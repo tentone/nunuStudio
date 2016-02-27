@@ -5,10 +5,7 @@ include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
-var scene = null;
-var camera = null;
-var renderer = null;
-var cube = null;
+include("Main.js");
 
 //App class
 function App(){}
@@ -55,60 +52,23 @@ App.initialize = function()
 		App.mouse.updateKey(event.which-1, Key.KEY_UP);
 	}
 
-	//Create camera and scene
-	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera(50, canvas.width/canvas.height, 0.1, 100000);
-
-	//Renderer
-	renderer = new THREE.WebGLRenderer({ canvas: canvas});
-	renderer.setSize(canvas.width, canvas.height);
-	renderer.shadowMap.enabled = true;
-	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-	//Add cube to scene
-	var material = new THREE.MeshPhongMaterial();
-	cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
-	cube.castShadow = true;
-	cube.receiveShadow = false;
-	cube.position.z = -3;
-	scene.add(cube);
-
-	//Create Floor
-	var geometry = new THREE.BoxGeometry(1, 1, 1);
-	geometry.castShadow = false;
-	geometry.receiveShadow = true;
-	geometry.scale(100,1,100);
-	
-	var floor = new THREE.Mesh(geometry, material);
-	floor.position.y = -1;
-	scene.add(floor);
-
-	var manager = new THREE.LoadingManager();
-
-	//Load eyebot
-	var loader = new THREE.OBJLoader();
-	loader.load("data/models/eyebot/eyebot.obj", function(object)
+	//Request to lock mouse if canvas is clicked (cross-browser)
+	canvas.onclick = function()
 	{
-		object.scale.set(0.03, 0.03, 0.03);
-		object.position.set(4, 0, 4);
-		scene.add(object);
-	});
+		try
+		{
+			canvas.requestPointerLock = canvas.mozRequestPointerLock || canvas.requestPointerLock || canvas.webkitRequestPointerLock;
+			canvas.requestPointerLock();
+		}
+		catch(e){}
+	}
 
-	//Light
-	light = new THREE.SpotLight(0xff0000);
-	light.position.set(8, 1, 0);
-	light.castShadow = true;
-	scene.add(light);
+	//Create main program
+	Main.initialize();
 
-	light = new THREE.SpotLight(0x0000ff);
-	light.position.set(-8, 1, 0);
-	light.castShadow = true;
-	scene.add(light);
-
-	light = new THREE.SpotLight(0x00ff00);
-	light.position.set(0, 1, -8);
-	light.castShadow = true;
-	scene.add(light);
+	//Time control
+	App.delta_time = 0;
+	App.time = new Date;
 
 	//Start Loop
 	App.loop();
@@ -123,47 +83,23 @@ App.loop = function()
 	//Update Mouse Values
 	App.mouse.update();
 
-	//Update stuff
-	cube.rotation.x += 0.01;
-	if(App.keyboard.isKeyPressed(Keyboard.W))
-	{
-		camera.position.z -= 0.1;
-	}
-	if(App.keyboard.isKeyPressed(Keyboard.S))
-	{
-		camera.position.z += 0.1;
-	}
-	if(App.keyboard.isKeyPressed(Keyboard.A))
-	{
-		camera.position.x -= 0.1;
-	}
-	if(App.keyboard.isKeyPressed(Keyboard.D))
-	{
-		camera.position.x += 0.1;
-	}
-	if(App.keyboard.isKeyPressed(Keyboard.SPACEBAR))
-	{
-		camera.position.y += 0.1;
-	}
-	if(App.keyboard.isKeyPressed(Keyboard.CTRL))
-	{
-		camera.position.y -= 0.1;
-	}
-	
-	//Draw stuff
-	renderer.render(scene, camera);
+	//Update time values
+	App.delta_time = new Date - App.time;
+	App.time += App.delta_time;
+
+	//Update and draw
+	Main.update();
+	Main.draw();
 }
 
-// Called every time page is resized
+//Called every time page is resized
 App.resize = function()
 {
 	var canvas = document.getElementById("canvas");
 	canvas.width  = window.innerWidth;
 	canvas.height = window.innerHeight;
 
-	renderer.setSize(canvas.width, canvas.height);
-	camera.aspect = canvas.width/canvas.height;
-	camera.updateProjectionMatrix();
+	Main.resize(canvas);
 }
 
 //Auxiliar include
