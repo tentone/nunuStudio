@@ -1,5 +1,11 @@
 include("lib/three/three.js");
 include("lib/three/loaders/OBJLoader.js");
+include("lib/three/loaders/MTLLoader.js");
+include("lib/three/loaders/DDSLoader.js");
+include("lib/three/loaders/ColladaLoader.js");
+include("lib/three/loaders/collada/Animation.js");
+include("lib/three/loaders/collada/AnimationHandler.js");
+include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
 include("input/Key.js");
 include("input/Keyboard.js");
@@ -64,7 +70,7 @@ App.initialize = function()
 	}
 
 	//Create main program
-	Main.initialize();
+	Main.initialize(canvas);
 
 	//Time control
 	App.delta_time = 0;
