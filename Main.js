@@ -4,17 +4,19 @@ var scene = null;
 var camera = null;
 var renderer = null;
 var cube = null;
+var camera_rotation = null;
 
 Main.initialize = function(canvas)
 {
 	//Create camera and scene
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(50, canvas.width/canvas.height, 0.1, 100000);
+	camera_rotation = new THREE.Vector2(0,0);
 
 	//Renderer
 	renderer = new THREE.WebGLRenderer({canvas: canvas});
 	renderer.setSize(canvas.width, canvas.height);
-	renderer.shadowMap.enabled = false;
+	renderer.shadowMap.enabled = true;
 
 	//Add cube to scene
 	var material = new THREE.MeshPhongMaterial();
@@ -94,24 +96,70 @@ Main.update = function()
 {
 	//Rotate cube
 	cube.rotation.x += 0.01;
-	
-	//Move Camera
-	if(App.keyboard.isKeyPressed(Keyboard.W))
+
+	//Rotate Camera
+	if(App.keyboard.isKeyPressed(Keyboard.E))
 	{
-		camera.position.z -= 0.1;
+		camera_rotation.x -= 0.02;
 	}
+	if(App.keyboard.isKeyPressed(Keyboard.Q))
+	{
+		camera_rotation.x += 0.02;
+	}
+	
+	//Camera Mouse Movement
+	camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * App.mouse.pos_diff.x;
+	camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * App.mouse.pos_diff.y;
+
+	//Limit Vertical Rotation to 90 degrees
+	var pid2 = 1.57079;
+	if(camera_rotation.y < -pid2)
+	{
+		camera_rotation.y = -pid2;
+	}
+	else if(camera_rotation.y > pid2)
+	{
+		camera_rotation.y = pid2;
+	}
+	
+	//Calculate direction vector
+	var cos_angle_y = Math.cos(camera_rotation.y);
+    var direction = new THREE.Vector3(Math.sin(camera_rotation.x)*cos_angle_y, Math.sin(camera_rotation.y), Math.cos(camera_rotation.x)*cos_angle_y);
+    
+    //Add position offset and set camera direction
+    direction.x += camera.position.x;
+    direction.y += camera.position.y;
+    direction.z += camera.position.z;
+    camera.lookAt(direction);
+	
+	//Move Camera with WASD
+	var speed_walk = 0.2;
+	var angle_cos = Math.cos(camera_rotation.x);
+	var angle_sin = Math.sin(camera_rotation.x);
 	if(App.keyboard.isKeyPressed(Keyboard.S))
 	{
-		camera.position.z += 0.1;
+		camera.position.z -= speed_walk * angle_cos;
+		camera.position.x -= speed_walk * angle_sin;
 	}
+	if(App.keyboard.isKeyPressed(Keyboard.W))
+	{
+		camera.position.z += speed_walk * angle_cos;
+		camera.position.x += speed_walk * angle_sin;
+	}
+	
+	var angle_cos = Math.cos(camera_rotation.x + Math.PI/2.0);
+	var angle_sin = Math.sin(camera_rotation.x + Math.PI/2.0);
 	if(App.keyboard.isKeyPressed(Keyboard.A))
 	{
-		camera.position.x -= 0.1;
+		camera.position.z += speed_walk * angle_cos;
+		camera.position.x += speed_walk * angle_sin;
 	}
 	if(App.keyboard.isKeyPressed(Keyboard.D))
 	{
-		camera.position.x += 0.1;
+		camera.position.z -= speed_walk * angle_cos;
+		camera.position.x -= speed_walk * angle_sin;
 	}
+
 	if(App.keyboard.isKeyPressed(Keyboard.SPACEBAR))
 	{
 		camera.position.y += 0.1;
