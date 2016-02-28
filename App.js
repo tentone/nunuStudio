@@ -8,6 +8,8 @@ include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
+include("lib/leap-0.6.4.js");
+
 include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");

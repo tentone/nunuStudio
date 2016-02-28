@@ -2,9 +2,14 @@ function Main(){}
 
 var scene = null;
 var camera = null;
+var camera_rotation = null;
 var renderer = null;
 var cube = null;
-var camera_rotation = null;
+
+//Leap Hand Variables
+var baseBoneRotation;
+var armMeshes;
+var boneMeshes;
 
 Main.initialize = function(canvas)
 {
@@ -90,6 +95,84 @@ Main.initialize = function(canvas)
 	light = new THREE.PointLight(0x003300);
 	light.position.set(0, 1, -8);
 	scene.add(light);
+
+	//Grid and Axis Helper
+	var gridHelper = new THREE.GridHelper(500, 10);
+	scene.add(gridHelper);
+
+	var axisHelper = new THREE.AxisHelper(500);
+	scene.add(axisHelper);
+
+	//Leap Integration
+	baseBoneRotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, Math.PI/2));
+	armMeshes = [];
+	boneMeshes = [];
+
+	//Start leap and set callback function
+	Leap.loop({background: true}, updateLeap).connect();
+}
+
+//Update leap status
+function updateLeap(frame)
+{
+	var countBones = 0;
+	var countArms = 0;
+
+	armMeshes.forEach(function(item)
+	{
+		scene.remove(item)
+	});
+	
+	boneMeshes.forEach(function(item)
+	{
+		scene.remove(item)
+	});
+
+	for(var hand of frame.hands)
+	{
+		for(var finger of hand.fingers)
+		{
+			for(var bone of finger.bones) 
+			{
+				if(countBones++ === 0)
+				{
+					continue;
+				}
+				var boneMesh = boneMeshes[countBones] || addMesh(boneMeshes);
+				updateMesh(bone, boneMesh);
+			}
+		}
+
+		var arm = hand.am;
+		if(arm != undefined)
+		{
+			var armMesh = armMeshes[countArms++] || addMesh(armMeshes);
+			updateMesh(arm, armMesh);
+			armMesh.scale.set(arm.width/4, arm.width/2, arm.length);
+		}
+	}
+}
+
+function addMesh(meshes)
+{
+	var geometry = new THREE.BoxGeometry(1, 1, 1);
+	var material = new THREE.MeshNormalMaterial();
+	var mesh = new THREE.Mesh(geometry, material);
+	meshes.push(mesh);
+	return mesh;
+}
+
+function updateMesh(bone, mesh)
+{
+	mesh.position.fromArray(bone.center());
+	mesh.position.x /= 150;
+	mesh.position.y /= 150;
+	mesh.position.z /= 150;
+	
+	mesh.setRotationFromMatrix((new THREE.Matrix4).fromArray(bone.matrix()));
+	mesh.quaternion.multiply(baseBoneRotation);
+	mesh.scale.set(bone.width/150, bone.width/150, bone.length/150);
+	scene.add(mesh);
 }
 
 Main.update = function()
@@ -146,7 +229,7 @@ Main.update = function()
 		camera.position.z += speed_walk * angle_cos;
 		camera.position.x += speed_walk * angle_sin;
 	}
-	
+
 	var angle_cos = Math.cos(camera_rotation.x + Math.PI/2.0);
 	var angle_sin = Math.sin(camera_rotation.x + Math.PI/2.0);
 	if(App.keyboard.isKeyPressed(Keyboard.A))
