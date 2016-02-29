@@ -1,25 +1,27 @@
+function Mouse(){}
+
 //Mouse Atached to camera
-function Mouse()
+Mouse.initialize = function()
 {
 	//Mouse Position Relative to camera
-	this.raw_mouse_pos = new THREE.Vector2(0,0);
-	this.raw_mouse_movement = new THREE.Vector2(0,0);
-	this.raw_mouse_pos_updated = false;
+	Mouse.raw_mouse_pos = new THREE.Vector2(0,0);
+	Mouse.raw_mouse_movement = new THREE.Vector2(0,0);
+	Mouse.raw_mouse_pos_updated = false;
 
-	this.pos = new THREE.Vector2(0,0);
-	this.pos_diff = new THREE.Vector2(0,0);
+	Mouse.pos = new THREE.Vector2(0,0);
+	Mouse.pos_diff = new THREE.Vector2(0,0);
 
 	//Raw Mouse Buttons
-	this.raw_keys = [];
-	this.raw_keys[0] = new Key();
-	this.raw_keys[1] = new Key();
-	this.raw_keys[2] = new Key();
+	Mouse.raw_keys = [];
+	Mouse.raw_keys[0] = new Key();
+	Mouse.raw_keys[1] = new Key();
+	Mouse.raw_keys[2] = new Key();
 
 	//Mouse Buttons
-	this.keys = [];
-	this.keys[0] = new Key();
-	this.keys[1] = new Key();
-	this.keys[2] = new Key();
+	Mouse.keys = [];
+	Mouse.keys[0] = new Key();
+	Mouse.keys[1] = new Key();
+	Mouse.keys[2] = new Key();
 }
 
 //Mouse Buttons
@@ -30,87 +32,78 @@ Mouse.RIGHT = 2;
 //Mouse Configuration Values
 Mouse.SENSITIVITY = 0.2;
 
-//Functions Prototype
-Mouse.prototype.buttonPressed = buttonPressed;
-Mouse.prototype.buttonJustReleased = buttonJustReleased;
-Mouse.prototype.buttonJustPressed = buttonJustPressed;
-Mouse.prototype.updatePosition = updatePosition;
-Mouse.prototype.updateKey = updateKey;
-Mouse.prototype.toString = toString;
-Mouse.prototype.update = update;
-
 //Check if Mouse button is pressed
-function buttonPressed(button)
+Mouse.buttonPressed = function(button)
 {
-	return this.keys[button].isPressed;
+	return Mouse.keys[button].isPressed;
 }
 
 //Check if a mouse button was just pressed
-function buttonJustPressed(button)
+Mouse.buttonJustPressed = function(button)
 {
-	return this.keys[button].justPressed;
+	return Mouse.keys[button].justPressed;
 }
 
 //Check if a mouse button was just released
-function buttonJustReleased(button)
+Mouse.buttonJustReleased = function(button)
 {
-	return this.keys[button].justReleased;
+	return Mouse.keys[button].justReleased;
 }
 
 //Update Mouse Position
-function updatePosition(x, y, x_diff, y_diff)
+Mouse.updatePosition = function(x, y, x_diff, y_diff)
 {
-	this.raw_mouse_pos.set(x, y);
-	this.raw_mouse_movement.x += x_diff;
-	this.raw_mouse_movement.y += y_diff;
-	this.raw_mouse_pos_updated = true;
+	Mouse.raw_mouse_pos.set(x, y);
+	Mouse.raw_mouse_movement.x += x_diff;
+	Mouse.raw_mouse_movement.y += y_diff;
+	Mouse.raw_mouse_pos_updated = true;
 }
 
 //Update Mouse Key
-function updateKey(button, action)
+Mouse.updateKey = function(button, action)
 {
-	this.raw_keys[button].update(action);
+	Mouse.raw_keys[button].update(action);
 }
 
 //Update Mouse State (Calculate position diff)
-function update()
+Mouse.update = function()
 {
 	//Update mouse keys state
-	for(var i = 0; i < this.raw_keys.length; i++)
+	for(var i = 0; i < Mouse.raw_keys.length; i++)
 	{
-		if(this.raw_keys[i].justPressed && this.keys[i].justPressed)
+		if(Mouse.raw_keys[i].justPressed && Mouse.keys[i].justPressed)
 		{
-			this.raw_keys[i].justPressed = false;
+			Mouse.raw_keys[i].justPressed = false;
 		}
-		if(this.raw_keys[i].justReleased && this.keys[i].justReleased)
+		if(Mouse.raw_keys[i].justReleased && Mouse.keys[i].justReleased)
 		{
-			this.raw_keys[i].justReleased = false;
+			Mouse.raw_keys[i].justReleased = false;
 		}
-		this.keys[i].set(this.raw_keys[i].justPressed, this.raw_keys[i].isPressed, this.raw_keys[i].justReleased);
+		Mouse.keys[i].set(Mouse.raw_keys[i].justPressed, Mouse.raw_keys[i].isPressed, Mouse.raw_keys[i].justReleased);
 	}
 
 	//Update Mouse Position if needed
-	if(this.raw_mouse_pos_updated)
+	if(Mouse.raw_mouse_pos_updated)
 	{
-		this.pos_diff.x = this.raw_mouse_movement.x;
-		this.pos_diff.y = this.raw_mouse_movement.y;
-		this.raw_mouse_movement.set(0,0);
+		Mouse.pos_diff.x = Mouse.raw_mouse_movement.x;
+		Mouse.pos_diff.y = Mouse.raw_mouse_movement.y;
+		Mouse.raw_mouse_movement.set(0,0);
 
-		this.pos.x = this.raw_mouse_pos.x;
-		this.pos.y = this.raw_mouse_pos.y;
-		this.raw_mouse_pos_updated = false;
+		Mouse.pos.x = Mouse.raw_mouse_pos.x;
+		Mouse.pos.y = Mouse.raw_mouse_pos.y;
+		Mouse.raw_mouse_pos_updated = false;
 	}
 	else
 	{
-		this.pos_diff.x = 0;
-		this.pos_diff.y = 0;
+		Mouse.pos_diff.x = 0;
+		Mouse.pos_diff.y = 0;
 	}
 }
 
 //Return string with mouse position
-function toString()
+Mouse.toString = function()
 {
-	return "Pos:" + this.pos.toString() + " Diff:" + this.pos_diff.toString() + "\n   Left: " + this.keys[0].toString() +
-		"\n   Middle: " + this.keys[1].toString() + "\n   Right: " + this.keys[2].toString();
+	return "Pos:" + Mouse.pos.toString() + " Diff:" + Mouse.pos_diff.toString() + "\n   Left: " + Mouse.keys[0].toString() +
+		"\n   Middle: " + Mouse.keys[1].toString() + "\n   Right: " + Mouse.keys[2].toString();
 }
 

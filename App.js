@@ -28,37 +28,37 @@ App.initialize = function()
 	canvas.height = window.innerHeight;
 
 	//Init Input
-	App.keyboard = new Keyboard();
-	App.mouse = new Mouse();
+	Keyboard.initialize();
+	Mouse.initialize();
 
 	//Keyboard OnKeyDown Event
 	document.onkeydown = function(event)
 	{
-		App.keyboard.update(event.keyCode, Key.KEY_DOWN);
+		Keyboard.update(event.keyCode, Key.KEY_DOWN);
 	}
 
 	//Keyboard OnKeyUp Event
 	document.onkeyup = function(event)
 	{
-		App.keyboard.update(event.keyCode, Key.KEY_UP);
+		Keyboard.update(event.keyCode, Key.KEY_UP);
 	}
 
 	//Mouse Move Position
 	document.onmousemove = function(event)
 	{
-		App.mouse.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
+		Mouse.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
 	}
 
 	//Mouse Button Down
 	document.onmousedown = function(event)
 	{
-		App.mouse.updateKey(event.which-1, Key.KEY_DOWN);
+		Mouse.updateKey(event.which-1, Key.KEY_DOWN);
 	}
 
 	//Mouse Button Up
 	document.onmouseup = function(event)
 	{
-		App.mouse.updateKey(event.which-1, Key.KEY_UP);
+		Mouse.updateKey(event.which-1, Key.KEY_UP);
 	}
 
 	//Request to lock mouse if canvas is clicked (cross-browser)
@@ -90,7 +90,7 @@ App.loop = function()
 	requestAnimationFrame(App.loop);
 
 	//Update Mouse Values
-	App.mouse.update();
+	Mouse.update();
 
 	//Update time values
 	App.delta_time = new Date - App.time;

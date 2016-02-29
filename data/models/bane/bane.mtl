@@ -14,7 +14,7 @@ illum 2
 
 
 map_Kd legs.png
-
+map_bump legs_n.png
 
 
 newmtl Bane_New_Mask
@@ -28,7 +28,7 @@ illum 2
 
 
 map_Kd mask.png
-
+map_bump mask_n.png
 
 
 newmtl Bane_Torso
@@ -42,3 +42,4 @@ illum 2
 
 
 map_Kd torso.png
+map_bump torso_n.png

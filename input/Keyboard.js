@@ -1,39 +1,36 @@
-function Keyboard()
+function Keyboard(){}
+
+Keyboard.initialize = function()
 {
-	this.keys = [];
+	Keyboard.keys = [];
 
 	for(var i = 0; i < 256; i++)
 	{
-		this.keys.push(new Key());
+		Keyboard.keys.push(new Key());
 	}
 }
 
-Keyboard.prototype.isKeyPressed = isKeyPressed;
-Keyboard.prototype.isKeyJustPressed = isKeyJustPressed;
-Keyboard.prototype.isKeyJustReleased = isKeyJustReleased;
-Keyboard.prototype.update = update;
-
-function update(key, action)
+Keyboard.update = function(key, action)
 {
 	if(key < 256)
 	{
-		this.keys[key].update(action);
+		Keyboard.keys[key].update(action);
 	}
 }
 
-function isKeyPressed(key)
+Keyboard.isKeyPressed = function(key)
 {
-	return key < 256 && this.keys[key].isPressed;
+	return key < 256 && Keyboard.keys[key].isPressed;
 }
 
-function isKeyJustPressed(key)
+Keyboard.isKeyJustPressed = function(key)
 {
-	return key < 256 && this.keys[key].justPressed;
+	return key < 256 && Keyboard.keys[key].justPressed;
 }
 
-function isKeyJustReleased(key)
+Keyboard.isKeyJustReleased = function(key)
 {
-	return key < 256 && this.keys[key].justReleased;
+	return key < 256 && Keyboard.keys[key].justReleased;
 }
 
 //Some Keycodes

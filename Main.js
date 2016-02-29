@@ -181,18 +181,18 @@ Main.update = function()
 	cube.rotation.x += 0.01;
 
 	//Rotate Camera
-	if(App.keyboard.isKeyPressed(Keyboard.E))
+	if(Keyboard.isKeyPressed(Keyboard.E))
 	{
 		camera_rotation.x -= 0.02;
 	}
-	if(App.keyboard.isKeyPressed(Keyboard.Q))
+	if(Keyboard.isKeyPressed(Keyboard.Q))
 	{
 		camera_rotation.x += 0.02;
 	}
 	
 	//Camera Mouse Movement
-	camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * App.mouse.pos_diff.x;
-	camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * App.mouse.pos_diff.y;
+	camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
+	camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
 
 	//Limit Vertical Rotation to 90 degrees
 	var pid2 = 1.57079;
@@ -219,12 +219,12 @@ Main.update = function()
 	var speed_walk = 0.2;
 	var angle_cos = Math.cos(camera_rotation.x);
 	var angle_sin = Math.sin(camera_rotation.x);
-	if(App.keyboard.isKeyPressed(Keyboard.S))
+	if(Keyboard.isKeyPressed(Keyboard.S))
 	{
 		camera.position.z -= speed_walk * angle_cos;
 		camera.position.x -= speed_walk * angle_sin;
 	}
-	if(App.keyboard.isKeyPressed(Keyboard.W))
+	if(Keyboard.isKeyPressed(Keyboard.W))
 	{
 		camera.position.z += speed_walk * angle_cos;
 		camera.position.x += speed_walk * angle_sin;
@@ -232,22 +232,22 @@ Main.update = function()
 
 	var angle_cos = Math.cos(camera_rotation.x + Math.PI/2.0);
 	var angle_sin = Math.sin(camera_rotation.x + Math.PI/2.0);
-	if(App.keyboard.isKeyPressed(Keyboard.A))
+	if(Keyboard.isKeyPressed(Keyboard.A))
 	{
 		camera.position.z += speed_walk * angle_cos;
 		camera.position.x += speed_walk * angle_sin;
 	}
-	if(App.keyboard.isKeyPressed(Keyboard.D))
+	if(Keyboard.isKeyPressed(Keyboard.D))
 	{
 		camera.position.z -= speed_walk * angle_cos;
 		camera.position.x -= speed_walk * angle_sin;
 	}
 
-	if(App.keyboard.isKeyPressed(Keyboard.SPACEBAR))
+	if(Keyboard.isKeyPressed(Keyboard.SPACEBAR))
 	{
 		camera.position.y += 0.1;
 	}
-	if(App.keyboard.isKeyPressed(Keyboard.CTRL))
+	if(Keyboard.isKeyPressed(Keyboard.CTRL))
 	{
 		camera.position.y -= 0.1;
 	}
