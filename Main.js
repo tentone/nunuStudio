@@ -72,13 +72,62 @@ Main.initialize = function(canvas)
 		});
 	});
 
+	//Dummy COLLADA load test
 	var loader = new THREE.ColladaLoader();
-	loader.setPreferredShading(THREE.SmoothShading);
-	loader.load("data/models/cheshirecat/cheshirecat.dae", function(collada)
+	loader.load("data/models/dummy/dummy.dae", function(collada)
 	{
-		collada.scene.scale.set(0.1, 0.1, 0.1);
 		scene.add(collada.scene);
 	});
+
+	var loader = new THREE.ColladaLoader();
+	loader.load("data/models/bane/bane.dae", function(collada)
+	{
+		var dae = collada.scene;
+		dae.traverse(function(child)
+		{
+			if(child instanceof THREE.Mesh)
+			{
+	
+			}
+			/*if(child instanceof THREE.SkinnedMesh)
+			{
+				var animation = new THREE.Animation(child, child.geometry.animation);
+				animation.play();
+			}*/
+		});
+		//scene.add(dae);
+	});
+
+	//Dummy OBJ load test
+	var objLoader = new THREE.OBJLoader();
+	objLoader.load("data/models/dummy/dummy.obj", function(object)
+	{
+		object.scale.set(0.01, 0.01, 0.01);
+		object.position.set(-4, 0, 0);
+		scene.add(object);
+	});
+
+	//Dummy FBX load test
+	/*var loader = new THREE.FBXLoader();
+	loader.load("data/models/dummy/dummy.fbx", function(object)
+	{
+		object.traverse(function(child)
+		{
+			if(child instanceof THREE.Mesh){}
+			if(child instanceof THREE.SkinnedMesh)
+			{
+				if(child.geometry.animations !== undefined || child.geometry.morphAnimations !== undefined)
+				{
+					child.mixer = new THREE.AnimationMixer(child);
+					mixers.push(child.mixer);
+					var action = child.mixer.clipAction(child.geometry.animations[ 0 ] );
+					action.play();
+				}
+			}
+		});
+		object.position.set(-8, 0, 0);
+		scene.add(object);
+	});*/
 
 	//Light
 	var light = new THREE.AmbientLight(0x555555);

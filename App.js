@@ -3,6 +3,7 @@ include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/OBJMTLLoader.js");
 include("lib/three/loaders/DDSLoader.js");
+include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
@@ -61,7 +62,7 @@ App.initialize = function()
 		Mouse.updateKey(event.which-1, Key.KEY_UP);
 	}
 
-	//Request to lock mouse if canvas is clicked (cross-browser)
+	//Request to lock mouse if canvas is clicked
 	canvas.onclick = function()
 	{
 		try
