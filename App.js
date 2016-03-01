@@ -2,7 +2,6 @@ include("lib/three/three.js");
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/OBJMTLLoader.js");
-include("lib/three/loaders/DDSLoader.js");
 include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/collada/Animation.js");
@@ -16,6 +15,8 @@ include("lib/three/vr/webvr-manager.js");
 include("lib/three/vr/webvr-polyfill.js");
 
 include("lib/leap-0.6.4.js");
+
+include("device/LeapHand.js");
 
 include("input/Key.js");
 include("input/Keyboard.js");

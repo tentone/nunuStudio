@@ -12,12 +12,6 @@ var raycaster = null;
 var vr_manager = null;
 var vr_controls = null;
 
-//Leap Hand Variables
-var baseBoneRotation = null;
-var armMeshes = null;
-var boneMeshes = null;
-var leap_scene = null;
-
 Main.initialize = function(canvas)
 {
 	//Create camera and scene
@@ -53,9 +47,6 @@ Main.initialize = function(canvas)
 	var floor = new THREE.Mesh(geometry, material);
 	floor.position.y = -1;
 	scene.add(floor);
-	
-	//Add new file handler
-	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
 	//Load eyebot model (normal/specular mapped)
 	var mtlLoader = new THREE.MTLLoader();
@@ -127,84 +118,14 @@ Main.initialize = function(canvas)
 
 	//Grid and Axis Helper
 	var gridHelper = new THREE.GridHelper(500, 10);
-	scene.add(gridHelper);
+	//scene.add(gridHelper);
 
 	var axisHelper = new THREE.AxisHelper(500);
-	scene.add(axisHelper);
+	//scene.add(axisHelper);
 
-	//Leap Integration
-	leap_scene = new THREE.Scene();
-	baseBoneRotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, Math.PI/2));
-	armMeshes = [];
-	boneMeshes = [];
-	scene.add(leap_scene);
-
-	//Start leap and set callback function
-	Leap.loop({background: true}, updateLeap).connect();
-}
-
-//Update leap status
-function updateLeap(frame)
-{
-	//Clear leap scene
-	armMeshes.forEach(function(item)
-	{
-		leap_scene.remove(item)
-	});
-	
-	boneMeshes.forEach(function(item)
-	{
-		leap_scene.remove(item)
-	});
-
-	//Add new Elements to scene
-	var countBones = 0;
-	var countArms = 0;
-	for(var hand of frame.hands)
-	{
-		for(var finger of hand.fingers)
-		{
-			for(var bone of finger.bones) 
-			{
-				if(countBones++ === 0)
-				{
-					continue;
-				}
-				var boneMesh = boneMeshes[countBones] || addMesh(boneMeshes);
-				updateMesh(bone, boneMesh);
-			}
-		}
-
-		var arm = hand.am;
-		if(arm != undefined)
-		{
-			var armMesh = armMeshes[countArms++] || addMesh(armMeshes);
-			updateMesh(arm, armMesh);
-			armMesh.scale.set(arm.width/4, arm.width/2, arm.length);
-		}
-	}
-}
-
-function addMesh(meshes)
-{
-	var geometry = new THREE.BoxGeometry(1, 1, 1);
-	var material = new THREE.MeshPhongMaterial(0x222200);
-	var mesh = new THREE.Mesh(geometry, material);
-	meshes.push(mesh);
-	return mesh;
-}
-
-function updateMesh(bone, mesh)
-{
-	mesh.position.fromArray(bone.center());
-	mesh.position.x /= 150;
-	mesh.position.y /= 150;
-	mesh.position.z /= 150;
-	
-	mesh.setRotationFromMatrix((new THREE.Matrix4).fromArray(bone.matrix()));
-	mesh.quaternion.multiply(baseBoneRotation);
-	mesh.scale.set(bone.width/150, bone.width/150, bone.length/150);
-	leap_scene.add(mesh);
+	//Initialize Leap Hand
+	LeapHand.initialize();
+	scene.add(LeapHand.scene);
 }
 
 Main.update = function()
@@ -227,7 +148,7 @@ Main.update = function()
 	camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
 
 	//Limit Vertical Rotation to 90 degrees
-	var pid2 = 1.57079;
+	var pid2 = 1.5708;
 	if(camera_rotation.y < -pid2)
 	{
 		camera_rotation.y = -pid2;
@@ -287,28 +208,31 @@ Main.update = function()
 		camera.position.y -= 0.1;
 	}
 
+	
 	//Rasycast line from camera and mouse position
-	var mouse = new THREE.Vector2((Mouse.pos.x/window.innerWidth )*2 - 1, -(Mouse.pos.y/window.innerHeight)*2 + 1);
+	/*var mouse = new THREE.Vector2((Mouse.pos.x/window.innerWidth )*2 - 1, -(Mouse.pos.y/window.innerHeight)*2 + 1);
 	
 	//Update the picking ray with the camera and mouse position	
-	/*raycaster.setFromCamera(mouse, camera);	
+	raycaster.setFromCamera(mouse, camera);	
 
-	var intersects = raycaster.intersectObjects(scene.children);
-	for(var i = 0; i < scene.children.length; i++)
-	{
-		intersects = intersects.concat(raycaster.intersectObjects(scene.children[i].children));
-	}
+	var intersects = getSceneAllIntersected(scene, raycaster);
 
-	//Calculate objects intersecting the picking ray
-	for(var i = 0; i < intersects.length; i++)
+	//Change closeste object material
+	if(intersects.length > 0)
 	{
-		intersects[i].object.material = new THREE.MeshNormalMaterial();
+		intersects[0].object.material = new THREE.MeshNormalMaterial();
 	}*/
 }
 
-function getSceneAllIntersected(scene, raycaster, intersects)
+//Return a list of all intersected object in a scene
+function getSceneAllIntersected(scene, raycaster)
 {
-	intersects = intersects.concat();
+	var intersects = raycaster.intersectObjects(scene.children);
+
+	for(var i = 0; i < scene.children.length; i++)
+	{
+		intersects = intersects.concat(getSceneAllIntersected(scene.children[i], raycaster));
+	}
 
 	return intersects;
 }
