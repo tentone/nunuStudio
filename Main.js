@@ -8,6 +8,10 @@ var renderer = null;
 var cube = null;
 var raycaster = null;
 
+//VR stuff
+var vr_manager = null;
+var vr_controls = null;
+
 //Leap Hand Variables
 var baseBoneRotation = null;
 var armMeshes = null;
@@ -18,7 +22,7 @@ Main.initialize = function(canvas)
 {
 	//Create camera and scene
 	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera(50, canvas.width/canvas.height, 0.1, 100000);
+	camera = new THREE.PerspectiveCamera(75, canvas.width/canvas.height, 0.1, 100000);
 	camera_rotation = new THREE.Vector2(0,0);
 
 	//Raycaster
@@ -28,6 +32,13 @@ Main.initialize = function(canvas)
 	renderer = new THREE.WebGLRenderer({canvas: canvas});
 	renderer.setSize(canvas.width, canvas.height);
 	renderer.shadowMap.enabled = true;
+
+	//Apply VR headset positional data to camera
+	vr_controls = new THREE.VRControls(camera);
+	var effect = new THREE.VREffect(renderer);
+	effect.setSize(window.innerWidth, window.innerHeight);
+
+	vr_manager = new WebVRManager(renderer, effect, {hideButton: false, isUndistorted: false});
 
 	//Add cube to scene
 	var material = new THREE.MeshPhongMaterial();
@@ -53,7 +64,7 @@ Main.initialize = function(canvas)
 	{
 		materials.preload();
 		var objLoader = new THREE.OBJLoader();
-		//objLoader.setMaterials(materials);
+		objLoader.setMaterials(materials);
 		objLoader.load("data/models/eyebot/eyebot.obj", function(object)
 		{
 			object.scale.set(0.03, 0.03, 0.03);
@@ -116,10 +127,10 @@ Main.initialize = function(canvas)
 
 	//Grid and Axis Helper
 	var gridHelper = new THREE.GridHelper(500, 10);
-	//scene.add(gridHelper);
+	scene.add(gridHelper);
 
 	var axisHelper = new THREE.AxisHelper(500);
-	//scene.add(axisHelper);
+	scene.add(axisHelper);
 
 	//Leap Integration
 	leap_scene = new THREE.Scene();
@@ -135,21 +146,20 @@ Main.initialize = function(canvas)
 //Update leap status
 function updateLeap(frame)
 {
-	var countBones = 0;
-	var countArms = 0;
-
+	//Clear leap scene
 	armMeshes.forEach(function(item)
 	{
-		scene.remove(item)
+		leap_scene.remove(item)
 	});
 	
 	boneMeshes.forEach(function(item)
 	{
-		scene.remove(item)
+		leap_scene.remove(item)
 	});
 
-	leap_scene.child = [];
-
+	//Add new Elements to scene
+	var countBones = 0;
+	var countArms = 0;
 	for(var hand of frame.hands)
 	{
 		for(var finger of hand.fingers)
@@ -178,7 +188,7 @@ function updateLeap(frame)
 function addMesh(meshes)
 {
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
-	var material = new THREE.MeshNormalMaterial();
+	var material = new THREE.MeshPhongMaterial(0x222200);
 	var mesh = new THREE.Mesh(geometry, material);
 	meshes.push(mesh);
 	return mesh;
@@ -237,6 +247,9 @@ Main.update = function()
     direction.z += camera.position.z;
     camera.lookAt(direction);
 	
+	//Update VR headset position and apply to camera.
+	vr_controls.update();
+
 	//Move Camera with WASD
 	var speed_walk = 0.2;
 	var angle_cos = Math.cos(camera_rotation.x);
@@ -278,7 +291,7 @@ Main.update = function()
 	var mouse = new THREE.Vector2((Mouse.pos.x/window.innerWidth )*2 - 1, -(Mouse.pos.y/window.innerHeight)*2 + 1);
 	
 	//Update the picking ray with the camera and mouse position	
-	raycaster.setFromCamera(mouse, camera);	
+	/*raycaster.setFromCamera(mouse, camera);	
 
 	var intersects = raycaster.intersectObjects(scene.children);
 	for(var i = 0; i < scene.children.length; i++)
@@ -290,7 +303,7 @@ Main.update = function()
 	for(var i = 0; i < intersects.length; i++)
 	{
 		intersects[i].object.material = new THREE.MeshNormalMaterial();
-	}
+	}*/
 }
 
 function getSceneAllIntersected(scene, raycaster, intersects)
@@ -303,7 +316,8 @@ function getSceneAllIntersected(scene, raycaster, intersects)
 //Draw stuff into screen
 Main.draw = function()
 {
-	renderer.render(scene, camera);
+	vr_manager.render(scene, camera, App.time);
+	//renderer.render(scene, camera);
 }
 
 //Resize to fit window
