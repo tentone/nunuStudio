@@ -1,15 +1,18 @@
 function Main(){}
 
+//Test objects
 var scene = null;
 var camera = null;
 var camera_rotation = null;
 var renderer = null;
 var cube = null;
+var raycaster = null;
 
 //Leap Hand Variables
-var baseBoneRotation;
-var armMeshes;
-var boneMeshes;
+var baseBoneRotation = null;
+var armMeshes = null;
+var boneMeshes = null;
+var leap_scene = null;
 
 Main.initialize = function(canvas)
 {
@@ -17,6 +20,9 @@ Main.initialize = function(canvas)
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(50, canvas.width/canvas.height, 0.1, 100000);
 	camera_rotation = new THREE.Vector2(0,0);
+
+	//Raycaster
+	raycaster = new THREE.Raycaster();
 
 	//Renderer
 	renderer = new THREE.WebGLRenderer({canvas: canvas});
@@ -47,11 +53,15 @@ Main.initialize = function(canvas)
 	{
 		materials.preload();
 		var objLoader = new THREE.OBJLoader();
-		objLoader.setMaterials(materials);
+		//objLoader.setMaterials(materials);
 		objLoader.load("data/models/eyebot/eyebot.obj", function(object)
 		{
 			object.scale.set(0.03, 0.03, 0.03);
 			object.position.set(4, 1, 4);
+			for(var j = 0; j < object.children.length; j++)
+			{
+				object.children[j].geometry.computeFaceNormals();
+			}
 			scene.add(object);
 		});
 	});
@@ -79,25 +89,6 @@ Main.initialize = function(canvas)
 		scene.add(collada.scene);
 	});
 
-	var loader = new THREE.ColladaLoader();
-	loader.load("data/models/bane/bane.dae", function(collada)
-	{
-		var dae = collada.scene;
-		dae.traverse(function(child)
-		{
-			if(child instanceof THREE.Mesh)
-			{
-	
-			}
-			/*if(child instanceof THREE.SkinnedMesh)
-			{
-				var animation = new THREE.Animation(child, child.geometry.animation);
-				animation.play();
-			}*/
-		});
-		//scene.add(dae);
-	});
-
 	//Dummy OBJ load test
 	var objLoader = new THREE.OBJLoader();
 	objLoader.load("data/models/dummy/dummy.obj", function(object)
@@ -106,28 +97,6 @@ Main.initialize = function(canvas)
 		object.position.set(-4, 0, 0);
 		scene.add(object);
 	});
-
-	//Dummy FBX load test
-	/*var loader = new THREE.FBXLoader();
-	loader.load("data/models/dummy/dummy.fbx", function(object)
-	{
-		object.traverse(function(child)
-		{
-			if(child instanceof THREE.Mesh){}
-			if(child instanceof THREE.SkinnedMesh)
-			{
-				if(child.geometry.animations !== undefined || child.geometry.morphAnimations !== undefined)
-				{
-					child.mixer = new THREE.AnimationMixer(child);
-					mixers.push(child.mixer);
-					var action = child.mixer.clipAction(child.geometry.animations[ 0 ] );
-					action.play();
-				}
-			}
-		});
-		object.position.set(-8, 0, 0);
-		scene.add(object);
-	});*/
 
 	//Light
 	var light = new THREE.AmbientLight(0x555555);
@@ -147,15 +116,17 @@ Main.initialize = function(canvas)
 
 	//Grid and Axis Helper
 	var gridHelper = new THREE.GridHelper(500, 10);
-	scene.add(gridHelper);
+	//scene.add(gridHelper);
 
 	var axisHelper = new THREE.AxisHelper(500);
-	scene.add(axisHelper);
+	//scene.add(axisHelper);
 
 	//Leap Integration
+	leap_scene = new THREE.Scene();
 	baseBoneRotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, Math.PI/2));
 	armMeshes = [];
 	boneMeshes = [];
+	scene.add(leap_scene);
 
 	//Start leap and set callback function
 	Leap.loop({background: true}, updateLeap).connect();
@@ -176,6 +147,8 @@ function updateLeap(frame)
 	{
 		scene.remove(item)
 	});
+
+	leap_scene.child = [];
 
 	for(var hand of frame.hands)
 	{
@@ -221,7 +194,7 @@ function updateMesh(bone, mesh)
 	mesh.setRotationFromMatrix((new THREE.Matrix4).fromArray(bone.matrix()));
 	mesh.quaternion.multiply(baseBoneRotation);
 	mesh.scale.set(bone.width/150, bone.width/150, bone.length/150);
-	scene.add(mesh);
+	leap_scene.add(mesh);
 }
 
 Main.update = function()
@@ -300,6 +273,31 @@ Main.update = function()
 	{
 		camera.position.y -= 0.1;
 	}
+
+	//Rasycast line from camera and mouse position
+	var mouse = new THREE.Vector2((Mouse.pos.x/window.innerWidth )*2 - 1, -(Mouse.pos.y/window.innerHeight)*2 + 1);
+	
+	//Update the picking ray with the camera and mouse position	
+	raycaster.setFromCamera(mouse, camera);	
+
+	var intersects = raycaster.intersectObjects(scene.children);
+	for(var i = 0; i < scene.children.length; i++)
+	{
+		intersects = intersects.concat(raycaster.intersectObjects(scene.children[i].children));
+	}
+
+	//Calculate objects intersecting the picking ray
+	for(var i = 0; i < intersects.length; i++)
+	{
+		intersects[i].object.material = new THREE.MeshNormalMaterial();
+	}
+}
+
+function getSceneAllIntersected(scene, raycaster, intersects)
+{
+	intersects = intersects.concat();
+
+	return intersects;
 }
 
 //Draw stuff into screen

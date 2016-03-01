@@ -14,8 +14,7 @@ newmtl Material_000001
 	Ke 0.0000 0.0000 0.0000
 	map_Ka Eyebot_d.png
 	map_Kd Eyebot_d.png
-	map_bump Eyebot_n.png
-	bump Eyebot_n.png
+
 
 newmtl Material_000ca6
 	Ns 33.0000
@@ -30,5 +29,3 @@ newmtl Material_000ca6
 	Ke 0.0000 0.0000 0.0000
 	map_Ka Eyebot_d.png
 	map_Kd Eyebot_d.png
-	map_bump Eyebot_n.png
-	bump Eyebot_n.png
