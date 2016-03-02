@@ -5,10 +5,12 @@ LeapHand.initialize = function()
 {
 	LeapHand.scene = new THREE.Scene();
 	LeapHand.base_rotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, Math.PI/2));
+	
 	LeapHand.bone_meshes = [];
 	LeapHand.arm_meshes = [];
 
 	//Hand Atributes
+	LeapHand.show_arm = false;
 	LeapHand.mode = LeapHand.DESK;
 	LeapHand.camera = null;
 	LeapHand.scale = new THREE.Vector3(1,1,1);
@@ -54,12 +56,12 @@ LeapHand.updateLeap = function(frame)
 			}
 		}
 
-		var arm = hand.am;
-		if(arm != undefined)
+		var arm = hand.arm;
+		if(LeapHand.show_arm)
 		{
 			var armMesh = LeapHand.arm_meshes[countArms++] || LeapHand.addMesh(LeapHand.arm_meshes);
 			LeapHand.updateMesh(arm, armMesh);
-			armMesh.scale.set(arm.width/4, arm.width/2, arm.length);
+			armMesh.scale.set(arm.width/1200, arm.width/300, arm.length/150);
 		}
 	}
 }

@@ -88,7 +88,7 @@ App.initialize = function()
 
 	//Time control
 	App.delta_time = 0;
-	App.time = new Date;
+	App.time = Date.now();
 
 	//Start Loop
 	App.loop();
@@ -104,7 +104,7 @@ App.loop = function()
 	Mouse.update();
 
 	//Update time values
-	App.delta_time = new Date - App.time;
+	App.delta_time = Date.now() - App.time;
 	App.time += App.delta_time;
 
 	//Update and draw

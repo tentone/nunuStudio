@@ -5,7 +5,6 @@ var scene = null;
 var camera = null;
 var camera_rotation = null;
 var renderer = null;
-var cube = null;
 
 //Cannon stuff
 var world = null;
@@ -24,6 +23,7 @@ Main.initialize = function(canvas)
 	//Create camera and scene
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(75, canvas.width/canvas.height, 0.1, 100000);
+	camera.position.set(0,5,-5);
 	camera_rotation = new THREE.Vector2(0,0);
 
 	//Raycaster
@@ -34,29 +34,21 @@ Main.initialize = function(canvas)
 	renderer.setSize(canvas.width, canvas.height);
 	renderer.shadowMap.enabled = true;
 
-	//Apply VR headset positional data to camera
+	//Initialize VR manager
 	vr_controls = new THREE.VRControls(camera);
 	var effect = new THREE.VREffect(renderer);
 	effect.setSize(window.innerWidth, window.innerHeight);
 
 	vr_manager = new WebVRManager(renderer, effect, {hideButton: false, isUndistorted: false});
 
-	//Add cube to scene
-	var material = new THREE.MeshPhongMaterial();
-	cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
-	cube.position.z = -3;
-	cube.receiveShadow = true;
-	cube.castShadow = true;
-	scene.add(cube);
-
 	//Create Floor
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
-	geometry.scale(100,1,100);
-	
+	geometry.scale(200,2,200);
+	var material = new THREE.MeshPhongMaterial();
 	var floor = new THREE.Mesh(geometry, material);
-	floor.position.y = -1;
 	floor.receiveShadow = true;
 	floor.castShadow = true;
+	floor.position.y = -1;
 	scene.add(floor);
 
 	//Load eyebot model (normal/specular mapped)
@@ -70,12 +62,28 @@ Main.initialize = function(canvas)
 		objLoader.load("data/models/eyebot/eyebot.obj", function(object)
 		{
 			object.scale.set(0.03, 0.03, 0.03);
-			object.position.set(4, 1, 4);
+			object.position.set(4, 2, 4);
 			setShadowReceiving(object, true);
 			setShadowCasting(object, true);
 			scene.add(object);
 		});
 	});
+
+	//Load skybox
+	/*var mtlLoader = new THREE.MTLLoader();
+	mtlLoader.setBaseUrl("data/models/skybox/");
+	mtlLoader.load("data/models/skybox/skybox.mtl", function(materials)
+	{
+		materials.preload();
+		var objLoader = new THREE.OBJLoader();
+		objLoader.setMaterials(materials);
+		objLoader.load("data/models/skybox/skybox.obj", function(object)
+		{
+			object.scale.set(10000,10000,10000);
+			object.position.set(0, 0, 0);
+			scene.add(object);
+		});
+	});*/
 
 	//Load bane model (multi material obj/mtl)
 	var mtlLoader = new THREE.MTLLoader();
@@ -88,7 +96,7 @@ Main.initialize = function(canvas)
 		objLoader.load("data/models/bane/bane.obj", function(object)
 		{
 			object.scale.set(0.008, 0.008, 0.008);
-			object.position.set(-4, -0.5, 4);
+			object.position.set(-4, 0, 4);
 			setShadowReceiving(object, true);
 			setShadowCasting(object, true);
 			scene.add(object);
@@ -129,6 +137,13 @@ Main.initialize = function(canvas)
 	light.castShadow = true;
 	scene.add(light);
 
+	//Hemisphere
+	/*var hemiLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.3);
+	hemiLight.color.setHSL(0.6, 1, 0.6);
+	hemiLight.groundColor.setHSL(0.095, 1, 0.75 );
+	hemiLight.position.set(0, 500, 0);
+	scene.add(hemiLight);*/
+
 	//Grid and Axis Helper
 	var gridHelper = new THREE.GridHelper(500, 20);
 	scene.add(gridHelper);
@@ -144,7 +159,7 @@ Main.initialize = function(canvas)
 	world = new CANNON.World();
 	world.broadphase = new CANNON.NaiveBroadphase();
 	world.gravity.set(0,-10,0);
-	world.solver.tolerance = 0.001;
+	world.solver.tolerance = 0.05;
 
 	// Ground plane
 	var plane = new CANNON.Plane();
@@ -159,7 +174,7 @@ Main.initialize = function(canvas)
 	var shape = new CANNON.Box(new CANNON.Vec3(0.5,0.5,0.5));
 	for(var i = 0; i < N; i++)
 	{
-		var body = new CANNON.Body({ mass: 1 });
+		var body = new CANNON.Body({mass:1});
 		body.addShape(shape);
 		body.position.set(Math.random()-0.5,2.5*i+0.5,Math.random()-0.5);
 		physics_objects.push(body);
@@ -167,17 +182,15 @@ Main.initialize = function(canvas)
 	}
 
 	//Create N cubes for render
-	var cubeGeo = new THREE.BoxGeometry( 1, 1, 1, 10, 10 );
-	var cubeMaterial = new THREE.MeshPhongMaterial( { color: 0x888888 } );
+	var geometry = new THREE.BoxGeometry(1, 1, 1, 10, 10);
+	var material = new THREE.MeshPhongMaterial();
 	for(var i = 0; i < N; i++)
 	{
-		cubeMesh = new THREE.Mesh( cubeGeo, cubeMaterial );
-		cubeMesh.castShadow = true;
-		render_objects.push(cubeMesh);
-		scene.add(cubeMesh);
+		var cube = new THREE.Mesh(geometry, material);
+		cube.castShadow = true;
+		render_objects.push(cube);
+		scene.add(cube);
 	}
-
-
 }
 
 Main.update = function()
@@ -188,13 +201,8 @@ Main.update = function()
 	for(var i = 0; i < render_objects.length; i++)
 	{
 		render_objects[i].position.set(physics_objects[i].position.x, physics_objects[i].position.y, physics_objects[i].position.z);
-		//render_objects[i].rotation.set(physics_objects[i].rotation.x, physics_objects[i].rotation.y, physics_objects[i].rotation.z);
-		//console.log("(" + render_objects[i].position.x + ", " + render_objects[i].position.y + ", " + render_objects[i].position.z + ")");
-		//console.log("(" + physics_objects[i].position.x + ", " + physics_objects[i].position.y + ", " + physics_objects[i].position.z + ")");
+		render_objects[i].quaternion.set(physics_objects[i].quaternion.x, physics_objects[i].quaternion.y, physics_objects[i].quaternion.z, physics_objects[i].quaternion.w);
 	}
-
-	//Rotate cube
-	cube.rotation.x += 0.01;
 
 	//Rotate Camera
 	if(Keyboard.isKeyPressed(Keyboard.E))
@@ -211,7 +219,7 @@ Main.update = function()
 	camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
 
 	//Limit Vertical Rotation to 90 degrees
-	var pid2 = 1.5708;
+	var pid2 = 1.57;
 	if(camera_rotation.y < -pid2)
 	{
 		camera_rotation.y = -pid2;
@@ -231,8 +239,8 @@ Main.update = function()
     direction.z += camera.position.z;
     camera.lookAt(direction);
 	
-	//Update VR headset position and apply to camera.
-	//vr_controls.update();
+	//Update VR headset position and apply to camera
+	vr_controls.update();
 
 	//Move Camera with WASD
 	var speed_walk = 0.2;
@@ -276,7 +284,7 @@ Main.update = function()
 	setShadowCasting(LeapHand.scene, true);
 
 	//Rasycast line from camera and mouse position
-	if(Mouse.buttonJustPressed(Mouse.LEFT))
+	if(Mouse.buttonJustPressed(Mouse.MIDDLE))
 	{
 		var mouse = new THREE.Vector2((Mouse.pos.x/window.innerWidth )*2 - 1, -(Mouse.pos.y/window.innerHeight)*2 + 1);
 		
@@ -286,9 +294,9 @@ Main.update = function()
 		var intersects = getSceneAllIntersected(scene, raycaster);
 
 		//Change closeste object material
-		if(intersects.length > 0)
+		for(var i = 0; i < intersects.length; i++)
 		{
-			intersects[0].object.material = new THREE.MeshNormalMaterial();
+			intersects[i].object.material = new THREE.MeshNormalMaterial();
 		}
 	}
 
