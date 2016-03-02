@@ -8,7 +8,9 @@ var renderer = null;
 var cube = null;
 
 //Cannon stuff
-var world;
+var world = null;
+var physics_objects = [];
+var render_objects = [];
 
 //Object selection
 var raycaster = null;
@@ -139,47 +141,58 @@ Main.initialize = function(canvas)
 	scene.add(LeapHand.scene);
 
 	//Init cannon
-	/*var solver = new CANNON.GSSolver();
-	solver.iterations = 7;
-	solver.tolerance = 0.1;
-
 	world = new CANNON.World();
-	world.quatNormalizeSkip = 0;
-	world.quatNormalizeFast = false;
-	world.gravity.set(0,-10,0);
 	world.broadphase = new CANNON.NaiveBroadphase();
-	world.defaultContactMaterial.contactEquationStiffness = 1e9;
-	world.defaultContactMaterial.contactEquationRelaxation = 4;
-	world.solver = new CANNON.SplitSolver(solver);
+	world.gravity.set(0,-10,0);
+	world.solver.tolerance = 0.001;
 
-	// Create a slippery material (friction coefficient = 0.1)
-	var physicsMaterial = new CANNON.Material("slipperyMaterial");
-	var physicsContactMaterial = new CANNON.ContactMaterial(physicsMaterial, physicsMaterial, 0.1, 0.3);
-
-	// We must add the contact materials to the world
-	world.addContactMaterial(physicsContactMaterial);
-
-	// Create a sphere
-	var mass = 5, radius = 1.3;
-	var sphereShape = new CANNON.Sphere(radius);
-	var sphereBody = new CANNON.Body({mass: mass});
-	sphereBody.addShape(sphereShape);
-	sphereBody.position.set(0,5,0);
-	sphereBody.linearDamping = 0.9;
-	world.addBody(sphereBody);
-
-	// Create a plane
-	var groundShape = new CANNON.Plane();
-	var groundBody = new CANNON.Body({mass: 0});
-	groundBody.addShape(groundShape);
+	// Ground plane
+	var plane = new CANNON.Plane();
+	var groundBody = new CANNON.Body({ mass: 0 });
+	groundBody.addShape(plane);
 	groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0),-Math.PI/2);
-	world.addBody(groundBody);*/
+	world.addBody(groundBody);
+
+	var N = 100;
+
+	//Create N cubes for physics
+	var shape = new CANNON.Box(new CANNON.Vec3(0.5,0.5,0.5));
+	for(var i = 0; i < N; i++)
+	{
+		var body = new CANNON.Body({ mass: 1 });
+		body.addShape(shape);
+		body.position.set(Math.random()-0.5,2.5*i+0.5,Math.random()-0.5);
+		physics_objects.push(body);
+		world.addBody(body);
+	}
+
+	//Create N cubes for render
+	var cubeGeo = new THREE.BoxGeometry( 1, 1, 1, 10, 10 );
+	var cubeMaterial = new THREE.MeshPhongMaterial( { color: 0x888888 } );
+	for(var i = 0; i < N; i++)
+	{
+		cubeMesh = new THREE.Mesh( cubeGeo, cubeMaterial );
+		cubeMesh.castShadow = true;
+		render_objects.push(cubeMesh);
+		scene.add(cubeMesh);
+	}
 
 
 }
 
 Main.update = function()
 {
+	//Step physics world
+	world.step(1/60);
+
+	for(var i = 0; i < render_objects.length; i++)
+	{
+		render_objects[i].position.set(physics_objects[i].position.x, physics_objects[i].position.y, physics_objects[i].position.z);
+		//render_objects[i].rotation.set(physics_objects[i].rotation.x, physics_objects[i].rotation.y, physics_objects[i].rotation.z);
+		//console.log("(" + render_objects[i].position.x + ", " + render_objects[i].position.y + ", " + render_objects[i].position.z + ")");
+		//console.log("(" + physics_objects[i].position.x + ", " + physics_objects[i].position.y + ", " + physics_objects[i].position.z + ")");
+	}
+
 	//Rotate cube
 	cube.rotation.x += 0.01;
 
