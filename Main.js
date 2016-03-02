@@ -6,7 +6,11 @@ var camera = null;
 var camera_rotation = null;
 var renderer = null;
 var cube = null;
+
+//Object selection tests
 var raycaster = null;
+var selected_object = null;
+var selected_object_material = null;
 
 //VR stuff
 var vr_manager = null;
@@ -68,7 +72,7 @@ Main.initialize = function(canvas)
 		});
 	});
 
-	//load bane model (multi material obj/mtl)
+	//Load bane model (multi material obj/mtl)
 	var mtlLoader = new THREE.MTLLoader();
 	mtlLoader.setBaseUrl("data/models/bane/");
 	mtlLoader.load("data/models/bane/bane.mtl", function(materials)
@@ -82,13 +86,6 @@ Main.initialize = function(canvas)
 			object.position.set(-4, -0.5, 4);
 			scene.add(object);
 		});
-	});
-
-	//Dummy COLLADA load test
-	var loader = new THREE.ColladaLoader();
-	loader.load("data/models/dummy/dummy.dae", function(collada)
-	{
-		scene.add(collada.scene);
 	});
 
 	//Dummy OBJ load test
@@ -118,10 +115,10 @@ Main.initialize = function(canvas)
 
 	//Grid and Axis Helper
 	var gridHelper = new THREE.GridHelper(500, 10);
-	//scene.add(gridHelper);
+	scene.add(gridHelper);
 
 	var axisHelper = new THREE.AxisHelper(500);
-	//scene.add(axisHelper);
+	scene.add(axisHelper);
 
 	//Initialize Leap Hand
 	LeapHand.initialize();
@@ -169,7 +166,7 @@ Main.update = function()
     camera.lookAt(direction);
 	
 	//Update VR headset position and apply to camera.
-	vr_controls.update();
+	//vr_controls.update();
 
 	//Move Camera with WASD
 	var speed_walk = 0.2;
@@ -210,18 +207,22 @@ Main.update = function()
 
 	
 	//Rasycast line from camera and mouse position
-	/*var mouse = new THREE.Vector2((Mouse.pos.x/window.innerWidth )*2 - 1, -(Mouse.pos.y/window.innerHeight)*2 + 1);
-	
-	//Update the picking ray with the camera and mouse position	
-	raycaster.setFromCamera(mouse, camera);	
-
-	var intersects = getSceneAllIntersected(scene, raycaster);
-
-	//Change closeste object material
-	if(intersects.length > 0)
+	if(Mouse.buttonJustPressed(Mouse.LEFT))
 	{
-		intersects[0].object.material = new THREE.MeshNormalMaterial();
-	}*/
+		var mouse = new THREE.Vector2((Mouse.pos.x/window.innerWidth )*2 - 1, -(Mouse.pos.y/window.innerHeight)*2 + 1);
+		
+		//Update the picking ray with the camera and mouse position	
+		raycaster.setFromCamera(mouse, camera);	
+
+		var intersects = getSceneAllIntersected(scene, raycaster);
+
+		//Change closeste object material
+		if(intersects.length > 0)
+		{
+			intersects[0].object.material = new THREE.MeshNormalMaterial();
+		}
+	}
+
 }
 
 //Return a list of all intersected object in a scene
@@ -241,7 +242,6 @@ function getSceneAllIntersected(scene, raycaster)
 Main.draw = function()
 {
 	vr_manager.render(scene, camera, App.time);
-	//renderer.render(scene, camera);
 }
 
 //Resize to fit window

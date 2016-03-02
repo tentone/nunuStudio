@@ -10,8 +10,9 @@ LeapHand.initialize = function()
 
 	//Hand Atributes
 	LeapHand.mode = LeapHand.DESK;
+	LeapHand.camera = null;
 	LeapHand.scale = new THREE.Vector3(1,1,1);
-	LeapHand.position = new THREE.Vector3(5,1,5);
+	LeapHand.position = new THREE.Vector3(0,1,-2);
 
 	//Start leap and set callback function
 	Leap.loop({}, LeapHand.updateLeap).connect();
@@ -81,8 +82,12 @@ LeapHand.updateMesh = function(bone, mesh)
 	mesh.quaternion.multiply(LeapHand.base_rotation);
 	mesh.scale.set(bone.width/150, bone.width/150, bone.length/150);
 
-
 	mesh.position.add(LeapHand.position);
+
+	if(LeapHand.camera != null)
+	{
+		mesh.position.add(camera.position);
+	}
 
 	LeapHand.scene.add(mesh);
 }
