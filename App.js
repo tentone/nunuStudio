@@ -15,6 +15,9 @@ include("lib/three/vr/webvr-manager.js");
 include("lib/three/vr/webvr-polyfill.js");
 
 include("lib/leap-0.6.4.js");
+include("lib/cannon/cannon.js");
+include("lib/cannon/ConvexGeometry.js");
+include("lib/cannon/Detector.js");
 
 include("device/LeapHand.js");
 

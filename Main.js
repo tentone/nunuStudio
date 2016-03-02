@@ -7,10 +7,11 @@ var camera_rotation = null;
 var renderer = null;
 var cube = null;
 
-//Object selection tests
+//Cannon stuff
+var world;
+
+//Object selection
 var raycaster = null;
-var selected_object = null;
-var selected_object_material = null;
 
 //VR stuff
 var vr_manager = null;
@@ -42,6 +43,8 @@ Main.initialize = function(canvas)
 	var material = new THREE.MeshPhongMaterial();
 	cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
 	cube.position.z = -3;
+	cube.receiveShadow = true;
+	cube.castShadow = true;
 	scene.add(cube);
 
 	//Create Floor
@@ -50,6 +53,8 @@ Main.initialize = function(canvas)
 	
 	var floor = new THREE.Mesh(geometry, material);
 	floor.position.y = -1;
+	floor.receiveShadow = true;
+	floor.castShadow = true;
 	scene.add(floor);
 
 	//Load eyebot model (normal/specular mapped)
@@ -64,10 +69,8 @@ Main.initialize = function(canvas)
 		{
 			object.scale.set(0.03, 0.03, 0.03);
 			object.position.set(4, 1, 4);
-			for(var j = 0; j < object.children.length; j++)
-			{
-				object.children[j].geometry.computeFaceNormals();
-			}
+			setShadowReceiving(object, true);
+			setShadowCasting(object, true);
 			scene.add(object);
 		});
 	});
@@ -84,6 +87,8 @@ Main.initialize = function(canvas)
 		{
 			object.scale.set(0.008, 0.008, 0.008);
 			object.position.set(-4, -0.5, 4);
+			setShadowReceiving(object, true);
+			setShadowCasting(object, true);
 			scene.add(object);
 		});
 	});
@@ -94,6 +99,8 @@ Main.initialize = function(canvas)
 	{
 		object.scale.set(0.01, 0.01, 0.01);
 		object.position.set(-4, 0, 0);
+		setShadowReceiving(object, true);
+		setShadowCasting(object, true);
 		scene.add(object);
 	});
 
@@ -101,20 +108,27 @@ Main.initialize = function(canvas)
 	var light = new THREE.AmbientLight(0x555555);
 	scene.add(light);
 
-	light = new THREE.PointLight(0x330000);
-	light.position.set(8, 1, 0);
+	light = new THREE.SpotLight(0x330000);
+	light.position.set(15, 10, 0);
+	light.target.position.set(0, 0, 0);
+	light.castShadow = true;
 	scene.add(light);
 
-	light = new THREE.PointLight(0x000033);
-	light.position.set(-8, 1, 0);
+	light = new THREE.SpotLight(0x000033);
+	light.position.set(-15, 10, 0);
+	light.target.position.set(0, 0, 0);
+	light.castShadow = true;
+
 	scene.add(light);
 
-	light = new THREE.PointLight(0x003300);
-	light.position.set(0, 1, -8);
+	light = new THREE.SpotLight(0x003300);
+	light.position.set(0, 10, -15);
+	light.target.position.set(0, 0, 0);
+	light.castShadow = true;
 	scene.add(light);
 
 	//Grid and Axis Helper
-	var gridHelper = new THREE.GridHelper(500, 10);
+	var gridHelper = new THREE.GridHelper(500, 20);
 	scene.add(gridHelper);
 
 	var axisHelper = new THREE.AxisHelper(500);
@@ -123,6 +137,45 @@ Main.initialize = function(canvas)
 	//Initialize Leap Hand
 	LeapHand.initialize();
 	scene.add(LeapHand.scene);
+
+	//Init cannon
+	/*var solver = new CANNON.GSSolver();
+	solver.iterations = 7;
+	solver.tolerance = 0.1;
+
+	world = new CANNON.World();
+	world.quatNormalizeSkip = 0;
+	world.quatNormalizeFast = false;
+	world.gravity.set(0,-10,0);
+	world.broadphase = new CANNON.NaiveBroadphase();
+	world.defaultContactMaterial.contactEquationStiffness = 1e9;
+	world.defaultContactMaterial.contactEquationRelaxation = 4;
+	world.solver = new CANNON.SplitSolver(solver);
+
+	// Create a slippery material (friction coefficient = 0.1)
+	var physicsMaterial = new CANNON.Material("slipperyMaterial");
+	var physicsContactMaterial = new CANNON.ContactMaterial(physicsMaterial, physicsMaterial, 0.1, 0.3);
+
+	// We must add the contact materials to the world
+	world.addContactMaterial(physicsContactMaterial);
+
+	// Create a sphere
+	var mass = 5, radius = 1.3;
+	var sphereShape = new CANNON.Sphere(radius);
+	var sphereBody = new CANNON.Body({mass: mass});
+	sphereBody.addShape(sphereShape);
+	sphereBody.position.set(0,5,0);
+	sphereBody.linearDamping = 0.9;
+	world.addBody(sphereBody);
+
+	// Create a plane
+	var groundShape = new CANNON.Plane();
+	var groundBody = new CANNON.Body({mass: 0});
+	groundBody.addShape(groundShape);
+	groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0),-Math.PI/2);
+	world.addBody(groundBody);*/
+
+
 }
 
 Main.update = function()
@@ -205,7 +258,10 @@ Main.update = function()
 		camera.position.y -= 0.1;
 	}
 
-	
+	//Enable leap hand shadowing
+	setShadowReceiving(LeapHand.scene, true);
+	setShadowCasting(LeapHand.scene, true);
+
 	//Rasycast line from camera and mouse position
 	if(Mouse.buttonJustPressed(Mouse.LEFT))
 	{
@@ -223,6 +279,28 @@ Main.update = function()
 		}
 	}
 
+}
+
+//Set shadow receiving
+function setShadowReceiving(object, state)
+{
+	object.receiveShadow = true;
+
+	for(var i = 0; i < object.children.length; i++)
+	{
+		setShadowReceiving(object.children[i], state);
+	}
+}
+
+//Enable shadow casting
+function setShadowCasting(object, state)
+{
+	object.castShadow = true;
+
+	for(var i = 0; i < object.children.length; i++)
+	{
+		setShadowCasting(object.children[i], state);
+	}
 }
 
 //Return a list of all intersected object in a scene
