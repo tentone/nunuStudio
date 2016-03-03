@@ -33,7 +33,8 @@ Main.initialize = function(canvas)
 	renderer = new THREE.WebGLRenderer({canvas: canvas});
 	renderer.setSize(canvas.width, canvas.height);
 	renderer.shadowMap.enabled = true;
-
+	//renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+ 
 	//Initialize VR manager
 	vr_controls = new THREE.VRControls(camera);
 	var effect = new THREE.VREffect(renderer);
@@ -79,7 +80,7 @@ Main.initialize = function(canvas)
 		objLoader.setMaterials(materials);
 		objLoader.load("data/models/skybox/skybox.obj", function(object)
 		{
-			object.scale.set(10000,10000,10000);
+			object.scale.set(5000, 5000, 5000);
 			object.position.set(0, 0, 0);
 			scene.add(object);
 		});
@@ -152,8 +153,8 @@ Main.initialize = function(canvas)
 	scene.add(axisHelper);
 
 	//Initialize Leap Hand
-	LeapHand.initialize();
-	scene.add(LeapHand.scene);
+	LeapDevice.initialize();
+	scene.add(LeapDevice.scene);
 
 	//Init cannon
 	world = new CANNON.World();
@@ -163,7 +164,7 @@ Main.initialize = function(canvas)
 
 	// Ground plane
 	var plane = new CANNON.Plane();
-	var groundBody = new CANNON.Body({ mass: 0 });
+	var groundBody = new CANNON.Body({mass:0});
 	groundBody.addShape(plane);
 	groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0),-Math.PI/2);
 	world.addBody(groundBody);
@@ -240,7 +241,7 @@ Main.update = function()
     camera.lookAt(direction);
 	
 	//Update VR headset position and apply to camera
-	vr_controls.update();
+	//vr_controls.update();
 
 	//Move Camera with WASD
 	var speed_walk = 0.2;
@@ -280,8 +281,8 @@ Main.update = function()
 	}
 
 	//Enable leap hand shadowing
-	setShadowReceiving(LeapHand.scene, true);
-	setShadowCasting(LeapHand.scene, true);
+	setShadowReceiving(LeapDevice.scene, true);
+	setShadowCasting(LeapDevice.scene, true);
 
 	//Rasycast line from camera and mouse position
 	if(Mouse.buttonJustPressed(Mouse.MIDDLE))

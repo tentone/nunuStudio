@@ -1,3 +1,4 @@
+//External Libs
 include("lib/three/three.js");
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
@@ -19,7 +20,11 @@ include("lib/cannon/cannon.js");
 include("lib/cannon/ConvexGeometry.js");
 include("lib/cannon/Detector.js");
 
-include("device/LeapHand.js");
+include("lib/stats.min.js");
+
+//Internal components
+include("device/LeapDevice.js");
+include("device/VRDevice.js");
 
 include("input/Key.js");
 include("input/Keyboard.js");
@@ -33,6 +38,15 @@ function App(){}
 //App initialization (entry point)
 App.initialize = function()
 {
+	//Stas tool
+	App.stats = new Stats();
+	App.stats.setMode(0);
+	App.stats.domElement.style.position = 'absolute';
+	App.stats.domElement.style.left = '0px';
+	App.stats.domElement.style.top = '0px';
+	document.body.appendChild(App.stats.domElement);
+
+
 	//Get canvas
 	var canvas = document.getElementById("canvas");
 	canvas.width  = window.innerWidth;
@@ -100,6 +114,8 @@ App.loop = function()
 	//Prepare next frame render
 	requestAnimationFrame(App.loop);
 
+	App.stats.begin();
+
 	//Update Mouse Values
 	Mouse.update();
 
@@ -110,6 +126,8 @@ App.loop = function()
 	//Update and draw
 	Main.update();
 	Main.draw();
+
+	App.stats.end();
 }
 
 //Called every time page is resized
