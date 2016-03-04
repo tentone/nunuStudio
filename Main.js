@@ -6,6 +6,9 @@ var camera = null;
 var camera_rotation = null;
 var renderer = null;
 
+//Leap physics
+var leap_bouding_box = null;
+
 //Cannon stuff
 var world = null;
 var physics_objects = [];
@@ -26,15 +29,18 @@ Main.initialize = function(canvas)
 	camera.position.set(0, 5, -5);
 	camera_rotation = new THREE.Vector2(0,0);
 
-	//Initialize Leap Hand
-	LeapDevice.initialize();
-	scene.add(LeapDevice.scene);
-
 	//Init Cannon
 	world = new CANNON.World();
 	world.broadphase = new CANNON.NaiveBroadphase();
 	world.gravity.set(0,-10,0);
 	world.solver.tolerance = 0.05;
+
+	//Initialize Leap Hand
+	LeapDevice.initialize();
+	scene.add(LeapDevice.scene);
+
+	//Leap hand physics
+	leap_bouding_box = new THREE.BoundingBoxHelper(LeapDevice.scene);
 
 	//Raycaster
 	raycaster = new THREE.Raycaster();

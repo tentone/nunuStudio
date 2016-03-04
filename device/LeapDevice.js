@@ -56,11 +56,7 @@ LeapDevice.updateLeap = function(frame)
 	var countArms = 0;
 	for(var hand of frame.hands)
 	{
-		var material = new THREE.MeshPhongMaterial({color: 0xff0000});
-		if(hand.type == "left")
-		{
-			material = new THREE.MeshPhongMaterial({color: 0x00ff00});
-		}
+		var material = new THREE.MeshPhongMaterial({color: 0x00ff00});
 		
 		for(var finger of hand.fingers)
 		{
