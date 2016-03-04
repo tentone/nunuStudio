@@ -2,6 +2,7 @@ function Main(){}
 
 //Test objects
 var scene = null;
+var debug_scene = null;
 var camera = null;
 var camera_rotation = null;
 var renderer = null;
@@ -13,6 +14,7 @@ var leap_bouding_box = null;
 var world = null;
 var physics_objects = [];
 var render_objects = [];
+var cannon_debug_renderer = null;
 
 //Object selection
 var raycaster = null;
@@ -25,6 +27,7 @@ Main.initialize = function(canvas)
 {
 	//Create camera and scene
 	scene = new THREE.Scene();
+	debug_scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(75, canvas.width/canvas.height, 0.1, 100000);
 	camera.position.set(0, 5, -5);
 	camera_rotation = new THREE.Vector2(0,0);
@@ -34,6 +37,8 @@ Main.initialize = function(canvas)
 	world.broadphase = new CANNON.NaiveBroadphase();
 	world.gravity.set(0,-10,0);
 	world.solver.tolerance = 0.05;
+
+	cannon_debug_renderer = new THREE.CannonDebugRenderer(debug_scene, world);
 
 	//Initialize Leap Hand
 	LeapDevice.initialize();
@@ -47,6 +52,7 @@ Main.initialize = function(canvas)
 
 	//Renderer
 	renderer = new THREE.WebGLRenderer({canvas: canvas});
+	renderer.autoClear = false;
 	renderer.setSize(canvas.width, canvas.height);
 	renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.PCFSoftShadowMap; //THREE.BasicShadowMap;
@@ -88,6 +94,8 @@ Main.initialize = function(canvas)
 			object.position.set(4, 2, 4);
 			setShadowReceiving(object, true);
 			setShadowCasting(object, true);
+
+			addPhysicsBoundingBox(object, world);
 			scene.add(object);
 		});
 	});
@@ -106,6 +114,8 @@ Main.initialize = function(canvas)
 			object.position.set(-4, 0, 4);
 			setShadowReceiving(object, true);
 			setShadowCasting(object, true);
+
+			addPhysicsBoundingBox(object, world);
 			scene.add(object);
 		});
 	});
@@ -114,10 +124,13 @@ Main.initialize = function(canvas)
 	var objLoader = new THREE.OBJLoader();
 	objLoader.load("data/models/dummy/dummy.obj", function(object)
 	{
-		object.scale.set(0.01, 0.01, 0.01);
+		var scale = 0.01;
+		object.scale.set(scale, scale, scale);
 		object.position.set(-4, 0, 0);
 		setShadowReceiving(object, true);
 		setShadowCasting(object, true);
+
+		addPhysicsBoundingBox(object, world);
 		scene.add(object);
 	});
 
@@ -146,10 +159,10 @@ Main.initialize = function(canvas)
 
 	//Grid and Axis Helper
 	var gridHelper = new THREE.GridHelper(500, 20);
-	scene.add(gridHelper);
+	debug_scene.add(gridHelper);
 
 	var axisHelper = new THREE.AxisHelper(500);
-	scene.add(axisHelper);
+	debug_scene.add(axisHelper);
 
 	//Number of cubes
 	var N = 100;
@@ -171,7 +184,7 @@ Main.initialize = function(canvas)
 			var geometry = new THREE.SphereGeometry(size, 16, 16);
 		}
 
-		var body = new CANNON.Body({mass:1});
+		var body = new CANNON.Body({mass:1, linearDamping:0.1, angularDamping:0.1});
 		body.addShape(shape);
 		body.position.set(Math.random()*10 - 5, 2.5*i+0.5, Math.random()*10 - 5);
 		physics_objects.push(body);
@@ -300,13 +313,44 @@ Main.update = function()
 			intersects[0].object.material = new THREE.MeshNormalMaterial();
 		}
 
-		//Change closeste object material
+		//Change closest object material
 		/*for(var i = 0; i < intersects.length; i++)
 		{
 			intersects[i].object.material = new THREE.MeshNormalMaterial();
 		}*/
 	}
 
+}
+
+//Add physics bounding box from objet to physics world
+function addPhysicsBoundingBox(object, world)
+{
+	for(var j = 0; j < object.children.length; j++)
+	{
+		var box = new THREE.BoundingBoxHelper(object.children[j]);
+		box.update();
+
+		var hs = new THREE.Vector3(box.box.max.x - box.box.min.x, box.box.max.y - box.box.min.y, box.box.max.y - box.box.min.z);
+		hs.x *= object.scale.x;
+		hs.y *= object.scale.y;
+		hs.z *= object.scale.z;
+		hs.divideScalar(2);
+
+		var pos = box.box.center();
+		pos.x *= object.scale.x;
+		pos.y *= object.scale.y;
+		pos.z *= object.scale.z;
+		pos.add(object.position);
+
+		var shape = new CANNON.Box(new CANNON.Vec3(hs.x, hs.y, hs.z));
+		var body = new CANNON.Body({mass:0});
+		body.addShape(shape);
+		body.quaternion.setFromEuler(0,Math.PI/2,0,"XYZ");
+		body.position.set(pos.x, pos.y, pos.z);
+		body.updateMassProperties();
+
+		world.addBody(body);
+	}
 }
 
 //Set shadow receiving
@@ -334,8 +378,11 @@ function setShadowCasting(object, state)
 //Draw stuff into screen
 Main.draw = function()
 {
+	cannon_debug_renderer.update();
 	vr_manager.render(scene, camera, App.time);
+	vr_manager.render(debug_scene, camera, App.time);
 }
+
 
 //Resize to fit window
 Main.resize = function(canvas)
