@@ -20,13 +20,8 @@ LeapDevice.initialize = function()
 	LeapDevice.scale = new THREE.Vector3(1,1,1);
 
 	//Start leap and set callback function
+	LeapDevice.controller = new Leap.Controller();
 	Leap.loop({}, LeapDevice.updateLeap).connect();
-}
-
-//Check if there is a leap device available
-LeapDevice.isAvailable = function()
-{
-	//TODO <ADD CODE HERE>
 }
 
 //Change Mode
@@ -61,6 +56,12 @@ LeapDevice.updateLeap = function(frame)
 	var countArms = 0;
 	for(var hand of frame.hands)
 	{
+		var material = new THREE.MeshPhongMaterial({color: 0xff0000});
+		if(hand.type == "left")
+		{
+			material = new THREE.MeshPhongMaterial({color: 0x00ff00});
+		}
+		
 		for(var finger of hand.fingers)
 		{
 			for(var bone of finger.bones) 
@@ -69,7 +70,8 @@ LeapDevice.updateLeap = function(frame)
 				{
 					continue;
 				}
-				var boneMesh = LeapDevice.bone_meshes[countBones] || LeapDevice.addMesh(LeapDevice.bone_meshes);
+
+				var boneMesh = LeapDevice.bone_meshes[countBones] || LeapDevice.addMesh(LeapDevice.bone_meshes, material);
 				LeapDevice.updateMesh(bone, boneMesh);
 			}
 		}
@@ -84,10 +86,9 @@ LeapDevice.updateLeap = function(frame)
 	}
 }
 
-LeapDevice.addMesh = function(meshes)
+LeapDevice.addMesh = function(meshes, material)
 {
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
-	var material = new THREE.MeshPhongMaterial(0x222200);
 	var mesh = new THREE.Mesh(geometry, material);
 	meshes.push(mesh);
 	return mesh;

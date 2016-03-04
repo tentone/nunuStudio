@@ -26,6 +26,16 @@ Main.initialize = function(canvas)
 	camera.position.set(0, 5, -5);
 	camera_rotation = new THREE.Vector2(0,0);
 
+	//Initialize Leap Hand
+	LeapDevice.initialize();
+	scene.add(LeapDevice.scene);
+
+	//Init Cannon
+	world = new CANNON.World();
+	world.broadphase = new CANNON.NaiveBroadphase();
+	world.gravity.set(0,-10,0);
+	world.solver.tolerance = 0.05;
+
 	//Raycaster
 	raycaster = new THREE.Raycaster();
 
@@ -37,11 +47,9 @@ Main.initialize = function(canvas)
 
 	//Initialize VR manager
 	vr_controls = new THREE.VRControls(camera);
-	var effect = new THREE.VREffect(renderer);
-	effect.setSize(window.innerWidth, window.innerHeight);
-
-
-	vr_manager = new WebVRManager(renderer, effect, {isUndistorted: false});
+	var vr_effect = new THREE.VREffect(renderer);
+	vr_effect.setSize(window.innerWidth, window.innerHeight);
+	vr_manager = new WebVRManager(renderer, vr_effect, {isUndistorted: false});
 
 	//Create Floor
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -52,6 +60,13 @@ Main.initialize = function(canvas)
 	floor.castShadow = true;
 	floor.position.y = -1;
 	scene.add(floor);
+
+	//Floor plane physics
+	var plane = new CANNON.Plane();
+	var body = new CANNON.Body({mass:0});
+	body.addShape(plane);
+	body.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0), -Math.PI/2);
+	world.addBody(body);
 
 	//Load eyebot model (normal/specular mapped)
 	var mtlLoader = new THREE.MTLLoader();
@@ -70,22 +85,6 @@ Main.initialize = function(canvas)
 			scene.add(object);
 		});
 	});
-
-	//Load skybox
-	/*var mtlLoader = new THREE.MTLLoader();
-	mtlLoader.setBaseUrl("data/models/skybox/");
-	mtlLoader.load("data/models/skybox/skybox.mtl", function(materials)
-	{
-		materials.preload();
-		var objLoader = new THREE.OBJLoader();
-		objLoader.setMaterials(materials);
-		objLoader.load("data/models/skybox/skybox.obj", function(object)
-		{
-			object.scale.set(5000, 5000, 5000);
-			object.position.set(0, 0, 0);
-			scene.add(object);
-		});
-	});*/
 
 	//Load bane model (multi material obj/mtl)
 	var mtlLoader = new THREE.MTLLoader();
@@ -146,23 +145,6 @@ Main.initialize = function(canvas)
 	var axisHelper = new THREE.AxisHelper(500);
 	scene.add(axisHelper);
 
-	//Initialize Leap Hand
-	LeapDevice.initialize();
-	scene.add(LeapDevice.scene);
-
-	//Init Cannon
-	world = new CANNON.World();
-	world.broadphase = new CANNON.NaiveBroadphase();
-	world.gravity.set(0,-10,0);
-	world.solver.tolerance = 0.05;
-
-	// Ground plane
-	var plane = new CANNON.Plane();
-	var groundBody = new CANNON.Body({mass:0});
-	groundBody.addShape(plane);
-	groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0),-Math.PI/2);
-	world.addBody(groundBody);
-
 	//Number of cubes
 	var N = 100;
 
@@ -185,7 +167,7 @@ Main.initialize = function(canvas)
 
 		var body = new CANNON.Body({mass:1});
 		body.addShape(shape);
-		body.position.set(Math.random()-0.5,2.5*i+0.5,Math.random()-0.5);
+		body.position.set(Math.random()*10 - 5, 2.5*i+0.5, Math.random()*10 - 5);
 		physics_objects.push(body);
 		world.addBody(body);
 
@@ -216,7 +198,7 @@ Main.update = function()
 	{
 		camera_rotation.x += 0.02;
 	}
-	
+
 	//Camera Mouse Movement
 	camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
 	camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
