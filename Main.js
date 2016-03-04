@@ -23,7 +23,7 @@ Main.initialize = function(canvas)
 	//Create camera and scene
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(75, canvas.width/canvas.height, 0.1, 100000);
-	camera.position.set(0,5,-5);
+	camera.position.set(0, 5, -5);
 	camera_rotation = new THREE.Vector2(0,0);
 
 	//Raycaster
@@ -33,14 +33,15 @@ Main.initialize = function(canvas)
 	renderer = new THREE.WebGLRenderer({canvas: canvas});
 	renderer.setSize(canvas.width, canvas.height);
 	renderer.shadowMap.enabled = true;
-	//renderer.shadowMap.type = THREE.PCFSoftShadowMap;
- 
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap; //THREE.BasicShadowMap;
+
 	//Initialize VR manager
 	vr_controls = new THREE.VRControls(camera);
 	var effect = new THREE.VREffect(renderer);
 	effect.setSize(window.innerWidth, window.innerHeight);
 
-	vr_manager = new WebVRManager(renderer, effect, {hideButton: false, isUndistorted: false});
+
+	vr_manager = new WebVRManager(renderer, effect, {isUndistorted: false});
 
 	//Create Floor
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -138,13 +139,6 @@ Main.initialize = function(canvas)
 	light.castShadow = true;
 	scene.add(light);
 
-	//Hemisphere
-	/*var hemiLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.3);
-	hemiLight.color.setHSL(0.6, 1, 0.6);
-	hemiLight.groundColor.setHSL(0.095, 1, 0.75 );
-	hemiLight.position.set(0, 500, 0);
-	scene.add(hemiLight);*/
-
 	//Grid and Axis Helper
 	var gridHelper = new THREE.GridHelper(500, 20);
 	scene.add(gridHelper);
@@ -156,7 +150,7 @@ Main.initialize = function(canvas)
 	LeapDevice.initialize();
 	scene.add(LeapDevice.scene);
 
-	//Init cannon
+	//Init Cannon
 	world = new CANNON.World();
 	world.broadphase = new CANNON.NaiveBroadphase();
 	world.gravity.set(0,-10,0);
@@ -169,24 +163,32 @@ Main.initialize = function(canvas)
 	groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0),-Math.PI/2);
 	world.addBody(groundBody);
 
+	//Number of cubes
 	var N = 100;
 
-	//Create N cubes for physics
-	var shape = new CANNON.Box(new CANNON.Vec3(0.5,0.5,0.5));
+	//Create N  objects for physics and render
 	for(var i = 0; i < N; i++)
 	{
+		var material = new THREE.MeshPhongMaterial({color: Math.floor(Math.random() * 0xffffff)});
+		if(Math.random() < 0.5)
+		{
+			var size = Math.random();
+			var shape = new CANNON.Box(new CANNON.Vec3(size, size, size));
+			var geometry = new THREE.BoxGeometry(size*2, size*2, size*2, 10, 10);
+		}
+		else
+		{
+			var size = Math.random() * 2;
+			var shape = new CANNON.Sphere(size);
+			var geometry = new THREE.SphereGeometry(size, 16, 16);
+		}
+
 		var body = new CANNON.Body({mass:1});
 		body.addShape(shape);
 		body.position.set(Math.random()-0.5,2.5*i+0.5,Math.random()-0.5);
 		physics_objects.push(body);
 		world.addBody(body);
-	}
 
-	//Create N cubes for render
-	var geometry = new THREE.BoxGeometry(1, 1, 1, 10, 10);
-	var material = new THREE.MeshPhongMaterial();
-	for(var i = 0; i < N; i++)
-	{
 		var cube = new THREE.Mesh(geometry, material);
 		cube.castShadow = true;
 		render_objects.push(cube);
@@ -243,8 +245,12 @@ Main.update = function()
 	//Update VR headset position and apply to camera
 	//vr_controls.update();
 
-	//Move Camera with WASD
+	//Move Camera Front and Back
 	var speed_walk = 0.2;
+	if(Keyboard.isKeyPressed(Keyboard.SHIFT))
+	{
+		speed_walk = 0.6;
+	}
 	var angle_cos = Math.cos(camera_rotation.x);
 	var angle_sin = Math.sin(camera_rotation.x);
 	if(Keyboard.isKeyPressed(Keyboard.S))
@@ -258,6 +264,13 @@ Main.update = function()
 		camera.position.x += speed_walk * angle_sin;
 	}
 
+	//Hand Leap Follow Camera
+	LeapDevice.scene.rotation.y = Math.PI + camera_rotation.x;
+	LeapDevice.scene.position.set(camera.position.x, camera.position.y-2, camera.position.z);
+	LeapDevice.scene.position.z += 2 * angle_cos;
+	LeapDevice.scene.position.x += 2 * angle_sin;
+
+	//Move Camera Lateral
 	var angle_cos = Math.cos(camera_rotation.x + Math.PI/2.0);
 	var angle_sin = Math.sin(camera_rotation.x + Math.PI/2.0);
 	if(Keyboard.isKeyPressed(Keyboard.A))
@@ -271,6 +284,7 @@ Main.update = function()
 		camera.position.x -= speed_walk * angle_sin;
 	}
 
+	//Move Camera UP and DOWN
 	if(Keyboard.isKeyPressed(Keyboard.SPACEBAR))
 	{
 		camera.position.y += 0.1;
@@ -292,13 +306,17 @@ Main.update = function()
 		//Update the picking ray with the camera and mouse position	
 		raycaster.setFromCamera(mouse, camera);	
 
-		var intersects = getSceneAllIntersected(scene, raycaster);
+		var intersects =  raycaster.intersectObjects(scene.children, true);
+		if(intersects.length > 0)
+		{
+			intersects[0].object.material = new THREE.MeshNormalMaterial();
+		}
 
 		//Change closeste object material
-		for(var i = 0; i < intersects.length; i++)
+		/*for(var i = 0; i < intersects.length; i++)
 		{
 			intersects[i].object.material = new THREE.MeshNormalMaterial();
-		}
+		}*/
 	}
 
 }
@@ -323,19 +341,6 @@ function setShadowCasting(object, state)
 	{
 		setShadowCasting(object.children[i], state);
 	}
-}
-
-//Return a list of all intersected object in a scene
-function getSceneAllIntersected(scene, raycaster)
-{
-	var intersects = raycaster.intersectObjects(scene.children);
-
-	for(var i = 0; i < scene.children.length; i++)
-	{
-		intersects = intersects.concat(getSceneAllIntersected(scene.children[i], raycaster));
-	}
-
-	return intersects;
 }
 
 //Draw stuff into screen

@@ -17,14 +17,13 @@ include("lib/three/vr/webvr-polyfill.js");
 
 include("lib/leap-0.6.4.js");
 include("lib/cannon/cannon.js");
-include("lib/cannon/ConvexGeometry.js");
+//include("lib/cannon/ConvexGeometry.js");
 include("lib/cannon/Detector.js");
 
 include("lib/stats.min.js");
 
 //Internal components
 include("device/LeapDevice.js");
-include("device/VRDevice.js");
 
 include("input/Key.js");
 include("input/Keyboard.js");

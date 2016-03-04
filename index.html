@@ -16,6 +16,9 @@
 
 	<body onload="App.initialize();" onresize="App.resize();">
 		<script type="text/javascript" src="App.js"></script>
+		<script>
+			WebVRConfig = {FORCE_ENABLE_VR: true}
+		</script>
 		<div>
 			<canvas id="canvas"/>
 		</div>
