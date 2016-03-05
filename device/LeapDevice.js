@@ -21,7 +21,7 @@ LeapDevice.initialize = function()
 
 	//Start leap and set callback function
 	LeapDevice.controller = new Leap.Controller();
-	Leap.loop({}, LeapDevice.updateLeap).connect();
+	Leap.loop({background:true}, LeapDevice.updateLeap).connect();
 }
 
 //Change Mode

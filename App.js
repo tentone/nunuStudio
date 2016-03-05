@@ -41,16 +41,13 @@ App.initialize = function()
 	//Stas tool
 	App.stats = new Stats();
 	App.stats.setMode(0);
-	App.stats.domElement.style.position = 'absolute';
-	App.stats.domElement.style.left = '0px';
-	App.stats.domElement.style.top = '0px';
+	App.stats.domElement.style.position = "absolute";
+	App.stats.domElement.style.left = "0px";
+	App.stats.domElement.style.top = "0px";
 	document.body.appendChild(App.stats.domElement);
 
-
 	//Get canvas
-	var canvas = document.getElementById("canvas");
-	canvas.width  = window.innerWidth;
-	canvas.height = window.innerHeight;
+	App.canvas = document.getElementById("canvas");
 
 	//Init Input
 	Keyboard.initialize();
@@ -86,19 +83,9 @@ App.initialize = function()
 		Mouse.updateKey(event.which-1, Key.KEY_UP);
 	}
 
-	//Request to lock mouse if canvas is clicked
-	canvas.onclick = function()
-	{
-		try
-		{
-			canvas.requestPointerLock = canvas.mozRequestPointerLock || canvas.requestPointerLock || canvas.webkitRequestPointerLock;
-			canvas.requestPointerLock();
-		}
-		catch(e){}
-	}
-
 	//Create main program
-	Main.initialize(canvas);
+	App.main = Main;
+	App.main.initialize(App.canvas);
 
 	//Time control
 	App.delta_time = 0;
@@ -106,6 +93,46 @@ App.initialize = function()
 
 	//Start Loop
 	App.loop();
+}
+
+//Load Main program
+App.loadMain = function(main)
+{
+	App.main = main;
+	App.main.initialize(App.canvas);
+}
+
+App.showStats = function(value)
+{
+	if(value === true)
+	{
+		App.stats.domElement.style.visibility = "visible";
+	}
+	else
+	{
+		App.stats.domElement.style.visibility = "hidden";
+	}
+}
+
+//Set if mouse locked
+App.setMouseLock = function(value)
+{
+	if(value === true)
+	{
+		App.canvas.onclick = function()
+		{
+			try
+			{
+				App.canvas.requestPointerLock = canvas.mozRequestPointerLock || canvas.requestPointerLock || canvas.webkitRequestPointerLock;
+				App.canvas.requestPointerLock();
+			}
+			catch(e){}
+		}
+	}
+	else
+	{
+		App.canvas.onclick = function(){}
+	}
 }
 
 //App loop
@@ -124,8 +151,8 @@ App.loop = function()
 	App.time += App.delta_time;
 
 	//Update and draw
-	Main.update();
-	Main.draw();
+	App.main.update();
+	App.main.draw();
 
 	App.stats.end();
 }
@@ -133,15 +160,12 @@ App.loop = function()
 //Called every time page is resized
 App.resize = function()
 {
-	var canvas = document.getElementById("canvas");
-	canvas.width  = window.innerWidth;
-	canvas.height = window.innerHeight;
-
-	Main.resize(canvas);
+	App.canvas = document.getElementById("canvas");
+	App.main.resize(App.canvas);
 }
 
 //Auxiliar include
 function include(jsFile)
 {
-	document.write('<script type="text/javascript" src="'+ jsFile+ '"></script>');
+	document.write('<script type="text/javascript" src="'+ jsFile + '"></script>');
 }
