@@ -270,7 +270,7 @@ Main.update = function()
 	LeapDevice.scene.position.set(camera.position.x, camera.position.y-2, camera.position.z);
 	LeapDevice.scene.position.z += 2 * angle_cos;
 	LeapDevice.scene.position.x += 2 * angle_sin;
-
+	
 	//Move Camera Lateral
 	var angle_cos = Math.cos(camera_rotation.x + Math.PI/2.0);
 	var angle_sin = Math.sin(camera_rotation.x + Math.PI/2.0);
@@ -379,8 +379,8 @@ function setShadowCasting(object, state)
 Main.draw = function()
 {
 	cannon_debug_renderer.update();
-	vr_manager.render(scene, camera, App.time);
 	vr_manager.render(debug_scene, camera, App.time);
+	vr_manager.render(scene, camera, App.time);
 }
 
 
