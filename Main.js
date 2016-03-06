@@ -61,7 +61,7 @@ Main.initialize = function(canvas)
 	Main.vr_controls = new THREE.VRControls(Main.camera);
 	Main.vr_effect = new THREE.VREffect(Main.renderer);
 	Main.vr_effect.setSize(window.innerWidth, window.innerHeight);
-	Main.vr_manager = new WebVRManager(Main.renderer, Main.vr_effect, {isUndistorted: false});
+	Main.vr_manager = new WebVRManager(Main.renderer, Main.vr_effect, {hideButton:true, isUndistorted:false});
 
 	//Create Floor
 	var geometry = new THREE.BoxGeometry(1, 1, 1);

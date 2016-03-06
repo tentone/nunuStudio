@@ -30,13 +30,18 @@ include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
-include("Main.js");
-
 //App class
 function App(){}
 
+//App variables
+App.stats = null;
+App.canvas = null;
+App.main = null;
+App.delta_time = 0;
+App.time = 0;
+
 //App initialization (entry point)
-App.initialize = function()
+App.initialize = function(main)
 {
 	//Stas tool
 	App.stats = new Stats();
@@ -84,7 +89,7 @@ App.initialize = function()
 	}
 
 	//Create main program
-	App.main = Main;
+	App.main = main;
 	App.main.initialize(App.canvas);
 
 	//Time control
