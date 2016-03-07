@@ -16,11 +16,23 @@ Editor.cannon_renderer = null;
 //Object selection
 Editor.raycaster = null;
 
-
 //Initialize UI
-Editor.initializeUI = function()
+Editor.createUI = function()
 {
+	Editor.createDiv("top_bar");
+	Editor.createDiv("tool_bar");
+	Editor.createDiv("explorer");
+	Editor.createDiv("asset_explorer");
+
 	Editor.resizeUI();
+}
+
+//Auxiliar func to create a div
+Editor.createDiv = function(id)
+{
+	var div = document.createElement("div");
+	div.id = id;
+	document.body.appendChild(div);
 }
 
 //resize UI
@@ -29,6 +41,8 @@ Editor.resizeUI = function()
 	//Get interface elements
 	var top_bar = document.getElementById("top_bar");
 	var tool_bar = document.getElementById("tool_bar");
+	var explorer = document.getElementById("explorer");
+	var asset_explorer = document.getElementById("asset_explorer");
 	var canvas = document.getElementById("canvas");
 
 	//Window size
@@ -49,16 +63,36 @@ Editor.resizeUI = function()
 	tool_bar.style.top = top_bar.height + "px";
 	tool_bar.style.left = "0px";
 	tool_bar.height = (size.y - top_bar.height);
-	tool_bar.width = 50;
+	tool_bar.width = 70;
 	tool_bar.style.height = tool_bar.height + "px";
 	tool_bar.style.width = tool_bar.width + "px";
 	tool_bar.style.backgroundColor = "#333333";
+
+	//Explorer
+	explorer.style.position = "absolute";
+	explorer.width = 300;
+	explorer.height = (size.y - top_bar.height);
+	explorer.style.top = top_bar.height + "px";
+	explorer.style.left = (size.x-explorer.width) + "px";
+	explorer.style.width = explorer.width + "px";
+	explorer.style.height = explorer.height + "px";
+	explorer.style.backgroundColor = "#333333";
+
+	//Asset explorer
+	asset_explorer.style.position = "absolute";
+	asset_explorer.width = size.x - explorer.width - tool_bar.width;
+	asset_explorer.height = 200;
+	asset_explorer.style.top = (size.y - asset_explorer.height) + "px";
+	asset_explorer.style.left = tool_bar.width + "px";
+	asset_explorer.style.width = asset_explorer.width + "px";
+	asset_explorer.style.height = asset_explorer.height + "px";
+	asset_explorer.style.backgroundColor = "#444444";
 
 	//Canvas
 	canvas.style.position = "absolute"; 
 	canvas.style.top = top_bar.height + "px";
 	canvas.style.left = tool_bar.width + "px";
-	canvas.width = (size.x - tool_bar.width);
+	canvas.width = (size.x - tool_bar.width - explorer.width);
 	canvas.height = (size.y - top_bar.height); 
 	canvas.style.width = canvas.width + "px";
 	canvas.style.height = canvas.height + "px";
@@ -67,13 +101,12 @@ Editor.resizeUI = function()
 //Initialize Main
 Editor.initialize = function(canvas)
 {
-	//Initialize UI
-	Editor.initializeUI();
-
 	//Set mouse lock true
 	App.setMouseLock(false);
 	App.showStats(false);
 	
+	Editor.canvas = canvas;
+
 	//Create camera and scene
 	Editor.scene = new THREE.Scene();
 	Editor.debug_scene = new THREE.Scene();
@@ -205,18 +238,21 @@ Editor.update = function()
 	}
 
 	//Camera Mouse Movement
-	Editor.camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
-	Editor.camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
+	if(Mouse.buttonPressed(Mouse.LEFT))
+	{
+		Editor.camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
+		Editor.camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
 
-	//Limit Vertical Rotation to 90 degrees
-	var pid2 = 1.57;
-	if(Editor.camera_rotation.y < -pid2)
-	{
-		Editor.camera_rotation.y = -pid2;
-	}
-	else if(Editor.camera_rotation.y > pid2)
-	{
-		Editor.camera_rotation.y = pid2;
+		//Limit Vertical Rotation to 90 degrees
+		var pid2 = 1.57;
+		if(Editor.camera_rotation.y < -pid2)
+		{
+			Editor.camera_rotation.y = -pid2;
+		}
+		else if(Editor.camera_rotation.y > pid2)
+		{
+			Editor.camera_rotation.y = pid2;
+		}
 	}
 	
 	//Calculate direction vector
@@ -285,7 +321,7 @@ Editor.update = function()
 	//Rasycast line from Editor.camera and mouse position
 	if(Mouse.buttonJustPressed(Mouse.MIDDLE))
 	{
-		var mouse = new THREE.Vector2((Mouse.pos.x/window.innerWidth )*2 - 1, -(Mouse.pos.y/window.innerHeight)*2 + 1);
+		var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
 		
 		//Update the picking ray with the Editor.camera and mouse position	
 		Editor.raycaster.setFromCamera(mouse, Editor.camera);	
@@ -364,6 +400,7 @@ Editor.draw = function()
 //Resize to fit window
 Editor.resize = function(canvas)
 {
+	Editor.canvas = canvas;
 	Editor.resizeUI();
 
 	//Update Renderer

@@ -1,4 +1,3 @@
-//External Libs
 include("lib/three/three.js");
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
@@ -16,6 +15,7 @@ include("lib/three/vr/webvr-manager.js");
 include("lib/three/vr/webvr-polyfill.js");
 
 include("lib/leap-0.6.4.js");
+
 include("lib/cannon/cannon.js");
 include("lib/cannon/ConvexGeometry.js");
 include("lib/cannon/Detector.js");
@@ -23,7 +23,8 @@ include("lib/cannon/CannonDebugRenderer.js");
 
 include("lib/stats.min.js");
 
-//Internal components
+include("lib/ui.js");
+
 include("device/LeapDevice.js");
 
 include("input/Key.js");
@@ -73,7 +74,8 @@ App.initialize = function(main)
 	//Mouse Move Position
 	document.onmousemove = function(event)
 	{
-		Mouse.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
+		var rect = App.canvas.getBoundingClientRect();
+		Mouse.updatePosition(event.clientX - rect.left, event.clientY - rect.top, event.movementX, event.movementY);
 	}
 
 	//Mouse Button Down
