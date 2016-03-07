@@ -16,12 +16,60 @@ Editor.cannon_renderer = null;
 //Object selection
 Editor.raycaster = null;
 
-//Set App main to editor
-App.main = Editor;
+
+//Initialize UI
+Editor.initializeUI = function()
+{
+	Editor.resizeUI();
+}
+
+//resize UI
+Editor.resizeUI = function()
+{
+	//Get interface elements
+	var top_bar = document.getElementById("top_bar");
+	var tool_bar = document.getElementById("tool_bar");
+	var canvas = document.getElementById("canvas");
+
+	//Window size
+	var size = new THREE.Vector2(window.innerWidth, window.innerHeight);
+
+	//Top bar
+	top_bar.style.position = "absolute";
+	top_bar.style.top = "0px";
+	top_bar.style.left = "0px";
+	top_bar.height = 30;
+	top_bar.width = size.x;
+	top_bar.style.width = top_bar.width + "px";
+	top_bar.style.height = top_bar.height + "px";
+	top_bar.style.backgroundColor = "#444444";
+
+	//Tool bar
+	tool_bar.style.position = "absolute"; 
+	tool_bar.style.top = top_bar.height + "px";
+	tool_bar.style.left = "0px";
+	tool_bar.height = (size.y - top_bar.height);
+	tool_bar.width = 50;
+	tool_bar.style.height = tool_bar.height + "px";
+	tool_bar.style.width = tool_bar.width + "px";
+	tool_bar.style.backgroundColor = "#333333";
+
+	//Canvas
+	canvas.style.position = "absolute"; 
+	canvas.style.top = top_bar.height + "px";
+	canvas.style.left = tool_bar.width + "px";
+	canvas.width = (size.x - tool_bar.width);
+	canvas.height = (size.y - top_bar.height); 
+	canvas.style.width = canvas.width + "px";
+	canvas.style.height = canvas.height + "px";
+}
 
 //Initialize Main
 Editor.initialize = function(canvas)
 {
+	//Initialize UI
+	Editor.initializeUI();
+
 	//Set mouse lock true
 	App.setMouseLock(false);
 	App.showStats(false);
@@ -247,12 +295,6 @@ Editor.update = function()
 		{
 			intersects[0].object.material = new THREE.MeshNormalMaterial();
 		}
-
-		//Change closest object material
-		/*for(var i = 0; i < intersects.length; i++)
-		{
-			intersects[i].object.material = new THREE.MeshNormalMaterial();
-		}*/
 	}
 
 }
@@ -322,6 +364,9 @@ Editor.draw = function()
 //Resize to fit window
 Editor.resize = function(canvas)
 {
+	Editor.resizeUI();
+
+	//Update Renderer
 	Editor.renderer.setSize(canvas.width, canvas.height);
 	Editor.camera.aspect = canvas.width/canvas.height;
 	Editor.camera.updateProjectionMatrix();
