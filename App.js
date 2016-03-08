@@ -29,6 +29,8 @@ include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
+include("editor/ui/Division.js");
+
 //App class
 function App(){}
 
