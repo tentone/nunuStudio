@@ -26,16 +26,16 @@ Editor.asset_explorer;
 //Initialize UI
 Editor.createUI = function()
 {
-	Editor.top_bar = new Division("top_bar");
+	Editor.top_bar = new Division();
 	Editor.top_bar.setHeight(30);
 	
-	Editor.tool_bar = new Division("tool_bar");
+	Editor.tool_bar = new Division();
 	Editor.tool_bar.setWidth(70);
 	
-	Editor.explorer = new Division("explorer");
-	Editor.explorer.setWidth(70);
-
-	Editor.explorer_resize = new Division("explorer_resize");
+	//Object explorer
+	Editor.explorer = new Division();
+	Editor.explorer.setWidth(300);
+	Editor.explorer_resize = new Division();
 	Editor.explorer_resize.setWidth(10);
 	Editor.explorer_resize.onmousemove = function(event)
 	{
@@ -46,7 +46,7 @@ Editor.createUI = function()
 		}
 	};
 
-	Editor.asset_explorer = new Division("asset_explorer");
+	Editor.asset_explorer = new Division();
 	Editor.asset_explorer.setHeight(200);
 
 	Editor.resizeUI();
@@ -63,38 +63,37 @@ Editor.resizeUI = function()
 	//Top bar
 	Editor.top_bar.width = size.x;
 	Editor.top_bar.updateSize();
-	Editor.top_bar.style.element.backgroundColor = "#444444";
+	Editor.top_bar.element.style.backgroundColor = "#444444";
 
 	//Tool bar
-	Editor.tool_bar.setPosition(0, top_bar.height);
-	Editor.tool_bar.setHeight(size.y - top_bar.height);
+	Editor.tool_bar.setPosition(0, Editor.top_bar.getHeight());
+	Editor.tool_bar.setHeight(size.y - Editor.top_bar.getHeight());
 	Editor.tool_bar.updateSize();
-	Editor.tool_bar.style.element.backgroundColor = "#333333";
+	Editor.tool_bar.element.style.backgroundColor = "#333333";
 
-	Editor.explorer_resize.setHeight(size.y - top_bar.height);
-	Editor.explorer_resize.setPosition(size.x-explorer_resize.width-explorer.width, top_bar.height);
+	Editor.explorer_resize.setHeight(size.y - Editor.top_bar.getHeight());
 	Editor.explorer_resize.updateSize();
-	Editor.explorer_resize.style.element.backgroundColor = "#222222";
+	Editor.explorer_resize.setPosition(size.x - Editor.explorer_resize.getWidth() - Editor.explorer.getWidth(), Editor.top_bar.getHeight());
+	Editor.explorer_resize.element.style.backgroundColor = "#222222";
 
 	//Explorer
-	Editor.explorer.setHeight(size.y - top_bar.height);
-	Editor.explorer.setPosition(size.x-explorer.width, top_bar.height);
+	Editor.explorer.setHeight(size.y - Editor.top_bar.getHeight());
+	Editor.explorer.setPosition(size.x - Editor.explorer.getWidth(), Editor.top_bar.getHeight());
 	Editor.explorer.updateSize();
 	Editor.explorer.element.style.backgroundColor = "#333333";
 
 	//Asset explorer
-	Editor.asset_explorer.width = size.x - explorer.width - explorer_resize.width - tool_bar.width;
-	Editor.asset_explorer.style.top = (size.y - asset_explorer.height) + "px";
-	Editor.asset_explorer.style.left = tool_bar.width + "px";
+	Editor.asset_explorer.width = size.x - Editor.explorer.getWidth() - Editor.explorer_resize.getWidth() - Editor.tool_bar.getWidth();
+	Editor.asset_explorer.setPosition(Editor.tool_bar.getWidth(), size.y - Editor.asset_explorer.getHeight());
 	Editor.asset_explorer.updateSize();
-	Editor.asset_explorer.style.element.backgroundColor = "#444444";
+	Editor.asset_explorer.element.style.backgroundColor = "#444444";
 
 	//Canvas
 	canvas.style.position = "absolute"; 
-	canvas.style.top = top_bar.height + "px";
-	canvas.style.left = tool_bar.width + "px";
-	canvas.width = (size.x - tool_bar.width - explorer.width);
-	canvas.height = (size.y - top_bar.height); 
+	canvas.style.top = Editor.top_bar.getHeight() + "px";
+	canvas.style.left = Editor.tool_bar.getWidth() + "px";
+	canvas.width = (size.x - Editor.tool_bar.getWidth() - Editor.explorer.getWidth());
+	canvas.height = (size.y - Editor.top_bar.getHeight()); 
 	canvas.style.width = canvas.width + "px";
 	canvas.style.height = canvas.height + "px";
 }

@@ -1,13 +1,14 @@
 function Division(id)
 {
-	if(id == undefined)
+	if(id === undefined)
 	{
 		var id = "div" + Division.id;
 		Division.id++;
 	}
 
 	//Create element
-	this.element = document.createElement(id);
+	this.element = document.createElement("div");
+	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
@@ -17,11 +18,16 @@ function Division(id)
 	document.body.appendChild(this.element);
 }
 
+//Division conter
 Division.id = 0;
 
+//Functions Prototype
 Division.prototype.setWidth = setWidth;
 Division.prototype.setHeight = setHeight;
+Division.prototype.getWidth = getWidth;
+Division.prototype.getHeight = getHeight;
 Division.prototype.setSize = setSize;
+Division.prototype.setPosition = setPosition;
 Division.prototype.updateSize = updateSize;
 
 //Set division width
@@ -34,6 +40,18 @@ function setWidth(value)
 function setHeight(value)
 {
 	this.element.height = value;
+}
+
+//Get division width
+function getWidth()
+{
+	return this.element.width;
+}
+
+//Get division height
+function getHeight()
+{
+	return this.element.height;
 }
 
 //Set division Size
