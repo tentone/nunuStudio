@@ -23,8 +23,6 @@ include("lib/cannon/CannonDebugRenderer.js");
 
 include("lib/stats.min.js");
 
-include("lib/ui.js");
-
 include("device/LeapDevice.js");
 
 include("input/Key.js");

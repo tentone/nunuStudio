@@ -19,21 +19,57 @@ Editor.raycaster = null;
 //Initialize UI
 Editor.createUI = function()
 {
-	Editor.createDiv("top_bar");
-	Editor.createDiv("tool_bar");
-	Editor.createDiv("explorer");
-	Editor.createDiv("asset_explorer");
+	var top_bar = Division.createNew("top_bar");
+	top_bar.height = 30;
+	
+	var tool_bar = Division.createNew("tool_bar");
+	tool_bar.width = 70;
+	
+	var explorer = Division.createNew("explorer");
+	explorer.width = 300;
+
+	var explorer_resize = Division.createNew("explorer_resize");
+	explorer_resize.width = 10;
+	explorer_resize.onmousemove = function(event)
+	{
+		if(Mouse.buttonPressed(Mouse.LEFT))
+		{
+			explorer.width -= event.movementX;
+			Editor.resizeUI();
+		}
+	};
+
+
+	var asset_explorer = Division.createNew("asset_explorer");
+	asset_explorer.height = 200;
+
+	
 
 	Editor.resizeUI();
 }
 
-//Auxiliar func to create a div
-Editor.createDiv = function(id)
+function Division()
+{
+	
+}
+
+//Create new Division
+Division.createNew = function(id)
 {
 	var div = document.createElement("div");
 	div.id = id;
 	document.body.appendChild(div);
+	return div;
 }
+
+//Set division width
+Division.setWidth = function(id, value)
+{
+
+}
+
+//Set division height
+
 
 //resize UI
 Editor.resizeUI = function()
@@ -42,7 +78,9 @@ Editor.resizeUI = function()
 	var top_bar = document.getElementById("top_bar");
 	var tool_bar = document.getElementById("tool_bar");
 	var explorer = document.getElementById("explorer");
+	var explorer_resize = document.getElementById("explorer_resize");
 	var asset_explorer = document.getElementById("asset_explorer");
+
 	var canvas = document.getElementById("canvas");
 
 	//Window size
@@ -52,7 +90,7 @@ Editor.resizeUI = function()
 	top_bar.style.position = "absolute";
 	top_bar.style.top = "0px";
 	top_bar.style.left = "0px";
-	top_bar.height = 30;
+	
 	top_bar.width = size.x;
 	top_bar.style.width = top_bar.width + "px";
 	top_bar.style.height = top_bar.height + "px";
@@ -63,14 +101,20 @@ Editor.resizeUI = function()
 	tool_bar.style.top = top_bar.height + "px";
 	tool_bar.style.left = "0px";
 	tool_bar.height = (size.y - top_bar.height);
-	tool_bar.width = 70;
 	tool_bar.style.height = tool_bar.height + "px";
 	tool_bar.style.width = tool_bar.width + "px";
 	tool_bar.style.backgroundColor = "#333333";
 
+	explorer_resize.style.position = "absolute";
+	explorer_resize.height = (size.y - top_bar.height);
+	explorer_resize.style.top = top_bar.height + "px";
+	explorer_resize.style.left = (size.x-explorer_resize.width-explorer.width) + "px";
+	explorer_resize.style.width = explorer_resize.width + "px";
+	explorer_resize.style.height = explorer_resize.height + "px";
+	explorer_resize.style.backgroundColor = "#222222";
+
 	//Explorer
 	explorer.style.position = "absolute";
-	explorer.width = 300;
 	explorer.height = (size.y - top_bar.height);
 	explorer.style.top = top_bar.height + "px";
 	explorer.style.left = (size.x-explorer.width) + "px";
@@ -78,10 +122,10 @@ Editor.resizeUI = function()
 	explorer.style.height = explorer.height + "px";
 	explorer.style.backgroundColor = "#333333";
 
+
 	//Asset explorer
 	asset_explorer.style.position = "absolute";
-	asset_explorer.width = size.x - explorer.width - tool_bar.width;
-	asset_explorer.height = 200;
+	asset_explorer.width = size.x - explorer.width - explorer_resize.width - tool_bar.width;
 	asset_explorer.style.top = (size.y - asset_explorer.height) + "px";
 	asset_explorer.style.left = tool_bar.width + "px";
 	asset_explorer.style.width = asset_explorer.width + "px";
@@ -319,7 +363,7 @@ Editor.update = function()
 	setShadowCasting(LeapDevice.scene, true);
 
 	//Rasycast line from Editor.camera and mouse position
-	if(Mouse.buttonJustPressed(Mouse.MIDDLE))
+	if(Mouse.buttonJustPressed(Mouse.RIGHT))
 	{
 		var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
 		
