@@ -1,4 +1,4 @@
-function Division(id)
+function Division(parent, id)
 {
 	if(id === undefined)
 	{
@@ -10,9 +10,11 @@ function Division(id)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.style.top = "0px";
-	this.element.style.left = "0px";
-	this.element.style.backgroundColor = "#444444";
+	this.element.style.backgroundColor = "#333333";
+	
+	//Element atributes
+	this.size = new THREE.Vector2(0,0);
+	this.position = new THREE.Vector2(0,0);
 
 	//Add element to document
 	document.body.appendChild(this.element);
@@ -22,55 +24,16 @@ function Division(id)
 Division.id = 0;
 
 //Functions Prototype
-Division.prototype.setWidth = setWidth;
-Division.prototype.setHeight = setHeight;
-Division.prototype.getWidth = getWidth;
-Division.prototype.getHeight = getHeight;
-Division.prototype.setSize = setSize;
-Division.prototype.setPosition = setPosition;
-Division.prototype.updateSize = updateSize;
+Division.prototype.update = update;
+Division.prototype.updateInterface = updateInterface;
 
-//Set division width
-function setWidth(value)
-{
-	this.element.width = value;
-}
-
-//Set division height
-function setHeight(value)
-{
-	this.element.height = value;
-}
-
-//Get division width
-function getWidth()
-{
-	return this.element.width;
-}
-
-//Get division height
-function getHeight()
-{
-	return this.element.height;
-}
-
-//Set division Size
-function setSize(width, height)
-{
-	this.setWidth(width);
-	this.setHeight(height);
-}
-
-//Set Position
-function setPosition(left, top)
-{
-	this.element.style.top = top + "px";
-	this.element.style.left = left + "px";
-}
+function update(){}
 
 //Update division Size
-function updateSize()
+function updateInterface()
 {
-	this.element.style.width = this.element.width + "px";
-	this.element.style.height = this.element.height + "px";
+	this.element.style.top = this.position.y + "px";
+	this.element.style.left = this.position.x + "px";
+	this.element.style.width = this.size.x + "px";
+	this.element.style.height = this.size.y + "px";
 }

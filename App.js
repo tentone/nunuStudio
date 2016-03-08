@@ -29,7 +29,14 @@ include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
+include("core/Program.js");
+include("core/Screen.js");
+
+include("editor/ui/EditorUI.js");
+include("editor/ui/Button.js");
 include("editor/ui/Division.js");
+include("editor/ui/DivisionResizable.js");
+
 
 //App class
 function App(){}
@@ -152,7 +159,7 @@ App.loop = function()
 
 	//Update Mouse Values
 	Mouse.update();
-
+	
 	//Update time values
 	App.delta_time = Date.now() - App.time;
 	App.time += App.delta_time;

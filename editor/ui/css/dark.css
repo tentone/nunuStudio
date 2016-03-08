@@ -1,0 +1,28 @@
+body
+{
+    color : #ffffff;
+}
+
+/*Containers*/
+.division
+{
+    background-color: #222222;
+}
+
+.panel
+{
+    background-color: #333333;
+}
+
+/*Buttons*/
+.button
+{
+    background-color: #404040;
+}
+
+
+/*Text*/
+.text
+{
+	background-color: #ffffff;
+}

@@ -91,6 +91,7 @@ Mouse.update = function()
 
 		Mouse.pos.x = Mouse.raw_mouse_pos.x;
 		Mouse.pos.y = Mouse.raw_mouse_pos.y;
+
 		Mouse.raw_mouse_pos_updated = false;
 	}
 	else
