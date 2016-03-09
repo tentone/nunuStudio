@@ -44,6 +44,13 @@ EditorUI.initialize = function()
 	EditorUI.image.size.set(240, 30);
 	EditorUI.image.updateInterface();
 	
+	//Image Button test
+	EditorUI.but_image = new ButtonImage();
+	EditorUI.but_image.setImage("editor/files/sign.png");
+	EditorUI.but_image.size.set(60, 60);
+	EditorUI.but_image.position.set(0,30);
+	EditorUI.but_image.updateInterface();
+
 	//Dropdown
 	EditorUI.dropdown = new DropdownMenu();
 	EditorUI.dropdown.text = "Test";

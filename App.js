@@ -18,7 +18,6 @@ include("lib/leap-0.6.4.js");
 
 include("lib/cannon/cannon.js");
 include("lib/cannon/ConvexGeometry.js");
-include("lib/cannon/Detector.js");
 include("lib/cannon/CannonDebugRenderer.js");
 
 include("lib/stats.min.js");

@@ -39,7 +39,7 @@ body
 /*Buttons*/
 .button
 {
-	background-color: #333333;
+	background-color: #222222;
 	cursor: default;
 	display: flex;
 	justify-content: center;
@@ -48,7 +48,7 @@ body
 
 .button_over
 {
-	background-color: #444444;
+	background-color: #555555;
 	cursor: pointer;
 	display: flex;
 	justify-content: center;

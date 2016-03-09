@@ -11,7 +11,7 @@ function DropdownMenu(parent)
 	}
 
 	//ID
-	var id = "dropdownmenu" + Button.id;
+	var id = "dropmenu" + Button.id;
 	DropdownMenu.id++;
 
 	//Create element

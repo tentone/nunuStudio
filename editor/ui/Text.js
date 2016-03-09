@@ -1,7 +1,7 @@
 function Text(parent)
 {
 	//ID
-	var id = "text" + Text.id;
+	var id = "txt" + Text.id;
 	Text.id++;
 
 	//Create element

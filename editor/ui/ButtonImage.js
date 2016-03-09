@@ -1,32 +1,21 @@
-function Button(parent)
+function ButtonImage(parent)
 {
-	//Parent
-	if(parent === undefined)
-	{
-		this.parent = null;
-	}
-	else
-	{
-		this.parent = parent;
-	}
-
 	//ID
-	var id = "but" + Button.id;
-	Button.id++;
+	var id = "but_img" + ButtonImage.id;
+	ButtonImage.id++;
 
 	//Create element
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "button";
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	
-	//Button text and callback
-	this.text = "text";
+
+	//Image and Callback
+	this.image = "";
 	this.callback = null;
 
 	//Click event
@@ -50,22 +39,20 @@ function Button(parent)
 		self.element.className = "button";
 	};
 
-	//Update element
-	this.updateInterface();
-
 	//Add element to document
 	document.body.appendChild(this.element);
 }
 
-//Button conter
-Button.id = 0;
+//ButtonImage ID counter
+ButtonImage.id = 0;
 
 //Functions Prototype
-Button.prototype.update = update;
-Button.prototype.updateInterface = updateInterface;
-Button.prototype.setCallback = setCallback;
+ButtonImage.prototype.setImage = setImage;
+ButtonImage.prototype.update = update;
+ButtonImage.prototype.updateInterface = updateInterface;
+ButtonImage.prototype.setCallback = setCallback;
 
-//Update status
+//Update
 function update(){}
 
 //Set button callback function
@@ -74,7 +61,13 @@ function setCallback(callback)
 	this.callback = callback;
 }
 
-//Update Button Size
+//Set ButtonImage
+function setImage(image)
+{
+	this.image = image;
+}
+
+//Update Interface
 function updateInterface()
 {
 	if(this.visible)
@@ -85,7 +78,8 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
-	this.element.innerHTML = "<span>" + this.text + "</span>";
+
+	this.element.innerHTML = '<img src="' + this.image + '" width="' + this.size.x + '" height="' + this.size.y +'">';
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
