@@ -1,4 +1,4 @@
-function DropdownMenu(parent, id)
+function DropdownMenu(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -10,7 +10,7 @@ function DropdownMenu(parent, id)
 		this.parent = parent;
 	}
 
-	//Id
+	//ID
 	var id = "dropdownmenu" + Button.id;
 	DropdownMenu.id++;
 
@@ -36,7 +36,8 @@ function DropdownMenu(parent, id)
 	var self = this;
 	this.element.onclick = function()
 	{
-		this.expanded = !this.expanded;
+		self.expanded = !self.expanded;
+		self.updateInterface();
 	};
 
 	//Mouse over and mouse out events
@@ -57,25 +58,44 @@ function DropdownMenu(parent, id)
 	document.body.appendChild(this.element);
 }
 
-//DropdownMenu conter
+//DropdownMenu ID counter
 DropdownMenu.id = 0;
 
 //Functions Prototype
 DropdownMenu.prototype.update = update;
 DropdownMenu.prototype.updateInterface = updateInterface;
 DropdownMenu.prototype.addOption = addOption;
+DropdownMenu.prototype.removeOption = removeOption;
 
-//Update status
+//Update
 function update(){}
 
-//Set dropdown
+//Remove option from dropdown menu
+function removeOption(index)
+{
+	if(index > 0 && index < this.options.length)
+	{
+		document.body.removeChild(this.options[index].element); 
+		this.options.splice(index, 1);
+		this.updateInterface();
+	}
+}
+
+//Add new Option to dropdown menu
 function addOption(name, callback)
 {
 	var button = new Button(this);
 	button.text = name;
-	button.callback = callback;
-	button.visible = true;
+	button.visible = this.expanded;
 	button.updateInterface();
+	
+	var self = this;
+	button.callback = function()
+	{
+		callback();
+		self.expanded = false;
+		self.updateInterface();
+	};
 
 	this.options.push(button);
 	this.updateInterface();
@@ -88,6 +108,7 @@ function updateInterface()
 	{
 		this.options[i].size.set(this.size.x, this.size.y);
 		this.options[i].position.set(this.position.x, this.position.y + (this.size.y*(i+1)));
+		this.options[i].visible = this.expanded;
 		this.options[i].updateInterface();
 	}
 

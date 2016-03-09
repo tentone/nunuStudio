@@ -1,11 +1,20 @@
 /*Text*/
 body
 {
+	overflow: hidden;
 	color : #ffffff;
 	font-family: "Arial Black", sans-serif;
 	font-size: 16px;
 	font-weight: bold;
 	text-align: center;
+
+	/*Avoid text selection*/
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /*Containers*/
@@ -41,6 +50,14 @@ body
 {
 	background-color: #444444;
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/*Text*/
+.text
+{
 	display: flex;
 	justify-content: center;
 	align-items: center;

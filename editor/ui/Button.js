@@ -10,7 +10,7 @@ function Button(parent)
 		this.parent = parent;
 	}
 
-	//Id
+	//ID
 	var id = "button" + Button.id;
 	Button.id++;
 

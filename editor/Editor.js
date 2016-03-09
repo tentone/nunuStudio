@@ -2,6 +2,7 @@ include("editor/ui/Button.js");
 include("editor/ui/DropdownMenu.js");
 include("editor/ui/Text.js");
 include("editor/ui/Division.js");
+include("editor/ui/Image.js");
 include("editor/ui/DivisionResizable.js");
 
 include("editor/EditorUI.js");
@@ -31,10 +32,10 @@ Editor.initialize = function(canvas)
 	//Set mouse lock true
 	App.setMouseLock(false);
 	App.showStats(false);
-
+	
 	//Initialize Editor Interface
 	EditorUI.initialize();
-	
+
 	Editor.canvas = canvas;
 
 	//Create camera and scene

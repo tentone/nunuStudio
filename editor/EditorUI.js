@@ -2,16 +2,21 @@ function EditorUI(){}
 
 EditorUI.initialize = function()
 {	
-	//Divisions
+	//Top Bar
 	EditorUI.top_bar = new Division();
 	EditorUI.top_bar.size.y = 30 ;
-	
+	EditorUI.top_bar.element.className = "bar";
+
+	//Tool Bar
 	EditorUI.tool_bar = new Division();
 	EditorUI.tool_bar.size.x = 60;
+	EditorUI.tool_bar.element.className = "bar";
 
+	//Project Exploer
 	EditorUI.explorer = new DivisionResizable(EditorUI);
 	EditorUI.explorer.size.x = 300;
 
+	//Asset Explorer
 	EditorUI.asset_explorer = new Division();
 	EditorUI.asset_explorer.size.y = 200;
 
@@ -25,16 +30,34 @@ EditorUI.initialize = function()
 		a.text = "test";
 		a.updateInterface();
 	});
-	EditorUI.but_text.size.set(100,30);
+	EditorUI.but_text.size.set(150,30);
 	EditorUI.but_text.position.set(0,0);
 	EditorUI.but_text.text = "File";
 
+	//Text test
+	EditorUI.text = new Text();
+	EditorUI.text.text = "qwerty";
+
+	//Image test
+	EditorUI.image = new Image();
+	EditorUI.image.setImage("data/logo.png");
+	EditorUI.image.size.set(240, 30);
+	EditorUI.image.updateInterface();
+	
 	//Dropdown
 	EditorUI.dropdown = new DropdownMenu();
 	EditorUI.dropdown.text = "Test";
-	EditorUI.dropdown.size.set(100,30);
-	EditorUI.dropdown.position.set(100,0);
-	EditorUI.dropdown.addOption("a", function(){EditorUI.dropdown.addOption("a", function(){});});
+	EditorUI.dropdown.size.set(150,30);
+	EditorUI.dropdown.position.set(150,0);
+	EditorUI.temp = 0;
+	EditorUI.dropdown.addOption("a", function()
+	{
+		EditorUI.dropdown.addOption("a" + EditorUI.temp, function()
+		{
+			EditorUI.dropdown.removeOption(1);
+		});
+		EditorUI.temp++;
+	});
 
 	EditorUI.updateInterface();
 }
@@ -43,6 +66,10 @@ EditorUI.update = function()
 {
 	EditorUI.explorer.update();
 }
+
+EditorUI.draw = function(){}
+
+EditorUI.resize = function(){}
 
 EditorUI.updateInterface = function()
 {
@@ -66,6 +93,12 @@ EditorUI.updateInterface = function()
 	EditorUI.asset_explorer.size.x = size.x - EditorUI.explorer.size.x - EditorUI.tool_bar.size.x;
 	EditorUI.asset_explorer.position.set(EditorUI.tool_bar.size.x, size.y - EditorUI.asset_explorer.size.y);
 
+	//Image
+	EditorUI.image.position.set(size.x - EditorUI.image.size.x, 0);
+
+	//Text
+	EditorUI.text.position.set(size.x/2, size.y/2);
+
 	//Canvas
 	canvas.style.position = "absolute"; 
 	canvas.style.top = EditorUI.top_bar.size.y + "px";
@@ -82,4 +115,6 @@ EditorUI.updateInterface = function()
 	EditorUI.top_bar.updateInterface();
 	EditorUI.but_text.updateInterface();
 	EditorUI.dropdown.updateInterface();
+	EditorUI.text.updateInterface();
+	EditorUI.image.updateInterface();
 }

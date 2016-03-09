@@ -10,7 +10,7 @@ function DivisionResizable(parent)
 		this.parent = parent;
 	}
 
-	//Id
+	//ID
 	var id = "div_res" + Button.id;
 	Button.id++;
 
@@ -31,6 +31,7 @@ function DivisionResizable(parent)
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 	this.resize_tab_size = 10;
+	this.resizable_size = DivisionResizable.LEFT;
 	this.resizing = false;
 
 	//On mouse move event
@@ -54,6 +55,10 @@ function DivisionResizable(parent)
 //DivisionResizable conter
 DivisionResizable.id = 0;
 
+//Resizable side
+DivisionResizable.LEFT = 0;
+DivisionResizable.RIGHT = 1;
+
 //Functions Prototype
 DivisionResizable.prototype.update = update;
 DivisionResizable.prototype.updateInterface = updateInterface;
@@ -63,7 +68,14 @@ function update()
 {
 	if(this.resizing && Mouse.buttonPressed(Mouse.LEFT))
 	{
-		this.size.x -= Mouse.pos_diff.x;
+		if(this.resizable_size == DivisionResizable.LEFT)
+		{	
+			this.size.x -= Mouse.pos_diff.x;
+		}
+		else if(this.resizable_size == DivisionResizable.RIGHT)
+		{	
+			this.size.x += Mouse.pos_diff.x;
+		}
 
 		//Limit Size
 		if(this.size.x < this.resize_tab_size)
@@ -101,13 +113,29 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
-	this.resize_tab.style.top = this.position.y + "px";
-	this.resize_tab.style.left = this.position.x + "px";
-	this.resize_tab.style.width = this.resize_tab_size + "px";
-	this.resize_tab.style.height = this.size.y + "px";
+	if(this.resizable_size == DivisionResizable.LEFT)
+	{	
+		this.resize_tab.style.top = this.position.y + "px";
+		this.resize_tab.style.left = this.position.x + "px";
+		this.resize_tab.style.width = this.resize_tab_size + "px";
+		this.resize_tab.style.height = this.size.y + "px";
 
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = (this.position.x + this.resize_tab_size) + "px";
-	this.element.style.width = (this.size.x - this.resize_tab_size) + "px";
-	this.element.style.height = this.size.y + "px";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = (this.position.x + this.resize_tab_size) + "px";
+		this.element.style.width = (this.size.x - this.resize_tab_size) + "px";
+		this.element.style.height = this.size.y + "px";
+	}
+	else if(this.resizable_size == DivisionResizable.RIGHT)
+	{	
+		this.resize_tab.style.top = this.position.y + "px";
+		this.resize_tab.style.left = this.position.x + "px";
+		this.resize_tab.style.width = this.resize_tab_size + "px";
+		this.resize_tab.style.height = this.size.y + "px";
+
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = (this.position.x + this.resize_tab_size) + "px";
+		this.element.style.width = (this.size.x - this.resize_tab_size) + "px";
+		this.element.style.height = this.size.y + "px";
+	}
+
 }

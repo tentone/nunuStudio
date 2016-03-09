@@ -1,16 +1,14 @@
-function Text(parent, id)
+function Text(parent)
 {
-	if(id === undefined)
-	{
-		var id = "text" + Text.id;
-		Text.id++;
-	}
+	//ID
+	var id = "text" + Text.id;
+	Text.id++;
 
 	//Create element
 	this.element = document.createElement("p");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.style.textAlign = "center";
+	this.element.className = "text";
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
