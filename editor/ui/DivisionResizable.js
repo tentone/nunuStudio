@@ -128,12 +128,12 @@ function updateInterface()
 	else if(this.resizable_size == DivisionResizable.RIGHT)
 	{	
 		this.resize_tab.style.top = this.position.y + "px";
-		this.resize_tab.style.left = this.position.x + "px";
+		this.resize_tab.style.left = (this.position.x + (this.size.x - this.resize_tab_size))+ "px";
 		this.resize_tab.style.width = this.resize_tab_size + "px";
 		this.resize_tab.style.height = this.size.y + "px";
 
 		this.element.style.top = this.position.y + "px";
-		this.element.style.left = (this.position.x + this.resize_tab_size) + "px";
+		this.element.style.left = this.position.x + "px";
 		this.element.style.width = (this.size.x - this.resize_tab_size) + "px";
 		this.element.style.height = this.size.y + "px";
 	}
