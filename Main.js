@@ -74,8 +74,9 @@ Main.initialize = function(canvas)
 	Main.scene.add(floor);
 
 	//Floor plane physics
+    var groundMaterial = new CANNON.Material();
 	var plane = new CANNON.Plane();
-	var body = new CANNON.Body({mass:0});
+	var body = new CANNON.Body({mass:0, material: groundMaterial});
 	body.addShape(plane);
 	body.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0), -Math.PI/2);
 	Main.world.addBody(body);
@@ -166,6 +167,9 @@ Main.initialize = function(canvas)
 
 	//Number of cubes
 	var N = 100;
+    
+    var mat = new CANNON.Material();
+
 
 	//Create N  objects for physics and render
 	for(var i = 0; i < N; i++)
@@ -184,7 +188,7 @@ Main.initialize = function(canvas)
 			var geometry = new THREE.SphereGeometry(size, 16, 16);
 		}
 
-		var body = new CANNON.Body({mass:1, linearDamping:0.1, angularDamping:0.1});
+		var body = new CANNON.Body({mass:1, linearDamping:0.1, angularDamping:0.1, material: mat});
 		body.addShape(shape);
 		body.position.set(Math.random()*10 - 5, 2.5*i+0.5, Math.random()*10 - 5);
 		Main.physics_objects.push(body);
@@ -195,6 +199,11 @@ Main.initialize = function(canvas)
 		Main.render_objects.push(cube);
 		Main.scene.add(cube);
 	}
+    
+    // contact behavior
+    var mat_ground = new CANNON.ContactMaterial(groundMaterial, mat, { friction: 0.3, restitution: 0.3 });
+    var mat_ground = new CANNON.ContactMaterial(mat, mat, { friction: 0.5, restitution: 0.2 });
+    Main.world.addContactMaterial(mat_ground);
 }
 
 Main.update = function()
@@ -345,7 +354,6 @@ function addPhysicsBoundingBox(object, world)
 		var shape = new CANNON.Box(new CANNON.Vec3(hs.x, hs.y, hs.z));
 		var body = new CANNON.Body({mass:0});
 		body.addShape(shape);
-		body.quaternion.setFromEuler(0,Math.PI/2,0,"XYZ");
 		body.position.set(pos.x, pos.y, pos.z);
 		body.updateMassProperties();
 
