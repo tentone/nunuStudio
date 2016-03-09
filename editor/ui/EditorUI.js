@@ -24,6 +24,24 @@ EditorUI.initialize = function()
 		a.position.set(Math.random() * 500, Math.random() * 500);
 		a.text = "coco";
 		a.updateInterface();
+
+				var a = new Button();
+		a.size.set(50,50);
+		a.position.set(Math.random() * 500, Math.random() * 500);
+		a.text = "coco";
+		a.updateInterface();
+
+				var a = new Button();
+		a.size.set(50,50);
+		a.position.set(Math.random() * 500, Math.random() * 500);
+		a.text = "coco";
+		a.updateInterface();
+
+				var a = new Button();
+		a.size.set(50,50);
+		a.position.set(Math.random() * 500, Math.random() * 500);
+		a.text = "coco";
+		a.updateInterface();
 	});
 	EditorUI.but_text.size.set(100,100);
 	EditorUI.but_text.position.set(500,500);

@@ -330,7 +330,7 @@ function addPhysicsBoundingBox(object, world)
 		var box = new THREE.BoundingBoxHelper(object.children[j]);
 		box.update();
 
-		var hs = new THREE.Vector3(box.box.max.x - box.box.min.x, box.box.max.y - box.box.min.y, box.box.max.y - box.box.min.z);
+		var hs = new THREE.Vector3(box.box.max.x - box.box.min.x, box.box.max.y - box.box.min.y, box.box.max.z - box.box.min.z);
 		hs.x *= object.scale.x;
 		hs.y *= object.scale.y;
 		hs.z *= object.scale.z;

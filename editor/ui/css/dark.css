@@ -1,10 +1,12 @@
+/*Text*/
 body
 {
     color : #ffffff;
+    font-family: "Arial Black", Gadget, sans-serif;
 }
 
 /*Containers*/
-.division
+.bar
 {
     background-color: #222222;
 }
@@ -14,15 +16,19 @@ body
     background-color: #333333;
 }
 
-/*Buttons*/
-.button
+.panel_tab
 {
-    background-color: #404040;
+    background-color: #222222;
 }
 
 
-/*Text*/
-.text
+/*Buttons*/
+.button
 {
-	background-color: #ffffff;
+    background-color: #333333;
+}
+
+.button_over
+{
+    background-color: #444444;
 }

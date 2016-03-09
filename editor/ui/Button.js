@@ -10,7 +10,7 @@ function Button(parent, id)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.style.backgroundColor = "#333333";
+	this.element.className = "button";
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
@@ -22,7 +22,6 @@ function Button(parent, id)
 	var self = this;
 	this.element.onclick = function()
 	{
-		console.log("coco");
 		if(self.callback != null)
 		{
 			self.callback();
@@ -32,12 +31,12 @@ function Button(parent, id)
 	//Mouse over and mouse out events
 	this.element.onmouseover = function()
 	{
-		self.element.style.backgroundColor = "#555555";
+		self.element.className = "button_over";
 	};
 
 	this.element.onmouseout = function()
 	{
-		self.element.style.backgroundColor = "#333333";
+		self.element.className = "button";
 	};
 
 	//Update element

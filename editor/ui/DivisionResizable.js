@@ -21,13 +21,13 @@ function DivisionResizable(parent, id)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.style.backgroundColor = "#333333";
+	this.element.className = "panel";
 
 	//Create resize_tab tab
 	this.resize_tab = document.createElement("div");
 	this.resize_tab.id = id + "_tab";
 	this.resize_tab.style.position = "absolute";
-	this.resize_tab.style.backgroundColor = "#222222";
+	this.resize_tab.className = "panel_tab";
 
 	this.resize_tab_size = 10;
 	this.resizing = false;
