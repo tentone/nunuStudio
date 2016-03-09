@@ -1,4 +1,4 @@
-function DivisionResizable(parent, id)
+function DivisionResizable(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -10,12 +10,9 @@ function DivisionResizable(parent, id)
 		this.parent = parent;
 	}
 
-	//ID
-	if(id === undefined)
-	{
-		var id = "div_resizable" + DivisionResizable.id;
-		DivisionResizable.id++;
-	}
+	//Id
+	var id = "div_res" + Button.id;
+	Button.id++;
 
 	//Create element
 	this.element = document.createElement("div");
@@ -29,6 +26,10 @@ function DivisionResizable(parent, id)
 	this.resize_tab.style.position = "absolute";
 	this.resize_tab.className = "panel_tab";
 
+	//Element atributes
+	this.size = new THREE.Vector2(0,0);
+	this.position = new THREE.Vector2(0,0);
+	this.visible = true;
 	this.resize_tab_size = 10;
 	this.resizing = false;
 
@@ -41,11 +42,7 @@ function DivisionResizable(parent, id)
 			self.resizing = true;
 		}
 	};
-
-	//Element atributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-
+	
 	//Update element
 	this.updateInterface();
 
@@ -93,6 +90,17 @@ function update()
 //Update DivisionResizable Size
 function updateInterface()
 {
+	if(this.visible)
+	{
+		this.resize_tab.style.visibility = "visible";
+		this.element.style.visibility = "visible";
+	}
+	else
+	{
+		this.resize_tab.style.visibility = "hidden";
+		this.element.style.visibility = "hidden";
+	}
+
 	this.resize_tab.style.top = this.position.y + "px";
 	this.resize_tab.style.left = this.position.x + "px";
 	this.resize_tab.style.width = this.resize_tab_size + "px";

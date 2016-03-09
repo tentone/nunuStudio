@@ -32,12 +32,6 @@ include("input/Mouse.js");
 include("core/Program.js");
 include("core/Screen.js");
 
-include("editor/ui/EditorUI.js");
-include("editor/ui/Button.js");
-include("editor/ui/Division.js");
-include("editor/ui/DivisionResizable.js");
-
-
 //App class
 function App(){}
 

@@ -1,3 +1,12 @@
+include("editor/ui/Button.js");
+include("editor/ui/DropdownMenu.js");
+include("editor/ui/Text.js");
+include("editor/ui/Division.js");
+include("editor/ui/DivisionResizable.js");
+
+include("editor/EditorUI.js");
+
+//Editor declaration
 function Editor(){}
 
 //Test objects
@@ -55,7 +64,7 @@ Editor.initialize = function(canvas)
 	Editor.renderer.autoClear = false;
 	Editor.renderer.setSize(canvas.width, canvas.height);
 	Editor.renderer.shadowMap.enabled = true;
-	Editor.renderer.shadowMap.type = THREE.PCFSoftShadowMap; //THREE.BasicShadowMap;
+	Editor.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 	//Create Floor
 	var geometry = new THREE.BoxGeometry(1, 1, 1);

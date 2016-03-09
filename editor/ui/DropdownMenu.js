@@ -1,4 +1,4 @@
-function Button(parent)
+function DropdownMenu(parent, id)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,8 +11,8 @@ function Button(parent)
 	}
 
 	//Id
-	var id = "button" + Button.id;
-	Button.id++;
+	var id = "dropdownmenu" + Button.id;
+	DropdownMenu.id++;
 
 	//Create element
 	this.element = document.createElement("div");
@@ -20,23 +20,23 @@ function Button(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "button";
 
-	//Element atributes
+	//Atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	
-	//Button text and callback
+
+	//Button text
 	this.text = "text";
-	this.callback = null;
+
+	//Options
+	this.options = [];
+	this.expanded = false;
 
 	//Click event
 	var self = this;
 	this.element.onclick = function()
 	{
-		if(self.callback != null)
-		{
-			self.callback();
-		}
+		this.expanded = !this.expanded;
 	};
 
 	//Mouse over and mouse out events
@@ -57,26 +57,40 @@ function Button(parent)
 	document.body.appendChild(this.element);
 }
 
-//Button conter
-Button.id = 0;
+//DropdownMenu conter
+DropdownMenu.id = 0;
 
 //Functions Prototype
-Button.prototype.update = update;
-Button.prototype.updateInterface = updateInterface;
-Button.prototype.setCallback = setCallback;
+DropdownMenu.prototype.update = update;
+DropdownMenu.prototype.updateInterface = updateInterface;
+DropdownMenu.prototype.addOption = addOption;
 
 //Update status
 function update(){}
 
-//Set button callback function
-function setCallback(callback)
+//Set dropdown
+function addOption(name, callback)
 {
-	this.callback = callback;
+	var button = new Button(this);
+	button.text = name;
+	button.callback = callback;
+	button.visible = true;
+	button.updateInterface();
+
+	this.options.push(button);
+	this.updateInterface();
 }
 
-//Update Button Size
+//Update interface
 function updateInterface()
 {
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].size.set(this.size.x, this.size.y);
+		this.options[i].position.set(this.position.x, this.position.y + (this.size.y*(i+1)));
+		this.options[i].updateInterface();
+	}
+
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";

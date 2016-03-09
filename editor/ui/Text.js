@@ -1,34 +1,38 @@
-function Division(parent)
+function Text(parent, id)
 {
-	//Id
-	var id = "div" + Division.id;
-	Division.id++;
+	if(id === undefined)
+	{
+		var id = "text" + Text.id;
+		Text.id++;
+	}
 
 	//Create element
-	this.element = document.createElement("div");
+	this.element = document.createElement("p");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "panel";
-	
+	this.element.style.textAlign = "center";
+
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
+	this.text = "text";
 	
 	//Add element to document
 	document.body.appendChild(this.element);
 }
 
-//Division conter
-Division.id = 0;
+//Text conter
+Text.id = 0;
 
 //Functions Prototype
-Division.prototype.update = update;
-Division.prototype.updateInterface = updateInterface;
+Text.prototype.update = update;
+Text.prototype.updateInterface = updateInterface;
 
+//Update
 function update(){}
 
-//Update division Size
+//Update Interface
 function updateInterface()
 {
 	if(this.visible)
@@ -39,6 +43,8 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
+
+	this.element.innerHTML = "<span>" + this.text + "</span>";
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
