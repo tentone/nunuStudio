@@ -5,6 +5,7 @@ include("editor/ui/Division.js");
 include("editor/ui/Image.js");
 include("editor/ui/DivisionResizable.js");
 include("editor/ui/ButtonImage.js");
+include("editor/ui/Style.js");
 
 include("editor/EditorUI.js");
 
@@ -34,9 +35,6 @@ Editor.initialize = function(canvas)
 	App.setMouseLock(false);
 	App.showStats(false);
 	
-	//Initialize Editor Interface
-	EditorUI.initialize();
-
 	Editor.canvas = canvas;
 
 	//Create camera and scene
@@ -146,6 +144,9 @@ Editor.initialize = function(canvas)
 		Editor.render_objects.push(cube);
 		Editor.scene.add(cube);
 	}
+
+	//Initialize User Interface
+	EditorUI.initialize();
 }
 
 Editor.update = function()
@@ -333,10 +334,15 @@ Editor.draw = function()
 //Resize to fit window
 Editor.resize = function(canvas)
 {
-	Editor.canvas = canvas;
 	EditorUI.updateInterface();
+	Editor.resizeCamera(canvas);
+}
 
-	//Update Renderer
+
+//Resize Camera
+Editor.resizeCamera = function(canvas)
+{
+	Editor.canvas = canvas;
 	Editor.renderer.setSize(canvas.width, canvas.height);
 	Editor.camera.aspect = canvas.width/canvas.height;
 	Editor.camera.updateProjectionMatrix();

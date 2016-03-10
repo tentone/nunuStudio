@@ -1,5 +1,15 @@
 function Division(parent)
 {
+	//Parent
+	if(parent === undefined)
+	{
+		this.parent = document.body;
+	}
+	else
+	{
+		this.parent = parent;
+	}
+	
 	//ID
 	var id = "div" + Division.id;
 	Division.id++;
@@ -16,7 +26,7 @@ function Division(parent)
 	this.visible = true;
 	
 	//Add element to document
-	document.body.appendChild(this.element);
+	this.parent.appendChild(this.element);
 }
 
 //Division conter
@@ -25,7 +35,15 @@ Division.id = 0;
 //Functions Prototype
 Division.prototype.update = update;
 Division.prototype.updateInterface = updateInterface;
+Division.prototype.destroy = destroy;
 
+//Remove element
+function destroy()
+{
+	this.parent.removeChild(this.element);
+}
+
+//Update Division
 function update(){}
 
 //Update division Size

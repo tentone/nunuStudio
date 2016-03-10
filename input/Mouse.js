@@ -22,6 +22,25 @@ Mouse.initialize = function()
 	Mouse.keys[0] = new Key();
 	Mouse.keys[1] = new Key();
 	Mouse.keys[2] = new Key();
+
+	//Mouse Move Position
+	document.onmousemove = function(event)
+	{
+		var rect = App.canvas.getBoundingClientRect();
+		Mouse.updatePosition(event.clientX - rect.left, event.clientY - rect.top, event.movementX, event.movementY);
+	}
+
+	//Mouse Button Down
+	document.onmousedown = function(event)
+	{
+		Mouse.updateKey(event.which-1, Key.KEY_DOWN);
+	}
+
+	//Mouse Button Up
+	document.onmouseup = function(event)
+	{
+		Mouse.updateKey(event.which-1, Key.KEY_UP);
+	}
 }
 
 //Mouse Buttons

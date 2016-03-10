@@ -1,5 +1,15 @@
 function Text(parent)
 {
+	//Parent
+	if(parent === undefined)
+	{
+		this.parent = document.body;
+	}
+	else
+	{
+		this.parent = parent;
+	}
+
 	//ID
 	var id = "txt" + Text.id;
 	Text.id++;
@@ -17,7 +27,7 @@ function Text(parent)
 	this.text = "text";
 	
 	//Add element to document
-	document.body.appendChild(this.element);
+	this.parent.appendChild(this.element);
 }
 
 //Text conter
@@ -26,6 +36,13 @@ Text.id = 0;
 //Functions Prototype
 Text.prototype.update = update;
 Text.prototype.updateInterface = updateInterface;
+Text.prototype.destroy = destroy;
+
+//Remove element
+function destroy()
+{
+	this.parent.removeChild(this.element);
+}
 
 //Update
 function update(){}

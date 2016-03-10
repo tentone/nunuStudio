@@ -1,4 +1,4 @@
-function ButtonImage(parent)
+function ButtonDrawer(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,8 +11,8 @@ function ButtonImage(parent)
 	}
 	
 	//ID
-	var id = "but_img" + ButtonImage.id;
-	ButtonImage.id++;
+	var id = "but_drawer" + ButtonDrawer.id;
+	ButtonDrawer.id++;
 
 	//Create element
 	this.element = document.createElement("div");
@@ -28,14 +28,17 @@ function ButtonImage(parent)
 	this.image = "";
 	this.callback = null;
 
+	//Options
+	this.element_line = 3;
+	this.options = [];
+	this.expanded = false;
+
 	//Click event
 	var self = this;
 	this.element.onclick = function()
 	{
-		if(self.callback != null)
-		{
-			self.callback();
-		}
+		self.expanded = !self.expanded;
+		self.updateInterface();
 	};
 
 	//Mouse over and mouse out events
@@ -53,19 +56,23 @@ function ButtonImage(parent)
 	this.parent.appendChild(this.element);
 }
 
-//ButtonImage ID counter
-ButtonImage.id = 0;
+//ButtonDrawer ID counter
+ButtonDrawer.id = 0;
 
 //Functions Prototype
-ButtonImage.prototype.setImage = setImage;
-ButtonImage.prototype.update = update;
-ButtonImage.prototype.updateInterface = updateInterface;
-ButtonImage.prototype.setCallback = setCallback;
-ButtonImage.prototype.destroy = destroy;
+ButtonDrawer.prototype.setImage = setImage;
+ButtonDrawer.prototype.update = update;
+ButtonDrawer.prototype.updateInterface = updateInterface;
+ButtonDrawer.prototype.setCallback = setCallback;
+ButtonDrawer.prototype.destroy = destroy;
 
 //Remove element
 function destroy()
 {
+	for(var k = 0; k < this.options.length; k++)
+	{
+		this.options[k].destroy();
+	}
 	this.parent.removeChild(this.element);
 }
 
@@ -78,7 +85,7 @@ function setCallback(callback)
 	this.callback = callback;
 }
 
-//Set ButtonImage
+//Set ButtonDrawer
 function setImage(image)
 {
 	this.image = image;

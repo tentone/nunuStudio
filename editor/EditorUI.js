@@ -2,22 +2,27 @@ function EditorUI(){}
 
 EditorUI.initialize = function()
 {	
+	//Style
+	EditorUI.theme = new Style();
+	EditorUI.theme.setStyleSheet("editor/files/css/dark.css");
+
 	//Top Bar
 	EditorUI.top_bar = new Division();
 	EditorUI.top_bar.size.y = 30 ;
 	EditorUI.top_bar.element.className = "bar";
 
-	//Tool Bar
-	EditorUI.tool_bar = new Division();
-	EditorUI.tool_bar.size.x = 60;
-	EditorUI.tool_bar.element.className = "bar";
-
 	//Project Exploer
-	EditorUI.explorer = new DivisionResizable(EditorUI);
+	EditorUI.explorer = new DivisionResizable();
 	EditorUI.explorer.size.x = 300;
 
+	//Tool Bar
+	EditorUI.tool_bar = new Division();
+	EditorUI.tool_bar.size.x = 50;
+	EditorUI.tool_bar.element.className = "bar";
+
 	//Asset Explorer
-	EditorUI.asset_explorer = new Division();
+	EditorUI.asset_explorer = new DivisionResizable();
+	EditorUI.asset_explorer.resizable_side = DivisionResizable.TOP;
 	EditorUI.asset_explorer.size.y = 200;
 
 	//Button
@@ -29,6 +34,10 @@ EditorUI.initialize = function()
 		a.position.set(Math.random() * 500, Math.random() * 500);
 		a.text = "test";
 		a.updateInterface();
+		a.setCallback(function()
+		{
+			EditorUI.theme.setStyleSheet("editor/files/css/notdark.css");
+		});
 	});
 	EditorUI.but_text.size.set(150,30);
 	EditorUI.but_text.position.set(0,0);
@@ -41,15 +50,43 @@ EditorUI.initialize = function()
 	//Image test
 	EditorUI.image = new Image();
 	EditorUI.image.setImage("data/logo.png");
-	EditorUI.image.size.set(240, 30);
+	EditorUI.image.size.set(160, 20);
 	EditorUI.image.updateInterface();
 	
 	//Image Button test
 	EditorUI.but_image = new ButtonImage();
 	EditorUI.but_image.setImage("editor/files/sign.png");
-	EditorUI.but_image.size.set(60, 60);
+	EditorUI.but_image.size.set(50, 50);
 	EditorUI.but_image.position.set(0,30);
 	EditorUI.but_image.updateInterface();
+	EditorUI.but_image.setCallback(function()
+	{
+		var material = new THREE.MeshPhongMaterial({color: Math.floor(Math.random() * 0xffffff)});
+		var i = 5;
+		if(Math.random() < 0.5)
+		{
+			var size = Math.random();
+			var shape = new CANNON.Box(new CANNON.Vec3(size, size, size));
+			var geometry = new THREE.BoxGeometry(size*2, size*2, size*2, 10, 10);
+		}
+		else
+		{
+			var size = Math.random() * 2;
+			var shape = new CANNON.Sphere(size);
+			var geometry = new THREE.SphereGeometry(size, 16, 16);
+		}
+
+		var body = new CANNON.Body({mass:1, linearDamping:0.1, angularDamping:0.1});
+		body.addShape(shape);
+		body.position.set(Math.random()*10 - 5, 2.5*i+0.5, Math.random()*10 - 5);
+		Editor.physics_objects.push(body);
+		Editor.world.addBody(body);
+
+		var cube = new THREE.Mesh(geometry, material);
+		cube.castShadow = true;
+		Editor.render_objects.push(cube);
+		Editor.scene.add(cube);
+	});
 
 	//Dropdown
 	EditorUI.dropdown = new DropdownMenu();
@@ -71,7 +108,9 @@ EditorUI.initialize = function()
 
 EditorUI.update = function()
 {
+	EditorUI.tool_bar.update();
 	EditorUI.explorer.update();
+	EditorUI.asset_explorer.update();
 }
 
 EditorUI.draw = function(){}
@@ -101,7 +140,7 @@ EditorUI.updateInterface = function()
 	EditorUI.asset_explorer.position.set(EditorUI.tool_bar.size.x, size.y - EditorUI.asset_explorer.size.y);
 
 	//Image
-	EditorUI.image.position.set(size.x - EditorUI.image.size.x, 0);
+	EditorUI.image.position.set(size.x - EditorUI.image.size.x, 5);
 
 	//Text
 	EditorUI.text.position.set(size.x/2, size.y/2);
@@ -114,6 +153,8 @@ EditorUI.updateInterface = function()
 	canvas.height = (size.y - EditorUI.top_bar.size.y); 
 	canvas.style.width = canvas.width + "px";
 	canvas.style.height = canvas.height + "px";
+
+	Editor.resizeCamera(canvas);
 
 	//Update interface status
 	EditorUI.explorer.updateInterface();

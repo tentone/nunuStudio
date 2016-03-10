@@ -59,37 +59,6 @@ App.initialize = function(main)
 	Keyboard.initialize();
 	Mouse.initialize();
 
-	//Keyboard OnKeyDown Event
-	document.onkeydown = function(event)
-	{
-		Keyboard.update(event.keyCode, Key.KEY_DOWN);
-	}
-
-	//Keyboard OnKeyUp Event
-	document.onkeyup = function(event)
-	{
-		Keyboard.update(event.keyCode, Key.KEY_UP);
-	}
-
-	//Mouse Move Position
-	document.onmousemove = function(event)
-	{
-		var rect = App.canvas.getBoundingClientRect();
-		Mouse.updatePosition(event.clientX - rect.left, event.clientY - rect.top, event.movementX, event.movementY);
-	}
-
-	//Mouse Button Down
-	document.onmousedown = function(event)
-	{
-		Mouse.updateKey(event.which-1, Key.KEY_DOWN);
-	}
-
-	//Mouse Button Up
-	document.onmouseup = function(event)
-	{
-		Mouse.updateKey(event.which-1, Key.KEY_UP);
-	}
-
 	//Create main program
 	App.main = main;
 	App.main.initialize(App.canvas);

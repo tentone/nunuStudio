@@ -8,6 +8,18 @@ Keyboard.initialize = function()
 	{
 		Keyboard.keys.push(new Key());
 	}
+
+	//Keyboard OnKeyDown Event
+	document.onkeydown = function(event)
+	{
+		Keyboard.update(event.keyCode, Key.KEY_DOWN);
+	}
+
+	//Keyboard OnKeyUp Event
+	document.onkeyup = function(event)
+	{
+		Keyboard.update(event.keyCode, Key.KEY_UP);
+	}
 }
 
 Keyboard.update = function(key, action)

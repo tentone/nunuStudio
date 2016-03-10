@@ -3,7 +3,7 @@ function Button(parent)
 	//Parent
 	if(parent === undefined)
 	{
-		this.parent = null;
+		this.parent = document.body;
 	}
 	else
 	{
@@ -54,7 +54,7 @@ function Button(parent)
 	this.updateInterface();
 
 	//Add element to document
-	document.body.appendChild(this.element);
+	this.parent.appendChild(this.element);
 }
 
 //Button conter
@@ -64,9 +64,17 @@ Button.id = 0;
 Button.prototype.update = update;
 Button.prototype.updateInterface = updateInterface;
 Button.prototype.setCallback = setCallback;
+Button.prototype.destroy = destroy;
+
+//Remove element from document
+function destroy()
+{
+	this.parent.removeChild(this.element);
+}
 
 //Update status
 function update(){}
+
 
 //Set button callback function
 function setCallback(callback)

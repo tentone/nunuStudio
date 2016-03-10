@@ -1,5 +1,15 @@
 function Image(parent)
 {
+	//Parent
+	if(parent === undefined)
+	{
+		this.parent = document.body;
+	}
+	else
+	{
+		this.parent = parent;
+	}
+
 	//ID
 	var id = "img" + Image.id;
 	Image.id++;
@@ -16,7 +26,7 @@ function Image(parent)
 	this.visible = true;
 	
 	//Add element to document
-	document.body.appendChild(this.element);
+	this.parent.appendChild(this.element);
 }
 
 //Image ID counter
@@ -26,6 +36,13 @@ Image.id = 0;
 Image.prototype.setImage = setImage;
 Image.prototype.update = update;
 Image.prototype.updateInterface = updateInterface;
+Image.prototype.destroy = destroy;
+
+//Remove element
+function destroy()
+{
+	this.parent.removeChild(this.element);
+}
 
 //Update
 function update(){}
