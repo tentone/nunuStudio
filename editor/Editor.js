@@ -5,6 +5,7 @@ include("editor/ui/Division.js");
 include("editor/ui/Image.js");
 include("editor/ui/DivisionResizable.js");
 include("editor/ui/ButtonImage.js");
+include("editor/ui/ButtonDrawer.js");
 include("editor/ui/Style.js");
 
 include("editor/EditorUI.js");

@@ -29,7 +29,7 @@ function ButtonDrawer(parent)
 	this.callback = null;
 
 	//Options
-	this.element_line = 3;
+	this.elements_per_line = 3;
 	this.options = [];
 	this.expanded = false;
 

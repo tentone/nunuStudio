@@ -62,7 +62,7 @@ EditorUI.initialize = function()
 	EditorUI.but_image.setCallback(function()
 	{
 		var material = new THREE.MeshPhongMaterial({color: Math.floor(Math.random() * 0xffffff)});
-		var i = 5;
+		var i = 2;
 		if(Math.random() < 0.5)
 		{
 			var size = Math.random();
@@ -88,6 +88,13 @@ EditorUI.initialize = function()
 		Editor.scene.add(cube);
 	});
 
+	//Button drawer
+	EditorUI.but_drawer = new ButtonDrawer();
+	EditorUI.but_drawer.setImage("editor/files/sign.png");
+	EditorUI.but_drawer.size.set(50, 50);
+	EditorUI.but_drawer.position.set(0, 80);
+	EditorUI.but_drawer.updateInterface();
+
 	//Dropdown
 	EditorUI.dropdown = new DropdownMenu();
 	EditorUI.dropdown.text = "Test";
@@ -111,6 +118,7 @@ EditorUI.update = function()
 	EditorUI.tool_bar.update();
 	EditorUI.explorer.update();
 	EditorUI.asset_explorer.update();
+	EditorUI.but_drawer.update();
 }
 
 EditorUI.draw = function(){}
