@@ -15,7 +15,7 @@ function Text(parent)
 	Text.id++;
 
 	//Create element
-	this.element = document.createElement("p");
+	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.className = "text";

@@ -103,7 +103,7 @@ EditorUI.initialize = function()
 	EditorUI.but_drawer.addOption("editor/files/sign.png", function(){});
 	EditorUI.but_drawer.addOption("editor/files/sign.png", function(){});
 	EditorUI.but_drawer.addOption("editor/files/sign.png", function(){});
-	
+
 	//Dropdown
 	EditorUI.dropdown = new DropdownMenu();
 	EditorUI.dropdown.text = "Test";
@@ -118,6 +118,17 @@ EditorUI.initialize = function()
 		});
 		EditorUI.temp++;
 	});
+
+	//Text box test
+	EditorUI.text_box = new TextBox(EditorUI.explorer.element);
+	EditorUI.text_box.position.set(80, 10);
+	EditorUI.text_box.size.set(180, 25);
+	EditorUI.text_box.updateInterface();
+
+	EditorUI.text_2 = new Text(EditorUI.explorer.element);
+	EditorUI.text_2.text = "TextBox:";
+	EditorUI.text_2.position.set(40, 25);
+	EditorUI.text_2.updateInterface();
 
 	EditorUI.updateInterface();
 }
@@ -182,4 +193,5 @@ EditorUI.updateInterface = function()
 	EditorUI.dropdown.updateInterface();
 	EditorUI.text.updateInterface();
 	EditorUI.image.updateInterface();
+	EditorUI.text_box.updateInterface();
 }

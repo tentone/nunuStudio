@@ -15,13 +15,10 @@ function TextBox(parent)
 	TextBox.id++;
 
 	//Create element
-	this.element = document.createElement("div");
+	this.element = document.createElement("input");
 	this.element.id = id;
+	this.element.className = "text_box";
 	this.element.style.position = "absolute";
-
-	//Text box
-	this.box = document.createElement("input");
-	this.box.type = "text";
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
@@ -61,7 +58,6 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
-	//this.element.innerHTML = '<img src="' + this.image + '" width="' + this.size.x + '" height="' + this.size.y +'">';
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

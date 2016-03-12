@@ -29,6 +29,7 @@ body
 {
 	background-color: #333333;
 	cursor: default;
+	overflow: auto;
 }
 
 .panel_res_hor_tab
@@ -69,4 +70,14 @@ body
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.text_box
+{
+	background-color: #444444;
+	border-style: none;
+	color : #ffffff;
+	font-family: "Arial", sans-serif;
+	font-size: 13px;
+	font-weight: bold;
 }
