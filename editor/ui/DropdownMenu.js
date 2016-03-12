@@ -119,7 +119,7 @@ function updateInterface()
 	{
 		this.options[i].size.set(this.size.x, this.size.y);
 		this.options[i].position.set(this.position.x, this.position.y + (this.size.y*(i+1)));
-		this.options[i].visible = this.expanded;
+		this.options[i].visible = (this.expanded && this.visible);
 		this.options[i].updateInterface();
 	}
 
@@ -131,6 +131,7 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
+	
 	this.element.innerHTML = "<span>" + this.text + "</span>";
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";

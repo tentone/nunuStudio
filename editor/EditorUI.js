@@ -36,7 +36,9 @@ EditorUI.initialize = function()
 		a.updateInterface();
 		a.setCallback(function()
 		{
-			EditorUI.theme.setStyleSheet("editor/files/css/notdark.css");
+			EditorUI.dropdown.visible = false;
+			EditorUI.dropdown.updateInterface();
+			//EditorUI.theme.setStyleSheet("editor/files/css/notdark.css");
 		});
 	});
 	EditorUI.but_text.size.set(150,30);
@@ -94,7 +96,14 @@ EditorUI.initialize = function()
 	EditorUI.but_drawer.size.set(50, 50);
 	EditorUI.but_drawer.position.set(0, 80);
 	EditorUI.but_drawer.updateInterface();
-
+	EditorUI.but_drawer.addOption("editor/files/sign.png", function(){});
+	EditorUI.but_drawer.addOption("editor/files/sign.png", function(){});
+	EditorUI.but_drawer.addOption("editor/files/sign.png", function(){});
+	EditorUI.but_drawer.addOption("editor/files/sign.png", function(){});
+	EditorUI.but_drawer.addOption("editor/files/sign.png", function(){});
+	EditorUI.but_drawer.addOption("editor/files/sign.png", function(){});
+	EditorUI.but_drawer.addOption("editor/files/sign.png", function(){});
+	
 	//Dropdown
 	EditorUI.dropdown = new DropdownMenu();
 	EditorUI.dropdown.text = "Test";

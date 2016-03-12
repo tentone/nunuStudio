@@ -7,7 +7,8 @@ body
 	font-size: 13px;
 	font-weight: bold;
 	text-align: center;
-
+	cursor: default;
+		
 	/*Avoid text selection*/
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -21,6 +22,7 @@ body
 .bar
 {
 	background-color: #222222;
+	cursor: default;
 }
 
 .panel
@@ -63,6 +65,7 @@ body
 /*Text*/
 .text
 {
+	cursor: default;
 	display: flex;
 	justify-content: center;
 	align-items: center;
