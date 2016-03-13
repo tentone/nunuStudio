@@ -26,7 +26,7 @@ function TabContainer(parent)
 	this.visible = true;
 	
 	//Tab Options
-	this.options_size = new THREE.Vector2(120, 30);
+	this.options_size = new THREE.Vector2(150, 30);
 	this.options_selected = 0;
 	this.options_closeable = false;
 	this.options = [];
@@ -45,18 +45,26 @@ TabContainer.prototype.destroy = destroy;
 TabContainer.prototype.addOption = addOption;
 TabContainer.prototype.removeOption = removeOption;
 TabContainer.prototype.updateOptionIndex = updateOptionIndex;
+TabContainer.prototype.selectOption = selectOption;
+
+//Select option
+function selectOption(index)
+{
+	this.options_selected = index;
+	this.updateInterface();
+}
 
 //Add tab
-function addOption(name, image)
+function addOption(name, image, closeable)
 {
-	var option = new TabOption(name, image, this, this.options.length);
+	var option = new TabOption(name, image, closeable, this, this.options.length);
 	this.options.push(option);
 }
 
 //Remove tab
 function removeOption(index)
 {
-	if(index > 0 && index < this.options.length)
+	if(index >= 0 && index < this.options.length)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);

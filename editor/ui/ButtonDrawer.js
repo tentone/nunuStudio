@@ -99,7 +99,7 @@ function update(){}
 //Remove option from dropdown menu
 function removeOption(index)
 {
-	if(index > 0 && index < this.options.length)
+	if(index >= 0 && index < this.options.length)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);

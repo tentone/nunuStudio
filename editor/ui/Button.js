@@ -69,6 +69,13 @@ Button.prototype.update = update;
 Button.prototype.updateInterface = updateInterface;
 Button.prototype.setCallback = setCallback;
 Button.prototype.destroy = destroy;
+Button.prototype.setClass = setClass;
+
+//Set element class
+function setClass(name)
+{
+	this.element.className = name;
+}
 
 //Remove element from document
 function destroy()
