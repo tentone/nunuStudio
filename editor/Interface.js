@@ -9,8 +9,13 @@ Interface.initialize = function()
 	//Tab
 	Interface.tab = new TabContainer();
 	Interface.tab.addOption("Tab1", "editor/files/icons/add.png")
+	Interface.tab.options[0].division.element.className = "panel";
 	Interface.tab.addOption("Tab2", "editor/files/icons/add.png")
 
+	//Canvas
+	Interface.canvas = new Canvas();
+	Interface.tab.options[0].attachComponent(Interface.canvas);
+	
 	//Top Bar
 	Interface.top_bar = new Division();
 	Interface.top_bar.size.y = 30 ;
@@ -130,9 +135,6 @@ Interface.initialize = function()
 	Interface.text.text = "TextBox:";
 	Interface.text.position.set(40, 25);
 	Interface.text.updateInterface();
-
-	//Canvas
-	Interface.canvas = new Canvas();
 }
 
 Interface.update = function()
@@ -176,8 +178,7 @@ Interface.updateInterface = function()
 	Interface.image.updateInterface();
 
 	//Canvas
-	Interface.canvas.position.set(0,130);
-	Interface.canvas.size.set(50,50);
+	//Interface.canvas.position.set(0,0);
 	//Interface.canvas.position.set(Interface.tool_bar.size.x, Interface.top_bar.size.y);
 	//Interface.canvas.size.x = (size.x - Interface.tool_bar.size.x - Interface.explorer.size.x);
 	//Interface.canvas.size.y = (size.y - Interface.top_bar.size.y - Interface.asset_explorer.size.y); 

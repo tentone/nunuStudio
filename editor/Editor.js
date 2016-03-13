@@ -10,6 +10,7 @@ include("editor/ui/Style.js");
 include("editor/ui/TextBox.js");
 include("editor/ui/Canvas.js");
 include("editor/ui/TabContainer.js");
+include("editor/ui/TabOption.js");
 
 include("editor/Interface.js");
 

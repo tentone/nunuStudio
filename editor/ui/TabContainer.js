@@ -35,33 +35,6 @@ function TabContainer(parent)
 	this.parent.appendChild(this.element);
 }
 
-function TabOption(name, image, container, index)
-{
-	this.name = name;
-	this.image = image;
-	this.force_fill = false;
-
-	//Button
-	this.button = new Button(container.element);
-	this.button.text = this.name;
-	this.button.visible = true;
-	this.button.position.set(container.options_size.x*index, 0);
-	this.button.size.set(container.options_size.x, container.options_size.y);
-	this.button.callback = function()
-	{
-		container.selected_option = index;
-		container.updateInterface();
-	};
-	this.button.updateInterface();
-
-	//Division
-	this.division = new Division(container.element);
-	this.division.element.className = "bar";
-	this.division.visible = false;
-	this.division.position.set(0, container.options_size.y);
-	this.division.updateInterface();
-}
-
 //TabContainer conter
 TabContainer.id = 0;
 
@@ -71,17 +44,35 @@ TabContainer.prototype.updateInterface = updateInterface;
 TabContainer.prototype.destroy = destroy;
 TabContainer.prototype.addOption = addOption;
 TabContainer.prototype.removeOption = removeOption;
+TabContainer.prototype.updateOptionIndex = updateOptionIndex;
 
 //Add tab
 function addOption(name, image)
 {
-	this.options.push(new TabOption(name, image, this, this.options.length));
+	var option = new TabOption(name, image, this, this.options.length);
+	this.options.push(option);
 }
 
 //Remove tab
-function removeOption()
+function removeOption(index)
 {
-	//TODO <ADD CODE HERE>
+	if(index > 0 && index < this.options.length)
+	{
+		this.options[index].destroy();
+		this.options.splice(index, 1);
+
+		this.updateOptionIndex();
+		this.updateInterface();
+	}
+}
+
+//Update options index
+function updateOptionIndex()
+{
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].index = i;
+	}
 }
 
 //Remove element
@@ -100,14 +91,15 @@ function updateInterface()
 	{
 		if(this.options_selected == i)
 		{
-			this.options[i].division.visible = true;
+			this.options[i].visible = true;
 		}
 		else
 		{
-			this.options[i].division.visible = false;
+			this.options[i].visible = false;
 		}
-		this.options[i].division.size.set(this.size.x, this.size.y - this.options_size.y);
-		this.options[i].division.updateInterface();
+		
+		this.options[i].size.set(this.size.x, this.size.y);
+		this.options[i].updateInterface();
 	}
 
 	if(this.visible)
