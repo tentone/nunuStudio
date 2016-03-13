@@ -20,6 +20,10 @@ function Button(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "button";
 
+	//Text
+	this.span = document.createElement("span");
+	this.element.appendChild(this.span);
+
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
@@ -93,7 +97,9 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
-	this.element.innerHTML = "<span>" + this.text + "</span>";
+
+	this.span.innerHTML = this.text;
+
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

@@ -8,6 +8,8 @@ include("editor/ui/ButtonImage.js");
 include("editor/ui/ButtonDrawer.js");
 include("editor/ui/Style.js");
 include("editor/ui/TextBox.js");
+include("editor/ui/Canvas.js");
+include("editor/ui/TabContainer.js");
 
 include("editor/Interface.js");
 
@@ -35,16 +37,21 @@ Editor.raycaster = null;
 //Initialize Main
 Editor.initialize = function(canvas)
 {
+	//Initialize User Interface
+	Interface.initialize();
+
 	//Set mouse lock true
 	App.setMouseLock(false);
 	App.showStats(false);
-	
-	Editor.canvas = canvas;
+
+	//Set canvas
+	Editor.canvas = Interface.canvas.element;
+	Mouse.canvas = Editor.canvas;
 
 	//Create camera and scene
 	Editor.scene = new THREE.Scene();
 	Editor.debug_scene = new THREE.Scene();
-	Editor.camera = new THREE.PerspectiveCamera(75, canvas.width/canvas.height, 0.1, 100000);
+	Editor.camera = new THREE.PerspectiveCamera(75, Editor.canvas.width/Editor.canvas.height, 0.1, 100000);
 	Editor.camera.position.set(0, 5, -5);
 	Editor.camera_rotation = new THREE.Vector2(0,0);
 
@@ -64,11 +71,14 @@ Editor.initialize = function(canvas)
 	Editor.raycaster = new THREE.Raycaster();
 
 	//Renderer
-	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas});
+	Editor.renderer = new THREE.WebGLRenderer({canvas: Editor.canvas});
 	Editor.renderer.autoClear = false;
-	Editor.renderer.setSize(canvas.width, canvas.height);
+	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
 	Editor.renderer.shadowMap.enabled = true;
 	Editor.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+	//Update interface
+	Interface.updateInterface();
 
 	//Create Floor
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -148,9 +158,6 @@ Editor.initialize = function(canvas)
 		Editor.render_objects.push(cube);
 		Editor.scene.add(cube);
 	}
-
-	//Initialize User Interface
-	Interface.initialize();
 }
 
 Editor.update = function()
@@ -336,18 +343,15 @@ Editor.draw = function()
 }
 
 //Resize to fit window
-Editor.resize = function(canvas)
+Editor.resize = function()
 {
 	Interface.updateInterface();
-	Editor.resizeCamera(canvas);
 }
 
-
 //Resize Camera
-Editor.resizeCamera = function(canvas)
+Editor.resizeCamera = function()
 {
-	Editor.canvas = canvas;
-	Editor.renderer.setSize(canvas.width, canvas.height);
-	Editor.camera.aspect = canvas.width/canvas.height;
+	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
+	Editor.camera.aspect = Editor.canvas.width/Editor.canvas.height;
 	Editor.camera.updateProjectionMatrix();
 }

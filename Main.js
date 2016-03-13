@@ -22,11 +22,16 @@ Main.vr_controls = null;
 Main.vr_effect = null;
 
 //Initialize Main
-Main.initialize = function(canvas)
+Main.initialize = function()
 {
+	//Get canvas
+	var canvas = document.getElementById("canvas");
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+
 	//Set mouse lock true
 	App.setMouseLock(true);
-	App.showStats(false);
+	App.showStats(true);
 	
 	//Create Main.camera and Main.scene
 	Main.scene = new THREE.Scene();
@@ -387,8 +392,12 @@ Main.draw = function()
 
 
 //Resize to fit window
-Main.resize = function(canvas)
+Main.resize = function()
 {
+	var canvas = document.getElementById("canvas");
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+
 	Main.renderer.setSize(canvas.width, canvas.height);
 	Main.camera.aspect = canvas.width/canvas.height;
 	Main.camera.updateProjectionMatrix();

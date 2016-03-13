@@ -2,7 +2,6 @@ include("lib/three/three.js");
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/OBJMTLLoader.js");
-include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
@@ -36,13 +35,12 @@ function App(){}
 
 //App variables
 App.stats = null;
-App.canvas = null;
 App.main = null;
 App.delta_time = 0;
 App.time = 0;
 
 //App initialization (entry point)
-App.initialize = function(main)
+App.initialize = function(main)//, canvas)
 {
 	//Stas tool
 	App.stats = new Stats();
@@ -51,11 +49,6 @@ App.initialize = function(main)
 	App.stats.domElement.style.left = "0px";
 	App.stats.domElement.style.top = "0px";
 	document.body.appendChild(App.stats.domElement);
-
-	//Get canvas
-	App.canvas = document.getElementById("canvas");
-	App.canvas.width = window.innerWidth;
-	App.canvas.height = window.innerHeight;
 	
 	//Init Input
 	Keyboard.initialize();
@@ -97,19 +90,19 @@ App.setMouseLock = function(value)
 {
 	if(value === true)
 	{
-		App.canvas.onclick = function()
+		document.body.onclick = function()
 		{
 			try
 			{
-				App.canvas.requestPointerLock = canvas.mozRequestPointerLock || canvas.requestPointerLock || canvas.webkitRequestPointerLock;
-				App.canvas.requestPointerLock();
+				document.body.requestPointerLock = canvas.mozRequestPointerLock || canvas.requestPointerLock || canvas.webkitRequestPointerLock;
+				document.body.requestPointerLock();
 			}
 			catch(e){}
 		}
 	}
 	else
 	{
-		App.canvas.onclick = function(){}
+		document.body.onclick = function(){}
 	}
 }
 
@@ -138,10 +131,7 @@ App.loop = function()
 //Called every time page is resized
 App.resize = function()
 {
-	App.canvas = document.getElementById("canvas");
-	App.canvas.width = window.innerWidth;
-	App.canvas.height = window.innerHeight;
-	App.main.resize(App.canvas);
+	App.main.resize();
 }
 
 //Auxiliar include

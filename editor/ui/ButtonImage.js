@@ -19,6 +19,15 @@ function ButtonImage(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 
+	//Image
+	this.img = document.createElement("img");
+	this.img.style.position = "absolute";
+	this.img.style.top = "0px";
+	this.img.style.left = "0px";
+
+	//Add image to button
+	this.element.appendChild(this.img);
+
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
@@ -96,7 +105,10 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
-	this.element.innerHTML = '<img src="' + this.image + '" width="' + this.size.x + '" height="' + this.size.y +'">';
+	this.img.src = this.image;
+	this.img.width = this.size.x;
+	this.img.height = this.size.y;
+
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

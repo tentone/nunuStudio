@@ -11,6 +11,9 @@ Mouse.initialize = function()
 	Mouse.pos = new THREE.Vector2(0,0);
 	Mouse.pos_diff = new THREE.Vector2(0,0);
 
+	//Calculate coordinates relative to canvas
+	Mouse.canvas = null;
+
 	//Raw Mouse Buttons
 	Mouse.raw_keys = [];
 	Mouse.raw_keys[0] = new Key();
@@ -26,8 +29,15 @@ Mouse.initialize = function()
 	//Mouse Move Position
 	document.onmousemove = function(event)
 	{
-		var rect = App.canvas.getBoundingClientRect();
-		Mouse.updatePosition(event.clientX - rect.left, event.clientY - rect.top, event.movementX, event.movementY);
+		if(Mouse.canvas != null)
+		{
+			var rect = Mouse.canvas.getBoundingClientRect();
+			Mouse.updatePosition(event.clientX - rect.left, event.clientY - rect.top, event.movementX, event.movementY);
+		}
+		else
+		{
+			Mouse.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
+		}	
 	}
 
 	//Mouse Button Down

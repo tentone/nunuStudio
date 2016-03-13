@@ -78,7 +78,6 @@ ButtonDrawer.id = 0;
 ButtonDrawer.prototype.setImage = setImage;
 ButtonDrawer.prototype.update = update;
 ButtonDrawer.prototype.updateInterface = updateInterface;
-ButtonDrawer.prototype.setCallback = setCallback;
 ButtonDrawer.prototype.destroy = destroy;
 ButtonDrawer.prototype.removeOption = removeOption;
 ButtonDrawer.prototype.addOption = addOption;
