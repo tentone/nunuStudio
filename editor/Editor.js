@@ -9,17 +9,19 @@ include("editor/ui/ButtonDrawer.js");
 include("editor/ui/Style.js");
 include("editor/ui/TextBox.js");
 
-include("editor/EditorUI.js");
+include("editor/Interface.js");
 
 //Editor declaration
 function Editor(){}
 
+//Editor renderer and camera objects
+Editor.renderer = null;
+Editor.camera = null;
+Editor.camera_rotation = null;
+
 //Test objects
 Editor.scene = null;
 Editor.debug_scene = null;
-Editor.camera = null;
-Editor.camera_rotation = null;
-Editor.renderer = null;
 
 //Cannon stuff
 Editor.world = null;
@@ -148,12 +150,12 @@ Editor.initialize = function(canvas)
 	}
 
 	//Initialize User Interface
-	EditorUI.initialize();
+	Interface.initialize();
 }
 
 Editor.update = function()
 {
-	EditorUI.update();
+	Interface.update();
 	
 	//Step physics Editor.world
 	Editor.world.step(1/60);
@@ -336,7 +338,7 @@ Editor.draw = function()
 //Resize to fit window
 Editor.resize = function(canvas)
 {
-	EditorUI.updateInterface();
+	Interface.updateInterface();
 	Editor.resizeCamera(canvas);
 }
 

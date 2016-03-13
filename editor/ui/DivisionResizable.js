@@ -107,7 +107,7 @@ function update()
 		}
 
 		//Update Parent interface
-		EditorUI.updateInterface();
+		Interface.updateInterface();
 	}
 	else
 	{

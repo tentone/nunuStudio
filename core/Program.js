@@ -8,5 +8,8 @@ function Program()
 
 	//Screens
 	this.screens = [];
+
+	//Assets list
+	this.assets = [];
 }
 

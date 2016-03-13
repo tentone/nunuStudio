@@ -58,10 +58,10 @@ Main.initialize = function(canvas)
 	Main.renderer.shadowMap.type = THREE.PCFSoftShadowMap; //THREE.BasicShadowMap;
 
 	//Initialize VR manager
-	Main.vr_controls = new THREE.VRControls(Main.camera);
+	/*Main.vr_controls = new THREE.VRControls(Main.camera);
 	Main.vr_effect = new THREE.VREffect(Main.renderer);
 	Main.vr_effect.setSize(window.innerWidth, window.innerHeight);
-	Main.vr_manager = new WebVRManager(Main.renderer, Main.vr_effect, {hideButton:false, isUndistorted:false});
+	Main.vr_manager = new WebVRManager(Main.renderer, Main.vr_effect, {hideButton:false, isUndistorted:false});*/
 
 	//Create Floor
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -321,12 +321,6 @@ Main.update = function()
 		{
 			intersects[0].object.material = new THREE.MeshNormalMaterial();
 		}
-
-		//Change closest object material
-		/*for(var i = 0; i < intersects.length; i++)
-		{
-			intersects[i].object.material = new THREE.MeshNormalMaterial();
-		}*/
 	}
 
 }
@@ -387,8 +381,8 @@ function setShadowCasting(object, state)
 Main.draw = function()
 {
 	Main.cannon_renderer.update();
-	Main.vr_manager.render(Main.debug_scene, Main.camera, App.time);
-	Main.vr_manager.render(Main.scene, Main.camera, App.time);
+	Main.renderer.render(Main.debug_scene, Main.camera);
+	Main.renderer.render(Main.scene, Main.camera);
 }
 
 
