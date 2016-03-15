@@ -34,6 +34,7 @@ function ButtonImage(parent)
 	this.visible = true;
 
 	//Image and Callback
+	this.image_scale = new THREE.Vector2(1,1);
 	this.image = "";
 	this.callback = null;
 
@@ -106,9 +107,12 @@ function updateInterface()
 	}
 
 	this.img.src = this.image;
-	this.img.width = this.size.x;
-	this.img.height = this.size.y;
+	this.img.width = this.size.x * this.image_scale.x;
+	this.img.height = this.size.y * this.image_scale.y;
 
+	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
+	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
+	
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

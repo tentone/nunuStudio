@@ -26,6 +26,12 @@ Mouse.initialize = function()
 	Mouse.keys[1] = new Key();
 	Mouse.keys[2] = new Key();
 
+	//Mouse Wheel
+	document.onwheel = function(event)
+	{
+		//TODO <ADD CODE HERE>
+	}
+
 	//Mouse Move Position
 	document.onmousemove = function(event)
 	{

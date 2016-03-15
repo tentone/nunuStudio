@@ -6,7 +6,7 @@ body
 	font-family: "Arial", sans-serif;
 	font-size: 13px;
 	font-weight: bold;
-	text-align: center;
+	/*text-align: center;*/
 	cursor: default;
 		
 	/*Avoid text selection*/

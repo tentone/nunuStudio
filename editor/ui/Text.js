@@ -29,7 +29,7 @@ function Text(parent)
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 	this.text = "text";
-	
+
 	//Add element to document
 	this.parent.appendChild(this.element);
 }

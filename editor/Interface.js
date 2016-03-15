@@ -17,125 +17,213 @@ Interface.initialize = function()
 	Interface.canvas = new Canvas();
 	Interface.tab.options[0].attachComponent(Interface.canvas);
 	
-	//Top Bar
-	Interface.top_bar = new Division();
-	Interface.top_bar.size.y = 30 ;
-	Interface.top_bar.element.className = "bar";
-
-	//Project Exploer
-	Interface.explorer = new DivisionResizable();
-	Interface.explorer.size.x = 300;
-
-	//Tool Bar
-	Interface.tool_bar = new Division();
-	Interface.tool_bar.size.x = 50;
-	Interface.tool_bar.element.className = "bar";
-
-	//Asset Explorer
+	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer = new DivisionResizable();
 	Interface.asset_explorer.resizable_side = DivisionResizable.TOP;
 	Interface.asset_explorer.size.y = 200;
 
-	//Button
-	Interface.but_text = new Button();
-	Interface.but_text.setCallback(function()
-	{
-		var a = new Button();
-		a.size.set(50,30);
-		a.position.set(Math.random() * 500, Math.random() * 500);
-		a.text = "test";
-		a.updateInterface();
-		a.setCallback(function()
-		{
-			Interface.dropdown.visible = false;
-			Interface.dropdown.updateInterface();
-		});
-	});
-	Interface.but_text.size.set(150,30);
-	Interface.but_text.position.set(0,0);
-	Interface.but_text.text = "File";
+	//------------------------------------Explorer------------------------------------
+	Interface.explorer = new DivisionResizable();
+	Interface.explorer.size.x = 300;
 
-	//Image test
-	Interface.image = new Image();
-	Interface.image.setImage("data/logo.png");
-	Interface.image.size.set(160, 20);
-	Interface.image.updateInterface();
-	
-	//Image Button test
-	Interface.but_image = new ButtonImage();
-	Interface.but_image.setImage("editor/files/icons/models.png");
-	Interface.but_image.size.set(50, 50);
-	Interface.but_image.position.set(0,30);
-	Interface.but_image.updateInterface();
-	Interface.but_image.setCallback(function()
-	{
-		var material = new THREE.MeshPhongMaterial({color: Math.floor(Math.random() * 0xffffff)});
-		var i = 2;
-		if(Math.random() < 0.5)
-		{
-			var size = Math.random();
-			var shape = new CANNON.Box(new CANNON.Vec3(size, size, size));
-			var geometry = new THREE.BoxGeometry(size*2, size*2, size*2, 10, 10);
-		}
-		else
-		{
-			var size = Math.random() * 2;
-			var shape = new CANNON.Sphere(size);
-			var geometry = new THREE.SphereGeometry(size, 16, 16);
-		}
+	//Test Text
+	Interface.text = new Text(Interface.explorer.element);
+	Interface.text.text = "TextBox:";
+	Interface.text.alignment = Text.CENTER;
+	Interface.text.position.set(40, 25);
+	Interface.text.updateInterface();
 
-		var body = new CANNON.Body({mass:1, linearDamping:0.1, angularDamping:0.1});
-		body.addShape(shape);
-		body.position.set(Math.random()*10 - 5, 2.5*i+0.5, Math.random()*10 - 5);
-		Editor.physics_objects.push(body);
-		Editor.world.addBody(body);
-
-		var cube = new THREE.Mesh(geometry, material);
-		cube.castShadow = true;
-		Editor.render_objects.push(cube);
-		Editor.scene.add(cube);
-	});
-
-	//Button drawer
-	Interface.but_drawer = new ButtonDrawer();
-	Interface.but_drawer.setImage("editor/files/sign.png");
-	Interface.but_drawer.size.set(50, 50);
-	Interface.but_drawer.position.set(0, 80);
-	Interface.but_drawer.updateInterface();
-	Interface.but_drawer.addOption("editor/files/icons/add.png", function(){});
-	Interface.but_drawer.addOption("editor/files/icons/cube.png", function(){});
-	Interface.but_drawer.addOption("editor/files/icons/menu.png", function(){});
-	Interface.but_drawer.addOption("editor/files/icons/mic.png", function(){});
-	Interface.but_drawer.addOption("editor/files/icons/move.png", function(){});
-	Interface.but_drawer.addOption("editor/files/icons/resize.png", function(){});
-	Interface.but_drawer.addOption("editor/files/sign.png", function(){});
-
-	//Dropdown
-	Interface.dropdown = new DropdownMenu();
-	Interface.dropdown.text = "Test";
-	Interface.dropdown.size.set(150,30);
-	Interface.dropdown.position.set(150,0);
-	Interface.temp = 0;
-	Interface.dropdown.addOption("a", function()
-	{
-		Interface.dropdown.addOption("a" + Interface.temp, function()
-		{
-			Interface.dropdown.removeOption(1);
-		});
-		Interface.temp++;
-	});
-
-	//Text box test
+	//Test Text Box
 	Interface.text_box = new TextBox(Interface.explorer.element);
 	Interface.text_box.position.set(80, 10);
 	Interface.text_box.size.set(180, 25);
 	Interface.text_box.updateInterface();
 
-	//Text
-	Interface.text = new Text(Interface.explorer.element);
-	Interface.text.text = "TextBox:";
-	Interface.text.position.set(40, 25);
-	Interface.text.updateInterface();
+	//------------------------------------Tool Bar------------------------------------
+	Interface.tool_bar = new Division();
+	Interface.tool_bar.size.x = 40;
+	Interface.tool_bar.element.className = "bar";
+
+	//Tools text
+	Interface.tool_text = new Text(Interface.tool_bar.element);
+	Interface.tool_text.text = "Tools";
+	Interface.tool_text.position.set(Interface.tool_bar.size.x/2, 40);
+	Interface.tool_text.updateInterface();
+
+	//Select
+	Interface.tool_select = new ButtonImage();
+	Interface.tool_select.setImage("editor/files/icons/select.png");
+	Interface.tool_select.image_scale.set(0.7, 0.7);
+	Interface.tool_select.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.tool_select.position.set(0, 80);
+	Interface.tool_select.updateInterface();
+	Interface.tool_select.setCallback(function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	//Move
+	Interface.tool_move = new ButtonImage();
+	Interface.tool_move.setImage("editor/files/icons/move.png");
+	Interface.tool_move.image_scale.set(0.7, 0.7);
+	Interface.tool_move.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.tool_move.position.set(0, 120);
+	Interface.tool_move.updateInterface();
+	Interface.tool_move.setCallback(function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	//Resize
+	Interface.tool_resize = new ButtonImage();
+	Interface.tool_resize.setImage("editor/files/icons/resize.png");
+	Interface.tool_resize.image_scale.set(0.7, 0.7);
+	Interface.tool_resize.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.tool_resize.position.set(0, 160);
+	Interface.tool_resize.updateInterface();
+	Interface.tool_resize.setCallback(function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	//Rotate
+	Interface.tool_rotate = new ButtonImage();
+	Interface.tool_rotate.setImage("editor/files/icons/rotate.png");
+	Interface.tool_rotate.image_scale.set(0.7, 0.7);
+	Interface.tool_rotate.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.tool_rotate.position.set(0, 200);
+	Interface.tool_rotate.updateInterface();
+	Interface.tool_rotate.setCallback(function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+ 
+	//Add Text
+	Interface.add_text = new Text(Interface.tool_bar.element);
+	Interface.add_text.text = "Add";
+	Interface.add_text.position.set(Interface.tool_bar.size.x/2, 240);
+	Interface.add_text.updateInterface();
+
+	//Add Models
+	Interface.add_model = new ButtonDrawer();
+	Interface.add_model.setImage("editor/files/icons/models.png");
+	Interface.add_model.image_scale.set(0.7, 0.7);
+	Interface.add_model.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.add_model.position.set(0, 280);
+	Interface.add_model.options_size.set(40, 40);
+	Interface.add_model.updateInterface();
+
+	Interface.add_model.addOption("editor/files/icons/cube.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	Interface.add_model.addOption("editor/files/icons/cylinder.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	Interface.add_model.addOption("editor/files/icons/sphere.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	Interface.add_model.addOption("editor/files/icons/torus.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	Interface.add_model.addOption("editor/files/icons/pyramid.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	//Add lights
+	Interface.add_light = new ButtonDrawer();
+	Interface.add_light.setImage("editor/files/icons/bulb.png");
+	Interface.add_light.image_scale.set(0.7, 0.7);
+	Interface.add_light.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.add_light.position.set(0, 320);
+	Interface.add_light.options_size.set(40, 40);
+	Interface.add_light.updateInterface();
+
+	Interface.add_light.addOption("editor/files/icons/bulb.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	Interface.add_light.addOption("editor/files/icons/sun.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	Interface.add_light.addOption("editor/files/icons/spotlight.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	//----------------------------------Menu Top Bar----------------------------------
+	Interface.top_bar = new Division();
+	Interface.top_bar.size.y = 25 ;
+	Interface.top_bar.element.className = "bar";
+
+	//Editor Logo
+	Interface.image = new Image();
+	Interface.image.setImage("data/logo.png");
+	Interface.image.size.set(120, 15);
+	Interface.image.updateInterface();
+
+	//File
+	Interface.file = new DropdownMenu();
+	Interface.file.text = "File";
+	Interface.file.size.set(150, Interface.top_bar.size.y);
+	Interface.file.position.set(0,0);
+
+	Interface.file.addOption("New Project", function()
+	{
+		//TODO <NEW PROJECT>
+	});
+
+	Interface.file.addOption("Save Project", function()
+	{
+		//TODO <SAVE PROJECT>
+	});
+
+	Interface.file.addOption("Load Project", function()
+	{
+		//TODO <LOAD PROJECT>
+	});
+
+	Interface.file.addOption("Exit", function()
+	{
+		//TODO <NEW PROJECT>
+	});
+
+	//Editor
+	Interface.editor = new DropdownMenu();
+	Interface.editor.text = "Editor";
+	Interface.editor.size.set(150, Interface.top_bar.size.y);
+	Interface.editor.position.set(150,0);
+	Interface.editor.addOption("Undo", function()
+	{
+		//TODO <UNDO>
+	});
+
+	Interface.editor.addOption("Redo", function()
+	{
+		//TODO <REDO>
+	});
+
+	//About
+	Interface.about = new Button();
+	Interface.about.text = "About";
+	Interface.about.size.set(150, Interface.top_bar.size.y);
+	Interface.about.position.set(300, 0);
+	Interface.about.updateInterface();
+	Interface.about.setCallback(function()
+	{
+		//TODO <ABOUT>
+	});
 }
 
 Interface.update = function()
@@ -143,19 +231,15 @@ Interface.update = function()
 	Interface.tool_bar.update();
 	Interface.explorer.update();
 	Interface.asset_explorer.update();
-	Interface.but_drawer.update();
+	Interface.add_model.update();
 }
-
-Interface.draw = function(){}
-
-Interface.resize = function(){}
 
 Interface.updateInterface = function()
 {
 	//Window size
 	var size = new THREE.Vector2(window.innerWidth, window.innerHeight);
 
-	//Top bar
+	//Menu Top bar
 	Interface.top_bar.size.x = size.x;
 	Interface.top_bar.updateInterface();
 
@@ -178,24 +262,11 @@ Interface.updateInterface = function()
 	Interface.image.position.set(size.x - Interface.image.size.x, 5);
 	Interface.image.updateInterface();
 
-	//Canvas
-	//Interface.canvas.position.set(0,0);
-	//Interface.canvas.position.set(Interface.tool_bar.size.x, Interface.top_bar.size.y);
-	//Interface.canvas.size.x = (size.x - Interface.tool_bar.size.x - Interface.explorer.size.x);
-	//Interface.canvas.size.y = (size.y - Interface.top_bar.size.y - Interface.asset_explorer.size.y); 
-	Interface.canvas.updateInterface();
-
 	//Tab
 	Interface.tab.position.set(Interface.tool_bar.size.x, Interface.top_bar.size.y);
 	Interface.tab.size.x = (size.x - Interface.tool_bar.size.x - Interface.explorer.size.x);
 	Interface.tab.size.y = (size.y - Interface.top_bar.size.y - Interface.asset_explorer.size.y); 
 	Interface.tab.updateInterface();
-
-	//Update interface status
-	Interface.but_text.updateInterface();
-	Interface.dropdown.updateInterface();
-	Interface.text.updateInterface();
-	Interface.text_box.updateInterface();
 
 	//Resize editor camera
 	Editor.resizeCamera();

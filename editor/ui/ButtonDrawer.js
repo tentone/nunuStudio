@@ -26,6 +26,14 @@ function ButtonDrawer(parent)
 	this.panel.style.position = "absolute";
 	this.panel.className = "bar";
 
+	//Image
+	this.img = document.createElement("img");
+	this.img.style.position = "absolute";
+	this.img.style.top = "0px";
+	this.img.style.left = "0px";
+
+	this.element.appendChild(this.img);
+
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
@@ -35,7 +43,8 @@ function ButtonDrawer(parent)
 	this.panel_size = new THREE.Vector2(0, 0);
 	this.panel_position = new THREE.Vector2(0, 0);
 
-	//Image and Callback
+	//Image
+	this.image_scale = new THREE.Vector2(1,1);
 	this.image = "";
 
 	//Options
@@ -186,7 +195,13 @@ function updateInterface()
 	this.panel.style.width = this.panel_size.x + "px";
 	this.panel.style.height = this.panel_size.y + "px";
 	
-	this.element.innerHTML = '<img src="' + this.image + '" width="' + this.size.x + '" height="' + this.size.y +'">';
+	this.img.src = this.image;
+	this.img.width = this.size.x * this.image_scale.x;
+	this.img.height = this.size.y * this.image_scale.y;
+	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
+	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
+
+	//this.element.innerHTML = '<img src="' + this.image + '" width="' + this.size.x + '" height="' + this.size.y +'">';
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

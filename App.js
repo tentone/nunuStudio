@@ -29,6 +29,8 @@ include("input/Mouse.js");
 
 include("core/Program.js");
 include("core/Screen.js");
+include("core/Script.js");
+include("core/Program.js");
 
 //App class
 function App(){}
@@ -42,7 +44,7 @@ App.time = 0;
 //App initialization (entry point)
 App.initialize = function(main)//, canvas)
 {
-	//Stas tool
+	//Stats tool
 	App.stats = new Stats();
 	App.stats.setMode(0);
 	App.stats.domElement.style.position = "absolute";

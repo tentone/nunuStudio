@@ -129,7 +129,7 @@ Editor.initialize = function(canvas)
 	Editor.debug_scene.add(axisHelper);
 
 	//Number of cubes
-	var N = 100;
+	var N = 0;
 
 	//Create N  objects for physics and render
 	for(var i = 0; i < N; i++)
@@ -174,16 +174,6 @@ Editor.update = function()
 		Editor.render_objects[i].quaternion.set(Editor.physics_objects[i].quaternion.x, Editor.physics_objects[i].quaternion.y, Editor.physics_objects[i].quaternion.z, Editor.physics_objects[i].quaternion.w);
 	}
 
-	//Rotate Camera
-	if(Keyboard.isKeyPressed(Keyboard.E))
-	{
-		Editor.camera_rotation.x -= 0.02;
-	}
-	if(Keyboard.isKeyPressed(Keyboard.Q))
-	{
-		Editor.camera_rotation.x += 0.02;
-	}
-
 	//Camera Mouse Movement
 	if(Mouse.buttonPressed(Mouse.LEFT))
 	{
@@ -213,7 +203,7 @@ Editor.update = function()
     Editor.camera.lookAt(direction);
 
 	//Move Camera Front and Back
-	var speed_walk = 0.2;
+	/*var speed_walk = 0.2;
 	if(Keyboard.isKeyPressed(Keyboard.SHIFT))
 	{
 		speed_walk = 0.6;
@@ -263,7 +253,7 @@ Editor.update = function()
 
 	//Enable leap hand shadowing
 	setShadowReceiving(LeapDevice.scene, true);
-	setShadowCasting(LeapDevice.scene, true);
+	setShadowCasting(LeapDevice.scene, true);*/
 
 	//Rasycast line from Editor.camera and mouse position
 	if(Mouse.buttonJustPressed(Mouse.RIGHT))
