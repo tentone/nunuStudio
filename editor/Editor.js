@@ -11,8 +11,10 @@ include("editor/ui/TextBox.js");
 include("editor/ui/Canvas.js");
 include("editor/ui/TabContainer.js");
 include("editor/ui/TabOption.js");
+include("editor/ui/DualDivisionResizable.js");
 
 include("editor/Interface.js");
+
 
 //Editor declaration
 function Editor(){}

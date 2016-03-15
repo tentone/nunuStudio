@@ -51,6 +51,7 @@ function ButtonDrawer(parent)
 	this.options_per_line = 3;
 	this.options = [];
 	this.options_size = new THREE.Vector2(50, 50);
+	this.options_scale = new THREE.Vector2(1, 1);
 	this.options_spacing = new THREE.Vector2(3, 3);
 	this.expanded = false;
 
@@ -163,6 +164,7 @@ function updateInterface()
 	for(var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].size.set(this.options_size.x, this.options_size.y);
+		this.options[i].image_scale.set(this.options_scale.x, this.options_scale.y);
 		this.options[i].position.x = this.options_size.x * (i % this.options_per_line);
 		this.options[i].position.y = this.options_size.y * Math.floor(i / this.options_per_line);
 		this.options[i].visible = (this.expanded && this.visible);

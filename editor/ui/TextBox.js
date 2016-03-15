@@ -24,7 +24,18 @@ function TextBox(parent)
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	
+	this.callback = null;
+
+	//Click event
+	var self = this;
+	this.element.onchange = function()
+	{
+		if(self.callback != null)
+		{
+			self.callback();
+		}
+	};
+
 	//Add element to document
 	this.parent.appendChild(this.element);
 }

@@ -17,6 +17,11 @@ Interface.initialize = function()
 	Interface.canvas = new Canvas();
 	Interface.tab.options[0].attachComponent(Interface.canvas);
 	
+	//Dual Div
+	Interface.dual_test = new DualDivisionResizable();
+	Interface.dual_test.orientation = DualDivisionResizable.VERTICAL;
+	Interface.tab.options[1].attachComponent(Interface.dual_test);
+
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer = new DivisionResizable();
 	Interface.asset_explorer.resizable_side = DivisionResizable.TOP;
@@ -108,6 +113,7 @@ Interface.initialize = function()
 	Interface.add_model = new ButtonDrawer();
 	Interface.add_model.setImage("editor/files/icons/models.png");
 	Interface.add_model.image_scale.set(0.7, 0.7);
+	Interface.add_model.options_scale.set(0.7, 0.7);
 	Interface.add_model.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
 	Interface.add_model.position.set(0, 280);
 	Interface.add_model.options_size.set(40, 40);
@@ -142,6 +148,7 @@ Interface.initialize = function()
 	Interface.add_light = new ButtonDrawer();
 	Interface.add_light.setImage("editor/files/icons/bulb.png");
 	Interface.add_light.image_scale.set(0.7, 0.7);
+	Interface.add_light.options_scale.set(0.7, 0.7);
 	Interface.add_light.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
 	Interface.add_light.position.set(0, 320);
 	Interface.add_light.options_size.set(40, 40);
@@ -232,6 +239,7 @@ Interface.update = function()
 	Interface.explorer.update();
 	Interface.asset_explorer.update();
 	Interface.add_model.update();
+	Interface.dual_test.update();
 }
 
 Interface.updateInterface = function()

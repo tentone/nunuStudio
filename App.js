@@ -28,7 +28,7 @@ include("input/Keyboard.js");
 include("input/Mouse.js");
 
 include("core/Program.js");
-include("core/Screen.js");
+include("core/Scene.js");
 include("core/Script.js");
 include("core/Program.js");
 

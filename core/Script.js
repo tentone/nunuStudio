@@ -1,6 +1,10 @@
 function Script()
 {
+	//Script name
 	this.name = "script";
+	this.author = "";
+
+	//Script Code
 	this.code = 'console.log("Hello World!");';	
 }
 

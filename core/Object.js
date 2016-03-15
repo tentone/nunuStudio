@@ -4,6 +4,6 @@ function Object()
 	this.children = [];
 	this.scripts = [];
 
-	this.model = [];
-	this.collider = [];
+	this.childs = null;
+	this.body = null;
 }
