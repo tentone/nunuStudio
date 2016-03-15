@@ -19,7 +19,9 @@ Interface.initialize = function()
 	
 	//Dual Div
 	Interface.dual_test = new DualDivisionResizable();
-	Interface.dual_test.orientation = DualDivisionResizable.VERTICAL;
+	Interface.dual_test.orientation = DualDivisionResizable.HORIZONTAL;
+	Interface.dual_test.tab_position = 250;
+	Interface.dual_test.div_a.className = "bar";
 	Interface.tab.options[1].attachComponent(Interface.dual_test);
 
 	//---------------------------------Asset Manager----------------------------------
@@ -56,7 +58,8 @@ Interface.initialize = function()
 	Interface.tool_text.updateInterface();
 
 	//Select
-	Interface.tool_select = new ButtonImage();
+	Interface.tool_select = new ButtonImageToggle();
+	Interface.tool_select.selected = true;
 	Interface.tool_select.setImage("editor/files/icons/select.png");
 	Interface.tool_select.image_scale.set(0.7, 0.7);
 	Interface.tool_select.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
@@ -64,11 +67,19 @@ Interface.initialize = function()
 	Interface.tool_select.updateInterface();
 	Interface.tool_select.setCallback(function()
 	{
-		//TODO <ADD CODE HERE>
+		Editor.tool_mode = Editor.MODE_SELECT;
+		Interface.tool_select.selected = true;
+		Interface.tool_move.selected = false;
+		Interface.tool_resize.selected = false;
+		Interface.tool_rotate.selected = false;
+		Interface.tool_rotate.updateInterface();
+		Interface.tool_move.updateInterface();
+		Interface.tool_resize.updateInterface();
+		Interface.tool_select.updateInterface();
 	});
 
 	//Move
-	Interface.tool_move = new ButtonImage();
+	Interface.tool_move = new ButtonImageToggle();
 	Interface.tool_move.setImage("editor/files/icons/move.png");
 	Interface.tool_move.image_scale.set(0.7, 0.7);
 	Interface.tool_move.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
@@ -76,11 +87,19 @@ Interface.initialize = function()
 	Interface.tool_move.updateInterface();
 	Interface.tool_move.setCallback(function()
 	{
-		//TODO <ADD CODE HERE>
+		Editor.tool_mode = Editor.MODE_MOVE;
+		Interface.tool_move.selected = true;
+		Interface.tool_select.selected = false;
+		Interface.tool_resize.selected = false;
+		Interface.tool_rotate.selected = false;
+		Interface.tool_rotate.updateInterface();
+		Interface.tool_move.updateInterface();
+		Interface.tool_resize.updateInterface();
+		Interface.tool_select.updateInterface();
 	});
 
 	//Resize
-	Interface.tool_resize = new ButtonImage();
+	Interface.tool_resize = new ButtonImageToggle();
 	Interface.tool_resize.setImage("editor/files/icons/resize.png");
 	Interface.tool_resize.image_scale.set(0.7, 0.7);
 	Interface.tool_resize.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
@@ -88,11 +107,19 @@ Interface.initialize = function()
 	Interface.tool_resize.updateInterface();
 	Interface.tool_resize.setCallback(function()
 	{
-		//TODO <ADD CODE HERE>
+		Editor.tool_mode = Editor.MODE_RESIZE;
+		Interface.tool_resize.selected = true;
+		Interface.tool_move.selected = false;
+		Interface.tool_select.selected = false;
+		Interface.tool_rotate.selected = false;
+		Interface.tool_rotate.updateInterface();
+		Interface.tool_move.updateInterface();
+		Interface.tool_resize.updateInterface();
+		Interface.tool_select.updateInterface();
 	});
 
 	//Rotate
-	Interface.tool_rotate = new ButtonImage();
+	Interface.tool_rotate = new ButtonImageToggle();
 	Interface.tool_rotate.setImage("editor/files/icons/rotate.png");
 	Interface.tool_rotate.image_scale.set(0.7, 0.7);
 	Interface.tool_rotate.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
@@ -100,7 +127,15 @@ Interface.initialize = function()
 	Interface.tool_rotate.updateInterface();
 	Interface.tool_rotate.setCallback(function()
 	{
-		//TODO <ADD CODE HERE>
+		Editor.tool_mode = Editor.MODE_ROTATE;
+		Interface.tool_rotate.selected = true;
+		Interface.tool_move.selected = false;
+		Interface.tool_resize.selected = false;
+		Interface.tool_select.selected = false;
+		Interface.tool_rotate.updateInterface();
+		Interface.tool_move.updateInterface();
+		Interface.tool_resize.updateInterface();
+		Interface.tool_select.updateInterface();
 	});
  
 	//Add Text
@@ -122,16 +157,34 @@ Interface.initialize = function()
 	Interface.add_model.addOption("editor/files/icons/cube.png", function()
 	{
 		//TODO <ADD CODE HERE>
+
+		//Create Cube
+		var geometry = new THREE.BoxGeometry(1, 1, 1);
+		var material = new THREE.MeshPhongMaterial();
+		var cube = new THREE.Mesh(geometry, material);
+		Editor.scene.scene.add(cube);
 	});
 
 	Interface.add_model.addOption("editor/files/icons/cylinder.png", function()
 	{
 		//TODO <ADD CODE HERE>
+
+		//Create Sphere
+		var geometry = new THREE.SphereGeometry(0.6, 16, 16);
+		var material = new THREE.MeshPhongMaterial();
+		var sphere = new THREE.Mesh(geometry, material);
+		Editor.scene.scene.add(sphere);
 	});
 
 	Interface.add_model.addOption("editor/files/icons/sphere.png", function()
 	{
 		//TODO <ADD CODE HERE>
+
+		//Create Sphere
+		var geometry = new THREE.SphereGeometry(0.6, 16, 16);
+		var material = new THREE.MeshPhongMaterial();
+		var sphere = new THREE.Mesh(geometry, material);
+		Editor.scene.scene.add(sphere);
 	});
 
 	Interface.add_model.addOption("editor/files/icons/torus.png", function()

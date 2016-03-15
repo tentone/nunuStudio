@@ -7,9 +7,15 @@ function Program()
 	this.version = "0";
 
 	//Screens
-	this.screens = [];
+	this.scenes = [];
 
 	//Assets list
 	this.assets = [];
 }
 
+Program.prototype.createScene = createScene;
+
+function createScene()
+{
+	this.scenes.push(new Scene());
+}

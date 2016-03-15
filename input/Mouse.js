@@ -43,7 +43,7 @@ Mouse.initialize = function()
 		else
 		{
 			Mouse.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
-		}	
+		}
 	}
 
 	//Mouse Button Down
@@ -66,6 +66,18 @@ Mouse.RIGHT = 2;
 
 //Mouse Configuration Values
 Mouse.SENSITIVITY = 0.2;
+
+//Check if mouse is inside canvas
+Mouse.insideCanvas = function()
+{
+	if(Mouse.canvas == null)
+	{
+		return false;
+	}
+	
+	var rect = Mouse.canvas.getBoundingClientRect();
+	return (Mouse.pos.x > 0 && Mouse.pos.y > 0 && Mouse.pos.x < rect.width && Mouse.pos.y < rect.height); 
+}
 
 //Check if Mouse button is pressed
 Mouse.buttonPressed = function(button)

@@ -12,30 +12,26 @@ include("editor/ui/Canvas.js");
 include("editor/ui/TabContainer.js");
 include("editor/ui/TabOption.js");
 include("editor/ui/DualDivisionResizable.js");
+include("editor/ui/ButtonImageToggle.js");
 
 include("editor/Interface.js");
-
 
 //Editor declaration
 function Editor(){}
 
-//Editor renderer and camera objects
-Editor.renderer = null;
-Editor.camera = null;
-Editor.camera_rotation = null;
+Editor.MODE_SELECT = 0;
+Editor.MODE_MOVE = 1;
+Editor.MODE_RESIZE = 2;
+Editor.MODE_ROTATE = 3;
 
-//Test objects
-Editor.scene = null;
-Editor.debug_scene = null;
+Editor.STATE_IDLE = 8;
+Editor.STATE_EDITING = 9;
+Editor.STATE_TESTING = 11;
 
-//Cannon stuff
-Editor.world = null;
-Editor.physics_objects = [];
-Editor.render_objects = [];
-Editor.cannon_renderer = null;
+Editor.tool_mode = Editor.MODE_SELECT;
+Editor.state = Editor.STATE_EDITING;
 
-//Object selection
-Editor.raycaster = null;
+Editor.selected_object = null;
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -47,28 +43,25 @@ Editor.initialize = function(canvas)
 	App.setMouseLock(false);
 	App.showStats(false);
 
-	//Set canvas
+	//Set render canvas
 	Editor.canvas = Interface.canvas.element;
 	Mouse.canvas = Editor.canvas;
 
-	//Create camera and scene
-	Editor.scene = new THREE.Scene();
+	//Editor program and scene
+	Editor.program = new Program();
+	Editor.scene = new Scene();
+
+	//Debug Elements
 	Editor.debug_scene = new THREE.Scene();
+	Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.debug_scene, Editor.scene.world);
+
 	Editor.camera = new THREE.PerspectiveCamera(75, Editor.canvas.width/Editor.canvas.height, 0.1, 100000);
 	Editor.camera.position.set(0, 5, -5);
 	Editor.camera_rotation = new THREE.Vector2(0,0);
 
-	//Init Cannon
-	Editor.world = new CANNON.World();
-	Editor.world.broadphase = new CANNON.NaiveBroadphase();
-	Editor.world.gravity.set(0,-10,0);
-	Editor.world.solver.tolerance = 0.05;
-
-	Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.debug_scene, Editor.world);
-
 	//Initialize Leap Hand
-	LeapDevice.initialize();
-	Editor.scene.add(LeapDevice.scene);
+	//LeapDevice.initialize();
+	//Editor.scene.scene.add(LeapDevice.scene);
 
 	//Raycaster
 	Editor.raycaster = new THREE.Raycaster();
@@ -83,100 +76,36 @@ Editor.initialize = function(canvas)
 	//Update interface
 	Interface.updateInterface();
 
-	//Create Floor
-	var geometry = new THREE.BoxGeometry(1, 1, 1);
-	geometry.scale(200,2,200);
-	var material = new THREE.MeshPhongMaterial();
-	var floor = new THREE.Mesh(geometry, material);
-	floor.receiveShadow = true;
-	floor.castShadow = true;
-	floor.position.y = -1;
-	Editor.scene.add(floor);
-
 	//Floor plane physics
-	var plane = new CANNON.Plane();
+	/*var plane = new CANNON.Plane();
 	var body = new CANNON.Body({mass:0});
 	body.addShape(plane);
 	body.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0), -Math.PI/2);
-	Editor.world.addBody(body);
+	Editor.scene.world.addBody(body);*/
 
 	//Light
-	var light = new THREE.AmbientLight(0x555555);
-	Editor.scene.add(light);
+	var light = new THREE.AmbientLight(0xffffff);
+	Editor.scene.scene.add(light);
 
-	light = new THREE.SpotLight(0x330000);
-	light.position.set(15, 10, 0);
-	light.target.position.set(0, 0, 0);
-	light.castShadow = true;
-	Editor.scene.add(light);
+	//Editor helpers
+	Editor.grid_helper = new THREE.GridHelper(500, 20);
+	Editor.debug_scene.add(Editor.grid_helper);
 
-	light = new THREE.SpotLight(0x000033);
-	light.position.set(-15, 10, 0);
-	light.target.position.set(0, 0, 0);
-	light.castShadow = true;
-
-	Editor.scene.add(light);
-
-	light = new THREE.SpotLight(0x003300);
-	light.position.set(0, 10, -15);
-	light.target.position.set(0, 0, 0);
-	light.castShadow = true;
-	Editor.scene.add(light);
-
-	//Grid and Axis Helper
-	var gridHelper = new THREE.GridHelper(500, 20);
-	Editor.debug_scene.add(gridHelper);
-
-	var axisHelper = new THREE.AxisHelper(500);
-	Editor.debug_scene.add(axisHelper);
-
-	//Number of cubes
-	var N = 0;
-
-	//Create N  objects for physics and render
-	for(var i = 0; i < N; i++)
-	{
-		var material = new THREE.MeshPhongMaterial({color: Math.floor(Math.random() * 0xffffff)});
-		if(Math.random() < 0.5)
-		{
-			var size = Math.random();
-			var shape = new CANNON.Box(new CANNON.Vec3(size, size, size));
-			var geometry = new THREE.BoxGeometry(size*2, size*2, size*2, 10, 10);
-		}
-		else
-		{
-			var size = Math.random() * 2;
-			var shape = new CANNON.Sphere(size);
-			var geometry = new THREE.SphereGeometry(size, 16, 16);
-		}
-
-		var body = new CANNON.Body({mass:1, linearDamping:0.1, angularDamping:0.1});
-		body.addShape(shape);
-		body.position.set(Math.random()*10 - 5, 2.5*i+0.5, Math.random()*10 - 5);
-		Editor.physics_objects.push(body);
-		Editor.world.addBody(body);
-
-		var cube = new THREE.Mesh(geometry, material);
-		cube.castShadow = true;
-		Editor.render_objects.push(cube);
-		Editor.scene.add(cube);
-	}
+	Editor.axis_helper = new THREE.AxisHelper(500);
+	Editor.debug_scene.add(Editor.axis_helper);
 }
 
 Editor.update = function()
 {
 	Interface.update();
 	
-	//Step physics Editor.world
-	Editor.world.step(1/60);
-
-	for(var i = 0; i < Editor.render_objects.length; i++)
+	//Update Scene if on test mode
+	if(Editor.state == Editor.STATE_TESTING)
 	{
-		Editor.render_objects[i].position.set(Editor.physics_objects[i].position.x, Editor.physics_objects[i].position.y, Editor.physics_objects[i].position.z);
-		Editor.render_objects[i].quaternion.set(Editor.physics_objects[i].quaternion.x, Editor.physics_objects[i].quaternion.y, Editor.physics_objects[i].quaternion.z, Editor.physics_objects[i].quaternion.w);
+		Editor.scene.update();
 	}
 
-	//Camera Mouse Movement
+	//Rotate Camera
 	if(Mouse.buttonPressed(Mouse.LEFT))
 	{
 		Editor.camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
@@ -192,20 +121,22 @@ Editor.update = function()
 		{
 			Editor.camera_rotation.y = pid2;
 		}
-	}
-	
-	//Calculate direction vector
-	var cos_angle_y = Math.cos(Editor.camera_rotation.y);
-    var direction = new THREE.Vector3(Math.sin(Editor.camera_rotation.x)*cos_angle_y, Math.sin(Editor.camera_rotation.y), Math.cos(Editor.camera_rotation.x)*cos_angle_y);
-    
-    //Add position offset and set Editor.camera direction
-    direction.x += Editor.camera.position.x;
-    direction.y += Editor.camera.position.y;
-    direction.z += Editor.camera.position.z;
-    Editor.camera.lookAt(direction);
 
+		//Calculate direction vector
+		var cos_angle_y = Math.cos(Editor.camera_rotation.y);
+		var direction = new THREE.Vector3(Math.sin(Editor.camera_rotation.x)*cos_angle_y, Math.sin(Editor.camera_rotation.y), Math.cos(Editor.camera_rotation.x)*cos_angle_y);
+
+		//Add position offset and set Editor.camera direction
+		direction.x += Editor.camera.position.x;
+		direction.y += Editor.camera.position.y;
+		direction.z += Editor.camera.position.z;
+		Editor.camera.lookAt(direction);
+	}
+
+
+	/*
 	//Move Camera Front and Back
-	/*var speed_walk = 0.2;
+	var speed_walk = 0.2;
 	if(Keyboard.isKeyPressed(Keyboard.SHIFT))
 	{
 		speed_walk = 0.6;
@@ -255,23 +186,49 @@ Editor.update = function()
 
 	//Enable leap hand shadowing
 	setShadowReceiving(LeapDevice.scene, true);
-	setShadowCasting(LeapDevice.scene, true);*/
+	setShadowCasting(LeapDevice.scene, true);
+	*/
 
-	//Rasycast line from Editor.camera and mouse position
-	if(Mouse.buttonJustPressed(Mouse.RIGHT))
+	//Select objects
+	if(Editor.tool_mode == Editor.MODE_SELECT)
 	{
-		var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
-		
-		//Update the picking ray with the Editor.camera and mouse position	
-		Editor.raycaster.setFromCamera(mouse, Editor.camera);	
-
-		var intersects =  Editor.raycaster.intersectObjects(Editor.scene.children, true);
-		if(intersects.length > 0)
+		if(Mouse.buttonJustPressed(Mouse.LEFT))
 		{
-			intersects[0].object.material = new THREE.MeshNormalMaterial();
+			var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
+			
+			//Update the picking ray with the Editor.camera and mouse position	
+			Editor.raycaster.setFromCamera(mouse, Editor.camera);	
+
+			var intersects =  Editor.raycaster.intersectObjects(Editor.scene.scene.children, true);
+			if(intersects.length > 0)
+			{
+				intersects[0].object.material = new THREE.MeshNormalMaterial();
+			}
 		}
 	}
 
+}
+
+//Draw stuff into screen
+Editor.draw = function()
+{
+	Editor.cannon_renderer.update();
+	Editor.renderer.render(Editor.debug_scene, Editor.camera);
+	Editor.renderer.render(Editor.scene.scene, Editor.camera);
+}
+
+//Resize to fit window
+Editor.resize = function()
+{
+	Interface.updateInterface();
+}
+
+//Resize Camera
+Editor.resizeCamera = function()
+{
+	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
+	Editor.camera.aspect = Editor.canvas.width/Editor.canvas.height;
+	Editor.camera.updateProjectionMatrix();
 }
 
 //Add physics bounding box from objet to physics world
@@ -325,26 +282,4 @@ function setShadowCasting(object, state)
 	{
 		setShadowCasting(object.children[i], state);
 	}
-}
-
-//Draw stuff into screen
-Editor.draw = function()
-{
-	Editor.cannon_renderer.update();
-	Editor.renderer.render(Editor.debug_scene, Editor.camera);
-	Editor.renderer.render(Editor.scene, Editor.camera);
-}
-
-//Resize to fit window
-Editor.resize = function()
-{
-	Interface.updateInterface();
-}
-
-//Resize Camera
-Editor.resizeCamera = function()
-{
-	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
-	Editor.camera.aspect = Editor.canvas.width/Editor.canvas.height;
-	Editor.camera.updateProjectionMatrix();
 }

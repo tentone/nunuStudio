@@ -13,7 +13,8 @@ include("lib/three/loaders/collada/KeyFrameAnimation.js");
 //include("lib/three/vr/webvr-manager.js");
 //include("lib/three/vr/webvr-polyfill.js");
 
-include("lib/leap-0.6.4.js");
+include("lib/leap/leap-0.6.4.min.js");
+include("lib/leap/leap-plugins-0.1.11.min.js");
 
 include("lib/cannon/cannon.js");
 include("lib/cannon/ConvexGeometry.js");
