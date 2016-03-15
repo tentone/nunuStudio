@@ -170,10 +170,10 @@ Interface.initialize = function()
 		//TODO <ADD CODE HERE>
 
 		//Create Sphere
-		var geometry = new THREE.SphereGeometry(0.6, 16, 16);
+		var geometry = new THREE.CylinderGeometry(1, 1, 2, 32);
 		var material = new THREE.MeshPhongMaterial();
-		var sphere = new THREE.Mesh(geometry, material);
-		Editor.scene.scene.add(sphere);
+		var model = new THREE.Mesh(geometry, material);
+		Editor.scene.scene.add(model);
 	});
 
 	Interface.add_model.addOption("editor/files/icons/sphere.png", function()
@@ -190,6 +190,12 @@ Interface.initialize = function()
 	Interface.add_model.addOption("editor/files/icons/torus.png", function()
 	{
 		//TODO <ADD CODE HERE>
+
+		//Create Sphere
+		var geometry = new THREE.TorusGeometry(1, 0.5, 16, 100);
+		var material = new THREE.MeshPhongMaterial();
+		var model = new THREE.Mesh(geometry, material);
+		Editor.scene.scene.add(model);
 	});
 
 	Interface.add_model.addOption("editor/files/icons/pyramid.png", function()
