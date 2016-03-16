@@ -16,11 +16,6 @@ Main.cannon_renderer = null;
 //Object selection
 Main.raycaster = null;
 
-//VR stuff
-Main.vr_manager = null;
-Main.vr_controls = null;
-Main.vr_effect = null;
-
 //Initialize Main
 Main.initialize = function()
 {
@@ -31,7 +26,7 @@ Main.initialize = function()
 
 	//Set mouse lock true
 	App.setMouseLock(true);
-	App.showStats(true);
+	App.showStats(false);
 	
 	//Create Main.camera and Main.scene
 	Main.scene = new THREE.Scene();
@@ -44,12 +39,13 @@ Main.initialize = function()
 	Main.world = new CANNON.World();
 	Main.world.broadphase = new CANNON.NaiveBroadphase();
 	Main.world.gravity.set(0,-10,0);
-	Main.world.solver.tolerance = 0.05;
+	Main.world.solver.tolerance = 0.1;
 
 	Main.cannon_renderer = new THREE.CannonDebugRenderer(Main.debug_scene, Main.world);
 
 	//Initialize Leap Hand
 	LeapDevice.initialize();
+	LeapDevice.physics_world = Main.world;
 	Main.scene.add(LeapDevice.scene);
 
 	//Raycaster
@@ -60,13 +56,7 @@ Main.initialize = function()
 	Main.renderer.autoClear = false;
 	Main.renderer.setSize(canvas.width, canvas.height);
 	Main.renderer.shadowMap.enabled = true;
-	Main.renderer.shadowMap.type = THREE.PCFSoftShadowMap; //THREE.BasicShadowMap;
-
-	//Initialize VR manager
-	/*Main.vr_controls = new THREE.VRControls(Main.camera);
-	Main.vr_effect = new THREE.VREffect(Main.renderer);
-	Main.vr_effect.setSize(window.innerWidth, window.innerHeight);
-	Main.vr_manager = new WebVRManager(Main.renderer, Main.vr_effect, {hideButton:false, isUndistorted:false});*/
+	Main.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 	//Create Floor
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -86,45 +76,36 @@ Main.initialize = function()
 	body.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0), -Math.PI/2);
 	Main.world.addBody(body);
 
-	//Load eyebot model (normal/specular mapped)
-	var mtlLoader = new THREE.MTLLoader();
-	mtlLoader.setBaseUrl("data/models/eyebot/");
-	mtlLoader.load("data/models/eyebot/eyebot.mtl", function(materials)
-	{
-		materials.preload();
-		var objLoader = new THREE.OBJLoader();
-		objLoader.setMaterials(materials);
-		objLoader.load("data/models/eyebot/eyebot.obj", function(object)
-		{
-			object.scale.set(0.03, 0.03, 0.03);
-			object.position.set(4, 2, 4);
-			setShadowReceiving(object, true);
-			setShadowCasting(object, true);
+    var groundMaterial = new CANNON.Material();
+	var plane = new CANNON.Plane();
+	var body = new CANNON.Body({mass:0, material: groundMaterial});
+	body.addShape(plane);
+	body.position.x = 10;
+	body.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0), -Math.PI/2);
+	Main.world.addBody(body);
 
-			addPhysicsBoundingBox(object, Main.world);
-			Main.scene.add(object);
-		});
-	});
+    var groundMaterial = new CANNON.Material();
+	var plane = new CANNON.Plane();
+	var body = new CANNON.Body({mass:0, material: groundMaterial});
+	body.addShape(plane);
+	body.position.x = -10;
+	body.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0), Math.PI/2);
+	Main.world.addBody(body);
 
-	//Load bane model (multi material obj/mtl)
-	var mtlLoader = new THREE.MTLLoader();
-	mtlLoader.setBaseUrl("data/models/bane/");
-	mtlLoader.load("data/models/bane/bane.mtl", function(materials)
-	{
-		materials.preload();
-		var objLoader = new THREE.OBJLoader();
-		objLoader.setMaterials(materials);
-		objLoader.load("data/models/bane/bane.obj", function(object)
-		{
-			object.scale.set(0.008, 0.008, 0.008);
-			object.position.set(-4, 0, 4);
-			setShadowReceiving(object, true);
-			setShadowCasting(object, true);
+    var groundMaterial = new CANNON.Material();
+	var plane = new CANNON.Plane();
+	var body = new CANNON.Body({mass:0, material: groundMaterial});
+	body.addShape(plane);
+	body.position.z = -10;
+	Main.world.addBody(body);
 
-			addPhysicsBoundingBox(object, Main.world);
-			Main.scene.add(object);
-		});
-	});
+    var groundMaterial = new CANNON.Material();
+	var plane = new CANNON.Plane();
+	var body = new CANNON.Body({mass:0, material: groundMaterial});
+	body.addShape(plane);
+	body.position.z = 10;
+	body.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0), Math.PI);
+	Main.world.addBody(body);
 
 	//Dummy OBJ load test
 	var objLoader = new THREE.OBJLoader();
@@ -141,23 +122,22 @@ Main.initialize = function()
 	});
 
 	//Light
-	var light = new THREE.AmbientLight(0x555555);
+	var light = new THREE.AmbientLight(0xaaaaaa);
 	Main.scene.add(light);
 
-	light = new THREE.SpotLight(0x330000);
+	light = new THREE.SpotLight(0x333333);
 	light.position.set(15, 10, 0);
 	light.target.position.set(0, 0, 0);
 	light.castShadow = true;
 	Main.scene.add(light);
 
-	light = new THREE.SpotLight(0x000033);
+	light = new THREE.SpotLight(0x333333);
 	light.position.set(-15, 10, 0);
 	light.target.position.set(0, 0, 0);
 	light.castShadow = true;
-
 	Main.scene.add(light);
 
-	light = new THREE.SpotLight(0x003300);
+	light = new THREE.SpotLight(0x333333);
 	light.position.set(0, 10, -15);
 	light.target.position.set(0, 0, 0);
 	light.castShadow = true;
@@ -171,31 +151,20 @@ Main.initialize = function()
 	Main.debug_scene.add(axisHelper);
 
 	//Number of cubes
-	var N = 100;
-    
+	var N = 200;
     var mat = new CANNON.Material();
-
 
 	//Create N  objects for physics and render
 	for(var i = 0; i < N; i++)
 	{
 		var material = new THREE.MeshPhongMaterial({color: Math.floor(Math.random() * 0xffffff)});
-		if(Math.random() < 0.5)
-		{
-			var size = Math.random();
-			var shape = new CANNON.Box(new CANNON.Vec3(size, size, size));
-			var geometry = new THREE.BoxGeometry(size*2, size*2, size*2, 10, 10);
-		}
-		else
-		{
-			var size = Math.random() * 2;
-			var shape = new CANNON.Sphere(size);
-			var geometry = new THREE.SphereGeometry(size, 16, 16);
-		}
+		var size = Math.random() * 0.3 + 0.5;
+		var shape = new CANNON.Sphere(size);
+		var geometry = new THREE.SphereGeometry(size, 16, 16);
 
-		var body = new CANNON.Body({mass:1, linearDamping:0.1, angularDamping:0.1, material: mat});
+		var body = new CANNON.Body({mass:0.1, linearDamping:0.1, angularDamping:0.1, material: mat});
 		body.addShape(shape);
-		body.position.set(Math.random()*10 - 5, 2.5*i+0.5, Math.random()*10 - 5);
+		body.position.set(Math.random()*5 - 5, i + 0.5, Math.random()*5 - 5);
 		Main.physics_objects.push(body);
 		Main.world.addBody(body);
 
@@ -256,9 +225,6 @@ Main.update = function()
     direction.y += Main.camera.position.y;
     direction.z += Main.camera.position.z;
     Main.camera.lookAt(direction);
-	
-	//Update VR headset position and apply to Main.camera
-	//Main.vr_controls.update();
 
 	//Move Camera Front and Back
 	var speed_walk = 0.2;
@@ -316,7 +282,7 @@ Main.update = function()
 	//Rasycast line from Main.camera and mouse position
 	if(Mouse.buttonJustPressed(Mouse.MIDDLE))
 	{
-		var mouse = new THREE.Vector2((Mouse.pos.x/window.innerWidth )*2 - 1, -(Mouse.pos.y/window.innerHeight)*2 + 1);
+		var mouse = new THREE.Vector2((Mouse.pos.x/window.innerWidth)*2 - 1, -(Mouse.pos.y/window.innerHeight)*2 + 1);
 		
 		//Update the picking ray with the Main.camera and mouse position	
 		Main.raycaster.setFromCamera(mouse, Main.camera);	
@@ -386,7 +352,7 @@ function setShadowCasting(object, state)
 Main.draw = function()
 {
 	Main.cannon_renderer.update();
-	Main.renderer.render(Main.debug_scene, Main.camera);
+	//Main.renderer.render(Main.debug_scene, Main.camera);
 	Main.renderer.render(Main.scene, Main.camera);
 }
 

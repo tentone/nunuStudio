@@ -59,10 +59,6 @@ Editor.initialize = function(canvas)
 	Editor.camera.position.set(0, 5, -5);
 	Editor.camera_rotation = new THREE.Vector2(0,0);
 
-	//Initialize Leap Hand
-	//LeapDevice.initialize();
-	//Editor.scene.scene.add(LeapDevice.scene);
-
 	//Raycaster
 	Editor.raycaster = new THREE.Raycaster();
 
@@ -75,13 +71,6 @@ Editor.initialize = function(canvas)
 
 	//Update interface
 	Interface.updateInterface();
-
-	//Floor plane physics
-	/*var plane = new CANNON.Plane();
-	var body = new CANNON.Body({mass:0});
-	body.addShape(plane);
-	body.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0), -Math.PI/2);
-	Editor.scene.world.addBody(body);*/
 
 	//Light
 	var light = new THREE.AmbientLight(0xffffff);
@@ -132,7 +121,6 @@ Editor.update = function()
 		direction.z += Editor.camera.position.z;
 		Editor.camera.lookAt(direction);
 	}
-
 
 	/*
 	//Move Camera Front and Back

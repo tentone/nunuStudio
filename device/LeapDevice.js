@@ -12,7 +12,9 @@ LeapDevice.initialize = function()
 	LeapDevice.bone_meshes = [];
 	LeapDevice.arm_meshes = [];
 
-	LeapDevice.bone_physics = [];
+	//Physics
+	LeapDevice.physics_world = null;
+	LeapDevice.physics_bodys = [];
 
 	//Hand Atributes
 	LeapDevice.use_arm = false;
@@ -80,7 +82,54 @@ LeapDevice.updateLeap = function(frame)
 			armMesh.scale.set(arm.width/1200, arm.width/300, arm.length/150);
 		}
 	}
+
+	//Update Leap Colision box
+	if(LeapDevice.physics_world != null)
+	{
+		LeapDevice.updatePhysics(LeapDevice.scene, LeapDevice.physics_world)
+	}
+	
 }
+
+//Add physics bounding box from objet to physics world
+LeapDevice.updatePhysics = function(object, world)
+{	
+	//Remove all physics bodys
+	LeapDevice.physics_bodys.forEach(function(item)
+	{
+		LeapDevice.physics_world.removeBody(item);
+	});
+	LeapDevice.physics_bodys = [];
+
+	//Create new physics bodys
+	for(var j = 0; j < object.children.length; j++)
+	{
+		var box = new THREE.BoundingBoxHelper(object.children[j]);
+		box.update();
+
+		var hs = new THREE.Vector3(box.box.max.x - box.box.min.x, box.box.max.y - box.box.min.y, box.box.max.z - box.box.min.z);
+		hs.x *= object.scale.x;
+		hs.y *= object.scale.y;
+		hs.z *= object.scale.z;
+		hs.divideScalar(2);
+
+		var pos = box.box.center();
+		pos.x *= object.scale.x;
+		pos.y *= object.scale.y;
+		pos.z *= object.scale.z;
+		pos.add(object.position);
+
+		var shape = new CANNON.Box(new CANNON.Vec3(hs.x, hs.y, hs.z));
+		var body = new CANNON.Body({mass:0});
+		body.addShape(shape);
+		body.position.set(pos.x - object.position.x, pos.y - object.position.y, pos.z - object.position.z);
+		body.updateMassProperties();
+
+		LeapDevice.physics_bodys.push(body);
+		world.addBody(body);
+	}
+}
+
 
 LeapDevice.addMesh = function(meshes, material)
 {
