@@ -32,7 +32,7 @@ Main.initialize = function()
 	Main.scene = new THREE.Scene();
 	Main.debug_scene = new THREE.Scene();
 	Main.camera = new THREE.PerspectiveCamera(75, canvas.width/canvas.height, 0.1, 100000);
-	Main.camera.position.set(0, 5, -5);
+	Main.camera.position.set(0, 2, -4);
 	Main.camera_rotation = new THREE.Vector2(0,0);
 
 	//Init Cannon
@@ -76,7 +76,6 @@ Main.initialize = function()
 	body.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0), -Math.PI/2);
 	Main.world.addBody(body);
 
-    var groundMaterial = new CANNON.Material();
 	var plane = new CANNON.Plane();
 	var body = new CANNON.Body({mass:0, material: groundMaterial});
 	body.addShape(plane);
@@ -84,7 +83,6 @@ Main.initialize = function()
 	body.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0), -Math.PI/2);
 	Main.world.addBody(body);
 
-    var groundMaterial = new CANNON.Material();
 	var plane = new CANNON.Plane();
 	var body = new CANNON.Body({mass:0, material: groundMaterial});
 	body.addShape(plane);
@@ -92,14 +90,12 @@ Main.initialize = function()
 	body.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0), Math.PI/2);
 	Main.world.addBody(body);
 
-    var groundMaterial = new CANNON.Material();
 	var plane = new CANNON.Plane();
 	var body = new CANNON.Body({mass:0, material: groundMaterial});
 	body.addShape(plane);
 	body.position.z = -10;
 	Main.world.addBody(body);
 
-    var groundMaterial = new CANNON.Material();
 	var plane = new CANNON.Plane();
 	var body = new CANNON.Body({mass:0, material: groundMaterial});
 	body.addShape(plane);
@@ -176,7 +172,7 @@ Main.initialize = function()
     
     // contact behavior
     var mat_ground = new CANNON.ContactMaterial(groundMaterial, mat, { friction: 0.3, restitution: 0.3 });
-    var mat_ground = new CANNON.ContactMaterial(mat, mat, { friction: 0.5, restitution: 0.2 });
+    var mat_ground = new CANNON.ContactMaterial(mat, mat, { friction: 0.5, restitution: 0.3 });
     Main.world.addContactMaterial(mat_ground);
 }
 
