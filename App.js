@@ -16,11 +16,14 @@ include("lib/cannon/CannonDebugRenderer.js");
 include("lib/stats.min.js");
 
 include("device/LeapDevice.js");
+include("device/KinectDevice.js");
 
 include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
+include("core/animation/Joint.js");
+include("core/animation/Skeleton.js");
 include("core/Program.js");
 include("core/Scene.js");
 include("core/Script.js");

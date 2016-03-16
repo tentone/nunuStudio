@@ -82,12 +82,35 @@ Editor.initialize = function(canvas)
 
 	Editor.axis_helper = new THREE.AxisHelper(500);
 	Editor.debug_scene.add(Editor.axis_helper);
+
+	//Arrow Helpers
+	Editor.arrow_helper_x = new THREE.ArrowHelper(new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 1, 0xff0000);
+	Editor.debug_scene.add(Editor.arrow_helper_x);
+	Editor.arrow_helper_y = new THREE.ArrowHelper(new THREE.Vector3(0,1,0), new THREE.Vector3(0,0,0), 1, 0x00ff00);
+	Editor.debug_scene.add(Editor.arrow_helper_y);
+	Editor.arrow_helper_z = new THREE.ArrowHelper(new THREE.Vector3(0,0,1), new THREE.Vector3(0,0,0), 1, 0x0000ff);
+	Editor.debug_scene.add(Editor.arrow_helper_z);
+
+	//Box helpers
+	Editor.box_helper = new THREE.BoxHelper();
+	Editor.debug_scene.add(Editor.box_helper);
 }
 
 Editor.update = function()
 {
 	Interface.update();
 	
+	//Check if object is selected
+	if(Editor.selected_object != null)
+	{
+		Editor.box_helper.visible = true;
+		Editor.box_helper.update(Editor.selected_object);
+	}
+	else
+	{
+		Editor.box_helper.visible = false;
+	}
+
 	//Update Scene if on test mode
 	if(Editor.state == Editor.STATE_TESTING)
 	{
@@ -122,15 +145,12 @@ Editor.update = function()
 		Editor.camera.lookAt(direction);
 	}
 
-	/*
+	
 	//Move Camera Front and Back
 	var speed_walk = 0.2;
-	if(Keyboard.isKeyPressed(Keyboard.SHIFT))
-	{
-		speed_walk = 0.6;
-	}
 	var angle_cos = Math.cos(Editor.camera_rotation.x);
 	var angle_sin = Math.sin(Editor.camera_rotation.x);
+
 	if(Keyboard.isKeyPressed(Keyboard.S))
 	{
 		Editor.camera.position.z -= speed_walk * angle_cos;
@@ -142,12 +162,6 @@ Editor.update = function()
 		Editor.camera.position.x += speed_walk * angle_sin;
 	}
 
-	//Hand Leap Follow Camera
-	LeapDevice.scene.rotation.y = Math.PI + Editor.camera_rotation.x;
-	LeapDevice.scene.position.set(Editor.camera.position.x, Editor.camera.position.y-2, Editor.camera.position.z);
-	LeapDevice.scene.position.z += 2 * angle_cos;
-	LeapDevice.scene.position.x += 2 * angle_sin;
-	
 	//Move Camera Lateral
 	var angle_cos = Math.cos(Editor.camera_rotation.x + Math.PI/2.0);
 	var angle_sin = Math.sin(Editor.camera_rotation.x + Math.PI/2.0);
@@ -172,11 +186,6 @@ Editor.update = function()
 		Editor.camera.position.y -= 0.1;
 	}
 
-	//Enable leap hand shadowing
-	setShadowReceiving(LeapDevice.scene, true);
-	setShadowCasting(LeapDevice.scene, true);
-	*/
-
 	//Select objects
 	if(Editor.tool_mode == Editor.MODE_SELECT)
 	{
@@ -190,7 +199,12 @@ Editor.update = function()
 			var intersects =  Editor.raycaster.intersectObjects(Editor.scene.scene.children, true);
 			if(intersects.length > 0)
 			{
-				intersects[0].object.material = new THREE.MeshNormalMaterial();
+				Editor.selected_object = intersects[0].object;
+				//intersects[0].object.material = new THREE.MeshNormalMaterial();
+			}
+			else
+			{
+				Editor.selected_object = null;
 			}
 		}
 	}
