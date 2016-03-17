@@ -83,14 +83,6 @@ Editor.initialize = function(canvas)
 	Editor.axis_helper = new THREE.AxisHelper(500);
 	Editor.debug_scene.add(Editor.axis_helper);
 
-	//Arrow Helpers
-	Editor.arrow_helper_x = new THREE.ArrowHelper(new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 1, 0xff0000);
-	Editor.debug_scene.add(Editor.arrow_helper_x);
-	Editor.arrow_helper_y = new THREE.ArrowHelper(new THREE.Vector3(0,1,0), new THREE.Vector3(0,0,0), 1, 0x00ff00);
-	Editor.debug_scene.add(Editor.arrow_helper_y);
-	Editor.arrow_helper_z = new THREE.ArrowHelper(new THREE.Vector3(0,0,1), new THREE.Vector3(0,0,0), 1, 0x0000ff);
-	Editor.debug_scene.add(Editor.arrow_helper_z);
-
 	//Box helpers
 	Editor.box_helper = new THREE.BoxHelper();
 	Editor.debug_scene.add(Editor.box_helper);
@@ -189,7 +181,7 @@ Editor.update = function()
 	//Select objects
 	if(Editor.tool_mode == Editor.MODE_SELECT)
 	{
-		if(Mouse.buttonJustPressed(Mouse.LEFT))
+		if(Mouse.buttonJustReleased(Mouse.LEFT))
 		{
 			var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
 			
