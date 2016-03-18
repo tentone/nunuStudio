@@ -1,4 +1,5 @@
-include("lib/three/three.js");
+include("lib/three/three.min.js");
+include("lib/three/stats.min.js");
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/OBJMTLLoader.js");
@@ -12,8 +13,6 @@ include("lib/leap/leap-plugins-0.1.11.min.js");
 include("lib/cannon/cannon.js");
 include("lib/cannon/ConvexGeometry.js");
 include("lib/cannon/CannonDebugRenderer.js");
-
-include("lib/stats.min.js");
 
 include("device/LeapDevice.js");
 include("device/KinectDevice.js");
@@ -32,14 +31,8 @@ include("core/Program.js");
 //App class
 function App(){}
 
-//App variables
-App.stats = null;
-App.main = null;
-App.delta_time = 0;
-App.time = 0;
-
-//App initialization (entry point)
-App.initialize = function(main)//, canvas)
+//App initialization
+App.initialize = function(main)
 {
 	//Stats tool
 	App.stats = new Stats();

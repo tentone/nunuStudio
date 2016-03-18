@@ -70,6 +70,14 @@ Button.prototype.updateInterface = updateInterface;
 Button.prototype.setCallback = setCallback;
 Button.prototype.destroy = destroy;
 Button.prototype.setClass = setClass;
+Button.prototype.setText = setText;
+
+//Set Button text
+function setText(text)
+{
+	this.text = text;
+	this.span.innerHTML = this.text;
+}
 
 //Set element class
 function setClass(name)

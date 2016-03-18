@@ -36,6 +36,7 @@ Editor.initialize = function(canvas)
 	Editor.tool_mode = Editor.MODE_SELECT;
 	Editor.state = Editor.STATE_EDITING;
 
+	//Editor Selected object
 	Editor.selected_object = null;
 
 	//Initialize User Interface
@@ -57,9 +58,11 @@ Editor.initialize = function(canvas)
 	Editor.debug_scene = new THREE.Scene();
 	Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.debug_scene, Editor.scene.world);
 
-	Editor.camera = new THREE.PerspectiveCamera(75, Editor.canvas.width/Editor.canvas.height, 0.1, 100000);
+	//Editor Camera
+	Editor.camera = new THREE.PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 100000);
 	Editor.camera.position.set(0, 5, -5);
 	Editor.camera_rotation = new THREE.Vector2(0,0);
+	Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
 
 	//Raycaster
 	Editor.raycaster = new THREE.Raycaster();
@@ -78,10 +81,9 @@ Editor.initialize = function(canvas)
 	var light = new THREE.AmbientLight(0xffffff);
 	Editor.scene.scene.add(light);
 
-	//Editor helpers
+	//Grid and axis helpers
 	Editor.grid_helper = new THREE.GridHelper(500, 20);
 	Editor.debug_scene.add(Editor.grid_helper);
-
 	Editor.axis_helper = new THREE.AxisHelper(500);
 	Editor.debug_scene.add(Editor.axis_helper);
 
@@ -90,89 +92,76 @@ Editor.initialize = function(canvas)
 	Editor.debug_scene.add(Editor.box_helper);
 }
 
+//Update Editor
 Editor.update = function()
 {
 	//Update editor interface
 	Interface.update();
-	
-	//Check if object is selected
-	if(Editor.selected_object != null)
-	{
-		Editor.box_helper.visible = true;
-		Editor.box_helper.update(Editor.selected_object);
-	}
-	else
-	{
-		Editor.box_helper.visible = false;
-	}
-
-	//Update Scene if on test mode
-	if(Editor.state == Editor.STATE_TESTING)
-	{
-		Editor.scene.update();
-	}
-
-	//Check if mouse inside canvas
-	if(Mouse.insideCanvas())
-	{
-		//Rotate camera
-		if(Mouse.buttonPressed(Mouse.LEFT))
-		{
-			Editor.camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
-			Editor.camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
-
-			//Limit Vertical Rotation to 90 degrees
-			var pid2 = 1.57;
-			if(Editor.camera_rotation.y < -pid2)
-			{
-				Editor.camera_rotation.y = -pid2;
-			}
-			else if(Editor.camera_rotation.y > pid2)
-			{
-				Editor.camera_rotation.y = pid2;
-			}
-
-			//Calculate direction vector
-			var cos_angle_y = Math.cos(Editor.camera_rotation.y);
-			var direction = new THREE.Vector3(Math.sin(Editor.camera_rotation.x)*cos_angle_y, Math.sin(Editor.camera_rotation.y), Math.cos(Editor.camera_rotation.x)*cos_angle_y);
-
-			//Add position offset and set Editor.camera direction
-			direction.x += Editor.camera.position.x;
-			direction.y += Editor.camera.position.y;
-			direction.z += Editor.camera.position.z;
-			Editor.camera.lookAt(direction);
-		}
-		//Move Camera on X and Z
-		else if(Mouse.buttonPressed(Mouse.RIGHT))
-		{
-			//Move Camera Front and Back
-			var speed = 0.1;
-			var angle_cos = Math.cos(Editor.camera_rotation.x);
-			var angle_sin = Math.sin(Editor.camera_rotation.x);
-			Editor.camera.position.z += Mouse.pos_diff.y * speed * angle_cos;
-			Editor.camera.position.x += Mouse.pos_diff.y * speed * angle_sin;
-
-			//Move Camera Lateral
-			var angle_cos = Math.cos(Editor.camera_rotation.x + Math.PI/2.0);
-			var angle_sin = Math.sin(Editor.camera_rotation.x + Math.PI/2.0);
-			Editor.camera.position.z += Mouse.pos_diff.x * speed * angle_cos;
-			Editor.camera.position.x += Mouse.pos_diff.x * speed * angle_sin;
-		}
-	}
-
-	//Move Camera UP and DOWN
-	if(Keyboard.isKeyPressed(Keyboard.SPACEBAR))
-	{
-		Editor.camera.position.y += 0.1;
-	}
-	if(Keyboard.isKeyPressed(Keyboard.CTRL))
-	{
-		Editor.camera.position.y -= 0.1;
-	}
 
 	//Editing a scene
-	if(Editor.state = Editor.STATE_EDITING)
+	if(Editor.state == Editor.STATE_EDITING)
 	{
+		//Check if object is selected
+		if(Editor.selected_object != null)
+		{
+			Editor.box_helper.visible = true;
+			Editor.box_helper.update(Editor.selected_object);
+		}
+		else
+		{
+			Editor.box_helper.visible = false;
+		}
+
+		//Check if mouse inside canvas
+		if(Mouse.insideCanvas())
+		{
+			//Rotate camera
+			if(Mouse.buttonPressed(Mouse.LEFT))
+			{
+				Editor.camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
+				Editor.camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
+
+				//Limit Vertical Rotation to 90 degrees
+				var pid2 = 1.57;
+				if(Editor.camera_rotation.y < -pid2)
+				{
+					Editor.camera_rotation.y = -pid2;
+				}
+				else if(Editor.camera_rotation.y > pid2)
+				{
+					Editor.camera_rotation.y = pid2;
+				}
+
+				Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
+			}
+			//Move Camera on X and Z
+			else if(Mouse.buttonPressed(Mouse.RIGHT))
+			{
+				//Move Camera Front and Back
+				var speed = 0.1;
+				var angle_cos = Math.cos(Editor.camera_rotation.x);
+				var angle_sin = Math.sin(Editor.camera_rotation.x);
+				Editor.camera.position.z += Mouse.pos_diff.y * speed * angle_cos;
+				Editor.camera.position.x += Mouse.pos_diff.y * speed * angle_sin;
+
+				//Move Camera Lateral
+				var angle_cos = Math.cos(Editor.camera_rotation.x + Math.PI/2.0);
+				var angle_sin = Math.sin(Editor.camera_rotation.x + Math.PI/2.0);
+				Editor.camera.position.z += Mouse.pos_diff.x * speed * angle_cos;
+				Editor.camera.position.x += Mouse.pos_diff.x * speed * angle_sin;
+			}
+		}
+
+		//Move Camera UP and DOWN
+		if(Keyboard.isKeyPressed(Keyboard.SPACEBAR))
+		{
+			Editor.camera.position.y += 0.1;
+		}
+		if(Keyboard.isKeyPressed(Keyboard.CTRL))
+		{
+			Editor.camera.position.y -= 0.1;
+		}
+
 		//Select objects
 		if(Editor.tool_mode == Editor.MODE_SELECT)
 		{
@@ -206,15 +195,21 @@ Editor.update = function()
 			//TODO <ADD CODE HERE>
 		}
 	}
+	//Update Scene if on test mode
+	else if(Editor.state == Editor.STATE_TESTING)
+	{
+		Editor.scene.update();
+	}
 }
 
 //Draw stuff into screen
 Editor.draw = function()
 {
 	//Render debug scene
-	if(Editor.state != Editor.STATE_TESTING)
+	if(Editor.state == Editor.STATE_EDITING)
 	{
 		Editor.cannon_renderer.update();
+		Editor.cannon_renderer.visible = false;
 		Editor.renderer.render(Editor.debug_scene, Editor.camera);
 	}
 
@@ -234,4 +229,18 @@ Editor.resizeCamera = function()
 	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
 	Editor.camera.aspect = Editor.canvas.width/Editor.canvas.height;
 	Editor.camera.updateProjectionMatrix();
+}
+
+//Set camera rotation
+Editor.setCameraRotation = function(camera_rotation, camera)
+{
+	//Calculate direction vector
+	var cos_angle_y = Math.cos(camera_rotation.y);
+	var direction = new THREE.Vector3(Math.sin(camera_rotation.x)*cos_angle_y, Math.sin(camera_rotation.y), Math.cos(camera_rotation.x)*cos_angle_y);
+
+	//Add position offset and set camera direction
+	direction.x += camera.position.x;
+	direction.y += camera.position.y;
+	direction.z += camera.position.z;
+	camera.lookAt(direction);
 }

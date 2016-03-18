@@ -6,10 +6,9 @@ Interface.initialize = function()
 	Interface.theme = new Style();
 	Interface.theme.setStyleSheet("editor/files/css/dark.css");
 
-	//Tab
+	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabContainer();
 	Interface.tab.addOption("Scene", "editor/files/icons/models.png", false);
-	Interface.tab.options[0].division.element.className = "panel";
 	Interface.tab.addOption("Settings", "editor/files/icons/cogwheel.png", true);
 	Interface.tab.addOption("Script", "editor/files/icons/screen.png", true);
 
@@ -27,24 +26,23 @@ Interface.initialize = function()
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer = new DivisionResizable();
 	Interface.asset_explorer.resizable_side = DivisionResizable.TOP;
-	Interface.asset_explorer.size.y = 200;
+	Interface.asset_explorer.size.y = 150;
+	Interface.asset_explorer.updateInterface();
+
+	Interface.asset_explorer_bar = new Division(Interface.asset_explorer.element);
+	Interface.asset_explorer.position.set(0, 0);
+	Interface.asset_explorer_bar.size.y = 20;
+	Interface.asset_explorer_bar.element.className = "bar";
+	Interface.asset_explorer_bar.updateInterface();
 
 	//------------------------------------Explorer------------------------------------
 	Interface.explorer = new DivisionResizable();
 	Interface.explorer.size.x = 300;
 
-	//Test Text
-	Interface.text = new Text(Interface.explorer.element);
-	Interface.text.text = "TextBox:";
-	Interface.text.alignment = Text.CENTER;
-	Interface.text.position.set(40, 25);
-	Interface.text.updateInterface();
-
-	//Test Text Box
-	Interface.text_box = new TextBox(Interface.explorer.element);
-	Interface.text_box.position.set(80, 10);
-	Interface.text_box.size.set(180, 25);
-	Interface.text_box.updateInterface();
+	Interface.explorer_resizable = new DualDivisionResizable(Interface.explorer.element);
+	Interface.explorer_resizable.orientation = DualDivisionResizable.VERTICAL;
+	Interface.explorer_resizable.tab_position = 400;
+	Interface.explorer_resizable.position.set(0, 0);
 
 	//------------------------------------Tool Bar------------------------------------
 	Interface.tool_bar = new Division();
@@ -282,23 +280,32 @@ Interface.initialize = function()
 
 	//About
 	Interface.about = new Button();
-	Interface.about.text = "About";
+	Interface.about.text = "Run";
 	Interface.about.size.set(150, Interface.top_bar.size.y);
 	Interface.about.position.set(300, 0);
 	Interface.about.updateInterface();
 	Interface.about.setCallback(function()
 	{
-		//TODO <ABOUT>
+		//TODO <ADD CODE HERE>
+		if(Interface.about.text == "Run")
+		{
+			Interface.about.setText("Stop");
+			Editor.state = Editor.STATE_TESTING;
+		}
+		else
+		{
+			Interface.about.setText("Run");
+			Editor.state = Editor.STATE_EDITING;
+		}
 	});
 }
 
 Interface.update = function()
 {
-	Interface.tool_bar.update();
 	Interface.explorer.update();
 	Interface.asset_explorer.update();
-	Interface.add_model.update();
 	Interface.dual_test.update();
+	Interface.explorer_resizable.update();
 }
 
 Interface.updateInterface = function()
@@ -306,30 +313,36 @@ Interface.updateInterface = function()
 	//Window size
 	var size = new THREE.Vector2(window.innerWidth, window.innerHeight);
 
-	//Menu Top bar
+	//----------------------------------Menu Top Bar----------------------------------
 	Interface.top_bar.size.x = size.x;
 	Interface.top_bar.updateInterface();
 
-	//Tool bar
+	//Logo
+	Interface.image.position.set(size.x - Interface.image.size.x, 5);
+	Interface.image.updateInterface();
+
+	//------------------------------------Tool Bar------------------------------------
 	Interface.tool_bar.position.set(0, Interface.top_bar.size.y);
 	Interface.tool_bar.size.y = size.y - Interface.top_bar.size.y;
 	Interface.tool_bar.updateInterface();
 
-	//Explorer
+	//------------------------------------Explorer------------------------------------
 	Interface.explorer.size.y = (size.y - Interface.top_bar.size.y);
 	Interface.explorer.position.set(size.x - Interface.explorer.size.x, Interface.top_bar.size.y);
 	Interface.explorer.updateInterface();
 
-	//Asset explorer
+	Interface.explorer_resizable.size.set(Interface.explorer.size.x - Interface.explorer.resize_tab_size, Interface.explorer.size.y);
+	Interface.explorer_resizable.updateInterface();
+
+	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;
 	Interface.asset_explorer.position.set(Interface.tool_bar.size.x, size.y - Interface.asset_explorer.size.y);
 	Interface.asset_explorer.updateInterface();
 
-	//Image
-	Interface.image.position.set(size.x - Interface.image.size.x, 5);
-	Interface.image.updateInterface();
+	Interface.asset_explorer_bar.size.x = Interface.asset_explorer.size.x;
+	Interface.asset_explorer_bar.updateInterface();
 
-	//Tab
+	//------------------------------------Tab Container-------------------------------
 	Interface.tab.position.set(Interface.tool_bar.size.x, Interface.top_bar.size.y);
 	Interface.tab.size.x = (size.x - Interface.tool_bar.size.x - Interface.explorer.size.x);
 	Interface.tab.size.y = (size.y - Interface.top_bar.size.y - Interface.asset_explorer.size.y); 

@@ -1,5 +1,4 @@
 {
   "name": "interact",
-  "productName": "interact Editor",
-  "main": "Electron.js"
+  "main": "editor.html"
 }

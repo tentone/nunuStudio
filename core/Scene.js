@@ -1,7 +1,6 @@
 function Scene()
 {
-	
-	//Objects composing the scene
+	//Objects that compose the scene
 	this.objects = [];
 	
 	//Create three scene
@@ -14,9 +13,16 @@ function Scene()
 	this.world.solver.tolerance = 0.05;
 }
 
+//Functions prototypes
 Scene.prototype.update = update;
 
+//Update scene
 function update()
 {
 	this.world.step(1/60);
+	
+	for(var i = 0; i < this.objects.length; i++)
+	{
+		this.objects[i].update();
+	}
 }

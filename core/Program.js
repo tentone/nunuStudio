@@ -10,8 +10,10 @@ function Program()
 	this.scenes = [];
 }
 
+//Function prototypes
 Program.prototype.createScene = createScene;
 
+//Create new Scene
 function createScene()
 {
 	var scene = new Scene();

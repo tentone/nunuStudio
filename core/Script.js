@@ -1,16 +1,22 @@
 function Script()
 {
-	//Script name
+	//Script info
 	this.name = "script";
 	this.author = "";
+	this.version = "";
+
+	//Script parent
+	this.parent = null;
 
 	//Script Code
 	this.code = 'console.log("Hello World!");';	
 }
 
-Script.prototype.run = run;
+//Function Prototype
+Script.prototype.update = update;
 
-function run()
+//Update Script (run)
+function update()
 {
 	eval(this.code);
 }

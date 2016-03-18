@@ -150,7 +150,7 @@ function addOption(image, callback)
 		self.expanded = false;
 		self.updateInterface();
 	};
-
+	
 	this.options.push(button);
 	this.updatePanelSize();
 	this.updateInterface();

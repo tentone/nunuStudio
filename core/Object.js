@@ -1,10 +1,14 @@
 function Object()
 {
+	//Object Info
 	this.name = "obj";
+
+	//Childrens and scripts
 	this.children = [];
 	this.scripts = [];
 
-	this.childs = null;
+	//ThreeJS mesh and CannonJS body instances
+	this.mesh = null;
 	this.body = null;
 }
 
@@ -14,14 +18,19 @@ Object.prototype.createPhysicsBoundingBox = createPhysicsBoundingBox;
 Object.prototype.setShadowReceiving = setShadowReceiving;
 Object.prototype.setShadowCasting = setShadowCasting;
 
+//Update object status
 function update()
 {
-
+	for(var i = 0; i < this.scripts.length; i++)
+	{
+		this.scripts[i].update();
+	}
 }
 
 //Add physics bounding box from objet to physics world
 function createPhysicsBoundingBox(object, world)
 {
+	//TODO <APPLY TO SELF>
 	for(var j = 0; j < object.children.length; j++)
 	{
 		var box = new THREE.BoundingBoxHelper(object.children[j]);
@@ -53,6 +62,7 @@ function createPhysicsBoundingBox(object, world)
 //Set shadow receiving
 function setShadowReceiving(object, state)
 {
+	//TODO <APPLY TO SELF>
 	object.receiveShadow = true;
 
 	for(var i = 0; i < object.children.length; i++)
@@ -64,6 +74,7 @@ function setShadowReceiving(object, state)
 //Enable shadow casting
 function setShadowCasting(object, state)
 {
+	//TODO <APPLY TO SELF>
 	object.castShadow = true;
 
 	for(var i = 0; i < object.children.length; i++)
