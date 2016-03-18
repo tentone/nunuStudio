@@ -16,26 +16,28 @@ include("editor/ui/ButtonImageToggle.js");
 
 include("editor/Interface.js");
 
-//Editor declaration
 function Editor(){}
 
+//Editor state
+Editor.STATE_IDLE = 8; //Editing scripts
+Editor.STATE_EDITING = 9; //Editing a scene
+Editor.STATE_TESTING = 11; //Testing a scene
+
+//Editor editing modes
 Editor.MODE_SELECT = 0;
 Editor.MODE_MOVE = 1;
 Editor.MODE_RESIZE = 2;
 Editor.MODE_ROTATE = 3;
 
-Editor.STATE_IDLE = 8;
-Editor.STATE_EDITING = 9;
-Editor.STATE_TESTING = 11;
-
-Editor.tool_mode = Editor.MODE_SELECT;
-Editor.state = Editor.STATE_EDITING;
-
-Editor.selected_object = null;
-
 //Initialize Main
 Editor.initialize = function(canvas)
 {
+	//Editor initial state
+	Editor.tool_mode = Editor.MODE_SELECT;
+	Editor.state = Editor.STATE_EDITING;
+
+	Editor.selected_object = null;
+
 	//Initialize User Interface
 	Interface.initialize();
 
@@ -90,6 +92,7 @@ Editor.initialize = function(canvas)
 
 Editor.update = function()
 {
+	//Update editor interface
 	Interface.update();
 	
 	//Check if object is selected
@@ -109,63 +112,52 @@ Editor.update = function()
 		Editor.scene.update();
 	}
 
-	//Rotate Camera
-	if(Mouse.buttonPressed(Mouse.LEFT))
+	//Check if mouse inside canvas
+	if(Mouse.insideCanvas())
 	{
-		Editor.camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
-		Editor.camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
-
-		//Limit Vertical Rotation to 90 degrees
-		var pid2 = 1.57;
-		if(Editor.camera_rotation.y < -pid2)
+		//Rotate camera
+		if(Mouse.buttonPressed(Mouse.LEFT))
 		{
-			Editor.camera_rotation.y = -pid2;
+			Editor.camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
+			Editor.camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
+
+			//Limit Vertical Rotation to 90 degrees
+			var pid2 = 1.57;
+			if(Editor.camera_rotation.y < -pid2)
+			{
+				Editor.camera_rotation.y = -pid2;
+			}
+			else if(Editor.camera_rotation.y > pid2)
+			{
+				Editor.camera_rotation.y = pid2;
+			}
+
+			//Calculate direction vector
+			var cos_angle_y = Math.cos(Editor.camera_rotation.y);
+			var direction = new THREE.Vector3(Math.sin(Editor.camera_rotation.x)*cos_angle_y, Math.sin(Editor.camera_rotation.y), Math.cos(Editor.camera_rotation.x)*cos_angle_y);
+
+			//Add position offset and set Editor.camera direction
+			direction.x += Editor.camera.position.x;
+			direction.y += Editor.camera.position.y;
+			direction.z += Editor.camera.position.z;
+			Editor.camera.lookAt(direction);
 		}
-		else if(Editor.camera_rotation.y > pid2)
+		//Move Camera on X and Z
+		else if(Mouse.buttonPressed(Mouse.RIGHT))
 		{
-			Editor.camera_rotation.y = pid2;
+			//Move Camera Front and Back
+			var speed = 0.1;
+			var angle_cos = Math.cos(Editor.camera_rotation.x);
+			var angle_sin = Math.sin(Editor.camera_rotation.x);
+			Editor.camera.position.z += Mouse.pos_diff.y * speed * angle_cos;
+			Editor.camera.position.x += Mouse.pos_diff.y * speed * angle_sin;
+
+			//Move Camera Lateral
+			var angle_cos = Math.cos(Editor.camera_rotation.x + Math.PI/2.0);
+			var angle_sin = Math.sin(Editor.camera_rotation.x + Math.PI/2.0);
+			Editor.camera.position.z += Mouse.pos_diff.x * speed * angle_cos;
+			Editor.camera.position.x += Mouse.pos_diff.x * speed * angle_sin;
 		}
-
-		//Calculate direction vector
-		var cos_angle_y = Math.cos(Editor.camera_rotation.y);
-		var direction = new THREE.Vector3(Math.sin(Editor.camera_rotation.x)*cos_angle_y, Math.sin(Editor.camera_rotation.y), Math.cos(Editor.camera_rotation.x)*cos_angle_y);
-
-		//Add position offset and set Editor.camera direction
-		direction.x += Editor.camera.position.x;
-		direction.y += Editor.camera.position.y;
-		direction.z += Editor.camera.position.z;
-		Editor.camera.lookAt(direction);
-	}
-
-	
-	//Move Camera Front and Back
-	var speed_walk = 0.2;
-	var angle_cos = Math.cos(Editor.camera_rotation.x);
-	var angle_sin = Math.sin(Editor.camera_rotation.x);
-
-	if(Keyboard.isKeyPressed(Keyboard.S))
-	{
-		Editor.camera.position.z -= speed_walk * angle_cos;
-		Editor.camera.position.x -= speed_walk * angle_sin;
-	}
-	if(Keyboard.isKeyPressed(Keyboard.W))
-	{
-		Editor.camera.position.z += speed_walk * angle_cos;
-		Editor.camera.position.x += speed_walk * angle_sin;
-	}
-
-	//Move Camera Lateral
-	var angle_cos = Math.cos(Editor.camera_rotation.x + Math.PI/2.0);
-	var angle_sin = Math.sin(Editor.camera_rotation.x + Math.PI/2.0);
-	if(Keyboard.isKeyPressed(Keyboard.A))
-	{
-		Editor.camera.position.z += speed_walk * angle_cos;
-		Editor.camera.position.x += speed_walk * angle_sin;
-	}
-	if(Keyboard.isKeyPressed(Keyboard.D))
-	{
-		Editor.camera.position.z -= speed_walk * angle_cos;
-		Editor.camera.position.x -= speed_walk * angle_sin;
 	}
 
 	//Move Camera UP and DOWN
@@ -178,36 +170,55 @@ Editor.update = function()
 		Editor.camera.position.y -= 0.1;
 	}
 
-	//Select objects
-	if(Editor.tool_mode == Editor.MODE_SELECT)
+	//Editing a scene
+	if(Editor.state = Editor.STATE_EDITING)
 	{
-		if(Mouse.buttonJustReleased(Mouse.LEFT))
+		//Select objects
+		if(Editor.tool_mode == Editor.MODE_SELECT)
 		{
-			var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
-			
-			//Update the picking ray with the Editor.camera and mouse position	
-			Editor.raycaster.setFromCamera(mouse, Editor.camera);	
+			if(Mouse.buttonJustReleased(Mouse.LEFT))
+			{
+				var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
+				
+				//Update the picking ray with the Editor.camera and mouse position	
+				Editor.raycaster.setFromCamera(mouse, Editor.camera);	
 
-			var intersects =  Editor.raycaster.intersectObjects(Editor.scene.scene.children, true);
-			if(intersects.length > 0)
-			{
-				Editor.selected_object = intersects[0].object;
-				//intersects[0].object.material = new THREE.MeshNormalMaterial();
-			}
-			else
-			{
-				Editor.selected_object = null;
+				var intersects =  Editor.raycaster.intersectObjects(Editor.scene.scene.children, true);
+				if(intersects.length > 0)
+				{
+					Editor.selected_object = intersects[0].object;
+				}
 			}
 		}
+		//Move objects
+		else if(Editor.tool_mode == Editor.MODE_MOVE)
+		{
+			//TODO <ADD CODE HERE>
+		}
+		//Resize Objects
+		else if(Editor.tool_mode == Editor.MODE_RESIZE)
+		{
+			//TODO <ADD CODE HERE>
+		}
+		//Rotate Objects
+		else if(Editor.tool_mode == Editor.MODE_ROTATE)
+		{
+			//TODO <ADD CODE HERE>
+		}
 	}
-
 }
 
 //Draw stuff into screen
 Editor.draw = function()
 {
-	Editor.cannon_renderer.update();
-	Editor.renderer.render(Editor.debug_scene, Editor.camera);
+	//Render debug scene
+	if(Editor.state != Editor.STATE_TESTING)
+	{
+		Editor.cannon_renderer.update();
+		Editor.renderer.render(Editor.debug_scene, Editor.camera);
+	}
+
+	//Render scene
 	Editor.renderer.render(Editor.scene.scene, Editor.camera);
 }
 
@@ -223,57 +234,4 @@ Editor.resizeCamera = function()
 	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
 	Editor.camera.aspect = Editor.canvas.width/Editor.canvas.height;
 	Editor.camera.updateProjectionMatrix();
-}
-
-//Add physics bounding box from objet to physics world
-function addPhysicsBoundingBox(object, world)
-{
-	for(var j = 0; j < object.children.length; j++)
-	{
-		var box = new THREE.BoundingBoxHelper(object.children[j]);
-		box.update();
-
-		var hs = new THREE.Vector3(box.box.max.x - box.box.min.x, box.box.max.y - box.box.min.y, box.box.max.y - box.box.min.z);
-		hs.x *= object.scale.x;
-		hs.y *= object.scale.y;
-		hs.z *= object.scale.z;
-		hs.divideScalar(2);
-
-		var pos = box.box.center();
-		pos.x *= object.scale.x;
-		pos.y *= object.scale.y;
-		pos.z *= object.scale.z;
-		pos.add(object.position);
-
-		var shape = new CANNON.Box(new CANNON.Vec3(hs.x, hs.y, hs.z));
-		var body = new CANNON.Body({mass:0});
-		body.addShape(shape);
-		body.quaternion.setFromEuler(0,Math.PI/2,0,"XYZ");
-		body.position.set(pos.x, pos.y, pos.z);
-		body.updateMassProperties();
-
-		world.addBody(body);
-	}
-}
-
-//Set shadow receiving
-function setShadowReceiving(object, state)
-{
-	object.receiveShadow = true;
-
-	for(var i = 0; i < object.children.length; i++)
-	{
-		setShadowReceiving(object.children[i], state);
-	}
-}
-
-//Enable shadow casting
-function setShadowCasting(object, state)
-{
-	object.castShadow = true;
-
-	for(var i = 0; i < object.children.length; i++)
-	{
-		setShadowCasting(object.children[i], state);
-	}
 }

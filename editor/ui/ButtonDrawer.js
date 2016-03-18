@@ -59,19 +59,35 @@ function ButtonDrawer(parent)
 	var self = this;
 	this.element.onclick = function()
 	{
-		self.expanded = !self.expanded;
+		self.expanded = true;
 		self.updateInterface();
 	};
 
 	//Mouse over and mouse out events
 	this.element.onmouseover = function()
 	{
+		self.expanded = true;
+		self.updateInterface();
 		self.element.className = "button_over";
 	};
 
 	this.element.onmouseout = function()
 	{
+		self.expanded = false;
+		self.updateInterface();
 		self.element.className = "button";
+	};
+
+	this.panel.onmouseover = function()
+	{
+		self.expanded = true;
+		self.updateInterface();
+	};
+
+	this.panel.onmouseout = function()
+	{
+		self.expanded = false;
+		self.updateInterface();
 	};
 
 	this.updatePanelSize();

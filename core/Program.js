@@ -1,6 +1,6 @@
 function Program()
 {
-	//Activity Information
+	//Program Info
 	this.name = "program";
 	this.description = "";
 	this.author = "";
@@ -8,14 +8,13 @@ function Program()
 
 	//Screens
 	this.scenes = [];
-
-	//Assets list
-	this.assets = [];
 }
 
 Program.prototype.createScene = createScene;
 
 function createScene()
 {
-	this.scenes.push(new Scene());
+	var scene = new Scene();
+	this.scenes.push();
+	return scene;
 }

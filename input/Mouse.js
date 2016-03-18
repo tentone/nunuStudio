@@ -26,10 +26,18 @@ Mouse.initialize = function()
 	Mouse.keys[1] = new Key();
 	Mouse.keys[2] = new Key();
 
-	//Mouse Wheel
+	//Mouse Wheel (Universal)
 	document.onwheel = function(event)
 	{
 		//TODO <ADD CODE HERE>
+		//console.log(event);
+	}
+
+	//Mouse Wheel (Chorme only)
+	document.onmousewheel = function(event)
+	{
+		//TODO <ADD CODE HERE>
+		//console.log(event);
 	}
 
 	//Mouse Move Position

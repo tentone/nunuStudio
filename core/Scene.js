@@ -1,5 +1,6 @@
 function Scene()
 {
+	
 	//Objects composing the scene
 	this.objects = [];
 	

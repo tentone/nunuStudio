@@ -8,9 +8,9 @@ Interface.initialize = function()
 
 	//Tab
 	Interface.tab = new TabContainer();
-	Interface.tab.addOption("Scene", "editor/files/icons/models.png", true);
+	Interface.tab.addOption("Scene", "editor/files/icons/models.png", false);
 	Interface.tab.options[0].division.element.className = "panel";
-	Interface.tab.addOption("Tab", "editor/files/icons/cogwheel.png", true);
+	Interface.tab.addOption("Settings", "editor/files/icons/cogwheel.png", true);
 	Interface.tab.addOption("Script", "editor/files/icons/screen.png", true);
 
 	//Canvas
