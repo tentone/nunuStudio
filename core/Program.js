@@ -8,15 +8,16 @@ function Program()
 
 	//Screens
 	this.scenes = [];
+
+	//Runtime variables
+	this.actual_scene = null;
 }
 
 //Function prototypes
-Program.prototype.createScene = createScene;
+Program.prototype.addScene = addScene;
 
-//Create new Scene
-function createScene()
+//Add scene to program
+function addScene(scene)
 {
-	var scene = new Scene();
-	this.scenes.push();
-	return scene;
+	this.scenes.push(scene);
 }

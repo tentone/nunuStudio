@@ -90,6 +90,17 @@ Editor.initialize = function(canvas)
 	//Box helpers
 	Editor.box_helper = new THREE.BoxHelper();
 	Editor.debug_scene.add(Editor.box_helper);
+
+	//Arrow Helper
+	Editor.arrow_helper = new THREE.Scene();
+	Editor.arrow_helper_x = new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 0), 1, 0xff0000);
+	Editor.arrow_helper.add(Editor.arrow_helper_x);
+	Editor.arrow_helper_y = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 1, 0x00ff00);
+	Editor.arrow_helper.add(Editor.arrow_helper_y);
+	Editor.arrow_helper_z = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 1, 0x0000ff);
+	Editor.arrow_helper.add(Editor.arrow_helper_z);
+
+	Editor.debug_scene.add(Editor.arrow_helper);
 }
 
 //Update Editor
@@ -106,9 +117,26 @@ Editor.update = function()
 		{
 			Editor.box_helper.visible = true;
 			Editor.box_helper.update(Editor.selected_object);
+
+			if(Editor.tool_mode == Editor.MODE_MOVE)
+			{
+				Editor.arrow_helper.visible = true;
+				Editor.arrow_helper.position.copy(Editor.selected_object.position);
+			}
+			else if(Editor.tool_mode == Editor.MODE_RESIZE)
+			{
+				//TODO <ADD CODE HERE>
+				Editor.arrow_helper.visible = false;
+			}
+			else if(Editor.tool_mode == Editor.MODE_ROTATE)
+			{
+				//TODO <ADD CODE HERE>
+				Editor.arrow_helper.visible = false;
+			}
 		}
 		else
 		{
+			Editor.arrow_helper.visible = false;
 			Editor.box_helper.visible = false;
 		}
 
@@ -205,11 +233,12 @@ Editor.update = function()
 //Draw stuff into screen
 Editor.draw = function()
 {
+	Editor.renderer.clear();
+	
 	//Render debug scene
 	if(Editor.state == Editor.STATE_EDITING)
 	{
 		Editor.cannon_renderer.update();
-		Editor.cannon_renderer.visible = false;
 		Editor.renderer.render(Editor.debug_scene, Editor.camera);
 	}
 

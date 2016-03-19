@@ -10,7 +10,7 @@ include("lib/three/loaders/collada/KeyFrameAnimation.js");
 include("lib/leap/leap-0.6.4.min.js");
 include("lib/leap/leap-plugins-0.1.11.min.js");
 
-include("lib/cannon/cannon.js");
+include("lib/cannon/cannon.min.js");
 include("lib/cannon/ConvexGeometry.js");
 include("lib/cannon/CannonDebugRenderer.js");
 
@@ -26,7 +26,7 @@ include("core/animation/Skeleton.js");
 include("core/Program.js");
 include("core/Scene.js");
 include("core/Script.js");
-include("core/Program.js");
+include("core/BaseObject.js");
 
 //App class
 function App(){}

@@ -1,22 +1,37 @@
-function Object()
+function BaseObject()
 {
-	//Object Info
+	//Super
+	THREE.Scene.call(this);
+
+	//BaseObject Info
 	this.name = "obj";
+	this.type = BaseObject.TYPE_CONTAINER;
 
 	//Childrens and scripts
 	this.children = [];
 	this.scripts = [];
 
+	//Parent
+	this.parent = null;
+
 	//ThreeJS mesh and CannonJS body instances
-	this.mesh = null;
 	this.body = null;
 }
 
+//BaseObject type
+BaseObject.TYPE_CONTAINER = 0;
+BaseObject.TYPE_MODEL = 1;
+BaseObject.TYPE_LIGHT = 2;
+BaseObject.TYPE_CAMERA = 3;
+BaseObject.TYPE_PARTICLE_EMITER = 4;
+BaseObject.TYPE_SCRIPT = 5;
+
 //Functions Prototype
-Object.prototype.update = update;
-Object.prototype.createPhysicsBoundingBox = createPhysicsBoundingBox;
-Object.prototype.setShadowReceiving = setShadowReceiving;
-Object.prototype.setShadowCasting = setShadowCasting;
+BaseObject.prototype = Object.create(THREE.Scene.prototype);
+BaseObject.prototype.update = update;
+BaseObject.prototype.createPhysicsBoundingBox = createPhysicsBoundingBox;
+BaseObject.prototype.setShadowReceiving = setShadowReceiving;
+BaseObject.prototype.setShadowCasting = setShadowCasting;
 
 //Update object status
 function update()
@@ -30,7 +45,6 @@ function update()
 //Add physics bounding box from objet to physics world
 function createPhysicsBoundingBox(object, world)
 {
-	//TODO <APPLY TO SELF>
 	for(var j = 0; j < object.children.length; j++)
 	{
 		var box = new THREE.BoundingBoxHelper(object.children[j]);
