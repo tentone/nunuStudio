@@ -4,12 +4,16 @@ function Mouse(){}
 Mouse.initialize = function()
 {
 	//Mouse Position Relative to camera
-	Mouse.raw_mouse_pos = new THREE.Vector2(0,0);
-	Mouse.raw_mouse_movement = new THREE.Vector2(0,0);
-	Mouse.raw_mouse_pos_updated = false;
+	Mouse.raw_pos = new THREE.Vector2(0,0);
+	Mouse.raw_movement = new THREE.Vector2(0,0);
+	Mouse.raw_pos_updated = false;
+	Mouse.raw_wheel = 0;
+	Mouse.raw_wheel_updated = false;
 
+	//Mouse position and scroll speed
 	Mouse.pos = new THREE.Vector2(0,0);
 	Mouse.pos_diff = new THREE.Vector2(0,0);
+	Mouse.wheel = 0;
 
 	//Calculate coordinates relative to canvas
 	Mouse.canvas = null;
@@ -26,18 +30,11 @@ Mouse.initialize = function()
 	Mouse.keys[1] = new Key();
 	Mouse.keys[2] = new Key();
 
-	//Mouse Wheel (Universal)
-	document.onwheel = function(event)
-	{
-		//TODO <ADD CODE HERE>
-		//console.log(event);
-	}
-
 	//Mouse Wheel (Chorme only)
 	document.onmousewheel = function(event)
 	{
-		//TODO <ADD CODE HERE>
-		//console.log(event);
+		Mouse.raw_wheel = event.deltaY;
+		Mouse.raw_wheel_updated = true;
 	}
 
 	//Mouse Move Position
@@ -108,10 +105,10 @@ Mouse.buttonJustReleased = function(button)
 //Update Mouse Position
 Mouse.updatePosition = function(x, y, x_diff, y_diff)
 {
-	Mouse.raw_mouse_pos.set(x, y);
-	Mouse.raw_mouse_movement.x += x_diff;
-	Mouse.raw_mouse_movement.y += y_diff;
-	Mouse.raw_mouse_pos_updated = true;
+	Mouse.raw_pos.set(x, y);
+	Mouse.raw_movement.x += x_diff;
+	Mouse.raw_movement.y += y_diff;
+	Mouse.raw_pos_updated = true;
 }
 
 //Update Mouse Key
@@ -137,17 +134,27 @@ Mouse.update = function()
 		Mouse.keys[i].set(Mouse.raw_keys[i].justPressed, Mouse.raw_keys[i].isPressed, Mouse.raw_keys[i].justReleased);
 	}
 
-	//Update Mouse Position if needed
-	if(Mouse.raw_mouse_pos_updated)
+	if(Mouse.raw_wheel_updated)
 	{
-		Mouse.pos_diff.x = Mouse.raw_mouse_movement.x;
-		Mouse.pos_diff.y = Mouse.raw_mouse_movement.y;
-		Mouse.raw_mouse_movement.set(0,0);
+		Mouse.wheel = Mouse.raw_wheel;
+		Mouse.raw_wheel_updated = false;
+	}
+	else
+	{
+		Mouse.wheel = 0;
+	}
 
-		Mouse.pos.x = Mouse.raw_mouse_pos.x;
-		Mouse.pos.y = Mouse.raw_mouse_pos.y;
+	//Update Mouse Position if needed
+	if(Mouse.raw_pos_updated)
+	{
+		Mouse.pos_diff.x = Mouse.raw_movement.x;
+		Mouse.pos_diff.y = Mouse.raw_movement.y;
+		Mouse.raw_movement.set(0,0);
 
-		Mouse.raw_mouse_pos_updated = false;
+		Mouse.pos.x = Mouse.raw_pos.x;
+		Mouse.pos.y = Mouse.raw_pos.y;
+
+		Mouse.raw_pos_updated = false;
 	}
 	else
 	{

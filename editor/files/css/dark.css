@@ -32,13 +32,13 @@ body
 .panel_res_hor_tab
 {
 	background-color: #222222;
-	cursor: col-resize;
+	cursor: e-resize;
 }
 
 .panel_res_ver_tab
 {
 	background-color: #222222;
-	cursor: row-resize;
+	cursor: n-resize;
 }
 
 .button

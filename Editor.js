@@ -13,6 +13,7 @@ include("editor/ui/TabContainer.js");
 include("editor/ui/TabOption.js");
 include("editor/ui/DualDivisionResizable.js");
 include("editor/ui/ButtonImageToggle.js");
+include("editor/ui/ThreeView.js");
 
 include("editor/Interface.js");
 
@@ -84,6 +85,7 @@ Editor.initialize = function(canvas)
 	//Grid and axis helpers
 	Editor.grid_helper = new THREE.GridHelper(500, 20);
 	Editor.debug_scene.add(Editor.grid_helper);
+	
 	Editor.axis_helper = new THREE.AxisHelper(500);
 	Editor.debug_scene.add(Editor.axis_helper);
 
@@ -93,11 +95,11 @@ Editor.initialize = function(canvas)
 
 	//Arrow Helper
 	Editor.arrow_helper = new THREE.Scene();
-	Editor.arrow_helper_x = new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 0), 1, 0xff0000);
+	Editor.arrow_helper_x = new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 0), 3, 0xff0000);
 	Editor.arrow_helper.add(Editor.arrow_helper_x);
-	Editor.arrow_helper_y = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 1, 0x00ff00);
+	Editor.arrow_helper_y = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 3, 0x00ff00);
 	Editor.arrow_helper.add(Editor.arrow_helper_y);
-	Editor.arrow_helper_z = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 1, 0x0000ff);
+	Editor.arrow_helper_z = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 3, 0x0000ff);
 	Editor.arrow_helper.add(Editor.arrow_helper_z);
 
 	Editor.debug_scene.add(Editor.arrow_helper);
@@ -178,17 +180,11 @@ Editor.update = function()
 				Editor.camera.position.z += Mouse.pos_diff.x * speed * angle_cos;
 				Editor.camera.position.x += Mouse.pos_diff.x * speed * angle_sin;
 			}
+			
+			//Move camera Y
+			Editor.camera.position.y -= Mouse.wheel * 0.1;
 		}
 
-		//Move Camera UP and DOWN
-		if(Keyboard.isKeyPressed(Keyboard.SPACEBAR))
-		{
-			Editor.camera.position.y += 0.1;
-		}
-		if(Keyboard.isKeyPressed(Keyboard.CTRL))
-		{
-			Editor.camera.position.y -= 0.1;
-		}
 
 		//Select objects
 		if(Editor.tool_mode == Editor.MODE_SELECT)
@@ -198,7 +194,7 @@ Editor.update = function()
 				var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
 				
 				//Update the picking ray with the Editor.camera and mouse position	
-				Editor.raycaster.setFromCamera(mouse, Editor.camera);	
+				Editor.raycaster.setFromCamera(mouse, Editor.camera);
 
 				var intersects =  Editor.raycaster.intersectObjects(Editor.scene.scene.children, true);
 				if(intersects.length > 0)
