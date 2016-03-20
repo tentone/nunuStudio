@@ -287,12 +287,12 @@ Interface.initialize = function()
 	Interface.about.setCallback(function()
 	{
 		//TODO <ADD CODE HERE>
-		if(Interface.about.text == "Run")
+		if(Editor.state === Editor.STATE_EDITING)
 		{
 			Interface.about.setText("Stop");
 			Editor.state = Editor.STATE_TESTING;
 		}
-		else
+		else if(Editor.state === Editor.STATE_TESTING)
 		{
 			Interface.about.setText("Run");
 			Editor.state = Editor.STATE_EDITING;

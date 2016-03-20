@@ -9,7 +9,6 @@ function BaseObject()
 
 	//Childrens and scripts
 	this.children = [];
-	this.scripts = [];
 
 	//Parent
 	this.parent = null;
@@ -36,9 +35,9 @@ BaseObject.prototype.setShadowCasting = setShadowCasting;
 //Update object status
 function update()
 {
-	for(var i = 0; i < this.scripts.length; i++)
+	for(var i = 0; i < this.children.length; i++)
 	{
-		this.scripts[i].update();
+		this.children[i].update();
 	}
 }
 

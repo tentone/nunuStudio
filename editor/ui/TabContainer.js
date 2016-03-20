@@ -18,7 +18,7 @@ function TabContainer(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "panel";
+	this.element.className = "container";
 	
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);

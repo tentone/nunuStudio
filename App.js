@@ -27,7 +27,8 @@ include("core/animation/Skeleton.js");
 include("core/Program.js");
 include("core/Scene.js");
 include("core/Script.js");
-include("core/BaseObject.js");
+
+include("core/objects/BaseObject.js");
 
 //App class
 function App(){}

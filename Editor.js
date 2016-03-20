@@ -15,6 +15,10 @@ include("editor/ui/DualDivisionResizable.js");
 include("editor/ui/ButtonImageToggle.js");
 include("editor/ui/ThreeView.js");
 
+include("editor/tools/MoveTool.js");
+include("editor/tools/ResizeTool.js");
+include("editor/tools/RotateTool.js");
+
 include("editor/Interface.js");
 
 function Editor(){}
@@ -56,8 +60,10 @@ Editor.initialize = function(canvas)
 	Editor.scene = new Scene();
 
 	//Debug Elements
-	Editor.debug_scene = new THREE.Scene();
-	Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.debug_scene, Editor.scene.world);
+	Editor.tool_scene = new THREE.Scene();
+	Editor.tool_scene_top = new THREE.Scene();
+
+	Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.tool_scene, Editor.scene.world);
 
 	//Editor Camera
 	Editor.camera = new THREE.PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 100000);
@@ -79,30 +85,36 @@ Editor.initialize = function(canvas)
 	Interface.updateInterface();
 
 	//Light
-	var light = new THREE.AmbientLight(0xffffff);
+	var light = new THREE.AmbientLight(0x888888);
+	Editor.scene.scene.add(light);
+
+	light = new THREE.PointLight(0xaaaaaa);
+	light.position.set(0, 5, -5);
 	Editor.scene.scene.add(light);
 
 	//Grid and axis helpers
-	Editor.grid_helper = new THREE.GridHelper(500, 20);
-	Editor.debug_scene.add(Editor.grid_helper);
+	Editor.grid_helper = new THREE.GridHelper(200, 5);
+	Editor.tool_scene.add(Editor.grid_helper);
 	
-	Editor.axis_helper = new THREE.AxisHelper(500);
-	Editor.debug_scene.add(Editor.axis_helper);
+	Editor.axis_helper = new THREE.AxisHelper(100);
+	Editor.tool_scene.add(Editor.axis_helper);
 
 	//Box helpers
 	Editor.box_helper = new THREE.BoxHelper();
-	Editor.debug_scene.add(Editor.box_helper);
+	Editor.tool_scene.add(Editor.box_helper);
 
-	//Arrow Helper
-	Editor.arrow_helper = new THREE.Scene();
-	Editor.arrow_helper_x = new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 0), 3, 0xff0000);
-	Editor.arrow_helper.add(Editor.arrow_helper_x);
-	Editor.arrow_helper_y = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 3, 0x00ff00);
-	Editor.arrow_helper.add(Editor.arrow_helper_y);
-	Editor.arrow_helper_z = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 3, 0x0000ff);
-	Editor.arrow_helper.add(Editor.arrow_helper_z);
+	//Tools
+	Editor.move_tool = new MoveTool();
+	Editor.move_tool.visible = false;
+	Editor.tool_scene_top.add(Editor.move_tool);
 
-	Editor.debug_scene.add(Editor.arrow_helper);
+	Editor.resize_tool = new ResizeTool();
+	Editor.resize_tool.visible = false;
+	Editor.tool_scene_top.add(Editor.resize_tool);
+
+	Editor.rotate_tool = new RotateTool();
+	Editor.rotate_tool.visible = false;
+	Editor.tool_scene_top.add(Editor.rotate_tool);
 }
 
 //Update Editor
@@ -114,7 +126,7 @@ Editor.update = function()
 	//Editing a scene
 	if(Editor.state == Editor.STATE_EDITING)
 	{
-		//Check if object is selected
+		//If object select display tools
 		if(Editor.selected_object != null)
 		{
 			Editor.box_helper.visible = true;
@@ -122,29 +134,70 @@ Editor.update = function()
 
 			if(Editor.tool_mode == Editor.MODE_MOVE)
 			{
-				Editor.arrow_helper.visible = true;
-				Editor.arrow_helper.position.copy(Editor.selected_object.position);
+				Editor.move_tool.visible = true;
+				Editor.rotate_tool.visible = false;
+				Editor.resize_tool.visible = false;
+				Editor.move_tool.position.copy(Editor.selected_object.position);
 			}
 			else if(Editor.tool_mode == Editor.MODE_RESIZE)
 			{
-				//TODO <ADD CODE HERE>
-				Editor.arrow_helper.visible = false;
+				Editor.resize_tool.visible = true;
+				Editor.move_tool.visible = false;
+				Editor.rotate_tool.visible = false;
+				Editor.resize_tool.position.copy(Editor.selected_object.position);
+				
 			}
 			else if(Editor.tool_mode == Editor.MODE_ROTATE)
 			{
-				//TODO <ADD CODE HERE>
-				Editor.arrow_helper.visible = false;
+				Editor.rotate_tool.visible = true;
+				Editor.move_tool.visible = false;
+				Editor.resize_tool.visible = false;
+				Editor.rotate_tool.position.copy(Editor.selected_object.position);
+			}
+			else
+			{
+				Editor.move_tool.visible = false;
+				Editor.rotate_tool.visible = false;
+				Editor.resize_tool.visible = false;
 			}
 		}
 		else
 		{
-			Editor.arrow_helper.visible = false;
+			Editor.move_tool.visible = false;
+			Editor.rotate_tool.visible = false;
+			Editor.resize_tool.visible = false;
 			Editor.box_helper.visible = false;
 		}
 
 		//Check if mouse inside canvas
 		if(Mouse.insideCanvas())
 		{
+			//Select objects
+			if(Editor.tool_mode === Editor.MODE_SELECT)
+			{
+				if(Mouse.buttonJustPressed(Mouse.LEFT))
+				{
+					Editor.updateRaycaster();
+					var intersects =  Editor.raycaster.intersectObjects(Editor.scene.scene.children, true);
+					if(intersects.length > 0)
+					{
+						Editor.selected_object = intersects[0].object;
+					}
+				}
+			}
+			//Move objects
+			else if(Editor.tool_mode === Editor.MODE_MOVE)
+			{
+				Editor.updateRaycaster();
+				Editor.move_tool.highlightSelectedComponents(Editor.raycaster);
+			}
+			//Resize
+			else if(Editor.tool_mode === Editor.MODE_RESIZE)
+			{
+				Editor.updateRaycaster();
+				Editor.resize_tool.highlightSelectedComponents(Editor.raycaster);
+			}
+
 			//Rotate camera
 			if(Mouse.buttonPressed(Mouse.LEFT))
 			{
@@ -164,6 +217,7 @@ Editor.update = function()
 
 				Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
 			}
+
 			//Move Camera on X and Z
 			else if(Mouse.buttonPressed(Mouse.RIGHT))
 			{
@@ -181,46 +235,19 @@ Editor.update = function()
 				Editor.camera.position.x += Mouse.pos_diff.x * speed * angle_sin;
 			}
 			
-			//Move camera Y
-			Editor.camera.position.y -= Mouse.wheel * 0.1;
-		}
-
-
-		//Select objects
-		if(Editor.tool_mode == Editor.MODE_SELECT)
-		{
-			if(Mouse.buttonJustReleased(Mouse.LEFT))
+			//Move in camera direction using mouse scroll
+			if(Mouse.wheel != 0)
 			{
-				var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
-				
-				//Update the picking ray with the Editor.camera and mouse position	
-				Editor.raycaster.setFromCamera(mouse, Editor.camera);
-
-				var intersects =  Editor.raycaster.intersectObjects(Editor.scene.scene.children, true);
-				if(intersects.length > 0)
-				{
-					Editor.selected_object = intersects[0].object;
-				}
+				var direction = Editor.camera.getWorldDirection();
+				var speed = 0.01 * Mouse.wheel;
+				Editor.camera.position.x -= speed * direction.x;
+				Editor.camera.position.y -= speed * direction.y;
+				Editor.camera.position.z -= speed * direction.z;
 			}
-		}
-		//Move objects
-		else if(Editor.tool_mode == Editor.MODE_MOVE)
-		{
-			//TODO <ADD CODE HERE>
-		}
-		//Resize Objects
-		else if(Editor.tool_mode == Editor.MODE_RESIZE)
-		{
-			//TODO <ADD CODE HERE>
-		}
-		//Rotate Objects
-		else if(Editor.tool_mode == Editor.MODE_ROTATE)
-		{
-			//TODO <ADD CODE HERE>
 		}
 	}
 	//Update Scene if on test mode
-	else if(Editor.state == Editor.STATE_TESTING)
+	else if(Editor.state === Editor.STATE_TESTING)
 	{
 		Editor.scene.update();
 	}
@@ -230,16 +257,19 @@ Editor.update = function()
 Editor.draw = function()
 {
 	Editor.renderer.clear();
-	
+
+	//Render scene
+	Editor.renderer.render(Editor.scene.scene, Editor.camera);
+
 	//Render debug scene
 	if(Editor.state == Editor.STATE_EDITING)
 	{
 		Editor.cannon_renderer.update();
-		Editor.renderer.render(Editor.debug_scene, Editor.camera);
-	}
+		Editor.renderer.render(Editor.tool_scene, Editor.camera);
 
-	//Render scene
-	Editor.renderer.render(Editor.scene.scene, Editor.camera);
+		Editor.renderer.clearDepth();
+		Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
+	}
 }
 
 //Resize to fit window
@@ -268,4 +298,11 @@ Editor.setCameraRotation = function(camera_rotation, camera)
 	direction.y += camera.position.y;
 	direction.z += camera.position.z;
 	camera.lookAt(direction);
+}
+
+//Update editor raycaster
+Editor.updateRaycaster = function()
+{
+	var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
+	Editor.raycaster.setFromCamera(mouse, Editor.camera);
 }

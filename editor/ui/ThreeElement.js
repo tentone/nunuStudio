@@ -24,7 +24,9 @@ function ThreeElement(parent)
 	this.icon = document.createElement("img");
 	this.icon.style.left = "0px";
 	this.icon.style.top = "0px";
-	
+	this.icon.style.width = "8px";
+	this.icon.style.height = "8px";
+
 	this.text = document.createElement("span");
 	this.text.style.left = "10px";
 	this.text.style.top = "0px";

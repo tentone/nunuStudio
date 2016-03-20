@@ -21,7 +21,7 @@ function DualDivisionResizable(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "panel";
+	this.element.className = "container";
 
 	//Division A
 	this.div_a = document.createElement("div");
