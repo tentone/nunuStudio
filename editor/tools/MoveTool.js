@@ -58,6 +58,14 @@ function MoveTool()
 	this.add(this.x);
 	this.add(this.y);
 	this.add(this.z);
+
+	this.x.updateMatrix();
+	this.x.matrixAutoUpdate = false;
+	this.y.updateMatrix();
+	this.y.matrixAutoUpdate = false;
+	this.z.updateMatrix();
+	this.z.matrixAutoUpdate = false;
+
 	this.add(this.block);
 }
 

@@ -24,6 +24,14 @@ function RotateTool()
 	geometry = new THREE.TorusGeometry(1, 0.02, 5, 64);
 	this.z = new THREE.Mesh(geometry, this.material_blue);
 
+	//Disable components auto matrix update
+	this.x.updateMatrix();
+	this.x.matrixAutoUpdate = false;
+	this.y.updateMatrix();
+	this.y.matrixAutoUpdate = false;
+	this.z.updateMatrix();
+	this.z.matrixAutoUpdate = false;
+
 	//Add to super
 	this.add(this.x);
 	this.add(this.y);

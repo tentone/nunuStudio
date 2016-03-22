@@ -2,15 +2,18 @@ function Interface(){}
 
 Interface.initialize = function()
 {	
+	//File directory
+	Interface.file_dir = "editor/files/";
+
 	//Style
 	Interface.theme = new Style();
-	Interface.theme.setStyleSheet("editor/files/css/dark.css");
+	Interface.theme.setStyleSheet(Interface.file_dir + "css/dark.css");
 
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabContainer();
-	Interface.tab.addOption("Scene", "editor/files/icons/models.png", false);
-	Interface.tab.addOption("Settings", "editor/files/icons/cogwheel.png", true);
-	Interface.tab.addOption("Script", "editor/files/icons/screen.png", true);
+	Interface.tab.addOption("Scene", Interface.file_dir + "icons/models.png", false);
+	Interface.tab.addOption("Settings", Interface.file_dir + "icons/cogwheel.png", true);
+	Interface.tab.addOption("Script", Interface.file_dir + "icons/screen.png", true);
 
 	//Canvas
 	Interface.canvas = new Canvas();
@@ -58,7 +61,7 @@ Interface.initialize = function()
 	//Select
 	Interface.tool_select = new ButtonImageToggle();
 	Interface.tool_select.selected = true;
-	Interface.tool_select.setImage("editor/files/icons/select.png");
+	Interface.tool_select.setImage(Interface.file_dir + "icons/select.png");
 	Interface.tool_select.image_scale.set(0.7, 0.7);
 	Interface.tool_select.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
 	Interface.tool_select.position.set(0, 80);
@@ -78,7 +81,7 @@ Interface.initialize = function()
 
 	//Move
 	Interface.tool_move = new ButtonImageToggle();
-	Interface.tool_move.setImage("editor/files/icons/move.png");
+	Interface.tool_move.setImage(Interface.file_dir + "icons/move.png");
 	Interface.tool_move.image_scale.set(0.7, 0.7);
 	Interface.tool_move.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
 	Interface.tool_move.position.set(0, 120);
@@ -98,7 +101,7 @@ Interface.initialize = function()
 
 	//Resize
 	Interface.tool_resize = new ButtonImageToggle();
-	Interface.tool_resize.setImage("editor/files/icons/resize.png");
+	Interface.tool_resize.setImage(Interface.file_dir + "icons/resize.png");
 	Interface.tool_resize.image_scale.set(0.7, 0.7);
 	Interface.tool_resize.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
 	Interface.tool_resize.position.set(0, 160);
@@ -118,7 +121,7 @@ Interface.initialize = function()
 
 	//Rotate
 	Interface.tool_rotate = new ButtonImageToggle();
-	Interface.tool_rotate.setImage("editor/files/icons/rotate.png");
+	Interface.tool_rotate.setImage(Interface.file_dir + "icons/rotate.png");
 	Interface.tool_rotate.image_scale.set(0.7, 0.7);
 	Interface.tool_rotate.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
 	Interface.tool_rotate.position.set(0, 200);
@@ -144,7 +147,7 @@ Interface.initialize = function()
 
 	//Add Models
 	Interface.add_model = new ButtonDrawer();
-	Interface.add_model.setImage("editor/files/icons/models.png");
+	Interface.add_model.setImage(Interface.file_dir + "icons/models.png");
 	Interface.add_model.image_scale.set(0.7, 0.7);
 	Interface.add_model.options_scale.set(0.7, 0.7);
 	Interface.add_model.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
@@ -152,56 +155,50 @@ Interface.initialize = function()
 	Interface.add_model.options_size.set(40, 40);
 	Interface.add_model.updateInterface();
 
-	Interface.add_model.addOption("editor/files/icons/cube.png", function()
+	Interface.add_model.addOption(Interface.file_dir + "icons/cube.png", function()
 	{
 		//Create Cube
 		var geometry = new THREE.BoxGeometry(1, 1, 1);
 		var material = new THREE.MeshPhongMaterial();
-		var cube = new THREE.Mesh(geometry, material);
-		Editor.scene.scene.add(cube);
+		var cube = new Model3D(geometry, material);
+		Editor.addToActualScene(cube);
 	});
 
-	Interface.add_model.addOption("editor/files/icons/cylinder.png", function()
+	Interface.add_model.addOption(Interface.file_dir + "icons/cylinder.png", function()
 	{
-		//TODO <ADD CODE HERE>
-
 		//Create Sphere
 		var geometry = new THREE.CylinderGeometry(1, 1, 2, 32);
 		var material = new THREE.MeshPhongMaterial();
-		var model = new THREE.Mesh(geometry, material);
-		Editor.scene.scene.add(model);
+		var model = new Model3D(geometry, material);
+		Editor.addToActualScene(model);
 	});
 
-	Interface.add_model.addOption("editor/files/icons/sphere.png", function()
+	Interface.add_model.addOption(Interface.file_dir + "icons/sphere.png", function()
 	{
-		//TODO <ADD CODE HERE>
-
 		//Create Sphere
 		var geometry = new THREE.SphereGeometry(0.6, 16, 16);
 		var material = new THREE.MeshPhongMaterial();
-		var sphere = new THREE.Mesh(geometry, material);
-		Editor.scene.scene.add(sphere);
+		var sphere = new Model3D(geometry, material);
+		Editor.addToActualScene(sphere);
 	});
 
-	Interface.add_model.addOption("editor/files/icons/torus.png", function()
+	Interface.add_model.addOption(Interface.file_dir + "icons/torus.png", function()
 	{
-		//TODO <ADD CODE HERE>
-
 		//Create Sphere
 		var geometry = new THREE.TorusGeometry(1, 0.5, 16, 100);
 		var material = new THREE.MeshPhongMaterial();
-		var model = new THREE.Mesh(geometry, material);
-		Editor.scene.scene.add(model);
+		var model = new Model3D(geometry, material);
+		Editor.addToActualScene(model);
 	});
 
-	Interface.add_model.addOption("editor/files/icons/pyramid.png", function()
+	Interface.add_model.addOption(Interface.file_dir + "icons/pyramid.png", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
 
 	//Add lights
 	Interface.add_light = new ButtonDrawer();
-	Interface.add_light.setImage("editor/files/icons/bulb.png");
+	Interface.add_light.setImage(Interface.file_dir + "icons/bulb.png");
 	Interface.add_light.image_scale.set(0.7, 0.7);
 	Interface.add_light.options_scale.set(0.7, 0.7);
 	Interface.add_light.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
@@ -209,17 +206,17 @@ Interface.initialize = function()
 	Interface.add_light.options_size.set(40, 40);
 	Interface.add_light.updateInterface();
 
-	Interface.add_light.addOption("editor/files/icons/bulb.png", function()
+	Interface.add_light.addOption(Interface.file_dir + "icons/bulb.png", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
 
-	Interface.add_light.addOption("editor/files/icons/sun.png", function()
+	Interface.add_light.addOption(Interface.file_dir + "icons/sun.png", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
 
-	Interface.add_light.addOption("editor/files/icons/spotlight.png", function()
+	Interface.add_light.addOption(Interface.file_dir + "icons/spotlight.png", function()
 	{
 		//TODO <ADD CODE HERE>
 	});

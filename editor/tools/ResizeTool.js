@@ -55,6 +55,13 @@ function ResizeTool()
 	geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
 	this.block = new THREE.Mesh(geometry, this.material_yellow);
 
+	this.x.updateMatrix();
+	this.x.matrixAutoUpdate = false;
+	this.y.updateMatrix();
+	this.y.matrixAutoUpdate = false;
+	this.z.updateMatrix();
+	this.z.matrixAutoUpdate = false;
+
 	//Add to super
 	this.add(this.x);
 	this.add(this.y);

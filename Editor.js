@@ -41,6 +41,9 @@ Editor.initialize = function(canvas)
 	//Editor initial state
 	Editor.tool_mode = Editor.MODE_SELECT;
 	Editor.state = Editor.STATE_EDITING;
+	
+	//Auxiliar values
+	Editor.pid2 = Math.PI/2;
 
 	//Editor Selected object
 	Editor.selected_object = null;
@@ -61,12 +64,12 @@ Editor.initialize = function(canvas)
 
 	//Editor program and scene
 	Editor.program = new Program();
-	Editor.scene = new Scene();
+	Editor.program.addDefaultScene();
+	Editor.scene = Editor.program.actual_scene;
 
 	//Debug Elements
 	Editor.tool_scene = new THREE.Scene();
 	Editor.tool_scene_top = new THREE.Scene();
-
 	Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.tool_scene, Editor.scene.world);
 
 	//Editor Camera
@@ -87,14 +90,6 @@ Editor.initialize = function(canvas)
 
 	//Update interface
 	Interface.updateInterface();
-
-	//Light
-	var light = new THREE.AmbientLight(0x888888);
-	Editor.scene.scene.add(light);
-
-	light = new THREE.PointLight(0xaaaaaa);
-	light.position.set(0, 5, -5);
-	Editor.scene.scene.add(light);
 
 	//Grid and axis helpers
 	Editor.grid_helper = new THREE.GridHelper(200, 5);
@@ -142,6 +137,9 @@ Editor.update = function()
 				Editor.move_tool.visible = true;
 				Editor.rotate_tool.visible = false;
 				Editor.resize_tool.visible = false;
+
+				var distance = Editor.camera.position.distanceTo(Editor.selected_object.position)/5;
+				Editor.move_tool.scale.set(distance, distance, distance);
 				Editor.move_tool.position.copy(Editor.selected_object.position);
 			}
 			else if(Editor.tool_mode === Editor.MODE_RESIZE)
@@ -149,14 +147,20 @@ Editor.update = function()
 				Editor.resize_tool.visible = true;
 				Editor.move_tool.visible = false;
 				Editor.rotate_tool.visible = false;
+
+				var distance = Editor.camera.position.distanceTo(Editor.selected_object.position)/5;
+				Editor.resize_tool.scale.set(distance, distance, distance);
+				Editor.resize_tool.rotation.copy(Editor.selected_object.rotation);
 				Editor.resize_tool.position.copy(Editor.selected_object.position);
-				
 			}
 			else if(Editor.tool_mode === Editor.MODE_ROTATE)
 			{
 				Editor.rotate_tool.visible = true;
 				Editor.move_tool.visible = false;
 				Editor.resize_tool.visible = false;
+
+				var distance = Editor.camera.position.distanceTo(Editor.selected_object.position)/5;
+				Editor.rotate_tool.scale.set(distance, distance, distance);
 				Editor.rotate_tool.position.copy(Editor.selected_object.position);
 			}
 			else
@@ -201,8 +205,8 @@ Editor.update = function()
 					}
 					else if(Editor.editing_object_args.z)
 					{
-						Editor.selected_object.position.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + App.pid2);
-						Editor.selected_object.position.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + App.pid2);
+						Editor.selected_object.position.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2);
+						Editor.selected_object.position.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2);
 					}
 				}
 				//Resize mode
@@ -220,8 +224,8 @@ Editor.update = function()
 					}
 					else if(Editor.editing_object_args.z)
 					{
-						Editor.selected_object.scale.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + App.pid2);
-						Editor.selected_object.scale.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + App.pid2);
+						Editor.selected_object.scale.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2);
+						Editor.selected_object.scale.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2);
 					}
 				}
 				//Rotate Mode
@@ -256,7 +260,7 @@ Editor.update = function()
 				if(Mouse.buttonJustPressed(Mouse.LEFT))
 				{
 					Editor.updateRaycaster();
-					var intersects =  Editor.raycaster.intersectObjects(Editor.scene.scene.children, true);
+					var intersects =  Editor.raycaster.intersectObjects(Editor.scene.children, true);
 					if(intersects.length > 0)
 					{
 						Editor.selected_object = intersects[0].object;
@@ -334,8 +338,8 @@ Editor.update = function()
 				Editor.camera.position.x += Mouse.pos_diff.y * speed * angle_sin;
 
 				//Move Camera Lateral
-				var angle_cos = Math.cos(Editor.camera_rotation.x + App.pid2);
-				var angle_sin = Math.sin(Editor.camera_rotation.x + App.pid2);
+				var angle_cos = Math.cos(Editor.camera_rotation.x + Editor.pid2);
+				var angle_sin = Math.sin(Editor.camera_rotation.x + Editor.pid2);
 				Editor.camera.position.z += Mouse.pos_diff.x * speed * angle_cos;
 				Editor.camera.position.x += Mouse.pos_diff.x * speed * angle_sin;
 			}
@@ -358,13 +362,19 @@ Editor.update = function()
 	}
 }
 
+//Add object to actual scene
+Editor.addToActualScene = function(obj)
+{
+	Editor.scene.add(obj);
+}
+
 //Draw stuff into screen
 Editor.draw = function()
 {
 	Editor.renderer.clear();
 
 	//Render scene
-	Editor.renderer.render(Editor.scene.scene, Editor.camera);
+	Editor.renderer.render(Editor.scene, Editor.camera);
 
 	//Render debug scene
 	if(Editor.state == Editor.STATE_EDITING)

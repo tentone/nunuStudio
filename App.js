@@ -28,7 +28,7 @@ include("core/Program.js");
 include("core/Scene.js");
 include("core/Script.js");
 
-include("core/objects/BaseObject.js");
+include("core/objects/Model3D.js");
 
 //App class
 function App(){}
@@ -43,9 +43,6 @@ App.initialize = function(main)
 	App.stats.domElement.style.left = "0px";
 	App.stats.domElement.style.top = "0px";
 	document.body.appendChild(App.stats.domElement);
-	
-	//Auxiliar values
-	App.pid2 = Math.PI/2;
 
 	//Init Input
 	Keyboard.initialize();
