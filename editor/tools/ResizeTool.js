@@ -52,7 +52,7 @@ function ResizeTool()
 	this.z.updateMatrix();
 	
 	//Center
-	geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+	geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
 	this.block = new THREE.Mesh(geometry, this.material_yellow);
 
 	//Add to super
@@ -69,9 +69,14 @@ ResizeTool.prototype.highlightSelectedComponents = highlightSelectedComponents;
 //Highligth selected compoonents and return witch are selected
 function highlightSelectedComponents(raycaster)
 {
+	var x = false, y = false, z = false, w = false;
+	var selected = false;
+	
 	//X Component
 	if(raycaster.intersectObject(this.x, true).length > 0)
 	{
+		x = true;
+		selected = true;
 		this.x.children[0].material = this.material_yellow;
 		this.x.children[1].material = this.material_yellow;
 	}
@@ -84,6 +89,8 @@ function highlightSelectedComponents(raycaster)
 	//Y Component
 	if(raycaster.intersectObject(this.y, true).length > 0)
 	{
+		y = true;
+		selected = true;
 		this.y.children[0].material = this.material_yellow;
 		this.y.children[1].material = this.material_yellow;
 	}
@@ -96,6 +103,8 @@ function highlightSelectedComponents(raycaster)
 	//Z Component
 	if(raycaster.intersectObject(this.z, true).length > 0)
 	{
+		z = true;
+		selected = true;
 		this.z.children[0].material = this.material_yellow;
 		this.z.children[1].material = this.material_yellow;
 	}
@@ -108,10 +117,14 @@ function highlightSelectedComponents(raycaster)
 	//Center Block Component
 	if(raycaster.intersectObject(this.block, true).length > 0)
 	{
-		this.block.material = this.material_white;
+		w = true;
+		selected = true;
+		this.block.material = this.material_yellow;
 	}
 	else
 	{
-		this.block.material = this.material_yellow;
+		this.block.material = this.material_white;
 	}
+
+	return {selected, x, y, z, w};
 }

@@ -40,7 +40,7 @@ Mouse.initialize = function()
 	//Mouse Move Position
 	document.onmousemove = function(event)
 	{
-		if(Mouse.canvas != null)
+		if(Mouse.canvas !== null)
 		{
 			var rect = Mouse.canvas.getBoundingClientRect();
 			Mouse.updatePosition(event.clientX - rect.left, event.clientY - rect.top, event.movementX, event.movementY);
@@ -75,7 +75,7 @@ Mouse.SENSITIVITY = 0.2;
 //Check if mouse is inside canvas
 Mouse.insideCanvas = function()
 {
-	if(Mouse.canvas == null)
+	if(Mouse.canvas === null)
 	{
 		return false;
 	}

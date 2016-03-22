@@ -51,7 +51,7 @@ function MoveTool()
 	this.z.updateMatrix();
 	
 	//Center
-	geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+	geometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
 	this.block = new THREE.Mesh(geometry, this.material_yellow);
 	
 	//Add to super
@@ -68,9 +68,14 @@ MoveTool.prototype.highlightSelectedComponents = highlightSelectedComponents;
 //Highligth selected compoonents and return witch are selected
 function highlightSelectedComponents(raycaster)
 {
+	var selected = false;
+	var x = false, y = false, z = false;
+
 	//X Component
 	if(raycaster.intersectObject(this.x, true).length > 0)
 	{
+		selected = true;
+		x = true;
 		this.x.children[0].material = this.material_yellow;
 		this.x.children[1].material = this.material_yellow;
 	}
@@ -83,6 +88,8 @@ function highlightSelectedComponents(raycaster)
 	//Y Component
 	if(raycaster.intersectObject(this.y, true).length > 0)
 	{
+		selected = true;
+		y = true;
 		this.y.children[0].material = this.material_yellow;
 		this.y.children[1].material = this.material_yellow;
 	}
@@ -95,6 +102,8 @@ function highlightSelectedComponents(raycaster)
 	//Z Component
 	if(raycaster.intersectObject(this.z, true).length > 0)
 	{
+		selected = true;
+		z = true;
 		this.z.children[0].material = this.material_yellow;
 		this.z.children[1].material = this.material_yellow;
 	}
@@ -103,4 +112,6 @@ function highlightSelectedComponents(raycaster)
 		this.z.children[0].material = this.material_blue;
 		this.z.children[1].material = this.material_blue;
 	}
+
+	return {selected, x, y, z};
 }

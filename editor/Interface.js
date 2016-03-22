@@ -154,8 +154,6 @@ Interface.initialize = function()
 
 	Interface.add_model.addOption("editor/files/icons/cube.png", function()
 	{
-		//TODO <ADD CODE HERE>
-
 		//Create Cube
 		var geometry = new THREE.BoxGeometry(1, 1, 1);
 		var material = new THREE.MeshPhongMaterial();

@@ -44,6 +44,9 @@ App.initialize = function(main)
 	App.stats.domElement.style.top = "0px";
 	document.body.appendChild(App.stats.domElement);
 	
+	//Auxiliar values
+	App.pid2 = Math.PI/2;
+
 	//Init Input
 	Keyboard.initialize();
 	Mouse.initialize();

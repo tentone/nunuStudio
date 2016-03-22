@@ -13,7 +13,8 @@ include("editor/ui/TabContainer.js");
 include("editor/ui/TabOption.js");
 include("editor/ui/DualDivisionResizable.js");
 include("editor/ui/ButtonImageToggle.js");
-include("editor/ui/ThreeView.js");
+include("editor/ui/TreeView.js");
+include("editor/ui/TreeElement.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -43,6 +44,9 @@ Editor.initialize = function(canvas)
 
 	//Editor Selected object
 	Editor.selected_object = null;
+	Editor.block_camera_move = false;
+	Editor.editing_object = false;
+	Editor.editing_object_args = null;
 
 	//Initialize User Interface
 	Interface.initialize();
@@ -122,24 +126,25 @@ Editor.update = function()
 {
 	//Update editor interface
 	Interface.update();
+	Editor.block_camera_move = false;
 
 	//Editing a scene
-	if(Editor.state == Editor.STATE_EDITING)
+	if(Editor.state === Editor.STATE_EDITING)
 	{
 		//If object select display tools
-		if(Editor.selected_object != null)
+		if(Editor.selected_object !== null)
 		{
 			Editor.box_helper.visible = true;
 			Editor.box_helper.update(Editor.selected_object);
 
-			if(Editor.tool_mode == Editor.MODE_MOVE)
+			if(Editor.tool_mode === Editor.MODE_MOVE)
 			{
 				Editor.move_tool.visible = true;
 				Editor.rotate_tool.visible = false;
 				Editor.resize_tool.visible = false;
 				Editor.move_tool.position.copy(Editor.selected_object.position);
 			}
-			else if(Editor.tool_mode == Editor.MODE_RESIZE)
+			else if(Editor.tool_mode === Editor.MODE_RESIZE)
 			{
 				Editor.resize_tool.visible = true;
 				Editor.move_tool.visible = false;
@@ -147,7 +152,7 @@ Editor.update = function()
 				Editor.resize_tool.position.copy(Editor.selected_object.position);
 				
 			}
-			else if(Editor.tool_mode == Editor.MODE_ROTATE)
+			else if(Editor.tool_mode === Editor.MODE_ROTATE)
 			{
 				Editor.rotate_tool.visible = true;
 				Editor.move_tool.visible = false;
@@ -169,6 +174,79 @@ Editor.update = function()
 			Editor.box_helper.visible = false;
 		}
 
+		//Check if editing object
+		if(Editor.editing_object)
+		{	
+			//If mouse button released exit edit mode
+			if(Mouse.buttonJustReleased(Mouse.LEFT))
+			{
+				Editor.editing_object = false;
+			}
+			else
+			{
+				Editor.block_camera_move = true;
+
+				//Moving object
+				if(Editor.tool_mode === Editor.MODE_MOVE)
+				{
+					var speed = Editor.camera.position.distanceTo(Editor.selected_object.position)/500;
+					if(Editor.editing_object_args.x)
+					{
+						Editor.selected_object.position.x -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x);
+						Editor.selected_object.position.x -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x);
+					}
+					else if(Editor.editing_object_args.y)
+					{
+						Editor.selected_object.position.y -= Mouse.pos_diff.y * speed;
+					}
+					else if(Editor.editing_object_args.z)
+					{
+						Editor.selected_object.position.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + App.pid2);
+						Editor.selected_object.position.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + App.pid2);
+					}
+				}
+				//Resize mode
+				else if(Editor.tool_mode === Editor.MODE_RESIZE)
+				{
+					var speed = Editor.camera.position.distanceTo(Editor.selected_object.position)/1000;
+					if(Editor.editing_object_args.x)
+					{
+						Editor.selected_object.scale.x -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x);
+						Editor.selected_object.scale.x -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x);
+					}
+					else if(Editor.editing_object_args.y)
+					{
+						Editor.selected_object.scale.y -= Mouse.pos_diff.y * speed;
+					}
+					else if(Editor.editing_object_args.z)
+					{
+						Editor.selected_object.scale.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + App.pid2);
+						Editor.selected_object.scale.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + App.pid2);
+					}
+				}
+				//Rotate Mode
+				else if(Editor.tool_mode === Editor.MODE_ROTATE)
+				{
+					var speed = Editor.camera.position.distanceTo(Editor.selected_object.position)/500;
+					if(Editor.editing_object_args.x)
+					{
+						Editor.selected_object.rotation.x -= Mouse.pos_diff.y * speed;
+						Editor.selected_object.rotation.x -= Mouse.pos_diff.x * speed;
+					}
+					else if(Editor.editing_object_args.y)
+					{
+						Editor.selected_object.rotation.y -= Mouse.pos_diff.y * speed;
+						Editor.selected_object.rotation.y -= Mouse.pos_diff.x * speed;
+					}
+					else if(Editor.editing_object_args.z)
+					{
+						Editor.selected_object.rotation.z -= Mouse.pos_diff.y * speed;
+						Editor.selected_object.rotation.z -= Mouse.pos_diff.x * speed;
+					}
+				}
+			}
+		}
+
 		//Check if mouse inside canvas
 		if(Mouse.insideCanvas())
 		{
@@ -185,21 +263,48 @@ Editor.update = function()
 					}
 				}
 			}
+
 			//Move objects
 			else if(Editor.tool_mode === Editor.MODE_MOVE)
 			{
 				Editor.updateRaycaster();
-				Editor.move_tool.highlightSelectedComponents(Editor.raycaster);
+				var move = Editor.move_tool.highlightSelectedComponents(Editor.raycaster);
+				if(move.selected && Mouse.buttonJustPressed(Mouse.LEFT))
+				{	
+					Editor.editing_object_args = move;
+					Editor.editing_object = true;
+					Editor.block_camera_move = true;
+				}
 			}
+
 			//Resize
 			else if(Editor.tool_mode === Editor.MODE_RESIZE)
 			{
 				Editor.updateRaycaster();
-				Editor.resize_tool.highlightSelectedComponents(Editor.raycaster);
+				var resize = Editor.resize_tool.highlightSelectedComponents(Editor.raycaster);
+				if(resize.selected && Mouse.buttonJustPressed(Mouse.LEFT))
+				{	
+					Editor.editing_object_args = resize;
+					Editor.editing_object = true;
+					Editor.block_camera_move = true;
+				}
+			}
+
+			//Rotate
+			else if(Editor.tool_mode === Editor.MODE_ROTATE)
+			{
+				Editor.updateRaycaster();
+				var rotate = Editor.rotate_tool.highlightSelectedComponents(Editor.raycaster);
+				if(rotate.selected && Mouse.buttonJustPressed(Mouse.LEFT))
+				{	
+					Editor.editing_object_args = rotate;
+					Editor.editing_object = true;
+					Editor.block_camera_move = true;
+				}
 			}
 
 			//Rotate camera
-			if(Mouse.buttonPressed(Mouse.LEFT))
+			if(Mouse.buttonPressed(Mouse.LEFT) && !Editor.block_camera_move)
 			{
 				Editor.camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
 				Editor.camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
@@ -229,8 +334,8 @@ Editor.update = function()
 				Editor.camera.position.x += Mouse.pos_diff.y * speed * angle_sin;
 
 				//Move Camera Lateral
-				var angle_cos = Math.cos(Editor.camera_rotation.x + Math.PI/2.0);
-				var angle_sin = Math.sin(Editor.camera_rotation.x + Math.PI/2.0);
+				var angle_cos = Math.cos(Editor.camera_rotation.x + App.pid2);
+				var angle_sin = Math.sin(Editor.camera_rotation.x + App.pid2);
 				Editor.camera.position.z += Mouse.pos_diff.x * speed * angle_cos;
 				Editor.camera.position.x += Mouse.pos_diff.x * speed * angle_sin;
 			}
