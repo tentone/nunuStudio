@@ -1,15 +1,21 @@
 function Model3D(geometry, material)
 {
 	THREE.Mesh.call(this, geometry, material);
+	
+	this.updateable = true;
 }
 
 Model3D.prototype = Object.create(THREE.Mesh.prototype);
+Model3D.prototype.constructor = Model3D;
 Model3D.prototype.update = update;
 
 function update()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		if(this.children[i].updateable)
+		{
+			this.children[i].update();
+		}
 	}
 }

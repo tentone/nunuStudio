@@ -63,9 +63,9 @@ Editor.initialize = function(canvas)
 	Mouse.canvas = Editor.canvas;
 
 	//Editor program and scene
-	Editor.program = new Program();
-	Editor.program.addDefaultScene();
-	Editor.scene = Editor.program.actual_scene;
+	Editor.program = null;
+	Editor.scene = null;
+	Editor.createNewProgram();
 
 	//Debug Elements
 	Editor.tool_scene = new THREE.Scene();
@@ -420,4 +420,23 @@ Editor.updateRaycaster = function()
 {
 	var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width )*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
 	Editor.raycaster.setFromCamera(mouse, Editor.camera);
+}
+
+//Reset editing flags
+Editor.resetEditingFlags = function()
+{
+	Editor.selected_object = null;
+	Editor.block_camera_move = false;
+	Editor.editing_object = false;
+	Editor.editing_object_args = null
+}
+
+//New Program
+Editor.createNewProgram = function()
+{
+	Editor.program = new Program();
+	Editor.program.addDefaultScene();
+	Editor.scene = Editor.program.actual_scene;
+
+	Editor.resetEditingFlags();
 }

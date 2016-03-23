@@ -26,9 +26,13 @@ include("core/animation/Joint.js");
 include("core/animation/Skeleton.js");
 include("core/Program.js");
 include("core/Scene.js");
-include("core/Script.js");
 
+include("core/objects/Script.js");
 include("core/objects/Model3D.js");
+include("core/objects/PointLight.js");
+include("core/objects/SpotLight.js");
+include("core/objects/AmbientLight.js");
+include("core/objects/DirectionalLight.js");
 
 //App class
 function App(){}
@@ -129,7 +133,13 @@ App.resize = function()
 }
 
 //Auxiliar include
-function include(jsFile)
+function include(file)
 {
-	document.write('<script type="text/javascript" src="'+ jsFile + '"></script>');
+	document.write('<script type="text/javascript" src="'+ file + '"></script>');
+}
+
+//Load stylesheet
+function style(file)
+{
+	document.write('<link rel="stylesheet" href="' + file + '">');
 }

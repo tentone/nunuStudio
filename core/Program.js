@@ -22,10 +22,9 @@ Program.prototype.addDefaultScene = addDefaultScene;
 function addDefaultScene()
 {
 	var scene = new Scene();
+	scene.add(new AmbientLight(0x202020));
 
-	scene.add(new THREE.AmbientLight(0x888888));
-
-	var light = new THREE.PointLight(0xaaaaaa);
+	var light = new PointLight(0x909090);
 	light.position.set(0, 5, -5);
 	scene.add(light);
 

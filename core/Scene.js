@@ -1,7 +1,8 @@
 function Scene()
 {
-	//Super
 	THREE.Scene.call(this);
+
+	//Disable auto updates
 	this.rotationAutoUpdate = false;
 	this.matrixAutoUpdate = false;
 
@@ -14,6 +15,7 @@ function Scene()
 
 //Functions prototypes
 Scene.prototype = Object.create(THREE.Scene.prototype);
+Scene.prototype.constructor = Scene;
 Scene.prototype.update = update;
 
 //Update scene
@@ -23,6 +25,9 @@ function update()
 	
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		if(this.children[i].updateable)
+		{
+			this.children[i].update();
+		}
 	}
 }
