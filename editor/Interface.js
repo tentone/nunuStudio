@@ -11,7 +11,7 @@ Interface.initialize = function()
 
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabContainer();
-	Interface.tab.addOption("Scene", Interface.file_dir + "icons/scene.png", false);
+	Interface.tab.addOption("Scene", Interface.file_dir + "icons/models/models.png", false);
 	Interface.tab.addOption("Settings", Interface.file_dir + "icons/settings.png", true);
 	Interface.tab.addOption("Script", Interface.file_dir + "icons/code.png", true);
 
@@ -19,6 +19,9 @@ Interface.initialize = function()
 	Interface.canvas = new Canvas();
 	Interface.tab.options[0].attachComponent(Interface.canvas);
 	
+	Interface.code = new CodeEditor();
+	Interface.tab.options[2].attachComponent(Interface.code);
+
 	//Dual Div
 	Interface.dual_test = new DualDivisionResizable();
 	Interface.dual_test.orientation = DualDivisionResizable.HORIZONTAL;
@@ -41,6 +44,7 @@ Interface.initialize = function()
 	//------------------------------------Explorer------------------------------------
 	Interface.explorer = new DivisionResizable();
 	Interface.explorer.size.x = 300;
+	Interface.explorer.resize_size_min = 100;
 
 	Interface.explorer_resizable = new DualDivisionResizable(Interface.explorer.element);
 	Interface.explorer_resizable.orientation = DualDivisionResizable.VERTICAL;
@@ -229,6 +233,53 @@ Interface.initialize = function()
 		Editor.addToActualScene(new DirectionalLight());
 	});
 
+	//Add camera
+	Interface.add_camera = new ButtonDrawer();
+	Interface.add_camera.setImage(Interface.file_dir + "icons/camera/camera.png");
+	Interface.add_camera.options_per_line = 2;
+	Interface.add_camera.image_scale.set(0.7, 0.7);
+	Interface.add_camera.options_scale.set(0.7, 0.7);
+	Interface.add_camera.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.add_camera.position.set(0, 360);
+	Interface.add_camera.options_size.set(40, 40);
+	Interface.add_camera.updateInterface();
+
+	//Prespective camera
+	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/prespective.png", function()
+	{
+		Editor.addToActualScene(new PointLight());
+	});
+
+	//Orthographic camera
+	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
+	{
+		Editor.addToActualScene(new AmbientLight());
+	});
+
+	//Add script
+	Interface.add_script = new ButtonDrawer();
+	Interface.add_script.setImage(Interface.file_dir + "icons/script/script.png");
+	Interface.add_script.options_per_line = 2;
+	Interface.add_script.image_scale.set(0.7, 0.7);
+	Interface.add_script.options_scale.set(0.7, 0.7);
+	Interface.add_script.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.add_script.position.set(0, 400);
+	Interface.add_script.options_size.set(40, 40);
+	Interface.add_script.updateInterface();
+
+	//Javascript script
+	Interface.add_script.addOption(Interface.file_dir + "icons/script/script.png", function()
+	{
+		Editor.addToActualScene(new PointLight());
+	});
+
+	//Block script
+	Interface.add_script.addOption(Interface.file_dir + "icons/script/blocks.png", function()
+	{
+		Editor.addToActualScene(new AmbientLight());
+	});
+
+
 	//----------------------------------Menu Top Bar----------------------------------
 	Interface.top_bar = new Division();
 	Interface.top_bar.size.y = 25 ;
@@ -333,6 +384,7 @@ Interface.updateInterface = function()
 	//------------------------------------Explorer------------------------------------
 	Interface.explorer.size.y = (size.y - Interface.top_bar.size.y);
 	Interface.explorer.position.set(size.x - Interface.explorer.size.x, Interface.top_bar.size.y);
+	Interface.explorer.resize_size_max = size.x/2;
 	Interface.explorer.updateInterface();
 
 	Interface.explorer_resizable.size.set(Interface.explorer.size.x - Interface.explorer.resize_tab_size, Interface.explorer.size.y);

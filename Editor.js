@@ -1,3 +1,7 @@
+include("lib/codemirror/codemirror.css");
+include("lib/codemirror/theme/monokai.css");
+include("lib/codemirror/codemirror.js");
+
 include("editor/ui/Button.js");
 include("editor/ui/DropdownMenu.js");
 include("editor/ui/Text.js");
@@ -13,6 +17,7 @@ include("editor/ui/TabContainer.js");
 include("editor/ui/TabOption.js");
 include("editor/ui/DualDivisionResizable.js");
 include("editor/ui/ButtonImageToggle.js");
+include("editor/ui/CodeEditor.js");
 include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 
@@ -161,6 +166,7 @@ Editor.update = function()
 
 				var distance = Editor.camera.position.distanceTo(Editor.selected_object.position)/5;
 				Editor.rotate_tool.scale.set(distance, distance, distance);
+				Editor.rotate_tool.rotation.copy(Editor.selected_object.rotation);
 				Editor.rotate_tool.position.copy(Editor.selected_object.position);
 			}
 			else

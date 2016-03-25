@@ -8,6 +8,12 @@ include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
+include("lib/three/vr/es6-promise.js");
+include("lib/three/vr/VRControls.js");
+include("lib/three/vr/VREffect.js");
+include("lib/three/vr/webvr-manager.js");
+include("lib/three/vr/webvr-polyfill.js");
+
 include("lib/leap/leap-0.6.4.min.js");
 include("lib/leap/leap-plugins-0.1.11.min.js");
 
@@ -135,11 +141,12 @@ App.resize = function()
 //Auxiliar include
 function include(file)
 {
-	document.write('<script type="text/javascript" src="'+ file + '"></script>');
-}
-
-//Load stylesheet
-function style(file)
-{
-	document.write('<link rel="stylesheet" href="' + file + '">');
+	if(file.endsWith(".js"))
+	{
+		document.write('<script type="text/javascript" src="'+ file + '"></script>');
+	}
+	else if(file.endsWith(".css"))
+	{
+		document.write('<link rel="stylesheet" href="' + file + '">');
+	}	
 }

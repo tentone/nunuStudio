@@ -31,6 +31,8 @@ function DivisionResizable(parent)
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
+	this.resize_size_max = Number.MAX_VALUE;
+	this.resize_size_min = 0;
 	this.resize_tab_size = 5;
 	this.resizable_side = DivisionResizable.LEFT;
 	this.resizing = false;
@@ -97,13 +99,22 @@ function update()
 		}
 
 		//Limit Size
-		if(this.size.x < this.resize_tab_size)
+		if(this.size.x < (this.resize_tab_size + this.resize_size_min))
 		{
-			this.size.x = this.resize_tab_size;
+			this.size.x = (this.resize_tab_size + this.resize_size_min);
 		}
-		if(this.size.y < this.resize_tab_size)
+		else if(this.size.x > this.resize_size_max)
 		{
-			this.size.y = this.resize_tab_size;
+			this.size.x = this.resize_size_max;
+		}
+
+		if(this.size.y < (this.resize_tab_size + this.resize_size_min))
+		{
+			this.size.y = this.resize_tab_size + this.resize_size_min;
+		}
+		else if(this.size.y > this.resize_size_max)
+		{
+			this.size.y = this.resize_size_max;
 		}
 
 		//Update Parent interface
