@@ -57,12 +57,37 @@ body
 	align-items: center;
 }
 
+.button_light
+{
+	background-color: #333333;
+	cursor: default;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .button_over
 {
 	background-color: #555555;
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
+	align-items: center;
+}
+
+.button_left_light
+{
+	background-color: #333333;
+	cursor: default;
+	display: flex;
+	align-items: center;
+}
+
+.button_left_over
+{
+	background-color: #555555;
+	cursor: pointer;
+	display: flex;
 	align-items: center;
 }
 

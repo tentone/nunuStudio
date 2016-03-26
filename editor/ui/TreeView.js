@@ -1,4 +1,4 @@
-function ThreeView(parent)
+function TreeView(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,8 +11,8 @@ function ThreeView(parent)
 	}
 	
 	//ID
-	var id = "div" + ThreeView.id;
-	ThreeView.id++;
+	var id = "tree" + TreeView.id;
+	TreeView.id++;
 
 	//Create element
 	this.element = document.createElement("div");
@@ -20,7 +20,7 @@ function ThreeView(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "panel";
 	
-	//ThreeView Childs
+	//TreeView Childs
 	this.childs = [];
 
 	//Element atributes
@@ -32,13 +32,13 @@ function ThreeView(parent)
 	this.parent.appendChild(this.element);
 }
 
-//ThreeView conter
-ThreeView.id = 0;
+//TreeView conter
+TreeView.id = 0;
 
 //Functions Prototype
-ThreeView.prototype.update = update;
-ThreeView.prototype.updateInterface = updateInterface;
-ThreeView.prototype.destroy = destroy;
+TreeView.prototype.update = update;
+TreeView.prototype.updateInterface = updateInterface;
+TreeView.prototype.destroy = destroy;
 
 //Remove element
 function destroy()
@@ -46,7 +46,7 @@ function destroy()
 	this.parent.removeChild(this.element);
 }
 
-//Update ThreeView
+//Update TreeView
 function update(){}
 
 //Update division Size

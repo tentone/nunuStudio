@@ -1,8 +1,8 @@
 function Model3D(geometry, material)
 {
 	THREE.Mesh.call(this, geometry, material);
-	
 	this.updateable = true;
+	this.name = "model";
 }
 
 Model3D.prototype = Object.create(THREE.Mesh.prototype);

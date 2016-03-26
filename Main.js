@@ -130,7 +130,7 @@ Main.initialize = function()
 	Main.scene.add(light);
 
 	light = new THREE.SpotLight(0x333333);
-		light.shadowMapWidth = 2048;
+	light.shadowMapWidth = 2048;
 	light.shadowMapHeight = 2048;
 	light.position.set(-15, 10, 0);
 	light.target.position.set(0, 0, 0);

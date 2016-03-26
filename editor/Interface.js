@@ -51,6 +51,10 @@ Interface.initialize = function()
 	Interface.explorer_resizable.tab_position = 400;
 	Interface.explorer_resizable.position.set(0, 0);
 
+	Interface.test = new TreeElement(Interface.explorer_resizable);
+	Interface.test.size.set(250, 20);
+	Interface.test.updateInterface();
+
 	//------------------------------------Tool Bar------------------------------------
 	Interface.tool_bar = new Division();
 	Interface.tool_bar.size.x = 40;
@@ -159,44 +163,60 @@ Interface.initialize = function()
 	Interface.add_model.options_size.set(40, 40);
 	Interface.add_model.updateInterface();
 
+	//Cube
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cube.png", function()
 	{
 		var geometry = new THREE.BoxGeometry(1, 1, 1);
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
+		model.receiveShadow = true;
 		Editor.addToActualScene(model);
 	});
 
+	//Cylinder
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cylinder.png", function()
 	{
 		var geometry = new THREE.CylinderGeometry(1, 1, 2, 32);
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
+		model.receiveShadow = true;
 		Editor.addToActualScene(model);
 	});
 
+	//Sphere
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/sphere.png", function()
 	{
 		var geometry = new THREE.SphereGeometry(0.6, 16, 16);
 		var material = new THREE.MeshPhongMaterial();
-		var sphere = new Model3D(geometry, material);
-		Editor.addToActualScene(sphere);
+		var model = new Model3D(geometry, material);
+		model.receiveShadow = true;
+		Editor.addToActualScene(model);
 	});
 
+	//Torus
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/torus.png", function()
 	{
 		var geometry = new THREE.TorusGeometry(1, 0.5, 16, 100);
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
+		model.receiveShadow = true;
 		Editor.addToActualScene(model);
 	});
 
+	//Pyramid
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/pyramid.png", function()
 	{
 		var geometry = new THREE.CylinderGeometry(0, 1, 2, 32);
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
+		model.receiveShadow = true;
 		Editor.addToActualScene(model);
+	});
+
+	//Text
+	Interface.add_model.addOption(Interface.file_dir + "icons/models/text.png", function()
+	{
+		//TODO <ADD CODE HERE>
 	});
 
 	//Add lights
@@ -212,25 +232,29 @@ Interface.initialize = function()
 	//Point Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/point.png", function()
 	{
-		Editor.addToActualScene(new PointLight());
+		var light = new PointLight();
+		Editor.addToActualScene(light);
 	});
 
 	//Ambient Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/ambient.png", function()
 	{
-		Editor.addToActualScene(new AmbientLight());
+		var light = new AmbientLight();
+		Editor.addToActualScene(light);
 	});
 
 	//Spot Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/spot.png", function()
 	{
-		Editor.addToActualScene(new SpotLight());
+		var light = new SpotLight();
+		Editor.addToActualScene(light);
 	});
 
 	//Directional Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/directional.png", function()
 	{
-		Editor.addToActualScene(new DirectionalLight());
+		var light = new DirectionalLight();
+		Editor.addToActualScene(light);
 	});
 
 	//Add camera
@@ -247,13 +271,13 @@ Interface.initialize = function()
 	//Prespective camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/prespective.png", function()
 	{
-		Editor.addToActualScene(new PointLight());
+		//TODO <ADD CODE HERE>
 	});
 
 	//Orthographic camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
 	{
-		Editor.addToActualScene(new AmbientLight());
+		//TODO <ADD CODE HERE>
 	});
 
 	//Add script
@@ -270,13 +294,13 @@ Interface.initialize = function()
 	//Javascript script
 	Interface.add_script.addOption(Interface.file_dir + "icons/script/script.png", function()
 	{
-		Editor.addToActualScene(new PointLight());
+		Editor.addToActualScene(new Script());
 	});
 
 	//Block script
 	Interface.add_script.addOption(Interface.file_dir + "icons/script/blocks.png", function()
 	{
-		Editor.addToActualScene(new AmbientLight());
+		//TODO <ADD CODE HERE>
 	});
 
 
@@ -333,7 +357,7 @@ Interface.initialize = function()
 		//TODO <REDO>
 	});
 
-	//About
+	//Run
 	Interface.about = new Button();
 	Interface.about.text = "Run";
 	Interface.about.size.set(150, Interface.top_bar.size.y);
@@ -341,7 +365,6 @@ Interface.initialize = function()
 	Interface.about.updateInterface();
 	Interface.about.setCallback(function()
 	{
-		//TODO <ADD CODE HERE>
 		if(Editor.state === Editor.STATE_EDITING)
 		{
 			Interface.about.setText("Stop");
@@ -389,6 +412,8 @@ Interface.updateInterface = function()
 
 	Interface.explorer_resizable.size.set(Interface.explorer.size.x - Interface.explorer.resize_tab_size, Interface.explorer.size.y);
 	Interface.explorer_resizable.updateInterface();
+
+	Interface.test.updateInterface();
 
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;

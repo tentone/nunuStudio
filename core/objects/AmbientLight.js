@@ -2,6 +2,7 @@ function AmbientLight(hex)
 {
 	THREE.AmbientLight.call(this, hex);
 	this.updateable = true;
+	this.name = "directional_light";
 }
 
 AmbientLight.prototype = Object.create(THREE.AmbientLight.prototype);

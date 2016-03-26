@@ -3,6 +3,7 @@ function Script()
 	THREE.Object3D.call(this);
 
 	this.updateable = true;
+	this.name = "script";
 
 	//Script Code
 	this.code = '';
@@ -22,8 +23,16 @@ function setLoopCode(code)
 	this.func = Function(this.code);
 }
 
-//Update Script (run)
+//Update Script
 function update()
 {
-	this.func_loop();
+	this.func();
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		if(this.children[i].updateable)
+		{
+			this.children[i].update();
+		}
+	}
 }

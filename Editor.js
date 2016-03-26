@@ -1,6 +1,7 @@
+include("lib/codemirror/codemirror.js");
+include("lib/codemirror/mode/javascript/javascript.js");
 include("lib/codemirror/codemirror.css");
 include("lib/codemirror/theme/monokai.css");
-include("lib/codemirror/codemirror.js");
 
 include("editor/ui/Button.js");
 include("editor/ui/DropdownMenu.js");
@@ -91,7 +92,7 @@ Editor.initialize = function(canvas)
 	Editor.renderer.autoClear = false;
 	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
 	Editor.renderer.shadowMap.enabled = true;
-	Editor.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+	Editor.renderer.shadowMap.type = THREE.PCFShadowMap;
 
 	//Update interface
 	Interface.updateInterface();
@@ -103,7 +104,7 @@ Editor.initialize = function(canvas)
 	Editor.axis_helper = new THREE.AxisHelper(100);
 	Editor.tool_scene.add(Editor.axis_helper);
 
-	//Box helpers
+	//Box and Wireframe helpers
 	Editor.box_helper = new THREE.BoxHelper();
 	Editor.tool_scene.add(Editor.box_helper);
 
