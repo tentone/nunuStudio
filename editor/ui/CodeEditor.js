@@ -18,7 +18,7 @@ function CodeEditor(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "panel";
+	this.element.className = "container";
 	
 	//Codemirror editor
 	this.code = new CodeMirror(this.element, {value: "//TODO <Insert Code here>\n", lineNumbers: true, mode: "javascript"});

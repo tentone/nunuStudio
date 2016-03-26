@@ -102,9 +102,6 @@ KinectDevice.updateDebugSkeleton = function(joints)
 	kneeright
 	ankleright
 	footright*/
-
-	//KinectDevice.debug_scene[0] = KinectDevice.createCylinderBetweenPoints(
-
 }
 
 //Create a cylinder between points a and b

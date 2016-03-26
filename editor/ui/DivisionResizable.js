@@ -81,40 +81,45 @@ function update()
 {
 	if(this.resizing && Mouse.buttonPressed(Mouse.LEFT))
 	{
-		if(this.resizable_side == DivisionResizable.LEFT)
+		if(this.resizable_side === DivisionResizable.LEFT)
 		{	
 			this.size.x -= Mouse.pos_diff.x;
 		}
-		else if(this.resizable_side == DivisionResizable.RIGHT)
+		else if(this.resizable_side === DivisionResizable.RIGHT)
 		{
 			this.size.x += Mouse.pos_diff.x;
 		}
-		else if(this.resizable_side == DivisionResizable.TOP)
+		else if(this.resizable_side === DivisionResizable.TOP)
 		{
 			this.size.y -= Mouse.pos_diff.y;
 		}
-		else if(this.resizable_side == DivisionResizable.BOTTOM)
+		else if(this.resizable_side === DivisionResizable.BOTTOM)
 		{
 			this.size.y += Mouse.pos_diff.y;
 		}
 
 		//Limit Size
-		if(this.size.x < (this.resize_tab_size + this.resize_size_min))
+		if(this.resizable_side === DivisionResizable.BOTTOM || this.resizable_side === DivisionResizable.TOP)
 		{
-			this.size.x = (this.resize_tab_size + this.resize_size_min);
+			if(this.size.y < (this.resize_tab_size + this.resize_size_min))
+			{
+				this.size.y = this.resize_tab_size + this.resize_size_min;
+			}
+			else if(this.size.y > this.resize_size_max)
+			{
+				this.size.y = this.resize_size_max;
+			}
 		}
-		else if(this.size.x > this.resize_size_max)
+		else
 		{
-			this.size.x = this.resize_size_max;
-		}
-
-		if(this.size.y < (this.resize_tab_size + this.resize_size_min))
-		{
-			this.size.y = this.resize_tab_size + this.resize_size_min;
-		}
-		else if(this.size.y > this.resize_size_max)
-		{
-			this.size.y = this.resize_size_max;
+			if(this.size.x < (this.resize_tab_size + this.resize_size_min))
+			{
+				this.size.x = (this.resize_tab_size + this.resize_size_min);
+			}
+			else if(this.size.x > this.resize_size_max)
+			{
+				this.size.x = this.resize_size_max;
+			}	
 		}
 
 		//Update Parent interface

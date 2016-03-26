@@ -54,7 +54,7 @@ function TabOption(name, image, closeable, container, index)
 	this.close_button.visible = this.closeable;
 	this.close_button.size.set(10, 10);
 	this.close_button.position.set(this.button.size.x - 20, 10);
-	this.close_button.setImage("editor/files/icons/close.png");
+	this.close_button.setImage("editor/files/icons/misc/close.png");
 	this.close_button.callback = function()
 	{
 		self.container.removeOption(self.index);

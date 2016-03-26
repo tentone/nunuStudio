@@ -37,10 +37,28 @@ function Text(parent)
 //Text conter
 Text.id = 0;
 
+//Text alignment
+Text.CENTER = 0;
+Text.LEFT = 1;
+
 //Functions Prototype
 Text.prototype.update = update;
 Text.prototype.updateInterface = updateInterface;
 Text.prototype.destroy = destroy;
+Text.prototype.setAlignment = setAlignment;
+
+//Set text alignment
+function setAlignment(align)
+{
+	if(align === Text.CENTER)
+	{
+		this.element.className = "text";
+	}
+	else if(align === Text.LEFT)
+	{
+		this.element.className = "text_left";
+	}
+}
 
 //Remove element
 function destroy()

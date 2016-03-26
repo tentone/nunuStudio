@@ -1,6 +1,8 @@
 function Scene()
 {
 	THREE.Scene.call(this);
+	this.name = "scene";
+	this.icon = "editor/files/icons/models/models.png";
 
 	//Disable auto updates
 	this.rotationAutoUpdate = false;

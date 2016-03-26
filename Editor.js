@@ -120,6 +120,9 @@ Editor.initialize = function(canvas)
 	Editor.rotate_tool = new RotateTool();
 	Editor.rotate_tool.visible = false;
 	Editor.tool_scene_top.add(Editor.rotate_tool);
+
+	//Update interface explorer tree view
+	Interface.tree_view.fromScene(Editor.scene);
 }
 
 //Update Editor
@@ -373,6 +376,7 @@ Editor.update = function()
 Editor.addToActualScene = function(obj)
 {
 	Editor.scene.add(obj);
+	Interface.tree_view.fromScene(Editor.scene);
 }
 
 //Draw stuff into screen

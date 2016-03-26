@@ -4,7 +4,8 @@ function Script()
 
 	this.updateable = true;
 	this.name = "script";
-
+	this.icon = "editor/files/icons/script/script.png";
+	
 	//Script Code
 	this.code = '';
 	this.func = Function(this.code_loop);

@@ -3,6 +3,7 @@ function DirectionalLight(hex, intensity)
 	THREE.DirectionalLight.call(this, hex, intensity);
 	this.updateable = true;
 	this.name = "directional_light";
+	this.icon = "editor/files/icons/lights/directional.png";
 }
 
 DirectionalLight.prototype = Object.create(THREE.DirectionalLight.prototype);

@@ -2,7 +2,8 @@ function AmbientLight(hex)
 {
 	THREE.AmbientLight.call(this, hex);
 	this.updateable = true;
-	this.name = "directional_light";
+	this.name = "ambient_light";
+	this.icon = "editor/files/icons/lights/ambient.png";
 }
 
 AmbientLight.prototype = Object.create(THREE.AmbientLight.prototype);

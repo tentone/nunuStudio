@@ -1,4 +1,12 @@
 {
-  "name": "interact",
-  "main": "editor.html"
+	"name": "interact",
+	"main": "editor.html",
+	"window":
+	{
+		"frame": true,
+		"width": 800,
+		"height": 480,
+		"min_width": 800,
+		"min_height": 480
+	}
 }

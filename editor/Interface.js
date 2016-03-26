@@ -11,9 +11,9 @@ Interface.initialize = function()
 
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabContainer();
-	Interface.tab.addOption("Scene", Interface.file_dir + "icons/models/models.png", false);
-	Interface.tab.addOption("Settings", Interface.file_dir + "icons/settings.png", true);
-	Interface.tab.addOption("Script", Interface.file_dir + "icons/code.png", true);
+	Interface.tab.addOption("Scene", Interface.file_dir + "icons/tab/scene.png", false);
+	Interface.tab.addOption("Settings", Interface.file_dir + "icons/tab/settings.png", true);
+	Interface.tab.addOption("Script", Interface.file_dir + "icons/tab/code.png", true);
 
 	//Canvas
 	Interface.canvas = new Canvas();
@@ -51,9 +51,8 @@ Interface.initialize = function()
 	Interface.explorer_resizable.tab_position = 400;
 	Interface.explorer_resizable.position.set(0, 0);
 
-	Interface.test = new TreeElement(Interface.explorer_resizable);
-	Interface.test.size.set(250, 20);
-	Interface.test.updateInterface();
+	Interface.tree_view = new TreeView(Interface.explorer_resizable.div_a, Interface.explorer_resizable);
+	Interface.tree_view.updateInterface();
 
 	//------------------------------------Tool Bar------------------------------------
 	Interface.tool_bar = new Division();
@@ -170,6 +169,7 @@ Interface.initialize = function()
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
+		model.castShadow = true;
 		Editor.addToActualScene(model);
 	});
 
@@ -180,6 +180,7 @@ Interface.initialize = function()
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
+		model.castShadow = true;
 		Editor.addToActualScene(model);
 	});
 
@@ -190,6 +191,7 @@ Interface.initialize = function()
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
+		model.castShadow = true;
 		Editor.addToActualScene(model);
 	});
 
@@ -200,6 +202,7 @@ Interface.initialize = function()
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
+		model.castShadow = true;
 		Editor.addToActualScene(model);
 	});
 
@@ -210,6 +213,7 @@ Interface.initialize = function()
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
+		model.castShadow = true;
 		Editor.addToActualScene(model);
 	});
 
@@ -232,21 +236,20 @@ Interface.initialize = function()
 	//Point Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/point.png", function()
 	{
-		var light = new PointLight();
-		Editor.addToActualScene(light);
+		Editor.addToActualScene(new PointLight());
 	});
 
 	//Ambient Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/ambient.png", function()
 	{
-		var light = new AmbientLight();
-		Editor.addToActualScene(light);
+		Editor.addToActualScene(new AmbientLight());
 	});
 
 	//Spot Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/spot.png", function()
 	{
 		var light = new SpotLight();
+		light.castShadow = true;
 		Editor.addToActualScene(light);
 	});
 
@@ -254,6 +257,7 @@ Interface.initialize = function()
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/directional.png", function()
 	{
 		var light = new DirectionalLight();
+		light.castShadow = true;
 		Editor.addToActualScene(light);
 	});
 
@@ -413,7 +417,7 @@ Interface.updateInterface = function()
 	Interface.explorer_resizable.size.set(Interface.explorer.size.x - Interface.explorer.resize_tab_size, Interface.explorer.size.y);
 	Interface.explorer_resizable.updateInterface();
 
-	Interface.test.updateInterface();
+	Interface.tree_view.updateInterface();
 
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;

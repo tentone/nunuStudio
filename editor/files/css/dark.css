@@ -99,6 +99,14 @@ body
 	align-items: center;
 }
 
+.text_left
+{
+	cursor: default;
+	display: flex;
+	align-items: center;
+}
+
+
 .text_box
 {
 	background-color: #444444;
