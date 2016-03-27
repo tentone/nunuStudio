@@ -93,19 +93,18 @@ body
 
 .text
 {
-	cursor: default;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	pointer-events:none;
 }
 
 .text_left
 {
-	cursor: default;
 	display: flex;
 	align-items: center;
+	pointer-events:none;
 }
-
 
 .text_box
 {

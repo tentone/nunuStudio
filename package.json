@@ -4,8 +4,8 @@
 	"window":
 	{
 		"frame": true,
-		"width": 800,
-		"height": 480,
+		"width": 1024,
+		"height": 600,
 		"min_width": 800,
 		"min_height": 480
 	}

@@ -11,23 +11,16 @@ Interface.initialize = function()
 
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabContainer();
-	Interface.tab.addOption("Scene", Interface.file_dir + "icons/tab/scene.png", false);
-	Interface.tab.addOption("Settings", Interface.file_dir + "icons/tab/settings.png", true);
+	var scene = Interface.tab.addOption("Scene", Interface.file_dir + "icons/tab/scene.png", false);
 	var script = Interface.tab.addOption("Script", Interface.file_dir + "icons/tab/code.png", true);
 
 	//Canvas
 	Interface.canvas = new Canvas();
-	Interface.tab.options[0].attachComponent(Interface.canvas);
+	scene.attachComponent(Interface.canvas);
 	
+	//Code Editor
 	Interface.code = new CodeEditor();
 	script.attachComponent(Interface.code);
-
-	//Dual Div
-	Interface.dual_test = new DualDivisionResizable();
-	Interface.dual_test.orientation = DualDivisionResizable.HORIZONTAL;
-	Interface.dual_test.tab_position = 250;
-	Interface.dual_test.div_a.className = "bar";
-	Interface.tab.options[1].attachComponent(Interface.dual_test);
 
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer = new DivisionResizable();
@@ -327,7 +320,6 @@ Interface.initialize = function()
 
 	Interface.file.addOption("New Project", function()
 	{
-		//TODO <CONFIRM ACTION>
 		Editor.createNewProgram();
 	});
 
@@ -341,9 +333,19 @@ Interface.initialize = function()
 		//TODO <LOAD PROJECT>
 	});
 
+	Interface.file.addOption("Settings", function()
+	{
+		var settings = Interface.tab.addOption("Settings", Interface.file_dir + "icons/tab/settings.png", true);
+		var settings_panel = new DualDivisionResizable();
+		settings_panel.orientation = DualDivisionResizable.HORIZONTAL;
+		settings_panel.tab_position = 250;
+		settings_panel.div_a.className = "bar";
+		settings.attachComponent(settings_panel);
+	});
+
 	Interface.file.addOption("Exit", function()
 	{
-		//TODO <NEW PROJECT>
+		Editor.exit();
 	});
 
 	//Editor
@@ -384,9 +386,9 @@ Interface.initialize = function()
 
 Interface.update = function()
 {
+	Interface.tab.update();
 	Interface.explorer.update();
 	Interface.asset_explorer.update();
-	Interface.dual_test.update();
 	Interface.explorer_resizable.update();
 }
 

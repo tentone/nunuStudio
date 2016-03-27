@@ -19,7 +19,7 @@ function Text(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.className = "text";
-
+	
 	//Text
 	this.span = document.createElement("span");
 	this.element.appendChild(this.span);
