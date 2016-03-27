@@ -457,3 +457,9 @@ Editor.createNewProgram = function()
 
 	Editor.resetEditingFlags();
 }
+
+//Exit editor
+Editor.exit = function()
+{
+	process.exit();
+}

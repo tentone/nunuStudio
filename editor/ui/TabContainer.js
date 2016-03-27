@@ -91,7 +91,13 @@ function destroy()
 }
 
 //Update TabContainer
-function update(){}
+function update()
+{
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].update();
+	}
+}
 
 //Update division Size
 function updateInterface()

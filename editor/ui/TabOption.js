@@ -8,12 +8,15 @@ function TabOption(name, image, closeable, container, index)
 	//Container info
 	this.index = index;
 	this.container = container;
+	this.component = null;
+	this.type = TabOption.CONTAINER;
 
 	//Atributes
 	this.size = new THREE.Vector2(0, 0);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = false;
 
+	//Self pointer
 	var self = this;
 
 	//Button
@@ -67,10 +70,13 @@ function TabOption(name, image, closeable, container, index)
 	this.division.visible = false;
 	this.division.position.set(0, this.container.options_size.y);
 	this.division.updateInterface();
-
-	//Element
-	this.component = null;
 }
+
+//Type of tab options
+TabOption.CONTAINER = 0;
+TabOption.SCRIPT = 1;
+TabOption.SCENE = 2;
+TabOption.SETTINGS = 3;
 
 TabOption.prototype.update = update;
 TabOption.prototype.updateInterface = updateInterface;
@@ -85,7 +91,13 @@ function isSelected()
 }
 
 //Update taboption status
-function update(){}
+function update()
+{
+	if(this.component != null)
+	{
+		this.component.update();
+	}
+}
 
 //Destroy
 function destroy()

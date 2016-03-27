@@ -20,6 +20,10 @@ function DropdownMenu(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "button";
 
+	//Text
+	this.span = document.createElement("span");
+	this.element.appendChild(this.span);
+
 	//Atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
@@ -43,11 +47,15 @@ function DropdownMenu(parent)
 	//Mouse over and mouse out events
 	this.element.onmouseover = function()
 	{
+		//self.expanded = true;
+		//self.updateInterface();
 		self.element.className = "button_over";
 	};
 
 	this.element.onmouseout = function()
 	{
+		//self.expanded = false;
+		//self.updateInterface();
 		self.element.className = "button";
 	};
 
@@ -115,6 +123,7 @@ function addOption(name, callback)
 //Update interface
 function updateInterface()
 {
+	//Update Options
 	for(var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].size.set(this.size.x, this.size.y);
@@ -123,6 +132,7 @@ function updateInterface()
 		this.options[i].updateInterface();
 	}
 
+	//Set visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -131,8 +141,11 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
-	
-	this.element.innerHTML = "<span>" + this.text + "</span>";
+
+	//Set Text
+	this.span.innerHTML = this.text;
+
+	//Element position and size
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
