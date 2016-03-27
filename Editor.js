@@ -79,7 +79,7 @@ Editor.initialize = function(canvas)
 	Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.tool_scene, Editor.scene.world);
 
 	//Editor Camera
-	Editor.camera = new THREE.PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 100000);
+	Editor.camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 100000);
 	Editor.camera.position.set(0, 5, -5);
 	Editor.camera_rotation = new THREE.Vector2(0,0);
 	Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
@@ -100,7 +100,6 @@ Editor.initialize = function(canvas)
 	//Grid and axis helpers
 	Editor.grid_helper = new THREE.GridHelper(200, 5);
 	Editor.tool_scene.add(Editor.grid_helper);
-	
 	Editor.axis_helper = new THREE.AxisHelper(100);
 	Editor.tool_scene.add(Editor.axis_helper);
 
@@ -141,6 +140,8 @@ Editor.update = function()
 			Editor.box_helper.visible = true;
 			Editor.box_helper.update(Editor.selected_object);
 
+			Editor.updateObjectHelper();
+
 			if(Editor.tool_mode === Editor.MODE_MOVE)
 			{
 				Editor.move_tool.visible = true;
@@ -170,7 +171,6 @@ Editor.update = function()
 
 				var distance = Editor.camera.position.distanceTo(Editor.selected_object.position)/5;
 				Editor.rotate_tool.scale.set(distance, distance, distance);
-				Editor.rotate_tool.rotation.copy(Editor.selected_object.rotation);
 				Editor.rotate_tool.position.copy(Editor.selected_object.position);
 			}
 			else
@@ -402,6 +402,12 @@ Editor.draw = function()
 Editor.resize = function()
 {
 	Interface.updateInterface();
+}
+
+//Show apropiate helper to selected object
+Editor.updateObjectHelper = function()
+{
+	//TODO <ADD CODE HERE>
 }
 
 //Resize Camera

@@ -59,6 +59,7 @@ function addOption(name, image, closeable)
 {
 	var option = new TabOption(name, image, closeable, this, this.options.length);
 	this.options.push(option);
+	return option;
 }
 
 //Remove tab

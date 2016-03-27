@@ -29,7 +29,7 @@ function TreeElement(container)
 	this.arrow = new Image(this.element);
 	this.arrow.size.set(15, 15);
 	this.arrow.position.set(5, 3);
-	this.arrow.setImage("editor/files/icons/misc/arrow_right.png");
+	this.arrow.setImage("editor/files/icons/misc/arrow_down.png");
 	this.arrow.updateInterface();
 
 	//Icon
@@ -179,7 +179,7 @@ function updateInterface()
 		this.size.x = this.container.size.x;
 	}
 
-	var offset = this.level * 25;
+	var offset = this.level * 20;
 
 	//Arrow
 	this.arrow.visible = (this.children.length > 0) && this.visible;

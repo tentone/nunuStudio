@@ -7,7 +7,6 @@ function Model3D(geometry, material)
 }
 
 Model3D.prototype = Object.create(THREE.Mesh.prototype);
-Model3D.prototype.constructor = Model3D;
 Model3D.prototype.update = update;
 
 function update()

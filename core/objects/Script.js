@@ -13,7 +13,6 @@ function Script()
 
 //Function Prototype
 Script.prototype = Object.create(THREE.Object3D.prototype);
-Script.prototype.constructor = Script;
 Script.prototype.update = update;
 Script.prototype.setLoopCode = setLoopCode;
 

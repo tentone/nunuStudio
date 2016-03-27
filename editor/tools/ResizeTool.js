@@ -52,7 +52,7 @@ function ResizeTool()
 	this.z.updateMatrix();
 	
 	//Center
-	geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+	geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
 	this.block = new THREE.Mesh(geometry, this.material_yellow);
 
 	this.x.updateMatrix();

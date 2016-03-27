@@ -13,14 +13,14 @@ Interface.initialize = function()
 	Interface.tab = new TabContainer();
 	Interface.tab.addOption("Scene", Interface.file_dir + "icons/tab/scene.png", false);
 	Interface.tab.addOption("Settings", Interface.file_dir + "icons/tab/settings.png", true);
-	Interface.tab.addOption("Script", Interface.file_dir + "icons/tab/code.png", true);
+	var script = Interface.tab.addOption("Script", Interface.file_dir + "icons/tab/code.png", true);
 
 	//Canvas
 	Interface.canvas = new Canvas();
 	Interface.tab.options[0].attachComponent(Interface.canvas);
 	
 	Interface.code = new CodeEditor();
-	Interface.tab.options[2].attachComponent(Interface.code);
+	script.attachComponent(Interface.code);
 
 	//Dual Div
 	Interface.dual_test = new DualDivisionResizable();
@@ -275,13 +275,13 @@ Interface.initialize = function()
 	//Prespective camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/prespective.png", function()
 	{
-		//TODO <ADD CODE HERE>
+		Editor.addToActualScene(new PerspectiveCamera());
 	});
 
 	//Orthographic camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
 	{
-		//TODO <ADD CODE HERE>
+		Editor.addToActualScene(new OrthographicCamera());
 	});
 
 	//Add script
