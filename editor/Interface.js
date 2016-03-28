@@ -229,7 +229,12 @@ Interface.initialize = function()
 	//Point Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/point.png", function()
 	{
-		Editor.addToActualScene(new PointLight());
+		var light = new PointLight();
+		light.castShadow = true;
+		light.shadow.camera.near = 1;
+		light.shadow.camera.far = 30;
+		light.shadow.bias = 0.01;
+		Editor.addToActualScene(light);
 	});
 
 	//Ambient Light
@@ -274,7 +279,7 @@ Interface.initialize = function()
 	//Orthographic camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
 	{
-		Editor.addToActualScene(new OrthographicCamera());
+		Editor.addToActualScene(new OrthographicCamera(1, 1, 1, 1, 1, 1));
 	});
 
 	//Add script
@@ -331,6 +336,11 @@ Interface.initialize = function()
 	Interface.file.addOption("Load Project", function()
 	{
 		//TODO <LOAD PROJECT>
+	});
+
+	Interface.file.addOption("Project Settings", function()
+	{
+		//TODO <ADD CODE HERE>
 	});
 
 	Interface.file.addOption("Settings", function()

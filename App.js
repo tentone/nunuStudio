@@ -34,6 +34,7 @@ include("core/Scene.js");
 
 include("core/objects/Script.js");
 include("core/objects/Model3D.js");
+include("core/objects/Text3D.js");
 include("core/objects/PointLight.js");
 include("core/objects/SpotLight.js");
 include("core/objects/AmbientLight.js");

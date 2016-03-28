@@ -19,6 +19,7 @@ function DropdownMenu(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.className = "button";
+	this.element.style.zIndex = "1000";
 
 	//Text
 	this.span = document.createElement("span");
@@ -104,6 +105,7 @@ function removeOption(index)
 function addOption(name, callback)
 {
 	var button = new Button();
+	button.element.style.zIndex = "10";
 	button.text = name;
 	button.visible = this.expanded;
 	button.updateInterface();

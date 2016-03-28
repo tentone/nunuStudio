@@ -19,13 +19,15 @@ function ButtonDrawer(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-
+	this.element.style.zIndex = "10";
+	
 	//Create Drawer Panel
 	this.panel = document.createElement("div");
 	this.panel.id = id_panel;
 	this.panel.style.position = "absolute";
 	this.panel.className = "bar";
-
+	this.panel.style.zIndex = "10";
+	
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.position = "absolute";
