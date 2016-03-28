@@ -54,7 +54,7 @@ Editor.initialize = function(canvas)
 	//Editor Selected object
 	Editor.selected_object = null;
 	Editor.block_camera_move = false;
-	Editor.editing_object = false;
+	Editor.is_editing_object = false;
 	Editor.editing_object_args = null;
 
 	//Initialize User Interface
@@ -103,19 +103,42 @@ Editor.initialize = function(canvas)
 	Editor.axis_helper = new THREE.AxisHelper(100);
 	Editor.tool_scene.add(Editor.axis_helper);
 
-	//Box and Wireframe helpers
+	//Box helper
 	Editor.box_helper = new THREE.BoxHelper();
+	Editor.box_helper.visible = false;
 	Editor.tool_scene.add(Editor.box_helper);
 
-	//Tools
+	//Camera helper
+	Editor.camera_helper = new THREE.CameraHelper(Editor.camera);
+	Editor.activateHelper(Editor.camera_helper, false);
+	Editor.tool_scene.add(Editor.camera_helper);
+
+	//DirectionalLight Helper
+	Editor.directional_light_helper = new THREE.DirectionalLightHelper(new THREE.DirectionalLight(), 1);
+	Editor.activateHelper(Editor.directional_light_helper, false);
+	Editor.tool_scene.add(Editor.directional_light_helper);
+
+	//PointLight helper
+	Editor.point_light_helper = new THREE.PointLightHelper(new THREE.PointLight(), 1);
+	Editor.activateHelper(Editor.point_light_helper, false);
+	Editor.tool_scene.add(Editor.point_light_helper);
+	
+	//SpotLight helper
+	Editor.spot_light_helper = new THREE.SpotLightHelper(new THREE.SpotLight(), 1);
+	Editor.activateHelper(Editor.spot_light_helper, false);
+	Editor.tool_scene.add(Editor.spot_light_helper);
+
+	//Move tool
 	Editor.move_tool = new MoveTool();
 	Editor.move_tool.visible = false;
 	Editor.tool_scene_top.add(Editor.move_tool);
 
+	//Resize tool
 	Editor.resize_tool = new ResizeTool();
 	Editor.resize_tool.visible = false;
 	Editor.tool_scene_top.add(Editor.resize_tool);
 
+	//Rotate tool
 	Editor.rotate_tool = new RotateTool();
 	Editor.rotate_tool.visible = false;
 	Editor.tool_scene_top.add(Editor.rotate_tool);
@@ -137,9 +160,6 @@ Editor.update = function()
 		//If object select display tools
 		if(Editor.selected_object !== null)
 		{
-			Editor.box_helper.visible = true;
-			Editor.box_helper.update(Editor.selected_object);
-
 			Editor.updateObjectHelper();
 
 			if(Editor.tool_mode === Editor.MODE_MOVE)
@@ -185,16 +205,15 @@ Editor.update = function()
 			Editor.move_tool.visible = false;
 			Editor.rotate_tool.visible = false;
 			Editor.resize_tool.visible = false;
-			Editor.box_helper.visible = false;
 		}
 
 		//Check if editing object
-		if(Editor.editing_object)
+		if(Editor.is_editing_object)
 		{	
 			//If mouse button released exit edit mode
 			if(Mouse.buttonJustReleased(Mouse.LEFT))
 			{
-				Editor.editing_object = false;
+				Editor.is_editing_object = false;
 			}
 			else
 			{
@@ -286,7 +305,7 @@ Editor.update = function()
 				if(move.selected && Mouse.buttonJustPressed(Mouse.LEFT))
 				{	
 					Editor.editing_object_args = move;
-					Editor.editing_object = true;
+					Editor.is_editing_object = true;
 					Editor.block_camera_move = true;
 				}
 			}
@@ -299,7 +318,7 @@ Editor.update = function()
 				if(resize.selected && Mouse.buttonJustPressed(Mouse.LEFT))
 				{	
 					Editor.editing_object_args = resize;
-					Editor.editing_object = true;
+					Editor.is_editing_object = true;
 					Editor.block_camera_move = true;
 				}
 			}
@@ -312,7 +331,7 @@ Editor.update = function()
 				if(rotate.selected && Mouse.buttonJustPressed(Mouse.LEFT))
 				{	
 					Editor.editing_object_args = rotate;
-					Editor.editing_object = true;
+					Editor.is_editing_object = true;
 					Editor.block_camera_move = true;
 				}
 			}
@@ -407,7 +426,63 @@ Editor.resize = function()
 //Show apropiate helper to selected object
 Editor.updateObjectHelper = function()
 {
-	//TODO <ADD CODE HERE>
+	Editor.activateHelper(Editor.box_helper, false);
+	Editor.activateHelper(Editor.camera_helper, false);
+	Editor.activateHelper(Editor.point_light_helper, false);
+	Editor.activateHelper(Editor.spot_light_helper, false);
+	Editor.activateHelper(Editor.directional_light_helper, false);
+
+	if(Editor.selected_object !== null)
+	{
+		if(Editor.selected_object instanceof THREE.Camera)
+		{
+			Editor.activateHelper(Editor.camera_helper, true);
+			Editor.camera_helper.camera = Editor.selected_object;
+			Editor.camera_helper.position.copy(Editor.selected_object.position);
+			Editor.camera_helper.rotation.copy(Editor.selected_object.rotation);
+			Editor.camera_helper.update();
+		}
+		else if(Editor.selected_object instanceof THREE.DirectionalLight)
+		{
+			Editor.activateHelper(Editor.directional_light_helper, true);
+			Editor.directional_light_helper.light = Editor.selected_object;
+			Editor.directional_light_helper.position.copy(Editor.selected_object.position);
+			Editor.directional_light_helper.update();
+		}
+		else if(Editor.selected_object instanceof THREE.PointLight)
+		{
+			Editor.activateHelper(Editor.point_light_helper, true);
+			Editor.point_light_helper.light = Editor.selected_object;
+			Editor.point_light_helper.position.copy(Editor.selected_object.position);
+			Editor.point_light_helper.update();
+		}
+		else if(Editor.selected_object instanceof THREE.SpotLight)
+		{
+			Editor.activateHelper(Editor.spot_light_helper, true);
+			Editor.spot_light_helper.light = Editor.selected_object;
+			Editor.spot_light_helper.position.copy(Editor.selected_object.position);
+			Editor.spot_light_helper.update();
+		}
+		else if(Editor.selected_object instanceof THREE.SpotLight)
+		{
+			Editor.activateHelper(Editor.spot_light_helper, true);
+			Editor.spot_light_helper.light = Editor.selected_object;
+			Editor.spot_light_helper.position.copy(Editor.selected_object.position);
+			Editor.spot_light_helper.update();
+		}
+		else if(Editor.selected_object instanceof THREE.Mesh)
+		{
+			Editor.activateHelper(Editor.box_helper, true);
+			Editor.box_helper.update(Editor.selected_object);
+		}
+	}
+}
+
+//Activate helper
+Editor.activateHelper = function(helper, value)
+{
+	helper.visible = value;
+	helper.matrixAutoUpdate = value;
 }
 
 //Resize Camera
@@ -444,7 +519,7 @@ Editor.resetEditingFlags = function()
 {
 	Editor.selected_object = null;
 	Editor.block_camera_move = false;
-	Editor.editing_object = false;
+	Editor.is_editing_object = false;
 	Editor.editing_object_args = null
 }
 
