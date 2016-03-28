@@ -1,5 +1,6 @@
 include("lib/three/three.min.js");
 include("lib/three/stats.min.js");
+
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/OBJMTLLoader.js");
@@ -8,7 +9,6 @@ include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
-include("lib/three/vr/es6-promise.js");
 include("lib/three/vr/VRControls.js");
 include("lib/three/vr/VREffect.js");
 include("lib/three/vr/webvr-manager.js");
@@ -18,10 +18,9 @@ include("lib/leap/leap-0.6.4.min.js");
 include("lib/leap/leap-plugins-0.1.11.min.js");
 
 include("lib/cannon/cannon.min.js");
-include("lib/cannon/ConvexGeometry.js");
-include("lib/cannon/CannonDebugRenderer.js");
+include("lib/cannon/cannondebugrenderer.js");
 
-include("device/LeapDevice.js");
+include("device/LeapHand.js");
 include("device/KinectDevice.js");
 
 include("input/Key.js");

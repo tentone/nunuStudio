@@ -2,13 +2,13 @@ function Container()
 {
 	THREE.Object3D.call(this);
 
-	this.updateable = true;
 	this.name = "container";
-	this.icon = "editor/files/icons/script/script.png";
 }
 
 //Function Prototype
 Container.prototype = Object.create(THREE.Object3D.prototype);
+Container.prototype.icon = "editor/files/icons/script/script.png";
+Container.prototype.updateable = true;
 Container.prototype.update = update;
 
 //Update Container
