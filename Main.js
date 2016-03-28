@@ -44,9 +44,9 @@ Main.initialize = function()
 	Main.cannon_renderer = new THREE.CannonDebugRenderer(Main.debug_scene, Main.world);
 
 	//Initialize Leap Hand
-	LeapDevice.initialize();
-	LeapDevice.physics_world = Main.world;
-	Main.scene.add(LeapDevice.scene);
+	LeapHand.initialize();
+	LeapHand.physics_world = Main.world;
+	Main.scene.add(LeapHand.scene);
 
 	//Raycaster
 	Main.raycaster = new THREE.Raycaster();
@@ -57,6 +57,12 @@ Main.initialize = function()
 	Main.renderer.setSize(canvas.width, canvas.height);
 	Main.renderer.shadowMap.enabled = true;
 	Main.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+	//VR
+	Main.controls = new THREE.VRControls(Main.camera);
+	Main.effect = new THREE.VREffect(Main.renderer);
+	Main.effect.setSize(canvas.width, canvas.height);
+	Main.manager = new WebVRManager(Main.renderer, Main.effect);
 
 	//Create Floor
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -248,10 +254,10 @@ Main.update = function()
 	}
 
 	//Hand Leap Follow Camera
-	LeapDevice.scene.rotation.y = Math.PI + Main.camera_rotation.x;
-	LeapDevice.scene.position.set(Main.camera.position.x, Main.camera.position.y-2, Main.camera.position.z);
-	LeapDevice.scene.position.z += 2 * angle_cos;
-	LeapDevice.scene.position.x += 2 * angle_sin;
+	LeapHand.scene.rotation.y = Math.PI + Main.camera_rotation.x;
+	LeapHand.scene.position.set(Main.camera.position.x, Main.camera.position.y-2, Main.camera.position.z);
+	LeapHand.scene.position.z += 2 * angle_cos;
+	LeapHand.scene.position.x += 2 * angle_sin;
 	
 	//Move Camera Lateral
 	var angle_cos = Math.cos(Main.camera_rotation.x + Math.PI/2.0);
@@ -278,8 +284,8 @@ Main.update = function()
 	}
 
 	//Enable leap hand shadowing
-	setShadowReceiving(LeapDevice.scene, true);
-	setShadowCasting(LeapDevice.scene, true);
+	setShadowReceiving(LeapHand.scene, true);
+	setShadowCasting(LeapHand.scene, true);
 
 	//Rasycast line from Main.camera and mouse position
 	if(Mouse.buttonJustPressed(Mouse.MIDDLE))
@@ -353,9 +359,10 @@ function setShadowCasting(object, state)
 //Draw stuff into screen
 Main.draw = function()
 {
-	Main.cannon_renderer.update();
+	//Main.cannon_renderer.update();
+	Main.manager.render(Main.scene, Main.camera, 1/60);
 	//Main.renderer.render(Main.debug_scene, Main.camera);
-	Main.renderer.render(Main.scene, Main.camera);
+	//Main.renderer.render(Main.scene, Main.camera);
 }
 
 
@@ -367,6 +374,8 @@ Main.resize = function()
 	canvas.height = window.innerHeight;
 
 	Main.renderer.setSize(canvas.width, canvas.height);
+	Main.effect.setSize(canvas.width, canvas.height);
+
 	Main.camera.aspect = canvas.width/canvas.height;
 	Main.camera.updateProjectionMatrix();
 }

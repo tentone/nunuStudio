@@ -2,7 +2,6 @@ function Scene()
 {
 	THREE.Scene.call(this);
 	this.name = "scene";
-	this.icon = "editor/files/icons/models/models.png";
 
 	//Disable auto updates
 	this.rotationAutoUpdate = false;
@@ -17,7 +16,7 @@ function Scene()
 
 //Functions prototypes
 Scene.prototype = Object.create(THREE.Scene.prototype);
-Scene.prototype.constructor = Scene;
+Scene.prototype.icon = "editor/files/icons/models/models.png";
 Scene.prototype.update = update;
 
 //Update scene
