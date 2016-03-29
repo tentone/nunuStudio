@@ -26,7 +26,7 @@ Main.initialize = function()
 
 	//Set mouse lock true
 	App.setMouseLock(true);
-	App.showStats(false);
+	App.showStats(true);
 	
 	//Create Main.camera and Main.scene
 	Main.scene = new THREE.Scene();
