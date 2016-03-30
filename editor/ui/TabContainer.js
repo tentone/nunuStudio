@@ -57,7 +57,7 @@ function selectOption(index)
 //Add tab
 function addOption(name, image, closeable)
 {
-	var option = new TabOption(name, image, closeable, this, this.options.length);
+	var option = new TabElement(name, image, closeable, this, this.options.length);
 	this.options.push(option);
 	return option;
 }

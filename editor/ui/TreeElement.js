@@ -17,6 +17,7 @@ function TreeElement(container)
 
 	//Create element
 	this.element = document.createElement("div");
+	this.element.draggable = true;
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.className = "button_left_light";
@@ -68,12 +69,87 @@ function TreeElement(container)
 		self.element.className = "button_left_light";
 	};
 
+	//Drag start
+	this.element.ondragstart = function(event)
+	{
+		if(self.obj.uuid != undefined && !(self.obj instanceof Scene))
+		{
+			event.dataTransfer.setData("uuid", self.obj.uuid);
+			TreeView.pushDragElement(self.obj);
+		}
+	};
+
+	//Drag end (called after of ondrog)
+	this.element.ondragend = function(event)
+	{
+		//Try to remove event from buffer
+		var uuid = event.dataTransfer.getData("uuid");
+		var obj = TreeView.popDragElement(uuid);
+
+		//To avoid mouse lock after drag
+		Mouse.updateKey(Mouse.LEFT, Key.KEY_UP);
+	};
+
+	//Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+
+		//Collect element from buffer
+		var uuid = event.dataTransfer.getData("uuid");
+		var obj = TreeView.popDragElement(uuid);
+		
+		if(obj != null)
+		{
+			self.obj.add(obj);
+			if(self.container.scene != null)
+			{
+				self.container.fromScene(self.container.scene);
+			}
+		}
+	};
+
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Object select event
 	this.element.onclick = function()
 	{
 		Editor.selected_object = self.obj;
 	};
-	this.label.element.onclick = this.element.onclick;
+
+	//Double click event
+	this.element.ondblclick = function()
+	{
+		//Script
+		if(self.obj instanceof Script)
+		{
+			//Check if there is already a tab with this script attached
+			var found = false;
+			for(var i = 0; i < Interface.tab.options.length; i++)
+			{
+				if(Interface.tab.options[i].component instanceof CodeEditor)
+				{
+					if(Interface.tab.options[i].component.script === self.obj)
+					{
+						found = true;
+						break;
+					}
+				}
+			}
+
+			//If not found add
+			if(!found)
+			{
+				var tab = Interface.tab.addOption("Script", Interface.file_dir + "icons/tab/code.png", true);
+				var code = new CodeEditor();
+				code.attachScript(self.obj);
+				tab.attachComponent(code);
+			}
+		}
+	};
 
 	//Arrow click
 	this.arrow.img.onclick = function()

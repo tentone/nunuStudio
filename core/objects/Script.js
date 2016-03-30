@@ -19,8 +19,12 @@ Script.prototype.setLoopCode = setLoopCode;
 //Set loop code
 function setLoopCode(code)
 {
-	this.code = code;
-	this.func = Function(this.code);
+	try
+	{
+		this.code = code;
+		this.func = Function(this.code);
+	}
+	catch(e){}
 }
 
 //Update Script
