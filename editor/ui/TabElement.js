@@ -1,4 +1,4 @@
-function TabOption(name, image, closeable, container, index)
+function TabElement(name, image, closeable, container, index)
 {
 	//Tab name and icon
 	this.name = name;
@@ -9,7 +9,6 @@ function TabOption(name, image, closeable, container, index)
 	this.index = index;
 	this.container = container;
 	this.component = null;
-	this.type = TabOption.CONTAINER;
 
 	//Atributes
 	this.size = new THREE.Vector2(0, 0);
@@ -72,17 +71,11 @@ function TabOption(name, image, closeable, container, index)
 	this.division.updateInterface();
 }
 
-//Type of tab options
-TabOption.CONTAINER = 0;
-TabOption.SCRIPT = 1;
-TabOption.SCENE = 2;
-TabOption.SETTINGS = 3;
-
-TabOption.prototype.update = update;
-TabOption.prototype.updateInterface = updateInterface;
-TabOption.prototype.attachComponent = attachComponent;
-TabOption.prototype.destroy = destroy;
-TabOption.prototype.isSelected = isSelected;
+TabElement.prototype.update = update;
+TabElement.prototype.updateInterface = updateInterface;
+TabElement.prototype.attachComponent = attachComponent;
+TabElement.prototype.destroy = destroy;
+TabElement.prototype.isSelected = isSelected;
 
 //Check if taboption is selected
 function isSelected()

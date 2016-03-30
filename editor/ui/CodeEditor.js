@@ -25,11 +25,21 @@ function CodeEditor(parent)
 	this.code.setOption("theme", "monokai");
 	this.code.setOption("mode", "javascript");
 
+	//Code changed event
+	var self = this;
+	this.code.on("change", function()
+	{
+		self.updateScript();
+	});
+
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 	
+	//Script attached to code editor
+	this.script = null;
+
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
@@ -42,6 +52,38 @@ CodeEditor.prototype.update = update;
 CodeEditor.prototype.updateInterface = updateInterface;
 CodeEditor.prototype.destroy = destroy;
 CodeEditor.prototype.setMode = setMode;
+CodeEditor.prototype.getText = getText;
+CodeEditor.prototype.setText = setText;
+CodeEditor.prototype.attachScript = attachScript;
+CodeEditor.prototype.updateScript = updateScript;
+
+//Return editor text
+function getText()
+{
+	return this.code.getValue();
+}
+
+//Set editor text
+function setText(text)
+{
+	this.code.setValue(text);
+}
+
+//Attach Script to code editor
+function attachScript(script)
+{
+	this.script = script;
+	this.setText(script.code);
+}
+
+//Update attached script
+function updateScript()
+{
+	if(this.script != null)
+	{
+		this.script.setLoopCode(this.code.getValue());
+	}
+}
 
 //Set language mode (javascript, glsl, ...)
 function setMode(mode)

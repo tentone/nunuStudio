@@ -15,7 +15,7 @@ include("editor/ui/Style.js");
 include("editor/ui/TextBox.js");
 include("editor/ui/Canvas.js");
 include("editor/ui/TabContainer.js");
-include("editor/ui/TabOption.js");
+include("editor/ui/TabElement.js");
 include("editor/ui/DualDivisionResizable.js");
 include("editor/ui/ButtonImageToggle.js");
 include("editor/ui/CodeEditor.js");
@@ -395,6 +395,12 @@ Editor.update = function()
 Editor.addToActualScene = function(obj)
 {
 	Editor.scene.add(obj);
+	Editor.updateTreeView();
+}
+
+//Update tree view to match actual scene
+Editor.updateTreeView = function()
+{
 	Interface.tree_view.fromScene(Editor.scene);
 }
 

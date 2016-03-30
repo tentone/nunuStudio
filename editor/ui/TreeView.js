@@ -43,6 +43,7 @@ function TreeView(parent, container)
 	this.visible = true;
 	
 	//Childs
+	this.scene = null;
 	this.auto_update_size = true;
 	this.children = [];
 	this.folded = false;
@@ -50,6 +51,9 @@ function TreeView(parent, container)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
+
+//Object drag buffer (stores objects being dragged)
+TreeView.drag_buffer = [];
 
 //TreeView conter
 TreeView.id = 0;
@@ -63,7 +67,7 @@ TreeView.prototype.fromScene = fromScene;
 
 //Set data from scene
 function fromScene(scene)
-{
+{	
 	//Remove all children
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -71,22 +75,12 @@ function fromScene(scene)
 	}
 	this.children = [];
 
+	//Set scene
+	this.scene = scene;
+	
+	//Add element and update interface
 	TreeView.addSceneElement(this, scene);
-
-	//Update interface
 	this.updateInterface();
-}
-
-TreeView.addSceneElement = function(tree, scene)
-{
-	//Recreate stuff
-	var element = tree.add(scene.name, scene.icon);
-	element.obj = scene;
-
-	for(var i = 0; i < scene.children.length; i++)
-	{
-		TreeView.addSceneElement(element, scene.children[i]);
-	}
 }
 
 //Add element
@@ -155,6 +149,44 @@ function updateInterface()
 		this.children[i].updateInterface();
 	}
 }
+
+//Push elemento to drag buffer
+TreeView.pushDragElement = function(obj)
+{
+	//Check if element dont exist on drag buffer
+	if(TreeView.drag_buffer.indexOf(obj) === -1)
+	{
+		TreeView.drag_buffer.push(obj);
+	}
+}
+
+//Get element from drag buffer using uuid
+TreeView.popDragElement = function(uuid)
+{
+	for(var i = 0; i < TreeView.drag_buffer.length; i++)
+	{
+		if(TreeView.drag_buffer[i].uuid === uuid)
+		{
+			var obj = TreeView.drag_buffer[i]; 
+			TreeView.drag_buffer.splice(i, 1);
+			return obj;
+		}
+	}
+	return null;
+}
+
+//Add scene element to tree (recursive)
+TreeView.addSceneElement = function(tree, scene)
+{
+	var element = tree.add(scene.name, scene.icon);
+	element.obj = scene;
+
+	for(var i = 0; i < scene.children.length; i++)
+	{
+		TreeView.addSceneElement(element, scene.children[i]);
+	}
+}
+
 
 //Check if parent if folded (recursive)
 TreeView.checkParentFolded = function(element)

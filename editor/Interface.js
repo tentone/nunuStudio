@@ -11,16 +11,11 @@ Interface.initialize = function()
 
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabContainer();
+	
+	//Scene Canvas
 	var scene = Interface.tab.addOption("Scene", Interface.file_dir + "icons/tab/scene.png", false);
-	var script = Interface.tab.addOption("Script", Interface.file_dir + "icons/tab/code.png", true);
-
-	//Canvas
 	Interface.canvas = new Canvas();
 	scene.attachComponent(Interface.canvas);
-	
-	//Code Editor
-	Interface.code = new CodeEditor();
-	script.attachComponent(Interface.code);
 
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer = new DivisionResizable();
@@ -29,10 +24,43 @@ Interface.initialize = function()
 	Interface.asset_explorer.updateInterface();
 
 	Interface.asset_explorer_bar = new Division(Interface.asset_explorer.element);
-	Interface.asset_explorer.position.set(0, 0);
-	Interface.asset_explorer_bar.size.y = 20;
+	Interface.asset_explorer_bar.position.set(0, 0);
+	Interface.asset_explorer_bar.size.y = 25;
 	Interface.asset_explorer_bar.element.className = "bar";
 	Interface.asset_explorer_bar.updateInterface();
+
+	//File
+	Interface.asset_file = new DropdownMenu(Interface.asset_explorer_bar.element);
+	Interface.asset_file.text = "File";
+	Interface.asset_file.size.set(100, Interface.asset_explorer_bar.size.y);
+	Interface.asset_file.position.set(0,0);
+	Interface.asset_file.addOption("Import", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	Interface.asset_file.addOption("Export", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	//Add assets
+	Interface.asset_add = new DropdownMenu(Interface.asset_explorer_bar.element);
+	Interface.asset_add.text = "Add";
+	Interface.asset_add.size.set(100, Interface.asset_explorer_bar.size.y);
+	Interface.asset_add.position.set(100,0);
+	Interface.asset_add.addOption("Shader", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	Interface.asset_add.addOption("Material", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	Interface.asset_add.addOption("Terrain", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
 
 	//------------------------------------Explorer------------------------------------
 	Interface.explorer = new DivisionResizable();
@@ -200,7 +228,7 @@ Interface.initialize = function()
 	});
 
 	//Pyramid
-	Interface.add_model.addOption(Interface.file_dir + "icons/models/pyramid.png", function()
+	Interface.add_model.addOption(Interface.file_dir + "icons/models/cone.png", function()
 	{
 		var geometry = new THREE.CylinderGeometry(0, 1, 2, 32);
 		var material = new THREE.MeshPhongMaterial();
@@ -256,6 +284,13 @@ Interface.initialize = function()
 	{
 		var light = new DirectionalLight();
 		light.castShadow = true;
+		Editor.addToActualScene(light);
+	});
+
+	//Sky
+	Interface.add_light.addOption(Interface.file_dir + "icons/lights/sky.png", function()
+	{
+		var light = new Sky();
 		Editor.addToActualScene(light);
 	});
 
@@ -320,7 +355,7 @@ Interface.initialize = function()
 	//File
 	Interface.file = new DropdownMenu();
 	Interface.file.text = "File";
-	Interface.file.size.set(150, Interface.top_bar.size.y);
+	Interface.file.size.set(120, Interface.top_bar.size.y);
 	Interface.file.position.set(0,0);
 
 	Interface.file.addOption("New Project", function()
@@ -336,11 +371,6 @@ Interface.initialize = function()
 	Interface.file.addOption("Load Project", function()
 	{
 		//TODO <LOAD PROJECT>
-	});
-
-	Interface.file.addOption("Project Settings", function()
-	{
-		//TODO <ADD CODE HERE>
 	});
 
 	Interface.file.addOption("Settings", function()
@@ -361,8 +391,8 @@ Interface.initialize = function()
 	//Editor
 	Interface.editor = new DropdownMenu();
 	Interface.editor.text = "Editor";
-	Interface.editor.size.set(150, Interface.top_bar.size.y);
-	Interface.editor.position.set(150,0);
+	Interface.editor.size.set(100, Interface.top_bar.size.y);
+	Interface.editor.position.set(120,0);
 	Interface.editor.addOption("Undo", function()
 	{
 		//TODO <UNDO>
@@ -375,20 +405,31 @@ Interface.initialize = function()
 
 	//Run
 	Interface.about = new Button();
-	Interface.about.text = "Run";
-	Interface.about.size.set(150, Interface.top_bar.size.y);
-	Interface.about.position.set(300, 0);
+	Interface.about.text = "About";
+	Interface.about.size.set(100, Interface.top_bar.size.y);
+	Interface.about.position.set(220, 0);
 	Interface.about.updateInterface();
 	Interface.about.setCallback(function()
 	{
+		//TODO <ADD CODE HERE>
+	});
+
+	//Run
+	Interface.run = new Button();
+	Interface.run.text = "Run";
+	Interface.run.size.set(100, Interface.top_bar.size.y);
+	Interface.run.position.set(320, 0);
+	Interface.run.updateInterface();
+	Interface.run.setCallback(function()
+	{
 		if(Editor.state === Editor.STATE_EDITING)
 		{
-			Interface.about.setText("Stop");
+			Interface.run.setText("Stop");
 			Editor.state = Editor.STATE_TESTING;
 		}
 		else if(Editor.state === Editor.STATE_TESTING)
 		{
-			Interface.about.setText("Run");
+			Interface.run.setText("Run");
 			Editor.state = Editor.STATE_EDITING;
 		}
 	});
