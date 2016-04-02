@@ -73,9 +73,15 @@ function TreeElement(container)
 	{
 		var context = new ContextMenu();
 		context.size.set(100, 20);
-		context.position.set(event.clientX, event.clientY);
-		context.addOption("Delete", function(){});
-		context.addOption("Copy", function(){});
+		context.position.set(event.clientX - 5, event.clientY - 5);
+		context.addOption("Delete", function()
+		{
+			//TODO <ADD CODE HERE>
+		});
+		context.addOption("Copy", function()
+		{
+			//TODO <ADD CODE HERE>
+		});
 	};
 
 	//Drag start

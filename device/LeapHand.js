@@ -32,13 +32,6 @@ LeapHand.setMode = function(mode)
 	LeapHand.mode = mode;
 }
 
-//Check if gesture ocuring
-LeapHand.gestureOccuring = function(gesture)
-{
-	//TODO <ADD CODE HERE>
-	return false;
-}
-
 //Update leap status
 LeapHand.updateLeap = function(frame)
 {
@@ -56,23 +49,22 @@ LeapHand.updateLeap = function(frame)
 	//Add new Elements to scene
 	var countBones = 0;
 	var countArms = 0;
-	for(var hand of frame.hands)
+
+	frame.hands.forEach(function(hand)
 	{
 		var material = new THREE.MeshPhongMaterial({color: 0x00ff00});
 		
-		for(var finger of hand.fingers)
+		hand.fingers.forEach(function(finger)
 		{
-			for(var bone of finger.bones) 
+			finger.bones.forEach(function(bone) 
 			{
-				if(countBones++ === 0)
+				if(countBones++ !== 0)
 				{
-					continue;
+					var boneMesh = LeapHand.bone_meshes[countBones] || LeapHand.addMesh(LeapHand.bone_meshes, material);
+					LeapHand.updateMesh(bone, boneMesh);	
 				}
-
-				var boneMesh = LeapHand.bone_meshes[countBones] || LeapHand.addMesh(LeapHand.bone_meshes, material);
-				LeapHand.updateMesh(bone, boneMesh);
-			}
-		}
+			});
+		});
 
 		var arm = hand.arm;
 		if(LeapHand.show_arm)
@@ -81,7 +73,7 @@ LeapHand.updateLeap = function(frame)
 			LeapHand.updateMesh(arm, armMesh);
 			armMesh.scale.set(arm.width/1200, arm.width/300, arm.length/150);
 		}
-	}
+	});
 
 	//Update Leap Colision box
 	if(LeapHand.physics_world != null)
@@ -102,9 +94,9 @@ LeapHand.updatePhysics = function(object, world)
 	LeapHand.physics_bodys = [];
 
 	//Create new physics bodys
-	for(var j = 0; j < object.children.length; j++)
+	object.children.forEach(function(children, j)
 	{
-		var box = new THREE.BoundingBoxHelper(object.children[j]);
+		var box = new THREE.BoundingBoxHelper(children);
 		box.update();
 
 		var hs = new THREE.Vector3(box.box.max.x - box.box.min.x, box.box.max.y - box.box.min.y, box.box.max.z - box.box.min.z);
@@ -127,7 +119,7 @@ LeapHand.updatePhysics = function(object, world)
 
 		LeapHand.physics_bodys.push(body);
 		world.addBody(body);
-	}
+	});
 }
 
 
