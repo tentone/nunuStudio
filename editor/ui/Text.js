@@ -46,6 +46,14 @@ Text.prototype.update = update;
 Text.prototype.updateInterface = updateInterface;
 Text.prototype.destroy = destroy;
 Text.prototype.setAlignment = setAlignment;
+Text.prototype.setText = setText;
+
+//Set Text
+function setText(text)
+{
+	this.text = text;
+	this.span.innerHTML = this.text;
+}
 
 //Set text alignment
 function setAlignment(align)
@@ -80,8 +88,6 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	this.span.innerHTML = this.text;
 
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";

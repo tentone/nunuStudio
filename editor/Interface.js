@@ -13,8 +13,9 @@ Interface.initialize = function()
 	Interface.tab = new TabContainer();
 	
 	//Scene Canvas
-	var scene = Interface.tab.addOption("Scene", Interface.file_dir + "icons/tab/scene.png", false);
-	Interface.canvas = new Canvas();
+	var scene = Interface.tab.addOption("Scene", Interface.file_dir + "icons/tab/scene.png", true);
+	Interface.canvas = new SceneContainer();
+	Interface.canvas.setScene(Editor.scene);
 	scene.attachComponent(Interface.canvas);
 
 	//---------------------------------Asset Manager----------------------------------
@@ -31,7 +32,7 @@ Interface.initialize = function()
 
 	//File
 	Interface.asset_file = new DropdownMenu(Interface.asset_explorer_bar.element);
-	Interface.asset_file.text = "File";
+	Interface.asset_file.setText("File");
 	Interface.asset_file.size.set(100, Interface.asset_explorer_bar.size.y);
 	Interface.asset_file.position.set(0,0);
 	Interface.asset_file.addOption("Import", function()
@@ -45,7 +46,7 @@ Interface.initialize = function()
 
 	//Add assets
 	Interface.asset_add = new DropdownMenu(Interface.asset_explorer_bar.element);
-	Interface.asset_add.text = "Add";
+	Interface.asset_add.setText("Add");
 	Interface.asset_add.size.set(100, Interface.asset_explorer_bar.size.y);
 	Interface.asset_add.position.set(100,0);
 	Interface.asset_add.addOption("Shader", function()
@@ -82,7 +83,7 @@ Interface.initialize = function()
 
 	//Tools text
 	Interface.tool_text = new Text(Interface.tool_bar.element);
-	Interface.tool_text.text = "Tools";
+	Interface.tool_text.setText("Tools");
 	Interface.tool_text.position.set(Interface.tool_bar.size.x/2, 40);
 	Interface.tool_text.updateInterface();
 
@@ -169,7 +170,7 @@ Interface.initialize = function()
  
 	//Add Text
 	Interface.add_text = new Text(Interface.tool_bar.element);
-	Interface.add_text.text = "Add";
+	Interface.add_text.setText("Add");
 	Interface.add_text.position.set(Interface.tool_bar.size.x/2, 240);
 	Interface.add_text.updateInterface();
 
@@ -354,7 +355,7 @@ Interface.initialize = function()
 
 	//File
 	Interface.file = new DropdownMenu();
-	Interface.file.text = "File";
+	Interface.file.setText("File");
 	Interface.file.size.set(120, Interface.top_bar.size.y);
 	Interface.file.position.set(0,0);
 
@@ -390,7 +391,7 @@ Interface.initialize = function()
 
 	//Editor
 	Interface.editor = new DropdownMenu();
-	Interface.editor.text = "Editor";
+	Interface.editor.setText("Editor");
 	Interface.editor.size.set(100, Interface.top_bar.size.y);
 	Interface.editor.position.set(120,0);
 	Interface.editor.addOption("Undo", function()
@@ -405,7 +406,7 @@ Interface.initialize = function()
 
 	//Run
 	Interface.about = new Button();
-	Interface.about.text = "About";
+	Interface.about.setText("About");
 	Interface.about.size.set(100, Interface.top_bar.size.y);
 	Interface.about.position.set(220, 0);
 	Interface.about.updateInterface();
@@ -416,7 +417,7 @@ Interface.initialize = function()
 
 	//Run
 	Interface.run = new Button();
-	Interface.run.text = "Run";
+	Interface.run.setText("Run");
 	Interface.run.size.set(100, Interface.top_bar.size.y);
 	Interface.run.position.set(320, 0);
 	Interface.run.updateInterface();

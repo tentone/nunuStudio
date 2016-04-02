@@ -42,7 +42,7 @@ function TreeElement(container)
 	//Text
 	this.label = new Text(this.element);
 	this.label.position.set(45, 10);
-	this.label.text = "text";
+	this.label.setText("text");
 	this.label.setAlignment(Text.LEFT);
 	this.label.updateInterface();
 
@@ -69,6 +69,15 @@ function TreeElement(container)
 		self.element.className = "button_left_light";
 	};
 
+	this.element.oncontextmenu = function(event)
+	{
+		var context = new ContextMenu();
+		context.size.set(100, 20);
+		context.position.set(event.clientX, event.clientY);
+		context.addOption("Delete", function(){});
+		context.addOption("Copy", function(){});
+	};
+
 	//Drag start
 	this.element.ondragstart = function(event)
 	{
@@ -79,7 +88,7 @@ function TreeElement(container)
 		}
 	};
 
-	//Drag end (called after of ondrog)
+	//Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
 		//Try to remove event from buffer
@@ -109,6 +118,7 @@ function TreeElement(container)
 		}
 	};
 
+	//Prevent deafault when object dragged over
 	this.element.ondragover = function(event)
 	{
 		event.preventDefault();
@@ -199,8 +209,7 @@ function setIcon(icon)
 //Set label
 function setLabel(label)
 {
-	this.label.text = label;
-	this.label.updateInterface();
+	this.label.setText(label);
 }
 
 //Add element

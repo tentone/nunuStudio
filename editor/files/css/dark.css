@@ -3,9 +3,8 @@ body
 	overflow: hidden;
 	color : #ffffff;
 	font-family: "Arial", sans-serif;
-	font-size: 13px;
-	font-weight: bold;
-	cursor: default;
+	font-size: 12px;
+	
 	border-style: none;
 	
 	-webkit-touch-callout: none;

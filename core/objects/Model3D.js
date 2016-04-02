@@ -7,14 +7,13 @@ function Model3D(geometry, material)
 
 Model3D.prototype = Object.create(THREE.Mesh.prototype);
 Model3D.prototype.icon = "editor/files/icons/models/cube.png";
-Model3D.prototype.updateable = true;
 Model3D.prototype.update = update;
 
 function update()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].updateable)
+		if(this.children[i].update != undefined)
 		{
 			this.children[i].update();
 		}
