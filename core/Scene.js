@@ -10,8 +10,8 @@ function Scene()
 	//Create cannon world
 	this.world = new CANNON.World();
 	this.world.broadphase = new CANNON.NaiveBroadphase();
-	this.world.gravity.set(0,-10,0);
-	this.world.solver.tolerance = 0.05;
+	this.world.gravity.set(0,-9.82,0);
+	this.world.solver.iterations = 10;
 }
 
 //Functions prototypes

@@ -38,11 +38,9 @@ Main.initialize = function()
 	//Init Cannon
 	Main.world = new CANNON.World();
 	Main.world.broadphase = new CANNON.NaiveBroadphase();
-	Main.world.gravity.set(0,-10,0);
-	Main.world.solver.tolerance = 0.1;
-
-	Main.cannon_renderer = new THREE.CannonDebugRenderer(Main.debug_scene, Main.world);
-
+	Main.world.gravity.set(0, -9.8, 0);
+	Main.world.solver.iterations = 5;
+                
 	//Initialize Leap Hand
 	LeapHand.initialize();
 	LeapHand.physics_world = Main.world;
@@ -159,7 +157,7 @@ Main.initialize = function()
 	Main.debug_scene.add(axisHelper);
 
 	//Number of cubes
-	var N = 200;
+	var N = 100;
     var mat = new CANNON.Material();
 
 	//Create N  objects for physics and render
@@ -193,11 +191,11 @@ Main.update = function()
 	//Step physics Main.world
 	Main.world.step(1/60);
 
-	for(var i = 0; i < Main.render_objects.length; i++)
+	Main.render_objects.forEach(function(obj, i)
 	{
 		Main.render_objects[i].position.set(Main.physics_objects[i].position.x, Main.physics_objects[i].position.y, Main.physics_objects[i].position.z);
 		Main.render_objects[i].quaternion.set(Main.physics_objects[i].quaternion.x, Main.physics_objects[i].quaternion.y, Main.physics_objects[i].quaternion.z, Main.physics_objects[i].quaternion.w);
-	}
+	});
 
 	//Rotate Camera
 	if(Keyboard.isKeyPressed(Keyboard.E))
@@ -359,10 +357,8 @@ function setShadowCasting(object, state)
 //Draw stuff into screen
 Main.draw = function()
 {
-	//Main.cannon_renderer.update();
-	Main.manager.render(Main.scene, Main.camera, 1/60);
-	//Main.renderer.render(Main.debug_scene, Main.camera);
-	//Main.renderer.render(Main.scene, Main.camera);
+	//Main.manager.render(Main.scene, Main.camera, 1/60);
+	Main.renderer.render(Main.scene, Main.camera);
 }
 
 
