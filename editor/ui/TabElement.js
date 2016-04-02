@@ -20,7 +20,7 @@ function TabElement(name, image, closeable, container, index)
 
 	//Button
 	this.button = new Button(this.container.element);
-	this.button.text = name;
+	this.button.setText(name);
 	this.button.visible = true;
 	this.button.position.set(container.options_size.x*index, 0);
 	this.button.size.set(container.options_size.x, container.options_size.y);
@@ -36,7 +36,7 @@ function TabElement(name, image, closeable, container, index)
 		self.button.element.className = "button_over";
 	};
 
-	this.button.element.onmouseout = function()
+	this.button.element.onmouseleave = function()
 	{
 		if(!self.isSelected())
 		{

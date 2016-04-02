@@ -17,7 +17,16 @@ function Scene()
 //Functions prototypes
 Scene.prototype = Object.create(THREE.Scene.prototype);
 Scene.prototype.icon = "editor/files/icons/models/models.png";
+
+Scene.prototype.initialize = initialize;
 Scene.prototype.update = update;
+Scene.prototype.resize = resize;
+
+//Initialize
+function initialize()
+{
+	//TODO <ADD CODE HERE>
+}
 
 //Update scene
 function update()
@@ -26,9 +35,15 @@ function update()
 	
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].updateable)
+		if(this.children[i].update != undefined)
 		{
 			this.children[i].update();
 		}
 	}
+}
+
+//Resize
+function resize()
+{
+	//TODO <ADD CODE HERE>
 }

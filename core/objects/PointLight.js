@@ -7,14 +7,13 @@ function PointLight(hex, intensity, distance, decay)
 
 PointLight.prototype = Object.create(THREE.PointLight.prototype);
 PointLight.prototype.icon = "editor/files/icons/lights/point.png";
-PointLight.prototype.updateable = true;
 PointLight.prototype.update = update;
 
 function update()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].updateable)
+		if(this.children[i].update != undefined)
 		{
 			this.children[i].update();
 		}

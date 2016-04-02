@@ -12,7 +12,6 @@ function Script()
 //Function Prototype
 Script.prototype = Object.create(THREE.Object3D.prototype);
 Script.prototype.icon = "editor/files/icons/script/script.png";
-Script.prototype.updateable = true;
 Script.prototype.update = update;
 Script.prototype.setLoopCode = setLoopCode;
 
@@ -30,11 +29,17 @@ function setLoopCode(code)
 //Update Script
 function update()
 {
-	this.func();
+	//Run script
+	try
+	{
+		this.func();
+	}
+	catch(e){}
 
+	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].updateable)
+		if(this.children[i].update != undefined)
 		{
 			this.children[i].update();
 		}
