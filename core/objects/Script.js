@@ -12,18 +12,24 @@ function Script()
 //Function Prototype
 Script.prototype = Object.create(THREE.Object3D.prototype);
 Script.prototype.icon = "editor/files/icons/script/script.png";
+
+//Runtime functions
+Script.prototype.initialize = initialize;
 Script.prototype.update = update;
+
+//Auxiliar Functions
 Script.prototype.setLoopCode = setLoopCode;
 
-//Set loop code
-function setLoopCode(code)
+//Initialize
+function initialize()
 {
-	try
+	for(var i = 0; i < this.children.length; i++)
 	{
-		this.code = code;
-		this.func = Function(this.code);
+		if(this.children[i].initialize != undefined)
+		{
+			this.children[i].initialize();
+		}
 	}
-	catch(e){}
 }
 
 //Update Script
@@ -44,4 +50,15 @@ function update()
 			this.children[i].update();
 		}
 	}
+}
+
+//Set loop code
+function setLoopCode(code)
+{
+	try
+	{
+		this.code = code;
+		this.func = Function(this.code);
+	}
+	catch(e){}
 }

@@ -1,14 +1,37 @@
-function Text3D(geometry, material)
+function Text3D(text, font , material)
 {
-	THREE.Mesh.call(this, geometry, material);
+	THREE.Mesh.call(this, new THREE.TextGeometry(text, {font: font}), material);
+	
+	this.font = font;
+	this.text = text;
 
 	this.name = "model";
 }
 
+//Function Prototype
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
-Text3D.prototype.icon = "editor/files/icons/models/cube.png";
+Text3D.prototype.icon = "editor/files/icons/models/text.png";
+
+//Runtime functions
+Text3D.prototype.initialize = initialize;
 Text3D.prototype.update = update;
 
+//Auxiliar Functions
+Text3D.prototype.setText = setText;
+
+//Initialize
+function initialize()
+{
+	for(var i = 0; i < this.children.length; i++)
+	{
+		if(this.children[i].initialize != undefined)
+		{
+			this.children[i].initialize();
+		}
+	}
+}
+
+//Update State
 function update()
 {
 	for(var i = 0; i < this.children.length; i++)
@@ -18,4 +41,11 @@ function update()
 			this.children[i].update();
 		}
 	}
+}
+
+//Set Text
+function setText(text)
+{
+	this.text = text;
+	this.geometry = new THREE.TextGeometry(this.text, {font: this.font});
 }

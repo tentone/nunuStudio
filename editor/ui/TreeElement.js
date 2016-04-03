@@ -74,6 +74,11 @@ function TreeElement(container)
 		var context = new ContextMenu();
 		context.size.set(100, 20);
 		context.position.set(event.clientX - 5, event.clientY - 5);
+		
+		context.addOption("Rename", function()
+		{
+			//TODO <ADD CODE HERE>
+		});
 		context.addOption("Delete", function()
 		{
 			//TODO <ADD CODE HERE>

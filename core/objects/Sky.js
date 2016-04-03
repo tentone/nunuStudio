@@ -6,20 +6,42 @@ function Sky()
 
 	this.castShadow = true;
 	
-	this.angle = 0;
-	this.distance = 20;
-	this.day_time = 10; //seconds
+	//Sun
+	this.distance = 200;
+	this.day_time = 10;
+
+	//Runtime stuff
+	this.time = 0;
 }
 
+//Function Prototype
 Sky.prototype = Object.create(THREE.DirectionalLight.prototype);
 Sky.prototype.icon = "editor/files/icons/lights/sky.png";
+
+//Runtime functions
+Sky.prototype.initialize = initialize;
 Sky.prototype.update = update;
 
+//Initialize
+function initialize()
+{
+	for(var i = 0; i < this.children.length; i++)
+	{
+		if(this.children[i].initialize != undefined)
+		{
+			this.children[i].initialize();
+		}
+	}
+}
+
+//Update State
 function update()
 {
-	//Update position
-	this.position.x = this.distance * Math.cos(App.time / 10000);
-	this.position.y = this.distance * Math.sin(App.time / 10000);
+	this.time += App.delta_time / 1000;
+
+	//Update positiond
+	this.position.x = this.distance * Math.cos(this.time);
+	this.position.y = this.distance * Math.sin(this.time);
 
 	//Update children
 	for(var i = 0; i < this.children.length; i++)
