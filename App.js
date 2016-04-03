@@ -1,9 +1,8 @@
-include("lib/three/three.min.js");
+include("lib/three/three.js");
 include("lib/three/stats.min.js");
 
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
-include("lib/three/loaders/OBJMTLLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
@@ -19,6 +18,8 @@ include("lib/leap/leap-plugins-0.1.11.min.js");
 
 include("lib/cannon/cannon.min.js");
 include("lib/cannon/cannondebugrenderer.js");
+
+include("lib/opentype.min.js");
 
 include("device/LeapHand.js");
 include("device/KinectDevice.js");
@@ -50,6 +51,9 @@ function App(){}
 //App initialization
 App.initialize = function(main)
 {
+	//Node modules
+	App.fs = require("fs");
+
 	//Stats tool
 	App.stats = new Stats();
 	App.stats.setMode(0);
@@ -74,6 +78,18 @@ App.initialize = function(main)
 	App.loop();
 }
 
+//Read File
+App.readFile = function(fname)
+{
+	return App.fs.readFileSync(fname, "utf8");
+}
+
+//Write File
+App.writeFile = function(fname, data)
+{
+	App.fs.writeFileSync(fname, data);
+}
+
 //Load Main program
 App.loadMain = function(main)
 {
@@ -81,6 +97,7 @@ App.loadMain = function(main)
 	App.main.initialize(App.canvas);
 }
 
+//Show Stats
 App.showStats = function(value)
 {
 	if(value === true)

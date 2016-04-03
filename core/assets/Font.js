@@ -1,0 +1,4 @@
+function Font()
+{
+	this.file = "";
+}

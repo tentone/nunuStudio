@@ -13,7 +13,7 @@ function Program()
 	this.actual_scene = null;
 }
 
-//Function prototypes
+//Function Prototype
 Program.prototype.addScene = addScene;
 Program.prototype.removeScene = removeScene;
 Program.prototype.addDefaultScene = addDefaultScene;

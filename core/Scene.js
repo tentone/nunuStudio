@@ -14,18 +14,24 @@ function Scene()
 	this.world.solver.iterations = 10;
 }
 
-//Functions prototypes
+//Function Prototype
 Scene.prototype = Object.create(THREE.Scene.prototype);
 Scene.prototype.icon = "editor/files/icons/models/models.png";
 
+//Runtime functions
 Scene.prototype.initialize = initialize;
 Scene.prototype.update = update;
-Scene.prototype.resize = resize;
 
 //Initialize
 function initialize()
 {
-	//TODO <ADD CODE HERE>
+	for(var i = 0; i < this.children.length; i++)
+	{
+		if(this.children[i].initialize != undefined)
+		{
+			this.children[i].initialize();
+		}
+	}
 }
 
 //Update scene
@@ -40,10 +46,4 @@ function update()
 			this.children[i].update();
 		}
 	}
-}
-
-//Resize
-function resize()
-{
-	//TODO <ADD CODE HERE>
 }

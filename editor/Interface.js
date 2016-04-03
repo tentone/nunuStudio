@@ -242,7 +242,14 @@ Interface.initialize = function()
 	//Text
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/text.png", function()
 	{
-		//TODO <ADD CODE HERE>
+		var loader = new THREE.FontLoader().load("data/fonts/helvetiker_bold.typeface.js", function(font)
+		{
+			var material = new THREE.MeshPhongMaterial();
+			var model = new Text3D("text", font, material);
+			model.receiveShadow = true;
+			model.castShadow = true;
+			Editor.addToActualScene(model);
+		});
 	});
 
 	//Add lights
@@ -341,6 +348,34 @@ Interface.initialize = function()
 		//TODO <ADD CODE HERE>
 	});
 
+	//Add device
+	Interface.add_device = new ButtonDrawer();
+	Interface.add_device.setImage(Interface.file_dir + "icons/hw/hw.png");
+	Interface.add_device.options_per_line = 3;
+	Interface.add_device.image_scale.set(0.7, 0.7);
+	Interface.add_device.options_scale.set(0.7, 0.7);
+	Interface.add_device.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.add_device.position.set(0, 440);
+	Interface.add_device.options_size.set(40, 40);
+	Interface.add_device.updateInterface();
+
+	//Leap Hand
+	Interface.add_device.addOption(Interface.file_dir + "icons/hw/leap.png", function()
+	{
+		Editor.addToActualScene(new LeapHand());
+	});
+
+	//Kinect Skeleton
+	Interface.add_device.addOption(Interface.file_dir + "icons/hw/kinect.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	//
+	Interface.add_device.addOption(Interface.file_dir + "icons/hw/vr.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
 
 	//----------------------------------Menu Top Bar----------------------------------
 	Interface.top_bar = new Division();
@@ -362,16 +397,19 @@ Interface.initialize = function()
 	Interface.file.addOption("New Project", function()
 	{
 		Editor.createNewProgram();
+		Editor.updateTreeView();
 	});
 
 	Interface.file.addOption("Save Project", function()
 	{
-		//TODO <SAVE PROJECT>
+		App.writeFile("project.isp", JSON.stringify(Editor.program));
 	});
 
 	Interface.file.addOption("Load Project", function()
 	{
-		//TODO <LOAD PROJECT>
+		console.log(Editor.program);
+		console.log(JSON.parse(App.readFile("project.isp")));
+		Editor.updateTreeView();
 	});
 
 	Interface.file.addOption("Settings", function()
