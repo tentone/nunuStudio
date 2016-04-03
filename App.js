@@ -40,6 +40,7 @@ include("core/objects/PointLight.js");
 include("core/objects/SpotLight.js");
 include("core/objects/AmbientLight.js");
 include("core/objects/DirectionalLight.js");
+include("core/objects/HemisphereLight.js");
 include("core/objects/PerspectiveCamera.js");
 include("core/objects/OrthographicCamera.js");
 include("core/objects/Container.js");
