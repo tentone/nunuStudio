@@ -18,15 +18,26 @@ Program.prototype.addScene = addScene;
 Program.prototype.removeScene = removeScene;
 Program.prototype.addDefaultScene = addDefaultScene;
 
-//Create a default scene with ligth camera and plane
+//Create a default scene with sky
 function addDefaultScene()
 {
 	var scene = new Scene();
-	scene.add(new AmbientLight(0x202020));
+	scene.add(new Sky());
+	
+	var material = new THREE.MeshPhongMaterial();
+	var geometry = new THREE.BoxGeometry(1, 1, 1);
+	var model = new Model3D(geometry, material);
+	model.receiveShadow = true;
+	model.castShadow = true;
+	scene.add(model);
 
-	var light = new PointLight(0x909090);
-	light.position.set(0, 5, -5);
-	scene.add(light);
+	material = new THREE.MeshPhongMaterial();
+	geometry = new THREE.BoxGeometry(10, 0.1, 10);
+ 	model = new Model3D(geometry, material);
+ 	model.position.set(0, -0.55, 0);
+	model.receiveShadow = true;
+	model.castShadow = true;
+	scene.add(model);
 
 	this.addScene(scene);
 
