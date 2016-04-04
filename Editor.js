@@ -23,7 +23,6 @@ include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/SceneContainer.js");
-include("editor/ui/Form.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -95,6 +94,8 @@ Editor.initialize = function(canvas)
 	Editor.renderer.autoClear = false;
 	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
 	Editor.renderer.shadowMap.enabled = true;
+	//Editor.renderer.shadowMap.height = 4096;
+	//Editor.renderer.shadowMap.width = 4096;
 	Editor.renderer.shadowMap.type = THREE.PCFShadowMap;
 
 	//Update interface

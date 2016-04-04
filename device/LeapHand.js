@@ -56,25 +56,25 @@ function update()
 		{
 			this.data.gestures.forEach(function(gesture)
 			{
-				if(gesture.type === "circle")
+				if(gesture.type === "swipe")
 				{
 					//TODO <ADD CODE HERE>
-					console.log("Circle Gesture");	
+					//console.log("Swipe Gesture");	
+				}
+				else if(gesture.type === "circle")
+				{
+					//TODO <ADD CODE HERE>
+					//console.log("Circle Gesture");	
 				}
 				else if(gesture.type === "keyTap")
 				{
 					//TODO <ADD CODE HERE>
-					console.log("Key Tap Gesture");	
-				}
-				else if(gesture.type === "swipe")
-				{
-					//TODO <ADD CODE HERE>
-					console.log("Swipe Gesture");	
+					//console.log("Key Tap Gesture");	
 				}
 				else if(gesture.type === "screenTap")
 				{
 					//TODO <ADD CODE HERE>
-					console.log("Screen Tap Gesture");	
+					//console.log("Screen Tap Gesture");	
 				}
 			});
 		}

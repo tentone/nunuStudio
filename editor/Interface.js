@@ -76,7 +76,8 @@ Interface.initialize = function()
 	Interface.tree_view = new TreeView(Interface.explorer_resizable.div_a, Interface.explorer_resizable);
 	Interface.tree_view.updateInterface();
 
-	Interface.form = new Form(Interface.explorer_resizable.div_b);
+	Interface.form = new Division(Interface.explorer_resizable.div_b);
+	Interface.form.fit_parent = true;
 	Interface.form.size.set(100, 100);
 	Interface.form.updateInterface();
 
