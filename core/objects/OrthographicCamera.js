@@ -2,7 +2,7 @@ function OrthographicCamera(left, right, top, bottom, near, far)
 {
 	THREE.OrthographicCamera.call(this, left, right, top, bottom, near, far);
 
-	this.name = "ortho_camera";
+	this.name = "orthographic_camera";
 }
 
 //Function Prototype

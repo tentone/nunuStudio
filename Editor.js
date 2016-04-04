@@ -23,6 +23,7 @@ include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/SceneContainer.js");
+include("editor/ui/Form.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -489,9 +490,9 @@ Editor.updateObjectHelper = function()
 //Return object absolute position (not relative to parent)
 Editor.objectAbsolutePosition = function(obj)
 {
-	if(obj.parent != null)
+	if(obj.parent !== null &&  obj.parent !== undefined)
 	{
-		var position = obj.position.clone();
+		var position = new THREE.Vector3(obj.position.x, obj.position.y, obj.position.z);
 		position.add(Editor.objectAbsolutePosition(obj.parent));
 		return position;
 	}

@@ -21,6 +21,7 @@ function Division(parent)
 	this.element.className = "panel";
 	
 	//Element atributes
+	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -49,6 +50,12 @@ function update(){}
 //Update division Size
 function updateInterface()
 {
+	if(this.fit_parent)
+	{
+		this.size.x = this.parent.offsetWidth;
+		this.size.y = this.parent.offsetHeight; 
+	}
+	
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";

@@ -81,11 +81,21 @@ function TreeElement(container)
 		});
 		context.addOption("Delete", function()
 		{
-			//TODO <ADD CODE HERE>
+			if((self.obj !== null) && (self.obj.parent !== null))
+			{
+				self.obj.parent.remove(self.obj);
+				self.updateSceneData();
+			}
 		});
 		context.addOption("Copy", function()
 		{
 			//TODO <ADD CODE HERE>
+			//Use JSON object description
+		});
+		context.addOption("Cut", function()
+		{
+			//TODO <ADD CODE HERE>
+			self.updateSceneData();
 		});
 	};
 
@@ -122,10 +132,7 @@ function TreeElement(container)
 		if(obj != null)
 		{
 			self.obj.add(obj);
-			if(self.container.scene != null)
-			{
-				self.container.fromScene(self.container.scene);
-			}
+			self.updateSceneData();
 		}
 	};
 
@@ -197,6 +204,7 @@ TreeElement.id = 0;
 
 //Functions Prototype
 TreeElement.prototype.update = update;
+TreeElement.prototype.updateSceneData = updateSceneData;
 TreeElement.prototype.updateInterface = updateInterface;
 TreeElement.prototype.destroy = destroy;
 TreeElement.prototype.add = add;
@@ -253,6 +261,14 @@ function destroy()
 	}
 }
 
+//Update TreeElement form scene data
+function updateSceneData()
+{
+	if(this.container.scene != null)
+	{
+		this.container.fromScene(this.container.scene);
+	}
+}
 //Update TreeElement
 function update(){}
 

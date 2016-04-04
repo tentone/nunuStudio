@@ -21,6 +21,8 @@ include("lib/cannon/cannondebugrenderer.js");
 
 include("lib/opentype.min.js");
 
+include("lib/jszip.min.js");
+
 include("device/LeapHand.js");
 include("device/KinectDevice.js");
 
@@ -45,6 +47,7 @@ include("core/objects/PerspectiveCamera.js");
 include("core/objects/OrthographicCamera.js");
 include("core/objects/Container.js");
 include("core/objects/Sky.js");
+include("core/objects/Sprite.js");
 
 //App class
 function App(){}

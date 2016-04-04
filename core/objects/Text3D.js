@@ -2,10 +2,12 @@ function Text3D(text, font , material)
 {
 	THREE.Mesh.call(this, new THREE.TextGeometry(text, {font: font}), material);
 	
+	this.name = "text";
+
 	this.font = font;
 	this.text = text;
 
-	this.name = "model";
+	this.scale.set(0.01, 0.01, 0.01);
 }
 
 //Function Prototype
