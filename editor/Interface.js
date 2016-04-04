@@ -76,6 +76,10 @@ Interface.initialize = function()
 	Interface.tree_view = new TreeView(Interface.explorer_resizable.div_a, Interface.explorer_resizable);
 	Interface.tree_view.updateInterface();
 
+	Interface.form = new Form(Interface.explorer_resizable.div_b);
+	Interface.form.size.set(100, 100);
+	Interface.form.updateInterface();
+
 	//------------------------------------Tool Bar------------------------------------
 	Interface.tool_bar = new Division();
 	Interface.tool_bar.size.x = 40;
@@ -192,6 +196,7 @@ Interface.initialize = function()
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
 		model.castShadow = true;
+		model.name = "cube";
 		Editor.addToActualScene(model);
 	});
 
@@ -203,6 +208,7 @@ Interface.initialize = function()
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
 		model.castShadow = true;
+		model.name = "cylinder";
 		Editor.addToActualScene(model);
 	});
 
@@ -214,6 +220,7 @@ Interface.initialize = function()
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
 		model.castShadow = true;
+		model.name = "sphere";
 		Editor.addToActualScene(model);
 	});
 
@@ -225,6 +232,7 @@ Interface.initialize = function()
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
 		model.castShadow = true;
+		model.name = "torus";
 		Editor.addToActualScene(model);
 	});
 
@@ -236,6 +244,7 @@ Interface.initialize = function()
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
 		model.castShadow = true;
+		model.name = "cone";
 		Editor.addToActualScene(model);
 	});
 
@@ -295,6 +304,14 @@ Interface.initialize = function()
 		Editor.addToActualScene(light);
 	});
 
+	//Hemisphere Light
+	Interface.add_light.addOption(Interface.file_dir + "icons/lights/hemisphere.png", function()
+	{
+		var light = new HemisphereLight();
+		light.castShadow = true;
+		Editor.addToActualScene(light);
+	});
+
 	//Sky
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/sky.png", function()
 	{
@@ -322,7 +339,7 @@ Interface.initialize = function()
 	//Orthographic camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
 	{
-		Editor.addToActualScene(new OrthographicCamera(1, 1, 1, 1, 1, 1));
+		Editor.addToActualScene(new OrthographicCamera(5, 5, 5, 5, 5, 5));
 	});
 
 	//Add script
@@ -348,14 +365,40 @@ Interface.initialize = function()
 		//TODO <ADD CODE HERE>
 	});
 
+	//Sprites and effects
+	Interface.add_effects = new ButtonDrawer();
+	Interface.add_effects.setImage(Interface.file_dir + "icons/effects/particles.png");
+	Interface.add_effects.options_per_line = 2;
+	Interface.add_effects.image_scale.set(0.7, 0.7);
+	Interface.add_effects.options_scale.set(0.7, 0.7);
+	Interface.add_effects.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.add_effects.position.set(0, 440);
+	Interface.add_effects.options_size.set(40, 40);
+	Interface.add_effects.updateInterface();
+
+	//Sprite
+	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/sprite.png", function()
+	{
+		var map = new THREE.TextureLoader().load("data/sample.png");
+		var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
+		var sprite = new Sprite(material);
+		Editor.addToActualScene(sprite);
+	});
+
+	//Particles
+	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/particles.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
 	//Add device
 	Interface.add_device = new ButtonDrawer();
 	Interface.add_device.setImage(Interface.file_dir + "icons/hw/hw.png");
-	Interface.add_device.options_per_line = 3;
+	Interface.add_device.options_per_line = 2;
 	Interface.add_device.image_scale.set(0.7, 0.7);
 	Interface.add_device.options_scale.set(0.7, 0.7);
 	Interface.add_device.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
-	Interface.add_device.position.set(0, 440);
+	Interface.add_device.position.set(0, 480);
 	Interface.add_device.options_size.set(40, 40);
 	Interface.add_device.updateInterface();
 
@@ -367,12 +410,6 @@ Interface.initialize = function()
 
 	//Kinect Skeleton
 	Interface.add_device.addOption(Interface.file_dir + "icons/hw/kinect.png", function()
-	{
-		//TODO <ADD CODE HERE>
-	});
-
-	//
-	Interface.add_device.addOption(Interface.file_dir + "icons/hw/vr.png", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
@@ -432,12 +469,28 @@ Interface.initialize = function()
 	Interface.editor.setText("Editor");
 	Interface.editor.size.set(100, Interface.top_bar.size.y);
 	Interface.editor.position.set(120,0);
-	Interface.editor.addOption("Undo", function()
+
+	Interface.editor.addOption("Copy Ctrl+C", function()
+	{
+		//TODO <UNDO>
+	});
+	
+	Interface.editor.addOption("Cut Ctrl+X", function()
+	{
+		//TODO <REDO>
+	});
+
+	Interface.editor.addOption("Paste Ctrl+V", function()
+	{
+		//TODO <REDO>
+	});
+
+	Interface.editor.addOption("Undo Ctrl+Z", function()
 	{
 		//TODO <UNDO>
 	});
 
-	Interface.editor.addOption("Redo", function()
+	Interface.editor.addOption("Redo Ctrl+Y", function()
 	{
 		//TODO <REDO>
 	});
@@ -510,6 +563,7 @@ Interface.updateInterface = function()
 	Interface.explorer_resizable.updateInterface();
 
 	Interface.tree_view.updateInterface();
+	Interface.form.updateInterface();
 
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;

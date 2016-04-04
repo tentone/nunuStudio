@@ -29,6 +29,7 @@ function addDefaultScene()
 	var model = new Model3D(geometry, material);
 	model.receiveShadow = true;
 	model.castShadow = true;
+	model.name = "box";
 	scene.add(model);
 
 	material = new THREE.MeshPhongMaterial();
@@ -37,6 +38,7 @@ function addDefaultScene()
  	model.position.set(0, -0.55, 0);
 	model.receiveShadow = true;
 	model.castShadow = true;
+	model.name = "ground";
 	scene.add(model);
 
 	this.addScene(scene);

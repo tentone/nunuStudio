@@ -3,6 +3,7 @@ function LeapHand()
 	THREE.Scene.call(this);
 	this.name = "leap";
 
+	//Hand and Arm meshes
 	this.bone_meshes = [];
 	this.arm_meshes = [];
 
@@ -18,10 +19,11 @@ function LeapHand()
 	this.mode = this.DESK;
 	this.scale = new THREE.Vector3(1,1,1);
 
-	//Start leap and set callback function
+	//Create leap controller and data storage
 	this.controller = new Leap.Controller();
-	this.data = null; //Controller data
+	this.data = null;
 
+	//Start leap worker to collect data
 	var self = this;
 	Leap.loop({background:true}, function(data)
 	{
@@ -49,7 +51,35 @@ function update()
 	{
 		var self = this;
 
-		//Clear scene
+		//Gesture detection
+		if(this.data.valid && this.data.gestures.length > 0)
+		{
+			this.data.gestures.forEach(function(gesture)
+			{
+				if(gesture.type === "circle")
+				{
+					//TODO <ADD CODE HERE>
+					console.log("Circle Gesture");	
+				}
+				else if(gesture.type === "keyTap")
+				{
+					//TODO <ADD CODE HERE>
+					console.log("Key Tap Gesture");	
+				}
+				else if(gesture.type === "swipe")
+				{
+					//TODO <ADD CODE HERE>
+					console.log("Swipe Gesture");	
+				}
+				else if(gesture.type === "screenTap")
+				{
+					//TODO <ADD CODE HERE>
+					console.log("Screen Tap Gesture");	
+				}
+			});
+		}
+
+		//Remove all bones from scene
 		this.arm_meshes.forEach(function(item)
 		{
 			self.remove(item);
@@ -88,7 +118,7 @@ function update()
 			}
 		}
 
-		//Update Leap Colision box
+		//Update Leap Hand
 		if(this.physics_world != null)
 		{
 			this.updatePhysics()
@@ -145,6 +175,8 @@ function addMesh(meshes, material)
 {
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
 	var mesh = new THREE.Mesh(geometry, material);
+	mesh.castShadow = true;
+	mesh.receiveShadow = true;
 	meshes.push(mesh);
 	return mesh;
 }

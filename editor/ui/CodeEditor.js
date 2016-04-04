@@ -73,7 +73,7 @@ function setText(text)
 function attachScript(script)
 {
 	this.script = script;
-	this.setText(script.code);
+	this.setText(script.code_loop);
 }
 
 //Update attached script
