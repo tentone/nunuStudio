@@ -58,8 +58,34 @@ function update()
 			{
 				if(gesture.type === "swipe")
 				{
-					//TODO <ADD CODE HERE>
-					//console.log("Swipe Gesture");	
+					var direction;
+
+					//Horizontal
+					if(Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]))
+					{
+						if(gesture.direction[0] > 0)
+						{
+							direction = "right";
+						}
+						else
+						{
+							direction = "left";
+						}
+					}
+					//Vertical
+					else
+					{ 
+						if(gesture.direction[1] > 0)
+						{
+							direction = "up";
+						}
+						else
+						{
+							direction = "down";
+						}                  
+					}
+
+					//console.log(direction)
 				}
 				else if(gesture.type === "circle")
 				{

@@ -92,6 +92,7 @@ Editor.initialize = function(canvas)
 	//Renderer
 	Editor.renderer = new THREE.WebGLRenderer({canvas: Editor.canvas});
 	Editor.renderer.autoClear = false;
+	//Editor.renderer.alpha = true;
 	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
 	Editor.renderer.shadowMap.enabled = true;
 	//Editor.renderer.shadowMap.height = 4096;
@@ -172,9 +173,10 @@ Editor.update = function()
 				Editor.rotate_tool.visible = false;
 				Editor.resize_tool.visible = false;
 
-				var distance = Editor.camera.position.distanceTo(Editor.selected_object.position)/5;
+				var position = Editor.objectAbsolutePosition(Editor.selected_object);
+				var distance = Editor.camera.position.distanceTo(position)/5;
 				Editor.move_tool.scale.set(distance, distance, distance);
-				Editor.move_tool.position.copy(Editor.objectAbsolutePosition(Editor.selected_object));
+				Editor.move_tool.position.copy(position);
 			}
 			else if(Editor.tool_mode === Editor.MODE_RESIZE)
 			{
@@ -182,10 +184,11 @@ Editor.update = function()
 				Editor.move_tool.visible = false;
 				Editor.rotate_tool.visible = false;
 
-				var distance = Editor.camera.position.distanceTo(Editor.selected_object.position)/5;
+				var position = Editor.objectAbsolutePosition(Editor.selected_object);
+				var distance = Editor.camera.position.distanceTo(position)/5;
 				Editor.resize_tool.scale.set(distance, distance, distance);
 				Editor.resize_tool.rotation.copy(Editor.selected_object.rotation);
-				Editor.resize_tool.position.copy(Editor.objectAbsolutePosition(Editor.selected_object));
+				Editor.resize_tool.position.copy(position);
 			}
 			else if(Editor.tool_mode === Editor.MODE_ROTATE)
 			{
@@ -193,9 +196,10 @@ Editor.update = function()
 				Editor.move_tool.visible = false;
 				Editor.resize_tool.visible = false;
 
-				var distance = Editor.camera.position.distanceTo(Editor.selected_object.position)/5;
+				var position = Editor.objectAbsolutePosition(Editor.selected_object);
+				var distance = Editor.camera.position.distanceTo(position)/5;
 				Editor.rotate_tool.scale.set(distance, distance, distance);
-				Editor.rotate_tool.position.copy(Editor.objectAbsolutePosition(Editor.selected_object));
+				Editor.rotate_tool.position.copy(position);
 			}
 			else
 			{
@@ -493,8 +497,18 @@ Editor.objectAbsolutePosition = function(obj)
 {
 	if(obj.parent !== null &&  obj.parent !== undefined)
 	{
+		var parent = obj.parent;
+		var scale = new THREE.Vector3(1, 1, 1);
+		while(parent !== null)
+		{
+			scale.multiply(parent.scale);
+			parent = parent.parent;
+		}
+
 		var position = new THREE.Vector3(obj.position.x, obj.position.y, obj.position.z);
+		position.multiply(scale);
 		position.add(Editor.objectAbsolutePosition(obj.parent));
+
 		return position;
 	}
 

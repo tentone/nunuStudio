@@ -56,7 +56,11 @@ function App(){}
 App.initialize = function(main)
 {
 	//Node modules
-	App.fs = require("fs");
+	try
+	{
+		App.fs = require("fs");
+	}
+	catch(e){}
 
 	//Stats tool
 	App.stats = new Stats();
@@ -85,13 +89,46 @@ App.initialize = function(main)
 //Read File
 App.readFile = function(fname)
 {
-	return App.fs.readFileSync(fname, "utf8");
+	if(App.fs !== undefined)
+	{
+		return App.fs.readFileSync(fname, "utf8");
+	}
+	else
+	{
+		var file = new XMLHttpRequest();
+		var ready = false;
+		var data = null;
+
+		//Request file to server
+		file.open("GET", fname, false);
+
+		//Get file
+		file.onreadystatechange = function ()
+		{
+			if(file.readyState === 4)
+			{
+				if(file.status === 200 || file.status == 0)
+				{
+					data = file.responseText;
+				}
+				ready = true;
+			}
+		}
+
+		//Send null to ensure that file was received
+		file.send(null);
+
+		return data;
+	}
 }
 
 //Write File
 App.writeFile = function(fname, data)
 {
-	App.fs.writeFileSync(fname, data);
+	if(App.fs !== undefined)
+	{
+		App.fs.writeFileSync(fname, data);
+	}
 }
 
 //Load Main program
