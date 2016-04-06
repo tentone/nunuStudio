@@ -44,6 +44,15 @@ LeapHand.prototype.updateMesh = updateMesh;
 LeapHand.DESK = 0;
 LeapHand.HDM = 1;
 
+//Leap Hand Gestures
+LeapHand.SWIPE = 0;
+LeapHand.SWIPE_LEFT = 1;
+LeapHand.SWIPE_RIGHT = 2;
+LeapHand.SWIPE_UP = 3;
+LeapHand.SWIPE_DOWN = 4;
+
+LeapHand.CIRCLE = 5;
+
 //Update leap status
 function update()
 {
@@ -85,22 +94,22 @@ function update()
 						}                  
 					}
 
-					//console.log(direction)
+					console.log("Swipe " + direction);
 				}
 				else if(gesture.type === "circle")
 				{
 					//TODO <ADD CODE HERE>
-					//console.log("Circle Gesture");	
+					console.log("Circle Gesture");	
 				}
 				else if(gesture.type === "keyTap")
 				{
 					//TODO <ADD CODE HERE>
-					//console.log("Key Tap Gesture");	
+					console.log("Key Tap Gesture");	
 				}
 				else if(gesture.type === "screenTap")
 				{
 					//TODO <ADD CODE HERE>
-					//console.log("Screen Tap Gesture");	
+					console.log("Screen Tap Gesture");	
 				}
 			});
 		}

@@ -440,13 +440,15 @@ Interface.initialize = function()
 
 	Interface.file.addOption("Save Project", function()
 	{
-		App.writeFile("project.isp", JSON.stringify(Editor.program));
+		App.writeFile("project.isp", JSON.stringify(Editor.program.scene));
 	});
 
 	Interface.file.addOption("Load Project", function()
 	{
-		console.log(Editor.program);
+
+		console.log(Editor.scene);
 		console.log(JSON.parse(App.readFile("project.isp")));
+
 		Editor.updateTreeView();
 	});
 

@@ -2,6 +2,7 @@ uniform vec3 top_color;
 uniform vec3 bottom_color;
 uniform float offset;
 uniform float exponent;
+
 varying vec3 vWorldPosition;
 
 void main()
