@@ -10,7 +10,7 @@ function Program()
 	this.scenes = [];
 
 	//Runtime variables
-	this.actual_scene = null;
+	this.scene = null;
 }
 
 //Function Prototype
@@ -44,9 +44,9 @@ function addDefaultScene()
 	this.addScene(scene);
 
 	//If first scene set as actual scene
-	if(this.actual_scene == null)
+	if(this.scene == null)
 	{
-		this.actual_scene = this.scenes[0];
+		this.scene = this.scenes[0];
 	}
 }
 
@@ -62,7 +62,7 @@ function removeScene(scene)
 	//If no scene on program set actual scene to null
 	if(this.scenes.length === 0)
 	{
-		this.actual_scene = null;
+		this.scene = null;
 	}
 }
 
