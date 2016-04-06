@@ -14,6 +14,13 @@ function LeapHand()
 	this.physics_world = null;
 	this.physics_bodys = [];
 
+	//Gesture
+	this.gesture = []
+	for(var i = 0; i < 8; i++)
+	{
+		this.gesture[i] = false;
+	}
+
 	//Hand Atributes
 	this.use_arm = false;
 	this.mode = this.DESK;
@@ -39,6 +46,7 @@ LeapHand.prototype.setMode = setMode;
 LeapHand.prototype.updatePhysics = updatePhysics;
 LeapHand.prototype.addMesh = addMesh;
 LeapHand.prototype.updateMesh = updateMesh;
+LeapHand.prototype.checkGesture = checkGesture;
 
 //Leap Hand Modes
 LeapHand.DESK = 0;
@@ -50,8 +58,9 @@ LeapHand.SWIPE_LEFT = 1;
 LeapHand.SWIPE_RIGHT = 2;
 LeapHand.SWIPE_UP = 3;
 LeapHand.SWIPE_DOWN = 4;
-
 LeapHand.CIRCLE = 5;
+LeapHand.SCREEN_TAP = 6;
+LeapHand.KEY_TAP = 7;
 
 //Update leap status
 function update()
@@ -60,6 +69,12 @@ function update()
 	{
 		var self = this;
 
+		//Reset event flags
+		for(var i = 0; i < 8; i++)
+		{
+			this.gesture[i] = false;
+		}
+
 		//Gesture detection
 		if(this.data.valid && this.data.gestures.length > 0)
 		{
@@ -67,18 +82,21 @@ function update()
 			{
 				if(gesture.type === "swipe")
 				{
-					var direction;
+					//var direction;
+					self.gesture[LeapHand.SWIPE] = true;
+					//console.log("Swipe");
 
 					//Horizontal
 					if(Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]))
 					{
 						if(gesture.direction[0] > 0)
 						{
-							direction = "right";
+							self.gesture[LeapHand.SWIPE_RIGHT] = true;
 						}
 						else
 						{
-							direction = "left";
+							//console.log("Swipe left");
+							self.gesture[LeapHand.SWIPE_LEFT] = true;
 						}
 					}
 					//Vertical
@@ -86,30 +104,28 @@ function update()
 					{ 
 						if(gesture.direction[1] > 0)
 						{
-							direction = "up";
+							self.gesture[LeapHand.SWIPE_UP] = true;
 						}
 						else
 						{
-							direction = "down";
+							self.gesture[LeapHand.SWIPE_DOWN] = true;
 						}                  
 					}
-
-					console.log("Swipe " + direction);
 				}
 				else if(gesture.type === "circle")
 				{
-					//TODO <ADD CODE HERE>
-					console.log("Circle Gesture");	
+					self.gesture[LeapHand.CIRCLE] = true;
+					//console.log("Circle Gesture");	
 				}
 				else if(gesture.type === "keyTap")
 				{
-					//TODO <ADD CODE HERE>
-					console.log("Key Tap Gesture");	
+					self.gesture[LeapHand.KEY_TAP] = true;
+					//console.log("Key Tap Gesture");	
 				}
 				else if(gesture.type === "screenTap")
 				{
-					//TODO <ADD CODE HERE>
-					console.log("Screen Tap Gesture");	
+					self.gesture[LeapHand.SCREEN_TAP] = true;
+					//console.log("Screen Tap Gesture");	
 				}
 			});
 		}
@@ -159,6 +175,25 @@ function update()
 			this.updatePhysics()
 		}
 	}
+
+	//Update children
+	for(var i = 0; i < this.children.length; i++)
+	{
+		if(this.children[i].update != undefined)
+		{
+			this.children[i].update();
+		}
+	}
+}
+
+//Check if gesture is occuring
+function checkGesture(gest)
+{
+	if(this.gesture[gest] !== undefined)
+	{
+		return this.gesture[gest];
+	}
+	return false;
 }
 
 //Change Mode
