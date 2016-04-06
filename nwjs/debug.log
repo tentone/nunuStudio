@@ -532,3 +532,11 @@
 [0406/025013:INFO:nw_package.cc(175)] nw.exe ..
 [0406/025045:INFO:nw_package.cc(175)] nw.exe ..
 [0406/025048:INFO:nw_package.cc(175)] nw.exe ..
+[0406/091556:INFO:nw_package.cc(175)] nw.exe ..
+[0406/091657:ERROR:image_metadata_extractor.cc(114)] Couldn't load libexif. 126
+[0406/091828:INFO:nw_package.cc(175)] nw.exe ..
+[0406/092105:INFO:nw_package.cc(175)] nw.exe ..
+[0406/092255:INFO:nw_package.cc(175)] nw.exe ..
+[0406/092451:INFO:nw_package.cc(175)] nw.exe ..
+[0406/092653:INFO:nw_package.cc(175)] nw.exe ..
+[0406/092955:INFO:nw_package.cc(175)] nw.exe ..
