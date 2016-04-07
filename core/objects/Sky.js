@@ -24,7 +24,7 @@ function Sky()
 	//Day time
 	this.update_time = true;
 	this.day_time = 20; //seconds
-	this.time = 0;
+	this.time = 5;
 
 	//Sky Shader
 	var vertex = App.readFile("data/shaders/sky_vertex.glsl");

@@ -13,6 +13,9 @@ include("lib/three/vr/VREffect.js");
 include("lib/three/vr/webvr-manager.js");
 include("lib/three/vr/webvr-polyfill.js");
 
+include("lib/threex/videotexture.js");
+include("lib/threex/webcamtexture.js");
+
 include("lib/leap/leap-0.6.4.min.js");
 include("lib/leap/leap-plugins-0.1.11.min.js");
 
@@ -29,6 +32,8 @@ include("device/KinectDevice.js");
 include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
+
+include("tools/WorkerLoop.js");
 
 include("core/animation/Joint.js");
 include("core/animation/Skeleton.js");
@@ -68,6 +73,7 @@ App.initialize = function(main)
 	App.stats.domElement.style.position = "absolute";
 	App.stats.domElement.style.left = "0px";
 	App.stats.domElement.style.top = "0px";
+	App.stats.domElement.style.zIndex = "10000";
 	document.body.appendChild(App.stats.domElement);
 
 	//Init Input
@@ -175,7 +181,8 @@ App.setMouseLock = function(value)
 //App loop
 App.loop = function()
 {
-	//Prepare next frame render
+	//Call loop again
+	//setTimeout(App.loop, 0);
 	requestAnimationFrame(App.loop);
 
 	App.stats.begin();

@@ -64,7 +64,7 @@ Editor.initialize = function(canvas)
 
 	//Set mouse lock true
 	App.setMouseLock(false);
-	App.showStats(false);
+	App.showStats(true);
 
 	//Set render canvas
 	Editor.canvas = Interface.canvas.element;
