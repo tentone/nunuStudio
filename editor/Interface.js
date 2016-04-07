@@ -382,6 +382,13 @@ Interface.initialize = function()
 	{
 		var map = new THREE.TextureLoader().load("data/sample.png");
 		var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
+
+		//TODO <CHECK CODE>
+		//var video = new THREEx.VideoTexture("data/sample.avi");
+		//function update(){video.update(App.delta_time, App.time);}
+		//update();
+		//var material = new THREE.SpriteMaterial({map: video.texture, color: 0xffffff});
+		
 		var sprite = new Sprite(material);
 		Editor.addToActualScene(sprite);
 	});
