@@ -3,6 +3,9 @@ function Container()
 	THREE.Object3D.call(this);
 
 	this.name = "container";
+	
+	this.rotationAutoUpdate = false;
+	this.matrixAutoUpdate = false;
 }
 
 //Function Prototype

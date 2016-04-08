@@ -33,25 +33,23 @@ include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
-include("tools/WorkerLoop.js");
-
 include("core/animation/Joint.js");
 include("core/animation/Skeleton.js");
 include("core/Program.js");
 include("core/Scene.js");
 
+include("core/objects/lights/PointLight.js");
+include("core/objects/lights/SpotLight.js");
+include("core/objects/lights/AmbientLight.js");
+include("core/objects/lights/DirectionalLight.js");
+include("core/objects/lights/HemisphereLight.js");
+include("core/objects/lights/Sky.js");
+include("core/objects/cameras/PerspectiveCamera.js");
+include("core/objects/cameras/OrthographicCamera.js");
+include("core/objects/Container.js");
 include("core/objects/Script.js");
 include("core/objects/Model3D.js");
 include("core/objects/Text3D.js");
-include("core/objects/PointLight.js");
-include("core/objects/SpotLight.js");
-include("core/objects/AmbientLight.js");
-include("core/objects/DirectionalLight.js");
-include("core/objects/HemisphereLight.js");
-include("core/objects/PerspectiveCamera.js");
-include("core/objects/OrthographicCamera.js");
-include("core/objects/Container.js");
-include("core/objects/Sky.js");
 include("core/objects/Sprite.js");
 
 //App class
@@ -74,6 +72,8 @@ App.initialize = function(main)
 	App.stats.domElement.style.left = "0px";
 	App.stats.domElement.style.top = "0px";
 	App.stats.domElement.style.zIndex = "10000";
+	App.stats.domElement.style.opacity = "0.7";
+	App.stats.domElement.style.pointerEvents = "none";
 	document.body.appendChild(App.stats.domElement);
 
 	//Init Input

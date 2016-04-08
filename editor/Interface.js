@@ -447,16 +447,35 @@ Interface.initialize = function()
 
 	Interface.file.addOption("Save Project", function()
 	{
-		App.writeFile("project.isp", JSON.stringify(Editor.program.scene));
+		var output = Editor.scene.toJSON();
+
+		try
+		{
+			output = JSON.stringify(output, null, '\t');
+			output = output.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, '$1');
+		}
+		catch(e)
+		{
+			output = JSON.stringify(output);
+		}
+
+		App.writeFile("project.json", output);
 	});
 
 	Interface.file.addOption("Load Project", function()
 	{
+		try
+		{
+			Editor.program = JSON.parse(App.readFile("project.json"));
+			Editor.updateTreeView();
+			alert("OK");
+		}
+		catch(e)
+		{
+			alert("Error!");
+		}
 
-		console.log(Editor.scene);
-		console.log(JSON.parse(App.readFile("project.isp")));
 
-		Editor.updateTreeView();
 	});
 
 	Interface.file.addOption("Settings", function()
@@ -480,27 +499,27 @@ Interface.initialize = function()
 	Interface.editor.size.set(100, Interface.top_bar.size.y);
 	Interface.editor.position.set(120,0);
 
-	Interface.editor.addOption("Copy Ctrl+C", function()
+	Interface.editor.addOption("Copy", function()
 	{
 		//TODO <UNDO>
 	});
 	
-	Interface.editor.addOption("Cut Ctrl+X", function()
+	Interface.editor.addOption("Cut", function()
 	{
 		//TODO <REDO>
 	});
 
-	Interface.editor.addOption("Paste Ctrl+V", function()
+	Interface.editor.addOption("Paste", function()
 	{
 		//TODO <REDO>
 	});
 
-	Interface.editor.addOption("Undo Ctrl+Z", function()
+	Interface.editor.addOption("Undo", function()
 	{
 		//TODO <UNDO>
 	});
 
-	Interface.editor.addOption("Redo Ctrl+Y", function()
+	Interface.editor.addOption("Redo", function()
 	{
 		//TODO <REDO>
 	});
