@@ -92,11 +92,8 @@ Editor.initialize = function(canvas)
 	//Renderer
 	Editor.renderer = new THREE.WebGLRenderer({canvas: Editor.canvas});
 	Editor.renderer.autoClear = false;
-	//Editor.renderer.alpha = true;
 	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
 	Editor.renderer.shadowMap.enabled = true;
-	//Editor.renderer.shadowMap.height = 4096;
-	//Editor.renderer.shadowMap.width = 4096;
 	Editor.renderer.shadowMap.type = THREE.PCFShadowMap;
 
 	//Update interface

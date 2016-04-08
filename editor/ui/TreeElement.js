@@ -131,8 +131,11 @@ function TreeElement(container)
 		
 		if(obj != null)
 		{
-			self.obj.add(obj);
-			self.updateSceneData();
+			if(obj.uuid !== self.obj.uuid)
+			{
+				self.obj.add(obj);
+				self.updateSceneData();
+			}
 		}
 	};
 

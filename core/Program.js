@@ -33,9 +33,9 @@ function addDefaultScene()
 	scene.add(model);
 
 	material = new THREE.MeshPhongMaterial();
-	geometry = new THREE.BoxGeometry(10, 0.1, 10);
+	geometry = new THREE.BoxGeometry(20, 1, 20);
  	model = new Model3D(geometry, material);
- 	model.position.set(0, -0.55, 0);
+ 	model.position.set(0, -1, 0);
 	model.receiveShadow = true;
 	model.castShadow = true;
 	model.name = "ground";
