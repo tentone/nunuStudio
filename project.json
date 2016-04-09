@@ -73,6 +73,7 @@
 		{
 			"uuid": "9D4BFB41-B035-4B32-B736-A0F46B4342BA",
 			"type": "CylinderGeometry",
+			"name": "object",
 			"radiusTop": 0,
 			"radiusBottom": 1,
 			"height": 2,
@@ -251,7 +252,7 @@
 						"name": "cube",
 						"castShadow": true,
 						"receiveShadow": true,
-						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"matrix": [0.855567991733551,0.43101766705513,0,0,-0.449911892414093,0.8930729627609253,0,0,0,0,1.8139827251434326,0,0,0,5.127877235412598,1],
 						"geometry": "C6974912-4541-41C8-B082-6D465EF0D50C",
 						"material": "71C379E9-74D2-4E83-A390-69E733EEBAFF",
 						"children": [
@@ -261,7 +262,7 @@
 								"name": "cube",
 								"castShadow": true,
 								"receiveShadow": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,6.8595404624938965,0,0,1],
 								"geometry": "5669F5A6-3ABF-4E06-A763-828833ECF8B6",
 								"material": "89A52E0E-9CEA-41DE-A506-6F942FC547FF",
 								"children": [
@@ -271,7 +272,7 @@
 										"name": "cube",
 										"castShadow": true,
 										"receiveShadow": true,
-										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0.6941370964050293,0,-7.3137617111206055,1],
 										"geometry": "FB56C20B-9ADC-439F-8B62-701C9A1C0369",
 										"material": "5811950E-F8F2-41AA-9252-B21AD6B278EB",
 										"children": [
@@ -281,7 +282,7 @@
 												"name": "cube",
 												"castShadow": true,
 												"receiveShadow": true,
-												"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+												"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-4.555863857269287,0,0,1],
 												"geometry": "C156FC56-3D78-4EC1-9F0E-BF31B2B71C21",
 												"material": "656C9AD5-ABFC-4158-B3C0-83614E01CF53"
 											}]
