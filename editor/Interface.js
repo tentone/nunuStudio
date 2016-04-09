@@ -463,22 +463,31 @@ Interface.initialize = function()
 		if(json != null)
 		{
 			App.writeFile("project.json", json);
+			alert("File saved!");
 		}
 	});
 
 	Interface.file.addOption("Load Project", function()
 	{
-		var loader = new THREE.ObjectLoader();
-		var data = JSON.parse(App.readFile("project.json"));
-		var scene = loader.parse(data);
-		
-		var program = new Program();
-		program.addScene(scene);
-		
-		Editor.program = program;
+		try
+		{
+			var loader = new ObjectLoader();
+			var data = JSON.parse(App.readFile("project.json"));
+			var scene = loader.parse(data);
+			
+			var program = new Program();
+			program.addScene(scene);
+			
+			Editor.program = program;
+			Editor.resetEditingFlags();
+			Editor.updateTreeView();
 
-		Editor.resetEditingFlags();
-		Editor.updateTreeView();
+			alert("File loaded!");
+		}
+		catch(e)
+		{
+			alert("Error loading file!");
+		}
 	});
 
 	Interface.file.addOption("Settings", function()
@@ -498,7 +507,7 @@ Interface.initialize = function()
 
 	//Editor
 	Interface.editor = new DropdownMenu();
-	Interface.editor.setText("Editor");
+	Interface.editor.setText("Edit");
 	Interface.editor.size.set(100, Interface.top_bar.size.y);
 	Interface.editor.position.set(120,0);
 
@@ -527,11 +536,22 @@ Interface.initialize = function()
 		//TODO <REDO>
 	});
 
+	//Project
+	Interface.project = new DropdownMenu();
+	Interface.project.setText("Project");
+	Interface.project.size.set(100, Interface.top_bar.size.y);
+	Interface.project.position.set(220,0);
+
+	Interface.project.addOption("Add Scene", function()
+	{
+		//TODO <UNDO>
+	});
+
 	//Run
 	Interface.about = new Button();
 	Interface.about.setText("About");
 	Interface.about.size.set(100, Interface.top_bar.size.y);
-	Interface.about.position.set(220, 0);
+	Interface.about.position.set(320, 0);
 	Interface.about.updateInterface();
 	Interface.about.setCallback(function()
 	{
@@ -542,7 +562,7 @@ Interface.initialize = function()
 	Interface.run = new Button();
 	Interface.run.setText("Run");
 	Interface.run.size.set(100, Interface.top_bar.size.y);
-	Interface.run.position.set(320, 0);
+	Interface.run.position.set(420, 0);
 	Interface.run.updateInterface();
 	Interface.run.setCallback(function()
 	{
