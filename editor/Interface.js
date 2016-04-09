@@ -15,7 +15,7 @@ Interface.initialize = function()
 	//Scene Canvas
 	var scene = Interface.tab.addOption("Scene", Interface.file_dir + "icons/tab/scene.png", true);
 	Interface.canvas = new SceneContainer();
-	Interface.canvas.setScene(Editor.scene);
+	Interface.canvas.setScene(Editor.program.scene);
 	scene.attachComponent(Interface.canvas);
 
 	//---------------------------------Asset Manager----------------------------------
@@ -447,35 +447,38 @@ Interface.initialize = function()
 
 	Interface.file.addOption("Save Project", function()
 	{
-		var output = Editor.scene.toJSON();
-
+		var output = Editor.program.scene.toJSON();
+		var json = null;
+		
 		try
 		{
-			output = JSON.stringify(output, null, '\t');
-			output = output.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, '$1');
+			json = JSON.stringify(output, null, "\t");
+			json = json.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
 		}
 		catch(e)
 		{
-			output = JSON.stringify(output);
+			json = JSON.stringify(output);
 		}
 
-		App.writeFile("project.json", output);
+		if(json != null)
+		{
+			App.writeFile("project.json", json);
+		}
 	});
 
 	Interface.file.addOption("Load Project", function()
 	{
-		try
-		{
-			Editor.program = JSON.parse(App.readFile("project.json"));
-			Editor.updateTreeView();
-			alert("OK");
-		}
-		catch(e)
-		{
-			alert("Error!");
-		}
+		var loader = new THREE.ObjectLoader();
+		var data = JSON.parse(App.readFile("project.json"));
+		var scene = loader.parse(data);
+		
+		var program = new Program();
+		program.addScene(scene);
+		
+		Editor.program = program;
 
-
+		Editor.resetEditingFlags();
+		Editor.updateTreeView();
 	});
 
 	Interface.file.addOption("Settings", function()
