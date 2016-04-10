@@ -36,11 +36,10 @@ include("input/Mouse.js");
 include("core/animation/Joint.js");
 include("core/animation/Skeleton.js");
 
-include("core/Program.js");
-include("core/Scene.js");
-
 include("core/ObjectLoader.js");
+include("core/Program.js");
 
+include("core/objects/Scene.js");
 include("core/objects/lights/PointLight.js");
 include("core/objects/lights/SpotLight.js");
 include("core/objects/lights/AmbientLight.js");
