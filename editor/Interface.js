@@ -462,7 +462,7 @@ Interface.initialize = function()
 
 		if(json != null)
 		{
-			App.writeFile("project.json", json);
+			App.writeFile("project.isp", json);
 			alert("File saved!");
 		}
 	});
@@ -472,7 +472,7 @@ Interface.initialize = function()
 		try
 		{
 			var loader = new ObjectLoader();
-			var data = JSON.parse(App.readFile("project.json"));
+			var data = JSON.parse(App.readFile("project.isp"));
 			var scene = loader.parse(data);
 			
 			var program = new Program();

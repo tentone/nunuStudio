@@ -91,7 +91,7 @@ function parseGeometries(json)
 			{
 				case 'PlaneGeometry':
 				case 'PlaneBufferGeometry':
-					geometry = new THREE[ data.type ](
+					geometry = new THREE[data.type](
 						data.width,
 						data.height,
 						data.widthSegments,
@@ -101,8 +101,8 @@ function parseGeometries(json)
 
 				case 'BoxGeometry':
 				case 'BoxBufferGeometry':
-				case 'CubeGeometry': // backwards compatible
-					geometry = new THREE[ data.type ](
+				case 'CubeGeometry':
+					geometry = new THREE[data.type](
 						data.width,
 						data.height,
 						data.depth,
@@ -114,7 +114,7 @@ function parseGeometries(json)
 
 				case 'CircleGeometry':
 				case 'CircleBufferGeometry':
-					geometry = new THREE[ data.type ](
+					geometry = new THREE[data.type](
 						data.radius,
 						data.segments,
 						data.thetaStart,
@@ -124,7 +124,7 @@ function parseGeometries(json)
 
 				case 'CylinderGeometry':
 				case 'CylinderBufferGeometry':
-					geometry = new THREE[ data.type ](
+					geometry = new THREE[data.type](
 						data.radiusTop,
 						data.radiusBottom,
 						data.height,
@@ -138,7 +138,7 @@ function parseGeometries(json)
 
 				case 'SphereGeometry':
 				case 'SphereBufferGeometry':
-					geometry = new THREE[ data.type ](
+					geometry = new THREE[data.type](
 						data.radius,
 						data.widthSegments,
 						data.heightSegments,
@@ -179,7 +179,7 @@ function parseGeometries(json)
 
 				case 'RingGeometry':
 				case 'RingBufferGeometry':
-					geometry = new THREE[ data.type ](
+					geometry = new THREE[data.type](
 						data.innerRadius,
 						data.outerRadius,
 						data.thetaSegments,
@@ -191,7 +191,7 @@ function parseGeometries(json)
 
 				case 'TorusGeometry':
 				case 'TorusBufferGeometry':
-					geometry = new THREE[ data.type ](
+					geometry = new THREE[data.type](
 						data.radius,
 						data.tube,
 						data.radialSegments,
@@ -202,7 +202,7 @@ function parseGeometries(json)
 
 				case 'TorusKnotGeometry':
 				case 'TorusKnotBufferGeometry':
-					geometry = new THREE[ data.type ](
+					geometry = new THREE[data.type](
 						data.radius,
 						data.tube,
 						data.tubularSegments,
@@ -222,11 +222,11 @@ function parseGeometries(json)
 					break;
 
 				case 'BufferGeometry':
-					geometry = bufferGeometryLoader.parse( data );
+					geometry = bufferGeometryLoader.parse(data);
 					break;
 
 				case 'Geometry':
-					geometry = geometryLoader.parse( data.data, this.texturePath ).geometry;
+					geometry = geometryLoader.parse(data.data, this.texturePath).geometry;
 					break;
 
 				default:
@@ -291,24 +291,23 @@ function parseImages(json, onLoad)
 
 	function loadImage(url)
 	{
-		scope.manager.itemStart( url );
+		scope.manager.itemStart(url);
 		return loader.load(url, function()
 		{
-			scope.manager.itemEnd( url );
+			scope.manager.itemEnd(url);
 		});
 	}
 
 	if(json !== undefined && json.length > 0)
 	{
-		var manager = new THREE.LoadingManager( onLoad );
-		var loader = new THREE.ImageLoader( manager );
-		loader.setCrossOrigin( this.crossOrigin );
+		var manager = new THREE.LoadingManager(onLoad);
+		var loader = new THREE.ImageLoader(manager);
+		loader.setCrossOrigin(this.crossOrigin);
 
 		for(var i = 0, l = json.length; i < l; i ++)
 		{
 			var image = json[ i ];
 			var path = /^(\/\/)|([a-z]+:(\/\/)?)/i.test( image.url ) ? image.url : scope.texturePath + image.url;
-
 			images[ image.uuid ] = loadImage( path );
 		}
 	}
@@ -320,44 +319,73 @@ function parseTextures(json, images)
 {
 	function parseConstant( value )
 	{
-		if ( typeof( value ) === 'number' )
+		if(typeof( value ) === 'number')
 		{
 			return value;
 		}
-		console.warn( 'ObjectLoader.parseTexture: Constant should be in numeric form.', value );
-		return THREE[ value ];
+
+		console.warn('ObjectLoader.parseTexture: Constant should be in numeric form.', value);
+		return THREE[value];
 	}
 
 	var textures = {};
 
-	if ( json !== undefined )
+	if(json !== undefined)
 	{
-		for ( var i = 0, l = json.length; i < l; i ++ )
+		for(var i = 0, l = json.length; i < l; i ++)
 		{
-			var data = json[ i ];
+			var data = json[i];
 
-			if ( data.image === undefined )
+			if(data.image === undefined)
 			{
-				console.warn( 'ObjectLoader: No "image" specified for', data.uuid );
+				console.warn('ObjectLoader: No "image" specified for', data.uuid);
 			}
 
-			if ( images[ data.image ] === undefined )
+			if(images[data.image] === undefined)
 			{
-				console.warn( 'ObjectLoader: Undefined image', data.image );
+				console.warn('ObjectLoader: Undefined image', data.image);
 			}
 
 			var texture = new THREE.Texture( images[ data.image ] );
 			texture.needsUpdate = true;
 			texture.uuid = data.uuid;
 
-			if ( data.name !== undefined ) texture.name = data.name;
-			if ( data.mapping !== undefined ) texture.mapping = parseConstant( data.mapping );
-			if ( data.offset !== undefined ) texture.offset = new THREE.Vector2( data.offset[ 0 ], data.offset[ 1 ] );
-			if ( data.repeat !== undefined ) texture.repeat = new THREE.Vector2( data.repeat[ 0 ], data.repeat[ 1 ] );
-			if ( data.minFilter !== undefined ) texture.minFilter = parseConstant( data.minFilter );
-			if ( data.magFilter !== undefined ) texture.magFilter = parseConstant( data.magFilter );
-			if ( data.anisotropy !== undefined ) texture.anisotropy = data.anisotropy;
-			if ( Array.isArray( data.wrap ) )
+			if(data.name !== undefined)
+			{
+				texture.name = data.name;
+			}
+			
+			if(data.mapping !== undefined)
+			{
+				texture.mapping = parseConstant(data.mapping);
+			}
+
+			if(data.offset !== undefined)
+			{
+				texture.offset = new THREE.Vector2(data.offset[0], data.offset[1]);
+			}
+
+			if(data.repeat !== undefined)
+			{
+				texture.repeat = new THREE.Vector2(data.repeat[0], data.repeat[1]);
+			}
+
+			if(data.minFilter !== undefined)
+			{
+				texture.minFilter = parseConstant(data.minFilter);
+			}
+
+			if(data.magFilter !== undefined)
+			{
+				texture.magFilter = parseConstant(data.magFilter);
+			}
+
+			if(data.anisotropy !== undefined)
+			{
+				texture.anisotropy = data.anisotropy;
+			}
+
+			if(Array.isArray(data.wrap))
 			{
 				texture.wrapS = parseConstant( data.wrap[ 0 ] );
 				texture.wrapT = parseConstant( data.wrap[ 1 ] );
@@ -405,31 +433,31 @@ function parseObject(data, geometries, materials)
 			break;
 
 		case 'PerspectiveCamera':
-			object = new THREE.PerspectiveCamera(data.fov, data.aspect, data.near, data.far);
+			object = new PerspectiveCamera(data.fov, data.aspect, data.near, data.far);
 			break;
 
 		case 'OrthographicCamera':
-			object = new THREE.OrthographicCamera(data.left, data.right, data.top, data.bottom, data.near, data.far);
+			object = new OrthographicCamera(data.left, data.right, data.top, data.bottom, data.near, data.far);
 			break;
 
 		case 'AmbientLight':
-			object = new THREE.AmbientLight(data.color, data.intensity);
+			object = new AmbientLight(data.color, data.intensity);
 			break;
 
 		case 'DirectionalLight':
-			object = new THREE.DirectionalLight(data.color, data.intensity);
+			object = new DirectionalLight(data.color, data.intensity);
 			break;
 
 		case 'PointLight':
-			object = new THREE.PointLight(data.color, data.intensity, data.distance, data.decay);
+			object = new PointLight(data.color, data.intensity, data.distance, data.decay);
 			break;
 
 		case 'SpotLight':
-			object = new THREE.SpotLight(data.color, data.intensity, data.distance, data.angle, data.penumbra, data.decay);
+			object = new SpotLight(data.color, data.intensity, data.distance, data.angle, data.penumbra, data.decay);
 			break;
 
 		case 'HemisphereLight':
-			object = new THREE.HemisphereLight(data.color, data.groundColor, data.intensity);
+			object = new HemisphereLight(data.color, data.groundColor, data.intensity);
 			break;
 
 		case 'Mesh':
@@ -441,7 +469,7 @@ function parseObject(data, geometries, materials)
 			}
 			else
 			{
-				object = new THREE.Mesh(geometry, material);
+				object = new Model3D(geometry, material);
 			}
 			break;
 
@@ -450,20 +478,23 @@ function parseObject(data, geometries, materials)
 			break;
 
 		case 'Line':
-			object = new THREE.Line( getGeometry( data.geometry ), getMaterial( data.material ), data.mode );
+			object = new THREE.Line(getGeometry(data.geometry), getMaterial(data.material), data.mode);
 			break;
 
 		case 'PointCloud':
 		case 'Points':
-			object = new THREE.Points( getGeometry( data.geometry ), getMaterial( data.material ) );
+			object = new THREE.Points(getGeometry(data.geometry), getMaterial(data.material));
 			break;
 
 		case 'Sprite':
-			object = new THREE.Sprite( getMaterial( data.material ) );
+			object = new THREE.Sprite(getMaterial(data.material));
 			break;
 
 		case 'Group':
 			object = new THREE.Group();
+			break;
+		case 'Script':
+			object = new Script(data.code_init, data.code_loop);
 			break;
 
 		default:
