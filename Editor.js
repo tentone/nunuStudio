@@ -48,7 +48,7 @@ Editor.initialize = function(canvas)
 {
 	//Set mouse lock false
 	App.setMouseLock(false);
-	App.showStats(true);
+	App.showStats(false);
 
 	//Editor initial state
 	Editor.tool_mode = Editor.MODE_SELECT;

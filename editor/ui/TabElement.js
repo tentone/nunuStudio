@@ -33,14 +33,14 @@ function TabElement(name, image, closeable, container, index)
 	//Change button behavior
 	this.button.element.onmouseover = function()
 	{
-		self.button.element.className = "button_over";
+		self.button.setClass("button_over");
 	};
 
 	this.button.element.onmouseleave = function()
 	{
 		if(!self.isSelected())
 		{
-			self.button.element.className = "button";
+			self.button.setClass("button");
 		}
 	};
 
@@ -80,13 +80,13 @@ TabElement.prototype.isSelected = isSelected;
 //Check if taboption is selected
 function isSelected()
 {
-	return (this.index == this.container.options_selected);
+	return this.index === this.container.options_selected;
 }
 
 //Update taboption status
 function update()
 {
-	if(this.component != null)
+	if(this.component !== null)
 	{
 		this.component.update();
 	}
@@ -117,11 +117,12 @@ function updateInterface()
 	{
 		this.button.setClass("button");
 	}
+
 	this.button.position.set(this.container.options_size.x * this.index, 0);
 	this.division.visible = this.visible;
 	this.division.size.set(this.size.x, this.size.y - this.button.size.y);
 
-	if(this.component != null)
+	if(this.component !== null)
 	{
 		this.component.visible = this.visible;
 		this.component.size.set(this.division.size.x, this.division.size.y);

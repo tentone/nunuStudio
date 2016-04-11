@@ -166,6 +166,7 @@ function TreeElement(container)
 					if(Interface.tab.options[i].component.script === self.obj)
 					{
 						found = true;
+						Interface.tab.selectOption(i);
 						break;
 					}
 				}
@@ -180,6 +181,8 @@ function TreeElement(container)
 				tab.attachComponent(code);
 			}
 		}
+		//Scene
+
 	};
 
 	//Arrow click
