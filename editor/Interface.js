@@ -469,25 +469,30 @@ Interface.initialize = function()
 
 	Interface.file.addOption("Load Project", function()
 	{
-		try
+		App.chooseFile(function(event)
 		{
-			var loader = new ObjectLoader();
-			var data = JSON.parse(App.readFile("project.isp"));
-			var scene = loader.parse(data);
-			
-			var program = new Program();
-			program.addScene(scene);
-			
-			Editor.program = program;
-			Editor.resetEditingFlags();
-			Editor.updateTreeView();
+			var file = event.srcElement.value;
+			try
+			{
+				var loader = new ObjectLoader();
+				var data = JSON.parse(App.readFile(file));
+				var scene = loader.parse(data);
+				
+				var program = new Program();
+				program.addScene(scene);
+				
+				Editor.program = program;
+				Editor.resetEditingFlags();
+				Editor.updateTreeView();
 
-			alert("File loaded!");
-		}
-		catch(e)
-		{
-			alert("Error loading file!");
-		}
+				alert("File loaded!");
+			}
+			catch(e)
+			{
+				alert("Error loading file!");
+			}
+		}, ".isp");
+
 	});
 
 	Interface.file.addOption("Settings", function()
