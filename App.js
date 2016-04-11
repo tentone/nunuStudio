@@ -94,6 +94,30 @@ App.initialize = function(main)
 	App.loop();
 }
 
+//File chooser callback receives event object
+App.chooseFile = function(callback, filter)
+{
+	//Create file chooser element
+	var chooser = document.createElement("input");
+	chooser.type = "file";	
+	chooser.style.display = "none";
+	if(filter !== undefined)
+	{
+		chooser.accept = filter;
+	}
+	document.body.appendChild(chooser);
+
+	//Create onchange event and trigger it
+	chooser.onchange = function(event)
+	{
+		if(callback !== undefined)
+		{
+			callback(event);
+		}
+	};
+	chooser.click();  
+}
+
 //Read File
 App.readFile = function(fname)
 {
