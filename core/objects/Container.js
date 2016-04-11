@@ -3,6 +3,7 @@ function Container()
 	THREE.Object3D.call(this);
 
 	this.name = "container";
+	this.type = "Group";
 	
 	this.rotationAutoUpdate = false;
 	this.matrixAutoUpdate = false;

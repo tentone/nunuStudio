@@ -49,7 +49,7 @@ function Button(parent)
 		self.element.className = "button_over";
 	};
 
-	this.element.onmouseout = function()
+	this.element.onmouseleave = function()
 	{
 		self.element.className = "button";
 	};

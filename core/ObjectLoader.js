@@ -428,6 +428,10 @@ function parseObject(data, geometries, materials)
 
 	switch(data.type)
 	{
+		case 'Sky':
+			object = new Sky(data.auto_updateabc, data.day_time, data.sun_distance);
+			break;
+			
 		case 'Scene':
 			object = new Scene();
 			break;
@@ -491,7 +495,7 @@ function parseObject(data, geometries, materials)
 			break;
 
 		case 'Group':
-			object = new THREE.Group();
+			object = new Container();
 			break;
 		case 'Script':
 			object = new Script(data.code_init, data.code_loop);

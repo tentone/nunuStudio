@@ -28,7 +28,6 @@ function TabContainer(parent)
 	//Tab Options
 	this.options_size = new THREE.Vector2(150, 30);
 	this.options_selected = 0;
-	this.options_closeable = false;
 	this.options = [];
 
 	//Add element to document
