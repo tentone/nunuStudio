@@ -27,13 +27,13 @@ function DualDivisionResizable(parent)
 	this.div_a = document.createElement("div");
 	this.div_a.id = id_a;
 	this.div_a.style.position = "absolute";
-	this.div_a.className = "panel";
+	this.div_a.className = "container";
 
 	//Division B
 	this.div_b = document.createElement("div");
 	this.div_b.id = id_b;
 	this.div_b.style.position = "absolute";
-	this.div_b.className = "panel";
+	this.div_b.className = "container";
 
 	//Create resize_tab tab
 	this.resize_tab = document.createElement("div");

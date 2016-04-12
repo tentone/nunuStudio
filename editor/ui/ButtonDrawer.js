@@ -145,13 +145,13 @@ function addOption(image, callback)
 	button.updateInterface();
 	
 	var self = this;
-	button.callback = function()
+	button.setCallback(function()
 	{
 		callback();
 		button.element.className = "button";
 		self.expanded = false;
 		self.updateInterface();
-	};
+	});
 	
 	this.options.push(button);
 	this.updatePanelSize();

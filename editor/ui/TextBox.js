@@ -1,4 +1,4 @@
-function TextBox(parent)
+function Textbox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,13 +11,14 @@ function TextBox(parent)
 	}
 
 	//ID
-	var id = "text_box" + TextBox.id;
-	TextBox.id++;
+	var id = "txt_box" + Textbox.id;
+	Textbox.id++;
 
 	//Create element
 	this.element = document.createElement("input");
-	this.element.id = id;
+	this.element.type = "text";
 	this.element.className = "text_box";
+	this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//Element atributes
@@ -30,7 +31,7 @@ function TextBox(parent)
 	var self = this;
 	this.element.onchange = function()
 	{
-		if(self.callback != null)
+		if(self.callback !== null)
 		{
 			self.callback();
 		}
@@ -40,13 +41,27 @@ function TextBox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//TextBox ID counter
-TextBox.id = 0;
+//Textbox ID counter
+Textbox.id = 0;
 
 //Functions Prototype
-TextBox.prototype.update = update;
-TextBox.prototype.updateInterface = updateInterface;
-TextBox.prototype.destroy = destroy;
+Textbox.prototype.update = update;
+Textbox.prototype.updateInterface = updateInterface;
+Textbox.prototype.destroy = destroy;
+Textbox.prototype.setText = setText;
+Textbox.prototype.getText = getText;
+
+//Set text
+function setText(text)
+{
+	this.element.value = text;
+}
+
+//Get text
+function getText()
+{
+	return this.element.value;
+}
 
 //Remove element
 function destroy()

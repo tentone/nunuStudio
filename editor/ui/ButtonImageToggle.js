@@ -37,6 +37,8 @@ function ButtonImageToggle(parent)
 	this.selected = false;
 	this.image_scale = new THREE.Vector2(1,1);
 	this.image = "";
+
+	//Callback to toggle button
 	this.callback = function()
 	{
 		self.selected = !self.selected;

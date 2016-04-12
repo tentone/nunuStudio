@@ -9,6 +9,13 @@ function Text3D(text, font , material)
 	this.text = text;
 
 	this.scale.set(0.01, 0.01, 0.01);
+	/*this.updateMatrix();
+	this.geometry.applyMatrix(this.matrix);
+
+	this.position.set(0, 0, 0);
+	this.rotation.set(0, 0, 0);
+	this.scale.set(1, 1, 1);
+	this.updateMatrix();*/
 }
 
 //Function Prototype
