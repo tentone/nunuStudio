@@ -12,7 +12,6 @@ include("editor/ui/DivisionResizable.js");
 include("editor/ui/ButtonImage.js");
 include("editor/ui/ButtonDrawer.js");
 include("editor/ui/Style.js");
-include("editor/ui/Textbox.js");
 include("editor/ui/Canvas.js");
 include("editor/ui/TabContainer.js");
 include("editor/ui/TabElement.js");
@@ -24,7 +23,9 @@ include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/SceneContainer.js");
 include("editor/ui/Form.js");
-include("editor/ui/Checkbox.js");
+include("editor/ui/form/Checkbox.js");
+include("editor/ui/form/Textbox.js");
+include("editor/ui/form/ColorChooser.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");

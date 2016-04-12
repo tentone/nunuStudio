@@ -99,6 +99,7 @@ function setLoopCode(code)
 	catch(e){}
 }
 
+//Create JSON for object
 function toJSON(meta)
 {
 	var isRootObject = (meta === undefined);

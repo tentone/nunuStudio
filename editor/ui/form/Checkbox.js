@@ -1,4 +1,4 @@
-function Text(parent)
+function Checkbox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,63 +11,54 @@ function Text(parent)
 	}
 
 	//ID
-	var id = "txt" + Text.id;
-	Text.id++;
+	var id = "checkbox" + Checkbox.id;
+	Checkbox.id++;
 
 	//Create element
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "text";
-	
+
+	//Checkbox
+	this.checkbox = document.createElement("input");
+	this.checkbox.type = "checkbox";
+	this.checkbox.style.position = "absolute";
+	this.checkbox.style.top = "0px";
+	this.checkbox.style.left = "0px";
+	this.element.appendChild(this.checkbox);
+
 	//Text
-	this.span = document.createElement("span");
-	this.span.innerHTML = "text";
-	this.element.appendChild(this.span);
+	this.text = new Text(this.element);
+	this.text.setAlignment(Text.LEFT);
+	this.text.updateInterface();
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	this.text = "text";
+	this.callback = null;
+
+	//Click event
+	var self = this;
+	this.element.onchange = function()
+	{
+		if(self.callback !== null)
+		{
+			self.callback();
+		}
+	};
 
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
 
-//Text conter
-Text.id = 0;
-
-//Text alignment
-Text.CENTER = 0;
-Text.LEFT = 1;
+//Checkbox ID counter
+Checkbox.id = 0;
 
 //Functions Prototype
-Text.prototype.update = update;
-Text.prototype.updateInterface = updateInterface;
-Text.prototype.destroy = destroy;
-Text.prototype.setAlignment = setAlignment;
-Text.prototype.setText = setText;
-
-//Set Text
-function setText(text)
-{
-	this.text = text;
-	this.span.innerHTML = this.text;
-}
-
-//Set text alignment
-function setAlignment(align)
-{
-	if(align === Text.CENTER)
-	{
-		this.element.className = "text";
-	}
-	else if(align === Text.LEFT)
-	{
-		this.element.className = "text_left";
-	}
-}
+Checkbox.prototype.update = update;
+Checkbox.prototype.updateInterface = updateInterface;
+Checkbox.prototype.destroy = destroy;
 
 //Remove element
 function destroy()
@@ -89,6 +80,12 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
+
+	this.checkbox.style.width = this.size.y + "px";
+	this.checkbox.style.height = this.size.y + "px";
+
+	this.text.position.set(this.size.y + 5, this.size.y/2);
+	this.text.updateInterface();
 
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";

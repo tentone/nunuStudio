@@ -1,4 +1,4 @@
-function Text(parent)
+function ColorChooser(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,62 +11,48 @@ function Text(parent)
 	}
 
 	//ID
-	var id = "txt" + Text.id;
-	Text.id++;
+	var id = "color" + ColorChooser.id;
+	ColorChooser.id++;
 
 	//Create element
-	this.element = document.createElement("div");
+	this.element = document.createElement("input");
+	this.element.type = "color";
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "text";
-	
-	//Text
-	this.span = document.createElement("span");
-	this.span.innerHTML = "text";
-	this.element.appendChild(this.span);
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	this.text = "text";
+	this.callback = null;
+
+	//Click event
+	var self = this;
+	this.element.onchange = function()
+	{
+		if(self.callback !== null)
+		{
+			self.callback();
+		}
+	};
 
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
 
-//Text conter
-Text.id = 0;
-
-//Text alignment
-Text.CENTER = 0;
-Text.LEFT = 1;
+//ColorChooser ID counter
+ColorChooser.id = 0;
 
 //Functions Prototype
-Text.prototype.update = update;
-Text.prototype.updateInterface = updateInterface;
-Text.prototype.destroy = destroy;
-Text.prototype.setAlignment = setAlignment;
-Text.prototype.setText = setText;
+ColorChooser.prototype.update = update;
+ColorChooser.prototype.updateInterface = updateInterface;
+ColorChooser.prototype.destroy = destroy;
+ColorChooser.prototype.getValue = getValue;
 
-//Set Text
-function setText(text)
+//Get Slider value
+function getValue()
 {
-	this.text = text;
-	this.span.innerHTML = this.text;
-}
-
-//Set text alignment
-function setAlignment(align)
-{
-	if(align === Text.CENTER)
-	{
-		this.element.className = "text";
-	}
-	else if(align === Text.LEFT)
-	{
-		this.element.className = "text_left";
-	}
+	return this.element.value;
 }
 
 //Remove element
