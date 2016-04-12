@@ -1,4 +1,4 @@
-function Textbox(parent)
+function Checkbox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,13 +11,12 @@ function Textbox(parent)
 	}
 
 	//ID
-	var id = "txt_box" + Textbox.id;
-	Textbox.id++;
+	var id = "checkbox" + Checkbox.id;
+	Checkbox.id++;
 
 	//Create element
 	this.element = document.createElement("input");
-	this.element.type = "text";
-	this.element.className = "text_box";
+	this.element.type = "checkbox";
 	this.element.id = id;
 	this.element.style.position = "absolute";
 
@@ -41,27 +40,13 @@ function Textbox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Textbox ID counter
-Textbox.id = 0;
+//Checkbox ID counter
+Checkbox.id = 0;
 
 //Functions Prototype
-Textbox.prototype.update = update;
-Textbox.prototype.updateInterface = updateInterface;
-Textbox.prototype.destroy = destroy;
-Textbox.prototype.setText = setText;
-Textbox.prototype.getText = getText;
-
-//Set text
-function setText(text)
-{
-	this.element.value = text;
-}
-
-//Get text
-function getText()
-{
-	return this.element.value;
-}
+Checkbox.prototype.update = update;
+Checkbox.prototype.updateInterface = updateInterface;
+Checkbox.prototype.destroy = destroy;
 
 //Remove element
 function destroy()

@@ -28,7 +28,7 @@ function TreeView(parent, container)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "container";
+	this.element.className = "panel";
 
 	//Label
 	this.label = new Text(this.element);
@@ -43,10 +43,9 @@ function TreeView(parent, container)
 	this.visible = true;
 	
 	//Childs
+	this.fit_parent = true;
 	this.scene = null;
-	this.auto_update_size = true;
 	this.children = [];
-	this.folded = false;
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -119,6 +118,7 @@ function update(){}
 //Update division Size
 function updateInterface()
 {
+	//Set Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -128,13 +128,15 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Update childs position and level
-	this.size.y = TreeView.updateChildPosition(this, 20, 0);
-
-	//Update element size
-	if(this.auto_update_size && this.container != null)
+	if(this.fit_parent)
 	{
-		this.size.x = this.container.size.x;
+		this.size.x = this.parent.offsetWidth;
+		this.size.y = this.parent.offsetHeight;
+		TreeView.updateChildPosition(this, 20, 0);
+	}
+	else
+	{
+		this.size.y = TreeView.updateChildPosition(this, 20, 0);
 	}
 
 	//Set element style

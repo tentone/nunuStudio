@@ -63,7 +63,7 @@ Interface.initialize = function()
 	Interface.tree_view = new TreeView(Interface.explorer_resizable.div_a, Interface.explorer_resizable);
 	Interface.tree_view.updateInterface();
 
-	Interface.form = new Division(Interface.explorer_resizable.div_b);
+	Interface.form = new Form(Interface.explorer_resizable.div_b);
 	Interface.form.fit_parent = true;
 	Interface.form.size.set(100, 100);
 	Interface.form.updateInterface();
@@ -467,29 +467,32 @@ Interface.initialize = function()
 
 	Interface.file.addOption("Load Project", function()
 	{
-		App.chooseFile(function(event)
+		if(confirm("All unsaved changes to the project will be lost! Load file?"))
 		{
-			var file = event.srcElement.value;
-			try
+			App.chooseFile(function(event)
 			{
-				var loader = new ObjectLoader();
-				var data = JSON.parse(App.readFile(file));
-				var scene = loader.parse(data);
-				
-				var program = new Program();
-				program.addScene(scene);
-				
-				Editor.program = program;
-				Editor.resetEditingFlags();
-				Editor.updateTreeView();
+				var file = event.srcElement.value;
+				try
+				{
+					var loader = new ObjectLoader();
+					var data = JSON.parse(App.readFile(file));
+					var scene = loader.parse(data);
+					
+					var program = new Program();
+					program.addScene(scene);
+					
+					Editor.program = program;
+					Editor.resetEditingFlags();
+					Editor.updateTreeView();
 
-				alert("File loaded");
-			}
-			catch(e)
-			{
-				alert("Error loading file");
-			}
-		}, ".isp");
+					alert("File loaded");
+				}
+				catch(e)
+				{
+					alert("Error loading file");
+				}
+			}, ".isp");
+		}
 	});
 
 	Interface.file.addOption("Settings", function()
@@ -504,7 +507,10 @@ Interface.initialize = function()
 
 	Interface.file.addOption("Exit", function()
 	{
-		Editor.exit();
+		if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
+		{
+			Editor.exit();
+		}
 	});
 
 	//Editor

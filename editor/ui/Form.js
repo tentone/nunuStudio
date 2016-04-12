@@ -1,4 +1,4 @@
-function Textbox(parent)
+function Form(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -9,59 +9,46 @@ function Textbox(parent)
 	{
 		this.parent = parent;
 	}
-
+	
 	//ID
-	var id = "txt_box" + Textbox.id;
-	Textbox.id++;
+	var id = "form" + Form.id;
+	Form.id++;
 
 	//Create element
-	this.element = document.createElement("input");
-	this.element.type = "text";
-	this.element.className = "text_box";
+	this.element = document.createElement("form");
 	this.element.id = id;
 	this.element.style.position = "absolute";
+	this.element.className = "panel";
+	
+	this.text = new Textbox(this.element);
+	this.text.size.set(200, 20);
+	this.text.position.set(0, 5);
+	this.text.updateInterface();
+	
+	this.text.setText("teste");
+
+	this.check = new Checkbox(this.element);
+	this.check.size.set(10, 10);
+	this.check.position.set(0, 40);
+	this.check.updateInterface();
 
 	//Element atributes
+	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	this.callback = null;
-
-	//Click event
-	var self = this;
-	this.element.onchange = function()
-	{
-		if(self.callback !== null)
-		{
-			self.callback();
-		}
-	};
-
+	
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
 
-//Textbox ID counter
-Textbox.id = 0;
+//Form conter
+Form.id = 0;
 
 //Functions Prototype
-Textbox.prototype.update = update;
-Textbox.prototype.updateInterface = updateInterface;
-Textbox.prototype.destroy = destroy;
-Textbox.prototype.setText = setText;
-Textbox.prototype.getText = getText;
-
-//Set text
-function setText(text)
-{
-	this.element.value = text;
-}
-
-//Get text
-function getText()
-{
-	return this.element.value;
-}
+Form.prototype.update = update;
+Form.prototype.updateInterface = updateInterface;
+Form.prototype.destroy = destroy;
 
 //Remove element
 function destroy()
@@ -69,12 +56,18 @@ function destroy()
 	this.parent.removeChild(this.element);
 }
 
-//Update
+//Update Form
 function update(){}
 
-//Update Interface
+//Update division Size
 function updateInterface()
 {
+	if(this.fit_parent)
+	{
+		this.size.x = this.parent.offsetWidth;
+		this.size.y = this.parent.offsetHeight; 
+	}
+	
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -83,7 +76,6 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
-
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

@@ -86,11 +86,21 @@ function TreeElement(container)
 				self.obj.parent.remove(self.obj);
 				self.updateSceneData();
 			}
+
+			//If this object is selected reset editing flags
+			if(Editor.isObjectSelected(self.obj))
+			{
+				Editor.resetEditingFlags();
+			}
 		});
 		context.addOption("Copy", function()
 		{
-			//TODO <ADD CODE HERE>
-			//Use JSON object description
+			try
+			{
+				//clipboard.set('I love node-webkit :)', 'text');
+				console.log(App.cliboard.get("text"));
+			}
+			catch(e){}
 		});
 		context.addOption("Cut", function()
 		{
@@ -172,17 +182,35 @@ function TreeElement(container)
 				}
 			}
 
-			//If not found add
+			//If not found open new tab
 			if(!found)
 			{
-				var tab = Interface.tab.addOption("Script", Interface.file_dir + "icons/tab/code.png", true);
+				//Add new Code Editor tab
+				var tab = Interface.tab.addOption(self.obj.name, Interface.file_dir + "icons/tab/code.png", true);
 				var code = new CodeEditor();
 				code.attachScript(self.obj);
 				tab.attachComponent(code);
+
+				//Select added tab
+				for(var i = 0; i < Interface.tab.options.length; i++)
+				{
+					if(Interface.tab.options[i].component instanceof CodeEditor)
+					{
+						if(Interface.tab.options[i].component.script === self.obj)
+						{
+							Interface.tab.selectOption(i);
+							break;
+						}
+					}
+				}
 			}
 		}
-		//Scene
 
+		//Scene
+		else if(self.obj instanceof Script)
+		{
+			//TODO <ADD CODE HERE>
+		}
 	};
 
 	//Arrow click

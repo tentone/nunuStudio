@@ -12,7 +12,7 @@ include("editor/ui/DivisionResizable.js");
 include("editor/ui/ButtonImage.js");
 include("editor/ui/ButtonDrawer.js");
 include("editor/ui/Style.js");
-include("editor/ui/TextBox.js");
+include("editor/ui/Textbox.js");
 include("editor/ui/Canvas.js");
 include("editor/ui/TabContainer.js");
 include("editor/ui/TabElement.js");
@@ -23,6 +23,8 @@ include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/SceneContainer.js");
+include("editor/ui/Form.js");
+include("editor/ui/Checkbox.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -401,6 +403,12 @@ Editor.update = function()
 	}
 }
 
+//Check if object is selected
+Editor.isObjectSelected = function(obj)
+{
+	return (obj === Editor.selected_object);
+}
+
 //Add object to actual scene
 Editor.addToActualScene = function(obj)
 {
@@ -575,7 +583,11 @@ Editor.resetEditingFlags = function()
 	Editor.selected_object = null;
 	Editor.block_camera_move = false;
 	Editor.is_editing_object = false;
-	Editor.editing_object_args = null
+	Editor.editing_object_args = null;
+	try
+	{
+		Editor.updateObjectHelper();
+	}catch(e){}
 }
 
 //New Program
