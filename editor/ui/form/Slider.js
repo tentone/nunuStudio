@@ -1,4 +1,4 @@
-function Checkbox(parent)
+function Slider(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,12 +11,14 @@ function Checkbox(parent)
 	}
 
 	//ID
-	var id = "checkbox" + Checkbox.id;
-	Checkbox.id++;
+	var id = "slider" + Slider.id;
+	Slider.id++;
 
 	//Create element
 	this.element = document.createElement("input");
-	this.element.type = "checkbox";
+	this.element.type = "range";
+	this.element.min = "0";
+	this.element.max = "100";
 	this.element.id = id;
 	this.element.style.position = "absolute";
 
@@ -40,13 +42,20 @@ function Checkbox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Checkbox ID counter
-Checkbox.id = 0;
+//Slider ID counter
+Slider.id = 0;
 
 //Functions Prototype
-Checkbox.prototype.update = update;
-Checkbox.prototype.updateInterface = updateInterface;
-Checkbox.prototype.destroy = destroy;
+Slider.prototype.update = update;
+Slider.prototype.updateInterface = updateInterface;
+Slider.prototype.destroy = destroy;
+Slider.prototype.getValue = getValue;
+
+//Get Slider value
+function getValue()
+{
+	return this.element.value;
+}
 
 //Remove element
 function destroy()

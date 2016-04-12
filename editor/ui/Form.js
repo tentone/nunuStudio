@@ -20,17 +20,24 @@ function Form(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "panel";
 	
+	//Textbox test
 	this.text = new Textbox(this.element);
 	this.text.size.set(200, 20);
 	this.text.position.set(0, 5);
 	this.text.updateInterface();
-	
 	this.text.setText("teste");
 
+	//Checkbox test
 	this.check = new Checkbox(this.element);
-	this.check.size.set(10, 10);
+	this.check.size.set(200, 15);
 	this.check.position.set(0, 40);
 	this.check.updateInterface();
+
+	//Color chooser
+	this.color = new ColorChooser(this.element);
+	this.color.size.set(200, 15);
+	this.color.position.set(0, 60);
+	this.color.updateInterface();
 
 	//Element atributes
 	this.fit_parent = false;
