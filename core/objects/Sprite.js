@@ -3,6 +3,7 @@ function Sprite(material)
 	THREE.Sprite.call(this, material);
 
 	this.name = "sprite";
+	this.type = "Sprite";
 }
 
 //Function Prototype

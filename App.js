@@ -26,9 +26,6 @@ include("lib/opentype.min.js");
 
 include("lib/jszip.min.js");
 
-include("device/LeapHand.js");
-include("device/KinectDevice.js");
-
 include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
@@ -39,6 +36,8 @@ include("core/animation/Skeleton.js");
 include("core/ObjectLoader.js");
 include("core/Program.js");
 
+include("core/objects/device/LeapHand.js");
+include("core/objects/device/KinectDevice.js");
 include("core/objects/Scene.js");
 include("core/objects/lights/PointLight.js");
 include("core/objects/lights/SpotLight.js");
@@ -95,7 +94,7 @@ App.initialize = function(main)
 }
 
 //File chooser callback receives event object
-App.chooseFile = function(callback, filter)
+App.chooseFile = function(callback, filter, savemode)
 {
 	//Create file chooser element
 	var chooser = document.createElement("input");
@@ -105,6 +104,12 @@ App.chooseFile = function(callback, filter)
 	{
 		chooser.accept = filter;
 	}
+	
+	if(savemode === true)
+	{
+		chooser.nwsaveas = "file";
+	}
+
 	document.body.appendChild(chooser);
 
 	//Create onchange event and trigger it
@@ -117,6 +122,8 @@ App.chooseFile = function(callback, filter)
 	};
 	chooser.click();  
 }
+
+
 
 //Read File
 App.readFile = function(fname)

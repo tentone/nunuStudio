@@ -3,7 +3,8 @@ function Text3D(text, font , material)
 	THREE.Mesh.call(this, new THREE.TextGeometry(text, {font: font}), material);
 	
 	this.name = "text";
-
+	this.type = "Text3D";
+	
 	this.font = font;
 	this.text = text;
 

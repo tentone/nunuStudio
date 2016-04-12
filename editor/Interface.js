@@ -39,29 +39,16 @@ Interface.initialize = function()
 	{
 		//TODO <ADD CODE HERE>
 	});
-	Interface.asset_file.addOption("Export", function()
-	{
-		//TODO <ADD CODE HERE>
-	});
 
 	//Add assets
 	Interface.asset_add = new DropdownMenu(Interface.asset_explorer_bar.element);
 	Interface.asset_add.setText("Add");
 	Interface.asset_add.size.set(100, Interface.asset_explorer_bar.size.y);
 	Interface.asset_add.position.set(100,0);
-	Interface.asset_add.addOption("Shader", function()
-	{
-		//TODO <ADD CODE HERE>
-	});
 	Interface.asset_add.addOption("Material", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
-	Interface.asset_add.addOption("Terrain", function()
-	{
-		//TODO <ADD CODE HERE>
-	});
-
 
 	//------------------------------------Explorer------------------------------------
 	Interface.explorer = new DivisionResizable();
@@ -447,24 +434,35 @@ Interface.initialize = function()
 
 	Interface.file.addOption("Save Project", function()
 	{
-		var output = Editor.program.scene.toJSON();
-		var json = null;
-		
-		try
+		App.chooseFile(function(event)
 		{
-			json = JSON.stringify(output, null, "\t");
-			json = json.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
-		}
-		catch(e)
-		{
-			json = JSON.stringify(output);
-		}
+			var file = event.srcElement.value;
+			try
+			{
+				var output = Editor.program.scene.toJSON();
+				var json = null;
+				
+				try
+				{
+					json = JSON.stringify(output, null, "\t");
+					json = json.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
+				}
+				catch(e)
+				{
+					json = JSON.stringify(output);
+				}
 
-		if(json != null)
-		{
-			App.writeFile("project.isp", json);
-			alert("File saved!");
-		}
+				if(json != null)
+				{
+					App.writeFile(file, json);
+					alert("File saved");
+				}
+			}
+			catch(e)
+			{
+				alert("Error saving file");
+			}
+		}, ".isp", true);
 	});
 
 	Interface.file.addOption("Load Project", function()
@@ -485,14 +483,13 @@ Interface.initialize = function()
 				Editor.resetEditingFlags();
 				Editor.updateTreeView();
 
-				alert("File loaded!");
+				alert("File loaded");
 			}
 			catch(e)
 			{
-				alert("Error loading file!");
+				alert("Error loading file");
 			}
 		}, ".isp");
-
 	});
 
 	Interface.file.addOption("Settings", function()
