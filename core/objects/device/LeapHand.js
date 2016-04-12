@@ -1,7 +1,9 @@
 function LeapHand()
 {
 	THREE.Scene.call(this);
+
 	this.name = "leap";
+	this.type = "LeapDevice";
 
 	//Hand and Arm meshes
 	this.bone_meshes = [];
@@ -84,7 +86,6 @@ function update()
 				{
 					//var direction;
 					self.gesture[LeapHand.SWIPE] = true;
-					//console.log("Swipe");
 
 					//Horizontal
 					if(Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]))
@@ -95,7 +96,6 @@ function update()
 						}
 						else
 						{
-							//console.log("Swipe left");
 							self.gesture[LeapHand.SWIPE_LEFT] = true;
 						}
 					}
@@ -114,18 +114,15 @@ function update()
 				}
 				else if(gesture.type === "circle")
 				{
-					self.gesture[LeapHand.CIRCLE] = true;
-					//console.log("Circle Gesture");	
+					self.gesture[LeapHand.CIRCLE] = true;	
 				}
 				else if(gesture.type === "keyTap")
 				{
-					self.gesture[LeapHand.KEY_TAP] = true;
-					//console.log("Key Tap Gesture");	
+					self.gesture[LeapHand.KEY_TAP] = true;	
 				}
 				else if(gesture.type === "screenTap")
 				{
-					self.gesture[LeapHand.SCREEN_TAP] = true;
-					//console.log("Screen Tap Gesture");	
+					self.gesture[LeapHand.SCREEN_TAP] = true;	
 				}
 			});
 		}

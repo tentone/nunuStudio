@@ -93,6 +93,7 @@ Editor.initialize = function(canvas)
 	Editor.renderer.autoClear = false;
 	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
 	Editor.renderer.shadowMap.enabled = true;
+	//Editor.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	Editor.renderer.shadowMap.type = THREE.PCFShadowMap;
 
 	//Update interface

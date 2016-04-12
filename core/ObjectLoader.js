@@ -390,7 +390,7 @@ function parseTextures(json, images)
 				texture.wrapS = parseConstant( data.wrap[ 0 ] );
 				texture.wrapT = parseConstant( data.wrap[ 1 ] );
 			}
-			textures[ data.uuid ] = texture;
+			textures[data.uuid] = texture;
 		}
 	}
 
@@ -491,7 +491,7 @@ function parseObject(data, geometries, materials)
 			break;
 
 		case 'Sprite':
-			object = new THREE.Sprite(getMaterial(data.material));
+			object = new Sprite(getMaterial(data.material));
 			break;
 
 		case 'Group':
