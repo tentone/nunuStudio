@@ -45,6 +45,15 @@ function Form(parent)
 	this.slider.position.set(0, 80);
 	this.slider.updateInterface();
 
+	//Dropdown
+	this.drop = new DropdownList(this.element);
+	this.drop.size.set(200, 20);
+	this.drop.position.set(0, 100);
+	this.drop.updateInterface();
+
+	this.drop.addValue("coco");
+	this.drop.addValue("xixi");
+	this.drop.addValue("caca");
 
 	//Element atributes
 	this.fit_parent = false;

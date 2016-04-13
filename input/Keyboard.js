@@ -51,6 +51,12 @@ Keyboard.SHIFT = 16;
 Keyboard.ESC = 27;
 Keyboard.SPACEBAR = 32;
 Keyboard.CTRL = 17;
+Keyboard.DEL = 46;
+Keyboard.END = 35;
+Keyboard.HOME = 36;
+
+Keyboard.PAGE_UP = 33;
+Keyboard.PAGE_DOWN = 34;
 
 Keyboard.LEFT = 37;
 Keyboard.RIGHT = 39;
@@ -94,3 +100,16 @@ Keyboard.W = 87;
 Keyboard.X = 88;
 Keyboard.Y = 89;
 Keyboard.Z = 90;
+
+Keyboard.F1 = 112;
+Keyboard.F2 = 113;
+Keyboard.F3 = 114;
+Keyboard.F4 = 115;
+Keyboard.F5 = 116;
+Keyboard.F6 = 117;
+Keyboard.F7 = 118;
+Keyboard.F8 = 119;
+Keyboard.F9 = 120;
+Keyboard.F10 = 121;
+Keyboard.F11 = 122;
+Keyboard.F12 = 123;
