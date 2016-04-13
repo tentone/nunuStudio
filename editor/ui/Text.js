@@ -30,6 +30,7 @@ function Text(parent)
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 	this.text = "text";
+	this.text_size = 12;
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -48,12 +49,20 @@ Text.prototype.updateInterface = updateInterface;
 Text.prototype.destroy = destroy;
 Text.prototype.setAlignment = setAlignment;
 Text.prototype.setText = setText;
+Text.prototype.setTextSize = setTextSize;
 
 //Set Text
 function setText(text)
 {
 	this.text = text;
 	this.span.innerHTML = this.text;
+}
+
+//Set Text Size
+function setTextSize(size)
+{
+	this.text_size = size;
+	this.element.style.fontSize = size + "px";
 }
 
 //Set text alignment
