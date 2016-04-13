@@ -84,7 +84,7 @@ function updateInterface()
 	this.checkbox.style.width = this.size.y + "px";
 	this.checkbox.style.height = this.size.y + "px";
 
-	this.text.position.set(this.size.y + 5, this.size.y/2);
+	this.text.position.set(this.size.y + 5, this.size.y/2 + 2);
 	this.text.updateInterface();
 
 	this.element.style.top = this.position.y + "px";

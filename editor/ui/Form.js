@@ -39,6 +39,13 @@ function Form(parent)
 	this.color.position.set(0, 60);
 	this.color.updateInterface();
 
+	//Slider
+	this.slider = new Slider(this.element);
+	this.slider.size.set(200, 15);
+	this.slider.position.set(0, 80);
+	this.slider.updateInterface();
+
+
 	//Element atributes
 	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);

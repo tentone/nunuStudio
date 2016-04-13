@@ -35,9 +35,49 @@ Interface.initialize = function()
 	Interface.asset_file.setText("File");
 	Interface.asset_file.size.set(100, Interface.asset_explorer_bar.size.y);
 	Interface.asset_file.position.set(0,0);
-	Interface.asset_file.addOption("Import", function()
+	
+	Interface.asset_file.addOption("Import .obj", function()
 	{
-		//TODO <ADD CODE HERE>
+		App.chooseFile(function(event)
+		{
+			var file = event.srcElement.value;
+			try
+			{
+				var loader = new THREE.OBJLoader();
+				loader.load(file, function(obj)
+				{
+					Editor.addToActualScene(obj);
+				});
+
+				alert("File loaded");
+			}
+			catch(e)
+			{
+				alert("Error loading file");
+			}
+		}, ".obj");
+	});
+
+	Interface.asset_file.addOption("Import .dae", function()
+	{
+		App.chooseFile(function(event)
+		{
+			var file = event.srcElement.value;
+			try
+			{
+				var loader = new THREE.ColladaLoader();
+				loader.load(file,function(obj)
+				{
+					Editor.addToActualScene(obj.scene);
+				});
+
+				alert("File loaded");
+			}
+			catch(e)
+			{
+				alert("Error loading file");
+			}
+		}, ".dae");
 	});
 
 	//Add assets
@@ -521,27 +561,27 @@ Interface.initialize = function()
 
 	Interface.editor.addOption("Copy", function()
 	{
-		//TODO <UNDO>
+		//TODO <ADD CODE HERE>
 	});
 	
 	Interface.editor.addOption("Cut", function()
 	{
-		//TODO <REDO>
+		//TODO <ADD CODE HERE>
 	});
 
 	Interface.editor.addOption("Paste", function()
 	{
-		//TODO <REDO>
+		//TODO <ADD CODE HERE>
 	});
 
 	Interface.editor.addOption("Undo", function()
 	{
-		//TODO <UNDO>
+		//TODO <ADD CODE HERE>
 	});
 
 	Interface.editor.addOption("Redo", function()
 	{
-		//TODO <REDO>
+		//TODO <ADD CODE HERE>
 	});
 
 	//Project
@@ -550,9 +590,14 @@ Interface.initialize = function()
 	Interface.project.size.set(100, Interface.top_bar.size.y);
 	Interface.project.position.set(220,0);
 
-	Interface.project.addOption("Add Scene", function()
+	Interface.project.addOption("Create Scene", function()
 	{
-		//TODO <UNDO>
+		//TODO <ADD CODE HERE>
+	});
+
+	Interface.project.addOption("Settings", function()
+	{
+		//TODO <ADD CODE HERE>
 	});
 
 	//Run

@@ -79,33 +79,58 @@ function TreeElement(container)
 		{
 			//TODO <ADD CODE HERE>
 		});
+		
 		context.addOption("Delete", function()
 		{
-			if((self.obj !== null) && (self.obj.parent !== null))
-			{
-				self.obj.parent.remove(self.obj);
-				self.updateSceneData();
-			}
-
-			//If this object is selected reset editing flags
-			if(Editor.isObjectSelected(self.obj))
-			{
-				Editor.resetEditingFlags();
-			}
+			self.deleteObject();
 		});
-		context.addOption("Copy", function()
+
+
+		if(!(self.obj instanceof Scene))
+		{
+			context.addOption("Copy", function()
+			{
+				try
+				{
+					if(self.obj !== null)
+					{
+						App.clipboard.set(JSON.stringify(self.obj.toJSON()), "text");
+					}
+				}
+				catch(e){}
+			});
+
+			context.addOption("Cut", function()
+			{
+				try
+				{
+					if(self.obj !== null)
+					{
+						App.clipboard.set(JSON.stringify(self.obj.toJSON()), "text");
+					}
+
+					self.deleteObject();
+				}
+				catch(e){}
+			});
+		}
+
+		context.addOption("Paste", function()
 		{
 			try
 			{
-				//clipboard.set('I love node-webkit :)', 'text');
-				console.log(App.cliboard.get("text"));
+				if(self.obj !== null)
+				{
+					var content = App.clipboard.get("text");
+					var loader = new ObjectLoader();
+					var data = JSON.parse(content);
+					var obj = loader.parse(data);
+					obj.position.set(0, 0, 0);
+					self.obj.add(obj);
+					self.updateSceneData();
+				}
 			}
 			catch(e){}
-		});
-		context.addOption("Cut", function()
-		{
-			//TODO <ADD CODE HERE>
-			self.updateSceneData();
 		});
 	};
 
@@ -245,6 +270,26 @@ TreeElement.prototype.add = add;
 TreeElement.prototype.setLabel = setLabel;
 TreeElement.prototype.setIcon = setIcon;
 TreeElement.prototype.setObject = setObject;
+
+//Tree object manipulation
+TreeElement.prototype.deleteObject = deleteObject;
+
+//Delete object attached to this three element
+function deleteObject()
+{
+	//Delete object
+	if((this.obj !== null) && (this.obj.parent !== null))
+	{
+		this.obj.parent.remove(this.obj);
+		this.updateSceneData();
+	}
+
+	//If this object is selected reset editing flags
+	if(Editor.isObjectSelected(this.obj))
+	{
+		Editor.resetEditingFlags();
+	}
+}
 
 //Set object attached to element
 function setObject(obj)

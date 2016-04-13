@@ -26,6 +26,7 @@ include("editor/ui/Form.js");
 include("editor/ui/form/Checkbox.js");
 include("editor/ui/form/Textbox.js");
 include("editor/ui/form/ColorChooser.js");
+include("editor/ui/form/Slider.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
