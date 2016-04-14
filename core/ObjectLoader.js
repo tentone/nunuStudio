@@ -501,12 +501,13 @@ function parseObject(data, geometries, materials)
 		case 'Group':
 			object = new Container();
 			break;
+
 		case 'Script':
 			object = new Script(data.code_init, data.code_loop);
 			break;
 
 		default:
-			object = new THREE.Object3D();
+			object = new Container();
 	}
 
 	object.uuid = data.uuid;

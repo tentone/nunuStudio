@@ -1,10 +1,23 @@
 //Object tools contains some object managing helpers
 function ObjectUtils(){}
 
+//Limit object size
+ObjectUtils.limitSize = function(x, y, z)
+{
+	//TODO <ADD CODE HERE>
+}
+
 //Check if object is child of another object
 ObjectUtils.isChildOf = function(parent, child)
 {
-	
+	for(var j = 0; j < parent.children.length; j++)
+	{
+		if(parent.children[i] === child || ObjectUtils.isChildOf(parent.children[i], child))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 //Return object absolute position (not relative to parent)

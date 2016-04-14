@@ -257,7 +257,15 @@ Editor.update = function()
 				else if(Editor.tool_mode === Editor.MODE_RESIZE)
 				{
 					var speed = Editor.camera.position.distanceTo(ObjectUtils.objectAbsolutePosition(Editor.selected_object))/1000;
-					if(Editor.editing_object_args.x)
+					if(Editor.editing_object_args.center)
+					{
+						var size = (Mouse.pos_diff.x - Mouse.pos_diff.y) * speed/3;
+
+						Editor.selected_object.scale.x += size;
+						Editor.selected_object.scale.y += size;
+						Editor.selected_object.scale.z += size;
+					}
+					else if(Editor.editing_object_args.x)
 					{
 						Editor.selected_object.scale.x -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x);
 						Editor.selected_object.scale.x -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x);

@@ -3,7 +3,7 @@ include("lib/three/stats.min.js");
 
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
-
+include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
@@ -24,7 +24,6 @@ include("lib/cannon/cannon.min.js");
 include("lib/cannon/cannondebugrenderer.js");
 
 include("lib/opentype.min.js");
-
 include("lib/jszip.min.js");
 
 include("input/Key.js");

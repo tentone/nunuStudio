@@ -173,7 +173,7 @@ function TreeElement(container)
 		
 		if(obj != null)
 		{
-			if(obj.uuid !== self.obj.uuid)
+			if(obj.uuid !== self.obj.uuid && !ObjectUtils.isChildOf(obj ,self.obj))
 			{
 				self.obj.add(obj);
 				self.updateSceneData();
