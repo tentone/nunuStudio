@@ -51,9 +51,9 @@ function Form(parent)
 	this.drop.position.set(0, 100);
 	this.drop.updateInterface();
 
-	this.drop.addValue("coco");
-	this.drop.addValue("xixi");
-	this.drop.addValue("caca");
+	this.drop.addValue("aaa");
+	this.drop.addValue("bbb");
+	this.drop.addValue("ccc");
 
 	//Element atributes
 	this.fit_parent = false;

@@ -180,7 +180,7 @@ Editor.update = function()
 				Editor.rotate_tool.visible = false;
 				Editor.resize_tool.visible = false;
 
-				var position = Editor.objectAbsolutePosition(Editor.selected_object);
+				var position = ObjectUtils.objectAbsolutePosition(Editor.selected_object);
 				var distance = Editor.camera.position.distanceTo(position)/5;
 				Editor.move_tool.scale.set(distance, distance, distance);
 				Editor.move_tool.position.copy(position);
@@ -191,7 +191,7 @@ Editor.update = function()
 				Editor.move_tool.visible = false;
 				Editor.rotate_tool.visible = false;
 
-				var position = Editor.objectAbsolutePosition(Editor.selected_object);
+				var position = ObjectUtils.objectAbsolutePosition(Editor.selected_object);
 				var distance = Editor.camera.position.distanceTo(position)/5;
 				Editor.resize_tool.scale.set(distance, distance, distance);
 				Editor.resize_tool.rotation.copy(Editor.selected_object.rotation);
@@ -203,7 +203,7 @@ Editor.update = function()
 				Editor.move_tool.visible = false;
 				Editor.resize_tool.visible = false;
 
-				var position = Editor.objectAbsolutePosition(Editor.selected_object);
+				var position = ObjectUtils.objectAbsolutePosition(Editor.selected_object);
 				var distance = Editor.camera.position.distanceTo(position)/5;
 				Editor.rotate_tool.scale.set(distance, distance, distance);
 				Editor.rotate_tool.position.copy(position);
@@ -237,7 +237,7 @@ Editor.update = function()
 				//Moving object
 				if(Editor.tool_mode === Editor.MODE_MOVE)
 				{
-					var speed = Editor.camera.position.distanceTo(Editor.objectAbsolutePosition(Editor.selected_object))/500;
+					var speed = Editor.camera.position.distanceTo(ObjectUtils.objectAbsolutePosition(Editor.selected_object))/500;
 					if(Editor.editing_object_args.x)
 					{
 						Editor.selected_object.position.x -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x);
@@ -256,7 +256,7 @@ Editor.update = function()
 				//Resize mode
 				else if(Editor.tool_mode === Editor.MODE_RESIZE)
 				{
-					var speed = Editor.camera.position.distanceTo(Editor.objectAbsolutePosition(Editor.selected_object))/1000;
+					var speed = Editor.camera.position.distanceTo(ObjectUtils.objectAbsolutePosition(Editor.selected_object))/1000;
 					if(Editor.editing_object_args.x)
 					{
 						Editor.selected_object.scale.x -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x);
@@ -461,7 +461,7 @@ Editor.updateObjectHelper = function()
 
 	if(Editor.selected_object !== null)
 	{
-		var position = Editor.objectAbsolutePosition(Editor.selected_object);
+		var position = ObjectUtils.objectAbsolutePosition(Editor.selected_object);
 		if(Editor.selected_object instanceof THREE.Camera)
 		{
 			Editor.activateHelper(Editor.camera_helper, true);
@@ -504,44 +504,6 @@ Editor.updateObjectHelper = function()
 			Editor.box_helper.update(Editor.selected_object);
 		}
 	}
-}
-
-//Return object absolute position (not relative to parent)
-Editor.objectAbsolutePosition = function(obj)
-{
-	if(obj.parent !== null &&  obj.parent !== undefined)
-	{
-		var parent = obj.parent;
-		var scale = new THREE.Vector3(1, 1, 1);
-		
-		while(parent !== null)
-		{
-			scale.multiply(parent.scale);
-			parent = parent.parent;
-		}
-
-		var position = new THREE.Vector3(obj.position.x, obj.position.y, obj.position.z);
-		position.multiply(scale);
-		position.add(Editor.objectAbsolutePosition(obj.parent));
-
-		return position;
-	}
-
-	return obj.position;
-}
-
-//Return object absolute scale (not relative to parent)
-Editor.objectAbsoluteScale = function(obj)
-{
-	if(obj.parent !== null &&  obj.parent !== undefined)
-	{
-		var scale = new THREE.Vector3(obj.scale.x, obj.scale.y, obj.scale.z);
-		scale.multiply(Editor.objectAbsoluteScale(obj.parent));
-
-		return scale;
-	}
-
-	return obj.scale;
 }
 
 //Activate helper
