@@ -33,10 +33,10 @@ Interface.initialize = function()
 	//File
 	Interface.asset_file = new DropdownMenu(Interface.asset_explorer_bar.element);
 	Interface.asset_file.setText("File");
-	Interface.asset_file.size.set(100, Interface.asset_explorer_bar.size.y);
+	Interface.asset_file.size.set(120, Interface.asset_explorer_bar.size.y);
 	Interface.asset_file.position.set(0,0);
 	
-	Interface.asset_file.addOption("Import .obj", function()
+	Interface.asset_file.addOption("Import obj", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -44,10 +44,8 @@ Interface.initialize = function()
 			try
 			{
 				var loader = new THREE.OBJLoader();
-				loader.load(file, function(obj)
-				{
-					Editor.addToActualScene(obj);
-				});
+				var obj = loader.parse(App.readFile(file));
+				Editor.addToActualScene(obj);
 
 				alert("File loaded");
 			}
@@ -58,7 +56,7 @@ Interface.initialize = function()
 		}, ".obj");
 	});
 
-	Interface.asset_file.addOption("Import .dae", function()
+	Interface.asset_file.addOption("Import Collada", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -66,10 +64,8 @@ Interface.initialize = function()
 			try
 			{
 				var loader = new THREE.ColladaLoader();
-				loader.load(file,function(obj)
-				{
-					Editor.addToActualScene(obj.scene);
-				});
+				var obj = loader.parse(App.readFile(file));
+				Editor.addToActualScene(obj.scene);
 
 				alert("File loaded");
 			}
@@ -80,11 +76,51 @@ Interface.initialize = function()
 		}, ".dae");
 	});
 
+	Interface.asset_file.addOption("Import json", function()
+	{
+		App.chooseFile(function(event)
+		{
+			var file = event.srcElement.value;
+			try
+			{
+				var loader = new ObjectLoader();
+				var obj = loader.parse(App.readFile(file));
+				Editor.addToActualScene(obj);
+
+				alert("File loaded");
+			}
+			catch(e)
+			{
+				alert("Error loading file");
+			}
+		}, ".json");
+	});
+
+	Interface.asset_file.addOption("Import VRML", function()
+	{
+		App.chooseFile(function(event)
+		{
+			var file = event.srcElement.value;
+			try
+			{
+				var loader = new THREE.VRMLLoader();
+				var obj = loader.parse(App.readFile(file));
+				Editor.addToActualScene(obj);
+
+				alert("File loaded");
+			}
+			catch(e)
+			{
+				alert("Error loading file");
+			}
+		}, ".wrl, .vrml");
+	});
+
 	//Add assets
 	Interface.asset_add = new DropdownMenu(Interface.asset_explorer_bar.element);
 	Interface.asset_add.setText("Add");
 	Interface.asset_add.size.set(100, Interface.asset_explorer_bar.size.y);
-	Interface.asset_add.position.set(100,0);
+	Interface.asset_add.position.set(120,0);
 	Interface.asset_add.addOption("Material", function()
 	{
 		//TODO <ADD CODE HERE>

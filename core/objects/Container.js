@@ -4,14 +4,11 @@ function Container()
 
 	this.name = "container";
 	this.type = "Group";
-	
-	this.rotationAutoUpdate = false;
-	this.matrixAutoUpdate = false;
 }
 
 //Function Prototype
 Container.prototype = Object.create(THREE.Object3D.prototype);
-Container.prototype.icon = "editor/files/icons/script/script.png";
+Container.prototype.icon = "editor/files/icons/effects/container.png";
 
 //Runtime functions
 Container.prototype.update = update;
