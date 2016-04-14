@@ -428,6 +428,10 @@ function parseObject(data, geometries, materials)
 
 	switch(data.type)
 	{
+		case 'Program':
+			object = new Program(data.name, data.description, data.author, data.version, data.vr);
+			break;
+
 		case 'Sky':
 			object = new Sky(data.auto_updateabc, data.day_time, data.sun_distance);
 			break;

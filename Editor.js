@@ -593,6 +593,40 @@ Editor.resetEditingFlags = function()
 	}catch(e){}
 }
 
+//Save program to file
+Editor.saveProgram = function(fname)
+{
+	var output = Editor.program.toJSON();
+	var json = null;
+	
+	try
+	{
+		json = JSON.stringify(output, null, "\t");
+		json = json.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
+	}
+	catch(e)
+	{
+		json = JSON.stringify(output);
+	}
+
+	if(json != null)
+	{
+		App.writeFile(fname, json);
+	}
+}
+
+//Load program from file
+Editor.loadProgram = function(fname)
+{
+	var loader = new ObjectLoader();
+	var data = JSON.parse(App.readFile(fname));
+	var program = loader.parse(data);
+	
+	Editor.program = program;
+	Editor.resetEditingFlags();
+	Editor.updateTreeView();
+}
+
 //New Program
 Editor.createNewProgram = function()
 {

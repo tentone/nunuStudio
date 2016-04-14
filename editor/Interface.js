@@ -468,8 +468,11 @@ Interface.initialize = function()
 
 	Interface.file.addOption("New Project", function()
 	{
-		Editor.createNewProgram();
-		Editor.updateTreeView();
+		if(confirm("All unsaved changes to the project will be lost! Create new File?"))
+		{
+			Editor.createNewProgram();
+			Editor.updateTreeView();
+		}
 	});
 
 	Interface.file.addOption("Save Project", function()
@@ -479,24 +482,8 @@ Interface.initialize = function()
 			var file = event.srcElement.value;
 			try
 			{
-				var output = Editor.program.scene.toJSON();
-				var json = null;
-				
-				try
-				{
-					json = JSON.stringify(output, null, "\t");
-					json = json.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
-				}
-				catch(e)
-				{
-					json = JSON.stringify(output);
-				}
-
-				if(json != null)
-				{
-					App.writeFile(file, json);
-					alert("File saved");
-				}
+				Editor.saveProgram(file);
+				alert("File saved");
 			}
 			catch(e)
 			{
@@ -514,17 +501,7 @@ Interface.initialize = function()
 				var file = event.srcElement.value;
 				try
 				{
-					var loader = new ObjectLoader();
-					var data = JSON.parse(App.readFile(file));
-					var scene = loader.parse(data);
-					
-					var program = new Program();
-					program.addScene(scene);
-					
-					Editor.program = program;
-					Editor.resetEditingFlags();
-					Editor.updateTreeView();
-
+					Editor.loadProgram(file);
 					alert("File loaded");
 				}
 				catch(e)

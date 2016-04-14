@@ -1,9 +1,10 @@
 function Scene()
 {
 	THREE.Scene.call(this);
+	
 	this.name = "scene";
 
-	//Disable auto updates
+	//Disable auto matrix updates
 	this.rotationAutoUpdate = false;
 	this.matrixAutoUpdate = false;
 
