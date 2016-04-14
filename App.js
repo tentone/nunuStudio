@@ -36,6 +36,7 @@ include("core/animation/Skeleton.js");
 
 include("core/ObjectLoader.js");
 include("core/Program.js");
+include("core/ObjectUtils.js");
 
 include("core/objects/device/LeapHand.js");
 include("core/objects/device/KinectDevice.js");

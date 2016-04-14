@@ -77,7 +77,11 @@ function TreeElement(container)
 		
 		context.addOption("Rename", function()
 		{
-			//TODO <ADD CODE HERE>
+			if(self.obj !== null)
+			{
+				self.obj.name = prompt("Rename object", self.obj.name);
+				self.updateSceneData();
+			}
 		});
 		
 		context.addOption("Delete", function()
@@ -85,52 +89,55 @@ function TreeElement(container)
 			self.deleteObject();
 		});
 
-
 		if(!(self.obj instanceof Scene))
 		{
 			context.addOption("Copy", function()
 			{
-				try
+				if(self.obj !== null)
 				{
-					if(self.obj !== null)
+					try
 					{
 						App.clipboard.set(JSON.stringify(self.obj.toJSON()), "text");
 					}
+					catch(e){}
 				}
-				catch(e){}
 			});
 
 			context.addOption("Cut", function()
 			{
-				try
+				if(self.obj !== null)
 				{
-					if(self.obj !== null)
+					try
 					{
 						App.clipboard.set(JSON.stringify(self.obj.toJSON()), "text");
+						self.deleteObject();	
 					}
-
-					self.deleteObject();
+					catch(e){}
 				}
-				catch(e){}
 			});
 		}
 
 		context.addOption("Paste", function()
 		{
-			try
+			if(self.obj !== null)
 			{
-				if(self.obj !== null)
+				try
 				{
 					var content = App.clipboard.get("text");
 					var loader = new ObjectLoader();
 					var data = JSON.parse(content);
+
+					//Create object
 					var obj = loader.parse(data);
+					obj.uuid = THREE.Math.generateUUID();
 					obj.position.set(0, 0, 0);
+
+					//Add object
 					self.obj.add(obj);
 					self.updateSceneData();
 				}
+				catch(e){}
 			}
-			catch(e){}
 		});
 	};
 
@@ -282,12 +289,12 @@ function deleteObject()
 	{
 		this.obj.parent.remove(this.obj);
 		this.updateSceneData();
-	}
 
-	//If this object is selected reset editing flags
-	if(Editor.isObjectSelected(this.obj))
-	{
-		Editor.resetEditingFlags();
+		//If this object is selected reset editing flags
+		if(Editor.isObjectSelected(this.obj))
+		{
+			Editor.resetEditingFlags();
+		}
 	}
 }
 
@@ -311,12 +318,12 @@ function setLabel(label)
 }
 
 //Add element
-function add(text, icon)
+function add(label, icon)
 {
 	var element = new TreeElement(this.container);
-	if(text != undefined)
+	if(label != undefined)
 	{
-		element.setLabel(text);
+		element.setLabel(label);
 	}
 	if(icon != undefined)
 	{
@@ -385,6 +392,7 @@ function updateInterface()
 	//Text
 	this.label.visible = this.visible;
 	this.label.position.set(45 + offset, 10);
+	this.label.size.set(this.size.x - (45 + offset), 0);
 	this.label.updateInterface();
 
 	//Base

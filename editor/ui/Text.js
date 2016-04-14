@@ -23,6 +23,7 @@ function Text(parent)
 	//Text
 	this.span = document.createElement("span");
 	this.span.innerHTML = "text";
+
 	this.element.appendChild(this.span);
 
 	//Element atributes
