@@ -45,6 +45,9 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.OBJLoader();
 				var obj = loader.parse(App.readFile(file));
+
+				ObjectUtils.setShadowCasting(obj, true);
+				ObjectUtils.setShadowReceiving(obj, true);
 				Editor.addToActualScene(obj);
 
 				alert("File loaded");
@@ -65,6 +68,9 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.ColladaLoader();
 				var obj = loader.parse(App.readFile(file));
+
+				ObjectUtils.setShadowCasting(obj.scene, true);
+				ObjectUtils.setShadowReceiving(obj.scene, true);
 				Editor.addToActualScene(obj.scene);
 
 				alert("File loaded");
@@ -85,6 +91,9 @@ Interface.initialize = function()
 			{
 				var loader = new ObjectLoader();
 				var obj = loader.parse(App.readFile(file));
+
+				ObjectUtils.setShadowCasting(obj, true);
+				ObjectUtils.setShadowReceiving(obj, true);
 				Editor.addToActualScene(obj);
 
 				alert("File loaded");
@@ -105,6 +114,9 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.VRMLLoader();
 				var obj = loader.parse(App.readFile(file));
+
+				ObjectUtils.setShadowCasting(obj, true);
+				ObjectUtils.setShadowReceiving(obj, true);
 				Editor.addToActualScene(obj);
 
 				alert("File loaded");
@@ -605,7 +617,9 @@ Interface.initialize = function()
 
 	Interface.project.addOption("Create Scene", function()
 	{
-		//TODO <ADD CODE HERE>
+		var scene = new Scene();
+		Editor.program.add(scene);
+		Editor.updateTreeView();
 	});
 
 	Interface.project.addOption("Settings", function()
