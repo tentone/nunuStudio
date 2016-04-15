@@ -659,6 +659,7 @@ Interface.initialize = function()
 	});
 }
 
+//Loop update elements
 Interface.update = function()
 {
 	Interface.tab.update();
@@ -667,6 +668,7 @@ Interface.update = function()
 	Interface.explorer_resizable.update();
 }
 
+//Update interface
 Interface.updateInterface = function()
 {
 	//Window size

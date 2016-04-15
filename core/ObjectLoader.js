@@ -432,8 +432,12 @@ function parseObject(data, geometries, materials)
 			object = new Program(data.name, data.description, data.author, data.version, data.vr);
 			break;
 
+		case 'LeapDevice':
+			object = new LeapHand(data.mode, data.use_arm);
+			break;
+
 		case 'Sky':
-			object = new Sky(data.auto_updateabc, data.day_time, data.sun_distance);
+			object = new Sky(data.auto_update, data.day_time, data.sun_distance);
 			break;
 			
 		case 'Scene':

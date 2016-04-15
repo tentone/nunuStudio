@@ -88,7 +88,11 @@ function setClass(name)
 //Remove element from document
 function destroy()
 {
-	this.parent.removeChild(this.element);
+	try
+	{
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
 }
 
 //Update status
