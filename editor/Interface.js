@@ -153,7 +153,6 @@ Interface.initialize = function()
 
 	Interface.form = new Form(Interface.explorer_resizable.div_b);
 	Interface.form.fit_parent = true;
-	Interface.form.size.set(100, 100);
 	Interface.form.updateInterface();
 
 	//------------------------------------Tool Bar------------------------------------

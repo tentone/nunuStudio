@@ -23,14 +23,14 @@ include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/SceneContainer.js");
 
-include("editor/ui/form/Form.js");
-include("editor/ui/form/Checkbox.js");
-include("editor/ui/form/Textbox.js");
-include("editor/ui/form/ColorChooser.js");
-include("editor/ui/form/Slider.js");
-include("editor/ui/form/DropdownList.js");
+include("editor/ui/Form.js");
+include("editor/ui/Checkbox.js");
+include("editor/ui/Textbox.js");
+include("editor/ui/ColorChooser.js");
+include("editor/ui/Slider.js");
+include("editor/ui/DropdownList.js");
 
-include("editor/ui/form/object/ObjectForm.js");
+include("editor/panels/ObjectPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -417,41 +417,6 @@ Editor.update = function()
 	}
 }
 
-//Select a object
-Editor.selectObject = function(obj)
-{
-	Editor.selected_object = obj;
-
-	Interface.form.destroy();
-
-	//Select correct form to edit object
-	if(obj instanceof Model3D)
-	{
-		Interface.form = new ObjectForm(Interface.explorer_resizable.div_b);
-		Interface.form.attachObject(obj);
-		Interface.form.updateInterface();
-	}
-}
-
-//Check if object is selected
-Editor.isObjectSelected = function(obj)
-{
-	return (obj === Editor.selected_object);
-}
-
-//Add object to actual scene
-Editor.addToActualScene = function(obj)
-{
-	Editor.program.scene.add(obj);
-	Editor.updateTreeView();
-}
-
-//Update tree view to match actual scene
-Editor.updateTreeView = function()
-{
-	Interface.tree_view.fromScene(Editor.program); //.scene);
-}
-
 //Draw stuff into screen
 Editor.draw = function()
 {
@@ -475,6 +440,48 @@ Editor.draw = function()
 Editor.resize = function()
 {
 	Interface.updateInterface();
+}
+
+//Select a object
+Editor.selectObject = function(obj)
+{
+	Editor.selected_object = obj;
+	Editor.updateSelectedObjectPanel();
+}
+
+//Update UI panel to match selected object
+Editor.updateSelectedObjectPanel = function()
+{
+	//Destroy old form
+	Interface.form.destroy();
+
+	//Select correct form to edit object
+	if(Editor.selected_object instanceof Model3D)
+	{
+		Interface.form = new ObjectPanel(Interface.explorer_resizable.div_b);
+		Interface.form.fit_parent = true;
+		Interface.form.attachObject(Editor.selected_object);
+		Interface.form.updateInterface();
+	}
+}
+
+//Update tree view to match actual scene
+Editor.updateTreeView = function()
+{
+	Interface.tree_view.fromScene(Editor.program); //.scene);
+}
+
+//Check if object is selected
+Editor.isObjectSelected = function(obj)
+{
+	return (obj === Editor.selected_object);
+}
+
+//Add object to actual scene
+Editor.addToActualScene = function(obj)
+{
+	Editor.program.scene.add(obj);
+	Editor.updateTreeView();
 }
 
 //Show apropiate helper to selected object
