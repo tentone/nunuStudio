@@ -1,4 +1,4 @@
-function ObjectForm(parent)
+function ObjectPanel(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,19 +11,31 @@ function ObjectForm(parent)
 	}
 	
 	//ID
-	var id = "obj_form" + ObjectForm.id;
-	ObjectForm.id++;
+	var id = "obj_panel" + ObjectPanel.id;
+	ObjectPanel.id++;
 
 	//Create element
-	this.element = document.createElement("ObjectForm");
+	this.element = document.createElement("form");
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.className = "panel";
+
+	this.element.onsubmit = function(event)
+	{
+		event.preventDefault();
+		return false;
+	};
 	
 	//Textbox test
+	this.name = new Text(this.element);
+	this.name.setAlignment(Text.LEFT);
+	this.name.setText("Name:");
+	this.name.position.set(10, 10);
+	this.name.updateInterface();
+
 	this.name = new Textbox(this.element);
+	this.name.position.set(30, 10);
 	this.name.size.set(200, 20);
-	this.name.position.set(0, 5);
 	this.name.updateInterface();
 
 	//Checkbox test
@@ -67,14 +79,14 @@ function ObjectForm(parent)
 	this.parent.appendChild(this.element);
 }
 
-//ObjectForm conter
-ObjectForm.id = 0;
+//ObjectPanel conter
+ObjectPanel.id = 0;
 
 //Functions Prototype
-ObjectForm.prototype.update = update;
-ObjectForm.prototype.updateInterface = updateInterface;
-ObjectForm.prototype.destroy = destroy;
-ObjectForm.prototype.attachObject = attachObject;
+ObjectPanel.prototype.update = update;
+ObjectPanel.prototype.updateInterface = updateInterface;
+ObjectPanel.prototype.destroy = destroy;
+ObjectPanel.prototype.attachObject = attachObject;
 
 function attachObject(obj)
 {
@@ -88,10 +100,14 @@ function attachObject(obj)
 //Remove element
 function destroy()
 {
-	this.parent.removeChild(this.element);
+	try
+	{
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
 }
 
-//Update ObjectForm
+//Update ObjectPanel
 function update(){}
 
 //Update division Size

@@ -19,41 +19,12 @@ function Form(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.className = "panel";
-	
-	//Textbox test
-	this.text = new Textbox(this.element);
-	this.text.size.set(200, 20);
-	this.text.position.set(0, 5);
-	this.text.updateInterface();
-	this.text.setText("teste");
 
-	//Checkbox test
-	this.check = new Checkbox(this.element);
-	this.check.size.set(200, 15);
-	this.check.position.set(0, 40);
-	this.check.updateInterface();
-
-	//Color chooser
-	this.color = new ColorChooser(this.element);
-	this.color.size.set(200, 15);
-	this.color.position.set(0, 60);
-	this.color.updateInterface();
-
-	//Slider
-	this.slider = new Slider(this.element);
-	this.slider.size.set(200, 15);
-	this.slider.position.set(0, 80);
-	this.slider.updateInterface();
-
-	//Dropdown
-	this.drop = new DropdownList(this.element);
-	this.drop.size.set(200, 20);
-	this.drop.position.set(0, 100);
-	this.drop.updateInterface();
-
-	this.drop.addValue("aaa");
-	this.drop.addValue("bbb");
-	this.drop.addValue("ccc");
+	this.element.onsubmit = function(event)
+	{
+		event.preventDefault();
+		return false;
+	};
 
 	//Element atributes
 	this.fit_parent = false;

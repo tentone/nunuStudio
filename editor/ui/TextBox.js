@@ -36,7 +36,7 @@ function Textbox(parent)
 			self.callback();
 		}
 	};
-
+	
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
