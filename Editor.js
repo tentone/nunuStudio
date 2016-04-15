@@ -22,12 +22,15 @@ include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/SceneContainer.js");
-include("editor/ui/Form.js");
+
+include("editor/ui/form/Form.js");
 include("editor/ui/form/Checkbox.js");
 include("editor/ui/form/Textbox.js");
 include("editor/ui/form/ColorChooser.js");
 include("editor/ui/form/Slider.js");
 include("editor/ui/form/DropdownList.js");
+
+include("editor/ui/form/object/ObjectForm.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -156,7 +159,7 @@ Editor.initialize = function(canvas)
 	Editor.tool_scene_top.add(Editor.rotate_tool);
 
 	//Update interface explorer tree view
-	Interface.tree_view.fromScene(Editor.program.scene);
+	Editor.updateTreeView();
 }
 
 //Update Editor
@@ -315,7 +318,7 @@ Editor.update = function()
 					var intersects =  Editor.raycaster.intersectObjects(Editor.program.scene.children, true);
 					if(intersects.length > 0)
 					{
-						Editor.selected_object = intersects[0].object;
+						Editor.selectObject(intersects[0].object);
 					}
 				}
 			}
@@ -414,6 +417,22 @@ Editor.update = function()
 	}
 }
 
+//Select a object
+Editor.selectObject = function(obj)
+{
+	Editor.selected_object = obj;
+
+	Interface.form.destroy();
+
+	//Select correct form to edit object
+	if(obj instanceof Model3D)
+	{
+		Interface.form = new ObjectForm(Interface.explorer_resizable.div_b);
+		Interface.form.attachObject(obj);
+		Interface.form.updateInterface();
+	}
+}
+
 //Check if object is selected
 Editor.isObjectSelected = function(obj)
 {
@@ -430,7 +449,7 @@ Editor.addToActualScene = function(obj)
 //Update tree view to match actual scene
 Editor.updateTreeView = function()
 {
-	Interface.tree_view.fromScene(Editor.program.scene);
+	Interface.tree_view.fromScene(Editor.program); //.scene);
 }
 
 //Draw stuff into screen
@@ -560,7 +579,8 @@ Editor.resetEditingFlags = function()
 	try
 	{
 		Editor.updateObjectHelper();
-	}catch(e){}
+	}
+	catch(e){}
 }
 
 //Save program to file

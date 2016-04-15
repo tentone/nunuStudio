@@ -190,7 +190,7 @@ function TreeElement(container)
 	//Object select event
 	this.element.onclick = function()
 	{
-		Editor.selected_object = self.obj;
+		Editor.selectObject(self.obj);
 	};
 
 	//Double click event

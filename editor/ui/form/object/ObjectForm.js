@@ -1,4 +1,4 @@
-function Form(parent)
+function ObjectForm(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,21 +11,20 @@ function Form(parent)
 	}
 	
 	//ID
-	var id = "form" + Form.id;
-	Form.id++;
+	var id = "obj_form" + ObjectForm.id;
+	ObjectForm.id++;
 
 	//Create element
-	this.element = document.createElement("form");
+	this.element = document.createElement("ObjectForm");
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.className = "panel";
 	
 	//Textbox test
-	this.text = new Textbox(this.element);
-	this.text.size.set(200, 20);
-	this.text.position.set(0, 5);
-	this.text.updateInterface();
-	this.text.setText("teste");
+	this.name = new Textbox(this.element);
+	this.name.size.set(200, 20);
+	this.name.position.set(0, 5);
+	this.name.updateInterface();
 
 	//Checkbox test
 	this.check = new Checkbox(this.element);
@@ -51,9 +50,12 @@ function Form(parent)
 	this.drop.position.set(0, 100);
 	this.drop.updateInterface();
 
-	this.drop.addValue("aaa");
-	this.drop.addValue("bbb");
-	this.drop.addValue("ccc");
+	this.drop.addValue("AAAAA");
+	this.drop.addValue("BBBBB");
+	this.drop.addValue("CCCCC");
+
+	//Object attached
+	this.obj = null;
 
 	//Element atributes
 	this.fit_parent = false;
@@ -65,13 +67,23 @@ function Form(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Form conter
-Form.id = 0;
+//ObjectForm conter
+ObjectForm.id = 0;
 
 //Functions Prototype
-Form.prototype.update = update;
-Form.prototype.updateInterface = updateInterface;
-Form.prototype.destroy = destroy;
+ObjectForm.prototype.update = update;
+ObjectForm.prototype.updateInterface = updateInterface;
+ObjectForm.prototype.destroy = destroy;
+ObjectForm.prototype.attachObject = attachObject;
+
+function attachObject(obj)
+{
+	this.obj = obj;
+
+	this.name.setText(this.obj.name);
+
+	this.updateInterface();
+}
 
 //Remove element
 function destroy()
@@ -79,7 +91,7 @@ function destroy()
 	this.parent.removeChild(this.element);
 }
 
-//Update Form
+//Update ObjectForm
 function update(){}
 
 //Update division Size

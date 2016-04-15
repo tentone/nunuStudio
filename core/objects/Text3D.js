@@ -9,6 +9,7 @@ function Text3D(text, font , material)
 	this.text = text;
 
 	this.scale.set(0.01, 0.01, 0.01);
+	
 	/*this.updateMatrix();
 	this.geometry.applyMatrix(this.matrix);
 

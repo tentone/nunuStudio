@@ -60,7 +60,11 @@ function getValue()
 //Remove element
 function destroy()
 {
-	this.parent.removeChild(this.element);
+	try
+	{
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
 }
 
 //Update

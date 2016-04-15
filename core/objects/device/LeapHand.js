@@ -1,4 +1,4 @@
-function LeapHand()
+function LeapHand(mode, use_arm)
 {
 	THREE.Scene.call(this);
 
@@ -25,8 +25,17 @@ function LeapHand()
 
 	//Hand Atributes
 	this.use_arm = false;
-	this.mode = this.DESK;
-	this.scale = new THREE.Vector3(1,1,1);
+	this.mode = LeapHand.DESK;
+
+	//Parameters
+	if(mode !== undefined)
+	{
+		this.mode = mode;
+	}
+	if(use_arm !== undefined)
+	{
+		this.use_arm = use_arm;
+	}
 
 	//Create leap controller and data storage
 	this.controller = new Leap.Controller();
@@ -49,6 +58,7 @@ LeapHand.prototype.updatePhysics = updatePhysics;
 LeapHand.prototype.addMesh = addMesh;
 LeapHand.prototype.updateMesh = updateMesh;
 LeapHand.prototype.checkGesture = checkGesture;
+LeapHand.prototype.toJSON = toJSON;
 
 //Leap Hand Modes
 LeapHand.DESK = 0;
@@ -197,6 +207,7 @@ function checkGesture(gest)
 function setMode(mode)
 {
 	this.mode = mode;
+	
 }
 
 //Add physics bounding box from objet to physics world
@@ -238,6 +249,7 @@ function updatePhysics()
 	});
 }
 
+//Add mesh to hand instance
 function addMesh(meshes, material)
 {
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -248,6 +260,7 @@ function addMesh(meshes, material)
 	return mesh;
 }
 
+//Update mesh position and size
 function updateMesh(bone, mesh)
 {
 	mesh.position.fromArray(bone.center());
@@ -257,4 +270,126 @@ function updateMesh(bone, mesh)
 	mesh.scale.set(bone.width/150, bone.width/150, bone.length/150);
 
 	this.add(mesh);
+}
+
+//Create JSON for object
+function toJSON(meta)
+{
+	var isRootObject = (meta === undefined);
+	var output = {};
+
+	//If root object initialize base structure
+	if(isRootObject)
+	{
+		meta =
+		{
+			geometries: {},
+			materials: {},
+			textures: {},
+			images: {}
+		};
+
+		output.metadata =
+		{
+			version: 4.4,
+			type: 'Object',
+			generator: 'Object3D.toJSON'
+		};
+	}
+
+	//Script serialization
+	var object = {};
+	object.uuid = this.uuid;
+	object.type = this.type;
+
+	object.mode = this.mode;
+	object.use_arm = this.use_arm;
+
+	if(this.name !== '')
+	{
+		object.name = this.name;
+	}
+	if(JSON.stringify(this.userData) !== '{}')
+	{
+		object.userData = this.userData;
+	}
+
+	object.castShadow = (this.castShadow === true);
+	object.receiveShadow = (this.receiveShadow === true);
+	object.visible = !(this.visible === false);
+
+	object.matrix = this.matrix.toArray();
+
+	if(this.geometry !== undefined)
+	{
+		if(meta.geometries[ this.geometry.uuid ] === undefined)
+		{
+			meta.geometries[ this.geometry.uuid ] = this.geometry.toJSON( meta );
+		}
+
+		object.geometry = this.geometry.uuid;
+	}
+
+	if(this.material !== undefined)
+	{
+		if(meta.materials[this.material.uuid] === undefined)
+		{
+			meta.materials[this.material.uuid] = this.material.toJSON(meta);
+		}
+
+		object.material = this.material.uuid;
+	}
+
+	//Collect children data
+	if(this.children.length > 0)
+	{
+		object.children = [];
+
+		for(var i = 0; i < this.children.length; i ++)
+		{
+			object.children.push( this.children[ i ].toJSON(meta).object);
+		}
+	}
+
+	if(isRootObject)
+	{
+		var geometries = extractFromCache( meta.geometries );
+		var materials = extractFromCache( meta.materials );
+		var textures = extractFromCache( meta.textures );
+		var images = extractFromCache( meta.images );
+
+		if(geometries.length > 0)
+		{
+			output.geometries = geometries;
+		}
+		if(materials.length > 0)
+		{
+			output.materials = materials;
+		}
+		if(textures.length > 0)
+		{
+			output.textures = textures;
+		}
+		if(images.length > 0)
+		{
+			output.images = images;
+		}
+	}
+
+	output.object = object;
+	return output;
+
+	//Extract data from the cache hash remove metadata on each item and return as array
+	function extractFromCache(cache)
+	{
+		var values = [];
+		for(var key in cache)
+		{
+			var data = cache[ key ];
+			delete data.metadata;
+			values.push( data );
+		}
+
+		return values;
+	}
 }
