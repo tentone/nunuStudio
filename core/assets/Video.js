@@ -1,4 +1,0 @@
-function Video()
-{
-	this.file = "";
-}

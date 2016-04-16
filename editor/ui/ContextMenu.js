@@ -96,12 +96,12 @@ function addOption(name, callback)
 	button.updateInterface();
 
 	var self = this;
-	button.callback = function()
+	button.setCallback(function()
 	{
 		callback();
 		self.destroy();
 		self.updateInterface();
-	};
+	});
 
 	this.options.push(button);
 	this.updateInterface();

@@ -1,4 +1,4 @@
-function Textbox(parent)
+function Numberbox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,12 +11,12 @@ function Textbox(parent)
 	}
 
 	//ID
-	var id = "txt_box" + Textbox.id;
-	Textbox.id++;
+	var id = "num_box" + Numberbox.id;
+	Numberbox.id++;
 
 	//Create element
 	this.element = document.createElement("input");
-	this.element.type = "text";
+	this.element.type = "number";
 	this.element.className = "text_box";
 	this.element.id = id;
 	this.element.style.position = "absolute";
@@ -30,16 +30,16 @@ function Textbox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Textbox ID counter
-Textbox.id = 0;
+//Numberbox ID counter
+Numberbox.id = 0;
 
 //Functions Prototype
-Textbox.prototype.update = update;
-Textbox.prototype.updateInterface = updateInterface;
-Textbox.prototype.destroy = destroy;
-Textbox.prototype.setText = setText;
-Textbox.prototype.getText = getText;
-Textbox.prototype.setOnChange = setOnChange;
+Numberbox.prototype.update = update;
+Numberbox.prototype.updateInterface = updateInterface;
+Numberbox.prototype.destroy = destroy;
+Numberbox.prototype.getValue = getValue;
+Numberbox.prototype.setValue = setValue;
+Numberbox.prototype.setOnChange = setOnChange;
 
 //Set onchange callback
 function setOnChange(callback)
@@ -48,14 +48,14 @@ function setOnChange(callback)
 	this.element.onchange = callback;
 }
 
-//Set text
-function setText(text)
+//Set value
+function setValue(value)
 {
-	this.element.value = text;
+	this.element.value = value;
 }
 
 //Get text
-function getText()
+function getValue()
 {
 	return this.element.value;
 }

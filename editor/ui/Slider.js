@@ -26,17 +26,6 @@ function Slider(parent)
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	this.callback = null;
-
-	//Click event
-	var self = this;
-	this.element.onchange = function()
-	{
-		if(self.callback !== null)
-		{
-			self.callback();
-		}
-	};
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -50,6 +39,14 @@ Slider.prototype.update = update;
 Slider.prototype.updateInterface = updateInterface;
 Slider.prototype.destroy = destroy;
 Slider.prototype.getValue = getValue;
+Slider.prototype.setOnChange = setOnChange;
+
+//Set onchange callback
+function setOnChange(callback)
+{
+	var self = this;
+	this.element.onchange = callback;
+}
 
 //Get Slider value
 function getValue()

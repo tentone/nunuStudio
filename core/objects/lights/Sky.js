@@ -40,7 +40,7 @@ function Sky(auto_update, day_time, sun_distance)
 	this.add(this.hemisphere);
 
 	//Day Time and Sun control
-	this.sun_distance = 200;
+	this.sun_distance = 100;
 	this.auto_update = true;
 	this.day_time = 20; //seconds
 	this.time = 13;
