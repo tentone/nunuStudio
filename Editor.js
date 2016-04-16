@@ -29,6 +29,7 @@ include("editor/ui/Textbox.js");
 include("editor/ui/ColorChooser.js");
 include("editor/ui/Slider.js");
 include("editor/ui/DropdownList.js");
+include("editor/ui/Numberbox.js");
 
 include("editor/panels/ObjectPanel.js");
 
@@ -468,7 +469,7 @@ Editor.updateSelectedObjectPanel = function()
 //Update tree view to match actual scene
 Editor.updateTreeView = function()
 {
-	Interface.tree_view.fromScene(Editor.program); //.scene);
+	Interface.tree_view.fromScene(Editor.program);
 }
 
 //Check if object is selected
@@ -532,7 +533,7 @@ Editor.updateObjectHelper = function()
 			Editor.hemisphere_light_helper.position.copy(position);
 			Editor.hemisphere_light_helper.update();
 		}
-		else if(Editor.selected_object instanceof THREE.Mesh)
+		else
 		{
 			Editor.activateHelper(Editor.box_helper, true);
 			Editor.box_helper.update(Editor.selected_object);

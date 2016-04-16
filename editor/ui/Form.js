@@ -19,11 +19,9 @@ function Form(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.className = "panel";
-
 	this.element.onsubmit = function(event)
 	{
 		event.preventDefault();
-		return false;
 	};
 
 	//Element atributes

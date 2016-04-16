@@ -67,10 +67,10 @@ Button.id = 0;
 //Functions Prototype
 Button.prototype.update = update;
 Button.prototype.updateInterface = updateInterface;
-Button.prototype.setCallback = setCallback;
 Button.prototype.destroy = destroy;
 Button.prototype.setClass = setClass;
 Button.prototype.setText = setText;
+Button.prototype.setCallback = setCallback;
 
 //Set Button text
 function setText(text)
@@ -102,7 +102,7 @@ function update(){}
 //Set button callback function
 function setCallback(callback)
 {
-	this.callback = callback;
+	this.element.onclick = callback;
 }
 
 //Update Button Size
