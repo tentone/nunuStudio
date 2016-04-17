@@ -39,14 +39,14 @@ function ObjectPanel(parent)
 	//Name text
 	var text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
-	text.setText("Name:");
+	text.setText("Name");
 	text.position.set(5, 20);
 	text.updateInterface();
 
 	//Name textbox
 	this.name = new Textbox(this.element);
 	this.name.position.set(50, 10);
-	this.name.size.set(200, 20);
+	this.name.size.set(200, 18);
 	this.name.updateInterface();
 	this.name.setOnChange(function()
 	{
@@ -60,26 +60,23 @@ function ObjectPanel(parent)
 	//Position text
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
-	text.setText("Position: X");
-	text.position.set(5, 45);
+	text.setText("Position");
+	text.position.set(5, 50);
 	text.updateInterface();
 
-	//X
-	this.pos_x= new Numberbox(this.element);
-	this.pos_x.position.set(50, 45);
-	this.pos_x.size.set(50, 20);
-	this.pos_x.updateInterface();
-	this.pos_x.setOnChange(function()
+	this.pos = new Positionbox(this.element);
+	this.pos.position.set(55, 40);
+	this.pos.updateInterface();
+	this.pos.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.position.x = self.pos_x.getValue();
-			Editor.updateTreeView();
+			var position = self.pos.getValue();
+			self.obj.position.set(position.x, position.y, position.z);
 		}
 	});
-
 	//Checkbox test
-	this.check = new Checkbox(this.element);
+	/*this.check = new Checkbox(this.element);
 	this.check.size.set(200, 15);
 	this.check.position.set(5, 50);
 	this.check.updateInterface();
@@ -104,7 +101,7 @@ function ObjectPanel(parent)
 
 	this.drop.addValue("AAAAA");
 	this.drop.addValue("BBBBB");
-	this.drop.addValue("CCCCC");
+	this.drop.addValue("CCCCC");*/
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -124,8 +121,11 @@ function updateObject()
 {
 	if(this.obj !== null)
 	{
+		//Name
 		this.name.setText(this.obj.name);
-		this.pos_x.setValue(this.obj.position.x);
+
+		//Position
+		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 	}
 }
 

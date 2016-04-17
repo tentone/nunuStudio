@@ -569,6 +569,11 @@ Interface.initialize = function()
 		settings.attachComponent(settings_panel);
 	});
 
+	Interface.file.addOption("Publish", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
 	Interface.file.addOption("Exit", function()
 	{
 		if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
