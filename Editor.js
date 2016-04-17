@@ -30,6 +30,7 @@ include("editor/ui/ColorChooser.js");
 include("editor/ui/Slider.js");
 include("editor/ui/DropdownList.js");
 include("editor/ui/Numberbox.js");
+include("editor/ui/Positionbox.js");
 
 include("editor/panels/ObjectPanel.js");
 
@@ -57,7 +58,7 @@ Editor.initialize = function(canvas)
 {
 	//Set mouse lock false
 	App.setMouseLock(false);
-	App.showStats(false);
+	App.showStats(true);
 
 	//Editor initial state
 	Editor.tool_mode = Editor.MODE_SELECT;
