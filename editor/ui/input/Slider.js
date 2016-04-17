@@ -44,8 +44,13 @@ Slider.prototype.setOnChange = setOnChange;
 //Set onchange callback
 function setOnChange(callback)
 {
-	var self = this;
 	this.element.onchange = callback;
+}
+
+//Get Slider value
+function setValue(value)
+{
+	this.element.value = value;
 }
 
 //Get Slider value

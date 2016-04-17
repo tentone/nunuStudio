@@ -1,4 +1,4 @@
-function DropdownList(parent)
+function Numberbox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,54 +11,57 @@ function DropdownList(parent)
 	}
 
 	//ID
-	var id = "droplist" + DropdownList.id;
-	DropdownList.id++;
+	var id = "num_box" + Numberbox.id;
+	Numberbox.id++;
 
 	//Create element
-	this.element = document.createElement("select");
+	this.element = document.createElement("input");
+	this.element.type = "number";
+	this.element.className = "text_box";
 	this.element.id = id;
+	this.element.step = "0.1";
 	this.element.style.position = "absolute";
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	this.callback = null;
-
-	//Click event
-	var self = this;
-	this.element.onchange = function()
-	{
-		if(self.callback !== null)
-		{
-			self.callback();
-		}
-	};
-
+	
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
 
-//DropdownList ID counter
-DropdownList.id = 0;
+//Numberbox ID counter
+Numberbox.id = 0;
 
 //Functions Prototype
-DropdownList.prototype.update = update;
-DropdownList.prototype.updateInterface = updateInterface;
-DropdownList.prototype.destroy = destroy;
-DropdownList.prototype.getValue = getValue;
-DropdownList.prototype.addValue = addValue;
+Numberbox.prototype.update = update;
+Numberbox.prototype.updateInterface = updateInterface;
+Numberbox.prototype.destroy = destroy;
+Numberbox.prototype.getValue = getValue;
+Numberbox.prototype.setValue = setValue;
+Numberbox.prototype.setStep = setStep;
+Numberbox.prototype.setOnChange = setOnChange;
 
-//Add element
-function addValue(text)
+//Set step
+function setStep(value)
 {
-	var option = document.createElement("option");
-	option.value = text;
-	option.innerHTML = text;
-	this.element.appendChild(option);
+	this.element.step = String(value);
 }
 
-//Get DropdownList value
+//Set onchange callback
+function setOnChange(callback)
+{
+	this.element.onchange = callback;
+}
+
+//Set value
+function setValue(value)
+{
+	this.element.value = value;
+}
+
+//Get text
 function getValue()
 {
 	return this.element.value;

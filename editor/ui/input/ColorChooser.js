@@ -1,4 +1,4 @@
-function Checkbox(parent)
+function ColorChooser(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,26 +11,14 @@ function Checkbox(parent)
 	}
 
 	//ID
-	var id = "checkbox" + Checkbox.id;
-	Checkbox.id++;
+	var id = "color" + ColorChooser.id;
+	ColorChooser.id++;
 
 	//Create element
-	this.element = document.createElement("div");
+	this.element = document.createElement("input");
+	this.element.type = "color";
 	this.element.id = id;
 	this.element.style.position = "absolute";
-
-	//Checkbox
-	this.checkbox = document.createElement("input");
-	this.checkbox.type = "checkbox";
-	this.checkbox.style.position = "absolute";
-	this.checkbox.style.top = "0px";
-	this.checkbox.style.left = "0px";
-	this.element.appendChild(this.checkbox);
-
-	//Text
-	this.text = new Text(this.element);
-	this.text.setAlignment(Text.LEFT);
-	this.text.updateInterface();
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
@@ -52,13 +40,34 @@ function Checkbox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Checkbox ID counter
-Checkbox.id = 0;
+//ColorChooser ID counter
+ColorChooser.id = 0;
 
 //Functions Prototype
-Checkbox.prototype.update = update;
-Checkbox.prototype.updateInterface = updateInterface;
-Checkbox.prototype.destroy = destroy;
+ColorChooser.prototype.update = update;
+ColorChooser.prototype.updateInterface = updateInterface;
+ColorChooser.prototype.destroy = destroy;
+ColorChooser.prototype.getValue = getValue;
+ColorChooser.prototype.setValue = setValue;
+ColorChooser.prototype.setOnChange = setOnChange;
+
+//Set onchange callback
+function setOnChange(callback)
+{
+	this.element.onchange = callback;
+}
+
+//Set color
+function setValue(value)
+{
+	this.element.value = value;
+}
+
+//Get Slider value
+function getValue()
+{
+	return this.element.value;
+}
 
 //Remove element
 function destroy()
@@ -84,12 +93,6 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	this.checkbox.style.width = this.size.y + "px";
-	this.checkbox.style.height = this.size.y + "px";
-
-	this.text.position.set(this.size.y + 5, this.size.y/2 + 2);
-	this.text.updateInterface();
 
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";

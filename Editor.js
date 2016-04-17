@@ -22,17 +22,18 @@ include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/SceneContainer.js");
-
 include("editor/ui/Form.js");
-include("editor/ui/Checkbox.js");
-include("editor/ui/Textbox.js");
-include("editor/ui/ColorChooser.js");
-include("editor/ui/Slider.js");
-include("editor/ui/DropdownList.js");
-include("editor/ui/Numberbox.js");
-include("editor/ui/Positionbox.js");
+
+include("editor/ui/input/Checkbox.js");
+include("editor/ui/input/Textbox.js");
+include("editor/ui/input/ColorChooser.js");
+include("editor/ui/input/Slider.js");
+include("editor/ui/input/DropdownList.js");
+include("editor/ui/input/Numberbox.js");
+include("editor/ui/input/Positionbox.js");
 
 include("editor/panels/ObjectPanel.js");
+include("editor/panels/LightPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -58,7 +59,7 @@ Editor.initialize = function(canvas)
 {
 	//Set mouse lock false
 	App.setMouseLock(false);
-	App.showStats(true);
+	App.showStats(false);
 
 	//Editor initial state
 	Editor.tool_mode = Editor.MODE_SELECT;
@@ -457,11 +458,18 @@ Editor.updateSelectedObjectPanel = function()
 	//Destroy old form
 	Interface.form.destroy();
 
-	//Select correct form to edit object
-	if(Editor.selected_object instanceof Model3D)
+	//Select correct panel
+	if(Editor.selected_object instanceof PointLight)
+	{
+		Interface.form = new LightPanel(Interface.explorer_resizable.div_b);
+
+		Interface.form.attachObject(Editor.selected_object);
+		Interface.form.updateInterface();
+	}
+	else if(Editor.selected_object instanceof Model3D)
 	{
 		Interface.form = new ObjectPanel(Interface.explorer_resizable.div_b);
-		Interface.form.fit_parent = true;
+
 		Interface.form.attachObject(Editor.selected_object);
 		Interface.form.updateInterface();
 	}

@@ -70,7 +70,7 @@ Interface.initialize = function()
 				var obj = loader.parse(App.readFile(file));
 
 				ObjectUtils.setShadowCasting(obj.scene, true);
-				ObjectUtils.setShadowReceiving(obj.scene, true);
+				//ObjectUtils.setShadowReceiving(obj.scene, true);
 				Editor.addToActualScene(obj.scene);
 
 				alert("File loaded");
