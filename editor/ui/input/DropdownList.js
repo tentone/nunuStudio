@@ -1,4 +1,4 @@
-function ColorChooser(parent)
+function DropdownList(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,12 +11,11 @@ function ColorChooser(parent)
 	}
 
 	//ID
-	var id = "color" + ColorChooser.id;
-	ColorChooser.id++;
+	var id = "droplist" + DropdownList.id;
+	DropdownList.id++;
 
 	//Create element
-	this.element = document.createElement("input");
-	this.element.type = "color";
+	this.element = document.createElement("select");
 	this.element.id = id;
 	this.element.style.position = "absolute";
 
@@ -26,30 +25,37 @@ function ColorChooser(parent)
 	this.visible = true;
 	this.callback = null;
 
-	//Click event
-	var self = this;
-	this.element.onchange = function()
-	{
-		if(self.callback !== null)
-		{
-			self.callback();
-		}
-	};
-
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
 
-//ColorChooser ID counter
-ColorChooser.id = 0;
+//DropdownList ID counter
+DropdownList.id = 0;
 
 //Functions Prototype
-ColorChooser.prototype.update = update;
-ColorChooser.prototype.updateInterface = updateInterface;
-ColorChooser.prototype.destroy = destroy;
-ColorChooser.prototype.getValue = getValue;
+DropdownList.prototype.update = update;
+DropdownList.prototype.updateInterface = updateInterface;
+DropdownList.prototype.destroy = destroy;
+DropdownList.prototype.getValue = getValue;
+DropdownList.prototype.addValue = addValue;
+DropdownList.prototype.setOnChange = setOnChange;
 
-//Get Slider value
+//Set onchange callback
+function setOnChange(callback)
+{
+	this.element.onchange = callback;
+}
+
+//Add element
+function addValue(text)
+{
+	var option = document.createElement("option");
+	option.value = text;
+	option.innerHTML = text;
+	this.element.appendChild(option);
+}
+
+//Get DropdownList value
 function getValue()
 {
 	return this.element.value;

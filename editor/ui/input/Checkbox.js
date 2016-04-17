@@ -1,4 +1,4 @@
-function Numberbox(parent)
+function Checkbox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,53 +11,50 @@ function Numberbox(parent)
 	}
 
 	//ID
-	var id = "num_box" + Numberbox.id;
-	Numberbox.id++;
+	var id = "checkbox" + Checkbox.id;
+	Checkbox.id++;
 
 	//Create element
-	this.element = document.createElement("input");
-	this.element.type = "number";
-	this.element.className = "text_box";
+	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
+
+	//Checkbox
+	this.checkbox = document.createElement("input");
+	this.checkbox.type = "checkbox";
+	this.checkbox.style.position = "absolute";
+	this.checkbox.style.top = "0px";
+	this.checkbox.style.left = "0px";
+	this.element.appendChild(this.checkbox);
+
+	//Text
+	this.text = new Text(this.element);
+	this.text.setAlignment(Text.LEFT);
+	this.text.updateInterface();
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	
+	this.callback = null;
+
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
 
-//Numberbox ID counter
-Numberbox.id = 0;
+//Checkbox ID counter
+Checkbox.id = 0;
 
 //Functions Prototype
-Numberbox.prototype.update = update;
-Numberbox.prototype.updateInterface = updateInterface;
-Numberbox.prototype.destroy = destroy;
-Numberbox.prototype.getValue = getValue;
-Numberbox.prototype.setValue = setValue;
-Numberbox.prototype.setOnChange = setOnChange;
+Checkbox.prototype.update = update;
+Checkbox.prototype.updateInterface = updateInterface;
+Checkbox.prototype.destroy = destroy;
+Checkbox.prototype.setOnChange = setOnChange;
 
 //Set onchange callback
 function setOnChange(callback)
 {
-	var self = this;
 	this.element.onchange = callback;
-}
-
-//Set value
-function setValue(value)
-{
-	this.element.value = value;
-}
-
-//Get text
-function getValue()
-{
-	return this.element.value;
 }
 
 //Remove element
@@ -84,6 +81,12 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
+
+	this.checkbox.style.width = this.size.y + "px";
+	this.checkbox.style.height = this.size.y + "px";
+
+	this.text.position.set(this.size.y + 5, this.size.y/2 + 2);
+	this.text.updateInterface();
 
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";

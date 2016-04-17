@@ -1,4 +1,4 @@
-function ObjectPanel(parent)
+function LightPanel(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,8 +11,8 @@ function ObjectPanel(parent)
 	}
 	
 	//ID
-	var id = "obj_panel" + ObjectPanel.id;
-	ObjectPanel.id++;
+	var id = "light_panel" + LightPanel.id;
+	LightPanel.id++;
 
 	//Create element
 	this.element = document.createElement("form");
@@ -76,84 +76,38 @@ function ObjectPanel(parent)
 		}
 	});
 
-	//Scale
+	//Color
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
-	text.setText("Scale");
+	text.setText("Color");
 	text.position.set(5, 75);
 	text.updateInterface();
 
-	this.scale = new Positionbox(this.element);
-	this.scale.position.set(45, 65);
-	this.scale.updateInterface();
-	this.scale.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			var scale = self.scale.getValue();
-			self.obj.scale.set(scale.x, scale.y, scale.z);
-		}
-	});
-
-	//Rotation
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Rotation");
-	text.position.set(5, 100);
-	text.updateInterface();
-
-	this.rotation = new Positionbox(this.element);
-	this.rotation.position.set(57, 90);
-	this.rotation.updateInterface();
-	this.rotation.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			var rotation = self.rotation.getValue();
-			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
-		}
-	});
-	//Checkbox test
-	/*this.check = new Checkbox(this.element);
-	this.check.size.set(200, 15);
-	this.check.position.set(5, 50);
-	this.check.updateInterface();
-
-	//Color chooser
 	this.color = new ColorChooser(this.element);
-	this.color.size.set(200, 15);
-	this.color.position.set(5, 80);
+	this.color.size.set(50, 20);
+	this.color.position.set(50, 65);
 	this.color.updateInterface();
-
-	//Slider
-	this.slider = new Slider(this.element);
-	this.slider.size.set(200, 15);
-	this.slider.position.set(5, 110);
-	this.slider.updateInterface();
-
-	//Dropdown
-	this.drop = new DropdownList(this.element);
-	this.drop.size.set(200, 20);
-	this.drop.position.set(0, 140);
-	this.drop.updateInterface();
-
-	this.drop.addValue("AAAAA");
-	this.drop.addValue("BBBBB");
-	this.drop.addValue("CCCCC");*/
+	this.color.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.color.setHex(self.color.getValue());
+		}
+	});
 
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
 
-//ObjectPanel conter
-ObjectPanel.id = 0;
+//LightPanel conter
+LightPanel.id = 0;
 
 //Functions Prototype
-ObjectPanel.prototype.update = update;
-ObjectPanel.prototype.updateInterface = updateInterface;
-ObjectPanel.prototype.destroy = destroy;
-ObjectPanel.prototype.attachObject = attachObject;
-ObjectPanel.prototype.updateObject = updateObject;
+LightPanel.prototype.update = update;
+LightPanel.prototype.updateInterface = updateInterface;
+LightPanel.prototype.destroy = destroy;
+LightPanel.prototype.attachObject = attachObject;
+LightPanel.prototype.updateObject = updateObject;
 
 function updateObject()
 {
@@ -162,8 +116,7 @@ function updateObject()
 		this.name.setText(this.obj.name);
 
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
-		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
-		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
+		this.color.setValue(this.obj.color.getHexString());
 	}
 }
 
@@ -185,7 +138,7 @@ function destroy()
 	catch(e){}
 }
 
-//Update ObjectPanel
+//Update LightPanel
 function update(){}
 
 //Update division Size

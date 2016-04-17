@@ -44,7 +44,6 @@ Textbox.prototype.setOnChange = setOnChange;
 //Set onchange callback
 function setOnChange(callback)
 {
-	var self = this;
 	this.element.onchange = callback;
 }
 
