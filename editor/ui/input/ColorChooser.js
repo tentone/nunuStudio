@@ -16,9 +16,14 @@ function ColorChooser(parent)
 
 	//Create element
 	this.element = document.createElement("input");
-	this.element.type = "color";
+	this.element.type = "text";
+	this.element.className = "text_box";
 	this.element.id = id;
 	this.element.style.position = "absolute";
+
+	//Color chooser
+	this.color = new jscolor(this.element);
+	this.color.shadow = false;
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
@@ -58,15 +63,15 @@ function setOnChange(callback)
 }
 
 //Set color
-function setValue(value)
+function setValue(r, g, b)
 {
-	this.element.value = value;
+	this.color.fromRGB(r*255, g*255, b*255);
 }
 
 //Get Slider value
 function getValue()
 {
-	return this.element.value;
+	return {r: this.color.rgb[0]/255, g: this.color.rgb[1]/255, b: this.color.rgb[2]/255};
 }
 
 //Remove element

@@ -3,6 +3,8 @@ include("lib/codemirror/mode/javascript/javascript.js");
 include("lib/codemirror/codemirror.css");
 include("lib/codemirror/theme/monokai.css");
 
+include("lib/jscolor.min.js");
+
 include("editor/ui/Button.js");
 include("editor/ui/DropdownMenu.js");
 include("editor/ui/Text.js");
@@ -82,8 +84,7 @@ Editor.initialize = function(canvas)
 	Interface.initialize();
 
 	//Set render canvas
-	Editor.canvas = Interface.canvas.element;
-	Mouse.canvas = Editor.canvas;
+	Editor.setRenderCanvas(Interface.canvas.element);
 
 	//Debug Elements
 	Editor.tool_scene = new THREE.Scene();
@@ -640,6 +641,13 @@ Editor.createNewProgram = function()
 	Editor.program = new Program();
 	Editor.program.addDefaultScene();
 	Editor.resetEditingFlags();
+}
+
+//Set render canvas
+Editor.setRenderCanvas = function(canvas)
+{
+	Editor.canvas = canvas;
+	Mouse.canvas = canvas;
 }
 
 //Exit editor

@@ -89,7 +89,7 @@ function TreeElement(container)
 			self.deleteObject();
 		});
 
-		if(!(self.obj instanceof Scene))
+		if(!(self.obj instanceof Scene) && !(self.obj instanceof Program))
 		{
 			context.addOption("Copy", function()
 			{

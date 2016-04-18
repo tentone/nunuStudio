@@ -93,6 +93,7 @@ function remove(scene)
 		if(index > -1)
 		{
 			this.children.splice(index, 1);
+			scene.parent = null;
 		}
 
 		//If no scene on program set actual scene to null
@@ -109,6 +110,7 @@ function add(scene)
 	if(scene instanceof Scene)
 	{
 		this.children.push(scene);
+		scene.parent = this;
 
 		//If first scene set as actual scene
 		if(this.children.length == 1)
