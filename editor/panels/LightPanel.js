@@ -91,7 +91,8 @@ function LightPanel(parent)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.color.setHex(self.color.getValue());
+			var color = self.color.getValue();
+			self.obj.color.setRGB(color.r, color.g, color.b);
 		}
 	});
 
@@ -116,7 +117,9 @@ function updateObject()
 		this.name.setText(this.obj.name);
 
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
-		this.color.setValue(this.obj.color.getHexString());
+
+		console.log(this.obj.color);
+		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 	}
 }
 

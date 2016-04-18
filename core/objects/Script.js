@@ -5,6 +5,10 @@ function Script(code_init, code_loop)
 	//Set default name and object type
 	this.name = "script";
 	this.type = "Script";
+	
+	//Disable auto matrix updates
+	this.rotationAutoUpdate = false;
+	this.matrixAutoUpdate = false;
 
 	//Script Code
 	this.code_loop = "";
