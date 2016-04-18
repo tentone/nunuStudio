@@ -3,7 +3,8 @@ function DirectionalLight(hex, intensity)
 	THREE.DirectionalLight.call(this, hex, intensity);
 
 	this.name = "directional_light";
-
+	
+	this.castShadow = true;
 	this.shadow.camera.near = 1;
 	this.shadow.camera.far = 500;
 	this.shadow.camera.left = -10;

@@ -437,7 +437,7 @@ function parseObject(data, geometries, materials)
 			break;
 
 		case 'Sky':
-			object = new Sky(data.auto_update, data.day_time, data.sun_distance);
+			object = new Sky(data.auto_update, data.day_time, data.sun_distance, data.time);
 			break;
 			
 		case 'Scene':

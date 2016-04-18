@@ -23,8 +23,6 @@ function Checkbox(parent)
 	this.checkbox = document.createElement("input");
 	this.checkbox.type = "checkbox";
 	this.checkbox.style.position = "absolute";
-	this.checkbox.style.top = "0px";
-	this.checkbox.style.left = "0px";
 	this.element.appendChild(this.checkbox);
 
 	//Text
@@ -50,6 +48,27 @@ Checkbox.prototype.update = update;
 Checkbox.prototype.updateInterface = updateInterface;
 Checkbox.prototype.destroy = destroy;
 Checkbox.prototype.setOnChange = setOnChange;
+Checkbox.prototype.setText = setText;
+Checkbox.prototype.getValue = getValue;
+Checkbox.prototype.setValue = setValue;
+
+//Set checkbox value
+function setValue(value)
+{
+	this.checkbox.checked = value;
+}
+
+//Get checkbox value
+function getValue()
+{
+	return this.checkbox.checked;
+}
+
+//Set checkbox text
+function setText(text)
+{
+	this.text.setText(text);
+}
 
 //Set onchange callback
 function setOnChange(callback)
@@ -85,6 +104,7 @@ function updateInterface()
 	this.checkbox.style.width = this.size.y + "px";
 	this.checkbox.style.height = this.size.y + "px";
 
+	this.text.size.set(this.size.x, 0);
 	this.text.position.set(this.size.y + 5, this.size.y/2 + 2);
 	this.text.updateInterface();
 

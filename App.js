@@ -30,9 +30,6 @@ include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
-include("core/animation/Joint.js");
-include("core/animation/Skeleton.js");
-
 include("core/ObjectLoader.js");
 include("core/Program.js");
 include("core/ObjectUtils.js");

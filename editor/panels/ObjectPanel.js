@@ -1,37 +1,6 @@
 function ObjectPanel(parent)
 {
-	//Parent
-	if(parent === undefined)
-	{
-		this.parent = document.body;
-	}
-	else
-	{
-		this.parent = parent;
-	}
-	
-	//ID
-	var id = "obj_panel" + ObjectPanel.id;
-	ObjectPanel.id++;
-
-	//Create element
-	this.element = document.createElement("form");
-	this.element.id = id;
-	this.element.style.position = "absolute";
-	this.element.className = "panel";
-	this.element.onsubmit = function(event)
-	{
-		event.preventDefault();
-	};
-	
-	//Object attached
-	this.obj = null;
-
-	//Element atributes
-	this.fit_parent = true;
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
+	Panel.call(this, parent);
 
 	//Self pointer
 	var self = this;
@@ -113,6 +82,7 @@ function ObjectPanel(parent)
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
 		}
 	});
+
 	//Checkbox test
 	/*this.check = new Checkbox(this.element);
 	this.check.size.set(200, 15);
@@ -140,22 +110,14 @@ function ObjectPanel(parent)
 	this.drop.addValue("AAAAA");
 	this.drop.addValue("BBBBB");
 	this.drop.addValue("CCCCC");*/
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
 
-//ObjectPanel conter
-ObjectPanel.id = 0;
-
 //Functions Prototype
-ObjectPanel.prototype.update = update;
-ObjectPanel.prototype.updateInterface = updateInterface;
-ObjectPanel.prototype.destroy = destroy;
+ObjectPanel.prototype = Object.create(Panel.prototype);
 ObjectPanel.prototype.attachObject = attachObject;
-ObjectPanel.prototype.updateObject = updateObject;
+ObjectPanel.prototype.updatePanel = updatePanel;
 
-function updateObject()
+function updatePanel()
 {
 	if(this.obj !== null)
 	{
@@ -171,42 +133,6 @@ function updateObject()
 function attachObject(obj)
 {
 	this.obj = obj;
-	this.updateObject();
+	this.updatePanel();
 	this.updateInterface();
-}
-
-//Remove element
-function destroy()
-{
-	try
-	{
-		this.parent.removeChild(this.element);
-	}
-	catch(e){}
-}
-
-//Update ObjectPanel
-function update(){}
-
-//Update division Size
-function updateInterface()
-{
-	if(this.fit_parent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-	
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }

@@ -3,7 +3,8 @@ function PointLight(hex, intensity, distance, decay)
 	THREE.PointLight.call(this, hex, intensity, distance, decay);
 
 	this.name = "point_light";
-
+	
+	this.castShadow = true;
 	this.shadow.camera.near = 0;
 	this.shadow.camera.far = 500;
 	

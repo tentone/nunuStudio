@@ -1,4 +1,4 @@
-function Sky(auto_update, day_time, sun_distance)
+function Sky(auto_update, day_time, sun_distance, time)
 {	
 	//Hemisphere light
 	this.hemisphere = new HemisphereLight(0xffffff, 0xffffff, 0.3);
@@ -57,6 +57,10 @@ function Sky(auto_update, day_time, sun_distance)
 	{
 		this.sun_distance = sun_distance;
 	}
+	if(time !== undefined)
+	{
+		this.time = time;
+	}
 
 	this.updateSky();
 }
@@ -74,6 +78,7 @@ Sky.prototype = Object.create(THREE.Mesh.prototype);
 Sky.prototype.icon = "editor/files/icons/lights/sky.png";
 
 //Runtime functions
+Sky.prototype.raycast = raycast;
 Sky.prototype.toJSON = toJSON;
 Sky.prototype.initialize = initialize;
 Sky.prototype.update = update;
@@ -226,7 +231,8 @@ function toJSON(meta)
 	object.auto_update = this.auto_update;
 	object.day_time = this.day_time;
 	object.sun_distance = this.sun_distance;
-
+	object.time = this.time;
+	
 	if(this.name !== '')
 	{
 		object.name = this.name;
@@ -314,4 +320,10 @@ function toJSON(meta)
 
 		return values;
 	}
+}
+
+//Sky is not collidable
+function raycast()
+{
+	return null;
 }
