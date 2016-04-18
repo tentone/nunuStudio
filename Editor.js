@@ -34,8 +34,10 @@ include("editor/ui/input/DropdownList.js");
 include("editor/ui/input/Numberbox.js");
 include("editor/ui/input/Positionbox.js");
 
+include("editor/panels/Panel.js");
 include("editor/panels/ObjectPanel.js");
 include("editor/panels/LightPanel.js");
+include("editor/panels/SkyPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -470,6 +472,13 @@ Editor.updateSelectedObjectPanel = function()
 	else if(Editor.selected_object instanceof Model3D)
 	{
 		Interface.form = new ObjectPanel(Interface.explorer_resizable.div_b);
+
+		Interface.form.attachObject(Editor.selected_object);
+		Interface.form.updateInterface();
+	}
+	else if(Editor.selected_object instanceof Sky)
+	{
+		Interface.form = new SkyPanel(Interface.explorer_resizable.div_b);
 
 		Interface.form.attachObject(Editor.selected_object);
 		Interface.form.updateInterface();

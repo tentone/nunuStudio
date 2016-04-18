@@ -1,37 +1,6 @@
 function LightPanel(parent)
 {
-	//Parent
-	if(parent === undefined)
-	{
-		this.parent = document.body;
-	}
-	else
-	{
-		this.parent = parent;
-	}
-	
-	//ID
-	var id = "light_panel" + LightPanel.id;
-	LightPanel.id++;
-
-	//Create element
-	this.element = document.createElement("form");
-	this.element.id = id;
-	this.element.style.position = "absolute";
-	this.element.className = "panel";
-	this.element.onsubmit = function(event)
-	{
-		event.preventDefault();
-	};
-	
-	//Object attached
-	this.obj = null;
-
-	//Element atributes
-	this.fit_parent = true;
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
+	Panel.call(this, parent);
 
 	//Self pointer
 	var self = this;
@@ -95,22 +64,14 @@ function LightPanel(parent)
 			self.obj.color.setRGB(color.r, color.g, color.b);
 		}
 	});
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
 
-//LightPanel conter
-LightPanel.id = 0;
-
 //Functions Prototype
-LightPanel.prototype.update = update;
-LightPanel.prototype.updateInterface = updateInterface;
-LightPanel.prototype.destroy = destroy;
+LightPanel.prototype = Object.create(Panel.prototype);
 LightPanel.prototype.attachObject = attachObject;
-LightPanel.prototype.updateObject = updateObject;
+LightPanel.prototype.updatePanel = updatePanel;
 
-function updateObject()
+function updatePanel()
 {
 	if(this.obj !== null)
 	{
@@ -118,7 +79,6 @@ function updateObject()
 
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 
-		console.log(this.obj.color);
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 	}
 }
@@ -127,42 +87,6 @@ function updateObject()
 function attachObject(obj)
 {
 	this.obj = obj;
-	this.updateObject();
+	this.updatePanel();
 	this.updateInterface();
-}
-
-//Remove element
-function destroy()
-{
-	try
-	{
-		this.parent.removeChild(this.element);
-	}
-	catch(e){}
-}
-
-//Update LightPanel
-function update(){}
-
-//Update division Size
-function updateInterface()
-{
-	if(this.fit_parent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-	
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }

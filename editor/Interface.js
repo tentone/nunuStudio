@@ -32,7 +32,7 @@ Interface.initialize = function()
 
 	//File
 	Interface.asset_file = new DropdownMenu(Interface.asset_explorer_bar.element);
-	Interface.asset_file.setText("File");
+	Interface.asset_file.setText("Models");
 	Interface.asset_file.size.set(120, Interface.asset_explorer_bar.size.y);
 	Interface.asset_file.position.set(0,0);
 	
@@ -70,7 +70,7 @@ Interface.initialize = function()
 				var obj = loader.parse(App.readFile(file));
 
 				ObjectUtils.setShadowCasting(obj.scene, true);
-				//ObjectUtils.setShadowReceiving(obj.scene, true);
+				ObjectUtils.setShadowReceiving(obj.scene, true);
 				Editor.addToActualScene(obj.scene);
 
 				alert("File loaded");
@@ -130,12 +130,29 @@ Interface.initialize = function()
 
 	//Add assets
 	Interface.asset_add = new DropdownMenu(Interface.asset_explorer_bar.element);
-	Interface.asset_add.setText("Add");
+	Interface.asset_add.setText("Texture");
 	Interface.asset_add.size.set(100, Interface.asset_explorer_bar.size.y);
 	Interface.asset_add.position.set(120,0);
-	Interface.asset_add.addOption("Material", function()
+	Interface.asset_add.addOption("Import Texture", function()
 	{
-		//TODO <ADD CODE HERE>
+		App.chooseFile(function(event)
+		{
+			var file = event.srcElement.value;
+			try
+			{
+				var map = new THREE.TextureLoader().load(file);
+
+				var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
+				var sprite = new Sprite(material);
+				Editor.addToActualScene(sprite);
+
+				alert("File loaded");
+			}
+			catch(e)
+			{
+				alert("Error loading file");
+			}
+		}, "image/*");
 	});
 
 	//------------------------------------Explorer------------------------------------
@@ -366,32 +383,25 @@ Interface.initialize = function()
 	//Spot Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/spot.png", function()
 	{
-		var light = new SpotLight();
-		light.castShadow = true;
-		Editor.addToActualScene(light);
+		Editor.addToActualScene(new SpotLight());
 	});
 
 	//Directional Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/directional.png", function()
 	{
-		var light = new DirectionalLight();
-		light.castShadow = true;
-		Editor.addToActualScene(light);
+		Editor.addToActualScene(new DirectionalLight());
 	});
 
 	//Hemisphere Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/hemisphere.png", function()
 	{
-		var light = new HemisphereLight();
-		light.castShadow = true;
-		Editor.addToActualScene(light);
+		Editor.addToActualScene(new HemisphereLight());
 	});
 
 	//Sky
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/sky.png", function()
 	{
-		var light = new Sky();
-		Editor.addToActualScene(light);
+		Editor.addToActualScene(new Sky());
 	});
 
 	//Add camera
@@ -443,7 +453,7 @@ Interface.initialize = function()
 	//Sprites and effects
 	Interface.add_effects = new ButtonDrawer();
 	Interface.add_effects.setImage(Interface.file_dir + "icons/effects/particles.png");
-	Interface.add_effects.options_per_line = 2;
+	Interface.add_effects.options_per_line = 3;
 	Interface.add_effects.image_scale.set(0.7, 0.7);
 	Interface.add_effects.options_scale.set(0.7, 0.7);
 	Interface.add_effects.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
@@ -456,12 +466,6 @@ Interface.initialize = function()
 	{
 		var map = new THREE.TextureLoader().load("data/sample.png");
 		var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
-
-		//TODO <CHECK CODE>
-		//var video = new THREEx.VideoTexture("data/sample.avi");
-		//function update(){video.update(App.delta_time, App.time);}
-		//update();
-		//var material = new THREE.SpriteMaterial({map: video.texture, color: 0xffffff});
 		
 		var sprite = new Sprite(material);
 		Editor.addToActualScene(sprite);
@@ -471,6 +475,12 @@ Interface.initialize = function()
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/particles.png", function()
 	{
 		//TODO <ADD CODE HERE>
+	});
+
+	//Container
+	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/container.png", function()
+	{
+		Editor.addToActualScene(new Container());
 	});
 
 	//Add device
@@ -590,27 +600,59 @@ Interface.initialize = function()
 
 	Interface.editor.addOption("Copy", function()
 	{
-		//TODO <ADD CODE HERE>
+		if(Editor.selected_object !== null)
+		{
+			try
+			{
+				App.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
+			}
+			catch(e){}
+		}
 	});
 	
 	Interface.editor.addOption("Cut", function()
 	{
-		//TODO <ADD CODE HERE>
+		if(Editor.selected_object !== null)
+		{
+			try
+			{
+				App.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
+				if(Editor.selected_object.parent !== null)
+				{
+					Editor.selected_object.parent.remove(Editor.selected_object);
+					Editor.updateTreeView();
+					Editor.resetEditingFlags();
+				}
+			}
+			catch(e){}
+		}
 	});
 
 	Interface.editor.addOption("Paste", function()
 	{
-		//TODO <ADD CODE HERE>
-	});
+		try
+		{
+			var content = App.clipboard.get("text");
+			var loader = new ObjectLoader();
+			var data = JSON.parse(content);
 
-	Interface.editor.addOption("Undo", function()
-	{
-		//TODO <ADD CODE HERE>
-	});
+			//Create object
+			var obj = loader.parse(data);
+			obj.uuid = THREE.Math.generateUUID();
+			obj.position.set(0, 0, 0);
 
-	Interface.editor.addOption("Redo", function()
-	{
-		//TODO <ADD CODE HERE>
+			//Add object
+			if(Editor.selected_object !== null)
+			{
+				Editor.selected_object.add(obj);
+			}
+			else
+			{
+				Editor.program.scene.add(obj);
+			}
+			Editor.updateTreeView();
+		}
+		catch(e){}
 	});
 
 	//Project
@@ -621,12 +663,11 @@ Interface.initialize = function()
 
 	Interface.project.addOption("Create Scene", function()
 	{
-		var scene = new Scene();
-		Editor.program.add(scene);
+		Editor.program.addDefaultScene();
 		Editor.updateTreeView();
 	});
 
-	Interface.project.addOption("Settings", function()
+	Interface.project.addOption("Project Settings", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
