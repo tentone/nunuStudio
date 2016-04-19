@@ -48,7 +48,7 @@ Interface.initialize = function()
 
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
-				Editor.addToActualScene(obj);
+				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
 
 				alert("File loaded");
 			}
@@ -71,7 +71,7 @@ Interface.initialize = function()
 
 				ObjectUtils.setShadowCasting(obj.scene, true);
 				ObjectUtils.setShadowReceiving(obj.scene, true);
-				Editor.addToActualScene(obj.scene);
+				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj.scene));
 
 				alert("File loaded");
 			}
@@ -94,6 +94,7 @@ Interface.initialize = function()
 
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
+
 				Editor.addToActualScene(obj);
 
 				alert("File loaded");
@@ -117,7 +118,7 @@ Interface.initialize = function()
 
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
-				Editor.addToActualScene(obj);
+				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
 
 				alert("File loaded");
 			}
@@ -600,59 +601,17 @@ Interface.initialize = function()
 
 	Interface.editor.addOption("Copy", function()
 	{
-		if(Editor.selected_object !== null)
-		{
-			try
-			{
-				App.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
-			}
-			catch(e){}
-		}
+		Editor.copySelectedObject();
 	});
 	
 	Interface.editor.addOption("Cut", function()
 	{
-		if(Editor.selected_object !== null)
-		{
-			try
-			{
-				App.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
-				if(Editor.selected_object.parent !== null)
-				{
-					Editor.selected_object.parent.remove(Editor.selected_object);
-					Editor.updateTreeView();
-					Editor.resetEditingFlags();
-				}
-			}
-			catch(e){}
-		}
+		Editor.cutSelectedObject();
 	});
 
 	Interface.editor.addOption("Paste", function()
 	{
-		try
-		{
-			var content = App.clipboard.get("text");
-			var loader = new ObjectLoader();
-			var data = JSON.parse(content);
-
-			//Create object
-			var obj = loader.parse(data);
-			obj.uuid = THREE.Math.generateUUID();
-			obj.position.set(0, 0, 0);
-
-			//Add object
-			if(Editor.selected_object !== null)
-			{
-				Editor.selected_object.add(obj);
-			}
-			else
-			{
-				Editor.program.scene.add(obj);
-			}
-			Editor.updateTreeView();
-		}
-		catch(e){}
+		Editor.pasteIntoSelectedObject();
 	});
 
 	//Project

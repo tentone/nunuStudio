@@ -14,7 +14,7 @@ function ObjectPanel(parent)
 
 	//Name textbox
 	this.name = new Textbox(this.element);
-	this.name.position.set(50, 10);
+	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
 	this.name.updateInterface();
 	this.name.setOnChange(function()

@@ -9,9 +9,11 @@ ObjectUtils.fitBox = function(x, y, z)
 }
 
 //Convert threejs type to internal types
-ObjectUtils.convertFromThreeType = function()
+ObjectUtils.convertFromThreeType = function(obj)
 {
-	//TODO <ADD CODE HERE>
+	var data = obj.toJSON();
+	var loader = new ObjectLoader();
+	return loader.parse(data);
 }
 
 //Set shadow receiving
