@@ -89,8 +89,8 @@ function parseGeometries(json)
 
 			switch(data.type)
 			{
-				case 'PlaneGeometry':
-				case 'PlaneBufferGeometry':
+				case "PlaneGeometry":
+				case "PlaneBufferGeometry":
 					geometry = new THREE[data.type](
 						data.width,
 						data.height,
@@ -99,9 +99,9 @@ function parseGeometries(json)
 					);
 					break;
 
-				case 'BoxGeometry':
-				case 'BoxBufferGeometry':
-				case 'CubeGeometry':
+				case "BoxGeometry":
+				case "BoxBufferGeometry":
+				case "CubeGeometry":
 					geometry = new THREE[data.type](
 						data.width,
 						data.height,
@@ -112,8 +112,8 @@ function parseGeometries(json)
 					);
 					break;
 
-				case 'CircleGeometry':
-				case 'CircleBufferGeometry':
+				case "CircleGeometry":
+				case "CircleBufferGeometry":
 					geometry = new THREE[data.type](
 						data.radius,
 						data.segments,
@@ -122,8 +122,8 @@ function parseGeometries(json)
 					);
 					break;
 
-				case 'CylinderGeometry':
-				case 'CylinderBufferGeometry':
+				case "CylinderGeometry":
+				case "CylinderBufferGeometry":
 					geometry = new THREE[data.type](
 						data.radiusTop,
 						data.radiusBottom,
@@ -136,8 +136,8 @@ function parseGeometries(json)
 					);
 					break;
 
-				case 'SphereGeometry':
-				case 'SphereBufferGeometry':
+				case "SphereGeometry":
+				case "SphereBufferGeometry":
 					geometry = new THREE[data.type](
 						data.radius,
 						data.widthSegments,
@@ -149,36 +149,36 @@ function parseGeometries(json)
 					);
 					break;
 
-				case 'DodecahedronGeometry':
+				case "DodecahedronGeometry":
 					geometry = new THREE.DodecahedronGeometry(
 						data.radius,
 						data.detail
 					);
 					break;
 
-				case 'IcosahedronGeometry':
+				case "IcosahedronGeometry":
 					geometry = new THREE.IcosahedronGeometry(
 						data.radius,
 						data.detail
 					);
 					break;
 
-				case 'OctahedronGeometry':
+				case "OctahedronGeometry":
 					geometry = new THREE.OctahedronGeometry(
 						data.radius,
 						data.detail
 					);
 					break;
 
-				case 'TetrahedronGeometry':
+				case "TetrahedronGeometry":
 					geometry = new THREE.TetrahedronGeometry(
 						data.radius,
 						data.detail
 					);
 					break;
 
-				case 'RingGeometry':
-				case 'RingBufferGeometry':
+				case "RingGeometry":
+				case "RingBufferGeometry":
 					geometry = new THREE[data.type](
 						data.innerRadius,
 						data.outerRadius,
@@ -189,8 +189,8 @@ function parseGeometries(json)
 					);
 					break;
 
-				case 'TorusGeometry':
-				case 'TorusBufferGeometry':
+				case "TorusGeometry":
+				case "TorusBufferGeometry":
 					geometry = new THREE[data.type](
 						data.radius,
 						data.tube,
@@ -200,8 +200,8 @@ function parseGeometries(json)
 					);
 					break;
 
-				case 'TorusKnotGeometry':
-				case 'TorusKnotBufferGeometry':
+				case "TorusKnotGeometry":
+				case "TorusKnotBufferGeometry":
 					geometry = new THREE[data.type](
 						data.radius,
 						data.tube,
@@ -212,7 +212,7 @@ function parseGeometries(json)
 					);
 					break;
 
-				case 'LatheGeometry':
+				case "LatheGeometry":
 					geometry = new THREE.LatheGeometry(
 						data.points,
 						data.segments,
@@ -221,11 +221,11 @@ function parseGeometries(json)
 					);
 					break;
 
-				case 'BufferGeometry':
+				case "BufferGeometry":
 					geometry = bufferGeometryLoader.parse(data);
 					break;
 
-				case 'Geometry':
+				case "Geometry":
 					geometry = geometryLoader.parse(data.data, this.texturePath).geometry;
 					break;
 
@@ -406,7 +406,7 @@ function parseObject(data, geometries, materials)
 	{
 		if(geometries[name] === undefined)
 		{
-			console.warn( 'ObjectLoader: Undefined geometry', name );
+			console.warn( "ObjectLoader: Undefined geometry", name );
 		}
 		return geometries[ name ];
 	}
@@ -420,7 +420,7 @@ function parseObject(data, geometries, materials)
 
 		if(materials[name] === undefined)
 		{
-			console.warn( 'ObjectLoader: Undefined material', name );
+			console.warn( "ObjectLoader: Undefined material", name );
 		}
 
 		return materials[name];
@@ -428,51 +428,51 @@ function parseObject(data, geometries, materials)
 
 	switch(data.type)
 	{
-		case 'Program':
+		case "Program":
 			object = new Program(data.name, data.description, data.author, data.version, data.vr);
 			break;
 
-		case 'LeapDevice':
+		case "LeapDevice":
 			object = new LeapHand(data.mode, data.use_arm);
 			break;
 
-		case 'Sky':
+		case "Sky":
 			object = new Sky(data.auto_update, data.day_time, data.sun_distance, data.time);
 			break;
 			
-		case 'Scene':
+		case "Scene":
 			object = new Scene();
 			break;
 
-		case 'PerspectiveCamera':
+		case "PerspectiveCamera":
 			object = new PerspectiveCamera(data.fov, data.aspect, data.near, data.far);
 			break;
 
-		case 'OrthographicCamera':
+		case "OrthographicCamera":
 			object = new OrthographicCamera(data.left, data.right, data.top, data.bottom, data.near, data.far);
 			break;
 
-		case 'AmbientLight':
+		case "AmbientLight":
 			object = new AmbientLight(data.color, data.intensity);
 			break;
 
-		case 'DirectionalLight':
+		case "DirectionalLight":
 			object = new DirectionalLight(data.color, data.intensity);
 			break;
 
-		case 'PointLight':
+		case "PointLight":
 			object = new PointLight(data.color, data.intensity, data.distance, data.decay);
 			break;
 
-		case 'SpotLight':
+		case "SpotLight":
 			object = new SpotLight(data.color, data.intensity, data.distance, data.angle, data.penumbra, data.decay);
 			break;
 
-		case 'HemisphereLight':
+		case "HemisphereLight":
 			object = new HemisphereLight(data.color, data.groundColor, data.intensity);
 			break;
 
-		case 'Mesh':
+		case "Mesh":
 			var geometry = getGeometry(data.geometry);
 			var material = getMaterial(data.material);
 			if(geometry.bones && geometry.bones.length > 0)
@@ -485,28 +485,28 @@ function parseObject(data, geometries, materials)
 			}
 			break;
 
-		case 'LOD':
+		case "LOD":
 			object = new THREE.LOD();
 			break;
 
-		case 'Line':
+		case "Line":
 			object = new THREE.Line(getGeometry(data.geometry), getMaterial(data.material), data.mode);
 			break;
 
-		case 'PointCloud':
-		case 'Points':
+		case "PointCloud":
+		case "Points":
 			object = new THREE.Points(getGeometry(data.geometry), getMaterial(data.material));
 			break;
 
-		case 'Sprite':
+		case "Sprite":
 			object = new Sprite(getMaterial(data.material));
 			break;
 
-		case 'Group':
+		case "Group":
 			object = new Container();
 			break;
 
-		case 'Script':
+		case "Script":
 			object = new Script(data.code_init, data.code_loop);
 			break;
 
@@ -567,14 +567,14 @@ function parseObject(data, geometries, materials)
 		}
 	}
 
-	if(data.type === 'LOD')
+	if(data.type === "LOD")
 	{
 		var levels = data.levels;
 
 		for(var l = 0; l < levels.length; l ++)
 		{
 			var level = levels[ l ];
-			var child = object.getObjectByProperty( 'uuid', level.object );
+			var child = object.getObjectByProperty( "uuid", level.object );
 			if (child !== undefined)
 			{
 				object.addLevel( child, level.distance );

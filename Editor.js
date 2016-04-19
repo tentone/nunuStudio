@@ -80,6 +80,7 @@ Editor.initialize = function(canvas)
 
 	//Editor program and scene
 	Editor.program = null;
+	Editor.program_backup = null;
 	Editor.createNewProgram();
 
 	//Initialize User Interface
@@ -106,8 +107,9 @@ Editor.initialize = function(canvas)
 	Editor.renderer = new THREE.WebGLRenderer({canvas: Editor.canvas});
 	Editor.renderer.autoClear = false;
 	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
+
+	//Enable shadow maps (THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
 	Editor.renderer.shadowMap.enabled = true;
-	//Editor.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	Editor.renderer.shadowMap.type = THREE.PCFShadowMap;
 
 	//Update interface
@@ -261,6 +263,7 @@ Editor.update = function()
 						Editor.selected_object.position.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2);
 						Editor.selected_object.position.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2);
 					}
+					Editor.updateObjectPanel();
 				}
 				//Resize mode
 				else if(Editor.tool_mode === Editor.MODE_RESIZE)
@@ -288,26 +291,32 @@ Editor.update = function()
 						Editor.selected_object.scale.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2);
 						Editor.selected_object.scale.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2);
 					}
+					Editor.updateObjectPanel();
 				}
 				//Rotate Mode
 				else if(Editor.tool_mode === Editor.MODE_ROTATE)
 				{
 					var speed = 1/300;
+
 					if(Editor.editing_object_args.x)
 					{
-						Editor.selected_object.rotation.x -= Mouse.pos_diff.y * speed;
-						Editor.selected_object.rotation.x -= Mouse.pos_diff.x * speed;
+						var delta = new THREE.Quaternion();
+						delta.setFromEuler(new THREE.Euler(-(Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 0, 0, 'XYZ'));
+        				Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
 					}
 					else if(Editor.editing_object_args.y)
 					{
-						Editor.selected_object.rotation.y -= Mouse.pos_diff.y * speed;
-						Editor.selected_object.rotation.y -= Mouse.pos_diff.x * speed;
+						var delta = new THREE.Quaternion();
+						delta.setFromEuler(new THREE.Euler(0, -(Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 0, 'XYZ'));
+        				Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
 					}
 					else if(Editor.editing_object_args.z)
 					{
-						Editor.selected_object.rotation.z += Mouse.pos_diff.y * speed;
-						Editor.selected_object.rotation.z += Mouse.pos_diff.x * speed;
+						var delta = new THREE.Quaternion();
+						delta.setFromEuler(new THREE.Euler(0, 0, (Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 'XYZ'));
+        				Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
 					}
+					Editor.updateObjectPanel();
 				}
 			}
 		}
@@ -465,21 +474,18 @@ Editor.updateSelectedObjectPanel = function()
 	if(Editor.selected_object instanceof PointLight)
 	{
 		Interface.form = new LightPanel(Interface.explorer_resizable.div_b);
-
 		Interface.form.attachObject(Editor.selected_object);
 		Interface.form.updateInterface();
 	}
 	else if(Editor.selected_object instanceof Model3D)
 	{
 		Interface.form = new ObjectPanel(Interface.explorer_resizable.div_b);
-
 		Interface.form.attachObject(Editor.selected_object);
 		Interface.form.updateInterface();
 	}
 	else if(Editor.selected_object instanceof Sky)
 	{
 		Interface.form = new SkyPanel(Interface.explorer_resizable.div_b);
-
 		Interface.form.attachObject(Editor.selected_object);
 		Interface.form.updateInterface();
 	}
@@ -489,6 +495,12 @@ Editor.updateSelectedObjectPanel = function()
 Editor.updateTreeView = function()
 {
 	Interface.tree_view.fromScene(Editor.program);
+}
+
+//Updates object panel values
+Editor.updateObjectPanel = function()
+{
+	Interface.form.updatePanel();
 }
 
 //Check if object is selected
@@ -650,6 +662,30 @@ Editor.createNewProgram = function()
 	Editor.program = new Program();
 	Editor.program.addDefaultScene();
 	Editor.resetEditingFlags();
+}
+
+//Set editor state
+Editor.setState = function(state)
+{
+	if(state === Editor.STATE_EDITING)
+	{
+		//Restore program from backup
+		if(Editor.state === Editor.STATE_TESTING)
+		{
+			Editor.program = Editor.program_backup;
+			Editor.program_backup = null;
+		}
+	}
+	else if(state === Editor.STATE_TESTING)
+	{
+		//Create a backup of the original program
+		Editor.program_backup = Editor.program;
+		Editor.program = Editor.program.clone();
+
+		//Iniialize program
+		Editor.program.scene.initialize();
+	}
+	Editor.state = state;
 }
 
 //Set render canvas

@@ -40,7 +40,7 @@ ObjectUtils.setShadowCasting = function(obj, value)
 //Check if object is child of another object
 ObjectUtils.isChildOf = function(parent, child)
 {
-	for(var j = 0; j < parent.children.length; j++)
+	for(var i = 0; i < parent.children.length; i++)
 	{
 		if(parent.children[i] === child || ObjectUtils.isChildOf(parent.children[i], child))
 		{
