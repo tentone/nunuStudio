@@ -50,6 +50,7 @@ Program.prototype.add = add;
 Program.prototype.remove = remove;
 Program.prototype.addDefaultScene = addDefaultScene;
 Program.prototype.toJSON = toJSON;
+Program.prototype.clone = clone;
 
 //Create a default scene with sky
 function addDefaultScene()
@@ -118,6 +119,14 @@ function add(scene)
 			this.scene = this.children[0];
 		}
 	}
+}
+
+//Clone program keep uuid and everything else
+function clone()
+{
+	var data = this.toJSON();
+	var loader = new ObjectLoader();
+	return loader.parse(data);
 }
 
 //Create JSON for object

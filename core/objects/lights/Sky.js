@@ -91,7 +91,7 @@ function initialize()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].initialize != undefined)
+		if(this.children[i].initialize !== undefined)
 		{
 			this.children[i].initialize();
 		}

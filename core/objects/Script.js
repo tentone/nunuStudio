@@ -11,8 +11,8 @@ function Script(code_init, code_loop)
 	this.matrixAutoUpdate = false;
 
 	//Script Code
-	this.code_loop = "";
-	this.code_init = "";
+	this.code_loop = "//ADD LOOP CODE HERE";
+	this.code_init = "//ADD INITIALIZATION CODE HERE";
 
 	//Compile init and loop code
 	if(code_init !== undefined)
@@ -23,10 +23,10 @@ function Script(code_init, code_loop)
 	{
 		this.setLoopCode(code_loop);
 	}
-
+	
 	//Script functions
-	this.func_loop = Function(this.code_loop);
-	this.func_init = Function(this.code_init);
+	this.setLoopCode(this.code_loop);
+	this.setInitCode(this.code_init);
 }
 
 //Function Prototype
