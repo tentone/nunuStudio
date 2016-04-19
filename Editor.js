@@ -81,7 +81,7 @@ Editor.initialize = function(canvas)
 
 	//Editor program and scene
 	Editor.program = null;
-	Editor.program_backup = null;
+	Editor.program_running = null;
 	Editor.createNewProgram();
 
 	//Renderer and canvas
@@ -227,21 +227,21 @@ Editor.update = function()
 			{
 				Editor.deleteSelectedObject();
 			}
-			else if(Keyboard.isKeyPressed(Keyboard.CTRL))
+			/*else if(Keyboard.isKeyPressed(Keyboard.CTRL))
 			{
-				if(Keyboard.isKeyPressed(Keyboard.C))
+				if(Keyboard.isKeyJustPressed(Keyboard.C))
 				{
 					Editor.copySelectedObject();
 				}
-				else if(Keyboard.isKeyPressed(Keyboard.V))
+				else if(Keyboard.isKeyJustPressed(Keyboard.V))
 				{
 					Editor.pasteIntoSelectedObject();
 				}
-				else if(Keyboard.isKeyPressed(Keyboard.X))
+				else if(Keyboard.isKeyJustPressed(Keyboard.X))
 				{
 					Editor.cutSelectedObject();
 				}
-			}
+			}*/
 		}
 		else
 		{
@@ -442,10 +442,11 @@ Editor.update = function()
 			}
 		}
 	}
+
 	//Update Scene if on test mode
 	else if(Editor.state === Editor.STATE_TESTING)
 	{
-		Editor.program.scene.update();
+		Editor.program_running.scene.update();
 	}
 }
 
@@ -454,17 +455,20 @@ Editor.draw = function()
 {
 	Editor.renderer.clear();
 
-	//Render scene
-	Editor.renderer.render(Editor.program.scene, Editor.camera);
-
-	//Render debug scene
-	if(Editor.state == Editor.STATE_EDITING)
+	if(Editor.state === Editor.STATE_EDITING)
 	{
+		//Render scene
+		Editor.renderer.render(Editor.program.scene, Editor.camera);
+
+		//Render debug scene
 		Editor.cannon_renderer.update();
 		Editor.renderer.render(Editor.tool_scene, Editor.camera);
-
 		Editor.renderer.clearDepth();
 		Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
+	}
+	else if(Editor.state === Editor.STATE_TESTING)
+	{
+		Editor.renderer.render(Editor.program_running.scene, Editor.program_running.scene.camera);
 	}
 }
 
@@ -772,21 +776,20 @@ Editor.setState = function(state)
 {
 	if(state === Editor.STATE_EDITING)
 	{
-		//Restore program from backup
-		if(Editor.state === Editor.STATE_TESTING)
-		{
-			Editor.program = Editor.program_backup;
-			Editor.program_backup = null;
-		}
+		//Clean program running varible
+		Editor.program_running = null;
 	}
 	else if(state === Editor.STATE_TESTING)
 	{
-		//Create a backup of the original program
-		Editor.program_backup = Editor.program;
-		Editor.program = Editor.program.clone();
+		//Copy program and initialize scene
+		Editor.program_running = Editor.program.clone();
+		Editor.program_running.scene.initialize();
 
-		//Iniialize program
-		Editor.program.scene.initialize();
+		//If no camera attached attach camera
+		if(Editor.program_running.scene.camera === null)
+		{
+			Editor.program_running.scene.camera = Editor.camera;
+		}
 	}
 	Editor.state = state;
 }

@@ -14,6 +14,9 @@ function Scene()
 	this.world.gravity.set(0,-9.82,0);
 	this.world.solver.iterations = 10;
 
+	//Initialization variables
+	this.initial_camera_uuid = null;
+
 	//Runtime variables
 	this.camera = null;
 }

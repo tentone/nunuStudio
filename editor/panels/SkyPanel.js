@@ -56,6 +56,41 @@ function SkyPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.day_time = self.day_time.getValue();
+			self.obj.updateSky();
+		}
+	});
+
+	//Actual time 
+	text = new Text(this.element);
+	text.setAlignment(Text.LEFT);
+	text.setText("Time(s)")
+	text.size.set(100, 0);
+	text.position.set(5, 85);
+	text.updateInterface();
+
+	this.time = new Numberbox(this.element);
+	this.time.size.set(100, 18);
+	this.time.position.set(60, 75);
+	this.time.updateInterface();
+	this.time.setOnChange(function()
+	{
+		if(self.obj!== null)
+		{
+			var time = self.time.getValue();
+
+			if(time < 0)
+			{
+				self.time.setValue(0);
+				time = 0;
+			}
+			else if(time > self.obj.day_time)
+			{
+				self.time.setValue(self.obj.day_time);
+				time = self.obj.day_time;
+			}
+
+			self.obj.time = time;
+			self.obj.updateSky();
 		}
 	});
 }
@@ -73,6 +108,7 @@ function updatePanel()
 		this.name.setText(this.obj.name);
 		this.auto_update.setValue(this.obj.auto_update);
 		this.day_time.setValue(this.obj.day_time);
+		this.time.setValue(this.obj.time);
 	}
 }
 

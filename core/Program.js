@@ -37,6 +37,9 @@ function Program(name, description, author, version, vr)
 	{
 		this.vr = vr;
 	}
+	
+	//Initialization variables
+	this.initial_scene_uuid = null;
 
 	//Runtime variables
 	this.scene = null;

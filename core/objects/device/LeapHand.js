@@ -18,7 +18,7 @@ function LeapHand(mode, use_arm)
 
 	//Gesture
 	this.gesture = []
-	for(var i = 0; i < 8; i++)
+	for(var i = 0; i < 10; i++)
 	{
 		this.gesture[i] = false;
 	}
@@ -57,7 +57,6 @@ LeapHand.prototype.toJSON = toJSON;
 
 LeapHand.prototype.setMode = setMode;
 LeapHand.prototype.checkGesture = checkGesture;
-
 LeapHand.prototype.addMesh = addMesh;
 LeapHand.prototype.updateMesh = updateMesh;
 LeapHand.prototype.updatePhysics = updatePhysics;
@@ -70,11 +69,14 @@ LeapHand.HDM = 1;
 LeapHand.SWIPE = 0;
 LeapHand.SWIPE_LEFT = 1;
 LeapHand.SWIPE_RIGHT = 2;
-LeapHand.SWIPE_UP = 3;
-LeapHand.SWIPE_DOWN = 4;
-LeapHand.CIRCLE = 5;
-LeapHand.SCREEN_TAP = 6;
-LeapHand.KEY_TAP = 7;
+LeapHand.SWIPE_FRONT = 3;
+LeapHand.SWIPE_BACK = 4;
+LeapHand.SWIPE_UP = 5;
+LeapHand.SWIPE_DOWN = 6;
+
+LeapHand.CIRCLE = 7;
+LeapHand.SCREEN_TAP = 8;
+LeapHand.KEY_TAP = 9;
 
 //Initialize
 function initialize()
@@ -96,7 +98,7 @@ function update()
 	{
 		var self = this;
 
-		//Reset event flags
+		//Clean all event flags
 		for(var i = 0; i < 8; i++)
 		{
 			this.gesture[i] = false;
@@ -112,29 +114,34 @@ function update()
 					//var direction;
 					self.gesture[LeapHand.SWIPE] = true;
 
-					//Horizontal
-					if(Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]))
-					{
-						if(gesture.direction[0] > 0)
-						{
-							self.gesture[LeapHand.SWIPE_RIGHT] = true;
-						}
-						else
-						{
-							self.gesture[LeapHand.SWIPE_LEFT] = true;
-						}
+					//X Direction
+					if(gesture.direction[0] > 0)
+					{	
+						self.gesture[LeapHand.SWIPE_RIGHT] = true;
 					}
-					//Vertical
 					else
-					{ 
-						if(gesture.direction[1] > 0)
-						{
-							self.gesture[LeapHand.SWIPE_UP] = true;
-						}
-						else
-						{
-							self.gesture[LeapHand.SWIPE_DOWN] = true;
-						}                  
+					{
+						self.gesture[LeapHand.SWIPE_LEFT] = true;
+					}
+
+					//Y Direction
+					if(gesture.direction[1] > 0)
+					{
+						self.gesture[LeapHand.SWIPE_UP] = true;
+					}
+					else
+					{
+						self.gesture[LeapHand.SWIPE_DOWN] = true;
+					}
+
+					//Z Direction
+					if(gesture.direction[2] > 0)
+					{
+						self.gesture[LeapHand.SWIPE_FRONT] = true;
+					}
+					else
+					{
+						self.gesture[LeapHand.SWIPE_BACK] = true;
 					}
 				}
 				else if(gesture.type === "circle")

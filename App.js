@@ -222,6 +222,7 @@ App.loop = function()
 
 	//Update Mouse Values
 	Mouse.update();
+	Keyboard.update();
 	
 	//Update time values
 	App.delta_time = Date.now() - App.time;
