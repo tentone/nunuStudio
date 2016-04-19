@@ -1,9 +1,11 @@
 function Keyboard(){}
 
+Keyboard.actions = [];
+Keyboard.keys = [];
+
 Keyboard.initialize = function()
 {
-	Keyboard.keys = [];
-
+	//Keyboard keys
 	for(var i = 0; i < 256; i++)
 	{
 		Keyboard.keys.push(new Key());
@@ -12,34 +14,40 @@ Keyboard.initialize = function()
 	//Keyboard OnKeyDown Event
 	document.onkeydown = function(event)
 	{
-		Keyboard.update(event.keyCode, Key.KEY_DOWN);
+		Keyboard.actions.push(event.keyCode);
+		Keyboard.actions.push(Key.KEY_DOWN);
 	}
 
 	//Keyboard OnKeyUp Event
 	document.onkeyup = function(event)
 	{
-		Keyboard.update(event.keyCode, Key.KEY_UP);
+		Keyboard.actions.push(event.keyCode);
+		Keyboard.actions.push(Key.KEY_UP);
 	}
 }
 
-Keyboard.update = function(key, action)
+//Update key pressed sync
+Keyboard.update = function()
 {
-	if(key < 256)
+	while(Keyboard.actions.length > 0)
 	{
-		Keyboard.keys[key].update(action);
+		Keyboard.keys[Keyboard.actions.shift()].update(Keyboard.actions.shift());
 	}
 }
 
+//Check if a key is pressed
 Keyboard.isKeyPressed = function(key)
 {
 	return key < 256 && Keyboard.keys[key].isPressed;
 }
 
+//Check is a key as just pressed
 Keyboard.isKeyJustPressed = function(key)
 {
 	return key < 256 && Keyboard.keys[key].justPressed;
 }
 
+//Check if a key was just released
 Keyboard.isKeyJustReleased = function(key)
 {
 	return key < 256 && Keyboard.keys[key].justReleased;

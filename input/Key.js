@@ -24,7 +24,8 @@ function update(action)
 	this.justPressed = false;
 	this.justReleased = false;
 
-	if(action === 0) //Key Down
+	//Key down
+	if(action === Key.KEY_DOWN)
 	{
 		if(!this.isPressed)
 		{
@@ -32,7 +33,8 @@ function update(action)
 		}
 		this.isPressed = true;
 	}
-	else //Key Up
+	//Key Up
+	else
 	{
 		if(this.isPressed)
 		{
