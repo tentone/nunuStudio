@@ -24,6 +24,9 @@ function ColorChooser(parent)
 	//Color chooser
 	this.color = new jscolor(this.element);
 	this.color.shadow = false;
+	this.color.borderWidth = 0;
+	this.color.borderRadius = 0;
+	this.color.zIndex = 500;
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);

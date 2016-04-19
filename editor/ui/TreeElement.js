@@ -239,7 +239,7 @@ function TreeElement(container)
 		}
 
 		//Scene
-		else if(self.obj instanceof Script)
+		else if(self.obj instanceof Scene)
 		{
 			//TODO <ADD CODE HERE>
 		}

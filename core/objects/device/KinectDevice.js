@@ -1,12 +1,18 @@
-function KinectDevice(){}
+function KinectDevice()
+{
+
+}
 
 KinectDevice.DEPTH = 0;
 KinectDevice.COLOR = 1;
-
 KinectDevice.JOINTS_NAME = [["head","shouldercenter"],["shouldercenter","shoulderright"],["shouldercenter","shoulderleft"],["shoulderright","elbowright"],
 							["shoulderleft","elbowleft"],["elbowright","wristright"],["elbowleft","wristleft"],["wristright","handright"],["wristleft","handleft"],
 							["shouldercenter","spine"],["spine","hipcenter"],["hipcenter","hipright"],["hipcenter","hipleft"],["hipright","kneeright"],
 							["hipleft","kneeleft"],["kneeright","ankleright"],["kneeleft","ankleleft"],["ankleright","footright"],["ankleleft","footleft"]];
+
+
+//KinectDevice.prototype.initialize = initialize;
+//KinectDevice.prototype.update = update;
 
 
 KinectDevice.initialize = function()
@@ -39,24 +45,23 @@ KinectDevice.initialize = function()
 	{
 		if(typeof event.data === "string")
 		{
-			var jsonObject = JSON.parse(event.data);
-			KinectDevice.data = jsonObject.skeletons;
-
+			var data = JSON.parse(event.data);
+			KinectDevice.data = data.skeletons;
 			KinectDevice.updateSkeletons();
 		}
 		else if(event.data instanceof Blob)
 		{
-			var blob = event.data;
+			var data = event.data;
 			//TOTO <STORE CAMERA FEED>
 		}
 	};
 
-	KinectDevice.debug_scene = new THREE.Scene();
+	/*KinectDevice.debug_scene = new THREE.Scene();
 	var point = new THREE.Vector3(0,0,0);
 	for(var i = 0; i < 19; i++)
 	{
 		KinectDevice.debug_scene.add(KinectDevice.createCylinderBetweenPoints(point, point));
-	}
+	}*/
 }
 
 KinectDevice.isConnected = function()
@@ -79,29 +84,16 @@ KinectDevice.updateSkeletons = function()
 	}
 }
 
-//Update Debug skeleton
-KinectDevice.updateDebugSkeleton = function(joints)
+KinectDevice.setCameraMode = function(mode)
 {
-	/*hipcenter
-	spine 
-	shouldercenter 
-	head 
-	shoulderleft 
-	elbowleft 
-	wristleft 
-	handleft 
-	shoulderright
-	elbowright 
-	wristright 
-	handright 
-	hipleft 
-	kneeleft 
-	ankleleft 
-	footleft
-	hipright 
-	kneeright
-	ankleright
-	footright*/
+	if(mode === KinectDevice.COLOR)
+	{
+		socket.send("Color");
+	}
+	else if(mode === KinectDevice.COLOR)
+	{
+		socket.send("Depth");
+	}
 }
 
 //Create a cylinder between points a and b
@@ -122,14 +114,3 @@ KinectDevice.createCylinderBetweenPoints = function(a, b)
 	return obj;
 }
 
-KinectDevice.setCameraMode = function(mode)
-{
-	if(mode === KinectDevice.COLOR)
-	{
-		socket.send("Color");
-	}
-	else if(mode === KinectDevice.COLOR)
-	{
-		socket.send("Depth");
-	}
-}

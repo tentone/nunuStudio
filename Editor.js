@@ -38,6 +38,7 @@ include("editor/panels/Panel.js");
 include("editor/panels/ObjectPanel.js");
 include("editor/panels/LightPanel.js");
 include("editor/panels/SkyPanel.js");
+include("editor/panels/LeapPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -83,34 +84,29 @@ Editor.initialize = function(canvas)
 	Editor.program_backup = null;
 	Editor.createNewProgram();
 
+	//Renderer and canvas
+	Editor.renderer = null;
+	Editor.canvas = null;
+
 	//Initialize User Interface
 	Interface.initialize();
-
-	//Set render canvas
-	Editor.setRenderCanvas(Interface.canvas.element);
 
 	//Debug Elements
 	Editor.tool_scene = new THREE.Scene();
 	Editor.tool_scene_top = new THREE.Scene();
 	Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.tool_scene, Editor.program.scene.world);
 
+	//Raycaster
+	Editor.raycaster = new THREE.Raycaster();
+
+	//Set render canvas
+	Editor.setRenderCanvas(Interface.canvas.element);
+
 	//Editor Camera
 	Editor.camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 100000);
 	Editor.camera.position.set(0, 5, -5);
 	Editor.camera_rotation = new THREE.Vector2(0,0);
 	Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
-
-	//Raycaster
-	Editor.raycaster = new THREE.Raycaster();
-
-	//Renderer
-	Editor.renderer = new THREE.WebGLRenderer({canvas: Editor.canvas});
-	Editor.renderer.autoClear = false;
-	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
-
-	//Enable shadow maps (THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
-	Editor.renderer.shadowMap.enabled = true;
-	Editor.renderer.shadowMap.type = THREE.PCFShadowMap;
 
 	//Update interface
 	Interface.updateInterface();
@@ -224,6 +220,27 @@ Editor.update = function()
 				Editor.move_tool.visible = false;
 				Editor.rotate_tool.visible = false;
 				Editor.resize_tool.visible = false;
+			}
+
+			//Delete Selected Object
+			if(Keyboard.isKeyPressed(Keyboard.DEL))
+			{
+				Editor.deleteSelectedObject();
+			}
+			else if(Keyboard.isKeyPressed(Keyboard.CTRL))
+			{
+				if(Keyboard.isKeyPressed(Keyboard.C))
+				{
+					Editor.copySelectedObject();
+				}
+				else if(Keyboard.isKeyPressed(Keyboard.V))
+				{
+					Editor.pasteIntoSelectedObject();
+				}
+				else if(Keyboard.isKeyPressed(Keyboard.X))
+				{
+					Editor.cutSelectedObject();
+				}
 			}
 		}
 		else
@@ -464,6 +481,94 @@ Editor.selectObject = function(obj)
 	Editor.updateSelectedObjectPanel();
 }
 
+//Check if object is selected
+Editor.isObjectSelected = function(obj)
+{
+	return Editor.selected_object === obj;
+}
+
+//Delete Selected Object
+Editor.deleteSelectedObject = function()
+{
+	if(Editor.selected_object.parent !== null)
+	{
+		Editor.selected_object.parent.remove(Editor.selected_object);
+		Editor.updateTreeView();
+		Editor.resetEditingFlags();
+	}
+}
+
+//Copy selected object
+Editor.copySelectedObject = function()
+{
+	if(Editor.selected_object !== null)
+	{
+		try
+		{
+			App.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
+		}
+		catch(e){}
+	}
+}
+
+//Cut selected object
+Editor.cutSelectedObject = function()
+{
+	if(Editor.selected_object !== null)
+	{
+		try
+		{
+			App.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
+			if(Editor.selected_object.parent !== null)
+			{
+				Editor.selected_object.parent.remove(Editor.selected_object);
+				Editor.updateTreeView();
+				Editor.resetEditingFlags();
+			}
+		}
+		catch(e){}
+	}
+}
+
+//Paste as children of selected object
+Editor.pasteIntoSelectedObject = function()
+{
+	try
+	{
+		var content = App.clipboard.get("text");
+		var loader = new ObjectLoader();
+		var data = JSON.parse(content);
+
+		//Create object
+		var obj = loader.parse(data);
+		obj.uuid = THREE.Math.generateUUID();
+		obj.position.set(0, 0, 0);
+
+		//Add object
+		if(Editor.selected_object !== null)
+		{
+			Editor.selected_object.add(obj);
+		}
+		else
+		{
+			Editor.program.scene.add(obj);
+		}
+		Editor.updateTreeView();
+	}
+	catch(e){}
+}
+
+//Delete selected object
+Editor.deleteSelectedObject = function()
+{
+	if(Editor.selected_object.parent !== null)
+	{
+		Editor.selected_object.parent.remove(Editor.selected_object);
+		Editor.updateTreeView();
+		Editor.resetEditingFlags();
+	}
+}
+
 //Update UI panel to match selected object
 Editor.updateSelectedObjectPanel = function()
 {
@@ -474,21 +579,22 @@ Editor.updateSelectedObjectPanel = function()
 	if(Editor.selected_object instanceof PointLight)
 	{
 		Interface.form = new LightPanel(Interface.explorer_resizable.div_b);
-		Interface.form.attachObject(Editor.selected_object);
-		Interface.form.updateInterface();
-	}
-	else if(Editor.selected_object instanceof Model3D)
-	{
-		Interface.form = new ObjectPanel(Interface.explorer_resizable.div_b);
-		Interface.form.attachObject(Editor.selected_object);
-		Interface.form.updateInterface();
 	}
 	else if(Editor.selected_object instanceof Sky)
 	{
 		Interface.form = new SkyPanel(Interface.explorer_resizable.div_b);
-		Interface.form.attachObject(Editor.selected_object);
-		Interface.form.updateInterface();
 	}
+	else if(Editor.selected_object instanceof LeapHand)
+	{
+		Interface.form = new LeapPanel(Interface.explorer_resizable.div_b);
+	}
+	else
+	{
+		Interface.form = new ObjectPanel(Interface.explorer_resizable.div_b);
+	}
+	
+	Interface.form.attachObject(Editor.selected_object);
+	Interface.form.updateInterface();
 }
 
 //Update tree view to match actual scene
@@ -501,12 +607,6 @@ Editor.updateTreeView = function()
 Editor.updateObjectPanel = function()
 {
 	Interface.form.updatePanel();
-}
-
-//Check if object is selected
-Editor.isObjectSelected = function(obj)
-{
-	return (obj === Editor.selected_object);
 }
 
 //Add object to actual scene
@@ -582,9 +682,12 @@ Editor.activateHelper = function(helper, value)
 //Resize Camera
 Editor.resizeCamera = function()
 {
-	Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
-	Editor.camera.aspect = Editor.canvas.width/Editor.canvas.height;
-	Editor.camera.updateProjectionMatrix();
+	if(Editor.canvas !== null && Editor.renderer != null)
+	{
+		Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
+		Editor.camera.aspect = Editor.canvas.width/Editor.canvas.height;
+		Editor.camera.updateProjectionMatrix();
+	}
 }
 
 //Set camera rotation
@@ -691,8 +794,20 @@ Editor.setState = function(state)
 //Set render canvas
 Editor.setRenderCanvas = function(canvas)
 {
-	Editor.canvas = canvas;
 	Mouse.canvas = canvas;
+	Editor.canvas = canvas;
+	Editor.initializeRenderer(canvas);
+}
+
+Editor.initializeRenderer = function(canvas)
+{
+	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas});
+	Editor.renderer.autoClear = false;
+
+	//Enable shadow maps (THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
+	Editor.renderer.shadowMap.enabled = true;
+	Editor.renderer.shadowMap.type = THREE.PCFShadowMap;
+	Editor.renderer.setSize(canvas.width, canvas.height);
 }
 
 //Exit editor

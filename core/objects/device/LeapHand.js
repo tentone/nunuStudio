@@ -1,6 +1,6 @@
 function LeapHand(mode, use_arm)
 {
-	THREE.Scene.call(this);
+	THREE.Object3D.call(this);
 
 	this.name = "leap";
 	this.type = "LeapDevice";
@@ -37,8 +37,7 @@ function LeapHand(mode, use_arm)
 		this.use_arm = use_arm;
 	}
 
-	//Create leap controller and data storage
-	this.controller = new Leap.Controller();
+	//Data storage
 	this.data = null;
 
 	//Start leap worker to collect data
@@ -49,16 +48,19 @@ function LeapHand(mode, use_arm)
 	}).connect();
 }
 
-LeapHand.prototype = Object.create(THREE.Scene.prototype);
+LeapHand.prototype = Object.create(THREE.Object3D.prototype);
 LeapHand.prototype.icon = "editor/files/icons/hw/leap.png";
 
+LeapHand.prototype.initialize = initialize;
 LeapHand.prototype.update = update;
+LeapHand.prototype.toJSON = toJSON;
+
 LeapHand.prototype.setMode = setMode;
-LeapHand.prototype.updatePhysics = updatePhysics;
+LeapHand.prototype.checkGesture = checkGesture;
+
 LeapHand.prototype.addMesh = addMesh;
 LeapHand.prototype.updateMesh = updateMesh;
-LeapHand.prototype.checkGesture = checkGesture;
-LeapHand.prototype.toJSON = toJSON;
+LeapHand.prototype.updatePhysics = updatePhysics;
 
 //Leap Hand Modes
 LeapHand.DESK = 0;
@@ -73,6 +75,19 @@ LeapHand.SWIPE_DOWN = 4;
 LeapHand.CIRCLE = 5;
 LeapHand.SCREEN_TAP = 6;
 LeapHand.KEY_TAP = 7;
+
+//Initialize
+function initialize()
+{
+	for(var i = 0; i < this.children.length; i++)
+	{
+		if(this.children[i].initialize !== undefined)
+		{
+			this.children[i].initialize();
+		}
+	}
+}
+
 
 //Update leap status
 function update()
