@@ -481,7 +481,7 @@ function parseObject(data, geometries, materials)
 			var material = getMaterial(data.material);
 			if(geometry.bones && geometry.bones.length > 0)
 			{
-				object = new THREE.SkinnedMesh(geometry, material);
+				object = new AnimatedModel(geometry, material);
 			}
 			else
 			{
