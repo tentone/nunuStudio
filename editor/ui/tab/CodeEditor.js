@@ -33,6 +33,7 @@ function CodeEditor(parent)
 	});
 
 	//Element atributes
+	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -51,11 +52,18 @@ CodeEditor.id = 0;
 CodeEditor.prototype.update = update;
 CodeEditor.prototype.updateInterface = updateInterface;
 CodeEditor.prototype.destroy = destroy;
+CodeEditor.prototype.activate = activate;
 CodeEditor.prototype.setMode = setMode;
 CodeEditor.prototype.getText = getText;
 CodeEditor.prototype.setText = setText;
 CodeEditor.prototype.attachScript = attachScript;
 CodeEditor.prototype.updateScript = updateScript;
+
+//Activate code editor
+function activate()
+{
+	this.updateScript();
+}
 
 //Return editor text
 function getText()
@@ -79,13 +87,13 @@ function attachScript(script)
 //Update attached script
 function updateScript()
 {
-	if(this.script != null)
+	if(this.script !== null)
 	{
 		this.script.setLoopCode(this.code.getValue());
 	}
 }
 
-//Set language mode (javascript, glsl, ...)
+//Set language mode (javascript, glsl, etc)
 function setMode(mode)
 {
 	this.code.setOption("mode", mode);
@@ -97,12 +105,20 @@ function destroy()
 	this.parent.removeChild(this.element);
 }
 
+//Activate code editor
+
 //Update CodeEditor
 function update(){}
 
 //Update division Size
 function updateInterface()
 {
+	if(this.fit_parent)
+	{
+		this.size.x = this.parent.offsetWidth;
+		this.size.y = this.parent.offsetHeight; 
+	}
+	
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
