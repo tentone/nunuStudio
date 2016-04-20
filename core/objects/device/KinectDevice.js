@@ -82,37 +82,23 @@ function update()
 		while(this.children.length > 0)
 		{
 			this.children.pop();
-			//remove(this.children[0]);
 		}
 
+		var geometry = new THREE.SphereGeometry(0.04, 6, 6);
+		var material = new THREE.MeshPhongMaterial(0xff0000);
+
 		//Fill with new data
-		if(this.data.skeletons.length > 0)
+		for(var j = 0; j < this.data.skeletons.length; j++)
 		{
-			var joints = this.data.skeletons[0].joints;
-
-			//Add children
-			for(var j = 0; j < KinectDevice.JOINTS_NAME.length; j++)
-			{	
-				var ori = 0, end = 0;
-
-				for(var k = 0; k < joints.length; k++)
-				{
-					if(joints[k].name === KinectDevice.JOINTS_NAME[j][0])
-					{
-						ori = k;
-					}
-					else if(joints[k].name === KinectDevice.JOINTS_NAME[j][1])
-					{
-						end = k;
-					}
-				}
-
-				this.add(ObjectUtils.createCylinderBetweenPoints
-				(
-					new THREE.Vector3(joints[ori].x, joints[ori].y, joints[ori].z), 
-					new THREE.Vector3(joints[end].x, joints[end].y, joints[end].z)
-				));
+			var joints = this.data.skeletons[j].joints;
+			for(var i = 0; i < joints.length; i++)
+			{
+				var model = new Model3D(geometry, material);
+				model.position.set(joints[i].x, joints[i].y, joints[i].z);
+				model.castShadow = true;
+				this.add(model);
 			}
+
 		}
 	}
 }

@@ -354,14 +354,6 @@ Interface.initialize = function()
 		});
 	});
 
-	//Test
-	Interface.add_model.addOption(Interface.file_dir + "icons/models/models.png", function()
-	{
-		Editor.addToActualScene(KinectDevice.createCylinderBetweenPoints(new THREE.Vector3(1,1,1), new THREE.Vector3(2,2,2)));
-	});
-
-
-
 	//Add lights
 	Interface.add_light = new ButtonDrawer();
 	Interface.add_light.setImage(Interface.file_dir + "icons/lights/point.png");
@@ -433,7 +425,7 @@ Interface.initialize = function()
 	//Orthographic camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
 	{
-		Editor.addToActualScene(new OrthographicCamera(5, 5, 5, 5, 5, 5));
+		Editor.addToActualScene(new OrthographicCamera(3, 3, 3, 3, 3, 3));
 	});
 
 	//Add script
