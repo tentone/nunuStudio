@@ -354,6 +354,14 @@ Interface.initialize = function()
 		});
 	});
 
+	//Test
+	Interface.add_model.addOption(Interface.file_dir + "icons/models/models.png", function()
+	{
+		Editor.addToActualScene(KinectDevice.createCylinderBetweenPoints(new THREE.Vector3(1,1,1), new THREE.Vector3(2,2,2)));
+	});
+
+
+
 	//Add lights
 	Interface.add_light = new ButtonDrawer();
 	Interface.add_light.setImage(Interface.file_dir + "icons/lights/point.png");
@@ -504,7 +512,7 @@ Interface.initialize = function()
 	//Kinect Skeleton
 	Interface.add_device.addOption(Interface.file_dir + "icons/hw/kinect.png", function()
 	{
-		//TODO <ADD CODE HERE>
+		Editor.addToActualScene(new KinectDevice());
 	});
 
 	//----------------------------------Menu Top Bar----------------------------------

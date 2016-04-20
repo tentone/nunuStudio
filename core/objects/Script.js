@@ -32,13 +32,13 @@ function Script(code_init, code_loop)
 //Function Prototype
 Script.prototype = Object.create(THREE.Object3D.prototype);
 Script.prototype.icon = "editor/files/icons/script/script.png";
-Script.prototype.toJSON = toJSON;
 
 //Runtime functions
 Script.prototype.initialize = initialize;
 Script.prototype.update = update;
 
 //Auxiliar Functions
+Script.prototype.toJSON = toJSON;
 Script.prototype.setLoopCode = setLoopCode;
 Script.prototype.setInitCode = setInitCode;
 

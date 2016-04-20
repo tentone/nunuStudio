@@ -1,6 +1,45 @@
 function KinectDevice()
 {
+	THREE.Object3D.call(this);
 
+	this.type = "Kinect";
+	this.name = "kinect";
+
+	//Initialize a new web socket
+	this.socket = new WebSocket("ws://127.0.0.1:8181");
+	this.connected = false;
+
+	//Received Data
+	this.data = null;
+
+	//Self pointer
+	var self = this;
+
+	//Connection established
+	this.socket.onopen = function()
+	{
+		self.connected = true;
+	};
+
+	//Connection closed
+	this.socket.onclose = function()
+	{
+		self.connected = false;
+	};
+
+	//Receive data from the server
+	this.socket.onmessage = function(event)
+	{
+		if(typeof event.data === "string")
+		{
+			self.data = JSON.parse(event.data);
+		}
+		else if(event.data instanceof Blob)
+		{
+			var data = event.data;
+			//TOTO <STORE CAMERA FEED>
+		}
+	};
 }
 
 KinectDevice.DEPTH = 0;
@@ -10,81 +49,82 @@ KinectDevice.JOINTS_NAME = [["head","shouldercenter"],["shouldercenter","shoulde
 							["shouldercenter","spine"],["spine","hipcenter"],["hipcenter","hipright"],["hipcenter","hipleft"],["hipright","kneeright"],
 							["hipleft","kneeleft"],["kneeright","ankleright"],["kneeleft","ankleleft"],["ankleright","footright"],["ankleleft","footleft"]];
 
+//Function Prototype
+KinectDevice.prototype = Object.create(THREE.Object3D.prototype);
+KinectDevice.prototype.icon = "editor/files/icons/hw/kinect.png";
 
-//KinectDevice.prototype.initialize = initialize;
-//KinectDevice.prototype.update = update;
+//Runtime functions
+KinectDevice.prototype.initialize = initialize;
+KinectDevice.prototype.update = update;
+KinectDevice.prototype.isConnected = isConnected;
+KinectDevice.prototype.setCameraMode = setCameraMode;
 
-
-KinectDevice.initialize = function()
+//Initialize
+function initialize()
 {
-	//Initialize a new web socket
-	KinectDevice.socket = new WebSocket("ws://127.0.0.1:8181");
-	KinectDevice.connected = false;
-
-	//Kinect Skeleton
-	KinectDevice.skeletons = [];
-
-	//Received Data
-	KinectDevice.data = [];
-	KinectDevice.camera_data = null;
-	
-	//Connection established
-	KinectDevice.socket.onopen = function ()
+	//Initialize children
+	for(var i = 0; i < this.children.length; i++)
 	{
-		KinectDevice.connected = true;
-	};
-
-	//Connection closed
-	KinectDevice.socket.onclose = function ()
-	{
-		KinectDevice.connected = false;
-	}
-
-	//Receive data from the server
-	KinectDevice.socket.onmessage = function (event)
-	{
-		if(typeof event.data === "string")
+		if(this.children[i].initialize != undefined)
 		{
-			var data = JSON.parse(event.data);
-			KinectDevice.data = data.skeletons;
-			KinectDevice.updateSkeletons();
+			this.children[i].initialize();
 		}
-		else if(event.data instanceof Blob)
-		{
-			var data = event.data;
-			//TOTO <STORE CAMERA FEED>
-		}
-	};
-
-	/*KinectDevice.debug_scene = new THREE.Scene();
-	var point = new THREE.Vector3(0,0,0);
-	for(var i = 0; i < 19; i++)
-	{
-		KinectDevice.debug_scene.add(KinectDevice.createCylinderBetweenPoints(point, point));
-	}*/
-}
-
-KinectDevice.isConnected = function()
-{
-	return KinectDevice.connected;
-}
-
-KinectDevice.updateSkeletons = function()
-{
-	for(var k = 0; k < KinectDevice.data.length; k++)
-	{
-
-		if(KinectDevice.skeletons[k] === undefined)
-		{
-			KinectDevice.skeletons[k] = new Skeleton();
-			KinectDevice.skeletons[k].createJoints(KinectDevice.JOINTS_NAME);
-		}
-
-		KinectDevice.skeletons[k].updateJoints(KinectDevice.data[k].joints);
 	}
 }
 
-KinectDevice.setCameraMode = function(mode)
+//Update State
+function update()
+{
+	//Check if there is data to process
+	if(this.data !== null)
+	{
+		//Remove all children
+		while(this.children.length > 0)
+		{
+			this.children.pop();
+			//remove(this.children[0]);
+		}
+
+		//Fill with new data
+		if(this.data.skeletons.length > 0)
+		{
+			var joints = this.data.skeletons[0].joints;
+
+			//Add children
+			for(var j = 0; j < KinectDevice.JOINTS_NAME.length; j++)
+			{	
+				var ori = 0, end = 0;
+
+				for(var k = 0; k < joints.length; k++)
+				{
+					if(joints[k].name === KinectDevice.JOINTS_NAME[j][0])
+					{
+						ori = k;
+					}
+					else if(joints[k].name === KinectDevice.JOINTS_NAME[j][1])
+					{
+						end = k;
+					}
+				}
+
+				this.add(ObjectUtils.createCylinderBetweenPoints
+				(
+					new THREE.Vector3(joints[ori].x, joints[ori].y, joints[ori].z), 
+					new THREE.Vector3(joints[end].x, joints[end].y, joints[end].z)
+				));
+			}
+		}
+	}
+}
+
+//Check if there is kinect connected
+function isConnected()
+{
+	return this.connected;
+}
+
+//Set kinect camera mode
+function setCameraMode(mode)
 {
 	if(mode === KinectDevice.COLOR)
 	{
@@ -95,22 +135,3 @@ KinectDevice.setCameraMode = function(mode)
 		socket.send("Depth");
 	}
 }
-
-//Create a cylinder between points a and b
-KinectDevice.createCylinderBetweenPoints = function(a, b)
-{
-	var dist = Math.sqrt(Math.pow((a.x - b.x),2) + Math.pow((a.y - b.y),2) + Math.pow((a.z - b.z),2));
-
-	var geometry = new THREE.CylinderGeometry(0.1, 0.1, dist, 16, 32, false);
-	var material = new THREE.MeshPhongMaterial({color: 0xff0000});
-	var cylinder = new THREE.Mesh(geometry, material);
-	cylinder.position.set(0, dist/2, 0)
-
-	var obj = new THREE.Object3D();
-	obj.position.set(a.x, a.y, a.z);
-	obj.add(cylinder);
-	obj.lookAt(b);
-
-	return obj;
-}
-

@@ -428,6 +428,10 @@ function parseObject(data, geometries, materials)
 
 	switch(data.type)
 	{
+		case "Kinect":
+			object = new KinectDevice();
+			break;
+
 		case "Program":
 			object = new Program(data.name, data.description, data.author, data.version, data.vr);
 			break;
