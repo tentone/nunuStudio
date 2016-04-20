@@ -82,34 +82,6 @@ function ObjectPanel(parent)
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
 		}
 	});
-
-	//Checkbox test
-	/*this.check = new Checkbox(this.element);
-	this.check.size.set(200, 15);
-	this.check.position.set(5, 50);
-	this.check.updateInterface();
-
-	//Color chooser
-	this.color = new ColorChooser(this.element);
-	this.color.size.set(200, 15);
-	this.color.position.set(5, 80);
-	this.color.updateInterface();
-
-	//Slider
-	this.slider = new Slider(this.element);
-	this.slider.size.set(200, 15);
-	this.slider.position.set(5, 110);
-	this.slider.updateInterface();
-
-	//Dropdown
-	this.drop = new DropdownList(this.element);
-	this.drop.size.set(200, 20);
-	this.drop.position.set(0, 140);
-	this.drop.updateInterface();
-
-	this.drop.addValue("AAAAA");
-	this.drop.addValue("BBBBB");
-	this.drop.addValue("CCCCC");*/
 }
 
 //Functions Prototype

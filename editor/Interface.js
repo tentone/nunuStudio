@@ -49,12 +49,10 @@ Interface.initialize = function()
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
 				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
-
-				alert("File loaded");
 			}
 			catch(e)
 			{
-				alert("Error loading file");
+				alert("Error loading file\n("+e+")");
 			}
 		}, ".obj");
 	});
@@ -72,12 +70,10 @@ Interface.initialize = function()
 				ObjectUtils.setShadowCasting(obj.scene, true);
 				ObjectUtils.setShadowReceiving(obj.scene, true);
 				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj.scene));
-
-				alert("File loaded");
 			}
 			catch(e)
 			{
-				alert("Error loading file");
+				alert("Error loading file\n("+e+")");
 			}
 		}, ".dae");
 	});
@@ -94,14 +90,11 @@ Interface.initialize = function()
 
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
-
 				Editor.addToActualScene(obj);
-
-				alert("File loaded");
 			}
 			catch(e)
 			{
-				alert("Error loading file");
+				alert("Error loading file\n("+e+")");
 			}
 		}, ".json");
 	});
@@ -119,15 +112,35 @@ Interface.initialize = function()
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
 				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
-
-				alert("File loaded");
 			}
 			catch(e)
 			{
-				alert("Error loading file");
+				alert("Error loading file\n("+e+")");
 			}
 		}, ".wrl, .vrml");
 	});
+
+	Interface.asset_file.addOption("Import FBX", function()
+	{
+		App.chooseFile(function(event)
+		{
+			var file = event.srcElement.value;
+			try
+			{
+				var loader = new THREE.FBXLoader();
+				var obj = loader.parse(App.readFile(file));
+
+				ObjectUtils.setShadowCasting(obj, true);
+				ObjectUtils.setShadowReceiving(obj, true);
+				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
+			}
+			catch(e)
+			{
+				alert("Error loading file\n("+e+")");
+			}
+		}, ".fbx");
+	});
+
 
 	//Add assets
 	Interface.asset_add = new DropdownMenu(Interface.asset_explorer_bar.element);
@@ -564,7 +577,7 @@ Interface.initialize = function()
 				}
 				catch(e)
 				{
-					alert("Error loading file");
+					alert("Error loading file\n("+e+")");
 				}
 			}, ".isp");
 		}
