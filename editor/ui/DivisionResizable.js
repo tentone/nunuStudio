@@ -72,8 +72,12 @@ DivisionResizable.prototype.destroy = destroy;
 //Remove element
 function destroy()
 {
-	this.parent.removeChild(this.resize_tab);
-	this.parent.removeChild(this.element);
+	try
+	{
+		this.parent.removeChild(this.resize_tab);
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
 }
 
 //Update status

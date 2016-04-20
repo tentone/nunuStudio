@@ -114,11 +114,15 @@ ButtonDrawer.prototype.updatePanelSize = updatePanelSize;
 //Remove element
 function destroy()
 {
-	for(var k = 0; k < this.options.length; k++)
+	try
 	{
-		this.options[k].destroy();
+		for(var k = 0; k < this.options.length; k++)
+		{
+			this.options[k].destroy();
+		}
+		this.parent.removeChild(this.element);
 	}
-	this.parent.removeChild(this.element);
+	catch(e){}
 }
 
 //Update

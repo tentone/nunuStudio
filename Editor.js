@@ -26,6 +26,7 @@ include("editor/ui/Form.js");
 
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/SceneEditor.js");
+include("editor/ui/tab/SettingsTab.js");
 
 include("editor/ui/input/Checkbox.js");
 include("editor/ui/input/Textbox.js");
@@ -228,7 +229,7 @@ Editor.update = function()
 			{
 				Editor.deleteSelectedObject();
 			}
-			/*else if(Keyboard.isKeyPressed(Keyboard.CTRL))
+			else if(Keyboard.isKeyPressed(Keyboard.CTRL))
 			{
 				if(Keyboard.isKeyJustPressed(Keyboard.C))
 				{
@@ -242,7 +243,7 @@ Editor.update = function()
 				{
 					Editor.cutSelectedObject();
 				}
-			}*/
+			}
 		}
 		else
 		{
@@ -792,6 +793,7 @@ Editor.setState = function(state)
 			Editor.program_running.scene.camera = Editor.camera;
 		}
 	}
+	
 	Editor.state = state;
 }
 

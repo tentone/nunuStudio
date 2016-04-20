@@ -115,6 +115,8 @@ function destroy()
 function attachComponent(component)
 {
 	this.component = component;
+	this.component.destroy();
+	this.component.parent = this.division.element;
 	this.division.element.appendChild(this.component.element);
 }
 

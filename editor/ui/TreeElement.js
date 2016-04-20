@@ -196,7 +196,6 @@ function TreeElement(container)
 	//Double click event
 	this.element.ondblclick = function()
 	{
-		//Script
 		if(self.obj instanceof Script)
 		{
 			//Check if there is already a tab with this script attached
@@ -227,8 +226,6 @@ function TreeElement(container)
 				tab.select();
 			}
 		}
-
-		//Scene
 		else if(self.obj instanceof Scene)
 		{
 			//Check if there is already a tab with this scene attached
@@ -357,7 +354,12 @@ function add(label, icon)
 //Remove element
 function destroy()
 {
-	this.parent.removeChild(this.element);
+	try
+	{
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
+	
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].destroy();

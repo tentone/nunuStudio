@@ -21,7 +21,7 @@ function CodeEditor(parent)
 	this.element.className = "container";
 	
 	//Codemirror editor
-	this.code = new CodeMirror(this.element, {value: "//TODO <Insert Code here>\n", lineNumbers: true, mode: "javascript"});
+	this.code = new CodeMirror(this.element, {value: "", lineNumbers: true, mode: "javascript"});
 	this.code.setOption("theme", "monokai");
 	this.code.setOption("mode", "javascript");
 
@@ -63,6 +63,9 @@ CodeEditor.prototype.updateScript = updateScript;
 function activate()
 {
 	this.updateScript();
+
+	Editor.setState(Editor.STATE_IDLE);
+	Editor.resetEditingFlags();
 }
 
 //Return editor text
@@ -102,10 +105,12 @@ function setMode(mode)
 //Remove element
 function destroy()
 {
-	this.parent.removeChild(this.element);
+	try
+	{
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
 }
-
-//Activate code editor
 
 //Update CodeEditor
 function update(){}
