@@ -90,7 +90,6 @@ function initialize()
 	}
 }
 
-
 //Update leap status
 function update()
 {
