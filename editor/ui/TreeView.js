@@ -104,7 +104,12 @@ function add(text, icon)
 //Remove element
 function destroy()
 {
-	this.parent.removeChild(this.element);
+	try
+	{
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
+	
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].destroy();

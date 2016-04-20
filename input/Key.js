@@ -36,7 +36,7 @@ function update(action)
 	//Key Up
 	else
 	{
-		if(this.isPressed)
+		if(this.isPressed === true)
 		{
 			this.justReleased = true;
 		}

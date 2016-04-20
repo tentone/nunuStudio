@@ -41,7 +41,11 @@ Division.prototype.destroy = destroy;
 //Remove element
 function destroy()
 {
-	this.parent.removeChild(this.element);
+	try
+	{
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
 }
 
 //Update Division

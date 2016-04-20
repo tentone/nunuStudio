@@ -49,6 +49,8 @@ function activate()
 {
 	Editor.program.scene = this.scene;
 	Editor.setRenderCanvas(this.element);
+	Editor.setState(Editor.STATE_EDITING);
+	Editor.resetEditingFlags();
 	Editor.resize();
 }
 
@@ -61,7 +63,11 @@ function setScene(scene)
 //Remove element
 function destroy()
 {
-	this.parent.removeChild(this.element);
+	try
+	{
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
 }
 
 //Update SceneEditor

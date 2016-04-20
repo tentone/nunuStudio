@@ -17,7 +17,11 @@ Style.prototype.destroy = destroy;
 //Remove element
 function destroy()
 {
-	document.body.removeChild(this.element);
+	try
+	{
+		document.body.removeChild(this.element);
+	}
+	catch(e){}
 }
 
 //Update

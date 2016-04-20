@@ -1,10 +1,10 @@
 function Keyboard(){}
 
-Keyboard.actions = [];
-Keyboard.keys = [];
-
 Keyboard.initialize = function()
 {
+	Keyboard.actions = [];
+	Keyboard.keys = [];
+
 	//Keyboard keys
 	for(var i = 0; i < 256; i++)
 	{
@@ -29,9 +29,26 @@ Keyboard.initialize = function()
 //Update key pressed sync
 Keyboard.update = function()
 {
-	while(Keyboard.actions.length > 0)
+	var end = 0;
+	while(Keyboard.actions.length > end)
 	{
-		Keyboard.keys[Keyboard.actions.shift()].update(Keyboard.actions.shift());
+		var key = Keyboard.actions.shift();
+		var action = Keyboard.actions.shift();
+
+		Keyboard.keys[key].update(action);
+
+		if(Keyboard.keys[key].justReleased)
+		{
+			Keyboard.actions.push(key);
+			Keyboard.actions.push(action);
+			end += 2;
+		}
+		else if(Keyboard.keys[key].justPressed)
+		{
+			Keyboard.actions.push(key);
+			Keyboard.actions.push(action);
+			end += 2;
+		}
 	}
 }
 

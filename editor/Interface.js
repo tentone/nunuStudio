@@ -572,12 +572,26 @@ Interface.initialize = function()
 
 	Interface.file.addOption("Settings", function()
 	{
-		var settings = Interface.tab.addOption("Settings", Interface.file_dir + "icons/tab/settings.png", true);
-		var settings_panel = new DualDivisionResizable();
-		settings_panel.orientation = DualDivisionResizable.HORIZONTAL;
-		settings_panel.tab_position = 250;
-		settings_panel.div_a.className = "bar";
-		settings.attachComponent(settings_panel);
+		//Check if there is already a settings tab
+		var found = false;
+		for(var i = 0; i < Interface.tab.options.length; i++)
+		{
+			if(Interface.tab.options[i].component instanceof SettingsTab)
+			{
+				found = true;
+				Interface.tab.options[i].select();
+				break;
+			}
+		}
+
+		//If not create one
+		if(!found)
+		{
+			var tab = Interface.tab.addOption("Settings", Interface.file_dir + "icons/tab/settings.png", true);
+			var settings = new SettingsTab(tab.element);
+			tab.attachComponent(settings);
+			tab.select();
+		}
 	});
 
 	Interface.file.addOption("Publish", function()

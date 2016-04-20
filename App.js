@@ -30,13 +30,10 @@ include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
-include("core/ObjectLoader.js");
-include("core/Program.js");
-include("core/ObjectUtils.js");
-
+include("core/objects/animation/Bone.js");
+include("core/objects/animation/Skeleton.js");
 include("core/objects/device/LeapHand.js");
 include("core/objects/device/KinectDevice.js");
-include("core/objects/Scene.js");
 include("core/objects/lights/PointLight.js");
 include("core/objects/lights/SpotLight.js");
 include("core/objects/lights/AmbientLight.js");
@@ -45,11 +42,15 @@ include("core/objects/lights/HemisphereLight.js");
 include("core/objects/lights/Sky.js");
 include("core/objects/cameras/PerspectiveCamera.js");
 include("core/objects/cameras/OrthographicCamera.js");
+include("core/objects/Scene.js");
 include("core/objects/Container.js");
 include("core/objects/Script.js");
 include("core/objects/Model3D.js");
 include("core/objects/Text3D.js");
 include("core/objects/Sprite.js");
+include("core/ObjectLoader.js");
+include("core/Program.js");
+include("core/ObjectUtils.js");
 
 //App class
 function App(){}
