@@ -222,26 +222,43 @@ function TreeElement(container)
 				var code = new CodeEditor();
 				code.attachScript(self.obj);
 				tab.attachComponent(code);
-
+				
 				//Select added tab
-				for(var i = 0; i < Interface.tab.options.length; i++)
-				{
-					if(Interface.tab.options[i].component instanceof CodeEditor)
-					{
-						if(Interface.tab.options[i].component.script === self.obj)
-						{
-							Interface.tab.selectOption(i);
-							break;
-						}
-					}
-				}
+				tab.select();
 			}
 		}
 
 		//Scene
 		else if(self.obj instanceof Scene)
 		{
-			//TODO <ADD CODE HERE>
+			//Check if there is already a tab with this scene attached
+			var found = false;
+			for(var i = 0; i < Interface.tab.options.length; i++)
+			{
+				if(Interface.tab.options[i].component instanceof SceneEditor)
+				{
+					//If found select it
+					if(Interface.tab.options[i].component.scene === self.obj)
+					{
+						found = true;
+						Interface.tab.selectOption(i);
+						break;
+					}
+				}
+			}
+
+			//If no tab is found create new one with a scene container
+			if(!found)
+			{
+				//Scene Canvas
+				var tab = Interface.tab.addOption(self.obj.name, Interface.file_dir + "icons/tab/scene.png", true);
+				var container = new SceneEditor();
+				container.setScene(self.obj);
+				tab.attachComponent(container);
+
+				//Select tab
+				tab.select();
+			}
 		}
 	};
 

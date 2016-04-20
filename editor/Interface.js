@@ -10,11 +10,11 @@ Interface.initialize = function()
 	Interface.theme.setStyleSheet(Interface.file_dir + "css/dark.css");
 
 	//------------------------------------Tab Container-------------------------------
-	Interface.tab = new TabContainer();
+	Interface.tab = new TabGroup();
 	
 	//Scene Canvas
 	var scene = Interface.tab.addOption("Scene", Interface.file_dir + "icons/tab/scene.png", true);
-	Interface.canvas = new SceneContainer();
+	Interface.canvas = new SceneEditor();
 	Interface.canvas.setScene(Editor.program.scene);
 	scene.attachComponent(Interface.canvas);
 
@@ -666,7 +666,6 @@ Interface.initialize = function()
 //Loop update elements
 Interface.update = function()
 {
-	Interface.tab.update();
 	Interface.explorer.update();
 	Interface.asset_explorer.update();
 	Interface.explorer_resizable.update();

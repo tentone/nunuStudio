@@ -15,16 +15,17 @@ include("editor/ui/ButtonImage.js");
 include("editor/ui/ButtonDrawer.js");
 include("editor/ui/Style.js");
 include("editor/ui/Canvas.js");
-include("editor/ui/TabContainer.js");
+include("editor/ui/TabGroup.js");
 include("editor/ui/TabElement.js");
 include("editor/ui/DualDivisionResizable.js");
 include("editor/ui/ButtonImageToggle.js");
-include("editor/ui/CodeEditor.js");
 include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
-include("editor/ui/SceneContainer.js");
 include("editor/ui/Form.js");
+
+include("editor/ui/tab/CodeEditor.js");
+include("editor/ui/tab/SceneEditor.js");
 
 include("editor/ui/input/Checkbox.js");
 include("editor/ui/input/Textbox.js");

@@ -41,6 +41,7 @@ function DualDivisionResizable(parent)
 	this.resize_tab.style.position = "absolute";
 	this.resize_tab.className = "panel_res_hor_tab";
 
+	//Add divs and tabs to element
 	this.element.appendChild(this.div_a);
 	this.element.appendChild(this.div_b);
 	this.element.appendChild(this.resize_tab);

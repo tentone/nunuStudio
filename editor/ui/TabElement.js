@@ -5,7 +5,7 @@ function TabElement(name, image, closeable, container, index)
 	this.image = image;
 	this.closeable = closeable;
 
-	//Container info
+	//Tab group container information
 	this.index = index;
 	this.container = container;
 	this.component = null;
@@ -71,26 +71,38 @@ function TabElement(name, image, closeable, container, index)
 	this.division.updateInterface();
 }
 
+//Function prototypes
 TabElement.prototype.update = update;
 TabElement.prototype.updateInterface = updateInterface;
-TabElement.prototype.attachComponent = attachComponent;
 TabElement.prototype.destroy = destroy;
+TabElement.prototype.activate = activate;
+TabElement.prototype.select = select;
+TabElement.prototype.attachComponent = attachComponent;
 TabElement.prototype.isSelected = isSelected;
 
-//Check if taboption is selected
+//Activate this tab
+function activate()
+{
+	if(this.component !== null)
+	{
+		this.component.activate();
+	}
+}
+
+//Selects this tab element on tabcontainer
+function select()
+{
+	this.container.selectOption(this.index);
+}
+
+//Check if this tab element is selected
 function isSelected()
 {
 	return this.index === this.container.options_selected;
 }
 
 //Update taboption status
-function update()
-{
-	if(this.component !== null)
-	{
-		this.component.update();
-	}
-}
+function update(){}
 
 //Destroy
 function destroy()

@@ -1,4 +1,4 @@
-function SceneContainer(parent)
+function SceneEditor(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,8 +11,8 @@ function SceneContainer(parent)
 	}
 	
 	//ID
-	var id = "scene_container" + SceneContainer.id;
-	SceneContainer.id++;
+	var id = "scene_editor" + SceneEditor.id;
+	SceneEditor.id++;
 
 	//Create Element
 	this.element = document.createElement("canvas");
@@ -22,6 +22,7 @@ function SceneContainer(parent)
 	this.element.style.left = "0px";
 
 	//Element atributes
+	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -33,14 +34,23 @@ function SceneContainer(parent)
 	this.parent.appendChild(this.element);
 }
 
-//SceneContainer conter
-SceneContainer.id = 0;
+//SceneEditor conter
+SceneEditor.id = 0;
 
 //Functions Prototype
-SceneContainer.prototype.update = update;
-SceneContainer.prototype.updateInterface = updateInterface;
-SceneContainer.prototype.destroy = destroy;
-SceneContainer.prototype.setScene = setScene;
+SceneEditor.prototype.update = update;
+SceneEditor.prototype.updateInterface = updateInterface;
+SceneEditor.prototype.destroy = destroy;
+SceneEditor.prototype.activate = activate;
+SceneEditor.prototype.setScene = setScene;
+
+//Activate scene editor
+function activate()
+{
+	Editor.program.scene = this.scene;
+	Editor.setRenderCanvas(this.element);
+	Editor.resize();
+}
 
 //Set scene
 function setScene(scene)
@@ -54,12 +64,18 @@ function destroy()
 	this.parent.removeChild(this.element);
 }
 
-//Update SceneContainer
+//Update SceneEditor
 function update(){}
 
 //Update division Size
 function updateInterface()
 {
+	if(this.fit_parent)
+	{
+		this.size.x = this.parent.offsetWidth;
+		this.size.y = this.parent.offsetHeight; 
+	}
+	
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";

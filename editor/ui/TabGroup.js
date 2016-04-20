@@ -1,4 +1,4 @@
-function TabContainer(parent)
+function TabGroup(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,8 +11,8 @@ function TabContainer(parent)
 	}
 	
 	//ID
-	var id = "tab_container" + TabContainer.id;
-	TabContainer.id++;
+	var id = "tab_group" + TabGroup.id;
+	TabGroup.id++;
 
 	//Create element
 	this.element = document.createElement("div");
@@ -34,23 +34,27 @@ function TabContainer(parent)
 	this.parent.appendChild(this.element);
 }
 
-//TabContainer conter
-TabContainer.id = 0;
+//TabGroup conter
+TabGroup.id = 0;
 
 //Functions Prototype
-TabContainer.prototype.update = update;
-TabContainer.prototype.updateInterface = updateInterface;
-TabContainer.prototype.destroy = destroy;
-TabContainer.prototype.addOption = addOption;
-TabContainer.prototype.removeOption = removeOption;
-TabContainer.prototype.updateOptionIndex = updateOptionIndex;
-TabContainer.prototype.selectOption = selectOption;
+TabGroup.prototype.update = update;
+TabGroup.prototype.updateInterface = updateInterface;
+TabGroup.prototype.destroy = destroy;
+TabGroup.prototype.addOption = addOption;
+TabGroup.prototype.removeOption = removeOption;
+TabGroup.prototype.updateOptionIndex = updateOptionIndex;
+TabGroup.prototype.selectOption = selectOption;
 
 //Select option
 function selectOption(index)
 {
-	this.options_selected = index;
-	this.updateInterface();
+	if(index >= 0 && index < this.options.length)
+	{
+		this.options_selected = index;
+		this.options[index].activate();
+		this.updateInterface();
+	}
 }
 
 //Add tab
@@ -89,14 +93,8 @@ function destroy()
 	this.parent.removeChild(this.element);
 }
 
-//Update TabContainer
-function update()
-{
-	for(var i = 0; i < this.options.length; i++)
-	{
-		this.options[i].update();
-	}
-}
+//Update TabGroup
+function update(){}
 
 //Update division Size
 function updateInterface()
