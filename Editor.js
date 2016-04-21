@@ -41,6 +41,7 @@ include("editor/panels/ObjectPanel.js");
 include("editor/panels/LightPanel.js");
 include("editor/panels/SkyPanel.js");
 include("editor/panels/LeapPanel.js");
+include("editor/panels/ScriptPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -242,6 +243,18 @@ Editor.update = function()
 				else if(Keyboard.isKeyJustPressed(Keyboard.X))
 				{
 					Editor.cutSelectedObject();
+				}
+				else if(Keyboard.isKeyJustPressed(Keyboard.Y))
+				{
+					//TODO <ADD CODE HERE>
+				}
+				else if(Keyboard.isKeyJustPressed(Keyboard.Z))
+				{
+					//TODO <ADD CODE HERE>
+				}
+				else if(Keyboard.isKeyJustPressed(Keyboard.W))
+				{
+					//TODO <ADD CODE HERE>
 				}
 			}
 		}
@@ -593,6 +606,10 @@ Editor.updateSelectedObjectPanel = function()
 	else if(Editor.selected_object instanceof LeapHand)
 	{
 		Interface.form = new LeapPanel(Interface.explorer_resizable.div_b);
+	}
+	else if(Editor.selected_object instanceof Script)
+	{
+		Interface.form = new ScriptPanel(Interface.explorer_resizable.div_b);
 	}
 	else
 	{

@@ -84,7 +84,7 @@ function setText(text)
 function attachScript(script)
 {
 	this.script = script;
-	this.setText(script.code_loop);
+	this.setText(script.code);
 }
 
 //Update attached script
@@ -92,7 +92,7 @@ function updateScript()
 {
 	if(this.script !== null)
 	{
-		this.script.setLoopCode(this.code.getValue());
+		this.script.setCode(this.code.getValue());
 	}
 }
 

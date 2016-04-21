@@ -1,4 +1,4 @@
-function Script(code_init, code_loop)
+function Script(code, mode)
 {
 	THREE.Object3D.call(this);
 
@@ -11,22 +11,22 @@ function Script(code_init, code_loop)
 	this.matrixAutoUpdate = false;
 
 	//Script Code
-	this.code_loop = "//ADD LOOP CODE HERE";
-	this.code_init = "//ADD INITIALIZATION CODE HERE";
+	this.code = "//ADD CODE HERE";
+	this.func = null;
+	this.mode = Script.INIT;
 
-	//Compile init and loop code
-	if(code_init !== undefined)
+	//Get arguments
+	if(code !== undefined)
 	{
-		this.setInitCode(code_init);
+		this.code = code;
 	}
-	if(code_loop !== undefined)
+	if(mode !== undefined)
 	{
-		this.setLoopCode(code_loop);
+		this.mode = mode;
 	}
-	
+
 	//Script functions
-	this.setLoopCode(this.code_loop);
-	this.setInitCode(this.code_init);
+	this.setCode(this.code);
 }
 
 //Function Prototype
@@ -36,25 +36,31 @@ Script.prototype.icon = "editor/files/icons/script/script.png";
 //Runtime functions
 Script.prototype.initialize = initialize;
 Script.prototype.update = update;
-
-//Auxiliar Functions
 Script.prototype.toJSON = toJSON;
-Script.prototype.setLoopCode = setLoopCode;
-Script.prototype.setInitCode = setInitCode;
+Script.prototype.setCode = setCode;
+Script.prototype.setMode = setMode;
+
+//Script mode
+Script.INIT = 0;
+Script.LOOP = 1;
 
 //Initialize
 function initialize()
 {
 	//Run script
-	try
+	if(this.mode === Script.INIT)
 	{
-		this.func_init();
+		try
+		{
+			this.func();
+		}
+		catch(e){}
 	}
-	catch(e){}
 
+	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].initialize != undefined)
+		if(this.children[i].initialize !== undefined)
 		{
 			this.children[i].initialize();
 		}
@@ -65,16 +71,19 @@ function initialize()
 function update()
 {
 	//Run script
-	try
+	if(this.mode === Script.LOOP)
 	{
-		this.func_loop();
+		try
+		{
+			this.func();
+		}
+		catch(e){}
 	}
-	catch(e){}
 
 	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].update != undefined)
+		if(this.children[i].update !== undefined)
 		{
 			this.children[i].update();
 		}
@@ -82,25 +91,20 @@ function update()
 }
 
 //Set initialization code
-function setInitCode(code)
+function setCode(code)
 {
 	try
 	{
-		this.code_init = code;
-		this.func_init = Function(this.code_init);
+		this.code = code;
+		this.func = Function(this.code);
 	}
 	catch(e){}
 }
 
-//Set loop code
-function setLoopCode(code)
+//Set script mode
+function setMode(mode)
 {
-	try
-	{
-		this.code_loop = code;
-		this.func_loop = Function(this.code_loop);
-	}
-	catch(e){}
+	this.mode = mode;
 }
 
 //Create JSON for object
@@ -133,8 +137,8 @@ function toJSON(meta)
 	object.uuid = this.uuid;
 	object.type = this.type;
 
-	object.code_init = this.code_init;
-	object.code_loop = this.code_loop;
+	object.code = this.code;
+	object.mode = this.mode;
 
 	if(this.name !== '')
 	{

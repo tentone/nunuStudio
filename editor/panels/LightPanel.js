@@ -71,6 +71,7 @@ LightPanel.prototype = Object.create(Panel.prototype);
 LightPanel.prototype.attachObject = attachObject;
 LightPanel.prototype.updatePanel = updatePanel;
 
+//Update panel content from attached object
 function updatePanel()
 {
 	if(this.obj !== null)

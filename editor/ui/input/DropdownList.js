@@ -16,6 +16,7 @@ function DropdownList(parent)
 
 	//Create element
 	this.element = document.createElement("select");
+	this.element.className = "text_box";
 	this.element.id = id;
 	this.element.style.position = "absolute";
 
@@ -23,7 +24,6 @@ function DropdownList(parent)
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	this.callback = null;
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -39,6 +39,8 @@ DropdownList.prototype.destroy = destroy;
 DropdownList.prototype.getValue = getValue;
 DropdownList.prototype.addValue = addValue;
 DropdownList.prototype.setOnChange = setOnChange;
+DropdownList.prototype.getSelectedIndex = getSelectedIndex;
+DropdownList.prototype.setSelectedIndex = setSelectedIndex;
 
 //Set onchange callback
 function setOnChange(callback)
@@ -47,10 +49,18 @@ function setOnChange(callback)
 }
 
 //Add element
-function addValue(text)
+function addValue(text, value)
 {
 	var option = document.createElement("option");
-	option.value = text;
+	if(value !== undefined)
+	{
+		option.value = value;
+	}
+	else
+	{
+		option.value = text;
+	}
+	
 	option.innerHTML = text;
 	this.element.appendChild(option);
 }
@@ -59,6 +69,18 @@ function addValue(text)
 function getValue()
 {
 	return this.element.value;
+}
+
+//Get dropdownlist selected index
+function getSelectedIndex()
+{
+	return this.element.selectedIndex;
+}
+
+//Set dropdownlist selected index
+function setSelectedIndex(index)
+{
+	this.element.selectedIndex = index;
 }
 
 //Remove element
