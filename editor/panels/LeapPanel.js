@@ -99,6 +99,7 @@ LeapPanel.prototype = Object.create(Panel.prototype);
 LeapPanel.prototype.attachObject = attachObject;
 LeapPanel.prototype.updatePanel = updatePanel;
 
+//Update panel content from attached object
 function updatePanel()
 {
 	if(this.obj !== null)

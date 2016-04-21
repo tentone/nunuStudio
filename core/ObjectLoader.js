@@ -511,7 +511,7 @@ function parseObject(data, geometries, materials)
 			break;
 
 		case "Script":
-			object = new Script(data.code_init, data.code_loop);
+			object = new Script(data.code, data.mode);
 			break;
 
 		default:
