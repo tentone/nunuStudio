@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Runtime.Serialization;
@@ -8,11 +6,9 @@ using System.Runtime.Serialization.Json;
 using Microsoft.Kinect;
 using System.Windows;
 
-namespace Kinect.Server
+namespace KinectServer
 {
-    /// <summary>
-    /// Serializes a Kinect skeleton to JSON fromat.
-    /// </summary>
+    //Serializes a Kinect skeleton to JSON fromat.
     public static class SkeletonSerializer
     {
         [DataContract]
@@ -48,13 +44,7 @@ namespace Kinect.Server
             public double Z { get; set; }
         }
 
-        /// <summary>
-        /// Serializes an array of Kinect skeletons into an array of JSON skeletons.
-        /// </summary>
-        /// <param name="skeletons">The Kinect skeletons.</param>
-        /// <param name="mapper">The coordinate mapper.</param>
-        /// <param name="mode">Mode (color or depth).</param>
-        /// <returns>A JSON representation of the skeletons.</returns>
+        //Serializes an array of Kinect skeletons into an array of JSON skeletons.The Kinect skeletons.The coordinate mapper.Mode (color or depth)
         public static string Serialize(this List<Skeleton> skeletons, CoordinateMapper mapper, Mode mode)
         {
             JSONSkeletonCollection jsonSkeletons = new JSONSkeletonCollection { Skeletons = new List<JSONSkeleton>() };
@@ -102,11 +92,7 @@ namespace Kinect.Server
             return Serialize(jsonSkeletons);
         }
 
-        /// <summary>
-        /// Serializes an object to JSON.
-        /// </summary>
-        /// <param name="obj">The specified object.</param>
-        /// <returns>A JSON representation of the object.</returns>
+        //Serializes an object to JSON.
         private static string Serialize(object obj)
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());

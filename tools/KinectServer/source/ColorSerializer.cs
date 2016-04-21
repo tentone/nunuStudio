@@ -1,52 +1,31 @@
 ﻿using Microsoft.Kinect;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Kinect.Server
+namespace KinectServer
 {
-    /// <summary>
-    /// Handles color frame serialization.
-    /// </summary>
+    //Handles color frame serialization.
     public static class ColorSerializer
     {
-        /// <summary>
-        /// The color bitmap source.
-        /// </summary>
+        //The color bitmap source.
         static WriteableBitmap _colorBitmap = null;
 
-        /// <summary>
-        /// The RGB pixel values.
-        /// </summary>
+        //The RGB pixel values.
         static byte[] _colorPixels = null;
 
-        /// <summary>
-        /// Color frame width.
-        /// </summary>
+        //Color frame width.
         static int _colorWidth;
 
-        /// <summary>
-        /// Color frame height.
-        /// </summary>
+        //Color frame height.
         static int _colorHeight;
 
-        /// <summary>
-        /// Color frame stride.
-        /// </summary>
+        //Color frame stride.
         static int _colorStride;
 
-        /// <summary>
-        /// Serializes a color frame.
-        /// </summary>
-        /// <param name="frame">The specified color frame.</param>
-        /// <returns>A binary representation of the frame.</returns>
+        //Serializes a color frame. The specified color frame returns a binary representation of the frame
         public static byte[] Serialize(this ColorImageFrame frame)
         {
-            if (_colorBitmap == null)
+            if(_colorBitmap == null)
             {
                 _colorWidth = frame.Width;
                 _colorHeight = frame.Height;

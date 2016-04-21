@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Fleck;
 using Microsoft.Kinect;
 
 
-namespace Kinect.Server
+namespace KinectServer
 {
     class Program
     {
         static List<IWebSocketConnection> _clients = new List<IWebSocketConnection>();
-
         static Skeleton[] _skeletons = new Skeleton[6];
-
         static Mode _mode = Mode.Color;
-
         static CoordinateMapper _coordinateMapper;
 
         static void Main(string[] args)
         {
             InitializeConnection();
             InitilizeKinect();
-
             Console.ReadLine();
         }
 
@@ -81,15 +76,15 @@ namespace Kinect.Server
 
         static void Sensor_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
-            using (var frame = e.OpenColorImageFrame())
+            using(var frame = e.OpenColorImageFrame())
             {
-                if (frame != null)
+                if(frame != null)
                 {
-                    if (_mode == Mode.Color)
+                    if(_mode == Mode.Color)
                     {
                         var blob = frame.Serialize();
 
-                        foreach (var socket in _clients)
+                        foreach(var socket in _clients)
                         {
                             socket.Send(blob);
                         }
@@ -97,15 +92,15 @@ namespace Kinect.Server
                 }
             }
 
-            using (var frame = e.OpenDepthImageFrame())
+            using(var frame = e.OpenDepthImageFrame())
             {
-                if (frame != null)
+                if(frame != null)
                 {
-                    if (_mode == Mode.Depth)
+                    if(_mode == Mode.Depth)
                     {
                         var blob = frame.Serialize();
 
-                        foreach (var socket in _clients)
+                        foreach(var socket in _clients)
                         {
                             socket.Send(blob);
                         }
@@ -113,19 +108,19 @@ namespace Kinect.Server
                 }
             }
 
-            using (var frame = e.OpenSkeletonFrame())
+            using(var frame = e.OpenSkeletonFrame())
             {
-                if (frame != null)
+                if(frame != null)
                 {
                     frame.CopySkeletonDataTo(_skeletons);
 
                     var users = _skeletons.Where(s => s.TrackingState == SkeletonTrackingState.Tracked).ToList();
 
-                    if (users.Count > 0)
+                    if(users.Count > 0)
                     {
                         string json = users.Serialize(_coordinateMapper, _mode);
 
-                        foreach (var socket in _clients)
+                        foreach(var socket in _clients)
                         {
                             socket.Send(json);
                         }

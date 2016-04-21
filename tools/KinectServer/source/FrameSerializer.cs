@@ -8,19 +8,12 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Kinect.Server
+namespace KinectServer
 {
-    /// <summary>
-    /// Converts a Kinect frame into an HTML5 blob.
-    /// </summary>
+    //Converts a Kinect frame into an HTML5 blob.
     public static class FrameSerializer
     {
-        /// <summary>
-        /// Converts a WriteableBitmap into a byte array.
-        /// </summary>
-        /// <param name="bitmap">The specified bitmap.</param>
-        /// <param name="file">The specified temporary file.</param>
-        /// <returns>A binary representation of the bitmap.</returns>
+        //Converts a WriteableBitmap into a byte array.
         public static byte[] CreateBlob(WriteableBitmap bitmap, string file)
         {
             // Save bitmap.

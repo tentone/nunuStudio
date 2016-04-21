@@ -24,3 +24,11 @@ C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\KinectServer\bin\Debug\Flec
 C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\KinectServer\bin\Debug\Microsoft.Kinect.dll
 C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\KinectServer\bin\Debug\Microsoft.Kinect.xml
 C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\KinectServer\obj\x86\Debug\Kinect.Server.csprojResolveAssemblyReference.cache
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\obj\x86\Debug\Kinect.Server.exe
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\obj\x86\Debug\Kinect.Server.pdb
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\bin\Debug\Kinect.Server.exe
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\bin\Debug\Kinect.Server.pdb
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\bin\Debug\Fleck.dll
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\bin\Debug\Microsoft.Kinect.dll
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\bin\Debug\Microsoft.Kinect.xml
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\obj\x86\Debug\Kinect.Server.csprojResolveAssemblyReference.cache
