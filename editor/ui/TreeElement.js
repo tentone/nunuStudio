@@ -413,7 +413,7 @@ function updateInterface()
 	this.label.position.set(45 + offset, 10);
 	this.label.size.set(this.size.x - (45 + offset), 0);
 	this.label.updateInterface();
-
+	
 	//Base
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";

@@ -5,14 +5,13 @@ function ObjectPanel(parent)
 	//Self pointer
 	var self = this;
 
-	//Name text
+	//Name
 	var text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Name");
 	text.position.set(5, 20);
 	text.updateInterface();
 
-	//Name textbox
 	this.name = new Textbox(this.element);
 	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
@@ -30,11 +29,11 @@ function ObjectPanel(parent)
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Position");
-	text.position.set(5, 50);
+	text.position.set(5, 45);
 	text.updateInterface();
 
 	this.pos = new Positionbox(this.element);
-	this.pos.position.set(56, 40);
+	this.pos.position.set(56, 35);
 	this.pos.updateInterface();
 	this.pos.setOnChange(function()
 	{
@@ -49,11 +48,11 @@ function ObjectPanel(parent)
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Scale");
-	text.position.set(5, 75);
+	text.position.set(5, 70);
 	text.updateInterface();
 
 	this.scale = new Positionbox(this.element);
-	this.scale.position.set(45, 65);
+	this.scale.position.set(45, 60);
 	this.scale.updateInterface();
 	this.scale.setOnChange(function()
 	{
@@ -68,11 +67,11 @@ function ObjectPanel(parent)
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Rotation");
-	text.position.set(5, 100);
+	text.position.set(5, 95);
 	text.updateInterface();
 
 	this.rotation = new Positionbox(this.element);
-	this.rotation.position.set(57, 90);
+	this.rotation.position.set(57, 85);
 	this.rotation.updateInterface();
 	this.rotation.setOnChange(function()
 	{
@@ -82,6 +81,20 @@ function ObjectPanel(parent)
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
 		}
 	});
+
+	//Type
+	text = new Text(this.element);
+	text.setAlignment(Text.LEFT);
+	text.setText("Type");
+	text.position.set(5, 120);
+	text.updateInterface();
+
+	this.type = new Text(this.element);
+	this.type.setAlignment(Text.LEFT);
+	this.type.setText("");
+	this.type.position.set(35, 120);
+	this.type.updateInterface();
+
 }
 
 //Functions Prototype
@@ -99,6 +112,8 @@ function updatePanel()
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
+
+		this.type.setText(this.obj.type);
 	}
 }
 

@@ -30,11 +30,11 @@ function LeapPanel(parent)
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Position");
-	text.position.set(5, 50);
+	text.position.set(5, 45);
 	text.updateInterface();
 
 	this.pos = new Positionbox(this.element);
-	this.pos.position.set(56, 40);
+	this.pos.position.set(56, 35);
 	this.pos.updateInterface();
 	this.pos.setOnChange(function()
 	{
@@ -49,11 +49,11 @@ function LeapPanel(parent)
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Scale");
-	text.position.set(5, 75);
+	text.position.set(5, 70);
 	text.updateInterface();
 
 	this.scale = new Positionbox(this.element);
-	this.scale.position.set(45, 65);
+	this.scale.position.set(45, 60);
 	this.scale.updateInterface();
 	this.scale.setOnChange(function()
 	{
