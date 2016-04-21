@@ -30,11 +30,11 @@ function LightPanel(parent)
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Position");
-	text.position.set(5, 50);
+	text.position.set(5, 45);
 	text.updateInterface();
 
 	this.pos = new Positionbox(this.element);
-	this.pos.position.set(56, 40);
+	this.pos.position.set(56, 35);
 	this.pos.updateInterface();
 	this.pos.setOnChange(function()
 	{
@@ -49,12 +49,12 @@ function LightPanel(parent)
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Color");
-	text.position.set(5, 75);
+	text.position.set(5, 70);
 	text.updateInterface();
 
 	this.color = new ColorChooser(this.element);
 	this.color.size.set(80, 18);
-	this.color.position.set(50, 65);
+	this.color.position.set(50, 60);
 	this.color.updateInterface();
 	this.color.setOnChange(function()
 	{
