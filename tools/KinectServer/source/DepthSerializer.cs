@@ -6,48 +6,30 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
-namespace Kinect.Server
+namespace KinectServer
 {
-    /// <summary>
-    /// Handles depth frame serialization.
-    /// </summary>
+    //Handles depth frame serialization.
     public static class DepthSerializer
     {
-        /// <summary>
-        /// The depth bitmap source.
-        /// </summary>
+        //The depth bitmap source.
         static WriteableBitmap _depthBitmap = null;
 
-        /// <summary>
-        /// The RGB depth values.
-        /// </summary>
+        //The RGB depth values.
         static byte[] _depthPixels = null;
 
-        /// <summary>
-        /// Depth frame width.
-        /// </summary>
+        //Depth frame width.
         static int _depthWidth;
 
-        /// <summary>
-        /// Depth frame height.
-        /// </summary>
+        //Depth frame height.
         static int _depthHeight;
 
-        /// <summary>
-        /// Depth frame stride.
-        /// </summary>
+        //Depth frame stride.
         static int _depthStride;
 
-        /// <summary>
-        /// The actual depth values.
-        /// </summary>
+        //The actual depth values.
         static short[] _depthData = null;
 
-        /// <summary>
-        /// Serializes a depth frame.
-        /// </summary>
-        /// <param name="frame">The specified depth frame.</param>
-        /// <returns>A binary representation of the frame.</returns>
+        //Serializes a depth frame.
         public static byte[] Serialize(this DepthImageFrame frame)
         {
             if (_depthBitmap == null)
@@ -62,12 +44,12 @@ namespace Kinect.Server
 
             frame.CopyPixelDataTo(_depthData);
 
-            for (int depthIndex = 0, colorIndex = 0; depthIndex < _depthData.Length && colorIndex < _depthPixels.Length; depthIndex++, colorIndex += 4)
+            for(int depthIndex = 0, colorIndex = 0; depthIndex < _depthData.Length && colorIndex < _depthPixels.Length; depthIndex++, colorIndex += 4)
             {
-                // Get the depth value.
+                //Get the depth value.
                 int depth = _depthData[depthIndex] >> DepthImageFrame.PlayerIndexBitmaskWidth;
 
-                // Equal coloring for monochromatic histogram.
+                //Equal coloring for monochromatic histogram.
                 byte intensity = (byte)(255 - (255 * Math.Max(depth - Constants.MIN_DEPTH_DISTANCE, 0) / (Constants.MAX_DEPTH_DISTANCE_OFFSET)));
 
                 _depthPixels[colorIndex + 0] = intensity;

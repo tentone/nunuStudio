@@ -1,2 +1,2 @@
-cd nwjs/win
-start nw.exe ../..
+start nwjs/win/nw.exe .
+start tools/kinectserver/bin/server.exe
