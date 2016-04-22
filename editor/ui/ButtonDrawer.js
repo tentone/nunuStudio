@@ -11,8 +11,8 @@ function ButtonDrawer(parent)
 	}
 	
 	//ID
-	var id = "but_drawer" + ButtonDrawer.id;
-	var id_panel = "but_drawer_panel" + ButtonDrawer.id;
+	var id = "drawer" + ButtonDrawer.id;
+	var id_panel = "drawerpanel" + ButtonDrawer.id;
 	ButtonDrawer.id++;
 
 	//Create element
@@ -59,11 +59,6 @@ function ButtonDrawer(parent)
 
 	//Click event
 	var self = this;
-	this.element.onclick = function()
-	{
-		self.expanded = true;
-		self.updateInterface();
-	};
 
 	//Mouse over and mouse out events
 	this.element.onmouseover = function()
@@ -73,7 +68,7 @@ function ButtonDrawer(parent)
 		self.element.className = "button_over";
 	};
 
-	this.element.onmouseout = function()
+	this.element.onmouseleave = function()
 	{
 		self.expanded = false;
 		self.updateInterface();
@@ -86,7 +81,7 @@ function ButtonDrawer(parent)
 		self.updateInterface();
 	};
 
-	this.panel.onmouseout = function()
+	this.panel.onmouseleave = function()
 	{
 		self.expanded = false;
 		self.updateInterface();

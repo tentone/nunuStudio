@@ -1,14 +1,12 @@
 function Script(code, mode)
 {
 	THREE.Object3D.call(this);
-
-	//Set default name and object type
-	this.name = "script";
+	
 	this.type = "Script";
+	this.name = "script";
 	
 	//Disable auto matrix updates
 	this.rotationAutoUpdate = false;
-	this.matrixAutoUpdate = false;
 
 	//Script Code
 	this.code = "//ADD CODE HERE";

@@ -31,17 +31,9 @@ function Button(parent)
 	
 	//Button text and callback
 	this.text = "text";
-	this.callback = null;
 
-	//Click event
+	//Self pointer
 	var self = this;
-	this.element.onclick = function()
-	{
-		if(self.callback != null)
-		{
-			self.callback();
-		}
-	};
 
 	//Mouse over and mouse out events
 	this.element.onmouseover = function()
@@ -97,7 +89,6 @@ function destroy()
 
 //Update status
 function update(){}
-
 
 //Set button callback function
 function setCallback(callback)

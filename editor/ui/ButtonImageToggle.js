@@ -38,20 +38,11 @@ function ButtonImageToggle(parent)
 	this.image_scale = new THREE.Vector2(1,1);
 	this.image = "";
 
-	//Callback to toggle button
-	this.callback = function()
-	{
-		self.selected = !self.selected;
-	};
-
 	//Click event
 	var self = this;
 	this.element.onclick = function()
 	{
-		if(self.callback != null)
-		{
-			self.callback();
-		}
+		self.selected = !self.selected;
 	};
 
 	//Mouse over and mouse out events
@@ -98,7 +89,12 @@ function update(){}
 //Set button callback function
 function setCallback(callback)
 {
-	this.callback = callback;
+	var self = this;
+	this.element.onclick = function()
+	{
+		self.selected = !self.selected;
+		callback();	
+	};
 }
 
 //Set ButtonImageToggle
@@ -131,7 +127,6 @@ function updateInterface()
 	this.img.src = this.image;
 	this.img.width = this.size.x * this.image_scale.x;
 	this.img.height = this.size.y * this.image_scale.y;
-
 	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
 	

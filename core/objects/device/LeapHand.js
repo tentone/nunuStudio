@@ -2,9 +2,9 @@ function LeapHand(mode, use_arm)
 {
 	THREE.Object3D.call(this);
 
-	this.name = "leap";
 	this.type = "LeapDevice";
-
+	this.name = "leap";
+	
 	//Hand and Arm meshes
 	this.bone_meshes = [];
 	this.arm_meshes = [];
