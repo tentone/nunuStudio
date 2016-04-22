@@ -651,6 +651,7 @@ Editor.updateObjectHelper = function()
 	if(Editor.selected_object !== null)
 	{
 		var position = ObjectUtils.objectAbsolutePosition(Editor.selected_object);
+
 		if(Editor.selected_object instanceof THREE.Camera)
 		{
 			Editor.activateHelper(Editor.camera_helper, true);

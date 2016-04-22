@@ -69,7 +69,8 @@ Interface.initialize = function()
 
 				ObjectUtils.setShadowCasting(obj.scene, true);
 				ObjectUtils.setShadowReceiving(obj.scene, true);
-				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj.scene));
+
+				Editor.addToActualScene(obj.scene);
 			}
 			catch(e)
 			{
@@ -85,18 +86,31 @@ Interface.initialize = function()
 			var file = event.srcElement.value;
 			try
 			{
-				var loader = new ObjectLoader();
-				var obj = loader.parse(App.readFile(file));
+				var loader = new THREE.JSONLoader();
+				loader.load(file, function(geometry, materials)
+				{
+					for(var i = 0; i < materials.length; i ++)
+					{
+						var m = materials[i];
+						m.skinning = true;
+						m.morphTargets = true;
+						m.specular.setHSL( 0, 0, 0.1 );
+						m.color.setHSL( 0.6, 0, 0.6 );
+					}
 
-				ObjectUtils.setShadowCasting(obj, true);
-				ObjectUtils.setShadowReceiving(obj, true);
-				Editor.addToActualScene(obj);
+					var obj = new AnimatedModel(geometry, new THREE.MultiMaterial(materials));
+
+					ObjectUtils.setShadowCasting(obj, true);
+					ObjectUtils.setShadowReceiving(obj, true);
+
+					Editor.addToActualScene(obj);
+				});
 			}
 			catch(e)
 			{
 				alert("Error loading file\n("+e+")");
 			}
-		}, ".json");
+		}, ".json, .js");
 	});
 
 	Interface.asset_file.addOption("Import VRML", function()
@@ -132,6 +146,7 @@ Interface.initialize = function()
 
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
+
 				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
 			}
 			catch(e)
