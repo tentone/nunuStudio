@@ -11,6 +11,8 @@ function KinectDevice()
 
 	//Received Data
 	this.data = null;
+	this.data_received = false;
+	this.data_timeout = 0;
 
 	//Self pointer
 	var self = this;
@@ -33,6 +35,8 @@ function KinectDevice()
 		if(typeof event.data === "string")
 		{
 			self.data = JSON.parse(event.data);
+			self.data_received = true;
+			self.data_timeout = KinectDevice.DATA_TIMEOUT;
 		}
 		else if(event.data instanceof Blob)
 		{
@@ -42,8 +46,14 @@ function KinectDevice()
 	};
 }
 
+//Data timeout limit
+KinectDevice.DATA_TIMEOUT = 20;
+
+//Kinect camera modes
 KinectDevice.DEPTH = 0;
 KinectDevice.COLOR = 1;
+
+//Joint names
 KinectDevice.JOINTS_NAME = [["head","shouldercenter"],["shouldercenter","shoulderright"],["shouldercenter","shoulderleft"],["shoulderright","elbowright"],
 							["shoulderleft","elbowleft"],["elbowright","wristright"],["elbowleft","wristleft"],["wristright","handright"],["wristleft","handleft"],
 							["shouldercenter","spine"],["spine","hipcenter"],["hipcenter","hipright"],["hipcenter","hipleft"],["hipright","kneeright"],
@@ -78,27 +88,45 @@ function update()
 	//Check if there is data to process
 	if(this.data !== null)
 	{
-		//Remove all children
-		while(this.children.length > 0)
+		if(this.data_received)
 		{
-			this.children.pop();
-		}
+			//Clear data received flag
+			this.data_received = false;
 
-		var geometry = new THREE.SphereGeometry(0.04, 6, 6);
-		var material = new THREE.MeshPhongMaterial(0xff0000);
-
-		//Fill with new data
-		for(var j = 0; j < this.data.skeletons.length; j++)
-		{
-			var joints = this.data.skeletons[j].joints;
-			for(var i = 0; i < joints.length; i++)
+			//Remove all children
+			while(this.children.length > 0)
 			{
-				var model = new Model3D(geometry, material);
-				model.position.set(joints[i].x, joints[i].y, joints[i].z);
-				model.castShadow = true;
-				this.add(model);
+				this.children.pop();
 			}
 
+			var geometry = new THREE.SphereGeometry(0.04, 6, 6);
+			var material = new THREE.MeshPhongMaterial(0xff0000);
+
+			//Fill with new data
+			for(var j = 0; j < this.data.skeletons.length; j++)
+			{
+				var joints = this.data.skeletons[j].joints;
+				for(var i = 0; i < joints.length; i++)
+				{
+					var model = new Model3D(geometry, material);
+					model.position.set(joints[i].x, joints[i].y, joints[i].z);
+					model.castShadow = true;
+					this.add(model);
+				}
+			}
+		}
+		else if(this.data_timeout > 0)
+		{
+			this.data_timeout--;
+
+			//If timeout Remove all children
+			if(this.data_timeout === 0)
+			{
+				while(this.children.length > 0)
+				{
+					this.children.pop();
+				}
+			}
 		}
 	}
 }
