@@ -94,15 +94,9 @@ Interface.initialize = function()
 						var m = materials[i];
 						m.skinning = true;
 						m.morphTargets = true;
-						m.specular.setHSL( 0, 0, 0.1 );
-						m.color.setHSL( 0.6, 0, 0.6 );
 					}
 
 					var obj = new AnimatedModel(geometry, new THREE.MultiMaterial(materials));
-
-					ObjectUtils.setShadowCasting(obj, true);
-					ObjectUtils.setShadowReceiving(obj, true);
-
 					Editor.addToActualScene(obj);
 				});
 			}

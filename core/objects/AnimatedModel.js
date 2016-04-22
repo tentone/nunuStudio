@@ -2,7 +2,7 @@ function AnimatedModel(geometry, material, useVertexTexture)
 {
 	THREE.SkinnedMesh.call(this, geometry, material, useVertexTexture);
 
-	this.name = "models";
+	this.name = "model";
 }
 
 //Function Prototype

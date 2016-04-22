@@ -1,6 +1,6 @@
 function ObjectLoader(manager)
 {
-	this.manager = ( manager !== undefined ) ? manager : THREE.DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 	this.texturePath = '';
 }
 
@@ -242,7 +242,7 @@ function parseGeometries(json)
 			}
 			else
 			{
-				geometry.name = "object";
+				geometry.name = "geometry";
 			}
 
 			geometries[data.uuid] = geometry;
@@ -406,9 +406,10 @@ function parseObject(data, geometries, materials)
 	{
 		if(geometries[name] === undefined)
 		{
-			console.warn( "ObjectLoader: Undefined geometry", name );
+			console.warn("ObjectLoader: Undefined geometry", name);
 		}
-		return geometries[ name ];
+
+		return geometries[name];
 	}
 
 	function getMaterial(name)
@@ -420,7 +421,7 @@ function parseObject(data, geometries, materials)
 
 		if(materials[name] === undefined)
 		{
-			console.warn( "ObjectLoader: Undefined material", name );
+			console.warn("ObjectLoader: Undefined material", name);
 		}
 
 		return materials[name];
@@ -450,6 +451,11 @@ function parseObject(data, geometries, materials)
 
 		case "PerspectiveCamera":
 			object = new PerspectiveCamera(data.fov, data.aspect, data.near, data.far);
+			if(data.focus !== undefined) object.focus = data.focus;
+			if(data.zoom !== undefined) object.zoom = data.zoom;
+			if(data.filmGauge !== undefined) object.filmGauge = data.filmGauge;
+			if(data.filmOffset !== undefined) object.filmOffset = data.filmOffset;
+			if(data.view !== undefined) object.view = Object.assign({}, data.view);
 			break;
 
 		case "OrthographicCamera":
@@ -479,6 +485,7 @@ function parseObject(data, geometries, materials)
 		case "Mesh":
 			var geometry = getGeometry(data.geometry);
 			var material = getMaterial(data.material);
+
 			if(geometry.bones && geometry.bones.length > 0)
 			{
 				object = new AnimatedModel(geometry, material);
@@ -512,6 +519,10 @@ function parseObject(data, geometries, materials)
 
 		case "Script":
 			object = new Script(data.code, data.mode);
+			break;
+
+		case "Bone":
+			object = new Bone();
 			break;
 
 		default:
