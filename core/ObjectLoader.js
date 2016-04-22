@@ -1,7 +1,7 @@
 function ObjectLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
-	this.texturePath = '';
+	this.texturePath = "";
 }
 
 ObjectLoader.prototype.load = load;
@@ -17,9 +17,9 @@ ObjectLoader.prototype.parseObject = parseObject;
 
 function load(url, onLoad, onProgress, onError)
 {
-	if(this.texturePath === '')
+	if(this.texturePath === "")
 	{
-		this.texturePath = url.substring(0, url.lastIndexOf( '/' ) + 1);
+		this.texturePath = url.substring(0, url.lastIndexOf("/") + 1);
 	}
 
 	var scope = this;
@@ -354,32 +354,26 @@ function parseTextures(json, images)
 			{
 				texture.name = data.name;
 			}
-			
 			if(data.mapping !== undefined)
 			{
 				texture.mapping = parseConstant(data.mapping);
 			}
-
 			if(data.offset !== undefined)
 			{
 				texture.offset = new THREE.Vector2(data.offset[0], data.offset[1]);
 			}
-
 			if(data.repeat !== undefined)
 			{
 				texture.repeat = new THREE.Vector2(data.repeat[0], data.repeat[1]);
 			}
-
 			if(data.minFilter !== undefined)
 			{
 				texture.minFilter = parseConstant(data.minFilter);
 			}
-
 			if(data.magFilter !== undefined)
 			{
 				texture.magFilter = parseConstant(data.magFilter);
 			}
-
 			if(data.anisotropy !== undefined)
 			{
 				texture.anisotropy = data.anisotropy;
@@ -387,8 +381,8 @@ function parseTextures(json, images)
 
 			if(Array.isArray(data.wrap))
 			{
-				texture.wrapS = parseConstant( data.wrap[ 0 ] );
-				texture.wrapT = parseConstant( data.wrap[ 1 ] );
+				texture.wrapS = parseConstant(data.wrap[0]);
+				texture.wrapT = parseConstant(data.wrap[1]);
 			}
 			textures[data.uuid] = texture;
 		}
@@ -444,18 +438,33 @@ function parseObject(data, geometries, materials)
 		case "Sky":
 			object = new Sky(data.auto_update, data.day_time, data.sun_distance, data.time);
 			break;
-			
+
 		case "Scene":
 			object = new Scene();
 			break;
 
 		case "PerspectiveCamera":
 			object = new PerspectiveCamera(data.fov, data.aspect, data.near, data.far);
-			if(data.focus !== undefined) object.focus = data.focus;
-			if(data.zoom !== undefined) object.zoom = data.zoom;
-			if(data.filmGauge !== undefined) object.filmGauge = data.filmGauge;
-			if(data.filmOffset !== undefined) object.filmOffset = data.filmOffset;
-			if(data.view !== undefined) object.view = Object.assign({}, data.view);
+			if(data.focus !== undefined) 
+			{
+				object.focus = data.focus;
+			}
+			if(data.zoom !== undefined)
+			{
+				object.zoom = data.zoom;
+			}
+			if(data.filmGauge !== undefined)
+			{
+				object.filmGauge = data.filmGauge;
+			}
+			if(data.filmOffset !== undefined)
+			{
+				object.filmOffset = data.filmOffset;
+			}
+			if(data.view !== undefined)
+			{
+				object.view = Object.assign({}, data.view);
+			}
 			break;
 
 		case "OrthographicCamera":
@@ -538,8 +547,8 @@ function parseObject(data, geometries, materials)
 
 	if(data.matrix !== undefined)
 	{
-		matrix.fromArray( data.matrix );
-		matrix.decompose( object.position, object.quaternion, object.scale );
+		matrix.fromArray(data.matrix);
+		matrix.decompose(object.position, object.quaternion, object.scale);
 	}
 	else
 	{
@@ -578,21 +587,20 @@ function parseObject(data, geometries, materials)
 	{
 		for(var child in data.children)
 		{
-			object.add(this.parseObject( data.children[ child ], geometries, materials));
+			object.add(this.parseObject(data.children[child], geometries, materials));
 		}
 	}
 
 	if(data.type === "LOD")
 	{
 		var levels = data.levels;
-
 		for(var l = 0; l < levels.length; l ++)
 		{
-			var level = levels[ l ];
-			var child = object.getObjectByProperty( "uuid", level.object );
-			if (child !== undefined)
+			var level = levels[l];
+			var child = object.getObjectByProperty("uuid", level.object);
+			if(child !== undefined)
 			{
-				object.addLevel( child, level.distance );
+				object.addLevel(child, level.distance);
 			}
 		}
 	}

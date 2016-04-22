@@ -12,6 +12,7 @@ function DropdownMenu(parent)
 	
 	//ID
 	var id = "dropmenu" + Button.id;
+	var id_panel = "dropmenupanel" + Button.id;
 	DropdownMenu.id++;
 
 	//Create element
@@ -27,12 +28,20 @@ function DropdownMenu(parent)
 	this.text.position.set(0, 0);
 	this.text.size.set(0 , 0);
 
+	//Options Panel
+	this.panel = document.createElement("div");
+	this.panel.id = id_panel;
+	this.panel.style.position = "absolute";
+	this.panel.className = "bar";
+	this.panel.style.zIndex = "200";
+
 	//Atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 
 	//Options
+	this.options_size = new THREE.Vector2(150, 20);
 	this.options = [];
 	this.expanded = false;
 
@@ -53,12 +62,25 @@ function DropdownMenu(parent)
 		self.updateInterface();
 		self.element.className = "button";
 	};
+	
+	this.panel.onmouseover = function()
+	{
+		self.expanded = true;
+		self.updateInterface();
+	};
+
+	this.panel.onmouseleave = function()
+	{
+		self.expanded = false;
+		self.updateInterface();
+	};
 
 	//Update element
 	this.updateInterface();
 
 	//Add element to document
 	this.parent.appendChild(this.element);
+	this.parent.appendChild(this.panel);
 }
 
 //DropdownMenu ID counter
@@ -71,6 +93,7 @@ DropdownMenu.prototype.addOption = addOption;
 DropdownMenu.prototype.removeOption = removeOption;
 DropdownMenu.prototype.destroy = destroy;
 DropdownMenu.prototype.setText = setText;
+DropdownMenu.prototype.updateOptions = updateOptions;
 
 //Set Text
 function setText(text)
@@ -102,6 +125,8 @@ function removeOption(index)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
+
+		this.updateOptions();
 		this.updateInterface();
 	}
 }
@@ -109,40 +134,69 @@ function removeOption(index)
 //Add new Option to dropdown menu
 function addOption(name, callback)
 {
-	var button = new Button(this.element);
+	var button = new Button(this.panel);
 	button.element.style.zIndex = "10";
-	button.setText(name);
 	button.visible = this.expanded;
-	button.updateInterface();
+	button.setText(name);
 	
 	var self = this;
-	button.callback = function()
+	button.setCallback(function()
 	{
 		callback();
 		self.expanded = false;
 		self.updateInterface();
-	};
+	});
 
 	this.options.push(button);
+
+	this.updateOptions();
 	this.updateInterface();
+}
+
+//Updates options position and size
+function updateOptions()
+{
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].size.set(this.options_size.x, this.options_size.y);
+		this.options[i].position.set(0, (this.options_size.y*i));
+		this.options[i].updateInterface();
+	}
 }
 
 //Update interface
 function updateInterface()
 {
-	//Update Options
+	var visibility, visible = false;
+
+	if(this.expanded && this.visible)
+	{
+		visibility = "visible";
+		visible = true;
+	}
+	else
+	{
+		visibility = "hidden";
+	}
+
+	//Update Options Visibility
 	for(var i = 0; i < this.options.length; i++)
 	{
-		this.options[i].size.set(this.size.x, this.size.y);
-		this.options[i].position.set(0, (this.size.y*(i+1)));
-		this.options[i].visible = (this.expanded && this.visible);
-		this.options[i].updateInterface();
+		this.options[i].visible = visible;
+		this.options[i].element.style.visibility = visibility;
 	}
 
 	//Update text
 	this.text.size.set(this.size.x, this.size.y);
 	this.text.visible = this.visible;
 	this.text.updateInterface();
+
+	//Panel position, size and visibility
+	this.panel.style.top = (this.position.y + this.size.y) + "px";
+	this.panel.style.left = this.position.x + "px";
+	this.panel.style.width = this.size.x + "px";
+	this.panel.style.height = (this.options_size.y * this.options.length) + "px";
+	this.panel.style.visibility = visibility;
 
 	//Set visibility
 	if(this.visible)
@@ -158,13 +212,5 @@ function updateInterface()
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
-
-	if(this.expanded)
-	{
-		this.element.style.height = (this.size.y * (this.options.length + 1))+ "px";
-	}
-	else
-	{
-		this.element.style.height = this.size.y + "px";
-	}
+	this.element.style.height = this.size.y + "px";
 }

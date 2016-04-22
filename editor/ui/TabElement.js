@@ -24,10 +24,10 @@ function TabElement(name, image, closeable, container, index)
 	this.button.visible = true;
 	this.button.position.set(container.options_size.x*index, 0);
 	this.button.size.set(container.options_size.x, container.options_size.y);
-	this.button.callback = function()
+	this.button.setCallback(function()
 	{
 		self.container.selectOption(self.index);
-	};
+	});
 	this.button.updateInterface();
 
 	//Change button behavior
@@ -57,10 +57,10 @@ function TabElement(name, image, closeable, container, index)
 	this.close_button.size.set(10, 10);
 	this.close_button.position.set(this.button.size.x - 20, 10);
 	this.close_button.setImage("editor/files/icons/misc/close.png");
-	this.close_button.callback = function()
+	this.close_button.setCallback(function()
 	{
 		self.container.removeOption(self.index);
-	};
+	});
 	this.close_button.updateInterface();
 
 	//Division

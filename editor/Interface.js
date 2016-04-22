@@ -69,8 +69,7 @@ Interface.initialize = function()
 
 				ObjectUtils.setShadowCasting(obj.scene, true);
 				ObjectUtils.setShadowReceiving(obj.scene, true);
-
-				Editor.addToActualScene(obj.scene);
+				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj.scene));
 			}
 			catch(e)
 			{
@@ -128,7 +127,7 @@ Interface.initialize = function()
 		}, ".wrl, .vrml");
 	});
 
-	Interface.asset_file.addOption("Import FBX", function()
+	/*Interface.asset_file.addOption("Import FBX", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -148,7 +147,7 @@ Interface.initialize = function()
 				alert("Error loading file\n("+e+")");
 			}
 		}, ".fbx");
-	});
+	});*/
 
 
 	//Add assets

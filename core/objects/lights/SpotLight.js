@@ -3,7 +3,11 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 	THREE.SpotLight.call(this, hex, intensity, distance, angle, exponent, decay);
 
 	this.name = "spot_light";
+	
 	this.castShadow = true;
+	
+	this.shadow.mapSize.width = 1024;
+	this.shadow.mapSize.height = 1024;
 }
 
 //Function Prototype

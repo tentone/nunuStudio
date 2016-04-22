@@ -36,17 +36,9 @@ function ButtonImage(parent)
 	//Image and Callback
 	this.image_scale = new THREE.Vector2(1,1);
 	this.image = "";
-	this.callback = null;
 
 	//Click event
 	var self = this;
-	this.element.onclick = function()
-	{
-		if(self.callback != null)
-		{
-			self.callback();
-		}
-	};
 
 	//Mouse over and mouse out events
 	this.element.onmouseover = function()
@@ -90,7 +82,7 @@ function update(){}
 //Set button callback function
 function setCallback(callback)
 {
-	this.callback = callback;
+	this.element.onclick = callback;
 }
 
 //Set ButtonImage
