@@ -42,6 +42,7 @@ include("editor/panels/LightPanel.js");
 include("editor/panels/SkyPanel.js");
 include("editor/panels/LeapPanel.js");
 include("editor/panels/ScriptPanel.js");
+include("editor/panels/PerspectiveCameraPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -446,12 +447,11 @@ Editor.update = function()
 				Editor.camera.position.x += Mouse.pos_diff.x * speed * angle_sin;
 			}
 			
-			//Move Camera on X and Z
+			//Move Camera on Y
 			else if(Mouse.buttonPressed(Mouse.MIDDLE))
 			{
 				Editor.camera.position.y += Mouse.pos_diff.y * 0.1;
 			}
-			
 
 			//Move in camera direction using mouse scroll
 			if(Mouse.wheel != 0)
@@ -598,33 +598,37 @@ Editor.deleteSelectedObject = function()
 //Update UI panel to match selected object
 Editor.updateSelectedObjectPanel = function()
 {
-	//Destroy old form
-	Interface.form.destroy();
+	//Destroy old panel
+	Interface.panel.destroy();
 
 	//Select correct panel
 	if(Editor.selected_object instanceof PointLight)
 	{
-		Interface.form = new LightPanel(Interface.explorer_resizable.div_b);
+		Interface.panel = new LightPanel(Interface.explorer_resizable.div_b);
 	}
 	else if(Editor.selected_object instanceof Sky)
 	{
-		Interface.form = new SkyPanel(Interface.explorer_resizable.div_b);
+		Interface.panel = new SkyPanel(Interface.explorer_resizable.div_b);
 	}
 	else if(Editor.selected_object instanceof LeapHand)
 	{
-		Interface.form = new LeapPanel(Interface.explorer_resizable.div_b);
+		Interface.panel = new LeapPanel(Interface.explorer_resizable.div_b);
 	}
 	else if(Editor.selected_object instanceof Script)
 	{
-		Interface.form = new ScriptPanel(Interface.explorer_resizable.div_b);
+		Interface.panel = new ScriptPanel(Interface.explorer_resizable.div_b);
+	}
+	else if(Editor.selected_object instanceof PerspectiveCamera)
+	{
+		Interface.panel = new PerspectiveCameraPanel(Interface.explorer_resizable.div_b);
 	}
 	else
 	{
-		Interface.form = new ObjectPanel(Interface.explorer_resizable.div_b);
+		Interface.panel = new ObjectPanel(Interface.explorer_resizable.div_b);
 	}
 	
-	Interface.form.attachObject(Editor.selected_object);
-	Interface.form.updateInterface();
+	Interface.panel.attachObject(Editor.selected_object);
+	Interface.panel.updateInterface();
 }
 
 //Update tree view to match actual scene
@@ -636,7 +640,7 @@ Editor.updateTreeView = function()
 //Updates object panel values
 Editor.updateObjectPanel = function()
 {
-	Interface.form.updatePanel();
+	Interface.panel.updatePanel();
 }
 
 //Add object to actual scene

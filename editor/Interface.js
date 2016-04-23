@@ -162,12 +162,9 @@ Interface.initialize = function()
 			try
 			{
 				var map = new THREE.TextureLoader().load(file);
-
 				var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
 				var sprite = new Sprite(material);
 				Editor.addToActualScene(sprite);
-
-				alert("File loaded");
 			}
 			catch(e)
 			{
@@ -183,15 +180,14 @@ Interface.initialize = function()
 
 	Interface.explorer_resizable = new DualDivisionResizable(Interface.explorer.element);
 	Interface.explorer_resizable.orientation = DualDivisionResizable.VERTICAL;
-	Interface.explorer_resizable.tab_position = 400;
-	Interface.explorer_resizable.position.set(0, 0);
+	Interface.explorer_resizable.tab_position = 450;
 
+	//Project explorer
 	Interface.tree_view = new TreeView(Interface.explorer_resizable.div_a, Interface.explorer_resizable);
 	Interface.tree_view.updateInterface();
 
-	Interface.form = new Form(Interface.explorer_resizable.div_b);
-	Interface.form.fit_parent = true;
-	Interface.form.updateInterface();
+	//Object panel variables
+	Interface.panel = new Form(Interface.explorer_resizable.div_b);
 
 	//------------------------------------Tool Bar------------------------------------
 	Interface.tool_bar = new Division();
@@ -388,10 +384,6 @@ Interface.initialize = function()
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/point.png", function()
 	{
 		var light = new PointLight();
-		light.castShadow = true;
-		light.shadow.camera.near = 1;
-		light.shadow.camera.far = 30;
-		light.shadow.bias = 0.01;
 		Editor.addToActualScene(light);
 	});
 
@@ -734,7 +726,7 @@ Interface.updateInterface = function()
 	Interface.explorer_resizable.updateInterface();
 
 	Interface.tree_view.updateInterface();
-	Interface.form.updateInterface();
+	Interface.panel.updateInterface();
 
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;
