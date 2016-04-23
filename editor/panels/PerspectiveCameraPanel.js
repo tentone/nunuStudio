@@ -73,7 +73,24 @@ function PerspectiveCameraPanel(parent)
 	this.fov = new Slider(this.element);
 	this.fov.size.set(150, 18);
 	this.fov.position.set(45, 85);
+	this.fov.setRange(45, 120);
 	this.fov.updateInterface();
+	this.fov.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.fov = self.fov.getValue();
+			self.obj.updateProjectionMatrix();
+			self.fov_text.setText(self.obj.fov);
+		}
+	});
+
+	this.fov_text = new Text(this.element);
+	this.fov_text.setAlignment(Text.LEFT);
+	this.fov_text.setText("-");
+	this.fov_text.position.set(205, 95);
+	this.fov_text.updateInterface();
+
 }
 
 //Functions Prototype
@@ -90,6 +107,9 @@ function updatePanel()
 
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.rotation.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
+
+		this.fov.setValue(this.obj.fov);
+		this.fov_text.setText(this.obj.fov);
 	}
 }
 

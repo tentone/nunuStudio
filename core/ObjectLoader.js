@@ -429,6 +429,11 @@ function parseObject(data, geometries, materials)
 
 		case "Program":
 			object = new Program(data.name, data.description, data.author, data.version, data.vr);
+			if(data.initial_scene !== undefined)
+			{
+				object.initial_scene = data.initial_scene;
+			}
+
 			break;
 
 		case "LeapDevice":
@@ -441,6 +446,10 @@ function parseObject(data, geometries, materials)
 
 		case "Scene":
 			object = new Scene();
+			if(data.initial_camera !== undefined)
+			{
+				object.initial_camera = data.initial_camera;
+			}
 			break;
 
 		case "PerspectiveCamera":

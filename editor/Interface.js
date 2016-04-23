@@ -431,13 +431,13 @@ Interface.initialize = function()
 	//Prespective camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/prespective.png", function()
 	{
-		Editor.addToActualScene(new PerspectiveCamera());
+		Editor.addToActualScene(new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 1000000));
 	});
 
 	//Orthographic camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
 	{
-		Editor.addToActualScene(new OrthographicCamera(3, 3, 3, 3, 3, 3));
+		Editor.addToActualScene(new OrthographicCamera(5, -5, 5, -5, 1, 1000000));
 	});
 
 	//Add script

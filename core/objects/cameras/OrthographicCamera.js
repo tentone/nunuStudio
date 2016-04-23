@@ -3,6 +3,8 @@ function OrthographicCamera(left, right, top, bottom, near, far)
 	THREE.OrthographicCamera.call(this, left, right, top, bottom, near, far);
 
 	this.name = "orthographic_camera";
+
+	this.rotationAutoUpdate = true;
 }
 
 //Function Prototype
