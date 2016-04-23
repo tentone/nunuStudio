@@ -1,9 +1,10 @@
 function PerspectiveCamera(fov, aspect, near, far)
 {
 	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
-	
-	this.rotationAutoUpdate = true;
+
 	this.name = "prespective_camera";
+
+	this.rotationAutoUpdate = true;
 }
 
 //Function Prototype

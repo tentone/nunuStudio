@@ -10,6 +10,8 @@ include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
+include("lib/three/cameras/CinematicCamera.js");
+
 include("lib/three/vr/VRControls.js");
 include("lib/three/vr/VREffect.js");
 include("lib/three/vr/webvr-manager.js");

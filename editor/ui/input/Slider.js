@@ -39,7 +39,16 @@ Slider.prototype.update = update;
 Slider.prototype.updateInterface = updateInterface;
 Slider.prototype.destroy = destroy;
 Slider.prototype.getValue = getValue;
+Slider.prototype.setValue = setValue;
 Slider.prototype.setOnChange = setOnChange;
+Slider.prototype.setRange = setRange;
+
+//Set slider range
+function setRange(min, max)
+{
+	this.element.min = String(min);
+	this.element.max = String(max);
+}
 
 //Set onchange callback
 function setOnChange(callback)

@@ -107,7 +107,7 @@ Editor.initialize = function(canvas)
 	Editor.setRenderCanvas(Interface.canvas.element);
 
 	//Editor Camera
-	Editor.camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 100000);
+	Editor.camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 1000000);
 	Editor.camera.position.set(0, 5, -5);
 	Editor.camera_rotation = new THREE.Vector2(0,0);
 	Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
