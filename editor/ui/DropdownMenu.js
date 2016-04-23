@@ -138,7 +138,9 @@ function addOption(name, callback)
 	button.element.style.zIndex = "10";
 	button.visible = this.expanded;
 	button.setText(name);
-	
+	button.text.setAlignment(Text.LEFT);
+	button.text.position.set(25, 0);
+
 	var self = this;
 	button.setCallback(function()
 	{
@@ -184,6 +186,7 @@ function updateInterface()
 	{
 		this.options[i].visible = visible;
 		this.options[i].element.style.visibility = visibility;
+		this.options[i].text.element.style.visibility = visibility;
 	}
 
 	//Update text

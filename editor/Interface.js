@@ -149,7 +149,6 @@ Interface.initialize = function()
 		}, ".fbx");
 	});*/
 
-
 	//Add assets
 	Interface.asset_add = new DropdownMenu(Interface.asset_explorer_bar.element);
 	Interface.asset_add.setText("Texture");

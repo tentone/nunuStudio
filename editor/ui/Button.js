@@ -21,16 +21,13 @@ function Button(parent)
 	this.element.className = "button";
 
 	//Text
-	this.span = document.createElement("span");
-	this.element.appendChild(this.span);
+	this.text = new Text(this.element);
+	this.text.setText("text");
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	
-	//Button text and callback
-	this.text = "text";
 
 	//Self pointer
 	var self = this;
@@ -67,8 +64,7 @@ Button.prototype.setCallback = setCallback;
 //Set Button text
 function setText(text)
 {
-	this.text = text;
-	this.span.innerHTML = this.text;
+	this.text.setText(text);
 }
 
 //Set element class
@@ -108,7 +104,9 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
-	this.span.innerHTML = this.text;
+	this.text.size.set(this.size.x, this.size.y);
+	this.text.visible = this.visible;
+	this.text.updateInterface();
 
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";

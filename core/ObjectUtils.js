@@ -1,13 +1,6 @@
 //Object tools contains some object managing helpers
 function ObjectUtils(){}
 
-//Limit object size
-ObjectUtils.fitBox = function(x, y, z)
-{
-	//geometry.boundingBox min max
-	//TODO <ADD CODE HERE>
-}
-
 //Convert threejs type to internal types
 ObjectUtils.convertFromThreeType = function(obj)
 {
