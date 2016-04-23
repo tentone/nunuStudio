@@ -1,18 +1,17 @@
-function LeapPanel(parent)
+function PerspectiveCameraPanel(parent)
 {
 	Panel.call(this, parent);
 
 	//Self pointer
 	var self = this;
 
-	//Name text
+	//Name
 	var text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Name");
 	text.position.set(5, 20);
 	text.updateInterface();
 
-	//Name textbox
 	this.name = new Textbox(this.element);
 	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
@@ -45,30 +44,42 @@ function LeapPanel(parent)
 		}
 	});
 
-	//Scale
+	//Rotation
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
-	text.setText("Scale");
+	text.setText("Rotation");
 	text.position.set(5, 70);
 	text.updateInterface();
 
-	this.scale = new Positionbox(this.element);
-	this.scale.position.set(45, 60);
-	this.scale.updateInterface();
-	this.scale.setOnChange(function()
+	this.rotation = new Positionbox(this.element);
+	this.rotation.position.set(57, 60);
+	this.rotation.updateInterface();
+	this.rotation.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			var scale = self.scale.getValue();
-			self.obj.scale.set(scale.x, scale.y, scale.z);
+			var rotation = self.rotation.getValue();
+			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
 		}
 	});
+
+	//Fov
+	text = new Text(this.element);
+	text.setAlignment(Text.LEFT);
+	text.setText("FOV");
+	text.position.set(5, 95);
+	text.updateInterface();
+
+	this.fov = new Slider(this.element);
+	this.fov.size.set(150, 18);
+	this.fov.position.set(45, 85);
+	this.fov.updateInterface();
 }
 
 //Functions Prototype
-LeapPanel.prototype = Object.create(Panel.prototype);
-LeapPanel.prototype.attachObject = attachObject;
-LeapPanel.prototype.updatePanel = updatePanel;
+PerspectiveCameraPanel.prototype = Object.create(Panel.prototype);
+PerspectiveCameraPanel.prototype.attachObject = attachObject;
+PerspectiveCameraPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
 function updatePanel()
@@ -78,7 +89,7 @@ function updatePanel()
 		this.name.setText(this.obj.name);
 
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
-		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
+		this.rotation.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 	}
 }
 

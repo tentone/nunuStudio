@@ -33,7 +33,6 @@ function ButtonDrawer(parent)
 	this.img.style.position = "absolute";
 	this.img.style.top = "0px";
 	this.img.style.left = "0px";
-
 	this.element.appendChild(this.img);
 
 	//Element atributes
@@ -161,6 +160,7 @@ function addOption(image, callback)
 function setImage(image)
 {
 	this.image = image;
+	this.img.src = this.image;
 }
 
 //Updates drawer panel size
@@ -214,13 +214,11 @@ function updateInterface()
 	this.panel.style.width = this.panel_size.x + "px";
 	this.panel.style.height = this.panel_size.y + "px";
 	
-	this.img.src = this.image;
 	this.img.width = this.size.x * this.image_scale.x;
 	this.img.height = this.size.y * this.image_scale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
 
-	//this.element.innerHTML = '<img src="' + this.image + '" width="' + this.size.x + '" height="' + this.size.y +'">';
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
