@@ -89,6 +89,31 @@ function PerspectiveCameraPanel(parent)
 	this.fov_text.setAlignment(Text.LEFT);
 	this.fov_text.position.set(215, 95);
 	this.fov_text.updateInterface();
+
+	//Select camera as scene default
+	this.default = new Checkbox(this.element);
+	this.default.setText("Default camera");
+	this.default.size.set(200, 15);
+	this.default.position.set(3, 110);
+	this.default.updateInterface();
+	this.default.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			var scene = ObjectUtils.getScene(self.obj);
+			if(scene !== null)
+			{
+				if(self.default.getValue())
+				{
+					scene.initial_camera = self.obj.uuid;
+				}
+				else
+				{
+					scene.initial_camera = null;
+				}
+			}
+		}
+	});
 }
 
 //Functions Prototype
@@ -108,6 +133,8 @@ function updatePanel()
 
 		this.fov.setValue(this.obj.fov);
 		this.fov_text.setText(this.obj.fov);
+
+		this.default.setValue(ObjectUtils.getScene(this.obj).initial_camera === this.obj.uuid);
 	}
 }
 

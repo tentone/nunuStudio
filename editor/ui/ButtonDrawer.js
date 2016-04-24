@@ -173,7 +173,7 @@ function updatePanelSize()
 //Update Interface
 function updateInterface()
 {
-	//Update panel position y
+	//Update panel position
 	this.panel_position.x = this.position.x + this.size.x;
 	this.panel_position.y = this.position.y;
 
