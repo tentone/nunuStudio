@@ -43,6 +43,7 @@ include("editor/panels/SkyPanel.js");
 include("editor/panels/LeapPanel.js");
 include("editor/panels/ScriptPanel.js");
 include("editor/panels/PerspectiveCameraPanel.js");
+include("editor/panels/OrthographicCameraPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -68,7 +69,11 @@ Editor.initialize = function(canvas)
 {
 	//Set mouse lock false
 	App.setMouseLock(false);
-	App.showStats(false);
+
+	//Show stats
+	App.showStats(true);
+	App.stats.domElement.style.left = "40px";
+	App.stats.domElement.style.top = "55px";
 
 	//Editor initial state
 	Editor.tool_mode = Editor.MODE_SELECT;
@@ -224,7 +229,7 @@ Editor.update = function()
 			}
 
 			//Delete Selected Object
-			if(Keyboard.isKeyPressed(Keyboard.DEL))
+			if(Keyboard.isKeyJustPressed(Keyboard.DEL))
 			{
 				Editor.deleteSelectedObject();
 			}
@@ -619,6 +624,10 @@ Editor.updateSelectedObjectPanel = function()
 	{
 		Interface.panel = new PerspectiveCameraPanel(Interface.explorer_resizable.div_b);
 	}
+	else if(Editor.selected_object instanceof OrthographicCamera)
+	{
+		Interface.panel = new OrthographicCameraPanel(Interface.explorer_resizable.div_b);
+	}
 	else
 	{
 		Interface.panel = new ObjectPanel(Interface.explorer_resizable.div_b);
@@ -845,6 +854,7 @@ Editor.setState = function(state)
 
 		//Initialize scene
 		Editor.program_running.initialize();
+		Editor.program_running.resize(Editor.canvas.width, Editor.canvas.height);
 	}
 	
 	Editor.state = state;

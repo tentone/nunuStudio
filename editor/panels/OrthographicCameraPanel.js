@@ -1,4 +1,4 @@
-function PerspectiveCameraPanel(parent)
+function OrthographicCameraPanel(parent)
 {
 	Panel.call(this, parent);
 
@@ -51,50 +51,73 @@ function PerspectiveCameraPanel(parent)
 	text.position.set(5, 70);
 	text.updateInterface();
 
-	this.rotation = new Positionbox(this.element);
-	this.rotation.position.set(57, 60);
+	this.rotation = new Slider(this.element);
+	this.rotation.size.set(150, 18);
+	this.rotation.position.set(65, 60);
+	this.rotation.setRange(-Math.PI, Math.PI);
+	this.rotation.setStep(0.1);
 	this.rotation.updateInterface();
 	this.rotation.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			var rotation = self.rotation.getValue();
-			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
+			self.obj.rotation.z = self.rotation.getValue();
+			self.obj.updateProjectionMatrix();
+			self.rotation_text.setText(self.obj.rotation.z);
 		}
 	});
 
-	//Fov
+	this.rotation_text = new Text(this.element);
+	this.rotation_text.setAlignment(Text.LEFT);
+	this.rotation_text.position.set(230, 70);
+	this.rotation_text.updateInterface();
+
+	//Size
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
-	text.setText("FOV");
+	text.setText("Size");
 	text.position.set(5, 95);
 	text.updateInterface();
 
-	this.fov = new Slider(this.element);
-	this.fov.size.set(160, 18);
-	this.fov.position.set(45, 85);
-	this.fov.setRange(30, 160);
-	this.fov.updateInterface();
-	this.fov.setOnChange(function()
+	this.size = new Numberbox(this.element);
+	this.size.size.set(80, 18);
+	this.size.position.set(40, 85);
+	this.size.updateInterface();
+	this.size.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fov = self.fov.getValue();
+			self.obj.size = self.size.getValue();
 			self.obj.updateProjectionMatrix();
-			self.fov_text.setText(self.obj.fov);
 		}
 	});
 
-	this.fov_text = new Text(this.element);
-	this.fov_text.setAlignment(Text.LEFT);
-	this.fov_text.position.set(215, 95);
-	this.fov_text.updateInterface();
+	//Camera resize Mode
+	text = new Text(this.element);
+	text.setAlignment(Text.LEFT);
+	text.setText("Mode");
+	text.position.set(5, 120);
+	text.updateInterface();
+
+	this.mode = new DropdownList(this.element);
+	this.mode.position.set(45, 110);
+	this.mode.size.set(130, 18);
+	this.mode.addValue("Resize Horizontal", OrthographicCamera.FIXED_VERTICAL);
+	this.mode.addValue("Resize Vertical", OrthographicCamera.FIXED_HORIZONTAL);
+	this.mode.updateInterface();
+	this.mode.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.mode = self.mode.getSelectedIndex();
+		}
+	});
 }
 
 //Functions Prototype
-PerspectiveCameraPanel.prototype = Object.create(Panel.prototype);
-PerspectiveCameraPanel.prototype.attachObject = attachObject;
-PerspectiveCameraPanel.prototype.updatePanel = updatePanel;
+OrthographicCameraPanel.prototype = Object.create(Panel.prototype);
+OrthographicCameraPanel.prototype.attachObject = attachObject;
+OrthographicCameraPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
 function updatePanel()
@@ -104,10 +127,13 @@ function updatePanel()
 		this.name.setText(this.obj.name);
 
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
-		this.rotation.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 
-		this.fov.setValue(this.obj.fov);
-		this.fov_text.setText(this.obj.fov);
+		this.rotation.setValue(this.obj.rotation.z);
+		this.rotation_text.setText(this.obj.rotation.z);
+
+		this.size.setValue(this.obj.size);
+
+		this.mode.setSelectedIndex(this.obj.mode);
 	}
 }
 

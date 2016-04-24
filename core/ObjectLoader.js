@@ -476,7 +476,7 @@ function parseObject(data, geometries, materials)
 			break;
 
 		case "OrthographicCamera":
-			object = new OrthographicCamera(data.left, data.right, data.top, data.bottom, data.near, data.far);
+			object = new OrthographicCamera(data.size, data.aspect, data.mode, data.near, data.far);
 			break;
 
 		case "AmbientLight":

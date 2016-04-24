@@ -440,7 +440,7 @@ Interface.initialize = function()
 	//Orthographic camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
 	{
-		Editor.addToActualScene(new OrthographicCamera(5, -5, 5, -5, 1, 1000000));
+		Editor.addToActualScene(new OrthographicCamera(3, 2, 0, 1, 1000000));
 	});
 
 	//Add script
