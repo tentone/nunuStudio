@@ -13,10 +13,13 @@ Interface.initialize = function()
 	Interface.tab = new TabGroup();
 	
 	//Scene Canvas
-	var scene = Interface.tab.addOption("Scene", Interface.file_dir + "icons/tab/scene.png", true);
-	Interface.canvas = new SceneEditor();
-	Interface.canvas.setScene(Editor.program.scene);
-	scene.attachComponent(Interface.canvas);
+	var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
+	var canvas = new SceneEditor();
+	canvas.setScene(Editor.program.scene);
+	scene.attachComponent(canvas);
+
+	//Set render canvas
+	Editor.setRenderCanvas(canvas.element);
 
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer = new DivisionResizable();

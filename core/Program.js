@@ -49,12 +49,54 @@ function Program(name, description, author, version, vr)
 Program.prototype = Object.create(THREE.Object3D.prototype);
 Program.prototype.icon = "editor/files/icons/script/script.png";
 
-Program.prototype.setInitialScene = setInitialScene;
-Program.prototype.add = add;
-Program.prototype.remove = remove;
-Program.prototype.addDefaultScene = addDefaultScene;
+Program.prototype.resize = resize;
+Program.prototype.initialize = initialize;
 Program.prototype.toJSON = toJSON;
 Program.prototype.clone = clone;
+Program.prototype.add = add;
+Program.prototype.remove = remove;
+Program.prototype.setInitialScene = setInitialScene;
+Program.prototype.addDefaultScene = addDefaultScene;
+
+//Screen resize
+function resize(x, y)
+{
+	if(this.scene !== null)
+	{
+		if(this.scene.camera instanceof THREE.OrthographicCamera)
+		{
+			this.scene.camera.aspect = Editor.canvas.width/Editor.canvas.height;
+			this.scene.camera.updateProjectionMatrix();
+		}
+		else
+		{
+			this.scene.camera.aspect = Editor.canvas.width/Editor.canvas.height;
+			this.scene.camera.updateProjectionMatrix();
+		}
+	}
+
+}
+
+//Select starting scene and initialize that scene
+function initialize()
+{
+	if(this.initial_scene !== null)
+	{
+		for(var i = 0; i < this.children.length; i++)
+		{
+			if(this.children[i].uuid === this.initial_scene)
+			{
+				this.scene = this.children[i];
+				break;
+			}
+		}
+	}
+	else
+	{
+		this.scene = this.children[0];
+	}
+	this.scene.initialize();
+}
 
 //Set as initial scene (from uuid)
 function setInitialScene(scene)

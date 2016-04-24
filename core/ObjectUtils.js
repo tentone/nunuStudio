@@ -1,6 +1,18 @@
 //Object tools contains some object managing helpers
 function ObjectUtils(){}
 
+//Get object tree root
+ObjectUtils.getRoot = function(obj)
+{
+	var node = obj;
+	while(node.parent != null)
+	{
+		node = node.parent;
+	}
+
+	return node;
+}
+
 //Convert threejs type to internal types
 ObjectUtils.convertFromThreeType = function(obj)
 {

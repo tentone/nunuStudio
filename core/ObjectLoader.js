@@ -433,7 +433,6 @@ function parseObject(data, geometries, materials)
 			{
 				object.initial_scene = data.initial_scene;
 			}
-
 			break;
 
 		case "LeapDevice":

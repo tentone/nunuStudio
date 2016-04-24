@@ -101,10 +101,7 @@ Editor.initialize = function(canvas)
 	Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.tool_scene, Editor.program.scene.world);
 
 	//Raycaster
-	Editor.raycaster = new THREE.Raycaster();
-
-	//Set render canvas
-	Editor.setRenderCanvas(Interface.canvas.element);
+	Editor.raycaster = new THREE.Raycaster(); 
 
 	//Editor Camera
 	Editor.camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 1000000);
@@ -722,6 +719,11 @@ Editor.resizeCamera = function()
 		Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
 		Editor.camera.aspect = Editor.canvas.width/Editor.canvas.height;
 		Editor.camera.updateProjectionMatrix();
+
+		if(Editor.state === Editor.STATE_TESTING)
+		{
+			Editor.program_running.resize(Editor.canvas.width, Editor.canvas.height);
+		}
 	}
 }
 
@@ -792,14 +794,34 @@ Editor.loadProgram = function(fname)
 	Editor.program = program;
 	Editor.resetEditingFlags();
 	Editor.updateTreeView();
+	
+	//Remove old tabs from interface
+	Interface.tab.removeAllOptions();
+	var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
+	var canvas = new SceneEditor();
+	canvas.setScene(Editor.program.scene);
+	scene.attachComponent(canvas);
+	Interface.tab.selectOption(0);
 }
 
 //New Program
 Editor.createNewProgram = function()
 {
+	//Create new program
 	Editor.program = new Program();
 	Editor.program.addDefaultScene();
 	Editor.resetEditingFlags();
+
+	//Remove old tabs from interface
+	if(Interface.tab !== undefined)
+	{
+		Interface.tab.removeAllOptions();
+		var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
+		var canvas = new SceneEditor();
+		canvas.setScene(Editor.program.scene);
+		scene.attachComponent(canvas);
+		Interface.tab.selectOption(0);
+	}
 }
 
 //Set editor state
@@ -812,15 +834,17 @@ Editor.setState = function(state)
 	}
 	else if(state === Editor.STATE_TESTING)
 	{
-		//Copy program and initialize scene
+		//Copy program
 		Editor.program_running = Editor.program.clone();
-		Editor.program_running.scene.initialize();
 
 		//If no camera attached attach camera
 		if(Editor.program_running.scene.camera === null)
 		{
 			Editor.program_running.scene.camera = Editor.camera;
 		}
+
+		//Initialize scene
+		Editor.program_running.initialize();
 	}
 	
 	Editor.state = state;

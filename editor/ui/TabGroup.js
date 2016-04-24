@@ -43,6 +43,7 @@ TabGroup.prototype.updateInterface = updateInterface;
 TabGroup.prototype.destroy = destroy;
 TabGroup.prototype.addOption = addOption;
 TabGroup.prototype.removeOption = removeOption;
+TabGroup.prototype.removeAllOptions = removeAllOptions;
 TabGroup.prototype.updateOptionIndex = updateOptionIndex;
 TabGroup.prototype.selectOption = selectOption;
 
@@ -66,6 +67,18 @@ function addOption(name, image, closeable)
 }
 
 //Remove tab
+function removeAllOptions()
+{
+	while(this.options.length > 0)
+	{
+		this.options.pop().destroy();
+	}
+	
+	this.updateOptionIndex();
+	this.updateInterface();
+}
+
+//Remove tab
 function removeOption(index)
 {
 	if(index >= 0 && index < this.options.length)
@@ -75,6 +88,11 @@ function removeOption(index)
 
 		this.updateOptionIndex();
 		this.updateInterface();
+
+		if(this.options_selected >= this.options.length)
+		{
+			this.selectOption(this.options.length - 1);
+		}
 	}
 }
 

@@ -90,7 +90,6 @@ function PerspectiveCameraPanel(parent)
 	this.fov_text.setText("-");
 	this.fov_text.position.set(205, 95);
 	this.fov_text.updateInterface();
-
 }
 
 //Functions Prototype
