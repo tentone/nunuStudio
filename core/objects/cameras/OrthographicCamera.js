@@ -1,17 +1,20 @@
-function OrthographicCamera(left, right, top, bottom, near, far)//(size, aspect, near, far, mode)
+//Orthographic Camera constructor aspect is in x/y mode
+function OrthographicCamera(size, aspect, mode, near, far)
 {
-	/*this.size = 5;
-	this.aspect = 1;
+	THREE.OrthographicCamera.call(this, -1, 1, 1, -1, near, far);
+
+	this.name = "orthographic_camera";
+
+	this.size = size;
+	this.aspect = aspect;
 	this.mode = OrthographicCamera.FIXED_VERTICAL;
 
 	if(mode !== undefined)
 	{
 		this.mode = mode;
-	}*/
+	}
 
-	THREE.OrthographicCamera.call(this, left, right, top, bottom, near, far);
-
-	this.name = "orthographic_camera";
+	this.updateProjectionMatrix();
 }
 
 //Function Prototype
@@ -20,6 +23,8 @@ OrthographicCamera.prototype.icon = "editor/files/icons/camera/orthographic.png"
 
 OrthographicCamera.prototype.update = update;
 OrthographicCamera.prototype.initialize = initialize;
+OrthographicCamera.prototype.updateProjectionMatrix = updateProjectionMatrix;
+OrthographicCamera.prototype.toJSON = toJSON;
 
 //Camera scale mode
 OrthographicCamera.FIXED_VERTICAL = 0;
@@ -47,4 +52,48 @@ function update()
 			this.children[i].update();
 		}
 	}
+}
+
+//Update camera projection matrix
+function updateProjectionMatrix()
+{
+	//Update left right, top and bottom values from aspect and size
+	if(this.mode === OrthographicCamera.FIXED_VERTICAL)
+	{
+		this.top = this.size/2;
+		this.bottom = -this.top;
+
+		this.right = this.top * this.aspect;
+		this.left = -this.right;
+	}
+	else if(this.mode === OrthographicCamera.FIXED_HORIZONTAL)
+	{
+		this.right = this.size/2;
+		this.left = -this.right;
+
+		this.top = this.right * this.aspect;
+		this.bottom = -this.right;
+	}
+
+	THREE.OrthographicCamera.prototype.updateProjectionMatrix.call(this);
+}
+
+//Create JSON for object
+function toJSON(meta)
+{
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+
+	data.object.zoom = this.zoom;
+	data.object.left = this.left;
+	data.object.right = this.right;
+	data.object.top = this.top;
+	data.object.bottom = this.bottom;
+	data.object.near = this.near;
+	data.object.far = this.far;
+
+	data.object.size = this.size;
+	data.object.aspect = this.aspect;
+	data.object.mode = this.mode;
+
+	return data;
 }

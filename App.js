@@ -1,5 +1,4 @@
 include("lib/three/three.js");
-include("lib/three/stats.min.js");
 
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
@@ -26,6 +25,7 @@ include("lib/leap/leap-plugins-0.1.11.min.js");
 include("lib/cannon/cannon.min.js");
 include("lib/cannon/cannondebugrenderer.js");
 
+include("lib/stats.min.js");
 include("lib/opentype.min.js");
 include("lib/jszip.min.js");
 
@@ -77,8 +77,8 @@ App.initialize = function(main)
 	App.stats.domElement.style.position = "absolute";
 	App.stats.domElement.style.left = "0px";
 	App.stats.domElement.style.top = "0px";
-	App.stats.domElement.style.zIndex = "10000";
-	App.stats.domElement.style.opacity = "0.9";
+	App.stats.domElement.style.zIndex = "100";
+	App.stats.domElement.style.opacity = "0.7";
 	App.stats.domElement.style.pointerEvents = "none";
 	document.body.appendChild(App.stats.domElement);
 

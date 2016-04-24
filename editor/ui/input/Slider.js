@@ -42,6 +42,13 @@ Slider.prototype.getValue = getValue;
 Slider.prototype.setValue = setValue;
 Slider.prototype.setOnChange = setOnChange;
 Slider.prototype.setRange = setRange;
+Slider.prototype.setStep = setStep;
+
+//Set slider min step
+function setStep(step)
+{
+	this.element.step = String(step);
+}
 
 //Set slider range
 function setRange(min, max)
