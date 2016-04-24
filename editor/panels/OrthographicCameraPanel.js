@@ -54,8 +54,8 @@ function OrthographicCameraPanel(parent)
 	this.rotation = new Slider(this.element);
 	this.rotation.size.set(150, 18);
 	this.rotation.position.set(65, 60);
-	this.rotation.setRange(-Math.PI, Math.PI);
-	this.rotation.setStep(0.1);
+	this.rotation.setRange(-3.14, 3.14);
+	this.rotation.setStep(0.02);
 	this.rotation.updateInterface();
 	this.rotation.setOnChange(function()
 	{

@@ -71,7 +71,7 @@ Editor.initialize = function(canvas)
 	App.setMouseLock(false);
 
 	//Show stats
-	App.showStats(true);
+	App.showStats(false);
 	App.stats.domElement.style.left = "40px";
 	App.stats.domElement.style.top = "55px";
 
