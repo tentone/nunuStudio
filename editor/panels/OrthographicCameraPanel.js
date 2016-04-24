@@ -112,6 +112,31 @@ function OrthographicCameraPanel(parent)
 			self.obj.mode = self.mode.getSelectedIndex();
 		}
 	});
+
+	//Select camera as scene default
+	this.default = new Checkbox(this.element);
+	this.default.setText("Default camera");
+	this.default.size.set(200, 15);
+	this.default.position.set(3, 135);
+	this.default.updateInterface();
+	this.default.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			var scene = ObjectUtils.getScene(self.obj);
+			if(scene !== null)
+			{
+				if(self.default.getValue())
+				{
+					scene.initial_camera = self.obj.uuid;
+				}
+				else
+				{
+					scene.initial_camera = null;
+				}
+			}
+		}
+	});
 }
 
 //Functions Prototype
@@ -125,15 +150,12 @@ function updatePanel()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
-
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
-
 		this.rotation.setValue(this.obj.rotation.z);
 		this.rotation_text.setText(this.obj.rotation.z);
-
 		this.size.setValue(this.obj.size);
-
 		this.mode.setSelectedIndex(this.obj.mode);
+		this.default.setValue(ObjectUtils.getScene(this.obj).initial_camera === this.obj.uuid);
 	}
 }
 

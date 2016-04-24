@@ -1,11 +1,28 @@
 //Object tools contains some object managing helpers
 function ObjectUtils(){}
 
+//Get object scene
+ObjectUtils.getScene = function(obj)
+{
+	var node = obj;
+
+	while(node.parent !== null)
+	{
+		node = node.parent;
+		if(node instanceof Scene)
+		{
+			return node;
+		}
+	}
+
+	return null;
+}
+
 //Get object tree root
 ObjectUtils.getRoot = function(obj)
 {
 	var node = obj;
-	while(node.parent != null)
+	while(node.parent !== null)
 	{
 		node = node.parent;
 	}
