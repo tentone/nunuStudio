@@ -41,6 +41,7 @@ function DropdownMenu(parent)
 	this.visible = true;
 
 	//Options
+	this.options_location = DropdownMenu.DOWN;
 	this.options_size = new THREE.Vector2(150, 20);
 	this.options = [];
 	this.expanded = false;
@@ -86,14 +87,27 @@ function DropdownMenu(parent)
 //DropdownMenu ID counter
 DropdownMenu.id = 0;
 
+//Options location
+DropdownMenu.DOWN = 0;
+DropdownMenu.LEFT = 1;
+DropdownMenu.RIGHT = 1;
+
 //Functions Prototype
 DropdownMenu.prototype.update = update;
 DropdownMenu.prototype.updateInterface = updateInterface;
 DropdownMenu.prototype.addOption = addOption;
+DropdownMenu.prototype.addMenu = addMenu;
 DropdownMenu.prototype.removeOption = removeOption;
 DropdownMenu.prototype.destroy = destroy;
 DropdownMenu.prototype.setText = setText;
 DropdownMenu.prototype.updateOptions = updateOptions;
+DropdownMenu.prototype.setLocation = setLocation;
+
+//Set location to where options should open
+function setLocation(location)
+{
+	this.options_location = location;
+}
 
 //Set Text
 function setText(text)
@@ -150,9 +164,28 @@ function addOption(name, callback)
 	});
 
 	this.options.push(button);
-
 	this.updateOptions();
 	this.updateInterface();
+
+	return button;
+}
+
+//Add new Option to dropdown menu
+function addMenu(name)
+{
+	var menu = new DropdownMenu(this.panel);
+	menu.visible = this.expanded;
+	menu.setText(name);
+	menu.setLocation(DropdownMenu.LEFT);
+
+	menu.text.setAlignment(Text.LEFT);
+	menu.text.position.set(25, 0);
+	
+	this.options.push(menu);
+	this.updateOptions();
+	this.updateInterface();
+
+	return menu;
 }
 
 //Updates options position and size
@@ -195,8 +228,22 @@ function updateInterface()
 	this.text.updateInterface();
 
 	//Panel position, size and visibility
-	this.panel.style.top = (this.position.y + this.size.y) + "px";
-	this.panel.style.left = this.position.x + "px";
+	if(this.options_location === DropdownMenu.DOWN)
+	{
+		this.panel.style.top = (this.position.y + this.size.y) + "px";
+		this.panel.style.left = this.position.x + "px";
+	}
+	else if(this.options_location === DropdownMenu.LEFT)
+	{
+		this.panel.style.top = this.position.y + "px";
+		this.panel.style.left = (this.position.x + this.size.x) + "px";
+	}
+	else if(this.options_location === DropdownMenu.RIGHT)
+	{
+		this.panel.style.top = this.position.y + "px";
+		this.panel.style.left = (this.position.x - this.size.x) + "px";
+	}
+
 	this.panel.style.width = this.size.x + "px";
 	this.panel.style.height = (this.options_size.y * this.options.length) + "px";
 	this.panel.style.visibility = visibility;
