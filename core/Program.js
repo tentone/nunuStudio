@@ -69,7 +69,7 @@ function resize(x, y)
 
 }
 
-//Select starting scene and initialize that scene
+//Select initial scene and initialize that scene
 function initialize()
 {
 	if(this.initial_scene !== null)
@@ -87,6 +87,7 @@ function initialize()
 	{
 		this.scene = this.children[0];
 	}
+
 	this.scene.initialize();
 }
 
@@ -158,7 +159,6 @@ function add(scene)
 		if(this.children.length === 1)
 		{
 			this.scene = this.children[0];
-			this.setInitialScene(this.scene);
 		}
 	}
 }
@@ -176,14 +176,14 @@ function toJSON(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
-	data.description = this.description;
-	data.author = this.author;
-	data.version = this.version;
-	data.vr = this.vr;
-
+	data.object.description = this.description;
+	data.object.author = this.author;
+	data.object.version = this.version;
+	data.object.vr = this.vr;
+	
 	if(this.initial_scene !== null)
 	{
-		data.initial_scene = this.initial_scene;
+		data.object.initial_scene = this.initial_scene;
 	}
 
 	return data;

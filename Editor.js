@@ -44,6 +44,8 @@ include("editor/panels/LeapPanel.js");
 include("editor/panels/ScriptPanel.js");
 include("editor/panels/PerspectiveCameraPanel.js");
 include("editor/panels/OrthographicCameraPanel.js");
+include("editor/panels/ScenePanel.js");
+include("editor/panels/ProgramPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -627,6 +629,14 @@ Editor.updateSelectedObjectPanel = function()
 	else if(Editor.selected_object instanceof OrthographicCamera)
 	{
 		Interface.panel = new OrthographicCameraPanel(Interface.explorer_resizable.div_b);
+	}
+	else if(Editor.selected_object instanceof Scene)
+	{
+		Interface.panel = new ScenePanel(Interface.explorer_resizable.div_b);
+	}
+	else if(Editor.selected_object instanceof Program)
+	{
+		Interface.panel = new ProgramPanel(Interface.explorer_resizable.div_b);
 	}
 	else
 	{

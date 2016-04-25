@@ -12,7 +12,6 @@ function ButtonDrawer(parent)
 	
 	//ID
 	var id = "drawer" + ButtonDrawer.id;
-	var id_panel = "drawerpanel" + ButtonDrawer.id;
 	ButtonDrawer.id++;
 
 	//Create element
@@ -23,7 +22,6 @@ function ButtonDrawer(parent)
 	
 	//Create Drawer Panel
 	this.panel = document.createElement("div");
-	this.panel.id = id_panel;
 	this.panel.style.position = "absolute";
 	this.panel.className = "bar";
 	this.panel.style.zIndex = "200";
@@ -110,13 +108,14 @@ function destroy()
 {
 	try
 	{
-		for(var k = 0; k < this.options.length; k++)
-		{
-			this.options[k].destroy();
-		}
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
+
+	for(var k = 0; k < this.options.length; k++)
+	{
+		this.options[k].destroy();
+	}
 }
 
 //Update

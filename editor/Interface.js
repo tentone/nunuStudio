@@ -29,17 +29,18 @@ Interface.initialize = function()
 
 	Interface.asset_explorer_bar = new Division(Interface.asset_explorer.element);
 	Interface.asset_explorer_bar.position.set(0, 0);
-	Interface.asset_explorer_bar.size.y = 25;
+	Interface.asset_explorer_bar.size.y = 20;
 	Interface.asset_explorer_bar.element.className = "bar";
 	Interface.asset_explorer_bar.updateInterface();
 
-	//File
+	//Import Files
 	Interface.asset_file = new DropdownMenu(Interface.asset_explorer_bar.element);
-	Interface.asset_file.setText("Models");
-	Interface.asset_file.size.set(120, Interface.asset_explorer_bar.size.y);
+	Interface.asset_file.setText("Import");
+	Interface.asset_file.size.set(100, Interface.asset_explorer_bar.size.y);
 	Interface.asset_file.position.set(0,0);
 	
-	Interface.asset_file.addOption("Import obj", function()
+	var import_models = Interface.asset_file.addMenu("3D Models");
+	import_models.addOption("Obj", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -60,7 +61,7 @@ Interface.initialize = function()
 		}, ".obj");
 	});
 
-	Interface.asset_file.addOption("Import Collada", function()
+	import_models.addOption("Collada", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -81,7 +82,7 @@ Interface.initialize = function()
 		}, ".dae");
 	});
 
-	Interface.asset_file.addOption("Import json", function()
+	import_models.addOption("ThreeJS JSON", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -109,7 +110,7 @@ Interface.initialize = function()
 		}, ".json, .js");
 	});
 
-	Interface.asset_file.addOption("Import VRML", function()
+	import_models.addOption("VRML", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -130,7 +131,7 @@ Interface.initialize = function()
 		}, ".wrl, .vrml");
 	});
 
-	/*Interface.asset_file.addOption("Import FBX", function()
+	/*import_models.addOption("FBX", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -152,12 +153,7 @@ Interface.initialize = function()
 		}, ".fbx");
 	});*/
 
-	//Add assets
-	Interface.asset_add = new DropdownMenu(Interface.asset_explorer_bar.element);
-	Interface.asset_add.setText("Texture");
-	Interface.asset_add.size.set(100, Interface.asset_explorer_bar.size.y);
-	Interface.asset_add.position.set(120,0);
-	Interface.asset_add.addOption("Import Texture", function()
+	Interface.asset_file.addOption("Texture", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -175,6 +171,45 @@ Interface.initialize = function()
 			}
 		}, "image/*");
 	});
+
+	Interface.asset_file.addOption("Audio", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	//Create new
+	Interface.asset_create = new DropdownMenu(Interface.asset_explorer_bar.element);
+	Interface.asset_create.setText("Create");
+	Interface.asset_create.size.set(100, Interface.asset_explorer_bar.size.y);
+	Interface.asset_create.position.set(100,0);
+
+	Interface.asset_create.addOption("Script", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
+	var asset_create_material = Interface.asset_create.addMenu("Material");
+	asset_create_material.addOption("Standard material", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	asset_create_material.addOption("Sprite material", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	asset_create_material.addOption("Phong material", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	asset_create_material.addOption("Shader material", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	asset_create_material.addOption("Lambert material", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
 
 	//------------------------------------Explorer------------------------------------
 	Interface.explorer = new DivisionResizable();
@@ -556,7 +591,6 @@ Interface.initialize = function()
 			try
 			{
 				Editor.saveProgram(file);
-				alert("File saved");
 			}
 			catch(e)
 			{
@@ -666,7 +700,7 @@ Interface.initialize = function()
 	{
 		Editor.program.addDefaultScene();
 		Editor.updateTreeView();
-	});
+	}, Interface.file_dir + "icons/misc/add.png");
 
 	Interface.project.addOption("Project Settings", function()
 	{
