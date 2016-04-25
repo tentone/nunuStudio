@@ -609,7 +609,20 @@ Interface.initialize = function()
 		}
 	});
 
-	Interface.file.addOption("Publish", function()
+	var publish = Interface.file.addMenu("Publish");
+	publish.addOption("Web", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	publish.addOption("Windows", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	publish.addOption("OSX", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	publish.addOption("Android", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
