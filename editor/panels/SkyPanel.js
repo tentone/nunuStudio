@@ -29,7 +29,7 @@ function SkyPanel(parent)
 	this.auto_update = new Checkbox(this.element);
 	this.auto_update.setText("Auto update");
 	this.auto_update.size.set(200, 15);
-	this.auto_update.position.set(0, 30);
+	this.auto_update.position.set(0, 35);
 	this.auto_update.updateInterface();
 	this.auto_update.setOnChange(function()
 	{
@@ -44,12 +44,12 @@ function SkyPanel(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Day duration(s)");
 	text.size.set(100, 0);
-	text.position.set(5, 60);
+	text.position.set(5, 70);
 	text.updateInterface();
 
 	this.day_time = new Numberbox(this.element);
 	this.day_time.size.set(100, 18);
-	this.day_time.position.set(95, 50);
+	this.day_time.position.set(95, 60);
 	this.day_time.updateInterface();
 	this.day_time.setOnChange(function()
 	{
@@ -65,12 +65,12 @@ function SkyPanel(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Time(s)")
 	text.size.set(100, 0);
-	text.position.set(5, 85);
+	text.position.set(5, 95);
 	text.updateInterface();
 
 	this.time = new Numberbox(this.element);
 	this.time.size.set(100, 18);
-	this.time.position.set(60, 75);
+	this.time.position.set(55, 85);
 	this.time.updateInterface();
 	this.time.setOnChange(function()
 	{
@@ -93,6 +93,28 @@ function SkyPanel(parent)
 			self.obj.updateSky();
 		}
 	});
+
+	//Sun distance
+	text = new Text(this.element);
+	text.setAlignment(Text.LEFT);
+	text.setText("Sun distance");
+	text.size.set(100, 0);
+	text.position.set(5, 120);
+	text.updateInterface();
+	
+	this.sun_distance = new Numberbox(this.element);
+	this.sun_distance.size.set(80, 18);
+	this.sun_distance.position.set(80, 110);
+	this.sun_distance.setStep(10);
+	this.sun_distance.updateInterface();
+	this.sun_distance.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.sun_distance = self.sun_distance.getValue();
+			self.obj.updateSky();
+		}
+	});
 }
 
 //Functions Prototype
@@ -109,6 +131,7 @@ function updatePanel()
 		this.auto_update.setValue(this.obj.auto_update);
 		this.day_time.setValue(this.obj.day_time);
 		this.time.setValue(this.obj.time);
+		this.sun_distance.setValue(this.obj.sun_distance);
 	}
 }
 

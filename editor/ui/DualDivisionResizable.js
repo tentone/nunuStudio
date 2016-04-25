@@ -12,9 +12,6 @@ function DualDivisionResizable(parent)
 
 	//ID
 	var id = "div_dual" + DualDivisionResizable.id;
-	var id_a = "div_dual_a" + DualDivisionResizable.id;
-	var id_b = "div_duasl_b" + DualDivisionResizable.id;
-	var id_tab = "div_dual_tab" + DualDivisionResizable.id;
 	DualDivisionResizable.id++;
 
 	//Create element
@@ -25,19 +22,16 @@ function DualDivisionResizable(parent)
 
 	//Division A
 	this.div_a = document.createElement("div");
-	this.div_a.id = id_a;
 	this.div_a.style.position = "absolute";
 	this.div_a.className = "container";
 
 	//Division B
 	this.div_b = document.createElement("div");
-	this.div_b.id = id_b;
 	this.div_b.style.position = "absolute";
 	this.div_b.className = "container";
 
 	//Create resize_tab tab
 	this.resize_tab = document.createElement("div");
-	this.resize_tab.id = id_tab;
 	this.resize_tab.style.position = "absolute";
 	this.resize_tab.className = "panel_res_hor_tab";
 

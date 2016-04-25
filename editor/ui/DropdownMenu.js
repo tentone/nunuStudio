@@ -12,7 +12,6 @@ function DropdownMenu(parent)
 	
 	//ID
 	var id = "dropmenu" + Button.id;
-	var id_panel = "dropmenupanel" + Button.id;
 	DropdownMenu.id++;
 
 	//Create element
@@ -30,7 +29,6 @@ function DropdownMenu(parent)
 
 	//Options Panel
 	this.panel = document.createElement("div");
-	this.panel.id = id_panel;
 	this.panel.style.position = "absolute";
 	this.panel.className = "bar";
 	this.panel.style.zIndex = "200";
@@ -39,6 +37,9 @@ function DropdownMenu(parent)
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
+
+	//Children elements
+	this.children = [];
 
 	//Options
 	this.options_location = DropdownMenu.DOWN;
@@ -100,8 +101,14 @@ DropdownMenu.prototype.addMenu = addMenu;
 DropdownMenu.prototype.removeOption = removeOption;
 DropdownMenu.prototype.destroy = destroy;
 DropdownMenu.prototype.setText = setText;
-DropdownMenu.prototype.updateOptions = updateOptions;
 DropdownMenu.prototype.setLocation = setLocation;
+DropdownMenu.prototype.add = add;
+
+//Add extra element to dropdown
+function add(element)
+{
+	this.children.push(element);
+}
 
 //Set location to where options should open
 function setLocation(location)
@@ -120,13 +127,18 @@ function destroy()
 {
 	try
 	{
-		for(var k = 0; k < this.options.length; k++)
-		{
-			this.options[k].destroy();
-		}
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
+
+	for(var k = 0; k < this.options.length; k++)
+	{
+		this.options[k].destroy();
+	}
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].destroy();
+	}
 }
 
 //Update
@@ -139,17 +151,15 @@ function removeOption(index)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
-
-		this.updateOptions();
 		this.updateInterface();
 	}
 }
 
 //Add new Option to dropdown menu
-function addOption(name, callback)
+function addOption(name, callback, icon)
 {
 	var button = new Button(this.panel);
-	button.element.style.zIndex = "10";
+	button.element.style.zIndex = "200";
 	button.visible = this.expanded;
 	button.setText(name);
 	button.text.setAlignment(Text.LEFT);
@@ -163,40 +173,50 @@ function addOption(name, callback)
 		self.updateInterface();
 	});
 
+	if(icon !== undefined)
+	{
+		var image = new Image(button.element);
+		image.setImage(icon);
+		image.size.set(12, 12);
+		image.position.set(5, 3);
+		button.add(image);
+	}
+
 	this.options.push(button);
-	this.updateOptions();
 	this.updateInterface();
 
 	return button;
 }
 
 //Add new Option to dropdown menu
-function addMenu(name)
+function addMenu(name, icon)
 {
 	var menu = new DropdownMenu(this.panel);
 	menu.visible = this.expanded;
 	menu.setText(name);
 	menu.setLocation(DropdownMenu.LEFT);
-
 	menu.text.setAlignment(Text.LEFT);
 	menu.text.position.set(25, 0);
-	
+
+	if(icon !== undefined)
+	{
+		var image = new Image(menu.element);
+		image.setImage(icon);
+		image.size.set(12, 12);
+		image.position.set(5, 3);
+		menu.add(image);
+	}
+
+	var arrow = new Image(menu.element);
+	arrow.setImage("editor/files/icons/misc/arrow_right.png");
+	arrow.size.set(12, 12);
+	arrow.position.set(this.options_size.x - 20, 3);
+	menu.add(arrow);
+
 	this.options.push(menu);
-	this.updateOptions();
 	this.updateInterface();
 
 	return menu;
-}
-
-//Updates options position and size
-function updateOptions()
-{
-	for(var i = 0; i < this.options.length; i++)
-	{
-		this.options[i].size.set(this.options_size.x, this.options_size.y);
-		this.options[i].position.set(0, (this.options_size.y*i));
-		this.options[i].updateInterface();
-	}
 }
 
 //Update interface
@@ -218,8 +238,16 @@ function updateInterface()
 	for(var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].visible = visible;
-		this.options[i].element.style.visibility = visibility;
-		this.options[i].text.element.style.visibility = visibility;
+		this.options[i].size.set(this.options_size.x, this.options_size.y);
+		this.options[i].position.set(0, (this.options_size.y*i));
+		this.options[i].updateInterface();
+	}
+
+	//Update attached elements if any
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].visible = this.visible;
+		this.children[i].updateInterface();
 	}
 
 	//Update text

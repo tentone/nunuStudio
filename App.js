@@ -128,8 +128,6 @@ App.chooseFile = function(callback, filter, savemode)
 	chooser.click();  
 }
 
-
-
 //Read File
 App.readFile = function(fname)
 {
@@ -171,7 +169,7 @@ App.writeFile = function(fname, data)
 {
 	if(App.fs !== undefined)
 	{
-		App.fs.writeFileSync(fname, data);
+		App.fs.writeFile(fname, data, "utf8");
 	}
 }
 

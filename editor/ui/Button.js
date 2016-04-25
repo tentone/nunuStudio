@@ -24,6 +24,9 @@ function Button(parent)
 	this.text = new Text(this.element);
 	this.text.setText("text");
 
+	//Children elements
+	this.children = [];
+
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
@@ -60,6 +63,13 @@ Button.prototype.destroy = destroy;
 Button.prototype.setClass = setClass;
 Button.prototype.setText = setText;
 Button.prototype.setCallback = setCallback;
+Button.prototype.add = add;
+
+//Add extra element to button
+function add(element)
+{
+	this.children.push(element);
+}
 
 //Set Button text
 function setText(text)
@@ -79,6 +89,10 @@ function destroy()
 	try
 	{
 		this.parent.removeChild(this.element);
+		for(var i = 0; i < this.children.length; i++)
+		{
+			this.children[i].destroy();
+		}
 	}
 	catch(e){}
 }
@@ -102,6 +116,12 @@ function updateInterface()
 	else
 	{
 		this.element.style.visibility = "hidden";
+	}
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].visible = this.visible;
+		this.children[i].updateInterface();
 	}
 
 	this.text.size.set(this.size.x, this.size.y);
