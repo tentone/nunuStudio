@@ -1,0 +1,119 @@
+{
+	"metadata": {
+		"version": 4.4,
+		"type": "Object",
+		"generator": "Object3D.toJSON"
+	},
+	"geometries": [
+		{
+			"uuid": "884FF864-F468-48EF-A7E5-B159180DCC41",
+			"type": "BoxGeometry",
+			"name": "geometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		},
+		{
+			"uuid": "CE10EFDD-340C-4872-80F7-9304CFB7CD4C",
+			"type": "BoxGeometry",
+			"name": "geometry",
+			"width": 20,
+			"height": 1,
+			"depth": 20
+		}],
+	"materials": [
+		{
+			"uuid": "00D7C448-FE04-43AE-9032-644F353CF31F",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
+		},
+		{
+			"uuid": "B7156046-BF4E-4A1A-9A79-7BB0859B6BFB",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
+		}],
+	"object": {
+		"uuid": "E34CB189-A697-4BB5-855E-95AB16032F0D",
+		"type": "Program",
+		"name": "Muscle avatar",
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+			{
+				"uuid": "254A9E9D-3BD9-44BE-A455-DFC846DC98D7",
+				"type": "Scene",
+				"name": "Avatar",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"children": [
+					{
+						"uuid": "AC51380A-61CE-4CC4-A38D-4CEA28891F2A",
+						"type": "Mesh",
+						"name": "box",
+						"castShadow": true,
+						"receiveShadow": true,
+						"matrix": [267.1200866699219,0,0,0,0,81.947021484375,0,0,0,0,1,0,0,31.747671127319336,-54.437889099121094,1],
+						"geometry": "884FF864-F468-48EF-A7E5-B159180DCC41",
+						"material": "00D7C448-FE04-43AE-9032-644F353CF31F"
+					},
+					{
+						"uuid": "E49C7B32-F8A1-4FC8-ADC9-6A1532773344",
+						"type": "Mesh",
+						"name": "ground",
+						"castShadow": true,
+						"receiveShadow": true,
+						"matrix": [13.576335906982422,0,0,0,0,1,0,0,0,0,10.746886253356934,0,-0.016987349838018417,-1,0,1],
+						"geometry": "CE10EFDD-340C-4872-80F7-9304CFB7CD4C",
+						"material": "B7156046-BF4E-4A1A-9A79-7BB0859B6BFB"
+					},
+					{
+						"uuid": "6C26B90A-AF5B-4F3E-B946-404E5B7E1473",
+						"type": "PointLight",
+						"name": "point_light",
+						"castShadow": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-0.1229010745882988,4.210941314697266,3.671330213546753,1],
+						"color": 7171437,
+						"intensity": 1,
+						"distance": 0,
+						"decay": 1
+					},
+					{
+						"uuid": "D0B00227-05D6-4D49-B76B-A389BAE43D1F",
+						"type": "Kinect",
+						"name": "kinect",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0.5,-4,1]
+					},
+					{
+						"uuid": "141B2823-3BBF-49AC-805A-16C133F4F5FE",
+						"type": "AmbientLight",
+						"name": "ambient_light",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"color": 5658198,
+						"intensity": 1
+					},
+					{
+						"uuid": "6628F9BA-D9FB-41A9-B3F4-449B28D9EBBC",
+						"type": "PerspectiveCamera",
+						"name": "prespective_camera",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"fov": 60,
+						"zoom": 1,
+						"near": 0.1,
+						"far": 1000000,
+						"focus": 10,
+						"aspect": 2.6226734348561758,
+						"filmGauge": 35,
+						"filmOffset": 0
+					}],
+				"initial_camera": "6628F9BA-D9FB-41A9-B3F4-449B28D9EBBC"
+			}],
+		"description": "",
+		"author": "",
+		"version": "0",
+		"vr": false
+	}
+}
