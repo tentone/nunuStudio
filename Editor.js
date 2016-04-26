@@ -46,6 +46,8 @@ include("editor/panels/PerspectiveCameraPanel.js");
 include("editor/panels/OrthographicCameraPanel.js");
 include("editor/panels/ScenePanel.js");
 include("editor/panels/ProgramPanel.js");
+include("editor/panels/AmbientLightPanel.js");
+include("editor/panels/KinectPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -610,6 +612,10 @@ Editor.updateSelectedObjectPanel = function()
 	{
 		Interface.panel = new LightPanel(Interface.explorer_resizable.div_b);
 	}
+	else if(Editor.selected_object instanceof AmbientLight)
+	{
+		Interface.panel = new AmbientLightPanel(Interface.explorer_resizable.div_b);
+	}
 	else if(Editor.selected_object instanceof Sky)
 	{
 		Interface.panel = new SkyPanel(Interface.explorer_resizable.div_b);
@@ -617,6 +623,10 @@ Editor.updateSelectedObjectPanel = function()
 	else if(Editor.selected_object instanceof LeapHand)
 	{
 		Interface.panel = new LeapPanel(Interface.explorer_resizable.div_b);
+	}
+	else if(Editor.selected_object instanceof KinectDevice)
+	{
+		Interface.panel = new KinectPanel(Interface.explorer_resizable.div_b);
 	}
 	else if(Editor.selected_object instanceof Script)
 	{

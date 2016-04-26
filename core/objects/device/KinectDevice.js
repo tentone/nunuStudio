@@ -9,10 +9,13 @@ function KinectDevice()
 	this.socket = new WebSocket("ws://127.0.0.1:8181");
 	this.connected = false;
 
+	//Configuration
+	this.debug_model = true;
+	this.data_timeout = 0;
+
 	//Received Data
 	this.data = null;
 	this.data_received = false;
-	this.data_timeout = 0;
 
 	//Self pointer
 	var self = this;
@@ -68,6 +71,7 @@ KinectDevice.prototype.initialize = initialize;
 KinectDevice.prototype.update = update;
 KinectDevice.prototype.isConnected = isConnected;
 KinectDevice.prototype.setCameraMode = setCameraMode;
+KinectDevice.prototype.toJSON = toJSON;
 
 //Initialize
 function initialize()
@@ -99,19 +103,23 @@ function update()
 				this.children.pop();
 			}
 
-			var geometry = new THREE.SphereGeometry(0.04, 6, 6);
-			var material = new THREE.MeshPhongMaterial(0xff0000);
-
-			//Fill with new data
-			for(var j = 0; j < this.data.skeletons.length; j++)
+			//Show debug model
+			if(this.debug_model)
 			{
-				var joints = this.data.skeletons[j].joints;
-				for(var i = 0; i < joints.length; i++)
+				var geometry = new THREE.SphereGeometry(0.04, 6, 6);
+				var material = new THREE.MeshPhongMaterial(0xff0000);
+
+				//Fill with new data
+				for(var j = 0; j < this.data.skeletons.length; j++)
 				{
-					var model = new Model3D(geometry, material);
-					model.position.set(joints[i].x, joints[i].y, joints[i].z);
-					model.castShadow = true;
-					this.add(model);
+					var joints = this.data.skeletons[j].joints;
+					for(var i = 0; i < joints.length; i++)
+					{
+						var model = new Model3D(geometry, material);
+						model.position.set(joints[i].x, joints[i].y, joints[i].z);
+						model.castShadow = true;
+						this.add(model);
+					}
 				}
 			}
 		}
@@ -144,8 +152,18 @@ function setCameraMode(mode)
 	{
 		socket.send("Color");
 	}
-	else if(mode === KinectDevice.COLOR)
+	else if(mode === KinectDevice.DEPTH)
 	{
 		socket.send("Depth");
 	}
+}
+
+//Create JSON for object
+function toJSON(meta)
+{
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+
+	data.object.debug_model = this.debug_model;
+
+	return data;
 }

@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Fleck;
 using Microsoft.Kinect;
-
+using System.Runtime.InteropServices;
 
 namespace KinectServer
 {
     class Program
     {
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GetConsoleWindow();
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        const int CONSOLE_HIDE = 0;
+        const int CONSOLE_SHOW = 5;
+
         static List<IWebSocketConnection> _clients = new List<IWebSocketConnection>();
         static Skeleton[] _skeletons = new Skeleton[6];
         static Mode _mode = Mode.Color;
@@ -16,8 +23,19 @@ namespace KinectServer
 
         static void Main(string[] args)
         {
-            InitializeConnection();
-            InitilizeKinect();
+            ShowWindow(GetConsoleWindow(), CONSOLE_HIDE);
+
+            Console.WriteLine("Websocket Microsoft Kinect Server");
+
+            try
+            {
+                InitializeConnection();
+                InitilizeKinect();
+            }
+            catch (Exception e)
+            {
+                System.Environment.Exit(1);
+            }
             Console.ReadLine();
         }
 
@@ -51,23 +69,30 @@ namespace KinectServer
                             break;
                     }
 
-                    Console.WriteLine("Switched to " + message);
+                    Console.WriteLine("Mode switched to " + message);
                 };
             });
         }
 
         private static void InitilizeKinect()
         {
-            var sensor = KinectSensor.KinectSensors.SingleOrDefault();
+            KinectSensor sensor = null;
+            try
+            {
+                sensor = KinectSensor.KinectSensors[0];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No kinect sensor found");
 
-            if (sensor != null)
+            }
+            if(sensor != null)
             {
                 sensor.ColorStream.Enable();
                 sensor.DepthStream.Enable();
                 sensor.SkeletonStream.Enable();
 
                 sensor.AllFramesReady += Sensor_AllFramesReady;
-
                 _coordinateMapper = sensor.CoordinateMapper;
 
                 sensor.Start();

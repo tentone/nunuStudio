@@ -423,10 +423,6 @@ function parseObject(data, geometries, materials)
 
 	switch(data.type)
 	{
-		case "Kinect":
-			object = new KinectDevice();
-			break;
-
 		case "Program":
 			object = new Program(data.name, data.description, data.author, data.version, data.vr);
 			if(data.initial_scene !== undefined)
@@ -437,6 +433,15 @@ function parseObject(data, geometries, materials)
 
 		case "LeapDevice":
 			object = new LeapHand(data.mode, data.use_arm);
+			break;
+
+		case "Kinect":
+			object = new KinectDevice();
+			if(data.debug_model !== undefined)
+			{
+				object.debug_model = data.debug_model;
+			}
+
 			break;
 
 		case "Sky":

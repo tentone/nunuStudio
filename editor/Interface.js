@@ -99,7 +99,11 @@ Interface.initialize = function()
 						m.morphTargets = true;
 					}
 
-					var obj = new AnimatedModel(geometry, new THREE.MultiMaterial(materials));
+					var material = new THREE.MeshPhongMaterial();
+					material.skinning = true;
+					material.morphTargets = true;
+
+					var obj = new AnimatedModel(geometry, material);//new THREE.MultiMaterial(materials));
 					Editor.addToActualScene(obj);
 				});
 			}
@@ -131,7 +135,7 @@ Interface.initialize = function()
 		}, ".wrl, .vrml");
 	});
 
-	/*import_models.addOption("FBX", function()
+	import_models.addOption("FBX", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -151,7 +155,7 @@ Interface.initialize = function()
 				alert("Error loading file\n("+e+")");
 			}
 		}, ".fbx");
-	});*/
+	});
 
 	Interface.asset_file.addOption("Texture", function()
 	{
