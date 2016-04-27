@@ -8,6 +8,10 @@ function Script(code, mode)
 	//Disable auto matrix updates
 	this.rotationAutoUpdate = false;
 
+	//Program and scene pointers
+	this.program = null;
+	this.scene = null;
+
 	//Script Code
 	this.code = "//ADD CODE HERE";
 	this.func = null;
@@ -45,6 +49,21 @@ Script.LOOP = 1;
 //Initialize
 function initialize()
 {
+	//Program and scene
+	var node = this;
+	while(node.parent !== null)
+	{
+		node = node.parent;
+		if(node instanceof Scene)
+		{
+			this.scene = node;
+		}
+		else if(node instanceof Program)
+		{
+			this.program = node;
+		}
+	}
+
 	//Run script
 	if(this.mode === Script.INIT)
 	{

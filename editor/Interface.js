@@ -147,7 +147,6 @@ Interface.initialize = function()
 
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
-
 				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
 			}
 			catch(e)

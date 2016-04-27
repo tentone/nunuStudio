@@ -18,6 +18,7 @@ function Scene()
 	this.initial_camera = null;
 
 	//Runtime variables
+	this.data = function(){};
 	this.camera = null;
 }
 

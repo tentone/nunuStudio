@@ -42,6 +42,7 @@ function Program(name, description, author, version, vr)
 	this.initial_scene = null;
 
 	//Runtime variables
+	this.data = function(){};
 	this.scene = null;
 }
 
@@ -57,17 +58,6 @@ Program.prototype.add = add;
 Program.prototype.remove = remove;
 Program.prototype.setInitialScene = setInitialScene;
 Program.prototype.addDefaultScene = addDefaultScene;
-
-//Screen resize
-function resize(x, y)
-{
-	if(this.scene !== null)
-	{
-		this.scene.camera.aspect = Editor.canvas.width/Editor.canvas.height;
-		this.scene.camera.updateProjectionMatrix();
-	}
-
-}
 
 //Select initial scene and initialize that scene
 function initialize()
@@ -128,6 +118,16 @@ function addDefaultScene()
 
 	//Add scene to program
 	this.add(scene);
+}
+
+//Screen resize
+function resize(x, y)
+{
+	if(this.scene !== null)
+	{
+		this.scene.camera.aspect = Editor.canvas.width/Editor.canvas.height;
+		this.scene.camera.updateProjectionMatrix();
+	}
 }
 
 //Remove Scene
