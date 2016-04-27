@@ -63,6 +63,25 @@ function LeapPanel(parent)
 			self.obj.scale.set(scale.x, scale.y, scale.z);
 		}
 	});
+
+	//Rotation
+	text = new Text(this.element);
+	text.setAlignment(Text.LEFT);
+	text.setText("Rotation");
+	text.position.set(5, 95);
+	text.updateInterface();
+
+	this.rotation = new Positionbox(this.element);
+	this.rotation.position.set(57, 85);
+	this.rotation.updateInterface();
+	this.rotation.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			var rotation = self.rotation.getValue();
+			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
+		}
+	});
 }
 
 //Functions Prototype
@@ -76,9 +95,9 @@ function updatePanel()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
-
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
+		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
 	}
 }
 
