@@ -16,9 +16,6 @@ include("lib/three/vr/VREffect.js");
 include("lib/three/vr/webvr-manager.js");
 include("lib/three/vr/webvr-polyfill.js");
 
-include("lib/threex/videotexture.js");
-include("lib/threex/webcamtexture.js");
-
 include("lib/leap/leap-0.6.4.min.js");
 include("lib/leap/leap-plugins-0.1.11.min.js");
 

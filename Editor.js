@@ -38,16 +38,16 @@ include("editor/ui/input/Positionbox.js");
 
 include("editor/panels/Panel.js");
 include("editor/panels/ObjectPanel.js");
-include("editor/panels/LightPanel.js");
 include("editor/panels/SkyPanel.js");
 include("editor/panels/LeapPanel.js");
 include("editor/panels/ScriptPanel.js");
-include("editor/panels/PerspectiveCameraPanel.js");
-include("editor/panels/OrthographicCameraPanel.js");
+include("editor/panels/KinectPanel.js");
 include("editor/panels/ScenePanel.js");
 include("editor/panels/ProgramPanel.js");
-include("editor/panels/AmbientLightPanel.js");
-include("editor/panels/KinectPanel.js");
+include("editor/panels/cameras/PerspectiveCameraPanel.js");
+include("editor/panels/cameras/OrthographicCameraPanel.js");
+include("editor/panels/lights/AmbientLightPanel.js");
+include("editor/panels/lights/PointLightPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -153,7 +153,7 @@ Editor.initialize = function(canvas)
 	Editor.tool_scene.add(Editor.spot_light_helper);
 
 	//HemisphereLight helper
-	Editor.hemisphere_light_helper = new THREE.HemisphereLightHelper(new THREE.HemisphereLight, 1);
+	Editor.hemisphere_light_helper = new THREE.HemisphereLightHelper(new THREE.HemisphereLight(), 1);
 	Editor.activateHelper(Editor.hemisphere_light_helper, false);
 	Editor.tool_scene.add(Editor.hemisphere_light_helper);
 
@@ -610,7 +610,7 @@ Editor.updateSelectedObjectPanel = function()
 	//Select correct panel
 	if(Editor.selected_object instanceof PointLight)
 	{
-		Interface.panel = new LightPanel(Interface.explorer_resizable.div_b);
+		Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b);
 	}
 	else if(Editor.selected_object instanceof AmbientLight)
 	{

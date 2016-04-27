@@ -1,4 +1,4 @@
-function LightPanel(parent)
+function PointLightPanel(parent)
 {
 	Panel.call(this, parent);
 
@@ -54,7 +54,7 @@ function LightPanel(parent)
 
 	this.color = new ColorChooser(this.element);
 	this.color.size.set(80, 18);
-	this.color.position.set(50, 60);
+	this.color.position.set(45, 60);
 	this.color.updateInterface();
 	this.color.setOnChange(function()
 	{
@@ -64,12 +64,26 @@ function LightPanel(parent)
 			self.obj.color.setRGB(color.r, color.g, color.b);
 		}
 	});
+
+	//Cast shadow
+	this.cast_shadow = new Checkbox(this.element);
+	this.cast_shadow.setText("Cast Shadow");
+	this.cast_shadow.size.set(200, 15);
+	this.cast_shadow.position.set(2, 85);
+	this.cast_shadow.updateInterface();
+	this.cast_shadow.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.castShadow = self.cast_shadow.getValue();
+		}
+	});
 }
 
 //Functions Prototype
-LightPanel.prototype = Object.create(Panel.prototype);
-LightPanel.prototype.attachObject = attachObject;
-LightPanel.prototype.updatePanel = updatePanel;
+PointLightPanel.prototype = Object.create(Panel.prototype);
+PointLightPanel.prototype.attachObject = attachObject;
+PointLightPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
 function updatePanel()
@@ -77,10 +91,9 @@ function updatePanel()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
-
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
-
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
+		this.cast_shadow.setValue(this.obj.castShadow);
 	}
 }
 

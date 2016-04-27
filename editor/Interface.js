@@ -341,7 +341,7 @@ Interface.initialize = function()
 	//Cube
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cube.png", function()
 	{
-		var geometry = new THREE.BoxGeometry(1, 1, 1);
+		var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
@@ -353,7 +353,7 @@ Interface.initialize = function()
 	//Cylinder
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cylinder.png", function()
 	{
-		var geometry = new THREE.CylinderGeometry(1, 1, 2, 32);
+		var geometry = new THREE.CylinderBufferGeometry(1, 1, 2, 32);
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
@@ -365,7 +365,7 @@ Interface.initialize = function()
 	//Sphere
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/sphere.png", function()
 	{
-		var geometry = new THREE.SphereGeometry(0.6, 16, 16);
+		var geometry = new THREE.SphereBufferGeometry(1, 16, 16);
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
@@ -377,7 +377,7 @@ Interface.initialize = function()
 	//Torus
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/torus.png", function()
 	{
-		var geometry = new THREE.TorusGeometry(1, 0.5, 16, 100);
+		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 100);
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
@@ -389,7 +389,7 @@ Interface.initialize = function()
 	//Pyramid
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cone.png", function()
 	{
-		var geometry = new THREE.CylinderGeometry(0, 1, 2, 32);
+		var geometry = new THREE.CylinderBufferGeometry(0, 1, 2, 32);
 		var material = new THREE.MeshPhongMaterial();
 		var model = new Model3D(geometry, material);
 		model.receiveShadow = true;
@@ -409,6 +409,18 @@ Interface.initialize = function()
 			model.castShadow = true;
 			Editor.addToActualScene(model);
 		});
+	});
+
+	//Plane
+	Interface.add_model.addOption(Interface.file_dir + "icons/models/plane.png", function()
+	{
+		var geometry = new THREE.PlaneBufferGeometry(1,1);
+		var material = new THREE.MeshPhongMaterial();
+		var model = new Model3D(geometry, material);
+		model.receiveShadow = true;
+		model.castShadow = true;
+		model.name = "plane";
+		Editor.addToActualScene(model);
 	});
 
 	//Add lights
@@ -537,6 +549,12 @@ Interface.initialize = function()
 		Editor.addToActualScene(new Container());
 	});
 
+	//Audio
+	Interface.add_effects.addOption(Interface.file_dir + "icons/misc/music.png", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+
 	//Add device
 	Interface.add_device = new ButtonDrawer();
 	Interface.add_device.setImage(Interface.file_dir + "icons/hw/hw.png");
@@ -600,7 +618,7 @@ Interface.initialize = function()
 				alert("Error saving file");
 			}
 		}, ".isp", true);
-	});
+	}, Interface.file_dir + "icons/misc/save.png");
 
 	Interface.file.addOption("Load Project", function()
 	{
@@ -650,19 +668,22 @@ Interface.initialize = function()
 	publish.addOption("Web", function()
 	{
 		//TODO <ADD CODE HERE>
-	});
+	}, Interface.file_dir + "icons/platform/web.png");
+
 	publish.addOption("Windows", function()
 	{
 		//TODO <ADD CODE HERE>
-	});
+	}, Interface.file_dir + "icons/platform/windows.png");
+
 	publish.addOption("OSX", function()
 	{
 		//TODO <ADD CODE HERE>
-	});
+	}, Interface.file_dir + "icons/platform/osx.png");
+
 	publish.addOption("Android", function()
 	{
 		//TODO <ADD CODE HERE>
-	});
+	}, Interface.file_dir + "icons/platform/android.png");
 
 	Interface.file.addOption("Exit", function()
 	{
@@ -692,6 +713,11 @@ Interface.initialize = function()
 	{
 		Editor.pasteIntoSelectedObject();
 	});
+
+	Interface.editor.addOption("Delete", function()
+	{
+		Editor.deleteSelectedObject();
+	}, Interface.file_dir + "icons/misc/delete.png");
 
 	//Project
 	Interface.project = new DropdownMenu();

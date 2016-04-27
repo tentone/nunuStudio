@@ -82,17 +82,45 @@ function ObjectPanel(parent)
 		}
 	});
 
+	//Cast shadow
+	this.cast_shadow = new Checkbox(this.element);
+	this.cast_shadow.setText("Cast Shadow");
+	this.cast_shadow.size.set(200, 15);
+	this.cast_shadow.position.set(2, 110);
+	this.cast_shadow.updateInterface();
+	this.cast_shadow.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.castShadow = self.cast_shadow.getValue();
+		}
+	});
+
+	//Cast shadow
+	this.receive_shadow = new Checkbox(this.element);
+	this.receive_shadow.setText("Receive Shadow");
+	this.receive_shadow.size.set(200, 15);
+	this.receive_shadow.position.set(2, 135);
+	this.receive_shadow.updateInterface();
+	this.receive_shadow.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.receiveShadow = self.receive_shadow.getValue();
+		}
+	});
+
 	//Type
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Type");
-	text.position.set(5, 120);
+	text.position.set(5, 170);
 	text.updateInterface();
 
 	this.type = new Text(this.element);
 	this.type.setAlignment(Text.LEFT);
 	this.type.setText("");
-	this.type.position.set(35, 120);
+	this.type.position.set(35, 170);
 	this.type.updateInterface();
 
 }
@@ -108,11 +136,11 @@ function updatePanel()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
-
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
-
+		this.cast_shadow.setValue(this.obj.castShadow);
+		this.receive_shadow.setValue(this.obj.receiveShadow);
 		this.type.setText(this.obj.type);
 	}
 }
