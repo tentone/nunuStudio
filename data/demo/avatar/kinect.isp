@@ -1,0 +1,326 @@
+{
+	"metadata": {
+		"version": 4.4,
+		"type": "Object",
+		"generator": "Object3D.toJSON"
+	},
+	"geometries": [
+		{
+			"uuid": "58CF49AB-2BAB-45C0-ABC5-8248C6B337EA",
+			"type": "SphereGeometry",
+			"radius": 4000,
+			"widthSegments": 32,
+			"heightSegments": 15
+		},
+		{
+			"uuid": "33ACAA0E-080A-4781-B5B2-C5B9C76C5C32",
+			"type": "BoxGeometry",
+			"name": "geometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		},
+		{
+			"uuid": "8069E455-0580-4972-AA66-C70DDF1EA97E",
+			"type": "BoxGeometry",
+			"name": "geometry",
+			"width": 20,
+			"height": 1,
+			"depth": 20
+		},
+		{
+			"uuid": "FA4E9406-90E4-4409-AE95-85B1A1AA819E",
+			"type": "BufferGeometry",
+			"data": {
+				"attributes": {
+					"position": {
+						"itemSize": 3,
+						"type": "Float32Array",
+						"array": [-0.5,-0.5,0,0.5,-0.5,0,0.5,0.5,0,-0.5,0.5,0],
+						"normalized": false
+					},
+					"uv": {
+						"itemSize": 2,
+						"type": "Float32Array",
+						"array": [0,0,1,0,1,1,0,1],
+						"normalized": false
+					}
+				},
+				"index": {
+					"type": "Uint16Array",
+					"array": [0,1,2,0,2,3]
+				},
+				"boundingSphere": {
+					"center": [0,0,0],
+					"radius": 0.7071067811865476
+				}
+			}
+		},
+		{
+			"uuid": "87C8FB04-E43E-4ADF-A700-2CC27846CCCF",
+			"type": "SphereGeometry",
+			"radius": 4000,
+			"widthSegments": 32,
+			"heightSegments": 15
+		},
+		{
+			"uuid": "75916831-390F-417A-ABB6-F4B27E272A1C",
+			"type": "BoxGeometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		},
+		{
+			"uuid": "A67F0748-3EEE-4845-B650-A7BFA457C30D",
+			"type": "BoxGeometry",
+			"width": 20,
+			"height": 1,
+			"depth": 20
+		}],
+	"materials": [
+		{
+			"uuid": "1F02B10E-08C3-4595-A304-B51DB31611EC",
+			"type": "ShaderMaterial",
+			"side": 1,
+			"uniforms": {
+				"top_color": {
+					"type": "c",
+					"value": {
+						"r": 0,
+						"g": 0.4627450980392157,
+						"b": 1
+					}
+				},
+				"bottom_color": {
+					"type": "c",
+					"value": {
+						"r": 1,
+						"g": 1,
+						"b": 1
+					}
+				},
+				"offset": {
+					"type": "f",
+					"value": 20
+				},
+				"exponent": {
+					"type": "f",
+					"value": 0.4
+				}
+			},
+			"vertexShader": "varying vec3 vWorldPosition;\r\n\r\nvoid main()\r\n{\r\n\tvec4 worldPosition = modelMatrix * vec4(position, 1.0);\r\n\tvWorldPosition = worldPosition.xyz;\r\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\r\n}",
+			"fragmentShader": "uniform vec3 top_color;\r\nuniform vec3 bottom_color;\r\nuniform float offset;\r\nuniform float exponent;\r\n\r\nvarying vec3 vWorldPosition;\r\n\r\nvoid main()\r\n{\r\n\tfloat h = normalize(vWorldPosition + offset).y;\r\n\tgl_FragColor = vec4(mix(bottom_color, top_color, max(pow(max(h , 0.0), exponent), 0.0)), 1.0);\r\n}"
+		},
+		{
+			"uuid": "F70E6A06-177D-412E-81D2-22A767D8FD4F",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
+		},
+		{
+			"uuid": "AFEE94A4-A6D9-43A6-945E-6BD31505324F",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
+		},
+		{
+			"uuid": "583C4107-6B97-4D93-BEBD-3925DAD1B0CF",
+			"type": "SpriteMaterial",
+			"color": 16777215,
+			"map": "314E6112-A2B6-4E19-B5E7-41CBD592BF8C"
+		},
+		{
+			"uuid": "33EE4924-7E86-4FD0-B24D-8ED18E6D8E04",
+			"type": "ShaderMaterial",
+			"side": 1,
+			"uniforms": {
+				"top_color": {
+					"type": "c",
+					"value": {
+						"r": 0,
+						"g": 0.4627450980392157,
+						"b": 1
+					}
+				},
+				"bottom_color": {
+					"type": "c",
+					"value": {
+						"r": 1,
+						"g": 1,
+						"b": 1
+					}
+				},
+				"offset": {
+					"type": "f",
+					"value": 20
+				},
+				"exponent": {
+					"type": "f",
+					"value": 0.4
+				}
+			},
+			"vertexShader": "varying vec3 vWorldPosition;\r\n\r\nvoid main()\r\n{\r\n\tvec4 worldPosition = modelMatrix * vec4(position, 1.0);\r\n\tvWorldPosition = worldPosition.xyz;\r\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\r\n}",
+			"fragmentShader": "uniform vec3 top_color;\r\nuniform vec3 bottom_color;\r\nuniform float offset;\r\nuniform float exponent;\r\n\r\nvarying vec3 vWorldPosition;\r\n\r\nvoid main()\r\n{\r\n\tfloat h = normalize(vWorldPosition + offset).y;\r\n\tgl_FragColor = vec4(mix(bottom_color, top_color, max(pow(max(h , 0.0), exponent), 0.0)), 1.0);\r\n}"
+		},
+		{
+			"uuid": "985E6664-E576-475F-8F24-4DF736546113",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
+		},
+		{
+			"uuid": "38577391-1F9B-448E-AE6A-57EC949FBFFD",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
+		}],
+	"textures": [
+		{
+			"uuid": "314E6112-A2B6-4E19-B5E7-41CBD592BF8C",
+			"name": "",
+			"mapping": 300,
+			"repeat": [1,1],
+			"offset": [0,0],
+			"wrap": [1001,1001],
+			"minFilter": 1008,
+			"magFilter": 1006,
+			"anisotropy": 1,
+			"image": "06DFD2AF-360B-4595-B356-62FB84395F6E"
+		}],
+	"images": [
+		{
+			"uuid": "06DFD2AF-360B-4595-B356-62FB84395F6E",
+			"url": "data:image/png;base64,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"
+		}],
+	"object": {
+		"uuid": "4F327601-FC8B-4DB4-9589-AE9931F44640",
+		"type": "Program",
+		"name": "program",
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+			{
+				"uuid": "FBDE904B-DBF9-4348-B5C7-3FE9A7CD6B47",
+				"type": "Scene",
+				"name": "scene",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"children": [
+					{
+						"uuid": "C144FD71-4504-4669-991F-C44D67D42BA1",
+						"type": "Sky",
+						"auto_update": false,
+						"day_time": 20,
+						"sun_distance": 100,
+						"time": 13,
+						"name": "sky",
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"geometry": "58CF49AB-2BAB-45C0-ABC5-8248C6B337EA",
+						"material": "1F02B10E-08C3-4595-A304-B51DB31611EC"
+					},
+					{
+						"uuid": "EA389024-76B6-4E73-A301-3F224E0B23CF",
+						"type": "Mesh",
+						"name": "box",
+						"castShadow": true,
+						"receiveShadow": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"geometry": "33ACAA0E-080A-4781-B5B2-C5B9C76C5C32",
+						"material": "F70E6A06-177D-412E-81D2-22A767D8FD4F"
+					},
+					{
+						"uuid": "320D2591-7859-4819-A27A-4CA12F0970F5",
+						"type": "Mesh",
+						"name": "ground",
+						"castShadow": true,
+						"receiveShadow": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,-1,0,1],
+						"geometry": "8069E455-0580-4972-AA66-C70DDF1EA97E",
+						"material": "AFEE94A4-A6D9-43A6-945E-6BD31505324F"
+					},
+					{
+						"uuid": "672D97D8-EE77-46A1-AC76-04D130A1284C",
+						"type": "Kinect",
+						"name": "kinect",
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"children": [
+							{
+								"uuid": "99D4DD03-362D-4010-9338-8C8851AAA4B9",
+								"type": "Script",
+								"code": "if(this.parent.camera !== null)\n{\n  this.children[0].material.map.image.src = URL.createObjectURL(this.parent.camera);\n  this.children[0].material.map.needsUpdate\t= true;\t\t\n}\n\nconsole.log(this.parent.camera);\nconsole.log(this.children[0].material.map);",
+								"mode": 1,
+								"name": "script",
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"children": [
+									{
+										"uuid": "95ACA016-2243-4F9E-AAA6-3A6BA4BBC8FC",
+										"type": "Sprite",
+										"name": "sprite",
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,2.64028263092041,0,1],
+										"geometry": "FA4E9406-90E4-4409-AE95-85B1A1AA819E",
+										"material": "583C4107-6B97-4D93-BEBD-3925DAD1B0CF"
+									}]
+							}],
+						"debug_model": true
+					}]
+			},
+			{
+				"uuid": "10A54E22-58FF-43BC-AA17-778B0738A2C5",
+				"type": "Scene",
+				"name": "scene",
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"children": [
+					{
+						"uuid": "9DD1A7E1-0137-4EAF-B619-C0CD8F9B1925",
+						"type": "Sky",
+						"auto_update": false,
+						"day_time": 20,
+						"sun_distance": 100,
+						"time": 13,
+						"name": "sky",
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"geometry": "87C8FB04-E43E-4ADF-A700-2CC27846CCCF",
+						"material": "33EE4924-7E86-4FD0-B24D-8ED18E6D8E04"
+					},
+					{
+						"uuid": "0CCC51D6-59C0-4412-94FF-AABE00DCBF30",
+						"type": "Mesh",
+						"name": "box",
+						"castShadow": true,
+						"receiveShadow": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"geometry": "75916831-390F-417A-ABB6-F4B27E272A1C",
+						"material": "985E6664-E576-475F-8F24-4DF736546113"
+					},
+					{
+						"uuid": "9281EEE4-F7A2-4C46-AF88-5F207F0AFC6D",
+						"type": "Mesh",
+						"name": "ground",
+						"castShadow": true,
+						"receiveShadow": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"geometry": "A67F0748-3EEE-4845-B650-A7BFA457C30D",
+						"material": "38577391-1F9B-448E-AE6A-57EC949FBFFD"
+					}]
+			}],
+		"description": "",
+		"author": "",
+		"version": "0",
+		"vr": false
+	}
+}

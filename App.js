@@ -122,7 +122,6 @@ App.chooseFile = function(callback, filter, savemode)
 	{
 		if(callback !== undefined)
 		{
-			console.log(event.srcElement);
 			callback(event);
 		}
 	};
