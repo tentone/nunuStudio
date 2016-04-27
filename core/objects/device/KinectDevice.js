@@ -14,6 +14,7 @@ function KinectDevice()
 	this.data_timeout = 0;
 
 	//Received Data
+	this.camera = null;
 	this.data = null;
 	this.data_received = false;
 
@@ -35,16 +36,18 @@ function KinectDevice()
 	//Receive data from the server
 	this.socket.onmessage = function(event)
 	{
+		//Point data received
 		if(typeof event.data === "string")
 		{
 			self.data = JSON.parse(event.data);
 			self.data_received = true;
 			self.data_timeout = KinectDevice.DATA_TIMEOUT;
 		}
+		//Camera feed can be collected using URL.createObjectURL(event.data)
 		else if(event.data instanceof Blob)
 		{
-			var data = event.data;
-			//TOTO <STORE CAMERA FEED>
+			self.camera = event.data;
+			//Interface.image.img.src = URL.createObjectURL(event.data);
 		}
 	};
 }
@@ -79,7 +82,7 @@ function initialize()
 	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].initialize != undefined)
+		if(this.children[i].initialize !== undefined)
 		{
 			this.children[i].initialize();
 		}
@@ -135,6 +138,15 @@ function update()
 					this.children.pop();
 				}
 			}
+		}
+	}
+
+	//Update children
+	for(var i = 0; i < this.children.length; i++)
+	{
+		if(this.children[i].update !== undefined)
+		{
+			this.children[i].update();
 		}
 	}
 }

@@ -114,7 +114,10 @@ Mouse.updatePosition = function(x, y, x_diff, y_diff)
 //Update Mouse Key
 Mouse.updateKey = function(button, action)
 {
-	Mouse.raw_keys[button].update(action);
+	if(button > -1)
+	{
+		Mouse.raw_keys[button].update(action);
+	}
 }
 
 //Update Mouse State (Calculate position diff)
