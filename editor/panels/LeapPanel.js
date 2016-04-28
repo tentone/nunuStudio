@@ -82,6 +82,69 @@ function LeapPanel(parent)
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
 		}
 	});
+
+	//Mode
+	text = new Text(this.element);
+	text.setAlignment(Text.LEFT);
+	text.setText("Mode");
+	text.position.set(5, 120);
+	text.updateInterface();
+
+	this.mode = new DropdownList(this.element);
+	this.mode.position.set(45, 110);
+	this.mode.size.set(80, 18);
+	this.mode.addValue("Desk", Script.INIT);
+	this.mode.addValue("HMD", Script.LOOP);
+	this.mode.updateInterface();
+	this.mode.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.mode = self.mode.getSelectedIndex();
+		}
+	});
+
+	//Debug model
+	this.debug_model = new Checkbox(this.element);
+	this.debug_model.setText("Debug model");
+	this.debug_model.size.set(200, 15);
+	this.debug_model.position.set(2, 135);
+	this.debug_model.updateInterface();
+	this.debug_model.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.debug_model = self.debug_model.getValue();
+		}
+	});
+
+	//Gestures Enabled
+	this.gestures_enabled = new Checkbox(this.element);
+	this.gestures_enabled.setText("Gestures Enabled");
+	this.gestures_enabled.size.set(200, 15);
+	this.gestures_enabled.position.set(2, 160);
+	this.gestures_enabled.updateInterface();
+	this.gestures_enabled.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.gestures_enabled = self.gestures_enabled.getValue();
+		}
+	});
+
+	//Poses Enabled
+	this.poses_enabled = new Checkbox(this.element);
+	this.poses_enabled.setText("Poses Enabled");
+	this.poses_enabled.size.set(200, 15);
+	this.poses_enabled.position.set(2, 185);
+	this.poses_enabled.updateInterface();
+	this.poses_enabled.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.poses_enabled = self.poses_enabled.getValue();
+		}
+	});
 }
 
 //Functions Prototype
@@ -98,6 +161,10 @@ function updatePanel()
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
+		this.mode.setSelectedIndex(this.obj.mode);
+		this.debug_model.setValue(this.obj.debug_model);
+		this.gestures_enabled.setValue(this.obj.gestures_enabled);
+		this.poses_enabled.setValue(this.obj.poses_enabled);
 	}
 }
 
