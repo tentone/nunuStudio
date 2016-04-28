@@ -6,8 +6,8 @@
 	},
 	"geometries": [
 		{
-			"uuid": "FE1C08BE-D84E-4FD8-B0BF-A1097E3E85F9",
-			"type": "SphereBufferGeometry",
+			"uuid": "F6B64D17-D3CF-4A1B-AACE-0B884A0CCA21",
+			"type": "SphereGeometry",
 			"radius": 4000,
 			"widthSegments": 32,
 			"heightSegments": 15
@@ -67,6 +67,7 @@
 		{
 			"uuid": "BF33F660-A9A9-4502-AC6B-94429CA8AFEA",
 			"type": "CylinderBufferGeometry",
+			"name": "geometry",
 			"radiusTop": 0,
 			"radiusBottom": 1,
 			"height": 2,
@@ -75,14 +76,22 @@
 		{
 			"uuid": "E04CE03E-3270-4018-87A9-8E93C27540CC",
 			"type": "TorusBufferGeometry",
+			"name": "geometry",
 			"radius": 1,
 			"tube": 0.5,
 			"radialSegments": 16,
 			"tubularSegments": 100
+		},
+		{
+			"uuid": "ED6E5139-AA4B-4599-AD6F-2D594ED75B2A",
+			"type": "SphereBufferGeometry",
+			"radius": 1,
+			"widthSegments": 16,
+			"heightSegments": 16
 		}],
 	"materials": [
 		{
-			"uuid": "2044B124-A8E6-48D7-A332-4E88EE01D570",
+			"uuid": "242FF1C9-4A4B-40C2-9105-BD1E076CEF3E",
 			"type": "ShaderMaterial",
 			"side": 1,
 			"uniforms": {
@@ -111,8 +120,8 @@
 					"value": 0.4
 				}
 			},
-			"vertexShader": "varying vec3 vWorldPosition;\r\n\r\nvoid main()\r\n{\r\n\tvec4 worldPosition = modelMatrix * vec4(position, 1.0);\r\n\tvWorldPosition = worldPosition.xyz;\r\n\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);\r\n}",
-			"fragmentShader": "uniform vec3 top_color;\r\nuniform vec3 bottom_color;\r\nuniform float offset;\r\nuniform float exponent;\r\n\r\nvarying vec3 vWorldPosition;\r\n\r\nvoid main()\r\n{\r\n\tfloat h = normalize(vWorldPosition + offset).y;\r\n\tgl_FragColor = vec4(mix(bottom_color, top_color, max(pow(max(h , 0.0), exponent), 0.0)), 1.0);\r\n}"
+			"vertexShader": "varying vec3 vWorldPosition; \tvoid main() \t{ \t\tvec4 worldPosition = modelMatrix * vec4(position, 1.0); \t\tvWorldPosition = worldPosition.xyz; \t\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); \t}",
+			"fragmentShader": "uniform vec3 top_color; \tuniform vec3 bottom_color; \tuniform float offset; \tuniform float exponent; \tvarying vec3 vWorldPosition; \tvoid main() \t{ \t\tfloat h = normalize(vWorldPosition + offset).y; \t\tgl_FragColor = vec4(mix(bottom_color, top_color, max(pow(max(h , 0.0), exponent), 0.0)), 1.0); \t}"
 		},
 		{
 			"uuid": "438BB09C-5064-4B41-AC67-2B15B3D888D9",
@@ -177,11 +186,26 @@
 			"emissive": 0,
 			"specular": 1118481,
 			"shininess": 30
+		},
+		{
+			"uuid": "6A329136-5D46-415D-AE02-9E6D19827CAE",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
 		}],
 	"object": {
 		"uuid": "97B37D03-DB88-40F1-B1C3-7CCF6A7D5030",
 		"type": "Program",
+		"description": "",
+		"author": "",
+		"version": "0",
+		"vr": false,
 		"name": "program",
+		"castShadow": false,
+		"receiveShadow": false,
+		"visible": true,
 		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 		"children": [
 			{
@@ -202,8 +226,8 @@
 						"receiveShadow": false,
 						"visible": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "FE1C08BE-D84E-4FD8-B0BF-A1097E3E85F9",
-						"material": "2044B124-A8E6-48D7-A332-4E88EE01D570"
+						"geometry": "F6B64D17-D3CF-4A1B-AACE-0B884A0CCA21",
+						"material": "242FF1C9-4A4B-40C2-9105-BD1E076CEF3E"
 					},
 					{
 						"uuid": "C5D67904-8A23-49B5-A708-2481D4E08E26",
@@ -450,12 +474,18 @@
 						"intensity": 1,
 						"distance": 0,
 						"decay": 1
+					},
+					{
+						"uuid": "2CA1D609-DA06-458E-A6A5-D81C7FF091BB",
+						"type": "Mesh",
+						"name": "sphere",
+						"castShadow": true,
+						"receiveShadow": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0.3711050748825073,-2.8633837699890137,1],
+						"geometry": "ED6E5139-AA4B-4599-AD6F-2D594ED75B2A",
+						"material": "6A329136-5D46-415D-AE02-9E6D19827CAE"
 					}],
 				"initial_camera": "67E42B40-169F-4B8F-88D6-A66586FA1A53"
-			}],
-		"description": "",
-		"author": "",
-		"version": "0",
-		"vr": false
+			}]
 	}
 }

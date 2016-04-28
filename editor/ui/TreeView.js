@@ -194,7 +194,6 @@ TreeView.addSceneElement = function(tree, scene)
 	}
 }
 
-
 //Check if parent if folded (recursive)
 TreeView.checkParentFolded = function(element)
 {
