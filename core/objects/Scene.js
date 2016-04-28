@@ -11,7 +11,7 @@ function Scene()
 	//Create cannon world
 	this.world = new CANNON.World();
 	this.world.broadphase = new CANNON.NaiveBroadphase();
-	this.world.gravity.set(0,-9.82,0);
+	this.world.gravity.set(0, -9.8, 0);
 	this.world.solver.iterations = 10;
 
 	//Initialization variables
@@ -52,7 +52,7 @@ function initialize()
 //Update scene
 function update()
 {
-	this.world.step(1/60);
+	//this.world.step(1/60);
 	
 	for(var i = 0; i < this.children.length; i++)
 	{

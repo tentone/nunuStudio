@@ -147,7 +147,7 @@ App.readFile = function(fname)
 		{
 			if(file.readyState === 4)
 			{
-				if(file.status === 200 || file.status == 0)
+				if(file.status === 200 || file.status === 0)
 				{
 					data = file.responseText;
 				}
