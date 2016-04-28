@@ -324,7 +324,7 @@ function parseTextures(json, images)
 			return value;
 		}
 
-		console.warn('ObjectLoader.parseTexture: Constant should be in numeric form.', value);
+		console.warn("ObjectLoader.parseTexture: Constant should be in numeric form.", value);
 		return THREE[value];
 	}
 
@@ -343,7 +343,7 @@ function parseTextures(json, images)
 
 			if(images[data.image] === undefined)
 			{
-				console.warn('ObjectLoader: Undefined image', data.image);
+				console.warn("ObjectLoader: Undefined image", data.image);
 			}
 
 			var texture = new THREE.Texture( images[ data.image ] );
@@ -396,7 +396,7 @@ function parseObject(data, geometries, materials)
 	var matrix = new THREE.Matrix4();
 	var object;
 
-	function getGeometry( name )
+	function getGeometry(name)
 	{
 		if(geometries[name] === undefined)
 		{
@@ -432,7 +432,12 @@ function parseObject(data, geometries, materials)
 			break;
 
 		case "LeapDevice":
-			object = new LeapHand(data.mode, data.use_arm);
+			object = new LeapHand();
+			object.mode = data.mode;
+			object.use_arm = data.use_arm;
+			object.debug_model = data.debug_model;
+			object.gestures_enabled = data.gestures_enabled;
+			object.poses_enabled = data.poses_enabled;
 			break;
 
 		case "Kinect":

@@ -1,10 +1,17 @@
-function LeapHand(mode, use_arm)
+function LeapHand()
 {
 	THREE.Object3D.call(this);
 
 	this.type = "LeapDevice";
 	this.name = "leap";
-	
+
+	//Leap configuration
+	this.debug_model = true;
+	this.gestures_enabled = true;
+	this.poses_enabled = true;
+	this.mode = LeapHand.DESK;
+	this.use_arm = false;
+
 	//Hand and Arm meshes
 	this.bone_meshes = [];
 	this.arm_meshes = [];
@@ -23,18 +30,11 @@ function LeapHand(mode, use_arm)
 		this.gesture[i] = false;
 	}
 
-	//Hand Atributes
-	this.use_arm = false;
-	this.mode = LeapHand.DESK;
-
-	//Parameters
-	if(mode !== undefined)
+	//Poses
+	this.pose = [];
+	for(var i = 0; i < 4; i++)
 	{
-		this.mode = mode;
-	}
-	if(use_arm !== undefined)
-	{
-		this.use_arm = use_arm;
+		this.pose[i] = false;
 	}
 
 	//Data storage
@@ -57,6 +57,12 @@ LeapHand.prototype.toJSON = toJSON;
 
 LeapHand.prototype.setMode = setMode;
 LeapHand.prototype.checkGesture = checkGesture;
+LeapHand.prototype.checkPose = checkPose;
+
+LeapHand.prototype.updateDebugModel = updateDebugModel;
+LeapHand.prototype.updatePoses = updatePoses;
+LeapHand.prototype.updateGestures = updateGestures;
+
 LeapHand.prototype.addMesh = addMesh;
 LeapHand.prototype.updateMesh = updateMesh;
 LeapHand.prototype.updatePhysics = updatePhysics;
@@ -73,10 +79,14 @@ LeapHand.SWIPE_FRONT = 3;
 LeapHand.SWIPE_BACK = 4;
 LeapHand.SWIPE_UP = 5;
 LeapHand.SWIPE_DOWN = 6;
-
 LeapHand.CIRCLE = 7;
 LeapHand.SCREEN_TAP = 8;
 LeapHand.KEY_TAP = 9;
+
+//Leap Hand Poses
+LeapHand.CLOSED = 0;
+LeapHand.OPEN = 2;
+LeapHand.POINTING = 3;
 
 //Initialize
 function initialize()
@@ -93,121 +103,26 @@ function initialize()
 //Update leap status
 function update()
 {
-	if(this.data != null)
+	if(this.data !== null)
 	{
-		var self = this;
-
-		//Clean all event flags
-		for(var i = 0; i < 8; i++)
+		if(this.gestures_enabled)
 		{
-			this.gesture[i] = false;
+			this.updateGestures();	
 		}
-
-		//Gesture detection
-		if(this.data.valid && this.data.gestures.length > 0)
+		if(this.poses_enabled)
 		{
-			this.data.gestures.forEach(function(gesture)
-			{
-				if(gesture.type === "swipe")
-				{
-					//var direction;
-					self.gesture[LeapHand.SWIPE] = true;
-
-					//X Direction
-					if(gesture.direction[0] > 0)
-					{	
-						self.gesture[LeapHand.SWIPE_RIGHT] = true;
-					}
-					else
-					{
-						self.gesture[LeapHand.SWIPE_LEFT] = true;
-					}
-
-					//Y Direction
-					if(gesture.direction[1] > 0)
-					{
-						self.gesture[LeapHand.SWIPE_UP] = true;
-					}
-					else
-					{
-						self.gesture[LeapHand.SWIPE_DOWN] = true;
-					}
-
-					//Z Direction
-					if(gesture.direction[2] > 0)
-					{
-						self.gesture[LeapHand.SWIPE_FRONT] = true;
-					}
-					else
-					{
-						self.gesture[LeapHand.SWIPE_BACK] = true;
-					}
-				}
-				else if(gesture.type === "circle")
-				{
-					self.gesture[LeapHand.CIRCLE] = true;	
-				}
-				else if(gesture.type === "keyTap")
-				{
-					self.gesture[LeapHand.KEY_TAP] = true;	
-				}
-				else if(gesture.type === "screenTap")
-				{
-					self.gesture[LeapHand.SCREEN_TAP] = true;	
-				}
-			});
+			this.updatePoses();
 		}
-
-		//Remove all bones from scene
-		this.arm_meshes.forEach(function(item)
+		if(this.debug_model)
 		{
-			self.remove(item);
-		});
-		
-		this.bone_meshes.forEach(function(item)
-		{
-			self.remove(item);
-		});
-
-		//Add new Elements to scene
-		var countBones = 0;
-		var countArms = 0;
-
-		for(var hand of this.data.hands)
-		{
-			for(var finger of hand.fingers)
-			{
-				for(var bone of finger.bones) 
-				{
-					if(countBones !== 0)
-					{
-						var boneMesh = this.bone_meshes[countBones] || this.addMesh(this.bone_meshes, this.material);
-						this.updateMesh(bone, boneMesh);	
-					}
-					countBones++;
-				}
-			}
-
-			var arm = hand.arm;
-			if(this.show_arm)
-			{
-				var armMesh = this.arm_meshes[countArms++] || this.addMesh(this.arm_meshes);
-				this.updateMesh(arm, armMesh);
-				armMesh.scale.set(arm.width/1200, arm.width/300, arm.length/150);
-			}
-		}
-
-		//Update Leap Hand
-		if(this.physics_world != null)
-		{
-			this.updatePhysics()
+			this.updateDebugModel();
 		}
 	}
 
 	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].update != undefined)
+		if(this.children[i].update !== undefined)
 		{
 			this.children[i].update();
 		}
@@ -215,11 +130,21 @@ function update()
 }
 
 //Check if gesture is occuring
-function checkGesture(gest)
+function checkGesture(gesture)
 {
-	if(this.gesture[gest] !== undefined)
+	if(this.gesture[gesture] !== undefined)
 	{
-		return this.gesture[gest];
+		return this.gesture[gesture];
+	}
+	return false;
+}
+
+//Check if hand is in pose
+function checkPose(pose)
+{
+	if(this.pose[pose] !== undefined)
+	{
+		return this.pose[pose];
 	}
 	return false;
 }
@@ -228,18 +153,188 @@ function checkGesture(gest)
 function setMode(mode)
 {
 	this.mode = mode;
-	
+}
+
+//Update leap pose flsgs from collected data
+function updatePoses()
+{
+	//Clean all pose flags
+	for(var i = 0; i < this.pose.length; i++)
+	{
+		this.pose[i] = true;
+	}
+
+	for(var j = 0; j < this.data.hands.length; j++)
+	{
+		var hand = this.data.hands[j];
+
+		var center = hand.sphereCenter;
+		center = new THREE.Vector3(center[0], center[1], center[2]);
+
+		//Fingers position 
+		var distance = [];
+		var indicator_distance = 0;
+		var finger_joint = [];
+
+		//Fingers direction array
+		var finger_direction = [];
+
+		for(var i = 0; i < hand.fingers.length; i++)
+		{
+			var finger = hand.fingers[i];
+
+			finger_direction.push(finger.direction);
+			finger_joint = finger.distal.nextJoint;
+
+			var joint = new THREE.Vector3(finger_joint[0], finger_joint[1], finger_joint[2]);
+			distance.push((center.distanceTo(joint))/hand._scaleFactor);
+
+			if(i !== 0)
+			{
+				if(finger_direction[i][2] < 0.3)
+				{
+					this.pose[LeapHand.CLOSED] = false;
+				}
+				
+				if(finger_direction[i][2] > -0.5)
+				{
+					this.pose[LeapHand.OPEN] = false;
+				}
+
+				if(i === 1)
+				{
+					indicator_distance = distance[1];
+				}
+				else if(indicator_distance < 2 * distance[i] - 15)
+				{
+					this.pose[LeapHand.POINTING] = false;
+				}
+			}
+		}
+
+		if(indicator_distance < 2 * distance[0] - 15)
+		{
+			this.pose[LeapHand.POINTING] = false;
+		}
+	}
+}
+
+//Update leap gesture flags from collected data
+function updateGestures()
+{
+	//Clean all event flags
+	for(var i = 0; i < this.gesture.length; i++)
+	{
+		this.gesture[i] = false;
+	}
+
+	//Gesture detection
+	if(this.data.valid && this.data.gestures.length > 0)
+	{
+		this.data.gestures.forEach(function(gesture)
+		{
+			if(gesture.type === "swipe")
+			{
+				//var direction;
+				self.gesture[LeapHand.SWIPE] = true;
+
+				//X Direction
+				if(gesture.direction[0] > 0)
+				{	
+					self.gesture[LeapHand.SWIPE_RIGHT] = true;
+				}
+				else
+				{
+					self.gesture[LeapHand.SWIPE_LEFT] = true;
+				}
+
+				//Y Direction
+				if(gesture.direction[1] > 0)
+				{
+					self.gesture[LeapHand.SWIPE_UP] = true;
+				}
+				else
+				{
+					self.gesture[LeapHand.SWIPE_DOWN] = true;
+				}
+
+				//Z Direction
+				if(gesture.direction[2] > 0)
+				{
+					self.gesture[LeapHand.SWIPE_FRONT] = true;
+				}
+				else
+				{
+					self.gesture[LeapHand.SWIPE_BACK] = true;
+				}
+			}
+			else if(gesture.type === "circle")
+			{
+				self.gesture[LeapHand.CIRCLE] = true;	
+			}
+			else if(gesture.type === "keyTap")
+			{
+				self.gesture[LeapHand.KEY_TAP] = true;	
+			}
+			else if(gesture.type === "screenTap")
+			{
+				self.gesture[LeapHand.SCREEN_TAP] = true;	
+			}
+		});
+	}
+}
+
+//Update debug hand model
+function updateDebugModel()
+{
+	//Remove all children
+	while(this.children.length > 0)
+	{
+		this.children.pop();
+	}
+
+	//Update bones
+	var countBones = 0;
+	var countArms = 0;
+	for(var hand of this.data.hands)
+	{
+		for(var finger of hand.fingers)
+		{
+			for(var bone of finger.bones) 
+			{
+				if(countBones !== 0)
+				{
+					var boneMesh = this.bone_meshes[countBones] || this.addMesh(this.bone_meshes, this.material);
+					this.updateMesh(bone, boneMesh);	
+				}
+				countBones++;
+			}
+		}
+		
+		if(this.show_arm)
+		{
+			var arm = hand.arm;
+			var armMesh = this.arm_meshes[countArms++] || this.addMesh(this.arm_meshes);
+			this.updateMesh(arm, armMesh);
+			armMesh.scale.set(arm.width/1200, arm.width/300, arm.length/150);
+		}
+	}
+
+	//Update Leap Hand
+	if(this.physics_world !== null)
+	{
+		this.updatePhysics()
+	}
 }
 
 //Add physics bounding box from objet to physics world
 function updatePhysics()
 {	
 	//Remove all physics bodys
-	this.physics_bodys.forEach(function(item)
+	for(var i = 0; i < this.physics_bodys.length; i++)
 	{
-		this.physics_world.removeBody(item);
-	});
-	this.physics_bodys = [];
+		this.physics_world.removeBody(this.physics_bodys[i].pop());
+	};
 
 	//Create new physics bodys
 	this.children.forEach(function(children, j)
@@ -296,123 +391,16 @@ function updateMesh(bone, mesh)
 //Create JSON for object
 function toJSON(meta)
 {
-	var isRootObject = (meta === undefined);
-	var output = {};
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
-	//If root object initialize base structure
-	if(isRootObject)
-	{
-		meta =
-		{
-			geometries: {},
-			materials: {},
-			textures: {},
-			images: {}
-		};
+	data.object.type = this.type;
+	data.object.debug_model = this.debug_model;
+	data.object.gestures_enabled = this.gestures_enabled;
+	data.object.poses_enabled = this.poses_enabled;
+	data.object.mode = this.mode;
+	data.object.use_arm = this.use_arm;
 
-		output.metadata =
-		{
-			version: 4.4,
-			type: 'Object',
-			generator: 'Object3D.toJSON'
-		};
-	}
-
-	//Script serialization
-	var object = {};
-	object.uuid = this.uuid;
-	object.type = this.type;
-
-	object.mode = this.mode;
-	object.use_arm = this.use_arm;
-
-	if(this.name !== '')
-	{
-		object.name = this.name;
-	}
-	if(JSON.stringify(this.userData) !== '{}')
-	{
-		object.userData = this.userData;
-	}
-
-	object.castShadow = (this.castShadow === true);
-	object.receiveShadow = (this.receiveShadow === true);
-	object.visible = !(this.visible === false);
-
-	object.matrix = this.matrix.toArray();
-
-	if(this.geometry !== undefined)
-	{
-		if(meta.geometries[ this.geometry.uuid ] === undefined)
-		{
-			meta.geometries[ this.geometry.uuid ] = this.geometry.toJSON( meta );
-		}
-
-		object.geometry = this.geometry.uuid;
-	}
-
-	if(this.material !== undefined)
-	{
-		if(meta.materials[this.material.uuid] === undefined)
-		{
-			meta.materials[this.material.uuid] = this.material.toJSON(meta);
-		}
-
-		object.material = this.material.uuid;
-	}
-
-	//Collect children data
-	if(this.children.length > 0)
-	{
-		object.children = [];
-
-		for(var i = 0; i < this.children.length; i ++)
-		{
-			object.children.push( this.children[ i ].toJSON(meta).object);
-		}
-	}
-
-	if(isRootObject)
-	{
-		var geometries = extractFromCache( meta.geometries );
-		var materials = extractFromCache( meta.materials );
-		var textures = extractFromCache( meta.textures );
-		var images = extractFromCache( meta.images );
-
-		if(geometries.length > 0)
-		{
-			output.geometries = geometries;
-		}
-		if(materials.length > 0)
-		{
-			output.materials = materials;
-		}
-		if(textures.length > 0)
-		{
-			output.textures = textures;
-		}
-		if(images.length > 0)
-		{
-			output.images = images;
-		}
-	}
-
-	output.object = object;
-	return output;
-
-	//Extract data from the cache hash remove metadata on each item and return as array
-	function extractFromCache(cache)
-	{
-		var values = [];
-		for(var key in cache)
-		{
-			var data = cache[ key ];
-			delete data.metadata;
-			values.push( data );
-		}
-
-		return values;
-	}
+	return data;
 }
 
 /*
@@ -476,13 +464,13 @@ if(Keyboard.isKeyPressed(Keyboard.C))
 	var fingers = hand.fingers;
 
 	//Fingers position 
-	var distVector = [];
-	var indicatorDist = 0;
-	var indicatorFinger = true;
+	var distance = [];
+	var indicator_distance = 0;
+	var finger_pointing = true;
 	var fingerJoint = [];
 
 	//Arm direction
-	var armDirection =  this.parent.data.hands[0].direction;
+	var arm_direction =  this.parent.data.hands[0].direction;
 
 	//Fingers direction array
 	var fingersDirection = [];
@@ -495,7 +483,7 @@ if(Keyboard.isKeyPressed(Keyboard.C))
 		fingerJoint = fingers[i].distal.nextJoint;
 
 		var vector3DJoint = new THREE.Vector3(fingerJoint[0], fingerJoint[1], fingerJoint[2]);
-		distVector.push((vector3DCenter.distanceTo(vector3DJoint))/hand._scaleFactor);
+		distance.push((vector3DCenter.distanceTo(vector3DJoint))/hand._scaleFactor);
 
 		if(i != 0)
 		{
@@ -511,19 +499,19 @@ if(Keyboard.isKeyPressed(Keyboard.C))
 
 			if(i === 1)
 			{
-				indicatorDist = distVector[1];
+				indicator_distance = distance[1];
 			}
-			else if(indicatorDist < 2*distVector[i]-15 && indicatorFinger)
+			else if(indicator_distance < 2*distance[i]-15 && finger_pointing)
 			{
-				indicatorFinger = false;
+				finger_pointing = false;
 			}
 		}
 	}
-	if(indicatorDist < 2*distVector[0]-15 && indicatorFinger)
+	if(indicator_distance < 2*distance[0]-15 && finger_pointing)
 	{
-		indicatorFinger = false;
+		finger_pointing = false;
 	}
 
-	console.log("Closed: ", closed, " Extended: ",extended, "Indicator: ", indicatorFinger);
+	console.log("Closed: ", closed, " Extended: ",extended, "Indicator: ", finger_pointing);
 }
 */
