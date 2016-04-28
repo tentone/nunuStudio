@@ -807,10 +807,7 @@ Editor.saveProgram = function(fname)
 		json = JSON.stringify(output);
 	}
 
-	if(json != null)
-	{
-		App.writeFile(fname, json);
-	}
+	App.writeFile(fname, json);
 }
 
 //Load program from file

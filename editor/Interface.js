@@ -667,7 +667,29 @@ Interface.initialize = function()
 	var publish = Interface.file.addMenu("Publish");
 	publish.addOption("Web", function()
 	{
-		//TODO <ADD CODE HERE>
+		App.chooseFile(function(event)
+		{
+			var file = event.srcElement.value;
+			try
+			{
+				var zip = new JSZip();
+				var output = Editor.program.toJSON();
+				var json = JSON.stringify(output);
+
+				zip.file("app.isp", json);
+				zip.file("index.html", App.readFile("runtime/index.html"));
+				zip.file("Main.js", App.readFile("runtime/Main.js"));
+
+				//var zfile = zip.generate({type:"blob"});
+				//console.log(zfile);
+				//App.writeFile(file, zfile);
+				//TODO <ADD CODE HERE>
+			}
+			catch(e)
+			{
+				alert("Error saving file");
+			}
+		}, ".zip", true);
 	}, Interface.file_dir + "icons/platform/web.png");
 
 	publish.addOption("Windows", function()
