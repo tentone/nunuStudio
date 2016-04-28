@@ -54,9 +54,9 @@ function TreeElement(container)
 	//Content
 	this.folded = false;
 	this.obj = null;
-	this.up = null;
-	this.children = [];
 	this.level = 0;
+	this.up = null; //Parent
+	this.children = [];
 
 	//Mouse events
 	var self = this;
