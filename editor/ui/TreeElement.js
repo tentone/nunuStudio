@@ -64,9 +64,12 @@ function TreeElement(container)
 	{
 		self.element.className = "button_left_over";
 	};
-	this.element.onmouseout = function()
+	this.element.onmouseleave = function()
 	{
-		self.element.className = "button_left_light";
+		if(!Editor.isObjectSelected(self.obj))
+		{
+			self.element.className = "button_left_light";
+		}
 	};
 
 	this.element.oncontextmenu = function(event)

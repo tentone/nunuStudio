@@ -60,9 +60,10 @@ TreeView.prototype.updateInterface = updateInterface;
 TreeView.prototype.destroy = destroy;
 TreeView.prototype.add = add;
 TreeView.prototype.fromObject = fromObject;
+TreeView.prototype.updateSelectedObject = updateSelectedObject;
 
 //Set data from scene
-function fromObject(scene)
+function fromObject(obj)
 {	
 	//Remove all children
 	for(var i = 0; i < this.children.length; i++)
@@ -72,11 +73,17 @@ function fromObject(scene)
 	this.children = [];
 
 	//Set scene
-	this.scene = scene;
+	this.scene = obj;
 	
 	//Add element and update interface
-	TreeView.addSceneElement(this, scene);
+	TreeView.addSceneElement(this, obj);
 	this.updateInterface();
+}
+
+//Update witch object is currently selected
+function updateSelectedObject(obj)
+{
+	TreeView.updateSelectedObject(this, obj);
 }
 
 //Add element
@@ -152,6 +159,44 @@ function updateInterface()
 	{
 		this.children[i].updateInterface();
 	}
+}
+
+//Get tree view element from attached object
+TreeView.updateSelectedObject = function(element, obj)
+{
+	for(var i = 0; i < element.children.length; i++)
+	{
+		if(element.children[i].obj.uuid === obj.uuid)
+		{
+			element.children[i].element.className = "button_left_over";
+		}
+		else
+		{
+			element.children[i].element.className = "button_left_light";
+		}
+
+		TreeView.updateSelectedObject(element.children[i], obj);
+	}
+}
+
+//Get tree view element from attached object
+TreeView.getElementFromObject = function(element, obj)
+{
+	for(var i = 0; i < element.children.length; i++)
+	{
+		if(element.children[i].obj.uuid === obj.uuid)
+		{
+			return element.children[i];
+		}
+
+		var child = TreeView.getElementFromObject(element.children[i], obj);
+		if(child !== null)
+		{
+			return child;
+		}
+	}
+
+	return null;
 }
 
 //Add scene element to tree (recursive)

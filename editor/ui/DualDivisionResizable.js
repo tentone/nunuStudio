@@ -53,12 +53,9 @@ function DualDivisionResizable(parent)
 
 	//On mouse move event
 	var self = this;
-	this.resize_tab.onmousemove = function(event)
+	this.resize_tab.onmousedown = function(event)
 	{
-		if(Mouse.buttonPressed(Mouse.LEFT))
-		{
-			self.resizing = true;
-		}
+		self.resizing = true;
 	};
 	
 	//Update element

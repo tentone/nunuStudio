@@ -524,13 +524,17 @@ Editor.resize = function()
 Editor.selectObject = function(obj)
 {
 	Editor.selected_object = obj;
-	Editor.updateSelectedObjectPanel();
+	Editor.updateSelectedObjectUI();
 }
 
 //Check if object is selected
 Editor.isObjectSelected = function(obj)
 {
-	return Editor.selected_object === obj;
+	if(Editor.selected_object !== null)
+	{
+		return Editor.selected_object.uuid === obj.uuid;
+	}
+	return false;
 }
 
 //Delete Selected Object
@@ -616,8 +620,10 @@ Editor.deleteSelectedObject = function()
 }
 
 //Update UI panel to match selected object
-Editor.updateSelectedObjectPanel = function()
+Editor.updateSelectedObjectUI = function()
 {
+	Interface.tree_view.updateSelectedObject(Editor.selected_object);
+
 	//Destroy old panel
 	Interface.panel.destroy();
 
@@ -626,13 +632,13 @@ Editor.updateSelectedObjectPanel = function()
 	{
 		Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b);
 	}
-	else if(Editor.selected_object instanceof AmbientLight)
-	{
-		Interface.panel = new AmbientLightPanel(Interface.explorer_resizable.div_b);
-	}
 	else if(Editor.selected_object instanceof SpotLight)
 	{
 		Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b);
+	}
+	else if(Editor.selected_object instanceof THREE.Light)
+	{
+		Interface.panel = new AmbientLightPanel(Interface.explorer_resizable.div_b);
 	}
 	else if(Editor.selected_object instanceof Sky)
 	{

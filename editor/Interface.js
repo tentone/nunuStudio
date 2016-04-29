@@ -22,12 +22,12 @@ Interface.initialize = function()
 	Editor.setRenderCanvas(canvas.element);
 
 	//---------------------------------Asset Manager----------------------------------
-	Interface.asset_explorer = new DivisionResizable();
-	Interface.asset_explorer.resizable_side = DivisionResizable.TOP;
-	Interface.asset_explorer.size.y = 150;
-	Interface.asset_explorer.updateInterface();
+	Interface.asset_explorer_div = new DivisionResizable();
+	Interface.asset_explorer_div.resizable_side = DivisionResizable.TOP;
+	Interface.asset_explorer_div.size.y = 150;
+	Interface.asset_explorer_div.updateInterface();
 
-	Interface.asset_explorer_bar = new Division(Interface.asset_explorer.element);
+	Interface.asset_explorer_bar = new Division(Interface.asset_explorer_div.element);
 	Interface.asset_explorer_bar.position.set(0, 0);
 	Interface.asset_explorer_bar.size.y = 20;
 	Interface.asset_explorer_bar.element.className = "bar";
@@ -723,11 +723,6 @@ Interface.initialize = function()
 		Editor.updateTreeView();
 	}, Interface.file_dir + "icons/misc/add.png");
 
-	Interface.project.addOption("Project Settings", function()
-	{
-		//TODO <ADD CODE HERE>
-	});
-
 	//Run
 	Interface.about = new Button();
 	Interface.about.setText("About");
@@ -764,7 +759,7 @@ Interface.initialize = function()
 Interface.update = function()
 {
 	Interface.explorer.update();
-	Interface.asset_explorer.update();
+	Interface.asset_explorer_div.update();
 	Interface.explorer_resizable.update();
 }
 
@@ -800,17 +795,17 @@ Interface.updateInterface = function()
 	Interface.panel.updateInterface();
 
 	//---------------------------------Asset Manager----------------------------------
-	Interface.asset_explorer.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;
-	Interface.asset_explorer.position.set(Interface.tool_bar.size.x, size.y - Interface.asset_explorer.size.y);
-	Interface.asset_explorer.updateInterface();
+	Interface.asset_explorer_div.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;
+	Interface.asset_explorer_div.position.set(Interface.tool_bar.size.x, size.y - Interface.asset_explorer_div.size.y);
+	Interface.asset_explorer_div.updateInterface();
 
-	Interface.asset_explorer_bar.size.x = Interface.asset_explorer.size.x;
+	Interface.asset_explorer_bar.size.x = Interface.asset_explorer_div.size.x;
 	Interface.asset_explorer_bar.updateInterface();
 
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab.position.set(Interface.tool_bar.size.x, Interface.top_bar.size.y);
 	Interface.tab.size.x = (size.x - Interface.tool_bar.size.x - Interface.explorer.size.x);
-	Interface.tab.size.y = (size.y - Interface.top_bar.size.y - Interface.asset_explorer.size.y); 
+	Interface.tab.size.y = (size.y - Interface.top_bar.size.y - Interface.asset_explorer_div.size.y); 
 	Interface.tab.updateInterface();
 
 	//Resize editor camera
