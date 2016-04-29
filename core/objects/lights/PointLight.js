@@ -27,10 +27,7 @@ function initialize()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].initialize !== undefined)
-		{
-			this.children[i].initialize();
-		}
+		this.children[i].initialize();
 	}
 }
 
@@ -39,9 +36,6 @@ function update()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].update !== undefined)
-		{
-			this.children[i].update();
-		}
+		this.children[i].update();
 	}
 }

@@ -24,18 +24,19 @@ function TabElement(name, image, closeable, container, index)
 	this.button.visible = true;
 	this.button.position.set(container.options_size.x*index, 0);
 	this.button.size.set(container.options_size.x, container.options_size.y);
+	this.button.updateInterface();
+
+	//Set button callback
 	this.button.setCallback(function()
 	{
 		self.container.selectOption(self.index);
 	});
-	this.button.updateInterface();
 
 	//Change button behavior
 	this.button.element.onmouseover = function()
 	{
 		self.button.setClass("button_over");
 	};
-
 	this.button.element.onmouseleave = function()
 	{
 		if(!self.isSelected())

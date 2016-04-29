@@ -186,7 +186,7 @@ TreeView.popDragElement = function(uuid)
 TreeView.addSceneElement = function(tree, scene)
 {
 	var element = tree.add(scene.name, scene.icon);
-	element.obj = scene;
+	element.setObject(scene);
 
 	for(var i = 0; i < scene.children.length; i++)
 	{
