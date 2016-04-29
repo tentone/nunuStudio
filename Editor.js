@@ -23,6 +23,7 @@ include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/Form.js");
+include("editor/ui/DragBuffer.js");
 
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/SceneEditor.js");
@@ -183,6 +184,22 @@ Editor.update = function()
 	Interface.update();
 	Editor.block_camera_move = false;
 
+	if(Keyboard.isKeyPressed(Keyboard.CTRL))
+	{
+		if(Keyboard.isKeyJustPressed(Keyboard.S))
+		{
+			Interface.saveProgram();
+		}
+		else if(Keyboard.isKeyJustPressed(Keyboard.L))
+		{
+			Interface.loadProgram();
+		}
+		else if(Keyboard.isKeyJustPressed(Keyboard.W))
+		{
+			//TODO <ADD CODE HERE>
+		}
+	}
+
 	//Editing a scene
 	if(Editor.state === Editor.STATE_EDITING)
 	{
@@ -256,10 +273,6 @@ Editor.update = function()
 					//TODO <ADD CODE HERE>
 				}
 				else if(Keyboard.isKeyJustPressed(Keyboard.Z))
-				{
-					//TODO <ADD CODE HERE>
-				}
-				else if(Keyboard.isKeyJustPressed(Keyboard.W))
 				{
 					//TODO <ADD CODE HERE>
 				}

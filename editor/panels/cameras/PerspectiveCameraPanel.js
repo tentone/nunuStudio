@@ -129,7 +129,7 @@ function updatePanel()
 		this.name.setText(this.obj.name);
 
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
-		this.rotation.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
+		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
 
 		this.fov.setValue(this.obj.fov);
 		this.fov_text.setText(this.obj.fov);
