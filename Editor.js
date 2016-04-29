@@ -49,6 +49,7 @@ include("editor/panels/cameras/PerspectiveCameraPanel.js");
 include("editor/panels/cameras/OrthographicCameraPanel.js");
 include("editor/panels/lights/AmbientLightPanel.js");
 include("editor/panels/lights/PointLightPanel.js");
+include("editor/panels/lights/SpotLightPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -628,6 +629,10 @@ Editor.updateSelectedObjectPanel = function()
 	else if(Editor.selected_object instanceof AmbientLight)
 	{
 		Interface.panel = new AmbientLightPanel(Interface.explorer_resizable.div_b);
+	}
+	else if(Editor.selected_object instanceof SpotLight)
+	{
+		Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b);
 	}
 	else if(Editor.selected_object instanceof Sky)
 	{

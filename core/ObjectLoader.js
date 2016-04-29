@@ -519,9 +519,9 @@ function parseObject(data, geometries, materials)
 			break;
 
 		case "Mesh":
+		case "SkinnedMesh":
 			var geometry = getGeometry(data.geometry);
 			var material = getMaterial(data.material);
-
 			if(geometry.bones && geometry.bones.length > 0)
 			{
 				object = new AnimatedModel(geometry, material);

@@ -550,7 +550,7 @@ Interface.initialize = function()
 	});
 
 	//Audio
-	Interface.add_effects.addOption(Interface.file_dir + "icons/misc/music.png", function()
+	Interface.add_effects.addOption(Interface.file_dir + "icons/assets/audio.png", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
