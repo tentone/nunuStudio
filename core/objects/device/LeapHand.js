@@ -16,8 +16,9 @@ function LeapHand()
 	this.bone_meshes = [];
 	this.arm_meshes = [];
 
-	//Hand Material
+	//Debug Hand Material and Geometry
 	this.material = new THREE.MeshPhongMaterial();
+	this.geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 
 	//Physics
 	this.physics_world = null;
@@ -32,7 +33,7 @@ function LeapHand()
 
 	//Poses
 	this.pose = [];
-	for(var i = 0; i < 4; i++)
+	for(var i = 0; i < 3; i++)
 	{
 		this.pose[i] = false;
 	}
@@ -85,18 +86,15 @@ LeapHand.KEY_TAP = 9;
 
 //Leap Hand Poses
 LeapHand.CLOSED = 0;
-LeapHand.OPEN = 2;
-LeapHand.POINTING = 3;
+LeapHand.OPEN = 1;
+LeapHand.POINTING = 2;
 
 //Initialize
 function initialize()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].initialize !== undefined)
-		{
-			this.children[i].initialize();
-		}
+		this.children[i].initialize();
 	}
 }
 
@@ -122,10 +120,7 @@ function update()
 	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].update !== undefined)
-		{
-			this.children[i].update();
-		}
+		this.children[i].update();
 	}
 }
 
@@ -227,6 +222,8 @@ function updateGestures()
 	{
 		this.gesture[i] = false;
 	}
+	
+	var self = this;
 
 	//Gesture detection
 	if(this.data.valid && this.data.gestures.length > 0)
@@ -287,11 +284,19 @@ function updateGestures()
 //Update debug hand model
 function updateDebugModel()
 {
+	//Self pointer
+	var self = this;
+
 	//Remove all children
-	while(this.children.length > 0)
+	this.arm_meshes.forEach(function(item)
 	{
-		this.children.pop();
-	}
+		self.remove(item);
+	});
+	
+	this.bone_meshes.forEach(function(item)
+	{
+		self.remove(item);
+	});
 
 	//Update bones
 	var countBones = 0;
@@ -304,7 +309,7 @@ function updateDebugModel()
 			{
 				if(countBones !== 0)
 				{
-					var boneMesh = this.bone_meshes[countBones] || this.addMesh(this.bone_meshes, this.material);
+					var boneMesh = this.bone_meshes[countBones] || this.addMesh(this.bone_meshes);
 					this.updateMesh(bone, boneMesh);	
 				}
 				countBones++;
@@ -366,10 +371,9 @@ function updatePhysics()
 }
 
 //Add mesh to hand instance
-function addMesh(meshes, material)
+function addMesh(meshes)
 {
-	var geometry = new THREE.BoxGeometry(1, 1, 1);
-	var mesh = new THREE.Mesh(geometry, material);
+	var mesh = new THREE.Mesh(this.geometry, this.material);
 	mesh.castShadow = true;
 	mesh.receiveShadow = true;
 	meshes.push(mesh);

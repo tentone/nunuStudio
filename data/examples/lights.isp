@@ -6,7 +6,7 @@
 	},
 	"geometries": [
 		{
-			"uuid": "F6B64D17-D3CF-4A1B-AACE-0B884A0CCA21",
+			"uuid": "72C9175B-8E97-46FE-BBE0-3F226A9F0BD9",
 			"type": "SphereGeometry",
 			"radius": 4000,
 			"widthSegments": 32,
@@ -85,13 +85,14 @@
 		{
 			"uuid": "ED6E5139-AA4B-4599-AD6F-2D594ED75B2A",
 			"type": "SphereBufferGeometry",
+			"name": "geometry",
 			"radius": 1,
 			"widthSegments": 16,
 			"heightSegments": 16
 		}],
 	"materials": [
 		{
-			"uuid": "242FF1C9-4A4B-40C2-9105-BD1E076CEF3E",
+			"uuid": "A1F65B0A-0975-4BB0-9A0B-8B827A6D4093",
 			"type": "ShaderMaterial",
 			"side": 1,
 			"uniforms": {
@@ -226,8 +227,8 @@
 						"receiveShadow": false,
 						"visible": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "F6B64D17-D3CF-4A1B-AACE-0B884A0CCA21",
-						"material": "242FF1C9-4A4B-40C2-9105-BD1E076CEF3E"
+						"geometry": "72C9175B-8E97-46FE-BBE0-3F226A9F0BD9",
+						"material": "A1F65B0A-0975-4BB0-9A0B-8B827A6D4093"
 					},
 					{
 						"uuid": "C5D67904-8A23-49B5-A708-2481D4E08E26",
@@ -282,13 +283,10 @@
 							{
 								"uuid": "1960002E-3B86-4B88-9D25-C0C4310FFAAF",
 								"type": "Script",
-								"code": "this.parent.rotation.y += 0.05;",
-								"mode": 1,
 								"name": "script",
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 1,
+								"code": "this.parent.rotation.y += 0.05;"
 							}]
 					},
 					{
@@ -304,13 +302,10 @@
 							{
 								"uuid": "63FA18FC-E1AC-41CD-B9F3-46608A96A10F",
 								"type": "Script",
-								"code": "this.parent.rotation.y -= 0.05;\nthis.parent.rotation.x -= 0.05;",
-								"mode": 1,
 								"name": "script",
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 1,
+								"code": "this.parent.rotation.y -= 0.05;\nthis.parent.rotation.x -= 0.05;"
 							}]
 					},
 					{
@@ -323,13 +318,10 @@
 							{
 								"uuid": "122DC08D-D433-4D70-BA50-7619A6C6FE0D",
 								"type": "Script",
-								"code": "this.parent.position.set(6 * Math.cos(App.time / 500), 5, 6 * Math.sin(App.time / 500));\n",
-								"mode": 1,
 								"name": "script",
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 1,
+								"code": "this.parent.position.set(6 * Math.cos(App.time / 500), 5, 6 * Math.sin(App.time / 500));\n"
 							}],
 						"color": 19456,
 						"intensity": 1,
@@ -346,13 +338,10 @@
 							{
 								"uuid": "122DC08D-D433-4D70-BA50-7619A6C6FE0D",
 								"type": "Script",
-								"code": "this.parent.position.set(6 * Math.cos(App.time / 500 + Math.PI/2), 5, 6 * Math.sin(App.time / 500 + Math.PI/2));\n",
-								"mode": 1,
 								"name": "script",
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 1,
+								"code": "this.parent.position.set(6 * Math.cos(App.time / 500 + Math.PI/2), 5, 6 * Math.sin(App.time / 500 + Math.PI/2));\n"
 							}],
 						"color": 4980736,
 						"intensity": 1,
@@ -369,13 +358,10 @@
 							{
 								"uuid": "122DC08D-D433-4D70-BA50-7619A6C6FE0D",
 								"type": "Script",
-								"code": "this.parent.position.set(6 * Math.cos(App.time / 500 + Math.PI), 5, 6 * Math.sin(App.time / 500 + Math.PI));\n",
-								"mode": 1,
 								"name": "script",
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 1,
+								"code": "this.parent.position.set(6 * Math.cos(App.time / 500 + Math.PI), 5, 6 * Math.sin(App.time / 500 + Math.PI));\n"
 							}],
 						"color": 76,
 						"intensity": 1,
@@ -395,13 +381,10 @@
 							{
 								"uuid": "109D4CF8-D0A8-4354-9E21-446F6EFFACCF",
 								"type": "Script",
-								"code": "this.parent.rotation.x += 0.1;",
-								"mode": 1,
 								"name": "script",
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 1,
+								"code": "this.parent.rotation.x += 0.1;"
 							}]
 					},
 					{
@@ -417,13 +400,10 @@
 							{
 								"uuid": "5BFE12E2-BF01-4D33-8B0A-70D21387D46A",
 								"type": "Script",
-								"code": "this.parent.rotation.x += 0.1;",
-								"mode": 1,
 								"name": "script",
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 1,
+								"code": "this.parent.rotation.x += 0.1;"
 							}]
 					},
 					{
@@ -435,13 +415,10 @@
 							{
 								"uuid": "91A51E61-3BB3-4A73-AA78-9FF050519FB3",
 								"type": "Script",
-								"code": "//ADD CODE HERE",
-								"mode": 1,
 								"name": "camera control",
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 1,
+								"code": "//ADD CODE HERE"
 							}],
 						"fov": 60,
 						"zoom": 1,
@@ -462,13 +439,10 @@
 							{
 								"uuid": "122DC08D-D433-4D70-BA50-7619A6C6FE0D",
 								"type": "Script",
-								"code": "this.parent.position.set(6 * Math.cos(App.time / 500 + 3*Math.PI/2), 5, 6 * Math.sin(App.time / 500 + 3*Math.PI/2));\n",
-								"mode": 1,
 								"name": "script",
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 1,
+								"code": "this.parent.position.set(6 * Math.cos(App.time / 500 + 3*Math.PI/2), 5, 6 * Math.sin(App.time / 500 + 3*Math.PI/2));\n"
 							}],
 						"color": 2960640,
 						"intensity": 1,

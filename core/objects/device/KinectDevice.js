@@ -47,7 +47,6 @@ function KinectDevice()
 		else if(event.data instanceof Blob)
 		{
 			self.camera = event.data;
-			//Interface.image.img.src = URL.createObjectURL(event.data);
 		}
 	};
 }
@@ -82,10 +81,7 @@ function initialize()
 	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].initialize !== undefined)
-		{
-			this.children[i].initialize();
-		}
+		this.children[i].initialize();
 	}
 }
 
@@ -144,10 +140,7 @@ function update()
 	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].update !== undefined)
-		{
-			this.children[i].update();
-		}
+		this.children[i].update();
 	}
 }
 

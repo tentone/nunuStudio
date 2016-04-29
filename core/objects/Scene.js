@@ -42,10 +42,7 @@ function initialize()
 			this.camera = this.children[i];
 		}
 
-		if(this.children[i].initialize !== undefined)
-		{
-			this.children[i].initialize();
-		}
+		this.children[i].initialize();
 	}
 }
 
@@ -54,12 +51,10 @@ function update()
 {
 	//this.world.step(1/60);
 	
+	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.children[i].update !== undefined)
-		{
-			this.children[i].update();
-		}
+		this.children[i].update();
 	}
 }
 
