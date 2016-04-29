@@ -21,7 +21,7 @@ function FileExplorer(parent)
 	this.element.className = "panel";
 	
 	//Element atributes
-	this.fit_parent = true;
+	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
