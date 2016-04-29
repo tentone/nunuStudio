@@ -660,7 +660,7 @@ Editor.updateSelectedObjectPanel = function()
 //Update tree view to match actual scene
 Editor.updateTreeView = function()
 {
-	Interface.tree_view.fromScene(Editor.program);
+	Interface.tree_view.fromObject(Editor.program);
 }
 
 //Updates object panel values

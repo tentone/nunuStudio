@@ -572,6 +572,11 @@ function parseObject(data, geometries, materials)
 		object.name = data.name;
 	}
 
+	if(data.folded !== undefined)
+	{
+		object.folded = data.folded;
+	}
+
 	if(data.matrix !== undefined)
 	{
 		matrix.fromArray(data.matrix);

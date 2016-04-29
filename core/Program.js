@@ -197,9 +197,11 @@ function toJSON(meta)
 	}
 
 	var object = {};
-
+	
+	object.folded = this.folded;
 	object.uuid = this.uuid;
 	object.type = this.type;
+
 	object.description = this.description;
 	object.author = this.author;
 	object.version = this.version;
@@ -210,7 +212,8 @@ function toJSON(meta)
 	{
 		object.initial_scene = this.initial_scene;
 	}
-	if(JSON.stringify(this.userData) !== '{}')
+	
+	if(JSON.stringify(this.userData) !== "{}")
 	{
 		object.userData = this.userData;
 	}

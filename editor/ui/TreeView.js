@@ -62,10 +62,10 @@ TreeView.prototype.update = update;
 TreeView.prototype.updateInterface = updateInterface;
 TreeView.prototype.destroy = destroy;
 TreeView.prototype.add = add;
-TreeView.prototype.fromScene = fromScene;
+TreeView.prototype.fromObject = fromObject;
 
 //Set data from scene
-function fromScene(scene)
+function fromObject(scene)
 {	
 	//Remove all children
 	for(var i = 0; i < this.children.length; i++)

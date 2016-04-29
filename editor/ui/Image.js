@@ -36,7 +36,6 @@ function Image(parent)
 
 	//Image
 	this.image_scale = new THREE.Vector2(1,1);
-	this.image = "";
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -67,7 +66,7 @@ function update(){}
 //Set Image
 function setImage(image)
 {
-	this.image = image;
+	this.img.src = image;
 }
 
 //Update Interface
@@ -82,13 +81,14 @@ function updateInterface()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+		this.img.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
+		this.img.style.visibility = "hidden";
 	}
 
-	this.img.src = this.image;
 	this.img.width = this.size.x * this.image_scale.x;
 	this.img.height = this.size.y * this.image_scale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
