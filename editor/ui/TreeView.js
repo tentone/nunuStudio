@@ -51,9 +51,6 @@ function TreeView(parent, container)
 	this.parent.appendChild(this.element);
 }
 
-//Object drag buffer (stores objects being dragged)
-TreeView.drag_buffer = [];
-
 //TreeView conter
 TreeView.id = 0;
 
@@ -155,31 +152,6 @@ function updateInterface()
 	{
 		this.children[i].updateInterface();
 	}
-}
-
-//Push elemento to drag buffer
-TreeView.pushDragElement = function(obj)
-{
-	//Check if element dont exist on drag buffer
-	if(TreeView.drag_buffer.indexOf(obj) === -1)
-	{
-		TreeView.drag_buffer.push(obj);
-	}
-}
-
-//Get element from drag buffer using uuid
-TreeView.popDragElement = function(uuid)
-{
-	for(var i = 0; i < TreeView.drag_buffer.length; i++)
-	{
-		if(TreeView.drag_buffer[i].uuid === uuid)
-		{
-			var obj = TreeView.drag_buffer[i]; 
-			TreeView.drag_buffer.splice(i, 1);
-			return obj;
-		}
-	}
-	return null;
 }
 
 //Add scene element to tree (recursive)

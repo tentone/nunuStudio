@@ -597,47 +597,17 @@ Interface.initialize = function()
 
 	Interface.file.addOption("New Project", function()
 	{
-		if(confirm("All unsaved changes to the project will be lost! Create new File?"))
-		{
-			Editor.createNewProgram();
-			Editor.updateTreeView();
-		}
+		Interface.newProgram();
 	});
 
 	Interface.file.addOption("Save Project", function()
 	{
-		App.chooseFile(function(event)
-		{
-			var file = event.srcElement.value;
-			try
-			{
-				Editor.saveProgram(file);
-			}
-			catch(e)
-			{
-				alert("Error saving file");
-			}
-		}, ".isp", true);
+		Interface.saveProgram();
 	}, Interface.file_dir + "icons/misc/save.png");
 
 	Interface.file.addOption("Load Project", function()
 	{
-		if(confirm("All unsaved changes to the project will be lost! Load file?"))
-		{
-			App.chooseFile(function(event)
-			{
-				var file = event.srcElement.value;
-				try
-				{
-					Editor.loadProgram(file);
-					alert("File loaded");
-				}
-				catch(e)
-				{
-					alert("Error loading file\n("+e+")");
-				}
-			}, ".isp");
-		}
+		Interface.loadProgram();
 	});
 
 	Interface.file.addOption("Settings", function()
@@ -845,4 +815,52 @@ Interface.updateInterface = function()
 
 	//Resize editor camera
 	Editor.resizeCamera();
+}
+
+//Open to save program window
+Interface.saveProgram = function()
+{
+	App.chooseFile(function(event)
+	{
+		var file = event.srcElement.value;
+		try
+		{
+			Editor.saveProgram(file);
+		}
+		catch(e)
+		{
+			alert("Error saving file");
+		}
+	}, ".isp", true);
+}
+
+//Open to load program window
+Interface.loadProgram = function()
+{
+	if(confirm("All unsaved changes to the project will be lost! Load file?"))
+	{
+		App.chooseFile(function(event)
+		{
+			var file = event.srcElement.value;
+			try
+			{
+				Editor.loadProgram(file);
+				alert("File loaded");
+			}
+			catch(e)
+			{
+				alert("Error loading file");
+			}
+		}, ".isp");
+	}
+}
+
+//Interface elemento to create new program
+Interface.newProgram = function()
+{
+	if(confirm("All unsaved changes to the project will be lost! Create new File?"))
+	{
+		Editor.createNewProgram();
+		Editor.updateTreeView();
+	}
 }

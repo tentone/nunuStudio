@@ -147,7 +147,7 @@ function TreeElement(container)
 		if(self.obj.uuid !== undefined && !(self.obj instanceof Scene))
 		{
 			event.dataTransfer.setData("uuid", self.obj.uuid);
-			TreeView.pushDragElement(self.obj);
+			DragBuffer.pushDragElement(self.obj);
 		}
 	};
 
@@ -156,7 +156,7 @@ function TreeElement(container)
 	{
 		//Try to remove event from buffer
 		var uuid = event.dataTransfer.getData("uuid");
-		var obj = TreeView.popDragElement(uuid);
+		var obj = DragBuffer.popDragElement(uuid);
 
 		//To avoid mouse lock after drag
 		Mouse.updateKey(Mouse.LEFT, Key.KEY_UP);
@@ -169,7 +169,7 @@ function TreeElement(container)
 
 		//Collect element from buffer
 		var uuid = event.dataTransfer.getData("uuid");
-		var obj = TreeView.popDragElement(uuid);
+		var obj = DragBuffer.popDragElement(uuid);
 		
 		if(obj !== null)
 		{
