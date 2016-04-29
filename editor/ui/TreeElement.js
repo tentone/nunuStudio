@@ -144,7 +144,7 @@ function TreeElement(container)
 	//Drag start
 	this.element.ondragstart = function(event)
 	{
-		if(self.obj.uuid != undefined && !(self.obj instanceof Scene))
+		if(self.obj.uuid !== undefined && !(self.obj instanceof Scene))
 		{
 			event.dataTransfer.setData("uuid", self.obj.uuid);
 			TreeView.pushDragElement(self.obj);
@@ -171,7 +171,7 @@ function TreeElement(container)
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = TreeView.popDragElement(uuid);
 		
-		if(obj != null)
+		if(obj !== null)
 		{
 			if(obj.uuid !== self.obj.uuid && !ObjectUtils.isChildOf(obj ,self.obj))
 			{
@@ -263,16 +263,7 @@ function TreeElement(container)
 	this.arrow.img.onclick = function()
 	{
 		self.folded = !self.folded;
-		if(self.folded)
-		{
-			self.arrow.setImage("editor/files/icons/misc/arrow_right.png");
-			self.container.updateInterface();
-		}
-		else
-		{
-			self.arrow.setImage("editor/files/icons/misc/arrow_down.png");
-			self.container.updateInterface();
-		}
+		self.updateFoldedState();
 	};
 
 	//Add element to document
@@ -286,6 +277,7 @@ TreeElement.id = 0;
 TreeElement.prototype.update = update;
 TreeElement.prototype.updateSceneData = updateSceneData;
 TreeElement.prototype.updateInterface = updateInterface;
+TreeElement.prototype.updateFoldedState = updateFoldedState;
 TreeElement.prototype.destroy = destroy;
 TreeElement.prototype.add = add;
 TreeElement.prototype.setLabel = setLabel;
@@ -316,13 +308,16 @@ function deleteObject()
 function setObject(obj)
 {
 	this.obj = obj;
+	this.icon.setImage(obj.icon);
+	this.label.setText(obj.name);
+	this.folded = obj.folded;
+	this.updateFoldedState();
 }
 
 //Set icon
 function setIcon(icon)
 {
 	this.icon.setImage(icon);
-	this.icon.updateInterface();
 }
 
 //Set label
@@ -366,14 +361,35 @@ function destroy()
 	}
 }
 
-//Update TreeElement form scene data
+//Update folded state for this tree element
+function updateFoldedState()
+{
+	if(this.obj !== undefined)
+	{
+		this.obj.folded = this.folded;
+	}
+
+	if(this.folded)
+	{
+		this.arrow.setImage("editor/files/icons/misc/arrow_right.png");
+		this.container.updateInterface();
+	}
+	else
+	{
+		this.arrow.setImage("editor/files/icons/misc/arrow_down.png");
+		this.container.updateInterface();
+	}
+}
+
+//Update parent tree element form scene data
 function updateSceneData()
 {
 	if(this.container.scene != null)
 	{
-		this.container.fromScene(this.container.scene);
+		this.container.fromObject(this.container.scene);
 	}
 }
+
 //Update TreeElement
 function update(){}
 

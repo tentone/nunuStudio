@@ -97,10 +97,12 @@ function updateInterface()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+		this.span.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
+		this.span.style.visibility = "hidden";
 	}
 
 	this.element.style.top = this.position.y + "px";

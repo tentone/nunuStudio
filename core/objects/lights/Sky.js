@@ -241,7 +241,8 @@ function toJSON(meta)
 	var object = {};
 	object.uuid = this.uuid;
 	object.type = this.type;
-
+	object.folded = this.folded;
+	
 	//Sky specific data
 	object.auto_update = this.auto_update;
 	object.day_time = this.day_time;
