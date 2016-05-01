@@ -46,6 +46,58 @@ function ScenePanel(parent)
 			}
 		}
 	});
+
+	//Fog
+	this.fog = new Checkbox(this.element);
+	this.fog.setText("Fog Enabled");
+	this.fog.size.set(200, 15);
+	this.fog.position.set(3, 60);
+	this.fog.updateInterface();
+	this.fog.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+
+		}
+	});
+
+	//For near
+	text = new Text(this.element);
+	text.setAlignment(Text.LEFT);
+	text.setText("Near");
+	text.position.set(5, 95);
+	text.updateInterface();
+
+	this.fog_near = new Numberbox(this.element);
+	this.fog_near.size.set(50, 18);
+	this.fog_near.position.set(40, 85);
+	this.fog_near.updateInterface();
+	this.fog_near.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+
+		}
+	});
+
+	//Fog far
+	text = new Text(this.element);
+	text.setAlignment(Text.LEFT);
+	text.setText("Far");
+	text.position.set(5, 120);
+	text.updateInterface();
+
+	this.fog_far = new Numberbox(this.element);
+	this.fog_far.size.set(50, 18);
+	this.fog_far.position.set(35, 110);
+	this.fog_far.updateInterface();
+	this.fog_far.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+
+		}
+	});
 }
 
 //Functions Prototype

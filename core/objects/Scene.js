@@ -8,6 +8,9 @@ function Scene()
 	this.rotationAutoUpdate = false;
 	this.matrixAutoUpdate = false;
 
+	//Fog
+	this.fog = null;//new THREE.Fog(0x0000ff, 1, 100);
+
 	//Create cannon world
 	this.world = new CANNON.World();
 	this.world.broadphase = new CANNON.NaiveBroadphase();
@@ -20,6 +23,7 @@ function Scene()
 	//Runtime variables
 	this.data = function(){};
 	this.camera = null;
+	this.listener = new THREE.AudioListener();
 }
 
 //Function Prototype
