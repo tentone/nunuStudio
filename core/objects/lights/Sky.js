@@ -8,13 +8,13 @@ function Sky(auto_update, day_time, sun_distance, time)
 	this.hemisphere.name = "horizon";
 
 	//Vertex Shader
-	var vertex = 'varying vec3 vWorldPosition; \
+	var vertex = "varying vec3 vWorldPosition; \
 	void main() \
 	{ \
 		vec4 worldPosition = modelMatrix * vec4(position, 1.0); \
 		vWorldPosition = worldPosition.xyz; \
 		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); \
-	}';
+	}";
 
 	//Pixel shader
 	var fragment = "uniform vec3 top_color; \
