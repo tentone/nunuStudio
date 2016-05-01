@@ -9,7 +9,11 @@ function Scene()
 	this.matrixAutoUpdate = false;
 
 	//Fog
-	this.fog = null;//new THREE.Fog(0x0000ff, 1, 100);
+	this.fog_color = 0xffffff;
+	this.fog_near = 2;
+	this.fog_far = 30;
+	this.fog_density = 0.001;
+	this.fog_mode = Scene.FOG_NONE;
 
 	//Create cannon world
 	this.world = new CANNON.World();
@@ -26,6 +30,11 @@ function Scene()
 	this.listener = new THREE.AudioListener();
 }
 
+//Fog modes
+Scene.FOG_NONE = 0;
+Scene.FOG_LINEAR = 1;
+Scene.FOG_EXPONENTIAL = 2;
+
 //Function Prototype
 Scene.prototype = Object.create(THREE.Scene.prototype);
 Scene.prototype.icon = "editor/files/icons/models/models.png";
@@ -34,6 +43,8 @@ Scene.prototype.icon = "editor/files/icons/models/models.png";
 Scene.prototype.initialize = initialize;
 Scene.prototype.update = update;
 Scene.prototype.toJSON = toJSON;
+Scene.prototype.setFogMode = setFogMode;
+Scene.prototype.updateFog = updateFog;
 
 //Initialize
 function initialize()
@@ -62,10 +73,51 @@ function update()
 	}
 }
 
+//Set fog mode
+function setFogMode(mode)
+{
+	this.fog_mode = mode;
+
+	if(mode === Scene.FOG_LINEAR)
+	{
+		this.fog = new THREE.Fog(this.fog_color, this.fog_near, this.fog_far);
+	}
+	else if(mode === Scene.FOG_EXPONENTIAL)
+	{
+		this.fog = new THREE.FogExp2(this.fog_color, this.fog_density);
+	}
+	else
+	{
+		this.fog = null;
+	}
+}
+
+//Update fog from stored value
+function updateFog()
+{
+	if(this.fog instanceof THREE.Fog)
+	{
+		this.fog.color.setHex(this.fog_color);
+		this.fog.far = this.fog_far;
+		this.fog_near = this.fog_near;
+	}
+	else if(this.fog instanceof THREE.FogExp2)
+	{
+		this.fog.color.setHex(this.fog_color);
+		this.fog.density = this.fog_density;
+	}
+}
+
 //Create JSON for object
 function toJSON(meta)
 {
 	var data = THREE.Scene.prototype.toJSON.call(this, meta);
+
+	data.object.fog_color = this.fog_color;
+	data.object.fog_density = this.fog_density;
+	data.object.fog_near = this.fog_near;
+	data.object.fog_far = this.fog_far;
+	data.object.fog_mode = this.fog_mode;
 
 	if(this.initial_camera !== null)
 	{

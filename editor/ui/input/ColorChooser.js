@@ -56,7 +56,9 @@ ColorChooser.prototype.update = update;
 ColorChooser.prototype.updateInterface = updateInterface;
 ColorChooser.prototype.destroy = destroy;
 ColorChooser.prototype.getValue = getValue;
+ColorChooser.prototype.getValueHex = getValueHex;
 ColorChooser.prototype.setValue = setValue;
+ColorChooser.prototype.setValueHex = setValueHex;
 ColorChooser.prototype.setOnChange = setOnChange;
 
 //Set onchange callback
@@ -71,10 +73,23 @@ function setValue(r, g, b)
 	this.color.fromRGB(r*255, g*255, b*255);
 }
 
-//Get Slider value
+//Set color value hex
+function setValueHex(hex)
+{
+	hex = Math.floor(hex);
+	this.color.fromRGB(hex >> 16 & 255, hex >> 8 & 255, hex & 255);
+}
+
+//Get color value
 function getValue()
 {
 	return {r: this.color.rgb[0]/255, g: this.color.rgb[1]/255, b: this.color.rgb[2]/255};
+}
+
+//Get color value hex
+function getValueHex()
+{
+	return (this.color.rgb[0] << 16 ^ this.color.rgb[1] << 8 ^ this.color.rgb[2] << 0);
 }
 
 //Remove element
