@@ -472,6 +472,26 @@ function parseObject(data, geometries, materials)
 
 		case "Scene":
 			object = new Scene();
+			if(data.fog_color !== undefined)
+			{
+				object.fog_color = data.fog_color;
+			}
+			if(data.fog_density !== undefined)
+			{
+				object.fog_density = data.fog_density;
+			}
+			if(data.fog_near !== undefined)
+			{
+				object.fog_near = data.fog_near;
+			}	
+			if(data.fog_far !== undefined)
+			{
+				object.fog_far = data.fog_far;
+			}
+			if(data.fog_mode !== undefined)
+			{
+				object.setFogMode(data.fog_mode);
+			}
 			if(data.initial_camera !== undefined)
 			{
 				object.initial_camera = data.initial_camera;

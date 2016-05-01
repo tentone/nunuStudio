@@ -7,40 +7,50 @@ function ParticleEmitter()
 
 	this.clock = clock = new THREE.Clock();
 
-	this.group = new SPE.Group({
-	texture: {
-	value: THREE.ImageUtils.loadTexture('./data/particle.png')
-	}
+	this.group = new SPE.Group(
+	{
+		texture:
+		{
+		value: THREE.ImageUtils.loadTexture('./data/particle.png')
+		}
 	});
 
-	this.emitter = new SPE.Emitter({
-	maxAge: {
-	value: 2
-	},
-	position: {
-	value: new THREE.Vector3(0, 0, 0),
-	spread: new THREE.Vector3( 0, 0, 0 )
-	},
+	this.emitter = new SPE.Emitter(
+	{
+		maxAge:
+		{
+			value: 3
+		},
 
-	acceleration: {
-	value: new THREE.Vector3(0, -10, 0),
-	spread: new THREE.Vector3( 10, 0, 10 )
-	},
+		position:
+		{
+			value: new THREE.Vector3(0, 0, 0),
+			spread: new THREE.Vector3(0, 0, 0)
+		},
 
-	velocity: {
-	value: new THREE.Vector3(0, 25, 0),
-	spread: new THREE.Vector3(10, 7.5, 10)
-	},
+		acceleration:
+		{
+			value: new THREE.Vector3(0, -10, 0),
+			spread: new THREE.Vector3( 10, 0, 10 )
+		},
 
-	color: {
-	value: [ new THREE.Color('white'), new THREE.Color('red') ]
-	},
+		velocity:
+		{
+			value: new THREE.Vector3(0, 25, 0),
+			spread: new THREE.Vector3(10, 7.5, 10)
+		},
 
-	size: {
-	value: 1
-	},
+		color:
+		{
+			value: [ new THREE.Color('white'), new THREE.Color('red') ]
+		},
 
-	particleCount: 2000
+		size:
+		{
+			value: 1
+		},
+
+		particleCount: 20000
 	});
 
 	this.group.addEmitter(this.emitter);

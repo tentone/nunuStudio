@@ -890,11 +890,8 @@ Editor.setState = function(state)
 		//Copy program
 		Editor.program_running = Editor.program.clone();
 
-		//If no camera attached attach camera
-		if(Editor.program_running.scene.camera === null)
-		{
-			Editor.program_running.scene.camera = Editor.camera;
-		}
+		//Use editor camera as default camera for program
+		Editor.program_running.default_camera = Editor.camera;
 
 		//Initialize scene
 		Editor.program_running.initialize();

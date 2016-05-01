@@ -38,27 +38,43 @@ function Program(name, description, author, version, vr)
 		this.vr = vr;
 	}
 	
-	//Initial scene
+	//Initial values
 	this.initial_scene = null;
-	
+	this.default_camera = null;
+
 	//Runtime variables
-	this.data = function(){};
+	this.renderer = null;
 	this.scene = null;
+	this.data = function(){};
 }
 
 //Function Prototype
 Program.prototype = Object.create(THREE.Object3D.prototype);
 Program.prototype.icon = "editor/files/icons/script/script.png";
 
-Program.prototype.resize = resize;
 Program.prototype.initialize = initialize;
-Program.prototype.toJSON = toJSON;
-
-Program.prototype.clone = clone;
-Program.prototype.add = add;
+Program.prototype.resize = resize;
 Program.prototype.remove = remove;
+Program.prototype.add = add;
+Program.prototype.clone = clone;
+Program.prototype.toJSON = toJSON;
+Program.prototype.setScene = setScene;
 Program.prototype.setInitialScene = setInitialScene;
 Program.prototype.addDefaultScene = addDefaultScene;
+
+//Set scene 
+function setScene(scene)
+{
+	if(scene instanceof Scene)
+	{
+		this.scene = scene;
+		this.scene.initialize();
+		if(this.scene.camera === null)
+		{
+			this.scene.camera = this.default_camera;
+		}
+	}
+}
 
 //Select initial scene and initialize that scene
 function initialize()
@@ -69,56 +85,15 @@ function initialize()
 		{
 			if(this.children[i].uuid === this.initial_scene)
 			{
-				this.scene = this.children[i];
+				this.setScene(this.children[i]);
 				break;
 			}
 		}
 	}
 	else
 	{
-		this.scene = this.children[0];
+		this.setScene(this.children[0]);
 	}
-
-	this.scene.initialize();
-}
-
-//Set as initial scene (from uuid)
-function setInitialScene(scene)
-{
-	this.initial_scene = scene.uuid;
-}
-
-//Create a default scene with sky
-function addDefaultScene()
-{
-	var scene = new Scene();
-
-	//Sky
-	var sky = new Sky();
-	sky.auto_update = false;
-	scene.add(sky);
-
-	var material = new THREE.MeshPhongMaterial();
-	var geometry = new THREE.BoxGeometry(1, 1, 1);
-
-	//Box
-	var model = new Model3D(geometry, material);
-	model.receiveShadow = true;
-	model.castShadow = true;
-	model.name = "box";
-	scene.add(model);
-
-	//Floor
-	model = new Model3D(geometry, material);
-	model.scale.set(20, 1, 20);
- 	model.position.set(0, -1, 0);
-	model.receiveShadow = true;
-	model.castShadow = true;
-	model.name = "ground";
-	scene.add(model);
-
-	//Add scene to program
-	this.add(scene);
 }
 
 //Screen resize
@@ -171,6 +146,47 @@ function clone()
 	var loader = new ObjectLoader();
 	return loader.parse(data);
 }
+
+//Set as initial scene (from uuid)
+function setInitialScene(scene)
+{
+	this.initial_scene = scene.uuid;
+}
+
+//Create a default scene with sky
+function addDefaultScene()
+{
+	var scene = new Scene();
+
+	//Sky
+	var sky = new Sky();
+	sky.auto_update = false;
+	scene.add(sky);
+
+	var material = new THREE.MeshPhongMaterial();
+	var geometry = new THREE.BoxGeometry(1, 1, 1);
+
+	//Box
+	var model = new Model3D(geometry, material);
+	model.receiveShadow = true;
+	model.castShadow = true;
+	model.name = "box";
+	scene.add(model);
+
+	//Floor
+	model = new Model3D(geometry, material);
+	model.scale.set(20, 1, 20);
+ 	model.position.set(0, -1, 0);
+	model.receiveShadow = true;
+	model.castShadow = true;
+	model.name = "ground";
+	scene.add(model);
+
+	//Add scene to program
+	this.add(scene);
+}
+
+//Set scene
 
 //Create JSON for object
 function toJSON(meta)
