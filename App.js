@@ -1,5 +1,4 @@
 include("lib/three/three.js");
-
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/VRMLLoader.js");
@@ -8,16 +7,13 @@ include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
-
 include("lib/three/cameras/CinematicCamera.js");
-
 include("lib/three/vr/VRControls.js");
 include("lib/three/vr/VREffect.js");
 include("lib/three/vr/webvr-manager.js");
 include("lib/three/vr/webvr-polyfill.js");
 
 include("lib/leap/leap-0.6.4.min.js");
-include("lib/leap/leap-plugins-0.1.11.min.js");
 
 include("lib/cannon/cannon.min.js");
 include("lib/cannon/cannondebugrenderer.js");
@@ -25,6 +21,7 @@ include("lib/cannon/cannondebugrenderer.js");
 include("lib/stats.min.js");
 include("lib/opentype.min.js");
 include("lib/jszip.min.js");
+include("lib/SPE.min.js");
 
 include("input/Key.js");
 include("input/Keyboard.js");
@@ -34,6 +31,7 @@ include("core/ThreeExpand.js");
 include("core/ObjectLoader.js");
 include("core/Program.js");
 include("core/ObjectUtils.js");
+include("core/Global.js");
 include("core/objects/device/LeapHand.js");
 include("core/objects/device/KinectDevice.js");
 include("core/objects/lights/PointLight.js");
@@ -52,6 +50,8 @@ include("core/objects/Model3D.js");
 include("core/objects/AnimatedModel.js");
 include("core/objects/Text3D.js");
 include("core/objects/Sprite.js");
+include("core/objects/ParticleEmitter.js");
+include("core/objects/Audio.js");
 
 //App class
 function App(){}

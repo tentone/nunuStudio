@@ -38,9 +38,9 @@ function Program(name, description, author, version, vr)
 		this.vr = vr;
 	}
 	
-	//Initialization variables
+	//Initial scene
 	this.initial_scene = null;
-
+	
 	//Runtime variables
 	this.data = function(){};
 	this.scene = null;
@@ -53,6 +53,7 @@ Program.prototype.icon = "editor/files/icons/script/script.png";
 Program.prototype.resize = resize;
 Program.prototype.initialize = initialize;
 Program.prototype.toJSON = toJSON;
+
 Program.prototype.clone = clone;
 Program.prototype.add = add;
 Program.prototype.remove = remove;
@@ -97,9 +98,10 @@ function addDefaultScene()
 	sky.auto_update = false;
 	scene.add(sky);
 
-	//Box
 	var material = new THREE.MeshPhongMaterial();
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
+
+	//Box
 	var model = new Model3D(geometry, material);
 	model.receiveShadow = true;
 	model.castShadow = true;
@@ -107,9 +109,8 @@ function addDefaultScene()
 	scene.add(model);
 
 	//Floor
-	material = new THREE.MeshPhongMaterial();
-	geometry = new THREE.BoxGeometry(20, 1, 20);
- 	model = new Model3D(geometry, material);
+	model = new Model3D(geometry, material);
+	model.scale.set(20, 1, 20);
  	model.position.set(0, -1, 0);
 	model.receiveShadow = true;
 	model.castShadow = true;

@@ -342,8 +342,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cube.png", function()
 	{
 		var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-		var material = new THREE.MeshPhongMaterial();
-		var model = new Model3D(geometry, material);
+		var model = new Model3D(geometry, Editor.default_material);
 		model.receiveShadow = true;
 		model.castShadow = true;
 		model.name = "cube";
@@ -354,8 +353,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cylinder.png", function()
 	{
 		var geometry = new THREE.CylinderBufferGeometry(1, 1, 2, 32);
-		var material = new THREE.MeshPhongMaterial();
-		var model = new Model3D(geometry, material);
+		var model = new Model3D(geometry, Editor.default_material);
 		model.receiveShadow = true;
 		model.castShadow = true;
 		model.name = "cylinder";
@@ -366,8 +364,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/sphere.png", function()
 	{
 		var geometry = new THREE.SphereBufferGeometry(1, 16, 16);
-		var material = new THREE.MeshPhongMaterial();
-		var model = new Model3D(geometry, material);
+		var model = new Model3D(geometry, Editor.default_material);
 		model.receiveShadow = true;
 		model.castShadow = true;
 		model.name = "sphere";
@@ -378,8 +375,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/torus.png", function()
 	{
 		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 100);
-		var material = new THREE.MeshPhongMaterial();
-		var model = new Model3D(geometry, material);
+		var model = new Model3D(geometry, Editor.default_material);
 		model.receiveShadow = true;
 		model.castShadow = true;
 		model.name = "torus";
@@ -390,8 +386,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cone.png", function()
 	{
 		var geometry = new THREE.CylinderBufferGeometry(0, 1, 2, 32);
-		var material = new THREE.MeshPhongMaterial();
-		var model = new Model3D(geometry, material);
+		var model = new Model3D(geometry, Editor.default_material);
 		model.receiveShadow = true;
 		model.castShadow = true;
 		model.name = "cone";
@@ -403,8 +398,7 @@ Interface.initialize = function()
 	{
 		var loader = new THREE.FontLoader().load("data/fonts/helvetiker_bold.typeface.js", function(font)
 		{
-			var material = new THREE.MeshPhongMaterial();
-			var model = new Text3D("text", font, material);
+			var model = new Text3D("text", font, Editor.default_material);
 			model.receiveShadow = true;
 			model.castShadow = true;
 			Editor.addToActualScene(model);
@@ -415,8 +409,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/plane.png", function()
 	{
 		var geometry = new THREE.PlaneBufferGeometry(1,1);
-		var material = new THREE.MeshPhongMaterial();
-		var model = new Model3D(geometry, material);
+		var model = new Model3D(geometry, Editor.default_material);
 		model.receiveShadow = true;
 		model.castShadow = true;
 		model.name = "plane";
@@ -540,7 +533,7 @@ Interface.initialize = function()
 	//Particles
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/particles.png", function()
 	{
-		//TODO <ADD CODE HERE>
+		Editor.addToActualScene(new ParticleEmitter());
 	});
 
 	//Container
@@ -552,7 +545,7 @@ Interface.initialize = function()
 	//Audio
 	Interface.add_effects.addOption(Interface.file_dir + "icons/assets/audio.png", function()
 	{
-		//TODO <ADD CODE HERE>
+		Editor.addToActualScene(new Audio());
 	});
 
 	//Add device

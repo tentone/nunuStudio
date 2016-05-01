@@ -103,6 +103,9 @@ Editor.initialize = function(canvas)
 	Editor.renderer = null;
 	Editor.canvas = null;
 
+	//Default material to be used when creating objects
+	Editor.default_material = new THREE.MeshPhongMaterial();
+
 	//Initialize User Interface
 	Interface.initialize();
 
