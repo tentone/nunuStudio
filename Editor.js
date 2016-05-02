@@ -188,25 +188,26 @@ Editor.update = function()
 	Interface.update();
 	Editor.block_camera_move = false;
 
-	if(Keyboard.isKeyPressed(Keyboard.CTRL))
-	{
-		if(Keyboard.isKeyJustPressed(Keyboard.S))
-		{
-			Interface.saveProgram();
-		}
-		else if(Keyboard.isKeyJustPressed(Keyboard.L))
-		{
-			Interface.loadProgram();
-		}
-		else if(Keyboard.isKeyJustPressed(Keyboard.W))
-		{
-			//TODO <ADD CODE HERE>
-		}
-	}
-
 	//Editing a scene
 	if(Editor.state === Editor.STATE_EDITING)
 	{
+		//Save or load files
+		if(Keyboard.isKeyPressed(Keyboard.CTRL))
+		{
+			if(Keyboard.isKeyJustPressed(Keyboard.S))
+			{
+				Interface.saveProgram();
+			}
+			else if(Keyboard.isKeyJustPressed(Keyboard.L))
+			{
+				Interface.loadProgram();
+			}
+			else if(Keyboard.isKeyJustPressed(Keyboard.W))
+			{
+				//TODO <ADD CODE HERE>
+			}
+		}
+
 		//If object select display tools
 		if(Editor.selected_object !== null)
 		{
