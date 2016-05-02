@@ -1,25 +1,31 @@
-function Text3D(text, font, material)
+function Text3D(text, material, font)
 {
-	THREE.Mesh.call(this, new THREE.TextGeometry(text, {font: font}), material);
+	if(font === undefined)
+	{
+		this.font = new FontLoader().parse(App.readFile("data/fonts/helvetiker_bold.typeface.js"));
+	}
+	else
+	{
+		this.font = new FontLoader().parse(font);
+	}
+
+	THREE.Mesh.call(this, new THREE.TextGeometry(text, {font: this.font}), material);
 	
 	this.name = "text";
 	this.type = "Text3D";
-	
-	this.font = font;
-	this.text = text;
 
-	this.scale.set(0.01, 0.01, 0.01);
+	this.text = text;
 }
 
 //Function Prototype
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
 Text3D.prototype.icon = "editor/files/icons/models/text.png";
 
-//Runtime functions
+//Overrided functions
 Text3D.prototype.initialize = initialize;
 Text3D.prototype.update = update;
 
-//Auxiliar Functions
+//Auxiliar functions
 Text3D.prototype.setText = setText;
 
 //Initialize
@@ -44,6 +50,7 @@ function update()
 function setText(text)
 {
 	this.text = text;
+	this.geometry.dispose();
 	this.geometry = new THREE.TextGeometry(this.text, {font: this.font});
 }
 
@@ -52,7 +59,6 @@ function toJSON(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
-	//TODO <ADD CODE HERE>
 	data.object.text = this.text;
 
 	return data;

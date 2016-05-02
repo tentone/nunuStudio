@@ -32,6 +32,8 @@ include("core/ObjectLoader.js");
 include("core/Program.js");
 include("core/ObjectUtils.js");
 include("core/Global.js");
+include("core/loaders/TextureLoader.js");
+include("core/loaders/FontLoader.js");
 include("core/objects/device/LeapHand.js");
 include("core/objects/device/KinectDevice.js");
 include("core/objects/lights/PointLight.js");
