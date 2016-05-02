@@ -396,13 +396,10 @@ Interface.initialize = function()
 	//Text
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/text.png", function()
 	{
-		var loader = new THREE.FontLoader().load("data/fonts/helvetiker_bold.typeface.js", function(font)
-		{
-			var model = new Text3D("text", font, Editor.default_material);
-			model.receiveShadow = true;
-			model.castShadow = true;
-			Editor.addToActualScene(model);
-		});
+		var model = new Text3D("text", Editor.default_material);
+		model.receiveShadow = true;
+		model.castShadow = true;
+		Editor.addToActualScene(model);
 	});
 
 	//Plane

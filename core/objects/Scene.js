@@ -43,20 +43,23 @@ Scene.prototype.icon = "editor/files/icons/models/models.png";
 Scene.prototype.initialize = initialize;
 Scene.prototype.update = update;
 Scene.prototype.toJSON = toJSON;
+Scene.prototype.getInitialCamera = getInitialCamera;
 Scene.prototype.setFogMode = setFogMode;
 Scene.prototype.updateFog = updateFog;
 
 //Initialize
 function initialize()
 {
-	//Initialize children and select camera
+	//Get initial camera	
+	var camera = this.getInitialCamera();
+	if(camera !== null)
+	{
+		this.camera = camera;
+	}
+
+	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		if(this.initial_camera === this.children[i].uuid)
-		{
-			this.camera = this.children[i];
-		}
-
 		this.children[i].initialize();
 	}
 }
@@ -64,13 +67,39 @@ function initialize()
 //Update scene
 function update()
 {
-	//this.world.step(1/60);
+	//Update physics
+	this.world.step(1/60);
 	
 	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();
 	}
+}
+
+//Get default camera
+function getInitialCamera(obj)
+{
+	if(obj === undefined)
+	{
+		obj = this;
+	}
+
+	if(this.initial_camera === obj.uuid)
+	{
+		return obj;
+	}
+
+	for(var i = 0; i < obj.children.length; i++)
+	{
+		var camera = this.getInitialCamera(obj.children[i]);
+		if(camera !== null)
+		{
+			return camera;
+		}
+	}
+
+	return null;
 }
 
 //Set fog mode

@@ -52,12 +52,16 @@ function Program(name, description, author, version, vr)
 Program.prototype = Object.create(THREE.Object3D.prototype);
 Program.prototype.icon = "editor/files/icons/script/script.png";
 
+//Overrided functions
 Program.prototype.initialize = initialize;
 Program.prototype.resize = resize;
 Program.prototype.remove = remove;
 Program.prototype.add = add;
 Program.prototype.clone = clone;
 Program.prototype.toJSON = toJSON;
+
+//Functions
+Program.prototype.dispose = dispose;
 Program.prototype.setScene = setScene;
 Program.prototype.setInitialScene = setInitialScene;
 Program.prototype.addDefaultScene = addDefaultScene;
@@ -186,7 +190,11 @@ function addDefaultScene()
 	this.add(scene);
 }
 
-//Set scene
+//Dipose program data (to avoid memory leaks)
+function dispose()
+{
+	//TODO <ADD CODE HERE>
+}
 
 //Create JSON for object
 function toJSON(meta)
