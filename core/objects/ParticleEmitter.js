@@ -17,7 +17,7 @@ function ParticleEmitter()
 
 	this.emitter = new SPE.Emitter(
 	{		
-		particleCount: 200000,
+		particleCount: 20000,
 		direction: 1,
 		duration: null, //seconds
 
