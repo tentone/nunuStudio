@@ -6,8 +6,8 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 	
 	this.castShadow = true;
 
-	this.shadow.mapSize.width = 1024;
-	this.shadow.mapSize.height = 1024;
+	//this.shadow.mapSize.width = 1024;
+	//this.shadow.mapSize.height = 1024;
 }
 
 //Function Prototype

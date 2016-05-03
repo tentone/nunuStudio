@@ -24,6 +24,7 @@ Text3D.prototype.icon = "editor/files/icons/models/text.png";
 //Overrided functions
 Text3D.prototype.initialize = initialize;
 Text3D.prototype.update = update;
+Text3D.prototype.toJSON = toJSON;
 
 //Auxiliar functions
 Text3D.prototype.setText = setText;
@@ -57,9 +58,18 @@ function setText(text)
 //Create JSON for object
 function toJSON(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	//Backup geometry and set to undefined to avoid being stored
+	var geometry = this.geometry;
+	this.geometry = undefined;
 
+	//Gen JSON
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	
 	data.object.text = this.text;
+	data.object.font = JSON.stringify(this.font);
+
+	//Restore geometry
+	this.geometry = geometry;
 
 	return data;
 }
