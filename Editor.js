@@ -61,7 +61,7 @@ include("editor/Interface.js");
 function Editor(){}
 
 //Editor state
-Editor.STATE_IDLE = 8; //Editing scripts
+Editor.STATE_IDLE = 8; //Non scene window open
 Editor.STATE_EDITING = 9; //Editing a scene
 Editor.STATE_TESTING = 11; //Testing a scene
 
@@ -71,9 +71,30 @@ Editor.MODE_MOVE = 1;
 Editor.MODE_RESIZE = 2;
 Editor.MODE_ROTATE = 3;
 
+//Editor version
+Editor.NAME = "interactive Editor";
+Editor.VERSION = "V0.6.3";
+Editor.TIMESTAMP = "201605031440";
+
 //Initialize Main
 Editor.initialize = function(canvas)
 {
+	//Set windows close event
+	if(App.gui !== undefined)
+	{
+		//Close event
+		App.gui.Window.get().on("close", function()
+		{
+			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
+			{
+				Editor.exit();
+			}
+		});
+	}
+
+	//Set window title
+	document.title = Editor.NAME + " " + Editor.VERSION + " (" + Editor.TIMESTAMP + ")";
+
 	//Set mouse lock false
 	App.setMouseLock(false);
 
@@ -929,5 +950,9 @@ Editor.initializeRenderer = function(canvas)
 //Exit editor
 Editor.exit = function()
 {
-	process.exit();
+	if(App.gui !== undefined)
+	{
+		App.gui.App.closeAllWindows();
+		App.gui.App.quit();
+	}
 }

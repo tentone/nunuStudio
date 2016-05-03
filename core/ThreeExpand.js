@@ -1,5 +1,6 @@
 //Editor UI elemenets
 THREE.Object3D.prototype.icon = "editor/files/icons/tab/scene.png";
+THREE.Bone.prototype.icon = "editor/files/icons/animation/bone.png";
 THREE.Object3D.prototype.folded = false;
 
 //Initialize Object
