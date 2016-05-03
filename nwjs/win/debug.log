@@ -7,3 +7,127 @@
 [0502/012702:WARNING:in_range_cast.h(38)] value 1988207775558 out of range
 [0502/012702:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
 [0502/012702:WARNING:in_range_cast.h(38)] value 1988278024000 out of range
+[0503/135658:ERROR:process_info.cc(608)] range at 0x34ac288600000000, size 0x1e1 fully unreadable
+[0503/135658:ERROR:process_info.cc(608)] range at 0x34ac28a600000000, size 0x1e1 fully unreadable
+[0503/135658:ERROR:process_info.cc(608)] range at 0x0, size 0x1e1 fully unreadable
+[0503/135658:WARNING:in_range_cast.h(38)] value 2066836063956 out of range
+[0503/135658:WARNING:in_range_cast.h(38)] value 2066836060040 out of range
+[0503/135658:WARNING:in_range_cast.h(38)] value 2066836064320 out of range
+[0503/135658:WARNING:in_range_cast.h(38)] value 2066836060372 out of range
+[0503/135658:WARNING:in_range_cast.h(38)] value 2066763261040 out of range
+[0503/135658:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/135658:WARNING:in_range_cast.h(38)] value 2066762968896 out of range
+[0503/135658:WARNING:in_range_cast.h(38)] value 2066763383056 out of range
+[0503/140538:ERROR:process_info.cc(608)] range at 0xd008288600000000, size 0x1a0 fully unreadable
+[0503/140538:ERROR:process_info.cc(608)] range at 0xd00828a600000000, size 0x1a0 fully unreadable
+[0503/140538:ERROR:process_info.cc(608)] range at 0x0, size 0x1a0 fully unreadable
+[0503/140538:WARNING:in_range_cast.h(38)] value 1790267616084 out of range
+[0503/140538:WARNING:in_range_cast.h(38)] value 1790267612168 out of range
+[0503/140538:WARNING:in_range_cast.h(38)] value 1790267616448 out of range
+[0503/140538:WARNING:in_range_cast.h(38)] value 1790267612500 out of range
+[0503/140538:WARNING:in_range_cast.h(38)] value 1790196880560 out of range
+[0503/140538:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/140538:WARNING:in_range_cast.h(38)] value 1790196988400 out of range
+[0503/140538:WARNING:in_range_cast.h(38)] value 1790197030112 out of range
+[0503/140714:ERROR:process_info.cc(608)] range at 0x1360288600000000, size 0x275 fully unreadable
+[0503/140714:ERROR:process_info.cc(608)] range at 0x136028a600000000, size 0x275 fully unreadable
+[0503/140714:ERROR:process_info.cc(608)] range at 0x0, size 0x275 fully unreadable
+[0503/140714:WARNING:in_range_cast.h(38)] value 2701930943140 out of range
+[0503/140714:WARNING:in_range_cast.h(38)] value 2701930939224 out of range
+[0503/140714:WARNING:in_range_cast.h(38)] value 2701930943504 out of range
+[0503/140714:WARNING:in_range_cast.h(38)] value 2701930939556 out of range
+[0503/140714:WARNING:in_range_cast.h(38)] value 2701859792160 out of range
+[0503/140714:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/140714:WARNING:in_range_cast.h(38)] value 2701860505984 out of range
+[0503/140714:WARNING:in_range_cast.h(38)] value 2701859896464 out of range
+[0503/140714:WARNING:in_range_cast.h(38)] value 2701859939056 out of range
+[0503/141417:ERROR:process_info.cc(608)] range at 0x448288600000000, size 0x2a4 fully unreadable
+[0503/141417:ERROR:process_info.cc(608)] range at 0x44828a600000000, size 0x2a4 fully unreadable
+[0503/141417:ERROR:process_info.cc(608)] range at 0x0, size 0x2a4 fully unreadable
+[0503/141417:WARNING:in_range_cast.h(38)] value 2903542027844 out of range
+[0503/141417:WARNING:in_range_cast.h(38)] value 2903542023928 out of range
+[0503/141417:WARNING:in_range_cast.h(38)] value 2903542028208 out of range
+[0503/141417:WARNING:in_range_cast.h(38)] value 2903542024260 out of range
+[0503/141417:WARNING:in_range_cast.h(38)] value 2903470022944 out of range
+[0503/141417:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/141417:WARNING:in_range_cast.h(38)] value 2903470140240 out of range
+[0503/141417:WARNING:in_range_cast.h(38)] value 2903469731648 out of range
+[0503/141417:WARNING:in_range_cast.h(38)] value 2903470190384 out of range
+[0503/141617:ERROR:process_info.cc(608)] range at 0x96ae288600000000, size 0x1ca fully unreadable
+[0503/141617:ERROR:process_info.cc(608)] range at 0x96ae28a600000000, size 0x1ca fully unreadable
+[0503/141617:ERROR:process_info.cc(608)] range at 0x0, size 0x1ca fully unreadable
+[0503/141617:WARNING:in_range_cast.h(38)] value 1969695328852 out of range
+[0503/141617:WARNING:in_range_cast.h(38)] value 1969695324936 out of range
+[0503/141617:WARNING:in_range_cast.h(38)] value 1969695329216 out of range
+[0503/141617:WARNING:in_range_cast.h(38)] value 1969695325268 out of range
+[0503/141617:WARNING:in_range_cast.h(38)] value 1969623323344 out of range
+[0503/141617:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/141617:WARNING:in_range_cast.h(38)] value 1969623818064 out of range
+[0503/141617:WARNING:in_range_cast.h(38)] value 1969623448240 out of range
+[0503/141834:ERROR:process_info.cc(608)] range at 0x3d0e288600000000, size 0x1a2 fully unreadable
+[0503/141834:ERROR:process_info.cc(608)] range at 0x3d0e28a600000000, size 0x1a2 fully unreadable
+[0503/141834:ERROR:process_info.cc(608)] range at 0x0, size 0x1a2 fully unreadable
+[0503/141834:WARNING:in_range_cast.h(38)] value 1796391221924 out of range
+[0503/141834:WARNING:in_range_cast.h(38)] value 1796391218008 out of range
+[0503/141834:WARNING:in_range_cast.h(38)] value 1796391222288 out of range
+[0503/141834:WARNING:in_range_cast.h(38)] value 1796391218340 out of range
+[0503/141834:WARNING:in_range_cast.h(38)] value 1796320954256 out of range
+[0503/141834:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/141834:WARNING:in_range_cast.h(38)] value 1796320669504 out of range
+[0503/141834:WARNING:in_range_cast.h(38)] value 1796321105072 out of range
+[0503/144039:ERROR:process_info.cc(608)] range at 0x518e288600000000, size 0x1d0 fully unreadable
+[0503/144039:ERROR:process_info.cc(608)] range at 0x518e28a600000000, size 0x1d0 fully unreadable
+[0503/144039:ERROR:process_info.cc(608)] range at 0x0, size 0x1d0 fully unreadable
+[0503/144039:WARNING:in_range_cast.h(38)] value 1994305971746 out of range
+[0503/144039:WARNING:in_range_cast.h(38)] value 1994305967830 out of range
+[0503/144039:WARNING:in_range_cast.h(38)] value 1994305972110 out of range
+[0503/144039:WARNING:in_range_cast.h(38)] value 1994305968162 out of range
+[0503/144039:WARNING:in_range_cast.h(38)] value 1994233408448 out of range
+[0503/144039:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/144039:WARNING:in_range_cast.h(38)] value 1994300474352 out of range
+[0503/144039:WARNING:in_range_cast.h(38)] value 1994233544816 out of range
+[0503/144055:ERROR:process_info.cc(608)] range at 0x2c69288600000000, size 0x15a fully unreadable
+[0503/144055:ERROR:process_info.cc(608)] range at 0x2c6928a600000000, size 0x15a fully unreadable
+[0503/144055:ERROR:process_info.cc(608)] range at 0x0, size 0x15a fully unreadable
+[0503/144055:WARNING:in_range_cast.h(38)] value 1486874968644 out of range
+[0503/144055:WARNING:in_range_cast.h(38)] value 1486874964728 out of range
+[0503/144055:WARNING:in_range_cast.h(38)] value 1486874969008 out of range
+[0503/144055:WARNING:in_range_cast.h(38)] value 1486874965060 out of range
+[0503/144055:WARNING:in_range_cast.h(38)] value 1486804077984 out of range
+[0503/144055:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/144055:WARNING:in_range_cast.h(38)] value 1486804190448 out of range
+[0503/144055:WARNING:in_range_cast.h(38)] value 1486804231616 out of range
+[0503/144401:ERROR:process_info.cc(608)] range at 0x9e7288600000000, size 0x183 fully unreadable
+[0503/144401:ERROR:process_info.cc(608)] range at 0x9e728a600000000, size 0x183 fully unreadable
+[0503/144401:ERROR:process_info.cc(608)] range at 0x0, size 0x183 fully unreadable
+[0503/144401:WARNING:in_range_cast.h(38)] value 1662391032500 out of range
+[0503/144401:WARNING:in_range_cast.h(38)] value 1662391028584 out of range
+[0503/144401:WARNING:in_range_cast.h(38)] value 1662391032864 out of range
+[0503/144401:WARNING:in_range_cast.h(38)] value 1662391028916 out of range
+[0503/144401:WARNING:in_range_cast.h(38)] value 1662318775824 out of range
+[0503/144401:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/144401:WARNING:in_range_cast.h(38)] value 1662319478000 out of range
+[0503/144401:WARNING:in_range_cast.h(38)] value 1662390640400 out of range
+[0503/144401:WARNING:in_range_cast.h(38)] value 1662318921760 out of range
+[0503/144426:ERROR:process_info.cc(608)] range at 0xeb0f288600000000, size 0x1ef fully unreadable
+[0503/144426:ERROR:process_info.cc(608)] range at 0xeb0f28a600000000, size 0x1ef fully unreadable
+[0503/144426:ERROR:process_info.cc(608)] range at 0x0, size 0x1ef fully unreadable
+[0503/144426:WARNING:in_range_cast.h(38)] value 2130024339428 out of range
+[0503/144426:WARNING:in_range_cast.h(38)] value 2130024335512 out of range
+[0503/144426:WARNING:in_range_cast.h(38)] value 2130024339792 out of range
+[0503/144426:WARNING:in_range_cast.h(38)] value 2130024335844 out of range
+[0503/144426:WARNING:in_range_cast.h(38)] value 2129952754192 out of range
+[0503/144426:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/144426:WARNING:in_range_cast.h(38)] value 2130026366512 out of range
+[0503/144426:WARNING:in_range_cast.h(38)] value 2129952891584 out of range
+[0503/144733:ERROR:process_info.cc(608)] range at 0x14b288600000000, size 0x216 fully unreadable
+[0503/144733:ERROR:process_info.cc(608)] range at 0x14b28a600000000, size 0x216 fully unreadable
+[0503/144733:ERROR:process_info.cc(608)] range at 0x0, size 0x216 fully unreadable
+[0503/144733:WARNING:in_range_cast.h(38)] value 2293606899140 out of range
+[0503/144733:WARNING:in_range_cast.h(38)] value 2293606895224 out of range
+[0503/144733:WARNING:in_range_cast.h(38)] value 2293606899504 out of range
+[0503/144733:WARNING:in_range_cast.h(38)] value 2293606895556 out of range
+[0503/144733:WARNING:in_range_cast.h(38)] value 2293534538656 out of range
+[0503/144733:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0503/144733:WARNING:in_range_cast.h(38)] value 2293534872544 out of range
+[0503/144733:WARNING:in_range_cast.h(38)] value 2293534684864 out of range

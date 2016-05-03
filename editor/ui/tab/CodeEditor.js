@@ -19,9 +19,9 @@ function CodeEditor(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.className = "container";
-	
+
 	//Codemirror editor
-	this.code = new CodeMirror(this.element, {value: "", lineNumbers: true, mode: "javascript"});
+	this.code = new CodeMirror(this.element, {value:"", lineNumbers:true, indentWithTabs:true, indentUnit:4, tabSize:4, mode:"javascript"});
 	this.code.setOption("theme", "monokai");
 	this.code.setOption("mode", "javascript");
 
@@ -31,6 +31,32 @@ function CodeEditor(parent)
 	{
 		self.updateScript();
 	});
+
+	//Context menu event
+	this.element.oncontextmenu = function()
+	{
+		var context = new ContextMenu();
+		context.size.set(100, 20);
+		context.position.set(event.clientX - 5, event.clientY - 5);
+		
+		context.addOption("Auto ident", function()
+		{
+			self.code.execCommand("indentAuto");
+		});
+		context.addOption("Select all", function()
+		{
+			self.code.execCommand("selectAll");
+		});
+		context.addOption("Undo", function()
+		{
+			self.code.execCommand("undo");
+		});
+		context.addOption("Redo", function()
+		{
+			self.code.execCommand("redo");
+		});
+	};
+
 
 	//Element atributes
 	this.fit_parent = false;
