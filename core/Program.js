@@ -251,9 +251,9 @@ function toJSON(meta)
 
 	if(this.geometry !== undefined)
 	{
-		if(meta.geometries[ this.geometry.uuid ] === undefined)
+		if(meta.geometries[this.geometry.uuid] === undefined)
 		{
-			meta.geometries[ this.geometry.uuid ] = this.geometry.toJSON( meta );
+			meta.geometries[this.geometry.uuid] = this.geometry.toJSON(meta);
 		}
 
 		object.geometry = this.geometry.uuid;
@@ -276,7 +276,7 @@ function toJSON(meta)
 
 		for(var i = 0; i < this.children.length; i ++)
 		{
-			object.children.push( this.children[ i ].toJSON(meta).object);
+			object.children.push(this.children[i].toJSON(meta).object);
 		}
 	}
 

@@ -18,14 +18,17 @@ function parse(data)
 //Load image
 function load(url, onLoad, onProgress, onError)
 {
-	if ( this.path !== undefined ) url = this.path + url;
+	if(this.path !== undefined)
+	{
+		url = this.path + url;
+	}
 
 	var scope = this;
 	var cached = Cache.get(url);
 
 	if(cached !== undefined)
 	{
-		scope.manager.itemStart( url );
+		scope.manager.itemStart(url);
 
 		if(onLoad)
 		{

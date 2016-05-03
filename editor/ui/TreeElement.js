@@ -84,6 +84,7 @@ function TreeElement(container)
 			{
 				self.obj.name = prompt("Rename object", self.obj.name);
 				self.updateSceneData();
+				Editor.updateObjectPanel();
 			}
 		});
 		

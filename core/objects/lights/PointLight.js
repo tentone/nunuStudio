@@ -10,8 +10,8 @@ function PointLight(hex, intensity, distance, decay)
 	this.shadow.camera.far = 5000;
 	this.shadow.bias = 0.01;
 
-	this.shadow.mapSize.width = 1024;
-	this.shadow.mapSize.height = 1024;
+	//this.shadow.mapSize.width = 1024;
+	//this.shadow.mapSize.height = 1024;
 }
 
 //Function Prototype

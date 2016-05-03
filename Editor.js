@@ -45,6 +45,7 @@ include("editor/panels/ScriptPanel.js");
 include("editor/panels/KinectPanel.js");
 include("editor/panels/ScenePanel.js");
 include("editor/panels/ProgramPanel.js");
+include("editor/panels/TextPanel.js");
 include("editor/panels/cameras/PerspectiveCameraPanel.js");
 include("editor/panels/cameras/OrthographicCameraPanel.js");
 include("editor/panels/lights/AmbientLightPanel.js");
@@ -632,7 +633,11 @@ Editor.updateSelectedObjectUI = function()
 	Interface.panel.destroy();
 
 	//Select correct panel
-	if(Editor.selected_object instanceof PointLight)
+	if(Editor.selected_object instanceof Text3D)
+	{
+		Interface.panel = new TextPanel(Interface.explorer_resizable.div_b);
+	}
+	else if(Editor.selected_object instanceof PointLight)
 	{
 		Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b);
 	}
