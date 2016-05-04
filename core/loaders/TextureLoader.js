@@ -14,7 +14,6 @@ function TextureLoader(manager)
 	this.crossOrigin = null;
 }
 
-
 //Function prototypes
 TextureLoader.prototype.load = load;
 TextureLoader.prototype.setCrossOrigin = setCrossOrigin;
