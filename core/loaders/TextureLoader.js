@@ -1,50 +1,69 @@
+//Alternative Textureloader (Based on the original from THREEJS made by drdoob)
 function TextureLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	if(manager !== undefined)
+	{
+		this.manager = manager;
+	}
+	else
+	{
+		this.manager = THREE.DefaultLoadingManager;
+	}
+
+	this.path = null;
+	this.crossOrigin = null;
 }
+
 
 //Function prototypes
 TextureLoader.prototype.load = load;
-TextureLoader.prototype.parse = parse;
 TextureLoader.prototype.setCrossOrigin = setCrossOrigin;
 TextureLoader.prototype.setPath = setPath;
 
-//Load image sync
-function parse(data)
+//Load texture sync
+TextureLoader.load = function(url, mapping, onLoad, onError)
 {
-	//TODO <ADD CODE HERE>
+	var loader = new THREE.TextureLoader();
+	var texture = loader.load(url, onLoad, undefined, onError);
+
+	if(mapping)
+	{
+		texture.mapping = mapping;
+	}
+
+	return texture;
 }
 
-//Load image
+//Load texture async
 function load(url, onLoad, onProgress, onError)
 {
-	if(this.path !== undefined)
+	if(this.path !== null)
 	{
 		url = this.path + url;
 	}
 
-	var scope = this;
+	//Self pointer
+	var self = this;
 	var cached = Cache.get(url);
 
 	if(cached !== undefined)
 	{
-		scope.manager.itemStart(url);
+		self.manager.itemStart(url);
 
 		if(onLoad)
 		{
 			setTimeout(function()
 			{
 				onLoad(cached);
-				scope.manager.itemEnd(url);
+				self.manager.itemEnd(url);
 			}, 0);
 		}
 		else
 		{
-			scope.manager.itemEnd(url);
+			self.manager.itemEnd(url);
 		}
 
 		return cached;
-
 	}
 
 	var image = document.createElement("img");
@@ -56,7 +75,7 @@ function load(url, onLoad, onProgress, onError)
 		{
 			onLoad(this);
 		}
-		scope.manager.itemEnd(url);
+		self.manager.itemEnd(url);
 	}, false);
 
 	if(onProgress !== undefined)
@@ -67,22 +86,21 @@ function load(url, onLoad, onProgress, onError)
 		}, false);
 	}
 
-	image.addEventListener("error", function (event)
+	image.addEventListener("error", function(event)
 	{
 		if(onError)
 		{
 			onError(event);
 		}
-
-		scope.manager.itemError(url);
+		self.manager.itemError(url);
 	}, false);
 
-	if(this.crossOrigin !== undefined)
+	if(this.crossOrigin !== null)
 	{
 		image.crossOrigin = this.crossOrigin;
 	}
 
-	scope.manager.itemStart(url);
+	self.manager.itemStart(url);
 	image.src = url;
 
 	return image;

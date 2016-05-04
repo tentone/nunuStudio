@@ -1,3 +1,4 @@
+//Alternative Font loader (Based on the original from THREEJS made by drdoob)
 function FontLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
