@@ -6,7 +6,7 @@
 	},
 	"geometries": [
 		{
-			"uuid": "5243A1E6-AFC3-40C4-87CB-49D754819BE7",
+			"uuid": "8A137AFB-4FBA-433F-866E-DF761E64E2D0",
 			"type": "SphereGeometry",
 			"radius": 4000,
 			"widthSegments": 32,
@@ -81,10 +81,25 @@
 			"radius": 1,
 			"widthSegments": 16,
 			"heightSegments": 16
+		},
+		{
+			"uuid": "52826DAA-15CB-44C9-87F7-097EC9F5499E",
+			"type": "SphereGeometry",
+			"radius": 4000,
+			"widthSegments": 32,
+			"heightSegments": 15
+		},
+		{
+			"uuid": "82AAC4B5-3CF8-4A3E-841D-61267321DB2F",
+			"type": "BoxGeometry",
+			"name": "geometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
 		}],
 	"materials": [
 		{
-			"uuid": "763364E7-A6AD-43F5-A76A-877F3B1DBFE1",
+			"uuid": "8369F5E9-2A5D-4317-8570-622CDF2D09EB",
 			"type": "ShaderMaterial",
 			"side": 1,
 			"uniforms": {
@@ -179,6 +194,47 @@
 			"emissive": 0,
 			"specular": 1118481,
 			"shininess": 30
+		},
+		{
+			"uuid": "5D3EFA30-7CE4-47FF-A190-B255F37382DD",
+			"type": "ShaderMaterial",
+			"side": 1,
+			"uniforms": {
+				"top_color": {
+					"type": "c",
+					"value": {
+						"r": 0,
+						"g": 0.4627450980392157,
+						"b": 1
+					}
+				},
+				"bottom_color": {
+					"type": "c",
+					"value": {
+						"r": 1,
+						"g": 1,
+						"b": 1
+					}
+				},
+				"offset": {
+					"type": "f",
+					"value": 20
+				},
+				"exponent": {
+					"type": "f",
+					"value": 0.4
+				}
+			},
+			"vertexShader": "varying vec3 vWorldPosition; \tvoid main() \t{ \t\tvec4 worldPosition = modelMatrix * vec4(position, 1.0); \t\tvWorldPosition = worldPosition.xyz; \t\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); \t}",
+			"fragmentShader": "uniform vec3 top_color; \tuniform vec3 bottom_color; \tuniform float offset; \tuniform float exponent; \tvarying vec3 vWorldPosition; \tvoid main() \t{ \t\tfloat h = normalize(vWorldPosition + offset).y; \t\tgl_FragColor = vec4(mix(bottom_color, top_color, max(pow(max(h , 0.0), exponent), 0.0)), 1.0); \t}"
+		},
+		{
+			"uuid": "75BD6EDB-7746-4550-8B28-F9167055AF55",
+			"type": "MeshPhongMaterial",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30
 		}],
 	"object": {
 		"folded": false,
@@ -217,8 +273,8 @@
 						"receiveShadow": false,
 						"visible": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "5243A1E6-AFC3-40C4-87CB-49D754819BE7",
-						"material": "763364E7-A6AD-43F5-A76A-877F3B1DBFE1"
+						"geometry": "8A137AFB-4FBA-433F-866E-DF761E64E2D0",
+						"material": "8369F5E9-2A5D-4317-8570-622CDF2D09EB"
 					},
 					{
 						"uuid": "A3C30F4D-E590-4F3E-BC50-55FCE4704F9A",
@@ -242,7 +298,7 @@
 								"visible": true,
 								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 								"mode": 0,
-								"code": "var loader = new THREE.TextureLoader();\nvar self = this;\nloader.load(\"data/normal.jpg\", function(texture)\n{\n\tvar material = new THREE.MeshPhongMaterial({normalMap:texture, color:0xffffff, specular:0xffffff, shininess:100});\n\tself.parent.material = material;\n});"
+								"code": "var texture = TextureLoader.load(\"data/texture/normal.jpg\");\nthis.parent.material = new THREE.MeshPhongMaterial({normalMap:texture, color:0xffffff, specular:0xffffff, shininess:100});\n"
 							}]
 					},
 					{
@@ -291,7 +347,7 @@
 								"visible": true,
 								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 								"mode": 1,
-								"code": "this.parent.rotation.y += 0.05;"
+								"code": "this.parent.rotation.y += 0.01;"
 							},
 							{
 								"uuid": "04091F0C-8D14-4CF9-B10F-DA41CC22A87A",
@@ -303,14 +359,14 @@
 								"visible": true,
 								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 								"mode": 0,
-								"code": "var self = this;\nnew THREE.TextureLoader().load(\"data/stone_normal.jpg\", function(normal)\n{\n\tconsole.log(\"coco\");\n\tvar him = self;\n\tnew THREE.TextureLoader().load(\"data/stone.jpg\", function(texture)\n\t{\n\t\tconsole.log(\"coco\");\n\t\tvar material = new THREE.MeshPhongMaterial({map:texture, normalMap:normal , color:0xffffff, specular:0xffffff, shininess:30});\n\t\thim.parent.material = material;\n\t});\n});"
+								"code": "/*\nvar self = this;\nnew THREE.TextureLoader().load(\"data/texture/stone_normal.jpg\", function(normal)\n{\n\tvar him = self;\n\tnew THREE.TextureLoader().load(\"data/texture/stone.jpg\", function(texture)\n\t{\n\t\tvar material = new THREE.MeshPhongMaterial({map:texture, normalMap:normal , color:0xffffff, specular:0xffffff, shininess:30});\n\t\thim.parent.material = material;\n\t});\n});\n*/\n\nvar normal = TextureLoader.load(\"data/texture/stone_normal.jpg\");\nvar texture = TextureLoader.load(\"data/texture/stone.jpg\");\n\nconsole.log(texture);\nconsole.log(normal);\n\nthis.parent.material = new THREE.MeshPhongMaterial({map:texture, normalMap:normal , color:0xffffff, specular:0xffffff, shininess:30});\n"
 							}]
 					},
 					{
 						"uuid": "EBBF9394-8474-4F8D-83F5-D76CDF58317C",
 						"type": "Mesh",
 						"name": "torus",
-						"folded": true,
+						"folded": false,
 						"castShadow": true,
 						"receiveShadow": true,
 						"visible": true,
@@ -428,7 +484,7 @@
 						"uuid": "A286D47F-F5D4-4DB7-9ED4-BFCD772D21E2",
 						"type": "Mesh",
 						"name": "cone",
-						"folded": true,
+						"folded": false,
 						"castShadow": true,
 						"receiveShadow": true,
 						"visible": true,
@@ -453,7 +509,7 @@
 						"uuid": "DF13D3C9-C77D-47EF-8FC1-132BD0ECF7B8",
 						"type": "Mesh",
 						"name": "torus",
-						"folded": true,
+						"folded": false,
 						"castShadow": true,
 						"receiveShadow": true,
 						"visible": true,
@@ -560,6 +616,62 @@
 				"fog_far": 30,
 				"fog_mode": 0,
 				"initial_camera": "67E42B40-169F-4B8F-88D6-A66586FA1A53"
+			},
+			{
+				"uuid": "BC4D34A7-327E-402B-B114-DF69E6CFC665",
+				"type": "Scene",
+				"name": "scene",
+				"folded": false,
+				"castShadow": false,
+				"receiveShadow": false,
+				"visible": true,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"children": [
+					{
+						"uuid": "C63D32C3-7C74-4DD9-A519-FF82C277E604",
+						"type": "Sky",
+						"folded": false,
+						"auto_update": false,
+						"day_time": 20,
+						"sun_distance": 100,
+						"time": 13,
+						"name": "sky",
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"geometry": "52826DAA-15CB-44C9-87F7-097EC9F5499E",
+						"material": "5D3EFA30-7CE4-47FF-A190-B255F37382DD"
+					},
+					{
+						"uuid": "1D74130B-A9A1-4BF4-A8B3-971803169ED6",
+						"type": "Mesh",
+						"name": "box",
+						"folded": false,
+						"castShadow": true,
+						"receiveShadow": true,
+						"visible": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"geometry": "82AAC4B5-3CF8-4A3E-841D-61267321DB2F",
+						"material": "75BD6EDB-7746-4550-8B28-F9167055AF55"
+					},
+					{
+						"uuid": "96D5C8BC-596C-4BBF-9E85-65F82C3F833E",
+						"type": "Mesh",
+						"name": "ground",
+						"folded": false,
+						"castShadow": true,
+						"receiveShadow": true,
+						"visible": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"geometry": "82AAC4B5-3CF8-4A3E-841D-61267321DB2F",
+						"material": "75BD6EDB-7746-4550-8B28-F9167055AF55"
+					}],
+				"fog_color": 16777215,
+				"fog_density": 0.001,
+				"fog_near": 2,
+				"fog_far": 30,
+				"fog_mode": 0
 			}]
 	}
 }
