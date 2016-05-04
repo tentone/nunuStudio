@@ -73,8 +73,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "interactive Editor";
-Editor.VERSION = "V0.6.3";
-Editor.TIMESTAMP = "201605031440";
+Editor.VERSION = "V0.6.4";
+Editor.TIMESTAMP = "201605040333";
 
 //Initialize Main
 Editor.initialize = function(canvas)
