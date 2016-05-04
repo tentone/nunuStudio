@@ -8,9 +8,14 @@ function VideoTexture(url)
 	this.video.loop = true;
 	this.video.src = url;
 
-	//Create the texture
-	this.texture = new THREE.Texture(video);
+	//Create Texture part of object
+	THREE.Texture.call(this, this.video);
 }
+
+//Function prototypes
+VideoTexture.prototype = Object.create(THREE.Texture.prototype);
+VideoTexture.prototype.update = update;
+VideoTexture.prototype.dispose = dispose;
 
 //Update texture state
 function update()
@@ -25,5 +30,6 @@ function update()
 //Dispose texture
 function dipose()
 {
+	THREE.Texture.prototype.toJSON.call(this);
 	this.video.pause()
 }

@@ -156,6 +156,7 @@ Interface.initialize = function()
 		}, ".fbx");
 	});
 
+	//Load texture image
 	Interface.asset_file.addOption("Texture", function()
 	{
 		App.chooseFile(function(event)
@@ -163,18 +164,39 @@ Interface.initialize = function()
 			var file = event.srcElement.value;
 			try
 			{
-				var map = new THREE.TextureLoader().load(file);
+				var map = TextureLoader.load(file);
 				var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
 				var sprite = new Sprite(material);
 				Editor.addToActualScene(sprite);
 			}
 			catch(e)
 			{
-				alert("Error loading file");
+				alert("Error loading file\n("+e+")");
 			}
 		}, "image/*");
 	});
 
+	//Load Video texture
+	Interface.asset_file.addOption("Video Texture", function()
+	{
+		App.chooseFile(function(event)
+		{
+			var file = event.srcElement.value;
+			try
+			{
+				var map = new VideoTexture(file);
+				var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
+				var sprite = new Sprite(material);
+				Editor.addToActualScene(sprite);
+			}
+			catch(e)
+			{
+				alert("Error loading file\n("+e+")");
+			}
+		}, "video/*");
+	});
+
+	//Load audio file
 	Interface.asset_file.addOption("Audio", function()
 	{
 		//TODO <ADD CODE HERE>

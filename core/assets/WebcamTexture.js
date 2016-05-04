@@ -36,10 +36,16 @@ function WebcamTexture()
 		});				
 	}
 
-	//Create the texture
-	this.texture = new THREE.Texture(video);
+	//Create Texture part of object
+	THREE.Texture.call(this, video);
 }
 
+//Function prototypes
+WebcamTexture.prototype = Object.create(THREE.Texture.prototype);
+WebcamTexture.prototype.update = update;
+WebcamTexture.prototype.dispose = dispose;
+
+//Update texture
 function update(delta, now)
 {
 	if(this.video.readyState !== this.video.HAVE_ENOUGH_DATA)	
@@ -49,7 +55,9 @@ function update(delta, now)
 	this.texture.needsUpdate	= true;		
 }
 
+//Dispose texture
 function dipose()
 {
-	this.video.pause();
+	THREE.Texture.prototype.toJSON.call(this);
+	this.video.pause()
 }
