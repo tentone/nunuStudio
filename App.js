@@ -35,11 +35,11 @@ include("core/Program.js");
 include("core/ObjectUtils.js");
 include("core/Global.js");
 
-include("core/assets/VideoTexture.js");
-include("core/assets/WebcamTexture.js");
-include("core/assets/Texture.js");
+include("core/texture/TextTexture.js");
+include("core/texture/VideoTexture.js");
+include("core/texture/WebcamTexture.js");
+include("core/texture/Texture.js");
 
-include("core/loaders/TextureLoader.js");
 include("core/loaders/FontLoader.js");
 
 include("core/objects/device/LeapHand.js");

@@ -164,7 +164,7 @@ Interface.initialize = function()
 			var file = event.srcElement.value;
 			try
 			{
-				var map = TextureLoader.load(file);
+				var map = new Texture(file);
 				var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
 				var sprite = new Sprite(material);
 				Editor.addToActualScene(sprite);
@@ -177,7 +177,7 @@ Interface.initialize = function()
 	});
 
 	//Load Video texture
-	Interface.asset_file.addOption("Video Texture", function()
+	Interface.asset_file.addOption("Video", function()
 	{
 		App.chooseFile(function(event)
 		{
@@ -199,7 +199,10 @@ Interface.initialize = function()
 	//Load audio file
 	Interface.asset_file.addOption("Audio", function()
 	{
-		//TODO <ADD CODE HERE>
+		App.chooseFile(function(event)
+		{
+
+		}, "audio/*");
 	});
 
 	//Create new
@@ -542,9 +545,8 @@ Interface.initialize = function()
 	//Sprite
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/sprite.png", function()
 	{
-		var map = new THREE.TextureLoader().load("data/sample.png");
+		var map = new Texture("data/sample.png");
 		var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
-		
 		var sprite = new Sprite(material);
 		Editor.addToActualScene(sprite);
 	});
@@ -644,7 +646,7 @@ Interface.initialize = function()
 			tab.attachComponent(settings);
 			tab.select();
 		}
-	});
+	}, Interface.file_dir + "icons/tab/settings.png");
 
 	var publish = Interface.file.addMenu("Publish");
 	publish.addOption("Web", function()

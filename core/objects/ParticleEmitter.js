@@ -11,13 +11,13 @@ function ParticleEmitter()
 	{
 		texture:
 		{
-			value: THREE.ImageUtils.loadTexture("./data/particle.png")
+			value: new Texture("./data/particle.png")
 		}
 	});
 
 	this.emitter = new SPE.Emitter(
 	{		
-		particleCount: 20000,
+		particleCount: 2000,
 		direction: 1,
 		duration: null, //seconds
 
