@@ -20,6 +20,10 @@ function SettingsTab(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "bar";
 
+	//Dual division
+	this.dual_division = new DualDivisionResizable(this.element);
+
+
 	//Element atributes
 	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
@@ -53,7 +57,10 @@ function destroy()
 }
 
 //Update SettingsTab
-function update(){}
+function update()
+{
+	this.dual_division.update();
+}
 
 //Update division Size
 function updateInterface()

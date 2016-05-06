@@ -18,17 +18,14 @@ Mouse.initialize = function()
 	//Calculate coordinates relative to canvas
 	Mouse.canvas = null;
 
-	//Raw Mouse Buttons
-	Mouse.raw_keys = [];
-	Mouse.raw_keys[0] = new Key();
-	Mouse.raw_keys[1] = new Key();
-	Mouse.raw_keys[2] = new Key();
-
 	//Mouse Buttons
+	Mouse.raw_keys = [];
 	Mouse.keys = [];
-	Mouse.keys[0] = new Key();
-	Mouse.keys[1] = new Key();
-	Mouse.keys[2] = new Key();
+	for(var i = 0; i < 3; i++)
+	{
+		Mouse.raw_keys.push(new Key());
+		Mouse.keys.push(new Key());
+	}
 
 	//Mouse Wheel (Chorme only)
 	document.onmousewheel = function(event)
@@ -69,10 +66,7 @@ Mouse.LEFT = 0;
 Mouse.MIDDLE = 1;
 Mouse.RIGHT = 2;
 
-//Mouse Configuration Values
-Mouse.SENSITIVITY = 0.2;
-
-//Check if mouse is inside canvas
+//Check if mouse is inside attached canvas
 Mouse.insideCanvas = function()
 {
 	if(Mouse.canvas === null)

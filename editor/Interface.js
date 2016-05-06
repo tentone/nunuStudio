@@ -12,6 +12,11 @@ Interface.initialize = function()
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabGroup();
 	
+	Interface.empty_tab_text = new Text(Interface.tab.element);
+	Interface.empty_tab_text.fit_parent = true;
+	Interface.empty_tab_text.setText("Open new tab to edit content or create new project");
+	Interface.empty_tab_text.updateInterface();
+
 	//Scene Canvas
 	var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
 	var canvas = new SceneEditor();
@@ -27,6 +32,20 @@ Interface.initialize = function()
 	Interface.asset_explorer_div.size.y = 150;
 	Interface.asset_explorer_div.updateInterface();
 
+	//Asset explorer
+	Interface.asset_explorer = new FileExplorer(Interface.asset_explorer_div.element);
+	Interface.asset_explorer.updateInterface();
+
+	//TODO <REMOVE THIS>
+	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
+	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
+	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
+	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
+	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
+	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
+	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
+
+	//Asset explorer menu bar
 	Interface.asset_explorer_bar = new Division(Interface.asset_explorer_div.element);
 	Interface.asset_explorer_bar.position.set(0, 0);
 	Interface.asset_explorer_bar.size.y = 20;
@@ -451,32 +470,31 @@ Interface.initialize = function()
 	//Point Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/point.png", function()
 	{
-		var light = new PointLight();
-		Editor.addToActualScene(light);
+		Editor.addToActualScene(new PointLight(0x444444));
 	});
 
 	//Ambient Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/ambient.png", function()
 	{
-		Editor.addToActualScene(new AmbientLight());
+		Editor.addToActualScene(new AmbientLight(0x444444));
 	});
 
 	//Spot Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/spot.png", function()
 	{
-		Editor.addToActualScene(new SpotLight());
+		Editor.addToActualScene(new SpotLight(0x444444));
 	});
 
 	//Directional Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/directional.png", function()
 	{
-		Editor.addToActualScene(new DirectionalLight());
+		Editor.addToActualScene(new DirectionalLight(0x444444));
 	});
 
 	//Hemisphere Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/hemisphere.png", function()
 	{
-		Editor.addToActualScene(new HemisphereLight());
+		Editor.addToActualScene(new HemisphereLight(0x444444));
 	});
 
 	//Sky
@@ -737,7 +755,7 @@ Interface.initialize = function()
 		Editor.updateTreeView();
 	}, Interface.file_dir + "icons/misc/add.png");
 
-	//Run
+	//About
 	Interface.about = new Button();
 	Interface.about.setText("About");
 	Interface.about.size.set(100, Interface.top_bar.size.y);
@@ -816,11 +834,18 @@ Interface.updateInterface = function()
 	Interface.asset_explorer_bar.size.x = Interface.asset_explorer_div.size.x;
 	Interface.asset_explorer_bar.updateInterface();
 
+	Interface.asset_explorer.size.x = Interface.asset_explorer_div.size.x;
+	Interface.asset_explorer.position.y = Interface.asset_explorer_bar.size.y;
+	Interface.asset_explorer.size.y = Interface.asset_explorer_div.size.y - Interface.asset_explorer.position.y;
+	Interface.asset_explorer.updateInterface();
+
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab.position.set(Interface.tool_bar.size.x, Interface.top_bar.size.y);
 	Interface.tab.size.x = (size.x - Interface.tool_bar.size.x - Interface.explorer.size.x);
 	Interface.tab.size.y = (size.y - Interface.top_bar.size.y - Interface.asset_explorer_div.size.y); 
 	Interface.tab.updateInterface();
+	
+	Interface.empty_tab_text.updateInterface();
 
 	//Resize editor camera
 	Editor.resizeCamera();

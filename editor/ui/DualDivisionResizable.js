@@ -41,6 +41,7 @@ function DualDivisionResizable(parent)
 	this.element.appendChild(this.resize_tab);
 
 	//Element atributes
+	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -127,6 +128,12 @@ function update()
 //Update DualDivisionResizable Size
 function updateInterface()
 {
+	if(this.fit_parent)
+	{
+		this.size.x = this.parent.offsetWidth;
+		this.size.y = this.parent.offsetHeight; 
+	}
+	
 	if(this.visible)
 	{
 		this.resize_tab.style.visibility = "visible";

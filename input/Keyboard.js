@@ -1,5 +1,6 @@
 function Keyboard(){}
 
+//Initialize keyboard
 Keyboard.initialize = function()
 {
 	Keyboard.actions = [];

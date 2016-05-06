@@ -40,13 +40,14 @@ function ButtonImage(parent)
 	//Click event
 	var self = this;
 
-	//Mouse over and mouse out events
+	//Mouse over event
 	this.element.onmouseover = function()
 	{
 		self.element.className = "button_over";
 	};
 
-	this.element.onmouseout = function()
+	//Mouse leave event
+	this.element.onmouseleave = function()
 	{
 		self.element.className = "button";
 	};

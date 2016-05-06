@@ -32,17 +32,45 @@ function TabElement(name, image, closeable, container, index)
 		self.container.selectOption(self.index);
 	});
 
-	//Change button behavior
+	//Mouse over event (overrided)
 	this.button.element.onmouseover = function()
 	{
 		self.button.setClass("button_over");
 	};
+
+	//Mouse leave event (overrided)
 	this.button.element.onmouseleave = function()
 	{
 		if(!self.isSelected())
 		{
 			self.button.setClass("button");
 		}
+	};
+
+	//Drag start
+	this.button.element.ondragstart = function(event)
+	{
+		//TODO <ADD CODE HERE>
+	};
+
+	//Drag end (called after of ondrop)
+	this.button.element.ondragend = function(event)
+	{
+		//TODO <ADD CODE HERE>
+	};
+
+	//Drop event
+	this.button.element.ondrop = function(event)
+	{
+		event.preventDefault();
+		//TODO <ADD CODE HERE>
+	};
+
+	//Prevent deafault when object dragged over
+	this.button.element.ondragover = function(event)
+	{
+		event.preventDefault();
+		//TODO <ADD CODE HERE>
 	};
 
 	//Icon
@@ -134,8 +162,11 @@ function updateInterface()
 	}
 
 	this.button.position.set(this.container.options_size.x * this.index, 0);
+	this.button.updateInterface();
+
 	this.division.visible = this.visible;
 	this.division.size.set(this.size.x, this.size.y - this.button.size.y);
+	this.division.updateInterface();
 
 	if(this.component !== null)
 	{
@@ -149,7 +180,4 @@ function updateInterface()
 		this.close_button.position.set(this.button.size.x - 20, 10);
 		this.close_button.updateInterface();
 	}
-
-	this.button.updateInterface();
-	this.division.updateInterface();
 }

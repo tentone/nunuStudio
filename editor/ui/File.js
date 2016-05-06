@@ -11,7 +11,7 @@ function File(parent)
 	}
 	
 	//ID
-	var id = "file" + File.id;
+	var id = "fi" + File.id;
 	File.id++;
 
 	//Create element
@@ -27,32 +27,30 @@ function File(parent)
 	this.element.appendChild(this.img);
 
 	//Text
-	this.span = document.createElement("span");
-	this.span.style.position = "absolute";
-	this.span.style.top = "0px";
-	this.span.style.left = "0px";
-	this.element.appendChild(this.span);
+	this.text = new Text(this.element);
+	this.text.updateInterface();
 
 	//Element atributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
+	this.size = new THREE.Vector2(50, 50);
+	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
 	//Image and Callback
-	this.scale = new THREE.Vector2(1,1);
+	this.scale = new THREE.Vector2(0.6, 0.6);
 
 	//Click event
 	var self = this;
 
-	//Mouse over and mouse out events
+	//Mouse over event
 	this.element.onmouseover = function()
 	{
 		self.element.className = "button_over";
 	};
 
-	this.element.onmouseout = function()
+	//Mouse leave event
+	this.element.onmouseleave = function()
 	{
-		self.element.className = "button";
+		self.element.className = "";
 	};
 
 	//Add element to document
@@ -63,11 +61,31 @@ function File(parent)
 File.id = 0;
 
 //Functions Prototype
-File.prototype.setIcon = setIcon;
 File.prototype.update = update;
 File.prototype.updateInterface = updateInterface;
-File.prototype.setCallback = setCallback;
 File.prototype.destroy = destroy;
+
+File.prototype.setIcon = setIcon;
+File.prototype.setText = setText;
+File.prototype.setCallback = setCallback;
+
+//Set file icon
+function setIcon(image)
+{
+	this.img.src = image;
+}
+
+//Set file label
+function setText(text)
+{
+	this.text.setText(text);
+}
+
+//Set button callback function
+function setCallback(callback)
+{
+	this.element.onclick = callback;
+}
 
 //Remove element
 function destroy()
@@ -82,27 +100,10 @@ function destroy()
 //Update
 function update(){}
 
-//Set button callback function
-function setCallback(callback)
-{
-	this.element.onclick = callback;
-}
-
-//Set file label
-function setLabel(text)
-{
-	this.span.innerHTML = this.text;
-}
-
-//Set file icon
-function setIcon(image)
-{
-	this.img.src = this.image;
-}
-
 //Update Interface
 function updateInterface()
 {
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -112,10 +113,16 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
+	//Update element
 	this.img.width = this.size.x * this.scale.x;
 	this.img.height = this.size.y * this.scale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
-	this.img.style.top = ((this.size.y - (this.size.y * this.scale.y))/2) + "px";
+
+	this.text.visible = this.visible;
+	this.text.size.x = this.size.x;
+	this.text.position.y = (this.size.y * this.scale.y);
+	this.text.size.y = this.size.y - this.text.position.y;
+	this.text.updateInterface();
 	
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";

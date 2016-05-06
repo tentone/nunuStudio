@@ -1,4 +1,4 @@
-//Alternative Font loader (Based on the original from THREEJS made by drdoob)
+//Alternative Font loader
 function FontLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
@@ -11,9 +11,7 @@ FontLoader.prototype.parse = parse;
 //Parse font data
 function parse(data)
 {
-	var font = new THREE.Font(JSON.parse(data.substring(65, data.length - 2)));
-
-	return font;
+	return new THREE.Font(JSON.parse(data.substring(65, data.length - 2)));
 }
 
 //Load  font
