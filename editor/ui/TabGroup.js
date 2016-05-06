@@ -27,7 +27,7 @@ function TabGroup(parent)
 	
 	//Tab Options
 	this.options_size = new THREE.Vector2(150, 30);
-	this.options_selected = 0;
+	this.options_selected = -1;
 	this.options = [];
 
 	//Add element to document
@@ -46,6 +46,19 @@ TabGroup.prototype.removeOption = removeOption;
 TabGroup.prototype.removeAllOptions = removeAllOptions;
 TabGroup.prototype.updateOptionIndex = updateOptionIndex;
 TabGroup.prototype.selectOption = selectOption;
+TabGroup.prototype.closeActual = closeActual;
+
+//If actual tab is closeable close it
+function closeActual()
+{
+	if(this.options_selected !== -1)
+	{
+		if(this.options[this.options_selected].closeable)
+		{
+			this.removeOption(this.options_selected);
+		}
+	}
+}
 
 //Select option
 function selectOption(index)
@@ -63,6 +76,10 @@ function addOption(name, image, closeable)
 {
 	var option = new TabElement(name, image, closeable, this, this.options.length);
 	this.options.push(option);
+	if(this.options_selected === -1)
+	{
+		this.selectOption(0);
+	}
 	return option;
 }
 
@@ -74,6 +91,7 @@ function removeAllOptions()
 		this.options.pop().destroy();
 	}
 	
+	this.options_selected = -1;	
 	this.updateOptionIndex();
 	this.updateInterface();
 }

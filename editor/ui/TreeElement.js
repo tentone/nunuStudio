@@ -60,10 +60,14 @@ function TreeElement(container)
 
 	//Mouse events
 	var self = this;
+
+	//Mouse over event
 	this.element.onmouseover = function()
 	{
 		self.element.className = "button_left_over";
 	};
+
+	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
 		if(!Editor.isObjectSelected(self.obj))
@@ -72,6 +76,7 @@ function TreeElement(container)
 		}
 	};
 
+	//Context menu event
 	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu();

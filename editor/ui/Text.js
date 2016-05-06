@@ -20,15 +20,18 @@ function Text(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "text";
 	
-	//Text
+	//Span element
 	this.span = document.createElement("span");
 	this.span.innerHTML = "text";
 	this.element.appendChild(this.span);
 
 	//Element atributes
+	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
+
+	//Text
 	this.text = "text";
 	this.text_size = 12;
 
@@ -94,6 +97,12 @@ function update(){}
 //Update Interface
 function updateInterface()
 {
+	if(this.fit_parent)
+	{
+		this.size.x = this.parent.offsetWidth;
+		this.size.y = this.parent.offsetHeight; 
+	}
+
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";

@@ -24,6 +24,8 @@ include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/Form.js");
 include("editor/ui/DragBuffer.js");
+include("editor/ui/FileExplorer.js");
+include("editor/ui/File.js");
 
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/SceneEditor.js");
@@ -37,20 +39,20 @@ include("editor/ui/input/DropdownList.js");
 include("editor/ui/input/Numberbox.js");
 include("editor/ui/input/Positionbox.js");
 
-include("editor/panels/Panel.js");
-include("editor/panels/ObjectPanel.js");
-include("editor/panels/SkyPanel.js");
-include("editor/panels/LeapPanel.js");
-include("editor/panels/ScriptPanel.js");
-include("editor/panels/KinectPanel.js");
-include("editor/panels/ScenePanel.js");
-include("editor/panels/ProgramPanel.js");
-include("editor/panels/TextPanel.js");
-include("editor/panels/cameras/PerspectiveCameraPanel.js");
-include("editor/panels/cameras/OrthographicCameraPanel.js");
-include("editor/panels/lights/AmbientLightPanel.js");
-include("editor/panels/lights/PointLightPanel.js");
-include("editor/panels/lights/SpotLightPanel.js");
+include("editor/ui/panels/Panel.js");
+include("editor/ui/panels/ObjectPanel.js");
+include("editor/ui/panels/SkyPanel.js");
+include("editor/ui/panels/LeapPanel.js");
+include("editor/ui/panels/ScriptPanel.js");
+include("editor/ui/panels/KinectPanel.js");
+include("editor/ui/panels/ScenePanel.js");
+include("editor/ui/panels/ProgramPanel.js");
+include("editor/ui/panels/TextPanel.js");
+include("editor/ui/panels/cameras/PerspectiveCameraPanel.js");
+include("editor/ui/panels/cameras/OrthographicCameraPanel.js");
+include("editor/ui/panels/lights/AmbientLightPanel.js");
+include("editor/ui/panels/lights/PointLightPanel.js");
+include("editor/ui/panels/lights/SpotLightPanel.js");
 
 include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
@@ -73,8 +75,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "interactive Editor";
-Editor.VERSION = "V0.6.5";
-Editor.TIMESTAMP = "201605041839";
+Editor.VERSION = "V0.6.6";
+Editor.TIMESTAMP = "201605062138";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -213,7 +215,7 @@ Editor.update = function()
 	//Editing a scene
 	if(Editor.state === Editor.STATE_EDITING)
 	{
-		//Save or load files
+		//Close tab, Save and load project
 		if(Keyboard.isKeyPressed(Keyboard.CTRL))
 		{
 			if(Keyboard.isKeyJustPressed(Keyboard.S))
@@ -226,7 +228,7 @@ Editor.update = function()
 			}
 			else if(Keyboard.isKeyJustPressed(Keyboard.W))
 			{
-				//TODO <ADD CODE HERE>
+				Interface.tab.closeActual();
 			}
 		}
 
@@ -459,8 +461,8 @@ Editor.update = function()
 			//Rotate camera
 			if(Mouse.buttonPressed(Mouse.LEFT) && !Editor.block_camera_move)
 			{
-				Editor.camera_rotation.x -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.x;
-				Editor.camera_rotation.y -= 0.01 * Mouse.SENSITIVITY * Mouse.pos_diff.y;
+				Editor.camera_rotation.x -= 0.002 * Mouse.pos_diff.x;
+				Editor.camera_rotation.y -= 0.002 * Mouse.pos_diff.y;
 
 				//Limit Vertical Rotation to 90 degrees
 				var pid2 = 1.57;
@@ -510,7 +512,6 @@ Editor.update = function()
 			}
 		}
 	}
-
 	//Update Scene if on test mode
 	else if(Editor.state === Editor.STATE_TESTING)
 	{
