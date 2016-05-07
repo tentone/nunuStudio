@@ -6,7 +6,7 @@
 	},
 	"geometries": [
 		{
-			"uuid": "8A137AFB-4FBA-433F-866E-DF761E64E2D0",
+			"uuid": "3EB54E88-2846-4ADB-BCB9-2AD4592C53D8",
 			"type": "SphereGeometry",
 			"radius": 4000,
 			"widthSegments": 32,
@@ -83,7 +83,7 @@
 			"heightSegments": 16
 		},
 		{
-			"uuid": "52826DAA-15CB-44C9-87F7-097EC9F5499E",
+			"uuid": "64006A2A-857F-4FEF-917D-A354DF985DB9",
 			"type": "SphereGeometry",
 			"radius": 4000,
 			"widthSegments": 32,
@@ -99,7 +99,7 @@
 		}],
 	"materials": [
 		{
-			"uuid": "8369F5E9-2A5D-4317-8570-622CDF2D09EB",
+			"uuid": "94284FF8-49DA-43D4-BA77-54E313ED7AC6",
 			"type": "ShaderMaterial",
 			"side": 1,
 			"uniforms": {
@@ -196,7 +196,7 @@
 			"shininess": 30
 		},
 		{
-			"uuid": "5D3EFA30-7CE4-47FF-A190-B255F37382DD",
+			"uuid": "300222D3-C568-4798-B9B9-657199B72C6B",
 			"type": "ShaderMaterial",
 			"side": 1,
 			"uniforms": {
@@ -273,8 +273,8 @@
 						"receiveShadow": false,
 						"visible": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "8A137AFB-4FBA-433F-866E-DF761E64E2D0",
-						"material": "8369F5E9-2A5D-4317-8570-622CDF2D09EB"
+						"geometry": "3EB54E88-2846-4ADB-BCB9-2AD4592C53D8",
+						"material": "94284FF8-49DA-43D4-BA77-54E313ED7AC6"
 					},
 					{
 						"uuid": "A3C30F4D-E590-4F3E-BC50-55FCE4704F9A",
@@ -298,7 +298,7 @@
 								"visible": true,
 								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 								"mode": 0,
-								"code": "var texture = TextureLoader.load(\"data/texture/normal.jpg\");\nthis.parent.material = new THREE.MeshPhongMaterial({normalMap:texture, color:0xffffff, specular:0xffffff, shininess:100});\n"
+								"code": "var texture = new Texture(\"data/texture/normal.jpg\");\nthis.parent.material = new THREE.MeshPhongMaterial({normalMap:texture, color:0xffffff, specular:0xffffff, shininess:100});\n"
 							}]
 					},
 					{
@@ -359,7 +359,7 @@
 								"visible": true,
 								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 								"mode": 0,
-								"code": "/*\nvar self = this;\nnew THREE.TextureLoader().load(\"data/texture/stone_normal.jpg\", function(normal)\n{\n\tvar him = self;\n\tnew THREE.TextureLoader().load(\"data/texture/stone.jpg\", function(texture)\n\t{\n\t\tvar material = new THREE.MeshPhongMaterial({map:texture, normalMap:normal , color:0xffffff, specular:0xffffff, shininess:30});\n\t\thim.parent.material = material;\n\t});\n});\n*/\n\nvar normal = TextureLoader.load(\"data/texture/stone_normal.jpg\");\nvar texture = TextureLoader.load(\"data/texture/stone.jpg\");\n\nconsole.log(texture);\nconsole.log(normal);\n\nthis.parent.material = new THREE.MeshPhongMaterial({map:texture, normalMap:normal , color:0xffffff, specular:0xffffff, shininess:30});\n"
+								"code": "var normal = new Texture(\"data/texture/stone_normal.jpg\");\nvar texture = new Texture(\"data/texture/stone.jpg\");\n\nthis.parent.material = new THREE.MeshPhongMaterial({map:texture, normalMap:normal , color:0xffffff, specular:0xffffff, shininess:30});\n"
 							}]
 					},
 					{
@@ -457,7 +457,7 @@
 						"uuid": "5327C340-C9F4-4174-B060-DF6419C2B7B2",
 						"type": "PointLight",
 						"name": "point_light",
-						"folded": true,
+						"folded": false,
 						"castShadow": true,
 						"receiveShadow": false,
 						"visible": true,
@@ -640,8 +640,8 @@
 						"receiveShadow": false,
 						"visible": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "52826DAA-15CB-44C9-87F7-097EC9F5499E",
-						"material": "5D3EFA30-7CE4-47FF-A190-B255F37382DD"
+						"geometry": "64006A2A-857F-4FEF-917D-A354DF985DB9",
+						"material": "300222D3-C568-4798-B9B9-657199B72C6B"
 					},
 					{
 						"uuid": "1D74130B-A9A1-4BF4-A8B3-971803169ED6",
