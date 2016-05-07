@@ -27,8 +27,8 @@ function FileExplorer(parent)
 	this.visible = true;
 	
 	//Files in explorer
-	this.files_size = new THREE.Vector2(50, 50);
-	this.files_spacing = 5;
+	this.files_size = new THREE.Vector2(70, 70);
+	this.files_spacing = 0;
 	this.files = [];
 
 	//Add element to document
@@ -49,7 +49,7 @@ function add(text, icon)
 {
 	var file = new File(this.element);
 	file.position.set(5, 5);
-	file.size.set(50, 50);
+	file.size.copy(this.files_size);
 	file.setText(text);
 	file.setIcon(icon);
 	file.updateInterface();
@@ -92,12 +92,15 @@ function updateInterface()
 	}
 
 	//Update file position
-	var files_per_row = Math.floor((this.files.length * (this.files_size.x+this.files_spacing)) / this.size.x);
-	console.log(files_per_row);
-	/*for(var i = 0; i < this.files.length; i++)
+	var files_per_row = Math.floor(this.files.length / ((this.files.length * (this.files_size.x+this.files_spacing)) / this.size.x));
+	for(var i = 0; i < this.files.length; i++)
 	{
-		this.files[i].position.x = this.
-	}*/
+		var row = Math.floor(i / files_per_row);
+		var col = i % files_per_row;
+		this.files[i].position.x = (col * this.files_size.x) + ((col+1) * this.files_spacing);
+		this.files[i].position.y = (row * this.files_size.y) + ((row+1) * this.files_spacing);
+		this.files[i].updateInterface();
+	}
 
 	//Update element
 	this.element.style.top = this.position.y + "px";

@@ -26,6 +26,9 @@ function TabElement(name, image, closeable, container, index)
 	this.button.size.set(container.options_size.x, container.options_size.y);
 	this.button.updateInterface();
 
+	//Set button as draggable
+	this.button.element.draggable = true;
+	
 	//Set button callback
 	this.button.setCallback(function()
 	{

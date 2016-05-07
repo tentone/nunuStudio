@@ -22,8 +22,6 @@ function File(parent)
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.position = "absolute";
-	this.img.style.top = "0px";
-	this.img.style.left = "0px";
 	this.element.appendChild(this.img);
 
 	//Text
@@ -31,7 +29,7 @@ function File(parent)
 	this.text.updateInterface();
 
 	//Element atributes
-	this.size = new THREE.Vector2(50, 50);
+	this.size = new THREE.Vector2(0, 0);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
@@ -51,6 +49,31 @@ function File(parent)
 	this.element.onmouseleave = function()
 	{
 		self.element.className = "";
+	};
+
+	//Drag start
+	this.element.ondragstart = function(event)
+	{
+		//TODO <ADD CODE HERE>
+	};
+
+	//Drag end (called after of ondrop)
+	this.element.ondragend = function(event)
+	{
+		//TODO <ADD CODE HERE>
+	};
+
+	//Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+		//TODO <ADD CODE HERE>
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
 	};
 
 	//Add element to document
@@ -117,6 +140,7 @@ function updateInterface()
 	this.img.width = this.size.x * this.scale.x;
 	this.img.height = this.size.y * this.scale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
+	this.img.style.left = "10px";
 
 	this.text.visible = this.visible;
 	this.text.size.x = this.size.x;
