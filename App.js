@@ -140,8 +140,15 @@ App.chooseFile = function(callback, filter, savemode)
 }
 
 //Read File
-App.readFile = function(fname)
+App.readFile = function(fname, sync, callback)
 {
+	//Check if sync defined
+	if(sync === undefined)
+	{
+		sync = true;
+	}
+
+	//Check if node available
 	if(App.fs !== undefined)
 	{
 		return App.fs.readFileSync(fname, "utf8");
@@ -176,11 +183,14 @@ App.readFile = function(fname)
 }
 
 //Write File
-App.writeFile = function(fname, data)
+App.writeFile = function(fname, data, sync, callback)
 {
 	if(App.fs !== undefined)
 	{
 		App.fs.writeFile(fname, data, "utf8");
+		//var stream = App.fs.createWriteStream(fname, "utf8");
+		//stream.write(data);
+		//stream.end();
 	}
 }
 

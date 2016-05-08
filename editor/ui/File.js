@@ -140,11 +140,11 @@ function updateInterface()
 	this.img.width = this.size.x * this.scale.x;
 	this.img.height = this.size.y * this.scale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
-	this.img.style.left = "10px";
+	this.img.style.top = "5px";
 
 	this.text.visible = this.visible;
 	this.text.size.x = this.size.x;
-	this.text.position.y = (this.size.y * this.scale.y);
+	this.text.position.y = (this.size.y - 20);
 	this.text.size.y = this.size.y - this.text.position.y;
 	this.text.updateInterface();
 	
