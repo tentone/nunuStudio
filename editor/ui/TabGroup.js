@@ -134,7 +134,13 @@ function destroy()
 }
 
 //Update TabGroup
-function update(){}
+function update()
+{
+	if(this.options_selected !== -1)
+	{
+		this.options[this.options_selected].update();
+	}
+}
 
 //Update division Size
 function updateInterface()

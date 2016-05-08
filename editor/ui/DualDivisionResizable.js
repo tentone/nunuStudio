@@ -23,6 +23,8 @@ function DualDivisionResizable(parent)
 	//Division A
 	this.div_a = document.createElement("div");
 	this.div_a.style.position = "absolute";
+	this.div_a.style.top = "0px";
+	this.div_a.style.left = "0px";
 	this.div_a.className = "container";
 
 	//Division B
@@ -47,7 +49,7 @@ function DualDivisionResizable(parent)
 	this.visible = true;
 
 	//Resize Tab
-	this.tab_position = 100;
+	this.tab_position = 0.5;
 	this.tab_size = 5;
 	this.orientation = DualDivisionResizable.HORIZONTAL;
 	this.resizing = false;
@@ -96,25 +98,21 @@ function update()
 	{
 		if(this.orientation == DualDivisionResizable.HORIZONTAL)
 		{	
-			this.tab_position += Mouse.pos_diff.x;
-			if(this.tab_position > (this.size.x-this.tab_size))
-			{
-				this.tab_position = (this.size.x-this.tab_size);
-			}
+			this.tab_position += Mouse.pos_diff.x/this.size.x;
 		}
 		else if(this.orientation == DualDivisionResizable.VERTICAL)
 		{
-			this.tab_position += Mouse.pos_diff.y;
-			if(this.tab_position > (this.size.y-this.tab_size))
-			{
-				this.tab_position = (this.size.y-this.tab_size);
-			}
+			this.tab_position += Mouse.pos_diff.y/this.size.y;
 		}
 
-		//Limit Size
-		if(this.tab_position < this.tab_size)
+	//Limit tab position
+		if(this.tab_position > 1)
 		{
-			this.tab_position = this.tab_size;
+			this.tab_position = 1;
+		}
+		else if(this.tab_position < 0)
+		{
+			this.tab_position = 0
 		}
 
 		Interface.updateInterface();
@@ -156,38 +154,38 @@ function updateInterface()
 
 	if(this.orientation == DualDivisionResizable.HORIZONTAL)
 	{	
+		var tab_position_abs = this.tab_position * this.size.x;
+
 		this.resize_tab.className = "panel_res_hor_tab";
 
-		this.div_a.style.top = "0px";
-		this.div_a.style.left = "0px";
-		this.div_a.style.width = this.tab_position + "px";
+		this.div_a.style.width = tab_position_abs + "px";
 		this.div_a.style.height = this.size.y + "px";
 
 		this.div_b.style.top = "0px";
-		this.div_b.style.left = this.tab_position + "px";
-		this.div_b.style.width = (this.size.x - this.tab_position - this.tab_size)+ "px";
+		this.div_b.style.left = tab_position_abs + "px";
+		this.div_b.style.width = (this.size.x - tab_position_abs - this.tab_size)+ "px";
 		this.div_b.style.height = this.size.y + "px";
 		
 		this.resize_tab.style.top = "0px";
-		this.resize_tab.style.left = this.tab_position + "px";
+		this.resize_tab.style.left = tab_position_abs + "px";
 		this.resize_tab.style.width = this.tab_size + "px";
 		this.resize_tab.style.height = this.size.y + "px";
 	}
 	else if(this.orientation == DualDivisionResizable.VERTICAL)
 	{
+		var tab_position_abs = this.tab_position * this.size.y;
+
 		this.resize_tab.className = "panel_res_ver_tab";
 
-		this.div_a.style.top = "0px";
-		this.div_a.style.left = "0px";
 		this.div_a.style.width = this.size.x + "px";
-		this.div_a.style.height = this.tab_position + "px";
+		this.div_a.style.height = tab_position_abs + "px";
 
-		this.div_b.style.top = this.tab_position + "px";
+		this.div_b.style.top = tab_position_abs + "px";
 		this.div_b.style.left = "0px";
 		this.div_b.style.width = this.size.x + "px";
-		this.div_b.style.height = (this.size.y - this.tab_position - this.tab_size)+ "px";
+		this.div_b.style.height = (this.size.y - tab_position_abs - this.tab_size)+ "px";
 		
-		this.resize_tab.style.top = this.tab_position + "px";
+		this.resize_tab.style.top = tab_position_abs + "px";
 		this.resize_tab.style.left = "0px";
 		this.resize_tab.style.width = this.size.x + "px";
 		this.resize_tab.style.height = this.tab_size + "px";

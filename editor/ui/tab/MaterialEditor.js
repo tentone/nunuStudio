@@ -1,4 +1,4 @@
-function SettingsTab(parent)
+function MaterialEditor(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,8 +11,8 @@ function SettingsTab(parent)
 	}
 	
 	//ID
-	var id = "settings" + SettingsTab.id;
-	SettingsTab.id++;
+	var id = "mat_ed" + MaterialEditor.id;
+	MaterialEditor.id++;
 
 	//Create element
 	this.element = document.createElement("div");
@@ -21,14 +21,7 @@ function SettingsTab(parent)
 
 	//Dual division
 	this.dual_division = new DualDivisionResizable(this.element);
-	this.dual_division.orientation = DualDivisionResizable.HORIZONTAL;
-	this.dual_division.tab_position = 0.2;
-	this.dual_division.fit_parent = true;
-	this.dual_division.updateInterface();
 
-	//Set Div A style
-	this.dual_division.div_a.className = "bar";
-	
 	//Element atributes
 	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
@@ -39,14 +32,14 @@ function SettingsTab(parent)
 	this.parent.appendChild(this.element);
 }
 
-//SettingsTab conter
-SettingsTab.id = 0;
+//MaterialEditor conter
+MaterialEditor.id = 0;
 
 //Functions Prototype
-SettingsTab.prototype.update = update;
-SettingsTab.prototype.updateInterface = updateInterface;
-SettingsTab.prototype.destroy = destroy;
-SettingsTab.prototype.activate = activate;
+MaterialEditor.prototype.update = update;
+MaterialEditor.prototype.updateInterface = updateInterface;
+MaterialEditor.prototype.destroy = destroy;
+MaterialEditor.prototype.activate = activate;
 
 //Activate code editor
 function activate(){}
@@ -61,7 +54,7 @@ function destroy()
 	catch(e){}
 }
 
-//Update SettingsTab
+//Update MaterialEditor
 function update()
 {
 	this.dual_division.update();
@@ -70,14 +63,12 @@ function update()
 //Update division Size
 function updateInterface()
 {
-	//Fit parent
 	if(this.fit_parent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
 	}
 	
-	//Set visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -86,14 +77,9 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
-		
-	//Update base element
+	
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-
-	//Update Dual Division
-	this.dual_division.visible = this.visible;
-	this.dual_division.updateInterface();
 }

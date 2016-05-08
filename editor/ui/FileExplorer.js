@@ -48,7 +48,6 @@ FileExplorer.prototype.add = add;
 function add(text, icon)
 {
 	var file = new File(this.element);
-	file.position.set(5, 5);
 	file.size.copy(this.files_size);
 	file.setText(text);
 	file.setIcon(icon);

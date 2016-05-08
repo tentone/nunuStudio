@@ -75,8 +75,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "interactive Editor";
-Editor.VERSION = "V0.6.6";
-Editor.TIMESTAMP = "201605062138";
+Editor.VERSION = "V0.6.7";
+Editor.TIMESTAMP = "201605081435";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -883,6 +883,25 @@ Editor.loadProgram = function(fname)
 	canvas.setScene(Editor.program.scene);
 	scene.attachComponent(canvas);
 	Interface.tab.selectOption(0);
+}
+
+//Export web project to file
+Editor.exportWebProject = function(fname)
+{
+	var zip = new JSZip();
+	var output = Editor.program.toJSON();
+	var json = JSON.stringify(output);
+
+	zip.file("app.isp", json);
+	zip.file("index.html", App.readFile("runtime/index.html"));
+	zip.file("Main.js", App.readFile("runtime/Main.js"));
+
+	var zfile = zip.generate({type:"blob"});
+	console.log(zFile);
+
+	//TODO <ADD CODE HERE>
+
+	//App.writeFile(fname, zfile);
 }
 
 //New Program

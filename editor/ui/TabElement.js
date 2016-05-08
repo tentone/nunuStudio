@@ -134,7 +134,13 @@ function isSelected()
 }
 
 //Update taboption status
-function update(){}
+function update()
+{
+	if(this.component !== null)
+	{
+		this.component.update();
+	}
+}
 
 //Destroy
 function destroy()

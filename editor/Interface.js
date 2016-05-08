@@ -37,175 +37,11 @@ Interface.initialize = function()
 	Interface.asset_explorer.updateInterface();
 
 	//TODO <REMOVE THIS>
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("aasddbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("abasdasc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("absdfc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("afdgbc", "editor/files/icons/tab/scene.png");
-	Interface.asset_explorer.add("adfgbc", "editor/files/icons/tab/scene.png");
-
+	for(var i = 0; i < 20; i++)
+	{
+		Interface.asset_explorer.add("File" + i, "editor/files/icons/tab/scene.png");
+	}
+	
 	//Asset explorer menu bar
 	Interface.asset_explorer_bar = new Division(Interface.asset_explorer_div.element);
 	Interface.asset_explorer_bar.position.set(0, 0);
@@ -426,7 +262,7 @@ Interface.initialize = function()
 
 	Interface.explorer_resizable = new DualDivisionResizable(Interface.explorer.element);
 	Interface.explorer_resizable.orientation = DualDivisionResizable.VERTICAL;
-	Interface.explorer_resizable.tab_position = 450;
+	Interface.explorer_resizable.tab_position = 0.6;
 
 	//Project explorer
 	Interface.tree_view = new TreeView(Interface.explorer_resizable.div_a, Interface.explorer_resizable);
@@ -835,18 +671,7 @@ Interface.initialize = function()
 			var file = event.srcElement.value;
 			try
 			{
-				var zip = new JSZip();
-				var output = Editor.program.toJSON();
-				var json = JSON.stringify(output);
-
-				zip.file("app.isp", json);
-				zip.file("index.html", App.readFile("runtime/index.html"));
-				zip.file("Main.js", App.readFile("runtime/Main.js"));
-
-				//var zfile = zip.generate({type:"blob"});
-				//console.log(zfile);
-				//App.writeFile(file, zfile);
-				//TODO <ADD CODE HERE>
+				Editor.exportWebProject(file);
 			}
 			catch(e)
 			{
@@ -954,6 +779,7 @@ Interface.update = function()
 	Interface.explorer.update();
 	Interface.asset_explorer_div.update();
 	Interface.explorer_resizable.update();
+	Interface.tab.update();
 }
 
 //Update interface
