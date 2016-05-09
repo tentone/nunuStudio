@@ -58,13 +58,12 @@ Interface.initialize = function()
 	var import_models = Interface.asset_file.addMenu("3D Models");
 	import_models.addOption("Obj", function()
 	{
-		App.chooseFile(function(event)
+		App.chooseFile(function(fname)
 		{
-			var file = event.srcElement.value;
 			try
 			{
 				var loader = new THREE.OBJLoader();
-				var obj = loader.parse(App.readFile(file));
+				var obj = loader.parse(App.readFile(fname));
 
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
@@ -79,13 +78,12 @@ Interface.initialize = function()
 
 	import_models.addOption("Collada", function()
 	{
-		App.chooseFile(function(event)
+		App.chooseFile(function(fname)
 		{
-			var file = event.srcElement.value;
 			try
 			{
 				var loader = new THREE.ColladaLoader();
-				var obj = loader.parse(App.readFile(file));
+				var obj = loader.parse(App.readFile(fname));
 
 				ObjectUtils.setShadowCasting(obj.scene, true);
 				ObjectUtils.setShadowReceiving(obj.scene, true);
@@ -100,13 +98,12 @@ Interface.initialize = function()
 
 	import_models.addOption("ThreeJS JSON", function()
 	{
-		App.chooseFile(function(event)
+		App.chooseFile(function(fname)
 		{
-			var file = event.srcElement.value;
 			try
 			{
 				var loader = new THREE.JSONLoader();
-				loader.load(file, function(geometry, materials)
+				loader.load(fname, function(geometry, materials)
 				{
 					for(var i = 0; i < materials.length; i ++)
 					{
@@ -132,13 +129,12 @@ Interface.initialize = function()
 
 	import_models.addOption("VRML", function()
 	{
-		App.chooseFile(function(event)
+		App.chooseFile(function(fname)
 		{
-			var file = event.srcElement.value;
 			try
 			{
 				var loader = new THREE.VRMLLoader();
-				var obj = loader.parse(App.readFile(file));
+				var obj = loader.parse(App.readFile(fname));
 
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
@@ -153,13 +149,12 @@ Interface.initialize = function()
 
 	import_models.addOption("FBX", function()
 	{
-		App.chooseFile(function(event)
+		App.chooseFile(function(fname)
 		{
-			var file = event.srcElement.value;
 			try
 			{
 				var loader = new THREE.FBXLoader();
-				var obj = loader.parse(App.readFile(file));
+				var obj = loader.parse(App.readFile(fname));
 
 				ObjectUtils.setShadowCasting(obj, true);
 				ObjectUtils.setShadowReceiving(obj, true);
@@ -175,12 +170,11 @@ Interface.initialize = function()
 	//Load texture image
 	Interface.asset_file.addOption("Texture", function()
 	{
-		App.chooseFile(function(event)
+		App.chooseFile(function(fname)
 		{
-			var file = event.srcElement.value;
 			try
 			{
-				var map = new Texture(file);
+				var map = new Texture(fname);
 				var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
 				var sprite = new Sprite(material);
 				Editor.addToActualScene(sprite);
@@ -195,12 +189,11 @@ Interface.initialize = function()
 	//Load Video texture
 	Interface.asset_file.addOption("Video", function()
 	{
-		App.chooseFile(function(event)
+		App.chooseFile(function(fname)
 		{
-			var file = event.srcElement.value;
 			try
 			{
-				var map = new VideoTexture(file);
+				var map = new VideoTexture(fname);
 				var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
 				var sprite = new Sprite(material);
 				Editor.addToActualScene(sprite);
@@ -215,9 +208,9 @@ Interface.initialize = function()
 	//Load audio file
 	Interface.asset_file.addOption("Audio", function()
 	{
-		App.chooseFile(function(event)
+		App.chooseFile(function(fname)
 		{
-
+			//TODO <ADD CODE HERE>
 		}, "audio/*");
 	});
 
@@ -666,12 +659,11 @@ Interface.initialize = function()
 	var publish = Interface.file.addMenu("Publish");
 	publish.addOption("Web", function()
 	{
-		App.chooseFile(function(event)
+		App.chooseFile(function(fname)
 		{
-			var file = event.srcElement.value;
 			try
 			{
-				Editor.exportWebProject(file);
+				Editor.exportWebProject(fname);
 			}
 			catch(e)
 			{
@@ -841,12 +833,11 @@ Interface.updateInterface = function()
 //Open to save program window
 Interface.saveProgram = function()
 {
-	App.chooseFile(function(event)
+	App.chooseFile(function(fname)
 	{
-		var file = event.srcElement.value;
 		try
 		{
-			Editor.saveProgram(file);
+			Editor.saveProgram(fname);
 		}
 		catch(e)
 		{
@@ -860,12 +851,11 @@ Interface.loadProgram = function()
 {
 	if(confirm("All unsaved changes to the project will be lost! Load file?"))
 	{
-		App.chooseFile(function(event)
+		App.chooseFile(function(fname)
 		{
-			var file = event.srcElement.value;
 			try
 			{
-				Editor.loadProgram(file);
+				Editor.loadProgram(fname);
 				alert("File loaded");
 			}
 			catch(e)

@@ -21,6 +21,18 @@ function DivisionResizable(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "container";
 
+	//Prevent Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Create resize_tab tab
 	this.resize_tab = document.createElement("div");
 	this.resize_tab.id = id_tab;
@@ -37,13 +49,27 @@ function DivisionResizable(parent)
 	this.resizable_side = DivisionResizable.LEFT;
 	this.resizing = false;
 
-	//On mouse move event
+	//Self pointer
 	var self = this;
+
+	//On mouse down start resizing
 	this.resize_tab.onmousedown = function(event)
 	{
 		self.resizing = true;
 	};
 	
+	//Prevent Drop event
+	this.resize_tab.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.resize_tab.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Update element
 	this.updateInterface();
 

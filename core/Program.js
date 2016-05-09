@@ -37,7 +37,7 @@ function Program(name, description, author, version, vr)
 	{
 		this.vr = vr;
 	}
-	
+
 	//Initial values
 	this.initial_scene = null;
 	this.default_camera = null;

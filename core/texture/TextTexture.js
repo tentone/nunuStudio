@@ -1,15 +1,16 @@
 function TextTexture()
 {
+	this.text = "text";
 	
+	this.span = document.createElement("span");
+	this.span.innerHTML = "text";
+
+	THREE.CanvasTexture.call(this, this.span);
 }
 
-/*THREE.CanvasTexture = function ( canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy ) {
+//Functions prototype
+TextTexture.prototype = Object.create(THREE.CanvasTexture.prototype);
+TextTexture.prototype.update = update;
 
-	THREE.Texture.call( this, canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy );
-
-	this.needsUpdate = true;
-
-};
-
-THREE.CanvasTexture.prototype = Object.create( THREE.Texture.prototype );
-THREE.CanvasTexture.prototype.constructor = THREE.CanvasTexture;*/
+//Update texture
+function update(){}

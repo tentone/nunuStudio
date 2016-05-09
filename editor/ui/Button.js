@@ -20,6 +20,18 @@ function Button(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "button";
 
+	//Prevent Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+	
 	//Text
 	this.text = new Text(this.element);
 	this.text.setText("text");

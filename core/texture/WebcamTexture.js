@@ -8,8 +8,8 @@ function WebcamTexture()
 
 	//Create the video element
 	this.video = document.createElement("video");
-	this.video.width = 320;
-	this.video.height = 240;
+	this.video.width = 256;
+	this.video.height = 256;
 	this.video.autoplay	= true;
 	this.video.loop	= true;
 

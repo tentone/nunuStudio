@@ -20,6 +20,18 @@ function ButtonDrawer(parent)
 	this.element.style.position = "absolute";
 	this.element.style.zIndex = "200";
 	
+	//Prevent Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Create Drawer Panel
 	this.panel = document.createElement("div");
 	this.panel.style.position = "absolute";

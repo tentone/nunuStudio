@@ -18,6 +18,18 @@ function Panel(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "panel";
 
+	//Prevent Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Element atributes
 	this.fit_parent = true;
 	this.size = new THREE.Vector2(0,0);
