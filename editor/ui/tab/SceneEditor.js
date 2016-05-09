@@ -21,11 +21,47 @@ function SceneEditor(parent)
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
 
+	//Self pointer
+	var self = this;
+
 	//Drop event
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
-		console.log(event);
+
+		if(self.scene !== null)
+		{
+			//Canvas element
+			var canvas = self.element;
+			var rect = canvas.getBoundingClientRect();
+
+			//Update raycaster direction
+			var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
+			var position_normalized = new THREE.Vector2((position.x/self.element.width)*2 - 1, -(position.y/self.element.height)*2 + 1);
+			Editor.updateRaycaster(position_normalized.x, position_normalized.y);
+
+			//Check intersected objects
+			var intersections = Editor.raycaster.intersectObjects(self.scene.children, true);
+
+			if(intersections.length > 0)
+			{
+				var object = intersections[0].object;
+
+				if(object instanceof THREE.Mesh)
+				{
+					//Get first file from event
+					var file = event.dataTransfer.files[0];
+
+					if(file.type.startsWith("image"))
+					{
+						//Create new material with selected image
+						var texture = new Texture(file.path);
+						var material = new THREE.MeshPhongMaterial({map:texture, color:0xffffff, specular:0x333333, shininess:80});
+						object.material = material;
+					}
+				}
+			}
+		}
 	};
 
 	//Prevent deafault when object dragged over
