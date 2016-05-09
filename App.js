@@ -113,8 +113,8 @@ App.chooseFile = function(callback, filter, savemode)
 {
 	//Create file chooser element
 	var chooser = document.createElement("input");
-	chooser.type = "file";	
-	chooser.style.display = "none";
+	chooser.type = "file";
+	
 	if(filter !== undefined)
 	{
 		chooser.accept = filter;
@@ -125,14 +125,12 @@ App.chooseFile = function(callback, filter, savemode)
 		chooser.nwsaveas = "file";
 	}
 
-	document.body.appendChild(chooser);
-
 	//Create onchange event and trigger it
 	chooser.onchange = function(event)
 	{
 		if(callback !== undefined)
 		{
-			callback(event);
+			callback(chooser.value);
 		}
 	};
 
@@ -142,7 +140,7 @@ App.chooseFile = function(callback, filter, savemode)
 //Read File
 App.readFile = function(fname, sync, callback)
 {
-	//Check if sync defined
+	//If sync undefined set true
 	if(sync === undefined)
 	{
 		sync = true;
@@ -151,7 +149,17 @@ App.readFile = function(fname, sync, callback)
 	//Check if node available
 	if(App.fs !== undefined)
 	{
-		return App.fs.readFileSync(fname, "utf8");
+		//If sync
+		if(sync)
+		{
+			return App.fs.readFileSync(fname, "utf8");
+		}
+
+		else
+		{
+			App.fs.readFile(fname, "utf8", callback);
+			return null;
+		}
 	}
 	else
 	{
@@ -170,27 +178,36 @@ App.readFile = function(fname, sync, callback)
 				if(file.status === 200 || file.status === 0)
 				{
 					data = file.responseText;
+
+					//Callback
+					if(callback !== undefined)
+					{
+						callback(file.responseText);
+					}
 				}
 				ready = true;
 			}
 		}
 
 		//Send null to ensure that file was received
-		file.send(null);
+		if(sync)
+		{
+			file.send(null);
+		}
 
 		return data;
 	}
 }
 
 //Write File
-App.writeFile = function(fname, data, sync, callback)
+App.writeFile = function(fname, data)
 {
 	if(App.fs !== undefined)
 	{
-		App.fs.writeFile(fname, data, "utf8");
-		//var stream = App.fs.createWriteStream(fname, "utf8");
-		//stream.write(data);
-		//stream.end();
+		//App.fs.writeFile(fname, data, "utf8");
+		var stream = App.fs.createWriteStream(fname, "utf8");
+		stream.write(data);
+		stream.end();
 	}
 }
 

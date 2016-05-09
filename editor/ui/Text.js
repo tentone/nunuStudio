@@ -20,6 +20,18 @@ function Text(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "text";
 	
+	//Prevent Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+	
 	//Span element
 	this.span = document.createElement("span");
 	this.span.innerHTML = "text";

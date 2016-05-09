@@ -95,7 +95,9 @@ function removeOption(index)
 function addOption(name, callback)
 {
 	var button = new Button(this.element);
-	button.element.style.zIndex = "300";
+	button.element.style.zIndex = "10000";
+	button.text.setAlignment(Text.LEFT);
+	button.text.position.x = 25;
 	button.setText(name);
 	button.visible = this.expanded;
 	button.updateInterface();

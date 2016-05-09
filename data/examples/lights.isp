@@ -6,7 +6,7 @@
 	},
 	"geometries": [
 		{
-			"uuid": "3EB54E88-2846-4ADB-BCB9-2AD4592C53D8",
+			"uuid": "165AB517-3C4C-4B54-B24E-EC65DA7D916D",
 			"type": "SphereGeometry",
 			"radius": 4000,
 			"widthSegments": 32,
@@ -81,25 +81,10 @@
 			"radius": 1,
 			"widthSegments": 16,
 			"heightSegments": 16
-		},
-		{
-			"uuid": "64006A2A-857F-4FEF-917D-A354DF985DB9",
-			"type": "SphereGeometry",
-			"radius": 4000,
-			"widthSegments": 32,
-			"heightSegments": 15
-		},
-		{
-			"uuid": "82AAC4B5-3CF8-4A3E-841D-61267321DB2F",
-			"type": "BoxGeometry",
-			"name": "geometry",
-			"width": 1,
-			"height": 1,
-			"depth": 1
 		}],
 	"materials": [
 		{
-			"uuid": "94284FF8-49DA-43D4-BA77-54E313ED7AC6",
+			"uuid": "1ED94001-89BE-42DF-A7CD-B8B345902C45",
 			"type": "ShaderMaterial",
 			"side": 1,
 			"uniforms": {
@@ -194,47 +179,6 @@
 			"emissive": 0,
 			"specular": 1118481,
 			"shininess": 30
-		},
-		{
-			"uuid": "300222D3-C568-4798-B9B9-657199B72C6B",
-			"type": "ShaderMaterial",
-			"side": 1,
-			"uniforms": {
-				"top_color": {
-					"type": "c",
-					"value": {
-						"r": 0,
-						"g": 0.4627450980392157,
-						"b": 1
-					}
-				},
-				"bottom_color": {
-					"type": "c",
-					"value": {
-						"r": 1,
-						"g": 1,
-						"b": 1
-					}
-				},
-				"offset": {
-					"type": "f",
-					"value": 20
-				},
-				"exponent": {
-					"type": "f",
-					"value": 0.4
-				}
-			},
-			"vertexShader": "varying vec3 vWorldPosition; \tvoid main() \t{ \t\tvec4 worldPosition = modelMatrix * vec4(position, 1.0); \t\tvWorldPosition = worldPosition.xyz; \t\tgl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); \t}",
-			"fragmentShader": "uniform vec3 top_color; \tuniform vec3 bottom_color; \tuniform float offset; \tuniform float exponent; \tvarying vec3 vWorldPosition; \tvoid main() \t{ \t\tfloat h = normalize(vWorldPosition + offset).y; \t\tgl_FragColor = vec4(mix(bottom_color, top_color, max(pow(max(h , 0.0), exponent), 0.0)), 1.0); \t}"
-		},
-		{
-			"uuid": "75BD6EDB-7746-4550-8B28-F9167055AF55",
-			"type": "MeshPhongMaterial",
-			"color": 16777215,
-			"emissive": 0,
-			"specular": 1118481,
-			"shininess": 30
 		}],
 	"object": {
 		"folded": false,
@@ -273,14 +217,14 @@
 						"receiveShadow": false,
 						"visible": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "3EB54E88-2846-4ADB-BCB9-2AD4592C53D8",
-						"material": "94284FF8-49DA-43D4-BA77-54E313ED7AC6"
+						"geometry": "165AB517-3C4C-4B54-B24E-EC65DA7D916D",
+						"material": "1ED94001-89BE-42DF-A7CD-B8B345902C45"
 					},
 					{
 						"uuid": "A3C30F4D-E590-4F3E-BC50-55FCE4704F9A",
 						"type": "Mesh",
 						"name": "ground",
-						"folded": false,
+						"folded": true,
 						"castShadow": true,
 						"receiveShadow": true,
 						"visible": true,
@@ -329,7 +273,7 @@
 						"uuid": "9E5C536E-B458-4CFB-A973-EA2E75843A37",
 						"type": "Mesh",
 						"name": "torus",
-						"folded": false,
+						"folded": true,
 						"castShadow": true,
 						"receiveShadow": true,
 						"visible": true,
@@ -366,7 +310,7 @@
 						"uuid": "EBBF9394-8474-4F8D-83F5-D76CDF58317C",
 						"type": "Mesh",
 						"name": "torus",
-						"folded": false,
+						"folded": true,
 						"castShadow": true,
 						"receiveShadow": true,
 						"visible": true,
@@ -457,7 +401,7 @@
 						"uuid": "5327C340-C9F4-4174-B060-DF6419C2B7B2",
 						"type": "PointLight",
 						"name": "point_light",
-						"folded": false,
+						"folded": true,
 						"castShadow": true,
 						"receiveShadow": false,
 						"visible": true,
@@ -484,7 +428,7 @@
 						"uuid": "A286D47F-F5D4-4DB7-9ED4-BFCD772D21E2",
 						"type": "Mesh",
 						"name": "cone",
-						"folded": false,
+						"folded": true,
 						"castShadow": true,
 						"receiveShadow": true,
 						"visible": true,
@@ -509,7 +453,7 @@
 						"uuid": "DF13D3C9-C77D-47EF-8FC1-132BD0ECF7B8",
 						"type": "Mesh",
 						"name": "torus",
-						"folded": false,
+						"folded": true,
 						"castShadow": true,
 						"receiveShadow": true,
 						"visible": true,
@@ -608,7 +552,17 @@
 						"castShadow": false,
 						"receiveShadow": false,
 						"visible": true,
-						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-6.609328746795654,-1.4024702310562134,8.08984661102295,1]
+					},
+					{
+						"uuid": "71EA38A4-0073-48E0-99AA-85644096A3B3",
+						"type": "ParticleEmiter",
+						"name": "particle",
+						"folded": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,9.540132522583008,-1.4175400733947754,-8.495237350463867,1]
 					}],
 				"fog_color": 16777215,
 				"fog_density": 0.001,
@@ -616,62 +570,6 @@
 				"fog_far": 30,
 				"fog_mode": 0,
 				"initial_camera": "67E42B40-169F-4B8F-88D6-A66586FA1A53"
-			},
-			{
-				"uuid": "BC4D34A7-327E-402B-B114-DF69E6CFC665",
-				"type": "Scene",
-				"name": "scene",
-				"folded": false,
-				"castShadow": false,
-				"receiveShadow": false,
-				"visible": true,
-				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-				"children": [
-					{
-						"uuid": "C63D32C3-7C74-4DD9-A519-FF82C277E604",
-						"type": "Sky",
-						"folded": false,
-						"auto_update": false,
-						"day_time": 20,
-						"sun_distance": 100,
-						"time": 13,
-						"name": "sky",
-						"castShadow": false,
-						"receiveShadow": false,
-						"visible": true,
-						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "64006A2A-857F-4FEF-917D-A354DF985DB9",
-						"material": "300222D3-C568-4798-B9B9-657199B72C6B"
-					},
-					{
-						"uuid": "1D74130B-A9A1-4BF4-A8B3-971803169ED6",
-						"type": "Mesh",
-						"name": "box",
-						"folded": false,
-						"castShadow": true,
-						"receiveShadow": true,
-						"visible": true,
-						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "82AAC4B5-3CF8-4A3E-841D-61267321DB2F",
-						"material": "75BD6EDB-7746-4550-8B28-F9167055AF55"
-					},
-					{
-						"uuid": "96D5C8BC-596C-4BBF-9E85-65F82C3F833E",
-						"type": "Mesh",
-						"name": "ground",
-						"folded": false,
-						"castShadow": true,
-						"receiveShadow": true,
-						"visible": true,
-						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "82AAC4B5-3CF8-4A3E-841D-61267321DB2F",
-						"material": "75BD6EDB-7746-4550-8B28-F9167055AF55"
-					}],
-				"fog_color": 16777215,
-				"fog_density": 0.001,
-				"fog_near": 2,
-				"fog_far": 30,
-				"fog_mode": 0
 			}]
 	}
 }

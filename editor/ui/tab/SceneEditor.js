@@ -21,6 +21,19 @@ function SceneEditor(parent)
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
 
+	//Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+		console.log(event);
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Element atributes
 	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);

@@ -21,6 +21,18 @@ function Canvas(parent)
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
 
+	//Prevent Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);

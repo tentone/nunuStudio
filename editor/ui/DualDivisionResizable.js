@@ -27,10 +27,34 @@ function DualDivisionResizable(parent)
 	this.div_a.style.left = "0px";
 	this.div_a.className = "container";
 
+	//Prevent Drop event
+	this.div_a.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.div_a.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Division B
 	this.div_b = document.createElement("div");
 	this.div_b.style.position = "absolute";
 	this.div_b.className = "container";
+
+	//Prevent Drop event
+	this.div_b.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.div_b.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
 
 	//Create resize_tab tab
 	this.resize_tab = document.createElement("div");
@@ -54,11 +78,25 @@ function DualDivisionResizable(parent)
 	this.orientation = DualDivisionResizable.HORIZONTAL;
 	this.resizing = false;
 
-	//On mouse move event
+	//Self pointer
 	var self = this;
+
+	//On mouse down start resizing
 	this.resize_tab.onmousedown = function(event)
 	{
 		self.resizing = true;
+	};
+	
+	//Prevent Drop event
+	this.resize_tab.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.resize_tab.ondragover = function(event)
+	{
+		event.preventDefault();
 	};
 	
 	//Update element

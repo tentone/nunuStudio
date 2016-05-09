@@ -33,7 +33,7 @@ function File(parent)
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
-	//Image and Callback
+	//Icon scale
 	this.scale = new THREE.Vector2(0.6, 0.6);
 
 	//Click event
@@ -49,6 +49,27 @@ function File(parent)
 	this.element.onmouseleave = function()
 	{
 		self.element.className = "";
+	};
+
+	//Context menu event
+	this.element.oncontextmenu = function(event)
+	{
+		var context = new ContextMenu();
+		context.size.set(130, 20);
+		context.position.set(event.clientX - 5, event.clientY - 5);
+		
+		context.addOption("Rename", function()
+		{
+			//TODO <ADD CODE HERE>
+		});
+		context.addOption("Delete", function()
+		{
+			//TODO <ADD CODE HERE>
+		});
+		context.addOption("Copy", function()
+		{
+			//TODO <ADD CODE HERE>
+		});
 	};
 
 	//Drag start

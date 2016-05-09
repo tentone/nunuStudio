@@ -20,6 +20,18 @@ function TabGroup(parent)
 	this.element.style.position = "absolute";
 	this.element.className = "container";
 	
+	//Prevent Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+	
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);

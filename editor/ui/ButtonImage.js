@@ -19,6 +19,18 @@ function ButtonImage(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 
+	//Prevent Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.position = "absolute";
