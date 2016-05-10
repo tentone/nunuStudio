@@ -30,6 +30,7 @@ include("editor/ui/File.js");
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/SceneEditor.js");
 include("editor/ui/tab/SettingsTab.js");
+include("editor/ui/tab/MaterialEditor.js");
 
 include("editor/ui/input/Checkbox.js");
 include("editor/ui/input/Textbox.js");

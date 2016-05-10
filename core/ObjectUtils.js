@@ -1,6 +1,33 @@
 //Object tools contains some object managing helpers
 function ObjectUtils(){}
 
+//Get all materials in object
+ObjectUtils.getMaterials = function(obj, materials)
+{
+	//If undefined create new array to store materials
+	if(materials === undefined)
+	{
+		materials = [];
+	}
+
+	//Add materials from children and call func for them
+	for(var i = 0; i < obj.children.length; i++)
+	{
+		var child = obj.children[i];
+		if(child instanceof THREE.Mesh)
+		{
+			var material = child.material;
+			if(materials.indexOf(material) === -1)
+			{
+				materials.push(material);
+			}
+		}
+		ObjectUtils.getMaterials(child, materials);
+	}
+
+	return materials;
+}
+
 //Get object scene
 ObjectUtils.getScene = function(obj)
 {

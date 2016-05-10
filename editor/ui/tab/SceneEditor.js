@@ -56,7 +56,7 @@ function SceneEditor(parent)
 					{
 						//Create new material with selected image
 						var texture = new Texture(file.path);
-						var material = new THREE.MeshPhongMaterial({map:texture, color:0xffffff, specular:0x333333, shininess:80});
+						var material = new THREE.MeshPhongMaterial({map:texture, color:0xffffff, specular:0x333333, shininess:30});
 						object.material = material;
 					}
 				}
