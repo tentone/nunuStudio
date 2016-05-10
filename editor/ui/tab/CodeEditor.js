@@ -71,7 +71,7 @@ function CodeEditor(parent)
 	this.parent.appendChild(this.element);
 }
 
-//CodeEditor conter
+//CodeEditor counter
 CodeEditor.id = 0;
 
 //Functions Prototype

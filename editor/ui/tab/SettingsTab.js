@@ -51,7 +51,7 @@ function SettingsTab(parent)
 	this.parent.appendChild(this.element);
 }
 
-//SettingsTab conter
+//SettingsTab counter
 SettingsTab.id = 0;
 
 //Functions Prototype

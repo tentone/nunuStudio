@@ -83,7 +83,7 @@ function SceneEditor(parent)
 	this.parent.appendChild(this.element);
 }
 
-//SceneEditor conter
+//SceneEditor counter
 SceneEditor.id = 0;
 
 //Functions Prototype

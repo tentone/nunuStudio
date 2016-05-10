@@ -143,7 +143,7 @@ function update()
 			this.tab_position += Mouse.pos_diff.y/this.size.y;
 		}
 
-	//Limit tab position
+		//Limit tab position
 		if(this.tab_position > 1)
 		{
 			this.tab_position = 1;
@@ -154,10 +154,12 @@ function update()
 		}
 
 		Interface.updateInterface();
+		return true;
 	}
 	else
 	{
 		this.resizing = false;
+		return false;
 	}
 }
 

@@ -18,7 +18,7 @@ function Numberbox(parent)
 	this.element = document.createElement("input");
 	this.element.type = "number";
 	this.element.className = "text_box";
-	this.element.id = id;
+	//this.element.id = id;
 	this.element.step = "0.1";
 	this.element.style.position = "absolute";
 
