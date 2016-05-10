@@ -18,7 +18,7 @@ function Textbox(parent)
 	this.element = document.createElement("input");
 	this.element.type = "text";
 	this.element.className = "text_box";
-	this.element.id = id;
+	//this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//Element atributes

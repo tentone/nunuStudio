@@ -19,7 +19,7 @@ function Slider(parent)
 	this.element.type = "range";
 	this.element.min = "0";
 	this.element.max = "100";
-	this.element.id = id;
+	//this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//Element atributes
