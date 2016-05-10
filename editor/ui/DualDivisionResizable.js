@@ -164,12 +164,14 @@ function update()
 //Update DualDivisionResizable Size
 function updateInterface()
 {
+	//Fit parent
 	if(this.fit_parent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
 	}
 	
+	//Set visibility
 	if(this.visible)
 	{
 		this.resize_tab.style.visibility = "visible";

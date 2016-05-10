@@ -34,7 +34,7 @@ function MaterialEditor(parent)
 	//Canvas
 	this.canvas = new Canvas(this.element);
 	this.canvas.position.set(0, 0);
-	this.canvas.size.set(500, 500);
+	this.canvas.size.set(250, 250);
 	this.canvas.updateInterface();
 
 	//Element atributes
@@ -47,7 +47,7 @@ function MaterialEditor(parent)
 	this.material = new THREE.MeshPhongMaterial({map: new Texture("data/texture/stone.jpg"), normalMap: new Texture("data/texture/stone_normal.jpg"), color:0xffffff, specular:0x777777, shininess:60});
 
 	//Material renderer and scene
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, alpha: true});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element}); //, alpha: true});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 	this.renderer.shadowMap.enabled = true;
 	this.renderer.shadowMap.type = THREE.PCFShadowMap;
@@ -59,7 +59,8 @@ function MaterialEditor(parent)
 	this.scene = new Scene();
 
 	//Light
-	this.scene.add(new PointLight(0x555555));
+	this.scene.add(new PointLight(0x333333));
+	this.scene.add(new Sky());
 
 	//Sphere
 	var sphere = new Model3D(new THREE.SphereBufferGeometry(1, 32, 32), this.material);
@@ -82,6 +83,7 @@ MaterialEditor.prototype.activate = activate;
 //Activate code editor
 function activate()
 {
+	Mouse.canvas = this.canvas.element;
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
 }
@@ -101,7 +103,15 @@ function update()
 {
 	this.renderer.render(this.scene, this.camera);
 
-	
+	if(Mouse.insideCanvas())
+	{
+		if(Mouse.buttonPressed(Mouse.LEFT))
+		{
+			//var delta = new THREE.Quaternion();
+			//delta.setFromEuler(new THREE.Euler(0, 0, (Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 'XYZ'));
+			//Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
+		}
+	}
 }
 
 //Update division Size

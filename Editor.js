@@ -385,19 +385,19 @@ Editor.update = function()
 					{
 						var delta = new THREE.Quaternion();
 						delta.setFromEuler(new THREE.Euler(-(Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 0, 0, 'XYZ'));
-        				Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
+						Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
 					}
 					else if(Editor.editing_object_args.y)
 					{
 						var delta = new THREE.Quaternion();
 						delta.setFromEuler(new THREE.Euler(0, -(Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 0, 'XYZ'));
-        				Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
+						Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
 					}
 					else if(Editor.editing_object_args.z)
 					{
 						var delta = new THREE.Quaternion();
 						delta.setFromEuler(new THREE.Euler(0, 0, (Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 'XYZ'));
-        				Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
+						Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
 					}
 					Editor.updateObjectPanel();
 				}
