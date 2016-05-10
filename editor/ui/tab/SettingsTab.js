@@ -61,7 +61,11 @@ SettingsTab.prototype.destroy = destroy;
 SettingsTab.prototype.activate = activate;
 
 //Activate code editor
-function activate(){}
+function activate()
+{
+	Editor.setState(Editor.STATE_IDLE);
+	Editor.resetEditingFlags();
+}
 
 //Remove element
 function destroy()

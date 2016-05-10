@@ -3,6 +3,9 @@ function Model3D(geometry, material)
 	THREE.Mesh.call(this, geometry, material);
 
 	this.name = "model";
+
+	this.receiveShadow = true;
+	this.castShadow = true;
 }
 
 //Function Prototype

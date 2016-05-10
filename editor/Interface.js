@@ -23,6 +23,11 @@ Interface.initialize = function()
 	canvas.setScene(Editor.program.scene);
 	scene.attachComponent(canvas);
 
+	//TODO <REMOVE THIS>
+	var material_tab = Interface.tab.addOption("Material", Interface.file_dir + "icons/misc/material.png", false);
+	var material_editor = new MaterialEditor();
+	material_tab.attachComponent(material_editor);
+	
 	//Set render canvas
 	Editor.setRenderCanvas(canvas.element);
 
@@ -838,6 +843,7 @@ Interface.saveProgram = function()
 		try
 		{
 			Editor.saveProgram(fname);
+			alert("File saved");
 		}
 		catch(e)
 		{

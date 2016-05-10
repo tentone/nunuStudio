@@ -18,8 +18,6 @@ function Canvas(parent)
 	this.element = document.createElement("canvas");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.style.top = "0px";
-	this.element.style.left = "0px";
 
 	//Prevent Drop event
 	this.element.ondrop = function(event)
