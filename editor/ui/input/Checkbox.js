@@ -106,6 +106,7 @@ function updateInterface()
 
 	this.text.size.set(this.size.x, 0);
 	this.text.position.set(this.size.y + 5, this.size.y/2 + 2);
+	this.text.visible = this.visible;
 	this.text.updateInterface();
 
 	this.element.style.top = this.position.y + "px";

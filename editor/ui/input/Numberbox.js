@@ -41,7 +41,15 @@ Numberbox.prototype.destroy = destroy;
 Numberbox.prototype.getValue = getValue;
 Numberbox.prototype.setValue = setValue;
 Numberbox.prototype.setStep = setStep;
+Numberbox.prototype.setRange = setRange;
 Numberbox.prototype.setOnChange = setOnChange;
+
+//Set numberbox range
+function setRange(min, max)
+{
+	this.element.min = String(min);
+	this.element.max = String(max);
+}
 
 //Set step
 function setStep(value)

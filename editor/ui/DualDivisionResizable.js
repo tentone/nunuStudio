@@ -74,6 +74,8 @@ function DualDivisionResizable(parent)
 
 	//Resize Tab
 	this.tab_position = 0.5;
+	this.tab_position_max = 1;
+	this.tab_position_min = 0;
 	this.tab_size = 5;
 	this.orientation = DualDivisionResizable.HORIZONTAL;
 	this.resizing = false;
@@ -144,13 +146,13 @@ function update()
 		}
 
 		//Limit tab position
-		if(this.tab_position > 1)
+		if(this.tab_position > this.tab_position_max)
 		{
-			this.tab_position = 1;
+			this.tab_position = this.tab_position_max;
 		}
-		else if(this.tab_position < 0)
+		else if(this.tab_position < this.tab_position_min)
 		{
-			this.tab_position = 0
+			this.tab_position = this.tab_position_min;
 		}
 
 		Interface.updateInterface();
