@@ -59,9 +59,16 @@ Image.id = 0;
 
 //Functions Prototype
 Image.prototype.setImage = setImage;
+Image.prototype.setCallback = setCallback;
 Image.prototype.update = update;
 Image.prototype.updateInterface = updateInterface;
 Image.prototype.destroy = destroy;
+
+//Set image onclick callback function
+function setCallback(callback)
+{
+	this.element.onclick = callback;
+}
 
 //Remove element
 function destroy()

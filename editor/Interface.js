@@ -17,16 +17,16 @@ Interface.initialize = function()
 	Interface.empty_tab_text.setText("Open new tab to edit content or create new project");
 	Interface.empty_tab_text.updateInterface();
 
+	//TODO <REMOVE THIS>
+	var material_tab = Interface.tab.addOption("Material", Interface.file_dir + "icons/misc/material.png", false);
+	var material_editor = new MaterialEditor();
+	material_tab.attachComponent(material_editor);
+
 	//Scene Canvas
 	var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
 	var canvas = new SceneEditor();
 	canvas.setScene(Editor.program.scene);
 	scene.attachComponent(canvas);
-
-	//TODO <REMOVE THIS>
-	var material_tab = Interface.tab.addOption("Material", Interface.file_dir + "icons/misc/material.png", false);
-	var material_editor = new MaterialEditor();
-	material_tab.attachComponent(material_editor);
 	
 	//Set render canvas
 	Editor.setRenderCanvas(canvas.element);
