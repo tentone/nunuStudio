@@ -168,6 +168,7 @@ function addDefaultScene()
 	scene.add(sky);
 
 	var material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
+	material.name = "default";
 	var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 
 	//Box
