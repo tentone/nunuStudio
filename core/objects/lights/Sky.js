@@ -41,6 +41,7 @@ function Sky(auto_update, day_time, sun_distance, time)
 	//Sky geometry and material
 	var geometry = new THREE.SphereGeometry(4000, 32, 15);
 	var material = new THREE.ShaderMaterial({vertexShader: vertex, fragmentShader: fragment, uniforms: uniforms, side: THREE.BackSide});
+	material.name = "sky";
 
 	//Call super contructor
 	THREE.Mesh.call(this, geometry, material);

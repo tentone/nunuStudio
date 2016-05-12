@@ -57,7 +57,7 @@ function MaterialEditor(parent)
 	this.visible = true;
 	
 	//Attached material
-	this.material = new THREE.MeshPhongMaterial({map: new Texture("data/texture/stone.jpg"), normalMap: new Texture("data/texture/stone_normal.jpg"), color:0xffffff, specular:0x777777, shininess:60});
+	this.material = new THREE.MeshPhongMaterial();
 
 	//Material renderer and scene
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element});
@@ -70,7 +70,8 @@ function MaterialEditor(parent)
 
 	//Material scene
 	this.scene = new Scene();
-	this.scene.add(new PointLight(0x444444));
+	this.scene.add(new PointLight(0x666666));
+	this.scene.add(new AmbientLight(0x333333));
 	this.scene.add(new Sky());
 	this.obj = new Model3D(new THREE.SphereBufferGeometry(1, 32, 32), this.material);
 	this.obj.position.set(0, 0, -2.5);

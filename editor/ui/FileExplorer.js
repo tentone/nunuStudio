@@ -55,6 +55,17 @@ FileExplorer.prototype.update = update;
 FileExplorer.prototype.updateInterface = updateInterface;
 FileExplorer.prototype.destroy = destroy;
 FileExplorer.prototype.add = add;
+FileExplorer.prototype.clear = clear;
+
+//Remove all files
+function clear()
+{
+	while(this.files.length > 0)
+	{
+		this.files.pop().destroy();
+	}
+	this.updateInterface();
+}
 
 //Add file
 function add(text, icon)

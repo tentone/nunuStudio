@@ -42,12 +42,6 @@ Interface.initialize = function()
 	//Asset explorer
 	Interface.asset_explorer = new FileExplorer(Interface.asset_explorer_div.element);
 	Interface.asset_explorer.updateInterface();
-
-	//TODO <REMOVE THIS>
-	for(var i = 0; i < 1; i++)
-	{
-		Interface.asset_explorer.add("File" + i, "editor/files/icons/misc/material.png");
-	}
 	
 	//Asset explorer menu bar
 	Interface.asset_explorer_bar = new Division(Interface.asset_explorer_div.element);

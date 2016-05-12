@@ -59,7 +59,6 @@ include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
 include("editor/tools/RotateTool.js");
 
-include("editor/MaterialRenderer.js");
 include("editor/Interface.js");
 
 function Editor(){}
@@ -77,8 +76,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "interactive Editor";
-Editor.VERSION = "V0.6.8";
-Editor.TIMESTAMP = "201605102041";
+Editor.VERSION = "V0.6.9";
+Editor.TIMESTAMP = "201605121641";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -131,7 +130,7 @@ Editor.initialize = function(canvas)
 
 	//Default material to be used when creating objects
 	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x777777, shininess:60});
-	Editor.default_material.name = "default material";
+	Editor.default_material.name = "default";
 	
 	//Initialize User Interface
 	Interface.initialize();
@@ -719,6 +718,26 @@ Editor.updateSelectedObjectUI = function()
 Editor.updateTreeView = function()
 {
 	Interface.tree_view.fromObject(Editor.program);
+
+
+	Interface.asset_explorer.clear();
+	
+	//Get material list
+	var materials = ObjectUtils.getMaterials(Editor.program);
+
+	//Add materials to asset explorer
+	for(var i = 0; i < materials.length; i++)
+	{
+		Interface.asset_explorer.add(materials[i].name, "editor/files/icons/misc/material.png");
+	}
+
+	//Else for test
+	for(var i = 0; i < 3; i++)
+	{
+		Interface.asset_explorer.add("Texture " + i, "data/sample.png");
+	}
+
+	Interface.asset_explorer.updateInterface();
 }
 
 //Updates object panel values
@@ -886,7 +905,7 @@ Editor.loadProgram = function(fname)
 	Editor.updateTreeView();
 	
 	//Remove old tabs from interface
-	Interface.tab.removeAllOptions();
+	Interface.tab.clear();
 	var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
 	var canvas = new SceneEditor();
 	canvas.setScene(Editor.program.scene);
@@ -924,7 +943,7 @@ Editor.createNewProgram = function()
 	//Remove old tabs from interface
 	if(Interface.tab !== undefined)
 	{
-		Interface.tab.removeAllOptions();
+		Interface.tab.clear();
 		var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
 		var canvas = new SceneEditor();
 		canvas.setScene(Editor.program.scene);

@@ -55,7 +55,7 @@ TabGroup.prototype.updateInterface = updateInterface;
 TabGroup.prototype.destroy = destroy;
 TabGroup.prototype.addOption = addOption;
 TabGroup.prototype.removeOption = removeOption;
-TabGroup.prototype.removeAllOptions = removeAllOptions;
+TabGroup.prototype.clear = clear;
 TabGroup.prototype.updateOptionIndex = updateOptionIndex;
 TabGroup.prototype.selectOption = selectOption;
 TabGroup.prototype.closeActual = closeActual;
@@ -95,15 +95,15 @@ function addOption(name, image, closeable)
 	return option;
 }
 
-//Remove tab
-function removeAllOptions()
+//Remove all tabs
+function clear()
 {
 	while(this.options.length > 0)
 	{
 		this.options.pop().destroy();
 	}
 	
-	this.options_selected = -1;	
+	this.options_selected = -1;
 	this.updateOptionIndex();
 	this.updateInterface();
 }
