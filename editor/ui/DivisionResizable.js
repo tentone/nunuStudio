@@ -161,6 +161,7 @@ function update()
 //Update DivisionResizable Size
 function updateInterface()
 {
+	//Set visibility
 	if(this.visible)
 	{
 		this.resize_tab.style.visibility = "visible";
@@ -172,6 +173,31 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
+	//Limit Size
+	if(this.resizable_side === DivisionResizable.BOTTOM || this.resizable_side === DivisionResizable.TOP)
+	{
+		if(this.size.y < (this.resize_tab_size + this.resize_size_min))
+		{
+			this.size.y = this.resize_tab_size + this.resize_size_min;
+		}
+		else if(this.size.y > this.resize_size_max)
+		{
+			this.size.y = this.resize_size_max;
+		}
+	}
+	else
+	{
+		if(this.size.x < (this.resize_tab_size + this.resize_size_min))
+		{
+			this.size.x = (this.resize_tab_size + this.resize_size_min);
+		}
+		else if(this.size.x > this.resize_size_max)
+		{
+			this.size.x = this.resize_size_max;
+		}	
+	}
+
+	//Update element
 	if(this.resizable_side == DivisionResizable.LEFT)
 	{	
 		this.resize_tab.className = "panel_res_hor_tab";
