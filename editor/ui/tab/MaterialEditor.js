@@ -111,13 +111,13 @@ function MaterialEditor(parent)
 	this.type.position.set(95, 35);
 	this.type.size.set(150, 18);
 	this.type.addValue("Phong", 0);
-	/*this.type.addValue("Standard", 1);
+	this.type.addValue("Standard", 1);
 	this.type.addValue("Lambert", 2);
 	this.type.addValue("Basic", 3);
 	this.type.addValue("Shader", 4);
 	this.type.addValue("Sprite", 5);
 	this.type.addValue("Depth", 6);
-	this.type.addValue("Normal", 7);*/
+	this.type.addValue("Normal", 7);
 	this.type.updateInterface();
 	this.type.setOnChange(function()
 	{

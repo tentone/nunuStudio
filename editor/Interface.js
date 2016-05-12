@@ -17,16 +17,16 @@ Interface.initialize = function()
 	Interface.empty_tab_text.setText("Open new tab to edit content or create new project");
 	Interface.empty_tab_text.updateInterface();
 
-	//TODO <REMOVE THIS>
-	var material_tab = Interface.tab.addOption("Material", Interface.file_dir + "icons/misc/material.png", false);
-	var material_editor = new MaterialEditor();
-	material_tab.attachComponent(material_editor);
-
 	//Scene Canvas
 	var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
 	var canvas = new SceneEditor();
 	canvas.setScene(Editor.program.scene);
 	scene.attachComponent(canvas);
+
+	//TODO <REMOVE THIS>
+	var material_tab = Interface.tab.addOption("Material", Interface.file_dir + "icons/misc/material.png", false);
+	var material_editor = new MaterialEditor();
+	material_tab.attachComponent(material_editor);
 	
 	//Set render canvas
 	Editor.setRenderCanvas(canvas.element);
@@ -35,6 +35,8 @@ Interface.initialize = function()
 	Interface.asset_explorer_div = new DivisionResizable();
 	Interface.asset_explorer_div.resizable_side = DivisionResizable.TOP;
 	Interface.asset_explorer_div.size.y = 150;
+	Interface.asset_explorer_div.resize_size_min = 100;
+	Interface.asset_explorer_div.resize_size_max = 400;
 	Interface.asset_explorer_div.updateInterface();
 
 	//Asset explorer
@@ -42,9 +44,9 @@ Interface.initialize = function()
 	Interface.asset_explorer.updateInterface();
 
 	//TODO <REMOVE THIS>
-	for(var i = 0; i < 20; i++)
+	for(var i = 0; i < 1; i++)
 	{
-		Interface.asset_explorer.add("File" + i, "editor/files/icons/tab/scene.png");
+		Interface.asset_explorer.add("File" + i, "editor/files/icons/misc/material.png");
 	}
 	
 	//Asset explorer menu bar
@@ -61,7 +63,7 @@ Interface.initialize = function()
 	Interface.asset_file.position.set(0,0);
 	
 	var import_models = Interface.asset_file.addMenu("3D Models");
-	import_models.addOption("Obj", function()
+	import_models.addOption("Wavefront", function()
 	{
 		App.chooseFile(function(fname)
 		{
@@ -231,15 +233,15 @@ Interface.initialize = function()
 	});
 
 	var asset_create_material = Interface.asset_create.addMenu("Material");
+	asset_create_material.addOption("Phong material", function()
+	{
+		//TODO <ADD CODE HERE>
+	});
 	asset_create_material.addOption("Standard material", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
 	asset_create_material.addOption("Sprite material", function()
-	{
-		//TODO <ADD CODE HERE>
-	});
-	asset_create_material.addOption("Phong material", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
@@ -801,7 +803,7 @@ Interface.updateInterface = function()
 	//------------------------------------Explorer------------------------------------
 	Interface.explorer.size.y = (size.y - Interface.top_bar.size.y);
 	Interface.explorer.position.set(size.x - Interface.explorer.size.x, Interface.top_bar.size.y);
-	Interface.explorer.resize_size_max = size.x/2;
+	Interface.explorer.resize_size_max = size.x * 0.7;
 	Interface.explorer.updateInterface();
 
 	Interface.explorer_resizable.size.set(Interface.explorer.size.x - Interface.explorer.resize_tab_size, Interface.explorer.size.y);
@@ -813,6 +815,7 @@ Interface.updateInterface = function()
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer_div.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;
 	Interface.asset_explorer_div.position.set(Interface.tool_bar.size.x, size.y - Interface.asset_explorer_div.size.y);
+	Interface.asset_explorer_div.resize_size_max = size.y * 0.6;
 	Interface.asset_explorer_div.updateInterface();
 
 	Interface.asset_explorer_bar.size.x = Interface.asset_explorer_div.size.x;

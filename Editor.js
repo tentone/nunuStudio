@@ -59,6 +59,7 @@ include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
 include("editor/tools/RotateTool.js");
 
+include("editor/MaterialRenderer.js");
 include("editor/Interface.js");
 
 function Editor(){}
@@ -967,11 +968,9 @@ Editor.setRenderCanvas = function(canvas)
 Editor.initializeRenderer = function(canvas)
 {
 	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas});
-	Editor.renderer.autoClear = false;
-
-	//Enable shadow maps (THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
+	Editor.renderer.autoClear = false;;
 	Editor.renderer.shadowMap.enabled = true;
-	Editor.renderer.shadowMap.type = THREE.PCFShadowMap;
+	Editor.renderer.shadowMap.type = THREE.PCFSoftShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
 	Editor.renderer.setSize(canvas.width, canvas.height);
 }
 

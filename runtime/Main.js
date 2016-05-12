@@ -24,7 +24,7 @@ Main.initialize = function(canvas)
 	Main.renderer = new THREE.WebGLRenderer({canvas: Main.canvas});
 	Main.renderer.autoClear = false;
 	Main.renderer.shadowMap.enabled = true;
-	Main.renderer.shadowMap.type = THREE.PCFShadowMap;
+	Main.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	Main.renderer.setSize(Main.canvas.width, Main.canvas.height);
 
 	//Initialize scene
