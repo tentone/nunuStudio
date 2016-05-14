@@ -182,25 +182,25 @@ function updateSky()
 		this.material.uniforms.top_color.value.setRGB(Sky.color_top[1].r, Sky.color_top[1].g, Sky.color_top[1].b);
 		this.material.uniforms.bottom_color.value.setRGB(Sky.color_bottom[1].r, Sky.color_bottom[1].g, Sky.color_bottom[1].b);
 	}
-	//17H -> 19h (noon to afternoon)
-	else if(time < 0.792)
+	//17H -> 18h (noon to afternoon)
+	else if(time < 0.75)
 	{
-		var t = (time-0.708) * 11.90476;
+		var t = (time-0.708) * 23.81;
 		var f = 1 - t;
 
 		this.material.uniforms.top_color.value.setRGB(f*Sky.color_top[1].r + t*Sky.color_top[2].r, f*Sky.color_top[1].g + t*Sky.color_top[2].g, f*Sky.color_top[1].b + t*Sky.color_top[2].b);
 		this.material.uniforms.bottom_color.value.setRGB(f*Sky.color_bottom[1].r + t*Sky.color_bottom[2].r, f*Sky.color_bottom[1].g + t*Sky.color_bottom[2].g, f*Sky.color_bottom[1].b + t*Sky.color_bottom[2].b);
 	}
-	//19H -> 21H (afternoon to night)
-	else if(time < 0.875)
+	//18H -> 20H (afternoon to night)
+	else if(time < 0.8333)
 	{
-		var t = (time-0.792) * 12.048;
+		var t = (time-0.75) * 12.048;
 		var f = 1 - t;
 
 		this.material.uniforms.top_color.value.setRGB(f*Sky.color_top[2].r + t*Sky.color_top[3].r, f*Sky.color_top[2].g + t*Sky.color_top[3].g, f*Sky.color_top[2].b + t*Sky.color_top[3].b);
 		this.material.uniforms.bottom_color.value.setRGB(f*Sky.color_bottom[2].r + t*Sky.color_bottom[3].r, f*Sky.color_bottom[2].g + t*Sky.color_bottom[3].g, f*Sky.color_bottom[2].b + t*Sky.color_bottom[3].b);
 	}
-	//21H -> 24H (night)
+	//20H -> 24H (night)
 	else
 	{
 		this.material.uniforms.top_color.value.setRGB(Sky.color_top[3].r, Sky.color_top[3].g, Sky.color_top[3].b);

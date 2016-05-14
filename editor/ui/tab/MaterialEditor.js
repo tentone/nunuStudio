@@ -11,7 +11,7 @@ function MaterialEditor(parent)
 	}
 	
 	//ID
-	var id = "mat_ed" + MaterialEditor.id;
+	var id = "mat_editor" + MaterialEditor.id;
 	MaterialEditor.id++;
 
 	//Create element
@@ -620,6 +620,16 @@ function update()
 			var delta = new THREE.Quaternion();
 			delta.setFromEuler(new THREE.Euler(Mouse.pos_diff.y * 0.005, Mouse.pos_diff.x * 0.005, 0, 'XYZ'));
 			this.obj.quaternion.multiplyQuaternions(delta, this.obj.quaternion);
+		}
+
+		this.camera.position.z += Mouse.wheel * 0.005;
+		if(this.camera.position.z > 5)
+		{
+			this.camera.position.z = 5;
+		}
+		else if(this.camera.position.z < -1)
+		{
+			this.camera.position.z = -1;
 		}
 	}
 }
