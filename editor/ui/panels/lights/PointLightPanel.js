@@ -22,7 +22,7 @@ function PointLightPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.name = self.name.getText();
-			Editor.updateTreeView();
+			Editor.updateObjectViews();
 		}
 	});
 
@@ -78,6 +78,20 @@ function PointLightPanel(parent)
 			self.obj.castShadow = self.cast_shadow.getValue();
 		}
 	});
+
+	//Visible
+	this.visible = new Checkbox(this.element);
+	this.visible.setText("Visible");
+	this.visible.size.set(200, 15);
+	this.visible.position.set(2, 110);
+	this.visible.updateInterface();
+	this.visible.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.visible = self.visible.getValue();
+		}
+	});
 }
 
 //Functions Prototype
@@ -94,6 +108,7 @@ function updatePanel()
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.cast_shadow.setValue(this.obj.castShadow);
+		this.visible.setValue(this.obj.visible);
 	}
 }
 

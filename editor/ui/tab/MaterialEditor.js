@@ -60,7 +60,7 @@ function MaterialEditor(parent)
 	this.material = new THREE.MeshPhongMaterial();
 
 	//Material renderer and scene
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: true});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 	this.renderer.shadowMap.enabled = true;
 	this.renderer.shadowMap.type = THREE.PCFShadowMap;
@@ -68,14 +68,14 @@ function MaterialEditor(parent)
 	//Material camera
 	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y, 0.1, 10000000);
 
-	//Material scene
+	//Material preview scene
 	this.scene = new Scene();
+	this.obj = new Model3D(new THREE.SphereBufferGeometry(1, 64, 64), this.material);
+	this.obj.position.set(0, 0, -2.5);
+	this.scene.add(this.obj);
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x333333));
 	this.scene.add(new Sky());
-	this.obj = new Model3D(new THREE.SphereBufferGeometry(1, 32, 32), this.material);
-	this.obj.position.set(0, 0, -2.5);
-	this.scene.add(this.obj);
 
 	//----------------------------Material parameters----------------------------
 	//Name
@@ -98,6 +98,50 @@ function MaterialEditor(parent)
 		}
 	});
 	this.children.push(this.name);
+
+	//Test model
+	text = new Text(this.main.div_b);
+	text.setAlignment(Text.LEFT);
+	text.setText("Test Model");
+	text.position.set(210, 45);
+	text.size.set(200, 0);
+	text.updateInterface();
+	this.children.push(text);
+
+	this.test_model = new DropdownList(this.main.div_b);
+	this.test_model.position.set(295, 35);
+	this.test_model.size.set(150, 18);
+	this.test_model.addValue("Sphere", 0);
+	this.test_model.addValue("Torus", 1);
+	this.test_model.addValue("Cube", 2);
+	this.test_model.addValue("Torus Knot", 3);
+	this.test_model.updateInterface();
+	this.test_model.setOnChange(function()
+	{
+		var value = self.test_model.getSelectedIndex();
+
+		//Sphere
+		if(value === 0)
+		{
+			self.obj.geometry = new THREE.SphereBufferGeometry(1, 64, 64);
+		}
+		//Torus
+		else if(value === 1)
+		{
+			self.obj.geometry = new THREE.TorusBufferGeometry(0.8, 0.4, 64, 128);
+		}
+		//Cube
+		else if(value === 2)
+		{
+			self.obj.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 32, 32, 32);
+		}
+		//Torus Knot
+		else if(value === 3)
+		{
+			self.obj.geometry = new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 32);
+		}	
+	});
+	this.children.push(this.test_model);
 
 	//Type
 	text = new Text(this.main.div_b);
@@ -264,20 +308,14 @@ function MaterialEditor(parent)
 	text.updateInterface();
 	this.children.push(text);
 
-	this.map = new Image(this.main.div_b);
+	this.map = new Imagebox(this.main.div_b);
 	this.map.position.set(10, 205);
 	this.map.size.set(100, 100);
 	this.map.updateInterface();
-	this.map.setCallback(function()
+	this.map.setOnChange(function(file)
 	{
-		if(self.material !== null)
-		{
-			App.chooseFile(function(file)
-			{
-				self.material.map = new Texture(file);
-				self.map.setImage(file);
-			}, "image/*");
-		}
+		self.material.map = new Texture(file);
+		self.material.needsUpdate = true;
 	});
 	this.children.push(this.map);
 
@@ -290,20 +328,14 @@ function MaterialEditor(parent)
 	text.updateInterface();
 	this.children.push(text);
 
-	this.bumpMap = new Image(this.main.div_b);
+	this.bumpMap = new Imagebox(this.main.div_b);
 	this.bumpMap.position.set(10, 330);
 	this.bumpMap.size.set(100, 100);
 	this.bumpMap.updateInterface();
-	this.bumpMap.setCallback(function()
+	this.bumpMap.setOnChange(function(file)
 	{
-		if(self.material !== null)
-		{
-			App.chooseFile(function(file)
-			{
-				self.material.bumpMap = new Texture(file);
-				self.bumpMap.setImage(file);
-			}, "image/*");
-		}
+		self.material.bumpMap = new Texture(file);
+		self.material.needsUpdate = true;
 	});
 	this.children.push(this.bumpMap);
 
@@ -327,6 +359,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.bumpScale = self.bumpScale.getValue();
+			self.material.needsUpdate = true;
 			self.bumpScale_text.setText(self.material.bumpScale);
 		}
 	});
@@ -349,20 +382,14 @@ function MaterialEditor(parent)
 	text.updateInterface();
 	this.children.push(text);
 
-	this.normalMap = new Image(this.main.div_b);
+	this.normalMap = new Imagebox(this.main.div_b);
 	this.normalMap.position.set(10, 480);
 	this.normalMap.size.set(100, 100);
 	this.normalMap.updateInterface();
-	this.normalMap.setCallback(function()
+	this.normalMap.setOnChange(function(file)
 	{
-		if(self.material !== null)
-		{
-			App.chooseFile(function(file)
-			{
-				self.material.normalMap = new Texture(file);
-				self.normalMap.setImage(file);
-			}, "image/*");
-		}
+		self.material.normalMap = new Texture(file);
+		self.material.needsUpdate = true;
 	});
 	this.children.push(this.normalMap);
 
@@ -386,6 +413,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.normalScale.x = self.normalScale_x.getValue();
+			self.material.needsUpdate = true;
 		}
 	});
 	this.children.push(this.normalScale_x);
@@ -409,6 +437,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.normalScale.y = self.normalScale_y.getValue();
+			self.material.needsUpdate = true;
 		}
 	});
 	this.children.push(this.normalScale_y);
@@ -422,20 +451,14 @@ function MaterialEditor(parent)
 	text.updateInterface();
 	this.children.push(text);
 
-	this.displacementMap = new Image(this.main.div_b);
+	this.displacementMap = new Imagebox(this.main.div_b);
 	this.displacementMap.position.set(10, 630);
 	this.displacementMap.size.set(100, 100);
 	this.displacementMap.updateInterface();
-	this.displacementMap.setCallback(function()
+	this.displacementMap.setOnChange(function(file)
 	{
-		if(self.material !== null)
-		{
-			App.chooseFile(function(file)
-			{
-				self.material.displacementMap = new Texture(file);
-				self.displacementMap.setImage(file);
-			}, "image/*");
-		}
+		self.material.displacementMap = new Texture(file);
+		self.material.needsUpdate = true;
 	});
 	this.children.push(this.displacementMap);
 
@@ -458,6 +481,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.displacementScale = self.displacementScale.getValue();
+			self.material.needsUpdate = true;
 		}
 	});
 	this.children.push(this.displacementScale);
@@ -481,6 +505,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.displacementBias = self.displacementBias.getValue();
+			self.material.needsUpdate = true;
 		}
 	});
 	this.children.push(this.displacementBias);
@@ -494,20 +519,14 @@ function MaterialEditor(parent)
 	text.updateInterface();
 	this.children.push(text);
 
-	this.specularMap = new Image(this.main.div_b);
+	this.specularMap = new Imagebox(this.main.div_b);
 	this.specularMap.position.set(10, 805);
 	this.specularMap.size.set(100, 100);
 	this.specularMap.updateInterface();
-	this.specularMap.setCallback(function()
+	this.specularMap.setOnChange(function(file)
 	{
-		if(self.material !== null)
-		{
-			App.chooseFile(function(file)
-			{
-				self.material.specularMap = new Texture(file);
-				self.specularMap.setImage(file);
-			}, "image/*");
-		}
+		self.material.specularMap = new Texture(file);
+		self.material.needsUpdate = true;
 	});
 	this.children.push(this.specularMap);
 
@@ -520,20 +539,14 @@ function MaterialEditor(parent)
 	text.updateInterface();
 	this.children.push(text);
 
-	this.alphaMap = new Image(this.main.div_b);
+	this.alphaMap = new Imagebox(this.main.div_b);
 	this.alphaMap.position.set(10, 930);
 	this.alphaMap.size.set(100, 100);
 	this.alphaMap.updateInterface();
-	this.alphaMap.setCallback(function()
+	this.alphaMap.setOnChange(function(file)
 	{
-		if(self.material !== null)
-		{
-			App.chooseFile(function(file)
-			{
-				self.material.alphaMap = new Texture(file);
-				self.alphaMap.setImage(file);
-			}, "image/*");
-		}
+		self.material.alphaMap = new Texture(file);
+		self.material.needsUpdate = true;
 	});
 	this.children.push(this.alphaMap);
 
@@ -546,20 +559,14 @@ function MaterialEditor(parent)
 	text.updateInterface();
 	this.children.push(text);
 
-	this.envMap = new Image(this.main.div_b);
+	this.envMap = new Imagebox(this.main.div_b);
 	this.envMap.position.set(10, 1055);
 	this.envMap.size.set(100, 100);
 	this.envMap.updateInterface();
-	this.envMap.setCallback(function()
+	this.envMap.setOnChange(function(file)
 	{
-		if(self.material !== null)
-		{
-			App.chooseFile(function(file)
-			{
-				self.material.envMap = new Texture(file);
-				self.envMap.setImage(file);
-			}, "image/*");
-		}
+		self.material.envMap = new Texture(file);
+		self.material.needsUpdate = true;
 	});
 	this.children.push(this.envMap);
 
@@ -657,7 +664,6 @@ function updateInterface()
 		this.children[i].visible = this.visible;
 		this.children[i].updateInterface();
 	}
-
 
 	//Update element
 	this.element.style.top = this.position.y + "px";

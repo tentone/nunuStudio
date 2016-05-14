@@ -31,6 +31,7 @@ include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/SceneEditor.js");
 include("editor/ui/tab/SettingsTab.js");
 include("editor/ui/tab/MaterialEditor.js");
+include("editor/ui/tab/AboutTab.js");
 
 include("editor/ui/input/Checkbox.js");
 include("editor/ui/input/Textbox.js");
@@ -39,6 +40,7 @@ include("editor/ui/input/Slider.js");
 include("editor/ui/input/DropdownList.js");
 include("editor/ui/input/Numberbox.js");
 include("editor/ui/input/Positionbox.js");
+include("editor/ui/input/Imagebox.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");
@@ -75,9 +77,9 @@ Editor.MODE_RESIZE = 2;
 Editor.MODE_ROTATE = 3;
 
 //Editor version
-Editor.NAME = "interactive Editor";
-Editor.VERSION = "V0.6.9";
-Editor.TIMESTAMP = "201605121641";
+Editor.NAME = "nunu Studio";
+Editor.VERSION = "V0.7.0";
+Editor.TIMESTAMP = "201605131631";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -129,7 +131,7 @@ Editor.initialize = function(canvas)
 	Editor.canvas = null;
 
 	//Default material to be used when creating objects
-	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x777777, shininess:60});
+	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x444444, shininess:60});
 	Editor.default_material.name = "default";
 	
 	//Initialize User Interface
@@ -144,8 +146,9 @@ Editor.initialize = function(canvas)
 	Editor.raycaster = new THREE.Raycaster(); 
 
 	//Editor Camera
-	Editor.camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 1000000);
-	Editor.camera.position.set(0, 5, -5);
+	Editor.default_camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 1000000);
+	Editor.default_camera.position.set(0, 5, -5);
+	Editor.camera = Editor.default_camera;
 	Editor.camera_rotation = new THREE.Vector2(0,0);
 	Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
 
@@ -204,7 +207,7 @@ Editor.initialize = function(canvas)
 	Editor.tool_scene_top.add(Editor.rotate_tool);
 
 	//Update interface explorer tree view
-	Editor.updateTreeView();
+	Editor.updateObjectViews();
 }
 
 //Update Editor
@@ -572,7 +575,7 @@ Editor.deleteSelectedObject = function()
 	if(Editor.selected_object.parent !== null)
 	{
 		Editor.selected_object.parent.remove(Editor.selected_object);
-		Editor.updateTreeView();
+		Editor.updateObjectViews();
 		Editor.resetEditingFlags();
 	}
 }
@@ -601,7 +604,7 @@ Editor.cutSelectedObject = function()
 			if(Editor.selected_object.parent !== null)
 			{
 				Editor.selected_object.parent.remove(Editor.selected_object);
-				Editor.updateTreeView();
+				Editor.updateObjectViews();
 				Editor.resetEditingFlags();
 			}
 		}
@@ -632,7 +635,7 @@ Editor.pasteIntoSelectedObject = function()
 		{
 			Editor.program.scene.add(obj);
 		}
-		Editor.updateTreeView();
+		Editor.updateObjectViews();
 	}
 	catch(e){}
 }
@@ -643,7 +646,7 @@ Editor.deleteSelectedObject = function()
 	if(Editor.selected_object.parent !== null)
 	{
 		Editor.selected_object.parent.remove(Editor.selected_object);
-		Editor.updateTreeView();
+		Editor.updateObjectViews();
 		Editor.resetEditingFlags();
 	}
 }
@@ -714,12 +717,25 @@ Editor.updateSelectedObjectUI = function()
 	Interface.panel.updateInterface();
 }
 
+//Update all object views
+Editor.updateObjectViews = function()
+{
+	Editor.updateTreeView();
+	Editor.updateAssetExplorer();
+	Editor.updateObjectPanel();
+}
+
 //Update tree view to match actual scene
 Editor.updateTreeView = function()
 {
+	//Update tree view from program
 	Interface.tree_view.fromObject(Editor.program);
+}
 
-
+//Update assets explorer
+Editor.updateAssetExplorer = function()
+{
+	//Clean asset explorer
 	Interface.asset_explorer.clear();
 	
 	//Get material list
@@ -731,26 +747,23 @@ Editor.updateTreeView = function()
 		Interface.asset_explorer.add(materials[i].name, "editor/files/icons/misc/material.png");
 	}
 
-	//Else for test
-	for(var i = 0; i < 3; i++)
-	{
-		Interface.asset_explorer.add("Texture " + i, "data/sample.png");
-	}
-
 	Interface.asset_explorer.updateInterface();
 }
 
 //Updates object panel values
 Editor.updateObjectPanel = function()
 {
-	Interface.panel.updatePanel();
+	if(Interface.panel !== null)
+	{
+		Interface.panel.updatePanel();
+	}
 }
 
 //Add object to actual scene
 Editor.addToActualScene = function(obj)
 {
 	Editor.program.scene.add(obj);
-	Editor.updateTreeView();
+	Editor.updateObjectViews();
 }
 
 //Show apropiate helper to selected object
@@ -902,7 +915,7 @@ Editor.loadProgram = function(fname)
 	
 	Editor.program = program;
 	Editor.resetEditingFlags();
-	Editor.updateTreeView();
+	Editor.updateObjectViews();
 	
 	//Remove old tabs from interface
 	Interface.tab.clear();
@@ -984,12 +997,13 @@ Editor.setRenderCanvas = function(canvas)
 	Editor.initializeRenderer(canvas);
 }
 
+//Initialize renderer
 Editor.initializeRenderer = function(canvas)
 {
-	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas});
-	Editor.renderer.autoClear = false;;
+	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: false});
+	Editor.renderer.autoClear = false;
 	Editor.renderer.shadowMap.enabled = true;
-	Editor.renderer.shadowMap.type = THREE.PCFSoftShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
+	Editor.renderer.shadowMap.type = THREE.PCFShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
 	Editor.renderer.setSize(canvas.width, canvas.height);
 }
 

@@ -22,7 +22,7 @@ function SpotLightPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.name = self.name.getText();
-			Editor.updateTreeView();
+			Editor.updateObjectViews();
 		}
 	});
 
@@ -178,6 +178,20 @@ function SpotLightPanel(parent)
 			self.obj.castShadow = self.cast_shadow.getValue();
 		}
 	});
+
+	//Visible
+	this.visible = new Checkbox(this.element);
+	this.visible.setText("Visible");
+	this.visible.size.set(200, 15);
+	this.visible.position.set(2, 210);
+	this.visible.updateInterface();
+	this.visible.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.visible = self.visible.getValue();
+		}
+	});
 }
 
 //Functions Prototype
@@ -201,6 +215,7 @@ function updatePanel()
 		this.penumbra_text.setText(this.obj.penumbra);
 		this.decay.setValue(this.obj.decay);
 		this.decay_text.setText(this.obj.decay);
+		this.visible.setValue(this.obj.visible);
 	}
 }
 

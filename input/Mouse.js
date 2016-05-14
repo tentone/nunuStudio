@@ -166,4 +166,3 @@ Mouse.toString = function()
 	return "Pos:" + Mouse.pos.x + "," + Mouse.pos.y + " Diff:" + Mouse.pos_diff.toString() + "\n   Left: " + Mouse.keys[0].toString() +
 		"\n   Middle: " + Mouse.keys[1].toString() + "\n   Right: " + Mouse.keys[2].toString();
 }
-

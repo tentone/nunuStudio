@@ -263,7 +263,7 @@ Interface.initialize = function()
 	Interface.tree_view.updateInterface();
 
 	//Object panel variables
-	Interface.panel = new Form(Interface.explorer_resizable.div_b);
+	Interface.panel = new Panel(Interface.explorer_resizable.div_b);
 
 	//------------------------------------Tool Bar------------------------------------
 	Interface.tool_bar = new Division();
@@ -398,7 +398,7 @@ Interface.initialize = function()
 	//Sphere
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/sphere.png", function()
 	{
-		var geometry = new THREE.SphereBufferGeometry(1, 16, 16);
+		var geometry = new THREE.SphereBufferGeometry(1, 32, 32);
 		var model = new Model3D(geometry, Editor.default_material);
 		model.receiveShadow = true;
 		model.castShadow = true;
@@ -409,7 +409,7 @@ Interface.initialize = function()
 	//Torus
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/torus.png", function()
 	{
-		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 100);
+		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 96);
 		var model = new Model3D(geometry, Editor.default_material);
 		model.receiveShadow = true;
 		model.castShadow = true;
@@ -608,8 +608,8 @@ Interface.initialize = function()
 
 	//Editor Logo
 	Interface.image = new Image();
-	Interface.image.setImage("data/logo.png");
-	Interface.image.size.set(120, 15);
+	Interface.image.setImage("editor/files/logo.png");
+	Interface.image.size.set(108, 18);
 	Interface.image.updateInterface();
 
 	//File
@@ -731,7 +731,7 @@ Interface.initialize = function()
 	Interface.project.addOption("Create Scene", function()
 	{
 		Editor.program.addDefaultScene();
-		Editor.updateTreeView();
+		Editor.updateObjectViews();
 	}, Interface.file_dir + "icons/misc/add.png");
 
 	//About
@@ -742,7 +742,26 @@ Interface.initialize = function()
 	Interface.about.updateInterface();
 	Interface.about.setCallback(function()
 	{
-		//TODO <ADD CODE HERE>
+		//Check if there is already a settings tab
+		var found = false;
+		for(var i = 0; i < Interface.tab.options.length; i++)
+		{
+			if(Interface.tab.options[i].component instanceof AboutTab)
+			{
+				found = true;
+				Interface.tab.options[i].select();
+				break;
+			}
+		}
+
+		//If not create one
+		if(!found)
+		{
+			var tab = Interface.tab.addOption("About", Interface.file_dir + "icons/misc/about.png", true);
+			var settings = new AboutTab(tab.element);
+			tab.attachComponent(settings);
+			tab.select();
+		}
 	});
 
 	//Run
@@ -786,7 +805,7 @@ Interface.updateInterface = function()
 	Interface.top_bar.updateInterface();
 
 	//Logo
-	Interface.image.position.set(size.x - Interface.image.size.x, 5);
+	Interface.image.position.set(size.x - Interface.image.size.x, 3);
 	Interface.image.updateInterface();
 
 	//------------------------------------Tool Bar------------------------------------
@@ -875,6 +894,6 @@ Interface.newProgram = function()
 	if(confirm("All unsaved changes to the project will be lost! Create new File?"))
 	{
 		Editor.createNewProgram();
-		Editor.updateTreeView();
+		Editor.updateObjectViews();
 	}
 }
