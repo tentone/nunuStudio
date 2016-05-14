@@ -1,4 +1,4 @@
-include("lib/three/three.js");
+include("lib/three/three.min.js");
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/VRMLLoader.js");
@@ -8,12 +8,12 @@ include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
-include("lib/three/cameras/CinematicCamera.js");
+//include("lib/three/cameras/CinematicCamera.js");
 
-include("lib/three/vr/VRControls.js");
-include("lib/three/vr/VREffect.js");
-include("lib/three/vr/webvr-manager.js");
-include("lib/three/vr/webvr-polyfill.js");
+//include("lib/three/vr/VRControls.js");
+//include("lib/three/vr/VREffect.js");
+//include("lib/three/vr/webvr-manager.js");
+//include("lib/three/vr/webvr-polyfill.js");
 
 include("lib/leap/leap-0.6.4.min.js");
 

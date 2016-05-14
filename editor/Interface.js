@@ -694,7 +694,7 @@ Interface.initialize = function()
 		{
 			Editor.exit();
 		}
-	});
+	}, Interface.file_dir + "icons/misc/exit.png");
 
 	//Editor
 	Interface.editor = new DropdownMenu();
