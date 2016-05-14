@@ -22,7 +22,7 @@ function AmbientLightPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.name = self.name.getText();
-			Editor.updateTreeView();
+			Editor.updateObjectViews();
 		}
 	});
 
@@ -45,6 +45,20 @@ function AmbientLightPanel(parent)
 			self.obj.color.setRGB(color.r, color.g, color.b);
 		}
 	});
+
+	//Visible
+	this.visible = new Checkbox(this.element);
+	this.visible.setText("Visible");
+	this.visible.size.set(200, 15);
+	this.visible.position.set(2, 60);
+	this.visible.updateInterface();
+	this.visible.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.visible = self.visible.getValue();
+		}
+	});
 }
 
 //Functions Prototype
@@ -59,6 +73,7 @@ function updatePanel()
 	{
 		this.name.setText(this.obj.name);
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
+		this.visible.setValue(this.visible);
 	}
 }
 

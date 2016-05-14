@@ -21,7 +21,7 @@ function SkyPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.name = self.name.getText();
-			Editor.updateTreeView();
+			Editor.updateObjectViews();
 		}
 	});
 
@@ -50,6 +50,7 @@ function SkyPanel(parent)
 	this.day_time = new Numberbox(this.element);
 	this.day_time.size.set(100, 18);
 	this.day_time.position.set(95, 60);
+	this.day_time.setStep(0.1);
 	this.day_time.updateInterface();
 	this.day_time.setOnChange(function()
 	{
@@ -57,13 +58,11 @@ function SkyPanel(parent)
 		{
 			//Check and set day time
 			var day_time = self.day_time.getValue();
-
 			if(day_time < 0)
 			{
 				day_time = 0;
 				self.day_time.setValue(day_time);
 			}
-
 			self.obj.day_time = day_time;
 
 			//Check actual time
@@ -73,6 +72,7 @@ function SkyPanel(parent)
 				self.time.setValue(day_time);
 			}
 
+			self.time.setRange(0, day_time);
 			self.obj.updateSky();
 		}
 	});
@@ -88,6 +88,7 @@ function SkyPanel(parent)
 	this.time = new Numberbox(this.element);
 	this.time.size.set(100, 18);
 	this.time.position.set(55, 85);
+	this.time.setStep(0.1);
 	this.time.updateInterface();
 	this.time.setOnChange(function()
 	{

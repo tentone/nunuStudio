@@ -21,7 +21,7 @@ function ObjectPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.name = self.name.getText();
-			Editor.updateTreeView();
+			Editor.updateObjectViews();
 		}
 	});
 
@@ -41,6 +41,7 @@ function ObjectPanel(parent)
 		{
 			var position = self.pos.getValue();
 			self.obj.position.set(position.x, position.y, position.z);
+			self.obj.updateMatrix();
 		}
 	});
 
@@ -60,6 +61,7 @@ function ObjectPanel(parent)
 		{
 			var scale = self.scale.getValue();
 			self.obj.scale.set(scale.x, scale.y, scale.z);
+			self.obj.updateMatrix();
 		}
 	});
 
@@ -79,6 +81,35 @@ function ObjectPanel(parent)
 		{
 			var rotation = self.rotation.getValue();
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
+			self.obj.updateMatrix();
+		}
+	});
+
+	//Visible
+	this.visible = new Checkbox(this.element);
+	this.visible.setText("Visible");
+	this.visible.size.set(200, 15);
+	this.visible.position.set(2, 110);
+	this.visible.updateInterface();
+	this.visible.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.visible = self.visible.getValue();
+		}
+	});
+
+	//Static
+	this.static = new Checkbox(this.element);
+	this.static.setText("Static Object");
+	this.static.size.set(200, 15);
+	this.static.position.set(2, 135);
+	this.static.updateInterface();
+	this.static.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.matrixAutoUpdate = !(self.static.getValue());
 		}
 	});
 
@@ -86,7 +117,7 @@ function ObjectPanel(parent)
 	this.cast_shadow = new Checkbox(this.element);
 	this.cast_shadow.setText("Cast Shadow");
 	this.cast_shadow.size.set(200, 15);
-	this.cast_shadow.position.set(2, 110);
+	this.cast_shadow.position.set(2, 160);
 	this.cast_shadow.updateInterface();
 	this.cast_shadow.setOnChange(function()
 	{
@@ -100,7 +131,7 @@ function ObjectPanel(parent)
 	this.receive_shadow = new Checkbox(this.element);
 	this.receive_shadow.setText("Receive Shadow");
 	this.receive_shadow.size.set(200, 15);
-	this.receive_shadow.position.set(2, 135);
+	this.receive_shadow.position.set(2, 185);
 	this.receive_shadow.updateInterface();
 	this.receive_shadow.setOnChange(function()
 	{
@@ -114,13 +145,13 @@ function ObjectPanel(parent)
 	text = new Text(this.element);
 	text.setAlignment(Text.LEFT);
 	text.setText("Type");
-	text.position.set(5, 170);
+	text.position.set(5, 220);
 	text.updateInterface();
 
 	this.type = new Text(this.element);
 	this.type.setAlignment(Text.LEFT);
 	this.type.setText("");
-	this.type.position.set(35, 170);
+	this.type.position.set(35, 220);
 	this.type.updateInterface();
 
 }
@@ -139,6 +170,8 @@ function updatePanel()
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
+		this.visible.setValue(this.obj.visible);
+		this.static.setValue(!this.obj.matrixAutoUpdate);
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.receive_shadow.setValue(this.obj.receiveShadow);
 		this.type.setText(this.obj.type);

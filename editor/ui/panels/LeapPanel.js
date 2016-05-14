@@ -22,7 +22,7 @@ function LeapPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.name = self.name.getText();
-			Editor.updateTreeView();
+			Editor.updateObjectViews();
 		}
 	});
 

@@ -35,6 +35,9 @@ function File(parent)
 
 	//Icon scale
 	this.scale = new THREE.Vector2(0.6, 0.6);
+	
+	//Attached object
+	this.obj = null;
 
 	//Click event
 	var self = this;
@@ -60,7 +63,11 @@ function File(parent)
 		
 		context.addOption("Rename", function()
 		{
-			//TODO <ADD CODE HERE>
+			if(self.obj !== null)
+			{
+				self.obj.name = prompt("Rename object", self.obj.name);
+				Editor.updateObjectPanel();
+			}
 		});
 		context.addOption("Delete", function()
 		{
@@ -122,6 +129,11 @@ function setIcon(image)
 //Set file label
 function setText(text)
 {
+	if(text.length > 8)
+	{
+		text = text.slice(0,8) + "...";
+	}
+
 	this.text.setText(text);
 }
 

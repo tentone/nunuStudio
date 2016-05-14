@@ -17,7 +17,6 @@ function Positionbox(parent)
 	//Create element
 	this.element = document.createElement("div");
 	this.element.type = "text";
-	//this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//X Text

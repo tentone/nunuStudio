@@ -1,4 +1,4 @@
-function Image(parent)
+function Imagebox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,18 +11,35 @@ function Image(parent)
 	}
 
 	//ID
-	var id = "img" + Image.id;
-	Image.id++;
+	var id = "img_box" + Imagebox.id;
+	Imagebox.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 
-	//Prevent Drop event
+	//Image
+	this.img = document.createElement("img");
+	this.img.style.position = "absolute";
+	this.element.appendChild(this.img);
+
+	//Self pointer
+	var self = this;
+
+	//On drop get file dropped
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
+
+		//Get first file from event
+		var file = event.dataTransfer.files[0];
+
+		//Check if its a image
+		if(file.type.startsWith("image"))
+		{
+			self.setImage(file.path);
+			self.onchange(file.path);
+		}
 	};
 
 	//Prevent deafault when object dragged over
@@ -31,14 +48,21 @@ function Image(parent)
 		event.preventDefault();
 	};
 
-	//Image
-	this.img = document.createElement("img");
-	this.img.style.position = "absolute";
-	this.img.style.top = "0px";
-	this.img.style.left = "0px";
-	
-	//Add image to div
-	this.element.appendChild(this.img);
+	//Onclick select image file
+	this.element.onclick = function()
+	{
+		if(self.onchange !== null)
+		{
+			App.chooseFile(function(file)
+			{
+				self.setImage(file);
+				self.onchange(file);
+			}, "image/*");
+		}
+	};
+
+	//On change function
+	this.onchange = null;
 
 	//Element atributes
 	this.fit_parent = false;
@@ -54,20 +78,21 @@ function Image(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Image ID counter
-Image.id = 0;
+//Imagebox ID counter
+Imagebox.id = 0;
 
 //Functions Prototype
-Image.prototype.setImage = setImage;
-Image.prototype.setCallback = setCallback;
-Image.prototype.update = update;
-Image.prototype.updateInterface = updateInterface;
-Image.prototype.destroy = destroy;
+Imagebox.prototype.setImage = setImage;
+Imagebox.prototype.getValue = getValue;
+Imagebox.prototype.update = update;
+Imagebox.prototype.updateInterface = updateInterface;
+Imagebox.prototype.destroy = destroy;
+Imagebox.prototype.setOnChange = setOnChange;
 
 //Set image onclick callback function
-function setCallback(callback)
+function setOnChange(callback)
 {
-	this.element.onclick = callback;
+	this.onchange = callback;
 }
 
 //Remove element
@@ -83,10 +108,16 @@ function destroy()
 //Update
 function update(){}
 
-//Set Image
-function setImage(image)
+//Set image from URL
+function setImage(url)
 {
-	this.img.src = image;
+	this.img.src = url;
+}
+
+//Get image URL
+function getValue()
+{
+	return this.img.src;
 }
 
 //Update Interface

@@ -17,7 +17,6 @@ function DropdownList(parent)
 	//Create element
 	this.element = document.createElement("select");
 	this.element.className = "text_box";
-	//this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//Element atributes

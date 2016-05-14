@@ -1,8 +1,9 @@
 {
-	"name": "interact",
+	"name": "nunu",
 	"main": "editor.html",
 	"window":
 	{
+		"icon": "editor/files/icon.png",
 		"frame": true,
 		"width": 1280,
 		"height": 720,
