@@ -18,6 +18,12 @@ function Imagebox(parent)
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 
+	//Alpha background
+	this.alpha = document.createElement("img");
+	this.alpha.style.position = "absolute";
+	this.alpha.src = "editor/files/alpha.png";
+	this.element.appendChild(this.alpha);
+
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.position = "absolute";
@@ -135,11 +141,13 @@ function updateInterface()
 	{
 		this.element.style.visibility = "visible";
 		this.img.style.visibility = "visible";
+		this.alpha.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 		this.img.style.visibility = "hidden";
+		this.alpha.style.visibility = "hidden";
 	}
 
 	var image = this.size.clone();
@@ -163,6 +171,11 @@ function updateInterface()
 	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
 	
+	this.alpha.width = this.size.x * this.image_scale.x;
+	this.alpha.height = this.size.y * this.image_scale.y;
+	this.alpha.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
+	this.alpha.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
+
 	//Update base element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
