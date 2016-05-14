@@ -6,7 +6,7 @@
 	},
 	"geometries": [
 		{
-			"uuid": "165AB517-3C4C-4B54-B24E-EC65DA7D916D",
+			"uuid": "6A0DF805-6C8A-4D01-A367-7C871F5336C6",
 			"type": "SphereGeometry",
 			"radius": 4000,
 			"widthSegments": 32,
@@ -81,11 +81,19 @@
 			"radius": 1,
 			"widthSegments": 16,
 			"heightSegments": 16
+		},
+		{
+			"uuid": "FD894FC3-5166-46E5-8A0D-C59F6B96C90C",
+			"type": "BoxBufferGeometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
 		}],
 	"materials": [
 		{
-			"uuid": "1ED94001-89BE-42DF-A7CD-B8B345902C45",
+			"uuid": "3EF0C940-45B7-4ADD-9C92-2BB50A383FD7",
 			"type": "ShaderMaterial",
+			"name": "sky",
 			"side": 1,
 			"uniforms": {
 				"top_color": {
@@ -179,6 +187,15 @@
 			"emissive": 0,
 			"specular": 1118481,
 			"shininess": 30
+		},
+		{
+			"uuid": "AE1AB3EF-9905-4145-9CAF-F0460F7A8683",
+			"type": "MeshPhongMaterial",
+			"name": "default",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 4473924,
+			"shininess": 60
 		}],
 	"object": {
 		"folded": false,
@@ -217,14 +234,14 @@
 						"receiveShadow": false,
 						"visible": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "165AB517-3C4C-4B54-B24E-EC65DA7D916D",
-						"material": "1ED94001-89BE-42DF-A7CD-B8B345902C45"
+						"geometry": "6A0DF805-6C8A-4D01-A367-7C871F5336C6",
+						"material": "3EF0C940-45B7-4ADD-9C92-2BB50A383FD7"
 					},
 					{
 						"uuid": "A3C30F4D-E590-4F3E-BC50-55FCE4704F9A",
 						"type": "Mesh",
 						"name": "ground",
-						"folded": true,
+						"folded": false,
 						"castShadow": true,
 						"receiveShadow": true,
 						"visible": true,
@@ -242,7 +259,7 @@
 								"visible": true,
 								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 								"mode": 0,
-								"code": "var texture = new Texture(\"data/texture/normal.jpg\");\nthis.parent.material = new THREE.MeshPhongMaterial({normalMap:texture, color:0xffffff, specular:0xffffff, shininess:100});\n"
+								"code": "var texture = new Texture(\"data/texture/crate_normal.png\");\nthis.parent.material = new THREE.MeshPhongMaterial({normalMap:texture, color:0xffffff, specular:0xffffff, shininess:100});\n"
 							}]
 					},
 					{
@@ -563,6 +580,31 @@
 						"receiveShadow": false,
 						"visible": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,9.540132522583008,-1.4175400733947754,-8.495237350463867,1]
+					},
+					{
+						"uuid": "CDDA5476-D961-4323-9953-FCCD002E63E6",
+						"type": "Mesh",
+						"name": "cube",
+						"folded": false,
+						"castShadow": true,
+						"receiveShadow": true,
+						"visible": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-4.670988082885742,0,0,1],
+						"geometry": "FD894FC3-5166-46E5-8A0D-C59F6B96C90C",
+						"material": "AE1AB3EF-9905-4145-9CAF-F0460F7A8683",
+						"children": [
+							{
+								"uuid": "5507024A-4DF2-48EB-9860-547D7B741519",
+								"type": "Script",
+								"name": "material ground",
+								"folded": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 0,
+								"code": "var texture = new TextTexture();\nthis.parent.material = new THREE.MeshPhongMaterial({transparent:true, map:texture, color:0xffffff, specular:0xffffff, shininess:100});\n"
+							}]
 					}],
 				"fog_color": 16777215,
 				"fog_density": 0.001,

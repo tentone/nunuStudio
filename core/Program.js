@@ -158,8 +158,15 @@ function setInitialScene(scene)
 }
 
 //Create a default scene with sky
-function addDefaultScene()
+function addDefaultScene(material)
 {
+	if(material === undefined)
+	{
+		material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
+		material.name = "default";
+	}
+
+	//Create new scene
 	var scene = new Scene();
 
 	//Sky
@@ -167,11 +174,8 @@ function addDefaultScene()
 	sky.auto_update = false;
 	scene.add(sky);
 
-	var material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
-	material.name = "default";
-	var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-
 	//Box
+	var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 	var model = new Model3D(geometry, material);
 	model.receiveShadow = true;
 	model.castShadow = true;
