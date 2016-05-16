@@ -103,13 +103,13 @@ function MaterialEditor(parent)
 	text = new Text(this.main.div_b);
 	text.setAlignment(Text.LEFT);
 	text.setText("Test Model");
-	text.position.set(210, 45);
+	text.position.set(10, 45);
 	text.size.set(200, 0);
 	text.updateInterface();
 	this.children.push(text);
 
 	this.test_model = new DropdownList(this.main.div_b);
-	this.test_model.position.set(295, 35);
+	this.test_model.position.set(80, 35);
 	this.test_model.size.set(150, 18);
 	this.test_model.addValue("Sphere", 0);
 	this.test_model.addValue("Torus", 1);
@@ -144,7 +144,7 @@ function MaterialEditor(parent)
 	this.children.push(this.test_model);
 
 	//Type
-	text = new Text(this.main.div_b);
+	/*text = new Text(this.main.div_b);
 	text.setAlignment(Text.LEFT);
 	text.setText("Material Type");
 	text.position.set(10, 45);
@@ -171,7 +171,7 @@ function MaterialEditor(parent)
 			//TODO <ADD CODE HERE>
 		}
 	});
-	this.children.push(this.type);
+	this.children.push(this.type);*/
 
 	//Transparent
 	this.transparent = new Checkbox(this.main.div_b);
@@ -585,6 +585,14 @@ MaterialEditor.prototype.update = update;
 MaterialEditor.prototype.updateInterface = updateInterface;
 MaterialEditor.prototype.destroy = destroy;
 MaterialEditor.prototype.activate = activate;
+MaterialEditor.prototype.attachMaterial = attachMaterial;
+
+//Attach material to material editor
+function attachMaterial(material)
+{
+	this.material = material;
+	this.obj.material = material;
+}
 
 //Activate code editor
 function activate()

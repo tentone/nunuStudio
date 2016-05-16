@@ -76,8 +76,9 @@ function add(text, icon)
 	file.setIcon(icon);
 	file.updateInterface();
 
-	//Add file
 	this.files.push(file);
+
+	return file;
 }
 
 //Remove element

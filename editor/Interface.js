@@ -23,8 +23,7 @@ Interface.initialize = function()
 	canvas.setScene(Editor.program.scene);
 	scene.attachComponent(canvas);
 
-	//TODO <REMOVE THIS>
-	var material_tab = Interface.tab.addOption("Material", Interface.file_dir + "icons/misc/material.png", false);
+	var material_tab = Interface.tab.addOption("material", Interface.file_dir + "icons/misc/material.png", true);
 	var material_editor = new MaterialEditor();
 	material_tab.attachComponent(material_editor);
 	

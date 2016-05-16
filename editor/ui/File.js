@@ -54,6 +54,40 @@ function File(parent)
 		self.element.className = "";
 	};
 
+	//Double click
+	this.element.ondblclick = function()
+	{
+		if(self.obj instanceof THREE.Material)
+		{
+			//Check if there is already a tab with this script attached
+			var found = false;
+			for(var i = 0; i < Interface.tab.options.length; i++)
+			{
+				if(Interface.tab.options[i].component instanceof MaterialEditor)
+				{
+					if(Interface.tab.options[i].component.material === self.obj)
+					{
+						found = true;
+						Interface.tab.selectOption(i);
+						break;
+					}
+				}
+			}
+
+			//If not found open new tab
+			if(!found)
+			{
+				var tab = Interface.tab.addOption(self.obj.name, Interface.file_dir + "icons/misc/material.png", true);
+				var material = new MaterialEditor();
+				material.attachMaterial(self.obj);
+				tab.attachComponent(material);
+				
+				//Select added tab
+				tab.select();
+			}
+		}
+	};
+
 	//Context menu event
 	this.element.oncontextmenu = function(event)
 	{
@@ -119,6 +153,14 @@ File.prototype.destroy = destroy;
 File.prototype.setIcon = setIcon;
 File.prototype.setText = setText;
 File.prototype.setCallback = setCallback;
+File.prototype.setObject = setObject;
+
+//Set object to file
+function setObject(obj)
+{
+	this.obj = obj;
+	this.setText(obj.name);
+}
 
 //Set file icon
 function setIcon(image)
