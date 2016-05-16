@@ -51,7 +51,19 @@ function OrthographicCameraPanel(parent)
 	text.position.set(5, 70);
 	text.updateInterface();
 
-	this.rotation = new Slider(this.element);
+	this.rotation = new Positionbox(this.element);
+	this.rotation.position.set(57, 60);
+	this.rotation.updateInterface();
+	this.rotation.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			var rotation = self.rotation.getValue();
+			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
+		}
+	});
+
+	/*this.rotation = new Slider(this.element);
 	this.rotation.size.set(150, 18);
 	this.rotation.position.set(65, 60);
 	this.rotation.setRange(-3.14, 3.14);
@@ -70,7 +82,7 @@ function OrthographicCameraPanel(parent)
 	this.rotation_text = new Text(this.element);
 	this.rotation_text.setAlignment(Text.LEFT);
 	this.rotation_text.position.set(230, 70);
-	this.rotation_text.updateInterface();
+	this.rotation_text.updateInterface();*/
 
 	//Size
 	text = new Text(this.element);
@@ -151,8 +163,8 @@ function updatePanel()
 	{
 		this.name.setText(this.obj.name);
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
-		this.rotation.setValue(this.obj.rotation.z);
-		this.rotation_text.setText(this.obj.rotation.z);
+		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
+		//this.rotation_text.setText(this.obj.rotation.z);
 		this.size.setValue(this.obj.size);
 		this.mode.setSelectedIndex(this.obj.mode);
 		this.default.setValue(ObjectUtils.getScene(this.obj).initial_camera === this.obj.uuid);

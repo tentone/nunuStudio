@@ -744,7 +744,8 @@ Editor.updateAssetExplorer = function()
 	//Add materials to asset explorer
 	for(var i = 0; i < materials.length; i++)
 	{
-		Interface.asset_explorer.add(materials[i].name, "editor/files/icons/misc/material.png");
+		var file = Interface.asset_explorer.add(materials[i].name, "editor/files/icons/misc/material.png");
+		file.setObject(materials[i]);
 	}
 
 	Interface.asset_explorer.updateInterface();
