@@ -57,7 +57,7 @@ function MaterialEditor(parent)
 	this.visible = true;
 	
 	//Attached material
-	this.material = new THREE.MeshPhongMaterial();
+	this.material = null;
 
 	//Material renderer and scene
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: true});
@@ -619,7 +619,11 @@ function destroy()
 function update()
 {
 	this.main.update();
-	this.renderer.render(this.scene, this.camera);
+	
+	if(this.material !== null)
+	{
+		this.renderer.render(this.scene, this.camera);
+	}
 
 	if(Mouse.insideCanvas())
 	{

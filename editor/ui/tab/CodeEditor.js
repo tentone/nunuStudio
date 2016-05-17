@@ -24,7 +24,7 @@ function CodeEditor(parent)
 	this.code = new CodeMirror(this.element, {value:"", lineNumbers:true, indentWithTabs:true, indentUnit:4, tabSize:4, mode:"javascript"});
 	this.code.setOption("theme", "monokai");
 	this.code.setOption("mode", "javascript");
-
+	
 	//Code changed event
 	var self = this;
 	this.code.on("change", function()
@@ -39,6 +39,27 @@ function CodeEditor(parent)
 		context.size.set(130, 20);
 		context.position.set(event.clientX - 5, event.clientY - 5);
 		
+		context.addOption("Copy", function()
+		{
+			var text = self.code.getSelection();
+			if(text !== "")
+			{
+				App.clipboard.set(text, "text");
+			}
+		});
+		context.addOption("Cut", function()
+		{
+			var text = self.code.getSelection();
+			if(text !== "")
+			{
+				App.clipboard.set(text, "text");
+				self.code.replaceSelection("");
+			}
+		});
+		context.addOption("Paste", function()
+		{
+			self.code.replaceSelection(App.clipboard.get("text"));
+		});
 		context.addOption("Auto ident", function()
 		{
 			self.code.execCommand("indentAuto");

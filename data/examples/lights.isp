@@ -1,12 +1,11 @@
 {
 	"metadata": {
-		"version": 4.4,
-		"type": "Object",
-		"generator": "Object3D.toJSON"
+		"version": 1,
+		"type": "NunuProgram"
 	},
 	"geometries": [
 		{
-			"uuid": "6A0DF805-6C8A-4D01-A367-7C871F5336C6",
+			"uuid": "6C27F9EA-3F5A-40C0-BBF4-6EC2A9E3D88D",
 			"type": "SphereGeometry",
 			"radius": 4000,
 			"widthSegments": 32,
@@ -85,13 +84,14 @@
 		{
 			"uuid": "FD894FC3-5166-46E5-8A0D-C59F6B96C90C",
 			"type": "BoxBufferGeometry",
+			"name": "geometry",
 			"width": 1,
 			"height": 1,
 			"depth": 1
 		}],
 	"materials": [
 		{
-			"uuid": "3EF0C940-45B7-4ADD-9C92-2BB50A383FD7",
+			"uuid": "0DB56CAD-410D-4737-9E24-38D59352A0B2",
 			"type": "ShaderMaterial",
 			"name": "sky",
 			"side": 1,
@@ -234,8 +234,8 @@
 						"receiveShadow": false,
 						"visible": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-						"geometry": "6A0DF805-6C8A-4D01-A367-7C871F5336C6",
-						"material": "3EF0C940-45B7-4ADD-9C92-2BB50A383FD7"
+						"geometry": "6C27F9EA-3F5A-40C0-BBF4-6EC2A9E3D88D",
+						"material": "0DB56CAD-410D-4737-9E24-38D59352A0B2"
 					},
 					{
 						"uuid": "A3C30F4D-E590-4F3E-BC50-55FCE4704F9A",
