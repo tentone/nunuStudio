@@ -70,9 +70,17 @@ function MaterialEditor(parent)
 
 	//Material preview scene
 	this.scene = new Scene();
-	this.obj = new Model3D(new THREE.SphereBufferGeometry(1, 64, 64), this.material);
+	
+	this.obj = new Model3D(new THREE.SphereBufferGeometry(1, 64, 64), null);
 	this.obj.position.set(0, 0, -2.5);
+	this.obj.visible = false;
 	this.scene.add(this.obj);
+	
+	/*this.sprite = new Sprite(null);
+	this.sprite.position.set(0, 0, -2.5);
+	this.sprite.visible = false;
+	this.scene.add(this.sprite);*/
+
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x333333));
 	this.scene.add(new Sky());
@@ -592,6 +600,8 @@ function attachMaterial(material)
 {
 	this.material = material;
 	this.obj.material = material;
+	this.obj.visible = true;
+	this.sprite.visible = false;
 }
 
 //Activate code editor
