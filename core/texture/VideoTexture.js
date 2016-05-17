@@ -13,7 +13,7 @@ function VideoTexture(url)
 
 	//Create Texture part of object
 	THREE.Texture.call(this, this.video);
-	
+
 	//Dont generate mipmaps
 	this.generateMipmaps = false;
 }

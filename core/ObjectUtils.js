@@ -14,7 +14,7 @@ ObjectUtils.getMaterials = function(obj, materials)
 	for(var i = 0; i < obj.children.length; i++)
 	{
 		var child = obj.children[i];
-		if(child instanceof THREE.Mesh)
+		if(child instanceof THREE.Mesh || child instanceof THREE.Sprite)
 		{
 			var material = child.material;
 			if(materials.indexOf(material) === -1)

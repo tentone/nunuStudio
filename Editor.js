@@ -131,9 +131,11 @@ Editor.initialize = function(canvas)
 	Editor.canvas = null;
 
 	//Default material to be used when creating objects
-	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x444444, shininess:60});
+	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
 	Editor.default_material.name = "default";
-	
+	Editor.default_sprite_material = new THREE.SpriteMaterial({map: new Texture("data/sample.png"), color: 0xffffff});
+	Editor.default_sprite_material.name = "sprite";
+
 	//Initialize User Interface
 	Interface.initialize();
 
@@ -971,8 +973,13 @@ Editor.setState = function(state)
 {
 	if(state === Editor.STATE_EDITING)
 	{
-		//Clean program running varible
-		Editor.program_running = null;
+		//Dispose running program if there is one
+		if(Editor.program_running !== null)
+		{
+			Editor.program_running.dispose();
+			Editor.program_running = null;
+		}
+
 	}
 	else if(state === Editor.STATE_TESTING)
 	{

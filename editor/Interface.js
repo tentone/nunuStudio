@@ -23,10 +23,6 @@ Interface.initialize = function()
 	canvas.setScene(Editor.program.scene);
 	scene.attachComponent(canvas);
 
-	var material_tab = Interface.tab.addOption("material", Interface.file_dir + "icons/misc/material.png", true);
-	var material_editor = new MaterialEditor();
-	material_tab.attachComponent(material_editor);
-	
 	//Set render canvas
 	Editor.setRenderCanvas(canvas.element);
 
@@ -55,7 +51,7 @@ Interface.initialize = function()
 	Interface.asset_file.size.set(100, Interface.asset_explorer_bar.size.y);
 	Interface.asset_file.position.set(0,0);
 	
-	var import_models = Interface.asset_file.addMenu("3D Models");
+	var import_models = Interface.asset_file.addMenu("3D Models", Interface.file_dir + "icons/models/models.png");
 	import_models.addOption("Wavefront", function()
 	{
 		App.chooseFile(function(fname)
@@ -184,7 +180,7 @@ Interface.initialize = function()
 				alert("Error loading file\n("+e+")");
 			}
 		}, "image/*");
-	});
+	}, Interface.file_dir + "icons/assets/image.png");
 
 	//Load Video texture
 	Interface.asset_file.addOption("Video", function()
@@ -203,7 +199,7 @@ Interface.initialize = function()
 				alert("Error loading file\n("+e+")");
 			}
 		}, "video/*");
-	});
+	}, Interface.file_dir + "icons/assets/video.png");
 
 	//Load audio file
 	Interface.asset_file.addOption("Audio", function()
@@ -212,7 +208,7 @@ Interface.initialize = function()
 		{
 			//TODO <ADD CODE HERE>
 		}, "audio/*");
-	});
+	}, Interface.file_dir + "icons/assets/audio.png");
 
 	//Create new
 	Interface.asset_create = new DropdownMenu(Interface.asset_explorer_bar.element);
@@ -223,9 +219,9 @@ Interface.initialize = function()
 	Interface.asset_create.addOption("Script", function()
 	{
 		//TODO <ADD CODE HERE>
-	});
+	}, Interface.file_dir + "icons/script/script.png");
 
-	var asset_create_material = Interface.asset_create.addMenu("Material");
+	var asset_create_material = Interface.asset_create.addMenu("Material", Interface.file_dir + "icons/misc/material.png");
 	asset_create_material.addOption("Phong material", function()
 	{
 		//TODO <ADD CODE HERE>
@@ -553,13 +549,10 @@ Interface.initialize = function()
 	//Sprite
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/sprite.png", function()
 	{
-		var map = new Texture("data/sample.png");
-		var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
-		var sprite = new Sprite(material);
-		Editor.addToActualScene(sprite);
+		Editor.addToActualScene(new Sprite(Editor.default_sprite_material));
 	});
 
-	//Particles
+	//Particle emitter
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/particles.png", function()
 	{
 		Editor.addToActualScene(new ParticleEmitter());
