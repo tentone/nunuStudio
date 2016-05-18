@@ -76,10 +76,10 @@ function MaterialEditor(parent)
 	this.obj.visible = false;
 	this.scene.add(this.obj);
 	
-	/*this.sprite = new Sprite(null);
+	this.sprite = new Sprite(null);
 	this.sprite.position.set(0, 0, -2.5);
 	this.sprite.visible = false;
-	this.scene.add(this.sprite);*/
+	this.scene.add(this.sprite);
 
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x333333));
@@ -131,7 +131,7 @@ function MaterialEditor(parent)
 		//Sphere
 		if(value === 0)
 		{
-			self.obj.geometry = new THREE.SphereBufferGeometry(1, 64, 64);
+			self.obj.geometry = new THREE.SphereBufferGeometry(1, 128, 128);
 		}
 		//Torus
 		else if(value === 1)
@@ -141,12 +141,12 @@ function MaterialEditor(parent)
 		//Cube
 		else if(value === 2)
 		{
-			self.obj.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 32, 32, 32);
+			self.obj.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 128, 128, 128);
 		}
 		//Torus Knot
 		else if(value === 3)
 		{
-			self.obj.geometry = new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 32);
+			self.obj.geometry = new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64);
 		}	
 	});
 	this.children.push(this.test_model);
