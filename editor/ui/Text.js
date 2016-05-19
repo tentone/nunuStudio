@@ -34,14 +34,15 @@ function Text(parent)
 	
 	//Span element
 	this.span = document.createElement("span");
+	this.span.style.whiteSpace = "nowrap";
 	this.span.innerHTML = "text";
 	this.element.appendChild(this.span);
 
 	//Element atributes
 	this.fit_content = false;
 	this.fit_parent = false;
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
+	this.size = new THREE.Vector2(0, 0);
+	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
 	//Text
@@ -66,19 +67,12 @@ Text.prototype.destroy = destroy;
 Text.prototype.setAlignment = setAlignment;
 Text.prototype.setText = setText;
 Text.prototype.setTextSize = setTextSize;
-Text.prototype.setMultiLine = setMultiLine;
+Text.prototype.textWidth = textWidth;
 
-//Set if text should be split into multiple lines
-function setMultiLine(value)
+//Return internal text width
+function textWidth()
 {
-	if(value)
-	{
-		this.span.style.whiteSpace = "";
-	}
-	else
-	{
-		this.span.style.whiteSpace = "nowrap";
-	}
+	return (this.span.clientWidth + 1);
 }
 
 //Set Text
@@ -86,6 +80,11 @@ function setText(text)
 {
 	this.text = text;
 	this.span.innerHTML = text;
+
+	if(this.fit_content)
+	{
+		this.size.x = this.textWidth();
+	}
 }
 
 //Set Text Size
@@ -93,6 +92,11 @@ function setTextSize(size)
 {
 	this.text_size = size;
 	this.element.style.fontSize = size + "px";
+
+	if(this.fit_content)
+	{
+		this.size.x = this.textWidth();
+	}
 }
 
 //Set text alignment
@@ -124,17 +128,17 @@ function update(){}
 //Update Interface
 function updateInterface()
 {
-	//Fit text
-	if(this.fit_content)
-	{
-		this.size.x = this.text.length * this.text_size / 1.5;
-	}
-	
 	//Fit parent
 	if(this.fit_parent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
+	}
+
+	//Fit size to text
+	if(this.fit_content)
+	{
+		this.size.x = this.textWidth();
 	}
 
 	//Set visibility
