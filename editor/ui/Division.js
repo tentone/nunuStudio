@@ -31,7 +31,7 @@ function Division(parent)
 	{
 		event.preventDefault();
 	};
-
+	
 	//Element atributes
 	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
@@ -66,12 +66,14 @@ function update(){}
 //Update division Size
 function updateInterface()
 {
+	//Fit parent
 	if(this.fit_parent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
 	}
 	
+	//Set visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -80,6 +82,8 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
+
+	//Update element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

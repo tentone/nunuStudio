@@ -90,6 +90,7 @@ function updateSelectedObject(obj)
 function add(text, icon)
 {
 	var element = new TreeElement(this);
+	
 	if(text != undefined)
 	{
 		element.setLabel(text);

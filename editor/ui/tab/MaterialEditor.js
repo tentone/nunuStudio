@@ -82,42 +82,51 @@ function MaterialEditor(parent)
 	this.scene.add(this.sprite);
 
 	this.scene.add(new PointLight(0x666666));
-	this.scene.add(new AmbientLight(0x333333));
+	this.scene.add(new AmbientLight(0x444444));
 	this.scene.add(new Sky());
 
 	//----------------------------Material parameters----------------------------
-	//Name
-	var text = new Text(this.main.div_b);
+	//Type
+	/*text = new Text(this.main.div_b);
 	text.setAlignment(Text.LEFT);
-	text.setText("Name");
-	text.position.set(10, 20);
+	text.setText("Material Type");
+	text.position.set(10, 70);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
-	this.name = new Textbox(this.main.div_b);
-	this.name.position.set(50, 10);
-	this.name.size.set(200, 18);
-	this.name.updateInterface();
-	this.name.setOnChange(function()
+	this.type = new DropdownList(this.main.div_b);
+	this.type.position.set(95, 60);
+	this.type.size.set(150, 18);
+	this.type.addValue("Phong", 0);
+	this.type.addValue("Standard", 1);
+	this.type.addValue("Lambert", 2);
+	this.type.addValue("Basic", 3);
+	this.type.addValue("Shader", 4);
+	this.type.addValue("Sprite", 5);
+	this.type.addValue("Depth", 6);
+	this.type.addValue("Normal", 7);
+	this.type.updateInterface();
+	this.type.setOnChange(function()
 	{
 		if(self.material !== null)
 		{
-			self.material.name = self.name.getText();
+			//TODO <ADD CODE HERE>
 		}
 	});
-	this.children.push(this.name);
+	this.children.push(this.type);*/
 
 	//Test model
-	text = new Text(this.main.div_b);
+	var text = new Text(this.main.div_b);
 	text.setAlignment(Text.LEFT);
 	text.setText("Test Model");
-	text.position.set(10, 45);
-	text.size.set(200, 0);
+	text.position.set(10, 20);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
 	this.test_model = new DropdownList(this.main.div_b);
-	this.test_model.position.set(80, 35);
+	this.test_model.position.set(80, 10);
 	this.test_model.size.set(150, 18);
 	this.test_model.addValue("Sphere", 0);
 	this.test_model.addValue("Torus", 1);
@@ -151,35 +160,27 @@ function MaterialEditor(parent)
 	});
 	this.children.push(this.test_model);
 
-	//Type
-	/*text = new Text(this.main.div_b);
+	//Name
+	var text = new Text(this.main.div_b);
 	text.setAlignment(Text.LEFT);
-	text.setText("Material Type");
+	text.setText("Name");
 	text.position.set(10, 45);
-	text.size.set(200, 0);
 	text.updateInterface();
 	this.children.push(text);
 
-	this.type = new DropdownList(this.main.div_b);
-	this.type.position.set(95, 35);
-	this.type.size.set(150, 18);
-	this.type.addValue("Phong", 0);
-	this.type.addValue("Standard", 1);
-	this.type.addValue("Lambert", 2);
-	this.type.addValue("Basic", 3);
-	this.type.addValue("Shader", 4);
-	this.type.addValue("Sprite", 5);
-	this.type.addValue("Depth", 6);
-	this.type.addValue("Normal", 7);
-	this.type.updateInterface();
-	this.type.setOnChange(function()
+	this.name = new Textbox(this.main.div_b);
+	this.name.position.set(50, 35);
+	this.name.size.set(200, 18);
+	this.name.updateInterface();
+	this.name.setOnChange(function()
 	{
 		if(self.material !== null)
 		{
-			//TODO <ADD CODE HERE>
+			self.material.name = self.name.getText();
+			Editor.updateAssetExplorer();
 		}
 	});
-	this.children.push(this.type);*/
+	this.children.push(this.name);
 
 	//Transparent
 	this.transparent = new Checkbox(this.main.div_b);
@@ -201,7 +202,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Opacity");
 	text.position.set(10, 95);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -225,17 +226,100 @@ function MaterialEditor(parent)
 	this.opacity_text.setAlignment(Text.LEFT);
 	this.opacity_text.setText("");
 	this.opacity_text.position.set(220, 95);
-	this.opacity_text.size.set(200, 0);
+	this.opacity_text.fit_content = true;
 	this.opacity_text.updateInterface();
 	this.children.push(this.opacity_text);
 
+	//Blending mode
+	text = new Text(this.main.div_b);
+	text.setAlignment(Text.LEFT);
+	text.setText("Blending Mode");
+	text.position.set(10, 120);
+	text.fit_content = true;
+	text.updateInterface();
+	this.children.push(text);
+
+	this.blending = new DropdownList(this.main.div_b);
+	this.blending.position.set(100, 110);
+	this.blending.size.set(150, 18);
+	this.blending.addValue("None", THREE.NoBlending);
+	this.blending.addValue("Normal", THREE.NormalBlending);
+	this.blending.addValue("Additive", THREE.AdditiveBlending);
+	this.blending.addValue("Subtractive", THREE.SubtractiveBlending);
+	this.blending.addValue("Multiply", THREE.MultiplyBlending);
+	this.blending.updateInterface();
+	this.blending.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.blending = self.blending.getValue();
+		}
+	});
+	this.children.push(this.blending);
+
+	//Blending source
+	text = new Text(this.main.div_b);
+	text.setAlignment(Text.LEFT);
+	text.setText("Blending Source");
+	text.position.set(10, 145);
+	text.fit_content = true;
+	text.updateInterface();
+	this.children.push(text);
+
+	this.blendSrc = new DropdownList(this.main.div_b);
+	this.blendSrc.position.set(115, 135);
+	this.blendSrc.size.set(150, 18);
+	this.blendSrc.addValue("DstColorFactor", THREE.DstColorFactor);
+	this.blendSrc.addValue("OneMinusDstColorFactor", THREE.OneMinusDstColorFactor);
+	this.blendSrc.addValue("SrcAlphaSaturateFactor", THREE.SrcAlphaSaturateFactor);
+	this.blendSrc.updateInterface();
+	this.blendSrc.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.blendSrc = self.blendSrc.getValue();
+		}
+	});
+	this.children.push(this.blendSrc);
+
+	//Blending destination
+	text = new Text(this.main.div_b);
+	text.setAlignment(Text.LEFT);
+	text.setText("Blending Destination");
+	text.position.set(10, 170);
+	text.fit_content = true;
+	text.updateInterface();
+	this.children.push(text);
+
+	this.blendDst = new DropdownList(this.main.div_b);
+	this.blendDst.position.set(135, 160);
+	this.blendDst.size.set(150, 18);
+	this.blendDst.addValue("ZeroFactor", THREE.ZeroFactor);
+	this.blendDst.addValue("OneFactor", THREE.OneFactor);
+	this.blendDst.addValue("SrcColorFactor", THREE.SrcColorFactor);
+	this.blendDst.addValue("OneMinusSrcColorFactor", THREE.OneMinusSrcColorFactor);
+	this.blendDst.addValue("SrcAlphaFactor", THREE.SrcAlphaFactor);
+	this.blendDst.addValue("OneMinusSrcAlphaFactor", THREE.OneMinusSrcAlphaFactor);
+	this.blendDst.addValue("DstAlphaFactor", THREE.DstAlphaFactor);
+	this.blendDst.addValue("OneMinusDstAlphaFactor", THREE.OneMinusDstAlphaFactor);
+	this.blendDst.updateInterface();
+	this.blendDst.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.blendDst = self.blendDst.getValue();
+		}
+	});
+	this.children.push(this.blendDst);
+
+	/*
 	//----------------------------Phong Material parameters----------------------------
 	//Color
 	text = new Text(this.main.div_b);
 	text.setAlignment(Text.LEFT);
 	text.setText("Color");
 	text.position.set(10, 120);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -257,7 +341,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Specular");
 	text.position.set(10, 145);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -279,7 +363,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Shininess");
 	text.position.set(10, 170);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -303,7 +387,7 @@ function MaterialEditor(parent)
 	this.shininess_text.setAlignment(Text.LEFT);
 	this.shininess_text.setText("");
 	this.shininess_text.position.set(240, 170);
-	this.shininess_text.size.set(200, 0);
+	this.shininess_text.fit_content = true;
 	this.shininess_text.updateInterface();
 	this.children.push(this.shininess_text);
 
@@ -312,7 +396,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Texture map");
 	text.position.set(10, 195);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -332,7 +416,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Bump map");
 	text.position.set(10, 320);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -352,7 +436,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Scale");
 	text.position.set(10, 445);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -377,16 +461,16 @@ function MaterialEditor(parent)
 	this.bumpScale_text.setAlignment(Text.LEFT);
 	this.bumpScale_text.setText("");
 	this.bumpScale_text.position.set(220, 445);
-	this.bumpScale_text.size.set(200, 0);
+	this.bumpScale_text.fit_content = true;
 	this.bumpScale_text.updateInterface();
 	this.children.push(this.bumpScale_text);
 
 	//Normal map
-	text = new Text(this.main.div_b);
+	/*text = new Text(this.main.div_b);
 	text.setAlignment(Text.LEFT);
 	text.setText("Normal map");
 	text.position.set(10, 470);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -406,7 +490,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Scale X");
 	text.position.set(10, 595);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -430,7 +514,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Y");
 	text.position.set(100, 595);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -455,7 +539,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Displacement map");
 	text.position.set(10, 620);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -475,7 +559,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Scale");
 	text.position.set(10, 745);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -499,7 +583,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Bias");
 	text.position.set(10, 770);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -523,7 +607,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Specular map");
 	text.position.set(10, 795);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -543,7 +627,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Alpha map");
 	text.position.set(10, 920);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -563,7 +647,7 @@ function MaterialEditor(parent)
 	text.setAlignment(Text.LEFT);
 	text.setText("Environment map");
 	text.position.set(10, 1045);
-	text.size.set(200, 0);
+	text.fit_content = true;
 	text.updateInterface();
 	this.children.push(text);
 
@@ -579,10 +663,29 @@ function MaterialEditor(parent)
 	this.children.push(this.envMap);
 
 	//Combine mode (environment map)
-	//TODO <ADD CODE HERE>
+	text = new Text(this.main.div_b);
+	text.setAlignment(Text.LEFT);
+	text.setText("Combine mode");
+	text.position.set(10, 1070);
+	text.fit_content = true;
+	text.updateInterface();
+	this.children.push(text);
+
+	this.envMap = new Imagebox(this.main.div_b);
+	this.envMap.position.set(10, 1055);
+	this.envMap.size.set(100, 100);
+	this.envMap.updateInterface();
+	this.envMap.setOnChange(function(file)
+	{
+		self.material.envMap = new Texture(file);
+		self.material.needsUpdate = true;
+	});
+	this.children.push(this.envMap);*/
+
 
 	//Add element to document
 	this.parent.appendChild(this.element);
+	
 }
 
 //Materialeditor counter

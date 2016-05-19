@@ -20,6 +20,7 @@ function DropdownList(parent)
 	this.element.style.position = "absolute";
 
 	//Element atributes
+	this.values = [];
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -51,23 +52,19 @@ function setOnChange(callback)
 function addValue(text, value)
 {
 	var option = document.createElement("option");
-	if(value !== undefined)
-	{
-		option.value = value;
-	}
-	else
-	{
-		option.value = text;
-	}
-	
 	option.innerHTML = text;
+	this.values.push(value);
 	this.element.appendChild(option);
 }
 
 //Get DropdownList value
 function getValue()
 {
-	return this.element.value;
+	if(this.element.selectedIndex > -1)
+	{
+		return this.values[this.element.selectedIndex];
+	}
+	return null;
 }
 
 //Get dropdownlist selected index
