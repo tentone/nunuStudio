@@ -38,6 +38,7 @@ function Text(parent)
 	this.element.appendChild(this.span);
 
 	//Element atributes
+	this.fit_content = false;
 	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
@@ -65,12 +66,26 @@ Text.prototype.destroy = destroy;
 Text.prototype.setAlignment = setAlignment;
 Text.prototype.setText = setText;
 Text.prototype.setTextSize = setTextSize;
+Text.prototype.setMultiLine = setMultiLine;
+
+//Set if text should be split into multiple lines
+function setMultiLine(value)
+{
+	if(value)
+	{
+		this.span.style.whiteSpace = "";
+	}
+	else
+	{
+		this.span.style.whiteSpace = "nowrap";
+	}
+}
 
 //Set Text
 function setText(text)
 {
 	this.text = text;
-	this.span.innerHTML = this.text;
+	this.span.innerHTML = text;
 }
 
 //Set Text Size
@@ -109,12 +124,20 @@ function update(){}
 //Update Interface
 function updateInterface()
 {
+	//Fit text
+	if(this.fit_content)
+	{
+		this.size.x = this.text.length * this.text_size / 1.5;
+	}
+	
+	//Fit parent
 	if(this.fit_parent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
 	}
 
+	//Set visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -126,6 +149,7 @@ function updateInterface()
 		this.span.style.visibility = "hidden";
 	}
 
+	//Update base element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

@@ -15,14 +15,10 @@ function Form(parent)
 	Form.id++;
 
 	//Create element
-	this.element = document.createElement("form");
+	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.className = "panel";
-	this.element.onsubmit = function(event)
-	{
-		event.preventDefault();
-	};
 
 	//Element atributes
 	this.fit_parent = false;
@@ -58,12 +54,14 @@ function update(){}
 //Update division Size
 function updateInterface()
 {
+	//Fit to parent
 	if(this.fit_parent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
 	}
 	
+	//Set visiblity
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -72,6 +70,8 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
+
+	//Update element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

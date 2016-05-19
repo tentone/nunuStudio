@@ -72,7 +72,7 @@ function Imagebox(parent)
 
 	//Element atributes
 	this.fit_parent = false;
-	this.size = new THREE.Vector2(0,0);
+	this.size = new THREE.Vector2(100, 100);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 

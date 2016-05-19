@@ -42,7 +42,7 @@ function TreeElement(container)
 	//Text
 	this.label = new Text(this.element);
 	this.label.position.set(45, 10);
-	this.label.setText("text");
+	this.label.fit_content = true;
 	this.label.setAlignment(Text.LEFT);
 	this.label.updateInterface();
 

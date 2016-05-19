@@ -1,4 +1,4 @@
-function Panel(parent)
+function MaterialPanel(parent)
 {
 	//Parent
 	if(parent === undefined)
