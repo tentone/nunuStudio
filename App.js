@@ -10,10 +10,11 @@ include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
 //include("lib/three/cameras/CinematicCamera.js");
 
-//include("lib/three/vr/VRControls.js");
-//include("lib/three/vr/VREffect.js");
-//include("lib/three/vr/webvr-manager.js");
-//include("lib/three/vr/webvr-polyfill.js");
+include("lib/three/webvr/VRControls.js");
+include("lib/three/webvr/VREffect.js");
+include("lib/three/webvr/WebVR.js");
+//include("lib/three/webvr/webvr-manager.js");
+//include("lib/three/webvr/webvr-polyfill.js");
 
 include("lib/leap/leap-0.6.4.min.js");
 
@@ -34,6 +35,8 @@ include("core/ObjectLoader.js");
 include("core/Program.js");
 include("core/ObjectUtils.js");
 include("core/Global.js");
+
+include("core/webvr/VRControls.js");
 
 include("core/texture/TextTexture.js");
 include("core/texture/VideoTexture.js");
@@ -256,7 +259,6 @@ App.setMouseLock = function(value)
 App.loop = function()
 {
 	//Call loop again
-	//setTimeout(App.loop, 0);
 	requestAnimationFrame(App.loop);
 
 	App.stats.begin();

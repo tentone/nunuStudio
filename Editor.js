@@ -78,8 +78,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunu Studio";
-Editor.VERSION = "V0.7.1";
-Editor.TIMESTAMP = "201605191127";
+Editor.VERSION = "V0.7.2";
+Editor.TIMESTAMP = "201605201148";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -126,6 +126,10 @@ Editor.initialize = function(canvas)
 	Editor.program_running = null;
 	Editor.createNewProgram();
 
+	//VR effect and control
+	Editor.vr_controls = null;
+	Editor.vr_effect = null;
+
 	//Renderer and canvas
 	Editor.renderer = null;
 	Editor.canvas = null;
@@ -153,6 +157,9 @@ Editor.initialize = function(canvas)
 	Editor.camera = Editor.default_camera;
 	Editor.camera_rotation = new THREE.Vector2(0,0);
 	Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
+
+ 	//TODO <VR STUFF>
+	Editor.vr_controls = new VRControls(Editor.camera);
 
 	//Update interface
 	Interface.updateInterface();
@@ -529,22 +536,44 @@ Editor.update = function()
 //Draw stuff into screen
 Editor.draw = function()
 {
-	Editor.renderer.clear();
-
-	if(Editor.state === Editor.STATE_EDITING)
+	if(WEBVR.isAvailable())
 	{
-		//Render scene
-		Editor.renderer.render(Editor.program.scene, Editor.camera);
+		Editor.vr_controls.update();
+		//Editor.renderer.clear();
+		if(Editor.state === Editor.STATE_EDITING)
+		{
+			//Render scene
+			Editor.vr_effect.render(Editor.program.scene, Editor.camera);
 
-		//Render debug scene
-		Editor.cannon_renderer.update();
-		Editor.renderer.render(Editor.tool_scene, Editor.camera);
-		Editor.renderer.clearDepth();
-		Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
+			//Render debug scene
+			//Editor.cannon_renderer.update();
+			//Editor.vr_effect.render(Editor.tool_scene, Editor.camera);
+			//Editor.renderer.clearDepth();
+			//Editor.vr_effect.render(Editor.tool_scene_top, Editor.camera);
+		}
+		else if(Editor.state === Editor.STATE_TESTING)
+		{
+			Editor.vr_effect.render(Editor.program_running.scene, Editor.program_running.scene.camera);
+		}
 	}
-	else if(Editor.state === Editor.STATE_TESTING)
+	else
 	{
-		Editor.renderer.render(Editor.program_running.scene, Editor.program_running.scene.camera);
+		Editor.renderer.clear();
+		if(Editor.state === Editor.STATE_EDITING)
+		{
+			//Render scene
+			Editor.renderer.render(Editor.program.scene, Editor.camera);
+
+			//Render debug scene
+			Editor.cannon_renderer.update();
+			Editor.renderer.render(Editor.tool_scene, Editor.camera);
+			Editor.renderer.clearDepth();
+			Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
+		}
+		else if(Editor.state === Editor.STATE_TESTING)
+		{
+			Editor.renderer.render(Editor.program_running.scene, Editor.program_running.scene.camera);
+		}
 	}
 }
 
@@ -1013,6 +1042,13 @@ Editor.initializeRenderer = function(canvas)
 	Editor.renderer.shadowMap.enabled = true;
 	Editor.renderer.shadowMap.type = THREE.PCFShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
 	Editor.renderer.setSize(canvas.width, canvas.height);
+
+	//TODO <VR Stuff>
+	if(WEBVR.isAvailable())
+	{
+		Editor.vr_effect = new THREE.VREffect(Editor.renderer);
+		document.body.appendChild(WEBVR.getButton(Editor.vr_effect));
+	}
 }
 
 //Exit editor
