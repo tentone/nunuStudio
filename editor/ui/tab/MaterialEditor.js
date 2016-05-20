@@ -269,7 +269,7 @@ function MaterialEditor(parent)
 	this.shininess = new Slider(this.form.element);
 	this.shininess.size.set(160, 18);
 	this.shininess.setRange(0, 250);
-	this.shininess.setStep(1);
+	this.shininess.setStep(0.1);
 	this.shininess.updateInterface();
 	this.shininess.setOnChange(function()
 	{
@@ -469,8 +469,23 @@ function MaterialEditor(parent)
 	this.form.add(this.envMap);
 	this.form.nextRow();
 
-	//Combine mode (environment map)
-	this.form.addText("Combine mode");
+	//Combine environment map
+	this.form.addText("Mode");
+	this.combine = new DropdownList(this.form.element);
+	this.combine.position.set(100, 85);
+	this.combine.size.set(120, 18);
+	this.combine.addValue("Multiply", THREE.MultiplyOperation);
+	this.combine.addValue("Mix", THREE.MixOperation);
+	this.combine.addValue("Add", THREE.AddOperation);
+	this.combine.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.combine = self.combine.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.combine);
 
 	//Update form
 	this.form.updateInterface();
