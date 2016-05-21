@@ -8,13 +8,8 @@ include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
-//include("lib/three/cameras/CinematicCamera.js");
-
-include("lib/three/webvr/VRControls.js");
 include("lib/three/webvr/VREffect.js");
 include("lib/three/webvr/WebVR.js");
-//include("lib/three/webvr/webvr-manager.js");
-//include("lib/three/webvr/webvr-polyfill.js");
 
 include("lib/leap/leap-0.6.4.min.js");
 

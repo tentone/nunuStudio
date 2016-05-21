@@ -11,9 +11,13 @@ function ParticleEmitter()
 	{
 		texture:
 		{
-			value: new Texture("./data/particle.png")
-		}
+			value: new Texture("data/particle.png")
+		},
+		blending: THREE.AdditiveBlending
 	});
+		
+	//Disable frustum culling
+	this.group.mesh.frustumCulled = false;
 
 	this.emitter = new SPE.Emitter(
 	{		

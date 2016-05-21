@@ -15,17 +15,21 @@ function SceneEditor(parent)
 	SceneEditor.id++;
 
 	//Create Element
-	this.element = document.createElement("canvas");
-	this.element.id = id;
+	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
-	this.element.style.top = "0px";
-	this.element.style.left = "0px";
+
+	//Canvas
+	this.canvas = document.createElement("canvas");
+	this.canvas.style.position = "absolute";
+	this.canvas.style.top = "0px";
+	this.canvas.style.left = "0px";
+	this.element.appendChild(this.canvas);
 
 	//Self pointer
 	var self = this;
 
 	//Drop event
-	this.element.ondrop = function(event)
+	this.canvas.ondrop = function(event)
 	{
 		event.preventDefault();
 
@@ -37,7 +41,7 @@ function SceneEditor(parent)
 
 			//Update raycaster direction
 			var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
-			var position_normalized = new THREE.Vector2((position.x/self.element.width)*2 - 1, -(position.y/self.element.height)*2 + 1);
+			var position_normalized = new THREE.Vector2((position.x/self.canvas.width)*2 - 1, -(position.y/self.canvas.height)*2 + 1);
 			Editor.updateRaycaster(position_normalized.x, position_normalized.y);
 
 			//Check intersected objects
@@ -69,10 +73,18 @@ function SceneEditor(parent)
 	};
 
 	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
+	this.canvas.ondragover = function(event)
 	{
 		event.preventDefault();
 	};
+
+	/*
+	//Fullscreen button
+	this.fullscreen_button = new ButtonImage(this.element);
+	this.fullscreen_button.size.set(30, 30);
+	this.fullscreen_button.setImage("editor/files/icons/misc/fullscreen.png");
+	this.fullscreen_button.updateInterface();
+	*/
 
 	//Element atributes
 	this.fit_parent = false;
@@ -96,12 +108,19 @@ SceneEditor.prototype.updateInterface = updateInterface;
 SceneEditor.prototype.destroy = destroy;
 SceneEditor.prototype.activate = activate;
 SceneEditor.prototype.setScene = setScene;
+SceneEditor.prototype.deactivate = deactivate;
+
+//Deactivate
+function deactivate()
+{
+	console.log("deactivated");
+}
 
 //Activate scene editor
 function activate()
 {
 	Editor.program.scene = this.scene;
-	Editor.setRenderCanvas(this.element);
+	Editor.setRenderCanvas(this.canvas);
 	Editor.setState(Editor.STATE_EDITING);
 	Editor.resetEditingFlags();
 	Editor.resize();
@@ -118,7 +137,7 @@ function destroy()
 {
 	try
 	{
-		this.parent.removeChild(this.element);
+		this.parent.removeChild(this.canvas);
 	}
 	catch(e){}
 }
@@ -129,24 +148,39 @@ function update(){}
 //Update division Size
 function updateInterface()
 {
+	//Fit parent
 	if(this.fit_parent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
 	}
 	
+	//Set visibilty
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.visible = "visible";
+		this.canvas.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
+		this.canvas.style.visibility = "hidden";
 	}
 
-	this.element.width = this.size.x;
-	this.element.height = this.size.y;
+	/*
+	//Fullscreen button
+	this.fullscreen_button.position.x = this.position.x + this.size.x - this.fullscreen_button.size.x - 5;
+	this.fullscreen_button.position.y = this.position.y + this.size.y - this.fullscreen_button.size.y - 5;
+	this.fullscreen_button.updateInterface();
+	*/
 
+	//Update canvas
+	this.canvas.width = this.size.x;
+	this.canvas.height = this.size.y;
+	this.canvas.style.width = this.size.x + "px";
+	this.canvas.style.height = this.size.y + "px";
+
+	//Update element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

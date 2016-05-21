@@ -19,12 +19,12 @@ Interface.initialize = function()
 
 	//Scene Canvas
 	var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
-	var canvas = new SceneEditor();
-	canvas.setScene(Editor.program.scene);
-	scene.attachComponent(canvas);
+	var scene_editor = new SceneEditor();
+	scene_editor.setScene(Editor.program.scene);
+	scene.attachComponent(scene_editor);
 
 	//Set render canvas
-	Editor.setRenderCanvas(canvas.element);
+	Editor.setRenderCanvas(scene_editor.canvas);
 
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer_div = new DivisionResizable();

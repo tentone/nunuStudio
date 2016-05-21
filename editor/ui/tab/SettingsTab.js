@@ -59,8 +59,12 @@ SettingsTab.prototype.update = update;
 SettingsTab.prototype.updateInterface = updateInterface;
 SettingsTab.prototype.destroy = destroy;
 SettingsTab.prototype.activate = activate;
+SettingsTab.prototype.deactivate = deactivate;
 
-//Activate code editor
+//Deactivate
+function deactivate(){}
+
+//Activate
 function activate()
 {
 	Editor.setState(Editor.STATE_IDLE);

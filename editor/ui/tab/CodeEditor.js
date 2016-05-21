@@ -100,11 +100,15 @@ CodeEditor.prototype.update = update;
 CodeEditor.prototype.updateInterface = updateInterface;
 CodeEditor.prototype.destroy = destroy;
 CodeEditor.prototype.activate = activate;
+CodeEditor.prototype.deactivate = deactivate;
 CodeEditor.prototype.setMode = setMode;
 CodeEditor.prototype.getText = getText;
 CodeEditor.prototype.setText = setText;
 CodeEditor.prototype.attachScript = attachScript;
 CodeEditor.prototype.updateScript = updateScript;
+
+//Deactivate
+function deactivate(){}
 
 //Activate code editor
 function activate()

@@ -499,11 +499,12 @@ function MaterialEditor(parent)
 MaterialEditor.id = 0;
 
 //Functions Prototype
+MaterialEditor.prototype.attachMaterial = attachMaterial;
+MaterialEditor.prototype.activate = activate;
+MaterialEditor.prototype.deactivate = deactivate;
+MaterialEditor.prototype.destroy = destroy;
 MaterialEditor.prototype.update = update;
 MaterialEditor.prototype.updateInterface = updateInterface;
-MaterialEditor.prototype.destroy = destroy;
-MaterialEditor.prototype.activate = activate;
-MaterialEditor.prototype.attachMaterial = attachMaterial;
 
 //Attach material to material editor
 function attachMaterial(material)
@@ -513,6 +514,9 @@ function attachMaterial(material)
 	this.obj.visible = true;
 	this.sprite.visible = false;
 }
+
+//Deactivate
+function deactivate(){}
 
 //Activate code editor
 function activate()
