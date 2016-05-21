@@ -126,8 +126,8 @@ Editor.initialize = function(canvas)
 	Editor.program_running = null;
 	Editor.createNewProgram();
 
-	//VR effect and control
-	Editor.vr_controls = null;
+	//VR effect and controls
+	Editor.vr_controls = new VRControls();
 	Editor.vr_effect = null;
 
 	//Renderer and canvas
@@ -157,9 +157,6 @@ Editor.initialize = function(canvas)
 	Editor.camera = Editor.default_camera;
 	Editor.camera_rotation = new THREE.Vector2(0,0);
 	Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
-
- 	//TODO <VR STUFF>
-	Editor.vr_controls = new VRControls(Editor.camera);
 
 	//Update interface
 	Interface.updateInterface();
@@ -536,41 +533,45 @@ Editor.update = function()
 //Draw stuff into screen
 Editor.draw = function()
 {
-	if(WEBVR.isAvailable())
-	{
-		Editor.vr_controls.update();
-		//Editor.renderer.clear();
-		if(Editor.state === Editor.STATE_EDITING)
-		{
-			//Render scene
-			Editor.vr_effect.render(Editor.program.scene, Editor.camera);
+	Editor.renderer.clear();
 
-			//Render debug scene
-			//Editor.cannon_renderer.update();
-			//Editor.vr_effect.render(Editor.tool_scene, Editor.camera);
-			//Editor.renderer.clearDepth();
-			//Editor.vr_effect.render(Editor.tool_scene_top, Editor.camera);
-		}
-		else if(Editor.state === Editor.STATE_TESTING)
-		{
-			Editor.vr_effect.render(Editor.program_running.scene, Editor.program_running.scene.camera);
-		}
+	if(Editor.state === Editor.STATE_EDITING)
+	{
+		//Render scene
+		Editor.renderer.render(Editor.program.scene, Editor.camera);
+
+		//Render debug scene
+		Editor.cannon_renderer.update();
+		Editor.renderer.render(Editor.tool_scene, Editor.camera);
+		Editor.renderer.clearDepth();
+		Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
 	}
-	else
+	else if(Editor.state === Editor.STATE_TESTING)
 	{
-		Editor.renderer.clear();
-		if(Editor.state === Editor.STATE_EDITING)
+		//If VR is enabled
+		if(Editor.vr_controls !== null && Editor.vr_effect !== null)
 		{
-			//Render scene
-			Editor.renderer.render(Editor.program.scene, Editor.camera);
+			//Update VR controls
+			Editor.vr_controls.scale = 5;
+			Editor.vr_controls.update();
 
-			//Render debug scene
-			Editor.cannon_renderer.update();
-			Editor.renderer.render(Editor.tool_scene, Editor.camera);
-			Editor.renderer.clearDepth();
-			Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
+			//Backup camera atributes
+			var camera = Editor.program_running.scene.camera;
+			var position = camera.position.clone();
+			var quaternion = camera.quaternion.clone();
+
+			//Apply VR controller offsets to actual camera
+			camera.position.add(Editor.vr_controls.position);
+			camera.quaternion.multiply(Editor.vr_controls.quaternion);
+
+			//Render scene
+			Editor.vr_effect.render(Editor.program_running.scene, camera);
+
+			//Backup camera atributes
+			camera.position.copy(position);
+			camera.quaternion.copy(quaternion);
 		}
-		else if(Editor.state === Editor.STATE_TESTING)
+		else
 		{
 			Editor.renderer.render(Editor.program_running.scene, Editor.program_running.scene.camera);
 		}
@@ -1007,6 +1008,7 @@ Editor.setState = function(state)
 		{
 			Editor.program_running.dispose();
 			Editor.program_running = null;
+			Editor.vr_effect = null;
 		}
 
 	}
@@ -1021,6 +1023,12 @@ Editor.setState = function(state)
 		//Initialize scene
 		Editor.program_running.initialize();
 		Editor.program_running.resize(Editor.canvas.width, Editor.canvas.height);
+
+		if(WEBVR.isAvailable())
+		{
+			Editor.vr_effect = new THREE.VREffect(Editor.renderer);
+			document.body.appendChild(WEBVR.getButton(Editor.vr_effect));
+		}
 	}
 	
 	Editor.state = state;
@@ -1042,13 +1050,6 @@ Editor.initializeRenderer = function(canvas)
 	Editor.renderer.shadowMap.enabled = true;
 	Editor.renderer.shadowMap.type = THREE.PCFShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
 	Editor.renderer.setSize(canvas.width, canvas.height);
-
-	//TODO <VR Stuff>
-	if(WEBVR.isAvailable())
-	{
-		Editor.vr_effect = new THREE.VREffect(Editor.renderer);
-		document.body.appendChild(WEBVR.getButton(Editor.vr_effect));
-	}
 }
 
 //Exit editor

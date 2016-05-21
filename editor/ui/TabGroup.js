@@ -75,6 +75,11 @@ function closeActual()
 //Select option
 function selectOption(index)
 {
+	if(this.options_selected > -1)
+	{
+		this.options[this.options_selected].deactivate();
+	}
+
 	if(index >= 0 && index < this.options.length)
 	{
 		this.options_selected = index;

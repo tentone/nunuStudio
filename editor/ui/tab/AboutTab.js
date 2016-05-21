@@ -85,8 +85,12 @@ AboutTab.prototype.update = update;
 AboutTab.prototype.updateInterface = updateInterface;
 AboutTab.prototype.destroy = destroy;
 AboutTab.prototype.activate = activate;
+AboutTab.prototype.deactivate = deactivate;
 
-//Activate code editor
+//Deactivate
+function deactivate(){}
+
+//Activate
 function activate()
 {
 	Editor.setState(Editor.STATE_IDLE);

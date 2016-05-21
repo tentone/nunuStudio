@@ -108,9 +108,19 @@ TabElement.prototype.update = update;
 TabElement.prototype.updateInterface = updateInterface;
 TabElement.prototype.destroy = destroy;
 TabElement.prototype.activate = activate;
+TabElement.prototype.deactivate = deactivate;
 TabElement.prototype.select = select;
 TabElement.prototype.attachComponent = attachComponent;
 TabElement.prototype.isSelected = isSelected;
+
+//Dectivate this tab
+function deactivate()
+{
+	if(this.component !== null)
+	{
+		this.component.deactivate();
+	}
+}
 
 //Activate this tab
 function activate()
@@ -161,6 +171,7 @@ function attachComponent(component)
 //Update Interface
 function updateInterface()
 {
+	//Set button color
 	if(this.isSelected())
 	{
 		this.button.setClass("button_over");
@@ -170,6 +181,7 @@ function updateInterface()
 		this.button.setClass("button");
 	}
 
+	//Update button and division
 	this.button.position.set(this.container.options_size.x * this.index, 0);
 	this.button.updateInterface();
 
@@ -177,6 +189,7 @@ function updateInterface()
 	this.division.size.set(this.size.x, this.size.y - this.button.size.y);
 	this.division.updateInterface();
 
+	//Update attached component
 	if(this.component !== null)
 	{
 		this.component.visible = this.visible;
@@ -184,6 +197,7 @@ function updateInterface()
 		this.component.updateInterface();
 	}
 
+	//Position close button if needed
 	if(this.closeable)
 	{
 		this.close_button.position.set(this.button.size.x - 20, 10);
