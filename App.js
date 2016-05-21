@@ -9,7 +9,6 @@ include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
 include("lib/three/webvr/VREffect.js");
-include("lib/three/webvr/WebVR.js");
 
 include("lib/leap/leap-0.6.4.min.js");
 
@@ -132,7 +131,7 @@ App.chooseFile = function(callback, filter, savemode)
 		}
 	};
 
-	chooser.click();  
+	chooser.click(); 
 }
 
 //Read File
@@ -227,6 +226,12 @@ App.showStats = function(value)
 	{
 		App.stats.domElement.style.visibility = "hidden";
 	}
+}
+
+//Check if webVr is available
+App.webvrAvailable = function()
+{
+	return (navigator.getVRDisplays !== undefined);
 }
 
 //Set if mouse locked

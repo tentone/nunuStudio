@@ -78,6 +78,7 @@ ButtonImage.prototype.updateInterface = updateInterface;
 ButtonImage.prototype.setCallback = setCallback;
 ButtonImage.prototype.destroy = destroy;
 ButtonImage.prototype.setAltText = setAltText;
+ButtonImage.prototype.setClass = setClass;
 
 //Remove element
 function destroy()
@@ -109,6 +110,12 @@ function setImage(image)
 function setAltText(text)
 {
 	this.img.alt = text;
+}
+
+//Set element class
+function setClass(name)
+{
+	this.element.className = name;
 }
 
 //Update Interface
