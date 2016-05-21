@@ -1961,3 +1961,26 @@
 [0521/050152:WARNING:in_range_cast.h(38)] value 2180925706592 out of range
 [0521/050152:WARNING:in_range_cast.h(38)] value 2180925788752 out of range
 [0521/050152:WARNING:in_range_cast.h(38)] value 2180925751216 out of range
+[0521/132404:ERROR:process_info.cc(608)] range at 0x5fec2b3e00000000, size 0x216 fully unreadable
+[0521/132404:ERROR:process_info.cc(608)] range at 0x5fec2b5e00000000, size 0x216 fully unreadable
+[0521/132404:ERROR:process_info.cc(608)] range at 0x0, size 0x216 fully unreadable
+[0521/132404:WARNING:in_range_cast.h(38)] value 2295193917128 out of range
+[0521/132404:WARNING:in_range_cast.h(38)] value 2295193913212 out of range
+[0521/132404:WARNING:in_range_cast.h(38)] value 2295193916902 out of range
+[0521/132404:WARNING:in_range_cast.h(38)] value 2295193911382 out of range
+[0521/132404:WARNING:in_range_cast.h(38)] value 2295194170960 out of range
+[0521/132404:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0521/132404:WARNING:in_range_cast.h(38)] value 2295166989216 out of range
+[0521/132404:WARNING:in_range_cast.h(38)] value 2295122250448 out of range
+[0521/132404:WARNING:in_range_cast.h(38)] value 2295122284576 out of range
+[0521/164905:ERROR:process_info.cc(608)] range at 0xa5a029aa00000000, size 0x25c fully unreadable
+[0521/164905:ERROR:process_info.cc(608)] range at 0xa5a029ca00000000, size 0x25c fully unreadable
+[0521/164905:ERROR:process_info.cc(608)] range at 0x0, size 0x25c fully unreadable
+[0521/164905:WARNING:in_range_cast.h(38)] value 2597010846698 out of range
+[0521/164905:WARNING:in_range_cast.h(38)] value 2597010842992 out of range
+[0521/164905:WARNING:in_range_cast.h(38)] value 2597010846472 out of range
+[0521/164905:WARNING:in_range_cast.h(38)] value 2597010841170 out of range
+[0521/164905:WARNING:in_range_cast.h(38)] value 2597010882384 out of range
+[0521/164905:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0521/164905:WARNING:in_range_cast.h(38)] value 2597009935840 out of range
+[0521/164905:WARNING:in_range_cast.h(38)] value 2596939417552 out of range

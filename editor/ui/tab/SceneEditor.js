@@ -92,6 +92,13 @@ function SceneEditor(parent)
 		self.fullscreen_button.setClass("");
 	};
 
+	var fullscreen = true;
+	this.fullscreen_button.setCallback(function()
+	{
+		self.setFullscreen(fullscreen);
+		fullscreen = !fullscreen;
+	});
+
 	//VR button
 	this.vr_button = new ButtonImage(this.element);
 	this.vr_button.size.set(25, 25);
@@ -126,6 +133,34 @@ SceneEditor.prototype.destroy = destroy;
 SceneEditor.prototype.activate = activate;
 SceneEditor.prototype.setScene = setScene;
 SceneEditor.prototype.deactivate = deactivate;
+SceneEditor.prototype.setFullscreen = setFullscreen;
+
+//Set fullscreen mode
+function setFullscreen(value)
+{
+	//Apply fullscreen mode
+	if(value)
+	{
+		//Set to fullscreen mode
+		App.enterFullscreen(this.element);
+
+		this.element.style.zIndex = 10000;
+		this.position.set(0, 0);	
+		this.size.set(window.screen.width, window.screen.height);
+		this.updateInterface();
+
+		Editor.resizeCamera();
+	}
+	else
+	{
+		//Leave fullscreen mode
+		App.leaveFullscreen();
+	
+		//Restore elements
+		this.element.style.zIndex = 0;
+		Interface.updateInterface();
+	}
+}
 
 //Deactivate
 function deactivate(){}
