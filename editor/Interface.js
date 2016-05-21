@@ -766,12 +766,10 @@ Interface.initialize = function()
 	{
 		if(Editor.state === Editor.STATE_EDITING)
 		{
-			Interface.run.setText("Stop");
 			Editor.setState(Editor.STATE_TESTING);
 		}
 		else if(Editor.state === Editor.STATE_TESTING)
 		{
-			Interface.run.setText("Run");
 			Editor.setState(Editor.STATE_EDITING);
 		}
 	});

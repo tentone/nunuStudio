@@ -78,13 +78,30 @@ function SceneEditor(parent)
 		event.preventDefault();
 	};
 
-	/*
+	//Button
+	this.show_buttons = false;
+
 	//Fullscreen button
 	this.fullscreen_button = new ButtonImage(this.element);
-	this.fullscreen_button.size.set(30, 30);
+	this.fullscreen_button.size.set(25, 25);
 	this.fullscreen_button.setImage("editor/files/icons/misc/fullscreen.png");
+	this.fullscreen_button.visible = false;
 	this.fullscreen_button.updateInterface();
-	*/
+	this.fullscreen_button.element.onmouseleave = function()
+	{
+		self.fullscreen_button.setClass("");
+	};
+
+	//VR button
+	this.vr_button = new ButtonImage(this.element);
+	this.vr_button.size.set(25, 25);
+	this.vr_button.setImage("editor/files/icons/misc/vr.png");
+	this.vr_button.visible = false;
+	this.vr_button.updateInterface();
+	this.vr_button.element.onmouseleave = function()
+	{
+		self.vr_button.setClass("");
+	};
 
 	//Element atributes
 	this.fit_parent = false;
@@ -111,10 +128,7 @@ SceneEditor.prototype.setScene = setScene;
 SceneEditor.prototype.deactivate = deactivate;
 
 //Deactivate
-function deactivate()
-{
-	console.log("deactivated");
-}
+function deactivate(){}
 
 //Activate scene editor
 function activate()
@@ -167,12 +181,17 @@ function updateInterface()
 		this.canvas.style.visibility = "hidden";
 	}
 
-	/*
 	//Fullscreen button
 	this.fullscreen_button.position.x = this.position.x + this.size.x - this.fullscreen_button.size.x - 5;
 	this.fullscreen_button.position.y = this.position.y + this.size.y - this.fullscreen_button.size.y - 5;
+	this.fullscreen_button.visible = this.visible && this.show_buttons;
 	this.fullscreen_button.updateInterface();
-	*/
+
+	//VR button
+	this.vr_button.position.x = this.fullscreen_button.position.x - this.vr_button.size.x - 10;
+	this.vr_button.position.y = this.fullscreen_button.position.y;
+	this.vr_button.visible = this.visible && this.show_buttons && App.webvrAvailable();
+	this.vr_button.updateInterface();
 
 	//Update canvas
 	this.canvas.width = this.size.x;

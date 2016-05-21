@@ -59,11 +59,26 @@ TabGroup.prototype.clear = clear;
 TabGroup.prototype.updateOptionIndex = updateOptionIndex;
 TabGroup.prototype.selectOption = selectOption;
 TabGroup.prototype.closeActual = closeActual;
+TabGroup.prototype.getActual = getActual;
+
+//Get actual tab
+function getActual()
+{
+	if(this.options_selected > -1)
+	{
+		if(this.options[this.options_selected].component !== null)
+		{
+			return this.options[this.options_selected].component;
+		}
+	}
+
+	return null;
+}
 
 //If actual tab is closeable close it
 function closeActual()
 {
-	if(this.options_selected !== -1)
+	if(this.options_selected > -1)
 	{
 		if(this.options[this.options_selected].closeable)
 		{

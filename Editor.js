@@ -78,8 +78,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunu Studio";
-Editor.VERSION = "V0.7.2";
-Editor.TIMESTAMP = "201605201148";
+Editor.VERSION = "V0.7.3";
+Editor.TIMESTAMP = "201605210236";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -549,10 +549,10 @@ Editor.draw = function()
 	else if(Editor.state === Editor.STATE_TESTING)
 	{
 		//If VR is enabled
-		if(Editor.vr_controls !== null && Editor.vr_effect !== null)
+		if(Editor.vr_effect !== null)
 		{
 			//Update VR controls
-			Editor.vr_controls.scale = 5;
+			Editor.vr_controls.scale = 8;
 			Editor.vr_controls.update();
 
 			//Backup camera atributes
@@ -1003,14 +1003,21 @@ Editor.setState = function(state)
 {
 	if(state === Editor.STATE_EDITING)
 	{
-		//Dispose running program if there is one
-		if(Editor.program_running !== null)
-		{
-			Editor.program_running.dispose();
-			Editor.program_running = null;
-			Editor.vr_effect = null;
-		}
+		//Dispose running program
+		Editor.disposeRunningProgram();
 
+		//Set run button text
+		Interface.run.setText("Run");
+		Interface.run.visible = true;
+		Interface.run.updateInterface();
+
+		//Hide fullscreen and VR buttons
+		var tab = Interface.tab.getActual();
+		if(tab instanceof SceneEditor)
+		{
+			tab.show_buttons = false;
+			tab.updateInterface();
+		}
 	}
 	else if(state === Editor.STATE_TESTING)
 	{
@@ -1024,14 +1031,60 @@ Editor.setState = function(state)
 		Editor.program_running.initialize();
 		Editor.program_running.resize(Editor.canvas.width, Editor.canvas.height);
 
-		if(WEBVR.isAvailable())
+		//Show full screen and VR buttons
+		var tab = Interface.tab.getActual();
+		tab.show_buttons = true;
+		tab.updateInterface();
+
+		//Fullscreen buttons
+		tab.fullscreen_button.setCallback(function()
+		{
+			tab.canvas.webkitRequestFullScreen();
+			Editor.resize();
+		});
+
+		//If program uses VR set button
+		if(Editor.program_running.vr && App.webvrAvailable())
 		{
 			Editor.vr_effect = new THREE.VREffect(Editor.renderer);
-			document.body.appendChild(WEBVR.getButton(Editor.vr_effect));
+
+			var vr_state = true;
+			tab.vr_button.setCallback(function()
+			{
+				Editor.vr_effect.setFullScreen(vr_state);
+				vr_state = !vr_state;
+			});
 		}
+
+		//Set run button text
+		Interface.run.setText("Stop");
+		Interface.run.visible = true;
+		Interface.run.updateInterface();
 	}
-	
+	else if(state === Editor.STATE_IDLE)
+	{
+		//Dispose running program
+		Editor.disposeRunningProgram();
+
+		//Hide run button
+		Interface.run.visible = false;
+		Interface.run.updateInterface();
+	}
+
+	//Set editor state
 	Editor.state = state;
+}
+
+//Dispose running program if there is one
+Editor.disposeRunningProgram = function()
+{
+	//Dispose running program if there is one
+	if(Editor.program_running !== null)
+	{
+		Editor.program_running.dispose();
+		Editor.program_running = null;
+		Editor.vr_effect = null;
+	}
 }
 
 //Set render canvas
