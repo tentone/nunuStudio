@@ -153,9 +153,9 @@ Editor.initialize = function(canvas)
 
 	//Editor Camera
 	Editor.default_camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 1000000);
-	Editor.default_camera.position.set(0, 5, -5);
+	Editor.default_camera.position.set(0, 5, 5);
 	Editor.camera = Editor.default_camera;
-	Editor.camera_rotation = new THREE.Vector2(0,0);
+	Editor.camera_rotation = new THREE.Vector2(3.14, 0);
 	Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
 
 	//Update interface
@@ -581,7 +581,10 @@ Editor.draw = function()
 //Resize to fit window
 Editor.resize = function()
 {
-	Interface.updateInterface();
+	if(!App.fullscreen)
+	{
+		Interface.updateInterface();
+	}
 }
 
 //Select a object
@@ -1036,13 +1039,6 @@ Editor.setState = function(state)
 		tab.show_buttons = true;
 		tab.updateInterface();
 
-		//Fullscreen buttons
-		tab.fullscreen_button.setCallback(function()
-		{
-			tab.canvas.webkitRequestFullScreen();
-			Editor.resize();
-		});
-
 		//If program uses VR set button
 		if(Editor.program_running.vr && App.webvrAvailable())
 		{
@@ -1098,7 +1094,7 @@ Editor.setRenderCanvas = function(canvas)
 //Initialize renderer
 Editor.initializeRenderer = function(canvas)
 {
-	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: false});
+	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true});
 	Editor.renderer.autoClear = false;
 	Editor.renderer.shadowMap.enabled = true;
 	Editor.renderer.shadowMap.type = THREE.PCFShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)

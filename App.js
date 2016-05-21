@@ -89,6 +89,9 @@ App.initialize = function(main)
 	App.stats.domElement.style.pointerEvents = "none";
 	document.body.appendChild(App.stats.domElement);
 
+	//Fullscreen flag
+	App.fullscreen = false;
+
 	//Init Input
 	Keyboard.initialize();
 	Mouse.initialize();
@@ -193,6 +196,57 @@ App.readFile = function(fname, sync, callback)
 		}
 
 		return data;
+	}
+}
+
+//Leave fullscreen mode
+App.leaveFullscreen = function()
+{
+	//Set fullscreen flag
+	App.fullscreen = false;
+
+	if(document.exitFullscreen)
+	{
+		document.exitFullscreen();
+	}
+	else if(document.mozCancelFullScreen)
+	{
+		document.mozCancelFullScreen();
+	}
+	else if(document.webkitExitFullscreen)
+	{
+		document.webkitExitFullscreen();
+	}
+}
+
+//Set an element to fullscreen mode
+App.enterFullscreen = function(element)
+{
+	//If no element passed use full page
+	if(element === undefined)
+	{
+		element = document.body;
+	}
+
+	//Set fullscreen flag
+	App.fullscreen = true;
+
+	//Set element to fullscreen
+	if(element.requestFullscreen)
+	{
+		element.requestFullscreen();
+	}
+	else if(element.mozRequestFullScreen)
+	{
+		element.mozRequestFullScreen();
+	}
+	else if(element.webkitRequestFullscreen)
+	{
+		element.webkitRequestFullscreen();
+	}
+	else if(element.msRequestFullscreen)
+	{
+		element.msRequestFullscreen();
 	}
 }
 
