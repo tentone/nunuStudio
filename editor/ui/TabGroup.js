@@ -90,16 +90,15 @@ function closeActual()
 //Select option
 function selectOption(index)
 {
-	if(this.options_selected > -1)
-	{
-		this.options[this.options_selected].deactivate();
-	}
-
-	if(index >= 0 && index < this.options.length)
+	if(index > -1 && index < this.options.length)
 	{
 		this.options_selected = index;
 		this.options[index].activate();
 		this.updateInterface();
+	}
+	else
+	{
+		this.options_selected = -1;
 	}
 }
 
@@ -112,6 +111,7 @@ function addOption(name, image, closeable)
 	{
 		this.selectOption(0);
 	}
+
 	return option;
 }
 
@@ -131,18 +131,23 @@ function clear()
 //Remove tab
 function removeOption(index)
 {
-	if(index >= 0 && index < this.options.length)
+	if(index > -1 && index < this.options.length)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
 
 		this.updateOptionIndex();
-		this.updateInterface();
 
-		if(this.options_selected >= this.options.length)
+		if(this.options.length > 0)
 		{
-			this.selectOption(this.options.length - 1);
+			this.selectOption(0);
 		}
+		else
+		{
+			this.selectOption(-1);
+		}
+
+		this.updateInterface();
 	}
 }
 
@@ -168,7 +173,7 @@ function destroy()
 //Update TabGroup
 function update()
 {
-	if(this.options_selected !== -1)
+	if(this.options_selected > -1)
 	{
 		this.options[this.options_selected].update();
 	}
