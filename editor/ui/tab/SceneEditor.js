@@ -79,7 +79,8 @@ function SceneEditor(parent)
 	};
 
 	//Button
-	this.show_buttons = false;
+	this.show_buttons_vr = false;
+	this.show_buttons_fullscreen = false;
 
 	//Fullscreen button
 	this.fullscreen_button = new ButtonImage(this.element);
@@ -219,13 +220,13 @@ function updateInterface()
 	//Fullscreen button
 	this.fullscreen_button.position.x = this.position.x + this.size.x - this.fullscreen_button.size.x - 5;
 	this.fullscreen_button.position.y = this.position.y + this.size.y - this.fullscreen_button.size.y - 5;
-	this.fullscreen_button.visible = this.visible && this.show_buttons;
+	this.fullscreen_button.visible = this.visible && this.show_buttons_fullscreen;
 	this.fullscreen_button.updateInterface();
 
 	//VR button
 	this.vr_button.position.x = this.fullscreen_button.position.x - this.vr_button.size.x - 10;
 	this.vr_button.position.y = this.fullscreen_button.position.y;
-	this.vr_button.visible = this.visible && this.show_buttons && App.webvrAvailable();
+	this.vr_button.visible = this.visible && this.show_buttons_vr;
 	this.vr_button.updateInterface();
 
 	//Update canvas

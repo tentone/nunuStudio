@@ -1018,7 +1018,8 @@ Editor.setState = function(state)
 		var tab = Interface.tab.getActual();
 		if(tab instanceof SceneEditor)
 		{
-			tab.show_buttons = false;
+			tab.show_buttons_fullscreen = false;
+			tab.show_buttons_vr = false;
 			tab.updateInterface();
 		}
 	}
@@ -1036,19 +1037,27 @@ Editor.setState = function(state)
 
 		//Show full screen and VR buttons
 		var tab = Interface.tab.getActual();
-		tab.show_buttons = true;
+		tab.show_buttons_fullscreen = true;
 		tab.updateInterface();
 
 		//If program uses VR set button
 		if(Editor.program_running.vr && App.webvrAvailable())
 		{
+			//Create VREffect instance
 			Editor.vr_effect = new THREE.VREffect(Editor.renderer);
+			
+			//Show VR button
+			tab.show_buttons_vr = true;
 
+			//Create VR switch callback
 			var vr_state = true;
 			tab.vr_button.setCallback(function()
 			{
-				Editor.vr_effect.setFullScreen(vr_state);
-				vr_state = !vr_state;
+				if(Editor.vr_effect !== null)
+				{
+					Editor.vr_effect.setFullScreen(vr_state);
+					vr_state = !vr_state;
+				}
 			});
 		}
 
