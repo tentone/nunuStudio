@@ -53,7 +53,7 @@ function ButtonImage(parent)
 	var self = this;
 
 	//Mouse over event
-	this.element.onmouseover = function()
+	this.element.onmouseenter = function()
 	{
 		self.element.className = "button_over";
 	};
@@ -130,10 +130,8 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
-	this.img.src = this.image;
 	this.img.width = this.size.x * this.image_scale.x;
 	this.img.height = this.size.y * this.image_scale.y;
-
 	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
 	

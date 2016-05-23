@@ -70,7 +70,7 @@ function ButtonDrawer(parent)
 	var self = this;
 
 	//Mouse over and mouse out events
-	this.element.onmouseover = function()
+	this.element.onmouseenter = function()
 	{
 		self.expanded = true;
 		self.updateInterface();
@@ -84,7 +84,7 @@ function ButtonDrawer(parent)
 		self.element.className = "button";
 	};
 
-	this.panel.onmouseover = function()
+	this.panel.onmouseenter = function()
 	{
 		self.expanded = true;
 		self.updateInterface();

@@ -48,7 +48,7 @@ function Button(parent)
 	var self = this;
 
 	//Mouse over and mouse out events
-	this.element.onmouseover = function()
+	this.element.onmouseenter = function()
 	{
 		self.element.className = "button_over";
 	};
