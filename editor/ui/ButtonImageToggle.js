@@ -36,8 +36,6 @@ function ButtonImageToggle(parent)
 	this.img.style.position = "absolute";
 	this.img.style.top = "0px";
 	this.img.style.left = "0px";
-
-	//Add image to button
 	this.element.appendChild(this.img);
 
 	//Element atributes
@@ -58,12 +56,12 @@ function ButtonImageToggle(parent)
 	};
 
 	//Mouse over and mouse out events
-	this.element.onmouseover = function()
+	this.element.onmouseenter = function()
 	{
 		self.element.className = "button_over";
 	};
 
-	this.element.onmouseout = function()
+	this.element.onmouseleave = function()
 	{
 		if(!self.selected)
 		{
@@ -112,12 +110,13 @@ function setCallback(callback)
 //Set ButtonImageToggle
 function setImage(image)
 {
-	this.image = image;
+	this.img.src = image;
 }
 
 //Update Interface
 function updateInterface()
 {
+	//Set visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -127,6 +126,7 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
+	//Set selected
 	if(this.selected)
 	{
 		this.element.className = "button_over";
@@ -136,12 +136,13 @@ function updateInterface()
 		this.element.className = "button";
 	}
 
-	this.img.src = this.image;
+	//Update image
 	this.img.width = this.size.x * this.image_scale.x;
 	this.img.height = this.size.y * this.image_scale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
 	
+	//Update element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

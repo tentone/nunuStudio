@@ -36,7 +36,7 @@ function TabElement(name, image, closeable, container, index)
 	});
 
 	//Mouse over event (overrided)
-	this.button.element.onmouseover = function()
+	this.button.element.onmouseenter = function()
 	{
 		self.button.setClass("button_over");
 	};

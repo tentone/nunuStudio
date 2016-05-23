@@ -62,7 +62,7 @@ function TreeElement(container)
 	var self = this;
 
 	//Mouse over event
-	this.element.onmouseover = function()
+	this.element.onmouseenter = function()
 	{
 		self.element.className = "button_left_over";
 	};

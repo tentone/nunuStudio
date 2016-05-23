@@ -41,17 +41,35 @@ function File(parent)
 
 	//Click event
 	var self = this;
+	var color = new THREE.Color(0, 0, 0);
 
 	//Mouse over event
-	this.element.onmouseover = function()
+	this.element.onmouseenter = function()
 	{
 		self.element.className = "button_over";
+
+		if(self.obj instanceof THREE.Material)
+		{
+			if(self.obj.color !== undefined)
+			{
+				color.copy(self.obj.color);
+				self.obj.color.setRGB(1, 0, 0);
+			}
+		}
 	};
 
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
 		self.element.className = "";
+
+		if(self.obj instanceof THREE.Material)
+		{
+			if(self.obj.color !== undefined)
+			{
+				self.obj.color.copy(color);
+			}
+		}
 	};
 
 	//Double click
