@@ -1,14 +1,12 @@
-function TabElement(name, image, closeable, container, index)
+function TabElement(name, icon, closeable, container, index)
 {
-	//Tab name and icon
-	this.name = name;
-	this.image = image;
-	this.closeable = closeable;
-
 	//Tab group container information
 	this.index = index;
 	this.container = container;
 	this.component = null;
+
+	//Tab closeable
+	this.closeable = closeable;
 
 	//Atributes
 	this.size = new THREE.Vector2(0, 0);
@@ -20,7 +18,6 @@ function TabElement(name, image, closeable, container, index)
 
 	//Button
 	this.button = new Button(this.container.element);
-	this.button.setText(name);
 	this.button.visible = true;
 	this.button.position.set(container.options_size.x*index, 0);
 	this.button.size.set(container.options_size.x, container.options_size.y);
@@ -66,22 +63,23 @@ function TabElement(name, image, closeable, container, index)
 	this.button.element.ondrop = function(event)
 	{
 		event.preventDefault();
-		//TODO <ADD CODE HERE>
 	};
 
 	//Prevent deafault when object dragged over
 	this.button.element.ondragover = function(event)
 	{
 		event.preventDefault();
-		//TODO <ADD CODE HERE>
 	};
 
 	//Icon
 	this.icon = new Image(this.button.element);
 	this.icon.size.set(15, 15);
 	this.icon.position.set(7, 7);
-	this.icon.setImage(image);
 	this.icon.updateInterface();
+
+	//Set name and icon
+	this.setName(name);
+	this.setIcon(icon);
 
 	//Close button
 	this.close_button = new ButtonImage(this.button.element);
@@ -108,17 +106,36 @@ TabElement.prototype.update = update;
 TabElement.prototype.updateInterface = updateInterface;
 TabElement.prototype.destroy = destroy;
 TabElement.prototype.activate = activate;
-TabElement.prototype.deactivate = deactivate;
+TabElement.prototype.updateObjectData = updateObjectData;
 TabElement.prototype.select = select;
 TabElement.prototype.attachComponent = attachComponent;
 TabElement.prototype.isSelected = isSelected;
+TabElement.prototype.setName = setName;
+TabElement.prototype.setIcon = setIcon;
+
+//Set tab element icon
+function setIcon(icon)
+{
+	this.icon.setImage(icon);
+}
+
+//Set tab element name
+function setName(text)
+{
+	if(text.length > 9)
+	{
+		text = text.slice(0,9) + "...";
+	}
+
+	this.button.setText(text);
+}
 
 //Dectivate this tab
-function deactivate()
+function updateObjectData()
 {
 	if(this.component !== null)
 	{
-		this.component.deactivate();
+		this.component.updateContainerMetaData(this);
 	}
 }
 
@@ -181,10 +198,11 @@ function updateInterface()
 		this.button.setClass("button");
 	}
 
-	//Update button and division
+	//Update button
 	this.button.position.set(this.container.options_size.x * this.index, 0);
 	this.button.updateInterface();
 
+	//Update division
 	this.division.visible = this.visible;
 	this.division.size.set(this.size.x, this.size.y - this.button.size.y);
 	this.division.updateInterface();

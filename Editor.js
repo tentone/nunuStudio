@@ -79,8 +79,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunu Studio";
-Editor.VERSION = "V0.7.3";
-Editor.TIMESTAMP = "201605210236";
+Editor.VERSION = "V0.7.4";
+Editor.TIMESTAMP = "201605241411";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -759,6 +759,13 @@ Editor.updateObjectViews = function()
 	Editor.updateTreeView();
 	Editor.updateAssetExplorer();
 	Editor.updateObjectPanel();
+	Editor.updateTabsData();
+}
+
+//Update tab names to match objects actual info
+Editor.updateTabsData = function()
+{
+	Interface.tab.updateObjectData();
 }
 
 //Update tree view to match actual scene
@@ -956,11 +963,16 @@ Editor.loadProgram = function(fname)
 	
 	//Remove old tabs from interface
 	Interface.tab.clear();
-	var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
-	var canvas = new SceneEditor();
-	canvas.setScene(Editor.program.scene);
-	scene.attachComponent(canvas);
-	Interface.tab.selectOption(0);
+
+	//Add new scene tab to interface
+	if(Editor.program.scene !== null)
+	{
+		var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
+		var canvas = new SceneEditor();
+		canvas.setScene(Editor.program.scene);
+		scene.attachComponent(canvas);
+		Interface.tab.selectOption(0);
+	}
 }
 
 //Export web project to file

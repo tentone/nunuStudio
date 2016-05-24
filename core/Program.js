@@ -146,9 +146,7 @@ function add(scene)
 //Clone program keep uuid and everything else
 function clone()
 {
-	var data = this.toJSON();
-	var loader = new ObjectLoader();
-	return loader.parse(data);
+	return new ObjectLoader().parse(this.toJSON());
 }
 
 //Set as initial scene (from uuid)

@@ -71,7 +71,10 @@ function initialize()
 		{
 			this.func();
 		}
-		catch(e){}
+		catch(e)
+		{
+			console.log(e.message);
+		}
 	}
 
 	//Initialize children
@@ -91,7 +94,10 @@ function update()
 		{
 			this.func();
 		}
-		catch(e){}
+		catch(e)
+		{
+			console.log(e.message);
+		}
 	}
 
 	//Update children
@@ -101,7 +107,7 @@ function update()
 	}
 }
 
-//Set initialization code
+//Define script code
 function setCode(code)
 {
 	try
@@ -109,7 +115,15 @@ function setCode(code)
 		this.code = code;
 		this.func = Function(this.code);
 	}
-	catch(e){}
+	catch(e)
+	{
+		if(e instanceof SyntaxError)
+		{
+			return e.message;
+		}
+	}
+
+	return null;
 }
 
 //Set script mode

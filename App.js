@@ -125,7 +125,7 @@ App.chooseFile = function(callback, filter, savemode)
 		chooser.nwsaveas = "file";
 	}
 
-	//Create onchange event and trigger it
+	//Create onchange event
 	chooser.onchange = function(event)
 	{
 		if(callback !== undefined)
@@ -134,6 +134,7 @@ App.chooseFile = function(callback, filter, savemode)
 		}
 	};
 
+	//Force trigger onchange event
 	chooser.click(); 
 }
 
@@ -154,7 +155,6 @@ App.readFile = function(fname, sync, callback)
 		{
 			return App.fs.readFileSync(fname, "utf8");
 		}
-
 		else
 		{
 			App.fs.readFile(fname, "utf8", callback);

@@ -6,8 +6,8 @@ function PointLight(hex, intensity, distance, decay)
 	
 	this.castShadow = true;
 
-	this.shadow.camera.near = 0.1;
-	this.shadow.camera.far = 5000;
+	this.shadow.camera.near = 0.01;
+	this.shadow.camera.far = 50000;
 	this.shadow.bias = 0.01;
 
 	//this.shadow.mapSize.width = 1024;

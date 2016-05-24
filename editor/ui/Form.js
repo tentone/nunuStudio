@@ -106,6 +106,7 @@ function updateInterface()
 
 	//Updated attached elements
 	var position = new THREE.Vector2(this.spacing.x, this.spacing.y);
+	var size = new THREE.Vector2(0, 0);
 	for(var i = 0; i < this.rows.length; i++)
 	{
 		var max_size_y = 0;
@@ -125,10 +126,20 @@ function updateInterface()
 			position.x += element.size.x + this.spacing.x;
 		}
 
+		//Update form size X
+		if(size.x < position.x)
+		{
+			size.x = position.x;
+		}
+
 		//Update position tracker
 		position.x = this.spacing.x;
 		position.y += max_size_y + this.spacing.y;
 	}
+	size.y = position.y;
+	
+	//Update form size
+	this.size.copy(size);
 
 	//Update element
 	this.element.style.top = this.position.y + "px";

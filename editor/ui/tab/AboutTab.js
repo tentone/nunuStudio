@@ -85,10 +85,10 @@ AboutTab.prototype.update = update;
 AboutTab.prototype.updateInterface = updateInterface;
 AboutTab.prototype.destroy = destroy;
 AboutTab.prototype.activate = activate;
-AboutTab.prototype.deactivate = deactivate;
+AboutTab.prototype.updateContainerMetaData = updateContainerMetaData;
 
-//Deactivate
-function deactivate(){}
+//Update container object data
+function updateContainerMetaData(container){}
 
 //Activate
 function activate()

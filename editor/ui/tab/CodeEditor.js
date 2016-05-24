@@ -100,15 +100,21 @@ CodeEditor.prototype.update = update;
 CodeEditor.prototype.updateInterface = updateInterface;
 CodeEditor.prototype.destroy = destroy;
 CodeEditor.prototype.activate = activate;
-CodeEditor.prototype.deactivate = deactivate;
 CodeEditor.prototype.setMode = setMode;
 CodeEditor.prototype.getText = getText;
 CodeEditor.prototype.setText = setText;
 CodeEditor.prototype.attachScript = attachScript;
 CodeEditor.prototype.updateScript = updateScript;
+CodeEditor.prototype.updateContainerMetaData = updateContainerMetaData;
 
-//Deactivate
-function deactivate(){}
+//Update container object data
+function updateContainerMetaData(container)
+{
+	if(this.script !== null)
+	{
+		container.setName(this.script.name);
+	}
+}
 
 //Activate code editor
 function activate()
