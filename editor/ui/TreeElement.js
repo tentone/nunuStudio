@@ -266,6 +266,36 @@ function TreeElement(container)
 				tab.select();
 			}
 		}
+		else if(self.obj instanceof ParticleEmitter)
+		{
+			//Check if there is already a tab with this script attached
+			var found = false;
+			for(var i = 0; i < Interface.tab.options.length; i++)
+			{
+				if(Interface.tab.options[i].component instanceof ParticleEditor)
+				{
+					if(Interface.tab.options[i].component.script === self.obj)
+					{
+						found = true;
+						Interface.tab.selectOption(i);
+						break;
+					}
+				}
+			}
+
+			//If not found open new tab
+			if(!found)
+			{
+				//Add new Code Editor tab
+				var tab = Interface.tab.addOption(self.obj.name, Interface.file_dir + "icons/effects/particles.png", true);
+				var particle = new ParticleEditor();
+				particle.attachParticle(self.obj);
+				tab.attachComponent(particle);
+				
+				//Select added tab
+				tab.select();
+			}
+		}
 	};
 
 	//Arrow click
