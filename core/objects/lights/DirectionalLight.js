@@ -7,7 +7,7 @@ function DirectionalLight(hex, intensity)
 	this.castShadow = true;
 	
 	this.shadow.camera.near = 0;
-	this.shadow.camera.far = 5000;
+	this.shadow.camera.far = 50000;
 	this.shadow.camera.left = -10;
 	this.shadow.camera.right = 10;
 	this.shadow.camera.top = 10;
@@ -24,6 +24,7 @@ DirectionalLight.prototype.icon = "editor/files/icons/lights/directional.png";
 //Runtime functions
 DirectionalLight.prototype.update = update;
 DirectionalLight.prototype.initialize = initialize;
+DirectionalLight.prototype.toJSON = toJSON;
 
 //Initialize
 function initialize()
@@ -41,4 +42,17 @@ function update()
 	{
 		this.children[i].update();
 	}
+}
+
+//Create JSON for object
+function toJSON(meta)
+{
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+
+	data.shadow_left = this.shadow.camera.left;
+	data.shadow_right = this.shadow.camera.right;
+	data.shadow_top = this.shadow.camera.top;
+	data.shadow_bottom = this.shadow.camera.bottom;
+	
+	return data;
 }

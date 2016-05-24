@@ -59,10 +59,10 @@ SettingsTab.prototype.update = update;
 SettingsTab.prototype.updateInterface = updateInterface;
 SettingsTab.prototype.destroy = destroy;
 SettingsTab.prototype.activate = activate;
-SettingsTab.prototype.deactivate = deactivate;
+SettingsTab.prototype.updateContainerMetaData = updateContainerMetaData;
 
-//Deactivate
-function deactivate(){}
+//Update container object data
+function updateContainerMetaData(container){}
 
 //Activate
 function activate()

@@ -495,16 +495,25 @@ function MaterialEditor(parent)
 	
 }
 
-//Materialeditor counter
+//Material editor counter
 MaterialEditor.id = 0;
 
 //Functions Prototype
 MaterialEditor.prototype.attachMaterial = attachMaterial;
 MaterialEditor.prototype.activate = activate;
-MaterialEditor.prototype.deactivate = deactivate;
 MaterialEditor.prototype.destroy = destroy;
 MaterialEditor.prototype.update = update;
 MaterialEditor.prototype.updateInterface = updateInterface;
+MaterialEditor.prototype.updateContainerMetaData = updateContainerMetaData;
+
+//Update container object data
+function updateContainerMetaData(container)
+{
+	if(this.material !== null)
+	{
+		container.setName(this.material.name);
+	}
+}
 
 //Attach material to material editor
 function attachMaterial(material)
@@ -514,9 +523,6 @@ function attachMaterial(material)
 	this.obj.visible = true;
 	this.sprite.visible = false;
 }
-
-//Deactivate
-function deactivate(){}
 
 //Activate code editor
 function activate()

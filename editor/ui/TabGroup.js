@@ -60,6 +60,16 @@ TabGroup.prototype.updateOptionIndex = updateOptionIndex;
 TabGroup.prototype.selectOption = selectOption;
 TabGroup.prototype.closeActual = closeActual;
 TabGroup.prototype.getActual = getActual;
+TabGroup.prototype.updateObjectData = updateObjectData;
+
+//Update all tabs object data
+function updateObjectData()
+{
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].updateObjectData();
+	}
+}
 
 //Get actual tab
 function getActual()

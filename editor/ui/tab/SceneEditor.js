@@ -133,8 +133,17 @@ SceneEditor.prototype.updateInterface = updateInterface;
 SceneEditor.prototype.destroy = destroy;
 SceneEditor.prototype.activate = activate;
 SceneEditor.prototype.setScene = setScene;
-SceneEditor.prototype.deactivate = deactivate;
 SceneEditor.prototype.setFullscreen = setFullscreen;
+SceneEditor.prototype.updateContainerMetaData = updateContainerMetaData;
+
+//Update container object data
+function updateContainerMetaData(container)
+{
+	if(this.scene !== null)
+	{
+		container.setName(this.scene.name);
+	}
+}
 
 //Set fullscreen mode
 function setFullscreen(value)
@@ -162,9 +171,6 @@ function setFullscreen(value)
 		Interface.updateInterface();
 	}
 }
-
-//Deactivate
-function deactivate(){}
 
 //Activate scene editor
 function activate()

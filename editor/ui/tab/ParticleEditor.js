@@ -64,8 +64,6 @@ function ParticleEditor(parent)
 	
 	//Particle preview scene
 	this.scene = new Scene();
-	this.container = new Container();
-	this.scene.add(this.container);
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x444444));
 	this.scene.add(new THREE.GridHelper(50, 1));
@@ -73,6 +71,7 @@ function ParticleEditor(parent)
 
 	//Particle
 	this.particle = null;
+	this.particle_runtime = null;
 
 	//Camera
 	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y, 0.1, 10000000);
@@ -100,7 +99,6 @@ function ParticleEditor(parent)
 
 	//Add element to document
 	this.parent.appendChild(this.element);
-	
 }
 
 //Particleeditor counter
@@ -109,21 +107,27 @@ ParticleEditor.id = 0;
 //Functions Prototype
 ParticleEditor.prototype.attachParticle = attachParticle;
 ParticleEditor.prototype.activate = activate;
-ParticleEditor.prototype.deactivate = deactivate;
 ParticleEditor.prototype.destroy = destroy;
 ParticleEditor.prototype.update = update;
 ParticleEditor.prototype.updateInterface = updateInterface;
+ParticleEditor.prototype.updateContainerMetaData = updateContainerMetaData;
+
+//Update container object data
+function updateContainerMetaData(container)
+{
+	if(this.particle !== null)
+	{
+		container.setName(this.particle.name);
+	}
+}
 
 //Attach particle to particle editor
 function attachParticle(particle)
 {
 	this.particle = particle;
-	this.container.add(particle);
-	this.particle.initialize();
+	this.particle_runtime = new ObjectLoader().parse(particle.toJSON());
+	this.particle_runtime.initialize();
 }
-
-//Deactivate
-function deactivate(){}
 
 //Activate code editor
 function activate()
@@ -175,11 +179,7 @@ function update()
 
 		//Camera zoom
 		this.camera_distance += Mouse.wheel * 0.005;
-		if(this.camera_distance > 20)
-		{
-			this.camera_distance = 20;
-		}
-		else if(this.camera_distance < 0.1)
+		if(this.camera_distance < 0.1)
 		{
 			this.camera_distance = 0.1;
 		}
@@ -192,7 +192,11 @@ function update()
 	}
 
 	//Update particle and render
-	this.container.update();
+	if(this.particle_runtime !== null)
+	{
+		this.particle_runtime.update();
+		this.renderer.render(this.particle_runtime, this.camera);
+	}
 	this.renderer.render(this.scene, this.camera);
 }
 
