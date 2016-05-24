@@ -99,6 +99,7 @@ function selectOption(index)
 	else
 	{
 		this.options_selected = -1;
+		this.updateInterface();
 	}
 }
 
@@ -123,30 +124,34 @@ function clear()
 		this.options.pop().destroy();
 	}
 	
-	this.options_selected = -1;
+	this.selectOption(-1);
 	this.updateOptionIndex();
 	this.updateInterface();
 }
 
-//Remove tab
+//Remove tab from group
 function removeOption(index)
 {
 	if(index > -1 && index < this.options.length)
 	{
+		//Remove option from list
 		this.options[index].destroy();
 		this.options.splice(index, 1);
 
+		//Update options index
 		this.updateOptionIndex();
 
+		//Select option
 		if(this.options.length > 0)
 		{
-			this.selectOption(0);
+			this.selectOption(index - 1);
 		}
 		else
 		{
 			this.selectOption(-1);
 		}
 
+		//Update interface
 		this.updateInterface();
 	}
 }
