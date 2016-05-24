@@ -79,8 +79,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunu Studio";
-Editor.VERSION = "V0.7.4";
-Editor.TIMESTAMP = "201605241411";
+Editor.VERSION = "V0.7.5";
+Editor.TIMESTAMP = "201605242336";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -1051,7 +1051,6 @@ Editor.setState = function(state)
 		//Show full screen and VR buttons
 		var tab = Interface.tab.getActual();
 		tab.show_buttons_fullscreen = true;
-		tab.updateInterface();
 
 		//If program uses VR set button
 		if(Editor.program_running.vr && App.webvrAvailable())
@@ -1073,6 +1072,9 @@ Editor.setState = function(state)
 				}
 			});
 		}
+
+		//Update tab to show buttons
+		tab.updateInterface();
 
 		//Set run button text
 		Interface.run.setText("Stop");

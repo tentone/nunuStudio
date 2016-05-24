@@ -343,10 +343,17 @@ function include(file)
 {
 	if(file.endsWith(".js"))
 	{
-		document.write('<script type="text/javascript" src="'+ file + '"></script>');
+		var js = document.createElement("script");
+		js.src = file;
+		js.type = "text/javascript";
+		js.async = false;
+		document.body.appendChild(js);
 	}
 	else if(file.endsWith(".css"))
 	{
-		document.write('<link rel="stylesheet" href="' + file + '">');
+		var css = document.createElement("link");
+		css.href = file;
+		css.rel = "stylesheet";
+		document.body.appendChild(css);
 	}	
 }
