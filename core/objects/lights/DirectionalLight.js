@@ -7,7 +7,7 @@ function DirectionalLight(hex, intensity)
 	this.castShadow = true;
 	
 	this.shadow.camera.near = 0;
-	this.shadow.camera.far = 50000;
+	this.shadow.camera.far = 5000;
 	this.shadow.camera.left = -10;
 	this.shadow.camera.right = 10;
 	this.shadow.camera.top = 10;

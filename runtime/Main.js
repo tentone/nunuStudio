@@ -18,13 +18,14 @@ Main.initialize = function(canvas)
 	Main.canvas.height = window.innerHeight;
 	document.body.appendChild(Main.canvas);
 
+	//Define mouse canvas
 	Mouse.canvas = Main.canvas;
 
 	//Set renderer
-	Main.renderer = new THREE.WebGLRenderer({canvas: Main.canvas});
+	Main.renderer = new THREE.WebGLRenderer({canvas: Main.canvas, antialias: true});
 	Main.renderer.autoClear = false;
 	Main.renderer.shadowMap.enabled = true;
-	Main.renderer.shadowMap.type = THREE.PCFShadowMap;
+	Main.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	Main.renderer.setSize(Main.canvas.width, Main.canvas.height);
 
 	//Initialize scene
@@ -32,6 +33,90 @@ Main.initialize = function(canvas)
 	Main.program.default_camera.position.set(0, 5, -5);
 	Main.program.initialize();
 	Main.program.resize(Main.canvas.width, Main.canvas.height);
+
+	//VR Stuff
+	Main.vr_controls = null;
+	Main.vr_effect = null;
+
+	//Fullscreen button
+	Main.fullscreen = document.createElement("div");
+	Main.fullscreen.style.position = "absolute";
+	Main.fullscreen.style.left = (window.innerWidth - 30) + "px";
+	Main.fullscreen.style.top = (window.innerHeight - 30) + "px";
+	document.body.appendChild(Main.fullscreen);
+	var fullscreen = true;
+	Main.fullscreen.onclick = function()
+	{
+		if(fullscreen)
+		{
+			App.enterFullscreen();
+			Main.resize();
+		}
+		else
+		{
+			App.leaveFullscreen();
+			Main.resize();
+		}
+		fullscreen = !fullscreen;
+	};
+
+	var img = document.createElement("img");
+	img.style.position = "absolute";
+	img.width = 25;
+	img.height = 25;
+	img.style.top = "0px";
+	img.style.left = "0px";
+	img.src = "fullscreen.png";
+	img.onmouseenter = function()
+	{
+		img.style.opacity = 0.5;
+	}
+	img.onmouseleave = function()
+	{
+		img.style.opacity = 1.0;
+	}
+	Main.fullscreen.appendChild(img);
+
+	//VR button
+	if(App.webvrAvailable())
+	{
+		Main.vr = document.createElement("div");
+		Main.vr.style.position = "absolute";
+		Main.vr.style.left = (window.innerWidth - 60) + "px";
+		Main.vr.style.top = (window.innerHeight - 30) + "px";
+		document.body.appendChild(Main.vr);
+
+		var vr_state = true;
+		Main.vr.onclick = function()
+		{
+			if(Main.vr_effect !== null)
+			{
+				Main.vr_effect.setFullScreen(vr_state);
+				vr_state = !vr_state;
+			}
+		};
+
+		var img = document.createElement("img");
+		img.style.position = "absolute";
+		img.width = 25;
+		img.height = 25;
+		img.style.top = "0px";
+		img.style.left = "0px";
+		img.src = "vr.png";
+		img.onmouseenter = function()
+		{
+			img.style.opacity = 0.5;
+		}
+		img.onmouseleave = function()
+		{
+			img.style.opacity = 1.0;
+		}
+		Main.vr.appendChild(img);
+
+		//Create vr effect
+		Main.vr_controls = new VRControls();
+		Main.vr_effect = new THREE.VREffect(Main.renderer);
+	}
 }
 
 //Update Main
@@ -43,20 +128,54 @@ Main.update = function()
 //Draw stuff into screen
 Main.draw = function()
 {
-	Main.renderer.clear();
-	Main.renderer.render(Main.program.scene, Main.program.scene.camera);
+	if(Main.vr_effect !== null)
+	{
+		//Update VR controls
+		Main.vr_controls.scale = 1;
+		Main.vr_controls.update();
+
+		//Backup camera atributes
+		var camera = Main.program.scene.camera;
+		var position = camera.position.clone();
+		var quaternion = camera.quaternion.clone();
+
+		//Apply VR controller offsets to actual camera
+		camera.position.add(Main.vr_controls.position);
+		camera.quaternion.multiply(Main.vr_controls.quaternion);
+
+		//Render scene
+		Main.vr_effect.render(Main.program.scene, camera);
+
+		//Backup camera atributes
+		camera.position.copy(position);
+		camera.quaternion.copy(quaternion);
+	}
+	else
+	{
+		Main.renderer.render(Main.program.scene, Main.program.scene.camera);
+	}
 }
 
 //Resize to fit window
 Main.resize = function()
 {
+	//Update canvas and renderer
 	if(Main.canvas !== null && Main.renderer != null)
 	{
 		Main.canvas.width = window.innerWidth;
 		Main.canvas.height = window.innerHeight;
-
 		Main.renderer.setSize(Main.canvas.width, Main.canvas.height);
 		Main.program.resize(Main.canvas.width, Main.canvas.height);
+	}
+
+	//Update button position
+	Main.fullscreen.style.left = (window.innerWidth - 30) + "px";
+	Main.fullscreen.style.top = (window.innerHeight - 30) + "px";
+
+	if(Main.vr !== undefined)
+	{
+		Main.vr.style.left = (window.innerWidth - 60) + "px";
+		Main.vr.style.top = (window.innerHeight - 30) + "px";
 	}
 }
 

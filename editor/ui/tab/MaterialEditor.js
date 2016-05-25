@@ -174,7 +174,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.name = self.name.getText();
-			Editor.updateAssetExplorer();
+			Editor.updateObjectViews();
 		}
 	});
 	this.form.add(this.name);
@@ -511,7 +511,10 @@ function updateContainerMetaData(container)
 {
 	if(this.material !== null)
 	{
-		container.setName(this.material.name);
+		if(this.material.name !== undefined)
+		{
+			container.setName(this.material.name);
+		}
 	}
 }
 

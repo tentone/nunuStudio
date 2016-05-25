@@ -726,6 +726,23 @@ Interface.initialize = function()
 		Editor.updateObjectViews();
 	}, Interface.file_dir + "icons/misc/add.png");
 
+	Interface.project.addOption("Execute script", function()
+	{
+		App.chooseFile(function(fname)
+		{
+			try
+			{
+				var code = App.readFile(fname);
+				var func = Function(code);
+				func();
+			}
+			catch(e)
+			{
+				alert(e);
+			}
+		}, ".js");
+	}, Interface.file_dir + "icons/script/script.png");
+
 	//About
 	Interface.about = new Button();
 	Interface.about.setText("About");

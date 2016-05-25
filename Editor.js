@@ -553,7 +553,7 @@ Editor.draw = function()
 		if(Editor.vr_effect !== null)
 		{
 			//Update VR controls
-			Editor.vr_controls.scale = 8;
+			Editor.vr_controls.scale = 1;
 			Editor.vr_controls.update();
 
 			//Backup camera atributes
