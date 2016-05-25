@@ -127,14 +127,20 @@ function updatePanel()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
-
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
-
 		this.fov.setValue(this.obj.fov);
 		this.fov_text.setText(this.obj.fov);
 
-		this.default.setValue(ObjectUtils.getScene(this.obj).initial_camera === this.obj.uuid);
+		var scene = ObjectUtils.getScene(this.obj);
+		if(scene !== null)
+		{
+			this.default.setValue(scene.initial_camera === this.obj.uuid);
+		}
+		else
+		{
+			this.default.setValue(false);
+		}
 	}
 }
 
