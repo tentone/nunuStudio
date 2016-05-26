@@ -22,9 +22,13 @@ function CodeEditor(parent)
 
 	//Codemirror editor
 	this.code = new CodeMirror(this.element, {value:"", lineNumbers:true, indentWithTabs:true, indentUnit:4, tabSize:4, mode:"javascript"});
-	this.code.setOption("theme", "monokai");
+	this.code.setOption("theme", Settings.code_theme);
 	this.code.setOption("mode", "javascript");
 	
+	//Font size
+	this.font_size = Settings.code_font_size;
+	this.setFontSize(this.font_size);
+
 	//Code changed event
 	var self = this;
 	this.code.on("change", function()
@@ -106,6 +110,15 @@ CodeEditor.prototype.setText = setText;
 CodeEditor.prototype.attachScript = attachScript;
 CodeEditor.prototype.updateScript = updateScript;
 CodeEditor.prototype.updateContainerMetaData = updateContainerMetaData;
+CodeEditor.prototype.setFontSize = setFontSize;
+
+//Set code editor font size
+function setFontSize(size)
+{
+	this.font_size = size;
+	this.code.display.wrapper.style.fontSize = size + "px";
+	this.code.refresh();
+}
 
 //Update container object data
 function updateContainerMetaData(container)
@@ -170,7 +183,22 @@ function destroy()
 }
 
 //Update CodeEditor
-function update(){}
+function update()
+{
+	if(Keyboard.isKeyPressed(Keyboard.CTRL))
+	{
+		if(Mouse.wheel !== 0)
+		{
+			this.font_size -= Mouse.wheel/100;
+			if(this.font_size < 5)
+			{
+				this.font_size = 5;
+			}
+
+			this.setFontSize(this.font_size);
+		}
+	}
+}
 
 //Update division Size
 function updateInterface()

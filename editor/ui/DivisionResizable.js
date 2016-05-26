@@ -12,7 +12,6 @@ function DivisionResizable(parent)
 
 	//ID
 	var id = "div_res" + DivisionResizable.id;
-	var id_tab = "div_res_tab" + DivisionResizable.id;
 	DivisionResizable.id++;
 
 	//Create element
@@ -33,9 +32,8 @@ function DivisionResizable(parent)
 		event.preventDefault();
 	};
 
-	//Create resize_tab tab
+	//Create division resize tab
 	this.resize_tab = document.createElement("div");
-	this.resize_tab.id = id_tab;
 	this.resize_tab.style.position = "absolute";
 	this.resize_tab.className = "panel_res_hor_tab";
 

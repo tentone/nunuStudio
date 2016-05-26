@@ -63,6 +63,7 @@ include("editor/tools/ResizeTool.js");
 include("editor/tools/RotateTool.js");
 
 include("editor/Interface.js");
+include("editor/Settings.js");
 
 function Editor(){}
 
@@ -79,8 +80,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunu Studio";
-Editor.VERSION = "V0.7.5";
-Editor.TIMESTAMP = "201605242336";
+Editor.VERSION = "V0.7.6";
+Editor.TIMESTAMP = "201605252306";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -224,8 +225,8 @@ Editor.update = function()
 	Interface.update();
 	Editor.block_camera_move = false;
 
-	//Editing a scene
-	if(Editor.state === Editor.STATE_EDITING)
+	//If not on test mode
+	if(Editor.state !== Editor.STATE_TESTING)
 	{
 		//Close tab, Save and load project
 		if(Keyboard.isKeyPressed(Keyboard.CTRL))
@@ -243,7 +244,11 @@ Editor.update = function()
 				Interface.tab.closeActual();
 			}
 		}
+	}
 
+	//Editing a scene
+	if(Editor.state === Editor.STATE_EDITING)
+	{
 		//If object select display tools
 		if(Editor.selected_object !== null)
 		{
@@ -255,7 +260,7 @@ Editor.update = function()
 				Editor.rotate_tool.visible = false;
 				Editor.resize_tool.visible = false;
 
-				var position = ObjectUtils.objectAbsolutePosition(Editor.selected_object);
+				var position = Editor.selected_object.getWorldPosition();
 				var distance = Editor.camera.position.distanceTo(position)/5;
 				Editor.move_tool.scale.set(distance, distance, distance);
 				Editor.move_tool.position.copy(position);
@@ -266,8 +271,9 @@ Editor.update = function()
 				Editor.move_tool.visible = false;
 				Editor.rotate_tool.visible = false;
 
-				var position = ObjectUtils.objectAbsolutePosition(Editor.selected_object);
+				var position = Editor.selected_object.getWorldPosition();
 				var distance = Editor.camera.position.distanceTo(position)/5;
+
 				Editor.resize_tool.scale.set(distance, distance, distance);
 				Editor.resize_tool.rotation.copy(Editor.selected_object.rotation);
 				Editor.resize_tool.position.copy(position);
@@ -278,7 +284,7 @@ Editor.update = function()
 				Editor.move_tool.visible = false;
 				Editor.resize_tool.visible = false;
 
-				var position = ObjectUtils.objectAbsolutePosition(Editor.selected_object);
+				var position = Editor.selected_object.getWorldPosition();
 				var distance = Editor.camera.position.distanceTo(position)/5;
 				Editor.rotate_tool.scale.set(distance, distance, distance);
 				Editor.rotate_tool.position.copy(position);
@@ -341,7 +347,7 @@ Editor.update = function()
 				//Moving object
 				if(Editor.tool_mode === Editor.MODE_MOVE)
 				{
-					var speed = Editor.camera.position.distanceTo(ObjectUtils.objectAbsolutePosition(Editor.selected_object))/500;
+					var speed = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/500;
 					if(Editor.editing_object_args.x)
 					{
 						Editor.selected_object.position.x -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x);
@@ -361,7 +367,7 @@ Editor.update = function()
 				//Resize mode
 				else if(Editor.tool_mode === Editor.MODE_RESIZE)
 				{
-					var speed = Editor.camera.position.distanceTo(ObjectUtils.objectAbsolutePosition(Editor.selected_object))/1000;
+					var speed = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/1000;
 					if(Editor.editing_object_args.center)
 					{
 						var size = (Mouse.pos_diff.x - Mouse.pos_diff.y) * speed/3;
@@ -821,7 +827,7 @@ Editor.updateObjectHelper = function()
 
 	if(Editor.selected_object !== null)
 	{
-		var position = ObjectUtils.objectAbsolutePosition(Editor.selected_object);
+		var position = Editor.selected_object.getWorldPosition();
 
 		if(Editor.selected_object instanceof THREE.Camera)
 		{
@@ -859,7 +865,7 @@ Editor.updateObjectHelper = function()
 			Editor.hemisphere_light_helper.position.copy(position);
 			Editor.hemisphere_light_helper.update();
 		}
-		else
+		else if(Editor.selected_object instanceof THREE.Object3D)
 		{
 			Editor.activateHelper(Editor.box_helper, true);
 			Editor.box_helper.update(Editor.selected_object);

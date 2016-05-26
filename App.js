@@ -1,4 +1,4 @@
-include("lib/three/three.min.js");
+include("lib/three/three.js");
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/VRMLLoader.js");
@@ -27,8 +27,8 @@ include("input/Mouse.js");
 include("core/ThreeExpand.js");
 include("core/ObjectLoader.js");
 include("core/Program.js");
+include("core/Scene.js");
 include("core/ObjectUtils.js");
-include("core/Global.js");
 
 include("core/webvr/VRControls.js");
 
@@ -41,19 +41,16 @@ include("core/loaders/FontLoader.js");
 
 include("core/objects/device/LeapHand.js");
 include("core/objects/device/KinectDevice.js");
-
 include("core/objects/lights/PointLight.js");
 include("core/objects/lights/SpotLight.js");
 include("core/objects/lights/AmbientLight.js");
 include("core/objects/lights/DirectionalLight.js");
 include("core/objects/lights/HemisphereLight.js");
 include("core/objects/lights/Sky.js");
-
 include("core/objects/cameras/PerspectiveCamera.js");
 include("core/objects/cameras/OrthographicCamera.js");
 
 include("core/objects/Bone.js");
-include("core/objects/Scene.js");
 include("core/objects/Container.js");
 include("core/objects/Script.js");
 include("core/objects/Model3D.js");

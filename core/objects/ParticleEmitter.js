@@ -1,6 +1,6 @@
 function ParticleEmitter()
 {
-	THREE.Object3D.call(this);
+	THREE.Scene.call(this);
 
 	this.type = "ParticleEmiter";
 	this.name = "particle";
@@ -84,7 +84,7 @@ function ParticleEmitter()
 }
 
 //Function Prototype
-ParticleEmitter.prototype = Object.create(THREE.Object3D.prototype);
+ParticleEmitter.prototype = Object.create(THREE.Scene.prototype);
 ParticleEmitter.prototype.icon = "editor/files/icons/effects/particles.png";
 
 //Runtime functions

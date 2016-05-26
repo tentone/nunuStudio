@@ -1,11 +1,11 @@
 function Audio()
 {
-	THREE.Audio.call(this, Global.listener);
+	THREE.Audio.call(this, Audio.listener);
 
 	this.name = "audio";
 	this.type = "Audio";
 
-	this.autoplay = true;
+	this.autoplay = false;
 	this.file = "data/evil_angel.ogg";
 }
 
@@ -16,6 +16,9 @@ Audio.prototype.icon = "editor/files/icons/assets/audio.png";
 //Runtime functions
 Audio.prototype.update = update;
 Audio.prototype.initialize = initialize;
+
+//Static variables
+Audio.listener = new THREE.AudioListener();
 
 //Initialize
 function initialize()

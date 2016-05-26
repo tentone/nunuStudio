@@ -104,6 +104,10 @@ function File(parent)
 				tab.select();
 			}
 		}
+		else if(self.obj instanceof THREE.Texture)
+		{
+			//TODO <ADD CODE HERE>
+		}
 	};
 
 	//Context menu event
@@ -118,16 +122,24 @@ function File(parent)
 			if(self.obj !== null)
 			{
 				self.obj.name = prompt("Rename object", self.obj.name);
-				Editor.updateObjectPanel();
+				Editor.updateObjectViews();
 			}
 		});
+		
 		context.addOption("Delete", function()
 		{
-			//TODO <ADD CODE HERE>
+			if(self.obj !== null)
+			{
+				//TODO <ADD CODE HERE>
+			}
 		});
+
 		context.addOption("Copy", function()
 		{
-			//TODO <ADD CODE HERE>
+			if(self.obj !== null)
+			{
+				//TODO <ADD CODE HERE>
+			}
 		});
 	};
 

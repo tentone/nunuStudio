@@ -46,7 +46,7 @@ WebcamTexture.prototype.update = update;
 WebcamTexture.prototype.dispose = dispose;
 
 //Update texture
-function update(delta, now)
+function update()
 {
 	if(this.video.readyState >= this.video.HAVE_CURRENT_DATA)
 	{

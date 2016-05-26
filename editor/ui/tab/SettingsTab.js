@@ -32,15 +32,24 @@ function SettingsTab(parent)
 	};
 
 	//Dual division
-	this.dual_division = new DualDivisionResizable(this.element);
-	this.dual_division.orientation = DualDivisionResizable.HORIZONTAL;
-	this.dual_division.tab_position = 0.2;
-	this.dual_division.fit_parent = true;
-	this.dual_division.updateInterface();
+	this.container = new DualDivisionResizable(this.element);
+	this.container.orientation = DualDivisionResizable.HORIZONTAL;
+	this.container.tab_position = 0.2;
+	this.container.tab_position_max = 0.8;
+	this.container.tab_position_min = 0.2;
+	this.container.fit_parent = true;
+	this.container.updateInterface();
 
 	//Set Div A style
-	this.dual_division.div_a.className = "bar";
+	this.container.div_a.className = "bar";
 	
+	//Settings divisions buttons
+	this.button_general = new Button(this.container.div_a);
+	this.button_general.setText("General");
+	this.button_general.position.set(0, 0);
+	this.button_general.size.set(0, 25);
+	this.button_general.updateInterface();
+
 	//Element atributes
 	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
@@ -84,7 +93,7 @@ function destroy()
 //Update SettingsTab
 function update()
 {
-	this.dual_division.update();
+	this.container.update();
 }
 
 //Update division Size
@@ -106,7 +115,12 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
-		
+	
+
+	//Update buttons
+	this.button_general.size.x = this.container.tab_position * this.size.x;
+	this.button_general.updateInterface();
+
 	//Update base element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
@@ -114,6 +128,6 @@ function updateInterface()
 	this.element.style.height = this.size.y + "px";
 
 	//Update Dual Division
-	this.dual_division.visible = this.visible;
-	this.dual_division.updateInterface();
+	this.container.visible = this.visible;
+	this.container.updateInterface();
 }
