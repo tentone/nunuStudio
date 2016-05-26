@@ -14,7 +14,7 @@ function parse(data)
 	return new THREE.Font(JSON.parse(data.substring(65, data.length - 2)));
 }
 
-//Load  font
+//Load font file
 function load(url, onLoad, onProgress, onError)
 {
 	var loader = new THREE.XHRLoader(this.manager);

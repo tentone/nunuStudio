@@ -67,7 +67,7 @@ function ParticleEditor(parent)
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x444444));
 	this.scene.add(new THREE.GridHelper(50, 1));
-	this.scene.add(new THREE.AxisHelper(100));
+	this.scene.add(new THREE.AxisHelper(50));
 
 	//Particle
 	this.particle = null;
@@ -75,8 +75,9 @@ function ParticleEditor(parent)
 
 	//Camera
 	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y, 0.1, 10000000);
-	this.camera_rotation = new THREE.Vector2(0, 0);
+	this.camera_rotation = new THREE.Vector2(0, 0.5);
 	this.camera_distance = 5;
+	this.updateCamera();
 
 	//-----------------------------Particle parameters------------------------------
 	this.form = new Form(this.main.div_b);
@@ -92,10 +93,26 @@ function ParticleEditor(parent)
 		if(self.particle !== null)
 		{
 			self.particle.name = self.name.getText();
+			Editor.updateObjectViews();
 		}
 	});
 	this.form.add(this.name);
-	this.form.updateInterface();
+	this.form.nextRow();
+
+	//Texture map
+	this.form.addText("Texture");
+	this.form.nextRow();
+	this.texture = new Imagebox(this.form.element);
+	this.texture.size.set(100, 100);
+	this.texture.updateInterface();
+	this.texture.setOnChange(function(file)
+	{
+		self.particle.group.texture = new Texture(file);
+		self.particle_runtime.group.material.uniforms.texture.value = new Texture(file);
+		self.particle_runtime.group.material.needsUpdate = true;
+	});
+	this.form.add(this.texture);
+	this.form.nextRow();
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -111,6 +128,7 @@ ParticleEditor.prototype.destroy = destroy;
 ParticleEditor.prototype.update = update;
 ParticleEditor.prototype.updateInterface = updateInterface;
 ParticleEditor.prototype.updateContainerMetaData = updateContainerMetaData;
+ParticleEditor.prototype.updateCamera = updateCamera;
 
 //Update container object data
 function updateContainerMetaData(container)
@@ -124,9 +142,23 @@ function updateContainerMetaData(container)
 //Attach particle to particle editor
 function attachParticle(particle)
 {
+	//Attached particle
 	this.particle = particle;
+
+	//Create particle copy for runtime
 	this.particle_runtime = new ObjectLoader().parse(particle.toJSON());
 	this.particle_runtime.initialize();
+	this.scene.add(this.particle_runtime);
+}
+
+//Update camera position and rotation from variables
+function updateCamera()
+{
+	//Calculate direction vector
+	var cos_angle_y = Math.cos(this.camera_rotation.y);
+	var position = new THREE.Vector3(this.camera_distance * Math.cos(this.camera_rotation.x)*cos_angle_y, this.camera_distance * Math.sin(this.camera_rotation.y), this.camera_distance * Math.sin(this.camera_rotation.x)*cos_angle_y);
+	this.camera.position.copy(position);
+	this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 }
 
 //Activate code editor
@@ -184,19 +216,16 @@ function update()
 			this.camera_distance = 0.1;
 		}
 
-		//Calculate direction vector
-		var cos_angle_y = Math.cos(this.camera_rotation.y);
-		var position = new THREE.Vector3(this.camera_distance * Math.cos(this.camera_rotation.x)*cos_angle_y, this.camera_distance * Math.sin(this.camera_rotation.y), this.camera_distance * Math.sin(this.camera_rotation.x)*cos_angle_y);
-		this.camera.position.copy(position);
-		this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+		this.updateCamera();
 	}
 
 	//Update particle and render
 	if(this.particle_runtime !== null)
 	{
 		this.particle_runtime.update();
-		this.renderer.render(this.particle_runtime, this.camera);
 	}
+
+	//Render editor scene
 	this.renderer.render(this.scene, this.camera);
 }
 

@@ -109,6 +109,7 @@ function selectOption(index)
 	else
 	{
 		this.options_selected = -1;
+		Editor.setState(Editor.STATE_IDLE);
 		this.updateInterface();
 	}
 }
@@ -154,7 +155,14 @@ function removeOption(index)
 		//Select option
 		if(this.options.length > 0)
 		{
-			this.selectOption(index - 1);
+			if(index !== 0)
+			{
+				this.selectOption(index - 1);
+			}
+			else
+			{
+				this.selectOption(0);
+			}
 		}
 		else
 		{

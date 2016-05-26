@@ -87,10 +87,15 @@ function SceneEditor(parent)
 	this.fullscreen_button.size.set(25, 25);
 	this.fullscreen_button.setImage("editor/files/icons/misc/fullscreen.png");
 	this.fullscreen_button.visible = false;
+	this.fullscreen_button.setClass("");
 	this.fullscreen_button.updateInterface();
+	this.fullscreen_button.element.onmouseenter = function()
+	{
+		self.fullscreen_button.img.style.opacity = 0.5;
+	};
 	this.fullscreen_button.element.onmouseleave = function()
 	{
-		self.fullscreen_button.setClass("");
+		self.fullscreen_button.img.style.opacity = 1.0;
 	};
 
 	var fullscreen = true;
