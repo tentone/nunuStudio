@@ -71,10 +71,7 @@ function initialize()
 		{
 			this.func();
 		}
-		catch(e)
-		{
-			console.log(e.message);
-		}
+		catch(e){}
 	}
 
 	//Initialize children
@@ -94,10 +91,7 @@ function update()
 		{
 			this.func();
 		}
-		catch(e)
-		{
-			console.log(e.message);
-		}
+		catch(e){}
 	}
 
 	//Update children
@@ -119,7 +113,7 @@ function setCode(code)
 	{
 		if(e instanceof SyntaxError)
 		{
-			return e.message;
+			//console.log(e.message);
 		}
 	}
 
