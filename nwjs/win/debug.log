@@ -175,3 +175,35 @@
 [0527/000902:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
 [0527/000902:WARNING:in_range_cast.h(38)] value 1900790304512 out of range
 [0527/000902:WARNING:in_range_cast.h(38)] value 1900790126992 out of range
+[0527/114837:ERROR:process_info.cc(608)] range at 0xaf1e29ea00000000, size 0x1e8 fully unreadable
+[0527/114837:ERROR:process_info.cc(608)] range at 0xaf1e2a0a00000000, size 0x1e8 fully unreadable
+[0527/114837:ERROR:process_info.cc(608)] range at 0x0, size 0x1e8 fully unreadable
+[0527/114837:WARNING:in_range_cast.h(38)] value 2098954720844 out of range
+[0527/114837:WARNING:in_range_cast.h(38)] value 2098954717138 out of range
+[0527/114837:WARNING:in_range_cast.h(38)] value 2098954720618 out of range
+[0527/114837:WARNING:in_range_cast.h(38)] value 2098954715314 out of range
+[0527/114837:WARNING:in_range_cast.h(38)] value 2098955052992 out of range
+[0527/114837:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0527/114837:WARNING:in_range_cast.h(38)] value 2098882444736 out of range
+[0527/115224:ERROR:process_info.cc(608)] range at 0xc9f629da00000000, size 0x2a0 fully unreadable
+[0527/115224:ERROR:process_info.cc(608)] range at 0xc9f629fa00000000, size 0x2a0 fully unreadable
+[0527/115224:ERROR:process_info.cc(608)] range at 0x0, size 0x2a0 fully unreadable
+[0527/115224:WARNING:in_range_cast.h(38)] value 2889679691944 out of range
+[0527/115224:WARNING:in_range_cast.h(38)] value 2889679688238 out of range
+[0527/115224:WARNING:in_range_cast.h(38)] value 2889679691718 out of range
+[0527/115224:WARNING:in_range_cast.h(38)] value 2889679686418 out of range
+[0527/115224:WARNING:in_range_cast.h(38)] value 2889680084320 out of range
+[0527/115224:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0527/115224:WARNING:in_range_cast.h(38)] value 2889606767440 out of range
+[0527/115224:WARNING:in_range_cast.h(38)] value 2889606797728 out of range
+[0527/115457:ERROR:process_info.cc(608)] range at 0xaa6329ea00000000, size 0x173 fully unreadable
+[0527/115457:ERROR:process_info.cc(608)] range at 0xaa632a0a00000000, size 0x173 fully unreadable
+[0527/115457:ERROR:process_info.cc(608)] range at 0x0, size 0x173 fully unreadable
+[0527/115457:WARNING:in_range_cast.h(38)] value 1596365022764 out of range
+[0527/115457:WARNING:in_range_cast.h(38)] value 1596365019058 out of range
+[0527/115457:WARNING:in_range_cast.h(38)] value 1596365022538 out of range
+[0527/115457:WARNING:in_range_cast.h(38)] value 1596365017234 out of range
+[0527/115457:WARNING:in_range_cast.h(38)] value 1596365367344 out of range
+[0527/115457:WARNING:in_range_cast.h(38)] value 108084205055182070 out of range
+[0527/115457:WARNING:in_range_cast.h(38)] value 1596359895712 out of range
+[0527/115457:WARNING:in_range_cast.h(38)] value 1596291921360 out of range
