@@ -69,13 +69,35 @@ function ProgramPanel(parent)
 	this.vr = new Checkbox(this.element);
 	this.vr.setText("VR Enabled");
 	this.vr.position.set(3, 85);
-	this.vr.size.set(100, 15);
+	this.vr.size.set(50, 15);
 	this.vr.updateInterface();
 	this.vr.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
 			self.obj.vr = self.vr.getValue();
+			Editor.updateObjectViews();
+		}
+	});
+
+	//VR Movement Scale
+	var text = new Text(this.element);
+	text.setAlignment(Text.LEFT);
+	text.setText("VR Movement Scale");
+	text.position.set(5, 120);
+	text.updateInterface();
+
+	this.vr_scale = new Numberbox(this.element);
+	this.vr_scale.position.set(120, 110);
+	this.vr_scale.size.set(50, 18);
+	this.vr_scale.setRange(0, 1000);
+	this.vr_scale.setStep(0.05);
+	this.vr_scale.updateInterface();
+	this.vr_scale.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.vr_scale = self.vr_scale.getValue();
 			Editor.updateObjectViews();
 		}
 	});
@@ -95,6 +117,7 @@ function updatePanel()
 		this.author.setText(this.obj.author);
 		this.version.setText(this.obj.version);
 		this.vr.setValue(this.obj.vr);
+		this.vr_scale.setValue(this.obj.vr_scale);
 	}
 }
 

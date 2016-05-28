@@ -131,7 +131,7 @@ Main.draw = function()
 	if(Main.vr_effect !== null)
 	{
 		//Update VR controls
-		Main.vr_controls.scale = 1;
+		Main.vr_controls.scale = Main.program.vr_scale;
 		Main.vr_controls.update();
 
 		//Backup camera atributes

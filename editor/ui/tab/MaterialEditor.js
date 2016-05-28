@@ -51,7 +51,7 @@ function MaterialEditor(parent)
 	//Self pointer
 	var self = this;
 
-	//----------------------------Material preview----------------------------
+	//--------------------------------------Material preview--------------------------------------
 	//Canvas
 	this.canvas = new Canvas(this.preview.div_a);
 	this.canvas.updateInterface();
@@ -90,7 +90,7 @@ function MaterialEditor(parent)
 	this.sky = new Sky();
 	this.scene.add(this.sky);
 
-	//------------------------Material preview configuration------------------------
+	//--------------------------------Material preview configuration--------------------------------
 	//Text
 	var text = new Text(this.preview.div_b);
 	text.setAlignment(Text.LEFT);
@@ -149,6 +149,7 @@ function MaterialEditor(parent)
 	this.sky_enabled.setText("Enable sky");
 	this.sky_enabled.size.set(200, 15);
 	this.sky_enabled.position.set(5, 60);
+	this.sky_enabled.setValue(true);
 	this.sky_enabled.updateInterface();
 	this.sky_enabled.setOnChange(function()
 	{
@@ -160,7 +161,7 @@ function MaterialEditor(parent)
 	this.children.push(this.sky_enabled);
 
 
-	//-----------------------------Material parameters------------------------------
+	//---------------------------------------Generic Material parameters------------------------------------------
 	this.form = new Form(this.main.div_b);
 	this.form.spacing.set(10, 8);
 	this.form.size.set(1000, 2000);
@@ -178,6 +179,24 @@ function MaterialEditor(parent)
 		}
 	});
 	this.form.add(this.name);
+	this.form.nextRow();
+
+	//Side
+	this.form.addText("Side");
+	this.side = new DropdownList(this.form.element);
+	this.side.position.set(100, 85);
+	this.side.size.set(150, 18);
+	this.side.addValue("Font", THREE.FrontSide);
+	this.side.addValue("Back", THREE.BackSide);
+	this.side.addValue("Double", THREE.DoubleSide);
+	this.side.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.side = self.side.getValue();
+		}
+	});
+	this.form.add(this.side);
 	this.form.nextRow();
 
 	//Transparent
@@ -209,9 +228,8 @@ function MaterialEditor(parent)
 		}
 	});
 	this.form.add(this.opacity);
-	this.opacity_text = this.form.addText("--");
+	this.opacity_text = this.form.addText("-------");
 	this.form.nextRow();
-
 	
 	//Blending mode
 	this.form.addText("Blending Mode");
@@ -233,7 +251,26 @@ function MaterialEditor(parent)
 	this.form.add(this.blending);
 	this.form.nextRow();
 	
-	//----------------------------Phong Material parameters----------------------------
+	//Alpha test
+	this.form.addText("Alpha test");
+	this.alphaTest = new Slider(this.form.element);
+	this.alphaTest.size.set(160, 18);
+	this.alphaTest.setRange(0, 1);
+	this.alphaTest.setStep(0.01);
+	this.alphaTest.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.alphaTest = self.alphaTest.getValue();
+			self.alphaTest_text.setText(self.material.alphaTest);
+		}
+	});
+	this.form.add(this.alphaTest);
+	this.alphaTest_text = this.form.addText("-------");
+	this.form.nextRow();
+	
+
+	//--------------------------------------Phong Material parameters--------------------------------------
 	//Color
 	this.form.addText("Color");
 	this.color = new ColorChooser(this.form.element);
@@ -280,7 +317,7 @@ function MaterialEditor(parent)
 		}
 	});
 	this.form.add(this.shininess);
-	this.shininess_text = this.form.addText("--");
+	this.shininess_text = this.form.addText("-------");
 	this.form.nextRow();
 
 	//Texture map
@@ -328,7 +365,7 @@ function MaterialEditor(parent)
 		}
 	});
 	this.form.add(this.bumpScale);
-	this.bumpScale_text = this.form.addText("--");
+	this.bumpScale_text = this.form.addText("-------");
 	this.form.nextRow();
 
 	//Normal map
@@ -442,7 +479,7 @@ function MaterialEditor(parent)
 	this.form.nextRow();
 
 	//Alpha map
-	this.form.addText("Alpha map");
+	/*this.form.addText("Alpha map");
 	this.form.nextRow();
 	this.alphaMap = new Imagebox(this.form.element);
 	this.alphaMap.size.set(100, 100);
@@ -453,7 +490,7 @@ function MaterialEditor(parent)
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.alphaMap);
-	this.form.nextRow();
+	this.form.nextRow();*/
 
 	//Environment map
 	this.form.addText("Environment map");
