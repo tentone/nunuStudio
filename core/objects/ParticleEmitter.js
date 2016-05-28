@@ -1,4 +1,4 @@
-function ParticleEmitter()
+function ParticleEmitter(texture)
 {
 	THREE.Scene.call(this);
 
@@ -11,7 +11,7 @@ function ParticleEmitter()
 	{
 		texture:
 		{
-			value: new Texture("data/particle.png")
+			value: (texture !== undefined) ? texture : new Texture("data/particle.png")
 		},
 		blending: THREE.AdditiveBlending
 	});
@@ -90,6 +90,7 @@ ParticleEmitter.prototype.icon = "editor/files/icons/effects/particles.png";
 //Runtime functions
 ParticleEmitter.prototype.update = update;
 ParticleEmitter.prototype.initialize = initialize;
+ParticleEmitter.prototype.toJSON = toJSON;
 
 //Initialize
 function initialize()
@@ -115,4 +116,29 @@ function update()
 	{
 		this.children[i].update();
 	}
+}
+
+//Create JSON for particle emitter
+function toJSON(meta)
+{
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+
+	//Add texture to textures
+	//if(meta.textures[this.group.texture.uuid] !== undefined)
+	//{
+	//	meta.textures[this.group.texture.uuid] = this.group.texture.toJSON(meta);
+	//}
+
+	//Particle group
+	data.object.group = {};
+	data.object.group.texture = this.group.texture.uuid;
+	data.object.group.textureFrames = this.group.textureFrames;
+	data.object.group.textureFrameCount = this.group.textureFrameCount
+	data.object.group.textureLoop = this.group.textureLoop;
+	data.object.group.hasPerspective = this.group.hasPerspective;
+	data.object.group.colorize = this.group.colorize;
+	data.object.group.maxParticleCount = this.group.maxParticleCount;
+	data.object.group.blending = this.group.blending;
+
+	return data;
 }

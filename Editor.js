@@ -81,7 +81,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunu Studio";
 Editor.VERSION = "V0.7.6";
-Editor.TIMESTAMP = "201605271217";
+Editor.TIMESTAMP = "201605281513";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -559,7 +559,7 @@ Editor.draw = function()
 		if(Editor.vr_effect !== null)
 		{
 			//Update VR controls
-			Editor.vr_controls.scale = 1;
+			Editor.vr_controls.scale = Editor.program_running.vr_scale;
 			Editor.vr_controls.update();
 
 			//Backup camera atributes

@@ -15,6 +15,7 @@ function Program(name, description, author, version, vr)
 	this.author = "";
 	this.version = "0";
 	this.vr = false;
+	this.vr_scale = 1;
 
 	//Collect arguments
 	if(name !== undefined)
@@ -202,125 +203,18 @@ function dispose()
 //Create JSON for object
 function toJSON(meta)
 {
-	var isRootObject = (meta === undefined);
-	var output = {};
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
-	//If root object initialize base structure
-	if(isRootObject)
-	{
-		meta =
-		{
-			geometries: {},
-			materials: {},
-			textures: {},
-			images: {}
-		};
-
-		output.metadata =
-		{
-			version: 1.0,
-			type: "NunuProgram"
-		};
-	}
-
-	var object = {};
-	
-	object.folded = this.folded;
-	object.uuid = this.uuid;
-	object.type = this.type;
-
-	object.description = this.description;
-	object.author = this.author;
-	object.version = this.version;
-	object.vr = this.vr;
-	object.name = this.name;
+	data.object.author = this.author;
+	data.object.description = this.description;
+	data.object.version = this.version;
+	data.object.vr = this.vr;
+	data.object.vr_scale = this.vr_scale;
 
 	if(this.initial_scene !== null)
 	{
-		object.initial_scene = this.initial_scene;
-	}
-	
-	if(JSON.stringify(this.userData) !== "{}")
-	{
-		object.userData = this.userData;
+		data.object.initial_scene = this.initial_scene;
 	}
 
-	object.castShadow = (this.castShadow === true);
-	object.receiveShadow = (this.receiveShadow === true);
-	object.visible = !(this.visible === false);
-
-	object.matrix = this.matrix.toArray();
-
-	if(this.geometry !== undefined)
-	{
-		if(meta.geometries[this.geometry.uuid] === undefined)
-		{
-			meta.geometries[this.geometry.uuid] = this.geometry.toJSON(meta);
-		}
-
-		object.geometry = this.geometry.uuid;
-	}
-
-	if(this.material !== undefined)
-	{
-		if(meta.materials[this.material.uuid] === undefined)
-		{
-			meta.materials[this.material.uuid] = this.material.toJSON(meta);
-		}
-
-		object.material = this.material.uuid;
-	}
-
-	//Collect children data
-	if(this.children.length > 0)
-	{
-		object.children = [];
-
-		for(var i = 0; i < this.children.length; i ++)
-		{
-			object.children.push(this.children[i].toJSON(meta).object);
-		}
-	}
-
-	if(isRootObject)
-	{
-		var geometries = extractFromCache(meta.geometries);
-		var materials = extractFromCache(meta.materials);
-		var textures = extractFromCache(meta.textures);
-		var images = extractFromCache(meta.images);
-
-		if(geometries.length > 0)
-		{
-			output.geometries = geometries;
-		}
-		if(materials.length > 0)
-		{
-			output.materials = materials;
-		}
-		if(textures.length > 0)
-		{
-			output.textures = textures;
-		}
-		if(images.length > 0)
-		{
-			output.images = images;
-		}
-	}
-
-	output.object = object;
-	return output;
-
-	//Extract data from the cache hash remove metadata on each item and return as array
-	function extractFromCache(cache)
-	{
-		var values = [];
-		for(var key in cache)
-		{
-			var data = cache[ key ];
-			delete data.metadata;
-			values.push( data );
-		}
-
-		return values;
-	}
+	return data;
 }

@@ -107,7 +107,12 @@ function ParticleEditor(parent)
 	this.texture.updateInterface();
 	this.texture.setOnChange(function(file)
 	{
+		//Set particle texture
 		self.particle.group.texture = new Texture(file);
+		self.particle.group.material.uniforms.texture.value = self.particle.group.texture;
+		self.particle.group.material.needsUpdate = true;
+
+		//Set runtime particle texture
 		self.particle_runtime.group.material.uniforms.texture.value = new Texture(file);
 		self.particle_runtime.group.material.needsUpdate = true;
 	});

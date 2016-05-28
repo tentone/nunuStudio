@@ -268,13 +268,13 @@ function TreeElement(container)
 		}
 		else if(self.obj instanceof ParticleEmitter)
 		{
-			//Check if there is already a tab with this script attached
+			//Check if there is already a tab with this particle emitter attached
 			var found = false;
 			for(var i = 0; i < Interface.tab.options.length; i++)
 			{
 				if(Interface.tab.options[i].component instanceof ParticleEditor)
 				{
-					if(Interface.tab.options[i].component.script === self.obj)
+					if(Interface.tab.options[i].component.particle === self.obj)
 					{
 						found = true;
 						Interface.tab.selectOption(i);
@@ -286,7 +286,7 @@ function TreeElement(container)
 			//If not found open new tab
 			if(!found)
 			{
-				//Add new Code Editor tab
+				//Add new Particle Editor tab
 				var tab = Interface.tab.addOption(self.obj.name, Interface.file_dir + "icons/effects/particles.png", true);
 				var particle = new ParticleEditor();
 				particle.attachParticle(self.obj);

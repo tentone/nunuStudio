@@ -19,17 +19,24 @@ function TabElement(name, icon, closeable, container, index)
 	//Button
 	this.button = new Button(this.container.element);
 	this.button.visible = true;
-	this.button.position.set(container.options_size.x*index, 0);
 	this.button.size.set(container.options_size.x, container.options_size.y);
-	this.button.updateInterface();
 
 	//Set button as draggable
 	this.button.element.draggable = true;
 	
 	//Set button callback
-	this.button.setCallback(function()
+	this.button.setCallback(function(event)
 	{
-		self.container.selectOption(self.index);
+		//Select tab if mouse left click
+		if(event.which-1 === Mouse.LEFT)
+		{
+			self.container.selectOption(self.index);
+		}
+		//Close tab if mouse mid click
+		else if(self.closeable && event.which-1 === Mouse.MIDDLE)
+		{
+			self.container.removeOption(self.index);
+		}
 	});
 
 	//Mouse over event (overrided)
@@ -95,10 +102,11 @@ function TabElement(name, icon, closeable, container, index)
 
 	//Division
 	this.division = new Division(this.container.element);
-	this.division.element.className = "bar";
 	this.division.visible = false;
 	this.division.position.set(0, this.container.options_size.y);
-	this.division.updateInterface();
+
+	//Update interface
+	this.updateInterface();
 }
 
 //Function prototypes
@@ -188,7 +196,7 @@ function attachComponent(component)
 //Update Interface
 function updateInterface()
 {
-	//Set button color
+	//Update button
 	if(this.isSelected())
 	{
 		this.button.setClass("button_over");
@@ -197,20 +205,39 @@ function updateInterface()
 	{
 		this.button.setClass("button");
 	}
-
-	//Update button
-	this.button.position.set(this.container.options_size.x * this.index, 0);
+	if(this.container.mode === TabGroup.TOP)
+	{
+		this.button.position.set(this.container.options_size.x*this.index, 0);
+	}
+	else if(this.container.mode === TabGroup.LEFT)
+	{
+		this.button.position.set(0, this.container.options_size.y*this.index);
+	}
+	this.button.visible = this.container.visible;
 	this.button.updateInterface();
 
+	//Update icon
+	this.icon.visible = this.container.visible;
+	this.icon.updateInterface();
+
 	//Update division
-	this.division.visible = this.visible;
-	this.division.size.set(this.size.x, this.size.y - this.button.size.y);
+	this.division.visible = this.visible && this.container.visible;
+	if(this.container.mode === TabGroup.TOP)
+	{
+		this.division.position.set(0, this.container.options_size.y);
+		this.division.size.set(this.size.x, this.size.y - this.button.size.y);
+	}
+	else if(this.container.mode === TabGroup.LEFT)
+	{
+		this.division.position.set(this.container.options_size.x, 0);
+		this.division.size.set(this.size.x - this.button.size.x, this.size.y);
+	}
 	this.division.updateInterface();
 
 	//Update attached component
 	if(this.component !== null)
 	{
-		this.component.visible = this.visible;
+		this.component.visible = this.visible && this.container.visible;
 		this.component.size.set(this.division.size.x, this.division.size.y);
 		this.component.updateInterface();
 	}
@@ -218,6 +245,7 @@ function updateInterface()
 	//Position close button if needed
 	if(this.closeable)
 	{
+		this.close_button.visible = this.container.visible;
 		this.close_button.position.set(this.button.size.x - 20, 10);
 		this.close_button.updateInterface();
 	}

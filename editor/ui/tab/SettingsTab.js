@@ -31,25 +31,19 @@ function SettingsTab(parent)
 		event.preventDefault();
 	};
 
-	//Dual division
-	this.container = new DualDivisionResizable(this.element);
-	this.container.orientation = DualDivisionResizable.HORIZONTAL;
-	this.container.tab_position = 0.2;
-	this.container.tab_position_max = 0.8;
-	this.container.tab_position_min = 0.2;
-	this.container.fit_parent = true;
-	this.container.updateInterface();
+	//Options tab container
+	this.tab = new TabGroup(this.element);
+	this.tab.mode = TabGroup.LEFT;
+	this.tab.updateInterface();
 
-	//Set Div A style
-	this.container.div_a.className = "bar";
+	//Options
+	this.general = this.tab.addOption("General", "editor/files/icons/misc/tool.png", false);
+	this.code = this.tab.addOption("Code", "editor/files/icons/script/script.png", false);
 	
-	//Settings divisions buttons
-	this.button_general = new Button(this.container.div_a);
-	this.button_general.setText("General");
-	this.button_general.position.set(0, 0);
-	this.button_general.size.set(0, 25);
-	this.button_general.updateInterface();
-
+	this.about = this.tab.addOption("About", "editor/files/icons/misc/about.png", false);
+	this.about.attachComponent(new AboutTab(this.about.division.element));
+	this.about.updateInterface();
+	
 	//Element atributes
 	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
@@ -91,10 +85,7 @@ function destroy()
 }
 
 //Update SettingsTab
-function update()
-{
-	this.container.update();
-}
+function update(){}
 
 //Update division Size
 function updateInterface()
@@ -116,18 +107,14 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 	
-
-	//Update buttons
-	this.button_general.size.x = this.container.tab_position * this.size.x;
-	this.button_general.updateInterface();
+	//Update tab
+	this.tab.visible = this.visible;
+	this.tab.size.copy(this.size);
+	this.tab.updateInterface();
 
 	//Update base element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-
-	//Update Dual Division
-	this.container.visible = this.visible;
-	this.container.updateInterface();
 }

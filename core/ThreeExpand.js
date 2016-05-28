@@ -66,16 +66,18 @@ THREE.Object3D.prototype.toJSON = function(meta)
 
 	object.matrix = this.matrix.toArray();
 
+	//If there is geometry store it
 	if(this.geometry !== undefined)
 	{
-		if(meta.geometries[ this.geometry.uuid ] === undefined)
+		if(meta.geometries[this.geometry.uuid] === undefined)
 		{
-			meta.geometries[ this.geometry.uuid ] = this.geometry.toJSON( meta );
+			meta.geometries[this.geometry.uuid] = this.geometry.toJSON(meta);
 		}
 
 		object.geometry = this.geometry.uuid;
 	}
 
+	//If there is a material store it
 	if(this.material !== undefined)
 	{
 		if(meta.materials[this.material.uuid] === undefined)
@@ -93,7 +95,7 @@ THREE.Object3D.prototype.toJSON = function(meta)
 
 		for(var i = 0; i < this.children.length; i ++)
 		{
-			object.children.push( this.children[ i ].toJSON(meta).object);
+			object.children.push(this.children[i].toJSON(meta).object);
 		}
 	}
 
@@ -131,9 +133,9 @@ THREE.Object3D.prototype.toJSON = function(meta)
 		var values = [];
 		for(var key in cache)
 		{
-			var data = cache[ key ];
+			var data = cache[key];
 			delete data.metadata;
-			values.push( data );
+			values.push(data);
 		}
 
 		return values;

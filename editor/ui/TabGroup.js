@@ -37,7 +37,10 @@ function TabGroup(parent)
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 	
-	//Tab Options
+	//Tab mode
+	this.mode = TabGroup.TOP;
+
+	//Options
 	this.options_size = new THREE.Vector2(150, 30);
 	this.options_selected = -1;
 	this.options = [];
@@ -61,6 +64,10 @@ TabGroup.prototype.selectOption = selectOption;
 TabGroup.prototype.closeActual = closeActual;
 TabGroup.prototype.getActual = getActual;
 TabGroup.prototype.updateObjectData = updateObjectData;
+
+//Tab button displacement mode
+TabGroup.TOP = 0;
+TabGroup.LEFT = 1;
 
 //Update all tabs object data
 function updateObjectData()
@@ -205,21 +212,15 @@ function update()
 //Update division Size
 function updateInterface()
 {
+	//Update options
 	for(var i = 0; i < this.options.length; i++)
 	{
-		if(this.options_selected == i)
-		{
-			this.options[i].visible = true;
-		}
-		else
-		{
-			this.options[i].visible = false;
-		}
-		
-		this.options[i].size.set(this.size.x, this.size.y);
+		this.options[i].visible = (this.options_selected === i);
+		this.options[i].size.copy(this.size);
 		this.options[i].updateInterface();
 	}
 
+	//Set visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -229,6 +230,7 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
+	//Update element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
