@@ -25,7 +25,7 @@ THREE.Object3D.prototype.update = function()
 };
 
 //Create JSON for object
-THREE.Object3D.prototype.toJSON = function(meta)
+THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 {
 	var isRootObject = (meta === undefined);
 	var output = {};
@@ -88,6 +88,11 @@ THREE.Object3D.prototype.toJSON = function(meta)
 		object.material = this.material.uuid;
 	}
 
+	if(resourceAccess !== undefined)
+	{
+		resourceAccess(meta, object);
+	}
+
 	//Collect children data
 	if(this.children.length > 0)
 	{
@@ -99,6 +104,7 @@ THREE.Object3D.prototype.toJSON = function(meta)
 		}
 	}
 
+	//If root object add resources before returning
 	if(isRootObject)
 	{
 		var geometries = extractFromCache(meta.geometries);

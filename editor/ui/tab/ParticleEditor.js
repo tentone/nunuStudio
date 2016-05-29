@@ -107,16 +107,63 @@ function ParticleEditor(parent)
 	this.texture.updateInterface();
 	this.texture.setOnChange(function(file)
 	{
+		var texture = new Texture(file);
+
 		//Set particle texture
-		self.particle.group.texture = new Texture(file);
-		self.particle.group.material.uniforms.texture.value = self.particle.group.texture;
-		self.particle.group.material.needsUpdate = true;
+		self.particle.group.texture = texture;
+		self.particle.updateValues();
 
 		//Set runtime particle texture
-		self.particle_runtime.group.material.uniforms.texture.value = new Texture(file);
-		self.particle_runtime.group.material.needsUpdate = true;
+		self.particle_runtime.group.texture = texture;
+		self.particle_runtime.updateValues();
 	});
 	this.form.add(this.texture);
+	this.form.nextRow();
+
+	//Blending mode
+	this.form.addText("Blending Mode");
+	this.blending = new DropdownList(this.form.element);
+	this.blending.size.set(120, 18);
+	this.blending.addValue("None", THREE.NoBlending);
+	this.blending.addValue("Normal", THREE.NormalBlending);
+	this.blending.addValue("Additive", THREE.AdditiveBlending);
+	this.blending.addValue("Subtractive", THREE.SubtractiveBlending);
+	this.blending.addValue("Multiply", THREE.MultiplyBlending);
+	this.blending.setOnChange(function()
+	{
+		self.particle.group.blending = self.blending.getValue();
+		self.particle.updateValues();
+
+		self.particle_runtime.group.blending = self.blending.getValue();
+		self.particle_runtime.updateValues();
+	});
+	this.form.add(this.blending);
+	this.form.nextRow();
+
+	//Direction (Time scale)
+	this.form.addText("Direction");
+	this.direction = new DropdownList(this.form.element);
+	this.direction.size.set(100, 18);
+	this.direction.addValue("Forward", 1);
+	this.direction.addValue("Backward", -1);
+	this.direction.setOnChange(function()
+	{
+		var direction = self.direction.getValue();
+		self.particle.emitter.direction = direction;
+		self.particle_runtime.emitter.direction = direction;
+	});
+	this.form.add(this.direction);
+	this.form.nextRow();
+
+	//Particle Count
+	this.form.addText("Particle Count");
+	this.particleCount = new Numberbox(this.form.element);
+	this.particleCount.size.set(100, 18);
+	this.particleCount.setOnChange(function()
+	{
+
+	});
+	this.form.add(this.particleCount);
 	this.form.nextRow();
 
 	//Add element to document
@@ -150,10 +197,16 @@ function attachParticle(particle)
 	//Attached particle
 	this.particle = particle;
 
-	//Create particle copy for runtime
+	//Create particle copy for preview
 	this.particle_runtime = new ObjectLoader().parse(particle.toJSON());
 	this.particle_runtime.initialize();
 	this.scene.add(this.particle_runtime);
+
+	//Update form elements from particle data
+	this.name.setText(particle.name);
+	this.texture.setImage(particle.group.texture.image.src);
+	this.blending.setValue(particle.group.blending);
+	this.direction.setValue(particle.emitter.direction);
 }
 
 //Update camera position and rotation from variables

@@ -37,6 +37,7 @@ DropdownList.prototype.update = update;
 DropdownList.prototype.updateInterface = updateInterface;
 DropdownList.prototype.destroy = destroy;
 DropdownList.prototype.getValue = getValue;
+DropdownList.prototype.setValue = setValue;
 DropdownList.prototype.addValue = addValue;
 DropdownList.prototype.setOnChange = setOnChange;
 DropdownList.prototype.getSelectedIndex = getSelectedIndex;
@@ -65,6 +66,26 @@ function getValue()
 		return this.values[this.element.selectedIndex];
 	}
 	return null;
+}
+
+//Set dropdown list value
+function setValue(value)
+{
+	//Get value index
+	for(var i = 0; i < this.values.length; i++)
+	{
+		if(this.values[i] === value)
+		{
+			this.element.selectedIndex = i;
+			break;
+		}
+	}
+
+	//If value not found set selectedIndex to -1
+	if(i === this.values.length)
+	{
+		this.element.selectedIndex = -1;
+	}
 }
 
 //Get dropdownlist selected index

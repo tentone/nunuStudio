@@ -103,6 +103,7 @@ function TabElement(name, icon, closeable, container, index)
 	//Division
 	this.division = new Division(this.container.element);
 	this.division.visible = false;
+	this.division.element.className = "container";
 	this.division.position.set(0, this.container.options_size.y);
 
 	//Update interface

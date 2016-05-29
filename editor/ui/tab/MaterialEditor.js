@@ -153,10 +153,7 @@ function MaterialEditor(parent)
 	this.sky_enabled.updateInterface();
 	this.sky_enabled.setOnChange(function()
 	{
-		if(self.material !== null)
-		{
-			self.sky.visible = self.sky_enabled.getValue();
-		}
+		self.sky.visible = self.sky_enabled.getValue();
 	});
 	this.children.push(this.sky_enabled);
 
@@ -197,6 +194,21 @@ function MaterialEditor(parent)
 		}
 	});
 	this.form.add(this.side);
+	this.form.nextRow();
+
+	//Skinning
+	this.skinning = new Checkbox(this.preview.div_b);
+	this.skinning.setText("Skinning");
+	this.skinning.size.set(200, 15);
+	this.skinning.updateInterface();
+	this.skinning.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.skinning = self.skinning.getValue();
+		}
+	});
+	this.form.add(this.skinning);
 	this.form.nextRow();
 
 	//Transparent
@@ -252,7 +264,7 @@ function MaterialEditor(parent)
 	this.form.nextRow();
 	
 	//Alpha test
-	this.form.addText("Alpha test");
+	/*this.form.addText("Alpha test");
 	this.alphaTest = new Slider(this.form.element);
 	this.alphaTest.size.set(160, 18);
 	this.alphaTest.setRange(0, 1);
@@ -267,7 +279,7 @@ function MaterialEditor(parent)
 	});
 	this.form.add(this.alphaTest);
 	this.alphaTest_text = this.form.addText("-------");
-	this.form.nextRow();
+	this.form.nextRow();*/
 	
 
 	//--------------------------------------Phong Material parameters--------------------------------------
