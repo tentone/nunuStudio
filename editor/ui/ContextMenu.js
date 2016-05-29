@@ -87,7 +87,6 @@ function removeOption(index)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
-		this.updateInterface();
 	}
 }
 
@@ -106,8 +105,8 @@ function addOption(name, callback)
 	button.setCallback(function()
 	{
 		callback();
-		self.destroy();
 		self.updateInterface();
+		self.destroy();
 	});
 
 	this.options.push(button);

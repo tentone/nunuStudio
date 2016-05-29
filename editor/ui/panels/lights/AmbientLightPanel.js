@@ -59,6 +59,21 @@ function AmbientLightPanel(parent)
 			self.obj.visible = self.visible.getValue();
 		}
 	});
+
+	//Static
+	this.static = new Checkbox(this.element);
+	this.static.setText("Static Object");
+	this.static.size.set(200, 15);
+	this.static.position.set(2, 85);
+	this.static.updateInterface();
+	this.static.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.matrixAutoUpdate = !(self.static.getValue());
+		}
+	});
+
 }
 
 //Functions Prototype
@@ -74,6 +89,7 @@ function updatePanel()
 		this.name.setText(this.obj.name);
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.visible.setValue(this.visible);
+		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
 }
 

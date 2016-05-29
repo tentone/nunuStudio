@@ -1,4 +1,4 @@
-function PointLightPanel(parent)
+function DirectionalLightPanel(parent)
 {
 	Panel.call(this, parent);
 
@@ -109,9 +109,9 @@ function PointLightPanel(parent)
 }
 
 //Functions Prototype
-PointLightPanel.prototype = Object.create(Panel.prototype);
-PointLightPanel.prototype.attachObject = attachObject;
-PointLightPanel.prototype.updatePanel = updatePanel;
+DirectionalLightPanel.prototype = Object.create(Panel.prototype);
+DirectionalLightPanel.prototype.attachObject = attachObject;
+DirectionalLightPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
 function updatePanel()

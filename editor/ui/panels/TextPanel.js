@@ -128,6 +128,34 @@ function TextPanel(parent)
 			self.obj.receiveShadow = self.receive_shadow.getValue();
 		}
 	});
+
+	//Visible
+	this.visible = new Checkbox(this.element);
+	this.visible.setText("Visible");
+	this.visible.size.set(200, 15);
+	this.visible.position.set(2, 185);
+	this.visible.updateInterface();
+	this.visible.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.visible = self.visible.getValue();
+		}
+	});
+
+	//Static
+	this.static = new Checkbox(this.element);
+	this.static.setText("Static Object");
+	this.static.size.set(200, 15);
+	this.static.position.set(2, 210);
+	this.static.updateInterface();
+	this.static.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.matrixAutoUpdate = !(self.static.getValue());
+		}
+	});
 }
 
 //Functions Prototype
@@ -147,6 +175,8 @@ function updatePanel()
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.receive_shadow.setValue(this.obj.receiveShadow);
+		this.visible.setValue(this.obj.visible);
+		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
 }
 
