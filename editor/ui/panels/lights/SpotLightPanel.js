@@ -192,6 +192,20 @@ function SpotLightPanel(parent)
 			self.obj.visible = self.visible.getValue();
 		}
 	});
+
+	//Static
+	this.static = new Checkbox(this.element);
+	this.static.setText("Static Object");
+	this.static.size.set(200, 15);
+	this.static.position.set(2, 235);
+	this.static.updateInterface();
+	this.static.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.matrixAutoUpdate = !(self.static.getValue());
+		}
+	});
 }
 
 //Functions Prototype
@@ -216,6 +230,7 @@ function updatePanel()
 		this.decay.setValue(this.obj.decay);
 		this.decay_text.setText(this.obj.decay);
 		this.visible.setValue(this.obj.visible);
+		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
 }
 

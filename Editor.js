@@ -56,6 +56,7 @@ include("editor/ui/panels/cameras/PerspectiveCameraPanel.js");
 include("editor/ui/panels/cameras/OrthographicCameraPanel.js");
 include("editor/ui/panels/lights/AmbientLightPanel.js");
 include("editor/ui/panels/lights/PointLightPanel.js");
+include("editor/ui/panels/lights/DirectionalLightPanel.js");
 include("editor/ui/panels/lights/SpotLightPanel.js");
 
 include("editor/tools/MoveTool.js");
@@ -80,8 +81,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunu Studio";
-Editor.VERSION = "V0.7.6";
-Editor.TIMESTAMP = "201605290309";
+Editor.VERSION = "V0.7.7 pre-alpha";
+Editor.TIMESTAMP = "201605291644";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -362,6 +363,8 @@ Editor.update = function()
 						Editor.selected_object.position.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2);
 						Editor.selected_object.position.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2);
 					}
+
+					//Update object panel
 					Editor.updateObjectPanel();
 				}
 				//Resize mode
@@ -390,6 +393,8 @@ Editor.update = function()
 						Editor.selected_object.scale.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2);
 						Editor.selected_object.scale.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2);
 					}
+
+					//Update object panel
 					Editor.updateObjectPanel();
 				}
 				//Rotate Mode
@@ -415,7 +420,16 @@ Editor.update = function()
 						delta.setFromEuler(new THREE.Euler(0, 0, (Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 'XYZ'));
 						Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
 					}
+
+					//Update object panel
 					Editor.updateObjectPanel();
+				}
+
+				if(!Editor.selected_object.matrixAutoUpdate)
+				{
+					//Update object tranformation matrix
+					Editor.selected_object.updateMatrix();
+					Editor.selected_object.updateMatrixWorld();
 				}
 			}
 		}
@@ -499,8 +513,14 @@ Editor.update = function()
 			//Move Camera on X and Z
 			else if(Mouse.buttonPressed(Mouse.RIGHT))
 			{
+				//Move speed
+				var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0,0,0))/1000;
+				if(speed < 0.02)
+				{
+					speed = 0.02;
+				}
+
 				//Move Camera Front and Back
-				var speed = 0.1;
 				var angle_cos = Math.cos(Editor.camera_rotation.x);
 				var angle_sin = Math.sin(Editor.camera_rotation.x);
 				Editor.camera.position.z += Mouse.pos_diff.y * speed * angle_cos;
@@ -522,8 +542,16 @@ Editor.update = function()
 			//Move in camera direction using mouse scroll
 			if(Mouse.wheel != 0)
 			{
+				//Move speed
+				var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0,0,0))/2000;
+				if(speed < 0.003)
+				{
+					speed = 0.003;
+				}
+				speed *= Mouse.wheel;
+				
+				//Move camera
 				var direction = Editor.camera.getWorldDirection();
-				var speed = 0.01 * Mouse.wheel;
 				Editor.camera.position.x -= speed * direction.x;
 				Editor.camera.position.y -= speed * direction.y;
 				Editor.camera.position.z -= speed * direction.z;
@@ -713,6 +741,10 @@ Editor.updateSelectedObjectUI = function()
 	else if(Editor.selected_object instanceof SpotLight)
 	{
 		Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b);
+	}
+	else if(Editor.selected_object instanceof DirectionalLight)
+	{
+		Interface.panel = new DirectionalLightPanel(Interface.explorer_resizable.div_b);
 	}
 	else if(Editor.selected_object instanceof THREE.Light)
 	{
