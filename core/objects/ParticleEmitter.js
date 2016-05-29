@@ -1,6 +1,6 @@
 function ParticleEmitter(texture)
 {
-	THREE.Scene.call(this);
+	THREE.Object3D.call(this);
 
 	this.type = "ParticleEmiter";
 	this.name = "particle";
@@ -13,7 +13,8 @@ function ParticleEmitter(texture)
 		{
 			value: (texture !== undefined) ? texture : new Texture("data/particle.png")
 		},
-		blending: THREE.AdditiveBlending
+		blending: THREE.AdditiveBlending,
+		maxParticleCount: 10000
 	});
 		
 	//Disable frustum culling
@@ -84,13 +85,22 @@ function ParticleEmitter(texture)
 }
 
 //Function Prototype
-ParticleEmitter.prototype = Object.create(THREE.Scene.prototype);
+ParticleEmitter.prototype = Object.create(THREE.Object3D.prototype);
 ParticleEmitter.prototype.icon = "editor/files/icons/effects/particles.png";
 
 //Runtime functions
+ParticleEmitter.prototype.updateValues = updateValues;
 ParticleEmitter.prototype.update = update;
 ParticleEmitter.prototype.initialize = initialize;
 ParticleEmitter.prototype.toJSON = toJSON;
+
+//Update particle group and emmiter runtime values
+function updateValues()
+{
+	this.group.material.uniforms.texture.value = this.group.texture;
+	this.group.material.blending = this.group.blending;
+	this.group.material.needsUpdate = true;
+}
 
 //Initialize
 function initialize()
@@ -121,15 +131,16 @@ function update()
 //Create JSON for particle emitter
 function toJSON(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	//Self pointer
+	var self = this;
 
-	//Add texture to textures
-	//if(meta.textures[this.group.texture.uuid] !== undefined)
-	//{
-	//	meta.textures[this.group.texture.uuid] = this.group.texture.toJSON(meta);
-	//}
+	//Call default toJSON
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	{
+		self.group.texture.toJSON(meta);
+	});
 
-	//Particle group
+	//Group
 	data.object.group = {};
 	data.object.group.texture = this.group.texture.uuid;
 	data.object.group.textureFrames = this.group.textureFrames;
@@ -140,5 +151,10 @@ function toJSON(meta)
 	data.object.group.maxParticleCount = this.group.maxParticleCount;
 	data.object.group.blending = this.group.blending;
 
+	//Emitter
+	data.object.emitter = {};
+	data.object.emitter.direction = this.emitter.direction;
+	data.object.emitter.particleCount = this.emitter.particleCount;
+	
 	return data;
 }

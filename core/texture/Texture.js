@@ -24,11 +24,11 @@ Texture.prototype.toJSON = toJSON;
 function update(){}
 
 //Create JSON description
-function toJSON( meta )
+function toJSON(meta)
 {
-	if(meta.textures[ this.uuid ] !== undefined)
+	if(meta.textures[this.uuid] !== undefined)
 	{
-		return meta.textures[ this.uuid ];
+		return meta.textures[this.uuid];
 	}
 
 	function getDataURL(image)
@@ -47,7 +47,7 @@ function toJSON( meta )
 			canvas.getContext("2d").drawImage(image, 0, 0, image.width, image.height);
 		}
 
-		if(canvas.width > 2048 || canvas.height > 2048)
+		if(canvas.width > 1024 || canvas.height > 1024)
 		{
 			return canvas.toDataURL("image/jpeg", 0.6);
 		}
@@ -62,9 +62,8 @@ function toJSON( meta )
 	{
 		metadata:
 		{
-			version: 4.4,
-			type: "Texture",
-			generator: "Texture.toJSON"
+			version: 1.0,
+			type: "NunuTexture"
 		},
 
 		uuid: this.uuid,
@@ -90,7 +89,7 @@ function toJSON( meta )
 			image.uuid = THREE.Math.generateUUID();
 		}
 
-		if(meta.images[ image.uuid ] === undefined)
+		if(meta.images[image.uuid] === undefined)
 		{
 			meta.images[image.uuid] =
 			{

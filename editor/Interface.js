@@ -52,7 +52,7 @@ Interface.initialize = function()
 	Interface.asset_file.position.set(0,0);
 	
 	var import_models = Interface.asset_file.addMenu("3D Models", Interface.file_dir + "icons/models/models.png");
-	import_models.addOption("Wavefront", function()
+	import_models.addOption("Wavefront OBJ", function()
 	{
 		App.chooseFile(function(fname)
 		{
@@ -60,9 +60,6 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.OBJLoader();
 				var obj = loader.parse(App.readFile(fname));
-
-				ObjectUtils.setShadowCasting(obj, true);
-				ObjectUtils.setShadowReceiving(obj, true);
 				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
 			}
 			catch(e)
@@ -80,9 +77,6 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.ColladaLoader();
 				var obj = loader.parse(App.readFile(fname));
-
-				ObjectUtils.setShadowCasting(obj.scene, true);
-				ObjectUtils.setShadowReceiving(obj.scene, true);
 				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj.scene));
 			}
 			catch(e)
@@ -92,7 +86,7 @@ Interface.initialize = function()
 		}, ".dae");
 	});
 
-	import_models.addOption("ThreeJS JSON", function()
+	import_models.addOption("Three.JS JSON", function()
 	{
 		App.chooseFile(function(fname)
 		{
@@ -101,18 +95,10 @@ Interface.initialize = function()
 				var loader = new THREE.JSONLoader();
 				loader.load(fname, function(geometry, materials)
 				{
-					for(var i = 0; i < materials.length; i ++)
-					{
-						var m = materials[i];
-						m.skinning = true;
-						m.morphTargets = true;
-					}
-
 					var material = new THREE.MeshPhongMaterial();
 					material.skinning = true;
-					material.morphTargets = true;
 
-					var obj = new AnimatedModel(geometry, material);//new THREE.MultiMaterial(materials));
+					var obj = new AnimatedModel(geometry, material);
 					Editor.addToActualScene(obj);
 				});
 			}
@@ -131,9 +117,6 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.VRMLLoader();
 				var obj = loader.parse(App.readFile(fname));
-
-				ObjectUtils.setShadowCasting(obj, true);
-				ObjectUtils.setShadowReceiving(obj, true);
 				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
 			}
 			catch(e)
@@ -151,9 +134,6 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.FBXLoader();
 				var obj = loader.parse(App.readFile(fname));
-
-				ObjectUtils.setShadowCasting(obj, true);
-				ObjectUtils.setShadowReceiving(obj, true);
 				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
 			}
 			catch(e)

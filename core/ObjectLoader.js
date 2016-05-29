@@ -440,6 +440,25 @@ function parseObject(data, geometries, materials, textures)
 		case "ParticleEmiter":
 			var texture = getTexture(data.group.texture);
 			object = new ParticleEmitter(texture);
+			
+			var update = false;
+
+			if(data.group.blending !== undefined)
+			{
+				object.group.blending = data.group.blending;
+				update = true;
+			}
+			if(data.emitter.direction !== undefined)
+			{
+				object.emitter.direction = data.emitter.direction;
+			}
+
+
+			if(update)
+			{
+				object.updateValues();
+			}
+
 			break;
 			
 		case "Text3D":
@@ -449,6 +468,7 @@ function parseObject(data, geometries, materials, textures)
 
 		case "Program":
 			object = new Program(data.name, data.description, data.author, data.version, data.vr);
+			
 			if(data.initial_scene !== undefined)
 			{
 				object.initial_scene = data.initial_scene;
@@ -457,12 +477,14 @@ function parseObject(data, geometries, materials, textures)
 			{
 				object.vr_scale = data.vr_scale;
 			}
+			
 			break;
 
 		case "LeapDevice":
 			object = new LeapHand();
 			object.mode = data.mode;
 			object.use_arm = data.use_arm;
+
 			if(data.debug_model !== undefined)
 			{
 				object.debug_model = data.debug_model;
@@ -475,10 +497,12 @@ function parseObject(data, geometries, materials, textures)
 			{
 				object.poses_enabled = data.poses_enabled;
 			}
+
 			break;
 
 		case "Kinect":
 			object = new KinectDevice();
+
 			if(data.debug_model !== undefined)
 			{
 				object.debug_model = data.debug_model;
@@ -492,6 +516,7 @@ function parseObject(data, geometries, materials, textures)
 
 		case "Scene":
 			object = new Scene();
+
 			if(data.fog_color !== undefined)
 			{
 				object.fog_color = data.fog_color;
@@ -503,7 +528,7 @@ function parseObject(data, geometries, materials, textures)
 			if(data.fog_near !== undefined)
 			{
 				object.fog_near = data.fog_near;
-			}	
+			}
 			if(data.fog_far !== undefined)
 			{
 				object.fog_far = data.fog_far;
@@ -516,10 +541,12 @@ function parseObject(data, geometries, materials, textures)
 			{
 				object.initial_camera = data.initial_camera;
 			}
+
 			break;
 
 		case "PerspectiveCamera":
 			object = new PerspectiveCamera(data.fov, data.aspect, data.near, data.far);
+
 			if(data.focus !== undefined) 
 			{
 				object.focus = data.focus;
@@ -540,6 +567,7 @@ function parseObject(data, geometries, materials, textures)
 			{
 				object.view = Object.assign({}, data.view);
 			}
+
 			break;
 
 		case "OrthographicCamera":
@@ -570,6 +598,7 @@ function parseObject(data, geometries, materials, textures)
 		case "SkinnedMesh":
 			var geometry = getGeometry(data.geometry);
 			var material = getMaterial(data.material);
+
 			if(geometry.bones && geometry.bones.length > 0)
 			{
 				object = new AnimatedModel(geometry, material);
@@ -578,6 +607,7 @@ function parseObject(data, geometries, materials, textures)
 			{
 				object = new Model3D(geometry, material);
 			}
+
 			break;
 
 		case "LOD":
