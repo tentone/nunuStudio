@@ -93,6 +93,18 @@ function TreeElement(container)
 			}
 		});
 		
+		context.addOption("Set static", function()
+		{
+			ObjectUtils.setMatrixAutoUpdate(self.obj, false);
+			Editor.updateObjectViews();
+		});
+
+		context.addOption("Set dynamic", function()
+		{
+			ObjectUtils.setMatrixAutoUpdate(self.obj, true);
+			Editor.updateObjectViews();
+		});
+
 		context.addOption("Delete", function()
 		{
 			self.deleteObject();

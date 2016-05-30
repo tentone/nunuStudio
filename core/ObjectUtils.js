@@ -65,6 +65,17 @@ ObjectUtils.convertFromThreeType = function(obj)
 	return loader.parse(data);
 }
 
+//Set static
+ObjectUtils.setMatrixAutoUpdate = function(obj, value)
+{
+	obj.matrixAutoUpdate = value;
+
+	for(var i = 0; i < obj.children.length; i++)
+	{
+		ObjectUtils.setMatrixAutoUpdate(obj.children[i], value);
+	}
+}
+
 //Set shadow receiving
 ObjectUtils.setShadowReceiving = function(obj, value)
 {
