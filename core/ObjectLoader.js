@@ -438,27 +438,33 @@ function parseObject(data, geometries, materials, textures)
 			break;
 
 		case "ParticleEmiter":
-			var texture = getTexture(data.group.texture);
+			if(data.group !== undefined)
+			{
+				var texture = getTexture(data.group.texture);
+			}
+
 			object = new ParticleEmitter(texture);
 			
 			var update = false;
-
-			if(data.group.blending !== undefined)
+			if(data.group !== undefined)
 			{
-				object.group.blending = data.group.blending;
-				update = true;
-			}
-			if(data.emitter.direction !== undefined)
-			{
-				object.emitter.direction = data.emitter.direction;
-			}
+				if(data.group.blending !== undefined)
+				{
+					object.group.blending = data.group.blending;
+					update = true;
+				}
+				if(data.emitter.direction !== undefined)
+				{
+					object.emitter.direction = data.emitter.direction;
+				}
 
 
-			if(update)
-			{
-				object.updateValues();
+				//Update webgl related atributes
+				if(update)
+				{
+					object.updateValues();
+				}
 			}
-
 			break;
 			
 		case "Text3D":

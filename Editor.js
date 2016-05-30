@@ -82,7 +82,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunu Studio";
 Editor.VERSION = "V0.7.7 pre-alpha";
-Editor.TIMESTAMP = "201605291644";
+Editor.TIMESTAMP = "201605301329";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -1159,7 +1159,7 @@ Editor.initializeRenderer = function(canvas)
 	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true});
 	Editor.renderer.autoClear = false;
 	Editor.renderer.shadowMap.enabled = true;
-	Editor.renderer.shadowMap.type = THREE.PCFShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
+	Editor.renderer.shadowMap.type = THREE.PCFSoftShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
 	Editor.renderer.setSize(canvas.width, canvas.height);
 }
 

@@ -850,7 +850,7 @@ Interface.saveProgram = function()
 		}
 		catch(e)
 		{
-			alert("Error saving file");
+			alert("Error saving file\n(" + e + ")");
 		}
 	}, ".isp", true);
 }
@@ -869,7 +869,7 @@ Interface.loadProgram = function()
 			}
 			catch(e)
 			{
-				alert("Error loading file");
+				alert("Error loading file\n(" + e + ")");
 			}
 		}, ".isp");
 	}
