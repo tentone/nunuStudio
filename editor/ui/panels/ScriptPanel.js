@@ -65,6 +65,20 @@ function ScriptPanel(parent)
 			self.obj.setMode(self.mode.getSelectedIndex());
 		}
 	});
+
+	//Static
+	this.static = new Checkbox(this.element);
+	this.static.setText("Static Object");
+	this.static.size.set(200, 15);
+	this.static.position.set(2, 85);
+	this.static.updateInterface();
+	this.static.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.matrixAutoUpdate = !(self.static.getValue());
+		}
+	});
 }
 
 //Functions Prototype
@@ -80,6 +94,7 @@ function updatePanel()
 		this.name.setText(this.obj.name);
 		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.mode.setSelectedIndex(this.obj.mode);
+		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
 }
 
