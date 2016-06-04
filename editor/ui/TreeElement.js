@@ -79,54 +79,63 @@ function TreeElement(container)
 	//Context menu event
 	this.element.oncontextmenu = function(event)
 	{
-		var context = new ContextMenu();
-		context.size.set(130, 20);
-		context.position.set(event.clientX - 5, event.clientY - 5);
-		
-		context.addOption("Rename", function()
+		if(self.obj !== null)
 		{
-			if(self.obj !== null)
+			var context = new ContextMenu();
+			context.size.set(130, 20);
+			context.position.set(event.clientX - 5, event.clientY - 5);
+			
+			context.addOption("Rename", function()
 			{
 				self.obj.name = prompt("Rename object", self.obj.name);
 				self.updateSceneData();
 				Editor.updateObjectViews();
-			}
-		});
-		
-		context.addOption("Set static", function()
-		{
-			ObjectUtils.setMatrixAutoUpdate(self.obj, false);
-			Editor.updateObjectViews();
-		});
+			});
 
-		context.addOption("Set dynamic", function()
-		{
-			ObjectUtils.setMatrixAutoUpdate(self.obj, true);
-			Editor.updateObjectViews();
-		});
-
-		context.addOption("Delete", function()
-		{
-			self.deleteObject();
-		});
-
-		if(!(self.obj instanceof Scene) && !(self.obj instanceof Program))
-		{
-			context.addOption("Copy", function()
+			//TODO <REMOVE THIS>
+			if(self.obj instanceof THREE.Mesh)
 			{
-				if(self.obj !== null)
+				context.addOption("New Material", function()
+				{
+					self.obj.material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
+					self.obj.material.name = self.obj.name;
+					Editor.updateObjectViews();
+				});
+			}
+
+			if(!(self.obj instanceof Program))
+			{
+				context.addOption("Delete", function()
+				{
+					self.deleteObject();
+					Editor.updateObjectViews();
+				});
+			}
+
+			if(!(self.obj instanceof Scene) && !(self.obj instanceof Program))
+			{
+				context.addOption("Set static", function()
+				{
+					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
+					Editor.updateObjectViews();
+				});
+
+				context.addOption("Set dynamic", function()
+				{
+					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
+					Editor.updateObjectViews();
+				});
+
+				context.addOption("Copy", function()
 				{
 					try
 					{
 						App.clipboard.set(JSON.stringify(self.obj.toJSON()), "text");
 					}
 					catch(e){}
-				}
-			});
+				});
 
-			context.addOption("Cut", function()
-			{
-				if(self.obj !== null)
+				context.addOption("Cut", function()
 				{
 					try
 					{
@@ -134,13 +143,10 @@ function TreeElement(container)
 						self.deleteObject();	
 					}
 					catch(e){}
-				}
-			});
-		}
+				});
+			}
 
-		context.addOption("Paste", function()
-		{
-			if(self.obj !== null)
+			context.addOption("Paste", function()
 			{
 				try
 				{
@@ -156,10 +162,13 @@ function TreeElement(container)
 					//Add object
 					self.obj.add(obj);
 					self.updateSceneData();
+
+					//Update object view
+					Editor.updateObjectViews();
 				}
 				catch(e){}
-			}
-		});
+			});
+		}
 	};
 
 	//Drag start

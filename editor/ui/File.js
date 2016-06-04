@@ -138,7 +138,14 @@ function File(parent)
 		{
 			if(self.obj !== null)
 			{
-				//TODO <ADD CODE HERE>
+				if(self.obj instanceof THREE.Material)
+				{
+					try
+					{
+						App.clipboard.set(JSON.stringify(self.obj.toJSON()), "text");
+					}
+					catch(e){}
+				}
 			}
 		});
 	};
