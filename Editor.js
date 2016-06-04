@@ -81,8 +81,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunu Studio";
-Editor.VERSION = "V0.7.7 pre-alpha";
-Editor.TIMESTAMP = "201605310110";
+Editor.VERSION = "V0.7.8 pre-alpha";
+Editor.TIMESTAMP = "201606041324";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -425,9 +425,9 @@ Editor.update = function()
 					Editor.updateObjectPanel();
 				}
 
+				//Update object tranformation matrix
 				if(!Editor.selected_object.matrixAutoUpdate)
 				{
-					//Update object tranformation matrix
 					Editor.selected_object.updateMatrix();
 					Editor.selected_object.updateMatrixWorld();
 				}

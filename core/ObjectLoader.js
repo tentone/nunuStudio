@@ -661,6 +661,7 @@ function parseObject(data, geometries, materials, textures)
 		object.folded = data.folded;
 	}
 
+	//Get or generate tranformation matrix if necessary
 	if(data.matrix !== undefined)
 	{
 		matrix.fromArray(data.matrix);
@@ -679,6 +680,17 @@ function parseObject(data, geometries, materials, textures)
 		if(data.scale !== undefined)
 		{
 			object.scale.fromArray(data.scale);
+		}
+	}
+
+	//Set static and update transformation matrix if necessary
+	if(data.matrixAutoUpdate !== undefined)
+	{
+		object.matrixAutoUpdate = data.matrixAutoUpdate;
+		if(!object.matrixAutoUpdate)
+		{
+			object.updateMatrix();
+			object.updateMatrixWorld();
 		}
 	}
 
