@@ -64,6 +64,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 	object.receiveShadow = (this.receiveShadow === true);
 	object.visible = !(this.visible === false);
 
+	object.matrixAutoUpdate = (this.matrixAutoUpdate === true);
 	object.matrix = this.matrix.toArray();
 
 	//If there is geometry store it
