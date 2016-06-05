@@ -28,7 +28,7 @@ function load(url, onLoad, onProgress, onError)
 	loader.load(url, function(text)
 	{
 		scope.parse(JSON.parse(text), onLoad);
-	}, onProgress, onError );
+	}, onProgress, onError);
 }
 
 function parse(json, onLoad)
@@ -307,8 +307,8 @@ function parseImages(json, onLoad)
 		for(var i = 0, l = json.length; i < l; i ++)
 		{
 			var image = json[ i ];
-			var path = /^(\/\/)|([a-z]+:(\/\/)?)/i.test( image.url ) ? image.url : scope.texturePath + image.url;
-			images[ image.uuid ] = loadImage( path );
+			var path = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(image.url) ? image.url : scope.texturePath + image.url;
+			images[image.uuid] = loadImage(path);
 		}
 	}
 
@@ -317,9 +317,9 @@ function parseImages(json, onLoad)
 
 function parseTextures(json, images)
 {
-	function parseConstant( value )
+	function parseConstant(value)
 	{
-		if(typeof( value ) === 'number')
+		if(typeof(value) === "number")
 		{
 			return value;
 		}
@@ -346,7 +346,7 @@ function parseTextures(json, images)
 				console.warn("ObjectLoader: Undefined image", data.image);
 			}
 
-			var texture = new THREE.Texture( images[ data.image ] );
+			var texture = new THREE.Texture(images[ data.image ]);
 			texture.needsUpdate = true;
 			texture.uuid = data.uuid;
 
@@ -444,23 +444,22 @@ function parseObject(data, geometries, materials, textures)
 			}
 
 			object = new ParticleEmitter(texture);
-			
-			var update = false;
+
 			if(data.group !== undefined)
 			{
+				var update_values = false;
+
 				if(data.group.blending !== undefined)
 				{
 					object.group.blending = data.group.blending;
-					update = true;
+					update_values = true;
 				}
 				if(data.emitter.direction !== undefined)
 				{
 					object.emitter.direction = data.emitter.direction;
 				}
 
-
-				//Update webgl related atributes
-				if(update)
+				if(update_values)
 				{
 					object.updateValues();
 				}
@@ -683,17 +682,7 @@ function parseObject(data, geometries, materials, textures)
 		}
 	}
 
-	//Set static and update transformation matrix if necessary
-	if(data.matrixAutoUpdate !== undefined)
-	{
-		object.matrixAutoUpdate = data.matrixAutoUpdate;
-		if(!object.matrixAutoUpdate)
-		{
-			object.updateMatrix();
-			object.updateMatrixWorld();
-		}
-	}
-
+	//Visibility data
 	if(data.castShadow !== undefined)
 	{
 		object.castShadow = data.castShadow;
@@ -706,11 +695,14 @@ function parseObject(data, geometries, materials, textures)
 	{
 		object.visible = data.visible;
 	}
+
+	//Aditional user data
 	if(data.userData !== undefined)
 	{
 		object.userData = data.userData;
 	}
 
+	//Add children
 	if(data.children !== undefined)
 	{
 		for(var child in data.children)
@@ -719,6 +711,19 @@ function parseObject(data, geometries, materials, textures)
 		}
 	}
 
+	//Set static and update transformation matrix if necessary
+	if(data.matrixAutoUpdate !== undefined)
+	{
+		object.matrixAutoUpdate = data.matrixAutoUpdate;
+		
+		if(!object.matrixAutoUpdate)
+		{
+			object.updateMatrix();
+			object.updateMatrixWorld(true);
+		}
+	}
+
+	//LOD objects
 	if(data.type === "LOD")
 	{
 		var levels = data.levels;

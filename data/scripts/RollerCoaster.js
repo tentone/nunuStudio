@@ -361,10 +361,10 @@ function RollerCoasterLiftersGeometry(curve, size)
 
 RollerCoasterLiftersGeometry.prototype = Object.create(THREE.BufferGeometry.prototype);
 
-//Parametric function to generate track
-this.getPointAt = function(t)
+//Parametric function to generate track (THREE.JS rollercoaster)
+this.getPointAtV1 = function(t)
 {
-	t = t * 6.28318530718;
+	t *= 6.28318531;
 	
 	var x = Math.sin(t * 3) * Math.cos(t * 4) * 50;
 	var y = Math.cos(t * 8) * 4 + Math.cos(t * 17) + 5;
@@ -373,6 +373,20 @@ this.getPointAt = function(t)
 	var vector = new THREE.Vector3(x, y, z);
 	return vector.multiplyScalar(20);
 };
+
+//Parametric function to generate track (Smaller rollercoaster)
+this.getPointAt = function(t)
+{
+	t *= Math.PI;
+	
+	var x = Math.sin(t * 4) * Math.cos(t * 6) * 50;
+	var y = Math.cos(t * 8) * 4 + Math.cos(t * 20 * Math.sin(t)) * 2 + 10;
+	var z = Math.sin(t * 5) * Math.sin(t * 3) * 50;
+	
+	var vector = new THREE.Vector3(x, y, z);
+	return vector.multiplyScalar(20);
+};
+
 
 //Parametric function derivate to position camera
 var self = this;
@@ -385,26 +399,33 @@ this.getTangentAt = function (t)
 	return self.getPointAt(t2).sub(self.getPointAt(t1)).normalize();
 };
 
-//Generate ground
-var geometry = new THREE.PlaneGeometry(5000, 5000, 15, 15);
-geometry.applyMatrix(new THREE.Matrix4().makeRotationX(- Math.PI / 2));
-geometry.type = "Geometry";
-var material = new THREE.MeshPhongMaterial({color: 0x407000});
-material.name = "ground";
 
-var zero = new THREE.Vector3(0,0,0);
-for(var i = 0; i < geometry.vertices.length; i ++)
+alert("Rollercoaster Generator\nCreated by tentone\n Based on original drdoob THREE.JS rollercoaster");
+var create_ground = confirm("Generate ground?");
+
+//Generate ground
+if(create_ground)
 {
-	var vertex = geometry.vertices[i];
-	vertex.x += Math.random() * 100 - 50;
-	vertex.z += Math.random() * 100 - 50;
-	var distance = (vertex.distanceTo(zero)/ 5) - 250;
-	vertex.y = Math.random() * Math.max(0, distance);
+	var geometry = new THREE.PlaneGeometry(5000, 5000, 15, 15);
+	geometry.applyMatrix(new THREE.Matrix4().makeRotationX(- Math.PI / 2));
+	geometry.type = "Geometry";
+	var material = new THREE.MeshPhongMaterial({color: 0x407000});
+	material.name = "ground";
+
+	var zero = new THREE.Vector3(0,0,0);
+	for(var i = 0; i < geometry.vertices.length; i ++)
+	{
+		var vertex = geometry.vertices[i];
+		vertex.x += Math.random() * 100 - 50;
+		vertex.z += Math.random() * 100 - 50;
+		var distance = (vertex.distanceTo(zero)/ 5) - 250;
+		vertex.y = Math.random() * Math.max(0, distance);
+	}
+	geometry.computeFaceNormals();
+	var ground = new Model3D(geometry, material);
+	ground.name = "ground";
+	Editor.program.scene.add(ground);
 }
-geometry.computeFaceNormals();
-var ground = new Model3D(geometry, material);
-ground.name = "ground";
-Editor.program.scene.add(ground);
 
 //Generate track
 var geometry = new RollerCoasterGeometry(this, 2500);
@@ -424,3 +445,4 @@ Editor.program.scene.add(lifters);
 
 //Update object view
 Editor.updateObjectViews();
+alert("Done!");

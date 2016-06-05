@@ -46,16 +46,8 @@ function toJSON(meta)
 			canvas.height = image.height;
 			canvas.getContext("2d").drawImage(image, 0, 0, image.width, image.height);
 		}
-
-		if(canvas.width > 1024 || canvas.height > 1024)
-		{
-			return canvas.toDataURL("image/jpeg", 0.6);
-		}
-		else
-		{
-			return canvas.toDataURL("image/png");
-		}
-
+		
+		return canvas.toDataURL("image/png");
 	}
 
 	var output =
