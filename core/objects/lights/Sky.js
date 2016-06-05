@@ -1,11 +1,30 @@
-function Sky(auto_update, day_time, sun_distance, time)
+function Sky(auto_update, day_time, sun_distance, time, hemisphere, sun)
 {	
 	//Hemisphere light
-	this.hemisphere = new HemisphereLight(0xffffff, 0xffffff, 0.3);
-	this.hemisphere.color.setHSL(0.6, 1, 0.6);
-	this.hemisphere.groundColor.setHSL(0.095, 1, 0.75);
-	this.hemisphere.position.set(0, 500, 0);
-	this.hemisphere.name = "horizon";
+	if(hemisphere !== undefined)
+	{
+		this.hemisphere	= hemisphere;
+	}
+	else
+	{
+		this.hemisphere = new HemisphereLight(0xffffff, 0xffffff, 0.3);
+		this.hemisphere.color.setHSL(0.6, 1, 0.6);
+		this.hemisphere.groundColor.setHSL(0.095, 1, 0.75);
+		this.hemisphere.position.set(0, 500, 0);
+		this.hemisphere.name = "horizon";
+	}
+
+	//Directional sun light
+	if(sun !== undefined)
+	{
+		this.sun = sun;
+	}
+	else
+	{
+		this.sun = new DirectionalLight(0xffffaa, 0.3);
+		this.sun.castShadow = true;
+		this.sun.name = "sun";
+	}
 
 	//Vertex Shader
 	var vertex = "varying vec3 vWorldPosition; \
@@ -39,7 +58,7 @@ function Sky(auto_update, day_time, sun_distance, time)
 	uniforms.top_color.value.copy(this.hemisphere.color);
 
 	//Sky geometry and material
-	var geometry = new THREE.SphereGeometry(4000, 32, 15);
+	var geometry = new THREE.SphereGeometry(5000, 32, 15);
 	var material = new THREE.ShaderMaterial({vertexShader: vertex, fragmentShader: fragment, uniforms: uniforms, side: THREE.BackSide});
 	material.name = "sky";
 
@@ -50,13 +69,8 @@ function Sky(auto_update, day_time, sun_distance, time)
 	this.name = "sky";
 	this.type = "Sky";
 
-	//Sun
-	this.sun = new DirectionalLight(0xffffaa, 0.3);
-	this.sun.castShadow = true;
-	this.sun.name = "sun";
+	//Add lights
 	this.add(this.sun);
-
-	//Hemisphere
 	this.add(this.hemisphere);
 
 	//Day Time and Sun control
@@ -65,6 +79,7 @@ function Sky(auto_update, day_time, sun_distance, time)
 	this.day_time = 20; //seconds
 	this.time = 13;
 
+	//Get parameters
 	if(auto_update !== undefined)
 	{
 		this.auto_update = auto_update;
