@@ -59,6 +59,7 @@ LeapHand.prototype.toJSON = toJSON;
 LeapHand.prototype.setMode = setMode;
 LeapHand.prototype.checkGesture = checkGesture;
 LeapHand.prototype.checkPose = checkPose;
+LeapHand.prototype.getMovement = getMovement;
 
 LeapHand.prototype.updateDebugModel = updateDebugModel;
 LeapHand.prototype.updatePoses = updatePoses;
@@ -170,6 +171,12 @@ function updatePoses()
 		var distance = [];
 		var indicator_distance = 0;
 		var finger_joint = [];
+
+		//Clear pose status list
+		for(var i = 0; i < this.pose.length; i++)
+		{
+			this.pose[i] = true;
+		}
 
 		//Fingers direction array
 		var finger_direction = [];
@@ -373,9 +380,9 @@ function updatePhysics()
 //Add mesh to hand instance
 function addMesh(meshes)
 {
-	var mesh = new THREE.Mesh(this.geometry, this.material);
-	mesh.castShadow = true;
-	mesh.receiveShadow = true;
+	var mesh = new Model3D(this.geometry, this.material);
+	mesh.castShadow = this.castShadow;
+	mesh.receiveShadow = this.receiveShadow;
 	meshes.push(mesh);
 	return mesh;
 }
@@ -392,6 +399,18 @@ function updateMesh(bone, mesh)
 	this.add(mesh);
 }
 
+//Get hand movement (already temporaly normalized)
+function getMovement()
+{
+	var actual = this.data.gestures[0].position;
+	var previous = this.data.gestures[0].startPosition;
+
+	var vel_abs = new THREE.Vector3(actual[0] - previous[0], actual[1] - previous[1], actual[2] - previous[2]);
+	vel_abs.divideScalar(this.data.currentFrameRate);
+
+	return vel_abs;
+}
+
 //Create JSON for object
 function toJSON(meta)
 {
@@ -406,116 +425,3 @@ function toJSON(meta)
 
 	return data;
 }
-
-/*
-//SWIPE controler
-if(this.parent.checkGesture(LeapHand.SWIPE))
-{
-		var data = this.parent.data;
-		var frameRate = data.currentFrameRate;
-		var position =  data.gestures[0].position;
-		var startPosition = data.gestures[0].startPosition;
-
-		var velXNormalize = Math.abs(position[0] - startPosition[0])/frameRate;
-		var velYNormalize = Math.abs(position[1] - startPosition[1])/frameRate;
-		var velZNormalize = Math.abs(position[2] - startPosition[2])/frameRate;
-
-		var vel = [velXNormalize,velYNormalize,velZNormalize];
-		var maxVel = Math.max(velXNormalize, velYNormalize, velZNormalize);
-		var axisMove = vel.indexOf(maxVel);
-
-		if(axisMove === 0)
-		{
-			if(this.parent.checkGesture(LeapHand.SWIPE_LEFT))
-			{
-				this.children[0].position.x -= 0.1;
-			}
-			if(this.parent.checkGesture(LeapHand.SWIPE_RIGHT))
-			{
-				this.children[0].position.x += 0.1;
-			}  
-		}
-		else if(axisMove === 1)
-		{
-			if(this.parent.checkGesture(LeapHand.SWIPE_UP))
-			{
-				this.children[0].position.y += 0.1;
-			}
-			if(this.parent.checkGesture(LeapHand.SWIPE_DOWN))
-			{
-				this.children[0].position.y -= 0.1;
-			}      
-		}
-		else // if(axisMove === 2)
-		{
-			if(this.parent.checkGesture(LeapHand.SWIPE_FRONT))
-			{
-				this.children[0].position.z += 0.1;
-			}
-			if(this.parent.checkGesture(LeapHand.SWIPE_BACK))
-			{
-				this.children[0].position.z -= 0.1;
-			}
-		}
-}
-
-//Gestures identifier
-if(Keyboard.isKeyPressed(Keyboard.C))
-{
-	var hand = this.parent.data.hands[0];
-	var center = hand.sphereCenter;
-	var vector3DCenter = new THREE.Vector3(center[0],center[1],center[2]);
-	var fingers = hand.fingers;
-
-	//Fingers position 
-	var distance = [];
-	var indicator_distance = 0;
-	var finger_pointing = true;
-	var fingerJoint = [];
-
-	//Arm direction
-	var arm_direction =  this.parent.data.hands[0].direction;
-
-	//Fingers direction array
-	var fingersDirection = [];
-	var closed = true;
-	var extended = true;
-
-	for(var i = 0; i < fingers.length; i++)
-	{
-		fingersDirection.push(this.parent.data.hands[0].fingers[i].direction);
-		fingerJoint = fingers[i].distal.nextJoint;
-
-		var vector3DJoint = new THREE.Vector3(fingerJoint[0], fingerJoint[1], fingerJoint[2]);
-		distance.push((vector3DCenter.distanceTo(vector3DJoint))/hand._scaleFactor);
-
-		if(i != 0)
-		{
-			if(fingersDirection[i][2] < 0.3)
-			{
-				closed = false;
-			}
-			
-			if(fingersDirection[i][2] > -0.5)
-			{
-				extended = false;
-			}
-
-			if(i === 1)
-			{
-				indicator_distance = distance[1];
-			}
-			else if(indicator_distance < 2*distance[i]-15 && finger_pointing)
-			{
-				finger_pointing = false;
-			}
-		}
-	}
-	if(indicator_distance < 2*distance[0]-15 && finger_pointing)
-	{
-		finger_pointing = false;
-	}
-
-	console.log("Closed: ", closed, " Extended: ",extended, "Indicator: ", finger_pointing);
-}
-*/
