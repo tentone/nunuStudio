@@ -156,8 +156,11 @@ function TreeElement(container)
 
 					//Create object
 					var obj = loader.parse(data);
-					obj.uuid = THREE.Math.generateUUID();
-					obj.position.set(0, 0, 0);
+					obj.traverse(function(child)
+					{
+						child.uuid = THREE.Math.generateUUID();
+					});
+
 
 					//Add object
 					self.obj.add(obj);

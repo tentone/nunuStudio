@@ -82,7 +82,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.7.9 Pre-Alpha";
-Editor.TIMESTAMP = "201606072220";
+Editor.TIMESTAMP = "201606080424";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -693,8 +693,10 @@ Editor.pasteIntoSelectedObject = function()
 
 		//Create object
 		var obj = loader.parse(data);
-		obj.uuid = THREE.Math.generateUUID();
-		obj.position.set(0, 0, 0);
+		obj.traverse(function(child)
+		{
+			child.uuid = THREE.Math.generateUUID();
+		});
 
 		//Add object
 		if(Editor.selected_object !== null)
@@ -705,6 +707,7 @@ Editor.pasteIntoSelectedObject = function()
 		{
 			Editor.program.scene.add(obj);
 		}
+
 		Editor.updateObjectViews();
 	}
 	catch(e){}
