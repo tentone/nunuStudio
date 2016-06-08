@@ -24,6 +24,7 @@ include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
+include("core/MathUtils.js");
 include("core/ThreeExpand.js");
 include("core/ObjectLoader.js");
 include("core/Program.js");

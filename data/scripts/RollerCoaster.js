@@ -401,7 +401,7 @@ this.getTangentAt = function (t)
 
 
 alert("Rollercoaster Generator\nCreated by tentone\n Based on original drdoob THREE.JS rollercoaster");
-var create_ground = confirm("Generate ground?");
+/*var create_ground = confirm("Generate ground?");
 
 //Generate ground
 if(create_ground)
@@ -425,10 +425,10 @@ if(create_ground)
 	var ground = new Model3D(geometry, material);
 	ground.name = "ground";
 	Editor.program.scene.add(ground);
-}
+}*/
 
 //Generate track
-var geometry = new RollerCoasterGeometry(this, 2500);
+var geometry = new RollerCoasterGeometry(this, 1500);
 var material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
 material.name = "track";
 var track = new Model3D(geometry, material);
@@ -436,7 +436,7 @@ track.name = "track";
 Editor.program.scene.add(track);
 
 //Generate lifters
-var geometry = new RollerCoasterLiftersGeometry(this, 200);
+var geometry = new RollerCoasterLiftersGeometry(this, 80);
 var material = new THREE.MeshPhongMaterial({color:0xffff00, specular:0x333333, shininess:30});
 material.name = "lifters";
 var lifters = new Model3D(geometry, material);
