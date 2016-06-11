@@ -84,7 +84,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.1 Pre-Alpha";
-Editor.TIMESTAMP = "201606110207";
+Editor.TIMESTAMP = "201606111814";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -824,7 +824,7 @@ Editor.updateSelectedObjectUI = function()
 Editor.updateObjectViews = function()
 {
 	Editor.updateTreeView();
-	Editor.updateAssetExplorer();
+	setTimeout(Editor.updateAssetExplorer, 0);
 	Editor.updateObjectPanel();
 	Editor.updateTabsData();
 }
@@ -854,7 +854,7 @@ Editor.updateAssetExplorer = function()
 	//Add materials to asset explorer
 	for(var i = 0; i < materials.length; i++)
 	{
-		var file = Interface.asset_explorer.add(materials[i].name);//, "editor/files/icons/misc/material.png");
+		var file = Interface.asset_explorer.add();
 		file.setObject(materials[i]);
 	}
 
