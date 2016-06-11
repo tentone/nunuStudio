@@ -379,12 +379,11 @@ this.getPointAt = function(t)
 {
 	t *= Math.PI;
 	
-	var x = Math.sin(t * 4) * Math.cos(t * 6) * 50;
-	var y = Math.cos(t * 8) * 4 + Math.cos(t * 20 * Math.sin(t)) * 2 + 10;
-	var z = Math.sin(t * 5) * Math.sin(t * 3) * 50;
-	
-	var vector = new THREE.Vector3(x, y, z);
-	return vector.multiplyScalar(20);
+	var x = Math.sin(t * 4) * Math.cos(t * 6) * 1000;
+	var y = Math.cos(t * 8) * 80 + Math.cos(t * 20 * Math.sin(t)) * 40 + 200;
+	var z = Math.sin(t * 5) * Math.sin(t * 3) * 1000;
+
+	return new THREE.Vector3(x, y, z);
 };
 
 
