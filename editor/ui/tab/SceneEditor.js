@@ -121,10 +121,15 @@ function SceneEditor(parent)
 	this.vr_button.size.set(25, 25);
 	this.vr_button.setImage("editor/files/icons/misc/vr.png");
 	this.vr_button.visible = false;
+	this.vr_button.setClass("");
 	this.vr_button.updateInterface();
+	this.vr_button.element.onmouseenter = function()
+	{
+		self.vr_button.img.style.opacity = 0.5;
+	};
 	this.vr_button.element.onmouseleave = function()
 	{
-		self.vr_button.setClass("");
+		self.vr_button.img.style.opacity = 1.0;
 	};
 
 	//Element atributes

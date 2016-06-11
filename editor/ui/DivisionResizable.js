@@ -108,19 +108,19 @@ function update()
 	{
 		if(this.resizable_side === DivisionResizable.LEFT)
 		{	
-			this.size.x -= Mouse.pos_diff.x;
+			this.size.x -= Mouse.delta.x;
 		}
 		else if(this.resizable_side === DivisionResizable.RIGHT)
 		{
-			this.size.x += Mouse.pos_diff.x;
+			this.size.x += Mouse.delta.x;
 		}
 		else if(this.resizable_side === DivisionResizable.TOP)
 		{
-			this.size.y -= Mouse.pos_diff.y;
+			this.size.y -= Mouse.delta.y;
 		}
 		else if(this.resizable_side === DivisionResizable.BOTTOM)
 		{
-			this.size.y += Mouse.pos_diff.y;
+			this.size.y += Mouse.delta.y;
 		}
 
 		//Limit Size

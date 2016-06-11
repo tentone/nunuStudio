@@ -81,9 +81,8 @@ function ParticleEditor(parent)
 
 	//-----------------------------Particle parameters------------------------------
 	this.form = new Form(this.main.div_b);
-	this.form.spacing.set(10, 8);
-	this.form.size.set(1000, 2000);
-
+	this.form.spacing.set(10, 5);
+	
 	//Name
 	this.form.addText("Name");
 	this.name = new Textbox(this.form.element);
@@ -161,7 +160,9 @@ function ParticleEditor(parent)
 	this.particleCount.size.set(100, 18);
 	this.particleCount.setOnChange(function()
 	{
-
+		var particleCount = self.particleCount.getValue();
+		self.particle.emitter.particleCount = particleCount;
+		self.particle_runtime.emitter.particleCount = particleCount;
 	});
 	this.form.add(this.particleCount);
 	this.form.nextRow();
@@ -200,6 +201,9 @@ function attachParticle(particle)
 	//Create particle copy for preview
 	this.particle_runtime = new ObjectLoader().parse(particle.toJSON());
 	this.particle_runtime.initialize();
+	this.particle_runtime.scale.set(1, 1, 1);
+	this.particle_runtime.position.set(0, 0, 0);
+	this.particle_runtime.updateMatrix();
 	this.scene.add(this.particle_runtime);
 
 	//Update form elements from particle data
@@ -207,6 +211,7 @@ function attachParticle(particle)
 	this.texture.setImage(particle.group.texture.image.src);
 	this.blending.setValue(particle.group.blending);
 	this.direction.setValue(particle.emitter.direction);
+	this.particleCount.setValue(particle.emitter.particleCount);
 }
 
 //Update camera position and rotation from variables
@@ -252,8 +257,8 @@ function update()
 		//Move camera
 		if(Mouse.buttonPressed(Mouse.LEFT))
 		{
-			this.camera_rotation.x -= 0.003 * Mouse.pos_diff.x;
-			this.camera_rotation.y -= 0.003 * Mouse.pos_diff.y;
+			this.camera_rotation.x -= 0.003 * Mouse.delta.x;
+			this.camera_rotation.y -= 0.003 * Mouse.delta.y;
 
 			//Limit Vertical Rotation to 90 degrees
 			var pid2 = 1.57;

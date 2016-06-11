@@ -7,13 +7,14 @@ include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
-
 include("lib/three/webvr/VREffect.js");
 
 include("lib/leap/leap-0.6.4.min.js");
 
 include("lib/cannon/cannon.min.js");
 include("lib/cannon/cannondebugrenderer.js");
+
+include("lib/webvr/webvr-polyfill.js");
 
 include("lib/stats.min.js");
 include("lib/opentype.min.js");
@@ -75,17 +76,6 @@ App.initialize = function(main)
 		App.clipboard = App.gui.Clipboard.get();
 	}
 	catch(e){}
-
-	//Stats tool
-	App.stats = new Stats();
-	App.stats.setMode(0);
-	App.stats.domElement.style.position = "absolute";
-	App.stats.domElement.style.left = "0px";
-	App.stats.domElement.style.top = "0px";
-	App.stats.domElement.style.zIndex = "100";
-	App.stats.domElement.style.opacity = "0.7";
-	App.stats.domElement.style.pointerEvents = "none";
-	document.body.appendChild(App.stats.domElement);
 
 	//Fullscreen flag
 	App.fullscreen = false;
@@ -267,19 +257,6 @@ App.loadMain = function(main)
 	App.main.initialize(App.canvas);
 }
 
-//Show Stats
-App.showStats = function(value)
-{
-	if(value === true)
-	{
-		App.stats.domElement.style.visibility = "visible";
-	}
-	else
-	{
-		App.stats.domElement.style.visibility = "hidden";
-	}
-}
-
 //Check if webVr is available
 App.webvrAvailable = function()
 {
@@ -313,8 +290,6 @@ App.loop = function()
 	//Call loop again
 	requestAnimationFrame(App.loop);
 
-	App.stats.begin();
-
 	//Update Mouse Values
 	Mouse.update();
 	Keyboard.update();
@@ -326,8 +301,6 @@ App.loop = function()
 	//Update and draw
 	App.main.update();
 	App.main.draw();
-
-	App.stats.end();
 }
 
 //Called every time page is resized

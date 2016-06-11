@@ -1,7 +1,7 @@
 function RotateTool()
 {
 	//Super
-	THREE.Scene.call(this);
+	THREE.Object3D.call(this);
 
 	var pid2 = Math.PI / 2;
 
@@ -14,20 +14,27 @@ function RotateTool()
 	//X
 	var geometry = new THREE.TorusGeometry(1, 0.015, 5, 64);
 	this.x = new THREE.Mesh(geometry, this.material_red);
+	this.x.matrixAutoUpdate = false;
 	this.x.rotateOnAxis(new THREE.Vector3(0,1,0), pid2);
+	this.x.updateMatrix();
 
 	//Y
 	geometry = new THREE.TorusGeometry(1, 0.015, 5, 64);
 	this.y = new THREE.Mesh(geometry, this.material_green);
+	this.y.matrixAutoUpdate = false;
 	this.y.rotateOnAxis(new THREE.Vector3(1,0,0), pid2);
+	this.y.updateMatrix();
 
 	//Z
 	geometry = new THREE.TorusGeometry(1, 0.015, 5, 64);
 	this.z = new THREE.Mesh(geometry, this.material_blue);
+	this.z.matrixAutoUpdate = false;
+	this.z.updateMatrix();
 
 	//Center
 	geometry = new THREE.SphereGeometry(0.05, 8, 8);
 	this.center = new THREE.Mesh(geometry, this.material_white);
+	this.center.matrixAutoUpdate = false;
 
 	//Disable components auto matrix update
 	this.x.updateMatrix();
@@ -47,7 +54,7 @@ function RotateTool()
 }
 
 //Functions Prototype
-RotateTool.prototype = Object.create(THREE.Scene.prototype);
+RotateTool.prototype = Object.create(THREE.Object3D.prototype);
 RotateTool.prototype.highlightSelectedComponents = highlightSelectedComponents;
 
 //Highligth selected compoonents and return witch are selected

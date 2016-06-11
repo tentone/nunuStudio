@@ -7078,7 +7078,7 @@ aL.StackPop=StackPop;
 ]);
 });
 
-string]á
+string=Þ
 (function(a,b){
 %CheckIsBootstrapping();
 var c;
@@ -7453,21 +7453,12 @@ function StringTrimRight(){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.trimRight");
 return %StringTrim((%_ToString(this)),false,true);
 }
-function StringFromCharCode(ao){
-"use strict";
-var w="";
-var an=arguments.length;
-for(var y=0;y<an;++y){
-w+=%_StringCharFromCode(arguments[y]&0xffff);
+function HtmlEscape(ao){
+return %_Call(StringReplace,(%_ToString(ao)),/"/g,"&quot;");
 }
-return w;
-}
-function HtmlEscape(ap){
-return %_Call(StringReplace,(%_ToString(ap)),/"/g,"&quot;");
-}
-function StringAnchor(aq){
+function StringAnchor(ap){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.anchor");
-return"<a name=\""+HtmlEscape(aq)+"\">"+(%_ToString(this))+
+return"<a name=\""+HtmlEscape(ap)+"\">"+(%_ToString(this))+
 "</a>";
 }
 function StringBig(){
@@ -7486,14 +7477,14 @@ function StringFixed(){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.fixed");
 return"<tt>"+(%_ToString(this))+"</tt>";
 }
-function StringFontcolor(ar){
+function StringFontcolor(aq){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.fontcolor");
-return"<font color=\""+HtmlEscape(ar)+"\">"+(%_ToString(this))+
+return"<font color=\""+HtmlEscape(aq)+"\">"+(%_ToString(this))+
 "</font>";
 }
-function StringFontsize(as){
+function StringFontsize(ar){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.fontsize");
-return"<font size=\""+HtmlEscape(as)+"\">"+(%_ToString(this))+
+return"<font size=\""+HtmlEscape(ar)+"\">"+(%_ToString(this))+
 "</font>";
 }
 function StringItalics(){
@@ -7520,93 +7511,93 @@ function StringSup(){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.sup");
 return"<sup>"+(%_ToString(this))+"</sup>";
 }
-function StringRepeat(at){
+function StringRepeat(as){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.repeat");
 var w=(%_ToString(this));
-var an=(%_ToInteger(at));
+var an=(%_ToInteger(as));
 if(an<0||an===(1/0))throw j(167);
 if(w.length===0)return"";
 if(an>%_MaxSmi())throw j(167);
-var au="";
+var at="";
 while(true){
-if(an&1)au+=w;
+if(an&1)at+=w;
 an>>=1;
-if(an===0)return au;
+if(an===0)return at;
 w+=w;
 }
 }
-function StringStartsWith(av,A){
+function StringStartsWith(au,A){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.startsWith");
 var w=(%_ToString(this));
-if(i(av)){
+if(i(au)){
 throw k(40,"String.prototype.startsWith");
 }
-var aw=(%_ToString(av));
+var av=(%_ToString(au));
 var t=(%_ToInteger(A));
 var ae=w.length;
 var R=m(l(t,0),ae);
-var ax=aw.length;
-if(ax+R>ae){
+var aw=av.length;
+if(aw+R>ae){
 return false;
 }
-return %_SubString(w,R,R+ax)===aw;
+return %_SubString(w,R,R+aw)===av;
 }
 %FunctionSetLength(StringStartsWith,1);
-function StringEndsWith(av,A){
+function StringEndsWith(au,A){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.endsWith");
 var w=(%_ToString(this));
-if(i(av)){
+if(i(au)){
 throw k(40,"String.prototype.endsWith");
 }
-var aw=(%_ToString(av));
+var av=(%_ToString(au));
 var ae=w.length;
 var t=!(A===(void 0))?(%_ToInteger(A)):ae
 var S=m(l(t,0),ae);
-var ax=aw.length;
-var R=S-ax;
+var aw=av.length;
+var R=S-aw;
 if(R<0){
 return false;
 }
-return %_SubString(w,R,R+ax)===aw;
+return %_SubString(w,R,R+aw)===av;
 }
 %FunctionSetLength(StringEndsWith,1);
-function StringIncludes(av,A){
+function StringIncludes(au,A){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.includes");
 var T=(%_ToString(this));
-if(i(av)){
+if(i(au)){
 throw k(40,"String.prototype.includes");
 }
-av=(%_ToString(av));
+au=(%_ToString(au));
 var t=(%_ToInteger(A));
-var ay=T.length;
+var ax=T.length;
 if(t<0)t=0;
-if(t>ay)t=ay;
-var az=av.length;
-if(az+t>ay){
+if(t>ax)t=ax;
+var ay=au.length;
+if(ay+t>ax){
 return false;
 }
-return %StringIndexOf(T,av,t)!==-1;
+return %StringIndexOf(T,au,t)!==-1;
 }
 %FunctionSetLength(StringIncludes,1);
 function StringCodePointAt(t){
 if((%IS_VAR(this)===null)||(this===(void 0)))throw k(18,"String.prototype.codePointAt");
 var T=(%_ToString(this));
-var as=T.length;
+var ar=T.length;
 t=(%_ToInteger(t));
-if(t<0||t>=as){
+if(t<0||t>=ar){
 return(void 0);
 }
-var aA=%_StringCharCodeAt(T,t);
-if(aA<0xD800||aA>0xDBFF||t+1==as){
-return aA;
+var az=%_StringCharCodeAt(T,t);
+if(az<0xD800||az>0xDBFF||t+1==ar){
+return az;
 }
-var aB=%_StringCharCodeAt(T,t+1);
-if(aB<0xDC00||aB>0xDFFF){
-return aA;
+var aA=%_StringCharCodeAt(T,t+1);
+if(aA<0xDC00||aA>0xDFFF){
+return az;
 }
-return(aA-0xD800)*0x400+aB+0x2400;
+return(az-0xD800)*0x400+aA+0x2400;
 }
-function StringFromCodePoint(ao){
+function StringFromCodePoint(aB){
 "use strict";
 var aC;
 var V=arguments.length;
@@ -7650,7 +7641,6 @@ return u;
 %AddNamedProperty(
 f.prototype,"constructor",f,2);
 b.InstallFunctions(f,2,[
-"fromCharCode",StringFromCharCode,
 "fromCodePoint",StringFromCodePoint,
 "raw",StringRaw
 ]);
@@ -14333,7 +14323,7 @@ function MakeTypeError(W,X,Y,Z){
 return MakeGenericError(H,W,X,Y,Z);
 }
 function MakeURIError(){
-return MakeGenericError(J,276);
+return MakeGenericError(J,277);
 }
 var bn=MakeRangeError(186);
 b.InstallGetterSetter(bn,'stack',

@@ -18,6 +18,7 @@ function AboutTab(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
+	this.element.className = "bar";
 
 	//Prevent Drop event
 	this.element.ondrop = function(event)
@@ -65,7 +66,6 @@ function AboutTab(parent)
 	this.madewith.size.set(540, 60);
 	this.madewith.position.set(0, 0);
 	this.madewith.updateInterface();
-
 
 	//Element atributes
 	this.fit_parent = false;

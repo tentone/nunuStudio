@@ -138,11 +138,11 @@ function update()
 	{
 		if(this.orientation == DualDivisionResizable.HORIZONTAL)
 		{	
-			this.tab_position += Mouse.pos_diff.x/this.size.x;
+			this.tab_position += Mouse.delta.x/this.size.x;
 		}
 		else if(this.orientation == DualDivisionResizable.VERTICAL)
 		{
-			this.tab_position += Mouse.pos_diff.y/this.size.y;
+			this.tab_position += Mouse.delta.y/this.size.y;
 		}
 
 		//Limit tab position

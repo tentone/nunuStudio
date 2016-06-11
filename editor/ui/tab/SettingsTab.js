@@ -33,13 +33,30 @@ function SettingsTab(parent)
 
 	//Options tab container
 	this.tab = new TabGroup(this.element);
+	this.tab.options_size.set(200, 30);
+	this.tab.element.className = "bar";
 	this.tab.mode = TabGroup.LEFT;
 	this.tab.updateInterface();
 
-	//Options
+	//General
 	this.general = this.tab.addOption("General", "editor/files/icons/misc/tool.png", false);
+	this.general_form = new Form(this.general.division.element);
+	this.general_form.spacing.set(10, 8);
+	this.general_form.addText("General Settings");
+	this.general_form.nextRow();
+	this.general_form.addText("Theme");
+	this.general_form.nextRow();
+	this.general_form.addText("Renderer Settings");
+	this.general_form.nextRow();
+	this.general_form.addText("Antialiasing");
+	this.general_form.nextRow();
+	this.general_form.addText("Show wireframe");
+	this.general_form.nextRow();
+
+	//Code 
 	this.code = this.tab.addOption("Code", "editor/files/icons/script/script.png", false);
 	
+	//About
 	this.about = this.tab.addOption("About", "editor/files/icons/misc/about.png", false);
 	this.about.attachComponent(new AboutTab(this.about.division.element));
 	this.about.updateInterface();
@@ -106,6 +123,10 @@ function updateInterface()
 	{
 		this.element.style.visibility = "hidden";
 	}
+
+	//Update forms
+	this.general_form.visible = this.visible;
+	this.general_form.updateInterface();
 	
 	//Update tab
 	this.tab.visible = this.visible;

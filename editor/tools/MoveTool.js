@@ -1,7 +1,7 @@
 function MoveTool()
 {
 	//Super
-	THREE.Scene.call(this);
+	THREE.Object3D.call(this);
 
 	//Move components
 	this.x = new THREE.Scene();
@@ -19,11 +19,15 @@ function MoveTool()
 	//X
 	var geometry = new THREE.CylinderGeometry(0.015, 0.015, 1, 5);
 	var mesh = new THREE.Mesh(geometry, this.material_red);
+	mesh.matrixAutoUpdate = false;
 	mesh.position.set(0, 0.5, 0);
+	mesh.updateMatrix();
 	this.x.add(mesh);
 	geometry = new THREE.CylinderGeometry(0, 0.05, 0.15, 8);
 	mesh = new THREE.Mesh(geometry, this.material_red);
+	mesh.matrixAutoUpdate = false;
 	mesh.position.set(0, 1, 0);
+	mesh.updateMatrix();
 	this.x.add(mesh);
 	this.x.rotateOnAxis(new THREE.Vector3(0,0,1) , -pid2);
 	this.x.updateMatrix();
@@ -32,20 +36,26 @@ function MoveTool()
 	geometry = new THREE.CylinderGeometry(0.015, 0.015, 1, 5);
 	mesh = new THREE.Mesh(geometry, this.material_green);
 	mesh.position.set(0, 0.5, 0);
+	mesh.updateMatrix();
 	this.y.add(mesh);
 	geometry = new THREE.CylinderGeometry(0, 0.05, 0.15, 8);
 	mesh = new THREE.Mesh(geometry, this.material_green);
 	mesh.position.set(0, 1, 0);
+	mesh.updateMatrix();
 	this.y.add(mesh);
 
 	//Z
 	geometry = new THREE.CylinderGeometry(0.015, 0.015, 1, 5);
 	mesh = new THREE.Mesh(geometry, this.material_blue);
+	mesh.matrixAutoUpdate = false;
 	mesh.position.set(0, 0.5, 0);
+	mesh.updateMatrix();
 	this.z.add(mesh);
 	geometry = new THREE.CylinderGeometry(0, 0.05, 0.15, 8);
 	mesh = new THREE.Mesh(geometry, this.material_blue);
+	mesh.matrixAutoUpdate = false;
 	mesh.position.set(0, 1, 0);
+	mesh.updateMatrix();
 	this.z.add(mesh);
 	this.z.rotateOnAxis(new THREE.Vector3(1,0,0), pid2);
 	this.z.updateMatrix();
@@ -53,11 +63,13 @@ function MoveTool()
 	//Center
 	geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
 	this.block = new THREE.Mesh(geometry, this.material_yellow);
-	
+	this.block.matrixAutoUpdate = false;
+
 	//Add to super
 	this.add(this.x);
 	this.add(this.y);
 	this.add(this.z);
+	this.add(this.block);
 
 	this.x.updateMatrix();
 	this.x.matrixAutoUpdate = false;
@@ -65,12 +77,10 @@ function MoveTool()
 	this.y.matrixAutoUpdate = false;
 	this.z.updateMatrix();
 	this.z.matrixAutoUpdate = false;
-
-	this.add(this.block);
 }
 
 //Functions Prototype
-MoveTool.prototype = Object.create(THREE.Scene.prototype);
+MoveTool.prototype = Object.create(THREE.Object3D.prototype);
 MoveTool.prototype.highlightSelectedComponents = highlightSelectedComponents;
 
 //Highligth selected compoonents and return witch are selected

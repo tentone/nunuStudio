@@ -1,4 +1,3 @@
-//Texture image
 function Texture(url)
 {
 	//Create video element

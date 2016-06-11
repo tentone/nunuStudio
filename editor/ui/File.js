@@ -195,6 +195,11 @@ File.prototype.setObject = setObject;
 //Set object to file
 function setObject(obj)
 {
+	if(obj instanceof THREE.Material)
+	{
+		Editor.material_renderer.renderMaterial(obj, this.img);
+	}
+
 	this.obj = obj;
 	this.setText(obj.name);
 }
@@ -260,6 +265,7 @@ function updateInterface()
 	this.text.size.y = this.size.y - this.text.position.y;
 	this.text.updateInterface();
 	
+	//Update element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

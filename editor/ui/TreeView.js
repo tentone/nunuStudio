@@ -65,6 +65,9 @@ TreeView.prototype.updateSelectedObject = updateSelectedObject;
 //Set data from scene
 function fromObject(obj)
 {	
+	//TODO <REMOVE THIS>
+	var startTime = new Date();
+
 	//Remove all children
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -78,9 +81,13 @@ function fromObject(obj)
 	//Add element and update interface
 	TreeView.addSceneElement(this, obj);
 	this.updateInterface();
+
+	//TODO <REMOVE THIS>
+	var endTime = new Date();
+	console.log("Time -> " + (endTime - startTime));
 }
 
-//Update witch object is currently selected
+//Update which object is currently selected
 function updateSelectedObject(obj)
 {
 	TreeView.updateSelectedObject(this, obj);
@@ -109,12 +116,14 @@ function add(text, icon)
 //Remove element
 function destroy()
 {
+	//Remove main element
 	try
 	{
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
 	
+	//Remove children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].destroy();
@@ -138,6 +147,7 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
+	//Fit to parent
 	if(this.fit_parent)
 	{
 		this.size.x = this.parent.offsetWidth;
@@ -162,11 +172,12 @@ function updateInterface()
 	}
 }
 
-//Get tree view element from attached object
+//Update treeview to highlight the selected object
 TreeView.updateSelectedObject = function(element, obj)
 {
 	for(var i = 0; i < element.children.length; i++)
 	{
+		//Check if is the selected object
 		if(element.children[i].obj.uuid === obj.uuid)
 		{
 			element.children[i].element.className = "button_left_over";
@@ -176,6 +187,7 @@ TreeView.updateSelectedObject = function(element, obj)
 			element.children[i].element.className = "button_left_light";
 		}
 
+		//Call children
 		TreeView.updateSelectedObject(element.children[i], obj);
 	}
 }
@@ -219,7 +231,7 @@ TreeView.checkParentFolded = function(element)
 	{
 		return false;
 	}
-
+	
 	if(element.folded)
 	{
 		return true;
