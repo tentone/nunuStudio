@@ -1,7 +1,7 @@
 function ResizeTool()
 {
 	//Super
-	THREE.Scene.call(this);
+	THREE.Object3D.call(this);
 
 	//Move components
 	this.x = new THREE.Scene();
@@ -72,7 +72,7 @@ function ResizeTool()
 }
 
 //Functions Prototype
-ResizeTool.prototype = Object.create(THREE.Scene.prototype);
+ResizeTool.prototype = Object.create(THREE.Object3D.prototype);
 ResizeTool.prototype.highlightSelectedComponents = highlightSelectedComponents;
 
 //Highligth selected compoonents and return witch are selected

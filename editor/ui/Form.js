@@ -18,7 +18,6 @@ function Form(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "panel";
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);

@@ -28,12 +28,12 @@ function TabElement(name, icon, closeable, container, index)
 	this.button.setCallback(function(event)
 	{
 		//Select tab if mouse left click
-		if(event.which-1 === Mouse.LEFT)
+		if(event.which - 1 === Mouse.LEFT)
 		{
 			self.container.selectOption(self.index);
 		}
 		//Close tab if mouse mid click
-		else if(self.closeable && event.which-1 === Mouse.MIDDLE)
+		else if(self.closeable && event.which - 1 === Mouse.MIDDLE)
 		{
 			self.container.removeOption(self.index);
 		}

@@ -161,8 +161,7 @@ function MaterialEditor(parent)
 	//---------------------------------------Generic Material parameters------------------------------------------
 	this.form = new Form(this.main.div_b);
 	this.form.spacing.set(10, 8);
-	this.form.size.set(1000, 2000);
-
+	
 	//Name
 	this.form.addText("Name");
 	this.name = new Textbox(this.form.element);
@@ -491,7 +490,7 @@ function MaterialEditor(parent)
 	this.form.nextRow();
 
 	//Alpha map
-	/*this.form.addText("Alpha map");
+	this.form.addText("Alpha map");
 	this.form.nextRow();
 	this.alphaMap = new Imagebox(this.form.element);
 	this.alphaMap.size.set(100, 100);
@@ -502,7 +501,7 @@ function MaterialEditor(parent)
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.alphaMap);
-	this.form.nextRow();*/
+	this.form.nextRow();
 
 	//Environment map
 	this.form.addText("Environment map");
@@ -570,10 +569,19 @@ function updateContainerMetaData(container)
 //Attach material to material editor
 function attachMaterial(material)
 {
+	if(material instanceof THREE.SpriteMaterial)
+	{
+		this.sprite.material = material;
+		this.sprite.visible = true;
+		this.obj.visible = false;
+	}
+	else
+	{
+		this.obj.material = material;
+		this.obj.visible = true;
+		this.sprite.visible = false;
+	}
 	this.material = material;
-	this.obj.material = material;
-	this.obj.visible = true;
-	this.sprite.visible = false;
 }
 
 //Activate code editor
@@ -613,7 +621,7 @@ function update()
 		if(Mouse.buttonPressed(Mouse.LEFT))
 		{
 			var delta = new THREE.Quaternion();
-			delta.setFromEuler(new THREE.Euler(Mouse.pos_diff.y * 0.005, Mouse.pos_diff.x * 0.005, 0, 'XYZ'));
+			delta.setFromEuler(new THREE.Euler(Mouse.delta.y * 0.005, Mouse.delta.x * 0.005, 0, 'XYZ'));
 			this.obj.quaternion.multiplyQuaternions(delta, this.obj.quaternion);
 		}
 

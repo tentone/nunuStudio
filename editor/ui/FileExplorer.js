@@ -67,11 +67,12 @@ function clear()
 	this.updateInterface();
 }
 
-//Add file
+//Create new file add it and return it
 function add(text, icon)
 {
 	var file = new File(this.element);
 	file.size.copy(this.files_size);
+	
 	file.setText(text);
 	file.setIcon(icon);
 	file.updateInterface();

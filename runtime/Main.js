@@ -18,6 +18,17 @@ Main.initialize = function(canvas)
 	Main.canvas.height = window.innerHeight;
 	document.body.appendChild(Main.canvas);
 
+	//Stats tool
+	Main.stats = new Stats();
+	Main.stats.setMode(0);
+	Main.stats.domElement.style.position = "absolute";
+	Main.stats.domElement.style.left = "0px";
+	Main.stats.domElement.style.top = "0px";
+	Main.stats.domElement.style.zIndex = "100";
+	Main.stats.domElement.style.opacity = "0.7";
+	Main.stats.domElement.style.pointerEvents = "none";
+	document.body.appendChild(Main.stats.domElement);
+
 	//Define mouse canvas
 	Mouse.canvas = Main.canvas;
 
@@ -44,6 +55,7 @@ Main.initialize = function(canvas)
 	Main.fullscreen.style.left = (window.innerWidth - 30) + "px";
 	Main.fullscreen.style.top = (window.innerHeight - 30) + "px";
 	document.body.appendChild(Main.fullscreen);
+	
 	var fullscreen = true;
 	Main.fullscreen.onclick = function()
 	{
@@ -122,6 +134,7 @@ Main.initialize = function(canvas)
 //Update Main
 Main.update = function()
 {
+	Main.stats.begin();
 	Main.program.scene.update();
 }
 
@@ -154,6 +167,8 @@ Main.draw = function()
 	{
 		Main.renderer.render(Main.program.scene, Main.program.scene.camera);
 	}
+
+	App.stats.end();
 }
 
 //Resize to fit window

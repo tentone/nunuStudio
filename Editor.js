@@ -63,6 +63,8 @@ include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
 include("editor/tools/RotateTool.js");
 
+include("editor/utils/MaterialRenderer.js");
+
 include("editor/Interface.js");
 include("editor/Settings.js");
 
@@ -81,8 +83,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.7.9 Pre-Alpha";
-Editor.TIMESTAMP = "201606080424";
+Editor.VERSION = "V0.8.1 Pre-Alpha";
+Editor.TIMESTAMP = "201606110207";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -105,11 +107,6 @@ Editor.initialize = function(canvas)
 
 	//Set mouse lock false
 	App.setMouseLock(false);
-
-	//Show stats
-	App.showStats(false);
-	App.stats.domElement.style.left = "40px";
-	App.stats.domElement.style.top = "55px";
 
 	//Editor initial state
 	Editor.tool_mode = Editor.MODE_SELECT;
@@ -136,6 +133,9 @@ Editor.initialize = function(canvas)
 	//Renderer and canvas
 	Editor.renderer = null;
 	Editor.canvas = null;
+
+	//Material renderer for material previews
+	Editor.material_renderer = new MaterialRenderer();
 
 	//Default material to be used when creating objects
 	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
@@ -261,10 +261,14 @@ Editor.update = function()
 				Editor.rotate_tool.visible = false;
 				Editor.resize_tool.visible = false;
 
-				var position = Editor.selected_object.getWorldPosition();
-				var distance = Editor.camera.position.distanceTo(position)/5;
+				var distance = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/5;
 				Editor.move_tool.scale.set(distance, distance, distance);
-				Editor.move_tool.position.copy(position);
+
+				Editor.selected_object.getWorldPosition(Editor.move_tool.position);
+				if(Editor.selected_object.parent !== null)
+				{
+					Editor.selected_object.parent.getWorldQuaternion(Editor.move_tool.quaternion);
+				}
 			}
 			else if(Editor.tool_mode === Editor.MODE_RESIZE)
 			{
@@ -272,12 +276,11 @@ Editor.update = function()
 				Editor.move_tool.visible = false;
 				Editor.rotate_tool.visible = false;
 
-				var position = Editor.selected_object.getWorldPosition();
-				var distance = Editor.camera.position.distanceTo(position)/5;
-
+				var distance = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/5;
 				Editor.resize_tool.scale.set(distance, distance, distance);
-				Editor.resize_tool.rotation.copy(Editor.selected_object.rotation);
-				Editor.resize_tool.position.copy(position);
+
+				Editor.selected_object.getWorldPosition(Editor.resize_tool.position);
+				Editor.selected_object.getWorldQuaternion(Editor.resize_tool.quaternion);
 			}
 			else if(Editor.tool_mode === Editor.MODE_ROTATE)
 			{
@@ -286,9 +289,9 @@ Editor.update = function()
 				Editor.resize_tool.visible = false;
 
 				var position = Editor.selected_object.getWorldPosition();
-				var distance = Editor.camera.position.distanceTo(position)/5;
+				var distance = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/5;
 				Editor.rotate_tool.scale.set(distance, distance, distance);
-				Editor.rotate_tool.position.copy(position);
+				Editor.selected_object.getWorldPosition(Editor.rotate_tool.position);
 			}
 			else
 			{
@@ -348,20 +351,22 @@ Editor.update = function()
 				//Moving object
 				if(Editor.tool_mode === Editor.MODE_MOVE)
 				{
+					var scale = Editor.selected_object.parent.getWorldScale();
 					var speed = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/500;
+
 					if(Editor.editing_object_args.x)
 					{
-						Editor.selected_object.position.x -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x);
-						Editor.selected_object.position.x -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x);
+						Editor.selected_object.position.x -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x) / scale.x;
+						Editor.selected_object.position.x -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x) / scale.x;
 					}
 					else if(Editor.editing_object_args.y)
 					{
-						Editor.selected_object.position.y -= Mouse.pos_diff.y * speed;
+						Editor.selected_object.position.y -= Mouse.delta.y * speed / scale.y;
 					}
 					else if(Editor.editing_object_args.z)
 					{
-						Editor.selected_object.position.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2);
-						Editor.selected_object.position.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2);
+						Editor.selected_object.position.z -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2) / scale.z;
+						Editor.selected_object.position.z -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2) / scale.z;
 					}
 
 					//Update object panel
@@ -370,28 +375,30 @@ Editor.update = function()
 				//Resize mode
 				else if(Editor.tool_mode === Editor.MODE_RESIZE)
 				{
-					var speed = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/1000;
+					var speed = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/1500;
+					var scale = Editor.selected_object.scale;
+
 					if(Editor.editing_object_args.center)
 					{
-						var size = (Mouse.pos_diff.x - Mouse.pos_diff.y) * speed/3;
+						var size = (Mouse.delta.x - Mouse.delta.y) * speed/2;
 
-						Editor.selected_object.scale.x += size;
-						Editor.selected_object.scale.y += size;
-						Editor.selected_object.scale.z += size;
+						Editor.selected_object.scale.x += size * scale.x;
+						Editor.selected_object.scale.y += size * scale.y;
+						Editor.selected_object.scale.z += size * scale.z;
 					}
 					else if(Editor.editing_object_args.x)
 					{
-						Editor.selected_object.scale.x -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x);
-						Editor.selected_object.scale.x -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x);
+						Editor.selected_object.scale.x -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x) * scale.x;
+						Editor.selected_object.scale.x -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x) * scale.x;
 					}
 					else if(Editor.editing_object_args.y)
 					{
-						Editor.selected_object.scale.y -= Mouse.pos_diff.y * speed;
+						Editor.selected_object.scale.y -= Mouse.delta.y * speed * scale.y;
 					}
 					else if(Editor.editing_object_args.z)
 					{
-						Editor.selected_object.scale.z -= Mouse.pos_diff.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2);
-						Editor.selected_object.scale.z -= Mouse.pos_diff.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2);
+						Editor.selected_object.scale.z -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2) * scale.z;
+						Editor.selected_object.scale.z -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2) * scale.z;
 					}
 
 					//Update object panel
@@ -405,19 +412,19 @@ Editor.update = function()
 					if(Editor.editing_object_args.x)
 					{
 						var delta = new THREE.Quaternion();
-						delta.setFromEuler(new THREE.Euler(-(Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 0, 0, 'XYZ'));
+						delta.setFromEuler(new THREE.Euler(-(Mouse.delta.y + Mouse.delta.x) * speed, 0, 0, 'XYZ'));
 						Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
 					}
 					else if(Editor.editing_object_args.y)
 					{
 						var delta = new THREE.Quaternion();
-						delta.setFromEuler(new THREE.Euler(0, -(Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 0, 'XYZ'));
+						delta.setFromEuler(new THREE.Euler(0, -(Mouse.delta.y + Mouse.delta.x) * speed, 0, 'XYZ'));
 						Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
 					}
 					else if(Editor.editing_object_args.z)
 					{
 						var delta = new THREE.Quaternion();
-						delta.setFromEuler(new THREE.Euler(0, 0, (Mouse.pos_diff.y + Mouse.pos_diff.x) * speed, 'XYZ'));
+						delta.setFromEuler(new THREE.Euler(0, 0, (Mouse.delta.y + Mouse.delta.x) * speed, 'XYZ'));
 						Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
 					}
 
@@ -429,7 +436,6 @@ Editor.update = function()
 				if(!Editor.selected_object.matrixAutoUpdate)
 				{
 					Editor.selected_object.updateMatrix();
-					Editor.selected_object.updateMatrixWorld();
 				}
 			}
 		}
@@ -493,8 +499,8 @@ Editor.update = function()
 			//Rotate camera
 			if(Mouse.buttonPressed(Mouse.LEFT) && !Editor.block_camera_move)
 			{
-				Editor.camera_rotation.x -= 0.002 * Mouse.pos_diff.x;
-				Editor.camera_rotation.y -= 0.002 * Mouse.pos_diff.y;
+				Editor.camera_rotation.x -= 0.002 * Mouse.delta.x;
+				Editor.camera_rotation.y -= 0.002 * Mouse.delta.y;
 
 				//Limit Vertical Rotation to 90 degrees
 				var pid2 = 1.57;
@@ -523,20 +529,20 @@ Editor.update = function()
 				//Move Camera Front and Back
 				var angle_cos = Math.cos(Editor.camera_rotation.x);
 				var angle_sin = Math.sin(Editor.camera_rotation.x);
-				Editor.camera.position.z += Mouse.pos_diff.y * speed * angle_cos;
-				Editor.camera.position.x += Mouse.pos_diff.y * speed * angle_sin;
+				Editor.camera.position.z += Mouse.delta.y * speed * angle_cos;
+				Editor.camera.position.x += Mouse.delta.y * speed * angle_sin;
 
 				//Move Camera Lateral
 				var angle_cos = Math.cos(Editor.camera_rotation.x + Editor.pid2);
 				var angle_sin = Math.sin(Editor.camera_rotation.x + Editor.pid2);
-				Editor.camera.position.z += Mouse.pos_diff.x * speed * angle_cos;
-				Editor.camera.position.x += Mouse.pos_diff.x * speed * angle_sin;
+				Editor.camera.position.z += Mouse.delta.x * speed * angle_cos;
+				Editor.camera.position.x += Mouse.delta.x * speed * angle_sin;
 			}
 			
 			//Move Camera on Y
 			else if(Mouse.buttonPressed(Mouse.MIDDLE))
 			{
-				Editor.camera.position.y += Mouse.pos_diff.y * 0.1;
+				Editor.camera.position.y += Mouse.delta.y * 0.1;
 			}
 
 			//Move in camera direction using mouse scroll
@@ -544,12 +550,32 @@ Editor.update = function()
 			{
 				//Move speed
 				var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0,0,0))/2000;
-				if(speed < 0.003)
-				{
-					speed = 0.003;
-				}
 				speed *= Mouse.wheel;
-				
+
+				//Limit zoom speed
+				if(speed < 0)
+				{
+					if(speed > -0.03)
+					{
+						speed = -0.03;
+					}
+					else if(speed < -5)
+					{
+						speed = -5;
+					}
+				}
+				else if(speed > 0)
+				{
+					if(speed < 0.03)
+					{
+						speed = 0.03;
+					}
+					else if(speed > 5)
+					{
+						speed = 5;
+					}
+				}
+
 				//Move camera
 				var direction = Editor.camera.getWorldDirection();
 				Editor.camera.position.x -= speed * direction.x;
@@ -828,7 +854,7 @@ Editor.updateAssetExplorer = function()
 	//Add materials to asset explorer
 	for(var i = 0; i < materials.length; i++)
 	{
-		var file = Interface.asset_explorer.add(materials[i].name, "editor/files/icons/misc/material.png");
+		var file = Interface.asset_explorer.add(materials[i].name);//, "editor/files/icons/misc/material.png");
 		file.setObject(materials[i]);
 	}
 
@@ -965,6 +991,7 @@ Editor.resetEditingFlags = function()
 	Editor.block_camera_move = false;
 	Editor.is_editing_object = false;
 	Editor.editing_object_args = null;
+	
 	try
 	{
 		Editor.updateObjectHelper();
@@ -999,8 +1026,6 @@ Editor.loadProgram = function(fname)
 	var program = loader.parse(data);
 	
 	Editor.program = program;
-	Editor.resetEditingFlags();
-	Editor.updateObjectViews();
 	
 	//Remove old tabs from interface
 	Interface.tab.clear();
@@ -1014,6 +1039,10 @@ Editor.loadProgram = function(fname)
 		scene.attachComponent(canvas);
 		Interface.tab.selectOption(0);
 	}
+
+	//Update object views
+	Editor.resetEditingFlags();
+	Editor.updateObjectViews();
 }
 
 //Export web project to file
