@@ -24,7 +24,7 @@ function MaterialRenderer()
 	this.scene.add(this.obj);
 	
 	this.sprite = new Sprite(null);
-	this.sprite.position.set(0, 0, -1.5);
+	this.sprite.position.set(0, 0, -0.5);
 	this.sprite.visible = false;
 	this.scene.add(this.sprite);
 

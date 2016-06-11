@@ -67,18 +67,13 @@ function clear()
 	this.updateInterface();
 }
 
-//Create new file add it and return it
-function add(text, icon)
+//Create new file add id and return it
+function add()
 {
 	var file = new File(this.element);
 	file.size.copy(this.files_size);
-	
-	file.setText(text);
-	file.setIcon(icon);
 	file.updateInterface();
-
 	this.files.push(file);
-
 	return file;
 }
 
