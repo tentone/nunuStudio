@@ -34,7 +34,7 @@ function File(parent)
 	this.visible = true;
 
 	//Icon scale
-	this.scale = new THREE.Vector2(0.6, 0.6);
+	this.scale = new THREE.Vector2(0.7, 0.7);
 	
 	//Attached object
 	this.obj = null;
