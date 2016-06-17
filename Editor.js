@@ -83,8 +83,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.1 Pre-Alpha";
-Editor.TIMESTAMP = "201606111814";
+Editor.VERSION = "V0.8.2 Pre-Alpha";
+Editor.TIMESTAMP = "201606171728";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -138,7 +138,7 @@ Editor.initialize = function(canvas)
 	Editor.material_renderer = new MaterialRenderer();
 
 	//Default material to be used when creating objects
-	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
+	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:3});
 	Editor.default_material.name = "default";
 	Editor.default_sprite_material = new THREE.SpriteMaterial({map: new Texture("data/sample.png"), color: 0xffffff});
 	Editor.default_sprite_material.name = "sprite";
@@ -1188,10 +1188,10 @@ Editor.setRenderCanvas = function(canvas)
 //Initialize renderer
 Editor.initializeRenderer = function(canvas)
 {
-	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true});
+	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: Settings.renderer_antialiasing});
 	Editor.renderer.autoClear = false;
-	Editor.renderer.shadowMap.enabled = true;
-	Editor.renderer.shadowMap.type = THREE.PCFSoftShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
+	Editor.renderer.shadowMap.enabled = Settings.renderer_shadows;
+	Editor.renderer.shadowMap.type = Settings.renderer_shadows_type;
 	Editor.renderer.setSize(canvas.width, canvas.height);
 }
 

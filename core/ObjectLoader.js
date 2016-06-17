@@ -654,7 +654,10 @@ function parseObject(data, geometries, materials, textures)
 	{
 		object.name = data.name;
 	}
-
+	if(data.hidden !== undefined)
+	{
+		object.hidden = data.hidden;
+	}
 	if(data.folded !== undefined)
 	{
 		object.folded = data.folded;

@@ -5,17 +5,14 @@
 	//Self pointer
 	var self = this;
 
-	//Name
-	var text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Name");
-	text.position.set(5, 20);
-	text.updateInterface();
+	this.form = new Form(this.element);
+	this.form.position.set(5, 10);
+	this.form.spacing.set(5, 5);
 
-	this.name = new Textbox(this.element);
-	this.name.position.set(45, 10);
+	//Name
+	this.form.addText("Name");
+	this.name = new Textbox(this.form.element);
 	this.name.size.set(200, 18);
-	this.name.updateInterface();
 	this.name.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -24,13 +21,13 @@
 			Editor.updateObjectViews();
 		}
 	});
+	this.form.add(this.name);
+	this.form.nextRow();
 
 	//Select scene as default
-	this.default = new Checkbox(this.element);
+	this.default = new Checkbox(this.form.element);
 	this.default.setText("Default scene");
 	this.default.size.set(200, 15);
-	this.default.position.set(3, 35);
-	this.default.updateInterface();
 	this.default.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -46,21 +43,35 @@
 			}
 		}
 	});
+	this.form.add(this.default);
+	this.form.nextRow();
+
+	//Background color
+	this.form.addText("Background");
+	this.background = new ColorChooser(this.form.element);
+	this.background.size.set(80, 18);
+	this.background.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{	
+			if(self.obj.background === null)
+			{
+				self.obj.background = new THREE.Color();
+			}
+			self.obj.background = self.background.getValueHex();
+			self.obj.updateFog();
+		}
+	});
+	this.form.add(this.background);
+	this.form.nextRow();
 
 	//Fog
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Fog");
-	text.position.set(5, 70);
-	text.updateInterface();
-
-	this.fog = new DropdownList(this.element);
-	this.fog.position.set(45, 60);
+	this.form.addText("Fog");
+	this.fog = new DropdownList(this.form.element);
 	this.fog.size.set(100, 18);
 	this.fog.addValue("Off", 0);
 	this.fog.addValue("Linear", 1);
 	this.fog.addValue("Exponential", 2);
-	this.fog.updateInterface();
 	this.fog.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -69,18 +80,13 @@
 			self.updateElementsVisibility();
 		}
 	});
+	this.form.add(this.fog);
+	this.form.nextRow();
 
 	//Fog color
-	this.fog_color_text = new Text(this.element);
-	this.fog_color_text.setAlignment(Text.LEFT);
-	this.fog_color_text.setText("Color");
-	this.fog_color_text.position.set(5, 95);
-	this.fog_color_text.updateInterface();
-
-	this.fog_color = new ColorChooser(this.element);
+	this.fog_color_text = this.form.addText("Color");
+	this.fog_color = new ColorChooser(this.form.element);
 	this.fog_color.size.set(80, 18);
-	this.fog_color.position.set(45, 85);
-	this.fog_color.updateInterface();
 	this.fog_color.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -89,18 +95,13 @@
 			self.obj.updateFog();
 		}
 	});
+	this.form.add(this.fog_color);
+	this.form.nextRow();
 
 	//Linear fog near
-	this.fog_near_text = new Text(this.element);
-	this.fog_near_text.setAlignment(Text.LEFT);
-	this.fog_near_text.setText("Near");
-	this.fog_near_text.position.set(5, 120);
-	this.fog_near_text.updateInterface();
-
-	this.fog_near = new Numberbox(this.element);
+	this.fog_near_text = this.form.addText("Near");
+	this.fog_near = new Numberbox(this.form.element);
 	this.fog_near.size.set(60, 18);
-	this.fog_near.position.set(40, 110);
-	this.fog_near.updateInterface();
 	this.fog_near.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -109,19 +110,14 @@
 			self.obj.updateFog();
 		}
 	});
+	this.form.add(this.fog_near);
+	this.form.nextRow();
 
 	//Exponential fog density
-	this.fog_density_text = new Text(this.element);
-	this.fog_density_text.setAlignment(Text.LEFT);
-	this.fog_density_text.setText("Density");
-	this.fog_density_text.position.set(5, 120);
-	this.fog_density_text.updateInterface();
-
-	this.fog_density = new Numberbox(this.element);
+	this.fog_density_text = this.form.addText("Density")
+	this.fog_density = new Numberbox(this.form.element);
 	this.fog_density.size.set(100, 18);
-	this.fog_density.position.set(55, 110);
 	this.fog_density.setStep(0.0001);
-	this.fog_density.updateInterface();
 	this.fog_density.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -130,18 +126,13 @@
 			self.obj.updateFog();
 		}
 	});
+	this.form.add(this.fog_density);
+	this.form.nextRow();
 
 	//Linear fog far
-	this.fog_far_text = new Text(this.element);
-	this.fog_far_text.setAlignment(Text.LEFT);
-	this.fog_far_text.setText("Far");
-	this.fog_far_text.position.set(5, 145);
-	this.fog_far_text.updateInterface();
-
-	this.fog_far = new Numberbox(this.element);
+	this.fog_far_text = this.form.addText("Far");
+	this.fog_far = new Numberbox(this.form.element);
 	this.fog_far.size.set(60, 18);
-	this.fog_far.position.set(35, 135);
-	this.fog_far.updateInterface();
 	this.fog_far.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -150,6 +141,11 @@
 			self.obj.updateFog();
 		}
 	});
+	this.form.add(this.fog_far);
+	this.form.nextRow();
+
+	//Update form
+	this.form.updateInterface();
 }
 
 //Functions Prototype

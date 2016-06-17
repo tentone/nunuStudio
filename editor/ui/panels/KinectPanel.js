@@ -86,7 +86,7 @@ function KinectPanel(parent)
 	this.debug_model = new Checkbox(this.element);
 	this.debug_model.setText("Debug model");
 	this.debug_model.size.set(200, 15);
-	this.debug_model.position.set(2, 110);
+	this.debug_model.position.set(5, 110);
 	this.debug_model.updateInterface();
 	this.debug_model.setOnChange(function()
 	{

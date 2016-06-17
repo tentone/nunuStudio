@@ -215,12 +215,15 @@ TreeView.getElementFromObject = function(element, obj)
 //Add scene element to tree (recursive)
 TreeView.addSceneElement = function(tree, scene)
 {
-	var element = tree.add(scene.name, scene.icon);
-	element.setObject(scene);
-
-	for(var i = 0; i < scene.children.length; i++)
+	if(!scene.hidden)
 	{
-		TreeView.addSceneElement(element, scene.children[i]);
+		var element = tree.add(scene.name, scene.icon);
+		element.setObject(scene);
+
+		for(var i = 0; i < scene.children.length; i++)
+		{
+			TreeView.addSceneElement(element, scene.children[i]);
+		}
 	}
 }
 

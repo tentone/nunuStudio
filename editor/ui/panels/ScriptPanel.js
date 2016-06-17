@@ -70,7 +70,7 @@ function ScriptPanel(parent)
 	this.static = new Checkbox(this.element);
 	this.static.setText("Static Object");
 	this.static.size.set(200, 15);
-	this.static.position.set(2, 85);
+	this.static.position.set(5, 85);
 	this.static.updateInterface();
 	this.static.setOnChange(function()
 	{

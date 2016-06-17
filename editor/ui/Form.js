@@ -72,8 +72,11 @@ function add(elem)
 	{
 		this.rows[this.rows.length - 1].push(elem);
 
-		elem.parent = this.element;
-		this.element.appendChild(elem.element);
+		if(elem.parent !== this.element)
+		{
+			elem.parent = this.element;
+			this.element.appendChild(elem.element);
+		}
 	}
 }
 
@@ -104,7 +107,7 @@ function updateInterface()
 	}
 
 	//Updated attached elements
-	var position = new THREE.Vector2(this.spacing.x, this.spacing.y);
+	var position = new THREE.Vector2(0, 0);
 	var size = new THREE.Vector2(0, 0);
 	for(var i = 0; i < this.rows.length; i++)
 	{
@@ -132,7 +135,7 @@ function updateInterface()
 		}
 
 		//Update position tracker
-		position.x = this.spacing.x;
+		position.x = 0;
 		position.y += max_size_y + this.spacing.y;
 	}
 	size.y = position.y;

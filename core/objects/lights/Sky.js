@@ -1,30 +1,18 @@
-function Sky(auto_update, day_time, sun_distance, time, hemisphere, sun)
+function Sky(auto_update, day_time, sun_distance, time)
 {	
 	//Hemisphere light
-	if(hemisphere !== undefined)
-	{
-		this.hemisphere	= hemisphere;
-	}
-	else
-	{
-		this.hemisphere = new HemisphereLight(0xffffff, 0xffffff, 0.4);
-		this.hemisphere.color.setHSL(0.6, 1, 0.6);
-		this.hemisphere.groundColor.setHSL(0.095, 1, 0.75);
-		this.hemisphere.position.set(0, 500, 0);
-		this.hemisphere.name = "horizon";
-	}
+	this.hemisphere = new HemisphereLight(0xffffff, 0xffffff, 0.4);
+	this.hemisphere.color.setHSL(0.6, 1, 0.6);
+	this.hemisphere.groundColor.setHSL(0.095, 1, 0.75);
+	this.hemisphere.position.set(0, 500, 0);
+	this.hemisphere.name = "horizon";
+	this.hemisphere.hidden = true;
 
 	//Directional sun light
-	if(sun !== undefined)
-	{
-		this.sun = sun;
-	}
-	else
-	{
-		this.sun = new DirectionalLight(Sky.sun_color, 0.3);
-		this.sun.castShadow = true;
-		this.sun.name = "sun";
-	}
+	this.sun = new DirectionalLight(Sky.sun_color, 0.3);
+	this.sun.castShadow = true;
+	this.sun.hidden = true;
+	this.sun.name = "sun";
 
 	//Vertex Shader
 	var vertex = "varying vec3 vWorldPosition; \

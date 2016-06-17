@@ -22,6 +22,7 @@ function Checkbox(parent)
 	this.checkbox = document.createElement("input");
 	this.checkbox.type = "checkbox";
 	this.checkbox.style.position = "absolute";
+	this.checkbox.style.left = "-3px";
 	this.element.appendChild(this.checkbox);
 
 	//Text
