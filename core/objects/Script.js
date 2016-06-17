@@ -33,7 +33,6 @@ function Script(code, mode)
 
 //Function Prototype
 Script.prototype = Object.create(THREE.Object3D.prototype);
-Script.prototype.icon = "editor/files/icons/script/script.png";
 
 //Runtime functions
 Script.prototype.initialize = initialize;

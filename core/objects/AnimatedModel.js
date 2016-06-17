@@ -7,7 +7,6 @@ function AnimatedModel(geometry, material, useVertexTexture)
 
 //Function Prototype
 AnimatedModel.prototype = Object.create(THREE.SkinnedMesh.prototype);
-AnimatedModel.prototype.icon = "editor/files/icons/models/cube.png";
 
 //Runtime functions
 AnimatedModel.prototype.update = update;

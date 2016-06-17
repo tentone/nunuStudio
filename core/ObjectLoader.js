@@ -542,6 +542,12 @@ function parseObject(data, geometries, materials, textures)
 			{
 				object.setFogMode(data.fog_mode);
 			}
+
+			if(data.background !== undefined)
+			{
+				object.background = new THREE.Color(data.background.r, data.background.g, data.background.b);
+			}
+
 			if(data.initial_camera !== undefined)
 			{
 				object.initial_camera = data.initial_camera;

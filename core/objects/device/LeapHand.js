@@ -50,7 +50,6 @@ function LeapHand()
 }
 
 LeapHand.prototype = Object.create(THREE.Object3D.prototype);
-LeapHand.prototype.icon = "editor/files/icons/hw/leap.png";
 
 LeapHand.prototype.initialize = initialize;
 LeapHand.prototype.update = update;

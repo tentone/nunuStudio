@@ -8,7 +8,6 @@ function Sprite(material)
 
 //Function Prototype
 Sprite.prototype = Object.create(THREE.Sprite.prototype);
-Sprite.prototype.icon = "editor/files/icons/assets/image.png";
 
 //Runtime functions
 Sprite.prototype.update = update;

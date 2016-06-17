@@ -10,8 +10,8 @@ function Scene()
 
 	//Fog
 	this.fog_color = 0xffffff;
-	this.fog_near = 2;
-	this.fog_far = 30;
+	this.fog_near = 4;
+	this.fog_far = 10;
 	this.fog_density = 0.001;
 	this.fog_mode = Scene.FOG_NONE;
 
@@ -37,7 +37,6 @@ Scene.FOG_EXPONENTIAL = 2;
 
 //Function Prototype
 Scene.prototype = Object.create(THREE.Scene.prototype);
-Scene.prototype.icon = "editor/files/icons/models/models.png";
 
 //Runtime functions
 Scene.prototype.initialize = initialize;
@@ -147,6 +146,14 @@ function toJSON(meta)
 	data.object.fog_near = this.fog_near;
 	data.object.fog_far = this.fog_far;
 	data.object.fog_mode = this.fog_mode;
+
+	if(this.background !== null)
+	{
+		data.object.background = {};
+		data.object.background.r = this.background.r;
+		data.object.background.g = this.background.g;
+		data.object.background.b = this.background.b;
+	}
 
 	if(this.initial_camera !== null)
 	{

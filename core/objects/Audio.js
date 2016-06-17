@@ -11,7 +11,6 @@ function Audio()
 
 //Function Prototype
 Audio.prototype = Object.create(THREE.Audio.prototype);
-Audio.prototype.icon = "editor/files/icons/assets/audio.png";
 
 //Runtime functions
 Audio.prototype.update = update;

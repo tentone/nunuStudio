@@ -66,7 +66,6 @@ KinectDevice.JOINTS_NAME = [["head","shouldercenter"],["shouldercenter","shoulde
 
 //Function Prototype
 KinectDevice.prototype = Object.create(THREE.Object3D.prototype);
-KinectDevice.prototype.icon = "editor/files/icons/hw/kinect.png";
 
 //Runtime functions
 KinectDevice.prototype.initialize = initialize;

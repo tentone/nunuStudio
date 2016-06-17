@@ -19,7 +19,6 @@ function Text3D(text, material, font)
 
 //Function Prototype
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
-Text3D.prototype.icon = "editor/files/icons/models/text.png";
 
 //Overrided functions
 Text3D.prototype.initialize = initialize;

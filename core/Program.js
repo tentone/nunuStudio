@@ -51,7 +51,6 @@ function Program(name, description, author, version, vr)
 
 //Function Prototype
 Program.prototype = Object.create(THREE.Object3D.prototype);
-Program.prototype.icon = "editor/files/icons/script/script.png";
 
 //Overrided functions
 Program.prototype.initialize = initialize;

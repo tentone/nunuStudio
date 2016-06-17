@@ -86,7 +86,6 @@ function ParticleEmitter(texture)
 
 //Function Prototype
 ParticleEmitter.prototype = Object.create(THREE.Object3D.prototype);
-ParticleEmitter.prototype.icon = "editor/files/icons/effects/particles.png";
 
 //Runtime functions
 ParticleEmitter.prototype.updateValues = updateValues;
