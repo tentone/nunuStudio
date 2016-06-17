@@ -29,7 +29,7 @@ function SkyPanel(parent)
 	this.auto_update = new Checkbox(this.element);
 	this.auto_update.setText("Auto update");
 	this.auto_update.size.set(200, 15);
-	this.auto_update.position.set(0, 35);
+	this.auto_update.position.set(5, 35);
 	this.auto_update.updateInterface();
 	this.auto_update.setOnChange(function()
 	{

@@ -169,7 +169,7 @@ function SpotLightPanel(parent)
 	this.cast_shadow = new Checkbox(this.element);
 	this.cast_shadow.setText("Cast Shadow");
 	this.cast_shadow.size.set(200, 15);
-	this.cast_shadow.position.set(2, 185);
+	this.cast_shadow.position.set(5, 185);
 	this.cast_shadow.updateInterface();
 	this.cast_shadow.setOnChange(function()
 	{
@@ -183,7 +183,7 @@ function SpotLightPanel(parent)
 	this.visible = new Checkbox(this.element);
 	this.visible.setText("Visible");
 	this.visible.size.set(200, 15);
-	this.visible.position.set(2, 210);
+	this.visible.position.set(5, 210);
 	this.visible.updateInterface();
 	this.visible.setOnChange(function()
 	{
@@ -197,7 +197,7 @@ function SpotLightPanel(parent)
 	this.static = new Checkbox(this.element);
 	this.static.setText("Static Object");
 	this.static.size.set(200, 15);
-	this.static.position.set(2, 235);
+	this.static.position.set(5, 235);
 	this.static.updateInterface();
 	this.static.setOnChange(function()
 	{

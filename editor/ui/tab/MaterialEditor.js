@@ -160,6 +160,7 @@ function MaterialEditor(parent)
 
 	//---------------------------------------Generic Material parameters------------------------------------------
 	this.form = new Form(this.main.div_b);
+	this.form.position.set(10, 8);
 	this.form.spacing.set(10, 8);
 	
 	//Name

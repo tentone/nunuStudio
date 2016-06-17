@@ -89,7 +89,7 @@ function ObjectPanel(parent)
 	this.visible = new Checkbox(this.element);
 	this.visible.setText("Visible");
 	this.visible.size.set(200, 15);
-	this.visible.position.set(2, 110);
+	this.visible.position.set(5, 110);
 	this.visible.updateInterface();
 	this.visible.setOnChange(function()
 	{
@@ -103,7 +103,7 @@ function ObjectPanel(parent)
 	this.static = new Checkbox(this.element);
 	this.static.setText("Static Object");
 	this.static.size.set(200, 15);
-	this.static.position.set(2, 135);
+	this.static.position.set(5, 135);
 	this.static.updateInterface();
 	this.static.setOnChange(function()
 	{
@@ -117,7 +117,7 @@ function ObjectPanel(parent)
 	this.cast_shadow = new Checkbox(this.element);
 	this.cast_shadow.setText("Cast Shadow");
 	this.cast_shadow.size.set(200, 15);
-	this.cast_shadow.position.set(2, 160);
+	this.cast_shadow.position.set(5, 160);
 	this.cast_shadow.updateInterface();
 	this.cast_shadow.setOnChange(function()
 	{
@@ -131,7 +131,7 @@ function ObjectPanel(parent)
 	this.receive_shadow = new Checkbox(this.element);
 	this.receive_shadow.setText("Receive Shadow");
 	this.receive_shadow.size.set(200, 15);
-	this.receive_shadow.position.set(2, 185);
+	this.receive_shadow.position.set(5, 185);
 	this.receive_shadow.updateInterface();
 	this.receive_shadow.setOnChange(function()
 	{

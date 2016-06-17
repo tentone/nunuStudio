@@ -54,7 +54,8 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 	object.type = this.type;
 	object.name = this.name;
 	object.folded = this.folded;
-
+	object.hidden = this.hidden;
+	
 	if(JSON.stringify(this.userData) !== "{}")
 	{
 		object.userData = this.userData;

@@ -1,5 +1,7 @@
 function Main(){}
 
+Main.app = "app.isp";
+
 //Initialize Main
 Main.initialize = function(canvas)
 {
@@ -7,7 +9,7 @@ Main.initialize = function(canvas)
 	App.setMouseLock(false);
 
 	//Main program and scene
-	Main.program = Main.loadProgram("app.isp");
+	Main.program = Main.loadProgram(Main.app);
 	
 	//Renderer and canvas
 	Main.canvas = document.createElement("canvas");

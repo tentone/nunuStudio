@@ -14,8 +14,6 @@ include("lib/leap/leap-0.6.4.min.js");
 include("lib/cannon/cannon.min.js");
 include("lib/cannon/cannondebugrenderer.js");
 
-include("lib/webvr/webvr-polyfill.js");
-
 include("lib/stats.min.js");
 include("lib/opentype.min.js");
 include("lib/jszip.min.js");

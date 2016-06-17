@@ -108,7 +108,7 @@ function LeapPanel(parent)
 	this.debug_model = new Checkbox(this.element);
 	this.debug_model.setText("Debug model");
 	this.debug_model.size.set(200, 15);
-	this.debug_model.position.set(2, 135);
+	this.debug_model.position.set(5, 135);
 	this.debug_model.updateInterface();
 	this.debug_model.setOnChange(function()
 	{
@@ -122,7 +122,7 @@ function LeapPanel(parent)
 	this.gestures_enabled = new Checkbox(this.element);
 	this.gestures_enabled.setText("Gestures Enabled");
 	this.gestures_enabled.size.set(200, 15);
-	this.gestures_enabled.position.set(2, 160);
+	this.gestures_enabled.position.set(5, 160);
 	this.gestures_enabled.updateInterface();
 	this.gestures_enabled.setOnChange(function()
 	{
@@ -136,7 +136,7 @@ function LeapPanel(parent)
 	this.poses_enabled = new Checkbox(this.element);
 	this.poses_enabled.setText("Poses Enabled");
 	this.poses_enabled.size.set(200, 15);
-	this.poses_enabled.position.set(2, 185);
+	this.poses_enabled.position.set(5, 185);
 	this.poses_enabled.updateInterface();
 	this.poses_enabled.setOnChange(function()
 	{
