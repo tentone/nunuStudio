@@ -371,7 +371,7 @@ function deleteObject()
 function setObject(obj)
 {
 	this.obj = obj;
-	this.icon.setImage(obj.icon);
+	this.icon.setImage(ObjectIcons.get(obj.type));
 	this.label.setText(obj.name);
 	this.folded = obj.folded;
 	this.updateFoldedState();

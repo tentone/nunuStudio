@@ -64,6 +64,7 @@ include("editor/tools/ResizeTool.js");
 include("editor/tools/RotateTool.js");
 
 include("editor/utils/MaterialRenderer.js");
+include("editor/utils/ObjectIcons.js");
 
 include("editor/Interface.js");
 include("editor/Settings.js");
@@ -84,7 +85,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.2 Pre-Alpha";
-Editor.TIMESTAMP = "201606171728";
+Editor.TIMESTAMP = "201606172252";
 
 //Initialize Main
 Editor.initialize = function(canvas)

@@ -8,7 +8,6 @@ function Container()
 
 //Function Prototype
 Container.prototype = Object.create(THREE.Object3D.prototype);
-Container.prototype.icon = "editor/files/icons/effects/container.png";
 
 //Runtime functions
 Container.prototype.update = update;

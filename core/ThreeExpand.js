@@ -1,10 +1,6 @@
-//Bones changes
-THREE.Bone.prototype.icon = "editor/files/icons/animation/bone.png";
-
 //Object3D changes
 THREE.Object3D.prototype.folded = false;
 THREE.Object3D.prototype.hidden = false;
-THREE.Object3D.prototype.icon = "editor/files/icons/tab/scene.png";
 
 //Initialize Object
 THREE.Object3D.prototype.initialize = function()

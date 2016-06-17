@@ -7,7 +7,6 @@ function AmbientLight(hex)
 
 //Function Prototype
 AmbientLight.prototype = Object.create(THREE.AmbientLight.prototype);
-AmbientLight.prototype.icon = "editor/files/icons/lights/ambient.png";
 
 //Runtime functions
 AmbientLight.prototype.update = update;

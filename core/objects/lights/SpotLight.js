@@ -19,7 +19,6 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 
 //Function Prototype
 SpotLight.prototype = Object.create(THREE.SpotLight.prototype);
-SpotLight.prototype.icon = "editor/files/icons/lights/spot.png";
 
 //Runtime functions
 SpotLight.prototype.initialize = initialize;

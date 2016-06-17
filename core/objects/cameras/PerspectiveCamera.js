@@ -9,7 +9,6 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 //Function Prototype
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
-PerspectiveCamera.prototype.icon = "editor/files/icons/camera/prespective.png";
 
 //Runtime functions
 PerspectiveCamera.prototype.update = update;

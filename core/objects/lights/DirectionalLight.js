@@ -19,7 +19,6 @@ function DirectionalLight(hex, intensity)
 
 //Function Prototype
 DirectionalLight.prototype = Object.create(THREE.DirectionalLight.prototype);
-DirectionalLight.prototype.icon = "editor/files/icons/lights/directional.png";
 
 //Runtime functions
 DirectionalLight.prototype.update = update;

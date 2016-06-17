@@ -19,7 +19,6 @@ function OrthographicCamera(size, aspect, mode, near, far)
 
 //Function Prototype
 OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype);
-OrthographicCamera.prototype.icon = "editor/files/icons/camera/orthographic.png";
 
 OrthographicCamera.prototype.update = update;
 OrthographicCamera.prototype.initialize = initialize;

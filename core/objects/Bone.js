@@ -6,7 +6,7 @@ function Bone()
 }
 
 Bone.prototype = Object.create(THREE.Bone.prototype);
-Bone.prototype.icon = "editor/files/icons/animation/bone.png";
+
 Bone.prototype.update = update;
 Bone.prototype.initialize = initialize;
 

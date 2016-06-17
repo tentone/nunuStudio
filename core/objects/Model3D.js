@@ -10,7 +10,6 @@ function Model3D(geometry, material)
 
 //Function Prototype
 Model3D.prototype = Object.create(THREE.Mesh.prototype);
-Model3D.prototype.icon = "editor/files/icons/models/cube.png";
 
 //Runtime functions
 Model3D.prototype.update = update;

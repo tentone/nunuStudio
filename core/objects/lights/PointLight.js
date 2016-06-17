@@ -9,14 +9,10 @@ function PointLight(hex, intensity, distance, decay)
 	this.shadow.camera.near = 0.01;
 	this.shadow.camera.far = 50000;
 	this.shadow.bias = 0.01;
-
-	//this.shadow.mapSize.width = 1024;
-	//this.shadow.mapSize.height = 1024;
 }
 
 //Function Prototype
 PointLight.prototype = Object.create(THREE.PointLight.prototype);
-PointLight.prototype.icon = "editor/files/icons/lights/point.png";
 
 //Runtime functions
 PointLight.prototype.update = update;

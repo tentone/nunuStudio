@@ -100,7 +100,6 @@ Sky.pid2 = Math.PI / 2;
 
 //Function Prototype
 Sky.prototype = Object.create(THREE.Mesh.prototype);
-Sky.prototype.icon = "editor/files/icons/lights/sky.png";
 
 //Runtime functions
 Sky.prototype.raycast = raycast;
