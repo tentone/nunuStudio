@@ -13645,7 +13645,7 @@ ab.PromiseResolved=PromiseResolved;
 });
 })
 
- messagesUê
+ messagesë
 (function(a,b){
 %CheckIsBootstrapping();
 var c;
@@ -14182,43 +14182,45 @@ return"<error>";
 }
 function GetStackFrames(aT){
 var aU=new q();
-var aV=aT[0];
-for(var aj=1;aj<aT.length;aj+=4){
-var aA=aT[aj];
-var aB=aT[aj+1];
-var aW=aT[aj+2];
-var aX=aT[aj+3];
-var aC=%_IsSmi(aW)?aW:%FunctionGetPositionForOffset(aW,aX);
-aV--;
-aU.push(new CallSite(aA,aB,aC,(aV<0)));
+%MoveArrayContents(aT,aU);
+var aV=new q();
+var aW=aU[0];
+for(var aj=1;aj<aU.length;aj+=4){
+var aA=aU[aj];
+var aB=aU[aj+1];
+var aX=aU[aj+2];
+var aY=aU[aj+3];
+var aC=%_IsSmi(aX)?aX:%FunctionGetPositionForOffset(aX,aY);
+aW--;
+aV.push(new CallSite(aA,aB,aC,(aW<0)));
 }
-return aU;
+return aV;
 }
-var aY=false;
+var aZ=false;
 function FormatStackTrace(Q,aT){
-var aU=GetStackFrames(aT);
+var aV=GetStackFrames(aT);
 if((%IsFunction(G.prepareStackTrace))&&
-!aY){
-var aZ=[];
-%MoveArrayContents(aU,aZ);
-aY=true;
-var ba=(void 0);
+!aZ){
+var ba=[];
+%MoveArrayContents(aV,ba);
+aZ=true;
+var bb=(void 0);
 try{
-ba=G.prepareStackTrace(Q,aZ);
+bb=G.prepareStackTrace(Q,ba);
 }catch(e){
 throw e;
 }finally{
-aY=false;
+aZ=false;
 }
-return ba;
+return bb;
 }
-var bb=new q();
-bb.push(FormatErrorString(Q));
-for(var aj=0;aj<aU.length;aj++){
-var bc=aU[aj];
+var bc=new q();
+bc.push(FormatErrorString(Q));
+for(var aj=0;aj<aV.length;aj++){
+var bd=aV[aj];
 var ak;
 try{
-ak=bc.toString();
+ak=bd.toString();
 }catch(e){
 try{
 ak="<error: "+e+">";
@@ -14226,68 +14228,68 @@ ak="<error: "+e+">";
 ak="<error>";
 }
 }
-bb.push("    at "+ak);
+bc.push("    at "+ak);
 }
-return %_Call(c,bb,"\n");
+return %_Call(c,bc,"\n");
 }
-function GetTypeName(aE,bd){
+function GetTypeName(aE,be){
 if((aE==null))return null;
 if((%_IsJSProxy(aE)))return"Proxy";
 var U=%GetDataProperty((%_ToObject(aE)),"constructor");
 if(!(%IsFunction(U))){
-return bd?null:%_Call(NoSideEffectsToString,aE);
+return be?null:%_Call(NoSideEffectsToString,aE);
 }
 return %FunctionGetName(U);
 }
-var be=function(){
-var bf=(void 0);
-var bg=this;
-while(bg){
-var bf=
-(bg[l]);
-if((bf===(void 0))){
-var ba=(bg[w]);
-if((ba===(void 0))){
-bg=%_GetPrototype(bg);
+var bf=function(){
+var bg=(void 0);
+var bh=this;
+while(bh){
+var bg=
+(bh[l]);
+if((bg===(void 0))){
+var bb=(bh[w]);
+if((bb===(void 0))){
+bh=%_GetPrototype(bh);
 continue;
 }
-bf=FormatStackTrace(bg,ba);
-(bg[w]=(void 0));
-(bg[l]=bf);
+bg=FormatStackTrace(bh,bb);
+(bh[w]=(void 0));
+(bh[l]=bg);
 }
-return bf;
+return bg;
 }
 return(void 0);
 };
-var bh=function(bi){
+var bi=function(bj){
 if(IsErrorObject(this)){
 (this[w]=(void 0));
-(this[l]=bi);
+(this[l]=bj);
 }
 };
-var bj=function(){};
-function SetUpError(bk){
-%FunctionSetInstanceClassName(bk,'Error');
-var R=bk.name;
-var bl=new m();
+var bk=function(){};
+function SetUpError(bl){
+%FunctionSetInstanceClassName(bl,'Error');
+var R=bl.name;
+var bm=new m();
 if(R!=='Error'){
-%InternalSetPrototype(bk,G);
-%InternalSetPrototype(bl,G.prototype);
+%InternalSetPrototype(bl,G);
+%InternalSetPrototype(bm,G.prototype);
 }
-%FunctionSetPrototype(bk,bl);
-%AddNamedProperty(bk.prototype,'name',R,2);
-%AddNamedProperty(bk.prototype,'message','',2);
+%FunctionSetPrototype(bl,bm);
+%AddNamedProperty(bl.prototype,'name',R,2);
+%AddNamedProperty(bl.prototype,'message','',2);
 %AddNamedProperty(
-bk.prototype,'constructor',bk,2);
-%SetCode(bk,function(bm){
-if((new.target===(void 0)))return new bk(bm);
-try{bj(this,bk);}catch(e){}
-if(!(bm===(void 0))){
-%AddNamedProperty(this,'message',(%_ToString(bm)),2);
+bl.prototype,'constructor',bl,2);
+%SetCode(bl,function(bn){
+if((new.target===(void 0)))return new bl(bn);
+try{bk(this,bl);}catch(e){}
+if(!(bn===(void 0))){
+%AddNamedProperty(this,'message',(%_ToString(bn)),2);
 }
 });
-%SetNativeFlag(bk);
-return bk;
+%SetNativeFlag(bl);
+return bl;
 };
 G=SetUpError(a.Error);
 M=SetUpError(a.EvalError);
@@ -14325,16 +14327,16 @@ return MakeGenericError(H,W,X,Y,Z);
 function MakeURIError(){
 return MakeGenericError(J,277);
 }
-var bn=MakeRangeError(186);
-b.InstallGetterSetter(bn,'stack',
-be,bh)
-bj=function captureStackTrace(Q,bo){
-s(Q,'stack',{get:be,
-set:bh,
+var bo=MakeRangeError(186);
+b.InstallGetterSetter(bo,'stack',
+bf,bi)
+bk=function captureStackTrace(Q,bp){
+s(Q,'stack',{get:bf,
+set:bi,
 configurable:true});
-%CollectStackTrace(Q,bo?bo:bj);
+%CollectStackTrace(Q,bp?bp:bk);
 };
-G.captureStackTrace=bj;
+G.captureStackTrace=bk;
 %InstallToContext([
 "get_stack_trace_line_fun",GetStackTraceLine,
 "make_error_function",MakeGenericError,
@@ -14344,15 +14346,15 @@ G.captureStackTrace=bj;
 "message_get_line_number",GetLineNumber,
 "message_get_source_line",GetSourceLine,
 "no_side_effects_to_string_fun",NoSideEffectsToString,
-"stack_overflow_boilerplate",bn,
+"stack_overflow_boilerplate",bo,
 ]);
-b.Export(function(bp){
-bp.ErrorToString=ErrorToString;
-bp.MakeError=MakeError;
-bp.MakeRangeError=MakeRangeError;
-bp.MakeSyntaxError=MakeSyntaxError;
-bp.MakeTypeError=MakeTypeError;
-bp.MakeURIError=MakeURIError;
+b.Export(function(bq){
+bq.ErrorToString=ErrorToString;
+bq.MakeError=MakeError;
+bq.MakeRangeError=MakeRangeError;
+bq.MakeSyntaxError=MakeSyntaxError;
+bq.MakeTypeError=MakeTypeError;
+bq.MakeURIError=MakeURIError;
 });
 });
 
