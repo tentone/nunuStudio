@@ -262,27 +262,26 @@ function MaterialEditor(parent)
 	});
 	this.form.add(this.blending);
 	this.form.nextRow();
-	
-	//Alpha test
-	/*this.form.addText("Alpha test");
-	this.alphaTest = new Slider(this.form.element);
-	this.alphaTest.size.set(160, 18);
-	this.alphaTest.setRange(0, 1);
-	this.alphaTest.setStep(0.01);
-	this.alphaTest.setOnChange(function()
+
+	//--------------------------------------Phong Material parameters--------------------------------------
+	//Shading mode
+	this.form.addText("Shading");
+	this.shading = new DropdownList(this.form.element);
+	this.shading.position.set(100, 85);
+	this.shading.size.set(120, 18);
+	this.shading.addValue("Smooth", THREE.SmoothShading);
+	this.shading.addValue("Flat", THREE.FlatShading);
+	this.shading.setOnChange(function()
 	{
 		if(self.material !== null)
 		{
-			self.material.alphaTest = self.alphaTest.getValue();
-			self.alphaTest_text.setText(self.material.alphaTest);
+			self.material.shading = self.shading.getValue();
+			self.material.needsUpdate = true;
 		}
 	});
-	this.form.add(this.alphaTest);
-	this.alphaTest_text = this.form.addText("-------");
-	this.form.nextRow();*/
-	
+	this.form.add(this.shading);
+	this.form.nextRow();
 
-	//--------------------------------------Phong Material parameters--------------------------------------
 	//Color
 	this.form.addText("Color");
 	this.color = new ColorChooser(this.form.element);
@@ -299,7 +298,6 @@ function MaterialEditor(parent)
 
 	//Specular color
 	this.form.addText("Specular");
-	this.form.nextRow();
 	this.specular = new ColorChooser(this.form.element);
 	this.specular.size.set(100, 18);
 	this.specular.updateInterface();

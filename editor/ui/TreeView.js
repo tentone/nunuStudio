@@ -67,10 +67,7 @@ TreeView.prototype.updateSelectedObject = updateSelectedObject;
 
 //Set data from object
 function fromObject(obj)
-{	
-	//TODO <REMOVE THIS>
-	var startTime = new Date();
-
+{
 	//Remove all children
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -85,10 +82,6 @@ function fromObject(obj)
 	TreeView.addSceneElement(this, obj);
 	this.updateChildPosition();
 	this.updateInterface();
-
-	//TODO <REMOVE THIS>
-	var endTime = new Date();
-	console.log("Time -> " + (endTime - startTime));
 }
 
 //Update which object is currently selected

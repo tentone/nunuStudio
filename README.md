@@ -5,7 +5,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - One file only project export with all assets included
 - NWJS and Cordova wrapper for desktop and mobile deployment
 - GLSL based particle system (github.com/squarefeet/ShaderParticleEngine)
-- THREE.JS based rendering (github.com/mrdoob/three.js)
+- THREE.JS based (github.com/mrdoob/three.js)
 
 ### Tech
 nunuStudio uses a number of open source projects to work properly
