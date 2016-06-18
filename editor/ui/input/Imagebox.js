@@ -173,8 +173,8 @@ function updateInterface()
 	
 	this.alpha.width = this.size.x * this.image_scale.x;
 	this.alpha.height = this.size.y * this.image_scale.y;
-	this.alpha.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
-	this.alpha.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
+	this.alpha.style.left = this.img.style.let;
+	this.alpha.style.top = this.img.style.top;
 
 	//Update base element
 	this.element.style.top = this.position.y + "px";

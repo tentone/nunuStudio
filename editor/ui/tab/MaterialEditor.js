@@ -510,7 +510,9 @@ function MaterialEditor(parent)
 	this.envMap.updateInterface();
 	this.envMap.setOnChange(function(file)
 	{
-		self.material.envMap = new Texture(file);
+		var files = [file, file, file, file, file, file];
+		self.material.envMap = new THREE.CubeTextureLoader().load(files);
+		self.material.envMap.format = THREE.RGBFormat;
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.envMap);
@@ -533,6 +535,40 @@ function MaterialEditor(parent)
 		}
 	});
 	this.form.add(this.combine);
+	this.form.nextRow();
+
+	//Reflectivity
+	this.form.addText("Reflectivity");
+	this.reflectivity = new Numberbox(this.form.element);
+	this.reflectivity.size.set(60, 18);
+	this.reflectivity.setStep(0.05);
+	this.reflectivity.updateInterface();
+	this.reflectivity.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.reflectivity = self.reflectivity.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.reflectivity);
+	this.form.nextRow();
+
+	//Reflectivity
+	this.form.addText("Refraction Ratio");
+	this.refractionRatio = new Numberbox(this.form.element);
+	this.refractionRatio.size.set(60, 18);
+	this.refractionRatio.setStep(0.05);
+	this.refractionRatio.updateInterface();
+	this.refractionRatio.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.refractionRatio = self.refractionRatio.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.refractionRatio);
 
 	//Update form
 	this.form.updateInterface();
