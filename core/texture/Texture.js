@@ -1,6 +1,6 @@
 function Texture(url)
 {
-	//Create video element
+	//Create image element
 	this.img = document.createElement("img");
 	this.img.src = url;
 

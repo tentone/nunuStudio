@@ -85,7 +85,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.3 Pre-Alpha";
-Editor.TIMESTAMP = "201606181450";
+Editor.TIMESTAMP = "201606182147";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -139,7 +139,7 @@ Editor.initialize = function(canvas)
 	Editor.material_renderer = new MaterialRenderer();
 
 	//Default material to be used when creating objects
-	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:3});
+	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:10});
 	Editor.default_material.name = "default";
 	Editor.default_sprite_material = new THREE.SpriteMaterial({map: new Texture("data/sample.png"), color: 0xffffff});
 	Editor.default_sprite_material.name = "sprite";
