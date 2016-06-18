@@ -343,9 +343,11 @@ TreeElement.prototype.updateInterface = updateInterface;
 TreeElement.prototype.updateFoldedState = updateFoldedState;
 TreeElement.prototype.destroy = destroy;
 TreeElement.prototype.add = add;
+TreeElement.prototype.addFromObject = addFromObject;
 TreeElement.prototype.setLabel = setLabel;
 TreeElement.prototype.setIcon = setIcon;
 TreeElement.prototype.setObject = setObject;
+TreeElement.prototype.setVisibility = setVisibility;
 
 //Tree object manipulation
 TreeElement.prototype.deleteObject = deleteObject;
@@ -354,7 +356,7 @@ TreeElement.prototype.deleteObject = deleteObject;
 function deleteObject()
 {
 	//Delete object
-	if((this.obj !== null) && (this.obj.parent !== null))
+	if(this.obj !== null && this.obj.parent !== null)
 	{
 		this.obj.parent.remove(this.obj);
 		this.updateSceneData();
@@ -374,7 +376,10 @@ function setObject(obj)
 	this.icon.setImage(ObjectIcons.get(obj.type));
 	this.label.setText(obj.name);
 	this.folded = obj.folded;
-	this.updateFoldedState();
+	if(obj.folded)
+	{
+		this.arrow.setImage("editor/files/icons/misc/arrow_right.png");
+	}
 }
 
 //Set icon
@@ -389,7 +394,27 @@ function setLabel(label)
 	this.label.setText(label);
 }
 
-//Add element
+//Add tree element from object
+function addFromObject(obj)
+{
+	var element = new TreeElement(this.container);
+
+	element.obj = obj;
+	element.icon.setImage(ObjectIcons.get(obj.type));
+	element.label.setText(obj.name);
+	element.folded = obj.folded;
+	element.up = this;
+
+	if(element.folded)
+	{
+		element.arrow.setImage("editor/files/icons/misc/arrow_right.png");
+	}
+
+	this.children.push(element);
+	return element;
+}
+
+//Add tree element
 function add(label, icon)
 {
 	var element = new TreeElement(this.container);
@@ -403,7 +428,6 @@ function add(label, icon)
 	}
 	
 	element.up = this;
-	element.updateInterface();
 
 	this.children.push(element);
 	return element;
@@ -435,22 +459,43 @@ function updateFoldedState()
 	if(this.folded)
 	{
 		this.arrow.setImage("editor/files/icons/misc/arrow_right.png");
+		this.container.updateChildPosition();
 		this.container.updateInterface();
 	}
 	else
 	{
 		this.arrow.setImage("editor/files/icons/misc/arrow_down.png");
+		this.container.updateChildPosition();
 		this.container.updateInterface();
 	}
 }
 
-//Update parent tree element form scene data
+//Update parent tree element from scene data
 function updateSceneData()
 {
 	if(this.container.scene != null)
 	{
 		this.container.fromObject(this.container.scene);
 	}
+}
+
+//Set element visibility
+function setVisibility(value)
+{
+	this.visible = value;
+
+	if(this.visible)
+	{
+		this.element.style.visibility = "visible";
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
+	}
+
+	this.arrow.setVisibility(value);
+	this.icon.setVisibility(value);
+	this.label.setVisibility(value);
 }
 
 //Update TreeElement

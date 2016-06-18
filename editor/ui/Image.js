@@ -60,9 +60,11 @@ Image.id = 0;
 //Functions Prototype
 Image.prototype.setImage = setImage;
 Image.prototype.setCallback = setCallback;
+Image.prototype.destroy = destroy;
+Image.prototype.setVisibility = setVisibility;
 Image.prototype.update = update;
 Image.prototype.updateInterface = updateInterface;
-Image.prototype.destroy = destroy;
+
 
 //Set image onclick callback function
 function setCallback(callback)
@@ -87,6 +89,23 @@ function update(){}
 function setImage(image)
 {
 	this.img.src = image;
+}
+
+//Set element visibility
+function setVisibility(value)
+{
+	this.visible = value;
+
+	if(this.visible)
+	{
+		this.element.style.visibility = "visible";
+		this.img.style.visibility = "visible";
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
+		this.img.style.visibility = "hidden";
+	}
 }
 
 //Update Interface

@@ -43,6 +43,7 @@ function TreeView(parent, container)
 	this.visible = true;
 	
 	//Childs
+	this.up = null;
 	this.fit_parent = true;
 	this.scene = null;
 	this.children = [];
@@ -59,10 +60,12 @@ TreeView.prototype.update = update;
 TreeView.prototype.updateInterface = updateInterface;
 TreeView.prototype.destroy = destroy;
 TreeView.prototype.add = add;
+TreeView.prototype.addFromObject = addFromObject;
 TreeView.prototype.fromObject = fromObject;
+TreeView.prototype.updateChildPosition = updateChildPosition;
 TreeView.prototype.updateSelectedObject = updateSelectedObject;
 
-//Set data from scene
+//Set data from object
 function fromObject(obj)
 {	
 	//TODO <REMOVE THIS>
@@ -80,6 +83,7 @@ function fromObject(obj)
 	
 	//Add element and update interface
 	TreeView.addSceneElement(this, obj);
+	this.updateChildPosition();
 	this.updateInterface();
 
 	//TODO <REMOVE THIS>
@@ -93,20 +97,35 @@ function updateSelectedObject(obj)
 	TreeView.updateSelectedObject(this, obj);
 }
 
+//Add tree element from object
+function addFromObject(obj)
+{
+	var element = new TreeElement(this);
+
+	element.obj = obj;
+	element.icon.setImage(ObjectIcons.get(obj.type));
+	element.label.setText(obj.name);
+	element.folded = obj.folded;
+	element.up = this;
+
+	this.children.push(element);
+
+	return element;
+}
+
 //Add element
 function add(text, icon)
 {
 	var element = new TreeElement(this);
 	
-	if(text != undefined)
+	if(text !== undefined)
 	{
 		element.setLabel(text);
 	}
-	if(icon != undefined)
+	if(icon !== undefined)
 	{
 		element.setIcon(icon);
 	}
-	element.updateInterface();
 
 	this.children.push(element);
 
@@ -131,6 +150,17 @@ function destroy()
 	this.children = [];
 }
 
+//Update tree view children positions
+function updateChildPosition()
+{
+	var size = TreeView.updateChildPosition(this, 20, 0, false);
+
+	if(!this.fit_parent)
+	{
+		this.size.y = size;
+	}
+}
+
 //Update TreeView
 function update(){}
 
@@ -152,11 +182,6 @@ function updateInterface()
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight;
-		TreeView.updateChildPosition(this, 20, 0);
-	}
-	else
-	{
-		this.size.y = TreeView.updateChildPosition(this, 20, 0);
 	}
 
 	//Set element style
@@ -192,7 +217,7 @@ TreeView.updateSelectedObject = function(element, obj)
 	}
 }
 
-//Get tree view element from attached object
+//Get tree view element where the object is attached
 TreeView.getElementFromObject = function(element, obj)
 {
 	for(var i = 0; i < element.children.length; i++)
@@ -212,14 +237,16 @@ TreeView.getElementFromObject = function(element, obj)
 	return null;
 }
 
-//Add scene element to tree (recursive)
+//Add object element to tree (recursive)
 TreeView.addSceneElement = function(tree, scene)
 {
+	//Check if object is hidden
 	if(!scene.hidden)
 	{
-		var element = tree.add(scene.name, scene.icon);
-		element.setObject(scene);
+		//Create new tree element and add
+		var element = tree.addFromObject(scene);
 
+		//Add object children
 		for(var i = 0; i < scene.children.length; i++)
 		{
 			TreeView.addSceneElement(element, scene.children[i]);
@@ -230,11 +257,11 @@ TreeView.addSceneElement = function(tree, scene)
 //Check if parent if folded (recursive)
 TreeView.checkParentFolded = function(element)
 {
-	if(element === null || element === undefined || element.folded === undefined || element.folded === null)
+	if(element.up === null)
 	{
 		return false;
 	}
-	
+
 	if(element.folded)
 	{
 		return true;
@@ -244,27 +271,28 @@ TreeView.checkParentFolded = function(element)
 }
 
 //Update childs position (recursive)
-TreeView.updateChildPosition = function(parent, position, level)
+TreeView.updateChildPosition = function(parent, position, level, folded)
 {
 	for(var i = 0; i < parent.children.length; i++)
 	{
-		if(TreeView.checkParentFolded(parent))
+		if(folded || TreeView.checkParentFolded(parent))
 		{
-			parent.children[i].visible = false;
+			parent.children[i].setVisibility(false);
+			folded = true;
 		}
 		else
 		{
 			parent.children[i].visible = true;
 			parent.children[i].position.set(0, position);
 			parent.children[i].level = level;
+			parent.children[i].updateInterface();
+			folded = false;
 			position += 20;
 		}
 
-		parent.children[i].updateInterface();
-
 		if(parent.children[i].children.length > 0)
 		{
-			position = TreeView.updateChildPosition(parent.children[i], position, level+1);
+			position = TreeView.updateChildPosition(parent.children[i], position, level + 1, folded);
 		}
 	}
 

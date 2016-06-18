@@ -137,6 +137,7 @@ Main.initialize = function(canvas)
 Main.update = function()
 {
 	Main.stats.begin();
+	
 	Main.program.scene.update();
 }
 
@@ -170,7 +171,7 @@ Main.draw = function()
 		Main.renderer.render(Main.program.scene, Main.program.scene.camera);
 	}
 
-	App.stats.end();
+	Main.stats.end();
 }
 
 //Resize to fit window
