@@ -22,6 +22,7 @@ function File(parent)
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.position = "absolute";
+	this.img.style.top = "5px";
 	this.element.appendChild(this.img);
 
 	//Text
@@ -253,12 +254,12 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Update element
+	//Update image
 	this.img.width = this.size.x * this.scale.x;
 	this.img.height = this.size.y * this.scale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
-	this.img.style.top = "5px";
 
+	//Update file text
 	this.text.visible = this.visible;
 	this.text.size.x = this.size.x;
 	this.text.position.y = (this.size.y - 20);

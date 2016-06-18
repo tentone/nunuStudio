@@ -68,11 +68,12 @@ Text.prototype.setAlignment = setAlignment;
 Text.prototype.setText = setText;
 Text.prototype.setTextSize = setTextSize;
 Text.prototype.textWidth = textWidth;
+Text.prototype.setVisibility = setVisibility;
 
 //Return internal text width
 function textWidth()
 {
-	return (this.span.clientWidth + 1);
+	return this.span.clientWidth;
 }
 
 //Set Text
@@ -120,6 +121,23 @@ function destroy()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
+}
+
+//Set text visibility
+function setVisibility(value)
+{
+	this.visible = value;
+
+	if(this.visible)
+	{
+		this.element.style.visibility = "visible";
+		this.span.style.visibility = "visible";
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
+		this.span.style.visibility = "hidden";
+	}
 }
 
 //Update
