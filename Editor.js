@@ -25,7 +25,9 @@ include("editor/ui/ContextMenu.js");
 include("editor/ui/Form.js");
 include("editor/ui/DragBuffer.js");
 include("editor/ui/FileExplorer.js");
-include("editor/ui/File.js");
+
+include("editor/ui/file/File.js");
+include("editor/ui/file/MaterialFile.js");
 
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/SceneEditor.js");
@@ -84,8 +86,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.3 Pre-Alpha";
-Editor.TIMESTAMP = "201606182147";
+Editor.VERSION = "V0.8.4 Pre-Alpha";
+Editor.TIMESTAMP = "201606190211";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -855,8 +857,9 @@ Editor.updateAssetExplorer = function()
 	//Add materials to asset explorer
 	for(var i = 0; i < materials.length; i++)
 	{
-		var file = Interface.asset_explorer.add();
-		file.setObject(materials[i]);
+		var file = new MaterialFile(Interface.asset_explorer.element);
+		file.setMaterial(materials[i]);
+		Interface.asset_explorer.add(file);
 	}
 
 	Interface.asset_explorer.updateInterface();
@@ -1114,6 +1117,7 @@ Editor.setState = function(state)
 
 		//Use editor camera as default camera for program
 		Editor.program_running.default_camera = Editor.camera;
+		Editor.program_running.renderer = Editor.renderer;
 
 		//Initialize scene
 		Editor.program_running.initialize();

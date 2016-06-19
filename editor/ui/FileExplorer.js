@@ -67,14 +67,14 @@ function clear()
 	this.updateInterface();
 }
 
-//Create new file add id and return it
-function add()
+//Add file to explorer
+function add(file)
 {
-	var file = new File(this.element);
+	file.setParent(this.element);
 	file.size.copy(this.files_size);
 	file.updateInterface();
+
 	this.files.push(file);
-	return file;
 }
 
 //Remove element

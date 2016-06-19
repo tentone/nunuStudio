@@ -1,5 +1,6 @@
 function Main(){}
 
+//App to load
 Main.app = "app.isp";
 
 //Initialize Main
@@ -41,9 +42,10 @@ Main.initialize = function(canvas)
 	Main.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	Main.renderer.setSize(Main.canvas.width, Main.canvas.height);
 
-	//Initialize scene
+	//Initialize program
 	Main.program.default_camera = new PerspectiveCamera(60, Main.canvas.width/Main.canvas.height, 0.1, 1000000);
 	Main.program.default_camera.position.set(0, 5, -5);
+	Main.program.renderer = Main.renderer;
 	Main.program.initialize();
 	Main.program.resize(Main.canvas.width, Main.canvas.height);
 
