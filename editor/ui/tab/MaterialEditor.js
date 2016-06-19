@@ -42,10 +42,11 @@ function MaterialEditor(parent)
 	this.preview.orientation = DualDivisionResizable.VERTICAL;
 	this.preview.tab_position = 0.8;
 	this.preview.tab_position_min = 0.3;
-	this.preview.tab_position_max = 0.9;
+	this.preview.tab_position_max = 0.8;
 	this.preview.updateInterface();
 
 	//Set main div B as panel
+	this.preview.div_b.className = "panel";
 	this.main.div_b.className = "panel";
 
 	//Self pointer
