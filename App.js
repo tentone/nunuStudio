@@ -1,3 +1,4 @@
+//External libs
 include("lib/three/three.js");
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
@@ -19,6 +20,7 @@ include("lib/opentype.min.js");
 include("lib/jszip.min.js");
 include("lib/SPE.min.js");
 
+//Internal modules
 include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
@@ -241,7 +243,6 @@ App.writeFile = function(fname, data)
 {
 	if(App.fs !== undefined)
 	{
-		//App.fs.writeFile(fname, data, "utf8");
 		var stream = App.fs.createWriteStream(fname, "utf8");
 		stream.write(data);
 		stream.end();

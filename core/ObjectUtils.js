@@ -15,8 +15,8 @@ ObjectUtils.getMaterials = function(obj, materials)
 	{
 		var child = obj.children[i];
 
-		//Check if material is mesh or sprite
-		if(child instanceof THREE.Mesh || child instanceof THREE.Sprite)
+		//Check if child has material
+		if(child.material !== undefined)
 		{
 			var material = child.material;
 			if(materials.indexOf(material) === -1)

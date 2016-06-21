@@ -1,3 +1,4 @@
+//External libs
 include("lib/codemirror/codemirror.js");
 include("lib/codemirror/mode/javascript/javascript.js");
 include("lib/codemirror/codemirror.css");
@@ -5,6 +6,7 @@ include("lib/codemirror/theme/monokai.css");
 
 include("lib/jscolor.min.js");
 
+//Internal modules
 include("editor/ui/Button.js");
 include("editor/ui/DropdownMenu.js");
 include("editor/ui/Text.js");
@@ -86,8 +88,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.4 Pre-Alpha";
-Editor.TIMESTAMP = "201606190211";
+Editor.VERSION = "V0.8.5 Pre-Alpha";
+Editor.TIMESTAMP = "201606210226";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -295,6 +297,11 @@ Editor.update = function()
 				var distance = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/5;
 				Editor.rotate_tool.scale.set(distance, distance, distance);
 				Editor.selected_object.getWorldPosition(Editor.rotate_tool.position);
+				
+				if(Editor.selected_object.parent !== null)
+				{
+					Editor.selected_object.parent.getWorldQuaternion(Editor.rotate_tool.quaternion);
+				}
 			}
 			else
 			{
@@ -1059,13 +1066,14 @@ Editor.exportWebProject = function(fname)
 	zip.file("app.isp", json);
 	zip.file("index.html", App.readFile("runtime/index.html"));
 	zip.file("Main.js", App.readFile("runtime/Main.js"));
-
-	var zfile = zip.generate({type:"blob"});
-	console.log(zFile);
-
+	zip.file("App.js", App.readFile("App.js"));
+	
 	//TODO <ADD CODE HERE>
 
-	//App.writeFile(fname, zfile);
+	zip.generateAsync({type: "nodebuffer"}).then(function(data)
+	{
+		App.writeFile(fname, data);
+	});
 }
 
 //New Program
