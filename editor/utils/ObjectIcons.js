@@ -25,7 +25,7 @@ ObjectIcons.icons["OrthographicCamera"] = "editor/files/icons/camera/orthographi
 
 //Objects
 ObjectIcons.icons["Mesh"] = "editor/files/icons/models/cube.png";
-ObjectIcons.icons["SkinnedMesh"] = "editor/files/icons/models/cube.png";
+ObjectIcons.icons["SkinnedMesh"] = "editor/files/icons/animation/skeleton.png";
 ObjectIcons.icons["ParticleEmiter"] = "editor/files/icons/effects/particles.png";
 ObjectIcons.icons["Script"] = "editor/files/icons/script/script.png";
 ObjectIcons.icons["Sprite"] = "editor/files/icons/assets/image.png";

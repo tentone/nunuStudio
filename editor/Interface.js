@@ -650,15 +650,15 @@ Interface.initialize = function()
 		//TODO <ADD CODE HERE>
 	}, Interface.file_dir + "icons/platform/windows.png");
 
-	publish.addOption("OSX", function()
-	{
+	//publish.addOption("OSX", function()
+	//{
 		//TODO <ADD CODE HERE>
-	}, Interface.file_dir + "icons/platform/osx.png");
+	//}, Interface.file_dir + "icons/platform/osx.png");
 
-	publish.addOption("Android", function()
-	{
+	//publish.addOption("Android", function()
+	//{
 		//TODO <ADD CODE HERE>
-	}, Interface.file_dir + "icons/platform/android.png");
+	//}, Interface.file_dir + "icons/platform/android.png");
 
 	Interface.file.addOption("Exit", function()
 	{
