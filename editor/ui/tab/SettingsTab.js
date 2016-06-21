@@ -40,7 +40,9 @@ function SettingsTab(parent)
 
 	//General
 	this.general = this.tab.addOption("General", "editor/files/icons/misc/tool.png", false);
+
 	this.general_form = new Form(this.general.division.element);
+	this.general_form.position.set(5, 5);
 	this.general_form.spacing.set(10, 8);
 	this.general_form.addText("General Settings");
 	this.general_form.nextRow();
