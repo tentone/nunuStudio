@@ -78,6 +78,10 @@ function MaterialEditor(parent)
 
 	//Material preview scene
 	this.scene = new Scene();
+	this.sky = new Sky();
+	this.scene.add(this.sky);
+	this.scene.add(new PointLight(0x666666));
+	this.scene.add(new AmbientLight(0x444444));
 	this.obj = new Model3D(new THREE.SphereBufferGeometry(1, 64, 64), null);
 	this.obj.position.set(0, 0, -2.5);
 	this.obj.visible = false;
@@ -86,10 +90,6 @@ function MaterialEditor(parent)
 	this.sprite.position.set(0, 0, -2.5);
 	this.sprite.visible = false;
 	this.scene.add(this.sprite);
-	this.scene.add(new PointLight(0x666666));
-	this.scene.add(new AmbientLight(0x444444));
-	this.sky = new Sky();
-	this.scene.add(this.sky);
 
 	//--------------------------------Material preview configuration--------------------------------
 	//Text
@@ -210,6 +210,21 @@ function MaterialEditor(parent)
 		}
 	});
 	this.form.add(this.skinning);
+	this.form.nextRow();
+
+	//Test depth
+	this.depthTest = new Checkbox(this.preview.div_b);
+	this.depthTest.setText("Test depth");
+	this.depthTest.size.set(200, 15);
+	this.depthTest.updateInterface();
+	this.depthTest.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.depthTest = self.depthTest.getValue();
+		}
+	});
+	this.form.add(this.depthTest);
 	this.form.nextRow();
 
 	//Transparent

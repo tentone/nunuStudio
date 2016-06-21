@@ -89,7 +89,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.5 Pre-Alpha";
-Editor.TIMESTAMP = "201606210226";
+Editor.TIMESTAMP = "201606210425";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -160,7 +160,7 @@ Editor.initialize = function(canvas)
 	Editor.raycaster = new THREE.Raycaster(); 
 
 	//Editor Camera
-	Editor.default_camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.01, 10000000);
+	Editor.default_camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.01, 1000000);
 	Editor.default_camera.position.set(0, 5, 5);
 	Editor.camera = Editor.default_camera;
 	Editor.camera_rotation = new THREE.Vector2(3.14, 0);

@@ -39,6 +39,10 @@ function Program(name, description, author, version, vr)
 		this.vr = vr;
 	}
 
+	//Assets
+	this.materials = [];
+	this.textures = [];
+
 	//Initial values
 	this.initial_scene = null;
 	this.default_camera = null;
@@ -193,10 +197,20 @@ function addDefaultScene(material)
 	this.add(scene);
 }
 
-//Dipose program data (to avoid memory leaks)
+//Dispose program data (to avoid memory leaks)
 function dispose()
 {
-	//TODO <ADD CODE HERE>
+	//Dispose materials
+	for(var i = 0; i < this.materials.length; i++)
+	{
+		this.materials[i].dispose();
+	}
+
+	//Dispose textures
+	for(var i = 0; i < this.textures.length; i++)
+	{
+		this.textures[i].dispose();
+	}
 }
 
 //Create JSON for object
