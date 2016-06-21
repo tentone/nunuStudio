@@ -86,6 +86,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 		object.material = this.material.uuid;
 	}
 
+	//Resource access callback
 	if(resourceAccess !== undefined)
 	{
 		resourceAccess(meta, object);

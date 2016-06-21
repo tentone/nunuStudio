@@ -1,6 +1,6 @@
 function TextTexture()
 {
-	this.text = "TEXT";
+	this.text = "Text";
 	
 	this.canvas = document.createElement("canvas");
 	this.canvas.width = 128;

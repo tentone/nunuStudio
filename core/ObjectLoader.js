@@ -474,6 +474,9 @@ function parseObject(data, geometries, materials, textures)
 		case "Program":
 			object = new Program(data.name, data.description, data.author, data.version, data.vr);
 			
+			object.materials = materials;
+			object.textures = textures;
+			
 			if(data.initial_scene !== undefined)
 			{
 				object.initial_scene = data.initial_scene;
