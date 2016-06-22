@@ -143,25 +143,6 @@ Interface.initialize = function()
 		}, ".fbx");
 	});
 
-	//Load texture image
-	Interface.asset_file.addOption("Texture", function()
-	{
-		App.chooseFile(function(fname)
-		{
-			try
-			{
-				var map = new Texture(fname);
-				var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
-				var sprite = new Sprite(material);
-				Editor.addToActualScene(sprite);
-			}
-			catch(e)
-			{
-				alert("Error loading file\n("+e+")");
-			}
-		}, "image/*");
-	}, Interface.file_dir + "icons/assets/image.png");
-
 	//Load Video texture
 	Interface.asset_file.addOption("Video", function()
 	{
@@ -222,6 +203,24 @@ Interface.initialize = function()
 	{
 		//TODO <ADD CODE HERE>
 	});
+
+	//Load texture image
+	var asset_create_texture = Interface.asset_create.addMenu("Texture", Interface.file_dir + "icons/assets/image.png");
+	asset_create_texture.addOption("Texture", function()
+	{
+		App.chooseFile(function(fname)
+		{
+			try
+			{
+				var texture = new Texture(fname);
+				//TODO <ADD CODE HERE>
+			}
+			catch(e)
+			{
+				alert("Error loading file\n("+e+")");
+			}
+		}, "image/*");
+	}, Interface.file_dir + "icons/assets/image.png");
 
 
 	//------------------------------------Explorer------------------------------------

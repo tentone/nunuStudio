@@ -53,24 +53,52 @@ function Program(name, description, author, version, vr)
 	this.data = function(){};
 }
 
-//Function Prototype
+//Program methods
 Program.prototype = Object.create(THREE.Object3D.prototype);
-
-//Overrided functions
 Program.prototype.initialize = initialize;
 Program.prototype.resize = resize;
 Program.prototype.remove = remove;
 Program.prototype.add = add;
 Program.prototype.clone = clone;
 Program.prototype.toJSON = toJSON;
-
-//Functions
 Program.prototype.dispose = dispose;
+
+//Asset management
+Program.prototype.addMaterial = addMaterial;
+Program.prototype.removeMaterial = removeMaterial;
+Program.prototype.addTexture = addTexture;
+Program.prototype.removeTexture = removeTexture;
+
+//Scene manipulation
 Program.prototype.setScene = setScene;
 Program.prototype.setInitialScene = setInitialScene;
 Program.prototype.addDefaultScene = addDefaultScene;
 
-//Set scene 
+//Add material to materials list
+function addMaterial(material)
+{
+ 	//TODO <ADD CODE HERE>
+}
+
+//Remove material from materials list (also receives default used to replace)
+function removeMaterial(material, default_material)
+{
+	//TODO <ADD CODE HERE>
+}
+
+//Add texture to texture list
+function addTexture(texture)
+{
+	//TODO <ADD CODE HERE>
+}
+
+//Remove texture from textures list
+function removeTexture(texture, default_texture)
+{
+	//TODO <ADD CODE HERE>
+}
+
+//Set actual scene (to be used in runtime)
 function setScene(scene)
 {
 	if(scene instanceof Scene)
@@ -131,7 +159,7 @@ function remove(scene)
 	}
 }
 
-//Add scene
+//Add children to program (only allows Scenes to be added)
 function add(scene)
 {
 	if(scene instanceof Scene)
@@ -147,13 +175,13 @@ function add(scene)
 	}
 }
 
-//Clone program keep uuid and everything else
+//Clone program (keep uuid and everything else)
 function clone()
 {
 	return new ObjectLoader().parse(this.toJSON());
 }
 
-//Set as initial scene (from uuid)
+//Set as initial scene (from uuid reference)
 function setInitialScene(scene)
 {
 	this.initial_scene = scene.uuid;

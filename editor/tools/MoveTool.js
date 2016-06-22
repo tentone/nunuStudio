@@ -71,6 +71,7 @@ function MoveTool()
 	this.add(this.z);
 	this.add(this.block);
 
+	//Disable auto matrix update
 	this.x.updateMatrix();
 	this.x.matrixAutoUpdate = false;
 	this.y.updateMatrix();
