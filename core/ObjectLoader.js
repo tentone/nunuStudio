@@ -4,6 +4,7 @@ function ObjectLoader(manager)
 	this.texturePath = "";
 }
 
+//Object loader methods
 ObjectLoader.prototype.load = load;
 ObjectLoader.prototype.parse = parse;
 ObjectLoader.prototype.setTexturePath = setTexturePath;
@@ -15,6 +16,7 @@ ObjectLoader.prototype.parseImages = parseImages;
 ObjectLoader.prototype.parseTextures = parseTextures;
 ObjectLoader.prototype.parseObject = parseObject;
 
+//Load object from url
 function load(url, onLoad, onProgress, onError)
 {
 	if(this.texturePath === "")
@@ -31,6 +33,7 @@ function load(url, onLoad, onProgress, onError)
 	}, onProgress, onError);
 }
 
+//Parse a object file
 function parse(json, onLoad)
 {
 	var geometries = this.parseGeometries(json.geometries);
@@ -42,7 +45,7 @@ function parse(json, onLoad)
 		}
 	});
 
-	var textures  = this.parseTextures(json.textures, images);
+	var textures = this.parseTextures(json.textures, images);
 	var materials = this.parseMaterials(json.materials, textures);
 
 	var object = this.parseObject(json.object, geometries, materials, textures);
@@ -63,19 +66,22 @@ function parse(json, onLoad)
 	return object;
 }
 
+//Set base texture path
 function setTexturePath(value)
 {
 	this.texturePath = value;
 }
 
+//Set cross origin
 function setCrossOrigin(value)
 {
 	this.crossOrigin = value;
 }
 
+//Parse geometries
 function parseGeometries(json)
 {
-	var geometries = {};
+	var geometries = [];
 
 	if(json !== undefined)
 	{
@@ -252,9 +258,10 @@ function parseGeometries(json)
 	return geometries;
 }
 
+//Parse all materials
 function parseMaterials(json, textures)
 {
-	var materials = {};
+	var materials = [];
 
 	if(json !== undefined)
 	{
@@ -271,6 +278,7 @@ function parseMaterials(json, textures)
 	return materials;
 }
 
+//Parse animations
 function parseAnimations(json)
 {
 	var animations = [];
@@ -284,10 +292,11 @@ function parseAnimations(json)
 	return animations;
 }
 
+//Parse images
 function parseImages(json, onLoad)
 {
 	var scope = this;
-	var images = {};
+	var images = [];
 
 	function loadImage(url)
 	{
@@ -315,6 +324,7 @@ function parseImages(json, onLoad)
 	return images;
 }
 
+//Parse textures
 function parseTextures(json, images)
 {
 	function parseConstant(value)
@@ -328,7 +338,7 @@ function parseTextures(json, images)
 		return THREE[value];
 	}
 
-	var textures = {};
+	var textures = [];
 
 	if(json !== undefined)
 	{
@@ -338,7 +348,7 @@ function parseTextures(json, images)
 
 			if(data.image === undefined)
 			{
-				console.warn('ObjectLoader: No "image" specified for', data.uuid);
+				console.warn("ObjectLoader: No image specified for", data.uuid);
 			}
 
 			if(images[data.image] === undefined)
@@ -391,6 +401,7 @@ function parseTextures(json, images)
 	return textures;
 }
 
+//Parse objects
 function parseObject(data, geometries, materials, textures)
 {
 	var matrix = new THREE.Matrix4();
@@ -473,9 +484,6 @@ function parseObject(data, geometries, materials, textures)
 
 		case "Program":
 			object = new Program(data.name, data.description, data.author, data.version, data.vr);
-			
-			object.materials = materials;
-			object.textures = textures;
 			
 			if(data.initial_scene !== undefined)
 			{
@@ -736,10 +744,16 @@ function parseObject(data, geometries, materials, textures)
 	}
 
 	//LOD objects
-	if(data.type === "LOD")
+	if(data.type === "Program")
+	{
+		object.materials = materials;
+		object.textures = textures;
+		object.geometries = geometries;
+	}
+	else if(data.type === "LOD")
 	{
 		var levels = data.levels;
-		for(var l = 0; l < levels.length; l ++)
+		for(var l = 0; l < levels.length; l++)
 		{
 			var level = levels[l];
 			var child = object.getObjectByProperty("uuid", level.object);

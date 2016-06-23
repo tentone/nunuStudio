@@ -42,6 +42,7 @@ function Program(name, description, author, version, vr)
 	//Assets
 	this.materials = [];
 	this.textures = [];
+	this.geometries = [];
 
 	//Initial values
 	this.initial_scene = null;
@@ -142,7 +143,7 @@ function resize(x, y)
 	}
 }
 
-//Remove Scene
+//Remove Scene from program
 function remove(scene)
 {
 	var index = this.children.indexOf(scene);
@@ -244,7 +245,35 @@ function dispose()
 //Create JSON for object
 function toJSON(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+	var self = this;
+
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	{
+		var textures = self.textures;
+		var materials = self.materials;
+
+		//Store textures
+		for(var i in textures)
+		{
+			var texture = textures[i];
+
+			if(meta.textures[texture.uuid] === undefined)
+			{
+				meta.textures[texture.uuid] = texture.toJSON(meta);
+			}
+		}
+
+		//Store materials
+		for(var i in materials)
+		{
+			var material = materials[i];
+
+			if(meta.materials[material.uuid] === undefined)
+			{
+				meta.materials[material.uuid] = material.toJSON(meta);
+			}
+		}
+	});
 
 	data.object.author = this.author;
 	data.object.description = this.description;
