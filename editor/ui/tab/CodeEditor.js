@@ -109,7 +109,7 @@ CodeEditor.prototype.getText = getText;
 CodeEditor.prototype.setText = setText;
 CodeEditor.prototype.attachScript = attachScript;
 CodeEditor.prototype.updateScript = updateScript;
-CodeEditor.prototype.updateContainerMetaData = updateContainerMetaData;
+CodeEditor.prototype.updateMetadata = updateMetadata;
 CodeEditor.prototype.setFontSize = setFontSize;
 
 //Set code editor font size
@@ -121,7 +121,7 @@ function setFontSize(size)
 }
 
 //Update container object data
-function updateContainerMetaData(container)
+function updateMetadata(container)
 {
 	if(this.script !== null)
 	{

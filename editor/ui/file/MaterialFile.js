@@ -62,9 +62,9 @@ function MaterialFile(parent)
 			if(!found)
 			{
 				var tab = Interface.tab.addOption(self.material.name, Interface.file_dir + "icons/misc/material.png", true);
-				var material = new MaterialEditor();
-				material.attachMaterial(self.material);
-				tab.attachComponent(material);
+				var material_editor = new MaterialEditor();
+				material_editor.attachMaterial(self.material, self);
+				tab.attachComponent(material_editor);
 				
 				//Select added tab
 				tab.select();
@@ -144,6 +144,7 @@ function MaterialFile(parent)
 //Functions Prototype
 MaterialFile.prototype = Object.create(File.prototype);
 MaterialFile.prototype.setMaterial = setMaterial;
+MaterialFile.prototype.updatePreview = updatePreview;
 
 //Set object to file
 function setMaterial(material)
@@ -153,5 +154,14 @@ function setMaterial(material)
 		Editor.material_renderer.renderMaterial(material, this.img);
 		this.material = material;
 		this.setText(material.name);
+	}
+}
+
+//Update material preview
+function updatePreview()
+{
+	if(this.material !== null)
+	{
+		Editor.material_renderer.renderMaterial(this.material, this.img);
 	}
 }

@@ -143,6 +143,23 @@ Interface.initialize = function()
 		}, ".fbx");
 	});
 
+	//Load Image texture
+	Interface.asset_file.addOption("Texture", function()
+	{
+		App.chooseFile(function(fname)
+		{
+			try
+			{
+				var texture = new Texture(fname);
+				//TODO <ADD CODE HERE>
+			}
+			catch(e)
+			{
+				alert("Error loading file\n("+e+")");
+			}
+		}, "image/*");
+	}, Interface.file_dir + "icons/assets/image.png");
+
 	//Load Video texture
 	Interface.asset_file.addOption("Video", function()
 	{
@@ -171,57 +188,32 @@ Interface.initialize = function()
 		}, "audio/*");
 	}, Interface.file_dir + "icons/assets/audio.png");
 
-	//Create new
-	Interface.asset_create = new DropdownMenu(Interface.asset_explorer_bar.element);
-	Interface.asset_create.setText("Create");
-	Interface.asset_create.size.set(100, Interface.asset_explorer_bar.size.y);
-	Interface.asset_create.position.set(100,0);
+	//Create material
+	Interface.asset_material = new DropdownMenu(Interface.asset_explorer_bar.element);
+	Interface.asset_material.setText("Add Material");
+	Interface.asset_material.size.set(100, Interface.asset_explorer_bar.size.y);
+	Interface.asset_material.position.set(100,0);
 
-	Interface.asset_create.addOption("Script", function()
-	{
-		//TODO <ADD CODE HERE>
-	}, Interface.file_dir + "icons/script/script.png");
-
-	var asset_create_material = Interface.asset_create.addMenu("Material", Interface.file_dir + "icons/misc/material.png");
-	asset_create_material.addOption("Phong material", function()
+	Interface.asset_material.addOption("Phong material", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
-	asset_create_material.addOption("Standard material", function()
+	Interface.asset_material.addOption("Standard material", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
-	asset_create_material.addOption("Sprite material", function()
+	Interface.asset_material.addOption("Sprite material", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
-	asset_create_material.addOption("Shader material", function()
+	Interface.asset_material.addOption("Shader material", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
-	asset_create_material.addOption("Lambert material", function()
+	Interface.asset_material.addOption("Lambert material", function()
 	{
 		//TODO <ADD CODE HERE>
 	});
-
-	//Load texture image
-	var asset_create_texture = Interface.asset_create.addMenu("Texture", Interface.file_dir + "icons/assets/image.png");
-	asset_create_texture.addOption("Texture", function()
-	{
-		App.chooseFile(function(fname)
-		{
-			try
-			{
-				var texture = new Texture(fname);
-				//TODO <ADD CODE HERE>
-			}
-			catch(e)
-			{
-				alert("Error loading file\n("+e+")");
-			}
-		}, "image/*");
-	}, Interface.file_dir + "icons/assets/image.png");
-
 
 	//------------------------------------Explorer------------------------------------
 	Interface.explorer = new DivisionResizable();

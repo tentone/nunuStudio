@@ -181,11 +181,11 @@ ParticleEditor.prototype.activate = activate;
 ParticleEditor.prototype.destroy = destroy;
 ParticleEditor.prototype.update = update;
 ParticleEditor.prototype.updateInterface = updateInterface;
-ParticleEditor.prototype.updateContainerMetaData = updateContainerMetaData;
+ParticleEditor.prototype.updateMetadata = updateMetadata;
 ParticleEditor.prototype.updateCamera = updateCamera;
 
 //Update container object data
-function updateContainerMetaData(container)
+function updateMetadata(container)
 {
 	if(this.particle !== null)
 	{

@@ -64,6 +64,9 @@ function MaterialEditor(parent)
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 	
+	//Material UI File element
+	this.material_file = null;
+
 	//Attached material
 	this.material = null;
 
@@ -192,6 +195,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.side = self.side.getValue();
+			self.material.needsUpdate = true;
 		}
 	});
 	this.form.add(this.side);
@@ -222,6 +226,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.depthTest = self.depthTest.getValue();
+			self.material.needsUpdate = true;
 		}
 	});
 	this.form.add(this.depthTest);
@@ -236,6 +241,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.transparent = self.transparent.getValue();
+			self.material.needsUpdate = true;
 		}
 	});
 	this.form.add(this.transparent);
@@ -252,6 +258,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.opacity = self.opacity.getValue();
+			self.material.needsUpdate = true;
 			self.opacity_text.setText(self.material.opacity);
 		}
 	});
@@ -274,6 +281,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.blending = self.blending.getValue();
+			self.material.needsUpdate = true;
 		}
 	});
 	this.form.add(this.blending);
@@ -307,6 +315,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.color.setHex(self.color.getValueHex());
+			self.material.needsUpdate = true;
 		}
 	});
 	this.form.add(this.color);
@@ -322,6 +331,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.specular.setHex(self.specular.getValueHex());
+			self.material.needsUpdate = true;
 		}
 	});
 	this.form.add(this.specular);
@@ -339,6 +349,7 @@ function MaterialEditor(parent)
 		if(self.material !== null)
 		{
 			self.material.shininess = self.shininess.getValue();
+			self.material.needsUpdate = true;
 			self.shininess_text.setText(self.material.shininess);
 		}
 	});
@@ -498,8 +509,11 @@ function MaterialEditor(parent)
 	this.specularMap.updateInterface();
 	this.specularMap.setOnChange(function(file)
 	{
-		self.material.specularMap = new Texture(file);
-		self.material.needsUpdate = true;
+		if(self.material !== null)
+		{
+			self.material.specularMap = new Texture(file);
+			self.material.needsUpdate = true;
+		}
 	});
 	this.form.add(this.specularMap);
 	this.form.nextRow();
@@ -512,8 +526,11 @@ function MaterialEditor(parent)
 	this.alphaMap.updateInterface();
 	this.alphaMap.setOnChange(function(file)
 	{
-		self.material.alphaMap = new Texture(file);
-		self.material.needsUpdate = true;
+		if(self.material !== null)
+		{
+			self.material.alphaMap = new Texture(file);
+			self.material.needsUpdate = true;
+		}
 	});
 	this.form.add(this.alphaMap);
 	this.form.nextRow();
@@ -526,10 +543,13 @@ function MaterialEditor(parent)
 	this.envMap.updateInterface();
 	this.envMap.setOnChange(function(file)
 	{
-		var files = [file, file, file, file, file, file];
-		self.material.envMap = new THREE.CubeTextureLoader().load(files);
-		self.material.envMap.format = THREE.RGBFormat;
-		self.material.needsUpdate = true;
+		if(self.material !== null)
+		{
+			var files = [file, file, file, file, file, file];
+			self.material.envMap = new THREE.CubeTextureLoader().load(files);
+			self.material.envMap.format = THREE.RGBFormat;
+			self.material.needsUpdate = true;
+		}
 	});
 	this.form.add(this.envMap);
 	this.form.nextRow();
@@ -601,24 +621,13 @@ MaterialEditor.id = 0;
 MaterialEditor.prototype.attachMaterial = attachMaterial;
 MaterialEditor.prototype.activate = activate;
 MaterialEditor.prototype.destroy = destroy;
+MaterialEditor.prototype.updateMetadata = updateMetadata;
 MaterialEditor.prototype.update = update;
 MaterialEditor.prototype.updateInterface = updateInterface;
-MaterialEditor.prototype.updateContainerMetaData = updateContainerMetaData;
 
-//Update container object data
-function updateContainerMetaData(container)
-{
-	if(this.material !== null)
-	{
-		if(this.material.name !== undefined)
-		{
-			container.setName(this.material.name);
-		}
-	}
-}
 
 //Attach material to material editor
-function attachMaterial(material)
+function attachMaterial(material, material_file)
 {
 	if(material instanceof THREE.SpriteMaterial)
 	{
@@ -632,6 +641,12 @@ function attachMaterial(material)
 		this.obj.visible = true;
 		this.sprite.visible = false;
 	}
+	
+	if(material_file !== undefined)
+	{
+		this.material_file = material_file;
+	}
+	
 	this.material = material;
 }
 
@@ -656,17 +671,31 @@ function destroy()
 	catch(e){}
 }
 
+//Update container object data
+function updateMetadata(container)
+{
+	if(this.material !== null)
+	{
+		if(this.material.name !== undefined)
+		{
+			container.setName(this.material.name);
+		}
+	}
+}
+
 //Update material editor
 function update()
 {
 	this.main.update();
 	this.preview.update();
 
+	//Render scene
 	if(this.material !== null)
 	{
 		this.renderer.render(this.scene, this.camera);
 	}
 
+	//Rotate material
 	if(Mouse.insideCanvas())
 	{
 		if(Mouse.buttonPressed(Mouse.LEFT))

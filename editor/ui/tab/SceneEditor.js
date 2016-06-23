@@ -155,10 +155,10 @@ SceneEditor.prototype.destroy = destroy;
 SceneEditor.prototype.activate = activate;
 SceneEditor.prototype.setScene = setScene;
 SceneEditor.prototype.setFullscreen = setFullscreen;
-SceneEditor.prototype.updateContainerMetaData = updateContainerMetaData;
+SceneEditor.prototype.updateMetadata = updateMetadata;
 
 //Update container object data
-function updateContainerMetaData(container)
+function updateMetadata(container)
 {
 	if(this.scene !== null)
 	{
