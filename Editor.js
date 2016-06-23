@@ -89,7 +89,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.5 Pre-Alpha";
-Editor.TIMESTAMP = "201606212009";
+Editor.TIMESTAMP = "201606230237";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -859,10 +859,10 @@ Editor.updateAssetExplorer = function()
 	Interface.asset_explorer.clear();
 	
 	//Get material list
-	var materials = ObjectUtils.getMaterials(Editor.program);
+	var materials = ObjectUtils.getMaterials(Editor.program, Editor.program.materials);
 
 	//Add materials to asset explorer
-	for(var i = 0; i < materials.length; i++)
+	for(var i in materials)
 	{
 		var file = new MaterialFile(Interface.asset_explorer.element);
 		file.setMaterial(materials[i]);

@@ -1,7 +1,7 @@
 //Object tools contains some object managing helpers
 function ObjectUtils(){}
 
-//Get all materials in object
+//Get all materials in object and childs
 ObjectUtils.getMaterials = function(obj, materials)
 {
 	//If undefined create new array to store materials
@@ -16,21 +16,22 @@ ObjectUtils.getMaterials = function(obj, materials)
 		var child = obj.children[i];
 
 		//Check if child has material
-		if(child.material !== undefined)
+		if(child.material !== undefined && !(child instanceof Sky))
 		{
-			var material = child.material;
-			if(materials.indexOf(material) === -1)
+			if(materials[child.material.uuid] === undefined)
 			{
-				materials.push(material);
+				materials[child.material.uuid] = child.material;
 			}
 		}
+
+		//Call recursively for childs
 		ObjectUtils.getMaterials(child, materials);
 	}
 
 	return materials;
 }
 
-//Get all textures in object
+//Get all textures in object and childs
 ObjectUtils.getTextures = function(obj, textures)
 {
 	//If undefined create new array to store materials
@@ -43,25 +44,22 @@ ObjectUtils.getTextures = function(obj, textures)
 	for(var i = 0; i < obj.children.length; i++)
 	{
 		var child = obj.children[i];
+
 		if(child.material !== undefined)
 		{
 			//TODO <ADD CODE HERE>
-
-			/*var texture = null;
-			if(textures.indexOf(texture) === -1)
-			{
-				textures.push(texture);
-			}*/
 		}
 		else if(child instanceof ParticleEmitter)
 		{
 			var texture = child.group.texture;
 
-			if(textures.indexOf(texture) === -1)
+			if(textures[texture.uuid] === undefined)
 			{
-				textures.push(texture);
+				textures[texture.uuid] = texture;
 			}
 		}
+
+		//Call recursively for childs
 		ObjectUtils.getTextures(child, textures);
 	}
 

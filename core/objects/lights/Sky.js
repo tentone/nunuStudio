@@ -309,40 +309,12 @@ function toJSON(meta)
 	object.day_time = this.day_time;
 	object.sun_distance = this.sun_distance;
 	object.time = this.time;
-	
-	if(this.name !== '')
-	{
-		object.name = this.name;
-	}
-	if(JSON.stringify(this.userData) !== '{}')
-	{
-		object.userData = this.userData;
-	}
+	object.name = this.name;
 
 	object.castShadow = (this.castShadow === true);
 	object.receiveShadow = (this.receiveShadow === true);
 	object.visible = !(this.visible === false);
 	object.matrix = this.matrix.toArray();
-
-	if(this.geometry !== undefined)
-	{
-		if(meta.geometries[ this.geometry.uuid ] === undefined)
-		{
-			meta.geometries[ this.geometry.uuid ] = this.geometry.toJSON( meta );
-		}
-
-		object.geometry = this.geometry.uuid;
-	}
-
-	if(this.material !== undefined)
-	{
-		if(meta.materials[this.material.uuid] === undefined)
-		{
-			meta.materials[this.material.uuid] = this.material.toJSON(meta);
-		}
-
-		object.material = this.material.uuid;
-	}
 
 	//Collect children data
 	if(this.children.length > 2)
@@ -355,6 +327,7 @@ function toJSON(meta)
 		}
 	}
 
+	//If called as root
 	if(isRootObject)
 	{
 		var geometries = extractFromCache(meta.geometries);
