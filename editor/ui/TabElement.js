@@ -144,7 +144,7 @@ function updateObjectData()
 {
 	if(this.component !== null)
 	{
-		this.component.updateContainerMetaData(this);
+		this.component.updateMetadata(this);
 	}
 }
 

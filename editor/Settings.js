@@ -5,7 +5,7 @@ Settings.general_theme = "dark";
 
 //Renderer settings
 Settings.renderer_shadows = true;
-Settings.renderer_shadows_type = THREE.PCFShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
+Settings.renderer_shadows_type = THREE.PCFSoftShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
 Settings.renderer_antialiasing = true;
 
 //Code editor settings
