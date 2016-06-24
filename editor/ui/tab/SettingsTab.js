@@ -38,24 +38,61 @@ function SettingsTab(parent)
 	this.tab.mode = TabGroup.LEFT;
 	this.tab.updateInterface();
 
-	//General
-	this.general = this.tab.addOption("General", "editor/files/icons/misc/tool.png", false);
+	//Self pointer
+	var self = this;
 
+	//General tab
+	this.general = this.tab.addOption("General", "editor/files/icons/misc/tool.png", false);
+	
+	//General form
 	this.general_form = new Form(this.general.division.element);
 	this.general_form.position.set(5, 5);
-	this.general_form.spacing.set(10, 8);
-	this.general_form.addText("General Settings");
+	this.general_form.spacing.set(5, 2);
+	this.general_form.addText("General");
 	this.general_form.nextRow();
+	
+	//Theme
 	this.general_form.addText("Theme");
-	this.general_form.nextRow();
-	this.general_form.addText("Renderer Settings");
-	this.general_form.nextRow();
-	this.general_form.addText("Antialiasing");
-	this.general_form.nextRow();
-	this.general_form.addText("Show wireframe");
+	this.theme = new DropdownList(this.general_form.element);
+	this.theme.size.set(150, 18);
+	this.theme.addValue("Dark", "dark.css");
+	this.theme.setOnChange(function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	this.general_form.add(this.theme);
 	this.general_form.nextRow();
 
-	//Code 
+	//Renderer settings
+	this.general_form.addText("Renderer");
+	this.general_form.nextRow();
+
+	//Shadows settings
+	this.general_form.addText("Shadows type");
+	this.shadows_type = new DropdownList(this.general_form.element);
+	this.shadows_type.size.set(150, 18);
+	this.shadows_type.addValue("Basic", THREE.BasicShadowMap);
+	this.shadows_type.addValue("PCF", THREE.PCFShadowMap);
+	this.shadows_type.addValue("PCF Soft", THREE.PCFSoftShadowMap);
+	this.shadows_type.setOnChange(function()
+	{
+		Settings.shadows_type = self.shadows_type.getValue();
+	});
+	this.general_form.add(this.shadows_type);
+	this.general_form.nextRow();
+
+	//Antialiasing
+	this.antialiasing = new Checkbox(this.general_form.element);
+	this.antialiasing.setText("Antialiasing");
+	this.antialiasing.size.set(200, 15);
+	this.antialiasing.setOnChange(function()
+	{
+		Settings.antialiasing = (self.antialiasing.getValue() === true);
+	});
+	this.general_form.add(this.antialiasing);
+	this.general_form.nextRow();
+
+	//Code tab
 	this.code = this.tab.addOption("Code", "editor/files/icons/script/script.png", false);
 	
 	//About

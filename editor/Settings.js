@@ -4,9 +4,9 @@ function Settings(){}
 Settings.general_theme = "dark";
 
 //Renderer settings
-Settings.renderer_shadows = true;
-Settings.renderer_shadows_type = THREE.PCFSoftShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
-Settings.renderer_antialiasing = true;
+Settings.shadows = true;
+Settings.shadows_type = THREE.PCFSoftShadowMap; //(THREE.PCFShadowMap or THREE.PCFSoftShadowMap)
+Settings.antialiasing = true;
 
 //Code editor settings
 Settings.code_font_size = 14;

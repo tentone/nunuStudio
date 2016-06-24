@@ -89,7 +89,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.5 Pre-Alpha";
-Editor.TIMESTAMP = "201606231616";
+Editor.TIMESTAMP = "201606240222";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -1201,10 +1201,10 @@ Editor.setRenderCanvas = function(canvas)
 //Initialize renderer
 Editor.initializeRenderer = function(canvas)
 {
-	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: Settings.renderer_antialiasing});
+	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: Settings.antialiasing});
 	Editor.renderer.autoClear = false;
-	Editor.renderer.shadowMap.enabled = Settings.renderer_shadows;
-	Editor.renderer.shadowMap.type = Settings.renderer_shadows_type;
+	Editor.renderer.shadowMap.enabled = Settings.shadows;
+	Editor.renderer.shadowMap.type = Settings.shadows_type;
 	Editor.renderer.setSize(canvas.width, canvas.height);
 }
 

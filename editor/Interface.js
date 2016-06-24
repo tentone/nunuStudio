@@ -184,19 +184,29 @@ Interface.initialize = function()
 	{
 		App.chooseFile(function(fname)
 		{
-			//TODO <ADD CODE HERE>
+			try
+			{
+				//TODO <ADD CODE HERE>
+			}
+			catch(e)
+			{
+				alert("Error loading file\n("+e+")");
+			}
 		}, "audio/*");
 	}, Interface.file_dir + "icons/assets/audio.png");
 
 	//Create material
 	Interface.asset_material = new DropdownMenu(Interface.asset_explorer_bar.element);
-	Interface.asset_material.setText("Add Material");
+	Interface.asset_material.setText("Material");
 	Interface.asset_material.size.set(100, Interface.asset_explorer_bar.size.y);
 	Interface.asset_material.position.set(100,0);
 
 	Interface.asset_material.addOption("Phong material", function()
 	{
-		//TODO <ADD CODE HERE>
+		var material = new THREE.MeshPhongMaterial();
+		material.name = "phong";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
 	});
 	Interface.asset_material.addOption("Standard material", function()
 	{
@@ -204,7 +214,10 @@ Interface.initialize = function()
 	});
 	Interface.asset_material.addOption("Sprite material", function()
 	{
-		//TODO <ADD CODE HERE>
+		var material = new THREE.SpriteMaterial({color: 0xffffff});
+		material.name = "sprite";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
 	});
 	Interface.asset_material.addOption("Shader material", function()
 	{

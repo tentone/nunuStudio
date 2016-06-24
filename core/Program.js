@@ -78,7 +78,10 @@ Program.prototype.addDefaultScene = addDefaultScene;
 //Add material to materials list
 function addMaterial(material)
 {
- 	//TODO <ADD CODE HERE>
+	if(material instanceof THREE.Material)
+	{
+ 		this.materials[material.uuid] = material;
+ 	}
 }
 
 //Remove material from materials list (also receives default used to replace)
@@ -90,7 +93,7 @@ function removeMaterial(material, default_material)
 //Add texture to texture list
 function addTexture(texture)
 {
-	//TODO <ADD CODE HERE>
+ 	this.textures[texture.uuid] = texture;
 }
 
 //Remove texture from textures list
