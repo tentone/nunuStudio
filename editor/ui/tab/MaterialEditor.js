@@ -686,18 +686,26 @@ function updateMetadata(container)
 //Update material editor
 function update()
 {
+	//Update UI containers
 	this.main.update();
 	this.preview.update();
 
-	//Render scene
 	if(this.material !== null)
 	{
+		//If needs update file metadata
+		if(this.material.needsUpdate)
+		{
+			this.material_file.updateMetadata();
+			this.material.needsUpdate = true;
+		}
+
+		//Render scene
 		this.renderer.render(this.scene, this.camera);
 	}
 
-	//Rotate material
 	if(Mouse.insideCanvas())
 	{
+		//Rotate object
 		if(Mouse.buttonPressed(Mouse.LEFT))
 		{
 			var delta = new THREE.Quaternion();
@@ -705,6 +713,7 @@ function update()
 			this.obj.quaternion.multiplyQuaternions(delta, this.obj.quaternion);
 		}
 
+		//Zoom
 		this.camera.position.z += Mouse.wheel * 0.005;
 		if(this.camera.position.z > 5)
 		{

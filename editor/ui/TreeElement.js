@@ -161,7 +161,6 @@ function TreeElement(container)
 						child.uuid = THREE.Math.generateUUID();
 					});
 
-
 					//Add object
 					self.obj.add(obj);
 					self.updateSceneData();
@@ -177,7 +176,7 @@ function TreeElement(container)
 	//Drag start
 	this.element.ondragstart = function(event)
 	{
-		if(self.obj.uuid !== undefined && !(self.obj instanceof Scene))
+		if(!(self.obj instanceof Scene))
 		{
 			event.dataTransfer.setData("uuid", self.obj.uuid);
 			DragBuffer.pushDragElement(self.obj);

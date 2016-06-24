@@ -51,33 +51,41 @@ function SceneEditor(parent)
 			{
 				var object = intersections[0].object;
 
-				//Get first file from event
-				var file = event.dataTransfer.files[0];
-
-				if(file.type.startsWith("image"))
+				//If its a file drop
+				if(event.dataTransfer.files.length > 0)
 				{
-					if(object instanceof THREE.Mesh)
-					{
-						//Create new material with selected image
-						var texture = new Texture(file.path);
-						var material = new THREE.MeshPhongMaterial({map:texture, color:0xffffff, specular:0x333333, shininess:30});
-						material.name = file.name;
-						object.material = material;
+					//Get first file from event
+					var file = event.dataTransfer.files[0];
 
-						//Update asset explorer
-						Editor.updateObjectViews();
-					}
-					else if(object instanceof THREE.Sprite)
+					if(file.type.startsWith("image"))
 					{
-						//Create new material with selected image
-						var texture = new Texture(file.path);
-						var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
-						material.name = file.name;
-						object.material = material;
+						if(object instanceof THREE.Mesh)
+						{
+							//Create new material with selected image
+							var texture = new Texture(file.path);
+							var material = new THREE.MeshPhongMaterial({map:texture, color:0xffffff, specular:0x333333, shininess:30});
+							material.name = file.name;
+							object.material = material;
 
-						//Update asset explorer
-						Editor.updateObjectViews();
+							//Update asset explorer
+							Editor.updateObjectViews();
+						}
+						else if(object instanceof THREE.Sprite)
+						{
+							//Create new material with selected image
+							var texture = new Texture(file.path);
+							var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
+							material.name = file.name;
+							object.material = material;
+
+							//Update asset explorer
+							Editor.updateObjectViews();
+						}
 					}
+				}
+				else
+				{
+					//TODO <NON FILE DROP>
 				}
 			}
 		}

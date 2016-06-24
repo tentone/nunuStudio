@@ -118,20 +118,25 @@ function MaterialFile(parent)
 	//Drag start
 	this.element.ondragstart = function(event)
 	{
-		//TODO <ADD CODE HERE>
+		if(self.material !== null)
+		{
+			event.dataTransfer.setData("uuid", self.material.uuid);
+			DragBuffer.pushDragElement(self.material);
+		}
 	};
 
 	//Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
-		//TODO <ADD CODE HERE>
+		//Try to remove event from buffer
+		var uuid = event.dataTransfer.getData("uuid");
+		var obj = DragBuffer.popDragElement(uuid);
 	};
 
 	//Drop event
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
-		//TODO <ADD CODE HERE>
 	};
 
 	//Prevent deafault when object dragged over
@@ -144,7 +149,7 @@ function MaterialFile(parent)
 //Functions Prototype
 MaterialFile.prototype = Object.create(File.prototype);
 MaterialFile.prototype.setMaterial = setMaterial;
-MaterialFile.prototype.updatePreview = updatePreview;
+MaterialFile.prototype.updateMetadata = updateMetadata;
 
 //Set object to file
 function setMaterial(material)
@@ -152,16 +157,17 @@ function setMaterial(material)
 	if(material instanceof THREE.Material)
 	{
 		Editor.material_renderer.renderMaterial(material, this.img);
-		this.material = material;
 		this.setText(material.name);
+		this.material = material;
 	}
 }
 
 //Update material preview
-function updatePreview()
+function updateMetadata()
 {
 	if(this.material !== null)
 	{
 		Editor.material_renderer.renderMaterial(this.material, this.img);
+		this.setText(this.material.name);
 	}
 }
