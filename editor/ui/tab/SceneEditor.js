@@ -83,9 +83,28 @@ function SceneEditor(parent)
 						}
 					}
 				}
+				//If its a dragged material
 				else
 				{
-					//TODO <NON FILE DROP>
+					var uuid = event.dataTransfer.getData("uuid");
+					var material = DragBuffer.popDragElement(uuid);
+					
+					if(material !== null)
+					{
+						if(material instanceof THREE.SpriteMaterial)
+						{
+							if(object instanceof THREE.Sprite)
+							{
+								object.material = material;
+								Editor.updateObjectViews();
+							}
+						}
+						if(object instanceof THREE.Mesh)
+						{
+							object.material = material;
+							Editor.updateObjectViews();
+						}
+					}
 				}
 			}
 		}

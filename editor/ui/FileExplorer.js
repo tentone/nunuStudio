@@ -64,7 +64,6 @@ function clear()
 	{
 		this.files.pop().destroy();
 	}
-	this.updateInterface();
 }
 
 //Add file to explorer

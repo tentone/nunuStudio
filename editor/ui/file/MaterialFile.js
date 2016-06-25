@@ -7,35 +7,23 @@ function MaterialFile(parent)
 
 	//Self pointer
 	var self = this;
-	var color = new THREE.Color(0, 0, 0);
+
+	//Use to store original material color on highlight
+	this.material_color = new THREE.Color(0, 0, 0);
+	this.material_highlighted = false;
 
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
 		self.element.className = "button_over";
-
-		if(self.material instanceof THREE.Material)
-		{
-			if(self.material.color !== undefined)
-			{
-				color.copy(self.material.color);
-				self.material.color.setRGB(1, 0, 0);
-			}
-		}
+		self.highlightMaterial();
 	};
 
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
 		self.element.className = "";
-
-		if(self.material instanceof THREE.Material)
-		{
-			if(self.material.color !== undefined)
-			{
-				self.material.color.copy(color);
-			}
-		}
+		self.restoreMaterial();
 	};
 
 	//Double click
@@ -84,7 +72,7 @@ function MaterialFile(parent)
 			if(self.material !== null)
 			{
 				self.material.name = prompt("Rename material", self.material.name);
-				Editor.updateObjectViews();
+				self.updateMetadata();
 			}
 		});
 		
@@ -103,14 +91,11 @@ function MaterialFile(parent)
 		{
 			if(self.material !== null)
 			{
-				if(self.material instanceof THREE.Material)
+				try
 				{
-					try
-					{
-						App.clipboard.set(JSON.stringify(self.material.toJSON()), "text");
-					}
-					catch(e){}
+					App.clipboard.set(JSON.stringify(self.material.toJSON()), "text");
 				}
+				catch(e){}
 			}
 		});
 	};
@@ -118,19 +103,25 @@ function MaterialFile(parent)
 	//Drag start
 	this.element.ondragstart = function(event)
 	{
+		//Insert material into drag buffer
 		if(self.material !== null)
 		{
 			event.dataTransfer.setData("uuid", self.material.uuid);
 			DragBuffer.pushDragElement(self.material);
 		}
+
+		//To avoid camera movement
+		Mouse.updateKey(Mouse.LEFT, Key.KEY_UP);
 	};
 
 	//Drag end (called after of ondrop)
 	this.element.ondragend = function(event)
 	{
-		//Try to remove event from buffer
+		//Try to remove material from drag buffer
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = DragBuffer.popDragElement(uuid);
+
+		this.restoreMaterial();
 	};
 
 	//Drop event
@@ -148,8 +139,18 @@ function MaterialFile(parent)
 
 //Functions Prototype
 MaterialFile.prototype = Object.create(File.prototype);
+MaterialFile.prototype.destroy = destroy;
 MaterialFile.prototype.setMaterial = setMaterial;
+MaterialFile.prototype.highlightMaterial = highlightMaterial;
+MaterialFile.prototype.restoreMaterial = restoreMaterial;
 MaterialFile.prototype.updateMetadata = updateMetadata;
+
+//Destroy material file
+function destroy()
+{
+	File.prototype.destroy.call(this);
+	this.restoreMaterial();
+}
 
 //Set object to file
 function setMaterial(material)
@@ -159,6 +160,36 @@ function setMaterial(material)
 		Editor.material_renderer.renderMaterial(material, this.img);
 		this.setText(material.name);
 		this.material = material;
+	}
+}
+
+//Highlight material
+function highlightMaterial()
+{
+	if(this.material instanceof THREE.Material)
+	{
+		if(this.material.color !== undefined)
+		{
+			this.material_color.copy(this.material.color);
+			this.material.color.setRGB(1, 0, 0);
+			this.material_highlighted = true;
+		}
+	}
+}
+
+//Restore material to normal color
+function restoreMaterial()
+{
+	if(this.material_highlighted)
+	{
+		if(this.material instanceof THREE.Material)
+		{
+			if(this.material.color !== undefined)
+			{
+				this.material.color.copy(this.material_color);
+				this.material_highlighted = false;
+			}
+		}
 	}
 }
 

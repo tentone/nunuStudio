@@ -201,6 +201,13 @@ Interface.initialize = function()
 	Interface.asset_material.size.set(100, Interface.asset_explorer_bar.size.y);
 	Interface.asset_material.position.set(100,0);
 
+	Interface.asset_material.addOption("Standard material", function()
+	{
+		var material = new THREE.MeshStandardMaterial();
+		material.name = "standard";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	});
 	Interface.asset_material.addOption("Phong material", function()
 	{
 		var material = new THREE.MeshPhongMaterial();
@@ -208,9 +215,19 @@ Interface.initialize = function()
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
 	});
-	Interface.asset_material.addOption("Standard material", function()
+	Interface.asset_material.addOption("Basic material", function()
 	{
-		//TODO <ADD CODE HERE>
+		var material = new THREE.MeshBasicMaterial();
+		material.name = "basic";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	});
+	Interface.asset_material.addOption("Lambert material", function()
+	{
+		var material = new THREE.MeshLambertMaterial();
+		material.name = "lambert";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
 	});
 	Interface.asset_material.addOption("Sprite material", function()
 	{
@@ -219,13 +236,28 @@ Interface.initialize = function()
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
 	});
-	Interface.asset_material.addOption("Shader material", function()
+
+	var material_others = Interface.asset_material.addMenu("Others");
+	material_others.addOption("Shader material", function()
 	{
-		//TODO <ADD CODE HERE>
+		var material = new THREE.ShaderMaterial();
+		material.name = "shader";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
 	});
-	Interface.asset_material.addOption("Lambert material", function()
+	material_others.addOption("Normal material", function()
 	{
-		//TODO <ADD CODE HERE>
+		var material = new THREE.MeshNormalMaterial();
+		material.name = "normal";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	});
+	material_others.addOption("Depth material", function()
+	{
+		var material = new THREE.MeshDepthMaterial();
+		material.name = "depth";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
 	});
 
 	//------------------------------------Explorer------------------------------------

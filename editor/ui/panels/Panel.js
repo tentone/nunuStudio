@@ -36,6 +36,11 @@ function Panel(parent)
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 
+	//Default form
+	this.form = new Form(this.element);
+	this.form.position.set(5, 10);
+	this.form.spacing.set(5, 5);
+
 	//Object attached
 	this.obj = null;
 

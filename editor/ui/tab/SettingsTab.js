@@ -43,18 +43,18 @@ function SettingsTab(parent)
 
 	//General tab
 	this.general = this.tab.addOption("General", "editor/files/icons/misc/tool.png", false);
-	
+
 	//General form
 	this.general_form = new Form(this.general.division.element);
 	this.general_form.position.set(5, 5);
-	this.general_form.spacing.set(5, 2);
+	this.general_form.spacing.set(5, 5);
 	this.general_form.addText("General");
 	this.general_form.nextRow();
 	
 	//Theme
 	this.general_form.addText("Theme");
 	this.theme = new DropdownList(this.general_form.element);
-	this.theme.size.set(150, 18);
+	this.theme.size.set(150, 20);
 	this.theme.addValue("Dark", "dark.css");
 	this.theme.setOnChange(function()
 	{
@@ -63,14 +63,50 @@ function SettingsTab(parent)
 	this.general_form.add(this.theme);
 	this.general_form.nextRow();
 
+	//Blank Space
+	this.general_form.addText("");
+	this.general_form.nextRow();
+
+	//Scene editor
+	this.general_form.addText("Rendering Quality");
+	this.general_form.nextRow();
+
+	//Enable Grid
+	this.grid_enabled = new Checkbox(this.general_form.element);
+	this.grid_enabled.setText("Show Grid");
+	this.grid_enabled.size.set(200, 16);
+	this.grid_enabled.setOnChange(function()
+	{
+		Settings.grid_enabled = self.grid_enabled.getValue();
+		Editor.grid_helper.visible = Settings.grid_enabled;
+	});
+	this.general_form.add(this.grid_enabled);
+	this.general_form.nextRow();
+
+	//Enable Axis
+	this.axis_enabled = new Checkbox(this.general_form.element);
+	this.axis_enabled.setText("Show axis");
+	this.axis_enabled.size.set(200, 16);
+	this.axis_enabled.setOnChange(function()
+	{
+		Settings.axis_enabled = self.axis_enabled.getValue();
+		Editor.axis_helper.visible = Settings.axis_enabled;
+	});
+	this.general_form.add(this.axis_enabled);
+	this.general_form.nextRow();
+
+	//Blank Space
+	this.general_form.addText("");
+	this.general_form.nextRow();
+
 	//Renderer settings
-	this.general_form.addText("Renderer");
+	this.general_form.addText("Rendering Quality");
 	this.general_form.nextRow();
 
 	//Shadows settings
 	this.general_form.addText("Shadows type");
 	this.shadows_type = new DropdownList(this.general_form.element);
-	this.shadows_type.size.set(150, 18);
+	this.shadows_type.size.set(150, 20);
 	this.shadows_type.addValue("Basic", THREE.BasicShadowMap);
 	this.shadows_type.addValue("PCF", THREE.PCFShadowMap);
 	this.shadows_type.addValue("PCF Soft", THREE.PCFSoftShadowMap);
@@ -84,10 +120,10 @@ function SettingsTab(parent)
 	//Antialiasing
 	this.antialiasing = new Checkbox(this.general_form.element);
 	this.antialiasing.setText("Antialiasing");
-	this.antialiasing.size.set(200, 15);
+	this.antialiasing.size.set(200, 16);
 	this.antialiasing.setOnChange(function()
 	{
-		Settings.antialiasing = (self.antialiasing.getValue() === true);
+		Settings.antialiasing = self.antialiasing.getValue();
 	});
 	this.general_form.add(this.antialiasing);
 	this.general_form.nextRow();
@@ -128,6 +164,13 @@ function activate()
 {
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
+
+	//Update UI elements
+	this.grid_enabled.setValue(Settings.grid_enabled);
+	this.axis_enabled.setValue(Settings.axis_enabled);
+	this.shadows_type.setValue(Settings.shadows_type);
+	this.antialiasing.setValue(Settings.antialiasing);
+
 }
 
 //Remove element
