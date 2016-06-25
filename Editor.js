@@ -89,8 +89,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.6 Pre-Alpha";
-Editor.TIMESTAMP = "201606252046";
+Editor.VERSION = "V0.8.6.5 Pre-Alpha";
+Editor.TIMESTAMP = "201606252157";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -1020,6 +1020,26 @@ Editor.resetEditingFlags = function()
 	catch(e){}
 }
 
+//Craete new Program
+Editor.createNewProgram = function()
+{
+	//Create new program
+	Editor.program = new Program();
+	Editor.program.addDefaultScene();
+	Editor.resetEditingFlags();
+
+	//Remove old tabs from interface
+	if(Interface.tab !== undefined)
+	{
+		Interface.tab.clear();
+		var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
+		var canvas = new SceneEditor();
+		canvas.setScene(Editor.program.scene);
+		scene.attachComponent(canvas);
+		Interface.tab.selectOption(0);
+	}
+}
+
 //Save program to file
 Editor.saveProgram = function(fname)
 {
@@ -1084,26 +1104,6 @@ Editor.exportWebProject = function(fname)
 	{
 		App.writeFile(fname, data);
 	});
-}
-
-//New Program
-Editor.createNewProgram = function()
-{
-	//Create new program
-	Editor.program = new Program();
-	Editor.program.addDefaultScene();
-	Editor.resetEditingFlags();
-
-	//Remove old tabs from interface
-	if(Interface.tab !== undefined)
-	{
-		Interface.tab.clear();
-		var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
-		var canvas = new SceneEditor();
-		canvas.setScene(Editor.program.scene);
-		scene.attachComponent(canvas);
-		Interface.tab.selectOption(0);
-	}
 }
 
 //Set editor state

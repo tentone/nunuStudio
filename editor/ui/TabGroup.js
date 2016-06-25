@@ -121,10 +121,11 @@ function selectOption(index)
 	}
 }
 
-//Add tab
+//Add new option to tab grounp
 function addOption(name, image, closeable)
 {
-	var option = new TabElement(name, image, closeable, this, this.options.length);
+	var option = new TabElement(this.element, name, image, closeable, this, this.options.length);
+
 	this.options.push(option);
 	if(this.options_selected === -1)
 	{
@@ -141,9 +142,7 @@ function clear()
 	{
 		this.options.pop().destroy();
 	}
-	
 	this.selectOption(-1);
-	this.updateOptionIndex();
 	this.updateInterface();
 }
 

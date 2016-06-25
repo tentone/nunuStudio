@@ -45,7 +45,7 @@ function SettingsTab(parent)
 	this.general = this.tab.addOption("General", "editor/files/icons/misc/tool.png", false);
 
 	//General form
-	this.general_form = new Form(this.general.division.element);
+	this.general_form = new Form(this.general.element);
 	this.general_form.position.set(5, 5);
 	this.general_form.spacing.set(5, 5);
 	this.general.attachComponent(this.general_form);
@@ -135,7 +135,7 @@ function SettingsTab(parent)
 	this.code = this.tab.addOption("Code", "editor/files/icons/script/script.png", false);
 	
 	//Code form
-	this.code_form = new Form(this.code.division.element);
+	this.code_form = new Form(this.code.element);
 	this.code_form.position.set(5, 5);
 	this.code_form.spacing.set(5, 5);
 	this.code.attachComponent(this.code_form);
@@ -170,7 +170,7 @@ function SettingsTab(parent)
 
 	//About
 	this.about = this.tab.addOption("About", "editor/files/icons/misc/about.png", false);
-	this.about.attachComponent(new AboutTab(this.about.division.element));
+	this.about.attachComponent(new AboutTab(this.about.element));
 	this.about.updateInterface();
 	
 	//Element atributes

@@ -778,7 +778,7 @@ Interface.initialize = function()
 		if(!found)
 		{
 			var tab = Interface.tab.addOption("About", Interface.file_dir + "icons/misc/about.png", true);
-			var settings = new AboutTab(tab.division.element);
+			var settings = new AboutTab(tab.element);
 			tab.attachComponent(settings);
 			tab.select();
 		}
