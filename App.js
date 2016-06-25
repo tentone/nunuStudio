@@ -51,7 +51,7 @@ include("core/objects/lights/HemisphereLight.js");
 include("core/objects/lights/Sky.js");
 include("core/objects/cameras/PerspectiveCamera.js");
 include("core/objects/cameras/OrthographicCamera.js");
-
+include("core/objects/audio/Audio.js");
 include("core/objects/Bone.js");
 include("core/objects/Container.js");
 include("core/objects/Script.js");
@@ -60,7 +60,6 @@ include("core/objects/AnimatedModel.js");
 include("core/objects/Text3D.js");
 include("core/objects/Sprite.js");
 include("core/objects/ParticleEmitter.js");
-include("core/objects/Audio.js");
 
 //App class
 function App(){}
@@ -152,7 +151,7 @@ App.readFile = function(fname, sync, callback)
 	else
 	{
 		var file = new XMLHttpRequest();
-		var ready = false;
+		file.overrideMimeType("text/plain");
 		var data = null;
 
 		//Request file to server
@@ -161,19 +160,15 @@ App.readFile = function(fname, sync, callback)
 		//Get file
 		file.onreadystatechange = function ()
 		{
-			if(file.readyState === 4)
+			if(file.status === 200 || file.status === 0)
 			{
-				if(file.status === 200 || file.status === 0)
-				{
-					data = file.responseText;
+				data = file.responseText;
 
-					//Callback
-					if(callback !== undefined)
-					{
-						callback(file.responseText);
-					}
+				//Callback
+				if(callback !== undefined)
+				{
+					callback(file.responseText);
 				}
-				ready = true;
 			}
 		}
 

@@ -19,14 +19,10 @@ function Text3D(text, material, font)
 
 //Function Prototype
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
-
-//Overrided functions
 Text3D.prototype.initialize = initialize;
 Text3D.prototype.update = update;
-Text3D.prototype.toJSON = toJSON;
-
-//Auxiliar functions
 Text3D.prototype.setText = setText;
+Text3D.prototype.toJSON = toJSON;
 
 //Initialize
 function initialize()
