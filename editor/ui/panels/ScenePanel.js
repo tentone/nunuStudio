@@ -5,10 +5,6 @@
 	//Self pointer
 	var self = this;
 
-	this.form = new Form(this.element);
-	this.form.position.set(5, 10);
-	this.form.spacing.set(5, 5);
-
 	//Name
 	this.form.addText("Name");
 	this.name = new Textbox(this.form.element);
@@ -69,7 +65,7 @@
 	//Fog
 	this.form.addText("Fog");
 	this.fog = new DropdownList(this.form.element);
-	this.fog.size.set(100, 18);
+	this.fog.size.set(100, 20);
 	this.fog.addValue("Off", 0);
 	this.fog.addValue("Linear", 1);
 	this.fog.addValue("Exponential", 2);

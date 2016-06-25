@@ -33,7 +33,7 @@ function TreeView(parent, container)
 	//Label
 	this.label = new Text(this.element);
 	this.label.position.set(5, 10);
-	this.label.setText("Explorer");
+	this.label.setText("Object Explorer");
 	this.label.setAlignment(Text.LEFT);
 	this.label.updateInterface();
 

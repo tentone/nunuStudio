@@ -20,6 +20,15 @@ THREE.Object3D.prototype.update = function()
 	}
 };
 
+//Dipose object
+THREE.Object3D.prototype.dispose = function()
+{
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].dispose();
+	}
+};
+
 //Create JSON for object
 THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 {

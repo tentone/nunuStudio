@@ -48,6 +48,7 @@ include("editor/ui/input/Positionbox.js");
 include("editor/ui/input/Imagebox.js");
 
 include("editor/ui/panels/Panel.js");
+include("editor/ui/panels/AudioPanel.js");
 include("editor/ui/panels/ObjectPanel.js");
 include("editor/ui/panels/SkyPanel.js");
 include("editor/ui/panels/LeapPanel.js");
@@ -88,8 +89,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.5 Pre-Alpha";
-Editor.TIMESTAMP = "201606240222";
+Editor.VERSION = "V0.8.6 Pre-Alpha";
+Editor.TIMESTAMP = "201606250048";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -142,8 +143,8 @@ Editor.initialize = function(canvas)
 	//Material renderer for material previews
 	Editor.material_renderer = new MaterialRenderer();
 
-	//Default material to be used when creating objects
-	Editor.default_material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:10});
+	//Default materials to be used when creating objects
+	Editor.default_material = new THREE.MeshPhongMaterial();
 	Editor.default_material.name = "default";
 	Editor.default_sprite_material = new THREE.SpriteMaterial({map: new Texture("data/sample.png"), color: 0xffffff});
 	Editor.default_sprite_material.name = "sprite";
@@ -170,9 +171,14 @@ Editor.initialize = function(canvas)
 	Interface.updateInterface();
 
 	//Grid and axis helpers
-	Editor.grid_helper = new THREE.GridHelper(200, 5);
+	Editor.grid_helper = new THREE.GridHelper(500, 200);
+	Editor.grid_helper.material.depthWrite = false;
+	Editor.grid_helper.visible = Settings.grid_enabled;
 	Editor.tool_scene.add(Editor.grid_helper);
-	Editor.axis_helper = new THREE.AxisHelper(100);
+
+	Editor.axis_helper = new THREE.AxisHelper(500);
+	Editor.axis_helper.material.depthWrite = false;
+	Editor.axis_helper.visible = Settings.axis_enabled;
 	Editor.tool_scene.add(Editor.axis_helper);
 
 	//Box helper
@@ -385,12 +391,12 @@ Editor.update = function()
 				//Resize mode
 				else if(Editor.tool_mode === Editor.MODE_RESIZE)
 				{
-					var speed = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/1500;
-					var scale = Editor.selected_object.scale;
+					var scale = Editor.selected_object.scale.clone();
+					scale.multiplyScalar(0.01);
 
 					if(Editor.editing_object_args.center)
 					{
-						var size = (Mouse.delta.x - Mouse.delta.y) * speed/2;
+						var size = (Mouse.delta.x - Mouse.delta.y);
 
 						Editor.selected_object.scale.x += size * scale.x;
 						Editor.selected_object.scale.y += size * scale.y;
@@ -398,17 +404,17 @@ Editor.update = function()
 					}
 					else if(Editor.editing_object_args.x)
 					{
-						Editor.selected_object.scale.x -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x) * scale.x;
-						Editor.selected_object.scale.x -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x) * scale.x;
+						Editor.selected_object.scale.x -= Mouse.delta.y * Math.sin(Editor.camera_rotation.x) * scale.x;
+						Editor.selected_object.scale.x -= Mouse.delta.x * Math.cos(Editor.camera_rotation.x) * scale.x;
 					}
 					else if(Editor.editing_object_args.y)
 					{
-						Editor.selected_object.scale.y -= Mouse.delta.y * speed * scale.y;
+						Editor.selected_object.scale.y -= Mouse.delta.y * scale.y;
 					}
 					else if(Editor.editing_object_args.z)
 					{
-						Editor.selected_object.scale.z -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2) * scale.z;
-						Editor.selected_object.scale.z -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2) * scale.z;
+						Editor.selected_object.scale.z -= Mouse.delta.y * Math.sin(Editor.camera_rotation.x + Editor.pid2) * scale.z;
+						Editor.selected_object.scale.z -= Mouse.delta.x * Math.cos(Editor.camera_rotation.x + Editor.pid2) * scale.z;
 					}
 
 					//Update object panel
@@ -417,7 +423,7 @@ Editor.update = function()
 				//Rotate Mode
 				else if(Editor.tool_mode === Editor.MODE_ROTATE)
 				{
-					var speed = 1/300;
+					var speed = 0.003;
 
 					if(Editor.editing_object_args.x)
 					{
@@ -812,6 +818,10 @@ Editor.updateSelectedObjectUI = function()
 	else if(Editor.selected_object instanceof OrthographicCamera)
 	{
 		Interface.panel = new OrthographicCameraPanel(Interface.explorer_resizable.div_b);
+	}
+	else if(Editor.selected_object instanceof Audio)
+	{
+		Interface.panel = new AudioPanel(Interface.explorer_resizable.div_b);
 	}
 	else if(Editor.selected_object instanceof Scene)
 	{

@@ -41,7 +41,6 @@ function ProgramPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.author = self.author.getText();
-			Editor.updateObjectViews();
 		}
 	});
 
@@ -61,7 +60,6 @@ function ProgramPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.version = self.version.getText();
-			Editor.updateObjectViews();
 		}
 	});
 
@@ -76,7 +74,6 @@ function ProgramPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.vr = self.vr.getValue();
-			Editor.updateObjectViews();
 		}
 	});
 
@@ -98,7 +95,6 @@ function ProgramPanel(parent)
 		if(self.obj !== null)
 		{
 			self.obj.vr_scale = self.vr_scale.getValue();
-			Editor.updateObjectViews();
 		}
 	});
 }

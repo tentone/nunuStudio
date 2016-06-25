@@ -85,9 +85,12 @@ function addMaterial(material)
 }
 
 //Remove material from materials list (also receives default used to replace)
-function removeMaterial(material, default_material)
+function removeMaterial(material, default_material, default_material_sprite)
 {
-	//TODO <ADD CODE HERE>
+	if(material instanceof THREE.Material)
+	{
+		//TODO <ADD CODE HERE>
+	}
 }
 
 //Add texture to texture list
@@ -196,7 +199,7 @@ function addDefaultScene(material)
 {
 	if(material === undefined)
 	{
-		material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
+		material = new THREE.MeshPhongMaterial();
 		material.name = "default";
 	}
 
@@ -242,6 +245,12 @@ function dispose()
 	for(var i = 0; i < this.textures.length; i++)
 	{
 		this.textures[i].dispose();
+	}
+
+	//Dipose children
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].dispose();
 	}
 }
 

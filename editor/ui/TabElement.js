@@ -54,18 +54,6 @@ function TabElement(name, icon, closeable, container, index)
 		}
 	};
 
-	//Drag start
-	this.button.element.ondragstart = function(event)
-	{
-		//TODO <ADD CODE HERE>
-	};
-
-	//Drag end (called after of ondrop)
-	this.button.element.ondragend = function(event)
-	{
-		//TODO <ADD CODE HERE>
-	};
-
 	//Drop event
 	this.button.element.ondrop = function(event)
 	{
