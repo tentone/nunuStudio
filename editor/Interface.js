@@ -629,7 +629,7 @@ Interface.initialize = function()
 	Interface.file.addOption("New Project", function()
 	{
 		Interface.newProgram();
-	});
+	}, Interface.file_dir + "icons/misc/new.png");
 
 	Interface.file.addOption("Save Project", function()
 	{
@@ -686,15 +686,10 @@ Interface.initialize = function()
 		//TODO <ADD CODE HERE>
 	}, Interface.file_dir + "icons/platform/windows.png");
 
-	//publish.addOption("OSX", function()
-	//{
+	publish.addOption("OSX", function()
+	{
 		//TODO <ADD CODE HERE>
-	//}, Interface.file_dir + "icons/platform/osx.png");
-
-	//publish.addOption("Android", function()
-	//{
-		//TODO <ADD CODE HERE>
-	//}, Interface.file_dir + "icons/platform/android.png");
+	}, Interface.file_dir + "icons/platform/osx.png");
 
 	Interface.file.addOption("Exit", function()
 	{
@@ -713,12 +708,12 @@ Interface.initialize = function()
 	Interface.editor.addOption("Copy", function()
 	{
 		Editor.copySelectedObject();
-	});
+	}, Interface.file_dir + "icons/misc/copy.png");
 	
 	Interface.editor.addOption("Cut", function()
 	{
 		Editor.cutSelectedObject();
-	});
+	}, Interface.file_dir + "icons/misc/cut.png");
 
 	Interface.editor.addOption("Paste", function()
 	{

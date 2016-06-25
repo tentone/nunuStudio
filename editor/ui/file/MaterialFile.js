@@ -120,8 +120,6 @@ function MaterialFile(parent)
 		//Try to remove material from drag buffer
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = DragBuffer.popDragElement(uuid);
-
-		this.restoreMaterial();
 	};
 
 	//Drop event

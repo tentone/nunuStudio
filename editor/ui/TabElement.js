@@ -93,9 +93,6 @@ function TabElement(name, icon, closeable, container, index)
 	this.division.visible = false;
 	this.division.element.className = "container";
 	this.division.position.set(0, this.container.options_size.y);
-
-	//Update interface
-	this.updateInterface();
 }
 
 //Function prototypes
@@ -139,7 +136,7 @@ function updateObjectData()
 //Activate this tab
 function activate()
 {
-	if(this.component !== null)
+	if(this.component !== null && this.component.activate !== undefined)
 	{
 		this.component.activate();
 	}

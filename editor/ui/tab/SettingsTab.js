@@ -48,6 +48,9 @@ function SettingsTab(parent)
 	this.general_form = new Form(this.general.division.element);
 	this.general_form.position.set(5, 5);
 	this.general_form.spacing.set(5, 5);
+	this.general.attachComponent(this.general_form);
+
+	//General text
 	this.general_form.addText("General");
 	this.general_form.nextRow();
 	
@@ -68,7 +71,7 @@ function SettingsTab(parent)
 	this.general_form.nextRow();
 
 	//Scene editor
-	this.general_form.addText("Rendering Quality");
+	this.general_form.addText("Scene editor");
 	this.general_form.nextRow();
 
 	//Enable Grid
@@ -131,6 +134,40 @@ function SettingsTab(parent)
 	//Code tab
 	this.code = this.tab.addOption("Code", "editor/files/icons/script/script.png", false);
 	
+	//Code form
+	this.code_form = new Form(this.code.division.element);
+	this.code_form.position.set(5, 5);
+	this.code_form.spacing.set(5, 5);
+	this.code.attachComponent(this.code_form);
+
+	//Code editor text
+	this.code_form.addText("Code Editor");
+	this.code_form.nextRow();
+
+	//Code font size
+	this.code_form.addText("Code size");
+	this.code_font_size = new Numberbox(this.code_form.element);
+	this.code_font_size.size.set(60, 18);
+	this.code_font_size.setOnChange(function()
+	{
+		Settings.code_font_size = self.code_font_size.getValue();
+	});
+	this.code_form.add(this.code_font_size);
+	this.code_form.nextRow();
+
+
+	//Code Theme
+	this.code_form.addText("Editor theme");
+	this.code_theme = new DropdownList(this.code_form.element);
+	this.code_theme.size.set(150, 20);
+	this.code_theme.addValue("Monokai", "monokai.css");
+	this.code_theme.setOnChange(function()
+	{
+		Settings.code_theme = self.code_theme.getValue();
+	});
+	this.code_form.add(this.code_theme);
+	this.code_form.nextRow();
+
 	//About
 	this.about = this.tab.addOption("About", "editor/files/icons/misc/about.png", false);
 	this.about.attachComponent(new AboutTab(this.about.division.element));
@@ -209,7 +246,9 @@ function updateInterface()
 	//Update forms
 	this.general_form.visible = this.visible;
 	this.general_form.updateInterface();
-	
+	this.code_form.visible = this.visible;
+	this.code_form.updateInterface();
+
 	//Update tab
 	this.tab.visible = this.visible;
 	this.tab.size.copy(this.size);
