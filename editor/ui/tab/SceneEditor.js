@@ -83,26 +83,33 @@ function SceneEditor(parent)
 						}
 					}
 				}
-				//If its a dragged material
+				//If its a dragged object
 				else
 				{
+					//Get object from drag buffer
 					var uuid = event.dataTransfer.getData("uuid");
-					var material = DragBuffer.popDragElement(uuid);
+					var dragged_object = DragBuffer.popDragElement(uuid);
 					
-					if(material !== null)
+					//Check if object exists
+					if(dragged_object !== null)
 					{
-						if(material instanceof THREE.SpriteMaterial)
+						//Sprite material
+						if(dragged_object instanceof THREE.SpriteMaterial)
 						{
 							if(object instanceof THREE.Sprite)
 							{
-								object.material = material;
+								object.material = dragged_object;
 								Editor.updateObjectViews();
 							}
 						}
-						if(object instanceof THREE.Mesh)
+						//Material
+						else if(dragged_object instanceof THREE.Material)
 						{
-							object.material = material;
-							Editor.updateObjectViews();
+							if(object instanceof THREE.Mesh)
+							{
+								object.material = dragged_object;
+								Editor.updateObjectViews();
+							}
 						}
 					}
 				}

@@ -23,7 +23,6 @@ nunuStudio is intended to run with NWJS direcly on the desktop, but there are pa
  - Webpage with documentation
  - Audio
  - Physics integration in the UI
- - Mobile and desktop export direcly from editor
 
 ### License
 nunuStudio uses a MIT license (Available on GitHub page)

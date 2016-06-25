@@ -1,18 +1,48 @@
-function TabElement(name, icon, closeable, container, index)
+function TabElement(parent, name, icon, closeable, container, index)
 {
+	//Parent
+	if(parent === undefined)
+	{
+		this.parent = document.body;
+	}
+	else
+	{
+		this.parent = parent;
+	}
+
+	//ID
+	var id = "tab_elem" + TabGroup.id;
+	TabElement.id++;
+
+	//Create element
+	this.element = document.createElement("div");
+	this.element.id = id;
+	this.element.style.position = "absolute";
+	this.element.className = "container";
+
+	//Prevent Drop event
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Prevent deafault when object dragged over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+	
+	//Element atributes
+	this.size = new THREE.Vector2(0,0);
+	this.position = new THREE.Vector2(0,0);
+	this.visible = true;
+
 	//Tab group container information
+	this.closeable = closeable;
 	this.index = index;
 	this.container = container;
 	this.component = null;
-
-	//Tab closeable
-	this.closeable = closeable;
-
-	//Atributes
-	this.size = new THREE.Vector2(0, 0);
-	this.position = new THREE.Vector2(0, 0);
-	this.visible = false;
-
+	
 	//Self pointer
 	var self = this;
 
@@ -20,8 +50,6 @@ function TabElement(name, icon, closeable, container, index)
 	this.button = new Button(this.container.element);
 	this.button.visible = true;
 	this.button.size.set(container.options_size.x, container.options_size.y);
-
-	//Set button as draggable
 	this.button.element.draggable = true;
 	
 	//Set button callback
@@ -88,12 +116,12 @@ function TabElement(name, icon, closeable, container, index)
 	});
 	this.close_button.updateInterface();
 
-	//Division
-	this.division = new Division(this.container.element);
-	this.division.visible = false;
-	this.division.element.className = "container";
-	this.division.position.set(0, this.container.options_size.y);
+	//Add element to document
+	this.parent.appendChild(this.element);
 }
+
+//ID counter
+TabElement.id = 0;
 
 //Function prototypes
 TabElement.prototype.update = update;
@@ -166,7 +194,14 @@ function update()
 //Destroy
 function destroy()
 {
-	this.division.destroy();
+	try
+	{
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
+
+	this.close_button.destroy();
+	this.icon.destroy();
 	this.button.destroy();
 }
 
@@ -175,8 +210,8 @@ function attachComponent(component)
 {
 	this.component = component;
 	this.component.destroy();
-	this.component.parent = this.division.element;
-	this.division.element.appendChild(this.component.element);
+	this.component.parent = this.element;
+	this.element.appendChild(this.component.element);
 }
 
 //Update Interface
@@ -206,33 +241,53 @@ function updateInterface()
 	this.icon.visible = this.container.visible;
 	this.icon.updateInterface();
 
-	//Update division
-	this.division.visible = this.visible && this.container.visible;
-	if(this.container.mode === TabGroup.TOP)
-	{
-		this.division.position.set(0, this.container.options_size.y);
-		this.division.size.set(this.size.x, this.size.y - this.button.size.y);
-	}
-	else if(this.container.mode === TabGroup.LEFT)
-	{
-		this.division.position.set(this.container.options_size.x, 0);
-		this.division.size.set(this.size.x - this.button.size.x, this.size.y);
-	}
-	this.division.updateInterface();
-
-	//Update attached component
-	if(this.component !== null)
-	{
-		this.component.visible = this.visible && this.container.visible;
-		this.component.size.set(this.division.size.x, this.division.size.y);
-		this.component.updateInterface();
-	}
-
-	//Position close button if needed
+	//Update close button
 	if(this.closeable)
 	{
 		this.close_button.visible = this.container.visible;
 		this.close_button.position.set(this.button.size.x - 20, 10);
 		this.close_button.updateInterface();
+	}
+
+	//Set visibility
+	if(this.visible && this.container.visible)
+	{
+		this.element.style.visibility = "visible";
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
+	}
+
+	//Update main element and attached component
+	if(this.container.mode === TabGroup.TOP)
+	{
+		this.element.style.top = this.container.options_size.y + "px";
+		this.element.style.left = "0px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = (this.size.y - this.button.size.y) + "px";
+
+		//Update attached component
+		if(this.component !== null)
+		{
+			this.component.visible = this.visible && this.container.visible;
+			this.component.size.set(this.size.x, this.size.y - this.button.size.y);
+			this.component.updateInterface();
+		}
+	}
+	else if(this.container.mode === TabGroup.LEFT)
+	{
+		this.element.style.top = "0px";
+		this.element.style.left = this.container.options_size.x + "px";
+		this.element.style.width = (this.size.x - this.button.size.x) + "px";
+		this.element.style.height = this.size.y + "px";
+
+		//Update attached component
+		if(this.component !== null)
+		{
+			this.component.visible = this.visible && this.container.visible;
+			this.component.size.set(this.size.x - this.button.size.x, this.size.y);
+			this.component.updateInterface();
+		}
 	}
 }

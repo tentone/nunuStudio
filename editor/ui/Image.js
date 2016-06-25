@@ -36,8 +36,8 @@ function Image(parent)
 	this.img.style.position = "absolute";
 	this.img.style.top = "0px";
 	this.img.style.left = "0px";
-	
-	//Add image to div
+
+	//Add image to element
 	this.element.appendChild(this.img);
 
 	//Element atributes
