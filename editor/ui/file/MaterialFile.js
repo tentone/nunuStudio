@@ -103,6 +103,9 @@ function MaterialFile(parent)
 	//Drag start
 	this.element.ondragstart = function(event)
 	{
+		//Restore material color
+		self.restoreMaterial();
+
 		//Insert material into drag buffer
 		if(self.material !== null)
 		{
@@ -169,7 +172,7 @@ function highlightMaterial()
 		if(this.material.color !== undefined)
 		{
 			this.material_color.copy(this.material.color);
-			this.material.color.setRGB(1, 0, 0);
+			this.material.color.setRGB(1, 1, 0);
 			this.material_highlighted = true;
 		}
 	}

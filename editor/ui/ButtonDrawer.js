@@ -107,13 +107,14 @@ function ButtonDrawer(parent)
 ButtonDrawer.id = 0;
 
 //Functions Prototype
-ButtonDrawer.prototype.setImage = setImage;
-ButtonDrawer.prototype.update = update;
-ButtonDrawer.prototype.updateInterface = updateInterface;
-ButtonDrawer.prototype.destroy = destroy;
-ButtonDrawer.prototype.removeOption = removeOption;
 ButtonDrawer.prototype.addOption = addOption;
+ButtonDrawer.prototype.removeOption = removeOption;
+ButtonDrawer.prototype.setImage = setImage;
+ButtonDrawer.prototype.destroy = destroy;
+ButtonDrawer.prototype.update = update;
 ButtonDrawer.prototype.updatePanelSize = updatePanelSize;
+ButtonDrawer.prototype.updateOptions = updateOptions;
+ButtonDrawer.prototype.updateInterface = updateInterface;
 
 //Remove element
 function destroy()
@@ -130,8 +131,39 @@ function destroy()
 	}
 }
 
-//Update
-function update(){}
+//Add new Option to dropdown menu
+function addOption(image, callback, alt_text)
+{
+	var button = new ButtonImage(this.panel);
+	button.setImage(image);
+	button.visible = this.expanded;
+
+	//Set alt text
+	if(alt_text !== undefined)
+	{
+		button.setAltText(alt_text);
+	}
+
+	//Set button callback
+	var self = this;
+	button.setCallback(function()
+	{
+		callback();
+		self.expanded = false;
+		self.updateInterface();
+	});
+
+	//Add button to drawer
+	this.options.push(button);
+	this.updatePanelSize();
+
+	//Set button
+	button.size.set(this.options_size.x, this.options_size.y);
+	button.image_scale.set(this.options_scale.x, this.options_scale.y);
+	button.position.x = this.options_size.x * ((this.options.length - 1) % this.options_per_line);
+	button.position.y = this.options_size.y * Math.floor((this.options.length - 1) / this.options_per_line);
+	button.updateInterface();
+}
 
 //Remove option from dropdown menu
 function removeOption(index)
@@ -145,40 +177,35 @@ function removeOption(index)
 	}
 }
 
-//Add new Option to dropdown menu
-function addOption(image, callback)
-{
-	var button = new ButtonImage(this.panel);
-	button.setImage(image);
-	button.visible = this.expanded;
-	button.updateInterface();
-	
-	var self = this;
-	button.setCallback(function()
-	{
-		callback();
-		button.element.className = "button";
-		self.expanded = false;
-		self.updateInterface();
-	});
-	
-	this.options.push(button);
-	this.updatePanelSize();
-	this.updateInterface();
-}
-
-//Set ButtonDrawer
+//Set button draw icon image
 function setImage(image)
 {
 	this.image = image;
 	this.img.src = this.image;
 }
 
+//Update
+function update(){}
+
 //Updates drawer panel size
 function updatePanelSize()
 {
 	this.panel_size.x = (this.options_size.x * this.options_per_line);
-	this.panel_size.y = (this.options_size.y * (Math.floor((this.options.length-1) / this.options_per_line)+1) );
+	this.panel_size.y = (this.options_size.y * (Math.floor((this.options.length - 1) / this.options_per_line) + 1));
+}
+
+//Update drawer options position and size (should be called after change in options displacement variables)
+function updateOptions()
+{
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].size.set(this.options_size.x, this.options_size.y);
+		this.options[i].image_scale.set(this.options_scale.x, this.options_scale.y);
+		this.options[i].position.x = this.options_size.x * (i % this.options_per_line);
+		this.options[i].position.y = this.options_size.y * Math.floor(i / this.options_per_line);
+		this.options[i].visible = (this.expanded && this.visible);
+		this.options[i].updateInterface();
+	}
 }
 
 //Update Interface
@@ -191,12 +218,7 @@ function updateInterface()
 	//Update options
 	for(var i = 0; i < this.options.length; i++)
 	{
-		this.options[i].size.set(this.options_size.x, this.options_size.y);
-		this.options[i].image_scale.set(this.options_scale.x, this.options_scale.y);
-		this.options[i].position.x = this.options_size.x * (i % this.options_per_line);
-		this.options[i].position.y = this.options_size.y * Math.floor(i / this.options_per_line);
-		this.options[i].visible = (this.expanded && this.visible);
-		this.options[i].updateInterface();
+		this.options[i].setVisibility(this.expanded && this.visible);
 	}
 
 	//Set Visibility
