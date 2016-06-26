@@ -90,7 +90,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.6.5 Pre-Alpha";
-Editor.TIMESTAMP = "201606252157";
+Editor.TIMESTAMP = "201606260329";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -575,20 +575,12 @@ Editor.update = function()
 					{
 						speed = -0.03;
 					}
-					else if(speed < -5)
-					{
-						speed = -5;
-					}
 				}
 				else if(speed > 0)
 				{
 					if(speed < 0.03)
 					{
 						speed = 0.03;
-					}
-					else if(speed > 5)
-					{
-						speed = 5;
 					}
 				}
 

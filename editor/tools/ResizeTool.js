@@ -18,11 +18,11 @@ function ResizeTool()
 	this.material_white = new THREE.MeshBasicMaterial({color: 0xffffff});
 
 	//X
-	var geometry = new THREE.CylinderGeometry(0.015, 0.015, 1, 5);
+	var geometry = new THREE.CylinderBufferGeometry(0.015, 0.015, 1, 5);
 	var mesh = new THREE.Mesh(geometry, this.material_red);
 	mesh.position.set(0, 0.5, 0);
 	this.x.add(mesh);
-	geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+	geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
 	mesh = new THREE.Mesh(geometry, this.material_red);
 	mesh.position.set(0, 1, 0);
 	this.x.add(mesh);
@@ -30,21 +30,21 @@ function ResizeTool()
 	this.x.updateMatrix();
 
 	//Y
-	geometry = new THREE.CylinderGeometry(0.015, 0.015, 1, 5);
+	geometry = new THREE.CylinderBufferGeometry(0.015, 0.015, 1, 5);
 	mesh = new THREE.Mesh(geometry, this.material_green);
 	mesh.position.set(0, 0.5, 0);
 	this.y.add(mesh);
-	geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+	geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
 	mesh = new THREE.Mesh(geometry, this.material_green);
 	mesh.position.set(0, 1, 0);
 	this.y.add(mesh);
 
 	//Z
-	geometry = new THREE.CylinderGeometry(0.015, 0.015, 1, 5);
+	geometry = new THREE.CylinderBufferGeometry(0.015, 0.015, 1, 5);
 	mesh = new THREE.Mesh(geometry, this.material_blue);
 	mesh.position.set(0, 0.5, 0);
 	this.z.add(mesh);
-	geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+	geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
 	mesh = new THREE.Mesh(geometry, this.material_blue);
 	mesh.position.set(0, 1, 0);
 	this.z.add(mesh);
@@ -52,7 +52,7 @@ function ResizeTool()
 	this.z.updateMatrix();
 	
 	//Center
-	geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+	geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
 	this.block = new THREE.Mesh(geometry, this.material_yellow);
 	
 	//Disable auto matrix update

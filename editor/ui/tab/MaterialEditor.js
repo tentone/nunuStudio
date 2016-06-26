@@ -71,7 +71,7 @@ function MaterialEditor(parent)
 	this.material = null;
 
 	//Material renderer and scene
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: true});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.antialiasing});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 	this.renderer.shadowMap.enabled = true;
 	this.renderer.shadowMap.type = THREE.PCFShadowMap;

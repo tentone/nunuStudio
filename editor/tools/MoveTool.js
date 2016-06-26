@@ -10,74 +10,86 @@ function MoveTool()
 
 	var pid2 = Math.PI / 2;
 
-	//Material
+	//Materials
 	this.material_red = new THREE.MeshBasicMaterial({color: 0xff0000});
 	this.material_green = new THREE.MeshBasicMaterial({color: 0x00ff00});
 	this.material_blue = new THREE.MeshBasicMaterial({color: 0x0000ff});
 	this.material_yellow = new THREE.MeshBasicMaterial({color: 0xffff00});
+	var material_invisible = new THREE.MeshBasicMaterial();
+	material_invisible.opacity = 0;
+	material_invisible.transparent = true;
+	material_invisible.needsUpdate = true;
+
+	//Geometries
+	var cylinder_geometry = new THREE.CylinderBufferGeometry(0.01, 0.01, 1, 5);
+	var cylinder_geometry_big = new THREE.CylinderBufferGeometry(0.1, 0.1, 1, 5);
+	var cone_geomtry = new THREE.ConeBufferGeometry(0.05, 0.15, 8);
 
 	//X
-	var geometry = new THREE.CylinderGeometry(0.015, 0.015, 1, 5);
-	var mesh = new THREE.Mesh(geometry, this.material_red);
+	var mesh = new THREE.Mesh(cylinder_geometry, this.material_red);
 	mesh.matrixAutoUpdate = false;
 	mesh.position.set(0, 0.5, 0);
 	mesh.updateMatrix();
 	this.x.add(mesh);
-	geometry = new THREE.CylinderGeometry(0, 0.05, 0.15, 8);
-	mesh = new THREE.Mesh(geometry, this.material_red);
+	mesh = new THREE.Mesh(cone_geomtry, this.material_red);
 	mesh.matrixAutoUpdate = false;
 	mesh.position.set(0, 1, 0);
+	mesh.updateMatrix();
+	this.x.add(mesh);
+	mesh = new THREE.Mesh(cylinder_geometry_big, material_invisible);
+	mesh.matrixAutoUpdate = false;
+	mesh.position.set(0, 0.5, 0);
 	mesh.updateMatrix();
 	this.x.add(mesh);
 	this.x.rotateOnAxis(new THREE.Vector3(0,0,1) , -pid2);
 	this.x.updateMatrix();
+	this.x.matrixAutoUpdate = false;
 
 	//Y
-	geometry = new THREE.CylinderGeometry(0.015, 0.015, 1, 5);
-	mesh = new THREE.Mesh(geometry, this.material_green);
+	mesh = new THREE.Mesh(cylinder_geometry, this.material_green);
 	mesh.position.set(0, 0.5, 0);
 	mesh.updateMatrix();
 	this.y.add(mesh);
-	geometry = new THREE.CylinderGeometry(0, 0.05, 0.15, 8);
-	mesh = new THREE.Mesh(geometry, this.material_green);
+	mesh = new THREE.Mesh(cone_geomtry, this.material_green);
 	mesh.position.set(0, 1, 0);
 	mesh.updateMatrix();
 	this.y.add(mesh);
+	mesh = new THREE.Mesh(cylinder_geometry_big, material_invisible);
+	mesh.matrixAutoUpdate = false;
+	mesh.position.set(0, 0.5, 0);
+	mesh.updateMatrix();
+	this.y.add(mesh);
+	this.y.matrixAutoUpdate = false;
 
 	//Z
-	geometry = new THREE.CylinderGeometry(0.015, 0.015, 1, 5);
-	mesh = new THREE.Mesh(geometry, this.material_blue);
+	mesh = new THREE.Mesh(cylinder_geometry, this.material_blue);
 	mesh.matrixAutoUpdate = false;
 	mesh.position.set(0, 0.5, 0);
 	mesh.updateMatrix();
 	this.z.add(mesh);
-	geometry = new THREE.CylinderGeometry(0, 0.05, 0.15, 8);
-	mesh = new THREE.Mesh(geometry, this.material_blue);
+	mesh = new THREE.Mesh(cone_geomtry, this.material_blue);
 	mesh.matrixAutoUpdate = false;
 	mesh.position.set(0, 1, 0);
+	mesh.updateMatrix();
+	this.z.add(mesh);
+	mesh = new THREE.Mesh(cylinder_geometry_big, material_invisible);
+	mesh.matrixAutoUpdate = false;
+	mesh.position.set(0, 0.5, 0);
 	mesh.updateMatrix();
 	this.z.add(mesh);
 	this.z.rotateOnAxis(new THREE.Vector3(1,0,0), pid2);
 	this.z.updateMatrix();
-	
-	//Center
-	geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
-	this.block = new THREE.Mesh(geometry, this.material_yellow);
+	this.z.matrixAutoUpdate = false;
+
+	//Center Block
+	this.block = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.1, 0.1), this.material_yellow);
 	this.block.matrixAutoUpdate = false;
 
-	//Add to super
+	//Add
 	this.add(this.x);
 	this.add(this.y);
 	this.add(this.z);
 	this.add(this.block);
-
-	//Disable auto matrix update
-	this.x.updateMatrix();
-	this.x.matrixAutoUpdate = false;
-	this.y.updateMatrix();
-	this.y.matrixAutoUpdate = false;
-	this.z.updateMatrix();
-	this.z.matrixAutoUpdate = false;
 }
 
 //Functions Prototype

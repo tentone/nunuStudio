@@ -144,10 +144,24 @@ function SettingsTab(parent)
 	this.code_form.addText("Code Editor");
 	this.code_form.nextRow();
 
+	//Code Theme
+	this.code_form.addText("Editor theme");
+	this.code_theme = new DropdownList(this.code_form.element);
+	this.code_theme.size.set(150, 20);
+	this.code_theme.addValue("Monokai", "monokai");
+	this.code_theme.setOnChange(function()
+	{
+		Settings.code_theme = self.code_theme.getValue();
+	});
+	this.code_form.add(this.code_theme);
+	this.code_form.nextRow();
+
 	//Code font size
 	this.code_form.addText("Code size");
 	this.code_font_size = new Numberbox(this.code_form.element);
 	this.code_font_size.size.set(60, 18);
+	this.code_font_size.setRange(5, 99999);
+	this.code_font_size.setStep(1);
 	this.code_font_size.setOnChange(function()
 	{
 		Settings.code_font_size = self.code_font_size.getValue();
@@ -155,17 +169,14 @@ function SettingsTab(parent)
 	this.code_form.add(this.code_font_size);
 	this.code_form.nextRow();
 
-
-	//Code Theme
-	this.code_form.addText("Editor theme");
-	this.code_theme = new DropdownList(this.code_form.element);
-	this.code_theme.size.set(150, 20);
-	this.code_theme.addValue("Monokai", "monokai.css");
-	this.code_theme.setOnChange(function()
+	this.code_line_numbers = new Checkbox(this.code_form.element);
+	this.code_line_numbers.setText("Show Line Numbers");
+	this.code_line_numbers.size.set(200, 16);
+	this.code_line_numbers.setOnChange(function()
 	{
-		Settings.code_theme = self.code_theme.getValue();
+		Settings.code_line_numbers = self.code_line_numbers.getValue();
 	});
-	this.code_form.add(this.code_theme);
+	this.code_form.add(this.code_line_numbers);
 	this.code_form.nextRow();
 
 	//About
@@ -202,12 +213,16 @@ function activate()
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
 
-	//Update UI elements
+	//General elements
 	this.grid_enabled.setValue(Settings.grid_enabled);
 	this.axis_enabled.setValue(Settings.axis_enabled);
 	this.shadows_type.setValue(Settings.shadows_type);
 	this.antialiasing.setValue(Settings.antialiasing);
 
+	//Code elements
+	this.code_theme.setValue(Settings.code_theme);
+	this.code_font_size.setValue(Settings.code_font_size);
+	this.code_line_numbers.setValue(Settings.code_line_numbers);
 }
 
 //Remove element
