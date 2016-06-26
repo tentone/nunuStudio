@@ -3,67 +3,71 @@ function ResizeTool()
 	//Super
 	THREE.Object3D.call(this);
 
-	//Move components
-	this.x = new THREE.Scene();
-	this.y = new THREE.Scene();
-	this.z = new THREE.Scene();
-
 	var pid2 = Math.PI / 2;
 
-	//Material
+	//Materials
 	this.material_red = new THREE.MeshBasicMaterial({color: 0xff0000});
 	this.material_green = new THREE.MeshBasicMaterial({color: 0x00ff00});
 	this.material_blue = new THREE.MeshBasicMaterial({color: 0x0000ff});
 	this.material_yellow = new THREE.MeshBasicMaterial({color: 0xffff00});
 	this.material_white = new THREE.MeshBasicMaterial({color: 0xffffff});
+	var material_invisible = new THREE.MeshBasicMaterial();
+	material_invisible.opacity = 0;
+	material_invisible.transparent = true;
+	material_invisible.needsUpdate = true;
+
+	//Geometries
+	var cylinder_geometry = new THREE.CylinderBufferGeometry(0.01, 0.01, 1, 5);
+	var cylinder_geometry_big = new THREE.CylinderBufferGeometry(0.15, 0.15, 1, 5);
+	var box_geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
 
 	//X
-	var geometry = new THREE.CylinderBufferGeometry(0.015, 0.015, 1, 5);
-	var mesh = new THREE.Mesh(geometry, this.material_red);
+	this.x = new THREE.Scene();
+	var mesh = new THREE.Mesh(cylinder_geometry, this.material_red);
 	mesh.position.set(0, 0.5, 0);
 	this.x.add(mesh);
-	geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
-	mesh = new THREE.Mesh(geometry, this.material_red);
+	mesh = new THREE.Mesh(box_geometry, this.material_red);
 	mesh.position.set(0, 1, 0);
 	this.x.add(mesh);
+	mesh = new THREE.Mesh(cylinder_geometry_big, material_invisible);
+	mesh.position.set(0, 0.5, 0);
+	this.x.add(mesh);
 	this.x.rotateOnAxis(new THREE.Vector3(0,0,1) , -pid2);
+	this.x.matrixAutoUpdate = false;
 	this.x.updateMatrix();
 
 	//Y
-	geometry = new THREE.CylinderBufferGeometry(0.015, 0.015, 1, 5);
-	mesh = new THREE.Mesh(geometry, this.material_green);
+	this.y = new THREE.Scene();
+	mesh = new THREE.Mesh(cylinder_geometry, this.material_green);
 	mesh.position.set(0, 0.5, 0);
 	this.y.add(mesh);
-	geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
-	mesh = new THREE.Mesh(geometry, this.material_green);
+	mesh = new THREE.Mesh(box_geometry, this.material_green);
 	mesh.position.set(0, 1, 0);
 	this.y.add(mesh);
+	mesh = new THREE.Mesh(cylinder_geometry_big, material_invisible);
+	mesh.position.set(0, 0.5, 0);
+	this.y.add(mesh);
+	this.y.matrixAutoUpdate = false;
 
 	//Z
-	geometry = new THREE.CylinderBufferGeometry(0.015, 0.015, 1, 5);
-	mesh = new THREE.Mesh(geometry, this.material_blue);
+	this.z = new THREE.Scene();
+	mesh = new THREE.Mesh(cylinder_geometry, this.material_blue);
 	mesh.position.set(0, 0.5, 0);
 	this.z.add(mesh);
-	geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
-	mesh = new THREE.Mesh(geometry, this.material_blue);
+	mesh = new THREE.Mesh(box_geometry, this.material_blue);
 	mesh.position.set(0, 1, 0);
 	this.z.add(mesh);
+	mesh = new THREE.Mesh(cylinder_geometry_big, material_invisible);
+	mesh.position.set(0, 0.5, 0);
+	this.z.add(mesh);
 	this.z.rotateOnAxis(new THREE.Vector3(1,0,0), pid2);
+	this.z.matrixAutoUpdate = false;
 	this.z.updateMatrix();
 	
 	//Center
-	geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
-	this.block = new THREE.Mesh(geometry, this.material_yellow);
-	
-	//Disable auto matrix update
-	this.x.updateMatrix();
-	this.x.matrixAutoUpdate = false;
-	this.y.updateMatrix();
-	this.y.matrixAutoUpdate = false;
-	this.z.updateMatrix();
-	this.z.matrixAutoUpdate = false;
-	this.block.updateMatrix();
+	this.block = new THREE.Mesh(box_geometry, this.material_yellow);
 	this.block.matrixAutoUpdate = false;
+	this.block.updateMatrix();
 	
 	//Add to super
 	this.add(this.x);

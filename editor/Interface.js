@@ -862,7 +862,7 @@ Interface.updateInterface = function()
 	Interface.tab.size.x = (size.x - Interface.tool_bar.size.x - Interface.explorer.size.x);
 	Interface.tab.size.y = (size.y - Interface.top_bar.size.y - Interface.asset_explorer_div.size.y); 
 	Interface.tab.updateInterface();
-	
+
 	Interface.empty_tab_text.updateInterface();
 
 	//Resize editor camera

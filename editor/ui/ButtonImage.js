@@ -19,18 +19,6 @@ function ButtonImage(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 
-	//Prevent Drop event
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
-
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.position = "absolute";
@@ -61,7 +49,7 @@ function ButtonImage(parent)
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
-		self.element.className = "button";
+		self.element.className = "";
 	};
 
 	//Add element to document
@@ -79,6 +67,7 @@ ButtonImage.prototype.setCallback = setCallback;
 ButtonImage.prototype.destroy = destroy;
 ButtonImage.prototype.setAltText = setAltText;
 ButtonImage.prototype.setClass = setClass;
+ButtonImage.prototype.setVisibility = setVisibility;
 
 //Remove element
 function destroy()
@@ -107,9 +96,27 @@ function setImage(image)
 }
 
 //Set alt text
-function setAltText(text)
+function setAltText(alt_text)
 {
-	this.img.alt = text;
+	var text = new Text(this.element);
+	text.setText(alt_text);
+	text.fit_content = true;
+	text.visible = false;
+
+	//Mouse mouse move event
+	this.element.onmousemove = function(event)
+	{
+		text.position.set(event.offsetX - text.size.x/2, event.offsetY - 15);
+		text.visible = true;
+		text.updateInterface();
+	};
+
+	//Mouse out event (to avoid overlap with mouse leave event)
+	this.element.onmouseout = function()
+	{
+		text.visible = false;
+		text.updateInterface();
+	}
 }
 
 //Set element class
@@ -118,23 +125,47 @@ function setClass(name)
 	this.element.className = name;
 }
 
-//Update Interface
-function updateInterface()
+//Set button image visibility
+function setVisibility(visible)
 {
+	this.visible = visible;
+
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+		this.img.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
+		this.img.style.visibility = "hidden";
+	}
+}
+
+//Update Interface
+function updateInterface()
+{
+	//Update visibility
+	if(this.visible)
+	{
+		this.element.style.visibility = "visible";
+		this.img.style.visibility = "visible";
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
+		this.img.style.visibility = "hidden";
 	}
 
+	//Update image
 	this.img.width = this.size.x * this.image_scale.x;
 	this.img.height = this.size.y * this.image_scale.y;
+	this.img.style.width = (this.size.x * this.image_scale.x) + "px";
+	this.img.style.height = (this.size.y * this.image_scale.y) + "px";
 	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
 	
+	//Update main element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

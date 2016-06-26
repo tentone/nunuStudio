@@ -3,11 +3,6 @@ function MoveTool()
 	//Super
 	THREE.Object3D.call(this);
 
-	//Move components
-	this.x = new THREE.Scene();
-	this.y = new THREE.Scene();
-	this.z = new THREE.Scene();
-
 	var pid2 = Math.PI / 2;
 
 	//Materials
@@ -22,10 +17,11 @@ function MoveTool()
 
 	//Geometries
 	var cylinder_geometry = new THREE.CylinderBufferGeometry(0.01, 0.01, 1, 5);
-	var cylinder_geometry_big = new THREE.CylinderBufferGeometry(0.1, 0.1, 1, 5);
+	var cylinder_geometry_big = new THREE.CylinderBufferGeometry(0.15, 0.15, 1, 5);
 	var cone_geomtry = new THREE.ConeBufferGeometry(0.05, 0.15, 8);
 
 	//X
+	this.x = new THREE.Scene();
 	var mesh = new THREE.Mesh(cylinder_geometry, this.material_red);
 	mesh.matrixAutoUpdate = false;
 	mesh.position.set(0, 0.5, 0);
@@ -46,6 +42,7 @@ function MoveTool()
 	this.x.matrixAutoUpdate = false;
 
 	//Y
+	this.y = new THREE.Scene();
 	mesh = new THREE.Mesh(cylinder_geometry, this.material_green);
 	mesh.position.set(0, 0.5, 0);
 	mesh.updateMatrix();
@@ -62,6 +59,7 @@ function MoveTool()
 	this.y.matrixAutoUpdate = false;
 
 	//Z
+	this.z = new THREE.Scene();
 	mesh = new THREE.Mesh(cylinder_geometry, this.material_blue);
 	mesh.matrixAutoUpdate = false;
 	mesh.position.set(0, 0.5, 0);

@@ -65,8 +65,12 @@ function ParticleEditor(parent)
 	this.scene = new Scene();
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x444444));
-	this.scene.add(new THREE.GridHelper(50, 50, 1));
-	this.scene.add(new THREE.AxisHelper(50));
+	var grid = new THREE.GridHelper(50, 50, 1);
+	grid.material.depthWrite = false;
+	this.scene.add(grid);
+	var axis = new THREE.AxisHelper(50);
+	axis.material.depthWrite = false;
+	this.scene.add(axis);
 
 	//Particle
 	this.particle = null;
