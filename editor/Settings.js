@@ -16,5 +16,6 @@ Settings.shadows_type = THREE.PCFSoftShadowMap;
 Settings.antialiasing = true;
 
 //Code editor settings
-Settings.code_font_size = 14;
 Settings.code_theme = "monokai";
+Settings.code_font_size = 14;
+Settings.code_line_numbers = true;

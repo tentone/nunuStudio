@@ -21,7 +21,7 @@ function CodeEditor(parent)
 	this.element.className = "container";
 
 	//Codemirror editor
-	this.code = new CodeMirror(this.element, {value:"", lineNumbers:true, indentWithTabs:true, indentUnit:4, tabSize:4, mode:"javascript"});
+	this.code = new CodeMirror(this.element, {value: "", lineNumbers: Settings.code_line_numbers, indentWithTabs: true, indentUnit: 4, tabSize: 4, mode: "javascript"});
 	this.code.setOption("theme", Settings.code_theme);
 	this.code.setOption("mode", "javascript");
 	
@@ -115,9 +115,16 @@ CodeEditor.prototype.setFontSize = setFontSize;
 //Set code editor font size
 function setFontSize(size)
 {
+	if(size < 5)
+	{
+		size = 5;
+	}
+
 	this.font_size = size;
 	this.code.display.wrapper.style.fontSize = size + "px";
 	this.code.refresh();
+
+	Settings.code_font_size = this.font_size;
 }
 
 //Update container object data
@@ -133,7 +140,8 @@ function updateMetadata(container)
 function activate()
 {
 	this.updateScript();
-
+	this.setFontSize(Settings.code_font_size);
+	
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
 }
@@ -190,11 +198,6 @@ function update()
 		if(Mouse.wheel !== 0)
 		{
 			this.font_size -= Mouse.wheel/100;
-			if(this.font_size < 5)
-			{
-				this.font_size = 5;
-			}
-
 			this.setFontSize(this.font_size);
 		}
 	}

@@ -431,7 +431,7 @@ Interface.initialize = function()
 	//Pyramid
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cone.png", function()
 	{
-		var geometry = new THREE.CylinderBufferGeometry(0, 1, 2, 32);
+		var geometry = new THREE.ConeBufferGeometry(1, 2, 32);
 		var model = new Model3D(geometry, Editor.default_material);
 		model.receiveShadow = true;
 		model.castShadow = true;

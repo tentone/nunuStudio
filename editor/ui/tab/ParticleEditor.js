@@ -57,16 +57,15 @@ function ParticleEditor(parent)
 	this.visible = true;
 
 	//Particle renderer and scene
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: true});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.antialiasing});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.renderer.shadowMap.enabled = true;
-	this.renderer.shadowMap.type = THREE.PCFShadowMap;
+	this.renderer.shadowMap.enabled = false;
 	
 	//Particle preview scene
 	this.scene = new Scene();
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x444444));
-	this.scene.add(new THREE.GridHelper(50, 1));
+	this.scene.add(new THREE.GridHelper(50, 50, 1));
 	this.scene.add(new THREE.AxisHelper(50));
 
 	//Particle

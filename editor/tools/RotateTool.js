@@ -12,27 +12,27 @@ function RotateTool()
 	this.material_white = new THREE.MeshBasicMaterial({color: 0xffffff});
 
 	//X
-	var geometry = new THREE.TorusGeometry(1, 0.015, 5, 64);
+	var geometry = new THREE.TorusBufferGeometry(1, 0.015, 5, 64);
 	this.x = new THREE.Mesh(geometry, this.material_red);
 	this.x.matrixAutoUpdate = false;
 	this.x.rotateOnAxis(new THREE.Vector3(0,1,0), pid2);
 	this.x.updateMatrix();
 
 	//Y
-	geometry = new THREE.TorusGeometry(1, 0.015, 5, 64);
+	geometry = new THREE.TorusBufferGeometry(1, 0.015, 5, 64);
 	this.y = new THREE.Mesh(geometry, this.material_green);
 	this.y.matrixAutoUpdate = false;
 	this.y.rotateOnAxis(new THREE.Vector3(1,0,0), pid2);
 	this.y.updateMatrix();
 
 	//Z
-	geometry = new THREE.TorusGeometry(1, 0.015, 5, 64);
+	geometry = new THREE.TorusBufferGeometry(1, 0.015, 5, 64);
 	this.z = new THREE.Mesh(geometry, this.material_blue);
 	this.z.matrixAutoUpdate = false;
 	this.z.updateMatrix();
 
 	//Center
-	geometry = new THREE.SphereGeometry(0.05, 8, 8);
+	geometry = new THREE.SphereBufferGeometry(0.05, 8, 8);
 	this.center = new THREE.Mesh(geometry, this.material_white);
 	this.center.matrixAutoUpdate = false;
 
