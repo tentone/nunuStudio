@@ -1,3 +1,5 @@
+"use strict";
+
 //Based on VRControl created by dmarcos (https://github.com/dmarcos) and mrdoob (http://mrdoob.com)
 function VRControls(object, onError)
 {

@@ -42,6 +42,13 @@ Slider.prototype.setValue = setValue;
 Slider.prototype.setOnChange = setOnChange;
 Slider.prototype.setRange = setRange;
 Slider.prototype.setStep = setStep;
+Slider.prototype.setDisabled = setDisabled;
+
+//Set if element if disabled
+function setDisabled(value)
+{
+	this.element.disabled = value;
+}
 
 //Set slider min step
 function setStep(step)

@@ -1,3 +1,6 @@
+"use strict";
+
+//Bone constructor
 function Bone()
 {
 	THREE.Bone.call(this);
@@ -5,8 +8,8 @@ function Bone()
 	this.name = "bone";
 }
 
+//Bone Methods
 Bone.prototype = Object.create(THREE.Bone.prototype);
-
 Bone.prototype.update = update;
 Bone.prototype.initialize = initialize;
 

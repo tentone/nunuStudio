@@ -42,6 +42,13 @@ DropdownList.prototype.addValue = addValue;
 DropdownList.prototype.setOnChange = setOnChange;
 DropdownList.prototype.getSelectedIndex = getSelectedIndex;
 DropdownList.prototype.setSelectedIndex = setSelectedIndex;
+DropdownList.prototype.setDisabled = setDisabled;
+
+//Set if element if disabled
+function setDisabled(value)
+{
+	this.element.disabled = value;
+}
 
 //Set onchange callback
 function setOnChange(callback)

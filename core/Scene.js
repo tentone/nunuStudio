@@ -1,3 +1,6 @@
+"use strict";
+
+//Scene constructor
 function Scene()
 {
 	THREE.Scene.call(this);

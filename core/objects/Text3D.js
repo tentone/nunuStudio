@@ -14,6 +14,8 @@ function Text3D(text, material, font)
 	this.name = "text";
 	this.type = "Text3D";
 
+	this.scale.set(0.01, 0.01, 0.01);
+
 	this.text = text;
 }
 

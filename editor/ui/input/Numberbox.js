@@ -42,6 +42,13 @@ Numberbox.prototype.setValue = setValue;
 Numberbox.prototype.setStep = setStep;
 Numberbox.prototype.setRange = setRange;
 Numberbox.prototype.setOnChange = setOnChange;
+Numberbox.prototype.setDisabled = setDisabled;
+
+//Set if element if disabled
+function setDisabled(value)
+{
+	this.element.disabled = value;
+}
 
 //Set numberbox range
 function setRange(min, max)

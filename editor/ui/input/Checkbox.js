@@ -51,6 +51,13 @@ Checkbox.prototype.setOnChange = setOnChange;
 Checkbox.prototype.setText = setText;
 Checkbox.prototype.getValue = getValue;
 Checkbox.prototype.setValue = setValue;
+Checkbox.prototype.setDisabled = setDisabled;
+
+//Set if element if disabled
+function setDisabled(value)
+{
+	this.checkbox.disabled = value;
+}
 
 //Set checkbox value
 function setValue(value)

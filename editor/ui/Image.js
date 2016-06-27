@@ -33,6 +33,7 @@ function Image(parent)
 
 	//Image
 	this.img = document.createElement("img");
+	this.img.style.pointerEvents = "none";
 	this.img.style.position = "absolute";
 	this.img.style.top = "0px";
 	this.img.style.left = "0px";

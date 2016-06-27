@@ -1,3 +1,6 @@
+"use strict";
+
+//Texture constructor
 function Texture(url)
 {
 	//Create image element

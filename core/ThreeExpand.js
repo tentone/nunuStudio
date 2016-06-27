@@ -1,3 +1,5 @@
+"use strict";
+
 //Object3D changes
 THREE.Object3D.prototype.folded = false;
 THREE.Object3D.prototype.hidden = false;

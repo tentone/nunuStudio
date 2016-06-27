@@ -21,6 +21,7 @@ function ButtonImage(parent)
 
 	//Image
 	this.img = document.createElement("img");
+	this.img.style.pointerEvents = "none";
 	this.img.style.position = "absolute";
 	this.img.style.top = "0px";
 	this.img.style.left = "0px";
@@ -99,14 +100,18 @@ function setImage(image)
 function setAltText(alt_text)
 {
 	var text = new Text(this.element);
+	text.element.style.background = "#222222";
+	text.element.style.zIndex = "300";
 	text.setText(alt_text);
-	text.fit_content = true;
 	text.visible = false;
+
+	text.updateInterface();
 
 	//Mouse mouse move event
 	this.element.onmousemove = function(event)
 	{
-		text.position.set(event.offsetX - text.size.x/2, event.offsetY - 15);
+		text.size.set(text.span.clientWidth + 20, 20);
+		text.position.set(event.offsetX - text.size.x/2, event.offsetY - 30);
 		text.visible = true;
 		text.updateInterface();
 	};
@@ -160,8 +165,6 @@ function updateInterface()
 	//Update image
 	this.img.width = this.size.x * this.image_scale.x;
 	this.img.height = this.size.y * this.image_scale.y;
-	this.img.style.width = (this.size.x * this.image_scale.x) + "px";
-	this.img.style.height = (this.size.y * this.image_scale.y) + "px";
 	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
 	

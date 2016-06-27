@@ -1,3 +1,5 @@
+"use strict";
+
 //Object tools contains some object managing helpers
 function ObjectUtils(){}
 

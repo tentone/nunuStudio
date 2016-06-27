@@ -1,4 +1,3 @@
-//Enable strict mode
 "use strict";
 
 //External libs

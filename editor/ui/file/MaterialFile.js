@@ -82,7 +82,8 @@ function MaterialFile(parent)
 			{
 				if(confirm("Delete material?"))
 				{
-					//TODO <ADD CODE HERE>	
+					Editor.program.removeMaterial(self.material, Editor.default_material, Editor.default_sprite_material);
+					Editor.updateObjectViews();
 				}
 			}
 		});
