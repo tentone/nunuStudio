@@ -1,3 +1,6 @@
+"use strict";
+
+//Program constructor
 function Program(name, description, author, version, vr)
 {
 	THREE.Object3D.call(this);
@@ -68,7 +71,6 @@ Program.prototype.dispose = dispose;
 Program.prototype.addMaterial = addMaterial;
 Program.prototype.removeMaterial = removeMaterial;
 Program.prototype.addTexture = addTexture;
-Program.prototype.removeTexture = removeTexture;
 
 //Scene manipulation
 Program.prototype.setScene = setScene;
@@ -89,7 +91,25 @@ function removeMaterial(material, default_material, default_material_sprite)
 {
 	if(material instanceof THREE.Material)
 	{
-		//TODO <ADD CODE HERE>
+		delete this.materials[material.uuid];
+		
+		this.traverse(function(child)
+		{
+			if(child.material !== undefined)
+			{
+				if(child.material.uuid === material.uuid)
+				{
+					if(child instanceof THREE.Sprite)
+					{
+						child.material = default_material_sprite;
+					}
+					else
+					{
+						child.material = default_material;
+					}
+				}
+			}
+		});
 	}
 }
 
@@ -97,12 +117,6 @@ function removeMaterial(material, default_material, default_material_sprite)
 function addTexture(texture)
 {
  	this.textures[texture.uuid] = texture;
-}
-
-//Remove texture from textures list
-function removeTexture(texture, default_texture)
-{
-	//TODO <ADD CODE HERE>
 }
 
 //Set actual scene (to be used in runtime)
@@ -263,12 +277,12 @@ function toJSON(meta)
 	{
 		var textures = self.textures;
 		var materials = self.materials;
+		var geometries = self.geometries;
 
 		//Store textures
 		for(var i in textures)
 		{
 			var texture = textures[i];
-
 			if(meta.textures[texture.uuid] === undefined)
 			{
 				meta.textures[texture.uuid] = texture.toJSON(meta);
@@ -279,10 +293,19 @@ function toJSON(meta)
 		for(var i in materials)
 		{
 			var material = materials[i];
-
 			if(meta.materials[material.uuid] === undefined)
 			{
 				meta.materials[material.uuid] = material.toJSON(meta);
+			}
+		}
+
+		//Store geometries
+		for(var i in geometries)
+		{
+			var geometry = geometries[i];
+			if(meta.geometries[geometry.uuid] === undefined)
+			{
+				meta.geometries[geometry.uuid] = geometry.toJSON(meta);
 			}
 		}
 	});

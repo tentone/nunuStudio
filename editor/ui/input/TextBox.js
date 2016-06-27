@@ -39,6 +39,13 @@ Textbox.prototype.destroy = destroy;
 Textbox.prototype.setText = setText;
 Textbox.prototype.getText = getText;
 Textbox.prototype.setOnChange = setOnChange;
+Textbox.prototype.setDisabled = setDisabled;
+
+//Set if element if disabled
+function setDisabled(value)
+{
+	this.element.disabled = value;
+}
 
 //Set onchange callback
 function setOnChange(callback)

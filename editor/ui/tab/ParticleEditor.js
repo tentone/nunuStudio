@@ -161,7 +161,7 @@ function ParticleEditor(parent)
 	//Particle Count
 	this.form.addText("Particle Count");
 	this.particleCount = new Numberbox(this.form.element);
-	this.particleCount.size.set(100, 18);
+	this.particleCount.size.set(120, 18);
 	this.particleCount.setOnChange(function()
 	{
 		var particleCount = self.particleCount.getValue();
@@ -169,6 +169,65 @@ function ParticleEditor(parent)
 		self.particle_runtime.emitter.particleCount = particleCount;
 	});
 	this.form.add(this.particleCount);
+	this.form.nextRow();
+
+	//Particle Duration
+	this.form.addText("Duration");
+	this.duration = new Numberbox(this.form.element);
+	this.duration.size.set(120, 18);
+	this.duration.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.duration.setOnChange(function()
+	{
+		var duration = self.duration.getValue();
+		if(duration === 0)
+		{
+			duration = null;
+		}
+		self.particle.emitter.duration = duration;
+		self.particle_runtime.emitter.duration = duration;
+	});
+	this.form.add(this.duration);
+	this.form.nextRow();
+
+	//Emmitter type
+	this.form.addText("Emitter Type");
+	this.type = new DropdownList(this.form.element);
+	this.type.size.set(100, 18);
+	this.type.addValue("Box", SPE.distributions.BOX);
+	this.type.addValue("Sphere", SPE.distributions.SPHERE);
+	this.type.addValue("Disc", SPE.distributions.DISC);
+	this.type.setOnChange(function()
+	{
+		var type = self.type.getValue();
+		self.particle.emitter.type = type;
+		self.particle_runtime.emitter.type = type;
+	});
+	this.form.add(this.type);
+	this.form.nextRow();
+
+	//Max age
+	this.form.addText("Max Age");
+	this.maxAge_value = new Numberbox(this.form.element);
+	this.maxAge_value.size.set(80, 18);
+	this.maxAge_value.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.maxAge_value.setOnChange(function()
+	{
+		var maxAge_value = self.maxAge_value.getValue();
+		self.particle.emitter.maxAge.value = maxAge_value;
+		self.particle_runtime.emitter.maxAge.value = maxAge_value;
+	});
+	this.form.add(this.maxAge_value);
+	this.form.addText("+/-");
+	this.maxAge_spread = new Numberbox(this.form.element);
+	this.maxAge_spread.size.set(60, 18);
+	this.maxAge_spread.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.maxAge_spread.setOnChange(function()
+	{
+		var maxAge_spread = self.maxAge_spread.getValue();
+		self.particle.emitter.maxAge.spread = maxAge_spread;
+		self.particle_runtime.emitter.maxAge.spread = maxAge_spread;
+	});
+	this.form.add(this.maxAge_spread);
 	this.form.nextRow();
 
 	//Add element to document
@@ -216,6 +275,9 @@ function attachParticle(particle)
 	this.blending.setValue(particle.group.blending);
 	this.direction.setValue(particle.emitter.direction);
 	this.particleCount.setValue(particle.emitter.particleCount);
+	this.duration.setValue(particle.emitter.duration);
+	this.type.setValue(particle.emitter.type);
+
 }
 
 //Update camera position and rotation from variables

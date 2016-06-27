@@ -34,6 +34,7 @@ function ButtonImageToggle(parent)
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.position = "absolute";
+	this.img.style.pointerEvents = "none";
 	this.img.style.top = "0px";
 	this.img.style.left = "0px";
 	this.element.appendChild(this.img);

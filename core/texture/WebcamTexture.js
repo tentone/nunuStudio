@@ -1,3 +1,6 @@
+"use strict";
+
+//Webcam texture constructor
 function WebcamTexture()
 {
 	//Check if webcam available

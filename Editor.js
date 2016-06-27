@@ -1,4 +1,3 @@
-//Enable strict mode
 "use strict";
 
 //External libs
@@ -93,7 +92,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.7 Pre-Alpha";
-Editor.TIMESTAMP = "201606262253";
+Editor.TIMESTAMP = "201606271755";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -769,7 +768,7 @@ Editor.updateSelectedObjectUI = function()
 	//Destroy old panel
 	Interface.panel.destroy();
 
-	//Select correct panel
+	//Select UI panel to use for selected object
 	if(Editor.selected_object instanceof Text3D)
 	{
 		Interface.panel = new TextPanel(Interface.explorer_resizable.div_b);

@@ -1,3 +1,6 @@
+"use strict";
+
+//Object loader constructor
 function ObjectLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;

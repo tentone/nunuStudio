@@ -1,4 +1,3 @@
-//Enable strict mode
 "use strict";
 
 function Interface(){}
@@ -11,7 +10,7 @@ Interface.initialize = function()
 
 	//Style
 	Interface.theme = new Style();
-	Interface.theme.setStyleSheet(Interface.file_dir + "css/dark.css");
+	Interface.theme.setStyleSheet(Interface.file_dir + "theme/dark/dark.css");
 
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabGroup();
@@ -397,7 +396,7 @@ Interface.initialize = function()
 		model.castShadow = true;
 		model.name = "cube";
 		Editor.addToActualScene(model);
-	});
+	}, "Cube");
 
 	//Cylinder
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cylinder.png", function()
@@ -408,7 +407,7 @@ Interface.initialize = function()
 		model.castShadow = true;
 		model.name = "cylinder";
 		Editor.addToActualScene(model);
-	});
+	}, "Cylinder");
 
 	//Sphere
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/sphere.png", function()
@@ -419,7 +418,7 @@ Interface.initialize = function()
 		model.castShadow = true;
 		model.name = "sphere";
 		Editor.addToActualScene(model);
-	});
+	}, "Sphere");
 
 	//Torus
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/torus.png", function()
@@ -430,7 +429,7 @@ Interface.initialize = function()
 		model.castShadow = true;
 		model.name = "torus";
 		Editor.addToActualScene(model);
-	});
+	}, "Torus");
 
 	//Pyramid
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cone.png", function()
@@ -441,7 +440,7 @@ Interface.initialize = function()
 		model.castShadow = true;
 		model.name = "cone";
 		Editor.addToActualScene(model);
-	});
+	}, "Cone");
 
 	//Text
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/text.png", function()
@@ -450,7 +449,7 @@ Interface.initialize = function()
 		model.receiveShadow = true;
 		model.castShadow = true;
 		Editor.addToActualScene(model);
-	});
+	}, "3D Text");
 
 	//Plane
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/plane.png", function()
@@ -461,7 +460,7 @@ Interface.initialize = function()
 		model.castShadow = true;
 		model.name = "plane";
 		Editor.addToActualScene(model);
-	});
+	}, "Plane");
 
 	//Add lights
 	Interface.add_light = new ButtonDrawer();
@@ -477,37 +476,37 @@ Interface.initialize = function()
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/point.png", function()
 	{
 		Editor.addToActualScene(new PointLight(0x444444));
-	});
+	}, "Point Light");
 
 	//Ambient Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/ambient.png", function()
 	{
 		Editor.addToActualScene(new AmbientLight(0x444444));
-	});
+	}, "Ambient Light");
 
 	//Spot Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/spot.png", function()
 	{
 		Editor.addToActualScene(new SpotLight(0x444444));
-	});
+	}, "Spot Light");
 
 	//Directional Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/directional.png", function()
 	{
 		Editor.addToActualScene(new DirectionalLight(0x444444));
-	});
+	}, "Directional Light");
 
 	//Hemisphere Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/hemisphere.png", function()
 	{
 		Editor.addToActualScene(new HemisphereLight(0x444444));
-	});
+	}, "Hemisphere Light");
 
 	//Sky
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/sky.png", function()
 	{
 		Editor.addToActualScene(new Sky());
-	});
+	}, "Sky");
 
 	//Add camera
 	Interface.add_camera = new ButtonDrawer();
@@ -524,13 +523,13 @@ Interface.initialize = function()
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/prespective.png", function()
 	{
 		Editor.addToActualScene(new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 1000000));
-	});
+	}, "Prespective Camera");
 
 	//Orthographic camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
 	{
 		Editor.addToActualScene(new OrthographicCamera(3, 2, 0, 1, 1000000));
-	});
+	}, "Othographic Camera");
 
 	//Add script
 	Interface.add_script = new ButtonDrawer();
@@ -547,13 +546,13 @@ Interface.initialize = function()
 	Interface.add_script.addOption(Interface.file_dir + "icons/script/script.png", function()
 	{
 		Editor.addToActualScene(new Script());
-	});
+	}, "JS Script");
 
 	//Block script
 	Interface.add_script.addOption(Interface.file_dir + "icons/script/blocks.png", function()
 	{
 		//TODO <ADD CODE HERE>
-	});
+	}, "Block Script");
 
 	//Sprites and effects
 	Interface.add_effects = new ButtonDrawer();
@@ -570,25 +569,25 @@ Interface.initialize = function()
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/sprite.png", function()
 	{
 		Editor.addToActualScene(new Sprite(Editor.default_sprite_material));
-	});
+	}, "Sprite");
 
 	//Particle emitter
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/particles.png", function()
 	{
 		Editor.addToActualScene(new ParticleEmitter());
-	});
+	}, "Particle Emitter");
 
 	//Container
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/container.png", function()
 	{
 		Editor.addToActualScene(new Container());
-	});
+	}, "Container");
 
 	//Audio
 	Interface.add_effects.addOption(Interface.file_dir + "icons/assets/audio.png", function()
 	{
 		Editor.addToActualScene(new Audio());
-	});
+	}, "Audio");
 
 	//Add device
 	Interface.add_device = new ButtonDrawer();
@@ -605,13 +604,13 @@ Interface.initialize = function()
 	Interface.add_device.addOption(Interface.file_dir + "icons/hw/leap.png", function()
 	{
 		Editor.addToActualScene(new LeapHand());
-	});
+	}, "Leap Motion");
 
 	//Kinect Skeleton
 	Interface.add_device.addOption(Interface.file_dir + "icons/hw/kinect.png", function()
 	{
 		Editor.addToActualScene(new KinectDevice());
-	});
+	}, "Microsoft Kinect");
 
 	//----------------------------------Menu Top Bar----------------------------------
 	Interface.top_bar = new Division();

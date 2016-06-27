@@ -19,7 +19,7 @@ function ButtonDrawer(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.zIndex = "200";
-	
+
 	//Prevent Drop event
 	this.element.ondrop = function(event)
 	{
@@ -36,11 +36,12 @@ function ButtonDrawer(parent)
 	this.panel = document.createElement("div");
 	this.panel.style.position = "absolute";
 	this.panel.className = "bar";
-	this.panel.style.zIndex = "200";
+	this.panel.style.zIndex = "250";
 	
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.position = "absolute";
+	this.img.style.pointerEvents = "none";
 	this.img.style.top = "0px";
 	this.img.style.left = "0px";
 	this.element.appendChild(this.img);

@@ -1,3 +1,6 @@
+"use strict";
+
+//Text texture constructor
 function TextTexture()
 {
 	this.text = "Text";

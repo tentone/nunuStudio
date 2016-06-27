@@ -1,3 +1,6 @@
+"use strict";
+
+//Video texture constructor
 function VideoTexture(url)
 {
 	//Create video element
