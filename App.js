@@ -1,3 +1,6 @@
+//Enable strict mode
+"use strict";
+
 //External libs
 include("lib/three/three.js");
 include("lib/three/loaders/OBJLoader.js");
