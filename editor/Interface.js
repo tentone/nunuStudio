@@ -1,5 +1,9 @@
+//Enable strict mode
+"use strict";
+
 function Interface(){}
 
+//Initialize interface
 Interface.initialize = function()
 {	
 	//File directory

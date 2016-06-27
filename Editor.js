@@ -1,3 +1,6 @@
+//Enable strict mode
+"use strict";
+
 //External libs
 include("lib/codemirror/codemirror.js");
 include("lib/codemirror/mode/javascript/javascript.js");
@@ -89,8 +92,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.6.8 Pre-Alpha";
-Editor.TIMESTAMP = "201606261633";
+Editor.VERSION = "V0.8.7 Pre-Alpha";
+Editor.TIMESTAMP = "201606262253";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -147,7 +150,7 @@ Editor.initialize = function(canvas)
 	Editor.default_material = new THREE.MeshPhongMaterial();
 	Editor.default_material.name = "default";
 	Editor.default_sprite_material = new THREE.SpriteMaterial({map: new Texture("data/sample.png"), color: 0xffffff});
-	Editor.default_sprite_material.name = "sprite";
+	Editor.default_sprite_material.name = "default";
 
 	//Initialize User Interface
 	Interface.initialize();
@@ -171,7 +174,7 @@ Editor.initialize = function(canvas)
 	Interface.updateInterface();
 
 	//Grid and axis helpers
-	Editor.grid_helper = new THREE.GridHelper(500, 200);
+	Editor.grid_helper = new THREE.GridHelper(500, 500);
 	Editor.grid_helper.material.depthWrite = false;
 	Editor.grid_helper.visible = Settings.grid_enabled;
 	Editor.tool_scene.add(Editor.grid_helper);

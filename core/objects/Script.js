@@ -66,11 +66,7 @@ function initialize()
 	//Run script
 	if(this.mode === Script.INIT)
 	{
-		try
-		{
-			this.func();
-		}
-		catch(e){}
+		this.func();
 	}
 
 	//Initialize children
@@ -86,11 +82,7 @@ function update()
 	//Run script
 	if(this.mode === Script.LOOP)
 	{
-		try
-		{
-			this.func();
-		}
-		catch(e){}
+		this.func();
 	}
 
 	//Update children

@@ -17,7 +17,8 @@ nunuStudio uses a number of open source projects to work properly
 * LeapJS to enable leap motion support
 
 ### Installation
-nunuStudio is intended to run with NWJS direcly on the desktop, but there are packages prepared for one click instalation.
+* nunuStudio is intended to run with NWJS direcly on the desktop
+* there are packages prepared for one click instalation for windows, linux and macos
 
 ### Todos
  - Webpage with documentation

@@ -3,8 +3,8 @@ function TextTexture()
 	this.text = "Text";
 	
 	this.canvas = document.createElement("canvas");
-	this.canvas.width = 128;
-	this.canvas.height = 128;
+	this.canvas.width = 256;
+	this.canvas.height = 256;
 
 	this.context2d = this.canvas.getContext("2d");
 	this.context2d.font = "Normal 60px Arial";
