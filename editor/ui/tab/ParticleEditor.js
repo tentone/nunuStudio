@@ -63,9 +63,8 @@ function ParticleEditor(parent)
 	
 	//Particle preview scene
 	this.scene = new Scene();
-	this.scene.add(new PointLight(0x666666));
-	this.scene.add(new AmbientLight(0x444444));
-	var grid = new THREE.GridHelper(50, 50, 1);
+	this.scene.add(new AmbientLight(0xffffff));
+	var grid = new THREE.GridHelper(50, 50, 0x888888);
 	grid.material.depthWrite = false;
 	this.scene.add(grid);
 	var axis = new THREE.AxisHelper(50);
@@ -110,15 +109,8 @@ function ParticleEditor(parent)
 	this.texture.updateInterface();
 	this.texture.setOnChange(function(file)
 	{
-		var texture = new Texture(file);
-
-		//Set particle texture
-		self.particle.group.texture = texture;
-		self.particle.updateValues();
-
-		//Set runtime particle texture
-		self.particle_runtime.group.texture = texture;
-		self.particle_runtime.updateValues();
+		self.particle.group.texture = new Texture(file);
+		self.updateRuntimeParticle();
 	});
 	this.form.add(this.texture);
 	this.form.nextRow();
@@ -135,10 +127,7 @@ function ParticleEditor(parent)
 	this.blending.setOnChange(function()
 	{
 		self.particle.group.blending = self.blending.getValue();
-		self.particle.updateValues();
-
-		self.particle_runtime.group.blending = self.blending.getValue();
-		self.particle_runtime.updateValues();
+		self.updateRuntimeParticle();
 	});
 	this.form.add(this.blending);
 	this.form.nextRow();
@@ -151,9 +140,8 @@ function ParticleEditor(parent)
 	this.direction.addValue("Backward", -1);
 	this.direction.setOnChange(function()
 	{
-		var direction = self.direction.getValue();
-		self.particle.emitter.direction = direction;
-		self.particle_runtime.emitter.direction = direction;
+		self.particle.emitter.direction = self.direction.getValue();
+		self.updateRuntimeParticle();
 	});
 	this.form.add(this.direction);
 	this.form.nextRow();
@@ -161,12 +149,11 @@ function ParticleEditor(parent)
 	//Particle Count
 	this.form.addText("Particle Count");
 	this.particleCount = new Numberbox(this.form.element);
-	this.particleCount.size.set(120, 18);
+	this.particleCount.size.set(100, 18);
 	this.particleCount.setOnChange(function()
 	{
-		var particleCount = self.particleCount.getValue();
-		self.particle.emitter.particleCount = particleCount;
-		self.particle_runtime.emitter.particleCount = particleCount;
+		self.particle.emitter.particleCount = self.particleCount.getValue();
+		self.updateRuntimeParticle();
 	});
 	this.form.add(this.particleCount);
 	this.form.nextRow();
@@ -174,7 +161,7 @@ function ParticleEditor(parent)
 	//Particle Duration
 	this.form.addText("Duration");
 	this.duration = new Numberbox(this.form.element);
-	this.duration.size.set(120, 18);
+	this.duration.size.set(60, 18);
 	this.duration.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.duration.setOnChange(function()
 	{
@@ -184,7 +171,7 @@ function ParticleEditor(parent)
 			duration = null;
 		}
 		self.particle.emitter.duration = duration;
-		self.particle_runtime.emitter.duration = duration;
+		self.updateRuntimeParticle();
 	});
 	this.form.add(this.duration);
 	this.form.nextRow();
@@ -198,9 +185,8 @@ function ParticleEditor(parent)
 	this.type.addValue("Disc", SPE.distributions.DISC);
 	this.type.setOnChange(function()
 	{
-		var type = self.type.getValue();
-		self.particle.emitter.type = type;
-		self.particle_runtime.emitter.type = type;
+		self.particle.emitter.type = self.type.getValue();
+		self.updateRuntimeParticle();
 	});
 	this.form.add(this.type);
 	this.form.nextRow();
@@ -208,13 +194,12 @@ function ParticleEditor(parent)
 	//Max age
 	this.form.addText("Max Age");
 	this.maxAge_value = new Numberbox(this.form.element);
-	this.maxAge_value.size.set(80, 18);
+	this.maxAge_value.size.set(60, 18);
 	this.maxAge_value.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAge_value.setOnChange(function()
 	{
-		var maxAge_value = self.maxAge_value.getValue();
-		self.particle.emitter.maxAge.value = maxAge_value;
-		self.particle_runtime.emitter.maxAge.value = maxAge_value;
+		self.particle.emitter.maxAge.value = self.maxAge_value.getValue();
+		self.updateRuntimeParticle();
 	});
 	this.form.add(this.maxAge_value);
 	this.form.addText("+/-");
@@ -223,9 +208,8 @@ function ParticleEditor(parent)
 	this.maxAge_spread.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAge_spread.setOnChange(function()
 	{
-		var maxAge_spread = self.maxAge_spread.getValue();
-		self.particle.emitter.maxAge.spread = maxAge_spread;
-		self.particle_runtime.emitter.maxAge.spread = maxAge_spread;
+		self.particle.emitter.maxAge.spread = self.maxAge_spread.getValue();
+		self.updateRuntimeParticle();
 	});
 	this.form.add(this.maxAge_spread);
 	this.form.nextRow();
@@ -245,6 +229,7 @@ ParticleEditor.prototype.update = update;
 ParticleEditor.prototype.updateInterface = updateInterface;
 ParticleEditor.prototype.updateMetadata = updateMetadata;
 ParticleEditor.prototype.updateCamera = updateCamera;
+ParticleEditor.prototype.updateRuntimeParticle = updateRuntimeParticle;
 
 //Update container object data
 function updateMetadata(container)
@@ -258,16 +243,8 @@ function updateMetadata(container)
 //Attach particle to particle editor
 function attachParticle(particle)
 {
-	//Attached particle
+	//Attach particle
 	this.particle = particle;
-
-	//Create particle copy for preview
-	this.particle_runtime = new ObjectLoader().parse(particle.toJSON());
-	this.particle_runtime.initialize();
-	this.particle_runtime.scale.set(1, 1, 1);
-	this.particle_runtime.position.set(0, 0, 0);
-	this.particle_runtime.updateMatrix();
-	this.scene.add(this.particle_runtime);
 
 	//Update form elements from particle data
 	this.name.setText(particle.name);
@@ -275,9 +252,36 @@ function attachParticle(particle)
 	this.blending.setValue(particle.group.blending);
 	this.direction.setValue(particle.emitter.direction);
 	this.particleCount.setValue(particle.emitter.particleCount);
-	this.duration.setValue(particle.emitter.duration);
+	if(particle.emitter.duration !== null)
+	{
+		this.duration.setValue(particle.emitter.duration);
+	}
+	else
+	{
+		this.duration.setValue(0);
+	}
 	this.type.setValue(particle.emitter.type);
+	this.maxAge_value.setValue(particle.emitter.maxAge.value);
+	this.maxAge_spread.setValue(particle.emitter.maxAge.spread);
 
+	//Create runtime particle to preview particle
+	this.updateRuntimeParticle();
+}
+
+//Updates runtime particle to match attached particle
+function updateRuntimeParticle()
+{
+	if(this.particle !== null)
+	{
+		if(this.particle_runtime !== null)
+		{
+			this.particle_runtime.dispose();
+			this.scene.remove(this.particle_runtime);
+		}
+		this.particle_runtime = new ObjectLoader().parse(this.particle.toJSON());
+		this.particle_runtime.initialize();
+		this.scene.add(this.particle_runtime);
+	}
 }
 
 //Update camera position and rotation from variables

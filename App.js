@@ -28,11 +28,12 @@ include("input/Keyboard.js");
 include("input/Mouse.js");
 
 include("core/MathUtils.js");
-include("core/ThreeExpand.js");
 include("core/ObjectLoader.js");
 include("core/Program.js");
 include("core/Scene.js");
 include("core/ObjectUtils.js");
+
+include("core/three/Object3D.js");
 
 include("core/webvr/VRControls.js");
 

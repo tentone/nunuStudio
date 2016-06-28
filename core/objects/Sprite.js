@@ -10,8 +10,9 @@ function Sprite(material)
 Sprite.prototype = Object.create(THREE.Sprite.prototype);
 
 //Runtime functions
-Sprite.prototype.update = update;
 Sprite.prototype.initialize = initialize;
+Sprite.prototype.update = update;
+Sprite.prototype.dispose = dispose;
 
 //Initialize
 function initialize()
@@ -22,11 +23,24 @@ function initialize()
 	}
 }
 
-//Update State
+//Update state
 function update()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();
+	}
+}
+
+//Dipose sprite
+function dispose()
+{
+	//Dipose material
+	this.material.dispose();
+
+	//Dipose children
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].dispose();
 	}
 }
