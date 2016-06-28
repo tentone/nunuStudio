@@ -1,7 +1,7 @@
 "use strict";
 
 //Particle emitter constructor
-function ParticleEmitter(texture, group, emitter)
+function ParticleEmitter(group, emitter)
 {
 	THREE.Object3D.call(this);
 
@@ -13,7 +13,7 @@ function ParticleEmitter(texture, group, emitter)
 	//Create group
 	if(group !== undefined)
 	{
-		//TODO <ADD CODE HERE>
+		this.group = new SPE.Group(group);
 	}
 	else
 	{
@@ -21,7 +21,7 @@ function ParticleEmitter(texture, group, emitter)
 		{
 			texture:
 			{
-				value: (texture !== undefined) ? texture : new Texture("data/particle.png")
+				value: new Texture("data/particle.png")
 			},
 			blending: THREE.AdditiveBlending,
 			maxParticleCount: 10000
@@ -34,7 +34,7 @@ function ParticleEmitter(texture, group, emitter)
 	//Create emitter
 	if(emitter !== undefined)
 	{
-		//TODO <ADD CODE HERE>
+		this.emitter = new SPE.Emitter(emitter);
 	}
 	else
 	{
@@ -182,7 +182,8 @@ function toJSON(meta)
 
 	//Group attributes
 	data.object.group = {};
-	data.object.group.texture = this.group.texture.uuid;
+	data.object.group.texture = {};
+	data.object.group.texture.value = this.group.texture.uuid;
 	data.object.group.textureFrames = this.group.textureFrames;
 	data.object.group.textureFrameCount = this.group.textureFrameCount
 	data.object.group.textureLoop = this.group.textureLoop;

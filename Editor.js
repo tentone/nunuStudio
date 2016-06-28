@@ -92,7 +92,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.7 Pre-Alpha";
-Editor.TIMESTAMP = "201606271755";
+Editor.TIMESTAMP = "201606280222";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -173,13 +173,17 @@ Editor.initialize = function(canvas)
 	Interface.updateInterface();
 
 	//Grid and axis helpers
-	Editor.grid_helper = new THREE.GridHelper(500, 500);
+	Editor.grid_helper = new THREE.GridHelper(Settings.grid_size, Math.round(Settings.grid_size/Settings.grid_spacing)*2, 0x888888, 0x888888);
 	Editor.grid_helper.material.depthWrite = false;
+	Editor.grid_helper.material.transparent = true;
+	Editor.grid_helper.material.opacity = 0.5;
 	Editor.grid_helper.visible = Settings.grid_enabled;
 	Editor.tool_scene.add(Editor.grid_helper);
 
-	Editor.axis_helper = new THREE.AxisHelper(500);
+	Editor.axis_helper = new THREE.AxisHelper(Settings.grid_size);
 	Editor.axis_helper.material.depthWrite = false;
+	Editor.axis_helper.material.transparent = true;
+	Editor.axis_helper.material.opacity = 1;
 	Editor.axis_helper.visible = Settings.axis_enabled;
 	Editor.tool_scene.add(Editor.axis_helper);
 
