@@ -1,3 +1,6 @@
+"use strict";
+
+//Text3D constructor
 function Text3D(text, material, font)
 {
 	if(font === undefined)
@@ -23,6 +26,7 @@ function Text3D(text, material, font)
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
 Text3D.prototype.initialize = initialize;
 Text3D.prototype.update = update;
+Text3D.prototype.dispose = dispose;
 Text3D.prototype.setText = setText;
 Text3D.prototype.toJSON = toJSON;
 
@@ -35,12 +39,26 @@ function initialize()
 	}
 }
 
-//Update State
+//Update state
 function update()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();
+	}
+}
+
+//Dipose text
+function dispose()
+{
+	//Dipose material and geometry
+	this.material.dispose();
+	this.geometry.dispose();
+
+	//Dipose children
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].dispose();
 	}
 }
 
@@ -63,7 +81,7 @@ function toJSON(meta)
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 	
 	data.object.text = this.text;
-	data.object.font = JSON.stringify(this.font);
+	data.object.font = this.font;
 
 	//Restore geometry
 	this.geometry = geometry;

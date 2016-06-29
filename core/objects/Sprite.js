@@ -1,3 +1,6 @@
+"use strict";
+
+//Sprite constructor
 function Sprite(material)
 {
 	THREE.Sprite.call(this, material);

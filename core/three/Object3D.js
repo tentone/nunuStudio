@@ -31,6 +31,16 @@ THREE.Object3D.prototype.dispose = function()
 	}
 }
 
+//Destroy object
+THREE.Object3D.prototype.destroy = function()
+{
+	if(this.parent !== null)
+	{
+		this.parent.remove(this);
+	}
+	this.dispose();
+}
+
 //Create JSON for object
 THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 {
