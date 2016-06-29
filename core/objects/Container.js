@@ -1,3 +1,6 @@
+"use strict";
+
+//Container constructor
 function Container()
 {
 	THREE.Object3D.call(this);
@@ -8,8 +11,6 @@ function Container()
 
 //Function Prototype
 Container.prototype = Object.create(THREE.Object3D.prototype);
-
-//Runtime functions
 Container.prototype.update = update;
 Container.prototype.initialize = initialize;
 

@@ -471,8 +471,26 @@ function parseObject(data, geometries, materials, textures)
 		case "ParticleEmiter":
 			if(data.group !== undefined)
 			{
-				data.group.texture.value = getTexture(data.group.texture.value);
+				var group = data.group;
+				group.texture.value = getTexture(group.texture.value);
+				group.textureFrames = THREE.Vector2(group.textureFrames);
 			}
+			if(data.emitter !== undefined)
+			{
+				var emitter = data.emitter;
+				emitter.position.value = THREE.Vector3.fromJSON(emitter.position.value);
+				emitter.position.spread = THREE.Vector3.fromJSON(emitter.position.spread);
+				emitter.velocity.value = THREE.Vector3.fromJSON(emitter.velocity.value);
+				emitter.velocity.spread = THREE.Vector3.fromJSON(emitter.velocity.spread);
+				emitter.acceleration.value = THREE.Vector3.fromJSON(emitter.acceleration.value);
+				emitter.acceleration.spread = THREE.Vector3.fromJSON(emitter.acceleration.spread);
+				for(var i = 0; i < emitter.color.value.length; i++)
+				{
+					emitter.color.value[i] = THREE.Color.fromJSON(emitter.color.value[i]);
+					emitter.color.spread[i] = THREE.Vector3.fromJSON(emitter.color.spread[i]);
+				}
+			}
+
 			object = new ParticleEmitter(data.group, data.emitter);
 			break;
 			

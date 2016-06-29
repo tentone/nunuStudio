@@ -34,6 +34,9 @@ include("core/Scene.js");
 include("core/ObjectUtils.js");
 
 include("core/three/Object3D.js");
+include("core/three/Vector3.js");
+include("core/three/Vector2.js");
+include("core/three/Color.js");
 
 include("core/webvr/VRControls.js");
 

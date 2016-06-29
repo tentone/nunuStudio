@@ -131,6 +131,15 @@ function setScene(scene)
 			this.scene.camera = this.default_camera;
 		}
 	}
+	else if(typeof scene === "string")
+	{
+		this.scene = this.getObjectByName(scene);
+		this.scene.initialize();
+		if(this.scene.camera === null)
+		{
+			this.scene.camera = this.default_camera;
+		}
+	}
 }
 
 //Select initial scene and initialize that scene
