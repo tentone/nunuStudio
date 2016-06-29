@@ -1,12 +1,9 @@
-function BlockScript(code, mode)
+function BlockScript(mode)
 {
 	THREE.Object3D.call(this);
 	
 	this.type = "BlockScript";
 	this.name = "BlockScript";
-	
-	//Disable auto matrix updates
-	this.rotationAutoUpdate = false;
 
 	//Program and scene pointers
 	this.program = null;
@@ -14,14 +11,9 @@ function BlockScript(code, mode)
 
 	//BlockScript Code
 	this.func = Function("");
-	this.code = "//ADD CODE HERE";
 	this.mode = BlockScript.INIT;
 
 	//Get arguments
-	if(code !== undefined)
-	{
-		this.code = code;
-	}
 	if(mode !== undefined)
 	{
 		this.mode = mode;

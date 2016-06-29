@@ -322,6 +322,7 @@ function TreeElement(container)
 	};
 
 	//Arrow click
+	this.arrow.img.style.pointerEvents = "visible";
 	this.arrow.img.onclick = function()
 	{
 		self.folded = !self.folded;
