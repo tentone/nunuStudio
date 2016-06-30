@@ -23,7 +23,7 @@ function initialize()
 	}
 }
 
-//Update State
+//Update
 function update()
 {
 	for(var i = 0; i < this.children.length; i++)

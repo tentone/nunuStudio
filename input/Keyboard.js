@@ -53,6 +53,15 @@ Keyboard.update = function()
 	}
 }
 
+//Reset keyboard status
+Keyboard.reset = function()
+{
+	for(var i = 0; i < Keyboard.keys.length; i++)
+	{
+		Keyboard.keys[i].reset();
+	}
+}
+
 //Check if a key is pressed
 Keyboard.isKeyPressed = function(key)
 {

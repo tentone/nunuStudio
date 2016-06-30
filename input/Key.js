@@ -10,9 +10,10 @@ function Key()
 Key.prototype.isPressed = isPressed;
 Key.prototype.justPressed = justPressed;
 Key.prototype.justReleased = justReleased;
+Key.prototype.set = set;
+Key.prototype.reset = reset;
 Key.prototype.update = update;
 Key.prototype.toString = toString;
-Key.prototype.set = set;
 
 //Action List
 Key.KEY_DOWN = 0;
@@ -24,7 +25,6 @@ function update(action)
 	this.justPressed = false;
 	this.justReleased = false;
 
-	//Key down
 	if(action === Key.KEY_DOWN)
 	{
 		if(!this.isPressed)
@@ -33,8 +33,7 @@ function update(action)
 		}
 		this.isPressed = true;
 	}
-	//Key Up
-	else
+	else//if(action === Key.KEY_UP))
 	{
 		if(this.isPressed === true)
 		{
@@ -44,25 +43,25 @@ function update(action)
 	}
 }
 
-//True if key is currently pressed
+//Check if key is currently pressed
 function isPressed()
 {
 	return this.isPressed;
 }
 
-//True if key was just pressed
+//Check if key was just pressed
 function justPressed()
 {
 	return this.justPressed;
 }
 
-//True if key was just released
+//Check if key was just released
 function justReleased()
 {
 	return this.justReleased;
 }
 
-//Set key values
+//Set key values manualy
 function set(just_pressed, is_pressed, just_released)
 {
 	this.justPressed = just_pressed;
@@ -70,7 +69,15 @@ function set(just_pressed, is_pressed, just_released)
 	this.justReleased = just_released;
 }
 
-//Print Key
+//Reset key to default values
+function reset()
+{
+	this.justPressed = false;
+	this.isPressed = false;
+	this.justReleased = false;
+}
+
+//Returns string with key status
 function toString()
 {
 	return "Pressed:" + this.isPressed + " JustPressed:" + this.justPressed + " JustReleased:" + this.justReleased;

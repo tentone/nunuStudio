@@ -38,7 +38,6 @@ THREE.Object3D.prototype.destroy = function()
 	{
 		this.parent.remove(this);
 	}
-	this.dispose();
 }
 
 //Create JSON for object
