@@ -89,6 +89,7 @@ ObjectUtils.getScene = function(obj)
 ObjectUtils.getRoot = function(obj)
 {
 	var node = obj;
+	
 	while(node.parent !== null)
 	{
 		node = node.parent;
