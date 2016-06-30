@@ -1,3 +1,5 @@
+"use strict";
+
 function Mouse(){}
 
 //Mouse Atached to camera
@@ -18,16 +20,18 @@ Mouse.initialize = function()
 	//Calculate coordinates relative to canvas
 	Mouse.canvas = null;
 
-	//Mouse Buttons
+	//Mouse keys
 	Mouse.raw_keys = [];
 	Mouse.keys = [];
+
+	//Create key instances
 	for(var i = 0; i < 3; i++)
 	{
 		Mouse.raw_keys.push(new Key());
 		Mouse.keys.push(new Key());
 	}
 
-	//Mouse scrool wheel
+	//Mouse scroll wheel
 	if(document.onmousewheel !== undefined)
 	{
 		//Chrome, edge

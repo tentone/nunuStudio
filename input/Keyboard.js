@@ -1,10 +1,12 @@
+"use strict";
+
 function Keyboard(){}
 
 //Initialize keyboard
 Keyboard.initialize = function()
 {
-	Keyboard.actions = [];
 	Keyboard.keys = [];
+	Keyboard.actions = [];
 
 	//Keyboard keys
 	for(var i = 0; i < 256; i++)
@@ -31,6 +33,8 @@ Keyboard.initialize = function()
 Keyboard.update = function()
 {
 	var end = 0;
+
+	//Update all actions
 	while(Keyboard.actions.length > end)
 	{
 		var key = Keyboard.actions.shift();
@@ -56,6 +60,10 @@ Keyboard.update = function()
 //Reset keyboard status
 Keyboard.reset = function()
 {
+	//Clear actions array
+	Keyboard.actions = [];
+
+	//Reset all keys
 	for(var i = 0; i < Keyboard.keys.length; i++)
 	{
 		Keyboard.keys[i].reset();
