@@ -629,6 +629,7 @@ MaterialEditor.prototype.updateInterface = updateInterface;
 //Attach material to material editor
 function attachMaterial(material, material_file)
 {
+	//Check is if sprite material and ajust preview
 	if(material instanceof THREE.SpriteMaterial)
 	{
 		this.sprite.material = material;
@@ -642,11 +643,37 @@ function attachMaterial(material, material_file)
 		this.sprite.visible = false;
 	}
 	
+	//Generic material elements
+	this.name.setText(material.name);
+	this.side.setValue(material.side);
+	this.skinning.setValue(material.skinning);
+	this.depthTest.setValue(material.depthTest);
+	this.transparent.setValue(material.transparent);
+	this.opacity.setValue(material.opacity);
+	this.opacity_text.setText(material.opacity);
+	this.blending.setValue(material.blending);
+
+	//Phong specific stuff
+	if(material instanceof THREE.MeshPhongMaterial)
+	{
+		this.shading.setValue(material.shading);
+		this.color.setValue(material.color.r, material.color.g, material.color.b);
+		this.specular.setValue(material.specular.r, material.specular.g, material.specular.b);
+		this.shininess.setValue(material.shininess);
+		this.shininess_text.setText(material.shininess);
+		if(material.map !== null)
+		{
+			this.map.setImage(material.map.image.src);
+		}
+	}
+
+	//Store material file pointer
 	if(material_file !== undefined)
 	{
 		this.material_file = material_file;
 	}
 	
+	//Store material
 	this.material = material;
 }
 
