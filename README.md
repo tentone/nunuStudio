@@ -9,21 +9,22 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 
 ### Tech
 nunuStudio uses a number of open source projects to work properly
-* NW.JS and NODE.JS to enable desktop support
+* NW.JS and NODE.JS
 * Cannon.JS as physics engine
 * JSColor
-* JSZip to enable zip compressed file reading/writing
 * CodeMirror
 * LeapJS to enable leap motion support
 
 ### Installation
 * nunuStudio is intended to run with NWJS direcly on the desktop
-* there are packages prepared for one click instalation for windows, linux and macos
+* there are packages prepared for one click instalation for windows, linux and osx
 
 ### Todos
- - Webpage with documentation
+ - Project webpage
  - Audio
- - Physics integration in the UI
+ - Physics integration
+ - Blockly integration
+ - Script helpers
 
 ### License
 nunuStudio uses a MIT license (Available on GitHub page)

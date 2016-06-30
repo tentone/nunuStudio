@@ -1,4 +1,6 @@
-//Constructor
+"use strict";
+
+//Key Constructor
 function Key()
 {
 	this.isPressed = false;
@@ -7,9 +9,6 @@ function Key()
 }
 
 //Funtion Prototypes
-Key.prototype.isPressed = isPressed;
-Key.prototype.justPressed = justPressed;
-Key.prototype.justReleased = justReleased;
 Key.prototype.set = set;
 Key.prototype.reset = reset;
 Key.prototype.update = update;
@@ -27,38 +26,20 @@ function update(action)
 
 	if(action === Key.KEY_DOWN)
 	{
-		if(!this.isPressed)
+		if(this.isPressed ===  false)
 		{
 			this.justPressed = true;
 		}
 		this.isPressed = true;
 	}
-	else//if(action === Key.KEY_UP))
+	else if(action === Key.KEY_UP)
 	{
-		if(this.isPressed === true)
+		if(this.isPressed)
 		{
 			this.justReleased = true;
 		}
 		this.isPressed = false;
 	}
-}
-
-//Check if key is currently pressed
-function isPressed()
-{
-	return this.isPressed;
-}
-
-//Check if key was just pressed
-function justPressed()
-{
-	return this.justPressed;
-}
-
-//Check if key was just released
-function justReleased()
-{
-	return this.justReleased;
 }
 
 //Set key values manualy

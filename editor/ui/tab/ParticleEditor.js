@@ -278,7 +278,11 @@ function updateRuntimeParticle()
 			this.particle_runtime.dispose();
 			this.scene.remove(this.particle_runtime);
 		}
+
 		this.particle_runtime = new ObjectLoader().parse(this.particle.toJSON());
+		this.particle_runtime.scale.set(1, 1, 1);
+		this.particle_runtime.position.set(0, 0, 0);
+		this.particle_runtime.rotation.set(0, 0, 0);
 		this.particle_runtime.initialize();
 		this.scene.add(this.particle_runtime);
 	}
