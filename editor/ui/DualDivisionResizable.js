@@ -26,7 +26,8 @@ function DualDivisionResizable(parent)
 	this.div_a.style.top = "0px";
 	this.div_a.style.left = "0px";
 	this.div_a.className = "container";
-
+	this.element.appendChild(this.div_a);
+	
 	//Prevent Drop event
 	this.div_a.ondrop = function(event)
 	{
@@ -43,6 +44,7 @@ function DualDivisionResizable(parent)
 	this.div_b = document.createElement("div");
 	this.div_b.style.position = "absolute";
 	this.div_b.className = "container";
+	this.element.appendChild(this.div_b);
 
 	//Prevent Drop event
 	this.div_b.ondrop = function(event)
@@ -60,10 +62,6 @@ function DualDivisionResizable(parent)
 	this.resize_tab = document.createElement("div");
 	this.resize_tab.style.position = "absolute";
 	this.resize_tab.className = "panel_res_hor_tab";
-
-	//Add divs and tabs to element
-	this.element.appendChild(this.div_a);
-	this.element.appendChild(this.div_b);
 	this.element.appendChild(this.resize_tab);
 
 	//Element atributes

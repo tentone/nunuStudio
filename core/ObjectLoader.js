@@ -27,12 +27,12 @@ function load(url, onLoad, onProgress, onError)
 		this.texturePath = url.substring(0, url.lastIndexOf("/") + 1);
 	}
 
-	var scope = this;
-	var loader = new THREE.XHRLoader(scope.manager);
+	var self = this;
+	var loader = new THREE.XHRLoader(this.manager);
 
 	loader.load(url, function(text)
 	{
-		scope.parse(JSON.parse(text), onLoad);
+		self.parse(JSON.parse(text), onLoad);
 	}, onProgress, onError);
 }
 
@@ -144,6 +144,21 @@ function parseGeometries(json)
 					);
 					break;
 
+				case 'ConeGeometry':
+				case 'ConeBufferGeometry':
+
+						geometry = new THREE [ data.type ](
+							data.radius,
+							data.height,
+							data.radialSegments,
+							data.heightSegments,
+							data.openEnded,
+							data.thetaStart,
+							data.thetaLength
+						);
+
+						break;
+
 				case "SphereGeometry":
 				case "SphereBufferGeometry":
 					geometry = new THREE[data.type](
@@ -157,33 +172,17 @@ function parseGeometries(json)
 					);
 					break;
 
-				case "DodecahedronGeometry":
-					geometry = new THREE.DodecahedronGeometry(
-						data.radius,
-						data.detail
-					);
-					break;
+					case 'DodecahedronGeometry':
+					case 'IcosahedronGeometry':
+					case 'OctahedronGeometry':
+					case 'TetrahedronGeometry':
 
-				case "IcosahedronGeometry":
-					geometry = new THREE.IcosahedronGeometry(
-						data.radius,
-						data.detail
-					);
-					break;
+						geometry = new THREE[ data.type ](
+							data.radius,
+							data.detail
+						);
 
-				case "OctahedronGeometry":
-					geometry = new THREE.OctahedronGeometry(
-						data.radius,
-						data.detail
-					);
-					break;
-
-				case "TetrahedronGeometry":
-					geometry = new THREE.TetrahedronGeometry(
-						data.radius,
-						data.detail
-					);
-					break;
+						break;
 
 				case "RingGeometry":
 				case "RingBufferGeometry":
@@ -221,7 +220,8 @@ function parseGeometries(json)
 					break;
 
 				case "LatheGeometry":
-					geometry = new THREE.LatheGeometry(
+				case 'LatheBufferGeometry':
+					geometry = new THREE[ data.type ](
 						data.points,
 						data.segments,
 						data.phiStart,
@@ -312,12 +312,13 @@ function parseImages(json, onLoad)
 	if(json !== undefined && json.length > 0)
 	{
 		var manager = new THREE.LoadingManager(onLoad);
+
 		var loader = new THREE.ImageLoader(manager);
 		loader.setCrossOrigin(this.crossOrigin);
 
 		for(var i = 0, l = json.length; i < l; i ++)
 		{
-			var image = json[ i ];
+			var image = json[i];
 			var path = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(image.url) ? image.url : scope.texturePath + image.url;
 			images[image.uuid] = loadImage(path);
 		}
@@ -390,12 +391,17 @@ function parseTextures(json, images)
 			{
 				texture.anisotropy = data.anisotropy;
 			}
+			if(data.flipY !== undefined)
+			{
+				texture.flipY = data.flipY;
+			}
 
 			if(Array.isArray(data.wrap))
 			{
 				texture.wrapS = parseConstant(data.wrap[0]);
 				texture.wrapT = parseConstant(data.wrap[1]);
 			}
+			
 			textures[data.uuid] = texture;
 		}
 	}

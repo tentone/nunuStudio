@@ -73,8 +73,8 @@ function MaterialEditor(parent)
 	//Material renderer and scene
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.antialiasing});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.renderer.shadowMap.enabled = true;
-	this.renderer.shadowMap.type = THREE.PCFShadowMap;
+	this.renderer.shadowMap.enabled = Settings.shadows;
+	this.renderer.shadowMap.type = Settings.shadows_type;
 
 	//Material camera
 	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y, 0.1, 10000000);
@@ -82,6 +82,11 @@ function MaterialEditor(parent)
 	//Material preview scene
 	this.scene = new Scene();
 	this.sky = new Sky();
+	var sun = this.sky.children[0];
+	sun.shadow.camera.left = -5;
+	sun.shadow.camera.right = 5;
+	sun.shadow.camera.top = 5;
+	sun.shadow.camera.bottom = -5;
 	this.scene.add(this.sky);
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x555555));
@@ -90,7 +95,7 @@ function MaterialEditor(parent)
 	this.obj.visible = false;
 	this.scene.add(this.obj);
 	this.sprite = new Sprite(null);
-	this.sprite.position.set(0, 0, -2.5);
+	this.sprite.position.set(0, 0, -1.5);
 	this.sprite.visible = false;
 	this.scene.add(this.sprite);
 
@@ -287,325 +292,6 @@ function MaterialEditor(parent)
 	this.form.add(this.blending);
 	this.form.nextRow();
 
-	//--------------------------------------Phong Material parameters--------------------------------------
-	//Shading mode
-	this.form.addText("Shading");
-	this.shading = new DropdownList(this.form.element);
-	this.shading.position.set(100, 85);
-	this.shading.size.set(120, 18);
-	this.shading.addValue("Smooth", THREE.SmoothShading);
-	this.shading.addValue("Flat", THREE.FlatShading);
-	this.shading.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.shading = self.shading.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.shading);
-	this.form.nextRow();
-
-	//Color
-	this.form.addText("Color");
-	this.color = new ColorChooser(this.form.element);
-	this.color.size.set(100, 18);
-	this.color.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.color.setHex(self.color.getValueHex());
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.color);
-	this.form.nextRow();
-
-	//Specular color
-	this.form.addText("Specular");
-	this.specular = new ColorChooser(this.form.element);
-	this.specular.size.set(100, 18);
-	this.specular.updateInterface();
-	this.specular.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.specular.setHex(self.specular.getValueHex());
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.specular);
-	this.form.nextRow();
-
-	//Shininess
-	this.form.addText("Shininess");
-	this.shininess = new Slider(this.form.element);
-	this.shininess.size.set(160, 18);
-	this.shininess.setRange(0, 250);
-	this.shininess.setStep(0.1);
-	this.shininess.updateInterface();
-	this.shininess.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.shininess = self.shininess.getValue();
-			self.material.needsUpdate = true;
-			self.shininess_text.setText(self.material.shininess);
-		}
-	});
-	this.form.add(this.shininess);
-	this.shininess_text = this.form.addText("-------");
-	this.form.nextRow();
-
-	//Texture map
-	this.form.addText("Texture map");
-	this.form.nextRow();
-	this.map = new Imagebox(this.form.element);
-	this.map.size.set(100, 100);
-	this.map.updateInterface();
-	this.map.setOnChange(function(file)
-	{
-		self.material.map = new Texture(file);
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.map);
-	this.form.nextRow();
-
-	//Bump map
-	this.form.addText("Bump map");
-	this.form.nextRow();
-	this.bumpMap = new Imagebox(this.form.element);
-	this.bumpMap.size.set(100, 100);
-	this.bumpMap.updateInterface();
-	this.bumpMap.setOnChange(function(file)
-	{
-		self.material.bumpMap = new Texture(file);
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.bumpMap);
-	this.form.nextRow();
-
-	//Bump map scale
-	this.form.addText("Scale");
-	this.bumpScale = new Slider(this.form.element);
-	this.bumpScale.size.set(160, 18);
-	this.bumpScale.setRange(0, 1);
-	this.bumpScale.setStep(0.01);
-	this.bumpScale.updateInterface();
-	this.bumpScale.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.bumpScale = self.bumpScale.getValue();
-			self.material.needsUpdate = true;
-			self.bumpScale_text.setText(self.material.bumpScale);
-		}
-	});
-	this.form.add(this.bumpScale);
-	this.bumpScale_text = this.form.addText("-------");
-	this.form.nextRow();
-
-	//Normal map
-	this.form.addText("Normal map");
-	this.form.nextRow();
-	this.normalMap = new Imagebox(this.form.element);
-	this.normalMap.size.set(100, 100);
-	this.normalMap.updateInterface();
-	this.normalMap.setOnChange(function(file)
-	{
-		self.material.normalMap = new Texture(file);
-		self.material.needsUpdate = true;
-	});
-	this.form.add(this.normalMap);
-	this.form.nextRow();
-
-	//Normal map scale
-	this.form.addText("Scale X");
-	this.normalScale_x = new Numberbox(this.form.element);
-	this.normalScale_x.size.set(35, 18);
-	this.normalScale_x.setRange(0, 1);
-	this.normalScale_x.setStep(0.01);
-	this.normalScale_x.updateInterface();
-	this.normalScale_x.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.normalScale.x = self.normalScale_x.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.normalScale_x);
-	this.form.addText("Y");
-	this.normalScale_y = new Numberbox(this.form.element);
-	this.normalScale_y.size.set(40, 18);
-	this.normalScale_y.setRange(0, 1);
-	this.normalScale_y.setStep(0.01);
-	this.normalScale_y.updateInterface();
-	this.normalScale_y.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.normalScale.y = self.normalScale_y.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.normalScale_y);
-	this.form.nextRow();
-
-	//Displacement map
-	this.form.addText("Displacement map");
-	this.form.nextRow();
-	this.displacementMap = new Imagebox(this.form.element);
-	this.displacementMap.size.set(100, 100);
-	this.displacementMap.updateInterface();
-	this.displacementMap.setOnChange(function(file)
-	{
-		self.material.displacementMap = new Texture(file);
-		self.material.needsUpdate = true;
-	});
-	this.children.push(this.displacementMap);
-	this.form.add(this.displacementMap);
-	this.form.nextRow();
-
-	//Displacement map scale
-	this.form.addText("Scale");
-	this.displacementScale = new Numberbox(this.form.element);
-	this.displacementScale.size.set(60, 18);
-	this.displacementScale.setStep(0.05);
-	this.displacementScale.updateInterface();
-	this.displacementScale.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.displacementScale = self.displacementScale.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.displacementScale);
-	this.form.nextRow();
-
-	//Displacement map bias
-	this.form.addText("Bias");
-	this.displacementBias = new Numberbox(this.form.element);
-	this.displacementBias.size.set(60, 18);
-	this.displacementBias.setStep(0.1);
-	this.displacementBias.updateInterface();
-	this.displacementBias.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.displacementBias = self.displacementBias.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.displacementBias);
-	this.form.nextRow();
-
-	//Specular map
-	this.form.addText("Specular map");
-	this.form.nextRow();
-	this.specularMap = new Imagebox(this.form.element);
-	this.specularMap.size.set(100, 100);
-	this.specularMap.updateInterface();
-	this.specularMap.setOnChange(function(file)
-	{
-		if(self.material !== null)
-		{
-			self.material.specularMap = new Texture(file);
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.specularMap);
-	this.form.nextRow();
-
-	//Alpha map
-	this.form.addText("Alpha map");
-	this.form.nextRow();
-	this.alphaMap = new Imagebox(this.form.element);
-	this.alphaMap.size.set(100, 100);
-	this.alphaMap.updateInterface();
-	this.alphaMap.setOnChange(function(file)
-	{
-		if(self.material !== null)
-		{
-			self.material.alphaMap = new Texture(file);
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.alphaMap);
-	this.form.nextRow();
-
-	//Environment map
-	this.form.addText("Environment map");
-	this.form.nextRow();
-	this.envMap = new Imagebox(this.form.element);
-	this.envMap.size.set(100, 100);
-	this.envMap.updateInterface();
-	this.envMap.setOnChange(function(file)
-	{
-		if(self.material !== null)
-		{
-			var files = [file, file, file, file, file, file];
-			self.material.envMap = new THREE.CubeTextureLoader().load(files);
-			self.material.envMap.format = THREE.RGBFormat;
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.envMap);
-	this.form.nextRow();
-
-	//Combine environment map
-	this.form.addText("Mode");
-	this.combine = new DropdownList(this.form.element);
-	this.combine.position.set(100, 85);
-	this.combine.size.set(120, 18);
-	this.combine.addValue("Multiply", THREE.MultiplyOperation);
-	this.combine.addValue("Mix", THREE.MixOperation);
-	this.combine.addValue("Add", THREE.AddOperation);
-	this.combine.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.combine = self.combine.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.combine);
-	this.form.nextRow();
-
-	//Reflectivity
-	this.form.addText("Reflectivity");
-	this.reflectivity = new Numberbox(this.form.element);
-	this.reflectivity.size.set(60, 18);
-	this.reflectivity.setStep(0.05);
-	this.reflectivity.updateInterface();
-	this.reflectivity.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.reflectivity = self.reflectivity.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.reflectivity);
-	this.form.nextRow();
-
-	//Reflectivity
-	this.form.addText("Refraction Ratio");
-	this.refractionRatio = new Numberbox(this.form.element);
-	this.refractionRatio.size.set(60, 18);
-	this.refractionRatio.setStep(0.05);
-	this.refractionRatio.updateInterface();
-	this.refractionRatio.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.refractionRatio = self.refractionRatio.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.refractionRatio);
-
 	//Update form
 	this.form.updateInterface();
 
@@ -642,30 +328,6 @@ function attachMaterial(material, material_file)
 		this.obj.visible = true;
 		this.sprite.visible = false;
 	}
-	
-	//Generic material elements
-	this.name.setText(material.name);
-	this.side.setValue(material.side);
-	this.skinning.setValue(material.skinning);
-	this.depthTest.setValue(material.depthTest);
-	this.transparent.setValue(material.transparent);
-	this.opacity.setValue(material.opacity);
-	this.opacity_text.setText(material.opacity);
-	this.blending.setValue(material.blending);
-
-	//Phong specific stuff
-	if(material instanceof THREE.MeshPhongMaterial)
-	{
-		this.shading.setValue(material.shading);
-		this.color.setValue(material.color.r, material.color.g, material.color.b);
-		this.specular.setValue(material.specular.r, material.specular.g, material.specular.b);
-		this.shininess.setValue(material.shininess);
-		this.shininess_text.setText(material.shininess);
-		if(material.map !== null)
-		{
-			this.map.setImage(material.map.image.src);
-		}
-	}
 
 	//Store material file pointer
 	if(material_file !== undefined)
@@ -675,16 +337,23 @@ function attachMaterial(material, material_file)
 	
 	//Store material
 	this.material = material;
+
+	//Generic material elements
+	this.name.setText(material.name);
+	this.side.setValue(material.side);
+	this.skinning.setValue(material.skinning);
+	this.depthTest.setValue(material.depthTest);
+	this.transparent.setValue(material.transparent);
+	this.opacity.setValue(material.opacity);
+	this.opacity_text.setText(material.opacity);
+	this.blending.setValue(material.blending);	
 }
 
 //Activate code editor
 function activate()
 {
-	//Set editor state
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
-	
-	//Set mouse canvas
 	Mouse.canvas = this.canvas.element;
 }
 
@@ -741,14 +410,14 @@ function update()
 		}
 
 		//Zoom
-		this.camera.position.z += Mouse.wheel * 0.005;
+		this.camera.position.z += Mouse.wheel * 0.003;
 		if(this.camera.position.z > 5)
 		{
 			this.camera.position.z = 5;
 		}
-		else if(this.camera.position.z < -1)
+		else if(this.camera.position.z < -1.5)
 		{
-			this.camera.position.z = -1;
+			this.camera.position.z = -1.5;
 		}
 	}
 }

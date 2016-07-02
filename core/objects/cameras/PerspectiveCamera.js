@@ -1,16 +1,17 @@
+"use strict";
+
+//Perspective camera from fov, aspect ration and near and far planes
 function PerspectiveCamera(fov, aspect, near, far)
 {
 	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
 
-	this.name = "prespective_camera";
+	this.name = "camera";
 
 	this.rotationAutoUpdate = true;
 }
 
 //Function Prototype
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
-
-//Runtime functions
 PerspectiveCamera.prototype.update = update;
 PerspectiveCamera.prototype.initialize = initialize;
 

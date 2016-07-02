@@ -281,7 +281,7 @@ function TreeElement(container)
 			{
 				//Scene Canvas
 				var tab = Interface.tab.addOption(self.obj.name, Interface.file_dir + "icons/tab/scene.png", true);
-				var container = new SceneEditor();
+				var container = new SceneEditor(tab.element);
 				container.setScene(self.obj);
 				tab.attachComponent(container);
 
@@ -418,11 +418,11 @@ function addFromObject(obj)
 function add(label, icon)
 {
 	var element = new TreeElement(this.container);
-	if(label != undefined)
+	if(label !== undefined)
 	{
 		element.setLabel(label);
 	}
-	if(icon != undefined)
+	if(icon !== undefined)
 	{
 		element.setIcon(icon);
 	}
@@ -473,7 +473,7 @@ function updateFoldedState()
 //Update parent tree element from scene data
 function updateSceneData()
 {
-	if(this.container.scene != null)
+	if(this.container.scene !== null)
 	{
 		this.container.fromObject(this.container.scene);
 	}

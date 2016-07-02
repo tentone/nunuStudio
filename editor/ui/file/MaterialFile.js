@@ -31,7 +31,7 @@ function MaterialFile(parent)
 	{
 		if(self.material instanceof THREE.Material)
 		{
-			//Check if there is already a tab with this script attached
+			//Check if there is already a tab with this material attached
 			var found = false;
 			for(var i = 0; i < Interface.tab.options.length; i++)
 			{
@@ -49,12 +49,34 @@ function MaterialFile(parent)
 			//If not found open new tab
 			if(!found)
 			{
+				self.restoreMaterial();
+
 				var tab = Interface.tab.addOption(self.material.name, Interface.file_dir + "icons/misc/material.png", true);
-				var material_editor = new MaterialEditor();
+				var material_editor;
+
+				if(self.material instanceof THREE.MeshPhongMaterial)
+				{
+					material_editor = new PhongMaterialEditor();
+				}
+				else if(self.material instanceof THREE.MeshBasicMaterial)
+				{
+					material_editor = new BasicMaterialEditor();
+				}
+				else if(self.material instanceof THREE.MeshStandardMaterial)
+				{
+					material_editor = new StandardMaterialEditor();
+				}
+				else if(self.material instanceof THREE.SpriteMaterial)
+				{
+					material_editor = new SpriteMaterialEditor();
+				}
+				else
+				{
+					material_editor = new MaterialEditor();
+				}
+
 				material_editor.attachMaterial(self.material, self);
 				tab.attachComponent(material_editor);
-				
-				//Select added tab
 				tab.select();
 			}
 		}

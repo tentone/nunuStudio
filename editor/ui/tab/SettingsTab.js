@@ -66,6 +66,17 @@ function SettingsTab(parent)
 	this.general_form.add(this.theme);
 	this.general_form.nextRow();
 
+	//Show stats
+	this.show_stats = new Checkbox(this.general_form.element);
+	this.show_stats.setText("Show stats");
+	this.show_stats.size.set(200, 16);
+	this.show_stats.setOnChange(function()
+	{
+		Settings.show_stats = self.show_stats.getValue();
+	});
+	this.general_form.add(this.show_stats);
+	this.general_form.nextRow();
+
 	//Blank Space
 	this.general_form.addText("");
 	this.general_form.nextRow();
@@ -76,7 +87,7 @@ function SettingsTab(parent)
 
 	//Enable Grid
 	this.grid_enabled = new Checkbox(this.general_form.element);
-	this.grid_enabled.setText("Show Grid");
+	this.grid_enabled.setText("Show grid");
 	this.grid_enabled.size.set(200, 16);
 	this.grid_enabled.setOnChange(function()
 	{
@@ -214,6 +225,7 @@ function activate()
 	Editor.resetEditingFlags();
 
 	//General elements
+	this.show_stats.setValue(Settings.show_stats);
 	this.grid_enabled.setValue(Settings.grid_enabled);
 	this.axis_enabled.setValue(Settings.axis_enabled);
 	this.shadows_type.setValue(Settings.shadows_type);

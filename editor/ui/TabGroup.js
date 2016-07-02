@@ -63,18 +63,18 @@ TabGroup.prototype.updateOptionIndex = updateOptionIndex;
 TabGroup.prototype.selectOption = selectOption;
 TabGroup.prototype.closeActual = closeActual;
 TabGroup.prototype.getActual = getActual;
-TabGroup.prototype.updateObjectData = updateObjectData;
+TabGroup.prototype.updateMetadata = updateMetadata;
 
 //Tab button displacement mode
 TabGroup.TOP = 0;
 TabGroup.LEFT = 1;
 
 //Update all tabs object data
-function updateObjectData()
+function updateMetadata()
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
-		this.options[i].updateObjectData();
+		this.options[i].updateMetadata();
 	}
 }
 
@@ -111,14 +111,14 @@ function selectOption(index)
 	{
 		this.options_selected = index;
 		this.options[index].activate();
-		this.updateInterface();
 	}
 	else
 	{
 		this.options_selected = -1;
 		Editor.setState(Editor.STATE_IDLE);
-		this.updateInterface();
 	}
+
+	this.updateInterface();
 }
 
 //Add new option to tab grounp
@@ -142,8 +142,8 @@ function clear()
 	{
 		this.options.pop().destroy();
 	}
+
 	this.selectOption(-1);
-	this.updateInterface();
 }
 
 //Remove tab from group
@@ -174,9 +174,6 @@ function removeOption(index)
 		{
 			this.selectOption(-1);
 		}
-
-		//Update interface
-		this.updateInterface();
 	}
 }
 
@@ -199,7 +196,7 @@ function destroy()
 	catch(e){}
 }
 
-//Update TabGroup
+//Update tabgroup
 function update()
 {
 	if(this.options_selected > -1)
@@ -214,7 +211,7 @@ function updateInterface()
 	//Update options
 	for(var i = 0; i < this.options.length; i++)
 	{
-		this.options[i].visible = (this.options_selected === i);
+		this.options[i].visible = this.visible && (this.options_selected === i);
 		this.options[i].size.copy(this.size);
 		this.options[i].updateInterface();
 	}
