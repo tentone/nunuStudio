@@ -16,6 +16,7 @@ function SceneEditor(parent)
 
 	//Create Element
 	this.element = document.createElement("div");
+	this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//Canvas
@@ -24,6 +25,14 @@ function SceneEditor(parent)
 	this.canvas.style.top = "0px";
 	this.canvas.style.left = "0px";
 	this.element.appendChild(this.canvas);
+
+	//Performance meter
+	this.stats = new Stats();
+	this.stats.dom.style.position = "absolute";
+	this.stats.dom.style.left = "0px";
+	this.stats.dom.style.top = "0px";
+	this.stats.dom.style.zIndex = "0";
+	this.element.appendChild(this.stats.dom);
 
 	//Self pointer
 	var self = this;
@@ -47,70 +56,70 @@ function SceneEditor(parent)
 			//Check intersected objects
 			var intersections = Editor.raycaster.intersectObjects(self.scene.children, true);
 
-			if(intersections.length > 0)
+			//Get object from drag buffer
+			var uuid = event.dataTransfer.getData("uuid");
+			var dragged_object = DragBuffer.popDragElement(uuid);
+
+			//If its a file drop
+			if(event.dataTransfer.files.length > 0)
 			{
-				var object = intersections[0].object;
+				//Get first file from event
+				var file = event.dataTransfer.files[0];
 
-				//If its a file drop
-				if(event.dataTransfer.files.length > 0)
+				if(file.type.startsWith("image") && intersections.length > 0)
 				{
-					//Get first file from event
-					var file = event.dataTransfer.files[0];
+					var object = intersections[0].object;
 
-					if(file.type.startsWith("image"))
+					if(object instanceof THREE.Mesh)
 					{
-						if(object instanceof THREE.Mesh)
-						{
-							//Create new material with selected image
-							var texture = new Texture(file.path);
-							var material = new THREE.MeshPhongMaterial({map:texture, color:0xffffff, specular:0x333333, shininess:30});
-							material.name = file.name;
-							object.material = material;
+						//Create new material with selected image
+						var texture = new Texture(file.path);
+						var material = new THREE.MeshPhongMaterial({map:texture, color:0xffffff, specular:0x333333, shininess:30});
+						material.name = file.name;
+						object.material = material;
 
-							//Update asset explorer
-							Editor.updateObjectViews();
-						}
-						else if(object instanceof THREE.Sprite)
-						{
-							//Create new material with selected image
-							var texture = new Texture(file.path);
-							var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
-							material.name = file.name;
-							object.material = material;
+						//Update asset explorer
+						Editor.updateObjectViews();
+					}
+					else if(object instanceof THREE.Sprite)
+					{
+						//Create new material with selected image
+						var texture = new Texture(file.path);
+						var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
+						material.name = file.name;
+						object.material = material;
 
-							//Update asset explorer
-							Editor.updateObjectViews();
-						}
+						//Update asset explorer
+						Editor.updateObjectViews();
 					}
 				}
-				//If its a dragged object
-				else
+				else if(file.name.endsWith(".isp"))
 				{
-					//Get object from drag buffer
-					var uuid = event.dataTransfer.getData("uuid");
-					var dragged_object = DragBuffer.popDragElement(uuid);
-					
-					//Check if object exists
-					if(dragged_object !== null)
+					if(confirm("All unsaved changes to the project will be lost! Load file?"))
 					{
-						//Sprite material
-						if(dragged_object instanceof THREE.SpriteMaterial)
-						{
-							if(object instanceof THREE.Sprite)
-							{
-								object.material = dragged_object;
-								Editor.updateObjectViews();
-							}
-						}
-						//Material
-						else if(dragged_object instanceof THREE.Material)
-						{
-							if(object instanceof THREE.Mesh)
-							{
-								object.material = dragged_object;
-								Editor.updateObjectViews();
-							}
-						}
+						Editor.loadProgram(file.path);
+					}
+				}
+			}
+			//If its a dragged object
+			else if(dragged_object !== null && intersections.length > 0)
+			{
+				var object = intersections[0].object;
+				
+				if(dragged_object instanceof THREE.SpriteMaterial)
+				{
+					if(object instanceof THREE.Sprite)
+					{
+						object.material = dragged_object;
+						Editor.updateObjectViews();
+					}
+				}
+				else if(dragged_object instanceof THREE.Material)
+				{
+					if(object instanceof THREE.Mesh)
+					{
+						object.material = dragged_object;
+						Editor.updateObjectViews();
 					}
 				}
 			}
@@ -231,6 +240,7 @@ function setFullscreen(value)
 function activate()
 {
 	Editor.program.scene = this.scene;
+	Editor.setPerformanceMeter(this.stats);
 	Editor.setRenderCanvas(this.canvas);
 	Editor.setState(Editor.STATE_EDITING);
 	Editor.resetEditingFlags();
@@ -269,13 +279,18 @@ function updateInterface()
 	//Set visibilty
 	if(this.visible)
 	{
-		this.element.style.visible = "visible";
+		this.element.style.visibility = "visible";
 		this.canvas.style.visibility = "visible";
+		if(Settings.show_stats)
+		{
+			this.stats.dom.style.visibility = "visible";
+		}
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 		this.canvas.style.visibility = "hidden";
+		this.stats.dom.style.visibility = "hidden";
 	}
 
 	//Fullscreen button

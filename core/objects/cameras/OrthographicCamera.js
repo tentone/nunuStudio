@@ -1,10 +1,11 @@
+"use strict";
+
 //Orthographic Camera constructor aspect is in x/y mode
 function OrthographicCamera(size, aspect, mode, near, far)
 {
 	THREE.OrthographicCamera.call(this, -1, 1, 1, -1, near, far);
 
-	this.name = "orthographic_camera";
-
+	this.name = "camera";
 	this.size = size;
 	this.aspect = aspect;
 	this.mode = OrthographicCamera.FIXED_VERTICAL;
@@ -19,7 +20,6 @@ function OrthographicCamera(size, aspect, mode, near, far)
 
 //Function Prototype
 OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype);
-
 OrthographicCamera.prototype.update = update;
 OrthographicCamera.prototype.initialize = initialize;
 OrthographicCamera.prototype.updateProjectionMatrix = updateProjectionMatrix;

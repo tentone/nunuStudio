@@ -1,4 +1,4 @@
- function ScenePanel(parent)
+function ScenePanel(parent)
 {
 	Panel.call(this, parent);
 

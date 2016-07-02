@@ -20,15 +20,6 @@ Interface.initialize = function()
 	Interface.empty_tab_text.setText("Open new tab to edit content or create new project");
 	Interface.empty_tab_text.updateInterface();
 
-	//Scene Canvas
-	var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
-	var scene_editor = new SceneEditor();
-	scene_editor.setScene(Editor.program.scene);
-	scene.attachComponent(scene_editor);
-
-	//Set render canvas
-	Editor.setRenderCanvas(scene_editor.canvas);
-
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer_div = new DivisionResizable();
 	Interface.asset_explorer_div.resizable_side = DivisionResizable.TOP;
@@ -880,7 +871,7 @@ Interface.saveProgram = function()
 		try
 		{
 			Editor.saveProgram(fname);
-			alert("File saved");
+			alert("Project saved");
 		}
 		catch(e)
 		{
@@ -896,15 +887,15 @@ Interface.loadProgram = function()
 	{
 		App.chooseFile(function(fname)
 		{
-			try
-			{
+			//try
+			//{
 				Editor.loadProgram(fname);
-				alert("File loaded");
-			}
-			catch(e)
-			{
-				alert("Error loading file\n(" + e + ")");
-			}
+				//alert("Project loaded");
+			//}
+			//catch(e)
+			//{
+			//	alert("Error loading file\n(" + e + ")");
+			//}
 		}, ".isp");
 	}
 }

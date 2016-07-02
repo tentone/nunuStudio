@@ -110,9 +110,24 @@ function ParticleEditor(parent)
 	this.texture.setOnChange(function(file)
 	{
 		self.particle.group.texture = new Texture(file);
-		self.updateRuntimeParticle();
+		setTimeout(function()
+		{
+			self.updateRuntimeParticle();
+		}, 100);
 	});
 	this.form.add(this.texture);
+	this.form.nextRow();
+
+	//Max particle count
+	this.form.addText("Particle count");
+	this.maxParticleCount = new Numberbox(this.form.element);
+	this.maxParticleCount.size.set(100, 18);
+	this.maxParticleCount.setOnChange(function()
+	{
+		self.particle.group.maxParticleCount = self.maxParticleCount.getValue();
+		self.updateRuntimeParticle();
+	});
+	this.form.add(this.maxParticleCount);
 	this.form.nextRow();
 
 	//Blending mode
@@ -147,7 +162,7 @@ function ParticleEditor(parent)
 	this.form.nextRow();
 
 	//Particle Count
-	this.form.addText("Particle Count");
+	this.form.addText("Particle rate");
 	this.particleCount = new Numberbox(this.form.element);
 	this.particleCount.size.set(100, 18);
 	this.particleCount.setOnChange(function()
@@ -214,6 +229,11 @@ function ParticleEditor(parent)
 	this.form.add(this.maxAge_spread);
 	this.form.nextRow();
 
+	//Position
+	this.form.addText("Position");
+
+
+
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
@@ -249,6 +269,7 @@ function attachParticle(particle)
 	//Update form elements from particle data
 	this.name.setText(particle.name);
 	this.texture.setImage(particle.group.texture.image.src);
+	this.maxParticleCount.setValue(particle.group.maxParticleCount);
 	this.blending.setValue(particle.group.blending);
 	this.direction.setValue(particle.emitter.direction);
 	this.particleCount.setValue(particle.emitter.particleCount);
@@ -264,6 +285,7 @@ function attachParticle(particle)
 	this.maxAge_value.setValue(particle.emitter.maxAge.value);
 	this.maxAge_spread.setValue(particle.emitter.maxAge.spread);
 
+
 	//Create runtime particle to preview particle
 	this.updateRuntimeParticle();
 }
@@ -275,7 +297,6 @@ function updateRuntimeParticle()
 	{
 		if(this.particle_runtime !== null)
 		{
-			this.particle_runtime.dispose();
 			this.scene.remove(this.particle_runtime);
 		}
 

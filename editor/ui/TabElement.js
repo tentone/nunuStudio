@@ -124,16 +124,16 @@ function TabElement(parent, name, icon, closeable, container, index)
 TabElement.id = 0;
 
 //Function prototypes
-TabElement.prototype.update = update;
-TabElement.prototype.updateInterface = updateInterface;
-TabElement.prototype.destroy = destroy;
-TabElement.prototype.activate = activate;
-TabElement.prototype.updateObjectData = updateObjectData;
-TabElement.prototype.select = select;
-TabElement.prototype.attachComponent = attachComponent;
-TabElement.prototype.isSelected = isSelected;
-TabElement.prototype.setName = setName;
 TabElement.prototype.setIcon = setIcon;
+TabElement.prototype.setName = setName;
+TabElement.prototype.updateMetadata = updateMetadata;
+TabElement.prototype.activate = activate;
+TabElement.prototype.select = select;
+TabElement.prototype.isSelected = isSelected;
+TabElement.prototype.update = update;
+TabElement.prototype.destroy = destroy;
+TabElement.prototype.attachComponent = attachComponent;
+TabElement.prototype.updateInterface = updateInterface;
 
 //Set tab element icon
 function setIcon(icon)
@@ -153,7 +153,7 @@ function setName(text)
 }
 
 //Dectivate this tab
-function updateObjectData()
+function updateMetadata()
 {
 	if(this.component !== null)
 	{
@@ -209,9 +209,12 @@ function destroy()
 function attachComponent(component)
 {
 	this.component = component;
-	this.component.destroy();
-	this.component.parent = this.element;
-	this.element.appendChild(this.component.element);
+	if(this.component.parent !== this.element)
+	{
+		this.component.destroy();
+		this.component.parent = this.element;
+		this.element.appendChild(this.component.element);
+	}
 }
 
 //Update Interface
@@ -228,11 +231,11 @@ function updateInterface()
 	}
 	if(this.container.mode === TabGroup.TOP)
 	{
-		this.button.position.set(this.container.options_size.x*this.index, 0);
+		this.button.position.set(this.container.options_size.x * this.index, 0);
 	}
 	else if(this.container.mode === TabGroup.LEFT)
 	{
-		this.button.position.set(0, this.container.options_size.y*this.index);
+		this.button.position.set(0, this.container.options_size.y * this.index);
 	}
 	this.button.visible = this.container.visible;
 	this.button.updateInterface();
@@ -250,7 +253,7 @@ function updateInterface()
 	}
 
 	//Set visibility
-	if(this.visible && this.container.visible)
+	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
 	}

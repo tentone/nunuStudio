@@ -24,13 +24,13 @@ Main.initialize = function(canvas)
 	//Stats tool
 	Main.stats = new Stats();
 	Main.stats.setMode(0);
-	Main.stats.domElement.style.position = "absolute";
-	Main.stats.domElement.style.left = "0px";
-	Main.stats.domElement.style.top = "0px";
-	Main.stats.domElement.style.zIndex = "100";
-	Main.stats.domElement.style.opacity = "0.7";
-	Main.stats.domElement.style.pointerEvents = "none";
-	document.body.appendChild(Main.stats.domElement);
+	Main.stats.dom.style.position = "absolute";
+	Main.stats.dom.style.left = "0px";
+	Main.stats.dom.style.top = "0px";
+	Main.stats.dom.style.zIndex = "100";
+	Main.stats.dom.style.opacity = "0.7";
+	Main.stats.dom.style.pointerEvents = "none";
+	document.body.appendChild(Main.stats.dom);
 
 	//Define mouse canvas
 	Mouse.canvas = Main.canvas;

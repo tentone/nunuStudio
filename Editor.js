@@ -36,9 +36,14 @@ include("editor/ui/file/MaterialFile.js");
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/SceneEditor.js");
 include("editor/ui/tab/SettingsTab.js");
-include("editor/ui/tab/MaterialEditor.js");
 include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
+
+include("editor/ui/tab/MaterialEditor.js");
+include("editor/ui/tab/materials/PhongMaterialEditor.js");
+include("editor/ui/tab/materials/BasicMaterialEditor.js");
+include("editor/ui/tab/materials/StandardMaterialEditor.js");
+include("editor/ui/tab/materials/SpriteMaterialEditor.js");
 
 include("editor/ui/input/Checkbox.js");
 include("editor/ui/input/Textbox.js");
@@ -91,8 +96,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.7.8 Pre-Alpha";
-Editor.TIMESTAMP = "201606302128";
+Editor.VERSION = "V0.8.8 Pre-Alpha";
+Editor.TIMESTAMP = "201607020401";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -129,10 +134,12 @@ Editor.initialize = function(canvas)
 	Editor.is_editing_object = false;
 	Editor.editing_object_args = null;
 
+	//Performance meter
+	Editor.stats = null;
+
 	//Editor program and scene
 	Editor.program = null;
 	Editor.program_running = null;
-	Editor.createNewProgram();
 
 	//VR effect and controls
 	Editor.vr_controls = new VRControls();
@@ -157,13 +164,13 @@ Editor.initialize = function(canvas)
 	//Debug Elements
 	Editor.tool_scene = new THREE.Scene();
 	Editor.tool_scene_top = new THREE.Scene();
-	Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.tool_scene, Editor.program.scene.world);
+	//Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.tool_scene, Editor.program.scene.world);
 
 	//Raycaster
 	Editor.raycaster = new THREE.Raycaster(); 
 
 	//Editor Camera
-	Editor.default_camera = new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.01, 1000000);
+	Editor.default_camera = new PerspectiveCamera(60, 1, 0.01, 1000000);
 	Editor.default_camera.position.set(0, 5, 5);
 	Editor.camera = Editor.default_camera;
 	Editor.camera_rotation = new THREE.Vector2(3.14, 0);
@@ -232,13 +239,22 @@ Editor.initialize = function(canvas)
 	Editor.rotate_tool.visible = false;
 	Editor.tool_scene_top.add(Editor.rotate_tool);
 
+	//Create new program
+	Editor.createNewProgram();
+
 	//Update interface explorer tree view
-	Editor.updateObjectViews();
+	Editor.updateObjectViews();	
 }
 
 //Update Editor
 Editor.update = function()
 {
+	//End performance measure
+	if(Editor.stats !== null)
+	{
+		Editor.stats.begin();
+	}
+
 	//Update editor interface
 	Interface.update();
 	Editor.block_camera_move = false;
@@ -616,7 +632,7 @@ Editor.draw = function()
 		Editor.renderer.render(Editor.program.scene, Editor.camera);
 
 		//Render debug scene
-		Editor.cannon_renderer.update();
+		//Editor.cannon_renderer.update();
 		Editor.renderer.render(Editor.tool_scene, Editor.camera);
 		Editor.renderer.clearDepth();
 		Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
@@ -650,6 +666,12 @@ Editor.draw = function()
 		{
 			Editor.renderer.render(Editor.program_running.scene, Editor.program_running.scene.camera);
 		}
+	}
+
+	//End performance measure
+	if(Editor.stats !== null)
+	{
+		Editor.stats.end();
 	}
 }
 
@@ -850,7 +872,7 @@ Editor.updateObjectViews = function()
 //Update tab names to match objects actual info
 Editor.updateTabsData = function()
 {
-	Interface.tab.updateObjectData();
+	Interface.tab.updateMetadata();
 }
 
 //Update tree view to match actual scene
@@ -1031,7 +1053,7 @@ Editor.createNewProgram = function()
 	{
 		Interface.tab.clear();
 		var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
-		var canvas = new SceneEditor();
+		var canvas = new SceneEditor(scene.element);
 		canvas.setScene(Editor.program.scene);
 		scene.attachComponent(canvas);
 		Interface.tab.selectOption(0);
@@ -1073,9 +1095,9 @@ Editor.loadProgram = function(fname)
 	if(Editor.program.scene !== null)
 	{
 		var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
-		var canvas = new SceneEditor();
-		canvas.setScene(Editor.program.scene);
-		scene.attachComponent(canvas);
+		var editor = new SceneEditor(scene.element);
+		editor.setScene(Editor.program.scene);
+		scene.attachComponent(editor);
 		Interface.tab.selectOption(0);
 	}
 
@@ -1196,6 +1218,12 @@ Editor.disposeRunningProgram = function()
 		Editor.program_running = null;
 		Editor.vr_effect = null;
 	}
+}
+
+//Set performance meter to be used
+Editor.setPerformanceMeter = function(stats)
+{
+	Editor.stats = stats;
 }
 
 //Set render canvas

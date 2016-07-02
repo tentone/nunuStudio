@@ -67,25 +67,13 @@ Text.prototype.destroy = destroy;
 Text.prototype.setAlignment = setAlignment;
 Text.prototype.setText = setText;
 Text.prototype.setTextSize = setTextSize;
-Text.prototype.textWidth = textWidth;
 Text.prototype.setVisibility = setVisibility;
-
-//Return internal text width
-function textWidth()
-{
-	return this.span.clientWidth;
-}
 
 //Set Text
 function setText(text)
 {
 	this.text = text;
 	this.span.innerHTML = text;
-
-	if(this.fit_content)
-	{
-		this.size.x = this.textWidth();
-	}
 }
 
 //Set Text Size
@@ -93,11 +81,6 @@ function setTextSize(size)
 {
 	this.text_size = size;
 	this.element.style.fontSize = size + "px";
-
-	if(this.fit_content)
-	{
-		this.size.x = this.textWidth();
-	}
 }
 
 //Set text alignment
@@ -156,7 +139,7 @@ function updateInterface()
 	//Fit size to text
 	if(this.fit_content)
 	{
-		this.size.x = this.textWidth();
+		this.size.x = this.span.clientWidth;
 	}
 
 	//Set visibility

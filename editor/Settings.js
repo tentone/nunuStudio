@@ -3,6 +3,9 @@ function Settings(){}
 //Appearance settings
 Settings.general_theme = "dark";
 
+//Debug settings
+Settings.show_stats = true;
+
 //Scene editor settings
 Settings.grid_size = 500;
 Settings.grid_spacing = 5;
