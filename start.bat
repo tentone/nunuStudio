@@ -1,1 +1,2 @@
-python -m SimpleHTTPServer 8000
+cd nwjs/win
+nw.exe ../../

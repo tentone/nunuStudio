@@ -124,7 +124,8 @@ App.chooseFile = function(callback, filter, savemode)
 	{
 		if(callback !== undefined)
 		{
-			callback(chooser.value);
+			callback(event.path[0].value);
+			//callback(chooser.value);
 		}
 	};
 
