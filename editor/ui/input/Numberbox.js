@@ -1,4 +1,4 @@
-function Numberbox(parent)
+function NumberBox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,8 +11,8 @@ function Numberbox(parent)
 	}
 
 	//ID
-	var id = "num_box" + Numberbox.id;
-	Numberbox.id++;
+	var id = "num_box" + NumberBox.id;
+	NumberBox.id++;
 
 	//Create element
 	this.element = document.createElement("input");
@@ -30,19 +30,19 @@ function Numberbox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Numberbox ID counter
-Numberbox.id = 0;
+//NumberBox ID counter
+NumberBox.id = 0;
 
 //Functions Prototype
-Numberbox.prototype.update = update;
-Numberbox.prototype.updateInterface = updateInterface;
-Numberbox.prototype.destroy = destroy;
-Numberbox.prototype.getValue = getValue;
-Numberbox.prototype.setValue = setValue;
-Numberbox.prototype.setStep = setStep;
-Numberbox.prototype.setRange = setRange;
-Numberbox.prototype.setOnChange = setOnChange;
-Numberbox.prototype.setDisabled = setDisabled;
+NumberBox.prototype.update = update;
+NumberBox.prototype.updateInterface = updateInterface;
+NumberBox.prototype.destroy = destroy;
+NumberBox.prototype.getValue = getValue;
+NumberBox.prototype.setValue = setValue;
+NumberBox.prototype.setStep = setStep;
+NumberBox.prototype.setRange = setRange;
+NumberBox.prototype.setOnChange = setOnChange;
+NumberBox.prototype.setDisabled = setDisabled;
 
 //Set if element if disabled
 function setDisabled(value)

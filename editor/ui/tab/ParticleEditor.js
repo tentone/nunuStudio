@@ -88,7 +88,7 @@ function ParticleEditor(parent)
 	
 	//Name
 	this.form.addText("Name");
-	this.name = new Textbox(this.form.element);
+	this.name = new TextBox(this.form.element);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
@@ -104,7 +104,7 @@ function ParticleEditor(parent)
 	//Texture map
 	this.form.addText("Texture");
 	this.form.nextRow();
-	this.texture = new Imagebox(this.form.element);
+	this.texture = new ImageBox(this.form.element);
 	this.texture.size.set(100, 100);
 	this.texture.updateInterface();
 	this.texture.setOnChange(function(file)
@@ -120,7 +120,7 @@ function ParticleEditor(parent)
 
 	//Max particle count
 	this.form.addText("Particle count");
-	this.maxParticleCount = new Numberbox(this.form.element);
+	this.maxParticleCount = new NumberBox(this.form.element);
 	this.maxParticleCount.size.set(100, 18);
 	this.maxParticleCount.setOnChange(function()
 	{
@@ -163,7 +163,7 @@ function ParticleEditor(parent)
 
 	//Particle Count
 	this.form.addText("Particle rate");
-	this.particleCount = new Numberbox(this.form.element);
+	this.particleCount = new NumberBox(this.form.element);
 	this.particleCount.size.set(100, 18);
 	this.particleCount.setOnChange(function()
 	{
@@ -175,7 +175,7 @@ function ParticleEditor(parent)
 
 	//Particle Duration
 	this.form.addText("Duration");
-	this.duration = new Numberbox(this.form.element);
+	this.duration = new NumberBox(this.form.element);
 	this.duration.size.set(60, 18);
 	this.duration.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.duration.setOnChange(function()
@@ -208,7 +208,7 @@ function ParticleEditor(parent)
 
 	//Max age
 	this.form.addText("Max Age");
-	this.maxAge_value = new Numberbox(this.form.element);
+	this.maxAge_value = new NumberBox(this.form.element);
 	this.maxAge_value.size.set(60, 18);
 	this.maxAge_value.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAge_value.setOnChange(function()
@@ -218,7 +218,7 @@ function ParticleEditor(parent)
 	});
 	this.form.add(this.maxAge_value);
 	this.form.addText("+/-");
-	this.maxAge_spread = new Numberbox(this.form.element);
+	this.maxAge_spread = new NumberBox(this.form.element);
 	this.maxAge_spread.size.set(60, 18);
 	this.maxAge_spread.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAge_spread.setOnChange(function()

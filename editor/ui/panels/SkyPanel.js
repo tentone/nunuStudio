@@ -12,7 +12,7 @@ function SkyPanel(parent)
 	text.position.set(5, 20);
 	text.updateInterface();
 
-	this.name = new Textbox(this.element);
+	this.name = new TextBox(this.element);
 	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
 	this.name.updateInterface();
@@ -26,7 +26,7 @@ function SkyPanel(parent)
 	});
 
 	//Auto update
-	this.auto_update = new Checkbox(this.element);
+	this.auto_update = new CheckBox(this.element);
 	this.auto_update.setText("Auto update");
 	this.auto_update.size.set(200, 15);
 	this.auto_update.position.set(5, 35);
@@ -47,7 +47,7 @@ function SkyPanel(parent)
 	text.position.set(5, 70);
 	text.updateInterface();
 
-	this.day_time = new Numberbox(this.element);
+	this.day_time = new NumberBox(this.element);
 	this.day_time.size.set(100, 18);
 	this.day_time.position.set(95, 60);
 	this.day_time.setStep(0.1);
@@ -85,7 +85,7 @@ function SkyPanel(parent)
 	text.position.set(5, 95);
 	text.updateInterface();
 
-	this.time = new Numberbox(this.element);
+	this.time = new NumberBox(this.element);
 	this.time.size.set(100, 18);
 	this.time.position.set(55, 85);
 	this.time.setStep(0.1);
@@ -120,7 +120,7 @@ function SkyPanel(parent)
 	text.position.set(5, 120);
 	text.updateInterface();
 	
-	this.sun_distance = new Numberbox(this.element);
+	this.sun_distance = new NumberBox(this.element);
 	this.sun_distance.size.set(80, 18);
 	this.sun_distance.position.set(80, 110);
 	this.sun_distance.setStep(10);

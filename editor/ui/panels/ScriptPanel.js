@@ -13,7 +13,7 @@ function ScriptPanel(parent)
 	text.updateInterface();
 
 	//Name textbox
-	this.name = new Textbox(this.element);
+	this.name = new TextBox(this.element);
 	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
 	this.name.updateInterface();
@@ -33,7 +33,7 @@ function ScriptPanel(parent)
 	text.position.set(5, 45);
 	text.updateInterface();
 
-	this.pos = new Positionbox(this.element);
+	this.pos = new PositionBox(this.element);
 	this.pos.position.set(56, 35);
 	this.pos.updateInterface();
 	this.pos.setOnChange(function()
@@ -67,7 +67,7 @@ function ScriptPanel(parent)
 	});
 
 	//Static
-	this.static = new Checkbox(this.element);
+	this.static = new CheckBox(this.element);
 	this.static.setText("Static Object");
 	this.static.size.set(200, 15);
 	this.static.position.set(5, 85);

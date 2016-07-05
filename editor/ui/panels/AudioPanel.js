@@ -7,7 +7,7 @@ function AudioPanel(parent)
 
 	//Name
 	this.form.addText("Name");
-	this.name = new Textbox(this.form.element);
+	this.name = new TextBox(this.form.element);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
@@ -21,7 +21,7 @@ function AudioPanel(parent)
 	this.form.nextRow();
 
 	//Autoplay
-	this.autoplay = new Checkbox(this.form.element);
+	this.autoplay = new CheckBox(this.form.element);
 	this.autoplay.setText("Autoplay");
 	this.autoplay.size.set(150, 15);
 	this.autoplay.setOnChange(function()
@@ -35,7 +35,7 @@ function AudioPanel(parent)
 	this.form.nextRow();
 
 	//Loop
-	this.loop = new Checkbox(this.form.element);
+	this.loop = new CheckBox(this.form.element);
 	this.loop.setText("Loop");
 	this.loop.size.set(150, 15);
 	this.loop.setOnChange(function()
@@ -50,7 +50,7 @@ function AudioPanel(parent)
 
 	//Playback Rate
 	this.form.addText("Playback Speed");
-	this.playbackRate = new Numberbox(this.form.element);
+	this.playbackRate = new NumberBox(this.form.element);
 	this.playbackRate.size.set(60, 18);
 	this.playbackRate.setStep(0.01);
 	this.playbackRate.setRange(0, 9999999);

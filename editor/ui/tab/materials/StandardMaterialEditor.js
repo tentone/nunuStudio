@@ -80,12 +80,12 @@ function StandardMaterialEditor(parent)
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
-	this.map = new Imagebox(this.form.element);
+	this.map = new TextureBox(this.form.element);
 	this.map.size.set(100, 100);
 	this.map.updateInterface();
 	this.map.setOnChange(function(file)
 	{
-		self.material.map = new Texture(file);
+		self.material.map = self.map.getValue();
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);
@@ -94,12 +94,12 @@ function StandardMaterialEditor(parent)
 	//Roughness map
 	this.form.addText("Roughness map");
 	this.form.nextRow();
-	this.roughnessMap = new Imagebox(this.form.element);
+	this.roughnessMap = new TextureBox(this.form.element);
 	this.roughnessMap.size.set(100, 100);
 	this.roughnessMap.updateInterface();
 	this.roughnessMap.setOnChange(function(file)
 	{
-		self.material.roughnessMap = new Texture(file);
+		self.material.roughnessMap = self.roughnessMap.getValue();
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.roughnessMap);
@@ -108,12 +108,12 @@ function StandardMaterialEditor(parent)
 	//Metalness map
 	this.form.addText("Metalness map");
 	this.form.nextRow();
-	this.metalnessMap = new Imagebox(this.form.element);
+	this.metalnessMap = new TextureBox(this.form.element);
 	this.metalnessMap.size.set(100, 100);
 	this.metalnessMap.updateInterface();
 	this.metalnessMap.setOnChange(function(file)
 	{
-		self.material.metalnessMap = new Texture(file);
+		self.material.metalnessMap = self.metalnessMap.getValue();
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.metalnessMap);
@@ -122,19 +122,19 @@ function StandardMaterialEditor(parent)
 	//Bump map
 	this.form.addText("Bump map");
 	this.form.nextRow();
-	this.bumpMap = new Imagebox(this.form.element);
+	this.bumpMap = new TextureBox(this.form.element);
 	this.bumpMap.size.set(100, 100);
 	this.bumpMap.updateInterface();
 	this.bumpMap.setOnChange(function(file)
 	{
-		self.material.bumpMap = new Texture(file);
+		self.material.bumpMap = self.bumpMap.getValue();
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.bumpMap);
 	this.form.nextRow();
 
 	//Bump map scale
-	this.form.addText("Scale");
+	this.form.addText("Bump Scale");
 	this.bumpScale = new Slider(this.form.element);
 	this.bumpScale.size.set(160, 18);
 	this.bumpScale.setRange(0, 1);
@@ -156,59 +156,42 @@ function StandardMaterialEditor(parent)
 	//Normal map
 	this.form.addText("Normal map");
 	this.form.nextRow();
-	this.normalMap = new Imagebox(this.form.element);
+	this.normalMap = new TextureBox(this.form.element);
 	this.normalMap.size.set(100, 100);
 	this.normalMap.updateInterface();
 	this.normalMap.setOnChange(function(file)
 	{
-		self.material.normalMap = new Texture(file);
+		self.material.normalMap = self.normalMap.getValue();
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.normalMap);
 	this.form.nextRow();
 
 	//Normal map scale
-	this.form.addText("Scale X");
-	this.normalScale_x = new Numberbox(this.form.element);
-	this.normalScale_x.size.set(35, 18);
-	this.normalScale_x.setRange(0, 1);
-	this.normalScale_x.setStep(0.01);
-	this.normalScale_x.updateInterface();
-	this.normalScale_x.setOnChange(function()
+	this.form.addText("Normal Scale");
+	this.normalScale = new PositionBox(this.form.element);
+	this.normalScale.setMode(PositionBox.VECTOR2);
+	this.normalScale.setValue(1, 1, 0);
+	this.normalScale.setOnChange(function()
 	{
 		if(self.material !== null)
 		{
-			self.material.normalScale.x = self.normalScale_x.getValue();
+			self.material.normalScale.copy(self.normalScale.getValue());
 			self.material.needsUpdate = true;
 		}
 	});
-	this.form.add(this.normalScale_x);
-	this.form.addText("Y");
-	this.normalScale_y = new Numberbox(this.form.element);
-	this.normalScale_y.size.set(40, 18);
-	this.normalScale_y.setRange(0, 1);
-	this.normalScale_y.setStep(0.01);
-	this.normalScale_y.updateInterface();
-	this.normalScale_y.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.normalScale.y = self.normalScale_y.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.normalScale_y);
+	this.form.add(this.normalScale);
 	this.form.nextRow();
 
 	//Displacement map
 	this.form.addText("Displacement map");
 	this.form.nextRow();
-	this.displacementMap = new Imagebox(this.form.element);
+	this.displacementMap = new TextureBox(this.form.element);
 	this.displacementMap.size.set(100, 100);
 	this.displacementMap.updateInterface();
 	this.displacementMap.setOnChange(function(file)
 	{
-		self.material.displacementMap = new Texture(file);
+		self.material.displacementMap = self.displacementMap.getValue();
 		self.material.needsUpdate = true;
 	});
 	this.children.push(this.displacementMap);
@@ -216,8 +199,8 @@ function StandardMaterialEditor(parent)
 	this.form.nextRow();
 
 	//Displacement map scale
-	this.form.addText("Scale");
-	this.displacementScale = new Numberbox(this.form.element);
+	this.form.addText("Displacement Scale");
+	this.displacementScale = new NumberBox(this.form.element);
 	this.displacementScale.size.set(60, 18);
 	this.displacementScale.setStep(0.05);
 	this.displacementScale.updateInterface();
@@ -233,8 +216,8 @@ function StandardMaterialEditor(parent)
 	this.form.nextRow();
 
 	//Displacement map bias
-	this.form.addText("Bias");
-	this.displacementBias = new Numberbox(this.form.element);
+	this.form.addText("Displacement Bias");
+	this.displacementBias = new NumberBox(this.form.element);
 	this.displacementBias.size.set(60, 18);
 	this.displacementBias.setStep(0.1);
 	this.displacementBias.updateInterface();
@@ -252,14 +235,14 @@ function StandardMaterialEditor(parent)
 	//Emissive map
 	this.form.addText("Emissive map");
 	this.form.nextRow();
-	this.emissiveMap = new Imagebox(this.form.element);
+	this.emissiveMap = new TextureBox(this.form.element);
 	this.emissiveMap.size.set(100, 100);
 	this.emissiveMap.updateInterface();
 	this.emissiveMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
 		{
-			self.material.emissiveMap = new Texture(file);
+			self.material.emissiveMap = self.emissiveMap.getValue();
 			self.material.needsUpdate = true;
 		}
 	});
@@ -283,7 +266,7 @@ function StandardMaterialEditor(parent)
 
 	//Emissive intensity
 	this.form.addText("Intensity");
-	this.emissiveIntensity = new Numberbox(this.form.element);
+	this.emissiveIntensity = new NumberBox(this.form.element);
 	this.emissiveIntensity.size.set(60, 18);
 	this.emissiveIntensity.setStep(0.1);
 	this.emissiveIntensity.updateInterface();
@@ -301,14 +284,14 @@ function StandardMaterialEditor(parent)
 	//Alpha map
 	this.form.addText("Alpha map");
 	this.form.nextRow();
-	this.alphaMap = new Imagebox(this.form.element);
+	this.alphaMap = new TextureBox(this.form.element);
 	this.alphaMap.size.set(100, 100);
 	this.alphaMap.updateInterface();
 	this.alphaMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
 		{
-			self.material.alphaMap = new Texture(file);
+			self.material.alphaMap = self.alphaMap.getValue();
 			self.material.needsUpdate = true;
 		}
 	});
@@ -331,44 +314,19 @@ function attachMaterial(material, material_file)
 	this.roughness_text.setText(material.roughness);
 	this.metalness.setValue(material.metalness);
 	this.metalness_text.setText(material.metalness);
-	if(material.map !== null)
-	{
-		this.map.setImage(material.map.image.src);
-	}
-	if(material.roughnessMap !== null)
-	{
-		this.roughnessMap.setImage(material.roughnessMap.image.src);
-	}
-	if(material.metalnessMap !== null)
-	{
-		this.metalnessMap.setImage(material.metalnessMap.image.src);
-	}
-	if(material.bumpMap !== null)
-	{
-		this.bumpMap.setImage(material.bumpMap.image.src);
-	}
+	this.map.setValue(material.map);
+	this.roughnessMap.setValue(material.roughnessMap);
+	this.metalnessMap.setValue(material.metalnessMap);
+	this.bumpMap.setValue(material.bumpMap);
 	this.bumpScale.setValue(material.bumpScale);
 	this.bumpScale_text.setText(material.bumpScale);
-	if(material.normalMap !== null)
-	{
-		this.normalMap.setImage(material.normalMap.image.src);
-	}
-	this.normalScale_x.setValue(material.normalScale.x);
-	this.normalScale_y.setValue(material.normalScale.y);
-	if(material.displacementMap !== null)
-	{
-		this.displacementMap.setImage(material.displacementMap.image.src);
-	}
+	this.normalMap.setValue(material.normalMap);
+	this.normalScale.setValue(material.normalScale.x, material.normalScale.y);
+	this.displacementMap.setValue(material.displacementMap);
 	this.displacementScale.setValue(material.displacementScale);
 	this.displacementBias.setValue(material.displacementBias);
 	this.emissive.setValue(material.emissive.r, material.emissive.g, material.emissive.b);
 	this.emissiveIntensity.setValue(material.emissiveIntensity);
-	if(material.emissiveMap !== null)
-	{
-		this.emissiveMap.setImage(material.emissiveMap.image.src);
-	}
-	if(material.alphaMap !== null)
-	{
-		this.alphaMap.setImage(material.alphaMap.image.src);
-	}
+	this.emissiveMap.setValue(material.emissiveMap);
+	this.alphaMap.setValue(material.alphaMap);
 }

@@ -141,7 +141,8 @@ function activate()
 {
 	this.updateScript();
 	this.setFontSize(Settings.code_font_size);
-	
+	this.code.setOption("theme", Settings.code_theme);
+
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
 }

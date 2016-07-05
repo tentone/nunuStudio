@@ -7,7 +7,7 @@ function ScenePanel(parent)
 
 	//Name
 	this.form.addText("Name");
-	this.name = new Textbox(this.form.element);
+	this.name = new TextBox(this.form.element);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
@@ -21,7 +21,7 @@ function ScenePanel(parent)
 	this.form.nextRow();
 
 	//Select scene as default
-	this.default = new Checkbox(this.form.element);
+	this.default = new CheckBox(this.form.element);
 	this.default.setText("Default scene");
 	this.default.size.set(200, 15);
 	this.default.setOnChange(function()
@@ -101,7 +101,7 @@ function ScenePanel(parent)
 
 	//Linear fog near
 	this.fog_near_text = this.linear_form.addText("Near");
-	this.fog_near = new Numberbox(this.linear_form.element);
+	this.fog_near = new NumberBox(this.linear_form.element);
 	this.fog_near.size.set(60, 18);
 	this.fog_near.setOnChange(function()
 	{
@@ -116,7 +116,7 @@ function ScenePanel(parent)
 
 	//Linear fog far
 	this.fog_far_text = this.linear_form.addText("Far");
-	this.fog_far = new Numberbox(this.linear_form.element);
+	this.fog_far = new NumberBox(this.linear_form.element);
 	this.fog_far.size.set(60, 18);
 	this.fog_far.setOnChange(function()
 	{
@@ -136,7 +136,7 @@ function ScenePanel(parent)
 
 	//Exponential fog density
 	this.fog_density_text = this.exponential_form.addText("Density")
-	this.fog_density = new Numberbox(this.exponential_form.element);
+	this.fog_density = new NumberBox(this.exponential_form.element);
 	this.fog_density.size.set(100, 18);
 	this.fog_density.setStep(0.0001);
 	this.fog_density.setOnChange(function()

@@ -12,7 +12,7 @@ function PerspectiveCameraPanel(parent)
 	text.position.set(5, 20);
 	text.updateInterface();
 
-	this.name = new Textbox(this.element);
+	this.name = new TextBox(this.element);
 	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
 	this.name.updateInterface();
@@ -32,7 +32,7 @@ function PerspectiveCameraPanel(parent)
 	text.position.set(5, 45);
 	text.updateInterface();
 
-	this.pos = new Positionbox(this.element);
+	this.pos = new PositionBox(this.element);
 	this.pos.position.set(56, 35);
 	this.pos.updateInterface();
 	this.pos.setOnChange(function()
@@ -51,7 +51,7 @@ function PerspectiveCameraPanel(parent)
 	text.position.set(5, 70);
 	text.updateInterface();
 
-	this.rotation = new Positionbox(this.element);
+	this.rotation = new PositionBox(this.element);
 	this.rotation.position.set(57, 60);
 	this.rotation.updateInterface();
 	this.rotation.setOnChange(function()
@@ -91,7 +91,7 @@ function PerspectiveCameraPanel(parent)
 	this.fov_text.updateInterface();
 
 	//Select camera as scene default
-	this.default = new Checkbox(this.element);
+	this.default = new CheckBox(this.element);
 	this.default.setText("Default camera");
 	this.default.size.set(200, 15);
 	this.default.position.set(3, 110);

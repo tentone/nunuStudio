@@ -5,6 +5,12 @@ include("lib/codemirror/codemirror.js");
 include("lib/codemirror/mode/javascript/javascript.js");
 include("lib/codemirror/codemirror.css");
 include("lib/codemirror/theme/monokai.css");
+include("lib/codemirror/theme/abcdef.css");
+include("lib/codemirror/theme/ambiance.css");
+include("lib/codemirror/theme/bespin.css");
+include("lib/codemirror/theme/blackboard.css");
+include("lib/codemirror/theme/cobalt.css");
+include("lib/codemirror/theme/colorforth.css");
 
 include("lib/jscolor.min.js");
 
@@ -45,14 +51,15 @@ include("editor/ui/tab/materials/BasicMaterialEditor.js");
 include("editor/ui/tab/materials/StandardMaterialEditor.js");
 include("editor/ui/tab/materials/SpriteMaterialEditor.js");
 
-include("editor/ui/input/Checkbox.js");
-include("editor/ui/input/Textbox.js");
+include("editor/ui/input/CheckBox.js");
+include("editor/ui/input/TextBox.js");
 include("editor/ui/input/ColorChooser.js");
 include("editor/ui/input/Slider.js");
 include("editor/ui/input/DropdownList.js");
-include("editor/ui/input/Numberbox.js");
-include("editor/ui/input/Positionbox.js");
-include("editor/ui/input/Imagebox.js");
+include("editor/ui/input/NumberBox.js");
+include("editor/ui/input/PositionBox.js");
+include("editor/ui/input/ImageBox.js");
+include("editor/ui/input/TextureBox.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/AudioPanel.js");
@@ -96,8 +103,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.8 Pre-Alpha";
-Editor.TIMESTAMP = "201607021446";
+Editor.VERSION = "V0.8.8.5 Alpha";
+Editor.TIMESTAMP = "201607050226";
 
 //Initialize Main
 Editor.initialize = function(canvas)

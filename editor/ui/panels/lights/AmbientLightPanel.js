@@ -13,7 +13,7 @@ function AmbientLightPanel(parent)
 	text.updateInterface();
 
 	//Name textbox
-	this.name = new Textbox(this.element);
+	this.name = new TextBox(this.element);
 	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
 	this.name.updateInterface();
@@ -47,7 +47,7 @@ function AmbientLightPanel(parent)
 	});
 
 	//Visible
-	this.visible = new Checkbox(this.element);
+	this.visible = new CheckBox(this.element);
 	this.visible.setText("Visible");
 	this.visible.size.set(200, 15);
 	this.visible.position.set(5, 60);
@@ -61,7 +61,7 @@ function AmbientLightPanel(parent)
 	});
 
 	//Static
-	this.static = new Checkbox(this.element);
+	this.static = new CheckBox(this.element);
 	this.static.setText("Static Object");
 	this.static.size.set(200, 15);
 	this.static.position.set(5, 85);

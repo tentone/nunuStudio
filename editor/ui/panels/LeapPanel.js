@@ -13,7 +13,7 @@ function LeapPanel(parent)
 	text.updateInterface();
 
 	//Name textbox
-	this.name = new Textbox(this.element);
+	this.name = new TextBox(this.element);
 	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
 	this.name.updateInterface();
@@ -33,7 +33,7 @@ function LeapPanel(parent)
 	text.position.set(5, 45);
 	text.updateInterface();
 
-	this.pos = new Positionbox(this.element);
+	this.pos = new PositionBox(this.element);
 	this.pos.position.set(56, 35);
 	this.pos.updateInterface();
 	this.pos.setOnChange(function()
@@ -52,7 +52,7 @@ function LeapPanel(parent)
 	text.position.set(5, 70);
 	text.updateInterface();
 
-	this.scale = new Positionbox(this.element);
+	this.scale = new PositionBox(this.element);
 	this.scale.position.set(45, 60);
 	this.scale.updateInterface();
 	this.scale.setOnChange(function()
@@ -71,7 +71,7 @@ function LeapPanel(parent)
 	text.position.set(5, 95);
 	text.updateInterface();
 
-	this.rotation = new Positionbox(this.element);
+	this.rotation = new PositionBox(this.element);
 	this.rotation.position.set(57, 85);
 	this.rotation.updateInterface();
 	this.rotation.setOnChange(function()
@@ -105,7 +105,7 @@ function LeapPanel(parent)
 	});
 
 	//Debug model
-	this.debug_model = new Checkbox(this.element);
+	this.debug_model = new CheckBox(this.element);
 	this.debug_model.setText("Debug model");
 	this.debug_model.size.set(200, 15);
 	this.debug_model.position.set(5, 135);
@@ -119,7 +119,7 @@ function LeapPanel(parent)
 	});
 
 	//Gestures Enabled
-	this.gestures_enabled = new Checkbox(this.element);
+	this.gestures_enabled = new CheckBox(this.element);
 	this.gestures_enabled.setText("Gestures Enabled");
 	this.gestures_enabled.size.set(200, 15);
 	this.gestures_enabled.position.set(5, 160);
@@ -133,7 +133,7 @@ function LeapPanel(parent)
 	});
 
 	//Poses Enabled
-	this.poses_enabled = new Checkbox(this.element);
+	this.poses_enabled = new CheckBox(this.element);
 	this.poses_enabled.setText("Poses Enabled");
 	this.poses_enabled.size.set(200, 15);
 	this.poses_enabled.position.set(5, 185);
