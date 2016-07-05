@@ -131,8 +131,6 @@ function updateInterface()
 		this.img.style.visibility = "hidden";
 	}
 
-	var image = this.size.clone();
-	
 	//Keep image aspect ratio
 	if(this.keep_aspect_ratio)
 	{

@@ -1,4 +1,4 @@
-function Checkbox(parent)
+function CheckBox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,14 +11,14 @@ function Checkbox(parent)
 	}
 
 	//ID
-	var id = "checkbox" + Checkbox.id;
-	Checkbox.id++;
+	var id = "checkbox" + CheckBox.id;
+	CheckBox.id++;
 
 	//Create element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 
-	//Checkbox
+	//CheckBox
 	this.checkbox = document.createElement("input");
 	this.checkbox.type = "checkbox";
 	this.checkbox.style.position = "absolute";
@@ -40,18 +40,18 @@ function Checkbox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Checkbox ID counter
-Checkbox.id = 0;
+//CheckBox ID counter
+CheckBox.id = 0;
 
 //Functions Prototype
-Checkbox.prototype.update = update;
-Checkbox.prototype.updateInterface = updateInterface;
-Checkbox.prototype.destroy = destroy;
-Checkbox.prototype.setOnChange = setOnChange;
-Checkbox.prototype.setText = setText;
-Checkbox.prototype.getValue = getValue;
-Checkbox.prototype.setValue = setValue;
-Checkbox.prototype.setDisabled = setDisabled;
+CheckBox.prototype.update = update;
+CheckBox.prototype.updateInterface = updateInterface;
+CheckBox.prototype.destroy = destroy;
+CheckBox.prototype.setOnChange = setOnChange;
+CheckBox.prototype.setText = setText;
+CheckBox.prototype.getValue = getValue;
+CheckBox.prototype.setValue = setValue;
+CheckBox.prototype.setDisabled = setDisabled;
 
 //Set if element if disabled
 function setDisabled(value)

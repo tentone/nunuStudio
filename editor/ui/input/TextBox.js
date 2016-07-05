@@ -1,4 +1,4 @@
-function Textbox(parent)
+function TextBox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,8 +11,8 @@ function Textbox(parent)
 	}
 
 	//ID
-	var id = "txt_box" + Textbox.id;
-	Textbox.id++;
+	var id = "txt_box" + TextBox.id;
+	TextBox.id++;
 
 	//Create element
 	this.element = document.createElement("input");
@@ -29,17 +29,17 @@ function Textbox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Textbox ID counter
-Textbox.id = 0;
+//TextBox ID counter
+TextBox.id = 0;
 
 //Functions Prototype
-Textbox.prototype.update = update;
-Textbox.prototype.updateInterface = updateInterface;
-Textbox.prototype.destroy = destroy;
-Textbox.prototype.setText = setText;
-Textbox.prototype.getText = getText;
-Textbox.prototype.setOnChange = setOnChange;
-Textbox.prototype.setDisabled = setDisabled;
+TextBox.prototype.update = update;
+TextBox.prototype.updateInterface = updateInterface;
+TextBox.prototype.destroy = destroy;
+TextBox.prototype.setText = setText;
+TextBox.prototype.getText = getText;
+TextBox.prototype.setOnChange = setOnChange;
+TextBox.prototype.setDisabled = setDisabled;
 
 //Set if element if disabled
 function setDisabled(value)

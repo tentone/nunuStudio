@@ -1,4 +1,4 @@
-function Imagebox(parent)
+function ImageBox(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,8 +11,8 @@ function Imagebox(parent)
 	}
 
 	//ID
-	var id = "img_box" + Imagebox.id;
-	Imagebox.id++;
+	var id = "img_box" + ImageBox.id;
+	ImageBox.id++;
 
 	//Create element
 	this.element = document.createElement("div");
@@ -37,14 +37,17 @@ function Imagebox(parent)
 	{
 		event.preventDefault();
 
-		//Get first file from event
-		var file = event.dataTransfer.files[0];
-
-		//Check if its a image
-		if(file.type.startsWith("image"))
+		if(event.dataTransfer.files.length > 0)
 		{
-			self.setImage(file.path);
-			self.onchange(file.path);
+			//Get first file from event
+			var file = event.dataTransfer.files[0];
+
+			//Check if its a image
+			if(file.type.startsWith("image"))
+			{
+				self.setImage(file.path);
+				self.onchange(file.path);
+			}
 		}
 	};
 
@@ -84,18 +87,18 @@ function Imagebox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Imagebox ID counter
-Imagebox.id = 0;
+//ImageBox ID counter
+ImageBox.id = 0;
 
 //Functions Prototype
-Imagebox.prototype.setImage = setImage;
-Imagebox.prototype.getValue = getValue;
-Imagebox.prototype.update = update;
-Imagebox.prototype.updateInterface = updateInterface;
-Imagebox.prototype.destroy = destroy;
-Imagebox.prototype.setOnChange = setOnChange;
+ImageBox.prototype.setImage = setImage;
+ImageBox.prototype.getValue = getValue;
+ImageBox.prototype.update = update;
+ImageBox.prototype.updateInterface = updateInterface;
+ImageBox.prototype.destroy = destroy;
+ImageBox.prototype.setOnChange = setOnChange;
 
-//Set image onclick callback function
+//Set onchange callback function
 function setOnChange(callback)
 {
 	this.onchange = callback;
@@ -150,8 +153,6 @@ function updateInterface()
 		this.alpha.style.visibility = "hidden";
 	}
 
-	var image = this.size.clone();
-	
 	//Keep image aspect ratio
 	if(this.keep_aspect_ratio)
 	{
@@ -171,9 +172,9 @@ function updateInterface()
 	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
 	
-	this.alpha.width = this.size.x * this.image_scale.x;
-	this.alpha.height = this.size.y * this.image_scale.y;
-	this.alpha.style.left = this.img.style.let;
+	this.alpha.width = this.size.x;
+	this.alpha.height = this.size.y;
+	this.alpha.style.left = this.img.style.left;
 	this.alpha.style.top = this.img.style.top;
 
 	//Update base element

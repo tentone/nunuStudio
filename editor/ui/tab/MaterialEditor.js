@@ -154,7 +154,7 @@ function MaterialEditor(parent)
 	this.children.push(this.test_model);
 
 	//Sky enabled
-	this.sky_enabled = new Checkbox(this.preview.div_b);
+	this.sky_enabled = new CheckBox(this.preview.div_b);
 	this.sky_enabled.setText("Enable sky");
 	this.sky_enabled.size.set(200, 15);
 	this.sky_enabled.position.set(5, 60);
@@ -174,7 +174,7 @@ function MaterialEditor(parent)
 	
 	//Name
 	this.form.addText("Name");
-	this.name = new Textbox(this.form.element);
+	this.name = new TextBox(this.form.element);
 	this.name.size.set(200, 18);
 	this.name.setOnChange(function()
 	{
@@ -207,7 +207,7 @@ function MaterialEditor(parent)
 	this.form.nextRow();
 
 	//Skinning
-	this.skinning = new Checkbox(this.preview.div_b);
+	this.skinning = new CheckBox(this.preview.div_b);
 	this.skinning.setText("Skinning");
 	this.skinning.size.set(200, 15);
 	this.skinning.updateInterface();
@@ -222,7 +222,7 @@ function MaterialEditor(parent)
 	this.form.nextRow();
 
 	//Test depth
-	this.depthTest = new Checkbox(this.preview.div_b);
+	this.depthTest = new CheckBox(this.preview.div_b);
 	this.depthTest.setText("Test depth");
 	this.depthTest.size.set(200, 15);
 	this.depthTest.updateInterface();
@@ -238,7 +238,7 @@ function MaterialEditor(parent)
 	this.form.nextRow();
 
 	//Transparent
-	this.transparent = new Checkbox(this.form.element);
+	this.transparent = new CheckBox(this.form.element);
 	this.transparent.setText("Transparent");
 	this.transparent.size.set(200, 15);
 	this.transparent.setOnChange(function()

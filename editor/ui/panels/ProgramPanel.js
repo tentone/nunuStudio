@@ -12,7 +12,7 @@ function ProgramPanel(parent)
 	text.position.set(5, 20);
 	text.updateInterface();
 
-	this.name = new Textbox(this.element);
+	this.name = new TextBox(this.element);
 	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
 	this.name.updateInterface();
@@ -32,7 +32,7 @@ function ProgramPanel(parent)
 	text.position.set(5, 45);
 	text.updateInterface();
 
-	this.author = new Textbox(this.element);
+	this.author = new TextBox(this.element);
 	this.author.position.set(50, 35);
 	this.author.size.set(200, 18);
 	this.author.updateInterface();
@@ -51,7 +51,7 @@ function ProgramPanel(parent)
 	text.position.set(5, 70);
 	text.updateInterface();
 
-	this.version = new Textbox(this.element);
+	this.version = new TextBox(this.element);
 	this.version.position.set(50, 60);
 	this.version.size.set(100, 18);
 	this.version.updateInterface();
@@ -64,7 +64,7 @@ function ProgramPanel(parent)
 	});
 
 	//VR
-	this.vr = new Checkbox(this.element);
+	this.vr = new CheckBox(this.element);
 	this.vr.setText("VR Enabled");
 	this.vr.position.set(3, 85);
 	this.vr.size.set(50, 15);
@@ -84,7 +84,7 @@ function ProgramPanel(parent)
 	text.position.set(5, 120);
 	text.updateInterface();
 
-	this.vr_scale = new Numberbox(this.element);
+	this.vr_scale = new NumberBox(this.element);
 	this.vr_scale.position.set(120, 110);
 	this.vr_scale.size.set(50, 18);
 	this.vr_scale.setRange(0, 1000);

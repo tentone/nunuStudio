@@ -21,7 +21,7 @@ function SpriteMaterialEditor(parent)
 
 	//Rotation
 	this.form.addText("Rotation");
-	this.rotation = new Numberbox(this.form.element);
+	this.rotation = new NumberBox(this.form.element);
 	this.rotation.size.set(60, 18);
 	this.rotation.setStep(0.01);
 	this.rotation.updateInterface();
@@ -39,12 +39,12 @@ function SpriteMaterialEditor(parent)
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
-	this.map = new Imagebox(this.form.element);
+	this.map = new TextureBox(this.form.element);
 	this.map.size.set(100, 100);
 	this.map.updateInterface();
 	this.map.setOnChange(function(file)
 	{
-		self.material.map = new Texture(file);
+		self.material.map = self.map.getValue();
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);
@@ -62,8 +62,5 @@ function attachMaterial(material, material_file)
 
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.rotation.setValue(material.rotation);
-	if(material.map !== null)
-	{
-		this.map.setImage(material.map.image.src);
-	}
+	this.map.setValue(material.map);
 }

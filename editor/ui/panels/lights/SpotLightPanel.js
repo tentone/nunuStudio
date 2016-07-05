@@ -13,7 +13,7 @@ function SpotLightPanel(parent)
 	text.updateInterface();
 
 	//Name textbox
-	this.name = new Textbox(this.element);
+	this.name = new TextBox(this.element);
 	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
 	this.name.updateInterface();
@@ -33,7 +33,7 @@ function SpotLightPanel(parent)
 	text.position.set(5, 45);
 	text.updateInterface();
 
-	this.pos = new Positionbox(this.element);
+	this.pos = new PositionBox(this.element);
 	this.pos.position.set(56, 35);
 	this.pos.updateInterface();
 	this.pos.setOnChange(function()
@@ -52,7 +52,7 @@ function SpotLightPanel(parent)
 	text.position.set(5, 70);
 	text.updateInterface();
 
-	this.rotation = new Positionbox(this.element);
+	this.rotation = new PositionBox(this.element);
 	this.rotation.position.set(56, 60);
 	this.rotation.updateInterface();
 	this.rotation.setOnChange(function()
@@ -166,7 +166,7 @@ function SpotLightPanel(parent)
 	this.decay_text.updateInterface();
 
 	//Cast shadow
-	this.cast_shadow = new Checkbox(this.element);
+	this.cast_shadow = new CheckBox(this.element);
 	this.cast_shadow.setText("Cast Shadow");
 	this.cast_shadow.size.set(200, 15);
 	this.cast_shadow.position.set(5, 185);
@@ -180,7 +180,7 @@ function SpotLightPanel(parent)
 	});
 
 	//Visible
-	this.visible = new Checkbox(this.element);
+	this.visible = new CheckBox(this.element);
 	this.visible.setText("Visible");
 	this.visible.size.set(200, 15);
 	this.visible.position.set(5, 210);
@@ -194,7 +194,7 @@ function SpotLightPanel(parent)
 	});
 
 	//Static
-	this.static = new Checkbox(this.element);
+	this.static = new CheckBox(this.element);
 	this.static.setText("Static Object");
 	this.static.size.set(200, 15);
 	this.static.position.set(5, 235);

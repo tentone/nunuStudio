@@ -58,16 +58,16 @@ function SettingsTab(parent)
 	this.general_form.addText("Theme");
 	this.theme = new DropdownList(this.general_form.element);
 	this.theme.size.set(150, 20);
-	this.theme.addValue("Dark", "dark.css");
+	this.theme.addValue("Dark", "dark");
 	this.theme.setOnChange(function()
 	{
-		//TODO <ADD CODE HERE>
+		Settings.general_theme = self.theme.getValue();
 	});
 	this.general_form.add(this.theme);
 	this.general_form.nextRow();
 
 	//Show stats
-	this.show_stats = new Checkbox(this.general_form.element);
+	this.show_stats = new CheckBox(this.general_form.element);
 	this.show_stats.setText("Show stats");
 	this.show_stats.size.set(200, 16);
 	this.show_stats.setOnChange(function()
@@ -86,7 +86,7 @@ function SettingsTab(parent)
 	this.general_form.nextRow();
 
 	//Enable Grid
-	this.grid_enabled = new Checkbox(this.general_form.element);
+	this.grid_enabled = new CheckBox(this.general_form.element);
 	this.grid_enabled.setText("Show grid");
 	this.grid_enabled.size.set(200, 16);
 	this.grid_enabled.setOnChange(function()
@@ -98,7 +98,7 @@ function SettingsTab(parent)
 	this.general_form.nextRow();
 
 	//Enable Axis
-	this.axis_enabled = new Checkbox(this.general_form.element);
+	this.axis_enabled = new CheckBox(this.general_form.element);
 	this.axis_enabled.setText("Show axis");
 	this.axis_enabled.size.set(200, 16);
 	this.axis_enabled.setOnChange(function()
@@ -132,7 +132,7 @@ function SettingsTab(parent)
 	this.general_form.nextRow();
 
 	//Antialiasing
-	this.antialiasing = new Checkbox(this.general_form.element);
+	this.antialiasing = new CheckBox(this.general_form.element);
 	this.antialiasing.setText("Antialiasing");
 	this.antialiasing.size.set(200, 16);
 	this.antialiasing.setOnChange(function()
@@ -159,7 +159,9 @@ function SettingsTab(parent)
 	this.code_form.addText("Editor theme");
 	this.code_theme = new DropdownList(this.code_form.element);
 	this.code_theme.size.set(150, 20);
-	this.code_theme.addValue("Monokai", "monokai");
+	this.code_theme.addValue("monokai", "monokai");
+	this.code_theme.addValue("abcdef", "abcdef");
+	this.code_theme.addValue("ambiance", "ambiance");
 	this.code_theme.setOnChange(function()
 	{
 		Settings.code_theme = self.code_theme.getValue();
@@ -169,7 +171,7 @@ function SettingsTab(parent)
 
 	//Code font size
 	this.code_form.addText("Code size");
-	this.code_font_size = new Numberbox(this.code_form.element);
+	this.code_font_size = new NumberBox(this.code_form.element);
 	this.code_font_size.size.set(60, 18);
 	this.code_font_size.setRange(5, 99999);
 	this.code_font_size.setStep(1);
@@ -180,7 +182,7 @@ function SettingsTab(parent)
 	this.code_form.add(this.code_font_size);
 	this.code_form.nextRow();
 
-	this.code_line_numbers = new Checkbox(this.code_form.element);
+	this.code_line_numbers = new CheckBox(this.code_form.element);
 	this.code_line_numbers.setText("Show Line Numbers");
 	this.code_line_numbers.size.set(200, 16);
 	this.code_line_numbers.setOnChange(function()

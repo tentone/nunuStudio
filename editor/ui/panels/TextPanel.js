@@ -12,7 +12,7 @@ function TextPanel(parent)
 	text.position.set(5, 20);
 	text.updateInterface();
 
-	this.name = new Textbox(this.element);
+	this.name = new TextBox(this.element);
 	this.name.position.set(45, 10);
 	this.name.size.set(200, 18);
 	this.name.updateInterface();
@@ -32,7 +32,7 @@ function TextPanel(parent)
 	text.position.set(5, 45);
 	text.updateInterface();
 
-	this.text = new Textbox(this.element);
+	this.text = new TextBox(this.element);
 	this.text.position.set(45, 35);
 	this.text.size.set(200, 18);
 	this.text.updateInterface();
@@ -51,7 +51,7 @@ function TextPanel(parent)
 	text.position.set(5, 70);
 	text.updateInterface();
 
-	this.pos = new Positionbox(this.element);
+	this.pos = new PositionBox(this.element);
 	this.pos.position.set(56, 60);
 	this.pos.updateInterface();
 	this.pos.setOnChange(function()
@@ -70,7 +70,7 @@ function TextPanel(parent)
 	text.position.set(5, 95);
 	text.updateInterface();
 
-	this.scale = new Positionbox(this.element);
+	this.scale = new PositionBox(this.element);
 	this.scale.position.set(45, 85);
 	this.scale.updateInterface();
 	this.scale.setOnChange(function()
@@ -89,7 +89,7 @@ function TextPanel(parent)
 	text.position.set(5, 120);
 	text.updateInterface();
 
-	this.rotation = new Positionbox(this.element);
+	this.rotation = new PositionBox(this.element);
 	this.rotation.position.set(57, 110);
 	this.rotation.updateInterface();
 	this.rotation.setOnChange(function()
@@ -102,7 +102,7 @@ function TextPanel(parent)
 	});
 
 	//Cast shadow
-	this.cast_shadow = new Checkbox(this.element);
+	this.cast_shadow = new CheckBox(this.element);
 	this.cast_shadow.setText("Cast Shadow");
 	this.cast_shadow.size.set(200, 15);
 	this.cast_shadow.position.set(5, 135);
@@ -116,7 +116,7 @@ function TextPanel(parent)
 	});
 
 	//Cast shadow
-	this.receive_shadow = new Checkbox(this.element);
+	this.receive_shadow = new CheckBox(this.element);
 	this.receive_shadow.setText("Receive Shadow");
 	this.receive_shadow.size.set(200, 15);
 	this.receive_shadow.position.set(5, 160);
@@ -130,7 +130,7 @@ function TextPanel(parent)
 	});
 
 	//Visible
-	this.visible = new Checkbox(this.element);
+	this.visible = new CheckBox(this.element);
 	this.visible.setText("Visible");
 	this.visible.size.set(200, 15);
 	this.visible.position.set(5, 185);
@@ -144,7 +144,7 @@ function TextPanel(parent)
 	});
 
 	//Static
-	this.static = new Checkbox(this.element);
+	this.static = new CheckBox(this.element);
 	this.static.setText("Static Object");
 	this.static.size.set(200, 15);
 	this.static.position.set(5, 210);
