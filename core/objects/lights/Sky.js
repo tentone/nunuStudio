@@ -1,3 +1,5 @@
+"use strict";
+
 function Sky(auto_update, day_time, sun_distance, time)
 {	
 	//Hemisphere light
@@ -100,14 +102,10 @@ Sky.pid2 = Math.PI / 2;
 
 //Function Prototype
 Sky.prototype = Object.create(THREE.Mesh.prototype);
-
-//Runtime functions
 Sky.prototype.raycast = raycast;
 Sky.prototype.toJSON = toJSON;
 Sky.prototype.initialize = initialize;
 Sky.prototype.update = update;
-
-//Auxiliar functions
 Sky.prototype.updateSky = updateSky;
 
 //Initialize

@@ -383,8 +383,6 @@ Interface.initialize = function()
 	{
 		var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 		var model = new Model3D(geometry, Editor.default_material);
-		model.receiveShadow = true;
-		model.castShadow = true;
 		model.name = "cube";
 		Editor.addToActualScene(model);
 	}, "Cube");
@@ -394,8 +392,6 @@ Interface.initialize = function()
 	{
 		var geometry = new THREE.CylinderBufferGeometry(1, 1, 2, 32);
 		var model = new Model3D(geometry, Editor.default_material);
-		model.receiveShadow = true;
-		model.castShadow = true;
 		model.name = "cylinder";
 		Editor.addToActualScene(model);
 	}, "Cylinder");
@@ -405,8 +401,6 @@ Interface.initialize = function()
 	{
 		var geometry = new THREE.SphereBufferGeometry(1, 32, 32);
 		var model = new Model3D(geometry, Editor.default_material);
-		model.receiveShadow = true;
-		model.castShadow = true;
 		model.name = "sphere";
 		Editor.addToActualScene(model);
 	}, "Sphere");
@@ -416,8 +410,6 @@ Interface.initialize = function()
 	{
 		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 96);
 		var model = new Model3D(geometry, Editor.default_material);
-		model.receiveShadow = true;
-		model.castShadow = true;
 		model.name = "torus";
 		Editor.addToActualScene(model);
 	}, "Torus");
@@ -427,8 +419,6 @@ Interface.initialize = function()
 	{
 		var geometry = new THREE.ConeBufferGeometry(1, 2, 32);
 		var model = new Model3D(geometry, Editor.default_material);
-		model.receiveShadow = true;
-		model.castShadow = true;
 		model.name = "cone";
 		Editor.addToActualScene(model);
 	}, "Cone");
@@ -437,8 +427,6 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/text.png", function()
 	{
 		var model = new Text3D("text", Editor.default_material);
-		model.receiveShadow = true;
-		model.castShadow = true;
 		Editor.addToActualScene(model);
 	}, "3D Text");
 
@@ -662,28 +650,38 @@ Interface.initialize = function()
 	var publish = Interface.file.addMenu("Publish");
 	publish.addOption("Web", function()
 	{
-		App.chooseFile(function(fname)
+		App.chooseFile(function(dir)
 		{
 			try
 			{
-				Editor.exportWebProject(fname);
+				Editor.exportWebProject(dir);
 			}
 			catch(e)
 			{
-				alert("Error saving file");
+				alert("Error exporting project (" + e + ")");
 			}
-		}, ".zip", true);
+		}, "", true);
 	}, Interface.file_dir + "icons/platform/web.png");
 
 	publish.addOption("Windows", function()
 	{
-		//TODO <ADD CODE HERE>
+		App.chooseFile(function(dir)
+		{
+			try
+			{
+				Editor.exportWindowsProject(dir);
+			}
+			catch(e)
+			{
+				alert("Error exporting project (" + e + ")");
+			}
+		}, "", true);
 	}, Interface.file_dir + "icons/platform/windows.png");
 
-	publish.addOption("OSX", function()
+	/*publish.addOption("OSX", function()
 	{
 		//TODO <ADD CODE HERE>
-	}, Interface.file_dir + "icons/platform/osx.png");
+	}, Interface.file_dir + "icons/platform/osx.png");*/
 
 	Interface.file.addOption("Exit", function()
 	{
@@ -887,15 +885,15 @@ Interface.loadProgram = function()
 	{
 		App.chooseFile(function(fname)
 		{
-			//try
-			//{
+			try
+			{
 				Editor.loadProgram(fname);
-				//alert("Project loaded");
-			//}
-			//catch(e)
-			//{
-			//	alert("Error loading file\n(" + e + ")");
-			//}
+				alert("Project loaded");
+			}
+			catch(e)
+			{
+				alert("Error loading file\n(" + e + ")");
+			}
 		}, ".isp");
 	}
 }

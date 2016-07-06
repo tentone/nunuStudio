@@ -1,3 +1,5 @@
+"use strict";
+
 function SpotLight(hex, intensity, distance, angle, exponent, decay)
 {
 	THREE.SpotLight.call(this, hex, intensity, distance, angle, exponent, decay);
@@ -19,8 +21,6 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 
 //Function Prototype
 SpotLight.prototype = Object.create(THREE.SpotLight.prototype);
-
-//Runtime functions
 SpotLight.prototype.initialize = initialize;
 SpotLight.prototype.update = update;
 

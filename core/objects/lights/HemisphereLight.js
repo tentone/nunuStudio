@@ -1,3 +1,5 @@
+"use strict";
+
 function HemisphereLight(skyColorHex, groundColorHex, intensity)
 {
 	THREE.HemisphereLight.call(this, skyColorHex, groundColorHex, intensity);
@@ -7,8 +9,6 @@ function HemisphereLight(skyColorHex, groundColorHex, intensity)
 
 //Function Prototype
 HemisphereLight.prototype = Object.create(THREE.HemisphereLight.prototype);
-
-//Runtime functions
 HemisphereLight.prototype.update = update;
 HemisphereLight.prototype.initialize = initialize;
 

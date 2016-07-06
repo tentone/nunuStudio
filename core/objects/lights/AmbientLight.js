@@ -1,3 +1,5 @@
+"use strict";
+
 function AmbientLight(hex)
 {
 	THREE.AmbientLight.call(this, hex);
@@ -9,8 +11,6 @@ function AmbientLight(hex)
 
 //Function Prototype
 AmbientLight.prototype = Object.create(THREE.AmbientLight.prototype);
-
-//Runtime functions
 AmbientLight.prototype.update = update;
 AmbientLight.prototype.initialize = initialize;
 

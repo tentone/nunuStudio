@@ -102,13 +102,13 @@ App.initialize = function(main)
 	App.loop();
 }
 
-//File chooser callback receives event object
+//Open file chooser dialog receives callback function, file filter, savemode and is its directory only
 App.chooseFile = function(callback, filter, savemode)
 {
 	//Create file chooser element
 	var chooser = document.createElement("input");
 	chooser.type = "file";
-	
+
 	if(filter !== undefined)
 	{
 		chooser.accept = filter;
@@ -124,8 +124,7 @@ App.chooseFile = function(callback, filter, savemode)
 	{
 		if(callback !== undefined)
 		{
-			callback(event.path[0].value);
-			//callback(chooser.value);
+			callback(chooser.value);
 		}
 	};
 
@@ -190,6 +189,89 @@ App.readFile = function(fname, sync, callback)
 	}
 }
 
+//Write File
+App.writeFile = function(fname, data)
+{
+	if(App.fs !== undefined)
+	{
+		var stream = App.fs.createWriteStream(fname, "utf8");
+		stream.write(data);
+		stream.end();
+	}
+}
+
+//Copy file (can't be used to copy folders)
+App.copyFile = function(src, dest)
+{
+	if(App.fs !== undefined)
+	{
+		App.fs.createReadStream(src).pipe(App.fs.createWriteStream(dest));
+	}
+}
+
+//Make a directory (dont trow exeption if directory already exists)
+App.makeDirectory = function(dir)
+{
+	if(App.fs !== undefined)
+	{
+		try
+		{
+			App.fs.mkdirSync(dir);
+		}
+		catch(e){}
+	}
+}
+
+//Returns files in directory (returns empty array in case of error)
+App.getFilesDirectory = function(dir)
+{
+	if(App.fs !== undefined)
+	{
+		try
+		{
+			return App.fs.readdirSync(dir);
+		}
+		catch(e)
+		{
+			return [];
+		}
+	}
+}
+
+//Copy folder and all its files (includes symbolic links)
+App.copyFolder = function(src, dest)
+{
+	if(App.fs !== undefined)
+	{
+		App.makeDirectory(dest);
+		var files = App.fs.readdirSync(src);
+
+		for(var i = 0; i < files.length; i++)
+		{
+			var source = src + "\\" + files[i];
+			var destiny = dest + "\\" + files[i];
+			var current = App.fs.statSync(source);
+			
+			//Directory
+			if(current.isDirectory())
+			{
+				App.copyFolder(source, destiny);
+			}
+			//Symbolic link
+			else if(current.isSymbolicLink())
+			{
+				App.fs.symlinkSync(App.fs.readlinkSync(source), destiny);
+			}
+			//File
+			else
+			{
+				App.copyFile(source, destiny);
+			}
+			
+		}
+	}
+}
+
 //Leave fullscreen mode
 App.leaveFullscreen = function()
 {
@@ -238,17 +320,6 @@ App.enterFullscreen = function(element)
 	else if(element.msRequestFullscreen)
 	{
 		element.msRequestFullscreen();
-	}
-}
-
-//Write File
-App.writeFile = function(fname, data)
-{
-	if(App.fs !== undefined)
-	{
-		var stream = App.fs.createWriteStream(fname, "utf8");
-		stream.write(data);
-		stream.end();
 	}
 }
 
