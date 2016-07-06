@@ -103,8 +103,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.8.5 Alpha";
-Editor.TIMESTAMP = "201607050226";
+Editor.VERSION = "V0.8.8.6 Alpha";
+Editor.TIMESTAMP = "201607060143";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -1113,24 +1113,31 @@ Editor.loadProgram = function(fname)
 	Editor.updateObjectViews();
 }
 
-//Export web project to file
-Editor.exportWebProject = function(fname)
+//Export web project
+Editor.exportWebProject = function(dir)
 {
-	var zip = new JSZip();
-	var output = Editor.program.toJSON();
-	var json = JSON.stringify(output);
+	App.copyFolder("runtime", dir);
+	App.copyFolder("core", dir + "\\core");
+	App.copyFolder("input", dir + "\\input");
+	App.copyFolder("lib", dir + "\\lib");
+	App.copyFolder("data", dir + "\\data");
+	App.copyFile("App.js", dir + "\\App.js");
+	Editor.saveProgram(dir + "\\app.isp");
+}
 
-	zip.file("app.isp", json);
-	zip.file("index.html", App.readFile("runtime/index.html"));
-	zip.file("Main.js", App.readFile("runtime/Main.js"));
-	zip.file("App.js", App.readFile("App.js"));
-	
-	//TODO <ADD CODE HERE>
-
-	zip.generateAsync({type: "nodebuffer"}).then(function(data)
-	{
-		App.writeFile(fname, data);
-	});
+//Export windows project
+Editor.exportWindowsProject = function(dir)
+{
+	App.copyFolder("runtime", dir);
+	App.copyFolder("core", dir + "\\core");
+	App.copyFolder("input", dir + "\\input");
+	App.copyFolder("lib", dir + "\\lib");
+	App.copyFolder("data", dir + "\\data");
+	App.copyFolder("nwjs", dir + "\\nwjs");
+	App.copyFile("App.js", dir + "\\App.js");
+	App.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
+	App.writeFile(dir + "\\" + Editor.program.name + ".bat", "cd nwjs/win\nstart nw.exe ../../");
+	Editor.saveProgram(dir + "\\app.isp");
 }
 
 //Set editor state

@@ -1,3 +1,5 @@
+"use strict";
+
 function Main(){}
 
 //App to load

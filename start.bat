@@ -1,2 +1,2 @@
 cd nwjs/win
-nw.exe ../../
+start nw.exe ../../

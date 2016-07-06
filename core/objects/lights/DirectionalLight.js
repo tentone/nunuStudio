@@ -1,3 +1,5 @@
+"use strict";
+
 function DirectionalLight(hex, intensity)
 {
 	THREE.DirectionalLight.call(this, hex, intensity);
@@ -19,8 +21,6 @@ function DirectionalLight(hex, intensity)
 
 //Function Prototype
 DirectionalLight.prototype = Object.create(THREE.DirectionalLight.prototype);
-
-//Runtime functions
 DirectionalLight.prototype.update = update;
 DirectionalLight.prototype.initialize = initialize;
 DirectionalLight.prototype.toJSON = toJSON;
