@@ -11,8 +11,6 @@ function Sprite(material)
 
 //Function Prototype
 Sprite.prototype = Object.create(THREE.Sprite.prototype);
-
-//Runtime functions
 Sprite.prototype.initialize = initialize;
 Sprite.prototype.update = update;
 Sprite.prototype.dispose = dispose;

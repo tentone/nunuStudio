@@ -14,11 +14,10 @@ Interface.initialize = function()
 
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabGroup();
-	
+
 	Interface.empty_tab_text = new Text(Interface.tab.element);
 	Interface.empty_tab_text.fit_parent = true;
 	Interface.empty_tab_text.setText("Open new tab to edit content or create new project");
-	Interface.empty_tab_text.updateInterface();
 
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer_div = new DivisionResizable();
@@ -26,18 +25,15 @@ Interface.initialize = function()
 	Interface.asset_explorer_div.size.y = 150;
 	Interface.asset_explorer_div.resize_size_min = 100;
 	Interface.asset_explorer_div.resize_size_max = 400;
-	Interface.asset_explorer_div.updateInterface();
 
 	//Asset explorer
 	Interface.asset_explorer = new FileExplorer(Interface.asset_explorer_div.element);
-	Interface.asset_explorer.updateInterface();
 	
 	//Asset explorer menu bar
 	Interface.asset_explorer_bar = new Division(Interface.asset_explorer_div.element);
 	Interface.asset_explorer_bar.position.set(0, 0);
 	Interface.asset_explorer_bar.size.y = 20;
 	Interface.asset_explorer_bar.element.className = "bar";
-	Interface.asset_explorer_bar.updateInterface();
 
 	//Import Files
 	Interface.asset_file = new DropdownMenu(Interface.asset_explorer_bar.element);
@@ -265,7 +261,6 @@ Interface.initialize = function()
 
 	//Project explorer
 	Interface.tree_view = new TreeView(Interface.explorer_resizable.div_a, Interface.explorer_resizable);
-	Interface.tree_view.updateInterface();
 
 	//Object panel variables
 	Interface.panel = new Panel(Interface.explorer_resizable.div_b);
@@ -677,6 +672,11 @@ Interface.initialize = function()
 			}
 		}, "", true);
 	}, Interface.file_dir + "icons/platform/windows.png");
+
+	/*publish.addOption("Linux", function()
+	{
+		//TODO <ADD CODE HERE>
+	}, Interface.file_dir + "icons/platform/linux.png");*/
 
 	/*publish.addOption("OSX", function()
 	{

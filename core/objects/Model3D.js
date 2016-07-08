@@ -13,8 +13,6 @@ function Model3D(geometry, material)
 
 //Function Prototype
 Model3D.prototype = Object.create(THREE.Mesh.prototype);
-
-//Runtime functions
 Model3D.prototype.initialize = initialize;
 Model3D.prototype.update = update;
 Model3D.prototype.dispose = dispose;

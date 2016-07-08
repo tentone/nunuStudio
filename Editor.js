@@ -1,16 +1,10 @@
 "use strict";
 
 //External libs
-include("lib/codemirror/codemirror.js");
+include("lib/codemirror/codemirror.min.js");
 include("lib/codemirror/mode/javascript/javascript.js");
 include("lib/codemirror/codemirror.css");
-include("lib/codemirror/theme/monokai.css");
-include("lib/codemirror/theme/abcdef.css");
-include("lib/codemirror/theme/ambiance.css");
-include("lib/codemirror/theme/bespin.css");
-include("lib/codemirror/theme/blackboard.css");
-include("lib/codemirror/theme/cobalt.css");
-include("lib/codemirror/theme/colorforth.css");
+include("lib/codemirror/theme/*");
 
 include("lib/jscolor.min.js");
 
@@ -103,12 +97,15 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.8.6 Alpha";
-Editor.TIMESTAMP = "201607060143";
+Editor.VERSION = "V0.8.8.7 Alpha";
+Editor.TIMESTAMP = "201607080205";
 
 //Initialize Main
 Editor.initialize = function(canvas)
 {
+	//Load settings
+	Settings.load();
+
 	//Set windows close event
 	if(App.gui !== undefined)
 	{
@@ -222,7 +219,7 @@ Editor.initialize = function(canvas)
 	Editor.tool_scene.add(Editor.point_light_helper);
 	
 	//SpotLight helper
-	Editor.spot_light_helper = new THREE.SpotLightHelper(new THREE.SpotLight(), 1);
+	Editor.spot_light_helper = new THREE.SpotLightHelper(new THREE.SpotLight());
 	Editor.activateHelper(Editor.spot_light_helper, false);
 	Editor.tool_scene.add(Editor.spot_light_helper);
 
@@ -1261,6 +1258,7 @@ Editor.initializeRenderer = function(canvas)
 //Exit editor
 Editor.exit = function()
 {
+	Settings.store();
 	if(App.gui !== undefined)
 	{
 		App.gui.App.closeAllWindows();

@@ -110,7 +110,7 @@ function update()
 function dispose()
 {
 	//Dispose particle group
-	this.group.dispose();
+	//this.group.dispose();
 
 	//Dipose children
 	for(var i = 0; i < this.children.length; i++)

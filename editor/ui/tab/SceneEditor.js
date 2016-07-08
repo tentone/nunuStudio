@@ -285,6 +285,10 @@ function updateInterface()
 		{
 			this.stats.dom.style.visibility = "visible";
 		}
+		else
+		{
+			this.stats.dom.style.visibility = "hidden";
+		}
 	}
 	else
 	{

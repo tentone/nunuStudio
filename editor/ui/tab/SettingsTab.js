@@ -159,15 +159,20 @@ function SettingsTab(parent)
 	this.code_form.addText("Editor theme");
 	this.code_theme = new DropdownList(this.code_form.element);
 	this.code_theme.size.set(150, 20);
-	this.code_theme.addValue("monokai", "monokai");
-	this.code_theme.addValue("abcdef", "abcdef");
-	this.code_theme.addValue("ambiance", "ambiance");
 	this.code_theme.setOnChange(function()
 	{
 		Settings.code_theme = self.code_theme.getValue();
 	});
 	this.code_form.add(this.code_theme);
 	this.code_form.nextRow();
+
+	//Get codemirror themes available
+	var files = App.getFilesDirectory("lib/codemirror/theme/");
+	for(var i = 0; i < files.length; i++)
+	{
+		var theme = files[i].replace(".css", "");
+		this.code_theme.addValue(theme, theme);
+	}
 
 	//Code font size
 	this.code_form.addText("Code size");
