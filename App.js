@@ -71,18 +71,18 @@ include("core/objects/ParticleEmitter.js");
 //App class
 function App(){}
 
+//Require NodeJS modules
+try
+{
+	App.fs = require("fs");
+	App.gui = require("nw.gui");
+	App.clipboard = App.gui.Clipboard.get();
+}
+catch(e){}
+
 //App initialization
 App.initialize = function(main)
 {
-	//Node modules
-	try
-	{
-		App.fs = require("fs");
-		App.gui = require("nw.gui");
-		App.clipboard = App.gui.Clipboard.get();
-	}
-	catch(e){}
-
 	//Fullscreen flag
 	App.fullscreen = false;
 
@@ -236,6 +236,7 @@ App.getFilesDirectory = function(dir)
 			return [];
 		}
 	}
+	return [];
 }
 
 //Copy folder and all its files (includes symbolic links)
@@ -399,5 +400,14 @@ function include(file)
 		css.href = file;
 		css.rel = "stylesheet";
 		document.body.appendChild(css);
-	}	
+	}
+	else if(file.endsWith("*"))
+	{
+		var directory = file.replace("*", "");
+		var files = App.getFilesDirectory(directory);
+		for(var i = 0; i < files.length; i++)
+		{
+			include(directory + files[i]);
+		}
+	}
 }

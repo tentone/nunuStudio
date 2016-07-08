@@ -34,7 +34,6 @@ Keyboard.update = function()
 {
 	var end = 0;
 
-	//Update all actions
 	while(Keyboard.actions.length > end)
 	{
 		var key = Keyboard.actions.shift();
@@ -42,16 +41,10 @@ Keyboard.update = function()
 
 		Keyboard.keys[key].update(action);
 
-		if(Keyboard.keys[key].justReleased)
+		if(Keyboard.keys[key].justReleased || Keyboard.keys[key].justPressed)
 		{
 			Keyboard.actions.push(key);
-			Keyboard.actions.push(action);
-			end += 2;
-		}
-		else if(Keyboard.keys[key].justPressed)
-		{
-			Keyboard.actions.push(key);
-			Keyboard.actions.push(action);
+			Keyboard.actions.push(Key.KEY_RESET);
 			end += 2;
 		}
 	}

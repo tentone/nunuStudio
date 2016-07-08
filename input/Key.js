@@ -17,6 +17,7 @@ Key.prototype.toString = toString;
 //Action List
 Key.KEY_DOWN = 0;
 Key.KEY_UP = 1;
+Key.KEY_RESET = 2;
 
 //Update Key status based new state
 function update(action)
@@ -39,6 +40,11 @@ function update(action)
 			this.justReleased = true;
 		}
 		this.isPressed = false;
+	}
+	else if(action === Key.KEY_RESET)
+	{
+		this.justReleased = false;
+		this.justPressed = false;
 	}
 }
 

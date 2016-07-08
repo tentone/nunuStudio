@@ -36,50 +36,48 @@ function AboutTab(parent)
 	this.logo = new Image(this.element);
 	this.logo.setImage("editor/files/logo.png");
 	this.logo.size.set(390, 65);
-	this.logo.updateInterface();
 
 	//Version info
 	this.name = new Text(this.element);
 	this.name.size.set(400, 0);
 	this.name.setTextSize(30);
 	this.name.setText(Editor.NAME + " " + Editor.VERSION);
-	this.name.updateInterface();
 
 	//Build info
 	this.timestamp = new Text(this.element);
 	this.timestamp.size.set(400, 0);
 	this.timestamp.setTextSize(20);
 	this.timestamp.setText("Build " + Editor.TIMESTAMP);
-	this.timestamp.updateInterface();
 
-	//ThreeJS Version
+	//ThreeJS version
 	this.threejs = new Text(this.element);
 	this.threejs.size.set(400, 0);
 	this.threejs.setTextSize(15);
 	this.threejs.setText("THREEJS R" + THREE.REVISION);
-	
-	this.threejs.updateInterface();
 
-	//NWJS Version
+	//NWJS version
 	this.nwjs = new Text(this.element);
 	this.nwjs.size.set(400, 0);
 	this.nwjs.setTextSize(15);
 	this.nwjs.setText("NWJS V" + process.versions['node-webkit']);
-	this.nwjs.updateInterface();
+
+	//Codemirror version
+	this.codemirror = new Text(this.element);
+	this.codemirror.size.set(400, 0);
+	this.codemirror.setTextSize(15);
+	this.codemirror.setText("CodeMirror V" + CodeMirror.version);
 
 	//Build info
 	this.builton = new Text(this.element);
 	this.builton.setText("Built on");
 	this.builton.size.set(400, 0);
 	this.builton.setTextSize(20);
-	this.builton.updateInterface();
 
 	//Made with
 	this.madewith = new Image(this.element);
 	this.madewith.setImage("editor/files/logo/madewith.png");
 	this.madewith.size.set(540, 60);
 	this.madewith.position.set(0, 0);
-	this.madewith.updateInterface();
 
 	//Element atributes
 	this.fit_parent = false;
@@ -164,6 +162,10 @@ function updateInterface()
 	this.nwjs.visible = this.visible;
 	this.nwjs.position.set((this.size.x-this.nwjs.size.x)/2, this.threejs.position.y + 25);
 	this.nwjs.updateInterface();
+
+	this.codemirror.visible = this.visible;
+	this.codemirror.position.set((this.size.x-this.codemirror.size.x)/2, this.nwjs.position.y + 25);
+	this.codemirror.updateInterface();
 
 	this.builton.visible = this.visible;
 	this.builton.position.set((this.size.x-this.builton.size.x)/2, this.size.y - 90);
