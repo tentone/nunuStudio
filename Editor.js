@@ -76,6 +76,9 @@ include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
 include("editor/tools/RotateTool.js");
 
+include("editor/helpers/ParticleEmitterHelper.js");
+include("editor/helpers/ObjectIconHelper.js");
+
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
 
@@ -98,15 +101,15 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.8.8 Alpha";
-Editor.TIMESTAMP = "201607090300";
+Editor.TIMESTAMP = "201607090400";
 
 //Initialize Main
 Editor.initialize = function(canvas)
 {
 	//Copy static elements pointer to global object 
-	global.Editor = Editor;
-	global.Interface = Interface;
-	global.Settings = Settings;
+	//global.Editor = Editor;
+	//global.Interface = Interface;
+	//global.Settings = Settings;
 
 	//Load settings
 	Settings.load();
@@ -782,15 +785,15 @@ Editor.updateSelectedObjectUI = function()
 	{
 		Interface.panel = new TextPanel(Interface.explorer_resizable.div_b);
 	}
-	else if(Editor.selected_object instanceof PointLight)
+	else if(Editor.selected_object instanceof THREE.PointLight)
 	{
 		Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b);
 	}
-	else if(Editor.selected_object instanceof SpotLight)
+	else if(Editor.selected_object instanceof THREE.SpotLight)
 	{
 		Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b);
 	}
-	else if(Editor.selected_object instanceof DirectionalLight)
+	else if(Editor.selected_object instanceof THREE.DirectionalLight)
 	{
 		Interface.panel = new DirectionalLightPanel(Interface.explorer_resizable.div_b);
 	}
@@ -933,6 +936,16 @@ Editor.selectObjectHelper = function()
 		else if(Editor.selected_object instanceof THREE.HemisphereLight)
 		{
 			Editor.object_helper.add(new THREE.HemisphereLightHelper(Editor.selected_object, 1));
+		}
+		//Particle emitter
+		else if(Editor.selected_object instanceof ParticleEmitter)
+		{
+			Editor.object_helper.add(new ParticleEmitterHelper(Editor.selected_object));
+		}
+		//Script
+		if(Editor.selected_object instanceof Script)
+		{
+			Editor.object_helper.add(new ObjectIconHelper(Editor.selected_object, ObjectIcons.get(Editor.selected_object.type)));
 		}
 		//Object 3D
 		else if(Editor.selected_object instanceof THREE.Object3D)
