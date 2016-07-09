@@ -55,6 +55,7 @@ function TextureFile(parent)
 //Functions Prototype
 TextureFile.prototype = Object.create(File.prototype);
 TextureFile.prototype.setTexture = setTexture;
+TextureFile.prototype.updateMetadata = updateMetadata;
 
 //Set object to file
 function setTexture(texture)
@@ -63,5 +64,14 @@ function setTexture(texture)
 	{
 		this.texture = texture;
 		this.setText(texture.name);
+	}
+}
+
+//Update material preview
+function updateMetadata()
+{
+	if(this.texture !== null)
+	{
+		//TODO <ADD CODE HERE>
 	}
 }

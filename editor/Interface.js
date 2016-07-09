@@ -4,7 +4,7 @@ function Interface(){}
 
 //Initialize interface
 Interface.initialize = function()
-{	
+{
 	//File directory
 	Interface.file_dir = "editor/files/";
 
@@ -42,6 +42,7 @@ Interface.initialize = function()
 	Interface.asset_file.position.set(0,0);
 	
 	var import_models = Interface.asset_file.addMenu("3D Models", Interface.file_dir + "icons/models/models.png");
+
 	import_models.addOption("Wavefront OBJ", function()
 	{
 		App.chooseFile(function(fname)

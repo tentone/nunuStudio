@@ -11,7 +11,7 @@ function CodeEditor(parent)
 	}
 	
 	//ID
-	var id = "code" + CodeEditor.id;
+	var id = "code_editor" + CodeEditor.id;
 	CodeEditor.id++;
 
 	//Create element

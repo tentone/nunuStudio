@@ -12,12 +12,14 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 //Function Prototype
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
-PerspectiveCamera.prototype.update = update;
 PerspectiveCamera.prototype.initialize = initialize;
+PerspectiveCamera.prototype.update = update;
 
 //Initialize
 function initialize()
 {
+	this.scale.set(1, 1, 1);
+	
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
