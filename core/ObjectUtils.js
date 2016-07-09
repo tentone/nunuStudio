@@ -6,6 +6,15 @@ function ObjectUtils(){}
 //Get all materials in object and childs
 ObjectUtils.getMaterials = function(obj, materials)
 {
+	//Auxiliar function to add materials
+	function add(material)
+	{
+		if(materials[material.uuid] === undefined)
+		{
+			materials[material.uuid] = material;
+		}
+	}
+
 	//If undefined create new array to store materials
 	if(materials === undefined)
 	{
@@ -20,9 +29,18 @@ ObjectUtils.getMaterials = function(obj, materials)
 		//Check if child has material
 		if(child.material !== undefined && !(child instanceof Sky))
 		{
-			if(materials[child.material.uuid] === undefined)
+			if(child.material instanceof THREE.Material)
 			{
-				materials[child.material.uuid] = child.material;
+				add(child.material);
+			}
+			else if(child.material instanceof THREE.MultiMaterial)
+			{
+				var material_array = child.material.materials;
+
+				for(var i = 0; i < material_array.length; i++)
+				{
+					add(material_array[i]);
+				}
 			}
 		}
 
@@ -36,6 +54,15 @@ ObjectUtils.getMaterials = function(obj, materials)
 //Get all textures in object and childs
 ObjectUtils.getTextures = function(obj, textures)
 {
+	//Auxiliar function to add textures
+	function add(texture)
+	{
+		if(textures[texture.uuid] === undefined)
+		{
+			textures[texture.uuid] = texture;
+		}
+	}
+
 	//If undefined create new array to store materials
 	if(textures === undefined)
 	{
@@ -49,16 +76,13 @@ ObjectUtils.getTextures = function(obj, textures)
 
 		if(child.material !== undefined)
 		{
+			var material = child.material;
+			
 			//TODO <ADD CODE HERE>
 		}
 		else if(child instanceof ParticleEmitter)
 		{
-			var texture = child.group.texture;
-
-			if(textures[texture.uuid] === undefined)
-			{
-				textures[texture.uuid] = texture;
-			}
+			add(child.group.texture);
 		}
 
 		//Call recursively for childs
@@ -211,14 +235,12 @@ ObjectUtils.createGrassTufts = function(positions)
 
 			//Back face
 			var object3d = new Model3D(geometry, material);
-			object3d.rotateY(angle+Math.PI);
+			object3d.rotateY(angle + Math.PI);
 			object3d.position.copy(position);
 			object3d.updateMatrix();
 			merged_geometry.merge(object3d.geometry, object3d.matrix);
 		}
 	}
 
-	//Create the mesh
-	var mesh = new Model3D(merged_geometry, material)
-	return mesh;
+	return new Model3D(merged_geometry, material);
 }

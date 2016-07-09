@@ -11,7 +11,7 @@ function MaterialEditor(parent)
 	}
 	
 	//ID
-	var id = "mat_editor" + MaterialEditor.id;
+	var id = "material_editor" + MaterialEditor.id;
 	MaterialEditor.id++;
 
 	//Create element

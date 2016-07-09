@@ -20,8 +20,8 @@ function OrthographicCamera(size, aspect, mode, near, far)
 
 //Function Prototype
 OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype);
-OrthographicCamera.prototype.update = update;
 OrthographicCamera.prototype.initialize = initialize;
+OrthographicCamera.prototype.update = update;
 OrthographicCamera.prototype.updateProjectionMatrix = updateProjectionMatrix;
 OrthographicCamera.prototype.toJSON = toJSON;
 
@@ -32,13 +32,15 @@ OrthographicCamera.FIXED_HORIZONTAL = 1;
 //Initialize
 function initialize()
 {
+	this.scale.set(1, 1, 1);
+	
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
 	}
 }
 
-//Update State
+//Update
 function update()
 {
 	for(var i = 0; i < this.children.length; i++)
@@ -55,7 +57,6 @@ function updateProjectionMatrix()
 	{
 		this.top = this.size/2;
 		this.bottom = -this.top;
-
 		this.right = this.top * this.aspect;
 		this.left = -this.right;
 	}
@@ -63,7 +64,6 @@ function updateProjectionMatrix()
 	{
 		this.right = this.size/2;
 		this.left = -this.right;
-
 		this.top = this.right / this.aspect;
 		this.bottom = -this.top;
 	}

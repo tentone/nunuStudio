@@ -97,12 +97,17 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.8.7 Alpha";
-Editor.TIMESTAMP = "201607080205";
+Editor.VERSION = "V0.8.8.8 Alpha";
+Editor.TIMESTAMP = "201607090300";
 
 //Initialize Main
 Editor.initialize = function(canvas)
 {
+	//Copy static elements pointer to global object 
+	global.Editor = Editor;
+	global.Interface = Interface;
+	global.Settings = Settings;
+
 	//Load settings
 	Settings.load();
 
@@ -168,7 +173,6 @@ Editor.initialize = function(canvas)
 	//Debug Elements
 	Editor.tool_scene = new THREE.Scene();
 	Editor.tool_scene_top = new THREE.Scene();
-	//Editor.cannon_renderer = new THREE.CannonDebugRenderer(Editor.tool_scene, Editor.program.scene.world);
 
 	//Raycaster
 	Editor.raycaster = new THREE.Raycaster(); 
@@ -198,35 +202,9 @@ Editor.initialize = function(canvas)
 	Editor.axis_helper.visible = Settings.axis_enabled;
 	Editor.tool_scene.add(Editor.axis_helper);
 
-	//Box helper
-	Editor.box_helper = new THREE.BoxHelper();
-	Editor.box_helper.visible = false;
-	Editor.tool_scene.add(Editor.box_helper);
-
-	//Camera helper
-	Editor.camera_helper = new THREE.CameraHelper(Editor.camera);
-	Editor.activateHelper(Editor.camera_helper, false);
-	Editor.tool_scene.add(Editor.camera_helper);
-
-	//DirectionalLight Helper
-	Editor.directional_light_helper = new THREE.DirectionalLightHelper(new THREE.DirectionalLight(), 1);
-	Editor.activateHelper(Editor.directional_light_helper, false);
-	Editor.tool_scene.add(Editor.directional_light_helper);
-
-	//PointLight helper
-	Editor.point_light_helper = new THREE.PointLightHelper(new THREE.PointLight(), 1);
-	Editor.activateHelper(Editor.point_light_helper, false);
-	Editor.tool_scene.add(Editor.point_light_helper);
-	
-	//SpotLight helper
-	Editor.spot_light_helper = new THREE.SpotLightHelper(new THREE.SpotLight());
-	Editor.activateHelper(Editor.spot_light_helper, false);
-	Editor.tool_scene.add(Editor.spot_light_helper);
-
-	//HemisphereLight helper
-	Editor.hemisphere_light_helper = new THREE.HemisphereLightHelper(new THREE.HemisphereLight(), 1);
-	Editor.activateHelper(Editor.hemisphere_light_helper, false);
-	Editor.tool_scene.add(Editor.hemisphere_light_helper);
+	//Object helper container
+	Editor.object_helper = new Container();
+	Editor.tool_scene.add(Editor.object_helper);
 
 	//Move tool
 	Editor.move_tool = new MoveTool();
@@ -287,11 +265,41 @@ Editor.update = function()
 	//Editing a scene
 	if(Editor.state === Editor.STATE_EDITING)
 	{
+		//Update object helper
+		Editor.updateObjectHelper();
+
+		//Keyboard shortcuts
+		if(Keyboard.isKeyJustPressed(Keyboard.DEL))
+		{
+			Editor.deleteSelectedObject();
+		}
+		else if(Keyboard.isKeyPressed(Keyboard.CTRL))
+		{
+			if(Keyboard.isKeyJustPressed(Keyboard.C))
+			{
+				Editor.copySelectedObject();
+			}
+			else if(Keyboard.isKeyJustPressed(Keyboard.V))
+			{
+				Editor.pasteIntoSelectedObject();
+			}
+			else if(Keyboard.isKeyJustPressed(Keyboard.X))
+			{
+				Editor.cutSelectedObject();
+			}
+			else if(Keyboard.isKeyJustPressed(Keyboard.Y))
+			{
+				//TODO <ADD CODE HERE>
+			}
+			else if(Keyboard.isKeyJustPressed(Keyboard.Z))
+			{
+				//TODO <ADD CODE HERE>
+			}
+		}
+
 		//If object select display tools
 		if(Editor.selected_object !== null)
 		{
-			Editor.updateObjectHelper();
-
 			if(Editor.tool_mode === Editor.MODE_MOVE)
 			{
 				Editor.move_tool.visible = true;
@@ -340,35 +348,6 @@ Editor.update = function()
 				Editor.move_tool.visible = false;
 				Editor.rotate_tool.visible = false;
 				Editor.resize_tool.visible = false;
-			}
-
-			//Delete Selected Object
-			if(Keyboard.isKeyJustPressed(Keyboard.DEL))
-			{
-				Editor.deleteSelectedObject();
-			}
-			else if(Keyboard.isKeyPressed(Keyboard.CTRL))
-			{
-				if(Keyboard.isKeyJustPressed(Keyboard.C))
-				{
-					Editor.copySelectedObject();
-				}
-				else if(Keyboard.isKeyJustPressed(Keyboard.V))
-				{
-					Editor.pasteIntoSelectedObject();
-				}
-				else if(Keyboard.isKeyJustPressed(Keyboard.X))
-				{
-					Editor.cutSelectedObject();
-				}
-				else if(Keyboard.isKeyJustPressed(Keyboard.Y))
-				{
-					//TODO <ADD CODE HERE>
-				}
-				else if(Keyboard.isKeyJustPressed(Keyboard.Z))
-				{
-					//TODO <ADD CODE HERE>
-				}
 			}
 		}
 		else
@@ -636,7 +615,6 @@ Editor.draw = function()
 		Editor.renderer.render(Editor.program.scene, Editor.camera);
 
 		//Render debug scene
-		//Editor.cannon_renderer.update();
 		Editor.renderer.render(Editor.tool_scene, Editor.camera);
 		Editor.renderer.clearDepth();
 		Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
@@ -693,6 +671,7 @@ Editor.selectObject = function(obj)
 {
 	Editor.selected_object = obj;
 	Editor.updateSelectedObjectUI();
+	Editor.selectObjectHelper();
 }
 
 //Check if object is selected
@@ -708,7 +687,7 @@ Editor.isObjectSelected = function(obj)
 //Delete Selected Object
 Editor.deleteSelectedObject = function()
 {
-	if(Editor.selected_object.parent !== null)
+	if(Editor.selected_object !== null && Editor.selected_object.parent !== null)
 	{
 		Editor.selected_object.parent.remove(Editor.selected_object);
 		Editor.updateObjectViews();
@@ -868,9 +847,10 @@ Editor.updateSelectedObjectUI = function()
 Editor.updateObjectViews = function()
 {
 	Editor.updateTreeView();
-	setTimeout(Editor.updateAssetExplorer, 0);
 	Editor.updateObjectPanel();
 	Editor.updateTabsData();
+	Editor.selectObjectHelper();
+	setTimeout(Editor.updateAssetExplorer, 50);
 }
 
 //Update tab names to match objects actual info
@@ -922,68 +902,53 @@ Editor.addToActualScene = function(obj)
 	Editor.updateObjectViews();
 }
 
-//Show apropiate helper to selected object
-Editor.updateObjectHelper = function()
+//Select helper to debug selected object data
+Editor.selectObjectHelper = function()
 {
-	Editor.activateHelper(Editor.box_helper, false);
-	Editor.activateHelper(Editor.camera_helper, false);
-	Editor.activateHelper(Editor.point_light_helper, false);
-	Editor.activateHelper(Editor.spot_light_helper, false);
-	Editor.activateHelper(Editor.directional_light_helper, false);
+	Editor.object_helper.removeAll();
 
 	if(Editor.selected_object !== null)
 	{
-		var position = Editor.selected_object.getWorldPosition();
-
+		//Camera
 		if(Editor.selected_object instanceof THREE.Camera)
 		{
-			Editor.activateHelper(Editor.camera_helper, true);
-			Editor.camera_helper.camera = Editor.selected_object;
-			Editor.camera_helper.position.copy(position);
-			Editor.camera_helper.rotation.copy(Editor.selected_object.rotation);
-			Editor.camera_helper.update();
+			Editor.object_helper.add(new THREE.CameraHelper(Editor.selected_object));
 		}
+		//Directional light
 		else if(Editor.selected_object instanceof THREE.DirectionalLight)
 		{
-			Editor.activateHelper(Editor.directional_light_helper, true);
-			Editor.directional_light_helper.light = Editor.selected_object;
-			Editor.directional_light_helper.position.copy(position);
-			Editor.directional_light_helper.update();
+			Editor.object_helper.add(new THREE.DirectionalLightHelper(Editor.selected_object, 1));
 		}
+		//Point light
 		else if(Editor.selected_object instanceof THREE.PointLight)
 		{
-			Editor.activateHelper(Editor.point_light_helper, true);
-			Editor.point_light_helper.light = Editor.selected_object;
-			Editor.point_light_helper.position.copy(position);
-			Editor.point_light_helper.update();
+			Editor.object_helper.add(new THREE.PointLightHelper(Editor.selected_object, 1));
 		}
+		//Spot light
 		else if(Editor.selected_object instanceof THREE.SpotLight)
 		{
-			Editor.activateHelper(Editor.spot_light_helper, true);
-			Editor.spot_light_helper.light = Editor.selected_object;
-			Editor.spot_light_helper.position.copy(position);
-			Editor.spot_light_helper.update();
+			Editor.object_helper.add(new THREE.SpotLightHelper(Editor.selected_object));
 		}
+		//Hemisphere light
 		else if(Editor.selected_object instanceof THREE.HemisphereLight)
 		{
-			Editor.activateHelper(Editor.hemisphere_light_helper, true);
-			Editor.hemisphere_light_helper.light = Editor.selected_object;
-			Editor.hemisphere_light_helper.position.copy(position);
-			Editor.hemisphere_light_helper.update();
+			Editor.object_helper.add(new THREE.HemisphereLightHelper(Editor.selected_object, 1));
 		}
+		//Object 3D
 		else if(Editor.selected_object instanceof THREE.Object3D)
 		{
-			Editor.activateHelper(Editor.box_helper, true);
-			Editor.box_helper.update(Editor.selected_object);
+			Editor.object_helper.add(new THREE.BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
 		}
 	}
 }
 
-//Activate helper
-Editor.activateHelper = function(helper, value)
+//Update object helper to match actual object data
+Editor.updateObjectHelper = function()
 {
-	helper.visible = value;
-	helper.matrixAutoUpdate = value;
+	if(Editor.selected_object !== null)
+	{
+		Editor.object_helper.update();
+	}
 }
 
 //Resize Camera
@@ -1037,11 +1002,7 @@ Editor.resetEditingFlags = function()
 	Editor.is_editing_object = false;
 	Editor.editing_object_args = null;
 	
-	try
-	{
-		Editor.updateObjectHelper();
-	}
-	catch(e){}
+	Editor.selectObjectHelper();
 }
 
 //Craete new Program
