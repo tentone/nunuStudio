@@ -231,8 +231,60 @@ function ParticleEditor(parent)
 
 	//Position
 	this.form.addText("Position");
+	this.position_value = new PositionBox(this.form.element);
+	this.position_value.setOnChange(function()
+	{
+		self.particle.emitter.position.value.copy(self.position_value.getValue());
+		self.updateRuntimeParticle();
+	});
+	this.form.add(this.position_value);
+	this.form.addText("+/-");
+	this.position_spread = new PositionBox(this.form.element);
+	this.position_spread.setOnChange(function()
+	{
+		self.particle.emitter.position.spread.copy(self.position_spread.getValue());
+		self.updateRuntimeParticle();
+	});
+	this.form.add(this.position_spread);
+	this.form.nextRow();
 
+	//Velocity
+	this.form.addText("Velocity");
+	this.velocity_value = new PositionBox(this.form.element);
+	this.velocity_value.setOnChange(function()
+	{
+		self.particle.emitter.velocity.value.copy(self.velocity_value.getValue());
+		self.updateRuntimeParticle();
+	});
+	this.form.add(this.velocity_value);
+	this.form.addText("+/-");
+	this.velocity_spread = new PositionBox(this.form.element);
+	this.velocity_spread.setOnChange(function()
+	{
+		self.particle.emitter.velocity.spread.copy(self.velocity_spread.getValue());
+		self.updateRuntimeParticle();
+	});
+	this.form.add(this.velocity_spread);
+	this.form.nextRow();
 
+	//Acceleration
+	this.form.addText("Acceleration");
+	this.acceleration_value = new PositionBox(this.form.element);
+	this.acceleration_value.setOnChange(function()
+	{
+		self.particle.emitter.acceleration.value.copy(self.acceleration_value.getValue());
+		self.updateRuntimeParticle();
+	});
+	this.form.add(this.acceleration_value);
+	this.form.addText("+/-");
+	this.acceleration_spread = new PositionBox(this.form.element);
+	this.acceleration_spread.setOnChange(function()
+	{
+		self.particle.emitter.acceleration.spread.copy(self.acceleration_spread.getValue());
+		self.updateRuntimeParticle();
+	});
+	this.form.add(this.acceleration_spread);
+	this.form.nextRow();
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -284,8 +336,13 @@ function attachParticle(particle)
 	this.type.setValue(particle.emitter.type);
 	this.maxAge_value.setValue(particle.emitter.maxAge.value);
 	this.maxAge_spread.setValue(particle.emitter.maxAge.spread);
-
-
+	this.position_value.setValue(particle.emitter.position.value);
+	this.position_spread.setValue(particle.emitter.position.spread);
+	this.velocity_value.setValue(particle.emitter.velocity.value);
+	this.velocity_spread.setValue(particle.emitter.velocity.spread);
+	this.acceleration_value.setValue(particle.emitter.acceleration.value);
+	this.acceleration_spread.setValue(particle.emitter.acceleration.spread);
+	
 	//Create runtime particle to preview particle
 	this.updateRuntimeParticle();
 }
