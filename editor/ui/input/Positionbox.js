@@ -152,9 +152,23 @@ function getValue()
 //Set value of position box
 function setValue(x, y, z)
 {
-	this.x.value = x;
-	this.y.value = y;
-	this.z.value = z;
+	if(x instanceof THREE.Vector2)
+	{
+		this.x.value = x.x;
+		this.y.value = x.y;
+	}
+	else if(x instanceof THREE.Vector3)
+	{
+		this.x.value = x.x;
+		this.y.value = x.y;
+		this.z.value = x.z;
+	}
+	else
+	{
+		this.x.value = x;
+		this.y.value = y;
+		this.z.value = z;
+	}
 }
 
 //Set onchange callback

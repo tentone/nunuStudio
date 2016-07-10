@@ -10,6 +10,6 @@
 	"shadows_type": 2,
 	"antialiasing": true,
 	"code_theme": "monokai",
-	"code_font_size": 20,
+	"code_font_size": 15,
 	"code_line_numbers": true
 }
