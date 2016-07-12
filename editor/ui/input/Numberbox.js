@@ -11,7 +11,7 @@ function NumberBox(parent)
 	}
 
 	//ID
-	var id = "num_box" + NumberBox.id;
+	var id = "number_box" + NumberBox.id;
 	NumberBox.id++;
 
 	//Create element

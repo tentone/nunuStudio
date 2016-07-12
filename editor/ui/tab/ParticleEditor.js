@@ -286,6 +286,31 @@ function ParticleEditor(parent)
 	this.form.add(this.acceleration_spread);
 	this.form.nextRow();
 
+	//Wiggle
+	this.form.addText("Wiggle");
+	this.wiggle_value = new NumberBox(this.form.element);
+	this.wiggle_value.size.set(60, 18);
+	this.wiggle_value.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.wiggle_value.setOnChange(function()
+	{
+		self.particle.emitter.wiggle.value = self.wiggle_value.getValue();
+		self.updateRuntimeParticle();
+	});
+	this.form.add(this.wiggle_value);
+	this.form.addText("+/-");
+	this.wiggle_spread = new NumberBox(this.form.element);
+	this.wiggle_spread.size.set(60, 18);
+	this.wiggle_spread.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.wiggle_spread.setOnChange(function()
+	{
+		self.particle.emitter.wiggle.spread = self.wiggle_spread.getValue();
+		self.updateRuntimeParticle();
+	});
+	this.form.add(this.wiggle_spread);
+	this.form.nextRow();
+	
+
+
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
@@ -318,12 +343,14 @@ function attachParticle(particle)
 	//Attach particle
 	this.particle = particle;
 
-	//Update form elements from particle data
+	//Group attributes
 	this.name.setText(particle.name);
 	this.texture.setImage(particle.group.texture.image.src);
 	this.maxParticleCount.setValue(particle.group.maxParticleCount);
 	this.blending.setValue(particle.group.blending);
 	this.direction.setValue(particle.emitter.direction);
+
+	//Emitter attributes
 	this.particleCount.setValue(particle.emitter.particleCount);
 	if(particle.emitter.duration !== null)
 	{
@@ -342,7 +369,9 @@ function attachParticle(particle)
 	this.velocity_spread.setValue(particle.emitter.velocity.spread);
 	this.acceleration_value.setValue(particle.emitter.acceleration.value);
 	this.acceleration_spread.setValue(particle.emitter.acceleration.spread);
-	
+	this.wiggle_value.setValue(particle.emitter.wiggle.value);
+	this.wiggle_spread.setValue(particle.emitter.wiggle.spread);
+
 	//Create runtime particle to preview particle
 	this.updateRuntimeParticle();
 }

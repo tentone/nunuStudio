@@ -43,6 +43,7 @@ Form.prototype.destroy = destroy;
 Form.prototype.nextRow = nextRow;
 Form.prototype.add = add;
 Form.prototype.addText = addText;
+Form.prototype.addDivision = addDivision;
 
 //Add new row to form
 function nextRow()
@@ -50,19 +51,29 @@ function nextRow()
 	this.rows.push([]);
 }
 
+//Create div element and add to form
+function addDivision(x, y)
+{
+	var division = new Division(this.element);
+	division.size.set(x, y);
+
+	this.add(division);
+
+	return division;
+}
+
 //Create text element and add to form
 function addText(text)
 {
-	var elem = new Text(this.element);
-	elem.setAlignment(Text.LEFT);
-	elem.fit_content = true;
-	elem.setText(text);
-	elem.size.set(0, 20);
-	elem.updateInterface();
+	var element = new Text(this.element);
+	element.fit_content = true;
+	element.size.set(0, 20);
+	element.setAlignment(Text.LEFT);
+	element.setText(text);
 
-	this.add(elem);
+	this.add(element);
 
-	return elem;
+	return element;
 }
 
 //Add a element to form (in actual row)
