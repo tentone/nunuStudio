@@ -63,7 +63,7 @@ function ParticleEmitter(group, emitter)
 
 			color:
 			{
-				value: [new THREE.Color(1, 1, 1), new THREE.Color(1, 0, 0)],
+				value: [new THREE.Color(1, 1, 1), new THREE.Color(0, 0, 0)],
 				spread: [new THREE.Vector3(0, 0, 0), new THREE.Vector3(1, 1, 1)]
 			}
 		});
@@ -109,10 +109,6 @@ function update()
 //Dipose particle emitter
 function dispose()
 {
-	//Dispose particle group
-	//this.group.dispose();
-
-	//Dipose children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].dispose();
