@@ -100,8 +100,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.8.9 Alpha";
-Editor.TIMESTAMP = "201607120152";
+Editor.VERSION = "V0.8.9.0 Alpha";
+Editor.TIMESTAMP = "201607161612";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -142,9 +142,7 @@ Editor.initialize = function(canvas)
 
 	//Editor Selected object
 	Editor.selected_object = null;
-	Editor.block_camera_move = false;
 	Editor.is_editing_object = false;
-	Editor.editing_object_args = null;
 
 	//Performance meter
 	Editor.stats = null;
@@ -206,23 +204,13 @@ Editor.initialize = function(canvas)
 	Editor.tool_scene.add(Editor.axis_helper);
 
 	//Object helper container
-	Editor.object_helper = new Container();
+	Editor.object_helper = new THREE.Scene();
 	Editor.tool_scene.add(Editor.object_helper);
 
-	//Move tool
-	Editor.move_tool = new MoveTool();
-	Editor.move_tool.visible = false;
-	Editor.tool_scene_top.add(Editor.move_tool);
-
-	//Resize tool
-	Editor.resize_tool = new ResizeTool();
-	Editor.resize_tool.visible = false;
-	Editor.tool_scene_top.add(Editor.resize_tool);
-
-	//Rotate tool
-	Editor.rotate_tool = new RotateTool();
-	Editor.rotate_tool.visible = false;
-	Editor.tool_scene_top.add(Editor.rotate_tool);
+	//Tool container
+	Editor.tool_container = new THREE.Scene();
+	Editor.tool_scene_top.add(Editor.tool_container);
+	Editor.tool = null;
 
 	//Create new program
 	Editor.createNewProgram();
@@ -242,7 +230,7 @@ Editor.update = function()
 
 	//Update editor interface
 	Interface.update();
-	Editor.block_camera_move = false;
+	Editor.is_editing_object = false;
 
 	//If not on test mode
 	if(Editor.state !== Editor.STATE_TESTING)
@@ -269,7 +257,10 @@ Editor.update = function()
 	if(Editor.state === Editor.STATE_EDITING)
 	{
 		//Update object helper
-		Editor.updateObjectHelper();
+		if(Editor.selected_object !== null)
+		{
+			Editor.object_helper.update();
+		}
 
 		//Keyboard shortcuts
 		if(Keyboard.isKeyJustPressed(Keyboard.DEL))
@@ -300,228 +291,49 @@ Editor.update = function()
 			}
 		}
 
-		//If object select display tools
-		if(Editor.selected_object !== null)
+		//Select objects
+		if(Editor.tool_mode === Editor.MODE_SELECT)
 		{
-			if(Editor.tool_mode === Editor.MODE_MOVE)
+			if(Mouse.buttonJustPressed(Mouse.LEFT) && Mouse.insideCanvas())
 			{
-				Editor.move_tool.visible = true;
-				Editor.rotate_tool.visible = false;
-				Editor.resize_tool.visible = false;
-
-				var distance = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/5;
-				Editor.move_tool.scale.set(distance, distance, distance);
-
-				Editor.selected_object.getWorldPosition(Editor.move_tool.position);
-				if(Editor.selected_object.parent !== null)
+				Editor.updateRaycasterFromMouse();
+				var intersects = Editor.raycaster.intersectObjects(Editor.program.scene.children, true);
+				if(intersects.length > 0)
 				{
-					Editor.selected_object.parent.getWorldQuaternion(Editor.move_tool.quaternion);
+					Editor.selectObject(intersects[0].object);
 				}
 			}
-			else if(Editor.tool_mode === Editor.MODE_RESIZE)
+
+			Editor.is_editing_object = false;
+		}
+		//Update active tool status
+		else
+		{
+			if(Editor.tool !== null)
 			{
-				Editor.resize_tool.visible = true;
-				Editor.move_tool.visible = false;
-				Editor.rotate_tool.visible = false;
-
-				var distance = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/5;
-				Editor.resize_tool.scale.set(distance, distance, distance);
-
-				Editor.selected_object.getWorldPosition(Editor.resize_tool.position);
-				Editor.selected_object.getWorldQuaternion(Editor.resize_tool.quaternion);
-			}
-			else if(Editor.tool_mode === Editor.MODE_ROTATE)
-			{
-				Editor.rotate_tool.visible = true;
-				Editor.move_tool.visible = false;
-				Editor.resize_tool.visible = false;
-
-				var position = Editor.selected_object.getWorldPosition();
-				var distance = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/5;
-				Editor.rotate_tool.scale.set(distance, distance, distance);
-				Editor.selected_object.getWorldPosition(Editor.rotate_tool.position);
-				
-				if(Editor.selected_object.parent !== null)
-				{
-					Editor.selected_object.parent.getWorldQuaternion(Editor.rotate_tool.quaternion);
-				}
+				Editor.is_editing_object = Editor.tool.update();
 			}
 			else
 			{
-				Editor.move_tool.visible = false;
-				Editor.rotate_tool.visible = false;
-				Editor.resize_tool.visible = false;
+				Editor.is_editing_object = false;
 			}
-		}
-		else
-		{
-			Editor.move_tool.visible = false;
-			Editor.rotate_tool.visible = false;
-			Editor.resize_tool.visible = false;
 		}
 
 		//Check if editing object
 		if(Editor.is_editing_object)
 		{	
-			//If mouse button released exit edit mode
-			if(Mouse.buttonJustReleased(Mouse.LEFT))
+			//Update object tranformation matrix
+			if(!Editor.selected_object.matrixAutoUpdate)
 			{
-				Editor.is_editing_object = false;
-			}
-			else
-			{
-				Editor.block_camera_move = true;
-
-				//Moving object
-				if(Editor.tool_mode === Editor.MODE_MOVE)
-				{
-					var scale = Editor.selected_object.parent.getWorldScale();
-					var speed = Editor.camera.position.distanceTo(Editor.selected_object.getWorldPosition())/500;
-
-					if(Editor.editing_object_args.x)
-					{
-						Editor.selected_object.position.x -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x) / scale.x;
-						Editor.selected_object.position.x -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x) / scale.x;
-					}
-					else if(Editor.editing_object_args.y)
-					{
-						Editor.selected_object.position.y -= Mouse.delta.y * speed / scale.y;
-					}
-					else if(Editor.editing_object_args.z)
-					{
-						Editor.selected_object.position.z -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2) / scale.z;
-						Editor.selected_object.position.z -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2) / scale.z;
-					}
-
-					//Update object panel
-					Editor.updateObjectPanel();
-				}
-				//Resize mode
-				else if(Editor.tool_mode === Editor.MODE_RESIZE)
-				{
-					var scale = Editor.selected_object.scale.clone();
-					scale.multiplyScalar(0.01);
-
-					if(Editor.editing_object_args.center)
-					{
-						var size = (Mouse.delta.x - Mouse.delta.y);
-
-						Editor.selected_object.scale.x += size * scale.x;
-						Editor.selected_object.scale.y += size * scale.y;
-						Editor.selected_object.scale.z += size * scale.z;
-					}
-					else if(Editor.editing_object_args.x)
-					{
-						Editor.selected_object.scale.x -= Mouse.delta.y * Math.sin(Editor.camera_rotation.x) * scale.x;
-						Editor.selected_object.scale.x -= Mouse.delta.x * Math.cos(Editor.camera_rotation.x) * scale.x;
-					}
-					else if(Editor.editing_object_args.y)
-					{
-						Editor.selected_object.scale.y -= Mouse.delta.y * scale.y;
-					}
-					else if(Editor.editing_object_args.z)
-					{
-						Editor.selected_object.scale.z -= Mouse.delta.y * Math.sin(Editor.camera_rotation.x + Editor.pid2) * scale.z;
-						Editor.selected_object.scale.z -= Mouse.delta.x * Math.cos(Editor.camera_rotation.x + Editor.pid2) * scale.z;
-					}
-
-					//Update object panel
-					Editor.updateObjectPanel();
-				}
-				//Rotate Mode
-				else if(Editor.tool_mode === Editor.MODE_ROTATE)
-				{
-					var speed = 0.003;
-
-					if(Editor.editing_object_args.x)
-					{
-						var delta = new THREE.Quaternion();
-						delta.setFromEuler(new THREE.Euler(-(Mouse.delta.y + Mouse.delta.x) * speed, 0, 0, 'XYZ'));
-						Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
-					}
-					else if(Editor.editing_object_args.y)
-					{
-						var delta = new THREE.Quaternion();
-						delta.setFromEuler(new THREE.Euler(0, -(Mouse.delta.y + Mouse.delta.x) * speed, 0, 'XYZ'));
-						Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
-					}
-					else if(Editor.editing_object_args.z)
-					{
-						var delta = new THREE.Quaternion();
-						delta.setFromEuler(new THREE.Euler(0, 0, (Mouse.delta.y + Mouse.delta.x) * speed, 'XYZ'));
-						Editor.selected_object.quaternion.multiplyQuaternions(delta, Editor.selected_object.quaternion);
-					}
-
-					//Update object panel
-					Editor.updateObjectPanel();
-				}
-
-				//Update object tranformation matrix
-				if(!Editor.selected_object.matrixAutoUpdate)
-				{
-					Editor.selected_object.updateMatrix();
-				}
+				Editor.selected_object.updateMatrix();
 			}
 		}
 
-		//Check if mouse inside canvas
+		//Check if mouse is inside canvas
 		if(Mouse.insideCanvas())
 		{
-			//Select objects
-			if(Editor.tool_mode === Editor.MODE_SELECT)
-			{
-				if(Mouse.buttonJustPressed(Mouse.LEFT))
-				{
-					Editor.updateRaycasterFromMouse();
-					var intersects =  Editor.raycaster.intersectObjects(Editor.program.scene.children, true);
-					if(intersects.length > 0)
-					{
-						Editor.selectObject(intersects[0].object);
-					}
-				}
-			}
-
-			//Move objects
-			else if(Editor.tool_mode === Editor.MODE_MOVE)
-			{
-				Editor.updateRaycasterFromMouse();
-				var move = Editor.move_tool.highlightSelectedComponents(Editor.raycaster);
-				if(move.selected && Mouse.buttonJustPressed(Mouse.LEFT))
-				{	
-					Editor.editing_object_args = move;
-					Editor.is_editing_object = true;
-					Editor.block_camera_move = true;
-				}
-			}
-
-			//Resize
-			else if(Editor.tool_mode === Editor.MODE_RESIZE)
-			{
-				Editor.updateRaycasterFromMouse();
-				var resize = Editor.resize_tool.highlightSelectedComponents(Editor.raycaster);
-				if(resize.selected && Mouse.buttonJustPressed(Mouse.LEFT))
-				{	
-					Editor.editing_object_args = resize;
-					Editor.is_editing_object = true;
-					Editor.block_camera_move = true;
-				}
-			}
-
-			//Rotate
-			else if(Editor.tool_mode === Editor.MODE_ROTATE)
-			{
-				Editor.updateRaycasterFromMouse();
-				var rotate = Editor.rotate_tool.highlightSelectedComponents(Editor.raycaster);
-				if(rotate.selected && Mouse.buttonJustPressed(Mouse.LEFT))
-				{	
-					Editor.editing_object_args = rotate;
-					Editor.is_editing_object = true;
-					Editor.block_camera_move = true;
-				}
-			}
-
-			//Rotate camera
-			if(Mouse.buttonPressed(Mouse.LEFT) && !Editor.block_camera_move)
+			//Look camera
+			if(Mouse.buttonPressed(Mouse.LEFT) && !Editor.is_editing_object)
 			{
 				Editor.camera_rotation.x -= 0.002 * Mouse.delta.x;
 				Editor.camera_rotation.y -= 0.002 * Mouse.delta.y;
@@ -675,6 +487,12 @@ Editor.selectObject = function(obj)
 	Editor.selected_object = obj;
 	Editor.updateSelectedObjectUI();
 	Editor.selectObjectHelper();
+
+	if(Editor.tool !== null && Editor.selected_object !== null)
+	{
+		Editor.tool_container.add(Editor.tool);
+		Editor.tool.attachObject(Editor.selected_object);
+	}
 }
 
 //Check if object is selected
@@ -764,7 +582,8 @@ Editor.pasteIntoSelectedObject = function()
 //Delete selected object
 Editor.deleteSelectedObject = function()
 {
-	if(Editor.selected_object.parent !== null)
+	//TODO <CHECK CODE HERE USE DESTROY FUNCTION>
+	if(Editor.selected_object !== null && Editor.selected_object.parent !== null)
 	{
 		Editor.selected_object.parent.remove(Editor.selected_object);
 		Editor.updateObjectViews();
@@ -776,74 +595,77 @@ Editor.deleteSelectedObject = function()
 Editor.updateSelectedObjectUI = function()
 {
 	Interface.tree_view.updateSelectedObject(Editor.selected_object);
-
-	//Destroy old panel
 	Interface.panel.destroy();
 
-	//Select UI panel to use for selected object
-	if(Editor.selected_object instanceof Text3D)
+	if(Editor.selected_object !== null)
 	{
-		Interface.panel = new TextPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof THREE.PointLight)
-	{
-		Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof THREE.SpotLight)
-	{
-		Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof THREE.DirectionalLight)
-	{
-		Interface.panel = new DirectionalLightPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof THREE.Light)
-	{
-		Interface.panel = new AmbientLightPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof Sky)
-	{
-		Interface.panel = new SkyPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof LeapHand)
-	{
-		Interface.panel = new LeapPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof KinectDevice)
-	{
-		Interface.panel = new KinectPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof Script)
-	{
-		Interface.panel = new ScriptPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof PerspectiveCamera)
-	{
-		Interface.panel = new PerspectiveCameraPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof OrthographicCamera)
-	{
-		Interface.panel = new OrthographicCameraPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof Audio)
-	{
-		Interface.panel = new AudioPanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof Scene)
-	{
-		Interface.panel = new ScenePanel(Interface.explorer_resizable.div_b);
-	}
-	else if(Editor.selected_object instanceof Program)
-	{
-		Interface.panel = new ProgramPanel(Interface.explorer_resizable.div_b);
+		if(Editor.selected_object instanceof Text3D)
+		{
+			Interface.panel = new TextPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof THREE.PointLight)
+		{
+			Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof THREE.SpotLight)
+		{
+			Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof THREE.DirectionalLight)
+		{
+			Interface.panel = new DirectionalLightPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof THREE.Light)
+		{
+			Interface.panel = new AmbientLightPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof Sky)
+		{
+			Interface.panel = new SkyPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof LeapHand)
+		{
+			Interface.panel = new LeapPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof KinectDevice)
+		{
+			Interface.panel = new KinectPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof Script)
+		{
+			Interface.panel = new ScriptPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof PerspectiveCamera)
+		{
+			Interface.panel = new PerspectiveCameraPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof OrthographicCamera)
+		{
+			Interface.panel = new OrthographicCameraPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof Audio)
+		{
+			Interface.panel = new AudioPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof Scene)
+		{
+			Interface.panel = new ScenePanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof Program)
+		{
+			Interface.panel = new ProgramPanel(Interface.explorer_resizable.div_b);
+		}
+		else
+		{
+			Interface.panel = new ObjectPanel(Interface.explorer_resizable.div_b);
+		}
+		Interface.panel.attachObject(Editor.selected_object);
+		Interface.panel.updateInterface();
 	}
 	else
 	{
-		Interface.panel = new ObjectPanel(Interface.explorer_resizable.div_b);
+		Interface.panel = null;
 	}
-	
-	Interface.panel.attachObject(Editor.selected_object);
-	Interface.panel.updateInterface();
 }
 
 //Update all object views
@@ -905,6 +727,36 @@ Editor.addToActualScene = function(obj)
 	Editor.updateObjectViews();
 }
 
+//Select tool to manipulate objects
+Editor.selectTool = function(tool)
+{
+	Editor.tool_mode = tool;
+	Editor.tool_container.removeAll();
+
+	if(tool === Editor.MODE_MOVE)
+	{
+		Editor.tool = new MoveTool();
+	}
+	else if(tool === Editor.MODE_ROTATE)
+	{
+		Editor.tool = new RotateTool();
+	}
+	else if(tool === Editor.MODE_RESIZE)
+	{
+		Editor.tool = new ResizeTool();
+	}
+	else
+	{
+		Editor.tool = null;
+	}
+
+	if(Editor.tool !== null && Editor.selected_object !== null)
+	{
+		Editor.tool_container.add(Editor.tool);
+		Editor.tool.attachObject(Editor.selected_object);
+	}
+}
+
 //Select helper to debug selected object data
 Editor.selectObjectHelper = function()
 {
@@ -955,15 +807,6 @@ Editor.selectObjectHelper = function()
 	}
 }
 
-//Update object helper to match actual object data
-Editor.updateObjectHelper = function()
-{
-	if(Editor.selected_object !== null)
-	{
-		Editor.object_helper.update();
-	}
-}
-
 //Resize Camera
 Editor.resizeCamera = function()
 {
@@ -1011,9 +854,8 @@ Editor.updateRaycaster = function(x, y)
 Editor.resetEditingFlags = function()
 {
 	Editor.selected_object = null;
-	Editor.block_camera_move = false;
 	Editor.is_editing_object = false;
-	Editor.editing_object_args = null;
+	Editor.is_editing_object = false;
 	
 	Editor.selectObjectHelper();
 }

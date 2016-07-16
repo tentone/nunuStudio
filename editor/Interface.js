@@ -287,7 +287,7 @@ Interface.initialize = function()
 	Interface.tool_select.updateInterface();
 	Interface.tool_select.setCallback(function()
 	{
-		Editor.tool_mode = Editor.MODE_SELECT;
+		Editor.selectTool(Editor.MODE_SELECT);
 		Interface.tool_select.selected = true;
 		Interface.tool_move.selected = false;
 		Interface.tool_resize.selected = false;
@@ -307,7 +307,7 @@ Interface.initialize = function()
 	Interface.tool_move.updateInterface();
 	Interface.tool_move.setCallback(function()
 	{
-		Editor.tool_mode = Editor.MODE_MOVE;
+		Editor.selectTool(Editor.MODE_MOVE);
 		Interface.tool_move.selected = true;
 		Interface.tool_select.selected = false;
 		Interface.tool_resize.selected = false;
@@ -327,7 +327,7 @@ Interface.initialize = function()
 	Interface.tool_resize.updateInterface();
 	Interface.tool_resize.setCallback(function()
 	{
-		Editor.tool_mode = Editor.MODE_RESIZE;
+		Editor.selectTool(Editor.MODE_RESIZE);
 		Interface.tool_resize.selected = true;
 		Interface.tool_move.selected = false;
 		Interface.tool_select.selected = false;
@@ -347,7 +347,7 @@ Interface.initialize = function()
 	Interface.tool_rotate.updateInterface();
 	Interface.tool_rotate.setCallback(function()
 	{
-		Editor.tool_mode = Editor.MODE_ROTATE;
+		Editor.selectTool(Editor.MODE_ROTATE);
 		Interface.tool_rotate.selected = true;
 		Interface.tool_move.selected = false;
 		Interface.tool_resize.selected = false;

@@ -1,9 +1,18 @@
+"use strict";
+
 function ResizeTool()
 {
-	//Super
 	THREE.Object3D.call(this);
 
 	var pid2 = Math.PI / 2;
+
+	this.obj = null;
+
+	this.selected = false;
+	this.selected_x = false;
+	this.selected_y = false;
+	this.selected_z = false;
+	this.selected_center = false;
 
 	//Materials
 	this.material_red = new THREE.MeshBasicMaterial({color: 0xff0000});
@@ -35,6 +44,7 @@ function ResizeTool()
 	this.x.rotateOnAxis(new THREE.Vector3(0,0,1) , -pid2);
 	this.x.matrixAutoUpdate = false;
 	this.x.updateMatrix();
+	this.add(this.x);
 
 	//Y
 	this.y = new THREE.Scene();
@@ -48,6 +58,7 @@ function ResizeTool()
 	mesh.position.set(0, 0.5, 0);
 	this.y.add(mesh);
 	this.y.matrixAutoUpdate = false;
+	this.add(this.y);
 
 	//Z
 	this.z = new THREE.Scene();
@@ -63,82 +74,144 @@ function ResizeTool()
 	this.z.rotateOnAxis(new THREE.Vector3(1,0,0), pid2);
 	this.z.matrixAutoUpdate = false;
 	this.z.updateMatrix();
-	
+	this.add(this.z);
+
 	//Center
 	this.block = new THREE.Mesh(box_geometry, this.material_yellow);
 	this.block.matrixAutoUpdate = false;
 	this.block.updateMatrix();
-	
-	//Add to super
-	this.add(this.x);
-	this.add(this.y);
-	this.add(this.z);
 	this.add(this.block);
 }
 
 //Functions Prototype
 ResizeTool.prototype = Object.create(THREE.Object3D.prototype);
-ResizeTool.prototype.highlightSelectedComponents = highlightSelectedComponents;
+ResizeTool.prototype.attachObject = attachObject;
+ResizeTool.prototype.update = update;
 
-//Highligth selected compoonents and return witch are selected
-function highlightSelectedComponents(raycaster)
+//Attach object to resize tool
+function attachObject(obj)
 {
-	var x = false, y = false, z = false, center = false;
-	var selected = false;
-	
-	//X Component
-	if(raycaster.intersectObject(this.x, true).length > 0)
+	this.obj = obj;
+}
+
+//Update attached object returns if object is being edited
+function update(raycaster)
+{
+	if(this.obj !== null)
 	{
-		x = true;
-		selected = true;
-		this.x.children[0].material = this.material_yellow;
-		this.x.children[1].material = this.material_yellow;
-	}
-	else
-	{
-		this.x.children[0].material = this.material_red;
-		this.x.children[1].material = this.material_red;
+		var distance = Editor.camera.position.distanceTo(this.obj.getWorldPosition())/5;
+		this.scale.set(distance, distance, distance);
+		this.obj.getWorldPosition(this.position);
+		this.obj.getWorldQuaternion(this.quaternion);
+
+		if(Mouse.buttonJustReleased(Mouse.LEFT))
+		{
+			this.selected = false;
+			this.selected_x = false;
+			this.selected_y = false;
+			this.selected_z = false;
+			this.selected_center = false;
+		}
+
+		if(this.selected)
+		{
+			var scale = this.obj.scale.clone();
+			scale.multiplyScalar(0.01);
+
+			if(this.selected_center)
+			{
+				var size = (Mouse.delta.x - Mouse.delta.y);
+				this.obj.scale.x += size * scale.x;
+				this.obj.scale.y += size * scale.y;
+				this.obj.scale.z += size * scale.z;
+			}
+			else if(this.selected_x)
+			{
+				this.obj.scale.x -= Mouse.delta.y * Math.sin(Editor.camera_rotation.x) * scale.x;
+				this.obj.scale.x -= Mouse.delta.x * Math.cos(Editor.camera_rotation.x) * scale.x;
+			}
+			else if(this.selected_y)
+			{
+				this.obj.scale.y -= Mouse.delta.y * scale.y;
+			}
+			else if(this.selected_z)
+			{
+				this.obj.scale.z -= Mouse.delta.y * Math.sin(Editor.camera_rotation.x + Editor.pid2) * scale.z;
+				this.obj.scale.z -= Mouse.delta.x * Math.cos(Editor.camera_rotation.x + Editor.pid2) * scale.z;
+			}
+
+			Editor.updateObjectPanel();
+
+			return true;
+		}
+		else
+		{
+			Editor.updateRaycasterFromMouse();
+
+			//X Component
+			if(Editor.raycaster.intersectObject(this.x, true).length > 0)
+			{
+				this.selected_x = true;
+				this.selected = true;
+				this.x.children[0].material = this.material_yellow;
+				this.x.children[1].material = this.material_yellow;
+			}
+			else
+			{
+				this.x.children[0].material = this.material_red;
+				this.x.children[1].material = this.material_red;
+			}
+
+			//Y Component
+			if(Editor.raycaster.intersectObject(this.y, true).length > 0)
+			{
+				this.selected_y = true;
+				this.selected = true;
+				this.y.children[0].material = this.material_yellow;
+				this.y.children[1].material = this.material_yellow;
+			}
+			else
+			{
+				this.y.children[0].material = this.material_green;
+				this.y.children[1].material = this.material_green;
+			}
+
+			//Z Component
+			if(Editor.raycaster.intersectObject(this.z, true).length > 0)
+			{
+				this.selected_z = true;
+				this.selected = true;
+				this.z.children[0].material = this.material_yellow;
+				this.z.children[1].material = this.material_yellow;
+			}
+			else
+			{
+				this.z.children[0].material = this.material_blue;
+				this.z.children[1].material = this.material_blue;
+			}
+
+			//Center Block Component
+			if(Editor.raycaster.intersectObject(this.block, true).length > 0)
+			{
+				this.selected_center = true;
+				this.selected = true;
+				this.block.material = this.material_yellow;
+			}
+			else
+			{
+				this.block.material = this.material_white;
+			}
+		}
+
+		if(!Mouse.buttonJustPressed(Mouse.LEFT))
+		{
+			this.selected = false;
+			this.selected_x = false;
+			this.selected_y = false;
+			this.selected_z = false;
+			this.selected_center = false;
+		}
 	}
 
-	//Y Component
-	if(raycaster.intersectObject(this.y, true).length > 0)
-	{
-		y = true;
-		selected = true;
-		this.y.children[0].material = this.material_yellow;
-		this.y.children[1].material = this.material_yellow;
-	}
-	else
-	{
-		this.y.children[0].material = this.material_green;
-		this.y.children[1].material = this.material_green;
-	}
-
-	//Z Component
-	if(raycaster.intersectObject(this.z, true).length > 0)
-	{
-		z = true;
-		selected = true;
-		this.z.children[0].material = this.material_yellow;
-		this.z.children[1].material = this.material_yellow;
-	}
-	else
-	{
-		this.z.children[0].material = this.material_blue;
-		this.z.children[1].material = this.material_blue;
-	}
-
-	//Center Block Component
-	if(raycaster.intersectObject(this.block, true).length > 0)
-	{
-		center = true;
-		selected = true;
-		this.block.material = this.material_yellow;
-	}
-	else
-	{
-		this.block.material = this.material_white;
-	}
-
-	return {selected, x, y, z, center};
+	return false;
 }

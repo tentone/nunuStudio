@@ -1,9 +1,17 @@
+"use strict";
+
 function MoveTool()
 {
-	//Super
 	THREE.Object3D.call(this);
 
 	var pid2 = Math.PI / 2;
+
+	this.obj = null;
+
+	this.selected = false;
+	this.selected_x = false;
+	this.selected_y = false;
+	this.selected_z = false;
 
 	//Materials
 	this.material_red = new THREE.MeshBasicMaterial({color: 0xff0000});
@@ -40,6 +48,7 @@ function MoveTool()
 	this.x.rotateOnAxis(new THREE.Vector3(0,0,1) , -pid2);
 	this.x.updateMatrix();
 	this.x.matrixAutoUpdate = false;
+	this.add(this.x);
 
 	//Y
 	this.y = new THREE.Scene();
@@ -57,6 +66,7 @@ function MoveTool()
 	mesh.updateMatrix();
 	this.y.add(mesh);
 	this.y.matrixAutoUpdate = false;
+	this.add(this.y);
 
 	//Z
 	this.z = new THREE.Scene();
@@ -78,69 +88,133 @@ function MoveTool()
 	this.z.rotateOnAxis(new THREE.Vector3(1,0,0), pid2);
 	this.z.updateMatrix();
 	this.z.matrixAutoUpdate = false;
+	this.add(this.z);
 
-	//Center Block
+	//Center
 	this.block = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.1, 0.1), this.material_yellow);
 	this.block.matrixAutoUpdate = false;
-
-	//Add
-	this.add(this.x);
-	this.add(this.y);
-	this.add(this.z);
 	this.add(this.block);
 }
 
 //Functions Prototype
 MoveTool.prototype = Object.create(THREE.Object3D.prototype);
-MoveTool.prototype.highlightSelectedComponents = highlightSelectedComponents;
+MoveTool.prototype.attachObject = attachObject;
+MoveTool.prototype.update = update;
 
-//Highligth selected compoonents and return witch are selected
-function highlightSelectedComponents(raycaster)
+//Attach object to move tool
+function attachObject(obj)
 {
-	var selected = false;
-	var x = false, y = false, z = false;
+	this.obj = obj;
+}
 
-	//X Component
-	if(raycaster.intersectObject(this.x, true).length > 0)
+//Update attached object returns if object is being edited
+function update()
+{
+	//Update tool position and scale
+	if(this.obj !== null)
 	{
-		selected = true;
-		x = true;
-		this.x.children[0].material = this.material_yellow;
-		this.x.children[1].material = this.material_yellow;
-	}
-	else
-	{
-		this.x.children[0].material = this.material_red;
-		this.x.children[1].material = this.material_red;
+		var distance = Editor.camera.position.distanceTo(this.obj.getWorldPosition())/5;
+		this.scale.set(distance, distance, distance);
+		this.obj.getWorldPosition(this.position);
+		if(this.obj.parent !== null)
+		{
+			this.obj.parent.getWorldQuaternion(this.quaternion);
+		}
+
+		if(Mouse.buttonJustReleased(Mouse.LEFT))
+		{
+			this.selected = false;
+			this.selected_x = false;
+			this.selected_y = false;
+			this.selected_z = false;
+		}
+
+		if(this.selected)
+		{
+			if(this.obj.parent !== null)
+			{
+				var scale = this.obj.parent.getWorldScale();
+			}
+			else
+			{
+				var scale = 1;
+			}
+			var speed = Editor.camera.position.distanceTo(this.obj.getWorldPosition())/500;
+
+			if(this.selected_x)
+			{
+				this.obj.position.x -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x) / scale.x;
+				this.obj.position.x -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x) / scale.x;
+			}
+			if(this.selected_y)
+			{
+				this.obj.position.y -= Mouse.delta.y * speed / scale.y;
+			}
+			if(this.selected_z)
+			{
+				this.obj.position.z -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x + Editor.pid2) / scale.z;
+				this.obj.position.z -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x + Editor.pid2) / scale.z;
+			}
+
+			Editor.updateObjectPanel();
+
+			return true;
+		}
+		else
+		{
+			Editor.updateRaycasterFromMouse();
+
+			//X Component
+			if(Editor.raycaster.intersectObject(this.x, true).length > 0)
+			{
+				this.selected = true;
+				this.selected_x = true;
+				this.x.children[0].material = this.material_yellow;
+				this.x.children[1].material = this.material_yellow;
+			}
+			else
+			{
+				this.x.children[0].material = this.material_red;
+				this.x.children[1].material = this.material_red;
+			}
+
+			//Y Component
+			if(Editor.raycaster.intersectObject(this.y, true).length > 0)
+			{
+				this.selected = true;
+				this.selected_y = true;
+				this.y.children[0].material = this.material_yellow;
+				this.y.children[1].material = this.material_yellow;
+			}
+			else
+			{
+				this.y.children[0].material = this.material_green;
+				this.y.children[1].material = this.material_green;
+			}
+
+			//Z Component
+			if(Editor.raycaster.intersectObject(this.z, true).length > 0)
+			{
+				this.selected = true;
+				this.selected_z = true;
+				this.z.children[0].material = this.material_yellow;
+				this.z.children[1].material = this.material_yellow;
+			}
+			else
+			{
+				this.z.children[0].material = this.material_blue;
+				this.z.children[1].material = this.material_blue;
+			}
+
+			if(!Mouse.buttonJustPressed(Mouse.LEFT))
+			{
+				this.selected = false;
+				this.selected_x = false;
+				this.selected_y = false;
+				this.selected_z = false;
+			}
+		}
 	}
 
-	//Y Component
-	if(raycaster.intersectObject(this.y, true).length > 0)
-	{
-		selected = true;
-		y = true;
-		this.y.children[0].material = this.material_yellow;
-		this.y.children[1].material = this.material_yellow;
-	}
-	else
-	{
-		this.y.children[0].material = this.material_green;
-		this.y.children[1].material = this.material_green;
-	}
-
-	//Z Component
-	if(raycaster.intersectObject(this.z, true).length > 0)
-	{
-		selected = true;
-		z = true;
-		this.z.children[0].material = this.material_yellow;
-		this.z.children[1].material = this.material_yellow;
-	}
-	else
-	{
-		this.z.children[0].material = this.material_blue;
-		this.z.children[1].material = this.material_blue;
-	}
-
-	return {selected, x, y, z};
+	return false;
 }
