@@ -109,6 +109,17 @@ function SettingsTab(parent)
 	this.general_form.add(this.axis_enabled);
 	this.general_form.nextRow();
 
+	//Enable camera preview
+	this.show_camera_preview = new CheckBox(this.general_form.element);
+	this.show_camera_preview.setText("Camera preview");
+	this.show_camera_preview.size.set(200, 16);
+	this.show_camera_preview.setOnChange(function()
+	{
+		Settings.show_camera_preview = self.show_camera_preview.getValue();
+	});
+	this.general_form.add(this.show_camera_preview);
+	this.general_form.nextRow();
+
 	//Blank Space
 	this.general_form.addText("");
 	this.general_form.nextRow();
