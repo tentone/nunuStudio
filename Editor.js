@@ -100,8 +100,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.0 Alpha";
-Editor.TIMESTAMP = "201607161612";
+Editor.VERSION = "V0.8.9.1 Alpha";
+Editor.TIMESTAMP = "201607180213";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -256,12 +256,6 @@ Editor.update = function()
 	//Editing a scene
 	if(Editor.state === Editor.STATE_EDITING)
 	{
-		//Update object helper
-		if(Editor.selected_object !== null)
-		{
-			Editor.object_helper.update();
-		}
-
 		//Keyboard shortcuts
 		if(Keyboard.isKeyJustPressed(Keyboard.DEL))
 		{
@@ -306,28 +300,30 @@ Editor.update = function()
 
 			Editor.is_editing_object = false;
 		}
-		//Update active tool status
-		else
+		else if(Editor.selected_object !== null)
 		{
+			//Update active tool status
 			if(Editor.tool !== null)
 			{
 				Editor.is_editing_object = Editor.tool.update();
+
+				if(Editor.is_editing_object)
+				{	
+					//Update object tranformation matrix
+					if(!Editor.selected_object.matrixAutoUpdate)
+					{
+						Editor.selected_object.updateMatrix();
+					}
+				}
 			}
 			else
 			{
 				Editor.is_editing_object = false;
 			}
 		}
-
-		//Check if editing object
-		if(Editor.is_editing_object)
-		{	
-			//Update object tranformation matrix
-			if(!Editor.selected_object.matrixAutoUpdate)
-			{
-				Editor.selected_object.updateMatrix();
-			}
-		}
+		
+		//Update object helper
+		Editor.object_helper.update();
 
 		//Check if mouse is inside canvas
 		if(Mouse.insideCanvas())
@@ -426,13 +422,25 @@ Editor.draw = function()
 
 	if(Editor.state === Editor.STATE_EDITING)
 	{
-		//Render scene
+		Editor.renderer.setViewport(0, 0, Editor.canvas.width, Editor.canvas.height);
+		Editor.renderer.setScissor(0, 0, Editor.canvas.width, Editor.canvas.height);
 		Editor.renderer.render(Editor.program.scene, Editor.camera);
 
-		//Render debug scene
 		Editor.renderer.render(Editor.tool_scene, Editor.camera);
 		Editor.renderer.clearDepth();
 		Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
+
+		if(Settings.show_camera_preview && Editor.selected_object instanceof THREE.Camera)
+		{
+			var width = 120 * Editor.canvas.width / Editor.canvas.height;
+			var height = 120;
+			var offset = Editor.canvas.width - 260;
+
+			Editor.renderer.clearDepth();
+			Editor.renderer.setViewport(offset, 20, width, height);
+			Editor.renderer.setScissor(offset, 20, width, height);
+			Editor.renderer.render(Editor.program.scene, Editor.selected_object);
+		}
 	}
 	else if(Editor.state === Editor.STATE_TESTING)
 	{
@@ -582,10 +590,9 @@ Editor.pasteIntoSelectedObject = function()
 //Delete selected object
 Editor.deleteSelectedObject = function()
 {
-	//TODO <CHECK CODE HERE USE DESTROY FUNCTION>
-	if(Editor.selected_object !== null && Editor.selected_object.parent !== null)
+	if(Editor.selected_object !== null)
 	{
-		Editor.selected_object.parent.remove(Editor.selected_object);
+		Editor.selected_object.destroy();
 		Editor.updateObjectViews();
 		Editor.resetEditingFlags();
 	}
@@ -687,7 +694,6 @@ Editor.updateTabsData = function()
 //Update tree view to match actual scene
 Editor.updateTreeView = function()
 {
-	//Update tree view from program
 	Interface.tree_view.fromObject(Editor.program);
 }
 
@@ -855,9 +861,9 @@ Editor.resetEditingFlags = function()
 {
 	Editor.selected_object = null;
 	Editor.is_editing_object = false;
-	Editor.is_editing_object = false;
 	
-	Editor.selectObjectHelper();
+	Editor.selectTool(Editor.tool_mode);
+	Editor.updateObjectViews();
 }
 
 //Craete new Program
@@ -1015,6 +1021,10 @@ Editor.setState = function(state)
 
 		//Update tab to show buttons
 		tab.updateInterface();
+
+		//Set renderer size
+		Editor.renderer.setViewport(0, 0, Editor.canvas.width, Editor.canvas.height);
+		Editor.renderer.setScissor(0, 0, Editor.canvas.width, Editor.canvas.height);
 
 		//Set run button text
 		Interface.run.setText("Stop");

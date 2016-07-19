@@ -1,15 +1,16 @@
 {
 	"general_theme": "dark",
-	"show_stats": true,
+	"show_stats": false,
 	"grid_size": 500,
 	"grid_spacing": 5,
 	"grid_enabled": true,
 	"axis_enabled": true,
+	"show_camera_preview": true,
 	"file_preview_size": 70,
 	"shadows": true,
 	"shadows_type": 2,
 	"antialiasing": true,
-	"code_theme": "mdn-like",
+	"code_theme": "icecoder",
 	"code_font_size": 15,
 	"code_line_numbers": true
 }
