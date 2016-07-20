@@ -1,3 +1,5 @@
+"use strict";
+
 //Auxiliar math functions
 function MathUtils(){}
 
