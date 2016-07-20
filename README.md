@@ -20,11 +20,10 @@ nunuStudio uses a number of open source projects to work properly
 * there are packages prepared for one click instalation for windows, linux and osx
 
 ### Todos
- - Project webpage
+ - Webpage
  - Audio
- - Physics integration
- - Blockly integration
- - Script helpers
+ - Physics (Cannon.JS)
+ - Blockly block script
 
 ### License
 nunuStudio uses a MIT license (Available on GitHub page)

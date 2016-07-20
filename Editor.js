@@ -78,6 +78,7 @@ include("editor/tools/RotateTool.js");
 
 include("editor/helpers/ParticleEmitterHelper.js");
 include("editor/helpers/ObjectIconHelper.js");
+include("editor/helpers/PhysicsObjectHelper.js");
 
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
@@ -101,7 +102,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.1 Alpha";
-Editor.TIMESTAMP = "201607180213";
+Editor.TIMESTAMP = "201607200146";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -216,7 +217,7 @@ Editor.initialize = function(canvas)
 	Editor.createNewProgram();
 
 	//Update interface explorer tree view
-	Editor.updateObjectViews();	
+	Editor.updateObjectViews();
 }
 
 //Update Editor
@@ -430,16 +431,20 @@ Editor.draw = function()
 		Editor.renderer.clearDepth();
 		Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
 
-		if(Settings.show_camera_preview && Editor.selected_object instanceof THREE.Camera)
+		if(Settings.camera_preview_enabled && Editor.selected_object instanceof THREE.Camera)
 		{
-			var width = 120 * Editor.canvas.width / Editor.canvas.height;
-			var height = 120;
-			var offset = Editor.canvas.width - 260;
+			var width = Settings.camera_preview_percentage * Editor.canvas.width;
+			var height = Settings.camera_preview_percentage * Editor.canvas.height;
+			var offset = Editor.canvas.width - width - 10;
+			var camera = Editor.selected_object;
+
+			camera.aspect = width/height;
+			camera.updateProjectionMatrix();
 
 			Editor.renderer.clearDepth();
-			Editor.renderer.setViewport(offset, 20, width, height);
-			Editor.renderer.setScissor(offset, 20, width, height);
-			Editor.renderer.render(Editor.program.scene, Editor.selected_object);
+			Editor.renderer.setViewport(offset, 10, width, height);
+			Editor.renderer.setScissor(offset, 10, width, height);
+			Editor.renderer.render(Editor.program.scene, camera);
 		}
 	}
 	else if(Editor.state === Editor.STATE_TESTING)
@@ -804,6 +809,10 @@ Editor.selectObjectHelper = function()
 		if(Editor.selected_object instanceof Script)
 		{
 			Editor.object_helper.add(new ObjectIconHelper(Editor.selected_object, ObjectIcons.get(Editor.selected_object.type)));
+		}
+		else if(Editor.selected_object instanceof PhysicsObject)
+		{
+			Editor.object_helper.add(new PhysicsObjectHelper(Editor.selected_object));
 		}
 		//Object 3D
 		else if(Editor.selected_object instanceof THREE.Object3D)

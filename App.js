@@ -47,6 +47,7 @@ include("core/texture/Texture.js");
 
 include("core/loaders/FontLoader.js");
 
+include("core/objects/physics/PhysicsObject.js");
 include("core/objects/device/LeapHand.js");
 include("core/objects/device/KinectDevice.js");
 include("core/objects/lights/PointLight.js");
@@ -409,5 +410,18 @@ function include(file)
 		{
 			include(directory + files[i]);
 		}
+	}
+	else
+	{
+		var directory = file + "/";
+		try
+		{
+			var files = App.getFilesDirectory(directory);
+			for(var i = 0; i < files.length; i++)
+			{
+				include(directory + files[i]);
+			}
+		}
+		catch(e){}
 	}
 }

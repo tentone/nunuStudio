@@ -474,6 +474,10 @@ function parseObject(data, geometries, materials, textures)
 
 			break;
 
+		case "Physics":
+			object = new PhysicsObject();
+			break;
+
 		case "ParticleEmiter":
 			if(data.group !== undefined)
 			{
