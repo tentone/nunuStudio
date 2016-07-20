@@ -110,14 +110,32 @@ function SettingsTab(parent)
 	this.general_form.nextRow();
 
 	//Enable camera preview
-	this.show_camera_preview = new CheckBox(this.general_form.element);
-	this.show_camera_preview.setText("Camera preview");
-	this.show_camera_preview.size.set(200, 16);
-	this.show_camera_preview.setOnChange(function()
+	this.camera_preview_enabled = new CheckBox(this.general_form.element);
+	this.camera_preview_enabled.setText("Camera preview");
+	this.camera_preview_enabled.size.set(200, 16);
+	this.camera_preview_enabled.setOnChange(function()
 	{
-		Settings.show_camera_preview = self.show_camera_preview.getValue();
+		Settings.camera_preview_enabled = self.camera_preview_enabled.getValue();
 	});
-	this.general_form.add(this.show_camera_preview);
+	this.general_form.add(this.camera_preview_enabled);
+	this.general_form.nextRow();
+
+	//Enable camera preview
+	this.general_form.addText("Preview size");
+	this.camera_preview_percentage = new Slider(this.general_form.element);
+	this.camera_preview_percentage.size.set(120, 18);
+	this.camera_preview_percentage.setRange(0, 0.7);
+	this.camera_preview_percentage.setStep(0.05);
+	this.camera_preview_percentage.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			Settings.camera_preview_percentage = self.camera_preview_percentage.getValue();
+			self.camera_preview_percentage_text.setText(Settings.camera_preview_percentage + "%");
+		}
+	});
+	this.general_form.add(this.camera_preview_percentage);
+	this.camera_preview_percentage_text = this.general_form.addText("");
 	this.general_form.nextRow();
 
 	//Blank Space
@@ -246,6 +264,9 @@ function activate()
 	this.show_stats.setValue(Settings.show_stats);
 	this.grid_enabled.setValue(Settings.grid_enabled);
 	this.axis_enabled.setValue(Settings.axis_enabled);
+	this.camera_preview_enabled.setValue(Settings.camera_preview_enabled);
+	this.camera_preview_percentage.setValue(Settings.camera_preview_percentage);
+	this.camera_preview_percentage_text.setText(Settings.camera_preview_percentage + "%");
 	this.shadows_type.setValue(Settings.shadows_type);
 	this.antialiasing.setValue(Settings.antialiasing);
 

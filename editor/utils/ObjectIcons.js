@@ -38,6 +38,9 @@ ObjectIcons.icons["Scene"] = "editor/files/icons/models/models.png";
 //Audio
 ObjectIcons.icons["Audio"] = "editor/files/icons/assets/audio.png";
 
+//Physics
+ObjectIcons.icons["Physics"] = "editor/files/icons/physics/physics.png";
+
 //Others
 ObjectIcons.icons["Bone"] = "editor/files/icons/animation/bone.png";
 ObjectIcons.icons["Group"] = "editor/files/icons/effects/container.png";

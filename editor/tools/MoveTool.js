@@ -113,7 +113,7 @@ function update()
 	//Update tool position and scale
 	if(this.obj !== null)
 	{
-		var distance = Editor.camera.position.distanceTo(this.obj.getWorldPosition())/5;
+		var distance = Editor.camera.position.distanceTo(this.obj.getWorldPosition())/6;
 		this.scale.set(distance, distance, distance);
 		this.obj.getWorldPosition(this.position);
 		if(this.obj.parent !== null)

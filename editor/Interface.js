@@ -564,6 +564,12 @@ Interface.initialize = function()
 		Editor.addToActualScene(new Audio());
 	}, "Audio");
 
+	//Physics
+	Interface.add_effects.addOption(Interface.file_dir + "icons/physics/physics.png", function()
+	{
+		Editor.addToActualScene(new PhysicsObject());
+	}, "Physics");
+
 	//Add device
 	Interface.add_device = new ButtonDrawer();
 	Interface.add_device.setImage(Interface.file_dir + "icons/hw/hw.png");
