@@ -41,7 +41,6 @@ function ObjectPanel(parent)
 		{
 			var position = self.pos.getValue();
 			self.obj.position.set(position.x, position.y, position.z);
-			self.obj.updateMatrix();
 		}
 	});
 
@@ -61,7 +60,6 @@ function ObjectPanel(parent)
 		{
 			var scale = self.scale.getValue();
 			self.obj.scale.set(scale.x, scale.y, scale.z);
-			self.obj.updateMatrix();
 		}
 	});
 
@@ -81,7 +79,6 @@ function ObjectPanel(parent)
 		{
 			var rotation = self.rotation.getValue();
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
-			self.obj.updateMatrix();
 		}
 	});
 
