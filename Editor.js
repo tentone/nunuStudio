@@ -65,6 +65,7 @@ include("editor/ui/panels/KinectPanel.js");
 include("editor/ui/panels/ScenePanel.js");
 include("editor/ui/panels/ProgramPanel.js");
 include("editor/ui/panels/TextPanel.js");
+include("editor/ui/panels/PhysicsPanel.js");
 include("editor/ui/panels/cameras/PerspectiveCameraPanel.js");
 include("editor/ui/panels/cameras/OrthographicCameraPanel.js");
 include("editor/ui/panels/lights/AmbientLightPanel.js");
@@ -102,7 +103,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.1 Alpha";
-Editor.TIMESTAMP = "201607200146";
+Editor.TIMESTAMP = "201607201332";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -666,6 +667,10 @@ Editor.updateSelectedObjectUI = function()
 		else if(Editor.selected_object instanceof Program)
 		{
 			Interface.panel = new ProgramPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof PhysicsObject)
+		{
+			Interface.panel = new PhysicsPanel(Interface.explorer_resizable.div_b);
 		}
 		else
 		{
