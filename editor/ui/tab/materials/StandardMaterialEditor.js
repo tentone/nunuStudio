@@ -169,8 +169,8 @@ function StandardMaterialEditor(parent)
 
 	//Normal map scale
 	this.form.addText("Normal Scale");
-	this.normalScale = new PositionBox(this.form.element);
-	this.normalScale.setMode(PositionBox.VECTOR2);
+	this.normalScale = new CoordinatesBox(this.form.element);
+	this.normalScale.setMode(CoordinatesBox.VECTOR2);
 	this.normalScale.setValue(1, 1, 0);
 	this.normalScale.setOnChange(function()
 	{
