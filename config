@@ -6,7 +6,7 @@
 	"grid_enabled": true,
 	"axis_enabled": true,
 	"camera_preview_enabled": true,
-	"camera_preview_percentage": "0.7",
+	"camera_preview_percentage": "0.3",
 	"file_preview_size": 70,
 	"shadows": true,
 	"shadows_type": 2,

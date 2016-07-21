@@ -231,7 +231,7 @@ function ParticleEditor(parent)
 
 	//Position
 	this.form.addText("Position");
-	this.position_value = new PositionBox(this.form.element);
+	this.position_value = new CoordinatesBox(this.form.element);
 	this.position_value.setOnChange(function()
 	{
 		self.particle.emitter.position.value.copy(self.position_value.getValue());
@@ -239,7 +239,7 @@ function ParticleEditor(parent)
 	});
 	this.form.add(this.position_value);
 	this.form.addText("+/-");
-	this.position_spread = new PositionBox(this.form.element);
+	this.position_spread = new CoordinatesBox(this.form.element);
 	this.position_spread.setOnChange(function()
 	{
 		self.particle.emitter.position.spread.copy(self.position_spread.getValue());
@@ -250,7 +250,7 @@ function ParticleEditor(parent)
 
 	//Velocity
 	this.form.addText("Velocity");
-	this.velocity_value = new PositionBox(this.form.element);
+	this.velocity_value = new CoordinatesBox(this.form.element);
 	this.velocity_value.setOnChange(function()
 	{
 		self.particle.emitter.velocity.value.copy(self.velocity_value.getValue());
@@ -258,7 +258,7 @@ function ParticleEditor(parent)
 	});
 	this.form.add(this.velocity_value);
 	this.form.addText("+/-");
-	this.velocity_spread = new PositionBox(this.form.element);
+	this.velocity_spread = new CoordinatesBox(this.form.element);
 	this.velocity_spread.setOnChange(function()
 	{
 		self.particle.emitter.velocity.spread.copy(self.velocity_spread.getValue());
@@ -269,7 +269,7 @@ function ParticleEditor(parent)
 
 	//Acceleration
 	this.form.addText("Acceleration");
-	this.acceleration_value = new PositionBox(this.form.element);
+	this.acceleration_value = new CoordinatesBox(this.form.element);
 	this.acceleration_value.setOnChange(function()
 	{
 		self.particle.emitter.acceleration.value.copy(self.acceleration_value.getValue());
@@ -277,7 +277,7 @@ function ParticleEditor(parent)
 	});
 	this.form.add(this.acceleration_value);
 	this.form.addText("+/-");
-	this.acceleration_spread = new PositionBox(this.form.element);
+	this.acceleration_spread = new CoordinatesBox(this.form.element);
 	this.acceleration_spread.setOnChange(function()
 	{
 		self.particle.emitter.acceleration.spread.copy(self.acceleration_spread.getValue());

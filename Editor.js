@@ -51,7 +51,7 @@ include("editor/ui/input/ColorChooser.js");
 include("editor/ui/input/Slider.js");
 include("editor/ui/input/DropdownList.js");
 include("editor/ui/input/NumberBox.js");
-include("editor/ui/input/PositionBox.js");
+include("editor/ui/input/CoordinatesBox.js");
 include("editor/ui/input/ImageBox.js");
 include("editor/ui/input/TextureBox.js");
 
@@ -102,8 +102,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.1 Alpha";
-Editor.TIMESTAMP = "201607201613";
+Editor.VERSION = "V0.8.9.2 Alpha";
+Editor.TIMESTAMP = "201607211439";
 
 //Initialize Main
 Editor.initialize = function(canvas)

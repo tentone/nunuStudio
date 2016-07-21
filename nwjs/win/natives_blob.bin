@@ -1,4 +1,4 @@
-mirrors6s
+mirrorséu
 (function(a,b){
 "use strict";
 var c;
@@ -739,6 +739,10 @@ return(this.attributes()&F.DontDelete)==0;
 PropertyMirror.prototype.name=function(){
 return this.name_;
 };
+PropertyMirror.prototype.toText=function(){
+if((typeof(this.name_)==='symbol'))return %SymbolDescriptiveString(this.name_);
+return this.name_;
+};
 PropertyMirror.prototype.isIndexed=function(){
 for(var N=0;N<this.name_.length;N++){
 if(this.name_[N]<'0'||'9'<this.name_[N]){
@@ -1067,10 +1071,10 @@ if(!Q.isIndexed()){
 if(aK){
 S+='.';
 }
-S+=Q.name();
+S+=Q.toText();
 }else{
 S+='[';
-S+=Q.name();
+S+=Q.toText();
 S+=']';
 }
 if(aF.name()&&aF.name()!=Q.name()){

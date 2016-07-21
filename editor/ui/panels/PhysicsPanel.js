@@ -22,12 +22,13 @@ function PhysicsPanel(parent)
 
 	//Position
 	this.form.addText("Position");
-	this.position = new PositionBox(this.form.element);
+	this.position = new CoordinatesBox(this.form.element);
+	this.position.setStep(0.1);
 	this.position.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.position.copy(self.pos.getValue());
+			self.obj.position.copy(self.position.getValue());
 		}
 	});
 	this.form.add(this.position);
@@ -35,12 +36,14 @@ function PhysicsPanel(parent)
 
 	//Rotation
 	this.form.addText("Rotation");
-	this.rotation = new PositionBox(this.form.element);
+	this.rotation = new CoordinatesBox(this.form.element);
+	this.rotation.setStep(0.1);
 	this.rotation.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.rotation.copy(self.rotation.getValue());
+			var rot = self.rotation.getValue();
+			self.obj.rotation.set(rot.x, rot.y, rot.z);
 		}
 	});
 	this.form.add(this.rotation);

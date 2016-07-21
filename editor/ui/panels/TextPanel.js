@@ -51,7 +51,7 @@ function TextPanel(parent)
 	text.position.set(5, 70);
 	text.updateInterface();
 
-	this.pos = new PositionBox(this.element);
+	this.pos = new CoordinatesBox(this.element);
 	this.pos.position.set(56, 60);
 	this.pos.updateInterface();
 	this.pos.setOnChange(function()
@@ -70,7 +70,7 @@ function TextPanel(parent)
 	text.position.set(5, 95);
 	text.updateInterface();
 
-	this.scale = new PositionBox(this.element);
+	this.scale = new CoordinatesBox(this.element);
 	this.scale.position.set(45, 85);
 	this.scale.updateInterface();
 	this.scale.setOnChange(function()
@@ -89,7 +89,7 @@ function TextPanel(parent)
 	text.position.set(5, 120);
 	text.updateInterface();
 
-	this.rotation = new PositionBox(this.element);
+	this.rotation = new CoordinatesBox(this.element);
 	this.rotation.position.set(57, 110);
 	this.rotation.updateInterface();
 	this.rotation.setOnChange(function()

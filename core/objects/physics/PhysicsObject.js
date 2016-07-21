@@ -12,7 +12,8 @@ function PhysicsObject()
 	this.body.type = CANNON.Body.DYNAMIC;
 	this.body.mass = 0.5;
 	this.body.addShape(new CANNON.Sphere(1.0));
-
+	//this.body.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)));
+	
 	this.world = null;
 }
 

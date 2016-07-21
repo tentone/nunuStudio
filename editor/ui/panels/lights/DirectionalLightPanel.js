@@ -33,7 +33,7 @@ function DirectionalLightPanel(parent)
 	text.position.set(5, 45);
 	text.updateInterface();
 
-	this.pos = new PositionBox(this.element);
+	this.pos = new CoordinatesBox(this.element);
 	this.pos.position.set(56, 35);
 	this.pos.updateInterface();
 	this.pos.setOnChange(function()
