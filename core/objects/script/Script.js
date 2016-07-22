@@ -110,10 +110,7 @@ function setCode(code)
 
 			//console.log(error);
 		}
-		else
-		{
-			console.log(e);
-		}
+		console.log(e);
 	}
 }
 

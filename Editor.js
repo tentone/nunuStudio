@@ -2,6 +2,8 @@
 
 //External libs
 include("lib/codemirror/codemirror.min.js");
+include("lib/codemirror/addon/search/search.js");
+include("lib/codemirror/addon/search/searchcursor.js");
 include("lib/codemirror/mode/javascript/javascript.js");
 include("lib/codemirror/codemirror.css");
 include("lib/codemirror/theme/*");
@@ -103,7 +105,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.2 Alpha";
-Editor.TIMESTAMP = "201607221206";
+Editor.TIMESTAMP = "201607221631";
 
 //Initialize Main
 Editor.initialize = function(canvas)
