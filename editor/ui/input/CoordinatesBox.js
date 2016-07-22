@@ -83,6 +83,9 @@ function CoordinatesBox(parent)
 	this.w.style.position = "absolute";
 	this.element.appendChild(this.w);
 
+	//Order
+	this.order = "XYZ";
+
 	//Attributes
 	this.mode = CoordinatesBox.VECTOR3;
 	this.size = new THREE.Vector2(220, 20);
@@ -134,7 +137,7 @@ function setStep(value)
 //Get value of position box
 function getValue()
 {
-	return {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value)};
+	return {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value), order: this.order};
 }
 
 //Set value of position box
@@ -158,6 +161,7 @@ function setValue(x, y, z, w)
 		this.x.value = x.x;
 		this.y.value = x.y;
 		this.z.value = x.z;
+		this.order = x.order;
 		this.setMode(CoordinatesBox.VECTOR3);
 	}
 	else if(x instanceof THREE.Quaternion)

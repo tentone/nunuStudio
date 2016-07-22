@@ -124,7 +124,7 @@ function SettingsTab(parent)
 	this.general_form.addText("Preview size");
 	this.camera_preview_percentage = new Slider(this.general_form.element);
 	this.camera_preview_percentage.size.set(120, 18);
-	this.camera_preview_percentage.setRange(0, 0.7);
+	this.camera_preview_percentage.setRange(0.05, 0.7);
 	this.camera_preview_percentage.setStep(0.05);
 	this.camera_preview_percentage.setOnChange(function()
 	{

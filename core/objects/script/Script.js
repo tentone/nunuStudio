@@ -102,11 +102,19 @@ function setCode(code)
 	{
 		if(e instanceof SyntaxError)
 		{
-			//console.log(e.message);
+			var error =
+			{
+				line: 0,
+				message: e.message
+			};
+
+			//console.log(error);
+		}
+		else
+		{
+			console.log(e);
 		}
 	}
-
-	return null;
 }
 
 //Set script mode
