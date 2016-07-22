@@ -67,6 +67,12 @@ function AboutTab(parent)
 	this.codemirror.setTextSize(15);
 	this.codemirror.setText("CodeMirror V" + CodeMirror.version);
 
+	//CannonJS version
+	this.cannon = new Text(this.element),
+	this.cannon.size.set(400, 0);
+	this.cannon.setTextSize(15);
+	this.cannon.setText("CannonJS V" + CANNON.version);
+
 	//Build info
 	this.builton = new Text(this.element);
 	this.builton.setText("Built on");
@@ -156,16 +162,20 @@ function updateInterface()
 	this.timestamp.updateInterface();
 
 	this.threejs.visible = this.visible;
-	this.threejs.position.set((this.size.x-this.threejs.size.x)/2, this.timestamp.position.y + 25);
+	this.threejs.position.set((this.size.x-this.threejs.size.x)/2, this.timestamp.position.y + 20);
 	this.threejs.updateInterface();
 
 	this.nwjs.visible = this.visible;
-	this.nwjs.position.set((this.size.x-this.nwjs.size.x)/2, this.threejs.position.y + 25);
+	this.nwjs.position.set((this.size.x-this.nwjs.size.x)/2, this.threejs.position.y + 20);
 	this.nwjs.updateInterface();
 
 	this.codemirror.visible = this.visible;
-	this.codemirror.position.set((this.size.x-this.codemirror.size.x)/2, this.nwjs.position.y + 25);
+	this.codemirror.position.set((this.size.x-this.codemirror.size.x)/2, this.nwjs.position.y + 20);
 	this.codemirror.updateInterface();
+
+	this.cannon.visible = this.visible;
+	this.cannon.position.set((this.size.x-this.cannon.size.x)/2, this.codemirror.position.y + 20);
+	this.cannon.updateInterface();
 
 	this.builton.visible = this.visible;
 	this.builton.position.set((this.size.x-this.builton.size.x)/2, this.size.y - 90);
