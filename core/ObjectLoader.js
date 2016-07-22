@@ -466,12 +466,12 @@ function parseObject(data, geometries, materials, textures)
 			object.body.mass = data.body.mass;
 			object.body.linearDamping = data.body.linearDamping;
 			object.body.angularDamping = data.body.angularDamping;
+			object.body.allowSleep = data.body.allowSleep;
 			object.body.sleepSpeedLimit = data.body.sleepSpeedLimit;
 			object.body.sleepTimeLimit = data.body.sleepTimeLimit;
 			object.body.collisionFilterGroup = data.body.collisionFilterGroup;
 			object.body.collisionFilterMask = data.body.collisionFilterMask;
 			object.body.fixedRotation = data.body.fixedRotation;
-			object.body.collisionResponse = data.body.collisionResponse;
 			break;
 
 		case "ParticleEmiter":

@@ -20,6 +20,9 @@ function Text3D(text, material, font)
 	this.scale.set(0.01, 0.01, 0.01);
 
 	this.text = text;
+	
+	this.receiveShadow = true;
+	this.castShadow = true;
 }
 
 //Function Prototype
