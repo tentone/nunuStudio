@@ -32,7 +32,7 @@ Main.initialize = function(canvas)
 	Main.stats.dom.style.zIndex = "100";
 	Main.stats.dom.style.opacity = "0.7";
 	Main.stats.dom.style.pointerEvents = "none";
-	document.body.appendChild(Main.stats.dom);
+	//document.body.appendChild(Main.stats.dom);
 
 	//Define mouse canvas
 	Mouse.canvas = Main.canvas;

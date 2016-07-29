@@ -1,3 +1,5 @@
+"use strict";
+
 function Audio()
 {
 	THREE.Audio.call(this, Audio.listener);
@@ -8,6 +10,7 @@ function Audio()
 	this.autoplay = true;
 	this.playbackRate = 1;
 	this.startTime = 0;
+
 	this.source.loop = true;
 
 	this.file = "data/sample.ogg";
@@ -33,12 +36,12 @@ function initialize()
 	//Load audio file
 	var loader = new THREE.XHRLoader(this.manager);
 	loader.setResponseType("arraybuffer");
-	loader.load(this.file, function(buffer)
+	loader.load(this.file, function(data)
 	{
-		var context = THREE.AudioContext;
-		context.decodeAudioData(buffer, function(audioBuffer)
+		//Decode audio data
+		THREE.AudioContext.decodeAudioData(data, function(buffer)
 		{
-			self.setBuffer(audioBuffer);
+			self.setBuffer(buffer);
 		});
 	});
 
@@ -83,7 +86,9 @@ function toJSON(meta)
 	data.object.autoplay = this.autoplay;
 	data.object.startTime = this.startTime;
 	data.object.playbackRate = this.playbackRate;
-	data.object.loop = this.source.loop;
+
+	data.object.source = {};
+	data.object.source.loop = this.source.loop;
 
 	return data;
 }

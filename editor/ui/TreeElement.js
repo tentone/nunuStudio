@@ -88,44 +88,47 @@ function TreeElement(container)
 			context.addOption("Rename", function()
 			{
 				self.obj.name = prompt("Rename object", self.obj.name);
-				self.updateSceneData();
 				Editor.updateObjectViews();
 			});
-
-			//TODO <REMOVE THIS>
-			if(self.obj instanceof THREE.Mesh)
-			{
-				context.addOption("New Material", function()
-				{
-					self.obj.material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
-					self.obj.material.name = self.obj.name;
-					Editor.updateObjectViews();
-				});
-			}
 
 			if(!(self.obj instanceof Program))
 			{
 				context.addOption("Delete", function()
 				{
-					self.deleteObject();
+					if((self.obj instanceof Scene && self.obj.parent.children.length > 1) || !(self.obj instanceof Scene))
+					{
+						self.deleteObject();
+					}
 					Editor.updateObjectViews();
 				});
 			}
 
 			if(!(self.obj instanceof Scene) && !(self.obj instanceof Program))
 			{
+				//Set object and children to static mode
 				context.addOption("Set static", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
 					Editor.updateObjectViews();
 				});
 
+				//Set object and children to dynamic mode
 				context.addOption("Set dynamic", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
 					Editor.updateObjectViews();
 				});
 
+				//Duplicate object
+				context.addOption("Duplicate", function()
+				{
+					var obj = new ObjectLoader().parse(self.obj.toJSON());
+					obj.uuid = THREE.Math.generateUUID();
+					self.obj.parent.add(obj);
+					Editor.updateObjectViews();
+				});
+
+				//Copy object
 				context.addOption("Copy", function()
 				{
 					try
@@ -135,6 +138,7 @@ function TreeElement(container)
 					catch(e){}
 				});
 
+				//Cut object
 				context.addOption("Cut", function()
 				{
 					try
@@ -151,11 +155,10 @@ function TreeElement(container)
 				try
 				{
 					var content = App.clipboard.get("text");
-					var loader = new ObjectLoader();
 					var data = JSON.parse(content);
 
 					//Create object
-					var obj = loader.parse(data);
+					var obj = new ObjectLoader().parse(data);
 					obj.traverse(function(child)
 					{
 						child.uuid = THREE.Math.generateUUID();
@@ -163,7 +166,6 @@ function TreeElement(container)
 
 					//Add object
 					self.obj.add(obj);
-					self.updateSceneData();
 
 					//Update object view
 					Editor.updateObjectViews();
