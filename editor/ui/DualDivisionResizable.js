@@ -18,14 +18,18 @@ function DualDivisionResizable(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "container";
+	this.element.style.cursor = "default";
+	this.element.style.overflow = "hidden";
+	this.element.style.backgroundColor = Editor.theme.panel_color;
 
 	//Division A
 	this.div_a = document.createElement("div");
 	this.div_a.style.position = "absolute";
 	this.div_a.style.top = "0px";
 	this.div_a.style.left = "0px";
-	this.div_a.className = "container";
+	this.div_a.style.cursor = "default";
+	this.div_a.style.overflow = "hidden";
+	this.div_a.style.backgroundColor = Editor.theme.panel_color;
 	this.element.appendChild(this.div_a);
 	
 	//Prevent Drop event
@@ -43,7 +47,9 @@ function DualDivisionResizable(parent)
 	//Division B
 	this.div_b = document.createElement("div");
 	this.div_b.style.position = "absolute";
-	this.div_b.className = "container";
+	this.div_b.style.cursor = "default";
+	this.div_b.style.overflow = "hidden";
+	this.div_b.style.backgroundColor = Editor.theme.panel_color;
 	this.element.appendChild(this.div_b);
 
 	//Prevent Drop event
@@ -61,7 +67,8 @@ function DualDivisionResizable(parent)
 	//Create resize_tab tab
 	this.resize_tab = document.createElement("div");
 	this.resize_tab.style.position = "absolute";
-	this.resize_tab.className = "panel_res_hor_tab";
+	this.resize_tab.style.cursor = "e-resize";
+	this.resize_tab.style.backgroundColor = Editor.theme.resize_tab_color;
 	this.element.appendChild(this.resize_tab);
 
 	//Element atributes
@@ -198,7 +205,7 @@ function updateInterface()
 	{	
 		var tab_position_abs = this.tab_position * this.size.x;
 
-		this.resize_tab.className = "panel_res_hor_tab";
+		this.resize_tab.style.cursor = "e-resize";
 
 		this.div_a.style.width = tab_position_abs + "px";
 		this.div_a.style.height = this.size.y + "px";
@@ -217,7 +224,7 @@ function updateInterface()
 	{
 		var tab_position_abs = this.tab_position * this.size.y;
 
-		this.resize_tab.className = "panel_res_ver_tab";
+		this.resize_tab.style.cursor = "n-resize";
 
 		this.div_a.style.width = this.size.x + "px";
 		this.div_a.style.height = tab_position_abs + "px";

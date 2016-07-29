@@ -28,7 +28,9 @@ function TreeView(parent, container)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "panel";
+	this.element.style.overflow = "auto";
+	this.element.style.cursor = "default";
+	this.element.style.backgroundColor = Editor.theme.panel_color;
 
 	//Label
 	this.label = new Text(this.element);
@@ -193,20 +195,25 @@ function updateInterface()
 //Update treeview to highlight the selected object
 TreeView.updateSelectedObject = function(element, obj)
 {
-	for(var i = 0; i < element.children.length; i++)
+	var children = element.children;
+
+	for(var i = 0; i < children.length; i++)
 	{
 		//Check if is the selected object
-		if(element.children[i].obj.uuid === obj.uuid)
+		if(children[i].obj.uuid === obj.uuid)
 		{
-			element.children[i].element.className = "button_left_over";
+			var element = children[i].element;
+			element.style.cursor = "pointer";
+			element.style.backgroundColor = Editor.theme.button_over_color;
 		}
 		else
 		{
-			element.children[i].element.className = "button_left_light";
+			var element = children[i].element;
+			element.style.cursor = "default";
+			element.style.backgroundColor = Editor.theme.button_light_color;
 		}
 
-		//Call children
-		TreeView.updateSelectedObject(element.children[i], obj);
+		TreeView.updateSelectedObject(children[i], obj);
 	}
 }
 

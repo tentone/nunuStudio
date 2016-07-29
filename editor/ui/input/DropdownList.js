@@ -16,8 +16,10 @@ function DropdownList(parent)
 
 	//Create element
 	this.element = document.createElement("select");
-	this.element.className = "text_box";
 	this.element.style.position = "absolute";
+	this.element.style.backgroundColor = Editor.theme.box_color;
+	this.element.style.color = Editor.theme.text_color;
+	this.element.style.borderStyle = "none";
 
 	//Element atributes
 	this.values = [];

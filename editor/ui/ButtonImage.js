@@ -44,13 +44,15 @@ function ButtonImage(parent)
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		self.element.className = "button_over";
+		self.element.style.cursor = "pointer";
+		self.element.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
-		self.element.className = "";
+		self.element.style.cursor = "default";
+		self.element.style.backgroundColor = "";
 	};
 
 	//Add element to document
@@ -100,7 +102,7 @@ function setImage(image)
 function setAltText(alt_text)
 {
 	var text = new Text(this.element);
-	text.element.style.background = "#222222";
+	text.element.style.background = Editor.theme.bar_color;
 	text.element.style.zIndex = "300";
 	text.setText(alt_text);
 	text.visible = false;

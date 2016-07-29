@@ -17,8 +17,10 @@ function ColorChooser(parent)
 	//Create element
 	this.element = document.createElement("input");
 	this.element.type = "text";
-	this.element.className = "text_box";
 	this.element.style.position = "absolute";
+	this.element.style.backgroundColor = Editor.theme.box_color;
+	this.element.style.color = Editor.theme.text_color;
+	this.element.style.borderStyle = "none";
 
 	//Color chooser
 	this.color = new jscolor(this.element);

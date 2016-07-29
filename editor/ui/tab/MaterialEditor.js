@@ -45,9 +45,15 @@ function MaterialEditor(parent)
 	this.preview.tab_position_max = 0.8;
 	this.preview.updateInterface();
 
-	//Set main div B as panel
-	this.preview.div_b.className = "panel";
-	this.main.div_b.className = "panel";
+	//Change preview div aspect
+	this.preview.div_b.style.overflow = "auto";
+	this.preview.div_b.style.cursor = "default";
+	this.preview.div_b.style.backgroundColor = Editor.theme.panel_color;
+
+	//Change main div aspect
+	this.main.div_b.style.overflow = "auto";
+	this.main.div_b.style.cursor = "default";
+	this.main.div_b.style.backgroundColor = Editor.theme.panel_color;
 
 	//Self pointer
 	var self = this;

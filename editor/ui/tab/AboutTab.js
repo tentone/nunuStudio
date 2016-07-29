@@ -18,7 +18,8 @@ function AboutTab(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "bar";
+	this.element.style.cursor = "default";
+	this.element.style.backgroundColor = Editor.theme.bar_color;
 
 	//Prevent Drop event
 	this.element.ondrop = function(event)

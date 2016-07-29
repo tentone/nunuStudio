@@ -11,6 +11,7 @@ include("lib/codemirror/theme/*");
 include("lib/jscolor.min.js");
 
 //Internal modules
+include("editor/ui/Bar.js");
 include("editor/ui/Button.js");
 include("editor/ui/DropdownMenu.js");
 include("editor/ui/Text.js");
@@ -34,6 +35,9 @@ include("editor/ui/FileExplorer.js");
 
 include("editor/ui/file/File.js");
 include("editor/ui/file/MaterialFile.js");
+
+include("editor/files/style/editor.css");
+include("editor/ui/theme/Theme.js");
 
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/SceneEditor.js");
@@ -104,8 +108,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.2 Alpha";
-Editor.TIMESTAMP = "201607290153";
+Editor.VERSION = "V0.8.9.3 Alpha";
+Editor.TIMESTAMP = "201607291448";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -171,6 +175,9 @@ Editor.initialize = function(canvas)
 	Editor.default_material.name = "default";
 	Editor.default_sprite_material = new THREE.SpriteMaterial({map: new Texture("data/sample.png"), color: 0xffffff});
 	Editor.default_sprite_material.name = "default";
+
+	//UI theme
+	Editor.theme = new Theme();
 
 	//Initialize User Interface
 	Interface.initialize();

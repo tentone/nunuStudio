@@ -18,7 +18,9 @@ function TabElement(parent, name, icon, closeable, container, index)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "container";
+	this.element.style.cursor = "default";
+	this.element.style.overflow = "hidden";
+	this.element.style.backgroundColor = Editor.theme.panel_color;
 
 	//Prevent Drop event
 	this.element.ondrop = function(event)
@@ -67,18 +69,13 @@ function TabElement(parent, name, icon, closeable, container, index)
 		}
 	});
 
-	//Mouse over event (overrided)
-	this.button.element.onmouseenter = function()
-	{
-		self.button.setClass("button_over");
-	};
-
 	//Mouse leave event (overrided)
 	this.button.element.onmouseleave = function()
 	{
 		if(!self.isSelected())
 		{
-			self.button.setClass("button");
+			self.button.element.style.cursor = "default";
+			self.button.element.style.backgroundColor = Editor.theme.button_color;
 		}
 	};
 
@@ -223,12 +220,15 @@ function updateInterface()
 	//Update button
 	if(this.isSelected())
 	{
-		this.button.setClass("button_over");
+		this.button.element.style.cursor = "pointer";
+		this.button.element.style.backgroundColor = Editor.theme.button_over_color;
 	}
 	else
 	{
-		this.button.setClass("button");
+		this.button.element.style.cursor = "default";
+		this.button.element.style.backgroundColor = Editor.theme.button_color;
 	}
+
 	if(this.container.mode === TabGroup.TOP)
 	{
 		this.button.position.set(this.container.options_size.x * this.index, 0);

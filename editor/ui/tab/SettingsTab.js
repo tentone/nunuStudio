@@ -34,7 +34,8 @@ function SettingsTab(parent)
 	//Options tab container
 	this.tab = new TabGroup(this.element);
 	this.tab.options_size.set(200, 30);
-	this.tab.element.className = "bar";
+	this.tab.element.style.cursor = "default";
+	this.tab.element.style.backgroundColor = Editor.theme.bar_color;
 	this.tab.mode = TabGroup.LEFT;
 	this.tab.updateInterface();
 

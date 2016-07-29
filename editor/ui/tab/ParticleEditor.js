@@ -38,8 +38,10 @@ function ParticleEditor(parent)
 	this.main.tab_position_max = 0.7;
 	this.main.updateInterface();
 
-	//Set main div B as panel
-	this.main.div_b.className = "panel";
+	//Change main div aspect
+	this.main.div_b.style.overflow = "auto";
+	this.main.div_b.style.cursor = "default";
+	this.main.div_b.style.backgroundColor = Editor.theme.panel_color;
 
 	//Self pointer
 	var self = this;
@@ -165,6 +167,7 @@ function ParticleEditor(parent)
 	this.form.addText("Particle rate");
 	this.particleCount = new NumberBox(this.form.element);
 	this.particleCount.size.set(100, 18);
+	this.particleCount.setStep(1);
 	this.particleCount.setOnChange(function()
 	{
 		self.particle.emitter.particleCount = self.particleCount.getValue();

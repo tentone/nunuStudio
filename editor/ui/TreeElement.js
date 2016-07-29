@@ -20,11 +20,15 @@ function TreeElement(container)
 	this.element.draggable = true;
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "button_left_light";
 	this.element.style.left = "0px";
 	this.element.style.top = "0px";
 	this.element.style.width = container.size.x + "px";
 	this.element.style.height = "20px";
+
+	this.element.style.cursor = "default";
+	this.element.style.display = "flex";
+	this.element.style.alignItems = "center";
+	this.element.style.backgroundColor = Editor.theme.button_light_color;
 
 	//Arrow
 	this.arrow = new Image(this.element);
@@ -64,7 +68,8 @@ function TreeElement(container)
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		self.element.className = "button_left_over";
+		self.element.style.cursor = "pointer";
+		self.element.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	//Mouse leave event
@@ -72,7 +77,8 @@ function TreeElement(container)
 	{
 		if(!Editor.isObjectSelected(self.obj))
 		{
-			self.element.className = "button_left_light";
+			self.element.style.cursor = "default";
+			self.element.style.backgroundColor = Editor.theme.button_light_color;
 		}
 	};
 
