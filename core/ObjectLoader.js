@@ -454,10 +454,10 @@ function parseObject(data, geometries, materials, textures)
 	{
 		case "Audio":
 			object = new Audio();
-			object.source.loop = data.loop;
 			object.autoplay = data.autoplay;
 			object.startTime = data.startTime;
 			object.playbackRate = data.playbackRate;
+			object.source.loop = data.source.loop;
 			break;
 
 		case "Physics":

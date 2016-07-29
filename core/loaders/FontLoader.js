@@ -1,4 +1,6 @@
-//Alternative Font loader
+"use strict";
+
+//Font loader
 function FontLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
