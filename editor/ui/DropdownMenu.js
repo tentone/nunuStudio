@@ -18,9 +18,13 @@ function DropdownMenu(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "button";
 	this.element.style.zIndex = "100";
-
+	this.element.style.cursor = "default";
+	this.element.style.display = "flex";
+	this.element.style.justifyContent = "center";
+	this.element.style.alignItems = "center";
+	this.element.style.backgroundColor = Editor.theme.button_color;
+	
 	//Text
 	this.text = new Text(this.element);
 	this.text.setText("text");
@@ -30,7 +34,7 @@ function DropdownMenu(parent)
 	//Options Panel
 	this.panel = document.createElement("div");
 	this.panel.style.position = "absolute";
-	this.panel.className = "bar";
+	this.panel.style.cursor = "default";
 	this.panel.style.zIndex = "200";
 
 	//Atributes
@@ -55,14 +59,16 @@ function DropdownMenu(parent)
 	{
 		self.expanded = true;
 		self.updateInterface();
-		self.element.className = "button_over";
+		self.element.style.cursor = "pointer";
+		self.element.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	this.element.onmouseleave = function()
 	{
 		self.expanded = false;
 		self.updateInterface();
-		self.element.className = "button";
+		self.element.style.cursor = "default";
+		self.element.style.backgroundColor = Editor.theme.button_color;
 	};
 	
 	this.panel.onmouseover = function()

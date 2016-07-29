@@ -18,7 +18,9 @@ function DivisionResizable(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "container";
+	this.element.style.cursor = "default";
+	this.element.style.overflow = "hidden";
+	this.element.style.backgroundColor = Editor.theme.panel_color;
 
 	//Prevent Drop event
 	this.element.ondrop = function(event)
@@ -35,7 +37,8 @@ function DivisionResizable(parent)
 	//Create division resize tab
 	this.resize_tab = document.createElement("div");
 	this.resize_tab.style.position = "absolute";
-	this.resize_tab.className = "panel_res_hor_tab";
+	this.resize_tab.style.cursor = "e-resize";
+	this.resize_tab.style.backgroundColor = Editor.theme.resize_tab_color;
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
@@ -198,7 +201,7 @@ function updateInterface()
 	//Update element
 	if(this.resizable_side == DivisionResizable.LEFT)
 	{	
-		this.resize_tab.className = "panel_res_hor_tab";
+		this.resize_tab.style.cursor = "e-resize";
 
 		this.resize_tab.style.top = this.position.y + "px";
 		this.resize_tab.style.left = this.position.x + "px";
@@ -212,7 +215,7 @@ function updateInterface()
 	}
 	else if(this.resizable_side == DivisionResizable.RIGHT)
 	{	
-		this.resize_tab.className = "panel_res_hor_tab";
+		this.resize_tab.style.cursor = "e-resize";
 
 		this.resize_tab.style.top = this.position.y + "px";
 		this.resize_tab.style.left = (this.position.x + (this.size.x - this.resize_tab_size))+ "px";
@@ -226,7 +229,7 @@ function updateInterface()
 	}
 	else if(this.resizable_side == DivisionResizable.TOP)
 	{
-		this.resize_tab.className = "panel_res_ver_tab";
+		this.resize_tab.style.cursor = "n-resize";
 
 		this.resize_tab.style.top = this.position.y + "px";
 		this.resize_tab.style.left = this.position.x + "px";
@@ -240,7 +243,7 @@ function updateInterface()
 	}
 	else if(this.resizable_side == DivisionResizable.BOTTOM)
 	{
-		this.resize_tab.className = "panel_res_ver_tab";
+		this.resize_tab.style.cursor = "n-resize";
 
 		this.resize_tab.style.top = (this.position.y + (this.size.y - this.resize_tab_size)) + "px";
 		this.resize_tab.style.left = this.position.x + "px";

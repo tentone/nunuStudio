@@ -18,7 +18,9 @@ function CodeEditor(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "container";
+	this.element.style.cursor = "default";
+	this.element.style.overflow = "hidden";
+	this.element.style.backgroundColor = Editor.theme.panel_color;
 
 	//Codemirror editor
 	this.code = new CodeMirror(this.element, {value: "", lineNumbers: Settings.code_line_numbers, indentWithTabs: true, indentUnit: 4, tabSize: 4, mode: "javascript"});

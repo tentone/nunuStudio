@@ -8,10 +8,6 @@ Interface.initialize = function()
 	//File directory
 	Interface.file_dir = "editor/files/";
 
-	//Style
-	Interface.theme = new Style();
-	Interface.theme.setStyleSheet(Interface.file_dir + "theme/dark/dark.css");
-
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabGroup();
 
@@ -30,10 +26,9 @@ Interface.initialize = function()
 	Interface.asset_explorer = new FileExplorer(Interface.asset_explorer_div.element);
 	
 	//Asset explorer menu bar
-	Interface.asset_explorer_bar = new Division(Interface.asset_explorer_div.element);
+	Interface.asset_explorer_bar = new Bar(Interface.asset_explorer_div.element);
 	Interface.asset_explorer_bar.position.set(0, 0);
 	Interface.asset_explorer_bar.size.y = 20;
-	Interface.asset_explorer_bar.element.className = "bar";
 
 	//Import Files
 	Interface.asset_file = new DropdownMenu(Interface.asset_explorer_bar.element);
@@ -267,9 +262,8 @@ Interface.initialize = function()
 	Interface.panel = new Panel(Interface.explorer_resizable.div_b);
 
 	//------------------------------------Tool Bar------------------------------------
-	Interface.tool_bar = new Division();
+	Interface.tool_bar = new Bar();
 	Interface.tool_bar.size.x = 40;
-	Interface.tool_bar.element.className = "bar";
 
 	//Tools text
 	Interface.tool_text = new Text(Interface.tool_bar.element);
@@ -594,9 +588,8 @@ Interface.initialize = function()
 	}, "Microsoft Kinect");
 
 	//----------------------------------Menu Top Bar----------------------------------
-	Interface.top_bar = new Division();
+	Interface.top_bar = new Bar();
 	Interface.top_bar.size.y = 25 ;
-	Interface.top_bar.element.className = "bar";
 
 	//Editor Logo
 	Interface.image = new Image();

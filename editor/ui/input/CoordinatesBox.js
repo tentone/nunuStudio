@@ -30,7 +30,9 @@ function CoordinatesBox(parent)
 	//X
 	this.x = document.createElement("input");
 	this.x.type = "number";
-	this.x.className = "text_box";
+	this.x.style.backgroundColor = Editor.theme.box_color;
+	this.x.style.color = Editor.theme.text_color;
+	this.x.style.borderStyle = "none";
 	this.x.style.position = "absolute";
 	this.x.style.left = "15px";
 	this.element.appendChild(this.x);
@@ -47,7 +49,9 @@ function CoordinatesBox(parent)
 	//Y
 	this.y = document.createElement("input");
 	this.y.type = "number";
-	this.y.className = "text_box";
+	this.y.style.backgroundColor = Editor.theme.box_color;
+	this.y.style.color = Editor.theme.text_color;
+	this.y.style.borderStyle = "none";
 	this.y.style.position = "absolute";
 	this.element.appendChild(this.y);
 
@@ -63,7 +67,9 @@ function CoordinatesBox(parent)
 	//Z
 	this.z = document.createElement("input");
 	this.z.type = "number";
-	this.z.className = "text_box";
+	this.z.style.backgroundColor = Editor.theme.box_color;
+	this.z.style.color = Editor.theme.text_color;
+	this.z.style.borderStyle = "none";
 	this.z.style.position = "absolute";
 	this.element.appendChild(this.z);
 
@@ -79,7 +85,9 @@ function CoordinatesBox(parent)
 	//W
 	this.w = document.createElement("input");
 	this.w.type = "number";
-	this.w.className = "text_box";
+	this.w.style.backgroundColor = Editor.theme.box_color;
+	this.w.style.color = Editor.theme.text_color;
+	this.w.style.borderStyle = "none";
 	this.w.style.position = "absolute";
 	this.element.appendChild(this.w);
 

@@ -16,7 +16,9 @@ function Panel(parent)
 	//Create element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
-	this.element.className = "panel";
+	this.element.style.overflow = "auto";
+	this.element.style.cursor = "default";
+	this.element.style.backgroundColor = Editor.theme.panel_color;
 
 	//Prevent Drop event
 	this.element.ondrop = function(event)

@@ -40,13 +40,15 @@ function File(parent)
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		self.element.className = "button_over";
+		self.element.style.cursor = "pointer";
+		self.element.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
-		self.element.className = "";
+		self.element.style.cursor = "default";
+		self.element.style.backgroundColor = "";
 	};
 
 	//Drop event

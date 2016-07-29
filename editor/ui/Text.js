@@ -18,7 +18,11 @@ function Text(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "text";
+	this.element.style.display = "flex";
+	this.element.style.justifyContent = "center";
+	this.element.style.alignItems = "center";
+	this.element.style.pointerEvents = "none";
+	this.element.style.color = Editor.theme.text_color;
 	
 	//Prevent Drop event
 	this.element.ondrop = function(event)
@@ -88,11 +92,11 @@ function setAlignment(align)
 {
 	if(align === Text.CENTER)
 	{
-		this.element.className = "text";
+		this.element.style.justifyContent = "center";
 	}
 	else if(align === Text.LEFT)
 	{
-		this.element.className = "text_left";
+		this.element.style.justifyContent = "";
 	}
 }
 

@@ -1,4 +1,4 @@
-function Division(parent)
+function Bar(parent)
 {
 	//Parent
 	if(parent === undefined)
@@ -11,16 +11,15 @@ function Division(parent)
 	}
 	
 	//ID
-	var id = "div" + Division.id;
-	Division.id++;
+	var id = "bar" + Bar.id;
+	Bar.id++;
 
 	//Create element
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.style.overflow = "auto";
 	this.element.style.cursor = "default";
-	this.element.style.backgroundColor = Editor.theme.panel_color;
+	this.element.style.backgroundColor = Editor.theme.bar_color;
 
 	//Prevent Drop event
 	this.element.ondrop = function(event)
@@ -44,13 +43,13 @@ function Division(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Division conter
-Division.id = 0;
+//Bar conter
+Bar.id = 0;
 
 //Functions Prototype
-Division.prototype.update = update;
-Division.prototype.updateInterface = updateInterface;
-Division.prototype.destroy = destroy;
+Bar.prototype.update = update;
+Bar.prototype.updateInterface = updateInterface;
+Bar.prototype.destroy = destroy;
 
 //Remove element
 function destroy()
@@ -62,7 +61,7 @@ function destroy()
 	catch(e){}
 }
 
-//Update Division
+//Update Bar
 function update(){}
 
 //Update division Size

@@ -17,9 +17,11 @@ function NumberBox(parent)
 	//Create element
 	this.element = document.createElement("input");
 	this.element.type = "number";
-	this.element.className = "text_box";
 	this.element.step = "0.1";
 	this.element.style.position = "absolute";
+	this.element.style.backgroundColor = Editor.theme.box_color;
+	this.element.style.color = Editor.theme.text_color;
+	this.element.style.borderStyle = "none";
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);

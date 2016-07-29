@@ -18,7 +18,9 @@ function TabGroup(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.className = "container";
+	this.element.style.cursor = "default";
+	this.element.style.overflow = "hidden";
+	this.element.style.backgroundColor = Editor.theme.panel_color;
 	
 	//Prevent Drop event
 	this.element.ondrop = function(event)

@@ -19,7 +19,12 @@ function ButtonDrawer(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.zIndex = "200";
-
+	this.element.style.cursor = "default";
+	this.element.style.display = "flex";
+	this.element.style.justifyContent = "center";
+	this.element.style.alignItems = "center";
+	this.element.style.backgroundColor = Editor.theme.button_color;
+	
 	//Prevent Drop event
 	this.element.ondrop = function(event)
 	{
@@ -35,7 +40,8 @@ function ButtonDrawer(parent)
 	//Create Drawer Panel
 	this.panel = document.createElement("div");
 	this.panel.style.position = "absolute";
-	this.panel.className = "bar";
+	this.panel.style.cursor = "default";
+	this.panel.style.backgroundColor = Editor.theme.bar_color;
 	this.panel.style.zIndex = "250";
 	
 	//Image
@@ -75,14 +81,16 @@ function ButtonDrawer(parent)
 	{
 		self.expanded = true;
 		self.updateInterface();
-		self.element.className = "button_over";
+		self.element.style.cursor = "pointer";
+		self.element.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	this.element.onmouseleave = function()
 	{
 		self.expanded = false;
 		self.updateInterface();
-		self.element.className = "button";
+		self.element.style.cursor = "default";
+		self.element.style.backgroundColor = Editor.theme.button_color;
 	};
 
 	this.panel.onmouseenter = function()
