@@ -76,6 +76,18 @@ Mouse.initialize = function()
 	{
 		Mouse.updateKey(event.which-1, Key.KEY_UP);
 	}
+
+	//Touch start
+	document.touchstart = function(event)
+	{
+		Mouse.updateKey(Mouse.LEFT, Key.KEY_DOWN);
+	}
+
+	//Touch end
+	document.touchend = function(event)
+	{
+		Mouse.updateKey(Mouse.LEFT, Key.KEY_UP);
+	}
 }
 
 //Mouse Buttons

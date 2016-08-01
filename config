@@ -6,12 +6,12 @@
 	"grid_enabled": true,
 	"axis_enabled": true,
 	"camera_preview_enabled": true,
-	"camera_preview_percentage": "0.25",
+	"camera_preview_percentage": 0.2,
 	"file_preview_size": 70,
 	"shadows": true,
-	"shadows_type": 2,
+	"shadows_type": 1,
 	"antialiasing": true,
 	"code_theme": "monokai",
-	"code_font_size": 18,
+	"code_font_size": 23,
 	"code_line_numbers": true
 }

@@ -59,13 +59,20 @@ function SettingsTab(parent)
 	this.general_form.addText("Theme");
 	this.theme = new DropdownList(this.general_form.element);
 	this.theme.size.set(150, 20);
-	this.theme.addValue("Dark", "dark");
 	this.theme.setOnChange(function()
 	{
-		Settings.general_theme = self.theme.getValue();
+		var value = self.theme.getValue();
+		Settings.general_theme = value;
 	});
 	this.general_form.add(this.theme);
 	this.general_form.nextRow();
+
+	//Fill theme dropdown
+	for(var i = 0; i < Theme.list.length; i++)
+	{
+		var theme = Theme.list[i];
+		this.theme.addValue(theme, theme);
+	}
 
 	//Show stats
 	this.show_stats = new CheckBox(this.general_form.element);
@@ -262,6 +269,7 @@ function activate()
 	Editor.resetEditingFlags();
 
 	//General elements
+	this.theme.setValue(Settings.general_theme);
 	this.show_stats.setValue(Settings.show_stats);
 	this.grid_enabled.setValue(Settings.grid_enabled);
 	this.axis_enabled.setValue(Settings.axis_enabled);

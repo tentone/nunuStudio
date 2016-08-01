@@ -38,6 +38,8 @@ include("editor/ui/file/MaterialFile.js");
 
 include("editor/files/style/editor.css");
 include("editor/ui/theme/Theme.js");
+include("editor/ui/theme/ThemeDark.js");
+include("editor/ui/theme/ThemeLight.js");
 
 include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/SceneEditor.js");
@@ -109,7 +111,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.3 Alpha";
-Editor.TIMESTAMP = "201607291448";
+Editor.TIMESTAMP = "201608011756";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -177,7 +179,7 @@ Editor.initialize = function(canvas)
 	Editor.default_sprite_material.name = "default";
 
 	//UI theme
-	Editor.theme = new Theme();
+	Editor.theme = Theme.get(Settings.general_theme);
 
 	//Initialize User Interface
 	Interface.initialize();
@@ -962,7 +964,8 @@ Editor.exportWebProject = function(dir)
 	App.copyFolder("core", dir + "\\core");
 	App.copyFolder("input", dir + "\\input");
 	App.copyFolder("lib", dir + "\\lib");
-	App.copyFolder("data", dir + "\\data");
+	App.makeDirectory(dir + "\\data");
+	App.copyFolder("data/fonts", dir + "\\data/fonts");
 	App.copyFile("App.js", dir + "\\App.js");
 	Editor.saveProgram(dir + "\\app.isp");
 }
@@ -974,7 +977,8 @@ Editor.exportWindowsProject = function(dir)
 	App.copyFolder("core", dir + "\\core");
 	App.copyFolder("input", dir + "\\input");
 	App.copyFolder("lib", dir + "\\lib");
-	App.copyFolder("data", dir + "\\data");
+	App.makeDirectory(dir + "\\data");
+	App.copyFolder("data/fonts", dir + "\\data/fonts");
 	App.copyFolder("nwjs", dir + "\\nwjs");
 	App.copyFile("App.js", dir + "\\App.js");
 	App.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
