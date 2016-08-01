@@ -5,11 +5,11 @@ function Text3D(text, material, font)
 {
 	if(font === undefined)
 	{
-		this.font = new FontLoader().parse(App.readFile("data/fonts/helvetiker_bold.typeface.js"));
+		this.font = new FontLoader().parse(App.readFile("data/fonts/montserrat.json"));
 	}
 	else
 	{
-		this.font = new FontLoader().parse(font);
+		this.font = new THREE.FontLoader().parse(font);
 	}
 
 	THREE.Mesh.call(this, new THREE.TextGeometry(text, {font: this.font}), material);
@@ -17,7 +17,7 @@ function Text3D(text, material, font)
 	this.name = "text";
 	this.type = "Text3D";
 
-	this.scale.set(0.01, 0.01, 0.01);
+	this.scale.set(0.02, 0.02, 0.02);
 
 	this.text = text;
 	

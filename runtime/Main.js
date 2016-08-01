@@ -27,21 +27,19 @@ Main.initialize = function(canvas)
 	Main.stats = new Stats();
 	Main.stats.setMode(0);
 	Main.stats.dom.style.position = "absolute";
-	Main.stats.dom.style.left = "0px";
-	Main.stats.dom.style.top = "0px";
 	Main.stats.dom.style.zIndex = "100";
 	Main.stats.dom.style.opacity = "0.7";
 	Main.stats.dom.style.pointerEvents = "none";
-	//document.body.appendChild(Main.stats.dom);
+	document.body.appendChild(Main.stats.dom);
 
 	//Define mouse canvas
 	Mouse.canvas = Main.canvas;
 
 	//Set renderer
-	Main.renderer = new THREE.WebGLRenderer({canvas: Main.canvas, antialias: true});
+	Main.renderer = new THREE.WebGLRenderer({canvas: Main.canvas, antialias: false});
 	Main.renderer.autoClear = false;
 	Main.renderer.shadowMap.enabled = true;
-	Main.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+	Main.renderer.shadowMap.type = THREE.PCFShadowMap;
 	Main.renderer.setSize(Main.canvas.width, Main.canvas.height);
 
 	//Initialize program
@@ -96,7 +94,7 @@ Main.initialize = function(canvas)
 	Main.fullscreen.appendChild(img);
 
 	//VR button
-	if(App.webvrAvailable())
+	if(Main.program.vr && App.webvrAvailable())
 	{
 		Main.vr = document.createElement("div");
 		Main.vr.style.position = "absolute";
@@ -121,6 +119,7 @@ Main.initialize = function(canvas)
 		img.style.top = "0px";
 		img.style.left = "0px";
 		img.src = "vr.png";
+		
 		img.onmouseenter = function()
 		{
 			img.style.opacity = 0.5;
@@ -141,7 +140,7 @@ Main.initialize = function(canvas)
 Main.update = function()
 {
 	Main.stats.begin();
-	
+
 	Main.program.scene.update();
 }
 
