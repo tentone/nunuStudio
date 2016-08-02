@@ -1,3 +1,5 @@
+"use strict";
+
 function AmbientLightPanel(parent)
 {
 	Panel.call(this, parent);

@@ -1,3 +1,5 @@
+"use strict";
+
 function CoordinatesBox(parent)
 {
 	//Parent

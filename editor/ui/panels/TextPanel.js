@@ -1,3 +1,5 @@
+"use strict";
+
 function TextPanel(parent)
 {
 	Panel.call(this, parent);

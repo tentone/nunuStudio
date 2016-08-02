@@ -1,3 +1,5 @@
+"use strict";
+
 function DropdownList(parent)
 {
 	//Parent

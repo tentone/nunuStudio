@@ -1,3 +1,5 @@
+"use strict";
+
 function KinectPanel(parent)
 {
 	Panel.call(this, parent);

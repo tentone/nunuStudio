@@ -51,7 +51,7 @@ Mouse.initialize = function()
 		});
 	}
 
-	//Mouse Move Position
+	//Mouse move event
 	document.onmousemove = function(event)
 	{
 		if(Mouse.canvas !== null)
@@ -65,29 +65,55 @@ Mouse.initialize = function()
 		}
 	}
 
-	//Mouse Button Down
+	//Mouse button pressed event
 	document.onmousedown = function(event)
 	{
 		Mouse.updateKey(event.which-1, Key.KEY_DOWN);
 	}
 
-	//Mouse Button Up
+	//Mouse button released event
 	document.onmouseup = function(event)
 	{
 		Mouse.updateKey(event.which-1, Key.KEY_UP);
 	}
 
-	//Touch start
-	document.touchstart = function(event)
-	{
-		Mouse.updateKey(Mouse.LEFT, Key.KEY_DOWN);
-	}
+	//Auxiliar variables to calculate touch delta
+	var touch_last = new THREE.Vector2(0, 0);
 
-	//Touch end
-	document.touchend = function(event)
+	//Touch screen pressed event
+	document.addEventListener("touchstart", function(event)
+	{
+		var touch = event.touches[0];
+		touch_last.set(touch.clientX, touch.clientY);
+		Mouse.updateKey(Mouse.LEFT, Key.KEY_DOWN);
+	}, false);
+
+	//Touch screen released event
+	document.addEventListener("touchend", function(event)
 	{
 		Mouse.updateKey(Mouse.LEFT, Key.KEY_UP);
-	}
+
+	}, false);
+
+	//Touch screen move event
+	document.addEventListener("touchmove", function(event)
+	{
+		var touch = event.touches[0];
+		var delta_x = touch.clientX - touch_last.x;
+		var delta_y = touch.clientY - touch_last.y;
+
+		if(Mouse.canvas !== null)
+		{
+			var rect = Mouse.canvas.getBoundingClientRect();
+			Mouse.updatePosition(touch.clientX - rect.left, touch.clientY - rect.top, delta_x, delta_y);
+		}
+		else
+		{
+			Mouse.updatePosition(touch.clientX, touch.clientY, delta_x, delta_y);
+		}
+
+		touch_last.set(touch.clientX, touch.clientY);
+	}, false);
 }
 
 //Mouse Buttons

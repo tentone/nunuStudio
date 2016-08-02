@@ -1,3 +1,5 @@
+"use strict";
+
 function PhongMaterialEditor(parent)
 {
 	MaterialEditor.call(this, parent);

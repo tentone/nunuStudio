@@ -1,3 +1,5 @@
+"use strict";
+
 function SpriteMaterialEditor(parent)
 {
 	MaterialEditor.call(this, parent);

@@ -1,3 +1,5 @@
+"use strict";
+
 function ContextMenu(parent)
 {
 	//Parent

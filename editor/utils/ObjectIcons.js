@@ -1,3 +1,5 @@
+"use strict";
+
 //List of object icon path by object type
 function ObjectIcons(){}
 

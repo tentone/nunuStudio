@@ -1,3 +1,5 @@
+"use strict";
+
 function ShaderMaterialEditor(parent)
 {
 	MaterialEditor.call(this, parent);

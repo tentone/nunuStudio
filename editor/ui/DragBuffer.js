@@ -1,3 +1,5 @@
+"use strict";
+
 function DragBuffer(){}
 
 //Object drag buffer (stores objects being dragged)

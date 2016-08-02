@@ -1,3 +1,5 @@
+"use strict";
+
 function DirectionalLightPanel(parent)
 {
 	Panel.call(this, parent);

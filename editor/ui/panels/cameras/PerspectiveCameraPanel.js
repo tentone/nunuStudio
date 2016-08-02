@@ -1,3 +1,5 @@
+"use strict";
+
 function PerspectiveCameraPanel(parent)
 {
 	Panel.call(this, parent);

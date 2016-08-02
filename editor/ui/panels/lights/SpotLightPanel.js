@@ -1,3 +1,5 @@
+"use strict";
+
 function SpotLightPanel(parent)
 {
 	Panel.call(this, parent);

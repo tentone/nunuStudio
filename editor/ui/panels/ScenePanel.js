@@ -1,3 +1,5 @@
+"use strict";
+
 function ScenePanel(parent)
 {
 	Panel.call(this, parent);

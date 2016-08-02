@@ -1,3 +1,5 @@
+"use strict";
+
 function ButtonImageToggle(parent)
 {
 	//Parent
