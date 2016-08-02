@@ -1,3 +1,5 @@
+"use strict";
+
 function MaterialFile(parent)
 {
 	File.call(this, parent);

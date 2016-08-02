@@ -1,3 +1,5 @@
+"use strict";
+
 function TabElement(parent, name, icon, closeable, container, index)
 {
 	//Parent

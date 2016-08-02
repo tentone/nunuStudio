@@ -1,3 +1,5 @@
+"use strict";
+
 function AboutTab(parent)
 {
 	//Parent

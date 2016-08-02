@@ -1,3 +1,5 @@
+"use strict";
+
 function TreeView(parent, container)
 {	
 	//Parent

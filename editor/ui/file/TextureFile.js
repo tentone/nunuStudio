@@ -1,3 +1,5 @@
+"use strict";
+
 function TextureFile(parent)
 {
 	File.call(this, parent);

@@ -1,3 +1,5 @@
+"use strict";
+
 function Button(parent)
 {
 	//Parent

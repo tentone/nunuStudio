@@ -1,3 +1,5 @@
+"use strict";
+
 function PhysicsPanel(parent)
 {
 	Panel.call(this, parent);

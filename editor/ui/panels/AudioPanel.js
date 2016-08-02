@@ -1,3 +1,5 @@
+"use strict";
+
 function AudioPanel(parent)
 {
 	Panel.call(this, parent);

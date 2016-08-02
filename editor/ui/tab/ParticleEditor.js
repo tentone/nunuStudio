@@ -1,3 +1,5 @@
+"use strict";
+
 function ParticleEditor(parent)
 {
 	//Parent

@@ -1,3 +1,5 @@
+"use strict";
+
 function MaterialEditor(parent)
 {
 	//Parent

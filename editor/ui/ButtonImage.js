@@ -1,3 +1,5 @@
+"use strict";
+
 function ButtonImage(parent)
 {
 	//Parent

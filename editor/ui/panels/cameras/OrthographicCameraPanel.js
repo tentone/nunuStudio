@@ -1,3 +1,5 @@
+"use strict";
+
 function OrthographicCameraPanel(parent)
 {
 	Panel.call(this, parent);

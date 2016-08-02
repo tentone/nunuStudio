@@ -1,3 +1,5 @@
+"use strict";
+
 function StandardMaterialEditor(parent)
 {
 	MaterialEditor.call(this, parent);

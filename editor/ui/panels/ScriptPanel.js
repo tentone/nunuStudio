@@ -1,3 +1,5 @@
+"use strict";
+
 function ScriptPanel(parent)
 {
 	Panel.call(this, parent);

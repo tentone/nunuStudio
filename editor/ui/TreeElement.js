@@ -1,3 +1,5 @@
+"use strict";
+
 function TreeElement(container)
 {
 	//Component

@@ -1,3 +1,5 @@
+"use strict";
+
 function ObjectPanel(parent)
 {
 	Panel.call(this, parent);

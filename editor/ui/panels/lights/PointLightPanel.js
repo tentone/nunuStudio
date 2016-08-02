@@ -1,3 +1,5 @@
+"use strict";
+
 function PointLightPanel(parent)
 {
 	Panel.call(this, parent);
