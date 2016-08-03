@@ -8,6 +8,12 @@ Main.app = "app.isp";
 //Initialize Main
 Main.initialize = function(canvas)
 {
+	//Correct device pixel ratio
+	/*var meta = document.createElement("meta");
+	meta.name = "viewport";
+	meta.content = "initial-scale=" + (1.0 / window.devicePixelRatio) + ", user-scalable=no";
+	document.head.appendChild(meta);*/
+
 	//Set mouse lock false
 	App.setMouseLock(false);
 
@@ -19,6 +25,8 @@ Main.initialize = function(canvas)
 	Main.canvas.style.position = "absolute";
 	Main.canvas.style.top = "0px";
 	Main.canvas.style.left = "0px";
+	Main.canvas.style.width = window.innerWidth + "px";
+	Main.canvas.style.height = window.innerHeight + "px";
 	Main.canvas.width = window.innerWidth;
 	Main.canvas.height = window.innerHeight;
 	document.body.appendChild(Main.canvas);
@@ -180,19 +188,22 @@ Main.draw = function()
 //Resize to fit window
 Main.resize = function()
 {
-	//Update canvas and renderer
+	//Update canvas and renderer size
 	if(Main.canvas !== null && Main.renderer != null)
 	{
+		Main.canvas.style.width = window.innerWidth + "px";
+		Main.canvas.style.height = window.innerHeight + "px";
 		Main.canvas.width = window.innerWidth;
 		Main.canvas.height = window.innerHeight;
 		Main.renderer.setSize(Main.canvas.width, Main.canvas.height);
 		Main.program.resize(Main.canvas.width, Main.canvas.height);
 	}
 
-	//Update button position
+	//Fullscreen button
 	Main.fullscreen.style.left = (window.innerWidth - 30) + "px";
 	Main.fullscreen.style.top = (window.innerHeight - 30) + "px";
 
+	//VR button
 	if(Main.vr !== undefined)
 	{
 		Main.vr.style.left = (window.innerWidth - 60) + "px";
