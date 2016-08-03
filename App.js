@@ -18,8 +18,6 @@ include("lib/cannon/cannon.min.js");
 include("lib/cannon/cannondebugrenderer.js");
 
 include("lib/stats.min.js");
-include("lib/opentype.min.js");
-include("lib/jszip.min.js");
 include("lib/SPE.min.js");
 
 //Internal modules
@@ -27,7 +25,6 @@ include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
-include("core/MathUtils.js");
 include("core/ObjectLoader.js");
 include("core/Program.js");
 include("core/Scene.js");

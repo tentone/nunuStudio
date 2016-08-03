@@ -9,7 +9,7 @@ function Text3D(text, material, font)
 	}
 	else
 	{
-		this.font = new THREE.FontLoader().parse(font);
+		this.font = new THREE.Font(font);
 	}
 
 	THREE.Mesh.call(this, new THREE.TextGeometry(text, {font: this.font}), material);
@@ -84,7 +84,7 @@ function toJSON(meta)
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 	
 	data.object.text = this.text;
-	data.object.font = this.font;
+	data.object.font = this.font.data;
 
 	//Restore geometry
 	this.geometry = geometry;

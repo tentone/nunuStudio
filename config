@@ -1,6 +1,6 @@
 {
 	"general_theme": "dark",
-	"show_stats": true,
+	"show_stats": false,
 	"grid_size": 500,
 	"grid_spacing": 5,
 	"grid_enabled": true,

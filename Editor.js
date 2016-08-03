@@ -111,7 +111,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.3 Alpha";
-Editor.TIMESTAMP = "201608020251";
+Editor.TIMESTAMP = "201608030526";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -964,8 +964,6 @@ Editor.exportWebProject = function(dir)
 	App.copyFolder("core", dir + "\\core");
 	App.copyFolder("input", dir + "\\input");
 	App.copyFolder("lib", dir + "\\lib");
-	App.makeDirectory(dir + "\\data");
-	App.copyFolder("data/fonts", dir + "\\data/fonts");
 	App.copyFile("App.js", dir + "\\App.js");
 	Editor.saveProgram(dir + "\\app.isp");
 }
@@ -977,8 +975,6 @@ Editor.exportWindowsProject = function(dir)
 	App.copyFolder("core", dir + "\\core");
 	App.copyFolder("input", dir + "\\input");
 	App.copyFolder("lib", dir + "\\lib");
-	App.makeDirectory(dir + "\\data");
-	App.copyFolder("data/fonts", dir + "\\data/fonts");
 	App.copyFolder("nwjs", dir + "\\nwjs");
 	App.copyFile("App.js", dir + "\\App.js");
 	App.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));

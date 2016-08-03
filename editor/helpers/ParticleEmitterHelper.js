@@ -24,8 +24,8 @@ function update()
 {
 	if(this.runtime !== null)
 	{
-		this.runtime.position.copy(this.particle.position);
-		this.runtime.scale.copy(this.particle.scale);
+		this.particle.getWorldPosition(this.runtime.position);
+		this.particle.getWorldScale(this.runtime.scale);
 		this.runtime.rotation.copy(this.particle.rotation);
 		this.runtime.update();
 	}
