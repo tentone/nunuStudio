@@ -503,25 +503,28 @@ function parseObject(data, geometries, materials, textures)
 			break;
 			
 		case "Text3D":
-			object = new Text3D(data.text, getMaterial(data.material), data.font);
+			object = new Text3D(data.text, getMaterial(data.material), new THREE.Font(data.font));
 			break;
 
 		case "Program":
-			object = new Program(data.name, data.description, data.author, data.version, data.vr);
-			
+			object = new Program(data.name);
+
+			object.description = data.description;
+			object.author = data.author;
+			object.version = data.version;
+			object.vr = data.vr;
+			object.vr_scale = data.vr_scale;
+
 			if(data.initial_scene !== undefined)
 			{
 				object.initial_scene = data.initial_scene;
 			}
-			if(data.vr_scale !== undefined)
-			{
-				object.vr_scale = data.vr_scale;
-			}
-			
+
 			break;
 
 		case "LeapDevice":
 			object = new LeapHand();
+			
 			object.mode = data.mode;
 			object.use_arm = data.use_arm;
 

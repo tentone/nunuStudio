@@ -1,7 +1,7 @@
 "use strict";
 
 //Program constructor
-function Program(name, description, author, version, vr)
+function Program(name)
 {
 	THREE.Object3D.call(this);
 
@@ -20,26 +20,10 @@ function Program(name, description, author, version, vr)
 	this.vr = false;
 	this.vr_scale = 1;
 
-	//Collect arguments
+	//Name
 	if(name !== undefined)
 	{
 		this.name = name;
-	}
-	if(description !== undefined)
-	{
-		this.description = description;
-	}
-	if(author !== undefined)
-	{
-		this.author = author;
-	}
-	if(version !== undefined)
-	{
-		this.version = version;
-	}
-	if(vr !== undefined)
-	{
-		this.vr = vr;
 	}
 
 	//Assets

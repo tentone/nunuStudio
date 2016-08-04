@@ -111,7 +111,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.3 Alpha";
-Editor.TIMESTAMP = "201608030526";
+Editor.TIMESTAMP = "201608040413";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -1022,24 +1022,27 @@ Editor.setState = function(state)
 		tab.show_buttons_fullscreen = true;
 
 		//If program uses VR set button
-		if(Editor.program_running.vr && App.webvrAvailable())
+		if(Editor.program_running.vr)
 		{
-			//Create VREffect instance
-			Editor.vr_effect = new THREE.VREffect(Editor.renderer);
-			
-			//Show VR button
-			tab.show_buttons_vr = true;
-
-			//Create VR switch callback
-			var vr_state = true;
-			tab.vr_button.setCallback(function()
+			if(App.webvrAvailable())
 			{
-				if(Editor.vr_effect !== null)
+				//Create VREffect instance
+				Editor.vr_effect = new THREE.VREffect(Editor.renderer);
+				
+				//Show VR button
+				tab.show_buttons_vr = true;
+
+				//Create VR switch callback
+				var vr_state = true;
+				tab.vr_button.setCallback(function()
 				{
-					Editor.vr_effect.setFullScreen(vr_state);
-					vr_state = !vr_state;
-				}
-			});
+					if(Editor.vr_effect !== null)
+					{
+						Editor.vr_effect.setFullScreen(vr_state);
+						vr_state = !vr_state;
+					}
+				});
+			}
 		}
 
 		//Update tab to show buttons
