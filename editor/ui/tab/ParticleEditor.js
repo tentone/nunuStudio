@@ -314,7 +314,22 @@ function ParticleEditor(parent)
 	this.form.add(this.wiggle_spread);
 	this.form.nextRow();
 	
+	//Opacity
+	this.form.addText("Opacity");
+	//TODO <ADD CODE HERE>
+	this.form.nextRow();
 
+	//Size
+	this.form.addText("Scale");
+	this.form.nextRow();
+
+	//Angle
+	this.form.addText("Rotation");
+	this.form.nextRow();
+
+	//Color
+	this.form.addText("Color");
+	this.form.nextRow();
 
 	//Add element to document
 	this.parent.appendChild(this.element);
