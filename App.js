@@ -12,7 +12,6 @@ include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
-include("lib/three/effects/CardboardEffect.js");
 include("lib/three/effects/VREffect.js");
 
 include("lib/leap/leap-0.6.4.min.js");
@@ -130,7 +129,7 @@ App.chooseFile = function(callback, filter, savemode)
 	};
 
 	//Force trigger onchange event
-	chooser.click(); 
+	chooser.click();
 }
 
 //Read File
