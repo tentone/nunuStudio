@@ -1,7 +1,8 @@
 "use strict";
 
 //External libs
-include("lib/three/three.js");
+include("lib/three/three.min.js");
+
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/VRMLLoader.js");
@@ -10,7 +11,9 @@ include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/collada/Animation.js");
 include("lib/three/loaders/collada/AnimationHandler.js");
 include("lib/three/loaders/collada/KeyFrameAnimation.js");
-include("lib/three/webvr/VREffect.js");
+
+include("lib/three/effects/CardboardEffect.js");
+include("lib/three/effects/VREffect.js");
 
 include("lib/leap/leap-0.6.4.min.js");
 

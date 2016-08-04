@@ -9,7 +9,7 @@ function Text3D(text, material, font)
 	}
 	else
 	{
-		this.font = new THREE.Font(font);
+		this.font = font;
 	}
 
 	THREE.Mesh.call(this, new THREE.TextGeometry(text, {font: this.font}), material);
