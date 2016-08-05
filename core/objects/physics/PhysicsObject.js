@@ -13,8 +13,12 @@ function PhysicsObject()
 	this.body.mass = 0.5;
 	
 	this.body.addShape(new CANNON.Sphere(1.0));
-	//this.body.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)));
-	
+	this.body.addShape(new CANNON.Particle());
+	this.body.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)));
+	this.body.addShape(new CANNON.Cylinder(1.0, 1.0, 2.0, 8));
+	//this.body.addShape(new CANNON.ConvexPolyhedron(points, faces));
+	//this.body.addShape(new CANNON.Plane());
+
 	this.world = null;
 }
 
@@ -79,9 +83,35 @@ function toJSON(meta)
 	data.object.body.collisionFilterGroup = this.body.collisionFilterGroup;
 	data.object.body.collisionFilterMask = this.body.collisionFilterMask;
 	data.object.body.fixedRotation = this.body.fixedRotation;
+	data.object.body.shapes = [];
 
 	//Shapes
-	data.object.shapes = {};
+	var shapes = this.body.shapes;
+	for(var i = 0; i < shapes; i++)
+	{
+		var shape = shapes[i];
+		data.object.body.shapes.push({});
+		if(shape.type === CANNON.Shape.types.SPHERE) //1
+		{
+			//TODO <ADD CODE HERE>
+		}
+		else if(shape.type === CANNON.Shape.types.PLANE) //2
+		{
+			//TODO <ADD CODE HERE>
+		}
+		else if(shape.type === CANNON.Shape.types.BOX) //4
+		{
+			//TODO <ADD CODE HERE>
+		}
+		else if(shape.type === CANNON.Shape.types.PARTICLE) //64
+		{
+			//TODO <ADD CODE HERE>
+		}
+		else if(shape.type === CANNON.Shape.types.CYLINDER) //128
+		{
+			//TODO <ADD CODE HERE>
+		}
+	}
 
 	return data;
 }
