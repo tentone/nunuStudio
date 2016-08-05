@@ -20,9 +20,13 @@ function Scene()
 
 	//Create cannon world
 	this.world = new CANNON.World();
-	this.world.broadphase = new CANNON.NaiveBroadphase();
+	this.world.quatNormalizeSkip = 0;
+	this.world.quatNormalizeFast = false;
 	this.world.gravity.set(0, -10, 0);
-	this.world.solver.tolerance = 0.001;
+	this.world.broadphase = new CANNON.NaiveBroadphase();
+	this.world.solver = new CANNON.SplitSolver(new CANNON.GSSolver());
+	this.world.solver.tolerance = 0.1;
+	this.world.solver.iterations = 7;
 
 	//Initialization variables
 	this.initial_camera = null;

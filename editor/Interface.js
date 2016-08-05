@@ -559,7 +559,18 @@ Interface.initialize = function()
 	}, "Audio");
 
 	//Physics
-	Interface.add_effects.addOption(Interface.file_dir + "icons/physics/physics.png", function()
+	Interface.add_physics = new ButtonDrawer();
+	Interface.add_physics.setImage(Interface.file_dir + "icons/physics/physics.png");
+	Interface.add_physics.options_per_line = 3;
+	Interface.add_physics.image_scale.set(0.7, 0.7);
+	Interface.add_physics.options_scale.set(0.7, 0.7);
+	Interface.add_physics.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.add_physics.position.set(0, 480);
+	Interface.add_physics.options_size.set(40, 40);
+	Interface.add_physics.updateInterface();
+
+	//Physics object
+	Interface.add_physics.addOption(Interface.file_dir + "icons/physics/physics.png", function()
 	{
 		Editor.addToActualScene(new PhysicsObject());
 	}, "Physics");
@@ -571,7 +582,7 @@ Interface.initialize = function()
 	Interface.add_device.image_scale.set(0.7, 0.7);
 	Interface.add_device.options_scale.set(0.7, 0.7);
 	Interface.add_device.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
-	Interface.add_device.position.set(0, 480);
+	Interface.add_device.position.set(0, 520);
 	Interface.add_device.options_size.set(40, 40);
 	Interface.add_device.updateInterface();
 
