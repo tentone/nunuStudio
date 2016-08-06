@@ -569,11 +569,29 @@ Interface.initialize = function()
 	Interface.add_physics.options_size.set(40, 40);
 	Interface.add_physics.updateInterface();
 
-	//Physics object
-	Interface.add_physics.addOption(Interface.file_dir + "icons/physics/physics.png", function()
+	//Physics box
+	Interface.add_physics.addOption(Interface.file_dir + "icons/models/cube.png", function()
 	{
-		Editor.addToActualScene(new PhysicsObject());
-	}, "Physics");
+		var obj = new PhysicsObject();
+		obj.body.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)));
+		Editor.addToActualScene(obj);
+	}, "Box");
+
+	//Physics sphere
+	Interface.add_physics.addOption(Interface.file_dir + "icons/models/sphere.png", function()
+	{
+		var obj = new PhysicsObject();
+		obj.body.addShape(new CANNON.Sphere(1.0));
+		Editor.addToActualScene(obj);
+	}, "Sphere");
+
+	//Physics Cylinder
+	Interface.add_physics.addOption(Interface.file_dir + "icons/models/cylinder.png", function()
+	{
+		var obj = new PhysicsObject();
+		obj.body.addShape(new CANNON.Cylinder(1.0, 1.0, 2.0, 8));
+		Editor.addToActualScene(obj);
+	}, "Cylinder");
 
 	//Add device
 	Interface.add_device = new ButtonDrawer();
