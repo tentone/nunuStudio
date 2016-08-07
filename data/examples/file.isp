@@ -1,0 +1,432 @@
+{
+	"metadata": {
+		"version": 1,
+		"type": "NunuProgram"
+	},
+	"geometries": [
+		{
+			"uuid": "9566DDF9-329A-4699-BB2D-3233141C6910",
+			"type": "BoxBufferGeometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		},
+		{
+			"uuid": "71228BCB-4A9F-423E-90E7-C36B82CF21E5",
+			"type": "BoxBufferGeometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		},
+		{
+			"uuid": "1E4C951E-0A0B-466A-85F2-7167EFC9E1F0",
+			"type": "SphereBufferGeometry",
+			"radius": 1,
+			"widthSegments": 32,
+			"heightSegments": 32
+		}],
+	"materials": [
+		{
+			"uuid": "5FD023C3-0A49-4628-991E-F1685A054749",
+			"type": "MeshPhongMaterial",
+			"name": "default",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true
+		},
+		{
+			"uuid": "00341F9A-18CA-422D-8184-9124ED7CC4D3",
+			"type": "MeshPhongMaterial",
+			"name": "default",
+			"color": 16777215,
+			"emissive": 0,
+			"specular": 1118481,
+			"shininess": 30,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true
+		}],
+	"object": {
+		"uuid": "0743619D-B74A-46AC-A3F2-F700FA1344D6",
+		"type": "Program",
+		"name": "program",
+		"folded": false,
+		"hidden": false,
+		"castShadow": false,
+		"receiveShadow": false,
+		"visible": true,
+		"matrixAutoUpdate": false,
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+			{
+				"uuid": "ABC4A891-01FA-4DF4-8535-64138076DF70",
+				"type": "Scene",
+				"name": "scene",
+				"folded": false,
+				"hidden": false,
+				"castShadow": false,
+				"receiveShadow": false,
+				"visible": true,
+				"matrixAutoUpdate": false,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"children": [
+					{
+						"uuid": "BA296D2D-0E5A-436A-8835-49B819CF68C0",
+						"type": "Sky",
+						"folded": false,
+						"auto_update": false,
+						"day_time": 20,
+						"sun_distance": 100,
+						"time": 13,
+						"name": "sky",
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+					},
+					{
+						"uuid": "EEE39F3F-96FA-4D45-A1E0-47DC374BD8CB",
+						"type": "Script",
+						"name": "control loop",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"children": [
+							{
+								"uuid": "417E7B7A-580F-4B91-9E0F-53CFC92ABBEE",
+								"type": "PerspectiveCamera",
+								"name": "camera",
+								"folded": false,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [-0.9999987483024597,0.000587788294069469,-0.001480218954384327,0,-5.421010862427522e-19,0.929404616355896,0.3690623939037323,0,0.0015926528722047806,0.3690619170665741,-0.9294034242630005,0,0,3.9886960983276367,0,1],
+								"fov": 60,
+								"zoom": 1,
+								"near": 0.1,
+								"far": 1000000,
+								"focus": 10,
+								"aspect": 2.622673434856176,
+								"filmGauge": 35,
+								"filmOffset": 0
+							},
+							{
+								"uuid": "11C2DE05-BF35-4219-82F1-CA4C6F4CD871",
+								"type": "Script",
+								"name": "script",
+								"folded": false,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 0,
+								"code": "this.parent.material = new THREE.MeshPhongMaterial();\nthis.parent.geometry = new THREE.SphereBufferGeometry(1, 32, 32);"
+							}],
+						"mode": 1,
+						"code": "this.position.x = 10 * Math.cos(App.time / 1000);\nthis.position.z = 10 * Math.sin(App.time / 1000);\nthis.lookAt(new THREE.Vector3(0,0,0));\n\nif(Mouse.buttonJustPressed(Mouse.LEFT))\n{\n\tvar obj = new PhysicsObject();\n\tobj.body.addShape(new CANNON.Sphere(1.0));\n\tobj.add(new Model3D(this.geometry, this.material));\n\tobj.position.set(2 * Math.random(), 4 * Math.random() + 5, 2 * Math.random());\n\tthis.scene.add(obj);\n\tobj.initialize();\n}"
+					},
+					{
+						"uuid": "9C4BD077-DF1A-4429-8230-05306448946E",
+						"type": "Physics",
+						"name": "cube",
+						"folded": true,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,3.0146687030792236,0,1],
+						"children": [
+							{
+								"uuid": "F1A7D803-D29E-4D9F-B981-555D5ACE4158",
+								"type": "Mesh",
+								"name": "cube",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "9566DDF9-329A-4699-BB2D-3233141C6910",
+								"material": "00341F9A-18CA-422D-8184-9124ED7CC4D3"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 4,
+									"halfExtents": {
+										"x": 0.5,
+										"y": 0.5,
+										"z": 0.5
+									}
+								}]
+						}
+					},
+					{
+						"uuid": "5F5600AF-A249-4169-BECF-1C6703F18A09",
+						"type": "Physics",
+						"name": "physics",
+						"folded": true,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,0.0007963267271406949,-0.9999997019767761,0,0,0.9999997019767761,0.0007963267271406949,0,0,0,0,1],
+						"children": [
+							{
+								"uuid": "35E638E4-23C6-4C57-BD48-04811A0EC489",
+								"type": "Mesh",
+								"name": "ground",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [20,0,0,0,0,0.0007963267271406949,-0.9999997019767761,0,0,19.9999942779541,0.015926534309983253,0,0,0,-0.5,1],
+								"geometry": "71228BCB-4A9F-423E-90E7-C36B82CF21E5",
+								"material": "5FD023C3-0A49-4628-991E-F1685A054749"
+							}],
+						"body": {
+							"type": 4,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 2
+								}]
+						}
+					},
+					{
+						"uuid": "3604FF00-915E-4831-8A8C-23A4AC6F3375",
+						"type": "Physics",
+						"name": "physics",
+						"folded": true,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,2.463805675506592,6.531800270080566,0,1],
+						"children": [
+							{
+								"uuid": "BB61D33F-CEE9-478B-80A8-4906F2E4B187",
+								"type": "Mesh",
+								"name": "sphere",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "1E4C951E-0A0B-466A-85F2-7167EFC9E1F0",
+								"material": "00341F9A-18CA-422D-8184-9124ED7CC4D3"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 1,
+									"radius": 1
+								}]
+						}
+					},
+					{
+						"uuid": "D8D3696A-3ECF-4E5E-84C3-FD0F95BE78B3",
+						"type": "Physics",
+						"name": "cube",
+						"folded": true,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,7.335245609283447,12.643083572387695,0,1],
+						"children": [
+							{
+								"uuid": "16B7C1B9-E2B7-464D-9A7B-035BE884DDB5",
+								"type": "Mesh",
+								"name": "cube",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "9566DDF9-329A-4699-BB2D-3233141C6910",
+								"material": "00341F9A-18CA-422D-8184-9124ED7CC4D3"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 4,
+									"halfExtents": {
+										"x": 0.5,
+										"y": 0.5,
+										"z": 0.5
+									}
+								}]
+						}
+					},
+					{
+						"uuid": "F31B7C47-6026-4A1B-B57A-AFF39C0C6C84",
+						"type": "Physics",
+						"name": "cube",
+						"folded": true,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,4.599758625030518,12.643083572387695,0,1],
+						"children": [
+							{
+								"uuid": "47BB00BE-2601-4346-801E-91E4C2768AF4",
+								"type": "Mesh",
+								"name": "cube",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "9566DDF9-329A-4699-BB2D-3233141C6910",
+								"material": "00341F9A-18CA-422D-8184-9124ED7CC4D3"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 4,
+									"halfExtents": {
+										"x": 0.5,
+										"y": 0.5,
+										"z": 0.5
+									}
+								}]
+						}
+					},
+					{
+						"uuid": "29A242E1-F59B-4DD0-9ADD-543884121DCB",
+						"type": "Physics",
+						"name": "cube",
+						"folded": true,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,4.599758625030518,12.643083572387695,5.8108086585998535,1],
+						"children": [
+							{
+								"uuid": "40EAE473-E4C2-4F34-8252-B6DE520B6511",
+								"type": "Mesh",
+								"name": "cube",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "9566DDF9-329A-4699-BB2D-3233141C6910",
+								"material": "00341F9A-18CA-422D-8184-9124ED7CC4D3"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 4,
+									"halfExtents": {
+										"x": 0.5,
+										"y": 0.5,
+										"z": 0.5
+									}
+								}]
+						}
+					}],
+				"fog_color": 16777215,
+				"fog_density": 0.001,
+				"fog_near": 4,
+				"fog_far": 10,
+				"fog_mode": 0,
+				"initial_camera": "417E7B7A-580F-4B91-9E0F-53CFC92ABBEE"
+			}],
+		"author": "",
+		"description": "",
+		"version": "0",
+		"vr": false,
+		"vr_scale": 1
+	}
+}

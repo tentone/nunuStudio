@@ -593,6 +593,22 @@ Interface.initialize = function()
 		Editor.addToActualScene(obj);
 	}, "Cylinder");
 
+	//Physics Plane
+	Interface.add_physics.addOption(Interface.file_dir + "icons/models/plane.png", function()
+	{
+		var obj = new PhysicsObject();
+		obj.body.addShape(new CANNON.Plane());
+		Editor.addToActualScene(obj);
+	}, "Ground");
+
+	//Physics Particle
+	Interface.add_physics.addOption(Interface.file_dir + "icons/models/point.png", function()
+	{
+		var obj = new PhysicsObject();
+		obj.body.addShape(new CANNON.Particle());
+		Editor.addToActualScene(obj);
+	}, "Particle");
+
 	//Add device
 	Interface.add_device = new ButtonDrawer();
 	Interface.add_device.setImage(Interface.file_dir + "icons/hw/hw.png");

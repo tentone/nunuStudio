@@ -131,7 +131,10 @@ function TreeElement(container)
 				context.addOption("Duplicate", function()
 				{
 					var obj = new ObjectLoader().parse(self.obj.toJSON());
-					obj.uuid = THREE.Math.generateUUID();
+					obj.traverse(function(child)
+					{
+						child.uuid = THREE.Math.generateUUID();
+					});
 					self.obj.parent.add(obj);
 					Editor.updateObjectViews();
 				});
