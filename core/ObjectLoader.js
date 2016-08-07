@@ -474,7 +474,6 @@ function parseObject(data, geometries, materials, textures)
 			object.body.collisionFilterGroup = data.body.collisionFilterGroup;
 			object.body.collisionFilterMask = data.body.collisionFilterMask;
 			object.body.fixedRotation = data.body.fixedRotation;
-
 			var shapes = data.body.shapes;
 			for(var i = 0; i < shapes.length; i++)
 			{
@@ -491,6 +490,14 @@ function parseObject(data, geometries, materials, textures)
 				else if(shape.type === CANNON.Shape.types.PARTICLE)
 				{
 					object.body.addShape(new CANNON.Particle());
+				}
+				else if(shape.type === CANNON.Shape.types.PLANE)
+				{
+					object.body.addShape(new CANNON.Plane());
+				}
+				else if(shape.type === CANNON.Shape.types.CONVEXPOLYHEDRON)
+				{
+					object.body.addShape(new CANNON.ConvexPolyhedron(shape.vertices, shape.faces));
 				}
 			}
 			break;
@@ -517,7 +524,6 @@ function parseObject(data, geometries, materials, textures)
 					emitter.color.spread[i] = THREE.Vector3.fromJSON(emitter.color.spread[i]);
 				}
 			}
-
 			object = new ParticleEmitter(data.group, data.emitter);
 			break;
 			
@@ -527,18 +533,15 @@ function parseObject(data, geometries, materials, textures)
 
 		case "Program":
 			object = new Program(data.name);
-
 			object.description = data.description;
 			object.author = data.author;
 			object.version = data.version;
 			object.vr = data.vr;
 			object.vr_scale = data.vr_scale;
-
 			if(data.initial_scene !== undefined)
 			{
 				object.initial_scene = data.initial_scene;
 			}
-
 			break;
 
 		case "LeapDevice":

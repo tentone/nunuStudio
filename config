@@ -1,6 +1,6 @@
 {
 	"general_theme": "dark",
-	"show_stats": false,
+	"show_stats": true,
 	"grid_size": 500,
 	"grid_spacing": 5,
 	"grid_enabled": true,
@@ -12,6 +12,6 @@
 	"shadows_type": 1,
 	"antialiasing": true,
 	"code_theme": "monokai",
-	"code_font_size": 17,
+	"code_font_size": 20,
 	"code_line_numbers": true
 }

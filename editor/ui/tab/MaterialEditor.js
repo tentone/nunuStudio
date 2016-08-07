@@ -394,19 +394,13 @@ function update()
 	this.main.update();
 	this.preview.update();
 
+	//Render Material
 	if(this.material !== null)
 	{
-		//If needs update file metadata
-		if(this.material.needsUpdate)
-		{
-			this.material_file.updateMetadata();
-			this.material.needsUpdate = true;
-		}
-
-		//Render scene
 		this.renderer.render(this.scene, this.camera);
 	}
 
+	//Move material view
 	if(Mouse.insideCanvas())
 	{
 		//Rotate object
