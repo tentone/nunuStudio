@@ -42,7 +42,7 @@ function initialize()
 		}
 	}
 
-	//Update children
+	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
@@ -55,6 +55,7 @@ function update()
 	this.position.copy(this.body.position);
 	this.quaternion.copy(this.body.quaternion);
 
+	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();

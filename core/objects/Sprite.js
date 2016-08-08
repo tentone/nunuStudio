@@ -24,7 +24,7 @@ function initialize()
 	}
 }
 
-//Update state
+//Update
 function update()
 {
 	for(var i = 0; i < this.children.length; i++)

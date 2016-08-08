@@ -1,3 +1,5 @@
+"use strict";
+
 //Create Vector3 from JSON data
 THREE.Vector3.fromJSON = function(data)
 {
