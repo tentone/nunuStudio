@@ -76,7 +76,16 @@ RotateTool.prototype.update = update;
 //Attach object to rotate tool
 function attachObject(obj)
 {
-	this.obj = obj;
+	if(obj instanceof THREE.Object3D)
+	{
+		this.obj = obj;
+		this.visible = true;
+	}
+	else
+	{
+		this.obj = null
+		this.visible = false;
+	}
 }
 
 //Update attached object returns if object is being edited

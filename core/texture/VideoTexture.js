@@ -11,33 +11,28 @@ function VideoTexture(url)
 	this.video.loop = true;
 	this.video.src = url;
 
-	//Source URL
-	this.url = url;
-
 	//Create Texture part of object
-	THREE.Texture.call(this, this.video);
+	THREE.VideoTexture.call(this, this.video);
 
-	//Dont generate mipmaps
-	this.generateMipmaps = false;
+	//Set filtering
+	this.minFilter = THREE.LinearFilter;
+	this.magFilter = THREE.LinearFilter;
+	this.format = THREE.RGBFormat;
+
+	//Name
+	this.name = "video";
 }
 
 //Function prototypes
-VideoTexture.prototype = Object.create(THREE.Texture.prototype);
-VideoTexture.prototype.update = update;
+VideoTexture.prototype = Object.create(THREE.VideoTexture.prototype);
 VideoTexture.prototype.dispose = dispose;
-
-//Update texture state
-function update()
-{
-	if(this.video.readyState >= this.video.HAVE_CURRENT_DATA)
-	{
-		this.needsUpdate = true;
-	}	
-}
 
 //Dispose texture
 function dispose()
 {
-	this.video.pause();
+	if(!this.video.paused)
+	{
+		this.video.pause();
+	}
 	THREE.Texture.prototype.dispose.call(this);
 }

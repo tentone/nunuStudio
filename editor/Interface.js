@@ -153,10 +153,9 @@ Interface.initialize = function()
 		{
 			try
 			{
-				var map = new VideoTexture(fname);
-				var material = new THREE.SpriteMaterial({map: map, color: 0xffffff});
-				var sprite = new Sprite(material);
-				Editor.addToActualScene(sprite);
+				var material = new THREE.SpriteMaterial({map: new VideoTexture(fname), color: 0xffffff});
+				material.name = "video";
+				Editor.addToActualScene(new Sprite(material));
 			}
 			catch(e)
 			{
@@ -165,19 +164,21 @@ Interface.initialize = function()
 		}, "video/*");
 	}, Interface.file_dir + "icons/assets/video.png");
 
+	//Load Font
+	Interface.asset_file.addOption("Font", function()
+	{
+		App.chooseFile(function(fname)
+		{
+			//TODO <ADD CODE HERE>
+		}, ".json, .ttf, .otf");
+	}, Interface.file_dir + "icons/assets/font.png");
+
 	//Load audio file
 	Interface.asset_file.addOption("Audio", function()
 	{
 		App.chooseFile(function(fname)
 		{
-			try
-			{
-				//TODO <ADD CODE HERE>
-			}
-			catch(e)
-			{
-				alert("Error loading file\n("+e+")");
-			}
+			//TODO <ADD CODE HERE>
 		}, "audio/*");
 	}, Interface.file_dir + "icons/assets/audio.png");
 
@@ -574,6 +575,7 @@ Interface.initialize = function()
 	{
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)));
+		obj.name = "box";
 		Editor.addToActualScene(obj);
 	}, "Box");
 
@@ -582,6 +584,7 @@ Interface.initialize = function()
 	{
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Sphere(1.0));
+		obj.name = "sphere";
 		Editor.addToActualScene(obj);
 	}, "Sphere");
 
@@ -590,6 +593,7 @@ Interface.initialize = function()
 	{
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Cylinder(1.0, 1.0, 2.0, 8));
+		obj.name = "cylinder";
 		Editor.addToActualScene(obj);
 	}, "Cylinder");
 
@@ -597,7 +601,10 @@ Interface.initialize = function()
 	Interface.add_physics.addOption(Interface.file_dir + "icons/models/plane.png", function()
 	{
 		var obj = new PhysicsObject();
+		obj.rotation.x = -1.57;
 		obj.body.addShape(new CANNON.Plane());
+		obj.body.type = CANNON.Body.KINEMATIC;
+		obj.name = "ground";
 		Editor.addToActualScene(obj);
 	}, "Ground");
 
@@ -606,6 +613,7 @@ Interface.initialize = function()
 	{
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Particle());
+		obj.name = "particle";
 		Editor.addToActualScene(obj);
 	}, "Particle");
 

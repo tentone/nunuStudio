@@ -1,3 +1,5 @@
+"use strict";
+
 //Create Color from JSON data
 THREE.Color.fromJSON = function(data)
 {
