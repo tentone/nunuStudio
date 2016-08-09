@@ -20,7 +20,6 @@ include("editor/ui/Image.js");
 include("editor/ui/DivisionResizable.js");
 include("editor/ui/ButtonImage.js");
 include("editor/ui/ButtonDrawer.js");
-include("editor/ui/Style.js");
 include("editor/ui/Canvas.js");
 include("editor/ui/TabGroup.js");
 include("editor/ui/TabElement.js");
@@ -111,7 +110,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.4 Alpha";
-Editor.TIMESTAMP = "201608080308";
+Editor.TIMESTAMP = "201608090320";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -871,7 +870,7 @@ Editor.setCameraRotation = function(camera_rotation, camera)
 //Update raycaster position from editor mouse position
 Editor.updateRaycasterFromMouse = function()
 {
-	var mouse = new THREE.Vector2((Mouse.pos.x/Editor.canvas.width)*2 - 1, -(Mouse.pos.y/Editor.canvas.height)*2 + 1);
+	var mouse = new THREE.Vector2((Mouse.position.x/Editor.canvas.width)*2 - 1, -(Mouse.position.y/Editor.canvas.height)*2 + 1);
 	Editor.raycaster.setFromCamera(mouse, Editor.camera);
 }
 

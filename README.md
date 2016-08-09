@@ -20,9 +20,9 @@ nunuStudio uses a number of open source projects to work properly
 * there are packages prepared for one click instalation for windows, linux and osx
 
 ### Todos
+ - Documentation
  - Webpage
  - Audio
- - Physics (Cannon.JS)
  - Blockly block script
 
 ### License

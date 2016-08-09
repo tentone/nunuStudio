@@ -14,19 +14,19 @@ Keyboard.initialize = function()
 		Keyboard.keys.push(new Key());
 	}
 
-	//Keyboard OnKeyDown Event
-	document.onkeydown = function(event)
+	//Keyboard key down Event
+	document.addEventListener("keydown", function(event)
 	{
 		Keyboard.actions.push(event.keyCode);
 		Keyboard.actions.push(Key.KEY_DOWN);
-	}
+	}, false);
 
-	//Keyboard OnKeyUp Event
-	document.onkeyup = function(event)
+	//Keyboard key up Event
+	document.addEventListener("keyup", function(event)
 	{
 		Keyboard.actions.push(event.keyCode);
 		Keyboard.actions.push(Key.KEY_UP);
-	}
+	}, false);
 }
 
 //Update key flags syncronously
