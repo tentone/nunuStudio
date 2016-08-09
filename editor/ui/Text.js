@@ -51,10 +51,6 @@ function Text(parent)
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
-	//Text
-	this.text = "text";
-	this.text_size = 12;
-
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
@@ -73,20 +69,25 @@ Text.prototype.destroy = destroy;
 Text.prototype.setAlignment = setAlignment;
 Text.prototype.setText = setText;
 Text.prototype.setTextSize = setTextSize;
+Text.prototype.setTextColor = setTextColor;
 Text.prototype.setVisibility = setVisibility;
 
 //Set Text
 function setText(text)
 {
-	this.text = text;
 	this.span.innerHTML = text;
 }
 
 //Set Text Size
 function setTextSize(size)
 {
-	this.text_size = size;
 	this.element.style.fontSize = size + "px";
+}
+
+//Set Text Color
+function setTextColor(color)
+{
+	this.element.style.color = color;
 }
 
 //Set text alignment

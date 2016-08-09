@@ -186,8 +186,8 @@ function setValue(x, y, z, w)
 	{
 		this.x.value = x;
 		this.y.value = y;
-		this.z.value = z;
-		this.w.value = w;
+		this.z.value = (z !== undefined) ? z : 0;
+		this.w.value = (w !== undefined) ? w : 0;
 	}
 }
 

@@ -38,7 +38,6 @@ function Program(name)
 	//Runtime variables
 	this.renderer = null;
 	this.scene = null;
-	this.data = function(){};
 }
 
 //Program methods
@@ -303,12 +302,14 @@ function toJSON(meta)
 		}
 	});
 
+	//Attributes
 	data.object.author = this.author;
 	data.object.description = this.description;
 	data.object.version = this.version;
 	data.object.vr = this.vr;
 	data.object.vr_scale = this.vr_scale;
 
+	//Initial scene
 	if(this.initial_scene !== null)
 	{
 		data.object.initial_scene = this.initial_scene;
