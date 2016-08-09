@@ -92,7 +92,7 @@ Interface.initialize = function()
 			{
 				alert("Error loading file\n("+e+")");
 			}
-		}, ".json, .js");
+		}, ".json");
 	});
 
 	import_models.addOption("VRML", function()
