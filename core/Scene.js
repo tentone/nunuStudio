@@ -15,7 +15,7 @@ function Scene()
 	this.fog_color = 0xffffff;
 	this.fog_near = 4;
 	this.fog_far = 10;
-	this.fog_density = 0.001;
+	this.fog_density = 0.01;
 	this.fog_mode = Scene.FOG_NONE;
 
 	//Create cannon world
@@ -32,7 +32,6 @@ function Scene()
 	this.initial_camera = null;
 
 	//Runtime variables
-	this.data = function(){};
 	this.camera = null;
 	this.listener = new THREE.AudioListener();
 }
@@ -148,24 +147,28 @@ function toJSON(meta)
 {
 	var data = THREE.Scene.prototype.toJSON.call(this, meta);
 
+	//Fog
 	data.object.fog_color = this.fog_color;
 	data.object.fog_density = this.fog_density;
 	data.object.fog_near = this.fog_near;
 	data.object.fog_far = this.fog_far;
 	data.object.fog_mode = this.fog_mode;
 
+	//Background color
 	if(this.background !== null)
 	{
-		data.object.background = {};
-		data.object.background.r = this.background.r;
-		data.object.background.g = this.background.g;
-		data.object.background.b = this.background.b;
+		data.object.background = this.background;
 	}
 
+	//Initial Camera
 	if(this.initial_camera !== null)
 	{
 		data.object.initial_camera = this.initial_camera;
 	}
+
+	//Physics World
+	data.object.world = {};
+	data.object.world.gravity = this.world.gravity;
 
 	return data;
 }

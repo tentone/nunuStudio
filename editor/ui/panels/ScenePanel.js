@@ -152,6 +152,25 @@ function ScenePanel(parent)
 	this.exponential_form.add(this.fog_density);
 	this.exponential_form.updateInterface();
 	this.form.add(this.exponential_form);
+	this.form.nextRow();
+
+	//Physics world
+	this.form.addText("Physics world");
+	this.form.nextRow();
+
+	//Gravity
+	this.form.addText("Gravity");
+	this.gravity = new CoordinatesBox(this.form.element);
+	this.gravity.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			var gravity = self.gravity.getValue();
+			self.obj.world.gravity.set(gravity.x, gravity.y, gravity.z);
+		}
+	});
+	this.form.add(this.gravity);
+	this.form.nextRow();
 
 	//Update form
 	this.form.updateInterface();
@@ -170,7 +189,6 @@ function updatePanel()
 	{
 		this.name.setText(this.obj.name);
 		this.default.setValue(this.obj.uuid === this.obj.parent.initial_scene);
-
 		if(this.obj.fog instanceof THREE.Fog)
 		{
 			this.fog.setSelectedIndex(Scene.FOG_LINEAR);
@@ -183,17 +201,15 @@ function updatePanel()
 		{
 			this.fog.setSelectedIndex(Scene.FOG_NONE);
 		}
-		
 		this.fog_color.setValueHex(this.obj.fog_color);
 		this.fog_near.setValue(this.obj.fog_near);
 		this.fog_far.setValue(this.obj.fog_far);
 		this.fog_density.setValue(this.obj.fog_density);
-
 		if(this.obj.background !== null)
 		{
 			this.background.setValue(this.obj.background.r, this.obj.background.g, this.obj.background.b);
 		}
-
+		this.gravity.setValue(this.obj.world.gravity.x, this.obj.world.gravity.y, this.obj.world.gravity.z);
 		this.updateElementsVisibility();
 	}
 }
