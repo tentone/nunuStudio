@@ -110,7 +110,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.5 Alpha";
-Editor.TIMESTAMP = "201608100426";
+Editor.TIMESTAMP = "201608101314";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -717,7 +717,7 @@ Editor.updateTreeView = function()
 	Interface.tree_view.fromObject(Editor.program);
 }
 
-//Update assets explorer
+//Update assets explorer content
 Editor.updateAssetExplorer = function()
 {
 	//Clean asset explorer

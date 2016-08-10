@@ -20,10 +20,7 @@ function TreeElement(container)
 	//Create element
 	this.element = document.createElement("div");
 	this.element.draggable = true;
-	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.style.left = "0px";
-	this.element.style.top = "0px";
 	this.element.style.width = container.size.x + "px";
 	this.element.style.height = "20px";
 

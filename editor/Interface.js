@@ -24,6 +24,7 @@ Interface.initialize = function()
 
 	//Asset explorer
 	Interface.asset_explorer = new FileExplorer(Interface.asset_explorer_div.element);
+	Interface.asset_explorer.files_size.set(Settings.file_preview_size, Settings.file_preview_size);
 	
 	//Asset explorer menu bar
 	Interface.asset_explorer_bar = new Bar(Interface.asset_explorer_div.element);
@@ -878,7 +879,7 @@ Interface.updateInterface = function()
 	Interface.tool_bar.size.y = size.y - Interface.top_bar.size.y;
 	Interface.tool_bar.updateInterface();
 
-	//------------------------------------Explorer------------------------------------
+	//------------------------------------Project Explorer------------------------------------
 	Interface.explorer.size.y = (size.y - Interface.top_bar.size.y);
 	Interface.explorer.position.set(size.x - Interface.explorer.size.x, Interface.top_bar.size.y);
 	Interface.explorer.resize_size_max = size.x * 0.7;
@@ -890,7 +891,7 @@ Interface.updateInterface = function()
 	Interface.tree_view.updateInterface();
 	Interface.panel.updateInterface();
 
-	//---------------------------------Asset Manager----------------------------------
+	//---------------------------------Asset Explorer----------------------------------
 	Interface.asset_explorer_div.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;
 	Interface.asset_explorer_div.position.set(Interface.tool_bar.size.x, size.y - Interface.asset_explorer_div.size.y);
 	Interface.asset_explorer_div.resize_size_max = size.y * 0.6;

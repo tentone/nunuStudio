@@ -18,25 +18,12 @@ function Text(parent)
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
 	this.element.style.pointerEvents = "none";
 	this.element.style.color = Editor.theme.text_color;
-	
-	//Prevent Drop event
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
 	
 	//Span element
 	this.span = document.createElement("span");
