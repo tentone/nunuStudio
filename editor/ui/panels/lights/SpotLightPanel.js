@@ -4,21 +4,13 @@ function SpotLightPanel(parent)
 {
 	Panel.call(this, parent);
 
-	//elf pointer
+	//Self pointer
 	var self = this;
 
-	//Name text
-	var text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Name");
-	text.position.set(5, 20);
-	text.updateInterface();
-
-	//Name textbox
-	this.name = new TextBox(this.element);
-	this.name.position.set(45, 10);
+	//Name
+	this.form.addText("Name");
+	this.name = new TextBox(this.form.element);
 	this.name.size.set(200, 18);
-	this.name.updateInterface();
 	this.name.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -27,18 +19,13 @@ function SpotLightPanel(parent)
 			Editor.updateObjectViews();
 		}
 	});
+	this.form.add(this.name);
+	this.form.nextRow();
 
 	//Position
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Position");
-	text.position.set(5, 45);
-	text.updateInterface();
-
-	this.pos = new CoordinatesBox(this.element);
-	this.pos.position.set(56, 35);
-	this.pos.updateInterface();
-	this.pos.setOnChange(function()
+	this.form.addText("Position");
+	this.position = new CoordinatesBox(this.form.element);
+	this.position.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
@@ -46,37 +33,27 @@ function SpotLightPanel(parent)
 			self.obj.position.set(position.x, position.y, position.z);
 		}
 	});
+	this.form.add(this.position);
+	this.form.nextRow()
 
 	//Rotation
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Rotation");
-	text.position.set(5, 70);
-	text.updateInterface();
-
-	this.rotation = new CoordinatesBox(this.element);
-	this.rotation.position.set(56, 60);
-	this.rotation.updateInterface();
+	this.form.addText("Rotation");
+	this.rotation = new CoordinatesBox(this.form.element);
 	this.rotation.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			var rotation = self.rotation.getValue();
+			var rotation = self.pos.getValue();
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
 		}
 	});
+	this.form.add(this.rotation);
+	this.form.nextRow();
 
 	//Color
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Color");
-	text.position.set(5, 95);
-	text.updateInterface();
-
-	this.color = new ColorChooser(this.element);
+	this.form.addText("Color");
+	this.color = new ColorChooser(this.form.element);
 	this.color.size.set(80, 18);
-	this.color.position.set(45, 85);
-	this.color.updateInterface();
 	this.color.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -85,15 +62,12 @@ function SpotLightPanel(parent)
 			self.obj.color.setRGB(color.r, color.g, color.b);
 		}
 	});
+	this.form.add(this.color);
+	this.form.nextRow();
 
 	//Penumbra
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Penumbra");
-	text.position.set(5, 120);
-	text.updateInterface();
-
-	this.penumbra = new Slider(this.element);
+	this.form.addText("Penumbra");
+	this.penumbra = new Slider(this.form.element);
 	this.penumbra.size.set(160, 18);
 	this.penumbra.position.set(65, 110);
 	this.penumbra.setRange(0, 1);
@@ -107,25 +81,17 @@ function SpotLightPanel(parent)
 			self.penumbra_text.setText(self.obj.penumbra);
 		}
 	});
-
-	this.penumbra_text = new Text(this.element);
+	this.form.add(this.penumbra);
+	this.penumbra_text = this.form.addText("");
 	this.penumbra_text.setAlignment(Text.LEFT);
-	this.penumbra_text.position.set(235, 120);
-	this.penumbra_text.updateInterface();
+	this.form.nextRow();
 
 	//Angle
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Angle");
-	text.position.set(5, 145);
-	text.updateInterface();
-
-	this.angle = new Slider(this.element);
+	this.form.addText("Angle");
+	this.angle = new Slider(this.form.element);
 	this.angle.size.set(160, 18);
-	this.angle.position.set(48, 135);
 	this.angle.setRange(0, 1.57);
 	this.angle.setStep(0.01);
-	this.angle.updateInterface();
 	this.angle.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -134,25 +100,17 @@ function SpotLightPanel(parent)
 			self.angle_text.setText(self.obj.angle);
 		}
 	});
-
-	this.angle_text = new Text(this.element);
+	this.form.add(this.angle);
+	this.angle_text = this.form.addText("");
 	this.angle_text.setAlignment(Text.LEFT);
-	this.angle_text.position.set(218, 145);
-	this.angle_text.updateInterface();
+	this.form.nextRow();
 
 	//Decay
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Decay");
-	text.position.set(5, 170);
-	text.updateInterface();
-
-	this.decay = new Slider(this.element);
+	this.form.addText("Decay");
+	this.decay = new Slider(this.form.element);
 	this.decay.size.set(160, 18);
-	this.decay.position.set(50, 160);
 	this.decay.setRange(0, 10);
 	this.decay.setStep(0.1);
-	this.decay.updateInterface();
 	this.decay.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -161,17 +119,16 @@ function SpotLightPanel(parent)
 			self.decay_text.setText(self.obj.decay);
 		}
 	});
-
-	this.decay_text = new Text(this.element);
+	this.form.add(this.decay);
+	this.decay_text = this.form.addText("");
 	this.decay_text.setAlignment(Text.LEFT);
-	this.decay_text.position.set(220, 170);
-	this.decay_text.updateInterface();
+	this.form.nextRow();
 
 	//Cast shadow
-	this.cast_shadow = new CheckBox(this.element);
+	this.cast_shadow = new CheckBox(this.form.element);
 	this.cast_shadow.setText("Cast Shadow");
 	this.cast_shadow.size.set(200, 15);
-	this.cast_shadow.position.set(5, 185);
+	this.cast_shadow.position.set(5, 85);
 	this.cast_shadow.updateInterface();
 	this.cast_shadow.setOnChange(function()
 	{
@@ -180,13 +137,13 @@ function SpotLightPanel(parent)
 			self.obj.castShadow = self.cast_shadow.getValue();
 		}
 	});
+	this.form.add(this.cast_shadow);
+	this.form.nextRow();
 
 	//Visible
-	this.visible = new CheckBox(this.element);
+	this.visible = new CheckBox(this.form.element);
 	this.visible.setText("Visible");
 	this.visible.size.set(200, 15);
-	this.visible.position.set(5, 210);
-	this.visible.updateInterface();
 	this.visible.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -194,13 +151,13 @@ function SpotLightPanel(parent)
 			self.obj.visible = self.visible.getValue();
 		}
 	});
+	this.form.add(this.visible);
+	this.form.nextRow();
 
 	//Static
-	this.static = new CheckBox(this.element);
+	this.static = new CheckBox(this.form.element);
 	this.static.setText("Static Object");
 	this.static.size.set(200, 15);
-	this.static.position.set(5, 235);
-	this.static.updateInterface();
 	this.static.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -208,11 +165,15 @@ function SpotLightPanel(parent)
 			self.obj.matrixAutoUpdate = !(self.static.getValue());
 		}
 	});
+	this.form.add(this.static);
+	this.form.nextRow();
+
+	//Update form
+	this.form.updateInterface();
 }
 
 //Functions Prototype
 SpotLightPanel.prototype = Object.create(Panel.prototype);
-SpotLightPanel.prototype.attachObject = attachObject;
 SpotLightPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
@@ -221,7 +182,7 @@ function updatePanel()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
-		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
+		this.position.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.cast_shadow.setValue(this.obj.castShadow);
@@ -234,12 +195,4 @@ function updatePanel()
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
-}
-
-//Attach object to panel
-function attachObject(obj)
-{
-	this.obj = obj;
-	this.updatePanel();
-	this.updateInterface();
 }

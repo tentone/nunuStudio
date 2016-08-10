@@ -56,11 +56,11 @@ function Panel(parent)
 Panel.id = 0;
 
 //Functions Prototype
+Panel.prototype.updatePanel = updatePanel;
+Panel.prototype.attachObject = attachObject;
+Panel.prototype.destroy = destroy;
 Panel.prototype.update = update;
 Panel.prototype.updateInterface = updateInterface;
-Panel.prototype.destroy = destroy;
-Panel.prototype.attachObject = attachObject;
-Panel.prototype.updatePanel = updatePanel;
 
 //Update panel with object data
 function updatePanel(){}
@@ -68,9 +68,11 @@ function updatePanel(){}
 //Attach object to panel
 function attachObject(obj)
 {
-	this.obj = obj;
-	this.updatePanel();
-	this.updateInterface();
+	if(obj instanceof THREE.Object3D)
+	{
+		this.obj = obj;
+		this.updatePanel();
+	}
 }
 
 //Remove element

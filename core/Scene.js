@@ -12,11 +12,11 @@ function Scene()
 	this.matrixAutoUpdate = false;
 
 	//Fog
+	this.fog_mode = Scene.FOG_NONE;
 	this.fog_color = 0xffffff;
 	this.fog_near = 4;
 	this.fog_far = 10;
 	this.fog_density = 0.01;
-	this.fog_mode = Scene.FOG_NONE;
 
 	//Create cannon world
 	this.world = new CANNON.World();

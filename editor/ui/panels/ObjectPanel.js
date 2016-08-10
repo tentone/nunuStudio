@@ -24,7 +24,7 @@ function ObjectPanel(parent)
 
 	//Position
 	this.form.addText("Position");
-	this.position = new CoordinatesBox(this.element);
+	this.position = new CoordinatesBox(this.form.element);
 	this.position.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -38,7 +38,7 @@ function ObjectPanel(parent)
 
 	//Scale
 	this.form.addText("Scale");
-	this.scale = new CoordinatesBox(this.element);
+	this.scale = new CoordinatesBox(this.form.element);
 	this.scale.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -52,8 +52,7 @@ function ObjectPanel(parent)
 
 	//Rotation
 	this.form.addText("Rotation");
-	this.rotation = new CoordinatesBox(this.element);
-	this.rotation.position.set(57, 85);
+	this.rotation = new CoordinatesBox(this.form.element);
 	this.rotation.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -66,7 +65,7 @@ function ObjectPanel(parent)
 	this.form.nextRow();
 
 	//Visible
-	this.visible = new CheckBox(this.element);
+	this.visible = new CheckBox(this.form.element);
 	this.visible.setText("Visible");
 	this.visible.size.set(200, 15);
 	this.visible.setOnChange(function()
@@ -80,7 +79,7 @@ function ObjectPanel(parent)
 	this.form.nextRow();
 
 	//Static
-	this.static = new CheckBox(this.element);
+	this.static = new CheckBox(this.form.element);
 	this.static.setText("Static Object");
 	this.static.size.set(200, 15);
 	this.static.setOnChange(function()
@@ -94,10 +93,9 @@ function ObjectPanel(parent)
 	this.form.nextRow();
 
 	//Cast shadow
-	this.cast_shadow = new CheckBox(this.element);
+	this.cast_shadow = new CheckBox(this.form.element);
 	this.cast_shadow.setText("Cast Shadow");
 	this.cast_shadow.size.set(200, 15);
-	this.cast_shadow.position.set(5, 160);
 	this.cast_shadow.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -108,11 +106,10 @@ function ObjectPanel(parent)
 	this.form.add(this.cast_shadow);
 	this.form.nextRow();
 
-	//Cast shadow
-	this.receive_shadow = new CheckBox(this.element);
+	//Receive shadow
+	this.receive_shadow = new CheckBox(this.form.element);
 	this.receive_shadow.setText("Receive Shadow");
 	this.receive_shadow.size.set(200, 15);
-	this.receive_shadow.position.set(5, 185);
 	this.receive_shadow.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -125,8 +122,7 @@ function ObjectPanel(parent)
 
 	//Type
 	this.form.addText("Type");
-	this.type = this.form.addText("");
-	this.form.add(this.type);
+	this.type = this.form.addText("null");
 
 	//Update form
 	this.form.updateInterface();
@@ -134,7 +130,6 @@ function ObjectPanel(parent)
 
 //Functions Prototype
 ObjectPanel.prototype = Object.create(Panel.prototype);
-ObjectPanel.prototype.attachObject = attachObject;
 ObjectPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
@@ -152,12 +147,4 @@ function updatePanel()
 		this.receive_shadow.setValue(this.obj.receiveShadow);
 		this.type.setText(this.obj.type);
 	}
-}
-
-//Attach object to panel
-function attachObject(obj)
-{
-	this.obj = obj;
-	this.updatePanel();
-	this.updateInterface();
 }

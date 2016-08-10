@@ -1,3 +1,5 @@
+"use strict";
+
 function SkyPanel(parent)
 {
 	Panel.call(this, parent);
@@ -6,16 +8,9 @@ function SkyPanel(parent)
 	var self = this;
 
 	//Name
-	var text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Name");
-	text.position.set(5, 20);
-	text.updateInterface();
-
-	this.name = new TextBox(this.element);
-	this.name.position.set(45, 10);
+	this.form.addText("Name");
+	this.name = new TextBox(this.form.element);
 	this.name.size.set(200, 18);
-	this.name.updateInterface();
 	this.name.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -24,13 +19,13 @@ function SkyPanel(parent)
 			Editor.updateObjectViews();
 		}
 	});
+	this.form.add(this.name);
+	this.form.nextRow();
 
 	//Auto update
-	this.auto_update = new CheckBox(this.element);
+	this.auto_update = new CheckBox(this.form.element);
 	this.auto_update.setText("Auto update");
 	this.auto_update.size.set(200, 15);
-	this.auto_update.position.set(5, 35);
-	this.auto_update.updateInterface();
 	this.auto_update.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -38,20 +33,14 @@ function SkyPanel(parent)
 			self.obj.auto_update = self.auto_update.getValue();
 		}
 	});
+	this.form.add(this.auto_update);
+	this.form.nextRow();
 
 	//Day time
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Day duration(s)");
-	text.size.set(100, 0);
-	text.position.set(5, 70);
-	text.updateInterface();
-
-	this.day_time = new NumberBox(this.element);
+	this.form.addText("Day duration(s)");
+	this.day_time = new NumberBox(this.form.element);
 	this.day_time.size.set(100, 18);
-	this.day_time.position.set(95, 60);
 	this.day_time.setStep(0.1);
-	this.day_time.updateInterface();
 	this.day_time.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -76,20 +65,14 @@ function SkyPanel(parent)
 			self.obj.updateSky();
 		}
 	});
+	this.form.add(this.day_time);
+	this.form.nextRow();
 
 	//Actual time 
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Time(s)")
-	text.size.set(100, 0);
-	text.position.set(5, 95);
-	text.updateInterface();
-
-	this.time = new NumberBox(this.element);
+	this.form.addText("Time(s)")
+	this.time = new NumberBox(this.form.element);
 	this.time.size.set(100, 18);
-	this.time.position.set(55, 85);
 	this.time.setStep(0.1);
-	this.time.updateInterface();
 	this.time.setOnChange(function()
 	{
 		if(self.obj!== null)
@@ -111,20 +94,14 @@ function SkyPanel(parent)
 			self.obj.updateSky();
 		}
 	});
+	this.form.add(this.time);
+	this.form.nextRow();
 
 	//Sun distance
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Sun distance");
-	text.size.set(100, 0);
-	text.position.set(5, 120);
-	text.updateInterface();
-	
-	this.sun_distance = new NumberBox(this.element);
+	this.form.addText("Sun distance");
+	this.sun_distance = new NumberBox(this.form.element);
 	this.sun_distance.size.set(80, 18);
-	this.sun_distance.position.set(80, 110);
 	this.sun_distance.setStep(10);
-	this.sun_distance.updateInterface();
 	this.sun_distance.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -133,11 +110,14 @@ function SkyPanel(parent)
 			self.obj.updateSky();
 		}
 	});
+	this.form.add(this.sun_distance);
+
+	//Update form
+	this.form.updateInterface();
 }
 
 //Functions Prototype
 SkyPanel.prototype = Object.create(Panel.prototype);
-SkyPanel.prototype.attachObject = attachObject;
 SkyPanel.prototype.updatePanel = updatePanel;
 
 //Update panel with object data
@@ -150,16 +130,5 @@ function updatePanel()
 		this.day_time.setValue(this.obj.day_time);
 		this.time.setValue(this.obj.time);
 		this.sun_distance.setValue(this.obj.sun_distance);
-	}
-}
-
-//Attach object to panel
-function attachObject(obj)
-{
-	if(obj instanceof Sky)
-	{
-		this.obj = obj;
-		this.updatePanel();
-		this.updateInterface();
 	}
 }

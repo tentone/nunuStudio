@@ -6,6 +6,21 @@ function StandardMaterialEditor(parent)
 
 	var self = this;
 
+	//Wireframe
+	this.wireframe = new CheckBox(this.preview.div_b);
+	this.wireframe.setText("Wireframe");
+	this.wireframe.size.set(200, 15);
+	this.wireframe.updateInterface();
+	this.wireframe.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.wireframe = self.wireframe.getValue();
+		}
+	});
+	this.form.add(this.wireframe);
+	this.form.nextRow();
+
 	//Shading mode
 	this.form.addText("Shading");
 	this.shading = new DropdownList(this.form.element);
@@ -309,7 +324,8 @@ StandardMaterialEditor.prototype.attachMaterial = attachMaterial;
 function attachMaterial(material, material_file)
 {
 	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
-
+	
+	this.wireframe.setValue(material.wireframe);
 	this.shading.setValue(material.shading);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.roughness.setValue(material.roughness);

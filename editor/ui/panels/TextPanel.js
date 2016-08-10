@@ -8,16 +8,9 @@ function TextPanel(parent)
 	var self = this;
 
 	//Name
-	var text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Name");
-	text.position.set(5, 20);
-	text.updateInterface();
-
-	this.name = new TextBox(this.element);
-	this.name.position.set(45, 10);
+	this.form.addText("Name");
+	this.name = new TextBox(this.form.element);
 	this.name.size.set(200, 18);
-	this.name.updateInterface();
 	this.name.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -26,18 +19,13 @@ function TextPanel(parent)
 			Editor.updateObjectViews();
 		}
 	});
+	this.form.add(this.name);
+	this.form.nextRow();
 
 	//Text
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Text");
-	text.position.set(5, 45);
-	text.updateInterface();
-
-	this.text = new TextBox(this.element);
-	this.text.position.set(45, 35);
+	this.form.addText("Text");
+	this.text = new TextBox(this.form.element);
 	this.text.size.set(200, 18);
-	this.text.updateInterface();
 	this.text.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -45,36 +33,26 @@ function TextPanel(parent)
 			self.obj.setText(self.text.getText());
 		}
 	});
+	this.form.add(this.text);
+	this.form.nextRow();
 
 	//Position
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Position");
-	text.position.set(5, 70);
-	text.updateInterface();
-
-	this.pos = new CoordinatesBox(this.element);
-	this.pos.position.set(56, 60);
-	this.pos.updateInterface();
-	this.pos.setOnChange(function()
+	this.form.addText("Position");
+	this.position = new CoordinatesBox(this.form.element);
+	this.position.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			var position = self.pos.getValue();
+			var position = self.position.getValue();
 			self.obj.position.set(position.x, position.y, position.z);
 		}
 	});
+	this.form.add(this.position);
+	this.form.nextRow();
 
 	//Scale
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Scale");
-	text.position.set(5, 95);
-	text.updateInterface();
-
-	this.scale = new CoordinatesBox(this.element);
-	this.scale.position.set(45, 85);
-	this.scale.updateInterface();
+	this.form.addText("Scale");
+	this.scale = new CoordinatesBox(this.form.element);
 	this.scale.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -83,17 +61,12 @@ function TextPanel(parent)
 			self.obj.scale.set(scale.x, scale.y, scale.z);
 		}
 	});
+	this.form.add(this.scale);
+	this.form.nextRow();
 
 	//Rotation
-	text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Rotation");
-	text.position.set(5, 120);
-	text.updateInterface();
-
-	this.rotation = new CoordinatesBox(this.element);
-	this.rotation.position.set(57, 110);
-	this.rotation.updateInterface();
+	this.form.addText("Rotation");
+	this.rotation = new CoordinatesBox(this.form.element);
 	this.rotation.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -102,41 +75,13 @@ function TextPanel(parent)
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
 		}
 	});
-
-	//Cast shadow
-	this.cast_shadow = new CheckBox(this.element);
-	this.cast_shadow.setText("Cast Shadow");
-	this.cast_shadow.size.set(200, 15);
-	this.cast_shadow.position.set(5, 135);
-	this.cast_shadow.updateInterface();
-	this.cast_shadow.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.castShadow = self.cast_shadow.getValue();
-		}
-	});
-
-	//Cast shadow
-	this.receive_shadow = new CheckBox(this.element);
-	this.receive_shadow.setText("Receive Shadow");
-	this.receive_shadow.size.set(200, 15);
-	this.receive_shadow.position.set(5, 160);
-	this.receive_shadow.updateInterface();
-	this.receive_shadow.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.receiveShadow = self.receive_shadow.getValue();
-		}
-	});
+	this.form.add(this.rotation);
+	this.form.nextRow();
 
 	//Visible
-	this.visible = new CheckBox(this.element);
+	this.visible = new CheckBox(this.form.element);
 	this.visible.setText("Visible");
 	this.visible.size.set(200, 15);
-	this.visible.position.set(5, 185);
-	this.visible.updateInterface();
 	this.visible.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -144,13 +89,13 @@ function TextPanel(parent)
 			self.obj.visible = self.visible.getValue();
 		}
 	});
+	this.form.add(this.visible);
+	this.form.nextRow();
 
 	//Static
-	this.static = new CheckBox(this.element);
+	this.static = new CheckBox(this.form.element);
 	this.static.setText("Static Object");
 	this.static.size.set(200, 15);
-	this.static.position.set(5, 210);
-	this.static.updateInterface();
 	this.static.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -158,11 +103,43 @@ function TextPanel(parent)
 			self.obj.matrixAutoUpdate = !(self.static.getValue());
 		}
 	});
+	this.form.add(this.static);
+	this.form.nextRow();
+
+	//Cast shadow
+	this.cast_shadow = new CheckBox(this.form.element);
+	this.cast_shadow.setText("Cast Shadow");
+	this.cast_shadow.size.set(200, 15);
+	this.cast_shadow.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.castShadow = self.cast_shadow.getValue();
+		}
+	});
+	this.form.add(this.cast_shadow);
+	this.form.nextRow();
+
+	//Receive shadow
+	this.receive_shadow = new CheckBox(this.form.element);
+	this.receive_shadow.setText("Receive Shadow");
+	this.receive_shadow.size.set(200, 15);
+	this.receive_shadow.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.receiveShadow = self.receive_shadow.getValue();
+		}
+	});
+	this.form.add(this.receive_shadow);
+	this.form.nextRow();
+
+	//Update form
+	this.form.updateInterface();
 }
 
 //Functions Prototype
 TextPanel.prototype = Object.create(Panel.prototype);
-TextPanel.prototype.attachObject = attachObject;
 TextPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
@@ -172,7 +149,7 @@ function updatePanel()
 	{
 		this.name.setText(this.obj.name);
 		this.text.setText(this.obj.text);
-		this.pos.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
+		this.position.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
 		this.cast_shadow.setValue(this.obj.castShadow);
@@ -180,12 +157,4 @@ function updatePanel()
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
-}
-
-//Attach object to panel
-function attachObject(obj)
-{
-	this.obj = obj;
-	this.updatePanel();
-	this.updateInterface();
 }
