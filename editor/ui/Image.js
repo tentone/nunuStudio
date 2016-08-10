@@ -18,7 +18,6 @@ function Image(parent)
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//Prevent Drop event

@@ -152,6 +152,30 @@ function SettingsTab(parent)
 	this.general_form.addText("");
 	this.general_form.nextRow();
 
+	//Asset explorer
+	this.general_form.addText("Asset explorer");
+	this.general_form.nextRow();
+
+	//Code font size
+	this.general_form.addText("Preview size");
+	this.file_preview_size = new NumberBox(this.general_form.element);
+	this.file_preview_size.size.set(60, 18);
+	this.file_preview_size.setRange(5, 99999);
+	this.file_preview_size.setStep(1);
+	this.file_preview_size.setOnChange(function()
+	{
+		var value = self.file_preview_size.getValue();
+		Settings.file_preview_size = value;
+		Interface.asset_explorer.files_size.set(value, value);
+		Editor.updateAssetExplorer();
+	});
+	this.general_form.add(this.file_preview_size);
+	this.general_form.nextRow();
+
+	//Blank Space
+	this.general_form.addText("");
+	this.general_form.nextRow();
+
 	//Renderer settings
 	this.general_form.addText("Rendering Quality");
 	this.general_form.nextRow();
@@ -163,6 +187,7 @@ function SettingsTab(parent)
 	this.shadows_type.addValue("Basic", THREE.BasicShadowMap);
 	this.shadows_type.addValue("PCF", THREE.PCFShadowMap);
 	this.shadows_type.addValue("PCF Soft", THREE.PCFSoftShadowMap);
+	//this.shadows_type.addValue("PCSS Soft", THREE.PCSSSoftShadowMap);
 	this.shadows_type.setOnChange(function()
 	{
 		Settings.shadows_type = self.shadows_type.getValue();
@@ -278,6 +303,7 @@ function activate()
 	this.camera_preview_enabled.setValue(Settings.camera_preview_enabled);
 	this.camera_preview_percentage.setValue(Settings.camera_preview_percentage);
 	this.camera_preview_percentage_text.setText(Settings.camera_preview_percentage + "%");
+	this.file_preview_size.setValue(Settings.file_preview_size);
 	this.shadows_type.setValue(Settings.shadows_type);
 	this.antialiasing.setValue(Settings.antialiasing);
 
