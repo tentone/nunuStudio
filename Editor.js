@@ -75,7 +75,7 @@ include("editor/ui/panels/TextPanel.js");
 include("editor/ui/panels/PhysicsPanel.js");
 include("editor/ui/panels/cameras/PerspectiveCameraPanel.js");
 include("editor/ui/panels/cameras/OrthographicCameraPanel.js");
-include("editor/ui/panels/lights/AmbientLightPanel.js");
+include("editor/ui/panels/lights/LightPanel.js");
 include("editor/ui/panels/lights/PointLightPanel.js");
 include("editor/ui/panels/lights/DirectionalLightPanel.js");
 include("editor/ui/panels/lights/SpotLightPanel.js");
@@ -109,8 +109,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.4 Alpha";
-Editor.TIMESTAMP = "201608091728";
+Editor.VERSION = "V0.8.9.5 Alpha";
+Editor.TIMESTAMP = "201608100426";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -543,7 +543,7 @@ Editor.deleteSelectedObject = function()
 //Copy selected object
 Editor.copySelectedObject = function()
 {
-	if(Editor.selected_object !== null)
+	if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
 	{
 		try
 		{
@@ -556,7 +556,7 @@ Editor.copySelectedObject = function()
 //Cut selected object
 Editor.cutSelectedObject = function()
 {
-	if(Editor.selected_object !== null)
+	if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
 	{
 		try
 		{
@@ -640,7 +640,7 @@ Editor.updateSelectedObjectUI = function()
 		}
 		else if(Editor.selected_object instanceof THREE.Light)
 		{
-			Interface.panel = new AmbientLightPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new LightPanel(Interface.explorer_resizable.div_b);
 		}
 		else if(Editor.selected_object instanceof Sky)
 		{

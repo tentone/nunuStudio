@@ -64,14 +64,13 @@ function AudioPanel(parent)
 		}
 	});
 	this.form.add(this.playbackRate);
-	this.form.nextRow();
 
+	//Update form
 	this.form.updateInterface();
 }
 
 //Functions Prototype
 AudioPanel.prototype = Object.create(Panel.prototype);
-AudioPanel.prototype.attachObject = attachObject;
 AudioPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
@@ -84,12 +83,4 @@ function updatePanel()
 		this.loop.setValue(this.obj.source.loop);
 		this.playbackRate.setValue(this.obj.playbackRate);
 	}
-}
-
-//Attach object to panel
-function attachObject(obj)
-{
-	this.obj = obj;
-	this.updatePanel();
-	this.updateInterface();
 }

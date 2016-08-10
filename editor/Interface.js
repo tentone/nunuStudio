@@ -46,7 +46,7 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.OBJLoader();
 				var obj = loader.parse(App.readFile(fname));
-				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
+				Editor.addToActualScene(obj);
 			}
 			catch(e)
 			{
@@ -62,8 +62,9 @@ Interface.initialize = function()
 			try
 			{
 				var loader = new THREE.ColladaLoader();
-				var obj = loader.parse(App.readFile(fname));
-				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj.scene));
+				var collada = loader.parse(App.readFile(fname));
+				var scene = collada.scene;
+				Editor.addToActualScene(scene);
 			}
 			catch(e)
 			{
@@ -81,9 +82,7 @@ Interface.initialize = function()
 				var loader = new THREE.JSONLoader();
 				loader.load(fname, function(geometry, materials)
 				{
-					var material = new THREE.MeshPhongMaterial();
-					material.skinning = true;
-
+					var material = new THREE.MeshStandardMaterial();
 					var obj = new AnimatedModel(geometry, material);
 					Editor.addToActualScene(obj);
 				});
@@ -102,8 +101,11 @@ Interface.initialize = function()
 			try
 			{
 				var loader = new THREE.VRMLLoader();
-				var obj = loader.parse(App.readFile(fname));
-				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
+				var scene = loader.parse(App.readFile(fname));
+				for(var i = 0; i < scene.children.length; i++)
+				{
+					Editor.addToActualScene(scene.children[i]);
+				}
 			}
 			catch(e)
 			{
@@ -120,7 +122,7 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.FBXLoader();
 				var obj = loader.parse(App.readFile(fname));
-				Editor.addToActualScene(ObjectUtils.convertFromThreeType(obj));
+				Editor.addToActualScene(obj);
 			}
 			catch(e)
 			{

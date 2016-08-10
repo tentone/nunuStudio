@@ -8,16 +8,9 @@ function ProgramPanel(parent)
 	var self = this;
 
 	//Name
-	var text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Name");
-	text.position.set(5, 20);
-	text.updateInterface();
-
-	this.name = new TextBox(this.element);
-	this.name.position.set(45, 10);
+	this.form.addText("Name");
+	this.name = new TextBox(this.form.element);
 	this.name.size.set(200, 18);
-	this.name.updateInterface();
 	this.name.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -26,15 +19,12 @@ function ProgramPanel(parent)
 			Editor.updateObjectViews();
 		}
 	});
+	this.form.add(this.name);
+	this.form.nextRow();
 
 	//Author
-	var text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Author");
-	text.position.set(5, 45);
-	text.updateInterface();
-
-	this.author = new TextBox(this.element);
+	this.form.addText("Author");
+	this.author = new TextBox(this.form.element);
 	this.author.position.set(50, 35);
 	this.author.size.set(200, 18);
 	this.author.updateInterface();
@@ -45,18 +35,13 @@ function ProgramPanel(parent)
 			self.obj.author = self.author.getText();
 		}
 	});
-
+	this.form.add(this.author);
+	this.form.nextRow();
+	
 	//Version
-	var text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("Version");
-	text.position.set(5, 70);
-	text.updateInterface();
-
-	this.version = new TextBox(this.element);
-	this.version.position.set(50, 60);
+	this.form.addText("Version");
+	this.version = new TextBox(this.form.element);
 	this.version.size.set(100, 18);
-	this.version.updateInterface();
 	this.version.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -64,13 +49,13 @@ function ProgramPanel(parent)
 			self.obj.version = self.version.getText();
 		}
 	});
+	this.form.add(this.version);
+	this.form.nextRow();
 
 	//VR
-	this.vr = new CheckBox(this.element);
+	this.vr = new CheckBox(this.form.element);
 	this.vr.setText("VR Enabled");
-	this.vr.position.set(3, 85);
 	this.vr.size.set(50, 15);
-	this.vr.updateInterface();
 	this.vr.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -78,20 +63,15 @@ function ProgramPanel(parent)
 			self.obj.vr = self.vr.getValue();
 		}
 	});
+	this.form.add(this.vr);
+	this.form.nextRow();
 
 	//VR Movement Scale
-	var text = new Text(this.element);
-	text.setAlignment(Text.LEFT);
-	text.setText("VR Movement Scale");
-	text.position.set(5, 120);
-	text.updateInterface();
-
-	this.vr_scale = new NumberBox(this.element);
-	this.vr_scale.position.set(120, 110);
+	this.form.addText("VR Movement Scale");
+	this.vr_scale = new NumberBox(this.form.element);
 	this.vr_scale.size.set(50, 18);
 	this.vr_scale.setRange(0, 1000);
 	this.vr_scale.setStep(0.05);
-	this.vr_scale.updateInterface();
 	this.vr_scale.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -99,11 +79,14 @@ function ProgramPanel(parent)
 			self.obj.vr_scale = self.vr_scale.getValue();
 		}
 	});
+	this.form.add(this.vr_scale);
+
+	//Update form
+	this.form.updateInterface();
 }
 
 //Functions Prototype
 ProgramPanel.prototype = Object.create(Panel.prototype);
-ProgramPanel.prototype.attachObject = attachObject;
 ProgramPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
@@ -117,12 +100,4 @@ function updatePanel()
 		this.vr.setValue(this.obj.vr);
 		this.vr_scale.setValue(this.obj.vr_scale);
 	}
-}
-
-//Attach object to panel
-function attachObject(obj)
-{
-	this.obj = obj;
-	this.updatePanel();
-	this.updateInterface();
 }

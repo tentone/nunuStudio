@@ -18,13 +18,13 @@ function Form(parent)
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
+	this.enabled = true;
 	
 	//Elements attached
 	this.spacing = new THREE.Vector2(10, 10);
@@ -119,42 +119,51 @@ function updateInterface()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Updated attached elements
+	//Position and size trackers
 	var position = new THREE.Vector2(0, 0);
-	var size = new THREE.Vector2(0, 0);
+	var size = this.size.set(0, 0);
+
+	//Updated attached elements
 	for(var i = 0; i < this.rows.length; i++)
 	{
 		var max_size_y = 0;
 		for(var j = 0; j < this.rows[i].length; j++)
 		{
-			//Update elements
 			var element = this.rows[i][j];
-			element.position.set(position.x, position.y);
-			element.visible = this.visible;
-			element.updateInterface();
-
-			//Update position tracker
-			if(element.size.y > max_size_y)
+			
+			if(element.visible)
 			{
-				max_size_y = element.size.y;
+				//Update element
+				element.position.set(position.x, position.y);
+				element.visible = this.visible;
+				element.updateInterface();
+				
+				//Restore visibility
+				element.visible = true;
+
+				//Update position tracker
+				if(element.size.y > max_size_y)
+				{
+					max_size_y = element.size.y;
+				}
+				position.x += element.size.x + this.spacing.x;
 			}
-			position.x += element.size.x + this.spacing.x;
 		}
 
-		//Update form size X
+		//Update form size x
 		if(size.x < position.x)
 		{
 			size.x = position.x;
 		}
 
 		//Update position tracker
-		position.x = 0;
-		position.y += max_size_y + this.spacing.y;
+		if(position.x !== 0)
+		{
+			position.x = 0;
+			position.y += max_size_y + this.spacing.y;
+		}
 	}
 	size.y = position.y;
-	
-	//Update form size
-	this.size.copy(size);
 
 	//Update element
 	this.element.style.top = this.position.y + "px";

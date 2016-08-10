@@ -17,6 +17,8 @@ function Program(name)
 	this.description = "";
 	this.author = "";
 	this.version = "0";
+
+	//VR flags
 	this.vr = false;
 	this.vr_scale = 1;
 
