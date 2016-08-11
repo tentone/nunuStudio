@@ -8,8 +8,8 @@ include("lib/codemirror/addon/search/search.js");
 include("lib/codemirror/addon/search/searchcursor.js");
 include("lib/codemirror/addon/hint/show-hint.js");
 include("lib/codemirror/addon/hint/show-hint.css");
-include("lib/codemirror/addon/tern/tern.js");
-include("lib/codemirror/addon/tern/tern.css");
+include("lib/codemirror/addon/dialog/dialog.js");
+include("lib/codemirror/addon/dialog/dialog.css");
 include("lib/codemirror/mode/javascript.js");
 include("lib/codemirror/mode/glsl.js");
 include("lib/codemirror/codemirror.css");
@@ -117,7 +117,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.5 Alpha";
-Editor.TIMESTAMP = "201608111452";
+Editor.TIMESTAMP = "201608111729";
 
 //Initialize Main
 Editor.initialize = function(canvas)

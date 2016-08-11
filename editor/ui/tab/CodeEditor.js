@@ -34,14 +34,13 @@ function CodeEditor(parent)
 		indentWithTabs: true,
 		indentUnit: 4,
 		tabSize: 4,
-		hintOptions:
-		{
-			completeSingle: false
-		}
 	});
 	this.code.setOption("theme", Settings.code.theme);
 	this.code.setOption("mode", "javascript");
 	
+	//TODO <REMOVE THIS>
+	console.log(this.code);
+
 	//Set editor font size
 	this.font_size = Settings.code.font_size;
 	this.setFontSize(this.font_size);
@@ -100,7 +99,6 @@ function CodeEditor(parent)
 			self.code.execCommand("redo");
 		});
 	};
-
 
 	//Element atributes
 	this.fit_parent = false;
