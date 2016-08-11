@@ -27,9 +27,12 @@ Settings.render.antialiasing = true;
 //Code editor settings
 Settings.code = {};
 Settings.code.theme = "monokai";
+Settings.code.keymap = "sublime";
 Settings.code.font_size = 14;
 Settings.code.line_numbers = true;
+Settings.code.line_wrapping = false;
 Settings.code.auto_close_brackets = true;
+Settings.code.highlight_active_line = false;
 
 //Store settings file
 Settings.store = function()
@@ -53,7 +56,7 @@ Settings.load = function()
 	try
 	{
 		var data = JSON.parse(App.readFile("config"));
-
+		
 		//General
 		Settings.general.theme = data.general.theme;
 		Settings.general.file_preview_size = data.general.file_preview_size;
@@ -75,8 +78,11 @@ Settings.load = function()
 		//Code editor settings
 		Settings.code.theme = data.code.theme;
 		Settings.code.font_size = data.code.font_size;
+		Settings.code.keymap = data.code.keymap;
 		Settings.code.line_numbers = data.code.line_numbers;
+		Settings.code.line_wrapping = data.code.line_wrapping;
 		Settings.code.auto_close_brackets = data.code.auto_close_brackets;
+		Settings.code.highlight_active_line = data.code.highlight_active_line;
 	}
 	catch(e){}
 }
