@@ -95,6 +95,29 @@ Interface.initialize = function()
 		}, ".json");
 	});
 
+	//GLTF
+	/*import_models.addOption("GLTF", function()
+	{
+		App.chooseFile(function(fname)
+		{
+			try
+			{
+				var loader = new THREE.GLTFLoader();
+				var gltf = loader.parse(App.readFile(fname));
+				console.log(gltf);
+				if(gltf.scene !== undefined)
+				{
+					Editor.addToActualScene(gltf.scene);
+				}
+			}
+			catch(e)
+			{
+				alert("Error loading file\n("+e+")");
+			}
+		}, ".gltf");
+	});*/
+
+	//VRML
 	import_models.addOption("VRML", function()
 	{
 		App.chooseFile(function(fname)
@@ -115,6 +138,7 @@ Interface.initialize = function()
 		}, ".wrl, .vrml");
 	});
 
+	//FBX
 	import_models.addOption("FBX", function()
 	{
 		App.chooseFile(function(fname)
