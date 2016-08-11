@@ -2,17 +2,27 @@
 
 //External libs
 include("lib/codemirror/codemirror.js");
+include("lib/codemirror/codemirror.css");
+include("lib/codemirror/keymap/sublime.js");
+include("lib/codemirror/keymap/emacs.js");
+include("lib/codemirror/keymap/vim.js");
 include("lib/codemirror/addon/edit/closebrackets.js");
 include("lib/codemirror/addon/edit/matchbrackets.js");
 include("lib/codemirror/addon/search/search.js");
 include("lib/codemirror/addon/search/searchcursor.js");
+include("lib/codemirror/addon/search/jump-to-line.js");
 include("lib/codemirror/addon/hint/show-hint.js");
 include("lib/codemirror/addon/hint/show-hint.css");
+include("lib/codemirror/addon/hint/javascript-hint.js");
+include("lib/codemirror/addon/hint/anyword-hint.js");
 include("lib/codemirror/addon/dialog/dialog.js");
 include("lib/codemirror/addon/dialog/dialog.css");
+include("lib/codemirror/addon/selection/active-line.js");
+//include("lib/codemirror/addon/lint/lint.js");
+//include("lib/codemirror/addon/lint/lint.css");
+//include("lib/codemirror/addon/lint/javascript-lint.js");
 include("lib/codemirror/mode/javascript.js");
 include("lib/codemirror/mode/glsl.js");
-include("lib/codemirror/codemirror.css");
 include("lib/codemirror/theme/*");
 
 include("lib/jscolor.min.js");
@@ -117,7 +127,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.5 Alpha";
-Editor.TIMESTAMP = "201608111729";
+Editor.TIMESTAMP = "201608112326";
 
 //Initialize Main
 Editor.initialize = function(canvas)

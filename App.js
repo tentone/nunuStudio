@@ -16,10 +16,7 @@ include("lib/three/loaders/collada/KeyFrameAnimation.js");
 include("lib/three/effects/VREffect.js");
 
 include("lib/leap/leap-0.6.4.min.js");
-
 include("lib/cannon/cannon.min.js");
-include("lib/cannon/cannondebugrenderer.js");
-
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
 

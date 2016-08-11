@@ -238,8 +238,23 @@ function SettingsTab(parent)
 		this.code_theme.addValue(theme, theme);
 	}
 
+	//Code keymap
+	this.code_form.addText("Key bindings");
+	this.code_keymap = new DropdownList(this.code_form.element);
+	this.code_keymap.size.set(150, 20);
+	this.code_keymap.addValue("codemirror", "default");
+	this.code_keymap.addValue("sublime", "sublime");
+	this.code_keymap.addValue("vim", "vim");
+	this.code_keymap.addValue("emacs", "emacs");
+	this.code_keymap.setOnChange(function()
+	{
+		Settings.code.keymap = self.code_keymap.getValue();
+	});
+	this.code_form.add(this.code_keymap);
+	this.code_form.nextRow();
+
 	//Code font size
-	this.code_form.addText("Code size");
+	this.code_form.addText("Font size");
 	this.code_font_size = new NumberBox(this.code_form.element);
 	this.code_font_size.size.set(60, 18);
 	this.code_font_size.setRange(5, 99999);
@@ -253,7 +268,7 @@ function SettingsTab(parent)
 
 	//Show line numbers
 	this.code_line_numbers = new CheckBox(this.code_form.element);
-	this.code_line_numbers.setText("Show Line Numbers");
+	this.code_line_numbers.setText("Show line number");
 	this.code_line_numbers.size.set(200, 16);
 	this.code_line_numbers.setOnChange(function()
 	{
@@ -262,15 +277,37 @@ function SettingsTab(parent)
 	this.code_form.add(this.code_line_numbers);
 	this.code_form.nextRow();
 
+	//Line wrapping
+	this.code_line_wrapping = new CheckBox(this.code_form.element);
+	this.code_line_wrapping.setText("Line wrap");
+	this.code_line_wrapping.size.set(200, 16);
+	this.code_line_wrapping.setOnChange(function()
+	{
+		Settings.code.line_wrapping = self.code_line_wrapping.getValue();
+	});
+	this.code_form.add(this.code_line_wrapping);
+	this.code_form.nextRow();
+
 	//Auto close brackets
 	this.code_auto_close_brackets = new CheckBox(this.code_form.element);
-	this.code_auto_close_brackets.setText("Close brackets automatically");
+	this.code_auto_close_brackets.setText("Auto close brackets");
 	this.code_auto_close_brackets.size.set(200, 16);
 	this.code_auto_close_brackets.setOnChange(function()
 	{
 		Settings.code.auto_close_brackets = self.code_auto_close_brackets.getValue();
 	});
 	this.code_form.add(this.code_auto_close_brackets);
+	this.code_form.nextRow();
+
+	//Highlight active line
+	this.code_highlight_active_line = new CheckBox(this.code_form.element);
+	this.code_highlight_active_line.setText("Highlight line");
+	this.code_highlight_active_line.size.set(200, 16);
+	this.code_highlight_active_line.setOnChange(function()
+	{
+		Settings.code.highlight_active_line = self.code_highlight_active_line.getValue();
+	});
+	this.code_form.add(this.code_highlight_active_line);
 	this.code_form.nextRow();
 
 	//About
@@ -326,8 +363,11 @@ function activate()
 	//Code
 	this.code_theme.setValue(Settings.code.theme);
 	this.code_font_size.setValue(Settings.code.font_size);
+	this.code_keymap.setValue(Settings.code.keymap);
 	this.code_line_numbers.setValue(Settings.code.line_numbers);
+	this.code_line_wrapping.setValue(Settings.code.line_wrapping);
 	this.code_auto_close_brackets.setValue(Settings.code.auto_close_brackets);
+	this.code_highlight_active_line.setValue(Settings.code.highlight_active_line);
 }
 
 //Remove element
