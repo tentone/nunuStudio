@@ -79,10 +79,10 @@ function MaterialEditor(parent)
 	this.material = null;
 
 	//Material renderer and scene
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.antialiasing});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.render.antialiasing});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.renderer.shadowMap.enabled = Settings.shadows;
-	this.renderer.shadowMap.type = Settings.shadows_type;
+	this.renderer.shadowMap.enabled = Settings.render.shadows;
+	this.renderer.shadowMap.type = Settings.render.shadows_type;
 
 	//Material camera
 	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y, 0.1, 10000000);

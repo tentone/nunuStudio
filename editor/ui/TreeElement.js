@@ -23,7 +23,6 @@ function TreeElement(container)
 	this.element.style.position = "absolute";
 	this.element.style.width = container.size.x + "px";
 	this.element.style.height = "20px";
-
 	this.element.style.cursor = "default";
 	this.element.style.display = "flex";
 	this.element.style.alignItems = "center";
@@ -183,7 +182,7 @@ function TreeElement(container)
 		}
 	};
 
-	//Drag start
+	//Drag start (fired on the draggable object)
 	this.element.ondragstart = function(event)
 	{
 		if(!(self.obj instanceof Scene))
@@ -193,7 +192,7 @@ function TreeElement(container)
 		}
 	};
 
-	//Drag end (called after of ondrop)
+	//Drag end (fired on the draggable object, called after of ondrop on the drop target)
 	this.element.ondragend = function(event)
 	{
 		//Try to remove event from buffer
@@ -204,7 +203,7 @@ function TreeElement(container)
 		Mouse.updateKey(Mouse.LEFT, Key.KEY_UP);
 	};
 
-	//Drop event
+	//Drop event (fired on the drop target)
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
@@ -223,8 +222,14 @@ function TreeElement(container)
 		}
 	};
 
-	//Prevent deafault when object dragged over
+	//Object dragged over (fired on the drop target)
 	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
+	//Object drag leave (fired on the drop target)
+	this.element.ondragleave = function(event)
 	{
 		event.preventDefault();
 	};

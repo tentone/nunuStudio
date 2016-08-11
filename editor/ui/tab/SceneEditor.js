@@ -283,7 +283,7 @@ function updateInterface()
 	{
 		this.element.style.visibility = "visible";
 		this.canvas.style.visibility = "visible";
-		if(Settings.show_stats)
+		if(Settings.general.show_stats)
 		{
 			this.stats.dom.style.visibility = "visible";
 		}

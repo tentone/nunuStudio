@@ -6,9 +6,6 @@ function MaterialRenderer()
 	this.canvas = document.createElement("canvas");
 	this.canvas.width = 128;
 	this.canvas.height = 128;
-	this.canvas.style.width = "128px";
-	this.canvas.style.height = "128px";
-	this.canvas.style.position = "absolute";
 
 	//Material renderer and scene
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, alpha: true});

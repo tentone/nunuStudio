@@ -61,7 +61,7 @@ function ParticleEditor(parent)
 	this.visible = true;
 
 	//Particle renderer and scene
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.antialiasing});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.render.antialiasing});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 	this.renderer.shadowMap.enabled = false;
 	

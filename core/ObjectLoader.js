@@ -589,7 +589,10 @@ function parseObject(data, geometries, materials, textures)
 			{
 				object.initial_camera = data.initial_camera;
 			}
-			object.world.gravity.set(data.world.gravity.x, data.world.gravity.y, data.world.gravity.z);
+			if(data.world !== undefined)
+			{
+				object.world.gravity.set(data.world.gravity.x, data.world.gravity.y, data.world.gravity.z);
+			}
 			break;
 
 		case "PerspectiveCamera":
@@ -644,7 +647,6 @@ function parseObject(data, geometries, materials, textures)
 		case "SkinnedMesh":
 			var geometry = getGeometry(data.geometry);
 			var material = getMaterial(data.material);
-
 			if(geometry.bones && geometry.bones.length > 0)
 			{
 				object = new AnimatedModel(geometry, material);
@@ -653,7 +655,6 @@ function parseObject(data, geometries, materials, textures)
 			{
 				object = new Model3D(geometry, material);
 			}
-
 			break;
 
 		case "LOD":

@@ -24,7 +24,7 @@ Interface.initialize = function()
 
 	//Asset explorer
 	Interface.asset_explorer = new FileExplorer(Interface.asset_explorer_div.element);
-	Interface.asset_explorer.files_size.set(Settings.file_preview_size, Settings.file_preview_size);
+	Interface.asset_explorer.files_size.set(Settings.general.file_preview_size, Settings.general.file_preview_size);
 	
 	//Asset explorer menu bar
 	Interface.asset_explorer_bar = new Bar(Interface.asset_explorer_div.element);
