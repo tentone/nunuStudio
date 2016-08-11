@@ -64,7 +64,7 @@ function SettingsTab(parent)
 	this.theme.setOnChange(function()
 	{
 		var value = self.theme.getValue();
-		Settings.general_theme = value;
+		Settings.general.theme = value;
 	});
 	this.general_form.add(this.theme);
 	this.general_form.nextRow();
@@ -82,7 +82,7 @@ function SettingsTab(parent)
 	this.show_stats.size.set(200, 16);
 	this.show_stats.setOnChange(function()
 	{
-		Settings.show_stats = self.show_stats.getValue();
+		Settings.general.show_stats = self.show_stats.getValue();
 	});
 	this.general_form.add(this.show_stats);
 	this.general_form.nextRow();
@@ -101,8 +101,8 @@ function SettingsTab(parent)
 	this.grid_enabled.size.set(200, 16);
 	this.grid_enabled.setOnChange(function()
 	{
-		Settings.grid_enabled = self.grid_enabled.getValue();
-		Editor.grid_helper.visible = Settings.grid_enabled;
+		Settings.editor.grid_enabled = self.grid_enabled.getValue();
+		Editor.grid_helper.visible = Settings.editor.grid_enabled;
 	});
 	this.general_form.add(this.grid_enabled);
 	this.general_form.nextRow();
@@ -113,8 +113,8 @@ function SettingsTab(parent)
 	this.axis_enabled.size.set(200, 16);
 	this.axis_enabled.setOnChange(function()
 	{
-		Settings.axis_enabled = self.axis_enabled.getValue();
-		Editor.axis_helper.visible = Settings.axis_enabled;
+		Settings.editor.axis_enabled = self.axis_enabled.getValue();
+		Editor.axis_helper.visible = Settings.editor.axis_enabled;
 	});
 	this.general_form.add(this.axis_enabled);
 	this.general_form.nextRow();
@@ -125,7 +125,7 @@ function SettingsTab(parent)
 	this.camera_preview_enabled.size.set(200, 16);
 	this.camera_preview_enabled.setOnChange(function()
 	{
-		Settings.camera_preview_enabled = self.camera_preview_enabled.getValue();
+		Settings.editor.camera_preview_enabled = self.camera_preview_enabled.getValue();
 	});
 	this.general_form.add(this.camera_preview_enabled);
 	this.general_form.nextRow();
@@ -140,8 +140,8 @@ function SettingsTab(parent)
 	{
 		if(self.obj !== null)
 		{
-			Settings.camera_preview_percentage = self.camera_preview_percentage.getValue();
-			self.camera_preview_percentage_text.setText(Settings.camera_preview_percentage + "%");
+			Settings.editor.camera_preview_percentage = self.camera_preview_percentage.getValue();
+			self.camera_preview_percentage_text.setText(Settings.editor.camera_preview_percentage + "%");
 		}
 	});
 	this.general_form.add(this.camera_preview_percentage);
@@ -160,12 +160,12 @@ function SettingsTab(parent)
 	this.general_form.addText("Preview size");
 	this.file_preview_size = new NumberBox(this.general_form.element);
 	this.file_preview_size.size.set(60, 18);
-	this.file_preview_size.setRange(5, 99999);
+	this.file_preview_size.setRange(60, 500);
 	this.file_preview_size.setStep(1);
 	this.file_preview_size.setOnChange(function()
 	{
 		var value = self.file_preview_size.getValue();
-		Settings.file_preview_size = value;
+		Settings.general.file_preview_size = value;
 		Interface.asset_explorer.files_size.set(value, value);
 		Editor.updateAssetExplorer();
 	});
@@ -190,7 +190,7 @@ function SettingsTab(parent)
 	//this.shadows_type.addValue("PCSS Soft", THREE.PCSSSoftShadowMap);
 	this.shadows_type.setOnChange(function()
 	{
-		Settings.shadows_type = self.shadows_type.getValue();
+		Settings.render.shadows_type = self.shadows_type.getValue();
 	});
 	this.general_form.add(this.shadows_type);
 	this.general_form.nextRow();
@@ -201,7 +201,7 @@ function SettingsTab(parent)
 	this.antialiasing.size.set(200, 16);
 	this.antialiasing.setOnChange(function()
 	{
-		Settings.antialiasing = self.antialiasing.getValue();
+		Settings.render.antialiasing = self.antialiasing.getValue();
 	});
 	this.general_form.add(this.antialiasing);
 	this.general_form.nextRow();
@@ -225,7 +225,7 @@ function SettingsTab(parent)
 	this.code_theme.size.set(150, 20);
 	this.code_theme.setOnChange(function()
 	{
-		Settings.code_theme = self.code_theme.getValue();
+		Settings.code.theme = self.code_theme.getValue();
 	});
 	this.code_form.add(this.code_theme);
 	this.code_form.nextRow();
@@ -246,19 +246,31 @@ function SettingsTab(parent)
 	this.code_font_size.setStep(1);
 	this.code_font_size.setOnChange(function()
 	{
-		Settings.code_font_size = self.code_font_size.getValue();
+		Settings.code.font_size = self.code_font_size.getValue();
 	});
 	this.code_form.add(this.code_font_size);
 	this.code_form.nextRow();
 
+	//Show line numbers
 	this.code_line_numbers = new CheckBox(this.code_form.element);
 	this.code_line_numbers.setText("Show Line Numbers");
 	this.code_line_numbers.size.set(200, 16);
 	this.code_line_numbers.setOnChange(function()
 	{
-		Settings.code_line_numbers = self.code_line_numbers.getValue();
+		Settings.code.line_numbers = self.code_line_numbers.getValue();
 	});
 	this.code_form.add(this.code_line_numbers);
+	this.code_form.nextRow();
+
+	//Auto close brackets
+	this.code_auto_close_brackets = new CheckBox(this.code_form.element);
+	this.code_auto_close_brackets.setText("Close brackets automatically");
+	this.code_auto_close_brackets.size.set(200, 16);
+	this.code_auto_close_brackets.setOnChange(function()
+	{
+		Settings.code.auto_close_brackets = self.code_auto_close_brackets.getValue();
+	});
+	this.code_form.add(this.code_auto_close_brackets);
 	this.code_form.nextRow();
 
 	//About
@@ -295,22 +307,27 @@ function activate()
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
 
-	//General elements
-	this.theme.setValue(Settings.general_theme);
-	this.show_stats.setValue(Settings.show_stats);
-	this.grid_enabled.setValue(Settings.grid_enabled);
-	this.axis_enabled.setValue(Settings.axis_enabled);
-	this.camera_preview_enabled.setValue(Settings.camera_preview_enabled);
-	this.camera_preview_percentage.setValue(Settings.camera_preview_percentage);
-	this.camera_preview_percentage_text.setText(Settings.camera_preview_percentage + "%");
-	this.file_preview_size.setValue(Settings.file_preview_size);
-	this.shadows_type.setValue(Settings.shadows_type);
-	this.antialiasing.setValue(Settings.antialiasing);
+	//General
+	this.theme.setValue(Settings.general.theme);
+	this.file_preview_size.setValue(Settings.general.file_preview_size);
+	this.show_stats.setValue(Settings.general.show_stats);
 
-	//Code elements
-	this.code_theme.setValue(Settings.code_theme);
-	this.code_font_size.setValue(Settings.code_font_size);
-	this.code_line_numbers.setValue(Settings.code_line_numbers);
+	//Editor
+	this.grid_enabled.setValue(Settings.editor.grid_enabled);
+	this.axis_enabled.setValue(Settings.editor.axis_enabled);
+	this.camera_preview_enabled.setValue(Settings.editor.camera_preview_enabled);
+	this.camera_preview_percentage.setValue(Settings.editor.camera_preview_percentage);
+	this.camera_preview_percentage_text.setText(Settings.editor.camera_preview_percentage + "%");
+	
+	//Render
+	this.shadows_type.setValue(Settings.render.shadows_type);
+	this.antialiasing.setValue(Settings.render.antialiasing);
+
+	//Code
+	this.code_theme.setValue(Settings.code.theme);
+	this.code_font_size.setValue(Settings.code.font_size);
+	this.code_line_numbers.setValue(Settings.code.line_numbers);
+	this.code_auto_close_brackets.setValue(Settings.code.auto_close_brackets);
 }
 
 //Remove element

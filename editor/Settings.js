@@ -1,59 +1,45 @@
 "use strict";
 
+//Static function to store editor settings
 function Settings(){}
 
-//Appearance settings
-Settings.general_theme = "dark";
+//General settings
+Settings.general = {};
+Settings.general.theme = "dark";
+Settings.general.file_preview_size = 70;
+Settings.general.show_stats = true;
 
-//Debug settings
-Settings.show_stats = true;
+//Editor settings
+Settings.editor = {};
+Settings.editor.grid_size = 500;
+Settings.editor.grid_spacing = 5;
+Settings.editor.grid_enabled = true;
+Settings.editor.axis_enabled = true;
+Settings.editor.camera_preview_enabled = true;
+Settings.editor.camera_preview_percentage = 0.2;
 
-//Scene editor settings
-Settings.grid_size = 500;
-Settings.grid_spacing = 5;
-Settings.grid_enabled = true;
-Settings.axis_enabled = true;
-Settings.camera_preview_enabled = true;
-Settings.camera_preview_percentage = 0.2;
-
-//Asset explorer
-Settings.file_preview_size = 70;
-
-//Renderer settings
-Settings.shadows = true;
-Settings.shadows_type = THREE.PCFSoftShadowMap;
-Settings.antialiasing = true;
+//Render settings
+Settings.render = {};
+Settings.render.shadows = true;
+Settings.render.shadows_type = THREE.PCFSoftShadowMap;
+Settings.render.antialiasing = true;
 
 //Code editor settings
-Settings.code_theme = "monokai";
-Settings.code_font_size = 14;
-Settings.code_line_numbers = true;
+Settings.code = {};
+Settings.code.theme = "monokai";
+Settings.code.font_size = 14;
+Settings.code.line_numbers = true;
+Settings.code.auto_close_brackets = true;
 
 //Store settings file
 Settings.store = function()
 {
 	var data = JSON.stringify(
 	{
-		general_theme: Settings.general_theme,
-
-		show_stats: Settings.show_stats,
-
-		grid_size: Settings.grid_size,
-		grid_spacing: Settings.grid_spacing,
-		grid_enabled: Settings.grid_enabled,
-		axis_enabled: Settings.axis_enabled,
-		camera_preview_enabled: Settings.camera_preview_enabled,
-		camera_preview_percentage: Settings.camera_preview_percentage,
-
-		file_preview_size: Settings.file_preview_size,
-
-		shadows: Settings.shadows,
-		shadows_type: Settings.shadows_type,
-		antialiasing: Settings.antialiasing,
-
-		code_theme: Settings.code_theme,
-		code_font_size: Settings.code_font_size,
-		code_line_numbers: Settings.code_line_numbers
+		general: Settings.general,
+		editor: Settings.editor,
+		render: Settings.render,
+		code: Settings.code
 	}, null, "\t");
 
 	data.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
@@ -68,26 +54,29 @@ Settings.load = function()
 	{
 		var data = JSON.parse(App.readFile("config"));
 
-		Settings.general_theme = data.general_theme;
+		//General
+		Settings.general.theme = data.general.theme;
+		Settings.general.file_preview_size = data.general.file_preview_size;
+		Settings.general.show_stats = data.general.show_stats;
 
-		Settings.show_stats = data.show_stats;
+		//Editor
+		Settings.editor.grid_size = data.editor.grid_size;
+		Settings.editor.grid_spacing = data.editor.grid_spacing;
+		Settings.editor.grid_enabled = data.editor.grid_enabled;
+		Settings.editor.axis_enabled = data.editor.axis_enabled;
+		Settings.editor.camera_preview_enabled = data.editor.camera_preview_enabled;
+		Settings.editor.camera_preview_percentage = data.editor.camera_preview_percentage;
 
-		Settings.grid_size = data.grid_size;
-		Settings.grid_spacing = data.grid_spacing;
-		Settings.grid_enabled = data.grid_enabled;
-		Settings.axis_enabled = data.axis_enabled;
-		Settings.camera_preview_enabled = data.camera_preview_enabled;
-		Settings.camera_preview_percentage = data.camera_preview_percentage;
+		//Render settings
+		Settings.render.shadows = data.render.shadows;
+		Settings.render.shadows_type = data.render.shadows_type;
+		Settings.render.antialiasing = data.render.antialiasing;
 
-		Settings.file_preview_size = data.file_preview_size;
-
-		Settings.shadows = data.shadows;
-		Settings.shadows_type = data.shadows_type;
-		Settings.antialiasing = data.antialiasing;
-
-		Settings.code_theme = data.code_theme;
-		Settings.code_font_size = data.code_font_size;
-		Settings.code_line_numbers = data.code_line_numbers;
+		//Code editor settings
+		Settings.code.theme = data.code.theme;
+		Settings.code.font_size = data.code.font_size;
+		Settings.code.line_numbers = data.code.line_numbers;
+		Settings.code.auto_close_brackets = data.code.auto_close_brackets;
 	}
 	catch(e){}
 }
