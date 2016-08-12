@@ -125,6 +125,30 @@ function MaterialFile(parent)
 				catch(e){}
 			}
 		});
+
+		context.addOption("Duplicate", function()
+		{
+			if(self.material !== null)
+			{
+				try
+				{
+					var json = self.material.toJSON();
+					var loader = new ObjectLoader();
+					var images = loader.parseImages(json.images);
+					var textures = loader.parseTextures(json.textures, images);
+					loader = new THREE.MaterialLoader();
+					loader.setTextures(textures);
+					var material = loader.parse(json); 
+					material.uuid = THREE.Math.generateUUID();
+					Editor.program.addMaterial(material);
+					Editor.updateAssetExplorer();
+				}
+				catch(e)
+				{
+					alert("Material duplication failed\n(" + e + ")");
+				}
+			}
+		});
 	};
 
 	//Drag start

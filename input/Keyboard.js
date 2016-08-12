@@ -82,17 +82,21 @@ Keyboard.isKeyJustReleased = function(key)
 }
 
 //Some Keycodes
+Keyboard.BACKSPACE = 8;
+Keyboard.TAB = 9;
 Keyboard.ENTER = 13;
 Keyboard.SHIFT = 16;
+Keyboard.CTRL = 17;
+Keyboard.ALT = 18;
+Keyboard.CAPS_LOCK = 20;
 Keyboard.ESC = 27;
 Keyboard.SPACEBAR = 32;
-Keyboard.CTRL = 17;
-Keyboard.DEL = 46;
-Keyboard.END = 35;
-Keyboard.HOME = 36;
-
 Keyboard.PAGE_UP = 33;
 Keyboard.PAGE_DOWN = 34;
+Keyboard.END = 35;
+Keyboard.HOME = 36;
+Keyboard.INSERT = 45;
+Keyboard.DEL = 46;
 
 Keyboard.LEFT = 37;
 Keyboard.RIGHT = 39;

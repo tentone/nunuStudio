@@ -38,7 +38,10 @@ function CodeEditor(parent)
 		indentWithTabs: true,
 		indentUnit: 4,
 		tabSize: 4,
-		hint: CodeMirror.hint.javascript
+		hintOptions:
+		{
+			hint: CodeMirror.hint.anyword
+		}
 	});
 	this.code.setOption("theme", Settings.code.theme);
 	this.code.setOption("mode", "javascript");
@@ -49,11 +52,18 @@ function CodeEditor(parent)
 	//Self pointer
 	var self = this;
 
-	//Codemirror onchange event
-	/*this.code.on("change", function()
+	//Keyup
+	this.code.on("keydown", function(code, event)
 	{
-		self.updateScript();
-	});*/
+		var key = event.keyCode;
+		if(key >= Keyboard.A && key <= Keyboard.Z)
+		{
+			if(!code.state.completionActive)
+			{
+				CodeMirror.commands.autocomplete(code, null, {completeSingle: false});
+			}
+		}
+	});
 
 	//Context menu event
 	this.element.oncontextmenu = function()
