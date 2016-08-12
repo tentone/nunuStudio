@@ -1,6 +1,6 @@
 "use strict";
 
-//External libs
+//Codemirror
 include("lib/codemirror/codemirror.js");
 include("lib/codemirror/codemirror.css");
 include("lib/codemirror/keymap/sublime.js");
@@ -20,6 +20,17 @@ include("lib/codemirror/addon/selection/active-line.js");
 include("lib/codemirror/mode/javascript.js");
 include("lib/codemirror/mode/glsl.js");
 include("lib/codemirror/theme/*");
+
+//Threejs
+include("lib/three/loaders/OBJLoader.js");
+include("lib/three/loaders/MTLLoader.js");
+include("lib/three/loaders/VRMLLoader.js");
+include("lib/three/loaders/FBXLoader.js");
+include("lib/three/loaders/GLTFLoader.js");
+include("lib/three/loaders/ColladaLoader.js");
+include("lib/three/loaders/collada/Animation.js");
+include("lib/three/loaders/collada/AnimationHandler.js");
+include("lib/three/loaders/collada/KeyFrameAnimation.js");
 
 include("lib/jscolor.min.js");
 
@@ -123,7 +134,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.5 Alpha";
-Editor.TIMESTAMP = "201608120354";
+Editor.TIMESTAMP = "201608121926";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -1113,10 +1124,11 @@ Editor.setRenderCanvas = function(canvas)
 Editor.initializeRenderer = function(canvas)
 {
 	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: Settings.render.antialiasing});
+	Editor.renderer.setSize(canvas.width, canvas.height);
+	Editor.renderer.setPixelRatio(window.devicePixelRatio || 1.0);
 	Editor.renderer.autoClear = false;
 	Editor.renderer.shadowMap.enabled = Settings.render.shadows;
 	Editor.renderer.shadowMap.type = Settings.render.shadows_type;
-	Editor.renderer.setSize(canvas.width, canvas.height);
 }
 
 //Exit editor

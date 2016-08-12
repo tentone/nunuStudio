@@ -39,29 +39,28 @@ function Form(parent)
 Form.id = 0;
 
 //Functions Prototype
-Form.prototype.update = update;
-Form.prototype.updateInterface = updateInterface;
-Form.prototype.destroy = destroy;
-Form.prototype.nextRow = nextRow;
 Form.prototype.add = add;
 Form.prototype.addText = addText;
 Form.prototype.addDivision = addDivision;
+Form.prototype.nextRow = nextRow;
+Form.prototype.removeLastRow = removeLastRow;
+Form.prototype.update = update;
+Form.prototype.updateInterface = updateInterface;
+Form.prototype.destroy = destroy;
 
-//Add new row to form
-function nextRow()
+//Add a element to form (in actual row)
+function add(elem)
 {
-	this.rows.push([]);
-}
+	if(this.rows.length > 0)
+	{
+		this.rows[this.rows.length - 1].push(elem);
 
-//Create div element and add to form
-function addDivision(x, y)
-{
-	var division = new Division(this.element);
-	division.size.set(x, y);
-
-	this.add(division);
-
-	return division;
+		if(elem.parent !== this.element)
+		{
+			elem.parent = this.element;
+			this.element.appendChild(elem.element);
+		}
+	}
 }
 
 //Create text element and add to form
@@ -78,17 +77,33 @@ function addText(text)
 	return element;
 }
 
-//Add a element to form (in actual row)
-function add(elem)
+//Create div element and add to form
+function addDivision(x, y)
+{
+	var division = new Division(this.element);
+	division.size.set(x, y);
+
+	this.add(division);
+
+	return division;
+}
+
+//Add new row to form
+function nextRow()
+{
+	this.rows.push([]);
+}
+
+//Add last row from form
+function removeLastRow()
 {
 	if(this.rows.length > 0)
 	{
-		this.rows[this.rows.length - 1].push(elem);
+		var row = this.rows.pop();
 
-		if(elem.parent !== this.element)
+		for(var i = 0; i < row.length; i++)
 		{
-			elem.parent = this.element;
-			this.element.appendChild(elem.element);
+			row[i].destroy();
 		}
 	}
 }

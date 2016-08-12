@@ -39,7 +39,10 @@ function update()
 function dispose()
 {
 	//Dipose material and geometry
-	this.material.dispose();
+	if(this.material.dispose !== undefined)
+	{
+		this.material.dispose();
+	}
 	this.geometry.dispose();
 
 	//Dipose children

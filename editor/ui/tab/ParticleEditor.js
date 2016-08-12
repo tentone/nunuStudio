@@ -316,20 +316,62 @@ function ParticleEditor(parent)
 	
 	//Opacity
 	this.form.addText("Opacity");
-	//TODO <ADD CODE HERE>
+	this.form.nextRow();
+	this.opacity = new Form(this.form.element);
+	this.form.add(this.opacity);
+	this.form.nextRow();
+	this.opacity_add = new Button(this.form.element);
+	this.opacity_add.size.set(60, 20);
+	this.opacity_add.setText("Add");
+	this.opacity_add.setCallback(function()
+	{
+		self.opacity.nextRow();
+		self.opacity.addText("     0");
+		var box = new NumberBox(self.form.element);
+		box.size.set(60, 18);
+		box.setRange(0, 1);
+		box.setStep(0.1);
+		box.setOnChange(function()
+		{
+			//TODO <ADD CODE HERE>
+		});
+		self.opacity.add(box);
+		self.opacity.addText("+/-");
+		var box = new NumberBox(self.form.element);
+		box.size.set(60, 18);
+		box.setRange(0, 1);
+		box.setStep(0.1);
+		box.setOnChange(function()
+		{
+			//TODO <ADD CODE HERE>
+		});
+		self.opacity.add(box);
+		self.form.updateInterface();
+	});
+	this.form.add(this.opacity_add);
+	this.opacity_remove = new Button(this.form.element);
+	this.opacity_remove.size.set(80, 20);
+	this.opacity_remove.setText("Remove");
+	this.opacity_remove.setCallback(function()
+	{
+		self.opacity.removeLastRow();
+		self.opacity.updateInterface();
+		self.form.updateInterface();
+	});
+	this.form.add(this.opacity_remove);
 	this.form.nextRow();
 
 	//Size
-	this.form.addText("Scale");
-	this.form.nextRow();
+	//this.form.addText("Scale");
+	//this.form.nextRow();
 
 	//Angle
-	this.form.addText("Rotation");
-	this.form.nextRow();
+	//this.form.addText("Rotation");
+	//this.form.nextRow();
 
 	//Color
-	this.form.addText("Color");
-	this.form.nextRow();
+	//this.form.addText("Color");
+	//this.form.nextRow();
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -391,6 +433,9 @@ function attachParticle(particle)
 	this.acceleration_spread.setValue(particle.emitter.acceleration.spread);
 	this.wiggle_value.setValue(particle.emitter.wiggle.value);
 	this.wiggle_spread.setValue(particle.emitter.wiggle.spread);
+
+	//particle.emitter.opacity.value;
+	//particle.emitter.opacity.spread;
 
 	//Create runtime particle to preview particle
 	this.updateRuntimeParticle();

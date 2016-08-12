@@ -8,12 +8,6 @@ Main.app = "app.isp";
 //Initialize Main
 Main.initialize = function(canvas)
 {
-	//Correct device pixel ratio
-	/*var meta = document.createElement("meta");
-	meta.name = "viewport";
-	meta.content = "initial-scale=" + (1.0 / window.devicePixelRatio) + ", user-scalable=no";
-	document.head.appendChild(meta);*/
-
 	//Set mouse lock false
 	App.setMouseLock(false);
 
@@ -48,6 +42,7 @@ Main.initialize = function(canvas)
 	Main.renderer.autoClear = false;
 	Main.renderer.shadowMap.enabled = true;
 	Main.renderer.shadowMap.type = THREE.PCFShadowMap;
+	Main.renderer.setPixelRatio(window.devicePixelRatio || 1.0);
 	Main.renderer.setSize(Main.canvas.width, Main.canvas.height);
 
 	//Initialize program

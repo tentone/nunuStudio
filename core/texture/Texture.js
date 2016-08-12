@@ -7,9 +7,6 @@ function Texture(url)
 	this.img = document.createElement("img");
 	this.img.src = url;
 
-	//Source URL
-	this.url = url;
-
 	//Create Texture part of object
 	THREE.Texture.call(this, this.img);
 
@@ -36,6 +33,7 @@ function toJSON(meta)
 	function getDataURL(image)
 	{
 		var canvas;
+		var transparent = false;
 
 		if(image.toDataURL !== undefined)
 		{
@@ -46,16 +44,29 @@ function toJSON(meta)
 			canvas = document.createElement("canvas");
 			canvas.width = image.width;
 			canvas.height = image.height;
-			canvas.getContext("2d").drawImage(image, 0, 0, image.width, image.height);
+
+			var context = canvas.getContext("2d");
+			context.drawImage(image, 0, 0, image.width, image.height);
+			var data = context.getImageData(0, 0, image.width, image.height).data;
+
+			//Check image transparency
+			for(var i = 0; i < data.length; i += 4)
+			{
+				if(data[i] !== 255)
+				{
+					transparent = true;
+					break;
+				}
+			}
 		}
 
-		if(canvas.width > 2048 || canvas.height > 2048)
+		if(transparent)
 		{
-			return canvas.toDataURL("image/jpeg", 0.6);
+			return canvas.toDataURL("image/png");
 		}
 		else
 		{
-			return canvas.toDataURL("image/png");
+			return canvas.toDataURL("image/jpeg", 0.8);
 		}
 	}
 
@@ -78,7 +89,9 @@ function toJSON(meta)
 
 		minFilter: this.minFilter,
 		magFilter: this.magFilter,
-		anisotropy: this.anisotropy
+		anisotropy: this.anisotropy,
+
+		flipY: this.flipY
 	};
 
 	if(this.image !== undefined)
