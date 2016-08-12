@@ -13,14 +13,10 @@ include("lib/codemirror/addon/search/searchcursor.js");
 include("lib/codemirror/addon/search/jump-to-line.js");
 include("lib/codemirror/addon/hint/show-hint.js");
 include("lib/codemirror/addon/hint/show-hint.css");
-include("lib/codemirror/addon/hint/javascript-hint.js");
 include("lib/codemirror/addon/hint/anyword-hint.js");
 include("lib/codemirror/addon/dialog/dialog.js");
 include("lib/codemirror/addon/dialog/dialog.css");
 include("lib/codemirror/addon/selection/active-line.js");
-//include("lib/codemirror/addon/lint/lint.js");
-//include("lib/codemirror/addon/lint/lint.css");
-//include("lib/codemirror/addon/lint/javascript-lint.js");
 include("lib/codemirror/mode/javascript.js");
 include("lib/codemirror/mode/glsl.js");
 include("lib/codemirror/theme/*");
@@ -127,7 +123,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.5 Alpha";
-Editor.TIMESTAMP = "201608112326";
+Editor.TIMESTAMP = "201608120354";
 
 //Initialize Main
 Editor.initialize = function(canvas)
