@@ -132,18 +132,31 @@ function MaterialFile(parent)
 			{
 				try
 				{
+					//Object loader
 					var json = self.material.toJSON();
 					var loader = new ObjectLoader();
+
+					//Load images
 					var images = loader.parseImages(json.images);
+					for(var i = 0; i < images.length; i++)
+					{
+						images[i].uuid = THREE.Math.generateUUID();
+					}
+
+					//Load textures
 					var textures = loader.parseTextures(json.textures, images);
-					for(var i = 0; i < textures.length; i++)
+					for(i = 0; i < textures.length; i++)
 					{
 						textures[i].uuid = THREE.Math.generateUUID();
 					}
+
+					//Load Material
 					loader = new THREE.MaterialLoader();
 					loader.setTextures(textures);
 					var material = loader.parse(json); 
 					material.uuid = THREE.Math.generateUUID();
+					
+					//Add material
 					Editor.program.addMaterial(material);
 					Editor.updateAssetExplorer();
 				}
