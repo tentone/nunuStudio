@@ -136,6 +136,10 @@ function MaterialFile(parent)
 					var loader = new ObjectLoader();
 					var images = loader.parseImages(json.images);
 					var textures = loader.parseTextures(json.textures, images);
+					for(var i = 0; i < textures.length; i++)
+					{
+						textures[i].uuid = THREE.Math.generateUUID();
+					}
 					loader = new THREE.MaterialLoader();
 					loader.setTextures(textures);
 					var material = loader.parse(json); 
