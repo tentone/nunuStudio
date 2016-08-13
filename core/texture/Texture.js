@@ -32,12 +32,13 @@ function toJSON(meta)
 
 	function getDataURL(image)
 	{
-		var canvas;
-		var transparent = false;
+		var canvas, context;
+		
 
 		if(image.toDataURL !== undefined)
 		{
 			canvas = image;
+			context = canvas.getContext("2d");
 		}
 		else
 		{
@@ -45,18 +46,18 @@ function toJSON(meta)
 			canvas.width = image.width;
 			canvas.height = image.height;
 
-			var context = canvas.getContext("2d");
+			context = canvas.getContext("2d");
 			context.drawImage(image, 0, 0, image.width, image.height);
-			var data = context.getImageData(0, 0, image.width, image.height).data;
-
-			//Check image transparency
-			for(var i = 0; i < data.length; i += 4)
+		}
+		
+		var transparent = false;
+		var data = context.getImageData(0, 0, image.width, image.height).data;
+		for(var i = 0; i < data.length; i += 4)
+		{
+			if(data[i] !== 255)
 			{
-				if(data[i] !== 255)
-				{
-					transparent = true;
-					break;
-				}
+				transparent = true;
+				break;
 			}
 		}
 

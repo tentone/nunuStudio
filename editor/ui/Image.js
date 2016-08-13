@@ -19,18 +19,7 @@ function Image(parent)
 	//Create element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
-
-	//Prevent Drop event
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
+	this.element.style.pointerEvents = "none";
 
 	//Image
 	this.img = document.createElement("img");

@@ -10,7 +10,7 @@
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,
-		"camera_preview_percentage": "0.3"
+		"camera_preview_percentage": 0.2
 	},
 	"render": {
 		"shadows": true,
@@ -20,7 +20,7 @@
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"font_size": 26,
+		"font_size": 14,
 		"line_numbers": true,
 		"line_wrapping": false,
 		"auto_close_brackets": true,

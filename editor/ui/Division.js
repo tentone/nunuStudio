@@ -22,20 +22,9 @@ function Division(parent)
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
 	this.element.style.cursor = "default";
+	this.element.style.pointerEvents = "none";
 	this.element.style.backgroundColor = Editor.theme.panel_color;
 
-	//Prevent Drop event
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
-	
 	//Element atributes
 	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);

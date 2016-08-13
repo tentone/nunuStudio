@@ -109,12 +109,13 @@ function destroy()
 	try
 	{
 		this.parent.removeChild(this.element);
-		for(var i = 0; i < this.children.length; i++)
-		{
-			this.children[i].destroy();
-		}
 	}
 	catch(e){}
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].destroy();
+	}
 }
 
 //Update status

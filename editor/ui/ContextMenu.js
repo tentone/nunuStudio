@@ -65,17 +65,17 @@ function setText(text)
 
 //Remove element
 function destroy()
-{
-	for(var k = 0; k < this.options.length; k++)
-	{
-		this.options[k].destroy();
-	}
-	
+{	
 	try
 	{
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
+
+	for(var k = 0; k < this.options.length; k++)
+	{
+		this.options[k].destroy();
+	}
 }
 
 //Update

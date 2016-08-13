@@ -222,7 +222,7 @@ function SettingsTab(parent)
 	//Code Theme
 	this.code_form.addText("Editor theme");
 	this.code_theme = new DropdownList(this.code_form.element);
-	this.code_theme.size.set(150, 20);
+	this.code_theme.size.set(120, 20);
 	this.code_theme.setOnChange(function()
 	{
 		Settings.code.theme = self.code_theme.getValue();
@@ -241,7 +241,7 @@ function SettingsTab(parent)
 	//Code keymap
 	this.code_form.addText("Key bindings");
 	this.code_keymap = new DropdownList(this.code_form.element);
-	this.code_keymap.size.set(150, 20);
+	this.code_keymap.size.set(120, 20);
 	this.code_keymap.addValue("codemirror", "default");
 	this.code_keymap.addValue("sublime", "sublime");
 	this.code_keymap.addValue("vim", "vim");

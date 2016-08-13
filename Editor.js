@@ -133,8 +133,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.5 Alpha";
-Editor.TIMESTAMP = "201608121926";
+Editor.VERSION = "V0.8.9.6 Alpha";
+Editor.TIMESTAMP = "201608130329";
 
 //Initialize Main
 Editor.initialize = function(canvas)
