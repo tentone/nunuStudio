@@ -64,8 +64,8 @@ function ParticleEmitter(group, emitter)
 
 			color:
 			{
-				value: [new THREE.Color(1, 1, 1), new THREE.Color(0, 0, 0)],
-				spread: [new THREE.Vector3(0, 0, 0), new THREE.Vector3(1, 1, 1)]
+				value: [new THREE.Color(1, 1, 1)],
+				spread: [new THREE.Vector3(0, 0, 0)]
 			}
 		});
 	}

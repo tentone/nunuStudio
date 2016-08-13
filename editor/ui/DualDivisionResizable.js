@@ -132,8 +132,8 @@ function destroy()
 {
 	try
 	{
-		this.parent.removeChild(this.resize_tab);
 		this.parent.removeChild(this.element);
+		this.parent.removeChild(this.resize_tab);
 	}
 	catch(e){}
 }

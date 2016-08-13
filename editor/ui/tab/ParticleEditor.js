@@ -317,61 +317,184 @@ function ParticleEditor(parent)
 	//Opacity
 	this.form.addText("Opacity");
 	this.form.nextRow();
-	this.opacity = new Form(this.form.element);
-	this.form.add(this.opacity);
-	this.form.nextRow();
-	this.opacity_add = new Button(this.form.element);
-	this.opacity_add.size.set(60, 20);
-	this.opacity_add.setText("Add");
-	this.opacity_add.setCallback(function()
+	this.opacity_value = [];
+	this.opacity_spread = [];
+	function addOpacityValue(index)
 	{
-		self.opacity.nextRow();
-		self.opacity.addText("     0");
-		var box = new NumberBox(self.form.element);
-		box.size.set(60, 18);
-		box.setRange(0, 1);
-		box.setStep(0.1);
-		box.setOnChange(function()
+		return function()
 		{
-			//TODO <ADD CODE HERE>
-		});
-		self.opacity.add(box);
-		self.opacity.addText("+/-");
-		var box = new NumberBox(self.form.element);
-		box.size.set(60, 18);
-		box.setRange(0, 1);
-		box.setStep(0.1);
-		box.setOnChange(function()
-		{
-			//TODO <ADD CODE HERE>
-		});
-		self.opacity.add(box);
-		self.form.updateInterface();
-	});
-	this.form.add(this.opacity_add);
-	this.opacity_remove = new Button(this.form.element);
-	this.opacity_remove.size.set(80, 20);
-	this.opacity_remove.setText("Remove");
-	this.opacity_remove.setCallback(function()
+			self.particle.emitter.opacity.value[index] = self.opacity_value[index].getValue();
+			self.updateRuntimeParticle();
+		};
+	}
+	function addOpacitySpread(index)
 	{
-		self.opacity.removeLastRow();
-		self.opacity.updateInterface();
-		self.form.updateInterface();
-	});
-	this.form.add(this.opacity_remove);
-	this.form.nextRow();
+		return function()
+		{
+			self.particle.emitter.opacity.spread[index] = self.opacity_spread[index].getValue();
+			self.updateRuntimeParticle();
+		};
+	}
+	for(var i = 0; i < 4; i++)
+	{
+		this.form.addText((25*i + 25) + "%");
+
+		var value = new NumberBox(self.form.element);
+		value.size.set(40, 18);
+		value.setRange(0, 1.0);
+		value.setStep(0.1);
+		value.setOnChange(addOpacityValue(i));
+
+		this.opacity_value[i] = value;
+		this.form.add(value);
+		this.form.addText("+/-");
+
+		var spread = new NumberBox(self.form.element);
+		spread.size.set(40, 18);
+		spread.setRange(0, 1.0);
+		spread.setStep(0.1);
+		spread.setOnChange(addOpacitySpread(i));
+
+		this.opacity_spread[i] = spread;
+		this.form.add(spread);
+		this.form.nextRow();
+	}
 
 	//Size
-	//this.form.addText("Scale");
-	//this.form.nextRow();
+	this.form.addText("Size");
+	this.form.nextRow();
+	this.size_value = [];
+	this.size_spread = [];
+	function addSizeValue(index)
+	{
+		return function()
+		{
+			self.particle.emitter.size.value[index] = self.size_value[index].getValue();
+			self.updateRuntimeParticle();
+		};
+	}
+	function addSizeSpread(index)
+	{
+		return function()
+		{
+			self.particle.emitter.size.spread[index] = self.size_spread[index].getValue();
+			self.updateRuntimeParticle();
+		};
+	}
+	for(var i = 0; i < 4; i++)
+	{
+		this.form.addText((25*i + 25) + "%");
+
+		var value = new NumberBox(self.form.element);
+		value.size.set(40, 18);
+		value.setStep(0.1);
+		value.setOnChange(addSizeValue(i));
+
+		this.size_value[i] = value;
+		this.form.add(value);
+		this.form.addText("+/-");
+
+		var spread = new NumberBox(self.form.element);
+		spread.size.set(40, 18);
+		spread.setStep(0.1);
+		spread.setOnChange(addSizeSpread(i));
+
+		this.size_spread[i] = spread;
+		this.form.add(spread);
+		this.form.nextRow();
+	}
 
 	//Angle
-	//this.form.addText("Rotation");
-	//this.form.nextRow();
+	this.form.addText("Rotation");
+	this.form.nextRow();
+	this.angle_value = [];
+	this.angle_spread = [];
+	function addAngleValue(index)
+	{
+		return function()
+		{
+			self.particle.emitter.angle.value[index] = self.angle_value[index].getValue();
+			self.updateRuntimeParticle();
+		};
+	}
+	function addAngleSpread(index)
+	{
+		return function()
+		{
+			self.particle.emitter.angle.spread[index] = self.angle_spread[index].getValue();
+			self.updateRuntimeParticle();
+		};
+	}
+	for(var i = 0; i < 4; i++)
+	{
+		this.form.addText((25*i + 25) + "%");
+		
+		var value = new NumberBox(self.form.element);
+		value.size.set(40, 18);
+		value.setStep(0.1);
+		value.setOnChange(addAngleValue(i));
+
+		this.angle_value[i] = value;
+		this.form.add(value);
+		this.form.addText("+/-");
+
+		var spread = new NumberBox(self.form.element);
+		spread.size.set(40, 18);
+		spread.setStep(0.1);
+		spread.setOnChange(addAngleSpread(i));
+
+		this.angle_spread[i] = spread;
+		this.form.add(spread);
+		this.form.nextRow();
+	}
 
 	//Color
-	//this.form.addText("Color");
-	//this.form.nextRow();
+	this.form.addText("Color");
+	this.form.nextRow();
+	this.color_value = [];
+	this.color_spread = [];
+	function addColorValue(index)
+	{
+		return function()
+		{
+			var color = self.color_value[index].getValue();
+			self.particle.emitter.color.value[index].r = color.r;
+			self.particle.emitter.color.value[index].g = color.g;
+			self.particle.emitter.color.value[index].b = color.b;
+			self.updateRuntimeParticle();
+		};
+	}
+	function addColorSpread(index)
+	{
+		return function()
+		{
+			var color = self.color_spread[index].getValue();
+			self.particle.emitter.color.spread[index].x = color.r;
+			self.particle.emitter.color.spread[index].y = color.g;
+			self.particle.emitter.color.spread[index].z = color.b;
+			self.updateRuntimeParticle();
+		};
+	}
+	for(var i = 0; i < 4; i++)
+	{
+		this.form.addText((25*i + 25) + "%");
+		
+		var value = new ColorChooser(self.form.element);
+		value.size.set(80, 18);
+		value.setOnChange(addColorValue(i));
+
+		this.color_value[i] = value;
+		this.form.add(value);
+		this.form.addText("+/-");
+
+		var spread = new ColorChooser(self.form.element);
+		spread.size.set(80, 18);
+		spread.setOnChange(addColorSpread(i));
+
+		this.color_spread[i] = spread;
+		this.form.add(spread);
+		this.form.nextRow();
+	}
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -433,9 +556,19 @@ function attachParticle(particle)
 	this.acceleration_spread.setValue(particle.emitter.acceleration.spread);
 	this.wiggle_value.setValue(particle.emitter.wiggle.value);
 	this.wiggle_spread.setValue(particle.emitter.wiggle.spread);
-
-	//particle.emitter.opacity.value;
-	//particle.emitter.opacity.spread;
+	for(var i = 0; i < 4; i++)
+	{
+		this.opacity_value[i].setValue(particle.emitter.opacity.value[i]);
+		this.opacity_spread[i].setValue(particle.emitter.opacity.spread[i]);
+		this.size_value[i].setValue(particle.emitter.size.value[i]);
+		this.size_spread[i].setValue(particle.emitter.size.spread[i]);
+		this.angle_value[i].setValue(particle.emitter.angle.value[i]);
+		this.angle_spread[i].setValue(particle.emitter.angle.spread[i]);
+		var value = particle.emitter.color.value[i];
+		this.color_value[i].setValue(value.r, value.g, value.b);
+		var spread = particle.emitter.color.spread[i];
+		this.color_spread[i].setValue(spread.x, spread.y, spread.z);
+	}
 
 	//Create runtime particle to preview particle
 	this.updateRuntimeParticle();
