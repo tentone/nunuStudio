@@ -35,6 +35,7 @@ include("lib/three/loaders/collada/KeyFrameAnimation.js");
 include("lib/jscolor.min.js");
 
 //Internal modules
+include("editor/ui/Graph.js");
 include("editor/ui/Bar.js");
 include("editor/ui/Button.js");
 include("editor/ui/DropdownMenu.js");
@@ -134,7 +135,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608131817";
+Editor.TIMESTAMP = "201608140109";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -146,6 +147,9 @@ Editor.initialize = function(canvas)
 
 	//Load settings
 	Settings.load();
+
+	//Load interface theme
+	Editor.theme = Theme.get(Settings.general.theme);
 
 	//Set windows close event
 	if(App.gui !== undefined)
@@ -200,9 +204,6 @@ Editor.initialize = function(canvas)
 	Editor.default_material.name = "default";
 	Editor.default_sprite_material = new THREE.SpriteMaterial({map: new Texture("data/sample.png"), color: 0xffffff});
 	Editor.default_sprite_material.name = "default";
-
-	//UI theme
-	Editor.theme = Theme.get(Settings.general.theme);
 
 	//Initialize User Interface
 	Interface.initialize();
