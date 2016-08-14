@@ -317,44 +317,31 @@ function ParticleEditor(parent)
 	//Opacity
 	this.form.addText("Opacity");
 	this.form.nextRow();
-	this.opacity_value = [];
+	this.opacity_value = new Graph(this.form.element);
+	this.opacity_value.setOnChange(function(value)
+	{
+		self.particle.emitter.opacity.value = value;
+		self.updateRuntimeParticle();
+	});
+	this.form.add(this.opacity_value);
+	this.form.nextRow();
+
+	this.form.addText("Spread");
+	this.form.nextRow();
 	this.opacity_spread = [];
-	function addOpacityValue(index)
-	{
-		return function()
-		{
-			self.particle.emitter.opacity.value[index] = self.opacity_value[index].getValue();
-			self.updateRuntimeParticle();
-		};
-	}
-	function addOpacitySpread(index)
-	{
-		return function()
-		{
-			self.particle.emitter.opacity.spread[index] = self.opacity_spread[index].getValue();
-			self.updateRuntimeParticle();
-		};
-	}
 	for(var i = 0; i < 4; i++)
 	{
 		this.form.addText((25*i + 25) + "%");
-
-		var value = new NumberBox(self.form.element);
-		value.size.set(40, 18);
-		value.setRange(0, 1.0);
-		value.setStep(0.1);
-		value.setOnChange(addOpacityValue(i));
-
-		this.opacity_value[i] = value;
-		this.form.add(value);
-		this.form.addText("+/-");
-
 		var spread = new NumberBox(self.form.element);
 		spread.size.set(40, 18);
 		spread.setRange(0, 1.0);
 		spread.setStep(0.1);
-		spread.setOnChange(addOpacitySpread(i));
-
+		spread.element.index = i;
+		spread.setOnChange(function()
+		{
+			self.particle.emitter.opacity.spread[this.index] = self.opacity_spread[this.index].getValue();
+			self.updateRuntimeParticle();
+		});
 		this.opacity_spread[i] = spread;
 		this.form.add(spread);
 		this.form.nextRow();
@@ -558,7 +545,6 @@ function attachParticle(particle)
 	this.wiggle_spread.setValue(particle.emitter.wiggle.spread);
 	for(var i = 0; i < 4; i++)
 	{
-		this.opacity_value[i].setValue(particle.emitter.opacity.value[i]);
 		this.opacity_spread[i].setValue(particle.emitter.opacity.spread[i]);
 		this.size_value[i].setValue(particle.emitter.size.value[i]);
 		this.size_spread[i].setValue(particle.emitter.size.spread[i]);
@@ -569,6 +555,8 @@ function attachParticle(particle)
 		var spread = particle.emitter.color.spread[i];
 		this.color_spread[i].setValue(spread.x, spread.y, spread.z);
 	}
+
+	this.opacity_value.setValue(particle.emitter.opacity.value);
 
 	//Create runtime particle to preview particle
 	this.updateRuntimeParticle();
@@ -627,8 +615,11 @@ function destroy()
 //Update material editor
 function update()
 {
-	//Update UI elements
+	//Main division
 	this.main.update();
+
+	//Graphs
+	this.opacity_value.update();
 
 	//Get mouse input
 	if(Mouse.insideCanvas())
