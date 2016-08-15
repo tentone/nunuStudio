@@ -36,6 +36,20 @@ function PhysicsPanel(parent)
 	this.form.add(this.position);
 	this.form.nextRow();
 
+	//Scale
+	this.form.addText("Scale");
+	this.scale = new CoordinatesBox(this.form.element);
+	this.scale.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			var scale = self.scale.getValue();
+			self.obj.scale.set(scale.x, scale.y, scale.z);
+		}
+	});
+	this.form.add(this.scale);
+	this.form.nextRow();
+
 	//Rotation
 	this.form.addText("Rotation");
 	this.rotation = new CoordinatesBox(this.form.element);
@@ -203,6 +217,7 @@ function updatePanel()
 	{
 		this.name.setText(this.obj.name);
 		this.position.setValue(this.obj.position);
+		this.scale.setValue(this.obj.scale);
 		this.rotation.setValue(this.obj.rotation);
 		this.type.setValue(this.obj.body.type);
 		this.mass.setValue(this.obj.body.mass);

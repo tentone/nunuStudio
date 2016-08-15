@@ -17,6 +17,8 @@ Main.initialize = function(canvas)
 	//Renderer and canvas
 	Main.canvas = document.createElement("canvas");
 	Main.canvas.style.position = "absolute";
+	Main.canvas.style.left = "0px";
+	Main.canvas.style.top = "0px";
 	Main.canvas.style.width = window.innerWidth + "px";
 	Main.canvas.style.height = window.innerHeight + "px";
 	Main.canvas.width = window.innerWidth;
@@ -25,10 +27,9 @@ Main.initialize = function(canvas)
 
 	//Stats tool
 	Main.stats = new Stats();
-	Main.stats.setMode(0);
 	Main.stats.dom.style.position = "absolute";
-	Main.stats.dom.style.zIndex = "100";
-	Main.stats.dom.style.opacity = "0.7";
+	Main.stats.dom.style.zIndex = "1000";
+	Main.stats.dom.style.opacity = "0.8";
 	Main.stats.dom.style.pointerEvents = "none";
 	//document.body.appendChild(Main.stats.dom);
 

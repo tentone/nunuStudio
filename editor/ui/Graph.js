@@ -87,7 +87,6 @@ function addGraph(name, color)
 	canvas.style.position = "absolute";
 	canvas.style.marginLeft = "30px";
 	this.element.appendChild(canvas);
-
 	this.graph.push({canvas: canvas, name: name, color: color, values: [], buttons: [], onchange: null});
 }
 
@@ -187,7 +186,12 @@ function getValue(name)
 {
 	var graph = this.getGraph(name);
 
-	return graph.values;
+	if(graph !== null)
+	{
+		return graph.values;
+	}
+
+	return null;
 }
 
 //Get graph object by name
@@ -204,10 +208,15 @@ function getGraph(name)
 		}
 	}
 
-	return this.graph[0];
+	if(this.graph.length > 0)
+	{
+		return this.graph[0];
+	}
+
+	return null;
 }
 
-//Update graph instance
+//Update graph canvas and buttons
 function updateGraph(graph)
 {
 	//Get canvas context
@@ -236,7 +245,7 @@ function updateGraph(graph)
 	context.stroke();
 }
 
-//Draw bakckground grid
+//Draw background grid canvas
 function updateGrid()
 {
 	var context = this.grid.getContext("2d");

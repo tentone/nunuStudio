@@ -22,6 +22,20 @@ function SkyPanel(parent)
 	this.form.add(this.name);
 	this.form.nextRow();
 
+	//Position
+	this.form.addText("Position");
+	this.position = new CoordinatesBox(this.form.element);
+	this.position.setStep(0.1);
+	this.position.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.position.copy(self.position.getValue());
+		}
+	});
+	this.form.add(this.position);
+	this.form.nextRow();
+
 	//Auto update
 	this.auto_update = new CheckBox(this.form.element);
 	this.auto_update.setText("Auto update");
@@ -126,6 +140,7 @@ function updatePanel()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
+		this.position.setValue(this.obj.position);
 		this.auto_update.setValue(this.obj.auto_update);
 		this.day_time.setValue(this.obj.day_time);
 		this.time.setValue(this.obj.time);
