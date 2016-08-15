@@ -63,6 +63,7 @@ Interface.initialize = function()
 			try
 			{
 				var loader = new THREE.ColladaLoader();
+				loader.options.convertUpAxis = true;
 				var collada = loader.parse(App.readFile(fname));
 				var scene = collada.scene;
 				Editor.addToScene(scene);
@@ -97,7 +98,7 @@ Interface.initialize = function()
 	});
 
 	//GLTF
-	/*import_models.addOption("GLTF", function()
+	import_models.addOption("GLTF", function()
 	{
 		App.chooseFile(function(fname)
 		{
@@ -105,10 +106,10 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.GLTFLoader();
 				var gltf = loader.parse(App.readFile(fname));
-				console.log(gltf);
-				if(gltf.scene !== undefined)
+				var scene = gltf.scene;
+				if(scene !== undefined)
 				{
-					Editor.addToScene(gltf.scene);
+					Editor.addToScene(scene);
 				}
 			}
 			catch(e)
@@ -116,7 +117,7 @@ Interface.initialize = function()
 				alert("Error loading file\n("+e+")");
 			}
 		}, ".gltf");
-	});*/
+	});
 
 	//VRML
 	import_models.addOption("VRML", function()
