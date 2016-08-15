@@ -317,123 +317,101 @@ function ParticleEditor(parent)
 	//Opacity
 	this.form.addText("Opacity");
 	this.form.nextRow();
-	this.opacity_value = new Graph(this.form.element);
-	this.opacity_value.setOnChange(function(value)
+	this.opacity = new Graph(this.form.element);
+	this.opacity.size.set(200, 120)
+	this.opacity.setOnChange(function(value)
 	{
 		self.particle.emitter.opacity.value = value;
-		self.updateRuntimeParticle();
+		self.particle_runtime.emitter.opacity.value = value;
 	});
-	this.form.add(this.opacity_value);
-	this.form.nextRow();
-
-	this.form.addText("Spread");
-	this.form.nextRow();
-	this.opacity_spread = [];
-	for(var i = 0; i < 4; i++)
+	this.opacity.addGraph("spread", "#AAAAAA");
+	this.opacity.setOnChange(function(value)
 	{
-		this.form.addText((25*i + 25) + "%");
-		var spread = new NumberBox(self.form.element);
-		spread.size.set(40, 18);
-		spread.setRange(0, 1.0);
-		spread.setStep(0.1);
-		spread.element.index = i;
-		spread.setOnChange(function()
-		{
-			self.particle.emitter.opacity.spread[this.index] = self.opacity_spread[this.index].getValue();
-			self.updateRuntimeParticle();
-		});
-		this.opacity_spread[i] = spread;
-		this.form.add(spread);
-		this.form.nextRow();
-	}
+		self.particle.emitter.opacity.spread = value;
+		self.particle_runtime.emitter.opacity.spread = value;
+	}, "spread");
+	this.form.add(this.opacity);
+	this.form.nextRow();
 
 	//Size
-	this.form.addText("Size");
+	this.form.addText("Scale");
 	this.form.nextRow();
-	this.size_value = [];
-	this.size_spread = [];
-	function addSizeValue(index)
+	this.scale = new Graph(this.form.element);
+	this.scale.size.set(200, 120)
+	this.scale.setOnChange(function(value)
 	{
-		return function()
-		{
-			self.particle.emitter.size.value[index] = self.size_value[index].getValue();
-			self.updateRuntimeParticle();
-		};
-	}
-	function addSizeSpread(index)
+		self.particle.emitter.size.value = value;
+		self.particle_runtime.emitter.size.value = value;
+	});
+	this.scale.addGraph("spread", "#AAAAAA");
+	this.scale.setOnChange(function(value)
 	{
-		return function()
-		{
-			self.particle.emitter.size.spread[index] = self.size_spread[index].getValue();
-			self.updateRuntimeParticle();
-		};
-	}
-	for(var i = 0; i < 4; i++)
+		self.particle.emitter.size.spread = value;
+		self.particle_runtime.emitter.size.spread = value;
+	}, "spread");
+	this.form.add(this.scale);
+	this.form.nextRow();
+	this.form.addText("Min");
+	this.scale_min = new NumberBox(this.form.element);
+	this.scale_min.size.set(50, 18);
+	this.scale_min.setOnChange(function()
 	{
-		this.form.addText((25*i + 25) + "%");
-
-		var value = new NumberBox(self.form.element);
-		value.size.set(40, 18);
-		value.setStep(0.1);
-		value.setOnChange(addSizeValue(i));
-
-		this.size_value[i] = value;
-		this.form.add(value);
-		this.form.addText("+/-");
-
-		var spread = new NumberBox(self.form.element);
-		spread.size.set(40, 18);
-		spread.setStep(0.1);
-		spread.setOnChange(addSizeSpread(i));
-
-		this.size_spread[i] = spread;
-		this.form.add(spread);
-		this.form.nextRow();
-	}
+		var min = self.scale_min.getValue();
+		var max = self.scale_max.getValue();
+		self.scale.setRange(min, max);
+	});
+	this.form.add(this.scale_min);
+	this.form.addText("Max");
+	this.scale_max = new NumberBox(this.form.element);
+	this.scale_max.size.set(50, 18);
+	this.scale_max.setOnChange(function()
+	{
+		var min = self.scale_min.getValue();
+		var max = self.scale_max.getValue();
+		self.scale.setRange(min, max);
+	});
+	this.form.add(this.scale_max);
+	this.form.nextRow();
 
 	//Angle
 	this.form.addText("Rotation");
 	this.form.nextRow();
-	this.angle_value = [];
-	this.angle_spread = [];
-	function addAngleValue(index)
+	this.angle = new Graph(this.form.element);
+	this.angle.size.set(200, 120)
+	this.angle.setOnChange(function(value)
 	{
-		return function()
-		{
-			self.particle.emitter.angle.value[index] = self.angle_value[index].getValue();
-			self.updateRuntimeParticle();
-		};
-	}
-	function addAngleSpread(index)
+		self.particle.emitter.angle.value = value;
+		self.particle_runtime.emitter.angle.value = value;
+	});
+	this.angle.addGraph("spread", "#AAAAAA");
+	this.angle.setOnChange(function(value)
 	{
-		return function()
-		{
-			self.particle.emitter.angle.spread[index] = self.angle_spread[index].getValue();
-			self.updateRuntimeParticle();
-		};
-	}
-	for(var i = 0; i < 4; i++)
+		self.particle.emitter.angle.spread = value;
+		self.particle_runtime.emitter.angle.spread = value;
+	}, "spread");
+	this.form.add(this.angle);
+	this.form.nextRow();
+	this.form.addText("Min");
+	this.angle_min = new NumberBox(this.form.element);
+	this.angle_min.size.set(50, 18);
+	this.angle_min.setOnChange(function()
 	{
-		this.form.addText((25*i + 25) + "%");
-		
-		var value = new NumberBox(self.form.element);
-		value.size.set(40, 18);
-		value.setStep(0.1);
-		value.setOnChange(addAngleValue(i));
-
-		this.angle_value[i] = value;
-		this.form.add(value);
-		this.form.addText("+/-");
-
-		var spread = new NumberBox(self.form.element);
-		spread.size.set(40, 18);
-		spread.setStep(0.1);
-		spread.setOnChange(addAngleSpread(i));
-
-		this.angle_spread[i] = spread;
-		this.form.add(spread);
-		this.form.nextRow();
-	}
+		var min = self.angle_min.getValue();
+		var max = self.angle_max.getValue();
+		self.angle.setRange(min, max);
+	});
+	this.form.add(this.angle_min);
+	this.form.addText("Max");
+	this.angle_max = new NumberBox(this.form.element);
+	this.angle_max.size.set(50, 18);
+	this.angle_max.setOnChange(function()
+	{
+		var min = self.angle_min.getValue();
+		var max = self.angle_max.getValue();
+		self.angle.setRange(min, max);
+	});
+	this.form.add(this.angle_max);
+	this.form.nextRow();
 
 	//Color
 	this.form.addText("Color");
@@ -543,20 +521,27 @@ function attachParticle(particle)
 	this.acceleration_spread.setValue(particle.emitter.acceleration.spread);
 	this.wiggle_value.setValue(particle.emitter.wiggle.value);
 	this.wiggle_spread.setValue(particle.emitter.wiggle.spread);
+
+	this.opacity.setValue(particle.emitter.opacity.value);
+	this.opacity.setValue(particle.emitter.opacity.spread, "spread");
+
+	this.scale.setValue(particle.emitter.size.value);
+	this.scale.setValue(particle.emitter.size.spread, "spread");
+	this.scale_min.setValue(this.scale.min);
+	this.scale_max.setValue(this.scale.max);
+
+	this.angle.setValue(particle.emitter.angle.value);
+	this.angle.setValue(particle.emitter.angle.spread, "spread");
+	this.angle_min.setValue(this.angle.min);
+	this.angle_max.setValue(this.angle.max);
+
 	for(var i = 0; i < 4; i++)
 	{
-		this.opacity_spread[i].setValue(particle.emitter.opacity.spread[i]);
-		this.size_value[i].setValue(particle.emitter.size.value[i]);
-		this.size_spread[i].setValue(particle.emitter.size.spread[i]);
-		this.angle_value[i].setValue(particle.emitter.angle.value[i]);
-		this.angle_spread[i].setValue(particle.emitter.angle.spread[i]);
 		var value = particle.emitter.color.value[i];
 		this.color_value[i].setValue(value.r, value.g, value.b);
 		var spread = particle.emitter.color.spread[i];
 		this.color_spread[i].setValue(spread.x, spread.y, spread.z);
 	}
-
-	this.opacity_value.setValue(particle.emitter.opacity.value);
 
 	//Create runtime particle to preview particle
 	this.updateRuntimeParticle();
@@ -619,8 +604,10 @@ function update()
 	this.main.update();
 
 	//Graphs
-	this.opacity_value.update();
-
+	this.opacity.update();
+	this.scale.update();
+	this.angle.update();
+	
 	//Get mouse input
 	if(Mouse.insideCanvas())
 	{

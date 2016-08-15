@@ -58,7 +58,6 @@ function ScenePanel(parent)
 				self.obj.background = new THREE.Color();
 			}
 			self.obj.background.setHex(self.background.getValueHex());
-			self.obj.updateFog();
 		}
 	});
 	this.form.add(this.background);

@@ -20,6 +20,7 @@ function ButtonImage(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
+	this.element.style.cursor = "pointer";
 
 	//Image
 	this.img = document.createElement("img");
@@ -46,14 +47,12 @@ function ButtonImage(parent)
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		self.element.style.cursor = "pointer";
 		self.element.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
-		self.element.style.cursor = "default";
 		self.element.style.backgroundColor = "";
 	};
 

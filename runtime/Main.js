@@ -17,8 +17,6 @@ Main.initialize = function(canvas)
 	//Renderer and canvas
 	Main.canvas = document.createElement("canvas");
 	Main.canvas.style.position = "absolute";
-	Main.canvas.style.top = "0px";
-	Main.canvas.style.left = "0px";
 	Main.canvas.style.width = window.innerWidth + "px";
 	Main.canvas.style.height = window.innerHeight + "px";
 	Main.canvas.width = window.innerWidth;
@@ -33,6 +31,10 @@ Main.initialize = function(canvas)
 	Main.stats.dom.style.opacity = "0.7";
 	Main.stats.dom.style.pointerEvents = "none";
 	//document.body.appendChild(Main.stats.dom);
+
+	//VR Stuff
+	Main.vr_controls = null;
+	Main.vr_effect = null;
 
 	//Define mouse canvas
 	Mouse.canvas = Main.canvas;
@@ -51,10 +53,6 @@ Main.initialize = function(canvas)
 	Main.program.renderer = Main.renderer;
 	Main.program.initialize();
 	Main.program.resize(Main.canvas.width, Main.canvas.height);
-
-	//VR Stuff
-	Main.vr_controls = null;
-	Main.vr_effect = null;
 
 	//Fullscreen button
 	Main.fullscreen = document.createElement("div");
@@ -81,10 +79,9 @@ Main.initialize = function(canvas)
 
 	var img = document.createElement("img");
 	img.style.position = "absolute";
+	img.style.cursor = "pointer";
 	img.width = 25;
 	img.height = 25;
-	img.style.top = "0px";
-	img.style.left = "0px";
 	img.src = "fullscreen.png";
 	img.onmouseenter = function()
 	{
@@ -117,10 +114,9 @@ Main.initialize = function(canvas)
 
 		var img = document.createElement("img");
 		img.style.position = "absolute";
+		img.style.cursor = "pointer";
 		img.width = 25;
 		img.height = 25;
-		img.style.top = "0px";
-		img.style.left = "0px";
 		img.src = "vr.png";
 		
 		img.onmouseenter = function()

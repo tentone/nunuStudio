@@ -20,7 +20,7 @@ function ButtonImageToggle(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.style.cursor = "default";
+	this.element.style.cursor = "pointer";
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
@@ -66,7 +66,6 @@ function ButtonImageToggle(parent)
 	//Mouse over and mouse out events
 	this.element.onmouseenter = function()
 	{
-		self.element.style.cursor = "pointer";
 		self.element.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
@@ -74,7 +73,6 @@ function ButtonImageToggle(parent)
 	{
 		if(!self.selected)
 		{
-			self.element.style.cursor = "default";
 			self.element.style.backgroundColor = Editor.theme.button_color;
 		}
 	};
@@ -139,12 +137,10 @@ function updateInterface()
 	//Set selected
 	if(this.selected)
 	{
-		this.element.style.cursor = "pointer";
 		this.element.style.backgroundColor = Editor.theme.button_over_color;
 	}
 	else
 	{
-		this.element.style.cursor = "default";
 		this.element.style.backgroundColor = Editor.theme.button_color;
 	}
 

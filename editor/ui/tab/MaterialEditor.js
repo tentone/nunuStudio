@@ -245,6 +245,22 @@ function MaterialEditor(parent)
 	this.form.add(this.depthTest);
 	this.form.nextRow();
 
+	//Write depth
+	this.depthWrite  = new CheckBox(this.preview.div_b);
+	this.depthWrite .setText("Depth write");
+	this.depthWrite .size.set(200, 15);
+	this.depthWrite .updateInterface();
+	this.depthWrite .setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.depthWrite  = self.depthWrite .getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.depthWrite );
+	this.form.nextRow();
+
 	//Transparent
 	this.transparent = new CheckBox(this.form.element);
 	this.transparent.setText("Transparent");
@@ -351,6 +367,7 @@ function attachMaterial(material, material_file)
 	this.side.setValue(material.side);
 	this.skinning.setValue(material.skinning);
 	this.depthTest.setValue(material.depthTest);
+	this.depthWrite.setValue(material.depthWrite);
 	this.transparent.setValue(material.transparent);
 	this.opacity.setValue(material.opacity);
 	this.opacity_text.setText(material.opacity);

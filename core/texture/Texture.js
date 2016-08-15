@@ -16,11 +16,7 @@ function Texture(url)
 
 //Functions prototype
 Texture.prototype = Object.create(THREE.Texture.prototype);
-Texture.prototype.update = update;
 Texture.prototype.toJSON = toJSON;
-
-//Update texture
-function update(){}
 
 //Create JSON description
 function toJSON(meta)
@@ -34,7 +30,6 @@ function toJSON(meta)
 	{
 		var canvas, context;
 		
-
 		if(image.toDataURL !== undefined)
 		{
 			canvas = image;
