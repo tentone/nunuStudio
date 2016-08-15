@@ -52,7 +52,7 @@ function CodeEditor(parent)
 	//Self pointer
 	var self = this;
 
-	//Keyup
+	//Key pressed event
 	this.code.on("keydown", function(code, event)
 	{
 		var key = event.keyCode;
@@ -63,6 +63,12 @@ function CodeEditor(parent)
 				CodeMirror.commands.autocomplete(code, null, {completeSingle: false});
 			}
 		}
+	});
+
+	//Change
+	this.code.on("change", function()
+	{
+		self.updateScript();
 	});
 
 	//Context menu event

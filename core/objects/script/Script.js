@@ -98,20 +98,7 @@ function setCode(code)
 		this.code = code;
 		this.func = Function(this.code);
 	}
-	catch(e)
-	{
-		if(e instanceof SyntaxError)
-		{
-			var error =
-			{
-				line: 0,
-				message: e.message
-			};
-
-			//console.log(error);
-		}
-		console.log(e);
-	}
+	catch(e){}
 }
 
 //Set script mode
