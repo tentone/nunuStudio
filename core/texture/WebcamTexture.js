@@ -16,11 +16,14 @@ function WebcamTexture()
 	this.video.autoplay	= true;
 	this.video.loop	= true;
 
+	//Self pointer
+	var self = this;
+
 	if(navigator.webkitGetUserMedia)
 	{
 		navigator.webkitGetUserMedia({video:true}, function(stream)
 		{
-			this.video.src = URL.createObjectURL(stream);
+			self.video.src = URL.createObjectURL(stream);
 		},
 		function(error)
 		{
@@ -31,7 +34,7 @@ function WebcamTexture()
 	{
 		navigator.mozGetUserMedia({video:true}, function(stream)
 		{
-			this.video.src = URL.createObjectURL(stream);
+			self.video.src = URL.createObjectURL(stream);
 		},
 		function(error)
 		{
@@ -40,26 +43,16 @@ function WebcamTexture()
 	}
 
 	//Create Texture part of object
-	THREE.Texture.call(this, this.video);
+	THREE.VideoTexture.call(this, this.video);
+
+	//Set filtering
+	this.minFilter = THREE.LinearFilter;
+	this.magFilter = THREE.LinearFilter;
+	this.format = THREE.RGBFormat;
+
+	//Name
+	this.name = "webcam";
 }
 
 //Function prototypes
-WebcamTexture.prototype = Object.create(THREE.Texture.prototype);
-WebcamTexture.prototype.update = update;
-WebcamTexture.prototype.dispose = dispose;
-
-//Update texture
-function update()
-{
-	if(this.video.readyState >= this.video.HAVE_CURRENT_DATA)
-	{
-		this.needsUpdate = true;
-	}		
-}
-
-//Dispose texture
-function dispose()
-{
-	this.video.pause();
-	THREE.Texture.prototype.dipose.call(this);
-}
+WebcamTexture.prototype = Object.create(THREE.VideoTexture.prototype);

@@ -24,8 +24,6 @@ function SceneEditor(parent)
 	//Canvas
 	this.canvas = document.createElement("canvas");
 	this.canvas.style.position = "absolute";
-	this.canvas.style.top = "0px";
-	this.canvas.style.left = "0px";
 	this.element.appendChild(this.canvas);
 
 	//Performance meter

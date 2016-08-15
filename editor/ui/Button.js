@@ -20,7 +20,7 @@ function Button(parent)
 	this.element = document.createElement("div");
 	this.element.id = id;
 	this.element.style.position = "absolute";
-	this.element.style.cursor = "default";
+	this.element.style.cursor = "pointer";
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
@@ -56,13 +56,11 @@ function Button(parent)
 	//Mouse over and mouse out events
 	this.element.onmouseenter = function()
 	{
-		self.element.style.cursor = "pointer";
 		self.element.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	this.element.onmouseleave = function()
 	{
-		self.element.style.cursor = "default";
 		self.element.style.backgroundColor = Editor.theme.button_color;
 	};
 
