@@ -483,7 +483,26 @@ function updateMetadata(container)
 {
 	if(this.particle !== null)
 	{
-		container.setName(this.particle.name);
+		var particle = this.particle;
+
+		//Set container name
+		container.setName(particle.name);
+
+		//Check if particle exists in program
+		var found = false;
+		Editor.program.traverse(function(obj)
+		{
+			if(obj.uuid === particle.uuid)
+			{
+				found = true;
+			}
+		});
+
+		//If not found close tab
+		if(!found)
+		{
+			container.close();
+		}
 	}
 }
 

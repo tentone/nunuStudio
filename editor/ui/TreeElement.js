@@ -85,46 +85,47 @@ function TreeElement(container)
 	{
 		if(self.obj !== null)
 		{
-			var context = new ContextMenu();
-			context.size.set(130, 20);
-			context.position.set(event.clientX - 5, event.clientY - 5);
+			//Scene and program flags
+			var program = self.obj instanceof Program;
+			var scene = self.obj instanceof Scene;
+
+			//Context menu object
+			var menu = new ContextMenu();
+			menu.size.set(130, 20);
+			menu.position.set(event.clientX - 5, event.clientY - 5);
 			
-			context.addOption("Rename", function()
+			menu.addOption("Rename", function()
 			{
 				self.obj.name = prompt("Rename object", self.obj.name);
 				Editor.updateObjectViews();
 			});
 
-			if(!(self.obj instanceof Program))
+			if(!program)
 			{
-				context.addOption("Delete", function()
+				menu.addOption("Delete", function()
 				{
-					if((self.obj instanceof Scene && self.obj.parent.children.length > 1) || !(self.obj instanceof Scene))
-					{
-						self.deleteObject();
-					}
-					Editor.updateObjectViews();
+					Editor.deleteObject(self.obj);
 				});
 			}
 
-			if(!(self.obj instanceof Scene) && !(self.obj instanceof Program))
+			if(!scene && !program)
 			{
 				//Set object and children to static mode
-				context.addOption("Set static", function()
+				menu.addOption("Set static", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
 					Editor.updateObjectViews();
 				});
 
 				//Set object and children to dynamic mode
-				context.addOption("Set dynamic", function()
+				menu.addOption("Set dynamic", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
 					Editor.updateObjectViews();
 				});
 
 				//Duplicate object
-				context.addOption("Duplicate", function()
+				menu.addOption("Duplicate", function()
 				{
 					var obj = new ObjectLoader().parse(self.obj.toJSON());
 					obj.traverse(function(child)
@@ -136,49 +137,26 @@ function TreeElement(container)
 				});
 
 				//Copy object
-				context.addOption("Copy", function()
+				menu.addOption("Copy", function()
 				{
-					try
-					{
-						App.clipboard.set(JSON.stringify(self.obj.toJSON()), "text");
-					}
-					catch(e){}
+					Editor.copyObject(self.obj);
 				});
 
 				//Cut object
-				context.addOption("Cut", function()
+				menu.addOption("Cut", function()
 				{
-					try
-					{
-						App.clipboard.set(JSON.stringify(self.obj.toJSON()), "text");
-						self.deleteObject();	
-					}
-					catch(e){}
+					Editor.cutObject(self.obj);
 				});
 			}
-
-			context.addOption("Paste", function()
+			
+			if(!program)
 			{
-				try
+				//Paste object form clipboard
+				menu.addOption("Paste", function()
 				{
-					var content = App.clipboard.get("text");
-					var data = JSON.parse(content);
-
-					//Create object
-					var obj = new ObjectLoader().parse(data);
-					obj.traverse(function(child)
-					{
-						child.uuid = THREE.Math.generateUUID();
-					});
-
-					//Add object
-					self.obj.add(obj);
-
-					//Update object view
-					Editor.updateObjectViews();
-				}
-				catch(e){}
-			});
+					Editor.pasteObject(self.obj);
+				});
+			}
 		}
 	};
 
@@ -363,26 +341,6 @@ TreeElement.prototype.setLabel = setLabel;
 TreeElement.prototype.setIcon = setIcon;
 TreeElement.prototype.setObject = setObject;
 TreeElement.prototype.setVisibility = setVisibility;
-
-//Tree object manipulation
-TreeElement.prototype.deleteObject = deleteObject;
-
-//Delete object attached to this three element
-function deleteObject()
-{
-	//Delete object
-	if(this.obj !== null && this.obj.parent !== null)
-	{
-		this.obj.parent.remove(this.obj);
-		this.updateSceneData();
-
-		//If this object is selected reset editing flags
-		if(Editor.isObjectSelected(this.obj))
-		{
-			Editor.resetEditingFlags();
-		}
-	}
-}
 
 //Set object attached to element
 function setObject(obj)

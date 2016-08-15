@@ -13,7 +13,7 @@ function DropdownMenu(parent)
 	}
 	
 	//ID
-	var id = "dropmenu" + Button.id;
+	var id = "dropdown" + Button.id;
 	DropdownMenu.id++;
 
 	//Create element
@@ -230,8 +230,8 @@ function addMenu(name, icon)
 //Update interface
 function updateInterface()
 {
-	var visibility, visible = false;
-
+	//Check visibility
+	var visibility, visible;
 	if(this.expanded && this.visible)
 	{
 		visibility = "visible";
@@ -240,9 +240,10 @@ function updateInterface()
 	else
 	{
 		visibility = "hidden";
+		visible = false;
 	}
 
-	//Update Options Visibility
+	//Update options
 	for(var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].visible = visible;
@@ -251,7 +252,7 @@ function updateInterface()
 		this.options[i].updateInterface();
 	}
 
-	//Update attached elements if any
+	//Update attached elements
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].visible = this.visible;

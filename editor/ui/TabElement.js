@@ -13,7 +13,7 @@ function TabElement(parent, name, icon, closeable, container, index)
 	}
 
 	//ID
-	var id = "tab_elem" + TabGroup.id;
+	var id = "tab" + TabGroup.id;
 	TabElement.id++;
 
 	//Create element
@@ -111,7 +111,7 @@ function TabElement(parent, name, icon, closeable, container, index)
 	this.close_button.setImage("editor/files/icons/misc/close.png");
 	this.close_button.setCallback(function()
 	{
-		self.container.removeOption(self.index);
+		self.close();
 	});
 	this.close_button.updateInterface();
 
@@ -123,6 +123,7 @@ function TabElement(parent, name, icon, closeable, container, index)
 TabElement.id = 0;
 
 //Function prototypes
+TabElement.prototype.close = close;
 TabElement.prototype.setIcon = setIcon;
 TabElement.prototype.setName = setName;
 TabElement.prototype.updateMetadata = updateMetadata;
@@ -134,6 +135,12 @@ TabElement.prototype.destroy = destroy;
 TabElement.prototype.attachComponent = attachComponent;
 TabElement.prototype.updateInterface = updateInterface;
 
+//Close this tab
+function close()
+{
+	this.container.removeOption(this.index);
+}
+
 //Set tab element icon
 function setIcon(icon)
 {
@@ -143,7 +150,7 @@ function setIcon(icon)
 //Set tab element name
 function setName(text)
 {
-	if(text.length > 9)
+	if(text !== undefined && text.length > 9)
 	{
 		text = text.slice(0,9) + "...";
 	}

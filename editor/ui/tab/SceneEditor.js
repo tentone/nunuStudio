@@ -50,7 +50,7 @@ function SceneEditor(parent)
 
 			//Update raycaster direction
 			var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
-			var position_normalized = new THREE.Vector2((position.x/self.canvas.width)*2 - 1, -(position.y/self.canvas.height)*2 + 1);
+			var position_normalized = new THREE.Vector2((position.x / self.canvas.width * 2) - 1, (-2 * position.y / self.canvas.height) + 1);
 			Editor.updateRaycaster(position_normalized.x, position_normalized.y);
 
 			//Check intersected objects
@@ -141,7 +141,6 @@ function SceneEditor(parent)
 	this.fullscreen_button.size.set(25, 25);
 	this.fullscreen_button.setImage("editor/files/icons/misc/fullscreen.png");
 	this.fullscreen_button.visible = false;
-	this.fullscreen_button.setClass("");
 	this.fullscreen_button.updateInterface();
 	this.fullscreen_button.element.onmouseenter = function()
 	{
@@ -164,7 +163,6 @@ function SceneEditor(parent)
 	this.vr_button.size.set(25, 25);
 	this.vr_button.setImage("editor/files/icons/misc/vr.png");
 	this.vr_button.visible = false;
-	this.vr_button.setClass("");
 	this.vr_button.updateInterface();
 	this.vr_button.element.onmouseenter = function()
 	{
@@ -205,7 +203,26 @@ function updateMetadata(container)
 {
 	if(this.scene !== null)
 	{
-		container.setName(this.scene.name);
+		var scene = this.scene;
+
+		//Set container name
+		container.setName(scene.name);
+
+		//Check if scene exists in program
+		var found = false;
+		Editor.program.traverse(function(obj)
+		{
+			if(obj.uuid === scene.uuid)
+			{
+				found = true;
+			}
+		});
+
+		//If not found close tab
+		if(!found)
+		{
+			container.close();
+		}
 	}
 }
 

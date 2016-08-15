@@ -70,7 +70,6 @@ ButtonImage.prototype.updateInterface = updateInterface;
 ButtonImage.prototype.setCallback = setCallback;
 ButtonImage.prototype.destroy = destroy;
 ButtonImage.prototype.setAltText = setAltText;
-ButtonImage.prototype.setClass = setClass;
 ButtonImage.prototype.setVisibility = setVisibility;
 
 //Remove element
@@ -125,12 +124,6 @@ function setAltText(alt_text)
 		text.visible = false;
 		text.updateInterface();
 	}
-}
-
-//Set element class
-function setClass(name)
-{
-	this.element.className = name;
 }
 
 //Set button image visibility

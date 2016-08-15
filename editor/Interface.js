@@ -47,7 +47,7 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.OBJLoader();
 				var obj = loader.parse(App.readFile(fname));
-				Editor.addToActualScene(obj);
+				Editor.addToScene(obj);
 			}
 			catch(e)
 			{
@@ -65,7 +65,7 @@ Interface.initialize = function()
 				var loader = new THREE.ColladaLoader();
 				var collada = loader.parse(App.readFile(fname));
 				var scene = collada.scene;
-				Editor.addToActualScene(scene);
+				Editor.addToScene(scene);
 			}
 			catch(e)
 			{
@@ -84,8 +84,9 @@ Interface.initialize = function()
 				loader.load(fname, function(geometry, materials)
 				{
 					var material = new THREE.MeshStandardMaterial();
+					material.name = "standard";
 					var obj = new AnimatedModel(geometry, material);
-					Editor.addToActualScene(obj);
+					Editor.addToScene(obj);
 				});
 			}
 			catch(e)
@@ -107,7 +108,7 @@ Interface.initialize = function()
 				console.log(gltf);
 				if(gltf.scene !== undefined)
 				{
-					Editor.addToActualScene(gltf.scene);
+					Editor.addToScene(gltf.scene);
 				}
 			}
 			catch(e)
@@ -128,7 +129,7 @@ Interface.initialize = function()
 				var scene = loader.parse(App.readFile(fname));
 				for(var i = 0; i < scene.children.length; i++)
 				{
-					Editor.addToActualScene(scene.children[i]);
+					Editor.addToScene(scene.children[i]);
 				}
 			}
 			catch(e)
@@ -147,7 +148,7 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.FBXLoader();
 				var obj = loader.parse(App.readFile(fname));
-				Editor.addToActualScene(obj);
+				Editor.addToScene(obj);
 			}
 			catch(e)
 			{
@@ -182,7 +183,7 @@ Interface.initialize = function()
 			{
 				var material = new THREE.SpriteMaterial({map: new VideoTexture(fname), color: 0xffffff});
 				material.name = "video";
-				Editor.addToActualScene(new Sprite(material));
+				Editor.addToScene(new Sprite(material));
 			}
 			catch(e)
 			{
@@ -402,7 +403,7 @@ Interface.initialize = function()
 		var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 		var model = new Model3D(geometry, Editor.default_material);
 		model.name = "cube";
-		Editor.addToActualScene(model);
+		Editor.addToScene(model);
 	}, "Cube");
 
 	//Cylinder
@@ -411,7 +412,7 @@ Interface.initialize = function()
 		var geometry = new THREE.CylinderBufferGeometry(1, 1, 2, 32);
 		var model = new Model3D(geometry, Editor.default_material);
 		model.name = "cylinder";
-		Editor.addToActualScene(model);
+		Editor.addToScene(model);
 	}, "Cylinder");
 
 	//Sphere
@@ -420,7 +421,7 @@ Interface.initialize = function()
 		var geometry = new THREE.SphereBufferGeometry(1, 32, 32);
 		var model = new Model3D(geometry, Editor.default_material);
 		model.name = "sphere";
-		Editor.addToActualScene(model);
+		Editor.addToScene(model);
 	}, "Sphere");
 
 	//Torus
@@ -429,7 +430,7 @@ Interface.initialize = function()
 		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 96);
 		var model = new Model3D(geometry, Editor.default_material);
 		model.name = "torus";
-		Editor.addToActualScene(model);
+		Editor.addToScene(model);
 	}, "Torus");
 
 	//Pyramid
@@ -438,14 +439,14 @@ Interface.initialize = function()
 		var geometry = new THREE.ConeBufferGeometry(1, 2, 32);
 		var model = new Model3D(geometry, Editor.default_material);
 		model.name = "cone";
-		Editor.addToActualScene(model);
+		Editor.addToScene(model);
 	}, "Cone");
 
 	//Text
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/text.png", function()
 	{
 		var model = new Text3D("text", Editor.default_material);
-		Editor.addToActualScene(model);
+		Editor.addToScene(model);
 	}, "3D Text");
 
 	//Plane
@@ -456,7 +457,7 @@ Interface.initialize = function()
 		model.receiveShadow = true;
 		model.castShadow = true;
 		model.name = "plane";
-		Editor.addToActualScene(model);
+		Editor.addToScene(model);
 	}, "Plane");
 
 	//Add lights
@@ -472,37 +473,37 @@ Interface.initialize = function()
 	//Point Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/point.png", function()
 	{
-		Editor.addToActualScene(new PointLight(0x444444));
+		Editor.addToScene(new PointLight(0x444444));
 	}, "Point Light");
 
 	//Ambient Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/ambient.png", function()
 	{
-		Editor.addToActualScene(new AmbientLight(0x444444));
+		Editor.addToScene(new AmbientLight(0x444444));
 	}, "Ambient Light");
 
 	//Spot Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/spot.png", function()
 	{
-		Editor.addToActualScene(new SpotLight(0x444444));
+		Editor.addToScene(new SpotLight(0x444444));
 	}, "Spot Light");
 
 	//Directional Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/directional.png", function()
 	{
-		Editor.addToActualScene(new DirectionalLight(0x444444));
+		Editor.addToScene(new DirectionalLight(0x444444));
 	}, "Directional Light");
 
 	//Hemisphere Light
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/hemisphere.png", function()
 	{
-		Editor.addToActualScene(new HemisphereLight(0x444444));
+		Editor.addToScene(new HemisphereLight(0x444444));
 	}, "Hemisphere Light");
 
 	//Sky
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/sky.png", function()
 	{
-		Editor.addToActualScene(new Sky());
+		Editor.addToScene(new Sky());
 	}, "Sky");
 
 	//Add camera
@@ -519,13 +520,13 @@ Interface.initialize = function()
 	//Prespective camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/prespective.png", function()
 	{
-		Editor.addToActualScene(new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 1000000));
+		Editor.addToScene(new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 1000000));
 	}, "Prespective Camera");
 
 	//Orthographic camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
 	{
-		Editor.addToActualScene(new OrthographicCamera(3, 2, 0, 1, 1000000));
+		Editor.addToScene(new OrthographicCamera(3, 2, 0, 1, 1000000));
 	}, "Othographic Camera");
 
 	//Add script
@@ -542,7 +543,7 @@ Interface.initialize = function()
 	//Javascript script
 	Interface.add_script.addOption(Interface.file_dir + "icons/script/script.png", function()
 	{
-		Editor.addToActualScene(new Script());
+		Editor.addToScene(new Script());
 	}, "JS Script");
 
 	//Block script
@@ -565,25 +566,25 @@ Interface.initialize = function()
 	//Sprite
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/sprite.png", function()
 	{
-		Editor.addToActualScene(new Sprite(Editor.default_sprite_material));
+		Editor.addToScene(new Sprite(Editor.default_sprite_material));
 	}, "Sprite");
 
 	//Particle emitter
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/particles.png", function()
 	{
-		Editor.addToActualScene(new ParticleEmitter());
+		Editor.addToScene(new ParticleEmitter());
 	}, "Particle Emitter");
 
 	//Container
 	Interface.add_effects.addOption(Interface.file_dir + "icons/effects/container.png", function()
 	{
-		Editor.addToActualScene(new Container());
+		Editor.addToScene(new Container());
 	}, "Container");
 
 	//Audio
 	Interface.add_effects.addOption(Interface.file_dir + "icons/assets/audio.png", function()
 	{
-		Editor.addToActualScene(new Audio());
+		Editor.addToScene(new Audio());
 	}, "Audio");
 
 	//Physics
@@ -603,7 +604,7 @@ Interface.initialize = function()
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)));
 		obj.name = "box";
-		Editor.addToActualScene(obj);
+		Editor.addToScene(obj);
 	}, "Box");
 
 	//Physics sphere
@@ -612,7 +613,7 @@ Interface.initialize = function()
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Sphere(1.0));
 		obj.name = "sphere";
-		Editor.addToActualScene(obj);
+		Editor.addToScene(obj);
 	}, "Sphere");
 
 	//Physics Cylinder
@@ -621,7 +622,7 @@ Interface.initialize = function()
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Cylinder(1.0, 1.0, 2.0, 8));
 		obj.name = "cylinder";
-		Editor.addToActualScene(obj);
+		Editor.addToScene(obj);
 	}, "Cylinder");
 
 	//Physics Plane
@@ -632,7 +633,7 @@ Interface.initialize = function()
 		obj.body.addShape(new CANNON.Plane());
 		obj.body.type = CANNON.Body.KINEMATIC;
 		obj.name = "ground";
-		Editor.addToActualScene(obj);
+		Editor.addToScene(obj);
 	}, "Ground");
 
 	//Physics Particle
@@ -641,7 +642,7 @@ Interface.initialize = function()
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Particle());
 		obj.name = "particle";
-		Editor.addToActualScene(obj);
+		Editor.addToScene(obj);
 	}, "Particle");
 
 	//Add device
@@ -658,13 +659,13 @@ Interface.initialize = function()
 	//Leap Hand
 	Interface.add_device.addOption(Interface.file_dir + "icons/hw/leap.png", function()
 	{
-		Editor.addToActualScene(new LeapHand());
+		Editor.addToScene(new LeapHand());
 	}, "Leap Motion");
 
 	//Kinect Skeleton
 	Interface.add_device.addOption(Interface.file_dir + "icons/hw/kinect.png", function()
 	{
-		Editor.addToActualScene(new KinectDevice());
+		Editor.addToScene(new KinectDevice());
 	}, "Microsoft Kinect");
 
 	//----------------------------------Menu Top Bar----------------------------------
@@ -779,22 +780,22 @@ Interface.initialize = function()
 
 	Interface.editor.addOption("Copy", function()
 	{
-		Editor.copySelectedObject();
+		Editor.copyObject();
 	}, Interface.file_dir + "icons/misc/copy.png");
 	
 	Interface.editor.addOption("Cut", function()
 	{
-		Editor.cutSelectedObject();
+		Editor.cutObject();
 	}, Interface.file_dir + "icons/misc/cut.png");
 
 	Interface.editor.addOption("Paste", function()
 	{
-		Editor.pasteIntoSelectedObject();
+		Editor.pasteObject();
 	});
 
 	Interface.editor.addOption("Delete", function()
 	{
-		Editor.deleteSelectedObject();
+		Editor.deleteObject();
 	}, Interface.file_dir + "icons/misc/delete.png");
 
 	//Project

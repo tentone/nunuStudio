@@ -78,7 +78,6 @@ Button.id = 0;
 Button.prototype.update = update;
 Button.prototype.updateInterface = updateInterface;
 Button.prototype.destroy = destroy;
-Button.prototype.setClass = setClass;
 Button.prototype.setText = setText;
 Button.prototype.setCallback = setCallback;
 Button.prototype.add = add;
@@ -93,12 +92,6 @@ function add(element)
 function setText(text)
 {
 	this.text.setText(text);
-}
-
-//Set element class
-function setClass(name)
-{
-	this.element.className = name;
 }
 
 //Remove element from document
