@@ -335,7 +335,6 @@ MaterialEditor.prototype.updateMetadata = updateMetadata;
 MaterialEditor.prototype.update = update;
 MaterialEditor.prototype.updateInterface = updateInterface;
 
-
 //Attach material to material editor
 function attachMaterial(material, material_file)
 {
@@ -397,9 +396,30 @@ function updateMetadata(container)
 {
 	if(this.material !== null)
 	{
-		if(this.material.name !== undefined)
+		var material = this.material;
+
+		//Set container name
+		if(material.name !== undefined)
 		{
-			container.setName(this.material.name);
+			container.setName(material.name);
+		}
+
+		//Check if scene exists in program
+		var found = false;
+		var materials = Editor.program.materials;
+		for(var i in materials)
+		{
+			if(materials[i].uuid === material.uuid)
+			{
+				found = true;
+				break;
+			}
+		}
+
+		//If not found close tab
+		if(!found)
+		{
+			container.close();
 		}
 	}
 }

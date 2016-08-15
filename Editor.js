@@ -72,10 +72,10 @@ include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
 
 include("editor/ui/tab/MaterialEditor.js");
-include("editor/ui/tab/materials/PhongMaterialEditor.js");
-include("editor/ui/tab/materials/BasicMaterialEditor.js");
-include("editor/ui/tab/materials/StandardMaterialEditor.js");
-include("editor/ui/tab/materials/SpriteMaterialEditor.js");
+include("editor/ui/tab/materialeditor/PhongMaterialEditor.js");
+include("editor/ui/tab/materialeditor/BasicMaterialEditor.js");
+include("editor/ui/tab/materialeditor/StandardMaterialEditor.js");
+include("editor/ui/tab/materialeditor/SpriteMaterialEditor.js");
 
 include("editor/ui/input/CheckBox.js");
 include("editor/ui/input/TextBox.js");
@@ -135,7 +135,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608151719";
+Editor.TIMESTAMP = "201608152123";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -296,29 +296,31 @@ Editor.update = function()
 		//Keyboard shortcuts
 		if(Keyboard.isKeyJustPressed(Keyboard.DEL))
 		{
-			Editor.deleteSelectedObject();
+			Editor.deleteObject();
 		}
 		else if(Keyboard.isKeyPressed(Keyboard.CTRL))
 		{
 			if(Keyboard.isKeyJustPressed(Keyboard.C))
 			{
-				Editor.copySelectedObject();
+				Editor.copyObject();
 			}
 			else if(Keyboard.isKeyJustPressed(Keyboard.V))
 			{
-				Editor.pasteIntoSelectedObject();
+				Editor.pasteObject();
 			}
 			else if(Keyboard.isKeyJustPressed(Keyboard.X))
 			{
-				Editor.cutSelectedObject();
+				Editor.cutObject();
 			}
 			else if(Keyboard.isKeyJustPressed(Keyboard.Y))
 			{
 				//TODO <ADD CODE HERE>
+				alert("Undo and redo not implemented!");
 			}
 			else if(Keyboard.isKeyJustPressed(Keyboard.Z))
 			{
 				//TODO <ADD CODE HERE>
+				alert("Undo and redo not implemented!");
 			}
 		}
 
@@ -389,7 +391,7 @@ Editor.update = function()
 			else if(Mouse.buttonPressed(Mouse.RIGHT))
 			{
 				//Move speed
-				var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0,0,0))/1000;
+				var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0,0,0)) / 1000;
 				if(speed < 0.02)
 				{
 					speed = 0.02;
@@ -422,19 +424,13 @@ Editor.update = function()
 				speed *= Mouse.wheel;
 
 				//Limit zoom speed
-				if(speed < 0)
+				if(speed < 0 && speed > -0.03)
 				{
-					if(speed > -0.03)
-					{
-						speed = -0.03;
-					}
+					speed = -0.03;
 				}
-				else if(speed > 0)
+				else if(speed > 0 && speed < 0.03)
 				{
-					if(speed < 0.03)
-					{
-						speed = 0.03;
-					}
+					speed = 0.03;
 				}
 
 				//Move camera
@@ -555,68 +551,91 @@ Editor.isObjectSelected = function(obj)
 }
 
 //Delete Selected Object
-Editor.deleteSelectedObject = function()
+Editor.deleteObject = function(obj)
 {
-	if(Editor.selected_object !== null && Editor.selected_object.parent !== null)
+	if(obj !== undefined)
 	{
-		Editor.selected_object.parent.remove(Editor.selected_object);
+		obj.destroy();
+		Editor.updateObjectViews();
+		if(Editor.isObjectSelected(obj))
+		{
+			Editor.resetEditingFlags();
+		}
+	}
+	else if(Editor.selected_object !== null)
+	{
+		Editor.selected_object.destroy();
 		Editor.updateObjectViews();
 		Editor.resetEditingFlags();
 	}
 }
 
 //Copy selected object
-Editor.copySelectedObject = function()
+Editor.copyObject = function(obj)
 {
-	if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
+	if(obj !== undefined)
 	{
-		try
+		if(App.clipboard !== undefined)
+		{
+			App.clipboard.set(JSON.stringify(obj.toJSON()), "text");
+		}
+	}
+	else if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
+	{
+		if(App.clipboard !== undefined)
 		{
 			App.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
 		}
-		catch(e){}
 	}
 }
 
 //Cut selected object
-Editor.cutSelectedObject = function()
+Editor.cutObject = function(obj)
 {
-	if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
+	if(obj !== undefined)
 	{
-		try
+		if(App.clipboard !== undefined)
+		{
+			App.clipboard.set(JSON.stringify(obj.toJSON()), "text");
+		}
+		obj.destroy();
+		Editor.updateObjectViews();
+		if(Editor.isObjectSelected(obj))
+		{
+			Editor.resetEditingFlags();
+		}
+	}
+	else if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
+	{
+		if(App.clipboard !== undefined)
 		{
 			App.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
-			if(Editor.selected_object.parent !== null)
-			{
-				Editor.selected_object.parent.remove(Editor.selected_object);
-				Editor.updateObjectViews();
-				Editor.resetEditingFlags();
-			}
 		}
-		catch(e){}
+		Editor.selected_object.destroy();
+		Editor.updateObjectViews();
+		Editor.resetEditingFlags();
 	}
 }
 
-//Paste as children of selected object
-Editor.pasteIntoSelectedObject = function()
+//Paste object as children of target object
+Editor.pasteObject = function(target)
 {
 	try
 	{
 		var content = App.clipboard.get("text");
-		var loader = new ObjectLoader();
 		var data = JSON.parse(content);
 
 		//Create object
-		var obj = loader.parse(data);
+		var obj = new ObjectLoader().parse(data);
 		obj.traverse(function(child)
 		{
 			child.uuid = THREE.Math.generateUUID();
 		});
 
-		//Add object
-		if(Editor.selected_object !== null)
+		//Add object to target
+		if(target !== undefined)
 		{
-			Editor.selected_object.add(obj);
+			target.add(obj);
 		}
 		else
 		{
@@ -626,17 +645,6 @@ Editor.pasteIntoSelectedObject = function()
 		Editor.updateObjectViews();
 	}
 	catch(e){}
-}
-
-//Delete selected object
-Editor.deleteSelectedObject = function()
-{
-	if(Editor.selected_object !== null)
-	{
-		Editor.selected_object.destroy();
-		Editor.updateObjectViews();
-		Editor.resetEditingFlags();
-	}
 }
 
 //Update UI panel to match selected object
@@ -772,10 +780,13 @@ Editor.updateObjectPanel = function()
 }
 
 //Add object to actual scene
-Editor.addToActualScene = function(obj)
+Editor.addToScene = function(obj)
 {
-	Editor.program.scene.add(obj);
-	Editor.updateObjectViews();
+	if(Editor.program.scene !== null)
+	{
+		Editor.program.scene.add(obj);
+		Editor.updateObjectViews();
+	}
 }
 
 //Select tool to manipulate objects

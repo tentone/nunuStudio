@@ -29,6 +29,9 @@ function Program(name)
 	}
 
 	//Assets
+	this.images = [];
+	this.videos = [];
+	this.fonts = [];
 	this.materials = [];
 	this.textures = [];
 	this.geometries = [];

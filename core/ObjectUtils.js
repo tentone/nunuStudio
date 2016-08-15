@@ -37,9 +37,9 @@ ObjectUtils.getMaterials = function(obj, materials)
 			{
 				var material_array = child.material.materials;
 
-				for(var i = 0; i < material_array.length; i++)
+				for(var j = 0; j < material_array.length; j++)
 				{
-					add(material_array[i]);
+					add(material_array[j]);
 				}
 			}
 		}

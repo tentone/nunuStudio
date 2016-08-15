@@ -165,7 +165,26 @@ function updateMetadata(container)
 {
 	if(this.script !== null)
 	{
-		container.setName(this.script.name);
+		var script = this.script;
+
+		//Set container name
+		container.setName(script.name);
+
+		//Check if script exists in program
+		var found = false;
+		Editor.program.traverse(function(obj)
+		{
+			if(obj.uuid === script.uuid)
+			{
+				found = true;
+			}
+		});
+
+		//If not found close tab
+		if(!found)
+		{
+			container.close();
+		}
 	}
 }
 
@@ -176,8 +195,7 @@ function activate()
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
 
-	//Update code and set font size
-	this.updateScript();
+	//Set font size
 	this.setFontSize(Settings.code.font_size);
 
 	//Update editor settings
@@ -187,6 +205,9 @@ function activate()
 	this.code.setOption("keyMap", Settings.code.keymap);
 	this.code.setOption("autoCloseBrackets", Settings.code.auto_close_brackets);
 	this.code.setOption("styleActiveLine", Settings.code.highlight_active_line);
+
+	//Update script
+	this.updateScript();
 }
 
 //Return editor text
