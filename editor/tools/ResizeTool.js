@@ -118,6 +118,7 @@ function update(raycaster)
 		this.obj.getWorldPosition(this.position);
 		this.obj.getWorldQuaternion(this.quaternion);
 
+		//Reset selected flags
 		if(Mouse.buttonJustReleased(Mouse.LEFT))
 		{
 			this.selected = false;
@@ -127,35 +128,60 @@ function update(raycaster)
 			this.selected_center = false;
 		}
 
+		//Update object scale
 		if(this.selected)
 		{
-			var scale = this.obj.scale.clone();
-			scale.multiplyScalar(0.01);
+			var scale = this.obj.scale;
+			var delta = Mouse.delta;
+			var rotation = Editor.camera_rotation;
+			var x = 0, y = 0, z = 0;
 
 			if(this.selected_center)
 			{
 				var size = (Mouse.delta.x - Mouse.delta.y);
-				this.obj.scale.x += size * scale.x;
-				this.obj.scale.y += size * scale.y;
-				this.obj.scale.z += size * scale.z;
+				x = size * scale * 0.01;
+				y = size * scale * 0.01;
+				z = size * scale * 0.01;
 			}
 			else if(this.selected_x)
 			{
-				this.obj.scale.x -= Mouse.delta.y * Math.sin(Editor.camera_rotation.x) * scale.x;
-				this.obj.scale.x -= Mouse.delta.x * Math.cos(Editor.camera_rotation.x) * scale.x;
+				x = (-delta.y * Math.sin(rotation.x) - delta.x * Math.cos(rotation.x)) * scale.x * 0.01;
 			}
 			else if(this.selected_y)
 			{
-				this.obj.scale.y -= Mouse.delta.y * scale.y;
+				y = -delta.y * scale.y * 0.01;
 			}
 			else if(this.selected_z)
 			{
-				this.obj.scale.z -= Mouse.delta.y * Math.sin(Editor.camera_rotation.x + Editor.pid2) * scale.z;
-				this.obj.scale.z -= Mouse.delta.x * Math.cos(Editor.camera_rotation.x + Editor.pid2) * scale.z;
+				z = (-delta.y * Math.sin(rotation.x + 1.57) - delta.x * Math.cos(rotation.x + 1.57))* scale.z * 0.01;
+			}
+
+			this.obj.scale.x += x;
+			this.obj.scale.y += y;
+			this.obj.scale.z += z;
+
+			//Update physics objects
+			if(this.obj instanceof PhysicsObject)
+			{
+				var shapes = this.obj.body.shapes;
+				for(var i = 0; i < shapes.length; i++)
+				{
+					var shape = shapes[i];
+					
+					if(shape.type === CANNON.Shape.types.BOX)
+					{
+						shape.halfExtents.x += x / 2.0;
+						shape.halfExtents.y += y / 2.0;
+						shape.halfExtents.z += z / 2.0;
+					}
+					else if(shape.type === CANNON.Shape.types.SPHERE)
+					{
+						shape.radius += x;
+					}
+				}
 			}
 
 			Editor.updateObjectPanel();
-
 			return true;
 		}
 		else

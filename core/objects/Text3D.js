@@ -20,7 +20,7 @@ function Text3D(text, material, font)
 	this.scale.set(0.02, 0.02, 0.02);
 
 	this.text = text;
-	
+		
 	this.receiveShadow = true;
 	this.castShadow = true;
 }
@@ -55,7 +55,10 @@ function update()
 function dispose()
 {
 	//Dipose material and geometry
-	this.material.dispose();
+	if(this.material.dispose !== undefined)
+	{
+		this.material.dispose();
+	}
 	this.geometry.dispose();
 
 	//Dipose children

@@ -19,7 +19,6 @@ var Vector3 = THREE.Vector3;
 var Vector4 = THREE.Vector4;
 
 //Objects
-var Object3D = THREE.Object3D;
 var LOD = THREE.LOD;
 
 //Materials
