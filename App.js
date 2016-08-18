@@ -36,11 +36,6 @@ include("input/Key.js");
 include("input/Keyboard.js");
 include("input/Mouse.js");
 
-include("core/ObjectLoader.js");
-include("core/Program.js");
-include("core/Scene.js");
-include("core/ObjectUtils.js");
-
 include("core/three/Object3D.js");
 include("core/three/Vector3.js");
 include("core/three/Vector2.js");
@@ -77,6 +72,12 @@ include("core/objects/AnimatedModel.js");
 include("core/objects/Text3D.js");
 include("core/objects/Sprite.js");
 include("core/objects/ParticleEmitter.js");
+
+include("core/ObjectLoader.js");
+include("core/Program.js");
+include("core/Scene.js");
+include("core/ObjectUtils.js");
+include("core/MathUtils.js");
 
 //App class
 function App(){}

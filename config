@@ -20,7 +20,7 @@
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"font_size": 15,
+		"font_size": 14,
 		"line_numbers": true,
 		"line_wrapping": false,
 		"auto_close_brackets": true,

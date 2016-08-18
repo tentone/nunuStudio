@@ -135,7 +135,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608180145";
+Editor.TIMESTAMP = "201608181653";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -168,9 +168,6 @@ Editor.initialize = function(canvas)
 	//Editor initial state
 	Editor.tool_mode = Editor.MODE_SELECT;
 	Editor.state = Editor.STATE_EDITING;
-	
-	//Auxiliar values
-	Editor.pid2 = Math.PI/2;
 
 	//Editor Selected object
 	Editor.selected_object = null;
@@ -399,8 +396,8 @@ Editor.update = function()
 				Editor.camera.position.x += Mouse.delta.y * speed * angle_sin;
 
 				//Move Camera Lateral
-				var angle_cos = Math.cos(Editor.camera_rotation.x + Editor.pid2);
-				var angle_sin = Math.sin(Editor.camera_rotation.x + Editor.pid2);
+				var angle_cos = Math.cos(Editor.camera_rotation.x + MathUtils.pid2);
+				var angle_sin = Math.sin(Editor.camera_rotation.x + MathUtils.pid2);
 				Editor.camera.position.z += Mouse.delta.x * speed * angle_cos;
 				Editor.camera.position.x += Mouse.delta.x * speed * angle_sin;
 			}
