@@ -139,9 +139,9 @@ function update(raycaster)
 			if(this.selected_center)
 			{
 				var size = (Mouse.delta.x - Mouse.delta.y);
-				x = size * scale * 0.01;
-				y = size * scale * 0.01;
-				z = size * scale * 0.01;
+				x = size * scale.x * 0.01;
+				y = size * scale.y * 0.01;
+				z = size * scale.z * 0.01;
 			}
 			else if(this.selected_x)
 			{
