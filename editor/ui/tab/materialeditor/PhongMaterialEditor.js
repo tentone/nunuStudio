@@ -7,7 +7,7 @@ function PhongMaterialEditor(parent)
 	var self = this;
 
 	//Wireframe
-	this.wireframe = new CheckBox(this.preview.div_b);
+	this.wireframe = new CheckBox(this.form.element);
 	this.wireframe.setText("Wireframe");
 	this.wireframe.size.set(200, 15);
 	this.wireframe.updateInterface();

@@ -22,7 +22,7 @@ function Scene()
 	this.world = new CANNON.World();
 	this.world.quatNormalizeSkip = 0;
 	this.world.quatNormalizeFast = false;
-	this.world.gravity.set(0, -10, 0);
+	this.world.gravity.set(0, -9.8, 0);
 	this.world.broadphase = new CANNON.NaiveBroadphase();
 	this.world.solver = new CANNON.SplitSolver(new CANNON.GSSolver());
 	this.world.solver.tolerance = 0.1;

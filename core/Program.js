@@ -31,6 +31,7 @@ function Program(name)
 	//Assets
 	this.images = [];
 	this.videos = [];
+	this.audio = [];
 	this.fonts = [];
 	this.materials = [];
 	this.textures = [];

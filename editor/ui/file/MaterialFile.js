@@ -74,6 +74,10 @@ function MaterialFile(parent)
 				{
 					material_editor = new SpriteMaterialEditor();
 				}
+				else if(self.material instanceof THREE.ShaderMaterial)
+				{
+					material_editor = new ShaderMaterialEditor();
+				}
 				else
 				{
 					material_editor = new MaterialEditor();
