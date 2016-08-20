@@ -133,7 +133,7 @@ function TreeElement(container)
 						child.uuid = THREE.Math.generateUUID();
 					});
 					self.obj.parent.add(obj);
-					Editor.updateObjectViews();
+					Editor.updateTreeView();
 				});
 
 				//Copy object
@@ -227,7 +227,7 @@ function TreeElement(container)
 			var found = false;
 			for(var i = 0; i < Interface.tab.options.length; i++)
 			{
-				if(Interface.tab.options[i].component instanceof CodeEditor)
+				if(Interface.tab.options[i].component instanceof ScriptEditor)
 				{
 					if(Interface.tab.options[i].component.script === self.obj)
 					{
@@ -243,7 +243,7 @@ function TreeElement(container)
 			{
 				//Add new Code Editor tab
 				var tab = Interface.tab.addOption(self.obj.name, Interface.file_dir + "icons/tab/code.png", true);
-				var code = new CodeEditor();
+				var code = new ScriptEditor();
 				code.attachScript(self.obj);
 				tab.attachComponent(code);
 				

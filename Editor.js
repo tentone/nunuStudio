@@ -35,7 +35,6 @@ include("lib/three/loaders/collada/KeyFrameAnimation.js");
 include("lib/jscolor.min.js");
 
 //Internal modules
-include("editor/ui/Graph.js");
 include("editor/ui/Bar.js");
 include("editor/ui/Button.js");
 include("editor/ui/DropdownMenu.js");
@@ -65,7 +64,7 @@ include("editor/ui/theme/Theme.js");
 include("editor/ui/theme/ThemeDark.js");
 include("editor/ui/theme/ThemeLight.js");
 
-include("editor/ui/tab/CodeEditor.js");
+include("editor/ui/tab/ScriptEditor.js");
 include("editor/ui/tab/SceneEditor.js");
 include("editor/ui/tab/SettingsTab.js");
 include("editor/ui/tab/ParticleEditor.js");
@@ -76,7 +75,10 @@ include("editor/ui/tab/materialeditor/PhongMaterialEditor.js");
 include("editor/ui/tab/materialeditor/BasicMaterialEditor.js");
 include("editor/ui/tab/materialeditor/StandardMaterialEditor.js");
 include("editor/ui/tab/materialeditor/SpriteMaterialEditor.js");
+include("editor/ui/tab/materialeditor/ShaderMaterialEditor.js");
 
+include("editor/ui/input/Graph.js");
+include("editor/ui/input/CodeEditor.js");
 include("editor/ui/input/CheckBox.js");
 include("editor/ui/input/TextBox.js");
 include("editor/ui/input/ColorChooser.js");
@@ -135,7 +137,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608181653";
+Editor.TIMESTAMP = "20160821617";
 
 //Initialize Main
 Editor.initialize = function(canvas)

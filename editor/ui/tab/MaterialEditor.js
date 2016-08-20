@@ -141,17 +141,17 @@ function MaterialEditor(parent)
 		//Sphere
 		if(value === 0)
 		{
-			self.obj.geometry = new THREE.SphereBufferGeometry(1, 128, 128);
+			self.obj.geometry = new THREE.SphereBufferGeometry(1, 64, 64);
 		}
 		//Torus
 		else if(value === 1)
 		{
-			self.obj.geometry = new THREE.TorusBufferGeometry(0.8, 0.4, 64, 128);
+			self.obj.geometry = new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64);
 		}
 		//Cube
 		else if(value === 2)
 		{
-			self.obj.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 128, 128, 128);
+			self.obj.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 64, 64, 64);
 		}
 		//Torus Knot
 		else if(value === 3)

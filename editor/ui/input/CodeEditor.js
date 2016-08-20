@@ -1,0 +1,195 @@
+"use strict";
+
+function CodeEditor(parent)
+{
+	//Parent
+	if(parent === undefined)
+	{
+		this.parent = document.body;
+	}
+	else
+	{
+		this.parent = parent;
+	}
+
+	//ID
+	var id = "code" + CodeEditor.id;
+	CodeEditor.id++;
+
+	//Create element
+	this.element = document.createElement("div");
+	this.element.id = id;
+	this.element.style.position = "absolute";
+	this.element.style.overflow = "hidden";
+	this.element.style.backgroundColor = Editor.theme.panel_color;
+
+	//Codemirror editor
+	this.code = new CodeMirror(this.element,
+	{
+		value: "",
+		lineNumbers: Settings.code.line_numbers,
+		lineWrapping: Settings.code.line_wrapping,
+		keyMap: Settings.code.keymap,
+		autoCloseBrackets: Settings.code.auto_close_brackets,
+		styleActiveLine: Settings.code.highlight_active_line,
+		matchBrackets: true,
+		dragDrop: true,
+		indentWithTabs: true,
+		indentUnit: 4,
+		tabSize: 4,
+		hintOptions:
+		{
+			hint: CodeMirror.hint.anyword
+		}
+	});
+	this.code.setOption("theme", Settings.code.theme);
+	this.code.setOption("mode", "javascript");
+
+	//Self pointer
+	var self = this;
+
+	//Key pressed event
+	this.code.on("keydown", function(code, event)
+	{
+		var key = event.keyCode;
+		if(!Keyboard.isKeyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
+		{
+			if(!code.state.completionActive)
+			{
+				CodeMirror.commands.autocomplete(code, null, {completeSingle: false});
+			}
+		}
+	});
+
+	//Context menu event
+	this.element.oncontextmenu = function()
+	{
+		var context = new ContextMenu();
+		context.size.set(130, 20);
+		context.position.set(event.clientX - 5, event.clientY - 5);
+		
+		context.addOption("Copy", function()
+		{
+			var text = self.code.getSelection();
+			if(text !== "")
+			{
+				App.clipboard.set(text, "text");
+			}
+		});
+		context.addOption("Cut", function()
+		{
+			var text = self.code.getSelection();
+			if(text !== "")
+			{
+				App.clipboard.set(text, "text");
+				self.code.replaceSelection("");
+			}
+		});
+		context.addOption("Paste", function()
+		{
+			self.code.replaceSelection(App.clipboard.get("text"));
+		});
+		context.addOption("Auto ident", function()
+		{
+			self.code.execCommand("indentAuto");
+		});
+		context.addOption("Select all", function()
+		{
+			self.code.execCommand("selectAll");
+		});
+		context.addOption("Undo", function()
+		{
+			self.code.execCommand("undo");
+		});
+		context.addOption("Redo", function()
+		{
+			self.code.execCommand("redo");
+		});
+	};
+
+	//Element atributes
+	this.size = new THREE.Vector2(0,0);
+	this.position = new THREE.Vector2(0,0);
+	this.visible = true;
+	
+	//Add element to document
+	this.parent.appendChild(this.element);
+}
+
+//CodeEditor ID counter
+CodeEditor.id = 0;
+
+//Functions Prototype
+CodeEditor.prototype.update = update;
+CodeEditor.prototype.updateInterface = updateInterface;
+CodeEditor.prototype.destroy = destroy;
+CodeEditor.prototype.setValue = setValue;
+CodeEditor.prototype.getValue = getValue;
+CodeEditor.prototype.setOnChange = setOnChange;
+CodeEditor.prototype.setMode = setMode;
+
+//Set language mode (javascript, glsl, etc)
+function setMode(mode)
+{
+	this.code.setOption("mode", mode);
+}
+
+//Set onchange callback
+function setOnChange(callback)
+{
+	this.code.on("change", callback);
+}
+
+//Set text
+function setValue(text)
+{
+	this.code.setValue(text);
+}
+
+//Get text
+function getValue()
+{
+	return this.code.getValue();
+}
+
+//Remove element
+function destroy()
+{
+	try
+	{
+		this.parent.removeChild(this.element);
+	}
+	catch(e){}
+}
+
+//Update
+function update(){}
+
+//Update Interface
+function updateInterface()
+{
+	if(this.visible)
+	{
+		this.element.style.visibility = "visible";
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
+	}
+
+	this.code.setOption("theme", Settings.code.theme);
+	this.code.setOption("lineNumbers", Settings.code.line_numbers);
+	this.code.setOption("lineWrapping", Settings.code.line_wrapping);
+	this.code.setOption("keyMap", Settings.code.keymap);
+	this.code.setOption("autoCloseBrackets", Settings.code.auto_close_brackets);
+	this.code.setOption("styleActiveLine", Settings.code.highlight_active_line);
+
+	this.code.display.wrapper.style.fontSize = Settings.code.font_size + "px";
+	this.code.setSize(this.size.x, this.size.y);
+	this.code.refresh();
+
+	this.element.style.top = this.position.y + "px";
+	this.element.style.left = this.position.x + "px";
+	this.element.style.width = this.size.x + "px";
+	this.element.style.height = this.size.y + "px";
+}

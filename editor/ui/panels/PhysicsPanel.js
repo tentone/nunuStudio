@@ -45,6 +45,24 @@ function PhysicsPanel(parent)
 		{
 			var scale = self.scale.getValue();
 			self.obj.scale.set(scale.x, scale.y, scale.z);
+
+			//Update physics objects
+			var shapes = self.obj.body.shapes;
+			for(var i = 0; i < shapes.length; i++)
+			{
+				var shape = shapes[i];
+				
+				if(shape.type === CANNON.Shape.types.BOX)
+				{
+					shape.halfExtents.x = scale.x / 2.0;
+					shape.halfExtents.y = scale.y / 2.0;
+					shape.halfExtents.z = scale.z / 2.0;
+				}
+				else if(shape.type === CANNON.Shape.types.SPHERE)
+				{
+					shape.radius = scale.x;
+				}
+			}
 		}
 	});
 	this.form.add(this.scale);
