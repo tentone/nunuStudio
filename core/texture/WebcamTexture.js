@@ -4,15 +4,15 @@
 function WebcamTexture()
 {
 	//Check if webcam available
-	if(navigator.webkitGetUserMedia || navigator.mozGetUserMedia ? true : false)
+	if(navigator.webkitGetUserMedia || navigator.mediaDevices.getUserMedia)
 	{
 		console.warn("Webcam available");
 	}
 
 	//Create the video element
 	this.video = document.createElement("video");
-	this.video.width = 256;
-	this.video.height = 256;
+	this.video.width = 512;
+	this.video.height = 512;
 	this.video.autoplay	= true;
 	this.video.loop	= true;
 
@@ -30,9 +30,9 @@ function WebcamTexture()
 			console.warn("No webcam available");
 		});		
 	}
-	else if(navigator.mozGetUserMedia)
+	else if(navigator.mediaDevices.getUserMedia)
 	{
-		navigator.mozGetUserMedia({video:true}, function(stream)
+		navigator.mediaDevices.getUserMedia({video:true}, function(stream)
 		{
 			self.video.src = URL.createObjectURL(stream);
 		},
