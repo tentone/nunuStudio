@@ -54,10 +54,10 @@ include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/Form.js");
 include("editor/ui/DragBuffer.js");
-include("editor/ui/FileExplorer.js");
+include("editor/ui/AssetExplorer.js");
 
-include("editor/ui/file/File.js");
-include("editor/ui/file/MaterialFile.js");
+include("editor/ui/asset/Asset.js");
+include("editor/ui/asset/MaterialAsset.js");
 
 include("editor/files/style/editor.css");
 include("editor/ui/theme/Theme.js");
@@ -137,7 +137,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "20160821712";
+Editor.TIMESTAMP = "201608202044";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -194,7 +194,7 @@ Editor.initialize = function(canvas)
 	Editor.material_renderer = new MaterialRenderer();
 
 	//Default materials to be used when creating objects
-	Editor.default_material = new THREE.MeshPhongMaterial();
+	Editor.default_material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 	Editor.default_material.name = "default";
 	Editor.default_sprite_material = new THREE.SpriteMaterial({map: new Texture("data/sample.png"), color: 0xffffff});
 	Editor.default_sprite_material.name = "default";
@@ -756,7 +756,7 @@ Editor.updateAssetExplorer = function()
 	//Add materials to asset explorer
 	for(var i in materials)
 	{
-		var file = new MaterialFile(Interface.asset_explorer.element);
+		var file = new MaterialAsset(Interface.asset_explorer.element);
 		file.setMaterial(materials[i]);
 		Interface.asset_explorer.add(file);
 	}
@@ -925,7 +925,7 @@ Editor.createNewProgram = function()
 {
 	//Create new program
 	Editor.program = new Program();
-	Editor.program.addDefaultScene();
+	Editor.program.addDefaultScene(Editor.default_material);
 	Editor.resetEditingFlags();
 
 	//Remove old tabs from interface

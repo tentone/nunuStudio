@@ -13,7 +13,7 @@ function Program(name)
 	this.matrixAutoUpdate = false;
 
 	//Program Info
-	this.name = "program";
+	this.name = (name !== undefined) ? name : "program";
 	this.description = "";
 	this.author = "";
 	this.version = "0";
@@ -22,13 +22,7 @@ function Program(name)
 	this.vr = false;
 	this.vr_scale = 1;
 
-	//Name
-	if(name !== undefined)
-	{
-		this.name = name;
-	}
-
-	//Assets
+	//Resources
 	this.images = [];
 	this.videos = [];
 	this.audio = [];
@@ -211,7 +205,7 @@ function addDefaultScene(material)
 {
 	if(material === undefined)
 	{
-		material = new THREE.MeshPhongMaterial();
+		material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 		material.name = "default";
 	}
 

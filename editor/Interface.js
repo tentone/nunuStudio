@@ -23,7 +23,7 @@ Interface.initialize = function()
 	Interface.asset_explorer_div.resize_size_max = 400;
 
 	//Asset explorer
-	Interface.asset_explorer = new FileExplorer(Interface.asset_explorer_div.element);
+	Interface.asset_explorer = new AssetExplorer(Interface.asset_explorer_div.element);
 	Interface.asset_explorer.files_size.set(Settings.general.file_preview_size, Settings.general.file_preview_size);
 	
 	//Asset explorer menu bar
