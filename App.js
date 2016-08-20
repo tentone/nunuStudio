@@ -1,13 +1,5 @@
 "use strict";
 
-//External libs
-include("lib/three/three.min.js");
-include("lib/three/effects/VREffect.js");
-include("lib/cannon/cannon.min.js");
-include("lib/leap.min.js");
-include("lib/stats.min.js");
-include("lib/SPE.min.js");
-
 //WebVR polyfill
 if(navigator.getVRDisplays === undefined)
 {
@@ -30,6 +22,14 @@ if(navigator.getVRDisplays === undefined)
 		}
 	});
 }
+
+//External libs
+include("lib/three/three.min.js");
+include("lib/three/effects/VREffect.js");
+include("lib/cannon/cannon.min.js");
+include("lib/leap.min.js");
+include("lib/stats.min.js");
+include("lib/SPE.min.js");
 
 //Internal modules
 include("input/Key.js");

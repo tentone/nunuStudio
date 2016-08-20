@@ -166,7 +166,11 @@ Interface.initialize = function()
 			try
 			{
 				var texture = new Texture(fname);
-				//TODO <ADD CODE HERE>
+				texture.name = "texture";
+				var material = new THREE.MeshPhongMaterial({map: texture, color: 0xffffff});
+				material.name = "texture";
+				Editor.program.addMaterial(material);
+				Editor.updateObjectViews();
 			}
 			catch(e)
 			{
@@ -175,16 +179,19 @@ Interface.initialize = function()
 		}, "image/*");
 	}, Interface.file_dir + "icons/assets/image.png");
 
-	//Load Video texture
-	Interface.asset_file.addOption("Video", function()
+	//Video texture
+	Interface.asset_file.addOption("Video Texture", function()
 	{
 		App.chooseFile(function(fname)
 		{
 			try
 			{
-				var material = new THREE.SpriteMaterial({map: new VideoTexture(fname), color: 0xffffff});
+				var texture = new VideoTexture(fname);
+				texture.name = "video";
+				var material = new THREE.MeshPhongMaterial({map: texture, color: 0xffffff});
 				material.name = "video";
-				Editor.addToScene(new Sprite(material));
+				Editor.program.addMaterial(material);
+				Editor.updateObjectViews();
 			}
 			catch(e)
 			{
@@ -192,6 +199,17 @@ Interface.initialize = function()
 			}
 		}, "video/*");
 	}, Interface.file_dir + "icons/assets/video.png");
+
+	//Webcam texture
+	Interface.asset_file.addOption("Webcam Texture", function()
+	{
+		var texture = new WebcamTexture();
+		texture.name = "webcam";
+		var material = new THREE.MeshPhongMaterial({map: texture, color: 0xffffff});
+		material.name = "webcam";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Interface.file_dir + "icons/hw/webcam.png");
 
 	//Load Font
 	Interface.asset_file.addOption("Font", function()
