@@ -23,7 +23,6 @@ function DirectionalLight(hex, intensity)
 DirectionalLight.prototype = Object.create(THREE.DirectionalLight.prototype);
 DirectionalLight.prototype.update = update;
 DirectionalLight.prototype.initialize = initialize;
-DirectionalLight.prototype.toJSON = toJSON;
 
 //Initialize
 function initialize()
@@ -41,17 +40,4 @@ function update()
 	{
 		this.children[i].update();
 	}
-}
-
-//Create JSON for object
-function toJSON(meta)
-{
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
-
-	data.shadow_left = this.shadow.camera.left;
-	data.shadow_right = this.shadow.camera.right;
-	data.shadow_top = this.shadow.camera.top;
-	data.shadow_bottom = this.shadow.camera.bottom;
-	
-	return data;
 }

@@ -731,7 +731,7 @@ function parseObject(data, geometries, materials, textures)
 		}
 	}
 
-	//Visibility data
+	//Shadow casting
 	if(data.castShadow !== undefined)
 	{
 		object.castShadow = data.castShadow;
@@ -740,6 +740,29 @@ function parseObject(data, geometries, materials, textures)
 	{
 		object.receiveShadow = data.receiveShadow;
 	}
+
+	//Shadow data
+	if(data.shadow)
+	{
+		if(data.shadow.bias !== undefined)
+		{
+			object.shadow.bias = data.shadow.bias;
+		}
+		if(data.shadow.radius !== undefined)
+		{
+			object.shadow.radius = data.shadow.radius;
+		}
+		if(data.shadow.mapSize !== undefined)
+		{
+			object.shadow.mapSize.fromArray(data.shadow.mapSize);
+		}
+		if(data.shadow.camera !== undefined)
+		{
+			object.shadow.camera = this.parseObject(data.shadow.camera);
+		}
+	}
+
+	//Visibility
 	if(data.visible !== undefined)
 	{
 		object.visible = data.visible;

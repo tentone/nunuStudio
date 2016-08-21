@@ -55,7 +55,7 @@ function AudioPanel(parent)
 	this.playbackRate = new NumberBox(this.form.element);
 	this.playbackRate.size.set(60, 18);
 	this.playbackRate.setStep(0.01);
-	this.playbackRate.setRange(0, 9999999);
+	this.playbackRate.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.playbackRate.setOnChange(function()
 	{
 		if(self.obj !== null)

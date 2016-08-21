@@ -51,6 +51,41 @@ function PointLightPanel(parent)
 	this.form.add(this.color);
 	this.form.nextRow();
 
+	//Distance
+	this.form.addText("Distance");
+	this.distance = new NumberBox(this.form.element);
+	this.distance.size.set(80, 18);
+	this.distance.setStep(0.1);
+	this.distance.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.distance.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.distance = self.distance.getValue();
+		}
+	});
+	this.form.add(this.distance);
+	this.form.nextRow();
+
+	//Decay
+	/*this.form.addText("Decay");
+	this.decay = new Slider(this.form.element);
+	this.decay.size.set(160, 18);
+	this.decay.setRange(0, 10);
+	this.decay.setStep(0.1);
+	this.decay.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.decay = self.decay.getValue();
+			self.decay_text.setText(self.obj.decay);
+		}
+	});
+	this.form.add(this.decay);
+	this.decay_text = this.form.addText("");
+	this.decay_text.setAlignment(Text.LEFT);
+	this.form.nextRow();*/
+
 	//Cast shadow
 	this.cast_shadow = new CheckBox(this.form.element);
 	this.cast_shadow.setText("Cast Shadow");
@@ -112,6 +147,9 @@ function updatePanel()
 		this.position.setValue(this.obj.position);
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.cast_shadow.setValue(this.obj.castShadow);
+		this.distance.setValue(this.obj.distance);
+		//this.decay.setValue(this.obj.decay);
+		//this.decay_text.setText(this.obj.decay);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
