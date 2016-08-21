@@ -137,7 +137,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608210413";
+Editor.TIMESTAMP = "201608211719";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -358,6 +358,17 @@ Editor.update = function()
 		//Check if mouse is inside canvas
 		if(Mouse.insideCanvas())
 		{
+			//TODO <FIX THIS>
+			//Lock mouse wheen camera is moving
+			/*if(Mouse.buttonJustPressed(Mouse.LEFT) || Mouse.buttonJustPressed(Mouse.RIGHT) || Mouse.buttonJustPressed(Mouse.MIDDLE))
+			{
+				Mouse.setLock(true);
+			}
+			else if(Mouse.buttonJustReleased(Mouse.LEFT) || Mouse.buttonJustReleased(Mouse.RIGHT) || Mouse.buttonJustReleased(Mouse.MIDDLE))
+			{
+				Mouse.setLock(false);
+			}*/
+
 			//Look camera
 			if(Mouse.buttonPressed(Mouse.LEFT) && !Editor.is_editing_object)
 			{

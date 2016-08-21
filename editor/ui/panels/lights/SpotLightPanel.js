@@ -106,7 +106,7 @@ function SpotLightPanel(parent)
 	this.form.nextRow();
 
 	//Decay
-	this.form.addText("Decay");
+	/*this.form.addText("Decay");
 	this.decay = new Slider(this.form.element);
 	this.decay.size.set(160, 18);
 	this.decay.setRange(0, 10);
@@ -122,8 +122,8 @@ function SpotLightPanel(parent)
 	this.form.add(this.decay);
 	this.decay_text = this.form.addText("");
 	this.decay_text.setAlignment(Text.LEFT);
-	this.form.nextRow();
-
+	this.form.nextRow();*/
+	
 	//Cast shadow
 	this.cast_shadow = new CheckBox(this.form.element);
 	this.cast_shadow.setText("Cast Shadow");
@@ -190,8 +190,8 @@ function updatePanel()
 		this.angle_text.setText(this.obj.angle);
 		this.penumbra.setValue(this.obj.penumbra);
 		this.penumbra_text.setText(this.obj.penumbra);
-		this.decay.setValue(this.obj.decay);
-		this.decay_text.setText(this.obj.decay);
+		//this.decay.setValue(this.obj.decay);
+		//this.decay_text.setText(this.obj.decay);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
