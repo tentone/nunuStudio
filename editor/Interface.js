@@ -208,7 +208,7 @@ Interface.initialize = function()
 		var material = new THREE.MeshPhongMaterial({map: texture, color: 0xffffff});
 		material.name = "webcam";
 		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
+		setTimeout(Editor.updateObjectViews, 500);
 	}, Interface.file_dir + "icons/hw/webcam.png");
 
 	//Load Font

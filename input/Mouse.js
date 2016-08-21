@@ -135,6 +135,44 @@ Mouse.insideCanvas = function()
 	return (Mouse.position.x > 0 && Mouse.position.y > 0 && Mouse.position.x < rect.width && Mouse.position.y < rect.height); 
 }
 
+//Set if mouse locked
+Mouse.setLock = function(value)
+{
+	if(Mouse.canvas !== null)
+	{
+		if(value)
+		{
+			if(Mouse.canvas.requestPointerLock)
+			{
+				Mouse.canvas.requestPointerLock();
+			}
+			else if(Mouse.canvas.mozRequestPointerLock)
+			{
+				Mouse.canvas.mozRequestPointerLock();
+			}
+			else if(Mouse.canvas.webkitRequestPointerLock)
+			{
+				Mouse.canvas.webkitRequestPointerLock();
+			}
+		}
+		else
+		{
+			if(document.exitPointerLock)
+			{
+				document.exitPointerLock();
+			}
+			else if(document.mozExitPointerLock)
+			{
+				document.mozExitPointerLock();
+			}
+			else if(document.webkitExitPointerLock)
+			{
+				document.webkitExitPointerLock();
+			}
+		}
+	}
+}
+
 //Check if Mouse button is pressed
 Mouse.buttonPressed = function(button)
 {

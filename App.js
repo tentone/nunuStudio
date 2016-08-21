@@ -3,7 +3,7 @@
 //WebVR polyfill
 if(navigator.getVRDisplays === undefined)
 {
-	include("lib/webvr-polyfill.js", function()
+	include("lib/webvr-polyfill.min.js", function()
 	{
 		window.WebVRConfig =
 		{
@@ -26,7 +26,7 @@ if(navigator.getVRDisplays === undefined)
 //External libs
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
-include("lib/cannon/cannon.min.js");
+include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
@@ -346,27 +346,6 @@ App.loadMain = function(main)
 App.webvrAvailable = function()
 {
 	return (navigator.getVRDisplays !== undefined);
-}
-
-//Set if mouse locked
-App.setMouseLock = function(value)
-{
-	if(value === true)
-	{
-		document.body.onclick = function()
-		{
-			try
-			{
-				document.body.requestPointerLock = canvas.mozRequestPointerLock || canvas.requestPointerLock || canvas.webkitRequestPointerLock;
-				document.body.requestPointerLock();
-			}
-			catch(e){}
-		}
-	}
-	else
-	{
-		document.body.onclick = function(){}
-	}
 }
 
 //App loop

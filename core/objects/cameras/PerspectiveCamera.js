@@ -18,8 +18,9 @@ PerspectiveCamera.prototype.update = update;
 //Initialize
 function initialize()
 {
-	this.scale.set(1, 1, 1);
-	
+	this.getWorldScale(this.scale);
+	this.scale.set(1.0 / this.scale.x, 1.0 / this.scale.y, 1.0 / this.scale.z);
+
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();

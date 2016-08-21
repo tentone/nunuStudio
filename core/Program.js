@@ -18,6 +18,9 @@ function Program(name)
 	this.author = "";
 	this.version = "0";
 
+	//Hardware flags
+	this.lock_pointer = false;
+	
 	//VR flags
 	this.vr = false;
 	this.vr_scale = 1;
@@ -302,10 +305,15 @@ function toJSON(meta)
 		}
 	});
 
-	//Attributes
+	//Program info
 	data.object.author = this.author;
 	data.object.description = this.description;
 	data.object.version = this.version;
+
+	//Hardware flags
+	data.object.lock_pointer = this.lock_pointer;
+
+	//VR flags
 	data.object.vr = this.vr;
 	data.object.vr_scale = this.vr_scale;
 

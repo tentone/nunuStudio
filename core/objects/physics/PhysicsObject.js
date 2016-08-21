@@ -53,7 +53,10 @@ function initialize()
 function update()
 {
 	this.position.copy(this.body.position);
-	this.quaternion.copy(this.body.quaternion);
+	if(!this.body.fixedRotation)
+	{
+		this.quaternion.copy(this.body.quaternion);
+	}
 
 	//Update children
 	for(var i = 0; i < this.children.length; i++)

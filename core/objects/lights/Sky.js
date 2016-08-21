@@ -3,7 +3,7 @@
 function Sky(auto_update, day_time, sun_distance, time)
 {	
 	//Hemisphere light
-	this.hemisphere = new HemisphereLight(0xffffff, 0xffffff, 0.3);
+	this.hemisphere = new HemisphereLight(0xffffff, 0xffffff, 0.5);
 	this.hemisphere.color.setHSL(0.6, 1, 0.6);
 	this.hemisphere.groundColor.setHSL(0.1, 1, 0.75);
 	this.hemisphere.position.set(0, 500, 0);
@@ -63,9 +63,9 @@ function Sky(auto_update, day_time, sun_distance, time)
 	this.add(this.sun);
 	this.add(this.hemisphere);
 
-	//Day Time and Sun control
-	this.sun_distance = 100;
+	//Day time (seconds) and sun distance
 	this.auto_update = true;
+	this.sun_distance = 100;
 	this.day_time = 20; //seconds
 	this.time = 13;
 
