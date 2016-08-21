@@ -137,7 +137,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608202044";
+Editor.TIMESTAMP = "201608210413";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -163,9 +163,6 @@ Editor.initialize = function(canvas)
 
 	//Set window title
 	document.title = Editor.NAME + " " + Editor.VERSION + " (" + Editor.TIMESTAMP + ")";
-
-	//Set mouse lock false
-	App.setMouseLock(false);
 
 	//Editor initial state
 	Editor.tool_mode = Editor.MODE_SELECT;
@@ -891,9 +888,7 @@ Editor.setCameraRotation = function(camera_rotation, camera)
 	var direction = new THREE.Vector3(Math.sin(camera_rotation.x)*cos_angle_y, Math.sin(camera_rotation.y), Math.cos(camera_rotation.x)*cos_angle_y);
 
 	//Add position offset and set camera direction
-	direction.x += camera.position.x;
-	direction.y += camera.position.y;
-	direction.z += camera.position.z;
+	direction.add(camera.position);
 	camera.lookAt(direction);
 }
 
@@ -992,7 +987,17 @@ Editor.exportWebProject = function(dir)
 	App.copyFolder("runtime", dir);
 	App.copyFolder("core", dir + "\\core");
 	App.copyFolder("input", dir + "\\input");
-	App.copyFolder("lib", dir + "\\lib");
+	App.makeDirectory(dir + "\\lib");
+	App.copyFile("lib\\leap.min.js", dir + "\\lib\\leap.min.js");
+	App.copyFile("lib\\SPE.min.js", dir + "\\lib\\SPE.min.js");
+	App.copyFile("lib\\leap.min.js", dir + "\\lib\\leap.min.js");
+	App.copyFile("lib\\stats.min.js", dir + "\\lib\\stats.min.js");
+	App.copyFile("lib\\cannon.min.js", dir + "\\lib\\cannon.min.js");
+	App.copyFile("lib\\webvr-polyfill.min.js", dir + "\\lib\\webvr-polyfill.min.js");	
+	App.makeDirectory(dir + "\\lib\\three");
+	App.copyFile("lib\\three\\three.min.js", dir + "\\lib\\three\\three.min.js");
+	App.makeDirectory(dir + "\\lib\\three\\effects");
+	App.copyFile("lib\\three\\effects\\VREffect.js", dir + "\\lib\\three\\effects\\VREffect.js");
 	App.copyFile("App.js", dir + "\\App.js");
 	Editor.saveProgram(dir + "\\app.isp");
 }
@@ -1000,12 +1005,9 @@ Editor.exportWebProject = function(dir)
 //Export windows project
 Editor.exportWindowsProject = function(dir)
 {
-	App.copyFolder("runtime", dir);
-	App.copyFolder("core", dir + "\\core");
-	App.copyFolder("input", dir + "\\input");
-	App.copyFolder("lib", dir + "\\lib");
+	Editor.exportWebProject(dir);
+
 	App.copyFolder("nwjs", dir + "\\nwjs");
-	App.copyFile("App.js", dir + "\\App.js");
 	App.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
 	App.writeFile(dir + "\\" + Editor.program.name + ".bat", "cd nwjs/win\nstart nw.exe ../../");
 	Editor.saveProgram(dir + "\\app.isp");
@@ -1074,6 +1076,12 @@ Editor.setState = function(state)
 			}
 		}
 
+		//Set mouse lock
+		if(Editor.program_running.lock_pointer)
+		{
+			Mouse.setLock(true);
+		}
+
 		//Update tab to show buttons
 		tab.updateInterface();
 
@@ -1110,6 +1118,9 @@ Editor.disposeRunningProgram = function()
 		Editor.program_running = null;
 		Editor.vr_effect = null;
 	}
+
+	//Unlock mouse
+	Mouse.setLock(false);
 }
 
 //Set performance meter to be used

@@ -52,7 +52,29 @@ function ProgramPanel(parent)
 	this.form.add(this.version);
 	this.form.nextRow();
 
+	//Mouse lock
+	this.lock_pointer = new CheckBox(this.form.element);
+	this.lock_pointer.setText("Lock pointer");
+	this.lock_pointer.size.set(50, 15);
+	this.lock_pointer.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.lock_pointer = self.lock_pointer.getValue();
+		}
+	});
+	this.form.add(this.lock_pointer);
+	this.form.nextRow();
+
+	//Spacing
+	this.form.addText("");
+	this.form.nextRow();
+
 	//VR
+	this.form.addText("Virtual Reality");
+	this.form.nextRow();
+
+	//VR Enabled
 	this.vr = new CheckBox(this.form.element);
 	this.vr.setText("VR Enabled");
 	this.vr.size.set(50, 15);
@@ -80,6 +102,7 @@ function ProgramPanel(parent)
 		}
 	});
 	this.form.add(this.vr_scale);
+	this.form.nextRow();
 
 	//Update form
 	this.form.updateInterface();
@@ -97,6 +120,7 @@ function updatePanel()
 		this.name.setText(this.obj.name);
 		this.author.setText(this.obj.author);
 		this.version.setText(this.obj.version);
+		this.lock_pointer.setValue(this.obj.lock_pointer);
 		this.vr.setValue(this.obj.vr);
 		this.vr_scale.setValue(this.obj.vr_scale);
 	}

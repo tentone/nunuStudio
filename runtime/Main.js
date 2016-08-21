@@ -8,12 +8,9 @@ Main.app = "app.isp";
 //Initialize Main
 Main.initialize = function(canvas)
 {
-	//Set mouse lock false
-	App.setMouseLock(false);
-
 	//Main program and scene
 	Main.program = Main.loadProgram(Main.app);
-	
+
 	//Renderer and canvas
 	Main.canvas = document.createElement("canvas");
 	Main.canvas.style.position = "absolute";
@@ -133,6 +130,12 @@ Main.initialize = function(canvas)
 		//Create vr effect
 		Main.vr_controls = new VRControls();
 		Main.vr_effect = new THREE.VREffect(Main.renderer);
+	}
+
+	//Set pointer lock
+	if(Main.program.lock_pointer)
+	{
+		Mouse.setLock(true);
 	}
 }
 

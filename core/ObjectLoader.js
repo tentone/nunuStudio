@@ -538,6 +538,10 @@ function parseObject(data, geometries, materials, textures)
 			object.version = data.version;
 			object.vr = data.vr;
 			object.vr_scale = data.vr_scale;
+			if(data.lock_pointer !== undefined)
+			{
+				object.lock_pointer = data.lock_pointer;
+			}
 			if(data.initial_scene !== undefined)
 			{
 				object.initial_scene = data.initial_scene;
