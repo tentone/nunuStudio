@@ -67,6 +67,22 @@ function PointLightPanel(parent)
 	this.form.add(this.distance);
 	this.form.nextRow();
 
+	//Intensity
+	this.form.addText("Intensity");
+	this.intensity = new Slider(this.form.element);
+	this.intensity.size.set(160, 18);
+	this.intensity.setStep(0.1);
+	this.intensity.setRange(0, 10);
+	this.intensity.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.intensity = self.intensity.getValue();
+		}
+	});
+	this.form.add(this.intensity);
+	this.form.nextRow();
+
 	//Decay
 	/*this.form.addText("Decay");
 	this.decay = new Slider(this.form.element);
@@ -82,8 +98,6 @@ function PointLightPanel(parent)
 		}
 	});
 	this.form.add(this.decay);
-	this.decay_text = this.form.addText("");
-	this.decay_text.setAlignment(Text.LEFT);
 	this.form.nextRow();*/
 
 	//Cast shadow
@@ -148,8 +162,8 @@ function updatePanel()
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.distance.setValue(this.obj.distance);
+		this.intensity.setValue(this.obj.intensity);
 		//this.decay.setValue(this.obj.decay);
-		//this.decay_text.setText(this.obj.decay);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}

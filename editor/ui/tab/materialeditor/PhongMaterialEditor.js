@@ -87,7 +87,6 @@ function PhongMaterialEditor(parent)
 		}
 	});
 	this.form.add(this.shininess);
-	this.shininess_text = this.form.addText("");
 	this.form.nextRow();
 
 	//Texture map
@@ -133,7 +132,6 @@ function PhongMaterialEditor(parent)
 		}
 	});
 	this.form.add(this.bumpScale);
-	this.bumpScale_text = this.form.addText("");
 	this.form.nextRow();
 
 	//Normal map
@@ -379,11 +377,9 @@ function attachMaterial(material, material_file)
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.specular.setValue(material.specular.r, material.specular.g, material.specular.b);
 	this.shininess.setValue(material.shininess);
-	this.shininess_text.setText(material.shininess);
 	this.map.setValue(material.map);
 	this.bumpMap.setValue(material.bumpMap);
 	this.bumpScale.setValue(material.bumpScale);
-	this.bumpScale_text.setText(material.bumpScale);
 	this.normalMap.setValue(material.normalMap);
 	this.normalScale.setValue(material.normalScale.x, material.normalScale.y);
 	this.displacementMap.setValue(material.displacementMap);

@@ -288,11 +288,9 @@ function MaterialEditor(parent)
 		{
 			self.material.opacity = self.opacity.getValue();
 			self.material.needsUpdate = true;
-			self.opacity_text.setText(self.material.opacity);
 		}
 	});
 	this.form.add(this.opacity);
-	this.opacity_text = this.form.addText("-------");
 	this.form.nextRow();
 	
 	//Blending mode
@@ -369,7 +367,6 @@ function attachMaterial(material, material_file)
 	this.depthWrite.setValue(material.depthWrite);
 	this.transparent.setValue(material.transparent);
 	this.opacity.setValue(material.opacity);
-	this.opacity_text.setText(material.opacity);
 	this.blending.setValue(material.blending);	
 }
 
