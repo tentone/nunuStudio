@@ -65,11 +65,7 @@ function ProgramPanel(parent)
 	});
 	this.form.add(this.lock_pointer);
 	this.form.nextRow();
-
-	//Spacing
-	this.form.addText("");
-	this.form.nextRow();
-
+	
 	//VR
 	this.form.addText("Virtual Reality");
 	this.form.nextRow();

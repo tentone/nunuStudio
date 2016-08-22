@@ -25,6 +25,11 @@ function Program(name)
 	this.vr = false;
 	this.vr_scale = 1;
 
+	//Rendering quality
+	this.antialiasing = false;
+	this.shadows = true;
+	this.shadows_type = THREE.PCFSoftShadowMap;
+
 	//Resources
 	this.images = [];
 	this.videos = [];
