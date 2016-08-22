@@ -1,5 +1,30 @@
 "use strict";
 
+//Core
+var BufferAttribute = THREE.BufferAttribute;
+var BufferGeometry = THREE.BufferGeometry;
+var Clock = THREE.Clock;
+var Face3 = THREE.Face3;
+var Geometry = THREE.Geometry;
+var Object3D = THREE.Object3D;
+var Raycaster = THREE.Raycaster;
+
+//Materials
+var LineBasicMaterial = THREE.LineBasicMaterial;
+var LineDashedMaterial = THREE.LineDashedMaterial;
+var MeshBasicMaterial = THREE.MeshBasicMaterial;
+var MeshDepthMaterial = THREE.MeshDepthMaterial;
+var MeshLambertMaterial = THREE.MeshLambertMaterial;
+var MeshNormalMaterial = THREE.MeshNormalMaterial;
+var MeshPhongMaterial = THREE.MeshPhongMaterial;
+var MeshPhysicalMaterial = THREE.MeshPhysicalMaterial;
+var MeshStandardMaterial = THREE.MeshStandardMaterial;
+var MultiMaterial = THREE.MultiMaterial;
+var PointsMaterial = THREE.PointsMaterial;
+var RawShaderMaterial = THREE.RawShaderMaterial;
+var ShaderMaterial = THREE.ShaderMaterial;
+var SpriteMaterial = THREE.SpriteMaterial;
+
 //Math
 var Box2 = THREE.Box2;
 var Box3 = THREE.Box3;
@@ -20,19 +45,4 @@ var Vector4 = THREE.Vector4;
 
 //Objects
 var LOD = THREE.LOD;
-
-//Materials
-var LineBasicMaterial = THREE.LineBasicMaterial;
-var LineDashedMaterial = THREE.LineDashedMaterial;
-var MeshBasicMaterial = THREE.MeshBasicMaterial;
-var MeshDepthMaterial = THREE.MeshDepthMaterial;
-var MeshLambertMaterial = THREE.MeshLambertMaterial;
-var MeshNormalMaterial = THREE.MeshNormalMaterial;
-var MeshPhongMaterial = THREE.MeshPhongMaterial;
-var MeshPhysicalMaterial = THREE.MeshPhysicalMaterial;
-var MeshStandardMaterial = THREE.MeshStandardMaterial;
-var MultiMaterial = THREE.MultiMaterial;
-var PointsMaterial = THREE.PointsMaterial;
-var RawShaderMaterial = THREE.RawShaderMaterial;
-var ShaderMaterial = THREE.ShaderMaterial;
-var SpriteMaterial = THREE.SpriteMaterial;
+var LensFlare = THREE.LensFlare;

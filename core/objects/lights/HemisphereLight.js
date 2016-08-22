@@ -1,8 +1,8 @@
 "use strict";
 
-function HemisphereLight(skyColorHex, groundColorHex, intensity)
+function HemisphereLight(skyColor, groundColor, intensity)
 {
-	THREE.HemisphereLight.call(this, skyColorHex, groundColorHex, intensity);
+	THREE.HemisphereLight.call(this, skyColor, groundColor, intensity);
 
 	this.name = "hemisphere_light";
 }

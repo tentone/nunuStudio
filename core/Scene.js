@@ -18,6 +18,9 @@ function Scene()
 	this.fog_far = 10;
 	this.fog_density = 0.01;
 
+	//Clock
+	this.clock = new THREE.Clock();
+
 	//Create cannon world
 	this.world = new CANNON.World();
 	this.world.defaultContactMaterial.contactEquationStiffness = 1e9;
@@ -69,13 +72,16 @@ function initialize()
 	{
 		this.children[i].initialize();
 	}
+
+	//Clear clock
+	this.clock.getDelta();
 }
 
 //Update scene
 function update()
 {
 	//Update physics
-	this.world.step(0.016667);
+	this.world.step(this.clock.getDelta());
 	
 	//Update children
 	for(var i = 0; i < this.children.length; i++)

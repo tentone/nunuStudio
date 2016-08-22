@@ -28,9 +28,10 @@ include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
-include("lib/three/loaders/collada/Animation.js");
-include("lib/three/loaders/collada/AnimationHandler.js");
-include("lib/three/loaders/collada/KeyFrameAnimation.js");
+
+include("lib/three/animation/Animation.js");
+include("lib/three/animation/AnimationHandler.js");
+include("lib/three/animation/KeyFrameAnimation.js");
 
 include("lib/jscolor.min.js");
 
@@ -103,6 +104,7 @@ include("editor/ui/panels/PhysicsPanel.js");
 include("editor/ui/panels/cameras/PerspectiveCameraPanel.js");
 include("editor/ui/panels/cameras/OrthographicCameraPanel.js");
 include("editor/ui/panels/lights/LightPanel.js");
+include("editor/ui/panels/lights/HemisphereLightPanel.js");
 include("editor/ui/panels/lights/PointLightPanel.js");
 include("editor/ui/panels/lights/DirectionalLightPanel.js");
 include("editor/ui/panels/lights/SpotLightPanel.js");
@@ -137,7 +139,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608211719";
+Editor.TIMESTAMP = "201608221312";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -672,6 +674,10 @@ Editor.updateSelectedObjectUI = function()
 		else if(Editor.selected_object instanceof THREE.DirectionalLight)
 		{
 			Interface.panel = new DirectionalLightPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof THREE.HemisphereLight)
+		{
+			Interface.panel = new HemisphereLightPanel(Interface.explorer_resizable.div_b);
 		}
 		else if(Editor.selected_object instanceof THREE.Light)
 		{
