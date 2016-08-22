@@ -67,11 +67,9 @@ function StandardMaterialEditor(parent)
 		{
 			self.material.roughness = self.roughness.getValue();
 			self.material.needsUpdate = true;
-			self.roughness_text.setText(self.material.roughness);
 		}
 	});
 	this.form.add(this.roughness);
-	this.roughness_text = this.form.addText("-------");
 	this.form.nextRow();
 
 	//Shininess
@@ -87,11 +85,9 @@ function StandardMaterialEditor(parent)
 		{
 			self.material.metalness = self.metalness.getValue();
 			self.material.needsUpdate = true;
-			self.metalness_text.setText(self.material.metalness);
 		}
 	});
 	this.form.add(this.metalness);
-	this.metalness_text = this.form.addText("-------");
 	this.form.nextRow();
 
 	//Texture map
@@ -163,11 +159,9 @@ function StandardMaterialEditor(parent)
 		{
 			self.material.bumpScale = self.bumpScale.getValue();
 			self.material.needsUpdate = true;
-			self.bumpScale_text.setText(self.material.bumpScale);
 		}
 	});
 	this.form.add(this.bumpScale);
-	this.bumpScale_text = this.form.addText("-------");
 	this.form.nextRow();
 
 	//Normal map
@@ -329,15 +323,12 @@ function attachMaterial(material, material_file)
 	this.shading.setValue(material.shading);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.roughness.setValue(material.roughness);
-	this.roughness_text.setText(material.roughness);
 	this.metalness.setValue(material.metalness);
-	this.metalness_text.setText(material.metalness);
 	this.map.setValue(material.map);
 	this.roughnessMap.setValue(material.roughnessMap);
 	this.metalnessMap.setValue(material.metalnessMap);
 	this.bumpMap.setValue(material.bumpMap);
 	this.bumpScale.setValue(material.bumpScale);
-	this.bumpScale_text.setText(material.bumpScale);
 	this.normalMap.setValue(material.normalMap);
 	this.normalScale.setValue(material.normalScale.x, material.normalScale.y);
 	this.displacementMap.setValue(material.displacementMap);

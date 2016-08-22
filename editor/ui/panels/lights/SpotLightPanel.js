@@ -82,8 +82,6 @@ function SpotLightPanel(parent)
 		}
 	});
 	this.form.add(this.penumbra);
-	this.penumbra_text = this.form.addText("");
-	this.penumbra_text.setAlignment(Text.LEFT);
 	this.form.nextRow();
 
 	//Angle
@@ -101,8 +99,6 @@ function SpotLightPanel(parent)
 		}
 	});
 	this.form.add(this.angle);
-	this.angle_text = this.form.addText("");
-	this.angle_text.setAlignment(Text.LEFT);
 	this.form.nextRow();
 
 	//Decay
@@ -120,8 +116,6 @@ function SpotLightPanel(parent)
 		}
 	});
 	this.form.add(this.decay);
-	this.decay_text = this.form.addText("");
-	this.decay_text.setAlignment(Text.LEFT);
 	this.form.nextRow();*/
 	
 	//Cast shadow
@@ -187,11 +181,8 @@ function updatePanel()
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.angle.setValue(this.obj.angle);
-		this.angle_text.setText(this.obj.angle);
 		this.penumbra.setValue(this.obj.penumbra);
-		this.penumbra_text.setText(this.obj.penumbra);
 		//this.decay.setValue(this.obj.decay);
-		//this.decay_text.setText(this.obj.decay);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}

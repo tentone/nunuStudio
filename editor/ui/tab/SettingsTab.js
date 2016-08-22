@@ -141,11 +141,9 @@ function SettingsTab(parent)
 		if(self.obj !== null)
 		{
 			Settings.editor.camera_preview_percentage = self.camera_preview_percentage.getValue();
-			self.camera_preview_percentage_text.setText(Settings.editor.camera_preview_percentage + "%");
 		}
 	});
 	this.general_form.add(this.camera_preview_percentage);
-	this.camera_preview_percentage_text = this.general_form.addText("");
 	this.general_form.nextRow();
 
 	//Blank Space
@@ -354,8 +352,7 @@ function activate()
 	this.axis_enabled.setValue(Settings.editor.axis_enabled);
 	this.camera_preview_enabled.setValue(Settings.editor.camera_preview_enabled);
 	this.camera_preview_percentage.setValue(Settings.editor.camera_preview_percentage);
-	this.camera_preview_percentage_text.setText(Settings.editor.camera_preview_percentage + "%");
-	
+
 	//Render
 	this.shadows_type.setValue(Settings.render.shadows_type);
 	this.antialiasing.setValue(Settings.render.antialiasing);

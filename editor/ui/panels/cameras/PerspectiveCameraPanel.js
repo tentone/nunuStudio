@@ -61,12 +61,9 @@ function PerspectiveCameraPanel(parent)
 		{
 			self.obj.fov = self.fov.getValue();
 			self.obj.updateProjectionMatrix();
-			self.fov_text.setText(self.obj.fov);
 		}
 	});
 	this.form.add(this.fov);
-	this.fov_text = this.form.addText("");
-	this.fov_text.setAlignment(Text.LEFT);
 	this.form.nextRow();
 
 	//Select camera as scene default
@@ -110,7 +107,6 @@ function updatePanel()
 		this.position.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
 		this.fov.setValue(this.obj.fov);
-		this.fov_text.setText(this.obj.fov);
 
 		var scene = ObjectUtils.getScene(this.obj);
 		if(scene !== null)

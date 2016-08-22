@@ -76,21 +76,8 @@ function TabElement(parent, name, icon, closeable, container, index)
 	{
 		if(!self.isSelected())
 		{
-			self.button.element.style.cursor = "default";
 			self.button.element.style.backgroundColor = Editor.theme.button_color;
 		}
-	};
-
-	//Drop event
-	this.button.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.button.element.ondragover = function(event)
-	{
-		event.preventDefault();
 	};
 
 	//Icon
