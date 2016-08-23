@@ -32,15 +32,15 @@ include("lib/stats.min.js");
 include("lib/SPE.min.js");
 
 //Internal modules
-include("input/Key.js");
-include("input/Keyboard.js");
-include("input/Mouse.js");
-
+include("core/three/Three.js");
 include("core/three/Object3D.js");
 include("core/three/Vector3.js");
 include("core/three/Vector2.js");
 include("core/three/Color.js");
-include("core/three/Three.js");
+
+include("input/Key.js");
+include("input/Keyboard.js");
+include("input/Mouse.js");
 
 include("core/webvr/VRControls.js");
 

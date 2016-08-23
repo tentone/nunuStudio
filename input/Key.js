@@ -8,19 +8,13 @@ function Key()
 	this.justReleased = false;
 }
 
-//Funtion Prototypes
-Key.prototype.set = set;
-Key.prototype.reset = reset;
-Key.prototype.update = update;
-Key.prototype.toString = toString;
-
 //Action List
 Key.KEY_DOWN = -1;
 Key.KEY_UP = 1;
 Key.KEY_RESET = 0;
 
 //Update Key status based new state
-function update(action)
+Key.prototype.update = function(action)
 {
 	this.justPressed = false;
 	this.justReleased = false;
@@ -48,8 +42,8 @@ function update(action)
 	}
 }
 
-//Set key values manualy
-function set(just_pressed, is_pressed, just_released)
+//Set key status
+Key.prototype.set = function(just_pressed, is_pressed, just_released)
 {
 	this.justPressed = just_pressed;
 	this.isPressed = is_pressed;
@@ -57,7 +51,7 @@ function set(just_pressed, is_pressed, just_released)
 }
 
 //Reset key to default values
-function reset()
+Key.prototype.reset = function()
 {
 	this.justPressed = false;
 	this.isPressed = false;
@@ -65,7 +59,7 @@ function reset()
 }
 
 //Returns string with key status
-function toString()
+Key.prototype.toString = function()
 {
 	return "Pressed:" + this.isPressed + " JustPressed:" + this.justPressed + " JustReleased:" + this.justReleased;
 }

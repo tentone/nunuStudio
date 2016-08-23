@@ -27,29 +27,9 @@ function Text3D(text, material, font)
 
 //Function Prototype
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
-Text3D.prototype.initialize = initialize;
-Text3D.prototype.update = update;
 Text3D.prototype.dispose = dispose;
 Text3D.prototype.setText = setText;
 Text3D.prototype.toJSON = toJSON;
-
-//Initialize
-function initialize()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-}
-
-//Update state
-function update()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
-	}
-}
 
 //Dipose text
 function dispose()
@@ -83,7 +63,7 @@ function toJSON(meta)
 	var geometry = this.geometry;
 	this.geometry = undefined;
 
-	//Gen JSON
+	//Call super toJSON
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 	
 	data.object.text = this.text;

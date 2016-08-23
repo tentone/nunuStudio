@@ -1,7 +1,9 @@
 "use strict";
 
-//Folded and hidden atributes
+//Folded
 THREE.Object3D.prototype.folded = false;
+
+//Hidden attribute (hidden objects are not serialized and dont show up in the editor)
 THREE.Object3D.prototype.hidden = false;
 
 //Initialize Object
@@ -128,7 +130,10 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 
 		for(var i = 0; i < this.children.length; i ++)
 		{
-			object.children.push(this.children[i].toJSON(meta).object);
+			if(!this.children[i].hidden)
+			{
+				object.children.push(this.children[i].toJSON(meta).object);
+			}
 		}
 	}
 

@@ -21,23 +21,3 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 
 //Function Prototype
 SpotLight.prototype = Object.create(THREE.SpotLight.prototype);
-SpotLight.prototype.initialize = initialize;
-SpotLight.prototype.update = update;
-
-//Initialize
-function initialize()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-}
-
-//Update
-function update()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
-	}
-}
