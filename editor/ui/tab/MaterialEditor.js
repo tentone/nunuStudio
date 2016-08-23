@@ -90,7 +90,7 @@ function MaterialEditor(parent)
 	//Material preview scene
 	this.scene = new Scene();
 	this.sky = new Sky();
-	var sun = this.sky.children[0];
+	var sun = this.sky.sun;
 	sun.shadow.camera.left = -5;
 	sun.shadow.camera.right = 5;
 	sun.shadow.camera.top = 5;

@@ -15,23 +15,3 @@ function PointLight(hex, intensity, distance, decay)
 
 //Function Prototype
 PointLight.prototype = Object.create(THREE.PointLight.prototype);
-PointLight.prototype.update = update;
-PointLight.prototype.initialize = initialize;
-
-//Initialize
-function initialize()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-}
-
-//Update State
-function update()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
-	}
-}

@@ -21,23 +21,3 @@ function DirectionalLight(hex, intensity)
 
 //Function Prototype
 DirectionalLight.prototype = Object.create(THREE.DirectionalLight.prototype);
-DirectionalLight.prototype.update = update;
-DirectionalLight.prototype.initialize = initialize;
-
-//Initialize
-function initialize()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-}
-
-//Update
-function update()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
-	}
-}

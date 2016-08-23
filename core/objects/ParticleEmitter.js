@@ -23,7 +23,7 @@ function ParticleEmitter(group, emitter)
 			{
 				value: new Texture("data/particle.png")
 			},
-			maxParticleCount: 10000,
+			maxParticleCount: 2000,
 			blending: THREE.AdditiveBlending,
 			hasPerspective: true
 		});
