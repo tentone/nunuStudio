@@ -43,16 +43,11 @@ function Canvas(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Canvas conter
+//Canvas counter
 Canvas.id = 0;
 
-//Functions Prototype
-Canvas.prototype.update = update;
-Canvas.prototype.updateInterface = updateInterface;
-Canvas.prototype.destroy = destroy;
-
 //Remove element
-function destroy()
+Canvas.prototype.destroy = function()
 {
 	try
 	{
@@ -61,11 +56,11 @@ function destroy()
 	catch(e){}
 }
 
-//Update Canvas
-function update(){}
+//Update
+Canvas.prototype.update = function(){}
 
 //Update division Size
-function updateInterface()
+Canvas.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

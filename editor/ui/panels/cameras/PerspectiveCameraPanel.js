@@ -94,12 +94,11 @@ function PerspectiveCameraPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 PerspectiveCameraPanel.prototype = Object.create(Panel.prototype);
-PerspectiveCameraPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+PerspectiveCameraPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

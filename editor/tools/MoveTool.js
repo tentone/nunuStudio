@@ -96,13 +96,11 @@ function MoveTool()
 	this.add(this.block);
 }
 
-//Functions Prototype
+//Super Prototype
 MoveTool.prototype = Object.create(THREE.Object3D.prototype);
-MoveTool.prototype.attachObject = attachObject;
-MoveTool.prototype.update = update;
 
 //Attach object to move tool
-function attachObject(obj)
+MoveTool.prototype.attachObject = function(obj)
 {
 	if(obj instanceof THREE.Object3D)
 	{
@@ -117,7 +115,7 @@ function attachObject(obj)
 }
 
 //Update attached object returns if object is being edited
-function update()
+MoveTool.prototype.update = function()
 {
 	//Update tool position and scale
 	if(this.obj !== null)

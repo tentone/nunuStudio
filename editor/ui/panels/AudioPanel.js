@@ -69,12 +69,11 @@ function AudioPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 AudioPanel.prototype = Object.create(Panel.prototype);
-AudioPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+AudioPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

@@ -132,21 +132,8 @@ function ScriptEditor(parent)
 //ScriptEditor counter
 ScriptEditor.id = 0;
 
-//Functions Prototype
-ScriptEditor.prototype.update = update;
-ScriptEditor.prototype.updateInterface = updateInterface;
-ScriptEditor.prototype.destroy = destroy;
-ScriptEditor.prototype.activate = activate;
-ScriptEditor.prototype.setMode = setMode;
-ScriptEditor.prototype.getText = getText;
-ScriptEditor.prototype.setText = setText;
-ScriptEditor.prototype.attachScript = attachScript;
-ScriptEditor.prototype.updateScript = updateScript;
-ScriptEditor.prototype.updateMetadata = updateMetadata;
-ScriptEditor.prototype.setFontSize = setFontSize;
-
 //Set code editor font size
-function setFontSize(size)
+ScriptEditor.prototype.setFontSize = function(size)
 {
 	if(size < 5)
 	{
@@ -160,7 +147,7 @@ function setFontSize(size)
 }
 
 //Update container object data
-function updateMetadata(container)
+ScriptEditor.prototype.updateMetadata = function(container)
 {
 	if(this.script !== null)
 	{
@@ -188,7 +175,7 @@ function updateMetadata(container)
 }
 
 //Activate code editor
-function activate()
+ScriptEditor.prototype.activate = function()
 {
 	//Set editor state
 	Editor.setState(Editor.STATE_IDLE);
@@ -210,26 +197,26 @@ function activate()
 }
 
 //Return editor text
-function getText()
+ScriptEditor.prototype.getText = function()
 {
 	return this.code.getValue();
 }
 
 //Set editor text
-function setText(text)
+ScriptEditor.prototype.setText = function(text)
 {
 	this.code.setValue(text);
 }
 
 //Attach Script to code editor
-function attachScript(script)
+ScriptEditor.prototype.attachScript = function(script)
 {
 	this.script = script;
 	this.setText(script.code);
 }
 
 //Update attached script
-function updateScript()
+ScriptEditor.prototype.updateScript = function()
 {
 	if(this.script !== null)
 	{
@@ -238,13 +225,13 @@ function updateScript()
 }
 
 //Set language mode (javascript, glsl, etc)
-function setMode(mode)
+ScriptEditor.prototype.setMode = function(mode)
 {
 	this.code.setOption("mode", mode);
 }
 
 //Remove element
-function destroy()
+ScriptEditor.prototype.destroy = function()
 {
 	try
 	{
@@ -254,7 +241,7 @@ function destroy()
 }
 
 //Update ScriptEditor
-function update()
+ScriptEditor.prototype.update = function()
 {
 	if(Keyboard.isKeyPressed(Keyboard.CTRL))
 	{
@@ -266,7 +253,7 @@ function update()
 }
 
 //Update division Size
-function updateInterface()
+ScriptEditor.prototype.updateInterface = function()
 {
 	if(this.fit_parent)
 	{

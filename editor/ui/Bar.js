@@ -48,13 +48,8 @@ function Bar(parent)
 //Bar conter
 Bar.id = 0;
 
-//Functions Prototype
-Bar.prototype.update = update;
-Bar.prototype.updateInterface = updateInterface;
-Bar.prototype.destroy = destroy;
-
 //Remove element
-function destroy()
+Bar.prototype.destroy = function()
 {
 	try
 	{
@@ -64,10 +59,10 @@ function destroy()
 }
 
 //Update Bar
-function update(){}
+Bar.prototype.update = function(){}
 
 //Update division Size
-function updateInterface()
+Bar.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

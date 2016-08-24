@@ -37,56 +37,45 @@ function NumberBox(parent)
 //NumberBox ID counter
 NumberBox.id = 0;
 
-//Functions Prototype
-NumberBox.prototype.update = update;
-NumberBox.prototype.updateInterface = updateInterface;
-NumberBox.prototype.destroy = destroy;
-NumberBox.prototype.getValue = getValue;
-NumberBox.prototype.setValue = setValue;
-NumberBox.prototype.setStep = setStep;
-NumberBox.prototype.setRange = setRange;
-NumberBox.prototype.setOnChange = setOnChange;
-NumberBox.prototype.setDisabled = setDisabled;
-
 //Set if element if disabled
-function setDisabled(value)
+NumberBox.prototype.setDisabled = function(value)
 {
 	this.element.disabled = value;
 }
 
 //Set numberbox range
-function setRange(min, max)
+NumberBox.prototype.setRange = function(min, max)
 {
 	this.element.min = String(min);
 	this.element.max = String(max);
 }
 
 //Set step
-function setStep(value)
+NumberBox.prototype.setStep = function(value)
 {
 	this.element.step = String(value);
 }
 
 //Set onchange callback
-function setOnChange(callback)
+NumberBox.prototype.setOnChange = function(callback)
 {
 	this.element.onchange = callback;
 }
 
 //Set value
-function setValue(value)
+NumberBox.prototype.setValue = function(value)
 {
 	this.element.value = value;
 }
 
 //Get text
-function getValue()
+NumberBox.prototype.getValue = function()
 {
 	return parseFloat(this.element.value);
 }
 
 //Remove element
-function destroy()
+NumberBox.prototype.destroy = function()
 {
 	try
 	{
@@ -96,10 +85,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+NumberBox.prototype.update = function(){}
 
 //Update Interface
-function updateInterface()
+NumberBox.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{

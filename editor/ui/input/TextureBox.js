@@ -139,16 +139,8 @@ function TextureBox(parent)
 //TextureBox ID counter
 TextureBox.id = 0;
 
-//Functions Prototype
-TextureBox.prototype.setOnChange = setOnChange;
-TextureBox.prototype.setValue = setValue;
-TextureBox.prototype.getValue = getValue;
-TextureBox.prototype.update = update;
-TextureBox.prototype.updateInterface = updateInterface;
-TextureBox.prototype.destroy = destroy;
-
 //Set onchange callback function
-function setOnChange(callback)
+TextureBox.prototype.setOnChange = function(callback)
 {
 	this.onchange = callback;
 	this.use_texture.setOnChange(callback);
@@ -158,7 +150,7 @@ function setOnChange(callback)
 }
 
 //Remove element
-function destroy()
+TextureBox.prototype.destroy = function()
 {
 	try
 	{
@@ -168,10 +160,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+TextureBox.prototype.update = function(){}
 
 //Set image from URL
-function setValue(texture)
+TextureBox.prototype.setValue = function(texture)
 {
 	this.texture = texture;
 
@@ -191,7 +183,7 @@ function setValue(texture)
 }
 
 //Get image URL
-function getValue()
+TextureBox.prototype.getValue = function()
 {
 	if(this.use_texture.getValue())
 	{
@@ -219,7 +211,7 @@ function getValue()
 }
 
 //Update Interface
-function updateInterface()
+TextureBox.prototype.updateInterface = function()
 {
 	//Fit parent element
 	if(this.fit_parent)

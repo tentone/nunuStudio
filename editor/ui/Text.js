@@ -49,36 +49,26 @@ Text.id = 0;
 Text.CENTER = 0;
 Text.LEFT = 1;
 
-//Functions Prototype
-Text.prototype.update = update;
-Text.prototype.updateInterface = updateInterface;
-Text.prototype.destroy = destroy;
-Text.prototype.setAlignment = setAlignment;
-Text.prototype.setText = setText;
-Text.prototype.setTextSize = setTextSize;
-Text.prototype.setTextColor = setTextColor;
-Text.prototype.setVisibility = setVisibility;
-
 //Set Text
-function setText(text)
+Text.prototype.setText = function(text)
 {
 	this.span.innerHTML = text;
 }
 
 //Set Text Size
-function setTextSize(size)
+Text.prototype.setTextSize = function(size)
 {
 	this.element.style.fontSize = size + "px";
 }
 
 //Set Text Color
-function setTextColor(color)
+Text.prototype.setTextColor = function(color)
 {
 	this.element.style.color = color;
 }
 
 //Set text alignment
-function setAlignment(align)
+Text.prototype.setAlignment = function(align)
 {
 	if(align === Text.CENTER)
 	{
@@ -91,7 +81,7 @@ function setAlignment(align)
 }
 
 //Remove element
-function destroy()
+Text.prototype.destroy = function()
 {
 	try
 	{
@@ -101,7 +91,7 @@ function destroy()
 }
 
 //Set text visibility
-function setVisibility(value)
+Text.prototype.setVisibility = function(value)
 {
 	this.visible = value;
 
@@ -118,10 +108,10 @@ function setVisibility(value)
 }
 
 //Update
-function update(){}
+Text.prototype.update = function(){}
 
 //Update Interface
-function updateInterface()
+Text.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

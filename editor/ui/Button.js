@@ -74,28 +74,20 @@ function Button(parent)
 //Button conter
 Button.id = 0;
 
-//Functions Prototype
-Button.prototype.update = update;
-Button.prototype.updateInterface = updateInterface;
-Button.prototype.destroy = destroy;
-Button.prototype.setText = setText;
-Button.prototype.setCallback = setCallback;
-Button.prototype.add = add;
-
 //Add extra element to button
-function add(element)
+Button.prototype.add = function(element)
 {
 	this.children.push(element);
 }
 
 //Set Button text
-function setText(text)
+Button.prototype.setText = function(text)
 {
 	this.text.setText(text);
 }
 
 //Remove element from document
-function destroy()
+Button.prototype.destroy = function()
 {
 	try
 	{
@@ -110,16 +102,16 @@ function destroy()
 }
 
 //Update status
-function update(){}
+Button.prototype.update = function(){}
 
 //Set button callback function
-function setCallback(callback)
+Button.prototype.setCallback = function(callback)
 {
 	this.element.onclick = callback;
 }
 
 //Update Button Size
-function updateInterface()
+Button.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{

@@ -210,23 +210,18 @@ function MaterialAsset(parent)
 	};
 }
 
-//Functions Prototype
+//Super prototypes
 MaterialAsset.prototype = Object.create(Asset.prototype);
-MaterialAsset.prototype.destroy = destroy;
-MaterialAsset.prototype.setMaterial = setMaterial;
-MaterialAsset.prototype.highlightMaterial = highlightMaterial;
-MaterialAsset.prototype.restoreMaterial = restoreMaterial;
-MaterialAsset.prototype.updateMetadata = updateMetadata;
 
 //Destroy material file
-function destroy()
+MaterialAsset.prototype.destroy = function()
 {
 	Asset.prototype.destroy.call(this);
 	this.restoreMaterial();
 }
 
 //Set object to file
-function setMaterial(material)
+MaterialAsset.prototype.setMaterial = function(material)
 {
 	if(material instanceof THREE.Material)
 	{
@@ -237,7 +232,7 @@ function setMaterial(material)
 }
 
 //Highlight material
-function highlightMaterial()
+MaterialAsset.prototype.highlightMaterial = function()
 {
 	if(this.material instanceof THREE.Material)
 	{
@@ -251,7 +246,7 @@ function highlightMaterial()
 }
 
 //Restore material to normal color
-function restoreMaterial()
+MaterialAsset.prototype.restoreMaterial = function()
 {
 	if(this.material_highlighted)
 	{
@@ -267,7 +262,7 @@ function restoreMaterial()
 }
 
 //Update material preview
-function updateMetadata()
+MaterialAsset.prototype.updateMetadata = function()
 {
 	if(this.material !== null)
 	{

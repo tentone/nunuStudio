@@ -138,12 +138,11 @@ function TextPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 TextPanel.prototype = Object.create(Panel.prototype);
-TextPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+TextPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

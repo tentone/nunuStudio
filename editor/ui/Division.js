@@ -38,13 +38,8 @@ function Division(parent)
 //Division conter
 Division.id = 0;
 
-//Functions Prototype
-Division.prototype.update = update;
-Division.prototype.updateInterface = updateInterface;
-Division.prototype.destroy = destroy;
-
 //Remove element
-function destroy()
+Division.prototype.destroy = function()
 {
 	try
 	{
@@ -53,11 +48,11 @@ function destroy()
 	catch(e){}
 }
 
-//Update Division
-function update(){}
+//Update
+Division.prototype.update = function(){}
 
 //Update division Size
-function updateInterface()
+Division.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

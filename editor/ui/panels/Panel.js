@@ -55,18 +55,11 @@ function Panel(parent)
 //Panel conter
 Panel.id = 0;
 
-//Functions Prototype
-Panel.prototype.updatePanel = updatePanel;
-Panel.prototype.attachObject = attachObject;
-Panel.prototype.destroy = destroy;
-Panel.prototype.update = update;
-Panel.prototype.updateInterface = updateInterface;
-
 //Update panel with object data
-function updatePanel(){}
+Panel.prototype.updatePanel = function(){}
 
 //Attach object to panel
-function attachObject(obj)
+Panel.prototype.attachObject = function(obj)
 {
 	if(obj instanceof THREE.Object3D)
 	{
@@ -76,7 +69,7 @@ function attachObject(obj)
 }
 
 //Remove element
-function destroy()
+Panel.prototype.destroy = function()
 {
 	try
 	{
@@ -86,10 +79,10 @@ function destroy()
 }
 
 //Update Panel
-function update(){}
+Panel.prototype.update = function(){}
 
 //Update division Size
-function updateInterface()
+Panel.prototype.updateInterface = function()
 {
 	if(this.fit_parent)
 	{

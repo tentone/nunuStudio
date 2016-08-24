@@ -56,9 +56,8 @@ function SpriteMaterialEditor(parent)
 }
 
 SpriteMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
-SpriteMaterialEditor.prototype.attachMaterial = attachMaterial;
 
-function attachMaterial(material, material_file)
+SpriteMaterialEditor.prototype.attachMaterial = function(material, material_file)
 {
 	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
 

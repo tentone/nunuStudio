@@ -68,13 +68,11 @@ function RotateTool()
 	this.add(this.center);
 }
 
-//Functions Prototype
+//Super prototypes
 RotateTool.prototype = Object.create(THREE.Object3D.prototype);
-RotateTool.prototype.attachObject = attachObject;
-RotateTool.prototype.update = update;
 
 //Attach object to rotate tool
-function attachObject(obj)
+RotateTool.prototype.attachObject = function(obj)
 {
 	if(obj instanceof THREE.Object3D)
 	{
@@ -89,7 +87,7 @@ function attachObject(obj)
 }
 
 //Update attached object returns if object is being edited
-function update(raycaster)
+RotateTool.prototype.update = function(raycaster)
 {
 	if(this.obj !== null)
 	{

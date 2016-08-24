@@ -63,17 +63,8 @@ function ButtonImage(parent)
 //ButtonImage ID counter
 ButtonImage.id = 0;
 
-//Functions Prototype
-ButtonImage.prototype.setImage = setImage;
-ButtonImage.prototype.update = update;
-ButtonImage.prototype.updateInterface = updateInterface;
-ButtonImage.prototype.setCallback = setCallback;
-ButtonImage.prototype.destroy = destroy;
-ButtonImage.prototype.setAltText = setAltText;
-ButtonImage.prototype.setVisibility = setVisibility;
-
 //Remove element
-function destroy()
+ButtonImage.prototype.destroy = function()
 {
 	try
 	{
@@ -83,23 +74,23 @@ function destroy()
 }
 
 //Update
-function update(){}
+ButtonImage.prototype.update = function(){}
 
 //Set button callback function
-function setCallback(callback)
+ButtonImage.prototype.setCallback = function(callback)
 {
 	this.element.onclick = callback;
 }
 
 //Set ButtonImage
-function setImage(image)
+ButtonImage.prototype.setImage = function(image)
 {
 	this.image = image;
 	this.img.src = this.image;
 }
 
 //Set alt text
-function setAltText(alt_text)
+ButtonImage.prototype.setAltText = function(alt_text)
 {
 	var text = new Text(this.element);
 	text.element.style.background = Editor.theme.bar_color;
@@ -127,7 +118,7 @@ function setAltText(alt_text)
 }
 
 //Set button image visibility
-function setVisibility(visible)
+ButtonImage.prototype.setVisibility = function(visible)
 {
 	this.visible = visible;
 
@@ -144,7 +135,7 @@ function setVisibility(visible)
 }
 
 //Update Interface
-function updateInterface()
+ButtonImage.prototype.updateInterface = function()
 {
 	//Update visibility
 	if(this.visible)

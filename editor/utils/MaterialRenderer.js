@@ -30,12 +30,8 @@ function MaterialRenderer()
 	this.scene.add(new AmbientLight(0x666666));
 }
 
-//Material preview methods
-MaterialRenderer.prototype.setSize = setSize;
-MaterialRenderer.prototype.renderMaterial = renderMaterial;
-
 //Set render size
-function setSize(x, y)
+MaterialRenderer.prototype.setSize = function(x, y)
 {
 	this.canvas.width = x;
 	this.canvas.height = y;
@@ -43,7 +39,7 @@ function setSize(x, y)
 }
 
 //Render material to internal canvas and copy image to html image element
-function renderMaterial(material, img)
+MaterialRenderer.prototype.renderMaterial = function(material, img)
 {
 	if(material instanceof THREE.SpriteMaterial)
 	{

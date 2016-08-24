@@ -101,25 +101,18 @@ function AboutTab(parent)
 //AboutTab counter
 AboutTab.id = 0;
 
-//Functions Prototype
-AboutTab.prototype.update = update;
-AboutTab.prototype.updateInterface = updateInterface;
-AboutTab.prototype.destroy = destroy;
-AboutTab.prototype.activate = activate;
-AboutTab.prototype.updateMetadata = updateMetadata;
-
 //Update container object data
-function updateMetadata(container){}
+AboutTab.prototype.updateMetadata = function(container){}
 
 //Activate
-function activate()
+AboutTab.prototype.activate = function()
 {
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
 }
 
 //Remove element
-function destroy()
+AboutTab.prototype.destroy = function()
 {
 	try
 	{
@@ -129,10 +122,10 @@ function destroy()
 }
 
 //Update tab
-function update(){}
+AboutTab.prototype.update = function(){}
 
 //Update division Size
-function updateInterface()
+AboutTab.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

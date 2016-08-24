@@ -325,16 +325,8 @@ function MaterialEditor(parent)
 //Material editor counter
 MaterialEditor.id = 0;
 
-//Functions Prototype
-MaterialEditor.prototype.attachMaterial = attachMaterial;
-MaterialEditor.prototype.activate = activate;
-MaterialEditor.prototype.destroy = destroy;
-MaterialEditor.prototype.updateMetadata = updateMetadata;
-MaterialEditor.prototype.update = update;
-MaterialEditor.prototype.updateInterface = updateInterface;
-
 //Attach material to material editor
-function attachMaterial(material, material_file)
+MaterialEditor.prototype.attachMaterial = function(material, material_file)
 {
 	//Check is if sprite material and ajust preview
 	if(material instanceof THREE.SpriteMaterial)
@@ -371,7 +363,7 @@ function attachMaterial(material, material_file)
 }
 
 //Activate code editor
-function activate()
+MaterialEditor.prototype.activate = function()
 {
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
@@ -379,7 +371,7 @@ function activate()
 }
 
 //Remove element
-function destroy()
+MaterialEditor.prototype.destroy = function()
 {
 	try
 	{
@@ -389,7 +381,7 @@ function destroy()
 }
 
 //Update container object data
-function updateMetadata(container)
+MaterialEditor.prototype.updateMetadata = function(container)
 {
 	if(this.material !== null)
 	{
@@ -422,7 +414,7 @@ function updateMetadata(container)
 }
 
 //Update material editor
-function update()
+MaterialEditor.prototype.update = function()
 {
 	//Update UI containers
 	this.main.update();
@@ -467,7 +459,7 @@ function update()
 }
 
 //Update division Size
-function updateInterface()
+MaterialEditor.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

@@ -36,32 +36,20 @@ function DropdownList(parent)
 //DropdownList ID counter
 DropdownList.id = 0;
 
-//Functions Prototype
-DropdownList.prototype.update = update;
-DropdownList.prototype.updateInterface = updateInterface;
-DropdownList.prototype.destroy = destroy;
-DropdownList.prototype.getValue = getValue;
-DropdownList.prototype.setValue = setValue;
-DropdownList.prototype.addValue = addValue;
-DropdownList.prototype.setOnChange = setOnChange;
-DropdownList.prototype.getSelectedIndex = getSelectedIndex;
-DropdownList.prototype.setSelectedIndex = setSelectedIndex;
-DropdownList.prototype.setDisabled = setDisabled;
-
 //Set if element if disabled
-function setDisabled(value)
+DropdownList.prototype.setDisabled = function(value)
 {
 	this.element.disabled = value;
 }
 
 //Set onchange callback
-function setOnChange(callback)
+DropdownList.prototype.setOnChange = function(callback)
 {
 	this.element.onchange = callback;
 }
 
 //Add element
-function addValue(text, value)
+DropdownList.prototype.addValue = function(text, value)
 {
 	var option = document.createElement("option");
 	option.innerHTML = text;
@@ -70,7 +58,7 @@ function addValue(text, value)
 }
 
 //Get DropdownList value
-function getValue()
+DropdownList.prototype.getValue = function()
 {
 	if(this.element.selectedIndex > -1)
 	{
@@ -80,7 +68,7 @@ function getValue()
 }
 
 //Set dropdown list value
-function setValue(value)
+DropdownList.prototype.setValue = function(value)
 {
 	//Get value index
 	for(var i = 0; i < this.values.length; i++)
@@ -100,19 +88,19 @@ function setValue(value)
 }
 
 //Get dropdownlist selected index
-function getSelectedIndex()
+DropdownList.prototype.getSelectedIndex = function()
 {
 	return this.element.selectedIndex;
 }
 
 //Set dropdownlist selected index
-function setSelectedIndex(index)
+DropdownList.prototype.setSelectedIndex = function(index)
 {
 	this.element.selectedIndex = index;
 }
 
 //Remove element
-function destroy()
+DropdownList.prototype.destroy = function()
 {
 	try
 	{
@@ -122,10 +110,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+DropdownList.prototype.update = function(){}
 
 //Update Interface
-function updateInterface()
+DropdownList.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{

@@ -13,7 +13,7 @@ function Asset(parent)
 	}
 	
 	//ID
-	var id = "fi" + Asset.id;
+	var id = "asset" + Asset.id;
 	Asset.id++;
 
 	//Create element
@@ -71,16 +71,8 @@ function Asset(parent)
 //Asset ID counter
 Asset.id = 0;
 
-//Functions Prototype
-Asset.prototype.update = update;
-Asset.prototype.updateInterface = updateInterface;
-Asset.prototype.destroy = destroy;
-Asset.prototype.setIcon = setIcon;
-Asset.prototype.setText = setText;
-Asset.prototype.setParent = setParent;
-
 //Set parent
-function setParent(parent)
+Asset.prototype.setParent = function(parent)
 {
 	if(parent !== this.parent)
 	{
@@ -90,13 +82,13 @@ function setParent(parent)
 }
 
 //Set file icon
-function setIcon(image)
+Asset.prototype.setIcon = function(image)
 {
 	this.img.src = image;
 }
 
 //Set file label
-function setText(text)
+Asset.prototype.setText = function(text)
 {
 	if(text.length > 8)
 	{
@@ -107,7 +99,7 @@ function setText(text)
 }
 
 //Remove element
-function destroy()
+Asset.prototype.destroy = function()
 {
 	try
 	{
@@ -117,10 +109,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+Asset.prototype.update = function(){}
 
 //Update Interface
-function updateInterface()
+Asset.prototype.updateInterface = function()
 {
 	//Visibility
 	if(this.visible)

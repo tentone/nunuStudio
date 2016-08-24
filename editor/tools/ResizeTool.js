@@ -83,13 +83,11 @@ function ResizeTool()
 	this.add(this.block);
 }
 
-//Functions Prototype
+//Super Prototype
 ResizeTool.prototype = Object.create(THREE.Object3D.prototype);
-ResizeTool.prototype.attachObject = attachObject;
-ResizeTool.prototype.update = update;
 
 //Attach object to resize tool
-function attachObject(obj)
+ResizeTool.prototype.attachObject = function(obj)
 {
 	if(obj instanceof THREE.Camera)
 	{
@@ -109,7 +107,7 @@ function attachObject(obj)
 }
 
 //Update attached object returns if object is being edited
-function update(raycaster)
+ResizeTool.prototype.update = function(raycaster)
 {
 	if(this.obj !== null)
 	{

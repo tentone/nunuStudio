@@ -84,15 +84,8 @@ function ButtonImageToggle(parent)
 //ButtonImageToggle ID counter
 ButtonImageToggle.id = 0;
 
-//Functions Prototype
-ButtonImageToggle.prototype.setImage = setImage;
-ButtonImageToggle.prototype.update = update;
-ButtonImageToggle.prototype.updateInterface = updateInterface;
-ButtonImageToggle.prototype.setCallback = setCallback;
-ButtonImageToggle.prototype.destroy = destroy;
-
 //Remove element
-function destroy()
+ButtonImageToggle.prototype.destroy = function()
 {
 	try
 	{
@@ -102,10 +95,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+ButtonImageToggle.prototype.update = function(){}
 
 //Set button callback function
-function setCallback(callback)
+ButtonImageToggle.prototype.setCallback = function(callback)
 {
 	var self = this;
 	this.element.onclick = function()
@@ -116,13 +109,13 @@ function setCallback(callback)
 }
 
 //Set ButtonImageToggle
-function setImage(image)
+ButtonImageToggle.prototype.setImage = function(image)
 {
 	this.img.src = image;
 }
 
 //Update Interface
-function updateInterface()
+ButtonImageToggle.prototype.updateInterface = function()
 {
 	//Set visibility
 	if(this.visible)

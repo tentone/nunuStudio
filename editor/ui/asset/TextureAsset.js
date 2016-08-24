@@ -54,13 +54,10 @@ function TextureAsset(parent)
 	};
 }
 
-//Functions Prototype
 TextureAsset.prototype = Object.create(Asset.prototype);
-TextureAsset.prototype.setTexture = setTexture;
-TextureAsset.prototype.updateMetadata = updateMetadata;
 
 //Set object to file
-function setTexture(texture)
+TextureAsset.prototype.setTexture = function(texture)
 {
 	if(texture instanceof THREE.Texture)
 	{
@@ -70,7 +67,7 @@ function setTexture(texture)
 }
 
 //Update material preview
-function updateMetadata()
+TextureAsset.prototype.updateMetadata = function()
 {
 	if(this.texture !== null)
 	{

@@ -36,41 +36,32 @@ function TextBox(parent)
 //TextBox ID counter
 TextBox.id = 0;
 
-//Functions Prototype
-TextBox.prototype.update = update;
-TextBox.prototype.updateInterface = updateInterface;
-TextBox.prototype.destroy = destroy;
-TextBox.prototype.setText = setText;
-TextBox.prototype.getText = getText;
-TextBox.prototype.setOnChange = setOnChange;
-TextBox.prototype.setDisabled = setDisabled;
-
 //Set if element if disabled
-function setDisabled(value)
+TextBox.prototype.setDisabled = function(value)
 {
 	this.element.disabled = value;
 }
 
 //Set onchange callback
-function setOnChange(callback)
+TextBox.prototype.setOnChange = function(callback)
 {
 	this.element.onchange = callback;
 }
 
 //Set text
-function setText(text)
+TextBox.prototype.setText = function(text)
 {
 	this.element.value = text;
 }
 
 //Get text
-function getText()
+TextBox.prototype.getText = function()
 {
 	return this.element.value;
 }
 
 //Remove element
-function destroy()
+TextBox.prototype.destroy = function()
 {
 	try
 	{
@@ -80,10 +71,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+TextBox.prototype.update = function(){}
 
 //Update Interface
-function updateInterface()
+TextBox.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{

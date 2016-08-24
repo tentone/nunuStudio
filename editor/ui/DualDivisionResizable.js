@@ -122,13 +122,8 @@ DualDivisionResizable.id = 0;
 DualDivisionResizable.HORIZONTAL = 0;
 DualDivisionResizable.VERTICAL = 1;
 
-//Functions Prototype
-DualDivisionResizable.prototype.update = update;
-DualDivisionResizable.prototype.updateInterface = updateInterface;
-DualDivisionResizable.prototype.destroy = destroy;
-
 //Remove element
-function destroy()
+DualDivisionResizable.prototype.destroy = function()
 {
 	try
 	{
@@ -139,7 +134,7 @@ function destroy()
 }
 
 //Update status
-function update()
+DualDivisionResizable.prototype.update = function()
 {
 	if(this.resizing && Mouse.buttonPressed(Mouse.LEFT))
 	{
@@ -172,8 +167,8 @@ function update()
 	}
 }
 
-//Update DualDivisionResizable Size
-function updateInterface()
+//Update interface
+DualDivisionResizable.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

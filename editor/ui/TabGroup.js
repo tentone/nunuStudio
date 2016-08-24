@@ -56,25 +56,12 @@ function TabGroup(parent)
 //TabGroup conter
 TabGroup.id = 0;
 
-//Functions Prototype
-TabGroup.prototype.update = update;
-TabGroup.prototype.updateInterface = updateInterface;
-TabGroup.prototype.destroy = destroy;
-TabGroup.prototype.addOption = addOption;
-TabGroup.prototype.removeOption = removeOption;
-TabGroup.prototype.clear = clear;
-TabGroup.prototype.updateOptionIndex = updateOptionIndex;
-TabGroup.prototype.selectOption = selectOption;
-TabGroup.prototype.closeActual = closeActual;
-TabGroup.prototype.getActual = getActual;
-TabGroup.prototype.updateMetadata = updateMetadata;
-
 //Tab button displacement mode
 TabGroup.TOP = 0;
 TabGroup.LEFT = 1;
 
 //Update all tabs object data
-function updateMetadata()
+TabGroup.prototype.updateMetadata = function()
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
@@ -83,7 +70,7 @@ function updateMetadata()
 }
 
 //Get actual tab
-function getActual()
+TabGroup.prototype.getActual = function()
 {
 	if(this.options_selected > -1)
 	{
@@ -97,7 +84,7 @@ function getActual()
 }
 
 //If actual tab is closeable close it
-function closeActual()
+TabGroup.prototype.closeActual = function()
 {
 	if(this.options_selected > -1)
 	{
@@ -109,7 +96,7 @@ function closeActual()
 }
 
 //Select option
-function selectOption(index)
+TabGroup.prototype.selectOption = function(index)
 {
 	if(index > -1 && index < this.options.length)
 	{
@@ -126,7 +113,7 @@ function selectOption(index)
 }
 
 //Add new option to tab grounp
-function addOption(name, image, closeable)
+TabGroup.prototype.addOption = function(name, image, closeable)
 {
 	var option = new TabElement(this.element, name, image, closeable, this, this.options.length);
 
@@ -140,7 +127,7 @@ function addOption(name, image, closeable)
 }
 
 //Remove all tabs
-function clear()
+TabGroup.prototype.clear = function()
 {
 	while(this.options.length > 0)
 	{
@@ -151,7 +138,7 @@ function clear()
 }
 
 //Remove tab from group
-function removeOption(index)
+TabGroup.prototype.removeOption = function(index)
 {
 	if(index > -1 && index < this.options.length)
 	{
@@ -182,7 +169,7 @@ function removeOption(index)
 }
 
 //Update options index
-function updateOptionIndex()
+TabGroup.prototype.updateOptionIndex = function()
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
@@ -191,7 +178,7 @@ function updateOptionIndex()
 }
 
 //Remove element
-function destroy()
+TabGroup.prototype.destroy = function()
 {
 	try
 	{
@@ -200,8 +187,8 @@ function destroy()
 	catch(e){}
 }
 
-//Update tabgroup
-function update()
+//Update
+TabGroup.prototype.update = function()
 {
 	if(this.options_selected > -1)
 	{
@@ -209,8 +196,8 @@ function update()
 	}
 }
 
-//Update division Size
-function updateInterface()
+//Update interface
+TabGroup.prototype.updateInterface = function()
 {
 	//Update options
 	for(var i = 0; i < this.options.length; i++)

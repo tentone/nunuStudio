@@ -101,37 +101,26 @@ DropdownMenu.DOWN = 0;
 DropdownMenu.LEFT = 1;
 DropdownMenu.RIGHT = 1;
 
-//Functions Prototype
-DropdownMenu.prototype.update = update;
-DropdownMenu.prototype.updateInterface = updateInterface;
-DropdownMenu.prototype.addOption = addOption;
-DropdownMenu.prototype.addMenu = addMenu;
-DropdownMenu.prototype.removeOption = removeOption;
-DropdownMenu.prototype.destroy = destroy;
-DropdownMenu.prototype.setText = setText;
-DropdownMenu.prototype.setLocation = setLocation;
-DropdownMenu.prototype.add = add;
-
 //Add extra element to dropdown
-function add(element)
+DropdownMenu.prototype.add = function(element)
 {
 	this.children.push(element);
 }
 
 //Set location to where options should open
-function setLocation(location)
+DropdownMenu.prototype.setLocation = function(location)
 {
 	this.options_location = location;
 }
 
 //Set Text
-function setText(text)
+DropdownMenu.prototype.setText = function(text)
 {
 	this.text.setText(text);
 }
 
 //Remove element
-function destroy()
+DropdownMenu.prototype.destroy = function()
 {
 	try
 	{
@@ -150,10 +139,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+DropdownMenu.prototype.update = function(){}
 
 //Remove option from dropdown menu
-function removeOption(index)
+DropdownMenu.prototype.removeOption = function(index)
 {
 	if(index >= 0 && index < this.options.length)
 	{
@@ -164,7 +153,7 @@ function removeOption(index)
 }
 
 //Add new Option to dropdown menu
-function addOption(name, callback, icon)
+DropdownMenu.prototype.addOption = function(name, callback, icon)
 {
 	var button = new Button(this.panel);
 	button.element.style.zIndex = "200";
@@ -197,7 +186,7 @@ function addOption(name, callback, icon)
 }
 
 //Add new Option to dropdown menu
-function addMenu(name, icon)
+DropdownMenu.prototype.addMenu = function(name, icon)
 {
 	var menu = new DropdownMenu(this.panel);
 	menu.visible = this.expanded;
@@ -228,7 +217,7 @@ function addMenu(name, icon)
 }
 
 //Update interface
-function updateInterface()
+DropdownMenu.prototype.updateInterface = function()
 {
 	//Check visibility
 	var visibility, visible;

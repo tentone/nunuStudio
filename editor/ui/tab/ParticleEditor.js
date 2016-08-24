@@ -468,18 +468,8 @@ function ParticleEditor(parent)
 //Particleeditor counter
 ParticleEditor.id = 0;
 
-//Functions Prototype
-ParticleEditor.prototype.attachParticle = attachParticle;
-ParticleEditor.prototype.activate = activate;
-ParticleEditor.prototype.destroy = destroy;
-ParticleEditor.prototype.update = update;
-ParticleEditor.prototype.updateInterface = updateInterface;
-ParticleEditor.prototype.updateMetadata = updateMetadata;
-ParticleEditor.prototype.updateCamera = updateCamera;
-ParticleEditor.prototype.updateRuntimeParticle = updateRuntimeParticle;
-
 //Update container object data
-function updateMetadata(container)
+ParticleEditor.prototype.updateMetadata = function(container)
 {
 	if(this.particle !== null)
 	{
@@ -507,7 +497,7 @@ function updateMetadata(container)
 }
 
 //Attach particle to particle editor
-function attachParticle(particle)
+ParticleEditor.prototype.attachParticle = function(particle)
 {
 	//Attach particle
 	this.particle = particle;
@@ -567,7 +557,7 @@ function attachParticle(particle)
 }
 
 //Updates runtime particle to match attached particle
-function updateRuntimeParticle()
+ParticleEditor.prototype.updateRuntimeParticle = function()
 {
 	if(this.particle !== null)
 	{
@@ -586,7 +576,7 @@ function updateRuntimeParticle()
 }
 
 //Update camera position and rotation from variables
-function updateCamera()
+ParticleEditor.prototype.updateCamera = function()
 {
 	//Calculate direction vector
 	var cos_angle_y = Math.cos(this.camera_rotation.y);
@@ -596,7 +586,7 @@ function updateCamera()
 }
 
 //Activate code editor
-function activate()
+ParticleEditor.prototype.activate = function()
 {
 	//Set editor state
 	Editor.setState(Editor.STATE_IDLE);
@@ -607,7 +597,7 @@ function activate()
 }
 
 //Remove element
-function destroy()
+ParticleEditor.prototype.destroy = function()
 {
 	try
 	{
@@ -617,7 +607,7 @@ function destroy()
 }
 
 //Update material editor
-function update()
+ParticleEditor.prototype.update = function()
 {
 	//Main division
 	this.main.update();
@@ -669,7 +659,7 @@ function update()
 }
 
 //Update division Size
-function updateInterface()
+ParticleEditor.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)
