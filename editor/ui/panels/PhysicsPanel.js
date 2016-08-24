@@ -224,12 +224,11 @@ function PhysicsPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 PhysicsPanel.prototype = Object.create(Panel.prototype);
-PhysicsPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+PhysicsPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

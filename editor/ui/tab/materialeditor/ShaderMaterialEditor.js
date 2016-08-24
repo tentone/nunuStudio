@@ -59,9 +59,8 @@ function ShaderMaterialEditor(parent)
 }
 
 ShaderMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
-ShaderMaterialEditor.prototype.attachMaterial = attachMaterial;
 
-function attachMaterial(material, material_file)
+ShaderMaterialEditor.prototype.attachMaterial = function(material, material_file)
 {
 	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
 

@@ -48,23 +48,14 @@ function Image(parent)
 //Image ID counter
 Image.id = 0;
 
-//Functions Prototype
-Image.prototype.setImage = setImage;
-Image.prototype.setCallback = setCallback;
-Image.prototype.destroy = destroy;
-Image.prototype.setVisibility = setVisibility;
-Image.prototype.update = update;
-Image.prototype.updateInterface = updateInterface;
-
-
 //Set image onclick callback function
-function setCallback(callback)
+Image.prototype.setCallback = function(callback)
 {
 	this.element.onclick = callback;
 }
 
 //Remove element
-function destroy()
+Image.prototype.destroy = function()
 {
 	try
 	{
@@ -74,16 +65,16 @@ function destroy()
 }
 
 //Update
-function update(){}
+Image.prototype.update = function(){}
 
 //Set Image
-function setImage(image)
+Image.prototype.setImage = function(image)
 {
 	this.img.src = image;
 }
 
 //Set element visibility
-function setVisibility(value)
+Image.prototype.setVisibility = function(value)
 {
 	this.visible = value;
 
@@ -100,7 +91,7 @@ function setVisibility(value)
 }
 
 //Update Interface
-function updateInterface()
+Image.prototype.updateInterface = function()
 {
 	//Fit parent element
 	if(this.fit_parent)

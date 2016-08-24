@@ -90,13 +90,8 @@ DivisionResizable.RIGHT = 1;
 DivisionResizable.TOP = 2;
 DivisionResizable.BOTTOM = 3;
 
-//Functions Prototype
-DivisionResizable.prototype.update = update;
-DivisionResizable.prototype.updateInterface = updateInterface;
-DivisionResizable.prototype.destroy = destroy;
-
 //Remove element
-function destroy()
+DivisionResizable.prototype.destroy = function()
 {
 	try
 	{
@@ -107,7 +102,7 @@ function destroy()
 }
 
 //Update status
-function update()
+DivisionResizable.prototype.update = function()
 {
 	if(this.resizing && Mouse.buttonPressed(Mouse.LEFT))
 	{
@@ -162,7 +157,7 @@ function update()
 }
 
 //Update DivisionResizable Size
-function updateInterface()
+DivisionResizable.prototype.updateInterface = function()
 {
 	//Set visibility
 	if(this.visible)

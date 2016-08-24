@@ -119,41 +119,32 @@ function CodeEditor(parent)
 //CodeEditor ID counter
 CodeEditor.id = 0;
 
-//Functions Prototype
-CodeEditor.prototype.update = update;
-CodeEditor.prototype.updateInterface = updateInterface;
-CodeEditor.prototype.destroy = destroy;
-CodeEditor.prototype.setValue = setValue;
-CodeEditor.prototype.getValue = getValue;
-CodeEditor.prototype.setOnChange = setOnChange;
-CodeEditor.prototype.setMode = setMode;
-
 //Set language mode (javascript, glsl, etc)
-function setMode(mode)
+CodeEditor.prototype.setMode = function(mode)
 {
 	this.code.setOption("mode", mode);
 }
 
 //Set onchange callback
-function setOnChange(callback)
+CodeEditor.prototype.setOnChange = function(callback)
 {
 	this.code.on("change", callback);
 }
 
 //Set text
-function setValue(text)
+CodeEditor.prototype.setValue = function(text)
 {
 	this.code.setValue(text);
 }
 
 //Get text
-function getValue()
+CodeEditor.prototype.getValue = function()
 {
 	return this.code.getValue();
 }
 
 //Remove element
-function destroy()
+CodeEditor.prototype.destroy = function()
 {
 	try
 	{
@@ -163,10 +154,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+CodeEditor.prototype.update = function(){}
 
 //Update Interface
-function updateInterface()
+CodeEditor.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{

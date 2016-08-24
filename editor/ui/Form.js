@@ -38,18 +38,8 @@ function Form(parent)
 //Form conter
 Form.id = 0;
 
-//Functions Prototype
-Form.prototype.add = add;
-Form.prototype.addText = addText;
-Form.prototype.addDivision = addDivision;
-Form.prototype.nextRow = nextRow;
-Form.prototype.removeLastRow = removeLastRow;
-Form.prototype.update = update;
-Form.prototype.updateInterface = updateInterface;
-Form.prototype.destroy = destroy;
-
 //Add a element to form (in actual row)
-function add(elem)
+Form.prototype.add = function(elem)
 {
 	if(this.rows.length > 0)
 	{
@@ -64,7 +54,7 @@ function add(elem)
 }
 
 //Create text element and add to form
-function addText(text)
+Form.prototype.addText = function(text)
 {
 	var element = new Text(this.element);
 	element.fit_content = true;
@@ -78,7 +68,7 @@ function addText(text)
 }
 
 //Create div element and add to form
-function addDivision(x, y)
+Form.prototype.addDivision = function(x, y)
 {
 	var division = new Division(this.element);
 	division.size.set(x, y);
@@ -89,13 +79,13 @@ function addDivision(x, y)
 }
 
 //Add new row to form
-function nextRow()
+Form.prototype.nextRow = function()
 {
 	this.rows.push([]);
 }
 
 //Add last row from form
-function removeLastRow()
+Form.prototype.removeLastRow = function()
 {
 	if(this.rows.length > 0)
 	{
@@ -109,7 +99,7 @@ function removeLastRow()
 }
 
 //Remove element
-function destroy()
+Form.prototype.destroy = function()
 {
 	try
 	{
@@ -118,11 +108,11 @@ function destroy()
 	catch(e){}
 }
 
-//Update Form
-function update(){}
+//Update
+Form.prototype.update = function(){}
 
-//Update division Size
-function updateInterface()
+//Update interface
+Form.prototype.updateInterface = function()
 {
 	//Set visiblity
 	if(this.visible)

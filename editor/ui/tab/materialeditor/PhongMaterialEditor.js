@@ -366,9 +366,8 @@ function PhongMaterialEditor(parent)
 }
 
 PhongMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
-PhongMaterialEditor.prototype.attachMaterial = attachMaterial;
 
-function attachMaterial(material, material_file)
+PhongMaterialEditor.prototype.attachMaterial = function(material, material_file)
 {
 	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
 

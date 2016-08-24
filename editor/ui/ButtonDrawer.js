@@ -117,18 +117,8 @@ function ButtonDrawer(parent)
 //ButtonDrawer ID counter
 ButtonDrawer.id = 0;
 
-//Functions Prototype
-ButtonDrawer.prototype.addOption = addOption;
-ButtonDrawer.prototype.removeOption = removeOption;
-ButtonDrawer.prototype.setImage = setImage;
-ButtonDrawer.prototype.destroy = destroy;
-ButtonDrawer.prototype.update = update;
-ButtonDrawer.prototype.updatePanelSize = updatePanelSize;
-ButtonDrawer.prototype.updateOptions = updateOptions;
-ButtonDrawer.prototype.updateInterface = updateInterface;
-
 //Remove element
-function destroy()
+ButtonDrawer.prototype.destroy = function()
 {
 	try
 	{
@@ -143,7 +133,7 @@ function destroy()
 }
 
 //Add new Option to dropdown menu
-function addOption(image, callback, alt_text)
+ButtonDrawer.prototype.addOption = function(image, callback, alt_text)
 {
 	var button = new ButtonImage(this.panel);
 	button.setImage(image);
@@ -177,7 +167,7 @@ function addOption(image, callback, alt_text)
 }
 
 //Remove option from dropdown menu
-function removeOption(index)
+ButtonDrawer.prototype.removeOption = function(index)
 {
 	if(index >= 0 && index < this.options.length)
 	{
@@ -189,24 +179,24 @@ function removeOption(index)
 }
 
 //Set button draw icon image
-function setImage(image)
+ButtonDrawer.prototype.setImage = function(image)
 {
 	this.image = image;
 	this.img.src = this.image;
 }
 
 //Update
-function update(){}
+ButtonDrawer.prototype.update = function(){}
 
 //Updates drawer panel size
-function updatePanelSize()
+ButtonDrawer.prototype.updatePanelSize = function()
 {
 	this.panel_size.x = (this.options_size.x * this.options_per_line);
 	this.panel_size.y = (this.options_size.y * (Math.floor((this.options.length - 1) / this.options_per_line) + 1));
 }
 
 //Update drawer options position and size (should be called after change in options displacement variables)
-function updateOptions()
+ButtonDrawer.prototype.updateOptions = function()
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
@@ -220,7 +210,7 @@ function updateOptions()
 }
 
 //Update Interface
-function updateInterface()
+ButtonDrawer.prototype.updateInterface = function()
 {
 	//Update panel position
 	this.panel_position.x = this.position.x + this.size.x;

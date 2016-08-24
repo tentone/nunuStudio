@@ -196,13 +196,11 @@ function ScenePanel(parent)
 	this.form.nextRow();
 }
 
-//Functions Prototype
+//Super prototypes
 ScenePanel.prototype = Object.create(Panel.prototype);
-ScenePanel.prototype.updatePanel = updatePanel;
-ScenePanel.prototype.updateForms = updateForms;
 
 //Update panel content from attached object
-function updatePanel()
+ScenePanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{
@@ -225,7 +223,7 @@ function updatePanel()
 }
 
 //Update wich forms should be visible in the panel
-function updateForms()
+ScenePanel.prototype.updateForms = function()
 {
 	if(this.obj !== null)
 	{

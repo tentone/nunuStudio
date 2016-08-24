@@ -125,12 +125,11 @@ function LeapPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 LeapPanel.prototype = Object.create(Panel.prototype);
-LeapPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+LeapPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

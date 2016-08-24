@@ -81,12 +81,11 @@ function KinectPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 KinectPanel.prototype = Object.create(Panel.prototype);
-KinectPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+KinectPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

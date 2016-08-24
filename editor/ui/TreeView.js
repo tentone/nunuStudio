@@ -59,18 +59,8 @@ function TreeView(parent, container)
 //TreeView conter
 TreeView.id = 0;
 
-//Functions Prototype
-TreeView.prototype.update = update;
-TreeView.prototype.updateInterface = updateInterface;
-TreeView.prototype.destroy = destroy;
-TreeView.prototype.add = add;
-TreeView.prototype.addFromObject = addFromObject;
-TreeView.prototype.fromObject = fromObject;
-TreeView.prototype.updateChildPosition = updateChildPosition;
-TreeView.prototype.updateSelectedObject = updateSelectedObject;
-
 //Set data from object
-function fromObject(obj)
+TreeView.prototype.fromObject = function(obj)
 {
 	//Remove all children
 	for(var i = 0; i < this.children.length; i++)
@@ -89,13 +79,13 @@ function fromObject(obj)
 }
 
 //Update which object is currently selected
-function updateSelectedObject(obj)
+TreeView.prototype.updateSelectedObject = function(obj)
 {
 	TreeView.updateSelectedObject(this, obj);
 }
 
 //Add tree element from object
-function addFromObject(obj)
+TreeView.prototype.addFromObject = function(obj)
 {
 	var element = new TreeElement(this);
 
@@ -111,7 +101,7 @@ function addFromObject(obj)
 }
 
 //Add element
-function add(text, icon)
+TreeView.prototype.add = function(text, icon)
 {
 	var element = new TreeElement(this);
 	
@@ -130,7 +120,7 @@ function add(text, icon)
 }
 
 //Remove element
-function destroy()
+TreeView.prototype.destroy = function()
 {
 	//Remove main element
 	try
@@ -148,7 +138,7 @@ function destroy()
 }
 
 //Update tree view children positions
-function updateChildPosition()
+TreeView.prototype.updateChildPosition = function()
 {
 	var size = TreeView.updateChildPosition(this, 20, 0, false);
 
@@ -158,11 +148,11 @@ function updateChildPosition()
 	}
 }
 
-//Update TreeView
-function update(){}
+//Update
+TreeView.prototype.update = function(){}
 
 //Update division Size
-function updateInterface()
+TreeView.prototype.updateInterface = function()
 {
 	//Set Visibility
 	if(this.visible)

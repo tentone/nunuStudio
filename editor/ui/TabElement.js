@@ -109,33 +109,20 @@ function TabElement(parent, name, icon, closeable, container, index)
 //ID counter
 TabElement.id = 0;
 
-//Function prototypes
-TabElement.prototype.close = close;
-TabElement.prototype.setIcon = setIcon;
-TabElement.prototype.setName = setName;
-TabElement.prototype.updateMetadata = updateMetadata;
-TabElement.prototype.activate = activate;
-TabElement.prototype.select = select;
-TabElement.prototype.isSelected = isSelected;
-TabElement.prototype.update = update;
-TabElement.prototype.destroy = destroy;
-TabElement.prototype.attachComponent = attachComponent;
-TabElement.prototype.updateInterface = updateInterface;
-
 //Close this tab
-function close()
+TabElement.prototype.close = function()
 {
 	this.container.removeOption(this.index);
 }
 
 //Set tab element icon
-function setIcon(icon)
+TabElement.prototype.setIcon = function(icon)
 {
 	this.icon.setImage(icon);
 }
 
 //Set tab element name
-function setName(text)
+TabElement.prototype.setName = function(text)
 {
 	if(text !== undefined && text.length > 9)
 	{
@@ -146,7 +133,7 @@ function setName(text)
 }
 
 //Dectivate this tab
-function updateMetadata()
+TabElement.prototype.updateMetadata = function()
 {
 	if(this.component !== null)
 	{
@@ -155,7 +142,7 @@ function updateMetadata()
 }
 
 //Activate this tab
-function activate()
+TabElement.prototype.activate = function()
 {
 	if(this.component !== null && this.component.activate !== undefined)
 	{
@@ -164,19 +151,19 @@ function activate()
 }
 
 //Selects this tab element on tabcontainer
-function select()
+TabElement.prototype.select = function()
 {
 	this.container.selectOption(this.index);
 }
 
 //Check if this tab element is selected
-function isSelected()
+TabElement.prototype.isSelected = function()
 {
 	return this.index === this.container.options_selected;
 }
 
 //Update taboption status
-function update()
+TabElement.prototype.update = function()
 {
 	if(this.component !== null)
 	{
@@ -185,7 +172,7 @@ function update()
 }
 
 //Destroy
-function destroy()
+TabElement.prototype.destroy = function()
 {
 	try
 	{
@@ -199,7 +186,7 @@ function destroy()
 }
 
 //Attach component that will be auto resized with tab division
-function attachComponent(component)
+TabElement.prototype.attachComponent = function(component)
 {
 	this.component = component;
 	if(this.component.parent !== this.element)
@@ -211,7 +198,7 @@ function attachComponent(component)
 }
 
 //Update Interface
-function updateInterface()
+TabElement.prototype.updateInterface = function()
 {
 	//Update button
 	if(this.isSelected())

@@ -69,9 +69,8 @@ function BasicMaterialEditor(parent)
 }
 
 BasicMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
-BasicMaterialEditor.prototype.attachMaterial = attachMaterial;
 
-function attachMaterial(material, material_file)
+BasicMaterialEditor.prototype.attachMaterial = function(material, material_file)
 {
 	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
 

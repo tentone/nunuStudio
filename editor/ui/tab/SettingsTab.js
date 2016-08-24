@@ -326,18 +326,11 @@ function SettingsTab(parent)
 //SettingsTab counter
 SettingsTab.id = 0;
 
-//Functions Prototype
-SettingsTab.prototype.update = update;
-SettingsTab.prototype.updateInterface = updateInterface;
-SettingsTab.prototype.destroy = destroy;
-SettingsTab.prototype.activate = activate;
-SettingsTab.prototype.updateMetadata = updateMetadata;
-
 //Update container object data
-function updateMetadata(container){}
+SettingsTab.prototype.updateMetadata = function(container){}
 
 //Activate
-function activate()
+SettingsTab.prototype.activate = function()
 {
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
@@ -368,7 +361,7 @@ function activate()
 }
 
 //Remove element
-function destroy()
+SettingsTab.prototype.destroy = function()
 {
 	try
 	{
@@ -378,10 +371,10 @@ function destroy()
 }
 
 //Update SettingsTab
-function update(){}
+SettingsTab.prototype.update = function(){}
 
 //Update division Size
-function updateInterface()
+SettingsTab.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

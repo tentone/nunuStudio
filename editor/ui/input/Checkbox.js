@@ -45,48 +45,38 @@ function CheckBox(parent)
 //CheckBox ID counter
 CheckBox.id = 0;
 
-//Functions Prototype
-CheckBox.prototype.update = update;
-CheckBox.prototype.updateInterface = updateInterface;
-CheckBox.prototype.destroy = destroy;
-CheckBox.prototype.setOnChange = setOnChange;
-CheckBox.prototype.setText = setText;
-CheckBox.prototype.getValue = getValue;
-CheckBox.prototype.setValue = setValue;
-CheckBox.prototype.setDisabled = setDisabled;
-
 //Set if element if disabled
-function setDisabled(value)
+CheckBox.prototype.setDisabled = function(value)
 {
 	this.checkbox.disabled = value;
 }
 
 //Set checkbox value
-function setValue(value)
+CheckBox.prototype.setValue = function(value)
 {
 	this.checkbox.checked = value;
 }
 
 //Get checkbox value
-function getValue()
+CheckBox.prototype.getValue = function()
 {
 	return this.checkbox.checked;
 }
 
 //Set checkbox text
-function setText(text)
+CheckBox.prototype.setText = function(text)
 {
 	this.text.setText(text);
 }
 
 //Set onchange callback
-function setOnChange(callback)
+CheckBox.prototype.setOnChange = function(callback)
 {
 	this.element.onchange = callback;
 }
 
 //Remove element
-function destroy()
+CheckBox.prototype.destroy = function()
 {
 	try
 	{
@@ -96,10 +86,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+CheckBox.prototype.update = function(){}
 
 //Update Interface
-function updateInterface()
+CheckBox.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{

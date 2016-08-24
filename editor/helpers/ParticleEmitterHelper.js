@@ -15,12 +15,11 @@ function ParticleEmitterHelper(particle)
 	}
 }
 
-//Functions prototypes
+//Super prototypes
 ParticleEmitterHelper.prototype = Object.create(THREE.Object3D.prototype);
-ParticleEmitterHelper.prototype.update = update;
 
 //Update attached particle
-function update()
+ParticleEmitterHelper.prototype.update = function()
 {
 	if(this.runtime !== null)
 	{

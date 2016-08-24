@@ -49,22 +49,14 @@ function ContextMenu(parent)
 //ContextMenu ID counter
 ContextMenu.id = 0;
 
-//Functions Prototype
-ContextMenu.prototype.update = update;
-ContextMenu.prototype.updateInterface = updateInterface;
-ContextMenu.prototype.addOption = addOption;
-ContextMenu.prototype.removeOption = removeOption;
-ContextMenu.prototype.destroy = destroy;
-ContextMenu.prototype.setText = setText;
-
 //Set Text
-function setText(text)
+ContextMenu.prototype.setText = function(text)
 {
 	this.text.setText(text);
 }
 
 //Remove element
-function destroy()
+ContextMenu.prototype.destroy = function()
 {	
 	try
 	{
@@ -79,10 +71,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+ContextMenu.prototype.update = function(){}
 
 //Remove option from dropdown menu
-function removeOption(index)
+ContextMenu.prototype.removeOption = function(index)
 {
 	if(index >= 0 && index < this.options.length)
 	{
@@ -92,7 +84,7 @@ function removeOption(index)
 }
 
 //Add new Option to dropdown menu
-function addOption(name, callback)
+ContextMenu.prototype.addOption = function(name, callback)
 {
 	var button = new Button(this.element);
 	button.element.style.zIndex = "10000";
@@ -115,7 +107,7 @@ function addOption(name, callback)
 }
 
 //Update interface
-function updateInterface()
+ContextMenu.prototype.updateInterface = function()
 {
 	//Update Options
 	for(var i = 0; i < this.options.length; i++)

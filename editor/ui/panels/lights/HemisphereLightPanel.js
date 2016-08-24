@@ -98,12 +98,11 @@ function HemisphereLightPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 HemisphereLightPanel.prototype = Object.create(Panel.prototype);
-HemisphereLightPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+HemisphereLightPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

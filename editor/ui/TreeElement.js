@@ -329,21 +329,8 @@ function TreeElement(container)
 //TreeElement conter
 TreeElement.id = 0;
 
-//Functions Prototype
-TreeElement.prototype.update = update;
-TreeElement.prototype.updateSceneData = updateSceneData;
-TreeElement.prototype.updateInterface = updateInterface;
-TreeElement.prototype.updateFoldedState = updateFoldedState;
-TreeElement.prototype.destroy = destroy;
-TreeElement.prototype.add = add;
-TreeElement.prototype.addFromObject = addFromObject;
-TreeElement.prototype.setLabel = setLabel;
-TreeElement.prototype.setIcon = setIcon;
-TreeElement.prototype.setObject = setObject;
-TreeElement.prototype.setVisibility = setVisibility;
-
 //Set object attached to element
-function setObject(obj)
+TreeElement.prototype.setObject = function(obj)
 {
 	this.obj = obj;
 	this.icon.setImage(ObjectIcons.get(obj.type));
@@ -356,19 +343,19 @@ function setObject(obj)
 }
 
 //Set icon
-function setIcon(icon)
+TreeElement.prototype.setIcon = function(icon)
 {
 	this.icon.setImage(icon);
 }
 
 //Set label
-function setLabel(label)
+TreeElement.prototype.setLabel = function(label)
 {
 	this.label.setText(label);
 }
 
 //Add tree element from object
-function addFromObject(obj)
+TreeElement.prototype.addFromObject = function(obj)
 {
 	var element = new TreeElement(this.container);
 
@@ -388,7 +375,7 @@ function addFromObject(obj)
 }
 
 //Add tree element
-function add(label, icon)
+TreeElement.prototype.add = function(label, icon)
 {
 	var element = new TreeElement(this.container);
 	if(label !== undefined)
@@ -407,7 +394,7 @@ function add(label, icon)
 }
 
 //Remove element
-function destroy()
+TreeElement.prototype.destroy = function()
 {
 	try
 	{
@@ -422,7 +409,7 @@ function destroy()
 }
 
 //Update folded state for this tree element
-function updateFoldedState()
+TreeElement.prototype.updateFoldedState = function()
 {
 	if(this.obj !== undefined)
 	{
@@ -444,7 +431,7 @@ function updateFoldedState()
 }
 
 //Update parent tree element from scene data
-function updateSceneData()
+TreeElement.prototype.updateSceneData = function()
 {
 	if(this.container.scene !== null)
 	{
@@ -453,7 +440,7 @@ function updateSceneData()
 }
 
 //Set element visibility
-function setVisibility(value)
+TreeElement.prototype.setVisibility = function(value)
 {
 	this.visible = value;
 
@@ -471,11 +458,11 @@ function setVisibility(value)
 	this.label.setVisibility(value);
 }
 
-//Update TreeElement
-function update(){}
+//Update
+TreeElement.prototype.update = function(){}
 
-//Update division Size
-function updateInterface()
+//Update interface
+TreeElement.prototype.updateInterface = function()
 {
 	//Visibility
 	if(this.visible)

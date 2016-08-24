@@ -114,18 +114,8 @@ CoordinatesBox.VECTOR2 = 2;
 CoordinatesBox.VECTOR3 = 3;
 CoordinatesBox.QUATERNION = 4;
 
-//Functions Prototype
-CoordinatesBox.prototype.update = update;
-CoordinatesBox.prototype.updateInterface = updateInterface;
-CoordinatesBox.prototype.destroy = destroy;
-CoordinatesBox.prototype.setOnChange = setOnChange;
-CoordinatesBox.prototype.getValue = getValue;
-CoordinatesBox.prototype.setValue = setValue;
-CoordinatesBox.prototype.setStep = setStep;
-CoordinatesBox.prototype.setMode = setMode;
-
 //Set position box mode
-function setMode(mode)
+CoordinatesBox.prototype.setMode = function(mode)
 {
 	if(this.mode !== mode)
 	{
@@ -135,7 +125,7 @@ function setMode(mode)
 }
 
 //Set step for position box
-function setStep(value)
+CoordinatesBox.prototype.setStep = function(value)
 {
 	var value = String(value);
 	this.x.step = value;
@@ -145,13 +135,13 @@ function setStep(value)
 }
 
 //Get value of position box
-function getValue()
+CoordinatesBox.prototype.getValue = function()
 {
 	return {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value), order: this.order};
 }
 
 //Set value of position box
-function setValue(x, y, z, w)
+CoordinatesBox.prototype.setValue = function(x, y, z, w)
 {
 	if(x instanceof THREE.Vector2)
 	{
@@ -192,7 +182,7 @@ function setValue(x, y, z, w)
 }
 
 //Set onchange callback
-function setOnChange(callback)
+CoordinatesBox.prototype.setOnChange = function(callback)
 {
 	this.x.onchange = callback;
 	this.y.onchange = callback;
@@ -201,7 +191,7 @@ function setOnChange(callback)
 }
 
 //Remove element
-function destroy()
+CoordinatesBox.prototype.destroy = function()
 {
 	try
 	{
@@ -211,10 +201,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+CoordinatesBox.prototype.update = function(){}
 
 //Update Interface
-function updateInterface()
+CoordinatesBox.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{

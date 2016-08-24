@@ -20,16 +20,11 @@ function PhysicsObjectHelper(obj)
 	this.tmpQuat0 = new CANNON.Vec3();
 }
 
-//Functions prototypes
+//Super prototypes
 PhysicsObjectHelper.prototype = Object.create(THREE.Object3D.prototype);
-PhysicsObjectHelper.prototype.update = update;
-PhysicsObjectHelper.prototype.updateMesh = updateMesh;
-PhysicsObjectHelper.prototype.typeMatch = typeMatch;
-PhysicsObjectHelper.prototype.createMesh = createMesh;
-PhysicsObjectHelper.prototype.scaleMesh = scaleMesh;
 
 //Update attached particle
-function update()
+PhysicsObjectHelper.prototype.update = function()
 {
 	var meshes = this.meshes;
 	var shapeWorldPosition = this.tmpVec0;
@@ -76,7 +71,7 @@ function update()
 	meshes.length = meshIndex;
 }
 
-function updateMesh(index, body, shape)
+PhysicsObjectHelper.prototype.updateMesh = function(index, body, shape)
 {
 	var mesh = this.meshes[index];
 	if(!this.typeMatch(mesh, shape))
@@ -90,7 +85,7 @@ function updateMesh(index, body, shape)
 	this.scaleMesh(mesh, shape);
 }
 
-function typeMatch(mesh, shape)
+PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
 {
 	if(!mesh)
 	{
@@ -110,7 +105,7 @@ function typeMatch(mesh, shape)
 	);
 }
 
-function createMesh(shape)
+PhysicsObjectHelper.prototype.createMesh = function(shape)
 {
 	var mesh;
 	var material = this.material;
@@ -223,7 +218,7 @@ function createMesh(shape)
 	return mesh;
 }
 
-function scaleMesh(mesh, shape)
+PhysicsObjectHelper.prototype.scaleMesh = function(mesh, shape)
 {
 	var type = shape.type;
 

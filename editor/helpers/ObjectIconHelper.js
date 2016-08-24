@@ -11,12 +11,11 @@ function ObjectIconHelper(obj, icon)
 	}
 }
 
-//Functions prototypes
+//Super prototypes
 ObjectIconHelper.prototype = Object.create(THREE.Sprite.prototype);
-ObjectIconHelper.prototype.update = update;
 
 //Update attached particle
-function update()
+ObjectIconHelper.prototype.update = function()
 {
 	if(this.obj !== null)
 	{

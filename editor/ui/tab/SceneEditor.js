@@ -189,17 +189,8 @@ function SceneEditor(parent)
 //SceneEditor counter
 SceneEditor.id = 0;
 
-//Functions Prototype
-SceneEditor.prototype.update = update;
-SceneEditor.prototype.updateInterface = updateInterface;
-SceneEditor.prototype.destroy = destroy;
-SceneEditor.prototype.activate = activate;
-SceneEditor.prototype.setScene = setScene;
-SceneEditor.prototype.setFullscreen = setFullscreen;
-SceneEditor.prototype.updateMetadata = updateMetadata;
-
 //Update container object data
-function updateMetadata(container)
+SceneEditor.prototype.updateMetadata = function(container)
 {
 	if(this.scene !== null)
 	{
@@ -227,7 +218,7 @@ function updateMetadata(container)
 }
 
 //Set fullscreen mode
-function setFullscreen(value)
+SceneEditor.prototype.setFullscreen = function(value)
 {
 	//Apply fullscreen mode
 	if(value)
@@ -254,7 +245,7 @@ function setFullscreen(value)
 }
 
 //Activate scene editor
-function activate()
+SceneEditor.prototype.activate = function()
 {
 	Editor.program.scene = this.scene;
 	Editor.setPerformanceMeter(this.stats);
@@ -265,13 +256,13 @@ function activate()
 }
 
 //Set scene
-function setScene(scene)
+SceneEditor.prototype.setScene = function(scene)
 {
 	this.scene = scene;
 }
 
 //Remove element
-function destroy()
+SceneEditor.prototype.destroy = function()
 {
 	try
 	{
@@ -281,10 +272,10 @@ function destroy()
 }
 
 //Update SceneEditor
-function update(){}
+SceneEditor.prototype.update = function(){}
 
 //Update division Size
-function updateInterface()
+SceneEditor.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

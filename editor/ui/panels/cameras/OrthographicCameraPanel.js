@@ -109,12 +109,11 @@ function OrthographicCameraPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super Prototypes
 OrthographicCameraPanel.prototype = Object.create(Panel.prototype);
-OrthographicCameraPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+OrthographicCameraPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

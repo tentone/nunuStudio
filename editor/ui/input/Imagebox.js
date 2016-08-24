@@ -92,22 +92,14 @@ function ImageBox(parent)
 //ImageBox ID counter
 ImageBox.id = 0;
 
-//Functions Prototype
-ImageBox.prototype.setImage = setImage;
-ImageBox.prototype.getValue = getValue;
-ImageBox.prototype.update = update;
-ImageBox.prototype.updateInterface = updateInterface;
-ImageBox.prototype.destroy = destroy;
-ImageBox.prototype.setOnChange = setOnChange;
-
 //Set onchange callback function
-function setOnChange(callback)
+ImageBox.prototype.setOnChange = function(callback)
 {
 	this.onchange = callback;
 }
 
 //Remove element
-function destroy()
+ImageBox.prototype.destroy = function()
 {
 	try
 	{
@@ -117,22 +109,22 @@ function destroy()
 }
 
 //Update
-function update(){}
+ImageBox.prototype.update = function(){}
 
 //Set image from URL
-function setImage(url)
+ImageBox.prototype.setImage = function(url)
 {
 	this.img.src = url;
 }
 
 //Get image URL
-function getValue()
+ImageBox.prototype.getValue = function()
 {
 	return this.img.src;
 }
 
 //Update Interface
-function updateInterface()
+ImageBox.prototype.updateInterface = function()
 {
 	//Fit parent element
 	if(this.fit_parent)

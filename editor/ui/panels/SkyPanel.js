@@ -130,12 +130,11 @@ function SkyPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 SkyPanel.prototype = Object.create(Panel.prototype);
-SkyPanel.prototype.updatePanel = updatePanel;
 
 //Update panel with object data
-function updatePanel()
+SkyPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

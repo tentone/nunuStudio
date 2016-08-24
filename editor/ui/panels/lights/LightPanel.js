@@ -69,12 +69,11 @@ function LightPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 LightPanel.prototype = Object.create(Panel.prototype);
-LightPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+LightPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

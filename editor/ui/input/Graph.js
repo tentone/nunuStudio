@@ -67,21 +67,8 @@ function Graph(parent)
 //Graph counter
 Graph.id = 0;
 
-//Functions Prototype
-Graph.prototype.addGraph = addGraph;
-Graph.prototype.setOnChange = setOnChange;
-Graph.prototype.setRange = setRange;
-Graph.prototype.setValue = setValue;
-Graph.prototype.getValue = getValue;
-Graph.prototype.getGraph = getGraph;
-Graph.prototype.updateGraph = updateGraph;
-Graph.prototype.updateGrid = updateGrid;
-Graph.prototype.update = update;
-Graph.prototype.updateInterface = updateInterface;
-Graph.prototype.destroy = destroy;
-
 //Add graph
-function addGraph(name, color)
+Graph.prototype.addGraph = function(name, color)
 {
 	var canvas = document.createElement("canvas");
 	canvas.style.position = "absolute";
@@ -91,14 +78,14 @@ function addGraph(name, color)
 }
 
 //Attach onchange callback to a graph
-function setOnChange(callback, name)
+Graph.prototype.setOnChange = function(callback, name)
 {
 	var graph = this.getGraph(name);
 	graph.onchange = callback;
 }
 
 //Set value range
-function setRange(min, max)
+Graph.prototype.setRange = function(min, max)
 {
 	this.min = min;
 	this.max = max;
@@ -118,7 +105,7 @@ function setRange(min, max)
 }
 
 //Set values to a graph
-function setValue(values, name)
+Graph.prototype.setValue = function(values, name)
 {
 	var graph = this.getGraph(name);
 
@@ -182,7 +169,7 @@ function setValue(values, name)
 }
 
 //Return value array
-function getValue(name)
+Graph.prototype.getValue = function(name)
 {
 	var graph = this.getGraph(name);
 
@@ -195,7 +182,7 @@ function getValue(name)
 }
 
 //Get graph object by name
-function getGraph(name)
+Graph.prototype.getGraph = function(name)
 {
 	if(name !== undefined)
 	{
@@ -217,7 +204,7 @@ function getGraph(name)
 }
 
 //Update graph canvas and buttons
-function updateGraph(graph)
+Graph.prototype.updateGraph = function(graph)
 {
 	//Get canvas context
 	var context = graph.canvas.getContext("2d");
@@ -246,7 +233,7 @@ function updateGraph(graph)
 }
 
 //Draw background grid canvas
-function updateGrid()
+Graph.prototype.updateGrid = function()
 {
 	var context = this.grid.getContext("2d");
 	context.clearRect(0, 0, this.size.x, this.size.y);
@@ -280,7 +267,7 @@ function updateGrid()
 }
 
 //Remove element
-function destroy()
+Graph.prototype.destroy = function()
 {
 	try
 	{
@@ -290,7 +277,7 @@ function destroy()
 }
 
 //Update graphs
-function update()
+Graph.prototype.update = function()
 {
 	for(var j = 0; j < this.graph.length; j++)
 	{
@@ -332,7 +319,7 @@ function update()
 }
 
 //Update Graph Size
-function updateInterface()
+Graph.prototype.updateInterface = function()
 {	
 	//Set visibility
 	if(this.visible)

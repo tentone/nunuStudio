@@ -61,57 +61,46 @@ function Slider(parent)
 //Slider ID counter
 Slider.id = 0;
 
-//Functions Prototype
-Slider.prototype.update = update;
-Slider.prototype.updateInterface = updateInterface;
-Slider.prototype.destroy = destroy;
-Slider.prototype.getValue = getValue;
-Slider.prototype.setValue = setValue;
-Slider.prototype.setOnChange = setOnChange;
-Slider.prototype.setRange = setRange;
-Slider.prototype.setStep = setStep;
-Slider.prototype.setDisabled = setDisabled;
-
 //Set if element if disabled
-function setDisabled(value)
+Slider.prototype.setDisabled = function(value)
 {
 	this.element.disabled = value;
 }
 
 //Set slider min step
-function setStep(step)
+Slider.prototype.setStep = function(step)
 {
 	this.element.step = String(step);
 }
 
 //Set slider range
-function setRange(min, max)
+Slider.prototype.setRange = function(min, max)
 {
 	this.element.min = String(min);
 	this.element.max = String(max);
 }
 
 //Set onchange callback
-function setOnChange(callback)
+Slider.prototype.setOnChange = function(callback)
 {
 	this.onchange = callback;
 }
 
 //Get Slider value
-function setValue(value)
+Slider.prototype.setValue = function(value)
 {
 	this.element.value = value;
 	this.text.innerHTML = value;
 }
 
 //Get Slider value
-function getValue()
+Slider.prototype.getValue = function()
 {
 	return this.element.value;
 }
 
 //Remove element
-function destroy()
+Slider.prototype.destroy = function()
 {
 	try
 	{
@@ -122,10 +111,10 @@ function destroy()
 }
 
 //Update
-function update(){}
+Slider.prototype.update = function(){}
 
 //Update Interface
-function updateInterface()
+Slider.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{

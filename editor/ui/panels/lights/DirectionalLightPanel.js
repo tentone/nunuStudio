@@ -99,12 +99,11 @@ function DirectionalLightPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 DirectionalLightPanel.prototype = Object.create(Panel.prototype);
-DirectionalLightPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+DirectionalLightPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{

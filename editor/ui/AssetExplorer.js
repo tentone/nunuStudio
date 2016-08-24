@@ -54,15 +54,8 @@ function AssetExplorer(parent)
 //AssetExplorer conter
 AssetExplorer.id = 0;
 
-//Functions Prototype
-AssetExplorer.prototype.update = update;
-AssetExplorer.prototype.updateInterface = updateInterface;
-AssetExplorer.prototype.destroy = destroy;
-AssetExplorer.prototype.add = add;
-AssetExplorer.prototype.clear = clear;
-
 //Remove all files
-function clear()
+AssetExplorer.prototype.clear = function()
 {
 	while(this.files.length > 0)
 	{
@@ -71,7 +64,7 @@ function clear()
 }
 
 //Add file to explorer
-function add(file)
+AssetExplorer.prototype.add = function(file)
 {
 	file.setParent(this.element);
 	file.size.copy(this.files_size);
@@ -81,7 +74,7 @@ function add(file)
 }
 
 //Remove element
-function destroy()
+AssetExplorer.prototype.destroy = function()
 {
 	try
 	{
@@ -91,10 +84,10 @@ function destroy()
 }
 
 //Update AssetExplorer
-function update(){}
+AssetExplorer.prototype.update = function(){}
 
 //Update division Size
-function updateInterface()
+AssetExplorer.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

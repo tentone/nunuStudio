@@ -202,7 +202,7 @@ function PointLightPanel(parent)
 	this.form.updateInterface();
 }
 
-//Functions Prototype
+//Super prototypes
 PointLightPanel.prototype = Object.create(Panel.prototype);
 
 //Update panel content from attached object
