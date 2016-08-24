@@ -139,7 +139,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608231607";
+Editor.TIMESTAMP = "201608240040";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -687,7 +687,7 @@ Editor.updateSelectedObjectUI = function()
 		{
 			Interface.panel = new SkyPanel(Interface.explorer_resizable.div_b);
 		}
-		else if(Editor.selected_object instanceof LeapHand)
+		else if(Editor.selected_object instanceof LeapMotion)
 		{
 			Interface.panel = new LeapPanel(Interface.explorer_resizable.div_b);
 		}
@@ -838,6 +838,7 @@ Editor.selectObjectHelper = function()
 		if(Editor.selected_object instanceof THREE.Camera)
 		{
 			Editor.object_helper.add(new THREE.CameraHelper(Editor.selected_object));
+			Editor.object_helper.add(new ObjectIconHelper(Editor.selected_object, Interface.file_dir + "icons/camera/camera.png"));
 		}
 		//Directional light
 		else if(Editor.selected_object instanceof THREE.DirectionalLight)
@@ -1001,9 +1002,13 @@ Editor.loadProgram = function(fname)
 //Export web project
 Editor.exportWebProject = function(dir)
 {
+	//Nunu core
 	App.copyFolder("runtime", dir);
 	App.copyFolder("core", dir + "\\core");
 	App.copyFolder("input", dir + "\\input");
+	App.copyFile("App.js", dir + "\\App.js");
+
+	//Libraries
 	App.makeDirectory(dir + "\\lib");
 	App.copyFile("lib\\leap.min.js", dir + "\\lib\\leap.min.js");
 	App.copyFile("lib\\SPE.min.js", dir + "\\lib\\SPE.min.js");
@@ -1015,7 +1020,8 @@ Editor.exportWebProject = function(dir)
 	App.copyFile("lib\\three\\three.min.js", dir + "\\lib\\three\\three.min.js");
 	App.makeDirectory(dir + "\\lib\\three\\effects");
 	App.copyFile("lib\\three\\effects\\VREffect.js", dir + "\\lib\\three\\effects\\VREffect.js");
-	App.copyFile("App.js", dir + "\\App.js");
+
+	//Save program
 	Editor.saveProgram(dir + "\\app.isp");
 }
 

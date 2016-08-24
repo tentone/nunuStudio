@@ -11,32 +11,10 @@ function Model3D(geometry, material)
 	this.castShadow = true;
 }
 
-//Function Prototype
 Model3D.prototype = Object.create(THREE.Mesh.prototype);
-Model3D.prototype.initialize = initialize;
-Model3D.prototype.update = update;
-Model3D.prototype.dispose = dispose;
-
-//Initialize model
-function initialize()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-}
-
-//Update model state
-function update()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
-	}
-}
 
 //Dipose model
-function dispose()
+Model3D.prototype.dispose = function()
 {
 	//Dipose material and geometry
 	if(this.material.dispose !== undefined)

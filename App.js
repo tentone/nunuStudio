@@ -52,7 +52,7 @@ include("core/texture/Texture.js");
 include("core/loaders/FontLoader.js");
 
 include("core/objects/physics/PhysicsObject.js");
-include("core/objects/device/LeapHand.js");
+include("core/objects/device/LeapMotion.js");
 include("core/objects/device/KinectDevice.js");
 include("core/objects/lights/PointLight.js");
 include("core/objects/lights/SpotLight.js");

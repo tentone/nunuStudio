@@ -8,8 +8,7 @@ function Program(name)
 	//Program Type
 	this.type = "Program";
 
-	//Disable auto matrix updates
-	this.rotationAutoUpdate = false;
+	//Matrix auto update
 	this.matrixAutoUpdate = false;
 
 	//Program Info
@@ -48,28 +47,10 @@ function Program(name)
 	this.scene = null;
 }
 
-//Program methods
 Program.prototype = Object.create(THREE.Object3D.prototype);
-Program.prototype.initialize = initialize;
-Program.prototype.resize = resize;
-Program.prototype.remove = remove;
-Program.prototype.add = add;
-Program.prototype.clone = clone;
-Program.prototype.toJSON = toJSON;
-Program.prototype.dispose = dispose;
-
-//Asset management
-Program.prototype.addMaterial = addMaterial;
-Program.prototype.removeMaterial = removeMaterial;
-Program.prototype.addTexture = addTexture;
-
-//Scene manipulation
-Program.prototype.setScene = setScene;
-Program.prototype.setInitialScene = setInitialScene;
-Program.prototype.addDefaultScene = addDefaultScene;
 
 //Add material to materials list
-function addMaterial(material)
+Program.prototype.addMaterial = function(material)
 {
 	if(material instanceof THREE.Material)
 	{
@@ -78,7 +59,7 @@ function addMaterial(material)
 }
 
 //Remove material from materials list (also receives default used to replace)
-function removeMaterial(material, default_material, default_material_sprite)
+Program.prototype.removeMaterial = function(material, default_material, default_material_sprite)
 {
 	if(material instanceof THREE.Material)
 	{
@@ -105,13 +86,13 @@ function removeMaterial(material, default_material, default_material_sprite)
 }
 
 //Add texture to texture list
-function addTexture(texture)
+Program.prototype.addTexture = function(texture)
 {
  	this.textures[texture.uuid] = texture;
 }
 
 //Set actual scene (to be used in runtime)
-function setScene(scene)
+Program.prototype.setScene = function(scene)
 {
 	if(scene instanceof Scene)
 	{
@@ -134,7 +115,7 @@ function setScene(scene)
 }
 
 //Select initial scene and initialize that scene
-function initialize()
+Program.prototype.initialize = function()
 {
 	if(this.initial_scene !== null)
 	{
@@ -154,7 +135,7 @@ function initialize()
 }
 
 //Screen resize
-function resize(x, y)
+Program.prototype.resize = function(x, y)
 {
 	if(this.scene !== null)
 	{
@@ -164,7 +145,7 @@ function resize(x, y)
 }
 
 //Remove Scene from program
-function remove(scene)
+Program.prototype.remove = function(scene)
 {
 	var index = this.children.indexOf(scene);
 	if(index > -1)
@@ -181,7 +162,7 @@ function remove(scene)
 }
 
 //Add children to program (only allows Scenes to be added)
-function add(scene)
+Program.prototype.add = function(scene)
 {
 	if(scene instanceof Scene)
 	{
@@ -197,19 +178,19 @@ function add(scene)
 }
 
 //Clone program (keep uuid and everything else)
-function clone()
+Program.prototype.clone = function()
 {
 	return new ObjectLoader().parse(this.toJSON());
 }
 
 //Set as initial scene (from uuid reference)
-function setInitialScene(scene)
+Program.prototype.setInitialScene = function(scene)
 {
 	this.initial_scene = scene.uuid;
 }
 
 //Create a default scene with sky
-function addDefaultScene(material)
+Program.prototype.addDefaultScene = function(material)
 {
 	if(material === undefined)
 	{
@@ -247,7 +228,7 @@ function addDefaultScene(material)
 }
 
 //Dispose program data (to avoid memory leaks)
-function dispose()
+Program.prototype.dispose = function()
 {
 	//Dispose materials
 	for(var i = 0; i < this.materials.length; i++)
@@ -269,7 +250,7 @@ function dispose()
 }
 
 //Create JSON for object
-function toJSON(meta)
+Program.prototype.toJSON = function(meta)
 {
 	var self = this;
 

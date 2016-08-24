@@ -678,7 +678,7 @@ Interface.initialize = function()
 	//Leap Hand
 	Interface.add_device.addOption(Interface.file_dir + "icons/hw/leap.png", function()
 	{
-		Editor.addToScene(new LeapHand());
+		Editor.addToScene(new LeapMotion());
 	}, "Leap Motion");
 
 	//Kinect Skeleton

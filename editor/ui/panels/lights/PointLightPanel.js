@@ -29,7 +29,7 @@ function PointLightPanel(parent)
 	{
 		if(self.obj !== null)
 		{
-			var position = self.pos.getValue();
+			var position = self.position.getValue();
 			self.obj.position.set(position.x, position.y, position.z);
 		}
 	});
@@ -54,7 +54,7 @@ function PointLightPanel(parent)
 	//Distance
 	this.form.addText("Distance");
 	this.distance = new NumberBox(this.form.element);
-	this.distance.size.set(80, 18);
+	this.distance.size.set(60, 18);
 	this.distance.setStep(0.1);
 	this.distance.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.distance.setOnChange(function()
@@ -82,23 +82,6 @@ function PointLightPanel(parent)
 	});
 	this.form.add(this.intensity);
 	this.form.nextRow();
-
-	//Decay
-	/*this.form.addText("Decay");
-	this.decay = new Slider(this.form.element);
-	this.decay.size.set(160, 18);
-	this.decay.setRange(0, 10);
-	this.decay.setStep(0.1);
-	this.decay.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.decay = self.decay.getValue();
-			self.decay_text.setText(self.obj.decay);
-		}
-	});
-	this.form.add(this.decay);
-	this.form.nextRow();*/
 
 	//Cast shadow
 	this.cast_shadow = new CheckBox(this.form.element);
@@ -144,16 +127,86 @@ function PointLightPanel(parent)
 	this.form.add(this.static);
 	this.form.nextRow();
 
+	//Shadow map
+	this.form.addText("Shadow Map");
+	this.form.nextRow();
+
+	//Shadow resolution
+	this.form.addText("Resolution");
+	this.shadow_width = new DropdownList(this.form.element);
+	this.shadow_width.size.set(60, 18);
+	this.shadow_width.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.shadow.mapSize.width = self.shadow_width.getValue();
+			self.obj.updateShadowMap();
+		}
+	});
+	this.form.add(this.shadow_width);
+	this.form.addText("x");
+	this.shadow_height = new DropdownList(this.form.element);
+	this.shadow_height.size.set(60, 18);
+	this.shadow_height.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.shadow.mapSize.height = self.shadow_height.getValue();
+			self.obj.updateShadowMap();
+		}
+	});
+	this.form.add(this.shadow_height);
+	this.form.nextRow();
+	for(var i = 5; i < 13; i++)
+	{
+		var size = Math.pow(2, i);
+		this.shadow_width.addValue(size.toString(), size);
+		this.shadow_height.addValue(size.toString(), size);
+	}
+
+	//Shadowmap camera near
+	this.form.addText("Near");
+	this.shadow_near = new NumberBox(this.form.element);
+	this.shadow_near.size.set(60, 18);
+	this.shadow_near.setStep(0.1);
+	this.shadow_near.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.shadow_near.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.shadow.camera.near = self.shadow_near.getValue();
+			self.obj.updateShadowMap();
+		}
+	});
+	this.form.add(this.shadow_near);
+
+	//Shadowmap camera far
+	this.form.addText("Far");
+	this.shadow_far = new NumberBox(this.form.element);
+	this.shadow_far.size.set(60, 18);
+	this.shadow_far.setStep(0.1);
+	this.shadow_far.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.shadow_far.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.shadow.camera.far = self.shadow_far.getValue();
+			self.obj.updateShadowMap();
+		}
+	});
+	this.form.add(this.shadow_far);
+	this.form.nextRow();
+
+
 	//Update form
 	this.form.updateInterface();
 }
 
 //Functions Prototype
 PointLightPanel.prototype = Object.create(Panel.prototype);
-PointLightPanel.prototype.updatePanel = updatePanel;
 
 //Update panel content from attached object
-function updatePanel()
+PointLightPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{
@@ -163,8 +216,11 @@ function updatePanel()
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.distance.setValue(this.obj.distance);
 		this.intensity.setValue(this.obj.intensity);
-		//this.decay.setValue(this.obj.decay);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
+		this.shadow_width.setValue(this.obj.shadow.mapSize.width);
+		this.shadow_height.setValue(this.obj.shadow.mapSize.height);
+		this.shadow_near.setValue(this.obj.shadow.camera.near);
+		this.shadow_far.setValue(this.obj.shadow.camera.far);
 	}
 }

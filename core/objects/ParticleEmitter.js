@@ -74,15 +74,10 @@ function ParticleEmitter(group, emitter)
 	this.group.addEmitter(this.emitter);
 }
 
-//Function Prototype
 ParticleEmitter.prototype = Object.create(THREE.Object3D.prototype);
-ParticleEmitter.prototype.initialize = initialize;
-ParticleEmitter.prototype.update = update;
-ParticleEmitter.prototype.dispose = dispose;
-ParticleEmitter.prototype.toJSON = toJSON;
 
 //Initialize particle system
-function initialize()
+ParticleEmitter.prototype.initialize = function()
 {
 	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
@@ -95,7 +90,7 @@ function initialize()
 }
 
 //Update State
-function update()
+ParticleEmitter.prototype.update = function()
 {
 	//Update group
 	this.group.tick(this.clock.getDelta());
@@ -108,7 +103,7 @@ function update()
 }
 
 //Dipose particle emitter
-function dispose()
+ParticleEmitter.prototype.dispose = function()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -117,7 +112,7 @@ function dispose()
 }
 
 //Create JSON for particle emitter
-function toJSON(meta)
+ParticleEmitter.prototype.toJSON = function(meta)
 {
 	//Self pointer
 	var self = this;

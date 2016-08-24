@@ -6,9 +6,8 @@ function Scene()
 	THREE.Scene.call(this);
 
 	this.name = "scene";
-
-	//Disable auto matrix updates
-	this.rotationAutoUpdate = false;
+	
+	//Matrix auto update
 	this.matrixAutoUpdate = false;
 
 	//Fog
@@ -46,19 +45,10 @@ Scene.FOG_NONE = 0;
 Scene.FOG_LINEAR = 1;
 Scene.FOG_EXPONENTIAL = 2;
 
-//Function Prototype
 Scene.prototype = Object.create(THREE.Scene.prototype);
 
-//Runtime functions
-Scene.prototype.initialize = initialize;
-Scene.prototype.update = update;
-Scene.prototype.toJSON = toJSON;
-Scene.prototype.getInitialCamera = getInitialCamera;
-Scene.prototype.setFogMode = setFogMode;
-Scene.prototype.updateFog = updateFog;
-
 //Initialize
-function initialize()
+Scene.prototype.initialize = function()
 {
 	//Get initial camera	
 	var camera = this.getInitialCamera();
@@ -78,7 +68,7 @@ function initialize()
 }
 
 //Update scene
-function update()
+Scene.prototype.update = function()
 {
 	//Update physics
 	this.world.step(this.clock.getDelta());
@@ -91,7 +81,7 @@ function update()
 }
 
 //Get default camera
-function getInitialCamera(obj)
+Scene.prototype.getInitialCamera = function(obj)
 {
 	if(obj === undefined)
 	{
@@ -116,7 +106,7 @@ function getInitialCamera(obj)
 }
 
 //Set fog mode
-function setFogMode(mode)
+Scene.prototype.setFogMode = function(mode)
 {
 	this.fog_mode = mode;
 
@@ -135,7 +125,7 @@ function setFogMode(mode)
 }
 
 //Update fog from stored value
-function updateFog()
+Scene.prototype.updateFog = function()
 {
 	if(this.fog instanceof THREE.Fog)
 	{
@@ -151,7 +141,7 @@ function updateFog()
 }
 
 //Create JSON for object
-function toJSON(meta)
+Scene.prototype.toJSON = function(meta)
 {
 	var data = THREE.Scene.prototype.toJSON.call(this, meta);
 

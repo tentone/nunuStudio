@@ -25,14 +25,10 @@ function Text3D(text, material, font)
 	this.castShadow = true;
 }
 
-//Function Prototype
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
-Text3D.prototype.dispose = dispose;
-Text3D.prototype.setText = setText;
-Text3D.prototype.toJSON = toJSON;
 
 //Dipose text
-function dispose()
+Text3D.prototype.dispose = function()
 {
 	//Dipose material and geometry
 	if(this.material.dispose !== undefined)
@@ -49,7 +45,7 @@ function dispose()
 }
 
 //Set Text
-function setText(text)
+Text3D.prototype.setText = function(text)
 {
 	this.text = text;
 	this.geometry.dispose();
@@ -57,7 +53,7 @@ function setText(text)
 }
 
 //Create JSON for object
-function toJSON(meta)
+Text3D.prototype.toJSON = function(meta)
 {
 	//Backup geometry and set to undefined to avoid being stored
 	var geometry = this.geometry;

@@ -74,7 +74,7 @@ function ScriptPanel(parent)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.setMode(self.mode.getSelectedIndex());
+			self.obj.setMode(self.mode.getValue());
 		}
 	});
 	this.form.add(this.mode);

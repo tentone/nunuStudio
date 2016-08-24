@@ -1,3 +1,6 @@
+"use strict";
+
+//Kinect device object
 function KinectDevice()
 {
 	THREE.Object3D.call(this);
@@ -64,28 +67,10 @@ KinectDevice.JOINTS_NAME = [["head","shouldercenter"],["shouldercenter","shoulde
 							["shouldercenter","spine"],["spine","hipcenter"],["hipcenter","hipright"],["hipcenter","hipleft"],["hipright","kneeright"],
 							["hipleft","kneeleft"],["kneeright","ankleright"],["kneeleft","ankleleft"],["ankleright","footright"],["ankleleft","footleft"]];
 
-//Function Prototype
 KinectDevice.prototype = Object.create(THREE.Object3D.prototype);
 
-//Runtime functions
-KinectDevice.prototype.initialize = initialize;
-KinectDevice.prototype.update = update;
-KinectDevice.prototype.isConnected = isConnected;
-KinectDevice.prototype.setCameraMode = setCameraMode;
-KinectDevice.prototype.toJSON = toJSON;
-
-//Initialize
-function initialize()
-{
-	//Initialize children
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-}
-
 //Update State
-function update()
+KinectDevice.prototype.update = function()
 {
 	//Check if there is data to process
 	if(this.data !== null)
@@ -144,13 +129,13 @@ function update()
 }
 
 //Check if there is kinect connected
-function isConnected()
+KinectDevice.prototype.isConnected = function()
 {
 	return this.connected;
 }
 
 //Set kinect camera mode
-function setCameraMode(mode)
+KinectDevice.prototype.setCameraMode = function(mode)
 {
 	if(mode === KinectDevice.COLOR)
 	{
@@ -163,7 +148,7 @@ function setCameraMode(mode)
 }
 
 //Create JSON for object
-function toJSON(meta)
+KinectDevice.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 

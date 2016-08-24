@@ -11,14 +11,10 @@ function AnimatedModel(geometry, material, useVertexTexture)
 	this.castShadow = true;
 }
 
-//Function Prototype
 AnimatedModel.prototype = Object.create(THREE.SkinnedMesh.prototype);
-AnimatedModel.prototype.initialize = initialize;
-AnimatedModel.prototype.update = update;
-AnimatedModel.prototype.dispose = dispose;
 
 //Initialize
-function initialize()
+AnimatedModel.prototype.initialize = function()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -27,7 +23,7 @@ function initialize()
 }
 
 //Update state
-function update()
+AnimatedModel.prototype.update = function()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -36,7 +32,7 @@ function update()
 }
 
 //Dipose model
-function dispose()
+AnimatedModel.prototype.dispose = function()
 {
 	//Dipose material and geometry
 	if(this.material.dispose !== undefined)

@@ -47,6 +47,10 @@ THREE.Object3D.prototype.destroy = function()
 {
 	if(this.parent !== null)
 	{
+		if(this.dispose)
+		{
+			this.dispose();
+		}
 		this.parent.remove(this);
 	}
 }
@@ -62,10 +66,12 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 	{
 		meta =
 		{
+			fonts: {},
+			videos: {},
+			images: {},
 			geometries: {},
 			materials: {},
-			textures: {},
-			images: {}
+			textures: {}
 		};
 
 		output.metadata =
@@ -80,6 +86,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 	object.uuid = this.uuid;
 	object.type = this.type;
 	object.name = this.name;
+
 	object.folded = this.folded;
 	object.hidden = this.hidden;
 	
@@ -88,11 +95,11 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 		object.userData = this.userData;
 	}
 
-	object.castShadow = (this.castShadow === true);
-	object.receiveShadow = (this.receiveShadow === true);
-	object.visible = !(this.visible === false);
+	object.castShadow = this.castShadow;
+	object.receiveShadow = this.receiveShadow;
+	object.visible = this.visible;
 
-	object.matrixAutoUpdate = (this.matrixAutoUpdate === true);
+	object.matrixAutoUpdate = this.matrixAutoUpdate;
 	object.matrix = this.matrix.toArray();
 
 	//If there is geometry store it

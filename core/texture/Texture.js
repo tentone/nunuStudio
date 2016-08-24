@@ -14,12 +14,10 @@ function Texture(url)
 	this.needsUpdate = true;
 }
 
-//Functions prototype
 Texture.prototype = Object.create(THREE.Texture.prototype);
-Texture.prototype.toJSON = toJSON;
 
 //Create JSON description
-function toJSON(meta)
+Texture.prototype.toJSON = function(meta)
 {
 	if(meta.textures[this.uuid] !== undefined)
 	{

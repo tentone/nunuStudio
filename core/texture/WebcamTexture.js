@@ -54,5 +54,4 @@ function WebcamTexture()
 	this.name = "webcam";
 }
 
-//Function prototypes
 WebcamTexture.prototype = Object.create(THREE.VideoTexture.prototype);

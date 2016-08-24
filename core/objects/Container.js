@@ -9,25 +9,4 @@ function Container()
 	this.type = "Group";
 }
 
-//Function Prototype
 Container.prototype = Object.create(THREE.Object3D.prototype);
-Container.prototype.update = update;
-Container.prototype.initialize = initialize;
-
-//Initialize
-function initialize()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-}
-
-//Update
-function update()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
-	}
-}
