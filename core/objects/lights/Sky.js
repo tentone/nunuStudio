@@ -56,7 +56,7 @@ function Sky(auto_update, day_time, sun_distance, time)
 	};
 	uniforms.top_color.value.copy(this.hemisphere.color);
 
-	//Sky geometry and material
+	//Sky geometry
 	var geometry = new THREE.SphereBufferGeometry(5000, 16, 16);
 	var material = new THREE.ShaderMaterial({vertexShader: vertex, fragmentShader: fragment, uniforms: uniforms, side: THREE.BackSide});
 	this.sky = new THREE.Mesh(geometry, material);
@@ -64,6 +64,12 @@ function Sky(auto_update, day_time, sun_distance, time)
 	this.sky.rotationAutoUpdate = false;
 	this.sky.matrixAutoUpdate = false;
 	this.add(this.sky);
+
+	//Override sky raycast function
+	this.sky.raycast = function()
+	{
+		return null;
+	};
 
 	//Day time (seconds) and sun distance
 	this.auto_update = true;
@@ -92,22 +98,16 @@ function Sky(auto_update, day_time, sun_distance, time)
 	this.updateSky();
 }
 
+Sky.prototype = Object.create(THREE.Object3D.prototype);
+
 //Sky color (morning, noon, afternoon, night)
 Sky.color_top = [new THREE.Color(0x77b3fb), new THREE.Color(0x0076ff), new THREE.Color(0x035bb6), new THREE.Color(0x002439)];
 Sky.color_bottom = [new THREE.Color(0xebece6), new THREE.Color(0xffffff), new THREE.Color(0xfee7d7), new THREE.Color(0x0065a7)];
 Sky.sun_color = 0xffffaa;
 Sky.moon_color = 0x8888ff;
 
-//Function Prototype
-Sky.prototype = Object.create(THREE.Object3D.prototype);
-Sky.prototype.initialize = initialize;
-Sky.prototype.update = update;
-Sky.prototype.updateSky = updateSky;
-Sky.prototype.toJSON = toJSON;
-Sky.prototype.raycast = raycast;
-
 //Initialize
-function initialize()
+Sky.prototype.initialize = function()
 {
 	this.updateSky();
 	
@@ -118,7 +118,7 @@ function initialize()
 }
 
 //Update State
-function update()
+Sky.prototype.update = function()
 {
 	//Update time
 	if(this.auto_update)
@@ -141,7 +141,7 @@ function update()
 
 
 //Update sky color and sun position
-function updateSky()
+Sky.prototype.updateSky = function()
 {
 	//Time in % of day
 	var time = (this.time / this.day_time);
@@ -271,7 +271,7 @@ function updateSky()
 }
 
 //Create JSON for object
-function toJSON(meta)
+Sky.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 	
@@ -281,10 +281,4 @@ function toJSON(meta)
 	data.object.time = this.time;
 
 	return data;
-}
-
-//Sky is not collidable
-function raycast()
-{
-	return null;
 }

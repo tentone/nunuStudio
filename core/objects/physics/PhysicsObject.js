@@ -17,14 +17,10 @@ function PhysicsObject()
 	this.world = null;
 }
 
-//Function Prototype
 PhysicsObject.prototype = Object.create(THREE.Object3D.prototype);
-PhysicsObject.prototype.initialize = initialize;
-PhysicsObject.prototype.update = update;
-PhysicsObject.prototype.toJSON = toJSON;
 
 //Initialize physics object
-function initialize()
+PhysicsObject.prototype.initialize = function()
 {
 	//Update body to world position
 	this.body.position.copy(this.position);
@@ -50,7 +46,7 @@ function initialize()
 }
 
 //Update physics object
-function update()
+PhysicsObject.prototype.update = function()
 {
 	this.position.copy(this.body.position);
 	if(!this.body.fixedRotation)
@@ -66,7 +62,7 @@ function update()
 }
 
 //Create JSON for object
-function toJSON(meta)
+PhysicsObject.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 

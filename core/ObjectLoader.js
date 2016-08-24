@@ -7,20 +7,8 @@ function ObjectLoader(manager)
 	this.texturePath = "";
 }
 
-//Object loader methods
-ObjectLoader.prototype.load = load;
-ObjectLoader.prototype.parse = parse;
-ObjectLoader.prototype.setTexturePath = setTexturePath;
-ObjectLoader.prototype.setCrossOrigin = setCrossOrigin;
-ObjectLoader.prototype.parseGeometries = parseGeometries;
-ObjectLoader.prototype.parseMaterials = parseMaterials;
-ObjectLoader.prototype.parseAnimations = parseAnimations;
-ObjectLoader.prototype.parseImages = parseImages;
-ObjectLoader.prototype.parseTextures = parseTextures;
-ObjectLoader.prototype.parseObject = parseObject;
-
-//Load object from url
-function load(url, onLoad, onProgress, onError)
+//Load object from file url
+ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	if(this.texturePath === "")
 	{
@@ -36,8 +24,8 @@ function load(url, onLoad, onProgress, onError)
 	}, onProgress, onError);
 }
 
-//Parse a object file
-function parse(json, onLoad)
+//Parse a json object representation
+ObjectLoader.prototype.parse = function(json, onLoad)
 {
 	var geometries = this.parseGeometries(json.geometries);
 	var images = this.parseImages(json.images, function()
@@ -71,19 +59,19 @@ function parse(json, onLoad)
 }
 
 //Set base texture path
-function setTexturePath(value)
+ObjectLoader.prototype.setTexturePath = function(value)
 {
 	this.texturePath = value;
 }
 
 //Set cross origin
-function setCrossOrigin(value)
+ObjectLoader.prototype.setCrossOrigin = function(value)
 {
 	this.crossOrigin = value;
 }
 
 //Parse geometries
-function parseGeometries(json)
+ObjectLoader.prototype.parseGeometries = function(json)
 {
 	var geometries = [];
 
@@ -263,7 +251,7 @@ function parseGeometries(json)
 }
 
 //Parse all materials
-function parseMaterials(json, textures)
+ObjectLoader.prototype.parseMaterials = function(json, textures)
 {
 	var materials = [];
 
@@ -283,7 +271,7 @@ function parseMaterials(json, textures)
 }
 
 //Parse animations
-function parseAnimations(json)
+ObjectLoader.prototype.parseAnimations = function(json)
 {
 	var animations = [];
 
@@ -297,7 +285,7 @@ function parseAnimations(json)
 }
 
 //Parse images
-function parseImages(json, onLoad)
+ObjectLoader.prototype.parseImages = function(json, onLoad)
 {
 	var scope = this;
 	var images = [];
@@ -330,7 +318,7 @@ function parseImages(json, onLoad)
 }
 
 //Parse textures
-function parseTextures(json, images)
+ObjectLoader.prototype.parseTextures = function(json, images)
 {
 	function parseConstant(value)
 	{
@@ -412,7 +400,7 @@ function parseTextures(json, images)
 }
 
 //Parse objects
-function parseObject(data, geometries, materials, textures)
+ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures)
 {
 	var matrix = new THREE.Matrix4();
 	var object;
@@ -549,7 +537,7 @@ function parseObject(data, geometries, materials, textures)
 			break;
 
 		case "LeapDevice":
-			object = new LeapHand();
+			object = new LeapMotion();
 			object.mode = data.mode;
 			object.use_arm = data.use_arm;
 			if(data.debug_model !== undefined)

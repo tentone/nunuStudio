@@ -20,24 +20,14 @@ function BlockScript(mode)
 	}
 }
 
-//Function Prototype
 BlockScript.prototype = Object.create(THREE.Object3D.prototype);
-BlockScript.prototype.initialize = initialize;
-BlockScript.prototype.update = update;
-BlockScript.prototype.setMode = setMode;
 
 //BlockScript mode
 BlockScript.INIT = 0;
 BlockScript.LOOP = 1;
 
-//Set script mode
-function setMode(mode)
-{
-	this.mode = mode;
-}
-
 //Initialize
-function initialize()
+BlockScript.prototype.initialize = function()
 {
 	//Program and scene
 	var node = this;
@@ -68,7 +58,7 @@ function initialize()
 }
 
 //Update script
-function update()
+BlockScript.prototype.update = function()
 {
 	//Run script
 	if(this.mode === BlockScript.LOOP)
@@ -81,4 +71,10 @@ function update()
 	{
 		this.children[i].update();
 	}
+}
+
+//Set script mode
+BlockScript.prototype.setMode = function(mode)
+{
+	this.mode = mode;
 }

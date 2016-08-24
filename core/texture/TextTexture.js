@@ -21,5 +21,4 @@ function TextTexture()
 	this.needsUpdate = true;
 }
 
-//Functions prototype
 TextTexture.prototype = Object.create(THREE.CanvasTexture.prototype);

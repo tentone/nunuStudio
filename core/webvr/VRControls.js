@@ -51,14 +51,8 @@ function VRControls(object, onError)
 	}
 }
 
-//Function prototypes
-VRControls.prototype.update = update;
-VRControls.prototype.dispose = dispose;
-VRControls.prototype.resetPose = resetPose;
-VRControls.prototype.attachObject = attachObject;
-
-//Update VRcontrols
-function update()
+//Update vr controls
+VRControls.prototype.update = function()
 {
 	if(this.vr_input !== null)
 	{
@@ -98,13 +92,13 @@ function update()
 }
 
 //Dispose vr controls
-function dispose()
+VRControls.prototype.dispose = function()
 {
 	this.vr_input = null;
 }
 
 //Reset pose
-function resetPose()
+VRControls.prototype.resetPose = function()
 {
 	if(this.vr_input !== null)
 	{
@@ -113,7 +107,7 @@ function resetPose()
 }
 
 //Attach object to VRControls
-function attachObject(object)
+VRControls.prototype.attachObject = function(object)
 {
 	this.object = object;
 }

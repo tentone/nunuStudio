@@ -23,12 +23,10 @@ function VideoTexture(url)
 	this.name = "video";
 }
 
-//Function prototypes
 VideoTexture.prototype = Object.create(THREE.VideoTexture.prototype);
-VideoTexture.prototype.dispose = dispose;
 
 //Dispose texture
-function dispose()
+VideoTexture.prototype.dispose = function()
 {
 	if(!this.video.paused)
 	{

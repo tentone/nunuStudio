@@ -10,13 +10,10 @@ function PerspectiveCamera(fov, aspect, near, far)
 	this.rotationAutoUpdate = true;
 }
 
-//Function Prototype
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
-PerspectiveCamera.prototype.initialize = initialize;
-PerspectiveCamera.prototype.update = update;
 
 //Initialize
-function initialize()
+PerspectiveCamera.prototype.initialize = function()
 {
 	this.getWorldScale(this.scale);
 	this.scale.set(1.0 / this.scale.x, 1.0 / this.scale.y, 1.0 / this.scale.z);
@@ -28,7 +25,7 @@ function initialize()
 }
 
 //Update State
-function update()
+PerspectiveCamera.prototype.update = function()
 {
 	for(var i = 0; i < this.children.length; i++)
 	{

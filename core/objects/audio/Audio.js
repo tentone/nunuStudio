@@ -16,20 +16,13 @@ function Audio()
 	this.file = "data/sample.ogg";
 }
 
-//Function Prototype
 Audio.prototype = Object.create(THREE.Audio.prototype);
-
-//Runtime functions
-Audio.prototype.update = update;
-Audio.prototype.initialize = initialize;
-Audio.prototype.dispose = dispose;
-Audio.prototype.toJSON = toJSON;
 
 //Static variables
 Audio.listener = new THREE.AudioListener();
 
 //Initialize
-function initialize()
+Audio.prototype.initialize = function()
 {
 	var self = this;
 
@@ -52,18 +45,8 @@ function initialize()
 	}
 }
 
-//Update State
-function update()
-{
-	//Update children
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
-	}
-}
-
 //Dipose music
-function dispose()
+Audio.prototype.dispose = function()
 {
 	if(this.isPlaying)
 	{
@@ -79,7 +62,7 @@ function dispose()
 }
 
 //Create JSON for object
-function toJSON(meta)
+Audio.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 

@@ -4,9 +4,6 @@ function Script(code, mode)
 	
 	this.type = "Script";
 	this.name = "script";
-	
-	//Disable auto matrix updates
-	this.rotationAutoUpdate = false;
 
 	//Program and scene pointers
 	this.program = null;
@@ -31,20 +28,14 @@ function Script(code, mode)
 	this.setCode(this.code);
 }
 
-//Function Prototype
 Script.prototype = Object.create(THREE.Object3D.prototype);
-Script.prototype.initialize = initialize;
-Script.prototype.update = update;
-Script.prototype.toJSON = toJSON;
-Script.prototype.setCode = setCode;
-Script.prototype.setMode = setMode;
 
 //Script mode
 Script.INIT = 0;
 Script.LOOP = 1;
 
 //Initialize
-function initialize()
+Script.prototype.initialize = function()
 {
 	//Program and scene
 	var node = this;
@@ -75,7 +66,7 @@ function initialize()
 }
 
 //Update Script
-function update()
+Script.prototype.update = function()
 {
 	//Run script
 	if(this.mode === Script.LOOP)
@@ -91,7 +82,7 @@ function update()
 }
 
 //Define script code
-function setCode(code)
+Script.prototype.setCode = function(code)
 {
 	try
 	{
@@ -102,13 +93,13 @@ function setCode(code)
 }
 
 //Set script mode
-function setMode(mode)
+Script.prototype.setMode = function(mode)
 {
 	this.mode = mode;
 }
 
 //Create JSON for object
-function toJSON(meta)
+Script.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 

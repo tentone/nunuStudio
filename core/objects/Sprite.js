@@ -9,12 +9,10 @@ function Sprite(material)
 	this.type = "Sprite";
 }
 
-//Function Prototype
 Sprite.prototype = Object.create(THREE.Sprite.prototype);
-Sprite.prototype.dispose = dispose;
 
 //Dipose sprite
-function dispose()
+Sprite.prototype.dispose = function()
 {
 	//Dipose material
 	if(this.material.dispose !== undefined)

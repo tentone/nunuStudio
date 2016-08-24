@@ -29,7 +29,7 @@ function SpotLightPanel(parent)
 	{
 		if(self.obj !== null)
 		{
-			var position = self.pos.getValue();
+			var position = self.position.getValue();
 			self.obj.position.set(position.x, position.y, position.z);
 		}
 	});
