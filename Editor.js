@@ -1,7 +1,7 @@
 "use strict";
 
 //Codemirror
-include("lib/codemirror/codemirror.js");
+include("lib/codemirror/codemirror.min.js");
 include("lib/codemirror/codemirror.css");
 include("lib/codemirror/keymap/sublime.js");
 include("lib/codemirror/keymap/emacs.js");
@@ -139,7 +139,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608241631";
+Editor.TIMESTAMP = "201608250152";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -362,14 +362,14 @@ Editor.update = function()
 		{
 			//TODO <FIX THIS>
 			//Lock mouse wheen camera is moving
-			/*if(Mouse.buttonJustPressed(Mouse.LEFT) || Mouse.buttonJustPressed(Mouse.RIGHT) || Mouse.buttonJustPressed(Mouse.MIDDLE))
+			if(Mouse.buttonJustPressed(Mouse.LEFT) || Mouse.buttonJustPressed(Mouse.RIGHT) || Mouse.buttonJustPressed(Mouse.MIDDLE))
 			{
 				Mouse.setLock(true);
 			}
 			else if(Mouse.buttonJustReleased(Mouse.LEFT) || Mouse.buttonJustReleased(Mouse.RIGHT) || Mouse.buttonJustReleased(Mouse.MIDDLE))
 			{
 				Mouse.setLock(false);
-			}*/
+			}
 
 			//Look camera
 			if(Mouse.buttonPressed(Mouse.LEFT) && !Editor.is_editing_object)
