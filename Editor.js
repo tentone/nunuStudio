@@ -139,7 +139,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608250152";
+Editor.TIMESTAMP = "201608260329";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -222,7 +222,7 @@ Editor.initialize = function(canvas)
 	Editor.grid_helper = new THREE.GridHelper(Settings.editor.grid_size, Math.round(Settings.editor.grid_size/Settings.editor.grid_spacing)*2, 0x888888, 0x888888);
 	Editor.grid_helper.material.depthWrite = false;
 	Editor.grid_helper.material.transparent = true;
-	Editor.grid_helper.material.opacity = 0.5;
+	Editor.grid_helper.material.opacity = 0.3;
 	Editor.grid_helper.visible = Settings.editor.grid_enabled;
 	Editor.tool_scene.add(Editor.grid_helper);
 
@@ -242,8 +242,21 @@ Editor.initialize = function(canvas)
 	Editor.tool_scene_top.add(Editor.tool_container);
 	Editor.tool = null;
 
+	//Check is some .isp file passed as argument
+	for(var i = 0; i < App.args.length; i++)
+	{
+		if(App.args[i].endsWith(".isp"))
+		{
+			Editor.loadProgram(App.args[i]);
+			break;
+		}
+	}
+
 	//Create new program
-	Editor.createNewProgram();
+	if(i === App.args.length)
+	{	
+		Editor.createNewProgram();
+	}
 
 	//Update interface explorer tree view
 	Editor.updateObjectViews();
@@ -266,17 +279,17 @@ Editor.update = function()
 	if(Editor.state !== Editor.STATE_TESTING)
 	{
 		//Close tab, Save and load project
-		if(Keyboard.isKeyPressed(Keyboard.CTRL))
+		if(Keyboard.keyPressed(Keyboard.CTRL))
 		{
-			if(Keyboard.isKeyJustPressed(Keyboard.S))
+			if(Keyboard.keyJustPressed(Keyboard.S))
 			{
 				Interface.saveProgram();
 			}
-			else if(Keyboard.isKeyJustPressed(Keyboard.L))
+			else if(Keyboard.keyJustPressed(Keyboard.L))
 			{
 				Interface.loadProgram();
 			}
-			else if(Keyboard.isKeyJustPressed(Keyboard.W))
+			else if(Keyboard.keyJustPressed(Keyboard.W))
 			{
 				Interface.tab.closeActual();
 			}
@@ -287,30 +300,30 @@ Editor.update = function()
 	if(Editor.state === Editor.STATE_EDITING)
 	{
 		//Keyboard shortcuts
-		if(Keyboard.isKeyJustPressed(Keyboard.DEL))
+		if(Keyboard.keyJustPressed(Keyboard.DEL))
 		{
 			Editor.deleteObject();
 		}
-		else if(Keyboard.isKeyPressed(Keyboard.CTRL))
+		else if(Keyboard.keyPressed(Keyboard.CTRL))
 		{
-			if(Keyboard.isKeyJustPressed(Keyboard.C))
+			if(Keyboard.keyJustPressed(Keyboard.C))
 			{
 				Editor.copyObject();
 			}
-			else if(Keyboard.isKeyJustPressed(Keyboard.V))
+			else if(Keyboard.keyJustPressed(Keyboard.V))
 			{
 				Editor.pasteObject();
 			}
-			else if(Keyboard.isKeyJustPressed(Keyboard.X))
+			else if(Keyboard.keyJustPressed(Keyboard.X))
 			{
 				Editor.cutObject();
 			}
-			else if(Keyboard.isKeyJustPressed(Keyboard.Y))
+			else if(Keyboard.keyJustPressed(Keyboard.Y))
 			{
 				//TODO <ADD CODE HERE>
 				alert("Undo and redo not implemented!");
 			}
-			else if(Keyboard.isKeyJustPressed(Keyboard.Z))
+			else if(Keyboard.keyJustPressed(Keyboard.Z))
 			{
 				//TODO <ADD CODE HERE>
 				alert("Undo and redo not implemented!");
@@ -360,15 +373,17 @@ Editor.update = function()
 		//Check if mouse is inside canvas
 		if(Mouse.insideCanvas())
 		{
-			//TODO <FIX THIS>
-			//Lock mouse wheen camera is moving
-			if(Mouse.buttonJustPressed(Mouse.LEFT) || Mouse.buttonJustPressed(Mouse.RIGHT) || Mouse.buttonJustPressed(Mouse.MIDDLE))
+			//Lock mouse when camera is moving
+			if(Settings.editor.lock_mouse)
 			{
-				Mouse.setLock(true);
-			}
-			else if(Mouse.buttonJustReleased(Mouse.LEFT) || Mouse.buttonJustReleased(Mouse.RIGHT) || Mouse.buttonJustReleased(Mouse.MIDDLE))
-			{
-				Mouse.setLock(false);
+				if(Mouse.buttonJustPressed(Mouse.LEFT) || Mouse.buttonJustPressed(Mouse.RIGHT) || Mouse.buttonJustPressed(Mouse.MIDDLE))
+				{
+					Mouse.setLock(true);
+				}
+				else if(Mouse.buttonJustReleased(Mouse.LEFT) || Mouse.buttonJustReleased(Mouse.RIGHT) || Mouse.buttonJustReleased(Mouse.MIDDLE))
+				{
+					Mouse.setLock(false);
+				}
 			}
 
 			//Look camera
@@ -974,11 +989,17 @@ Editor.saveProgram = function(fname)
 
 //Load program from file
 Editor.loadProgram = function(fname)
-{
+{	
+	//Dipose old program
+	if(Editor.program !== null)
+	{
+		Editor.program.dispose();
+	}
+
+	//Load program data file
 	var loader = new ObjectLoader();
 	var data = JSON.parse(App.readFile(fname));
 	var program = loader.parse(data);
-	
 	Editor.program = program;
 	
 	//Remove old tabs from interface
@@ -993,10 +1014,6 @@ Editor.loadProgram = function(fname)
 		scene.attachComponent(editor);
 		Interface.tab.selectOption(0);
 	}
-
-	//Update object views
-	Editor.resetEditingFlags();
-	Editor.updateObjectViews();
 }
 
 //Export web project
@@ -1155,7 +1172,7 @@ Editor.setPerformanceMeter = function(stats)
 //Set render canvas
 Editor.setRenderCanvas = function(canvas)
 {
-	Mouse.canvas = canvas;
+	Mouse.setCanvas(canvas);
 	Editor.canvas = canvas;
 	Editor.initializeRenderer(canvas);
 }

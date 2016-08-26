@@ -52,7 +52,7 @@ function CodeEditor(parent)
 	this.code.on("keydown", function(code, event)
 	{
 		var key = event.keyCode;
-		if(!Keyboard.isKeyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
+		if(!Keyboard.keyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
 		{
 			if(!code.state.completionActive)
 			{

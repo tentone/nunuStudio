@@ -72,22 +72,23 @@ include("core/objects/AnimatedModel.js");
 include("core/objects/Text3D.js");
 include("core/objects/Sprite.js");
 include("core/objects/ParticleEmitter.js");
+include("core/objects/Program.js");
+include("core/objects/Scene.js");
 
 include("core/ObjectLoader.js");
-include("core/Program.js");
-include("core/Scene.js");
 include("core/ObjectUtils.js");
 include("core/MathUtils.js");
 
 //App class
 function App(){}
 
-//Require NodeJS modules
+//NWJS modules
 try
 {
 	App.fs = require("fs");
 	App.gui = require("nw.gui");
 	App.clipboard = App.gui.Clipboard.get();
+	App.args = App.gui.App.argv;
 }
 catch(e){}
 

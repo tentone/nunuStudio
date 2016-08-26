@@ -119,6 +119,17 @@ function SettingsTab(parent)
 	this.general_form.add(this.axis_enabled);
 	this.general_form.nextRow();
 
+	//Mouse lock on camera move
+	this.lock_mouse = new CheckBox(this.general_form.element);
+	this.lock_mouse.setText("Lock mouse editor");
+	this.lock_mouse.size.set(200, 16);
+	this.lock_mouse.setOnChange(function()
+	{
+		Settings.editor.lock_mouse = self.lock_mouse.getValue();
+	});
+	this.general_form.add(this.lock_mouse);
+	this.general_form.nextRow();
+
 	//Enable camera preview
 	this.camera_preview_enabled = new CheckBox(this.general_form.element);
 	this.camera_preview_enabled.setText("Camera preview");
@@ -343,6 +354,7 @@ SettingsTab.prototype.activate = function()
 	//Editor
 	this.grid_enabled.setValue(Settings.editor.grid_enabled);
 	this.axis_enabled.setValue(Settings.editor.axis_enabled);
+	this.lock_mouse.setValue(Settings.editor.lock_mouse);
 	this.camera_preview_enabled.setValue(Settings.editor.camera_preview_enabled);
 	this.camera_preview_percentage.setValue(Settings.editor.camera_preview_percentage);
 

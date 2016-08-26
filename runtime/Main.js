@@ -35,7 +35,7 @@ Main.initialize = function(canvas)
 	Main.vr_effect = null;
 
 	//Define mouse canvas
-	Mouse.canvas = Main.canvas;
+	Mouse.setCanvas(Main.canvas);
 
 	//Set renderer
 	Main.renderer = new THREE.WebGLRenderer({canvas: Main.canvas, antialias: false});

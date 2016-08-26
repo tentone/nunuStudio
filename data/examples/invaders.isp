@@ -979,7 +979,7 @@
 								"material": "8043A1C7-3270-4203-8F70-BD4981381FCB"
 							}],
 						"mode": 1,
-						"code": "if(this.position.x > -8 && Keyboard.isKeyPressed(Keyboard.LEFT))\n{\n\tthis.position.x -= 0.1;\n}\nif(this.position.x < 8 && Keyboard.isKeyPressed(Keyboard.RIGHT))\n{\n\tthis.position.x += 0.1;\n}\n\nif(Keyboard.isKeyJustPressed(Keyboard.SPACEBAR))\n{\n\tthis.shoot();\n}\n"
+						"code": "if(this.position.x > -8 && Keyboard.keyPressed(Keyboard.LEFT))\n{\n\tthis.position.x -= 0.1;\n}\nif(this.position.x < 8 && Keyboard.keyPressed(Keyboard.RIGHT))\n{\n\tthis.position.x += 0.1;\n}\n\nif(Keyboard.keyJustPressed(Keyboard.SPACEBAR))\n{\n\tthis.shoot();\n}\n"
 					},
 					{
 						"uuid": "8C0C8569-201F-4C75-BA70-D6814E2879F2",
@@ -1248,7 +1248,7 @@
 						"matrixAutoUpdate": false,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,-0.18368956446647644,0,1],
 						"mode": 1,
-						"code": "if(Keyboard.isKeyJustPressed(Keyboard.SPACEBAR))\n{\n\tthis.program.setScene(\"Game\");\n}"
+						"code": "if(Keyboard.keyJustPressed(Keyboard.SPACEBAR))\n{\n\tthis.program.setScene(\"Game\");\n}"
 					}],
 				"fog_color": 16777215,
 				"fog_density": 0.001,

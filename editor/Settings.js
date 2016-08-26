@@ -16,7 +16,8 @@ Settings.editor.grid_spacing = 5;
 Settings.editor.grid_enabled = true;
 Settings.editor.axis_enabled = true;
 Settings.editor.camera_preview_enabled = true;
-Settings.editor.camera_preview_percentage = 0.2;
+Settings.editor.camera_preview_percentage = 0.35;
+Settings.editor.lock_mouse = true;
 
 //Render settings
 Settings.render = {};
@@ -69,6 +70,7 @@ Settings.load = function()
 		Settings.editor.axis_enabled = data.editor.axis_enabled;
 		Settings.editor.camera_preview_enabled = data.editor.camera_preview_enabled;
 		Settings.editor.camera_preview_percentage = data.editor.camera_preview_percentage;
+		Settings.editor.lock_mouse = data.editor.lock_mouse;
 
 		//Render settings
 		Settings.render.shadows = data.render.shadows;

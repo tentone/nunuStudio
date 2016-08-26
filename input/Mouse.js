@@ -123,6 +123,24 @@ Mouse.LEFT = 0;
 Mouse.MIDDLE = 1;
 Mouse.RIGHT = 2;
 
+//Canvas to be used for relative coordinates calculation
+Mouse.setCanvas = function(canvas)
+{
+	Mouse.canvas = canvas;
+
+	canvas.mouseInside = false;
+
+	canvas.onmouseenter = function()
+	{
+		this.mouseInside = true;
+	};
+
+	canvas.onmouseleave = function()
+	{
+		this.mouseInside = false;
+	};
+}
+
 //Check if mouse is inside attached canvas
 Mouse.insideCanvas = function()
 {
@@ -131,8 +149,7 @@ Mouse.insideCanvas = function()
 		return false;
 	}
 	
-	var rect = Mouse.canvas.getBoundingClientRect();
-	return (Mouse.position.x > 0 && Mouse.position.y > 0 && Mouse.position.x < rect.width && Mouse.position.y < rect.height); 
+	return Mouse.canvas.mouseInside;
 }
 
 //Set if mouse locked
