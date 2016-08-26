@@ -303,7 +303,7 @@ ObjectLoader.prototype.parseImages = function(json, onLoad)
 	{
 		var manager = new THREE.LoadingManager(onLoad);
 
-		var loader = new THREE.ImageLoader(manager);
+		var loader = new ImageLoader(manager);
 		loader.setCrossOrigin(this.crossOrigin);
 
 		for(var i = 0, l = json.length; i < l; i ++)
@@ -349,7 +349,7 @@ ObjectLoader.prototype.parseTextures = function(json, images)
 				console.warn("ObjectLoader: Undefined image", data.image);
 			}
 
-			var texture = new THREE.Texture(images[ data.image ]);
+			var texture = new Texture(images[ data.image ]);
 			texture.needsUpdate = true;
 			texture.uuid = data.uuid;
 

@@ -6,7 +6,7 @@ function WebcamTexture()
 	//Check if webcam available
 	if(navigator.webkitGetUserMedia || navigator.mediaDevices.getUserMedia)
 	{
-		console.warn("Webcam available");
+		//console.warn("Webcam available");
 	}
 
 	//Create the video element
@@ -27,7 +27,7 @@ function WebcamTexture()
 		},
 		function(error)
 		{
-			console.warn("No webcam available");
+			//console.warn("No webcam available");
 		});		
 	}
 	else if(navigator.mediaDevices.getUserMedia)
@@ -38,20 +38,21 @@ function WebcamTexture()
 		},
 		function(error)
 		{
-			console.warn("No webcam available");
+			//console.warn("No webcam available");
 		});				
 	}
 
 	//Create Texture part of object
 	THREE.VideoTexture.call(this, this.video);
 
+	//Name and type
+	this.name = "webcam";
+	this.type = "Webcam";
+
 	//Set filtering
 	this.minFilter = THREE.LinearFilter;
 	this.magFilter = THREE.LinearFilter;
 	this.format = THREE.RGBFormat;
-
-	//Name
-	this.name = "webcam";
 }
 
 WebcamTexture.prototype = Object.create(THREE.VideoTexture.prototype);
