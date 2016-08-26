@@ -10,8 +10,11 @@ function Texture(url)
 	//Create Texture part of object
 	THREE.Texture.call(this, image);
 
-	var self = this;
+	//Name and type
+	this.name = "texture";
+	this.type = "Image";
 
+	var self = this;
 	image.onload = function()
 	{
 		self.needsUpdate = true;
@@ -38,6 +41,7 @@ Texture.prototype.toJSON = function(meta)
 
 		uuid: this.uuid,
 		name: this.name,
+		type: this.type,
 
 		mapping: this.mapping,
 
