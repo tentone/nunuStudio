@@ -14,19 +14,19 @@ Keyboard.initialize = function()
 		Keyboard.keys.push(new Key());
 	}
 
-	//Keyboard key down Event
-	document.addEventListener("keydown", function(event)
+	//Key down Event
+	document.onkeydown = function(event)
 	{
 		Keyboard.actions.push(event.keyCode);
 		Keyboard.actions.push(Key.KEY_DOWN);
-	}, false);
+	};
 
-	//Keyboard key up Event
-	document.addEventListener("keyup", function(event)
+	//Key up Event
+	document.onkeyup = function(event)
 	{
 		Keyboard.actions.push(event.keyCode);
 		Keyboard.actions.push(Key.KEY_UP);
-	}, false);
+	};
 }
 
 //Update key flags syncronously
@@ -64,19 +64,19 @@ Keyboard.reset = function()
 }
 
 //Check if a key is pressed
-Keyboard.isKeyPressed = function(key)
+Keyboard.keyPressed = function(key)
 {
 	return key < 256 && Keyboard.keys[key].isPressed;
 }
 
 //Check is a key as just pressed
-Keyboard.isKeyJustPressed = function(key)
+Keyboard.keyJustPressed = function(key)
 {
 	return key < 256 && Keyboard.keys[key].justPressed;
 }
 
 //Check if a key was just released
-Keyboard.isKeyJustReleased = function(key)
+Keyboard.keyJustReleased = function(key)
 {
 	return key < 256 && Keyboard.keys[key].justReleased;
 }

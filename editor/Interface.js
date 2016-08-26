@@ -988,6 +988,8 @@ Interface.loadProgram = function()
 			try
 			{
 				Editor.loadProgram(fname);
+				Editor.resetEditingFlags();
+				Editor.updateObjectViews();
 				alert("Project loaded");
 			}
 			catch(e)
