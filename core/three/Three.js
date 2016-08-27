@@ -10,6 +10,7 @@ var Object3D = THREE.Object3D;
 var Raycaster = THREE.Raycaster;
 
 //Materials
+var Material = THREE.Material;
 var LineBasicMaterial = THREE.LineBasicMaterial;
 var LineDashedMaterial = THREE.LineDashedMaterial;
 var MeshBasicMaterial = THREE.MeshBasicMaterial;

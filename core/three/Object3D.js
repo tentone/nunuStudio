@@ -69,6 +69,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 			fonts: {},
 			videos: {},
 			images: {},
+			audio: {},
 			geometries: {},
 			materials: {},
 			textures: {}
