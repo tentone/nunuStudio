@@ -15,13 +15,16 @@ function TextTexture()
 	this.context.fillStyle = "#FFFFFF";
 	this.context.fillText("text", this.canvas.width/2, this.canvas.height/2);
 
+	//Super constructor
 	THREE.CanvasTexture.call(this, this.canvas);
 
 	//Name
 	this.name = "text";
+	this.category = "TextTexture";
 
 	//Texture text
 	this.text = "text";
 }
 
+//Super prototypes
 TextTexture.prototype = Object.create(THREE.CanvasTexture.prototype);

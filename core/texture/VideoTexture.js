@@ -1,26 +1,28 @@
 "use strict";
 
 //Video texture constructor
-function VideoTexture(url)
+function VideoTexture(video, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy)
 {
-	this.data = null;
+	//Video data
+	this.data = "";
 	this.encoding = "";
 
-	if(url !== null)
+	//If video is a URL
+	if(typeof video === "string")
 	{
-		this.data = base64ArrayBuffer(App.readFileArrayBuffer(url));
-		this.encoding = url.split(".").pop();
+		this.encoding = video.split(".").pop();
+		this.data = "data:video/" + this.encoding + ";base64," + base64ArrayBuffer(App.readFileArrayBuffer(video));
+
+		video = document.createElement("video");
+		video.width = 256;
+		video.height = 256;
+		video.autoplay = true;
+		video.loop = true;
+		video.src = this.data;
 	}
 
-	//Element
-	this.video = document.createElement("video");
-	this.video.width = 256;
-	this.video.height = 256;
-	this.video.autoplay = true;
-	this.video.loop = true;
-	this.video.src = "data:video/" + this.enconding + ";base64," + this.data;;
-
-	THREE.VideoTexture.call(this, this.video);
+	//Call super constructor
+	THREE.VideoTexture.call(this, video, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy);
 
 	//Name
 	this.name = "video";
@@ -42,41 +44,13 @@ VideoTexture.prototype.dispose = function()
 	{
 		this.video.pause();
 	}
-	THREE.Texture.prototype.dispose.call(this);
+	THREE.VideoTexture.prototype.dispose.call(this);
 }
 
 //Create JSON description
 VideoTexture.prototype.toJSON = function(meta)
 {
-	if(meta.textures[this.uuid] !== undefined)
-	{
-		return meta.textures[this.uuid];
-	}
-
-	var output =
-	{
-		metadata:
-		{
-			version: Editor.VERSION,
-			type: "VideoTexture"
-		},
-
-		uuid: this.uuid,
-		name: this.name,
-		
-		mapping: this.mapping,
-
-		repeat: [this.repeat.x, this.repeat.y],
-		offset: [this.offset.x, this.offset.y],
-		wrap: [this.wrapS, this.wrapT],
-
-		minFilter: this.minFilter,
-		magFilter: this.magFilter,
-		anisotropy: this.anisotropy,
-
-		flipY: this.flipY
-	};
-
-	meta.textures[this.uuid] = output;
-	return output;
+	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+	
+	return data;
 }
