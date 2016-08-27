@@ -28,6 +28,8 @@ include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
+include("lib/three/loaders/PLYLoader.js");
+include("lib/three/loaders/VTKLoader.js");
 
 include("lib/three/animation/Animation.js");
 include("lib/three/animation/AnimationHandler.js");
@@ -139,7 +141,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608261615";
+Editor.TIMESTAMP = "201608270432";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -1032,6 +1034,7 @@ Editor.exportWebProject = function(dir)
 	App.copyFile("lib\\leap.min.js", dir + "\\lib\\leap.min.js");
 	App.copyFile("lib\\stats.min.js", dir + "\\lib\\stats.min.js");
 	App.copyFile("lib\\cannon.min.js", dir + "\\lib\\cannon.min.js");
+	App.copyFile("lib\\base64.min.js", dir + "\\lib\\base64.min.js");
 	App.copyFile("lib\\webvr-polyfill.min.js", dir + "\\lib\\webvr-polyfill.min.js");	
 	App.makeDirectory(dir + "\\lib\\three");
 	App.copyFile("lib\\three\\three.min.js", dir + "\\lib\\three\\three.min.js");

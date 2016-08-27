@@ -120,7 +120,7 @@ function TreeElement(container)
 				//Set object and children to dynamic mode
 				menu.addOption("Set dynamic", function()
 				{
-					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
+					ObjectUtils.setMatrixAutoUpdate(self.obj, true);
 					Editor.updateObjectViews();
 				});
 

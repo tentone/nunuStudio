@@ -1,0 +1,1136 @@
+{
+	"metadata": {
+		"version": "V0.8.9.6 Alpha",
+		"type": "NunuProgram"
+	},
+	"geometries": [
+		{
+			"uuid": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+			"type": "BoxBufferGeometry",
+			"name": "geometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		},
+		{
+			"uuid": "07D282FD-283E-4C9D-8E58-423E77DF5A9E",
+			"type": "SphereBufferGeometry",
+			"name": "geometry",
+			"radius": 1,
+			"widthSegments": 32,
+			"heightSegments": 32
+		},
+		{
+			"uuid": "AEF20773-CED5-4445-8CC5-F6C444F0AD62",
+			"type": "ConeBufferGeometry",
+			"name": "geometry",
+			"radius": 1,
+			"height": 2,
+			"radialSegments": 32
+		},
+		{
+			"uuid": "4F85791F-61CB-4A74-A12F-2CB4ECB2065E",
+			"type": "BoxBufferGeometry",
+			"name": "geometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		},
+		{
+			"uuid": "4F3A193B-F152-4730-BD07-3225C5EC1A35",
+			"type": "CylinderBufferGeometry",
+			"name": "geometry",
+			"radiusTop": 1,
+			"radiusBottom": 1,
+			"height": 2,
+			"radialSegments": 32
+		},
+		{
+			"uuid": "2E71762A-68D7-45B3-98F4-019E78949CBF",
+			"type": "SphereBufferGeometry",
+			"name": "geometry",
+			"radius": 1,
+			"widthSegments": 32,
+			"heightSegments": 32
+		},
+		{
+			"uuid": "F0771748-FDA7-45FB-BF5C-604CA0C43860",
+			"type": "BoxBufferGeometry",
+			"name": "geometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		}],
+	"materials": [
+		{
+			"uuid": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA",
+			"type": "MeshStandardMaterial",
+			"name": "default",
+			"color": 16777215,
+			"roughness": 0.6,
+			"metalness": 0.2,
+			"emissive": 0,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"skinning": false,
+			"morphTargets": false
+		}],
+	"textures": [
+		{
+			"uuid": "980BF0B6-3D07-42E6-8E1F-F0499DA5B84B",
+			"name": "texture",
+			"category": "Image",
+			"mapping": 300,
+			"repeat": [1,1],
+			"offset": [0,0],
+			"wrap": [1001,1001],
+			"minFilter": 1008,
+			"magFilter": 1006,
+			"anisotropy": 1,
+			"flipY": true,
+			"image": "6D4A3495-FEE7-4051-8025-1CF8AEA8C022"
+		}],
+	"images": [
+		{
+			"uuid": "6D4A3495-FEE7-4051-8025-1CF8AEA8C022",
+			"url": "data:image/png;base64,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"
+		}],
+	"object": {
+		"uuid": "C7C0E8DE-9F1E-4CF8-94AD-9A28AA32CD60",
+		"type": "Program",
+		"name": "program",
+		"folded": false,
+		"hidden": false,
+		"castShadow": false,
+		"receiveShadow": false,
+		"visible": true,
+		"matrixAutoUpdate": false,
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+			{
+				"uuid": "1A43BDBC-80DF-4232-A94A-3F01A45A18EE",
+				"type": "Scene",
+				"name": "scene",
+				"folded": false,
+				"hidden": false,
+				"castShadow": false,
+				"receiveShadow": false,
+				"visible": true,
+				"matrixAutoUpdate": false,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"children": [
+					{
+						"uuid": "E749CD2F-22CB-40DA-8C33-2D3F832C065E",
+						"type": "Group",
+						"name": "walls",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"children": [
+							{
+								"uuid": "20FA3A45-9C1F-47AD-BC79-594A12C7E7B1",
+								"type": "Physics",
+								"name": "box",
+								"folded": true,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [171.6995086669922,0,0,0,0,1,0,0,0,0,185.61080932617188,0,0,0,0,1],
+								"children": [
+									{
+										"uuid": "B4B4FC7C-5940-47F2-98E5-107838030A7D",
+										"type": "Mesh",
+										"name": "cube",
+										"folded": false,
+										"hidden": false,
+										"castShadow": true,
+										"receiveShadow": true,
+										"visible": true,
+										"matrixAutoUpdate": false,
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"geometry": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+										"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+									}],
+								"body": {
+									"type": 4,
+									"mass": 1,
+									"linearDamping": 0,
+									"angularDamping": 0,
+									"allowSleep": true,
+									"sleepSpeedLimit": 0.1,
+									"sleepTimeLimit": 1,
+									"collisionFilterGroup": 1,
+									"collisionFilterMask": 1,
+									"fixedRotation": true,
+									"shapes": [
+										{
+											"type": 4,
+											"halfExtents": {
+												"x": 85.84975217305276,
+												"y": 0.5,
+												"z": 92.80540385730987
+											}
+										}]
+								}
+							},
+							{
+								"uuid": "2179D7B1-A797-426F-9CC5-88B2A2F211F8",
+								"type": "Physics",
+								"name": "box",
+								"folded": true,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [0.9982003569602966,0,0,0,0,58.58656692504883,0,0,0,0,187.92413330078125,0,85.76168060302734,29.156503677368164,0,1],
+								"children": [
+									{
+										"uuid": "86494F43-302D-4004-A6D2-493FE7F71A41",
+										"type": "Mesh",
+										"name": "cube",
+										"folded": false,
+										"hidden": false,
+										"castShadow": true,
+										"receiveShadow": true,
+										"visible": true,
+										"matrixAutoUpdate": false,
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"geometry": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+										"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+									}],
+								"body": {
+									"type": 4,
+									"mass": 1,
+									"linearDamping": 0,
+									"angularDamping": 0,
+									"allowSleep": true,
+									"sleepSpeedLimit": 0.1,
+									"sleepTimeLimit": 1,
+									"collisionFilterGroup": 1,
+									"collisionFilterMask": 1,
+									"fixedRotation": true,
+									"shapes": [
+										{
+											"type": 4,
+											"halfExtents": {
+												"x": 0.49910000352433753,
+												"y": 29.293283471870208,
+												"z": 93.96207012252691
+											}
+										}]
+								}
+							},
+							{
+								"uuid": "3732A60C-A09C-44B8-BEAB-289CD17DF1F4",
+								"type": "Physics",
+								"name": "box",
+								"folded": true,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [-0.0007952769519761205,2.444885428075469e-16,-0.9982001185417175,0,7.216144992900302e-18,73.9713134765625,1.811774336243563e-14,0,172.0264892578125,1.6786318623312188e-17,-0.1370553821325302,0,-0.5500331521034241,21.841007232666016,-92.12088775634766,1],
+								"children": [
+									{
+										"uuid": "691CEC76-BB70-48CE-890D-4A1A0817E6C6",
+										"type": "Mesh",
+										"name": "cube",
+										"folded": false,
+										"hidden": false,
+										"castShadow": true,
+										"receiveShadow": true,
+										"visible": true,
+										"matrixAutoUpdate": false,
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"geometry": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+										"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+									}],
+								"body": {
+									"type": 4,
+									"mass": 1,
+									"linearDamping": 0,
+									"angularDamping": 0,
+									"allowSleep": true,
+									"sleepSpeedLimit": 0.1,
+									"sleepTimeLimit": 1,
+									"collisionFilterGroup": 1,
+									"collisionFilterMask": 1,
+									"fixedRotation": true,
+									"shapes": [
+										{
+											"type": 4,
+											"halfExtents": {
+												"x": 0.49910000352433753,
+												"y": 36.9856549642543,
+												"z": 86.01327326331223
+											}
+										}]
+								}
+							},
+							{
+								"uuid": "463EBFFD-0424-4C27-A25B-0FEB41D3946B",
+								"type": "Physics",
+								"name": "box",
+								"folded": true,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [0.9982003569602966,0,0,0,0,58.58656692504883,0,0,0,0,187.92413330078125,0,-83.68091583251953,29.156503677368164,0,1],
+								"children": [
+									{
+										"uuid": "109F65ED-BE3F-4A81-97CC-B380C17CE475",
+										"type": "Mesh",
+										"name": "cube",
+										"folded": false,
+										"hidden": false,
+										"castShadow": true,
+										"receiveShadow": true,
+										"visible": true,
+										"matrixAutoUpdate": false,
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"geometry": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+										"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+									}],
+								"body": {
+									"type": 4,
+									"mass": 1,
+									"linearDamping": 0,
+									"angularDamping": 0,
+									"allowSleep": true,
+									"sleepSpeedLimit": 0.1,
+									"sleepTimeLimit": 1,
+									"collisionFilterGroup": 1,
+									"collisionFilterMask": 1,
+									"fixedRotation": true,
+									"shapes": [
+										{
+											"type": 4,
+											"halfExtents": {
+												"x": 0.49910000352433753,
+												"y": 29.293283471870208,
+												"z": 93.96207012252691
+											}
+										}]
+								}
+							},
+							{
+								"uuid": "A1FA3FA4-5124-4F4E-8D1E-AF9DD5A6A3FA",
+								"type": "Physics",
+								"name": "box",
+								"folded": true,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [-0.0007953154854476452,2.444885428075469e-16,-0.9982001185417175,0,1.1243386301678024e-18,11.526388168334961,2.823150437044979e-15,0,18.346097946166992,1.790539555760354e-18,-0.014617245644330978,0,49.72178268432617,4.823906421661377,32.22202682495117,1],
+								"children": [
+									{
+										"uuid": "1048FC73-0E1F-499B-B9C2-CD3CA9C77C93",
+										"type": "Mesh",
+										"name": "cube",
+										"folded": false,
+										"hidden": false,
+										"castShadow": true,
+										"receiveShadow": true,
+										"visible": true,
+										"matrixAutoUpdate": false,
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"geometry": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+										"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+									}],
+								"body": {
+									"type": 4,
+									"mass": 1,
+									"linearDamping": 0,
+									"angularDamping": 0,
+									"allowSleep": true,
+									"sleepSpeedLimit": 0.1,
+									"sleepTimeLimit": 1,
+									"collisionFilterGroup": 1,
+									"collisionFilterMask": 1,
+									"fixedRotation": true,
+									"shapes": [
+										{
+											"type": 4,
+											"halfExtents": {
+												"x": 0.49910000352433753,
+												"y": 5.7631921927386465,
+												"z": 9.173052620213861
+											}
+										}]
+								}
+							},
+							{
+								"uuid": "3B6CD6EE-F12D-46D2-B6C9-5495DE89EE92",
+								"type": "Physics",
+								"name": "box",
+								"folded": true,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [-0.1492520123720169,4.588167072292447e-14,-187.32611083984375,0,6.217727446995988e-19,6.372496604919434,1.5608112006421462e-15,0,14.751327514648438,1.4393065701538799e-18,-0.011753115803003311,0,37.54749298095703,28.70676612854004,0,1],
+								"children": [
+									{
+										"uuid": "79038CEF-3E7D-4803-92E2-96C345FEFAEE",
+										"type": "Mesh",
+										"name": "cube",
+										"folded": false,
+										"hidden": false,
+										"castShadow": true,
+										"receiveShadow": true,
+										"visible": true,
+										"matrixAutoUpdate": false,
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"geometry": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+										"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+									}],
+								"body": {
+									"type": 4,
+									"mass": 1,
+									"linearDamping": 0,
+									"angularDamping": 0,
+									"allowSleep": true,
+									"sleepSpeedLimit": 0.1,
+									"sleepTimeLimit": 1,
+									"collisionFilterGroup": 1,
+									"collisionFilterMask": 1,
+									"fixedRotation": true,
+									"shapes": [
+										{
+											"type": 4,
+											"halfExtents": {
+												"x": 93.66308118684485,
+												"y": 3.1862482884499066,
+												"z": 7.375665740929766
+											}
+										}]
+								}
+							},
+							{
+								"uuid": "6C03C58C-3DEA-44D2-9899-FCFE22981D48",
+								"type": "Physics",
+								"name": "box",
+								"folded": true,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [-0.0007953542517498136,2.444885428075469e-16,-0.9982001185417175,0,7.216844787698522e-18,73.9713134765625,1.811774336243563e-14,0,172.0264892578125,1.6787951477841367e-17,-0.1370687037706375,0,-0.5500331521034241,21.841007232666016,91.52455139160156,1],
+								"children": [
+									{
+										"uuid": "4247937D-D142-4239-B8D4-FF2A58736EF1",
+										"type": "Mesh",
+										"name": "cube",
+										"folded": false,
+										"hidden": false,
+										"castShadow": true,
+										"receiveShadow": true,
+										"visible": true,
+										"matrixAutoUpdate": false,
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"geometry": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+										"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+									}],
+								"body": {
+									"type": 4,
+									"mass": 1,
+									"linearDamping": 0,
+									"angularDamping": 0,
+									"allowSleep": true,
+									"sleepSpeedLimit": 0.1,
+									"sleepTimeLimit": 1,
+									"collisionFilterGroup": 1,
+									"collisionFilterMask": 1,
+									"fixedRotation": true,
+									"shapes": [
+										{
+											"type": 4,
+											"halfExtents": {
+												"x": 0.49910000352433753,
+												"y": 36.9856549642543,
+												"z": 86.01327326331223
+											}
+										}]
+								}
+							},
+							{
+								"uuid": "DB7918FD-7F2A-42A2-BA8B-6B7B57FA97B4",
+								"type": "Physics",
+								"name": "box",
+								"folded": false,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [-0.06471752375364304,1.98929211319733e-14,-81.21900177001953,0,1.9484044165760793e-19,1.9972525835037231,4.891857204179144e-16,0,48.53239059448242,4.737119438664605e-18,-0.038671936839818954,0,61.67021179199219,15.181442260742188,-32.247161865234375,1],
+								"children": [
+									{
+										"uuid": "1EF92892-3273-4860-A8F0-955B3B6C011D",
+										"type": "Mesh",
+										"name": "cube",
+										"folded": false,
+										"hidden": false,
+										"castShadow": true,
+										"receiveShadow": true,
+										"visible": true,
+										"matrixAutoUpdate": false,
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"geometry": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+										"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+									}],
+								"body": {
+									"type": 4,
+									"mass": 1,
+									"linearDamping": 0,
+									"angularDamping": 0,
+									"allowSleep": true,
+									"sleepSpeedLimit": 0.1,
+									"sleepTimeLimit": 1,
+									"collisionFilterGroup": 1,
+									"collisionFilterMask": 1,
+									"fixedRotation": true,
+									"shapes": [
+										{
+											"type": 4,
+											"halfExtents": {
+												"x": 40.60951253352703,
+												"y": 0.9986244247414031,
+												"z": 24.266203999488173
+											}
+										}]
+								}
+							},
+							{
+								"uuid": "5E6650BB-E105-4E92-B6BE-B7F6AC9F3CFC",
+								"type": "Physics",
+								"name": "box",
+								"folded": true,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [-0.0007954319007694721,2.444885428075469e-16,-0.9982001185417175,0,1.1245027221218176e-18,11.526388168334961,2.823150437044979e-15,0,18.346097946166992,1.7908017720145333e-18,-0.01461938489228487,0,76.10753631591797,4.823906421661377,32.22202682495117,1],
+								"children": [
+									{
+										"uuid": "DAD7EF76-1492-41D0-A2E0-15FCFE9D0B50",
+										"type": "Mesh",
+										"name": "cube",
+										"folded": false,
+										"hidden": false,
+										"castShadow": true,
+										"receiveShadow": true,
+										"visible": true,
+										"matrixAutoUpdate": false,
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"geometry": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+										"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+									}],
+								"body": {
+									"type": 4,
+									"mass": 1,
+									"linearDamping": 0,
+									"angularDamping": 0,
+									"allowSleep": true,
+									"sleepSpeedLimit": 0.1,
+									"sleepTimeLimit": 1,
+									"collisionFilterGroup": 1,
+									"collisionFilterMask": 1,
+									"fixedRotation": true,
+									"shapes": [
+										{
+											"type": 4,
+											"halfExtents": {
+												"x": 0.49910000352433753,
+												"y": 5.7631921927386465,
+												"z": 9.173052620213861
+											}
+										}]
+								}
+							},
+							{
+								"uuid": "877AEE56-34A7-4A1D-A17F-E12D7DE62B28",
+								"type": "Physics",
+								"name": "box",
+								"folded": true,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [-0.06472069025039673,1.98929211319733e-14,-81.21900177001953,0,1.9484995423465229e-19,1.9972525835037231,4.891857204179144e-16,0,48.53239059448242,4.737351876416733e-18,-0.03867382928729057,0,62.53727722167969,11.145538330078125,70.24897766113281,1],
+								"children": [
+									{
+										"uuid": "02830652-1077-4C75-A06F-E4649734E35D",
+										"type": "Mesh",
+										"name": "cube",
+										"folded": false,
+										"hidden": false,
+										"castShadow": true,
+										"receiveShadow": true,
+										"visible": true,
+										"matrixAutoUpdate": false,
+										"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+										"geometry": "074AC79F-15BF-4EE8-8749-132FCA77C62F",
+										"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+									}],
+								"body": {
+									"type": 4,
+									"mass": 1,
+									"linearDamping": 0,
+									"angularDamping": 0,
+									"allowSleep": true,
+									"sleepSpeedLimit": 0.1,
+									"sleepTimeLimit": 1,
+									"collisionFilterGroup": 1,
+									"collisionFilterMask": 1,
+									"fixedRotation": true,
+									"shapes": [
+										{
+											"type": 4,
+											"halfExtents": {
+												"x": 40.60951253352703,
+												"y": 0.9986244247414031,
+												"z": 24.266203999488173
+											}
+										}]
+								}
+							}]
+					},
+					{
+						"uuid": "BDFD6569-DF8E-4545-BCDA-BA5BE850E177",
+						"type": "Physics",
+						"name": "player",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,5.092445373535156,3.328169584274292,14.918651580810547,1],
+						"children": [
+							{
+								"uuid": "7DC1EC6F-57C2-448D-8390-E818DA200BBE",
+								"type": "PerspectiveCamera",
+								"name": "camera",
+								"folded": false,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0.47199490666389465,0,1],
+								"fov": "90",
+								"zoom": 1,
+								"near": 0.1,
+								"far": 1000000,
+								"focus": 10,
+								"aspect": 1.825242718446602,
+								"filmGauge": 35,
+								"filmOffset": 0
+							},
+							{
+								"uuid": "6DE37752-14ED-4BD4-89A7-1757DEAF3866",
+								"type": "Script",
+								"name": "control",
+								"folded": false,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 1,
+								"code": "//Update camera rotation\nthis.parent.camera_rotation.x -= Mouse.delta.x * 0.005;\nthis.parent.camera_rotation.y -= Mouse.delta.y * 0.005;\n\n//Limit Vertical Rotation to near 90 degrees\nif(this.parent.camera_rotation.y < -1.57)\n{\n\tthis.parent.camera_rotation.y = -1.57;\n}\nelse if(this.parent.camera_rotation.y > 1.57)\n{\n\tthis.parent.camera_rotation.y = 1.57;\n}\n\t\n//Update camera rotation (euler)\nvar cos_angle_y = Math.cos(this.parent.camera_rotation.y);\nvar direction = new Vector3(Math.sin(this.parent.camera_rotation.x)*cos_angle_y, Math.sin(this.parent.camera_rotation.y), Math.cos(this.parent.camera_rotation.x)*cos_angle_y);\ndirection.add(this.parent.camera.position);\nthis.parent.camera.lookAt(direction);\n\nvar speed = 10;\nif(Keyboard.keyPressed(Keyboard.SHIFT))\n{\n\tspeed += 5;\n}\n\n//Move player\nif(Keyboard.keyPressed(Keyboard.W))\n{\n\tthis.parent.body.velocity.x = speed * Math.sin(this.parent.camera_rotation.x);\n\tthis.parent.body.velocity.z = speed * Math.cos(this.parent.camera_rotation.x);\n}\nif(Keyboard.keyPressed(Keyboard.S))\n{\n\tthis.parent.body.velocity.x = -speed * Math.sin(this.parent.camera_rotation.x);\n\tthis.parent.body.velocity.z = -speed * Math.cos(this.parent.camera_rotation.x);\n}\nif(Keyboard.keyPressed(Keyboard.A))\n{\n\tthis.parent.body.velocity.x = speed * Math.sin(this.parent.camera_rotation.x + MathUtils.pid2);\n\tthis.parent.body.velocity.z = speed * Math.cos(this.parent.camera_rotation.x + MathUtils.pid2);\n}\nif(Keyboard.keyPressed(Keyboard.D))\n{\n\tthis.parent.body.velocity.x = -speed * Math.sin(this.parent.camera_rotation.x + MathUtils.pid2);\n\tthis.parent.body.velocity.z = -speed * Math.cos(this.parent.camera_rotation.x + MathUtils.pid2);\n}\n\nif(Keyboard.keyPressed(Keyboard.SPACEBAR))\n{\n\tthis.parent.body.velocity.y = 15;\n}\n\n\nconsole.log(this.parent.body.collisionResponse);"
+							},
+							{
+								"uuid": "1CFC9429-C111-4E09-BDB2-231A98B6EBAD",
+								"type": "Script",
+								"name": "initialize",
+								"folded": false,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"mode": 0,
+								"code": "this.parent.camera_rotation = new Vector2(0, 0);\nthis.parent.camera = this.parent.getObjectByName(\"camera\");"
+							},
+							{
+								"uuid": "7E987792-C8F5-4CCF-A557-2D1FC803614F",
+								"type": "Mesh",
+								"name": "cylinder",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [0.6713052988052368,0,0,0,0,0.5877909064292908,0,0,0,0,0.7584227919578552,0,0.10862623155117035,0.2805308699607849,0,1],
+								"geometry": "4F3A193B-F152-4730-BD07-3225C5EC1A35",
+								"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 10,
+							"linearDamping": 0,
+							"angularDamping": 0,
+							"allowSleep": false,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": true,
+							"shapes": [
+								{
+									"type": 4,
+									"halfExtents": {
+										"x": 0.5,
+										"y": 0.5,
+										"z": 0.5
+									}
+								}]
+						}
+					},
+					{
+						"uuid": "6B9AF617-0692-4B3E-8E10-708D0DCF9423",
+						"type": "PointLight",
+						"name": "point_light",
+						"folded": false,
+						"hidden": false,
+						"castShadow": true,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,15.218711853027344,0,1],
+						"color": 4473924,
+						"intensity": 1,
+						"distance": 0,
+						"decay": 1,
+						"shadow": {
+							"bias": 0.01,
+							"mapSize": [2048,2048],
+							"camera": {
+								"uuid": "A3F96549-2D8A-46BB-8C51-0AA6EDF4F55D",
+								"type": "PerspectiveCamera",
+								"name": "",
+								"folded": false,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"fov": 90,
+								"zoom": 1,
+								"near": 0.01,
+								"far": 50000,
+								"focus": 10,
+								"aspect": 1,
+								"filmGauge": 35,
+								"filmOffset": 0
+							}
+						}
+					},
+					{
+						"uuid": "5A62D1FF-4F69-40BC-B2F0-4D621D48BB54",
+						"type": "AmbientLight",
+						"name": "ambient_light",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": false,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"color": 4473924,
+						"intensity": 1
+					},
+					{
+						"uuid": "DC75DB9F-74CA-4CB0-8558-7A657D44A4B6",
+						"type": "Physics",
+						"name": "sphere",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,6.796435832977295,5.624654293060303,0,1],
+						"children": [
+							{
+								"uuid": "FB79DAAC-AE97-4C83-A664-52335C05DEEF",
+								"type": "Mesh",
+								"name": "sphere",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "2E71762A-68D7-45B3-98F4-019E78949CBF",
+								"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 1,
+									"radius": 1
+								}]
+						}
+					},
+					{
+						"uuid": "4BC62CA8-B7DF-4F85-91D2-36B8EFCFCC3C",
+						"type": "Physics",
+						"name": "sphere",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,11.979830741882324,5.624654293060303,0,1],
+						"children": [
+							{
+								"uuid": "701768F3-8284-4CE6-9B0D-A929BAE73502",
+								"type": "Mesh",
+								"name": "sphere",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "2E71762A-68D7-45B3-98F4-019E78949CBF",
+								"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 1,
+									"radius": 1
+								}]
+						}
+					},
+					{
+						"uuid": "06F1C14B-654E-46A6-8F97-428656F616A2",
+						"type": "Physics",
+						"name": "box",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0.7298343181610107,0,1],
+						"children": [
+							{
+								"uuid": "5778A098-C4C4-4390-8BCA-05648A8D5977",
+								"type": "Mesh",
+								"name": "cube",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "F0771748-FDA7-45FB-BF5C-604CA0C43860",
+								"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 4,
+									"halfExtents": {
+										"x": 0.5,
+										"y": 0.5,
+										"z": 0.5
+									}
+								}]
+						}
+					},
+					{
+						"uuid": "8EA97389-1179-49D1-9E90-F2DE0364BDE4",
+						"type": "Physics",
+						"name": "box",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,3.705620288848877,1.907737135887146,0,1],
+						"children": [
+							{
+								"uuid": "73F92618-9BCE-4E8A-8180-4AD65F2DFCD3",
+								"type": "Mesh",
+								"name": "cube",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "F0771748-FDA7-45FB-BF5C-604CA0C43860",
+								"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 4,
+									"halfExtents": {
+										"x": 0.5,
+										"y": 0.5,
+										"z": 0.5
+									}
+								}]
+						}
+					},
+					{
+						"uuid": "09357E2D-E436-4D63-8353-D49DDD24EB2C",
+						"type": "Physics",
+						"name": "box",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,1.9068189859390259,1.907737135887146,0,1],
+						"children": [
+							{
+								"uuid": "47ACBADE-8823-4EAA-9C12-6505C2C09E64",
+								"type": "Mesh",
+								"name": "cube",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "F0771748-FDA7-45FB-BF5C-604CA0C43860",
+								"material": "93B4DCE0-0E51-4D66-A544-B4E03E0E3FAA"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 4,
+									"halfExtents": {
+										"x": 0.5,
+										"y": 0.5,
+										"z": 0.5
+									}
+								}]
+						}
+					},
+					{
+						"uuid": "5DC5169A-7F26-4111-89D2-D32863ED9362",
+						"type": "ParticleEmiter",
+						"name": "particle",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"group": {
+							"texture": {
+								"value": "980BF0B6-3D07-42E6-8E1F-F0499DA5B84B"
+							},
+							"textureFrames": {
+								"x": 1,
+								"y": 1
+							},
+							"textureFrameCount": 1,
+							"textureLoop": 1,
+							"hasPerspective": true,
+							"colorize": true,
+							"maxParticleCount": 2000,
+							"blending": 2,
+							"scale": 300,
+							"depthWrite": false,
+							"depthTest": true,
+							"fog": true
+						},
+						"emitter": {
+							"uuid": "847D12E3-4041-4974-B8C2-DE1E4BDCA63E",
+							"direction": 1,
+							"particleCount": 2000,
+							"duration": null,
+							"type": 1,
+							"maxAge": {
+								"value": 2,
+								"spread": 0
+							},
+							"position": {
+								"value": {
+									"x": 0,
+									"y": 0,
+									"z": 0
+								},
+								"spread": {
+									"x": 0,
+									"y": 0,
+									"z": 0
+								}
+							},
+							"velocity": {
+								"value": {
+									"x": 0,
+									"y": 25,
+									"z": 0
+								},
+								"spread": {
+									"x": 10,
+									"y": 7.5,
+									"z": 10
+								}
+							},
+							"acceleration": {
+								"value": {
+									"x": 0,
+									"y": -10,
+									"z": 0
+								},
+								"spread": {
+									"x": 10,
+									"y": 0,
+									"z": 10
+								}
+							},
+							"wiggle": {
+								"value": 0,
+								"spread": 0
+							},
+							"opacity": {
+								"value": [1,1,1,1],
+								"spread": [0,0,0,0]
+							},
+							"size": {
+								"value": [1,1,1,1],
+								"spread": [0,0,0,0]
+							},
+							"angle": {
+								"value": [0,0,0,0],
+								"spread": [0,0,0,0]
+							},
+							"color": {
+								"value": [16777215,16777215,16777215,16777215],
+								"spread": [
+									{
+										"x": 0,
+										"y": 0,
+										"z": 0
+									},
+									{
+										"x": 0,
+										"y": 0,
+										"z": 0
+									},
+									{
+										"x": 0,
+										"y": 0,
+										"z": 0
+									},
+									{
+										"x": 0,
+										"y": 0,
+										"z": 0
+									}]
+							}
+						}
+					}],
+				"fog_color": 16777215,
+				"fog_density": 0.01,
+				"fog_near": 4,
+				"fog_far": 10,
+				"fog_mode": 0,
+				"initial_camera": "7DC1EC6F-57C2-448D-8390-E818DA200BBE",
+				"world": {
+					"gravity": {
+						"x": 0,
+						"y": -25,
+						"z": 0
+					}
+				}
+			}],
+		"author": "",
+		"description": "",
+		"version": "0",
+		"lock_pointer": true,
+		"vr": false,
+		"vr_scale": 1
+	}
+}

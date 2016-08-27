@@ -421,7 +421,7 @@ if(create_ground)
 		vertex.y = Math.random() * Math.max(0, distance);
 	}
 	geometry.computeFaceNormals();
-	var ground = new Model3D(geometry, material);
+	var ground = new Mesh(geometry, material);
 	ground.name = "ground";
 	Editor.program.scene.add(ground);
 }*/
@@ -430,7 +430,7 @@ if(create_ground)
 var geometry = new RollerCoasterGeometry(this, 1500);
 var material = new THREE.MeshPhongMaterial({color:0xffffff, specular:0x333333, shininess:30});
 material.name = "track";
-var track = new Model3D(geometry, material);
+var track = new Mesh(geometry, material);
 track.name = "track";
 Editor.program.scene.add(track);
 
@@ -438,7 +438,7 @@ Editor.program.scene.add(track);
 var geometry = new RollerCoasterLiftersGeometry(this, 80);
 var material = new THREE.MeshPhongMaterial({color:0xffff00, specular:0x333333, shininess:30});
 material.name = "lifters";
-var lifters = new Model3D(geometry, material);
+var lifters = new Mesh(geometry, material);
 lifters.name = "lifters";
 Editor.program.scene.add(lifters);
 

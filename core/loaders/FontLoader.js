@@ -7,9 +7,9 @@ function FontLoader(manager)
 }
 
 //Parse font data
-FontLoader.prototype.parse = function(data)
+FontLoader.prototype.parse = function(text)
 {
-	return new THREE.Font(JSON.parse(data));
+	return new THREE.Font(JSON.parse(text));
 }
 
 //Load font file

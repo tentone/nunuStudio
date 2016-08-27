@@ -98,7 +98,7 @@ KinectDevice.prototype.update = function()
 					var joints = this.data.skeletons[j].joints;
 					for(var i = 0; i < joints.length; i++)
 					{
-						var model = new Model3D(geometry, material);
+						var model = new Mesh(geometry, material);
 						model.position.set(joints[i].x, joints[i].y, joints[i].z);
 						model.castShadow = true;
 						this.add(model);

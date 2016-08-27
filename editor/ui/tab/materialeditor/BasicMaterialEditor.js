@@ -5,6 +5,21 @@ function BasicMaterialEditor(parent)
 	MaterialEditor.call(this, parent);
 
 	var self = this;
+	
+	//Skinning
+	this.skinning = new CheckBox(this.preview.div_b);
+	this.skinning.setText("Skinning");
+	this.skinning.size.set(200, 15);
+	this.skinning.updateInterface();
+	this.skinning.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.skinning = self.skinning.getValue();
+		}
+	});
+	this.form.add(this.skinning);
+	this.form.nextRow();
 
 	//Wireframe
 	this.wireframe = new CheckBox(this.form.element);
@@ -74,6 +89,7 @@ BasicMaterialEditor.prototype.attachMaterial = function(material, material_file)
 {
 	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
 
+	this.skinning.setValue(material.skinning);
 	this.wireframe.setValue(material.wireframe);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.map.setValue(material.map);

@@ -98,7 +98,7 @@ function MaterialEditor(parent)
 	this.scene.add(this.sky);
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x555555));
-	this.obj = new Model3D(new THREE.SphereBufferGeometry(1, 64, 64), null);
+	this.obj = new Mesh(new THREE.SphereBufferGeometry(1, 64, 64), null);
 	this.obj.position.set(0, 0, -2.5);
 	this.obj.visible = false;
 	this.scene.add(this.obj);
@@ -212,21 +212,6 @@ function MaterialEditor(parent)
 		}
 	});
 	this.form.add(this.side);
-	this.form.nextRow();
-
-	//Skinning
-	this.skinning = new CheckBox(this.preview.div_b);
-	this.skinning.setText("Skinning");
-	this.skinning.size.set(200, 15);
-	this.skinning.updateInterface();
-	this.skinning.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.skinning = self.skinning.getValue();
-		}
-	});
-	this.form.add(this.skinning);
 	this.form.nextRow();
 
 	//Test depth
@@ -354,7 +339,6 @@ MaterialEditor.prototype.attachMaterial = function(material, material_file)
 	//Generic material elements
 	this.name.setText(material.name);
 	this.side.setValue(material.side);
-	this.skinning.setValue(material.skinning);
 	this.depthTest.setValue(material.depthTest);
 	this.depthWrite.setValue(material.depthWrite);
 	this.transparent.setValue(material.transparent);

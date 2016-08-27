@@ -368,7 +368,7 @@ LeapMotion.prototype.updatePhysics = function()
 //Add mesh to hand instance
 LeapMotion.prototype.addMesh = function(meshes)
 {
-	var mesh = new Model3D(this.geometry, this.material);
+	var mesh = new Mesh(this.geometry, this.material);
 	mesh.castShadow = this.castShadow;
 	mesh.receiveShadow = this.receiveShadow;
 	meshes.push(mesh);

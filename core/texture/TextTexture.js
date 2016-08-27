@@ -17,9 +17,8 @@ function TextTexture()
 
 	THREE.CanvasTexture.call(this, this.canvas);
 
-	//Name and type
+	//Name
 	this.name = "text";
-	this.type = "Text";
 
 	//Texture text
 	this.text = "text";
