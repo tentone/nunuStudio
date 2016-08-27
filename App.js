@@ -30,6 +30,7 @@ include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
+include("lib/base64.min.js");
 
 //Internal modules
 include("core/three/Three.js");
@@ -44,12 +45,17 @@ include("input/Mouse.js");
 
 include("core/webvr/VRControls.js");
 
+//include("core/assets/Image.js");
+
 include("core/texture/TextTexture.js");
 include("core/texture/VideoTexture.js");
 include("core/texture/WebcamTexture.js");
 include("core/texture/Texture.js");
 
 include("core/loaders/FontLoader.js");
+include("core/loaders/ImageLoader.js");
+include("core/loaders/TextureLoader.js");
+include("core/loaders/ObjectLoader.js");
 
 include("core/objects/physics/PhysicsObject.js");
 include("core/objects/device/LeapMotion.js");
@@ -67,15 +73,14 @@ include("core/objects/script/Script.js");
 include("core/objects/script/BlockScript.js");
 include("core/objects/Bone.js");
 include("core/objects/Container.js");
-include("core/objects/Model3D.js");
-include("core/objects/AnimatedModel.js");
+include("core/objects/Mesh.js");
+include("core/objects/SkinnedMesh.js");
 include("core/objects/Text3D.js");
 include("core/objects/Sprite.js");
 include("core/objects/ParticleEmitter.js");
 include("core/objects/Program.js");
 include("core/objects/Scene.js");
 
-include("core/ObjectLoader.js");
 include("core/ObjectUtils.js");
 include("core/MathUtils.js");
 
@@ -408,7 +413,7 @@ App.copyFolder = function(src, dest)
 	}
 }
 
-//Auxiliar include
+//Include javacript or css file in project
 function include(file, onload)
 {
 	if(file.endsWith(".js"))
@@ -454,7 +459,7 @@ function include(file, onload)
 	}
 }
 
-//Create base64 string from array buffer
+//Create base64 string from arraybuffer object
 function base64ArrayBuffer(arrayBuffer)
 {
 	var base64 = "";
@@ -463,11 +468,6 @@ function base64ArrayBuffer(arrayBuffer)
 	var bytes = new Uint8Array(arrayBuffer);
 	var remainder = bytes.byteLength % 3;
 	var length = bytes.byteLength - remainder;
-
-	console.log(arrayBuffer);
-	console.log(bytes);
-	console.log(remainder);
-	console.log(length);
 
 	//Auxiliar variables
 	var a, b, c, d;

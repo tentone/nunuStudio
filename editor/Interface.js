@@ -39,6 +39,7 @@ Interface.initialize = function()
 	
 	var import_models = Interface.asset_file.addMenu("3D Models", Interface.file_dir + "icons/models/models.png");
 
+	//OBJ file loader
 	import_models.addOption("Wavefront OBJ", function()
 	{
 		App.chooseFile(function(fname)
@@ -56,6 +57,7 @@ Interface.initialize = function()
 		}, ".obj");
 	});
 
+	//Collada file loader
 	import_models.addOption("Collada", function()
 	{
 		App.chooseFile(function(fname)
@@ -75,20 +77,19 @@ Interface.initialize = function()
 		}, ".dae");
 	});
 
-	import_models.addOption("Three.JS JSON", function()
+	//ThreeJS file format menu
+	var import_models_three = import_models.addMenu("ThreeJS");
+
+	//ThreeJS Object Loader
+	import_models_three.addOption("Object Loader", function()
 	{
 		App.chooseFile(function(fname)
 		{
 			try
 			{
-				var loader = new THREE.JSONLoader();
-				loader.load(fname, function(geometry, materials)
-				{
-					var material = new THREE.MeshStandardMaterial();
-					material.name = "standard";
-					var obj = new AnimatedModel(geometry, material);
-					Editor.addToScene(obj);
-				});
+				var loader = new THREE.ObjectLoader();
+				var object = loader.parse(JSON.parse(App.readFile(fname)));
+				Editor.addToScene(object);
 			}
 			catch(e)
 			{
@@ -97,7 +98,55 @@ Interface.initialize = function()
 		}, ".json");
 	});
 
-	//GLTF
+	//ThreeJS JSON Loader
+	import_models_three.addOption("JSON Loader", function()
+	{
+		App.chooseFile(function(fname)
+		{
+			try
+			{
+				var loader = new THREE.JSONLoader();
+				var data = loader.parse(JSON.parse(App.readFile(fname)));
+				var materials = data.materials;
+				var geometry = data.geometry;
+
+				//Create material object
+				var material = null;
+				if(materials === undefined || materials.length === 0)
+				{
+					material = new THREE.MeshStandardMaterial();
+					material.name = "standard";
+				}
+				else if(materials.length === 1)
+				{
+					material = materials[0];
+				}
+				else if(materials.length > 1)
+				{
+					material = THREE.MultiMaterial(materials);
+				}
+
+				//Create model
+				var model = null;
+				if(geometry.bones.length > 0)
+				{
+					model = new SkinnedMesh(geometry, material);
+				}
+				else
+				{
+					model = new Mesh(geometry, material);
+				}
+
+				Editor.addToScene(model);
+			}
+			catch(e)
+			{
+				alert("Error loading file\n("+e+")");
+			}
+		}, ".json");
+	});
+
+	//GLTF file loader
 	import_models.addOption("GLTF", function()
 	{
 		App.chooseFile(function(fname)
@@ -106,10 +155,9 @@ Interface.initialize = function()
 			{
 				var loader = new THREE.GLTFLoader();
 				var gltf = loader.parse(App.readFile(fname));
-				var scene = gltf.scene;
-				if(scene !== undefined)
+				if(gltf.scene !== undefined)
 				{
-					Editor.addToScene(scene);
+					Editor.addToScene(gltf.scene);
 				}
 			}
 			catch(e)
@@ -119,7 +167,43 @@ Interface.initialize = function()
 		}, ".gltf");
 	});
 
-	//VRML
+	//PLY file loader
+	import_models.addOption("PLY", function()
+	{
+		App.chooseFile(function(fname)
+		{
+			try
+			{
+				var loader = new THREE.PLYLoader();
+				var geometry = loader.parse(App.readFile(fname));
+				Editor.addToScene(new Mesh(geometry));
+			}
+			catch(e)
+			{
+				alert("Error loading file\n("+e+")");
+			}
+		}, ".ply");
+	});
+
+	//VTK file loader
+	import_models.addOption("VTK", function()
+	{
+		App.chooseFile(function(fname)
+		{
+			try
+			{
+				var loader = new THREE.VTKLoader();
+				var geometry = loader.parse(App.readFileArrayBuffer(fname));
+				Editor.addToScene(new Mesh(geometry));
+			}
+			catch(e)
+			{
+				alert("Error loading file\n("+e+")");
+			}
+		}, ".vtk, .vtp");
+	});
+
+	//VRML file loader
 	import_models.addOption("VRML", function()
 	{
 		App.chooseFile(function(fname)
@@ -187,7 +271,6 @@ Interface.initialize = function()
 			try
 			{
 				var texture = new VideoTexture(fname);
-				texture.name = "video";
 				var material = new THREE.MeshPhongMaterial({map: texture, color: 0xffffff});
 				material.name = "video";
 				Editor.program.addMaterial(material);
@@ -204,7 +287,6 @@ Interface.initialize = function()
 	Interface.asset_file.addOption("Webcam Texture", function()
 	{
 		var texture = new WebcamTexture();
-		texture.name = "webcam";
 		var material = new THREE.MeshPhongMaterial({map: texture, color: 0xffffff});
 		material.name = "webcam";
 		Editor.program.addMaterial(material);
@@ -225,7 +307,9 @@ Interface.initialize = function()
 	{
 		App.chooseFile(function(fname)
 		{
-			//TODO <ADD CODE HERE>
+			var audio = new Audio(fname);
+			Editor.addToScene(audio);
+			Editor.updateObjectViews();
 		}, "audio/*");
 	}, Interface.file_dir + "icons/assets/audio.png");
 
@@ -420,7 +504,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cube.png", function()
 	{
 		var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-		var model = new Model3D(geometry, Editor.default_material);
+		var model = new Mesh(geometry, Editor.default_material);
 		model.name = "cube";
 		Editor.addToScene(model);
 	}, "Cube");
@@ -429,7 +513,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cylinder.png", function()
 	{
 		var geometry = new THREE.CylinderBufferGeometry(1, 1, 2, 32);
-		var model = new Model3D(geometry, Editor.default_material);
+		var model = new Mesh(geometry, Editor.default_material);
 		model.name = "cylinder";
 		Editor.addToScene(model);
 	}, "Cylinder");
@@ -438,7 +522,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/sphere.png", function()
 	{
 		var geometry = new THREE.SphereBufferGeometry(1, 32, 32);
-		var model = new Model3D(geometry, Editor.default_material);
+		var model = new Mesh(geometry, Editor.default_material);
 		model.name = "sphere";
 		Editor.addToScene(model);
 	}, "Sphere");
@@ -447,7 +531,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/torus.png", function()
 	{
 		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 96);
-		var model = new Model3D(geometry, Editor.default_material);
+		var model = new Mesh(geometry, Editor.default_material);
 		model.name = "torus";
 		Editor.addToScene(model);
 	}, "Torus");
@@ -456,7 +540,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cone.png", function()
 	{
 		var geometry = new THREE.ConeBufferGeometry(1, 2, 32);
-		var model = new Model3D(geometry, Editor.default_material);
+		var model = new Mesh(geometry, Editor.default_material);
 		model.name = "cone";
 		Editor.addToScene(model);
 	}, "Cone");
@@ -472,7 +556,7 @@ Interface.initialize = function()
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/plane.png", function()
 	{
 		var geometry = new THREE.PlaneBufferGeometry(1,1);
-		var model = new Model3D(geometry, Editor.default_material);
+		var model = new Mesh(geometry, Editor.default_material);
 		model.receiveShadow = true;
 		model.castShadow = true;
 		model.name = "plane";
@@ -603,7 +687,7 @@ Interface.initialize = function()
 	//Audio
 	Interface.add_effects.addOption(Interface.file_dir + "icons/assets/audio.png", function()
 	{
-		Editor.addToScene(new Audio());
+		Editor.addToScene(new Audio("data/sample.ogg"));
 	}, "Audio");
 
 	//Physics

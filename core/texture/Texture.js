@@ -1,26 +1,32 @@
 "use strict";
 
 //Texture constructor
-function Texture(url)
+function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
-	//Create image element
-	var image = document.createElement("img");
-	image.src = url;
-
-	//Create Texture part of object
-	THREE.Texture.call(this, image);
-
-	//Name and type
-	this.name = "texture";
-	this.type = "Image";
-
+	//Self pointer
 	var self = this;
-	image.onload = function()
+
+	//Check if image is url
+	if(typeof image === "string")
 	{
-		self.needsUpdate = true;
+		var url = image;
+		var image = document.createElement("img");
+		image.src = url;
+
+		image.onload = function()
+		{
+			self.needsUpdate = true;
+		}
 	}
+
+	THREE.Texture.call(this, image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+
+	//Name
+	this.name = "texture";
+	this.category = "Image";
 }
 
+//Super prototypes
 Texture.prototype = Object.create(THREE.Texture.prototype);
 
 //Create JSON description
@@ -35,14 +41,14 @@ Texture.prototype.toJSON = function(meta)
 	{
 		metadata:
 		{
-			version: 1.0,
-			type: "NunuTexture"
+			version: Editor.VERSION,
+			type: "Texture"
 		},
 
 		uuid: this.uuid,
 		name: this.name,
-		type: this.type,
-
+		category: this.category,
+		
 		mapping: this.mapping,
 
 		repeat: [this.repeat.x, this.repeat.y],

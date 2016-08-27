@@ -3,10 +3,14 @@
 //Video texture constructor
 function VideoTexture(url)
 {
-	var extension = url.split(".").pop();
+	this.data = null;
+	this.encoding = "";
 
-	//Data
-	this.data = "data:video/" + extension + ";base64," + base64ArrayBuffer(App.readFileArrayBuffer(url));
+	if(url !== null)
+	{
+		this.data = base64ArrayBuffer(App.readFileArrayBuffer(url));
+		this.encoding = url.split(".").pop();
+	}
 
 	//Element
 	this.video = document.createElement("video");
@@ -14,14 +18,13 @@ function VideoTexture(url)
 	this.video.height = 256;
 	this.video.autoplay = true;
 	this.video.loop = true;
-	this.video.src = this.data;
+	this.video.src = "data:video/" + this.enconding + ";base64," + this.data;;
 
-	//Create Texture part of object
 	THREE.VideoTexture.call(this, this.video);
 
-	//Name and type
+	//Name
 	this.name = "video";
-	this.type = "Video";
+	this.category = "Video";
 
 	//Set filtering
 	this.minFilter = THREE.LinearFilter;
@@ -29,6 +32,7 @@ function VideoTexture(url)
 	this.format = THREE.RGBFormat;
 }
 
+//Super prototypes
 VideoTexture.prototype = Object.create(THREE.VideoTexture.prototype);
 
 //Dispose texture
@@ -53,13 +57,12 @@ VideoTexture.prototype.toJSON = function(meta)
 	{
 		metadata:
 		{
-			version: 1.0,
-			type: "NunuTexture"
+			version: Editor.VERSION,
+			type: "VideoTexture"
 		},
 
 		uuid: this.uuid,
 		name: this.name,
-		type: this.type,
 		
 		mapping: this.mapping,
 
@@ -73,27 +76,6 @@ VideoTexture.prototype.toJSON = function(meta)
 
 		flipY: this.flipY
 	};
-
-	if(this.image !== undefined)
-	{
-		var image = this.image;
-
-		if(image.uuid === undefined)
-		{
-			image.uuid = THREE.Math.generateUUID();
-		}
-
-		if(meta.images[image.uuid] === undefined)
-		{
-			meta.images[image.uuid] =
-			{
-				uuid: image.uuid,
-				url: this.data
-			};
-		}
-
-		output.image = image.uuid;
-	}
 
 	meta.textures[this.uuid] = output;
 	return output;

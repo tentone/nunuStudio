@@ -76,7 +76,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 
 		output.metadata =
 		{
-			version: 1.0,
+			version: Editor.VERSION,
 			type: "NunuProgram"
 		};
 	}

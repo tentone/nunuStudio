@@ -60,94 +60,97 @@ function SceneEditor(parent)
 			//Check intersected objects
 			var intersections = Editor.raycaster.intersectObjects(self.scene.children, true);
 
-			if(intersections.length > 0)
+			//Dragged file into object
+			if(intersections.length > 0 && event.dataTransfer.files.length > 0)
 			{
-				//If its a file drop
-				if(event.dataTransfer.files.length > 0)
-				{
-					//Get first file from event
-					var file = event.dataTransfer.files[0];
+				var file = event.dataTransfer.files[0];
 
-					//Image
-					if(file.type.startsWith("image"))
-					{
-						var object = intersections[0].object;
-
-						if(object instanceof THREE.Mesh)
-						{
-							//Create new material with selected image
-							var texture = new Texture(file.path);
-							var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-							material.name = file.name;
-							object.material = material;
-
-							//Update asset explorer
-							Editor.updateObjectViews();
-						}
-						else if(object instanceof THREE.Sprite)
-						{
-							//Create new material with selected image
-							var texture = new Texture(file.path);
-							var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
-							material.name = file.name;
-							object.material = material;
-
-							Editor.updateObjectViews();
-						}
-					}
-					//Video
-					if(file.type.startsWith("video"))
-					{
-						var object = intersections[0].object;
-
-						if(object instanceof THREE.Mesh)
-						{
-							var texture = new VideoTexture(file.path);
-							var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-							material.name = file.name;
-							object.material = material;
-							Editor.updateObjectViews();
-						}
-						else if(object instanceof THREE.Sprite)
-						{
-							var texture = new VideoTexture(file.path);
-							var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
-							material.name = file.name;
-							object.material = material;
-							Editor.updateObjectViews();
-						}
-					}
-					else if(file.name.endsWith(".isp"))
-					{
-						if(confirm("All unsaved changes to the project will be lost! Load file?"))
-						{
-							Editor.loadProgram(file.path);
-
-							Editor.resetEditingFlags();
-							Editor.updateObjectViews();
-						}
-					}
-				}
-				//If its a dragged object
-				else if(dragged_object !== null)
+				//Image
+				if(file.type.startsWith("image"))
 				{
 					var object = intersections[0].object;
-					
-					if(dragged_object instanceof THREE.SpriteMaterial)
+
+					if(object instanceof THREE.Mesh)
 					{
-						if(object instanceof THREE.Sprite)
-						{
-							object.material = dragged_object;
-							Editor.updateObjectViews();
-						}
+						//Create new material with selected image
+						var texture = new Texture(file.path);
+						var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+						material.name = file.name;
+						object.material = material;
+
+						//Update asset explorer
+						Editor.updateObjectViews();
 					}
-					else if(dragged_object instanceof THREE.Material)
+					else if(object instanceof THREE.Sprite)
 					{
-						if(object instanceof THREE.Mesh)
-						{
-							object.material = dragged_object;
-							Editor.updateObjectViews();
-						}
+						//Create new material with selected image
+						var texture = new Texture(file.path);
+						var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
+						material.name = file.name;
+						object.material = material;
+
+						Editor.updateObjectViews();
+					}
+				}
+				//Video
+				else if(file.type.startsWith("video"))
+				{
+					var object = intersections[0].object;
+
+					if(object instanceof THREE.Mesh)
+					{
+						var texture = new VideoTexture(file.path);
+						var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+						material.name = file.name;
+						object.material = material;
+						Editor.updateObjectViews();
+					}
+					else if(object instanceof THREE.Sprite)
+					{
+						var texture = new VideoTexture(file.path);
+						var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
+						material.name = file.name;
+						object.material = material;
+						Editor.updateObjectViews();
+					}
+				}
+			}
+			//Dragged resource into object
+			else if(intersections.length > 0 && dragged_object !== null)
+			{
+				var object = intersections[0].object;
+				
+				if(dragged_object instanceof THREE.SpriteMaterial)
+				{
+					if(object instanceof THREE.Sprite)
+					{
+						object.material = dragged_object;
+						Editor.updateObjectViews();
+					}
+				}
+				else if(dragged_object instanceof THREE.Material)
+				{
+					if(object instanceof THREE.Mesh)
+					{
+						object.material = dragged_object;
+						Editor.updateObjectViews();
+					}
+				}
+			}
+			
+			//Dragged file into window
+			if(event.dataTransfer.files.length > 0)
+			{
+				var file = event.dataTransfer.files[0];
+
+				//Open project
+				if(file.name.endsWith(".isp"))
+				{
+					if(confirm("All unsaved changes to the project will be lost! Load file?"))
+					{
+						Editor.loadProgram(file.path);
+						Editor.resetEditingFlags();
+						Editor.updateObjectViews();
 					}
 				}
 			}

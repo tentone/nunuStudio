@@ -208,14 +208,14 @@ Program.prototype.addDefaultScene = function(material)
 
 	//Box
 	var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-	var model = new Model3D(geometry, material);
+	var model = new Mesh(geometry, material);
 	model.receiveShadow = true;
 	model.castShadow = true;
 	model.name = "box";
 	scene.add(model);
 
 	//Floor
-	model = new Model3D(geometry, material);
+	model = new Mesh(geometry, material);
 	model.scale.set(20, 1, 20);
  	model.position.set(0, -1, 0);
 	model.receiveShadow = true;

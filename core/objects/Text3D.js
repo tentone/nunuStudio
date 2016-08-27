@@ -25,19 +25,20 @@ function Text3D(text, material, font)
 	this.castShadow = true;
 }
 
+//Super prototype
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
 
-//Dipose text
+//Dispose text
 Text3D.prototype.dispose = function()
 {
-	//Dipose material and geometry
+	//Dispose material and geometry
 	if(this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
 	this.geometry.dispose();
 
-	//Dipose children
+	//Dispose children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].dispose();

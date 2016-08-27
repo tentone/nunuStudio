@@ -2,7 +2,7 @@
 
 function TextureLoader(manager)
 {
-	this.manager =(manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
 }
 
 TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
@@ -13,6 +13,7 @@ TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	loader.setCrossOrigin(this.crossOrigin);
 	loader.setWithCredentials(this.withCredentials);
 	loader.setPath(this.path);
+	
 	loader.load(url, function(image)
 	{
 		//Check if image is a JPEG if so there is no need to store alpha
@@ -29,7 +30,6 @@ TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}, onProgress, onError);
 
 	return texture;
-
 }
 
 TextureLoader.prototype.setCrossOrigin = function(value)

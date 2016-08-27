@@ -9,18 +9,19 @@ function Sprite(material)
 	this.type = "Sprite";
 }
 
+//Super prototype
 Sprite.prototype = Object.create(THREE.Sprite.prototype);
 
-//Dipose sprite
+//Dispose sprite
 Sprite.prototype.dispose = function()
 {
-	//Dipose material
+	//Dispose material
 	if(this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
 
-	//Dipose children
+	//Dispose children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].dispose();
