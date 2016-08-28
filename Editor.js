@@ -141,7 +141,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.7 Alpha";
-Editor.TIMESTAMP = "201608281605";
+Editor.TIMESTAMP = "201608281913";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -878,19 +878,20 @@ Editor.selectObjectHelper = function()
 		{
 			Editor.object_helper.add(new THREE.HemisphereLightHelper(Editor.selected_object, 1));
 		}
-		//Particle emitter
+		//Particle
 		else if(Editor.selected_object instanceof ParticleEmitter)
 		{
 			Editor.object_helper.add(new ParticleEmitterHelper(Editor.selected_object));
 		}
-		//Script
-		if(Editor.selected_object instanceof Script)
-		{
-			Editor.object_helper.add(new ObjectIconHelper(Editor.selected_object, ObjectIcons.get(Editor.selected_object.type)));
-		}
+		//Physics
 		else if(Editor.selected_object instanceof PhysicsObject)
 		{
 			Editor.object_helper.add(new PhysicsObjectHelper(Editor.selected_object));
+		}
+		//Script or Audio
+		if(Editor.selected_object instanceof Script || Editor.selected_object instanceof AudioEmitter)
+		{
+			Editor.object_helper.add(new ObjectIconHelper(Editor.selected_object, ObjectIcons.get(Editor.selected_object.type)));
 		}
 		//Object 3D
 		else if(Editor.selected_object instanceof THREE.Object3D)
@@ -1022,13 +1023,11 @@ Editor.loadProgram = function(fname)
 //Export web project
 Editor.exportWebProject = function(dir)
 {
-	//Nunu core
 	App.copyFolder("runtime", dir);
 	App.copyFolder("core", dir + "\\core");
 	App.copyFolder("input", dir + "\\input");
 	App.copyFile("App.js", dir + "\\App.js");
 
-	//Libraries
 	App.makeDirectory(dir + "\\lib");
 	App.copyFile("lib\\leap.min.js", dir + "\\lib\\leap.min.js");
 	App.copyFile("lib\\SPE.min.js", dir + "\\lib\\SPE.min.js");
@@ -1042,7 +1041,6 @@ Editor.exportWebProject = function(dir)
 	App.makeDirectory(dir + "\\lib\\three\\effects");
 	App.copyFile("lib\\three\\effects\\VREffect.js", dir + "\\lib\\three\\effects\\VREffect.js");
 
-	//Save program
 	Editor.saveProgram(dir + "\\app.isp");
 }
 

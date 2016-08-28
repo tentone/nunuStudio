@@ -48,6 +48,7 @@ include("core/webvr/VRControls.js");
 
 include("core/assets/Font.js");
 include("core/assets/Video.js");
+include("core/assets/Audio.js");
 //include("core/assets/Image.js");
 
 include("core/texture/TextTexture.js");
@@ -73,7 +74,7 @@ include("core/objects/lights/HemisphereLight.js");
 include("core/objects/lights/Sky.js");
 include("core/objects/cameras/PerspectiveCamera.js");
 include("core/objects/cameras/OrthographicCamera.js");
-include("core/objects/audio/Audio.js");
+include("core/objects/audio/AudioEmitter.js");
 include("core/objects/script/Script.js");
 include("core/objects/script/BlockScript.js");
 include("core/objects/Bone.js");
