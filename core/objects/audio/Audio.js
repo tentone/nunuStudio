@@ -16,7 +16,7 @@ function Audio(audio)
 	if(audio !== undefined)
 	{
 		this.enconding = audio.split(".").pop();
-		this.data = App.readFileArrayBuffer(url);
+		this.data = App.readFileArrayBuffer(audio);
 	}
 
 	//Playback control

@@ -1,6 +1,6 @@
 "use strict";
 
-//Folded
+//Folded attribute
 THREE.Object3D.prototype.folded = false;
 
 //Hidden attribute (hidden objects are not serialized and dont show up in the editor)
@@ -90,11 +90,6 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 
 	object.folded = this.folded;
 	object.hidden = this.hidden;
-	
-	if(JSON.stringify(this.userData) !== "{}")
-	{
-		object.userData = this.userData;
-	}
 
 	object.castShadow = this.castShadow;
 	object.receiveShadow = this.receiveShadow;
@@ -145,30 +140,16 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 		}
 	}
 
-	//If root object add resources before returning
+	//If root object add assets
 	if(isRootObject)
 	{
-		var geometries = extractFromCache(meta.geometries);
-		var materials = extractFromCache(meta.materials);
-		var textures = extractFromCache(meta.textures);
-		var images = extractFromCache(meta.images);
-
-		if(geometries.length > 0)
-		{
-			output.geometries = geometries;
-		}
-		if(materials.length > 0)
-		{
-			output.materials = materials;
-		}
-		if(textures.length > 0)
-		{
-			output.textures = textures;
-		}
-		if(images.length > 0)
-		{
-			output.images = images;
-		}
+		output.geometries = extractFromCache(meta.geometries);
+		output.materials = extractFromCache(meta.materials);
+		output.textures = extractFromCache(meta.textures);
+		output.images = extractFromCache(meta.images);
+		output.videos = extractFromCache(meta.videos);
+		output.audio = extractFromCache(meta.audio);
+		output.fonts = extractFromCache(meta.fonts);	
 	}
 
 	output.object = object;
@@ -178,6 +159,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 	function extractFromCache(cache)
 	{
 		var values = [];
+
 		for(var key in cache)
 		{
 			var data = cache[key];

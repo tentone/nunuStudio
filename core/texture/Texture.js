@@ -7,16 +7,14 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	this.data = "";
 	this.encoding = "";
 
-	//Self pointer
-	var self = this;
-
 	//If image is a URL
 	if(typeof image === "string")
 	{
 		var url = image;
 		var image = document.createElement("img");
 		image.src = url;
-
+		
+		var self = this;
 		image.onload = function()
 		{
 			self.needsUpdate = true;
@@ -54,6 +52,7 @@ Texture.prototype.toJSON = function(meta)
 		};
 	}
 	data.image = image.uuid;
+
 	return data;
 
 	//Create data url for image element
