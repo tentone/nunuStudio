@@ -30,9 +30,10 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 	var geometries = this.parseGeometries(json.geometries);
 	var images = this.parseImages(json.images);
 	var videos = this.parseVideos(json.videos);
+	var fonts = this.parseFonts(json.fonts);
 	var textures = this.parseTextures(json.textures, images, videos);
 	var materials = this.parseMaterials(json.materials, textures);
-	var object = this.parseObject(json.object, geometries, materials, textures);
+	var object = this.parseObject(json.object, geometries, materials, textures, fonts);
 
 	if(json.animations)
 	{
@@ -246,12 +247,11 @@ ObjectLoader.prototype.parseGeometries = function(json)
 ObjectLoader.prototype.parseMaterials = function(json, textures)
 {
 	var materials = [];
+	var loader = new THREE.MaterialLoader();
+	loader.setTextures(textures);
 
 	if(json !== undefined)
 	{
-		var loader = new THREE.MaterialLoader();
-		loader.setTextures(textures);
-
 		for(var i = 0, l = json.length; i < l; i ++)
 		{
 			var material = loader.parse(json[i]);
@@ -310,6 +310,23 @@ ObjectLoader.prototype.parseVideos = function(json, onLoad)
 	return videos;
 }
 
+//Parse fonts
+ObjectLoader.prototype.parseFonts = function(json, onLoad)
+{
+	var loader = new FontLoader();
+	var fonts = [];
+
+	if(json !== undefined)
+	{
+		for(var i = 0, l = json.length; i < l; i ++)
+		{
+			fonts[json[i].uuid] = loader.parse(json[i]);
+		}
+	}
+
+	return fonts;
+}
+
 //Parse textures
 ObjectLoader.prototype.parseTextures = function(json, images, videos)
 {
@@ -332,7 +349,7 @@ ObjectLoader.prototype.parseTextures = function(json, images, videos)
 }
 
 //Parse objects
-ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures)
+ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, fonts)
 {
 	var matrix = new THREE.Matrix4();
 	var object;
@@ -362,6 +379,15 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			console.warn("ObjectLoader: Undefined material", uuid);
 		}
 		return materials[uuid];
+	}
+
+	function getFont(uuid)
+	{
+		if(fonts[uuid] === undefined)
+		{
+			console.warn("ObjectLoader: Undefined material", uuid);
+		}
+		return fonts[uuid];
 	}
 
 	switch(data.type)
@@ -445,7 +471,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 			
 		case "Text3D":
-			object = new Text3D(data.text, getMaterial(data.material), new Font(data.font));
+			object = new Text3D(data.text, getMaterial(data.material), getFont(data.font));
 			break;
 
 		case "Program":
@@ -565,17 +591,11 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 
 		case "Mesh":
+			object = new Mesh(getGeometry(data.geometry), getMaterial(data.material));
+			break;
+
 		case "SkinnedMesh":
-			var geometry = getGeometry(data.geometry);
-			var material = getMaterial(data.material);
-			if(geometry.bones && geometry.bones.length > 0)
-			{
-				object = new SkinnedMesh(geometry, material);
-			}
-			else
-			{
-				object = new Mesh(geometry, material);
-			}
+			object = new SkinnedMesh(getGeometry(data.geometry), getMaterial(data.material));
 			break;
 
 		case "LOD":
@@ -696,7 +716,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	{
 		for(var child in data.children)
 		{
-			object.add(this.parseObject(data.children[child], geometries, materials, textures));
+			object.add(this.parseObject(data.children[child], geometries, materials, textures, fonts));
 		}
 	}
 

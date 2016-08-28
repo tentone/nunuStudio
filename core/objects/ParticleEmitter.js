@@ -117,7 +117,7 @@ ParticleEmitter.prototype.toJSON = function(meta)
 	//Self pointer
 	var self = this;
 
-	//Call default toJSON
+	//Super toJSON
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
 		self.group.texture.toJSON(meta);

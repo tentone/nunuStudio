@@ -36,5 +36,6 @@ THREE.Texture.prototype.toJSON = function(meta)
 	};
 
 	meta.textures[this.uuid] = data;
+	
 	return data;
 }
