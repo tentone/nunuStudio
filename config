@@ -15,13 +15,13 @@
 	},
 	"render": {
 		"shadows": true,
-		"shadows_type": 2,
+		"shadows_type": 0,
 		"antialiasing": true
 	},
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"font_size": 14,
+		"font_size": 17,
 		"line_numbers": true,
 		"line_wrapping": false,
 		"auto_close_brackets": true,

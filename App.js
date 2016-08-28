@@ -57,6 +57,8 @@ include("core/texture/Texture.js");
 
 include("core/loaders/FontLoader.js");
 include("core/loaders/ImageLoader.js");
+include("core/loaders/VideoLoader.js");
+
 include("core/loaders/TextureLoader.js");
 include("core/loaders/ObjectLoader.js");
 

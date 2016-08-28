@@ -2,7 +2,7 @@
 
 function ImageLoader(manager)
 {
-	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 }
 
 ImageLoader.prototype.load = function(url, onLoad, onProgress, onError)
