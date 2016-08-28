@@ -687,7 +687,7 @@ Interface.initialize = function()
 	//Audio
 	Interface.add_effects.addOption(Interface.file_dir + "icons/assets/audio.png", function()
 	{
-		Editor.addToScene(new Audio("data/sample.ogg"));
+		Editor.addToScene(new AudioEmitter("data/sample.ogg"));
 	}, "Audio");
 
 	//Physics
