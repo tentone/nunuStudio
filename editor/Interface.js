@@ -548,7 +548,7 @@ Interface.initialize = function()
 	//Text
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/text.png", function()
 	{
-		var model = new Text3D("text", Editor.default_material);
+		var model = new Text3D("text", Editor.default_material, Editor.default_font);
 		Editor.addToScene(model);
 	}, "3D Text");
 

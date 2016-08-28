@@ -140,8 +140,8 @@ Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201608280455";
+Editor.VERSION = "V0.8.9.7 Alpha";
+Editor.TIMESTAMP = "201608281605";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -194,11 +194,12 @@ Editor.initialize = function(canvas)
 	//Material renderer for material previews
 	Editor.material_renderer = new MaterialRenderer();
 
-	//Default materials to be used when creating objects
+	//Default assets to be used when creating objects
 	Editor.default_material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 	Editor.default_material.name = "default";
 	Editor.default_sprite_material = new THREE.SpriteMaterial({map: new Texture("data/sample.png"), color: 0xffffff});
 	Editor.default_sprite_material.name = "default";
+	Editor.default_font = new Font(JSON.parse(App.readFile("data/fonts/montserrat.json")));
 
 	//Initialize User Interface
 	Interface.initialize();

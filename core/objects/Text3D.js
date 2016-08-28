@@ -3,22 +3,14 @@
 //Text3D constructor
 function Text3D(text, material, font)
 {
-	if(font === undefined)
-	{
-		this.font = new FontLoader().parse(JSON.parse(App.readFile("data/fonts/montserrat.json")));
-	}
-	else
-	{
-		this.font = font;
-	}
-
-	THREE.Mesh.call(this, new THREE.TextGeometry(text, {font: this.font}), material);
+	THREE.Mesh.call(this, new THREE.TextGeometry(text, {font: font}), material);
 	
 	this.name = "text";
 	this.type = "Text3D";
 
 	this.scale.set(0.02, 0.02, 0.02);
 
+	this.font = font;
 	this.text = text;
 		
 	this.receiveShadow = true;
@@ -56,15 +48,21 @@ Text3D.prototype.setText = function(text)
 //Create JSON for object
 Text3D.prototype.toJSON = function(meta)
 {
+	//Self pointer
+	var self = this;
+
 	//Backup geometry and set to undefined to avoid being stored
 	var geometry = this.geometry;
 	this.geometry = undefined;
 
 	//Call super toJSON
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
-	
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	{
+		self.font.toJSON(meta);
+	});
+
 	data.object.text = this.text;
-	data.object.font = this.font.data;
+	data.object.font = this.font.uuid;
 	
 	//Restore geometry
 	this.geometry = geometry;

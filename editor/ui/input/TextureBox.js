@@ -22,6 +22,7 @@ function TextureBox(parent)
 
 	//Texture preview division
 	this.preview = document.createElement("div");
+	this.preview.style.cursor = "pointer";
 	this.preview.style.position = "absolute";
 	this.preview.style.top = "0px";
 	this.preview.style.left = "0px";
@@ -30,6 +31,7 @@ function TextureBox(parent)
 	//Alpha background
 	this.alpha = document.createElement("img");
 	this.alpha.src = "editor/files/alpha.png";
+	this.alpha.style.pointerEvents = "none";
 	this.alpha.style.position = "absolute";
 	this.alpha.style.left = "0px";
 	this.alpha.style.top = "0px";
@@ -37,10 +39,10 @@ function TextureBox(parent)
 
 	//Image
 	this.img = document.createElement("img");
+	this.img.style.pointerEvents = "none";
 	this.img.style.position = "absolute";
 	this.img.style.left = "0px";
 	this.img.style.top = "0px";
-	this.img.src = "";
 	this.preview.appendChild(this.img);
 
 	//Self pointer
@@ -63,6 +65,10 @@ function TextureBox(parent)
 				self.use_texture.setValue(true);
 				self.onchange();
 			}
+			else if(file.type.startsWith("video"))
+			{
+				//TODO <ADD CODE HERE>
+			}
 		}
 	};
 
@@ -76,7 +82,7 @@ function TextureBox(parent)
 				self.img.src = file;
 				self.use_texture.setValue(true);
 				self.onchange();
-			}, "image/*");
+			}, "image/*, video/*");
 		}
 	};
 
