@@ -1,51 +1,100 @@
 "use strict";
 
+//Texture loader constructor
 function TextureLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : DefaultLoadingManager;
+
+	//Assets
+	this.images = [];
+	this.videos = [];
+	this.fonts = [];
 }
 
+//Load texture from url
 TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
-	var texture = new Texture();
-
-	var loader = new ImageLoader(this.manager);
-	loader.setCrossOrigin(this.crossOrigin);
-	loader.setWithCredentials(this.withCredentials);
-	loader.setPath(this.path);
-	
-	loader.load(url, function(image)
+	var self = this;
+	var loader = new THREE.XHRLoader(this.manager);
+	loader.load(url, function(text)
 	{
-		//Check if image is a JPEG if so there is no need to store alpha
-		var isJPEG = url.search(/\.(jpg|jpeg)$/) > 0 || url.search(/^data\:image\/jpeg/) === 0;
-
-		texture.format = isJPEG ? RGBFormat : RGBAFormat;
-		texture.image = image;
-		texture.needsUpdate = true;
-
-		if(onLoad !== undefined)
-		{
-			onLoad(texture);
-		}
+		self.parse(JSON.parse(text), onLoad);
 	}, onProgress, onError);
-
-	return texture;
 }
 
-TextureLoader.prototype.setCrossOrigin = function(value)
+//Parse texture JSON
+TextureLoader.prototype.parse = function(json)
 {
-	this.crossOrigin = value;
+	var texture = null;
+	var category = json.category;
+
+	//Video texture
+	if(category === "Video")
+	{
+		/*var video = document.createElement("video");
+		video.width = 256;
+		video.height = 256;
+		video.autoplay = true;
+		video.loop = true;
+		video.src = json.data;
+
+		texture = new VideoTexture();
+		texture.encoding = json.encoding;
+		texture.data = json.data;*/
+	}
+	//Webcam texture
+	else if(category === "Webcam")
+	{
+		texture = new WebcamTexture();
+	}
+	//Texture
+	else
+	{
+		if(json.image === undefined)
+		{
+			console.warn("ObjectLoader: No image specified for", json.uuid);
+		}
+
+		if(this.images[json.image] === undefined)
+		{
+			console.warn("ObjectLoader: Undefined image", json.image);
+		}
+		texture = new Texture(this.images[json.image]);
+	}
+
+	texture.uuid = json.uuid;
+	texture.name = json.name;
+	texture.mapping = parseConstant(json.mapping);
+
+	texture.offset = new THREE.Vector2(json.offset[0], json.offset[1]);
+	texture.repeat = new THREE.Vector2(json.repeat[0], json.repeat[1]);
+	texture.wrapS = parseConstant(json.wrap[0]);
+	texture.wrapT = parseConstant(json.wrap[1]);
+
+	texture.minFilter = parseConstant(json.minFilter);
+	texture.magFilter = parseConstant(json.magFilter);
+
+	texture.anisotropy = json.anisotropy;
+	texture.flipY = json.flipY;
+}
+
+//Set images
+TextureLoader.prototype.setImages = function(images)
+{
+	this.images = images;
 	return this;
 }
 
-TextureLoader.prototype.setWithCredentials = function(value)
+//Set videos
+TextureLoader.prototype.setVideos = function(images)
 {
-	this.withCredentials = value;
+	this.videos = videos;
 	return this;
 }
 
-TextureLoader.prototype.setPath = function(value)
+//Set fonts
+TextureLoader.prototype.setFonts = function(images)
 {
-	this.path = value;
+	this.fonts = fonts;
 	return this;
 }

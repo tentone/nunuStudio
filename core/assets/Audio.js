@@ -1,25 +1,24 @@
 "use strict";
 
-//Image constructor
-function Image()
+//Audio constructor
+function Audio()
 {
-	this.name = "image";
+	this.name = "audio";
 	this.uuid = THREE.Math.generateUUID();
-	this.type = "Image";
+	this.type = "Audio";
 
 	this.encoding = "";
 	this.data = null;
 }
 
 //Create json description
-Image.prototype.toJSON = function(meta)
+Audio.prototype.toJSON = function(meta)
 {
 	var data = {};
 
 	data.name = this.name;
 	data.uuid = this.uuid;
 	data.type = this.type;
-	
 	data.encoding = this.encoding;
 	data.data = this.data;
 

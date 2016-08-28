@@ -511,7 +511,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 			
 		case "Text3D":
-			object = new Text3D(data.text, getMaterial(data.material), new THREE.Font(data.font));
+			object = new Text3D(data.text, getMaterial(data.material), new Font(data.font));
 			break;
 
 		case "Program":

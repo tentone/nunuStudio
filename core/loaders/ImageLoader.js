@@ -43,12 +43,6 @@ ImageLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	return image;
 }
 
-ImageLoader.prototype.setCrossOrigin = function(value)
-{
-	this.crossOrigin = value;
-	return this;
-}
-
 ImageLoader.prototype.setWithCredentials = function(value)
 {
 	this.withCredentials = value;

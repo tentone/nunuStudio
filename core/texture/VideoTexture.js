@@ -1,37 +1,32 @@
 "use strict";
 
 //Video texture constructor
-function VideoTexture(video, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy)
+function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 {
-	//Video data
-	this.data = "";
-	this.encoding = "";
-
-	//If video is a URL
 	if(typeof video === "string")
 	{
-		this.encoding = video.split(".").pop();
-		this.data = "data:video/" + this.encoding + ";base64," + base64ArrayBuffer(App.readFileArrayBuffer(video));
-
-		video = document.createElement("video");
-		video.width = 256;
-		video.height = 256;
-		video.autoplay = true;
-		video.loop = true;
-		video.src = this.data;
+		this.video = new Video(video);
 	}
+ 	else if(video instanceof Video)
+ 	{
+ 		this.video = video;
+ 	}
 
 	//Call super constructor
-	THREE.VideoTexture.call(this, video, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy);
+	THREE.VideoTexture.call(this, document.createElement("video"), mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 
 	//Name
 	this.name = "video";
 	this.category = "Video";
 
-	//Set filtering
-	this.minFilter = THREE.LinearFilter;
-	this.magFilter = THREE.LinearFilter;
-	this.format = THREE.RGBFormat;
+	//Controls
+	this.autoplay = true;
+	this.loop = true;
+
+	//Video
+	this.image.autoplay = this.autoplay;
+	this.image.loop = this.loop;
+	this.image.src = "data:video/" + this.video.encoding + ";base64," + this.video.data;
 }
 
 //Super prototypes
@@ -40,9 +35,9 @@ VideoTexture.prototype = Object.create(THREE.VideoTexture.prototype);
 //Dispose texture
 VideoTexture.prototype.dispose = function()
 {
-	if(!this.video.paused)
+	if(!this.image.paused)
 	{
-		this.video.pause();
+		this.image.pause();
 	}
 	THREE.VideoTexture.prototype.dispose.call(this);
 }
@@ -51,6 +46,15 @@ VideoTexture.prototype.dispose = function()
 VideoTexture.prototype.toJSON = function(meta)
 {
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);
-	
+
+	data.video = this.video.uuid;
+	data.loop = this.loop;
+	data.autoplay = this.autoplay;
+
+	if(meta.videos[this.video.uuid] === undefined)
+	{
+		meta.videos[this.video.uuid] = this.video.toJSON();
+	}
+
 	return data;
 }
