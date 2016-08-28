@@ -1,7 +1,7 @@
 "use strict";
 
 //Webcam texture constructor
-function WebcamTexture(mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy)
+function WebcamTexture(mapping, wrapS, wrapT, magFilter, minFilter, type, anisotropy)
 {
 	//Check if webcam API available
 	if(navigator.webkitGetUserMedia || navigator.mediaDevices.getUserMedia)
@@ -11,10 +11,10 @@ function WebcamTexture(mapping, wrapS, wrapT, magFilter, minFilter, format, type
 
 	//Create the video element
 	var video = document.createElement("video");
-	video.width = 256;
-	video.height = 256;
-	video.autoplay	= true;
-	video.loop	= true;
+	video.width = 512;
+	video.height = 512;
+	video.autoplay = true;
+	video.loop = true;
 
 	//Create webcam stream
 	if(navigator.webkitGetUserMedia)

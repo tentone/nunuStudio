@@ -29,7 +29,8 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 {
 	var geometries = this.parseGeometries(json.geometries);
 	var images = this.parseImages(json.images);
-	var textures = this.parseTextures(json.textures, images);
+	var videos = this.parseVideos(json.videos);
+	var textures = this.parseTextures(json.textures, images, videos);
 	var materials = this.parseMaterials(json.materials, textures);
 	var object = this.parseObject(json.object, geometries, materials, textures);
 
@@ -278,48 +279,43 @@ ObjectLoader.prototype.parseAnimations = function(json)
 //Parse images
 ObjectLoader.prototype.parseImages = function(json, onLoad)
 {
-	var self = this;
+	var loader = new ImageLoader();
 	var images = [];
 
-	function loadImage(url)
+	if(json !== undefined)
 	{
-		self.manager.itemStart(url);
-		return loader.load(url, function()
-		{
-			self.manager.itemEnd(url);
-		});
-	}
-
-	if(json !== undefined && json.length > 0)
-	{
-		var manager = new THREE.LoadingManager(onLoad);
-		var loader = new ImageLoader(manager);
-		loader.setCrossOrigin(this.crossOrigin);
-
 		for(var i = 0, l = json.length; i < l; i ++)
 		{
-			var image = json[i];
-			var path = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(image.url) ? image.url : self.texturePath + image.url;
-			images[image.uuid] = loadImage(path);
+			images[json[i].uuid] = loader.load(json[i].url);
 		}
 	}
 
 	return images;
 }
 
-//Parse textures
-ObjectLoader.prototype.parseTextures = function(json, images)
+//Parse videos
+ObjectLoader.prototype.parseVideos = function(json, onLoad)
 {
-	function parseConstant(value)
-	{
-		if(typeof(value) === "number")
-		{
-			return value;
-		}
+	var loader = new VideoLoader();
+	var videos = [];
 
-		console.warn("ObjectLoader.parseTexture: Constant should be in numeric form.", value);
-		return THREE[value];
+	if(json !== undefined)
+	{
+		for(var i = 0, l = json.length; i < l; i ++)
+		{
+			videos[json[i].uuid] = loader.parse(json[i]);
+		}
 	}
+
+	return videos;
+}
+
+//Parse textures
+ObjectLoader.prototype.parseTextures = function(json, images, videos)
+{
+	var loader = new TextureLoader();
+	loader.setImages(images);
+	loader.setVideos(videos);
 
 	var textures = [];
 
@@ -327,62 +323,8 @@ ObjectLoader.prototype.parseTextures = function(json, images)
 	{
 		for(var i = 0, l = json.length; i < l; i ++)
 		{
-			var data = json[i];
-
-			if(data.image === undefined)
-			{
-				console.warn("ObjectLoader: No image specified for", data.uuid);
-			}
-
-			if(images[data.image] === undefined)
-			{
-				console.warn("ObjectLoader: Undefined image", data.image);
-			}
-
-			var texture = new Texture(images[data.image]);
-			texture.needsUpdate = true;
-			texture.uuid = data.uuid;
-
-			if(data.name !== undefined)
-			{
-				texture.name = data.name;
-			}
-			if(data.mapping !== undefined)
-			{
-				texture.mapping = parseConstant(data.mapping);
-			}
-			if(data.offset !== undefined)
-			{
-				texture.offset = new THREE.Vector2(data.offset[0], data.offset[1]);
-			}
-			if(data.repeat !== undefined)
-			{
-				texture.repeat = new THREE.Vector2(data.repeat[0], data.repeat[1]);
-			}
-			if(data.minFilter !== undefined)
-			{
-				texture.minFilter = parseConstant(data.minFilter);
-			}
-			if(data.magFilter !== undefined)
-			{
-				texture.magFilter = parseConstant(data.magFilter);
-			}
-			if(data.anisotropy !== undefined)
-			{
-				texture.anisotropy = data.anisotropy;
-			}
-			if(data.flipY !== undefined)
-			{
-				texture.flipY = data.flipY;
-			}
-
-			if(Array.isArray(data.wrap))
-			{
-				texture.wrapS = parseConstant(data.wrap[0]);
-				texture.wrapT = parseConstant(data.wrap[1]);
-			}
-			
-			textures[data.uuid] = texture;
+			var texture = loader.parse(json[i]);
+			textures[texture.uuid] = texture;
 		}
 	}
 
@@ -395,39 +337,31 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	var matrix = new THREE.Matrix4();
 	var object;
 
-	function getTexture(name)
+	function getTexture(uuid)
 	{
-		if(textures[name] === undefined)
+		if(textures[uuid] === undefined)
 		{
-			console.warn("ObjectLoader: Undefined texture", name);
+			console.warn("ObjectLoader: Undefined texture", uuid);
 		}
-
-		return textures[name];
+		return textures[uuid];
 	}
 
-	function getGeometry(name)
+	function getGeometry(uuid)
 	{
-		if(geometries[name] === undefined)
+		if(geometries[uuid] === undefined)
 		{
-			console.warn("ObjectLoader: Undefined geometry", name);
+			console.warn("ObjectLoader: Undefined geometry", uuid);
 		}
-
-		return geometries[name];
+		return geometries[uuid];
 	}
 
-	function getMaterial(name)
+	function getMaterial(uuid)
 	{
-		if(name === undefined)
+		if(materials[uuid] === undefined)
 		{
-			return undefined;
+			console.warn("ObjectLoader: Undefined material", uuid);
 		}
-
-		if(materials[name] === undefined)
-		{
-			console.warn("ObjectLoader: Undefined material", name);
-		}
-
-		return materials[name];
+		return materials[uuid];
 	}
 
 	switch(data.type)

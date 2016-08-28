@@ -17,7 +17,7 @@ FontLoader.prototype.load = function(url, onLoad, onProgress, onError)
 }
 
 //Parse JSON font data
-FontLoader.prototype.parse = function(text)
+FontLoader.prototype.parse = function(json)
 {
-	return new Font(JSON.parse(text));
+	return new Font(json);
 }

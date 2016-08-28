@@ -97,6 +97,11 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 
 	object.matrixAutoUpdate = this.matrixAutoUpdate;
 	object.matrix = this.matrix.toArray();
+	
+	if(JSON.stringify(this.userData) !== "{}")
+	{
+		object.userData = this.userData;
+	}
 
 	//If there is geometry store it
 	if(this.geometry !== undefined)

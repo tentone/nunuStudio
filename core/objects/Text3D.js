@@ -5,7 +5,7 @@ function Text3D(text, material, font)
 {
 	if(font === undefined)
 	{
-		this.font = new FontLoader().parse(App.readFile("data/fonts/montserrat.json"));
+		this.font = new FontLoader().parse(JSON.parse(App.readFile("data/fonts/montserrat.json")));
 	}
 	else
 	{
@@ -65,7 +65,7 @@ Text3D.prototype.toJSON = function(meta)
 	
 	data.object.text = this.text;
 	data.object.font = this.font.data;
-
+	
 	//Restore geometry
 	this.geometry = geometry;
 

@@ -3,26 +3,25 @@
 //Texture constructor
 function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
-	//Image data
-	this.data = "";
-	this.encoding = "";
-
 	//If image is a URL
 	if(typeof image === "string")
 	{
 		var url = image;
 		var image = document.createElement("img");
 		image.src = url;
-		
-		var self = this;
-		image.onload = function()
-		{
-			self.needsUpdate = true;
-		}
 	}
 
 	//Call super constructor
 	THREE.Texture.call(this, image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+
+	//Self pointer
+	var self = this;
+
+	//Update texture after image loads
+	image.onload = function()
+	{
+		self.needsUpdate = true;
+	}
 
 	//Name
 	this.name = "texture";
