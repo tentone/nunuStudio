@@ -30,10 +30,11 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 	var geometries = this.parseGeometries(json.geometries);
 	var images = this.parseImages(json.images);
 	var videos = this.parseVideos(json.videos);
+	var audio = this.parseAudio(json.audio);
 	var fonts = this.parseFonts(json.fonts);
 	var textures = this.parseTextures(json.textures, images, videos);
 	var materials = this.parseMaterials(json.materials, textures);
-	var object = this.parseObject(json.object, geometries, materials, textures, fonts);
+	var object = this.parseObject(json.object, geometries, materials, textures, audio, fonts);
 
 	if(json.animations)
 	{
@@ -277,7 +278,7 @@ ObjectLoader.prototype.parseAnimations = function(json)
 }
 
 //Parse images
-ObjectLoader.prototype.parseImages = function(json, onLoad)
+ObjectLoader.prototype.parseImages = function(json)
 {
 	var loader = new ImageLoader();
 	var images = [];
@@ -294,7 +295,7 @@ ObjectLoader.prototype.parseImages = function(json, onLoad)
 }
 
 //Parse videos
-ObjectLoader.prototype.parseVideos = function(json, onLoad)
+ObjectLoader.prototype.parseVideos = function(json)
 {
 	var loader = new VideoLoader();
 	var videos = [];
@@ -310,8 +311,25 @@ ObjectLoader.prototype.parseVideos = function(json, onLoad)
 	return videos;
 }
 
+//Parse audio
+ObjectLoader.prototype.parseAudio = function(json)
+{
+	var loader = new AudioLoader();
+	var audio = [];
+
+	if(json !== undefined)
+	{
+		for(var i = 0, l = json.length; i < l; i ++)
+		{
+			audio[json[i].uuid] = loader.parse(json[i]);
+		}
+	}
+
+	return audio;
+}
+
 //Parse fonts
-ObjectLoader.prototype.parseFonts = function(json, onLoad)
+ObjectLoader.prototype.parseFonts = function(json)
 {
 	var loader = new FontLoader();
 	var fonts = [];
@@ -349,7 +367,7 @@ ObjectLoader.prototype.parseTextures = function(json, images, videos)
 }
 
 //Parse objects
-ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, fonts)
+ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts)
 {
 	var matrix = new THREE.Matrix4();
 	var object;
@@ -385,20 +403,24 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	{
 		if(fonts[uuid] === undefined)
 		{
-			console.warn("ObjectLoader: Undefined material", uuid);
+			console.warn("ObjectLoader: Undefined font", uuid);
 		}
 		return fonts[uuid];
+	}
+
+	function getAudio(uuid)
+	{
+		if(audio[uuid] === undefined)
+		{
+			console.warn("ObjectLoader: Undefined audio", uuid);
+		}
+		return audio[uuid];
 	}
 
 	switch(data.type)
 	{
 		case "Audio":
-			object = new AudioEmitter();
-			if(object.data !== undefined)
-			{
-				object.enconding = data.enconding;
-				object.data = Base64Binary.decodeArrayBuffer(data.data);
-			}
+			object = new AudioEmitter(getAudio(data.audio));
 			object.autoplay = data.autoplay;
 			object.startTime = data.startTime;
 			object.playbackRate = data.playbackRate;
@@ -716,7 +738,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	{
 		for(var child in data.children)
 		{
-			object.add(this.parseObject(data.children[child], geometries, materials, textures, fonts));
+			object.add(this.parseObject(data.children[child], geometries, materials, textures, audio, fonts));
 		}
 	}
 

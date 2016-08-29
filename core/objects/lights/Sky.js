@@ -15,11 +15,10 @@ function Sky(auto_update, day_time, sun_distance, time)
 	this.hemisphere.groundColor.setHSL(0.1, 1, 0.75);
 	this.hemisphere.position.set(0, 500, 0);
 	this.hemisphere.hidden = true;
-	this.hemisphere.rotationAutoUpdate = false;
 	this.hemisphere.matrixAutoUpdate = false;
 	this.add(this.hemisphere);
 
-	//Directional sun light
+	//Sun light
 	this.sun = new DirectionalLight(Sky.sun_color, 0.3);
 	this.sun.castShadow = true;
 	this.sun.hidden = true;
@@ -56,12 +55,11 @@ function Sky(auto_update, day_time, sun_distance, time)
 	};
 	uniforms.top_color.value.copy(this.hemisphere.color);
 
-	//Sky geometry
-	var geometry = new THREE.SphereBufferGeometry(5000, 16, 16);
+	//Sky
+	var geometry = new THREE.SphereBufferGeometry(1000, 16, 16);
 	var material = new THREE.ShaderMaterial({vertexShader: vertex, fragmentShader: fragment, uniforms: uniforms, side: THREE.BackSide});
 	this.sky = new THREE.Mesh(geometry, material);
 	this.sky.hidden = true;
-	this.sky.rotationAutoUpdate = false;
 	this.sky.matrixAutoUpdate = false;
 	this.add(this.sky);
 
@@ -72,28 +70,10 @@ function Sky(auto_update, day_time, sun_distance, time)
 	};
 
 	//Day time (seconds) and sun distance
-	this.auto_update = true;
-	this.sun_distance = 1000;
-	this.day_time = 20; //seconds
-	this.time = 13;
-
-	//Get parameters
-	if(auto_update !== undefined)
-	{
-		this.auto_update = auto_update;
-	}
-	if(day_time !== undefined)
-	{
-		this.day_time = day_time;
-	}
-	if(sun_distance !== undefined)
-	{
-		this.sun_distance = sun_distance;
-	}
-	if(time !== undefined)
-	{
-		this.time = time;
-	}
+	this.auto_update = (auto_update !== undefined) ? auto_update : true;
+	this.sun_distance = (sun_distance !== undefined) ? sun_distance : 500;
+	this.day_time = (day_time !== undefined) ? day_time : 240; //seconds
+	this.time = (time !== undefined) ? time : 150;
 
 	this.updateSky();
 }

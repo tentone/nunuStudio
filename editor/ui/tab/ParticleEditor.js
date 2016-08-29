@@ -80,7 +80,7 @@ function ParticleEditor(parent)
 	this.particle_runtime = null;
 
 	//Camera
-	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y, 0.1, 10000000);
+	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y);
 	this.camera_rotation = new THREE.Vector2(0, 0.5);
 	this.camera_distance = 5;
 	this.updateCamera();

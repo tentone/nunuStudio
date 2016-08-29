@@ -45,44 +45,67 @@ function TextureBox(parent)
 	this.img.style.top = "0px";
 	this.preview.appendChild(this.img);
 
+	//Video
+	this.video = document.createElement("video");
+	this.video.autoplay = true;
+	this.video.loop = true;
+	this.video.style.pointerEvents = "none";
+	this.video.style.position = "absolute";
+	this.video.style.left = "0px";
+	this.video.style.top = "0px";
+	this.preview.appendChild(this.video);
+
 	//Self pointer
 	var self = this;
 
 	//On drop get file dropped
 	this.preview.ondrop = function(event)
 	{
-		event.preventDefault();
-
 		if(event.dataTransfer.files.length > 0)
 		{
-			//Get first file from event
 			var file = event.dataTransfer.files[0];
 
-			//Check if its a image
+			//Image
 			if(file.type.startsWith("image"))
 			{
-				self.img.src = file.path;
+				self.texture = new Texture(file.path);
 				self.use_texture.setValue(true);
-				self.onchange();
+				if(self.onchange !== null)
+				{
+					self.onchange();
+				}
+				self.updatePreview();
 			}
+			//Video
 			else if(file.type.startsWith("video"))
 			{
-				//TODO <ADD CODE HERE>
+				self.texture = new VideoTexture(new Video(file.path));
+				self.use_texture.setValue(true);
+				if(self.onchange !== null)
+				{
+					self.onchange();
+				}
+				self.updatePreview();
 			}
 		}
+		event.preventDefault();
 	};
 
-	//Onclick select image file
+	//Onclick select image or video file
 	this.preview.onclick = function()
 	{
 		if(self.onchange !== null)
 		{
 			App.chooseFile(function(file)
 			{
-				self.img.src = file;
+				self.texture = new Texture(file);
 				self.use_texture.setValue(true);
-				self.onchange();
-			}, "image/*, video/*");
+				if(self.onchange !== null)
+				{
+					self.onchange();
+				}
+				self.updatePreview();
+			}, "image/*");
 		}
 	};
 
@@ -168,23 +191,24 @@ TextureBox.prototype.destroy = function()
 //Update
 TextureBox.prototype.update = function(){}
 
-//Set image from URL
+//Set texture value
 TextureBox.prototype.setValue = function(texture)
 {
-	this.texture = texture;
-
-	if(texture === null)
+	if(texture === null || texture === undefined)
 	{
-		this.img.src = "";
 		this.use_texture.setValue(false);
+		this.texture = null;
 	}
 	else
 	{
-		this.img.src = texture.image.src;
+		this.texture = texture;
+
 		this.use_texture.setValue(true);
 		this.wrapS.setValue(texture.wrapS);
 		this.wrapT.setValue(texture.wrapT);
 		this.repeat.setValue(texture.repeat.x, texture.repeat.y);
+
+		this.updatePreview();
 	}
 }
 
@@ -195,66 +219,80 @@ TextureBox.prototype.getValue = function()
 	{
 		if(this.texture !== null)
 		{
-			this.texture.image.src = this.img.src;
-		}
-		else if(this.img.src !== "")
-		{
-			this.texture = new Texture(this.img.src);
-		}
-		else
-		{
-			return null;
-		}
+			this.texture.wrapS = this.wrapS.getValue();
+			this.texture.wrapT = this.wrapT.getValue();
+			this.texture.repeat.copy(this.repeat.getValue());
+			this.texture.needsUpdate = true;
 
-		this.texture.wrapS = this.wrapS.getValue();
-		this.texture.wrapT = this.wrapT.getValue();
-		this.texture.repeat.copy(this.repeat.getValue());
-		this.texture.needsUpdate = true;
-		return this.texture;
+			return this.texture;
+		}
 	}
 
 	return null;
 }
 
+//Update texture preview
+TextureBox.prototype.updatePreview = function()
+{
+	var texture = this.texture;
+
+	if(texture instanceof Texture)
+	{
+		this.video.visibility = "hidden";
+		this.video.src = "";
+
+		this.img.visibility = "visible";
+		this.img.src = texture.image.src;
+	}
+	else if(texture instanceof VideoTexture || texture instanceof WebcamTexture)
+	{
+		this.img.visibility = "hidden";
+		this.img.src = "";
+		
+		this.video.visibility = "visible";
+		this.video.src = texture.image.src;
+	}
+}
+
 //Update Interface
 TextureBox.prototype.updateInterface = function()
 {
-	//Fit parent element
 	if(this.fit_parent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
 	}
 
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
 		this.preview.style.visibility = "visible";
-		this.img.style.visibility = "visible";
 		this.alpha.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 		this.preview.style.visibility = "hidden";
-		this.img.style.visibility = "hidden";
 		this.alpha.style.visibility = "hidden";
 	}
 
-	//Update preview elements
+	//Preview
 	this.preview.style.width = this.size.y + "px";
 	this.preview.style.height = this.size.y + "px";
+
 	this.img.width = this.size.y;
 	this.img.height = this.size.y;
+	this.video.width = this.size.y;
+	this.video.height = this.size.y;
 	this.alpha.width = this.size.y;
 	this.alpha.height = this.size.y;
 
-	//Update auxiliar form
+	//Auxiliar form
 	this.form.visible = this.visible;
 	this.form.updateInterface();
 
-	//Update base element
+	//Base element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
