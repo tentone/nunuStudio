@@ -307,7 +307,7 @@ Interface.initialize = function()
 	{
 		App.chooseFile(function(fname)
 		{
-			var audio = new Audio(fname);
+			var audio = new AudioEmitter(new Audio(fname));
 			Editor.addToScene(audio);
 			Editor.updateObjectViews();
 		}, "audio/*");
@@ -623,13 +623,13 @@ Interface.initialize = function()
 	//Prespective camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/prespective.png", function()
 	{
-		Editor.addToScene(new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height, 0.1, 1000000));
+		Editor.addToScene(new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height));
 	}, "Prespective Camera");
 
 	//Orthographic camera
 	Interface.add_camera.addOption(Interface.file_dir + "icons/camera/orthographic.png", function()
 	{
-		Editor.addToScene(new OrthographicCamera(3, 2, 0, 1, 1000000));
+		Editor.addToScene(new OrthographicCamera(3, 2, OrthographicCamera.FIXED_VERTICAL));
 	}, "Othographic Camera");
 
 	//Add script
@@ -687,7 +687,7 @@ Interface.initialize = function()
 	//Audio
 	Interface.add_effects.addOption(Interface.file_dir + "icons/assets/audio.png", function()
 	{
-		Editor.addToScene(new AudioEmitter("data/sample.ogg"));
+		Editor.addToScene(new AudioEmitter(Editor.default_audio));
 	}, "Audio");
 
 	//Physics

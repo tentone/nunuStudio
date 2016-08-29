@@ -31,6 +31,7 @@ include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
 include("lib/base64.min.js");
+include("lib/opentype.min.js");
 
 //Internal modules
 include("core/three/Three.js");
@@ -46,10 +47,10 @@ include("input/Mouse.js");
 
 include("core/webvr/VRControls.js");
 
-include("core/assets/Font.js");
-include("core/assets/Video.js");
-include("core/assets/Audio.js");
-//include("core/assets/Image.js");
+include("core/resources/Font.js");
+include("core/resources/Video.js");
+include("core/resources/Audio.js");
+//include("core/resources/Image.js");
 
 include("core/texture/TextTexture.js");
 include("core/texture/VideoTexture.js");
@@ -59,7 +60,7 @@ include("core/texture/Texture.js");
 include("core/loaders/FontLoader.js");
 include("core/loaders/ImageLoader.js");
 include("core/loaders/VideoLoader.js");
-
+include("core/loaders/AudioLoader.js");
 include("core/loaders/TextureLoader.js");
 include("core/loaders/ObjectLoader.js");
 
@@ -247,10 +248,9 @@ App.chooseFile = function(callback, filter, savemode)
 	chooser.click();
 }
 
-//Read File
+//Read text file
 App.readFile = function(fname, sync, callback)
 {
-	//If sync undefined set true
 	if(sync === undefined)
 	{
 		sync = true;
@@ -259,7 +259,6 @@ App.readFile = function(fname, sync, callback)
 	//Check if node available
 	if(App.fs !== undefined)
 	{
-		//If sync
 		if(sync)
 		{
 			return App.fs.readFileSync(fname, "utf8");
@@ -267,18 +266,13 @@ App.readFile = function(fname, sync, callback)
 		else
 		{
 			App.fs.readFile(fname, "utf8", callback);
-			return null;
 		}
 	}
 	else
 	{
 		var file = new XMLHttpRequest();
 		file.overrideMimeType("text/plain");
-
-		//Request file to server
-		file.open("GET", fname, false);
-
-		//Get file
+		file.open("GET", fname, !sync);
 		file.onreadystatechange = function ()
 		{
 			if(file.status === 200 || file.status === 0)
@@ -289,27 +283,22 @@ App.readFile = function(fname, sync, callback)
 				}
 			}
 		}
-
-		//Send null to ensure that file was received
-		if(sync)
-		{
-			file.send(null);
-		}
-
+		file.send(null);
 		return file.responseText;
 	}
 }
 
-//Read File
+//Read file as arraybuffer
 App.readFileArrayBuffer = function(fname, callback)
 {
 	if(App.fs !== undefined)
 	{
 		var buffer = App.fs.readFileSync(fname, undefined);
-		var array = new ArrayBuffer(buffer.length);
+		var length = buffer.length;
+		var array = new ArrayBuffer(length);
 		var view = new Uint8Array(array);
 
-		for(var i = 0; i < buffer.length; i++)
+		for(var i = 0; i < length; i++)
 		{
 			view[i] = buffer[i];
 		}
@@ -318,23 +307,24 @@ App.readFileArrayBuffer = function(fname, callback)
 	}
 	else
 	{
+		//TODO <ADD CODE HERE>
+	}
+}
+
+App.readFileBase64 = function(fname)
+{
+	if(App.fs !== undefined)
+	{
+		//TODO <ADD CODE HERE>
+	}
+	else
+	{
 		var file = new XMLHttpRequest();
 		file.open("GET", fname, false);
-		file.responseType = "arraybuffer";
-
-		file.onreadystatechange = function ()
-		{
-			if(file.status === 200 || file.status === 0)
-			{
-				if(callback !== undefined)
-				{
-					callback(file.response);
-				}
-			}
-		}
-
+		file.overrideMimeType("text/plain; charset=x-user-defined");
 		file.send(null);
-		return file.response;
+
+		return base64BinaryString(file.response);
 	}
 }
 
@@ -471,31 +461,27 @@ function include(file, onload)
 //Create base64 string from arraybuffer object
 function base64ArrayBuffer(arrayBuffer)
 {
+	var enconding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 	var base64 = "";
-	var encodings = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 	var bytes = new Uint8Array(arrayBuffer);
 	var remainder = bytes.byteLength % 3;
 	var length = bytes.byteLength - remainder;
 
-	//Auxiliar variables
 	var a, b, c, d;
 	var chunk;
 
 	//Main loop deals with bytes in chunks of 3 bytes
 	for(var i = 0; i < length; i += 3)
 	{
-		//Combine the three bytes into a single integer
 		chunk = (bytes[i] << 16) | (bytes[i + 1] << 8) | bytes[i + 2];
 
-		//Use bitmasks to extract 6-bit segments from the triplet
 		a = (chunk & 16515072) >> 18; //16515072 = (2^6 - 1) << 18
 		b = (chunk & 258048) >> 12; //258048 = (2^6 - 1) << 12
 		c = (chunk & 4032) >> 6; //4032 = (2^6 - 1) << 6
 		d = chunk & 63; //63 = 2^6 - 1
 
-		// Convert the raw binary segments to the appropriate ASCII encoding
-		base64 += encodings[a] + encodings[b] + encodings[c] + encodings[d]
+		base64 += enconding[a] + enconding[b] + enconding[c] + enconding[d]
 	}
 
 	//Deal with the remaining bytes and padding
@@ -506,7 +492,7 @@ function base64ArrayBuffer(arrayBuffer)
 		a = (chunk & 252) >> 2; //252 = (2^6 - 1) << 2
 		b = (chunk & 3) << 4; //3 = 2^2 - 1 (Set the 4 LSB to zero)
 
-		base64 += encodings[a] + encodings[b] + '==';
+		base64 += enconding[a] + enconding[b] + "==";
 	}
 	else if(remainder === 2)
 	{
@@ -516,8 +502,64 @@ function base64ArrayBuffer(arrayBuffer)
 		b = (chunk & 1008) >> 4; //1008  = (2^6 - 1) << 4
 		c = (chunk & 15) << 2; //15 = 2^4 - 1 (Set the 2 LSB to zero)
 
-		base64 += encodings[a] + encodings[b] + encodings[c] + '=';
+		base64 += enconding[a] + enconding[b] + enconding[c] + "=";
 	}
 
 	return base64;
+}
+
+//Create base64 string from binary string
+function base64BinaryString(str)
+{
+	var enconding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+	var base64 = "";
+
+	var length = str.length;
+	var c1, c2, c3;
+
+	var i = 0;
+	while(i < length)
+	{
+		c1 = str.charCodeAt(i++) & 0xff;
+		if(i === length)
+		{
+			base64 += enconding.charAt(c1 >> 2);
+			base64 += enconding.charAt((c1 & 0x3) << 4);
+			base64 += "==";
+			break;
+		}
+
+		c2 = str.charCodeAt(i++);
+		if(i === length)
+		{
+			base64 += enconding.charAt(c1 >> 2);
+			base64 += enconding.charAt(((c1 & 0x3)<< 4) | ((c2 & 0xF0) >> 4));
+			base64 += enconding.charAt((c2 & 0xF) << 2);
+			base64 += "=";
+			break;
+		}
+
+		c3 = str.charCodeAt(i++);
+		base64 += enconding.charAt(c1 >> 2);
+		base64 += enconding.charAt(((c1 & 0x3) << 4) | ((c2 & 0xF0) >> 4));
+		base64 += enconding.charAt(((c2 & 0xF) << 2) | ((c3 & 0xC0) >> 6));
+		base64 += enconding.charAt(c3 & 0x3F);
+	}
+	
+	return base64;
+}
+
+//Create array buffer from binary string
+function arrayBufferBinaryString(str)
+{
+	var length = str.length;
+	var buffer = new ArrayBuffer(length);
+	var view = new Uint8Array(buffer);
+
+	for(var i = 0; i < length; i++)
+	{
+		view[i] = str.charCodeAt(i);
+	}
+
+	return buffer;
 }

@@ -23,6 +23,6 @@ VideoLoader.prototype.parse = function(json, onLoad)
 	video.uuid = json.uuid;
 	video.encoding = json.encoding;
 	video.data = json.data;
-
+	
 	return video;
 }

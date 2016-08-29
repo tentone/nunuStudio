@@ -12,7 +12,7 @@ function MaterialRenderer()
 	this.renderer.setSize(this.canvas.width, this.canvas.width);
 
 	//Material camera
-	this.camera = new PerspectiveCamera(90, this.canvas.width/this.canvas.height, 0.1, 5000);
+	this.camera = new PerspectiveCamera(90, this.canvas.width/this.canvas.height);
 
 	//Material preview scene
 	this.scene = new Scene();

@@ -4,22 +4,11 @@ function AudioEmitter(audio)
 {
 	THREE.Audio.call(this, AudioEmitter.listener);
 
-	//Name and type
 	this.name = "audio";
 	this.type = "Audio";
 
-	//Audio data
-	this.enconding = "";
-	this.data = null;
+	this.audio = (audio !== undefined) ? audio : null;
 
-	//Load audio file
-	if(audio !== undefined)
-	{
-		this.enconding = audio.split(".").pop();
-		this.data = App.readFileArrayBuffer(audio);
-	}
-
-	//Playback control
 	this.autoplay = true;
 	this.playbackRate = 1;
 	this.startTime = 0;
@@ -37,11 +26,13 @@ AudioEmitter.prototype.initialize = function()
 {
 	var self = this;
 
-	//Decode audio data
-	THREE.AudioContext.decodeAudioData(this.data, function(buffer)
+	if(this.audio !== null)
 	{
-		self.setBuffer(buffer);
-	});
+		THREE.AudioContext.decodeAudioData(this.audio.data, function(buffer)
+		{
+			self.setBuffer(buffer);
+		});
+	}
 
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -68,10 +59,9 @@ AudioEmitter.prototype.dispose = function()
 AudioEmitter.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
-
-	data.object.enconding = this.enconding;
-	data.object.data = base64ArrayBuffer(this.data);
-
+	var audio = this.audio.toJSON(meta);
+	
+	data.object.audio = audio.uuid;	
 	data.object.autoplay = this.autoplay;
 	data.object.startTime = this.startTime;
 	data.object.playbackRate = this.playbackRate;

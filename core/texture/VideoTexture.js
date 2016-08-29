@@ -7,10 +7,10 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	{
 		this.video = new Video(video);
 	}
- 	else if(video instanceof Video)
- 	{
- 		this.video = video;
- 	}
+	else if(video instanceof Video)
+	{
+		this.video = video;
+	}
 
 	//Call super constructor
 	THREE.VideoTexture.call(this, document.createElement("video"), mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
@@ -46,15 +46,11 @@ VideoTexture.prototype.dispose = function()
 VideoTexture.prototype.toJSON = function(meta)
 {
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+	var video = this.video.toJSON(meta);
 
-	data.video = this.video.uuid;
+	data.video = video.uuid;
 	data.loop = this.loop;
 	data.autoplay = this.autoplay;
-
-	if(meta.videos[this.video.uuid] === undefined)
-	{
-		meta.videos[this.video.uuid] = this.video.toJSON();
-	}
 
 	return data;
 }

@@ -1,18 +1,35 @@
 "use strict";
 
 //Font constructor
-function Font(data)
+function Font(url)
 {
 	this.name = "font";
 	this.uuid = THREE.Math.generateUUID();
 	this.type = "Font";
 
-	if(data !== undefined)
-	{
-		this.name = data.original_font_information.fullName;
-	}
+	this.encoding = ""
+	this.data = null;
 
-	this.data = data;
+	if(url !== undefined)
+	{
+		this.encoding = url.split(".").pop();
+
+		if(this.encoding === "json")
+		{
+			var file = new XMLHttpRequest();
+			file.open("GET", url, false);
+			file.overrideMimeType("text/plain");
+			file.send(null);
+
+			this.data = JSON.parse(file.response);
+			this.name = this.data.original_font_information.fullName;
+		}
+		else
+		{
+			//TODO <TTF Support>
+			console.warn("Font: Font format is not supported", this.encoding);
+		}
+	}
 }
 
 Font.prototype.isFont = true;
@@ -26,9 +43,9 @@ Font.prototype.toJSON = function(meta)
 	}
 
 	var data = {};
-
 	data.name = this.name;
 	data.uuid = this.uuid;
+	data.encoding = this.encoding;
 	data.type = this.type;
 	data.data = this.data;
 	

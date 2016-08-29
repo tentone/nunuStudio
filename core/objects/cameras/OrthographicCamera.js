@@ -3,18 +3,21 @@
 //Orthographic Camera constructor aspect is in x/y mode
 function OrthographicCamera(size, aspect, mode, near, far)
 {
+	if(near === undefined)
+	{
+		near = 0.1;
+	}
+	if(far === undefined)
+	{
+		far = 100000;
+	}
+
 	THREE.OrthographicCamera.call(this, -1.0, 1.0, 1.0, -1.0, near, far);
 
 	this.name = "camera";
-	
 	this.size = size;
 	this.aspect = aspect;
-	this.mode = OrthographicCamera.FIXED_VERTICAL;
-
-	if(mode !== undefined)
-	{
-		this.mode = mode;
-	}
+	this.mode = (mode !== undefined) ? mode : OrthographicCamera.FIXED_VERTICAL;
 
 	this.updateProjectionMatrix();
 }
