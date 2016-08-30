@@ -33,18 +33,6 @@ function DualDivisionResizable(parent)
 	this.div_a.style.overflow = "hidden";
 	this.div_a.style.backgroundColor = Editor.theme.panel_color;
 	this.element.appendChild(this.div_a);
-	
-	//Prevent Drop event
-	this.div_a.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.div_a.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
 
 	//Division B
 	this.div_b = document.createElement("div");
@@ -53,18 +41,6 @@ function DualDivisionResizable(parent)
 	this.div_b.style.overflow = "hidden";
 	this.div_b.style.backgroundColor = Editor.theme.panel_color;
 	this.element.appendChild(this.div_b);
-
-	//Prevent Drop event
-	this.div_b.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.div_b.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
 
 	//Create resize_tab tab
 	this.resize_tab = document.createElement("div");
@@ -108,8 +84,7 @@ function DualDivisionResizable(parent)
 		event.preventDefault();
 	};
 	
-	//Update element
-	this.updateInterface();
+	this.container = Interface;
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -157,7 +132,8 @@ DualDivisionResizable.prototype.update = function()
 			this.tab_position = this.tab_position_min;
 		}
 
-		Interface.updateInterface();
+		this.container.updateInterface();
+
 		return true;
 	}
 	else

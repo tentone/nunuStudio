@@ -27,6 +27,16 @@ function DropdownMenu(parent)
 	this.element.style.alignItems = "center";
 	this.element.style.backgroundColor = Editor.theme.button_color;
 	
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Text
 	this.text = new Text(this.element);
 	this.text.setText("text");
@@ -84,9 +94,6 @@ function DropdownMenu(parent)
 		self.expanded = false;
 		self.updateInterface();
 	};
-
-	//Update element
-	this.updateInterface();
 
 	//Add element to document
 	this.parent.appendChild(this.element);

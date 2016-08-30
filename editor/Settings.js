@@ -7,7 +7,7 @@ function Settings(){}
 Settings.general = {};
 Settings.general.theme = "dark";
 Settings.general.file_preview_size = 70;
-Settings.general.show_stats = true;
+Settings.general.show_stats = false;
 
 //Editor settings
 Settings.editor = {};

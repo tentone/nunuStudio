@@ -41,19 +41,16 @@ function ButtonImage(parent)
 	this.image_scale = new THREE.Vector2(1,1);
 	this.image = "";
 
-	//Click event
-	var self = this;
-
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		self.element.style.backgroundColor = Editor.theme.button_over_color;
+		this.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
-		self.element.style.backgroundColor = "";
+		this.style.backgroundColor = "";
 	};
 
 	//Add element to document
