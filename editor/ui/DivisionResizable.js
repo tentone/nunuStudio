@@ -46,6 +46,8 @@ function DivisionResizable(parent)
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
+
+	//Resize control
 	this.resize_size_max = Number.MAX_VALUE;
 	this.resize_size_min = 0;
 	this.resize_tab_size = 5;
@@ -73,8 +75,7 @@ function DivisionResizable(parent)
 		event.preventDefault();
 	};
 
-	//Update element
-	this.updateInterface();
+	this.container = Interface;
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -148,7 +149,7 @@ DivisionResizable.prototype.update = function()
 		}
 
 		//Update Parent interface
-		Interface.updateInterface();
+		this.container.updateInterface();
 	}
 	else
 	{

@@ -26,13 +26,11 @@ function Button(parent)
 	this.element.style.alignItems = "center";
 	this.element.style.backgroundColor = Editor.theme.button_color;
 
-	//Prevent Drop event
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
 	};
 
-	//Prevent deafault when object dragged over
 	this.element.ondragover = function(event)
 	{
 		event.preventDefault();
@@ -50,22 +48,16 @@ function Button(parent)
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 
-	//Self pointer
-	var self = this;
-
 	//Mouse over and mouse out events
 	this.element.onmouseenter = function()
 	{
-		self.element.style.backgroundColor = Editor.theme.button_over_color;
+		this.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	this.element.onmouseleave = function()
 	{
-		self.element.style.backgroundColor = Editor.theme.button_color;
+		this.style.backgroundColor = Editor.theme.button_color;
 	};
-
-	//Update element
-	this.updateInterface();
 
 	//Add element to document
 	this.parent.appendChild(this.element);

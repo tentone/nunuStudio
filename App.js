@@ -1,7 +1,7 @@
 "use strict";
 
 //WebVR polyfill
-if(navigator.getVRDisplays === undefined)
+/*if(navigator.getVRDisplays === undefined)
 {
 	include("lib/webvr-polyfill.min.js", function()
 	{
@@ -21,7 +21,7 @@ if(navigator.getVRDisplays === undefined)
 			DIRTY_SUBMIT_FRAME_BINDINGS: false
 		}
 	});
-}
+}*/
 
 //External libs
 include("lib/three/three.min.js");

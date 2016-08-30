@@ -23,13 +23,11 @@ function Bar(parent)
 	this.element.style.cursor = "default";
 	this.element.style.backgroundColor = Editor.theme.bar_color;
 
-	//Prevent Drop event
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
 	};
 
-	//Prevent deafault when object dragged over
 	this.element.ondragover = function(event)
 	{
 		event.preventDefault();
