@@ -1,22 +1,13 @@
 "use strict";
 
-//Webcam texture constructor
+//Webcam texture
 function WebcamTexture(mapping, wrapS, wrapT, magFilter, minFilter, type, anisotropy)
 {
-	//Check if webcam API available
-	if(navigator.webkitGetUserMedia || navigator.mediaDevices.getUserMedia)
-	{
-		console.warn("Webcam available");
-	}
-
-	//Create the video element
 	var video = document.createElement("video");
-	video.width = 512;
-	video.height = 512;
 	video.autoplay = true;
 	video.loop = true;
 
-	//Create webcam stream
+	//Chorme
 	if(navigator.webkitGetUserMedia)
 	{
 		navigator.webkitGetUserMedia({video:true}, function(stream)
@@ -25,28 +16,43 @@ function WebcamTexture(mapping, wrapS, wrapT, magFilter, minFilter, type, anisot
 		},
 		function(error)
 		{
-			console.warn("No webcam available");
+			console.warn("WebcamTexture: No webcam available");
 		});		
 	}
+	//Firefox
 	else if(navigator.mediaDevices.getUserMedia)
 	{
-		navigator.mediaDevices.getUserMedia({video:true}, function(stream)
+		navigator.mediaDevices.getUserMedia({video:true}).then(function(stream)
 		{
 			video.src = URL.createObjectURL(stream);
-		},
-		function(error)
+		})
+		.catch(function(error)
 		{
-			console.warn("No webcam available");
+			console.warn("WebcamTexture: No webcam available");
 		});				
 	}
 
-	//Call super constructor
-	THREE.VideoTexture.call(this, video, mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
+	//Super constructor
+	THREE.Texture.call(this, video, mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
+
+	this.generateMipmaps = false;
 
 	//Name
 	this.name = "webcam";
 	this.category = "Webcam";
+
+	//Webcam video update loop
+	var texture = this;
+	function update()
+	{
+		requestAnimationFrame(update);
+		if(video.readyState >= video.HAVE_CURRENT_DATA)
+		{
+			texture.needsUpdate = true;
+		}
+	};
+	update();
 }
 
 //Super prototypes
-WebcamTexture.prototype = Object.create(THREE.VideoTexture.prototype);
+WebcamTexture.prototype = Object.create(THREE.Texture.prototype);

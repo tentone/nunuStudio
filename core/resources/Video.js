@@ -7,9 +7,9 @@ function Video(url)
 	this.uuid = THREE.Math.generateUUID();
 	this.type = "Video";
 
-	this.encoding = "";
-	this.data = null;
 	this.format = "";
+	this.encoding = ""
+	this.data = null;
 
 	if(url !== undefined)
 	{

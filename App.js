@@ -31,7 +31,6 @@ include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
 include("lib/base64.min.js");
-include("lib/opentype.min.js");
 
 //Internal modules
 include("core/three/Three.js");
@@ -50,7 +49,7 @@ include("core/webvr/VRControls.js");
 include("core/resources/Font.js");
 include("core/resources/Video.js");
 include("core/resources/Audio.js");
-//include("core/resources/Image.js");
+include("core/resources/Image.js");
 
 include("core/texture/TextTexture.js");
 include("core/texture/VideoTexture.js");
