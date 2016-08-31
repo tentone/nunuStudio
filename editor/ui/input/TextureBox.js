@@ -68,7 +68,7 @@ function TextureBox(parent)
 			//Image
 			if(file.type.startsWith("image"))
 			{
-				self.texture = new Texture(file.path);
+				self.texture = new Texture(new Image(file.path));
 				self.use_texture.setValue(true);
 				if(self.onchange !== null)
 				{

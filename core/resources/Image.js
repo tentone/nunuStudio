@@ -7,27 +7,36 @@ function Image(url)
 	this.uuid = THREE.Math.generateUUID();
 	this.type = "Image";
 
-	this.encoding = "";
-	this.data = null;
 	this.format = "";
+	this.encoding = ""
+	this.data = null;
 
 	if(url !== undefined)
 	{
-		var file = new XMLHttpRequest();
-		file.open("GET", url, false);
-		file.overrideMimeType("text/plain; charset=x-user-defined");
-		file.send(null);
+		this.enconding = url.split(".").pop();
 
-		this.encoding = url.split(".").pop();
-		this.data = "data:image/" + this.encoding + ";base64," + base64BinaryString(file.response);
-		this.format = "base64";
+		if(this.enconding !== "gif")
+		{
+			this.format = "url";
+			this.data = url;
+		}
+		else
+		{
+			var file = new XMLHttpRequest();
+			file.open("GET", url, false);
+			file.overrideMimeType("text/plain; charset=x-user-defined");
+			file.send(null);
+
+			this.data = "data:image/" + this.encoding + ";base64," + base64BinaryString(file.response);
+			this.format = "base64";
+		}
 	}
 }
 
-//Choose proper enconding for image data
-Image.prototype.compressData = function()
+//Encode image data to jpeg or png
+Image.prototype.encodeData = function()
 {
-	/*var image = document.createElement("img");
+	var image = document.createElement("img");
 	image.src = this.data;
 
 	var canvas = document.createElement("canvas");
@@ -50,12 +59,16 @@ Image.prototype.compressData = function()
 
 	if(transparent)
 	{
-		return canvas.toDataURL("image/png");
+		this.format = "base64";
+		this.encoding = "png";
+		this.data = canvas.toDataURL("image/png");
 	}
 	else
 	{
-		return canvas.toDataURL("image/jpeg", 0.8);
-	}*/
+		this.format = "base64";
+		this.encoding = "jpeg";
+		this.data = canvas.toDataURL("image/jpeg", 0.8);
+	}
 }
 
 //JSON serialization
@@ -64,6 +77,11 @@ Image.prototype.toJSON = function(meta)
 	if(meta.images[this.uuid] !== undefined)
 	{
 		return meta.images[this.uuid];
+	}
+
+	if(this.format === "url")
+	{
+		this.encodeData();
 	}
 
 	var data = {};

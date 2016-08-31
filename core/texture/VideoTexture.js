@@ -12,8 +12,10 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 		this.video = video;
 	}
 
-	//Call super constructor
-	THREE.VideoTexture.call(this, document.createElement("video"), mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
+	//Super constructor
+	THREE.Texture.call(this, document.createElement("video"), mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
+
+	this.generateMipmaps = false;
 
 	//Name
 	this.name = "video";
@@ -27,10 +29,23 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	this.image.autoplay = this.autoplay;
 	this.image.loop = this.loop;
 	this.image.src = this.video.data;
+
+	//Video update loop
+	var texture = this;
+	var video = this.image;
+	function update()
+	{
+		requestAnimationFrame(update);
+		if(video.readyState >= video.HAVE_CURRENT_DATA)
+		{
+			texture.needsUpdate = true;
+		}
+	};
+	update();
 }
 
 //Super prototypes
-VideoTexture.prototype = Object.create(THREE.VideoTexture.prototype);
+VideoTexture.prototype = Object.create(THREE.Texture.prototype);
 
 //Dispose texture
 VideoTexture.prototype.dispose = function()
@@ -39,7 +54,7 @@ VideoTexture.prototype.dispose = function()
 	{
 		this.image.pause();
 	}
-	THREE.VideoTexture.prototype.dispose.call(this);
+	THREE.Texture.prototype.dispose.call(this);
 }
 
 //Create JSON description

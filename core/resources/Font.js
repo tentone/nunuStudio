@@ -7,8 +7,8 @@ function Font(url)
 	this.uuid = THREE.Math.generateUUID();
 	this.type = "Font";
 
-	this.encoding = ""
 	this.format = "";
+	this.encoding = ""
 	this.data = null;
 
 	if(url !== undefined)
