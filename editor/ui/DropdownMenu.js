@@ -179,7 +179,7 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
 
 	if(icon !== undefined)
 	{
-		var image = new Image(button.element);
+		var image = new ImageBox(button.element);
 		image.setImage(icon);
 		image.size.set(12, 12);
 		image.position.set(5, 3);
@@ -204,14 +204,14 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 
 	if(icon !== undefined)
 	{
-		var image = new Image(menu.element);
+		var image = new ImageBox(menu.element);
 		image.setImage(icon);
 		image.size.set(12, 12);
 		image.position.set(5, 3);
 		menu.add(image);
 	}
 
-	var arrow = new Image(menu.element);
+	var arrow = new ImageBox(menu.element);
 	arrow.setImage("editor/files/icons/misc/arrow_right.png");
 	arrow.size.set(12, 12);
 	arrow.position.set(this.options_size.x - 20, 3);

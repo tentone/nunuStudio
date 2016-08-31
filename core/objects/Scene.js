@@ -57,23 +57,19 @@ Scene.prototype.initialize = function()
 		this.camera = camera;
 	}
 
-	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
 	}
 
-	//Clear clock
 	this.clock.getDelta();
 }
 
 //Update scene
 Scene.prototype.update = function()
 {
-	//Update physics
 	this.world.step(this.clock.getDelta());
-	
-	//Update children
+
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();

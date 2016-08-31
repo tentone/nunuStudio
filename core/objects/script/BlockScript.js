@@ -22,14 +22,14 @@ function BlockScript(mode)
 
 BlockScript.prototype = Object.create(THREE.Object3D.prototype);
 
-//BlockScript mode
+//Script execution mode
 BlockScript.INIT = 0;
 BlockScript.LOOP = 1;
 
 //Initialize
 BlockScript.prototype.initialize = function()
 {
-	//Program and scene
+	//Get program and scene
 	var node = this;
 	while(node.parent !== null)
 	{
@@ -44,13 +44,11 @@ BlockScript.prototype.initialize = function()
 		}
 	}
 
-	//Run script
 	if(this.mode === BlockScript.INIT)
 	{
 		this.func();
 	}
 
-	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
@@ -60,20 +58,18 @@ BlockScript.prototype.initialize = function()
 //Update script
 BlockScript.prototype.update = function()
 {
-	//Run script
 	if(this.mode === BlockScript.LOOP)
 	{
 		this.func();
 	}
 
-	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();
 	}
 }
 
-//Set script mode
+//Set script execution mode
 BlockScript.prototype.setMode = function(mode)
 {
 	this.mode = mode;

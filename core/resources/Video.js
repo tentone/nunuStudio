@@ -9,6 +9,7 @@ function Video(url)
 
 	this.encoding = "";
 	this.data = null;
+	this.format = "";
 
 	if(url !== undefined)
 	{
@@ -18,7 +19,8 @@ function Video(url)
 		file.send(null);
 
 		this.encoding = url.split(".").pop();
-		this.data = base64BinaryString(file.response);
+		this.data = "data:video/" + this.encoding + ";base64," + base64BinaryString(file.response);
+		this.format = "base64";
 	}
 }
 
@@ -35,6 +37,7 @@ Video.prototype.toJSON = function(meta)
 	data.uuid = this.uuid;
 	data.type = this.type;
 	data.encoding = this.encoding;
+	data.format = this.format;
 	data.data = this.data;
 
 	meta.videos[this.uuid] = data;

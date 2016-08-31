@@ -108,12 +108,12 @@ function ParticleEditor(parent)
 	//Texture map
 	this.form.addText("Texture");
 	this.form.nextRow();
-	this.texture = new ImageBox(this.form.element);
+	this.texture = new TextureBox(this.form.element);
 	this.texture.size.set(100, 100);
 	this.texture.updateInterface();
 	this.texture.setOnChange(function(file)
 	{
-		self.particle.group.texture = new Texture(file);
+		self.particle.group.texture = self.texture.getValue();
 		setTimeout(function()
 		{
 			self.updateRuntimeParticle();
@@ -504,7 +504,7 @@ ParticleEditor.prototype.attachParticle = function(particle)
 
 	//Group attributes
 	this.name.setText(particle.name);
-	this.texture.setImage(particle.group.texture.image.src);
+	this.texture.setValue(particle.group.texture);
 	this.maxParticleCount.setValue(particle.group.maxParticleCount);
 	this.blending.setValue(particle.group.blending);
 	this.direction.setValue(particle.emitter.direction);

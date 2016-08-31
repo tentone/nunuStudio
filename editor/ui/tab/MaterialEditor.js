@@ -35,12 +35,14 @@ function MaterialEditor(parent)
 
 	//Main container
 	this.main = new DualDivisionResizable(this.element);
+	this.main.setContainer(this);
 	this.main.tab_position = 0.5;
 	this.main.tab_position_min = 0.3;
 	this.main.tab_position_max = 0.7;
 	this.main.updateInterface();
 
 	this.preview = new DualDivisionResizable(this.main.div_a);
+	this.preview.setContainer(this);
 	this.preview.orientation = DualDivisionResizable.VERTICAL;
 	this.preview.tab_position = 0.8;
 	this.preview.tab_position_min = 0.3;
