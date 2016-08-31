@@ -36,7 +36,7 @@ function AboutTab(parent)
 	};
 
 	//Logo
-	this.logo = new Image(this.element);
+	this.logo = new ImageBox(this.element);
 	this.logo.setImage("editor/files/logo.png");
 	this.logo.size.set(390, 65);
 
@@ -83,7 +83,7 @@ function AboutTab(parent)
 	this.builton.setTextSize(20);
 
 	//Made with
-	this.madewith = new Image(this.element);
+	this.madewith = new ImageBox(this.element);
 	this.madewith.setImage("editor/files/logo/madewith.png");
 	this.madewith.size.set(540, 60);
 	this.madewith.position.set(0, 0);
@@ -108,7 +108,6 @@ AboutTab.prototype.updateMetadata = function(container){}
 AboutTab.prototype.activate = function()
 {
 	Editor.setState(Editor.STATE_IDLE);
-	Editor.resetEditingFlags();
 }
 
 //Remove element

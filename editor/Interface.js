@@ -776,7 +776,7 @@ Interface.initialize = function()
 	Interface.top_bar.size.y = 25 ;
 
 	//Editor Logo
-	Interface.image = new Image();
+	Interface.image = new ImageBox();
 	Interface.image.setImage("editor/files/logo.png");
 	Interface.image.size.set(108, 18);
 	Interface.image.updateInterface();
@@ -857,15 +857,15 @@ Interface.initialize = function()
 		}, "", true);
 	}, Interface.file_dir + "icons/platform/windows.png");
 
-	/*publish.addOption("Linux", function()
+	publish.addOption("Linux", function()
 	{
-		//TODO <ADD CODE HERE>
-	}, Interface.file_dir + "icons/platform/linux.png");*/
+		alert("For linux export NWJS for Linux is required");
+	}, Interface.file_dir + "icons/platform/linux.png");
 
-	/*publish.addOption("OSX", function()
+	publish.addOption("macOS", function()
 	{
-		//TODO <ADD CODE HERE>
-	}, Interface.file_dir + "icons/platform/osx.png");*/
+		alert("For macOS export NWJS for macOS is required");
+	}, Interface.file_dir + "icons/platform/osx.png");
 
 	Interface.file.addOption("Exit", function()
 	{
@@ -1017,7 +1017,6 @@ Interface.updateInterface = function()
 	Interface.explorer_resizable.updateInterface();
 
 	Interface.tree_view.updateInterface();
-	Interface.panel.updateInterface();
 
 	//---------------------------------Asset Explorer----------------------------------
 	Interface.asset_explorer_div.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;

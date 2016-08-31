@@ -362,7 +362,7 @@ ObjectLoader.prototype.parseTextures = function(json, images, videos)
 			textures[texture.uuid] = texture;
 		}
 	}
-
+	
 	return textures;
 }
 

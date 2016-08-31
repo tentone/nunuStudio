@@ -26,7 +26,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	//Video
 	this.image.autoplay = this.autoplay;
 	this.image.loop = this.loop;
-	this.image.src = "data:video/" + this.video.encoding + ";base64," + this.video.data;
+	this.image.src = this.video.data;
 }
 
 //Super prototypes

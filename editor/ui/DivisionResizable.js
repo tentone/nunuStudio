@@ -24,13 +24,11 @@ function DivisionResizable(parent)
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panel_color;
 
-	//Prevent Drop event
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
 	};
 
-	//Prevent deafault when object dragged over
 	this.element.ondragover = function(event)
 	{
 		event.preventDefault();
@@ -41,6 +39,16 @@ function DivisionResizable(parent)
 	this.resize_tab.style.position = "absolute";
 	this.resize_tab.style.cursor = "e-resize";
 	this.resize_tab.style.backgroundColor = Editor.theme.resize_tab_color;
+
+	this.resize_tab.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	this.resize_tab.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
@@ -62,22 +70,9 @@ function DivisionResizable(parent)
 	{
 		self.resizing = true;
 	};
-	
-	//Prevent Drop event
-	this.resize_tab.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.resize_tab.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
 
 	this.container = Interface;
 
-	//Add element to document
 	this.parent.appendChild(this.element);
 	this.parent.appendChild(this.resize_tab);
 }
@@ -90,6 +85,12 @@ DivisionResizable.LEFT = 0;
 DivisionResizable.RIGHT = 1;
 DivisionResizable.TOP = 2;
 DivisionResizable.BOTTOM = 3;
+
+//Set container
+DivisionResizable.prototype.setContainer = function(container)
+{
+	this.container = container;
+}
 
 //Remove element
 DivisionResizable.prototype.destroy = function()
@@ -105,55 +106,58 @@ DivisionResizable.prototype.destroy = function()
 //Update status
 DivisionResizable.prototype.update = function()
 {
-	if(this.resizing && Mouse.buttonPressed(Mouse.LEFT))
+	if(this.resizing)
 	{
-		if(this.resizable_side === DivisionResizable.LEFT)
-		{	
-			this.size.x -= Mouse.delta.x;
-		}
-		else if(this.resizable_side === DivisionResizable.RIGHT)
+		if(Mouse.buttonPressed(Mouse.LEFT))
 		{
-			this.size.x += Mouse.delta.x;
-		}
-		else if(this.resizable_side === DivisionResizable.TOP)
-		{
-			this.size.y -= Mouse.delta.y;
-		}
-		else if(this.resizable_side === DivisionResizable.BOTTOM)
-		{
-			this.size.y += Mouse.delta.y;
-		}
+			if(this.resizable_side === DivisionResizable.LEFT)
+			{	
+				this.size.x -= Mouse.delta.x;
+			}
+			else if(this.resizable_side === DivisionResizable.RIGHT)
+			{
+				this.size.x += Mouse.delta.x;
+			}
+			else if(this.resizable_side === DivisionResizable.TOP)
+			{
+				this.size.y -= Mouse.delta.y;
+			}
+			else if(this.resizable_side === DivisionResizable.BOTTOM)
+			{
+				this.size.y += Mouse.delta.y;
+			}
 
-		//Limit Size
-		if(this.resizable_side === DivisionResizable.BOTTOM || this.resizable_side === DivisionResizable.TOP)
-		{
-			if(this.size.y < (this.resize_tab_size + this.resize_size_min))
+			//Limit Size
+			if(this.resizable_side === DivisionResizable.BOTTOM || this.resizable_side === DivisionResizable.TOP)
 			{
-				this.size.y = this.resize_tab_size + this.resize_size_min;
+				if(this.size.y < (this.resize_tab_size + this.resize_size_min))
+				{
+					this.size.y = this.resize_tab_size + this.resize_size_min;
+				}
+				else if(this.size.y > this.resize_size_max)
+				{
+					this.size.y = this.resize_size_max;
+				}
 			}
-			else if(this.size.y > this.resize_size_max)
+			else
 			{
-				this.size.y = this.resize_size_max;
+				if(this.size.x < (this.resize_tab_size + this.resize_size_min))
+				{
+					this.size.x = (this.resize_tab_size + this.resize_size_min);
+				}
+				else if(this.size.x > this.resize_size_max)
+				{
+					this.size.x = this.resize_size_max;
+				}	
 			}
+
+			//Update Parent interface
+			this.container.updateInterface();
 		}
 		else
 		{
-			if(this.size.x < (this.resize_tab_size + this.resize_size_min))
-			{
-				this.size.x = (this.resize_tab_size + this.resize_size_min);
-			}
-			else if(this.size.x > this.resize_size_max)
-			{
-				this.size.x = this.resize_size_max;
-			}	
+			this.resizing = false;
 		}
-
-		//Update Parent interface
-		this.container.updateInterface();
-	}
-	else
-	{
-		this.resizing = false;
 	}
 }
 

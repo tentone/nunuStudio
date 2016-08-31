@@ -21,6 +21,21 @@ function BasicMaterialEditor(parent)
 	this.form.add(this.skinning);
 	this.form.nextRow();
 
+	//Morph targets
+	this.morphTargets = new CheckBox(this.preview.div_b);
+	this.morphTargets.setText("Morph targets");
+	this.morphTargets.size.set(200, 15);
+	this.morphTargets.updateInterface();
+	this.morphTargets.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.morphTargets = self.morphTargets.getValue();
+		}
+	});
+	this.form.add(this.morphTargets);
+	this.form.nextRow();
+
 	//Wireframe
 	this.wireframe = new CheckBox(this.form.element);
 	this.wireframe.setText("Wireframe");
@@ -90,6 +105,7 @@ BasicMaterialEditor.prototype.attachMaterial = function(material, material_file)
 	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
 
 	this.skinning.setValue(material.skinning);
+	this.morphTargets.setValue(material.morphTargets);
 	this.wireframe.setValue(material.wireframe);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.map.setValue(material.map);

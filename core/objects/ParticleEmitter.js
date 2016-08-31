@@ -70,7 +70,6 @@ function ParticleEmitter(group, emitter)
 		});
 	}
 
-	//Add emitter to group
 	this.group.addEmitter(this.emitter);
 }
 
@@ -79,30 +78,28 @@ ParticleEmitter.prototype = Object.create(THREE.Object3D.prototype);
 //Initialize particle system
 ParticleEmitter.prototype.initialize = function()
 {
-	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
 	}
 
-	//Add group mesh to particle emitter object
+	this.clock.getDelta();
+	
 	this.add(this.group.mesh);
 }
 
-//Update State
+//Update particle emitter
 ParticleEmitter.prototype.update = function()
 {
-	//Update group
 	this.group.tick(this.clock.getDelta());
 
-	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();
 	}
 }
 
-//Dipose particle emitter
+//Dispose particle emitter
 ParticleEmitter.prototype.dispose = function()
 {
 	for(var i = 0; i < this.children.length; i++)
@@ -111,22 +108,19 @@ ParticleEmitter.prototype.dispose = function()
 	}
 }
 
-//Create JSON for particle emitter
+//JSON serializer
 ParticleEmitter.prototype.toJSON = function(meta)
 {
-	//Self pointer
-	var self = this;
-
-	//Super toJSON
+	var texture = this.group.texture;
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
-		self.group.texture.toJSON(meta);
+		texture = texture.toJSON(meta);
 	});
 
 	//Group attributes
 	data.object.group = {};
 	data.object.group.texture = {};
-	data.object.group.texture.value = this.group.texture.uuid;
+	data.object.group.texture.value = texture.uuid;
 	data.object.group.textureFrames = this.group.textureFrames;
 	data.object.group.textureFrameCount = this.group.textureFrameCount
 	data.object.group.textureLoop = this.group.textureLoop;

@@ -30,7 +30,7 @@ function Script(code, mode)
 
 Script.prototype = Object.create(THREE.Object3D.prototype);
 
-//Script mode
+//Script execution mode
 Script.INIT = 0;
 Script.LOOP = 1;
 
@@ -52,13 +52,11 @@ Script.prototype.initialize = function()
 		}
 	}
 
-	//Run script
 	if(this.mode === Script.INIT)
 	{
 		this.func();
 	}
 
-	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
@@ -68,13 +66,11 @@ Script.prototype.initialize = function()
 //Update Script
 Script.prototype.update = function()
 {
-	//Run script
 	if(this.mode === Script.LOOP)
 	{
 		this.func();
 	}
 
-	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();
@@ -92,7 +88,7 @@ Script.prototype.setCode = function(code)
 	catch(e){}
 }
 
-//Set script mode
+//Set script execution mode
 Script.prototype.setMode = function(mode)
 {
 	this.mode = mode;

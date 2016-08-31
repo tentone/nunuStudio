@@ -29,14 +29,14 @@ function TreeElement(container)
 	this.element.style.backgroundColor = Editor.theme.button_light_color;
 
 	//Arrow
-	this.arrow = new Image(this.element);
+	this.arrow = new ImageBox(this.element);
 	this.arrow.size.set(15, 15);
 	this.arrow.position.set(5, 3);
 	this.arrow.setImage("editor/files/icons/misc/arrow_down.png");
 	this.arrow.updateInterface();
 
 	//Icon
-	this.icon = new Image(this.element);
+	this.icon = new ImageBox(this.element);
 	this.icon.size.set(15, 15);
 	this.icon.position.set(25, 3);
 	this.icon.updateInterface();

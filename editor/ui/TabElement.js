@@ -81,7 +81,7 @@ function TabElement(parent, name, icon, closeable, container, index)
 	};
 
 	//Icon
-	this.icon = new Image(this.button.element);
+	this.icon = new ImageBox(this.button.element);
 	this.icon.size.set(15, 15);
 	this.icon.position.set(7, 7);
 	this.icon.updateInterface();

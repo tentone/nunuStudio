@@ -58,9 +58,12 @@ AudioEmitter.prototype.dispose = function()
 //Create JSON description
 AudioEmitter.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
-	var audio = this.audio.toJSON(meta);
-	
+	var audio = this.audio;
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	{
+		audio = audio.toJSON(meta);
+	});
+
 	data.object.audio = audio.uuid;	
 	data.object.autoplay = this.autoplay;
 	data.object.startTime = this.startTime;

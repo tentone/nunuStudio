@@ -97,6 +97,12 @@ DualDivisionResizable.id = 0;
 DualDivisionResizable.HORIZONTAL = 0;
 DualDivisionResizable.VERTICAL = 1;
 
+//Set container
+DualDivisionResizable.prototype.setContainer = function(container)
+{
+	this.container = container;
+}
+
 //Remove element
 DualDivisionResizable.prototype.destroy = function()
 {
@@ -111,35 +117,35 @@ DualDivisionResizable.prototype.destroy = function()
 //Update status
 DualDivisionResizable.prototype.update = function()
 {
-	if(this.resizing && Mouse.buttonPressed(Mouse.LEFT))
+	if(this.resizing)
 	{
-		if(this.orientation == DualDivisionResizable.HORIZONTAL)
-		{	
-			this.tab_position += Mouse.delta.x/this.size.x;
-		}
-		else if(this.orientation == DualDivisionResizable.VERTICAL)
+		if(Mouse.buttonPressed(Mouse.LEFT))
 		{
-			this.tab_position += Mouse.delta.y/this.size.y;
-		}
+			if(this.orientation == DualDivisionResizable.HORIZONTAL)
+			{	
+				this.tab_position += Mouse.delta.x/this.size.x;
+			}
+			else if(this.orientation == DualDivisionResizable.VERTICAL)
+			{
+				this.tab_position += Mouse.delta.y/this.size.y;
+			}
 
-		//Limit tab position
-		if(this.tab_position > this.tab_position_max)
+			//Limit tab position
+			if(this.tab_position > this.tab_position_max)
+			{
+				this.tab_position = this.tab_position_max;
+			}
+			else if(this.tab_position < this.tab_position_min)
+			{
+				this.tab_position = this.tab_position_min;
+			}
+
+			this.container.updateInterface();
+		}
+		else
 		{
-			this.tab_position = this.tab_position_max;
+			this.resizing = false;
 		}
-		else if(this.tab_position < this.tab_position_min)
-		{
-			this.tab_position = this.tab_position_min;
-		}
-
-		this.container.updateInterface();
-
-		return true;
-	}
-	else
-	{
-		this.resizing = false;
-		return false;
 	}
 }
 
@@ -211,6 +217,5 @@ DualDivisionResizable.prototype.updateInterface = function()
 		this.resize_tab.style.left = "0px";
 		this.resize_tab.style.width = this.size.x + "px";
 		this.resize_tab.style.height = this.tab_size + "px";
-
 	}
 }
