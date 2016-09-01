@@ -507,9 +507,9 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.lock_pointer = data.lock_pointer;
 			}
-			if(data.initial_scene !== undefined)
+			if(data.default_scene !== undefined)
 			{
-				object.initial_scene = data.initial_scene;
+				object.default_scene = data.default_scene;
 			}
 			break;
 

@@ -56,9 +56,12 @@ ObjectUtils.getTextures = function(obj, textures)
 	//Auxiliar function to add textures
 	function add(texture)
 	{
-		if(textures[texture.uuid] === undefined)
+		if(texture !== null && texture !== undefined)
 		{
-			textures[texture.uuid] = texture;
+			if(textures[texture.uuid] === undefined)
+			{
+				textures[texture.uuid] = texture;
+			}
 		}
 	}
 
@@ -76,8 +79,15 @@ ObjectUtils.getTextures = function(obj, textures)
 		if(child.material !== undefined)
 		{
 			var material = child.material;
-			
-			//TODO <ADD CODE HERE>
+			add(material.map);
+			add(material.bumpMap);
+			add(material.normalMap);
+			add(material.displacementMap);
+			add(material.specularMap);
+			add(material.emissiveMap);
+			add(material.alphaMap);
+			add(material.roughnessMap);
+			add(material.metalnessMap);
 		}
 		else if(child instanceof ParticleEmitter)
 		{

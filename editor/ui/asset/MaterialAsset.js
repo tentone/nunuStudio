@@ -17,16 +17,14 @@ function MaterialAsset(parent)
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		self.element.style.cursor = "pointer";
-		self.element.style.backgroundColor = Editor.theme.button_over_color;
+		this.style.backgroundColor = Editor.theme.button_over_color;
 		self.highlightMaterial();
 	};
 
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
-		self.element.style.cursor = "default";
-		self.element.style.backgroundColor = "";
+		this.style.backgroundColor = "";
 		self.restoreMaterial();
 	};
 
@@ -195,18 +193,6 @@ function MaterialAsset(parent)
 		//Try to remove material from drag buffer
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = DragBuffer.popDragElement(uuid);
-	};
-
-	//Drop event
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
 	};
 }
 

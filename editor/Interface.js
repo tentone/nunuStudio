@@ -763,21 +763,25 @@ Interface.initialize = function()
 	Interface.file.size.set(120, Interface.top_bar.size.y);
 	Interface.file.position.set(0,0);
 
+	//New project
 	Interface.file.addOption("New Project", function()
 	{
 		Interface.newProgram();
 	}, Interface.file_dir + "icons/misc/new.png");
 
+	//Save project
 	Interface.file.addOption("Save Project", function()
 	{
 		Interface.saveProgram();
 	}, Interface.file_dir + "icons/misc/save.png");
 
+	//Load Project
 	Interface.file.addOption("Load Project", function()
 	{
 		Interface.loadProgram();
 	});
 
+	//Settings
 	Interface.file.addOption("Settings", function()
 	{
 		//Check if there is already a settings tab
@@ -815,7 +819,7 @@ Interface.initialize = function()
 			{
 				alert("Error exporting project (" + e + ")");
 			}
-		}, "", true);
+		}, "", Editor.program.name);
 	}, Interface.file_dir + "icons/platform/web.png");
 
 	publish.addOption("Windows", function()
@@ -830,7 +834,7 @@ Interface.initialize = function()
 			{
 				alert("Error exporting project (" + e + ")");
 			}
-		}, "", true);
+		}, "", Editor.program.name);
 	}, Interface.file_dir + "icons/platform/windows.png");
 
 	publish.addOption("Linux", function()

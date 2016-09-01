@@ -62,6 +62,7 @@ include("editor/ui/AssetExplorer.js");
 
 include("editor/ui/asset/Asset.js");
 include("editor/ui/asset/MaterialAsset.js");
+include("editor/ui/asset/TextureAsset.js");
 
 include("editor/files/style/editor.css");
 include("editor/ui/theme/Theme.js");
@@ -142,7 +143,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.7 Alpha";
-Editor.TIMESTAMP = "201609010238";
+Editor.TIMESTAMP = "201609011837";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -196,13 +197,7 @@ Editor.initialize = function(canvas)
 	Editor.material_renderer = new MaterialRenderer();
 
 	//Default resources
-	Editor.default_image = new Image("data/sample.png");
-	Editor.default_font = new Font("data/fonts/montserrat.json");
-	Editor.default_audio = new Audio("data/sample.ogg");
-	Editor.default_material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
-	Editor.default_material.name = "default";
-	Editor.default_sprite_material = new THREE.SpriteMaterial({map: new Texture(Editor.default_image), color: 0xffffff});
-	Editor.default_sprite_material.name = "default";
+	Editor.createDefaultResouces();
 
 	//Initialize User Interface
 	Interface.initialize();
@@ -764,7 +759,7 @@ Editor.updateObjectViews = function()
 	Editor.updateObjectPanel();
 	Editor.updateTabsData();
 	Editor.selectObjectHelper();
-	setTimeout(Editor.updateAssetExplorer, 50);
+	Editor.updateAssetExplorer();
 }
 
 //Update tab names to match objects actual info
@@ -785,14 +780,21 @@ Editor.updateAssetExplorer = function()
 	//Clean asset explorer
 	Interface.asset_explorer.clear();
 	
-	//Get material list
+	//Materials
 	var materials = ObjectUtils.getMaterials(Editor.program, Editor.program.materials);
-
-	//Add materials to asset explorer
 	for(var i in materials)
 	{
 		var file = new MaterialAsset(Interface.asset_explorer.element);
 		file.setMaterial(materials[i]);
+		Interface.asset_explorer.add(file);
+	}
+
+	//Textures
+	var textures = ObjectUtils.getTextures(Editor.program, Editor.program.textures);
+	for(var i in textures)
+	{
+		var file = new TextureAsset(Interface.asset_explorer.element);
+		file.setTexture(textures[i]);
 		Interface.asset_explorer.add(file);
 	}
 
@@ -806,6 +808,19 @@ Editor.updateObjectPanel = function()
 	{
 		Interface.panel.updatePanel();
 	}
+}
+
+//Create default resouces to be used when creating new objects
+Editor.createDefaultResouces = function()
+{
+	Editor.default_image = new Image("data/sample.png");
+	Editor.default_font = new Font("data/fonts/montserrat.json");
+	Editor.default_audio = new Audio("data/sample.ogg");
+	Editor.default_texture = new Texture(Editor.default_image);
+	Editor.default_material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
+	Editor.default_material.name = "default";
+	Editor.default_sprite_material = new THREE.SpriteMaterial({map: Editor.default_texture, color: 0xffffff});
+	Editor.default_sprite_material.name = "default";
 }
 
 //Add object to actual scene
@@ -896,6 +911,12 @@ Editor.selectObjectHelper = function()
 		{
 			Editor.object_helper.add(new ObjectIconHelper(Editor.selected_object, ObjectIcons.get(Editor.selected_object.type)));
 		}
+		//Animated Mesh
+		else if(Editor.selected_object instanceof THREE.SkinnedMesh)
+		{
+			Editor.object_helper.add(new THREE.BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
+			Editor.object_helper.add(new THREE.SkeletonHelper(Editor.selected_object));
+		}
 		//Object 3D
 		else if(Editor.selected_object instanceof THREE.Object3D)
 		{
@@ -958,6 +979,9 @@ Editor.resetEditingFlags = function()
 //Craete new Program
 Editor.createNewProgram = function()
 {
+	//Reset default resources
+	Editor.createDefaultResouces();
+
 	//Create new program
 	Editor.program = new Program();
 	Editor.program.addDefaultScene(Editor.default_material);
