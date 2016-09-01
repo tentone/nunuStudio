@@ -1,5 +1,6 @@
 "use strict";
 
+//Based on code from cannonjs debug shape renderer
 function PhysicsObjectHelper(obj)
 {
 	THREE.Object3D.call(this);
@@ -9,10 +10,10 @@ function PhysicsObjectHelper(obj)
 	this.meshes = [];
 
 	this.material = new THREE.MeshBasicMaterial({color: 0x00ff00, wireframe: true});
-	this.sphere_geometry = new THREE.SphereBufferGeometry(1, 12, 12);
-	this.box_geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-	this.plane_geometry = new THREE.PlaneBufferGeometry(50, 50, 10, 10);
-	this.cylinder_geometry = new THREE.CylinderBufferGeometry(1, 1, 10, 10);
+	this.sphere = new THREE.SphereBufferGeometry(1, 12, 12);
+	this.box = new THREE.BoxBufferGeometry(1, 1, 1);
+	this.plane = new THREE.PlaneBufferGeometry(100, 100, 20, 20);
+	this.cylinder = new THREE.CylinderBufferGeometry(1, 1, 10, 10);
 
 	this.tmpVec0 = new CANNON.Vec3();
 	this.tmpVec1 = new CANNON.Vec3();
@@ -113,19 +114,19 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 	switch(shape.type)
 	{
 		case CANNON.Shape.types.SPHERE:
-			mesh = new THREE.Mesh(this.sphere_geometry, material);
+			mesh = new THREE.Mesh(this.sphere, material);
 			break;
 
 		case CANNON.Shape.types.PARTICLE:
-			mesh = new THREE.Mesh(this.sphere_geometry, material);
+			mesh = new THREE.Mesh(this.sphere, material);
 			break;
 
 		case CANNON.Shape.types.BOX:
-			mesh = new THREE.Mesh(this.box_geometry, material);
+			mesh = new THREE.Mesh(this.box, material);
 			break;
 
 		case CANNON.Shape.types.PLANE:
-			mesh = new THREE.Mesh(this.plane_geometry, material);
+			mesh = new THREE.Mesh(this.plane, material);
 			break;
 
 		case CANNON.Shape.types.CONVEXPOLYHEDRON:
@@ -164,7 +165,7 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 			var v0 = this.tmpVec0;
 			var v1 = this.tmpVec1;
 			var v2 = this.tmpVec2;
-			for (var i = 0; i < shape.indices.length / 3; i++)
+			for(var i = 0; i < shape.indices.length / 3; i++)
 			{
 				shape.getTriangleVertices(i, v0, v1, v2);
 				geometry.vertices.push(new THREE.Vector3(v0.x, v0.y, v0.z), new THREE.Vector3(v1.x, v1.y, v1.z), new THREE.Vector3(v2.x, v2.y, v2.z));

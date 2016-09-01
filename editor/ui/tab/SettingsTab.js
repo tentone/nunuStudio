@@ -240,7 +240,7 @@ function SettingsTab(parent)
 	this.code_form.nextRow();
 
 	//Get codemirror themes available
-	var files = App.getFilesDirectory("lib/codemirror/theme/");
+	var files = FileSystem.getFilesDirectory("lib/codemirror/theme/");
 	for(var i = 0; i < files.length; i++)
 	{
 		var theme = files[i].replace(".css", "");

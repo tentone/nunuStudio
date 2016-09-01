@@ -210,7 +210,7 @@ Main.resize = function()
 Main.loadProgram = function(fname)
 {
 	var loader = new ObjectLoader();
-	var data = JSON.parse(App.readFile(fname));
+	var data = JSON.parse(FileSystem.readFile(fname));
 	return loader.parse(data);
 }
 
