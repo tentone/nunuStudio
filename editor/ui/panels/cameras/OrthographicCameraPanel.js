@@ -104,6 +104,41 @@ function OrthographicCameraPanel(parent)
 		}
 	});
 	this.form.add(this.default);
+	this.form.nextRow();
+	
+	//Distance
+	this.form.addText("Distance");
+	this.form.nextRow();
+
+	//Near
+	this.form.addText("Near");
+	this.near = new NumberBox(this.form.element);
+	this.near.size.set(60, 18);
+	this.near.setStep(0.1);
+	this.near.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.near.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.near = self.near.getValue();
+		}
+	});
+	this.form.add(this.near);
+
+	//Far
+	this.form.addText("Far");
+	this.far = new NumberBox(this.form.element);
+	this.far.size.set(80, 18);
+	this.far.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.far.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.far = self.far.getValue();
+		}
+	});
+	this.form.add(this.far);
+	this.form.nextRow();
 
 	//Update form
 	this.form.updateInterface();
@@ -132,5 +167,8 @@ OrthographicCameraPanel.prototype.updatePanel = function()
 		{
 			this.default.setValue(false);
 		}
+
+		this.near.setValue(this.obj.near);
+		this.far.setValue(this.obj.far);
 	}
 }

@@ -33,11 +33,11 @@ function ScenePanel(parent)
 			var program = self.obj.parent;
 			if(self.default.getValue())
 			{
-				program.initial_scene = self.obj.uuid;
+				program.default_scene = self.obj.uuid;
 			}
 			else
 			{
-				program.initial_scene = null;
+				program.default_scene = null;
 			}
 		}
 	});
@@ -205,7 +205,7 @@ ScenePanel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
-		this.default.setValue(this.obj.uuid === this.obj.parent.initial_scene);
+		this.default.setValue(this.obj.uuid === this.obj.parent.default_scene);
 		this.fog.setValue(this.obj.fog_mode);
 		this.fog_linear_color.setValueHex(this.obj.fog_color);
 		this.fog_exponential_color.setValueHex(this.obj.fog_color);

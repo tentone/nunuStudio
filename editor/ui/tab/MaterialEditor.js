@@ -413,7 +413,8 @@ MaterialEditor.prototype.update = function()
 		//If needs update file metadata
 		if(this.material.needsUpdate)
 		{
-			this.material_file.updateMetadata();
+			//this.material_file.updateMetadata();
+			Editor.updateAssetExplorer();
 			this.material.needsUpdate = true;
 		}
 

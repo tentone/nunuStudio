@@ -91,7 +91,7 @@ function PerspectiveCameraPanel(parent)
 	this.form.add(this.default);
 	this.form.nextRow();
 
-	//Rendering distance
+	//Distance
 	this.form.addText("Distance");
 	this.form.nextRow();
 
@@ -109,7 +109,6 @@ function PerspectiveCameraPanel(parent)
 		}
 	});
 	this.form.add(this.near);
-	this.form.nextRow();
 
 	//Far
 	this.form.addText("Far");

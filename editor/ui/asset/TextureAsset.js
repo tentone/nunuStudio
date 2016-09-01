@@ -71,6 +71,7 @@ TextureAsset.prototype.updateMetadata = function()
 {
 	if(this.texture !== null)
 	{
-		//TODO <ADD CODE HERE>
+		this.img.src = this.texture.image.src;
+		this.setText(this.texture.name);
 	}
 }

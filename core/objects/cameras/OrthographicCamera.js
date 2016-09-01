@@ -5,7 +5,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 {
 	if(near === undefined)
 	{
-		near = 0.1;
+		near = 0;
 	}
 	if(far === undefined)
 	{

@@ -220,24 +220,25 @@ App.resize = function()
 	App.main.resize();
 }
 
-//Open file chooser dialog receives callback function, file filter, savemode and is its directory only
-App.chooseFile = function(callback, filter, savemode)
+//Open file chooser dialog receives callback function, file filter, saveas
+App.chooseFile = function(callback, filter, saveas)
 {
-	//Create file chooser element
 	var chooser = document.createElement("input");
 	chooser.type = "file";
+	chooser.accept = (filter !== undefined) ? filter : "";
 
-	if(filter !== undefined)
+	if(saveas !== undefined)
 	{
-		chooser.accept = filter;
-	}
-	
-	if(savemode === true)
-	{
-		chooser.nwsaveas = "file";
+		if(saveas !== true)
+		{
+			chooser.nwsaveas = saveas;
+		}
+		else
+		{
+			chooser.nwsaveas = "file";
+		}
 	}
 
-	//Create onchange event
 	chooser.onchange = function(event)
 	{
 		if(callback !== undefined)
@@ -246,7 +247,6 @@ App.chooseFile = function(callback, filter, savemode)
 		}
 	};
 
-	//Force trigger onchange event
 	chooser.click();
 }
 

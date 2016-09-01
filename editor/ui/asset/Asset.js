@@ -19,6 +19,17 @@ function Asset(parent)
 	//Create element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
+	this.element.style.cursor = "pointer";
+	
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
 
 	//Image
 	this.img = document.createElement("img");
@@ -28,7 +39,6 @@ function Asset(parent)
 
 	//Text
 	this.text = new Text(this.element);
-	this.text.updateInterface();
 
 	//Element atributes
 	this.size = new THREE.Vector2(0, 0);
@@ -41,27 +51,13 @@ function Asset(parent)
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		self.element.style.cursor = "pointer";
-		self.element.style.backgroundColor = Editor.theme.button_over_color;
+		this.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
-		self.element.style.cursor = "default";
-		self.element.style.backgroundColor = "";
-	};
-
-	//Drop event
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
+		this.style.backgroundColor = "";
 	};
 
 	//Add element to document

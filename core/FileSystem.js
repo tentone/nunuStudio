@@ -75,7 +75,7 @@ FileSystem.readFileBase64 = function(fname)
 {
 	if(App.fs !== undefined)
 	{
-		var buffer = fs.readFileSync(fname);
+		var buffer = App.fs.readFileSync(fname);
 		return new Buffer(buffer).toString("base64");
 	}
 	else
