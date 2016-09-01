@@ -13,27 +13,41 @@ function Image(url)
 
 	if(url !== undefined)
 	{
-		this.enconding = url.split(".").pop();
+		this.encoding = url.split(".").pop();
 
-		if(this.enconding !== "gif")
-		{
-			this.format = "url";
-			this.data = url;
-		}
-		else
+		if(this.encoding === "gif")
 		{
 			var file = new XMLHttpRequest();
 			file.open("GET", url, false);
 			file.overrideMimeType("text/plain; charset=x-user-defined");
 			file.send(null);
 
-			this.data = "data:image/" + this.encoding + ";base64," + base64BinaryString(file.response);
+			this.data = "data:image/" + this.encoding + ";base64," + Base64Utils.fromBinaryString(file.response);
 			this.format = "base64";
+		}
+		else if(this.encoding === "tga")
+		{
+			var file = new XMLHttpRequest();
+			file.open("GET", url, false);
+			file.overrideMimeType("text/plain; charset=x-user-defined");
+			file.send(null);
+
+			var loader = new THREE.TGALoader();
+			var canvas = loader.parse(ArraybufferUtils.fromBinaryString(file.response));
+
+			this.encoding = "jpeg";
+			this.format = "base64";
+			this.data = canvas.toDataURL("image/jpeg", 0.8);
+		}
+		else
+		{
+			this.format = "url";
+			this.data = url;
 		}
 	}
 }
 
-//Encode image data to jpeg or png
+//Encode image data to jpeg or png in base64 format
 Image.prototype.encodeData = function()
 {
 	var image = document.createElement("img");

@@ -21,7 +21,7 @@ AudioLoader.prototype.parse = function(json)
 	audio.name = json.name;
 	audio.uuid = json.uuid;
 	audio.encoding = json.encoding;
-	audio.data = Base64Binary.decodeArrayBuffer(json.data);
+	audio.data = ArraybufferUtils.fromBase64(json.data);
 
 	return audio;
 }

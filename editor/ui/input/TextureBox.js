@@ -66,27 +66,23 @@ function TextureBox(parent)
 			var file = event.dataTransfer.files[0];
 
 			//Image
-			if(file.type.startsWith("image"))
+			if(file.type.startsWith("image") || file.path.endsWith("tga"))
 			{
 				self.texture = new Texture(new Image(file.path));
 				self.use_texture.setValue(true);
-				if(self.onchange !== null)
-				{
-					self.onchange();
-				}
-				self.updatePreview();
 			}
 			//Video
 			else if(file.type.startsWith("video"))
 			{
 				self.texture = new VideoTexture(new Video(file.path));
 				self.use_texture.setValue(true);
-				if(self.onchange !== null)
-				{
-					self.onchange();
-				}
-				self.updatePreview();
 			}
+
+			if(self.onchange !== null)
+			{
+				self.onchange();
+			}
+			self.updatePreview();
 		}
 		event.preventDefault();
 	};
@@ -96,16 +92,32 @@ function TextureBox(parent)
 	{
 		if(self.onchange !== null)
 		{
-			App.chooseFile(function(file)
+			App.chooseFile(function(files)
 			{
-				self.texture = new Texture(file);
-				self.use_texture.setValue(true);
-				if(self.onchange !== null)
+				if(files.length > 0)
 				{
-					self.onchange();
+					var file = files[0];
+					
+					//Image
+					if(file.type.startsWith("image") || file.path.endsWith("tga"))
+					{
+						self.texture = new Texture(file.path);
+						self.use_texture.setValue(true);
+					}
+					//Video
+					else if(file.type.startsWith("video"))
+					{
+						self.texture = new VideoTexture(file.path);
+						self.use_texture.setValue(true);
+					}
+
+					if(self.onchange !== null)
+					{
+						self.onchange();
+					}
+					self.updatePreview();
 				}
-				self.updatePreview();
-			}, "image/*");
+			}, "image/*, video/*, .tga");
 		}
 	};
 
@@ -241,7 +253,6 @@ TextureBox.prototype.updatePreview = function()
 	{
 		this.video.visibility = "hidden";
 		this.video.src = "";
-
 		this.img.visibility = "visible";
 		this.img.src = texture.image.src;
 	}
@@ -249,7 +260,6 @@ TextureBox.prototype.updatePreview = function()
 	{
 		this.img.visibility = "hidden";
 		this.img.src = "";
-		
 		this.video.visibility = "visible";
 		this.video.src = texture.image.src;
 	}

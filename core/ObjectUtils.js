@@ -1,6 +1,5 @@
 "use strict";
 
-//Object tools contains some object managing helpers
 function ObjectUtils(){}
 
 //Get all materials in object and childs
@@ -122,15 +121,7 @@ ObjectUtils.getRoot = function(obj)
 	return node;
 }
 
-//Convert threejs type to internal types
-ObjectUtils.convertFromThreeType = function(obj)
-{
-	var data = obj.toJSON();
-	var loader = new ObjectLoader();
-	return loader.parse(data);
-}
-
-//Set static
+//Set matrix auto update value
 ObjectUtils.setMatrixAutoUpdate = function(obj, value)
 {
 	obj.traverse(function(child)
@@ -148,7 +139,7 @@ ObjectUtils.setShadowReceiving = function(obj, value)
 	});
 }
 
-//Enable shadow casting
+//Set shadow casting
 ObjectUtils.setShadowCasting = function(obj, value)
 {
 	obj.traverse(function(child)

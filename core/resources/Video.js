@@ -19,7 +19,7 @@ function Video(url)
 		file.send(null);
 
 		this.encoding = url.split(".").pop();
-		this.data = "data:video/" + this.encoding + ";base64," + base64BinaryString(file.response);
+		this.data = "data:video/" + this.encoding + ";base64," + Base64Utils.fromBinaryString(file.response);
 		this.format = "base64";
 	}
 }

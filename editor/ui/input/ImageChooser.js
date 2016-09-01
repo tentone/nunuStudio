@@ -64,10 +64,14 @@ function ImageChooser(parent)
 	{
 		if(self.onchange !== null)
 		{
-			App.chooseFile(function(file)
+			App.chooseFile(function(files)
 			{
-				self.setImage(file);
-				self.onchange(file);
+				if(files.length > 0)
+				{
+					var file = files[0].path;
+					self.setImage(file);
+					self.onchange(file);
+				}
 			}, "image/*");
 		}
 	};

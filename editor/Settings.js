@@ -48,7 +48,7 @@ Settings.store = function()
 
 	data.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
 
-	App.writeFile("config", data);
+	FileSystem.writeFile("config", data);
 }
 
 //Load settings file
@@ -56,7 +56,7 @@ Settings.load = function()
 {
 	try
 	{
-		var data = JSON.parse(App.readFile("config"));
+		var data = JSON.parse(FileSystem.readFile("config"));
 		
 		//General
 		Settings.general.theme = data.general.theme;
