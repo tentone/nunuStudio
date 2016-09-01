@@ -112,7 +112,6 @@ catch(e)
 //App initialization
 App.initialize = function(main)
 {
-	//Fullscreen flag
 	App.fullscreen = false;
 
 	//Init Input
@@ -129,6 +128,30 @@ App.initialize = function(main)
 
 	//Start Loop
 	App.loop();
+}
+
+//App loop
+App.loop = function()
+{
+	requestAnimationFrame(App.loop);
+
+	//Update Mouse Values
+	Mouse.update();
+	Keyboard.update();
+	
+	//Update time values
+	App.delta_time = Date.now() - App.time;
+	App.time += App.delta_time;
+
+	//Update and draw
+	App.main.update();
+	App.main.draw();
+}
+
+//Called every time page is resized
+App.resize = function()
+{
+	App.main.resize();
 }
 
 //Leave fullscreen mode
@@ -193,31 +216,6 @@ App.loadMain = function(main)
 App.webvrAvailable = function()
 {
 	return (navigator.getVRDisplays !== undefined);
-}
-
-//App loop
-App.loop = function()
-{
-	//Call loop again
-	requestAnimationFrame(App.loop);
-
-	//Update Mouse Values
-	Mouse.update();
-	Keyboard.update();
-	
-	//Update time values
-	App.delta_time = Date.now() - App.time;
-	App.time += App.delta_time;
-
-	//Update and draw
-	App.main.update();
-	App.main.draw();
-}
-
-//Called every time page is resized
-App.resize = function()
-{
-	App.main.resize();
 }
 
 //Open file chooser dialog receives callback function, file filter, saveas
