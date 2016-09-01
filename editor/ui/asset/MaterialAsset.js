@@ -211,7 +211,7 @@ MaterialAsset.prototype.setMaterial = function(material)
 {
 	if(material instanceof THREE.Material)
 	{
-		Editor.material_renderer.renderMaterial(material, this.img);
+		Editor.material_renderer.renderMaterial(material, this.image);
 		this.setText(material.name);
 		this.material = material;
 	}
@@ -252,7 +252,7 @@ MaterialAsset.prototype.updateMetadata = function()
 {
 	if(this.material !== null)
 	{
-		Editor.material_renderer.renderMaterial(this.material, this.img);
+		Editor.material_renderer.renderMaterial(this.material, this.image);
 		this.setText(this.material.name);
 	}
 }

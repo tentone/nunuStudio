@@ -16,8 +16,8 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	//Super constructor
 	THREE.Texture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
-	//Self pointer
-	var self = this;
+	var texture = this;
+	this.disposed = false;
 
 	//Name
 	this.name = "texture";
@@ -27,12 +27,34 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	this.image.src = this.img.data;
 	this.image.onload = function()
 	{
-		self.needsUpdate = true;
+		texture.needsUpdate = true;
+	}
+
+	//Check if image is animated
+	if(this.img.encoding === "gif")
+	{
+		function update()
+		{
+			if(!texture.disposed)
+			{
+				texture.needsUpdate = true;
+				requestAnimationFrame(update);
+			}
+		};
+		update();
 	}
 }
 
 //Super prototypes
 Texture.prototype = Object.create(THREE.Texture.prototype);
+
+//Dispose texture
+Texture.prototype.dispose = function()
+{	
+	THREE.Texture.prototype.dispose.call(this);
+
+	this.disposed = true;
+}
 
 //Create JSON description
 Texture.prototype.toJSON = function(meta)

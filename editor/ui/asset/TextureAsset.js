@@ -32,7 +32,8 @@ function TextureAsset(parent)
 			{
 				if(confirm("Delete texture?"))
 				{
-					//TODO <ADD CODE HERE>	
+					self.texture.dispose();
+					//TODO <ADD CODE HERE>
 				}
 			}
 		});
@@ -62,6 +63,7 @@ TextureAsset.prototype.setTexture = function(texture)
 	if(texture instanceof THREE.Texture)
 	{
 		this.texture = texture;
+		this.image.src = texture.image.src;
 		this.setText(texture.name);
 	}
 }
@@ -71,7 +73,7 @@ TextureAsset.prototype.updateMetadata = function()
 {
 	if(this.texture !== null)
 	{
-		this.img.src = this.texture.image.src;
+		this.image.src = this.texture.image.src;
 		this.setText(this.texture.name);
 	}
 }
