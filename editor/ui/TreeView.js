@@ -188,20 +188,19 @@ TreeView.prototype.updateInterface = function()
 TreeView.updateSelectedObject = function(element, obj)
 {
 	var children = element.children;
+	var length = children.length;
 
-	for(var i = 0; i < children.length; i++)
+	for(var i = 0; i < length; i++)
 	{
 		//Check if is the selected object
 		if(children[i].obj.uuid === obj.uuid)
 		{
 			var element = children[i].element;
-			element.style.cursor = "pointer";
 			element.style.backgroundColor = Editor.theme.button_over_color;
 		}
 		else
 		{
 			var element = children[i].element;
-			element.style.cursor = "default";
 			element.style.backgroundColor = Editor.theme.button_light_color;
 		}
 
@@ -212,14 +211,17 @@ TreeView.updateSelectedObject = function(element, obj)
 //Get tree view element where the object is attached
 TreeView.getElementFromObject = function(element, obj)
 {
-	for(var i = 0; i < element.children.length; i++)
+	var children = element.children;
+	var length = children.length;
+
+	for(var i = 0; i < length; i++)
 	{
-		if(element.children[i].obj.uuid === obj.uuid)
+		if(children[i].obj.uuid === obj.uuid)
 		{
-			return element.children[i];
+			return children[i];
 		}
 
-		var child = TreeView.getElementFromObject(element.children[i], obj);
+		var child = TreeView.getElementFromObject(children[i], obj);
 		if(child !== null)
 		{
 			return child;

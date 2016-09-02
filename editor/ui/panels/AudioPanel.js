@@ -21,7 +21,7 @@ function AudioPanel(parent)
 	});
 	this.form.add(this.name);
 	this.form.nextRow();
-
+	
 	//Autoplay
 	this.autoplay = new CheckBox(this.form.element);
 	this.autoplay.setText("Autoplay");
