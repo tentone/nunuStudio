@@ -118,6 +118,14 @@ include("editor/tools/MoveTool.js");
 include("editor/tools/ResizeTool.js");
 include("editor/tools/RotateTool.js");
 
+include("editor/tools/TransformControls.js");
+include("editor/tools/GizmoMaterial.js");
+include("editor/tools/GizmoLineMaterial.js");
+include("editor/tools/TransformGizmo.js");
+include("editor/tools/TransformGizmoRotate.js");
+include("editor/tools/TransformGizmoScale.js");
+include("editor/tools/TransformGizmoTranslate.js");
+
 include("editor/helpers/ParticleEmitterHelper.js");
 include("editor/helpers/ObjectIconHelper.js");
 include("editor/helpers/PhysicsObjectHelper.js");
@@ -131,9 +139,9 @@ include("editor/Settings.js");
 function Editor(){}
 
 //Editor state
-Editor.STATE_IDLE = 8; //Idle mode
-Editor.STATE_EDITING = 9; //Editing a scene
-Editor.STATE_TESTING = 11; //Testing a scene
+Editor.STATE_IDLE = 8;
+Editor.STATE_EDITING = 9;
+Editor.STATE_TESTING = 11;
 
 //Editor editing modes
 Editor.MODE_SELECT = 0;
@@ -144,7 +152,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.7 Alpha";
-Editor.TIMESTAMP = "201609030210";
+Editor.TIMESTAMP = "201609031751";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -256,6 +264,8 @@ Editor.initialize = function(canvas)
 	{	
 		Editor.createNewProgram();
 	}
+
+	Editor.updateObjectViews();
 }
 
 //Update Editor
@@ -551,7 +561,7 @@ Editor.selectObject = function(obj)
 	if(Editor.tool !== null && Editor.selected_object !== null)
 	{
 		Editor.tool_container.add(Editor.tool);
-		Editor.tool.attachObject(Editor.selected_object);
+		Editor.tool.attach(Editor.selected_object);
 	}
 }
 
@@ -864,17 +874,27 @@ Editor.selectTool = function(tool)
 	Editor.tool_mode = tool;
 	Editor.tool_container.removeAll();
 
+	if(Editor.tool !== null)
+	{
+		Editor.tool.dispose();	
+	}
+
 	if(tool === Editor.MODE_MOVE)
 	{
-		Editor.tool = new MoveTool();
+		//Editor.tool = new MoveTool();
+		Editor.tool = new TransformControls();
 	}
 	else if(tool === Editor.MODE_ROTATE)
 	{
-		Editor.tool = new RotateTool();
+		//Editor.tool = new RotateTool();
+		Editor.tool = new TransformControls();
+		Editor.tool.setMode("rotate");
 	}
 	else if(tool === Editor.MODE_RESIZE)
 	{
-		Editor.tool = new ResizeTool();
+		//Editor.tool = new ResizeTool();
+		Editor.tool = new TransformControls();
+		Editor.tool.setMode("scale");
 	}
 	else
 	{
@@ -884,7 +904,7 @@ Editor.selectTool = function(tool)
 	if(Editor.tool !== null && Editor.selected_object !== null)
 	{
 		Editor.tool_container.add(Editor.tool);
-		Editor.tool.attachObject(Editor.selected_object);
+		Editor.tool.attach(Editor.selected_object);
 	}
 }
 
@@ -985,26 +1005,19 @@ Editor.updateRaycasterFromMouse = function()
 	Editor.raycaster.setFromCamera(mouse, Editor.camera);
 }
 
-//Update editor raycaster with new x and y positions (normalized -1 to 1)
-Editor.updateRaycaster = function(x, y)
-{
-	Editor.raycaster.setFromCamera(new THREE.Vector2(x, y), Editor.camera);
-}
-
 //Reset editing flags
 Editor.resetEditingFlags = function()
 {
 	Editor.selected_object = null;
 	Editor.is_editing_object = false;
 	
-	Editor.selectTool(Editor.tool_mode);
-	Editor.updateObjectViews();
+	Editor.selectTool(Editor.MODE_SELECT);
+	Editor.selectObjectHelper();
 }
 
 //Craete new Program
 Editor.createNewProgram = function()
 {
-	//Reset default resources
 	Editor.createDefaultResouces();
 
 	//Create new program

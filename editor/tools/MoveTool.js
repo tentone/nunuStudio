@@ -100,7 +100,7 @@ function MoveTool()
 MoveTool.prototype = Object.create(THREE.Object3D.prototype);
 
 //Attach object to move tool
-MoveTool.prototype.attachObject = function(obj)
+MoveTool.prototype.attach = function(obj)
 {
 	if(obj instanceof THREE.Object3D)
 	{
