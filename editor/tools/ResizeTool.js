@@ -111,10 +111,12 @@ ResizeTool.prototype.update = function(raycaster)
 {
 	if(this.obj !== null)
 	{
-		var distance = Editor.camera.position.distanceTo(this.obj.getWorldPosition())/6;
+		var object = this.obj;
+		
+		var distance = Editor.camera.position.distanceTo(object.getWorldPosition())/6;
 		this.scale.set(distance, distance, distance);
-		this.obj.getWorldPosition(this.position);
-		this.obj.getWorldQuaternion(this.quaternion);
+		object.getWorldPosition(this.position);
+		object.getWorldQuaternion(this.quaternion);
 
 		//Reset selected flags
 		if(Mouse.buttonJustReleased(Mouse.LEFT))
@@ -129,7 +131,7 @@ ResizeTool.prototype.update = function(raycaster)
 		//Update object scale
 		if(this.selected)
 		{
-			var scale = this.obj.scale;
+			var scale = object.scale;
 			var delta = Mouse.delta;
 			var rotation = Editor.camera_rotation;
 			var x = 0, y = 0, z = 0;
@@ -154,14 +156,14 @@ ResizeTool.prototype.update = function(raycaster)
 				z = (-delta.y * Math.sin(rotation.x + 1.57) - delta.x * Math.cos(rotation.x + 1.57))* scale.z * 0.01;
 			}
 
-			this.obj.scale.x += x;
-			this.obj.scale.y += y;
-			this.obj.scale.z += z;
+			object.scale.x += x;
+			object.scale.y += y;
+			object.scale.z += z;
 
 			//Update physics objects
-			if(this.obj instanceof PhysicsObject)
+			if(object instanceof PhysicsObject)
 			{
-				var shapes = this.obj.body.shapes;
+				var shapes = object.body.shapes;
 				for(var i = 0; i < shapes.length; i++)
 				{
 					var shape = shapes[i];

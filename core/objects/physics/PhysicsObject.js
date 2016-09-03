@@ -1,6 +1,6 @@
 "use strict";
 
-//PhysicsObject constructor
+//Physics object constructor
 function PhysicsObject()
 {
 	THREE.Object3D.call(this);
@@ -8,12 +8,10 @@ function PhysicsObject()
 	this.name = "physics";
 	this.type = "Physics";
 
-	//Body
 	this.body = new CANNON.Body();
 	this.body.type = CANNON.Body.DYNAMIC;
 	this.body.mass = 1.0;
 
-	//World pointer
 	this.world = null;
 }
 
@@ -22,7 +20,6 @@ PhysicsObject.prototype = Object.create(THREE.Object3D.prototype);
 //Initialize physics object
 PhysicsObject.prototype.initialize = function()
 {
-	//Update body to world position
 	this.body.position.copy(this.position);
 	this.body.quaternion.copy(this.quaternion);
 	
@@ -38,7 +35,7 @@ PhysicsObject.prototype.initialize = function()
 		}
 	}
 
-	//Initialize children
+	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();

@@ -22,6 +22,7 @@ FontLoader.prototype.parse = function(json)
 
 		font.name = json.name;
 		font.uuid = json.uuid;
+		font.format = json.format;
 		font.encoding = json.encoding;
 		font.data = json.data;
 
