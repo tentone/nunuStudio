@@ -87,7 +87,7 @@ function ResizeTool()
 ResizeTool.prototype = Object.create(THREE.Object3D.prototype);
 
 //Attach object to resize tool
-ResizeTool.prototype.attachObject = function(obj)
+ResizeTool.prototype.attach = function(obj)
 {
 	if(obj instanceof THREE.Camera)
 	{

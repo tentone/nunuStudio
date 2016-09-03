@@ -72,7 +72,7 @@ function RotateTool()
 RotateTool.prototype = Object.create(THREE.Object3D.prototype);
 
 //Attach object to rotate tool
-RotateTool.prototype.attachObject = function(obj)
+RotateTool.prototype.attach = function(obj)
 {
 	if(obj instanceof THREE.Object3D)
 	{

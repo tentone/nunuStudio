@@ -258,7 +258,7 @@ Program.prototype.toJSON = function(meta)
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
 		//Fonts
-		var fonts = self.fonts;
+		/*var fonts = self.fonts;
 		for(var i in fonts)
 		{
 			fonts[i].toJSON(meta);
@@ -292,17 +292,6 @@ Program.prototype.toJSON = function(meta)
 			textures[i].toJSON(meta);
 		}
 
-		//Materials
-		var materials = self.materials;
-		for(var i in materials)
-		{
-			var material = materials[i];
-			if(meta.materials[material.uuid] === undefined)
-			{
-				meta.materials[material.uuid] = material.toJSON(meta);
-			}
-		}
-
 		//Geometries
 		var geometries = self.geometries;
 		for(var i in geometries)
@@ -311,6 +300,17 @@ Program.prototype.toJSON = function(meta)
 			if(meta.geometries[geometry.uuid] === undefined)
 			{
 				meta.geometries[geometry.uuid] = geometry.toJSON(meta);
+			}
+		}*/
+
+		//Materials
+		var materials = self.materials;
+		for(var i in materials)
+		{
+			var material = materials[i];
+			if(meta.materials[material.uuid] === undefined)
+			{
+				meta.materials[material.uuid] = material.toJSON(meta);
 			}
 		}
 	});

@@ -65,10 +65,10 @@ include("core/objects/Scene.js");
 
 include("core/utils/Base64Utils.js");
 include("core/utils/ArraybufferUtils.js");
+include("core/utils/MathUtils.js");
+include("core/utils/ObjectUtils.js");
 
 include("core/FileSystem.js");
-include("core/ObjectUtils.js");
-include("core/MathUtils.js");
 
 //App class
 function App(){}
