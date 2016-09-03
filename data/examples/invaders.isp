@@ -369,36 +369,6 @@
 		}],
 	"images": [
 		{
-			"uuid": "DB439929-7C99-40B9-8B83-A6099583D062",
-			"type": "Image",
-			"format": ""
-		},
-		{
-			"uuid": "F064935D-D9E6-4A78-9FF4-27981B727030",
-			"type": "Image",
-			"format": ""
-		},
-		{
-			"uuid": "7DE97B72-72B6-4757-9263-147A293FB594",
-			"type": "Image",
-			"format": ""
-		},
-		{
-			"uuid": "8974CE80-9F48-46AE-9546-6B57C6CE9BC3",
-			"type": "Image",
-			"format": ""
-		},
-		{
-			"uuid": "5139DC6B-626C-4B5E-AAEC-19EC3C5B30FC",
-			"type": "Image",
-			"format": ""
-		},
-		{
-			"uuid": "9FF7FBB9-AA90-4BE4-B98B-E9AC4FD2EBDE",
-			"type": "Image",
-			"format": ""
-		},
-		{
 			"name": "image",
 			"uuid": "7FCD323C-BCBE-4933-9509-BD327846D456",
 			"type": "Image",

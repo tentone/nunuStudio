@@ -1,6 +1,6 @@
 "use strict";
 
-function TreeView(parent, container)
+function TreeView(parent)
 {	
 	//Parent
 	if(parent === undefined)
@@ -10,16 +10,6 @@ function TreeView(parent, container)
 	else
 	{
 		this.parent = parent;
-	}
-
-	//Component
-	if(container === undefined)
-	{
-		this.container = null;
-	}
-	else
-	{
-		this.container = container;
 	}
 
 	//ID
@@ -267,26 +257,29 @@ TreeView.checkParentFolded = function(element)
 //Update childs position (recursive)
 TreeView.updateChildPosition = function(parent, position, level, folded)
 {
-	for(var i = 0; i < parent.children.length; i++)
+	var length = parent.children.length;
+	var children = parent.children;
+
+	for(var i = 0; i < length; i++)
 	{
 		if(folded || TreeView.checkParentFolded(parent))
 		{
-			parent.children[i].setVisibility(false);
+			children[i].setVisibility(false);
 			folded = true;
 		}
 		else
 		{
-			parent.children[i].visible = true;
-			parent.children[i].position.set(0, position);
-			parent.children[i].level = level;
-			parent.children[i].updateInterface();
+			children[i].visible = true;
+			children[i].position.set(0, position);
+			children[i].level = level;
+			children[i].updateInterface();
 			folded = false;
 			position += 20;
 		}
 
-		if(parent.children[i].children.length > 0)
+		if(children[i].children.length > 0)
 		{
-			position = TreeView.updateChildPosition(parent.children[i], position, level + 1, folded);
+			position = TreeView.updateChildPosition(children[i], position, level + 1, folded);
 		}
 	}
 

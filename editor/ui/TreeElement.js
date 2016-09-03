@@ -11,6 +11,7 @@ function TreeElement(container)
 	{
 		this.container = container;
 	}
+
 	this.parent = this.container.element;
 	
 	//ID

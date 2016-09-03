@@ -117,15 +117,17 @@ MoveTool.prototype.attachObject = function(obj)
 //Update attached object returns if object is being edited
 MoveTool.prototype.update = function()
 {
-	//Update tool position and scale
 	if(this.obj !== null)
 	{
-		var distance = Editor.camera.position.distanceTo(this.obj.getWorldPosition())/6;
+		var object = this.obj;
+		
+		var distance = Editor.camera.position.distanceTo(object.getWorldPosition())/6;
 		this.scale.set(distance, distance, distance);
-		this.obj.getWorldPosition(this.position);
-		if(this.obj.parent !== null)
+
+		object.getWorldPosition(this.position);
+		if(object.parent !== null)
 		{
-			this.obj.parent.getWorldQuaternion(this.quaternion);
+			object.parent.getWorldQuaternion(this.quaternion);
 		}
 
 		if(Mouse.buttonJustReleased(Mouse.LEFT))
@@ -138,29 +140,30 @@ MoveTool.prototype.update = function()
 
 		if(this.selected)
 		{
-			if(this.obj.parent !== null)
+			if(object.parent !== null)
 			{
-				var scale = this.obj.parent.getWorldScale();
+				var scale = object.parent.getWorldScale();
 			}
 			else
 			{
 				var scale = 1;
 			}
-			var speed = Editor.camera.position.distanceTo(this.obj.getWorldPosition())/500;
+
+			var speed = Editor.camera.position.distanceTo(object.getWorldPosition()) / 500;
 
 			if(this.selected_x)
 			{
-				this.obj.position.x -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x) / scale.x;
-				this.obj.position.x -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x) / scale.x;
+				object.position.x -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x) / scale.x;
+				object.position.x -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x) / scale.x;
 			}
 			if(this.selected_y)
 			{
-				this.obj.position.y -= Mouse.delta.y * speed / scale.y;
+				object.position.y -= Mouse.delta.y * speed / scale.y;
 			}
 			if(this.selected_z)
 			{
-				this.obj.position.z -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x + MathUtils.pid2) / scale.z;
-				this.obj.position.z -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x + MathUtils.pid2) / scale.z;
+				object.position.z -= Mouse.delta.y * speed * Math.sin(Editor.camera_rotation.x + MathUtils.pid2) / scale.z;
+				object.position.z -= Mouse.delta.x * speed * Math.cos(Editor.camera_rotation.x + MathUtils.pid2) / scale.z;
 			}
 
 			Editor.updateObjectPanel();

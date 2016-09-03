@@ -1,28 +1,5 @@
 "use strict";
 
-//WebVR polyfill
-/*if(navigator.getVRDisplays === undefined)
-{
-	include("lib/webvr-polyfill.min.js", function()
-	{
-		window.WebVRConfig =
-		{
-			FORCE_ENABLE_VR: false, //Forces availability of VR mode in desktop
-			CARDBOARD_UI_DISABLED: false,
-			ROTATE_INSTRUCTIONS_DISABLED: true,
-			TOUCH_PANNER_DISABLED: true,
-			MOUSE_KEYBOARD_CONTROLS_DISABLED: true,
-			K_FILTER: 1.0, //0 for accelerometer, 1 for gyro
-			PREDICTION_TIME_S: 0.0, //Time predict during fast motion
-			YAW_ONLY: false,
-			DEFER_INITIALIZATION: false,
-			ENABLE_DEPRECATED_API: false,
-			BUFFER_SCALE: 1.0,
-			DIRTY_SUBMIT_FRAME_BINDINGS: false
-		}
-	});
-}*/
-
 //External libs
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");

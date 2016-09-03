@@ -21,6 +21,7 @@ ImageLoader.prototype.parse = function(json, onLoad)
 	
 	image.name = json.name;
 	image.uuid = json.uuid;
+	image.format = json.format;
 	image.encoding = json.encoding;
 	image.data = json.data;
 	
