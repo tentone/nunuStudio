@@ -9,7 +9,7 @@ function TransformControls()
 	var camera = Editor.camera;
 	var element = Editor.canvas;
 
-	this.object = undefined;
+	this.object = null;
 	this.visible = false;
 	this.translationSnap = null;
 	this.rotationSnap = null;
@@ -20,6 +20,7 @@ function TransformControls()
 	var scope = this;
 	var mode = "translate";
 	var dragging = false;
+	var editing = false; //Editing object flag
 	var gizmo =
 	{
 		"translate": new TransformGizmoTranslate(),
@@ -74,49 +75,16 @@ function TransformControls()
 	var camPosition = new THREE.Vector3();
 	var camRotation = new THREE.Euler();
 
-	element.addEventListener("mousedown", onPointerDown, false);
-	//element.addEventListener("touchstart", onPointerDown, false);
-
-	element.addEventListener("mousemove", onPointerHover, false);
-	//element.addEventListener("touchmove", onPointerHover, false);
-
-	element.addEventListener("mousemove", onPointerMove, false);
-	//element.addEventListener("touchmove", onPointerMove, false);
-
-	element.addEventListener("mouseup", onPointerUp, false);
-	element.addEventListener("mouseout", onPointerUp, false);
-	//element.addEventListener("touchend", onPointerUp, false);
-	//element.addEventListener("touchcancel", onPointerUp, false);
-	//element.addEventListener("touchleave", onPointerUp, false);
-
-	this.dispose = function()
-	{
-		element.removeEventListener("mousedown", onPointerDown);
-		//element.removeEventListener("touchstart", onPointerDown);
-
-		element.removeEventListener("mousemove", onPointerHover);
-		//element.removeEventListener("touchmove", onPointerHover);
-
-		element.removeEventListener("mousemove", onPointerMove);
-		//element.removeEventListener("touchmove", onPointerMove);
-
-		element.removeEventListener("mouseup", onPointerUp);
-		element.removeEventListener("mouseout", onPointerUp);
-		//element.removeEventListener("touchend", onPointerUp);
-		//element.removeEventListener("touchcancel", onPointerUp);
-		//element.removeEventListener("touchleave", onPointerUp);
-	};
-
 	this.attach = function(object)
 	{
 		this.object = object;
 		this.visible = true;
-		this.update();
+		this.updateScale();
 	};
 
 	this.detach = function()
 	{
-		this.object = undefined;
+		this.object = null;
 		this.visible = false;
 		this.axis = null;
 	};
@@ -140,7 +108,7 @@ function TransformControls()
 			gizmo[type].visible = (type === mode);
 		}
 
-		this.update();
+		this.updateScale();
 	};
 
 	this.setTranslationSnap = function(translationSnap)
@@ -156,20 +124,43 @@ function TransformControls()
 	this.setSize = function(size)
 	{
 		scope.size = size;
-		this.update();
+		this.updateScale();
 	};
 
 	this.setSpace = function(space)
 	{
 		scope.space = space;
-		this.update();
+		this.updateScale();
 	};
 
 	this.update = function()
 	{
-		if(scope.object === undefined)
+		if(Mouse.buttonJustPressed(Mouse.LEFT))
 		{
-			return true;
+			onPointerDown();
+		}
+		
+		if(Mouse.buttonJustReleased(Mouse.LEFT))
+		{
+			onPointerUp();
+		}
+
+		if(Mouse.delta.x !== 0 || Mouse.delta.y !== 0)
+		{
+			onPointerHover();
+			onPointerMove();
+		}
+
+		this.updateScale();
+
+		return editing;
+	};
+
+	this.updateScale = function()
+	{
+		if(scope.object === null)
+		{
+			return;
 		}
 
 		scope.object.updateMatrixWorld();
@@ -196,99 +187,84 @@ function TransformControls()
 		}
 
 		gizmo[mode].highlight(scope.axis);
+	}
 
-		return true;
-	};
-
-	function onPointerHover(event)
+	function onPointerHover()
 	{
-		if(scope.object === undefined || dragging === true || (event.button !== undefined && event.button !== 0)) 
+		if(scope.object === null || dragging === true) 
 		{
 			return;
 		}
 
-		var pointer = event.changedTouches ? event.changedTouches[0] : event;
-		var intersect = intersectObjects(pointer, gizmo[mode].pickers.children);
-
+		var intersect = intersectObjects(gizmo[mode].pickers.children);
 		var axis = null;
 
 		if(intersect)
 		{
 			axis = intersect.object.name;
-			event.preventDefault();
 		}
 
 		if(scope.axis !== axis)
 		{
 			scope.axis = axis;
-			scope.update();
+			scope.updateScale();
 		}
 	}
 
-	function onPointerDown(event)
+	function onPointerDown()
 	{
-		if(scope.object === undefined || dragging === true || (event.button !== undefined && event.button !== 0)) 
+		if(scope.object === null || dragging === true) 
 		{
 			return;
 		}
 
-		var pointer = event.changedTouches ? event.changedTouches[0] : event;
+		var intersect = intersectObjects(gizmo[mode].pickers.children);
 
-		if(pointer.button === 0 || pointer.button === undefined)
+		if(intersect)
 		{
-			var intersect = intersectObjects(pointer, gizmo[mode].pickers.children);
+			editing = true;
 
-			if(intersect)
+			scope.axis = intersect.object.name;
+
+			scope.updateScale();
+
+			eye.copy(camPosition).sub(worldPosition).normalize();
+
+			gizmo[mode].setActivePlane(scope.axis, eye);
+
+			var planeIntersect = intersectObjects([gizmo[mode].activePlane]);
+
+			if(planeIntersect)
 			{
-				event.preventDefault();
-				event.stopPropagation();
+				oldPosition.copy(scope.object.position);
+				oldScale.copy(scope.object.scale);
 
-				scope.axis = intersect.object.name;
+				oldRotationMatrix.extractRotation(scope.object.matrix);
+				worldRotationMatrix.extractRotation(scope.object.matrixWorld);
 
-				scope.update();
+				parentRotationMatrix.extractRotation(scope.object.parent.matrixWorld);
+				parentScale.setFromMatrixScale(tempMatrix.getInverse(scope.object.parent.matrixWorld));
 
-				eye.copy(camPosition).sub(worldPosition).normalize();
-
-				gizmo[mode].setActivePlane(scope.axis, eye);
-
-				var planeIntersect = intersectObjects(pointer, [gizmo[mode].activePlane]);
-
-				if(planeIntersect)
-				{
-					oldPosition.copy(scope.object.position);
-					oldScale.copy(scope.object.scale);
-
-					oldRotationMatrix.extractRotation(scope.object.matrix);
-					worldRotationMatrix.extractRotation(scope.object.matrixWorld);
-
-					parentRotationMatrix.extractRotation(scope.object.parent.matrixWorld);
-					parentScale.setFromMatrixScale(tempMatrix.getInverse(scope.object.parent.matrixWorld));
-
-					offset.copy(planeIntersect.point);
-				}
+				offset.copy(planeIntersect.point);
 			}
 		}
 
 		dragging = true;
 	}
 
-	function onPointerMove(event)
+	function onPointerMove()
 	{
-		if(scope.object === undefined || scope.axis === null || dragging === false || (event.button !== undefined && event.button !== 0))
+		if(scope.object === null || scope.axis === null || dragging === false)
 		{
 			return;
 		}
 
-		var pointer = event.changedTouches ? event.changedTouches[0] : event;
-		var planeIntersect = intersectObjects(pointer, [gizmo[mode].activePlane]);
+		var planeIntersect = intersectObjects([gizmo[mode].activePlane]);
 
 		if(planeIntersect === false) 
 		{
 			return;
 		}
-
-		event.preventDefault();
-		event.stopPropagation();
 
 		point.copy(planeIntersect.point);
 
@@ -494,28 +470,21 @@ function TransformControls()
 			}
 		}
 
-		scope.update();
+		scope.updateScale();
 	}
 
-	function onPointerUp(event)
+	function onPointerUp()
 	{
-		event.preventDefault();
-
-		if(event.button !== undefined && event.button !== 0)
-		{
-			return;
-		}
-
+		editing = false;
 		dragging = false;
-
-		onPointerHover(event);
+		onPointerHover();
 	}
 
-	function intersectObjects(pointer, objects)
+	function intersectObjects(objects)
 	{
 		var rect = element.getBoundingClientRect();
-		var x = (pointer.clientX - rect.left) / rect.width;
-		var y = (pointer.clientY - rect.top) / rect.height;
+		var x = Mouse.position.x / rect.width;
+		var y = Mouse.position.y / rect.height;
 
 		pointerVector.set((x * 2) - 1, - (y * 2) + 1);
 		ray.setFromCamera(pointerVector, camera);

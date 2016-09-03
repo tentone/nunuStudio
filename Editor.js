@@ -114,10 +114,6 @@ include("editor/ui/panels/lights/PointLightPanel.js");
 include("editor/ui/panels/lights/DirectionalLightPanel.js");
 include("editor/ui/panels/lights/SpotLightPanel.js");
 
-include("editor/tools/MoveTool.js");
-include("editor/tools/ResizeTool.js");
-include("editor/tools/RotateTool.js");
-
 include("editor/tools/TransformControls.js");
 include("editor/tools/GizmoMaterial.js");
 include("editor/tools/GizmoLineMaterial.js");
@@ -152,7 +148,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.7 Alpha";
-Editor.TIMESTAMP = "201609031751";
+Editor.TIMESTAMP = "201609032015";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -357,6 +353,10 @@ Editor.update = function()
 			if(Editor.tool !== null)
 			{
 				Editor.is_editing_object = Editor.tool.update();
+				if(Editor.is_editing_object)
+				{
+					Editor.updateObjectPanel();
+				}
 			}
 			else
 			{
@@ -382,7 +382,7 @@ Editor.update = function()
 			//Lock mouse when camera is moving
 			if(Settings.editor.lock_mouse)
 			{
-				if(Mouse.buttonJustPressed(Mouse.LEFT) || Mouse.buttonJustPressed(Mouse.RIGHT) || Mouse.buttonJustPressed(Mouse.MIDDLE))
+				if(!Editor.is_editing_object && (Mouse.buttonJustPressed(Mouse.LEFT) || Mouse.buttonJustPressed(Mouse.RIGHT) || Mouse.buttonJustPressed(Mouse.MIDDLE)))
 				{
 					Mouse.setLock(true);
 				}
@@ -881,18 +881,16 @@ Editor.selectTool = function(tool)
 
 	if(tool === Editor.MODE_MOVE)
 	{
-		//Editor.tool = new MoveTool();
 		Editor.tool = new TransformControls();
+		Editor.tool.setMode("translate");
 	}
 	else if(tool === Editor.MODE_ROTATE)
 	{
-		//Editor.tool = new RotateTool();
 		Editor.tool = new TransformControls();
 		Editor.tool.setMode("rotate");
 	}
 	else if(tool === Editor.MODE_RESIZE)
 	{
-		//Editor.tool = new ResizeTool();
 		Editor.tool = new TransformControls();
 		Editor.tool.setMode("scale");
 	}

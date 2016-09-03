@@ -138,15 +138,15 @@ Mouse.setCanvas = function(canvas)
 
 	canvas.mouseInside = false;
 
-	canvas.onmouseenter = function()
+	canvas.addEventListener("mouseenter", function()
 	{
 		this.mouseInside = true;
-	};
+	}, false);
 
-	canvas.onmouseleave = function()
+	canvas.addEventListener("mouseleave", function()
 	{
 		this.mouseInside = false;
-	};
+	}, false);
 }
 
 //Check if mouse is inside attached canvas
