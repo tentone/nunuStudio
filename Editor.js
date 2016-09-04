@@ -125,6 +125,7 @@ include("editor/tools/TransformGizmoTranslate.js");
 include("editor/helpers/ParticleEmitterHelper.js");
 include("editor/helpers/ObjectIconHelper.js");
 include("editor/helpers/PhysicsObjectHelper.js");
+include("editor/helpers/WireframeHelper.js");
 
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
@@ -148,7 +149,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.7 Alpha";
-Editor.TIMESTAMP = "201609040237";
+Editor.TIMESTAMP = "201609041521";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -757,7 +758,7 @@ Editor.updateSelectedObjectUI = function()
 	}
 }
 
-//TODO <TEST CODE>
+//TODO <REMOVE TEST CODE>
 var update = 0;
 var tree_delta, asset_delta, tabs_delta, panel_delta;
 
@@ -784,26 +785,31 @@ Editor.updateObjectViews = function()
 //Update tab names to match objects actual info
 Editor.updateTabsData = function()
 {
+	//TODO <REMOVE TEST CODE>
 	var start = Date.now();
 
 	Interface.tab.updateMetadata();
 
+	//TODO <REMOVE TEST CODE>
 	tabs_delta = Date.now() - start;
 }
 
 //Update tree view to match actual scene
 Editor.updateTreeView = function()
 {
+	//TODO <REMOVE TEST CODE>
 	var start = Date.now();
 
 	Interface.tree_view.fromObject(Editor.program);
 
+	//TODO <REMOVE TEST CODE>
 	tree_delta = Date.now() - start;
 }
 
 //Update assets explorer content
 Editor.updateAssetExplorer = function()
 {
+	//TODO <REMOVE TEST CODE>
 	var start = Date.now();
 
 	//Clean asset explorer
@@ -829,12 +835,14 @@ Editor.updateAssetExplorer = function()
 
 	Interface.asset_explorer.updateInterface();
 
+	//TODO <REMOVE TEST CODE>
 	asset_delta = Date.now() - start;
 }
 
 //Updates object panel values
 Editor.updateObjectPanel = function()
 {
+	//TODO <REMOVE TEST CODE>
 	var start = Date.now();
 
 	if(Interface.panel !== null)
@@ -842,6 +850,7 @@ Editor.updateObjectPanel = function()
 		Interface.panel.updatePanel();
 	}
 
+	//TODO <REMOVE TEST CODE>
 	panel_delta = Date.now() - start;
 }
 
@@ -962,6 +971,12 @@ Editor.selectObjectHelper = function()
 			Editor.object_helper.add(new THREE.BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
 			Editor.object_helper.add(new THREE.SkeletonHelper(Editor.selected_object));
 		}
+		//Mesh
+		else if(Editor.selected_object instanceof THREE.Mesh)
+		{
+			Editor.object_helper.add(new THREE.BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
+			Editor.object_helper.add(new WireframeHelper(Editor.selected_object));
+		}
 		//Object 3D
 		else if(Editor.selected_object instanceof THREE.Object3D)
 		{
@@ -1003,6 +1018,12 @@ Editor.updateRaycasterFromMouse = function()
 {
 	var mouse = new THREE.Vector2((Mouse.position.x/Editor.canvas.width)*2 - 1, -(Mouse.position.y/Editor.canvas.height)*2 + 1);
 	Editor.raycaster.setFromCamera(mouse, Editor.camera);
+}
+
+//Update editor raycaster with new x and y positions (normalized -1 to 1)
+Editor.updateRaycaster = function(x, y)
+{
+	Editor.raycaster.setFromCamera(new THREE.Vector2(x, y), Editor.camera);
 }
 
 //Reset editing flags
