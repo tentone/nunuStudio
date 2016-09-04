@@ -12,20 +12,19 @@ function ParticleEmitterHelper(particle)
 		this.runtime = new ObjectLoader().parse(particle.toJSON());
 		this.add(this.runtime);
 		this.runtime.initialize();
+
+		this.runtime.matrix = particle.matrixWorld;
+		this.runtime.matrixAutoUpdate = false;
 	}
 }
 
-//Super prototypes
 ParticleEmitterHelper.prototype = Object.create(THREE.Object3D.prototype);
 
-//Update attached particle
 ParticleEmitterHelper.prototype.update = function()
 {
 	if(this.runtime !== null)
 	{
-		this.particle.getWorldPosition(this.runtime.position);
-		this.particle.getWorldScale(this.runtime.scale);
-		this.particle.getWorldRotation(this.runtime.rotation);
+		this.runtime.matrix = this.particle.matrixWorld;
 		this.runtime.update();
 	}
 }
