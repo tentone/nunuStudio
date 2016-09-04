@@ -18,6 +18,7 @@ Settings.editor.axis_enabled = true;
 Settings.editor.camera_preview_enabled = true;
 Settings.editor.camera_preview_percentage = 0.35;
 Settings.editor.lock_mouse = true;
+Settings.editor.transformation_space = "local";
 
 //Render settings
 Settings.render = {};
@@ -71,7 +72,8 @@ Settings.load = function()
 		Settings.editor.camera_preview_enabled = data.editor.camera_preview_enabled;
 		Settings.editor.camera_preview_percentage = data.editor.camera_preview_percentage;
 		Settings.editor.lock_mouse = data.editor.lock_mouse;
-
+		Settings.editor.transformation_space = data.editor.transformation_space;
+		
 		//Render settings
 		Settings.render.shadows = data.render.shadows;
 		Settings.render.shadows_type = data.render.shadows_type;

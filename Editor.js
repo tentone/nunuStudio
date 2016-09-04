@@ -142,13 +142,13 @@ Editor.STATE_TESTING = 11;
 //Editor editing modes
 Editor.MODE_SELECT = 0;
 Editor.MODE_MOVE = 1;
-Editor.MODE_RESIZE = 2;
+Editor.MODE_SCALE = 2;
 Editor.MODE_ROTATE = 3;
 
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.7 Alpha";
-Editor.TIMESTAMP = "201609032015";
+Editor.TIMESTAMP = "201609040237";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -882,14 +882,16 @@ Editor.selectTool = function(tool)
 	if(tool === Editor.MODE_MOVE)
 	{
 		Editor.tool = new TransformControls();
+		Editor.tool.setSpace(Settings.editor.transformation_space);
 		Editor.tool.setMode("translate");
 	}
 	else if(tool === Editor.MODE_ROTATE)
 	{
 		Editor.tool = new TransformControls();
+		Editor.tool.setSpace(Settings.editor.transformation_space);
 		Editor.tool.setMode("rotate");
 	}
-	else if(tool === Editor.MODE_RESIZE)
+	else if(tool === Editor.MODE_SCALE)
 	{
 		Editor.tool = new TransformControls();
 		Editor.tool.setMode("scale");
