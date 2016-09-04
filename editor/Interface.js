@@ -444,7 +444,7 @@ Interface.initialize = function()
 	Interface.tool_resize.updateInterface();
 	Interface.tool_resize.setCallback(function()
 	{
-		Editor.selectTool(Editor.MODE_RESIZE);
+		Editor.selectTool(Editor.MODE_SCALE);
 		Interface.tool_resize.selected = true;
 		Interface.tool_move.selected = false;
 		Interface.tool_select.selected = false;

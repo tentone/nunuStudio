@@ -2,7 +2,7 @@
 	"general": {
 		"theme": "dark",
 		"file_preview_size": 70,
-		"show_stats": true
+		"show_stats": false
 	},
 	"editor": {
 		"grid_size": 500,
@@ -10,8 +10,9 @@
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,
-		"camera_preview_percentage": "0.4",
-		"lock_mouse": true
+		"camera_preview_percentage": 0.35,
+		"lock_mouse": true,
+		"transformation_space": "world"
 	},
 	"render": {
 		"shadows": true,
