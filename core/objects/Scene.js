@@ -141,19 +141,6 @@ Scene.prototype.toJSON = function(meta)
 {
 	var data = THREE.Scene.prototype.toJSON.call(this, meta);
 
-	//Fog
-	data.object.fog_color = this.fog_color;
-	data.object.fog_density = this.fog_density;
-	data.object.fog_near = this.fog_near;
-	data.object.fog_far = this.fog_far;
-	data.object.fog_mode = this.fog_mode;
-
-	//Background color
-	if(this.background !== null)
-	{
-		data.object.background = this.background;
-	}
-
 	//Initial Camera
 	if(this.initial_camera !== null)
 	{

@@ -100,40 +100,7 @@ function SpotLightPanel(parent)
 	});
 	this.form.add(this.angle);
 	this.form.nextRow();
-
-	//Decay
-	/*this.form.addText("Decay");
-	this.decay = new Slider(this.form.element);
-	this.decay.size.set(160, 18);
-	this.decay.setRange(0, 10);
-	this.decay.setStep(0.1);
-	this.decay.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.decay = self.decay.getValue();
-			self.decay_text.setText(self.obj.decay);
-		}
-	});
-	this.form.add(this.decay);
-	this.form.nextRow();*/
 	
-	//Cast shadow
-	this.cast_shadow = new CheckBox(this.form.element);
-	this.cast_shadow.setText("Cast Shadow");
-	this.cast_shadow.size.set(200, 15);
-	this.cast_shadow.position.set(5, 85);
-	this.cast_shadow.updateInterface();
-	this.cast_shadow.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.castShadow = self.cast_shadow.getValue();
-		}
-	});
-	this.form.add(this.cast_shadow);
-	this.form.nextRow();
-
 	//Visible
 	this.visible = new CheckBox(this.form.element);
 	this.visible.setText("Visible");
@@ -162,6 +129,92 @@ function SpotLightPanel(parent)
 	this.form.add(this.static);
 	this.form.nextRow();
 
+	//Shadow map
+	this.form.addText("Shadows");
+	this.form.nextRow();
+
+	//Cast shadow
+	this.cast_shadow = new CheckBox(this.form.element);
+	this.cast_shadow.setText("Cast Shadows");
+	this.cast_shadow.size.set(200, 15);
+	this.cast_shadow.position.set(5, 85);
+	this.cast_shadow.updateInterface();
+	this.cast_shadow.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.castShadow = self.cast_shadow.getValue();
+		}
+	});
+	this.form.add(this.cast_shadow);
+	this.form.nextRow();
+
+	//Shadow resolution
+	this.form.addText("Resolution");
+	this.shadow_width = new DropdownList(this.form.element);
+	this.shadow_width.size.set(60, 18);
+	this.shadow_width.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.shadow.mapSize.width = self.shadow_width.getValue();
+			self.obj.updateShadowMap();
+		}
+	});
+	this.form.add(this.shadow_width);
+	this.form.addText("x");
+	this.shadow_height = new DropdownList(this.form.element);
+	this.shadow_height.size.set(60, 18);
+	this.shadow_height.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.shadow.mapSize.height = self.shadow_height.getValue();
+			self.obj.updateShadowMap();
+		}
+	});
+	this.form.add(this.shadow_height);
+	this.form.nextRow();
+	for(var i = 5; i < 13; i++)
+	{
+		var size = Math.pow(2, i);
+		this.shadow_width.addValue(size.toString(), size);
+		this.shadow_height.addValue(size.toString(), size);
+	}
+
+	//Shadowmap camera near
+	this.form.addText("Near");
+	this.shadow_near = new NumberBox(this.form.element);
+	this.shadow_near.size.set(60, 18);
+	this.shadow_near.setStep(0.1);
+	this.shadow_near.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.shadow_near.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.shadow.camera.near = self.shadow_near.getValue();
+			self.obj.updateShadowMap();
+		}
+	});
+	this.form.add(this.shadow_near);
+
+	//Shadowmap camera far
+	this.form.addText("Far");
+	this.shadow_far = new NumberBox(this.form.element);
+	this.shadow_far.size.set(60, 18);
+	this.shadow_far.setStep(0.1);
+	this.shadow_far.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.shadow_far.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.shadow.camera.far = self.shadow_far.getValue();
+			self.obj.updateShadowMap();
+		}
+	});
+	this.form.add(this.shadow_far);
+	this.form.nextRow();
+
 	//Update form
 	this.form.updateInterface();
 }
@@ -178,11 +231,14 @@ SpotLightPanel.prototype.updatePanel = function()
 		this.position.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
-		this.cast_shadow.setValue(this.obj.castShadow);
 		this.angle.setValue(this.obj.angle);
 		this.penumbra.setValue(this.obj.penumbra);
-		//this.decay.setValue(this.obj.decay);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
+		this.cast_shadow.setValue(this.obj.castShadow);
+		this.shadow_width.setValue(this.obj.shadow.mapSize.width);
+		this.shadow_height.setValue(this.obj.shadow.mapSize.height);
+		this.shadow_near.setValue(this.obj.shadow.camera.near);
+		this.shadow_far.setValue(this.obj.shadow.camera.far);
 	}
 }

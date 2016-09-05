@@ -149,7 +149,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.7 Alpha";
-Editor.TIMESTAMP = "201609041521";
+Editor.TIMESTAMP = "201609050211";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -555,14 +555,22 @@ Editor.resize = function()
 //Select a object
 Editor.selectObject = function(obj)
 {
-	Editor.selected_object = obj;
-	Editor.updateSelectedObjectUI();
-	Editor.selectObjectHelper();
-
-	if(Editor.tool !== null && Editor.selected_object !== null)
+	if(obj !== null)
 	{
-		Editor.tool_container.add(Editor.tool);
-		Editor.tool.attach(Editor.selected_object);
+		Editor.selected_object = obj;
+		Editor.updateSelectedObjectUI();
+		Editor.selectObjectHelper();
+
+		if(Editor.tool !== null)
+		{
+			Editor.tool.detach();
+			Editor.tool.attach(Editor.selected_object);
+		}
+	}
+	else
+	{
+		Editor.selected_object = null;
+		Editor.resetEditingFlags();
 	}
 }
 
@@ -891,19 +899,19 @@ Editor.selectTool = function(tool)
 	if(tool === Editor.MODE_MOVE)
 	{
 		Editor.tool = new TransformControls();
-		Editor.tool.setSpace(Settings.editor.transformation_space);
 		Editor.tool.setMode("translate");
-	}
-	else if(tool === Editor.MODE_ROTATE)
-	{
-		Editor.tool = new TransformControls();
 		Editor.tool.setSpace(Settings.editor.transformation_space);
-		Editor.tool.setMode("rotate");
 	}
 	else if(tool === Editor.MODE_SCALE)
 	{
 		Editor.tool = new TransformControls();
 		Editor.tool.setMode("scale");
+	}
+	else if(tool === Editor.MODE_ROTATE)
+	{
+		Editor.tool = new TransformControls();
+		Editor.tool.setMode("rotate");
+		Editor.tool.setSpace(Settings.editor.transformation_space);
 	}
 	else
 	{
@@ -912,8 +920,8 @@ Editor.selectTool = function(tool)
 
 	if(Editor.tool !== null && Editor.selected_object !== null)
 	{
-		Editor.tool_container.add(Editor.tool);
 		Editor.tool.attach(Editor.selected_object);
+		Editor.tool_container.add(Editor.tool);
 	}
 }
 

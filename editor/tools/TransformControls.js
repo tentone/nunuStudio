@@ -71,7 +71,7 @@ function TransformControls()
 
 	var worldPosition = new THREE.Vector3();
 	var worldRotation = new THREE.Euler();
-	var worldRotationMatrix  = new THREE.Matrix4();
+	var worldRotationMatrix = new THREE.Matrix4();
 	var camPosition = new THREE.Vector3();
 	var camRotation = new THREE.Euler();
 
@@ -223,15 +223,11 @@ function TransformControls()
 		if(intersect)
 		{
 			editing = true;
-
 			scope.axis = intersect.object.name;
-
 			scope.updateScale();
 
 			eye.copy(camPosition).sub(worldPosition).normalize();
-
 			gizmo[mode].setActivePlane(scope.axis, eye);
-
 			var planeIntersect = intersectObjects([gizmo[mode].activePlane]);
 
 			if(planeIntersect)
@@ -272,22 +268,38 @@ function TransformControls()
 		{
 			point.sub(offset);
 			point.multiply(parentScale);
-			if(scope.axis.search("X") === - 1) point.x = 0;
-			if(scope.axis.search("Y") === - 1) point.y = 0;
-			if(scope.axis.search("Z") === - 1) point.z = 0;
 
-			if(scope.space === "local")
+			if(scope.axis.search("X") === -1)
 			{
-				point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
-				point.applyMatrix4(oldRotationMatrix);
+				point.x = 0;
+			}
+			if(scope.axis.search("Y") === -1) 
+			{
+				point.y = 0;
+			}
+			if(scope.axis.search("Z") === -1)
+			{
+				point.z = 0;
+			}
+					
+			if(scope.space === "world" || scope.axis.search("XYZ") !== -1)
+			{
+				point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
 
 				scope.object.position.copy(oldPosition);
 				scope.object.position.add(point);
 			}
-
-			if(scope.space === "world" || scope.axis.search("XYZ") !== - 1)
+			else if(scope.space === "local")
 			{
-				point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
+				if(scope.axis.length > 1)
+				{
+					point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
+				}
+				else
+				{
+					point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
+				}
+				point.applyMatrix4(oldRotationMatrix);
 
 				scope.object.position.copy(oldPosition);
 				scope.object.position.add(point);
@@ -300,15 +312,15 @@ function TransformControls()
 					scope.object.position.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
 				}
 
-				if(scope.axis.search("X") !== - 1)
+				if(scope.axis.search("X") !== -1)
 				{
 					scope.object.position.x = Math.round(scope.object.position.x / scope.translationSnap) * scope.translationSnap;
 				}
-				if(scope.axis.search("Y") !== - 1)
+				if(scope.axis.search("Y") !== -1)
 				{
 					scope.object.position.y = Math.round(scope.object.position.y / scope.translationSnap) * scope.translationSnap;
 				}
-				if(scope.axis.search("Z") !== - 1)
+				if(scope.axis.search("Z") !== -1)
 				{
 					scope.object.position.z = Math.round(scope.object.position.z / scope.translationSnap) * scope.translationSnap;
 				}

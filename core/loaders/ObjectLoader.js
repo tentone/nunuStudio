@@ -545,14 +545,23 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 		case "Scene":
 			object = new Scene();
-			object.fog_color = data.fog_color;
-			object.fog_density = data.fog_density;
-			object.fog_near = data.fog_near;
-			object.fog_far = data.fog_far;
-			object.setFogMode(data.fog_mode);
 			if(data.background !== undefined)
 			{
-				object.background = new THREE.Color(data.background.r, data.background.g, data.background.b);
+				if(Number.isInteger(data.background))
+				{
+					object.background = new THREE.Color(data.background);
+				}
+			}
+			if(data.fog !== undefined)
+			{
+				if(data.fog.type === "Fog")
+				{
+					object.fog = new THREE.Fog(data.fog.color, data.fog.near, data.fog.far);
+				}
+				else if(data.fog.type === "FogExp2")
+				{
+					object.fog = new THREE.FogExp2(data.fog.color, data.fog.density);
+				}
 			}
 			if(data.initial_camera !== undefined)
 			{
@@ -760,6 +769,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		object.materials = materials;
 		object.textures = textures;
 		object.geometries = geometries;
+		object.images = images;
+		object.video = videos;
+		object.fonts = fonts;
+		object.audio = audio;
 	}
 	else if(data.type === "LOD")
 	{
