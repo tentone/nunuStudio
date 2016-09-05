@@ -83,22 +83,6 @@ function PointLightPanel(parent)
 	this.form.add(this.intensity);
 	this.form.nextRow();
 
-	//Cast shadow
-	this.cast_shadow = new CheckBox(this.form.element);
-	this.cast_shadow.setText("Cast Shadow");
-	this.cast_shadow.size.set(200, 15);
-	this.cast_shadow.position.set(5, 85);
-	this.cast_shadow.updateInterface();
-	this.cast_shadow.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.castShadow = self.cast_shadow.getValue();
-		}
-	});
-	this.form.add(this.cast_shadow);
-	this.form.nextRow();
-
 	//Visible
 	this.visible = new CheckBox(this.form.element);
 	this.visible.setText("Visible");
@@ -128,7 +112,23 @@ function PointLightPanel(parent)
 	this.form.nextRow();
 
 	//Shadow map
-	this.form.addText("Shadow Map");
+	this.form.addText("Shadows");
+	this.form.nextRow();
+
+	//Cast shadow
+	this.cast_shadow = new CheckBox(this.form.element);
+	this.cast_shadow.setText("Cast Shadows");
+	this.cast_shadow.size.set(200, 15);
+	this.cast_shadow.position.set(5, 85);
+	this.cast_shadow.updateInterface();
+	this.cast_shadow.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.castShadow = self.cast_shadow.getValue();
+		}
+	});
+	this.form.add(this.cast_shadow);
 	this.form.nextRow();
 
 	//Shadow resolution
@@ -197,7 +197,6 @@ function PointLightPanel(parent)
 	this.form.add(this.shadow_far);
 	this.form.nextRow();
 
-
 	//Update form
 	this.form.updateInterface();
 }
@@ -213,11 +212,11 @@ PointLightPanel.prototype.updatePanel = function()
 		this.name.setText(this.obj.name);
 		this.position.setValue(this.obj.position);
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
-		this.cast_shadow.setValue(this.obj.castShadow);
 		this.distance.setValue(this.obj.distance);
 		this.intensity.setValue(this.obj.intensity);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
+		this.cast_shadow.setValue(this.obj.castShadow);
 		this.shadow_width.setValue(this.obj.shadow.mapSize.width);
 		this.shadow_height.setValue(this.obj.shadow.mapSize.height);
 		this.shadow_near.setValue(this.obj.shadow.camera.near);
