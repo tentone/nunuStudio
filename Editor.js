@@ -149,7 +149,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.7 Alpha";
-Editor.TIMESTAMP = "201609060211";
+Editor.TIMESTAMP = "201609061805";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -564,7 +564,6 @@ Editor.selectObject = function(object)
 
 		if(Editor.tool !== null)
 		{
-
 			Editor.tool.detach();
 			Editor.tool.attach(object);
 		}
@@ -902,7 +901,7 @@ Editor.selectTool = function(tool)
 		Editor.tool.dispose();	
 	}
 
-	if(Editor.selected_object !== null)
+	if(Editor.selected_object !== null && tool !== Editor.MODE_SELECT)
 	{
 		if(tool === Editor.MODE_MOVE)
 		{
@@ -1282,7 +1281,6 @@ Editor.initializeRenderer = function(canvas)
 {
 	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: Settings.render.antialiasing});
 	Editor.renderer.setSize(canvas.width, canvas.height);
-	Editor.renderer.setPixelRatio(window.devicePixelRatio || 1.0);
 	Editor.renderer.autoClear = false;
 	Editor.renderer.shadowMap.enabled = Settings.render.shadows;
 	Editor.renderer.shadowMap.type = Settings.render.shadows_type;
