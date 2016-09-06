@@ -766,11 +766,11 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	//LOD objects
 	if(data.type === "Program")
 	{
+		//object.images = images;
+		//object.videos = videos;
 		object.materials = materials;
 		object.textures = textures;
 		object.geometries = geometries;
-		object.images = images;
-		object.video = videos;
 		object.fonts = fonts;
 		object.audio = audio;
 	}

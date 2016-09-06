@@ -149,7 +149,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.7 Alpha";
-Editor.TIMESTAMP = "201609050211";
+Editor.TIMESTAMP = "201609060211";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -553,18 +553,24 @@ Editor.resize = function()
 }
 
 //Select a object
-Editor.selectObject = function(obj)
+Editor.selectObject = function(object)
 {
-	if(obj !== null)
+	if(object instanceof THREE.Object3D)
 	{
-		Editor.selected_object = obj;
+		Editor.selected_object = object;
+
 		Editor.updateSelectedObjectUI();
 		Editor.selectObjectHelper();
 
 		if(Editor.tool !== null)
 		{
+
 			Editor.tool.detach();
-			Editor.tool.attach(Editor.selected_object);
+			Editor.tool.attach(object);
+		}
+		else
+		{
+			Editor.selectTool(Editor.tool_mode);
 		}
 	}
 	else
@@ -890,38 +896,38 @@ Editor.selectTool = function(tool)
 {
 	Editor.tool_mode = tool;
 	Editor.tool_container.removeAll();
-
+	
 	if(Editor.tool !== null)
 	{
 		Editor.tool.dispose();	
 	}
 
-	if(tool === Editor.MODE_MOVE)
+	if(Editor.selected_object !== null)
 	{
-		Editor.tool = new TransformControls();
-		Editor.tool.setMode("translate");
-		Editor.tool.setSpace(Settings.editor.transformation_space);
-	}
-	else if(tool === Editor.MODE_SCALE)
-	{
-		Editor.tool = new TransformControls();
-		Editor.tool.setMode("scale");
-	}
-	else if(tool === Editor.MODE_ROTATE)
-	{
-		Editor.tool = new TransformControls();
-		Editor.tool.setMode("rotate");
-		Editor.tool.setSpace(Settings.editor.transformation_space);
+		if(tool === Editor.MODE_MOVE)
+		{
+			Editor.tool = new TransformControls();
+			Editor.tool.setMode("translate");
+			Editor.tool.setSpace(Settings.editor.transformation_space);
+		}
+		else if(tool === Editor.MODE_SCALE)
+		{
+			Editor.tool = new TransformControls();
+			Editor.tool.setMode("scale");
+		}
+		else if(tool === Editor.MODE_ROTATE)
+		{
+			Editor.tool = new TransformControls();
+			Editor.tool.setMode("rotate");
+			Editor.tool.setSpace(Settings.editor.transformation_space);
+		}
+
+		Editor.tool.attach(Editor.selected_object);
+		Editor.tool_container.add(Editor.tool);
 	}
 	else
 	{
 		Editor.tool = null;
-	}
-
-	if(Editor.tool !== null && Editor.selected_object !== null)
-	{
-		Editor.tool.attach(Editor.selected_object);
-		Editor.tool_container.add(Editor.tool);
 	}
 }
 
