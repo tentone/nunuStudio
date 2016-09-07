@@ -2,7 +2,7 @@
 	"general": {
 		"theme": "dark",
 		"file_preview_size": 70,
-		"show_stats": true
+		"show_stats": false
 	},
 	"editor": {
 		"grid_size": 500,
