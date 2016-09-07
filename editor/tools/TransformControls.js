@@ -282,13 +282,13 @@ function TransformControls()
 				if(scope.axis.length > 1)
 				{
 					point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
+					point.applyMatrix4(oldRotationMatrix);
 				}
 				else
 				{
-					point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
+					point.applyMatrix4(oldRotationMatrix);
 				}
-				point.applyMatrix4(oldRotationMatrix);
-
+				
 				scope.object.position.copy(oldPosition);
 				scope.object.position.add(point);
 			}
