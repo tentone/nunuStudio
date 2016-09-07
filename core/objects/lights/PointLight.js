@@ -8,8 +8,8 @@ function PointLight(hex, intensity, distance, decay)
 	
 	this.castShadow = true;
 
-	this.shadow.camera.near = 0.01;
-	this.shadow.camera.far = Number.MAX_SAFE_INTEGER;
+	this.shadow.camera.near = 0.05;
+	this.shadow.camera.far = 5000;
 	this.shadow.bias = 0.01;
 }
 
@@ -21,6 +21,5 @@ PointLight.prototype.updateShadowMap = function()
 {
 	this.shadow.map.dispose();
 	this.shadow.map = null;
-
 	this.shadow.camera.updateProjectionMatrix();
 }
