@@ -11,8 +11,6 @@ function TransformControls()
 
 	this.object = null;
 	this.visible = false;
-	this.translationSnap = null;
-	this.rotationSnap = null;
 	this.space = "world";
 	this.size = 1;
 	this.axis = null;
@@ -109,16 +107,6 @@ function TransformControls()
 		}
 
 		this.updateScale();
-	};
-
-	this.setTranslationSnap = function(translationSnap)
-	{
-		scope.translationSnap = translationSnap;
-	};
-
-	this.setRotationSnap = function(rotationSnap)
-	{
-		scope.rotationSnap = rotationSnap;
 	};
 
 	this.setSize = function(size)
@@ -304,32 +292,6 @@ function TransformControls()
 				scope.object.position.copy(oldPosition);
 				scope.object.position.add(point);
 			}
-
-			if(scope.translationSnap !== null)
-			{
-				if(scope.space === "local")
-				{
-					scope.object.position.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
-				}
-
-				if(scope.axis.search("X") !== -1)
-				{
-					scope.object.position.x = Math.round(scope.object.position.x / scope.translationSnap) * scope.translationSnap;
-				}
-				if(scope.axis.search("Y") !== -1)
-				{
-					scope.object.position.y = Math.round(scope.object.position.y / scope.translationSnap) * scope.translationSnap;
-				}
-				if(scope.axis.search("Z") !== -1)
-				{
-					scope.object.position.z = Math.round(scope.object.position.z / scope.translationSnap) * scope.translationSnap;
-				}
-
-				if(scope.space === "local")
-				{
-					scope.object.position.applyMatrix4(worldRotationMatrix);
-				}
-			}
 		}
 		else if(mode === "scale")
 		{
@@ -413,19 +375,9 @@ function TransformControls()
 				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
 
 				quaternionXYZ.setFromRotationMatrix(oldRotationMatrix);
-
-				if(scope.rotationSnap !== null)
-				{
-					quaternionX.setFromAxisAngle(unitX, Math.round((rotation.x - offsetRotation.x) / scope.rotationSnap) * scope.rotationSnap);
-					quaternionY.setFromAxisAngle(unitY, Math.round((rotation.y - offsetRotation.y) / scope.rotationSnap) * scope.rotationSnap);
-					quaternionZ.setFromAxisAngle(unitZ, Math.round((rotation.z - offsetRotation.z) / scope.rotationSnap) * scope.rotationSnap);
-				}
-				else
-				{
-					quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
-					quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
-					quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
-				}
+				quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
+				quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
+				quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
 
 				if(scope.axis === "X")
 				{
@@ -448,19 +400,10 @@ function TransformControls()
 				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
 				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix));
 
-				if(scope.rotationSnap !== null)
-				{
-					quaternionX.setFromAxisAngle(unitX, Math.round((rotation.x - offsetRotation.x) / scope.rotationSnap) * scope.rotationSnap);
-					quaternionY.setFromAxisAngle(unitY, Math.round((rotation.y - offsetRotation.y) / scope.rotationSnap) * scope.rotationSnap);
-					quaternionZ.setFromAxisAngle(unitZ, Math.round((rotation.z - offsetRotation.z) / scope.rotationSnap) * scope.rotationSnap);
-				}
-				else
-				{
-					quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
-					quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
-					quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
-				}
 
+				quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
+				quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
+				quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
 				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix);
 
 				if(scope.axis === "X")

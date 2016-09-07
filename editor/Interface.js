@@ -238,39 +238,15 @@ Interface.initialize = function()
 			if(files.length > 0)
 			{
 				var file = files[0].path;
+				
+				var json = FileSystem.readFile(file);
+				var atlas = FileSystem.readFile(file.replace("json", "atlas"));
 				var path = file.substring(0, file.lastIndexOf("\\"));
+				
+				var animation = new SpineAnimation(json, atlas, path);
+				animation.setAnimation(0, "walk");
 
-				var atlas = new spine.TextureAtlas(FileSystem.readFile(file.replace("json", "atlas")), function(fname)
-				{
-					var image = document.createElement("img");
-					image.src = path + "\\" + fname;
-					image.width = 1024;
-					image.height = 1024;
-
-					var texture = new spine.threejs.ThreeJsTexture(image);
-
-					return texture;
-				});
-				var loader = new spine.TextureAtlasAttachmentLoader(atlas);
-
-				var json = new spine.SkeletonJson(loader);
-
-				var skeleton = json.readSkeletonData(FileSystem.readFile(file));
-
-				var mesh = new spine.threejs.SkeletonMesh(skeleton);
-				mesh.state.setAnimation(0, "walk", true);
-				mesh.name = "spine";
-
-				var clock = new THREE.Clock();
-
-				var update = function()
-				{
-					mesh.update(clock.getDelta());
-					requestAnimationFrame(update);
-				}
-
-				update();
-				Editor.addToScene(mesh);
+				Editor.addToScene(animation);
 				Editor.updateObjectViews();
 			}
 		}, ".json");

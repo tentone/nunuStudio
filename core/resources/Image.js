@@ -10,7 +10,7 @@ function Image(url)
 	this.format = "";
 	this.encoding = ""
 	this.data = null;
-
+	
 	if(url !== undefined)
 	{
 		this.encoding = url.split(".").pop();
