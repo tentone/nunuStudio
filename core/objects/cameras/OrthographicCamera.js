@@ -15,6 +15,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	THREE.OrthographicCamera.call(this, -1.0, 1.0, 1.0, -1.0, near, far);
 
 	this.name = "camera";
+
 	this.size = size;
 	this.aspect = aspect;
 	this.mode = (mode !== undefined) ? mode : OrthographicCamera.FIXED_VERTICAL;
@@ -63,15 +64,7 @@ OrthographicCamera.prototype.updateProjectionMatrix = function()
 //Create JSON for object
 OrthographicCamera.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
-
-	data.object.zoom = this.zoom;
-	data.object.left = this.left;
-	data.object.right = this.right;
-	data.object.top = this.top;
-	data.object.bottom = this.bottom;
-	data.object.near = this.near;
-	data.object.far = this.far;
+	var data = THREE.OrthographicCamera.prototype.toJSON.call(this, meta);
 
 	data.object.size = this.size;
 	data.object.aspect = this.aspect;

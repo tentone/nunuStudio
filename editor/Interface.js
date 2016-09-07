@@ -230,6 +230,52 @@ Interface.initialize = function()
 		}, ".fbx");
 	});
 
+	//Load Spine Animation
+	Interface.asset_file.addOption("Spine Animation", function()
+	{
+		App.chooseFile(function(files)
+		{
+			if(files.length > 0)
+			{
+				var file = files[0].path;
+				var path = file.substring(0, file.lastIndexOf("\\"));
+
+				var atlas = new spine.TextureAtlas(FileSystem.readFile(file.replace("json", "atlas")), function(fname)
+				{
+					var image = document.createElement("img");
+					image.src = path + "\\" + fname;
+					image.width = 1024;
+					image.height = 1024;
+
+					var texture = new spine.threejs.ThreeJsTexture(image);
+
+					return texture;
+				});
+				var loader = new spine.TextureAtlasAttachmentLoader(atlas);
+
+				var json = new spine.SkeletonJson(loader);
+
+				var skeleton = json.readSkeletonData(FileSystem.readFile(file));
+
+				var mesh = new spine.threejs.SkeletonMesh(skeleton);
+				mesh.state.setAnimation(0, "walk", true);
+				mesh.name = "spine";
+
+				var clock = new THREE.Clock();
+
+				var update = function()
+				{
+					mesh.update(clock.getDelta());
+					requestAnimationFrame(update);
+				}
+
+				update();
+				Editor.addToScene(mesh);
+				Editor.updateObjectViews();
+			}
+		}, ".json");
+	}, Interface.file_dir + "icons/animation/spine.png");
+
 	//Load Image texture
 	Interface.asset_file.addOption("Texture", function()
 	{

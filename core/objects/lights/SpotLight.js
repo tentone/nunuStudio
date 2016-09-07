@@ -8,8 +8,8 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 	
 	this.castShadow = true;
 
-	this.shadow.camera.near = 0.1;
-	this.shadow.camera.far = 500;
+	this.shadow.camera.near = 0.05;
+	this.shadow.camera.far = 5000;
 	this.shadow.mapSize.width = 512;
 	this.shadow.mapSize.height = 512;
 }
@@ -22,6 +22,5 @@ SpotLight.prototype.updateShadowMap = function()
 {
 	this.shadow.map.dispose();
 	this.shadow.map = null;
-
 	this.shadow.camera.updateProjectionMatrix();
 }

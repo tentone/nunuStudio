@@ -19,7 +19,6 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
-//Initialize
 PerspectiveCamera.prototype.initialize = function()
 {
 	this.getWorldScale(this.scale);
@@ -28,14 +27,5 @@ PerspectiveCamera.prototype.initialize = function()
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
-	}
-}
-
-//Update State
-PerspectiveCamera.prototype.update = function()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
 	}
 }

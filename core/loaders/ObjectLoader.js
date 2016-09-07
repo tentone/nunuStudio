@@ -710,23 +710,30 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	}
 
 	//Shadow data
-	if(data.shadow)
+	if(data.shadow !== undefined)
 	{
-		if(data.shadow.bias !== undefined)
+		if(object.shadow.bias !== undefined)
 		{
 			object.shadow.bias = data.shadow.bias;
 		}
-		if(data.shadow.radius !== undefined)
-		{
+		if(object.shadow.radius !== undefined)
+		{	
 			object.shadow.radius = data.shadow.radius;
 		}
 		if(data.shadow.mapSize !== undefined)
 		{
-			object.shadow.mapSize.fromArray(data.shadow.mapSize);
+			var mapSize = data.shadow.mapSize;
+			object.shadow.mapSize.set(mapSize.x, mapSize.y);
 		}
 		if(data.shadow.camera !== undefined)
 		{
-			object.shadow.camera = this.parseObject(data.shadow.camera);
+			var camera = data.shadow.camera;
+			object.shadow.camera.top = camera.top;
+			object.shadow.camera.bottom = camera.bottom;
+			object.shadow.camera.left = camera.left;
+			object.shadow.camera.right = camera.right;
+			object.shadow.camera.near = camera.near;
+			object.shadow.camera.far = camera.far;
 		}
 	}
 

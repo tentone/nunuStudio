@@ -7,6 +7,7 @@ include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
+include("lib/spine.min.js");
 
 //Internal modules
 include("core/three/Three.js");
@@ -15,6 +16,7 @@ include("core/three/Vector3.js");
 include("core/three/Vector2.js");
 include("core/three/Color.js");
 include("core/three/Texture.js");
+include("core/three/LightShadow.js");
 
 include("input/Key.js");
 include("input/Keyboard.js");
@@ -39,9 +41,11 @@ include("core/loaders/AudioLoader.js");
 include("core/loaders/TextureLoader.js");
 include("core/loaders/ObjectLoader.js");
 
-include("core/objects/physics/PhysicsObject.js");
 include("core/objects/device/LeapMotion.js");
 include("core/objects/device/KinectDevice.js");
+include("core/objects/mesh/Mesh.js");
+include("core/objects/mesh/SkinnedMesh.js");
+include("core/objects/mesh/Text3D.js");
 include("core/objects/lights/PointLight.js");
 include("core/objects/lights/SpotLight.js");
 include("core/objects/lights/AmbientLight.js");
@@ -53,11 +57,9 @@ include("core/objects/cameras/OrthographicCamera.js");
 include("core/objects/audio/AudioEmitter.js");
 include("core/objects/script/Script.js");
 include("core/objects/script/BlockScript.js");
+include("core/objects/physics/PhysicsObject.js");
 include("core/objects/Bone.js");
 include("core/objects/Container.js");
-include("core/objects/Mesh.js");
-include("core/objects/SkinnedMesh.js");
-include("core/objects/Text3D.js");
 include("core/objects/Sprite.js");
 include("core/objects/ParticleEmitter.js");
 include("core/objects/Program.js");
