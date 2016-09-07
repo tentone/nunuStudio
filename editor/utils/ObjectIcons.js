@@ -26,6 +26,7 @@ ObjectIcons.icons["PerspectiveCamera"] = "editor/files/icons/camera/prespective.
 ObjectIcons.icons["OrthographicCamera"] = "editor/files/icons/camera/orthographic.png";
 
 //Objects
+ObjectIcons.icons["SpineAnimation"] = "editor/files/icons/animation/spine.png";
 ObjectIcons.icons["Mesh"] = "editor/files/icons/models/cube.png";
 ObjectIcons.icons["SkinnedMesh"] = "editor/files/icons/animation/skeleton.png";
 ObjectIcons.icons["ParticleEmiter"] = "editor/files/icons/effects/particles.png";
