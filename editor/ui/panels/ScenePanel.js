@@ -67,15 +67,15 @@ function ScenePanel(parent)
 	this.form.addText("Fog");
 	this.fog = new DropdownList(this.form.element);
 	this.fog.size.set(100, 20);
-	this.fog.addValue("Off", Scene.FOG_NONE);
-	this.fog.addValue("Linear", Scene.FOG_LINEAR);
-	this.fog.addValue("Exponential", Scene.FOG_EXPONENTIAL);
+	this.fog.addValue("None", THREE.Fog.NONE);
+	this.fog.addValue("Linear", THREE.Fog.LINEAR);
+	this.fog.addValue("Exponential", THREE.Fog.EXPONENTIAL);
 	this.fog.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
 			self.obj.setFogMode(self.fog.getSelectedIndex());
-			self.updateForms();
+			self.updatePanel();
 		}
 	});
 	this.form.add(this.fog);
@@ -94,9 +94,8 @@ function ScenePanel(parent)
 		if(self.obj !== null)
 		{	
 			var color = self.fog_linear_color.getValueHex();
-			self.obj.fog_color = color;
 			self.fog_exponential_color.setValueHex(color);
-			self.obj.updateFog();
+			self.obj.fog.color.setHex(color);
 		}
 	});
 	this.fog_linear_form.add(this.fog_linear_color);
@@ -110,8 +109,7 @@ function ScenePanel(parent)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fog_near = self.fog_near.getValue();
-			self.obj.updateFog();
+			self.obj.fog.near = self.fog_near.getValue();
 		}
 	});
 	this.fog_linear_form.add(this.fog_near);
@@ -125,8 +123,7 @@ function ScenePanel(parent)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fog_far = self.fog_far.getValue();
-			self.obj.updateFog();
+			self.obj.fog.far = self.fog_far.getValue();
 		}
 	});
 	this.fog_linear_form.add(this.fog_far);
@@ -149,9 +146,8 @@ function ScenePanel(parent)
 		if(self.obj !== null)
 		{	
 			var color = self.fog_exponential_color.getValueHex();
-			self.obj.fog_color = color;
 			self.fog_linear_color.setValueHex(color);
-			self.obj.updateFog();
+			self.obj.fog.color.setHex(color);
 		}
 	});
 	this.fog_exponential_form.add(this.fog_exponential_color);
@@ -166,8 +162,7 @@ function ScenePanel(parent)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fog_density = self.fog_density.getValue();
-			self.obj.updateFog();
+			self.obj.fog.density = self.fog_density.getValue();
 		}
 	});
 	this.fog_exponential_form.add(this.fog_density);
@@ -206,19 +201,34 @@ ScenePanel.prototype.updatePanel = function()
 	{
 		this.name.setText(this.obj.name);
 		this.default.setValue(this.obj.uuid === this.obj.parent.default_scene);
-		this.fog.setValue(this.obj.fog_mode);
-		this.fog_linear_color.setValueHex(this.obj.fog_color);
-		this.fog_exponential_color.setValueHex(this.obj.fog_color);
-		this.fog_near.setValue(this.obj.fog_near);
-		this.fog_far.setValue(this.obj.fog_far);
-		this.fog_density.setValue(this.obj.fog_density);
+		
+		if(this.obj.fog instanceof THREE.Fog)
+		{
+			this.fog.setValue(THREE.Fog.LINEAR);
+			this.fog_linear_color.setValueHex(this.obj.fog.color.getHex());
+			this.fog_near.setValue(this.obj.fog.near);
+			this.fog_far.setValue(this.obj.fog.far);
+			this.updateForms();
+		}
+		else if(this.obj.fog instanceof THREE.FogExp2)
+		{
+			this.fog.setValue(THREE.Fog.EXPONENTIAL);
+			this.fog_exponential_color.setValueHex(this.obj.fog.color.getHex());
+			this.fog_density.setValue(this.obj.fog.density);
+			this.updateForms();
+		}
+		else
+		{
+			this.fog.setValue(THREE.Fog.NONE);
+			this.updateForms();
+		}
+
 		if(this.obj.background !== null)
 		{
 			this.background.setValue(this.obj.background.r, this.obj.background.g, this.obj.background.b);
 		}
-		this.gravity.setValue(this.obj.world.gravity.x, this.obj.world.gravity.y, this.obj.world.gravity.z);
 
-		this.updateForms();
+		this.gravity.setValue(this.obj.world.gravity.x, this.obj.world.gravity.y, this.obj.world.gravity.z);
 	}
 }
 
@@ -227,13 +237,10 @@ ScenePanel.prototype.updateForms = function()
 {
 	if(this.obj !== null)
 	{
-		//Update sub forms visibility
-		this.fog_linear_form.visible = (this.obj.fog_mode === Scene.FOG_LINEAR) ? true : false;
+		this.fog_linear_form.visible = (this.obj.fog instanceof THREE.Fog) ? true : false;
 		this.fog_linear_form.updateInterface();
-		this.fog_exponential_form.visible = (this.obj.fog_mode === Scene.FOG_EXPONENTIAL) ? true : false;
+		this.fog_exponential_form.visible = (this.obj.fog instanceof THREE.FogExp2) ? true : false;
 		this.fog_exponential_form.updateInterface();
-
-		//Update form
 		this.form.updateInterface();
 	}
 }

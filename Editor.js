@@ -149,7 +149,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201609081416";
+Editor.TIMESTAMP = "201609082139";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -477,32 +477,39 @@ Editor.update = function()
 //Draw stuff into screen
 Editor.draw = function()
 {
-	Editor.renderer.clear();
+	var renderer = Editor.renderer;	
+	renderer.clear();
 
 	if(Editor.state === Editor.STATE_EDITING)
 	{
-		Editor.renderer.setViewport(0, 0, Editor.canvas.width, Editor.canvas.height);
-		Editor.renderer.setScissor(0, 0, Editor.canvas.width, Editor.canvas.height);
-		Editor.renderer.render(Editor.program.scene, Editor.camera);
+		renderer.setViewport(0, 0, Editor.canvas.width, Editor.canvas.height);
+		renderer.setScissor(0, 0, Editor.canvas.width, Editor.canvas.height);
+		renderer.render(Editor.program.scene, Editor.camera);
 
-		Editor.renderer.render(Editor.tool_scene, Editor.camera);
-		Editor.renderer.clearDepth();
-		Editor.renderer.render(Editor.tool_scene_top, Editor.camera);
+		renderer.render(Editor.tool_scene, Editor.camera);
+		renderer.clearDepth();
+		renderer.render(Editor.tool_scene_top, Editor.camera);
 
 		if(Settings.editor.camera_preview_enabled && Editor.selected_object instanceof THREE.Camera)
 		{
 			var width = Settings.editor.camera_preview_percentage * Editor.canvas.width;
 			var height = Settings.editor.camera_preview_percentage * Editor.canvas.height;
 			var offset = Editor.canvas.width - width - 10;
-			var camera = Editor.selected_object;
 
-			camera.aspect = width/height;
+			var camera = Editor.selected_object;
+			camera.aspect = width / height;
 			camera.updateProjectionMatrix();
 
-			Editor.renderer.clearDepth();
-			Editor.renderer.setViewport(offset, 10, width, height);
-			Editor.renderer.setScissor(offset, 10, width, height);
-			Editor.renderer.render(Editor.program.scene, camera);
+			//TODO <HACK>
+			var background = Editor.program.scene.background;
+			Editor.program.scene.background = null;
+
+			renderer.setViewport(offset, 10, width, height);
+			renderer.setScissor(offset, 10, width, height);
+			renderer.render(Editor.program.scene, camera);
+
+			//TODO <HACK>
+			Editor.program.scene.background = background;
 		}
 	}
 	else if(Editor.state === Editor.STATE_TESTING)
@@ -532,7 +539,7 @@ Editor.draw = function()
 		}
 		else
 		{
-			Editor.renderer.render(Editor.program_running.scene, Editor.program_running.scene.camera);
+			renderer.render(Editor.program_running.scene, Editor.program_running.scene.camera);
 		}
 	}
 
