@@ -38,7 +38,7 @@ Main.initialize = function(canvas)
 	Mouse.setCanvas(Main.canvas);
 
 	//Set renderer
-	Main.renderer = new THREE.WebGLRenderer({canvas: Main.canvas, antialias: false});
+	Main.renderer = new THREE.WebGLRenderer({canvas: Main.canvas, antialias: true});
 	Main.renderer.autoClear = false;
 	Main.renderer.shadowMap.enabled = true;
 	Main.renderer.shadowMap.type = THREE.PCFShadowMap;
