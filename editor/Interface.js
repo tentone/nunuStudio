@@ -244,7 +244,6 @@ Interface.initialize = function()
 				var path = file.substring(0, file.lastIndexOf("\\"));
 				
 				var animation = new SpineAnimation(json, atlas, path);
-				animation.setAnimation(0, "walk");
 
 				Editor.addToScene(animation);
 				Editor.updateObjectViews();

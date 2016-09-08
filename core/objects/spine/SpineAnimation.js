@@ -1,25 +1,42 @@
 "use strict";
 
-function SpineAnimation(json, atlas, path)
+function SpineAnimation(json, atlas, path, textures)
 {
-	var images = [];
-	var texture_atlas = new spine.TextureAtlas(atlas, function(file)
+	if(textures !== undefined)
 	{
-		var image = new Image(path + "\\" + file);
-		images.push(image);
+		var texture_atlas = new spine.TextureAtlas(atlas, function(file)
+		{
+			for(var i = 0; i < textures.length; i++)
+			{
+				if(textures[i].name === file)
+				{
+					var texture = new SpineTexture(textures[i].texture);
+					var image = texture.texture.image;
+					image.width = 1024;
+					image.height = 1024;
 
-		var element = document.createElement("img");
-		element.src = image.data;
-		element.width = 1024;
-		element.height = 1024;
+					return texture;
+				}
+			}
+		});
+	}
+	else
+	{
+		textures = [];
+		
+		var texture_atlas = new spine.TextureAtlas(atlas, function(file)
+		{
+			var texture = new SpineTexture(new Texture(new Image(path + "\\" + file)));
+			var image = texture.texture.image;
+			image.width = 1024;
+			image.height = 1024;
+			
+			textures.push({name: file, texture: texture.texture});
 
-		var texture = new spine.threejs.ThreeJsTexture(element);
-		texture.texture = new Texture(new Image(element.src));
-		texture.texture.flipY = false;
+			return texture;
+		});
+	}
 
-		return texture;
-	});
-	
 	var loader = new spine.TextureAtlasAttachmentLoader(texture_atlas);
 	var skeleton = new spine.SkeletonJson(loader).readSkeletonData(json);
 
@@ -42,7 +59,7 @@ function SpineAnimation(json, atlas, path)
 
 	this.json = json;
 	this.atlas = atlas;
-	this.images = images;
+	this.textures = textures;
 
 	this.name = "spine";
 	this.type = "SpineAnimation";
@@ -52,44 +69,43 @@ function SpineAnimation(json, atlas, path)
 	this.castShadow = true;
 
 	this.clock = new THREE.Clock();
-	
-	var mesh = this;
-	var clock = this.clock;
-	var state = this.state;
-	var skeleton = this.skeleton;
-
-	var update = function()
-	{
-		requestAnimationFrame(update);
-		state.update(clock.getDelta());
-		state.apply(skeleton);
-		skeleton.updateWorldTransform();
-		mesh.updateGeometry();
-	};
-	requestAnimationFrame(update);
 }
 
 SpineAnimation.prototype = Object.create(THREE.Mesh.prototype);
 SpineAnimation.QUAD_TRIANGLES = [0, 1, 2, 2, 3, 0];
 
-SpineAnimation.prototype.setAnimation = function(track, name)
+SpineAnimation.prototype.update = function()
 {
-	this.state.setAnimation(track, name, true);
-}
-
-SpineAnimation.prototype.update = function(delta)
-{
-	/*var state = this.state;
+	var state = this.state;
 	var skeleton = this.skeleton;
-	state.update(delta);
+	state.update(this.clock.getDelta());
 	state.apply(skeleton);
 	skeleton.updateWorldTransform();
-	this.updateGeometry();*/
+	this.updateGeometry();
 
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();
 	}
+}
+
+SpineAnimation.prototype.getAnimations = function()
+{
+	return this.state.data.skeletonData.animations;
+}
+
+SpineAnimation.prototype.setAnimation = function(track, name)
+{
+	try
+	{
+		this.state.setAnimation(track, name, true);
+	}
+	catch(e){}
+}
+
+SpineAnimation.prototype.getSkins = function()
+{
+	return this.state.data.skeletonData.skins;
 }
 
 //Update mesh geometry from animation state
@@ -103,12 +119,11 @@ SpineAnimation.prototype.updateGeometry = function()
 	var vertices = null;
 	var triangles = null;
 	var drawOrder = this.skeleton.drawOrder;
-	var batcher = this.batcher;
-	batcher.begin();
-	
 	var z = 0;
 	var zOffset = this.zOffset;
-	
+	var batcher = this.batcher;
+	batcher.begin();
+
 	for(var i = 0, n = drawOrder.length; i < n; i++)
 	{
 		var slot = drawOrder[i];
@@ -142,7 +157,7 @@ SpineAnimation.prototype.updateGeometry = function()
 				material.map = texture.texture;
 				material.needsUpdate = true;
 			}
-			this.batcher.batch(vertices, triangles, z);
+			batcher.batch(vertices, triangles, z);
 			z += zOffset;
 		}
 	}
@@ -152,16 +167,27 @@ SpineAnimation.prototype.updateGeometry = function()
 //Serialize animation data
 SpineAnimation.prototype.toJSON = function(meta)
 {
+	//Avoid serializing geometry and material
 	var geometry = this.geometry;
 	var material = this.material;
 	this.geometry = undefined;
 	this.material = undefined;
 
+	//Animation data
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
-
 	data.object.json = this.json;
 	data.object.atlas = this.atlas;
+	data.object.textures = [];
 
+	//Textures
+	var textures = this.textures;
+	for(var i = 0; i < textures.length; i++)
+	{
+		var texture = textures[i].texture.toJSON(meta);
+		data.object.textures.push({name: textures[i].name, texture: texture.uuid});
+	}
+
+	//Restore geometry and material
 	this.geometry = geometry;
 	this.material = material;
 

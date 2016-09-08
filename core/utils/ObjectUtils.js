@@ -26,7 +26,7 @@ ObjectUtils.getMaterials = function(obj, materials)
 		var child = obj.children[i];
 
 		//Check if child has material
-		if(!child.hidden && child.material !== undefined && !(child instanceof Sky))
+		if(!child.hidden && child.material !== undefined && !(child instanceof Sky || child instanceof SpineAnimation))
 		{
 			if(child.material instanceof THREE.Material)
 			{
