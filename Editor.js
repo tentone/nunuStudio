@@ -149,7 +149,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201609071608";
+Editor.TIMESTAMP = "201609080330";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -1134,6 +1134,7 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile("lib\\leap.min.js", dir + "\\lib\\leap.min.js");
 	FileSystem.copyFile("lib\\stats.min.js", dir + "\\lib\\stats.min.js");
 	FileSystem.copyFile("lib\\cannon.min.js", dir + "\\lib\\cannon.min.js");
+	FileSystem.copyFile("lib\\spine.min.js", dir + "\\lib\\spine.min.js");
 	FileSystem.makeDirectory(dir + "\\lib\\three");
 	FileSystem.copyFile("lib\\three\\three.min.js", dir + "\\lib\\three\\three.min.js");
 	FileSystem.makeDirectory(dir + "\\lib\\three\\effects");

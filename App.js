@@ -60,6 +60,7 @@ include("core/objects/script/Script.js");
 include("core/objects/script/BlockScript.js");
 include("core/objects/physics/PhysicsObject.js");
 include("core/objects/spine/SpineAnimation.js");
+include("core/objects/spine/SpineTexture.js");
 include("core/objects/Bone.js");
 include("core/objects/Container.js");
 include("core/objects/ParticleEmitter.js");
