@@ -17,6 +17,7 @@ include("core/three/Vector2.js");
 include("core/three/Color.js");
 include("core/three/Texture.js");
 include("core/three/LightShadow.js");
+include("core/three/Fog.js");
 
 include("input/Key.js");
 include("input/Keyboard.js");

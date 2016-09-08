@@ -10,13 +10,6 @@ function Scene()
 	//Matrix auto update
 	this.matrixAutoUpdate = false;
 
-	//Fog
-	this.fog_mode = Scene.FOG_NONE;
-	this.fog_color = 0xffffff;
-	this.fog_near = 4;
-	this.fog_far = 10;
-	this.fog_density = 0.01;
-
 	//Clock
 	this.clock = new THREE.Clock();
 
@@ -40,11 +33,6 @@ function Scene()
 	this.listener = new THREE.AudioListener();
 }
 
-//Fog modes
-Scene.FOG_NONE = 0;
-Scene.FOG_LINEAR = 1;
-Scene.FOG_EXPONENTIAL = 2;
-
 Scene.prototype = Object.create(THREE.Scene.prototype);
 
 //Initialize
@@ -61,8 +49,6 @@ Scene.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
-
-	this.clock.getDelta();
 }
 
 //Update scene
@@ -89,9 +75,11 @@ Scene.prototype.getInitialCamera = function(obj)
 		return obj;
 	}
 
-	for(var i = 0; i < obj.children.length; i++)
+	var children = obj.children;
+	var length = children.length;
+	for(var i = 0; i < length; i++)
 	{
-		var camera = this.getInitialCamera(obj.children[i]);
+		var camera = this.getInitialCamera(children[i]);
 		if(camera !== null)
 		{
 			return camera;
@@ -103,36 +91,24 @@ Scene.prototype.getInitialCamera = function(obj)
 
 //Set fog mode
 Scene.prototype.setFogMode = function(mode)
-{
-	this.fog_mode = mode;
+{	
+	var color = "#FFFFFF";
+	if(this.fog !== null)
+	{
+		color = this.fog.color.getHex();
+	}
 
-	if(mode === Scene.FOG_LINEAR)
-	{
-		this.fog = new THREE.Fog(this.fog_color, this.fog_near, this.fog_far);
+	if(mode === THREE.Fog.LINEAR)
+	{	
+		this.fog = new THREE.Fog(color, 5, 20);
 	}
-	else if(mode === Scene.FOG_EXPONENTIAL)
+	else if(mode === THREE.Fog.EXPONENTIAL)
 	{
-		this.fog = new THREE.FogExp2(this.fog_color, this.fog_density);
+		this.fog = new THREE.FogExp2(color, 0.01);
 	}
-	else
+	else if(mode === THREE.Fog.NONE)
 	{
 		this.fog = null;
-	}
-}
-
-//Update fog from stored value
-Scene.prototype.updateFog = function()
-{
-	if(this.fog instanceof THREE.Fog)
-	{
-		this.fog.color.setHex(this.fog_color);
-		this.fog.far = this.fog_far;
-		this.fog_near = this.fog_near;
-	}
-	else if(this.fog instanceof THREE.FogExp2)
-	{
-		this.fog.color.setHex(this.fog_color);
-		this.fog.density = this.fog_density;
 	}
 }
 
@@ -141,15 +117,16 @@ Scene.prototype.toJSON = function(meta)
 {
 	var data = THREE.Scene.prototype.toJSON.call(this, meta);
 
-	//Initial Camera
 	if(this.initial_camera !== null)
 	{
 		data.object.initial_camera = this.initial_camera;
 	}
 
-	//Physics World
 	data.object.world = {};
 	data.object.world.gravity = this.world.gravity;
+	data.object.world.solver = {};
+	data.object.world.solver.tolerance = this.world.solver.tolerance;
+	data.object.world.solver.iterations = this.world.solver.iterations;
 
 	return data;
 }
