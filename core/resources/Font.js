@@ -13,23 +13,36 @@ function Font(url)
 
 	if(url !== undefined)
 	{
-		this.encoding = url.split(".").pop();
-
-		if(this.encoding === "json")
+		if(typeof url === "object")
 		{
-			var file = new XMLHttpRequest();
-			file.open("GET", url, false);
-			file.overrideMimeType("text/plain");
-			file.send(null);
-
-			this.data = JSON.parse(file.response);
-			this.name = this.data.original_font_information.fullName;
-			this.format = "JSON";
+			this.data = url;
+			this.name = url.original_font_information.fullName;
+			this.format = "json";
+			this.encoding = "json";
 		}
 		else
 		{
-			//TODO <TTF/OTF Support>
-			console.warn("Font: Font format is not supported", this.encoding);
+			this.encoding = url.split(".").pop().toLowerCase();
+
+			if(this.encoding === "json")
+			{
+				/*var file = new XMLHttpRequest();
+				file.open("GET", url, false);
+				file.overrideMimeType("text/plain");
+				file.send(null);
+				this.data = JSON.parse(file.response);*/
+
+				this.data = JSON.parse(FileSystem.readFile(url));
+				this.name = this.data.original_font_information.fullName;
+				this.format = "json";
+			}
+			else if(this.encoding === "ttf")
+			{
+				this.data = new TTFLoader().parse(FileSystem.readFileArrayBuffer(url));
+				this.name = this.data.original_font_information.fullName;
+				this.format = "json";
+				this.encoding = "json";
+			}
 		}
 	}
 }

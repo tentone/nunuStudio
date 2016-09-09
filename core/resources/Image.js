@@ -13,27 +13,33 @@ function Image(url)
 	
 	if(url !== undefined)
 	{
-		this.encoding = url.split(".").pop();
+		this.encoding = url.split(".").pop().toLowerCase();
 
 		if(this.encoding === "gif")
 		{
+			/*
 			var file = new XMLHttpRequest();
 			file.open("GET", url, false);
 			file.overrideMimeType("text/plain; charset=x-user-defined");
 			file.send(null);
 
 			this.data = "data:image/" + this.encoding + ";base64," + Base64Utils.fromBinaryString(file.response);
+			*/
+
+			this.data = "data:image/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
 			this.format = "base64";
 		}
 		else if(this.encoding === "tga")
 		{
-			var file = new XMLHttpRequest();
+			/*var file = new XMLHttpRequest();
 			file.open("GET", url, false);
 			file.overrideMimeType("text/plain; charset=x-user-defined");
 			file.send(null);
 
 			var loader = new THREE.TGALoader();
-			var canvas = loader.parse(ArraybufferUtils.fromBinaryString(file.response));
+			var canvas = loader.parse(ArraybufferUtils.fromBinaryString(file.response));*/
+
+			var canvas = new THREE.TGALoader().parse(FileSystem.readFileArrayBuffer(url));
 
 			this.encoding = "jpeg";
 			this.format = "base64";
