@@ -18,7 +18,7 @@ function Audio(url)
 		file.overrideMimeType("text/plain; charset=x-user-defined");
 		file.send(null);
 
-		this.encoding = url.split(".").pop();
+		this.encoding = url.split(".").pop().toLowerCase();
 		this.format = "arraybuffer";
 		this.data = ArraybufferUtils.fromBinaryString(file.response);
 	}

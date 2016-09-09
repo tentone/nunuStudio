@@ -41,6 +41,7 @@ include("core/loaders/VideoLoader.js");
 include("core/loaders/AudioLoader.js");
 include("core/loaders/TextureLoader.js");
 include("core/loaders/ObjectLoader.js");
+include("core/loaders/TTFLoader.js");
 
 include("core/objects/device/LeapMotion.js");
 include("core/objects/device/KinectDevice.js");

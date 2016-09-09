@@ -22,7 +22,7 @@ function Video(url)
 		this.data = "data:video/" + this.encoding + ";base64," + Base64Utils.fromBinaryString(file.response);
 		this.format = "base64";*/
 
-		this.encoding = url.split(".").pop();
+		this.encoding = url.split(".").pop().toLowerCase();
 		this.data = "data:video/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
 		this.format = "base64";
 	}
