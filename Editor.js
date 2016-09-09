@@ -37,6 +37,7 @@ include("lib/three/animation/Animation.js");
 include("lib/three/animation/AnimationHandler.js");
 include("lib/three/animation/KeyFrameAnimation.js");
 
+include("lib/opentype.min.js");
 include("lib/jscolor.min.js");
 
 //Internal modules
@@ -149,7 +150,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201609082139";
+Editor.TIMESTAMP = "201609090300";
 
 //Initialize Main
 Editor.initialize = function(canvas)

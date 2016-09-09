@@ -15,7 +15,7 @@ function TransformControls()
 	this.size = 1;
 	this.axis = null;
 
-	var scope = this;
+	var self = this;
 	var mode = "translate";
 	var dragging = false;
 	var editing = false; //Editing object flag
@@ -98,7 +98,7 @@ function TransformControls()
 
 		if(mode === "scale")
 		{
-			scope.space = "local";
+			self.space = "local";
 		}
 
 		for(var type in gizmo)
@@ -111,13 +111,13 @@ function TransformControls()
 
 	this.setSize = function(size)
 	{
-		scope.size = size;
+		self.size = size;
 		this.updateScale();
 	};
 
 	this.setSpace = function(space)
 	{
-		scope.space = space;
+		self.space = space;
 		this.updateScale();
 	};
 
@@ -146,40 +146,40 @@ function TransformControls()
 
 	this.updateScale = function()
 	{
-		if(scope.object === null)
+		if(self.object === null)
 		{
 			return;
 		}
 
-		scope.object.updateMatrixWorld();
-		worldPosition.setFromMatrixPosition(scope.object.matrixWorld);
-		worldRotation.setFromRotationMatrix(tempMatrix.extractRotation(scope.object.matrixWorld));
+		self.object.updateMatrixWorld();
+		worldPosition.setFromMatrixPosition(self.object.matrixWorld);
+		worldRotation.setFromRotationMatrix(tempMatrix.extractRotation(self.object.matrixWorld));
 
 		camera.updateMatrixWorld();
 		camPosition.setFromMatrixPosition(camera.matrixWorld);
 		camRotation.setFromRotationMatrix(tempMatrix.extractRotation(camera.matrixWorld));
 
-		scale = worldPosition.distanceTo(camPosition) / 6 * scope.size;
+		scale = worldPosition.distanceTo(camPosition) / 6 * self.size;
 		this.position.copy(worldPosition);
 		this.scale.set(scale, scale, scale);
 
 		eye.copy(camPosition).sub(worldPosition).normalize();
 
-		if(scope.space === "local")
+		if(self.space === "local")
 		{
 			gizmo[mode].update(worldRotation, eye);
 		}
-		else if(scope.space === "world")
+		else if(self.space === "world")
 		{
 			gizmo[mode].update(new THREE.Euler(), eye);
 		}
 
-		gizmo[mode].highlight(scope.axis);
+		gizmo[mode].highlight(self.axis);
 	}
 
 	function onPointerHover()
 	{
-		if(scope.object === null || dragging === true) 
+		if(self.object === null || dragging === true) 
 		{
 			return;
 		}
@@ -192,16 +192,16 @@ function TransformControls()
 			axis = intersect.object.name;
 		}
 
-		if(scope.axis !== axis)
+		if(self.axis !== axis)
 		{
-			scope.axis = axis;
-			scope.updateScale();
+			self.axis = axis;
+			self.updateScale();
 		}
 	}
 
 	function onPointerDown()
 	{
-		if(scope.object === null || dragging === true) 
+		if(self.object === null || dragging === true) 
 		{
 			return;
 		}
@@ -211,23 +211,23 @@ function TransformControls()
 		if(intersect)
 		{
 			editing = true;
-			scope.axis = intersect.object.name;
-			scope.updateScale();
+			self.axis = intersect.object.name;
+			self.updateScale();
 
 			eye.copy(camPosition).sub(worldPosition).normalize();
-			gizmo[mode].setActivePlane(scope.axis, eye);
+			gizmo[mode].setActivePlane(self.axis, eye);
 			var planeIntersect = intersectObjects([gizmo[mode].activePlane]);
 
 			if(planeIntersect)
 			{
-				oldPosition.copy(scope.object.position);
-				oldScale.copy(scope.object.scale);
+				oldPosition.copy(self.object.position);
+				oldScale.copy(self.object.scale);
 
-				oldRotationMatrix.extractRotation(scope.object.matrix);
-				worldRotationMatrix.extractRotation(scope.object.matrixWorld);
+				oldRotationMatrix.extractRotation(self.object.matrix);
+				worldRotationMatrix.extractRotation(self.object.matrixWorld);
 
-				parentRotationMatrix.extractRotation(scope.object.parent.matrixWorld);
-				parentScale.setFromMatrixScale(tempMatrix.getInverse(scope.object.parent.matrixWorld));
+				parentRotationMatrix.extractRotation(self.object.parent.matrixWorld);
+				parentScale.setFromMatrixScale(tempMatrix.getInverse(self.object.parent.matrixWorld));
 
 				offset.copy(planeIntersect.point);
 			}
@@ -238,7 +238,7 @@ function TransformControls()
 
 	function onPointerMove()
 	{
-		if(scope.object === null || scope.axis === null || dragging === false)
+		if(self.object === null || self.axis === null || dragging === false)
 		{
 			return;
 		}
@@ -257,29 +257,29 @@ function TransformControls()
 			point.sub(offset);
 			point.multiply(parentScale);
 
-			if(scope.axis.search("X") === -1)
+			if(self.axis.search("X") === -1)
 			{
 				point.x = 0;
 			}
-			if(scope.axis.search("Y") === -1) 
+			if(self.axis.search("Y") === -1) 
 			{
 				point.y = 0;
 			}
-			if(scope.axis.search("Z") === -1)
+			if(self.axis.search("Z") === -1)
 			{
 				point.z = 0;
 			}
 					
-			if(scope.space === "world" || scope.axis.search("XYZ") !== -1)
+			if(self.space === "world" || self.axis.search("XYZ") !== -1)
 			{
 				point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
 
-				scope.object.position.copy(oldPosition);
-				scope.object.position.add(point);
+				self.object.position.copy(oldPosition);
+				self.object.position.add(point);
 			}
-			else if(scope.space === "local")
+			else if(self.space === "local")
 			{
-				if(scope.axis.length > 1)
+				if(self.axis.length > 1)
 				{
 					point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
 					point.applyMatrix4(oldRotationMatrix);
@@ -289,8 +289,8 @@ function TransformControls()
 					point.applyMatrix4(oldRotationMatrix);
 				}
 				
-				scope.object.position.copy(oldPosition);
-				scope.object.position.add(point);
+				self.object.position.copy(oldPosition);
+				self.object.position.add(point);
 			}
 		}
 		else if(mode === "scale")
@@ -298,31 +298,54 @@ function TransformControls()
 			point.sub(offset);
 			point.multiply(parentScale);
 
-			if(scope.space === "local")
+			if(self.space === "local")
 			{
-				if(scope.axis === "XYZ")
+				if(self.axis === "XYZ")
 				{
 					scale = 1 + ((point.y) / Math.max(oldScale.x, oldScale.y, oldScale.z));
 
-					scope.object.scale.x = oldScale.x * scale;
-					scope.object.scale.y = oldScale.y * scale;
-					scope.object.scale.z = oldScale.z * scale;
+					self.object.scale.x = oldScale.x * scale;
+					self.object.scale.y = oldScale.y * scale;
+					self.object.scale.z = oldScale.z * scale;
 				}
 				else
 				{
 					point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
 
-					if(scope.axis === "X")
+					if(self.axis === "X")
 					{
-						scope.object.scale.x = oldScale.x * (1 + point.x / oldScale.x);
+						self.object.scale.x = oldScale.x * (1 + point.x / oldScale.x);
 					}
-					else if(scope.axis === "Y")
+					else if(self.axis === "Y")
 					{
-						scope.object.scale.y = oldScale.y * (1 + point.y / oldScale.y);
+						self.object.scale.y = oldScale.y * (1 + point.y / oldScale.y);
 					}
-					else if(scope.axis === "Z")
+					else if(self.axis === "Z")
 					{
-						scope.object.scale.z = oldScale.z * (1 + point.z / oldScale.z);
+						self.object.scale.z = oldScale.z * (1 + point.z / oldScale.z);
+					}
+				}
+
+				//Update physics objects
+				if(self.object instanceof PhysicsObject)
+				{
+					var shapes = self.object.body.shapes;
+					var scale = self.object.scale;
+
+					for(var i = 0; i < shapes.length; i++)
+					{
+						var shape = shapes[i];
+						
+						if(shape.type === CANNON.Shape.types.BOX)
+						{
+							shape.halfExtents.x = scale.x / 2.0;
+							shape.halfExtents.y = scale.y / 2.0;
+							shape.halfExtents.z = scale.z / 2.0;
+						}
+						else if(shape.type === CANNON.Shape.types.SPHERE)
+						{
+							shape.radius = scale.x;
+						}
 					}
 				}
 			}
@@ -334,7 +357,7 @@ function TransformControls()
 			tempVector.copy(offset).sub(worldPosition);
 			tempVector.multiply(parentScale);
 
-			if(scope.axis === "E")
+			if(self.axis === "E")
 			{
 				point.applyMatrix4(tempMatrix.getInverse(lookAtMatrix));
 				tempVector.applyMatrix4(tempMatrix.getInverse(lookAtMatrix));
@@ -350,9 +373,9 @@ function TransformControls()
 				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionE);
 				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
 
-				scope.object.quaternion.copy(tempQuaternion);
+				self.object.quaternion.copy(tempQuaternion);
 			}
-			else if(scope.axis === "XYZE")
+			else if(self.axis === "XYZE")
 			{
 				quaternionE.setFromEuler(point.clone().cross(tempVector).normalize()); // rotation axis
 
@@ -363,9 +386,9 @@ function TransformControls()
 				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionX);
 				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
 
-				scope.object.quaternion.copy(tempQuaternion);
+				self.object.quaternion.copy(tempQuaternion);
 			}
-			else if(scope.space === "local")
+			else if(self.space === "local")
 			{
 				point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
 
@@ -379,22 +402,22 @@ function TransformControls()
 				quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
 				quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
 
-				if(scope.axis === "X")
+				if(self.axis === "X")
 				{
 					quaternionXYZ.multiplyQuaternions(quaternionXYZ, quaternionX);
 				}
-				else if(scope.axis === "Y")
+				else if(self.axis === "Y")
 				{
 					quaternionXYZ.multiplyQuaternions(quaternionXYZ, quaternionY);
 				}
-				else if(scope.axis === "Z")
+				else if(self.axis === "Z")
 				{
 					quaternionXYZ.multiplyQuaternions(quaternionXYZ, quaternionZ);
 				}
 
-				scope.object.quaternion.copy(quaternionXYZ);
+				self.object.quaternion.copy(quaternionXYZ);
 			}
-			else if(scope.space === "world")
+			else if(self.space === "world")
 			{
 				rotation.set(Math.atan2(point.z, point.y), Math.atan2(point.x, point.z), Math.atan2(point.y, point.x));
 				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
@@ -406,26 +429,26 @@ function TransformControls()
 				quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
 				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix);
 
-				if(scope.axis === "X")
+				if(self.axis === "X")
 				{
 					tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionX);
 				}
-				else if(scope.axis === "Y")
+				else if(self.axis === "Y")
 				{
 					tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionY);
 				}
-				else if(scope.axis === "Z")
+				else if(self.axis === "Z")
 				{
 					tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionZ);
 				}
 
 				tempQuaternion.multiplyQuaternions(tempQuaternion, quaternionXYZ);
 
-				scope.object.quaternion.copy(tempQuaternion);
+				self.object.quaternion.copy(tempQuaternion);
 			}
 		}
 
-		scope.updateScale();
+		self.updateScale();
 	}
 
 	function onPointerUp()

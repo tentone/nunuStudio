@@ -55,6 +55,7 @@ function SpineAnimation(json, atlas, path, textures)
 	material.side = THREE.DoubleSide;
 	material.transparent = true;
 	material.name = "spine";
+	material.alphaTest = 0.5;
 	this.material = material;
 
 	this.json = json;
@@ -173,19 +174,22 @@ SpineAnimation.prototype.toJSON = function(meta)
 	this.geometry = undefined;
 	this.material = undefined;
 
+	
+	var textures = [];
+	var self = this;
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	{
+		for(var i = 0; i < self.textures.length; i++)
+		{
+			var texture = self.textures[i].texture.toJSON(meta);
+			textures.push({name: self.textures[i].name, texture: texture.uuid});
+		}
+	});
+
 	//Animation data
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 	data.object.json = this.json;
 	data.object.atlas = this.atlas;
-	data.object.textures = [];
-
-	//Textures
-	var textures = this.textures;
-	for(var i = 0; i < textures.length; i++)
-	{
-		var texture = textures[i].texture.toJSON(meta);
-		data.object.textures.push({name: textures[i].name, texture: texture.uuid});
-	}
+	data.object.textures = textures;
 
 	//Restore geometry and material
 	this.geometry = geometry;

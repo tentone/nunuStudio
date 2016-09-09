@@ -280,6 +280,23 @@ function MaterialEditor(parent)
 	this.form.add(this.opacity);
 	this.form.nextRow();
 	
+	//Alpha test
+	this.form.addText("Alpha test");
+	this.alphaTest = new Slider(this.form.element);
+	this.alphaTest.size.set(160, 18);
+	this.alphaTest.setRange(0, 1);
+	this.alphaTest.setStep(0.01);
+	this.alphaTest.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.alphaTest = self.alphaTest.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.alphaTest);
+	this.form.nextRow();
+	
 	//Blending mode
 	this.form.addText("Blending Mode");
 	this.blending = new DropdownList(this.form.element);
@@ -345,6 +362,7 @@ MaterialEditor.prototype.attachMaterial = function(material, material_file)
 	this.depthWrite.setValue(material.depthWrite);
 	this.transparent.setValue(material.transparent);
 	this.opacity.setValue(material.opacity);
+	this.alphaTest.setValue(material.alphaTest);
 	this.blending.setValue(material.blending);	
 }
 
