@@ -2,8 +2,6 @@
 
 function TransformGizmo()
 {
-	var scope = this;
-
 	this.init = function()
 	{
 		THREE.Object3D.call(this);

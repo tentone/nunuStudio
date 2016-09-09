@@ -49,9 +49,12 @@ Text3D.prototype.toJSON = function(meta)
 	var geometry = this.geometry;
 	this.geometry = undefined;
 
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
-	var font = this.font.toJSON(meta);
-
+	var font = this.font;
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	{
+		font = font.toJSON(meta);
+	});
+	
 	data.object.text = this.text;
 	data.object.font = font.uuid;
 

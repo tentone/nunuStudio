@@ -304,8 +304,8 @@ Interface.initialize = function()
 			if(files.length > 0)
 			{
 				var file = files[0].path;
-				var font = new Font(file);
-				//TODO <ADD CODE HERE>
+				Editor.addToScene(new Text3D("Text", Editor.default_material, new Font(file)));
+				Editor.updateObjectViews();
 			}
 		}, ".json, .ttf, .otf");
 	}, Interface.file_dir + "icons/assets/font.png");

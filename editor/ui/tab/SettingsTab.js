@@ -78,7 +78,7 @@ function SettingsTab(parent)
 
 	//Show stats
 	this.show_stats = new CheckBox(this.general_form.element);
-	this.show_stats.setText("Show stats");
+	this.show_stats.setText("Show performance info");
 	this.show_stats.size.set(200, 16);
 	this.show_stats.setOnChange(function()
 	{
