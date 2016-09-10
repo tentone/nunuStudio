@@ -26,12 +26,6 @@ function Font(url)
 
 			if(this.encoding === "json")
 			{
-				/*var file = new XMLHttpRequest();
-				file.open("GET", url, false);
-				file.overrideMimeType("text/plain");
-				file.send(null);
-				this.data = JSON.parse(file.response);*/
-
 				this.data = JSON.parse(FileSystem.readFile(url));
 				this.name = this.data.original_font_information.fullName;
 				this.format = "json";

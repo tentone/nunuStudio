@@ -13,15 +13,6 @@ function Video(url)
 
 	if(url !== undefined)
 	{
-		/*var file = new XMLHttpRequest();
-		file.open("GET", url, false);
-		file.overrideMimeType("text/plain; charset=x-user-defined");
-		file.send(null);
-
-		this.encoding = url.split(".").pop();
-		this.data = "data:video/" + this.encoding + ";base64," + Base64Utils.fromBinaryString(file.response);
-		this.format = "base64";*/
-
 		this.encoding = url.split(".").pop().toLowerCase();
 		this.data = "data:video/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
 		this.format = "base64";
