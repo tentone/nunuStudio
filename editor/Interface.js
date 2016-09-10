@@ -11,10 +11,6 @@ Interface.initialize = function()
 	//------------------------------------Tab Container-------------------------------
 	Interface.tab = new TabGroup();
 
-	Interface.empty_tab_text = new Text(Interface.tab.element);
-	Interface.empty_tab_text.fit_parent = true;
-	Interface.empty_tab_text.setText("Open new tab to edit content or create new project");
-
 	//---------------------------------Asset Manager----------------------------------
 	Interface.asset_explorer_div = new DivisionResizable();
 	Interface.asset_explorer_div.resizable_side = DivisionResizable.TOP;
@@ -835,7 +831,7 @@ Interface.initialize = function()
 		//If not create one
 		if(!found)
 		{
-			var tab = Interface.tab.addOption("Settings", Interface.file_dir + "icons/tab/settings.png", true);
+			var tab = Interface.tab.addTab("Settings", Interface.file_dir + "icons/tab/settings.png", true);
 			var settings = new SettingsTab(tab.element);
 			tab.attachComponent(settings);
 			tab.select();
@@ -897,6 +893,16 @@ Interface.initialize = function()
 	Interface.editor.size.set(100, Interface.top_bar.size.y);
 	Interface.editor.position.set(120,0);
 
+	Interface.editor.addOption("Undo", function()
+	{
+		Editor.undo();
+	}, Interface.file_dir + "icons/misc/undo.png");
+
+	Interface.editor.addOption("Redo", function()
+	{
+		Editor.redo();
+	}, Interface.file_dir + "icons/misc/redo.png");
+
 	Interface.editor.addOption("Copy", function()
 	{
 		Editor.copyObject();
@@ -910,7 +916,7 @@ Interface.initialize = function()
 	Interface.editor.addOption("Paste", function()
 	{
 		Editor.pasteObject();
-	});
+	}, Interface.file_dir + "icons/misc/paste.png");
 
 	Interface.editor.addOption("Delete", function()
 	{
@@ -972,7 +978,7 @@ Interface.initialize = function()
 		//If not create one
 		if(!found)
 		{
-			var tab = Interface.tab.addOption("About", Interface.file_dir + "icons/misc/about.png", true);
+			var tab = Interface.tab.addTab("About", Interface.file_dir + "icons/misc/about.png", true);
 			var settings = new AboutTab(tab.element);
 			tab.attachComponent(settings);
 			tab.select();
@@ -1056,8 +1062,6 @@ Interface.updateInterface = function()
 	Interface.tab.size.x = (size.x - Interface.tool_bar.size.x - Interface.explorer.size.x);
 	Interface.tab.size.y = (size.y - Interface.top_bar.size.y - Interface.asset_explorer_div.size.y); 
 	Interface.tab.updateInterface();
-
-	Interface.empty_tab_text.updateInterface();
 
 	//Resize editor camera
 	Editor.resizeCamera();

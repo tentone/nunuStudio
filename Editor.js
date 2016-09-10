@@ -41,24 +41,38 @@ include("lib/opentype.min.js");
 include("lib/jscolor.min.js");
 
 //Internal modules
-include("editor/ui/Bar.js");
-include("editor/ui/Button.js");
+include("editor/ui/element/Bar.js");
+include("editor/ui/element/Button.js");
+include("editor/ui/element/Text.js");
+include("editor/ui/element/Division.js");
+include("editor/ui/element/ImageBox.js");
+include("editor/ui/element/DivisionResizable.js");
+include("editor/ui/element/ButtonImage.js");
+include("editor/ui/element/ButtonDrawer.js");
+include("editor/ui/element/Canvas.js");
+include("editor/ui/element/DualDivisionResizable.js");
+include("editor/ui/element/ButtonImageToggle.js");
+include("editor/ui/element/Form.js");
+
+include("editor/ui/element/input/Graph.js");
+include("editor/ui/element/input/CodeEditor.js");
+include("editor/ui/element/input/CheckBox.js");
+include("editor/ui/element/input/TextBox.js");
+include("editor/ui/element/input/ColorChooser.js");
+include("editor/ui/element/input/Slider.js");
+include("editor/ui/element/input/DropdownList.js");
+include("editor/ui/element/input/NumberBox.js");
+include("editor/ui/element/input/CoordinatesBox.js");
+include("editor/ui/element/input/ImageChooser.js");
+include("editor/ui/element/input/TextureBox.js");
+
 include("editor/ui/DropdownMenu.js");
-include("editor/ui/Text.js");
-include("editor/ui/Division.js");
-include("editor/ui/ImageBox.js");
-include("editor/ui/DivisionResizable.js");
-include("editor/ui/ButtonImage.js");
-include("editor/ui/ButtonDrawer.js");
-include("editor/ui/Canvas.js");
 include("editor/ui/TabGroup.js");
 include("editor/ui/TabElement.js");
-include("editor/ui/DualDivisionResizable.js");
-include("editor/ui/ButtonImageToggle.js");
+include("editor/ui/TabButton.js");
 include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
-include("editor/ui/Form.js");
 include("editor/ui/DragBuffer.js");
 include("editor/ui/AssetExplorer.js");
 
@@ -83,18 +97,6 @@ include("editor/ui/tab/materialeditor/BasicMaterialEditor.js");
 include("editor/ui/tab/materialeditor/StandardMaterialEditor.js");
 include("editor/ui/tab/materialeditor/SpriteMaterialEditor.js");
 include("editor/ui/tab/materialeditor/ShaderMaterialEditor.js");
-
-include("editor/ui/input/Graph.js");
-include("editor/ui/input/CodeEditor.js");
-include("editor/ui/input/CheckBox.js");
-include("editor/ui/input/TextBox.js");
-include("editor/ui/input/ColorChooser.js");
-include("editor/ui/input/Slider.js");
-include("editor/ui/input/DropdownList.js");
-include("editor/ui/input/NumberBox.js");
-include("editor/ui/input/CoordinatesBox.js");
-include("editor/ui/input/ImageChooser.js");
-include("editor/ui/input/TextureBox.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");
@@ -151,7 +153,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201609100149";
+Editor.TIMESTAMP = "201609101940";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -298,6 +300,10 @@ Editor.update = function()
 			{
 				Interface.tab.closeActual();
 			}
+			else if(Keyboard.keyJustPressed(Keyboard.TAB))
+			{
+				Interface.tab.selectNextTab();
+			}
 		}
 	}
 
@@ -325,13 +331,11 @@ Editor.update = function()
 			}
 			else if(Keyboard.keyJustPressed(Keyboard.Y))
 			{
-				//TODO <ADD CODE HERE>
-				alert("Undo and redo not implemented!");
+				Editor.redo();
 			}
 			else if(Keyboard.keyJustPressed(Keyboard.Z))
 			{
-				//TODO <ADD CODE HERE>
-				alert("Undo and redo not implemented!");
+				Editor.undo();
 			}
 		}
 
@@ -502,15 +506,13 @@ Editor.draw = function()
 			camera.aspect = width / height;
 			camera.updateProjectionMatrix();
 
-			//TODO <HACK>
 			var background = Editor.program.scene.background;
 			Editor.program.scene.background = null;
 
 			renderer.setViewport(offset, 10, width, height);
 			renderer.setScissor(offset, 10, width, height);
 			renderer.render(Editor.program.scene, camera);
-
-			//TODO <HACK>
+			
 			Editor.program.scene.background = background;
 		}
 	}
@@ -693,6 +695,18 @@ Editor.pasteObject = function(target)
 		Editor.updateObjectViews();
 	}
 	catch(e){}
+}
+
+//Redo action
+Editor.redo = function()
+{
+	alert("Undo and redo not implemented!");
+}
+
+//Undo action
+Editor.undo = function()
+{
+	alert("Undo and redo not implemented!");
 }
 
 //Update UI panel to match selected object
@@ -1077,11 +1091,11 @@ Editor.createNewProgram = function()
 	if(Interface.tab !== undefined)
 	{
 		Interface.tab.clear();
-		var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
+		var scene = Interface.tab.addTab("scene", Interface.file_dir + "icons/tab/scene.png", true);
 		var canvas = new SceneEditor(scene.element);
 		canvas.setScene(Editor.program.scene);
 		scene.attachComponent(canvas);
-		Interface.tab.selectOption(0);
+		Interface.tab.selectTab(0);
 	}
 }
 
@@ -1126,11 +1140,11 @@ Editor.loadProgram = function(fname)
 	//Add new scene tab to interface
 	if(Editor.program.scene !== null)
 	{
-		var scene = Interface.tab.addOption("scene", Interface.file_dir + "icons/tab/scene.png", true);
+		var scene = Interface.tab.addTab("scene", Interface.file_dir + "icons/tab/scene.png", true);
 		var editor = new SceneEditor(scene.element);
 		editor.setScene(Editor.program.scene);
 		scene.attachComponent(editor);
-		Interface.tab.selectOption(0);
+		Interface.tab.selectTab(0);
 	}
 }
 
