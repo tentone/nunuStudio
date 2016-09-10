@@ -1,3 +1,4 @@
+
 function Script(code, mode)
 {
 	THREE.Object3D.call(this);
@@ -5,27 +6,12 @@ function Script(code, mode)
 	this.type = "Script";
 	this.name = "script";
 
-	//Program and scene pointers
+	this.script = null;
+	this.mode = (mode !== undefined) ? mode : Script.INIT;
+	this.setCode((code !== undefined) ? code : "//ADD CODE HERE");
+
 	this.program = null;
 	this.scene = null;
-
-	//Script Code
-	this.func = null;
-	this.code = "//ADD CODE HERE";
-	this.mode = Script.INIT;
-
-	//Get arguments
-	if(code !== undefined)
-	{
-		this.code = code;
-	}
-	if(mode !== undefined)
-	{
-		this.mode = mode;
-	}
-
-	//Script functions
-	this.setCode(this.code);
 }
 
 Script.prototype = Object.create(THREE.Object3D.prototype);
@@ -54,7 +40,7 @@ Script.prototype.initialize = function()
 
 	if(this.mode === Script.INIT)
 	{
-		this.func();
+		this.script();
 	}
 
 	for(var i = 0; i < this.children.length; i++)
@@ -68,7 +54,7 @@ Script.prototype.update = function()
 {
 	if(this.mode === Script.LOOP)
 	{
-		this.func();
+		this.script();
 	}
 
 	for(var i = 0; i < this.children.length; i++)
@@ -83,7 +69,7 @@ Script.prototype.setCode = function(code)
 	try
 	{
 		this.code = code;
-		this.func = Function(this.code);
+		this.script = Function(this.code);
 	}
 	catch(e){}
 }

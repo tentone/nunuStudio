@@ -12,7 +12,7 @@
 		"camera_preview_enabled": true,
 		"camera_preview_percentage": 0.35,
 		"lock_mouse": true,
-		"transformation_space": "local"
+		"transformation_space": "world"
 	},
 	"render": {
 		"shadows": true,
