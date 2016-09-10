@@ -18,7 +18,6 @@ function TreeView(parent)
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
 	this.element.style.cursor = "default";
@@ -32,13 +31,13 @@ function TreeView(parent)
 	this.label.updateInterface();
 
 	//Element atributes
+	this.fit_parent = true;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 	
 	//Childs
 	this.up = null;
-	this.fit_parent = true;
 	this.scene = null;
 	this.children = [];
 
@@ -51,12 +50,13 @@ TreeView.id = 0;
 
 //Set data from object
 TreeView.prototype.fromObject = function(obj)
-{
-	//Remove all children
-	for(var i = 0; i < this.children.length; i++)
+{	
+	var children = this.children;
+	for(var i = 0; i < children.length; i++)
 	{
-		this.children[i].destroy();
+		children[i].destroy();
 	}
+	
 	this.children = [];
 
 	//Set scene
@@ -78,11 +78,7 @@ TreeView.prototype.updateSelectedObject = function(obj)
 TreeView.prototype.addFromObject = function(obj)
 {
 	var element = new TreeElement(this);
-
-	element.obj = obj;
-	element.icon.setImage(ObjectIcons.get(obj.type));
-	element.label.setText(obj.name);
-	element.folded = obj.folded;
+	element.setObject(obj);
 	element.up = this;
 
 	this.children.push(element);
@@ -168,9 +164,10 @@ TreeView.prototype.updateInterface = function()
 	this.element.style.height = this.size.y + "px";
 
 	//Update childs
-	for(var i = 0; i < this.children.length; i++)
+	var children = this.children;
+	for(var i = 0; i < children.length; i++)
 	{
-		this.children[i].updateInterface();
+		children[i].updateInterface();
 	}
 }
 
@@ -224,13 +221,10 @@ TreeView.getElementFromObject = function(element, obj)
 //Add object element to tree (recursive)
 TreeView.addSceneElement = function(tree, scene)
 {
-	//Check if object is hidden
 	if(!scene.hidden)
 	{
-		//Create new tree element and add
 		var element = tree.addFromObject(scene);
 
-		//Add object children
 		for(var i = 0; i < scene.children.length; i++)
 		{
 			TreeView.addSceneElement(element, scene.children[i]);

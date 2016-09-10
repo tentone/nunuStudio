@@ -42,7 +42,7 @@ function MaterialAsset(parent)
 					if(Interface.tab.options[i].component.material === self.material)
 					{
 						found = true;
-						Interface.tab.selectOption(i);
+						Interface.tab.selectTab(i);
 						break;
 					}
 				}
@@ -53,7 +53,7 @@ function MaterialAsset(parent)
 			{
 				self.restoreMaterial();
 
-				var tab = Interface.tab.addOption(self.material.name, Interface.file_dir + "icons/misc/material.png", true);
+				var tab = Interface.tab.addTab(self.material.name, Interface.file_dir + "icons/misc/material.png", true);
 				var material_editor;
 
 				if(self.material instanceof THREE.MeshPhongMaterial)

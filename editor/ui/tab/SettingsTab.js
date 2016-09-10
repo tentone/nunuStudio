@@ -35,9 +35,9 @@ function SettingsTab(parent)
 
 	//Options tab container
 	this.tab = new TabGroup(this.element);
-	this.tab.options_size.set(200, 30);
 	this.tab.element.style.cursor = "default";
 	this.tab.element.style.backgroundColor = Editor.theme.bar_color;
+	this.tab.button_size.set(200, 30);
 	this.tab.mode = TabGroup.LEFT;
 	this.tab.updateInterface();
 
@@ -45,7 +45,7 @@ function SettingsTab(parent)
 	var self = this;
 
 	//General tab
-	this.general = this.tab.addOption("General", "editor/files/icons/misc/tool.png", false);
+	this.general = this.tab.addTab("General", "editor/files/icons/misc/tool.png", false);
 
 	//General form
 	this.general_form = new Form(this.general.element);
@@ -233,7 +233,7 @@ function SettingsTab(parent)
 	this.general_form.nextRow();
 
 	//Code tab
-	this.code = this.tab.addOption("Code", "editor/files/icons/script/script.png", false);
+	this.code = this.tab.addTab("Code", "editor/files/icons/script/script.png", false);
 	
 	//Code form
 	this.code_form = new Form(this.code.element);
@@ -337,7 +337,7 @@ function SettingsTab(parent)
 	this.code_form.nextRow();
 
 	//About
-	this.about = this.tab.addOption("About", "editor/files/icons/misc/about.png", false);
+	this.about = this.tab.addTab("About", "editor/files/icons/misc/about.png", false);
 	this.about.attachComponent(new AboutTab(this.about.element));
 	this.about.updateInterface();
 	

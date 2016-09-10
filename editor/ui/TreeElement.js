@@ -29,6 +29,16 @@ function TreeElement(container)
 	this.element.style.alignItems = "center";
 	this.element.style.backgroundColor = Editor.theme.button_light_color;
 
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
+	this.element.ondragleave = function(event)
+	{
+		event.preventDefault();
+	};
+
 	//Arrow
 	this.arrow = new ImageBox(this.element);
 	this.arrow.size.set(15, 15);
@@ -67,8 +77,8 @@ function TreeElement(container)
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		self.element.style.cursor = "pointer";
-		self.element.style.backgroundColor = Editor.theme.button_over_color;
+		this.style.cursor = "pointer";
+		this.style.backgroundColor = Editor.theme.button_over_color;
 	};
 
 	//Mouse leave event
@@ -76,8 +86,8 @@ function TreeElement(container)
 	{
 		if(!Editor.isObjectSelected(self.obj))
 		{
-			self.element.style.cursor = "default";
-			self.element.style.backgroundColor = Editor.theme.button_light_color;
+			this.style.cursor = "default";
+			this.style.backgroundColor = Editor.theme.button_light_color;
 		}
 	};
 
@@ -201,18 +211,6 @@ function TreeElement(container)
 		}
 	};
 
-	//Object dragged over (fired on the drop target)
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Object drag leave (fired on the drop target)
-	this.element.ondragleave = function(event)
-	{
-		event.preventDefault();
-	};
-
 	//Object select event
 	this.element.onclick = function()
 	{
@@ -233,7 +231,7 @@ function TreeElement(container)
 					if(Interface.tab.options[i].component.script === self.obj)
 					{
 						found = true;
-						Interface.tab.selectOption(i);
+						Interface.tab.selectTab(i);
 						break;
 					}
 				}
@@ -243,7 +241,7 @@ function TreeElement(container)
 			if(!found)
 			{
 				//Add new Code Editor tab
-				var tab = Interface.tab.addOption(self.obj.name, Interface.file_dir + "icons/tab/code.png", true);
+				var tab = Interface.tab.addTab(self.obj.name, Interface.file_dir + "icons/tab/code.png", true);
 				var code = new ScriptEditor();
 				code.attachScript(self.obj);
 				tab.attachComponent(code);
@@ -264,7 +262,7 @@ function TreeElement(container)
 					if(Interface.tab.options[i].component.scene === self.obj)
 					{
 						found = true;
-						Interface.tab.selectOption(i);
+						Interface.tab.selectTab(i);
 						break;
 					}
 				}
@@ -274,7 +272,7 @@ function TreeElement(container)
 			if(!found)
 			{
 				//Scene Canvas
-				var tab = Interface.tab.addOption(self.obj.name, Interface.file_dir + "icons/tab/scene.png", true);
+				var tab = Interface.tab.addTab(self.obj.name, Interface.file_dir + "icons/tab/scene.png", true);
 				var container = new SceneEditor(tab.element);
 				container.setScene(self.obj);
 				tab.attachComponent(container);
@@ -294,7 +292,7 @@ function TreeElement(container)
 					if(Interface.tab.options[i].component.particle === self.obj)
 					{
 						found = true;
-						Interface.tab.selectOption(i);
+						Interface.tab.selectTab(i);
 						break;
 					}
 				}
@@ -304,7 +302,7 @@ function TreeElement(container)
 			if(!found)
 			{
 				//Add new Particle Editor tab
-				var tab = Interface.tab.addOption(self.obj.name, Interface.file_dir + "icons/effects/particles.png", true);
+				var tab = Interface.tab.addTab(self.obj.name, Interface.file_dir + "icons/effects/particles.png", true);
 				var particle = new ParticleEditor();
 				particle.attachParticle(self.obj);
 				tab.attachComponent(particle);
@@ -359,18 +357,9 @@ TreeElement.prototype.setLabel = function(label)
 TreeElement.prototype.addFromObject = function(obj)
 {
 	var element = new TreeElement(this.container);
-
-	element.obj = obj;
-	element.icon.setImage(ObjectIcons.get(obj.type));
-	element.label.setText(obj.name);
-	element.folded = obj.folded;
+	element.setObject(obj);
 	element.up = this;
-
-	if(element.folded)
-	{
-		element.arrow.setImage("editor/files/icons/misc/arrow_right.png");
-	}
-
+	
 	this.children.push(element);
 	return element;
 }
