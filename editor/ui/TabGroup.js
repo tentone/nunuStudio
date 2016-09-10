@@ -238,25 +238,33 @@ TabGroup.prototype.update = function()
 //Update interface
 TabGroup.prototype.updateInterface = function()
 {
+	var size = this.size.clone();
+	var offset = this.button_size.clone();
+	
+	if(this.mode === TabGroup.TOP || this.mode === TabGroup.BOTTOM)
+	{
+		size.y -= this.button_size.y;
+		offset.y = 0;
+	}
+	else if(this.mode === TabGroup.LEFT || this.mode === TabGroup.RIGHT)
+	{
+		size.x -= this.button_size.x;
+		offset.x = 0;
+	}
+
 	//Update tabs
 	for(var i = 0; i < this.options.length; i++)
 	{
 		var tab = this.options[i];
 		tab.visible = this.visible && (this.selected === i);
-		tab.size.copy(this.size);
+		tab.size.copy(size);
 		tab.updateInterface();
 
 		var button = tab.button;
 		button.visible = this.visible;
 		button.size.copy(this.button_size);
-		if(this.mode === TabGroup.TOP || this.mode === TabGroup.BOTTOM)
-		{
-			button.position.set(button.size.x * i, 0);
-		}
-		else if(this.mode === TabGroup.LEFT || this.mode === TabGroup.RIGHT)
-		{
-			button.position.set(0, button.size.y * i);
-		}
+		button.position.copy(offset);
+		button.position.multiplyScalar(i);
 		button.updateInterface();
 	}
 

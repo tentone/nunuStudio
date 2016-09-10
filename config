@@ -1,8 +1,8 @@
 {
 	"general": {
-		"theme": "dark",
-		"file_preview_size": 70,
-		"show_stats": true
+		"theme": "light",
+		"file_preview_size": 96,
+		"show_stats": false
 	},
 	"editor": {
 		"grid_size": 500,
@@ -10,14 +10,14 @@
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,
-		"camera_preview_percentage": 0.35,
+		"camera_preview_percentage": "0.3",
 		"lock_mouse": true,
-		"transformation_space": "local"
+		"transformation_space": "world"
 	},
 	"render": {
 		"shadows": true,
 		"shadows_type": 2,
-		"antialiasing": true
+		"antialiasing": false
 	},
 	"code": {
 		"theme": "monokai",
