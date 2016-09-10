@@ -97,8 +97,9 @@ include("editor/ui/input/ImageChooser.js");
 include("editor/ui/input/TextureBox.js");
 
 include("editor/ui/panels/Panel.js");
-include("editor/ui/panels/AudioPanel.js");
 include("editor/ui/panels/ObjectPanel.js");
+include("editor/ui/panels/MeshPanel.js");
+include("editor/ui/panels/AudioPanel.js");
 include("editor/ui/panels/SkyPanel.js");
 include("editor/ui/panels/LeapPanel.js");
 include("editor/ui/panels/ScriptPanel.js");
@@ -150,7 +151,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201609091728";
+Editor.TIMESTAMP = "201609100149";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -702,9 +703,14 @@ Editor.updateSelectedObjectUI = function()
 
 	if(Editor.selected_object !== null)
 	{
+
 		if(Editor.selected_object instanceof Text3D)
 		{
 			Interface.panel = new TextPanel(Interface.explorer_resizable.div_b);
+		}
+		else if(Editor.selected_object instanceof THREE.Mesh)
+		{
+			Interface.panel = new MeshPanel(Interface.explorer_resizable.div_b);
 		}
 		else if(Editor.selected_object instanceof THREE.PointLight)
 		{
@@ -770,7 +776,7 @@ Editor.updateSelectedObjectUI = function()
 		{
 			Interface.panel = new ObjectPanel(Interface.explorer_resizable.div_b);
 		}
-		Interface.panel.attachObject(Editor.selected_object);
+		Interface.panel.attach(Editor.selected_object);
 		Interface.panel.updateInterface();
 	}
 	else

@@ -59,7 +59,7 @@ Panel.id = 0;
 Panel.prototype.updatePanel = function(){}
 
 //Attach object to panel
-Panel.prototype.attachObject = function(obj)
+Panel.prototype.attach = function(obj)
 {
 	if(obj instanceof THREE.Object3D)
 	{
