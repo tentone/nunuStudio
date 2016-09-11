@@ -65,6 +65,8 @@ function SpineAnimation(json, atlas, path, textures)
 	this.name = "spine";
 	this.type = "SpineAnimation";
 
+	this.scale.set(0.005, 0.005, 0.005);
+
 	this.frustumCulled = false;
 	this.receiveShadow = true;
 	this.castShadow = true;
