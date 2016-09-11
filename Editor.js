@@ -73,7 +73,6 @@ include("editor/ui/TabButton.js");
 include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
-include("editor/ui/DragBuffer.js");
 include("editor/ui/AssetExplorer.js");
 
 include("editor/ui/asset/Asset.js");
@@ -134,6 +133,7 @@ include("editor/helpers/WireframeHelper.js");
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
 
+include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
 
@@ -153,7 +153,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201609102353";
+Editor.TIMESTAMP = "201609110132";
 
 //Initialize Main
 Editor.initialize = function(canvas)
