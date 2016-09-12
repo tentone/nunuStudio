@@ -153,7 +153,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201609110132";
+Editor.TIMESTAMP = "201609120344";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -300,9 +300,13 @@ Editor.update = function()
 			{
 				Interface.tab.closeActual();
 			}
-			else if(Keyboard.keyJustPressed(Keyboard.TAB))
+			else if(Keyboard.keyJustPressed(Keyboard.TAB) || Keyboard.keyJustPressed(Keyboard.PAGE_DOWN))
 			{
 				Interface.tab.selectNextTab();
+			}
+			else if(Keyboard.keyJustPressed(Keyboard.PAGE_UP))
+			{
+				Interface.tab.selectPreviousTab();
 			}
 		}
 	}
