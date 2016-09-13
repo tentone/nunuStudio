@@ -125,13 +125,8 @@ TabElement.prototype.setIcon = function(icon)
 //Set button name
 TabElement.prototype.setName = function(text)
 {
-	if(text !== undefined && text.length > 9)
-	{
-		text = text.slice(0,9) + "...";
-	}
-
 	this.name = text;
-	this.button.setText(text);
+	this.button.setName(text);
 }
 
 
@@ -161,13 +156,10 @@ TabElement.prototype.updateInterface = function()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Main element
-	this.element.style.top = "0px";
-	this.element.style.left = "0px";
+	//Element
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
 
-	//TODO <COMPONENT EXTENDS THIS CLASS>
 	//Attached component
 	if(this.component !== null)
 	{
