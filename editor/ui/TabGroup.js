@@ -38,38 +38,7 @@ function TabGroup(parent)
 	this.buttons.style.overflow = "hidden";
 	this.buttons.style.position = "absolute";
 	this.element.appendChild(this.buttons);
-
-	//Next tab
-	var buttons = this.buttons;
-	this.next = document.createElement("img");
-	this.next.style.position = "absolute";
-	this.next.style.top = "8px";
-	this.next.style.right = "0px";
-	this.next.style.width = "15px";
-	this.next.style.height = "15px";
-	this.next.style.zIndex = "10";
-	this.next.src = "editor/files/icons/misc/arrow_right.png";
-	this.next.onclick = function()
-	{
-		buttons.scrollLeft += 150;
-	}
-	//this.buttons.appendChild(this.next);
-
-	//Previous tab
-	this.previous = document.createElement("img");
-	this.previous.style.position = "absolute";
-	this.previous.style.top = "8px";
-	this.previous.style.right = "25px";
-	this.previous.style.width = "15px";
-	this.previous.style.height = "15px";
-	this.previous.style.zIndex = "10";
-	this.previous.src = "editor/files/icons/misc/arrow_left.png";
-	this.previous.onclick = function()
-	{
-		buttons.scrollLeft -= 150;
-	}
-	//this.buttons.appendChild(this.previous);
-
+	
 	//Tab
 	this.tab = document.createElement("div");
 	this.tab.style.position = "absolute";
@@ -150,14 +119,6 @@ TabGroup.prototype.selectTab = function(index)
 {
 	if(index > -1 && index < this.options.length)
 	{
-		//TODO <TEST CODE>
-		var but = index * this.button_size.x;
-		var tab_min = this.buttons.scrollLeft;
-		var tab_max = this.buttons.scrollLeft + (this.size.x - (this.size.x % this.buttons.scrollLeft));
-
-		console.log("Button Position:" + but);
-		console.log("Tab Position:" + tab_min + " , " + tab_max);
-
 		this.selected = index;
 		this.options[index].activate();
 		this.updateInterface();
@@ -283,17 +244,28 @@ TabGroup.prototype.update = function()
 //Update interface
 TabGroup.prototype.updateInterface = function()
 {
-	var size = this.size.clone();
+	var tab_size = this.size.clone();
+	var button_size = this.button_size.clone();
 	var offset = this.button_size.clone();
 	
 	if(this.mode === TabGroup.TOP || this.mode === TabGroup.BOTTOM)
 	{
-		size.y -= this.button_size.y;
+		if(button_size.x * this.options.length > this.size.x)
+		{
+			button_size.x = this.size.x / this.options.length;
+			offset.x = button_size.x;
+		}
+		tab_size.y -= this.button_size.y;
 		offset.y = 0;
 	}
 	else if(this.mode === TabGroup.LEFT || this.mode === TabGroup.RIGHT)
 	{
-		size.x -= this.button_size.x;
+		if(button_size.y * this.options.length > this.size.y)
+		{
+			button_size.y = this.size.y / this.options.length;
+			offset.y = button_size.y;
+		}
+		tab_size.x -= this.button_size.x;
 		offset.x = 0;
 	}
 
@@ -302,12 +274,12 @@ TabGroup.prototype.updateInterface = function()
 	{
 		var tab = this.options[i];
 		tab.visible = this.visible && (this.selected === i);
-		tab.size.copy(size);
+		tab.size.copy(tab_size);
 		tab.updateInterface();
 
 		var button = tab.button;
 		button.visible = this.visible;
-		button.size.copy(this.button_size);
+		button.size.copy(button_size);
 		button.position.copy(offset);
 		button.position.multiplyScalar(i);
 		button.updateInterface();

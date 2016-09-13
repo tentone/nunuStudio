@@ -2,15 +2,32 @@
 
 function TabButton(parent, tab)
 {
-	Button.call(this, parent);
+	if(parent === undefined)
+	{
+		this.parent = document.body;
+	}
+	else
+	{
+		this.parent = parent;
+	}
 
-	//Tab
-	this.tab = tab;
-	
-	//Button
+	//Element
+	this.element = document.createElement("div");
+	this.element.style.position = "absolute";
+	this.element.style.cursor = "pointer";
+	this.element.style.backgroundColor = Editor.theme.button_color;
 	this.element.draggable = true;
 
-	//Set button callback
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+	};
+
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+	};
+
 	this.element.onclick = function(event)
 	{
 		//Select tab on mouse left click
@@ -26,7 +43,13 @@ function TabButton(parent, tab)
 		}
 	};
 
-	//Mouse leave event (overrided)
+	//Mouse over and mouse out events
+	this.element.onmouseenter = function()
+	{
+		this.style.backgroundColor = Editor.theme.button_over_color;
+	};
+
+	//Mouse leave event
 	this.element.onmouseleave = function()
 	{
 		if(!tab.isSelected())
@@ -36,20 +59,34 @@ function TabButton(parent, tab)
 	};
 
 	//Icon
-	this.icon = new ImageBox(this.element);
-	this.icon.size.set(15, 15);
-	this.icon.position.set(7, 7);
-	this.icon.setImage(tab.icon);
-	this.icon.updateInterface();
+	this.icon = document.createElement("img");
+	this.icon.style.position = "absolute";
+	this.icon.style.top = "7px";
+	this.icon.style.left = "7px";
+	this.icon.style.width = "15px";
+	this.icon.style.height = "15px";
+	this.icon.src = tab.icon;
+	this.element.appendChild(this.icon);
 
-	//Name
-	this.setName(tab.name);
+	//Text
+	this.text = document.createElement("div");
+	this.text.style.position = "absolute";
+	this.text.style.overflow = "hidden";
+	this.text.style.textAlign = "center";
+	this.text.style.pointerEvents = "none";
+	this.text.style.textOverflow = "ellipsis";
+	this.text.style.whiteSpace = "nowrap";
+	this.text.style.top = "8px";
+	this.text.style.left = "25px";
+	this.text.style.color = Editor.theme.text_color;
+	this.text.innerHTML = tab.name;
+	this.element.appendChild(this.text);
 
 	//Close button
 	this.close_button = new ButtonImage(this.element);
 	this.close_button.visible = this.closeable;
 	this.close_button.size.set(10, 10);
-	this.close_button.position.set(this.size.x - 20, 10);
+	this.close_button.position.set(130, 10);
 	this.close_button.setImage("editor/files/icons/misc/close.png");
 	this.close_button.setCallback(function()
 	{
@@ -57,10 +94,16 @@ function TabButton(parent, tab)
 	});
 	this.close_button.updateInterface();
 
+	//Element atributes
+	this.size = new THREE.Vector2(150, 30);
+	this.position = new THREE.Vector2(0, 0);
+	this.visible = true;
+
+	//Tab
+	this.tab = tab;
+
 	this.parent.appendChild(this.element);
 }
-
-TabButton.prototype = Object.create(Button.prototype);
 
 //Set button icon
 TabButton.prototype.setIcon = function(icon)
@@ -72,13 +115,8 @@ TabButton.prototype.setIcon = function(icon)
 //Set button name
 TabButton.prototype.setName = function(text)
 {
-	if(text !== undefined && text.length > 9)
-	{
-		text = text.slice(0,9) + "...";
-	}
-
 	this.tab.name = text;
-	this.setText(text);
+	this.text.innerHTML = text;
 }
 
 //Destroy
@@ -103,11 +141,30 @@ TabButton.prototype.updateInterface = function()
 	{
 		this.element.style.backgroundColor = Editor.theme.button_color;
 	}
-	Button.prototype.updateInterface.call(this);
 
-	//Icon
-	this.icon.visible = this.visible;
-	this.icon.updateInterface();
+	//Visibility
+	if(this.visible)
+	{
+		this.icon.style.visibility = "visible";
+		this.text.style.visibility = "visible";
+		this.element.style.visibility = "visible";
+	}
+	else
+	{
+		this.icon.style.visibility = "hidden";
+		this.text.style.visibility = "hidden";
+		this.element.style.visibility = "hidden";
+	}
+
+	//Text
+	this.text.style.width = (this.size.x - 50) + "px";
+	this.text.style.height = this.size.y + "px";
+
+	//Element
+	this.element.style.top = this.position.y + "px";
+	this.element.style.left = this.position.x + "px";
+	this.element.style.width = this.size.x + "px";
+	this.element.style.height = this.size.y + "px";
 
 	//Close button
 	if(this.tab.closeable)
