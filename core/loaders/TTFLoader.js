@@ -1,4 +1,4 @@
-//Code from typeface.js online converted made by gero3
+//Based on typeface.js online converter made by gero3
 
 "use strict";
 
@@ -35,8 +35,10 @@ TTFLoader.convert = function(font, reversed)
 	var result = {};
 	result.glyphs = {};
 
-	font.glyphs.forEach(function(glyph)
+	for(var i = 0; i < font.glyphs.length; i++)
 	{
+		var glyph = font.glyphs.glyphs[i];
+
 		if(glyph.unicode !== undefined)
 		{
 			var token = {};
@@ -83,7 +85,7 @@ TTFLoader.convert = function(font, reversed)
 			});
 			result.glyphs[String.fromCharCode(glyph.unicode)] = token;
 		}
-	});
+	}
 
 	result.familyName = font.familyName;
 	result.ascender = Math.round(font.ascender * scale);
@@ -100,23 +102,6 @@ TTFLoader.convert = function(font, reversed)
 
 	result.resolution = 1000;
 	result.original_font_information = font.tables.name;
-	if(font.styleName.toLowerCase().indexOf("bold") > -1)
-	{
-		result.cssFontWeight = "bold";
-	}
-	else
-	{
-		result.cssFontWeight = "normal";
-	}
-
-	if(font.styleName.toLowerCase().indexOf("italic") > -1)
-	{
-		result.cssFontStyle = "italic";
-	}
-	else
-	{
-		result.cssFontStyle = "normal";
-	}
 
 	return result;
 }
