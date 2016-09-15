@@ -37,7 +37,6 @@ include("lib/three/animation/Animation.js");
 include("lib/three/animation/AnimationHandler.js");
 include("lib/three/animation/KeyFrameAnimation.js");
 
-include("lib/opentype.min.js");
 include("lib/jscolor.min.js");
 
 //Internal modules
@@ -153,7 +152,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201609141543";
+Editor.TIMESTAMP = "201609152219";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -1167,6 +1166,7 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile("lib\\stats.min.js", dir + "\\lib\\stats.min.js");
 	FileSystem.copyFile("lib\\cannon.min.js", dir + "\\lib\\cannon.min.js");
 	FileSystem.copyFile("lib\\spine.min.js", dir + "\\lib\\spine.min.js");
+	FileSystem.copyFile("lib\\opentype.min.js", dir + "\\lib\\opentype.min.js");
 	FileSystem.makeDirectory(dir + "\\lib\\three");
 	FileSystem.copyFile("lib\\three\\three.min.js", dir + "\\lib\\three\\three.min.js");
 	FileSystem.makeDirectory(dir + "\\lib\\three\\effects");

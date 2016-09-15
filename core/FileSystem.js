@@ -172,3 +172,15 @@ FileSystem.copyFolder = function(src, dest)
 		}
 	}
 }
+
+//Get file name from file path string
+FileSystem.getFileName = function(file)
+{
+	return file.substring(file.lastIndexOf("\\") + 1, file.lastIndexOf("."));
+}
+
+//Get file extension from file path string
+FileSystem.getFileExtension = function(file)
+{
+	return file.substring(file.lastIndexOf(".") + 1, file.length);
+}
