@@ -152,29 +152,35 @@ Main.draw = function()
 {
 	if(Main.vr_effect !== null)
 	{
-		//Update VR controls
 		Main.vr_controls.scale = Main.program.vr_scale;
 		Main.vr_controls.update();
 
-		//Backup camera atributes
-		var camera = Main.program.scene.camera;
-		var position = camera.position.clone();
-		var quaternion = camera.quaternion.clone();
+		var scene = Main.program.scene;
+		for(var i = 0; i < scene.cameras.length; i++)
+		{
+			var camera = scene.cameras[i];
 
-		//Apply VR controller offsets to actual camera
-		camera.position.add(Main.vr_controls.position);
-		camera.quaternion.multiply(Main.vr_controls.quaternion);
+			//Apply VR controller offsets to camera
+			var position = camera.position.clone();
+			var quaternion = camera.quaternion.clone();
+			camera.position.add(Editor.vr_controls.position);
+			camera.quaternion.multiply(Editor.vr_controls.quaternion);
 
-		//Render scene
-		Main.vr_effect.render(Main.program.scene, camera);
+			//Render scene
+			Main.vr_effect.render(scene, camera);
 
-		//Backup camera atributes
-		camera.position.copy(position);
-		camera.quaternion.copy(quaternion);
+			//Restore camera attributes
+			camera.position.copy(position);
+			camera.quaternion.copy(quaternion);
+		}
 	}
 	else
 	{
-		Main.renderer.render(Main.program.scene, Main.program.scene.camera);
+		var scene = Main.program.scene;
+		for(var i = 0; i < scene.cameras.length; i++)
+		{
+			Main.renderer.render(scene, scene.cameras[i]);
+		}
 	}
 
 	Main.stats.end();
