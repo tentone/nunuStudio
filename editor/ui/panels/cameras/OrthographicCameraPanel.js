@@ -83,7 +83,7 @@ function OrthographicCameraPanel(parent)
 
 	//Select camera as scene default
 	this.default = new CheckBox(this.form.element);
-	this.default.setText("Default camera");
+	this.default.setText("Use camera");
 	this.default.size.set(200, 15);
 	this.default.setOnChange(function()
 	{
@@ -94,11 +94,15 @@ function OrthographicCameraPanel(parent)
 			{
 				if(self.default.getValue())
 				{
-					scene.initial_camera = self.obj.uuid;
+					scene.cameras.push(self.obj);
 				}
 				else
 				{
-					scene.initial_camera = null;
+					var index = scene.cameras.indexOf(self.obj);
+					if(index > -1)
+					{
+						scene.cameras.splice(index, 1);
+					}
 				}
 			}
 		}
@@ -157,16 +161,7 @@ OrthographicCameraPanel.prototype.updatePanel = function()
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
 		this.size.setValue(this.obj.size);
 		this.mode.setSelectedIndex(this.obj.mode);
-
-		var scene = ObjectUtils.getScene(this.obj);
-		if(scene !== null)
-		{
-			this.default.setValue(scene.initial_camera === this.obj.uuid);
-		}
-		else
-		{
-			this.default.setValue(false);
-		}
+		this.default.setValue(ObjectUtils.getScene(this.obj).cameras.indexOf(this.obj) !== -1);
 
 		this.near.setValue(this.obj.near);
 		this.far.setValue(this.obj.far);

@@ -11,6 +11,9 @@ function Scene()
 	//Clock
 	this.clock = new THREE.Clock();
 
+	//Camera
+	this.cameras = [];
+
 	//Cannon world
 	this.world = new CANNON.World();
 	this.world.defaultContactMaterial.contactEquationStiffness = 1e9;
@@ -22,12 +25,6 @@ function Scene()
 	this.world.solver = new CANNON.SplitSolver(new CANNON.GSSolver());
 	this.world.solver.tolerance = 0.1;
 	this.world.solver.iterations = 7;
-
-	//Camera
-	this.initial_camera = null;
-
-	//Runtime variables
-	this.camera = null;
 }
 
 Scene.prototype = Object.create(THREE.Scene.prototype);
@@ -35,13 +32,6 @@ Scene.prototype = Object.create(THREE.Scene.prototype);
 //Initialize
 Scene.prototype.initialize = function()
 {
-	//Get initial camera	
-	var camera = this.getInitialCamera();
-	if(camera !== null)
-	{
-		this.camera = camera;
-	}
-
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
@@ -59,24 +49,23 @@ Scene.prototype.update = function()
 	}
 }
 
-//Get default camera
-Scene.prototype.getInitialCamera = function(obj)
+//Get camera from scene using cameras uuid
+Scene.prototype.getCamera = function(uuid, obj)
 {
 	if(obj === undefined)
 	{
 		obj = this;
 	}
 
-	if(this.initial_camera === obj.uuid)
+	if(uuid === obj.uuid)
 	{
 		return obj;
 	}
 
 	var children = obj.children;
-	var length = children.length;
-	for(var i = 0; i < length; i++)
+	for(var i = 0; i < children.length; i++)
 	{
-		var camera = this.getInitialCamera(children[i]);
+		var camera = this.getCamera(uuid, children[i]);
 		if(camera !== null)
 		{
 			return camera;
@@ -89,11 +78,7 @@ Scene.prototype.getInitialCamera = function(obj)
 //Set fog mode
 Scene.prototype.setFogMode = function(mode)
 {	
-	var color = "#FFFFFF";
-	if(this.fog !== null)
-	{
-		color = this.fog.color.getHex();
-	}
+	var color = (this.fog !== null) ? this.fog.color.getHex() : "#FFFFFF";
 
 	if(mode === THREE.Fog.LINEAR)
 	{	
@@ -114,9 +99,10 @@ Scene.prototype.toJSON = function(meta)
 {
 	var data = THREE.Scene.prototype.toJSON.call(this, meta);
 
-	if(this.initial_camera !== null)
+	data.object.cameras = [];
+	for(var i = 0; i < this.cameras.length; i++)
 	{
-		data.object.initial_camera = this.initial_camera;
+		data.object.cameras.push(this.cameras[i].uuid);
 	}
 
 	data.object.world = {};

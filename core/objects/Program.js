@@ -98,19 +98,18 @@ Program.prototype.setScene = function(scene)
 	if(scene instanceof Scene)
 	{
 		this.scene = scene;
-		this.scene.initialize();
-		if(this.scene.camera === null)
-		{
-			this.scene.camera = this.default_camera;
-		}
 	}
 	else if(typeof scene === "string")
 	{
 		this.scene = this.getObjectByName(scene);
+	}
+
+	if(this.scene !== null)
+	{
 		this.scene.initialize();
-		if(this.scene.camera === null)
+		if(this.scene.cameras.length === 0)
 		{
-			this.scene.camera = this.default_camera;
+			this.scene.cameras.push(this.default_camera);
 		}
 	}
 }
@@ -140,8 +139,11 @@ Program.prototype.resize = function(x, y)
 {
 	if(this.scene !== null)
 	{
-		this.scene.camera.aspect = x/y;
-		this.scene.camera.updateProjectionMatrix();
+		for(var i = 0; i < this.scene.cameras.length; i++)
+		{
+			this.scene.cameras[i].aspect = x / y;
+			this.scene.cameras[i].updateProjectionMatrix();
+		}
 	}
 }
 
