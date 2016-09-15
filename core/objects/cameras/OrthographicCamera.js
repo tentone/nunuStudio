@@ -19,6 +19,8 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.size = size;
 	this.aspect = aspect;
 	this.mode = (mode !== undefined) ? mode : OrthographicCamera.FIXED_VERTICAL;
+
+	this.listener = new THREE.AudioListener();
 }
 
 OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype);

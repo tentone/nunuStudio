@@ -18,7 +18,7 @@ Settings.editor.axis_enabled = true;
 Settings.editor.camera_preview_enabled = true;
 Settings.editor.camera_preview_percentage = 0.35;
 Settings.editor.lock_mouse = true;
-Settings.editor.transformation_space = "local";
+Settings.editor.transformation_space = "world";
 
 //Render settings
 Settings.render = {};

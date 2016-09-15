@@ -15,6 +15,8 @@ function PerspectiveCamera(fov, aspect, near, far)
 	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
 
 	this.name = "camera";
+	
+	this.listener = new THREE.AudioListener();
 }
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
