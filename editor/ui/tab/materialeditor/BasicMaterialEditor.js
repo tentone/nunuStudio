@@ -7,9 +7,10 @@ function BasicMaterialEditor(parent)
 	var self = this;
 	
 	//Skinning
+	this.form.addText("Animation");
 	this.skinning = new CheckBox(this.preview.div_b);
 	this.skinning.setText("Skinning");
-	this.skinning.size.set(200, 15);
+	this.skinning.size.set(75, 15);
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
@@ -19,7 +20,6 @@ function BasicMaterialEditor(parent)
 		}
 	});
 	this.form.add(this.skinning);
-	this.form.nextRow();
 
 	//Morph targets
 	this.morphTargets = new CheckBox(this.preview.div_b);

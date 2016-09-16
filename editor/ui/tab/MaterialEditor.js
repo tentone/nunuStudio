@@ -217,9 +217,10 @@ function MaterialEditor(parent)
 	this.form.nextRow();
 
 	//Test depth
+	this.form.addText("Depth");
 	this.depthTest = new CheckBox(this.preview.div_b);
-	this.depthTest.setText("Test depth");
-	this.depthTest.size.set(200, 15);
+	this.depthTest.setText("Test");
+	this.depthTest.size.set(40, 15);
 	this.depthTest.updateInterface();
 	this.depthTest.setOnChange(function()
 	{
@@ -230,12 +231,11 @@ function MaterialEditor(parent)
 		}
 	});
 	this.form.add(this.depthTest);
-	this.form.nextRow();
 
 	//Write depth
 	this.depthWrite  = new CheckBox(this.preview.div_b);
-	this.depthWrite .setText("Depth write");
-	this.depthWrite .size.set(200, 15);
+	this.depthWrite .setText("Write");
+	this.depthWrite .size.set(40, 15);
 	this.depthWrite .updateInterface();
 	this.depthWrite .setOnChange(function()
 	{
@@ -301,7 +301,7 @@ function MaterialEditor(parent)
 	this.form.addText("Blending Mode");
 	this.blending = new DropdownList(this.form.element);
 	this.blending.position.set(100, 85);
-	this.blending.size.set(150, 18);
+	this.blending.size.set(100, 18);
 	this.blending.addValue("None", THREE.NoBlending);
 	this.blending.addValue("Normal", THREE.NormalBlending);
 	this.blending.addValue("Additive", THREE.AdditiveBlending);

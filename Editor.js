@@ -128,6 +128,7 @@ include("editor/helpers/ParticleEmitterHelper.js");
 include("editor/helpers/ObjectIconHelper.js");
 include("editor/helpers/PhysicsObjectHelper.js");
 include("editor/helpers/WireframeHelper.js");
+include("editor/helpers/BoundingBoxHelper.js");
 
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
@@ -152,7 +153,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201609160042";
+Editor.TIMESTAMP = "201609161318";
 
 //Initialize Main
 Editor.initialize = function(canvas)
@@ -499,7 +500,7 @@ Editor.draw = function()
 		renderer.clearDepth();
 		renderer.render(Editor.tool_scene_top, Editor.camera);
 
-		if(Settings.editor.camera_preview_enabled)
+		if(Settings.editor.camera_preview_enabled && (Editor.selected_object instanceof THREE.Camera || Editor.program.scene.cameras.length > 0))
 		{
 			var width = Settings.editor.camera_preview_percentage * Editor.canvas.width;
 			var height = Settings.editor.camera_preview_percentage * Editor.canvas.height;
@@ -1029,19 +1030,20 @@ Editor.selectObjectHelper = function()
 		//Animated Mesh
 		else if(Editor.selected_object instanceof THREE.SkinnedMesh)
 		{
-			Editor.object_helper.add(new THREE.BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
+			Editor.object_helper.add(new BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
+			Editor.object_helper.add(new WireframeHelper(Editor.selected_object));
 			Editor.object_helper.add(new THREE.SkeletonHelper(Editor.selected_object));
 		}
 		//Mesh
 		else if(Editor.selected_object instanceof THREE.Mesh)
 		{
-			Editor.object_helper.add(new THREE.BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
+			Editor.object_helper.add(new BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
 			Editor.object_helper.add(new WireframeHelper(Editor.selected_object));
 		}
 		//Object 3D
 		else if(Editor.selected_object instanceof THREE.Object3D)
 		{
-			Editor.object_helper.add(new THREE.BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
+			Editor.object_helper.add(new BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
 		}
 	}
 }
@@ -1123,19 +1125,8 @@ Editor.createNewProgram = function()
 Editor.saveProgram = function(fname)
 {
 	var output = Editor.program.toJSON();
-	var json = null;
-	
-	try
-	{
-		json = JSON.stringify(output, null, "\t");
-		json = json.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
-	}
-	catch(e)
-	{
-		json = JSON.stringify(output);
-	}
-
-	FileSystem.writeFile(fname, json);
+	//var json = JSON.stringify(output, null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
+	FileSystem.writeFile(fname, JSON.stringify(output));
 }
 
 //Load program from file
