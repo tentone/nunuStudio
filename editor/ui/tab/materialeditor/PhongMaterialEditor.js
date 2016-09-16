@@ -6,6 +6,36 @@ function PhongMaterialEditor(parent)
 
 	var self = this;
 
+	//Skinning
+	this.form.addText("Animation");
+	this.skinning = new CheckBox(this.preview.div_b);
+	this.skinning.setText("Skinning");
+	this.skinning.size.set(75, 15);
+	this.skinning.updateInterface();
+	this.skinning.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.skinning = self.skinning.getValue();
+		}
+	});
+	this.form.add(this.skinning);
+
+	//Morph targets
+	this.morphTargets = new CheckBox(this.preview.div_b);
+	this.morphTargets.setText("Morph targets");
+	this.morphTargets.size.set(200, 15);
+	this.morphTargets.updateInterface();
+	this.morphTargets.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.morphTargets = self.morphTargets.getValue();
+		}
+	});
+	this.form.add(this.morphTargets);
+	this.form.nextRow();
+
 	//Wireframe
 	this.wireframe = new CheckBox(this.form.element);
 	this.wireframe.setText("Wireframe");
@@ -371,6 +401,8 @@ PhongMaterialEditor.prototype.attachMaterial = function(material, material_file)
 {
 	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
 
+	this.skinning.setValue(material.skinning);
+	this.morphTargets.setValue(material.morphTargets);
 	this.wireframe.setValue(material.wireframe);
 	this.shading.setValue(material.shading);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
