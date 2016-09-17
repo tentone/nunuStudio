@@ -15,19 +15,32 @@ function PerspectiveCamera(fov, aspect, near, far)
 	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
 
 	this.name = "camera";
-	
+
+	this.viewport = new THREE.Vector2(1.0, 1.0);
+
 	this.listener = new THREE.AudioListener();
 }
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
+//Initialize camera
 PerspectiveCamera.prototype.initialize = function()
 {
-	this.getWorldScale(this.scale);
-	this.scale.set(1.0 / this.scale.x, 1.0 / this.scale.y, 1.0 / this.scale.z);
-
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
 	}
 }
+
+//Destroy camera
+PerspectiveCamera.prototype.destroy = function()
+{
+	var scene = ObjectUtils.getScene(this);
+	if(scene !== null)
+	{
+		scene.removeCamera(this);
+	}
+	
+	THREE.Object3D.prototype.destroy.call(this);
+}
+

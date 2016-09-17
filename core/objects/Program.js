@@ -24,7 +24,7 @@ function Program(name)
 	this.vr = false;
 	this.vr_scale = 1;
 
-	//Rendering quality
+	//Render quality
 	this.antialiasing = false;
 	this.shadows = true;
 	this.shadows_type = THREE.PCFSoftShadowMap;
@@ -49,6 +49,42 @@ function Program(name)
 }
 
 Program.prototype = Object.create(THREE.Object3D.prototype);
+
+//Select initial scene and initialize that scene
+Program.prototype.initialize = function()
+{
+	if(this.default_scene !== null)
+	{
+		for(var i = 0; i < this.children.length; i++)
+		{
+			if(this.children[i].uuid === this.default_scene)
+			{
+				this.setScene(this.children[i]);
+				break;
+			}
+		}
+	}
+	else
+	{
+		this.setScene(this.children[0]);
+	}
+}
+
+//Update program
+Program.prototype.update = function()
+{
+	this.scene.update();
+}
+
+//Screen resize
+Program.prototype.resize = function(x, y)
+{
+	for(var i = 0; i < this.scene.cameras.length; i++)
+	{
+		this.scene.cameras[i].aspect = x / y;
+		this.scene.cameras[i].updateProjectionMatrix();
+	}
+}
 
 //Add material to materials list
 Program.prototype.addMaterial = function(material)
@@ -110,39 +146,6 @@ Program.prototype.setScene = function(scene)
 		if(this.scene.cameras.length === 0)
 		{
 			this.scene.cameras.push(this.default_camera);
-		}
-	}
-}
-
-//Select initial scene and initialize that scene
-Program.prototype.initialize = function()
-{
-	if(this.default_scene !== null)
-	{
-		for(var i = 0; i < this.children.length; i++)
-		{
-			if(this.children[i].uuid === this.default_scene)
-			{
-				this.setScene(this.children[i]);
-				break;
-			}
-		}
-	}
-	else
-	{
-		this.setScene(this.children[0]);
-	}
-}
-
-//Screen resize
-Program.prototype.resize = function(x, y)
-{
-	if(this.scene !== null)
-	{
-		for(var i = 0; i < this.scene.cameras.length; i++)
-		{
-			this.scene.cameras[i].aspect = x / y;
-			this.scene.cameras[i].updateProjectionMatrix();
 		}
 	}
 }

@@ -79,15 +79,11 @@ function PerspectiveCameraPanel(parent)
 			{
 				if(self.default.getValue())
 				{
-					scene.cameras.push(self.obj);
+					scene.addCamera(self.obj);
 				}
 				else
 				{
-					var index = scene.cameras.indexOf(self.obj);
-					if(index > -1)
-					{
-						scene.cameras.splice(index, 1);
-					}
+					scene.removeCamera(self.obj);
 				}
 			}
 		}
@@ -146,7 +142,6 @@ PerspectiveCameraPanel.prototype.updatePanel = function()
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
 		this.fov.setValue(this.obj.fov);
 		this.default.setValue(ObjectUtils.getScene(this.obj).cameras.indexOf(this.obj) !== -1);
-
 		this.near.setValue(this.obj.near);
 		this.far.setValue(this.obj.far);
 	}

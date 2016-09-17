@@ -97,16 +97,15 @@ App.initialize = function(main)
 {
 	App.fullscreen = false;
 
-	//Init Input
 	Keyboard.initialize();
 	Mouse.initialize();
 
 	//Create main program
 	App.main = main;
-	App.main.initialize(App.canvas);
+	App.main.initialize();
 
 	//Time control
-	App.delta_time = 0;
+	App.delta = 0;
 	App.time = Date.now();
 
 	//Start Loop
@@ -118,20 +117,20 @@ App.loop = function()
 {
 	requestAnimationFrame(App.loop);
 
-	//Update Mouse Values
+	//Update input
 	Mouse.update();
 	Keyboard.update();
 	
 	//Update time values
-	App.delta_time = Date.now() - App.time;
-	App.time += App.delta_time;
+	App.delta = Date.now() - App.time;
+	App.time += App.delta;
 
-	//Update and draw
+	//Update and render
 	App.main.update();
-	App.main.draw();
+	App.main.render();
 }
 
-//Called every time page is resized
+//Resize app
 App.resize = function()
 {
 	App.main.resize();
@@ -140,7 +139,6 @@ App.resize = function()
 //Leave fullscreen mode
 App.leaveFullscreen = function()
 {
-	//Set fullscreen flag
 	App.fullscreen = false;
 
 	if(document.exitFullscreen)

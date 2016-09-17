@@ -20,6 +20,8 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.aspect = aspect;
 	this.mode = (mode !== undefined) ? mode : OrthographicCamera.FIXED_VERTICAL;
 
+	this.viewport = new THREE.Vector2(1.0, 1.0);
+
 	this.listener = new THREE.AudioListener();
 }
 
@@ -32,13 +34,22 @@ OrthographicCamera.FIXED_HORIZONTAL = 1;
 //Initialize
 OrthographicCamera.prototype.initialize = function()
 {
-	this.getWorldScale(this.scale);
-	this.scale.set(1.0 / this.scale.x, 1.0 / this.scale.y, 1.0 / this.scale.z);
-	
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
 	}
+}
+
+//Destroy camera
+OrthographicCamera.prototype.destroy = function()
+{
+	var scene = ObjectUtils.getScene(this);
+	if(scene !== null)
+	{
+		scene.removeCamera(this);
+	}
+	
+	THREE.Object3D.prototype.destroy.call(this);
 }
 
 //Update camera projection matrix

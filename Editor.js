@@ -154,10 +154,10 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201609170145";
+Editor.TIMESTAMP = "201609171543";
 
 //Initialize Main
-Editor.initialize = function(canvas)
+Editor.initialize = function()
 {
 	//Load settings
 	Settings.load();
@@ -481,12 +481,12 @@ Editor.update = function()
 	//Update Scene if on test mode
 	else if(Editor.state === Editor.STATE_TESTING)
 	{
-		Editor.program_running.scene.update();
+		Editor.program_running.update();
 	}
 }
 
 //Draw stuff into screen
-Editor.draw = function()
+Editor.render = function()
 {
 	var renderer = Editor.renderer;	
 	renderer.clear();
@@ -592,7 +592,7 @@ Editor.selectObject = function(object)
 	{
 		Editor.selected_object = object;
 
-		Editor.updateSelectedObjectUI();
+		Editor.selectObjectPanel();
 		Editor.selectObjectHelper();
 
 		if(Editor.tool !== null)
@@ -622,23 +622,24 @@ Editor.isObjectSelected = function(obj)
 	return false;
 }
 
-//Delete Selected Object
+//Delete selected Object
 Editor.deleteObject = function(obj)
 {
-	if(obj !== undefined)
+	if(obj === undefined)
 	{
-		obj.destroy();
-		Editor.updateObjectViews();
+		obj = Editor.selected_object;
+	}
+	
+	if(obj instanceof THREE.Object3D)
+	{
 		if(Editor.isObjectSelected(obj))
 		{
 			Editor.resetEditingFlags();
 		}
-	}
-	else if(Editor.selected_object !== null)
-	{
-		Editor.selected_object.destroy();
+
+		obj.destroy();
+
 		Editor.updateObjectViews();
-		Editor.resetEditingFlags();
 	}
 }
 
@@ -732,14 +733,17 @@ Editor.undo = function()
 }
 
 //Update UI panel to match selected object
-Editor.updateSelectedObjectUI = function()
+Editor.selectObjectPanel= function()
 {
 	Interface.tree_view.updateSelectedObject(Editor.selected_object);
-	Interface.panel.destroy();
+
+	if(Interface.panel !== null)
+	{
+		Interface.panel.destroy();
+	}
 
 	if(Editor.selected_object !== null)
 	{
-
 		if(Editor.selected_object instanceof Text3D)
 		{
 			Interface.panel = new TextPanel(Interface.explorer_resizable.div_b);
@@ -1095,6 +1099,12 @@ Editor.resetEditingFlags = function()
 {
 	Editor.selected_object = null;
 	Editor.is_editing_object = false;
+	
+	if(Interface.panel !== null)
+	{
+		Interface.panel.destroy();
+		Interface.panel = null;
+	}
 	
 	Editor.selectTool(Editor.MODE_SELECT);
 	Editor.selectObjectHelper();
