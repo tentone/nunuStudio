@@ -94,15 +94,11 @@ function OrthographicCameraPanel(parent)
 			{
 				if(self.default.getValue())
 				{
-					scene.cameras.push(self.obj);
+					scene.addCamera(self.obj);
 				}
 				else
 				{
-					var index = scene.cameras.indexOf(self.obj);
-					if(index > -1)
-					{
-						scene.cameras.splice(index, 1);
-					}
+					scene.removeCamera(self.obj);
 				}
 			}
 		}
@@ -162,7 +158,6 @@ OrthographicCameraPanel.prototype.updatePanel = function()
 		this.size.setValue(this.obj.size);
 		this.mode.setSelectedIndex(this.obj.mode);
 		this.default.setValue(ObjectUtils.getScene(this.obj).cameras.indexOf(this.obj) !== -1);
-
 		this.near.setValue(this.obj.near);
 		this.far.setValue(this.obj.far);
 	}

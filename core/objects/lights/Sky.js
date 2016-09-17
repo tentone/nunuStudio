@@ -2,12 +2,12 @@
 
 function Sky(auto_update, day_time, sun_distance, time)
 {	
-	//Call super contructor
 	THREE.Object3D.call(this);
 
-	//Attributes
 	this.name = "sky";
 	this.type = "Sky";
+
+	this.clock = new THREE.Clock();
 
 	//Hemisphere light
 	this.hemisphere = new HemisphereLight(0xffffff, 0xffffff, 0.5);
@@ -103,7 +103,7 @@ Sky.prototype.update = function()
 	//Update time
 	if(this.auto_update)
 	{
-		this.time += App.delta_time / 1000;
+		this.time += this.clock.getDelta();
 		if(this.time > this.day_time)
 		{
 			this.time -= this.day_time;

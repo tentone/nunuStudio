@@ -6,7 +6,7 @@ function Main(){}
 Main.app = "app.isp";
 
 //Initialize Main
-Main.initialize = function(canvas)
+Main.initialize = function()
 {
 	//Main program and scene
 	Main.program = Main.loadProgram(Main.app);
@@ -139,16 +139,15 @@ Main.initialize = function(canvas)
 	}
 }
 
-//Update Main
+//Update program
 Main.update = function()
 {
 	Main.stats.begin();
-
-	Main.program.scene.update();
+	Main.program.update();
 }
 
-//Draw stuff into screen
-Main.draw = function()
+//Render program
+Main.render = function()
 {
 	if(Main.vr_effect !== null)
 	{
@@ -163,8 +162,8 @@ Main.draw = function()
 			//Apply VR controller offsets to camera
 			var position = camera.position.clone();
 			var quaternion = camera.quaternion.clone();
-			camera.position.add(Editor.vr_controls.position);
-			camera.quaternion.multiply(Editor.vr_controls.quaternion);
+			camera.position.add(Main.vr_controls.position);
+			camera.quaternion.multiply(Main.vr_controls.quaternion);
 
 			//Render scene
 			Main.vr_effect.render(scene, camera);
@@ -220,7 +219,7 @@ Main.loadProgram = function(fname)
 	return loader.parse(data);
 }
 
-//Exit editor
+//Exit program
 Main.exit = function()
 {
 	process.exit();
