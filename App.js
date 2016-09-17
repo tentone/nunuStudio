@@ -8,7 +8,6 @@ include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.min.js");
-include("lib/opentype.min.js");
 
 //Internal modules
 include("core/three/Three.js");
