@@ -1,4 +1,3 @@
-
 function Script(code, mode)
 {
 	THREE.Object3D.call(this);

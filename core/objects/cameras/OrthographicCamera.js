@@ -82,6 +82,7 @@ OrthographicCamera.prototype.toJSON = function(meta)
 	data.object.size = this.size;
 	data.object.aspect = this.aspect;
 	data.object.mode = this.mode;
+	data.object.viewport = this.viewport.toJSON();
 
 	return data;
 }

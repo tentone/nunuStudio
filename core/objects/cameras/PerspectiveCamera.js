@@ -44,3 +44,12 @@ PerspectiveCamera.prototype.destroy = function()
 	THREE.Object3D.prototype.destroy.call(this);
 }
 
+//Create JSON for object
+PerspectiveCamera.prototype.toJSON = function(meta)
+{
+	var data = THREE.PerspectiveCamera.prototype.toJSON.call(this, meta);
+
+	data.object.viewport = this.viewport.toJSON();
+
+	return data;
+}
