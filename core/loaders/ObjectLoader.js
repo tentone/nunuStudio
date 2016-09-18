@@ -497,10 +497,6 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 					object.fog = new THREE.FogExp2(data.fog.color, data.fog.density);
 				}
 			}
-			if(data.initial_camera !== undefined)
-			{
-				object.cameras.push(data.initial_camera);
-			}
 			if(data.cameras !== undefined)
 			{
 				object.cameras = data.cameras;
@@ -533,10 +529,18 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.view = Object.assign({}, data.view);
 			}
+			if(data.viewport !== undefined)
+			{
+				object.viewport.set(data.viewport.x, data.viewport.y);
+			}
 			break;
 
 		case "OrthographicCamera":
 			object = new OrthographicCamera(data.size, data.aspect, data.mode, data.near, data.far);
+			if(data.viewport !== undefined)
+			{
+				object.viewport.set(data.viewport.x, data.viewport.y);
+			}			
 			break;
 
 		case "AmbientLight":
