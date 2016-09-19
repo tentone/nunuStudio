@@ -154,7 +154,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201609190041";
+Editor.TIMESTAMP = "201609191621";
 
 //Initialize Main
 Editor.initialize = function()
@@ -870,8 +870,9 @@ Editor.updateTreeView = function()
 	//TODO <REMOVE TEST CODE>
 	var start = Date.now();
 
-	Interface.tree_view.fromObject(Editor.program);
-
+	Interface.tree_view.attachObject(Editor.program);
+	Interface.tree_view.updateView();
+	
 	//TODO <REMOVE TEST CODE>
 	tree_delta = Date.now() - start;
 }
