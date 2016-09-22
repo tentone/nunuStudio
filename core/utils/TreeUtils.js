@@ -78,87 +78,139 @@ Tree.prototype.print = function(level)
 	}
 }
 
+function TreeUtils(){}
+
 //Tree changes code
-Tree.DIFF_ADD = 0;
-Tree.DIFF_REM = 1;
-Tree.DIFF_MOVE = 2;
+TreeUtils.DIFF_ADDED = 0;
+TreeUtils.DIFF_REMOVED = 1;
+TreeUtils.DIFF_MOVED = 2;
 
 //Compare two trees and return list of changes (a is the oldest version of tree and b the newest)
-Tree.compare = function(a, b, diffs, missing)
+TreeUtils.compare = function(a, b, diffs, path)
 {
+	//Differences array
 	if(diffs === undefined)
 	{
 		diffs = [];
 	}
 
-	if(missing === undefined)
+	//Path to this tree point in positions
+	if(path === undefined)
 	{
-		missing = [];
+		path = [];
 	}
 
-	var length = (a.children.length < b.children.length) ? a.children.length : b.children.length;
-
-	for(var i = 0, j = 0; i < length; i++, j++)
+	var i = 0, j = 0;
+	while(i < a.children.length && j < b.children.length)
 	{
 		if(a.children[i].uuid !== b.children[j].uuid)
 		{
+			//Element missing (moved of deleted)
 			if(a.children[i + 1].uuid === b.children[j].uuid)
 			{
-				for(var k = 0; k < missing.length; k++)
+				diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: a.children[i].uuid, from: i, to: -1});
+				i++;
+			}
+			//Added element
+			else if(a.children[i].uuid === b.children[j + 1].uuid)
+			{
+				diffs.push({status: TreeUtils.DIFF_ADDED, uuid: b.children[j].uuid, from: -1, to: j});
+				j++;
+			}
+		}
+		else
+		{
+			TreeUtils.compare(a.children[i], b.children[j], diffs);
+		}
+		i++;
+		j++;
+	}
+
+	//Remaining elements missing in a
+	while(i < a.children.length)
+	{
+		diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: a.children[i].uuid, from: i, to: -1});
+		i++;
+	}
+
+	//Extra elements added in b
+	while(j < b.children.length)
+	{
+		diffs.push({status: TreeUtils.DIFF_ADDED, uuid: b.children[j].uuid, from: -1, to: j});
+		j++;
+	}
+
+	//Check if some elements have removed and added status at same time
+	for(var i = 0; i < diffs.length; i++)
+	{
+		for(var j = 0; j < diffs.length; j++)
+		{
+			if(diffs[i].uuid === diffs[j].uuid)
+			{
+				if(diffs[i].status === TreeUtils.DIFF_REMOVED && diffs[j].status === TreeUtils.DIFF_ADDED)
 				{
-					if(missing[k] === b.children[j].uuid)
-					{
-						diffs.push("Moved (" + b.children[j].uuid + ")");
-					}
+					diffs[i].status = TreeUtils.DIFF_MOVED;
+					diffs[i].to = diffs[j].to;
+					diffs.splice(j, 1);
+				}
+				else if(diffs[j].status === TreeUtils.DIFF_REMOVED && diffs[i].status === TreeUtils.DIFF_ADDED)
+				{
+					diffs[i].status = TreeUtils.DIFF_MOVED;
+					diffs[i].from = diffs[j].to;
+					diffs.splice(j, 1);
 				}
 
-				if(k === missing.length)
-				{
-					diffs.push("Removed (" + b.children[j].uuid + ")");
-				}
 			}
-			else
-			{
-				diffs.push("Added (" + b.children[j].uuid + ")");
-			}
-
-			i++;
-
-			/*if(i < length)
-			{
-				Tree.compare(a, b, diffs, missing);
-			}*/
 		}
 	}
-	
+
 	return diffs;
 }
 
 console.log("Tree Comparison");
 
-var temp;
-
 console.log("Tree A");
-var a = new Tree("root");
-a.add(new Tree("a"));
-temp = new Tree("b");
-temp.add(new Tree("a"));
-temp.add(new Tree("b"));
-temp.add(new Tree("c"));
-a.add(temp);
-a.add(new Tree("c"));
-a.add(new Tree("d"));
-a.add(new Tree("e"));
-a.add(new Tree("f"));
-a.print();
+var tree_a = new Tree("root");
+tree_a.add(new Tree("a"));
+var b = new Tree("b");
+b.add(new Tree("ba"));
+b.add(new Tree("bb"));
+b.add(new Tree("bc"));
+var bd = new Tree("bd");
+b.add(bd);
+tree_a.add(b);
+tree_a.add(new Tree("c"));
+var d = new Tree("d");
+tree_a.add(d);
+tree_a.add(new Tree("e"));
+tree_a.add(new Tree("f"));
+tree_a.print();
 
 console.log("\nTree B");
-var b = a.clone();
-b.remove(temp);
-b.print();
+var tree_b = tree_a.clone();
+tree_b.remove(b);
+tree_b.print();
+
+console.log("\nTree C");
+var tree_c = tree_a.clone();
+tree_c.remove(b);
+tree_c.remove(d);
+tree_c.add(d);
+tree_c.print();
+
+console.log("\nTree D");
+var tree_d = tree_a.clone();
+tree_d.children[1].remove(bd);
+tree_d.print();
 
 console.log("\nCompare A to B");
-console.log(Tree.compare(a, b));
+console.log(TreeUtils.compare(tree_a, tree_b));
+
+console.log("\nCompare A to C");
+console.log(TreeUtils.compare(tree_a, tree_c));
+
+console.log("\nCompare A to D");
+console.log(TreeUtils.compare(tree_a, tree_d));
 
 console.log("\nCompare B to A");
-console.log(Tree.compare(b, a));
+console.log(TreeUtils.compare(tree_b, tree_a));
