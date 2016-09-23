@@ -39,6 +39,8 @@ include("lib/three/animation/KeyFrameAnimation.js");
 
 include("lib/jscolor.min.js");
 include("lib/opentype.min.js");
+include("lib/quickhull.js");
+include("lib/mesh2shape.js");
 
 //Internal modules
 include("editor/ui/element/Bar.js");
@@ -154,7 +156,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201609231730";
+Editor.TIMESTAMP = "201609231949";
 
 //Initialize Main
 Editor.initialize = function()

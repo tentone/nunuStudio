@@ -58,6 +58,15 @@ PhysicsObject.prototype.update = function()
 	}
 }
 
+//Add shape to physics object body
+PhysicsObject.prototype.addShape = function(shape)
+{
+	if(shape instanceof CANNON.Shape)
+	{
+		this.body.addShape(shape);
+	}
+}
+
 //Create JSON for object
 PhysicsObject.prototype.toJSON = function(meta)
 {
