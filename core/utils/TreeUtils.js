@@ -86,7 +86,7 @@ TreeUtils.DIFF_REMOVED = 1;
 TreeUtils.DIFF_MOVED = 2;
 
 //Compare two trees and return list of changes (a is the oldest version of tree and b the newest)
-TreeUtils.compare = function(a, b, diffs, path)
+TreeUtils.compare = function(a, b, diffs, path_a, path_b)
 {
 	//Differences array
 	if(diffs === undefined)
@@ -95,9 +95,14 @@ TreeUtils.compare = function(a, b, diffs, path)
 	}
 
 	//Path to this tree point in positions
-	if(path === undefined)
+	if(path_a === undefined)
 	{
-		path = [];
+		path_a = [];
+	}
+
+	if(path_b === undefined)
+	{
+		path_b = [];
 	}
 
 	var i = 0, j = 0;
@@ -108,20 +113,32 @@ TreeUtils.compare = function(a, b, diffs, path)
 			//Element missing (moved of deleted)
 			if(a.children[i + 1].uuid === b.children[j].uuid)
 			{
-				diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: a.children[i].uuid, from: i, to: -1});
+				var from = path_a.slice(0);
+				from.push(i);
+
+				diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: a.children[i].uuid, from: from, to: null});
 				i++;
 			}
 			//Added element
 			else if(a.children[i].uuid === b.children[j + 1].uuid)
 			{
-				diffs.push({status: TreeUtils.DIFF_ADDED, uuid: b.children[j].uuid, from: -1, to: j});
+				var to = path_b.slice(0);
+				to.push(j);
+
+				diffs.push({status: TreeUtils.DIFF_ADDED, uuid: b.children[j].uuid, from: null, to: to});
 				j++;
 			}
 		}
 		else
 		{
-			TreeUtils.compare(a.children[i], b.children[j], diffs);
+			var from = path_a.slice(0);
+			from.push(i);
+			var to = path_b.slice(0);
+			to.push(j);
+
+			TreeUtils.compare(a.children[i], b.children[j], diffs, from, to);
 		}
+
 		i++;
 		j++;
 	}
@@ -129,14 +146,20 @@ TreeUtils.compare = function(a, b, diffs, path)
 	//Remaining elements missing in a
 	while(i < a.children.length)
 	{
-		diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: a.children[i].uuid, from: i, to: -1});
+		var from = path_a.slice(0);
+		from.push(i);
+
+		diffs.push({status: TreeUtils.DIFF_REMOVED, uuid: a.children[i].uuid, from: from, to: null});
 		i++;
 	}
 
 	//Extra elements added in b
 	while(j < b.children.length)
 	{
-		diffs.push({status: TreeUtils.DIFF_ADDED, uuid: b.children[j].uuid, from: -1, to: j});
+		var to = path_b.slice(0);
+		to.push(j);
+
+		diffs.push({status: TreeUtils.DIFF_ADDED, uuid: b.children[j].uuid, from: null, to: to});
 		j++;
 	}
 
