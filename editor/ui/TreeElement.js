@@ -121,6 +121,17 @@ function TreeElement(container)
 
 			if(!scene && !program)
 			{
+				//Create physics shape to match object
+				menu.addOption("Add physics", function()
+				{
+					var physics = new PhysicsObject();
+					physics.addShape(Mesh2shape.createShape(self.obj));
+					physics.name = self.obj.name;
+					
+					Editor.addToScene(physics);
+					Editor.updateObjectViews();
+				});
+
 				//Set object and children to static mode
 				menu.addOption("Set static", function()
 				{
