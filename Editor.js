@@ -156,7 +156,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201609231949";
+Editor.TIMESTAMP = "201609240157";
 
 //Initialize Main
 Editor.initialize = function()
@@ -1142,8 +1142,9 @@ Editor.createNewProgram = function()
 Editor.saveProgram = function(fname)
 {
 	var output = Editor.program.toJSON();
-	//var json = JSON.stringify(output, null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
-	FileSystem.writeFile(fname, JSON.stringify(output));
+	var json = JSON.stringify(output, null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
+	FileSystem.writeFile(fname, json);
+	//FileSystem.writeFile(fname, JSON.stringify(output));
 }
 
 //Load program from file
