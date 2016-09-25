@@ -1,8 +1,6 @@
 /*
 	Mesh2shape - Convert ThreeJS objects to Cannon shapes
-
 	@author Don McCurdy / https://github.com/donmccurdy
-	@contributer Tentone / https://github.com/tentone
 */
 
 "use strict";
@@ -41,10 +39,8 @@ Mesh2shape.createShape = function(object, type)
 		{
 			return Mesh2shape.createConvexPolyhedron(object);
 		}
-		else
-		{
-			console.warn("[CANNON.mesh2shape] Invalid type", type);
-		}
+		
+		return null;
 	}
 
 	var geometry = Mesh2shape.getGeometry(object);

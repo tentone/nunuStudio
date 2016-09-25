@@ -19,9 +19,9 @@ include("core/three/Texture.js");
 include("core/three/LightShadow.js");
 include("core/three/Fog.js");
 
-include("input/Key.js");
-include("input/Keyboard.js");
-include("input/Mouse.js");
+include("core/input/Key.js");
+include("core/input/Keyboard.js");
+include("core/input/Mouse.js");
 
 include("core/webvr/VRControls.js");
 
@@ -73,6 +73,7 @@ include("core/utils/Base64Utils.js");
 include("core/utils/ArraybufferUtils.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
+include("core/utils/Mesh2shape.js");
 
 include("core/FileSystem.js");
 

@@ -76,6 +76,24 @@ Program.prototype.update = function()
 	this.scene.update();
 }
 
+//Render program
+Program.prototype.render = function(renderer, x, y)
+{
+	renderer.setScissorTest(true);
+
+	for(var i = 0; i < this.scene.cameras.length; i++)
+	{
+		var camera = this.scene.cameras[i];
+
+		//renderer.setViewport(x * camera.offset.x, height * camera.offset.y, y * camera.viewport.x, height * camera.viewport.y);
+		//renderer.setScissor(x * camera.offset.x, height * camera.offset.y, y * camera.viewport.x, height * camera.viewport.y);
+
+		renderer.render(this.scene, camera);
+	}
+
+	renderer.setScissorTest(false);
+}
+
 //Screen resize
 Program.prototype.resize = function(x, y)
 {

@@ -16,6 +16,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 	this.name = "camera";
 
+	this.offset = new THREE.Vector2(0.0, 0.0);
 	this.viewport = new THREE.Vector2(1.0, 1.0);
 
 	this.listener = new THREE.AudioListener();
@@ -49,7 +50,8 @@ PerspectiveCamera.prototype.toJSON = function(meta)
 {
 	var data = THREE.PerspectiveCamera.prototype.toJSON.call(this, meta);
 
-	data.object.viewport = this.viewport.toJSON();
+	data.object.viewport = this.viewport.toArray();
+	data.object.offset = this.offset.toArray();
 
 	return data;
 }
