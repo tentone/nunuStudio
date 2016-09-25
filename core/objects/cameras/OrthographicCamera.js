@@ -20,6 +20,7 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.aspect = aspect;
 	this.mode = (mode !== undefined) ? mode : OrthographicCamera.FIXED_VERTICAL;
 
+	this.offset = new THREE.Vector2(0.0, 0.0);
 	this.viewport = new THREE.Vector2(1.0, 1.0);
 
 	this.listener = new THREE.AudioListener();
@@ -82,7 +83,8 @@ OrthographicCamera.prototype.toJSON = function(meta)
 	data.object.size = this.size;
 	data.object.aspect = this.aspect;
 	data.object.mode = this.mode;
-	data.object.viewport = this.viewport.toJSON();
+	data.object.viewport = this.viewport.toArray();
+	data.object.offset = this.offset.toArray();
 
 	return data;
 }

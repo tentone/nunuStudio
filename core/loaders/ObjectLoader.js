@@ -531,7 +531,11 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			}
 			if(data.viewport !== undefined)
 			{
-				object.viewport.set(data.viewport.x, data.viewport.y);
+				object.viewport.fromArray(data.viewport);
+			}
+			if(data.viewport !== undefined)
+			{
+				object.offset.fromArray(data.offset);
 			}
 			break;
 
@@ -539,8 +543,12 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			object = new OrthographicCamera(data.size, data.aspect, data.mode, data.near, data.far);
 			if(data.viewport !== undefined)
 			{
-				object.viewport.set(data.viewport.x, data.viewport.y);
-			}			
+				object.viewport.fromArray(data.viewport);
+			}
+			if(data.viewport !== undefined)
+			{
+				object.offset.fromArray(data.offset);
+			}
 			break;
 
 		case "AmbientLight":

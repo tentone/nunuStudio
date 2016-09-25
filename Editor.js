@@ -40,7 +40,6 @@ include("lib/three/animation/KeyFrameAnimation.js");
 include("lib/jscolor.min.js");
 include("lib/opentype.min.js");
 include("lib/quickhull.js");
-include("lib/mesh2shape.js");
 
 //Internal modules
 include("editor/ui/element/Bar.js");
@@ -156,7 +155,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201609240157";
+Editor.TIMESTAMP = "201609250257";
 
 //Initialize Main
 Editor.initialize = function()
@@ -488,7 +487,7 @@ Editor.update = function()
 	}
 }
 
-//Draw stuff into screen
+//Render stuff into screen
 Editor.render = function()
 {
 	var renderer = Editor.renderer;	
@@ -540,38 +539,7 @@ Editor.render = function()
 	}
 	else if(Editor.state === Editor.STATE_TESTING)
 	{
-		if(Editor.vr_effect !== null)
-		{
-			Editor.vr_controls.scale = Editor.program_running.vr_scale;
-			Editor.vr_controls.update();
-
-			var scene = Editor.program_running.scene;
-			for(var i = 0; i < scene.cameras.length; i++)
-			{
-				var camera = scene.cameras[i];
-
-				//Apply VR controller offsets to camera
-				var position = camera.position.clone();
-				var quaternion = camera.quaternion.clone();
-				camera.position.add(Editor.vr_controls.position);
-				camera.quaternion.multiply(Editor.vr_controls.quaternion);
-
-				//Render scene
-				Editor.vr_effect.render(scene, camera);
-
-				//Restore camera attributes
-				camera.position.copy(position);
-				camera.quaternion.copy(quaternion);
-			}
-		}
-		else
-		{
-			var scene = Editor.program_running.scene;
-			for(var i = 0; i < scene.cameras.length; i++)
-			{
-				renderer.render(scene, scene.cameras[i]);
-			}
-		}
+		Editor.program_running.render(renderer, Editor.canvas.width, Editor.canvas.height);
 	}
 
 	//End performance measure
