@@ -92,7 +92,7 @@ function PerspectiveCameraPanel(parent)
 	this.form.nextRow();
 
 	//Distance
-	this.form.addText("Distance");
+	this.form.addText("Clipping planes");
 	this.form.nextRow();
 
 	//Near
@@ -125,6 +125,68 @@ function PerspectiveCameraPanel(parent)
 	this.form.add(this.far);
 	this.form.nextRow();
 
+	//Viewport
+	this.form.addText("Viewport");
+	this.form.nextRow();
+
+	//Offset
+	this.form.addText("Start");
+	this.offset = new CoordinatesBox(this.form.element);
+	this.offset.setMode(CoordinatesBox.VECTOR2);
+	this.offset.size.set(160, 20);
+	this.offset.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.offset.copy(self.offset.getValue());
+		}
+	});
+	this.form.add(this.offset);
+	this.form.nextRow();
+
+	//Viewport size
+	this.form.addText("Size");
+	this.viewport = new CoordinatesBox(this.form.element);
+	this.viewport.setMode(CoordinatesBox.VECTOR2);
+	this.viewport.size.set(160, 20);
+	this.viewport.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.viewport.copy(self.viewport.getValue());
+		}
+	});
+	this.form.add(this.viewport);
+	this.form.nextRow();
+	
+	//Clear color
+	this.clear_color = new CheckBox(this.form.element);
+	this.clear_color.setText("Clear color");
+	this.clear_color.size.set(200, 15);
+	this.clear_color.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.clear_color = self.clear_color.getValue();
+		}
+	});
+	this.form.add(this.clear_color);
+	this.form.nextRow();
+
+	//Clear depth
+	this.clear_depth = new CheckBox(this.form.element);
+	this.clear_depth.setText("Clear depth");
+	this.clear_depth.size.set(200, 15);
+	this.clear_depth.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.clear_depth = self.clear_depth.getValue();
+		}
+	});
+	this.form.add(this.clear_depth);
+	this.form.nextRow();
+
 	//Update form
 	this.form.updateInterface();
 }
@@ -144,5 +206,9 @@ PerspectiveCameraPanel.prototype.updatePanel = function()
 		this.default.setValue(ObjectUtils.getScene(this.obj).cameras.indexOf(this.obj) !== -1);
 		this.near.setValue(this.obj.near);
 		this.far.setValue(this.obj.far);
+		this.offset.setValue(this.obj.offset);
+		this.viewport.setValue(this.obj.viewport);
+		this.clear_color.setValue(this.obj.clear_color);
+		this.clear_depth.setValue(this.obj.clear_depth);
 	}
 }

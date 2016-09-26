@@ -533,9 +533,17 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.viewport.fromArray(data.viewport);
 			}
-			if(data.viewport !== undefined)
+			if(data.offset !== undefined)
 			{
 				object.offset.fromArray(data.offset);
+			}
+			if(data.clear_color !== undefined)
+			{
+				object.clear_color = data.clear_color;
+			}
+			if(data.clear_depth !== undefined)
+			{
+				object.clear_depth = data.clear_depth;
 			}
 			break;
 
@@ -545,9 +553,17 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.viewport.fromArray(data.viewport);
 			}
-			if(data.viewport !== undefined)
+			if(data.offset !== undefined)
 			{
 				object.offset.fromArray(data.offset);
+			}
+			if(data.clear_color !== undefined)
+			{
+				object.clear_color = data.clear_color;
+			}
+			if(data.clear_depth !== undefined)
+			{
+				object.clear_depth = data.clear_depth;
 			}
 			break;
 

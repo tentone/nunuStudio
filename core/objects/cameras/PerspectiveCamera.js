@@ -18,6 +18,8 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 	this.offset = new THREE.Vector2(0.0, 0.0);
 	this.viewport = new THREE.Vector2(1.0, 1.0);
+	this.clear_color = false;
+	this.clear_depth = false;
 
 	this.listener = new THREE.AudioListener();
 }
@@ -45,11 +47,29 @@ PerspectiveCamera.prototype.destroy = function()
 	THREE.Object3D.prototype.destroy.call(this);
 }
 
+//Update camera projection matrix
+PerspectiveCamera.prototype.updateProjectionMatrix = function()
+{
+	var top = this.near * Math.tan(THREE.Math.DEG2RAD * 0.5 * this.fov ) / this.zoom;
+	var height = 2 * top;
+	var width = this.aspect * height * ((this.viewport !== undefined) ? (this.viewport.x / this.viewport.y) : 1.0);
+	var left = - 0.5 * width;
+
+	if(this.filmOffset !== 0)
+	{
+		left += this.near * this.filmOffset / this.getFilmWidth();
+	}
+
+	this.projectionMatrix.makeFrustum(left, left + width, top - height, top, this.near, this.far);
+}
+
 //Create JSON for object
 PerspectiveCamera.prototype.toJSON = function(meta)
 {
 	var data = THREE.PerspectiveCamera.prototype.toJSON.call(this, meta);
 
+	data.object.clear_color = this.clear_color;
+	data.object.clear_depth = this.clear_depth;
 	data.object.viewport = this.viewport.toArray();
 	data.object.offset = this.offset.toArray();
 
