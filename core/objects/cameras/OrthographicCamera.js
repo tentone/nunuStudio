@@ -22,6 +22,8 @@ function OrthographicCamera(size, aspect, mode, near, far)
 
 	this.offset = new THREE.Vector2(0.0, 0.0);
 	this.viewport = new THREE.Vector2(1.0, 1.0);
+	this.clear_color = false;
+	this.clear_depth = false;
 
 	this.listener = new THREE.AudioListener();
 }
@@ -61,14 +63,14 @@ OrthographicCamera.prototype.updateProjectionMatrix = function()
 	{
 		this.top = this.size/2;
 		this.bottom = -this.top;
-		this.right = this.top * this.aspect;
+		this.right = this.top * this.aspect * (this.viewport.x / this.viewport.y);
 		this.left = -this.right;
 	}
 	else if(this.mode === OrthographicCamera.FIXED_HORIZONTAL)
 	{
 		this.right = this.size/2;
 		this.left = -this.right;
-		this.top = this.right / this.aspect;
+		this.top = this.right / this.aspect * (this.viewport.x / this.viewport.y);
 		this.bottom = -this.top;
 	}
 
@@ -83,6 +85,9 @@ OrthographicCamera.prototype.toJSON = function(meta)
 	data.object.size = this.size;
 	data.object.aspect = this.aspect;
 	data.object.mode = this.mode;
+
+	data.object.clear_color = this.clear_color;
+	data.object.clear_depth = this.clear_depth;
 	data.object.viewport = this.viewport.toArray();
 	data.object.offset = this.offset.toArray();
 

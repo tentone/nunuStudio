@@ -155,7 +155,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201609250257";
+Editor.TIMESTAMP = "201609261749";
 
 //Initialize Main
 Editor.initialize = function()
@@ -511,9 +511,9 @@ Editor.render = function()
 			var height = Settings.editor.camera_preview_percentage * Editor.canvas.height;
 			var offset = Editor.canvas.width - width - 10;
 
+			renderer.setScissorTest(true);
 			renderer.setViewport(offset, 10, width, height);
 			renderer.setScissor(offset, 10, width, height);
-			renderer.setScissorTest(true);
 			renderer.clear();
 
 			if(Editor.selected_object instanceof THREE.Camera)
@@ -521,6 +521,10 @@ Editor.render = function()
 				var camera = Editor.selected_object;
 				camera.aspect = width / height;
 				camera.updateProjectionMatrix();
+
+				renderer.setViewport(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+				renderer.setScissor(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+
 				renderer.render(Editor.program.scene, camera);
 			}
 			else
@@ -528,9 +532,22 @@ Editor.render = function()
 				var scene = Editor.program.scene;
 				for(var i = 0; i < scene.cameras.length; i++)
 				{
-					scene.cameras[i].aspect = width / height;
-					scene.cameras[i].updateProjectionMatrix();
-					renderer.render(scene, scene.cameras[i]);
+					var camera = scene.cameras[i];
+					camera.aspect = width / height;
+					camera.updateProjectionMatrix();
+					
+					if(camera.clear_color)
+					{
+						renderer.clearColor();
+					}
+					if(camera.clear_depth)
+					{
+						renderer.clearDepth();
+					}
+
+					renderer.setViewport(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+					renderer.setScissor(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+					renderer.render(scene, camera);
 				}
 			}
 
@@ -1112,7 +1129,6 @@ Editor.saveProgram = function(fname)
 	var output = Editor.program.toJSON();
 	var json = JSON.stringify(output, null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
 	FileSystem.writeFile(fname, json);
-	//FileSystem.writeFile(fname, JSON.stringify(output));
 }
 
 //Load program from file
@@ -1150,7 +1166,6 @@ Editor.exportWebProject = function(dir)
 {
 	FileSystem.copyFolder("runtime", dir);
 	FileSystem.copyFolder("core", dir + "\\core");
-	FileSystem.copyFolder("input", dir + "\\input");
 	FileSystem.copyFile("App.js", dir + "\\App.js");
 
 	FileSystem.makeDirectory(dir + "\\lib");

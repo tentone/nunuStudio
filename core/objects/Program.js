@@ -76,25 +76,34 @@ Program.prototype.update = function()
 	this.scene.update();
 }
 
-//Render program
-Program.prototype.render = function(renderer, x, y)
+//Render program (renderer passed as argument)
+Program.prototype.render = function(renderer)
 {
 	renderer.setScissorTest(true);
+
+	var x = renderer.domElement.width;
+	var y = renderer.domElement.height;
 
 	for(var i = 0; i < this.scene.cameras.length; i++)
 	{
 		var camera = this.scene.cameras[i];
 
-		//renderer.setViewport(x * camera.offset.x, height * camera.offset.y, y * camera.viewport.x, height * camera.viewport.y);
-		//renderer.setScissor(x * camera.offset.x, height * camera.offset.y, y * camera.viewport.x, height * camera.viewport.y);
+		if(camera.clear_color)
+		{
+			renderer.clearColor();
+		}
+		if(camera.clear_depth)
+		{
+			renderer.clearDepth();
+		}
+		renderer.setViewport(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
+		renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
 
 		renderer.render(this.scene, camera);
 	}
-
-	renderer.setScissorTest(false);
 }
 
-//Screen resize
+//Resize program cameras
 Program.prototype.resize = function(x, y)
 {
 	for(var i = 0; i < this.scene.cameras.length; i++)

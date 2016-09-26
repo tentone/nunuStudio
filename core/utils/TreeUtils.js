@@ -190,50 +190,53 @@ TreeUtils.compare = function(a, b, diffs, path_a, path_b)
 	return diffs;
 }
 
-console.log("Tree Comparison");
+TreeUtils.test = function()
+{
+	console.log("Tree Comparison");
 
-console.log("Tree A");
-var tree_a = new Tree("root");
-tree_a.add(new Tree("a"));
-var b = new Tree("b");
-b.add(new Tree("ba"));
-b.add(new Tree("bb"));
-b.add(new Tree("bc"));
-var bd = new Tree("bd");
-b.add(bd);
-tree_a.add(b);
-tree_a.add(new Tree("c"));
-var d = new Tree("d");
-tree_a.add(d);
-tree_a.add(new Tree("e"));
-tree_a.add(new Tree("f"));
-tree_a.print();
+	console.log("Tree A");
+	var tree_a = new Tree("root");
+	tree_a.add(new Tree("a"));
+	var b = new Tree("b");
+	b.add(new Tree("ba"));
+	b.add(new Tree("bb"));
+	b.add(new Tree("bc"));
+	var bd = new Tree("bd");
+	b.add(bd);
+	tree_a.add(b);
+	tree_a.add(new Tree("c"));
+	var d = new Tree("d");
+	tree_a.add(d);
+	tree_a.add(new Tree("e"));
+	tree_a.add(new Tree("f"));
+	tree_a.print();
 
-console.log("\nTree B");
-var tree_b = tree_a.clone();
-tree_b.remove(b);
-tree_b.print();
+	console.log("\nTree B");
+	var tree_b = tree_a.clone();
+	tree_b.remove(b);
+	tree_b.print();
 
-console.log("\nTree C");
-var tree_c = tree_a.clone();
-tree_c.remove(b);
-tree_c.remove(d);
-tree_c.add(d);
-tree_c.print();
+	console.log("\nTree C");
+	var tree_c = tree_a.clone();
+	tree_c.remove(b);
+	tree_c.remove(d);
+	tree_c.add(d);
+	tree_c.print();
 
-console.log("\nTree D");
-var tree_d = tree_a.clone();
-tree_d.children[1].remove(bd);
-tree_d.print();
+	console.log("\nTree D");
+	var tree_d = tree_a.clone();
+	tree_d.children[1].remove(bd);
+	tree_d.print();
 
-console.log("\nCompare A to B");
-console.log(TreeUtils.compare(tree_a, tree_b));
+	console.log("\nCompare A to B");
+	console.log(TreeUtils.compare(tree_a, tree_b));
 
-console.log("\nCompare A to C");
-console.log(TreeUtils.compare(tree_a, tree_c));
+	console.log("\nCompare A to C");
+	console.log(TreeUtils.compare(tree_a, tree_c));
 
-console.log("\nCompare A to D");
-console.log(TreeUtils.compare(tree_a, tree_d));
+	console.log("\nCompare A to D");
+	console.log(TreeUtils.compare(tree_a, tree_d));
 
-console.log("\nCompare B to A");
-console.log(TreeUtils.compare(tree_b, tree_a));
+	console.log("\nCompare B to A");
+	console.log(TreeUtils.compare(tree_b, tree_a));
+}
