@@ -36,6 +36,20 @@ function PerspectiveCameraPanel(parent)
 	this.form.add(this.position);
 	this.form.nextRow();
 
+	//Scale
+	this.form.addText("Scale");
+	this.scale = new CoordinatesBox(this.form.element);
+	this.scale.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			var scale = self.scale.getValue();
+			self.obj.scale.set(scale.x, scale.y, scale.z);
+		}
+	});
+	this.form.add(this.scale);
+	this.form.nextRow();
+
 	//Rotation
 	this.form.addText("Rotation");
 	this.rotation = new CoordinatesBox(this.form.element);
@@ -201,7 +215,9 @@ PerspectiveCameraPanel.prototype.updatePanel = function()
 	{
 		this.name.setText(this.obj.name);
 		this.position.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
+		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
+		
 		this.fov.setValue(this.obj.fov);
 		this.default.setValue(ObjectUtils.getScene(this.obj).cameras.indexOf(this.obj) !== -1);
 		this.near.setValue(this.obj.near);

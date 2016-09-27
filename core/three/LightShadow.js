@@ -21,3 +21,30 @@ THREE.LightShadow.prototype.toJSON = function()
 
 	return data;
 }
+
+THREE.LightShadow.prototype.fromJSON = function(data)
+{
+	if(data.bias !== undefined)
+	{
+		this.bias = data.bias;
+	}
+	if(data.radius !== undefined)
+	{	
+		this.radius = data.radius;
+	}
+	if(data.mapSize !== undefined)
+	{
+		var mapSize = data.mapSize;
+		this.mapSize.set(mapSize.x, mapSize.y);
+	}
+	if(data.camera !== undefined)
+	{
+		var camera = data.camera;
+		this.camera.top = camera.top;
+		this.camera.bottom = camera.bottom;
+		this.camera.left = camera.left;
+		this.camera.right = camera.right;
+		this.camera.near = camera.near;
+		this.camera.far = camera.far;
+	}
+}

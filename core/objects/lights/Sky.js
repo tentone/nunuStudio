@@ -45,7 +45,7 @@ function Sky(auto_update, day_time, sun_distance, time)
 		gl_FragColor = vec4(mix(bottom_color, top_color, max(pow(max(h , 0.0), exponent), 0.0)), 1.0); \
 	}";
 
-	//Uniform vars values
+	//Uniforms
 	var uniforms =
 	{
 		top_color: {type: "c", value: new THREE.Color(0.0, 0.46, 1.0)},
@@ -72,7 +72,7 @@ function Sky(auto_update, day_time, sun_distance, time)
 	//Day time (seconds) and sun distance
 	this.auto_update = (auto_update !== undefined) ? auto_update : true;
 	this.sun_distance = (sun_distance !== undefined) ? sun_distance : 500;
-	this.day_time = (day_time !== undefined) ? day_time : 240; //seconds
+	this.day_time = (day_time !== undefined) ? day_time : 240;
 	this.time = (time !== undefined) ? time : 150;
 
 	this.updateSky();
@@ -259,6 +259,9 @@ Sky.prototype.toJSON = function(meta)
 	data.object.sun_distance = this.sun_distance;
 	data.object.day_time = this.day_time;
 	data.object.time = this.time;
+
+	data.object.sun = {};
+ 	data.object.sun.shadow = this.sun.shadow.toJSON();
 
 	return data;
 }

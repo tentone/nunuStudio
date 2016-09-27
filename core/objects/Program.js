@@ -101,6 +101,8 @@ Program.prototype.render = function(renderer)
 
 		renderer.render(this.scene, camera);
 	}
+
+	renderer.setScissorTest(false);
 }
 
 //Resize program cameras
