@@ -102,7 +102,6 @@ include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");
 include("editor/ui/panels/MeshPanel.js");
 include("editor/ui/panels/AudioPanel.js");
-include("editor/ui/panels/SkyPanel.js");
 include("editor/ui/panels/LeapPanel.js");
 include("editor/ui/panels/ScriptPanel.js");
 include("editor/ui/panels/KinectPanel.js");
@@ -112,6 +111,7 @@ include("editor/ui/panels/TextPanel.js");
 include("editor/ui/panels/PhysicsPanel.js");
 include("editor/ui/panels/cameras/PerspectiveCameraPanel.js");
 include("editor/ui/panels/cameras/OrthographicCameraPanel.js");
+include("editor/ui/panels/lights/SkyPanel.js");
 include("editor/ui/panels/lights/LightPanel.js");
 include("editor/ui/panels/lights/HemisphereLightPanel.js");
 include("editor/ui/panels/lights/PointLightPanel.js");
@@ -155,7 +155,7 @@ Editor.MODE_ROTATE = 3;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201609261900";
+Editor.TIMESTAMP = "201609271909";
 
 //Initialize Main
 Editor.initialize = function()

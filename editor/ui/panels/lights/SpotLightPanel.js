@@ -22,19 +22,32 @@ function SpotLightPanel(parent)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	//Position
+		//Position
 	this.form.addText("Position");
 	this.position = new CoordinatesBox(this.form.element);
 	this.position.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			var position = self.position.getValue();
-			self.obj.position.set(position.x, position.y, position.z);
+			self.obj.position.copy(self.position.getValue());
 		}
 	});
 	this.form.add(this.position);
-	this.form.nextRow()
+	this.form.nextRow();
+
+	//Scale
+	this.form.addText("Scale");
+	this.scale = new CoordinatesBox(this.form.element);
+	this.scale.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			var scale = self.scale.getValue();
+			self.obj.scale.set(scale.x, scale.y, scale.z);
+		}
+	});
+	this.form.add(this.scale);
+	this.form.nextRow();
 
 	//Rotation
 	this.form.addText("Rotation");
@@ -43,7 +56,7 @@ function SpotLightPanel(parent)
 	{
 		if(self.obj !== null)
 		{
-			var rotation = self.pos.getValue();
+			var rotation = self.rotation.getValue();
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
 		}
 	});
@@ -228,13 +241,16 @@ SpotLightPanel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
-		this.position.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
+		this.position.setValue(this.obj.position);
+		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
+
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.angle.setValue(this.obj.angle);
 		this.penumbra.setValue(this.obj.penumbra);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
+		
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.shadow_width.setValue(this.obj.shadow.mapSize.width);
 		this.shadow_height.setValue(this.obj.shadow.mapSize.height);

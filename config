@@ -10,13 +10,13 @@
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,
-		"camera_preview_percentage": 0.35,
+		"camera_preview_percentage": "0.35",
 		"lock_mouse": true,
 		"transformation_space": "world"
 	},
 	"render": {
 		"shadows": true,
-		"shadows_type": 2,
+		"shadows_type": 0,
 		"antialiasing": true
 	},
 	"code": {

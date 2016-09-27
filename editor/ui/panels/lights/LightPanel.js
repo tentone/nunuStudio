@@ -7,7 +7,7 @@ function LightPanel(parent)
 	//Self pointer
 	var self = this;
 
-	//Name
+//Name
 	this.form.addText("Name");
 	this.name = new TextBox(this.form.element);
 	this.name.size.set(200, 18);
@@ -20,6 +20,47 @@ function LightPanel(parent)
 		}
 	});
 	this.form.add(this.name);
+	this.form.nextRow();
+
+	//Position
+	this.form.addText("Position");
+	this.position = new CoordinatesBox(this.form.element);
+	this.position.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.position.copy(self.position.getValue());
+		}
+	});
+	this.form.add(this.position);
+	this.form.nextRow();
+
+	//Scale
+	this.form.addText("Scale");
+	this.scale = new CoordinatesBox(this.form.element);
+	this.scale.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			var scale = self.scale.getValue();
+			self.obj.scale.set(scale.x, scale.y, scale.z);
+		}
+	});
+	this.form.add(this.scale);
+	this.form.nextRow();
+
+	//Rotation
+	this.form.addText("Rotation");
+	this.rotation = new CoordinatesBox(this.form.element);
+	this.rotation.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			var rotation = self.rotation.getValue();
+			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
+		}
+	});
+	this.form.add(this.rotation);
 	this.form.nextRow();
 
 	//Color
@@ -78,6 +119,10 @@ LightPanel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
+		this.position.setValue(this.obj.position);
+		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
+		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
+		
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.visible.setValue(this.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
