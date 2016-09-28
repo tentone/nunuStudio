@@ -137,7 +137,6 @@ function DirectionalLightPanel(parent)
 	this.shadow_near = new NumberBox(this.form.element);
 	this.shadow_near.size.set(60, 18);
 	this.shadow_near.setStep(0.1);
-	this.shadow_near.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.shadow_near.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -153,7 +152,6 @@ function DirectionalLightPanel(parent)
 	this.shadow_far = new NumberBox(this.form.element);
 	this.shadow_far.size.set(60, 18);
 	this.shadow_far.setStep(0.1);
-	this.shadow_far.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.shadow_far.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -170,7 +168,6 @@ function DirectionalLightPanel(parent)
 	this.shadow_left = new NumberBox(this.form.element);
 	this.shadow_left.size.set(60, 18);
 	this.shadow_left.setStep(0.1);
-	this.shadow_left.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.shadow_left.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -186,7 +183,6 @@ function DirectionalLightPanel(parent)
 	this.shadow_right = new NumberBox(this.form.element);
 	this.shadow_right.size.set(60, 18);
 	this.shadow_right.setStep(0.1);
-	this.shadow_right.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.shadow_right.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -203,7 +199,6 @@ function DirectionalLightPanel(parent)
 	this.shadow_top = new NumberBox(this.form.element);
 	this.shadow_top.size.set(60, 18);
 	this.shadow_top.setStep(0.1);
-	this.shadow_top.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.shadow_top.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -219,7 +214,6 @@ function DirectionalLightPanel(parent)
 	this.shadow_bottom = new NumberBox(this.form.element);
 	this.shadow_bottom.size.set(60, 18);
 	this.shadow_bottom.setStep(0.1);
-	this.shadow_bottom.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.shadow_bottom.setOnChange(function()
 	{
 		if(self.obj !== null)

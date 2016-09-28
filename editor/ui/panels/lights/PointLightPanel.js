@@ -196,7 +196,6 @@ function PointLightPanel(parent)
 	this.shadow_near = new NumberBox(this.form.element);
 	this.shadow_near.size.set(60, 18);
 	this.shadow_near.setStep(0.1);
-	this.shadow_near.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.shadow_near.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -212,7 +211,6 @@ function PointLightPanel(parent)
 	this.shadow_far = new NumberBox(this.form.element);
 	this.shadow_far.size.set(60, 18);
 	this.shadow_far.setStep(0.1);
-	this.shadow_far.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.shadow_far.setOnChange(function()
 	{
 		if(self.obj !== null)

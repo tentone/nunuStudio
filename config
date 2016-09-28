@@ -16,7 +16,7 @@
 	},
 	"render": {
 		"shadows": true,
-		"shadows_type": 0,
+		"shadows_type": 2,
 		"antialiasing": true
 	},
 	"code": {
