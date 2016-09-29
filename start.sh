@@ -1,2 +1,2 @@
 cd nwjs/linux
-./nw ../..
+./nw ../../source
