@@ -1,29 +1,33 @@
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/resources/logo.png)
+
 # nunuStudio
-nunuStudio is a JS based framework for 3D and VR applications that run direcly on the browser without the need for addicional plugins
-- Visual object editor
+nunuStudio is a JS based framework for 3D and VR applications that run direcly on the browser without the need for addicional plugins using WebGL and WebVR
+- Visual application editor
 - Real time lighting and shadows
+- TTF Font support
 - One file only project export with all assets included
 - NWJS and Cordova wrapper for desktop and mobile deployment
-- GLSL based particle system (github.com/squarefeet/ShaderParticleEngine)
-- THREE.JS based (github.com/mrdoob/three.js)
+- CannonJS physics engine
+- SPE particle system (github.com/squarefeet/ShaderParticleEngine)
+- three.js based (github.com/mrdoob/three.js)
+- Microft Kinect and leap motion support
 
 ### Tech
 nunuStudio uses a number of open source projects to work properly
-* NW.JS and NODE.JS
-* Cannon.JS as physics engine
-* JSColor
-* CodeMirror
-* LeapJS to enable leap motion support
+- NWJS
+- Cannon.JS
+- JSColor
+- CodeMirror
+- LeapJS
 
 ### Installation
-* nunuStudio is intended to run with NWJS direcly on the desktop
-* there are packages prepared for one click instalation for windows, linux and osx
+ - nunuStudio is intended to run with NWJS direcly on the desktop
+ - Download the repository and run the start.bat or start.sh file depending on your OS
 
 ### Todos
  - Documentation
  - Webpage
- - Audio
  - Blockly block script
 
 ### License
-nunuStudio uses a MIT license (Available on GitHub page)
+ - nunuStudio uses a MIT license (Available on GitHub page)
