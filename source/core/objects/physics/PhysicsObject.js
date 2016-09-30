@@ -112,13 +112,13 @@ PhysicsObject.prototype.toJSON = function(meta)
 			values.vertices = shape.vertices;
 			values.faces = shape.faces;
 		}
-		else if(shape.type === CANNON.Shape.types.TRIMESH)
+		/*else if(shape.type === CANNON.Shape.types.TRIMESH)
 		{
-			//values.vertices = shape.vertices;
-			//values.normals = shape.normals;
-			//values.edges = shape.edges;
-			//values.indices = shape.indices;
-		}
+			values.vertices = shape.vertices;
+			values.normals = shape.normals;
+			values.edges = shape.edges;
+			values.indices = shape.indices;
+		}*/
 
 		//Add shape
 		data.object.body.shapes[i] = values;

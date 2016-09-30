@@ -134,6 +134,21 @@ CoordinatesBox.prototype.setStep = function(value)
 	this.w.step = value;
 }
 
+//Set coordinate range
+CoordinatesBox.prototype.setRange = function(min, max)
+{
+ 	var min = String(min);
+ 	var max = String(max);
+	this.x.min = min;
+	this.x.max = max;
+	this.y.min = min;
+	this.y.max = max;
+	this.z.min = min;
+	this.z.max = max;
+	this.w.min = min;
+	this.w.max = max;	
+}
+
 //Get value of position box
 CoordinatesBox.prototype.getValue = function()
 {

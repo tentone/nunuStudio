@@ -159,7 +159,7 @@ Editor.CAMERA_PERSPECTIVE = 21;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201609301239";
+Editor.TIMESTAMP = "201610010018";
 
 //Initialize Main
 Editor.initialize = function()
