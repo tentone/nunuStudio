@@ -64,7 +64,7 @@ Main.initialize = function()
 	{
 		if(fullscreen)
 		{
-			App.setFullscreen(true, );
+			App.setFullscreen(true);
 			Main.resize();
 		}
 		else

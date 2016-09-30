@@ -144,9 +144,10 @@ function PerspectiveCameraPanel(parent)
 	this.form.nextRow();
 
 	//Offset
-	this.form.addText("Start");
+	this.form.addText("Position");
 	this.offset = new CoordinatesBox(this.form.element);
 	this.offset.setMode(CoordinatesBox.VECTOR2);
+	this.offset.setStep(0.05);
 	this.offset.size.set(160, 20);
 	this.offset.setOnChange(function()
 	{
@@ -158,10 +159,11 @@ function PerspectiveCameraPanel(parent)
 	this.form.add(this.offset);
 	this.form.nextRow();
 
-	//Viewport size
+	//Size
 	this.form.addText("Size");
 	this.viewport = new CoordinatesBox(this.form.element);
 	this.viewport.setMode(CoordinatesBox.VECTOR2);
+	this.viewport.setStep(0.05);
 	this.viewport.size.set(160, 20);
 	this.viewport.setOnChange(function()
 	{

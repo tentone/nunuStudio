@@ -180,9 +180,20 @@ App.webvrAvailable = function()
 	return (navigator.getVRDisplays !== undefined);
 }
 
+//Set on exit callback
+App.setOnExit = function(callback)
+{
+	App.onExit = callback;
+} 
+
 //Exit from app
 App.exit = function()
 {
+	if(App.onExit !== undefined)
+	{
+		App.onExit();
+	}
+
 	if(App.gui !== undefined)
 	{
 		App.gui.App.closeAllWindows();
