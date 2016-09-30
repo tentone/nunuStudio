@@ -45,6 +45,11 @@ THREE.Object3D.prototype.removeAll = function()
 //Destroy object
 THREE.Object3D.prototype.destroy = function()
 {
+	while(this.children.length > 0)
+	{
+		this.children[0].destroy();
+	}
+	
 	if(this.parent !== null)
 	{
 		if(this.dispose)
