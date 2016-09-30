@@ -173,6 +173,36 @@ FileSystem.copyFolder = function(src, dest)
 	}
 }
 
+//Open file chooser dialog receives callback function, file filter, saveas
+FileSystem.chooseFile = function(callback, filter, saveas)
+{
+	var chooser = document.createElement("input");
+	chooser.type = "file";
+	chooser.accept = (filter !== undefined) ? filter : "";
+
+	if(saveas !== undefined)
+	{
+		if(saveas !== true)
+		{
+			chooser.nwsaveas = saveas;
+		}
+		else
+		{
+			chooser.nwsaveas = "file";
+		}
+	}
+
+	chooser.onchange = function(event)
+	{
+		if(callback !== undefined)
+		{
+			callback(chooser.files);
+		}
+	};
+
+	chooser.click();
+}
+
 //Get file name from file path string
 FileSystem.getFileName = function(file)
 {

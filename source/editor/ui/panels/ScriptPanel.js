@@ -64,22 +64,6 @@ function ScriptPanel(parent)
 	this.form.add(this.rotation);
 	this.form.nextRow();
 
-	//Execution mode
-	this.form.addText("Mode");
-	this.mode = new DropdownList(this.form.element);
-	this.mode.size.set(100, 18);
-	this.mode.addValue("Initialization", Script.INIT);
-	this.mode.addValue("Loop", Script.LOOP);
-	this.mode.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.setMode(self.mode.getValue());
-		}
-	});
-	this.form.add(this.mode);
-	this.form.nextRow();
-
 	//Visible
 	this.visible = new CheckBox(this.form.element);
 	this.visible.setText("Visible");
@@ -124,7 +108,6 @@ ScriptPanel.prototype.updatePanel = function()
 		this.position.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
-		this.mode.setSelectedIndex(this.obj.mode);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}

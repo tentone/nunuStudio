@@ -366,7 +366,7 @@
 								"receiveShadow": false,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [-0.0007957448833622038,2.444885428075469e-16,-0.9982001185417175,0,7.220382639178411e-18,73.9713134765625,1.811774336243563e-14,0,172.0264892578125,1.679619846854852e-17,-0.13713602721691132,0,-0.5500331521034241,21.841007232666016,-92.12088775634766,1],
+								"matrix": [-0.0007957842899486423,2.444885428075469e-16,-0.9982001185417175,0,7.220739981203034e-18,73.9713134765625,1.811774336243563e-14,0,172.0264892578125,1.679703061224475e-17,-0.1371428221464157,0,-0.5500331521034241,21.841007232666016,-92.12088775634766,1],
 								"children": [
 									{
 										"uuid": "691CEC76-BB70-48CE-890D-4A1A0817E6C6",
@@ -462,7 +462,7 @@
 								"receiveShadow": false,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [-0.0007957843481563032,2.444885428075469e-16,-0.9982001185417175,0,1.1249996508748089e-18,11.526388168334961,2.823150437044979e-15,0,18.346097946166992,1.7915962789928905e-18,-0.01462586224079132,0,49.72178268432617,4.823906421661377,32.22202682495117,1],
+								"matrix": [-0.0007958238129504025,2.444885428075469e-16,-0.9982001185417175,0,1.1250551753734265e-18,11.526388168334961,2.823150437044979e-15,0,18.346097946166992,1.79168520090874e-18,-0.014626587741076946,0,49.72178268432617,4.823906421661377,32.22202682495117,1],
 								"children": [
 									{
 										"uuid": "1048FC73-0E1F-499B-B9C2-CD3CA9C77C93",
@@ -510,7 +510,7 @@
 								"receiveShadow": false,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [-0.1493399739265442,4.588167072292447e-14,-187.32611083984375,0,6.2213887551823e-19,6.372496604919434,1.5608112006421462e-15,0,14.751327514648438,1.4401542234865936e-18,-0.011760042048990726,0,37.54749298095703,28.70676612854004,0,1],
+								"matrix": [-0.14934737980365753,4.588167072292447e-14,-187.32611083984375,0,6.221696879960476e-19,6.372496604919434,1.5608112006421462e-15,0,14.751327514648438,1.4402254644168497e-18,-0.011760625056922436,0,37.54749298095703,28.70676612854004,0,1],
 								"children": [
 									{
 										"uuid": "79038CEF-3E7D-4803-92E2-96C345FEFAEE",
@@ -558,7 +558,7 @@
 								"receiveShadow": false,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [-0.0007958237547427416,2.444885428075469e-16,-0.9982001185417175,0,7.221097323227657e-18,73.9713134765625,1.811774336243563e-14,0,172.0264892578125,1.6797862755940978e-17,-0.1371496170759201,0,-0.5500331521034241,21.841007232666016,91.52455139160156,1],
+								"matrix": [-0.0007958632777445018,2.444885428075469e-16,-0.9982001185417175,0,7.221455492432892e-18,73.9713134765625,1.811774336243563e-14,0,172.0264892578125,1.679869655399843e-17,-0.1371564269065857,0,-0.5500331521034241,21.841007232666016,91.52455139160156,1],
 								"children": [
 									{
 										"uuid": "4247937D-D142-4239-B8D4-FF2A58736EF1",
@@ -606,7 +606,7 @@
 								"receiveShadow": false,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [-0.06475579738616943,1.98929211319733e-14,-81.21900177001953,0,1.9495534221457037e-19,1.9972525835037231,4.891857204179144e-16,0,48.53239059448242,4.739925235302385e-18,-0.03869480639696121,0,61.67021179199219,15.181442260742188,-32.247161865234375,1],
+								"matrix": [-0.0647590160369873,1.98929211319733e-14,-81.21900177001953,0,1.9496502281267666e-19,1.9972525835037231,4.891857204179144e-16,0,48.53239059448242,4.740161395367269e-18,-0.03869673237204552,0,61.67021179199219,15.181442260742188,-32.247161865234375,1],
 								"children": [
 									{
 										"uuid": "1EF92892-3273-4860-A8F0-955B3B6C011D",
@@ -654,7 +654,7 @@
 								"receiveShadow": false,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [-0.0007959029171615839,2.444885428075469e-16,-0.9982001185417175,0,1.1251667413585446e-18,11.526388168334961,2.823150437044979e-15,0,18.346097946166992,1.791863458330745e-18,-0.014628041535615921,0,76.10753631591797,4.823906421661377,32.22202682495117,1],
+								"matrix": [-0.0007959426147863269,2.444885428075469e-16,-0.9982001185417175,0,1.125222782845045e-18,11.526388168334961,2.823150437044979e-15,0,18.346097946166992,1.791953000632054e-18,-0.01462877169251442,0,76.10753631591797,4.823906421661377,32.22202682495117,1],
 								"children": [
 									{
 										"uuid": "DAD7EF76-1492-41D0-A2E0-15FCFE9D0B50",
@@ -702,7 +702,7 @@
 								"receiveShadow": false,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [-0.0647590160369873,1.98929211319733e-14,-81.21900177001953,0,1.9496502281267666e-19,1.9972525835037231,4.891857204179144e-16,0,48.53239059448242,4.740161395367269e-18,-0.03869673237204552,0,62.53727722167969,11.145538330078125,70.24897766113281,1],
+								"matrix": [-0.06476224213838577,1.98929211319733e-14,-81.21900177001953,0,1.9497470341078294e-19,1.9972525835037231,4.891857204179144e-16,0,48.53239059448242,4.740397555432153e-18,-0.03869865834712982,0,62.53727722167969,11.145538330078125,70.24897766113281,1],
 								"children": [
 									{
 										"uuid": "02830652-1077-4C75-A06F-E4649734E35D",
@@ -769,39 +769,13 @@
 								"near": 0.1,
 								"far": 1000000,
 								"focus": 10,
-								"aspect": 1.9028340080971662,
+								"aspect": 2.011764705882353,
 								"filmGauge": 35,
 								"filmOffset": 0,
+								"clear_color": false,
+								"clear_depth": false,
 								"viewport": [1,1],
 								"offset": [0,0]
-							},
-							{
-								"uuid": "6DE37752-14ED-4BD4-89A7-1757DEAF3866",
-								"type": "Script",
-								"name": "control",
-								"folded": false,
-								"hidden": false,
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrixAutoUpdate": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-								"mode": 1,
-								"code": "//Update camera rotation\nthis.parent.camera_rotation.x -= Mouse.delta.x * 0.005;\nthis.parent.camera_rotation.y -= Mouse.delta.y * 0.005;\n\n//Limit Vertical Rotation to near 90 degrees\nif(this.parent.camera_rotation.y < -1.57)\n{\n\tthis.parent.camera_rotation.y = -1.57;\n}\nelse if(this.parent.camera_rotation.y > 1.57)\n{\n\tthis.parent.camera_rotation.y = 1.57;\n}\n\t\n//Update camera rotation (euler)\nvar cos_angle_y = Math.cos(this.parent.camera_rotation.y);\nvar direction = new Vector3(Math.sin(this.parent.camera_rotation.x)*cos_angle_y, Math.sin(this.parent.camera_rotation.y), Math.cos(this.parent.camera_rotation.x)*cos_angle_y);\ndirection.add(this.parent.camera.position);\nthis.parent.camera.lookAt(direction);\n\nvar speed = 10;\nif(Keyboard.keyPressed(Keyboard.SHIFT))\n{\n\tspeed += 5;\n}\n\n//Move player\nif(Keyboard.keyPressed(Keyboard.W))\n{\n\tthis.parent.body.velocity.x = speed * Math.sin(this.parent.camera_rotation.x);\n\tthis.parent.body.velocity.z = speed * Math.cos(this.parent.camera_rotation.x);\n}\nif(Keyboard.keyPressed(Keyboard.S))\n{\n\tthis.parent.body.velocity.x = -speed * Math.sin(this.parent.camera_rotation.x);\n\tthis.parent.body.velocity.z = -speed * Math.cos(this.parent.camera_rotation.x);\n}\nif(Keyboard.keyPressed(Keyboard.A))\n{\n\tthis.parent.body.velocity.x = speed * Math.sin(this.parent.camera_rotation.x + MathUtils.pid2);\n\tthis.parent.body.velocity.z = speed * Math.cos(this.parent.camera_rotation.x + MathUtils.pid2);\n}\nif(Keyboard.keyPressed(Keyboard.D))\n{\n\tthis.parent.body.velocity.x = -speed * Math.sin(this.parent.camera_rotation.x + MathUtils.pid2);\n\tthis.parent.body.velocity.z = -speed * Math.cos(this.parent.camera_rotation.x + MathUtils.pid2);\n}\n\nif(Keyboard.keyPressed(Keyboard.SPACEBAR))\n{\n\tthis.parent.body.velocity.y = 15;\n}\n"
-							},
-							{
-								"uuid": "1CFC9429-C111-4E09-BDB2-231A98B6EBAD",
-								"type": "Script",
-								"name": "initialize",
-								"folded": false,
-								"hidden": false,
-								"castShadow": false,
-								"receiveShadow": false,
-								"visible": true,
-								"matrixAutoUpdate": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-								"mode": 0,
-								"code": "this.parent.camera_rotation = new Vector2(0, 0);\nthis.parent.camera = this.parent.getObjectByName(\"camera\");"
 							},
 							{
 								"uuid": "7E987792-C8F5-4CCF-A557-2D1FC803614F",
@@ -816,6 +790,19 @@
 								"matrix": [0.6713052988052368,0,0,0,0,0.5877909064292908,0,0,0,0,0.7584227919578552,0,0.10862623155117035,0.2805308699607849,0,1],
 								"geometry": "4F3A193B-F152-4730-BD07-3225C5EC1A35",
 								"material": "0B4CD293-633A-498C-818B-CA0612294018"
+							},
+							{
+								"uuid": "0EAF88CF-682B-4D29-9936-F8BA16ACEFD7",
+								"type": "Script",
+								"name": "script",
+								"folded": false,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"code": "var body;\nvar camera;\nvar camera_rotation;\n\nthis.initialize = function()\n{\n\tcamera_rotation = new Vector2(0, 0);\n\tcamera = this.parent.getObjectByName(\"camera\");\n\tbody = this.parent.body;\n}\n\nthis.update = function()\n{\n\t//Update camera rotation\n\tcamera_rotation.x -= Mouse.delta.x * 0.005;\n\tcamera_rotation.y -= Mouse.delta.y * 0.005;\n\n\t//Limit Vertical Rotation to near 90 degrees\n\tif(camera_rotation.y < -1.57)\n\t{\n\t\tcamera_rotation.y = -1.57;\n\t}\n\telse if(camera_rotation.y > 1.57)\n\t{\n\t\tcamera_rotation.y = 1.57;\n\t}\n\n\t//Update camera rotation (euler)\n\tvar cos_angle_y = Math.cos(camera_rotation.y);\n\tvar direction = new Vector3(Math.sin(camera_rotation.x)*cos_angle_y, Math.sin(camera_rotation.y), Math.cos(camera_rotation.x)*cos_angle_y);\n\tdirection.add(camera.position);\n\tcamera.lookAt(direction);\n\n\tvar speed = 10;\n\tif(Keyboard.keyPressed(Keyboard.SHIFT))\n\t{\n\t\tspeed += 5;\n\t}\n\n\t//Move player\n\tif(Keyboard.keyPressed(Keyboard.W))\n\t{\n\t\tbody.velocity.x = speed * Math.sin(camera_rotation.x);\n\t\tbody.velocity.z = speed * Math.cos(camera_rotation.x);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.S))\n\t{\n\t\tbody.velocity.x = -speed * Math.sin(camera_rotation.x);\n\t\tbody.velocity.z = -speed * Math.cos(camera_rotation.x);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.A))\n\t{\n\t\tbody.velocity.x = speed * Math.sin(camera_rotation.x + MathUtils.pid2);\n\t\tbody.velocity.z = speed * Math.cos(camera_rotation.x + MathUtils.pid2);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.D))\n\t{\n\t\tbody.velocity.x = -speed * Math.sin(camera_rotation.x + MathUtils.pid2);\n\t\tbody.velocity.z = -speed * Math.cos(camera_rotation.x + MathUtils.pid2);\n\t}\n\n\tif(Keyboard.keyJustPressed(Keyboard.SPACEBAR))\n\t{\n\t\tbody.velocity.y = 15;\n\t}\n}"
 							}],
 						"body": {
 							"type": 1,
@@ -856,6 +843,7 @@
 						"decay": 1,
 						"shadow": {
 							"bias": 0.01,
+							"radius": 1,
 							"mapSize": {
 								"x": 1024,
 								"y": 1024
@@ -884,7 +872,7 @@
 						"uuid": "DC75DB9F-74CA-4CB0-8558-7A657D44A4B6",
 						"type": "Physics",
 						"name": "sphere",
-						"folded": false,
+						"folded": true,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -928,7 +916,7 @@
 						"uuid": "4BC62CA8-B7DF-4F85-91D2-36B8EFCFCC3C",
 						"type": "Physics",
 						"name": "sphere",
-						"folded": false,
+						"folded": true,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -972,7 +960,7 @@
 						"uuid": "06F1C14B-654E-46A6-8F97-428656F616A2",
 						"type": "Physics",
 						"name": "box",
-						"folded": false,
+						"folded": true,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -1020,7 +1008,7 @@
 						"uuid": "8EA97389-1179-49D1-9E90-F2DE0364BDE4",
 						"type": "Physics",
 						"name": "box",
-						"folded": false,
+						"folded": true,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -1068,7 +1056,7 @@
 						"uuid": "09357E2D-E436-4D63-8353-D49DDD24EB2C",
 						"type": "Physics",
 						"name": "box",
-						"folded": false,
+						"folded": true,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -1116,7 +1104,7 @@
 						"uuid": "5DC5169A-7F26-4111-89D2-D32863ED9362",
 						"type": "ParticleEmiter",
 						"name": "particle",
-						"folded": false,
+						"folded": true,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -1140,6 +1128,7 @@
 								"decay": 1,
 								"shadow": {
 									"bias": 0.01,
+									"radius": 1,
 									"mapSize": {
 										"x": 512,
 										"y": 512
@@ -1170,7 +1159,7 @@
 							"fog": true
 						},
 						"emitter": {
-							"uuid": "7FED1736-25A8-4593-91DD-9B4FA97678F5",
+							"uuid": "31E00417-608D-49E7-8BB7-CD8CB7A152E8",
 							"direction": 1,
 							"particleCount": 2000,
 							"duration": null,

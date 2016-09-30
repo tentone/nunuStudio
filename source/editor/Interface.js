@@ -38,7 +38,7 @@ Interface.initialize = function()
 	//OBJ file loader
 	import_models.addOption("Wavefront OBJ", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -53,7 +53,7 @@ Interface.initialize = function()
 	//Collada file loader
 	import_models.addOption("Collada", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -73,7 +73,7 @@ Interface.initialize = function()
 	//ThreeJS Object Loader
 	import_models_three.addOption("Object Loader", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -88,7 +88,7 @@ Interface.initialize = function()
 	//ThreeJS JSON Loader
 	import_models_three.addOption("JSON Loader", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -133,7 +133,7 @@ Interface.initialize = function()
 	//GLTF file loader
 	import_models.addOption("GLTF", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -151,7 +151,7 @@ Interface.initialize = function()
 	//AWD file loader
 	import_models.addOption("AWD", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -166,7 +166,7 @@ Interface.initialize = function()
 	//PLY file loader
 	import_models.addOption("PLY", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -181,7 +181,7 @@ Interface.initialize = function()
 	//VTK file loader
 	import_models.addOption("VTK", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -196,7 +196,7 @@ Interface.initialize = function()
 	//VRML file loader
 	import_models.addOption("VRML", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -214,7 +214,7 @@ Interface.initialize = function()
 	//FBX
 	import_models.addOption("FBX", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -229,7 +229,7 @@ Interface.initialize = function()
 	//Load Spine Animation
 	Interface.asset_file.addOption("Spine Animation", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -252,7 +252,7 @@ Interface.initialize = function()
 	//Load Image texture
 	Interface.asset_file.addOption("Texture", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -283,7 +283,7 @@ Interface.initialize = function()
 	//Video texture
 	Interface.asset_file.addOption("Video Texture", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -314,7 +314,7 @@ Interface.initialize = function()
 	//Load Font
 	Interface.asset_file.addOption("Font", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -332,7 +332,7 @@ Interface.initialize = function()
 	//Load audio file
 	Interface.asset_file.addOption("Audio", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
@@ -871,7 +871,7 @@ Interface.initialize = function()
 	var publish = Interface.file.addMenu("Publish");
 	publish.addOption("Web", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			try
 			{
@@ -886,7 +886,7 @@ Interface.initialize = function()
 
 	publish.addOption("Windows", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			try
 			{
@@ -967,7 +967,7 @@ Interface.initialize = function()
 
 	Interface.project.addOption("Execute script", function()
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			try
 			{
@@ -1100,7 +1100,7 @@ Interface.updateInterface = function()
 //Open to save program window
 Interface.saveProgram = function()
 {
-	App.chooseFile(function(files)
+	FileSystem.chooseFile(function(files)
 	{
 		try
 		{
@@ -1119,7 +1119,7 @@ Interface.loadProgram = function()
 {
 	if(confirm("All unsaved changes to the project will be lost! Load file?"))
 	{
-		App.chooseFile(function(files)
+		FileSystem.chooseFile(function(files)
 		{
 			try
 			{

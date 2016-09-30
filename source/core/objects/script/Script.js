@@ -1,4 +1,4 @@
-function Script(code, mode)
+function Script(code)
 {
 	THREE.Object3D.call(this);
 	
@@ -6,18 +6,13 @@ function Script(code, mode)
 	this.name = "script";
 
 	this.script = null;
-	this.mode = (mode !== undefined) ? mode : Script.INIT;
-	this.setCode((code !== undefined) ? code : "//ADD CODE HERE");
+	this.setCode((code !== undefined) ? code : "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n}\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n}");
 
 	this.program = null;
 	this.scene = null;
 }
 
 Script.prototype = Object.create(THREE.Object3D.prototype);
-
-//Script execution mode
-Script.INIT = 0;
-Script.LOOP = 1;
 
 //Initialize
 Script.prototype.initialize = function()
@@ -37,9 +32,9 @@ Script.prototype.initialize = function()
 		}
 	}
 
-	if(this.mode === Script.INIT)
+	if(this.script.initialize !== undefined)
 	{
-		this.script();
+		this.script.initialize.call(this);
 	}
 
 	for(var i = 0; i < this.children.length; i++)
@@ -51,9 +46,9 @@ Script.prototype.initialize = function()
 //Update Script
 Script.prototype.update = function()
 {
-	if(this.mode === Script.LOOP)
+	if(this.script.update !== undefined)
 	{
-		this.script();
+		this.script.update.call(this);
 	}
 
 	for(var i = 0; i < this.children.length; i++)
@@ -68,15 +63,9 @@ Script.prototype.setCode = function(code)
 	try
 	{
 		this.code = code;
-		this.script = Function(this.code);
+		this.script = new(new Function(this.code))();
 	}
 	catch(e){}
-}
-
-//Set script execution mode
-Script.prototype.setMode = function(mode)
-{
-	this.mode = mode;
 }
 
 //Create JSON for object
@@ -84,7 +73,6 @@ Script.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
-	data.object.mode = this.mode;
 	data.object.code = this.code;
 
 	return data;

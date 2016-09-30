@@ -571,6 +571,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			}
 			break;
 
+		case "Script":
+			object = new Script(data.code);
+			break;
+
 		case "AmbientLight":
 			object = new AmbientLight(data.color, data.intensity);
 			break;
@@ -618,10 +622,6 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 		case "Group":
 			object = new Container();
-			break;
-
-		case "Script":
-			object = new Script(data.code, data.mode);
 			break;
 
 		case "Bone":

@@ -75,7 +75,7 @@ function TextureBox(parent)
 	{
 		if(self.onchange !== null)
 		{
-			App.chooseFile(function(files)
+			FileSystem.chooseFile(function(files)
 			{
 				if(files.length > 0)
 				{
