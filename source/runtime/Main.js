@@ -64,12 +64,12 @@ Main.initialize = function()
 	{
 		if(fullscreen)
 		{
-			App.enterFullscreen();
+			App.setFullscreen(true, );
 			Main.resize();
 		}
 		else
 		{
-			App.leaveFullscreen();
+			App.setFullscreen(false);
 			Main.resize();
 		}
 		fullscreen = !fullscreen;
