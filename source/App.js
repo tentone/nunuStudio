@@ -137,53 +137,33 @@ App.resize = function()
 	App.main.resize();
 }
 
-//Leave fullscreen mode
-App.leaveFullscreen = function()
+//Set fullscreen mode
+App.setFullscreen = function(fullscreen, element)
 {
-	App.fullscreen = false;
+	App.fullscreen = fullscreen;
 
-	if(document.exitFullscreen)
+	if(fullscreen)
 	{
-		document.exitFullscreen();
+		if(element === undefined)
+		{
+			element = document.body;
+		}
+		
+		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
+		
+		if(element.requestFullscreen)
+		{
+			element.requestFullscreen();
+		}
 	}
-	else if(document.mozCancelFullScreen)
+	else
 	{
-		document.mozCancelFullScreen();
-	}
-	else if(document.webkitExitFullscreen)
-	{
-		document.webkitExitFullscreen();
-	}
-}
-
-//Set an element to fullscreen mode
-App.enterFullscreen = function(element)
-{
-	//If no element passed use full page
-	if(element === undefined)
-	{
-		element = document.body;
-	}
-
-	//Set fullscreen flag
-	App.fullscreen = true;
-
-	//Set element to fullscreen
-	if(element.requestFullscreen)
-	{
-		element.requestFullscreen();
-	}
-	else if(element.mozRequestFullScreen)
-	{
-		element.mozRequestFullScreen();
-	}
-	else if(element.webkitRequestFullscreen)
-	{
-		element.webkitRequestFullscreen();
-	}
-	else if(element.msRequestFullscreen)
-	{
-		element.msRequestFullscreen();
+		document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+		
+		if(document.exitFullscreen)
+		{
+			document.exitFullscreen();
+		}
 	}
 }
 
