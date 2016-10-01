@@ -71,7 +71,10 @@ function DivisionResizable(parent)
 		self.resizing = true;
 	};
 
-	this.container = Interface;
+	this.onResize = function()
+	{
+		Interface.updateInterface();
+	}
 
 	this.parent.appendChild(this.element);
 	this.parent.appendChild(this.resize_tab);
@@ -87,9 +90,9 @@ DivisionResizable.TOP = 2;
 DivisionResizable.BOTTOM = 3;
 
 //Set container
-DivisionResizable.prototype.setContainer = function(container)
+DivisionResizable.prototype.setOnResize = function(callback)
 {
-	this.container = container;
+	this.onResize = callback;
 }
 
 //Remove element
@@ -151,8 +154,8 @@ DivisionResizable.prototype.update = function()
 				}	
 			}
 
-			//Update Parent interface
-			this.container.updateInterface();
+			//On resize callback
+			this.onResize();
 		}
 		else
 		{

@@ -84,7 +84,10 @@ function DualDivisionResizable(parent)
 		event.preventDefault();
 	};
 	
-	this.container = Interface;
+	this.onResize = function()
+	{
+		Interface.updateInterface();
+	}
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -98,9 +101,9 @@ DualDivisionResizable.HORIZONTAL = 0;
 DualDivisionResizable.VERTICAL = 1;
 
 //Set container
-DualDivisionResizable.prototype.setContainer = function(container)
+DualDivisionResizable.prototype.setOnResize = function(callback)
 {
-	this.container = container;
+	this.onResize = callback;
 }
 
 //Remove element
@@ -140,7 +143,7 @@ DualDivisionResizable.prototype.update = function()
 				this.tab_position = this.tab_position_min;
 			}
 
-			this.container.updateInterface();
+			this.onResize();
 		}
 		else
 		{
