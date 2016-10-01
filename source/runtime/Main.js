@@ -131,12 +131,6 @@ Main.initialize = function()
 		Main.vr_controls = new VRControls();
 		Main.vr_effect = new THREE.VREffect(Main.renderer);
 	}
-
-	//Set pointer lock
-	if(Main.program.lock_pointer)
-	{
-		Mouse.setLock(true);
-	}
 }
 
 //Update program

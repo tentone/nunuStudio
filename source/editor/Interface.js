@@ -424,6 +424,10 @@ Interface.initialize = function()
 	Interface.explorer_resizable = new DualDivisionResizable(Interface.explorer.element);
 	Interface.explorer_resizable.orientation = DualDivisionResizable.VERTICAL;
 	Interface.explorer_resizable.tab_position = 0.6;
+	Interface.explorer_resizable.setOnResize(function()
+	{
+		//alert("test");
+	});
 
 	//Project explorer
 	Interface.tree_view = new TreeView(Interface.explorer_resizable.div_a);

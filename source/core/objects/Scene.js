@@ -8,13 +8,12 @@ function Scene()
 	this.name = "scene";
 	this.matrixAutoUpdate = false;
 
-	//Clock
 	this.clock = new THREE.Clock();
+	this.raycaster = new THREE.Raycaster();
 
-	//Camera
 	this.cameras = [];
 
-	//Cannon world
+	//Physics world
 	this.world = new CANNON.World();
 	this.world.defaultContactMaterial.contactEquationStiffness = 1e9;
 	this.world.defaultContactMaterial.contactEquationRelaxation = 4;
@@ -41,6 +40,13 @@ Scene.prototype.initialize = function()
 //Update scene
 Scene.prototype.update = function()
 {
+	/*var mouse = new Vector2((Mouse.position.x/Editor.canvas.width)*2 - 1, -(Mouse.position.y/Editor.canvas.height)*2 + 1);
+	for(var i = 0; i < this.cameras.length; i++)
+	{
+		this.raycaster.setFromCamera(mouse, this.cameras[i]);
+		this.raycaster.intersectObjects(this.children, true);
+	}*/
+
 	this.world.step(this.clock.getDelta());
 
 	for(var i = 0; i < this.children.length; i++)
@@ -123,6 +129,8 @@ Scene.prototype.toJSON = function(meta)
 
 	data.object.world = {};
 	data.object.world.gravity = this.world.gravity;
+	data.object.world.quatNormalizeSkip = this.world.quatNormalizeSkip;
+	data.object.world.quatNormalizeFast = this.world.quatNormalizeFast;
 	data.object.world.solver = {};
 	data.object.world.solver.tolerance = this.world.solver.tolerance;
 	data.object.world.solver.iterations = this.world.solver.iterations;
