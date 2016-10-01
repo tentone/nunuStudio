@@ -2,7 +2,7 @@
 	"general": {
 		"theme": "dark",
 		"file_preview_size": 70,
-		"show_stats": true
+		"show_stats": false
 	},
 	"editor": {
 		"grid_size": 500,
@@ -10,9 +10,9 @@
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,
-		"camera_preview_percentage": "0.35",
+		"camera_preview_percentage": 0.35,
 		"lock_mouse": true,
-		"transformation_space": "local"
+		"transformation_space": "world"
 	},
 	"render": {
 		"shadows": true,
@@ -22,10 +22,10 @@
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"font_size": 12,
+		"font_size": 14,
 		"line_numbers": true,
 		"line_wrapping": false,
 		"auto_close_brackets": true,
-		"highlight_active_line": true
+		"highlight_active_line": false
 	}
 }

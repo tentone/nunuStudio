@@ -3,7 +3,14 @@
 var path = "../../source/";
 var code = "";
 
-include("App.js");
+include("lib/three/three.min.js");
+include("lib/three/effects/VREffect.js");
+include("lib/cannon.min.js");
+include("lib/leap.min.js");
+include("lib/stats.min.js");
+include("lib/SPE.min.js");
+include("lib/spine.min.js");
+
 include("core/three/Three.js");
 include("core/three/Object3D.js");
 include("core/three/Vector3.js");
@@ -63,7 +70,10 @@ include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");
 include("core/FileSystem.js");
 
-writeFile("out.js", "\"use strict\";" + code.replace(/"use strict";/gi, "").replace(/include\(".*"\);/gi, ""));
+include("App.js");
+include("runtime/Main.js");
+
+writeFile("out.js", code.replace(/"use strict";/gi, "").replace(/include\(".*"\);/gi, ""));
 
 function include(file)
 {
