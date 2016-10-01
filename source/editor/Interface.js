@@ -426,7 +426,9 @@ Interface.initialize = function()
 	Interface.explorer_resizable.tab_position = 0.6;
 	Interface.explorer_resizable.setOnResize(function()
 	{
-		//alert("test");
+		Interface.explorer_resizable.updateInterface();
+		Interface.tree_view.updateInterface();
+		Interface.panel.updateInterface();
 	});
 
 	//Project explorer
@@ -880,6 +882,7 @@ Interface.initialize = function()
 			try
 			{
 				Editor.exportWebProject(files[0].path);
+				alert("Project exported");
 			}
 			catch(e)
 			{
@@ -895,6 +898,7 @@ Interface.initialize = function()
 			try
 			{
 				Editor.exportWindowsProject(files[0].path);
+				alert("Project exported");
 			}
 			catch(e)
 			{
@@ -905,7 +909,18 @@ Interface.initialize = function()
 
 	publish.addOption("Linux", function()
 	{
-		alert("For linux export NWJS for Linux is required");
+		FileSystem.chooseFile(function(files)
+		{
+			try
+			{
+				Editor.exportLinuxProject(files[0].path);
+				alert("Project exported");
+			}
+			catch(e)
+			{
+				alert("Error exporting project (" + e + ")");
+			}
+		}, "", Editor.program.name);
 	}, Interface.file_dir + "icons/platform/linux.png");
 
 	publish.addOption("macOS", function()

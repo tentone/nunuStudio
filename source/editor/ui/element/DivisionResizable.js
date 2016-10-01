@@ -74,7 +74,7 @@ function DivisionResizable(parent)
 	this.onResize = function()
 	{
 		Interface.updateInterface();
-	}
+	};
 
 	this.parent.appendChild(this.element);
 	this.parent.appendChild(this.resize_tab);
@@ -154,7 +154,7 @@ DivisionResizable.prototype.update = function()
 				}	
 			}
 
-			//On resize callback
+			//onResize callback
 			this.onResize();
 		}
 		else

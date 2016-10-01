@@ -159,7 +159,7 @@ Editor.CAMERA_PERSPECTIVE = 21;
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201610011225";
+Editor.TIMESTAMP = "201610011409";
 
 //Initialize Main
 Editor.initialize = function()
@@ -1143,10 +1143,18 @@ Editor.createNewProgram = function()
 }
 
 //Save program to file
-Editor.saveProgram = function(fname)
+Editor.saveProgram = function(fname, compressed)
 {
-	var output = Editor.program.toJSON();
-	var json = JSON.stringify(output, null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
+	if(compressed === true)
+	{
+		var json = JSON.stringify(Editor.program.toJSON());
+	}
+	else
+	{
+		var output = Editor.program.toJSON();
+		var json = JSON.stringify(output, null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
+	}
+
 	FileSystem.writeFile(fname, json);
 }
 
@@ -1183,6 +1191,7 @@ Editor.loadProgram = function(fname)
 //Export web project
 Editor.exportWebProject = function(dir)
 {
+	/*
 	FileSystem.copyFolder("runtime", dir);
 	FileSystem.copyFolder("core", dir + "\\core");
 	FileSystem.copyFile("App.js", dir + "\\App.js");
@@ -1198,19 +1207,33 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile("lib\\three\\three.min.js", dir + "\\lib\\three\\three.min.js");
 	FileSystem.makeDirectory(dir + "\\lib\\three\\effects");
 	FileSystem.copyFile("lib\\three\\effects\\VREffect.js", dir + "\\lib\\three\\effects\\VREffect.js");
+	*/
 
-	Editor.saveProgram(dir + "\\app.isp");
+	FileSystem.makeDirectory(dir);
+	FileSystem.copyFile("runtime/vr.png", dir + "\\vr.png");
+	FileSystem.copyFile("runtime/fullscreen.png", dir + "\\fullscreen.png");
+	FileSystem.copyFile("runtime/index.html", dir + "\\index.html");
+	FileSystem.copyFile("../build/nunu.js", dir + "\\nunu.js");
+	
+	Editor.saveProgram(dir + "\\app.isp", true);
 }
 
 //Export windows project
 Editor.exportWindowsProject = function(dir)
 {
 	Editor.exportWebProject(dir);
-
-	FileSystem.copyFolder("nwjs", dir + "\\nwjs");
+	FileSystem.copyFolder("..\\nwjs\\win", dir + "\\nwjs");
 	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
-	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".bat", "cd nwjs/win\nstart nw.exe ../../");
-	Editor.saveProgram(dir + "\\app.isp");
+	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".bat", "cd nwjs\nstart nw.exe ..");
+}
+
+//Export linux project
+Editor.exportLinuxProject = function(dir)
+{
+	Editor.exportWebProject(dir);
+	FileSystem.copyFolder("nwjs\\linux", dir + "\\nwjs");
+	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
+	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
 }
 
 //Set editor state

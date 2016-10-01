@@ -21,48 +21,53 @@ function MaterialEditor(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 
-	//Prevent Drop event
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
 	};
 
-	//Prevent deafault when object dragged over
 	this.element.ondragover = function(event)
 	{
 		event.preventDefault();
 	};
 
+	//Self pointer
+	var self = this;
+
 	//Main container
 	this.main = new DualDivisionResizable(this.element);
-	this.main.setContainer(this);
+	this.main.setOnResize(function()
+	{
+		self.updateInterface();
+	});
 	this.main.tab_position = 0.5;
 	this.main.tab_position_min = 0.3;
 	this.main.tab_position_max = 0.7;
 	this.main.updateInterface();
 
+	//Preview division
 	this.preview = new DualDivisionResizable(this.main.div_a);
-	this.preview.setContainer(this);
+	this.preview.setOnResize(function()
+	{
+		self.updateInterface();
+	});
 	this.preview.orientation = DualDivisionResizable.VERTICAL;
 	this.preview.tab_position = 0.8;
 	this.preview.tab_position_min = 0.3;
 	this.preview.tab_position_max = 0.8;
 	this.preview.updateInterface();
 
-	//Change preview div aspect
+	//Change preview division style
 	this.preview.div_b.style.overflow = "auto";
 	this.preview.div_b.style.cursor = "default";
 	this.preview.div_b.style.backgroundColor = Editor.theme.panel_color;
 
-	//Change main div aspect
+	//Change main division style
 	this.main.div_b.style.overflow = "auto";
 	this.main.div_b.style.cursor = "default";
 	this.main.div_b.style.backgroundColor = Editor.theme.panel_color;
 
-	//Self pointer
-	var self = this;
-
-	//--------------------------------------Material preview--------------------------------------
+	//Material preview
 	//Canvas
 	this.canvas = new Canvas(this.preview.div_a);
 	this.canvas.updateInterface();
@@ -109,7 +114,7 @@ function MaterialEditor(parent)
 	this.sprite.visible = false;
 	this.scene.add(this.sprite);
 
-	//--------------------------------Material preview configuration--------------------------------
+	//Material preview configuration
 	//Text
 	var text = new Text(this.preview.div_b);
 	text.setAlignment(Text.LEFT);
@@ -177,7 +182,7 @@ function MaterialEditor(parent)
 	this.children.push(this.sky_enabled);
 
 
-	//---------------------------------------Generic Material parameters------------------------------------------
+	//Generic Material parameters
 	this.form = new Form(this.main.div_b);
 	this.form.position.set(10, 8);
 	this.form.spacing.set(10, 8);
