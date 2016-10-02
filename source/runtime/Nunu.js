@@ -77,40 +77,61 @@ include("core/utils/Mesh2shape.js");
 
 include("core/FileSystem.js");
 
-function Nunu(app)
+function Nunu(canvas)
 {
-	//Initialize input
-	Keyboard.initialize();
-	Mouse.initialize();
+	this.program = null;
+	this.canvas_resize = true;
 
-	//Nunu program and scene
-	this.program = this.loadProgram((app !== undefined) ? app : "app.isp");
+	//Create canvas
+	if(canvas === undefined)
+	{
+		this.canvas = document.createElement("canvas");
+		this.canvas.style.position = "absolute";
+		this.canvas.style.left = "0px";
+		this.canvas.style.top = "0px";
+		this.canvas.style.width = window.innerWidth + "px";
+		this.canvas.style.height = window.innerHeight + "px";
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = window.innerHeight;
+		document.body.appendChild(this.canvas);
+	}
+	else
+	{
+		this.canvas = canvas;
+	}
 
-	//Renderer and canvas
-	this.canvas = document.createElement("canvas");
-	this.canvas.style.position = "absolute";
-	this.canvas.style.left = "0px";
-	this.canvas.style.top = "0px";
-	this.canvas.style.width = window.innerWidth + "px";
-	this.canvas.style.height = window.innerHeight + "px";
-	this.canvas.width = window.innerWidth;
-	this.canvas.height = window.innerHeight;
-	document.body.appendChild(this.canvas);
-
-	//VR Stuff
-	this.vr_controls = null;
-	this.vr_effect = null;
-
-	//Define mouse canvas
-	Mouse.setCanvas(this.canvas);
-
-	//Set renderer
+	//WebGL renderer
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, antialias: true});
 	this.renderer.autoClear = false;
 	this.renderer.shadowMap.enabled = true;
 	this.renderer.shadowMap.type = THREE.PCFShadowMap;
 	this.renderer.setPixelRatio(window.devicePixelRatio || 1.0);
 	this.renderer.setSize(this.canvas.width, this.canvas.height);
+}
+
+//Fullscreen controll
+Nunu.fullscreen = false;
+
+//Start nunu program
+Nunu.prototype.run = function()
+{
+	if(this.program === null)
+	{
+		console.warn("nunuStudio: no program is loaded [app.loadPogram(fname)]");
+		return;
+	}
+
+	//Mouse and Keyboard input
+	Keyboard.initialize();
+	Mouse.initialize();
+	Mouse.setCanvas(this.canvas);
+
+	//Virtual reality
+	if(this.program.vr === true)
+	{
+		this.vr_controls = new VRControls();
+		this.vr_effect = new THREE.VREffect(this.renderer);
+	}
 
 	//Initialize program
 	this.program.default_camera = new PerspectiveCamera(60, this.canvas.width/this.canvas.height, 0.1, 1000000);
@@ -119,65 +140,7 @@ function Nunu(app)
 	this.program.initialize();
 	this.program.resize(this.canvas.width, this.canvas.height);
 
-	//Fullscreen button
-	/*var fullscreen = true;
-	this.fullscreen.onclick = function()
-	{
-		if(fullscreen)
-		{
-			Nunu.setFullscreen(true);
-			this.resize();
-		}
-		else
-		{
-			Nunu.setFullscreen(false);
-			this.resize();
-		}
-		fullscreen = !fullscreen;
-	};*/
-
-
-	//VR button
-	/*if(this.program.vr && Nunu.webvrAvailable())
-	{
-		this.vr = document.createElement("div");
-		this.vr.style.position = "absolute";
-		this.vr.style.left = (window.innerWidth - 60) + "px";
-		this.vr.style.top = (window.innerHeight - 30) + "px";
-		document.body.appendChild(this.vr);
-
-		var vr_state = true;
-		this.vr.onclick = function()
-		{
-			if(this.vr_effect !== null)
-			{
-				this.vr_effect.setFullScreen(vr_state);
-				vr_state = !vr_state;
-			}
-		};
-
-		var img = document.createElement("img");
-		img.style.position = "absolute";
-		img.style.cursor = "pointer";
-		img.width = 25;
-		img.height = 25;
-		img.src = "vr.png";
-		
-		img.onmouseenter = function()
-		{
-			img.style.opacity = 0.5;
-		}
-		img.onmouseleave = function()
-		{
-			img.style.opacity = 1.0;
-		}
-		this.vr.appendChild(img);
-
-		//Create vr effect
-		this.vr_controls = new VRControls();
-		this.vr_effect = new THREE.VREffect(this.renderer);
-	}*/
-
+	//Update loop
 	var self = this;
 	var update = function()
 	{
@@ -186,9 +149,6 @@ function Nunu(app)
 	};
 	update();
 }
-
-//Fullscreen control
-Nunu.fullscreen = false;
 
 //Update nunu program
 Nunu.prototype.update = function()
@@ -200,49 +160,15 @@ Nunu.prototype.update = function()
 	this.program.render(this.renderer);
 }
 
-//Resize to fit window
-Nunu.prototype.resize = function()
-{
-	//Update canvas and renderer size
-	if(this.canvas !== null && this.renderer != null)
-	{
-		this.canvas.style.width = window.innerWidth + "px";
-		this.canvas.style.height = window.innerHeight + "px";
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = window.innerHeight;
-		this.renderer.setSize(this.canvas.width, this.canvas.height);
-		this.program.resize(this.canvas.width, this.canvas.height);
-	}
-
-	//Fullscreen button
-	this.fullscreen.style.left = (window.innerWidth - 30) + "px";
-	this.fullscreen.style.top = (window.innerHeight - 30) + "px";
-
-	//VR button
-	if(this.vr !== undefined)
-	{
-		this.vr.style.left = (window.innerWidth - 60) + "px";
-		this.vr.style.top = (window.innerHeight - 30) + "px";
-	}
-}
-
-//Load program from file
-Nunu.prototype.loadProgram = function(fname)
-{
-	var loader = new ObjectLoader();
-	var data = JSON.parse(FileSystem.readFile(fname));
-	return loader.parse(data);
-}
-
-//Set on exit callback
-Nunu.prototype.setOnExit = function(callback)
-{
-	this.onExit = callback;
-} 
-
 //Exit from app
 Nunu.prototype.exit = function()
 {
+	if(this.program !== null)
+	{
+		this.program.dispose();
+		this.program = null;
+	}
+
 	if(this.onExit !== undefined)
 	{
 		this.onExit();
@@ -253,6 +179,38 @@ Nunu.prototype.exit = function()
 		Nunu.gui.Nunu.closeAllWindows();
 		Nunu.gui.Nunu.quit();
 	}
+}
+
+//Resize to fit window
+Nunu.prototype.resize = function()
+{
+	if(this.canvas !== null && this.canvas_resize)
+	{
+		this.canvas.style.width = window.innerWidth + "px";
+		this.canvas.style.height = window.innerHeight + "px";
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = window.innerHeight;
+	}
+	
+	if(this.renderer !== undefined)
+	{
+		this.renderer.setSize(this.canvas.width, this.canvas.height);
+		this.program.resize(this.canvas.width, this.canvas.height);
+	}
+}
+
+//Load program from file
+Nunu.prototype.loadProgram = function(fname)
+{
+	var loader = new ObjectLoader();
+	var data = JSON.parse(FileSystem.readFile(fname));
+	this.program = loader.parse(data);
+}
+
+//Set on exit callback
+Nunu.prototype.setOnExit = function(callback)
+{
+	this.onExit = callback;
 }
 
 //Set fullscreen mode

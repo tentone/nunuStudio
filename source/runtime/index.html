@@ -7,26 +7,59 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 	</head>
 
-	<body style="background-color:#FF0000" onload="initialize();" onresize="resize();" oncontextmenu="return false;">
+	<body onload="initialize();" onresize="resize();" oncontextmenu="return false;">
 		<script type="text/javascript" src="nunu.js"></script>
 		<script type="text/javascript">
 			var app;
 
 			function initialize()
 			{
-				app = new Nunu('app.isp');
+				app = new Nunu();
+				app.loadProgram("app.isp");
+				app.run();
+
+				if(!app.program.vr || !Nunu.webvrAvailable())
+				{
+					var button = document.getElementById("vr_button");
+					button.style.visibility = "hidden";
+				}
 			}
 
 			function resize()
 			{
 				app.resize();
 			}
+
+			//Fullscreen
+			function toggleFullscreen()
+			{
+				if(Nunu.fullscreen === true)
+				{
+					Nunu.setFullscreen(false);
+					app.resize();
+				}
+				else
+				{
+					Nunu.setFullscreen(true);
+					app.resize();
+				}
+			}
+
+			var vr = true;
+			function toggleVR()
+			{
+				if(app.vr_effect !== null)
+				{
+					app.vr_effect.setFullScreen(vr);
+					vr = !vr;
+				}
+			}
 		</script>
-		<div style="position:absolute; right:30px; bottom:30px">
-			<img style="position:absolute; cursor:pointer" width=25 height=25 src="fullscreen.png" onmouseenter="this.style.opacity = 0.5;" onmouseleave="this.style.opacity=1.0;"></img>
+		<div id="fullscreen_button" onclick="toggleFullscreen();" style="position:absolute; z-index: 10000; right:30px; bottom:30px">
+			<img style="position:absolute; cursor:pointer; opacity:0.4" width=25 height=25 src="fullscreen.png" onmouseenter="this.style.opacity = 1.0;" onmouseleave="this.style.opacity=0.4;"></img>
 		</div>
-		<div style="position:absolute; right:70px; bottom:30px">
-			<img style="position:absolute; cursor:pointer" width=25 height=25 src="vr.png" onmouseenter="this.style.opacity = 0.5;" onmouseleave="this.style.opacity=1.0;"></img>
+		<div id = "vr_button" onclick="toggleVR();" style="position:absolute; z-index: 10000; right:70px; bottom:30px">
+			<img style="position:absolute; cursor:pointer; opacity:0.4" width=25 height=25 src="vr.png" onmouseenter="this.style.opacity = 1.0;" onmouseleave="this.style.opacity=0.4;"></img>
 		</div>
 	</body>
 </html>
