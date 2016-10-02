@@ -122,7 +122,7 @@ function MaterialAsset(parent)
 			{
 				try
 				{
-					App.clipboard.set(JSON.stringify(self.material.toJSON()), "text");
+					Editor.clipboard.set(JSON.stringify(self.material.toJSON()), "text");
 				}
 				catch(e){}
 			}

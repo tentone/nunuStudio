@@ -73,7 +73,7 @@ function CodeEditor(parent)
 			var text = self.code.getSelection();
 			if(text !== "")
 			{
-				App.clipboard.set(text, "text");
+				Editor.clipboard.set(text, "text");
 			}
 		});
 		context.addOption("Cut", function()
@@ -81,13 +81,13 @@ function CodeEditor(parent)
 			var text = self.code.getSelection();
 			if(text !== "")
 			{
-				App.clipboard.set(text, "text");
+				Editor.clipboard.set(text, "text");
 				self.code.replaceSelection("");
 			}
 		});
 		context.addOption("Paste", function()
 		{
-			self.code.replaceSelection(App.clipboard.get("text"));
+			self.code.replaceSelection(Editor.clipboard.get("text"));
 		});
 		context.addOption("Auto ident", function()
 		{
