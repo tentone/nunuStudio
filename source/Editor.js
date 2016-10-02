@@ -1,5 +1,82 @@
 "use strict";
 
+//External libs
+include("lib/three/three.min.js");
+include("lib/three/effects/VREffect.js");
+include("lib/cannon.min.js");
+include("lib/leap.min.js");
+include("lib/stats.min.js");
+include("lib/SPE.min.js");
+include("lib/spine.min.js");
+
+//Internal modules
+include("core/three/Three.js");
+include("core/three/Object3D.js");
+include("core/three/Vector3.js");
+include("core/three/Vector2.js");
+include("core/three/Color.js");
+include("core/three/Texture.js");
+include("core/three/LightShadow.js");
+include("core/three/Fog.js");
+
+include("core/input/Key.js");
+include("core/input/Keyboard.js");
+include("core/input/Mouse.js");
+
+include("core/webvr/VRControls.js");
+
+include("core/resources/Font.js");
+include("core/resources/Video.js");
+include("core/resources/Audio.js");
+include("core/resources/Image.js");
+
+include("core/texture/TextTexture.js");
+include("core/texture/VideoTexture.js");
+include("core/texture/WebcamTexture.js");
+include("core/texture/Texture.js");
+
+include("core/loaders/FontLoader.js");
+include("core/loaders/ImageLoader.js");
+include("core/loaders/VideoLoader.js");
+include("core/loaders/AudioLoader.js");
+include("core/loaders/TextureLoader.js");
+include("core/loaders/ObjectLoader.js");
+include("core/loaders/TTFLoader.js");
+
+include("core/objects/device/LeapMotion.js");
+include("core/objects/device/KinectDevice.js");
+include("core/objects/mesh/Mesh.js");
+include("core/objects/mesh/SkinnedMesh.js");
+include("core/objects/mesh/Text3D.js");
+include("core/objects/sprite/Sprite.js");
+include("core/objects/lights/PointLight.js");
+include("core/objects/lights/SpotLight.js");
+include("core/objects/lights/AmbientLight.js");
+include("core/objects/lights/DirectionalLight.js");
+include("core/objects/lights/HemisphereLight.js");
+include("core/objects/lights/Sky.js");
+include("core/objects/cameras/PerspectiveCamera.js");
+include("core/objects/cameras/OrthographicCamera.js");
+include("core/objects/audio/AudioEmitter.js");
+include("core/objects/script/Script.js");
+include("core/objects/script/BlockScript.js");
+include("core/objects/physics/PhysicsObject.js");
+include("core/objects/spine/SpineAnimation.js");
+include("core/objects/spine/SpineTexture.js");
+include("core/objects/Bone.js");
+include("core/objects/Container.js");
+include("core/objects/ParticleEmitter.js");
+include("core/objects/Program.js");
+include("core/objects/Scene.js");
+
+include("core/utils/Base64Utils.js");
+include("core/utils/ArraybufferUtils.js");
+include("core/utils/MathUtils.js");
+include("core/utils/ObjectUtils.js");
+include("core/utils/Mesh2shape.js");
+
+include("core/FileSystem.js");
+
 //Codemirror
 include("lib/codemirror/codemirror.min.js");
 include("lib/codemirror/codemirror.css");
@@ -141,6 +218,19 @@ include("editor/Settings.js");
 
 function Editor(){}
 
+//NWJS modules
+try
+{
+	Editor.fs = require("fs");
+	Editor.gui = require("nw.gui");
+	Editor.clipboard = Editor.gui.Clipboard.get();
+	Editor.args = Editor.gui.App.argv;
+}
+catch(e)
+{
+	Editor.args = [];
+}
+
 //Editor state
 Editor.STATE_IDLE = 8;
 Editor.STATE_EDITING = 9;
@@ -158,12 +248,17 @@ Editor.CAMERA_PERSPECTIVE = 21;
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201610011409";
+Editor.VERSION = "V0.8.9.0 Alpha";
+Editor.TIMESTAMP = "201610020133";
 
 //Initialize Main
 Editor.initialize = function()
 {
+	Editor.fullscreen = false;
+
+	Keyboard.initialize();
+	Mouse.initialize();
+
 	//Load settings
 	Settings.load();
 
@@ -171,10 +266,10 @@ Editor.initialize = function()
 	Editor.theme = Theme.get(Settings.general.theme);
 
 	//Set windows close event
-	if(App.gui !== undefined)
+	if(Editor.gui !== undefined)
 	{
 		//Close event
-		App.gui.Window.get().on("close", function()
+		Editor.gui.Window.get().on("close", function()
 		{
 			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
 			{
@@ -254,11 +349,11 @@ Editor.initialize = function()
 	Editor.tool = null;
 
 	//Check is some .isp file passed as argument
-	for(var i = 0; i < App.args.length; i++)
+	for(var i = 0; i < Editor.args.length; i++)
 	{
-		if(App.args[i].endsWith(".isp"))
+		if(Editor.args[i].endsWith(".isp"))
 		{
-			Editor.loadProgram(App.args[i]);
+			Editor.loadProgram(Editor.args[i]);
 			break;
 		}
 	}
@@ -270,11 +365,18 @@ Editor.initialize = function()
 	}
 
 	Editor.updateObjectViews();
+	Editor.update();
 }
 
 //Update Editor
 Editor.update = function()
 {
+	requestAnimationFrame(Editor.update);
+
+	//Update input
+	Mouse.update();
+	Keyboard.update();
+
 	//End performance measure
 	if(Editor.stats !== null)
 	{
@@ -485,6 +587,8 @@ Editor.update = function()
 	{
 		Editor.program_running.update();
 	}
+
+	Editor.render();
 }
 
 //Render stuff into screen
@@ -569,7 +673,7 @@ Editor.render = function()
 //Resize to fit window
 Editor.resize = function()
 {
-	if(!App.fullscreen)
+	if(!Editor.fullscreen)
 	{
 		Interface.updateInterface();
 	}
@@ -638,16 +742,16 @@ Editor.copyObject = function(obj)
 {
 	if(obj !== undefined)
 	{
-		if(App.clipboard !== undefined)
+		if(Editor.clipboard !== undefined)
 		{
-			App.clipboard.set(JSON.stringify(obj.toJSON()), "text");
+			Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
 		}
 	}
 	else if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
 	{
-		if(App.clipboard !== undefined)
+		if(Editor.clipboard !== undefined)
 		{
-			App.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
+			Editor.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
 		}
 	}
 }
@@ -657,9 +761,9 @@ Editor.cutObject = function(obj)
 {
 	if(obj !== undefined)
 	{
-		if(App.clipboard !== undefined)
+		if(Editor.clipboard !== undefined)
 		{
-			App.clipboard.set(JSON.stringify(obj.toJSON()), "text");
+			Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
 		}
 		obj.destroy();
 		Editor.updateObjectViews();
@@ -670,9 +774,9 @@ Editor.cutObject = function(obj)
 	}
 	else if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
 	{
-		if(App.clipboard !== undefined)
+		if(Editor.clipboard !== undefined)
 		{
-			App.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
+			Editor.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
 		}
 		Editor.selected_object.destroy();
 		Editor.updateObjectViews();
@@ -685,7 +789,7 @@ Editor.pasteObject = function(target)
 {
 	try
 	{
-		var content = App.clipboard.get("text");
+		var content = Editor.clipboard.get("text");
 		var data = JSON.parse(content);
 
 		//Create object
@@ -1194,7 +1298,7 @@ Editor.exportWebProject = function(dir)
 	/*
 	FileSystem.copyFolder("runtime", dir);
 	FileSystem.copyFolder("core", dir + "\\core");
-	FileSystem.copyFile("App.js", dir + "\\App.js");
+	FileSystem.copyFile("Editor.js", dir + "\\Editor.js");
 
 	FileSystem.makeDirectory(dir + "\\lib");
 	FileSystem.copyFile("lib\\leap.min.js", dir + "\\lib\\leap.min.js");
@@ -1278,7 +1382,7 @@ Editor.setState = function(state)
 		//If program uses VR set button
 		if(Editor.program_running.vr)
 		{
-			if(App.webvrAvailable())
+			if(Editor.webvrAvailable())
 			{
 				Editor.vr_effect = new THREE.VREffect(Editor.renderer);
 				
@@ -1364,9 +1468,103 @@ Editor.initializeRenderer = function(canvas)
 	Editor.gl = Editor.renderer.context;
 }
 
+//Set fullscreen mode
+Editor.setFullscreen = function(fullscreen, element)
+{
+	Editor.fullscreen = fullscreen;
+
+	if(fullscreen)
+	{
+		if(element === undefined)
+		{
+			element = document.body;
+		}
+		
+		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
+		
+		if(element.requestFullscreen)
+		{
+			element.requestFullscreen();
+		}
+	}
+	else
+	{
+		document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+		
+		if(document.exitFullscreen)
+		{
+			document.exitFullscreen();
+		}
+	}
+}
+
+//Check if webvr is available
+Editor.webvrAvailable = function()
+{
+	return (navigator.getVRDisplays !== undefined);
+}
+
 //Exit editor
 Editor.exit = function()
 {
 	Settings.store();
-	App.exit();
+
+	if(Editor.gui !== undefined)
+	{
+		Editor.gui.App.closeAllWindows();
+		Editor.gui.App.quit();
+		process.exit();
+	}
+}
+
+//Include javacript or css file in project
+function include(file, onload)
+{
+	if(file.endsWith(".js"))
+	{
+		var js = document.createElement("script");
+		js.src = file;
+		js.type = "text/javascript";
+		js.async = false;
+		if(onload)
+		{
+			js.onload = onload;
+		}
+		document.body.appendChild(js);
+	}
+	else if(file.endsWith(".css"))
+	{
+		var css = document.createElement("link");
+		css.href = file;
+		css.rel = "stylesheet";
+		document.body.appendChild(css);
+	}
+	else if(file.endsWith("*"))
+	{
+		if(Editor.fs !== undefined)
+		{
+			var directory = file.replace("*", "");
+			var files = Editor.fs.readdirSync(directory);
+			for(var i = 0; i < files.length; i++)
+			{
+				include(directory + files[i]);
+			}
+		}
+	}
+	else
+	{
+		if(Editor.fs !== undefined)
+		{
+			var directory = file + "/";
+			try
+			{
+				var files = Editor.fs.readdirSync(directory);
+				for(var i = 0; i < files.length; i++)
+				{
+					include(directory + files[i]);
+				}
+			}
+			catch(e){}
+		}
+	}
 }

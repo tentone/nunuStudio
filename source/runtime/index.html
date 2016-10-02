@@ -7,7 +7,26 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 	</head>
 
-	<body onload="App.initialize(Main);" onresize="App.resize();" oncontextmenu="return false;">
+	<body style="background-color:#FF0000" onload="initialize();" onresize="resize();" oncontextmenu="return false;">
 		<script type="text/javascript" src="nunu.js"></script>
+		<script type="text/javascript">
+			var app;
+
+			function initialize()
+			{
+				app = new Nunu('app.isp');
+			}
+
+			function resize()
+			{
+				app.resize();
+			}
+		</script>
+		<div style="position:absolute; right:30px; bottom:30px">
+			<img style="position:absolute; cursor:pointer" width=25 height=25 src="fullscreen.png" onmouseenter="this.style.opacity = 0.5;" onmouseleave="this.style.opacity=1.0;"></img>
+		</div>
+		<div style="position:absolute; right:70px; bottom:30px">
+			<img style="position:absolute; cursor:pointer" width=25 height=25 src="vr.png" onmouseenter="this.style.opacity = 0.5;" onmouseleave="this.style.opacity=1.0;"></img>
+		</div>
 	</body>
 </html>

@@ -70,8 +70,7 @@ include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");
 include("core/FileSystem.js");
 
-include("App.js");
-include("runtime/Main.js");
+include("runtime/Nunu.js");
 
 writeFile("out.js", code.replace(/"use strict";/gi, "").replace(/include\(".*"\);/gi, ""));
 

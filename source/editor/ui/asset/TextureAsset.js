@@ -46,7 +46,7 @@ function TextureAsset(parent)
 				{
 					try
 					{
-						App.clipboard.set(JSON.stringify(self.texture.toJSON()), "text");
+						Editor.clipboard.set(JSON.stringify(self.texture.toJSON()), "text");
 					}
 					catch(e){}
 				}

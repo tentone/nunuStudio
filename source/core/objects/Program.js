@@ -247,7 +247,6 @@ Program.prototype.addDefaultScene = function(material)
 	//Box
 	var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 	var model = new Mesh(geometry, material);
-	model.position.set(0, 0.5, 0);
 	model.receiveShadow = true;
 	model.castShadow = true;
 	model.name = "box";
@@ -256,7 +255,7 @@ Program.prototype.addDefaultScene = function(material)
 	//Floor
 	model = new Mesh(geometry, material);
 	model.scale.set(20, 1, 20);
- 	model.position.set(0, -0.5, 0);
+ 	model.position.set(0, -1.0, 0);
 	model.receiveShadow = true;
 	model.castShadow = true;
 	model.name = "ground";
