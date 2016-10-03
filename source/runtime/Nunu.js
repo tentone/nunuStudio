@@ -80,7 +80,6 @@ include("core/FileSystem.js");
 function Nunu(canvas)
 {
 	this.program = null;
-	this.canvas_resize = true;
 
 	//Create canvas
 	if(canvas === undefined)
@@ -94,10 +93,12 @@ function Nunu(canvas)
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
 		document.body.appendChild(this.canvas);
+		this.canvas_resize = true;
 	}
 	else
 	{
 		this.canvas = canvas;
+		this.canvas_resize = false;
 	}
 
 	//WebGL renderer
