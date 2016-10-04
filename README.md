@@ -20,17 +20,18 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 ### Runtime
  - To embed applications made inside nunuStudio in web pages the following code can be used
 
-    var app = new NunuApp();
-    app.setCanvas(canvas);
-    app.load("app.isp");
-    app.initialize();
-    
-    //Called on page resize
-    app.resize();
-    
-    //On exit callback
-    app.onExit(function(){...});
-
+```
+ var app = new NunuApp();
+ app.setCanvas(canvas);
+ app.load("app.isp");
+ app.run();
+ 
+ //On exit callback
+ app.onExit(function()
+ {
+ 	//TODO <Exit callback>
+ });
+```
 
 ### Tech
 nunuStudio uses a number of open source projects to work properly

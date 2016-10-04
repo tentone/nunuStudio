@@ -40,12 +40,12 @@ Scene.prototype.initialize = function()
 //Update scene
 Scene.prototype.update = function()
 {
-	/*var mouse = new Vector2((Mouse.position.x/Editor.canvas.width)*2 - 1, -(Mouse.position.y/Editor.canvas.height)*2 + 1);
+	var mouse = new Vector2((Mouse.position.x/Editor.canvas.width)*2 - 1, -(Mouse.position.y/Editor.canvas.height)*2 + 1);
 	for(var i = 0; i < this.cameras.length; i++)
 	{
 		this.raycaster.setFromCamera(mouse, this.cameras[i]);
-		this.raycaster.intersectObjects(this.children, true);
-	}*/
+		//this.raycaster.intersectObjects(this.children, true);
+	}
 
 	this.world.step(this.clock.getDelta());
 
