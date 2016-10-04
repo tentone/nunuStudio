@@ -5,7 +5,7 @@ function Editor(){}
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.0 Alpha";
-Editor.TIMESTAMP = "201610021239";
+Editor.TIMESTAMP = "201610042301";
 
 //Node modules
 try
@@ -255,6 +255,8 @@ Editor.CAMERA_PERSPECTIVE = 21;
 Editor.initialize = function()
 {
 	Editor.fullscreen = false;
+
+	document.body.style.overflow = "hidden";
 
 	Keyboard.initialize();
 	Mouse.initialize();
@@ -987,13 +989,13 @@ Editor.updateAssetExplorer = function()
 	}
 
 	//Textures
-	/*var textures = ObjectUtils.getTextures(Editor.program, Editor.program.textures);
+	var textures = ObjectUtils.getTextures(Editor.program, Editor.program.textures);
 	for(var i in textures)
 	{
 		var file = new TextureAsset(Interface.asset_explorer.element);
 		file.setTexture(textures[i]);
 		Interface.asset_explorer.add(file);
-	}*/
+	}
 
 	Interface.asset_explorer.updateInterface();
 
@@ -1295,24 +1297,6 @@ Editor.loadProgram = function(fname)
 //Export web project
 Editor.exportWebProject = function(dir)
 {
-	/*
-	FileSystem.copyFolder("runtime", dir);
-	FileSystem.copyFolder("core", dir + "\\core");
-	FileSystem.copyFile("Editor.js", dir + "\\Editor.js");
-
-	FileSystem.makeDirectory(dir + "\\lib");
-	FileSystem.copyFile("lib\\leap.min.js", dir + "\\lib\\leap.min.js");
-	FileSystem.copyFile("lib\\SPE.min.js", dir + "\\lib\\SPE.min.js");
-	FileSystem.copyFile("lib\\leap.min.js", dir + "\\lib\\leap.min.js");
-	FileSystem.copyFile("lib\\stats.min.js", dir + "\\lib\\stats.min.js");
-	FileSystem.copyFile("lib\\cannon.min.js", dir + "\\lib\\cannon.min.js");
-	FileSystem.copyFile("lib\\spine.min.js", dir + "\\lib\\spine.min.js");
-	FileSystem.makeDirectory(dir + "\\lib\\three");
-	FileSystem.copyFile("lib\\three\\three.min.js", dir + "\\lib\\three\\three.min.js");
-	FileSystem.makeDirectory(dir + "\\lib\\three\\effects");
-	FileSystem.copyFile("lib\\three\\effects\\VREffect.js", dir + "\\lib\\three\\effects\\VREffect.js");
-	*/
-
 	FileSystem.makeDirectory(dir);
 	FileSystem.copyFile("runtime/vr.png", dir + "\\vr.png");
 	FileSystem.copyFile("runtime/fullscreen.png", dir + "\\fullscreen.png");
