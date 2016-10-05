@@ -5,7 +5,7 @@ function Editor(){}
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.0 Alpha";
-Editor.TIMESTAMP = "201610042301";
+Editor.TIMESTAMP = "201610051234";
 
 //Node modules
 try
@@ -69,6 +69,7 @@ include("core/objects/mesh/Mesh.js");
 include("core/objects/mesh/SkinnedMesh.js");
 include("core/objects/mesh/Text3D.js");
 include("core/objects/sprite/Sprite.js");
+include("core/objects/sprite/TextSprite.js");
 include("core/objects/lights/PointLight.js");
 include("core/objects/lights/SpotLight.js");
 include("core/objects/lights/AmbientLight.js");
