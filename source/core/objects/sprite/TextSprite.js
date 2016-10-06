@@ -11,7 +11,7 @@ function TextSprite(text, font)
 	this.text = text;
 }
 
-TextSprite.prototype = Object.create(THREE.TextSprite.prototype);
+TextSprite.prototype = Object.create(THREE.Sprite.prototype);
 
 //Set text
 TextSprite.prototype.setText = function(text)
