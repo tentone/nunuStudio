@@ -5,7 +5,7 @@ function Editor(){}
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.0 Alpha";
-Editor.TIMESTAMP = "201610051234";
+Editor.TIMESTAMP = "201610051636";
 
 //Node modules
 try
@@ -236,6 +236,8 @@ include("editor/utils/ObjectIcons.js");
 include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
+include("editor/History.js");
+include("editor/Action.js");
 
 //Editor state
 Editor.STATE_IDLE = 8;
@@ -256,7 +258,7 @@ Editor.CAMERA_PERSPECTIVE = 21;
 Editor.initialize = function()
 {
 	Editor.fullscreen = false;
-
+	
 	document.body.style.overflow = "hidden";
 
 	Keyboard.initialize();

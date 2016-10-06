@@ -420,6 +420,14 @@ Interface.initialize = function()
 	Interface.explorer = new DivisionResizable();
 	Interface.explorer.size.x = 300;
 	Interface.explorer.resize_size_min = 100;
+	Interface.explorer.setOnResize(function()
+	{
+		Interface.updateInterface();
+		if(Interface.panel !== null)
+		{
+			Interface.panel.updateInterface();
+		}
+	});
 
 	Interface.explorer_resizable = new DualDivisionResizable(Interface.explorer.element);
 	Interface.explorer_resizable.orientation = DualDivisionResizable.VERTICAL;
@@ -428,7 +436,10 @@ Interface.initialize = function()
 	{
 		Interface.explorer_resizable.updateInterface();
 		Interface.tree_view.updateInterface();
-		Interface.panel.updateInterface();
+		if(Interface.panel !== null)
+		{
+			Interface.panel.updateInterface();
+		}
 	});
 
 	//Project explorer

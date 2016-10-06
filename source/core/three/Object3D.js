@@ -61,7 +61,7 @@ THREE.Object3D.prototype.destroy = function()
 }
 
 //Create JSON for object
-THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
+THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 {
 	var isRootObject = (meta === undefined);
 	var output = {};
@@ -137,7 +137,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess)
 	}
 
 	//Serialize children data
-	if(this.children.length > 0)
+	if(recursive !== false && this.children.length > 0)
 	{
 		object.children = [];
 
