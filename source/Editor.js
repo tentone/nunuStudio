@@ -4,8 +4,8 @@ function Editor(){}
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.0 Alpha";
-Editor.TIMESTAMP = "201610051636";
+Editor.VERSION = "V0.8.9.1 Alpha";
+Editor.TIMESTAMP = "201610081338";
 
 //Node modules
 try
@@ -191,6 +191,7 @@ include("editor/ui/tab/AboutTab.js");
 
 include("editor/ui/tab/MaterialEditor.js");
 include("editor/ui/tab/materialeditor/PhongMaterialEditor.js");
+include("editor/ui/tab/materialeditor/LambertMaterialEditor.js");
 include("editor/ui/tab/materialeditor/BasicMaterialEditor.js");
 include("editor/ui/tab/materialeditor/StandardMaterialEditor.js");
 include("editor/ui/tab/materialeditor/SpriteMaterialEditor.js");

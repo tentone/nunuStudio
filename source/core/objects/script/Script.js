@@ -6,7 +6,7 @@ function Script(code)
 	this.name = "script";
 
 	this.script = null;
-	this.setCode((code !== undefined) ? code : "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n}\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n}");
+	this.setCode((code !== undefined) ? code : "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n}\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n}\n\nthis.onMouseOver = function()\n{\n	//TODO <MOUSE OVER CODE>\n}");
 
 	this.program = null;
 	this.scene = null;
@@ -46,6 +46,15 @@ Script.prototype.initialize = function()
 //Update Script
 Script.prototype.update = function()
 {
+	if(this.script.onMouseOver !== undefined)
+	{
+		var obj = this.scene.raycaster.intersectObjects(this.children, true);
+		if(obj.length > 0)
+		{
+			this.script.onMouseOver.call(this, obj);
+		}
+	}
+
 	if(this.script.update !== undefined)
 	{
 		this.script.update.call(this);
