@@ -41,9 +41,10 @@ Scene.prototype.initialize = function()
 Scene.prototype.update = function()
 {
 	var mouse = new Vector2((Mouse.position.x/Editor.canvas.width)*2 - 1, -(Mouse.position.y/Editor.canvas.height)*2 + 1);
-	for(var i = 0; i < this.cameras.length; i++)
+	//for(var i = 0; i < this.cameras.length; i++)
+	if(this.cameras.length > 0)
 	{
-		this.raycaster.setFromCamera(mouse, this.cameras[i]);
+		this.raycaster.setFromCamera(mouse, this.cameras[0]);
 		//this.raycaster.intersectObjects(this.children, true);
 	}
 
