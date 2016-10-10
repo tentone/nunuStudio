@@ -16,7 +16,7 @@ function Text3D(text, material, font)
 	this.bevel = false;
 	this.bevel_thickness = 10;
 	this.bevel_size = 8;
-	this.setText("text");
+	this.setText(this.text);
 
 	this.receiveShadow = true;
 	this.castShadow = true;
