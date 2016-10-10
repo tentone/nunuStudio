@@ -118,6 +118,20 @@ Program.prototype.resize = function(x, y)
 	}
 }
 
+//Get material by name
+Program.prototype.getMaterialByName = function(name)
+{
+	for(var i = 0; i < this.materials.length; i++)
+	{
+		if(this.materials[i].name === name)
+		{
+			return this.materials[i];
+		}
+	}
+
+	return null;
+}
+
 //Add material to materials list
 Program.prototype.addMaterial = function(material)
 {
@@ -152,6 +166,20 @@ Program.prototype.removeMaterial = function(material, default_material, default_
 			}
 		});
 	}
+}
+
+//Get material by name
+Program.prototype.getTextureByName = function(name)
+{
+	for(var i = 0; i < this.textures.length; i++)
+	{
+		if(this.textures[i].name === name)
+		{
+			return this.textures[i];
+		}
+	}
+
+	return null;
 }
 
 //Add texture to texture list

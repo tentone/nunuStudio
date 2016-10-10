@@ -36,7 +36,7 @@ TextSprite.prototype.dispose = function()
 }
 
 //Create JSON for object
-Text3D.prototype.toJSON = function(meta)
+TextSprite.prototype.toJSON = function(meta)
 {
 	var material = this.material;
 	this.material = undefined;
