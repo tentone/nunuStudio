@@ -111,8 +111,6 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	//If there is geometry store it
 	if(this.geometry !== undefined)
 	{
-		console.log(this.geometry);
-
 		if(meta.geometries[this.geometry.uuid] === undefined)
 		{
 			meta.geometries[this.geometry.uuid] = this.geometry.toJSON(meta);
@@ -124,8 +122,6 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 	//If there is a material store it
 	if(this.material !== undefined)
 	{
-		console.log(this.material);
-
 		if(meta.materials[this.material.uuid] === undefined)
 		{
 			meta.materials[this.material.uuid] = this.material.toJSON(meta);

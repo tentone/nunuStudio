@@ -121,7 +121,7 @@ Program.prototype.resize = function(x, y)
 //Get material by name
 Program.prototype.getMaterialByName = function(name)
 {
-	for(var i = 0; i < this.materials.length; i++)
+	for(var i in this.materials)
 	{
 		if(this.materials[i].name === name)
 		{
@@ -171,7 +171,7 @@ Program.prototype.removeMaterial = function(material, default_material, default_
 //Get material by name
 Program.prototype.getTextureByName = function(name)
 {
-	for(var i = 0; i < this.textures.length; i++)
+	for(var i in this.textures)
 	{
 		if(this.textures[i].name === name)
 		{
