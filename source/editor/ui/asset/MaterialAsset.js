@@ -60,7 +60,7 @@ function MaterialAsset(parent)
 				{
 					material_editor = new PhongMaterialEditor();
 				}
-				if(self.material instanceof THREE.MeshLambertMaterial)
+				else if(self.material instanceof THREE.MeshLambertMaterial)
 				{
 					material_editor = new LambertMaterialEditor();
 				}
