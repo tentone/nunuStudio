@@ -591,7 +591,7 @@ Interface.initialize = function()
 		Editor.addToScene(model);
 	}, "Torus");
 
-	//Pyramid
+	//Cone
 	Interface.add_model.addOption(Interface.file_dir + "icons/models/cone.png", function()
 	{
 		var geometry = new THREE.ConeBufferGeometry(1, 2, 32);
@@ -617,6 +617,15 @@ Interface.initialize = function()
 		model.name = "plane";
 		Editor.addToScene(model);
 	}, "Plane");
+
+	//Tetrahedron
+	Interface.add_model.addOption(Interface.file_dir + "icons/models/pyramid.png", function()
+	{
+		var geometry = new THREE.TetrahedronGeometry(1, 0);
+		var model = new Mesh(geometry, Editor.default_material);
+		model.name = "tetrahedron";
+		Editor.addToScene(model);
+	}, "Tetrahedron");
 
 	//Add lights
 	Interface.add_light = new ButtonDrawer();

@@ -5,7 +5,7 @@ function Editor(){}
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.1 Alpha";
-Editor.TIMESTAMP = "201610101333";
+Editor.TIMESTAMP = "201610101445";
 
 //Node modules
 try
