@@ -8,11 +8,6 @@ function Scene()
 	this.name = "scene";
 	this.matrixAutoUpdate = false;
 
-	this.clock = new THREE.Clock();
-	this.raycaster = new THREE.Raycaster();
-
-	this.cameras = [];
-
 	//Physics world
 	this.world = new CANNON.World();
 	this.world.defaultContactMaterial.contactEquationStiffness = 1e9;
@@ -24,6 +19,16 @@ function Scene()
 	this.world.solver = new CANNON.SplitSolver(new CANNON.GSSolver());
 	this.world.solver.tolerance = 0.1;
 	this.world.solver.iterations = 7;
+
+	//Cameras in use
+	this.cameras = [];
+
+	//Runtime objects
+	this.clock = new THREE.Clock();
+	this.raycaster = new THREE.Raycaster();
+
+	//Renderer canvas
+	this.canvas = null;
 }
 
 Scene.prototype = Object.create(THREE.Scene.prototype);
@@ -35,17 +40,18 @@ Scene.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
+
+	this.canvas = this.parent.renderer.domElement;
 }
 
 //Update scene
 Scene.prototype.update = function()
 {
-	var mouse = new Vector2((Mouse.position.x/Editor.canvas.width)*2 - 1, -(Mouse.position.y/Editor.canvas.height)*2 + 1);
-	//for(var i = 0; i < this.cameras.length; i++)
+	var mouse = new Vector2(Mouse.position.x/this.canvas.width * 2 - 1, -2 * Mouse.position.y/this.canvas.height + 1);
+
 	if(this.cameras.length > 0)
 	{
 		this.raycaster.setFromCamera(mouse, this.cameras[0]);
-		//this.raycaster.intersectObjects(this.children, true);
 	}
 
 	this.world.step(this.clock.getDelta());

@@ -12,6 +12,7 @@ function Key()
 Key.KEY_DOWN = -1;
 Key.KEY_UP = 1;
 Key.KEY_RESET = 0;
+Key.KEY_DOUBLE = 2;
 
 //Update Key status based new state
 Key.prototype.update = function(action)

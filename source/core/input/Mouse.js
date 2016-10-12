@@ -12,12 +12,14 @@ Mouse.initialize = function()
 	Mouse._delta = new THREE.Vector2(0,0);
 	Mouse._wheel = 0;
 	Mouse._wheel_updated = false;
+	Mouse._double_clicked = false;
 
 	//Mouse position, delta, and scroll speed
 	Mouse.keys = [];
 	Mouse.position = new THREE.Vector2(0,0);
 	Mouse.delta = new THREE.Vector2(0,0);
 	Mouse.wheel = 0;
+	Mouse.double_clicked = false;
 
 	//Calculate coordinates relative to canvas
 	Mouse.canvas = null;
@@ -124,6 +126,12 @@ Mouse.initialize = function()
 			Mouse.updateKey(event.which - 1, Key.KEY_UP);
 		}, false);
 	}
+
+	//Mouse double click
+	document.addEventListener("dblclick", function(event)
+	{
+		Mouse._double_clicked = true;
+	}, false);
 }
 
 //Mouse Buttons
@@ -204,6 +212,12 @@ Mouse.buttonPressed = function(button)
 	return Mouse.keys[button].isPressed;
 }
 
+//Check if Mouse button was double clicked
+Mouse.buttonDoubleClicked = function()
+{
+	return Mouse.double_clicked;
+}
+
 //Check if a mouse button was just pressed
 Mouse.buttonJustPressed = function(button)
 {
@@ -262,7 +276,18 @@ Mouse.update = function()
 		Mouse.wheel = 0;
 	}
 
-	//Update mouse Position if needed
+	//Update mouse double click
+	if(Mouse._double_clicked)
+	{
+		Mouse.double_clicked = true;
+		Mouse._double_clicked = false;
+	}
+	else
+	{
+		Mouse.double_clicked = false;
+	}
+
+	//Update mouse position if needed
 	if(Mouse._position_updated)
 	{
 		Mouse.delta.x = Mouse._delta.x;
