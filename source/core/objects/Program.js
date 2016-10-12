@@ -203,6 +203,7 @@ Program.prototype.setScene = function(scene)
 	if(this.scene !== null)
 	{
 		this.scene.initialize();
+
 		if(this.scene.cameras.length === 0)
 		{
 			this.scene.cameras.push(this.default_camera);

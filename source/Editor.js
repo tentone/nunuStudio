@@ -5,7 +5,7 @@ function Editor(){}
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.1 Alpha";
-Editor.TIMESTAMP = "201610101445";
+Editor.TIMESTAMP = "201610120122";
 
 //Node modules
 try
@@ -459,19 +459,14 @@ Editor.update = function()
 		{
 			if(Mouse.buttonJustPressed(Mouse.LEFT) && Mouse.insideCanvas())
 			{
-				Editor.updateRaycasterFromMouse();
-				var intersects = Editor.raycaster.intersectObjects(Editor.program.scene.children, true);
-				if(intersects.length > 0)
-				{
-					Editor.selectObject(intersects[0].object);
-				}
+				Editor.selectObjectWithMouse();
 			}
 
 			Editor.is_editing_object = false;
 		}
 		else if(Editor.selected_object !== null)
 		{
-			//Update active tool status
+			//Update active tool
 			if(Editor.tool !== null)
 			{
 				Editor.is_editing_object = Editor.tool.update();
@@ -483,6 +478,12 @@ Editor.update = function()
 			else
 			{
 				Editor.is_editing_object = false;
+			}
+
+			//If mouse double clicked select object
+			if(Mouse.buttonDoubleClicked() && Mouse.insideCanvas())
+			{
+				Editor.selectObjectWithMouse();
 			}
 		}
 		
@@ -1208,6 +1209,17 @@ Editor.updateRaycasterFromMouse = function()
 	Editor.raycaster.setFromCamera(mouse, Editor.camera);
 }
 
+//Select objects with mouse
+Editor.selectObjectWithMouse = function()
+{
+	Editor.updateRaycasterFromMouse();
+	var intersects = Editor.raycaster.intersectObjects(Editor.program.scene.children, true);
+	if(intersects.length > 0)
+	{
+		Editor.selectObject(intersects[0].object);
+	}
+}
+
 //Update editor raycaster with new x and y positions (normalized -1 to 1)
 Editor.updateRaycaster = function(x, y)
 {
@@ -1305,7 +1317,7 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile("runtime/vr.png", dir + "\\vr.png");
 	FileSystem.copyFile("runtime/fullscreen.png", dir + "\\fullscreen.png");
 	FileSystem.copyFile("runtime/index.html", dir + "\\index.html");
-	FileSystem.copyFile("../build/nunu.js", dir + "\\nunu.js");
+	FileSystem.copyFile("../build/nunu.min.js", dir + "\\nunu.min.js");
 	
 	Editor.saveProgram(dir + "\\app.isp", true);
 }
