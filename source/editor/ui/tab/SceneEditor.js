@@ -204,6 +204,28 @@ function SceneEditor(parent)
 		self.vr_button.img.style.opacity = 1.0;
 	};
 
+	//Camera mode button
+	this.camera_button = new ButtonImage(this.element);
+	this.camera_button.size.set(35, 35);
+	this.camera_button.setImage("editor/files/icons/camera/camera.png");
+	this.camera_button.visible = true;
+	this.camera_button.updateInterface();
+
+	this.camera_button.element.onmouseenter = function()
+	{
+		self.camera_button.img.style.opacity = 0.5;
+	};
+
+	this.camera_button.element.onmouseleave = function()
+	{
+		self.camera_button.img.style.opacity = 1.0;
+	};
+
+	this.camera_button.setCallback(function()
+	{
+		Editor.setCameraMode();
+	});
+
 	//Element atributes
 	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
@@ -347,6 +369,12 @@ SceneEditor.prototype.updateInterface = function()
 	this.vr_button.position.y = this.fullscreen_button.position.y;
 	this.vr_button.visible = this.visible && this.show_buttons_vr;
 	this.vr_button.updateInterface();
+
+	//Camera mode button
+	this.camera_button.position.x = this.position.x + this.size.x - this.camera_button.size.x - 5;
+	this.camera_button.position.y = 5;
+	this.camera_button.visible = this.visible;
+	this.camera_button.updateInterface();
 
 	//Update canvas
 	this.canvas.width = this.size.x;
