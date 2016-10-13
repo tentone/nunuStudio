@@ -1,6 +1,6 @@
 "use strict";
 
-function Text3D(text, material, font)
+function Text3D(text, material, font, height, bevel, bevel_thickness, bevel_size)
 {
 	THREE.Mesh.call(this, undefined, material);
 	
@@ -11,11 +11,12 @@ function Text3D(text, material, font)
 
 	this.font = font;
 
-	this.text = text;
-	this.height = 50;
-	this.bevel = false;
-	this.bevel_thickness = 10;
-	this.bevel_size = 8;
+	this.text = (text !== undefined) ? text : "text";
+	this.height = (height !== undefined) ? height : 50;
+	this.bevel = (bevel !== undefined) ? bevel : false;
+	this.bevel_thickness = (bevel_thickness !== undefined) ? bevel_thickness : 10;
+	this.bevel_size = (bevel_size !== undefined) ? bevel_size : 8;
+
 	this.setText(this.text);
 
 	this.receiveShadow = true;
@@ -27,7 +28,10 @@ Text3D.prototype = Object.create(THREE.Mesh.prototype);
 //Set Text
 Text3D.prototype.setText = function(text)
 {
-	this.text = text;
+	if(text !== undefined)
+	{
+		this.text = text;
+	}
 
 	if(this.geometry !== undefined)
 	{

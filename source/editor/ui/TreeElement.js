@@ -477,7 +477,7 @@ TreeElement.prototype.updateInterface = function()
 	}
 	
 	//Update size
-	if(this.container != null)
+	if(this.container !== null)
 	{
 		this.size.x = this.container.size.x;
 	}

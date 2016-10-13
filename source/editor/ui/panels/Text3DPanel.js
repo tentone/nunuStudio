@@ -1,6 +1,6 @@
 "use strict";
 
-function TextPanel(parent)
+function Text3DPanel(parent)
 {
 	Panel.call(this, parent);
 
@@ -20,20 +20,6 @@ function TextPanel(parent)
 		}
 	});
 	this.form.add(this.name);
-	this.form.nextRow();
-
-	//Text
-	this.form.addText("Text");
-	this.text = new TextBox(this.form.element);
-	this.text.size.set(200, 18);
-	this.text.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.setText(self.text.getText());
-		}
-	});
-	this.form.add(this.text);
 	this.form.nextRow();
 
 	//Position
@@ -76,6 +62,86 @@ function TextPanel(parent)
 		}
 	});
 	this.form.add(this.rotation);
+	this.form.nextRow();
+
+	//Text
+	this.form.addText("Text");
+	this.text = new TextBox(this.form.element);
+	this.text.size.set(200, 18);
+	this.text.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.setText(self.text.getText());
+		}
+	});
+	this.form.add(this.text);
+	this.form.nextRow();
+
+	//Height
+	this.form.addText("Thickness");
+	this.height = new NumberBox(this.form.element);
+	this.height.size.set(60, 18);
+	this.height.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.height.setStep(0.1);
+	this.height.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.height = self.height.getValue();
+			self.obj.setText();
+		}
+	});
+	this.form.add(this.height);
+	this.form.nextRow();
+
+	//Bevel
+	this.bevel = new CheckBox(this.form.element);
+	this.bevel.setText("Bevel");
+	this.bevel.size.set(200, 15);
+	this.bevel.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.bevel = self.bevel.getValue();
+			self.obj.setText();
+		}
+	});
+	this.form.add(this.bevel);
+	this.form.nextRow();
+
+	//Bevel thickness
+	this.form.addText("Bevel Thickness");
+	this.bevel_thickness = new NumberBox(this.form.element);
+	this.bevel_thickness.size.set(60, 18);
+	this.bevel_thickness.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.bevel_thickness.setStep(0.1);
+	this.bevel_thickness.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.bevel_thickness = self.bevel_thickness.getValue();
+			self.obj.setText();
+		}
+	});
+	this.form.add(this.bevel_thickness);
+	this.form.nextRow();
+
+	//Bevel size
+	this.form.addText("Bevel Size");
+	this.bevel_size = new NumberBox(this.form.element);
+	this.bevel_size.size.set(60, 18);
+	this.bevel_size.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.bevel_size.setStep(0.1);
+	this.bevel_size.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.bevel_size = self.bevel_size.getValue();
+			self.obj.setText();
+		}
+	});
+	this.form.add(this.bevel_size);
 	this.form.nextRow();
 
 	//Visible
@@ -139,18 +205,24 @@ function TextPanel(parent)
 }
 
 //Super prototypes
-TextPanel.prototype = Object.create(Panel.prototype);
+Text3DPanel.prototype = Object.create(Panel.prototype);
 
 //Update panel content from attached object
-TextPanel.prototype.updatePanel = function()
+Text3DPanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
-		this.text.setText(this.obj.text);
 		this.position.setValue(this.obj.position.x, this.obj.position.y, this.obj.position.z);
 		this.scale.setValue(this.obj.scale.x, this.obj.scale.y, this.obj.scale.z);
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
+
+		this.text.setText(this.obj.text);
+		this.height.setValue(this.obj.height);
+		this.bevel.setValue(this.obj.bevel);
+		this.bevel_thickness.setValue(this.obj.bevel_thickness);
+		this.bevel_size.setValue(this.obj.bevel_size);
+
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.receive_shadow.setValue(this.obj.receiveShadow);
 		this.visible.setValue(this.obj.visible);
