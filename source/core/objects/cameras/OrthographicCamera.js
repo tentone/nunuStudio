@@ -16,14 +16,16 @@ function OrthographicCamera(size, aspect, mode, near, far)
 
 	this.name = "camera";
 
-	this.size = size;
-	this.aspect = aspect;
+	this.size = (size != undefined) ? size : 10.0;
+	this.aspect = (aspect != undefined) ? aspect : 1.0;
 	this.mode = (mode !== undefined) ? mode : OrthographicCamera.FIXED_VERTICAL;
 
 	this.offset = new THREE.Vector2(0.0, 0.0);
 	this.viewport = new THREE.Vector2(1.0, 1.0);
 	this.clear_color = false;
 	this.clear_depth = false;
+
+	this.updateProjectionMatrix();
 
 	this.listener = new THREE.AudioListener();
 }
