@@ -11,21 +11,21 @@ function TransformGizmoScale()
 
 	arrowGeometry.merge(mesh.geometry, mesh.matrix);
 
-	var lineXGeometry = new THREE.BufferGeometry();
-	lineXGeometry.addAttribute("position", new THREE.Float32Attribute([0, 0, 0,  1, 0, 0], 3));
+	var x = new THREE.BufferGeometry();
+	x.addAttribute("position", new THREE.Float32Attribute([0, 0, 0,  1, 0, 0], 3));
 
-	var lineYGeometry = new THREE.BufferGeometry();
-	lineYGeometry.addAttribute("position", new THREE.Float32Attribute([0, 0, 0,  0, 1, 0], 3));
+	var y = new THREE.BufferGeometry();
+	y.addAttribute("position", new THREE.Float32Attribute([0, 0, 0,  0, 1, 0], 3));
 
-	var lineZGeometry = new THREE.BufferGeometry();
-	lineZGeometry.addAttribute("position", new THREE.Float32Attribute([0, 0, 0,  0, 0, 1], 3));
+	var z = new THREE.BufferGeometry();
+	z.addAttribute("position", new THREE.Float32Attribute([0, 0, 0,  0, 0, 1], 3));
 
 	this.handleGizmos =
 	{
-		X: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0xff0000 })), [0.5, 0, 0], [0, 0, - Math.PI / 2]],[new THREE.Line(lineXGeometry, new GizmoLineMaterial({ color: 0xff0000 }))]],
-		Y: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x00ff00 })), [0, 0.5, 0]],[new THREE.Line(lineYGeometry, new GizmoLineMaterial({ color: 0x00ff00 }))]],
-		Z: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x0000ff })), [0, 0, 0.5], [Math.PI / 2, 0, 0]],[new THREE.Line(lineZGeometry, new GizmoLineMaterial({ color: 0x0000ff }))]],
-		XYZ: [[new THREE.Mesh(new THREE.BoxBufferGeometry(0.125, 0.125, 0.125), new GizmoMaterial({ color: 0xffffff, opacity: 0.25 }))]]
+		X: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({color: 0xff0000})), [0.5, 0, 0], [0, 0, - Math.PI / 2]],[new THREE.Line(x, new GizmoLineMaterial({color: 0xff0000}))]],
+		Y: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({color: 0x00ff00})), [0, 0.5, 0]],[new THREE.Line(y, new GizmoLineMaterial({color: 0x00ff00}))]],
+		Z: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({color: 0x0000ff})), [0, 0, 0.5], [Math.PI / 2, 0, 0]],[new THREE.Line(z, new GizmoLineMaterial({color: 0x0000ff}))]],
+		XYZ: [[new THREE.Mesh(new THREE.BoxBufferGeometry(0.125, 0.125, 0.125), new GizmoMaterial({color: 0xffffff, opacity: 0.25}))]]
 	};
 
 	this.pickerGizmos =
