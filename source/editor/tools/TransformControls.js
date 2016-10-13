@@ -98,7 +98,7 @@ function TransformControls()
 
 		if(mode === "scale")
 		{
-			self.space = "local";
+			this.space = "local";
 		}
 
 		for(var type in gizmo)
@@ -111,13 +111,13 @@ function TransformControls()
 
 	this.setSize = function(size)
 	{
-		self.size = size;
+		this.size = size;
 		this.updateScale();
 	};
 
 	this.setSpace = function(space)
 	{
-		self.space = space;
+		this.space = space;
 		this.updateScale();
 	};
 
@@ -146,35 +146,44 @@ function TransformControls()
 
 	this.updateScale = function()
 	{
-		if(self.object === null)
+		if(this.object === null)
 		{
 			return;
 		}
 
-		self.object.updateMatrixWorld();
-		worldPosition.setFromMatrixPosition(self.object.matrixWorld);
-		worldRotation.setFromRotationMatrix(tempMatrix.extractRotation(self.object.matrixWorld));
+		//this.object.updateMatrixWorld();
+		worldPosition.setFromMatrixPosition(this.object.matrixWorld);
+		worldRotation.setFromRotationMatrix(tempMatrix.extractRotation(this.object.matrixWorld));
 
-		camera.updateMatrixWorld();
+		//camera.updateMatrixWorld();
 		camPosition.setFromMatrixPosition(camera.matrixWorld);
 		camRotation.setFromRotationMatrix(tempMatrix.extractRotation(camera.matrixWorld));
 
-		scale = worldPosition.distanceTo(camPosition) / 6 * self.size;
 		this.position.copy(worldPosition);
-		this.scale.set(scale, scale, scale);
 
+		if(camera instanceof THREE.PerspectiveCamera)
+		{
+			scale = worldPosition.distanceTo(camPosition) / 6 * this.size;
+			this.scale.set(scale, scale, scale);
+		}
+		else
+		{
+			scale = camera.size / 6 * this.size;
+			this.scale.set(scale, scale, scale);
+		}
+		
 		eye.copy(camPosition).sub(worldPosition).normalize();
 
-		if(self.space === "local")
+		if(this.space === "local")
 		{
 			gizmo[mode].update(worldRotation, eye);
 		}
-		else if(self.space === "world")
+		else if(this.space === "world")
 		{
 			gizmo[mode].update(new THREE.Euler(), eye);
 		}
 
-		gizmo[mode].highlight(self.axis);
+		gizmo[mode].highlight(this.axis);
 	}
 
 	function onPointerHover()
