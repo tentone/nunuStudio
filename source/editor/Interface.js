@@ -8,10 +8,10 @@ Interface.initialize = function()
 	//File directory
 	Interface.file_dir = "editor/files/";
 
-	//------------------------------------Tab Container-------------------------------
+	//Tab Container
 	Interface.tab = new TabGroup();
 
-	//---------------------------------Asset Manager----------------------------------
+	//Asset Manager
 	Interface.asset_explorer_div = new DivisionResizable();
 	Interface.asset_explorer_div.resizable_side = DivisionResizable.TOP;
 	Interface.asset_explorer_div.size.y = 150;
@@ -416,7 +416,7 @@ Interface.initialize = function()
 		Editor.updateObjectViews();
 	});
 
-	//------------------------------------Explorer------------------------------------
+	//Explorer
 	Interface.explorer = new DivisionResizable();
 	Interface.explorer.size.x = 300;
 	Interface.explorer.resize_size_min = 100;
@@ -448,7 +448,7 @@ Interface.initialize = function()
 	//Object panel variables
 	Interface.panel = new Panel(Interface.explorer_resizable.div_b);
 
-	//------------------------------------Tool Bar------------------------------------
+	//Tool Bar
 	Interface.tool_bar = new Bar();
 	Interface.tool_bar.size.x = 40;
 
@@ -469,14 +469,6 @@ Interface.initialize = function()
 	Interface.tool_select.setCallback(function()
 	{
 		Editor.selectTool(Editor.MODE_SELECT);
-		Interface.tool_select.selected = true;
-		Interface.tool_move.selected = false;
-		Interface.tool_resize.selected = false;
-		Interface.tool_rotate.selected = false;
-		Interface.tool_rotate.updateInterface();
-		Interface.tool_move.updateInterface();
-		Interface.tool_resize.updateInterface();
-		Interface.tool_select.updateInterface();
 	});
 
 	//Move
@@ -489,34 +481,18 @@ Interface.initialize = function()
 	Interface.tool_move.setCallback(function()
 	{
 		Editor.selectTool(Editor.MODE_MOVE);
-		Interface.tool_move.selected = true;
-		Interface.tool_select.selected = false;
-		Interface.tool_resize.selected = false;
-		Interface.tool_rotate.selected = false;
-		Interface.tool_rotate.updateInterface();
-		Interface.tool_move.updateInterface();
-		Interface.tool_resize.updateInterface();
-		Interface.tool_select.updateInterface();
 	});
 
 	//Resize
-	Interface.tool_resize = new ButtonImageToggle();
-	Interface.tool_resize.setImage(Interface.file_dir + "icons/tools/resize.png");
-	Interface.tool_resize.image_scale.set(0.7, 0.7);
-	Interface.tool_resize.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
-	Interface.tool_resize.position.set(0, 160);
-	Interface.tool_resize.updateInterface();
-	Interface.tool_resize.setCallback(function()
+	Interface.tool_scale = new ButtonImageToggle();
+	Interface.tool_scale.setImage(Interface.file_dir + "icons/tools/resize.png");
+	Interface.tool_scale.image_scale.set(0.7, 0.7);
+	Interface.tool_scale.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);
+	Interface.tool_scale.position.set(0, 160);
+	Interface.tool_scale.updateInterface();
+	Interface.tool_scale.setCallback(function()
 	{
 		Editor.selectTool(Editor.MODE_SCALE);
-		Interface.tool_resize.selected = true;
-		Interface.tool_move.selected = false;
-		Interface.tool_select.selected = false;
-		Interface.tool_rotate.selected = false;
-		Interface.tool_rotate.updateInterface();
-		Interface.tool_move.updateInterface();
-		Interface.tool_resize.updateInterface();
-		Interface.tool_select.updateInterface();
 	});
 
 	//Rotate
@@ -529,14 +505,6 @@ Interface.initialize = function()
 	Interface.tool_rotate.setCallback(function()
 	{
 		Editor.selectTool(Editor.MODE_ROTATE);
-		Interface.tool_rotate.selected = true;
-		Interface.tool_move.selected = false;
-		Interface.tool_resize.selected = false;
-		Interface.tool_select.selected = false;
-		Interface.tool_rotate.updateInterface();
-		Interface.tool_move.updateInterface();
-		Interface.tool_resize.updateInterface();
-		Interface.tool_select.updateInterface();
 	});
  
 	//Add Text
@@ -835,7 +803,7 @@ Interface.initialize = function()
 		Editor.addToScene(new KinectDevice());
 	}, "Microsoft Kinect");
 
-	//----------------------------------Menu Top Bar----------------------------------
+	//Menu Top Bar
 	Interface.top_bar = new Bar();
 	Interface.top_bar.size.y = 25 ;
 
@@ -1088,7 +1056,7 @@ Interface.updateInterface = function()
 	//Window size
 	var size = new THREE.Vector2(window.innerWidth, window.innerHeight);
 
-	//----------------------------------Menu Top Bar----------------------------------
+	//Menu Top Bar
 	Interface.top_bar.size.x = size.x;
 	Interface.top_bar.updateInterface();
 
@@ -1096,12 +1064,12 @@ Interface.updateInterface = function()
 	Interface.image.position.set(size.x - Interface.image.size.x, 3);
 	Interface.image.updateInterface();
 
-	//------------------------------------Tool Bar------------------------------------
+	//Tool Bar
 	Interface.tool_bar.position.set(0, Interface.top_bar.size.y);
 	Interface.tool_bar.size.y = size.y - Interface.top_bar.size.y;
 	Interface.tool_bar.updateInterface();
 
-	//------------------------------------Project Explorer------------------------------------
+	//Project Explorer
 	Interface.explorer.size.y = (size.y - Interface.top_bar.size.y);
 	Interface.explorer.position.set(size.x - Interface.explorer.size.x, Interface.top_bar.size.y);
 	Interface.explorer.resize_size_max = size.x * 0.7;
@@ -1112,7 +1080,7 @@ Interface.updateInterface = function()
 
 	Interface.tree_view.updateInterface();
 
-	//---------------------------------Asset Explorer----------------------------------
+	//Asset Explorer
 	Interface.asset_explorer_div.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;
 	Interface.asset_explorer_div.position.set(Interface.tool_bar.size.x, size.y - Interface.asset_explorer_div.size.y);
 	Interface.asset_explorer_div.resize_size_max = size.y * 0.6;
@@ -1126,7 +1094,7 @@ Interface.updateInterface = function()
 	Interface.asset_explorer.size.y = Interface.asset_explorer_div.size.y - Interface.asset_explorer.position.y;
 	Interface.asset_explorer.updateInterface();
 
-	//------------------------------------Tab Container-------------------------------
+	//Tab Container
 	Interface.tab.position.set(Interface.tool_bar.size.x, Interface.top_bar.size.y);
 	Interface.tab.size.x = (size.x - Interface.tool_bar.size.x - Interface.explorer.size.x);
 	Interface.tab.size.y = (size.y - Interface.top_bar.size.y - Interface.asset_explorer_div.size.y); 
@@ -1183,4 +1151,35 @@ Interface.newProgram = function()
 		Editor.createNewProgram();
 		Editor.updateObjectViews();
 	}
+}
+
+//Select object manipulation tool
+Interface.selectTool = function(tool)
+{
+	Interface.tool_select.selected = false;
+	Interface.tool_move.selected = false;
+	Interface.tool_scale.selected = false;
+	Interface.tool_rotate.selected = false;
+
+	if(tool === Editor.MODE_SELECT)
+	{
+		Interface.tool_select.selected = true;
+	}
+	else if(tool === Editor.MODE_MOVE)
+	{
+		Interface.tool_move.selected = true;
+	}
+	else if(tool === Editor.MODE_ROTATE)
+	{
+		Interface.tool_rotate.selected = true;
+	}
+	else if(tool === Editor.MODE_SCALE)
+	{
+		Interface.tool_scale.selected = true;
+	}
+
+	Interface.tool_rotate.updateInterface();
+	Interface.tool_move.updateInterface();
+	Interface.tool_scale.updateInterface();
+	Interface.tool_select.updateInterface();
 }

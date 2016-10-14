@@ -50,8 +50,7 @@ function SceneEditor(parent)
 
 			//Update raycaster direction
 			var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
-			var position_normalized = new THREE.Vector2((position.x / self.canvas.width * 2) - 1, (-2 * position.y / self.canvas.height) + 1);
-			Editor.updateRaycaster(position_normalized.x, position_normalized.y);
+			Editor.updateRaycaster(position.x / self.canvas.width * 2 - 1, -2 * position.y / self.canvas.height + 1);
 
 			//Get object from drag buffer
 			var uuid = event.dataTransfer.getData("uuid");
@@ -163,9 +162,10 @@ function SceneEditor(parent)
 		event.preventDefault();
 	};
 
-	//Button
+	//Buttons visibility
 	this.show_buttons_vr = false;
 	this.show_buttons_fullscreen = false;
+	this.show_buttons_camera_mode = true;
 
 	//Fullscreen button
 	this.fullscreen_button = new ButtonImage(this.element);
@@ -206,8 +206,8 @@ function SceneEditor(parent)
 
 	//Camera mode button
 	this.camera_button = new ButtonImage(this.element);
-	this.camera_button.size.set(35, 35);
-	this.camera_button.setImage("editor/files/icons/camera/camera.png");
+	this.camera_button.size.set(25, 25);
+	this.camera_button.setImage("editor/files/icons/misc/3d.png");
 	this.camera_button.visible = true;
 	this.camera_button.updateInterface();
 
@@ -224,6 +224,14 @@ function SceneEditor(parent)
 	this.camera_button.setCallback(function()
 	{
 		Editor.setCameraMode();
+		if(Editor.camera_mode === Editor.CAMERA_ORTHOGRAPHIC)
+		{
+			self.camera_button.setImage("editor/files/icons/misc/2d.png");
+		}
+		else
+		{
+			self.camera_button.setImage("editor/files/icons/misc/3d.png");
+		}
 	});
 
 	//Element atributes
@@ -373,7 +381,7 @@ SceneEditor.prototype.updateInterface = function()
 	//Camera mode button
 	this.camera_button.position.x = this.position.x + this.size.x - this.camera_button.size.x - 5;
 	this.camera_button.position.y = 5;
-	this.camera_button.visible = this.visible;
+	this.camera_button.visible = this.visible && this.show_buttons_camera_mode;
 	this.camera_button.updateInterface();
 
 	//Update canvas
