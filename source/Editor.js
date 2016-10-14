@@ -5,7 +5,7 @@ function Editor(){}
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.2 Alpha";
-Editor.TIMESTAMP = "201610131700";
+Editor.TIMESTAMP = "201610132357";
 
 //Node modules
 try
@@ -345,9 +345,6 @@ Editor.initialize = function()
 	Editor.axis_helper.visible = Settings.editor.axis_enabled;
 	Editor.tool_scene.add(Editor.axis_helper);
 
-	//Editor Camera
-	Editor.camera_rotation = new Vector2(0, 0);
-	Editor.setCameraMode(Editor.CAMERA_PERSPECTIVE);
 
 	//Object helper container
 	Editor.object_helper = new THREE.Scene();
@@ -358,6 +355,11 @@ Editor.initialize = function()
 	Editor.tool_scene_top.add(Editor.tool_container);
 	Editor.tool = null;
 
+	//Editor Camera
+	Editor.camera_mode = Editor.CAMERA_PERSPECTIVE;
+	Editor.camera_rotation = new Vector2(0, 0);
+	Editor.setCameraMode(Editor.CAMERA_PERSPECTIVE);
+	
 	//Check is some .isp file passed as argument
 	for(var i = 0; i < Editor.args.length; i++)
 	{
@@ -469,26 +471,29 @@ Editor.update = function()
 
 			Editor.is_editing_object = false;
 		}
-		else if(Editor.selected_object !== null)
+		else
 		{
-			//Update active tool
-			if(Editor.tool !== null)
-			{
-				Editor.is_editing_object = Editor.tool.update();
-				if(Editor.is_editing_object)
-				{
-					Editor.updateObjectPanel();
-				}
-			}
-			else
-			{
-				Editor.is_editing_object = false;
-			}
-
 			//If mouse double clicked select object
 			if(Mouse.buttonDoubleClicked() && Mouse.insideCanvas())
 			{
 				Editor.selectObjectWithMouse();
+			}
+
+			//If no object selected update tool
+			if(Editor.selected_object !== null)
+			{
+				if(Editor.tool !== null)
+				{
+					Editor.is_editing_object = Editor.tool.update();
+					if(Editor.is_editing_object)
+					{
+						Editor.updateObjectPanel();
+					}
+				}
+				else
+				{
+					Editor.is_editing_object = false;
+				}
 			}
 		}
 		
@@ -521,7 +526,7 @@ Editor.update = function()
 			}
 
 			//Orthographic camera (2D mode)
-			if(Editor.camera instanceof OrthographicCamera)
+			if(Editor.camera_mode === Editor.CAMERA_ORTHOGRAPHIC)
 			{
 				//Move camera on y / x
 				if(Mouse.buttonPressed(Mouse.RIGHT))
@@ -1062,7 +1067,7 @@ Editor.createDefaultResouces = function()
 {
 	Editor.default_image = new Image("data/sample.png");
 	Editor.default_font = new Font("data/fonts/montserrat.json");
-	Editor.default_audio = new Audio("data/sample.ogg");
+	Editor.default_audio = new Audio("data/sample.mp3");
 	Editor.default_texture = new Texture(Editor.default_image);
 	Editor.default_material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 	Editor.default_material.name = "default";
@@ -1090,6 +1095,8 @@ Editor.selectTool = function(tool)
 	{
 		Editor.tool.dispose();	
 	}
+
+	Interface.selectTool(tool);
 
 	if(Editor.selected_object !== null && tool !== Editor.MODE_SELECT)
 	{
@@ -1210,7 +1217,7 @@ Editor.setCameraMode = function(mode)
 {
 	if(mode === undefined)
 	{
-		mode = (Editor.camera instanceof PerspectiveCamera) ? Editor.CAMERA_ORTHOGRAPHIC : Editor.CAMERA_PERSPECTIVE;
+		mode = (Editor.camera_mode === Editor.CAMERA_PERSPECTIVE) ? Editor.CAMERA_ORTHOGRAPHIC : Editor.CAMERA_PERSPECTIVE;
 	}
 	
 	var aspect = (Editor.canvas !== null) ? Editor.canvas.width/Editor.canvas.height : 1.0;
@@ -1229,6 +1236,9 @@ Editor.setCameraMode = function(mode)
 		Editor.grid_helper.rotation.x = 0;
 		Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
 	}
+
+	Editor.camera_mode = mode;
+	Editor.selectTool(Editor.tool_mode);
 }
 
 //Set camera rotation
@@ -1400,6 +1410,7 @@ Editor.setState = function(state)
 		{
 			tab.show_buttons_fullscreen = false;
 			tab.show_buttons_vr = false;
+			tab.show_buttons_camera_mode = true;
 			tab.updateInterface();
 		}
 	}
@@ -1419,6 +1430,7 @@ Editor.setState = function(state)
 		//Show full screen and VR buttons
 		var tab = Interface.tab.getActual();
 		tab.show_buttons_fullscreen = true;
+		tab.show_buttons_camera_mode = false;
 
 		//If program uses VR set button
 		if(Editor.program_running.vr)
@@ -1431,14 +1443,17 @@ Editor.setState = function(state)
 				tab.show_buttons_vr = true;
 
 				//Create VR switch callback
-				var vr_state = true;
+				var vr = true;
 				tab.vr_button.setCallback(function()
 				{
-					if(Editor.vr_effect !== null)
-					{
-						Editor.vr_effect.setFullScreen(vr_state);
-						vr_state = !vr_state;
-					}
+					//TODO <CHANGE CODE>
+					//Editor.program.setVR(vr);
+
+					//if(Editor.vr_effect !== null)
+					//{
+					//	Editor.vr_effect.setFullScreen(vr_state);
+					//	vr_state = !vr_state;
+					//}
 				});
 			}
 		}
