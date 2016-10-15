@@ -10,7 +10,7 @@
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,
-		"camera_preview_percentage": 0.35,
+		"camera_preview_percentage": "0.4",
 		"lock_mouse": true,
 		"transformation_space": "world"
 	},
