@@ -160,18 +160,15 @@ Program.prototype.removeMaterial = function(material, default_material, default_
 		
 		this.traverse(function(child)
 		{
-			if(child.material !== undefined)
+			if(child.material !== undefined && child.material.uuid === material.uuid)
 			{
-				if(child.material.uuid === material.uuid)
+				if(child instanceof THREE.Sprite)
 				{
-					if(child instanceof THREE.Sprite)
-					{
-						child.material = default_material_sprite;
-					}
-					else
-					{
-						child.material = default_material;
-					}
+					child.material = default_material_sprite;
+				}
+				else
+				{
+					child.material = default_material;
 				}
 			}
 		});
@@ -214,7 +211,57 @@ Program.prototype.removeTexture = function(texture, default_texture)
 		{
 			if(child.material !== undefined)
 			{
-				//TODO <ADD CODE HERE>
+				var material = child.material;
+				
+				if(material.map !== undefined)
+				{
+					material.map = default_texture;
+					material.needsUpdate = true;
+				}
+				else if(material.bumpMap !== undefined)
+				{
+					material.bumpMap = default_texture;
+					material.needsUpdate = true;
+				}
+				else if(material.normalMap !== undefined)
+				{
+					material.normalMap = default_texture;
+					material.needsUpdate = true;
+				}
+				else if(material.displacementMap !== undefined)
+				{
+					material.displacementMap = default_texture;
+					material.needsUpdate = true;
+				}
+				else if(material.specularMap !== undefined)
+				{
+					material.specularMap = default_texture;
+					material.needsUpdate = true;
+				}
+				else if(material.emissiveMap !== undefined)
+				{
+					material.emissiveMap = default_texture;
+					material.needsUpdate = true;
+				}
+				else if(material.alphaMap !== undefined)
+				{
+					material.alphaMap = default_texture;
+					material.needsUpdate = true;
+				}
+				else if(material.roughnessMap !== undefined)
+				{
+					material.roughnessMap = default_texture;
+					material.needsUpdate = true;
+				}
+				else if(material.metalnessMap !== undefined)
+				{
+					material.metalnessMap = default_texture;
+					material.needsUpdate = true;
+				}
+			}
+			else if(child instanceof ParticleEmitter)
+			{
+				child.group.texture = default_texture;
 			}
 		});
 	}
@@ -227,6 +274,28 @@ Program.prototype.addFont = function(font)
 	{
  		this.fonts[font.uuid] = font;
  	}
+}
+
+//Remove material from materials list (also receives default used to replace)
+Program.prototype.removeFont = function(material, default_font)
+{
+	if(default_font === undefined)
+	{
+		default_font = new Font();
+	}
+
+	if(font instanceof Font)
+	{
+		delete this.fonts[font.uuid];
+		
+		this.traverse(function(child)
+		{
+			if(child.font !== undefined && child.font.uuid === font.uuid)
+			{
+				child.font = default_font;
+			}
+		});
+	}
 }
 
 //Add audio to audio list

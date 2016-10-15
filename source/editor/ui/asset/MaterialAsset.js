@@ -109,13 +109,10 @@ function MaterialAsset(parent)
 		
 		context.addOption("Delete", function()
 		{
-			if(self.material !== null)
+			if(self.material !== null && confirm("Delete material?"))
 			{
-				if(confirm("Delete material?"))
-				{
-					Editor.program.removeMaterial(self.material, Editor.default_material, Editor.default_sprite_material);
-					Editor.updateObjectViews();
-				}
+				Editor.program.removeMaterial(self.material, Editor.default_material, Editor.default_sprite_material);
+				Editor.updateObjectViews();
 			}
 		});
 

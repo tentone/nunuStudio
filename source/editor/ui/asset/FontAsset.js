@@ -27,13 +27,10 @@ function FontAsset(parent)
 		
 		context.addOption("Delete", function()
 		{
-			if(self.font !== null)
+			if(self.font !== null && confirm("Delete font?"))
 			{
-				if(confirm("Delete font?"))
-				{
-					self.font.dispose();
-					//TODO <ADD CODE HERE>
-				}
+				Editor.program.removeMaterial(self.font, Editor.default_font);
+				Editor.updateObjectViews();
 			}
 		});
 
