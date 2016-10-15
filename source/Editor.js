@@ -4,8 +4,8 @@ function Editor(){}
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.2 Alpha";
-Editor.TIMESTAMP = "201610132357";
+Editor.VERSION = "V0.8.9.3 Alpha";
+Editor.TIMESTAMP = "201610150223";
 
 //Node modules
 try
@@ -177,6 +177,8 @@ include("editor/ui/AssetExplorer.js");
 include("editor/ui/asset/Asset.js");
 include("editor/ui/asset/MaterialAsset.js");
 include("editor/ui/asset/TextureAsset.js");
+include("editor/ui/asset/FontAsset.js");
+include("editor/ui/asset/AudioAsset.js");
 
 include("editor/files/style/editor.css");
 include("editor/ui/theme/Theme.js");
@@ -1038,6 +1040,24 @@ Editor.updateAssetExplorer = function()
 	{
 		var file = new TextureAsset(Interface.asset_explorer.element);
 		file.setTexture(textures[i]);
+		Interface.asset_explorer.add(file);
+	}
+
+	//Fonts
+	var fonts = ObjectUtils.getFonts(Editor.program, Editor.program.fonts);
+	for(var i in fonts)
+	{
+		var file = new FontAsset(Interface.asset_explorer.element);
+		file.setFont(fonts[i]);
+		Interface.asset_explorer.add(file);
+	}
+
+	//Audio
+	var audio = ObjectUtils.getAudio(Editor.program, Editor.program.audio);
+	for(var i in audio)
+	{
+		var file = new AudioAsset(Interface.asset_explorer.element);
+		file.setAudio(audio[i]);
 		Interface.asset_explorer.add(file);
 	}
 

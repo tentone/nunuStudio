@@ -2,13 +2,13 @@
 
 "use strict";
 
-function TransformControls()
+function TransformControls(camera, canvas)
 {
 	THREE.Object3D.call(this);
 
-	var camera = Editor.camera;
-	var element = Editor.canvas;
-
+	var camera = (camera !== undefined) ? camera : Editor.camera;
+	var canvas = (canvas !== undefined) ? canvas : Editor.canvas;
+	
 	this.object = null;
 	this.visible = false;
 	this.space = "world";
@@ -16,7 +16,7 @@ function TransformControls()
 	this.axis = null;
 
 	var self = this;
-	var mode = "translate";
+	var mode = (mode !== undefined) ? mode : "translate";
 	var dragging = false;
 	var editing = false; //Editing object flag
 	var gizmo =
@@ -469,7 +469,7 @@ function TransformControls()
 
 	function intersectObjects(objects)
 	{
-		var rect = element.getBoundingClientRect();
+		var rect = canvas.getBoundingClientRect();
 		var x = Mouse.position.x / rect.width;
 		var y = Mouse.position.y / rect.height;
 

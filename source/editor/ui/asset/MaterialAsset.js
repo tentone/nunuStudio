@@ -4,7 +4,6 @@ function MaterialAsset(parent)
 {
 	Asset.call(this, parent);
 
-	//Mateiral
 	this.material = null;
 
 	//Self pointer
@@ -215,9 +214,8 @@ MaterialAsset.prototype.setMaterial = function(material)
 {
 	if(material instanceof THREE.Material)
 	{
-		Editor.material_renderer.renderMaterial(material, this.image);
-		this.setText(material.name);
 		this.material = material;
+		this.updateMetadata();
 	}
 }
 
