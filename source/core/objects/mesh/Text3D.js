@@ -25,6 +25,13 @@ function Text3D(text, material, font, height, bevel, bevel_thickness, bevel_size
 
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
 
+//Set font
+Text3D.prototype.setFont = function(font)
+{
+	this.font = font;
+	this.setText();
+}
+
 //Set Text
 Text3D.prototype.setText = function(text)
 {
