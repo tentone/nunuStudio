@@ -4,7 +4,6 @@ function TextureAsset(parent)
 {
 	Asset.call(this, parent);
 
-	//Material pointer
 	this.texture = null;
 
 	//Self pointer
@@ -33,7 +32,8 @@ function TextureAsset(parent)
 				if(confirm("Delete texture?"))
 				{
 					self.texture.dispose();
-					//TODO <ADD CODE HERE>
+					Editor.program.removeTexture(self.texture, Editor.default_texture);
+					Editor.updateObjectViews();
 				}
 			}
 		});
@@ -42,14 +42,11 @@ function TextureAsset(parent)
 		{
 			if(self.texture !== null)
 			{
-				if(self.texture instanceof THREE.Texture)
+				try
 				{
-					try
-					{
-						Editor.clipboard.set(JSON.stringify(self.texture.toJSON()), "text");
-					}
-					catch(e){}
+					Editor.clipboard.set(JSON.stringify(self.texture.toJSON()), "text");
 				}
+				catch(e){}
 			}
 		});
 	};
@@ -63,8 +60,7 @@ TextureAsset.prototype.setTexture = function(texture)
 	if(texture instanceof THREE.Texture)
 	{
 		this.texture = texture;
-		this.image.src = texture.image.src;
-		this.setText(texture.name);
+		this.updateMetadata();
 	}
 }
 

@@ -724,10 +724,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		object.materials = materials;
 		//object.images = images;
 		//object.videos = videos;
-		//object.textures = textures;
+		object.textures = textures;
 		//object.geometries = geometries;
-		//object.fonts = fonts;
-		//object.audio = audio;
+		object.fonts = fonts;
+		object.audio = audio;
 	}
 	else if(data.type === "Scene")
 	{

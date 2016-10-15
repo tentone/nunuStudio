@@ -144,6 +144,16 @@ Program.prototype.addMaterial = function(material)
 //Remove material from materials list (also receives default used to replace)
 Program.prototype.removeMaterial = function(material, default_material, default_material_sprite)
 {
+	if(default_material === undefined)
+	{
+		default_material = new THREE.MeshBasicMaterial();
+	}
+
+	if(default_material_sprite === undefined)
+	{
+		default_material_sprite = new THREE.SpriteMaterial();
+	}
+
 	if(material instanceof THREE.Material)
 	{
 		delete this.materials[material.uuid];
@@ -186,6 +196,46 @@ Program.prototype.getTextureByName = function(name)
 Program.prototype.addTexture = function(texture)
 {
  	this.textures[texture.uuid] = texture;
+}
+
+//Remove texture from textures list (also receives default used to replace)
+Program.prototype.removeTexture = function(texture, default_texture)
+{
+	if(default_texture === undefined)
+	{
+		default_texture = new THREE.Texture();
+	}
+
+	if(texture instanceof THREE.Texture)
+	{
+		delete this.textures[texture.uuid];
+		
+		this.traverse(function(child)
+		{
+			if(child.material !== undefined)
+			{
+				//TODO <ADD CODE HERE>
+			}
+		});
+	}
+}
+
+//Add font to fonts list
+Program.prototype.addFont = function(font)
+{
+	if(font instanceof Font)
+	{
+ 		this.fonts[font.uuid] = font;
+ 	}
+}
+
+//Add audio to audio list
+Program.prototype.addAudio = function(audio)
+{
+	if(audio instanceof Audio)
+	{
+ 		this.audio[audio.uuid] = audio;
+ 	}
 }
 
 //Set actual scene (to be used in runtime)
@@ -317,67 +367,85 @@ Program.prototype.dispose = function()
 }
 
 //Create JSON for object
-Program.prototype.toJSON = function(meta)
+Program.prototype.toJSON = function(meta, export_resources)
 {
 	var self = this;
 
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
-		//Fonts
-		/*var fonts = self.fonts;
-		for(var i in fonts)
+		if(export_resources !== false)
 		{
-			fonts[i].toJSON(meta);
-		}
-
-		//Videos
-		var videos = self.videos;
-		for(var i in videos)
-		{
-			videos[i].toJSON(meta);
-		}
-
-		//Audio
-		var audio = self.audio;
-		for(var i in audio)
-		{
-			audio[i].toJSON(meta);
-		}
-
-		//Images
-		var images = self.images;
-		for(var i in images)
-		{
-			images[i].toJSON(meta);
-		}
-
-		//Textures
-		var textures = self.textures;
-		for(var i in textures)
-		{
-			textures[i].toJSON(meta);
-		}
-
-		//Geometries
-		var geometries = self.geometries;
-		for(var i in geometries)
-		{
-			var geometry = geometries[i];
-			if(meta.geometries[geometry.uuid] === undefined)
+			//Textures
+			var textures = self.textures;
+			for(var i in textures)
 			{
-				meta.geometries[geometry.uuid] = geometry.toJSON(meta);
+				var texture = textures[i];
+				if(meta.textures[texture.uuid] === undefined)
+				{
+					meta.textures[texture.uuid] = texture.toJSON(meta);
+				}
 			}
-		}*/
 
-		//Materials
-		var materials = self.materials;
-		for(var i in materials)
-		{
-			var material = materials[i];
-			if(meta.materials[material.uuid] === undefined)
+			//Materials
+			var materials = self.materials;
+			for(var i in materials)
 			{
-				meta.materials[material.uuid] = material.toJSON(meta);
+				var material = materials[i];
+				if(meta.materials[material.uuid] === undefined)
+				{
+					meta.materials[material.uuid] = material.toJSON(meta);
+				}
 			}
+
+			//Fonts
+			var fonts = self.fonts;
+			for(var i in fonts)
+			{
+				var font = fonts[i];
+				if(meta.fonts[font.uuid] === undefined)
+				{
+					meta.fonts[font.uuid] = font.toJSON(meta);
+				}
+			}
+
+			//Audio
+			var audio = self.audio;
+			for(var i in audio)
+			{
+				var aud = audio[i];
+				if(meta.audio[aud.uuid] === undefined)
+				{
+					console.log(aud);
+					meta.audio[aud.uuid] = aud.toJSON(meta);
+				}
+			}
+
+			/*
+			//Videos
+			var videos = self.videos;
+			for(var i in videos)
+			{
+				videos[i].toJSON(meta);
+			}
+
+			//Images
+			var images = self.images;
+			for(var i in images)
+			{
+				images[i].toJSON(meta);
+			}
+
+			//Geometries
+			var geometries = self.geometries;
+			for(var i in geometries)
+			{
+				var geometry = geometries[i];
+				if(meta.geometries[geometry.uuid] === undefined)
+				{
+					meta.geometries[geometry.uuid] = geometry.toJSON(meta);
+				}
+			}
+			*/
 		}
 	});
 
