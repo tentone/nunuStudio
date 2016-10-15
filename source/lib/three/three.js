@@ -606,6 +606,8 @@
 				default: throw new Error( 'index is out of range: ' + index );
 
 			}
+			
+			return this;
 
 		},
 
@@ -1372,6 +1374,8 @@
 				default: throw new Error( 'index is out of range: ' + index );
 
 			}
+			
+			return this;
 
 		},
 
@@ -2679,6 +2683,8 @@
 				default: throw new Error( 'index is out of range: ' + index );
 
 			}
+			
+			return this;
 
 		},
 
@@ -4956,7 +4962,7 @@
 
 	var bumpmap_pars_fragment = "#ifdef USE_BUMPMAP\n\tuniform sampler2D bumpMap;\n\tuniform float bumpScale;\n\tvec2 dHdxy_fwd() {\n\t\tvec2 dSTdx = dFdx( vUv );\n\t\tvec2 dSTdy = dFdy( vUv );\n\t\tfloat Hll = bumpScale * texture2D( bumpMap, vUv ).x;\n\t\tfloat dBx = bumpScale * texture2D( bumpMap, vUv + dSTdx ).x - Hll;\n\t\tfloat dBy = bumpScale * texture2D( bumpMap, vUv + dSTdy ).x - Hll;\n\t\treturn vec2( dBx, dBy );\n\t}\n\tvec3 perturbNormalArb( vec3 surf_pos, vec3 surf_norm, vec2 dHdxy ) {\n\t\tvec3 vSigmaX = dFdx( surf_pos );\n\t\tvec3 vSigmaY = dFdy( surf_pos );\n\t\tvec3 vN = surf_norm;\n\t\tvec3 R1 = cross( vSigmaY, vN );\n\t\tvec3 R2 = cross( vN, vSigmaX );\n\t\tfloat fDet = dot( vSigmaX, R1 );\n\t\tvec3 vGrad = sign( fDet ) * ( dHdxy.x * R1 + dHdxy.y * R2 );\n\t\treturn normalize( abs( fDet ) * surf_norm - vGrad );\n\t}\n#endif\n";
 
-	var clipping_planes_fragment = "#if NUM_CLIPPING_PLANES > 0\n\tfor ( int i = 0; i < NUM_CLIPPING_PLANES; ++ i ) {\n\t\tvec4 plane = clippingPlanes[ i ];\n\t\tif ( dot( vViewPosition, plane.xyz ) > plane.w ) discard;\n\t}\n#endif\n";
+	var clipping_planes_fragment = "#if NUM_CLIPPING_PLANES > 0\n\tfor ( int i = 0; i < UNION_CLIPPING_PLANES; ++ i ) {\n\t\tvec4 plane = clippingPlanes[ i ];\n\t\tif ( dot( vViewPosition, plane.xyz ) > plane.w ) discard;\n\t}\n\t\t\n\t#if UNION_CLIPPING_PLANES < NUM_CLIPPING_PLANES\n\t\tbool clipped = true;\n\t\tfor ( int i = UNION_CLIPPING_PLANES; i < NUM_CLIPPING_PLANES; ++ i ) {\n\t\t\tvec4 plane = clippingPlanes[ i ];\n\t\t\tclipped = ( dot( vViewPosition, plane.xyz ) > plane.w ) && clipped;\n\t\t}\n\t\tif ( clipped ) discard;\n\t\n\t#endif\n#endif\n";
 
 	var clipping_planes_pars_fragment = "#if NUM_CLIPPING_PLANES > 0\n\t#if ! defined( PHYSICAL ) && ! defined( PHONG )\n\t\tvarying vec3 vViewPosition;\n\t#endif\n\tuniform vec4 clippingPlanes[ NUM_CLIPPING_PLANES ];\n#endif\n";
 
@@ -7194,6 +7200,7 @@
 		this.depthWrite = true;
 
 		this.clippingPlanes = null;
+		this.clipIntersection = false;
 		this.clipShadows = false;
 
 		this.colorWrite = true;
@@ -7457,6 +7464,7 @@
 
 			this.visible = source.visible;
 			this.clipShadows = source.clipShadows;
+			this.clipIntersection = source.clipIntersection;
 
 			var srcPlanes = source.clippingPlanes,
 				dstPlanes = null;
@@ -12538,6 +12546,8 @@
 
 			} else {
 
+				this.computeFaceNormals();
+
 				for ( f = 0, fl = this.faces.length; f < fl; f ++ ) {
 
 					face = this.faces[ f ];
@@ -12573,6 +12583,42 @@
 					vertexNormals[ 0 ] = vertices[ face.a ].clone();
 					vertexNormals[ 1 ] = vertices[ face.b ].clone();
 					vertexNormals[ 2 ] = vertices[ face.c ].clone();
+
+				}
+
+			}
+
+			if ( this.faces.length > 0 ) {
+
+				this.normalsNeedUpdate = true;
+
+			}
+
+		},
+
+		computeFlatVertexNormals: function () {
+
+			var f, fl, face;
+
+			this.computeFaceNormals();
+
+			for ( f = 0, fl = this.faces.length; f < fl; f ++ ) {
+
+				face = this.faces[ f ];
+
+				var vertexNormals = face.vertexNormals;
+
+				if ( vertexNormals.length === 3 ) {
+
+					vertexNormals[ 0 ].copy( face.normal );
+					vertexNormals[ 1 ].copy( face.normal );
+					vertexNormals[ 2 ].copy( face.normal );
+
+				} else {
+
+					vertexNormals[ 0 ] = face.normal.clone();
+					vertexNormals[ 1 ] = face.normal.clone();
+					vertexNormals[ 2 ] = face.normal.clone();
 
 				}
 
@@ -16400,6 +16446,7 @@
 				parameters.flipSided ? '#define FLIP_SIDED' : '',
 
 				'#define NUM_CLIPPING_PLANES ' + parameters.numClippingPlanes,
+				'#define UNION_CLIPPING_PLANES ' + (parameters.numClippingPlanes - parameters.numClipIntersection),
 
 				parameters.shadowMapEnabled ? '#define USE_SHADOWMAP' : '',
 				parameters.shadowMapEnabled ? '#define ' + shadowMapTypeDefine : '',
@@ -16639,7 +16686,7 @@
 			"maxMorphTargets", "maxMorphNormals", "premultipliedAlpha",
 			"numDirLights", "numPointLights", "numSpotLights", "numHemiLights",
 			"shadowMapEnabled", "shadowMapType", "toneMapping", 'physicallyCorrectLights',
-			"alphaTest", "doubleSided", "flipSided", "numClippingPlanes", "depthPacking"
+			"alphaTest", "doubleSided", "flipSided", "numClippingPlanes", "numClipIntersection", "depthPacking"
 		];
 
 
@@ -16711,7 +16758,7 @@
 
 		}
 
-		this.getParameters = function ( material, lights, fog, nClipPlanes, object ) {
+		this.getParameters = function ( material, lights, fog, nClipPlanes, nClipIntersection, object ) {
 
 			var shaderID = shaderIDs[ material.type ];
 
@@ -16788,6 +16835,7 @@
 				numHemiLights: lights.hemi.length,
 
 				numClippingPlanes: nClipPlanes,
+				numClipIntersection: nClipIntersection,
 
 				shadowMapEnabled: renderer.shadowMap.enabled && object.receiveShadow && lights.shadows.length > 0,
 				shadowMapType: renderer.shadowMap.type,
@@ -18537,8 +18585,6 @@
 			} else {
 
 				disable( gl.BLEND );
-				currentBlending = blending; // no blending, that is
-				return;
 
 			}
 
@@ -19201,6 +19247,7 @@
 
 		this.uniform = uniform;
 		this.numPlanes = 0;
+		this.numIntersection = 0;
 
 		this.init = function( planes, enableLocalClipping, camera ) {
 
@@ -19235,7 +19282,7 @@
 
 		};
 
-		this.setState = function( planes, clipShadows, camera, cache, fromCache ) {
+		this.setState = function( planes, clipIntersection, clipShadows, camera, cache, fromCache ) {
 
 			if ( ! localClippingEnabled ||
 					planes === null || planes.length === 0 ||
@@ -19270,6 +19317,7 @@
 				}
 
 				cache.clippingState = dstArray;
+				this.numIntersection = clipIntersection ? this.numPlanes : 0;
 				this.numPlanes += nGlobal;
 
 			}
@@ -19287,6 +19335,7 @@
 			}
 
 			scope.numPlanes = numGlobalPlanes;
+			scope.numIntersection = 0;
 
 		}
 
@@ -19331,6 +19380,7 @@
 			}
 
 			scope.numPlanes = nPlanes;
+			
 			return dstArray;
 
 		}
@@ -20292,7 +20342,7 @@
 						var size = geometryAttribute.itemSize;
 						var buffer = objects.getAttributeBuffer( geometryAttribute );
 
-						if ( geometryAttribute && geometryAttribute.isInterleavedBufferAttribute ) {
+						if ( geometryAttribute.isInterleavedBufferAttribute ) {
 
 							var data = geometryAttribute.data;
 							var stride = data.stride;
@@ -20319,7 +20369,7 @@
 
 						} else {
 
-							if ( geometryAttribute && geometryAttribute.isInstancedBufferAttribute ) {
+							if ( geometryAttribute.isInstancedBufferAttribute ) {
 
 								state.enableAttributeAndDivisor( programAttribute, geometryAttribute.meshPerAttribute, extension );
 
@@ -20847,7 +20897,7 @@
 			var materialProperties = properties.get( material );
 
 			var parameters = programCache.getParameters(
-					material, _lights, fog, _clipping.numPlanes, object );
+					material, _lights, fog, _clipping.numPlanes, _clipping.numIntersection, object );
 
 			var code = programCache.getProgramCode( material, parameters );
 
@@ -20950,6 +21000,7 @@
 			       material.clipping === true ) {
 
 				materialProperties.numClippingPlanes = _clipping.numPlanes;
+				materialProperties.numIntersection = _clipping.numIntersection;
 				uniforms.clippingPlanes = _clipping.uniform;
 
 			}
@@ -21025,7 +21076,7 @@
 					// object instead of the material, once it becomes feasible
 					// (#8465, #8379)
 					_clipping.setState(
-							material.clippingPlanes, material.clipShadows,
+							material.clippingPlanes, material.clipIntersection, material.clipShadows,
 							camera, materialProperties, useCache );
 
 				}
@@ -21047,7 +21098,8 @@
 					material.needsUpdate = true;
 
 				} else if ( materialProperties.numClippingPlanes !== undefined &&
-					materialProperties.numClippingPlanes !== _clipping.numPlanes ) {
+					( materialProperties.numClippingPlanes !== _clipping.numPlanes || 
+	 				  materialProperties.numIntersection  !== _clipping.numIntersection ) ) {
 
 					material.needsUpdate = true;
 
@@ -24484,20 +24536,189 @@
 	PolyhedronGeometry.prototype.constructor = PolyhedronGeometry;
 
 	/**
+	 * @author Mugen87 / https://github.com/Mugen87
+	 *
+	 * Creates a tube which extrudes along a 3d spline.
+	 *
+	 */
+
+	function TubeBufferGeometry( path, tubularSegments, radius, radialSegments, closed ) {
+
+		BufferGeometry.call( this );
+
+		this.type = 'TubeBufferGeometry';
+
+		this.parameters = {
+			path: path,
+			tubularSegments: tubularSegments,
+			radius: radius,
+			radialSegments: radialSegments,
+			closed: closed
+		};
+
+		tubularSegments = tubularSegments || 64;
+		radius = radius || 1;
+		radialSegments = radialSegments || 8;
+		closed = closed || false;
+
+		var frames = path.computeFrenetFrames( tubularSegments, closed );
+
+		// expose internals
+
+		this.tangents = frames.tangents;
+		this.normals = frames.normals;
+		this.binormals = frames.binormals;
+
+		// helper variables
+
+		var vertex = new Vector3();
+		var normal = new Vector3();
+		var uv = new Vector2();
+
+		var i, j;
+
+		// buffer
+
+		var vertices = [];
+		var normals = [];
+		var uvs = [];
+		var indices = [];
+
+		// create buffer data
+
+		generateBufferData();
+
+		// build geometry
+
+		this.setIndex( ( indices.length > 65535 ? Uint32Attribute : Uint16Attribute )( indices, 1 ) );
+		this.addAttribute( 'position', Float32Attribute( vertices, 3 ) );
+		this.addAttribute( 'normal', Float32Attribute( normals, 3 ) );
+		this.addAttribute( 'uv', Float32Attribute( uvs, 2 ) );
+
+		// functions
+
+		function generateBufferData() {
+
+			for ( i = 0; i < tubularSegments; i ++ ) {
+
+				generateSegment( i );
+
+			}
+
+			// if the geometry is not closed, generate the last row of vertices and normals
+			// at the regular position on the given path
+			//
+			// if the geometry is closed, duplicate the first row of vertices and normals (uvs will differ)
+
+			generateSegment( ( closed === false ) ? tubularSegments : 0 );
+
+			// uvs are generated in a separate function.
+			// this makes it easy compute correct values for closed geometries
+
+			generateUVs();
+
+			// finally create faces
+
+			generateIndices();
+
+		}
+
+		function generateSegment( i ) {
+
+			// we use getPointAt to sample evenly distributed points from the given path
+
+			var P = path.getPointAt( i / tubularSegments );
+
+			// retrieve corresponding normal and binormal
+
+			var N = frames.normals[ i ];
+			var B = frames.binormals[ i ];
+
+			// generate normals and vertices for the current segment
+
+			for ( j = 0; j <= radialSegments; j ++ ) {
+
+				var v = j / radialSegments * Math.PI * 2;
+
+				var sin =   Math.sin( v );
+				var cos = - Math.cos( v );
+
+				// normal
+
+				normal.x = ( cos * N.x + sin * B.x );
+				normal.y = ( cos * N.y + sin * B.y );
+				normal.z = ( cos * N.z + sin * B.z );
+				normal.normalize();
+
+				normals.push( normal.x, normal.y, normal.z );
+
+				// vertex
+
+				vertex.x = P.x + radius * normal.x;
+				vertex.y = P.y + radius * normal.y;
+				vertex.z = P.z + radius * normal.z;
+
+				vertices.push( vertex.x, vertex.y, vertex.z );
+
+			}
+
+		}
+
+		function generateIndices() {
+
+			for ( j = 1; j <= tubularSegments; j ++ ) {
+
+				for ( i = 1; i <= radialSegments; i ++ ) {
+
+					var a = ( radialSegments + 1 ) * ( j - 1 ) + ( i - 1 );
+					var b = ( radialSegments + 1 ) * j + ( i - 1 );
+					var c = ( radialSegments + 1 ) * j + i;
+					var d = ( radialSegments + 1 ) * ( j - 1 ) + i;
+
+					// faces
+
+					indices.push( a, b, d );
+					indices.push( b, c, d );
+
+				}
+
+			}
+
+		}
+
+		function generateUVs() {
+
+			for ( i = 0; i <= tubularSegments; i ++ ) {
+
+				for ( j = 0; j <= radialSegments; j ++ ) {
+
+					uv.x = i / tubularSegments;
+					uv.y = j / radialSegments;
+
+					uvs.push( uv.x, uv.y );
+
+				}
+
+			}
+
+		}
+
+	}
+
+	TubeBufferGeometry.prototype = Object.create( BufferGeometry.prototype );
+	TubeBufferGeometry.prototype.constructor = TubeBufferGeometry;
+
+	/**
+	 * @author oosmoxiecode / https://github.com/oosmoxiecode
 	 * @author WestLangley / https://github.com/WestLangley
 	 * @author zz85 / https://github.com/zz85
 	 * @author miningold / https://github.com/miningold
 	 * @author jonobr1 / https://github.com/jonobr1
 	 *
-	 * Modified from the TorusKnotGeometry by @oosmoxiecode
-	 *
-	 * Creates a tube which extrudes along a 3d spline
-	 *
-	 * Uses parallel transport frames as described in
-	 * http://www.cs.indiana.edu/pub/techreports/TR425.pdf
+	 * Creates a tube which extrudes along a 3d spline.
 	 */
 
-	function TubeGeometry( path, segments, radius, radialSegments, closed, taper ) {
+	function TubeGeometry( path, tubularSegments, radius, radialSegments, closed, taper ) {
 
 		Geometry.call( this );
 
@@ -24505,289 +24726,31 @@
 
 		this.parameters = {
 			path: path,
-			segments: segments,
+			tubularSegments: tubularSegments,
 			radius: radius,
 			radialSegments: radialSegments,
-			closed: closed,
-			taper: taper
+			closed: closed
 		};
 
-		segments = segments || 64;
-		radius = radius || 1;
-		radialSegments = radialSegments || 8;
-		closed = closed || false;
-		taper = taper || TubeGeometry.NoTaper;
+		if ( taper !== undefined ) console.warn( 'THREE.TubeGeometry: taper has been removed.' );
 
-		var grid = [];
+		var bufferGeometry = new TubeBufferGeometry( path, tubularSegments, radius, radialSegments, closed );
 
-		var scope = this,
+		// expose internals
 
-			tangent,
-			normal,
-			binormal,
+		this.tangents = bufferGeometry.tangents;
+		this.normals = bufferGeometry.normals;
+		this.binormals = bufferGeometry.binormals;
 
-			numpoints = segments + 1,
+		// create geometry
 
-			u, v, r,
-
-			cx, cy,
-			pos, pos2 = new Vector3(),
-			i, j,
-			ip, jp,
-			a, b, c, d,
-			uva, uvb, uvc, uvd;
-
-		var frames = new TubeGeometry.FrenetFrames( path, segments, closed ),
-			tangents = frames.tangents,
-			normals = frames.normals,
-			binormals = frames.binormals;
-
-		// proxy internals
-		this.tangents = tangents;
-		this.normals = normals;
-		this.binormals = binormals;
-
-		function vert( x, y, z ) {
-
-			return scope.vertices.push( new Vector3( x, y, z ) ) - 1;
-
-		}
-
-		// construct the grid
-
-		for ( i = 0; i < numpoints; i ++ ) {
-
-			grid[ i ] = [];
-
-			u = i / ( numpoints - 1 );
-
-			pos = path.getPointAt( u );
-
-			tangent = tangents[ i ];
-			normal = normals[ i ];
-			binormal = binormals[ i ];
-
-			r = radius * taper( u );
-
-			for ( j = 0; j < radialSegments; j ++ ) {
-
-				v = j / radialSegments * 2 * Math.PI;
-
-				cx = - r * Math.cos( v ); // TODO: Hack: Negating it so it faces outside.
-				cy = r * Math.sin( v );
-
-				pos2.copy( pos );
-				pos2.x += cx * normal.x + cy * binormal.x;
-				pos2.y += cx * normal.y + cy * binormal.y;
-				pos2.z += cx * normal.z + cy * binormal.z;
-
-				grid[ i ][ j ] = vert( pos2.x, pos2.y, pos2.z );
-
-			}
-
-		}
-
-
-		// construct the mesh
-
-		for ( i = 0; i < segments; i ++ ) {
-
-			for ( j = 0; j < radialSegments; j ++ ) {
-
-				ip = ( closed ) ? ( i + 1 ) % segments : i + 1;
-				jp = ( j + 1 ) % radialSegments;
-
-				a = grid[ i ][ j ];		// *** NOT NECESSARILY PLANAR ! ***
-				b = grid[ ip ][ j ];
-				c = grid[ ip ][ jp ];
-				d = grid[ i ][ jp ];
-
-				uva = new Vector2( i / segments, j / radialSegments );
-				uvb = new Vector2( ( i + 1 ) / segments, j / radialSegments );
-				uvc = new Vector2( ( i + 1 ) / segments, ( j + 1 ) / radialSegments );
-				uvd = new Vector2( i / segments, ( j + 1 ) / radialSegments );
-
-				this.faces.push( new Face3( a, b, d ) );
-				this.faceVertexUvs[ 0 ].push( [ uva, uvb, uvd ] );
-
-				this.faces.push( new Face3( b, c, d ) );
-				this.faceVertexUvs[ 0 ].push( [ uvb.clone(), uvc, uvd.clone() ] );
-
-			}
-
-		}
-
-		this.computeFaceNormals();
-		this.computeVertexNormals();
+		this.fromBufferGeometry( bufferGeometry );
+		this.mergeVertices();
 
 	}
 
 	TubeGeometry.prototype = Object.create( Geometry.prototype );
 	TubeGeometry.prototype.constructor = TubeGeometry;
-
-	TubeGeometry.NoTaper = function ( u ) {
-
-		return 1;
-
-	};
-
-	TubeGeometry.SinusoidalTaper = function ( u ) {
-
-		return Math.sin( Math.PI * u );
-
-	};
-
-	// For computing of Frenet frames, exposing the tangents, normals and binormals the spline
-	TubeGeometry.FrenetFrames = function ( path, segments, closed ) {
-
-		var	normal = new Vector3(),
-
-			tangents = [],
-			normals = [],
-			binormals = [],
-
-			vec = new Vector3(),
-			mat = new Matrix4(),
-
-			numpoints = segments + 1,
-			theta,
-			smallest,
-
-			tx, ty, tz,
-			i, u;
-
-
-		// expose internals
-		this.tangents = tangents;
-		this.normals = normals;
-		this.binormals = binormals;
-
-		// compute the tangent vectors for each segment on the path
-
-		for ( i = 0; i < numpoints; i ++ ) {
-
-			u = i / ( numpoints - 1 );
-
-			tangents[ i ] = path.getTangentAt( u );
-			tangents[ i ].normalize();
-
-		}
-
-		initialNormal3();
-
-		/*
-		function initialNormal1(lastBinormal) {
-			// fixed start binormal. Has dangers of 0 vectors
-			normals[ 0 ] = new THREE.Vector3();
-			binormals[ 0 ] = new THREE.Vector3();
-			if (lastBinormal===undefined) lastBinormal = new THREE.Vector3( 0, 0, 1 );
-			normals[ 0 ].crossVectors( lastBinormal, tangents[ 0 ] ).normalize();
-			binormals[ 0 ].crossVectors( tangents[ 0 ], normals[ 0 ] ).normalize();
-		}
-
-		function initialNormal2() {
-
-			// This uses the Frenet-Serret formula for deriving binormal
-			var t2 = path.getTangentAt( epsilon );
-
-			normals[ 0 ] = new THREE.Vector3().subVectors( t2, tangents[ 0 ] ).normalize();
-			binormals[ 0 ] = new THREE.Vector3().crossVectors( tangents[ 0 ], normals[ 0 ] );
-
-			normals[ 0 ].crossVectors( binormals[ 0 ], tangents[ 0 ] ).normalize(); // last binormal x tangent
-			binormals[ 0 ].crossVectors( tangents[ 0 ], normals[ 0 ] ).normalize();
-
-		}
-		*/
-
-		function initialNormal3() {
-
-			// select an initial normal vector perpendicular to the first tangent vector,
-			// and in the direction of the smallest tangent xyz component
-
-			normals[ 0 ] = new Vector3();
-			binormals[ 0 ] = new Vector3();
-			smallest = Number.MAX_VALUE;
-			tx = Math.abs( tangents[ 0 ].x );
-			ty = Math.abs( tangents[ 0 ].y );
-			tz = Math.abs( tangents[ 0 ].z );
-
-			if ( tx <= smallest ) {
-
-				smallest = tx;
-				normal.set( 1, 0, 0 );
-
-			}
-
-			if ( ty <= smallest ) {
-
-				smallest = ty;
-				normal.set( 0, 1, 0 );
-
-			}
-
-			if ( tz <= smallest ) {
-
-				normal.set( 0, 0, 1 );
-
-			}
-
-			vec.crossVectors( tangents[ 0 ], normal ).normalize();
-
-			normals[ 0 ].crossVectors( tangents[ 0 ], vec );
-			binormals[ 0 ].crossVectors( tangents[ 0 ], normals[ 0 ] );
-
-		}
-
-
-		// compute the slowly-varying normal and binormal vectors for each segment on the path
-
-		for ( i = 1; i < numpoints; i ++ ) {
-
-			normals[ i ] = normals[ i - 1 ].clone();
-
-			binormals[ i ] = binormals[ i - 1 ].clone();
-
-			vec.crossVectors( tangents[ i - 1 ], tangents[ i ] );
-
-			if ( vec.length() > Number.EPSILON ) {
-
-				vec.normalize();
-
-				theta = Math.acos( exports.Math.clamp( tangents[ i - 1 ].dot( tangents[ i ] ), - 1, 1 ) ); // clamp for floating pt errors
-
-				normals[ i ].applyMatrix4( mat.makeRotationAxis( vec, theta ) );
-
-			}
-
-			binormals[ i ].crossVectors( tangents[ i ], normals[ i ] );
-
-		}
-
-
-		// if the curve is closed, postprocess the vectors so the first and last normal vectors are the same
-
-		if ( closed ) {
-
-			theta = Math.acos( exports.Math.clamp( normals[ 0 ].dot( normals[ numpoints - 1 ] ), - 1, 1 ) );
-			theta /= ( numpoints - 1 );
-
-			if ( tangents[ 0 ].dot( vec.crossVectors( normals[ 0 ], normals[ numpoints - 1 ] ) ) > 0 ) {
-
-				theta = - theta;
-
-			}
-
-			for ( i = 1; i < numpoints; i ++ ) {
-
-				// twist a little...
-				normals[ i ].applyMatrix4( mat.makeRotationAxis( tangents[ i ], theta * i ) );
-				binormals[ i ].crossVectors( tangents[ i ], normals[ i ] );
-
-			}
-
-		}
-
-	};
 
 	/**
 	 * @author Mugen87 / https://github.com/Mugen87
@@ -25191,7 +25154,7 @@
 				cx = contour[ verts[ w ] ].x;
 				cy = contour[ verts[ w ] ].y;
 
-				if ( Number.EPSILON > ( ( ( bx - ax ) * ( cy - ay ) ) - ( ( by - ay ) * ( cx - ax ) ) ) ) return false;
+				if ( ( bx - ax ) * ( cy - ay ) - ( by - ay ) * ( cx - ax ) <= 0 ) return false;
 
 				var aX, aY, bX, bY, cX, cY;
 				var apx, apy, bpx, bpy, cpx, cpy;
@@ -25920,7 +25883,7 @@
 	 *  bevelSegments: <int>, // number of bevel layers
 	 *
 	 *  extrudePath: <THREE.CurvePath> // 3d spline path to extrude shape along. (creates Frames if .frames aren't defined)
-	 *  frames: <THREE.TubeGeometry.FrenetFrames> // containing arrays of tangents, normals, binormals
+	 *  frames: <Object> // containing arrays of tangents, normals, binormals
 	 *
 	 *  uvGenerator: <Object> // object that provides UV generator functions
 	 *
@@ -26002,10 +25965,9 @@
 
 			// SETUP TNB variables
 
-			// Reuse TNB from TubeGeomtry for now.
 			// TODO1 - have a .isClosed in spline?
 
-			splineTube = options.frames !== undefined ? options.frames : new TubeGeometry.FrenetFrames( extrudePath, steps, false );
+			splineTube = options.frames !== undefined ? options.frames : extrudePath.computeFrenetFrames( steps, false );
 
 			// console.log(splineTube, 'splineTube', splineTube.normals.length, 'steps', steps, 'extrudePts', extrudePts.length);
 
@@ -27921,6 +27883,7 @@
 		PolyhedronGeometry: PolyhedronGeometry,
 		PolyhedronBufferGeometry: PolyhedronBufferGeometry,
 		TubeGeometry: TubeGeometry,
+		TubeBufferGeometry: TubeBufferGeometry,
 		TorusKnotGeometry: TorusKnotGeometry,
 		TorusKnotBufferGeometry: TorusKnotBufferGeometry,
 		TorusGeometry: TorusGeometry,
@@ -33641,6 +33604,123 @@
 			var t = this.getUtoTmapping( u );
 			return this.getTangent( t );
 
+		},
+
+		computeFrenetFrames: function ( segments, closed ) {
+
+			// see http://www.cs.indiana.edu/pub/techreports/TR425.pdf
+
+			var normal = new Vector3();
+
+			var tangents = [];
+			var normals = [];
+			var binormals = [];
+
+			var vec = new Vector3();
+			var mat = new Matrix4();
+
+			var i, u, theta;
+
+			// compute the tangent vectors for each segment on the curve
+
+			for ( i = 0; i <= segments; i ++ ) {
+
+				u = i / segments;
+
+				tangents[ i ] = this.getTangentAt( u );
+				tangents[ i ].normalize();
+
+			}
+
+			// select an initial normal vector perpendicular to the first tangent vector,
+			// and in the direction of the minimum tangent xyz component
+
+			normals[ 0 ] = new Vector3();
+			binormals[ 0 ] = new Vector3();
+			var min = Number.MAX_VALUE;
+			var tx = Math.abs( tangents[ 0 ].x );
+			var ty = Math.abs( tangents[ 0 ].y );
+			var tz = Math.abs( tangents[ 0 ].z );
+
+			if ( tx <= min ) {
+
+				min = tx;
+				normal.set( 1, 0, 0 );
+
+			}
+
+			if ( ty <= min ) {
+
+				min = ty;
+				normal.set( 0, 1, 0 );
+
+			}
+
+			if ( tz <= min ) {
+
+				normal.set( 0, 0, 1 );
+
+			}
+
+			vec.crossVectors( tangents[ 0 ], normal ).normalize();
+
+			normals[ 0 ].crossVectors( tangents[ 0 ], vec );
+			binormals[ 0 ].crossVectors( tangents[ 0 ], normals[ 0 ] );
+
+
+			// compute the slowly-varying normal and binormal vectors for each segment on the curve
+
+			for ( i = 1; i <= segments; i ++ ) {
+
+				normals[ i ] = normals[ i - 1 ].clone();
+
+				binormals[ i ] = binormals[ i - 1 ].clone();
+
+				vec.crossVectors( tangents[ i - 1 ], tangents[ i ] );
+
+				if ( vec.length() > Number.EPSILON ) {
+
+					vec.normalize();
+
+					theta = Math.acos( exports.Math.clamp( tangents[ i - 1 ].dot( tangents[ i ] ), - 1, 1 ) ); // clamp for floating pt errors
+
+					normals[ i ].applyMatrix4( mat.makeRotationAxis( vec, theta ) );
+
+				}
+
+				binormals[ i ].crossVectors( tangents[ i ], normals[ i ] );
+
+			}
+
+			// if the curve is closed, postprocess the vectors so the first and last normal vectors are the same
+
+			if ( closed === true ) {
+
+				theta = Math.acos( exports.Math.clamp( normals[ 0 ].dot( normals[ segments ] ), - 1, 1 ) );
+				theta /= segments;
+
+				if ( tangents[ 0 ].dot( vec.crossVectors( normals[ 0 ], normals[ segments ] ) ) > 0 ) {
+
+					theta = - theta;
+
+				}
+
+				for ( i = 1; i <= segments; i ++ ) {
+
+					// twist a little...
+					normals[ i ].applyMatrix4( mat.makeRotationAxis( tangents[ i ], theta * i ) );
+					binormals[ i ].crossVectors( tangents[ i ], normals[ i ] );
+
+				}
+
+			}
+
+			return {
+				tangents: tangents,
+				normals: normals,
+				binormals: binormals
+			};
+
 		}
 
 	};
@@ -38253,13 +38333,13 @@
 
 	InstancedBufferGeometry.prototype.isInstancedBufferGeometry = true;
 
-	InstancedBufferGeometry.prototype.addGroup = function ( start, count, instances ) {
+	InstancedBufferGeometry.prototype.addGroup = function ( start, count, materialIndex ) {
 
 		this.groups.push( {
 
 			start: start,
 			count: count,
-			instances: instances
+			materialIndex: materialIndex
 
 		} );
 
@@ -38289,7 +38369,7 @@
 		for ( var i = 0, l = groups.length; i < l; i ++ ) {
 
 			var group = groups[ i ];
-			this.addGroup( group.start, group.count, group.instances );
+			this.addGroup( group.start, group.count, group.materialIndex );
 
 		}
 
@@ -41875,6 +41955,7 @@
 	exports.PolyhedronGeometry = PolyhedronGeometry;
 	exports.PolyhedronBufferGeometry = PolyhedronBufferGeometry;
 	exports.TubeGeometry = TubeGeometry;
+	exports.TubeBufferGeometry = TubeBufferGeometry;
 	exports.TorusKnotGeometry = TorusKnotGeometry;
 	exports.TorusKnotBufferGeometry = TorusKnotBufferGeometry;
 	exports.TorusGeometry = TorusGeometry;
