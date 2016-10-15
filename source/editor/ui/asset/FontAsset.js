@@ -46,6 +46,28 @@ function FontAsset(parent)
 			}
 		});
 	};
+
+	//Drag start
+	this.element.ondragstart = function(event)
+	{
+		//Insert into drag buffer
+		if(self.font !== null)
+		{
+			event.dataTransfer.setData("uuid", self.font.uuid);
+			DragBuffer.pushDragElement(self.font);
+		}
+
+		//To avoid camera movement
+		Mouse.updateKey(Mouse.LEFT, Key.KEY_UP);
+	};
+
+	//Drag end (called after of ondrop)
+	this.element.ondragend = function(event)
+	{
+		//Try to remove font from drag buffer
+		var uuid = event.dataTransfer.getData("uuid");
+		var obj = DragBuffer.popDragElement(uuid);
+	};
 }
 
 FontAsset.prototype = Object.create(Asset.prototype);

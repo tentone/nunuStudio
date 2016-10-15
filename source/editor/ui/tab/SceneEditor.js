@@ -118,7 +118,7 @@ function SceneEditor(parent)
 			else if(intersections.length > 0 && dragged_object !== null)
 			{
 				var object = intersections[0].object;
-				
+
 				if(dragged_object instanceof THREE.SpriteMaterial)
 				{
 					if(object instanceof THREE.Sprite)
@@ -132,6 +132,14 @@ function SceneEditor(parent)
 					if(object instanceof THREE.Mesh)
 					{
 						object.material = dragged_object;
+						Editor.updateObjectViews();
+					}
+				}
+				else if(dragged_object instanceof Font)
+				{
+					if(object.font !== undefined)
+					{
+						object.setFont(dragged_object);
 						Editor.updateObjectViews();
 					}
 				}
