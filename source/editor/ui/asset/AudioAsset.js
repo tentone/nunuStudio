@@ -27,12 +27,9 @@ function AudioAsset(parent)
 		
 		context.addOption("Delete", function()
 		{
-			if(self.audio !== null)
+			if(self.audio !== null && confirm("Delete audio?"))
 			{
-				if(confirm("Delete audio?"))
-				{
-					//TODO <ADD CODE HERE>
-				}
+				//TODO <ADD CODE HERE>
 			}
 		});
 

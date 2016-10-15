@@ -27,14 +27,11 @@ function TextureAsset(parent)
 		
 		context.addOption("Delete", function()
 		{
-			if(self.texture !== null)
+			if(self.texture !== null && confirm("Delete texture?"))
 			{
-				if(confirm("Delete texture?"))
-				{
-					self.texture.dispose();
-					Editor.program.removeTexture(self.texture, Editor.default_texture);
-					Editor.updateObjectViews();
-				}
+				self.texture.dispose();
+				Editor.program.removeTexture(self.texture, Editor.default_texture);
+				Editor.updateObjectViews();
 			}
 		});
 
