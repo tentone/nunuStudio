@@ -15,7 +15,7 @@ TTFLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	loader.setResponseType("arraybuffer");
 	loader.load(url, function(buffer)
 	{
-		var json = scope.parse( buffer );
+		var json = self.parse( buffer );
 		if(onLoad !== undefined)
 		{
 			onLoad(json);
@@ -87,21 +87,22 @@ TTFLoader.convert = function(font, reversed)
 		}
 	}
 
-	result.familyName = font.familyName;
+	result.resolution = 1000;
+	result.original_font_information = font.names;
+	
+	result.unitsPerEm = font.unitsPerEm;
 	result.ascender = Math.round(font.ascender * scale);
 	result.descender = Math.round(font.descender * scale);
 	result.underlinePosition = font.tables.post.underlinePosition;
 	result.underlineThickness = font.tables.post.underlineThickness;
+
 	result.boundingBox =
 	{
-		"yMin": font.tables.head.yMin,
-		"xMin": font.tables.head.xMin,
-		"yMax": font.tables.head.yMax,
-		"xMax": font.tables.head.xMax
+		yMin: font.tables.head.yMin,
+		xMin: font.tables.head.xMin,
+		yMax: font.tables.head.yMax,
+		xMax: font.tables.head.xMax
 	};
-
-	result.resolution = 1000;
-	result.original_font_information = font.tables.name;
 
 	return result;
 }

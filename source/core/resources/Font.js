@@ -65,6 +65,34 @@ Font.prototype.toJSON = function(meta)
 }
 
 //Generate shapes
+Font.prototype.getOpentypeFont = function()
+{
+	if(this.encoding === "json")
+	{
+		var options = 
+		{
+			familyName: this.data.original_font_information.fontFamily || " ",
+			styleName: this.data.original_font_information.fontSubfamily || this.data.styleName || " ",
+			unitsPerEm: this.data.unitsPerEm || 2048,
+			ascender: this.data.ascender,
+			descender: this.data.descender
+		};
+
+		var font = new opentype.Font(options);
+
+		var glyphs = this.data.glyphs;
+		for(var i in glyphs)
+		{
+			//TODO <ADD CODE HERE>
+		}
+
+		return font;
+	}
+
+	return null;
+}
+
+//Generate shapes
 Font.prototype.generateShapes = function(text, size, divisions)
 {
 	if(size === undefined)
