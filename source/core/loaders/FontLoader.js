@@ -22,9 +22,20 @@ FontLoader.prototype.parse = function(json)
 
 		font.name = json.name;
 		font.uuid = json.uuid;
-		font.format = json.format;
 		font.encoding = json.encoding;
-		font.data = json.data;
+		
+		if(json.format === "base64")
+		{
+			font.format = "arraybuffer";
+			font.data = ArraybufferUtils.fromBase64(json.data);
+			font.font = new TTFLoader().parse(font.data);
+		}
+		else
+		{
+			font.format = json.format;
+			font.data = json.data;
+			font.font = json.data;
+		}
 
 		return font;
 	}

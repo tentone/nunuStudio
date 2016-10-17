@@ -1,18 +1,19 @@
 "use strict";
 
-function Text3D(text, material, font, height, bevel, bevel_thickness, bevel_size)
+function Text3D(text, material, font, height, bevel, bevel_thickness, bevel_size, size, curve_segments)
 {
 	THREE.Mesh.call(this, undefined, material);
 	
 	this.name = "text";
 	this.type = "Text3D";
 
-	this.scale.set(0.02, 0.02, 0.02);
-
 	this.font = font;
-
 	this.text = (text !== undefined) ? text : "text";
-	this.height = (height !== undefined) ? height : 50;
+	
+	this.size = (size !== undefined) ? size : 1;
+	this.height = (height !== undefined) ? height : 0.5;
+	this.curve_segments = (curve_segments !== undefined) ? curve_segments : 10;
+
 	this.bevel = (bevel !== undefined) ? bevel : false;
 	this.bevel_thickness = (bevel_thickness !== undefined) ? bevel_thickness : 10;
 	this.bevel_size = (bevel_size !== undefined) ? bevel_size : 8;
@@ -47,6 +48,8 @@ Text3D.prototype.setText = function(text)
 	
 	var options = 
 	{
+		size: this.size,
+		curveSegments: this.curve_segments,
 		font: this.font,
 		height: this.height,
 		bevelEnabled: this.bevel,
@@ -90,6 +93,10 @@ Text3D.prototype.toJSON = function(meta)
 
 	data.object.text = this.text;
 	data.object.font = font.uuid;
+
+	data.object.size = this.size;
+	data.object.curve_segments = this.curve_segments;
+
 	data.object.height = this.height;
 	data.object.bevel = this.bevel;
 	data.object.bevel_thickness = this.bevel_thickness;

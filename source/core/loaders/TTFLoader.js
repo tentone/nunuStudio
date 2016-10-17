@@ -15,7 +15,7 @@ TTFLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	loader.setResponseType("arraybuffer");
 	loader.load(url, function(buffer)
 	{
-		var json = self.parse( buffer );
+		var json = self.parse(buffer);
 		if(onLoad !== undefined)
 		{
 			onLoad(json);
@@ -32,9 +32,9 @@ TTFLoader.prototype.parse = function(arraybuffer)
 TTFLoader.convert = function(font, reversed)
 {
 	var scale = (100000) / ((font.unitsPerEm || 2048) * 72);
-	var result = {};
-	result.glyphs = {};
+	var data = {};
 
+	data.glyphs = {};
 	for(var i = 0; i < font.glyphs.length; i++)
 	{
 		var glyph = font.glyphs.glyphs[i];
@@ -62,7 +62,8 @@ TTFLoader.convert = function(font, reversed)
 				token.o += command.type.toLowerCase();
 				token.o += " "
 				
-				if(command.x !== undefined && command.y !== undefined){
+				if(command.x !== undefined && command.y !== undefined)
+				{
 					token.o += Math.round(command.x * scale);
 					token.o += " "
 					token.o += Math.round(command.y * scale);
@@ -83,20 +84,19 @@ TTFLoader.convert = function(font, reversed)
 					token.o += " "
 				}
 			});
-			result.glyphs[String.fromCharCode(glyph.unicode)] = token;
+			data.glyphs[String.fromCharCode(glyph.unicode)] = token;
 		}
 	}
 
-	result.resolution = 1000;
-	result.original_font_information = font.names;
+	data.resolution = 1000;
+	data.original_font_information = font.names;
+	data.unitsPerEm = font.unitsPerEm;
+	data.ascender = Math.round(font.ascender * scale);
+	data.descender = Math.round(font.descender * scale);
+	data.underlinePosition = font.tables.post.underlinePosition;
+	data.underlineThickness = font.tables.post.underlineThickness;
 	
-	result.unitsPerEm = font.unitsPerEm;
-	result.ascender = Math.round(font.ascender * scale);
-	result.descender = Math.round(font.descender * scale);
-	result.underlinePosition = font.tables.post.underlinePosition;
-	result.underlineThickness = font.tables.post.underlineThickness;
-
-	result.boundingBox =
+	data.boundingBox =
 	{
 		yMin: font.tables.head.yMin,
 		xMin: font.tables.head.xMin,
@@ -104,7 +104,7 @@ TTFLoader.convert = function(font, reversed)
 		xMax: font.tables.head.xMax
 	};
 
-	return result;
+	return data;
 }
 
 TTFLoader.reverseCommands = function(commands)
@@ -128,36 +128,36 @@ TTFLoader.reverseCommands = function(commands)
 	var reversed = [];
 	paths.forEach(function(p)
 	{
-		var result =
+		var data =
 		{
 			type: "m",
-			x: p[p.length-1].x,
-			y: p[p.length-1].y
+			x: p[p.length - 1].x,
+			y: p[p.length - 1].y
 		};
 
-		reversed.push(result);
+		reversed.push(data);
 		
 		for(var i = p.length - 1; i > 0; i--)
 		{
 			var command = p[i];
-			result = {type: command.type};
+			data = {type: command.type};
 
 			if(command.x2 !== undefined && command.y2 !== undefined)
 			{
-				result.x1 = command.x2;
-				result.y1 = command.y2;
-				result.x2 = command.x1;
-				result.y2 = command.y1;
+				data.x1 = command.x2;
+				data.y1 = command.y2;
+				data.x2 = command.x1;
+				data.y2 = command.y1;
 			}
 			else if(command.x1 !== undefined && command.y1 !== undefined)
 			{
-				result.x1 = command.x1;
-				result.y1 = command.y1;
+				data.x1 = command.x1;
+				data.y1 = command.y1;
 			}
 
-			result.x = p[i-1].x;
-			result.y = p[i-1].y;
-			reversed.push(result);
+			data.x = p[i - 1].x;
+			data.y = p[i - 1].y;
+			reversed.push(data);
 		}
 	});
 	
