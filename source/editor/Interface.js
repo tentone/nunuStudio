@@ -325,10 +325,10 @@ Interface.initialize = function()
 					loader.reversed = true;
 				}
 
-				var font = new Font(loader.parse(FileSystem.readFileArrayBuffer(file)));
+				var font = new Font(file);
 				font.name = FileSystem.getFileName(file);
 
-				Editor.addToScene(new Text3D("Text", Editor.default_material, font));
+				Editor.program.addFont(font);
 				Editor.updateObjectViews();
 			}
 		}, ".json, .ttf, .otf");

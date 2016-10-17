@@ -47,6 +47,28 @@ function TextureAsset(parent)
 			}
 		});
 	};
+
+	//Drag start
+	this.element.ondragstart = function(event)
+	{
+		//Insert into drag buffer
+		if(self.texture !== null)
+		{
+			event.dataTransfer.setData("uuid", self.texture.uuid);
+			DragBuffer.pushDragElement(self.texture);
+		}
+
+		//To avoid camera movement
+		Mouse.updateKey(Mouse.LEFT, Key.KEY_UP);
+	};
+
+	//Drag end (called after of ondrop)
+	this.element.ondragend = function(event)
+	{
+		//Try to remove font from drag buffer
+		var uuid = event.dataTransfer.getData("uuid");
+		var obj = DragBuffer.popDragElement(uuid);
+	};
 }
 
 TextureAsset.prototype = Object.create(Asset.prototype);

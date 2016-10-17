@@ -78,6 +78,23 @@ function Text3DPanel(parent)
 	this.form.add(this.text);
 	this.form.nextRow();
 
+	//Size
+	this.form.addText("Size");
+	this.size = new NumberBox(this.form.element);
+	this.size.size.set(60, 18);
+	this.size.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.size.setStep(0.1);
+	this.size.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.size = self.size.getValue();
+			self.obj.setText();
+		}
+	});
+	this.form.add(this.size);
+	this.form.nextRow();
+
 	//Height
 	this.form.addText("Thickness");
 	this.height = new NumberBox(this.form.element);
@@ -218,6 +235,7 @@ Text3DPanel.prototype.updatePanel = function()
 		this.rotation.setValue(this.obj.rotation.x, this.obj.rotation.y, this.obj.rotation.z);
 
 		this.text.setText(this.obj.text);
+		this.size.setValue(this.obj.size);
 		this.height.setValue(this.obj.height);
 		this.bevel.setValue(this.obj.bevel);
 		this.bevel_thickness.setValue(this.obj.bevel_thickness);

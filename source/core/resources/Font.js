@@ -8,14 +8,17 @@ function Font(url)
 	this.type = "Font";
 
 	this.format = "";
-	this.encoding = ""
+	this.encoding = "";
 	this.data = null;
+
+	this.font = null;
 
 	if(url !== undefined)
 	{
 		if(typeof url === "object")
 		{
 			this.data = url;
+			this.font = url;
 			this.name = url.original_font_information.fullName;
 			this.format = "json";
 			this.encoding = "json";
@@ -27,70 +30,22 @@ function Font(url)
 			if(this.encoding === "json")
 			{
 				this.data = JSON.parse(FileSystem.readFile(url));
+				this.font = this.data;
 				this.name = this.data.original_font_information.fullName;
 				this.format = "json";
 			}
 			else if(this.encoding === "ttf" || this.encoding === "otf" || this.encoding === "ttc" || this.encoding === "otc")
 			{
-				this.data = new TTFLoader().parse(FileSystem.readFileArrayBuffer(url));
-				this.name = this.data.original_font_information.fullName;
-				this.format = "json";
-				this.encoding = "json";
+				this.data = FileSystem.readFileArrayBuffer(url);
+				this.font = new TTFLoader().parse(this.data);
+				this.name = this.font.original_font_information.fullName;
+				this.format = "arraybuffer";
 			}
 		}
 	}
 }
 
 Font.prototype.isFont = true;
-
-//Create json description
-Font.prototype.toJSON = function(meta)
-{
-	if(meta.fonts[this.uuid] !== undefined)
-	{
-		return meta.fonts[this.uuid];
-	}
-
-	var data = {};
-	data.name = this.name;
-	data.uuid = this.uuid;
-	data.encoding = this.encoding;
-	data.type = this.type;
-	data.format = this.format;
-	data.data = this.data;
-	
-	meta.fonts[this.uuid] = data;
-	
-	return data;
-}
-
-//Generate shapes
-Font.prototype.getOpentypeFont = function()
-{
-	if(this.encoding === "json")
-	{
-		var options = 
-		{
-			familyName: this.data.original_font_information.fontFamily || " ",
-			styleName: this.data.original_font_information.fontSubfamily || this.data.styleName || " ",
-			unitsPerEm: this.data.unitsPerEm || 2048,
-			ascender: this.data.ascender,
-			descender: this.data.descender
-		};
-
-		var font = new opentype.Font(options);
-
-		var glyphs = this.data.glyphs;
-		for(var i in glyphs)
-		{
-			//TODO <ADD CODE HERE>
-		}
-
-		return font;
-	}
-
-	return null;
-}
 
 //Generate shapes
 Font.prototype.generateShapes = function(text, size, divisions)
@@ -99,16 +54,17 @@ Font.prototype.generateShapes = function(text, size, divisions)
 	{
 		size = 100;
 	}
+
 	if(divisions === undefined)
 	{
-		divisions = 4;
+		divisions = 10;
 	}
 
-	var data = this.data;
+	var data = this.font;
 	var paths = createPaths(text);
 	var shapes = [];
 
-	for(var p = 0, pl = paths.length; p < pl; p++)
+	for(var p = 0; p < paths.length; p++)
 	{
 		Array.prototype.push.apply(shapes, paths[p].toShapes());
 	}
@@ -146,6 +102,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 
 		var path = new THREE.ShapePath();
 
+		//Temporary variables
 		var pts = [], b2 = THREE.ShapeUtils.b2, b3 = THREE.ShapeUtils.b3;
 		var x, y, cpx, cpy, cpx0, cpy0, cpx1, cpy1, cpx2, cpy2, laste;
 
@@ -227,4 +184,34 @@ Font.prototype.generateShapes = function(text, size, divisions)
 
 		return {offset: glyph.ha * scale, path: path};
 	}
+}
+
+//Create json description
+Font.prototype.toJSON = function(meta)
+{
+	if(meta.fonts[this.uuid] !== undefined)
+	{
+		return meta.fonts[this.uuid];
+	}
+
+	var data = {};
+	data.name = this.name;
+	data.uuid = this.uuid;
+	data.type = this.type;
+	data.encoding = this.encoding;
+
+	if(this.format === "arraybuffer")
+	{
+		data.data = Base64Utils.fromArraybuffer(this.data);
+		data.format = "base64";
+	}
+	else if(this.format === "json")
+	{
+		data.data = this.data;
+		data.format = this.format;
+	}
+
+	meta.fonts[this.uuid] = data;
+	
+	return data;
 }
