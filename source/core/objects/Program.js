@@ -213,47 +213,47 @@ Program.prototype.removeTexture = function(texture, default_texture)
 			{
 				var material = child.material;
 				
-				if(material.map !== undefined)
+				if(material.map != null && material.map.uuid === texture.uuid)
 				{
 					material.map = default_texture;
 					material.needsUpdate = true;
 				}
-				else if(material.bumpMap !== undefined)
+				else if(material.bumpMap != null && material.bumpMap.uuid === texture.uuid)
 				{
 					material.bumpMap = default_texture;
 					material.needsUpdate = true;
 				}
-				else if(material.normalMap !== undefined)
+				else if(material.normalMap != null && material.normalMap.uuid === texture.uuid)
 				{
 					material.normalMap = default_texture;
 					material.needsUpdate = true;
 				}
-				else if(material.displacementMap !== undefined)
+				else if(material.displacementMap != null && material.displacementMap.uuid === texture.uuid)
 				{
 					material.displacementMap = default_texture;
 					material.needsUpdate = true;
 				}
-				else if(material.specularMap !== undefined)
+				else if(material.specularMap != null && material.specularMap.uuid === texture.uuid)
 				{
 					material.specularMap = default_texture;
 					material.needsUpdate = true;
 				}
-				else if(material.emissiveMap !== undefined)
+				else if(material.emissiveMap != null && material.emissiveMap.uuid === texture.uuid)
 				{
 					material.emissiveMap = default_texture;
 					material.needsUpdate = true;
 				}
-				else if(material.alphaMap !== undefined)
+				else if(material.alphaMap != null && material.alphaMap.uuid === texture.uuid)
 				{
 					material.alphaMap = default_texture;
 					material.needsUpdate = true;
 				}
-				else if(material.roughnessMap !== undefined)
+				else if(material.roughnessMap != null && material.roughnessMap.uuid === texture.uuid)
 				{
 					material.roughnessMap = default_texture;
 					material.needsUpdate = true;
 				}
-				else if(material.metalnessMap !== undefined)
+				else if(material.metalnessMap != null && material.metalnessMap.uuid === texture.uuid)
 				{
 					material.metalnessMap = default_texture;
 					material.needsUpdate = true;
@@ -261,7 +261,10 @@ Program.prototype.removeTexture = function(texture, default_texture)
 			}
 			else if(child instanceof ParticleEmitter)
 			{
-				child.group.texture = default_texture;
+				if(child.group.texture.uuid === texture.uuid)
+				{
+					child.group.texture = default_texture;
+				}
 			}
 		});
 	}
