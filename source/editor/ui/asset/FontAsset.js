@@ -29,8 +29,17 @@ function FontAsset(parent)
 		{
 			if(self.font !== null && confirm("Delete font?"))
 			{
-				Editor.program.removeMaterial(self.font, Editor.default_font);
+				Editor.program.removeFont(self.font, Editor.default_font);
 				Editor.updateObjectViews();
+			}
+		});
+
+		context.addOption("Reverse glyphs", function()
+		{
+			if(self.font !== null && confirm("Reverse font glyphs?"))
+			{
+				//TODO <ADD CODE HERE>
+				alert("Glyph reversing is not implemented!");
 			}
 		});
 

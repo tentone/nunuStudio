@@ -276,8 +276,8 @@ Program.prototype.addFont = function(font)
  	}
 }
 
-//Remove material from materials list (also receives default used to replace)
-Program.prototype.removeFont = function(material, default_font)
+//Remove font from font list
+Program.prototype.removeFont = function(font, default_font)
 {
 	if(default_font === undefined)
 	{
@@ -292,7 +292,7 @@ Program.prototype.removeFont = function(material, default_font)
 		{
 			if(child.font !== undefined && child.font.uuid === font.uuid)
 			{
-				child.font = default_font;
+				child.setFont(default_font);
 			}
 		});
 	}

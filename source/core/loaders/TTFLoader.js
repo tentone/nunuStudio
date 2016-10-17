@@ -128,13 +128,20 @@ TTFLoader.reverseCommands = function(commands)
 	var reversed = [];
 	paths.forEach(function(p)
 	{
-		var result = {"type":"m" , "x" : p[p.length-1].x, "y": p[p.length-1].y};
+		var result =
+		{
+			type: "m",
+			x: p[p.length-1].x,
+			y: p[p.length-1].y
+		};
+
 		reversed.push(result);
 		
 		for(var i = p.length - 1; i > 0; i--)
 		{
 			var command = p[i];
-			result = {"type":command.type};
+			result = {type: command.type};
+
 			if(command.x2 !== undefined && command.y2 !== undefined)
 			{
 				result.x1 = command.x2;
@@ -147,11 +154,12 @@ TTFLoader.reverseCommands = function(commands)
 				result.x1 = command.x1;
 				result.y1 = command.y1;
 			}
-			result.x =  p[i-1].x;
-			result.y =  p[i-1].y;
+
+			result.x = p[i-1].x;
+			result.y = p[i-1].y;
 			reversed.push(result);
 		}
 	});
 	
-	return reversed;	
+	return reversed;
 }

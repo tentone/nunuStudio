@@ -318,8 +318,14 @@ Interface.initialize = function()
 			if(files.length > 0)
 			{
 				var file = files[0].path;
+				var loader = new TTFLoader();
 
-				var font = new Font(file);
+				if(confirm("Reverse font glyphs?"))
+				{
+					loader.reversed = true;
+				}
+
+				var font = new Font(loader.parse(FileSystem.readFileArrayBuffer(file)));
 				font.name = FileSystem.getFileName(file);
 
 				Editor.addToScene(new Text3D("Text", Editor.default_material, font));
