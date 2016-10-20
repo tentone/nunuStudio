@@ -76,6 +76,9 @@ Script.prototype.setCode = function(code)
 	}
 	catch(e)
 	{
+		console.warn("NUNU: Error compiling script code");
+		console.log(e);
+		
 		this.script = new(function(){})();
 	}
 }
