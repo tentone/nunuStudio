@@ -4,8 +4,8 @@ function Editor(){}
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.5 Alpha";
-Editor.TIMESTAMP = "201610201157";
+Editor.VERSION = "V0.8.9.6 Alpha";
+Editor.TIMESTAMP = "201610201705";
 
 //Node modules
 try
@@ -232,6 +232,7 @@ include("editor/helpers/ObjectIconHelper.js");
 include("editor/helpers/PhysicsObjectHelper.js");
 include("editor/helpers/WireframeHelper.js");
 include("editor/helpers/BoundingBoxHelper.js");
+include("editor/helpers/GridHelper.js");
 
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
@@ -333,10 +334,7 @@ Editor.initialize = function()
 	Editor.raycaster = new THREE.Raycaster(); 
 
 	//Grid and axis helpers
-	Editor.grid_helper = new THREE.GridHelper(Settings.editor.grid_size, Math.round(Settings.editor.grid_size/Settings.editor.grid_spacing)*2, 0x888888, 0x888888);
-	Editor.grid_helper.material.depthWrite = false;
-	Editor.grid_helper.material.transparent = true;
-	Editor.grid_helper.material.opacity = 0.3;
+	Editor.grid_helper = new GridHelper(Settings.editor.grid_size, Settings.editor.grid_spacing, 0x888888);
 	Editor.grid_helper.visible = Settings.editor.grid_enabled;
 	Editor.tool_scene.add(Editor.grid_helper);
 

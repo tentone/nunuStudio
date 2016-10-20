@@ -105,6 +105,42 @@ function SettingsTab(parent)
 	this.general_form.add(this.grid_enabled);
 	this.general_form.nextRow();
 
+	//Grid size 
+	this.general_form.addText("Grid size");
+	this.grid_size = new NumberBox(this.general_form.element);
+	this.grid_size.size.set(60, 18);
+	this.grid_size.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.grid_size.setStep(0.05);
+	this.grid_size.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			Settings.editor.grid_size = self.grid_size.getValue();
+			Editor.grid_helper.setSize(Settings.editor.grid_size);
+			Editor.grid_helper.update();
+		}
+	});
+	this.general_form.add(this.grid_size);
+	this.general_form.nextRow();
+
+	//Grid spacing
+	this.general_form.addText("Grid spacing");
+	this.grid_spacing = new NumberBox(this.general_form.element);
+	this.grid_spacing.size.set(60, 18);
+	this.grid_spacing.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.grid_spacing.setStep(1.0);
+	this.grid_spacing.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			Settings.editor.grid_spacing = self.grid_spacing.getValue();
+			Editor.grid_helper.setSpacing(Settings.editor.grid_spacing);
+			Editor.grid_helper.update();
+		}
+	});
+	this.general_form.add(this.grid_spacing);
+	this.general_form.nextRow();
+
 	//Enable Axis
 	this.axis_enabled = new CheckBox(this.general_form.element);
 	this.axis_enabled.setText("Show axis");
@@ -367,6 +403,8 @@ SettingsTab.prototype.activate = function()
 
 	//Editor
 	this.grid_enabled.setValue(Settings.editor.grid_enabled);
+	this.grid_size.setValue(Settings.editor.grid_size);
+	this.grid_spacing.setValue(Settings.editor.grid_spacing);
 	this.axis_enabled.setValue(Settings.editor.axis_enabled);
 	this.lock_mouse.setValue(Settings.editor.lock_mouse);
 	this.transformation_space.setValue(Settings.editor.transformation_space);
