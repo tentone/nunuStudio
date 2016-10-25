@@ -61,12 +61,23 @@ function TextureBox(parent)
 	//On drop get file dropped
 	this.preview.ondrop = function(event)
 	{
+		//File dragged
 		if(event.dataTransfer.files.length > 0)
 		{
 			var file = event.dataTransfer.files[0];
-
 			self.loadTexture(file);
 		}
+		//Resouce dragged
+		else
+		{
+			var uuid = event.dataTransfer.getData("uuid");
+			var texture = DragBuffer.popDragElement(uuid);
+			if(texture !== null)
+			{
+				self.setTexture(texture);
+			}
+		}
+
 		event.preventDefault();
 	};
 
@@ -180,11 +191,11 @@ TextureBox.prototype.setValue = function(texture)
 	{
 		this.texture = texture;
 
+		//Update UI elements
 		this.use_texture.setValue(true);
 		this.wrapS.setValue(texture.wrapS);
 		this.wrapT.setValue(texture.wrapT);
 		this.repeat.setValue(texture.repeat.x, texture.repeat.y);
-
 		this.updatePreview();
 	}
 }
@@ -206,6 +217,17 @@ TextureBox.prototype.getValue = function()
 	}
 
 	return null;
+}
+
+//Set Texture
+TextureBox.prototype.setTexture = function(texture)
+{
+	this.setValue(texture);
+
+	if(this.onchange !== null)
+	{
+		this.onchange();
+	}
 }
 
 //Load texture from file

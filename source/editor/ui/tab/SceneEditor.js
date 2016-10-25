@@ -107,7 +107,7 @@ function SceneEditor(parent)
 					else if(object instanceof THREE.Sprite)
 					{
 						var texture = new VideoTexture(file.path);
-						var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
+						var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
 						material.name = file.name;
 						object.material = material;
 						Editor.updateObjectViews();
@@ -132,6 +132,19 @@ function SceneEditor(parent)
 					if(object instanceof THREE.Mesh)
 					{
 						object.material = dragged_object;
+						Editor.updateObjectViews();
+					}
+				}
+				else if(dragged_object instanceof THREE.Texture)
+				{
+					if(object instanceof THREE.Mesh)
+					{
+						object.material = new THREE.MeshStandardMaterial({map:dragged_object, color:0xffffff, roughness: 0.6, metalness: 0.2});
+						Editor.updateObjectViews();
+					}
+					else if(object instanceof THREE.Sprite)
+					{
+						object.material = new THREE.SpriteMaterial({map:dragged_object, color:0xffffff});
 						Editor.updateObjectViews();
 					}
 				}

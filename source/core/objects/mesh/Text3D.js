@@ -12,11 +12,11 @@ function Text3D(text, material, font, height, bevel, bevel_thickness, bevel_size
 	
 	this.size = (size !== undefined) ? size : 1;
 	this.height = (height !== undefined) ? height : 0.5;
-	this.curve_segments = (curve_segments !== undefined) ? curve_segments : 10;
+	this.curve_segments = (curve_segments !== undefined) ? curve_segments : 15;
 
 	this.bevel = (bevel !== undefined) ? bevel : false;
-	this.bevel_thickness = (bevel_thickness !== undefined) ? bevel_thickness : 10;
-	this.bevel_size = (bevel_size !== undefined) ? bevel_size : 8;
+	this.bevel_thickness = (bevel_thickness !== undefined) ? bevel_thickness : 0.1;
+	this.bevel_size = (bevel_size !== undefined) ? bevel_size : 0.05;
 
 	this.setText(this.text);
 
