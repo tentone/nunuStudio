@@ -4,8 +4,8 @@ function Editor(){}
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.6 Alpha";
-Editor.TIMESTAMP = "201610201705";
+Editor.VERSION = "V0.8.9.7 Alpha";
+Editor.TIMESTAMP = "201610251256";
 
 //Node modules
 try
@@ -294,6 +294,9 @@ Editor.initialize = function()
 	Editor.tool_mode = Editor.MODE_SELECT;
 	Editor.state = Editor.STATE_EDITING;
 
+	//Open file
+	Editor.open_file = null;
+
 	//Editor Selected object
 	Editor.selected_object = null;
 	Editor.is_editing_object = false;
@@ -408,7 +411,14 @@ Editor.update = function()
 		{
 			if(Keyboard.keyJustPressed(Keyboard.S))
 			{
-				Interface.saveProgram();
+				if(Editor.open_file === null)
+				{
+					Interface.saveProgram();
+				}
+				else
+				{
+					Editor.saveProgram(undefined, false);
+				}
 			}
 			else if(Keyboard.keyJustPressed(Keyboard.L))
 			{
@@ -1321,6 +1331,9 @@ Editor.createNewProgram = function()
 	Editor.program.addDefaultScene(Editor.default_material);
 	Editor.resetEditingFlags();
 
+	//Reset open file
+	Editor.setOpenFile(null);
+
 	//Remove old tabs from interface
 	if(Interface.tab !== undefined)
 	{
@@ -1336,6 +1349,11 @@ Editor.createNewProgram = function()
 //Save program to file
 Editor.saveProgram = function(fname, compressed)
 {
+	if(fname === undefined && Editor.open_file !== null)
+	{
+		fname = Editor.open_file;
+	}
+
 	if(compressed === true)
 	{
 		var json = JSON.stringify(Editor.program.toJSON());
@@ -1347,6 +1365,11 @@ Editor.saveProgram = function(fname, compressed)
 	}
 
 	FileSystem.writeFile(fname, json);
+
+	if(Editor.open_file === null)
+	{
+		Editor.setOpenFile(fname);
+	}
 }
 
 //Load program from file
@@ -1368,6 +1391,9 @@ Editor.loadProgram = function(fname)
 	//Remove old tabs from interface
 	Interface.tab.clear();
 
+	//Set open file
+	Editor.setOpenFile(fname);
+
 	//Add new scene tab to interface
 	if(Editor.program.scene !== null)
 	{
@@ -1376,6 +1402,21 @@ Editor.loadProgram = function(fname)
 		editor.setScene(Editor.program.scene);
 		scene.attachComponent(editor);
 		Interface.tab.selectTab(0);
+	}
+}
+
+//Set currently open file (also updates the editor title)
+Editor.setOpenFile = function(fname)
+{
+	Editor.open_file = (fname !== undefined) ? fname : null;
+
+	if(fname === null)
+	{
+		document.title = Editor.NAME + " " + Editor.VERSION + " (" + Editor.TIMESTAMP + ")";
+	}
+	else
+	{
+		document.title = Editor.NAME + " " + Editor.VERSION + " (" + Editor.TIMESTAMP + ") (" + fname + ")";
 	}
 }
 
