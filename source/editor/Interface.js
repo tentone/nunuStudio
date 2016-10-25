@@ -825,19 +825,32 @@ Interface.initialize = function()
 	Interface.file.position.set(0,0);
 
 	//New project
-	Interface.file.addOption("New Project", function()
+	Interface.file.addOption("New", function()
 	{
 		Interface.newProgram();
 	}, Interface.file_dir + "icons/misc/new.png");
 
 	//Save project
-	Interface.file.addOption("Save Project", function()
+	Interface.file.addOption("Save", function()
+	{
+		if(Editor.open_file !== null)
+		{
+			Editor.saveProgram(undefined, false);
+		}
+		else
+		{
+			Interface.saveProgram();
+		}
+	}, Interface.file_dir + "icons/misc/save.png");
+
+	//Save project
+	Interface.file.addOption("Save As", function()
 	{
 		Interface.saveProgram();
 	}, Interface.file_dir + "icons/misc/save.png");
 
 	//Load Project
-	Interface.file.addOption("Load Project", function()
+	Interface.file.addOption("Load", function()
 	{
 		Interface.loadProgram();
 	});
