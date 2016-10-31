@@ -432,7 +432,6 @@ function TransformControls(camera, canvas)
 				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
 				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix));
 
-
 				quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
 				quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
 				quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
