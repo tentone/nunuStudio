@@ -79,6 +79,10 @@ function MaterialAsset(parent)
 				{
 					material_editor = new ShaderMaterialEditor();
 				}
+				else if(self.material instanceof THREE.PointsMaterial)
+				{
+					material_editor = new PointMaterialEditor();
+				}
 				else
 				{
 					material_editor = new MaterialEditor();

@@ -9,6 +9,21 @@ function TextureAsset(parent)
 	//Self pointer
 	var self = this;
 
+	//Video
+	this.video = document.createElement("video");
+	this.video.style.position = "absolute";
+	this.video.style.top = "5px";
+	this.video.loop = true;
+	this.video.autostart = true;
+	this.video.volume = 0.0;
+	//this.element.appendChild(this.image);
+
+	//Canvas
+	this.canvas = document.createElement("canvas");
+	this.canvas.style.position = "absolute";
+	this.canvas.style.top = "5px";
+	//this.element.appendChild(this.image);
+
 	//Context menu event
 	this.element.oncontextmenu = function(event)
 	{
@@ -76,6 +91,8 @@ TextureAsset.prototype = Object.create(Asset.prototype);
 //Set object to file
 TextureAsset.prototype.setTexture = function(texture)
 {
+	//if(texture instanceof THREE.VideoTexture)
+	//if(texture instanceof THREE.CanvasTexture)
 	if(texture instanceof THREE.Texture)
 	{
 		this.texture = texture;
