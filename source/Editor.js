@@ -4,8 +4,8 @@ function Editor(){}
 
 //Editor version
 Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.8 Alpha";
-Editor.TIMESTAMP = "201610310251";
+Editor.VERSION = "V0.8.9.9 Alpha";
+Editor.TIMESTAMP = "201611021030";
 
 //Node modules
 try
@@ -130,6 +130,7 @@ include("lib/three/loaders/PLYLoader.js");
 include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/TGALoader.js");
+include("lib/three/loaders/PCDLoader.js");
 
 include("lib/three/animation/Animation.js");
 include("lib/three/animation/AnimationHandler.js");
@@ -198,6 +199,7 @@ include("editor/ui/tab/materialeditor/BasicMaterialEditor.js");
 include("editor/ui/tab/materialeditor/StandardMaterialEditor.js");
 include("editor/ui/tab/materialeditor/SpriteMaterialEditor.js");
 include("editor/ui/tab/materialeditor/ShaderMaterialEditor.js");
+include("editor/ui/tab/materialeditor/PointMaterialEditor.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");

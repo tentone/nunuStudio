@@ -226,30 +226,28 @@ Interface.initialize = function()
 		}, ".fbx");
 	});
 
-	//Load Spine Animation
-	Interface.asset_file.addOption("Spine Animation", function()
+	//PCD file loader
+	import_models.addOption("PCD", function()
 	{
 		FileSystem.chooseFile(function(files)
 		{
 			if(files.length > 0)
 			{
 				var file = files[0].path;
-
-				var json = FileSystem.readFile(file);
-				var atlas = FileSystem.readFile(file.replace("json", "atlas"));
-				var path = file.substring(0, file.lastIndexOf("\\"));
-				
-				var animation = new SpineAnimation(json, atlas, path);
-				animation.name = FileSystem.getFileName(file);
-
-				Editor.addToScene(animation);
-				Editor.updateObjectViews();
+				var loader = new THREE.PCDLoader();
+				var pcd = loader.parse(FileSystem.readFileArrayBuffer(file), file);
+				pcd.name = FileSystem.getFileName(file);
+				pcd.material.name = "points";
+				Editor.addToScene(pcd);
 			}
-		}, ".json");
-	}, Interface.file_dir + "icons/animation/spine.png");
+		}, ".pcd");
+	});
+
+	//Textures menu
+	var import_texture = Interface.asset_file.addMenu("Texture", Interface.file_dir + "icons/assets/image.png");
 
 	//Load Image texture
-	Interface.asset_file.addOption("Texture", function()
+	import_texture.addOption("Texture", function()
 	{
 		FileSystem.chooseFile(function(files)
 		{
@@ -269,7 +267,7 @@ Interface.initialize = function()
 	}, Interface.file_dir + "icons/assets/image.png");
 
 	//Create text texture
-	Interface.asset_file.addOption("Text Texture", function()
+	import_texture.addOption("Text Texture", function()
 	{
 		var texture = new TextTexture("abcdef", Editor.default_font);
 		var material = new THREE.MeshStandardMaterial({map: texture, roughness: 0.6, metalness: 0.2});
@@ -280,7 +278,7 @@ Interface.initialize = function()
 
 
 	//Video texture
-	Interface.asset_file.addOption("Video Texture", function()
+	import_texture.addOption("Video Texture", function()
 	{
 		FileSystem.chooseFile(function(files)
 		{
@@ -300,7 +298,7 @@ Interface.initialize = function()
 	}, Interface.file_dir + "icons/assets/video.png");
 
 	//Webcam texture
-	Interface.asset_file.addOption("Webcam Texture", function()
+	import_texture.addOption("Webcam Texture", function()
 	{
 		var texture = new WebcamTexture();
 		texture.name = "webcam";
@@ -333,6 +331,28 @@ Interface.initialize = function()
 			}
 		}, ".json, .ttf, .otf");
 	}, Interface.file_dir + "icons/assets/font.png");
+
+	//Load Spine Animation
+	Interface.asset_file.addOption("Spine Animation", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			if(files.length > 0)
+			{
+				var file = files[0].path;
+
+				var json = FileSystem.readFile(file);
+				var atlas = FileSystem.readFile(file.replace("json", "atlas"));
+				var path = file.substring(0, file.lastIndexOf("\\"));
+				
+				var animation = new SpineAnimation(json, atlas, path);
+				animation.name = FileSystem.getFileName(file);
+
+				Editor.addToScene(animation);
+				Editor.updateObjectViews();
+			}
+		}, ".json");
+	}, Interface.file_dir + "icons/animation/spine.png");
 
 	//Load audio file
 	Interface.asset_file.addOption("Audio", function()

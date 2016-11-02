@@ -33,6 +33,7 @@ ObjectIcons.icons["ParticleEmiter"] = "editor/files/icons/effects/particles.png"
 ObjectIcons.icons["Script"] = "editor/files/icons/script/script.png";
 ObjectIcons.icons["Sprite"] = "editor/files/icons/assets/image.png";
 ObjectIcons.icons["Text3D"] = "editor/files/icons/models/text.png";
+ObjectIcons.icons["Points"] = "editor/files/icons/models/points.png";
 
 //Program
 ObjectIcons.icons["Program"] = "editor/files/icons/script/script.png";

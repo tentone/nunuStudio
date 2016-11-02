@@ -9,7 +9,7 @@
 		"grid_spacing": 5,
 		"grid_enabled": true,
 		"axis_enabled": true,
-		"camera_preview_enabled": false,
+		"camera_preview_enabled": true,
 		"camera_preview_percentage": 0.35,
 		"lock_mouse": true,
 		"transformation_space": "world"
@@ -22,7 +22,7 @@
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"font_size": 16,
+		"font_size": 14,
 		"line_numbers": true,
 		"line_wrapping": false,
 		"auto_close_brackets": true,
