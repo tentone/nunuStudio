@@ -93,7 +93,6 @@ function Text3DPanel(parent)
 		}
 	});
 	this.form.add(this.size);
-	this.form.nextRow();
 
 	//Height
 	this.form.addText("Thickness");
@@ -110,6 +109,23 @@ function Text3DPanel(parent)
 		}
 	});
 	this.form.add(this.height);
+	this.form.nextRow();
+
+	//Curve segments
+	this.form.addText("Curve Segments");
+	this.curve_segments = new NumberBox(this.form.element);
+	this.curve_segments.size.set(60, 18);
+	this.curve_segments.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.curve_segments.setStep(1.0);
+	this.curve_segments.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.curve_segments = self.curve_segments.getValue();
+			self.obj.setText();
+		}
+	});
+	this.form.add(this.curve_segments);
 	this.form.nextRow();
 
 	//Bevel
@@ -237,6 +253,7 @@ Text3DPanel.prototype.updatePanel = function()
 		this.text.setText(this.obj.text);
 		this.size.setValue(this.obj.size);
 		this.height.setValue(this.obj.height);
+		this.curve_segments.setValue(this.obj.curve_segments);
 		this.bevel.setValue(this.obj.bevel);
 		this.bevel_thickness.setValue(this.obj.bevel_thickness);
 		this.bevel_size.setValue(this.obj.bevel_size);

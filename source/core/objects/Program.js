@@ -310,6 +310,28 @@ Program.prototype.addAudio = function(audio)
  	}
 }
 
+//Remove audio
+Program.prototype.removeAudio = function(audio, default_audio)
+{
+	if(default_audio === undefined)
+	{
+		default_audio = new Audio();
+	}
+
+	if(audio instanceof Audio)
+	{
+		delete this.audio[audio.uuid];
+		
+		this.traverse(function(child)
+		{
+			if(child.audio !== undefined && child.audio.uuid === audio.uuid)
+			{
+				child.setFont(default_audio);
+			}
+		});
+	}
+}
+
 //Set actual scene (to be used in runtime)
 Program.prototype.setScene = function(scene)
 {

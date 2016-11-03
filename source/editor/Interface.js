@@ -363,10 +363,15 @@ Interface.initialize = function()
 			{
 				var file = files[0].path;
 
-				var audio = new AudioEmitter(new Audio(file));
+				var audio = new Audio(file);
 				audio.name = FileSystem.getFileName(file);
 				
-				Editor.addToScene(audio);
+				Editor.program.addAudio(audio);
+
+				var emitter = new AudioEmitter(audio);
+				emitter.name = audio.name;
+				Editor.addToScene(emitter);
+				
 				Editor.updateObjectViews();
 			}
 		}, "audio/*");
