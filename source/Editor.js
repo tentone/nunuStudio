@@ -5,7 +5,7 @@ function Editor(){}
 //Editor version
 Editor.NAME = "nunuStudio";
 Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201611021030";
+Editor.TIMESTAMP = "201611031740";
 
 //Node modules
 try
@@ -1147,7 +1147,7 @@ Editor.selectTool = function(tool)
 			Editor.tool.setMode("rotate");
 			Editor.tool.setSpace(Settings.editor.transformation_space);
 		}
-
+		
 		Editor.tool.attach(Editor.selected_object);
 		Editor.tool_container.add(Editor.tool);
 	}

@@ -29,7 +29,8 @@ function AudioAsset(parent)
 		{
 			if(self.audio !== null && confirm("Delete audio?"))
 			{
-				//TODO <ADD CODE HERE>
+				Editor.program.removeAudio(self.audio, Editor.default_audio);
+				Editor.updateObjectViews();
 			}
 		});
 
