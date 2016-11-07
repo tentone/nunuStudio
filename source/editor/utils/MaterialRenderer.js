@@ -7,24 +7,27 @@ function MaterialRenderer()
 	this.canvas.width = 128;
 	this.canvas.height = 128;
 
-	//Material renderer and scene
+	//Renderer
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, alpha: true});
 	this.renderer.setSize(this.canvas.width, this.canvas.width);
 
-	//Material camera
+	//Camera
 	this.camera = new PerspectiveCamera(90, this.canvas.width/this.canvas.height);
 
-	//Material preview scene
-	this.scene = new Scene();
-
+	//Material Sphere
 	this.obj = new Mesh(new THREE.SphereBufferGeometry(1, 32, 32), null);
 	this.obj.position.set(0, 0, -1.5);
 	this.obj.visible = false;
-	this.scene.add(this.obj);
 	
+	//Sprite
 	this.sprite = new Sprite(null);
 	this.sprite.position.set(0, 0, -0.5);
 	this.sprite.visible = false;
+
+	//Scene
+	this.scene = new Scene();
+	this.scene.position.set(0, 0, 0);
+	this.scene.add(this.obj);
 	this.scene.add(this.sprite);
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x666666));
@@ -35,7 +38,7 @@ MaterialRenderer.prototype.setSize = function(x, y)
 {
 	this.canvas.width = x;
 	this.canvas.height = y;
-	this.renderer.setSize(this.canvas.width, this.canvas.width);
+	this.renderer.setSize(x, y);
 }
 
 //Render material to internal canvas and copy image to html image element
@@ -54,8 +57,10 @@ MaterialRenderer.prototype.renderMaterial = function(material, img)
 		this.sprite.visible = false;
 	}
 
+	//Render material
 	this.renderer.render(this.scene, this.camera);
 
+	//Create image blob and set image src
 	var self = this;
 	if(img !== undefined)
 	{
