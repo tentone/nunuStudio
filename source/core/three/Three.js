@@ -26,6 +26,45 @@ var RawShaderMaterial = THREE.RawShaderMaterial;
 var ShaderMaterial = THREE.ShaderMaterial;
 var SpriteMaterial = THREE.SpriteMaterial;
 
+//Geometries
+var BoxBufferGeometry = THREE.BoxBufferGeometry;
+var BoxGeometry = THREE.BoxGeometry;
+var CircleBufferGeometry = THREE.CircleBufferGeometry;
+var CircleGeometry = THREE.CircleGeometry;
+var ConeBufferGeometry = THREE.ConeBufferGeometry;
+var ConeGeometry = THREE.ConeGeometry;
+var CylinderBufferGeometry = THREE.CylinderBufferGeometry;
+var CylinderGeometry = THREE.CylinderGeometry;
+var DodecahedronBufferGeometry = THREE.DodecahedronBufferGeometry;
+var DodecahedronGeometry = THREE.DodecahedronGeometry;
+var ExtrudeGeometry = THREE.ExtrudeGeometry;
+var IcosahedronBufferGeometry = THREE.IcosahedronBufferGeometry;
+var IcosahedronGeometry = THREE.IcosahedronGeometry;
+var LatheBufferGeometry = THREE.LatheBufferGeometry;
+var LatheGeometry = THREE.LatheGeometry;
+var OctahedronBufferGeometry = THREE.OctahedronBufferGeometry;
+var OctahedronGeometry = THREE.OctahedronGeometry;
+var ParametricBufferGeometry = THREE.ParametricBufferGeometry;
+var ParametricGeometry = THREE.ParametricGeometry;
+var PlaneBufferGeometry = THREE.PlaneBufferGeometry;
+var PlaneGeometry = THREE.PlaneGeometry;
+var PolyhedronBufferGeometry = THREE.PolyhedronBufferGeometry;
+var PolyhedronGeometry = THREE.PolyhedronGeometry;
+var RingBufferGeometry = THREE.RingBufferGeometry;
+var RingGeometry = THREE.RingGeometry;
+var ShapeGeometry = THREE.ShapeGeometry;
+var SphereBufferGeometry = THREE.SphereBufferGeometry;
+var SphereGeometry = THREE.SphereGeometry;
+var TetrahedronBufferGeometry = THREE.TetrahedronBufferGeometry;
+var TetrahedronGeometry = THREE.TetrahedronGeometry;
+var TextGeometry = THREE.TextGeometry;
+var TorusBufferGeometry = THREE.TorusBufferGeometry;
+var TorusGeometry = THREE.TorusGeometry;
+var TorusKnotBufferGeometry = THREE.TorusKnotBufferGeometry;
+var TorusKnotGeometry = THREE.TorusKnotGeometry;
+var TubeGeometry = THREE.TubeGeometry;
+var TubeBufferGeometry = THREE.TubeBufferGeometry;
+
 //Math
 var Box2 = THREE.Box2;
 var Box3 = THREE.Box3;
