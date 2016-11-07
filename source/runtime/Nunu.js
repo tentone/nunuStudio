@@ -94,7 +94,9 @@ function Nunu(canvas)
 		this.canvas.style.height = window.innerHeight + "px";
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
+
 		document.body.appendChild(this.canvas);
+
 		this.canvas_resize = true;
 	}
 	else
@@ -112,7 +114,7 @@ function Nunu(canvas)
 	this.renderer.setSize(this.canvas.width, this.canvas.height);
 }
 
-//Fullscreen controll
+//Fullscreen control
 Nunu.fullscreen = false;
 
 //Start nunu program
@@ -187,6 +189,7 @@ Nunu.prototype.exit = function()
 //Resize to fit window
 Nunu.prototype.resize = function()
 {
+
 	if(this.canvas !== null && this.canvas_resize)
 	{
 		this.canvas.style.width = window.innerWidth + "px";
@@ -195,7 +198,7 @@ Nunu.prototype.resize = function()
 		this.canvas.height = window.innerHeight;
 	}
 	
-	if(this.renderer !== undefined)
+	if(this.program !== null && this.renderer !== undefined)
 	{
 		this.renderer.setSize(this.canvas.width, this.canvas.height);
 		this.program.resize(this.canvas.width, this.canvas.height);
