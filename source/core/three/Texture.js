@@ -14,7 +14,7 @@ THREE.Texture.prototype.toJSON = function(meta)
 	{
 		metadata:
 		{
-			version: Editor.VERSION,
+			version: Nunu.VERSION,
 			type: "Texture"
 		},
 

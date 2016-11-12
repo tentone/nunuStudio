@@ -1,5 +1,8 @@
 "use strict";
 
+//Nunu global
+include("Nunu.js");
+
 //External libs
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
@@ -79,11 +82,13 @@ include("core/utils/Mesh2shape.js");
 
 include("core/FileSystem.js");
 
-function Nunu(canvas)
+//Nunu app contructor
+function NunuRuntime(canvas)
 {
+	//Program
 	this.program = null;
 
-	//Create canvas
+	//Canvas
 	if(canvas === undefined)
 	{
 		this.canvas = document.createElement("canvas");
@@ -110,15 +115,15 @@ function Nunu(canvas)
 	this.renderer.autoClear = false;
 	this.renderer.shadowMap.enabled = true;
 	this.renderer.shadowMap.type = THREE.PCFShadowMap;
-	this.renderer.setPixelRatio(window.devicePixelRatio || 1.0);
+	//this.renderer.setPixelRatio(window.devicePixelRatio || 1.0);
 	this.renderer.setSize(this.canvas.width, this.canvas.height);
 }
 
 //Fullscreen control
-Nunu.fullscreen = false;
+NunuRuntime.fullscreen = false;
 
 //Start nunu program
-Nunu.prototype.run = function()
+NunuRuntime.prototype.run = function()
 {
 	if(this.program === null)
 	{
@@ -156,7 +161,7 @@ Nunu.prototype.run = function()
 }
 
 //Update nunu program
-Nunu.prototype.update = function()
+NunuRuntime.prototype.update = function()
 {
 	Mouse.update();
 	Keyboard.update();
@@ -166,7 +171,7 @@ Nunu.prototype.update = function()
 }
 
 //Exit from app
-Nunu.prototype.exit = function()
+NunuRuntime.prototype.exit = function()
 {
 	if(this.program !== null)
 	{
@@ -179,15 +184,15 @@ Nunu.prototype.exit = function()
 		this.onExit();
 	}
 
-	if(Nunu.gui !== undefined)
+	if(NunuRuntime.gui !== undefined)
 	{
-		Nunu.gui.Nunu.closeAllWindows();
-		Nunu.gui.Nunu.quit();
+		NunuRuntime.gui.App.closeAllWindows();
+		NunuRuntime.gui.App.quit();
 	}
 }
 
 //Resize to fit window
-Nunu.prototype.resize = function()
+NunuRuntime.prototype.resize = function()
 {
 
 	if(this.canvas !== null && this.canvas_resize)
@@ -206,7 +211,7 @@ Nunu.prototype.resize = function()
 }
 
 //Load program from file
-Nunu.prototype.loadProgram = function(fname)
+NunuRuntime.prototype.loadProgram = function(fname)
 {
 	var loader = new ObjectLoader();
 	var data = JSON.parse(FileSystem.readFile(fname));
@@ -214,15 +219,15 @@ Nunu.prototype.loadProgram = function(fname)
 }
 
 //Set on exit callback
-Nunu.prototype.setOnExit = function(callback)
+NunuRuntime.prototype.setOnExit = function(callback)
 {
 	this.onExit = callback;
 }
 
 //Set fullscreen mode
-Nunu.setFullscreen = function(fullscreen, element)
+NunuRuntime.setFullscreen = function(fullscreen, element)
 {
-	Nunu.fullscreen = fullscreen;
+	NunuRuntime.fullscreen = fullscreen;
 
 	if(fullscreen)
 	{
@@ -250,7 +255,7 @@ Nunu.setFullscreen = function(fullscreen, element)
 }
 
 //Check if webvr is available
-Nunu.webvrAvailable = function()
+NunuRuntime.webvrAvailable = function()
 {
 	return (navigator.getVRDisplays !== undefined);
 }
