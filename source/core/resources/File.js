@@ -1,17 +1,17 @@
 "use strict";
 
-function Resource
+function File
 {
 	this.name = "";
 	this.uuid = THREE.Math.generateUUID();
-	this.type = "Resource";
+	this.type = "File";
 
 	this.format = "";
 	this.encoding = ""
 	this.data = null;
 }
 
-Resource.prototype.toJSON = function(meta)
+File.prototype.toJSON = function(meta)
 {
 	var data = {};
 	data.name = this.name;

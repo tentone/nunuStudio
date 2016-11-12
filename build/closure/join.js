@@ -1,7 +1,7 @@
 "use strict";
 
 var path = "../../source/";
-var input = "../../source/runtime/Nunu.js";
+var input = "../../source/runtime/NunuRuntime.js";
 
 var code = readFile(input);
 var includes = getIncludes(code);

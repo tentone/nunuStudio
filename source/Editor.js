@@ -2,11 +2,6 @@
 
 function Editor(){}
 
-//Editor version
-Editor.NAME = "nunuStudio";
-Editor.VERSION = "V0.8.9.9 Alpha";
-Editor.TIMESTAMP = "201611120134";
-
 //Node modules
 try
 {
@@ -20,7 +15,10 @@ catch(e)
 	Editor.args = [];
 }
 
-//External libs
+//Nunu global
+include("Nunu.js");
+
+//Runtime dependencies
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
 include("lib/cannon.min.js");
@@ -28,8 +26,9 @@ include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.min.js");
+include("lib/opentype.min.js");
 
-//Internal modules
+//Runtime internal modules
 include("core/three/Three.js");
 include("core/three/Object3D.js");
 include("core/three/Vector3.js");
@@ -137,7 +136,6 @@ include("lib/three/animation/AnimationHandler.js");
 include("lib/three/animation/KeyFrameAnimation.js");
 
 include("lib/jscolor.min.js");
-include("lib/opentype.min.js");
 include("lib/quickhull.js");
 
 //Internal modules
@@ -290,7 +288,7 @@ Editor.initialize = function()
 	}
 
 	//Set window title
-	document.title = Editor.NAME + " " + Editor.VERSION + " (" + Editor.TIMESTAMP + ")";
+	document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ")";
 
 	//Editor initial state
 	Editor.tool_mode = Editor.MODE_SELECT;
@@ -1414,11 +1412,11 @@ Editor.setOpenFile = function(fname)
 
 	if(fname === null)
 	{
-		document.title = Editor.NAME + " " + Editor.VERSION + " (" + Editor.TIMESTAMP + ")";
+		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ")";
 	}
 	else
 	{
-		document.title = Editor.NAME + " " + Editor.VERSION + " (" + Editor.TIMESTAMP + ") (" + fname + ")";
+		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ") (" + fname + ")";
 	}
 }
 

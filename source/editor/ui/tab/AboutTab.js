@@ -44,13 +44,13 @@ function AboutTab(parent)
 	this.name = new Text(this.element);
 	this.name.size.set(400, 0);
 	this.name.setTextSize(30);
-	this.name.setText(Editor.NAME + " " + Editor.VERSION);
+	this.name.setText(Nunu.NAME + " " + Nunu.VERSION);
 
 	//Build info
 	this.timestamp = new Text(this.element);
 	this.timestamp.size.set(400, 0);
 	this.timestamp.setTextSize(20);
-	this.timestamp.setText("Build " + Editor.TIMESTAMP);
+	this.timestamp.setText("Build " + Nunu.TIMESTAMP);
 
 	//ThreeJS version
 	this.threejs = new Text(this.element);
