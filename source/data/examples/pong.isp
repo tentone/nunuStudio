@@ -1,6 +1,6 @@
 {
 	"metadata": {
-		"version": "V0.8.9.7 Alpha",
+		"version": "V0.8.9.9 Alpha",
 		"type": "NunuProgram"
 	},
 	"geometries": [
@@ -132,7 +132,8 @@
 			"map": "70611342-BE5A-435D-A53F-45B67333CA0D",
 			"depthFunc": 3,
 			"depthTest": true,
-			"depthWrite": true
+			"depthWrite": true,
+			"alphaTest": "0.76"
 		},
 		{
 			"uuid": "3433CC9B-95E9-43AA-B6A7-AC1BC67D2AFF",
@@ -142,7 +143,8 @@
 			"map": "520011CB-8B3D-46FB-A11B-23D9BB9F61D8",
 			"depthFunc": 3,
 			"depthTest": true,
-			"depthWrite": true
+			"depthWrite": true,
+			"alphaTest": "0.51"
 		},
 		{
 			"uuid": "99E6D340-51DE-43B7-8F5B-2CA504975325",
@@ -152,10 +154,25 @@
 			"map": "8CC55EFF-D4E4-4B0F-818F-769F177363E9",
 			"depthFunc": 3,
 			"depthTest": true,
-			"depthWrite": true
+			"depthWrite": true,
+			"alphaTest": "0.66"
 		},
 		{
 			"uuid": "2D9378A4-3901-4B6D-8DAF-5E84926E3FC6",
+			"type": "MeshStandardMaterial",
+			"name": "default",
+			"color": 16777215,
+			"roughness": 0.6,
+			"metalness": 0.2,
+			"emissive": 0,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"skinning": false,
+			"morphTargets": false
+		},
+		{
+			"uuid": "1E00B3E1-A95A-4052-A676-054B22610618",
 			"type": "MeshStandardMaterial",
 			"name": "default",
 			"color": 16777215,
@@ -458,7 +475,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": false,
-						"matrix": [0.009999999776482582,0,0,0,0,0.000007948865459184162,-0.009999996982514858,0,0,0.009999996982514858,0.000007948865459184162,0,-7.599999904632568,4.400000095367432,-5,1],
+						"matrix": [0.009999999776482582,0,0,0,0,0.000007948508027766366,-0.009999996982514858,0,0,0.009999996982514858,0.000007948508027766366,0,-7.599999904632568,4.400000095367432,-5,1],
 						"material": "98210C36-8EEC-4134-9852-2A7879193EF4",
 						"text": "0",
 						"font": "670F0F9E-5948-4408-9A88-4D53CC4A0124",
@@ -479,7 +496,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": false,
-						"matrix": [0.009999999776482582,0,0,0,0,0.000007948865459184162,-0.009999996982514858,0,0,0.009999996982514858,0.000007948865459184162,0,6.767843723297119,4.400000095367432,-5,1],
+						"matrix": [0.009999999776482582,0,0,0,0,0.000007948508027766366,-0.009999996982514858,0,0,0.009999996982514858,0.000007948508027766366,0,6.767843723297119,4.400000095367432,-5,1],
 						"material": "98210C36-8EEC-4134-9852-2A7879193EF4",
 						"text": "0",
 						"font": "670F0F9E-5948-4408-9A88-4D53CC4A0124",
@@ -540,7 +557,7 @@
 								"receiveShadow": false,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [1,0,0,0,0,0.0007937481859698892,-0.9999997019767761,0,0,0.9999997019767761,0.0007937481859698892,0,0,13.5,13.628532409667969,1],
+								"matrix": [1,0,0,0,0,0.0007937142509035766,-0.9999997019767761,0,0,0.9999997019767761,0.0007937142509035766,0,0,13.5,13.628532409667969,1],
 								"children": [
 									{
 										"uuid": "983B760D-7D82-47B5-B81B-5B506B019425",
@@ -560,7 +577,7 @@
 								"near": 0.1,
 								"far": 1000000,
 								"focus": 10,
-								"aspect": 1.738562091503268,
+								"aspect": 1.9028340080971662,
 								"filmGauge": 35,
 								"filmOffset": 0,
 								"clear_color": false,
@@ -641,7 +658,7 @@
 									"fog": true
 								},
 								"emitter": {
-									"uuid": "EFB63150-BD9B-4DCF-BA6D-F2F04480CDC4",
+									"uuid": "B0AE90F1-1025-45C5-BAEE-D86538C4B1B1",
 									"direction": 1,
 									"particleCount": 40,
 									"duration": null,
