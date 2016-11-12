@@ -5,9 +5,16 @@ function FontAsset(parent)
 	Asset.call(this, parent);
 
 	this.font = null;
-
+	this.setIcon(Interface.file_dir + "icons/assets/font.png");
+	
 	//Self pointer
 	var self = this;
+
+	//Image
+	this.image = document.createElement("img");
+	this.image.style.position = "absolute";
+	this.image.style.top = "5px";
+	this.element.appendChild(this.image);
 
 	//Context menu event
 	this.element.oncontextmenu = function(event)
@@ -96,7 +103,20 @@ FontAsset.prototype.updateMetadata = function()
 {
 	if(this.font !== null)
 	{
+		//TODO <FONT PREVIEW>
 		this.image.src = Interface.file_dir + "icons/assets/font.png";
+		
 		this.setText(this.font.name);
 	}
+}
+
+//Update interface
+FontAsset.prototype.updateInterface = function()
+{
+	Asset.prototype.updateInterface.call(this);
+
+	//Update image
+	this.image.width = this.size.x * this.scale.x;
+	this.image.height = this.size.y * this.scale.y;
+	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
 }

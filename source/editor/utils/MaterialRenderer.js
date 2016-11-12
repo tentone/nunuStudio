@@ -8,29 +8,28 @@ function MaterialRenderer()
 	this.canvas.height = 128;
 
 	//Renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, alpha: true});
+	this.renderer = new THREE.WebGLRenderer({canvas:this.canvas, alpha:true});
 	this.renderer.setSize(this.canvas.width, this.canvas.width);
 
 	//Camera
-	this.camera = new PerspectiveCamera(90, this.canvas.width/this.canvas.height);
-
-	//Material Sphere
-	this.obj = new Mesh(new THREE.SphereBufferGeometry(1, 32, 32), null);
-	this.obj.position.set(0, 0, -1.5);
-	this.obj.visible = false;
-	
-	//Sprite
-	this.sprite = new Sprite(null);
-	this.sprite.position.set(0, 0, -0.5);
-	this.sprite.visible = false;
+	this.camera = new THREE.PerspectiveCamera(90, this.canvas.width / this.canvas.height);
 
 	//Scene
-	this.scene = new Scene();
-	this.scene.position.set(0, 0, 0);
-	this.scene.add(this.obj);
+	this.scene = new THREE.Scene();
+	this.scene.add(new THREE.PointLight(0x666666));
+	this.scene.add(new THREE.AmbientLight(0x666666));
+
+	//Sphere
+	this.sphere = new Mesh(new THREE.SphereBufferGeometry(1, 32, 32), null);
+	this.sphere.position.set(0, 0, -1.5);
+	this.sphere.visible = false;
+	this.scene.add(this.sphere);
+
+	//Sprite
+	this.sprite = new THREE.Sprite(null);
+	this.sprite.position.set(0, 0, -0.5);
+	this.sprite.visible = false;
 	this.scene.add(this.sprite);
-	this.scene.add(new PointLight(0x666666));
-	this.scene.add(new AmbientLight(0x666666));
 }
 
 //Set render size
@@ -48,23 +47,22 @@ MaterialRenderer.prototype.renderMaterial = function(material, img)
 	{
 		this.sprite.material = material;
 		this.sprite.visible = true;
-		this.obj.visible = false;
+		this.sphere.visible = false;
 	}
 	else
 	{
-		this.obj.material = material;
-		this.obj.visible = true;
+		this.sphere.material = material;
+		this.sphere.visible = true;
 		this.sprite.visible = false;
 	}
 
-	//Render material
 	this.renderer.render(this.scene, this.camera);
 
-	//Create image blob and set image src
-	var self = this;
+	//Create image blob and set as image source
+	var canvas = this.canvas;
 	if(img !== undefined)
 	{
-		self.canvas.toBlob(function(blob)
+		canvas.toBlob(function(blob)
 		{
 			var url = URL.createObjectURL(blob);
 			img.src = url;

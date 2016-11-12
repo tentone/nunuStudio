@@ -16,26 +16,20 @@ function Asset(parent)
 	var id = "asset" + Asset.id;
 	Asset.id++;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "pointer";
-	
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
 
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Image
-	this.image = document.createElement("img");
-	this.image.style.position = "absolute";
-	this.image.style.top = "5px";
-	this.element.appendChild(this.image);
+	//Icon
+	this.icon = document.createElement("img");
+	this.icon.style.position = "absolute";
+	this.icon.style.bottom = "15px";
+	this.icon.style.right = "5px";
+	this.icon.style.width = "20px";
+	this.icon.style.height = "20px";
+	this.icon.style.zIndex = 1;
+	//this.element.appendChild(this.icon);
 
 	//Text
 	this.text = new Text(this.element);
@@ -78,9 +72,9 @@ Asset.prototype.setParent = function(parent)
 }
 
 //Set file icon
-Asset.prototype.setIcon = function(image)
+Asset.prototype.setIcon = function(icon)
 {
-	this.image.src = image;
+	this.icon.src = icon;
 }
 
 //Set file label
@@ -119,11 +113,6 @@ Asset.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	//Update image
-	this.image.width = this.size.x * this.scale.x;
-	this.image.height = this.size.y * this.scale.y;
-	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
 
 	//Update file text
 	this.text.visible = this.visible;
