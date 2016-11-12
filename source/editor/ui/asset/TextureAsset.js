@@ -5,24 +5,16 @@ function TextureAsset(parent)
 	Asset.call(this, parent);
 
 	this.texture = null;
+	this.setIcon(Interface.file_dir + "icons/assets/image.png");
 
 	//Self pointer
 	var self = this;
 
-	//Video
-	this.video = document.createElement("video");
-	this.video.style.position = "absolute";
-	this.video.style.top = "5px";
-	this.video.loop = true;
-	this.video.autostart = true;
-	this.video.volume = 0.0;
-	//this.element.appendChild(this.image);
-
-	//Canvas
-	this.canvas = document.createElement("canvas");
-	this.canvas.style.position = "absolute";
-	this.canvas.style.top = "5px";
-	//this.element.appendChild(this.image);
+	//Image
+	this.image = document.createElement("img");
+	this.image.style.position = "absolute";
+	this.image.style.top = "5px";
+	this.element.appendChild(this.image);
 
 	//Context menu event
 	this.element.oncontextmenu = function(event)
@@ -91,11 +83,35 @@ TextureAsset.prototype = Object.create(Asset.prototype);
 //Set object to file
 TextureAsset.prototype.setTexture = function(texture)
 {
-	//if(texture instanceof THREE.VideoTexture)
-	//if(texture instanceof THREE.CanvasTexture)
-	if(texture instanceof THREE.Texture)
+	if(texture instanceof THREE.VideoTexture)
 	{
 		this.texture = texture;
+		//TODO <TEXTURE PREVIEW CODE>
+
+		//Video
+		this.video = document.createElement("video");
+		this.video.style.position = "absolute";
+		this.video.style.top = "5px";
+		this.video.loop = true;
+		this.video.autostart = true;
+		this.video.volume = 0.0;
+		//this.element.appendChild(this.video);
+	}
+	else if(texture instanceof THREE.CanvasTexture)
+	{
+		this.texture = texture;
+		//TODO <TEXTURE PREVIEW CODE>
+
+		//Canvas
+		this.canvas = document.createElement("canvas");
+		this.canvas.style.position = "absolute";
+		this.canvas.style.top = "5px";
+		//this.element.appendChild(this.canvas);
+	}
+	else if(texture instanceof THREE.Texture)
+	{
+		this.texture = texture;
+		this.image.src = this.texture.image.src;
 		this.updateMetadata();
 	}
 }
@@ -105,7 +121,17 @@ TextureAsset.prototype.updateMetadata = function()
 {
 	if(this.texture !== null)
 	{
-		this.image.src = this.texture.image.src;
 		this.setText(this.texture.name);
 	}
+}
+
+//Update interface
+TextureAsset.prototype.updateInterface = function()
+{
+	Asset.prototype.updateInterface.call(this);
+
+	//Update image
+	this.image.width = this.size.x * this.scale.x;
+	this.image.height = this.size.y * this.scale.y;
+	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
 }

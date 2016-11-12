@@ -5,13 +5,20 @@ function MaterialAsset(parent)
 	Asset.call(this, parent);
 
 	this.material = null;
-
+	this.setIcon(Interface.file_dir + "icons/misc/material.png");
+	
 	//Self pointer
 	var self = this;
 
 	//Use to store original material color on highlight
 	this.material_color = new THREE.Color(0, 0, 0);
 	this.material_highlighted = false;
+
+	//Material Preview
+	this.image = document.createElement("img");
+	this.image.style.position = "absolute";
+	this.image.style.top = "5px";
+	this.element.appendChild(this.image);
 
 	//Mouse over event
 	this.element.onmouseenter = function()
@@ -258,4 +265,15 @@ MaterialAsset.prototype.updateMetadata = function()
 		Editor.material_renderer.renderMaterial(this.material, this.image);
 		this.setText(this.material.name);
 	}
+}
+
+//Update interface
+MaterialAsset.prototype.updateInterface = function()
+{
+	Asset.prototype.updateInterface.call(this);
+
+	//Update image
+	this.image.width = this.size.x * this.scale.x;
+	this.image.height = this.size.y * this.scale.y;
+	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
 }

@@ -72,7 +72,7 @@ function TextureBox(parent)
 		{
 			var uuid = event.dataTransfer.getData("uuid");
 			var texture = DragBuffer.popDragElement(uuid);
-			if(texture !== null)
+			if(texture instanceof THREE.Texture)
 			{
 				self.setTexture(texture);
 			}

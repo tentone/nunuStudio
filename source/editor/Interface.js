@@ -246,7 +246,7 @@ Interface.initialize = function()
 	//Textures menu
 	var import_texture = Interface.asset_file.addMenu("Texture", Interface.file_dir + "icons/assets/image.png");
 
-	//Load Image texture
+	//Image texture
 	import_texture.addOption("Texture", function()
 	{
 		FileSystem.chooseFile(function(files)
@@ -258,21 +258,20 @@ Interface.initialize = function()
 
 				var texture = new Texture(new Image(file));
 				texture.name = name;
-				var material = new THREE.MeshStandardMaterial({map: texture, roughness: 0.6, metalness: 0.2});
-				material.name = name;
-				Editor.program.addMaterial(material);
+				Editor.program.addTexture(texture);
+
 				Editor.updateObjectViews();
 			}
 		}, "image/*");
 	}, Interface.file_dir + "icons/assets/image.png");
 
-	//Create text texture
+	//Text texture
 	import_texture.addOption("Text Texture", function()
 	{
 		var texture = new TextTexture("abcdef", Editor.default_font);
-		var material = new THREE.MeshStandardMaterial({map: texture, roughness: 0.6, metalness: 0.2});
-		material.name = "text";
-		Editor.program.addMaterial(material);
+		texture.name = "text";
+		Editor.program.addTexture(texture);
+
 		Editor.updateObjectViews();
 	}, Interface.file_dir + "icons/assets/image.png");
 
@@ -289,9 +288,8 @@ Interface.initialize = function()
 
 				var texture = new VideoTexture(new Video(file));
 				texture.name = name;
-				var material = new THREE.MeshStandardMaterial({map: texture, roughness: 0.6, metalness: 0.2});
-				material.name = name;
-				Editor.program.addMaterial(material);
+				Editor.program.addTexture(texture);
+
 				Editor.updateObjectViews();
 			}
 		}, "video/*");
@@ -302,9 +300,8 @@ Interface.initialize = function()
 	{
 		var texture = new WebcamTexture();
 		texture.name = "webcam";
-		var material = new THREE.MeshStandardMaterial({map: texture, roughness: 0.6, metalness: 0.2});
-		material.name = "webcam";
-		Editor.program.addMaterial(material);
+		Editor.program.addTexture(texture);
+
 		Editor.updateObjectViews();
 	}, Interface.file_dir + "icons/hw/webcam.png");
 
