@@ -85,10 +85,10 @@ function MaterialEditor(parent)
 	this.renderer.shadowMap.type = Settings.render.shadows_type;
 
 	//Material camera
-	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y);
+	this.camera = new THREE.PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y);
 
 	//Material preview scene
-	this.scene = new Scene();
+	this.scene = new THREE.Scene();
 	this.sky = new Sky();
 	var sun = this.sky.sun;
 	sun.shadow.camera.left = -5;
@@ -98,11 +98,13 @@ function MaterialEditor(parent)
 	this.scene.add(this.sky);
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x555555));
-	this.obj = new Mesh(new THREE.SphereBufferGeometry(1, 64, 64), null);
+
+	this.obj = new THREE.Mesh(new THREE.SphereBufferGeometry(1, 64, 64), null);
 	this.obj.position.set(0, 0, -2.5);
 	this.obj.visible = false;
 	this.scene.add(this.obj);
-	this.sprite = new Sprite(null);
+	
+	this.sprite = new THREE.Sprite(null);
 	this.sprite.position.set(0, 0, -1.5);
 	this.sprite.visible = false;
 	this.scene.add(this.sprite);
