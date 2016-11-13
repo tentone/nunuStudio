@@ -2,14 +2,7 @@
 
 function TabButton(parent, tab)
 {
-	if(parent === undefined)
-	{
-		this.parent = document.body;
-	}
-	else
-	{
-		this.parent = parent;
-	}
+	this.parent = (parent !== undefined) ? parent : document.body;
 
 	//Element
 	this.element = document.createElement("div");

@@ -6,7 +6,7 @@ function Script(code)
 	this.name = "script";
 
 	this.script = null;
-	this.setCode((code !== undefined) ? code : "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n}\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n}\n\nthis.onMouseOver = function()\n{\n	//TODO <MOUSE OVER CODE>\n}");
+	this.setCode((code !== undefined) ? code : "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n};\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n};\n\nthis.onMouseOver = function()\n{\n	//TODO <MOUSE OVER CHILDREN CODE>\n};");
 
 	this.program = null;
 	this.scene = null;
@@ -76,9 +76,7 @@ Script.prototype.setCode = function(code)
 	}
 	catch(e)
 	{
-		console.warn("NUNU: Error compiling script code");
-		console.log(e);
-		
+		console.warn("NunuStudio: Error compiling script code");
 		this.script = new(function(){})();
 	}
 }

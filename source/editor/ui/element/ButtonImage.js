@@ -3,14 +3,7 @@
 function ButtonImage(parent)
 {
 	//Parent
-	if(parent === undefined)
-	{
-		this.parent = document.body;
-	}
-	else
-	{
-		this.parent = parent;
-	}
+	this.parent = (parent !== undefined) ? parent : document.body;
 	
 	//ID
 	var id = "but_img" + ButtonImage.id;

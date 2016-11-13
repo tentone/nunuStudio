@@ -3,14 +3,7 @@
 function TabGroup(parent)
 {
 	//Parent
-	if(parent === undefined)
-	{
-		this.parent = document.body;
-	}
-	else
-	{
-		this.parent = parent;
-	}
+	this.parent = (parent !== undefined) ? parent : document.body;
 	
 	//ID
 	var id = "tab_group" + TabGroup.id;
