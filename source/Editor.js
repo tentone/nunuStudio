@@ -19,7 +19,7 @@ catch(e)
 include("Nunu.js");
 
 //Runtime dependencies
-include("lib/three/three.min.js");
+include("lib/three/three.js");
 include("lib/three/effects/VREffect.js");
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
@@ -37,6 +37,7 @@ include("core/three/Color.js");
 include("core/three/Texture.js");
 include("core/three/LightShadow.js");
 include("core/three/Fog.js");
+include("core/three/RectAreaLight.js");
 
 include("core/input/Key.js");
 include("core/input/Keyboard.js");
