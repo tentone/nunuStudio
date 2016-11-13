@@ -3,14 +3,7 @@
 function ScriptEditor(parent)
 {
 	//Parent
-	if(parent === undefined)
-	{
-		this.parent = document.body;
-	}
-	else
-	{
-		this.parent = parent;
-	}
+	this.parent = (parent !== undefined) ? parent : document.body;
 	
 	//ID
 	var id = "script_editor" + ScriptEditor.id;
@@ -40,8 +33,11 @@ function ScriptEditor(parent)
 		hintOptions:
 		{
 			hint: CodeMirror.hint.anyword
-		}
+		},
+		lint: true,
+		gutters: ["CodeMirror-lint-markers"]
 	});
+
 	this.code.setOption("theme", Settings.code.theme);
 	this.code.setOption("mode", "javascript");
 

@@ -116,6 +116,9 @@ include("lib/codemirror/addon/dialog/dialog.css");
 include("lib/codemirror/addon/selection/active-line.js");
 include("lib/codemirror/mode/javascript.js");
 include("lib/codemirror/mode/glsl.js");
+include("lib/codemirror/addon/lint/lint.css");
+include("lib/codemirror/addon/lint/lint.js");
+include("lib/codemirror/addon/lint/javascript-lint.js");
 include("lib/codemirror/theme/*");
 
 //Threejs
@@ -135,6 +138,7 @@ include("lib/three/animation/Animation.js");
 include("lib/three/animation/AnimationHandler.js");
 include("lib/three/animation/KeyFrameAnimation.js");
 
+include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/quickhull.js");
 
@@ -237,11 +241,12 @@ include("editor/helpers/GridHelper.js");
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
 
+include("editor/history/History.js");
+include("editor/history/Action.js");
+
 include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
-include("editor/History.js");
-include("editor/Action.js");
 
 //Editor state
 Editor.STATE_IDLE = 8;
@@ -495,6 +500,12 @@ Editor.update = function()
 				if(Editor.tool !== null)
 				{
 					Editor.is_editing_object = Editor.tool.update();
+					
+					if(Mouse.buttonJustPressed(Mouse.LEFT) && Editor.is_editing_object)
+					{
+						Editor.history.push(Editor.selected_object, Action.CHANGED);
+					}
+
 					if(Editor.is_editing_object)
 					{
 						Editor.updateObjectPanel();
@@ -772,6 +783,19 @@ Editor.isObjectSelected = function(obj)
 	return false;
 }
 
+//Add object to actual scene
+Editor.addToScene = function(obj)
+{
+	if(Editor.program.scene !== null)
+	{
+		Editor.program.scene.add(obj);
+
+		Editor.history.push(obj, Action.ADDED);
+
+		Editor.updateObjectViews();
+	}
+}
+
 //Delete selected Object
 Editor.deleteObject = function(obj)
 {
@@ -787,6 +811,8 @@ Editor.deleteObject = function(obj)
 			Editor.resetEditingFlags();
 		}
 
+		Editor.history.push(obj, Action.REMOVED);
+		
 		obj.destroy();
 
 		Editor.updateObjectViews();
@@ -815,27 +841,29 @@ Editor.copyObject = function(obj)
 //Cut selected object
 Editor.cutObject = function(obj)
 {
-	if(obj !== undefined)
+	if(obj === undefined)
 	{
-		if(Editor.clipboard !== undefined)
+		if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
 		{
-			Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
+			obj = Editor.selected_object;
 		}
-		obj.destroy();
-		Editor.updateObjectViews();
-		if(Editor.isObjectSelected(obj))
+		else
 		{
-			Editor.resetEditingFlags();
+			return;
 		}
 	}
-	else if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
+
+	if(Editor.clipboard !== undefined)
 	{
-		if(Editor.clipboard !== undefined)
-		{
-			Editor.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
-		}
-		Editor.selected_object.destroy();
-		Editor.updateObjectViews();
+		Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
+	}
+	
+	Editor.history.push(obj, Action.REMOVED);
+	obj.destroy();
+
+	Editor.updateObjectViews();
+	if(Editor.isObjectSelected(obj))
+	{
 		Editor.resetEditingFlags();
 	}
 }
@@ -865,6 +893,8 @@ Editor.pasteObject = function(target)
 			Editor.program.scene.add(obj);
 		}
 
+		Editor.history.push(obj, Action.ADDED);
+		
 		Editor.updateObjectViews();
 	}
 	catch(e){}
@@ -873,13 +903,29 @@ Editor.pasteObject = function(target)
 //Redo action
 Editor.redo = function()
 {
-	alert("Undo and redo not implemented!");
+	alert("Redo not implemented");
 }
 
 //Undo action
 Editor.undo = function()
 {
-	alert("Undo and redo not implemented!");
+	var action = Editor.history.undo();
+	if(action != null)
+	{
+		Editor.updateObjectViews();
+	
+		if(action.type === Action.CHANGED)
+		{
+			if(action.object.uuid === Editor.selected_object.uuid)
+			{
+				Editor.selectObject(action.object);
+			}
+		}
+	}
+	else
+	{
+		alert("Not possible to undo any further");
+	}
 }
 
 //Update UI panel to match selected object
@@ -1101,16 +1147,6 @@ Editor.createDefaultResouces = function()
 	Editor.default_material.name = "default";
 	Editor.default_sprite_material = new THREE.SpriteMaterial({map: Editor.default_texture, color: 0xffffff});
 	Editor.default_sprite_material.name = "default";
-}
-
-//Add object to actual scene
-Editor.addToScene = function(obj)
-{
-	if(Editor.program.scene !== null)
-	{
-		Editor.program.scene.add(obj);
-		Editor.updateObjectViews();
-	}
 }
 
 //Select tool to manipulate objects

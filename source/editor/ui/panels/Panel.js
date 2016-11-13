@@ -3,14 +3,7 @@
 function Panel(parent)
 {
 	//Parent
-	if(parent === undefined)
-	{
-		this.parent = document.body;
-	}
-	else
-	{
-		this.parent = parent;
-	}
+	this.parent = (parent !== undefined) ? parent : document.body;
 	
 	//ID
 	Panel.id++;
