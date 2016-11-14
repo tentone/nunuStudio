@@ -175,7 +175,7 @@ Program.prototype.removeMaterial = function(material, default_material, default_
 	}
 }
 
-//Get material by name
+//Get texture by name
 Program.prototype.getTextureByName = function(name)
 {
 	for(var i in this.textures)
@@ -270,6 +270,20 @@ Program.prototype.removeTexture = function(texture, default_texture)
 	}
 }
 
+//Get font by name
+Program.prototype.getFontByName = function(name)
+{
+	for(var i in this.fonts)
+	{
+		if(this.fonts[i].name === name)
+		{
+			return this.fonts[i];
+		}
+	}
+
+	return null;
+}
+
 //Add font to fonts list
 Program.prototype.addFont = function(font)
 {
@@ -299,6 +313,20 @@ Program.prototype.removeFont = function(font, default_font)
 			}
 		});
 	}
+}
+
+//Get audio by name
+Program.prototype.getAudioByName = function(name)
+{
+	for(var i in this.audio)
+	{
+		if(this.audio[i].name === name)
+		{
+			return this.audio[i];
+		}
+	}
+
+	return null;
 }
 
 //Add audio to audio list
