@@ -7,35 +7,6 @@ function DirectionalLightPanel(parent)
 	//Self pointer
 	var self = this;
 
-	//Name
-	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
-	this.name.size.set(200, 18);
-	this.name.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.name = self.name.getText();
-			Editor.updateObjectViews();
-		}
-	});
-	this.form.add(this.name);
-	this.form.nextRow();
-
-	//Position
-	this.form.addText("Position");
-	this.position = new CoordinatesBox(this.form.element);
-	this.position.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			var position = self.position.getValue();
-			self.obj.position.set(position.x, position.y, position.z);
-		}
-	});
-	this.form.add(this.position);
-	this.form.nextRow();
-
 	//Color
 	this.form.addText("Color");
 	this.color = new ColorChooser(this.form.element);
@@ -235,13 +206,14 @@ DirectionalLightPanel.prototype = Object.create(Panel.prototype);
 //Update panel content from attached object
 DirectionalLightPanel.prototype.updatePanel = function()
 {
+	Panel.prototype.updatePanel.call(this);
+	
 	if(this.obj !== null)
 	{
-		this.name.setText(this.obj.name);
-		this.position.setValue(this.obj.position);
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
+		
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.shadow_width.setValue(this.obj.shadow.mapSize.width);
 		this.shadow_height.setValue(this.obj.shadow.mapSize.height);

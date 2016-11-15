@@ -31,6 +31,10 @@ function Action(object, type, parent, state)
 }
 
 //Actions type
-Action.ADDED = 0;
-Action.REMOVED = 1;
-Action.CHANGED = 2;
+Action.ADDED = 10;
+Action.REMOVED = 11;
+Action.CHANGED = 12;
+
+//Action target
+Action.OBJECT = 20;
+Action.RESOURCE = 21;

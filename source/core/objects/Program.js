@@ -537,7 +537,6 @@ Program.prototype.toJSON = function(meta, export_resources)
 				var aud = audio[i];
 				if(meta.audio[aud.uuid] === undefined)
 				{
-					console.log(aud);
 					meta.audio[aud.uuid] = aud.toJSON(meta);
 				}
 			}

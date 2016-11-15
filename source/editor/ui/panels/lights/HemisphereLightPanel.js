@@ -7,35 +7,6 @@ function HemisphereLightPanel(parent)
 	//Self pointer
 	var self = this;
 
-	//Name
-	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
-	this.name.size.set(200, 18);
-	this.name.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.name = self.name.getText();
-			Editor.updateObjectViews();
-		}
-	});
-	this.form.add(this.name);
-	this.form.nextRow();
-
-	//Position
-	this.form.addText("Position");
-	this.position = new CoordinatesBox(this.form.element);
-	this.position.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			var position = self.position.getValue();
-			self.obj.position.set(position.x, position.y, position.z);
-		}
-	});
-	this.form.add(this.position);
-	this.form.nextRow();
-
 	//Sky color
 	this.form.addText("Sky color");
 	this.color = new ColorChooser(this.form.element);
@@ -104,10 +75,10 @@ HemisphereLightPanel.prototype = Object.create(Panel.prototype);
 //Update panel content from attached object
 HemisphereLightPanel.prototype.updatePanel = function()
 {
+	Panel.prototype.updatePanel.call(this);
+
 	if(this.obj !== null)
 	{
-		this.name.setText(this.obj.name);
-		this.position.setValue(this.obj.position);
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.groundColor.setValue(this.obj.groundColor.r, this.obj.groundColor.g, this.obj.groundColor.b);
 		this.visible.setValue(this.visible);

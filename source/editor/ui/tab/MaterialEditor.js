@@ -202,7 +202,7 @@ function MaterialEditor(parent)
 	this.side = new DropdownList(this.form.element);
 	this.side.position.set(100, 85);
 	this.side.size.set(150, 18);
-	this.side.addValue("Font", THREE.FrontSide);
+	this.side.addValue("Front", THREE.FrontSide);
 	this.side.addValue("Back", THREE.BackSide);
 	this.side.addValue("Double", THREE.DoubleSide);
 	this.side.setOnChange(function()

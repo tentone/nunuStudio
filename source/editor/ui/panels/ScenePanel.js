@@ -7,21 +7,6 @@ function ScenePanel(parent)
 	//Self pointer
 	var self = this;
 
-	//Name
-	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
-	this.name.size.set(200, 18);
-	this.name.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.name = self.name.getText();
-			Editor.updateObjectViews();
-		}
-	});
-	this.form.add(this.name);
-	this.form.nextRow();
-
 	//Select scene as default
 	this.default = new CheckBox(this.form.element);
 	this.default.setText("Default scene");
@@ -199,7 +184,6 @@ ScenePanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{
-		this.name.setText(this.obj.name);
 		this.default.setValue(this.obj.uuid === this.obj.parent.default_scene);
 		
 		if(this.obj.fog instanceof THREE.Fog)
@@ -235,6 +219,8 @@ ScenePanel.prototype.updatePanel = function()
 //Update wich forms should be visible in the panel
 ScenePanel.prototype.updateForms = function()
 {
+	Panel.prototype.updatePanel.call(this);
+	
 	if(this.obj !== null)
 	{
 		this.fog_linear_form.visible = (this.obj.fog instanceof THREE.Fog) ? true : false;
