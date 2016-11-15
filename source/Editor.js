@@ -1394,7 +1394,7 @@ Editor.saveProgram = function(fname, compressed)
 	//If compressed dont store all resources
 	if(compressed === true)
 	{
-		var json = JSON.stringify(Editor.program.toJSON(undefined, false));
+		var json = JSON.stringify(Editor.program.toJSON());
 	}
 	else
 	{

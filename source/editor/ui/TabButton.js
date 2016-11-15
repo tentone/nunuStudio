@@ -21,7 +21,7 @@ function TabButton(parent, tab)
 		event.preventDefault();
 	};
 
-	this.element.onclick = function(event)
+	this.element.onmousedown = function(event)
 	{
 		//Select tab on mouse left click
 		if(event.which - 1 === Mouse.LEFT)
