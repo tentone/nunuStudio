@@ -7,38 +7,7 @@ function PhysicsPanel(parent)
 	//Self pointer
 	var self = this;
 
-	//Name
-	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
-	this.name.size.set(200, 18);
-	this.name.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.name = self.name.getText();
-			Editor.updateObjectViews();
-		}
-	});
-	this.form.add(this.name);
-	this.form.nextRow();
-
-	//Position
-	this.form.addText("Position");
-	this.position = new CoordinatesBox(this.form.element);
-	this.position.setStep(0.1);
-	this.position.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.position.copy(self.position.getValue());
-		}
-	});
-	this.form.add(this.position);
-	this.form.nextRow();
-
 	//Scale
-	this.form.addText("Scale");
-	this.scale = new CoordinatesBox(this.form.element);
 	this.scale.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -65,23 +34,6 @@ function PhysicsPanel(parent)
 			}
 		}
 	});
-	this.form.add(this.scale);
-	this.form.nextRow();
-
-	//Rotation
-	this.form.addText("Rotation");
-	this.rotation = new CoordinatesBox(this.form.element);
-	this.rotation.setStep(0.1);
-	this.rotation.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			var rot = self.rotation.getValue();
-			self.obj.rotation.set(rot.x, rot.y, rot.z);
-		}
-	});
-	this.form.add(this.rotation);
-	this.form.nextRow();
 
 	//Body Type
 	this.form.addText("Type");
@@ -230,12 +182,10 @@ PhysicsPanel.prototype = Object.create(Panel.prototype);
 //Update panel content from attached object
 PhysicsPanel.prototype.updatePanel = function()
 {
+	Panel.prototype.updatePanel.call(this);
+
 	if(this.obj !== null)
 	{
-		this.name.setText(this.obj.name);
-		this.position.setValue(this.obj.position);
-		this.scale.setValue(this.obj.scale);
-		this.rotation.setValue(this.obj.rotation);
 		this.type.setValue(this.obj.body.type);
 		this.mass.setValue(this.obj.body.mass);
 		this.linearDamping.setValue(this.obj.body.linearDamping);

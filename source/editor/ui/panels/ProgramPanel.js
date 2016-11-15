@@ -7,21 +7,6 @@ function ProgramPanel(parent)
 	//Self pointer
 	var self = this;
 
-	//Name
-	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
-	this.name.size.set(200, 18);
-	this.name.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.name = self.name.getText();
-			Editor.updateObjectViews();
-		}
-	});
-	this.form.add(this.name);
-	this.form.nextRow();
-
 	//Author
 	this.form.addText("Author");
 	this.author = new TextBox(this.form.element);
@@ -110,9 +95,10 @@ ProgramPanel.prototype = Object.create(Panel.prototype);
 //Update panel content from attached object
 ProgramPanel.prototype.updatePanel = function()
 {
+	Panel.prototype.updatePanel.call(this);
+
 	if(this.obj !== null)
 	{
-		this.name.setText(this.obj.name);
 		this.author.setText(this.obj.author);
 		this.version.setText(this.obj.version);
 		this.lock_pointer.setValue(this.obj.lock_pointer);

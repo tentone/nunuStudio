@@ -6,21 +6,6 @@ function AudioPanel(parent)
 
 	//Self pointer
 	var self = this;
-
-	//Name
-	this.form.addText("Name");
-	this.name = new TextBox(this.form.element);
-	this.name.size.set(200, 18);
-	this.name.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.name = self.name.getText();
-			Editor.updateObjectViews();
-		}
-	});
-	this.form.add(this.name);
-	this.form.nextRow();
 	
 	//Autoplay
 	this.autoplay = new CheckBox(this.form.element);
@@ -75,9 +60,10 @@ AudioPanel.prototype = Object.create(Panel.prototype);
 //Update panel content from attached object
 AudioPanel.prototype.updatePanel = function()
 {
+	Panel.prototype.updatePanel.call(this);
+
 	if(this.obj !== null)
 	{
-		this.name.setText(this.obj.name);
 		this.autoplay.setValue(this.obj.autoplay);
 		this.loop.setValue(this.obj.source.loop);
 		this.playbackRate.setValue(this.obj.playbackRate);
