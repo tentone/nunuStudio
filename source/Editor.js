@@ -354,7 +354,6 @@ Editor.initialize = function()
 	Editor.axis_helper.visible = Settings.editor.axis_enabled;
 	Editor.tool_scene.add(Editor.axis_helper);
 
-
 	//Object helper container
 	Editor.object_helper = new THREE.Scene();
 	Editor.tool_scene.add(Editor.object_helper);
@@ -1404,7 +1403,7 @@ Editor.saveProgram = function(fname, compressed)
 
 	FileSystem.writeFile(fname, json);
 
-	if(Editor.open_file === null)
+	if(Editor.open_file !== fname)
 	{
 		Editor.setOpenFile(fname);
 	}
