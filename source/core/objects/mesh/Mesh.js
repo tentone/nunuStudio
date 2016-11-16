@@ -18,7 +18,7 @@ Mesh.prototype = Object.create(THREE.Mesh.prototype);
 Mesh.prototype.dispose = function()
 {
 	//Dispose material and geometry
-	if(this.material.dispose !== undefined)
+	if(this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
