@@ -7,10 +7,10 @@
 	"editor": {
 		"grid_size": 500,
 		"grid_spacing": 5,
-		"grid_enabled": false,
-		"axis_enabled": false,
+		"grid_enabled": true,
+		"axis_enabled": true,
 		"camera_preview_enabled": false,
-		"camera_preview_percentage": 0.35,
+		"camera_preview_percentage": "0.6",
 		"lock_mouse": true,
 		"transformation_space": "world"
 	},

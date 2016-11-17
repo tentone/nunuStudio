@@ -14,8 +14,19 @@ function MaterialRenderer()
 	//Camera
 	this.camera = new THREE.PerspectiveCamera(90, this.canvas.width / this.canvas.height);
 
+	//Mesh sphere scene
+	this.scene = new THREE.Scene();
+
 	//Sphere
 	this.sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), null);
+	this.scene.add(this.sphere);
+
+	this.ambient = new THREE.AmbientLight(0x777777);
+	this.scene.add(this.ambient);
+
+	this.point = new THREE.PointLight(0xBBBBBB);
+	this.point.position.set(0, 1, 2);
+	//this.scene.add(this.point);
 
 	//Sprite
 	this.sprite = new THREE.Sprite(null);
@@ -42,13 +53,13 @@ MaterialRenderer.prototype.renderMaterial = function(material, img)
 	{
 		this.sphere.material = material;
 		this.camera.position.set(0, 0, 1.5);
-		this.renderer.render(this.sphere, this.camera);
+		this.renderer.render(this.scene, this.camera);
 	}
 
 	//Create image blob and set as image source
-	var canvas = this.canvas;
 	if(img !== undefined)
 	{
+		var canvas = this.canvas;
 		canvas.toBlob(function(blob)
 		{
 			var url = URL.createObjectURL(blob);
