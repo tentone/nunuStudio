@@ -10,12 +10,6 @@ function TextureAsset(parent)
 	//Self pointer
 	var self = this;
 
-	//Image
-	this.image = document.createElement("img");
-	this.image.style.position = "absolute";
-	this.image.style.top = "5px";
-	this.element.appendChild(this.image);
-
 	//Context menu event
 	this.element.oncontextmenu = function(event)
 	{
@@ -86,16 +80,16 @@ TextureAsset.prototype.setTexture = function(texture)
 	if(texture instanceof THREE.VideoTexture)
 	{
 		this.texture = texture;
-		//TODO <TEXTURE PREVIEW CODE>
 
 		//Video
-		this.video = document.createElement("video");
-		this.video.style.position = "absolute";
-		this.video.style.top = "5px";
-		this.video.loop = true;
-		this.video.autostart = true;
-		this.video.volume = 0.0;
-		//this.element.appendChild(this.video);
+		this.preview = document.createElement("video");
+		this.preview.style.position = "absolute";
+		this.preview.style.top = "5px";
+		this.preview.loop = true;
+		this.preview.autostart = true;
+		this.preview.volume = 0.0;
+		this.preview.src = this.texture.image.src;
+		this.element.appendChild(this.preview);
 	}
 	else if(texture instanceof THREE.CanvasTexture)
 	{
@@ -111,9 +105,16 @@ TextureAsset.prototype.setTexture = function(texture)
 	else if(texture instanceof THREE.Texture)
 	{
 		this.texture = texture;
-		this.image.src = this.texture.image.src;
-		this.updateMetadata();
+
+		//Image
+		this.preview = document.createElement("img");
+		this.preview.style.position = "absolute";
+		this.preview.style.top = "5px";
+		this.preview.src = this.texture.image.src;
+		this.element.appendChild(this.preview);	
 	}
+
+	this.updateMetadata();
 }
 
 //Update material preview
@@ -130,8 +131,7 @@ TextureAsset.prototype.updateInterface = function()
 {
 	Asset.prototype.updateInterface.call(this);
 
-	//Update image
-	this.image.width = this.size.x * this.scale.x;
-	this.image.height = this.size.y * this.scale.y;
-	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
+	this.preview.width = this.size.x * this.scale.x;
+	this.preview.height = this.size.y * this.scale.y;
+	this.preview.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
 }
