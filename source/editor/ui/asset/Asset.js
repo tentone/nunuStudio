@@ -22,7 +22,7 @@ function Asset(parent)
 	this.icon.style.width = "20px";
 	this.icon.style.height = "20px";
 	this.icon.style.zIndex = 1;
-	//this.element.appendChild(this.icon);
+	this.element.appendChild(this.icon);
 
 	//Text
 	this.text = new Text(this.element);
