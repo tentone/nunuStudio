@@ -420,7 +420,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				for(var i = 0; i < emitter.color.value.length; i++)
 				{
 					emitter.color.value[i] = THREE.Color.fromJSON(emitter.color.value[i]);
-					emitter.color.spread[i] = THREE.Vector3.fromJSON(emitter.color.spread[i]);
+					emitter.color.spread[i] = THREE.Color.fromJSON(emitter.color.spread[i]);
 				}
 			}
 			object = new ParticleEmitter(data.group, data.emitter);

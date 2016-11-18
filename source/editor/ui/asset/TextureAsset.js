@@ -5,7 +5,7 @@ function TextureAsset(parent)
 	Asset.call(this, parent);
 
 	this.texture = null;
-	this.setIcon(Interface.file_dir + "icons/assets/image.png");
+	this.setIcon(Interface.file_dir + "icons/misc/image.png");
 
 	//Self pointer
 	var self = this;
@@ -77,30 +77,24 @@ TextureAsset.prototype = Object.create(Asset.prototype);
 //Set object to file
 TextureAsset.prototype.setTexture = function(texture)
 {
-	if(texture instanceof THREE.VideoTexture)
+	if(texture instanceof VideoTexture || texture instanceof WebcamTexture)
 	{
 		this.texture = texture;
 
 		//Video
 		this.preview = document.createElement("video");
+		this.preview.draggable = true;
 		this.preview.style.position = "absolute";
 		this.preview.style.top = "5px";
-		this.preview.loop = true;
-		this.preview.autostart = true;
 		this.preview.volume = 0.0;
 		this.preview.src = this.texture.image.src;
-		this.element.appendChild(this.preview);
-	}
-	else if(texture instanceof THREE.CanvasTexture)
-	{
-		this.texture = texture;
-		//TODO <TEXTURE PREVIEW CODE>
+		this.preview.onload = function()
+		{
+			this.preview.loop = true;
+			this.preview.autostart = true;
+		};
 
-		//Canvas
-		this.canvas = document.createElement("canvas");
-		this.canvas.style.position = "absolute";
-		this.canvas.style.top = "5px";
-		//this.element.appendChild(this.canvas);
+		this.element.appendChild(this.preview);
 	}
 	else if(texture instanceof THREE.Texture)
 	{

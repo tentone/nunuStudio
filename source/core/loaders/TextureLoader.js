@@ -44,6 +44,11 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	{
 		texture = new WebcamTexture();
 	}
+	//Canvas texture
+	else if(category === "Canvas")
+	{
+		texture = new CanvasTexture(json.width, json.height);
+	}
 	//Texture
 	else
 	{

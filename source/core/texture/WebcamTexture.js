@@ -16,7 +16,7 @@ function WebcamTexture(mapping, wrapS, wrapT, magFilter, minFilter, type, anisot
 		},
 		function(error)
 		{
-			console.warn("WebcamTexture: No webcam available");
+			console.warn("NunuStudio: No webcam available");
 		});		
 	}
 	//Firefox
@@ -28,7 +28,7 @@ function WebcamTexture(mapping, wrapS, wrapT, magFilter, minFilter, type, anisot
 		})
 		.catch(function(error)
 		{
-			console.warn("WebcamTexture: No webcam available");
+			console.warn("NunuStudio: No webcam available");
 		});				
 	}
 
