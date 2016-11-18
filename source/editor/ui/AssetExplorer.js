@@ -33,10 +33,16 @@ function AssetExplorer(parent)
 		context.size.set(130, 20);
 		context.position.set(event.clientX - 5, event.clientY - 5);
 
+		context.addOption("Select All", function()
+		{
+			//TODO <ADD CODE HERE>
+			alert("Not implemented");
+		});
+
 		context.addOption("Paste", function()
 		{
-			alert("Not implemented");
 			//TODO <ADD CODE HERE>
+			alert("Not implemented");
 		});
 	};
 

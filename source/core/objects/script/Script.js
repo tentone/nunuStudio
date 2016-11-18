@@ -6,7 +6,7 @@ function Script(code)
 	this.name = "script";
 
 	this.script = null;
-	this.setCode((code !== undefined) ? code : "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n};\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n};\n\nthis.onMouseOver = function()\n{\n	//TODO <MOUSE OVER CHILDREN CODE>\n};");
+	this.setCode((code !== undefined) ? code : "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n};\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n};\n\nthis.onMouseOver = function()\n{\n	//TODO <MOUSE OVER CHILDREN CODE>\n};\n\nthis.onResize = function()\n{\n	//TODO <RESIZE CODE>\n};\n\nthis.onExit = function()\n{\n	//TODO <APP EXIT CODE>\n};");
 
 	this.program = null;
 	this.scene = null;

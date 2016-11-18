@@ -244,7 +244,7 @@ Interface.initialize = function()
 	});
 
 	//Textures menu
-	var import_texture = Interface.asset_file.addMenu("Texture", Interface.file_dir + "icons/assets/image.png");
+	var import_texture = Interface.asset_file.addMenu("Texture", Interface.file_dir + "icons/misc/image.png");
 
 	//Image texture
 	import_texture.addOption("Texture", function()
@@ -263,18 +263,17 @@ Interface.initialize = function()
 				Editor.updateObjectViews();
 			}
 		}, "image/*");
-	}, Interface.file_dir + "icons/assets/image.png");
+	}, Interface.file_dir + "icons/misc/image.png");
 
-	//Text texture
-	import_texture.addOption("Text Texture", function()
+	//Canvas texture
+	import_texture.addOption("Canvas Texture", function()
 	{
-		var texture = new TextTexture("abcdef", Editor.default_font);
-		texture.name = "text";
+		var texture = new CanvasTexture(512, 512);
+		texture.name = "canvas";
 		Editor.program.addTexture(texture);
 
 		Editor.updateObjectViews();
-	}, Interface.file_dir + "icons/assets/image.png");
-
+	}, Interface.file_dir + "icons/misc/canvas.png");
 
 	//Video texture
 	import_texture.addOption("Video Texture", function()
@@ -293,7 +292,7 @@ Interface.initialize = function()
 				Editor.updateObjectViews();
 			}
 		}, "video/*");
-	}, Interface.file_dir + "icons/assets/video.png");
+	}, Interface.file_dir + "icons/misc/video.png");
 
 	//Webcam texture
 	import_texture.addOption("Webcam Texture", function()
@@ -327,7 +326,7 @@ Interface.initialize = function()
 				Editor.updateObjectViews();
 			}
 		}, ".json, .ttf, .otf");
-	}, Interface.file_dir + "icons/assets/font.png");
+	}, Interface.file_dir + "icons/misc/font.png");
 
 	//Load Spine Animation
 	Interface.asset_file.addOption("Spine Animation", function()
@@ -349,7 +348,7 @@ Interface.initialize = function()
 				Editor.updateObjectViews();
 			}
 		}, ".json");
-	}, Interface.file_dir + "icons/animation/spine.png");
+	}, Interface.file_dir + "icons/misc/spine.png");
 
 	//Load audio file
 	Interface.asset_file.addOption("Audio", function()
@@ -372,7 +371,7 @@ Interface.initialize = function()
 				Editor.updateObjectViews();
 			}
 		}, "audio/*");
-	}, Interface.file_dir + "icons/assets/audio.png");
+	}, Interface.file_dir + "icons/misc/audio.png");
 
 	//Create material
 	Interface.asset_material = new DropdownMenu(Interface.asset_explorer_bar.element);
@@ -709,10 +708,7 @@ Interface.initialize = function()
 	}, "JS Script");
 
 	//Block script
-	Interface.add_script.addOption(Interface.file_dir + "icons/script/blocks.png", function()
-	{
-		//TODO <ADD CODE HERE>
-	}, "Block Script");
+	//Interface.add_script.addOption(Interface.file_dir + "icons/script/blocks.png", function(){}, "Block Script");
 
 	//Sprites and effects
 	Interface.add_effects = new ButtonDrawer();
@@ -744,7 +740,7 @@ Interface.initialize = function()
 	}, "Container");
 
 	//Audio
-	Interface.add_effects.addOption(Interface.file_dir + "icons/assets/audio.png", function()
+	Interface.add_effects.addOption(Interface.file_dir + "icons/misc/audio.png", function()
 	{
 		Editor.addToScene(new AudioEmitter(Editor.default_audio));
 	}, "Audio");

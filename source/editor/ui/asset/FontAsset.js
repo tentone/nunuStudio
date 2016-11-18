@@ -5,7 +5,7 @@ function FontAsset(parent)
 	Asset.call(this, parent);
 
 	this.font = null;
-	this.setIcon(Interface.file_dir + "icons/assets/font.png");
+	this.setIcon(Interface.file_dir + "icons/misc/font.png");
 	
 	//Self pointer
 	var self = this;
@@ -104,7 +104,7 @@ FontAsset.prototype.updateMetadata = function()
 	if(this.font !== null)
 	{
 		//TODO <FONT PREVIEW>
-		this.image.src = Interface.file_dir + "icons/assets/font.png";
+		this.image.src = Interface.file_dir + "icons/misc/font.png";
 		
 		this.setText(this.font.name);
 	}

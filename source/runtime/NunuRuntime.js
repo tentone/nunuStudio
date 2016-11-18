@@ -34,7 +34,7 @@ include("core/resources/Video.js");
 include("core/resources/Audio.js");
 include("core/resources/Image.js");
 
-include("core/texture/TextTexture.js");
+include("core/texture/CanvasTexture.js");
 include("core/texture/VideoTexture.js");
 include("core/texture/WebcamTexture.js");
 include("core/texture/Texture.js");
@@ -64,7 +64,6 @@ include("core/objects/cameras/PerspectiveCamera.js");
 include("core/objects/cameras/OrthographicCamera.js");
 include("core/objects/audio/AudioEmitter.js");
 include("core/objects/script/Script.js");
-include("core/objects/script/BlockScript.js");
 include("core/objects/physics/PhysicsObject.js");
 include("core/objects/spine/SpineAnimation.js");
 include("core/objects/spine/SpineTexture.js");
@@ -115,7 +114,6 @@ function NunuRuntime(canvas)
 	this.renderer.autoClear = false;
 	this.renderer.shadowMap.enabled = true;
 	this.renderer.shadowMap.type = THREE.PCFShadowMap;
-	//this.renderer.setPixelRatio(window.devicePixelRatio || 1.0);
 	this.renderer.setSize(this.canvas.width, this.canvas.height);
 }
 

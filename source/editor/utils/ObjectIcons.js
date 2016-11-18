@@ -26,12 +26,12 @@ ObjectIcons.icons["PerspectiveCamera"] = "editor/files/icons/camera/prespective.
 ObjectIcons.icons["OrthographicCamera"] = "editor/files/icons/camera/orthographic.png";
 
 //Objects
-ObjectIcons.icons["SpineAnimation"] = "editor/files/icons/animation/spine.png";
+ObjectIcons.icons["SpineAnimation"] = "editor/files/icons/misc/spine.png";
 ObjectIcons.icons["Mesh"] = "editor/files/icons/models/cube.png";
-ObjectIcons.icons["SkinnedMesh"] = "editor/files/icons/animation/skeleton.png";
+ObjectIcons.icons["SkinnedMesh"] = "editor/files/icons/misc/skeleton.png";
 ObjectIcons.icons["ParticleEmiter"] = "editor/files/icons/effects/particles.png";
 ObjectIcons.icons["Script"] = "editor/files/icons/script/script.png";
-ObjectIcons.icons["Sprite"] = "editor/files/icons/assets/image.png";
+ObjectIcons.icons["Sprite"] = "editor/files/icons/misc/image.png";
 ObjectIcons.icons["Text3D"] = "editor/files/icons/models/text.png";
 ObjectIcons.icons["Points"] = "editor/files/icons/models/points.png";
 
@@ -40,13 +40,13 @@ ObjectIcons.icons["Program"] = "editor/files/icons/script/script.png";
 ObjectIcons.icons["Scene"] = "editor/files/icons/models/models.png";
 
 //Audio
-ObjectIcons.icons["Audio"] = "editor/files/icons/assets/audio.png";
+ObjectIcons.icons["Audio"] = "editor/files/icons/misc/audio.png";
 
 //Physics
 ObjectIcons.icons["Physics"] = "editor/files/icons/physics/physics.png";
 
 //Others
-ObjectIcons.icons["Bone"] = "editor/files/icons/animation/bone.png";
+ObjectIcons.icons["Bone"] = "editor/files/icons/misc/bone.png";
 ObjectIcons.icons["Group"] = "editor/files/icons/effects/container.png";
 
 //Get icon path from object type
