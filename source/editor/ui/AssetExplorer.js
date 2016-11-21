@@ -27,7 +27,7 @@ function AssetExplorer(parent)
 		event.preventDefault();
 	};
 
-	this.element.oncontextmenu = function(event)
+	/*this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu();
 		context.size.set(130, 20);
@@ -44,7 +44,7 @@ function AssetExplorer(parent)
 			//TODO <ADD CODE HERE>
 			alert("Not implemented");
 		});
-	};
+	};*/
 
 	//Element atributes
 	this.fit_parent = false;
