@@ -560,12 +560,7 @@ Editor.update = function()
 				//Camera zoom
 				if(Mouse.wheel !== 0)
 				{
-					Editor.camera.size += Mouse.wheel * 0.01;
-	
-					if(Editor.camera.size < 0.01)
-					{
-						Editor.camera.size = 0.01;
-					}
+					Editor.camera.size += Mouse.wheel * Editor.camera.size / 1000;
 
 					Editor.camera.updateProjectionMatrix();
 				}
