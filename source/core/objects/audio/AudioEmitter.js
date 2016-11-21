@@ -12,7 +12,10 @@ function AudioEmitter(audio)
 	this.autoplay = true;
 	this.playbackRate = 1;
 	this.startTime = 0;
-	this.source.loop = true;
+	this.loop = true;
+
+	this.isPlaying = false;
+	this.hasPlaybackControl = true;
 }
 
 //Default audio listener
@@ -68,9 +71,7 @@ AudioEmitter.prototype.toJSON = function(meta)
 	data.object.autoplay = this.autoplay;
 	data.object.startTime = this.startTime;
 	data.object.playbackRate = this.playbackRate;
-
-	data.object.source = {};
-	data.object.source.loop = this.source.loop;
+	data.object.loop = this.loop;
 
 	return data;
 }

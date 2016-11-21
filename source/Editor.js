@@ -21,6 +21,10 @@ include("Nunu.js");
 //Runtime dependencies
 include("lib/three/three.js");
 include("lib/three/effects/VREffect.js");
+include("lib/three/animation/Animation.js");
+include("lib/three/animation/AnimationHandler.js");
+include("lib/three/animation/KeyFrameAnimation.js");
+
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/stats.min.js");
@@ -28,16 +32,14 @@ include("lib/SPE.min.js");
 include("lib/spine.min.js");
 include("lib/opentype.min.js");
 
-//Runtime internal modules
+//Core runtime modules
 include("core/three/Three.js");
 include("core/three/Object3D.js");
 include("core/three/Vector3.js");
 include("core/three/Vector2.js");
-include("core/three/Color.js");
 include("core/three/Texture.js");
 include("core/three/LightShadow.js");
 include("core/three/Fog.js");
-include("core/three/RectAreaLight.js");
 
 include("core/input/Key.js");
 include("core/input/Keyboard.js");
@@ -75,6 +77,7 @@ include("core/objects/lights/SpotLight.js");
 include("core/objects/lights/AmbientLight.js");
 include("core/objects/lights/DirectionalLight.js");
 include("core/objects/lights/HemisphereLight.js");
+include("core/objects/lights/RectAreaLight.js");
 include("core/objects/lights/Sky.js");
 include("core/objects/cameras/PerspectiveCamera.js");
 include("core/objects/cameras/OrthographicCamera.js");
@@ -133,10 +136,6 @@ include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/PCDLoader.js");
-
-include("lib/three/animation/Animation.js");
-include("lib/three/animation/AnimationHandler.js");
-include("lib/three/animation/KeyFrameAnimation.js");
 
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");

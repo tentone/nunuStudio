@@ -4,7 +4,7 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 {
 	THREE.SpotLight.call(this, hex, intensity, distance, angle, exponent, decay);
 
-	this.name = "spot_light";
+	this.name = "spotlight";
 	
 	this.castShadow = true;
 
