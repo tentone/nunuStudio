@@ -5,8 +5,8 @@
 		"show_stats": false
 	},
 	"editor": {
-		"grid_size": 500,
-		"grid_spacing": 5,
+		"grid_size": 50,
+		"grid_spacing": 1,
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,

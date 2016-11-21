@@ -403,6 +403,14 @@ Interface.initialize = function()
 		Editor.updateObjectViews();
 	});
 	
+	Interface.asset_material.addOption("Toon material", function()
+	{
+		var material = new THREE.MeshToonMaterial();
+		material.name = "toon";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	});
+
 	Interface.asset_material.addOption("Lambert material", function()
 	{
 		var material = new THREE.MeshLambertMaterial();
@@ -427,6 +435,7 @@ Interface.initialize = function()
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
 	});
+
 	material_others.addOption("Normal material", function()
 	{
 		var material = new THREE.MeshNormalMaterial();
@@ -434,6 +443,7 @@ Interface.initialize = function()
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
 	});
+	
 	material_others.addOption("Depth material", function()
 	{
 		var material = new THREE.MeshDepthMaterial();
@@ -693,7 +703,7 @@ Interface.initialize = function()
 	//Add script
 	Interface.add_script = new ButtonDrawer();
 	Interface.add_script.setImage(Interface.file_dir + "icons/script/script.png");
-	Interface.add_script.options_per_line = 2;
+	Interface.add_script.options_per_line = 1;
 	Interface.add_script.image_scale.set(0.7, 0.7);
 	Interface.add_script.options_scale.set(0.7, 0.7);
 	Interface.add_script.size.set(Interface.tool_bar.size.x, Interface.tool_bar.size.x);

@@ -29,7 +29,7 @@ function AudioPanel(parent)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.souce.loop = self.loop.getValue();
+			self.obj.loop = self.loop.getValue();
 		}
 	});
 	this.form.add(this.loop);
@@ -65,7 +65,7 @@ AudioPanel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.autoplay.setValue(this.obj.autoplay);
-		this.loop.setValue(this.obj.source.loop);
+		this.loop.setValue(this.obj.loop);
 		this.playbackRate.setValue(this.obj.playbackRate);
 	}
 }

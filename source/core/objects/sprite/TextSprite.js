@@ -9,6 +9,8 @@ function TextSprite(text, font)
 
 	this.font = font;
 	this.text = text;
+
+	//TODO <ADD CODE HERE>
 }
 
 TextSprite.prototype = Object.create(THREE.Sprite.prototype);

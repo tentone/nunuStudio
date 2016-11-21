@@ -4,7 +4,7 @@ function AmbientLight(hex)
 {
 	THREE.AmbientLight.call(this, hex);
 	
-	this.name = "ambient_light";
+	this.name = "ambient light";
 
 	this.matrixAutoUpdate = false;
 }
