@@ -45,6 +45,7 @@ function Program(name)
 	//Runtime variables
 	this.scene = null;
 	this.renderer = null;
+	this.canvas = null;
 }
 
 Program.prototype = Object.create(THREE.Object3D.prototype);
@@ -69,8 +70,17 @@ Program.prototype.initialize = function()
 		this.setScene(this.children[0]);
 	}
 
+	//Ger canvas from renderer
+	this.canvas = this.renderer.domElement;
+
 	//Set mouse lock
-	Mouse.setLock(this.lock_pointer);
+	if(this.lock_pointer)
+	{
+		Mouse.setLock(true);
+		
+		//TODO <ADD EVENT TO LOCK MOUSE WHEN CANVAS IS CLICKED>
+		//this.canvas.addEventListener("click", function(){Mouse.setLock(true);}, false);
+	}
 }
 
 //Update program

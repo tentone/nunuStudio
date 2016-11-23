@@ -8,25 +8,35 @@ Keyboard.initialize = function()
 	Keyboard.keys = [];
 	Keyboard.actions = [];
 
-	//Keyboard keys
+	//Initialize Keys
 	for(var i = 0; i < 256; i++)
 	{
 		Keyboard.keys.push(new Key());
 	}
 
-	//Key down Event
-	document.onkeydown = function(event)
-	{
-		Keyboard.actions.push(event.keyCode);
-		Keyboard.actions.push(Key.KEY_DOWN);
-	};
+	//Events
+	Keyboard.events = [];
 
-	//Key up Event
-	document.onkeyup = function(event)
+	//Key down
+	Keyboard.events.push([window, "keydown", function(event)
 	{
 		Keyboard.actions.push(event.keyCode);
-		Keyboard.actions.push(Key.KEY_UP);
-	};
+		Keyboard.actions.push(Key.DOWN);
+	}]);
+
+	//Key up
+	Keyboard.events.push([window, "keyup", function(event)
+	{
+		Keyboard.actions.push(event.keyCode);
+		Keyboard.actions.push(Key.UP);
+	}]);
+
+	//Initialize events
+	for(var i = 0; i < Keyboard.events.length; i++)
+	{
+		var event = Keyboard.events[i];
+		event[0].addEventListener(event[1], event[2]);
+	}
 }
 
 //Update key flags syncronously
@@ -41,10 +51,10 @@ Keyboard.update = function()
 
 		Keyboard.keys[key].update(action);
 
-		if(Keyboard.keys[key].justReleased || Keyboard.keys[key].justPressed)
+		if(Keyboard.keys[key].just_released || Keyboard.keys[key].just_pressed)
 		{
 			Keyboard.actions.push(key);
-			Keyboard.actions.push(Key.KEY_RESET);
+			Keyboard.actions.push(Key.RESET);
 			end += 2;
 		}
 	}
@@ -66,19 +76,29 @@ Keyboard.reset = function()
 //Check if a key is pressed
 Keyboard.keyPressed = function(key)
 {
-	return key < 256 && Keyboard.keys[key].isPressed;
+	return key < 256 && Keyboard.keys[key].pressed;
 }
 
 //Check is a key as just pressed
 Keyboard.keyJustPressed = function(key)
 {
-	return key < 256 && Keyboard.keys[key].justPressed;
+	return key < 256 && Keyboard.keys[key].just_pressed;
 }
 
 //Check if a key was just released
 Keyboard.keyJustReleased = function(key)
 {
-	return key < 256 && Keyboard.keys[key].justReleased;
+	return key < 256 && Keyboard.keys[key].just_released;
+}
+
+//Dispose keyboard events
+Keyboard.prototype.dispose = function()
+{
+	for(var i = 0; i < Keyboard.events.length; i++)
+	{
+		var event = Keyboard.events[i];
+		event[0].removeEventListener(event[1], event[2]);
+	}
 }
 
 //Some Keycodes

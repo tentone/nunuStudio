@@ -124,6 +124,14 @@ function NunuRuntime(canvas)
 //Fullscreen control
 NunuRuntime.fullscreen = false;
 
+//Load program from file
+NunuRuntime.prototype.loadProgram = function(fname)
+{
+	var loader = new ObjectLoader();
+	var data = JSON.parse(FileSystem.readFile(fname));
+	this.program = loader.parse(data);
+}
+
 //Start nunu program
 NunuRuntime.prototype.run = function()
 {
@@ -180,17 +188,24 @@ NunuRuntime.prototype.update = function()
 //Exit from app
 NunuRuntime.prototype.exit = function()
 {
+	//Dispose and remove program
 	if(this.program !== null)
 	{
 		this.program.dispose();
 		this.program = null;
 	}
 
+	//Dispose keyboard and mouse
+	Mouse.dispose();
+	Keyboard.dispose();
+
+	//Run onExit callback if any
 	if(this.onExit !== undefined)
 	{
 		this.onExit();
 	}
 
+	//If running on nwjs close all windows
 	if(NunuRuntime.gui !== undefined)
 	{
 		NunuRuntime.gui.App.closeAllWindows();
@@ -214,14 +229,6 @@ NunuRuntime.prototype.resize = function()
 		this.renderer.setSize(this.canvas.width, this.canvas.height);
 		this.program.resize(this.canvas.width, this.canvas.height);
 	}
-}
-
-//Load program from file
-NunuRuntime.prototype.loadProgram = function(fname)
-{
-	var loader = new ObjectLoader();
-	var data = JSON.parse(FileSystem.readFile(fname));
-	this.program = loader.parse(data);
 }
 
 //Set on exit callback

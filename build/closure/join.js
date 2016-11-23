@@ -1,18 +1,32 @@
 "use strict";
 
-var path = "../../source/";
-var input = "../../source/runtime/NunuRuntime.js";
-
-var code = readFile(input);
-var includes = getIncludes(code);
-var output = "";
-for(var i = 0; i < includes.length; i++)
+if(process.argv.length > 4)
 {
-	output += "\n" + readFile(path + includes[i]);
+	//Path for source code
+	var path = process.argv[2];
+
+	//Main javascript file inside of source code folder
+	var input = process.argv[3];
+
+	//Output file
+	var out = process.argv[4];
+
+	//Join files
+	var code = readFile(input);
+	var includes = getIncludes(code);
+	var output = "";
+	for(var i = 0; i < includes.length; i++)
+	{
+		output += "\n" + readFile(path + includes[i]);
+	}
+	output += code;
+	output = output.replace(/"use strict";/gi, "").replace(/include\(".+?"\);/gi, "").replace(/^\s*\n/gm, "") ;
+	writeFile(out, output);
 }
-output += code;
-output = output.replace(/"use strict";/gi, "").replace(/include\(".+?"\);/gi, "");
-writeFile("out.js", output);
+else
+{
+	console.log("Usage: <source_path> <main_js> <out_js>")
+}
 
 //Get included files
 function getIncludes(code, results)
