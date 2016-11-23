@@ -92,7 +92,7 @@ Keyboard.keyJustReleased = function(key)
 }
 
 //Dispose keyboard events
-Keyboard.prototype.dispose = function()
+Keyboard.dispose = function()
 {
 	for(var i = 0; i < Keyboard.events.length; i++)
 	{
