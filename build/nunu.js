@@ -29817,7 +29817,7 @@ Keyboard.keyJustPressed = function(a) {
 Keyboard.keyJustReleased = function(a) {
   return 256 > a && Keyboard.keys[a].just_released;
 };
-Keyboard.prototype.dispose = function() {
+Keyboard.dispose = function() {
   for (var a = 0;a < Keyboard.events.length;a++) {
     var f = Keyboard.events[a];
     f[0].removeEventListener(f[1], f[2]);
