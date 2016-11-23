@@ -296,12 +296,19 @@ LeapMotion.prototype.updateDebugModel = function()
 	//Update bones
 	var countBones = 0;
 	var countArms = 0;
-	for(var hand of this.data.hands)
+
+	//TODO <CHECK THIS CODE USED TO BE FOR OF ...>
+	for(var i = 0; i < this.data.hands.length; i++)
 	{
-		for(var finger of hand.fingers)
+		var hand = this.data.hands[i];
+
+		for(var j = 0; j < hand.fingers.length; j++)
 		{
-			for(var bone of finger.bones) 
+			var finger = hand.fingers[j];
+
+			for(var k = 0; k < finger.bones.length; k++)
 			{
+				var bone = finger.bones[k];
 				if(countBones !== 0)
 				{
 					var boneMesh = this.bone_meshes[countBones] || this.addMesh(this.bone_meshes);

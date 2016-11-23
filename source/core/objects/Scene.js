@@ -29,6 +29,9 @@ function Scene()
 
 	//Renderer canvas
 	this.canvas = null;
+
+	//Mouse normalized
+	this.mouse = new Vector2(0, 0);
 }
 
 Scene.prototype = Object.create(THREE.Scene.prototype);
@@ -41,20 +44,25 @@ Scene.prototype.initialize = function()
 		this.children[i].initialize();
 	}
 
+	//Get canvas from renderer
 	this.canvas = this.parent.renderer.domElement;
+
+	//Start
+	this.clock.start();
 }
 
 //Update scene
 Scene.prototype.update = function()
 {
-	var mouse = new Vector2(Mouse.position.x/this.canvas.width * 2 - 1, -2 * Mouse.position.y/this.canvas.height + 1);
+	this.mouse.set(Mouse.position.x/this.canvas.width * 2 - 1, -2 * Mouse.position.y/this.canvas.height + 1);
 
 	if(this.cameras.length > 0)
 	{
-		this.raycaster.setFromCamera(mouse, this.cameras[0]);
+		this.raycaster.setFromCamera(this.mouse, this.cameras[0]);
 	}
 
-	this.world.step(this.clock.getDelta());
+	var delta = this.clock.getDelta();
+	this.world.step((delta < 0.05) ? delta : 0.05);
 
 	for(var i = 0; i < this.children.length; i++)
 	{
