@@ -1,5 +1,20 @@
 "use strict";
 
+function Editor(){}
+
+//Node modules
+try
+{
+	Editor.fs = require("fs");
+	Editor.gui = require("nw.gui");
+	Editor.clipboard = Editor.gui.Clipboard.get();
+	Editor.args = Editor.gui.App.argv;
+}
+catch(e)
+{
+	Editor.args = [];
+}
+
 //Nunu global
 include("Nunu.js");
 
@@ -232,8 +247,6 @@ include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
 
-function Editor(){}
-
 //Editor state
 Editor.STATE_IDLE = 8;
 Editor.STATE_EDITING = 9;
@@ -248,19 +261,6 @@ Editor.MODE_ROTATE = 3;
 //Editor camera mode
 Editor.CAMERA_ORTHOGRAPHIC = 20;
 Editor.CAMERA_PERSPECTIVE = 21;
-
-//Node modules
-try
-{
-	Editor.fs = require("fs");
-	Editor.gui = require("nw.gui");
-	Editor.clipboard = Editor.gui.Clipboard.get();
-	Editor.args = Editor.gui.App.argv;
-}
-catch(e)
-{
-	Editor.args = [];
-}
 
 //Initialize Main
 Editor.initialize = function()
