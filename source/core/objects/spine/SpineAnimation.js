@@ -37,7 +37,7 @@ function SpineAnimation(json, atlas, path, textures)
 		});
 	}
 
-	var loader = new spine.TextureAtlasAttachmentLoader(texture_atlas);
+	var loader = new spine.AtlasAttachmentLoader(texture_atlas);
 	var skeleton = new spine.SkeletonJson(loader).readSkeletonData(json);
 
 	THREE.Mesh.call(this);
@@ -65,7 +65,7 @@ function SpineAnimation(json, atlas, path, textures)
 	this.name = "spine";
 	this.type = "SpineAnimation";
 
-	this.scale.set(0.005, 0.005, 0.005);
+	this.scale.set(0.01, 0.01, 0.01);
 
 	this.frustumCulled = false;
 	this.receiveShadow = true;
@@ -114,16 +114,16 @@ SpineAnimation.prototype.getSkins = function()
 //Update mesh geometry from animation state
 SpineAnimation.prototype.updateGeometry = function()
 {
-	var geometry = this.geometry;
-	var numVertices = 0;
-	var verticesLength = 0;
-	var indicesLength = 0;
-	var blendMode = null;
-	var vertices = null;
-	var triangles = null;
+	//var geometry = this.geometry;
+	//var numVertices = 0;
+	//var verticesLength = 0;
+	//var indicesLength = 0;
+	//var blendMode = null;
+
+	var vertices = null, triangles = null;
 	var drawOrder = this.skeleton.drawOrder;
 	var z = 0;
-	var zOffset = this.zOffset;
+
 	var batcher = this.batcher;
 	batcher.begin();
 
@@ -161,7 +161,7 @@ SpineAnimation.prototype.updateGeometry = function()
 				material.needsUpdate = true;
 			}
 			batcher.batch(vertices, triangles, z);
-			z += zOffset;
+			z += this.zOffset;
 		}
 	}
 	batcher.end();
@@ -175,8 +175,8 @@ SpineAnimation.prototype.toJSON = function(meta)
 	var material = this.material;
 	this.geometry = undefined;
 	this.material = undefined;
-
 	
+	//Store textures
 	var textures = [];
 	var self = this;
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
