@@ -2,7 +2,7 @@
 	"general": {
 		"theme": "dark",
 		"file_preview_size": 70,
-		"show_stats": false
+		"show_stats": true
 	},
 	"editor": {
 		"grid_size": 50,
@@ -24,7 +24,7 @@
 		"keymap": "sublime",
 		"font_size": 14,
 		"line_numbers": true,
-		"line_wrapping": false,
+		"line_wrapping": true,
 		"auto_close_brackets": true,
 		"highlight_active_line": false
 	}
