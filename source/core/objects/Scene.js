@@ -39,16 +39,16 @@ Scene.prototype = Object.create(THREE.Scene.prototype);
 //Initialize
 Scene.prototype.initialize = function()
 {
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-
 	//Get canvas from program
 	this.canvas = this.parent.canvas;
 
 	//Start
 	this.clock.start();
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].initialize();
+	}
 }
 
 //Update scene
