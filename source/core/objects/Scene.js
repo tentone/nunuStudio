@@ -44,8 +44,8 @@ Scene.prototype.initialize = function()
 		this.children[i].initialize();
 	}
 
-	//Get canvas from renderer
-	this.canvas = this.parent.renderer.domElement;
+	//Get canvas from program
+	this.canvas = this.parent.canvas;
 
 	//Start
 	this.clock.start();
