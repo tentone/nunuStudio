@@ -46,7 +46,13 @@ Text3D.prototype.setText = function(text)
 		this.geometry.dispose();
 	}
 	
-	var options = 
+	this.updateText();
+}
+
+//Update attributes
+Text3D.prototype.updateText = function()
+{
+	this.geometry = new THREE.TextGeometry(this.text,
 	{
 		size: this.size,
 		curveSegments: this.curve_segments,
@@ -55,9 +61,13 @@ Text3D.prototype.setText = function(text)
 		bevelEnabled: this.bevel,
 		bevelSize: this.bevel_size,
 		bevelThickness: this.bevel_thickness
-	};
+	});
+}
 
-	this.geometry = new THREE.TextGeometry(this.text, options);
+//Clone text 3D
+Text3D.prototype.clone = function()
+{
+	return new Text3D(this.text, this.material, this.font, this.height, this.bevel, this.bevel_thickness, this.bevel_size, this.size, this.curve_segments);
 }
 
 //Dispose text object

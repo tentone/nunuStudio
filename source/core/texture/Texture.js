@@ -8,6 +8,10 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	{
 		this.img = new Image(image);
 	}
+	else if(image === undefined)
+	{
+		this.img = new Image();
+	}
 	else
 	{
 		this.img = image;

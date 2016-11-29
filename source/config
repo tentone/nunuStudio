@@ -22,10 +22,10 @@
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"font_size": 14,
+		"font_size": 16,
 		"line_numbers": true,
 		"line_wrapping": true,
 		"auto_close_brackets": true,
-		"highlight_active_line": false
+		"highlight_active_line": true
 	}
 }

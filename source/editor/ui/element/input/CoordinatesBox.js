@@ -123,7 +123,7 @@ CoordinatesBox.prototype.setStep = function(value)
 	var value = String(value);
 	this.x.step = value;
 	this.y.step = value;
-	this.x.step = value;
+	this.z.step = value;
 	this.w.step = value;
 }
 
