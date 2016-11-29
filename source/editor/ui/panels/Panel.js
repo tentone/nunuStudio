@@ -61,6 +61,7 @@ function Panel(parent)
 	//Position
 	this.form.addText("Position");
 	this.position = new CoordinatesBox(this.form.element);
+	this.position.setStep(0.01);
 	this.position.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -75,6 +76,7 @@ function Panel(parent)
 	//Scale
 	this.form.addText("Scale");
 	this.scale = new CoordinatesBox(this.form.element);
+	this.scale.setStep(0.01);
 	this.scale.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -89,6 +91,7 @@ function Panel(parent)
 	//Rotation
 	this.form.addText("Rotation");
 	this.rotation = new CoordinatesBox(this.form.element);
+	this.rotation.setStep(0.01);
 	this.rotation.setOnChange(function()
 	{
 		if(self.obj !== null)
