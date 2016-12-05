@@ -3,22 +3,13 @@
 //Orthographic Camera constructor aspect is in x/y mode
 function OrthographicCamera(size, aspect, mode, near, far)
 {
-	if(near === undefined)
-	{
-		near = 0;
-	}
-	if(far === undefined)
-	{
-		far = 100000;
-	}
-
 	THREE.OrthographicCamera.call(this, -1.0, 1.0, 1.0, -1.0, near, far);
 
 	this.name = "camera";
 
 	this.size = (size != undefined) ? size : 10.0;
 	this.aspect = (aspect != undefined) ? aspect : 1.0;
-	this.mode = (mode !== undefined) ? mode : OrthographicCamera.FIXED_VERTICAL;
+	this.mode = (mode !== undefined) ? mode : OrthographicCamera.RESIZE_HORIZONTAL;
 
 	this.offset = new THREE.Vector2(0.0, 0.0);
 	this.viewport = new THREE.Vector2(1.0, 1.0);
@@ -33,8 +24,8 @@ function OrthographicCamera(size, aspect, mode, near, far)
 OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype);
 
 //Camera scale mode
-OrthographicCamera.FIXED_VERTICAL = 0;
-OrthographicCamera.FIXED_HORIZONTAL = 1;
+OrthographicCamera.RESIZE_HORIZONTAL = 0;
+OrthographicCamera.RESIZE_VERTICAL = 1;
 
 //Initialize
 OrthographicCamera.prototype.initialize = function()
@@ -61,16 +52,16 @@ OrthographicCamera.prototype.destroy = function()
 OrthographicCamera.prototype.updateProjectionMatrix = function()
 {
 	//Update left right, top and bottom values from aspect and size
-	if(this.mode === OrthographicCamera.FIXED_VERTICAL)
+	if(this.mode === OrthographicCamera.RESIZE_HORIZONTAL)
 	{
-		this.top = this.size/2;
+		this.top = this.size / 2;
 		this.bottom = -this.top;
 		this.right = this.top * this.aspect * (this.viewport.x / this.viewport.y);
 		this.left = -this.right;
 	}
-	else if(this.mode === OrthographicCamera.FIXED_HORIZONTAL)
+	else if(this.mode === OrthographicCamera.RESIZE_VERTICAL)
 	{
-		this.right = this.size/2;
+		this.right = this.size / 2;
 		this.left = -this.right;
 		this.top = this.right / this.aspect * (this.viewport.x / this.viewport.y);
 		this.bottom = -this.top;

@@ -3,15 +3,6 @@
 //Perspective camera from fov, aspect ration and near and far planes
 function PerspectiveCamera(fov, aspect, near, far)
 {
-	if(near === undefined)
-	{
-		near = 0.1;
-	}
-	if(far === undefined)
-	{
-		far = 100000;
-	}
-
 	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
 
 	this.name = "camera";

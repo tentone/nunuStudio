@@ -26,8 +26,8 @@ function OrthographicCameraPanel(parent)
 	this.form.addText("Resize Mode");
 	this.mode = new DropdownList(this.form.element);
 	this.mode.size.set(130, 18);
-	this.mode.addValue("Horizontal", OrthographicCamera.FIXED_VERTICAL);
-	this.mode.addValue("Vertical", OrthographicCamera.FIXED_HORIZONTAL);
+	this.mode.addValue("Horizontal", OrthographicCamera.RESIZE_HORIZONTAL);
+	this.mode.addValue("Vertical", OrthographicCamera.RESIZE_VERTICAL);
 	this.mode.setOnChange(function()
 	{
 		if(self.obj !== null)

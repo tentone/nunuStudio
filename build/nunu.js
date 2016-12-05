@@ -30,7 +30,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.y = n || 0;
   }
   function b(d, n, a, c, g, e, m, h, k, q) {
-    Object.defineProperty(this, "id", {value:Me++});
+    Object.defineProperty(this, "id", {value:Ne++});
     this.uuid = da.generateUUID();
     this.name = "";
     this.image = void 0 !== d ? d : b.DEFAULT_IMAGE;
@@ -102,8 +102,8 @@ Nunu.TIMESTAMP = "201611291716";
     if (0 >= z || 0 < z) {
       return d;
     }
-    var b = n * a, c = ye[b];
-    void 0 === c && (c = new Float32Array(b), ye[b] = c);
+    var b = n * a, c = ze[b];
+    void 0 === c && (c = new Float32Array(b), ze[b] = c);
     if (0 !== n) {
       for (z.toArray(c, 0), z = 1, b = 0;z !== n;++z) {
         b += a, d[z].toArray(c, b);
@@ -112,8 +112,8 @@ Nunu.TIMESTAMP = "201611291716";
     return c;
   }
   function p(d, n) {
-    var a = ze[n];
-    void 0 === a && (a = new Int32Array(n), ze[n] = a);
+    var a = Ae[n];
+    void 0 === a && (a = new Int32Array(n), Ae[n] = a);
     for (var b = 0;b !== n;++b) {
       a[b] = d.allocTextureUnit();
     }
@@ -146,12 +146,12 @@ Nunu.TIMESTAMP = "201611291716";
   function D(d, n, a) {
     var z = a.allocTextureUnit();
     d.uniform1i(this.addr, z);
-    a.setTexture2D(n || Ae, z);
+    a.setTexture2D(n || Be, z);
   }
   function G(d, n, a) {
     var z = a.allocTextureUnit();
     d.uniform1i(this.addr, z);
-    a.setTextureCube(n || Be, z);
+    a.setTextureCube(n || Ce, z);
   }
   function F(d, n) {
     d.uniform2iv(this.addr, n);
@@ -228,14 +228,14 @@ Nunu.TIMESTAMP = "201611291716";
     var z = n.length, b = p(a, z);
     d.uniform1iv(this.addr, b);
     for (d = 0;d !== z;++d) {
-      a.setTexture2D(n[d] || Ae, b[d]);
+      a.setTexture2D(n[d] || Be, b[d]);
     }
   }
   function S(d, n, a) {
     var z = n.length, b = p(a, z);
     d.uniform1iv(this.addr, b);
     for (d = 0;d !== z;++d) {
-      a.setTextureCube(n[d] || Be, b[d]);
+      a.setTextureCube(n[d] || Ce, b[d]);
     }
   }
   function V(d) {
@@ -518,7 +518,7 @@ Nunu.TIMESTAMP = "201611291716";
     };
   }
   function Z() {
-    Object.defineProperty(this, "id", {value:Oe++});
+    Object.defineProperty(this, "id", {value:Pe++});
     this.uuid = da.generateUUID();
     this.name = "";
     this.type = "Material";
@@ -726,7 +726,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.mask = 1;
   }
   function X() {
-    Object.defineProperty(this, "id", {value:Pe++});
+    Object.defineProperty(this, "id", {value:Qe++});
     this.uuid = da.generateUUID();
     this.name = "";
     this.type = "Object3D";
@@ -983,7 +983,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.far = void 0 !== g ? g : 2E3;
     this.updateProjectionMatrix();
   }
-  function Qe(d, n, a) {
+  function Re(d, n, a) {
     var z, b, c;
     return {setMode:function(d) {
       z = d;
@@ -999,7 +999,7 @@ Nunu.TIMESTAMP = "201611291716";
       null === m ? console.error("THREE.WebGLBufferRenderer: using THREE.InstancedBufferGeometry but hardware does not support extension ANGLE_instanced_arrays.") : (m.drawElementsInstancedANGLE(z, E, b, e * c, g.maxInstancedCount), a.calls++, a.vertices += E * g.maxInstancedCount, z === d.TRIANGLES && (a.faces += g.maxInstancedCount * E / 3));
     }};
   }
-  function Re(d, n, a) {
+  function Se(d, n, a) {
     var z;
     return {setMode:function(d) {
       z = d;
@@ -1021,7 +1021,7 @@ Nunu.TIMESTAMP = "201611291716";
       }
     }};
   }
-  function Se() {
+  function Te() {
     var d = {};
     return {get:function(n) {
       if (void 0 !== d[n.id]) {
@@ -1255,7 +1255,7 @@ Nunu.TIMESTAMP = "201611291716";
       console.warn("THREE.WebGLProgram: .attributes is now .getAttributes().");
       return this.getAttributes();
     }}});
-    this.id = Te++;
+    this.id = Ue++;
     this.code = n;
     this.usedTimes = 1;
     this.program = r;
@@ -1263,7 +1263,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.fragmentShader = E;
     return this;
   }
-  function Ue(d, n) {
+  function Ve(d, n) {
     function a(d, n) {
       var a;
       d ? d.isTexture ? a = d.encoding : d.isWebGLRenderTarget && (console.warn("THREE.WebGLPrograms.getTextureEncodingFromMap: don't use render targets as textures. Use their .texture property instead."), a = d.texture.encoding) : a = 3E3;
@@ -1355,7 +1355,7 @@ Nunu.TIMESTAMP = "201611291716";
       return z;
     }};
   }
-  function Ve(d, n, a) {
+  function We(d, n, a) {
     function b(a, b) {
       a = a.isInterleavedBufferAttribute ? a.data : a;
       var z = n.get(a);
@@ -1418,7 +1418,7 @@ Nunu.TIMESTAMP = "201611291716";
       return a;
     }};
   }
-  function We(d, n, a, b, c, g, e) {
+  function Xe(d, n, a, b, c, g, e) {
     function z(d, n) {
       if (d.width > n || d.height > n) {
         n /= Math.max(d.width, d.height);
@@ -1682,7 +1682,7 @@ Nunu.TIMESTAMP = "201611291716";
       z.generateMipmaps && m(n) && 1003 !== z.minFilter && 1006 !== z.minFilter && (n = n && n.isWebGLRenderTargetCube ? d.TEXTURE_CUBE_MAP : d.TEXTURE_2D, z = b.get(z).__webglTexture, a.bindTexture(n, z), d.generateMipmap(n), a.bindTexture(n, null));
     };
   }
-  function Xe() {
+  function Ye() {
     var d = {};
     return {get:function(n) {
       n = n.uuid;
@@ -1695,7 +1695,7 @@ Nunu.TIMESTAMP = "201611291716";
       d = {};
     }};
   }
-  function Ye(d, n, a) {
+  function Ze(d, n, a) {
     function b(n, a, b) {
       var z = new Uint8Array(4), c = d.createTexture();
       d.bindTexture(n, c);
@@ -1934,7 +1934,7 @@ Nunu.TIMESTAMP = "201611291716";
       r.reset();
     }};
   }
-  function Ze(d, n, a) {
+  function $e(d, n, a) {
     function b(n) {
       if ("highp" === n) {
         if (0 < d.getShaderPrecisionFormat(d.VERTEX_SHADER, d.HIGH_FLOAT).precision && 0 < d.getShaderPrecisionFormat(d.FRAGMENT_SHADER, d.HIGH_FLOAT).precision) {
@@ -1956,7 +1956,7 @@ Nunu.TIMESTAMP = "201611291716";
       return z = null !== a ? d.getParameter(a.MAX_TEXTURE_MAX_ANISOTROPY_EXT) : 0;
     }, getMaxPrecision:b, precision:c, logarithmicDepthBuffer:a, maxTextures:g, maxVertexTextures:e, maxTextureSize:m, maxCubemapSize:k, maxAttributes:h, maxVertexUniforms:q, maxVaryings:f, maxFragmentUniforms:p, vertexTextures:r, floatFragmentTextures:u, floatVertexTextures:r && u};
   }
-  function $e(d) {
+  function af(d) {
     var n = {};
     return {get:function(a) {
       if (void 0 !== n[a]) {
@@ -1986,7 +1986,7 @@ Nunu.TIMESTAMP = "201611291716";
       return n[a] = b;
     }};
   }
-  function af() {
+  function bf() {
     function d() {
       h.value !== b && (h.value = b, h.needsUpdate = 0 < c);
       a.numPlanes = c;
@@ -2481,7 +2481,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.toneMappingWhitePoint = this.toneMappingExposure = this.toneMapping = 1;
     this.maxMorphTargets = 8;
     this.maxMorphNormals = 4;
-    var Q = this, H = null, ba = null, R = null, ha = -1, V = "", pa = null, ra = new k, Ic = null, Ab = new k, Z = 0, Pa = new T(0), nb = 0, yb = A.width, U = A.height, Ua = 1, Jc = new k(0, 0, yb, U), sd = !1, X = new k(0, 0, yb, U), Ba = new Sa, sa = new af, ya = !1, ja = !1, db = new Ca, la = new q, da = new g, Zb = new q, na = new q, oa = {hash:"", ambient:[0, 0, 0], directional:[], directionalShadowMap:[], directionalShadowMatrix:[], spot:[], spotShadowMap:[], spotShadowMatrix:[], rectArea:[], 
+    var Q = this, H = null, ba = null, R = null, ha = -1, V = "", pa = null, ra = new k, Ic = null, Ab = new k, Z = 0, Pa = new T(0), nb = 0, yb = A.width, U = A.height, Ua = 1, Jc = new k(0, 0, yb, U), sd = !1, X = new k(0, 0, yb, U), Ba = new Sa, sa = new bf, ya = !1, ja = !1, db = new Ca, la = new q, da = new g, Zb = new q, na = new q, oa = {hash:"", ambient:[0, 0, 0], directional:[], directionalShadowMap:[], directionalShadowMatrix:[], spot:[], spotShadowMap:[], spotShadowMatrix:[], rectArea:[], 
     point:[], pointShadowMap:[], pointShadowMatrix:[], hemi:[], shadows:[]}, wa = {calls:0, vertices:0, faces:0, points:0};
     this.info = {render:wa, memory:{geometries:0, textures:0}, programs:null};
     var K;
@@ -2498,10 +2498,10 @@ Nunu.TIMESTAMP = "201611291716";
         return {rangeMin:1, rangeMax:1, precision:1};
       });
       A.addEventListener("webglcontextlost", b, !1);
-    } catch (bf) {
-      console.error("THREE.WebGLRenderer: " + bf);
+    } catch (cf) {
+      console.error("THREE.WebGLRenderer: " + cf);
     }
-    var ka = new $e(K);
+    var ka = new af(K);
     ka.get("WEBGL_depth_texture");
     ka.get("OES_texture_float");
     ka.get("OES_texture_float_linear");
@@ -2510,9 +2510,9 @@ Nunu.TIMESTAMP = "201611291716";
     ka.get("OES_standard_derivatives");
     ka.get("ANGLE_instanced_arrays");
     ka.get("OES_element_index_uint") && (ca.MaxIndex = 4294967296);
-    var Va = new Ze(K, ka, d), ma = new Ye(K, ka, y), Qa = new Xe, zb = new We(K, ka, ma, Qa, Va, y, this.info), ta = new Ve(K, Qa, this.info), xa = new Ue(this, Va), Bb = new Se;
+    var Va = new $e(K, ka, d), ma = new Ze(K, ka, y), Qa = new Ye, zb = new Xe(K, ka, ma, Qa, Va, y, this.info), ta = new We(K, Qa, this.info), xa = new Ve(this, Va), Bb = new Te;
     this.info.programs = xa.programs;
-    var Ha = new Re(K, ka, wa), Ia = new Qe(K, ka, wa), Ja = new Yb(-1, 1, 1, -1, 0, 1), za = new Oa, Aa = new Da(new Ra(2, 2), new La({depthTest:!1, depthWrite:!1, fog:!1}));
+    var Ha = new Se(K, ka, wa), Ia = new Re(K, ka, wa), Ja = new Yb(-1, 1, 1, -1, 0, 1), za = new Oa, Aa = new Da(new Ra(2, 2), new La({depthTest:!1, depthWrite:!1, fog:!1}));
     d = Wb.cube;
     var Ea = new Da(new mb(5, 5, 5), new ua({uniforms:d.uniforms, vertexShader:d.vertexShader, fragmentShader:d.fragmentShader, side:1, depthTest:!1, depthWrite:!1, fog:!1}));
     n();
@@ -3995,7 +3995,7 @@ Nunu.TIMESTAMP = "201611291716";
   function fb(d) {
     this.manager = void 0 !== d ? d : $a;
   }
-  function Ce(d) {
+  function De(d) {
     this.manager = void 0 !== d ? d : $a;
     this._parser = null;
   }
@@ -4166,7 +4166,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.manager = void 0 !== d ? d : $a;
     this.withCredentials = !1;
   }
-  function De(d) {
+  function Ee(d) {
     this.manager = void 0 !== d ? d : $a;
     this.texturePath = "";
   }
@@ -4220,7 +4220,7 @@ Nunu.TIMESTAMP = "201611291716";
   function ee(d) {
     this.data = d;
   }
-  function Ee(d) {
+  function Fe(d) {
     this.manager = void 0 !== d ? d : $a;
   }
   function fe(d) {
@@ -4234,7 +4234,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.width = void 0 !== a ? a : 10;
     this.height = void 0 !== b ? b : 10;
   }
-  function Fe() {
+  function Ge() {
     this.type = "StereoCamera";
     this.aspect = 1;
     this.eyeSep = .064;
@@ -4455,7 +4455,7 @@ Nunu.TIMESTAMP = "201611291716";
       return this.Points;
     }}});
   }
-  function Ge(d, n) {
+  function He(d, n) {
     return d.distance - n.distance;
   }
   function qe(d, n, a, b) {
@@ -4476,6 +4476,12 @@ Nunu.TIMESTAMP = "201611291716";
     this.radius = void 0 !== d ? d : 1;
     this.phi = void 0 !== n ? n : 0;
     this.theta = void 0 !== a ? a : 0;
+    return this;
+  }
+  function te(d, n, a) {
+    this.radius = void 0 !== d ? d : 1;
+    this.theta = void 0 !== n ? n : 0;
+    this.y = void 0 !== a ? a : 0;
     return this;
   }
   function Ka(d, n) {
@@ -4712,10 +4718,10 @@ Nunu.TIMESTAMP = "201611291716";
     void 0 === c && (c = .2 * a);
     void 0 === e && (e = .2 * c);
     this.position.copy(n);
-    this.line = new tb(He, new za({color:b}));
+    this.line = new tb(Ie, new za({color:b}));
     this.line.matrixAutoUpdate = !1;
     this.add(this.line);
-    this.cone = new Da(Ie, new La({color:b}));
+    this.cone = new Da(Je, new La({color:b}));
     this.cone.matrixAutoUpdate = !1;
     this.add(this.cone);
     this.setDirection(d);
@@ -4733,9 +4739,9 @@ Nunu.TIMESTAMP = "201611291716";
   function Sd(d, n, a, b, c, e) {
     vb.call(this, d, n, a, a, b, c, e);
   }
-  function Je(d) {
+  function Ke(d) {
     console.warn("THREE.ClosedSplineCurve3 has been deprecated. Use THREE.CatmullRomCurve3 instead.");
-    te.call(this, d);
+    ue.call(this, d);
     this.type = "catmullrom";
     this.closed = !0;
   }
@@ -4790,7 +4796,7 @@ Nunu.TIMESTAMP = "201611291716";
       }
     }
   }});
-  var Ke = {NoBlending:0, NormalBlending:1, AdditiveBlending:2, SubtractiveBlending:3, MultiplyBlending:4, CustomBlending:5}, Le = {UVMapping:300, CubeReflectionMapping:301, CubeRefractionMapping:302, EquirectangularReflectionMapping:303, EquirectangularRefractionMapping:304, SphericalReflectionMapping:305, CubeUVReflectionMapping:306, CubeUVRefractionMapping:307}, ue = {RepeatWrapping:1E3, ClampToEdgeWrapping:1001, MirroredRepeatWrapping:1002}, ve = {NearestFilter:1003, NearestMipMapNearestFilter:1004, 
+  var Le = {NoBlending:0, NormalBlending:1, AdditiveBlending:2, SubtractiveBlending:3, MultiplyBlending:4, CustomBlending:5}, Me = {UVMapping:300, CubeReflectionMapping:301, CubeRefractionMapping:302, EquirectangularReflectionMapping:303, EquirectangularRefractionMapping:304, SphericalReflectionMapping:305, CubeUVReflectionMapping:306, CubeUVRefractionMapping:307}, ve = {RepeatWrapping:1E3, ClampToEdgeWrapping:1001, MirroredRepeatWrapping:1002}, we = {NearestFilter:1003, NearestMipMapNearestFilter:1004, 
   NearestMipMapLinearFilter:1005, LinearFilter:1006, LinearMipMapNearestFilter:1007, LinearMipMapLinearFilter:1008}, da = {DEG2RAD:Math.PI / 180, RAD2DEG:180 / Math.PI, generateUUID:function() {
     var d = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split(""), n = Array(36), a = 0, b;
     return function() {
@@ -5044,7 +5050,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.y = b * a + c * n + d.y;
     return this;
   }};
-  var Me = 0;
+  var Ne = 0;
   b.DEFAULT_IMAGE = void 0;
   b.DEFAULT_MAPPING = 300;
   b.prototype = {constructor:b, isTexture:!0, set needsUpdate(d) {
@@ -5885,6 +5891,11 @@ Nunu.TIMESTAMP = "201611291716";
     this.y = Math.cos(d.phi) * d.radius;
     this.z = a * Math.cos(d.theta);
     return this;
+  }, setFromCylindrical:function(d) {
+    this.x = d.radius * Math.sin(d.theta);
+    this.y = d.y;
+    this.z = d.radius * Math.cos(d.theta);
+    return this;
   }, setFromMatrixPosition:function(d) {
     return this.setFromMatrixColumn(d, 3);
   }, setFromMatrixScale:function(d) {
@@ -6374,7 +6385,7 @@ Nunu.TIMESTAMP = "201611291716";
   }, set:function(d) {
     this.image = d;
   }});
-  var Ae = new b, Be = new r, ye = [], ze = [];
+  var Be = new b, Ce = new r, ze = [], Ae = [];
   ia.prototype.setValue = function(d, a) {
     for (var n = this.seq, b = 0, c = n.length;b !== c;++b) {
       var e = n[b];
@@ -6532,7 +6543,7 @@ Nunu.TIMESTAMP = "201611291716";
         }
       }
     }
-    d && 0 < d.length && (b = cf[d], void 0 !== b ? this.setHex(b) : console.warn("THREE.Color: Unknown color " + d));
+    d && 0 < d.length && (b = df[d], void 0 !== b ? this.setHex(b) : console.warn("THREE.Color: Unknown color " + d));
     return this;
   }, clone:function() {
     return new this.constructor(this.r, this.g, this.b);
@@ -6654,7 +6665,7 @@ Nunu.TIMESTAMP = "201611291716";
   }, toJSON:function() {
     return this.getHex();
   }};
-  var cf = {aliceblue:15792383, antiquewhite:16444375, aqua:65535, aquamarine:8388564, azure:15794175, beige:16119260, bisque:16770244, black:0, blanchedalmond:16772045, blue:255, blueviolet:9055202, brown:10824234, burlywood:14596231, cadetblue:6266528, chartreuse:8388352, chocolate:13789470, coral:16744272, cornflowerblue:6591981, cornsilk:16775388, crimson:14423100, cyan:65535, darkblue:139, darkcyan:35723, darkgoldenrod:12092939, darkgray:11119017, darkgreen:25600, darkgrey:11119017, darkkhaki:12433259, 
+  var df = {aliceblue:15792383, antiquewhite:16444375, aqua:65535, aquamarine:8388564, azure:15794175, beige:16119260, bisque:16770244, black:0, blanchedalmond:16772045, blue:255, blueviolet:9055202, brown:10824234, burlywood:14596231, cadetblue:6266528, chartreuse:8388352, chocolate:13789470, coral:16744272, cornflowerblue:6591981, cornsilk:16775388, crimson:14423100, cyan:65535, darkblue:139, darkcyan:35723, darkgoldenrod:12092939, darkgray:11119017, darkgreen:25600, darkgrey:11119017, darkkhaki:12433259, 
   darkmagenta:9109643, darkolivegreen:5597999, darkorange:16747520, darkorchid:10040012, darkred:9109504, darksalmon:15308410, darkseagreen:9419919, darkslateblue:4734347, darkslategray:3100495, darkslategrey:3100495, darkturquoise:52945, darkviolet:9699539, deeppink:16716947, deepskyblue:49151, dimgray:6908265, dimgrey:6908265, dodgerblue:2003199, firebrick:11674146, floralwhite:16775920, forestgreen:2263842, fuchsia:16711935, gainsboro:14474460, ghostwhite:16316671, gold:16766720, goldenrod:14329120, 
   gray:8421504, green:32768, greenyellow:11403055, grey:8421504, honeydew:15794160, hotpink:16738740, indianred:13458524, indigo:4915330, ivory:16777200, khaki:15787660, lavender:15132410, lavenderblush:16773365, lawngreen:8190976, lemonchiffon:16775885, lightblue:11393254, lightcoral:15761536, lightcyan:14745599, lightgoldenrodyellow:16448210, lightgray:13882323, lightgreen:9498256, lightgrey:13882323, lightpink:16758465, lightsalmon:16752762, lightseagreen:2142890, lightskyblue:8900346, lightslategray:7833753, 
   lightslategrey:7833753, lightsteelblue:11584734, lightyellow:16777184, lime:65280, limegreen:3329330, linen:16445670, magenta:16711935, maroon:8388608, mediumaquamarine:6737322, mediumblue:205, mediumorchid:12211667, mediumpurple:9662683, mediumseagreen:3978097, mediumslateblue:8087790, mediumspringgreen:64154, mediumturquoise:4772300, mediumvioletred:13047173, midnightblue:1644912, mintcream:16121850, mistyrose:16770273, moccasin:16770229, navajowhite:16768685, navy:128, oldlace:16643558, olive:8421376, 
@@ -6750,7 +6761,7 @@ Nunu.TIMESTAMP = "201611291716";
   }, equals:function(d) {
     return d.min.equals(this.min) && d.max.equals(this.max);
   }};
-  var Oe = 0;
+  var Pe = 0;
   Z.prototype = {constructor:Z, isMaterial:!0, get needsUpdate() {
     return this._needsUpdate;
   }, set needsUpdate(d) {
@@ -7671,7 +7682,7 @@ Nunu.TIMESTAMP = "201611291716";
   }, test:function(d) {
     return 0 !== (this.mask & d.mask);
   }};
-  var Pe = 0;
+  var Qe = 0;
   X.DefaultUp = new g(0, 1, 0);
   X.DefaultMatrixAutoUpdate = !0;
   Object.assign(X.prototype, f.prototype, {isObject3D:!0, applyMatrix:function(d) {
@@ -7889,6 +7900,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.matrixWorld.copy(d.matrixWorld);
     this.matrixAutoUpdate = d.matrixAutoUpdate;
     this.matrixWorldNeedsUpdate = d.matrixWorldNeedsUpdate;
+    this.layers.mask = d.layers.mask;
     this.visible = d.visible;
     this.castShadow = d.castShadow;
     this.receiveShadow = d.receiveShadow;
@@ -9177,7 +9189,7 @@ Nunu.TIMESTAMP = "201611291716";
     null !== this.view && (d.object.view = Object.assign({}, this.view));
     return d;
   }});
-  var Te = 0;
+  var Ue = 0;
   $b.prototype.isFogExp2 = !0;
   $b.prototype.clone = function() {
     return new $b(this.color.getHex(), this.density);
@@ -10157,7 +10169,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.gapSize = d.gapSize;
     return this;
   };
-  var df = Object.freeze({ShadowMaterial:sc, SpriteMaterial:Db, RawShaderMaterial:tc, ShaderMaterial:ua, PointsMaterial:gb, MultiMaterial:ed, MeshPhysicalMaterial:Hb, MeshStandardMaterial:ob, MeshPhongMaterial:hb, MeshToonMaterial:Ib, MeshNormalMaterial:Jb, MeshLambertMaterial:Kb, MeshDepthMaterial:sa, MeshBasicMaterial:La, LineDashedMaterial:Lb, LineBasicMaterial:za, Material:Z}), we = {enabled:!1, files:{}, add:function(d, a) {
+  var ef = Object.freeze({ShadowMaterial:sc, SpriteMaterial:Db, RawShaderMaterial:tc, ShaderMaterial:ua, PointsMaterial:gb, MultiMaterial:ed, MeshPhysicalMaterial:Hb, MeshStandardMaterial:ob, MeshPhongMaterial:hb, MeshToonMaterial:Ib, MeshNormalMaterial:Jb, MeshLambertMaterial:Kb, MeshDepthMaterial:sa, MeshBasicMaterial:La, LineDashedMaterial:Lb, LineBasicMaterial:za, Material:Z}), xe = {enabled:!1, files:{}, add:function(d, a) {
     !1 !== this.enabled && (this.files[d] = a);
   }, get:function(d) {
     if (!1 !== this.enabled) {
@@ -10171,7 +10183,7 @@ Nunu.TIMESTAMP = "201611291716";
   Object.assign(fb.prototype, {load:function(d, a, b, c) {
     void 0 === d && (d = "");
     void 0 !== this.path && (d = this.path + d);
-    var e = this, n = we.get(d);
+    var e = this, n = xe.get(d);
     if (void 0 !== n) {
       return e.manager.itemStart(d), setTimeout(function() {
         a && a(n);
@@ -10207,9 +10219,9 @@ Nunu.TIMESTAMP = "201611291716";
           a && a(k);
           e.manager.itemEnd(d);
         }, 0);
-      } catch (Ne) {
+      } catch (Oe) {
         window.setTimeout(function() {
-          c && c(Ne);
+          c && c(Oe);
           e.manager.itemError(d);
         }, 0);
       }
@@ -10218,7 +10230,7 @@ Nunu.TIMESTAMP = "201611291716";
       p.open("GET", d, !0);
       p.addEventListener("load", function(b) {
         var n = b.target.response;
-        we.add(d, n);
+        xe.add(d, n);
         200 === this.status ? (a && a(n), e.manager.itemEnd(d)) : 0 === this.status ? (console.warn("THREE.FileLoader: HTTP Status 0 received."), a && a(n), e.manager.itemEnd(d)) : (c && c(b), e.manager.itemError(d));
       }, !1);
       void 0 !== b && p.addEventListener("progress", function(d) {
@@ -10248,7 +10260,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.mimeType = d;
     return this;
   }});
-  Object.assign(Ce.prototype, {load:function(d, a, b, c) {
+  Object.assign(De.prototype, {load:function(d, a, b, c) {
     function e(e) {
       h.load(d[e], function(d) {
         d = n._parser(d, !0);
@@ -10969,7 +10981,7 @@ Nunu.TIMESTAMP = "201611291716";
       void 0 === b[d] && console.warn("THREE.MaterialLoader: Undefined texture", d);
       return b[d];
     }
-    var b = this.textures, c = new df[d.type];
+    var b = this.textures, c = new ef[d.type];
     void 0 !== d.uuid && (c.uuid = d.uuid);
     void 0 !== d.name && (c.name = d.name);
     void 0 !== d.color && c.color.setHex(d.color);
@@ -11103,7 +11115,7 @@ Nunu.TIMESTAMP = "201611291716";
             h.name = q;
             break;
           case "blending":
-            h.blending = Ke[q];
+            h.blending = Le[q];
             break;
           case "colorAmbient":
           ;
@@ -11455,7 +11467,7 @@ Nunu.TIMESTAMP = "201611291716";
     c = Pb.prototype.initMaterials(d.materials, a, this.crossOrigin);
     return {geometry:b, materials:c};
   }});
-  Object.assign(De.prototype, {load:function(d, a, b, c) {
+  Object.assign(Ee.prototype, {load:function(d, a, b, c) {
     "" === this.texturePath && (this.texturePath = d.substring(0, d.lastIndexOf("/") + 1));
     var e = this;
     (new fb(e.manager)).load(d, function(b) {
@@ -11620,12 +11632,12 @@ Nunu.TIMESTAMP = "201611291716";
         h.needsUpdate = !0;
         h.uuid = m.uuid;
         void 0 !== m.name && (h.name = m.name);
-        void 0 !== m.mapping && (h.mapping = c(m.mapping, Le));
+        void 0 !== m.mapping && (h.mapping = c(m.mapping, Me));
         void 0 !== m.offset && h.offset.fromArray(m.offset);
         void 0 !== m.repeat && h.repeat.fromArray(m.repeat);
-        void 0 !== m.wrap && (h.wrapS = c(m.wrap[0], ue), h.wrapT = c(m.wrap[1], ue));
-        void 0 !== m.minFilter && (h.minFilter = c(m.minFilter, ve));
-        void 0 !== m.magFilter && (h.magFilter = c(m.magFilter, ve));
+        void 0 !== m.wrap && (h.wrapS = c(m.wrap[0], ve), h.wrapT = c(m.wrap[1], ve));
+        void 0 !== m.minFilter && (h.minFilter = c(m.minFilter, we));
+        void 0 !== m.magFilter && (h.magFilter = c(m.magFilter, we));
         void 0 !== m.anisotropy && (h.anisotropy = m.anisotropy);
         void 0 !== m.flipY && (h.flipY = m.flipY);
         e[m.uuid] = h;
@@ -11965,7 +11977,7 @@ Nunu.TIMESTAMP = "201611291716";
     var a = pd.tangentQuadraticBezier;
     return (new l(a(d, this.v0.x, this.v1.x, this.v2.x), a(d, this.v0.y, this.v1.y, this.v2.y))).normalize();
   };
-  var xe = Object.assign(Object.create(id.prototype), {fromPoints:function(d) {
+  var ye = Object.assign(Object.create(id.prototype), {fromPoints:function(d) {
     this.moveTo(d[0].x, d[0].y);
     for (var a = 1, b = d.length;a < b;a++) {
       this.lineTo(d[a].x, d[a].y);
@@ -12001,7 +12013,7 @@ Nunu.TIMESTAMP = "201611291716";
     d = d.getPoint(1);
     this.currentPoint.copy(d);
   }});
-  Tb.prototype = Object.assign(Object.create(xe), {constructor:Tb, getPointsHoles:function(d) {
+  Tb.prototype = Object.assign(Object.create(ye), {constructor:Tb, getPointsHoles:function(d) {
     for (var a = [], b = 0, c = this.holes.length;b < c;b++) {
       a[b] = this.holes[b].getPoints(d);
     }
@@ -12011,8 +12023,8 @@ Nunu.TIMESTAMP = "201611291716";
   }, extractPoints:function(d) {
     return this.extractAllPoints(d);
   }});
-  jd.prototype = xe;
-  xe.constructor = jd;
+  jd.prototype = ye;
+  ye.constructor = jd;
   de.prototype = {moveTo:function(d, a) {
     this.currentPath = new jd;
     this.subPaths.push(this.currentPath);
@@ -12175,7 +12187,7 @@ Nunu.TIMESTAMP = "201611291716";
     }
     return b;
   }});
-  Object.assign(Ee.prototype, {load:function(d, a, b, c) {
+  Object.assign(Fe.prototype, {load:function(d, a, b, c) {
     var e = this;
     (new fb(this.manager)).load(d, function(d) {
       var b;
@@ -12211,7 +12223,7 @@ Nunu.TIMESTAMP = "201611291716";
     this.height = d.height;
     return this;
   }});
-  Object.assign(Fe.prototype, {update:function() {
+  Object.assign(Ge.prototype, {update:function() {
     var d, a, b, c, e, g, m, h = new q, k = new q;
     return function(n) {
       if (d !== this || a !== n.focus || b !== n.fov || c !== n.aspect * this.aspect || e !== n.near || g !== n.far || m !== n.zoom) {
@@ -12925,45 +12937,45 @@ Nunu.TIMESTAMP = "201611291716";
       }
     }
     return this.time = a;
-  }, _setEndings:function(a, b, c) {
-    var d = this._interpolantSettings;
-    c ? (d.endingStart = 2401, d.endingEnd = 2401) : (d.endingStart = a ? this.zeroSlopeAtStart ? 2401 : 2400 : 2402, d.endingEnd = b ? this.zeroSlopeAtEnd ? 2401 : 2400 : 2402);
-  }, _scheduleFading:function(a, b, c) {
-    var d = this._mixer, e = d.time, g = this._weightInterpolant;
-    null === g && (this._weightInterpolant = g = d._lendControlInterpolant());
-    d = g.parameterPositions;
+  }, _setEndings:function(d, a, b) {
+    var c = this._interpolantSettings;
+    b ? (c.endingStart = 2401, c.endingEnd = 2401) : (c.endingStart = d ? this.zeroSlopeAtStart ? 2401 : 2400 : 2402, c.endingEnd = a ? this.zeroSlopeAtEnd ? 2401 : 2400 : 2402);
+  }, _scheduleFading:function(d, a, b) {
+    var c = this._mixer, e = c.time, g = this._weightInterpolant;
+    null === g && (this._weightInterpolant = g = c._lendControlInterpolant());
+    c = g.parameterPositions;
     g = g.sampleValues;
-    d[0] = e;
-    g[0] = b;
-    d[1] = e + a;
-    g[1] = c;
+    c[0] = e;
+    g[0] = a;
+    c[1] = e + d;
+    g[1] = b;
     return this;
   }};
-  Object.assign(ne.prototype, f.prototype, {clipAction:function(a, b) {
-    var d = b || this._root, c = d.uuid, e = "string" === typeof a ? ab.findByName(d, a) : a, d = null !== e ? e.uuid : a;
-    a = this._actionsByClip[d];
+  Object.assign(ne.prototype, f.prototype, {clipAction:function(d, a) {
+    var b = a || this._root, c = b.uuid, e = "string" === typeof d ? ab.findByName(b, d) : d, b = null !== e ? e.uuid : d;
+    d = this._actionsByClip[b];
     var g = null;
-    if (void 0 !== a) {
-      g = a.actionByRoot[c];
+    if (void 0 !== d) {
+      g = d.actionByRoot[c];
       if (void 0 !== g) {
         return g;
       }
-      g = a.knownActions[0];
+      g = d.knownActions[0];
       null === e && (e = g._clip);
     }
     if (null === e) {
       return null;
     }
-    e = new me(this, e, b);
+    e = new me(this, e, a);
     this._bindAction(e, g);
-    this._addInactiveAction(e, d, c);
+    this._addInactiveAction(e, b, c);
     return e;
-  }, existingAction:function(a, b) {
-    b = b || this._root;
-    var d = b.uuid;
-    b = "string" === typeof a ? ab.findByName(b, a) : a;
-    b = this._actionsByClip[b ? b.uuid : a];
-    return void 0 !== b ? b.actionByRoot[d] || null : null;
+  }, existingAction:function(d, a) {
+    a = a || this._root;
+    var b = a.uuid;
+    a = "string" === typeof d ? ab.findByName(a, d) : d;
+    a = this._actionsByClip[a ? a.uuid : d];
+    return void 0 !== a ? a.actionByRoot[b] || null : null;
   }, stopAllAction:function() {
     for (var a = this._actions, b = this._nActiveActions, c = this._bindings, e = this._nActiveBindings, g = this._nActiveBindings = this._nActiveActions = 0;g !== b;++g) {
       a[g].reset();
@@ -13294,7 +13306,7 @@ Nunu.TIMESTAMP = "201611291716";
   }, intersectObject:function(a, b) {
     var d = [];
     qe(a, this, d, b);
-    d.sort(Ge);
+    d.sort(He);
     return d;
   }, intersectObjects:function(a, b) {
     var d = [];
@@ -13304,7 +13316,7 @@ Nunu.TIMESTAMP = "201611291716";
     for (var c = 0, e = a.length;c < e;c++) {
       qe(a[c], this, d, b);
     }
-    d.sort(Ge);
+    d.sort(He);
     return d;
   }};
   re.prototype = {constructor:re, start:function() {
@@ -13345,6 +13357,24 @@ Nunu.TIMESTAMP = "201611291716";
   }, setFromVector3:function(a) {
     this.radius = a.length();
     0 === this.radius ? this.phi = this.theta = 0 : (this.theta = Math.atan2(a.x, a.z), this.phi = Math.acos(da.clamp(a.y / this.radius, -1, 1)));
+    return this;
+  }};
+  te.prototype = {constructor:te, set:function(a, b, c) {
+    this.radius = a;
+    this.theta = b;
+    this.y = c;
+    return this;
+  }, clone:function() {
+    return (new this.constructor).copy(this);
+  }, copy:function(a) {
+    this.radius = a.radius;
+    this.theta = a.theta;
+    this.y = a.y;
+    return this;
+  }, setFromVector3:function(a) {
+    this.radius = Math.sqrt(a.x * a.x + a.z * a.z);
+    this.theta = Math.atan2(a.x, a.z);
+    this.y = a.y;
     return this;
   }};
   Ka.prototype = Object.create(Da.prototype);
@@ -13708,10 +13738,10 @@ Nunu.TIMESTAMP = "201611291716";
       }
     };
   }();
-  var He = new ca;
-  He.addAttribute("position", new la([0, 0, 0, 0, 1, 0], 3));
-  var Ie = new ub(0, .5, 1, 5, 1);
-  Ie.translate(0, -.5, 0);
+  var Ie = new ca;
+  Ie.addAttribute("position", new la([0, 0, 0, 0, 1, 0], 3));
+  var Je = new ub(0, .5, 1, 5, 1);
+  Je.translate(0, -.5, 0);
   Vb.prototype = Object.create(X.prototype);
   Vb.prototype.constructor = Vb;
   Vb.prototype.setDirection = function() {
@@ -13735,7 +13765,7 @@ Nunu.TIMESTAMP = "201611291716";
   };
   Rd.prototype = Object.create(ta.prototype);
   Rd.prototype.constructor = Rd;
-  var te = function() {
+  var ue = function() {
     function a() {
     }
     var b = new g, c = new a, e = new a, m = new a;
@@ -13787,7 +13817,7 @@ Nunu.TIMESTAMP = "201611291716";
       }
       return new g(c.calc(a), e.calc(a), m.calc(a));
     });
-  }(), ef = Na.create(function(a) {
+  }(), ff = Na.create(function(a) {
     console.warn("THREE.SplineCurve3 will be deprecated. Please use THREE.CatmullRomCurve3");
     this.points = void 0 === a ? [] : a;
   }, function(a) {
@@ -13797,7 +13827,7 @@ Nunu.TIMESTAMP = "201611291716";
     a -= b;
     var c = d[0 == b ? b : b - 1], e = d[b], m = d[b > d.length - 2 ? d.length - 1 : b + 1], d = d[b > d.length - 3 ? d.length - 1 : b + 2], b = pd.interpolate;
     return new g(b(c.x, e.x, m.x, d.x, a), b(c.y, e.y, m.y, d.y, a), b(c.z, e.z, m.z, d.z, a));
-  }), ff = Na.create(function(a, b, c, e) {
+  }), gf = Na.create(function(a, b, c, e) {
     this.v0 = a;
     this.v1 = b;
     this.v2 = c;
@@ -13805,14 +13835,14 @@ Nunu.TIMESTAMP = "201611291716";
   }, function(a) {
     var d = Ea.b3;
     return new g(d(a, this.v0.x, this.v1.x, this.v2.x, this.v3.x), d(a, this.v0.y, this.v1.y, this.v2.y, this.v3.y), d(a, this.v0.z, this.v1.z, this.v2.z, this.v3.z));
-  }), gf = Na.create(function(a, b, c) {
+  }), hf = Na.create(function(a, b, c) {
     this.v0 = a;
     this.v1 = b;
     this.v2 = c;
   }, function(a) {
     var d = Ea.b2;
     return new g(d(a, this.v0.x, this.v1.x, this.v2.x), d(a, this.v0.y, this.v1.y, this.v2.y), d(a, this.v0.z, this.v1.z, this.v2.z));
-  }), hf = Na.create(function(a, b) {
+  }), jf = Na.create(function(a, b) {
     this.v1 = a;
     this.v2 = b;
   }, function(a) {
@@ -13827,7 +13857,7 @@ Nunu.TIMESTAMP = "201611291716";
   });
   Sd.prototype = Object.create(vb.prototype);
   Sd.prototype.constructor = Sd;
-  Je.prototype = Object.create(te.prototype);
+  Ke.prototype = Object.create(ue.prototype);
   md.prototype.setColors = function() {
     console.error("THREE.GridHelper: setColors() has been deprecated, pass them in the constructor instead.");
   };
@@ -14244,22 +14274,22 @@ Nunu.TIMESTAMP = "201611291716";
   a.CanvasTexture = xd;
   a.DepthTexture = Nc;
   a.Texture = b;
-  a.CompressedTextureLoader = Ce;
+  a.CompressedTextureLoader = De;
   a.BinaryTextureLoader = $d;
   a.DataTextureLoader = $d;
   a.CubeTextureLoader = ae;
   a.TextureLoader = yd;
-  a.ObjectLoader = De;
+  a.ObjectLoader = Ee;
   a.MaterialLoader = Md;
   a.BufferGeometryLoader = be;
   a.DefaultLoadingManager = $a;
   a.LoadingManager = Zd;
   a.JSONLoader = ce;
   a.ImageLoader = fd;
-  a.FontLoader = Ee;
+  a.FontLoader = Fe;
   a.FileLoader = fb;
   a.Loader = Pb;
-  a.Cache = we;
+  a.Cache = xe;
   a.AudioLoader = fe;
   a.SpotLightShadow = Ad;
   a.SpotLight = Bd;
@@ -14271,7 +14301,7 @@ Nunu.TIMESTAMP = "201611291716";
   a.AmbientLight = Fd;
   a.LightShadow = Mb;
   a.Light = Aa;
-  a.StereoCamera = Fe;
+  a.StereoCamera = Ge;
   a.PerspectiveCamera = Oa;
   a.OrthographicCamera = Yb;
   a.CubeCamera = Nd;
@@ -14387,6 +14417,7 @@ Nunu.TIMESTAMP = "201611291716";
   };
   a.Math = da;
   a.Spherical = se;
+  a.Cylindrical = te;
   a.Plane = wa;
   a.Frustum = Sa;
   a.Sphere = Ca;
@@ -14418,11 +14449,11 @@ Nunu.TIMESTAMP = "201611291716";
   a.BoxHelper = Gc;
   a.ArrowHelper = Vb;
   a.AxisHelper = Rd;
-  a.CatmullRomCurve3 = te;
-  a.SplineCurve3 = ef;
-  a.CubicBezierCurve3 = ff;
-  a.QuadraticBezierCurve3 = gf;
-  a.LineCurve3 = hf;
+  a.CatmullRomCurve3 = ue;
+  a.SplineCurve3 = ff;
+  a.CubicBezierCurve3 = gf;
+  a.QuadraticBezierCurve3 = hf;
+  a.LineCurve3 = jf;
   a.ArcCurve = Sd;
   a.EllipseCurve = vb;
   a.SplineCurve = Qb;
@@ -14545,7 +14576,7 @@ Nunu.TIMESTAMP = "201611291716";
   a.SubtractiveBlending = 3;
   a.MultiplyBlending = 4;
   a.CustomBlending = 5;
-  a.BlendingMode = Ke;
+  a.BlendingMode = Le;
   a.AddEquation = 100;
   a.SubtractEquation = 101;
   a.ReverseSubtractEquation = 102;
@@ -14586,18 +14617,18 @@ Nunu.TIMESTAMP = "201611291716";
   a.SphericalReflectionMapping = 305;
   a.CubeUVReflectionMapping = 306;
   a.CubeUVRefractionMapping = 307;
-  a.TextureMapping = Le;
+  a.TextureMapping = Me;
   a.RepeatWrapping = 1E3;
   a.ClampToEdgeWrapping = 1001;
   a.MirroredRepeatWrapping = 1002;
-  a.TextureWrapping = ue;
+  a.TextureWrapping = ve;
   a.NearestFilter = 1003;
   a.NearestMipMapNearestFilter = 1004;
   a.NearestMipMapLinearFilter = 1005;
   a.LinearFilter = 1006;
   a.LinearMipMapNearestFilter = 1007;
   a.LinearMipMapLinearFilter = 1008;
-  a.TextureFilter = ve;
+  a.TextureFilter = we;
   a.UnsignedByteType = 1009;
   a.ByteType = 1010;
   a.ShortType = 1011;
@@ -14728,7 +14759,7 @@ Nunu.TIMESTAMP = "201611291716";
     console.warn("THREE.Float64Attribute has been removed. Use new THREE.Float64BufferAttribute() instead.");
     return new sb(a, b);
   };
-  a.ClosedSplineCurve3 = Je;
+  a.ClosedSplineCurve3 = Ke;
   a.BoundingBoxHelper = function(a, b) {
     console.warn("THREE.BoundingBoxHelper has been deprecated. Creating a THREE.BoxHelper instead.");
     return new Gc(a, b);
@@ -32494,8 +32525,6 @@ Sky.prototype.toJSON = function(a) {
   return a;
 };
 function PerspectiveCamera(a, f, l, b) {
-  void 0 === l && (l = .1);
-  void 0 === b && (b = 1E5);
   THREE.PerspectiveCamera.call(this, a, f, l, b);
   this.name = "camera";
   this.offset = new THREE.Vector2(0, 0);
@@ -32537,13 +32566,11 @@ PerspectiveCamera.prototype.toJSON = function(a) {
   return a;
 };
 function OrthographicCamera(a, f, l, b, k) {
-  void 0 === b && (b = 0);
-  void 0 === k && (k = 1E5);
   THREE.OrthographicCamera.call(this, -1, 1, 1, -1, b, k);
   this.name = "camera";
   this.size = void 0 != a ? a : 10;
   this.aspect = void 0 != f ? f : 1;
-  this.mode = void 0 !== l ? l : OrthographicCamera.FIXED_VERTICAL;
+  this.mode = void 0 !== l ? l : OrthographicCamera.RESIZE_HORIZONTAL;
   this.offset = new THREE.Vector2(0, 0);
   this.viewport = new THREE.Vector2(1, 1);
   this.clear_depth = this.clear_color = !1;
@@ -32551,8 +32578,8 @@ function OrthographicCamera(a, f, l, b, k) {
   this.listener = new THREE.AudioListener;
 }
 OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype);
-OrthographicCamera.FIXED_VERTICAL = 0;
-OrthographicCamera.FIXED_HORIZONTAL = 1;
+OrthographicCamera.RESIZE_HORIZONTAL = 0;
+OrthographicCamera.RESIZE_VERTICAL = 1;
 OrthographicCamera.prototype.initialize = function() {
   for (var a = 0;a < this.children.length;a++) {
     this.children[a].initialize();
@@ -32564,7 +32591,7 @@ OrthographicCamera.prototype.destroy = function() {
   THREE.Object3D.prototype.destroy.call(this);
 };
 OrthographicCamera.prototype.updateProjectionMatrix = function() {
-  this.mode === OrthographicCamera.FIXED_VERTICAL ? (this.top = this.size / 2, this.bottom = -this.top, this.right = this.viewport.x / this.viewport.y * this.aspect * this.top, this.left = -this.right) : this.mode === OrthographicCamera.FIXED_HORIZONTAL && (this.right = this.size / 2, this.left = -this.right, this.top = this.right / this.aspect * (this.viewport.x / this.viewport.y), this.bottom = -this.top);
+  this.mode === OrthographicCamera.RESIZE_HORIZONTAL ? (this.top = this.size / 2, this.bottom = -this.top, this.right = this.viewport.x / this.viewport.y * this.aspect * this.top, this.left = -this.right) : this.mode === OrthographicCamera.RESIZE_VERTICAL && (this.right = this.size / 2, this.left = -this.right, this.top = this.right / this.aspect * (this.viewport.x / this.viewport.y), this.bottom = -this.top);
   THREE.OrthographicCamera.prototype.updateProjectionMatrix.call(this);
 };
 OrthographicCamera.prototype.toJSON = function(a) {
