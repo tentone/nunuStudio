@@ -1281,7 +1281,7 @@ Editor.setCameraMode = function(mode)
 
 	if(mode === Editor.CAMERA_ORTHOGRAPHIC)
 	{
-		Editor.camera = new OrthographicCamera(10, aspect, OrthographicCamera.FIXED_VERTICAL);
+		Editor.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL);
 		Editor.camera.position.set(0, 0, 20);
 		Editor.grid_helper.rotation.x = Math.PI / 2;
 	}
