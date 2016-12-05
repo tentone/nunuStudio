@@ -19,7 +19,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.13 Alpha";
-Nunu.TIMESTAMP = "201611291716";
+Nunu.TIMESTAMP = "201612051312";
 (function(a, f) {
   "object" === typeof exports && "undefined" !== typeof module ? f(exports) : "function" === typeof define && define.amd ? define(["exports"], f) : f(a.THREE = a.THREE || {});
 })(this, function(a) {
@@ -30747,7 +30747,8 @@ MeshPhongMaterial = THREE.MeshPhongMaterial, MeshPhysicalMaterial = THREE.MeshPh
 ConeBufferGeometry = THREE.ConeBufferGeometry, ConeGeometry = THREE.ConeGeometry, CylinderBufferGeometry = THREE.CylinderBufferGeometry, CylinderGeometry = THREE.CylinderGeometry, DodecahedronBufferGeometry = THREE.DodecahedronBufferGeometry, DodecahedronGeometry = THREE.DodecahedronGeometry, ExtrudeGeometry = THREE.ExtrudeGeometry, IcosahedronBufferGeometry = THREE.IcosahedronBufferGeometry, IcosahedronGeometry = THREE.IcosahedronGeometry, LatheBufferGeometry = THREE.LatheBufferGeometry, LatheGeometry = 
 THREE.LatheGeometry, OctahedronBufferGeometry = THREE.OctahedronBufferGeometry, OctahedronGeometry = THREE.OctahedronGeometry, ParametricBufferGeometry = THREE.ParametricBufferGeometry, ParametricGeometry = THREE.ParametricGeometry, PlaneBufferGeometry = THREE.PlaneBufferGeometry, PlaneGeometry = THREE.PlaneGeometry, PolyhedronBufferGeometry = THREE.PolyhedronBufferGeometry, PolyhedronGeometry = THREE.PolyhedronGeometry, RingBufferGeometry = THREE.RingBufferGeometry, RingGeometry = THREE.RingGeometry, 
 ShapeGeometry = THREE.ShapeGeometry, SphereBufferGeometry = THREE.SphereBufferGeometry, SphereGeometry = THREE.SphereGeometry, TetrahedronBufferGeometry = THREE.TetrahedronBufferGeometry, TetrahedronGeometry = THREE.TetrahedronGeometry, TextGeometry = THREE.TextGeometry, TorusBufferGeometry = THREE.TorusBufferGeometry, TorusGeometry = THREE.TorusGeometry, TorusKnotBufferGeometry = THREE.TorusKnotBufferGeometry, TorusKnotGeometry = THREE.TorusKnotGeometry, TubeGeometry = THREE.TubeGeometry, TubeBufferGeometry = 
-THREE.TubeBufferGeometry, Box2 = THREE.Box2, Box3 = THREE.Box3, Color = THREE.Color, Euler = THREE.Euler, Frustum = THREE.Frustum, Matrix3 = THREE.Matrix3, Matrix4 = THREE.Matrix4, Plane = THREE.Plane, Quarternion = THREE.Quarternion, Ray = THREE.Ray, Sphere = THREE.Sphere, Spline = THREE.Spline, Triangle = THREE.Triangle, Vector2 = THREE.Vector2, Vector3 = THREE.Vector3, Vector4 = THREE.Vector4, LOD = THREE.LOD, LensFlare = THREE.LensFlare;
+THREE.TubeBufferGeometry, Box2 = THREE.Box2, Box3 = THREE.Box3, Color = THREE.Color, Euler = THREE.Euler, Line3 = THREE.Line3, Frustum = THREE.Frustum, Matrix3 = THREE.Matrix3, Matrix4 = THREE.Matrix4, Plane = THREE.Plane, Quarternion = THREE.Quarternion, Ray = THREE.Ray, Sphere = THREE.Sphere, Spline = THREE.Spline, Triangle = THREE.Triangle, Vector2 = THREE.Vector2, Vector3 = THREE.Vector3, Vector4 = THREE.Vector4, LOD = THREE.LOD, LensFlare = THREE.LensFlare, Line = THREE.Line, LineSegments = 
+THREE.LineSegments;
 THREE.Object3D.prototype.folded = !1;
 THREE.Object3D.prototype.hidden = !1;
 THREE.Object3D.prototype.initialize = function() {
