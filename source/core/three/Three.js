@@ -70,6 +70,7 @@ var Box2 = THREE.Box2;
 var Box3 = THREE.Box3;
 var Color = THREE.Color;
 var Euler = THREE.Euler;
+var Line3 = THREE.Line3;
 var Frustum = THREE.Frustum;
 var Matrix3 = THREE.Matrix3;
 var Matrix4 = THREE.Matrix4;
@@ -86,3 +87,5 @@ var Vector4 = THREE.Vector4;
 //Objects
 var LOD = THREE.LOD;
 var LensFlare = THREE.LensFlare;
+var Line = THREE.Line;
+var LineSegments = THREE.LineSegments;
