@@ -1,7 +1,7 @@
 "use strict";
 
 //Constructor from object before changes parent and change type
-function Action(object, type, parent, state)
+function Action(object, type, target, parent, state)
 {
 	if(type === Action.CHANGED)
 	{
@@ -13,6 +13,7 @@ function Action(object, type, parent, state)
 	}
 
 	this.type = type;
+	this.target = target;
 	this.state = state;
 
 	this.parent = (parent !== undefined) ? parent : object.parent;
@@ -36,5 +37,5 @@ Action.REMOVED = 11;
 Action.CHANGED = 12;
 
 //Action target
-Action.OBJECT = 20;
-Action.RESOURCE = 21;
+Action.TARGET_OBJECT = 20;
+Action.TARGET_RESOURCE = 21;
