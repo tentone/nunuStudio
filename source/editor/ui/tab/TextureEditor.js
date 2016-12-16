@@ -1,13 +1,13 @@
 "use strict";
 
-function MaterialEditor(parent)
+function TextureEditor(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 	
 	//ID
-	var id = "material_editor" + MaterialEditor.id;
-	MaterialEditor.id++;
+	var id = "texture_editor" + TextureEditor.id;
+	TextureEditor.id++;
 
 	//Create element
 	this.element = document.createElement("div");
@@ -89,15 +89,7 @@ function MaterialEditor(parent)
 
 	//Material preview scene
 	this.scene = new THREE.Scene();
-	this.sky = new Sky();
-	var sun = this.sky.sun;
-	sun.shadow.camera.left = -5;
-	sun.shadow.camera.right = 5;
-	sun.shadow.camera.top = 5;
-	sun.shadow.camera.bottom = -5;
-	this.scene.add(this.sky);
-	this.scene.add(new PointLight(0x666666));
-	this.scene.add(new AmbientLight(0x555555));
+	this.scene.add(new AmbientLight(0xFFFFFF));
 
 	this.obj = new THREE.Mesh(new THREE.SphereBufferGeometry(1, 64, 64), null);
 	this.obj.position.set(0, 0, -2.5);
@@ -327,10 +319,10 @@ function MaterialEditor(parent)
 }
 
 //Material editor counter
-MaterialEditor.id = 0;
+TextureEditor.id = 0;
 
 //Attach material to material editor
-MaterialEditor.prototype.attachMaterial = function(material, material_file)
+TextureEditor.prototype.attachMaterial = function(material, material_file)
 {
 	//Check is if sprite material and ajust preview
 	if(material instanceof THREE.SpriteMaterial)
@@ -367,7 +359,7 @@ MaterialEditor.prototype.attachMaterial = function(material, material_file)
 }
 
 //Activate code editor
-MaterialEditor.prototype.activate = function()
+TextureEditor.prototype.activate = function()
 {
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
@@ -376,7 +368,7 @@ MaterialEditor.prototype.activate = function()
 }
 
 //Remove element
-MaterialEditor.prototype.destroy = function()
+TextureEditor.prototype.destroy = function()
 {
 	try
 	{
@@ -386,7 +378,7 @@ MaterialEditor.prototype.destroy = function()
 }
 
 //Update container object data
-MaterialEditor.prototype.updateMetadata = function(container)
+TextureEditor.prototype.updateMetadata = function(container)
 {
 	if(this.material !== null)
 	{
@@ -419,7 +411,7 @@ MaterialEditor.prototype.updateMetadata = function(container)
 }
 
 //Update material editor
-MaterialEditor.prototype.update = function()
+TextureEditor.prototype.update = function()
 {
 	//Update UI containers
 	this.main.update();
@@ -438,33 +430,10 @@ MaterialEditor.prototype.update = function()
 		//Render scene
 		this.renderer.render(this.scene, this.camera);
 	}
-
-	//Move material view
-	if(Mouse.insideCanvas())
-	{
-		//Rotate object
-		if(Mouse.buttonPressed(Mouse.LEFT))
-		{
-			var delta = new THREE.Quaternion();
-			delta.setFromEuler(new THREE.Euler(Mouse.delta.y * 0.005, Mouse.delta.x * 0.005, 0, 'XYZ'));
-			this.obj.quaternion.multiplyQuaternions(delta, this.obj.quaternion);
-		}
-
-		//Zoom
-		this.camera.position.z += Mouse.wheel * 0.003;
-		if(this.camera.position.z > 5)
-		{
-			this.camera.position.z = 5;
-		}
-		else if(this.camera.position.z < -1.5)
-		{
-			this.camera.position.z = -1.5;
-		}
-	}
 }
 
 //Update division Size
-MaterialEditor.prototype.updateInterface = function()
+TextureEditor.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)
