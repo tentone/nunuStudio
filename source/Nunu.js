@@ -2,4 +2,4 @@ function Nunu(){}
 
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.13 Alpha";
-Nunu.TIMESTAMP = "201612080312";
+Nunu.TIMESTAMP = "201612161531";
