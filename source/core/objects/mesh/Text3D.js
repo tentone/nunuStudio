@@ -30,6 +30,7 @@ Text3D.prototype = Object.create(THREE.Mesh.prototype);
 Text3D.prototype.setFont = function(font)
 {
 	this.font = font;
+	
 	this.setText();
 }
 
@@ -52,16 +53,19 @@ Text3D.prototype.setText = function(text)
 //Update attributes
 Text3D.prototype.updateText = function()
 {
-	this.geometry = new THREE.TextGeometry(this.text,
+	if(this.font !== null)
 	{
-		size: this.size,
-		curveSegments: this.curve_segments,
-		font: this.font,
-		height: this.height,
-		bevelEnabled: this.bevel,
-		bevelSize: this.bevel_size,
-		bevelThickness: this.bevel_thickness
-	});
+		this.geometry = new THREE.TextGeometry(this.text,
+		{
+			size: this.size,
+			curveSegments: this.curve_segments,
+			font: this.font,
+			height: this.height,
+			bevelEnabled: this.bevel,
+			bevelSize: this.bevel_size,
+			bevelThickness: this.bevel_thickness
+		});
+	}
 }
 
 //Clone text 3D

@@ -150,23 +150,6 @@ function SceneEditor(parent)
 					}
 				}
 			}
-			
-			//Dragged file into window
-			if(event.dataTransfer.files.length > 0)
-			{
-				var file = event.dataTransfer.files[0];
-
-				//Open project
-				if(file.name.endsWith(".isp"))
-				{
-					if(confirm("All unsaved changes to the project will be lost! Load file?"))
-					{
-						Editor.loadProgram(file.path);
-						Editor.resetEditingFlags();
-						Editor.updateObjectViews();
-					}
-				}
-			}
 		}
 	};
 
@@ -222,6 +205,7 @@ function SceneEditor(parent)
 	this.camera_button = new ButtonImage(this.element);
 	this.camera_button.size.set(25, 25);
 	this.camera_button.setImage("editor/files/icons/misc/3d.png");
+	this.camera_button.setAltText("Change camera mode");
 	this.camera_button.visible = true;
 	this.camera_button.updateInterface();
 
@@ -238,11 +222,12 @@ function SceneEditor(parent)
 	this.camera_button.setCallback(function()
 	{
 		Editor.setCameraMode();
+
 		if(Editor.camera_mode === Editor.CAMERA_ORTHOGRAPHIC)
 		{
 			self.camera_button.setImage("editor/files/icons/misc/2d.png");
 		}
-		else
+		else if(Editor.camera_mode === Editor.CAMERA_PERSPECTIVE)
 		{
 			self.camera_button.setImage("editor/files/icons/misc/3d.png");
 		}
@@ -347,7 +332,10 @@ SceneEditor.prototype.destroy = function()
 }
 
 //Update SceneEditor
-SceneEditor.prototype.update = function(){}
+SceneEditor.prototype.update = function()
+{
+	//TODO <ADD CODE HERE>
+}
 
 //Update division Size
 SceneEditor.prototype.updateInterface = function()

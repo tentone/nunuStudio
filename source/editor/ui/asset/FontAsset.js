@@ -41,15 +41,6 @@ function FontAsset(parent)
 			}
 		});
 
-		context.addOption("Reverse glyphs", function()
-		{
-			if(self.font !== null && confirm("Reverse font glyphs?"))
-			{
-				//TODO <ADD CODE HERE>
-				alert("Glyph reversing is not implemented!");
-			}
-		});
-
 		context.addOption("Copy", function()
 		{
 			if(self.font !== null)
@@ -103,9 +94,8 @@ FontAsset.prototype.updateMetadata = function()
 {
 	if(this.font !== null)
 	{
-		//TODO <FONT PREVIEW>
-		this.image.src = Interface.file_dir + "icons/misc/font.png";
-		
+		Editor.font_renderer.renderFont(this.font, this.image);
+
 		this.setText(this.font.name);
 	}
 }

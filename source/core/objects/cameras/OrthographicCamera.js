@@ -27,15 +27,6 @@ OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype)
 OrthographicCamera.RESIZE_HORIZONTAL = 0;
 OrthographicCamera.RESIZE_VERTICAL = 1;
 
-//Initialize
-OrthographicCamera.prototype.initialize = function()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-}
-
 //Destroy camera
 OrthographicCamera.prototype.destroy = function()
 {

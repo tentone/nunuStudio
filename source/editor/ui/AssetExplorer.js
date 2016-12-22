@@ -17,9 +17,33 @@ function AssetExplorer(parent)
 	this.element.style.cursor = "default";
 	this.element.style.backgroundColor = Editor.theme.panel_color;
 
+	//Drop event
 	this.element.ondrop = function(event)
 	{
-		event.preventDefault();
+		//Dragged file into object
+		if(event.dataTransfer.files.length > 0)
+		{
+			var file = event.dataTransfer.files[0];
+
+			//Image
+			if(file.type.startsWith("image"))
+			{
+				var texture = new Texture(file.path);
+
+			}
+			//Video
+			else if(file.type.startsWith("video"))
+			{
+				var texture = new VideoTexture(file.path);
+
+			}
+			//Audio
+			else if(file.type.startsWith("audio"))
+			{
+				var texture = new Audio(file.path);
+
+			}
+		}
 	};
 
 	this.element.ondragover = function(event)

@@ -47,6 +47,22 @@ function TextureAsset(parent)
 				catch(e){}
 			}
 		});
+
+		context.addOption("Cut", function()
+		{
+			if(self.texture !== null)
+			{
+				try
+				{
+					Editor.clipboard.set(JSON.stringify(self.texture.toJSON()), "text");
+
+					self.texture.dispose();
+					Editor.program.removeTexture(self.texture, Editor.default_texture);
+					Editor.updateObjectViews();
+				}
+				catch(e){}
+			}
+		});
 	};
 
 	//Drag start

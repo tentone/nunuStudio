@@ -237,6 +237,7 @@ include("editor/helpers/WireframeHelper.js");
 include("editor/helpers/BoundingBoxHelper.js");
 include("editor/helpers/GridHelper.js");
 
+include("editor/utils/FontRenderer.js");
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
 
@@ -268,6 +269,26 @@ Editor.initialize = function()
 	Editor.fullscreen = false;
 	
 	document.body.style.overflow = "hidden";
+	
+	//Open ISP file if dragged to the window
+	document.body.ondrop = function(event)
+	{
+		if(event.dataTransfer.files.length > 0)
+		{
+			var file = event.dataTransfer.files[0];
+
+			//Open project
+			if(file.name.endsWith(".isp"))
+			{
+				if(confirm("All unsaved changes to the project will be lost! Load file?"))
+				{
+					Editor.loadProgram(file.path);
+					Editor.resetEditingFlags();
+					Editor.updateObjectViews();
+				}
+			}
+		}
+	}
 
 	Keyboard.initialize();
 	Mouse.initialize();
@@ -326,7 +347,8 @@ Editor.initialize = function()
 
 	//Material renderer for material previews
 	Editor.material_renderer = new MaterialRenderer();
-
+	Editor.font_renderer = new FontRenderer();
+	
 	//Default resources
 	Editor.createDefaultResouces();
 
@@ -449,6 +471,10 @@ Editor.update = function()
 		if(Keyboard.keyJustPressed(Keyboard.DEL))
 		{
 			Editor.deleteObject();
+		}
+		else if(Keyboard.keyJustPressed(Keyboard.F5))
+		{
+			Editor.setState(Editor.STATE_TESTING);
 		}
 		else if(Keyboard.keyPressed(Keyboard.CTRL))
 		{
@@ -646,6 +672,11 @@ Editor.update = function()
 	else if(Editor.state === Editor.STATE_TESTING)
 	{
 		Editor.program_running.update();
+
+		if(Keyboard.keyJustPressed(Keyboard.F5))
+		{
+			Editor.setState(Editor.STATE_EDITING);
+		}
 	}
 
 	Editor.render();
