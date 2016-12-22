@@ -18,6 +18,7 @@ function MaterialRenderer()
 
 	//Sprite
 	this.sprite = new THREE.Sprite(null);
+	this.sprite.scale.set(2, 2, 1);
 	this.scene.add(this.sprite);
 
 	//Ambient light

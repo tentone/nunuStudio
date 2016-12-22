@@ -9,6 +9,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - Real time lighting and shadows
 - TTF Font support
 - One file only project export with all assets included
+	- No more broken projects because of missing files
 - NWJS and Cordova used for desktop and mobile deployment
 - CannonJS physics engine 
 - SPE particle system
@@ -17,8 +18,21 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - Microft Kinect and Leap Motion support
 	- Kinect only supported in windows projects
 
+### Todo
+ - Proper packaging
+ - Documentation
+ - Blockly block script
+
+### ChangeLog
+- V0.8.9.15 Alpha
+	- Added font preview in asset explorer
+	- Fixed material preview projection
+	- Projects can be loaded when dragged anywhere
+	- Videos and images can now be exported to files
+		- Left click on texture inside the asset explorer and select Export Image/Video
+
 ### Runtime
- - To embed applications made inside nunuStudio in web pages the following code can be used
+- To embed applications made inside nunuStudio in web pages the following code can be used
 
 ```
  var app = new NunuApp();
@@ -53,13 +67,8 @@ nunuStudio uses a number of open source projects to work properly
 	- github.com/leapmotion/leapjs
 
 ### Installation
- - nunuStudio is intended to run with NWJS direcly on the desktop
- - Download the repository and run the start.bat or start.sh file depending on your OS
-
-### To do
- - Proper packaging
- - Documentation
- - Blockly block script
+- nunuStudio is intended to run with NWJS direcly on the desktop
+- Download the repository and run the start.bat or start.sh file depending on your OS
 
 ### License
- - nunuStudio uses a MIT license (Available on GitHub page)
+- nunuStudio uses a MIT license (Available on GitHub page)

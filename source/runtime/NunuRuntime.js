@@ -3,7 +3,7 @@
 //Nunu global
 include("Nunu.js");
 
-//External libs
+//Runtime dependencies
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
 include("lib/three/animation/Animation.js");
@@ -18,7 +18,9 @@ include("lib/spine.min.js");
 include("lib/opentype.min.js");
 
 //Core runtime modules
-include("core/three/Three.js");
+include("core/Global.js");
+include("core/FileSystem.js");
+
 include("core/three/Object3D.js");
 include("core/three/Vector3.js");
 include("core/three/Vector2.js");
@@ -81,9 +83,7 @@ include("core/utils/Base64Utils.js");
 include("core/utils/ArraybufferUtils.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
-include("core/utils/Mesh2shape.js");
-
-include("core/FileSystem.js");
+include("core/utils/BufferUtils.js");
 
 //Nunu app contructor
 function NunuRuntime(canvas)
