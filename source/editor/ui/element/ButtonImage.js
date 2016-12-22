@@ -80,7 +80,7 @@ ButtonImage.prototype.setImage = function(image)
 //Set alt text
 ButtonImage.prototype.setAltText = function(alt_text)
 {
-	var text = new Text(this.element);
+	var text = new Text();//this.element);
 	text.element.style.background = Editor.theme.bar_color;
 	text.element.style.zIndex = "300";
 	text.setText(alt_text);
@@ -92,7 +92,7 @@ ButtonImage.prototype.setAltText = function(alt_text)
 	this.element.onmousemove = function(event)
 	{
 		text.size.set(0, 20);
-		text.position.set(event.offsetX - text.size.x/2, event.offsetY - 30);
+		text.position.set(event.clientX - text.size.x/2, event.clientY - 30);
 		text.visible = true;
 		text.updateInterface();
 	};

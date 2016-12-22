@@ -7,7 +7,7 @@ function MaterialRenderer()
 	this.renderer.setSize(128, 128);
 	
 	//Camera
-	this.camera = new THREE.PerspectiveCamera(90, 1);
+	this.camera = new OrthographicCamera(2.2, 1);
 
 	//Scene
 	this.scene = new THREE.Scene();
@@ -21,7 +21,7 @@ function MaterialRenderer()
 	this.scene.add(this.sprite);
 
 	//Ambient light
-	var ambient = new THREE.AmbientLight(0x777777);
+	var ambient = new THREE.AmbientLight(0x999999);
 	this.scene.add(ambient);
 
 	//Pontual light

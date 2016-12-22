@@ -17,15 +17,6 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
-//Initialize camera
-PerspectiveCamera.prototype.initialize = function()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-}
-
 //Destroy camera
 PerspectiveCamera.prototype.destroy = function()
 {
@@ -48,10 +39,6 @@ PerspectiveCamera.prototype.updateMatrixWorld = function(force)
 
 	if(this.matrixWorldNeedsUpdate === true || force === true)
 	{
-		//this.matrixWorld.makeRotationFromQuaternion(this.quaternion);
-		//this.matrixWorld.scale(this.scale);
-		//this.matrixWorld.setPosition(this.position);
-
 		if(this.parent !== null)
 		{
 			this.matrixWorld.multiplyMatrices(this.parent.matrixWorld, this.matrix);
@@ -86,7 +73,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 		left += this.near * this.filmOffset / this.getFilmWidth();
 	}
 
-	this.projectionMatrix.makeFrustum(left, left + width, top - height, top, this.near, this.far);
+	this.projectionMatrix.makePerspective(left, left + width, top, top - height, this.near, this.far);
 }
 
 //Create JSON for object
