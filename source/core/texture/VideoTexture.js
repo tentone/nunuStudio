@@ -36,8 +36,6 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	this.image.volume = this.volume;
 	this.image.src = this.video.data;
 
-	console.log(this.image.prototype);
-
 	//Video update loop
 	var texture = this;
 	var video = this.image;

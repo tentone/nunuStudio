@@ -6,15 +6,15 @@ function ArraybufferUtils(){}
 ArraybufferUtils.fromBinaryString = function(str)
 {
 	var length = str.length;
-	var arraybuffer = new ArrayBuffer(length);
-	var view = new Uint8Array(arraybuffer);
+	var array = new ArrayBuffer(length);
+	var view = new Uint8Array(array);
 
 	for(var i = 0; i < length; i++)
 	{
 		view[i] = str.charCodeAt(i);
 	}
 
-	return arraybuffer;
+	return array;
 }
 
 //Create arraybuffer from base64 string
@@ -22,8 +22,8 @@ ArraybufferUtils.fromBase64 = function(str)
 {
 	var encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 	var length = str.length / 4 * 3;
-	var arraybuffer = new ArrayBuffer(length);
-	var view = new Uint8Array(arraybuffer);
+	var array = new ArrayBuffer(length);
+	var view = new Uint8Array(array);
 
 	var a, b, c, d;
 
@@ -45,5 +45,19 @@ ArraybufferUtils.fromBase64 = function(str)
 		}
 	}
 
-	return arraybuffer;
+	return array;
+}
+
+//Create arraybuffer from nodejs buffer
+ArraybufferUtils.fromBuffer = function(buffer)
+{
+	var array = new ArrayBuffer(buffer.length);
+	var view = new Uint8Array(array);
+
+	for(var i = 0; i < buffer.length; i++)
+	{
+		view[i] = buffer[i];
+	}
+
+	return array;
 }

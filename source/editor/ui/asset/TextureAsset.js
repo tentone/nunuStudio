@@ -48,6 +48,40 @@ function TextureAsset(parent)
 			}
 		});
 
+		if(self.texture instanceof Texture)
+		{
+			context.addOption("Export Image", function()
+			{
+				var image = self.texture.img;
+				image.encodeData();
+
+				FileSystem.chooseFile(function(files)
+				{
+					if(files.length > 0)
+					{
+						var file = files[0].path;
+						FileSystem.writeFileBase64(file, image.data);
+					}
+				}, "." + image.encoding , true);
+			});
+		}
+		else if(self.texture instanceof VideoTexture)
+		{
+			context.addOption("Export Video", function()
+			{
+				var video = self.texture.video;
+				
+				FileSystem.chooseFile(function(files)
+				{
+					if(files.length > 0)
+					{
+						var file = files[0].path;
+						FileSystem.writeFileBase64(file, video.data);
+					}
+				}, "." + video.encoding , true);
+			});
+		}
+
 		context.addOption("Cut", function()
 		{
 			if(self.texture !== null)

@@ -106,6 +106,19 @@ FileSystem.writeFile = function(fname, data)
 	}
 }
 
+//Write binary file from base64 data
+FileSystem.writeFileBase64 = function(fname, data)
+{
+	if(FileSystem.fs !== undefined)
+	{
+		var buffer = Buffer.from(Base64Utils.removeHeader(data), "base64");
+
+		var stream = FileSystem.fs.createWriteStream(fname);
+		stream.write(buffer);
+		stream.end();
+	}
+}
+
 //Copy file (cant be used to copy folders)
 FileSystem.copyFile = function(src, dest)
 {
