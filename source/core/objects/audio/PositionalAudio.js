@@ -1,11 +1,11 @@
 "use strict";
 
-function PositionalAudioEmitter(audio)
+function PositionalAudio(audio)
 {
-	THREE.Audio.call(this, PositionalAudioEmitter.listener);
+	THREE.PositionalAudio.call(this, PositionalAudio.listener);
 
 	this.name = "audio";
-	this.type = "Audio";
+	this.type = "PositionalAudio";
 
 	this.audio = (audio !== undefined) ? audio : null;
 
@@ -19,13 +19,13 @@ function PositionalAudioEmitter(audio)
 }
 
 //Default audio listener
-PositionalAudioEmitter.listener = new THREE.AudioListener();
+PositionalAudio.listener = new THREE.AudioListener();
 
 //Super prototypes
-PositionalAudioEmitter.prototype = Object.create(THREE.Audio.prototype);
+PositionalAudio.prototype = Object.create(THREE.PositionalAudio.prototype);
 
 //Initialize audio object
-PositionalAudioEmitter.prototype.initialize = function()
+PositionalAudio.prototype.initialize = function()
 {
 	var self = this;
 
@@ -44,7 +44,7 @@ PositionalAudioEmitter.prototype.initialize = function()
 }
 
 //Dispose audio object
-PositionalAudioEmitter.prototype.dispose = function()
+PositionalAudio.prototype.dispose = function()
 {
 	if(this.isPlaying)
 	{
@@ -59,7 +59,7 @@ PositionalAudioEmitter.prototype.dispose = function()
 }
 
 //Create JSON description
-PositionalAudioEmitter.prototype.toJSON = function(meta)
+PositionalAudio.prototype.toJSON = function(meta)
 {
 	var audio = this.audio;
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)

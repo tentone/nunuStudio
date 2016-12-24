@@ -69,6 +69,15 @@ Script.prototype.update = function()
 	}
 }
 
+//Call resize method if available
+Script.prototype.resize = function()
+{
+	if(this.script.onResize !== undefined)
+	{
+		this.script.onResize.call(this);
+	}
+}
+
 //Define script code
 Script.prototype.setCode = function(code)
 {

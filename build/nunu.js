@@ -19,7 +19,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.15 Alpha";
-Nunu.TIMESTAMP = "201612221935";
+Nunu.TIMESTAMP = "201612240229";
 (function(a, g) {
   "object" === typeof exports && "undefined" !== typeof module ? g(exports) : "function" === typeof define && define.amd ? define(["exports"], g) : g(a.THREE = a.THREE || {});
 })(this, function(a) {
@@ -3698,7 +3698,7 @@ Nunu.TIMESTAMP = "201612221935";
   }
   function vb(d, m, a, b, c, e, f, p) {
     function z(a) {
-      var c, z, e, q = new l, n = new h, G = 0, Y = !0 === a ? d : m, y = !0 === a ? 1 : -1;
+      var c, z, e, q = new l, n = new h, g = 0, Y = !0 === a ? d : m, y = !0 === a ? 1 : -1;
       z = w;
       for (c = 1;c <= b;c++) {
         r.setXYZ(w, 0, v * y, 0), u.setXYZ(w, 0, y, 0), q.x = .5, q.y = .5, Q.setXY(w, q.x, q.y), w++;
@@ -3717,10 +3717,10 @@ Nunu.TIMESTAMP = "201612221935";
         w++;
       }
       for (c = 0;c < b;c++) {
-        q = z + c, n = e + c, !0 === a ? (g.setX(t, n), t++, g.setX(t, n + 1)) : (g.setX(t, n + 1), t++, g.setX(t, n)), t++, g.setX(t, q), t++, G += 3;
+        q = z + c, n = e + c, !0 === a ? (G.setX(t, n), t++, G.setX(t, n + 1)) : (G.setX(t, n + 1), t++, G.setX(t, n)), t++, G.setX(t, q), t++, g += 3;
       }
-      k.addGroup(C, G, !0 === a ? 1 : 2);
-      C += G;
+      k.addGroup(C, g, !0 === a ? 1 : 2);
+      C += g;
     }
     ba.call(this);
     this.type = "CylinderBufferGeometry";
@@ -3740,13 +3740,13 @@ Nunu.TIMESTAMP = "201612221935";
       var d = (b + 1) * (c + 1);
       !1 === e && (d += (b + 1) * q + b * q);
       return d;
-    }(), G = function() {
+    }(), g = function() {
       var d = b * c * 6;
       !1 === e && (d += b * q * 3);
       return d;
-    }(), g = new V(new (65535 < G ? Uint32Array : Uint16Array)(G), 1), r = new V(new Float32Array(3 * n), 3), u = new V(new Float32Array(3 * n), 3), Q = new V(new Float32Array(2 * n), 2), w = 0, t = 0, Y = [], v = a / 2, C = 0;
+    }(), G = new V(new (65535 < g ? Uint32Array : Uint16Array)(g), 1), r = new V(new Float32Array(3 * n), 3), u = new V(new Float32Array(3 * n), 3), Q = new V(new Float32Array(2 * n), 2), w = 0, t = 0, Y = [], v = a / 2, C = 0;
     (function() {
-      var z, e, q = new h, n = new h, G = 0, l = (m - d) / a;
+      var z, e, q = new h, n = new h, g = 0, l = (m - d) / a;
       for (e = 0;e <= c;e++) {
         var y = [], ga = e / c, O = ga * (m - d) + d;
         for (z = 0;z <= b;z++) {
@@ -3765,14 +3765,14 @@ Nunu.TIMESTAMP = "201612221935";
       }
       for (z = 0;z < b;z++) {
         for (e = 0;e < c;e++) {
-          q = Y[e + 1][z], n = Y[e + 1][z + 1], l = Y[e][z + 1], g.setX(t, Y[e][z]), t++, g.setX(t, q), t++, g.setX(t, l), t++, g.setX(t, q), t++, g.setX(t, n), t++, g.setX(t, l), t++, G += 6;
+          q = Y[e + 1][z], n = Y[e + 1][z + 1], l = Y[e][z + 1], G.setX(t, Y[e][z]), t++, G.setX(t, q), t++, G.setX(t, l), t++, G.setX(t, q), t++, G.setX(t, n), t++, G.setX(t, l), t++, g += 6;
         }
       }
-      k.addGroup(C, G, 0);
-      C += G;
+      k.addGroup(C, g, 0);
+      C += g;
     })();
     !1 === e && (0 < d && z(!0), 0 < m && z(!1));
-    this.setIndex(g);
+    this.setIndex(G);
     this.addAttribute("position", r);
     this.addAttribute("normal", u);
     this.addAttribute("uv", Q);
@@ -5369,35 +5369,35 @@ Nunu.TIMESTAMP = "201612221935";
     return this.subVectors(m, d).multiplyScalar(a).add(d);
   }, equals:function(d) {
     return d.x === this.x && d.y === this.y && d.z === this.z && d.w === this.w;
-  }, fromArray:function(d, m) {
-    void 0 === m && (m = 0);
-    this.x = d[m];
-    this.y = d[m + 1];
-    this.z = d[m + 2];
-    this.w = d[m + 3];
+  }, fromArray:function(d, a) {
+    void 0 === a && (a = 0);
+    this.x = d[a];
+    this.y = d[a + 1];
+    this.z = d[a + 2];
+    this.w = d[a + 3];
     return this;
-  }, toArray:function(d, m) {
+  }, toArray:function(d, a) {
     void 0 === d && (d = []);
-    void 0 === m && (m = 0);
-    d[m] = this.x;
-    d[m + 1] = this.y;
-    d[m + 2] = this.z;
-    d[m + 3] = this.w;
+    void 0 === a && (a = 0);
+    d[a] = this.x;
+    d[a + 1] = this.y;
+    d[a + 2] = this.z;
+    d[a + 3] = this.w;
     return d;
-  }, fromAttribute:function(d, m, a) {
-    void 0 !== a && console.warn("THREE.Vector4: offset has been removed from .fromAttribute().");
-    this.x = d.getX(m);
-    this.y = d.getY(m);
-    this.z = d.getZ(m);
-    this.w = d.getW(m);
+  }, fromAttribute:function(d, a, b) {
+    void 0 !== b && console.warn("THREE.Vector4: offset has been removed from .fromAttribute().");
+    this.x = d.getX(a);
+    this.y = d.getY(a);
+    this.z = d.getZ(a);
+    this.w = d.getW(a);
     return this;
   }};
-  f.prototype = {constructor:f, isWebGLRenderTarget:!0, setSize:function(d, m) {
-    if (this.width !== d || this.height !== m) {
-      this.width = d, this.height = m, this.dispose();
+  f.prototype = {constructor:f, isWebGLRenderTarget:!0, setSize:function(d, a) {
+    if (this.width !== d || this.height !== a) {
+      this.width = d, this.height = a, this.dispose();
     }
-    this.viewport.set(0, 0, d, m);
-    this.scissor.set(0, 0, d, m);
+    this.viewport.set(0, 0, d, a);
+    this.scissor.set(0, 0, d, a);
   }, clone:function() {
     return (new this.constructor).copy(this);
   }, copy:function(d) {
@@ -5436,11 +5436,11 @@ Nunu.TIMESTAMP = "201612221935";
   }, set w(d) {
     this._w = d;
     this.onChangeCallback();
-  }, set:function(d, m, a, b) {
+  }, set:function(d, a, b, c) {
     this._x = d;
-    this._y = m;
-    this._z = a;
-    this._w = b;
+    this._y = a;
+    this._z = b;
+    this._w = c;
     this.onChangeCallback();
     return this;
   }, clone:function() {
@@ -5452,25 +5452,25 @@ Nunu.TIMESTAMP = "201612221935";
     this._w = d.w;
     this.onChangeCallback();
     return this;
-  }, setFromEuler:function(d, m) {
+  }, setFromEuler:function(d, a) {
     if (!1 === (d && d.isEuler)) {
       throw Error("THREE.Quaternion: .setFromEuler() now expects an Euler rotation rather than a Vector3 and order.");
     }
-    var a = Math.cos(d._x / 2), b = Math.cos(d._y / 2), c = Math.cos(d._z / 2), e = Math.sin(d._x / 2), h = Math.sin(d._y / 2), f = Math.sin(d._z / 2);
+    var m = Math.cos(d._x / 2), b = Math.cos(d._y / 2), c = Math.cos(d._z / 2), e = Math.sin(d._x / 2), h = Math.sin(d._y / 2), f = Math.sin(d._z / 2);
     d = d.order;
-    "XYZ" === d ? (this._x = e * b * c + a * h * f, this._y = a * h * c - e * b * f, this._z = a * b * f + e * h * c, this._w = a * b * c - e * h * f) : "YXZ" === d ? (this._x = e * b * c + a * h * f, this._y = a * h * c - e * b * f, this._z = a * b * f - e * h * c, this._w = a * b * c + e * h * f) : "ZXY" === d ? (this._x = e * b * c - a * h * f, this._y = a * h * c + e * b * f, this._z = a * b * f + e * h * c, this._w = a * b * c - e * h * f) : "ZYX" === d ? (this._x = e * b * c - a * h * f, this._y = 
-    a * h * c + e * b * f, this._z = a * b * f - e * h * c, this._w = a * b * c + e * h * f) : "YZX" === d ? (this._x = e * b * c + a * h * f, this._y = a * h * c + e * b * f, this._z = a * b * f - e * h * c, this._w = a * b * c - e * h * f) : "XZY" === d && (this._x = e * b * c - a * h * f, this._y = a * h * c - e * b * f, this._z = a * b * f + e * h * c, this._w = a * b * c + e * h * f);
-    if (!1 !== m) {
+    "XYZ" === d ? (this._x = e * b * c + m * h * f, this._y = m * h * c - e * b * f, this._z = m * b * f + e * h * c, this._w = m * b * c - e * h * f) : "YXZ" === d ? (this._x = e * b * c + m * h * f, this._y = m * h * c - e * b * f, this._z = m * b * f - e * h * c, this._w = m * b * c + e * h * f) : "ZXY" === d ? (this._x = e * b * c - m * h * f, this._y = m * h * c + e * b * f, this._z = m * b * f + e * h * c, this._w = m * b * c - e * h * f) : "ZYX" === d ? (this._x = e * b * c - m * h * f, this._y = 
+    m * h * c + e * b * f, this._z = m * b * f - e * h * c, this._w = m * b * c + e * h * f) : "YZX" === d ? (this._x = e * b * c + m * h * f, this._y = m * h * c + e * b * f, this._z = m * b * f - e * h * c, this._w = m * b * c - e * h * f) : "XZY" === d && (this._x = e * b * c - m * h * f, this._y = m * h * c - e * b * f, this._z = m * b * f + e * h * c, this._w = m * b * c + e * h * f);
+    if (!1 !== a) {
       this.onChangeCallback();
     }
     return this;
-  }, setFromAxisAngle:function(d, m) {
-    m /= 2;
-    var a = Math.sin(m);
-    this._x = d.x * a;
-    this._y = d.y * a;
-    this._z = d.z * a;
-    this._w = Math.cos(m);
+  }, setFromAxisAngle:function(d, a) {
+    a /= 2;
+    var m = Math.sin(a);
+    this._x = d.x * m;
+    this._y = d.y * m;
+    this._z = d.z * m;
+    this._w = Math.cos(a);
     this.onChangeCallback();
     return this;
   }, setFromRotationMatrix:function(d) {
@@ -9398,8 +9398,8 @@ Nunu.TIMESTAMP = "201612221935";
   };
   ub.prototype = Object.assign(Object.create(X.prototype), {constructor:ub, isLine:!0, raycast:function() {
     var d = new q, a = new ib, b = new Da;
-    return function(c, m) {
-      var e = c.linePrecision, e = e * e, f = this.geometry, p = this.matrixWorld;
+    return function(c, e) {
+      var m = c.linePrecision, m = m * m, f = this.geometry, p = this.matrixWorld;
       null === f.boundingSphere && f.computeBoundingSphere();
       b.copy(f.boundingSphere);
       b.applyMatrix4(p);
@@ -9415,17 +9415,17 @@ Nunu.TIMESTAMP = "201612221935";
               k.fromArray(u, 3 * r[f]);
               q.fromArray(u, 3 * w);
               w = a.distanceSqToSegment(k, q, n, p);
-              w > e || (n.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(n), w < c.near || w > c.far || m.push({distance:w, point:p.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
+              w > m || (n.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(n), w < c.near || w > c.far || e.push({distance:w, point:p.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
             }
           } else {
             for (f = 0, l = u.length / 3 - 1;f < l;f += g) {
-              k.fromArray(u, 3 * f), q.fromArray(u, 3 * f + 3), w = a.distanceSqToSegment(k, q, n, p), w > e || (n.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(n), w < c.near || w > c.far || m.push({distance:w, point:p.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
+              k.fromArray(u, 3 * f), q.fromArray(u, 3 * f + 3), w = a.distanceSqToSegment(k, q, n, p), w > m || (n.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(n), w < c.near || w > c.far || e.push({distance:w, point:p.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
             }
           }
         } else {
           if (f.isGeometry) {
             for (k = f.vertices, q = k.length, f = 0;f < q - 1;f += g) {
-              w = a.distanceSqToSegment(k[f], k[f + 1], n, p), w > e || (n.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(n), w < c.near || w > c.far || m.push({distance:w, point:p.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
+              w = a.distanceSqToSegment(k[f], k[f + 1], n, p), w > m || (n.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(n), w < c.near || w > c.far || e.push({distance:w, point:p.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
             }
           }
         }
@@ -13411,9 +13411,9 @@ Nunu.TIMESTAMP = "201612221935";
     this.animationsMap[d] = a;
     this.animationsList.push(a);
   };
-  Ka.prototype.autoCreateAnimations = function(d) {
-    for (var a = /([a-z]+)_?(\d+)/i, b, c = {}, e = this.geometry, h = 0, f = e.morphTargets.length;h < f;h++) {
-      var p = e.morphTargets[h].name.match(a);
+  Ka.prototype.autoCreateAnimations = function(a) {
+    for (var d = /([a-z]+)_?(\d+)/i, b, c = {}, e = this.geometry, h = 0, f = e.morphTargets.length;h < f;h++) {
+      var p = e.morphTargets[h].name.match(d);
       if (p && 1 < p.length) {
         var k = p[1];
         c[k] || (c[k] = {start:Infinity, end:-Infinity});
@@ -13424,61 +13424,61 @@ Nunu.TIMESTAMP = "201612221935";
       }
     }
     for (k in c) {
-      p = c[k], this.createAnimation(k, p.start, p.end, d);
+      p = c[k], this.createAnimation(k, p.start, p.end, a);
     }
     this.firstAnimation = b;
   };
-  Ka.prototype.setAnimationDirectionForward = function(d) {
-    if (d = this.animationsMap[d]) {
-      d.direction = 1, d.directionBackwards = !1;
+  Ka.prototype.setAnimationDirectionForward = function(a) {
+    if (a = this.animationsMap[a]) {
+      a.direction = 1, a.directionBackwards = !1;
     }
   };
-  Ka.prototype.setAnimationDirectionBackward = function(d) {
-    if (d = this.animationsMap[d]) {
-      d.direction = -1, d.directionBackwards = !0;
+  Ka.prototype.setAnimationDirectionBackward = function(a) {
+    if (a = this.animationsMap[a]) {
+      a.direction = -1, a.directionBackwards = !0;
     }
   };
-  Ka.prototype.setAnimationFPS = function(d, a) {
-    (d = this.animationsMap[d]) && (d.fps = a, d.duration = (d.end - d.start) / d.fps);
+  Ka.prototype.setAnimationFPS = function(a, b) {
+    (a = this.animationsMap[a]) && (a.fps = b, a.duration = (a.end - a.start) / a.fps);
   };
-  Ka.prototype.setAnimationDuration = function(d, a) {
-    (d = this.animationsMap[d]) && (d.duration = a, d.fps = (d.end - d.start) / d.duration);
+  Ka.prototype.setAnimationDuration = function(a, b) {
+    (a = this.animationsMap[a]) && (a.duration = b, a.fps = (a.end - a.start) / a.duration);
   };
-  Ka.prototype.setAnimationWeight = function(d, a) {
-    (d = this.animationsMap[d]) && (d.weight = a);
+  Ka.prototype.setAnimationWeight = function(a, b) {
+    (a = this.animationsMap[a]) && (a.weight = b);
   };
-  Ka.prototype.setAnimationTime = function(d, a) {
-    (d = this.animationsMap[d]) && (d.time = a);
+  Ka.prototype.setAnimationTime = function(a, b) {
+    (a = this.animationsMap[a]) && (a.time = b);
   };
-  Ka.prototype.getAnimationTime = function(d) {
-    var a = 0;
-    if (d = this.animationsMap[d]) {
-      a = d.time;
+  Ka.prototype.getAnimationTime = function(a) {
+    var d = 0;
+    if (a = this.animationsMap[a]) {
+      d = a.time;
     }
-    return a;
+    return d;
   };
-  Ka.prototype.getAnimationDuration = function(d) {
-    var a = -1;
-    if (d = this.animationsMap[d]) {
-      a = d.duration;
+  Ka.prototype.getAnimationDuration = function(a) {
+    var d = -1;
+    if (a = this.animationsMap[a]) {
+      d = a.duration;
     }
-    return a;
+    return d;
   };
-  Ka.prototype.playAnimation = function(d) {
-    var a = this.animationsMap[d];
-    a ? (a.time = 0, a.active = !0) : console.warn("THREE.MorphBlendMesh: animation[" + d + "] undefined in .playAnimation()");
+  Ka.prototype.playAnimation = function(a) {
+    var d = this.animationsMap[a];
+    d ? (d.time = 0, d.active = !0) : console.warn("THREE.MorphBlendMesh: animation[" + a + "] undefined in .playAnimation()");
   };
-  Ka.prototype.stopAnimation = function(d) {
-    if (d = this.animationsMap[d]) {
-      d.active = !1;
+  Ka.prototype.stopAnimation = function(a) {
+    if (a = this.animationsMap[a]) {
+      a.active = !1;
     }
   };
-  Ka.prototype.update = function(d) {
-    for (var a = 0, b = this.animationsList.length;a < b;a++) {
-      var c = this.animationsList[a];
+  Ka.prototype.update = function(a) {
+    for (var d = 0, b = this.animationsList.length;d < b;d++) {
+      var c = this.animationsList[d];
       if (c.active) {
         var e = c.duration / c.length;
-        c.time += c.direction * d;
+        c.time += c.direction * a;
         if (c.mirroredLoop) {
           if (c.time > c.duration || 0 > c.time) {
             c.direction *= -1, c.time > c.duration && (c.time = c.duration, c.directionBackwards = !0), 0 > c.time && (c.time = 0, c.directionBackwards = !1);
@@ -13500,28 +13500,28 @@ Nunu.TIMESTAMP = "201612221935";
   nd.prototype = Object.create(ta.prototype);
   nd.prototype.constructor = nd;
   nd.prototype.update = function() {
-    var d = new h, a = new h, b = new za;
+    var a = new h, b = new h, c = new za;
     return function() {
-      var c = ["a", "b", "c"];
+      var d = ["a", "b", "c"];
       this.object.updateMatrixWorld(!0);
-      b.getNormalMatrix(this.object.matrixWorld);
+      c.getNormalMatrix(this.object.matrixWorld);
       var e = this.object.matrixWorld, h = this.geometry.attributes.position, f = this.object.geometry;
       if (f && f.isGeometry) {
         for (var p = f.vertices, k = f.faces, m = f = 0, q = k.length;m < q;m++) {
           for (var n = k[m], g = 0, r = n.vertexNormals.length;g < r;g++) {
             var u = n.vertexNormals[g];
-            d.copy(p[n[c[g]]]).applyMatrix4(e);
-            a.copy(u).applyMatrix3(b).normalize().multiplyScalar(this.size).add(d);
-            h.setXYZ(f, d.x, d.y, d.z);
-            f += 1;
+            a.copy(p[n[d[g]]]).applyMatrix4(e);
+            b.copy(u).applyMatrix3(c).normalize().multiplyScalar(this.size).add(a);
             h.setXYZ(f, a.x, a.y, a.z);
+            f += 1;
+            h.setXYZ(f, b.x, b.y, b.z);
             f += 1;
           }
         }
       } else {
         if (f && f.isBufferGeometry) {
-          for (c = f.attributes.position, p = f.attributes.normal, g = f = 0, r = c.count;g < r;g++) {
-            d.set(c.getX(g), c.getY(g), c.getZ(g)).applyMatrix4(e), a.set(p.getX(g), p.getY(g), p.getZ(g)), a.applyMatrix3(b).normalize().multiplyScalar(this.size).add(d), h.setXYZ(f, d.x, d.y, d.z), f += 1, h.setXYZ(f, a.x, a.y, a.z), f += 1;
+          for (d = f.attributes.position, p = f.attributes.normal, g = f = 0, r = d.count;g < r;g++) {
+            a.set(d.getX(g), d.getY(g), d.getZ(g)).applyMatrix4(e), b.set(p.getX(g), p.getY(g), p.getZ(g)), b.applyMatrix3(c).normalize().multiplyScalar(this.size).add(a), h.setXYZ(f, a.x, a.y, a.z), f += 1, h.setXYZ(f, b.x, b.y, b.z), f += 1;
           }
         }
       }
@@ -17230,25 +17230,25 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
     };
     var y = new f, x = [], p = [];
     b.prototype.updateFriction = function(b) {
-      for (var c = this.wheelInfos, e = c.length, h = this.chassisBody, q = 0, g = 0;e > g;g++) {
-        var n = c[g], l = n.raycastResult.body;
-        l && q++;
+      for (var c = this.wheelInfos, e = c.length, h = this.chassisBody, g = 0, q = 0;e > q;q++) {
+        var n = c[q], l = n.raycastResult.body;
+        l && g++;
         n.sideImpulse = 0;
         n.forwardImpulse = 0;
-        p[g] || (p[g] = new f);
-        x[g] || (x[g] = new f);
+        p[q] || (p[q] = new f);
+        x[q] || (x[q] = new f);
       }
-      for (g = 0;e > g;g++) {
-        if (n = c[g], l = n.raycastResult.body) {
-          var r = x[g];
-          this.getWheelTransformWorld(g).vectorToWorldFrame(v[this.indexRightAxis], r);
-          var q = n.raycastResult.hitNormalWorld, w = r.dot(q);
-          q.scale(w, y);
+      for (q = 0;e > q;q++) {
+        if (n = c[q], l = n.raycastResult.body) {
+          var r = x[q];
+          this.getWheelTransformWorld(q).vectorToWorldFrame(v[this.indexRightAxis], r);
+          var g = n.raycastResult.hitNormalWorld, w = r.dot(g);
+          g.scale(w, y);
           r.vsub(y, r);
           r.normalize();
-          q.cross(r, p[g]);
-          p[g].normalize();
-          q = n;
+          g.cross(r, p[q]);
+          p[q].normalize();
+          g = n;
           var w = h, t = n.raycastResult.hitPointWorld, B = n.raycastResult.hitPointWorld;
           if (1.1 < r.norm2()) {
             l = 0;
@@ -17259,17 +17259,17 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
             E.vsub(F, D);
             l = -.2 * r.dot(D) * (1 / (w.invMass + l.invMass));
           }
-          q.sideImpulse = l;
+          g.sideImpulse = l;
           n.sideImpulse *= 1;
         }
       }
       this.sliding = !1;
-      for (g = 0;e > g;g++) {
-        n = c[g];
+      for (q = 0;e > q;q++) {
+        n = c[q];
         l = n.raycastResult.body;
         t = 0;
         if (n.slipInfo = 1, l) {
-          var q = n.brake ? n.brake : 0, F = h, B = l, r = n.raycastResult.hitPointWorld, E = p[g], t = q, w = 0, D = r, M = u, ra = C, qa = A;
+          var g = n.brake ? n.brake : 0, F = h, B = l, r = n.raycastResult.hitPointWorld, E = p[q], t = g, w = 0, D = r, M = u, ra = C, qa = A;
           F.getVelocityAtWorldPoint(D, M);
           B.getVelocityAtWorldPoint(D, ra);
           M.vsub(ra, qa);
@@ -17278,27 +17278,27 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
           B = k(B, r, E);
           t = (w = 1 / (F + B) * -D, w > t && (w = t), -t > w && (w = -t), w);
           t += n.engineForce * b;
-          q /= t;
-          n.slipInfo *= q;
+          g /= t;
+          n.slipInfo *= g;
         }
         if (n.forwardImpulse = 0, n.skidInfo = 1, l) {
-          if (n.skidInfo = 1, l = n.suspensionForce * b * n.frictionSlip, q = l * l, n.forwardImpulse = t, w = .5 * n.forwardImpulse, t = 1 * n.sideImpulse, w = w * w + t * t, n.sliding = !1, w > q) {
-            this.sliding = !0, n.sliding = !0, q = l / Math.sqrt(w), n.skidInfo *= q;
+          if (n.skidInfo = 1, l = n.suspensionForce * b * n.frictionSlip, g = l * l, n.forwardImpulse = t, w = .5 * n.forwardImpulse, t = 1 * n.sideImpulse, w = w * w + t * t, n.sliding = !1, w > g) {
+            this.sliding = !0, n.sliding = !0, g = l / Math.sqrt(w), n.skidInfo *= g;
           }
         }
       }
       if (this.sliding) {
-        for (g = 0;e > g;g++) {
-          n = c[g], 0 !== n.sideImpulse && 1 > n.skidInfo && (n.forwardImpulse *= n.skidInfo, n.sideImpulse *= n.skidInfo);
+        for (q = 0;e > q;q++) {
+          n = c[q], 0 !== n.sideImpulse && 1 > n.skidInfo && (n.forwardImpulse *= n.skidInfo, n.sideImpulse *= n.skidInfo);
         }
       }
-      for (g = 0;e > g;g++) {
-        n = c[g];
+      for (q = 0;e > q;q++) {
+        n = c[q];
         b = new f;
         if (b.copy(n.raycastResult.hitPointWorld), 0 !== n.forwardImpulse) {
-          l = new f, p[g].scale(n.forwardImpulse, l), h.applyImpulse(l, b);
+          l = new f, p[q].scale(n.forwardImpulse, l), h.applyImpulse(l, b);
         }
-        0 !== n.sideImpulse && (l = n.raycastResult.body, q = new f, q.copy(n.raycastResult.hitPointWorld), w = new f, x[g].scale(n.sideImpulse, w), h.pointToLocalFrame(b, b), b["xyz"[this.indexUpAxis]] *= n.rollInfluence, h.pointToWorldFrame(b, b), h.applyImpulse(w, b), w.scale(-1, w), l.applyImpulse(w, q));
+        0 !== n.sideImpulse && (l = n.raycastResult.body, g = new f, g.copy(n.raycastResult.hitPointWorld), w = new f, x[q].scale(n.sideImpulse, w), h.pointToLocalFrame(b, b), b["xyz"[this.indexUpAxis]] *= n.rollInfluence, h.pointToWorldFrame(b, b), h.applyImpulse(w, b), w.scale(-1, w), l.applyImpulse(w, g));
       }
     };
     var u = new f, C = new f, A = new f, D = new f, E = new f, F = new f, B = new f, L = new f, I = new f, P = new f;
@@ -17317,12 +17317,12 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
       c || (c = new k(1, new f(1.2)));
       this.wheelBodies.push(c);
       this.wheelForces.push(0);
-      var g = (new e, "undefined" != typeof b.position ? b.position.clone() : new e), q = new e;
-      this.chassisBody.pointToWorldFrame(g, q);
-      c.position.set(q.x, q.y, q.z);
+      var q = (new e, "undefined" != typeof b.position ? b.position.clone() : new e), g = new e;
+      this.chassisBody.pointToWorldFrame(q, g);
+      c.position.set(g.x, g.y, g.z);
       b = "undefined" != typeof b.axis ? b.axis.clone() : new e(0, 1, 0);
       this.wheelAxes.push(b);
-      c = new h(this.chassisBody, c, {pivotA:g, axisA:b, pivotB:e.ZERO, axisB:b, collideConnected:!1});
+      c = new h(this.chassisBody, c, {pivotA:q, axisA:b, pivotB:e.ZERO, axisB:b, collideConnected:!1});
       return this.constraints.push(c), this.wheelBodies.length - 1;
     };
     b.prototype.setSteeringValue = function(b, c) {
@@ -17402,8 +17402,8 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
     };
     var k = new l;
     b.prototype.getNeighbors = function(b, c) {
-      for (var e = this.particles.length, h = b.id, f = this.smoothingRadius * this.smoothingRadius, g = 0;g !== e;g++) {
-        var p = this.particles[g];
+      for (var e = this.particles.length, h = b.id, f = this.smoothingRadius * this.smoothingRadius, q = 0;q !== e;q++) {
+        var p = this.particles[q];
         p.position.vsub(b.position, k);
         h !== p.id && k.norm2() < f && c.push(p);
       }
@@ -21342,15 +21342,15 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
       v.fromQuat = function(a, b) {
         var c = b[0], e = b[1], f = b[2];
         b = b[3];
-        var h = c + c, k = e + e, g = f + f, c = c * h, p = e * h, e = e * k, q = f * h, n = f * k, f = f * g, h = b * h, k = b * k;
+        var h = c + c, k = e + e, g = f + f, c = c * h, q = e * h, e = e * k, p = f * h, n = f * k, f = f * g, h = b * h, k = b * k;
         b *= g;
-        return a[0] = 1 - e - f, a[3] = p - b, a[6] = q + k, a[1] = p + b, a[4] = 1 - c - f, a[7] = n - h, a[2] = q - k, a[5] = n + h, a[8] = 1 - c - e, a;
+        return a[0] = 1 - e - f, a[3] = q - b, a[6] = p + k, a[1] = q + b, a[4] = 1 - c - f, a[7] = n - h, a[2] = p - k, a[5] = n + h, a[8] = 1 - c - e, a;
       };
       v.normalFromMat4 = function(a, b) {
-        var c = b[0], e = b[1], f = b[2], h = b[3], k = b[4], g = b[5], p = b[6], q = b[7], n = b[8], l = b[9], r = b[10], u = b[11], w = b[12], t = b[13], v = b[14];
+        var c = b[0], e = b[1], f = b[2], h = b[3], k = b[4], g = b[5], q = b[6], p = b[7], n = b[8], l = b[9], r = b[10], u = b[11], w = b[12], t = b[13], v = b[14];
         b = b[15];
-        var y = c * g - e * k, x = c * p - f * k, T = c * q - h * k, W = e * p - f * g, K = e * q - h * g, S = f * q - h * p, ia = n * t - l * w, wa = n * v - r * w, n = n * b - u * w, U = l * v - r * t, l = l * b - u * t, r = r * b - u * v;
-        return (u = y * r - x * l + T * U + W * n - K * wa + S * ia) ? (u = 1 / u, a[0] = (g * r - p * l + q * U) * u, a[1] = (p * n - k * r - q * wa) * u, a[2] = (k * l - g * n + q * ia) * u, a[3] = (f * l - e * r - h * U) * u, a[4] = (c * r - f * n + h * wa) * u, a[5] = (e * n - c * l - h * ia) * u, a[6] = (t * S - v * K + b * W) * u, a[7] = (v * T - w * S - b * x) * u, a[8] = (w * K - t * T + b * y) * u, a) : null;
+        var y = c * g - e * k, x = c * q - f * k, T = c * p - h * k, W = e * q - f * g, K = e * p - h * g, S = f * p - h * q, ia = n * t - l * w, wa = n * v - r * w, n = n * b - u * w, U = l * v - r * t, l = l * b - u * t, r = r * b - u * v;
+        return (u = y * r - x * l + T * U + W * n - K * wa + S * ia) ? (u = 1 / u, a[0] = (g * r - q * l + p * U) * u, a[1] = (q * n - k * r - p * wa) * u, a[2] = (k * l - g * n + p * ia) * u, a[3] = (f * l - e * r - h * U) * u, a[4] = (c * r - f * n + h * wa) * u, a[5] = (e * n - c * l - h * ia) * u, a[6] = (t * S - v * K + b * W) * u, a[7] = (v * T - w * S - b * x) * u, a[8] = (w * K - t * T + b * y) * u, a) : null;
       };
       v.str = function(a) {
         return "mat3(" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + ", " + a[4] + ", " + a[5] + ", " + a[6] + ", " + a[7] + ", " + a[8] + ")";
@@ -27852,13 +27852,13 @@ var __extends = this && this.__extends || function(a, g) {
     b.CffEncoding = c;
     b.GlyphNames = e;
     b.addGlyphNames = function(b) {
-      for (var c, e = b.tables.cmap.glyphIndexMap, f = Object.keys(e), g = 0;g < f.length;g += 1) {
-        var h = f[g];
-        c = b.glyphs.get(e[h]);
-        c.addUnicode(parseInt(h));
+      for (var c, e = b.tables.cmap.glyphIndexMap, f = Object.keys(e), h = 0;h < f.length;h += 1) {
+        var g = f[h];
+        c = b.glyphs.get(e[g]);
+        c.addUnicode(parseInt(g));
       }
-      for (g = 0;g < b.glyphs.length;g += 1) {
-        c = b.glyphs.get(g), b.cffEncoding ? c.name = b.cffEncoding.charset[g] : b.glyphNames.names && (c.name = b.glyphNames.glyphIndexToName(g));
+      for (h = 0;h < b.glyphs.length;h += 1) {
+        c = b.glyphs.get(h), b.cffEncoding ? c.name = b.cffEncoding.charset[h] : b.glyphNames.names && (c.name = b.glyphNames.glyphIndexToName(h));
       }
     };
   }, {}], 5:[function(g, l, b) {
@@ -27908,45 +27908,45 @@ var __extends = this && this.__extends || function(a, g) {
       var e = this.getGposKerningValue;
       return e ? e(b, c) : this.kerningPairs[b + "," + c] || 0;
     };
-    k.prototype.forEachGlyph = function(b, c, e, f, g, h) {
+    k.prototype.forEachGlyph = function(b, c, e, f, h, g) {
       c = void 0 !== c ? c : 0;
       e = void 0 !== e ? e : 0;
       f = void 0 !== f ? f : 72;
-      g = g || {};
-      var k = void 0 === g.kerning ? !0 : g.kerning, l = 1 / this.unitsPerEm * f;
+      h = h || {};
+      var k = void 0 === h.kerning ? !0 : h.kerning, l = 1 / this.unitsPerEm * f;
       b = this.stringToGlyphs(b);
       for (var n = 0;n < b.length;n += 1) {
         var q = b[n];
-        if (h(q, c, e, f, g), q.advanceWidth && (c += q.advanceWidth * l), k && n < b.length - 1) {
+        if (g(q, c, e, f, h), q.advanceWidth && (c += q.advanceWidth * l), k && n < b.length - 1) {
           q = this.getKerningValue(q, b[n + 1]), c += q * l;
         }
       }
     };
-    k.prototype.getPath = function(b, c, e, g, h) {
+    k.prototype.getPath = function(b, c, e, h, g) {
       var k = new f.Path;
-      return this.forEachGlyph(b, c, e, g, h, function(b, c, e, f) {
+      return this.forEachGlyph(b, c, e, h, g, function(b, c, e, f) {
         b = b.getPath(c, e, f);
         k.extend(b);
       }), k;
     };
-    k.prototype.getPaths = function(b, c, e, f, g) {
-      var h = [];
-      return this.forEachGlyph(b, c, e, f, g, function(b, c, e, f) {
+    k.prototype.getPaths = function(b, c, e, f, h) {
+      var g = [];
+      return this.forEachGlyph(b, c, e, f, h, function(b, c, e, f) {
         b = b.getPath(c, e, f);
-        h.push(b);
-      }), h;
+        g.push(b);
+      }), g;
     };
-    k.prototype.draw = function(b, c, e, f, g, h) {
-      this.getPath(c, e, f, g, h).draw(b);
+    k.prototype.draw = function(b, c, e, f, h, g) {
+      this.getPath(c, e, f, h, g).draw(b);
     };
-    k.prototype.drawPoints = function(b, c, e, f, g, h) {
-      this.forEachGlyph(c, e, f, g, h, function(c, e, f, g) {
-        c.drawPoints(b, e, f, g);
+    k.prototype.drawPoints = function(b, c, e, f, h, g) {
+      this.forEachGlyph(c, e, f, h, g, function(c, e, f, h) {
+        c.drawPoints(b, e, f, h);
       });
     };
-    k.prototype.drawMetrics = function(b, c, e, f, g, h) {
-      this.forEachGlyph(c, e, f, g, h, function(c, e, f, g) {
-        c.drawMetrics(b, e, f, g);
+    k.prototype.drawMetrics = function(b, c, e, f, h, g) {
+      this.forEachGlyph(c, e, f, h, g, function(c, e, f, h) {
+        c.drawMetrics(b, e, f, h);
       });
     };
     k.prototype.getEnglishName = function(b) {
@@ -28044,31 +28044,31 @@ var __extends = this && this.__extends || function(a, g) {
         return [];
       }
       for (var b = [], e = [], f = 0;f < this.points.length;f += 1) {
-        var g = this.points[f];
-        e.push(g);
-        g.lastPointOfContour && (b.push(e), e = []);
+        var h = this.points[f];
+        e.push(h);
+        h.lastPointOfContour && (b.push(e), e = []);
       }
       return c.argument(0 === e.length, "There are still points left in the current contour."), b;
     };
     f.prototype.getMetrics = function() {
       for (var b = this.path.commands, c = [], e = [], f = 0;f < b.length;f += 1) {
-        var g = b[f];
-        "Z" !== g.type && (c.push(g.x), e.push(g.y));
-        "Q" !== g.type && "C" !== g.type || (c.push(g.x1), e.push(g.y1));
-        "C" === g.type && (c.push(g.x2), e.push(g.y2));
+        var h = b[f];
+        "Z" !== h.type && (c.push(h.x), e.push(h.y));
+        "Q" !== h.type && "C" !== h.type || (c.push(h.x1), e.push(h.y1));
+        "C" === h.type && (c.push(h.x2), e.push(h.y2));
       }
       b = {xMin:Math.min.apply(null, c), yMin:Math.min.apply(null, e), xMax:Math.max.apply(null, c), yMax:Math.max.apply(null, e), leftSideBearing:this.leftSideBearing};
       return isFinite(b.xMin) || (b.xMin = 0), isFinite(b.xMax) || (b.xMax = this.advanceWidth), isFinite(b.yMin) || (b.yMin = 0), isFinite(b.yMax) || (b.yMax = 0), b.rightSideBearing = this.advanceWidth - b.leftSideBearing - (b.xMax - b.xMin), b;
     };
-    f.prototype.draw = function(b, c, e, f, g) {
-      this.getPath(c, e, f, g).draw(b);
+    f.prototype.draw = function(b, c, e, f, h) {
+      this.getPath(c, e, f, h).draw(b);
     };
     f.prototype.drawPoints = function(b, c, e, f) {
-      function g(c, e, f, g) {
-        var h = 2 * Math.PI;
+      function h(c, e, f, h) {
+        var g = 2 * Math.PI;
         b.beginPath();
         for (var k = 0;k < c.length;k += 1) {
-          b.moveTo(e + c[k].x * g, f + c[k].y * g), b.arc(e + c[k].x * g, f + c[k].y * g, 2, 0, h, !1);
+          b.moveTo(e + c[k].x * h, f + c[k].y * h), b.arc(e + c[k].x * h, f + c[k].y * h, 2, 0, g, !1);
         }
         b.closePath();
         b.fill();
@@ -28076,33 +28076,33 @@ var __extends = this && this.__extends || function(a, g) {
       c = void 0 !== c ? c : 0;
       e = void 0 !== e ? e : 0;
       f = 1 / this.path.unitsPerEm * (void 0 !== f ? f : 24);
-      for (var h = [], k = [], l = this.path, n = 0;n < l.commands.length;n += 1) {
+      for (var g = [], k = [], l = this.path, n = 0;n < l.commands.length;n += 1) {
         var q = l.commands[n];
-        void 0 !== q.x && h.push({x:q.x, y:-q.y});
+        void 0 !== q.x && g.push({x:q.x, y:-q.y});
         void 0 !== q.x1 && k.push({x:q.x1, y:-q.y1});
         void 0 !== q.x2 && k.push({x:q.x2, y:-q.y2});
       }
       b.fillStyle = "blue";
-      g(h, c, e, f);
+      h(g, c, e, f);
       b.fillStyle = "red";
-      g(k, c, e, f);
+      h(k, c, e, f);
     };
-    f.prototype.drawMetrics = function(b, c, f, g) {
+    f.prototype.drawMetrics = function(b, c, f, h) {
       c = void 0 !== c ? c : 0;
       f = void 0 !== f ? f : 0;
-      g = 1 / this.path.unitsPerEm * (void 0 !== g ? g : 24);
+      h = 1 / this.path.unitsPerEm * (void 0 !== h ? h : 24);
       b.lineWidth = 1;
       b.strokeStyle = "black";
       e.line(b, c, -1E4, c, 1E4);
       e.line(b, -1E4, f, 1E4, f);
-      var h = this.xMin || 0, k = this.yMin || 0, l = this.xMax || 0, n = this.yMax || 0, p = this.advanceWidth || 0;
+      var g = this.xMin || 0, k = this.yMin || 0, l = this.xMax || 0, n = this.yMax || 0, p = this.advanceWidth || 0;
       b.strokeStyle = "blue";
-      e.line(b, c + h * g, -1E4, c + h * g, 1E4);
-      e.line(b, c + l * g, -1E4, c + l * g, 1E4);
-      e.line(b, -1E4, f + -k * g, 1E4, f + -k * g);
-      e.line(b, -1E4, f + -n * g, 1E4, f + -n * g);
+      e.line(b, c + g * h, -1E4, c + g * h, 1E4);
+      e.line(b, c + l * h, -1E4, c + l * h, 1E4);
+      e.line(b, -1E4, f + -k * h, 1E4, f + -k * h);
+      e.line(b, -1E4, f + -n * h, 1E4, f + -n * h);
       b.strokeStyle = "green";
-      e.line(b, c + p * g, -1E4, c + p * g, 1E4);
+      e.line(b, c + p * h, -1E4, c + p * h, 1E4);
     };
     b.Glyph = f;
   }, {"./check":2, "./draw":3, "./path":11}], 7:[function(g, l, b) {
@@ -31291,7 +31291,7 @@ function Font(a) {
         this.font = this.data = JSON.parse(FileSystem.readFile(a)), this.name = this.data.original_font_information.fullName, this.format = "json";
       } else {
         if ("ttf" === this.encoding || "otf" === this.encoding || "ttc" === this.encoding || "otc" === this.encoding) {
-          this.data = FileSystem.readFileArrayBuffer(a), this.font = (new TTFLoader).parse(this.data), this.name = this.font.original_font_information.fullName, this.format = "arraybuffer";
+          this.data = FileSystem.readFileArrayBuffer(a), this.font = (new TTFLoader).parse(this.data), this.name = FileSystem.getFileName(a), this.format = "arraybuffer";
         }
       }
     }
@@ -31585,6 +31585,9 @@ Texture.prototype.toJSON = function(a) {
 function FontLoader(a) {
   this.manager = void 0 !== a ? a : THREE.DefaultLoadingManager;
 }
+FontLoader.fileIsFont = function(a) {
+  return a.endsWith("ttf") || a.endsWith("otf") || a.endsWith("ttc") || a.endsWith("otc");
+};
 FontLoader.prototype.load = function(a, g, l, b) {
   (new THREE.XHRLoader(this.manager)).load(a, function(a) {
     g(new Font(JSON.parse(a)));
@@ -31902,6 +31905,13 @@ ObjectLoader.prototype.parseObject = function(a, g, l, b, k, f) {
       break;
     case "Audio":
       n = new AudioEmitter(r(a.audio));
+      n.autoplay = a.autoplay;
+      n.startTime = a.startTime;
+      n.playbackRate = a.playbackRate;
+      n.loop = void 0 !== a.source ? a.source.loop : a.loop;
+      break;
+    case "PositionalAudio":
+      n = new PositionalAudio(r(a.audio));
       n.autoplay = a.autoplay;
       n.startTime = a.startTime;
       n.playbackRate = a.playbackRate;
@@ -32715,6 +32725,7 @@ function AudioEmitter(a) {
   THREE.Audio.call(this, AudioEmitter.listener);
   this.name = "audio";
   this.type = "Audio";
+  this.matrixAutoUpdate = !1;
   this.audio = void 0 !== a ? a : null;
   this.autoplay = !0;
   this.playbackRate = 1;
@@ -32741,6 +32752,47 @@ AudioEmitter.prototype.dispose = function() {
   }
 };
 AudioEmitter.prototype.toJSON = function(a) {
+  var g = this.audio;
+  a = THREE.Object3D.prototype.toJSON.call(this, a, function(a, b) {
+    g = g.toJSON(a);
+  });
+  a.object.audio = g.uuid;
+  a.object.autoplay = this.autoplay;
+  a.object.startTime = this.startTime;
+  a.object.playbackRate = this.playbackRate;
+  a.object.loop = this.loop;
+  return a;
+};
+function PositionalAudio(a) {
+  THREE.PositionalAudio.call(this, PositionalAudio.listener);
+  this.name = "audio";
+  this.type = "PositionalAudio";
+  this.audio = void 0 !== a ? a : null;
+  this.autoplay = !0;
+  this.playbackRate = 1;
+  this.startTime = 0;
+  this.loop = !0;
+  this.isPlaying = !1;
+  this.hasPlaybackControl = !0;
+}
+PositionalAudio.listener = new THREE.AudioListener;
+PositionalAudio.prototype = Object.create(THREE.PositionalAudio.prototype);
+PositionalAudio.prototype.initialize = function() {
+  var a = this;
+  null !== this.audio && THREE.AudioContext.getContext().decodeAudioData(this.audio.data, function(g) {
+    a.setBuffer(g);
+  });
+  for (var g = 0;g < this.children.length;g++) {
+    this.children[g].initialize();
+  }
+};
+PositionalAudio.prototype.dispose = function() {
+  this.isPlaying && (this.stop(), this.disconnect());
+  for (var a = 0;a < this.children.length;a++) {
+    this.children[a].dispose();
+  }
+};
+PositionalAudio.prototype.toJSON = function(a) {
   var g = this.audio;
   a = THREE.Object3D.prototype.toJSON.call(this, a, function(a, b) {
     g = g.toJSON(a);
@@ -32780,6 +32832,9 @@ Script.prototype.update = function() {
   for (a = 0;a < this.children.length;a++) {
     this.children[a].update();
   }
+};
+Script.prototype.resize = function() {
+  void 0 !== this.script.onResize && this.script.onResize.call(this);
 };
 Script.prototype.setCode = function(a) {
   try {
@@ -33138,6 +33193,9 @@ Program.prototype.resize = function(a, g) {
   for (var l = 0;l < this.scene.cameras.length;l++) {
     this.scene.cameras[l].aspect = a / g, this.scene.cameras[l].updateProjectionMatrix();
   }
+  this.traverse(function(a) {
+    a instanceof Script && a.resize();
+  });
 };
 Program.prototype.getMaterialByName = function(a) {
   for (var g in this.materials) {

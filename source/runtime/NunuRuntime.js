@@ -69,6 +69,7 @@ include("core/objects/lights/Sky.js");
 include("core/objects/cameras/PerspectiveCamera.js");
 include("core/objects/cameras/OrthographicCamera.js");
 include("core/objects/audio/AudioEmitter.js");
+include("core/objects/audio/PositionalAudio.js");
 include("core/objects/script/Script.js");
 include("core/objects/physics/PhysicsObject.js");
 include("core/objects/spine/SpineAnimation.js");

@@ -755,6 +755,12 @@ Interface.initialize = function()
 		Editor.addToScene(new AudioEmitter(Editor.default_audio));
 	}, "Audio");
 
+	//Positional Audio
+	Interface.add_effects.addOption(Interface.file_dir + "icons/misc/audio_positional.png", function()
+	{
+		Editor.addToScene(new PositionalAudio(Editor.default_audio));
+	}, "Positional Audio");
+
 	//Physics
 	Interface.add_physics = new ButtonDrawer();
 	Interface.add_physics.setImage(Interface.file_dir + "icons/physics/physics.png");

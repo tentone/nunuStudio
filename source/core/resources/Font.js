@@ -38,7 +38,7 @@ function Font(url)
 			{
 				this.data = FileSystem.readFileArrayBuffer(url);
 				this.font = new TTFLoader().parse(this.data);
-				this.name = this.font.original_font_information.fullName;
+				this.name = FileSystem.getFileName(url); //this.font.original_font_information.fullName;
 				this.format = "arraybuffer";
 			}
 		}

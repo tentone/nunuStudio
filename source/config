@@ -1,7 +1,7 @@
 {
 	"general": {
 		"theme": "dark",
-		"file_preview_size": 80,
+		"file_preview_size": 70,
 		"show_stats": false
 	},
 	"editor": {
@@ -10,7 +10,7 @@
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,
-		"camera_preview_percentage": "0.4",
+		"camera_preview_percentage": 0.35,
 		"lock_mouse": true,
 		"transformation_space": "world"
 	},

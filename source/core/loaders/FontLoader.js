@@ -5,6 +5,11 @@ function FontLoader(manager)
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 }
 
+FontLoader.fileIsFont = function(fname)
+{
+	return fname.endsWith("ttf") || fname.endsWith("otf") || fname.endsWith("ttc") || fname.endsWith("otc");
+}
+
 FontLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	var loader = new THREE.XHRLoader(this.manager);

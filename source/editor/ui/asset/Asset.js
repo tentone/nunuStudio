@@ -25,7 +25,17 @@ function Asset(parent)
 	this.element.appendChild(this.icon);
 
 	//Text
-	this.text = new Text(this.element);
+	this.text = document.createElement("div");
+	this.text.style.position = "absolute";
+	this.text.style.overflow = "hidden";
+	this.text.style.textAlign = "center";
+	this.text.style.pointerEvents = "none";
+	this.text.style.textOverflow = "ellipsis";
+	this.text.style.whiteSpace = "nowrap";
+	this.text.style.color = Editor.theme.text_color;
+	this.text.style.height = "20px";
+	this.text.innerHTML = "";
+	this.element.appendChild(this.text);
 
 	//Element atributes
 	this.size = new THREE.Vector2(0, 0);
@@ -73,12 +83,7 @@ Asset.prototype.setIcon = function(icon)
 //Set file label
 Asset.prototype.setText = function(text)
 {
-	if(text.length > 8)
-	{
-		text = text.slice(0,8) + "...";
-	}
-
-	this.text.setText(text);
+	this.text.innerHTML = text;
 }
 
 //Remove element
@@ -101,18 +106,17 @@ Asset.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+		this.text.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
+		this.text.style.visibility = "hidden";
 	}
 
 	//Update file text
-	this.text.visible = this.visible;
-	this.text.size.x = this.size.x;
-	this.text.position.y = (this.size.y - 20);
-	this.text.size.y = this.size.y - this.text.position.y;
-	this.text.updateInterface();
+	this.text.style.top = (this.size.y - 20) + "px";
+	this.text.style.width = this.size.x + "px";
 	
 	//Update element
 	this.element.style.top = this.position.y + "px";

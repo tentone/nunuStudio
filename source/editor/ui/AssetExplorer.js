@@ -29,19 +29,29 @@ function AssetExplorer(parent)
 			if(file.type.startsWith("image"))
 			{
 				var texture = new Texture(file.path);
-
+				Editor.program.addTexture(texture);
+				Editor.updateAssetExplorer();
 			}
 			//Video
 			else if(file.type.startsWith("video"))
 			{
 				var texture = new VideoTexture(file.path);
-
+				Editor.program.addTexture(texture);
+				Editor.updateAssetExplorer();
 			}
 			//Audio
 			else if(file.type.startsWith("audio"))
 			{
-				var texture = new Audio(file.path);
-
+				var audio = new Audio(file.path);
+				Editor.program.addAudio(audio);
+				Editor.updateAssetExplorer();
+			}
+			//Font
+			else if(FontLoader.fileIsFont(file.path))
+			{
+				var font = new Font(file.path);
+				Editor.program.addFont(font);
+				Editor.updateAssetExplorer();
 			}
 		}
 	};
