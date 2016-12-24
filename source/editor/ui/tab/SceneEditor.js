@@ -56,12 +56,11 @@ function SceneEditor(parent)
 			if(intersections.length > 0 && event.dataTransfer.files.length > 0)
 			{
 				var file = event.dataTransfer.files[0];
+				var object = intersections[0].object;
 
 				//Image
 				if(file.type.startsWith("image"))
 				{
-					var object = intersections[0].object;
-
 					if(object instanceof THREE.Mesh)
 					{
 						//Create new material with selected image
@@ -87,8 +86,6 @@ function SceneEditor(parent)
 				//Video
 				else if(file.type.startsWith("video"))
 				{
-					var object = intersections[0].object;
-
 					if(object instanceof THREE.Mesh)
 					{
 						var texture = new VideoTexture(file.path);
@@ -103,6 +100,15 @@ function SceneEditor(parent)
 						var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
 						material.name = file.name;
 						object.material = material;
+						Editor.updateObjectViews();
+					}
+				}
+				else if(FontLoader.fileIsFont(file.path))
+				{
+					if(object.font !== undefined)
+					{
+						var font = new Font(file.path);
+						object.setFont(font);
 						Editor.updateObjectViews();
 					}
 				}

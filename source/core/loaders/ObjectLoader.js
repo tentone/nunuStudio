@@ -361,6 +361,14 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			object.loop = (data.source !== undefined) ? data.source.loop : data.loop;
 			break;
 
+		case "PositionalAudio":
+			object = new PositionalAudio(getAudio(data.audio));
+			object.autoplay = data.autoplay;
+			object.startTime = data.startTime;
+			object.playbackRate = data.playbackRate;
+			object.loop = (data.source !== undefined) ? data.source.loop : data.loop;
+			break;
+
 		case "Physics":
 			object = new PhysicsObject();
 			object.body.type = data.body.type;

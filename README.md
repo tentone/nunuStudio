@@ -19,7 +19,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Kinect only supported in windows projects
 
 ### Todo
- - Proper packaging
+ - Proper app packaging
  - Documentation
  - Blockly block script
 
@@ -30,6 +30,10 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Projects can be loaded when dragged anywhere
 	- Videos and images can now be exported to files
 		- Left click on texture inside the asset explorer and select Export Image/Video
+	- Added support for Positional Audio
+		- Audio relative to origin
+	- Fonts can now be dragged directly to an object
+	- Fixed script onResize method
 
 ### Runtime
 - To embed applications made inside nunuStudio in web pages the following code can be used
