@@ -963,20 +963,20 @@ Interface.initialize = function()
 		}, "", Editor.program.name);
 	}, Interface.file_dir + "icons/platform/linux.png");
 
-	publish.addOption("macOS", function()
+	/*publish.addOption("macOS", function()
 	{
 		alert("For macOS export NWJS for macOS is required");
-	}, Interface.file_dir + "icons/platform/osx.png");
+	}, Interface.file_dir + "icons/platform/osx.png");*/
 
-	publish.addOption("Android", function()
+	/*publish.addOption("Android", function()
 	{
 		alert("Android export not implemented");
-	}, Interface.file_dir + "icons/platform/android.png");
+	}, Interface.file_dir + "icons/platform/android.png");*/
 
-	publish.addOption("Nunu App", function()
+	/*publish.addOption("Nunu App", function()
 	{
 		alert("Optimized nunu app export not implemented");
-	}, Interface.file_dir + "icons/platform/nunu.png");
+	}, Interface.file_dir + "icons/platform/nunu.png");*/
 
 	Interface.file.addOption("Exit", function()
 	{
