@@ -64,6 +64,7 @@ var TorusKnotBufferGeometry = THREE.TorusKnotBufferGeometry;
 var TorusKnotGeometry = THREE.TorusKnotGeometry;
 var TubeGeometry = THREE.TubeGeometry;
 var TubeBufferGeometry = THREE.TubeBufferGeometry;
+var WireframeGeometry = THREE.WireframeGeometry;
 
 //Math
 var Box2 = THREE.Box2;

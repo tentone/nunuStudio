@@ -16,6 +16,12 @@ function PositionalAudio(audio)
 
 	this.isPlaying = false;
 	this.hasPlaybackControl = true;
+
+	//Runtime variables
+	this.cameras = null;
+
+	this.temp_a = new THREE.Vector3();
+	this.temp_b = new THREE.Vector3();
 }
 
 //Default audio listener
@@ -37,9 +43,41 @@ PositionalAudio.prototype.initialize = function()
 		});
 	}
 
+	//Get cameras
+	var node = this;
+	while(node.parent !== null)
+	{
+		node = node.parent;
+		if(node instanceof Scene)
+		{
+			this.cameras = node.cameras;
+		}
+	}
+
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
+	}
+}
+
+//Update audio position
+PositionalAudio.prototype.update = function()
+{
+	this.temp_a.setFromMatrixPosition(this.matrixWorld);
+
+	if(this.cameras.length > 0)
+	{
+		this.temp_b.setFromMatrixPosition(this.cameras[0].matrixWorld);
+		//this.panner.setOrientation(this.cameras[0].rotation.x, this.cameras[0].rotation.y, this.cameras[0].rotation.z);
+		this.temp_a.sub(this.temp_b);
+	}
+
+	this.panner.setPosition(this.temp_a.x, this.temp_a.y, this.temp_a.z);
+
+	//Update children
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].update();
 	}
 }
 
@@ -56,6 +94,12 @@ PositionalAudio.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
+}
+
+//Update world matrix
+PositionalAudio.prototype.updateMatrixWorld = function(force)
+{
+	Object3D.prototype.updateMatrixWorld.call(this, force);
 }
 
 //Create JSON description

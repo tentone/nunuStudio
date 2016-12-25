@@ -17,17 +17,15 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.clear_depth = false;
 
 	this.updateProjectionMatrix();
-
-	this.listener = new THREE.AudioListener();
 }
 
 OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype);
 
-//Camera scale mode
+//Scale mode
 OrthographicCamera.RESIZE_HORIZONTAL = 0;
 OrthographicCamera.RESIZE_VERTICAL = 1;
 
-//Destroy camera
+//Destroy
 OrthographicCamera.prototype.destroy = function()
 {
 	var scene = ObjectUtils.getScene(this);
