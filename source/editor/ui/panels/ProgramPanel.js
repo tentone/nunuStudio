@@ -85,6 +85,53 @@ function ProgramPanel(parent)
 	this.form.add(this.vr_scale);
 	this.form.nextRow();
 
+	//Rendering
+	this.form.addText("Rendering");
+	this.form.nextRow();
+
+	//Antialiasing
+	this.antialiasing = new CheckBox(this.form.element);
+	this.antialiasing.setText("Antialiasing");
+	this.antialiasing.size.set(50, 15);
+	this.antialiasing.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.antialiasing = self.antialiasing.getValue();
+		}
+	});
+	this.form.add(this.antialiasing);
+	this.form.nextRow();
+
+	//Shadows
+	this.shadows = new CheckBox(this.form.element);
+	this.shadows.setText("Shadows");
+	this.shadows.size.set(50, 15);
+	this.shadows.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.shadows = self.shadows.getValue();
+		}
+	});
+	this.form.add(this.shadows);
+	this.form.nextRow();
+
+	//Shadow type
+	this.form.addText("Shadows type");
+	this.shadows_type = new DropdownList(this.form.element);
+	this.shadows_type.size.set(120, 20);
+	this.shadows_type.addValue("Basic", THREE.BasicShadowMap);
+	this.shadows_type.addValue("PCF", THREE.PCFShadowMap);
+	this.shadows_type.addValue("PCF Soft", THREE.PCFSoftShadowMap);
+	//this.shadows_type.addValue("PCSS Soft", THREE.PCSSSoftShadowMap);
+	this.shadows_type.setOnChange(function()
+	{
+		self.obj.shadows_type = self.shadows_type.getValue();
+	});
+	this.form.add(this.shadows_type);
+	this.form.nextRow();
+
 	//Update form
 	this.form.updateInterface();
 }

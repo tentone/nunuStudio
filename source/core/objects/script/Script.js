@@ -15,7 +15,7 @@ function Script(code)
 Script.prototype = Object.create(THREE.Object3D.prototype);
 
 //Default script code
-Script.default = "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n};\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n};\n\nthis.onMouseOver = function()\n{\n	//TODO <MOUSE OVER CHILDREN CODE>\n};\n\nthis.onResize = function()\n{\n	//TODO <RESIZE CODE>\n};\n\nthis.onExit = function()\n{\n	//TODO <APP EXIT CODE>\n};";
+Script.default = "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n};\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n};\n\nthis.onMouseOver = function()\n{\n	//TODO <MOUSE OVER CHILDREN CODE>\n};\n\nthis.onResize = function()\n{\n	//TODO <RESIZE CODE>\n};";//\n\nthis.onExit = function()\n{\n	//TODO <APP EXIT CODE>\n};";
 
 //Initialize
 Script.prototype.initialize = function()
