@@ -1411,7 +1411,7 @@ Editor.createNewProgram = function()
 }
 
 //Save program to file
-Editor.saveProgram = function(fname, compressed)
+Editor.saveProgram = function(fname, compressed, keep_directory)
 {
 	if(fname === undefined && Editor.open_file !== null)
 	{
@@ -1431,7 +1431,7 @@ Editor.saveProgram = function(fname, compressed)
 
 	FileSystem.writeFile(fname, json);
 
-	if(Editor.open_file !== fname)
+	if(keep_directory !== true && Editor.open_file !== fname)
 	{
 		Editor.setOpenFile(fname);
 	}
@@ -1494,7 +1494,7 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile("runtime/index.html", dir + "\\index.html");
 	FileSystem.copyFile("../build/nunu.min.js", dir + "\\nunu.min.js");
 	
-	Editor.saveProgram(dir + "\\app.isp", true);
+	Editor.saveProgram(dir + "\\app.isp", true, true);
 }
 
 //Export windows project
@@ -1681,7 +1681,7 @@ Editor.setFullscreen = function(fullscreen, element)
 //Check if webvr is available
 Editor.webvrAvailable = function()
 {
-	return (navigator.getVRDisplays !== undefined);
+	return navigator.getVRDisplays !== undefined;
 }
 
 //Exit editor

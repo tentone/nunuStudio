@@ -16,10 +16,9 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - three.js based
 	- three.js code can be used inside nunuStudio scripts
 - Microft Kinect and Leap Motion support
-	- Kinect only supported in windows projects
+	- Kinect only supported in Windows projects
 
 ### Todo
- - Proper app packaging
  - Documentation
  - Blockly block script
 
@@ -34,8 +33,12 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 		- Audio relative to origin
 	- Fonts can now be dragged directly to an object
 	- Fixed script onResize method
+- V0.8.9.16 Alpha
+	- Fixed file path changing after project export
+	- Program rendering settings (Antialiasing, Shadows)
 
 ### Runtime
+- nunuStudio apps are meant to be used inside web pages
 - To embed applications made inside nunuStudio in web pages the following code can be used
 
 ```

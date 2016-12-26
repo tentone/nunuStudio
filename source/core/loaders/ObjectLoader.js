@@ -444,19 +444,31 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 		case "Program":
 			object = new Program(data.name);
+			
 			object.description = data.description;
 			object.author = data.author;
 			object.version = data.version;
+
 			object.vr = data.vr;
 			object.vr_scale = data.vr_scale;
+
+			if(data.antialiasing !== undefined)
+			{
+				object.antialiasing = data.antialiasing;
+				object.shadows = data.shadows;
+				object.shadows_type = data.shadows_type;
+			}
+
 			if(data.lock_pointer !== undefined)
 			{
 				object.lock_pointer = data.lock_pointer;
 			}
+
 			if(data.default_scene !== undefined)
 			{
 				object.default_scene = data.default_scene;
 			}
+			
 			break;
 
 		case "LeapDevice":
@@ -734,17 +746,18 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		}
 	}
 
-	//LOD objects
+	//Attach resources to program
 	if(data.type === "Program")
 	{
 		object.materials = materials;
-		//object.images = images;
-		//object.videos = videos;
 		object.textures = textures;
-		//object.geometries = geometries;
 		object.fonts = fonts;
 		object.audio = audio;
+		//object.images = images;
+		//object.videos = videos;
+		//object.geometries = geometries;
 	}
+	//Get scene default cameras
 	else if(data.type === "Scene")
 	{
 		for(var i = 0; i < object.cameras.length; i++)
@@ -760,6 +773,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			}
 		}
 	}
+	//LOD objects
 	else if(data.type === "LOD")
 	{
 		var levels = data.levels;

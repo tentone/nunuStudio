@@ -484,22 +484,22 @@ Program.prototype.addDefaultScene = function(material)
 	this.add(scene);
 }
 
-//Dispose program data (to avoid memory leaks)
+//Dispose program data
 Program.prototype.dispose = function()
 {
-	//Dispose materials
+	//Materials
 	for(var i = 0; i < this.materials.length; i++)
 	{
 		this.materials[i].dispose();
 	}
 
-	//Dispose textures
+	//Textures
 	for(var i = 0; i < this.textures.length; i++)
 	{
 		this.textures[i].dispose();
 	}
 
-	//Dipose children
+	//Children objects
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].dispose();
@@ -558,53 +558,31 @@ Program.prototype.toJSON = function(meta, export_resources)
 					meta.audio[aud.uuid] = aud.toJSON(meta);
 				}
 			}
-
-			/*
-			//Videos
-			var videos = self.videos;
-			for(var i in videos)
-			{
-				videos[i].toJSON(meta);
-			}
-
-			//Images
-			var images = self.images;
-			for(var i in images)
-			{
-				images[i].toJSON(meta);
-			}
-
-			//Geometries
-			var geometries = self.geometries;
-			for(var i in geometries)
-			{
-				var geometry = geometries[i];
-				if(meta.geometries[geometry.uuid] === undefined)
-				{
-					meta.geometries[geometry.uuid] = geometry.toJSON(meta);
-				}
-			}
-			*/
 		}
 	});
-
-	//Program info
-	data.object.author = this.author;
-	data.object.description = this.description;
-	data.object.version = this.version;
-
-	//Hardware flags
-	data.object.lock_pointer = this.lock_pointer;
-
-	//VR flags
-	data.object.vr = this.vr;
-	data.object.vr_scale = this.vr_scale;
 
 	//Initial scene
 	if(this.default_scene !== null)
 	{
 		data.object.default_scene = this.default_scene;
 	}
+
+	//Information
+	data.object.author = this.author;
+	data.object.description = this.description;
+	data.object.version = this.version;
+
+	//Misc
+	data.object.lock_pointer = this.lock_pointer;
+
+	//VR
+	data.object.vr = this.vr;
+	data.object.vr_scale = this.vr_scale;
+
+	//Rendering
+	data.object.antialiasing = this.antialiasing;
+	data.object.shadows = this.shadows;
+	data.object.shadows_type = this.shadows_type;
 
 	return data;
 }
