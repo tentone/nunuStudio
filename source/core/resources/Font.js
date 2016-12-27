@@ -76,14 +76,26 @@ Font.prototype.generateShapes = function(text, size, divisions)
 	{
 		var chars = String(text).split("");
 		var scale = size / data.resolution;
-		var offset = 0;
+		var offset_x = 0, offset_y = 0;
 
 		var paths = [];
 
 		for(var i = 0; i < chars.length; i++)
 		{
-			var ret = createPath(chars[i], scale, offset);
-			offset += ret.offset;
+			var char = chars[i];
+
+			if(char === "\n")
+			{
+				offset_y -= (data.boundingBox.yMax - data.boundingBox.yMin) * scale;
+				offset_x = 0;
+			}
+			else
+			{
+				var ret = createPath(char, scale, offset_x, offset_y);
+				offset_x += ret.offset_x;
+			}
+
+
 			paths.push(ret.path);
 		}
 
@@ -91,7 +103,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 	}
 
 	//Create path for a character
-	function createPath(c, scale, offset)
+	function createPath(c, scale, offset_x, offset_y)
 	{
 		var glyph = data.glyphs[c] || data.glyphs["?"];
 
@@ -117,25 +129,25 @@ Font.prototype.generateShapes = function(text, size, divisions)
 				//Move to
 				if(action === "m")
 				{
-					x = outline[i++] * scale + offset;
-					y = outline[i++] * scale;
+					x = outline[i++] * scale + offset_x;
+					y = outline[i++] * scale + offset_y;
 
 					path.moveTo(x, y);
 				}
 				//Line to
 				if(action === "l")
 				{
-					x = outline[i++] * scale + offset;
-					y = outline[i++] * scale;
+					x = outline[i++] * scale + offset_x;
+					y = outline[i++] * scale + offset_y;
 					path.lineTo(x, y);
 				}
 				//Quadratic curve to
 				else if(action === "q")
 				{
-					cpx = outline[i++] * scale + offset;
-					cpy = outline[i++] * scale;
-					cpx1 = outline[i++] * scale + offset;
-					cpy1 = outline[i++] * scale;
+					cpx = outline[i++] * scale + offset_x;
+					cpy = outline[i++] * scale + offset_y;
+					cpx1 = outline[i++] * scale + offset_x;
+					cpy1 = outline[i++] * scale + offset_y;
 
 					path.quadraticCurveTo(cpx1, cpy1, cpx, cpy);
 					laste = pts[pts.length - 1];
@@ -156,12 +168,12 @@ Font.prototype.generateShapes = function(text, size, divisions)
 				//Bezier curve to
 				else if(action === "b")
 				{
-					cpx = outline[i++] * scale + offset;
-					cpy = outline[i++] * scale;
-					cpx1 = outline[i++] * scale + offset;
-					cpy1 = outline[i++] * scale;
-					cpx2 = outline[i++] * scale + offset;
-					cpy2 = outline[i++] * scale;
+					cpx = outline[i++] * scale + offset_x;
+					cpy = outline[i++] * scale + offset_y;
+					cpx1 = outline[i++] * scale + offset_x;
+					cpy1 = outline[i++] * scale + offset_y;
+					cpx2 = outline[i++] * scale + offset_x;
+					cpy2 = outline[i++] * scale + offset_y;
 
 					path.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, cpx, cpy);
 					laste = pts[pts.length - 1];
@@ -182,7 +194,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 			}
 		}
 
-		return {offset: glyph.ha * scale, path: path};
+		return {offset_x: glyph.ha * scale, path: path};
 	}
 }
 

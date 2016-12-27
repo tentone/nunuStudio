@@ -42,6 +42,7 @@ TTFLoader.convert = function(font, reversed)
 		if(glyph.unicode !== undefined)
 		{
 			var token = {};
+			
 			token.ha = Math.round(glyph.advanceWidth * scale);
 			token.x_min = Math.round(glyph.xMin * scale);
 			token.x_max = Math.round(glyph.xMax * scale);
