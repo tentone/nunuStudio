@@ -76,8 +76,9 @@ Font.prototype.generateShapes = function(text, size, divisions)
 	{
 		var chars = String(text).split("");
 		var scale = size / data.resolution;
+		var line_height = (data.boundingBox.yMax - data.boundingBox.yMin + data.underlineThickness) * scale;
+		
 		var offset_x = 0, offset_y = 0;
-
 		var paths = [];
 
 		for(var i = 0; i < chars.length; i++)
@@ -86,7 +87,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 
 			if(char === "\n")
 			{
-				offset_y -= (data.boundingBox.yMax - data.boundingBox.yMin) * scale;
+				offset_y -= line_height;
 				offset_x = 0;
 			}
 			else
