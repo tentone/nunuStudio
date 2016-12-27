@@ -1024,7 +1024,7 @@ Editor.selectObjectPanel= function()
 		{
 			Interface.panel = new OrthographicCameraPanel(Interface.explorer_resizable.div_b);
 		}
-		else if(Editor.selected_object instanceof AudioEmitter)
+		else if(Editor.selected_object instanceof AudioEmitter || Editor.selected_object instanceof PositionalAudio)
 		{
 			Interface.panel = new AudioPanel(Interface.explorer_resizable.div_b);
 		}
@@ -1044,6 +1044,7 @@ Editor.selectObjectPanel= function()
 		{
 			Interface.panel = new ObjectPanel(Interface.explorer_resizable.div_b);
 		}
+
 		Interface.panel.attach(Editor.selected_object);
 		Interface.panel.updateInterface();
 	}
