@@ -19,7 +19,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.16 Alpha";
-Nunu.TIMESTAMP = "201612270303";
+Nunu.TIMESTAMP = "201612271532";
 (function(a, g) {
   "object" === typeof exports && "undefined" !== typeof module ? g(exports) : "function" === typeof define && define.amd ? define(["exports"], g) : g(a.THREE = a.THREE || {});
 })(this, function(a) {

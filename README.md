@@ -5,22 +5,31 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 
 ### Features
 - Visual application editor
-- WebVR 1.1 compatible
 - Real time lighting and shadows
-- TTF Font support
-- One file only project export with all assets included
-	- No more broken projects because of missing files
-- NWJS and Cordova used for desktop and mobile deployment
-- CannonJS physics engine 
-- SPE particle system
 - three.js based
 	- three.js code can be used inside nunuStudio scripts
+- Wide range of file formats supported
+- TTF Font support
+- Drag and drop files directly to objects
+- One file only project export with all assets included
+	- No more broken projects because of missing files
+- NWJS and Cordova used for easy desktop and mobile deployment
+- Physics engine (cannon.js)
+- SPE particle system
 - Microft Kinect and Leap Motion support
 	- Kinect only supported in Windows projects
+- WebVR 1.1 compatible
+
+### Screenshots
+- TODO
 
 ### Todo
- - Documentation
- - Blockly block script
+- Documentation website
+- Blockly based visual block scripting
+- Audio editor
+- Editor UI
+	- CTRL-Z and CTRL-Y support
+	- File dialogs sometimes dont open/save files
 
 ### ChangeLog
 - V0.8.9.15 Alpha
@@ -38,6 +47,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Fixed file path changing after project export
 	- Program rendering settings (Antialiasing, Shadows)
 	- Text3D now supports line break with '\n'
+	- Text3D panel can be used to edit multiline text
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
@@ -77,6 +87,7 @@ nunuStudio uses a number of open source projects to work properly
 
 ### Installation
 - nunuStudio is intended to run with NWJS direcly on the desktop
+	-Linux and Windows are supported
 - Download the repository and run the start.bat or start.sh file depending on your OS
 
 ### License

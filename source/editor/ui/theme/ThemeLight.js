@@ -2,8 +2,16 @@
 
 function ThemeLight()
 {
+	//Metadata
 	this.name = "light";
+	this.info = "";
+	this.version = "V1.0";
+	this.author = "Tentone";
 
+	//Font
+	this.font = "Arial";
+
+	//Colors
 	this.bar_color = "#666666";
 	this.panel_color = "#999999";
 	this.resize_tab_color = "#666666";
@@ -14,9 +22,10 @@ function ThemeLight()
 	this.text_color = "#FFFFFF";
 	this.icon_color = "#FFFFFF";
 
-	document.body.style.color = this.text_color;
+	//Body
 	document.body.style.fontFamily = "Arial";
 	document.body.style.fontSize = "12px";
+	document.body.style.color = this.text_color;
 }
 
 Theme.register(ThemeLight, "light");
