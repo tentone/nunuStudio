@@ -1,6 +1,6 @@
 {
 	"general": {
-		"theme": "light",
+		"theme": "dark",
 		"file_preview_size": 70,
 		"show_stats": true
 	},

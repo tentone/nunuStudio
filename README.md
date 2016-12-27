@@ -21,9 +21,9 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - WebVR 1.1 compatible
 
 ### Screenshots
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/screenshot/editor_a.png)
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/screenshot/editor_b.png)
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/screenshot/editor_c.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_a.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_b.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_c.png)
 
 ### Todo
 - Documentation website
