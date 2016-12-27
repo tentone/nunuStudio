@@ -5,8 +5,8 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 
 ### Features
 - Visual application editor
-- Real time lighting and shadows
 - three.js based
+	- Real time lighting and shadow map support
 	- three.js code can be used inside nunuStudio scripts
 - Wide range of file formats supported
 - TTF Font support
@@ -21,9 +21,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - WebVR 1.1 compatible
 
 ### Screenshots
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_a.png)
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_b.png)
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_c.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_b.png) ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_c.png) ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_d.png) ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_a.png) ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_e.png)
 
 ### Todo
 - Documentation website
