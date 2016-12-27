@@ -9,8 +9,8 @@ function Text3DPanel(parent)
 
 	//Text
 	this.form.addText("Text");
-	this.text = new TextBox(this.form.element);
-	this.text.size.set(200, 18);
+	this.text = new TextArea(this.form.element);
+	this.text.size.set(200, 60);
 	this.text.setOnChange(function()
 	{
 		if(self.obj !== null)

@@ -163,6 +163,7 @@ include("editor/ui/element/input/Graph.js");
 include("editor/ui/element/input/CodeEditor.js");
 include("editor/ui/element/input/CheckBox.js");
 include("editor/ui/element/input/TextBox.js");
+include("editor/ui/element/input/TextArea.js");
 include("editor/ui/element/input/ColorChooser.js");
 include("editor/ui/element/input/Slider.js");
 include("editor/ui/element/input/DropdownList.js");
@@ -208,13 +209,13 @@ include("editor/ui/tab/materialeditor/PointMaterialEditor.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");
-include("editor/ui/panels/MeshPanel.js");
 include("editor/ui/panels/AudioPanel.js");
 include("editor/ui/panels/ScriptPanel.js");
 include("editor/ui/panels/ScenePanel.js");
 include("editor/ui/panels/ProgramPanel.js");
-include("editor/ui/panels/Text3DPanel.js");
 include("editor/ui/panels/PhysicsPanel.js");
+include("editor/ui/panels/mesh/MeshPanel.js");
+include("editor/ui/panels/mesh/Text3DPanel.js");
 include("editor/ui/panels/devices/LeapPanel.js");
 include("editor/ui/panels/devices/KinectPanel.js");
 include("editor/ui/panels/cameras/PerspectiveCameraPanel.js");
@@ -294,6 +295,9 @@ Editor.initialize = function()
 		}
 	}
 
+	//TODO <USE SYNC INPUT KEYBOARD MOUSE AND GAMEPAD>
+
+	//Initialize input
 	Keyboard.initialize();
 	Mouse.initialize();
 

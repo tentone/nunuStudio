@@ -20,7 +20,7 @@
 		"antialiasing": true
 	},
 	"code": {
-		"theme": "twilight",
+		"theme": "monokai",
 		"keymap": "sublime",
 		"font_size": 14,
 		"line_numbers": true,
