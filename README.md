@@ -33,9 +33,11 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 		- Audio relative to origin
 	- Fonts can now be dragged directly to an object
 	- Fixed script onResize method
+	- Projects can now be run by pressing F5
 - V0.8.9.16 Alpha
 	- Fixed file path changing after project export
 	- Program rendering settings (Antialiasing, Shadows)
+	- Text3D now supports line break with '\n'
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
