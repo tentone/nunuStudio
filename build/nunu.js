@@ -31302,8 +31302,8 @@ Font.prototype.generateShapes = function(a, g, l) {
         r = void 0;
       }
       c += r.offset_x;
+      g.push(r.path);
     }
-    g.push(r.path);
   }
   l = [];
   for (b = 0;b < g.length;b++) {
