@@ -1,4 +1,4 @@
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/resources/logo.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/logo_border.png)
 
 # nunuStudio
 nunuStudio is a JS based framework for 3D and VR applications that run direcly on the browser without the need for addicional plugins using WebGL and WebVR
@@ -21,7 +21,9 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - WebVR 1.1 compatible
 
 ### Screenshots
-- TODO
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/screenshot/editor_a.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/screenshot/editor_b.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/screenshot/editor_c.png)
 
 ### Todo
 - Documentation website
@@ -53,7 +55,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - nunuStudio apps are meant to be used inside web pages
 - To embed applications made inside nunuStudio in web pages the following code can be used
 
-```
+```javascript
  var app = new NunuApp();
  app.setCanvas(canvas);
  app.load("app.isp");

@@ -38,7 +38,7 @@ function Font(url)
 			{
 				this.data = FileSystem.readFileArrayBuffer(url);
 				this.font = new TTFLoader().parse(this.data);
-				this.name = FileSystem.getFileName(url); //this.font.original_font_information.fullName;
+				this.name = FileSystem.getFileName(url);
 				this.format = "arraybuffer";
 			}
 		}
@@ -94,10 +94,8 @@ Font.prototype.generateShapes = function(text, size, divisions)
 			{
 				var ret = createPath(char, scale, offset_x, offset_y);
 				offset_x += ret.offset_x;
+				paths.push(ret.path);
 			}
-
-
-			paths.push(ret.path);
 		}
 
 		return paths;
