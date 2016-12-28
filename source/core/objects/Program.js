@@ -11,7 +11,7 @@ function Program(name)
 	this.matrixAutoUpdate = false;
 
 	//Pointer to nunu app
-	this.nunu_app = null;
+	this.app = null;
 
 	//Program Info
 	this.name = (name !== undefined) ? name : "program";
@@ -272,11 +272,11 @@ Program.prototype.dispose = function()
 //Communicate
 Program.prototype.sendDataApp = function(data)
 {
-	if(this.nunu_app !== null)
+	if(this.app !== null)
 	{
-		if(this.nunu_app.onDataReceived !== undefined)
+		if(this.app.onDataReceived !== undefined)
 		{
-			this.nunu_app.onDataReceived(data);
+			this.app.onDataReceived(data);
 		}
 		else
 		{
@@ -285,7 +285,14 @@ Program.prototype.sendDataApp = function(data)
 	}
 	else
 	{
-		alert(data);
+		if(typeof obj === "object")
+		{
+			alert(JSON.stringify(data));
+		}
+		else
+		{
+			alert(data);
+		}
 	}
 }
 
