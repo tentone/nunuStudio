@@ -1564,7 +1564,7 @@ Editor.setState = function(state)
 		//If program uses VR set button
 		if(Editor.program_running.vr)
 		{
-			if(Editor.webvrAvailable())
+			if(Nunu.webvrAvailable())
 			{
 				Editor.vr_effect = new THREE.VREffect(Editor.renderer);
 				
@@ -1681,12 +1681,6 @@ Editor.setFullscreen = function(fullscreen, element)
 			document.exitFullscreen();
 		}
 	}
-}
-
-//Check if webvr is available
-Editor.webvrAvailable = function()
-{
-	return navigator.getVRDisplays !== undefined;
 }
 
 //Exit editor

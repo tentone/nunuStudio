@@ -7,6 +7,7 @@ function FontLoader(manager)
 
 FontLoader.fileIsFont = function(fname)
 {
+	fname = fname.toLocaleLowerCase();
 	return fname.endsWith("ttf") || fname.endsWith("otf") || fname.endsWith("ttc") || fname.endsWith("otc");
 }
 
