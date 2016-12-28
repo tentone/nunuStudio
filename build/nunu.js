@@ -25,10 +25,11 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.16 Alpha";
-Nunu.TIMESTAMP = "201612280259";
+Nunu.TIMESTAMP = "201612280338";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
-}(function(a, g) {
+};
+(function(a, g) {
   "object" === typeof exports && "undefined" !== typeof module ? g(exports) : "function" === typeof define && define.amd ? define(["exports"], g) : g(a.THREE = a.THREE || {});
 })(this, function(a) {
   function g() {
@@ -13104,10 +13105,10 @@ Nunu.webvrAvailable = function() {
     delete e.actionByRoot[(a._localRoot || this._root).uuid];
     0 === h.length && delete c[b];
     this._removeInactiveBindingsForAction(d);
-  }, _removeInactiveBindingsForAction:function(d) {
-    d = d._propertyBindings;
-    for (var a = 0, b = d.length;a !== b;++a) {
-      var c = d[a];
+  }, _removeInactiveBindingsForAction:function(a) {
+    a = a._propertyBindings;
+    for (var d = 0, b = a.length;d !== b;++d) {
+      var c = a[d];
       0 === --c.referenceCount && this._removeInactiveBinding(c);
     }
   }, _lendAction:function(a) {
@@ -33008,7 +33009,7 @@ function Program(a) {
   THREE.Object3D.call(this);
   this.type = "Program";
   this.matrixAutoUpdate = !1;
-  this.nunu_app = null;
+  this.app = null;
   this.name = void 0 !== a ? a : "program";
   this.author = this.description = "";
   this.version = "0";
@@ -33114,14 +33115,14 @@ Program.prototype.dispose = function() {
   }
 };
 Program.prototype.sendDataApp = function(a) {
-  if (null !== this.nunu_app) {
-    if (void 0 !== this.nunu_app.onDataReceived) {
-      this.nunu_app.onDataReceived(a);
+  if (null !== this.app) {
+    if (void 0 !== this.app.onDataReceived) {
+      this.app.onDataReceived(a);
     } else {
       console.warn("nunuStudio: App data communication", a);
     }
   } else {
-    alert(a);
+    "object" === typeof obj ? alert(JSON.stringify(a)) : alert(a);
   }
 };
 Program.prototype.getMaterialByName = function(a) {
@@ -33475,7 +33476,7 @@ BufferUtils.fromArrayBuffer = function(a) {
   }
   return g;
 };
-function NunuRuntime(a) {
+function NunuApp(a) {
   this.program = null;
   void 0 === a ? (this.canvas = document.createElement("canvas"), this.canvas.style.position = "absolute", this.canvas.style.left = "0px", this.canvas.style.top = "0px", this.canvas.style.width = window.innerWidth + "px", this.canvas.style.height = window.innerHeight + "px", this.canvas.width = window.innerWidth, this.canvas.height = window.innerHeight, document.body.appendChild(this.canvas), this.canvas_resize = !0) : (this.canvas = a, this.canvas_resize = !1);
   this.renderer = new THREE.WebGLRenderer({canvas:this.canvas, antialias:!0});
@@ -33484,21 +33485,21 @@ function NunuRuntime(a) {
   this.renderer.shadowMap.type = THREE.PCFShadowMap;
   this.renderer.setSize(this.canvas.width, this.canvas.height);
 }
-NunuRuntime.fullscreen = !1;
-NunuRuntime.prototype.loadProgram = function(a) {
+NunuApp.fullscreen = !1;
+NunuApp.prototype.loadProgram = function(a) {
   var g = new ObjectLoader;
   a = JSON.parse(FileSystem.readFile(a));
   this.program = g.parse(a);
 };
-NunuRuntime.prototype.run = function() {
+NunuApp.prototype.run = function() {
   if (null === this.program) {
     console.warn("nunuStudio: no program is loaded [app.loadPogram(fname)]");
   } else {
     Keyboard.initialize();
     Mouse.initialize();
     Mouse.setCanvas(this.canvas);
-    !0 === this.program.vr && (this.vr_controls = new VRControls, this.vr_effect = new THREE.VREffect(this.renderer));
-    this.program.nunu_app = this;
+    !0 === this.program.vr && Nunu.webvrAvailable() && (this.vr_controls = new VRControls, this.vr_effect = new THREE.VREffect(this.renderer));
+    this.program.app = this;
     this.program.default_camera = new PerspectiveCamera(60, this.canvas.width / this.canvas.height, .1, 1E6);
     this.program.default_camera.position.set(0, 5, -5);
     this.program.renderer = this.renderer;
@@ -33510,32 +33511,32 @@ NunuRuntime.prototype.run = function() {
     g();
   }
 };
-NunuRuntime.prototype.update = function() {
+NunuApp.prototype.update = function() {
   Mouse.update();
   Keyboard.update();
   this.program.update();
   this.program.render(this.renderer);
 };
-NunuRuntime.prototype.exit = function() {
+NunuApp.prototype.exit = function() {
   null !== this.program && (this.program.dispose(), this.program = null);
   Mouse.dispose();
   Keyboard.dispose();
   if (void 0 !== this.onExit) {
     this.onExit();
   }
-  void 0 !== NunuRuntime.gui && (NunuRuntime.gui.App.closeAllWindows(), NunuRuntime.gui.App.quit());
+  void 0 !== NunuApp.gui && (NunuApp.gui.App.closeAllWindows(), NunuApp.gui.App.quit());
 };
-NunuRuntime.prototype.resize = function() {
+NunuApp.prototype.resize = function() {
   null !== this.canvas && this.canvas_resize && (this.canvas.style.width = window.innerWidth + "px", this.canvas.style.height = window.innerHeight + "px", this.canvas.width = window.innerWidth, this.canvas.height = window.innerHeight);
   null !== this.program && void 0 !== this.renderer && (this.renderer.setSize(this.canvas.width, this.canvas.height), this.program.resize(this.canvas.width, this.canvas.height));
 };
-NunuRuntime.prototype.setOnDataReceived = function(a) {
+NunuApp.prototype.setOnDataReceived = function(a) {
   this.onDataReceived = a;
 };
-NunuRuntime.prototype.setOnExit = function(a) {
+NunuApp.prototype.setOnExit = function(a) {
   this.onExit = a;
 };
-NunuRuntime.setFullscreen = function(a, g) {
-  (NunuRuntime.fullscreen = a) ? (void 0 === g && (g = document.body), g.requestFullscreen = g.requestFullscreen || g.mozRequestFullScreen || g.webkitRequestFullscreen || g.msRequestFullscreen, g.requestFullscreen && g.requestFullscreen()) : (document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen, document.exitFullscreen && document.exitFullscreen());
+NunuApp.setFullscreen = function(a, g) {
+  (NunuApp.fullscreen = a) ? (void 0 === g && (g = document.body), g.requestFullscreen = g.requestFullscreen || g.mozRequestFullScreen || g.webkitRequestFullscreen || g.msRequestFullscreen, g.requestFullscreen && g.requestFullscreen()) : (document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen, document.exitFullscreen && document.exitFullscreen());
 };
 

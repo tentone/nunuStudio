@@ -49,6 +49,9 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Program rendering settings (Antialiasing, Shadows)
 	- Text3D now supports line break with '\n'
 	- Text3D panel can be used to edit multiline text
+	- Program stores pointer to nunu app (program.app)
+	- Added program.sendDataApp and app.setOnDataReceived for app/page communication
+	- Renamed NunuRuntime to NunuApp (Makes more sense)
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

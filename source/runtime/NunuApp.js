@@ -87,7 +87,7 @@ include("core/utils/ObjectUtils.js");
 include("core/utils/BufferUtils.js");
 
 //Nunu app contructor
-function NunuRuntime(canvas)
+function NunuApp(canvas)
 {
 	//Program
 	this.program = null;
@@ -123,10 +123,10 @@ function NunuRuntime(canvas)
 }
 
 //Fullscreen control
-NunuRuntime.fullscreen = false;
+NunuApp.fullscreen = false;
 
 //Load program from file
-NunuRuntime.prototype.loadProgram = function(fname)
+NunuApp.prototype.loadProgram = function(fname)
 {
 	var loader = new ObjectLoader();
 	var data = JSON.parse(FileSystem.readFile(fname));
@@ -134,7 +134,7 @@ NunuRuntime.prototype.loadProgram = function(fname)
 }
 
 //Start nunu program
-NunuRuntime.prototype.run = function()
+NunuApp.prototype.run = function()
 {
 	if(this.program === null)
 	{
@@ -148,14 +148,14 @@ NunuRuntime.prototype.run = function()
 	Mouse.setCanvas(this.canvas);
 
 	//Virtual reality
-	if(this.program.vr === true)
+	if(this.program.vr === true && Nunu.webvrAvailable())
 	{
 		this.vr_controls = new VRControls();
 		this.vr_effect = new THREE.VREffect(this.renderer);
 	}
 
 	//Attach this runtime to program
-	this.program.nunu_app = this;
+	this.program.app = this;
 
 	//Create default camera
 	this.program.default_camera = new PerspectiveCamera(60, this.canvas.width/this.canvas.height, 0.1, 1000000);
@@ -180,7 +180,7 @@ NunuRuntime.prototype.run = function()
 }
 
 //Update nunu program
-NunuRuntime.prototype.update = function()
+NunuApp.prototype.update = function()
 {
 	Mouse.update();
 	Keyboard.update();
@@ -190,7 +190,7 @@ NunuRuntime.prototype.update = function()
 }
 
 //Exit from app
-NunuRuntime.prototype.exit = function()
+NunuApp.prototype.exit = function()
 {
 	//Dispose and remove program
 	if(this.program !== null)
@@ -210,15 +210,15 @@ NunuRuntime.prototype.exit = function()
 	}
 
 	//If running on nwjs close all windows
-	if(NunuRuntime.gui !== undefined)
+	if(NunuApp.gui !== undefined)
 	{
-		NunuRuntime.gui.App.closeAllWindows();
-		NunuRuntime.gui.App.quit();
+		NunuApp.gui.App.closeAllWindows();
+		NunuApp.gui.App.quit();
 	}
 }
 
 //Resize to fit window
-NunuRuntime.prototype.resize = function()
+NunuApp.prototype.resize = function()
 {
 	if(this.canvas !== null && this.canvas_resize)
 	{
@@ -236,21 +236,21 @@ NunuRuntime.prototype.resize = function()
 }
 
 //Set on data receive callback (callback receives data as argument)
-NunuRuntime.prototype.setOnDataReceived = function(callback)
+NunuApp.prototype.setOnDataReceived = function(callback)
 {
 	this.onDataReceived = callback;
 }
 
 //Set on exit callback
-NunuRuntime.prototype.setOnExit = function(callback)
+NunuApp.prototype.setOnExit = function(callback)
 {
 	this.onExit = callback;
 }
 
 //Set fullscreen mode
-NunuRuntime.setFullscreen = function(fullscreen, element)
+NunuApp.setFullscreen = function(fullscreen, element)
 {
-	NunuRuntime.fullscreen = fullscreen;
+	NunuApp.fullscreen = fullscreen;
 
 	if(fullscreen)
 	{
