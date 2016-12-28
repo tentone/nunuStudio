@@ -88,7 +88,7 @@ Script.prototype.setCode = function(code)
 	}
 	catch(e)
 	{
-		console.warn("NunuStudio: Error compiling script code");
+		console.warn("nunuStudio: Error compiling script code", e);
 		this.script = new(function(){})();
 	}
 }

@@ -5,11 +5,13 @@ function Program(name)
 {
 	THREE.Object3D.call(this);
 
-	//Program Type
 	this.type = "Program";
 
-	//Matrix auto update
+	//Disable matrix auto update
 	this.matrixAutoUpdate = false;
+
+	//Pointer to nunu app
+	this.nunu_app = null;
 
 	//Program Info
 	this.name = (name !== undefined) ? name : "program";
@@ -109,6 +111,7 @@ Program.prototype.render = function(renderer)
 		{
 			renderer.clearDepth();
 		}
+
 		renderer.setViewport(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
 		renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
 
@@ -121,12 +124,14 @@ Program.prototype.render = function(renderer)
 //Resize program cameras
 Program.prototype.resize = function(x, y)
 {
+	//Resize cameras
 	for(var i = 0; i < this.scene.cameras.length; i++)
 	{
 		this.scene.cameras[i].aspect = x / y;
 		this.scene.cameras[i].updateProjectionMatrix();
 	}
 
+	//Resize scripts
 	this.traverse(function(child)
 	{
 		if(child instanceof Script)
@@ -134,6 +139,154 @@ Program.prototype.resize = function(x, y)
 			child.resize();
 		}
 	});
+}
+
+//Set actual scene (to be used in runtime)
+Program.prototype.setScene = function(scene)
+{
+	if(scene instanceof Scene)
+	{
+		this.scene = scene;
+	}
+	else if(typeof scene === "string")
+	{
+		this.scene = this.getObjectByName(scene);
+	}
+
+	if(this.scene !== null)
+	{
+		this.scene.initialize();
+
+		if(this.scene.cameras.length === 0)
+		{
+			this.scene.cameras.push(this.default_camera);
+		}
+	}
+}
+
+//Remove Scene from program
+Program.prototype.remove = function(scene)
+{
+	var index = this.children.indexOf(scene);
+	if(index > -1)
+	{
+		this.children.splice(index, 1);
+		scene.parent = null;
+	}
+
+	//If no scene on program set actual scene to null
+	if(this.children.length === 0)
+	{
+		this.scene = null;
+	}
+}
+
+//Add children to program (only allows Scenes to be added)
+Program.prototype.add = function(scene)
+{
+	if(scene instanceof Scene)
+	{
+		this.children.push(scene);
+		scene.parent = this;
+
+		//If first scene set as actual scene
+		if(this.children.length === 1)
+		{
+			this.scene = this.children[0];
+		}
+	}
+}
+
+//Clone program (keep uuid and everything else)
+Program.prototype.clone = function()
+{
+	return new ObjectLoader().parse(this.toJSON());
+}
+
+//Set as initial scene (from uuid reference)
+Program.prototype.setInitialScene = function(scene)
+{
+	this.default_scene = scene.uuid;
+}
+
+//Create a default scene with sky
+Program.prototype.addDefaultScene = function(material)
+{
+	if(material === undefined)
+	{
+		material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
+		material.name = "default";
+	}
+
+	//Create new scene
+	var scene = new Scene();
+
+	//Sky
+	var sky = new Sky();
+	sky.auto_update = false;
+	scene.add(sky);
+
+	//Box
+	var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+	var model = new Mesh(geometry, material);
+	model.receiveShadow = true;
+	model.castShadow = true;
+	model.name = "box";
+	scene.add(model);
+
+	//Floor
+	model = new Mesh(geometry, material);
+	model.scale.set(20, 1, 20);
+ 	model.position.set(0, -1.0, 0);
+	model.receiveShadow = true;
+	model.castShadow = true;
+	model.name = "ground";
+	scene.add(model);
+
+	//Add scene to program
+	this.add(scene);
+}
+
+//Dispose program data
+Program.prototype.dispose = function()
+{
+	//Materials
+	for(var i = 0; i < this.materials.length; i++)
+	{
+		this.materials[i].dispose();
+	}
+
+	//Textures
+	for(var i = 0; i < this.textures.length; i++)
+	{
+		this.textures[i].dispose();
+	}
+
+	//Children objects
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].dispose();
+	}
+}
+
+//Communicate
+Program.prototype.sendDataApp = function(data)
+{
+	if(this.nunu_app !== null)
+	{
+		if(this.nunu_app.onDataReceived !== undefined)
+		{
+			this.nunu_app.onDataReceived(data);
+		}
+		else
+		{
+			console.warn("nunuStudio: App data communication", data);
+		}
+	}
+	else
+	{
+		alert(data);
+	}
 }
 
 //Get material by name
@@ -375,134 +528,6 @@ Program.prototype.removeAudio = function(audio, default_audio)
 				child.setFont(default_audio);
 			}
 		});
-	}
-}
-
-//Set actual scene (to be used in runtime)
-Program.prototype.setScene = function(scene)
-{
-	if(scene instanceof Scene)
-	{
-		this.scene = scene;
-	}
-	else if(typeof scene === "string")
-	{
-		this.scene = this.getObjectByName(scene);
-	}
-
-	if(this.scene !== null)
-	{
-		this.scene.initialize();
-
-		if(this.scene.cameras.length === 0)
-		{
-			this.scene.cameras.push(this.default_camera);
-		}
-	}
-}
-
-//Remove Scene from program
-Program.prototype.remove = function(scene)
-{
-	var index = this.children.indexOf(scene);
-	if(index > -1)
-	{
-		this.children.splice(index, 1);
-		scene.parent = null;
-	}
-
-	//If no scene on program set actual scene to null
-	if(this.children.length === 0)
-	{
-		this.scene = null;
-	}
-}
-
-//Add children to program (only allows Scenes to be added)
-Program.prototype.add = function(scene)
-{
-	if(scene instanceof Scene)
-	{
-		this.children.push(scene);
-		scene.parent = this;
-
-		//If first scene set as actual scene
-		if(this.children.length === 1)
-		{
-			this.scene = this.children[0];
-		}
-	}
-}
-
-//Clone program (keep uuid and everything else)
-Program.prototype.clone = function()
-{
-	return new ObjectLoader().parse(this.toJSON());
-}
-
-//Set as initial scene (from uuid reference)
-Program.prototype.setInitialScene = function(scene)
-{
-	this.default_scene = scene.uuid;
-}
-
-//Create a default scene with sky
-Program.prototype.addDefaultScene = function(material)
-{
-	if(material === undefined)
-	{
-		material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
-		material.name = "default";
-	}
-
-	//Create new scene
-	var scene = new Scene();
-
-	//Sky
-	var sky = new Sky();
-	sky.auto_update = false;
-	scene.add(sky);
-
-	//Box
-	var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-	var model = new Mesh(geometry, material);
-	model.receiveShadow = true;
-	model.castShadow = true;
-	model.name = "box";
-	scene.add(model);
-
-	//Floor
-	model = new Mesh(geometry, material);
-	model.scale.set(20, 1, 20);
- 	model.position.set(0, -1.0, 0);
-	model.receiveShadow = true;
-	model.castShadow = true;
-	model.name = "ground";
-	scene.add(model);
-
-	//Add scene to program
-	this.add(scene);
-}
-
-//Dispose program data
-Program.prototype.dispose = function()
-{
-	//Materials
-	for(var i = 0; i < this.materials.length; i++)
-	{
-		this.materials[i].dispose();
-	}
-
-	//Textures
-	for(var i = 0; i < this.textures.length; i++)
-	{
-		this.textures[i].dispose();
-	}
-
-	//Children objects
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].dispose();
 	}
 }
 
