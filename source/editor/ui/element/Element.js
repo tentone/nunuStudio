@@ -1,19 +1,15 @@
 "use strict";
 
-function Bar(parent)
+function Element(parent, tag)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "bar" + Bar.id;
-	Bar.id++;
 
-	//Create element
-	this.element = document.createElement("div");
-	this.element.id = id;
+	//Element
+	this.element = document.createElement(tag);
+	this.element.id = tag + Element.id++;
 	this.element.style.position = "absolute";
-	this.element.style.backgroundColor = Editor.theme.bar_color;
+	this.element.style.overflow = "auto";
 
 	this.element.ondrop = function(event)
 	{
@@ -24,22 +20,22 @@ function Bar(parent)
 	{
 		event.preventDefault();
 	};
-	
-	//Element atributes
+
+	//Attributes
 	this.fit_parent = false;
+	this.visible = true;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
 	
-	//Add element to document
+	//Add to parent
 	this.parent.appendChild(this.element);
 }
 
-//Bar conter
-Bar.id = 0;
+//Element conter
+Element.id = 0;
 
 //Remove element
-Bar.prototype.destroy = function()
+Element.prototype.destroy = function()
 {
 	try
 	{
@@ -48,11 +44,11 @@ Bar.prototype.destroy = function()
 	catch(e){}
 }
 
-//Update Bar
-Bar.prototype.update = function(){}
+//Update
+Element.prototype.update = function(){}
 
 //Update division Size
-Bar.prototype.updateInterface = function()
+Element.prototype.updateInterface = function()
 {
 	//Fit parent
 	if(this.fit_parent)

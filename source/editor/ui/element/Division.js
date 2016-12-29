@@ -14,7 +14,6 @@ function Division(parent)
 	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
-	this.element.style.cursor = "default";
 	this.element.style.pointerEvents = "none";
 	this.element.style.backgroundColor = Editor.theme.panel_color;
 

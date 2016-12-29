@@ -486,17 +486,20 @@ Editor.update = function()
 		}
 		else if(Keyboard.keyPressed(Keyboard.CTRL))
 		{
-			if(Keyboard.keyJustPressed(Keyboard.C))
+			if(Editor.panel !== null && !Editor.panel.focused)
 			{
-				Editor.copyObject();
-			}
-			else if(Keyboard.keyJustPressed(Keyboard.V))
-			{
-				Editor.pasteObject();
-			}
-			else if(Keyboard.keyJustPressed(Keyboard.X))
-			{
-				Editor.cutObject();
+				if(Keyboard.keyJustPressed(Keyboard.C))
+				{
+					Editor.copyObject();
+				}
+				else if(Keyboard.keyJustPressed(Keyboard.V))
+				{
+					Editor.pasteObject();
+				}
+				else if(Keyboard.keyJustPressed(Keyboard.X))
+				{
+					Editor.cutObject();
+				}
 			}
 			else if(Keyboard.keyJustPressed(Keyboard.Y))
 			{
