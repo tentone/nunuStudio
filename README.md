@@ -52,6 +52,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Program stores pointer to nunu app (program.app)
 	- Added program.sendDataApp and app.setOnDataReceived for app/page communication
 	- Renamed NunuRuntime to NunuApp (Makes more sense)
+	- Fixed copy/paste inside object panels
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

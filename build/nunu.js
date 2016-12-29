@@ -25,7 +25,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.16 Alpha";
-Nunu.TIMESTAMP = "201612280338";
+Nunu.TIMESTAMP = "201612290236";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -33122,7 +33122,7 @@ Program.prototype.sendDataApp = function(a) {
       console.warn("nunuStudio: App data communication", a);
     }
   } else {
-    "object" === typeof obj ? alert(JSON.stringify(a)) : alert(a);
+    "object" === typeof a ? alert(JSON.stringify(a)) : alert(a);
   }
 };
 Program.prototype.getMaterialByName = function(a) {

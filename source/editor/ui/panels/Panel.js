@@ -27,11 +27,27 @@ function Panel(parent)
 		event.preventDefault();
 	};
 
-	//Element atributes
+	//Attributes
 	this.fit_parent = true;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
+
+	//Self pointer
+	var self = this;
+
+	//Mouse inside panel
+	this.focused = false;
+
+	this.element.onmouseenter = function()
+	{
+		self.focused = true;
+	};
+
+	this.element.onmouseout = function()
+	{
+		self.focused = false;
+	};
 
 	//Default form
 	this.form = new Form(this.element);
@@ -40,8 +56,6 @@ function Panel(parent)
 
 	//Object attached
 	this.obj = null;
-
-	var self = this;
 
 	//Name
 	this.form.addText("Name");

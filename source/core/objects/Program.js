@@ -285,7 +285,7 @@ Program.prototype.sendDataApp = function(data)
 	}
 	else
 	{
-		if(typeof obj === "object")
+		if(typeof data === "object")
 		{
 			alert(JSON.stringify(data));
 		}
