@@ -16,8 +16,8 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - NWJS and Cordova used for easy desktop and mobile deployment
 - Physics engine (cannon.js)
 - SPE particle system
-- Microft Kinect and Leap Motion support
-	- Kinect only supported in Windows projects
+- Microsoft Kinect and Leap Motion support
+	- Microsoft Kinect only supported in Windows projects
 - WebVR 1.1 compatible
 
 ### Screenshots
@@ -53,10 +53,13 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Added program.sendDataApp and app.setOnDataReceived for app/page communication
 	- Renamed NunuRuntime to NunuApp (Makes more sense)
 	- Fixed copy/paste inside object panels
+- V0.8.9.17 Alpha
+	- Particle editor position, velocity and acceleration delta now shows in different a row
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
 - To embed applications made inside nunuStudio in web pages the following code can be used
+- nunuStudio can export full page web apps with a fullscreen and vr buttons by default
 
 ```javascript
  var app = new NunuApp();
@@ -89,6 +92,8 @@ nunuStudio uses a number of open source projects to work properly
 	- codemirror.net
 - LeapJS
 	- github.com/leapmotion/leapjs
+- JSHint
+	- jshint.com
 
 ### Installation
 - nunuStudio is intended to run with NWJS direcly on the desktop
