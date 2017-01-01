@@ -236,6 +236,7 @@ function ParticleEditor(parent)
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.position_value);
+	this.form.nextRow();
 	this.form.addText("+/-");
 	this.position_spread = new CoordinatesBox(this.form.element);
 	this.position_spread.setOnChange(function()
@@ -255,6 +256,7 @@ function ParticleEditor(parent)
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.velocity_value);
+	this.form.nextRow();
 	this.form.addText("+/-");
 	this.velocity_spread = new CoordinatesBox(this.form.element);
 	this.velocity_spread.setOnChange(function()
@@ -274,6 +276,7 @@ function ParticleEditor(parent)
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.acceleration_value);
+	this.form.nextRow();
 	this.form.addText("+/-");
 	this.acceleration_spread = new CoordinatesBox(this.form.element);
 	this.acceleration_spread.setOnChange(function()
