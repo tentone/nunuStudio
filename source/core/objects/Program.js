@@ -250,16 +250,16 @@ Program.prototype.addDefaultScene = function(material)
 //Dispose program data
 Program.prototype.dispose = function()
 {
-	//Materials
-	for(var i = 0; i < this.materials.length; i++)
-	{
-		this.materials[i].dispose();
-	}
-
 	//Textures
-	for(var i = 0; i < this.textures.length; i++)
+	for(var i in this.textures)
 	{
 		this.textures[i].dispose();
+	}
+	
+	//Materials
+	for(var i in this.materials)
+	{
+		this.materials[i].dispose();
 	}
 
 	//Children objects
