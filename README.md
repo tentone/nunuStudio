@@ -55,6 +55,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Fixed copy/paste inside object panels
 - V0.8.9.17 Alpha
 	- Particle editor position, velocity and acceleration delta now shows in different a row
+	- Fixed orogram resources dispose
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
@@ -97,8 +98,8 @@ nunuStudio uses a number of open source projects to work properly
 
 ### Installation
 - nunuStudio is intended to run with NWJS direcly on the desktop
-	-Linux and Windows are supported
-- Download the repository and run the start.bat or start.sh file depending on your OS
+	- Linux and Windows are supported
+	- Download the repository and run the start.bat or start.sh file depending on your OS
 
 ### License
 - nunuStudio uses a MIT license (Available on GitHub page)
