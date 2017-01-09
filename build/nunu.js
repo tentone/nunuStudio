@@ -1,6 +1,11 @@
 /*
 
 
+ nunuStudio:
+   license: MIT (http://opensource.org/licenses/MIT)
+   author: Tentone <tentone@outlook.com>
+
+
  opentype.js:
    license: MIT (http://opensource.org/licenses/MIT)
    author: Frederik De Bleser <frederik@debleser.be>
@@ -25,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.17 Alpha";
-Nunu.TIMESTAMP = "201701041641";
+Nunu.TIMESTAMP = "201701090103";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -5147,19 +5152,19 @@ Nunu.webvrAvailable = function() {
     if (void 0 !== d.textures[this.uuid]) {
       return d.textures[this.uuid];
     }
-    var m = {metadata:{version:4.4, type:"Texture", generator:"Texture.toJSON"}, uuid:this.uuid, name:this.name, mapping:this.mapping, repeat:[this.repeat.x, this.repeat.y], offset:[this.offset.x, this.offset.y], wrap:[this.wrapS, this.wrapT], minFilter:this.minFilter, magFilter:this.magFilter, anisotropy:this.anisotropy, flipY:this.flipY};
+    var a = {metadata:{version:4.4, type:"Texture", generator:"Texture.toJSON"}, uuid:this.uuid, name:this.name, mapping:this.mapping, repeat:[this.repeat.x, this.repeat.y], offset:[this.offset.x, this.offset.y], wrap:[this.wrapS, this.wrapT], minFilter:this.minFilter, magFilter:this.magFilter, anisotropy:this.anisotropy, flipY:this.flipY};
     if (void 0 !== this.image) {
-      var a = this.image;
-      void 0 === a.uuid && (a.uuid = la.generateUUID());
-      if (void 0 === d.images[a.uuid]) {
-        var b = d.images, c = a.uuid, e = a.uuid, h;
-        void 0 !== a.toDataURL ? h = a : (h = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas"), h.width = a.width, h.height = a.height, h.getContext("2d").drawImage(a, 0, 0, a.width, a.height));
-        h = 2048 < h.width || 2048 < h.height ? h.toDataURL("image/jpeg", .6) : h.toDataURL("image/png");
-        b[c] = {uuid:e, url:h};
+      var b = this.image;
+      void 0 === b.uuid && (b.uuid = la.generateUUID());
+      if (void 0 === d.images[b.uuid]) {
+        var c = d.images, e = b.uuid, h = b.uuid, f;
+        void 0 !== b.toDataURL ? f = b : (f = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas"), f.width = b.width, f.height = b.height, f.getContext("2d").drawImage(b, 0, 0, b.width, b.height));
+        f = 2048 < f.width || 2048 < f.height ? f.toDataURL("image/jpeg", .6) : f.toDataURL("image/png");
+        c[e] = {uuid:h, url:f};
       }
-      m.image = a.uuid;
+      a.image = b.uuid;
     }
-    return d.textures[this.uuid] = m;
+    return d.textures[this.uuid] = a;
   }, dispose:function() {
     this.dispatchEvent({type:"dispose"});
   }, transformUv:function(d) {
@@ -11618,9 +11623,9 @@ Nunu.webvrAvailable = function() {
       var h = new jd(a);
       h.setCrossOrigin(this.crossOrigin);
       a = 0;
-      for (var m = d.length;a < m;a++) {
-        var f = d[a], n = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(f.url) ? f.url : c.texturePath + f.url;
-        e[f.uuid] = b(n);
+      for (var f = d.length;a < f;a++) {
+        var m = d[a], n = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(m.url) ? m.url : c.texturePath + m.url;
+        e[m.uuid] = b(n);
       }
     }
     return e;
@@ -11632,8 +11637,8 @@ Nunu.webvrAvailable = function() {
       console.warn("THREE.ObjectLoader.parseTexture: Constant should be in numeric form.", d);
       return a[d];
     }
-    var e = {UVMapping:300, CubeReflectionMapping:301, CubeRefractionMapping:302, EquirectangularReflectionMapping:303, EquirectangularRefractionMapping:304, SphericalReflectionMapping:305, CubeUVReflectionMapping:306, CubeUVRefractionMapping:307}, h = {RepeatWrapping:1E3, ClampToEdgeWrapping:1001, MirroredRepeatWrapping:1002}, m = {NearestFilter:1003, NearestMipMapNearestFilter:1004, NearestMipMapLinearFilter:1005, LinearFilter:1006, LinearMipMapNearestFilter:1007, LinearMipMapLinearFilter:1008}, 
-    f = {};
+    var e = {UVMapping:300, CubeReflectionMapping:301, CubeRefractionMapping:302, EquirectangularReflectionMapping:303, EquirectangularRefractionMapping:304, SphericalReflectionMapping:305, CubeUVReflectionMapping:306, CubeUVRefractionMapping:307}, h = {RepeatWrapping:1E3, ClampToEdgeWrapping:1001, MirroredRepeatWrapping:1002}, f = {NearestFilter:1003, NearestMipMapNearestFilter:1004, NearestMipMapLinearFilter:1005, LinearFilter:1006, LinearMipMapNearestFilter:1007, LinearMipMapLinearFilter:1008}, 
+    m = {};
     if (void 0 !== d) {
       for (var n = 0, k = d.length;n < k;n++) {
         var q = d[n];
@@ -11647,14 +11652,14 @@ Nunu.webvrAvailable = function() {
         void 0 !== q.offset && g.offset.fromArray(q.offset);
         void 0 !== q.repeat && g.repeat.fromArray(q.repeat);
         void 0 !== q.wrap && (g.wrapS = c(q.wrap[0], h), g.wrapT = c(q.wrap[1], h));
-        void 0 !== q.minFilter && (g.minFilter = c(q.minFilter, m));
-        void 0 !== q.magFilter && (g.magFilter = c(q.magFilter, m));
+        void 0 !== q.minFilter && (g.minFilter = c(q.minFilter, f));
+        void 0 !== q.magFilter && (g.magFilter = c(q.magFilter, f));
         void 0 !== q.anisotropy && (g.anisotropy = q.anisotropy);
         void 0 !== q.flipY && (g.flipY = q.flipY);
-        f[q.uuid] = g;
+        m[q.uuid] = g;
       }
     }
-    return f;
+    return m;
   }, parseObject:function() {
     var d = new q;
     return function(a, b, c) {
@@ -13096,20 +13101,20 @@ Nunu.webvrAvailable = function() {
     d._cacheIndex = c.length;
     c.push(d);
     h.actionByRoot[b] = d;
-  }, _removeInactiveAction:function(a) {
-    var d = this._actions, b = d[d.length - 1], c = a._cacheIndex;
+  }, _removeInactiveAction:function(d) {
+    var a = this._actions, b = a[a.length - 1], c = d._cacheIndex;
     b._cacheIndex = c;
-    d[c] = b;
-    d.pop();
-    a._cacheIndex = null;
-    var b = a._clip.uuid, c = this._actionsByClip, e = c[b], h = e.knownActions, f = h[h.length - 1], n = a._byClipCacheIndex;
+    a[c] = b;
+    a.pop();
+    d._cacheIndex = null;
+    var b = d._clip.uuid, c = this._actionsByClip, e = c[b], h = e.knownActions, f = h[h.length - 1], n = d._byClipCacheIndex;
     f._byClipCacheIndex = n;
     h[n] = f;
     h.pop();
-    a._byClipCacheIndex = null;
-    delete e.actionByRoot[(d._localRoot || this._root).uuid];
+    d._byClipCacheIndex = null;
+    delete e.actionByRoot[(a._localRoot || this._root).uuid];
     0 === h.length && delete c[b];
-    this._removeInactiveBindingsForAction(a);
+    this._removeInactiveBindingsForAction(d);
   }, _removeInactiveBindingsForAction:function(a) {
     a = a._propertyBindings;
     for (var d = 0, b = a.length;d !== b;++d) {
@@ -16765,9 +16770,9 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
       return this.x = b.x, this.y = b.y, this.z = b.z, this;
     };
     b.prototype.lerp = function(b, c, e) {
-      var h = this.x, f = this.y, k = this.z;
-      e.x = h + (b.x - h) * c;
-      e.y = f + (b.y - f) * c;
+      var f = this.x, h = this.y, k = this.z;
+      e.x = f + (b.x - f) * c;
+      e.y = h + (b.y - h) * c;
       e.z = k + (b.z - k) * c;
     };
     b.prototype.almostEquals = function(b, c) {
@@ -16894,13 +16899,13 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
       return c && n.copy(c), h && k.copy(h), this.shapes.push(b), this.shapeOffsets.push(n), this.shapeOrientations.push(k), this.updateMassProperties(), this.updateBoundingRadius(), this.aabbNeedsUpdate = !0, this;
     };
     b.prototype.updateBoundingRadius = function() {
-      for (var b = this.shapes, c = this.shapeOffsets, e = b.length, h = 0, f = 0;f !== e;f++) {
-        var n = b[f];
+      for (var b = this.shapes, c = this.shapeOffsets, e = b.length, f = 0, h = 0;h !== e;h++) {
+        var n = b[h];
         n.updateBoundingSphereRadius();
-        var k = c[f].norm(), n = n.boundingSphereRadius;
-        k + n > h && (h = k + n);
+        var k = c[h].norm(), n = n.boundingSphereRadius;
+        k + n > f && (f = k + n);
       }
-      this.boundingRadius = h;
+      this.boundingRadius = f;
     };
     var p = new h;
     b.prototype.computeAABB = function() {
@@ -17046,17 +17051,17 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
       }
     };
     b.prototype.updateSuspension = function() {
-      for (var b = this.chassisBody.mass, c = this.wheelInfos, e = c.length, h = 0;e > h;h++) {
-        var f = c[h];
-        if (f.isInContact) {
+      for (var b = this.chassisBody.mass, c = this.wheelInfos, e = c.length, f = 0;e > f;f++) {
+        var h = c[f];
+        if (h.isInContact) {
           var n;
-          n = f.suspensionStiffness * (f.suspensionRestLength - f.suspensionLength) * f.clippedInvContactDotSuspension;
-          var k = f.suspensionRelativeVelocity;
-          n -= (0 > k ? f.dampingCompression : f.dampingRelaxation) * k;
-          f.suspensionForce = n * b;
-          0 > f.suspensionForce && (f.suspensionForce = 0);
+          n = h.suspensionStiffness * (h.suspensionRestLength - h.suspensionLength) * h.clippedInvContactDotSuspension;
+          var k = h.suspensionRelativeVelocity;
+          n -= (0 > k ? h.dampingCompression : h.dampingRelaxation) * k;
+          h.suspensionForce = n * b;
+          0 > h.suspensionForce && (h.suspensionForce = 0);
         } else {
-          f.suspensionForce = 0;
+          h.suspensionForce = 0;
         }
       }
     };
@@ -33499,6 +33504,10 @@ BufferUtils.fromArrayBuffer = function(a) {
 function NunuApp(a) {
   this.program = null;
   void 0 === a ? (this.canvas = document.createElement("canvas"), this.canvas.style.position = "absolute", this.canvas.style.left = "0px", this.canvas.style.top = "0px", this.canvas.style.width = window.innerWidth + "px", this.canvas.style.height = window.innerHeight + "px", this.canvas.width = window.innerWidth, this.canvas.height = window.innerHeight, document.body.appendChild(this.canvas), this.canvas_resize = !0) : (this.canvas = a, this.canvas_resize = !1);
+  a = this.canvas;
+  this.lock_mouse = function() {
+    a.requestPointerLock ? a.requestPointerLock() : a.mozRequestPointerLock ? a.mozRequestPointerLock() : a.webkitRequestPointerLock && a.webkitRequestPointerLock();
+  };
   this.renderer = new THREE.WebGLRenderer({canvas:this.canvas, antialias:!0});
   this.renderer.autoClear = !1;
   this.renderer.shadowMap.enabled = !0;
@@ -33525,6 +33534,7 @@ NunuApp.prototype.run = function() {
     this.program.renderer = this.renderer;
     this.program.initialize();
     this.program.resize(this.canvas.width, this.canvas.height);
+    this.program.lock_pointer && this.canvas.addEventListener("click", this.lock_mouse, !1);
     var a = this, g = function() {
       null !== a.program && (requestAnimationFrame(g), a.update());
     };
@@ -33538,6 +33548,7 @@ NunuApp.prototype.update = function() {
   this.program.render(this.renderer);
 };
 NunuApp.prototype.exit = function() {
+  this.program.lock_pointer && this.canvas.removeEventListener("click", this.lock_mouse, !1);
   null !== this.program && (this.program.dispose(), this.program = null);
   Mouse.dispose();
   Keyboard.dispose();

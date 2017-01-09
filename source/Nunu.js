@@ -1,10 +1,19 @@
+/**
+ * Modules in this bundle
+ * @license
+ *
+ * nunuStudio:
+ *   license: MIT (http://opensource.org/licenses/MIT)
+ *   author: Tentone <tentone@outlook.com>
+ */
+
 "use strict";
 
 function Nunu(){}
 
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.17 Alpha";
-Nunu.TIMESTAMP = "201701041641";
+Nunu.TIMESTAMP = "201701090103";
 
 //Check if webvr is available
 Nunu.webvrAvailable = function()

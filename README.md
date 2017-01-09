@@ -24,6 +24,9 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_b.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_c.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_d.png)
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_a.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_e.png)
 
+### Examples
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/examples/pong.png)(http://tentone.github.io/nunuStudio/examples/pong)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/examples/fps.png)(http://tentone.github.io/nunuStudio/examples/fps)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/examples/spine.png)(http://tentone.github.io/nunuStudio/examples/spine)
+
 ### Todo
 - Documentation website
 - Blockly based visual block scripting
@@ -55,7 +58,8 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Fixed copy/paste inside object panels
 - V0.8.9.17 Alpha
 	- Particle editor position, velocity and acceleration delta now shows in different a row
-	- Fixed orogram resources dispose
+	- Fixed program resources dispose
+	- Added support for mouse lock on runtime
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
