@@ -81,7 +81,10 @@ Program.prototype.initialize = function()
 		Mouse.setLock(true);
 		
 		//TODO <ADD EVENT TO LOCK MOUSE WHEN CANVAS IS CLICKED>
-		//this.canvas.addEventListener("click", function(){Mouse.setLock(true);}, false);
+		/*this.canvas.addEventListener("click", function()
+		{
+			Mouse.setLock(true);
+		}, false);*/
 	}
 }
 

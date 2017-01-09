@@ -115,6 +115,24 @@ function NunuApp(canvas)
 		this.canvas_resize = false;
 	}
 
+	//Lock pointer function
+	var canvas = this.canvas;
+	this.lock_mouse = function()
+	{
+		if(canvas.requestPointerLock)
+		{
+			canvas.requestPointerLock();
+		}
+		else if(canvas.mozRequestPointerLock)
+		{
+			canvas.mozRequestPointerLock();
+		}
+		else if(canvas.webkitRequestPointerLock)
+		{
+			canvas.webkitRequestPointerLock();
+		}
+	};
+
 	//WebGL renderer
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, antialias: true});
 	this.renderer.autoClear = false;
@@ -167,6 +185,12 @@ NunuApp.prototype.run = function()
 	this.program.initialize();
 	this.program.resize(this.canvas.width, this.canvas.height);
 
+	//Lock mouse pointer
+	if(this.program.lock_pointer)
+	{
+		this.canvas.addEventListener("click", this.lock_mouse, false);
+	}
+
 	//Update loop
 	var self = this;
 	var update = function()
@@ -193,6 +217,12 @@ NunuApp.prototype.update = function()
 //Exit from app
 NunuApp.prototype.exit = function()
 {
+	//Remove mouse lock event from canvas
+	if(this.program.lock_pointer)
+	{
+		this.canvas.removeEventListener("click", this.lock_mouse, false);
+	}
+
 	//Dispose and remove program
 	if(this.program !== null)
 	{
