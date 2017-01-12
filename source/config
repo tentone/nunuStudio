@@ -2,7 +2,7 @@
 	"general": {
 		"theme": "dark",
 		"file_preview_size": 70,
-		"show_stats": false
+		"show_stats": true
 	},
 	"editor": {
 		"grid_size": 500,
@@ -15,9 +15,10 @@
 		"transformation_space": "world"
 	},
 	"render": {
+		"use_project_settings": false,
 		"shadows": true,
-		"shadows_type": 2,
-		"antialiasing": true
+		"antialiasing": true,
+		"shadows_type": 1
 	},
 	"code": {
 		"theme": "monokai",

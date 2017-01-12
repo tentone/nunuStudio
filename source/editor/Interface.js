@@ -671,6 +671,12 @@ Interface.initialize = function()
 		Editor.addToScene(new HemisphereLight(0x444444));
 	}, "Hemisphere Light");
 
+	//RectArea Light
+	Interface.add_light.addOption(Interface.file_dir + "icons/lights/directional.png", function()
+	{
+		Editor.addToScene(new RectAreaLight(0x555555, 20, 20, 20));
+	}, "RectArea Light");
+
 	//Sky
 	Interface.add_light.addOption(Interface.file_dir + "icons/lights/sky.png", function()
 	{

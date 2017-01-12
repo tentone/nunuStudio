@@ -55,13 +55,13 @@ function SkyPanel(parent)
 	this.form.nextRow();
 
 	//Actual time 
-	this.form.addText("Time")
+	this.form.addText("Time");
 	this.time = new NumberBox(this.form.element);
 	this.time.size.set(60, 18);
 	this.time.setStep(0.1);
 	this.time.setOnChange(function()
 	{
-		if(self.obj!== null)
+		if(self.obj !== null)
 		{
 			var time = self.time.getValue();
 

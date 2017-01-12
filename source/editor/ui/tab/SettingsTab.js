@@ -234,6 +234,39 @@ function SettingsTab(parent)
 	this.general_form.addText("Rendering Quality");
 	this.general_form.nextRow();
 
+	//Use project settings
+	this.use_project_settings = new CheckBox(this.general_form.element);
+	this.use_project_settings.setText("Follow project settings");
+	this.use_project_settings.size.set(200, 16);
+	this.use_project_settings.setOnChange(function()
+	{
+		Settings.render.use_project_settings = self.use_project_settings.getValue();
+	});
+	this.general_form.add(this.use_project_settings);
+	this.general_form.nextRow();
+
+	//Antialiasing
+	this.antialiasing = new CheckBox(this.general_form.element);
+	this.antialiasing.setText("Antialiasing");
+	this.antialiasing.size.set(200, 16);
+	this.antialiasing.setOnChange(function()
+	{
+		Settings.render.antialiasing = self.antialiasing.getValue();
+	});
+	this.general_form.add(this.antialiasing);
+	this.general_form.nextRow();
+
+	//Shadows
+	this.shadows = new CheckBox(this.general_form.element);
+	this.shadows.setText("Shadows");
+	this.shadows.size.set(50, 15);
+	this.shadows.setOnChange(function()
+	{	
+		Settings.render.shadows = self.shadows.getValue();
+	});
+	this.general_form.add(this.shadows);
+	this.general_form.nextRow();
+
 	//Shadows settings
 	this.general_form.addText("Shadows type");
 	this.shadows_type = new DropdownList(this.general_form.element);
@@ -249,16 +282,7 @@ function SettingsTab(parent)
 	this.general_form.add(this.shadows_type);
 	this.general_form.nextRow();
 
-	//Antialiasing
-	this.antialiasing = new CheckBox(this.general_form.element);
-	this.antialiasing.setText("Antialiasing");
-	this.antialiasing.size.set(200, 16);
-	this.antialiasing.setOnChange(function()
-	{
-		Settings.render.antialiasing = self.antialiasing.getValue();
-	});
-	this.general_form.add(this.antialiasing);
-	this.general_form.nextRow();
+
 
 	//Code tab
 	this.code = this.tab.addTab("Code", "editor/files/icons/script/script.png", false);
@@ -407,8 +431,10 @@ SettingsTab.prototype.activate = function()
 	this.camera_preview_percentage.setValue(Settings.editor.camera_preview_percentage);
 
 	//Render
-	this.shadows_type.setValue(Settings.render.shadows_type);
+	this.use_project_settings.setValue(Settings.render.use_project_settings);
 	this.antialiasing.setValue(Settings.render.antialiasing);
+	this.shadows.setValue(Settings.render.shadows);
+	this.shadows_type.setValue(Settings.render.shadows_type);
 
 	//Code
 	this.code_theme.setValue(Settings.code.theme);
