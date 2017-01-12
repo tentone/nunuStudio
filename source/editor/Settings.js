@@ -22,9 +22,10 @@ Settings.editor.transformation_space = "world";
 
 //Render settings
 Settings.render = {};
+Settings.render.use_project_settings = false;
 Settings.render.shadows = true;
-Settings.render.shadows_type = THREE.PCFSoftShadowMap;
 Settings.render.antialiasing = true;
+Settings.render.shadows_type = THREE.PCFSoftShadowMap;
 
 //Code editor settings
 Settings.code = {};

@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.17 Alpha";
-Nunu.TIMESTAMP = "201701090103";
+Nunu.TIMESTAMP = "201701120421";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -32442,7 +32442,7 @@ function RectAreaLight(a, g, l, b) {
 }
 RectAreaLight.prototype = Object.create(THREE.RectAreaLight.prototype);
 RectAreaLight.prototype.toJSON = function(a) {
-  a = Light.prototype.toJSON.call(this, a);
+  a = THREE.Light.prototype.toJSON.call(this, a);
   a.object.width = this.width;
   a.object.height = this.height;
   return a;

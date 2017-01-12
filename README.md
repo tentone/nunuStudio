@@ -60,6 +60,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Particle editor position, velocity and acceleration delta now shows in different a row
 	- Fixed program resources dispose
 	- Added support for mouse lock on runtime
+	- Added RectArea light support
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
