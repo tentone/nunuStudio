@@ -151,5 +151,9 @@ ProgramPanel.prototype.updatePanel = function()
 		this.lock_pointer.setValue(this.obj.lock_pointer);
 		this.vr.setValue(this.obj.vr);
 		this.vr_scale.setValue(this.obj.vr_scale);
+
+		this.shadows.setValue(this.obj.shadows);
+		this.shadows_type.setValue(this.obj.shadows_type);
+		this.antialiasing.setValue(this.obj.antialiasing);
 	}
 }

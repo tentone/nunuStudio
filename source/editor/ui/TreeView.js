@@ -16,6 +16,13 @@ function TreeView(parent)
 	this.element.style.cursor = "default";
 	this.element.style.backgroundColor = Editor.theme.panel_color;
 
+	//Label
+	this.label = new Text(this.element);
+	this.label.position.set(5, 10);
+	this.label.setText("Project Explorer");
+	this.label.setAlignment(Text.LEFT);
+	this.label.updateInterface();
+
 	//Element atributes
 	this.fit_parent = true;
 	this.size = new THREE.Vector2(0,0);
@@ -104,19 +111,15 @@ TreeView.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-	
-	//Remove children
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].destroy();
-	}
+
+	//Clear children list
 	this.children = [];
 }
 
 //Update tree view children positions
 TreeView.prototype.updateChildPosition = function()
 {
-	var size = TreeView.updateChildPosition(this, 0, 0, false);
+	var size = TreeView.updateChildPosition(this, 20, 0, false);
 
 	if(!this.fit_parent)
 	{

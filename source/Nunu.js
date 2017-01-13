@@ -13,7 +13,7 @@ function Nunu(){}
 
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.17 Alpha";
-Nunu.TIMESTAMP = "201701120421";
+Nunu.TIMESTAMP = "201701130538";
 
 //Check if webvr is available
 Nunu.webvrAvailable = function()

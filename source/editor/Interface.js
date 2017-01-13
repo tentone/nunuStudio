@@ -672,9 +672,9 @@ Interface.initialize = function()
 	}, "Hemisphere Light");
 
 	//RectArea Light
-	Interface.add_light.addOption(Interface.file_dir + "icons/lights/directional.png", function()
+	Interface.add_light.addOption(Interface.file_dir + "icons/lights/rectarea.png", function()
 	{
-		Editor.addToScene(new RectAreaLight(0x555555, 20, 20, 20));
+		Editor.addToScene(new RectAreaLight(0x444444, 100, 1, 1));
 	}, "RectArea Light");
 
 	//Sky

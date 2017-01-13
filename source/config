@@ -15,15 +15,18 @@
 		"transformation_space": "world"
 	},
 	"render": {
-		"use_project_settings": false,
-		"shadows": true,
+		"follow_project": false,
+		"tonemapping": 0,
+		"tonemapping_exposure": 1,
+		"tonemapping_whitepoint": 1,
 		"antialiasing": true,
-		"shadows_type": 1
+		"shadows": true,
+		"shadows_type": 2
 	},
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"font_size": 14,
+		"font_size": 17,
 		"line_numbers": true,
 		"line_wrapping": false,
 		"auto_close_brackets": true,

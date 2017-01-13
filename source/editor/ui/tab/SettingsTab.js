@@ -235,14 +235,14 @@ function SettingsTab(parent)
 	this.general_form.nextRow();
 
 	//Use project settings
-	this.use_project_settings = new CheckBox(this.general_form.element);
-	this.use_project_settings.setText("Follow project settings");
-	this.use_project_settings.size.set(200, 16);
-	this.use_project_settings.setOnChange(function()
+	this.follow_project = new CheckBox(this.general_form.element);
+	this.follow_project.setText("Follow project settings");
+	this.follow_project.size.set(200, 16);
+	this.follow_project.setOnChange(function()
 	{
-		Settings.render.use_project_settings = self.use_project_settings.getValue();
+		Settings.render.follow_project = self.follow_project.getValue();
 	});
-	this.general_form.add(this.use_project_settings);
+	this.general_form.add(this.follow_project);
 	this.general_form.nextRow();
 
 	//Antialiasing
@@ -281,8 +281,6 @@ function SettingsTab(parent)
 	});
 	this.general_form.add(this.shadows_type);
 	this.general_form.nextRow();
-
-
 
 	//Code tab
 	this.code = this.tab.addTab("Code", "editor/files/icons/script/script.png", false);
@@ -431,7 +429,7 @@ SettingsTab.prototype.activate = function()
 	this.camera_preview_percentage.setValue(Settings.editor.camera_preview_percentage);
 
 	//Render
-	this.use_project_settings.setValue(Settings.render.use_project_settings);
+	this.follow_project.setValue(Settings.render.follow_project);
 	this.antialiasing.setValue(Settings.render.antialiasing);
 	this.shadows.setValue(Settings.render.shadows);
 	this.shadows_type.setValue(Settings.render.shadows_type);

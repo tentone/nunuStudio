@@ -243,6 +243,7 @@ include("editor/helpers/PhysicsObjectHelper.js");
 include("editor/helpers/WireframeHelper.js");
 include("editor/helpers/BoundingBoxHelper.js");
 include("editor/helpers/GridHelper.js");
+include("editor/helpers/RectAreaLightHelper.js");
 
 include("editor/utils/FontRenderer.js");
 include("editor/utils/MaterialRenderer.js");
@@ -254,6 +255,29 @@ include("editor/history/Action.js");
 include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
+
+//WebVR polyfill
+/*if(navigator.getVRDisplays === undefined)
+{
+	include("lib/webvr-polyfill.js", function()
+	{
+		window.WebVRConfig =
+		{
+			FORCE_ENABLE_VR: true, //Forces availability of VR mode in desktop
+			CARDBOARD_UI_DISABLED: true,
+			ROTATE_INSTRUCTIONS_DISABLED: true,
+			TOUCH_PANNER_DISABLED: true,
+			MOUSE_KEYBOARD_CONTROLS_DISABLED: false,
+			K_FILTER: 1.0, //0 for accelerometer, 1 for gyro
+			PREDICTION_TIME_S: 0.04, //Time predict during fast motion
+			YAW_ONLY: false,
+			DEFER_INITIALIZATION: false,
+			ENABLE_DEPRECATED_API: false,
+			BUFFER_SCALE: 0.5,
+			DIRTY_SUBMIT_FRAME_BINDINGS: false
+		}
+	});
+}*/
 
 //Editor state
 Editor.STATE_IDLE = 8;
@@ -348,7 +372,6 @@ Editor.initialize = function()
 
 	//VR effect and controls
 	Editor.vr_controls = new VRControls();
-	Editor.vr_effect = null;
 
 	//Renderer and canvas
 	Editor.renderer = null;
@@ -488,7 +511,7 @@ Editor.update = function()
 		}
 		else if(Keyboard.keyPressed(Keyboard.CTRL))
 		{
-			if(Editor.panel !== null && !Editor.panel.focused)
+			if(Interface.panel !== null && !Interface.panel.focused)
 			{
 				if(Keyboard.keyJustPressed(Keyboard.C))
 				{
@@ -503,7 +526,8 @@ Editor.update = function()
 					Editor.cutObject();
 				}
 			}
-			else if(Keyboard.keyJustPressed(Keyboard.Y))
+			
+			if(Keyboard.keyJustPressed(Keyboard.Y))
 			{
 				Editor.redo();
 			}
@@ -1256,6 +1280,11 @@ Editor.selectObjectHelper = function()
 		{
 			Editor.object_helper.add(new THREE.PointLightHelper(Editor.selected_object, 1));
 		}
+		//RectArea light
+		else if(Editor.selected_object instanceof THREE.RectAreaLight)
+		{
+			Editor.object_helper.add(new RectAreaLightHelper(Editor.selected_object));
+		}
 		//Spot light
 		else if(Editor.selected_object instanceof THREE.SpotLight)
 		{
@@ -1559,7 +1588,7 @@ Editor.setState = function(state)
 
 		//Use editor camera as default camera for program
 		Editor.program_running.default_camera = Editor.camera;
-		Editor.program_running.renderer = Editor.renderer;
+		Editor.program_running.setRenderer(Editor.renderer);
 
 		//Initialize scene
 		Editor.program_running.initialize();
@@ -1575,8 +1604,6 @@ Editor.setState = function(state)
 		{
 			if(Nunu.webvrAvailable())
 			{
-				Editor.vr_effect = new THREE.VREffect(Editor.renderer);
-				
 				//Show VR button
 				tab.show_buttons_vr = true;
 
@@ -1584,14 +1611,16 @@ Editor.setState = function(state)
 				var vr = true;
 				tab.vr_button.setCallback(function()
 				{
-					//TODO <CHANGE CODE>
-					//Editor.program.setVR(vr);
+					if(vr)
+					{
+						Editor.program_running.displayVR();
+					}
+					else
+					{
+						Editor.program_running.exitVR();
+					}
 
-					//if(Editor.vr_effect !== null)
-					//{
-					//	Editor.vr_effect.setFullScreen(vr_state);
-					//	vr_state = !vr_state;
-					//}
+					vr = !vr;
 				});
 			}
 		}
@@ -1630,7 +1659,6 @@ Editor.disposeRunningProgram = function()
 	{
 		Editor.program_running.dispose();
 		Editor.program_running = null;
-		Editor.vr_effect = null;
 	}
 
 	//Unlock mouse
@@ -1647,18 +1675,40 @@ Editor.setPerformanceMeter = function(stats)
 Editor.setRenderCanvas = function(canvas)
 {
 	Mouse.setCanvas(canvas);
-	Editor.canvas = canvas;
 	Editor.initializeRenderer(canvas);
 }
 
 //Initialize renderer
 Editor.initializeRenderer = function(canvas)
 {
-	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: Settings.render.antialiasing});
+	if(canvas === undefined)
+	{
+		canvas = Editor.canvas;
+	}
+	else
+	{
+		Editor.canvas = canvas;
+	}
+
+	//Get rendering quality settings
+	var antialiasing = Settings.render.follow_project ? Editor.program.antialiasing : Settings.render.antialiasing;
+	var shadows = Settings.render.follow_project ? Editor.program.shadows : Settings.render.shadows;
+	var shadows_type = Settings.render.follow_project ? Editor.program.shadows_type : Settings.render.shadows_type;
+
+	//Dispose old renderer
+	if(Editor.renderer !== null)
+	{
+		Editor.renderer.dispose();
+	}
+
+	//Create renderer
+	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: antialiasing});
 	Editor.renderer.setSize(canvas.width, canvas.height);
+	Editor.renderer.shadowMap.enabled = shadows;
+	Editor.renderer.shadowMap.type = shadows_type;
 	Editor.renderer.autoClear = false;
-	Editor.renderer.shadowMap.enabled = Settings.render.shadows;
-	Editor.renderer.shadowMap.type = Settings.render.shadows_type;
+
+	//Get webgl context
 	Editor.gl = Editor.renderer.context;
 }
 
