@@ -20,11 +20,14 @@ Settings.editor.camera_preview_percentage = 0.35;
 Settings.editor.lock_mouse = true;
 Settings.editor.transformation_space = "world";
 
-//Render settings
+//Rendering settings
 Settings.render = {};
-Settings.render.use_project_settings = false;
-Settings.render.shadows = true;
+Settings.render.follow_project = false;
+Settings.render.tonemapping = THREE.NoToneMapping;
+Settings.render.tonemapping_exposure = 1.0;
+Settings.render.tonemapping_whitepoint = 1.0;
 Settings.render.antialiasing = true;
+Settings.render.shadows = true;
 Settings.render.shadows_type = THREE.PCFSoftShadowMap;
 
 //Code editor settings
@@ -60,34 +63,10 @@ Settings.load = function()
 	{
 		var data = JSON.parse(FileSystem.readFile("config"));
 		
-		//General
-		Settings.general.theme = data.general.theme;
-		Settings.general.file_preview_size = data.general.file_preview_size;
-		Settings.general.show_stats = data.general.show_stats;
-
-		//Editor
-		Settings.editor.grid_size = data.editor.grid_size;
-		Settings.editor.grid_spacing = data.editor.grid_spacing;
-		Settings.editor.grid_enabled = data.editor.grid_enabled;
-		Settings.editor.axis_enabled = data.editor.axis_enabled;
-		Settings.editor.camera_preview_enabled = data.editor.camera_preview_enabled;
-		Settings.editor.camera_preview_percentage = data.editor.camera_preview_percentage;
-		Settings.editor.lock_mouse = data.editor.lock_mouse;
-		Settings.editor.transformation_space = data.editor.transformation_space;
-		
-		//Render settings
-		Settings.render.shadows = data.render.shadows;
-		Settings.render.shadows_type = data.render.shadows_type;
-		Settings.render.antialiasing = data.render.antialiasing;
-
-		//Code editor settings
-		Settings.code.theme = data.code.theme;
-		Settings.code.font_size = data.code.font_size;
-		Settings.code.keymap = data.code.keymap;
-		Settings.code.line_numbers = data.code.line_numbers;
-		Settings.code.line_wrapping = data.code.line_wrapping;
-		Settings.code.auto_close_brackets = data.code.auto_close_brackets;
-		Settings.code.highlight_active_line = data.code.highlight_active_line;
+		Settings.general = data.general;
+		Settings.editor = data.editor;
+		Settings.render = data.render;
+		Settings.code = data.code;
 	}
 	catch(e){}
 }

@@ -166,20 +166,15 @@ NunuApp.prototype.run = function()
 	Mouse.initialize();
 	Mouse.setCanvas(this.canvas);
 
-	//Virtual reality
-	if(this.program.vr === true && Nunu.webvrAvailable())
-	{
-		this.vr_controls = new VRControls();
-		this.vr_effect = new THREE.VREffect(this.renderer);
-	}
-
 	//Attach this runtime to program
 	this.program.app = this;
 
 	//Create default camera
 	this.program.default_camera = new PerspectiveCamera(60, this.canvas.width/this.canvas.height, 0.1, 1000000);
 	this.program.default_camera.position.set(0, 5, -5);
-	this.program.renderer = this.renderer;
+
+	//Set renderer
+	this.program.setRenderer(this.renderer);
 	
 	//Initialize program
 	this.program.initialize();

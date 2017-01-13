@@ -115,6 +115,7 @@ function MaterialAsset(parent)
 			{
 				self.material.name = prompt("Rename material", self.material.name);
 				self.updateMetadata();
+				Editor.updateTabsData();
 			}
 		});
 		

@@ -44,7 +44,7 @@ function Panel(parent)
 		self.focused = true;
 	};
 
-	this.element.onmouseout = function()
+	this.element.onmouseleave = function()
 	{
 		self.focused = false;
 	};
@@ -82,6 +82,7 @@ function Panel(parent)
 		{
 			var position = self.position.getValue();
 			self.obj.position.set(position.x, position.y, position.z);
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.position);
@@ -97,6 +98,7 @@ function Panel(parent)
 		{
 			var scale = self.scale.getValue();
 			self.obj.scale.set(scale.x, scale.y, scale.z);
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.scale);
@@ -112,6 +114,7 @@ function Panel(parent)
 		{
 			var rotation = self.rotation.getValue();
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.rotation);
