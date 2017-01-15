@@ -33,12 +33,12 @@
 			{
 				if(Nunu.fullscreen === true)
 				{
-					Nunu.setFullscreen(false);
+					NunuApp.setFullscreen(false);
 					app.resize();
 				}
 				else
 				{
-					Nunu.setFullscreen(true);
+					NunuApp.setFullscreen(true);
 					app.resize();
 				}
 			}
@@ -46,10 +46,18 @@
 			var vr = true;
 			function toggleVR()
 			{
-				if(app.vr_effect !== null)
+				if(app !== null)
 				{
-					app.vr_effect.setFullScreen(vr);
 					vr = !vr;
+					
+					if(vr)
+					{
+						NunuApp.program.displayVR();
+					}
+					else
+					{
+						NunuApp.program.exitVR();
+					}
 				}
 			}
 		</script>
