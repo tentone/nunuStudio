@@ -61,6 +61,8 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Fixed program resources dispose
 	- Added support for mouse lock on runtime
 	- Added RectArea light support
+	- Added MTL loading support
+	- Added program, scene and self variables to scripts (can be used without this.)
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

@@ -222,10 +222,32 @@ FileSystem.chooseFile = function(callback, filter, saveas)
 	chooser.click();
 }
 
+FileSystem.fileExists = function(file)
+{
+	if(FileSystem.fs !== undefined)
+	{
+		return FileSystem.fs.existsSync(file);
+	}
+
+	return false;
+}
+
 //Get file name from file path string
 FileSystem.getFileName = function(file)
 {
 	return file.substring(file.lastIndexOf("\\") + 1, file.lastIndexOf("."));
+}
+
+//Get file name without extension
+FileSystem.getNameWithoutExtension = function(file)
+{
+	return file.substring(0, file.lastIndexOf("."));
+}
+
+//Get file directoty
+FileSystem.getFilePath = function(file)
+{
+	return file.substring(0, file.lastIndexOf("\\") + 1);
 }
 
 //Get file extension from file path string

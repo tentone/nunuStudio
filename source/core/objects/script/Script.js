@@ -6,7 +6,7 @@ function Script(code)
 	this.name = "script";
 
 	this.script = null;
-	this.setCode((code !== undefined) ? code : Script.default);
+	this.code = (code !== undefined) ? code : Script.default 
 
 	this.program = null;
 	this.scene = null;
@@ -35,14 +35,19 @@ Script.prototype.initialize = function()
 		}
 	}
 
-	if(this.script.initialize !== undefined)
-	{
-		this.script.initialize.call(this);
-	}
+	//Compile script
+	this.setCode(this.code);	
 
+	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
+	}
+
+	//Initialize script
+	if(this.script.initialize !== undefined)
+	{
+		this.script.initialize.call(this);
 	}
 }
 
@@ -81,10 +86,15 @@ Script.prototype.resize = function()
 //Define script code
 Script.prototype.setCode = function(code)
 {
-	try
+	if(code !== undefined)
 	{
 		this.code = code;
-		this.script = new(new Function(this.code))();
+	}
+
+	//Compile code and create object
+	try
+	{
+		this.script = new(new Function("Keyboard, Mouse, self, program, scene", this.code))(Keyboard, Mouse, this, this.program, this.scene);
 	}
 	catch(e)
 	{

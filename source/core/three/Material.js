@@ -1,11 +1,11 @@
 "use strict";
 
 //Dispose material
-THREE.Material.dispose = function()
+THREE.Material.prototype.dispose = function()
 {
 	function disposeTexture(texture)
 	{
-		if(texture !== undefined)
+		if(texture !== undefined && texture !== null)
 		{
 			texture.dispose();
 		}
