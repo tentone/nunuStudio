@@ -102,7 +102,7 @@ function TreeElement(container)
 
 			//Context menu object
 			var menu = new ContextMenu();
-			menu.size.set(130, 20);
+			menu.size.set(140, 20);
 			menu.position.set(event.clientX - 5, event.clientY - 5);
 			
 			menu.addOption("Rename", function()
@@ -143,6 +143,24 @@ function TreeElement(container)
 				menu.addOption("Set dynamic", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, true);
+					Editor.updateObjectViews();
+				});
+
+				//Set object and children shadow casting mode
+				menu.addOption("Enable shadows", function()
+				{
+					ObjectUtils.setShadowCasting(self.obj, true);
+					ObjectUtils.setShadowReceiving(self.obj, true);
+
+					Editor.updateObjectViews();
+				});
+
+				//Set object and children shadow casting mode
+				menu.addOption("Disable shadows", function()
+				{
+					ObjectUtils.setShadowCasting(self.obj, false);
+					ObjectUtils.setShadowReceiving(self.obj, false);
+
 					Editor.updateObjectViews();
 				});
 
