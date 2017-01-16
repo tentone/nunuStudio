@@ -43,6 +43,7 @@ include("core/three/Texture.js");
 include("core/three/LightShadow.js");
 include("core/three/Fog.js");
 include("core/three/Material.js");
+include("core/three/MultiMaterial.js");
 
 include("core/input/Key.js");
 include("core/input/Keyboard.js");

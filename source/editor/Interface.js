@@ -43,7 +43,20 @@ Interface.initialize = function()
 			if(files.length > 0)
 			{
 				var file = files[0].path;
+				var path = FileSystem.getFilePath(file)
+
+				var mtl = FileSystem.getNameWithoutExtension(file) + ".mtl";
 				var loader = new THREE.OBJLoader();
+
+				if(FileSystem.fileExists(mtl))
+				{
+					var mtl_loader = new THREE.MTLLoader()
+					mtl_loader.setPath(path);
+					var materials = mtl_loader.parse(FileSystem.readFile(mtl));
+
+					loader.setMaterials(materials);
+				}
+
 				var obj = loader.parse(FileSystem.readFile(file));
 				Editor.addToScene(obj);
 			}
@@ -242,6 +255,25 @@ Interface.initialize = function()
 			}
 		}, ".pcd");
 	});
+
+	/*//Import materials
+	var import_materials = Interface.asset_file.addMenu("Materials", Interface.file_dir + "icons/misc/material.png");
+
+	//OBJ file loader
+	import_materials.addOption("MTL File", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			if(files.length > 0)
+			{
+				var file = files[0].path;
+				var loader = new THREE.MTLLoader()
+				loader.setPath(FileSystem.getFilePath(file));
+
+				var materials = loader.parse(FileSystem.readFile(file));
+			}
+		}, ".mtl");
+	}, Interface.file_dir + "icons/misc/material.png");*/
 
 	//Textures menu
 	var import_texture = Interface.asset_file.addMenu("Texture", Interface.file_dir + "icons/misc/image.png");
