@@ -139,10 +139,12 @@ include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/PCDLoader.js");
+//include("lib/three/loaders/DRACOLoader.js");
 
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/quickhull.js");
+//include("lib/draco.js");
 
 //Core modules
 include("core/utils/Mesh2shape.js");
