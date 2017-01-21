@@ -6,7 +6,9 @@ function Editor(){}
 try
 {
 	Editor.fs = require("fs");
+	Editor.os = require("os");
 	Editor.gui = require("nw.gui");
+	
 	Editor.clipboard = Editor.gui.Clipboard.get();
 	Editor.args = Editor.gui.App.argv;
 }
@@ -139,12 +141,10 @@ include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/PCDLoader.js");
-//include("lib/three/loaders/DRACOLoader.js");
 
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/quickhull.js");
-//include("lib/draco.js");
 
 //Core modules
 include("core/utils/Mesh2shape.js");
@@ -218,8 +218,6 @@ include("editor/ui/panels/ScriptPanel.js");
 include("editor/ui/panels/ScenePanel.js");
 include("editor/ui/panels/ProgramPanel.js");
 include("editor/ui/panels/PhysicsPanel.js");
-include("editor/ui/panels/mesh/MeshPanel.js");
-include("editor/ui/panels/mesh/Text3DPanel.js");
 include("editor/ui/panels/devices/LeapPanel.js");
 include("editor/ui/panels/devices/KinectPanel.js");
 include("editor/ui/panels/cameras/PerspectiveCameraPanel.js");
@@ -231,6 +229,10 @@ include("editor/ui/panels/lights/HemisphereLightPanel.js");
 include("editor/ui/panels/lights/PointLightPanel.js");
 include("editor/ui/panels/lights/DirectionalLightPanel.js");
 include("editor/ui/panels/lights/SpotLightPanel.js");
+include("editor/ui/panels/mesh/MeshPanel.js");
+include("editor/ui/panels/mesh/Text3DPanel.js");
+include("editor/ui/panels/mesh/geometry/BoxGeometryPanel.js");
+
 
 include("editor/tools/TransformControls.js");
 include("editor/tools/GizmoMaterial.js");
@@ -751,6 +753,7 @@ Editor.render = function()
 			renderer.setScissor(offset, 10, width, height);
 			renderer.clear();
 
+			//Preview selected camera
 			if(Editor.selected_object instanceof THREE.Camera)
 			{
 				var camera = Editor.selected_object;
@@ -762,6 +765,7 @@ Editor.render = function()
 
 				renderer.render(Editor.program.scene, camera);
 			}
+			//Preview all cameras in use
 			else
 			{
 				var scene = Editor.program.scene;
@@ -893,6 +897,7 @@ Editor.copyObject = function(obj)
 			Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
 		}
 	}
+	//If no object passed copy selected object
 	else if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
 	{
 		if(Editor.clipboard !== undefined)
@@ -1174,37 +1179,43 @@ Editor.selectObjectPanel = function()
 
 	if(Editor.selected_object !== null)
 	{
-		if(Editor.selected_object instanceof Text3D)
+		if(Editor.selected_object instanceof THREE.Mesh)
 		{
-			Interface.panel = new Text3DPanel(Interface.explorer_resizable.div_b);
-		}
-		else if(Editor.selected_object instanceof THREE.Mesh)
-		{
-			Interface.panel = new MeshPanel(Interface.explorer_resizable.div_b);
-		}
-		else if(Editor.selected_object instanceof THREE.PointLight)
-		{
-			Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b);
-		}
-		else if(Editor.selected_object instanceof THREE.RectAreaLight)
-		{
-			Interface.panel = new RectAreaLightPanel(Interface.explorer_resizable.div_b);
-		}
-		else if(Editor.selected_object instanceof THREE.SpotLight)
-		{
-			Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b);
-		}
-		else if(Editor.selected_object instanceof THREE.DirectionalLight)
-		{
-			Interface.panel = new DirectionalLightPanel(Interface.explorer_resizable.div_b);
-		}
-		else if(Editor.selected_object instanceof THREE.HemisphereLight)
-		{
-			Interface.panel = new HemisphereLightPanel(Interface.explorer_resizable.div_b);
+			if(Editor.selected_object instanceof Text3D)
+			{
+				Interface.panel = new Text3DPanel(Interface.explorer_resizable.div_b);
+			}
+			else
+			{
+				Interface.panel = new MeshPanel(Interface.explorer_resizable.div_b);
+			}
 		}
 		else if(Editor.selected_object instanceof THREE.Light)
 		{
-			Interface.panel = new LightPanel(Interface.explorer_resizable.div_b);
+			if(Editor.selected_object instanceof THREE.PointLight)
+			{
+				Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b);
+			}
+			else if(Editor.selected_object instanceof THREE.RectAreaLight)
+			{
+				Interface.panel = new RectAreaLightPanel(Interface.explorer_resizable.div_b);
+			}
+			else if(Editor.selected_object instanceof THREE.SpotLight)
+			{
+				Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b);
+			}
+			else if(Editor.selected_object instanceof THREE.DirectionalLight)
+			{
+				Interface.panel = new DirectionalLightPanel(Interface.explorer_resizable.div_b);
+			}
+			else if(Editor.selected_object instanceof THREE.HemisphereLight)
+			{
+				Interface.panel = new HemisphereLightPanel(Interface.explorer_resizable.div_b);
+			}
+			else
+			{
+				Interface.panel = new LightPanel(Interface.explorer_resizable.div_b);
+			}
 		}
 		else if(Editor.selected_object instanceof Sky)
 		{
@@ -1230,7 +1241,7 @@ Editor.selectObjectPanel = function()
 		{
 			Interface.panel = new OrthographicCameraPanel(Interface.explorer_resizable.div_b);
 		}
-		else if(Editor.selected_object instanceof AudioEmitter || Editor.selected_object instanceof PositionalAudio)
+		else if(Editor.selected_object instanceof THREE.Audio)
 		{
 			Interface.panel = new AudioPanel(Interface.explorer_resizable.div_b);
 		}
@@ -1273,30 +1284,34 @@ Editor.selectObjectHelper = function()
 			Editor.object_helper.add(new THREE.CameraHelper(Editor.selected_object));
 			Editor.object_helper.add(new ObjectIconHelper(Editor.selected_object, Interface.file_dir + "icons/camera/camera.png"));
 		}
-		//Directional light
-		else if(Editor.selected_object instanceof THREE.DirectionalLight)
+		//Light
+		else if(Editor.selected_object instanceof THREE.Light)
 		{
-			Editor.object_helper.add(new THREE.DirectionalLightHelper(Editor.selected_object, 1));
-		}
-		//Point light
-		else if(Editor.selected_object instanceof THREE.PointLight)
-		{
-			Editor.object_helper.add(new THREE.PointLightHelper(Editor.selected_object, 1));
-		}
-		//RectArea light
-		else if(Editor.selected_object instanceof THREE.RectAreaLight)
-		{
-			Editor.object_helper.add(new RectAreaLightHelper(Editor.selected_object));
-		}
-		//Spot light
-		else if(Editor.selected_object instanceof THREE.SpotLight)
-		{
-			Editor.object_helper.add(new THREE.SpotLightHelper(Editor.selected_object));
-		}
-		//Hemisphere light
-		else if(Editor.selected_object instanceof THREE.HemisphereLight)
-		{
-			Editor.object_helper.add(new THREE.HemisphereLightHelper(Editor.selected_object, 1));
+			//Directional light
+			if(Editor.selected_object instanceof THREE.DirectionalLight)
+			{
+				Editor.object_helper.add(new THREE.DirectionalLightHelper(Editor.selected_object, 1));
+			}
+			//Point light
+			else if(Editor.selected_object instanceof THREE.PointLight)
+			{
+				Editor.object_helper.add(new THREE.PointLightHelper(Editor.selected_object, 1));
+			}
+			//RectArea light
+			else if(Editor.selected_object instanceof THREE.RectAreaLight)
+			{
+				Editor.object_helper.add(new RectAreaLightHelper(Editor.selected_object));
+			}
+			//Spot light
+			else if(Editor.selected_object instanceof THREE.SpotLight)
+			{
+				Editor.object_helper.add(new THREE.SpotLightHelper(Editor.selected_object));
+			}
+			//Hemisphere light
+			else if(Editor.selected_object instanceof THREE.HemisphereLight)
+			{
+				Editor.object_helper.add(new THREE.HemisphereLightHelper(Editor.selected_object, 1));
+			}
 		}
 		//Particle
 		else if(Editor.selected_object instanceof ParticleEmitter)
@@ -1309,22 +1324,20 @@ Editor.selectObjectHelper = function()
 			Editor.object_helper.add(new PhysicsObjectHelper(Editor.selected_object));
 		}
 		//Script or Audio
-		else if(Editor.selected_object instanceof Script || Editor.selected_object instanceof AudioEmitter)
+		else if(Editor.selected_object instanceof Script || Editor.selected_object instanceof THREE.Audio)
 		{
 			Editor.object_helper.add(new ObjectIconHelper(Editor.selected_object, ObjectIcons.get(Editor.selected_object.type)));
 		}
 		//Animated Mesh
 		else if(Editor.selected_object instanceof THREE.SkinnedMesh)
 		{
-			Editor.object_helper.add(new BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
-			Editor.object_helper.add(new WireframeHelper(Editor.selected_object));
+			Editor.object_helper.add(new WireframeHelper(Editor.selected_object, 0xFFFF00));
 			Editor.object_helper.add(new THREE.SkeletonHelper(Editor.selected_object));
 		}
 		//Mesh
 		else if(Editor.selected_object instanceof THREE.Mesh)
 		{
-			Editor.object_helper.add(new BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
-			Editor.object_helper.add(new WireframeHelper(Editor.selected_object));
+			Editor.object_helper.add(new WireframeHelper(Editor.selected_object, 0xFFFF00));
 		}
 		//Object 3D
 		else if(Editor.selected_object instanceof THREE.Object3D)

@@ -10,11 +10,8 @@ function ParticleEmitterHelper(particle)
 	if(particle instanceof ParticleEmitter)
 	{
 		this.runtime = new ObjectLoader().parse(particle.toJSON());
-		this.add(this.runtime);
 		this.runtime.initialize();
-
-		this.runtime.matrix = particle.matrixWorld;
-		this.runtime.matrixAutoUpdate = false;
+		this.add(this.runtime);
 	}
 }
 
@@ -24,7 +21,10 @@ ParticleEmitterHelper.prototype.update = function()
 {
 	if(this.runtime !== null)
 	{
-		this.runtime.matrix = this.particle.matrixWorld;
+		this.runtime.position.copy(this.particle.position);
+		this.runtime.rotation.copy(this.particle.rotation);
+		this.runtime.scale.copy(this.particle.scale);
+		this.runtime.updateMatrix();
 		this.runtime.update();
 	}
 }

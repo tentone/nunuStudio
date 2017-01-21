@@ -4,14 +4,9 @@ function DropdownMenu(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "dropdown" + Button.id;
-	DropdownMenu.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.zIndex = "100";
 	this.element.style.cursor = "default";
@@ -93,9 +88,6 @@ function DropdownMenu(parent)
 	this.parent.appendChild(this.panel);
 }
 
-//DropdownMenu ID counter
-DropdownMenu.id = 0;
-
 //Options location
 DropdownMenu.DOWN = 0;
 DropdownMenu.UP = 1;
@@ -126,17 +118,9 @@ DropdownMenu.prototype.destroy = function()
 	try
 	{
 		this.parent.removeChild(this.element);
+		this.parent.removeChild(this.panel);
 	}
 	catch(e){}
-
-	for(var k = 0; k < this.options.length; k++)
-	{
-		this.options[k].destroy();
-	}
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].destroy();
-	}
 }
 
 //Update

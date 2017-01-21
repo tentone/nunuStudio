@@ -13,10 +13,6 @@ function TreeElement(container)
 	}
 
 	this.parent = this.container.element;
-	
-	//ID
-	var id = "tree_elem" + TreeElement.id;
-	TreeElement.id++;
 
 	//Create element
 	this.element = document.createElement("div");
@@ -353,9 +349,6 @@ function TreeElement(container)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//TreeElement conter
-TreeElement.id = 0;
 
 //Set object attached to element
 TreeElement.prototype.setObject = function(obj)

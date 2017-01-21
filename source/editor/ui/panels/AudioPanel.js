@@ -7,6 +7,21 @@ function AudioPanel(parent)
 	//Self pointer
 	var self = this;
 	
+	//Playback Rate
+	this.form.addText("Playback Rate");
+	this.playbackRate = new NumberBox(this.form.element);
+	this.playbackRate.size.set(60, 18);
+	this.playbackRate.setStep(0.1);
+	this.playbackRate.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.playbackRate.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.playbackRate = self.playbackRate.getValue();
+		}
+	});
+	this.form.add(this.playbackRate);
+
 	//Autoplay
 	this.autoplay = new CheckBox(this.form.element);
 	this.autoplay.setText("Autoplay");
@@ -34,21 +49,6 @@ function AudioPanel(parent)
 	});
 	this.form.add(this.loop);
 	this.form.nextRow();
-
-	//Playback Rate
-	this.form.addText("Playback Speed");
-	this.playbackRate = new NumberBox(this.form.element);
-	this.playbackRate.size.set(60, 18);
-	this.playbackRate.setStep(0.01);
-	this.playbackRate.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.playbackRate.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.playbackRate = self.playbackRate.getValue();
-		}
-	});
-	this.form.add(this.playbackRate);
 
 	//Update form
 	this.form.updateInterface();

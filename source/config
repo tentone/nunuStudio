@@ -2,7 +2,7 @@
 	"general": {
 		"theme": "dark",
 		"file_preview_size": 70,
-		"show_stats": false
+		"show_stats": true
 	},
 	"editor": {
 		"grid_size": 500,
@@ -26,7 +26,7 @@
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"font_size": 16.494444656372078,
+		"font_size": 14,
 		"line_numbers": true,
 		"line_wrapping": false,
 		"auto_close_brackets": true,

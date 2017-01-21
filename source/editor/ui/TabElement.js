@@ -5,13 +5,8 @@ function TabElement(parent, name, icon, closeable, container, index)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "tab" + TabGroup.id;
-	TabElement.id++;
-
 	//Element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
 	this.element.style.overflow = "hidden";
@@ -48,9 +43,6 @@ function TabElement(parent, name, icon, closeable, container, index)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//ID counter
-TabElement.id = 0;
 
 //Close tab
 TabElement.prototype.close = function()

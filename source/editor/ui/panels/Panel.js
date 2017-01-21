@@ -4,9 +4,6 @@ function Panel(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	Panel.id++;
 
 	//Create element
 	this.element = document.createElement("div");
@@ -123,9 +120,6 @@ function Panel(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//Panel conter
-Panel.id = 0;
 
 //Update panel with object data
 Panel.prototype.updatePanel = function(){}

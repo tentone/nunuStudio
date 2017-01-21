@@ -80,22 +80,6 @@ Interface.initialize = function()
 		}, ".dae");
 	});
 
-	//Draco file loader
-	/*import_models.addOption("Draco", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.DRACOLoader();
-				var geometry = loader.decodeDracoFile(FileSystem.readFileArrayBuffer(file));
-				var mesh = new Mesh(geometry, new MeshStandardMaterial());
-				Editor.addToScene(mesh);
-			}
-		}, ".drc");
-	});*/
-
 	//ThreeJS file format menu
 	var import_models_three = import_models.addMenu("ThreeJS");
 
