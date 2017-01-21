@@ -7,7 +7,6 @@ function Element(parent, tag)
 
 	//Element
 	this.element = document.createElement(tag);
-	this.element.id = tag + Element.id++;
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
 
@@ -30,9 +29,6 @@ function Element(parent, tag)
 	//Add to parent
 	this.parent.appendChild(this.element);
 }
-
-//Element conter
-Element.id = 0;
 
 //Remove element
 Element.prototype.destroy = function()

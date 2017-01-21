@@ -11,7 +11,7 @@ function ThemeDark()
 	//Font
 	this.font = "Arial";
 
-	//Colors
+	//Color
 	this.bar_color = "#222222";
 	this.panel_color = "#333333";
 	this.resize_tab_color = "#222222";

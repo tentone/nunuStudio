@@ -197,28 +197,27 @@ FileSystem.chooseFile = function(callback, filter, saveas)
 {
 	var chooser = document.createElement("input");
 	chooser.type = "file";
-	chooser.accept = (filter !== undefined) ? filter : "";
+
+	if(filter !== undefined)
+	{
+		chooser.accept = filter;
+	}
 
 	if(saveas !== undefined)
 	{
-		if(saveas !== true)
-		{
-			chooser.nwsaveas = saveas;
-		}
-		else
-		{
-			chooser.nwsaveas = "file";
-		}
+		chooser.nwsaveas = (saveas !== true) ? saveas : "file";
 	}
 
 	chooser.onchange = function(event)
 	{
+		console.log("onchange");
+
 		if(callback !== undefined)
 		{
 			callback(chooser.files);
 		}
 	};
-
+	
 	chooser.click();
 }
 

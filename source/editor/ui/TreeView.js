@@ -5,10 +5,6 @@ function TreeView(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "tree" + TreeView.id;
-	TreeView.id++;
-
 	//Create element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
@@ -39,9 +35,6 @@ function TreeView(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//TreeView conter
-TreeView.id = 0;
 
 //Set data from object
 TreeView.prototype.attachObject = function(obj)

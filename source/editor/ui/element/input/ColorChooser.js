@@ -19,10 +19,12 @@ function ColorChooser(parent)
 
 	//Color chooser
 	this.color = new jscolor(this.element);
+	this.color.backgroundColor = Editor.theme.box_color;
+	this.color.insetColor = Editor.theme.box_color;
 	this.color.shadow = false;
 	this.color.borderWidth = 0;
 	this.color.borderRadius = 0;
-	this.color.zIndex = 500;
+	this.color.zIndex = 2000;
 
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);

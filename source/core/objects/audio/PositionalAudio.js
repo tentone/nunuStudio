@@ -2,7 +2,7 @@
 
 function PositionalAudio(audio)
 {
-	THREE.PositionalAudio.call(this, PositionalAudio.listener);
+	THREE.PositionalAudio.call(this, AudioEmitter.listener);
 
 	this.name = "audio";
 	this.type = "PositionalAudio";
@@ -19,13 +19,9 @@ function PositionalAudio(audio)
 
 	//Runtime variables
 	this.cameras = null;
-
 	this.temp_a = new THREE.Vector3();
 	this.temp_b = new THREE.Vector3();
 }
-
-//Default audio listener
-PositionalAudio.listener = new THREE.AudioListener();
 
 //Super prototypes
 PositionalAudio.prototype = Object.create(THREE.PositionalAudio.prototype);
