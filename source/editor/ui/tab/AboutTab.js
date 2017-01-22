@@ -4,14 +4,9 @@ function AboutTab(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "about" + AboutTab.id;
-	AboutTab.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
 	this.element.style.backgroundColor = Editor.theme.bar_color;
@@ -90,9 +85,6 @@ function AboutTab(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//AboutTab counter
-AboutTab.id = 0;
 
 //Update container object data
 AboutTab.prototype.updateMetadata = function(container){}

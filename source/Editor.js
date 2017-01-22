@@ -231,7 +231,7 @@ include("editor/ui/panels/lights/DirectionalLightPanel.js");
 include("editor/ui/panels/lights/SpotLightPanel.js");
 include("editor/ui/panels/mesh/MeshPanel.js");
 include("editor/ui/panels/mesh/Text3DPanel.js");
-include("editor/ui/panels/mesh/geometry/BoxGeometryPanel.js");
+include("editor/ui/panels/geometry/BoxGeometryPanel.js");
 
 
 include("editor/tools/TransformControls.js");
@@ -374,9 +374,6 @@ Editor.initialize = function()
 	//Editor program and scene
 	Editor.program = null;
 	Editor.program_running = null;
-
-	//VR effect and controls
-	Editor.vr_controls = new VRControls();
 
 	//Renderer and canvas
 	Editor.renderer = null;

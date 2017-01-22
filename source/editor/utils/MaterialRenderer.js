@@ -7,7 +7,7 @@ function MaterialRenderer()
 	this.renderer.setSize(128, 128);
 	
 	//Camera
-	this.camera = new OrthographicCamera(2.2, 1);
+	this.camera = new OrthographicCamera(2.3, 1);
 
 	//Scene
 	this.scene = new THREE.Scene();

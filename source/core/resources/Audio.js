@@ -1,6 +1,5 @@
 "use strict";
 
-//Audio constructor
 function Audio(url)
 {
 	this.name = "audio";
@@ -19,7 +18,7 @@ function Audio(url)
 	}
 }
 
-//Create json description
+//JSON serialization
 Audio.prototype.toJSON = function(meta)
 {
 	if(meta.audio[this.uuid] !== undefined)

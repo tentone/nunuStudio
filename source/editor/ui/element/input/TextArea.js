@@ -5,10 +5,6 @@ function TextArea(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "txt_area" + TextArea.id;
-	TextArea.id++;
-
 	//Create element
 	this.element = document.createElement("textarea");
 	this.element.style.overflow = "auto";
@@ -19,7 +15,6 @@ function TextArea(parent)
 	this.element.style.color = Editor.theme.text_color;
 	this.element.style.borderStyle = "none";
 	
-
 	//Element atributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
@@ -28,9 +23,6 @@ function TextArea(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//TextArea ID counter
-TextArea.id = 0;
 
 //Set if element if disabled
 TextArea.prototype.setDisabled = function(value)

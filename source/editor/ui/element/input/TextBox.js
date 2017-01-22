@@ -5,10 +5,6 @@ function TextBox(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "txt_box" + TextBox.id;
-	TextBox.id++;
-
 	//Create element
 	this.element = document.createElement("input");
 	this.element.type = "text";
@@ -25,9 +21,6 @@ function TextBox(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//TextBox ID counter
-TextBox.id = 0;
 
 //Set if element if disabled
 TextBox.prototype.setDisabled = function(value)

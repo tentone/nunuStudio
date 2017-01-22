@@ -4,7 +4,7 @@ function PointLight(hex, intensity, distance, decay)
 {
 	THREE.PointLight.call(this, hex, intensity, distance, decay);
 
-	this.name = "point light";
+	this.name = "point";
 	
 	this.castShadow = true;
 

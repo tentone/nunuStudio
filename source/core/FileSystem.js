@@ -210,8 +210,6 @@ FileSystem.chooseFile = function(callback, filter, saveas)
 
 	chooser.onchange = function(event)
 	{
-		console.log("onchange");
-
 		if(callback !== undefined)
 		{
 			callback(chooser.files);
@@ -249,8 +247,8 @@ FileSystem.getFilePath = function(file)
 	return file.substring(0, file.lastIndexOf("\\") + 1);
 }
 
-//Get file extension from file path string
+//Get file extension from file path string (always in lowercase)
 FileSystem.getFileExtension = function(file)
 {
-	return file.substring(file.lastIndexOf(".") + 1, file.length);
+	return file.substring(file.lastIndexOf(".") + 1, file.length).toLowerCase();
 }

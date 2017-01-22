@@ -4,14 +4,9 @@ function Bar(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "bar" + Bar.id;
-	Bar.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.backgroundColor = Editor.theme.bar_color;
 
@@ -34,9 +29,6 @@ function Bar(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//Bar conter
-Bar.id = 0;
 
 //Remove element
 Bar.prototype.destroy = function()

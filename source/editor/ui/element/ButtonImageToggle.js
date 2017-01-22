@@ -4,14 +4,9 @@ function ButtonImageToggle(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "but_img_tog" + ButtonImageToggle.id;
-	ButtonImageToggle.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "pointer";
 	this.element.style.display = "flex";
@@ -73,9 +68,6 @@ function ButtonImageToggle(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//ButtonImageToggle ID counter
-ButtonImageToggle.id = 0;
 
 //Remove element
 ButtonImageToggle.prototype.destroy = function()

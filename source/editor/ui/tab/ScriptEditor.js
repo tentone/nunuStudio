@@ -5,13 +5,8 @@ function ScriptEditor(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 	
-	//ID
-	var id = "script_editor" + ScriptEditor.id;
-	ScriptEditor.id++;
-
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panel_color;
@@ -124,9 +119,6 @@ function ScriptEditor(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//ScriptEditor counter
-ScriptEditor.id = 0;
 
 //Set code editor font size
 ScriptEditor.prototype.setFontSize = function(size)

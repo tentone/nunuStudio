@@ -4,14 +4,9 @@ function Graph(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "graph" + Graph.id;
-	Graph.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
 
@@ -56,9 +51,6 @@ function Graph(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//Graph counter
-Graph.id = 0;
 
 //Add graph
 Graph.prototype.addGraph = function(name, color)

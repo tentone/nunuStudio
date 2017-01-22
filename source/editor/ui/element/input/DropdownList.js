@@ -5,10 +5,6 @@ function DropdownList(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "droplist" + DropdownList.id;
-	DropdownList.id++;
-
 	//Create element
 	this.element = document.createElement("select");
 	this.element.style.position = "absolute";
@@ -25,9 +21,6 @@ function DropdownList(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//DropdownList ID counter
-DropdownList.id = 0;
 
 //Set if element if disabled
 DropdownList.prototype.setDisabled = function(value)

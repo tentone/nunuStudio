@@ -4,7 +4,7 @@ function DirectionalLight(hex, intensity)
 {
 	THREE.DirectionalLight.call(this, hex, intensity);
 
-	this.name = "directional light";
+	this.name = "directional";
 	
 	this.castShadow = true;
 	

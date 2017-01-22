@@ -5,13 +5,8 @@ function CodeEditor(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "code" + CodeEditor.id;
-	CodeEditor.id++;
-
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panel_color;
@@ -108,9 +103,6 @@ function CodeEditor(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//CodeEditor ID counter
-CodeEditor.id = 0;
 
 //Set language mode (javascript, glsl, etc)
 CodeEditor.prototype.setMode = function(mode)

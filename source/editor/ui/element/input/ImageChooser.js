@@ -5,10 +5,6 @@ function ImageChooser(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "img_box" + ImageChooser.id;
-	ImageChooser.id++;
-
 	//Create element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
@@ -85,9 +81,6 @@ function ImageChooser(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//ImageChooser ID counter
-ImageChooser.id = 0;
 
 //Set onchange callback function
 ImageChooser.prototype.setOnChange = function(callback)

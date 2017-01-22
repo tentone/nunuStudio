@@ -4,14 +4,9 @@ function SceneEditor(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "scene_editor" + SceneEditor.id;
-	SceneEditor.id++;
 
 	//Create Element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//Canvas
@@ -251,9 +246,6 @@ function SceneEditor(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//SceneEditor counter
-SceneEditor.id = 0;
 
 //Update container object data
 SceneEditor.prototype.updateMetadata = function(container)

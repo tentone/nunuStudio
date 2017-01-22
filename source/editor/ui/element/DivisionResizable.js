@@ -5,13 +5,8 @@ function DivisionResizable(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "div_res" + DivisionResizable.id;
-	DivisionResizable.id++;
-
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
 	this.element.style.overflow = "hidden";
@@ -72,9 +67,6 @@ function DivisionResizable(parent)
 	this.parent.appendChild(this.element);
 	this.parent.appendChild(this.resize_tab);
 }
-
-//DivisionResizable conter
-DivisionResizable.id = 0;
 
 //Resizable side
 DivisionResizable.LEFT = 0;

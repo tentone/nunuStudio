@@ -4,14 +4,9 @@ function Form(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "form" + Form.id;
-	Form.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//Element atributes
@@ -28,9 +23,6 @@ function Form(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//Form conter
-Form.id = 0;
 
 //Add a element to form (in actual row)
 Form.prototype.add = function(elem)

@@ -5,10 +5,6 @@ function CoordinatesBox(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "coord_box" + CoordinatesBox.id;
-	CoordinatesBox.id++;
-
 	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
@@ -98,9 +94,6 @@ function CoordinatesBox(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//CoordinatesBox ID counter
-CoordinatesBox.id = 0;
 
 //Positionbox mode
 CoordinatesBox.VECTOR2 = 2;
