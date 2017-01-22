@@ -1,6 +1,5 @@
 "use strict";
 
-//Image constructor
 function Image(url)
 {
 	this.name = "image";

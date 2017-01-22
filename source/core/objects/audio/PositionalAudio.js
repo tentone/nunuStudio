@@ -64,7 +64,6 @@ PositionalAudio.prototype.update = function()
 	if(this.cameras.length > 0)
 	{
 		this.temp_b.setFromMatrixPosition(this.cameras[0].matrixWorld);
-		//this.panner.setOrientation(this.cameras[0].rotation.x, this.cameras[0].rotation.y, this.cameras[0].rotation.z);
 		this.temp_a.sub(this.temp_b);
 	}
 

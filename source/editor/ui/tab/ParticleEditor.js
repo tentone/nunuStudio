@@ -5,13 +5,8 @@ function ParticleEditor(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 	
-	//ID
-	var id = "particle_editor" + ParticleEditor.id;
-	ParticleEditor.id++;
-
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 
 	//Prevent Drop event
@@ -229,6 +224,9 @@ function ParticleEditor(parent)
 
 	//Position
 	this.form.addText("Position");
+	this.form.nextRow();
+
+	this.form.addText("Initial");
 	this.position_value = new CoordinatesBox(this.form.element);
 	this.position_value.setOnChange(function()
 	{
@@ -237,7 +235,8 @@ function ParticleEditor(parent)
 	});
 	this.form.add(this.position_value);
 	this.form.nextRow();
-	this.form.addText("+/-");
+
+	this.form.addText("Variation");
 	this.position_spread = new CoordinatesBox(this.form.element);
 	this.position_spread.setOnChange(function()
 	{
@@ -249,6 +248,9 @@ function ParticleEditor(parent)
 
 	//Velocity
 	this.form.addText("Velocity");
+	this.form.nextRow();
+
+	this.form.addText("Initial");
 	this.velocity_value = new CoordinatesBox(this.form.element);
 	this.velocity_value.setOnChange(function()
 	{
@@ -257,7 +259,8 @@ function ParticleEditor(parent)
 	});
 	this.form.add(this.velocity_value);
 	this.form.nextRow();
-	this.form.addText("+/-");
+
+	this.form.addText("Variation");
 	this.velocity_spread = new CoordinatesBox(this.form.element);
 	this.velocity_spread.setOnChange(function()
 	{
@@ -269,6 +272,9 @@ function ParticleEditor(parent)
 
 	//Acceleration
 	this.form.addText("Acceleration");
+	this.form.nextRow();
+
+	this.form.addText("Initial");
 	this.acceleration_value = new CoordinatesBox(this.form.element);
 	this.acceleration_value.setOnChange(function()
 	{
@@ -277,7 +283,8 @@ function ParticleEditor(parent)
 	});
 	this.form.add(this.acceleration_value);
 	this.form.nextRow();
-	this.form.addText("+/-");
+
+	this.form.addText("Variation");
 	this.acceleration_spread = new CoordinatesBox(this.form.element);
 	this.acceleration_spread.setOnChange(function()
 	{

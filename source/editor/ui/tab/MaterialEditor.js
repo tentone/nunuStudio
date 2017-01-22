@@ -4,14 +4,9 @@ function MaterialEditor(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "material_editor" + MaterialEditor.id;
-	MaterialEditor.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 
 	this.element.ondrop = function(event)
@@ -325,9 +320,6 @@ function MaterialEditor(parent)
 	this.parent.appendChild(this.element);
 	
 }
-
-//Material editor counter
-MaterialEditor.id = 0;
 
 //Attach material to material editor
 MaterialEditor.prototype.attachMaterial = function(material, material_file)

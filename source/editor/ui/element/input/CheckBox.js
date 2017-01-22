@@ -5,10 +5,6 @@ function CheckBox(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "checkbox" + CheckBox.id;
-	CheckBox.id++;
-
 	//Create element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
@@ -34,9 +30,6 @@ function CheckBox(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//CheckBox ID counter
-CheckBox.id = 0;
 
 //Set if element if disabled
 CheckBox.prototype.setDisabled = function(value)

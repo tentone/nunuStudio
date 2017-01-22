@@ -1,6 +1,5 @@
 "use strict";
 
-//Font constructor
 function Font(url)
 {
 	this.name = "font";
@@ -197,7 +196,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 	}
 }
 
-//Create json description
+//JSON serialization
 Font.prototype.toJSON = function(meta)
 {
 	if(meta.fonts[this.uuid] !== undefined)

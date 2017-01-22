@@ -11,6 +11,7 @@ function File
 	this.data = null;
 }
 
+//JSON serialization
 File.prototype.toJSON = function(meta)
 {
 	var data = {};

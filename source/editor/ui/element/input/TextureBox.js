@@ -5,10 +5,6 @@ function TextureBox(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "texture_box" + TextureBox.id;
-	TextureBox.id++;
-
 	//Base element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
@@ -145,9 +141,6 @@ function TextureBox(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//TextureBox ID counter
-TextureBox.id = 0;
 
 //Set onchange callback function
 TextureBox.prototype.setOnChange = function(callback)

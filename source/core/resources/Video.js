@@ -1,6 +1,5 @@
 "use strict";
 
-//Video constructor
 function Video(url)
 {
 	this.name = "video";
@@ -19,7 +18,7 @@ function Video(url)
 	}
 }
 
-//Create json description
+//JSON serialization
 Video.prototype.toJSON = function(meta)
 {
 	if(meta.videos[this.uuid] !== undefined)

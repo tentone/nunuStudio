@@ -5,10 +5,6 @@ function Slider(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "slider" + Slider.id;
-	Slider.id++;
-
 	//Self pointer
 	var self = this;
 
@@ -50,9 +46,6 @@ function Slider(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//Slider ID counter
-Slider.id = 0;
 
 //Set if element if disabled
 Slider.prototype.setDisabled = function(value)

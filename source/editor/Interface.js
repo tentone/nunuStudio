@@ -32,248 +32,142 @@ Interface.initialize = function()
 	Interface.asset_file.setText("Import");
 	Interface.asset_file.size.set(100, Interface.asset_explorer_bar.size.y);
 	Interface.asset_file.position.set(0,0);
-	
-	var import_models = Interface.asset_file.addMenu("3D Models", Interface.file_dir + "icons/models/models.png");
 
-	//OBJ file loader
-	import_models.addOption("Wavefront OBJ", function()
+	//3D Models Loader
+	Interface.asset_file.addOption("3D Models", function()
 	{
 		FileSystem.chooseFile(function(files)
-		{
+		{	
 			if(files.length > 0)
 			{
 				var file = files[0].path;
-				var path = FileSystem.getFilePath(file)
+				var path = FileSystem.getFilePath(file);
+				var extension = FileSystem.getFileExtension(file);
 
-				var mtl = FileSystem.getNameWithoutExtension(file) + ".mtl";
-				var loader = new THREE.OBJLoader();
-
-				if(FileSystem.fileExists(mtl))
+				//Wavefront OBJ
+				if(extension === "obj")
 				{
-					var mtl_loader = new THREE.MTLLoader()
-					mtl_loader.setPath(path);
-					var materials = mtl_loader.parse(FileSystem.readFile(mtl));
+					var mtl = FileSystem.getNameWithoutExtension(file) + ".mtl";
+					var loader = new THREE.OBJLoader();
 
-					loader.setMaterials(materials);
+					if(FileSystem.fileExists(mtl))
+					{
+						var mtl_loader = new THREE.MTLLoader()
+						mtl_loader.setPath(path);
+						var materials = mtl_loader.parse(FileSystem.readFile(mtl));
+
+						loader.setMaterials(materials);
+					}
+
+					var obj = loader.parse(FileSystem.readFile(file));
+					Editor.addToScene(obj);
 				}
-
-				var obj = loader.parse(FileSystem.readFile(file));
-				Editor.addToScene(obj);
-			}
-		}, ".obj");
-	});
-
-	//Collada file loader
-	import_models.addOption("Collada", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.ColladaLoader();
-				loader.options.convertUpAxis = true;
-				var collada = loader.parse(FileSystem.readFile(file));
-				var scene = collada.scene;
-				Editor.addToScene(scene);
-			}
-		}, ".dae");
-	});
-
-	//ThreeJS file format menu
-	var import_models_three = import_models.addMenu("ThreeJS");
-
-	//ThreeJS Object Loader
-	import_models_three.addOption("Object Loader", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.ObjectLoader();
-				var object = loader.parse(JSON.parse(FileSystem.readFile(file)));
-				Editor.addToScene(object);
-			}
-		}, ".json");
-	});
-
-	//ThreeJS JSON Loader
-	import_models_three.addOption("JSON Loader", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.JSONLoader();
-				var data = loader.parse(JSON.parse(FileSystem.readFile(file)));
-				var materials = data.materials;
-				var geometry = data.geometry;
-
-				//Create material object
-				var material = null;
-				if(materials === undefined || materials.length === 0)
+				//Collada
+				else if(extension === "dae")
 				{
-					material = new THREE.MeshStandardMaterial();
-					material.name = "standard";
+					var loader = new THREE.ColladaLoader();
+					loader.options.convertUpAxis = true;
+					var collada = loader.parse(FileSystem.readFile(file));
+					var scene = collada.scene;
+					Editor.addToScene(scene);
 				}
-				else if(materials.length === 1)
+				//GLTF
+				else if(extension === "gltf")
 				{
-					material = materials[0];
+					var loader = new THREE.GLTFLoader();
+					var gltf = loader.parse(FileSystem.readFile(file));
+					if(gltf.scene !== undefined)
+					{
+						Editor.addToScene(gltf.scene);
+					}
 				}
-				else if(materials.length > 1)
+				//AWD
+				else if(extension === "awd")
 				{
-					material = THREE.MultiMaterial(materials);
+					var loader = new THREE.AWDLoader();
+					var awd = loader.parse(FileSystem.readFileArrayBuffer(file));
+					Editor.addToScene(awd);
 				}
-
-				//Create model
-				var model = null;
-				if(geometry.bones.length > 0)
+				//PLY
+				else if(extension === "ply")
 				{
-					model = new SkinnedMesh(geometry, material);
+					var loader = new THREE.PLYLoader();
+					var geometry = loader.parse(FileSystem.readFile(file));
+					Editor.addToScene(new Mesh(geometry));
 				}
-				else
+				//VTK
+				else if(extension === "vtk" || extension === "vtp")
 				{
-					model = new Mesh(geometry, material);
+					var loader = new THREE.VTKLoader();
+					var geometry = loader.parse(FileSystem.readFileArrayBuffer(file));
+					Editor.addToScene(new Mesh(geometry));
 				}
-
-				Editor.addToScene(model);
-			}
-		}, ".json");
-	});
-
-	//GLTF file loader
-	import_models.addOption("GLTF", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.GLTFLoader();
-				var gltf = loader.parse(FileSystem.readFile(file));
-				if(gltf.scene !== undefined)
+				//VRML
+				else if(extension === "wrl" || extension === "vrml")
 				{
-					Editor.addToScene(gltf.scene);
+					var loader = new THREE.VRMLLoader();
+					var scene = loader.parse(FileSystem.readFile(file));
+					for(var i = 0; i < scene.children.length; i++)
+					{
+						Editor.addToScene(scene.children[i]);
+					}
 				}
-			}
-		}, ".gltf");
-	});
-
-	//AWD file loader
-	import_models.addOption("AWD", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.AWDLoader();
-				var awd = loader.parse(FileSystem.readFileArrayBuffer(file));
-				Editor.addToScene(awd);
-			}
-		}, ".awd");
-	});
-
-	//PLY file loader
-	import_models.addOption("PLY", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.PLYLoader();
-				var geometry = loader.parse(FileSystem.readFile(file));
-				Editor.addToScene(new Mesh(geometry));
-			}
-		}, ".ply");
-	});
-
-	//VTK file loader
-	import_models.addOption("VTK", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.VTKLoader();
-				var geometry = loader.parse(FileSystem.readFileArrayBuffer(file));
-				Editor.addToScene(new Mesh(geometry));
-			}
-		}, ".vtk, .vtp");
-	});
-
-	//VRML file loader
-	import_models.addOption("VRML", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.VRMLLoader();
-				var scene = loader.parse(FileSystem.readFile(file));
-				for(var i = 0; i < scene.children.length; i++)
+				//FBX
+				else if(extension === "fbx")
 				{
-					Editor.addToScene(scene.children[i]);
+					var loader = new THREE.FBXLoader();
+					var obj = loader.parse(FileSystem.readFile(file));
+					Editor.addToScene(obj);
+				}
+				//PCD Point Cloud Data
+				else if(extension === "pcd")
+				{
+					var loader = new THREE.PCDLoader();
+					var pcd = loader.parse(FileSystem.readFileArrayBuffer(file), file);
+					pcd.name = FileSystem.getFileName(file);
+					pcd.material.name = "points";
+					Editor.addToScene(pcd);
+				}
+				//THREE JSON Model
+				else if(extension === "json")
+				{
+					var loader = new THREE.JSONLoader();
+					var data = loader.parse(JSON.parse(FileSystem.readFile(file)));
+					var materials = data.materials;
+					var geometry = data.geometry;
+
+					//Create material object
+					var material = null;
+					if(materials === undefined || materials.length === 0)
+					{
+						material = new THREE.MeshStandardMaterial();
+						material.name = "standard";
+					}
+					else if(materials.length === 1)
+					{
+						material = materials[0];
+					}
+					else if(materials.length > 1)
+					{
+						material = THREE.MultiMaterial(materials);
+					}
+
+					//Create model
+					var model = null;
+					if(geometry.bones.length > 0)
+					{
+						model = new SkinnedMesh(geometry, material);
+					}
+					else
+					{
+						model = new Mesh(geometry, material);
+					}
+
+					Editor.addToScene(model);
 				}
 			}
-		}, ".wrl, .vrml");
-	});
-
-	//FBX
-	import_models.addOption("FBX", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.FBXLoader();
-				var obj = loader.parse(FileSystem.readFile(file));
-				Editor.addToScene(obj);
-			}
-		}, ".fbx");
-	});
-
-	//PCD file loader
-	import_models.addOption("PCD", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.PCDLoader();
-				var pcd = loader.parse(FileSystem.readFileArrayBuffer(file), file);
-				pcd.name = FileSystem.getFileName(file);
-				pcd.material.name = "points";
-				Editor.addToScene(pcd);
-			}
-		}, ".pcd");
-	});
-
-	/*//Import materials
-	var import_materials = Interface.asset_file.addMenu("Materials", Interface.file_dir + "icons/misc/material.png");
-
-	//OBJ file loader
-	import_materials.addOption("MTL File", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var loader = new THREE.MTLLoader()
-				loader.setPath(FileSystem.getFilePath(file));
-
-				var materials = loader.parse(FileSystem.readFile(file));
-			}
-		}, ".mtl");
-	}, Interface.file_dir + "icons/misc/material.png");*/
+		}, ".obj, .dae, .gltf, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json");
+	}, Interface.file_dir + "icons/models/models.png");
 
 	//Textures menu
 	var import_texture = Interface.asset_file.addMenu("Texture", Interface.file_dir + "icons/misc/image.png");
@@ -417,7 +311,7 @@ Interface.initialize = function()
 		material.name = "standard";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	});
+	}, Interface.file_dir + "icons/misc/material.png");
 
 	Interface.asset_material.addOption("Phong material", function()
 	{
@@ -425,7 +319,7 @@ Interface.initialize = function()
 		material.name = "phong";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	});
+	}, Interface.file_dir + "icons/misc/material.png");
 	
 	Interface.asset_material.addOption("Basic material", function()
 	{
@@ -433,15 +327,23 @@ Interface.initialize = function()
 		material.name = "basic";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	});
-	
+	}, Interface.file_dir + "icons/misc/material.png");
+
+	Interface.asset_material.addOption("Sprite material", function()
+	{
+		var material = new THREE.SpriteMaterial({color: 0xffffff});
+		material.name = "sprite";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Interface.file_dir + "icons/misc/image.png");
+
 	Interface.asset_material.addOption("Toon material", function()
 	{
 		var material = new THREE.MeshToonMaterial();
 		material.name = "toon";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	});
+	}, Interface.file_dir + "icons/misc/material.png");
 
 	Interface.asset_material.addOption("Lambert material", function()
 	{
@@ -449,16 +351,8 @@ Interface.initialize = function()
 		material.name = "lambert";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	});
+	}, Interface.file_dir + "icons/misc/material.png");
 	
-	Interface.asset_material.addOption("Sprite material", function()
-	{
-		var material = new THREE.SpriteMaterial({color: 0xffffff});
-		material.name = "sprite";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	});
-
 	var material_others = Interface.asset_material.addMenu("Others");
 	material_others.addOption("Shader material", function()
 	{
@@ -466,7 +360,7 @@ Interface.initialize = function()
 		material.name = "shader";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	});
+	}, Interface.file_dir + "icons/script/script.png");
 
 	material_others.addOption("Normal material", function()
 	{
@@ -474,7 +368,7 @@ Interface.initialize = function()
 		material.name = "normal";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	});
+	}, Interface.file_dir + "icons/misc/material.png");
 	
 	material_others.addOption("Depth material", function()
 	{
@@ -482,7 +376,7 @@ Interface.initialize = function()
 		material.name = "depth";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	});
+	}, Interface.file_dir + "icons/misc/material.png");
 
 	//Explorer
 	Interface.explorer = new DivisionResizable();
@@ -755,9 +649,6 @@ Interface.initialize = function()
 		Editor.addToScene(new Script());
 	}, "JS Script");
 
-	//Block script
-	//Interface.add_script.addOption(Interface.file_dir + "icons/script/blocks.png", function(){}, "Block Script");
-
 	//Sprites and effects
 	Interface.add_effects = new ButtonDrawer();
 	Interface.add_effects.setImage(Interface.file_dir + "icons/effects/particles.png");
@@ -969,52 +860,51 @@ Interface.initialize = function()
 		}, "", Editor.program.name);
 	}, Interface.file_dir + "icons/platform/web.png");
 
-	publish.addOption("Windows", function()
+	if(FileSystem.fileExists("../nwjs/win"))
 	{
-		FileSystem.chooseFile(function(files)
+		publish.addOption("Windows", function()
 		{
-			try
+			FileSystem.chooseFile(function(files)
 			{
-				Editor.exportWindowsProject(files[0].path);
-				alert("Project exported");
-			}
-			catch(e)
-			{
-				alert("Error exporting project (" + e + ")");
-			}
-		}, "", Editor.program.name);
-	}, Interface.file_dir + "icons/platform/windows.png");
+				try
+				{
+					Editor.exportWindowsProject(files[0].path);
+					alert("Project exported");
+				}
+				catch(e)
+				{
+					alert("Error exporting project (" + e + ")");
+				}
+			}, "", Editor.program.name);
+		}, Interface.file_dir + "icons/platform/windows.png");
+	}
 
-	publish.addOption("Linux", function()
+	if(FileSystem.fileExists("../nwjs/linux"))
 	{
-		FileSystem.chooseFile(function(files)
+		publish.addOption("Linux", function()
 		{
-			try
+			FileSystem.chooseFile(function(files)
 			{
-				Editor.exportLinuxProject(files[0].path);
-				alert("Project exported");
-			}
-			catch(e)
-			{
-				alert("Error exporting project (" + e + ")");
-			}
-		}, "", Editor.program.name);
-	}, Interface.file_dir + "icons/platform/linux.png");
+				try
+				{
+					Editor.exportLinuxProject(files[0].path);
+					alert("Project exported");
+				}
+				catch(e)
+				{
+					alert("Error exporting project (" + e + ")");
+				}
+			}, "", Editor.program.name);
+		}, Interface.file_dir + "icons/platform/linux.png");
+	}
 
-	/*publish.addOption("macOS", function()
+	if(FileSystem.fileExists("../nwjs/mac"))
 	{
-		alert("For macOS export NWJS for macOS is required");
-	}, Interface.file_dir + "icons/platform/osx.png");*/
-
-	/*publish.addOption("Android", function()
-	{
-		alert("Android export not implemented");
-	}, Interface.file_dir + "icons/platform/android.png");*/
-
-	/*publish.addOption("Nunu App", function()
-	{
-		alert("Optimized nunu app export not implemented");
-	}, Interface.file_dir + "icons/platform/nunu.png");*/
+		publish.addOption("macOS", function()
+		{
+			alert("For macOS export NWJS for macOS is required");
+		}, Interface.file_dir + "icons/platform/osx.png");
+	}
 
 	Interface.file.addOption("Exit", function()
 	{

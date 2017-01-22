@@ -5,10 +5,6 @@ function Text(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "txt" + Text.id;
-	Text.id++;
-
 	//Create element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
@@ -34,9 +30,6 @@ function Text(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//Text conter
-Text.id = 0;
 
 //Text alignment
 Text.CENTER = 0;

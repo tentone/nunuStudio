@@ -5,13 +5,8 @@ function DualDivisionResizable(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "div_dual" + DualDivisionResizable.id;
-	DualDivisionResizable.id++;
-
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panel_color;
@@ -85,9 +80,6 @@ function DualDivisionResizable(parent)
 	this.parent.appendChild(this.element);
 }
 
-//DualDivisionResizable conter
-DualDivisionResizable.id = 0;
-
 //Resizable side
 DualDivisionResizable.HORIZONTAL = 0;
 DualDivisionResizable.VERTICAL = 1;
@@ -104,7 +96,6 @@ DualDivisionResizable.prototype.destroy = function()
 	try
 	{
 		this.parent.removeChild(this.element);
-		this.parent.removeChild(this.resize_tab);
 	}
 	catch(e){}
 }

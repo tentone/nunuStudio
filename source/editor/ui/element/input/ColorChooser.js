@@ -5,10 +5,6 @@ function ColorChooser(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "color" + ColorChooser.id;
-	ColorChooser.id++;
-
 	//Create element
 	this.element = document.createElement("input");
 	this.element.type = "text";
@@ -45,9 +41,6 @@ function ColorChooser(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//ColorChooser ID counter
-ColorChooser.id = 0;
 
 //Set onchange callback
 ColorChooser.prototype.setOnChange = function(callback)

@@ -5,10 +5,6 @@ function NumberBox(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "number_box" + NumberBox.id;
-	NumberBox.id++;
-
 	//Create element
 	this.element = document.createElement("input");
 	this.element.type = "number";
@@ -26,9 +22,6 @@ function NumberBox(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//NumberBox ID counter
-NumberBox.id = 0;
 
 //Set if element if disabled
 NumberBox.prototype.setDisabled = function(value)

@@ -4,14 +4,9 @@ function ButtonDrawer(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "drawer" + ButtonDrawer.id;
-	ButtonDrawer.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.zIndex = "200";
 	this.element.style.cursor = "pointer";
@@ -106,9 +101,6 @@ function ButtonDrawer(parent)
 	this.parent.appendChild(this.element);
 	this.parent.appendChild(this.panel);
 }
-
-//ButtonDrawer ID counter
-ButtonDrawer.id = 0;
 
 //Remove element
 ButtonDrawer.prototype.destroy = function()

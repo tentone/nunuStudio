@@ -5,13 +5,8 @@ function Button(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//ID
-	var id = "but" + Button.id;
-	Button.id++;
-
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "pointer";
 	this.element.style.display = "flex";
@@ -55,9 +50,6 @@ function Button(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//Button conter
-Button.id = 0;
 
 //Add extra element to button
 Button.prototype.add = function(element)

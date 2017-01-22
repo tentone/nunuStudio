@@ -3,14 +3,10 @@
 //Particle emitter constructor
 function ParticleEmitter(group, emitter)
 {
-	THREE.Object3D.call(this);
-
-	this.type = "ParticleEmiter";
-	this.name = "particle";
-
+	//Clock
 	this.clock = new THREE.Clock();
 
-	//Create group
+	//Group
 	if(group !== undefined)
 	{
 		this.group = new SPE.Group(group);
@@ -25,7 +21,7 @@ function ParticleEmitter(group, emitter)
 			},
 			maxParticleCount: 2000,
 			blending: THREE.AdditiveBlending,
-			fog: true,
+			fog: false,
 			depthWrite: false,
 			depthTest: true,
 			transparent: false,
@@ -33,13 +29,35 @@ function ParticleEmitter(group, emitter)
 		});
 	}
 
-	//Disable frustum culling on group mesh
-	this.group.mesh.frustumCulled = false;
+	//Points constructor
+	THREE.Points.call(this, this.group.geometry, this.group.material);
 
-	//Create emitter
+	this.type = "ParticleEmiter";
+	this.name = "particle";
+	this.frustumCulled = false;
+
+	//Texture
+	var group = this.group;
+	Object.defineProperties(this,
+	{
+		texture:
+		{
+			get: function()
+			{
+				return group.texture;
+			},
+			set: function(texture)
+			{
+				group.texture = texture;
+			}
+		}
+	});
+
+	//Emitter
 	if(emitter !== undefined)
 	{
 		this.emitter = new SPE.Emitter(emitter);
+		this.group.addEmitter(this.emitter);
 	}
 	else
 	{
@@ -47,37 +65,32 @@ function ParticleEmitter(group, emitter)
 		{		
 			particleCount: 2000,
 			type: SPE.distributions.BOX,
-
 			maxAge:
 			{
 				value: 3,
 				spread: 0
 			},
-
 			velocity:
 			{
 				value: new THREE.Vector3(0, 25, 0),
 				spread: new THREE.Vector3(10, 10, 10)
 			},
-
 			acceleration:
 			{
 				value: new THREE.Vector3(0, -10, 0),
 				spread: new THREE.Vector3(10, 0, 10)
 			},
-
 			color:
 			{
 				value: [new THREE.Color(1, 1, 1)],
 				spread: [new THREE.Vector3(0, 0, 0)]
 			}
 		});
+		this.group.addEmitter(this.emitter);
 	}
-
-	this.group.addEmitter(this.emitter);
 }
 
-ParticleEmitter.prototype = Object.create(THREE.Object3D.prototype);
+ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
 
 //Initialize particle system
 ParticleEmitter.prototype.initialize = function()
@@ -88,8 +101,6 @@ ParticleEmitter.prototype.initialize = function()
 	}
 
 	this.clock.start();
-	
-	this.add(this.group.mesh);
 }
 
 //Update particle emitter
@@ -120,7 +131,6 @@ ParticleEmitter.prototype.updateMatrix = function ()
 	this.matrix.makeRotationFromQuaternion(this.quaternion);
 	this.matrix.scale(this.scale);
 	this.matrix.setPosition(this.position);
-	//this.emitter.position.value = this.position;
 
 	this.matrixWorldNeedsUpdate = true;
 };

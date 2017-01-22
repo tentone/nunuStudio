@@ -4,14 +4,9 @@ function Division(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "div" + Division.id;
-	Division.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
 	this.element.style.pointerEvents = "none";
@@ -26,9 +21,6 @@ function Division(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//Division conter
-Division.id = 0;
 
 //Remove element
 Division.prototype.destroy = function()

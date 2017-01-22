@@ -5,13 +5,8 @@ function ButtonImage(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 	
-	//ID
-	var id = "but_img" + ButtonImage.id;
-	ButtonImage.id++;
-
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "pointer";
 
@@ -47,9 +42,6 @@ function ButtonImage(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//ButtonImage ID counter
-ButtonImage.id = 0;
 
 //Remove element
 ButtonImage.prototype.destroy = function()
