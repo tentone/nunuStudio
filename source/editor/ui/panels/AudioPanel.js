@@ -16,6 +16,7 @@ function AudioPanel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.matrixAutoUpdate = !(self.static.getValue());
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.static);
@@ -32,6 +33,7 @@ function AudioPanel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.playbackRate = self.playbackRate.getValue();
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.playbackRate);
@@ -46,6 +48,7 @@ function AudioPanel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.autoplay = self.autoplay.getValue();
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.autoplay);
@@ -60,6 +63,7 @@ function AudioPanel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.loop = self.loop.getValue();
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.loop);

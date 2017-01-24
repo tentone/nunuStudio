@@ -231,7 +231,6 @@ include("editor/ui/panels/lights/DirectionalLightPanel.js");
 include("editor/ui/panels/lights/SpotLightPanel.js");
 include("editor/ui/panels/mesh/MeshPanel.js");
 include("editor/ui/panels/mesh/Text3DPanel.js");
-include("editor/ui/panels/mesh/geometry/GeometryForm.js");
 
 include("editor/tools/TransformControls.js");
 include("editor/tools/GizmoMaterial.js");
@@ -1258,6 +1257,7 @@ Editor.selectObjectPanel = function()
 			Interface.panel = new ObjectPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 
+		Interface.panel.updatePanel();
 		Interface.panel.updateInterface();
 	}
 	else
