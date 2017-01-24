@@ -1,8 +1,8 @@
 "use strict";
 
-function ScriptPanel(parent)
+function ScriptPanel(parent, obj)
 {
-	Panel.call(this, parent);
+	Panel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;

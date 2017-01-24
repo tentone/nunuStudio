@@ -1,12 +1,17 @@
 "use strict";
 
-function MeshPanel(parent)
+function MeshPanel(parent, obj)
 {
-	Panel.call(this, parent);
+	Panel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
 	
+	//Geometry
+	this.geometry = new GeometryForm(this.form.element);
+	this.form.add(this.geometry);
+	this.form.nextRow();
+
 	//Visible
 	this.visible = new CheckBox(this.form.element);
 	this.visible.setText("Visible");
@@ -70,6 +75,22 @@ function MeshPanel(parent)
 //Super prototypes
 MeshPanel.prototype = Object.create(Panel.prototype);
 
+//Attack object to meshpanel
+MeshPanel.prototype.attach = function(obj)
+{
+	Panel.prototype.attach.call(this, obj);
+	
+	if(obj instanceof THREE.Mesh)
+	{
+		var geometry = obj.geometry;
+
+		if(geometry instanceof THREE.BoxGeometry || geometry instanceof THREE.BoxBufferGeometry)
+		{
+			//TODO
+		}
+	}
+}
+
 //Update panel content from attached object
 MeshPanel.prototype.updatePanel = function()
 {
@@ -81,5 +102,7 @@ MeshPanel.prototype.updatePanel = function()
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.receive_shadow.setValue(this.obj.receiveShadow);
+
+		this.geometry.updateValues();
 	}
 }

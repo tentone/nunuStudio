@@ -1,8 +1,8 @@
 "use strict";
 
-function Text3DPanel(parent)
+function Text3DPanel(parent, obj)
 {
-	Panel.call(this, parent);
+	Panel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;

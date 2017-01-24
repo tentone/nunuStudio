@@ -1,6 +1,6 @@
 "use strict";
 
-function Panel(parent)
+function Panel(parent, obj)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
@@ -50,9 +50,6 @@ function Panel(parent)
 	this.form = new Form(this.element);
 	this.form.position.set(5, 10);
 	this.form.spacing.set(5, 5);
-
-	//Object attached
-	this.obj = null;
 
 	//Name
 	this.form.addText("Name");
@@ -117,8 +114,33 @@ function Panel(parent)
 	this.form.add(this.rotation);
 	this.form.nextRow();
 
+	//Attached object
+	if(this.obj !== undefined)
+	{
+		this.obj = obj;
+		this.updatePanel();
+	}
+	else
+	{
+		this.obj = null;
+	}
+
 	//Add element to document
 	this.parent.appendChild(this.element);
+}
+
+Panel.list = [];
+
+//Register panel
+Panel.register = function(type, panel)
+{
+	Panel.list[type] = panel;
+}
+
+//Create new panel
+Panel.create = function(parent, obj)
+{
+	//TODO<ADD CODE HERE>
 }
 
 //Update panel with object data

@@ -1,8 +1,8 @@
 "use strict";
 
-function KinectPanel(parent)
+function KinectPanel(parent, obj)
 {
-	Panel.call(this, parent);
+	Panel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
