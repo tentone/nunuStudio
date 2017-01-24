@@ -231,8 +231,7 @@ include("editor/ui/panels/lights/DirectionalLightPanel.js");
 include("editor/ui/panels/lights/SpotLightPanel.js");
 include("editor/ui/panels/mesh/MeshPanel.js");
 include("editor/ui/panels/mesh/Text3DPanel.js");
-include("editor/ui/panels/geometry/BoxGeometryPanel.js");
-
+include("editor/ui/panels/mesh/geometry/GeometryForm.js");
 
 include("editor/tools/TransformControls.js");
 include("editor/tools/GizmoMaterial.js");
@@ -1180,86 +1179,85 @@ Editor.selectObjectPanel = function()
 		{
 			if(Editor.selected_object instanceof Text3D)
 			{
-				Interface.panel = new Text3DPanel(Interface.explorer_resizable.div_b);
+				Interface.panel = new Text3DPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 			}
 			else
 			{
-				Interface.panel = new MeshPanel(Interface.explorer_resizable.div_b);
+				Interface.panel = new MeshPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 			}
 		}
 		else if(Editor.selected_object instanceof THREE.Light)
 		{
 			if(Editor.selected_object instanceof THREE.PointLight)
 			{
-				Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b);
+				Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 			}
 			else if(Editor.selected_object instanceof THREE.RectAreaLight)
 			{
-				Interface.panel = new RectAreaLightPanel(Interface.explorer_resizable.div_b);
+				Interface.panel = new RectAreaLightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 			}
 			else if(Editor.selected_object instanceof THREE.SpotLight)
 			{
-				Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b);
+				Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 			}
 			else if(Editor.selected_object instanceof THREE.DirectionalLight)
 			{
-				Interface.panel = new DirectionalLightPanel(Interface.explorer_resizable.div_b);
+				Interface.panel = new DirectionalLightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 			}
 			else if(Editor.selected_object instanceof THREE.HemisphereLight)
 			{
-				Interface.panel = new HemisphereLightPanel(Interface.explorer_resizable.div_b);
+				Interface.panel = new HemisphereLightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 			}
 			else
 			{
-				Interface.panel = new LightPanel(Interface.explorer_resizable.div_b);
+				Interface.panel = new LightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 			}
 		}
 		else if(Editor.selected_object instanceof Sky)
 		{
-			Interface.panel = new SkyPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new SkyPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 		else if(Editor.selected_object instanceof LeapMotion)
 		{
-			Interface.panel = new LeapPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new LeapPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 		else if(Editor.selected_object instanceof KinectDevice)
 		{
-			Interface.panel = new KinectPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new KinectPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 		else if(Editor.selected_object instanceof Script)
 		{
-			Interface.panel = new ScriptPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new ScriptPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 		else if(Editor.selected_object instanceof PerspectiveCamera)
 		{
-			Interface.panel = new PerspectiveCameraPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new PerspectiveCameraPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 		else if(Editor.selected_object instanceof OrthographicCamera)
 		{
-			Interface.panel = new OrthographicCameraPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new OrthographicCameraPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 		else if(Editor.selected_object instanceof THREE.Audio)
 		{
-			Interface.panel = new AudioPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new AudioPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 		else if(Editor.selected_object instanceof Scene)
 		{
-			Interface.panel = new ScenePanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new ScenePanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 		else if(Editor.selected_object instanceof Program)
 		{
-			Interface.panel = new ProgramPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new ProgramPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 		else if(Editor.selected_object instanceof PhysicsObject)
 		{
-			Interface.panel = new PhysicsPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new PhysicsPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 		else
 		{
-			Interface.panel = new ObjectPanel(Interface.explorer_resizable.div_b);
+			Interface.panel = new ObjectPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
 		}
 
-		Interface.panel.attach(Editor.selected_object);
 		Interface.panel.updateInterface();
 	}
 	else

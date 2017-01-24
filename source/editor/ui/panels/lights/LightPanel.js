@@ -1,8 +1,8 @@
 "use strict";
 
-function LightPanel(parent)
+function LightPanel(parent, obj)
 {
-	Panel.call(this, parent);
+	Panel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;

@@ -1,12 +1,26 @@
 "use strict";
 
-function AudioPanel(parent)
+function AudioPanel(parent, obj)
 {
-	Panel.call(this, parent);
+	Panel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
-	
+
+	//Static
+	this.static = new CheckBox(this.form.element);
+	this.static.setText("Static Object");
+	this.static.size.set(200, 15);
+	this.static.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.matrixAutoUpdate = !(self.static.getValue());
+		}
+	});
+	this.form.add(this.static);
+	this.form.nextRow();
+
 	//Playback Rate
 	this.form.addText("Playback Rate");
 	this.playbackRate = new NumberBox(this.form.element);
@@ -21,6 +35,7 @@ function AudioPanel(parent)
 		}
 	});
 	this.form.add(this.playbackRate);
+	this.form.nextRow();
 
 	//Autoplay
 	this.autoplay = new CheckBox(this.form.element);
@@ -64,6 +79,7 @@ AudioPanel.prototype.updatePanel = function()
 
 	if(this.obj !== null)
 	{
+		this.static.setValue(!this.obj.matrixAutoUpdate);
 		this.autoplay.setValue(this.obj.autoplay);
 		this.loop.setValue(this.obj.loop);
 		this.playbackRate.setValue(this.obj.playbackRate);

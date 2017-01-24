@@ -1,8 +1,8 @@
 "use strict";
 
-function PerspectiveCameraPanel(parent)
+function PerspectiveCameraPanel(parent, obj)
 {
-	Panel.call(this, parent);
+	Panel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;

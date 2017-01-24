@@ -1,8 +1,8 @@
 "use strict";
 
-function ObjectPanel(parent)
+function ObjectPanel(parent, obj)
 {
-	Panel.call(this, parent);
+	Panel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
@@ -65,7 +65,7 @@ function ObjectPanel(parent)
 
 	//Type
 	this.form.addText("Type");
-	this.type = this.form.addText("null");
+	this.type = this.form.addText("undefined");
 
 	//Update form
 	this.form.updateInterface();

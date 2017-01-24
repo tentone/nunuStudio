@@ -1,8 +1,8 @@
 "use strict";
 
-function LeapPanel(parent)
+function LeapPanel(parent, obj)
 {
-	Panel.call(this, parent);
+	Panel.call(this, parent, obj);
 
 	//Self pointer
 	var self = this;
