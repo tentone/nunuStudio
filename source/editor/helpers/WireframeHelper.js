@@ -4,7 +4,7 @@ function WireframeHelper(obj, hex)
 {
 	var color = (hex !== undefined) ? hex : 0xFFFFFF;
 
-	THREE.Mesh.call(this, obj.geometry, new THREE.MeshBasicMaterial({color: color, wireframe: true, transparent: true, opacity: 0.3}));
+	THREE.Mesh.call(this, obj.geometry, new THREE.MeshBasicMaterial({color: color, wireframe: true, transparent: true, opacity: 0.5}));
 
 	this.matrix = obj.matrixWorld;
 	this.matrixAutoUpdate = false;
