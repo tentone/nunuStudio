@@ -16,6 +16,7 @@ function ObjectPanel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.visible = self.visible.getValue();
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.visible);
@@ -30,6 +31,7 @@ function ObjectPanel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.matrixAutoUpdate = !(self.static.getValue());
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.static);
@@ -44,6 +46,7 @@ function ObjectPanel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.castShadow = self.cast_shadow.getValue();
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.cast_shadow);
@@ -58,14 +61,11 @@ function ObjectPanel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.receiveShadow = self.receive_shadow.getValue();
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.receive_shadow);
 	this.form.nextRow();
-
-	//Type
-	this.form.addText("Type");
-	this.type = this.form.addText("undefined");
 
 	//Update form
 	this.form.updateInterface();
@@ -85,6 +85,5 @@ ObjectPanel.prototype.updatePanel = function()
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.receive_shadow.setValue(this.obj.receiveShadow);
-		this.type.setText(this.obj.type);
 	}
 }

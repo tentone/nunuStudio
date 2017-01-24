@@ -6,11 +6,6 @@ function MeshPanel(parent, obj)
 
 	//Self pointer
 	var self = this;
-	
-	//Geometry
-	this.geometry = new GeometryForm(this.form.element);
-	this.form.add(this.geometry);
-	this.form.nextRow();
 
 	//Visible
 	this.visible = new CheckBox(this.form.element);
@@ -74,22 +69,6 @@ function MeshPanel(parent, obj)
 
 //Super prototypes
 MeshPanel.prototype = Object.create(Panel.prototype);
-
-//Attack object to meshpanel
-MeshPanel.prototype.attach = function(obj)
-{
-	Panel.prototype.attach.call(this, obj);
-	
-	if(obj instanceof THREE.Mesh)
-	{
-		var geometry = obj.geometry;
-
-		if(geometry instanceof THREE.BoxGeometry || geometry instanceof THREE.BoxBufferGeometry)
-		{
-			//TODO
-		}
-	}
-}
 
 //Update panel content from attached object
 MeshPanel.prototype.updatePanel = function()

@@ -61,6 +61,7 @@ function Panel(parent, obj)
 		{
 			self.obj.name = self.name.getText();
 			Editor.updateObjectViews();
+			Editor.history.push(self.obj, Action.CHANGED);
 		}
 	});
 	this.form.add(this.name);
@@ -114,37 +115,11 @@ function Panel(parent, obj)
 	this.form.add(this.rotation);
 	this.form.nextRow();
 
-	//Attached object
-	if(this.obj !== undefined)
-	{
-		this.obj = obj;
-		this.updatePanel();
-	}
-	else
-	{
-		this.obj = null;
-	}
+	this.attach(obj);
 
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-Panel.list = [];
-
-//Register panel
-Panel.register = function(type, panel)
-{
-	Panel.list[type] = panel;
-}
-
-//Create new panel
-Panel.create = function(parent, obj)
-{
-	//TODO<ADD CODE HERE>
-}
-
-//Update panel with object data
-Panel.prototype.updatePanel = function(){}
 
 //Attach object to panel
 Panel.prototype.attach = function(obj)
@@ -152,7 +127,10 @@ Panel.prototype.attach = function(obj)
 	if(obj instanceof THREE.Object3D)
 	{
 		this.obj = obj;
-		this.updatePanel();
+	}
+	else
+	{
+		this.obj = null;
 	}
 }
 
@@ -165,9 +143,6 @@ Panel.prototype.destroy = function()
 	}
 	catch(e){}
 }
-
-//Update panel
-Panel.prototype.update = function(){}
 
 //Update panel ui
 Panel.prototype.updateInterface = function()

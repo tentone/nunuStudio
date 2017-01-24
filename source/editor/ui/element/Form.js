@@ -154,6 +154,8 @@ Form.prototype.updateInterface = function()
 			position.y += max_size_y + this.spacing.y;
 		}
 	}
+
+	//Set size y
 	size.y = position.y;
 
 	//Update element
