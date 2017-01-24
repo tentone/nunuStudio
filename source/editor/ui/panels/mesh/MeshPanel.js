@@ -63,6 +63,9 @@ function MeshPanel(parent, obj)
 	this.form.add(this.receive_shadow);
 	this.form.nextRow();
 
+	//Geometry
+	this.geometry = GeometryForm.create(this.form, this.obj);
+
 	//Update form
 	this.form.updateInterface();
 }
@@ -77,11 +80,14 @@ MeshPanel.prototype.updatePanel = function()
 	
 	if(this.obj !== null)
 	{
+		if(this.geometry !== null)
+		{
+			this.geometry.updateValues();
+		}
+
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 		this.cast_shadow.setValue(this.obj.castShadow);
 		this.receive_shadow.setValue(this.obj.receiveShadow);
-
-		this.geometry.updateValues();
 	}
 }

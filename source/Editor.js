@@ -232,6 +232,13 @@ include("editor/ui/panels/lights/SpotLightPanel.js");
 include("editor/ui/panels/mesh/MeshPanel.js");
 include("editor/ui/panels/mesh/Text3DPanel.js");
 
+include("editor/ui/panels/mesh/geometry/GeometryForm.js");
+include("editor/ui/panels/mesh/geometry/BoxGeometryForm.js");
+include("editor/ui/panels/mesh/geometry/SphereGeometryForm.js");
+include("editor/ui/panels/mesh/geometry/TorusGeometryForm.js");
+include("editor/ui/panels/mesh/geometry/PlaneGeometryForm.js");
+include("editor/ui/panels/mesh/geometry/ConeGeometryForm.js");
+
 include("editor/tools/TransformControls.js");
 include("editor/tools/GizmoMaterial.js");
 include("editor/tools/GizmoLineMaterial.js");
