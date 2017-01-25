@@ -24,6 +24,10 @@ GeometryForm.create = function(form, obj)
 	{
 		return new ConeGeometryForm(form, obj);
 	}
-
+	else if(obj.geometry instanceof THREE.CylinderGeometry || obj.geometry instanceof THREE.CylinderBufferGeometry)
+	{
+		return new CylinderGeometryForm(form, obj);
+	}
+	
 	return null;
 }
