@@ -33,12 +33,12 @@
 			{
 				if(Nunu.fullscreen === true)
 				{
-					NunuApp.setFullscreen(false);
+					app.setFullscreen(false);
 					app.resize();
 				}
 				else
 				{
-					NunuApp.setFullscreen(true);
+					app.setFullscreen(true);
 					app.resize();
 				}
 			}
@@ -52,11 +52,11 @@
 					
 					if(vr)
 					{
-						NunuApp.program.displayVR();
+						app.program.displayVR();
 					}
 					else
 					{
-						NunuApp.program.exitVR();
+						app.program.exitVR();
 					}
 				}
 			}
