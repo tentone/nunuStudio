@@ -28,6 +28,10 @@ GeometryForm.create = function(form, obj)
 	{
 		return new CylinderGeometryForm(form, obj);
 	}
+	else if(obj.geometry instanceof THREE.TetrahedronGeometry || obj.geometry instanceof THREE.TetrahedronBufferGeometry)
+	{
+		return new TetrahedronGeometryForm(form, obj);
+	}
 	
 	return null;
 }
