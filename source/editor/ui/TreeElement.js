@@ -103,8 +103,12 @@ function TreeElement(container)
 			
 			menu.addOption("Rename", function()
 			{
-				self.obj.name = prompt("Rename object", self.obj.name);
-				Editor.updateObjectViews();
+				var name = prompt("Rename object", self.obj.name);
+				if(name !== null && name !== "")
+				{
+					self.obj.name = name;
+					Editor.updateObjectViews();
+				}
 			});
 
 			if(!program)

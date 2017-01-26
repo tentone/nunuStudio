@@ -76,9 +76,9 @@ include("core/objects/script/Script.js");
 include("core/objects/physics/PhysicsObject.js");
 include("core/objects/spine/SpineAnimation.js");
 include("core/objects/spine/SpineTexture.js");
-include("core/objects/Bone.js");
-include("core/objects/Container.js");
-include("core/objects/ParticleEmitter.js");
+include("core/objects/particle/ParticleEmitter.js");
+include("core/objects/animation/Bone.js");
+include("core/objects/misc/Container.js");
 include("core/objects/Program.js");
 include("core/objects/Scene.js");
 

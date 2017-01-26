@@ -93,9 +93,9 @@ include("core/objects/script/Script.js");
 include("core/objects/physics/PhysicsObject.js");
 include("core/objects/spine/SpineAnimation.js");
 include("core/objects/spine/SpineTexture.js");
-include("core/objects/Bone.js");
-include("core/objects/Container.js");
-include("core/objects/ParticleEmitter.js");
+include("core/objects/particle/ParticleEmitter.js");
+include("core/objects/animation/Bone.js");
+include("core/objects/misc/Container.js");
 include("core/objects/Program.js");
 include("core/objects/Scene.js");
 
@@ -517,6 +517,18 @@ Editor.update = function()
 		else if(Keyboard.keyJustPressed(Keyboard.F5))
 		{
 			Editor.setState(Editor.STATE_TESTING);
+		}
+		else if(Keyboard.keyJustPressed(Keyboard.F2))
+		{
+			if(Editor.selected_object !== null)
+			{
+				var name = prompt("Rename object", Editor.selected_object.name);
+				if(name !== null && name !== "")
+				{
+					Editor.selected_object.name = name;
+					Editor.updateObjectViews();
+				}
+			}
 		}
 		else if(Keyboard.keyPressed(Keyboard.CTRL))
 		{

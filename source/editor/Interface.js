@@ -692,7 +692,7 @@ Interface.initialize = function()
 
 	//Physics
 	Interface.add_physics = new ButtonDrawer();
-	Interface.add_physics.setImage(Interface.file_dir + "icons/physics/physics.png");
+	Interface.add_physics.setImage(Interface.file_dir + "icons/misc/physics.png");
 	Interface.add_physics.options_per_line = 3;
 	Interface.add_physics.image_scale.set(0.7, 0.7);
 	Interface.add_physics.options_scale.set(0.7, 0.7);
