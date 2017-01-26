@@ -45,7 +45,7 @@ ObjectIcons.icons["Audio"] = "editor/files/icons/misc/audio.png";
 ObjectIcons.icons["PositionalAudio"] = "editor/files/icons/misc/audio_positional.png";
 
 //Physics
-ObjectIcons.icons["Physics"] = "editor/files/icons/physics/physics.png";
+ObjectIcons.icons["Physics"] = "editor/files/icons/misc/physics.png";
 
 //Others
 ObjectIcons.icons["Bone"] = "editor/files/icons/misc/bone.png";
