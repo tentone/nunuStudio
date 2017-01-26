@@ -14,14 +14,14 @@
 			function initialize()
 			{
 				app = new NunuApp();
-				app.loadProgram("app.isp");
-				app.run();
-
-				if(!app.program.vr || !Nunu.webvrAvailable())
+				app.loadRunProgram("app.isp", function()
 				{
-					var button = document.getElementById("vr_button");
-					button.style.visibility = "hidden";
-				}
+					if(!app.vrAvailable())
+					{
+						var button = document.getElementById("vr");
+						button.style.visibility = "hidden";
+					}		
+				});
 			}
 
 			function resize()
@@ -31,40 +31,19 @@
 
 			function toggleFullscreen()
 			{
-				if(Nunu.fullscreen === true)
-				{
-					app.setFullscreen(false);
-					app.resize();
-				}
-				else
-				{
-					app.setFullscreen(true);
-					app.resize();
-				}
+				app.setFullscreen();
+				app.resize();
 			}
 
-			var vr = true;
 			function toggleVR()
 			{
-				if(app !== null)
-				{
-					vr = !vr;
-					
-					if(vr)
-					{
-						app.program.displayVR();
-					}
-					else
-					{
-						app.program.exitVR();
-					}
-				}
+				app.toggleVR();
 			}
 		</script>
-		<div id="fullscreen_button" onclick="toggleFullscreen();" style="position:absolute; z-index: 10000; right:30px; bottom:30px">
+		<div onclick="toggleFullscreen();" style="position:absolute; z-index: 10000; right:30px; bottom:30px">
 			<img style="position:absolute; cursor:pointer; opacity:0.4" width=25 height=25 src="fullscreen.png" onmouseenter="this.style.opacity = 1.0;" onmouseleave="this.style.opacity=0.4;"></img>
 		</div>
-		<div id = "vr_button" onclick="toggleVR();" style="position:absolute; z-index: 10000; right:70px; bottom:30px">
+		<div id="vr" onclick="toggleVR();" style="position:absolute; z-index: 10000; right:70px; bottom:30px">
 			<img style="position:absolute; cursor:pointer; opacity:0.4" width=25 height=25 src="vr.png" onmouseenter="this.style.opacity = 1.0;" onmouseleave="this.style.opacity=0.4;"></img>
 		</div>
 	</body>

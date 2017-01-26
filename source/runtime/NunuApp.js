@@ -97,6 +97,7 @@ function NunuApp(canvas)
 
 	//Fullscreen controll
 	this.fullscreen = false;
+	this.vr = false;
 
 	//Canvas
 	if(canvas === undefined)
@@ -143,8 +144,26 @@ function NunuApp(canvas)
 NunuApp.prototype.loadProgram = function(fname)
 {
 	var loader = new ObjectLoader();
-	var data = JSON.parse(FileSystem.readFile(fname));
-	this.program = loader.parse(data);
+	var data = FileSystem.readFile(fname);
+	this.program = loader.parse(JSON.parse(data));
+}
+
+//Load and run program (async)
+NunuApp.prototype.loadRunProgram = function(fname, callback)
+{
+	var loader = new ObjectLoader();
+	var app = this;
+
+	FileSystem.readFile(fname, false, function(data)
+	{
+		app.program = loader.parse(JSON.parse(data));
+		app.run();
+
+		if(callback !== undefined)
+		{
+			callback();
+		}
+	});
 }
 
 //Start nunu program
@@ -276,11 +295,45 @@ NunuApp.prototype.setOnExit = function(callback)
 	this.onExit = callback;
 }
 
+//Check if VR is available
+NunuApp.prototype.vrAvailable = function()
+{
+	return this.program.vr && Nunu.webvrAvailable();	
+}
+
+//Toggle vr
+NunuApp.prototype.toggleVR = function()
+{
+	if(this.program.vr)
+	{
+		if(this.vr)
+		{
+			this.program.exitVR();
+			this.vr = false;
+		}
+		else
+		{
+			this.program.displayVR();
+			this.vr = true;
+		}
+	}
+	else
+	{
+		console.warn("nunuStudio: loaded program is not VR enabled");
+	}
+}
 
 //Set fullscreen mode
 NunuApp.prototype.setFullscreen = function(fullscreen, element)
 {
-	this.fullscreen = fullscreen;
+	if(fullscreen !== undefined)
+	{
+		this.fullscreen = fullscreen;
+	}
+	else
+	{
+		this.fullscreen = !this.fullscreen;
+	}
 
 	if(this.fullscreen)
 	{

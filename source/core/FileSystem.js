@@ -33,7 +33,7 @@ FileSystem.readFile = function(fname, sync, callback)
 		var file = new XMLHttpRequest();
 		file.overrideMimeType("text/plain");
 		file.open("GET", fname, !sync);
-		file.onreadystatechange = function ()
+		file.onload = function ()
 		{
 			if(file.status === 200 || file.status === 0)
 			{
@@ -44,6 +44,7 @@ FileSystem.readFile = function(fname, sync, callback)
 			}
 		}
 		file.send(null);
+
 		return file.responseText;
 	}
 }

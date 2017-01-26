@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.18 Alpha";
-Nunu.TIMESTAMP = "201701261814";
+Nunu.TIMESTAMP = "201701262000";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -1834,7 +1834,7 @@ Nunu.webvrAvailable = function() {
         h = b = a = null;
       }};
     }, r = new function() {
-      var m = !1, a = null, b = null, h = null, e = null, n = null, g = null, G = null, k = null;
+      var m = !1, a = null, b = null, h = null, e = null, n = null, g = null, k = null, G = null;
       return {setTest:function(m) {
         m ? A(d.STENCIL_TEST) : c(d.STENCIL_TEST);
       }, setMask:function(b) {
@@ -1844,16 +1844,16 @@ Nunu.webvrAvailable = function() {
           d.stencilFunc(m, a, A), b = m, h = a, e = A;
         }
       }, setOp:function(m, a, b) {
-        if (n !== m || g !== a || G !== b) {
-          d.stencilOp(m, a, b), n = m, g = a, G = b;
+        if (n !== m || g !== a || k !== b) {
+          d.stencilOp(m, a, b), n = m, g = a, k = b;
         }
       }, setLocked:function(d) {
         m = d;
       }, setClear:function(m) {
-        k !== m && (d.clearStencil(m), k = m);
+        G !== m && (d.clearStencil(m), G = m);
       }, reset:function() {
         m = !1;
-        k = G = g = n = e = h = b = a = null;
+        G = k = g = n = e = h = b = a = null;
       }};
     }, t = d.getParameter(d.MAX_VERTEX_ATTRIBS), l = new Uint8Array(t), w = new Uint8Array(t), u = new Uint8Array(t), v = {}, B = null, y = null, x = null, z = null, C = null, F = null, E = null, D = null, J = !1, U = null, K = null, H = null, aa = null, L = null, R = null, ga = d.getParameter(d.MAX_TEXTURE_IMAGE_UNITS), t = parseFloat(/^WebGL\ ([0-9])/.exec(d.getParameter(d.VERSION))[1]), O = 1 <= parseFloat(t), ja = null, N = {}, I = new k, ba = new k, P = {};
     P[d.TEXTURE_2D] = b(d.TEXTURE_2D, d.TEXTURE_2D, 1);
@@ -1969,14 +1969,14 @@ Nunu.webvrAvailable = function() {
     var A, c = void 0 !== a.precision ? a.precision : "highp", h = b(c);
     h !== c && (console.warn("THREE.WebGLRenderer:", c, "not supported, using", h, "instead."), c = h);
     a = !0 === a.logarithmicDepthBuffer && !!m.get("EXT_frag_depth");
-    var h = d.getParameter(d.MAX_TEXTURE_IMAGE_UNITS), e = d.getParameter(d.MAX_VERTEX_TEXTURE_IMAGE_UNITS), n = d.getParameter(d.MAX_TEXTURE_SIZE), g = d.getParameter(d.MAX_CUBE_MAP_TEXTURE_SIZE), k = d.getParameter(d.MAX_VERTEX_ATTRIBS), q = d.getParameter(d.MAX_VERTEX_UNIFORM_VECTORS), p = d.getParameter(d.MAX_VARYING_VECTORS), f = d.getParameter(d.MAX_FRAGMENT_UNIFORM_VECTORS), r = 0 < e, t = !!m.get("OES_texture_float");
+    var h = d.getParameter(d.MAX_TEXTURE_IMAGE_UNITS), e = d.getParameter(d.MAX_VERTEX_TEXTURE_IMAGE_UNITS), n = d.getParameter(d.MAX_TEXTURE_SIZE), g = d.getParameter(d.MAX_CUBE_MAP_TEXTURE_SIZE), k = d.getParameter(d.MAX_VERTEX_ATTRIBS), q = d.getParameter(d.MAX_VERTEX_UNIFORM_VECTORS), f = d.getParameter(d.MAX_VARYING_VECTORS), p = d.getParameter(d.MAX_FRAGMENT_UNIFORM_VECTORS), r = 0 < e, t = !!m.get("OES_texture_float");
     return {getMaxAnisotropy:function() {
       if (void 0 !== A) {
         return A;
       }
       var a = m.get("EXT_texture_filter_anisotropic");
       return A = null !== a ? d.getParameter(a.MAX_TEXTURE_MAX_ANISOTROPY_EXT) : 0;
-    }, getMaxPrecision:b, precision:c, logarithmicDepthBuffer:a, maxTextures:h, maxVertexTextures:e, maxTextureSize:n, maxCubemapSize:g, maxAttributes:k, maxVertexUniforms:q, maxVaryings:p, maxFragmentUniforms:f, vertexTextures:r, floatFragmentTextures:t, floatVertexTextures:r && t};
+    }, getMaxPrecision:b, precision:c, logarithmicDepthBuffer:a, maxTextures:h, maxVertexTextures:e, maxTextureSize:n, maxCubemapSize:g, maxAttributes:k, maxVertexUniforms:q, maxVaryings:f, maxFragmentUniforms:p, vertexTextures:r, floatFragmentTextures:t, floatVertexTextures:r && t};
   }
   function mf(d) {
     var m = {};
@@ -2058,13 +2058,13 @@ Nunu.webvrAvailable = function() {
         e ? m(null) : d();
       } else {
         n = e ? 0 : c;
-        var p = 4 * n, f = G.clippingState || null;
-        k.value = f;
-        f = m(a, g, p, q);
-        for (a = 0;a !== p;++a) {
-          f[a] = b[a];
+        var f = 4 * n, p = G.clippingState || null;
+        k.value = p;
+        p = m(a, g, f, q);
+        for (a = 0;a !== f;++a) {
+          p[a] = b[a];
         }
-        G.clippingState = f;
+        G.clippingState = p;
         this.numIntersection = A ? this.numPlanes : 0;
         this.numPlanes += n;
       }
@@ -12822,24 +12822,24 @@ Nunu.webvrAvailable = function() {
     this.loop = d;
     this.repetitions = a;
     return this;
-  }, setEffectiveWeight:function(d) {
-    this.weight = d;
-    this._effectiveWeight = this.enabled ? d : 0;
+  }, setEffectiveWeight:function(a) {
+    this.weight = a;
+    this._effectiveWeight = this.enabled ? a : 0;
     return this.stopFading();
   }, getEffectiveWeight:function() {
     return this._effectiveWeight;
-  }, fadeIn:function(d) {
-    return this._scheduleFading(d, 0, 1);
-  }, fadeOut:function(d) {
-    return this._scheduleFading(d, 1, 0);
-  }, crossFadeFrom:function(d, a, b) {
-    d.fadeOut(a);
-    this.fadeIn(a);
-    if (b) {
-      b = this._clip.duration;
-      var c = d._clip.duration, e = b / c;
-      d.warp(1, c / b, a);
-      this.warp(e, 1, a);
+  }, fadeIn:function(a) {
+    return this._scheduleFading(a, 0, 1);
+  }, fadeOut:function(a) {
+    return this._scheduleFading(a, 1, 0);
+  }, crossFadeFrom:function(a, b, c) {
+    a.fadeOut(b);
+    this.fadeIn(b);
+    if (c) {
+      c = this._clip.duration;
+      var d = a._clip.duration, e = c / d;
+      a.warp(1, d / c, b);
+      this.warp(e, 1, b);
     }
     return this;
   }, crossFadeTo:function(a, b, c) {
@@ -30672,7 +30672,7 @@ FileSystem.readFile = function(a, f, l) {
     var b = new XMLHttpRequest;
     b.overrideMimeType("text/plain");
     b.open("GET", a, !f);
-    b.onreadystatechange = function() {
+    b.onload = function() {
       200 !== b.status && 0 !== b.status || void 0 === l || l(b.responseText);
     };
     b.send(null);
@@ -32048,14 +32048,14 @@ TTFLoader.reverseCommands = function(a) {
   });
   var b = [];
   f.forEach(function(a) {
-    var g = {type:"m", x:a[a.length - 1].x, y:a[a.length - 1].y};
-    b.push(g);
+    var f = {type:"m", x:a[a.length - 1].x, y:a[a.length - 1].y};
+    b.push(f);
     for (var c = a.length - 1;0 < c;c--) {
-      var e = a[c], g = {type:e.type};
-      void 0 !== e.x2 && void 0 !== e.y2 ? (g.x1 = e.x2, g.y1 = e.y2, g.x2 = e.x1, g.y2 = e.y1) : void 0 !== e.x1 && void 0 !== e.y1 && (g.x1 = e.x1, g.y1 = e.y1);
-      g.x = a[c - 1].x;
-      g.y = a[c - 1].y;
-      b.push(g);
+      var e = a[c], f = {type:e.type};
+      void 0 !== e.x2 && void 0 !== e.y2 ? (f.x1 = e.x2, f.y1 = e.y2, f.x2 = e.x1, f.y2 = e.y1) : void 0 !== e.x1 && void 0 !== e.y1 && (f.x1 = e.x1, f.y1 = e.y1);
+      f.x = a[c - 1].x;
+      f.y = a[c - 1].y;
+      b.push(f);
     }
   });
   return b;
@@ -33574,7 +33574,7 @@ BufferUtils.fromArrayBuffer = function(a) {
 };
 function NunuApp(a) {
   this.renderer = this.program = null;
-  this.fullscreen = !1;
+  this.vr = this.fullscreen = !1;
   void 0 === a ? (this.canvas = document.createElement("canvas"), this.canvas.style.position = "absolute", this.canvas.style.left = "0px", this.canvas.style.top = "0px", this.canvas.style.width = window.innerWidth + "px", this.canvas.style.height = window.innerHeight + "px", this.canvas.width = window.innerWidth, this.canvas.height = window.innerHeight, document.body.appendChild(this.canvas), this.canvas_resize = !0) : (this.canvas = a, this.canvas_resize = !1);
   a = this.canvas;
   this.lock_mouse = function() {
@@ -33583,8 +33583,16 @@ function NunuApp(a) {
 }
 NunuApp.prototype.loadProgram = function(a) {
   var f = new ObjectLoader;
-  a = JSON.parse(FileSystem.readFile(a));
-  this.program = f.parse(a);
+  a = FileSystem.readFile(a);
+  this.program = f.parse(JSON.parse(a));
+};
+NunuApp.prototype.loadRunProgram = function(a, f) {
+  var l = new ObjectLoader, b = this;
+  FileSystem.readFile(a, !1, function(a) {
+    b.program = l.parse(JSON.parse(a));
+    b.run();
+    void 0 !== f && f();
+  });
 };
 NunuApp.prototype.run = function() {
   if (null === this.program) {
@@ -33638,7 +33646,13 @@ NunuApp.prototype.setOnDataReceived = function(a) {
 NunuApp.prototype.setOnExit = function(a) {
   this.onExit = a;
 };
+NunuApp.prototype.vrAvailable = function() {
+  return this.program.vr && Nunu.webvrAvailable();
+};
+NunuApp.prototype.toggleVR = function() {
+  this.program.vr ? this.vr ? (this.program.exitVR(), this.vr = !1) : (this.program.displayVR(), this.vr = !0) : console.warn("nunuStudio: loaded program is not VR enabled");
+};
 NunuApp.prototype.setFullscreen = function(a, f) {
-  (this.fullscreen = a) ? (void 0 === f && (f = document.body), f.requestFullscreen = f.requestFullscreen || f.mozRequestFullScreen || f.webkitRequestFullscreen || f.msRequestFullscreen, f.requestFullscreen && f.requestFullscreen()) : (document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen, document.exitFullscreen && document.exitFullscreen());
+  (this.fullscreen = void 0 !== a ? a : !this.fullscreen) ? (void 0 === f && (f = document.body), f.requestFullscreen = f.requestFullscreen || f.mozRequestFullScreen || f.webkitRequestFullscreen || f.msRequestFullscreen, f.requestFullscreen && f.requestFullscreen()) : (document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen, document.exitFullscreen && document.exitFullscreen());
 };
 
