@@ -12842,8 +12842,8 @@ Nunu.webvrAvailable = function() {
       this.warp(e, 1, a);
     }
     return this;
-  }, crossFadeTo:function(d, a, b) {
-    return d.crossFadeFrom(this, a, b);
+  }, crossFadeTo:function(a, b, c) {
+    return a.crossFadeFrom(this, b, c);
   }, stopFading:function() {
     var a = this._weightInterpolant;
     null !== a && (this._weightInterpolant = null, this._mixer._takeBackControlInterpolant(a));
@@ -33573,19 +33573,14 @@ BufferUtils.fromArrayBuffer = function(a) {
   return f;
 };
 function NunuApp(a) {
-  this.program = null;
+  this.renderer = this.program = null;
+  this.fullscreen = !1;
   void 0 === a ? (this.canvas = document.createElement("canvas"), this.canvas.style.position = "absolute", this.canvas.style.left = "0px", this.canvas.style.top = "0px", this.canvas.style.width = window.innerWidth + "px", this.canvas.style.height = window.innerHeight + "px", this.canvas.width = window.innerWidth, this.canvas.height = window.innerHeight, document.body.appendChild(this.canvas), this.canvas_resize = !0) : (this.canvas = a, this.canvas_resize = !1);
   a = this.canvas;
   this.lock_mouse = function() {
     a.requestPointerLock ? a.requestPointerLock() : a.mozRequestPointerLock ? a.mozRequestPointerLock() : a.webkitRequestPointerLock && a.webkitRequestPointerLock();
   };
-  this.renderer = new THREE.WebGLRenderer({canvas:this.canvas, antialias:!0});
-  this.renderer.autoClear = !1;
-  this.renderer.shadowMap.enabled = !0;
-  this.renderer.shadowMap.type = THREE.PCFShadowMap;
-  this.renderer.setSize(this.canvas.width, this.canvas.height);
 }
-NunuApp.fullscreen = !1;
 NunuApp.prototype.loadProgram = function(a) {
   var f = new ObjectLoader;
   a = JSON.parse(FileSystem.readFile(a));
@@ -33595,6 +33590,11 @@ NunuApp.prototype.run = function() {
   if (null === this.program) {
     console.warn("nunuStudio: no program is loaded [app.loadPogram(fname)]");
   } else {
+    this.renderer = new THREE.WebGLRenderer({canvas:this.canvas, antialias:!0});
+    this.renderer.autoClear = !1;
+    this.renderer.shadowMap.enabled = !0;
+    this.renderer.shadowMap.type = THREE.PCFShadowMap;
+    this.renderer.setSize(this.canvas.width, this.canvas.height);
     Keyboard.initialize();
     Mouse.initialize();
     Mouse.setCanvas(this.canvas);
@@ -33625,11 +33625,12 @@ NunuApp.prototype.exit = function() {
   if (void 0 !== this.onExit) {
     this.onExit();
   }
-  void 0 !== NunuApp.gui && (NunuApp.gui.App.closeAllWindows(), NunuApp.gui.App.quit());
+  var a = require("nw.gui");
+  void 0 !== a && (a.App.closeAllWindows(), a.App.quit());
 };
 NunuApp.prototype.resize = function() {
   null !== this.canvas && this.canvas_resize && (this.canvas.style.width = window.innerWidth + "px", this.canvas.style.height = window.innerHeight + "px", this.canvas.width = window.innerWidth, this.canvas.height = window.innerHeight);
-  null !== this.program && void 0 !== this.renderer && (this.renderer.setSize(this.canvas.width, this.canvas.height), this.program.resize(this.canvas.width, this.canvas.height));
+  null !== this.program && null !== this.renderer && (this.renderer.setSize(this.canvas.width, this.canvas.height), this.program.resize(this.canvas.width, this.canvas.height));
 };
 NunuApp.prototype.setOnDataReceived = function(a) {
   this.onDataReceived = a;
@@ -33637,7 +33638,7 @@ NunuApp.prototype.setOnDataReceived = function(a) {
 NunuApp.prototype.setOnExit = function(a) {
   this.onExit = a;
 };
-NunuApp.setFullscreen = function(a, f) {
-  (NunuApp.fullscreen = a) ? (void 0 === f && (f = document.body), f.requestFullscreen = f.requestFullscreen || f.mozRequestFullScreen || f.webkitRequestFullscreen || f.msRequestFullscreen, f.requestFullscreen && f.requestFullscreen()) : (document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen, document.exitFullscreen && document.exitFullscreen());
+NunuApp.prototype.setFullscreen = function(a, f) {
+  (this.fullscreen = a) ? (void 0 === f && (f = document.body), f.requestFullscreen = f.requestFullscreen || f.mozRequestFullScreen || f.webkitRequestFullscreen || f.msRequestFullscreen, f.requestFullscreen && f.requestFullscreen()) : (document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen, document.exitFullscreen && document.exitFullscreen());
 };
 

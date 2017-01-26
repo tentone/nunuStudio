@@ -91,8 +91,12 @@ include("core/utils/BufferUtils.js");
 //Nunu app contructor
 function NunuApp(canvas)
 {
-	//Program
+	//Program and renderer
 	this.program = null;
+	this.renderer = null;
+
+	//Fullscreen controll
+	this.fullscreen = false;
 
 	//Canvas
 	if(canvas === undefined)
@@ -105,7 +109,7 @@ function NunuApp(canvas)
 		this.canvas.style.height = window.innerHeight + "px";
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
-
+		
 		document.body.appendChild(this.canvas);
 
 		this.canvas_resize = true;
@@ -133,17 +137,7 @@ function NunuApp(canvas)
 			canvas.webkitRequestPointerLock();
 		}
 	};
-
-	//WebGL renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, antialias: true});
-	this.renderer.autoClear = false;
-	this.renderer.shadowMap.enabled = true;
-	this.renderer.shadowMap.type = THREE.PCFShadowMap;
-	this.renderer.setSize(this.canvas.width, this.canvas.height);
 }
-
-//Fullscreen control
-NunuApp.fullscreen = false;
 
 //Load program from file
 NunuApp.prototype.loadProgram = function(fname)
@@ -161,6 +155,13 @@ NunuApp.prototype.run = function()
 		console.warn("nunuStudio: no program is loaded [app.loadPogram(fname)]");
 		return;
 	}
+
+	//WebGL renderer
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, antialias: true});
+	this.renderer.autoClear = false;
+	this.renderer.shadowMap.enabled = true;
+	this.renderer.shadowMap.type = THREE.PCFShadowMap;
+	this.renderer.setSize(this.canvas.width, this.canvas.height);
 
 	//Mouse and Keyboard input
 	Keyboard.initialize();
@@ -237,10 +238,11 @@ NunuApp.prototype.exit = function()
 	}
 
 	//If running on nwjs close all windows
-	if(NunuApp.gui !== undefined)
+	var gui = require("nw.gui");
+	if(gui !== undefined)
 	{
-		NunuApp.gui.App.closeAllWindows();
-		NunuApp.gui.App.quit();
+		gui.App.closeAllWindows();
+		gui.App.quit();
 	}
 }
 
@@ -255,7 +257,7 @@ NunuApp.prototype.resize = function()
 		this.canvas.height = window.innerHeight;
 	}
 	
-	if(this.program !== null && this.renderer !== undefined)
+	if(this.program !== null && this.renderer !== null)
 	{
 		this.renderer.setSize(this.canvas.width, this.canvas.height);
 		this.program.resize(this.canvas.width, this.canvas.height);
@@ -274,12 +276,13 @@ NunuApp.prototype.setOnExit = function(callback)
 	this.onExit = callback;
 }
 
-//Set fullscreen mode
-NunuApp.setFullscreen = function(fullscreen, element)
-{
-	NunuApp.fullscreen = fullscreen;
 
-	if(fullscreen)
+//Set fullscreen mode
+NunuApp.prototype.setFullscreen = function(fullscreen, element)
+{
+	this.fullscreen = fullscreen;
+
+	if(this.fullscreen)
 	{
 		if(element === undefined)
 		{
