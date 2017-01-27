@@ -15,7 +15,8 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.viewport = new THREE.Vector2(1.0, 1.0);
 	this.clear_color = false;
 	this.clear_depth = false;
-
+	this.order = 0;
+	
 	this.updateProjectionMatrix();
 }
 
@@ -72,6 +73,7 @@ OrthographicCamera.prototype.toJSON = function(meta)
 	data.object.clear_depth = this.clear_depth;
 	data.object.viewport = this.viewport.toArray();
 	data.object.offset = this.offset.toArray();
+	data.object.order = this.order;
 
 	return data;
 }

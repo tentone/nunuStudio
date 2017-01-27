@@ -115,6 +115,7 @@ function Panel(parent, obj)
 	this.form.add(this.rotation);
 	this.form.nextRow();
 
+	//Attach object
 	this.attach(obj);
 
 	//Add element to document

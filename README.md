@@ -66,6 +66,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Generic multi file format 3D model loading
 - V0.8.9.17 Alpha
 	- Added geometry properties to geometry panels
+	- Camera draw order
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
@@ -83,6 +84,28 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
  {
  	//TODO <Exit callback>
  });
+
+ //Resize app
+ function resize()
+ {
+ 	app.resize();
+ }
+ 
+ //Toggle fullscreen
+ function toggleFullscreen()
+ {
+ 	app.setFullscreen();
+ 	app.resize();
+ }
+ 
+ //Toggle VR mode (if available)
+ function toggleVR()
+ {
+ 	if(app.vrAvailable())
+ 	{
+ 		app.toggleVR();
+ 	}
+ }
 ```
 
 ### Tech

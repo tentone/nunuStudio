@@ -31,7 +31,7 @@ function Scene()
 	this.canvas = null;
 
 	//Mouse normalized
-	this.mouse = new Vector2(0, 0);
+	this.mouse = new THREE.Vector2(0, 0);
 }
 
 Scene.prototype = Object.create(THREE.Scene.prototype);
@@ -42,7 +42,6 @@ Scene.prototype.initialize = function()
 	//Get canvas from program
 	this.canvas = this.parent.canvas;
 
-	//Start
 	this.clock.start();
 
 	for(var i = 0; i < this.children.length; i++)
@@ -100,6 +99,16 @@ Scene.prototype.getCamera = function(uuid, obj)
 Scene.prototype.addCamera = function(camera)
 {
 	this.cameras.push(camera);
+	this.updateCameraOrder();
+}
+
+//Update camera order
+Scene.prototype.updateCameraOrder = function()
+{
+	this.cameras.sort(function(a,b)
+	{
+		return a.order < b.order;
+	});
 }
 
 //Remove camera (from active cameras)

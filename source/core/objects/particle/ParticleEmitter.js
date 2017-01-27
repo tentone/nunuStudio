@@ -138,11 +138,22 @@ ParticleEmitter.prototype.updateMatrix = function ()
 //JSON serializer
 ParticleEmitter.prototype.toJSON = function(meta)
 {
+	//Back material and geometry to avoid unwanted serialization
+	var material = this.material;
+	var geometry = this.geometry;
+	this.material = undefined;
+	this.geometry = undefined;
+
+	//Call object3d to json
 	var texture = this.group.texture;
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
-	{
+	{	
 		texture = texture.toJSON(meta);
 	});
+
+	//Restore material and geometry
+	this.material = material;
+	this.geometry = geometry;
 
 	//Group attributes
 	data.object.group = {};
