@@ -66,7 +66,7 @@ Mouse.initialize = function()
 	if("ontouchstart" in window || navigator.msMaxTouchPoints > 0)
 	{
 		//Auxiliar variables to calculate touch delta
-		var last_touch = new Vector2(0, 0);
+		var last_touch = new THREE.Vector2(0, 0);
 
 		//Touch screen pressed event
 		Mouse.events.push([window, "touchstart", function(event)

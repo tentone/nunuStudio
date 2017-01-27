@@ -572,6 +572,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.clear_depth = data.clear_depth;
 			}
+			if(data.order !== undefined)
+			{
+				object.order = data.order;
+			}
 			break;
 
 		case "OrthographicCamera":
@@ -591,6 +595,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			if(data.clear_depth !== undefined)
 			{
 				object.clear_depth = data.clear_depth;
+			}
+			if(data.order !== undefined)
+			{
+				object.order = data.order;
 			}
 			break;
 

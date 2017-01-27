@@ -155,7 +155,7 @@ Mesh2shape.createConvexPolyhedron = function(object)
 	var hull = new quickhull()(geometry);
 	console.log(hull);
 
-	//Convert from THREE.Vector3 to CANNON.Vec3
+	//Convert from Vector3 to CANNON.Vec3
 	vertices = new Array(hull.vertices.length);
 	for(i = 0; i < hull.vertices.length; i++)
 	{

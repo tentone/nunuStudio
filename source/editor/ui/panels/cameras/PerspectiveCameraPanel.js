@@ -2,6 +2,10 @@
 
 function PerspectiveCameraPanel(parent, obj)
 {
+	//Scene
+	this.scene = null;
+
+	//Panel
 	Panel.call(this, parent, obj);
 
 	//Self pointer
@@ -23,29 +27,25 @@ function PerspectiveCameraPanel(parent, obj)
 	this.form.add(this.fov);
 	this.form.nextRow();
 
-	//Select camera as scene default
-	this.default = new CheckBox(this.form.element);
-	this.default.setText("Use camera");
-	this.default.size.set(200, 15);
-	this.default.setOnChange(function()
+	//Camera used
+	this.use = new CheckBox(this.form.element);
+	this.use.setText("Use camera");
+	this.use.size.set(200, 15);
+	this.use.setOnChange(function()
 	{
-		if(self.obj !== null)
+		if(self.obj !== null && self.scene !== null)
 		{
-			var scene = ObjectUtils.getScene(self.obj);
-			if(scene !== null)
+			if(self.use.getValue())
 			{
-				if(self.default.getValue())
-				{
-					scene.addCamera(self.obj);
-				}
-				else
-				{
-					scene.removeCamera(self.obj);
-				}
+				self.scene.addCamera(self.obj);
+			}
+			else
+			{
+				self.scene.removeCamera(self.obj);
 			}
 		}
 	});
-	this.form.add(this.default);
+	this.form.add(this.use);
 	this.form.nextRow();
 
 	//Distance
@@ -118,6 +118,23 @@ function PerspectiveCameraPanel(parent, obj)
 	this.form.add(this.viewport);
 	this.form.nextRow();
 	
+	//Order
+	this.form.addText("Draw Order");
+	this.order = new NumberBox(this.form.element);
+	this.order.size.set(80, 18);
+	this.order.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.order.setStep(1);
+	this.order.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.order = self.order.getValue();
+			self.scene.updateCameraOrder();
+		}
+	});
+	this.form.add(this.order);
+	this.form.nextRow();
+
 	//Clear color
 	this.clear_color = new CheckBox(this.form.element);
 	this.clear_color.setText("Clear color");
@@ -153,19 +170,28 @@ function PerspectiveCameraPanel(parent, obj)
 //Super prototypes
 PerspectiveCameraPanel.prototype = Object.create(Panel.prototype);
 
+//Attach camera
+PerspectiveCameraPanel.prototype.attach = function(obj)
+{
+	Panel.prototype.attach.call(this, obj);
+	this.scene = ObjectUtils.getScene(obj);
+}
+
+
 //Update panel content from attached object
 PerspectiveCameraPanel.prototype.updatePanel = function()
 {
 	Panel.prototype.updatePanel.call(this);
-	
+
 	if(this.obj !== null)
 	{
 		this.fov.setValue(this.obj.fov);
-		this.default.setValue(ObjectUtils.getScene(this.obj).cameras.indexOf(this.obj) !== -1);
+		this.use.setValue(this.scene.cameras.indexOf(this.obj) !== -1);
 		this.near.setValue(this.obj.near);
 		this.far.setValue(this.obj.far);
 		this.offset.setValue(this.obj.offset);
 		this.viewport.setValue(this.obj.viewport);
+		this.order.setValue(this.obj.order);
 		this.clear_color.setValue(this.obj.clear_color);
 		this.clear_depth.setValue(this.obj.clear_depth);
 	}
