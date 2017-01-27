@@ -30,12 +30,12 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	this.volume = 1.0;
 
 	//Video
+	this.image.src = this.video.data;
 	this.image.autoplay = this.autoplay;
 	this.image.playbackRate = this.speed;
 	this.image.loop = this.loop;
 	this.image.volume = this.volume;
-	this.image.src = this.video.data;
-
+	
 	//Video update loop
 	var texture = this;
 	var video = this.image;
@@ -51,6 +51,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 			requestAnimationFrame(update);
 		}
 	};
+
 	update();
 }
 
@@ -108,6 +109,7 @@ VideoTexture.prototype.dispose = function()
 	THREE.Texture.prototype.dispose.call(this);
 
 	this.disposed = true;
+	
 	if(!this.image.paused)
 	{
 		this.image.pause();
