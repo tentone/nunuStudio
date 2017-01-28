@@ -9,11 +9,14 @@
 	<body style="background-color: #222222" onload="initialize();" onresize="resize();" oncontextmenu="return false;">
 		<script type="text/javascript" src="nunu.min.js"></script>
 		<script type="text/javascript">
-			var app = new NunuApp();
+			var app;
 
 			//Initialize app
 			function initialize()
 			{	
+				//Create app object
+				app = new NunuApp();
+
 				//Onload enable the vr and fullscreen buttons
 				var logo = document.getElementById("logo");
 				var onLoad = function()
