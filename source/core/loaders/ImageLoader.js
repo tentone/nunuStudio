@@ -5,10 +5,10 @@ function ImageLoader(manager)
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 }
 
-ImageLoader.prototype.load = function(url, onLoad, onProgress, onError)
+ImageLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 {
 	var self = this;
-	var loader = new THREE.XHRLoader(this.manager);
+	var loader = new THREE.FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
 		self.parse(JSON.parse(text), onLoad);

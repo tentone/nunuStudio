@@ -9,7 +9,7 @@ try
 catch(e){}
 
 //Read text file
-FileSystem.readFile = function(fname, sync, callback)
+FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 {
 	if(sync === undefined)
 	{
@@ -25,7 +25,7 @@ FileSystem.readFile = function(fname, sync, callback)
 		}
 		else
 		{
-			FileSystem.fs.readFile(fname, "utf8", callback);
+			FileSystem.fs.readFile(fname, "utf8", onLoad);
 		}
 	}
 	else
@@ -33,16 +33,25 @@ FileSystem.readFile = function(fname, sync, callback)
 		var file = new XMLHttpRequest();
 		file.overrideMimeType("text/plain");
 		file.open("GET", fname, !sync);
-		file.onload = function ()
+		file.onload = function()
 		{
 			if(file.status === 200 || file.status === 0)
 			{
-				if(callback !== undefined)
+				if(onLoad !== undefined)
 				{
-					callback(file.responseText);
+					onLoad(file.responseText);
 				}
 			}
+		};
+		
+		if(onProgress !== undefined)
+		{
+			file.onprogress = function(event)
+			{
+				onProgress(event);
+			};
 		}
+
 		file.send(null);
 
 		return file.responseText;
