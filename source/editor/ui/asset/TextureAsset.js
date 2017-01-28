@@ -127,17 +127,17 @@ TextureAsset.prototype = Object.create(Asset.prototype);
 //Set object to file
 TextureAsset.prototype.setTexture = function(texture)
 {
+	this.texture = texture;
+
+	//Video
 	if(texture instanceof VideoTexture || texture instanceof WebcamTexture)
 	{
-		this.texture = texture;
-
-		//Video
 		this.preview = document.createElement("video");
 		this.preview.draggable = true;
 		this.preview.style.position = "absolute";
 		this.preview.style.top = "5px";
 		this.preview.volume = 0.0;
-		this.preview.src = this.texture.image.src;
+		this.preview.src = texture.image.src;
 		this.preview.onload = function()
 		{
 			this.preview.loop = true;
@@ -146,15 +146,13 @@ TextureAsset.prototype.setTexture = function(texture)
 
 		this.element.appendChild(this.preview);
 	}
+	//Image
 	else if(texture instanceof THREE.Texture)
 	{
-		this.texture = texture;
-
-		//Image
 		this.preview = document.createElement("img");
 		this.preview.style.position = "absolute";
 		this.preview.style.top = "5px";
-		this.preview.src = this.texture.image.src;
+		this.preview.src = texture.image.src;
 		this.element.appendChild(this.preview);	
 	}
 

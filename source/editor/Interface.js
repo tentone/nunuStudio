@@ -55,7 +55,6 @@ Interface.initialize = function()
 						var mtl_loader = new THREE.MTLLoader()
 						mtl_loader.setPath(path);
 						var materials = mtl_loader.parse(FileSystem.readFile(mtl));
-
 						loader.setMaterials(materials);
 					}
 

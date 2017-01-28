@@ -17,15 +17,17 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 		this.img = image;
 	}
 
-	//Super constructor
+	//Texture constructor
 	THREE.Texture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
+	//If the image is not transparent use RBG instead of RGBA to save space
+	var transparent = this.img.encoding === "png" || this.img.encoding === "gif";
 	var texture = this;
-	this.disposed = false;
 
-	//Name
 	this.name = "texture";
 	this.category = "Image";
+	this.disposed = false;
+	this.format = transparent ? THREE.RGBAFormat : THREE.RGBFormat;
 
 	//Set image source
 	this.image.src = this.img.data;

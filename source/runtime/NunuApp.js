@@ -140,16 +140,8 @@ function NunuApp(canvas)
 	};
 }
 
-//Load program from file
-NunuApp.prototype.loadProgram = function(fname)
-{
-	var loader = new ObjectLoader();
-	var data = FileSystem.readFile(fname);
-	this.program = loader.parse(JSON.parse(data));
-}
-
 //Load and run program (async)
-NunuApp.prototype.loadRunProgram = function(fname, callback)
+NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 {
 	var loader = new ObjectLoader();
 	var app = this;
@@ -159,11 +151,19 @@ NunuApp.prototype.loadRunProgram = function(fname, callback)
 		app.program = loader.parse(JSON.parse(data));
 		app.run();
 
-		if(callback !== undefined)
+		if(onLoad !== undefined)
 		{
-			callback();
+			onLoad();
 		}
-	});
+	}, onProgress);
+}
+
+//Load program from file
+NunuApp.prototype.loadProgram = function(fname)
+{
+	var loader = new ObjectLoader();
+	var data = FileSystem.readFile(fname);
+	this.program = loader.parse(JSON.parse(data));
 }
 
 //Start nunu program

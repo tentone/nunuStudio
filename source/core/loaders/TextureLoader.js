@@ -9,10 +9,24 @@ function TextureLoader(manager)
 	this.fonts = [];
 }
 
+THREE.TextureLoader = TextureLoader;
+
 TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
+	var texture = new Texture(url);
+
+	if(onLoad !== undefined)
+	{
+		onLoad(texture);
+	}
+
+	return texture;
+}
+
+TextureLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
+{
 	var self = this;
-	var loader = new THREE.XHRLoader(this.manager);
+	var loader = new THREE.FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
 		self.parse(JSON.parse(text), onLoad);

@@ -15,7 +15,7 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}
 
 	var self = this;
-	var loader = new THREE.XHRLoader(this.manager);
+	var loader = new THREE.FileLoader(this.manager);
 
 	loader.load(url, function(text)
 	{
