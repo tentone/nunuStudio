@@ -40,13 +40,21 @@ Form.prototype.add = function(elem)
 }
 
 //Create text element and add to form
-Form.prototype.addText = function(text)
+Form.prototype.addText = function(text, width)
 {
 	var element = new Text(this.element);
-	element.fit_content = true;
-	element.size.set(0, 20);
 	element.setAlignment(Text.LEFT);
 	element.setText(text);
+	
+	if(width === undefined)
+	{
+		element.fit_content = true;
+		element.size.set(0, 20);
+	}
+	else
+	{
+		element.size.set(width, 20);
+	}
 
 	this.add(element);
 
