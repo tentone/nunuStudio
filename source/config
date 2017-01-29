@@ -10,7 +10,7 @@
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,
-		"camera_preview_percentage": "0.25",
+		"camera_preview_percentage": "0.6",
 		"lock_mouse": true,
 		"transformation_space": "local"
 	},
@@ -24,11 +24,11 @@
 		"shadows_type": 2
 	},
 	"code": {
-		"theme": "monokai",
+		"theme": "cobalt",
 		"keymap": "sublime",
-		"font_size": 14,
+		"font_size": 18,
 		"line_numbers": false,
-		"line_wrapping": false,
+		"line_wrapping": true,
 		"auto_close_brackets": true,
 		"highlight_active_line": false
 	}
