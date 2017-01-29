@@ -48,8 +48,8 @@ Form.prototype.addText = function(text, width)
 	
 	if(width === undefined)
 	{
-		element.fit_content = true;
-		element.size.set(0, 20);
+		element.fit_content = false;
+		element.size.set(150, 20);
 	}
 	else
 	{

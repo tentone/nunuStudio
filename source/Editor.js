@@ -198,10 +198,12 @@ include("editor/ui/theme/ThemeLight.js");
 
 include("editor/ui/tab/ScriptEditor.js");
 include("editor/ui/tab/SceneEditor.js");
-include("editor/ui/tab/SettingsTab.js");
 include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
-include("editor/ui/tab/MaterialEditor.js");
+include("editor/ui/tab/settings/SettingsTab.js");
+include("editor/ui/tab/settings/CodeSettingsTab.js");
+include("editor/ui/tab/settings/GeneralSettingsTab.js");
+include("editor/ui/tab/material/MaterialEditor.js");
 include("editor/ui/tab/material/PhongMaterialEditor.js");
 include("editor/ui/tab/material/LambertMaterialEditor.js");
 include("editor/ui/tab/material/BasicMaterialEditor.js");
