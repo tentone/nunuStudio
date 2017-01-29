@@ -8,9 +8,9 @@ function PhongMaterialEditor(parent)
 
 	//Skinning
 	this.form.addText("Animation");
-	this.skinning = new CheckBox(this.preview.div_b);
-	this.skinning.setText("Skinning");
-	this.skinning.size.set(75, 15);
+	this.skinning = new CheckBox(this.form.element);
+	this.form.addText("Skinning");
+	this.skinning.size.set(20, 15);
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
@@ -22,9 +22,9 @@ function PhongMaterialEditor(parent)
 	this.form.add(this.skinning);
 
 	//Morph targets
-	this.morphTargets = new CheckBox(this.preview.div_b);
-	this.morphTargets.setText("Morph targets");
-	this.morphTargets.size.set(200, 15);
+	this.morphTargets = new CheckBox(this.form.element);
+	this.form.addText("Morph targets");
+	this.morphTargets.size.set(20, 15);
 	this.morphTargets.updateInterface();
 	this.morphTargets.setOnChange(function()
 	{
@@ -38,7 +38,7 @@ function PhongMaterialEditor(parent)
 
 	//Wireframe
 	this.wireframe = new CheckBox(this.form.element);
-	this.wireframe.setText("Wireframe");
+	this.form.addText("Wireframe");
 	this.wireframe.size.set(200, 15);
 	this.wireframe.updateInterface();
 	this.wireframe.setOnChange(function()

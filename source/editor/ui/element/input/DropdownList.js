@@ -28,10 +28,10 @@ DropdownList.prototype.setDisabled = function(value)
 	this.element.disabled = value;
 }
 
-//Set onchange callback
-DropdownList.prototype.setOnChange = function(callback)
+//Set onchange onChange
+DropdownList.prototype.setOnChange = function(onChange)
 {
-	this.element.onchange = callback;
+	this.element.onchange = onChange;
 }
 
 //Add element

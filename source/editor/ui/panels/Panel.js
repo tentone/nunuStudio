@@ -60,8 +60,8 @@ function Panel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.name = self.name.getText();
-			Editor.updateObjectViews();
 			Editor.history.push(self.obj, Action.CHANGED);
+			Editor.updateObjectViews();
 		}
 	});
 	this.form.add(this.name);

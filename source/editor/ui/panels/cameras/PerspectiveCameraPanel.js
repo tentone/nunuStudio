@@ -29,7 +29,7 @@ function PerspectiveCameraPanel(parent, obj)
 
 	//Camera used
 	this.use = new CheckBox(this.form.element);
-	this.use.setText("Use camera");
+	this.form.addText("Use camera");
 	this.use.size.set(200, 15);
 	this.use.setOnChange(function()
 	{
@@ -137,7 +137,7 @@ function PerspectiveCameraPanel(parent, obj)
 
 	//Clear color
 	this.clear_color = new CheckBox(this.form.element);
-	this.clear_color.setText("Clear color");
+	this.form.addText("Clear color");
 	this.clear_color.size.set(200, 15);
 	this.clear_color.setOnChange(function()
 	{
@@ -151,7 +151,7 @@ function PerspectiveCameraPanel(parent, obj)
 
 	//Clear depth
 	this.clear_depth = new CheckBox(this.form.element);
-	this.clear_depth.setText("Clear depth");
+	this.form.addText("Clear depth");
 	this.clear_depth.size.set(200, 15);
 	this.clear_depth.setOnChange(function()
 	{
@@ -176,7 +176,6 @@ PerspectiveCameraPanel.prototype.attach = function(obj)
 	Panel.prototype.attach.call(this, obj);
 	this.scene = ObjectUtils.getScene(obj);
 }
-
 
 //Update panel content from attached object
 PerspectiveCameraPanel.prototype.updatePanel = function()

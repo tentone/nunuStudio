@@ -37,7 +37,7 @@ function ImageChooser(parent)
 			if(file.type.startsWith("image"))
 			{
 				self.setImage(file.path);
-				self.onchange(file.path);
+				self.onChange(file.path);
 			}
 		}
 	};
@@ -51,7 +51,7 @@ function ImageChooser(parent)
 	//Onclick select image file
 	this.element.onclick = function()
 	{
-		if(self.onchange !== null)
+		if(self.onChange !== null)
 		{
 			FileSystem.chooseFile(function(files)
 			{
@@ -59,14 +59,14 @@ function ImageChooser(parent)
 				{
 					var file = files[0].path;
 					self.setImage(file);
-					self.onchange(file);
+					self.onChange(file);
 				}
 			}, "image/*");
 		}
 	};
 
 	//On change function
-	this.onchange = null;
+	this.onChange = null;
 
 	//Element atributes
 	this.fit_parent = false;
@@ -82,10 +82,10 @@ function ImageChooser(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Set onchange callback function
-ImageChooser.prototype.setOnChange = function(callback)
+//Set onChange callback
+ImageChooser.prototype.setOnChange = function(onChange)
 {
-	this.onchange = callback;
+	this.onChange = onChange;
 }
 
 //Remove element

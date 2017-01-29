@@ -39,7 +39,7 @@ function ProgramPanel(parent, obj)
 
 	//Mouse lock
 	this.lock_pointer = new CheckBox(this.form.element);
-	this.lock_pointer.setText("Lock pointer");
+	this.form.addText("Lock pointer");
 	this.lock_pointer.size.set(50, 15);
 	this.lock_pointer.setOnChange(function()
 	{
@@ -57,7 +57,7 @@ function ProgramPanel(parent, obj)
 
 	//VR Enabled
 	this.vr = new CheckBox(this.form.element);
-	this.vr.setText("VR Enabled");
+	this.form.addText("VR Enabled");
 	this.vr.size.set(50, 15);
 	this.vr.setOnChange(function()
 	{
@@ -91,7 +91,7 @@ function ProgramPanel(parent, obj)
 
 	//Antialiasing
 	this.antialiasing = new CheckBox(this.form.element);
-	this.antialiasing.setText("Antialiasing");
+	this.form.addText("Antialiasing");
 	this.antialiasing.size.set(50, 15);
 	this.antialiasing.setOnChange(function()
 	{
@@ -105,7 +105,7 @@ function ProgramPanel(parent, obj)
 
 	//Shadows
 	this.shadows = new CheckBox(this.form.element);
-	this.shadows.setText("Shadows");
+	this.form.addText("Shadows");
 	this.shadows.size.set(50, 15);
 	this.shadows.setOnChange(function()
 	{
@@ -124,7 +124,6 @@ function ProgramPanel(parent, obj)
 	this.shadows_type.addValue("Basic", THREE.BasicShadowMap);
 	this.shadows_type.addValue("PCF", THREE.PCFShadowMap);
 	this.shadows_type.addValue("PCF Soft", THREE.PCFSoftShadowMap);
-	//this.shadows_type.addValue("PCSS Soft", THREE.PCSSSoftShadowMap);
 	this.shadows_type.setOnChange(function()
 	{
 		self.obj.shadows_type = self.shadows_type.getValue();

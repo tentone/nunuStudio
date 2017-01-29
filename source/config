@@ -10,9 +10,9 @@
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,
-		"camera_preview_percentage": 0.35,
+		"camera_preview_percentage": "0.7",
 		"lock_mouse": true,
-		"transformation_space": "world"
+		"transformation_space": "local"
 	},
 	"render": {
 		"follow_project": false,

@@ -35,7 +35,7 @@ function CoordinatesBox(parent)
 	this.y_text.style.textAlign = "center";
 	this.y_text.style.verticalAlign = "middle";
 	this.y_text.innerHTML = "Y";
-	this.element.appendChild(this.y_text);;
+	this.element.appendChild(this.y_text);
 
 	//Y
 	this.y = document.createElement("input");
@@ -182,13 +182,13 @@ CoordinatesBox.prototype.setValue = function(x, y, z, w)
 	}
 }
 
-//Set onchange callback
-CoordinatesBox.prototype.setOnChange = function(callback)
+//Set onchange onChange
+CoordinatesBox.prototype.setOnChange = function(onChange)
 {
-	this.x.onchange = callback;
-	this.y.onchange = callback;
-	this.z.onchange = callback;
-	this.w.onchange = callback;
+	this.x.onchange = onChange;
+	this.y.onchange = onChange;
+	this.z.onchange = onChange;
+	this.w.onchange = onChange;
 }
 
 //Remove element
