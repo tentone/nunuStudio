@@ -9,7 +9,7 @@ function AudioPanel(parent, obj)
 
 	//Static
 	this.static = new CheckBox(this.form.element);
-	this.static.setText("Static Object");
+	this.form.addText("Static Object");
 	this.static.size.set(200, 15);
 	this.static.setOnChange(function()
 	{
@@ -41,7 +41,7 @@ function AudioPanel(parent, obj)
 
 	//Autoplay
 	this.autoplay = new CheckBox(this.form.element);
-	this.autoplay.setText("Autoplay");
+	this.form.addText("Autoplay");
 	this.autoplay.size.set(150, 15);
 	this.autoplay.setOnChange(function()
 	{
@@ -56,7 +56,7 @@ function AudioPanel(parent, obj)
 
 	//Loop
 	this.loop = new CheckBox(this.form.element);
-	this.loop.setText("Loop");
+	this.form.addText("Loop");
 	this.loop.size.set(150, 15);
 	this.loop.setOnChange(function()
 	{

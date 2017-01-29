@@ -62,11 +62,11 @@ Graph.prototype.addGraph = function(name, color)
 	this.graph.push({canvas: canvas, name: name, color: color, values: [], buttons: [], onchange: null});
 }
 
-//Attach onchange callback to a graph
-Graph.prototype.setOnChange = function(callback, name)
+//Attach onchange onChange to a graph
+Graph.prototype.setOnChange = function(onChange, name)
 {
 	var graph = this.getGraph(name);
-	graph.onchange = callback;
+	graph.onchange = onChange;
 }
 
 //Set value range

@@ -35,7 +35,7 @@ function Slider(parent)
 	this.text.style.color = Editor.theme.text_color;
 	this.parent.appendChild(this.text);
 
-	//On Change callback
+	//On Change onChange
 	this.onchange = null;
 
 	//Element atributes
@@ -66,10 +66,10 @@ Slider.prototype.setRange = function(min, max)
 	this.element.max = String(max);
 }
 
-//Set onchange callback
-Slider.prototype.setOnChange = function(callback)
+//Set onchange onChange
+Slider.prototype.setOnChange = function(onChange)
 {
-	this.onchange = callback;
+	this.onchange = onChange;
 }
 
 //Get Slider value

@@ -65,7 +65,7 @@ function SettingsTab(parent)
 
 	//Show stats
 	this.show_stats = new CheckBox(this.general_form.element);
-	this.show_stats.setText("Show performance info");
+	this.general_form.addText("Show performance info");
 	this.show_stats.size.set(200, 16);
 	this.show_stats.setOnChange(function()
 	{
@@ -84,7 +84,7 @@ function SettingsTab(parent)
 
 	//Enable Grid
 	this.grid_enabled = new CheckBox(this.general_form.element);
-	this.grid_enabled.setText("Show grid");
+	this.general_form.addText("Show grid");
 	this.grid_enabled.size.set(200, 16);
 	this.grid_enabled.setOnChange(function()
 	{
@@ -132,7 +132,7 @@ function SettingsTab(parent)
 
 	//Enable Axis
 	this.axis_enabled = new CheckBox(this.general_form.element);
-	this.axis_enabled.setText("Show axis");
+	this.general_form.addText("Show axis");
 	this.axis_enabled.size.set(200, 16);
 	this.axis_enabled.setOnChange(function()
 	{
@@ -144,7 +144,7 @@ function SettingsTab(parent)
 
 	//Mouse lock on camera move
 	this.lock_mouse = new CheckBox(this.general_form.element);
-	this.lock_mouse.setText("Lock mouse editor");
+	this.general_form.addText("Lock mouse editor");
 	this.lock_mouse.size.set(200, 16);
 	this.lock_mouse.setOnChange(function()
 	{
@@ -172,7 +172,7 @@ function SettingsTab(parent)
 
 	//Enable camera preview
 	this.camera_preview_enabled = new CheckBox(this.general_form.element);
-	this.camera_preview_enabled.setText("Camera preview");
+	this.general_form.addText("Camera preview");
 	this.camera_preview_enabled.size.set(200, 16);
 	this.camera_preview_enabled.setOnChange(function()
 	{
@@ -231,7 +231,7 @@ function SettingsTab(parent)
 
 	//Use project settings
 	this.follow_project = new CheckBox(this.general_form.element);
-	this.follow_project.setText("Follow project settings");
+	this.general_form.addText("Follow project settings");
 	this.follow_project.size.set(200, 16);
 	this.follow_project.setOnChange(function()
 	{
@@ -242,7 +242,7 @@ function SettingsTab(parent)
 
 	//Antialiasing
 	this.antialiasing = new CheckBox(this.general_form.element);
-	this.antialiasing.setText("Antialiasing");
+	this.general_form.addText("Antialiasing");
 	this.antialiasing.size.set(200, 16);
 	this.antialiasing.setOnChange(function()
 	{
@@ -253,7 +253,7 @@ function SettingsTab(parent)
 
 	//Shadows
 	this.shadows = new CheckBox(this.general_form.element);
-	this.shadows.setText("Shadows");
+	this.general_form.addText("Shadows");
 	this.shadows.size.set(50, 15);
 	this.shadows.setOnChange(function()
 	{	
@@ -340,7 +340,7 @@ function SettingsTab(parent)
 
 	//Show line numbers
 	this.code_line_numbers = new CheckBox(this.code_form.element);
-	this.code_line_numbers.setText("Show line number");
+	this.code_form.addText("Show line number");
 	this.code_line_numbers.size.set(200, 16);
 	this.code_line_numbers.setOnChange(function()
 	{
@@ -351,7 +351,7 @@ function SettingsTab(parent)
 
 	//Line wrapping
 	this.code_line_wrapping = new CheckBox(this.code_form.element);
-	this.code_line_wrapping.setText("Line wrap");
+	this.code_form.addText("Line wrap");
 	this.code_line_wrapping.size.set(200, 16);
 	this.code_line_wrapping.setOnChange(function()
 	{
@@ -362,7 +362,7 @@ function SettingsTab(parent)
 
 	//Auto close brackets
 	this.code_auto_close_brackets = new CheckBox(this.code_form.element);
-	this.code_auto_close_brackets.setText("Auto close brackets");
+	this.code_form.addText("Auto close brackets");
 	this.code_auto_close_brackets.size.set(200, 16);
 	this.code_auto_close_brackets.setOnChange(function()
 	{
@@ -373,7 +373,7 @@ function SettingsTab(parent)
 
 	//Highlight active line
 	this.code_highlight_active_line = new CheckBox(this.code_form.element);
-	this.code_highlight_active_line.setText("Highlight line");
+	this.code_form.addText("Highlight line");
 	this.code_highlight_active_line.size.set(200, 16);
 	this.code_highlight_active_line.setOnChange(function()
 	{

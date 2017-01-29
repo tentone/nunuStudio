@@ -9,7 +9,7 @@ function ScenePanel(parent, obj)
 
 	//Select scene as default
 	this.default = new CheckBox(this.form.element);
-	this.default.setText("Default scene");
+	this.form.addText("Default scene");
 	this.default.size.set(200, 15);
 	this.default.setOnChange(function()
 	{

@@ -177,13 +177,13 @@ include("editor/ui/element/input/ImageChooser.js");
 include("editor/ui/element/input/TextureBox.js");
 
 include("editor/ui/DropdownMenu.js");
-include("editor/ui/TabGroup.js");
-include("editor/ui/TabElement.js");
-include("editor/ui/TabButton.js");
 include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/AssetExplorer.js");
+include("editor/ui/TabGroup.js");
+include("editor/ui/TabElement.js");
+include("editor/ui/TabButton.js");
 
 include("editor/ui/asset/Asset.js");
 include("editor/ui/asset/MaterialAsset.js");
@@ -201,15 +201,14 @@ include("editor/ui/tab/SceneEditor.js");
 include("editor/ui/tab/SettingsTab.js");
 include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
-
 include("editor/ui/tab/MaterialEditor.js");
-include("editor/ui/tab/materialeditor/PhongMaterialEditor.js");
-include("editor/ui/tab/materialeditor/LambertMaterialEditor.js");
-include("editor/ui/tab/materialeditor/BasicMaterialEditor.js");
-include("editor/ui/tab/materialeditor/StandardMaterialEditor.js");
-include("editor/ui/tab/materialeditor/SpriteMaterialEditor.js");
-include("editor/ui/tab/materialeditor/ShaderMaterialEditor.js");
-include("editor/ui/tab/materialeditor/PointMaterialEditor.js");
+include("editor/ui/tab/material/PhongMaterialEditor.js");
+include("editor/ui/tab/material/LambertMaterialEditor.js");
+include("editor/ui/tab/material/BasicMaterialEditor.js");
+include("editor/ui/tab/material/StandardMaterialEditor.js");
+include("editor/ui/tab/material/SpriteMaterialEditor.js");
+include("editor/ui/tab/material/ShaderMaterialEditor.js");
+include("editor/ui/tab/material/PointMaterialEditor.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");

@@ -28,10 +28,10 @@ TextBox.prototype.setDisabled = function(value)
 	this.element.disabled = value;
 }
 
-//Set onchange callback
-TextBox.prototype.setOnChange = function(callback)
+//Set onchange onChange
+TextBox.prototype.setOnChange = function(onChange)
 {
-	this.element.onchange = callback;
+	this.element.onchange = onChange;
 }
 
 //Set text

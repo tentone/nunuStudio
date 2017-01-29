@@ -2,13 +2,11 @@
 
 function Element(parent, tag)
 {
-	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Element
 	this.element = document.createElement(tag);
 	this.element.style.position = "absolute";
-	this.element.style.overflow = "auto";
+	this.element.style.overflow = "hidden";
 
 	this.element.ondrop = function(event)
 	{
@@ -20,13 +18,11 @@ function Element(parent, tag)
 		event.preventDefault();
 	};
 
-	//Attributes
 	this.fit_parent = false;
 	this.visible = true;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	
-	//Add to parent
 	this.parent.appendChild(this.element);
 }
 

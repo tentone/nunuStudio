@@ -42,10 +42,10 @@ NumberBox.prototype.setStep = function(value)
 	this.element.step = String(value);
 }
 
-//Set onchange callback
-NumberBox.prototype.setOnChange = function(callback)
+//Set onchange onChange
+NumberBox.prototype.setOnChange = function(onChange)
 {
-	this.element.onchange = callback;
+	this.element.onchange = onChange;
 }
 
 //Set value

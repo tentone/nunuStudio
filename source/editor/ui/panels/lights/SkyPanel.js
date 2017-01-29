@@ -9,7 +9,7 @@ function SkyPanel(parent, obj)
 
 	//Auto update
 	this.auto_update = new CheckBox(this.form.element);
-	this.auto_update.setText("Auto update");
+	this.form.addText("Auto update");
 	this.auto_update.size.set(200, 15);
 	this.auto_update.setOnChange(function()
 	{
@@ -106,7 +106,7 @@ function SkyPanel(parent, obj)
 
 	//Cast shadow
 	this.cast_shadow = new CheckBox(this.form.element);
-	this.cast_shadow.setText("Cast Shadows");
+	this.form.addText("Cast Shadows");
 	this.cast_shadow.size.set(200, 15);
 	this.cast_shadow.position.set(5, 85);
 	this.cast_shadow.updateInterface();

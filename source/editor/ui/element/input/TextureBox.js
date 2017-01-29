@@ -86,15 +86,15 @@ function TextureBox(parent)
 		}
 	};
 
-	//Side elements form
+	//Form
 	this.form = new Form(this.element);
 	this.form.position.set(105, 0);
 	this.form.spacing.set(10, 5);
 
 	//Use texture
+	this.form.addText("Use texture");
 	this.use_texture = new CheckBox(this.form.element);
-	this.use_texture.setText("Use texture");
-	this.use_texture.size.set(120, 15);
+	this.use_texture.size.set(30, 15);
 	this.form.add(this.use_texture);
 	this.form.nextRow();
 
@@ -143,14 +143,14 @@ function TextureBox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Set onchange callback function
-TextureBox.prototype.setOnChange = function(callback)
+//Set onchange onChange function
+TextureBox.prototype.setOnChange = function(onChange)
 {
-	this.onchange = callback;
-	this.use_texture.setOnChange(callback);
-	this.wrapT.setOnChange(callback);
-	this.wrapS.setOnChange(callback);
-	this.repeat.setOnChange(callback);
+	this.onchange = onChange;
+	this.use_texture.setOnChange(onChange);
+	this.wrapT.setOnChange(onChange);
+	this.wrapS.setOnChange(onChange);
+	this.repeat.setOnChange(onChange);
 }
 
 //Remove element

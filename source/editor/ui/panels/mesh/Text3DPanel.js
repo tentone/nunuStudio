@@ -73,7 +73,7 @@ function Text3DPanel(parent, obj)
 
 	//Bevel
 	this.bevel = new CheckBox(this.form.element);
-	this.bevel.setText("Bevel");
+	this.form.addText("Bevel");
 	this.bevel.size.set(200, 15);
 	this.bevel.setOnChange(function()
 	{
@@ -122,7 +122,7 @@ function Text3DPanel(parent, obj)
 
 	//Visible
 	this.visible = new CheckBox(this.form.element);
-	this.visible.setText("Visible");
+	this.form.addText("Visible");
 	this.visible.size.set(200, 15);
 	this.visible.setOnChange(function()
 	{
@@ -136,7 +136,7 @@ function Text3DPanel(parent, obj)
 
 	//Static
 	this.static = new CheckBox(this.form.element);
-	this.static.setText("Static Object");
+	this.form.addText("Static Object");
 	this.static.size.set(200, 15);
 	this.static.setOnChange(function()
 	{
@@ -150,7 +150,7 @@ function Text3DPanel(parent, obj)
 
 	//Cast shadow
 	this.cast_shadow = new CheckBox(this.form.element);
-	this.cast_shadow.setText("Cast Shadow");
+	this.form.addText("Cast Shadow");
 	this.cast_shadow.size.set(200, 15);
 	this.cast_shadow.setOnChange(function()
 	{
@@ -164,7 +164,7 @@ function Text3DPanel(parent, obj)
 
 	//Receive shadow
 	this.receive_shadow = new CheckBox(this.form.element);
-	this.receive_shadow.setText("Receive Shadow");
+	this.form.addText("Receive Shadow");
 	this.receive_shadow.size.set(200, 15);
 	this.receive_shadow.setOnChange(function()
 	{

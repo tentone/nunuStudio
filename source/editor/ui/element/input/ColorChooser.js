@@ -26,15 +26,15 @@ function ColorChooser(parent)
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	this.callback = null;
+	this.onChange = null;
 
 	//Click event
 	var self = this;
 	this.element.onchange = function()
 	{
-		if(self.callback !== null)
+		if(self.onChange !== null)
 		{
-			self.callback();
+			self.onChange();
 		}
 	};
 
@@ -42,10 +42,10 @@ function ColorChooser(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Set onchange callback
-ColorChooser.prototype.setOnChange = function(callback)
+//Set onchange onChange
+ColorChooser.prototype.setOnChange = function(onChange)
 {
-	this.element.onchange = callback;
+	this.element.onchange = onChange;
 }
 
 //Set color

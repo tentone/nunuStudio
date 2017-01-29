@@ -56,7 +56,7 @@ function PointLightPanel(parent, obj)
 
 	//Visible
 	this.visible = new CheckBox(this.form.element);
-	this.visible.setText("Visible");
+	this.form.addText("Visible");
 	this.visible.size.set(200, 15);
 	this.visible.setOnChange(function()
 	{
@@ -70,7 +70,7 @@ function PointLightPanel(parent, obj)
 
 	//Static
 	this.static = new CheckBox(this.form.element);
-	this.static.setText("Static Object");
+	this.form.addText("Static Object");
 	this.static.size.set(200, 15);
 	this.static.setOnChange(function()
 	{
@@ -88,7 +88,7 @@ function PointLightPanel(parent, obj)
 
 	//Cast shadow
 	this.cast_shadow = new CheckBox(this.form.element);
-	this.cast_shadow.setText("Cast Shadows");
+	this.form.addText("Cast Shadows");
 	this.cast_shadow.size.set(200, 15);
 	this.cast_shadow.position.set(5, 85);
 	this.cast_shadow.updateInterface();

@@ -30,10 +30,10 @@ TextArea.prototype.setDisabled = function(value)
 	this.element.disabled = value;
 }
 
-//Set onchange callback
-TextArea.prototype.setOnChange = function(callback)
+//Set onchange onChange
+TextArea.prototype.setOnChange = function(onChange)
 {
-	this.element.onchange = callback;
+	this.element.onchange = onChange;
 }
 
 //Set text

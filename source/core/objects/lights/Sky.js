@@ -14,19 +14,18 @@ function Sky(auto_update, day_time, sun_distance, time)
 	this.color_top = [new THREE.Color(0x77b3fb), new THREE.Color(0x0076ff), new THREE.Color(0x035bb6), new THREE.Color(0x002439)];
 	this.color_bottom = [new THREE.Color(0xebece6), new THREE.Color(0xffffff), new THREE.Color(0xfee7d7), new THREE.Color(0x0065a7)];
 	this.sun_color = 0xffffaa;
-	this.moon_color = 0x8888ff;
+	this.moon_color = 0x5555bb;
 
 	//Hemisphere light
-	this.hemisphere = new HemisphereLight(0xffffff, 0xffffff, 0.5);
+	this.hemisphere = new HemisphereLight(0, 0, 0.6);
 	this.hemisphere.color.setHSL(0.6, 1, 0.6);
 	this.hemisphere.groundColor.setHSL(0.1, 1, 0.75);
-	this.hemisphere.position.set(0, 500, 0);
 	this.hemisphere.hidden = true;
 	this.hemisphere.matrixAutoUpdate = false;
 	this.add(this.hemisphere);
 
 	//Sun light
-	this.sun = new DirectionalLight(this.sun_color, 0.3);
+	this.sun = new DirectionalLight(this.sun_color, 0.5);
 	this.sun.castShadow = true;
 	this.sun.hidden = true;
 	this.add(this.sun);
@@ -79,9 +78,9 @@ function Sky(auto_update, day_time, sun_distance, time)
 
 	//Day time (seconds) and sun distance
 	this.auto_update = (auto_update !== undefined) ? auto_update : true;
-	this.sun_distance = (sun_distance !== undefined) ? sun_distance : 500;
-	this.day_time = (day_time !== undefined) ? day_time : 240;
-	this.time = (time !== undefined) ? time : 150;
+	this.sun_distance = (sun_distance !== undefined) ? sun_distance : 100;
+	this.day_time = (day_time !== undefined) ? day_time : 120;
+	this.time = (time !== undefined) ? time : 75;
 
 	this.updateSky();
 }
@@ -106,6 +105,7 @@ Sky.prototype.update = function()
 	if(this.auto_update)
 	{
 		this.time += this.clock.getDelta();
+
 		if(this.time > this.day_time)
 		{
 			this.time -= this.day_time;

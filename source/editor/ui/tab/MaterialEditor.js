@@ -46,9 +46,9 @@ function MaterialEditor(parent)
 	this.preview.updateInterface();
 
 	//Change preview division style
-	this.preview.div_b.style.overflow = "auto";
-	this.preview.div_b.style.cursor = "default";
-	this.preview.div_b.style.backgroundColor = Editor.theme.panel_color;
+	this.preview.div_a.style.overflow = "auto";
+	this.preview.div_a.style.cursor = "default";
+	this.preview.div_a.style.backgroundColor = Editor.theme.panel_color;
 
 	//Change main division style
 	this.main.div_b.style.overflow = "auto";
@@ -94,10 +94,10 @@ function MaterialEditor(parent)
 	this.scene.add(new PointLight(0x666666));
 	this.scene.add(new AmbientLight(0x555555));
 
-	this.obj = new THREE.Mesh(new THREE.SphereBufferGeometry(1, 64, 64), null);
-	this.obj.position.set(0, 0, -2.5);
-	this.obj.visible = false;
-	this.scene.add(this.obj);
+	this.mesh = new THREE.Mesh(new THREE.SphereBufferGeometry(1, 64, 64), null);
+	this.mesh.position.set(0, 0, -2.5);
+	this.mesh.visible = false;
+	this.scene.add(this.mesh);
 	
 	this.sprite = new THREE.Sprite(null);
 	this.sprite.position.set(0, 0, -1.5);
@@ -159,10 +159,16 @@ function MaterialEditor(parent)
 	this.children.push(this.test_model);
 
 	//Sky enabled
+	this.sky_text = new Text(this.preview.div_b);
+	this.sky_text.size.set(0, 20);
+	this.sky_text.position.set(10, 60);
+	this.sky_text.setAlignment(Text.LEFT);
+	this.sky_text.setText("Enable sky");
+	this.children.push(this.sky_text);
+
 	this.sky_enabled = new CheckBox(this.preview.div_b);
-	this.sky_enabled.setText("Enable sky");
 	this.sky_enabled.size.set(200, 15);
-	this.sky_enabled.position.set(5, 60);
+	this.sky_enabled.position.set(80, 60);
 	this.sky_enabled.setValue(true);
 	this.sky_enabled.updateInterface();
 	this.sky_enabled.setOnChange(function()
@@ -170,7 +176,6 @@ function MaterialEditor(parent)
 		self.sky.visible = self.sky_enabled.getValue();
 	});
 	this.children.push(this.sky_enabled);
-
 
 	//Generic Material parameters
 	this.form = new Form(this.main.div_b);
@@ -213,9 +218,9 @@ function MaterialEditor(parent)
 
 	//Test depth
 	this.form.addText("Depth");
-	this.depthTest = new CheckBox(this.preview.div_b);
-	this.depthTest.setText("Test");
-	this.depthTest.size.set(40, 15);
+	this.depthTest = new CheckBox(this.form.element);
+	this.form.addText("Test");
+	this.depthTest.size.set(20, 15);
 	this.depthTest.updateInterface();
 	this.depthTest.setOnChange(function()
 	{
@@ -228,11 +233,11 @@ function MaterialEditor(parent)
 	this.form.add(this.depthTest);
 
 	//Write depth
-	this.depthWrite  = new CheckBox(this.preview.div_b);
-	this.depthWrite .setText("Write");
-	this.depthWrite .size.set(40, 15);
-	this.depthWrite .updateInterface();
-	this.depthWrite .setOnChange(function()
+	this.depthWrite = new CheckBox(this.form.element);
+	this.form.addText("Write");
+	this.depthWrite.size.set(20, 15);
+	this.depthWrite.updateInterface();
+	this.depthWrite.setOnChange(function()
 	{
 		if(self.material !== null)
 		{
@@ -245,7 +250,7 @@ function MaterialEditor(parent)
 
 	//Transparent
 	this.transparent = new CheckBox(this.form.element);
-	this.transparent.setText("Transparent");
+	this.form.addText("Transparent");
 	this.transparent.size.set(200, 15);
 	this.transparent.setOnChange(function()
 	{
@@ -329,12 +334,12 @@ MaterialEditor.prototype.attachMaterial = function(material, material_file)
 	{
 		this.sprite.material = material;
 		this.sprite.visible = true;
-		this.obj.visible = false;
+		this.mesh.visible = false;
 	}
 	else
 	{
-		this.obj.material = material;
-		this.obj.visible = true;
+		this.mesh.material = material;
+		this.mesh.visible = true;
 		this.sprite.visible = false;
 	}
 
@@ -439,7 +444,7 @@ MaterialEditor.prototype.update = function()
 		{
 			var delta = new THREE.Quaternion();
 			delta.setFromEuler(new THREE.Euler(Mouse.delta.y * 0.005, Mouse.delta.x * 0.005, 0, 'XYZ'));
-			this.obj.quaternion.multiplyQuaternions(delta, this.obj.quaternion);
+			this.mesh.quaternion.multiplyQuaternions(delta, this.mesh.quaternion);
 		}
 
 		//Zoom

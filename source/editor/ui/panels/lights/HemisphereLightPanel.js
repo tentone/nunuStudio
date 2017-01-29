@@ -39,7 +39,7 @@ function HemisphereLightPanel(parent, obj)
 
 	//Visible
 	this.visible = new CheckBox(this.form.element);
-	this.visible.setText("Visible");
+	this.form.addText("Visible");
 	this.visible.size.set(200, 15);
 	this.visible.setOnChange(function()
 	{
@@ -53,7 +53,7 @@ function HemisphereLightPanel(parent, obj)
 
 	//Static
 	this.static = new CheckBox(this.form.element);
-	this.static.setText("Static Object");
+	this.form.addText("Static Object");
 	this.static.size.set(200, 15);
 	this.static.setOnChange(function()
 	{
