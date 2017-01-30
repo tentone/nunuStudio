@@ -820,27 +820,13 @@ Interface.initialize = function()
 	//Settings
 	Interface.file.addOption("Settings", function()
 	{
-		//Check if there is already a settings tab
-		var found = false;
-		for(var i = 0; i < Interface.tab.options.length; i++)
+		var tab = Interface.tab.getTab(SettingsTab);
+		if(tab === null)
 		{
-			if(Interface.tab.options[i].component instanceof SettingsTab)
-			{
-				found = true;
-				Interface.tab.options[i].select();
-				break;
-			}
+			tab = Interface.tab.addTab(SettingsTab, true);
 		}
-
-		//If not create one
-		if(!found)
-		{
-			var tab = Interface.tab.addTab("Settings", Interface.file_dir + "icons/tab/settings.png", true);
-			var settings = new SettingsTab(tab.element);
-			tab.attachComponent(settings);
-			tab.select();
-		}
-	}, Interface.file_dir + "icons/tab/settings.png");
+		tab.select();
+	}, Interface.file_dir + "icons/misc/settings.png");
 
 	var publish = Interface.file.addMenu("Publish");
 	publish.addOption("Web", function()
@@ -989,26 +975,13 @@ Interface.initialize = function()
 	Interface.about.updateInterface();
 	Interface.about.setCallback(function()
 	{
-		//Check if there is already a settings tab
-		var found = false;
-		for(var i = 0; i < Interface.tab.options.length; i++)
+		var tab = Interface.tab.getTab(AboutTab);
+		if(tab === null)
 		{
-			if(Interface.tab.options[i].component instanceof AboutTab)
-			{
-				found = true;
-				Interface.tab.options[i].select();
-				break;
-			}
+			tab = Interface.tab.addTab(AboutTab, true);
 		}
 
-		//If not create one
-		if(!found)
-		{
-			var tab = Interface.tab.addTab("About", Interface.file_dir + "icons/misc/about.png", true);
-			var settings = new AboutTab(tab.element);
-			tab.attachComponent(settings);
-			tab.select();
-		}
+		tab.select();
 	});
 
 	//Run

@@ -10,9 +10,9 @@
 		"grid_enabled": true,
 		"axis_enabled": true,
 		"camera_preview_enabled": true,
-		"camera_preview_percentage": "0.6",
+		"camera_preview_percentage": "0.3",
 		"lock_mouse": true,
-		"transformation_space": "local"
+		"transformation_space": "world"
 	},
 	"render": {
 		"follow_project": false,
@@ -26,7 +26,7 @@
 	"code": {
 		"theme": "cobalt",
 		"keymap": "sublime",
-		"font_size": 18,
+		"font_size": 14.366667098999018,
 		"line_numbers": false,
 		"line_wrapping": true,
 		"auto_close_brackets": true,

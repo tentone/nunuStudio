@@ -39,66 +39,49 @@ function MaterialAsset(parent)
 	{
 		if(self.material instanceof THREE.Material)
 		{
-			//Check if there is already a tab with this material attached
-			var found = false;
-			for(var i = 0; i < Interface.tab.options.length; i++)
-			{
-				if(Interface.tab.options[i].component instanceof MaterialEditor)
-				{
-					if(Interface.tab.options[i].component.material === self.material)
-					{
-						found = true;
-						Interface.tab.selectTab(i);
-						break;
-					}
-				}
-			}
+			var tab = Interface.tab.getTab(MaterialEditor, self.material);
 
-			//If not found open new tab
-			if(!found)
+			if(tab === null)
 			{
 				self.restoreMaterial();
 
-				var tab = Interface.tab.addTab(self.material.name, Interface.file_dir + "icons/misc/material.png", true);
-				var material_editor;
-
 				if(self.material instanceof THREE.MeshPhongMaterial)
 				{
-					material_editor = new PhongMaterialEditor();
+					tab = Interface.tab.addTab(PhongMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.MeshLambertMaterial)
 				{
-					material_editor = new LambertMaterialEditor();
+					tab = Interface.tab.addTab(LambertMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.MeshBasicMaterial)
 				{
-					material_editor = new BasicMaterialEditor();
+					tab = Interface.tab.addTab(BasicMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.MeshStandardMaterial)
 				{
-					material_editor = new StandardMaterialEditor();
+					tab = Interface.tab.addTab(StandardMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.SpriteMaterial)
 				{
-					material_editor = new SpriteMaterialEditor();
+					tab = Interface.tab.addTab(SpriteMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.ShaderMaterial)
 				{
-					material_editor = new ShaderMaterialEditor();
+					tab = Interface.tab.addTab(ShaderMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.PointsMaterial)
 				{
-					material_editor = new PointMaterialEditor();
+					tab = Interface.tab.addTab(PointMaterialEditor, true);
 				}
 				else
 				{
-					material_editor = new MaterialEditor();
+					tab = Interface.tab.addTab(MaterialEditor, true);
 				}
 
-				material_editor.attachMaterial(self.material, self);
-				tab.attachComponent(material_editor);
-				tab.select();
+				tab.attach(self.material, self);
 			}
+
+			tab.select();
 		}
 	};
 

@@ -2,6 +2,7 @@
 
 function TabButton(parent, tab)
 {
+	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
 	//Element
@@ -72,7 +73,7 @@ function TabButton(parent, tab)
 	this.text.style.top = "8px";
 	this.text.style.left = "25px";
 	this.text.style.color = Editor.theme.text_color;
-	this.text.innerHTML = tab.name;
+	this.text.innerHTML = tab.title;
 	this.element.appendChild(this.text);
 
 	//Close button
@@ -108,7 +109,7 @@ TabButton.prototype.setIcon = function(icon)
 //Set button name
 TabButton.prototype.setName = function(text)
 {
-	this.tab.name = text;
+	this.tab.title = text;
 	this.text.innerHTML = text;
 }
 

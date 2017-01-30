@@ -1,23 +1,8 @@
 "use strict";
 
-function MaterialEditor(parent)
+function MaterialEditor(parent, closeable, container, index)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-
-	//Create element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
-
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
+	TabElement.call(this, parent, closeable, container, index, "Material", "editor/files/icons/misc/material.png");
 
 	//Self pointer
 	var self = this;
@@ -62,13 +47,9 @@ function MaterialEditor(parent)
 
 	//Element atributes
 	this.children = [];
-	this.fit_parent = false;
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
 	
 	//Material UI File element
-	this.material_file = null;
+	this.asset = null;
 
 	//Attached material
 	this.material = null;
@@ -320,14 +301,12 @@ function MaterialEditor(parent)
 
 	//Update form
 	this.form.updateInterface();
-
-	//Add element to document
-	this.parent.appendChild(this.element);
-	
 }
 
+MaterialEditor.prototype = Object.create(TabElement.prototype);
+
 //Attach material to material editor
-MaterialEditor.prototype.attachMaterial = function(material, material_file)
+MaterialEditor.prototype.attach = function(material, asset)
 {
 	//Check is if sprite material and ajust preview
 	if(material instanceof THREE.SpriteMaterial)
@@ -343,14 +322,15 @@ MaterialEditor.prototype.attachMaterial = function(material, material_file)
 		this.sprite.visible = false;
 	}
 
-	//Store material file pointer
-	if(material_file !== undefined)
+	//Material asset
+	if(asset !== undefined)
 	{
-		this.material_file = material_file;
+		this.asset = asset;
 	}
 	
 	//Store material
 	this.material = material;
+	this.updateMetadata();
 
 	//Generic material elements
 	this.name.setText(material.name);
@@ -363,6 +343,12 @@ MaterialEditor.prototype.attachMaterial = function(material, material_file)
 	this.blending.setValue(material.blending);	
 }
 
+//Check if material is attached to tab
+MaterialEditor.prototype.isAttached = function(material)
+{
+	return this.material === material;
+}
+
 //Activate code editor
 MaterialEditor.prototype.activate = function()
 {
@@ -372,27 +358,17 @@ MaterialEditor.prototype.activate = function()
 	Mouse.setCanvas(this.canvas.element);
 }
 
-//Remove element
-MaterialEditor.prototype.destroy = function()
-{
-	try
-	{
-		this.parent.removeChild(this.element);
-	}
-	catch(e){}
-}
-
-//Update container object data
-MaterialEditor.prototype.updateMetadata = function(container)
+//Update object data
+MaterialEditor.prototype.updateMetadata = function()
 {
 	if(this.material !== null)
 	{
 		var material = this.material;
 
-		//Set container name
+		//Set name
 		if(material.name !== undefined)
 		{
-			container.setName(material.name);
+			this.setName(material.name);
 		}
 
 		//Check if scene exists in program
@@ -410,7 +386,7 @@ MaterialEditor.prototype.updateMetadata = function(container)
 		//If not found close tab
 		if(!found)
 		{
-			container.close();
+			this.close();
 		}
 	}
 }
@@ -418,7 +394,7 @@ MaterialEditor.prototype.updateMetadata = function(container)
 //Update material editor
 MaterialEditor.prototype.update = function()
 {
-	//Update UI containers
+	//Update UI
 	this.main.update();
 	this.preview.update();
 
@@ -462,14 +438,7 @@ MaterialEditor.prototype.update = function()
 
 //Update division Size
 MaterialEditor.prototype.updateInterface = function()
-{
-	//Fit parent
-	if(this.fit_parent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-	
+{	
 	//Set visibility
 	if(this.visible)
 	{
@@ -480,12 +449,12 @@ MaterialEditor.prototype.updateInterface = function()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Update main container
+	//Update main
 	this.main.visible = this.visible;
 	this.main.size.copy(this.size);
 	this.main.updateInterface();
 
-	//Update preview container
+	//Update preview
 	this.preview.visible = this.visible;
 	this.preview.size.set(this.size.x * this.main.tab_position, this.size.y);
 	this.preview.updateInterface();

@@ -2,18 +2,18 @@
 
 function TreeElement(container)
 {
-	//Component
-	if(container === undefined)
+	//Container
+	if(container !== undefined)
 	{
-		this.container = null;
+		this.container = container;
+		this.parent = this.container.element;
 	}
 	else
 	{
-		this.container = container;
+		this.container = null;
+		this.parent = null;
 	}
-
-	this.parent = this.container.element;
-
+	
 	//Create element
 	this.element = document.createElement("div");
 	this.element.draggable = true;
@@ -101,7 +101,7 @@ function TreeElement(container)
 			menu.size.set(140, 20);
 			menu.position.set(event.clientX - 5, event.clientY - 5);
 			
-
+			//Open tab for object editor
 			if(self.obj instanceof Script)
 			{
 				menu.addOption("Script editor", openScriptTab);
@@ -115,6 +115,7 @@ function TreeElement(container)
 				menu.addOption("Particle editor", openParticleTab);
 			}
 
+			//Rename Object
 			menu.addOption("Rename", function()
 			{
 				var name = prompt("Rename object", self.obj.name);
@@ -263,97 +264,36 @@ function TreeElement(container)
 	//Open new script tab
 	var openScriptTab = function()
 	{
-		//Check if there is already a tab with this script attached
-		var found = false;
-		for(var i = 0; i < Interface.tab.options.length; i++)
+		var tab = Interface.tab.getTab(ScriptEditor, self.obj);
+		if(tab === null)
 		{
-			if(Interface.tab.options[i].component instanceof ScriptEditor)
-			{
-				if(Interface.tab.options[i].component.script === self.obj)
-				{
-					found = true;
-					Interface.tab.selectTab(i);
-					break;
-				}
-			}
+			tab = Interface.tab.addTab(ScriptEditor, true);
+			tab.attach(self.obj);
 		}
-
-		//If not found open new tab
-		if(!found)
-		{
-			//Add new Code Editor tab
-			var tab = Interface.tab.addTab(self.obj.name, Interface.file_dir + "icons/tab/code.png", true);
-			var code = new ScriptEditor();
-			code.attachScript(self.obj);
-			tab.attachComponent(code);
-			
-			//Select added tab
-			tab.select();
-		}
+		tab.select();
 	};
 
 	//Open scene tab
 	var openSceneTab = function()
 	{
-		//Check if there is already a tab with this scene attached
-		var found = false;
-		for(var i = 0; i < Interface.tab.options.length; i++)
+		var tab = Interface.tab.getTab(SceneEditor, self.obj);
+		if(tab === null)
 		{
-			if(Interface.tab.options[i].component instanceof SceneEditor)
-			{
-				//If found select it
-				if(Interface.tab.options[i].component.scene === self.obj)
-				{
-					found = true;
-					Interface.tab.selectTab(i);
-					break;
-				}
-			}
+			tab = Interface.tab.addTab(SceneEditor, true);
+			tab.attach(self.obj);
 		}
-
-		//If no tab is found create new one with a scene container
-		if(!found)
-		{
-			//Scene Canvas
-			var tab = Interface.tab.addTab(self.obj.name, Interface.file_dir + "icons/tab/scene.png", true);
-			var container = new SceneEditor(tab.element);
-			container.setScene(self.obj);
-			tab.attachComponent(container);
-
-			//Select tab
-			tab.select();
-		}
+		tab.select();
 	};
 
 	var openParticleTab = function()
 	{
-		//Check if there is already a tab with this particle emitter attached
-		var found = false;
-		for(var i = 0; i < Interface.tab.options.length; i++)
+		var tab = Interface.tab.getTab(ParticleEditor, self.obj);
+		if(tab === null)
 		{
-			if(Interface.tab.options[i].component instanceof ParticleEditor)
-			{
-				if(Interface.tab.options[i].component.particle === self.obj)
-				{
-					found = true;
-					Interface.tab.selectTab(i);
-					break;
-				}
-			}
+			tab = Interface.tab.addTab(ParticleEditor, true);
+			tab.attach(self.obj);
 		}
-
-		//If not found open new tab
-		if(!found)
-		{
-			//Add new Particle Editor tab
-			var tab = Interface.tab.addTab(self.obj.name, Interface.file_dir + "icons/effects/particles.png", true);
-			var particle = new ParticleEditor();
-			particle.attachParticle(self.obj);
-			tab.attachComponent(particle);
-			
-			//Select added tab
-			tab.select();
-		}
+		tab.select();
 	};
 
 	//Double click event

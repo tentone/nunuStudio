@@ -1,27 +1,9 @@
 "use strict";
 
-function GeneralSettingsTab(parent)
+function GeneralSettingsTab(parent, closeable, container, index)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	TabElement.call(this, parent, closeable, container, index, "General", "editor/files/icons/misc/tool.png");
 
-	//Create element
-	this.element = document.createElement("div");
-	this.element.style.overflow = "auto";
-	this.element.style.position = "absolute";
-	
-	//Prevent Drop event
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
-	
 	//Self pointer
 	var self = this;
 
@@ -54,9 +36,9 @@ function GeneralSettingsTab(parent)
 	}
 
 	//Show stats
+	this.form.addText("Performance info");
 	this.show_stats = new CheckBox(this.form.element);
-	this.form.addText("Show performance info");
-	this.show_stats.size.set(200, 16);
+	this.show_stats.size.set(20, 16);
 	this.show_stats.setOnChange(function()
 	{
 		Settings.general.show_stats = self.show_stats.getValue();
@@ -73,9 +55,9 @@ function GeneralSettingsTab(parent)
 	this.form.nextRow();
 
 	//Enable Grid
-	this.grid_enabled = new CheckBox(this.form.element);
 	this.form.addText("Show grid");
-	this.grid_enabled.size.set(200, 16);
+	this.grid_enabled = new CheckBox(this.form.element);
+	this.grid_enabled.size.set(20, 16);
 	this.grid_enabled.setOnChange(function()
 	{
 		Settings.editor.grid_enabled = self.grid_enabled.getValue();
@@ -121,9 +103,9 @@ function GeneralSettingsTab(parent)
 	this.form.nextRow();
 
 	//Enable Axis
-	this.axis_enabled = new CheckBox(this.form.element);
 	this.form.addText("Show axis");
-	this.axis_enabled.size.set(200, 16);
+	this.axis_enabled = new CheckBox(this.form.element);
+	this.axis_enabled.size.set(20, 16);
 	this.axis_enabled.setOnChange(function()
 	{
 		Settings.editor.axis_enabled = self.axis_enabled.getValue();
@@ -133,9 +115,9 @@ function GeneralSettingsTab(parent)
 	this.form.nextRow();
 
 	//Mouse lock on camera move
-	this.lock_mouse = new CheckBox(this.form.element);
 	this.form.addText("Lock mouse editor");
-	this.lock_mouse.size.set(200, 16);
+	this.lock_mouse = new CheckBox(this.form.element);
+	this.lock_mouse.size.set(20, 16);
 	this.lock_mouse.setOnChange(function()
 	{
 		Settings.editor.lock_mouse = self.lock_mouse.getValue();
@@ -161,9 +143,9 @@ function GeneralSettingsTab(parent)
 	this.form.nextRow();
 
 	//Enable camera preview
-	this.camera_preview_enabled = new CheckBox(this.form.element);
 	this.form.addText("Camera preview");
-	this.camera_preview_enabled.size.set(200, 16);
+	this.camera_preview_enabled = new CheckBox(this.form.element);
+	this.camera_preview_enabled.size.set(20, 16);
 	this.camera_preview_enabled.setOnChange(function()
 	{
 		Settings.editor.camera_preview_enabled = self.camera_preview_enabled.getValue();
@@ -220,9 +202,9 @@ function GeneralSettingsTab(parent)
 	this.form.nextRow();
 
 	//Use project settings
+	this.form.addText("Follow project");
 	this.follow_project = new CheckBox(this.form.element);
-	this.form.addText("Follow project settings");
-	this.follow_project.size.set(200, 16);
+	this.follow_project.size.set(20, 16);
 	this.follow_project.setOnChange(function()
 	{
 		Settings.render.follow_project = self.follow_project.getValue();
@@ -231,9 +213,9 @@ function GeneralSettingsTab(parent)
 	this.form.nextRow();
 
 	//Antialiasing
-	this.antialiasing = new CheckBox(this.form.element);
 	this.form.addText("Antialiasing");
-	this.antialiasing.size.set(200, 16);
+	this.antialiasing = new CheckBox(this.form.element);
+	this.antialiasing.size.set(20, 16);
 	this.antialiasing.setOnChange(function()
 	{
 		Settings.render.antialiasing = self.antialiasing.getValue();
@@ -242,8 +224,8 @@ function GeneralSettingsTab(parent)
 	this.form.nextRow();
 
 	//Shadows
-	this.shadows = new CheckBox(this.form.element);
 	this.form.addText("Shadows");
+	this.shadows = new CheckBox(this.form.element);
 	this.shadows.size.set(50, 15);
 	this.shadows.setOnChange(function()
 	{	
@@ -266,19 +248,9 @@ function GeneralSettingsTab(parent)
 	});
 	this.form.add(this.shadows_type);
 	this.form.nextRow();
-
-	//Element atributes
-	this.fit_parent = false;
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-	
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
 
-//Update container object data
-GeneralSettingsTab.prototype.updateMetadata = function(container){}
+GeneralSettingsTab.prototype = Object.create(TabElement.prototype);
 
 //Activate
 GeneralSettingsTab.prototype.activate = function()
@@ -307,29 +279,9 @@ GeneralSettingsTab.prototype.activate = function()
 	this.shadows_type.setValue(Settings.render.shadows_type);
 }
 
-//Remove element
-GeneralSettingsTab.prototype.destroy = function()
-{
-	try
-	{
-		this.parent.removeChild(this.element);
-	}
-	catch(e){}
-}
-
-//Update tab
-GeneralSettingsTab.prototype.update = function(){}
-
 //Update division Size
 GeneralSettingsTab.prototype.updateInterface = function()
 {
-	//Fit parent
-	if(this.fit_parent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-	
 	//Set visibility
 	if(this.visible)
 	{

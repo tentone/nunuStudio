@@ -358,10 +358,7 @@ Editor.initialize = function()
 			}
 		});
 	}
-
-	//Set window title
-	document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ")";
-
+	
 	//Editor initial state
 	Editor.tool_mode = Editor.MODE_SELECT;
 	Editor.state = Editor.STATE_EDITING;
@@ -1478,10 +1475,8 @@ Editor.createNewProgram = function()
 	if(Interface.tab !== undefined)
 	{
 		Interface.tab.clear();
-		var scene = Interface.tab.addTab("scene", Interface.file_dir + "icons/tab/scene.png", true);
-		var canvas = new SceneEditor(scene.element);
-		canvas.setScene(Editor.program.scene);
-		scene.attachComponent(canvas);
+		var scene = Interface.tab.addTab(SceneEditor, true);
+		scene.attach(Editor.program.scene);
 		Interface.tab.selectTab(0);
 	}
 }
@@ -1538,10 +1533,8 @@ Editor.loadProgram = function(fname)
 	//Add new scene tab to interface
 	if(Editor.program.scene !== null)
 	{
-		var scene = Interface.tab.addTab("scene", Interface.file_dir + "icons/tab/scene.png", true);
-		var editor = new SceneEditor(scene.element);
-		editor.setScene(Editor.program.scene);
-		scene.attachComponent(editor);
+		var scene = Interface.tab.addTab(SceneEditor, true);
+		scene.attach(Editor.program.scene);
 		Interface.tab.selectTab(0);
 	}
 }
