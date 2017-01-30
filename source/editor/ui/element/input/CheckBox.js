@@ -11,6 +11,7 @@ function CheckBox(parent)
 
 	//CheckBox
 	this.checkbox = document.createElement("input");
+	this.checkbox.style.cursor = "pointer";
 	this.checkbox.type = "checkbox";
 	this.checkbox.style.position = "absolute";
 	this.checkbox.style.left = "-3px";
