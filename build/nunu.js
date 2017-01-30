@@ -12586,11 +12586,11 @@ Nunu.webvrAvailable = function() {
     this.targetObject.matrixWorldNeedsUpdate = !0;
   }], [function(d, a) {
     this.resolvedProperty[this.propertyIndex] = d[a];
-  }, function(a, b) {
-    this.resolvedProperty[this.propertyIndex] = a[b];
+  }, function(d, a) {
+    this.resolvedProperty[this.propertyIndex] = d[a];
     this.targetObject.needsUpdate = !0;
-  }, function(a, b) {
-    this.resolvedProperty[this.propertyIndex] = a[b];
+  }, function(d, a) {
+    this.resolvedProperty[this.propertyIndex] = d[a];
     this.targetObject.matrixWorldNeedsUpdate = !0;
   }], [function(a, b) {
     this.resolvedProperty.fromArray(a, b);
@@ -33668,8 +33668,6 @@ NunuApp.prototype.exit = function() {
   if (void 0 !== this.onExit) {
     this.onExit();
   }
-  var a = require("nw.gui");
-  void 0 !== a && (a.App.closeAllWindows(), a.App.quit());
 };
 NunuApp.prototype.resize = function() {
   null !== this.canvas && this.canvas_resize && (this.canvas.style.width = window.innerWidth + "px", this.canvas.style.height = window.innerHeight + "px", this.canvas.width = window.innerWidth, this.canvas.height = window.innerHeight);
