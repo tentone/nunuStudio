@@ -83,6 +83,15 @@ Script.prototype.resize = function()
 	}
 }
 
+//Call onAppData if available
+Script.prototype.appData = function(data)
+{
+	if(this.script.onAppData !== undefined)
+	{
+		this.script.onAppData.call(this);
+	}
+}
+
 //Define script code
 Script.prototype.setCode = function(code)
 {

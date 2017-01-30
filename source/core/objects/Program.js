@@ -337,8 +337,19 @@ Program.prototype.receiveDataApp = function(data)
 {
 	var found = false;
 
-	//TODO <ADD CODE HERE>
+	//Check if there is a script with onAppData method available
+	this.traverse(function(child)
+	{
+		if(child instanceof Script)
+		{
+			if(child.script !== null && child.script.onAppData !== undefined)
+			{
+				child.appData(data);
+			}
+		}
+	});
 
+	//Show warning message
 	if(!found)
 	{
 		if(typeof data === "object")

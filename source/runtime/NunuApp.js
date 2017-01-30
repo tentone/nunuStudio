@@ -283,6 +283,15 @@ NunuApp.prototype.resize = function()
 	}
 }
 
+//Send data to running application
+NunuApp.prototype.sendData = function(data)
+{
+	if(this.program !== null)
+	{
+		this.program.receiveDataApp(data);
+	}
+}
+
 //Set on data receive callback (callback receives data as argument)
 NunuApp.prototype.setOnDataReceived = function(callback)
 {
