@@ -269,6 +269,9 @@ include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
 
+//include("editor/ui/tab/ConsoleTab.js");
+//include("editor/Console.js");
+
 //WebVR polyfill
 /*if(navigator.getVRDisplays === undefined)
 {

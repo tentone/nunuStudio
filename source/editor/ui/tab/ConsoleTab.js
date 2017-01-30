@@ -2,7 +2,7 @@
 
 function ConsoleTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "About", "editor/files/icons/misc/about.png");
+	TabElement.call(this, parent, closeable, container, index, "Console", "editor/files/icons/console/console.png");
 
 	this.element.style.backgroundColor = Editor.theme.bar_color;
 
