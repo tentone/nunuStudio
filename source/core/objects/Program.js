@@ -345,6 +345,7 @@ Program.prototype.receiveDataApp = function(data)
 			if(child.script !== null && child.script.onAppData !== undefined)
 			{
 				child.appData(data);
+				found = true;
 			}
 		}
 	});
@@ -354,11 +355,11 @@ Program.prototype.receiveDataApp = function(data)
 	{
 		if(typeof data === "object")
 		{
-			console.warn("nunuStudio: No script with data receive event found", JSON.stringify(data));
+			console.warn("nunuStudio: No script with onAppData found", JSON.stringify(data));
 		}
 		else
 		{
-			console.warn("nunuStudio: No script with data receive event found", data);
+			console.warn("nunuStudio: No script with onAppData found", data);
 		}
 	}
 }
