@@ -255,14 +255,6 @@ NunuApp.prototype.exit = function()
 	{
 		this.onExit();
 	}
-
-	//If running on nwjs close all windows
-	var gui = require("nw.gui");
-	if(gui !== undefined)
-	{
-		gui.App.closeAllWindows();
-		gui.App.quit();
-	}
 }
 
 //Resize to fit window
