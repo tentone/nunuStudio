@@ -332,7 +332,27 @@ Program.prototype.dispose = function()
 	}
 }
 
-//Communicate
+//Receive external data and pass it to all script instances
+Program.prototype.receiveDataApp = function(data)
+{
+	var found = false;
+
+	//TODO <ADD CODE HERE>
+
+	if(!found)
+	{
+		if(typeof data === "object")
+		{
+			console.warn("nunuStudio: No script with data receive event found", JSON.stringify(data));
+		}
+		else
+		{
+			console.warn("nunuStudio: No script with data receive event found", data);
+		}
+	}
+}
+
+//Send data to external app instance
 Program.prototype.sendDataApp = function(data)
 {
 	if(this.app !== null)
@@ -350,11 +370,11 @@ Program.prototype.sendDataApp = function(data)
 	{
 		if(typeof data === "object")
 		{
-			alert(JSON.stringify(data));
+			console.warn("nunuStudio: No app available", JSON.stringify(data));
 		}
 		else
 		{
-			alert(data);
+			console.warn("nunuStudio: No app available", data);
 		}
 	}
 }

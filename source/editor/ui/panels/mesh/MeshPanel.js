@@ -10,7 +10,7 @@ function MeshPanel(parent, obj)
 	//Visible
 	this.visible = new CheckBox(this.form.element);
 	this.form.addText("Visible");
-	this.visible.size.set(200, 15);
+	this.visible.size.set(20, 15);
 	this.visible.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -24,7 +24,7 @@ function MeshPanel(parent, obj)
 	//Static
 	this.static = new CheckBox(this.form.element);
 	this.form.addText("Static Object");
-	this.static.size.set(200, 15);
+	this.static.size.set(20, 15);
 	this.static.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -38,7 +38,7 @@ function MeshPanel(parent, obj)
 	//Cast shadow
 	this.cast_shadow = new CheckBox(this.form.element);
 	this.form.addText("Cast Shadow");
-	this.cast_shadow.size.set(200, 15);
+	this.cast_shadow.size.set(20, 15);
 	this.cast_shadow.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -52,7 +52,7 @@ function MeshPanel(parent, obj)
 	//Receive shadow
 	this.receive_shadow = new CheckBox(this.form.element);
 	this.form.addText("Receive Shadow");
-	this.receive_shadow.size.set(200, 15);
+	this.receive_shadow.size.set(20, 15);
 	this.receive_shadow.setOnChange(function()
 	{
 		if(self.obj !== null)

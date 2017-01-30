@@ -4,11 +4,14 @@ function GeneralSettingsTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "General", "editor/files/icons/misc/tool.png");
 
+	this.element.style.overflow = "auto";
+
 	//Self pointer
 	var self = this;
 
 	//Form
 	this.form = new Form(this.element);
+	this.form.default_text_width = 125;
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);
 
@@ -226,7 +229,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Shadows
 	this.form.addText("Shadows");
 	this.shadows = new CheckBox(this.form.element);
-	this.shadows.size.set(50, 15);
+	this.shadows.size.set(20, 15);
 	this.shadows.setOnChange(function()
 	{	
 		Settings.render.shadows = self.shadows.getValue();

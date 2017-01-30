@@ -26,7 +26,7 @@ function LeapPanel(parent, obj)
 	//Debug model
 	this.debug_model = new CheckBox(this.form.element);
 	this.form.addText("Debug model");
-	this.debug_model.size.set(200, 15);
+	this.debug_model.size.set(20, 15);
 	this.debug_model.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -40,7 +40,7 @@ function LeapPanel(parent, obj)
 	//Gestures Enabled
 	this.gestures_enabled = new CheckBox(this.form.element);
 	this.form.addText("Gestures Enabled");
-	this.gestures_enabled.size.set(200, 15);
+	this.gestures_enabled.size.set(20, 15);
 	this.gestures_enabled.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -54,7 +54,7 @@ function LeapPanel(parent, obj)
 	//Poses Enabled
 	this.poses_enabled = new CheckBox(this.form.element);
 	this.form.addText("Poses Enabled");
-	this.poses_enabled.size.set(200, 15);
+	this.poses_enabled.size.set(20, 15);
 	this.poses_enabled.setOnChange(function()
 	{
 		if(self.obj !== null)

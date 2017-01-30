@@ -102,7 +102,7 @@ function PhysicsPanel(parent, obj)
 	//Allow sleep
 	this.allowSleep = new CheckBox(this.form.element);
 	this.form.addText("Allow sleep");
-	this.allowSleep.size.set(150, 15);
+	this.allowSleep.size.set(20, 15);
 	this.allowSleep.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -146,7 +146,7 @@ function PhysicsPanel(parent, obj)
 	//Fixed rotation
 	this.fixedRotation = new CheckBox(this.form.element);
 	this.form.addText("Fixed rotation");
-	this.fixedRotation.size.set(150, 15);
+	this.fixedRotation.size.set(20, 15);
 	this.fixedRotation.setOnChange(function()
 	{
 		if(self.obj !== null)

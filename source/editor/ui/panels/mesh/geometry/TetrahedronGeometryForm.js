@@ -18,7 +18,7 @@ function TetrahedronGeometryForm(form, obj)
 	this.form.nextRow();
 
 	//Radius
-	this.form.addText("Radius")
+	this.form.addText("Radius");
 	this.radius = new NumberBox(this.form.element);
 	this.radius.size.set(40, 18);
 	this.radius.setStep(0.1);
@@ -28,7 +28,7 @@ function TetrahedronGeometryForm(form, obj)
 	this.form.nextRow();
 
 	//Detail
-	this.form.addText("Detail")
+	this.form.addText("Detail");
 	this.detail = new Slider(this.form.element);
 	this.detail.size.set(90, 18);
 	this.detail.setRange(1, 7);
@@ -40,7 +40,7 @@ function TetrahedronGeometryForm(form, obj)
 	//Buffer
 	this.buffer = new CheckBox(this.form.element);
 	this.form.addText("Buffered");
-	this.buffer.size.set(200, 15);
+	this.buffer.size.set(20, 15);
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();

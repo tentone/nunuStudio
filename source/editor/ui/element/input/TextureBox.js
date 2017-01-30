@@ -88,6 +88,7 @@ function TextureBox(parent)
 
 	//Form
 	this.form = new Form(this.element);
+	this.form.default_text_width = 60;
 	this.form.position.set(105, 0);
 	this.form.spacing.set(10, 5);
 

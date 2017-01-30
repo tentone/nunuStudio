@@ -54,6 +54,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//-----------------------------Particle parameters------------------------------
 	this.form = new Form(this.main.div_b);
+	this.form.default_text_width = 80;
 	this.form.position.set(10, 8);
 	this.form.spacing.set(10, 5);
 	
@@ -189,7 +190,7 @@ function ParticleEditor(parent, closeable, container, index)
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.maxAge_value);
-	this.form.addText("+/-");
+	this.form.addText("+/-", true);
 	this.maxAge_spread = new NumberBox(this.form.element);
 	this.maxAge_spread.size.set(60, 18);
 	this.maxAge_spread.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -284,7 +285,7 @@ function ParticleEditor(parent, closeable, container, index)
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.wiggle_value);
-	this.form.addText("+/-");
+	this.form.addText("+/-", true);
 	this.wiggle_spread = new NumberBox(this.form.element);
 	this.wiggle_spread.size.set(60, 18);
 	this.wiggle_spread.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -333,7 +334,7 @@ function ParticleEditor(parent, closeable, container, index)
 	}, "spread");
 	this.form.add(this.scale);
 	this.form.nextRow();
-	this.form.addText("Min");
+	this.form.addText("Min", true);
 	this.scale_min = new NumberBox(this.form.element);
 	this.scale_min.size.set(50, 18);
 	this.scale_min.setOnChange(function()
@@ -343,7 +344,7 @@ function ParticleEditor(parent, closeable, container, index)
 		self.scale.setRange(min, max);
 	});
 	this.form.add(this.scale_min);
-	this.form.addText("Max");
+	this.form.addText("Max", true);
 	this.scale_max = new NumberBox(this.form.element);
 	this.scale_max.size.set(50, 18);
 	this.scale_max.setOnChange(function()
@@ -373,7 +374,7 @@ function ParticleEditor(parent, closeable, container, index)
 	}, "spread");
 	this.form.add(this.angle);
 	this.form.nextRow();
-	this.form.addText("Min");
+	this.form.addText("Min", true);
 	this.angle_min = new NumberBox(this.form.element);
 	this.angle_min.size.set(50, 18);
 	this.angle_min.setOnChange(function()
@@ -383,7 +384,7 @@ function ParticleEditor(parent, closeable, container, index)
 		self.angle.setRange(min, max);
 	});
 	this.form.add(this.angle_min);
-	this.form.addText("Max");
+	this.form.addText("Max", true);
 	this.angle_max = new NumberBox(this.form.element);
 	this.angle_max.size.set(50, 18);
 	this.angle_max.setOnChange(function()
@@ -435,7 +436,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 		this.color_value[i] = value;
 		this.form.add(value);
-		this.form.addText("+/-");
+		this.form.addText("+/-", true);
 
 		var spread = new ColorChooser(self.form.element);
 		spread.size.set(80, 18);
