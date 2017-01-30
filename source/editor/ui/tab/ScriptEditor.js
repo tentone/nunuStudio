@@ -1,15 +1,8 @@
 "use strict";
 
-function ScriptEditor(parent)
+function ScriptEditor(parent, closeable, container, index)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//Create element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
-	this.element.style.overflow = "hidden";
-	this.element.style.backgroundColor = Editor.theme.panel_color;
+	TabElement.call(this, parent, closeable, container, index, "Script", "editor/files/icons/misc/code.png");
 
 	//Codemirror editor
 	this.code = new CodeMirror(this.element,
@@ -107,18 +100,11 @@ function ScriptEditor(parent)
 		});
 	};
 
-	//Element atributes
-	this.fit_parent = false;
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-	
 	//Script attached to code editor
 	this.script = null;
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+ScriptEditor.prototype = Object.create(TabElement.prototype);
 
 //Set code editor font size
 ScriptEditor.prototype.setFontSize = function(size)
@@ -134,15 +120,15 @@ ScriptEditor.prototype.setFontSize = function(size)
 	this.code.refresh();
 }
 
-//Update container object data
-ScriptEditor.prototype.updateMetadata = function(container)
+//Update object data
+ScriptEditor.prototype.updateMetadata = function()
 {
 	if(this.script !== null)
 	{
 		var script = this.script;
 
-		//Set container name
-		container.setName(script.name);
+		//Set name
+		this.setName(script.name);
 
 		//Check if script exists in program
 		var found = false;
@@ -157,7 +143,7 @@ ScriptEditor.prototype.updateMetadata = function(container)
 		//If not found close tab
 		if(!found)
 		{
-			container.close();
+			this.close();
 		}
 	}
 }
@@ -196,11 +182,18 @@ ScriptEditor.prototype.setText = function(text)
 	this.code.setValue(text);
 }
 
+//Check if script is attached to editor
+ScriptEditor.prototype.isAttached = function(script)
+{
+	return this.script === script;
+}
+
 //Attach Script to code editor
-ScriptEditor.prototype.attachScript = function(script)
+ScriptEditor.prototype.attach = function(script)
 {
 	this.script = script;
 	this.setText(script.code);
+	this.updateMetadata();
 }
 
 //Update attached script
@@ -218,16 +211,6 @@ ScriptEditor.prototype.setMode = function(mode)
 	this.code.setOption("mode", mode);
 }
 
-//Remove element
-ScriptEditor.prototype.destroy = function()
-{
-	try
-	{
-		this.parent.removeChild(this.element);
-	}
-	catch(e){}
-}
-
 //Update ScriptEditor
 ScriptEditor.prototype.update = function()
 {
@@ -243,12 +226,6 @@ ScriptEditor.prototype.update = function()
 //Update division Size
 ScriptEditor.prototype.updateInterface = function()
 {
-	if(this.fit_parent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-	
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";

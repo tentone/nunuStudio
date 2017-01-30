@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.18 Alpha";
-Nunu.TIMESTAMP = "201701280328";
+Nunu.TIMESTAMP = "201701300237";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -32503,15 +32503,14 @@ function Sky(a, f, l, b) {
   this.color_top = [new THREE.Color(7844859), new THREE.Color(30463), new THREE.Color(220086), new THREE.Color(9273)];
   this.color_bottom = [new THREE.Color(15461606), new THREE.Color(16777215), new THREE.Color(16705495), new THREE.Color(26023)];
   this.sun_color = 16777130;
-  this.moon_color = 8947967;
-  this.hemisphere = new HemisphereLight(16777215, 16777215, .5);
+  this.moon_color = 5592507;
+  this.hemisphere = new HemisphereLight(0, 0, .6);
   this.hemisphere.color.setHSL(.6, 1, .6);
   this.hemisphere.groundColor.setHSL(.1, 1, .75);
-  this.hemisphere.position.set(0, 500, 0);
   this.hemisphere.hidden = !0;
   this.hemisphere.matrixAutoUpdate = !1;
   this.add(this.hemisphere);
-  this.sun = new DirectionalLight(this.sun_color, .3);
+  this.sun = new DirectionalLight(this.sun_color, .5);
   this.sun.castShadow = !0;
   this.sun.hidden = !0;
   this.add(this.sun);
@@ -32527,9 +32526,9 @@ function Sky(a, f, l, b) {
     return null;
   };
   this.auto_update = void 0 !== a ? a : !0;
-  this.sun_distance = void 0 !== l ? l : 500;
-  this.day_time = void 0 !== f ? f : 240;
-  this.time = void 0 !== b ? b : 150;
+  this.sun_distance = void 0 !== l ? l : 100;
+  this.day_time = void 0 !== f ? f : 120;
+  this.time = void 0 !== b ? b : 75;
   this.updateSky();
 }
 Sky.prototype = Object.create(THREE.Object3D.prototype);
@@ -33358,7 +33357,7 @@ function Scene() {
   this.world.gravity.set(0, -9.8, 0);
   this.world.broadphase = new CANNON.NaiveBroadphase;
   this.world.solver = new CANNON.SplitSolver(new CANNON.GSSolver);
-  this.world.solver.tolerance = .1;
+  this.world.solver.tolerance = .05;
   this.world.solver.iterations = 7;
   this.cameras = [];
   this.clock = new THREE.Clock;

@@ -1,8 +1,8 @@
 "use strict";
 
-function LambertMaterialEditor(parent)
+function LambertMaterialEditor(parent, closeable, container, index)
 {
-	MaterialEditor.call(this, parent);
+	MaterialEditor.call(this, parent, closeable, container, index);
 
 	var self = this;
 	

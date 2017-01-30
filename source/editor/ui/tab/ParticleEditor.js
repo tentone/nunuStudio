@@ -1,25 +1,8 @@
 "use strict";
 
-function ParticleEditor(parent)
+function ParticleEditor(parent, closeable, container, index)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//Create element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
-
-	//Prevent Drop event
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
+	TabElement.call(this, parent, closeable, container, index, "Particle", "editor/files/icons/effects/particles.png");
 
 	//Main container
 	this.main = new DualDivisionResizable(this.element);
@@ -43,10 +26,6 @@ function ParticleEditor(parent)
 
 	//Element atributes
 	this.children = [];
-	this.fit_parent = false;
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
 
 	//Particle renderer and scene
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.render.antialiasing});
@@ -421,6 +400,7 @@ function ParticleEditor(parent)
 	this.form.nextRow();
 	this.color_value = [];
 	this.color_spread = [];
+
 	function addColorValue(index)
 	{
 		return function()
@@ -432,6 +412,7 @@ function ParticleEditor(parent)
 			self.updateRuntimeParticle();
 		};
 	}
+
 	function addColorSpread(index)
 	{
 		return function()
@@ -443,6 +424,7 @@ function ParticleEditor(parent)
 			self.updateRuntimeParticle();
 		};
 	}
+	
 	for(var i = 0; i < 4; i++)
 	{
 		this.form.addText((25*i + 25) + "%");
@@ -463,23 +445,18 @@ function ParticleEditor(parent)
 		this.form.add(spread);
 		this.form.nextRow();
 	}
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
 
-//Particleeditor counter
-ParticleEditor.id = 0;
+ParticleEditor.prototype = Object.create(TabElement.prototype);
 
-//Update container object data
-ParticleEditor.prototype.updateMetadata = function(container)
+//Update object data
+ParticleEditor.prototype.updateMetadata = function()
 {
 	if(this.particle !== null)
 	{
 		var particle = this.particle;
 
-		//Set container name
-		container.setName(particle.name);
+		this.setName(particle.name);
 
 		//Check if particle exists in program
 		var found = false;
@@ -494,17 +471,18 @@ ParticleEditor.prototype.updateMetadata = function(container)
 		//If not found close tab
 		if(!found)
 		{
-			container.close();
+			this.close();
 		}
 	}
 }
 
 //Attach particle to particle editor
-ParticleEditor.prototype.attachParticle = function(particle)
+ParticleEditor.prototype.attach = function(particle)
 {
 	//Attach particle
 	this.particle = particle;
-
+	this.updateMetadata();
+	
 	//Group attributes
 	this.name.setText(particle.name);
 	this.texture.setValue(particle.group.texture);
@@ -559,6 +537,12 @@ ParticleEditor.prototype.attachParticle = function(particle)
 	this.updateRuntimeParticle();
 }
 
+//Check if particle is attached to tab
+ParticleEditor.prototype.isAttached = function(particle)
+{
+	return this.particle === particle;
+}
+
 //Updates runtime particle to match attached particle
 ParticleEditor.prototype.updateRuntimeParticle = function()
 {
@@ -597,16 +581,6 @@ ParticleEditor.prototype.activate = function()
 	
 	//Set mouse canvas
 	Mouse.setCanvas(this.canvas.element);
-}
-
-//Remove element
-ParticleEditor.prototype.destroy = function()
-{
-	try
-	{
-		this.parent.removeChild(this.element);
-	}
-	catch(e){}
 }
 
 //Update material editor
@@ -664,13 +638,6 @@ ParticleEditor.prototype.update = function()
 //Update division Size
 ParticleEditor.prototype.updateInterface = function()
 {
-	//Fit parent
-	if(this.fit_parent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-	
 	//Set visibility
 	if(this.visible)
 	{

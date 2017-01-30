@@ -1,6 +1,6 @@
 "use strict";
 
-function TabElement(parent, name, icon, closeable, container, index)
+function TabElement(parent, closeable, container, index, title, icon)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
@@ -29,7 +29,7 @@ function TabElement(parent, name, icon, closeable, container, index)
 
 	//Meta
 	this.closeable = closeable;
-	this.name = name;
+	this.title = title;
 	this.icon = icon;
 
 	//Button
@@ -38,7 +38,6 @@ function TabElement(parent, name, icon, closeable, container, index)
 	//Tab information
 	this.index = index;
 	this.container = container;
-	this.component = null;
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -48,24 +47,6 @@ function TabElement(parent, name, icon, closeable, container, index)
 TabElement.prototype.close = function()
 {
 	this.container.removeTab(this.index);
-}
-
-//Dectivate tab
-TabElement.prototype.updateMetadata = function()
-{
-	if(this.component !== null)
-	{
-		this.component.updateMetadata(this);
-	}
-}
-
-//Activate tab
-TabElement.prototype.activate = function()
-{
-	if(this.component !== null && this.component.activate !== undefined)
-	{
-		this.component.activate();
-	}
 }
 
 //Selects this tab
@@ -80,14 +61,23 @@ TabElement.prototype.isSelected = function()
 	return this.index === this.container.selected;
 }
 
-//Update
-TabElement.prototype.update = function()
+//Update tab metadata
+TabElement.prototype.updateMetadata = function(){}
+
+//Activate tab
+TabElement.prototype.activate = function(){}
+
+//Attach object to tab
+TabElement.prototype.attach = function(obj){}
+
+//Check if object is attached to tab
+TabElement.prototype.isAttached = function(obj)
 {
-	if(this.component !== null)
-	{
-		this.component.update();
-	}
+	return false;
 }
+
+//Update
+TabElement.prototype.update = function(){}
 
 //Destroy
 TabElement.prototype.destroy = function()
@@ -107,25 +97,11 @@ TabElement.prototype.setIcon = function(icon)
 	this.button.icon.setImage(icon);
 }
 
-//Set button name
+//Set button title
 TabElement.prototype.setName = function(text)
 {
-	this.name = text;
+	this.title = text;
 	this.button.setName(text);
-}
-
-
-//Attach element to tab container
-TabElement.prototype.attachComponent = function(component)
-{
-	this.component = component;
-
-	if(this.component.parent !== this.element)
-	{
-		this.component.destroy();
-		this.component.parent = this.element;
-		this.element.appendChild(this.component.element);
-	}
 }
 
 //Update Interface
@@ -144,12 +120,4 @@ TabElement.prototype.updateInterface = function()
 	//Element
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-
-	//Attached component
-	if(this.component !== null)
-	{
-		this.component.visible = this.visible && this.container.visible;
-		this.component.size.set(this.size.x, this.size.y);
-		this.component.updateInterface();
-	}
 }

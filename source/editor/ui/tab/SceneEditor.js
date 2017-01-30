@@ -1,13 +1,8 @@
 "use strict";
 
-function SceneEditor(parent)
+function SceneEditor(parent, closeable, container, index)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-
-	//Create Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
+	TabElement.call(this, parent, closeable, container, index, "Scene", "editor/files/icons/misc/scene.png");
 
 	//Canvas
 	this.canvas = document.createElement("canvas");
@@ -234,28 +229,20 @@ function SceneEditor(parent)
 		}
 	});
 
-	//Element atributes
-	this.fit_parent = false;
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-	
 	//Scene
 	this.scene = null;
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
 
+SceneEditor.prototype = Object.create(TabElement.prototype);
+
 //Update container object data
-SceneEditor.prototype.updateMetadata = function(container)
+SceneEditor.prototype.updateMetadata = function()
 {
 	if(this.scene !== null)
 	{
 		var scene = this.scene;
 
-		//Set container name
-		container.setName(scene.name);
+		this.setName(scene.name);
 
 		//Check if scene exists in program
 		var found = false;
@@ -270,7 +257,7 @@ SceneEditor.prototype.updateMetadata = function(container)
 		//If not found close tab
 		if(!found)
 		{
-			container.close();
+			this.close();
 		}
 	}
 }
@@ -305,7 +292,11 @@ SceneEditor.prototype.setFullscreen = function(value)
 //Activate scene editor
 SceneEditor.prototype.activate = function()
 {
-	Editor.program.scene = this.scene;
+	if(this.scene !== null)
+	{
+		Editor.program.scene = this.scene;
+	}
+
 	Editor.setPerformanceMeter(this.stats);
 	Editor.setRenderCanvas(this.canvas);
 	Editor.setState(Editor.STATE_EDITING);
@@ -314,42 +305,27 @@ SceneEditor.prototype.activate = function()
 }
 
 //Set scene
-SceneEditor.prototype.setScene = function(scene)
+SceneEditor.prototype.attach = function(scene)
 {
 	this.scene = scene;
+	this.updateMetadata();
 }
 
-//Remove element
-SceneEditor.prototype.destroy = function()
+//Check if scene is attached
+SceneEditor.prototype.isAttached = function(scene)
 {
-	try
-	{
-		this.parent.removeChild(this.canvas);
-	}
-	catch(e){}
-}
-
-//Update SceneEditor
-SceneEditor.prototype.update = function()
-{
-	//TODO <ADD CODE HERE>
+	return this.scene === scene;
 }
 
 //Update division Size
 SceneEditor.prototype.updateInterface = function()
 {
-	//Fit parent
-	if(this.fit_parent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-	
 	//Set visibilty
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
 		this.canvas.style.visibility = "visible";
+
 		if(Settings.general.show_stats)
 		{
 			this.stats.dom.style.visibility = "visible";

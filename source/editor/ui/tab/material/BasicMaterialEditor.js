@@ -1,8 +1,8 @@
 "use strict";
 
-function BasicMaterialEditor(parent)
+function BasicMaterialEditor(parent, closeable, container, index)
 {
-	MaterialEditor.call(this, parent);
+	MaterialEditor.call(this, parent, closeable, container, index);
 
 	var self = this;
 	
