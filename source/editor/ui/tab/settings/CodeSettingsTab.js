@@ -4,11 +4,14 @@ function CodeSettingsTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Code", "editor/files/icons/script/script.png");
 	
+	this.element.style.overflow = "auto";
+
 	//Self pointer
 	var self = this;
 
-	//Code form
+	//Form
 	this.form = new Form(this.element);
+	this.form.default_text_width = 125;
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);
 

@@ -20,6 +20,9 @@ function Form(parent)
 	this.rows = [];
 	this.rows.push([]);
 
+	//Default elements
+	this.default_text_width = 100;
+
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
@@ -40,22 +43,13 @@ Form.prototype.add = function(elem)
 }
 
 //Create text element and add to form
-Form.prototype.addText = function(text, width)
+Form.prototype.addText = function(text, fit)
 {
 	var element = new Text(this.element);
 	element.setAlignment(Text.LEFT);
 	element.setText(text);
-	
-	if(width === undefined)
-	{
-		element.fit_content = false;
-		element.size.set(150, 20);
-	}
-	else
-	{
-		element.size.set(width, 20);
-	}
-
+	element.fit_content = (fit === true);
+	element.size.set(this.default_text_width, 20);
 	this.add(element);
 
 	return element;

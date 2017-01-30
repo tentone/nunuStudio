@@ -9,7 +9,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	//Skinning
 	this.form.addText("Animation");
 	this.skinning = new CheckBox(this.form.element);
-	this.form.addText("Skinning");
+	this.form.addText("Skinning", true);
 	this.skinning.size.set(20, 15);
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
@@ -23,7 +23,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 
 	//Morph targets
 	this.morphTargets = new CheckBox(this.form.element);
-	this.form.addText("Morph targets");
+	this.form.addText("Morph targets", true);
 	this.morphTargets.size.set(20, 15);
 	this.morphTargets.updateInterface();
 	this.morphTargets.setOnChange(function()

@@ -28,14 +28,14 @@ function SphereGeometryForm(form, obj)
 
 	//Segments
 	this.form.addText("Segments")
-	this.form.addText("W");
+	this.form.addText("W", true);
 	this.widthSegments = new NumberBox(this.form.element);
 	this.widthSegments.size.set(40, 18);
 	this.widthSegments.setStep(1);
 	this.widthSegments.setOnChange(updateGeometry);
 	this.form.add(this.widthSegments);
 
-	this.form.addText("H");
+	this.form.addText("H", true);
 	this.heightSegments = new NumberBox(this.form.element);
 	this.heightSegments.size.set(40, 18);
 	this.heightSegments.setStep(1);
@@ -46,7 +46,7 @@ function SphereGeometryForm(form, obj)
 	//Buffer
 	this.buffer = new CheckBox(this.form.element);
 	this.form.addText("Buffered");
-	this.buffer.size.set(200, 15);
+	this.buffer.size.set(20, 15);
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();

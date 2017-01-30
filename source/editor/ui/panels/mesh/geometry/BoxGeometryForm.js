@@ -19,21 +19,21 @@ function BoxGeometryForm(form, obj)
 	
 	//Size
 	this.form.addText("Size")
-	this.form.addText("X");
+	this.form.addText("X", true);
 	this.width = new NumberBox(this.form.element);
 	this.width.size.set(40, 18);
 	this.width.setStep(0.1);
 	this.width.setOnChange(updateGeometry);
 	this.form.add(this.width);
 
-	this.form.addText("Y");
+	this.form.addText("Y", true);
 	this.height = new NumberBox(this.form.element);
 	this.height.size.set(40, 18);
 	this.height.setStep(0.1);
 	this.height.setOnChange(updateGeometry);
 	this.form.add(this.height);
 
-	this.form.addText("Z");
+	this.form.addText("Z", true);
 	this.depth = new NumberBox(this.form.element);
 	this.depth.size.set(40, 18);
 	this.depth.setStep(0.1);
@@ -43,21 +43,21 @@ function BoxGeometryForm(form, obj)
 
 	//Segments
 	this.form.addText("Segments")
-	this.form.addText("X");
+	this.form.addText("X", true);
 	this.widthSegments = new NumberBox(this.form.element);
 	this.widthSegments.size.set(40, 18);
 	this.widthSegments.setStep(1);
 	this.widthSegments.setOnChange(updateGeometry);
 	this.form.add(this.widthSegments);
 
-	this.form.addText("Y");
+	this.form.addText("Y", true);
 	this.heightSegments = new NumberBox(this.form.element);
 	this.heightSegments.size.set(40, 18);
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);
 	this.form.add(this.heightSegments);
 
-	this.form.addText("Z");
+	this.form.addText("Z", true);
 	this.depthSegments = new NumberBox(this.form.element);
 	this.depthSegments.size.set(40, 18);
 	this.depthSegments.setStep(1);
@@ -68,7 +68,7 @@ function BoxGeometryForm(form, obj)
 	//Buffer
 	this.buffer = new CheckBox(this.form.element);
 	this.form.addText("Buffered");
-	this.buffer.size.set(200, 15);
+	this.buffer.size.set(20, 15);
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();

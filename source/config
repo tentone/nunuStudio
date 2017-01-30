@@ -24,10 +24,10 @@
 		"shadows_type": 2
 	},
 	"code": {
-		"theme": "cobalt",
+		"theme": "monokai",
 		"keymap": "sublime",
-		"font_size": 14.366667098999018,
-		"line_numbers": false,
+		"font_size": 16,
+		"line_numbers": true,
 		"line_wrapping": true,
 		"auto_close_brackets": true,
 		"highlight_active_line": false

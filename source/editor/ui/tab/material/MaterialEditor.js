@@ -200,7 +200,7 @@ function MaterialEditor(parent, closeable, container, index)
 	//Test depth
 	this.form.addText("Depth");
 	this.depthTest = new CheckBox(this.form.element);
-	this.form.addText("Test");
+	this.form.addText("Test", true);
 	this.depthTest.size.set(20, 15);
 	this.depthTest.updateInterface();
 	this.depthTest.setOnChange(function()
@@ -215,7 +215,7 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Write depth
 	this.depthWrite = new CheckBox(this.form.element);
-	this.form.addText("Write");
+	this.form.addText("Write", true);
 	this.depthWrite.size.set(20, 15);
 	this.depthWrite.updateInterface();
 	this.depthWrite.setOnChange(function()

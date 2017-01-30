@@ -10,7 +10,7 @@ function SkyPanel(parent, obj)
 	//Auto update
 	this.auto_update = new CheckBox(this.form.element);
 	this.form.addText("Auto update");
-	this.auto_update.size.set(200, 15);
+	this.auto_update.size.set(20, 15);
 	this.auto_update.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -51,7 +51,7 @@ function SkyPanel(parent, obj)
 		}
 	});
 	this.form.add(this.day_time);
-	this.form.addText("s");
+	this.form.addText("s", true);
 	this.form.nextRow();
 
 	//Actual time 
@@ -81,7 +81,7 @@ function SkyPanel(parent, obj)
 		}
 	});
 	this.form.add(this.time);
-	this.form.addText("s");
+	this.form.addText("s", true);
 	this.form.nextRow();
 
 	//Sun distance
@@ -107,7 +107,7 @@ function SkyPanel(parent, obj)
 	//Cast shadow
 	this.cast_shadow = new CheckBox(this.form.element);
 	this.form.addText("Cast Shadows");
-	this.cast_shadow.size.set(200, 15);
+	this.cast_shadow.size.set(20, 15);
 	this.cast_shadow.position.set(5, 85);
 	this.cast_shadow.updateInterface();
 	this.cast_shadow.setOnChange(function()
@@ -133,7 +133,7 @@ function SkyPanel(parent, obj)
 		}
 	});
 	this.form.add(this.shadow_width);
-	this.form.addText("x");
+	this.form.addText("x", true);
 	this.shadow_height = new DropdownList(this.form.element);
 	this.shadow_height.size.set(60, 18);
 	this.shadow_height.setOnChange(function()
