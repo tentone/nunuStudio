@@ -100,9 +100,9 @@ function BasicMaterialEditor(parent, closeable, container, index)
 
 BasicMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-BasicMaterialEditor.prototype.attachMaterial = function(material, material_file)
+BasicMaterialEditor.prototype.attach = function(material, material_file)
 {
-	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
+	MaterialEditor.prototype.attach.call(this, material, material_file);
 
 	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);

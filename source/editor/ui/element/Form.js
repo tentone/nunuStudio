@@ -21,7 +21,7 @@ function Form(parent)
 	this.rows.push([]);
 
 	//Default elements
-	this.default_text_width = 100;
+	this.default_text_width = 80;
 
 	//Add element to document
 	this.parent.appendChild(this.element);

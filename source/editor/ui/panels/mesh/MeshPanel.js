@@ -51,7 +51,7 @@ function MeshPanel(parent, obj)
 
 	//Receive shadow
 	this.receive_shadow = new CheckBox(this.form.element);
-	this.form.addText("Receive Shadow");
+	this.form.addText("React Shadow");
 	this.receive_shadow.size.set(20, 15);
 	this.receive_shadow.setOnChange(function()
 	{

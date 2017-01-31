@@ -60,9 +60,9 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 ShaderMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-ShaderMaterialEditor.prototype.attachMaterial = function(material, material_file)
+ShaderMaterialEditor.prototype.attach = function(material, material_file)
 {
-	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
+	MaterialEditor.prototype.attach.call(this, material, material_file);
 
 	this.wireframe.setValue(material.wireframe);
 	this.fragmentShader.setValue(material.fragmentShader);

@@ -2,18 +2,15 @@
 
 var _console = console;
 var console = {};
+console.history = [];
 
 console.log = function()
 {
-
 	_console.log.apply(null, arguments);
 }
 
 console.warn = function()
 {
-	Console.messages.push(arguments);
-	_console.log(arguments);
-
 	_console.warn.apply(null, arguments);
 }
 

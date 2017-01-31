@@ -84,10 +84,10 @@ function CoordinatesBox(parent)
 
 	//Order
 	this.order = "XYZ";
+	this.mode = CoordinatesBox.VECTOR3;
 
 	//Attributes
-	this.mode = CoordinatesBox.VECTOR3;
-	this.size = new THREE.Vector2(220, 20);
+	this.size = new THREE.Vector2(180, 18);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 	
@@ -248,7 +248,7 @@ CoordinatesBox.prototype.updateInterface = function()
 		this.z_text.style.visibility = "hidden";
 	}
 
-	var size_x = (this.size.x - 60) / this.mode;
+	var size_x = Math.round((this.size.x - this.mode * 15) / this.mode);
 	var size_y = this.size.y + "px";
 
 	this.x_text.style.height = size_y;

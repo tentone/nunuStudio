@@ -54,7 +54,7 @@ function Panel(parent, obj)
 	//Name
 	this.form.addText("Name");
 	this.name = new TextBox(this.form.element);
-	this.name.size.set(200, 18);
+	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -75,6 +75,7 @@ function Panel(parent, obj)
 	//Position
 	this.form.addText("Position");
 	this.position = new CoordinatesBox(this.form.element);
+	this.position.size.set(190, 18);
 	this.position.setStep(0.01);
 	this.position.setOnChange(function()
 	{
@@ -91,6 +92,7 @@ function Panel(parent, obj)
 	//Scale
 	this.form.addText("Scale");
 	this.scale = new CoordinatesBox(this.form.element);
+	this.scale.size.set(190, 18);
 	this.scale.setStep(0.01);
 	this.scale.setOnChange(function()
 	{
@@ -107,6 +109,7 @@ function Panel(parent, obj)
 	//Rotation
 	this.form.addText("Rotation");
 	this.rotation = new CoordinatesBox(this.form.element);
+	this.rotation.size.set(190, 18);
 	this.rotation.setStep(0.01);
 	this.rotation.setOnChange(function()
 	{

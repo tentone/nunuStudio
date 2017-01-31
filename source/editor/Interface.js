@@ -817,6 +817,17 @@ Interface.initialize = function()
 		Interface.loadProgram();
 	});
 
+	//Console
+	/*Interface.file.addOption("Console", function()
+	{
+		var tab = Interface.tab.getTab(ConsoleTab);
+		if(tab === null)
+		{
+			tab = Interface.tab.addTab(ConsoleTab, true);
+		}
+		tab.select();
+	}, Interface.file_dir + "icons/misc/console.png");*/
+
 	//Settings
 	Interface.file.addOption("Settings", function()
 	{
@@ -1041,7 +1052,11 @@ Interface.updateInterface = function()
 	Interface.explorer_resizable.updateInterface();
 
 	Interface.tree_view.updateInterface();
-
+	if(Interface.panel !== null)
+	{
+		Interface.panel.updateInterface();
+	}
+	
 	//Asset Explorer
 	Interface.asset_explorer_div.size.x = size.x - Interface.explorer.size.x - Interface.tool_bar.size.x;
 	Interface.asset_explorer_div.position.set(Interface.tool_bar.size.x, size.y - Interface.asset_explorer_div.size.y);
