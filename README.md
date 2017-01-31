@@ -64,7 +64,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Added MTL loading support
 	- Added program, scene and self variables to scripts (can be used without this reference)
 	- Generic multi file format 3D model loading
-- V0.8.9.17 Alpha
+- V0.8.9.18 Alpha
 	- Added geometry properties to geometry panels
 	- Camera draw order
 	- Fixed OBJ and MTL loading

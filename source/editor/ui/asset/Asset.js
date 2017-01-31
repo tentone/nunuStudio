@@ -39,7 +39,7 @@ function Asset(parent)
 	this.visible = true;
 
 	//Icon scale
-	this.scale = new THREE.Vector2(0.7, 0.7);
+	this.scale = new THREE.Vector2(0.65, 0.65);
 
 	//Mouse over event
 	this.element.onmouseenter = function()

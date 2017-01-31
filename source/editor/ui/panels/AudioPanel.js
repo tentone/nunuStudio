@@ -7,9 +7,15 @@ function AudioPanel(parent, obj)
 	//Self pointer
 	var self = this;
 
+	//Audio player
+	this.player = new AudioPlayer(this.form.element);
+	this.player.size.set(240, 40);
+	this.form.add(this.player);
+	this.form.nextRow();
+
 	//Static
-	this.static = new CheckBox(this.form.element);
 	this.form.addText("Static Object");
+	this.static = new CheckBox(this.form.element);
 	this.static.size.set(20, 15);
 	this.static.setOnChange(function()
 	{
@@ -83,6 +89,12 @@ AudioPanel.prototype.updatePanel = function()
 
 	if(this.obj !== null)
 	{
+		var player = this.player;
+		this.player.setAudioBuffer(this.obj.audio.data, function()
+		{
+			player.play();
+		});
+
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 		this.autoplay.setValue(this.obj.autoplay);
 		this.loop.setValue(this.obj.loop);
