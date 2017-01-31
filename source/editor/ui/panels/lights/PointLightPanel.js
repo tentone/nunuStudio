@@ -149,7 +149,8 @@ function PointLightPanel(parent, obj)
 		}
 	});
 	this.form.add(this.shadow_near);
-
+	this.form.nextRow();
+	
 	//Shadowmap camera far
 	this.form.addText("Far");
 	this.shadow_far = new NumberBox(this.form.element);

@@ -57,9 +57,9 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 
 SpriteMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-SpriteMaterialEditor.prototype.attachMaterial = function(material, material_file)
+SpriteMaterialEditor.prototype.attach = function(material, material_file)
 {
-	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
+	MaterialEditor.prototype.attach.call(this, material, material_file);
 
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.rotation.setValue(material.rotation);

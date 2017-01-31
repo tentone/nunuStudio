@@ -194,7 +194,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map
-	this.form.addText("Displacement map");
+	this.form.addText("Displacement Map");
 	this.form.nextRow();
 	this.displacementMap = new TextureBox(this.form.element);
 	this.displacementMap.updateInterface();
@@ -208,7 +208,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map scale
-	this.form.addText("Displacement scale");
+	this.form.addText("Displacement Scale", true);
 	this.displacementScale = new NumberBox(this.form.element);
 	this.displacementScale.size.set(60, 18);
 	this.displacementScale.setStep(0.05);
@@ -225,7 +225,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map bias
-	this.form.addText("Displacement bias");
+	this.form.addText("Displacement Bias", true);
 	this.displacementBias = new NumberBox(this.form.element);
 	this.displacementBias.size.set(60, 18);
 	this.displacementBias.setStep(0.1);
@@ -397,9 +397,9 @@ function PhongMaterialEditor(parent, closeable, container, index)
 
 PhongMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-PhongMaterialEditor.prototype.attachMaterial = function(material, material_file)
+PhongMaterialEditor.prototype.attach = function(material, material_file)
 {
-	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
+	MaterialEditor.prototype.attach.call(this, material, material_file);
 
 	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);

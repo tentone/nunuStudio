@@ -10,7 +10,7 @@ function Text3DPanel(parent, obj)
 	//Text
 	this.form.addText("Text");
 	this.text = new TextArea(this.form.element);
-	this.text.size.set(200, 60);
+	this.text.size.set(190, 60);
 	this.text.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -36,6 +36,7 @@ function Text3DPanel(parent, obj)
 		}
 	});
 	this.form.add(this.size);
+	this.form.nextRow();
 
 	//Height
 	this.form.addText("Thickness");
@@ -55,7 +56,7 @@ function Text3DPanel(parent, obj)
 	this.form.nextRow();
 
 	//Curve segments
-	this.form.addText("Curve Segments");
+	this.form.addText("Curve Detail");
 	this.curve_segments = new NumberBox(this.form.element);
 	this.curve_segments.size.set(60, 18);
 	this.curve_segments.setRange(0, Number.MAX_SAFE_INTEGER);
@@ -164,7 +165,7 @@ function Text3DPanel(parent, obj)
 
 	//Receive shadow
 	this.receive_shadow = new CheckBox(this.form.element);
-	this.form.addText("Receive Shadow");
+	this.form.addText("React Shadow");
 	this.receive_shadow.size.set(20, 15);
 	this.receive_shadow.setOnChange(function()
 	{

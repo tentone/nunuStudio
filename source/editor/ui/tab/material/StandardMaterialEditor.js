@@ -240,7 +240,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map scale
-	this.form.addText("Displacement Scale");
+	this.form.addText("Displacement Scale", true);
 	this.displacementScale = new NumberBox(this.form.element);
 	this.displacementScale.size.set(60, 18);
 	this.displacementScale.setStep(0.05);
@@ -257,7 +257,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map bias
-	this.form.addText("Displacement Bias");
+	this.form.addText("Displacement Bias", true);
 	this.displacementBias = new NumberBox(this.form.element);
 	this.displacementBias.size.set(60, 18);
 	this.displacementBias.setStep(0.1);
@@ -344,9 +344,9 @@ function StandardMaterialEditor(parent, closeable, container, index)
 
 StandardMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-StandardMaterialEditor.prototype.attachMaterial = function(material, material_file)
+StandardMaterialEditor.prototype.attach = function(material, material_file)
 {
-	MaterialEditor.prototype.attachMaterial.call(this, material, material_file);
+	MaterialEditor.prototype.attach.call(this, material, material_file);
 	
 	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);

@@ -269,6 +269,7 @@ include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
 
+//Internal console
 //include("editor/ui/tab/ConsoleTab.js");
 //include("editor/Console.js");
 
