@@ -31,13 +31,11 @@ function MaterialEditor(parent, closeable, container, index)
 	this.preview.updateInterface();
 
 	//Change preview division style
-	this.preview.div_a.style.overflow = "auto";
-	this.preview.div_a.style.cursor = "default";
+	this.preview.div_a.style.overflow = "hidden";
 	this.preview.div_a.style.backgroundColor = Editor.theme.panel_color;
 
 	//Change main division style
 	this.main.div_b.style.overflow = "auto";
-	this.main.div_b.style.cursor = "default";
 	this.main.div_b.style.backgroundColor = Editor.theme.panel_color;
 
 	//Material preview

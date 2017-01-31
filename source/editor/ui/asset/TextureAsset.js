@@ -146,6 +146,15 @@ TextureAsset.prototype.setTexture = function(texture)
 
 		this.element.appendChild(this.preview);
 	}
+	//Canvas texture
+	else if(texture instanceof CanvasTexture)
+	{
+		this.preview = document.createElement("img");
+		this.preview.style.position = "absolute";
+		this.preview.style.top = "5px";
+		this.preview.src = texture.image.toDataURL();
+		this.element.appendChild(this.preview);
+	}
 	//Image
 	else if(texture instanceof THREE.Texture)
 	{

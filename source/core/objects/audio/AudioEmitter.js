@@ -15,7 +15,6 @@ function AudioEmitter(audio)
 	this.playbackRate = 1;
 	this.startTime = 0;
 	this.loop = true;
-
 	this.isPlaying = false;
 	this.hasPlaybackControl = true;
 }
