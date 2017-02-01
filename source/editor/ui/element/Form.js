@@ -5,22 +5,22 @@ function Form(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
+	this.element.style.overflow = "visible";
 	this.element.style.position = "absolute";
 
-	//Element atributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
+	//Attributes
+	this.size = new THREE.Vector2(0, 0);
+	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
-	this.enabled = true;
 	
-	//Elements attached
+	//Child elements
 	this.spacing = new THREE.Vector2(10, 10);
 	this.rows = [];
 	this.rows.push([]);
 
-	//Default elements
+	//Defaults
 	this.default_text_width = 80;
 
 	//Add element to document
@@ -42,7 +42,7 @@ Form.prototype.add = function(elem)
 	}
 }
 
-//Create text element and add to form
+//Create text element
 Form.prototype.addText = function(text, fit)
 {
 	var element = new Text(this.element);
@@ -55,12 +55,20 @@ Form.prototype.addText = function(text, fit)
 	return element;
 }
 
-//Create div element and add to form
+//Create separator
+Form.prototype.addSeparator = function()
+{
+	var separator = new FormSeparator(this.element);
+	this.add(separator);
+
+	return separator;
+}
+
+//Create division
 Form.prototype.addDivision = function(x, y)
 {
 	var division = new Division(this.element);
 	division.size.set(x, y);
-
 	this.add(division);
 
 	return division;

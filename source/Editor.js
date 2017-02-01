@@ -162,6 +162,7 @@ include("editor/ui/element/Canvas.js");
 include("editor/ui/element/DualDivisionResizable.js");
 include("editor/ui/element/ButtonImageToggle.js");
 include("editor/ui/element/Form.js");
+include("editor/ui/element/FormSeparator.js");
 include("editor/ui/element/AudioPlayer.js");
 
 include("editor/ui/element/input/Graph.js");

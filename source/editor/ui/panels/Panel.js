@@ -48,7 +48,7 @@ function Panel(parent, obj)
 
 	//Default form
 	this.form = new Form(this.element);
-	this.form.position.set(5, 10);
+	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);
 
 	//Name

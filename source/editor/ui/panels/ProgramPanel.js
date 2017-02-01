@@ -7,11 +7,15 @@ function ProgramPanel(parent, obj)
 	//Self pointer
 	var self = this;
 
+	//Program information
+	this.form.addText("Information");
+	this.form.nextRow();
+
 	//Author
 	this.form.addText("Author");
 	this.author = new TextBox(this.form.element);
 	this.author.position.set(50, 35);
-	this.author.size.set(200, 18);
+	this.author.size.set(190, 18);
 	this.author.updateInterface();
 	this.author.setOnChange(function()
 	{
@@ -70,7 +74,7 @@ function ProgramPanel(parent, obj)
 	this.form.nextRow();
 
 	//VR Movement Scale
-	this.form.addText("VR Movement Scale");
+	this.form.addText("Room Scale");
 	this.vr_scale = new NumberBox(this.form.element);
 	this.vr_scale.size.set(50, 18);
 	this.vr_scale.setRange(0, 1000);
