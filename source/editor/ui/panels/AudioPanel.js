@@ -8,8 +8,9 @@ function AudioPanel(parent, obj)
 	var self = this;
 
 	//Audio player
+	this.form.addText("Audio");
 	this.player = new AudioPlayer(this.form.element);
-	this.player.size.set(240, 40);
+	this.player.size.set(190, 20);
 	this.form.add(this.player);
 	this.form.nextRow();
 
@@ -100,12 +101,8 @@ AudioPanel.prototype.updatePanel = function()
 
 	if(this.obj !== null)
 	{
-		var player = this.player;
-		this.player.setAudioBuffer(this.obj.audio.data, function()
-		{
-			player.play();
-		});
-
+		this.player.setAudioBuffer(this.obj.audio.data);
+	
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 		this.autoplay.setValue(this.obj.autoplay);
 		this.loop.setValue(this.obj.loop);

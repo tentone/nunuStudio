@@ -27,6 +27,18 @@ function TabGroup(parent)
 	this.buttons.style.position = "absolute";
 	this.element.appendChild(this.buttons);
 	
+	this.buttons.ondrop = function(event)
+	{
+		//TODO <REORDER TABS>
+		event.preventDefault();
+	};
+
+	this.buttons.ondragover = function(event)
+	{
+		//TODO <REORDER TABS ICONS>
+		event.preventDefault();
+	};
+
 	//Tab
 	this.tab = document.createElement("div");
 	this.tab.style.position = "absolute";

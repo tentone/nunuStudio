@@ -29,7 +29,6 @@ function TabButton(parent, tab)
 		{
 			tab.container.selectTab(tab.index);
 		}
-
 		//Close tab on mouse middle click
 		else if(tab.closeable && event.which - 1 === Mouse.MIDDLE)
 		{

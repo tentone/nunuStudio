@@ -157,7 +157,11 @@ function ScenePanel(parent, obj)
 	this.form.add(this.fog_exponential_form);
 	this.form.nextRow();
 
+
 	//Physics world
+	this.form.addSeparator();
+	this.form.nextRow();
+	
 	this.form.addText("Physics world");
 	this.form.nextRow();
 
