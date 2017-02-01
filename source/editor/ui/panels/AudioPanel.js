@@ -82,6 +82,17 @@ function AudioPanel(parent, obj)
 //Super prototypes
 AudioPanel.prototype = Object.create(Panel.prototype);
 
+//Destroy audio panel
+AudioPanel.prototype.destroy = function()
+{
+	try
+	{
+		this.parent.removeChild(this.element);
+		this.player.destroy();
+	}
+	catch(e){}
+}
+
 //Update panel content from attached object
 AudioPanel.prototype.updatePanel = function()
 {

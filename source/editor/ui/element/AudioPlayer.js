@@ -5,7 +5,8 @@ function AudioPlayer(parent)
 	this.parent = (parent !== undefined) ? parent : document.body;
 
 	//WebAudio context
-	this.context = THREE.AudioContext.getContext();//new (window.AudioContext || window.webkitAudioContext)();
+	//this.context = new (window.AudioContext || window.webkitAudioContext)();
+	this.context = THREE.AudioContext.getContext();
 
 	//Element
 	this.element = document.createElement("div");
@@ -54,73 +55,48 @@ function AudioPlayer(parent)
 	this.time = 0;
 	this.startTime = 0;
 	this.playing = false;
-
+	this.loop = false;
 	this.dragging = false;
 
-/*
-AudioPlayer.prototype.onMouseDown = function(e)
-{
-	this.dragging = true;
-	this.startX = e.pageX;
-	this.startLeft = parseInt(this.scrubber.style.left || 0, 10);
-}
-
-AudioPlayer.prototype.onDrag = function(e)
-{
-	if(!this.dragging)
-	{
-		return;
-	}
-
-	var width = this.track.offsetWidth;
-	var position = this.startLeft + (e.pageX - this.startX);
-	position = Math.max(Math.min(width, position), 0);
-	
-	this.scrubber.style.left = position + "px";
-}
-
-AudioPlayer.prototype.onMouseUp = function()
-{
-	if(this.dragging)
-	{
-		var width = this.track.offsetWidth;
-		var left = parseInt(this.scrubber.style.left || 0, 10);
-		var time = left / width * this.buffer.duration;
-		this.seek(time);
-		this.dragging = false;
-	}
-}
-*/
+	//Self pointer
+	var self = this;
 
 	//Update elements
 	function draw()
 	{
-		if(this.buffer !== null)
+		if(self.playing)
 		{
-			if(this.playing)
+			self.time = self.context.currentTime - self.startTime;
+
+			if(self.time >= self.buffer.duration)
 			{
-				this.time = this.context.currentTime;
-
-				if(this.time >= this.buffer.duration)
-				{
-					this.pause();
-				}
+				self.pause();
 			}
-
-			var progress = this.time / this.buffer.duration;
-			var position = progress * (this.size.x - this.size.y);
-
-			this.progress.style.width = position + "px";
-			this.scrubber.style.left = position + "px";
 		}
 
-		if(this.parent !== null)
+		if(Keyboard.keyPressed(Keyboard.Y))
 		{
-			requestAnimationFrame(draw.bind(this));
+			console.log("Context");
+			console.log(self.context);
+			console.log("Buffer");
+			console.log(self.buffer);
+			console.log("Source");
+			console.log(self.buffer);
+		}
+
+		/*var progress = self.time / self.buffer.duration;
+		var position = progress * (self.size.x - self.size.y);
+
+		self.progress.style.width = position + "px";
+		self.scrubber.style.left = position + "px";*/
+
+		if(self.parent !== null)
+		{
+			requestAnimationFrame(draw);
 		}
 	}
 	
-	draw.bind(this)();
+	draw();
 
 	//Attributes
 	this.visible = true;
@@ -188,9 +164,9 @@ AudioPlayer.prototype.pause = function()
 {
 	if(this.playing)
 	{
+		this.playing = false;
 		this.source.stop();
 		this.time = this.context.currentTime - this.startTime;
-		this.playing = false;
 
 		//TODO <CHECK THIS>
 		this.button.style.backgroundColor = "#FF0000";
@@ -199,7 +175,7 @@ AudioPlayer.prototype.pause = function()
 
 //Stop audio playback
 AudioPlayer.prototype.stop = function()
-{
+{	
 	if(this.playing)
 	{
 		this.source.stop();
@@ -254,6 +230,41 @@ AudioPlayer.prototype.destroy = function()
 	}
 	catch(e){}
 }
+
+/*
+AudioPlayer.prototype.onMouseDown = function(e)
+{
+	this.dragging = true;
+	this.startX = e.pageX;
+	this.startLeft = parseInt(this.scrubber.style.left || 0, 10);
+}
+
+AudioPlayer.prototype.onDrag = function(e)
+{
+	if(!this.dragging)
+	{
+		return;
+	}
+
+	var width = this.track.offsetWidth;
+	var position = this.startLeft + (e.pageX - this.startX);
+	position = Math.max(Math.min(width, position), 0);
+	
+	this.scrubber.style.left = position + "px";
+}
+
+AudioPlayer.prototype.onMouseUp = function()
+{
+	if(this.dragging)
+	{
+		var width = this.track.offsetWidth;
+		var left = parseInt(this.scrubber.style.left || 0, 10);
+		var time = left / width * this.buffer.duration;
+		this.seek(time);
+		this.dragging = false;
+	}
+}
+*/
 
 //Update
 AudioPlayer.prototype.update = function(){}
