@@ -2,7 +2,8 @@
 	"general": {
 		"theme": "dark",
 		"file_preview_size": 70,
-		"show_stats": true
+		"show_stats": true,
+		"show_uuid": false
 	},
 	"editor": {
 		"grid_size": 500,
@@ -12,7 +13,7 @@
 		"camera_preview_enabled": true,
 		"camera_preview_percentage": "0.25",
 		"lock_mouse": true,
-		"transformation_space": "world"
+		"transformation_space": "local"
 	},
 	"render": {
 		"follow_project": false,

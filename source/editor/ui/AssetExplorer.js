@@ -24,11 +24,13 @@ function AssetExplorer(parent)
 		if(event.dataTransfer.files.length > 0)
 		{
 			var file = event.dataTransfer.files[0];
+			var name = FileSystem.getFileName(file.path);
 
 			//Image
 			if(file.type.startsWith("image"))
 			{
 				var texture = new Texture(file.path);
+				texture.name = name;
 				Editor.program.addTexture(texture);
 				Editor.updateAssetExplorer();
 			}
@@ -36,6 +38,7 @@ function AssetExplorer(parent)
 			else if(file.type.startsWith("video"))
 			{
 				var texture = new VideoTexture(file.path);
+				texture.name = name;
 				Editor.program.addTexture(texture);
 				Editor.updateAssetExplorer();
 			}
@@ -43,6 +46,7 @@ function AssetExplorer(parent)
 			else if(file.type.startsWith("audio"))
 			{
 				var audio = new Audio(file.path);
+				audio.name = name;
 				Editor.program.addAudio(audio);
 				Editor.updateAssetExplorer();
 			}
@@ -61,27 +65,7 @@ function AssetExplorer(parent)
 		event.preventDefault();
 	};
 
-	/*this.element.oncontextmenu = function(event)
-	{
-		var context = new ContextMenu();
-		context.size.set(130, 20);
-		context.position.set(event.clientX - 5, event.clientY - 5);
-
-		context.addOption("Select All", function()
-		{
-			//TODO <ADD CODE HERE>
-			alert("Not implemented");
-		});
-
-		context.addOption("Paste", function()
-		{
-			//TODO <ADD CODE HERE>
-			alert("Not implemented");
-		});
-	};*/
-
 	//Element atributes
-	this.fit_parent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -133,13 +117,6 @@ AssetExplorer.prototype.update = function(){}
 //Update division Size
 AssetExplorer.prototype.updateInterface = function()
 {
-	//Fit parent
-	if(this.fit_parent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-
 	//Element visibility
 	if(this.visible)
 	{

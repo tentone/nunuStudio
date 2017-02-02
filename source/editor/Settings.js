@@ -8,6 +8,7 @@ Settings.general = {};
 Settings.general.theme = "dark";
 Settings.general.file_preview_size = 70;
 Settings.general.show_stats = false;
+Settings.general.show_uuid = false;
 
 //Editor settings
 Settings.editor = {};
