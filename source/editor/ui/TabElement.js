@@ -43,24 +43,6 @@ function TabElement(parent, closeable, container, index, title, icon)
 	this.parent.appendChild(this.element);
 }
 
-//Close tab
-TabElement.prototype.close = function()
-{
-	this.container.removeTab(this.index);
-}
-
-//Selects this tab
-TabElement.prototype.select = function()
-{
-	this.container.selectTab(this.index);
-}
-
-//Check if tab is selected
-TabElement.prototype.isSelected = function()
-{
-	return this.index === this.container.selected;
-}
-
 //Update tab metadata
 TabElement.prototype.updateMetadata = function(){}
 
@@ -78,6 +60,24 @@ TabElement.prototype.isAttached = function(obj)
 
 //Update
 TabElement.prototype.update = function(){}
+
+//Close tab
+TabElement.prototype.close = function()
+{
+	this.container.removeTab(this.index);
+}
+
+//Selects this tab
+TabElement.prototype.select = function()
+{
+	this.container.selectTab(this.index);
+}
+
+//Check if tab is selected
+TabElement.prototype.isSelected = function()
+{
+	return this.index === this.container.selected;
+}
 
 //Destroy
 TabElement.prototype.destroy = function()
@@ -107,15 +107,8 @@ TabElement.prototype.setName = function(text)
 //Update Interface
 TabElement.prototype.updateInterface = function()
 {
-	//Set visibility
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
+	//Visibility
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
 
 	//Element
 	this.element.style.width = this.size.x + "px";

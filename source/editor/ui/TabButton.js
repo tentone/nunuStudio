@@ -54,10 +54,6 @@ function TabButton(parent, tab)
 	//Icon
 	this.icon = document.createElement("img");
 	this.icon.style.position = "absolute";
-	this.icon.style.top = "7px";
-	this.icon.style.left = "7px";
-	this.icon.style.width = "15px";
-	this.icon.style.height = "15px";
 	this.icon.src = tab.icon;
 	this.element.appendChild(this.icon);
 
@@ -69,26 +65,35 @@ function TabButton(parent, tab)
 	this.text.style.pointerEvents = "none";
 	this.text.style.textOverflow = "ellipsis";
 	this.text.style.whiteSpace = "nowrap";
-	this.text.style.top = "8px";
-	this.text.style.left = "25px";
 	this.text.style.color = Editor.theme.text_color;
 	this.text.innerHTML = tab.title;
 	this.element.appendChild(this.text);
 
 	//Close button
-	this.close_button = new ButtonImage(this.element);
-	this.close_button.visible = this.closeable;
-	this.close_button.size.set(10, 10);
-	this.close_button.position.set(130, 10);
-	this.close_button.setImage("editor/files/icons/misc/close.png");
-	this.close_button.setCallback(function()
+	this.close = document.createElement("img");
+	this.close.style.position = "absolute";
+	this.close.style.opacity = 0.6;
+	this.close.style.visibility = tab.closeable ? "visible" : "hidden";
+	this.close.src = "editor/files/icons/misc/close.png";
+	this.element.appendChild(this.close);
+	
+	this.close.onmouseenter = function()
+	{
+		this.style.opacity = 1.0;
+	};
+
+	this.close.onmouseleave = function()
+	{
+		this.style.opacity = 0.6;
+	};
+
+	this.close.onclick = function()
 	{
 		tab.close();
-	});
-	this.close_button.updateInterface();
+	};
 
 	//Element atributes
-	this.size = new THREE.Vector2(150, 30);
+	this.size = new THREE.Vector2(150, 50);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
@@ -138,32 +143,35 @@ TabButton.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.icon.style.visibility = "visible";
-		this.text.style.visibility = "visible";
 		this.element.style.visibility = "visible";
 	}
 	else
 	{
-		this.icon.style.visibility = "hidden";
-		this.text.style.visibility = "hidden";
 		this.element.style.visibility = "hidden";
 	}
 
+	//Icon
+	this.icon.style.top = (this.size.y * 0.2) + "px";
+	this.icon.style.left = (this.size.y * 0.2) + "px"
+	this.icon.style.width = (this.size.y * 0.6) + "px";
+	this.icon.style.height = (this.size.y * 0.6) + "px";
+
 	//Text
-	this.text.style.width = (this.size.x - 50) + "px";
+	this.text.style.top = "25%";
+	this.text.style.left = this.size.y + "px";
+	this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
 	this.text.style.height = this.size.y + "px";
+
+	//Close
+	this.close.style.visibility = this.tab.closeable ? "visible" : "hidden";
+	this.close.style.width = (this.size.y * 0.45) + "px";
+	this.close.style.height = (this.size.y * 0.45) + "px";
+	this.close.style.top = (this.size.y * 0.275) + "px";
+	this.close.style.right = (this.size.y * 0.275) + "px";
 
 	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-
-	//Close button
-	if(this.tab.closeable)
-	{
-		this.close_button.visible = this.visible;
-		this.close_button.position.set(this.size.x - 20, 10);
-		this.close_button.updateInterface();
-	}
 }

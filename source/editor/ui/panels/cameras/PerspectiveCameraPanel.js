@@ -66,7 +66,8 @@ function PerspectiveCameraPanel(parent, obj)
 		}
 	});
 	this.form.add(this.near);
-
+	this.form.nextRow();
+	
 	//Far
 	this.form.addText("Far");
 	this.far = new NumberBox(this.form.element);

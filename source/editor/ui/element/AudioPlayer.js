@@ -19,9 +19,9 @@ function AudioPlayer(parent)
 	this.timer.style.display = "flex";
 	this.timer.style.justifyContent = "center";
 	this.timer.style.alignItems = "center";
-	this.timer.style.right = "0px";
-	this.timer.style.width = "50px";
+	this.timer.style.width = "40px";
 	this.timer.style.height = "100%";
+	this.timer.style.right = "0px";
 	this.timer.innerHTML = "00:00";
 	this.element.appendChild(this.timer);
 
@@ -30,7 +30,6 @@ function AudioPlayer(parent)
 	this.button.style.position = "absolute";
 	this.button.style.cursor = "pointer";
 	this.button.style.background = "transparent";
-	this.button.style.left = "0px";
 	this.button.style.border = "none";
 	this.button.style.outline = "none";
 	this.element.appendChild(this.button);
@@ -38,10 +37,10 @@ function AudioPlayer(parent)
 	//Icon
 	this.icon = document.createElement("img");
 	this.icon.style.position = "absolute";
-	this.icon.style.left = "10%";
-	this.icon.style.top = "10%";
-	this.icon.style.width = "80%";
-	this.icon.style.height = "80%";
+	this.icon.style.left = "15%";
+	this.icon.style.top = "15%";
+	this.icon.style.width = "70%";
+	this.icon.style.height = "70%";
 	this.icon.src = "editor/files/icons/misc/play.png";
 	this.button.appendChild(this.icon);
 
@@ -49,15 +48,13 @@ function AudioPlayer(parent)
 	this.track = document.createElement("div");
 	this.track.style.position = "absolute";
 	this.track.style.backgroundColor = "#222222";
-	this.track.style.cursor = "pointer";
+	//this.track.style.cursor = "pointer";
 	this.element.appendChild(this.track);
 
 	//Progress
 	this.progress = document.createElement("div");
 	this.progress.style.position = "absolute";
 	this.progress.style.backgroundColor = "#555555";
-	this.progress.style.top = "0px";
-	this.progress.style.left = "0px";
 	this.progress.style.height = "100%";
 	this.track.appendChild(this.progress);
 
@@ -340,9 +337,9 @@ AudioPlayer.prototype.updateInterface = function()
 	this.button.style.height = this.element.style.height;
 
 	//Track
-	this.track.style.top = (this.size.y * 0.45) + "px";
-	this.track.style.left = (this.size.y * 1.5) + "px";
-	this.track.style.width = (this.size.x - this.size.y * 1.5 - 45) + "px";
+	this.track.style.top = (this.size.y * 0.40) + "px";
+	this.track.style.left = (this.size.y * 1.05) + "px";
+	this.track.style.width = (this.size.x - this.size.y * 1.5 - 35) + "px";
 	this.track.style.height = (this.size.y * 0.2) + "px";
 
 	//Scrubber
