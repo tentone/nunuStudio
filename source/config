@@ -25,7 +25,7 @@
 		"shadows_type": 2
 	},
 	"code": {
-		"theme": "monokai",
+		"theme": "lesser-dark",
 		"keymap": "sublime",
 		"font_size": 16,
 		"line_numbers": true,

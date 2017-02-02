@@ -81,7 +81,8 @@ function OrthographicCameraPanel(parent, obj)
 		}
 	});
 	this.form.add(this.near);
-
+	this.form.nextRow();
+	
 	//Far
 	this.form.addText("Far");
 	this.far = new NumberBox(this.form.element);
@@ -151,8 +152,8 @@ function OrthographicCameraPanel(parent, obj)
 	this.form.nextRow();
 
 	//Clear color
-	this.clear_color = new CheckBox(this.form.element);
 	this.form.addText("Clear color");
+	this.clear_color = new CheckBox(this.form.element);
 	this.clear_color.size.set(20, 15);
 	this.clear_color.setOnChange(function()
 	{

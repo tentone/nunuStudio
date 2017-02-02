@@ -14,19 +14,21 @@ function AudioPanel(parent, obj)
 	this.form.add(this.player);
 	this.form.nextRow();
 
-	//Static
-	this.form.addText("Static Object");
-	this.static = new CheckBox(this.form.element);
-	this.static.size.set(20, 15);
-	this.static.setOnChange(function()
+	//Volume
+	this.form.addText("Volume");
+	this.volume = new Slider(this.form.element);
+	this.volume.size.set(80, 18);
+	this.volume.setRange(0, 1);
+	this.volume.setStep(0.01);
+	this.volume.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.matrixAutoUpdate = !(self.static.getValue());
-			Editor.history.push(self.obj, Action.CHANGED);
+			self.obj.volume = self.volume.getValue();
+			self.obj.updateProjectionMatrix();
 		}
 	});
-	this.form.add(this.static);
+	this.form.add(this.volume);
 	this.form.nextRow();
 
 	//Playback Rate
@@ -76,6 +78,21 @@ function AudioPanel(parent, obj)
 	this.form.add(this.loop);
 	this.form.nextRow();
 
+	//Static
+	this.form.addText("Static Object");
+	this.static = new CheckBox(this.form.element);
+	this.static.size.set(20, 15);
+	this.static.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.matrixAutoUpdate = !(self.static.getValue());
+			Editor.history.push(self.obj, Action.CHANGED);
+		}
+	});
+	this.form.add(this.static);
+	this.form.nextRow();
+
 	//Update form
 	this.form.updateInterface();
 }
@@ -102,7 +119,7 @@ AudioPanel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.player.setAudioBuffer(this.obj.audio.data);
-	
+		this.volume.setValue(this.obj.volume);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 		this.autoplay.setValue(this.obj.autoplay);
 		this.loop.setValue(this.obj.loop);

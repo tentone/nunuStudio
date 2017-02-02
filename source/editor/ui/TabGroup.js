@@ -62,7 +62,7 @@ function TabGroup(parent)
 	
 	//Options
 	this.mode = TabGroup.TOP;
-	this.button_size = new THREE.Vector2(150, 30);
+	this.button_size = new THREE.Vector2(150, 25);
 	this.selected = -1;
 	this.options = [];
 

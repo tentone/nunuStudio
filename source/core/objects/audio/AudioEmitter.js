@@ -11,10 +11,13 @@ function AudioEmitter(audio)
 
 	this.audio = (audio !== undefined) ? audio : null;
 
+	this.volume = 1.0;
+
 	this.autoplay = true;
-	this.playbackRate = 1;
+	this.playbackRate = 1.0;
 	this.startTime = 0;
 	this.loop = true;
+
 	this.isPlaying = false;
 	this.hasPlaybackControl = true;
 }
@@ -38,6 +41,8 @@ AudioEmitter.prototype.initialize = function()
 		});
 	}
 
+	this.setVolume(this.volume);
+
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
@@ -59,6 +64,15 @@ AudioEmitter.prototype.dispose = function()
 	}
 }
 
+//Set volume
+AudioEmitter.prototype.setVolume = function(value)
+{
+	this.volume = value;
+	this.gain.gain.value = value;
+
+	return this;
+}
+
 //Create JSON description
 AudioEmitter.prototype.toJSON = function(meta)
 {
@@ -69,6 +83,7 @@ AudioEmitter.prototype.toJSON = function(meta)
 	});
 
 	data.object.audio = audio.uuid;	
+	data.object.volume = this.volume;
 	data.object.autoplay = this.autoplay;
 	data.object.startTime = this.startTime;
 	data.object.playbackRate = this.playbackRate;
