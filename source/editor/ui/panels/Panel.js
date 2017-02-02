@@ -68,10 +68,13 @@ function Panel(parent, obj)
 	this.form.nextRow();
 
 	//UUID
-	//this.form.addText("UUID");
-	//this.uuid = this.form.addText("");
-	//this.form.nextRow();
-
+	if(Settings.general.show_uuid)
+	{
+		this.form.addText("UUID");
+		this.uuid = this.form.addText("");
+		this.form.nextRow();
+	}
+	
 	//Position
 	this.form.addText("Position");
 	this.position = new CoordinatesBox(this.form.element);
@@ -183,7 +186,10 @@ Panel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
-		//this.uuid.setText(this.obj.uuid);
+		if(this.uuid !== undefined)
+		{
+			this.uuid.setText(this.obj.uuid);
+		}
 		this.position.setValue(this.obj.position);
 		this.scale.setValue(this.obj.scale);
 		this.rotation.setValue(this.obj.rotation);

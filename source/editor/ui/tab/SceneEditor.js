@@ -46,6 +46,7 @@ function SceneEditor(parent, closeable, container, index)
 			if(intersections.length > 0 && event.dataTransfer.files.length > 0)
 			{
 				var file = event.dataTransfer.files[0];
+				var name = FileSystem.getFileName(file.path);
 				var object = intersections[0].object;
 
 				//Image
@@ -55,8 +56,10 @@ function SceneEditor(parent, closeable, container, index)
 					{
 						//Create new material with selected image
 						var texture = new Texture(file.path);
+						texture.name = name;
+
 						var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-						material.name = file.name;
+						material.name = name;
 						object.material = material;
 
 						//Update asset explorer
@@ -66,8 +69,9 @@ function SceneEditor(parent, closeable, container, index)
 					{
 						//Create new material with selected image
 						var texture = new Texture(file.path);
+						texture.name = name;
 						var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
-						material.name = file.name;
+						material.name = name;
 						object.material = material;
 
 						Editor.updateObjectViews();
@@ -79,16 +83,18 @@ function SceneEditor(parent, closeable, container, index)
 					if(object instanceof THREE.Mesh)
 					{
 						var texture = new VideoTexture(file.path);
+						texture.name = name;
 						var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-						material.name = file.name;
+						material.name = name;
 						object.material = material;
 						Editor.updateObjectViews();
 					}
 					else if(object instanceof THREE.Sprite)
 					{
 						var texture = new VideoTexture(file.path);
+						texture.name;
 						var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
-						material.name = file.name;
+						material.name = name;
 						object.material = material;
 						Editor.updateObjectViews();
 					}

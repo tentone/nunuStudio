@@ -16,7 +16,7 @@ function Form(parent)
 	this.visible = true;
 	
 	//Child elements
-	this.spacing = new THREE.Vector2(10, 10);
+	this.spacing = new THREE.Vector2(5, 5);
 	this.rows = [];
 	this.rows.push([]);
 
@@ -171,6 +171,6 @@ Form.prototype.updateInterface = function()
 	//Update element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
+	this.element.style.width = this.size.x + "px";	
 }

@@ -61,6 +61,11 @@ TreeView.prototype.updateView = function()
 //Update which object is currently selected
 TreeView.prototype.updateSelectedObject = function(obj)
 {
+	if(obj === undefined || obj === null)
+	{
+		return;
+	}
+
 	TreeView.updateSelectedObject(this, obj);
 }
 

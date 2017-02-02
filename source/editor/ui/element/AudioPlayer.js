@@ -13,6 +13,18 @@ function AudioPlayer(parent)
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "visible";
 
+	//Timer
+	this.timer = document.createElement("div");
+	this.timer.style.position = "absolute";
+	this.timer.style.display = "flex";
+	this.timer.style.justifyContent = "center";
+	this.timer.style.alignItems = "center";
+	this.timer.style.right = "0px";
+	this.timer.style.width = "50px";
+	this.timer.style.height = "100%";
+	this.timer.innerHTML = "00:00";
+	this.element.appendChild(this.timer);
+
 	//Button
 	this.button = document.createElement("button");
 	this.button.style.position = "absolute";
@@ -23,17 +35,27 @@ function AudioPlayer(parent)
 	this.button.style.outline = "none";
 	this.element.appendChild(this.button);
 
+	//Icon
+	this.icon = document.createElement("img");
+	this.icon.style.position = "absolute";
+	this.icon.style.left = "10%";
+	this.icon.style.top = "10%";
+	this.icon.style.width = "80%";
+	this.icon.style.height = "80%";
+	this.icon.src = "editor/files/icons/misc/play.png";
+	this.button.appendChild(this.icon);
+
 	//Track
 	this.track = document.createElement("div");
 	this.track.style.position = "absolute";
-	this.track.style.backgroundColor = "#FFFF00";
+	this.track.style.backgroundColor = "#222222";
 	this.track.style.cursor = "pointer";
 	this.element.appendChild(this.track);
 
 	//Progress
 	this.progress = document.createElement("div");
 	this.progress.style.position = "absolute";
-	this.progress.style.backgroundColor = "#FF0000";
+	this.progress.style.backgroundColor = "#555555";
 	this.progress.style.top = "0px";
 	this.progress.style.left = "0px";
 	this.progress.style.height = "100%";
@@ -42,14 +64,29 @@ function AudioPlayer(parent)
 	//Scrubber
 	this.scrubber = document.createElement("div");
 	this.scrubber.style.position = "absolute";
-	this.scrubber.style.backgroundColor = "#0000FF";
+	this.scrubber.style.backgroundColor = "#FFFFFF";
 	this.scrubber.style.cursor = "pointer";
 	this.track.appendChild(this.scrubber);
+
+	//Audio source and buffer
+	this.buffer = null;
+	this.source = null;
+
+	//Playback control
+	this.time = 0;
+	this.start_time = 0;
+	this.playing = false;
+	this.loop = false;
+
+	//Drag controll
+	this.seek_start = 0;
+	this.seek_time = 0;
+	this.seek_progress = 0;
+	this.dragging = false;
 
 	//Self pointer
 	var self = this;
 
-	//Create events
 	this.button. onclick = function()
 	{
 		self.toggle();
@@ -98,24 +135,9 @@ function AudioPlayer(parent)
 		
 	};
 	
+	//Window events
 	window.addEventListener("mousemove", this.onMouseMove);
 	window.addEventListener("mouseup", this.onMouseUp);
-
-	//Audio source and buffer
-	this.buffer = null;
-	this.source = null;
-
-	//Playback control
-	this.time = 0;
-	this.start_time = 0;
-	this.playing = false;
-	this.loop = false;
-
-	//Drag controll
-	this.seek_start = 0;
-	this.seek_time = 0;
-	this.seek_progress = 0;
-	this.dragging = false;
 
 	//Update elements
 	function draw()
@@ -123,6 +145,20 @@ function AudioPlayer(parent)
 		if(self.playing)
 		{
 			self.time = self.context.currentTime - self.start_time;
+
+			var seconds = Math.round(self.time % 60);
+			if(seconds < 10)
+			{
+				seconds = "0" + seconds;
+			}
+
+			var minutes = Math.round(self.time / 60);
+			if(minutes < 10)
+			{
+				minutes = "0" + minutes;
+			}
+			
+			self.timer.innerHTML = minutes + ":" + seconds;
 
 			if(self.time >= self.buffer.duration)
 			{
@@ -203,8 +239,7 @@ AudioPlayer.prototype.play = function(time)
 	this.source.start(this.context.currentTime, this.time);
 	this.playing = true;
 
-	//TODO <CHECK THIS>
-	this.button.style.backgroundColor = "#00FF00";
+	this.icon.src = "editor/files/icons/misc/pause.png";
 }
 
 //Pause audio
@@ -216,8 +251,7 @@ AudioPlayer.prototype.pause = function()
 		this.source.stop();
 		this.time = this.context.currentTime - this.start_time;
 
-		//TODO <CHECK THIS>
-		this.button.style.backgroundColor = "#FF0000";
+		this.icon.src = "editor/files/icons/misc/play.png";
 	}
 }
 
@@ -230,8 +264,7 @@ AudioPlayer.prototype.stop = function()
 		this.time = 0;
 		this.playing = false;
 
-		//TODO <CHECK THIS>
-		this.button.style.backgroundColor = "#FF0000";
+		this.icon.src = "editor/files/icons/misc/play.png";
 	}
 }
 
@@ -308,12 +341,12 @@ AudioPlayer.prototype.updateInterface = function()
 
 	//Track
 	this.track.style.top = (this.size.y * 0.45) + "px";
-	this.track.style.left = (this.size.y * 1.3) + "px";
-	this.track.style.width = (this.size.x - this.size.y * 1.3) + "px";
+	this.track.style.left = (this.size.y * 1.5) + "px";
+	this.track.style.width = (this.size.x - this.size.y * 1.5 - 45) + "px";
 	this.track.style.height = (this.size.y * 0.2) + "px";
 
 	//Scrubber
-	this.scrubber.style.width = (this.size.y * 0.6) + "px";
+	this.scrubber.style.width = (this.size.y * 0.2) + "px";
 	this.scrubber.style.height = (this.size.y * 0.6) + "px";
 	this.scrubber.style.top = (-this.size.y * 0.2) + "px";
 }
