@@ -62,7 +62,7 @@ function TabGroup(parent)
 	
 	//Options
 	this.mode = TabGroup.TOP;
-	this.button_size = new THREE.Vector2(150, 25);
+	this.button_size = new THREE.Vector2(150, 27);
 	this.selected = -1;
 	this.options = [];
 
@@ -260,7 +260,7 @@ TabGroup.prototype.updateInterface = function()
 	var tab_size = this.size.clone();
 	var button_size = this.button_size.clone();
 	var offset = this.button_size.clone();
-	
+
 	if(this.mode === TabGroup.TOP || this.mode === TabGroup.BOTTOM)
 	{
 		if(button_size.x * this.options.length > this.size.x)

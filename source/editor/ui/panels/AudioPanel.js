@@ -25,7 +25,6 @@ function AudioPanel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.volume = self.volume.getValue();
-			self.obj.updateProjectionMatrix();
 		}
 	});
 	this.form.add(this.volume);

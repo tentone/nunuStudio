@@ -33,7 +33,10 @@ function AboutTab(parent, closeable, container, index)
 	this.nwjs = new Text(this.element);
 	this.nwjs.size.set(400, 0);
 	this.nwjs.setTextSize(15);
-	this.nwjs.setText("NWJS V" + process.versions['node-webkit']);
+	if(Editor.gui !== undefined)
+	{
+		this.nwjs.setText("NWJS V" + process.versions['node-webkit']);
+	}
 
 	//Codemirror version
 	this.codemirror = new Text(this.element);

@@ -164,10 +164,10 @@ TabButton.prototype.updateInterface = function()
 
 	//Close
 	this.close.style.visibility = this.tab.closeable ? "visible" : "hidden";
-	this.close.style.width = (this.size.y * 0.45) + "px";
-	this.close.style.height = (this.size.y * 0.45) + "px";
-	this.close.style.top = (this.size.y * 0.275) + "px";
-	this.close.style.right = (this.size.y * 0.275) + "px";
+	this.close.style.width = (this.size.y * 0.4) + "px";
+	this.close.style.height = (this.size.y * 0.4) + "px";
+	this.close.style.top = (this.size.y * 0.3) + "px";
+	this.close.style.right = (this.size.y * 0.3) + "px";
 
 	//Element
 	this.element.style.top = this.position.y + "px";

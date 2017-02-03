@@ -246,22 +246,20 @@ SceneEditor.prototype.updateMetadata = function()
 {
 	if(this.scene !== null)
 	{
-		var scene = this.scene;
-
-		this.setName(scene.name);
+		this.setName(this.scene.name);
 
 		//Check if scene exists in program
-		var found = false;
-		Editor.program.traverse(function(obj)
+		var scenes = Editor.program.children;
+		for(var i = 0; i < scenes.length; i++)
 		{
-			if(obj.uuid === scene.uuid)
+			if(this.scene.uuid === scenes[i].uuid)
 			{
-				found = true;
+				return;
 			}
-		});
+		}
 
 		//If not found close tab
-		if(!found)
+		if(i >= scenes.length)
 		{
 			this.close();
 		}
