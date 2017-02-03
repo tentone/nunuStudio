@@ -1,4 +1,4 @@
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/logo_border.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/logo_border.png)
 
 # nunuStudio
 nunuStudio is a JS based framework for 3D and VR applications that run direcly on the browser without the need for addicional plugins using WebGL and WebVR
@@ -21,11 +21,11 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - WebVR 1.1 compatible
 
 ### Screenshots
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_b.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_c.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_d.png)
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_a.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/screenshot/editor_e.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/editor_b.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/editor_c.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/editor_d.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/editor_a.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/editor_e.png)
 
 ### Examples
-[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/examples/pong.png)](http://tentone.github.io/nunuStudio/examples/pong)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/examples/fps.png)](http://tentone.github.io/nunuStudio/examples/fps)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/images/examples/spine.png)](http://tentone.github.io/nunuStudio/examples/spine)
+[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/pong.png)](http://tentone.github.io/nunuStudio/examples/pong)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/fps.png)](http://tentone.github.io/nunuStudio/examples/fps)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/spine.png)](http://tentone.github.io/nunuStudio/examples/spine)
 
 ### Todo
 - Documentation website
