@@ -1,53 +1,217 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>nunuStudio</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head>
+<!DOCTYPE html>
 
-	<body>
-		<!--Navigation bar-->
-		<div style="position:absolute; background-color:#222222; width:100%; height:50px;">
-			<!--nunu Logo-->
-			<div style="position:absolute; left:0px; top:5px; width:30%">
-				<img src="images/logo.png" height="40px"/>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>nunuStudio</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		
+	<!--Porperties-->
+	<meta property="og:title" content="">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="">
+	<meta property="og:site_name" content="">
+	<meta property="og:description" content="">
+
+	<!--Styles-->
+	<link rel="stylesheet" href="css/lib/font-awesome.min.css">
+	<link rel="stylesheet" href="css/lib/bootstrap.min.css">
+	<link rel="stylesheet" href="css/lib/animate.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900|Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+	<!--Javascript-->
+	<script src="js/lib/jquery-1.11.0.min.js"></script>
+	<script src="js/lib/wow.min.js"></script>
+	<script src="js/lib/bootstrap.min.js"></script>
+	<script src="js/lib/modernizr-2.7.1.js"></script>
+	<script src="js/main.js"></script>
+</head>
+
+<body>
+	<!--Navigation bar-->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<!--Mobile>-->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="logo" href="index.html"><img src="img/logo.png" width="230" alt="Logo"></a>
 			</div>
 
-			<!--Navigation buttons-->
-			<div style="position:absolute; right:0px">
-				<button class="navigation_button">
-					Features
-				</button>
-				<button class="navigation_button">
-					Showcase
-				</button>
-				<button class="navigation_button">
-					Learn
-				</button>
-				<button class="navigation_button">
-					Documentation
-				</button>
+			<!--Desktop-->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Features</a></li>
+					<li><a href="#">Learn</a></li>
+					<li><a href="#">Documentation</a></li>
+					<li><a href="download.html">Download</a></li>
+					<li><a href="https://github.com/tentone/nunuStudio">GitHub</a></li>
+				</ul>
 			</div>
 		</div>
-
-		<!--Running example division-->
-		<div style="position:absolute; top:50px; background-color:#888888; width:100%; height:400px;">
-			<button class="button" style="height:60px; width:200px; right: 40px; bottom: 40px">
-				Download
-			</button>
+	</div>
+	
+	<!--Principal container container-->	
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-6">
+					<a href="index.html"><img src="img/logo.png" width="230" alt="Logo"></a>
+				</div>
+				<!--<div class="col-xs-6 signin text-right navbar-nav">
+					<a href="#pricing" class="scroll">Pricing</a>&nbsp; &nbsp;<a href="#">Sign in</a>
+				</div>-->
+			</div>
+			
+			<div class="row header-info">
+				<div class="col-sm-10 col-sm-offset-1 text-center">
+					<h1 class="wow fadeIn">Create 3D content that run everywhere!</h1>
+					<br/>
+					<p class="lead wow fadeIn" data-wow-delay="0.5s">
+						Fully featured IDE for 3D app development for the Web.
+						<br/>
+						Design, edit, code, all in one place!
+					</p>
+					<br/>
+						
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+							<div class="row">
+								<div class="col-xs-6 text-right wow fadeInUp" data-wow-delay="1s">
+									<a href="https://github.com/tentone/nunuStudio" class="btn btn-secondary btn-lg">GitHub</a>
+								</div>
+								<div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1.4s">
+									<a href="#invite" class="btn btn-primary btn-lg">Download</a>
+								</div>
+							</div> 
+						</div>
+					</div>
+					
+				</div>
+			</div>
 		</div>
+	</header>
+	
+	<!--Mouse scroll icon-->
+	<div class="mouse-icon hidden-xs">
+			<div class="scroll"></div>
+	</div>
+	
+	<section id="nunu" class="pad-xl">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
+					<h2>Built on OpenSource</h2>
+					<p class="lead">Three.js | CodeMirror | CannonJS | SPE | NWJS</p>
 
-		<!--Features division-->
-		<div style="position:absolute; top:450px; width:100%; height:800px;">
-			<div>
+				</div>
+			</div>
+			
+			<!--<div class="iphone wow fadeInUp" data-wow-delay="1s">
+				<img src="img/iphone.png">
+			</div>-->
 		</div>
-
-		<!--Footer-->
-		<div style="position:absolute; top:1250px; text-align:center; background-color:#222222; width:100%; height:40px;">
-			nunuStudio | Tentone
-			<br/>
-			2016
+	</section>
+	
+	<section id="main-info" class="pad-xl">
+		<div class="container">
+			<h2 class="white">Features</h2>
+			<div class="row">
+				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.4s">
+					<hr class="line purple">
+					<h3>App Feature One Here</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut est facilisis, eu elementum mi volutpat. Pellentesque ac tristique nisi.</p>
+				</div>
+				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.8s">
+					<hr  class="line blue">
+					<h3>App Feature One Here</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut est facilisis, eu elementum mi volutpat. Pellentesque ac tristique nisi.</p>
+				</div>
+				<div class="col-sm-4 wow fadeIn" data-wow-delay="1.2s">
+					<hr  class="line yellow">
+					<h3>App Feature One Here</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut est facilisis, eu elementum mi volutpat. Pellentesque ac tristique nisi.</p>
+				</div>
+			</div>
 		</div>
-	</body>
+	</section>
+			
+			
+	<!--Pricing-->
+	<section id="pricing" class="pad-lg">
+		<div class="container">
+			<h2 class="white">Features</h2>
+			<p class="white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut.</p>
+		</div>
+	</section>
+	
+	
+	<section id="invite" class="pad-lg light-gray-bg">
+		<div class="container">
+			<!--<div class="row">
+				<div class="col-sm-8 col-sm-offset-2 text-center">
+					<i class="fa fa-envelope-o margin-40"></i>
+					<h2 class="black">Get the invite</h2>
+					<br/>
+					<p class="black">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut.</p>
+					<br/>
+					
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+							<form role="form">
+								<div class="form-group">
+									<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+								</div>
+								<button type="submit" class="btn btn-primary btn-lg">Request Invite</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>-->
+		</div>
+	</section>
+	
+	
+	<section id="press" class="pad-sm">
+		<div class="container">
+			<!--<div class="row margin-30 news-container">
+				<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 wow fadeInLeft" data-wow-delay="0.8s">
+					<a href="#" target="_blank">
+					<img class="news-img pull-left" src="img/press-01.jpg" alt="Tech Crunch">
+					<p class="black">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut.<br/> 
+					<small><em>Tech Crunch - January 15, 2015</em></small></p>
+					</a>
+				</div>
+			</div>
+			
+			<div class="row margin-30 news-container">
+				<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 wow fadeInLeft" data-wow-delay="1.2s">
+					<a href="#" target="_blank">
+					<img class="news-img pull-left" src="img/press-02.jpg" alt="Forbes">
+					<p class="black">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut. <br/> 
+					<small><em>Forbes - Feb 25, 2015</em></small></p>
+					</a>
+				</div>
+			</div>-->
+		</div>
+	</section>
+	
+	<!--Footer-->
+	<footer>
+		<div class="container">				
+			<div class="col-sm-4 text-left">
+				<p><small>Tentone 2017<br>
+					Website designed by <a href="http://designscrazed.org/">Designscrazed</a></small></p>
+			</div>
+		</div>
+	</footer>
+</body>
 </html>
