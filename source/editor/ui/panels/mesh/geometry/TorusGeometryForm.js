@@ -50,7 +50,8 @@ function TorusGeometryForm(form, obj)
 	this.tubularSegments.setStep(1);
 	this.tubularSegments.setOnChange(updateGeometry);
 	this.form.add(this.tubularSegments);
-
+	this.form.nextRow();
+	
 	//Arc
 	this.form.addText("Arc");
 	this.arc = new NumberBox(this.form.element);

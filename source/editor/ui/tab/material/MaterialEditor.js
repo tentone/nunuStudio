@@ -347,7 +347,7 @@ MaterialEditor.prototype.isAttached = function(material)
 	return this.material === material;
 }
 
-//Activate code editor
+//Activate
 MaterialEditor.prototype.activate = function()
 {
 	Editor.setState(Editor.STATE_IDLE);
@@ -361,28 +361,14 @@ MaterialEditor.prototype.updateMetadata = function()
 {
 	if(this.material !== null)
 	{
-		var material = this.material;
-
 		//Set name
-		if(material.name !== undefined)
+		if(this.material.name !== undefined)
 		{
-			this.setName(material.name);
-		}
-
-		//Check if scene exists in program
-		var found = false;
-		var materials = Editor.program.materials;
-		for(var i in materials)
-		{
-			if(materials[i].uuid === material.uuid)
-			{
-				found = true;
-				break;
-			}
+			this.setName(this.material.name);
 		}
 
 		//If not found close tab
-		if(!found)
+		if(Editor.program.materials[this.material.uuid] === undefined)
 		{
 			this.close();
 		}
