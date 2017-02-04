@@ -21,7 +21,14 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 	{
 		if(sync)
 		{
-			return FileSystem.fs.readFileSync(fname, "utf8");
+			var data = FileSystem.fs.readFileSync(fname, "utf8");
+
+			if(onLoad !== undefined)
+			{
+				onLoad(data);
+			}
+			
+			return data;
 		}
 		else
 		{
