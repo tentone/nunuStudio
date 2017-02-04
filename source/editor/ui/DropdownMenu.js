@@ -13,7 +13,7 @@ function DropdownMenu(parent)
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
-	this.element.style.backgroundColor = Editor.theme.button_color;
+	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	
 	this.element.ondrop = function(event)
 	{
@@ -46,8 +46,8 @@ function DropdownMenu(parent)
 	this.children = [];
 
 	//Options
-	this.options_location = DropdownMenu.DOWN;
-	this.options_size = new THREE.Vector2(150, 20);
+	this.optionsLocation = DropdownMenu.DOWN;
+	this.optionsSize = new THREE.Vector2(150, 20);
 	this.options = [];
 	this.expanded = false;
 
@@ -60,7 +60,7 @@ function DropdownMenu(parent)
 		self.expanded = true;
 		self.updateInterface();
 		self.element.style.cursor = "pointer";
-		self.element.style.backgroundColor = Editor.theme.button_over_color;
+		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
 	this.element.onmouseleave = function()
@@ -68,7 +68,7 @@ function DropdownMenu(parent)
 		self.expanded = false;
 		self.updateInterface();
 		self.element.style.cursor = "default";
-		self.element.style.backgroundColor = Editor.theme.button_color;
+		self.element.style.backgroundColor = Editor.theme.buttonColor;
 	};
 	
 	this.panel.onmouseover = function()
@@ -103,7 +103,7 @@ DropdownMenu.prototype.add = function(element)
 //Set location to where options should open
 DropdownMenu.prototype.setLocation = function(location)
 {
-	this.options_location = location;
+	this.optionsLocation = location;
 }
 
 //Set Text
@@ -192,7 +192,7 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 	var arrow = new ImageBox(menu.element);
 	arrow.setImage("editor/files/icons/misc/arrow_right.png");
 	arrow.size.set(12, 12);
-	arrow.position.set(this.options_size.x - 20, 3);
+	arrow.position.set(this.optionsSize.x - 20, 3);
 	menu.add(arrow);
 
 	this.options.push(menu);
@@ -222,8 +222,8 @@ DropdownMenu.prototype.updateInterface = function()
 	for(var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].visible = visible;
-		this.options[i].size.set(this.options_size.x, this.options_size.y);
-		this.options[i].position.set(0, (this.options_size.y*i));
+		this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
+		this.options[i].position.set(0, (this.optionsSize.y*i));
 		this.options[i].updateInterface();
 	}
 
@@ -240,29 +240,29 @@ DropdownMenu.prototype.updateInterface = function()
 	this.text.updateInterface();
 
 	//Panel position, size and visibility
-	if(this.options_location === DropdownMenu.DOWN)
+	if(this.optionsLocation === DropdownMenu.DOWN)
 	{
 		this.panel.style.top = (this.position.y + this.size.y) + "px";
 		this.panel.style.left = this.position.x + "px";
 	}
-	else if(this.options_location === DropdownMenu.UP)
+	else if(this.optionsLocation === DropdownMenu.UP)
 	{
 		this.panel.style.top = (this.position.y - this.size.y) + "px";
 		this.panel.style.left = this.position.x + "px";
 	}
-	else if(this.options_location === DropdownMenu.LEFT)
+	else if(this.optionsLocation === DropdownMenu.LEFT)
 	{
 		this.panel.style.top = this.position.y + "px";
 		this.panel.style.left = (this.position.x + this.size.x) + "px";
 	}
-	else if(this.options_location === DropdownMenu.RIGHT)
+	else if(this.optionsLocation === DropdownMenu.RIGHT)
 	{
 		this.panel.style.top = this.position.y + "px";
 		this.panel.style.left = (this.position.x - this.size.x) + "px";
 	}
 
 	this.panel.style.width = this.size.x + "px";
-	this.panel.style.height = (this.options_size.y * this.options.length) + "px";
+	this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
 	this.panel.style.visibility = visibility;
 
 	//Set visibility

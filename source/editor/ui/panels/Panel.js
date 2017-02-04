@@ -10,7 +10,7 @@ function Panel(parent, obj)
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
 	this.element.style.cursor = "default";
-	this.element.style.backgroundColor = Editor.theme.panel_color;
+	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Prevent Drop event
 	this.element.ondrop = function(event)
@@ -25,7 +25,7 @@ function Panel(parent, obj)
 	};
 
 	//Attributes
-	this.fit_parent = true;
+	this.fitParent = true;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -68,7 +68,7 @@ function Panel(parent, obj)
 	this.form.nextRow();
 
 	//UUID
-	if(Settings.general.show_uuid)
+	if(Settings.general.showUuid)
 	{
 		this.form.addText("UUID");
 		this.uuid = this.form.addText("");
@@ -159,7 +159,7 @@ Panel.prototype.destroy = function()
 //Update panel ui
 Panel.prototype.updateInterface = function()
 {
-	if(this.fit_parent)
+	if(this.fitParent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 

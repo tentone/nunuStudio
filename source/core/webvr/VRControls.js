@@ -3,7 +3,7 @@
 //Based on VRControl created by dmarcos (https://github.com/dmarcos) and mrdoob (http://mrdoob.com)
 function VRControls(object, onError)
 {
-	this.vr_input = null;
+	this.vrInput = null;
 	this.scale = 1; //Scale from real units to world units
 	this.standing = false;
 	this.userHeight = 1.6; //Meters
@@ -35,13 +35,13 @@ function VRControls(object, onError)
 		{
 			if(("VRDisplay" in window && devices[i] instanceof VRDisplay) || ("PositionSensorVRDevice" in window && devices[i] instanceof PositionSensorVRDevice))
 			{
-				self.vr_input = devices[i];
+				self.vrInput = devices[i];
 				break;
 			}
 		}
 
 		//If no display found call onError
-		if(!self.vr_input)
+		if(!self.vrInput)
 		{
 			if(onError)
 			{
@@ -54,9 +54,9 @@ function VRControls(object, onError)
 //Update vr controls
 VRControls.prototype.update = function()
 {
-	if(this.vr_input !== null)
+	if(this.vrInput !== null)
 	{
-		var pose = this.vr_input.getPose();
+		var pose = this.vrInput.getPose();
 
 		//Orientation
 		if(pose.orientation !== null)
@@ -94,15 +94,15 @@ VRControls.prototype.update = function()
 //Dispose vr controls
 VRControls.prototype.dispose = function()
 {
-	this.vr_input = null;
+	this.vrInput = null;
 }
 
 //Reset pose
 VRControls.prototype.resetPose = function()
 {
-	if(this.vr_input !== null)
+	if(this.vrInput !== null)
 	{
-		this.vr_input.resetPose();
+		this.vrInput.resetPose();
 	}
 }
 

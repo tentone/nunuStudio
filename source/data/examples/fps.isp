@@ -929,8 +929,8 @@
 								"aspect": 1.8146718146718148,
 								"filmGauge": 35,
 								"filmOffset": 0,
-								"clear_color": false,
-								"clear_depth": false,
+								"clearColor": false,
+								"clearDepth": false,
 								"viewport": [1,1],
 								"offset": [0,0],
 								"order": 0
@@ -960,7 +960,7 @@
 								"visible": true,
 								"matrixAutoUpdate": true,
 								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-								"code": "var body;\nvar camera;\nvar camera_rotation;\n\nthis.initialize = function()\n{\n\tcamera_rotation = new Vector2(0, 0);\n\tcamera = this.parent.getObjectByName(\"camera\");\n\tbody = this.parent.body;\n\t\n\tvar scene = this.scene;\n\tvar world = this.world;\n\tvar crate = this.program.getMaterialByName(\"crate\");\n\tvar ball = this.program.getMaterialByName(\"default\");\n\t\n\tfor(var i = 0; i < 50; i++)\n\t{\n\t\tvar physics = new PhysicsObject();\n\t\t\n\t\tif(Math.random() < 0.6)\n\t\t{\n\t\t\tphysics.addShape(new Box(new CANNON.Vec3(0.5, 0.5, 0.5)));\n\t\t\tphysics.add(new Mesh(new BoxGeometry(1, 1, 1), crate));\n\t\t}\n\t\telse\n\t\t{\n\t\t\tphysics.addShape(new CANNON.Sphere(0.5));\n\t\t\tphysics.add(new Mesh(new SphereGeometry(0.5, 24, 24, 24), ball));\n\t\t}\n\n\t\tphysics.position.set(Math.random() * 50 - 25, Math.random() * 200 + 5, Math.random() * 50 - 25);\n\t\tscene.add(physics);\n\t\t\n\t\tphysics.initialize();\n\t}\n};\n\nthis.update = function()\n{\n\t//Update camera rotation\n\tcamera_rotation.x -= Mouse.delta.x * 0.005;\n\tcamera_rotation.y -= Mouse.delta.y * 0.005;\n\n\t//Limit Vertical Rotation to near 90 degrees\n\tif(camera_rotation.y < -1.57)\n\t{\n\t\tcamera_rotation.y = -1.57;\n\t}\n\telse if(camera_rotation.y > 1.57)\n\t{\n\t\tcamera_rotation.y = 1.57;\n\t}\n\n\t//Update camera rotation (euler)\n\tvar cos_angle_y = Math.cos(camera_rotation.y);\n\tvar direction = new Vector3(Math.sin(camera_rotation.x)*cos_angle_y, Math.sin(camera_rotation.y), Math.cos(camera_rotation.x)*cos_angle_y);\n\tdirection.add(camera.position);\n\tcamera.lookAt(direction);\n\n\tvar speed = 10;\n\tif(Keyboard.keyPressed(Keyboard.SHIFT))\n\t{\n\t\tspeed += 5;\n\t}\n\n\t//Move player\n\tif(Keyboard.keyPressed(Keyboard.W))\n\t{\n\t\tbody.velocity.x = speed * Math.sin(camera_rotation.x);\n\t\tbody.velocity.z = speed * Math.cos(camera_rotation.x);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.S))\n\t{\n\t\tbody.velocity.x = -speed * Math.sin(camera_rotation.x);\n\t\tbody.velocity.z = -speed * Math.cos(camera_rotation.x);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.A))\n\t{\n\t\tbody.velocity.x = speed * Math.sin(camera_rotation.x + MathUtils.pid2);\n\t\tbody.velocity.z = speed * Math.cos(camera_rotation.x + MathUtils.pid2);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.D))\n\t{\n\t\tbody.velocity.x = -speed * Math.sin(camera_rotation.x + MathUtils.pid2);\n\t\tbody.velocity.z = -speed * Math.cos(camera_rotation.x + MathUtils.pid2);\n\t}\n\n\tif(Keyboard.keyJustPressed(Keyboard.SPACEBAR))\n\t{\n\t\tbody.velocity.y += 15;\n\t}\n};"
+								"code": "var body;\nvar camera;\nvar cameraRotation;\n\nthis.initialize = function()\n{\n\tcameraRotation = new Vector2(0, 0);\n\tcamera = this.parent.getObjectByName(\"camera\");\n\tbody = this.parent.body;\n\t\n\tvar scene = this.scene;\n\tvar world = this.world;\n\tvar crate = this.program.getMaterialByName(\"crate\");\n\tvar ball = this.program.getMaterialByName(\"default\");\n\t\n\tfor(var i = 0; i < 50; i++)\n\t{\n\t\tvar physics = new PhysicsObject();\n\t\t\n\t\tif(Math.random() < 0.6)\n\t\t{\n\t\t\tphysics.addShape(new Box(new CANNON.Vec3(0.5, 0.5, 0.5)));\n\t\t\tphysics.add(new Mesh(new BoxGeometry(1, 1, 1), crate));\n\t\t}\n\t\telse\n\t\t{\n\t\t\tphysics.addShape(new CANNON.Sphere(0.5));\n\t\t\tphysics.add(new Mesh(new SphereGeometry(0.5, 24, 24, 24), ball));\n\t\t}\n\n\t\tphysics.position.set(Math.random() * 50 - 25, Math.random() * 200 + 5, Math.random() * 50 - 25);\n\t\tscene.add(physics);\n\t\t\n\t\tphysics.initialize();\n\t}\n};\n\nthis.update = function()\n{\n\t//Update camera rotation\n\tcameraRotation.x -= Mouse.delta.x * 0.005;\n\tcameraRotation.y -= Mouse.delta.y * 0.005;\n\n\t//Limit Vertical Rotation to near 90 degrees\n\tif(cameraRotation.y < -1.57)\n\t{\n\t\tcameraRotation.y = -1.57;\n\t}\n\telse if(cameraRotation.y > 1.57)\n\t{\n\t\tcameraRotation.y = 1.57;\n\t}\n\n\t//Update camera rotation (euler)\n\tvar cosAngleY = Math.cos(cameraRotation.y);\n\tvar direction = new Vector3(Math.sin(cameraRotation.x)*cosAngleY, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cosAngleY);\n\tdirection.add(camera.position);\n\tcamera.lookAt(direction);\n\n\tvar speed = 10;\n\tif(Keyboard.keyPressed(Keyboard.SHIFT))\n\t{\n\t\tspeed += 5;\n\t}\n\n\t//Move player\n\tif(Keyboard.keyPressed(Keyboard.W))\n\t{\n\t\tbody.velocity.x = speed * Math.sin(cameraRotation.x);\n\t\tbody.velocity.z = speed * Math.cos(cameraRotation.x);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.S))\n\t{\n\t\tbody.velocity.x = -speed * Math.sin(cameraRotation.x);\n\t\tbody.velocity.z = -speed * Math.cos(cameraRotation.x);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.A))\n\t{\n\t\tbody.velocity.x = speed * Math.sin(cameraRotation.x + MathUtils.pid2);\n\t\tbody.velocity.z = speed * Math.cos(cameraRotation.x + MathUtils.pid2);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.D))\n\t{\n\t\tbody.velocity.x = -speed * Math.sin(cameraRotation.x + MathUtils.pid2);\n\t\tbody.velocity.z = -speed * Math.cos(cameraRotation.x + MathUtils.pid2);\n\t}\n\n\tif(Keyboard.keyJustPressed(Keyboard.SPACEBAR))\n\t{\n\t\tbody.velocity.y += 15;\n\t}\n};"
 							}],
 						"body": {
 							"type": 1,
@@ -1201,11 +1201,11 @@
 		"author": "",
 		"description": "",
 		"version": "0",
-		"lock_pointer": true,
+		"lockPointer": true,
 		"vr": true,
-		"vr_scale": 1,
+		"vrScale": 1,
 		"antialiasing": false,
 		"shadows": true,
-		"shadows_type": 2
+		"shadowsType": 2
 	}
 }

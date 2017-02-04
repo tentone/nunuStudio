@@ -69,14 +69,14 @@ function ImageChooser(parent)
 	this.onChange = null;
 
 	//Element atributes
-	this.fit_parent = false;
+	this.fitParent = false;
 	this.size = new THREE.Vector2(100, 100);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 
 	//Image
-	this.keep_aspect_ratio = false;
-	this.image_scale = new THREE.Vector2(1,1);
+	this.keepAspectRatio = false;
+	this.imageScale = new THREE.Vector2(1,1);
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -117,7 +117,7 @@ ImageChooser.prototype.getValue = function()
 ImageChooser.prototype.updateInterface = function()
 {
 	//Fit parent element
-	if(this.fit_parent)
+	if(this.fitParent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
@@ -138,7 +138,7 @@ ImageChooser.prototype.updateInterface = function()
 	}
 
 	//Keep image aspect ratio
-	if(this.keep_aspect_ratio)
+	if(this.keepAspectRatio)
 	{
 		if(this.size.x < this.size.y)
 		{
@@ -151,10 +151,10 @@ ImageChooser.prototype.updateInterface = function()
 	}
 
 	//Update img
-	this.img.width = this.size.x * this.image_scale.x;
-	this.img.height = this.size.y * this.image_scale.y;
-	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
-	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
+	this.img.width = this.size.x * this.imageScale.x;
+	this.img.height = this.size.y * this.imageScale.y;
+	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
+	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
 	
 	this.alpha.width = this.size.x;
 	this.alpha.height = this.size.y;

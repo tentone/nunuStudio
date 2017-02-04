@@ -18,7 +18,7 @@ function Font(url)
 		{
 			this.data = url;
 			this.font = url;
-			this.name = url.original_font_information.fullName;
+			this.name = url.original_font_information.full_name;
 			this.format = "json";
 			this.encoding = "json";
 		}
@@ -30,7 +30,7 @@ function Font(url)
 			{
 				this.data = JSON.parse(FileSystem.readFile(url));
 				this.font = this.data;
-				this.name = this.data.original_font_information.fullName;
+				this.name = this.data.original_font_information.full_name;
 				this.format = "json";
 			}
 			else if(this.encoding === "ttf" || this.encoding === "otf" || this.encoding === "ttc" || this.encoding === "otc")
@@ -75,9 +75,9 @@ Font.prototype.generateShapes = function(text, size, divisions)
 	{
 		var chars = String(text).split("");
 		var scale = size / data.resolution;
-		var line_height = (data.boundingBox.yMax - data.boundingBox.yMin) * scale;
+		var lineHeight = (data.boundingBox.yMax - data.boundingBox.yMin) * scale;
 		
-		var offset_x = 0, offset_y = 0;
+		var offsetX = 0, offsetY = 0;
 		var paths = [];
 
 		for(var i = 0; i < chars.length; i++)
@@ -86,13 +86,13 @@ Font.prototype.generateShapes = function(text, size, divisions)
 
 			if(char === "\n")
 			{
-				offset_y -= line_height;
-				offset_x = 0;
+				offsetY -= lineHeight;
+				offsetX = 0;
 			}
 			else
 			{
-				var ret = createPath(char, scale, offset_x, offset_y);
-				offset_x += ret.width;
+				var ret = createPath(char, scale, offsetX, offsetY);
+				offsetX += ret.width;
 
 				paths.push(ret.path);
 			}
@@ -102,7 +102,7 @@ Font.prototype.generateShapes = function(text, size, divisions)
 	}
 
 	//Create path for a character
-	function createPath(c, scale, offset_x, offset_y)
+	function createPath(c, scale, offsetX, offsetY)
 	{
 		var glyph = data.glyphs[c] || data.glyphs["?"];
 		
@@ -128,24 +128,24 @@ Font.prototype.generateShapes = function(text, size, divisions)
 				//Move to
 				if(action === "m")
 				{
-					x = outline[i++] * scale + offset_x;
-					y = outline[i++] * scale + offset_y;
+					x = outline[i++] * scale + offsetX;
+					y = outline[i++] * scale + offsetY;
 					path.moveTo(x, y);
 				}
 				//Line to
 				if(action === "l")
 				{
-					x = outline[i++] * scale + offset_x;
-					y = outline[i++] * scale + offset_y;
+					x = outline[i++] * scale + offsetX;
+					y = outline[i++] * scale + offsetY;
 					path.lineTo(x, y);
 				}
 				//Quadratic curve to
 				else if(action === "q")
 				{
-					cpx = outline[i++] * scale + offset_x;
-					cpy = outline[i++] * scale + offset_y;
-					cpx1 = outline[i++] * scale + offset_x;
-					cpy1 = outline[i++] * scale + offset_y;
+					cpx = outline[i++] * scale + offsetX;
+					cpy = outline[i++] * scale + offsetY;
+					cpx1 = outline[i++] * scale + offsetX;
+					cpy1 = outline[i++] * scale + offsetY;
 
 					path.quadraticCurveTo(cpx1, cpy1, cpx, cpy);
 					laste = pts[pts.length - 1];
@@ -166,12 +166,12 @@ Font.prototype.generateShapes = function(text, size, divisions)
 				//Bezier curve to
 				else if(action === "b")
 				{
-					cpx = outline[i++] * scale + offset_x;
-					cpy = outline[i++] * scale + offset_y;
-					cpx1 = outline[i++] * scale + offset_x;
-					cpy1 = outline[i++] * scale + offset_y;
-					cpx2 = outline[i++] * scale + offset_x;
-					cpy2 = outline[i++] * scale + offset_y;
+					cpx = outline[i++] * scale + offsetX;
+					cpy = outline[i++] * scale + offsetY;
+					cpx1 = outline[i++] * scale + offsetX;
+					cpy1 = outline[i++] * scale + offsetY;
+					cpx2 = outline[i++] * scale + offsetX;
+					cpy2 = outline[i++] * scale + offsetY;
 
 					path.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, cpx, cpy);
 					laste = pts[pts.length - 1];

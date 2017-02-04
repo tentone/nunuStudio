@@ -134,9 +134,9 @@ function LambertMaterialEditor(parent, closeable, container, index)
 
 LambertMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-LambertMaterialEditor.prototype.attach = function(material, material_file)
+LambertMaterialEditor.prototype.attach = function(material, materialFile)
 {
-	MaterialEditor.prototype.attach.call(this, material, material_file);
+	MaterialEditor.prototype.attach.call(this, material, materialFile);
 
 	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);

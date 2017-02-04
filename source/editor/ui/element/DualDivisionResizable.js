@@ -9,44 +9,44 @@ function DualDivisionResizable(parent)
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
-	this.element.style.backgroundColor = Editor.theme.panel_color;
+	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Division A
-	this.div_a = document.createElement("div");
-	this.div_a.style.position = "absolute";
-	this.div_a.style.top = "0px";
-	this.div_a.style.left = "0px";
-	this.div_a.style.cursor = "default";
-	this.div_a.style.overflow = "hidden";
-	this.div_a.style.backgroundColor = Editor.theme.panel_color;
-	this.element.appendChild(this.div_a);
+	this.divA = document.createElement("div");
+	this.divA.style.position = "absolute";
+	this.divA.style.top = "0px";
+	this.divA.style.left = "0px";
+	this.divA.style.cursor = "default";
+	this.divA.style.overflow = "hidden";
+	this.divA.style.backgroundColor = Editor.theme.panelColor;
+	this.element.appendChild(this.divA);
 
 	//Division B
-	this.div_b = document.createElement("div");
-	this.div_b.style.position = "absolute";
-	this.div_b.style.cursor = "default";
-	this.div_b.style.overflow = "hidden";
-	this.div_b.style.backgroundColor = Editor.theme.panel_color;
-	this.element.appendChild(this.div_b);
+	this.divB = document.createElement("div");
+	this.divB.style.position = "absolute";
+	this.divB.style.cursor = "default";
+	this.divB.style.overflow = "hidden";
+	this.divB.style.backgroundColor = Editor.theme.panelColor;
+	this.element.appendChild(this.divB);
 
-	//Create resize_tab tab
-	this.resize_tab = document.createElement("div");
-	this.resize_tab.style.position = "absolute";
-	this.resize_tab.style.cursor = "e-resize";
-	this.resize_tab.style.backgroundColor = Editor.theme.resize_tab_color;
-	this.element.appendChild(this.resize_tab);
+	//Create resizeTab tab
+	this.resizeTab = document.createElement("div");
+	this.resizeTab.style.position = "absolute";
+	this.resizeTab.style.cursor = "e-resize";
+	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
+	this.element.appendChild(this.resizeTab);
 
 	//Element atributes
-	this.fit_parent = false;
+	this.fitParent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 
 	//Resize Tab
-	this.tab_position = 0.5;
-	this.tab_position_max = 1;
-	this.tab_position_min = 0;
-	this.tab_size = 5;
+	this.tabPosition = 0.5;
+	this.tabPositionMax = 1;
+	this.tabPositionMin = 0;
+	this.tabSize = 5;
 	this.orientation = DualDivisionResizable.HORIZONTAL;
 	this.resizing = false;
 
@@ -54,19 +54,19 @@ function DualDivisionResizable(parent)
 	var self = this;
 
 	//On mouse down start resizing
-	this.resize_tab.onmousedown = function(event)
+	this.resizeTab.onmousedown = function(event)
 	{
 		self.resizing = true;
 	};
 	
 	//Prevent Drop event
-	this.resize_tab.ondrop = function(event)
+	this.resizeTab.ondrop = function(event)
 	{
 		event.preventDefault();
 	};
 
 	//Prevent deafault when object dragged over
-	this.resize_tab.ondragover = function(event)
+	this.resizeTab.ondragover = function(event)
 	{
 		event.preventDefault();
 	};
@@ -109,21 +109,21 @@ DualDivisionResizable.prototype.update = function()
 		{
 			if(this.orientation == DualDivisionResizable.HORIZONTAL)
 			{	
-				this.tab_position += Mouse.delta.x/this.size.x;
+				this.tabPosition += Mouse.delta.x/this.size.x;
 			}
 			else if(this.orientation == DualDivisionResizable.VERTICAL)
 			{
-				this.tab_position += Mouse.delta.y/this.size.y;
+				this.tabPosition += Mouse.delta.y/this.size.y;
 			}
 
 			//Limit tab position
-			if(this.tab_position > this.tab_position_max)
+			if(this.tabPosition > this.tabPositionMax)
 			{
-				this.tab_position = this.tab_position_max;
+				this.tabPosition = this.tabPositionMax;
 			}
-			else if(this.tab_position < this.tab_position_min)
+			else if(this.tabPosition < this.tabPositionMin)
 			{
-				this.tab_position = this.tab_position_min;
+				this.tabPosition = this.tabPositionMin;
 			}
 
 			//onResize callback
@@ -140,7 +140,7 @@ DualDivisionResizable.prototype.update = function()
 DualDivisionResizable.prototype.updateInterface = function()
 {
 	//Fit parent
-	if(this.fit_parent)
+	if(this.fitParent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
@@ -149,16 +149,16 @@ DualDivisionResizable.prototype.updateInterface = function()
 	//Set visibility
 	if(this.visible)
 	{
-		this.resize_tab.style.visibility = "visible";
-		this.div_a.style.visibility = "visible";
-		this.div_b.style.visibility = "visible";
+		this.resizeTab.style.visibility = "visible";
+		this.divA.style.visibility = "visible";
+		this.divB.style.visibility = "visible";
 		this.element.style.visibility = "visible";
 	}
 	else
 	{
-		this.div_a.style.visibility = "hidden";
-		this.div_b.style.visibility = "hidden";
-		this.resize_tab.style.visibility = "hidden";
+		this.divA.style.visibility = "hidden";
+		this.divB.style.visibility = "hidden";
+		this.resizeTab.style.visibility = "hidden";
 		this.element.style.visibility = "hidden";
 	}
 
@@ -169,40 +169,40 @@ DualDivisionResizable.prototype.updateInterface = function()
 
 	if(this.orientation == DualDivisionResizable.HORIZONTAL)
 	{	
-		var tab_position_abs = this.tab_position * this.size.x;
+		var tabPositionAbs = this.tabPosition * this.size.x;
 
-		this.resize_tab.style.cursor = "e-resize";
+		this.resizeTab.style.cursor = "e-resize";
 
-		this.div_a.style.width = tab_position_abs + "px";
-		this.div_a.style.height = this.size.y + "px";
+		this.divA.style.width = tabPositionAbs + "px";
+		this.divA.style.height = this.size.y + "px";
 
-		this.div_b.style.top = "0px";
-		this.div_b.style.left = tab_position_abs + "px";
-		this.div_b.style.width = (this.size.x - tab_position_abs - this.tab_size)+ "px";
-		this.div_b.style.height = this.size.y + "px";
+		this.divB.style.top = "0px";
+		this.divB.style.left = tabPositionAbs + "px";
+		this.divB.style.width = (this.size.x - tabPositionAbs - this.tabSize)+ "px";
+		this.divB.style.height = this.size.y + "px";
 		
-		this.resize_tab.style.top = "0px";
-		this.resize_tab.style.left = tab_position_abs + "px";
-		this.resize_tab.style.width = this.tab_size + "px";
-		this.resize_tab.style.height = this.size.y + "px";
+		this.resizeTab.style.top = "0px";
+		this.resizeTab.style.left = tabPositionAbs + "px";
+		this.resizeTab.style.width = this.tabSize + "px";
+		this.resizeTab.style.height = this.size.y + "px";
 	}
 	else if(this.orientation == DualDivisionResizable.VERTICAL)
 	{
-		var tab_position_abs = this.tab_position * this.size.y;
+		var tabPositionAbs = this.tabPosition * this.size.y;
 
-		this.resize_tab.style.cursor = "n-resize";
+		this.resizeTab.style.cursor = "n-resize";
 
-		this.div_a.style.width = this.size.x + "px";
-		this.div_a.style.height = tab_position_abs + "px";
+		this.divA.style.width = this.size.x + "px";
+		this.divA.style.height = tabPositionAbs + "px";
 
-		this.div_b.style.top = (tab_position_abs + this.tab_size) + "px";
-		this.div_b.style.left = "0px";
-		this.div_b.style.width = this.size.x + "px";
-		this.div_b.style.height = (this.size.y - tab_position_abs - this.tab_size)+ "px";
+		this.divB.style.top = (tabPositionAbs + this.tabSize) + "px";
+		this.divB.style.left = "0px";
+		this.divB.style.width = this.size.x + "px";
+		this.divB.style.height = (this.size.y - tabPositionAbs - this.tabSize)+ "px";
 		
-		this.resize_tab.style.top = tab_position_abs + "px";
-		this.resize_tab.style.left = "0px";
-		this.resize_tab.style.width = this.size.x + "px";
-		this.resize_tab.style.height = this.tab_size + "px";
+		this.resizeTab.style.top = tabPositionAbs + "px";
+		this.resizeTab.style.left = "0px";
+		this.resizeTab.style.width = this.size.x + "px";
+		this.resizeTab.style.height = this.tabSize + "px";
 	}
 }

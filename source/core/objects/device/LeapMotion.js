@@ -9,23 +9,23 @@ function LeapMotion()
 	this.name = "leap";
 
 	//Leap configuration
-	this.debug_model = true;
-	this.gestures_enabled = true;
-	this.poses_enabled = true;
+	this.debugModel = true;
+	this.gesturesEnabled = true;
+	this.posesEnabled = true;
 	this.mode = LeapMotion.DESK;
-	this.use_arm = false;
+	this.useArm = false;
 
 	//Hand and Arm meshes
-	this.bone_meshes = [];
-	this.arm_meshes = [];
+	this.boneMeshes = [];
+	this.armMeshes = [];
 
 	//Debug Hand Material and Geometry
 	this.material = new THREE.MeshPhongMaterial();
 	this.geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 
 	//Physics
-	this.physics_world = null;
-	this.physics_bodys = [];
+	this.physicsWorld = null;
+	this.physicsBodys = [];
 
 	//Gesture
 	this.gesture = []
@@ -92,15 +92,15 @@ LeapMotion.prototype.update = function()
 {
 	if(this.data !== null)
 	{
-		if(this.gestures_enabled)
+		if(this.gesturesEnabled)
 		{
 			this.updateGestures();	
 		}
-		if(this.poses_enabled)
+		if(this.posesEnabled)
 		{
 			this.updatePoses();
 		}
-		if(this.debug_model)
+		if(this.debugModel)
 		{
 			this.updateDebugModel();
 		}
@@ -157,8 +157,8 @@ LeapMotion.prototype.updatePoses = function()
 
 		//Fingers position 
 		var distance = [];
-		var indicator_distance = 0;
-		var finger_joint = [];
+		var indicatorDistance = 0;
+		var fingerJoint = [];
 
 		//Clear pose status list
 		for(var i = 0; i < this.pose.length; i++)
@@ -167,42 +167,42 @@ LeapMotion.prototype.updatePoses = function()
 		}
 
 		//Fingers direction array
-		var finger_direction = [];
+		var fingerDirection = [];
 
 		for(var i = 0; i < hand.fingers.length; i++)
 		{
 			var finger = hand.fingers[i];
 
-			finger_direction.push(finger.direction);
-			finger_joint = finger.distal.nextJoint;
+			fingerDirection.push(finger.direction);
+			fingerJoint = finger.distal.nextJoint;
 
-			var joint = new THREE.Vector3(finger_joint[0], finger_joint[1], finger_joint[2]);
+			var joint = new THREE.Vector3(fingerJoint[0], fingerJoint[1], fingerJoint[2]);
 			distance.push((center.distanceTo(joint))/hand._scaleFactor);
 
 			if(i !== 0)
 			{
-				if(finger_direction[i][2] < 0.3)
+				if(fingerDirection[i][2] < 0.3)
 				{
 					this.pose[LeapMotion.CLOSED] = false;
 				}
 				
-				if(finger_direction[i][2] > -0.5)
+				if(fingerDirection[i][2] > -0.5)
 				{
 					this.pose[LeapMotion.OPEN] = false;
 				}
 
 				if(i === 1)
 				{
-					indicator_distance = distance[1];
+					indicatorDistance = distance[1];
 				}
-				else if(indicator_distance < 2 * distance[i] - 15)
+				else if(indicatorDistance < 2 * distance[i] - 15)
 				{
 					this.pose[LeapMotion.POINTING] = false;
 				}
 			}
 		}
 
-		if(indicator_distance < 2 * distance[0] - 15)
+		if(indicatorDistance < 2 * distance[0] - 15)
 		{
 			this.pose[LeapMotion.POINTING] = false;
 		}
@@ -283,12 +283,12 @@ LeapMotion.prototype.updateDebugModel = function()
 	var self = this;
 
 	//Remove all children
-	this.arm_meshes.forEach(function(item)
+	this.armMeshes.forEach(function(item)
 	{
 		self.remove(item);
 	});
 	
-	this.bone_meshes.forEach(function(item)
+	this.boneMeshes.forEach(function(item)
 	{
 		self.remove(item);
 	});
@@ -311,24 +311,24 @@ LeapMotion.prototype.updateDebugModel = function()
 				var bone = finger.bones[k];
 				if(countBones !== 0)
 				{
-					var boneMesh = this.bone_meshes[countBones] || this.addMesh(this.bone_meshes);
+					var boneMesh = this.boneMeshes[countBones] || this.addMesh(this.boneMeshes);
 					this.updateMesh(bone, boneMesh);	
 				}
 				countBones++;
 			}
 		}
 		
-		if(this.show_arm)
+		if(this.showArm)
 		{
 			var arm = hand.arm;
-			var armMesh = this.arm_meshes[countArms++] || this.addMesh(this.arm_meshes);
+			var armMesh = this.armMeshes[countArms++] || this.addMesh(this.armMeshes);
 			this.updateMesh(arm, armMesh);
 			armMesh.scale.set(arm.width/1200, arm.width/300, arm.length/150);
 		}
 	}
 
 	//Update Leap Hand
-	if(this.physics_world !== null)
+	if(this.physicsWorld !== null)
 	{
 		this.updatePhysics()
 	}
@@ -338,9 +338,9 @@ LeapMotion.prototype.updateDebugModel = function()
 LeapMotion.prototype.updatePhysics = function()
 {	
 	//Remove all physics bodys
-	for(var i = 0; i < this.physics_bodys.length; i++)
+	for(var i = 0; i < this.physicsBodys.length; i++)
 	{
-		this.physics_world.removeBody(this.physics_bodys[i].pop());
+		this.physicsWorld.removeBody(this.physicsBodys[i].pop());
 	};
 
 	//Create new physics bodys
@@ -367,8 +367,8 @@ LeapMotion.prototype.updatePhysics = function()
 		body.position.set(pos.x - this.position.x, pos.y - this.position.y, pos.z - this.position.z);
 		body.updateMassProperties();
 
-		this.physics_bodys.push(body);
-		this.physics_world.addBody(body);
+		this.physicsBodys.push(body);
+		this.physicsWorld.addBody(body);
 	});
 }
 
@@ -400,10 +400,10 @@ LeapMotion.prototype.getMovement = function()
 	var actual = this.data.gestures[0].position;
 	var previous = this.data.gestures[0].startPosition;
 
-	var vel_abs = new THREE.Vector3(actual[0] - previous[0], actual[1] - previous[1], actual[2] - previous[2]);
-	vel_abs.divideScalar(this.data.currentFrameRate);
+	var velAbs = new THREE.Vector3(actual[0] - previous[0], actual[1] - previous[1], actual[2] - previous[2]);
+	velAbs.divideScalar(this.data.currentFrameRate);
 
-	return vel_abs;
+	return velAbs;
 }
 
 //Create JSON for object
@@ -412,11 +412,11 @@ LeapMotion.prototype.toJSON = function(meta)
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.type = this.type;
-	data.object.debug_model = this.debug_model;
-	data.object.gestures_enabled = this.gestures_enabled;
-	data.object.poses_enabled = this.poses_enabled;
+	data.object.debugModel = this.debugModel;
+	data.object.gesturesEnabled = this.gesturesEnabled;
+	data.object.posesEnabled = this.posesEnabled;
 	data.object.mode = this.mode;
-	data.object.use_arm = this.use_arm;
+	data.object.useArm = this.useArm;
 
 	return data;
 }

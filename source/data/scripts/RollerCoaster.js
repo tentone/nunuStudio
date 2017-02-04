@@ -400,10 +400,10 @@ this.getTangentAt = function (t)
 
 
 alert("Rollercoaster Generator\nCreated by tentone\n Based on original drdoob THREE.JS rollercoaster");
-/*var create_ground = confirm("Generate ground?");
+/*var createGround = confirm("Generate ground?");
 
 //Generate ground
-if(create_ground)
+if(createGround)
 {
 	var geometry = new THREE.PlaneGeometry(5000, 5000, 15, 15);
 	geometry.applyMatrix(new THREE.Matrix4().makeRotationX(- Math.PI / 2));

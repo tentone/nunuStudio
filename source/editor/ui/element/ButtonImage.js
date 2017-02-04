@@ -24,13 +24,13 @@ function ButtonImage(parent)
 	this.visible = true;
 
 	//Image and Callback
-	this.image_scale = new THREE.Vector2(1,1);
+	this.imageScale = new THREE.Vector2(1,1);
 	this.image = "";
 
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		this.style.backgroundColor = Editor.theme.button_over_color;
+		this.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
 	//Mouse leave event
@@ -70,14 +70,14 @@ ButtonImage.prototype.setImage = function(image)
 }
 
 //Set alt text
-ButtonImage.prototype.setAltText = function(alt_text)
+ButtonImage.prototype.setAltText = function(altText)
 {
 	var text = new Text();//this.element);
-	text.element.style.background = Editor.theme.bar_color;
+	text.element.style.background = Editor.theme.barColor;
 	text.element.style.zIndex = "300";
-	text.setText(alt_text);
+	text.setText(altText);
 	text.visible = false;
-	text.fit_content = true;
+	text.fitContent = true;
 	text.updateInterface();
 
 	//Mouse mouse move event
@@ -130,10 +130,10 @@ ButtonImage.prototype.updateInterface = function()
 	}
 
 	//Update image
-	this.img.width = this.size.x * this.image_scale.x;
-	this.img.height = this.size.y * this.image_scale.y;
-	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
-	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
+	this.img.width = this.size.x * this.imageScale.x;
+	this.img.height = this.size.y * this.imageScale.y;
+	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
+	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
 	
 	//Update main element
 	this.element.style.top = this.position.y + "px";

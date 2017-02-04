@@ -1,6 +1,6 @@
 "use strict";
 
-function Sky(auto_update, day_time, sun_distance, time)
+function Sky(autoUpdate, dayTime, sunDistance, time)
 {	
 	THREE.Object3D.call(this);
 
@@ -11,10 +11,10 @@ function Sky(auto_update, day_time, sun_distance, time)
 	this.clock = new THREE.Clock();
 
 	//Colors (morning, noon, afternoon, night)
-	this.color_top = [new THREE.Color(0x77b3fb), new THREE.Color(0x0076ff), new THREE.Color(0x035bb6), new THREE.Color(0x002439)];
-	this.color_bottom = [new THREE.Color(0xebece6), new THREE.Color(0xffffff), new THREE.Color(0xfee7d7), new THREE.Color(0x0065a7)];
-	this.sun_color = 0xffffaa;
-	this.moon_color = 0x5555bb;
+	this.colorTop = [new THREE.Color(0x77b3fb), new THREE.Color(0x0076ff), new THREE.Color(0x035bb6), new THREE.Color(0x002439)];
+	this.colorBottom = [new THREE.Color(0xebece6), new THREE.Color(0xffffff), new THREE.Color(0xfee7d7), new THREE.Color(0x0065a7)];
+	this.sunColor = 0xffffaa;
+	this.moonColor = 0x5555bb;
 
 	//Hemisphere light
 	this.hemisphere = new HemisphereLight(0, 0, 0.6);
@@ -25,7 +25,7 @@ function Sky(auto_update, day_time, sun_distance, time)
 	this.add(this.hemisphere);
 
 	//Sun light
-	this.sun = new DirectionalLight(this.sun_color, 0.5);
+	this.sun = new DirectionalLight(this.sunColor, 0.5);
 	this.sun.castShadow = true;
 	this.sun.hidden = true;
 	this.add(this.sun);
@@ -40,26 +40,26 @@ function Sky(auto_update, day_time, sun_distance, time)
 	}";
 
 	//Pixel shader
-	var fragment = "uniform vec3 top_color; \
-	uniform vec3 bottom_color; \
+	var fragment = "uniform vec3 topColor; \
+	uniform vec3 bottomColor; \
 	uniform float offset; \
 	uniform float exponent; \
 	varying vec3 vWorldPosition; \
 	void main() \
 	{ \
 		float h = normalize(vWorldPosition + offset).y; \
-		gl_FragColor = vec4(mix(bottom_color, top_color, max(pow(max(h , 0.0), exponent), 0.0)), 1.0); \
+		gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h , 0.0), exponent), 0.0)), 1.0); \
 	}";
 
 	//Uniforms
 	var uniforms =
 	{
-		top_color: {type: "c", value: new THREE.Color(0.0, 0.46, 1.0)},
-		bottom_color: {type: "c", value: new THREE.Color(1.0, 1.0, 1.0)},
+		topColor: {type: "c", value: new THREE.Color(0.0, 0.46, 1.0)},
+		bottomColor: {type: "c", value: new THREE.Color(1.0, 1.0, 1.0)},
 		offset:	{type: "f", value: 20},
 		exponent: {type: "f", value: 0.4}
 	};
-	uniforms.top_color.value.copy(this.hemisphere.color);
+	uniforms.topColor.value.copy(this.hemisphere.color);
 
 	//Sky
 	var geometry = new THREE.SphereBufferGeometry(1000, 16, 16);
@@ -77,9 +77,9 @@ function Sky(auto_update, day_time, sun_distance, time)
 	};
 
 	//Day time (seconds) and sun distance
-	this.auto_update = (auto_update !== undefined) ? auto_update : true;
-	this.sun_distance = (sun_distance !== undefined) ? sun_distance : 100;
-	this.day_time = (day_time !== undefined) ? day_time : 120;
+	this.autoUpdate = (autoUpdate !== undefined) ? autoUpdate : true;
+	this.sunDistance = (sunDistance !== undefined) ? sunDistance : 100;
+	this.dayTime = (dayTime !== undefined) ? dayTime : 120;
 	this.time = (time !== undefined) ? time : 75;
 
 	this.updateSky();
@@ -102,13 +102,13 @@ Sky.prototype.initialize = function()
 Sky.prototype.update = function()
 {
 	//Update time
-	if(this.auto_update)
+	if(this.autoUpdate)
 	{
 		this.time += this.clock.getDelta();
 
-		if(this.time > this.day_time)
+		if(this.time > this.dayTime)
 		{
-			this.time -= this.day_time;
+			this.time -= this.dayTime;
 		}
 
 		this.updateSky();
@@ -126,13 +126,13 @@ Sky.prototype.update = function()
 Sky.prototype.updateSky = function()
 {
 	//Time in % of day
-	var time = (this.time / this.day_time);
+	var time = (this.time / this.dayTime);
 
 	//0H - 6H (night)
 	if(time < 0.25)
 	{
-		this.sky.material.uniforms.top_color.value.setRGB(this.color_top[3].r, this.color_top[3].g, this.color_top[3].b);
-		this.sky.material.uniforms.bottom_color.value.setRGB(this.color_bottom[3].r, this.color_bottom[3].g, this.color_bottom[3].b);
+		this.sky.material.uniforms.topColor.value.setRGB(this.colorTop[3].r, this.colorTop[3].g, this.colorTop[3].b);
+		this.sky.material.uniforms.bottomColor.value.setRGB(this.colorBottom[3].r, this.colorBottom[3].g, this.colorBottom[3].b);
 	}
 	//6H - 7H (night to morning)
 	else if(time < 0.292)
@@ -140,14 +140,14 @@ Sky.prototype.updateSky = function()
 		var t = (time-0.25) * 23.81;
 		var f = 1 - t;
 
-		this.sky.material.uniforms.top_color.value.setRGB(f*this.color_top[3].r + t*this.color_top[0].r, f*this.color_top[3].g + t*this.color_top[0].g, f*this.color_top[3].b + t*this.color_top[0].b);
-		this.sky.material.uniforms.bottom_color.value.setRGB(f*this.color_bottom[3].r + t*this.color_bottom[0].r, f*this.color_bottom[3].g + t*this.color_bottom[0].g, f*this.color_bottom[3].b + t*this.color_bottom[0].b);
+		this.sky.material.uniforms.topColor.value.setRGB(f*this.colorTop[3].r + t*this.colorTop[0].r, f*this.colorTop[3].g + t*this.colorTop[0].g, f*this.colorTop[3].b + t*this.colorTop[0].b);
+		this.sky.material.uniforms.bottomColor.value.setRGB(f*this.colorBottom[3].r + t*this.colorBottom[0].r, f*this.colorBottom[3].g + t*this.colorBottom[0].g, f*this.colorBottom[3].b + t*this.colorBottom[0].b);
 	}
 	//7H - 10H (morning)
 	else if(time < 0.4167)
 	{
-		this.sky.material.uniforms.top_color.value.setRGB(this.color_top[0].r, this.color_top[0].g, this.color_top[0].b);
-		this.sky.material.uniforms.bottom_color.value.setRGB(this.color_bottom[0].r, this.color_bottom[0].g, this.color_bottom[0].b);
+		this.sky.material.uniforms.topColor.value.setRGB(this.colorTop[0].r, this.colorTop[0].g, this.colorTop[0].b);
+		this.sky.material.uniforms.bottomColor.value.setRGB(this.colorBottom[0].r, this.colorBottom[0].g, this.colorBottom[0].b);
 	}
 	//10H - 12H (morning to noon)
 	else if(time < 0.5)
@@ -155,14 +155,14 @@ Sky.prototype.updateSky = function()
 		var t = (time-0.4167) * 12;
 		var f = 1 - t;
 
-		this.sky.material.uniforms.top_color.value.setRGB(f*this.color_top[0].r + t*this.color_top[1].r, f*this.color_top[0].g + t*this.color_top[1].g, f*this.color_top[0].b + t*this.color_top[1].b);
-		this.sky.material.uniforms.bottom_color.value.setRGB(f*this.color_bottom[0].r + t*this.color_bottom[1].r, f*this.color_bottom[0].g + t*this.color_bottom[1].g, f*this.color_bottom[0].b + t*this.color_bottom[1].b);
+		this.sky.material.uniforms.topColor.value.setRGB(f*this.colorTop[0].r + t*this.colorTop[1].r, f*this.colorTop[0].g + t*this.colorTop[1].g, f*this.colorTop[0].b + t*this.colorTop[1].b);
+		this.sky.material.uniforms.bottomColor.value.setRGB(f*this.colorBottom[0].r + t*this.colorBottom[1].r, f*this.colorBottom[0].g + t*this.colorBottom[1].g, f*this.colorBottom[0].b + t*this.colorBottom[1].b);
 	}
 	//12H - 17H (noon)
 	else if(time < 0.708)
 	{
-		this.sky.material.uniforms.top_color.value.setRGB(this.color_top[1].r, this.color_top[1].g, this.color_top[1].b);
-		this.sky.material.uniforms.bottom_color.value.setRGB(this.color_bottom[1].r, this.color_bottom[1].g, this.color_bottom[1].b);
+		this.sky.material.uniforms.topColor.value.setRGB(this.colorTop[1].r, this.colorTop[1].g, this.colorTop[1].b);
+		this.sky.material.uniforms.bottomColor.value.setRGB(this.colorBottom[1].r, this.colorBottom[1].g, this.colorBottom[1].b);
 	}
 	//17H -> 18h (noon to afternoon)
 	else if(time < 0.75)
@@ -170,8 +170,8 @@ Sky.prototype.updateSky = function()
 		var t = (time-0.708) * 23.81;
 		var f = 1 - t;
 
-		this.sky.material.uniforms.top_color.value.setRGB(f*this.color_top[1].r + t*this.color_top[2].r, f*this.color_top[1].g + t*this.color_top[2].g, f*this.color_top[1].b + t*this.color_top[2].b);
-		this.sky.material.uniforms.bottom_color.value.setRGB(f*this.color_bottom[1].r + t*this.color_bottom[2].r, f*this.color_bottom[1].g + t*this.color_bottom[2].g, f*this.color_bottom[1].b + t*this.color_bottom[2].b);
+		this.sky.material.uniforms.topColor.value.setRGB(f*this.colorTop[1].r + t*this.colorTop[2].r, f*this.colorTop[1].g + t*this.colorTop[2].g, f*this.colorTop[1].b + t*this.colorTop[2].b);
+		this.sky.material.uniforms.bottomColor.value.setRGB(f*this.colorBottom[1].r + t*this.colorBottom[2].r, f*this.colorBottom[1].g + t*this.colorBottom[2].g, f*this.colorBottom[1].b + t*this.colorBottom[2].b);
 	}
 	//18H -> 20H (afternoon to night)
 	else if(time < 0.8333)
@@ -179,20 +179,20 @@ Sky.prototype.updateSky = function()
 		var t = (time-0.75) * 12.048;
 		var f = 1 - t;
 
-		this.sky.material.uniforms.top_color.value.setRGB(f*this.color_top[2].r + t*this.color_top[3].r, f*this.color_top[2].g + t*this.color_top[3].g, f*this.color_top[2].b + t*this.color_top[3].b);
-		this.sky.material.uniforms.bottom_color.value.setRGB(f*this.color_bottom[2].r + t*this.color_bottom[3].r, f*this.color_bottom[2].g + t*this.color_bottom[3].g, f*this.color_bottom[2].b + t*this.color_bottom[3].b);
+		this.sky.material.uniforms.topColor.value.setRGB(f*this.colorTop[2].r + t*this.colorTop[3].r, f*this.colorTop[2].g + t*this.colorTop[3].g, f*this.colorTop[2].b + t*this.colorTop[3].b);
+		this.sky.material.uniforms.bottomColor.value.setRGB(f*this.colorBottom[2].r + t*this.colorBottom[3].r, f*this.colorBottom[2].g + t*this.colorBottom[3].g, f*this.colorBottom[2].b + t*this.colorBottom[3].b);
 	}
 	//20H -> 24H (night)
 	else
 	{
-		this.sky.material.uniforms.top_color.value.setRGB(this.color_top[3].r, this.color_top[3].g, this.color_top[3].b);
-		this.sky.material.uniforms.bottom_color.value.setRGB(this.color_bottom[3].r, this.color_bottom[3].g, this.color_bottom[3].b);
+		this.sky.material.uniforms.topColor.value.setRGB(this.colorTop[3].r, this.colorTop[3].g, this.colorTop[3].b);
+		this.sky.material.uniforms.bottomColor.value.setRGB(this.colorBottom[3].r, this.colorBottom[3].g, this.colorBottom[3].b);
 	}
 
 	//Sun / moon color
 	if(time < 0.20)
 	{
-		this.sun.color.setHex(this.moon_color);
+		this.sun.color.setHex(this.moonColor);
 	}
 	else if(time < 0.30)
 	{
@@ -203,18 +203,18 @@ Sky.prototype.updateSky = function()
 		{
 			var f = 2 - t*2;
 			this.sun.intensity = f * 0.3;
-			this.sun.color.setHex(this.moon_color);
+			this.sun.color.setHex(this.moonColor);
 		}
 		else
 		{
 			t = t*2;
 			this.sun.intensity = t * 0.3;
-			this.sun.color.setHex(this.sun_color);
+			this.sun.color.setHex(this.sunColor);
 		}
 	}
 	else if(time < 0.70)
 	{
-		this.sun.color.setHex(this.sun_color);
+		this.sun.color.setHex(this.sunColor);
 	}
 	else if(time < 0.80)
 	{
@@ -224,31 +224,31 @@ Sky.prototype.updateSky = function()
 		{
 			var f = 2 - t*2;
 			this.sun.intensity = f * 0.3;
-			this.sun.color.setHex(this.sun_color);
+			this.sun.color.setHex(this.sunColor);
 		}
 		else
 		{
 			t = t*2;
 			this.sun.intensity = t * 0.3;
-			this.sun.color.setHex(this.moon_color);
+			this.sun.color.setHex(this.moonColor);
 		}
 	}
 	else
 	{
-		this.sun.color.setHex(this.moon_color);
+		this.sun.color.setHex(this.moonColor);
 	}
 
 	//Update sun position
 	var rotation = (MathUtils.pi2 * time) - MathUtils.pid2;
 	if(time > 0.25 && time < 0.75)
 	{
-		this.sun.position.x = this.sun_distance * Math.cos(rotation);
-		this.sun.position.y = this.sun_distance * Math.sin(rotation);
+		this.sun.position.x = this.sunDistance * Math.cos(rotation);
+		this.sun.position.y = this.sunDistance * Math.sin(rotation);
 	}
 	else
 	{
-		this.sun.position.x = this.sun_distance * Math.cos(rotation + Math.PI);
-		this.sun.position.y = this.sun_distance * Math.sin(rotation + Math.PI);	
+		this.sun.position.x = this.sunDistance * Math.cos(rotation + Math.PI);
+		this.sun.position.y = this.sunDistance * Math.sin(rotation + Math.PI);	
 	}
 }
 
@@ -257,9 +257,9 @@ Sky.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 	
-	data.object.auto_update = this.auto_update;
-	data.object.sun_distance = this.sun_distance;
-	data.object.day_time = this.day_time;
+	data.object.autoUpdate = this.autoUpdate;
+	data.object.sunDistance = this.sunDistance;
+	data.object.dayTime = this.dayTime;
 	data.object.time = this.time;
 
 	data.object.sun = {};

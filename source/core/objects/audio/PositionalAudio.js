@@ -21,8 +21,8 @@ function PositionalAudio(audio)
 
 	//Runtime variables
 	this.cameras = null;
-	this.temp_a = new THREE.Vector3();
-	this.temp_b = new THREE.Vector3();
+	this.tempA = new THREE.Vector3();
+	this.tempB = new THREE.Vector3();
 }
 
 //Super prototypes
@@ -63,15 +63,15 @@ PositionalAudio.prototype.initialize = function()
 //Update audio position
 PositionalAudio.prototype.update = function()
 {
-	this.temp_a.setFromMatrixPosition(this.matrixWorld);
+	this.tempA.setFromMatrixPosition(this.matrixWorld);
 
 	if(this.cameras.length > 0)
 	{
-		this.temp_b.setFromMatrixPosition(this.cameras[0].matrixWorld);
-		this.temp_a.sub(this.temp_b);
+		this.tempB.setFromMatrixPosition(this.cameras[0].matrixWorld);
+		this.tempA.sub(this.tempB);
 	}
 
-	this.panner.setPosition(this.temp_a.x, this.temp_a.y, this.temp_a.z);
+	this.panner.setPosition(this.tempA.x, this.tempA.y, this.tempA.z);
 
 	//Update children
 	for(var i = 0; i < this.children.length; i++)

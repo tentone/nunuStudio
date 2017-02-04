@@ -6,22 +6,22 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Main container
 	this.main = new DualDivisionResizable(this.element);
-	this.main.tab_position = 0.7;
-	this.main.tab_position_min = 0.3;
-	this.main.tab_position_max = 0.7;
+	this.main.tabPosition = 0.7;
+	this.main.tabPositionMin = 0.3;
+	this.main.tabPositionMax = 0.7;
 	this.main.updateInterface();
 
 	//Change main div aspect
-	this.main.div_b.style.overflow = "auto";
-	this.main.div_b.style.cursor = "default";
-	this.main.div_b.style.backgroundColor = Editor.theme.panel_color;
+	this.main.divB.style.overflow = "auto";
+	this.main.divB.style.cursor = "default";
+	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
 
 	//Self pointer
 	var self = this;
 
 	//----------------------------Particle preview----------------------------
 	//Canvas
-	this.canvas = new Canvas(this.main.div_a);
+	this.canvas = new Canvas(this.main.divA);
 	this.canvas.updateInterface();
 
 	//Element atributes
@@ -44,17 +44,17 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Particle
 	this.particle = null;
-	this.particle_runtime = null;
+	this.particleRuntime = null;
 
 	//Camera
 	this.camera = new PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y);
-	this.camera_rotation = new THREE.Vector2(0, 0.5);
-	this.camera_distance = 5;
+	this.cameraRotation = new THREE.Vector2(0, 0.5);
+	this.cameraDistance = 5;
 	this.updateCamera();
 
 	//-----------------------------Particle parameters------------------------------
-	this.form = new Form(this.main.div_b);
-	this.form.default_text_width = 80;
+	this.form = new Form(this.main.divB);
+	this.form.defaultTextWidth = 80;
 	this.form.position.set(10, 8);
 	this.form.spacing.set(10, 5);
 	
@@ -181,25 +181,25 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Max age
 	this.form.addText("Max Age");
-	this.maxAge_value = new NumberBox(this.form.element);
-	this.maxAge_value.size.set(60, 18);
-	this.maxAge_value.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.maxAge_value.setOnChange(function()
+	this.maxAgeValue = new NumberBox(this.form.element);
+	this.maxAgeValue.size.set(60, 18);
+	this.maxAgeValue.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.maxAgeValue.setOnChange(function()
 	{
-		self.particle.emitter.maxAge.value = self.maxAge_value.getValue();
+		self.particle.emitter.maxAge.value = self.maxAgeValue.getValue();
 		self.updateRuntimeParticle();
 	});
-	this.form.add(this.maxAge_value);
+	this.form.add(this.maxAgeValue);
 	this.form.addText("+/-", true);
-	this.maxAge_spread = new NumberBox(this.form.element);
-	this.maxAge_spread.size.set(60, 18);
-	this.maxAge_spread.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.maxAge_spread.setOnChange(function()
+	this.maxAgeSpread = new NumberBox(this.form.element);
+	this.maxAgeSpread.size.set(60, 18);
+	this.maxAgeSpread.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.maxAgeSpread.setOnChange(function()
 	{
-		self.particle.emitter.maxAge.spread = self.maxAge_spread.getValue();
+		self.particle.emitter.maxAge.spread = self.maxAgeSpread.getValue();
 		self.updateRuntimeParticle();
 	});
-	this.form.add(this.maxAge_spread);
+	this.form.add(this.maxAgeSpread);
 	this.form.nextRow();
 
 	//Position
@@ -207,23 +207,23 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Initial");
-	this.position_value = new CoordinatesBox(this.form.element);
-	this.position_value.setOnChange(function()
+	this.positionValue = new CoordinatesBox(this.form.element);
+	this.positionValue.setOnChange(function()
 	{
-		self.particle.emitter.position.value.copy(self.position_value.getValue());
+		self.particle.emitter.position.value.copy(self.positionValue.getValue());
 		self.updateRuntimeParticle();
 	});
-	this.form.add(this.position_value);
+	this.form.add(this.positionValue);
 	this.form.nextRow();
 
 	this.form.addText("Variation");
-	this.position_spread = new CoordinatesBox(this.form.element);
-	this.position_spread.setOnChange(function()
+	this.positionSpread = new CoordinatesBox(this.form.element);
+	this.positionSpread.setOnChange(function()
 	{
-		self.particle.emitter.position.spread.copy(self.position_spread.getValue());
+		self.particle.emitter.position.spread.copy(self.positionSpread.getValue());
 		self.updateRuntimeParticle();
 	});
-	this.form.add(this.position_spread);
+	this.form.add(this.positionSpread);
 	this.form.nextRow();
 
 	//Velocity
@@ -231,23 +231,23 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Initial");
-	this.velocity_value = new CoordinatesBox(this.form.element);
-	this.velocity_value.setOnChange(function()
+	this.velocityValue = new CoordinatesBox(this.form.element);
+	this.velocityValue.setOnChange(function()
 	{
-		self.particle.emitter.velocity.value.copy(self.velocity_value.getValue());
+		self.particle.emitter.velocity.value.copy(self.velocityValue.getValue());
 		self.updateRuntimeParticle();
 	});
-	this.form.add(this.velocity_value);
+	this.form.add(this.velocityValue);
 	this.form.nextRow();
 
 	this.form.addText("Variation");
-	this.velocity_spread = new CoordinatesBox(this.form.element);
-	this.velocity_spread.setOnChange(function()
+	this.velocitySpread = new CoordinatesBox(this.form.element);
+	this.velocitySpread.setOnChange(function()
 	{
-		self.particle.emitter.velocity.spread.copy(self.velocity_spread.getValue());
+		self.particle.emitter.velocity.spread.copy(self.velocitySpread.getValue());
 		self.updateRuntimeParticle();
 	});
-	this.form.add(this.velocity_spread);
+	this.form.add(this.velocitySpread);
 	this.form.nextRow();
 
 	//Acceleration
@@ -255,46 +255,46 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	this.form.addText("Initial");
-	this.acceleration_value = new CoordinatesBox(this.form.element);
-	this.acceleration_value.setOnChange(function()
+	this.accelerationValue = new CoordinatesBox(this.form.element);
+	this.accelerationValue.setOnChange(function()
 	{
-		self.particle.emitter.acceleration.value.copy(self.acceleration_value.getValue());
+		self.particle.emitter.acceleration.value.copy(self.accelerationValue.getValue());
 		self.updateRuntimeParticle();
 	});
-	this.form.add(this.acceleration_value);
+	this.form.add(this.accelerationValue);
 	this.form.nextRow();
 
 	this.form.addText("Variation");
-	this.acceleration_spread = new CoordinatesBox(this.form.element);
-	this.acceleration_spread.setOnChange(function()
+	this.accelerationSpread = new CoordinatesBox(this.form.element);
+	this.accelerationSpread.setOnChange(function()
 	{
-		self.particle.emitter.acceleration.spread.copy(self.acceleration_spread.getValue());
+		self.particle.emitter.acceleration.spread.copy(self.accelerationSpread.getValue());
 		self.updateRuntimeParticle();
 	});
-	this.form.add(this.acceleration_spread);
+	this.form.add(this.accelerationSpread);
 	this.form.nextRow();
 
 	//Wiggle
 	this.form.addText("Wiggle");
-	this.wiggle_value = new NumberBox(this.form.element);
-	this.wiggle_value.size.set(60, 18);
-	this.wiggle_value.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.wiggle_value.setOnChange(function()
+	this.wiggleValue = new NumberBox(this.form.element);
+	this.wiggleValue.size.set(60, 18);
+	this.wiggleValue.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.wiggleValue.setOnChange(function()
 	{
-		self.particle.emitter.wiggle.value = self.wiggle_value.getValue();
+		self.particle.emitter.wiggle.value = self.wiggleValue.getValue();
 		self.updateRuntimeParticle();
 	});
-	this.form.add(this.wiggle_value);
+	this.form.add(this.wiggleValue);
 	this.form.addText("+/-", true);
-	this.wiggle_spread = new NumberBox(this.form.element);
-	this.wiggle_spread.size.set(60, 18);
-	this.wiggle_spread.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.wiggle_spread.setOnChange(function()
+	this.wiggleSpread = new NumberBox(this.form.element);
+	this.wiggleSpread.size.set(60, 18);
+	this.wiggleSpread.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.wiggleSpread.setOnChange(function()
 	{
-		self.particle.emitter.wiggle.spread = self.wiggle_spread.getValue();
+		self.particle.emitter.wiggle.spread = self.wiggleSpread.getValue();
 		self.updateRuntimeParticle();
 	});
-	this.form.add(this.wiggle_spread);
+	this.form.add(this.wiggleSpread);
 	this.form.nextRow();
 	
 	//Opacity
@@ -305,13 +305,13 @@ function ParticleEditor(parent, closeable, container, index)
 	this.opacity.setOnChange(function(value)
 	{
 		self.particle.emitter.opacity.value = value;
-		self.particle_runtime.emitter.opacity.value = value;
+		self.particleRuntime.emitter.opacity.value = value;
 	});
 	this.opacity.addGraph("spread", "#AAAAAA");
 	this.opacity.setOnChange(function(value)
 	{
 		self.particle.emitter.opacity.spread = value;
-		self.particle_runtime.emitter.opacity.spread = value;
+		self.particleRuntime.emitter.opacity.spread = value;
 	}, "spread");
 	this.form.add(this.opacity);
 	this.form.nextRow();
@@ -324,36 +324,36 @@ function ParticleEditor(parent, closeable, container, index)
 	this.scale.setOnChange(function(value)
 	{
 		self.particle.emitter.size.value = value;
-		self.particle_runtime.emitter.size.value = value;
+		self.particleRuntime.emitter.size.value = value;
 	});
 	this.scale.addGraph("spread", "#AAAAAA");
 	this.scale.setOnChange(function(value)
 	{
 		self.particle.emitter.size.spread = value;
-		self.particle_runtime.emitter.size.spread = value;
+		self.particleRuntime.emitter.size.spread = value;
 	}, "spread");
 	this.form.add(this.scale);
 	this.form.nextRow();
 	this.form.addText("Min", true);
-	this.scale_min = new NumberBox(this.form.element);
-	this.scale_min.size.set(50, 18);
-	this.scale_min.setOnChange(function()
+	this.scaleMin = new NumberBox(this.form.element);
+	this.scaleMin.size.set(50, 18);
+	this.scaleMin.setOnChange(function()
 	{
-		var min = self.scale_min.getValue();
-		var max = self.scale_max.getValue();
+		var min = self.scaleMin.getValue();
+		var max = self.scaleMax.getValue();
 		self.scale.setRange(min, max);
 	});
-	this.form.add(this.scale_min);
+	this.form.add(this.scaleMin);
 	this.form.addText("Max", true);
-	this.scale_max = new NumberBox(this.form.element);
-	this.scale_max.size.set(50, 18);
-	this.scale_max.setOnChange(function()
+	this.scaleMax = new NumberBox(this.form.element);
+	this.scaleMax.size.set(50, 18);
+	this.scaleMax.setOnChange(function()
 	{
-		var min = self.scale_min.getValue();
-		var max = self.scale_max.getValue();
+		var min = self.scaleMin.getValue();
+		var max = self.scaleMax.getValue();
 		self.scale.setRange(min, max);
 	});
-	this.form.add(this.scale_max);
+	this.form.add(this.scaleMax);
 	this.form.nextRow();
 
 	//Angle
@@ -364,49 +364,49 @@ function ParticleEditor(parent, closeable, container, index)
 	this.angle.setOnChange(function(value)
 	{
 		self.particle.emitter.angle.value = value;
-		self.particle_runtime.emitter.angle.value = value;
+		self.particleRuntime.emitter.angle.value = value;
 	});
 	this.angle.addGraph("spread", "#AAAAAA");
 	this.angle.setOnChange(function(value)
 	{
 		self.particle.emitter.angle.spread = value;
-		self.particle_runtime.emitter.angle.spread = value;
+		self.particleRuntime.emitter.angle.spread = value;
 	}, "spread");
 	this.form.add(this.angle);
 	this.form.nextRow();
 	this.form.addText("Min", true);
-	this.angle_min = new NumberBox(this.form.element);
-	this.angle_min.size.set(50, 18);
-	this.angle_min.setOnChange(function()
+	this.angleMin = new NumberBox(this.form.element);
+	this.angleMin.size.set(50, 18);
+	this.angleMin.setOnChange(function()
 	{
-		var min = self.angle_min.getValue();
-		var max = self.angle_max.getValue();
+		var min = self.angleMin.getValue();
+		var max = self.angleMax.getValue();
 		self.angle.setRange(min, max);
 	});
-	this.form.add(this.angle_min);
+	this.form.add(this.angleMin);
 	this.form.addText("Max", true);
-	this.angle_max = new NumberBox(this.form.element);
-	this.angle_max.size.set(50, 18);
-	this.angle_max.setOnChange(function()
+	this.angleMax = new NumberBox(this.form.element);
+	this.angleMax.size.set(50, 18);
+	this.angleMax.setOnChange(function()
 	{
-		var min = self.angle_min.getValue();
-		var max = self.angle_max.getValue();
+		var min = self.angleMin.getValue();
+		var max = self.angleMax.getValue();
 		self.angle.setRange(min, max);
 	});
-	this.form.add(this.angle_max);
+	this.form.add(this.angleMax);
 	this.form.nextRow();
 
 	//Color
 	this.form.addText("Color");
 	this.form.nextRow();
-	this.color_value = [];
-	this.color_spread = [];
+	this.colorValue = [];
+	this.colorSpread = [];
 
 	function addColorValue(index)
 	{
 		return function()
 		{
-			var color = self.color_value[index].getValue();
+			var color = self.colorValue[index].getValue();
 			self.particle.emitter.color.value[index].r = color.r;
 			self.particle.emitter.color.value[index].g = color.g;
 			self.particle.emitter.color.value[index].b = color.b;
@@ -418,7 +418,7 @@ function ParticleEditor(parent, closeable, container, index)
 	{
 		return function()
 		{
-			var color = self.color_spread[index].getValue();
+			var color = self.colorSpread[index].getValue();
 			self.particle.emitter.color.spread[index].x = color.r;
 			self.particle.emitter.color.spread[index].y = color.g;
 			self.particle.emitter.color.spread[index].z = color.b;
@@ -434,7 +434,7 @@ function ParticleEditor(parent, closeable, container, index)
 		value.size.set(80, 18);
 		value.setOnChange(addColorValue(i));
 
-		this.color_value[i] = value;
+		this.colorValue[i] = value;
 		this.form.add(value);
 		this.form.addText("+/-", true);
 
@@ -442,7 +442,7 @@ function ParticleEditor(parent, closeable, container, index)
 		spread.size.set(80, 18);
 		spread.setOnChange(addColorSpread(i));
 
-		this.color_spread[i] = spread;
+		this.colorSpread[i] = spread;
 		this.form.add(spread);
 		this.form.nextRow();
 	}
@@ -502,36 +502,36 @@ ParticleEditor.prototype.attach = function(particle)
 		this.duration.setValue(0);
 	}
 	this.type.setValue(particle.emitter.type);
-	this.maxAge_value.setValue(particle.emitter.maxAge.value);
-	this.maxAge_spread.setValue(particle.emitter.maxAge.spread);
-	this.position_value.setValue(particle.emitter.position.value);
-	this.position_spread.setValue(particle.emitter.position.spread);
-	this.velocity_value.setValue(particle.emitter.velocity.value);
-	this.velocity_spread.setValue(particle.emitter.velocity.spread);
-	this.acceleration_value.setValue(particle.emitter.acceleration.value);
-	this.acceleration_spread.setValue(particle.emitter.acceleration.spread);
-	this.wiggle_value.setValue(particle.emitter.wiggle.value);
-	this.wiggle_spread.setValue(particle.emitter.wiggle.spread);
+	this.maxAgeValue.setValue(particle.emitter.maxAge.value);
+	this.maxAgeSpread.setValue(particle.emitter.maxAge.spread);
+	this.positionValue.setValue(particle.emitter.position.value);
+	this.positionSpread.setValue(particle.emitter.position.spread);
+	this.velocityValue.setValue(particle.emitter.velocity.value);
+	this.velocitySpread.setValue(particle.emitter.velocity.spread);
+	this.accelerationValue.setValue(particle.emitter.acceleration.value);
+	this.accelerationSpread.setValue(particle.emitter.acceleration.spread);
+	this.wiggleValue.setValue(particle.emitter.wiggle.value);
+	this.wiggleSpread.setValue(particle.emitter.wiggle.spread);
 
 	this.opacity.setValue(particle.emitter.opacity.value);
 	this.opacity.setValue(particle.emitter.opacity.spread, "spread");
 
 	this.scale.setValue(particle.emitter.size.value);
 	this.scale.setValue(particle.emitter.size.spread, "spread");
-	this.scale_min.setValue(this.scale.min);
-	this.scale_max.setValue(this.scale.max);
+	this.scaleMin.setValue(this.scale.min);
+	this.scaleMax.setValue(this.scale.max);
 
 	this.angle.setValue(particle.emitter.angle.value);
 	this.angle.setValue(particle.emitter.angle.spread, "spread");
-	this.angle_min.setValue(this.angle.min);
-	this.angle_max.setValue(this.angle.max);
+	this.angleMin.setValue(this.angle.min);
+	this.angleMax.setValue(this.angle.max);
 
 	for(var i = 0; i < 4; i++)
 	{
 		var value = particle.emitter.color.value[i];
-		this.color_value[i].setValue(value.r, value.g, value.b);
+		this.colorValue[i].setValue(value.r, value.g, value.b);
 		var spread = particle.emitter.color.spread[i];
-		this.color_spread[i].setValue(spread.x, spread.y, spread.z);
+		this.colorSpread[i].setValue(spread.x, spread.y, spread.z);
 	}
 
 	//Create runtime particle to preview particle
@@ -549,18 +549,18 @@ ParticleEditor.prototype.updateRuntimeParticle = function()
 {
 	if(this.particle !== null)
 	{
-		if(this.particle_runtime !== null)
+		if(this.particleRuntime !== null)
 		{
-			this.scene.remove(this.particle_runtime);
+			this.scene.remove(this.particleRuntime);
 		}
 
-		this.particle_runtime = new ObjectLoader().parse(this.particle.toJSON());
-		this.particle_runtime.visible = true;
-		this.particle_runtime.scale.set(1, 1, 1);
-		this.particle_runtime.position.set(0, 0, 0);
-		this.particle_runtime.rotation.set(0, 0, 0);
-		this.particle_runtime.initialize();
-		this.scene.add(this.particle_runtime);
+		this.particleRuntime = new ObjectLoader().parse(this.particle.toJSON());
+		this.particleRuntime.visible = true;
+		this.particleRuntime.scale.set(1, 1, 1);
+		this.particleRuntime.position.set(0, 0, 0);
+		this.particleRuntime.rotation.set(0, 0, 0);
+		this.particleRuntime.initialize();
+		this.scene.add(this.particleRuntime);
 	}
 }
 
@@ -568,8 +568,8 @@ ParticleEditor.prototype.updateRuntimeParticle = function()
 ParticleEditor.prototype.updateCamera = function()
 {
 	//Calculate direction vector
-	var cos_angle_y = Math.cos(this.camera_rotation.y);
-	var position = new THREE.Vector3(this.camera_distance * Math.cos(this.camera_rotation.x)*cos_angle_y, this.camera_distance * Math.sin(this.camera_rotation.y), this.camera_distance * Math.sin(this.camera_rotation.x)*cos_angle_y);
+	var cosAngleY = Math.cos(this.cameraRotation.y);
+	var position = new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x)*cosAngleY, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x)*cosAngleY);
 	this.camera.position.copy(position);
 	this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 }
@@ -602,35 +602,35 @@ ParticleEditor.prototype.update = function()
 		//Move camera
 		if(Mouse.buttonPressed(Mouse.LEFT))
 		{
-			this.camera_rotation.x -= 0.003 * Mouse.delta.x;
-			this.camera_rotation.y -= 0.003 * Mouse.delta.y;
+			this.cameraRotation.x -= 0.003 * Mouse.delta.x;
+			this.cameraRotation.y -= 0.003 * Mouse.delta.y;
 
 			//Limit Vertical Rotation to 90 degrees
 			var pid2 = 1.57;
-			if(this.camera_rotation.y < -pid2)
+			if(this.cameraRotation.y < -pid2)
 			{
-				this.camera_rotation.y = -pid2;
+				this.cameraRotation.y = -pid2;
 			}
-			else if(this.camera_rotation.y > pid2)
+			else if(this.cameraRotation.y > pid2)
 			{
-				this.camera_rotation.y = pid2;
+				this.cameraRotation.y = pid2;
 			}
 		}
 
 		//Camera zoom
-		this.camera_distance += Mouse.wheel * 0.005;
-		if(this.camera_distance < 0.1)
+		this.cameraDistance += Mouse.wheel * 0.005;
+		if(this.cameraDistance < 0.1)
 		{
-			this.camera_distance = 0.1;
+			this.cameraDistance = 0.1;
 		}
 
 		this.updateCamera();
 	}
 
 	//Update particle and render
-	if(this.particle_runtime !== null)
+	if(this.particleRuntime !== null)
 	{
-		this.particle_runtime.update();
+		this.particleRuntime.update();
 	}
 
 	//Render editor scene
@@ -657,7 +657,7 @@ ParticleEditor.prototype.updateInterface = function()
 
 	//Update canvas
 	this.canvas.visible = this.visible;
-	this.canvas.size.set(this.main.div_a.offsetWidth, this.main.div_a.offsetHeight);
+	this.canvas.size.set(this.main.divA.offsetWidth, this.main.divA.offsetHeight);
 	this.canvas.updateInterface();
 
 	//Update renderer and canvas

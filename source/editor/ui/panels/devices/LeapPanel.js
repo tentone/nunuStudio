@@ -24,45 +24,45 @@ function LeapPanel(parent, obj)
 	this.form.nextRow();
 
 	//Debug model
-	this.debug_model = new CheckBox(this.form.element);
+	this.debugModel = new CheckBox(this.form.element);
 	this.form.addText("Debug model");
-	this.debug_model.size.set(20, 15);
-	this.debug_model.setOnChange(function()
+	this.debugModel.size.set(20, 15);
+	this.debugModel.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.debug_model = self.debug_model.getValue();
+			self.obj.debugModel = self.debugModel.getValue();
 		}
 	});
-	this.form.add(this.debug_model);
+	this.form.add(this.debugModel);
 	this.form.nextRow();
 
 	//Gestures Enabled
-	this.gestures_enabled = new CheckBox(this.form.element);
+	this.gesturesEnabled = new CheckBox(this.form.element);
 	this.form.addText("Gestures Enabled");
-	this.gestures_enabled.size.set(20, 15);
-	this.gestures_enabled.setOnChange(function()
+	this.gesturesEnabled.size.set(20, 15);
+	this.gesturesEnabled.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.gestures_enabled = self.gestures_enabled.getValue();
+			self.obj.gesturesEnabled = self.gesturesEnabled.getValue();
 		}
 	});
-	this.form.add(this.gestures_enabled);
+	this.form.add(this.gesturesEnabled);
 	this.form.nextRow();
 
 	//Poses Enabled
-	this.poses_enabled = new CheckBox(this.form.element);
+	this.posesEnabled = new CheckBox(this.form.element);
 	this.form.addText("Poses Enabled");
-	this.poses_enabled.size.set(20, 15);
-	this.poses_enabled.setOnChange(function()
+	this.posesEnabled.size.set(20, 15);
+	this.posesEnabled.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.poses_enabled = self.poses_enabled.getValue();
+			self.obj.posesEnabled = self.posesEnabled.getValue();
 		}
 	});
-	this.form.add(this.poses_enabled);
+	this.form.add(this.posesEnabled);
 
 	//Update form
 	this.form.updateInterface();
@@ -79,8 +79,8 @@ LeapPanel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.mode.setSelectedIndex(this.obj.mode);
-		this.debug_model.setValue(this.obj.debug_model);
-		this.gestures_enabled.setValue(this.obj.gestures_enabled);
-		this.poses_enabled.setValue(this.obj.poses_enabled);
+		this.debugModel.setValue(this.obj.debugModel);
+		this.gesturesEnabled.setValue(this.obj.gesturesEnabled);
+		this.posesEnabled.setValue(this.obj.posesEnabled);
 	}
 }

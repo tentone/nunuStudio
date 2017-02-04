@@ -4,7 +4,7 @@ function SpineAnimation(json, atlas, path, textures)
 {
 	if(textures !== undefined)
 	{
-		var texture_atlas = new spine.TextureAtlas(atlas, function(file)
+		var textureAtlas = new spine.TextureAtlas(atlas, function(file)
 		{
 			for(var i = 0; i < textures.length; i++)
 			{
@@ -24,7 +24,7 @@ function SpineAnimation(json, atlas, path, textures)
 	{
 		textures = [];
 		
-		var texture_atlas = new spine.TextureAtlas(atlas, function(file)
+		var textureAtlas = new spine.TextureAtlas(atlas, function(file)
 		{
 			var texture = new SpineTexture(new Texture(new Image(path + "\\" + file)));
 			var image = texture.texture.image;
@@ -37,7 +37,7 @@ function SpineAnimation(json, atlas, path, textures)
 		});
 	}
 
-	var loader = new spine.AtlasAttachmentLoader(texture_atlas);
+	var loader = new spine.AtlasAttachmentLoader(textureAtlas);
 	var skeleton = new spine.SkeletonJson(loader).readSkeletonData(json);
 
 	THREE.Mesh.call(this);

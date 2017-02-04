@@ -1,36 +1,36 @@
 {
 	"general": {
 		"theme": "dark",
-		"file_preview_size": 70,
-		"show_stats": false,
-		"show_uuid": false
+		"filePreviewSize": 70,
+		"showStats": true,
+		"showUuid": false
 	},
 	"editor": {
-		"grid_size": 500,
-		"grid_spacing": 5,
-		"grid_enabled": true,
-		"axis_enabled": true,
-		"camera_preview_enabled": true,
-		"camera_preview_percentage": 0.35,
-		"lock_mouse": true,
-		"transformation_space": "world"
+		"gridSize": 500,
+		"gridSpacing": 5,
+		"gridEnabled": true,
+		"axisEnabled": true,
+		"cameraPreviewEnabled": true,
+		"cameraPreviewPercentage": 0.35,
+		"lockMouse": true,
+		"transformationSpace": "world"
 	},
 	"render": {
-		"follow_project": false,
-		"tonemapping": 0,
-		"tonemapping_exposure": 1,
-		"tonemapping_whitepoint": 1,
+		"followProject": false,
+		"toneMapping": 0,
+		"toneMappingExposure": 1,
+		"toneMappingWhitepoint": 1,
 		"antialiasing": true,
 		"shadows": true,
-		"shadows_type": 2
+		"shadowsType": 2
 	},
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"font_size": 14,
-		"line_numbers": true,
-		"line_wrapping": false,
-		"auto_close_brackets": true,
-		"highlight_active_line": false
+		"fontSize": 14,
+		"lineNumbers": true,
+		"lineWrapping": false,
+		"autoCloseBrackets": true,
+		"highlightActiveLine": false
 	}
 }

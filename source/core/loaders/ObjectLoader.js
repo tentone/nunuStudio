@@ -446,7 +446,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 			
 		case "Text3D":
-			object = new Text3D(data.text, getMaterial(data.material), getFont(data.font), data.height, data.bevel, data.bevel_thickness, data.bevel_size, data.size, data.curve_segments);
+			object = new Text3D(data.text, getMaterial(data.material), getFont(data.font), data.height, data.bevel, data.bevelThickness, data.bevelSize, data.size, data.curveSegments);
 			break;
 
 		case "Program":
@@ -457,23 +457,23 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			object.version = data.version;
 
 			object.vr = data.vr;
-			object.vr_scale = data.vr_scale;
+			object.vrScale = data.vrScale;
 
 			if(data.antialiasing !== undefined)
 			{
 				object.antialiasing = data.antialiasing;
 				object.shadows = data.shadows;
-				object.shadows_type = data.shadows_type;
+				object.shadowsType = data.shadowsType;
 			}
 
-			if(data.lock_pointer !== undefined)
+			if(data.lockPointer !== undefined)
 			{
-				object.lock_pointer = data.lock_pointer;
+				object.lockPointer = data.lockPointer;
 			}
 
-			if(data.default_scene !== undefined)
+			if(data.defaultScene !== undefined)
 			{
-				object.default_scene = data.default_scene;
+				object.defaultScene = data.defaultScene;
 			}
 			
 			break;
@@ -481,31 +481,31 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		case "LeapDevice":
 			object = new LeapMotion();
 			object.mode = data.mode;
-			object.use_arm = data.use_arm;
-			if(data.debug_model !== undefined)
+			object.useArm = data.useArm;
+			if(data.debugModel !== undefined)
 			{
-				object.debug_model = data.debug_model;
+				object.debugModel = data.debugModel;
 			}
-			if(data.gestures_enabled !== undefined)
+			if(data.gesturesEnabled !== undefined)
 			{
-				object.gestures_enabled = data.gestures_enabled;
+				object.gesturesEnabled = data.gesturesEnabled;
 			}
-			if(data.poses_enabled !== undefined)
+			if(data.posesEnabled !== undefined)
 			{
-				object.poses_enabled = data.poses_enabled;
+				object.posesEnabled = data.posesEnabled;
 			}
 			break;
 
 		case "Kinect":
 			object = new KinectDevice();
-			if(data.debug_model !== undefined)
+			if(data.debugModel !== undefined)
 			{
-				object.debug_model = data.debug_model;
+				object.debugModel = data.debugModel;
 			}
 			break;
 
 		case "Sky":
-			object = new Sky(data.auto_update, data.day_time, data.sun_distance, data.time);
+			object = new Sky(data.autoUpdate, data.dayTime, data.sunDistance, data.time);
 			if(data.sun !== undefined)
 			{
 				object.sun.shadow.fromJSON(data.sun.shadow);
@@ -572,13 +572,13 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.offset.fromArray(data.offset);
 			}
-			if(data.clear_color !== undefined)
+			if(data.clearColor !== undefined)
 			{
-				object.clear_color = data.clear_color;
+				object.clearColor = data.clearColor;
 			}
-			if(data.clear_depth !== undefined)
+			if(data.clearDepth !== undefined)
 			{
-				object.clear_depth = data.clear_depth;
+				object.clearDepth = data.clearDepth;
 			}
 			if(data.order !== undefined)
 			{
@@ -596,13 +596,13 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.offset.fromArray(data.offset);
 			}
-			if(data.clear_color !== undefined)
+			if(data.clearColor !== undefined)
 			{
-				object.clear_color = data.clear_color;
+				object.clearColor = data.clearColor;
 			}
-			if(data.clear_depth !== undefined)
+			if(data.clearDepth !== undefined)
 			{
-				object.clear_depth = data.clear_depth;
+				object.clearDepth = data.clearDepth;
 			}
 			if(data.order !== undefined)
 			{

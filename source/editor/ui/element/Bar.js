@@ -8,7 +8,7 @@ function Bar(parent)
 	//Create element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
-	this.element.style.backgroundColor = Editor.theme.bar_color;
+	this.element.style.backgroundColor = Editor.theme.barColor;
 
 	this.element.ondrop = function(event)
 	{
@@ -21,7 +21,7 @@ function Bar(parent)
 	};
 	
 	//Element atributes
-	this.fit_parent = false;
+	this.fitParent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -47,7 +47,7 @@ Bar.prototype.update = function(){}
 Bar.prototype.updateInterface = function()
 {
 	//Fit parent
-	if(this.fit_parent)
+	if(this.fitParent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 

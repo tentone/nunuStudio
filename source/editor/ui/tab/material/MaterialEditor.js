@@ -13,34 +13,34 @@ function MaterialEditor(parent, closeable, container, index)
 	{
 		self.updateInterface();
 	});
-	this.main.tab_position = 0.5;
-	this.main.tab_position_min = 0.3;
-	this.main.tab_position_max = 0.7;
+	this.main.tabPosition = 0.5;
+	this.main.tabPositionMin = 0.3;
+	this.main.tabPositionMax = 0.7;
 	this.main.updateInterface();
 
 	//Preview division
-	this.preview = new DualDivisionResizable(this.main.div_a);
+	this.preview = new DualDivisionResizable(this.main.divA);
 	this.preview.setOnResize(function()
 	{
 		self.updateInterface();
 	});
 	this.preview.orientation = DualDivisionResizable.VERTICAL;
-	this.preview.tab_position = 0.8;
-	this.preview.tab_position_min = 0.3;
-	this.preview.tab_position_max = 0.8;
+	this.preview.tabPosition = 0.8;
+	this.preview.tabPositionMin = 0.3;
+	this.preview.tabPositionMax = 0.8;
 	this.preview.updateInterface();
 
 	//Change preview division style
-	this.preview.div_a.style.overflow = "hidden";
-	this.preview.div_a.style.backgroundColor = Editor.theme.panel_color;
+	this.preview.divA.style.overflow = "hidden";
+	this.preview.divA.style.backgroundColor = Editor.theme.panelColor;
 
 	//Change main division style
-	this.main.div_b.style.overflow = "auto";
-	this.main.div_b.style.backgroundColor = Editor.theme.panel_color;
+	this.main.divB.style.overflow = "auto";
+	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
 
 	//Material preview
 	//Canvas
-	this.canvas = new Canvas(this.preview.div_a);
+	this.canvas = new Canvas(this.preview.divA);
 	this.canvas.updateInterface();
 
 	//Element atributes
@@ -56,7 +56,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.render.antialiasing});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 	this.renderer.shadowMap.enabled = Settings.render.shadows;
-	this.renderer.shadowMap.type = Settings.render.shadows_type;
+	this.renderer.shadowMap.type = Settings.render.shadowsType;
 
 	//Material camera
 	this.camera = new THREE.PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y);
@@ -85,34 +85,34 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Material preview configuration
 	//Text
-	var text = new Text(this.preview.div_b);
+	var text = new Text(this.preview.divB);
 	text.setAlignment(Text.LEFT);
 	text.setText("Configuration");
 	text.position.set(10, 20);
-	text.fit_content = true;
+	text.fitContent = true;
 	text.updateInterface();
 	this.children.push(text);
 
 	//Test model
-	var text = new Text(this.preview.div_b);
+	var text = new Text(this.preview.divB);
 	text.setAlignment(Text.LEFT);
 	text.setText("Test Model");
 	text.position.set(10, 45);
-	text.fit_content = true;
+	text.fitContent = true;
 	text.updateInterface();
 	this.children.push(text);
 
-	this.test_model = new DropdownList(this.preview.div_b);
-	this.test_model.position.set(80, 35);
-	this.test_model.size.set(150, 18);
-	this.test_model.addValue("Sphere", 0);
-	this.test_model.addValue("Torus", 1);
-	this.test_model.addValue("Cube", 2);
-	this.test_model.addValue("Torus Knot", 3);
-	this.test_model.updateInterface();
-	this.test_model.setOnChange(function()
+	this.testModel = new DropdownList(this.preview.divB);
+	this.testModel.position.set(80, 35);
+	this.testModel.size.set(150, 18);
+	this.testModel.addValue("Sphere", 0);
+	this.testModel.addValue("Torus", 1);
+	this.testModel.addValue("Cube", 2);
+	this.testModel.addValue("Torus Knot", 3);
+	this.testModel.updateInterface();
+	this.testModel.setOnChange(function()
 	{
-		var value = self.test_model.getSelectedIndex();
+		var value = self.testModel.getSelectedIndex();
 
 		//Sphere
 		if(value === 0)
@@ -135,29 +135,29 @@ function MaterialEditor(parent, closeable, container, index)
 			self.mesh.geometry = new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64);
 		}	
 	});
-	this.children.push(this.test_model);
+	this.children.push(this.testModel);
 
 	//Sky enabled
-	this.sky_text = new Text(this.preview.div_b);
-	this.sky_text.size.set(0, 20);
-	this.sky_text.position.set(10, 60);
-	this.sky_text.setAlignment(Text.LEFT);
-	this.sky_text.setText("Enable sky");
-	this.children.push(this.sky_text);
+	this.skyText = new Text(this.preview.divB);
+	this.skyText.size.set(0, 20);
+	this.skyText.position.set(10, 60);
+	this.skyText.setAlignment(Text.LEFT);
+	this.skyText.setText("Enable sky");
+	this.children.push(this.skyText);
 
-	this.sky_enabled = new CheckBox(this.preview.div_b);
-	this.sky_enabled.size.set(200, 15);
-	this.sky_enabled.position.set(80, 60);
-	this.sky_enabled.setValue(true);
-	this.sky_enabled.updateInterface();
-	this.sky_enabled.setOnChange(function()
+	this.skyEnabled = new CheckBox(this.preview.divB);
+	this.skyEnabled.size.set(200, 15);
+	this.skyEnabled.position.set(80, 60);
+	this.skyEnabled.setValue(true);
+	this.skyEnabled.updateInterface();
+	this.skyEnabled.setOnChange(function()
 	{
-		self.sky.visible = self.sky_enabled.getValue();
+		self.sky.visible = self.skyEnabled.getValue();
 	});
-	this.children.push(this.sky_enabled);
+	this.children.push(this.skyEnabled);
 
 	//Generic Material parameters
-	this.form = new Form(this.main.div_b);
+	this.form = new Form(this.main.divB);
 	this.form.position.set(10, 8);
 	this.form.spacing.set(10, 8);
 	
@@ -440,12 +440,12 @@ MaterialEditor.prototype.updateInterface = function()
 
 	//Update preview
 	this.preview.visible = this.visible;
-	this.preview.size.set(this.size.x * this.main.tab_position, this.size.y);
+	this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
 	this.preview.updateInterface();
 
 	//Update canvas
 	this.canvas.visible = this.visible;
-	this.canvas.size.set(this.preview.div_a.offsetWidth, this.preview.div_a.offsetHeight);
+	this.canvas.size.set(this.preview.divA.offsetWidth, this.preview.divA.offsetHeight);
 	this.canvas.updateInterface();
 
 	//Update renderer and canvas

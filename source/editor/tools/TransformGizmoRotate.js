@@ -9,9 +9,9 @@ function TransformGizmoRotate()
 		var geometry = new THREE.BufferGeometry();
 		var vertices = [];
 
-		var arc_len = (arc !== undefined) ? (arc * 64) : 64;
+		var arcLen = (arc !== undefined) ? (arc * 64) : 64;
 
-		for(var i = 0; i < arc_len; i++)
+		for(var i = 0; i < arcLen; i++)
 		{
 			if(facing === "x")
 			{

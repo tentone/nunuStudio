@@ -8,17 +8,17 @@ function KinectPanel(parent, obj)
 	var self = this;
 
 	//Debug model
-	this.debug_model = new CheckBox(this.form.element);
+	this.debugModel = new CheckBox(this.form.element);
 	this.form.addText("Debug model");
-	this.debug_model.size.set(20, 15);
-	this.debug_model.setOnChange(function()
+	this.debugModel.size.set(20, 15);
+	this.debugModel.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.debug_model = self.debug_model.getValue();
+			self.obj.debugModel = self.debugModel.getValue();
 		}
 	});
-	this.form.add(this.debug_model);
+	this.form.add(this.debugModel);
 
 	//Update form
 	this.form.updateInterface();
@@ -34,6 +34,6 @@ KinectPanel.prototype.updatePanel = function()
 	
 	if(this.obj !== null)
 	{
-		this.debug_model.setValue(this.obj.debug_model);
+		this.debugModel.setValue(this.obj.debugModel);
 	}
 }

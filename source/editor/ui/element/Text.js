@@ -12,7 +12,7 @@ function Text(parent)
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
 	this.element.style.pointerEvents = "none";
-	this.element.style.color = Editor.theme.text_color;
+	this.element.style.color = Editor.theme.textColor;
 	
 	//Span element
 	this.span = document.createElement("span");
@@ -21,8 +21,8 @@ function Text(parent)
 	this.element.appendChild(this.span);
 
 	//Element atributes
-	this.fit_content = false;
-	this.fit_parent = false;
+	this.fitContent = false;
+	this.fitParent = false;
 	this.size = new THREE.Vector2(0, 0);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
@@ -100,14 +100,14 @@ Text.prototype.update = function(){}
 Text.prototype.updateInterface = function()
 {
 	//Fit parent
-	if(this.fit_parent)
+	if(this.fitParent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 
 	}
 
 	//Fit size to text
-	if(this.fit_content)
+	if(this.fitContent)
 	{
 		this.size.x = this.span.clientWidth;
 		//this.size.y = this.span.clientHeight;

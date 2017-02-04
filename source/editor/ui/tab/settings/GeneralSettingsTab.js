@@ -11,7 +11,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	//Form
 	this.form = new Form(this.element);
-	this.form.default_text_width = 125;
+	this.form.defaultTextWidth = 125;
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);
 
@@ -40,25 +40,25 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	//Show stats
 	this.form.addText("Performance info");
-	this.show_stats = new CheckBox(this.form.element);
-	this.show_stats.size.set(20, 16);
-	this.show_stats.setOnChange(function()
+	this.showStats = new CheckBox(this.form.element);
+	this.showStats.size.set(20, 16);
+	this.showStats.setOnChange(function()
 	{
-		Settings.general.show_stats = self.show_stats.getValue();
+		Settings.general.showStats = self.showStats.getValue();
 	});
-	this.form.add(this.show_stats);
+	this.form.add(this.showStats);
 	this.form.nextRow();
 
 	//Show UUID
 	this.form.addText("Show object UUID");
-	this.show_uuid = new CheckBox(this.form.element);
-	this.show_uuid.size.set(20, 16);
-	this.show_uuid.setOnChange(function()
+	this.showUuid = new CheckBox(this.form.element);
+	this.showUuid.size.set(20, 16);
+	this.showUuid.setOnChange(function()
 	{
-		Settings.general.show_uuid = self.show_uuid.getValue();
+		Settings.general.showUuid = self.showUuid.getValue();
 		Editor.selectObjectPanel();
 	});
-	this.form.add(this.show_uuid);
+	this.form.add(this.showUuid);
 	this.form.nextRow();
 
 	//Blank Space
@@ -71,117 +71,117 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	//Enable Grid
 	this.form.addText("Show grid");
-	this.grid_enabled = new CheckBox(this.form.element);
-	this.grid_enabled.size.set(20, 16);
-	this.grid_enabled.setOnChange(function()
+	this.gridEnabled = new CheckBox(this.form.element);
+	this.gridEnabled.size.set(20, 16);
+	this.gridEnabled.setOnChange(function()
 	{
-		Settings.editor.grid_enabled = self.grid_enabled.getValue();
-		Editor.grid_helper.visible = Settings.editor.grid_enabled;
+		Settings.editor.gridEnabled = self.gridEnabled.getValue();
+		Editor.gridHelper.visible = Settings.editor.gridEnabled;
 	});
-	this.form.add(this.grid_enabled);
+	this.form.add(this.gridEnabled);
 	this.form.nextRow();
 
 	//Grid size 
 	this.form.addText("Grid size");
-	this.grid_size = new NumberBox(this.form.element);
-	this.grid_size.size.set(60, 18);
-	this.grid_size.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.grid_size.setStep(0.05);
-	this.grid_size.setOnChange(function()
+	this.gridSize = new NumberBox(this.form.element);
+	this.gridSize.size.set(60, 18);
+	this.gridSize.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.gridSize.setStep(0.05);
+	this.gridSize.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			Settings.editor.grid_size = self.grid_size.getValue();
-			Editor.grid_helper.setSize(Settings.editor.grid_size);
-			Editor.grid_helper.update();
+			Settings.editor.gridSize = self.gridSize.getValue();
+			Editor.gridHelper.setSize(Settings.editor.gridSize);
+			Editor.gridHelper.update();
 		}
 	});
-	this.form.add(this.grid_size);
+	this.form.add(this.gridSize);
 	this.form.nextRow();
 
 	//Grid spacing
 	this.form.addText("Grid spacing");
-	this.grid_spacing = new NumberBox(this.form.element);
-	this.grid_spacing.size.set(60, 18);
-	this.grid_spacing.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.grid_spacing.setStep(1.0);
-	this.grid_spacing.setOnChange(function()
+	this.gridSpacing = new NumberBox(this.form.element);
+	this.gridSpacing.size.set(60, 18);
+	this.gridSpacing.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.gridSpacing.setStep(1.0);
+	this.gridSpacing.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			Settings.editor.grid_spacing = self.grid_spacing.getValue();
-			Editor.grid_helper.setSpacing(Settings.editor.grid_spacing);
-			Editor.grid_helper.update();
+			Settings.editor.gridSpacing = self.gridSpacing.getValue();
+			Editor.gridHelper.setSpacing(Settings.editor.gridSpacing);
+			Editor.gridHelper.update();
 		}
 	});
-	this.form.add(this.grid_spacing);
+	this.form.add(this.gridSpacing);
 	this.form.nextRow();
 
 	//Enable Axis
 	this.form.addText("Show axis");
-	this.axis_enabled = new CheckBox(this.form.element);
-	this.axis_enabled.size.set(20, 16);
-	this.axis_enabled.setOnChange(function()
+	this.axisEnabled = new CheckBox(this.form.element);
+	this.axisEnabled.size.set(20, 16);
+	this.axisEnabled.setOnChange(function()
 	{
-		Settings.editor.axis_enabled = self.axis_enabled.getValue();
-		Editor.axis_helper.visible = Settings.editor.axis_enabled;
+		Settings.editor.axisEnabled = self.axisEnabled.getValue();
+		Editor.axisHelper.visible = Settings.editor.axisEnabled;
 	});
-	this.form.add(this.axis_enabled);
+	this.form.add(this.axisEnabled);
 	this.form.nextRow();
 
 	//Mouse lock on camera move
 	this.form.addText("Lock mouse editor");
-	this.lock_mouse = new CheckBox(this.form.element);
-	this.lock_mouse.size.set(20, 16);
-	this.lock_mouse.setOnChange(function()
+	this.lockMouse = new CheckBox(this.form.element);
+	this.lockMouse.size.set(20, 16);
+	this.lockMouse.setOnChange(function()
 	{
-		Settings.editor.lock_mouse = self.lock_mouse.getValue();
+		Settings.editor.lockMouse = self.lockMouse.getValue();
 	});
-	this.form.add(this.lock_mouse);
+	this.form.add(this.lockMouse);
 	this.form.nextRow();
 
 	//Tranformations space
 	this.form.addText("Transformations space");
-	this.transformation_space = new DropdownList(this.form.element);
-	this.transformation_space.size.set(150, 20);
-	this.transformation_space.addValue("Local", "local");
-	this.transformation_space.addValue("World", "world");
-	this.transformation_space.setOnChange(function()
+	this.transformationSpace = new DropdownList(this.form.element);
+	this.transformationSpace.size.set(150, 20);
+	this.transformationSpace.addValue("Local", "local");
+	this.transformationSpace.addValue("World", "world");
+	this.transformationSpace.setOnChange(function()
 	{
-		Settings.editor.transformation_space = self.transformation_space.getValue();
-		if(Editor.tool !== null && Editor.tool_mode !== Editor.MODE_SCALE)
+		Settings.editor.transformationSpace = self.transformationSpace.getValue();
+		if(Editor.tool !== null && Editor.toolMode !== Editor.MODE_SCALE)
 		{
-			Editor.tool.setSpace(Settings.editor.transformation_space);
+			Editor.tool.setSpace(Settings.editor.transformationSpace);
 		}
 	});
-	this.form.add(this.transformation_space);
+	this.form.add(this.transformationSpace);
 	this.form.nextRow();
 
 	//Enable camera preview
 	this.form.addText("Camera preview");
-	this.camera_preview_enabled = new CheckBox(this.form.element);
-	this.camera_preview_enabled.size.set(20, 16);
-	this.camera_preview_enabled.setOnChange(function()
+	this.cameraPreviewEnabled = new CheckBox(this.form.element);
+	this.cameraPreviewEnabled.size.set(20, 16);
+	this.cameraPreviewEnabled.setOnChange(function()
 	{
-		Settings.editor.camera_preview_enabled = self.camera_preview_enabled.getValue();
+		Settings.editor.cameraPreviewEnabled = self.cameraPreviewEnabled.getValue();
 	});
-	this.form.add(this.camera_preview_enabled);
+	this.form.add(this.cameraPreviewEnabled);
 	this.form.nextRow();
 
 	//Enable camera preview
 	this.form.addText("Preview size");
-	this.camera_preview_percentage = new Slider(this.form.element);
-	this.camera_preview_percentage.size.set(120, 18);
-	this.camera_preview_percentage.setRange(0.05, 0.7);
-	this.camera_preview_percentage.setStep(0.05);
-	this.camera_preview_percentage.setOnChange(function()
+	this.cameraPreviewPercentage = new Slider(this.form.element);
+	this.cameraPreviewPercentage.size.set(120, 18);
+	this.cameraPreviewPercentage.setRange(0.05, 0.7);
+	this.cameraPreviewPercentage.setStep(0.05);
+	this.cameraPreviewPercentage.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			Settings.editor.camera_preview_percentage = self.camera_preview_percentage.getValue();
+			Settings.editor.cameraPreviewPercentage = self.cameraPreviewPercentage.getValue();
 		}
 	});
-	this.form.add(this.camera_preview_percentage);
+	this.form.add(this.cameraPreviewPercentage);
 	this.form.nextRow();
 
 	//Blank Space
@@ -194,18 +194,18 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	//Code font size
 	this.form.addText("Preview size");
-	this.file_preview_size = new NumberBox(this.form.element);
-	this.file_preview_size.size.set(60, 18);
-	this.file_preview_size.setRange(60, 500);
-	this.file_preview_size.setStep(1);
-	this.file_preview_size.setOnChange(function()
+	this.filePreviewSize = new NumberBox(this.form.element);
+	this.filePreviewSize.size.set(60, 18);
+	this.filePreviewSize.setRange(60, 500);
+	this.filePreviewSize.setStep(1);
+	this.filePreviewSize.setOnChange(function()
 	{
-		var value = self.file_preview_size.getValue();
-		Settings.general.file_preview_size = value;
-		Interface.asset_explorer.files_size.set(value, value);
+		var value = self.filePreviewSize.getValue();
+		Settings.general.filePreviewSize = value;
+		Interface.assetExplorer.filesSize.set(value, value);
 		Editor.updateAssetExplorer();
 	});
-	this.form.add(this.file_preview_size);
+	this.form.add(this.filePreviewSize);
 	this.form.nextRow();
 
 	//Blank Space
@@ -218,13 +218,13 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	//Use project settings
 	this.form.addText("Follow project");
-	this.follow_project = new CheckBox(this.form.element);
-	this.follow_project.size.set(20, 16);
-	this.follow_project.setOnChange(function()
+	this.followProject = new CheckBox(this.form.element);
+	this.followProject.size.set(20, 16);
+	this.followProject.setOnChange(function()
 	{
-		Settings.render.follow_project = self.follow_project.getValue();
+		Settings.render.followProject = self.followProject.getValue();
 	});
-	this.form.add(this.follow_project);
+	this.form.add(this.followProject);
 	this.form.nextRow();
 
 	//Antialiasing
@@ -251,17 +251,17 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	//Shadows settings
 	this.form.addText("Shadows type");
-	this.shadows_type = new DropdownList(this.form.element);
-	this.shadows_type.size.set(150, 20);
-	this.shadows_type.addValue("Basic", THREE.BasicShadowMap);
-	this.shadows_type.addValue("PCF", THREE.PCFShadowMap);
-	this.shadows_type.addValue("PCF Soft", THREE.PCFSoftShadowMap);
-	//this.shadows_type.addValue("PCSS Soft", THREE.PCSSSoftShadowMap);
-	this.shadows_type.setOnChange(function()
+	this.shadowsType = new DropdownList(this.form.element);
+	this.shadowsType.size.set(150, 20);
+	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
+	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
+	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
+	//this.shadowsType.addValue("PCSS Soft", THREE.PCSSSoftShadowMap);
+	this.shadowsType.setOnChange(function()
 	{
-		Settings.render.shadows_type = self.shadows_type.getValue();
+		Settings.render.shadowsType = self.shadowsType.getValue();
 	});
-	this.form.add(this.shadows_type);
+	this.form.add(this.shadowsType);
 	this.form.nextRow();
 }
 
@@ -274,25 +274,25 @@ GeneralSettingsTab.prototype.activate = function()
 
 	//General
 	this.theme.setValue(Settings.general.theme);
-	this.file_preview_size.setValue(Settings.general.file_preview_size);
-	this.show_stats.setValue(Settings.general.show_stats);
-	this.show_uuid.setValue(Settings.general.show_uuid);
+	this.filePreviewSize.setValue(Settings.general.filePreviewSize);
+	this.showStats.setValue(Settings.general.showStats);
+	this.showUuid.setValue(Settings.general.showUuid);
 
 	//Editor
-	this.grid_enabled.setValue(Settings.editor.grid_enabled);
-	this.grid_size.setValue(Settings.editor.grid_size);
-	this.grid_spacing.setValue(Settings.editor.grid_spacing);
-	this.axis_enabled.setValue(Settings.editor.axis_enabled);
-	this.lock_mouse.setValue(Settings.editor.lock_mouse);
-	this.transformation_space.setValue(Settings.editor.transformation_space);
-	this.camera_preview_enabled.setValue(Settings.editor.camera_preview_enabled);
-	this.camera_preview_percentage.setValue(Settings.editor.camera_preview_percentage);
+	this.gridEnabled.setValue(Settings.editor.gridEnabled);
+	this.gridSize.setValue(Settings.editor.gridSize);
+	this.gridSpacing.setValue(Settings.editor.gridSpacing);
+	this.axisEnabled.setValue(Settings.editor.axisEnabled);
+	this.lockMouse.setValue(Settings.editor.lockMouse);
+	this.transformationSpace.setValue(Settings.editor.transformationSpace);
+	this.cameraPreviewEnabled.setValue(Settings.editor.cameraPreviewEnabled);
+	this.cameraPreviewPercentage.setValue(Settings.editor.cameraPreviewPercentage);
 
 	//Render
-	this.follow_project.setValue(Settings.render.follow_project);
+	this.followProject.setValue(Settings.render.followProject);
 	this.antialiasing.setValue(Settings.render.antialiasing);
 	this.shadows.setValue(Settings.render.shadows);
-	this.shadows_type.setValue(Settings.render.shadows_type);
+	this.shadowsType.setValue(Settings.render.shadowsType);
 }
 
 //Update division Size
