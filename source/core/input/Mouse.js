@@ -19,7 +19,7 @@ Mouse.initialize = function()
 	Mouse.position = new THREE.Vector2(0,0);
 	Mouse.delta = new THREE.Vector2(0,0);
 	Mouse.wheel = 0;
-	Mouse._doubleClicked = false;
+	Mouse.doubleClicked = false;
 
 	//Calculate coordinates relative to canvas
 	Mouse.canvas = null;
@@ -225,7 +225,7 @@ Mouse.buttonPressed = function(button)
 //Check if Mouse button was double clicked
 Mouse.buttonDoubleClicked = function()
 {
-	return Mouse._doubleClicked;
+	return Mouse.doubleClicked;
 }
 
 //Check if a mouse button was just pressed
@@ -289,12 +289,12 @@ Mouse.update = function()
 	//Update mouse double click
 	if(Mouse._doubleClicked)
 	{
-		Mouse._doubleClicked = true;
+		Mouse.doubleClicked = true;
 		Mouse._doubleClicked = false;
 	}
 	else
 	{
-		Mouse._doubleClicked = false;
+		Mouse.doubleClicked = false;
 	}
 
 	//Update mouse position if needed
