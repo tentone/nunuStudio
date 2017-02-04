@@ -32,7 +32,13 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 		}
 		else
 		{
-			FileSystem.fs.readFile(fname, "utf8", onLoad);
+			FileSystem.fs.readFile(fname, "utf8", function(err, data)
+			{
+				if(onLoad !== undefined)
+				{
+					onLoad(data);
+				}
+			});
 		}
 	}
 	else

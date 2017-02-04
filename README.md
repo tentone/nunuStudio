@@ -21,8 +21,8 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - WebVR 1.1 compatible
 
 ### Screenshots
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/editor_b.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/editor_c.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/editor_d.png)
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/editor_a.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/editor_e.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/2.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/3.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/4.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/1.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/5.png)
 
 ### Examples
 [![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/pong.png)](http://tentone.github.io/nunuStudio/examples/pong)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/fps.png)](http://tentone.github.io/nunuStudio/examples/fps)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/spine.png)](http://tentone.github.io/nunuStudio/examples/spine)
