@@ -2,10 +2,11 @@
 	"general": {
 		"theme": "dark",
 		"filePreviewSize": 70,
-		"showStats": true,
+		"showStats": false,
 		"showUuid": false
 	},
 	"editor": {
+		"angleFormat": 0,
 		"gridSize": 500,
 		"gridSpacing": 5,
 		"gridEnabled": true,
