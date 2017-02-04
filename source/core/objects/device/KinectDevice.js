@@ -13,13 +13,13 @@ function KinectDevice()
 	this.connected = false;
 
 	//Configuration
-	this.debug_model = true;
-	this.data_timeout = 0;
+	this.debugModel = true;
+	this.dataTimeout = 0;
 
 	//Received Data
 	this.camera = null;
 	this.data = null;
-	this.data_received = false;
+	this.dataReceived = false;
 
 	//Self pointer
 	var self = this;
@@ -43,8 +43,8 @@ function KinectDevice()
 		if(typeof event.data === "string")
 		{
 			self.data = JSON.parse(event.data);
-			self.data_received = true;
-			self.data_timeout = KinectDevice.DATA_TIMEOUT;
+			self.dataReceived = true;
+			self.dataTimeout = KinectDevice.DATA_TIMEOUT;
 		}
 		//Camera feed can be collected using URL.createObjectURL(event.data)
 		else if(event.data instanceof Blob)
@@ -75,10 +75,10 @@ KinectDevice.prototype.update = function()
 	//Check if there is data to process
 	if(this.data !== null)
 	{
-		if(this.data_received)
+		if(this.dataReceived)
 		{
 			//Clear data received flag
-			this.data_received = false;
+			this.dataReceived = false;
 
 			//Remove all children
 			while(this.children.length > 0)
@@ -87,7 +87,7 @@ KinectDevice.prototype.update = function()
 			}
 
 			//Show debug model
-			if(this.debug_model)
+			if(this.debugModel)
 			{
 				var geometry = new THREE.SphereGeometry(0.04, 6, 6);
 				var material = new THREE.MeshPhongMaterial(0xff0000);
@@ -106,12 +106,12 @@ KinectDevice.prototype.update = function()
 				}
 			}
 		}
-		else if(this.data_timeout > 0)
+		else if(this.dataTimeout > 0)
 		{
-			this.data_timeout--;
+			this.dataTimeout--;
 
 			//If timeout Remove all children
-			if(this.data_timeout === 0)
+			if(this.dataTimeout === 0)
 			{
 				while(this.children.length > 0)
 				{
@@ -152,7 +152,7 @@ KinectDevice.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
-	data.object.debug_model = this.debug_model;
+	data.object.debugModel = this.debugModel;
 
 	return data;
 }

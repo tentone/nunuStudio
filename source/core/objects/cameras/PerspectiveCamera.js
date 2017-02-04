@@ -9,8 +9,8 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 	this.offset = new THREE.Vector2(0.0, 0.0);
 	this.viewport = new THREE.Vector2(1.0, 1.0);
-	this.clear_color = false;
-	this.clear_depth = false;
+	this.clearColor = false;
+	this.clearDepth = false;
 	this.order = 0;
 }
 
@@ -80,8 +80,8 @@ PerspectiveCamera.prototype.toJSON = function(meta)
 {
 	var data = THREE.PerspectiveCamera.prototype.toJSON.call(this, meta);
 
-	data.object.clear_color = this.clear_color;
-	data.object.clear_depth = this.clear_depth;
+	data.object.clearColor = this.clearColor;
+	data.object.clearDepth = this.clearDepth;
 	data.object.viewport = this.viewport.toArray();
 	data.object.offset = this.offset.toArray();
 	data.object.order = this.order;

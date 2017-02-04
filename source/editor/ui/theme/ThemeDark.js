@@ -12,20 +12,20 @@ function ThemeDark()
 	this.font = "Arial";
 
 	//Color
-	this.bar_color = "#222222";
-	this.panel_color = "#333333";
-	this.resize_tab_color = "#222222";
-	this.button_color = "#222222";
-	this.button_over_color = "#555555";
-	this.button_light_color = "#333333";
-	this.box_color = "#444444";
-	this.text_color = "#FFFFFF";
-	this.icon_color = "#FFFFFF";
+	this.barColor = "#222222";
+	this.panelColor = "#333333";
+	this.resizeTabColor = "#222222";
+	this.buttonColor = "#222222";
+	this.buttonOverColor = "#555555";
+	this.buttonLightColor = "#333333";
+	this.boxColor = "#444444";
+	this.textColor = "#FFFFFF";
+	this.iconColor = "#FFFFFF";
 
 	//Body
 	document.body.style.fontFamily = this.font;
 	document.body.style.fontSize = "12px";
-	document.body.style.color = this.text_color;
+	document.body.style.color = this.textColor;
 }
 
 Theme.register(ThemeDark, "dark");

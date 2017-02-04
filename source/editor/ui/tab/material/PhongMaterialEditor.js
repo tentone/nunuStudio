@@ -113,7 +113,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 		{
 			self.material.shininess = self.shininess.getValue();
 			self.material.needsUpdate = true;
-			self.shininess_text.setText(self.material.shininess);
+			self.shininessText.setText(self.material.shininess);
 		}
 	});
 	this.form.add(this.shininess);
@@ -158,7 +158,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 		{
 			self.material.bumpScale = self.bumpScale.getValue();
 			self.material.needsUpdate = true;
-			self.bumpScale_text.setText(self.material.bumpScale);
+			self.bumpScaleText.setText(self.material.bumpScale);
 		}
 	});
 	this.form.add(this.bumpScale);
@@ -397,9 +397,9 @@ function PhongMaterialEditor(parent, closeable, container, index)
 
 PhongMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-PhongMaterialEditor.prototype.attach = function(material, material_file)
+PhongMaterialEditor.prototype.attach = function(material, materialFile)
 {
-	MaterialEditor.prototype.attach.call(this, material, material_file);
+	MaterialEditor.prototype.attach.call(this, material, materialFile);
 
 	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);

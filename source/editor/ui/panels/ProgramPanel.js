@@ -42,17 +42,17 @@ function ProgramPanel(parent, obj)
 	this.form.nextRow();
 
 	//Mouse lock
-	this.lock_pointer = new CheckBox(this.form.element);
+	this.lockPointer = new CheckBox(this.form.element);
 	this.form.addText("Lock pointer");
-	this.lock_pointer.size.set(20, 15);
-	this.lock_pointer.setOnChange(function()
+	this.lockPointer.size.set(20, 15);
+	this.lockPointer.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.lock_pointer = self.lock_pointer.getValue();
+			self.obj.lockPointer = self.lockPointer.getValue();
 		}
 	});
-	this.form.add(this.lock_pointer);
+	this.form.add(this.lockPointer);
 	this.form.nextRow();
 	
 	//VR
@@ -75,18 +75,18 @@ function ProgramPanel(parent, obj)
 
 	//VR Movement Scale
 	this.form.addText("Room Scale");
-	this.vr_scale = new NumberBox(this.form.element);
-	this.vr_scale.size.set(50, 18);
-	this.vr_scale.setRange(0, 1000);
-	this.vr_scale.setStep(0.05);
-	this.vr_scale.setOnChange(function()
+	this.vrScale = new NumberBox(this.form.element);
+	this.vrScale.size.set(50, 18);
+	this.vrScale.setRange(0, 1000);
+	this.vrScale.setStep(0.05);
+	this.vrScale.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.vr_scale = self.vr_scale.getValue();
+			self.obj.vrScale = self.vrScale.getValue();
 		}
 	});
-	this.form.add(this.vr_scale);
+	this.form.add(this.vrScale);
 	this.form.nextRow();
 
 	//Rendering
@@ -123,16 +123,16 @@ function ProgramPanel(parent, obj)
 
 	//Shadow type
 	this.form.addText("Shadows type");
-	this.shadows_type = new DropdownList(this.form.element);
-	this.shadows_type.size.set(120, 20);
-	this.shadows_type.addValue("Basic", THREE.BasicShadowMap);
-	this.shadows_type.addValue("PCF", THREE.PCFShadowMap);
-	this.shadows_type.addValue("PCF Soft", THREE.PCFSoftShadowMap);
-	this.shadows_type.setOnChange(function()
+	this.shadowsType = new DropdownList(this.form.element);
+	this.shadowsType.size.set(120, 20);
+	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
+	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
+	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
+	this.shadowsType.setOnChange(function()
 	{
-		self.obj.shadows_type = self.shadows_type.getValue();
+		self.obj.shadowsType = self.shadowsType.getValue();
 	});
-	this.form.add(this.shadows_type);
+	this.form.add(this.shadowsType);
 	this.form.nextRow();
 
 	//Update form
@@ -151,12 +151,12 @@ ProgramPanel.prototype.updatePanel = function()
 	{
 		this.author.setText(this.obj.author);
 		this.version.setText(this.obj.version);
-		this.lock_pointer.setValue(this.obj.lock_pointer);
+		this.lockPointer.setValue(this.obj.lockPointer);
 		this.vr.setValue(this.obj.vr);
-		this.vr_scale.setValue(this.obj.vr_scale);
+		this.vrScale.setValue(this.obj.vrScale);
 
 		this.shadows.setValue(this.obj.shadows);
-		this.shadows_type.setValue(this.obj.shadows_type);
+		this.shadowsType.setValue(this.obj.shadowsType);
 		this.antialiasing.setValue(this.obj.antialiasing);
 	}
 }

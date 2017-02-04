@@ -153,30 +153,30 @@ function OrthographicCameraPanel(parent, obj)
 
 	//Clear color
 	this.form.addText("Clear color");
-	this.clear_color = new CheckBox(this.form.element);
-	this.clear_color.size.set(20, 15);
-	this.clear_color.setOnChange(function()
+	this.clearColor = new CheckBox(this.form.element);
+	this.clearColor.size.set(20, 15);
+	this.clearColor.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.clear_color = self.clear_color.getValue();
+			self.obj.clearColor = self.clearColor.getValue();
 		}
 	});
-	this.form.add(this.clear_color);
+	this.form.add(this.clearColor);
 	this.form.nextRow();
 
 	//Clear depth
-	this.clear_depth = new CheckBox(this.form.element);
+	this.clearDepth = new CheckBox(this.form.element);
 	this.form.addText("Clear depth");
-	this.clear_depth.size.set(20, 15);
-	this.clear_depth.setOnChange(function()
+	this.clearDepth.size.set(20, 15);
+	this.clearDepth.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.clear_depth = self.clear_depth.getValue();
+			self.obj.clearDepth = self.clearDepth.getValue();
 		}
 	});
-	this.form.add(this.clear_depth);
+	this.form.add(this.clearDepth);
 	this.form.nextRow();
 
 	//Update form
@@ -208,7 +208,7 @@ OrthographicCameraPanel.prototype.updatePanel = function()
 		this.offset.setValue(this.obj.offset);
 		this.viewport.setValue(this.obj.viewport);
 		this.order.setValue(this.obj.order);
-		this.clear_color.setValue(this.obj.clear_color);
-		this.clear_depth.setValue(this.obj.clear_depth);
+		this.clearColor.setValue(this.obj.clearColor);
+		this.clearDepth.setValue(this.obj.clearDepth);
 	}
 }

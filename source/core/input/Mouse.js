@@ -8,18 +8,18 @@ Mouse.initialize = function()
 	//Mouse raw data
 	Mouse._keys = [];
 	Mouse._position = new THREE.Vector2(0,0);
-	Mouse._position_updated = false;
+	Mouse._positionUpdated = false;
 	Mouse._delta = new THREE.Vector2(0,0);
 	Mouse._wheel = 0;
-	Mouse._wheel_updated = false;
-	Mouse._double_clicked = false;
+	Mouse._wheelUpdated = false;
+	Mouse._doubleClicked = false;
 
 	//Mouse position, delta, and scroll speed
 	Mouse.keys = [];
 	Mouse.position = new THREE.Vector2(0,0);
 	Mouse.delta = new THREE.Vector2(0,0);
 	Mouse.wheel = 0;
-	Mouse.double_clicked = false;
+	Mouse._doubleClicked = false;
 
 	//Calculate coordinates relative to canvas
 	Mouse.canvas = null;
@@ -41,7 +41,7 @@ Mouse.initialize = function()
 		Mouse.events.push([window, "mousewheel", function(event)
 		{
 			Mouse._wheel = event.deltaY;
-			Mouse._wheel_updated = true;
+			Mouse._wheelUpdated = true;
 		}]);
 	}
 	else if(window.addEventListener !== undefined)
@@ -50,7 +50,7 @@ Mouse.initialize = function()
 		Mouse.events.push([window, "DOMMouseScroll", function(event)
 		{
 			Mouse._wheel = event.detail * 30;
-			Mouse._wheel_updated = true;
+			Mouse._wheelUpdated = true;
 		}]);
 	}
 	else
@@ -58,7 +58,7 @@ Mouse.initialize = function()
 		Mouse.events.push([window, "wheel", function(event)
 		{
 			Mouse._wheel = event.deltaY;
-			Mouse._wheel_updated = true;
+			Mouse._wheelUpdated = true;
 		}]);
 	}
 
@@ -66,13 +66,13 @@ Mouse.initialize = function()
 	if("ontouchstart" in window || navigator.msMaxTouchPoints > 0)
 	{
 		//Auxiliar variables to calculate touch delta
-		var last_touch = new THREE.Vector2(0, 0);
+		var lastTouch = new THREE.Vector2(0, 0);
 
 		//Touch screen pressed event
 		Mouse.events.push([window, "touchstart", function(event)
 		{
 			var touch = event.touches[0];
-			last_touch.set(touch.clientX, touch.clientY);
+			lastTouch.set(touch.clientX, touch.clientY);
 			Mouse.updateKey(Mouse.LEFT, Key.DOWN);
 		}]);
 
@@ -90,14 +90,14 @@ Mouse.initialize = function()
 			if(Mouse.canvas !== null)
 			{
 				var rect = Mouse.canvas.getBoundingClientRect();
-				Mouse.updatePosition(touch.clientX - rect.left, touch.clientY - rect.top, touch.clientX - last_touch.x, touch.clientY - last_touch.y);
+				Mouse.updatePosition(touch.clientX - rect.left, touch.clientY - rect.top, touch.clientX - lastTouch.x, touch.clientY - lastTouch.y);
 			}
 			else
 			{
-				Mouse.updatePosition(touch.clientX, touch.clientY, touch.clientX - last_touch.x, touch.clientY - last_touch.y);
+				Mouse.updatePosition(touch.clientX, touch.clientY, touch.clientX - lastTouch.x, touch.clientY - lastTouch.y);
 			}
 
-			last_touch.set(touch.clientX, touch.clientY);
+			lastTouch.set(touch.clientX, touch.clientY);
 		}]);
 	}
 	//Input
@@ -133,7 +133,7 @@ Mouse.initialize = function()
 	//Mouse double click
 	Mouse.events.push([window, "dblclick", function(event)
 	{
-		Mouse._double_clicked = true;
+		Mouse._doubleClicked = true;
 	}]);
 
 	//Initialize events
@@ -225,28 +225,28 @@ Mouse.buttonPressed = function(button)
 //Check if Mouse button was double clicked
 Mouse.buttonDoubleClicked = function()
 {
-	return Mouse.double_clicked;
+	return Mouse._doubleClicked;
 }
 
 //Check if a mouse button was just pressed
 Mouse.buttonJustPressed = function(button)
 {
-	return Mouse.keys[button].just_pressed;
+	return Mouse.keys[button].justPressed;
 }
 
 //Check if a mouse button was just released
 Mouse.buttonJustReleased = function(button)
 {
-	return Mouse.keys[button].just_released;
+	return Mouse.keys[button].justReleased;
 }
 
 //Update Mouse Position
-Mouse.updatePosition = function(x, y, x_diff, y_diff)
+Mouse.updatePosition = function(x, y, xDiff, yDiff)
 {
 	Mouse._position.set(x, y);
-	Mouse._delta.x += x_diff;
-	Mouse._delta.y += y_diff;
-	Mouse._position_updated = true;
+	Mouse._delta.x += xDiff;
+	Mouse._delta.y += yDiff;
+	Mouse._positionUpdated = true;
 }
 
 //Update Mouse Key
@@ -264,22 +264,22 @@ Mouse.update = function()
 	//Update mouse keys state
 	for(var i = 0; i < Mouse._keys.length; i++)
 	{
-		if(Mouse._keys[i].just_pressed && Mouse.keys[i].just_pressed)
+		if(Mouse._keys[i].justPressed && Mouse.keys[i].justPressed)
 		{
-			Mouse._keys[i].just_pressed = false;
+			Mouse._keys[i].justPressed = false;
 		}
-		if(Mouse._keys[i].just_released && Mouse.keys[i].just_released)
+		if(Mouse._keys[i].justReleased && Mouse.keys[i].justReleased)
 		{
-			Mouse._keys[i].just_released = false;
+			Mouse._keys[i].justReleased = false;
 		}
-		Mouse.keys[i].set(Mouse._keys[i].just_pressed, Mouse._keys[i].pressed, Mouse._keys[i].just_released);
+		Mouse.keys[i].set(Mouse._keys[i].justPressed, Mouse._keys[i].pressed, Mouse._keys[i].justReleased);
 	}
 
 	//Update mouse wheel
-	if(Mouse._wheel_updated)
+	if(Mouse._wheelUpdated)
 	{
 		Mouse.wheel = Mouse._wheel;
-		Mouse._wheel_updated = false;
+		Mouse._wheelUpdated = false;
 	}
 	else
 	{
@@ -287,18 +287,18 @@ Mouse.update = function()
 	}
 
 	//Update mouse double click
-	if(Mouse._double_clicked)
+	if(Mouse._doubleClicked)
 	{
-		Mouse.double_clicked = true;
-		Mouse._double_clicked = false;
+		Mouse._doubleClicked = true;
+		Mouse._doubleClicked = false;
 	}
 	else
 	{
-		Mouse.double_clicked = false;
+		Mouse._doubleClicked = false;
 	}
 
 	//Update mouse position if needed
-	if(Mouse._position_updated)
+	if(Mouse._positionUpdated)
 	{
 		Mouse.delta.x = Mouse._delta.x;
 		Mouse.delta.y = Mouse._delta.y;
@@ -307,7 +307,7 @@ Mouse.update = function()
 		Mouse.position.x = Mouse._position.x;
 		Mouse.position.y = Mouse._position.y;
 
-		Mouse._position_updated = false;
+		Mouse._positionUpdated = false;
 	}
 	else
 	{

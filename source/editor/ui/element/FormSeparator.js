@@ -11,7 +11,7 @@ function FormSeparator(parent)
 	this.element.style.pointerEvents = "none";
 	this.element.style.width = "100%";
 	this.element.style.height = "2px";
-	this.element.style.backgroundColor = Editor.theme.bar_color;
+	this.element.style.backgroundColor = Editor.theme.barColor;
 
 	//Attributes
 	this.size = new THREE.Vector2(0,0);

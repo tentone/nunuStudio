@@ -8,7 +8,7 @@
 		"frame": true,
 		"width": 1280,
 		"height": 720,
-		"min_width": 800,
-		"min_height": 600
+		"minWidth": 800,
+		"minHeight": 600
 	}
 }

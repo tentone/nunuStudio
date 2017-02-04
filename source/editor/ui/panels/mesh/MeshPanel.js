@@ -36,31 +36,31 @@ function MeshPanel(parent, obj)
 	this.form.nextRow();
 
 	//Cast shadow
-	this.cast_shadow = new CheckBox(this.form.element);
+	this.castShadow = new CheckBox(this.form.element);
 	this.form.addText("Cast Shadow");
-	this.cast_shadow.size.set(20, 15);
-	this.cast_shadow.setOnChange(function()
+	this.castShadow.size.set(20, 15);
+	this.castShadow.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.castShadow = self.cast_shadow.getValue();
+			self.obj.castShadow = self.castShadow.getValue();
 		}
 	});
-	this.form.add(this.cast_shadow);
+	this.form.add(this.castShadow);
 	this.form.nextRow();
 
 	//Receive shadow
-	this.receive_shadow = new CheckBox(this.form.element);
+	this.receiveShadow = new CheckBox(this.form.element);
 	this.form.addText("React Shadow");
-	this.receive_shadow.size.set(20, 15);
-	this.receive_shadow.setOnChange(function()
+	this.receiveShadow.size.set(20, 15);
+	this.receiveShadow.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.receiveShadow = self.receive_shadow.getValue();
+			self.obj.receiveShadow = self.receiveShadow.getValue();
 		}
 	});
-	this.form.add(this.receive_shadow);
+	this.form.add(this.receiveShadow);
 	this.form.nextRow();
 
 	//Geometry
@@ -87,7 +87,7 @@ MeshPanel.prototype.updatePanel = function()
 
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
-		this.cast_shadow.setValue(this.obj.castShadow);
-		this.receive_shadow.setValue(this.obj.receiveShadow);
+		this.castShadow.setValue(this.obj.castShadow);
+		this.receiveShadow.setValue(this.obj.receiveShadow);
 	}
 }

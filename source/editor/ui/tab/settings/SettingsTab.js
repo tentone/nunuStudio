@@ -6,8 +6,8 @@ function SettingsTab(parent, closeable, container, index)
 
 	//Options tab container
 	this.tab = new TabGroup(this.element);
-	this.tab.element.style.backgroundColor = Editor.theme.bar_color;
-	this.tab.button_size.set(200, 30);
+	this.tab.element.style.backgroundColor = Editor.theme.barColor;
+	this.tab.buttonSize.set(200, 30);
 	this.tab.mode = TabGroup.LEFT;
 	this.tab.updateInterface();
 

@@ -9,17 +9,17 @@ function CodeEditor(parent)
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
-	this.element.style.backgroundColor = Editor.theme.panel_color;
+	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Codemirror editor
 	this.code = new CodeMirror(this.element,
 	{
 		value: "",
-		lineNumbers: Settings.code.line_numbers,
-		lineWrapping: Settings.code.line_wrapping,
+		lineNumbers: Settings.code.lineNumbers,
+		lineWrapping: Settings.code.lineWrapping,
 		keyMap: Settings.code.keymap,
-		autoCloseBrackets: Settings.code.auto_close_brackets,
-		styleActiveLine: Settings.code.highlight_active_line,
+		autoCloseBrackets: Settings.code.autoCloseBrackets,
+		styleActiveLine: Settings.code.highlightActiveLine,
 		matchBrackets: true,
 		dragDrop: true,
 		indentWithTabs: true,
@@ -154,13 +154,13 @@ CodeEditor.prototype.updateInterface = function()
 	}
 
 	this.code.setOption("theme", Settings.code.theme);
-	this.code.setOption("lineNumbers", Settings.code.line_numbers);
-	this.code.setOption("lineWrapping", Settings.code.line_wrapping);
+	this.code.setOption("lineNumbers", Settings.code.lineNumbers);
+	this.code.setOption("lineWrapping", Settings.code.lineWrapping);
 	this.code.setOption("keyMap", Settings.code.keymap);
-	this.code.setOption("autoCloseBrackets", Settings.code.auto_close_brackets);
-	this.code.setOption("styleActiveLine", Settings.code.highlight_active_line);
+	this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
+	this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
 
-	this.code.display.wrapper.style.fontSize = Settings.code.font_size + "px";
+	this.code.display.wrapper.style.fontSize = Settings.code.fontSize + "px";
 	this.code.setSize(this.size.x, this.size.y);
 	this.code.refresh();
 

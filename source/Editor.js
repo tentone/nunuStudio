@@ -366,15 +366,15 @@ Editor.initialize = function()
 	}
 	
 	//Editor initial state
-	Editor.tool_mode = Editor.MODE_SELECT;
+	Editor.toolMode = Editor.MODE_SELECT;
 	Editor.state = Editor.STATE_EDITING;
 
 	//Open file
-	Editor.open_file = null;
+	Editor.openFile = null;
 
 	//Editor Selected object
-	Editor.selected_object = null;
-	Editor.is_editing_object = false;
+	Editor.selectedObject = null;
+	Editor.isEditingObject = false;
 
 	//Performance meter
 	Editor.stats = null;
@@ -384,7 +384,7 @@ Editor.initialize = function()
 
 	//Editor program and scene
 	Editor.program = null;
-	Editor.program_running = null;
+	Editor.programRunning = null;
 
 	//Renderer and canvas
 	Editor.renderer = null;
@@ -392,8 +392,8 @@ Editor.initialize = function()
 	Editor.gl = null;
 
 	//Material renderer for material previews
-	Editor.material_renderer = new MaterialRenderer();
-	Editor.font_renderer = new FontRenderer();
+	Editor.materialRenderer = new MaterialRenderer();
+	Editor.fontRenderer = new FontRenderer();
 	
 	//Default resources
 	Editor.createDefaultResouces();
@@ -402,36 +402,36 @@ Editor.initialize = function()
 	Interface.initialize();
 
 	//Debug Elements
-	Editor.tool_scene = new THREE.Scene();
-	Editor.tool_scene_top = new THREE.Scene();
+	Editor.toolScene = new THREE.Scene();
+	Editor.toolSceneTop = new THREE.Scene();
 
 	//Raycaster
 	Editor.raycaster = new THREE.Raycaster(); 
 
 	//Grid and axis helpers
-	Editor.grid_helper = new GridHelper(Settings.editor.grid_size, Settings.editor.grid_spacing, 0x888888);
-	Editor.grid_helper.visible = Settings.editor.grid_enabled;
-	Editor.tool_scene.add(Editor.grid_helper);
+	Editor.gridHelper = new GridHelper(Settings.editor.gridSize, Settings.editor.gridSpacing, 0x888888);
+	Editor.gridHelper.visible = Settings.editor.gridEnabled;
+	Editor.toolScene.add(Editor.gridHelper);
 
-	Editor.axis_helper = new THREE.AxisHelper(Settings.editor.grid_size);
-	Editor.axis_helper.material.depthWrite = false;
-	Editor.axis_helper.material.transparent = true;
-	Editor.axis_helper.material.opacity = 1;
-	Editor.axis_helper.visible = Settings.editor.axis_enabled;
-	Editor.tool_scene.add(Editor.axis_helper);
+	Editor.axisHelper = new THREE.AxisHelper(Settings.editor.gridSize);
+	Editor.axisHelper.material.depthWrite = false;
+	Editor.axisHelper.material.transparent = true;
+	Editor.axisHelper.material.opacity = 1;
+	Editor.axisHelper.visible = Settings.editor.axisEnabled;
+	Editor.toolScene.add(Editor.axisHelper);
 
 	//Object helper container
-	Editor.object_helper = new THREE.Scene();
-	Editor.tool_scene.add(Editor.object_helper);
+	Editor.objectHelper = new THREE.Scene();
+	Editor.toolScene.add(Editor.objectHelper);
 
 	//Tool container
-	Editor.tool_container = new THREE.Scene();
-	Editor.tool_scene_top.add(Editor.tool_container);
+	Editor.toolContainer = new THREE.Scene();
+	Editor.toolSceneTop.add(Editor.toolContainer);
 	Editor.tool = null;
 
 	//Editor Camera
-	Editor.camera_mode = Editor.CAMERA_PERSPECTIVE;
-	Editor.camera_rotation = new THREE.Vector2(0, 0);
+	Editor.cameraMode = Editor.CAMERA_PERSPECTIVE;
+	Editor.cameraRotation = new THREE.Vector2(0, 0);
 	Editor.setCameraMode(Editor.CAMERA_PERSPECTIVE);
 	
 	//Check is some .isp file passed as argument
@@ -472,7 +472,7 @@ Editor.update = function()
 
 	//Update editor interface
 	Interface.update();
-	Editor.is_editing_object = false;
+	Editor.isEditingObject = false;
 
 	//If not on test mode
 	if(Editor.state !== Editor.STATE_TESTING)
@@ -482,7 +482,7 @@ Editor.update = function()
 		{
 			if(Keyboard.keyJustPressed(Keyboard.S))
 			{
-				if(Editor.open_file === null)
+				if(Editor.openFile === null)
 				{
 					Interface.saveProgram();
 				}
@@ -524,12 +524,12 @@ Editor.update = function()
 		}
 		else if(Keyboard.keyJustPressed(Keyboard.F2))
 		{
-			if(Editor.selected_object !== null)
+			if(Editor.selectedObject !== null)
 			{
-				var name = prompt("Rename object", Editor.selected_object.name);
+				var name = prompt("Rename object", Editor.selectedObject.name);
 				if(name !== null && name !== "")
 				{
-					Editor.selected_object.name = name;
+					Editor.selectedObject.name = name;
 					Editor.updateObjectViews();
 				}
 			}
@@ -563,14 +563,14 @@ Editor.update = function()
 		}
 
 		//Select objects
-		if(Editor.tool_mode === Editor.MODE_SELECT)
+		if(Editor.toolMode === Editor.MODE_SELECT)
 		{
 			if(Mouse.buttonJustPressed(Mouse.LEFT) && Mouse.insideCanvas())
 			{
 				Editor.selectObjectWithMouse();
 			}
 
-			Editor.is_editing_object = false;
+			Editor.isEditingObject = false;
 		}
 		else
 		{
@@ -581,48 +581,48 @@ Editor.update = function()
 			}
 
 			//If no object selected update tool
-			if(Editor.selected_object !== null)
+			if(Editor.selectedObject !== null)
 			{
 				if(Editor.tool !== null)
 				{
-					Editor.is_editing_object = Editor.tool.update();
+					Editor.isEditingObject = Editor.tool.update();
 					
-					if(Mouse.buttonJustPressed(Mouse.LEFT) && Editor.is_editing_object)
+					if(Mouse.buttonJustPressed(Mouse.LEFT) && Editor.isEditingObject)
 					{
-						Editor.history.push(Editor.selected_object, Action.CHANGED);
+						Editor.history.push(Editor.selectedObject, Action.CHANGED);
 					}
 
-					if(Editor.is_editing_object)
+					if(Editor.isEditingObject)
 					{
 						Editor.updateObjectPanel();
 					}
 				}
 				else
 				{
-					Editor.is_editing_object = false;
+					Editor.isEditingObject = false;
 				}
 			}
 		}
 		
 		//Update object transformation matrix
-		if(Editor.selected_object !== null)
+		if(Editor.selectedObject !== null)
 		{	
-			if(!Editor.selected_object.matrixAutoUpdate)
+			if(!Editor.selectedObject.matrixAutoUpdate)
 			{
-				Editor.selected_object.updateMatrix();
+				Editor.selectedObject.updateMatrix();
 			}
 		}
 
 		//Update object helper
-		Editor.object_helper.update();
+		Editor.objectHelper.update();
 
 		//Check if mouse is inside canvas
 		if(Mouse.insideCanvas())
 		{
 			//Lock mouse when camera is moving
-			if(Settings.editor.lock_mouse)
+			if(Settings.editor.lockMouse)
 			{
-				if(!Editor.is_editing_object && (Mouse.buttonJustPressed(Mouse.LEFT) || Mouse.buttonJustPressed(Mouse.RIGHT) || Mouse.buttonJustPressed(Mouse.MIDDLE)))
+				if(!Editor.isEditingObject && (Mouse.buttonJustPressed(Mouse.LEFT) || Mouse.buttonJustPressed(Mouse.RIGHT) || Mouse.buttonJustPressed(Mouse.MIDDLE)))
 				{
 					Mouse.setLock(true);
 				}
@@ -633,7 +633,7 @@ Editor.update = function()
 			}
 
 			//Orthographic camera (2D mode)
-			if(Editor.camera_mode === Editor.CAMERA_ORTHOGRAPHIC)
+			if(Editor.cameraMode === Editor.CAMERA_ORTHOGRAPHIC)
 			{
 				//Move camera on y / x
 				if(Mouse.buttonPressed(Mouse.RIGHT))
@@ -656,23 +656,23 @@ Editor.update = function()
 			else
 			{
 				//Look camera
-				if(Mouse.buttonPressed(Mouse.LEFT) && !Editor.is_editing_object)
+				if(Mouse.buttonPressed(Mouse.LEFT) && !Editor.isEditingObject)
 				{
-					Editor.camera_rotation.x -= 0.002 * Mouse.delta.x;
-					Editor.camera_rotation.y -= 0.002 * Mouse.delta.y;
+					Editor.cameraRotation.x -= 0.002 * Mouse.delta.x;
+					Editor.cameraRotation.y -= 0.002 * Mouse.delta.y;
 
 					//Limit Vertical Rotation to 90 degrees
 					var pid2 = 1.57;
-					if(Editor.camera_rotation.y < -pid2)
+					if(Editor.cameraRotation.y < -pid2)
 					{
-						Editor.camera_rotation.y = -pid2;
+						Editor.cameraRotation.y = -pid2;
 					}
-					else if(Editor.camera_rotation.y > pid2)
+					else if(Editor.cameraRotation.y > pid2)
 					{
-						Editor.camera_rotation.y = pid2;
+						Editor.cameraRotation.y = pid2;
 					}
 
-					Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
+					Editor.setCameraRotation(Editor.cameraRotation, Editor.camera);
 				}
 
 				//Move Camera on X and Z
@@ -686,16 +686,16 @@ Editor.update = function()
 					}
 
 					//Move Camera Front and Back
-					var angle_cos = Math.cos(Editor.camera_rotation.x);
-					var angle_sin = Math.sin(Editor.camera_rotation.x);
-					Editor.camera.position.z += Mouse.delta.y * speed * angle_cos;
-					Editor.camera.position.x += Mouse.delta.y * speed * angle_sin;
+					var angleCos = Math.cos(Editor.cameraRotation.x);
+					var angleSin = Math.sin(Editor.cameraRotation.x);
+					Editor.camera.position.z += Mouse.delta.y * speed * angleCos;
+					Editor.camera.position.x += Mouse.delta.y * speed * angleSin;
 
 					//Move Camera Lateral
-					var angle_cos = Math.cos(Editor.camera_rotation.x + MathUtils.pid2);
-					var angle_sin = Math.sin(Editor.camera_rotation.x + MathUtils.pid2);
-					Editor.camera.position.z += Mouse.delta.x * speed * angle_cos;
-					Editor.camera.position.x += Mouse.delta.x * speed * angle_sin;
+					var angleCos = Math.cos(Editor.cameraRotation.x + MathUtils.pid2);
+					var angleSin = Math.sin(Editor.cameraRotation.x + MathUtils.pid2);
+					Editor.camera.position.z += Mouse.delta.x * speed * angleCos;
+					Editor.camera.position.x += Mouse.delta.x * speed * angleSin;
 				}
 				
 				//Move Camera on Y
@@ -733,7 +733,7 @@ Editor.update = function()
 	//Update Scene if on test mode
 	else if(Editor.state === Editor.STATE_TESTING)
 	{
-		Editor.program_running.update();
+		Editor.programRunning.update();
 
 		if(Keyboard.keyJustPressed(Keyboard.F5))
 		{
@@ -757,15 +757,15 @@ Editor.render = function()
 		renderer.render(Editor.program.scene, Editor.camera);
 
 		//Render tools
-		renderer.render(Editor.tool_scene, Editor.camera);
+		renderer.render(Editor.toolScene, Editor.camera);
 		renderer.clearDepth();
-		renderer.render(Editor.tool_scene_top, Editor.camera);
+		renderer.render(Editor.toolSceneTop, Editor.camera);
 
 		//Render camera preview
-		if(Settings.editor.camera_preview_enabled && (Editor.selected_object instanceof THREE.Camera || Editor.program.scene.cameras.length > 0))
+		if(Settings.editor.cameraPreviewEnabled && (Editor.selectedObject instanceof THREE.Camera || Editor.program.scene.cameras.length > 0))
 		{
-			var width = Settings.editor.camera_preview_percentage * Editor.canvas.width;
-			var height = Settings.editor.camera_preview_percentage * Editor.canvas.height;
+			var width = Settings.editor.cameraPreviewPercentage * Editor.canvas.width;
+			var height = Settings.editor.cameraPreviewPercentage * Editor.canvas.height;
 			var offset = Editor.canvas.width - width - 10;
 
 			renderer.setScissorTest(true);
@@ -774,9 +774,9 @@ Editor.render = function()
 			renderer.clear();
 
 			//Preview selected camera
-			if(Editor.selected_object instanceof THREE.Camera)
+			if(Editor.selectedObject instanceof THREE.Camera)
 			{
-				var camera = Editor.selected_object;
+				var camera = Editor.selectedObject;
 				camera.aspect = width / height;
 				camera.updateProjectionMatrix();
 
@@ -795,11 +795,11 @@ Editor.render = function()
 					camera.aspect = width / height;
 					camera.updateProjectionMatrix();
 					
-					if(camera.clear_color)
+					if(camera.clearColor)
 					{
 						renderer.clearColor();
 					}
-					if(camera.clear_depth)
+					if(camera.clearDepth)
 					{
 						renderer.clearDepth();
 					}
@@ -815,7 +815,7 @@ Editor.render = function()
 	}
 	else if(Editor.state === Editor.STATE_TESTING)
 	{
-		Editor.program_running.render(renderer, Editor.canvas.width, Editor.canvas.height);
+		Editor.programRunning.render(renderer, Editor.canvas.width, Editor.canvas.height);
 	}
 
 	//End performance measure
@@ -839,7 +839,7 @@ Editor.selectObject = function(object)
 {
 	if(object instanceof THREE.Object3D)
 	{
-		Editor.selected_object = object;
+		Editor.selectedObject = object;
 
 		Editor.selectObjectPanel();
 		Editor.selectObjectHelper();
@@ -851,12 +851,12 @@ Editor.selectObject = function(object)
 		}
 		else
 		{
-			Editor.selectTool(Editor.tool_mode);
+			Editor.selectTool(Editor.toolMode);
 		}
 	}
 	else
 	{
-		Editor.selected_object = null;
+		Editor.selectedObject = null;
 		Editor.resetEditingFlags();
 	}
 }
@@ -864,9 +864,9 @@ Editor.selectObject = function(object)
 //Check if object is selected
 Editor.isObjectSelected = function(obj)
 {
-	if(Editor.selected_object !== null)
+	if(Editor.selectedObject !== null)
 	{
-		return Editor.selected_object.uuid === obj.uuid;
+		return Editor.selectedObject.uuid === obj.uuid;
 	}
 	return false;
 }
@@ -889,7 +889,7 @@ Editor.deleteObject = function(obj)
 {
 	if(obj === undefined)
 	{
-		obj = Editor.selected_object;
+		obj = Editor.selectedObject;
 	}
 	
 	if(obj instanceof THREE.Object3D)
@@ -918,11 +918,11 @@ Editor.copyObject = function(obj)
 		}
 	}
 	//If no object passed copy selected object
-	else if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
+	else if(Editor.selectedObject !== null && !(Editor.selectedObject instanceof Program || Editor.selectedObject instanceof Scene))
 	{
 		if(Editor.clipboard !== undefined)
 		{
-			Editor.clipboard.set(JSON.stringify(Editor.selected_object.toJSON()), "text");
+			Editor.clipboard.set(JSON.stringify(Editor.selectedObject.toJSON()), "text");
 		}
 	}
 }
@@ -932,9 +932,9 @@ Editor.cutObject = function(obj)
 {
 	if(obj === undefined)
 	{
-		if(Editor.selected_object !== null && !(Editor.selected_object instanceof Program || Editor.selected_object instanceof Scene))
+		if(Editor.selectedObject !== null && !(Editor.selectedObject instanceof Program || Editor.selectedObject instanceof Scene))
 		{
-			obj = Editor.selected_object;
+			obj = Editor.selectedObject;
 		}
 		else
 		{
@@ -1005,7 +1005,7 @@ Editor.undo = function()
 	
 		if(action.type === Action.CHANGED)
 		{
-			if(action.object.uuid === Editor.selected_object.uuid)
+			if(action.object.uuid === Editor.selectedObject.uuid)
 			{
 				Editor.selectObject(action.object);
 			}
@@ -1019,7 +1019,7 @@ Editor.undo = function()
 
 //TODO <REMOVE TEST CODE>
 var update = 0;
-var tree_delta, asset_delta, tabs_delta, panel_delta;
+var treeDelta, assetDelta, tabsDelta, panelDelta;
 
 //Update all object views
 Editor.updateObjectViews = function()
@@ -1035,10 +1035,10 @@ Editor.updateObjectViews = function()
 	//TODO <REMOVE TEST CODE>
 	var delta = Date.now() - start;
 	//console.log("Update " + (update++) + " ObjectView: " + delta + "ms");
-	//console.log("    Treeview " + tree_delta + "ms");
-	//console.log("    Panel " + panel_delta + "ms");
-	//console.log("    Tabs " + tabs_delta + "ms");
-	//console.log("    Assets " + asset_delta + "ms\n\n");
+	//console.log("    Treeview " + treeDelta + "ms");
+	//console.log("    Panel " + panelDelta + "ms");
+	//console.log("    Tabs " + tabsDelta + "ms");
+	//console.log("    Assets " + assetDelta + "ms\n\n");
 }
 
 //Update tab names to match objects actual info
@@ -1050,7 +1050,7 @@ Editor.updateTabsData = function()
 	Interface.tab.updateMetadata();
 
 	//TODO <REMOVE TEST CODE>
-	tabs_delta = Date.now() - start;
+	tabsDelta = Date.now() - start;
 }
 
 //Update tree view to match actual scene
@@ -1059,11 +1059,11 @@ Editor.updateTreeView = function()
 	//TODO <REMOVE TEST CODE>
 	var start = Date.now();
 
-	Interface.tree_view.attachObject(Editor.program);
-	Interface.tree_view.updateView();
+	Interface.treeView.attachObject(Editor.program);
+	Interface.treeView.updateView();
 	
 	//TODO <REMOVE TEST CODE>
-	tree_delta = Date.now() - start;
+	treeDelta = Date.now() - start;
 }
 
 //Update assets explorer content
@@ -1073,48 +1073,48 @@ Editor.updateAssetExplorer = function()
 	var start = Date.now();
 
 	//Clean asset explorer
-	Interface.asset_explorer.clear();
+	Interface.assetExplorer.clear();
 	
 	//Materials
 	var materials = ObjectUtils.getMaterials(Editor.program, Editor.program.materials);
 	for(var i in materials)
 	{
-		var file = new MaterialAsset(Interface.asset_explorer.element);
+		var file = new MaterialAsset(Interface.assetExplorer.element);
 		file.setMaterial(materials[i]);
-		Interface.asset_explorer.add(file);
+		Interface.assetExplorer.add(file);
 	}
 
 	//Textures
 	var textures = ObjectUtils.getTextures(Editor.program, Editor.program.textures);
 	for(var i in textures)
 	{
-		var file = new TextureAsset(Interface.asset_explorer.element);
+		var file = new TextureAsset(Interface.assetExplorer.element);
 		file.setTexture(textures[i]);
-		Interface.asset_explorer.add(file);
+		Interface.assetExplorer.add(file);
 	}
 
 	//Fonts
 	var fonts = ObjectUtils.getFonts(Editor.program, Editor.program.fonts);
 	for(var i in fonts)
 	{
-		var file = new FontAsset(Interface.asset_explorer.element);
+		var file = new FontAsset(Interface.assetExplorer.element);
 		file.setFont(fonts[i]);
-		Interface.asset_explorer.add(file);
+		Interface.assetExplorer.add(file);
 	}
 
 	//Audio
 	var audio = ObjectUtils.getAudio(Editor.program, Editor.program.audio);
 	for(var i in audio)
 	{
-		var file = new AudioAsset(Interface.asset_explorer.element);
+		var file = new AudioAsset(Interface.assetExplorer.element);
 		file.setAudio(audio[i]);
-		Interface.asset_explorer.add(file);
+		Interface.assetExplorer.add(file);
 	}
 
-	Interface.asset_explorer.updateInterface();
+	Interface.assetExplorer.updateInterface();
 
 	//TODO <REMOVE TEST CODE>
-	asset_delta = Date.now() - start;
+	assetDelta = Date.now() - start;
 }
 
 //Updates object panel values
@@ -1129,27 +1129,27 @@ Editor.updateObjectPanel = function()
 	}
 
 	//TODO <REMOVE TEST CODE>
-	panel_delta = Date.now() - start;
+	panelDelta = Date.now() - start;
 }
 
 //Create default resouces to be used when creating new objects
 Editor.createDefaultResouces = function()
 {
-	Editor.default_image = new Image("data/sample.png");
-	Editor.default_font = new Font("data/fonts/montserrat.json");
-	Editor.default_audio = new Audio("data/sample.mp3");
-	Editor.default_texture = new Texture(Editor.default_image);
-	Editor.default_material = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
-	Editor.default_material.name = "default";
-	Editor.default_sprite_material = new THREE.SpriteMaterial({map: Editor.default_texture, color: 0xffffff});
-	Editor.default_sprite_material.name = "default";
+	Editor.defaultImage = new Image("data/sample.png");
+	Editor.defaultFont = new Font("data/fonts/montserrat.json");
+	Editor.defaultAudio = new Audio("data/sample.mp3");
+	Editor.defaultTexture = new Texture(Editor.defaultImage);
+	Editor.defaultMaterial = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
+	Editor.defaultMaterial.name = "default";
+	Editor.defaultSpriteMaterial = new THREE.SpriteMaterial({map: Editor.defaultTexture, color: 0xffffff});
+	Editor.defaultSpriteMaterial.name = "default";
 }
 
 //Select tool to manipulate objects
 Editor.selectTool = function(tool)
 {
-	Editor.tool_mode = tool;
-	Editor.tool_container.removeAll();
+	Editor.toolMode = tool;
+	Editor.toolContainer.removeAll();
 	
 	if(Editor.tool !== null)
 	{
@@ -1158,13 +1158,13 @@ Editor.selectTool = function(tool)
 
 	Interface.selectTool(tool);
 
-	if(Editor.selected_object !== null && tool !== Editor.MODE_SELECT)
+	if(Editor.selectedObject !== null && tool !== Editor.MODE_SELECT)
 	{
 		if(tool === Editor.MODE_MOVE)
 		{
 			Editor.tool = new TransformControls();
 			Editor.tool.setMode("translate");
-			Editor.tool.setSpace(Settings.editor.transformation_space);
+			Editor.tool.setSpace(Settings.editor.transformationSpace);
 		}
 		else if(tool === Editor.MODE_SCALE)
 		{
@@ -1175,11 +1175,11 @@ Editor.selectTool = function(tool)
 		{
 			Editor.tool = new TransformControls();
 			Editor.tool.setMode("rotate");
-			Editor.tool.setSpace(Settings.editor.transformation_space);
+			Editor.tool.setSpace(Settings.editor.transformationSpace);
 		}
 		
-		Editor.tool.attach(Editor.selected_object);
-		Editor.tool_container.add(Editor.tool);
+		Editor.tool.attach(Editor.selectedObject);
+		Editor.toolContainer.add(Editor.tool);
 	}
 	else
 	{
@@ -1190,96 +1190,96 @@ Editor.selectTool = function(tool)
 //Update UI panel to match selected object
 Editor.selectObjectPanel = function()
 {
-	Interface.tree_view.updateSelectedObject(Editor.selected_object);
+	Interface.treeView.updateSelectedObject(Editor.selectedObject);
 
 	if(Interface.panel !== null)
 	{
 		Interface.panel.destroy();
 	}
 
-	if(Editor.selected_object !== null)
+	if(Editor.selectedObject !== null)
 	{
-		if(Editor.selected_object instanceof THREE.Mesh)
+		if(Editor.selectedObject instanceof THREE.Mesh)
 		{
-			if(Editor.selected_object instanceof Text3D)
+			if(Editor.selectedObject instanceof Text3D)
 			{
-				Interface.panel = new Text3DPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+				Interface.panel = new Text3DPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 			}
 			else
 			{
-				Interface.panel = new MeshPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+				Interface.panel = new MeshPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 			}
 		}
-		else if(Editor.selected_object instanceof THREE.Light)
+		else if(Editor.selectedObject instanceof THREE.Light)
 		{
-			if(Editor.selected_object instanceof THREE.PointLight)
+			if(Editor.selectedObject instanceof THREE.PointLight)
 			{
-				Interface.panel = new PointLightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+				Interface.panel = new PointLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 			}
-			else if(Editor.selected_object instanceof THREE.RectAreaLight)
+			else if(Editor.selectedObject instanceof THREE.RectAreaLight)
 			{
-				Interface.panel = new RectAreaLightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+				Interface.panel = new RectAreaLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 			}
-			else if(Editor.selected_object instanceof THREE.SpotLight)
+			else if(Editor.selectedObject instanceof THREE.SpotLight)
 			{
-				Interface.panel = new SpotLightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+				Interface.panel = new SpotLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 			}
-			else if(Editor.selected_object instanceof THREE.DirectionalLight)
+			else if(Editor.selectedObject instanceof THREE.DirectionalLight)
 			{
-				Interface.panel = new DirectionalLightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+				Interface.panel = new DirectionalLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 			}
-			else if(Editor.selected_object instanceof THREE.HemisphereLight)
+			else if(Editor.selectedObject instanceof THREE.HemisphereLight)
 			{
-				Interface.panel = new HemisphereLightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+				Interface.panel = new HemisphereLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 			}
 			else
 			{
-				Interface.panel = new LightPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+				Interface.panel = new LightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 			}
 		}
-		else if(Editor.selected_object instanceof Sky)
+		else if(Editor.selectedObject instanceof Sky)
 		{
-			Interface.panel = new SkyPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new SkyPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
-		else if(Editor.selected_object instanceof LeapMotion)
+		else if(Editor.selectedObject instanceof LeapMotion)
 		{
-			Interface.panel = new LeapPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new LeapPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
-		else if(Editor.selected_object instanceof KinectDevice)
+		else if(Editor.selectedObject instanceof KinectDevice)
 		{
-			Interface.panel = new KinectPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new KinectPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
-		else if(Editor.selected_object instanceof Script)
+		else if(Editor.selectedObject instanceof Script)
 		{
-			Interface.panel = new ScriptPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new ScriptPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
-		else if(Editor.selected_object instanceof PerspectiveCamera)
+		else if(Editor.selectedObject instanceof PerspectiveCamera)
 		{
-			Interface.panel = new PerspectiveCameraPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new PerspectiveCameraPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
-		else if(Editor.selected_object instanceof OrthographicCamera)
+		else if(Editor.selectedObject instanceof OrthographicCamera)
 		{
-			Interface.panel = new OrthographicCameraPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new OrthographicCameraPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
-		else if(Editor.selected_object instanceof THREE.Audio)
+		else if(Editor.selectedObject instanceof THREE.Audio)
 		{
-			Interface.panel = new AudioPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new AudioPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
-		else if(Editor.selected_object instanceof Scene)
+		else if(Editor.selectedObject instanceof Scene)
 		{
-			Interface.panel = new ScenePanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new ScenePanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
-		else if(Editor.selected_object instanceof Program)
+		else if(Editor.selectedObject instanceof Program)
 		{
-			Interface.panel = new ProgramPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new ProgramPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
-		else if(Editor.selected_object instanceof PhysicsObject)
+		else if(Editor.selectedObject instanceof PhysicsObject)
 		{
-			Interface.panel = new PhysicsPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new PhysicsPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
 		else
 		{
-			Interface.panel = new ObjectPanel(Interface.explorer_resizable.div_b, Editor.selected_object);
+			Interface.panel = new ObjectPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
 
 		Interface.panel.updatePanel();
@@ -1294,75 +1294,75 @@ Editor.selectObjectPanel = function()
 //Select helper to debug selected object data
 Editor.selectObjectHelper = function()
 {
-	Editor.object_helper.removeAll();
+	Editor.objectHelper.removeAll();
 
-	if(Editor.selected_object !== null)
+	if(Editor.selectedObject !== null)
 	{
 		//Camera
-		if(Editor.selected_object instanceof THREE.Camera)
+		if(Editor.selectedObject instanceof THREE.Camera)
 		{
-			Editor.object_helper.add(new THREE.CameraHelper(Editor.selected_object));
-			Editor.object_helper.add(new ObjectIconHelper(Editor.selected_object, Interface.file_dir + "icons/camera/camera.png"));
+			Editor.objectHelper.add(new THREE.CameraHelper(Editor.selectedObject));
+			Editor.objectHelper.add(new ObjectIconHelper(Editor.selectedObject, Interface.fileDir + "icons/camera/camera.png"));
 		}
 		//Light
-		else if(Editor.selected_object instanceof THREE.Light)
+		else if(Editor.selectedObject instanceof THREE.Light)
 		{
 			//Directional light
-			if(Editor.selected_object instanceof THREE.DirectionalLight)
+			if(Editor.selectedObject instanceof THREE.DirectionalLight)
 			{
-				Editor.object_helper.add(new THREE.DirectionalLightHelper(Editor.selected_object, 1));
+				Editor.objectHelper.add(new THREE.DirectionalLightHelper(Editor.selectedObject, 1));
 			}
 			//Point light
-			else if(Editor.selected_object instanceof THREE.PointLight)
+			else if(Editor.selectedObject instanceof THREE.PointLight)
 			{
-				Editor.object_helper.add(new THREE.PointLightHelper(Editor.selected_object, 1));
+				Editor.objectHelper.add(new THREE.PointLightHelper(Editor.selectedObject, 1));
 			}
 			//RectArea light
-			else if(Editor.selected_object instanceof THREE.RectAreaLight)
+			else if(Editor.selectedObject instanceof THREE.RectAreaLight)
 			{
-				Editor.object_helper.add(new RectAreaLightHelper(Editor.selected_object));
+				Editor.objectHelper.add(new RectAreaLightHelper(Editor.selectedObject));
 			}
 			//Spot light
-			else if(Editor.selected_object instanceof THREE.SpotLight)
+			else if(Editor.selectedObject instanceof THREE.SpotLight)
 			{
-				Editor.object_helper.add(new THREE.SpotLightHelper(Editor.selected_object));
+				Editor.objectHelper.add(new THREE.SpotLightHelper(Editor.selectedObject));
 			}
 			//Hemisphere light
-			else if(Editor.selected_object instanceof THREE.HemisphereLight)
+			else if(Editor.selectedObject instanceof THREE.HemisphereLight)
 			{
-				Editor.object_helper.add(new THREE.HemisphereLightHelper(Editor.selected_object, 1));
+				Editor.objectHelper.add(new THREE.HemisphereLightHelper(Editor.selectedObject, 1));
 			}
 		}
 		//Particle
-		else if(Editor.selected_object instanceof ParticleEmitter)
+		else if(Editor.selectedObject instanceof ParticleEmitter)
 		{
-			Editor.object_helper.add(new ParticleEmitterHelper(Editor.selected_object));
+			Editor.objectHelper.add(new ParticleEmitterHelper(Editor.selectedObject));
 		}
 		//Physics
-		else if(Editor.selected_object instanceof PhysicsObject)
+		else if(Editor.selectedObject instanceof PhysicsObject)
 		{
-			Editor.object_helper.add(new PhysicsObjectHelper(Editor.selected_object));
+			Editor.objectHelper.add(new PhysicsObjectHelper(Editor.selectedObject));
 		}
 		//Script or Audio
-		else if(Editor.selected_object instanceof Script || Editor.selected_object instanceof THREE.Audio)
+		else if(Editor.selectedObject instanceof Script || Editor.selectedObject instanceof THREE.Audio)
 		{
-			Editor.object_helper.add(new ObjectIconHelper(Editor.selected_object, ObjectIcons.get(Editor.selected_object.type)));
+			Editor.objectHelper.add(new ObjectIconHelper(Editor.selectedObject, ObjectIcons.get(Editor.selectedObject.type)));
 		}
 		//Animated Mesh
-		else if(Editor.selected_object instanceof THREE.SkinnedMesh)
+		else if(Editor.selectedObject instanceof THREE.SkinnedMesh)
 		{
-			Editor.object_helper.add(new WireframeHelper(Editor.selected_object, 0xFFFF00));
-			Editor.object_helper.add(new THREE.SkeletonHelper(Editor.selected_object));
+			Editor.objectHelper.add(new WireframeHelper(Editor.selectedObject, 0xFFFF00));
+			Editor.objectHelper.add(new THREE.SkeletonHelper(Editor.selectedObject));
 		}
 		//Mesh
-		else if(Editor.selected_object instanceof THREE.Mesh)
+		else if(Editor.selectedObject instanceof THREE.Mesh)
 		{
-			Editor.object_helper.add(new WireframeHelper(Editor.selected_object, 0xFFFF00));
+			Editor.objectHelper.add(new WireframeHelper(Editor.selectedObject, 0xFFFF00));
 		}
 		//Object 3D
-		else if(Editor.selected_object instanceof THREE.Object3D)
+		else if(Editor.selectedObject instanceof THREE.Object3D)
 		{
-			Editor.object_helper.add(new BoundingBoxHelper(Editor.selected_object, 0xFFFF00));
+			Editor.objectHelper.add(new BoundingBoxHelper(Editor.selectedObject, 0xFFFF00));
 		}
 	}
 }
@@ -1378,7 +1378,7 @@ Editor.resizeCamera = function()
 
 		if(Editor.state === Editor.STATE_TESTING)
 		{
-			Editor.program_running.resize(Editor.canvas.width, Editor.canvas.height);
+			Editor.programRunning.resize(Editor.canvas.width, Editor.canvas.height);
 		}
 	}
 }
@@ -1388,7 +1388,7 @@ Editor.setCameraMode = function(mode)
 {
 	if(mode === undefined)
 	{
-		mode = (Editor.camera_mode === Editor.CAMERA_PERSPECTIVE) ? Editor.CAMERA_ORTHOGRAPHIC : Editor.CAMERA_PERSPECTIVE;
+		mode = (Editor.cameraMode === Editor.CAMERA_PERSPECTIVE) ? Editor.CAMERA_ORTHOGRAPHIC : Editor.CAMERA_PERSPECTIVE;
 	}
 	
 	var aspect = (Editor.canvas !== null) ? Editor.canvas.width/Editor.canvas.height : 1.0;
@@ -1397,27 +1397,27 @@ Editor.setCameraMode = function(mode)
 	{
 		Editor.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL);
 		Editor.camera.position.set(0, 0, 20);
-		Editor.grid_helper.rotation.x = Math.PI / 2;
+		Editor.gridHelper.rotation.x = Math.PI / 2;
 	}
 	else if(mode === Editor.CAMERA_PERSPECTIVE)
 	{
 		Editor.camera = new PerspectiveCamera(60, aspect);
 		Editor.camera.position.set(0, 3, 5);
-		Editor.camera_rotation.set(3.14, 0);
-		Editor.grid_helper.rotation.x = 0;
-		Editor.setCameraRotation(Editor.camera_rotation, Editor.camera);
+		Editor.cameraRotation.set(3.14, 0);
+		Editor.gridHelper.rotation.x = 0;
+		Editor.setCameraRotation(Editor.cameraRotation, Editor.camera);
 	}
 
-	Editor.camera_mode = mode;
-	Editor.selectTool(Editor.tool_mode);
+	Editor.cameraMode = mode;
+	Editor.selectTool(Editor.toolMode);
 }
 
 //Set camera rotation
-Editor.setCameraRotation = function(camera_rotation, camera)
+Editor.setCameraRotation = function(cameraRotation, camera)
 {
 	//Calculate direction vector
-	var cos_angle_y = Math.cos(camera_rotation.y);
-	var direction = new THREE.Vector3(Math.sin(camera_rotation.x)*cos_angle_y, Math.sin(camera_rotation.y), Math.cos(camera_rotation.x)*cos_angle_y);
+	var cosAngleY = Math.cos(cameraRotation.y);
+	var direction = new THREE.Vector3(Math.sin(cameraRotation.x)*cosAngleY, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cosAngleY);
 
 	//Add position offset and set camera direction
 	direction.add(camera.position);
@@ -1451,8 +1451,8 @@ Editor.updateRaycaster = function(x, y)
 //Reset editing flags
 Editor.resetEditingFlags = function()
 {
-	Editor.selected_object = null;
-	Editor.is_editing_object = false;
+	Editor.selectedObject = null;
+	Editor.isEditingObject = false;
 	
 	if(Interface.panel !== null)
 	{
@@ -1471,7 +1471,7 @@ Editor.createNewProgram = function()
 
 	//Create new program
 	Editor.program = new Program();
-	Editor.program.addDefaultScene(Editor.default_material);
+	Editor.program.addDefaultScene(Editor.defaultMaterial);
 	Editor.resetEditingFlags();
 
 	//Reset open file
@@ -1488,11 +1488,11 @@ Editor.createNewProgram = function()
 }
 
 //Save program to file
-Editor.saveProgram = function(fname, compressed, keep_directory)
+Editor.saveProgram = function(fname, compressed, keepDirectory)
 {
-	if(fname === undefined && Editor.open_file !== null)
+	if(fname === undefined && Editor.openFile !== null)
 	{
-		fname = Editor.open_file;
+		fname = Editor.openFile;
 	}
 
 	//If compressed dont store all resources
@@ -1508,7 +1508,7 @@ Editor.saveProgram = function(fname, compressed, keep_directory)
 
 	FileSystem.writeFile(fname, json);
 
-	if(keep_directory !== true && Editor.open_file !== fname)
+	if(keepDirectory !== true && Editor.openFile !== fname)
 	{
 		Editor.setOpenFile(fname);
 	}
@@ -1548,7 +1548,7 @@ Editor.loadProgram = function(fname)
 //Set currently open file (also updates the editor title)
 Editor.setOpenFile = function(fname)
 {
-	Editor.open_file = (fname !== undefined) ? fname : null;
+	Editor.openFile = (fname !== undefined) ? fname : null;
 
 	if(fname === null)
 	{
@@ -1607,49 +1607,49 @@ Editor.setState = function(state)
 		var tab = Interface.tab.getActual();
 		if(tab instanceof SceneEditor)
 		{
-			tab.show_buttons_fullscreen = false;
-			tab.show_buttons_vr = false;
-			tab.show_buttons_camera_mode = true;
+			tab.showButtonsFullscreen = false;
+			tab.showButtonsVr = false;
+			tab.showButtonsCameraMode = true;
 			tab.updateInterface();
 		}
 	}
 	else if(state === Editor.STATE_TESTING)
 	{
 		//Copy program
-		Editor.program_running = Editor.program.clone();
+		Editor.programRunning = Editor.program.clone();
 
 		//Use editor camera as default camera for program
-		Editor.program_running.default_camera = Editor.camera;
-		Editor.program_running.setRenderer(Editor.renderer);
+		Editor.programRunning.defaultCamera = Editor.camera;
+		Editor.programRunning.setRenderer(Editor.renderer);
 
 		//Initialize scene
-		Editor.program_running.initialize();
-		Editor.program_running.resize(Editor.canvas.width, Editor.canvas.height);
+		Editor.programRunning.initialize();
+		Editor.programRunning.resize(Editor.canvas.width, Editor.canvas.height);
 
 		//Show full screen and VR buttons
 		var tab = Interface.tab.getActual();
-		tab.show_buttons_fullscreen = true;
-		tab.show_buttons_camera_mode = false;
+		tab.showButtonsFullscreen = true;
+		tab.showButtonsCameraMode = false;
 
 		//If program uses VR set button
-		if(Editor.program_running.vr)
+		if(Editor.programRunning.vr)
 		{
 			if(Nunu.webvrAvailable())
 			{
 				//Show VR button
-				tab.show_buttons_vr = true;
+				tab.showButtonsVr = true;
 
 				//Create VR switch callback
 				var vr = true;
-				tab.vr_button.setCallback(function()
+				tab.vrButton.setCallback(function()
 				{
 					if(vr)
 					{
-						Editor.program_running.displayVR();
+						Editor.programRunning.displayVR();
 					}
 					else
 					{
-						Editor.program_running.exitVR();
+						Editor.programRunning.exitVR();
 					}
 
 					vr = !vr;
@@ -1687,10 +1687,10 @@ Editor.setState = function(state)
 Editor.disposeRunningProgram = function()
 {
 	//Dispose running program if there is one
-	if(Editor.program_running !== null)
+	if(Editor.programRunning !== null)
 	{
-		Editor.program_running.dispose();
-		Editor.program_running = null;
+		Editor.programRunning.dispose();
+		Editor.programRunning = null;
 	}
 
 	//Unlock mouse
@@ -1723,9 +1723,9 @@ Editor.initializeRenderer = function(canvas)
 	}
 
 	//Get rendering quality settings
-	var antialiasing = Settings.render.follow_project ? Editor.program.antialiasing : Settings.render.antialiasing;
-	var shadows = Settings.render.follow_project ? Editor.program.shadows : Settings.render.shadows;
-	var shadows_type = Settings.render.follow_project ? Editor.program.shadows_type : Settings.render.shadows_type;
+	var antialiasing = Settings.render.followProject ? Editor.program.antialiasing : Settings.render.antialiasing;
+	var shadows = Settings.render.followProject ? Editor.program.shadows : Settings.render.shadows;
+	var shadowsType = Settings.render.followProject ? Editor.program.shadowsType : Settings.render.shadowsType;
 
 	//Dispose old renderer
 	if(Editor.renderer !== null)
@@ -1737,7 +1737,7 @@ Editor.initializeRenderer = function(canvas)
 	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: antialiasing});
 	Editor.renderer.setSize(canvas.width, canvas.height);
 	Editor.renderer.shadowMap.enabled = shadows;
-	Editor.renderer.shadowMap.type = shadows_type;
+	Editor.renderer.shadowMap.type = shadowsType;
 	Editor.renderer.autoClear = false;
 
 	//Get webgl context

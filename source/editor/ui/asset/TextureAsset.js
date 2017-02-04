@@ -5,7 +5,7 @@ function TextureAsset(parent)
 	Asset.call(this, parent);
 
 	this.texture = null;
-	this.setIcon(Interface.file_dir + "icons/misc/image.png");
+	this.setIcon(Interface.fileDir + "icons/misc/image.png");
 
 	//Self pointer
 	var self = this;
@@ -31,7 +31,7 @@ function TextureAsset(parent)
 			if(self.texture !== null && confirm("Delete texture?"))
 			{
 				self.texture.dispose();
-				Editor.program.removeTexture(self.texture, Editor.default_texture);
+				Editor.program.removeTexture(self.texture, Editor.defaultTexture);
 				Editor.updateObjectViews();
 			}
 		});
@@ -91,7 +91,7 @@ function TextureAsset(parent)
 					Editor.clipboard.set(JSON.stringify(self.texture.toJSON()), "text");
 
 					self.texture.dispose();
-					Editor.program.removeTexture(self.texture, Editor.default_texture);
+					Editor.program.removeTexture(self.texture, Editor.defaultTexture);
 					Editor.updateObjectViews();
 				}
 				catch(e){}

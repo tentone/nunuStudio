@@ -51,7 +51,7 @@ Keyboard.update = function()
 
 		Keyboard.keys[key].update(action);
 
-		if(Keyboard.keys[key].just_released || Keyboard.keys[key].just_pressed)
+		if(Keyboard.keys[key].justReleased || Keyboard.keys[key].justPressed)
 		{
 			Keyboard.actions.push(key);
 			Keyboard.actions.push(Key.RESET);
@@ -82,13 +82,13 @@ Keyboard.keyPressed = function(key)
 //Check is a key as just pressed
 Keyboard.keyJustPressed = function(key)
 {
-	return key < 256 && Keyboard.keys[key].just_pressed;
+	return key < 256 && Keyboard.keys[key].justPressed;
 }
 
 //Check if a key was just released
 Keyboard.keyJustReleased = function(key)
 {
-	return key < 256 && Keyboard.keys[key].just_released;
+	return key < 256 && Keyboard.keys[key].justReleased;
 }
 
 //Dispose keyboard events

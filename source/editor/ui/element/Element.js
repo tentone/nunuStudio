@@ -18,7 +18,7 @@ function Element(parent, tag)
 		event.preventDefault();
 	};
 
-	this.fit_parent = false;
+	this.fitParent = false;
 	this.visible = true;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
@@ -43,7 +43,7 @@ Element.prototype.update = function(){}
 Element.prototype.updateInterface = function()
 {
 	//Fit parent
-	if(this.fit_parent)
+	if(this.fitParent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 

@@ -37,7 +37,7 @@ function SceneEditor(parent, closeable, container, index)
 
 			//Get object from drag buffer
 			var uuid = event.dataTransfer.getData("uuid");
-			var dragged_object = DragBuffer.popDragElement(uuid);
+			var draggedObject = DragBuffer.popDragElement(uuid);
 
 			//Check intersected objects
 			var intersections = Editor.raycaster.intersectObjects(self.scene.children, true);
@@ -110,44 +110,44 @@ function SceneEditor(parent, closeable, container, index)
 				}
 			}
 			//Dragged resource into object
-			else if(intersections.length > 0 && dragged_object !== null)
+			else if(intersections.length > 0 && draggedObject !== null)
 			{
 				var object = intersections[0].object;
 
-				if(dragged_object instanceof THREE.SpriteMaterial)
+				if(draggedObject instanceof THREE.SpriteMaterial)
 				{
 					if(object instanceof THREE.Sprite)
 					{
-						object.material = dragged_object;
+						object.material = draggedObject;
 						Editor.updateObjectViews();
 					}
 				}
-				else if(dragged_object instanceof THREE.Material)
+				else if(draggedObject instanceof THREE.Material)
 				{
 					if(object instanceof THREE.Mesh)
 					{
-						object.material = dragged_object;
+						object.material = draggedObject;
 						Editor.updateObjectViews();
 					}
 				}
-				else if(dragged_object instanceof THREE.Texture)
+				else if(draggedObject instanceof THREE.Texture)
 				{
 					if(object instanceof THREE.Mesh)
 					{
-						object.material = new THREE.MeshStandardMaterial({map:dragged_object, color:0xffffff, roughness: 0.6, metalness: 0.2});
+						object.material = new THREE.MeshStandardMaterial({map:draggedObject, color:0xffffff, roughness: 0.6, metalness: 0.2});
 						Editor.updateObjectViews();
 					}
 					else if(object instanceof THREE.Sprite)
 					{
-						object.material = new THREE.SpriteMaterial({map:dragged_object, color:0xffffff});
+						object.material = new THREE.SpriteMaterial({map:draggedObject, color:0xffffff});
 						Editor.updateObjectViews();
 					}
 				}
-				else if(dragged_object instanceof Font)
+				else if(draggedObject instanceof Font)
 				{
 					if(object.font !== undefined)
 					{
-						object.setFont(dragged_object);
+						object.setFont(draggedObject);
 						Editor.updateObjectViews();
 					}
 				}
@@ -162,76 +162,76 @@ function SceneEditor(parent, closeable, container, index)
 	};
 
 	//Buttons visibility
-	this.show_buttons_vr = false;
-	this.show_buttons_fullscreen = false;
-	this.show_buttons_camera_mode = true;
+	this.showButtonsVr = false;
+	this.showButtonsFullscreen = false;
+	this.showButtonsCameraMode = true;
 
 	//Fullscreen button
-	this.fullscreen_button = new ButtonImage(this.element);
-	this.fullscreen_button.size.set(25, 25);
-	this.fullscreen_button.setImage("editor/files/icons/misc/fullscreen.png");
-	this.fullscreen_button.visible = false;
-	this.fullscreen_button.updateInterface();
-	this.fullscreen_button.element.onmouseenter = function()
+	this.fullscreenButton = new ButtonImage(this.element);
+	this.fullscreenButton.size.set(25, 25);
+	this.fullscreenButton.setImage("editor/files/icons/misc/fullscreen.png");
+	this.fullscreenButton.visible = false;
+	this.fullscreenButton.updateInterface();
+	this.fullscreenButton.element.onmouseenter = function()
 	{
-		self.fullscreen_button.img.style.opacity = 0.5;
+		self.fullscreenButton.img.style.opacity = 0.5;
 	};
-	this.fullscreen_button.element.onmouseleave = function()
+	this.fullscreenButton.element.onmouseleave = function()
 	{
-		self.fullscreen_button.img.style.opacity = 1.0;
+		self.fullscreenButton.img.style.opacity = 1.0;
 	};
 
 	var fullscreen = true;
-	this.fullscreen_button.setCallback(function()
+	this.fullscreenButton.setCallback(function()
 	{
 		self.setFullscreen(fullscreen);
 		fullscreen = !fullscreen;
 	});
 
 	//VR button
-	this.vr_button = new ButtonImage(this.element);
-	this.vr_button.size.set(25, 25);
-	this.vr_button.setImage("editor/files/icons/misc/vr.png");
-	this.vr_button.visible = false;
-	this.vr_button.updateInterface();
-	this.vr_button.element.onmouseenter = function()
+	this.vrButton = new ButtonImage(this.element);
+	this.vrButton.size.set(25, 25);
+	this.vrButton.setImage("editor/files/icons/misc/vr.png");
+	this.vrButton.visible = false;
+	this.vrButton.updateInterface();
+	this.vrButton.element.onmouseenter = function()
 	{
-		self.vr_button.img.style.opacity = 0.5;
+		self.vrButton.img.style.opacity = 0.5;
 	};
-	this.vr_button.element.onmouseleave = function()
+	this.vrButton.element.onmouseleave = function()
 	{
-		self.vr_button.img.style.opacity = 1.0;
+		self.vrButton.img.style.opacity = 1.0;
 	};
 
 	//Camera mode button
-	this.camera_button = new ButtonImage(this.element);
-	this.camera_button.size.set(25, 25);
-	this.camera_button.setImage("editor/files/icons/misc/3d.png");
-	this.camera_button.setAltText("Change camera mode");
-	this.camera_button.visible = true;
-	this.camera_button.updateInterface();
+	this.cameraButton = new ButtonImage(this.element);
+	this.cameraButton.size.set(25, 25);
+	this.cameraButton.setImage("editor/files/icons/misc/3d.png");
+	this.cameraButton.setAltText("Change camera mode");
+	this.cameraButton.visible = true;
+	this.cameraButton.updateInterface();
 
-	this.camera_button.element.onmouseenter = function()
+	this.cameraButton.element.onmouseenter = function()
 	{
-		self.camera_button.img.style.opacity = 0.5;
+		self.cameraButton.img.style.opacity = 0.5;
 	};
 
-	this.camera_button.element.onmouseleave = function()
+	this.cameraButton.element.onmouseleave = function()
 	{
-		self.camera_button.img.style.opacity = 1.0;
+		self.cameraButton.img.style.opacity = 1.0;
 	};
 
-	this.camera_button.setCallback(function()
+	this.cameraButton.setCallback(function()
 	{
 		Editor.setCameraMode();
 
-		if(Editor.camera_mode === Editor.CAMERA_ORTHOGRAPHIC)
+		if(Editor.cameraMode === Editor.CAMERA_ORTHOGRAPHIC)
 		{
-			self.camera_button.setImage("editor/files/icons/misc/2d.png");
+			self.cameraButton.setImage("editor/files/icons/misc/2d.png");
 		}
-		else if(Editor.camera_mode === Editor.CAMERA_PERSPECTIVE)
+		else if(Editor.cameraMode === Editor.CAMERA_PERSPECTIVE)
 		{
-			self.camera_button.setImage("editor/files/icons/misc/3d.png");
+			self.cameraButton.setImage("editor/files/icons/misc/3d.png");
 		}
 	});
 
@@ -330,7 +330,7 @@ SceneEditor.prototype.updateInterface = function()
 		this.element.style.visibility = "visible";
 		this.canvas.style.visibility = "visible";
 
-		if(Settings.general.show_stats)
+		if(Settings.general.showStats)
 		{
 			this.stats.dom.style.visibility = "visible";
 		}
@@ -347,22 +347,22 @@ SceneEditor.prototype.updateInterface = function()
 	}
 
 	//Fullscreen button
-	this.fullscreen_button.position.x = this.position.x + this.size.x - this.fullscreen_button.size.x - 5;
-	this.fullscreen_button.position.y = this.position.y + this.size.y - this.fullscreen_button.size.y - 5;
-	this.fullscreen_button.visible = this.visible && this.show_buttons_fullscreen;
-	this.fullscreen_button.updateInterface();
+	this.fullscreenButton.position.x = this.position.x + this.size.x - this.fullscreenButton.size.x - 5;
+	this.fullscreenButton.position.y = this.position.y + this.size.y - this.fullscreenButton.size.y - 5;
+	this.fullscreenButton.visible = this.visible && this.showButtonsFullscreen;
+	this.fullscreenButton.updateInterface();
 
 	//VR button
-	this.vr_button.position.x = this.fullscreen_button.position.x - this.vr_button.size.x - 10;
-	this.vr_button.position.y = this.fullscreen_button.position.y;
-	this.vr_button.visible = this.visible && this.show_buttons_vr;
-	this.vr_button.updateInterface();
+	this.vrButton.position.x = this.fullscreenButton.position.x - this.vrButton.size.x - 10;
+	this.vrButton.position.y = this.fullscreenButton.position.y;
+	this.vrButton.visible = this.visible && this.showButtonsVr;
+	this.vrButton.updateInterface();
 
 	//Camera mode button
-	this.camera_button.position.x = this.position.x + this.size.x - this.camera_button.size.x - 5;
-	this.camera_button.position.y = 5;
-	this.camera_button.visible = this.visible && this.show_buttons_camera_mode;
-	this.camera_button.updateInterface();
+	this.cameraButton.position.x = this.position.x + this.size.x - this.cameraButton.size.x - 5;
+	this.cameraButton.position.y = 5;
+	this.cameraButton.visible = this.visible && this.showButtonsCameraMode;
+	this.cameraButton.updateInterface();
 
 	//Update canvas
 	this.canvas.width = this.size.x;

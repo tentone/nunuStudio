@@ -8,11 +8,11 @@ function ScriptEditor(parent, closeable, container, index)
 	this.code = new CodeMirror(this.element,
 	{
 		value: "",
-		lineNumbers: Settings.code.line_numbers,
-		lineWrapping: Settings.code.line_wrapping,
+		lineNumbers: Settings.code.lineNumbers,
+		lineWrapping: Settings.code.lineWrapping,
 		keyMap: Settings.code.keymap,
-		autoCloseBrackets: Settings.code.auto_close_brackets,
-		styleActiveLine: Settings.code.highlight_active_line,
+		autoCloseBrackets: Settings.code.autoCloseBrackets,
+		styleActiveLine: Settings.code.highlightActiveLine,
 		matchBrackets: true,
 		dragDrop: true,
 		indentWithTabs: true,
@@ -30,7 +30,7 @@ function ScriptEditor(parent, closeable, container, index)
 	this.code.setOption("mode", "javascript");
 
 	//Set editor font size
-	this.setFontSize(Settings.code.font_size);
+	this.setFontSize(Settings.code.fontSize);
 
 	//Self pointer
 	var self = this;
@@ -114,7 +114,7 @@ ScriptEditor.prototype.setFontSize = function(size)
 		size = 5;
 	}
 
-	Settings.code.font_size = size;
+	Settings.code.fontSize = size;
 
 	this.code.display.wrapper.style.fontSize = size + "px";
 	this.code.refresh();
@@ -156,15 +156,15 @@ ScriptEditor.prototype.activate = function()
 	Editor.resetEditingFlags();
 
 	//Set font size
-	this.setFontSize(Settings.code.font_size);
+	this.setFontSize(Settings.code.fontSize);
 
 	//Update editor settings
 	this.code.setOption("theme", Settings.code.theme);
-	this.code.setOption("lineNumbers", Settings.code.line_numbers);
-	this.code.setOption("lineWrapping", Settings.code.line_wrapping);
+	this.code.setOption("lineNumbers", Settings.code.lineNumbers);
+	this.code.setOption("lineWrapping", Settings.code.lineWrapping);
 	this.code.setOption("keyMap", Settings.code.keymap);
-	this.code.setOption("autoCloseBrackets", Settings.code.auto_close_brackets);
-	this.code.setOption("styleActiveLine", Settings.code.highlight_active_line);
+	this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
+	this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
 
 	//Update script
 	this.updateScript();
@@ -218,7 +218,7 @@ ScriptEditor.prototype.update = function()
 	{
 		if(Mouse.wheel !== 0)
 		{
-			this.setFontSize(Settings.code.font_size - Mouse.wheel/100);
+			this.setFontSize(Settings.code.fontSize - Mouse.wheel/100);
 		}
 	}
 }

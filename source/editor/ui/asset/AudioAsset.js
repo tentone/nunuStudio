@@ -5,7 +5,7 @@ function AudioAsset(parent)
 	Asset.call(this, parent);
 
 	this.audio = null;
-	this.setIcon(Interface.file_dir + "icons/misc/audio.png");
+	this.setIcon(Interface.fileDir + "icons/misc/audio.png");
 	
 	//Self pointer
 	var self = this;
@@ -36,7 +36,7 @@ function AudioAsset(parent)
 		{
 			if(self.audio !== null && confirm("Delete audio?"))
 			{
-				Editor.program.removeAudio(self.audio, Editor.default_audio);
+				Editor.program.removeAudio(self.audio, Editor.defaultAudio);
 				Editor.updateObjectViews();
 			}
 		});
@@ -73,7 +73,7 @@ AudioAsset.prototype.updateMetadata = function()
 	if(this.audio !== null)
 	{
 		//TODO <AUDIO PREVIEW GRAPH>
-		this.image.src = Interface.file_dir + "icons/misc/audio.png";
+		this.image.src = Interface.fileDir + "icons/misc/audio.png";
 
 		this.setText(this.audio.name);
 	}

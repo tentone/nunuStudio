@@ -20,16 +20,16 @@ function Program(name)
 	this.version = "0";
 
 	//Hardware flags
-	this.lock_pointer = false;
+	this.lockPointer = false;
 
 	//VR flags
 	this.vr = false;
-	this.vr_scale = 1;
+	this.vrScale = 1;
 
 	//Render quality
 	this.antialiasing = false;
 	this.shadows = true;
-	this.shadows_type = THREE.PCFSoftShadowMap;
+	this.shadowsType = THREE.PCFSoftShadowMap;
 
 	//Resources
 	this.images = [];
@@ -41,8 +41,8 @@ function Program(name)
 	this.geometries = [];
 
 	//Defaults
-	this.default_scene = null;
-	this.default_camera = null;
+	this.defaultScene = null;
+	this.defaultCamera = null;
 
 	//Runtime variables
 	this.renderer = null;
@@ -50,9 +50,9 @@ function Program(name)
 	this.scene = null;
 
 	//VR objects
-	this.use_vr = false;
-	this.vr_effect = null;
-	this.vr_controls = null;
+	this.useVr = false;
+	this.vrEffect = null;
+	this.vrControls = null;
 }
 
 Program.prototype = Object.create(THREE.Object3D.prototype);
@@ -61,11 +61,11 @@ Program.prototype = Object.create(THREE.Object3D.prototype);
 Program.prototype.initialize = function()
 {
 	//Get default scene
-	if(this.default_scene !== null)
+	if(this.defaultScene !== null)
 	{
 		for(var i = 0; i < this.children.length; i++)
 		{
-			if(this.children[i].uuid === this.default_scene)
+			if(this.children[i].uuid === this.defaultScene)
 			{
 				this.setScene(this.children[i]);
 				break;
@@ -78,7 +78,7 @@ Program.prototype.initialize = function()
 	}
 
 	//Set mouse lock
-	if(this.lock_pointer)
+	if(this.lockPointer)
 	{
 		Mouse.setLock(true);
 	}
@@ -98,15 +98,15 @@ Program.prototype.displayVR = function()
 	{
 		try
 		{
-			this.use_vr = true;
+			this.useVr = true;
 
-			this.vr_effect = new THREE.VREffect(this.renderer);
-			this.vr_effect.setFullScreen(true);
+			this.vrEffect = new THREE.VREffect(this.renderer);
+			this.vrEffect.setFullScreen(true);
 		}
 		catch(e)
 		{
-			this.use_vr = false;
-			this.vr_effect = null;
+			this.useVr = false;
+			this.vrEffect = null;
 
 			console.warn("nunuStudio: Failed to enter in VR mode", e);
 		}		
@@ -118,13 +118,13 @@ Program.prototype.exitVR = function()
 {
 	if(this.vr)
 	{
-		this.use_vr = false;
+		this.useVr = false;
 
-		if(this.vr_effect != null)
+		if(this.vrEffect != null)
 		{
-			this.vr_effect.setFullScreen(false);
-			this.vr_effect.dispose();
-			this.vr_effect = null;
+			this.vrEffect.setFullScreen(false);
+			this.vrEffect.dispose();
+			this.vrEffect = null;
 		}
 	}
 }
@@ -139,12 +139,12 @@ Program.prototype.update = function()
 Program.prototype.render = function(renderer)
 {
 	//Render as a VR application (ignores camera parameters)
-	if(this.use_vr)
+	if(this.useVr)
 	{
 		for(var i = 0; i < this.scene.cameras.length; i++)
 		{
 			var camera = this.scene.cameras[i];
-			this.vr_effect.render(this.scene, camera);
+			this.vrEffect.render(this.scene, camera);
 		}
 	}
 	//Render normally
@@ -159,11 +159,11 @@ Program.prototype.render = function(renderer)
 		{
 			var camera = this.scene.cameras[i];
 
-			if(camera.clear_color)
+			if(camera.clearColor)
 			{
 				renderer.clearColor();
 			}
-			if(camera.clear_depth)
+			if(camera.clearDepth)
 			{
 				renderer.clearDepth();
 			}
@@ -216,7 +216,7 @@ Program.prototype.setScene = function(scene)
 
 		if(this.scene.cameras.length === 0)
 		{
-			this.scene.cameras.push(this.default_camera);
+			this.scene.cameras.push(this.defaultCamera);
 		}
 	}
 }
@@ -263,7 +263,7 @@ Program.prototype.clone = function()
 //Set as initial scene (from uuid reference)
 Program.prototype.setInitialScene = function(scene)
 {
-	this.default_scene = scene.uuid;
+	this.defaultScene = scene.uuid;
 }
 
 //Create a default scene with sky
@@ -280,7 +280,7 @@ Program.prototype.addDefaultScene = function(material)
 
 	//Sky
 	var sky = new Sky();
-	sky.auto_update = false;
+	sky.autoUpdate = false;
 	scene.add(sky);
 
 	//Box
@@ -415,16 +415,16 @@ Program.prototype.addMaterial = function(material)
 }
 
 //Remove material from materials list (also receives default used to replace)
-Program.prototype.removeMaterial = function(material, default_material, default_material_sprite)
+Program.prototype.removeMaterial = function(material, defaultMaterial, defaultMaterialSprite)
 {
-	if(default_material === undefined)
+	if(defaultMaterial === undefined)
 	{
-		default_material = new THREE.MeshBasicMaterial();
+		defaultMaterial = new THREE.MeshBasicMaterial();
 	}
 
-	if(default_material_sprite === undefined)
+	if(defaultMaterialSprite === undefined)
 	{
-		default_material_sprite = new THREE.SpriteMaterial();
+		defaultMaterialSprite = new THREE.SpriteMaterial();
 	}
 
 	if(material instanceof THREE.Material)
@@ -437,11 +437,11 @@ Program.prototype.removeMaterial = function(material, default_material, default_
 			{
 				if(child instanceof THREE.Sprite)
 				{
-					child.material = default_material_sprite;
+					child.material = defaultMaterialSprite;
 				}
 				else
 				{
-					child.material = default_material;
+					child.material = defaultMaterial;
 				}
 			}
 		});
@@ -469,11 +469,11 @@ Program.prototype.addTexture = function(texture)
 }
 
 //Remove texture from textures list (also receives default used to replace)
-Program.prototype.removeTexture = function(texture, default_texture)
+Program.prototype.removeTexture = function(texture, defaultTexture)
 {
-	if(default_texture === undefined)
+	if(defaultTexture === undefined)
 	{
-		default_texture = new THREE.Texture();
+		defaultTexture = new THREE.Texture();
 	}
 
 	if(texture instanceof THREE.Texture)
@@ -488,47 +488,47 @@ Program.prototype.removeTexture = function(texture, default_texture)
 				
 				if(material.map != null && material.map.uuid === texture.uuid)
 				{
-					material.map = default_texture;
+					material.map = defaultTexture;
 					material.needsUpdate = true;
 				}
 				else if(material.bumpMap != null && material.bumpMap.uuid === texture.uuid)
 				{
-					material.bumpMap = default_texture;
+					material.bumpMap = defaultTexture;
 					material.needsUpdate = true;
 				}
 				else if(material.normalMap != null && material.normalMap.uuid === texture.uuid)
 				{
-					material.normalMap = default_texture;
+					material.normalMap = defaultTexture;
 					material.needsUpdate = true;
 				}
 				else if(material.displacementMap != null && material.displacementMap.uuid === texture.uuid)
 				{
-					material.displacementMap = default_texture;
+					material.displacementMap = defaultTexture;
 					material.needsUpdate = true;
 				}
 				else if(material.specularMap != null && material.specularMap.uuid === texture.uuid)
 				{
-					material.specularMap = default_texture;
+					material.specularMap = defaultTexture;
 					material.needsUpdate = true;
 				}
 				else if(material.emissiveMap != null && material.emissiveMap.uuid === texture.uuid)
 				{
-					material.emissiveMap = default_texture;
+					material.emissiveMap = defaultTexture;
 					material.needsUpdate = true;
 				}
 				else if(material.alphaMap != null && material.alphaMap.uuid === texture.uuid)
 				{
-					material.alphaMap = default_texture;
+					material.alphaMap = defaultTexture;
 					material.needsUpdate = true;
 				}
 				else if(material.roughnessMap != null && material.roughnessMap.uuid === texture.uuid)
 				{
-					material.roughnessMap = default_texture;
+					material.roughnessMap = defaultTexture;
 					material.needsUpdate = true;
 				}
 				else if(material.metalnessMap != null && material.metalnessMap.uuid === texture.uuid)
 				{
-					material.metalnessMap = default_texture;
+					material.metalnessMap = defaultTexture;
 					material.needsUpdate = true;
 				}
 			}
@@ -536,7 +536,7 @@ Program.prototype.removeTexture = function(texture, default_texture)
 			{
 				if(child.group.texture.uuid === texture.uuid)
 				{
-					child.group.texture = default_texture;
+					child.group.texture = defaultTexture;
 				}
 			}
 		});
@@ -567,11 +567,11 @@ Program.prototype.addFont = function(font)
 }
 
 //Remove font from font list
-Program.prototype.removeFont = function(font, default_font)
+Program.prototype.removeFont = function(font, defaultFont)
 {
-	if(default_font === undefined)
+	if(defaultFont === undefined)
 	{
-		default_font = new Font();
+		defaultFont = new Font();
 	}
 
 	if(font instanceof Font)
@@ -582,7 +582,7 @@ Program.prototype.removeFont = function(font, default_font)
 		{
 			if(child.font !== undefined && child.font.uuid === font.uuid)
 			{
-				child.setFont(default_font);
+				child.setFont(defaultFont);
 			}
 		});
 	}
@@ -612,11 +612,11 @@ Program.prototype.addAudio = function(audio)
 }
 
 //Remove audio
-Program.prototype.removeAudio = function(audio, default_audio)
+Program.prototype.removeAudio = function(audio, defaultAudio)
 {
-	if(default_audio === undefined)
+	if(defaultAudio === undefined)
 	{
-		default_audio = new Audio();
+		defaultAudio = new Audio();
 	}
 
 	if(audio instanceof Audio)
@@ -627,20 +627,20 @@ Program.prototype.removeAudio = function(audio, default_audio)
 		{
 			if(child.audio !== undefined && child.audio.uuid === audio.uuid)
 			{
-				child.setFont(default_audio);
+				child.setFont(defaultAudio);
 			}
 		});
 	}
 }
 
 //Create JSON for object
-Program.prototype.toJSON = function(meta, export_resources)
+Program.prototype.toJSON = function(meta, exportResources)
 {
 	var self = this;
 
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
-		if(export_resources !== false)
+		if(exportResources !== false)
 		{
 			//Textures
 			var textures = self.textures;
@@ -689,9 +689,9 @@ Program.prototype.toJSON = function(meta, export_resources)
 	});
 
 	//Initial scene
-	if(this.default_scene !== null)
+	if(this.defaultScene !== null)
 	{
-		data.object.default_scene = this.default_scene;
+		data.object.defaultScene = this.defaultScene;
 	}
 
 	//Information
@@ -700,16 +700,16 @@ Program.prototype.toJSON = function(meta, export_resources)
 	data.object.version = this.version;
 
 	//Misc
-	data.object.lock_pointer = this.lock_pointer;
+	data.object.lockPointer = this.lockPointer;
 
 	//VR
 	data.object.vr = this.vr;
-	data.object.vr_scale = this.vr_scale;
+	data.object.vrScale = this.vrScale;
 
 	//Rendering
 	data.object.antialiasing = this.antialiasing;
 	data.object.shadows = this.shadows;
-	data.object.shadows_type = this.shadows_type;
+	data.object.shadowsType = this.shadowsType;
 
 	return data;
 }

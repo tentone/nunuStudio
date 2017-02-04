@@ -32,7 +32,7 @@ function Slider(parent)
 	this.text.style.flexDirection = "column";
 	this.text.style.justifyContent = "center";
 	this.text.style.textAlign = "center";
-	this.text.style.color = Editor.theme.text_color;
+	this.text.style.color = Editor.theme.textColor;
 	this.parent.appendChild(this.text);
 
 	//On Change onChange

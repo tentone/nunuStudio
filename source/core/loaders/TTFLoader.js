@@ -44,8 +44,8 @@ TTFLoader.convert = function(font, reversed)
 			var token = {};
 			
 			token.ha = Math.round(glyph.advanceWidth * scale);
-			token.x_min = Math.round(glyph.xMin * scale);
-			token.x_max = Math.round(glyph.xMax * scale);
+			token.xMin = Math.round(glyph.xMin * scale);
+			token.xMax = Math.round(glyph.xMax * scale);
 			token.o = ""
 			
 			if(reversed)
@@ -90,7 +90,7 @@ TTFLoader.convert = function(font, reversed)
 	}
 
 	data.resolution = 1000;
-	data.original_font_information = font.names;
+	data.originalFontInformation = font.names;
 	data.unitsPerEm = font.unitsPerEm;
 	data.ascender = Math.round(font.ascender * scale);
 	data.descender = Math.round(font.descender * scale);

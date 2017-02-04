@@ -70,6 +70,8 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Fixed OBJ and MTL loading
 	- Default app export template loading screen
 	- Audio preview
+- V0.8.9.19 Alpha
+	- Renamed variables variable_name to variableName
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

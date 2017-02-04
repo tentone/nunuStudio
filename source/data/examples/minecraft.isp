@@ -83,9 +83,9 @@
 						"matrixAutoUpdate": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 						"children": [],
-						"auto_update": true,
-						"sun_distance": 100,
-						"day_time": 30,
+						"autoUpdate": true,
+						"sunDistance": 100,
+						"dayTime": 30,
 						"time": 15,
 						"sun": {
 							"shadow": {
@@ -137,8 +137,8 @@
 								"aspect": 1.825242718446602,
 								"filmGauge": 35,
 								"filmOffset": 0,
-								"clear_color": false,
-								"clear_depth": false,
+								"clearColor": false,
+								"clearDepth": false,
 								"viewport": [1,1],
 								"offset": [0,0],
 								"order": 0
@@ -164,11 +164,11 @@
 		"author": "",
 		"description": "",
 		"version": "0",
-		"lock_pointer": false,
+		"lockPointer": false,
 		"vr": false,
-		"vr_scale": 1,
+		"vrScale": 1,
 		"antialiasing": false,
 		"shadows": true,
-		"shadows_type": 2
+		"shadowsType": 2
 	}
 }

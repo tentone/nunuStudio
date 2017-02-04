@@ -12,7 +12,7 @@ function ButtonImageToggle(parent)
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
-	this.element.style.backgroundColor = Editor.theme.button_color;
+	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	
 	//Prevent Drop event
 	this.element.ondrop = function(event)
@@ -41,7 +41,7 @@ function ButtonImageToggle(parent)
 
 	//Image and Callback
 	this.selected = false;
-	this.image_scale = new THREE.Vector2(1,1);
+	this.imageScale = new THREE.Vector2(1,1);
 	this.image = "";
 
 	//Click event
@@ -54,14 +54,14 @@ function ButtonImageToggle(parent)
 	//Mouse over and mouse out events
 	this.element.onmouseenter = function()
 	{
-		self.element.style.backgroundColor = Editor.theme.button_over_color;
+		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
 	this.element.onmouseleave = function()
 	{
 		if(!self.selected)
 		{
-			self.element.style.backgroundColor = Editor.theme.button_color;
+			self.element.style.backgroundColor = Editor.theme.buttonColor;
 		}
 	};
 
@@ -115,18 +115,18 @@ ButtonImageToggle.prototype.updateInterface = function()
 	//Set selected
 	if(this.selected)
 	{
-		this.element.style.backgroundColor = Editor.theme.button_over_color;
+		this.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	}
 	else
 	{
-		this.element.style.backgroundColor = Editor.theme.button_color;
+		this.element.style.backgroundColor = Editor.theme.buttonColor;
 	}
 
 	//Update image
-	this.img.width = this.size.x * this.image_scale.x;
-	this.img.height = this.size.y * this.image_scale.y;
-	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
-	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
+	this.img.width = this.size.x * this.imageScale.x;
+	this.img.height = this.size.y * this.imageScale.y;
+	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
+	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
 	
 	//Update element
 	this.element.style.top = this.position.y + "px";

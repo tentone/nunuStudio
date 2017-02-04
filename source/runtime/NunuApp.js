@@ -113,17 +113,17 @@ function NunuApp(canvas)
 		
 		document.body.appendChild(this.canvas);
 
-		this.canvas_resize = true;
+		this.canvasResize = true;
 	}
 	else
 	{
 		this.canvas = canvas;
-		this.canvas_resize = false;
+		this.canvasResize = false;
 	}
 
 	//Lock pointer function
 	var canvas = this.canvas;
-	this.lock_mouse = function()
+	this.lockMouse = function()
 	{
 		if(canvas.requestPointerLock)
 		{
@@ -191,8 +191,8 @@ NunuApp.prototype.run = function()
 	this.program.app = this;
 
 	//Create default camera
-	this.program.default_camera = new PerspectiveCamera(60, this.canvas.width/this.canvas.height, 0.1, 1000000);
-	this.program.default_camera.position.set(0, 5, -5);
+	this.program.defaultCamera = new PerspectiveCamera(60, this.canvas.width/this.canvas.height, 0.1, 1000000);
+	this.program.defaultCamera.position.set(0, 5, -5);
 
 	//Set renderer
 	this.program.setRenderer(this.renderer);
@@ -202,9 +202,9 @@ NunuApp.prototype.run = function()
 	this.program.resize(this.canvas.width, this.canvas.height);
 
 	//Lock mouse pointer
-	if(this.program.lock_pointer)
+	if(this.program.lockPointer)
 	{
-		this.canvas.addEventListener("click", this.lock_mouse, false);
+		this.canvas.addEventListener("click", this.lockMouse, false);
 	}
 
 	//Update loop
@@ -234,9 +234,9 @@ NunuApp.prototype.update = function()
 NunuApp.prototype.exit = function()
 {
 	//Remove mouse lock event from canvas
-	if(this.program.lock_pointer)
+	if(this.program.lockPointer)
 	{
-		this.canvas.removeEventListener("click", this.lock_mouse, false);
+		this.canvas.removeEventListener("click", this.lockMouse, false);
 	}
 
 	//Dispose and remove program
@@ -260,7 +260,7 @@ NunuApp.prototype.exit = function()
 //Resize to fit window
 NunuApp.prototype.resize = function()
 {
-	if(this.canvas !== null && this.canvas_resize)
+	if(this.canvas !== null && this.canvasResize)
 	{
 		this.canvas.style.width = window.innerWidth + "px";
 		this.canvas.style.height = window.innerHeight + "px";

@@ -1,6 +1,6 @@
 "use strict";
 
-function Text3D(text, material, font, height, bevel, bevel_thickness, bevel_size, size, curve_segments)
+function Text3D(text, material, font, height, bevel, bevelThickness, bevelSize, size, curveSegments)
 {
 	THREE.Mesh.call(this, undefined, material);
 	
@@ -12,11 +12,11 @@ function Text3D(text, material, font, height, bevel, bevel_thickness, bevel_size
 	
 	this.size = (size !== undefined) ? size : 1;
 	this.height = (height !== undefined) ? height : 0.5;
-	this.curve_segments = (curve_segments !== undefined) ? curve_segments : 15;
+	this.curveSegments = (curveSegments !== undefined) ? curveSegments : 15;
 
 	this.bevel = (bevel !== undefined) ? bevel : false;
-	this.bevel_thickness = (bevel_thickness !== undefined) ? bevel_thickness : 0.1;
-	this.bevel_size = (bevel_size !== undefined) ? bevel_size : 0.05;
+	this.bevelThickness = (bevelThickness !== undefined) ? bevelThickness : 0.1;
+	this.bevelSize = (bevelSize !== undefined) ? bevelSize : 0.05;
 
 	this.setText(this.text);
 
@@ -58,12 +58,12 @@ Text3D.prototype.updateText = function()
 		this.geometry = new THREE.TextGeometry(this.text,
 		{
 			size: this.size,
-			curveSegments: this.curve_segments,
+			curveSegments: this.curveSegments,
 			font: this.font,
 			height: this.height,
 			bevelEnabled: this.bevel,
-			bevelSize: this.bevel_size,
-			bevelThickness: this.bevel_thickness
+			bevelSize: this.bevelSize,
+			bevelThickness: this.bevelThickness
 		});
 	}
 }
@@ -71,7 +71,7 @@ Text3D.prototype.updateText = function()
 //Clone text 3D
 Text3D.prototype.clone = function()
 {
-	return new Text3D(this.text, this.material, this.font, this.height, this.bevel, this.bevel_thickness, this.bevel_size, this.size, this.curve_segments);
+	return new Text3D(this.text, this.material, this.font, this.height, this.bevel, this.bevelThickness, this.bevelSize, this.size, this.curveSegments);
 }
 
 //Dispose text object
@@ -109,12 +109,12 @@ Text3D.prototype.toJSON = function(meta)
 	data.object.font = font.uuid;
 
 	data.object.size = this.size;
-	data.object.curve_segments = this.curve_segments;
+	data.object.curveSegments = this.curveSegments;
 
 	data.object.height = this.height;
 	data.object.bevel = this.bevel;
-	data.object.bevel_thickness = this.bevel_thickness;
-	data.object.bevel_size = this.bevel_size;
+	data.object.bevelThickness = this.bevelThickness;
+	data.object.bevelSize = this.bevelSize;
 
 	this.geometry = geometry;
 

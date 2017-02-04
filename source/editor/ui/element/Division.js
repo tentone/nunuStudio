@@ -10,10 +10,10 @@ function Division(parent)
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
 	this.element.style.pointerEvents = "none";
-	this.element.style.backgroundColor = Editor.theme.panel_color;
+	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Element atributes
-	this.fit_parent = false;
+	this.fitParent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -39,7 +39,7 @@ Division.prototype.update = function(){}
 Division.prototype.updateInterface = function()
 {
 	//Fit parent
-	if(this.fit_parent)
+	if(this.fitParent)
 	{
 		this.size.x = this.parent.offsetWidth;
 		this.size.y = this.parent.offsetHeight; 

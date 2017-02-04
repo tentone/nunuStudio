@@ -13,7 +13,7 @@ function ButtonDrawer(parent)
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
-	this.element.style.backgroundColor = Editor.theme.button_color;
+	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	
 	//Prevent Drop event
 	this.element.ondrop = function(event)
@@ -31,7 +31,7 @@ function ButtonDrawer(parent)
 	this.panel = document.createElement("div");
 	this.panel.style.position = "absolute";
 	this.panel.style.cursor = "default";
-	this.panel.style.backgroundColor = Editor.theme.bar_color;
+	this.panel.style.backgroundColor = Editor.theme.barColor;
 	this.panel.style.zIndex = "250";
 	
 	//Image
@@ -48,19 +48,19 @@ function ButtonDrawer(parent)
 	this.visible = true;
 
 	//Panel atributes
-	this.panel_size = new THREE.Vector2(0, 0);
-	this.panel_position = new THREE.Vector2(0, 0);
+	this.panelSize = new THREE.Vector2(0, 0);
+	this.panelPosition = new THREE.Vector2(0, 0);
 
 	//Image
-	this.image_scale = new THREE.Vector2(1,1);
+	this.imageScale = new THREE.Vector2(1,1);
 	this.image = "";
 
 	//Options
-	this.options_per_line = 3;
+	this.optionsPerLine = 3;
 	this.options = [];
-	this.options_size = new THREE.Vector2(50, 50);
-	this.options_scale = new THREE.Vector2(1, 1);
-	this.options_spacing = new THREE.Vector2(3, 3);
+	this.optionsSize = new THREE.Vector2(50, 50);
+	this.optionsScale = new THREE.Vector2(1, 1);
+	this.optionsSpacing = new THREE.Vector2(3, 3);
 	this.expanded = false;
 
 	//Click event
@@ -72,7 +72,7 @@ function ButtonDrawer(parent)
 		self.expanded = true;
 		self.updateInterface();
 		self.element.style.cursor = "pointer";
-		self.element.style.backgroundColor = Editor.theme.button_over_color;
+		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
 	this.element.onmouseleave = function()
@@ -80,7 +80,7 @@ function ButtonDrawer(parent)
 		self.expanded = false;
 		self.updateInterface();
 		self.element.style.cursor = "default";
-		self.element.style.backgroundColor = Editor.theme.button_color;
+		self.element.style.backgroundColor = Editor.theme.buttonColor;
 	};
 
 	this.panel.onmouseenter = function()
@@ -118,16 +118,16 @@ ButtonDrawer.prototype.destroy = function()
 }
 
 //Add new Option to dropdown menu
-ButtonDrawer.prototype.addOption = function(image, callback, alt_text)
+ButtonDrawer.prototype.addOption = function(image, callback, altText)
 {
 	var button = new ButtonImage(this.panel);
 	button.setImage(image);
 	button.visible = this.expanded;
 
 	//Set alt text
-	if(alt_text !== undefined)
+	if(altText !== undefined)
 	{
-		button.setAltText(alt_text);
+		button.setAltText(altText);
 	}
 
 	//Set button callback
@@ -144,10 +144,10 @@ ButtonDrawer.prototype.addOption = function(image, callback, alt_text)
 	this.updatePanelSize();
 
 	//Set button
-	button.size.set(this.options_size.x, this.options_size.y);
-	button.image_scale.set(this.options_scale.x, this.options_scale.y);
-	button.position.x = this.options_size.x * ((this.options.length - 1) % this.options_per_line);
-	button.position.y = this.options_size.y * Math.floor((this.options.length - 1) / this.options_per_line);
+	button.size.set(this.optionsSize.x, this.optionsSize.y);
+	button.imageScale.set(this.optionsScale.x, this.optionsScale.y);
+	button.position.x = this.optionsSize.x * ((this.options.length - 1) % this.optionsPerLine);
+	button.position.y = this.optionsSize.y * Math.floor((this.options.length - 1) / this.optionsPerLine);
 	button.updateInterface();
 }
 
@@ -176,8 +176,8 @@ ButtonDrawer.prototype.update = function(){}
 //Updates drawer panel size
 ButtonDrawer.prototype.updatePanelSize = function()
 {
-	this.panel_size.x = (this.options_size.x * this.options_per_line);
-	this.panel_size.y = (this.options_size.y * (Math.floor((this.options.length - 1) / this.options_per_line) + 1));
+	this.panelSize.x = (this.optionsSize.x * this.optionsPerLine);
+	this.panelSize.y = (this.optionsSize.y * (Math.floor((this.options.length - 1) / this.optionsPerLine) + 1));
 }
 
 //Update drawer options position and size (should be called after change in options displacement variables)
@@ -185,10 +185,10 @@ ButtonDrawer.prototype.updateOptions = function()
 {
 	for(var i = 0; i < this.options.length; i++)
 	{
-		this.options[i].size.set(this.options_size.x, this.options_size.y);
-		this.options[i].image_scale.set(this.options_scale.x, this.options_scale.y);
-		this.options[i].position.x = this.options_size.x * (i % this.options_per_line);
-		this.options[i].position.y = this.options_size.y * Math.floor(i / this.options_per_line);
+		this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
+		this.options[i].imageScale.set(this.optionsScale.x, this.optionsScale.y);
+		this.options[i].position.x = this.optionsSize.x * (i % this.optionsPerLine);
+		this.options[i].position.y = this.optionsSize.y * Math.floor(i / this.optionsPerLine);
 		this.options[i].visible = (this.expanded && this.visible);
 		this.options[i].updateInterface();
 	}
@@ -198,8 +198,8 @@ ButtonDrawer.prototype.updateOptions = function()
 ButtonDrawer.prototype.updateInterface = function()
 {
 	//Update panel position
-	this.panel_position.x = this.position.x + this.size.x;
-	this.panel_position.y = this.position.y;
+	this.panelPosition.x = this.position.x + this.size.x;
+	this.panelPosition.y = this.position.y;
 
 	//Update options
 	for(var i = 0; i < this.options.length; i++)
@@ -228,15 +228,15 @@ ButtonDrawer.prototype.updateInterface = function()
 	}
 
 	//Calculate panel size
-	this.panel.style.top = this.panel_position.y + "px";
-	this.panel.style.left = this.panel_position.x + "px";
-	this.panel.style.width = this.panel_size.x + "px";
-	this.panel.style.height = this.panel_size.y + "px";
+	this.panel.style.top = this.panelPosition.y + "px";
+	this.panel.style.left = this.panelPosition.x + "px";
+	this.panel.style.width = this.panelSize.x + "px";
+	this.panel.style.height = this.panelSize.y + "px";
 	
-	this.img.width = this.size.x * this.image_scale.x;
-	this.img.height = this.size.y * this.image_scale.y;
-	this.img.style.left = ((this.size.x - (this.size.x * this.image_scale.x))/2) + "px";
-	this.img.style.top = ((this.size.y - (this.size.y * this.image_scale.y))/2) + "px";
+	this.img.width = this.size.x * this.imageScale.x;
+	this.img.height = this.size.y * this.imageScale.y;
+	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
+	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
 
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";

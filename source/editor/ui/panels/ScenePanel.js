@@ -18,11 +18,11 @@ function ScenePanel(parent, obj)
 			var program = self.obj.parent;
 			if(self.default.getValue())
 			{
-				program.default_scene = self.obj.uuid;
+				program.defaultScene = self.obj.uuid;
 			}
 			else
 			{
-				program.default_scene = null;
+				program.defaultScene = null;
 			}
 		}
 	});
@@ -67,94 +67,94 @@ function ScenePanel(parent, obj)
 	this.form.nextRow();
 
 	//Linear fog properties
-	this.fog_linear_form = new Form(this.form.element);
-	this.fog_linear_form.spacing.set(5, 5);
+	this.fogLinearForm = new Form(this.form.element);
+	this.fogLinearForm.spacing.set(5, 5);
 
 	//Linear fog color
-	this.fog_linear_form.addText("Color");
-	this.fog_linear_color = new ColorChooser(this.fog_linear_form.element);
-	this.fog_linear_color.size.set(80, 18);
-	this.fog_linear_color.setOnChange(function()
+	this.fogLinearForm.addText("Color");
+	this.fogLinearColor = new ColorChooser(this.fogLinearForm.element);
+	this.fogLinearColor.size.set(80, 18);
+	this.fogLinearColor.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{	
-			var color = self.fog_linear_color.getValueHex();
-			self.fog_exponential_color.setValueHex(color);
+			var color = self.fogLinearColor.getValueHex();
+			self.fogExponentialColor.setValueHex(color);
 			self.obj.fog.color.setHex(color);
 		}
 	});
-	this.fog_linear_form.add(this.fog_linear_color);
-	this.fog_linear_form.nextRow();
+	this.fogLinearForm.add(this.fogLinearColor);
+	this.fogLinearForm.nextRow();
 
 	//Linear fog near
-	this.fog_linear_form.addText("Near");
-	this.fog_near = new NumberBox(this.fog_linear_form.element);
-	this.fog_near.size.set(60, 18);
-	this.fog_near.setOnChange(function()
+	this.fogLinearForm.addText("Near");
+	this.fogNear = new NumberBox(this.fogLinearForm.element);
+	this.fogNear.size.set(60, 18);
+	this.fogNear.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fog.near = self.fog_near.getValue();
+			self.obj.fog.near = self.fogNear.getValue();
 		}
 	});
-	this.fog_linear_form.add(this.fog_near);
-	this.fog_linear_form.nextRow();
+	this.fogLinearForm.add(this.fogNear);
+	this.fogLinearForm.nextRow();
 
 	//Linear fog far
-	this.fog_linear_form.addText("Far");
-	this.fog_far = new NumberBox(this.fog_linear_form.element);
-	this.fog_far.size.set(60, 18);
-	this.fog_far.setOnChange(function()
+	this.fogLinearForm.addText("Far");
+	this.fogFar = new NumberBox(this.fogLinearForm.element);
+	this.fogFar.size.set(60, 18);
+	this.fogFar.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fog.far = self.fog_far.getValue();
+			self.obj.fog.far = self.fogFar.getValue();
 		}
 	});
-	this.fog_linear_form.add(this.fog_far);
-	this.fog_linear_form.updateInterface();
+	this.fogLinearForm.add(this.fogFar);
+	this.fogLinearForm.updateInterface();
 
 	//Add linear fog form
-	this.form.add(this.fog_linear_form);
+	this.form.add(this.fogLinearForm);
 	this.form.nextRow();
 
 	//Exponential fog properties
-	this.fog_exponential_form = new Form(this.form.element);
-	this.fog_exponential_form.spacing.set(5, 5);
+	this.fogExponentialForm = new Form(this.form.element);
+	this.fogExponentialForm.spacing.set(5, 5);
 
 	//Exponential fog color
-	this.fog_exponential_form.addText("Color");
-	this.fog_exponential_color = new ColorChooser(this.fog_exponential_form.element);
-	this.fog_exponential_color.size.set(80, 18);
-	this.fog_exponential_color.setOnChange(function()
+	this.fogExponentialForm.addText("Color");
+	this.fogExponentialColor = new ColorChooser(this.fogExponentialForm.element);
+	this.fogExponentialColor.size.set(80, 18);
+	this.fogExponentialColor.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{	
-			var color = self.fog_exponential_color.getValueHex();
-			self.fog_linear_color.setValueHex(color);
+			var color = self.fogExponentialColor.getValueHex();
+			self.fogLinearColor.setValueHex(color);
 			self.obj.fog.color.setHex(color);
 		}
 	});
-	this.fog_exponential_form.add(this.fog_exponential_color);
-	this.fog_exponential_form.nextRow();
+	this.fogExponentialForm.add(this.fogExponentialColor);
+	this.fogExponentialForm.nextRow();
 
 	//Exponential fog density
-	this.fog_exponential_form.addText("Density")
-	this.fog_density = new NumberBox(this.fog_exponential_form.element);
-	this.fog_density.size.set(100, 18);
-	this.fog_density.setStep(0.0001);
-	this.fog_density.setOnChange(function()
+	this.fogExponentialForm.addText("Density")
+	this.fogDensity = new NumberBox(this.fogExponentialForm.element);
+	this.fogDensity.size.set(100, 18);
+	this.fogDensity.setStep(0.0001);
+	this.fogDensity.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fog.density = self.fog_density.getValue();
+			self.obj.fog.density = self.fogDensity.getValue();
 		}
 	});
-	this.fog_exponential_form.add(this.fog_density);
-	this.fog_exponential_form.updateInterface();
+	this.fogExponentialForm.add(this.fogDensity);
+	this.fogExponentialForm.updateInterface();
 
 	//Add exponential fog form
-	this.form.add(this.fog_exponential_form);
+	this.form.add(this.fogExponentialForm);
 	this.form.nextRow();
 
 
@@ -188,21 +188,21 @@ ScenePanel.prototype.updatePanel = function()
 {
 	if(this.obj !== null)
 	{
-		this.default.setValue(this.obj.uuid === this.obj.parent.default_scene);
+		this.default.setValue(this.obj.uuid === this.obj.parent.defaultScene);
 		
 		if(this.obj.fog instanceof THREE.Fog)
 		{
 			this.fog.setValue(THREE.Fog.LINEAR);
-			this.fog_linear_color.setValueHex(this.obj.fog.color.getHex());
-			this.fog_near.setValue(this.obj.fog.near);
-			this.fog_far.setValue(this.obj.fog.far);
+			this.fogLinearColor.setValueHex(this.obj.fog.color.getHex());
+			this.fogNear.setValue(this.obj.fog.near);
+			this.fogFar.setValue(this.obj.fog.far);
 			this.updateForms();
 		}
 		else if(this.obj.fog instanceof THREE.FogExp2)
 		{
 			this.fog.setValue(THREE.Fog.EXPONENTIAL);
-			this.fog_exponential_color.setValueHex(this.obj.fog.color.getHex());
-			this.fog_density.setValue(this.obj.fog.density);
+			this.fogExponentialColor.setValueHex(this.obj.fog.color.getHex());
+			this.fogDensity.setValue(this.obj.fog.density);
 			this.updateForms();
 		}
 		else
@@ -227,10 +227,10 @@ ScenePanel.prototype.updateForms = function()
 	
 	if(this.obj !== null)
 	{
-		this.fog_linear_form.visible = (this.obj.fog instanceof THREE.Fog) ? true : false;
-		this.fog_linear_form.updateInterface();
-		this.fog_exponential_form.visible = (this.obj.fog instanceof THREE.FogExp2) ? true : false;
-		this.fog_exponential_form.updateInterface();
+		this.fogLinearForm.visible = (this.obj.fog instanceof THREE.Fog) ? true : false;
+		this.fogLinearForm.updateInterface();
+		this.fogExponentialForm.visible = (this.obj.fog instanceof THREE.FogExp2) ? true : false;
+		this.fogExponentialForm.updateInterface();
 		this.form.updateInterface();
 	}
 }

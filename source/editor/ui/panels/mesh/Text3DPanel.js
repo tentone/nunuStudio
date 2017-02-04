@@ -57,19 +57,19 @@ function Text3DPanel(parent, obj)
 
 	//Curve segments
 	this.form.addText("Curve Detail");
-	this.curve_segments = new NumberBox(this.form.element);
-	this.curve_segments.size.set(60, 18);
-	this.curve_segments.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.curve_segments.setStep(1.0);
-	this.curve_segments.setOnChange(function()
+	this.curveSegments = new NumberBox(this.form.element);
+	this.curveSegments.size.set(60, 18);
+	this.curveSegments.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.curveSegments.setStep(1.0);
+	this.curveSegments.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.curve_segments = self.curve_segments.getValue();
+			self.obj.curveSegments = self.curveSegments.getValue();
 			self.obj.setText();
 		}
 	});
-	this.form.add(this.curve_segments);
+	this.form.add(this.curveSegments);
 	this.form.nextRow();
 
 	//Bevel
@@ -89,36 +89,36 @@ function Text3DPanel(parent, obj)
 
 	//Bevel thickness
 	this.form.addText("Bevel Thickness");
-	this.bevel_thickness = new NumberBox(this.form.element);
-	this.bevel_thickness.size.set(60, 18);
-	this.bevel_thickness.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.bevel_thickness.setStep(0.1);
-	this.bevel_thickness.setOnChange(function()
+	this.bevelThickness = new NumberBox(this.form.element);
+	this.bevelThickness.size.set(60, 18);
+	this.bevelThickness.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.bevelThickness.setStep(0.1);
+	this.bevelThickness.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.bevel_thickness = self.bevel_thickness.getValue();
+			self.obj.bevelThickness = self.bevelThickness.getValue();
 			self.obj.setText();
 		}
 	});
-	this.form.add(this.bevel_thickness);
+	this.form.add(this.bevelThickness);
 	this.form.nextRow();
 
 	//Bevel size
 	this.form.addText("Bevel Size");
-	this.bevel_size = new NumberBox(this.form.element);
-	this.bevel_size.size.set(60, 18);
-	this.bevel_size.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.bevel_size.setStep(0.1);
-	this.bevel_size.setOnChange(function()
+	this.bevelSize = new NumberBox(this.form.element);
+	this.bevelSize.size.set(60, 18);
+	this.bevelSize.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.bevelSize.setStep(0.1);
+	this.bevelSize.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.bevel_size = self.bevel_size.getValue();
+			self.obj.bevelSize = self.bevelSize.getValue();
 			self.obj.setText();
 		}
 	});
-	this.form.add(this.bevel_size);
+	this.form.add(this.bevelSize);
 	this.form.nextRow();
 
 	//Visible
@@ -150,31 +150,31 @@ function Text3DPanel(parent, obj)
 	this.form.nextRow();
 
 	//Cast shadow
-	this.cast_shadow = new CheckBox(this.form.element);
+	this.castShadow = new CheckBox(this.form.element);
 	this.form.addText("Cast Shadow");
-	this.cast_shadow.size.set(20, 15);
-	this.cast_shadow.setOnChange(function()
+	this.castShadow.size.set(20, 15);
+	this.castShadow.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.castShadow = self.cast_shadow.getValue();
+			self.obj.castShadow = self.castShadow.getValue();
 		}
 	});
-	this.form.add(this.cast_shadow);
+	this.form.add(this.castShadow);
 	this.form.nextRow();
 
 	//Receive shadow
-	this.receive_shadow = new CheckBox(this.form.element);
+	this.receiveShadow = new CheckBox(this.form.element);
 	this.form.addText("React Shadow");
-	this.receive_shadow.size.set(20, 15);
-	this.receive_shadow.setOnChange(function()
+	this.receiveShadow.size.set(20, 15);
+	this.receiveShadow.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
-			self.obj.receiveShadow = self.receive_shadow.getValue();
+			self.obj.receiveShadow = self.receiveShadow.getValue();
 		}
 	});
-	this.form.add(this.receive_shadow);
+	this.form.add(this.receiveShadow);
 	this.form.nextRow();
 
 	//Update form
@@ -194,13 +194,13 @@ Text3DPanel.prototype.updatePanel = function()
 		this.text.setText(this.obj.text);
 		this.size.setValue(this.obj.size);
 		this.height.setValue(this.obj.height);
-		this.curve_segments.setValue(this.obj.curve_segments);
+		this.curveSegments.setValue(this.obj.curveSegments);
 		this.bevel.setValue(this.obj.bevel);
-		this.bevel_thickness.setValue(this.obj.bevel_thickness);
-		this.bevel_size.setValue(this.obj.bevel_size);
+		this.bevelThickness.setValue(this.obj.bevelThickness);
+		this.bevelSize.setValue(this.obj.bevelSize);
 
-		this.cast_shadow.setValue(this.obj.castShadow);
-		this.receive_shadow.setValue(this.obj.receiveShadow);
+		this.castShadow.setValue(this.obj.castShadow);
+		this.receiveShadow.setValue(this.obj.receiveShadow);
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}

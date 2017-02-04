@@ -9,7 +9,7 @@ function TabButton(parent, tab)
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "pointer";
-	this.element.style.backgroundColor = Editor.theme.button_color;
+	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	this.element.draggable = true;
 
 	this.element.ondrop = function(event)
@@ -39,7 +39,7 @@ function TabButton(parent, tab)
 	//Mouse over and mouse out events
 	this.element.onmouseenter = function()
 	{
-		this.style.backgroundColor = Editor.theme.button_over_color;
+		this.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
 	//Mouse leave event
@@ -47,7 +47,7 @@ function TabButton(parent, tab)
 	{
 		if(!tab.isSelected())
 		{
-			this.style.backgroundColor = Editor.theme.button_color;
+			this.style.backgroundColor = Editor.theme.buttonColor;
 		}
 	};
 
@@ -65,7 +65,7 @@ function TabButton(parent, tab)
 	this.text.style.pointerEvents = "none";
 	this.text.style.textOverflow = "ellipsis";
 	this.text.style.whiteSpace = "nowrap";
-	this.text.style.color = Editor.theme.text_color;
+	this.text.style.color = Editor.theme.textColor;
 	this.text.innerHTML = tab.title;
 	this.element.appendChild(this.text);
 
@@ -133,11 +133,11 @@ TabButton.prototype.updateInterface = function()
 	//Button
 	if(this.tab.isSelected())
 	{
-		this.element.style.backgroundColor = Editor.theme.button_over_color;
+		this.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	}
 	else
 	{
-		this.element.style.backgroundColor = Editor.theme.button_color;
+		this.element.style.backgroundColor = Editor.theme.buttonColor;
 	}
 
 	//Visibility

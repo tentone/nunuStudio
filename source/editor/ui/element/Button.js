@@ -12,7 +12,7 @@ function Button(parent)
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
-	this.element.style.backgroundColor = Editor.theme.button_color;
+	this.element.style.backgroundColor = Editor.theme.buttonColor;
 
 	this.element.ondrop = function(event)
 	{
@@ -39,12 +39,12 @@ function Button(parent)
 	//Mouse over and mouse out events
 	this.element.onmouseenter = function()
 	{
-		this.style.backgroundColor = Editor.theme.button_over_color;
+		this.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
 	this.element.onmouseleave = function()
 	{
-		this.style.backgroundColor = Editor.theme.button_color;
+		this.style.backgroundColor = Editor.theme.buttonColor;
 	};
 
 	//Add element to document

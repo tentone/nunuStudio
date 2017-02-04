@@ -28,7 +28,7 @@ function Asset(parent)
 	this.text.style.pointerEvents = "none";
 	this.text.style.textOverflow = "ellipsis";
 	this.text.style.whiteSpace = "nowrap";
-	this.text.style.color = Editor.theme.text_color;
+	this.text.style.color = Editor.theme.textColor;
 	this.text.style.height = "20px";
 	this.text.innerHTML = "";
 	this.element.appendChild(this.text);
@@ -44,7 +44,7 @@ function Asset(parent)
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		this.style.backgroundColor = Editor.theme.button_over_color;
+		this.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
 	//Mouse leave event

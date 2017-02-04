@@ -33,7 +33,7 @@ function Graph(parent)
 		var scale = document.createElement("div");
 		scale.style.position = "absolute";
 		scale.style.pointerEvents = "none";
-		scale.style.color = Editor.theme.text_color;
+		scale.style.color = Editor.theme.textColor;
 		scale.innerHTML = 1.0 - (0.5 * i);
 		this.scale.push(scale);
 		this.element.appendChild(scale);

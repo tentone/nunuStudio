@@ -71,14 +71,14 @@ function AudioPlayer(parent)
 
 	//Playback control
 	this.time = 0;
-	this.start_time = 0;
+	this.startTime = 0;
 	this.playing = false;
 	this.loop = false;
 
 	//Drag controll
-	this.seek_start = 0;
-	this.seek_time = 0;
-	this.seek_progress = 0;
+	this.seekStart = 0;
+	this.seekTime = 0;
+	this.seekProgress = 0;
 	this.dragging = false;
 
 	//Self pointer
@@ -92,27 +92,27 @@ function AudioPlayer(parent)
 	this.scrubber.onmousedown = function(event)
 	{
 		self.dragging = true;
-		self.seek_start = event.pageX;
-		self.seek_time = self.time;
+		self.seekStart = event.pageX;
+		self.seekTime = self.time;
 	};
 
 	this.onMouseMove = function(event)
 	{
 		if(self.dragging)
 		{
-			self.seek_progress = (event.pageX - self.seek_start) / (self.size.x - self.size.y * 1.1);
-			self.seek_progress += self.seek_time / self.buffer.duration;
+			self.seekProgress = (event.pageX - self.seekStart) / (self.size.x - self.size.y * 1.1);
+			self.seekProgress += self.seekTime / self.buffer.duration;
 
-			if(self.seek_progress < 0)
+			if(self.seekProgress < 0)
 			{
-				self.seek_progress = 0;
+				self.seekProgress = 0;
 			}
-			else if(self.seek_progress > 1)
+			else if(self.seekProgress > 1)
 			{
-				self.seek_progress = 1;
+				self.seekProgress = 1;
 			}
 
-			self.progress.style.width = (self.seek_progress * 100) + "%";
+			self.progress.style.width = (self.seekProgress * 100) + "%";
 			self.scrubber.style.left = self.progress.style.width;
 		}
 	};
@@ -121,7 +121,7 @@ function AudioPlayer(parent)
 	{
 		if(self.dragging)
 		{
-			self.time = self.seek_progress * self.buffer.duration;
+			self.time = self.seekProgress * self.buffer.duration;
 			self.dragging = false;
 
 			if(self.playing)
@@ -141,7 +141,7 @@ function AudioPlayer(parent)
 	{
 		if(self.playing)
 		{
-			self.time = self.context.currentTime - self.start_time;
+			self.time = self.context.currentTime - self.startTime;
 
 			var seconds = Math.round(self.time % 60);
 			if(seconds < 10)
@@ -232,7 +232,7 @@ AudioPlayer.prototype.play = function(time)
 	}
 
 	this.source.loop = this.loop;
-	this.start_time = this.context.currentTime - this.time;
+	this.startTime = this.context.currentTime - this.time;
 	this.source.start(this.context.currentTime, this.time);
 	this.playing = true;
 
@@ -246,7 +246,7 @@ AudioPlayer.prototype.pause = function()
 	{
 		this.playing = false;
 		this.source.stop();
-		this.time = this.context.currentTime - this.start_time;
+		this.time = this.context.currentTime - this.startTime;
 
 		this.icon.src = "editor/files/icons/misc/play.png";
 	}

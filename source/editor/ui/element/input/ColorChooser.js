@@ -9,14 +9,14 @@ function ColorChooser(parent)
 	this.element = document.createElement("input");
 	this.element.type = "text";
 	this.element.style.position = "absolute";
-	this.element.style.backgroundColor = Editor.theme.box_color;
-	this.element.style.color = Editor.theme.text_color;
+	this.element.style.backgroundColor = Editor.theme.boxColor;
+	this.element.style.color = Editor.theme.textColor;
 	this.element.style.borderStyle = "none";
 
 	//Color chooser
 	this.color = new jscolor(this.element);
-	this.color.backgroundColor = Editor.theme.box_color;
-	this.color.insetColor = Editor.theme.box_color;
+	this.color.backgroundColor = Editor.theme.boxColor;
+	this.color.insetColor = Editor.theme.boxColor;
 	this.color.shadow = false;
 	this.color.borderWidth = 0;
 	this.color.borderRadius = 0;

@@ -21,7 +21,7 @@ function Form(parent)
 	this.rows.push([]);
 
 	//Defaults
-	this.default_text_width = 80;
+	this.defaultTextWidth = 80;
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -48,8 +48,8 @@ Form.prototype.addText = function(text, fit)
 	var element = new Text(this.element);
 	element.setAlignment(Text.LEFT);
 	element.setText(text);
-	element.fit_content = (fit === true);
-	element.size.set(this.default_text_width, 20);
+	element.fitContent = (fit === true);
+	element.size.set(this.defaultTextWidth, 20);
 	this.add(element);
 
 	return element;
@@ -127,7 +127,7 @@ Form.prototype.updateInterface = function()
 	//Updated attached elements
 	for(var i = 0; i < this.rows.length; i++)
 	{
-		var max_size_y = 0;
+		var maxSizeY = 0;
 		for(var j = 0; j < this.rows[i].length; j++)
 		{
 			var element = this.rows[i][j];
@@ -143,9 +143,9 @@ Form.prototype.updateInterface = function()
 				element.visible = true;
 
 				//Update position tracker
-				if(element.size.y > max_size_y)
+				if(element.size.y > maxSizeY)
 				{
-					max_size_y = element.size.y;
+					maxSizeY = element.size.y;
 				}
 				position.x += element.size.x + this.spacing.x;
 			}
@@ -161,7 +161,7 @@ Form.prototype.updateInterface = function()
 		if(position.x !== 0)
 		{
 			position.x = 0;
-			position.y += max_size_y + this.spacing.y;
+			position.y += maxSizeY + this.spacing.y;
 		}
 	}
 
