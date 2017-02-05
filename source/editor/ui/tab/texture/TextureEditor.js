@@ -131,7 +131,7 @@ function TextureEditor(parent, closeable, container, index)
 	//Minification filter
 	this.form.addText("Min. filter");
 	this.minFilter = new DropdownList(this.form.element);
-	this.minFilter.size.set(180, 18);
+	this.minFilter.size.set(150, 18);
 	this.minFilter.addValue("Nearest", THREE.NearestFilter);
 	this.minFilter.addValue("Linear", THREE.LinearFilter);
 	this.minFilter.addValue("MIP Nearest Nearest", THREE.NearestMipMapNearestFilter);
@@ -152,7 +152,7 @@ function TextureEditor(parent, closeable, container, index)
 	//Magnification filter
 	this.form.addText("Mag. filter");
 	this.magFilter = new DropdownList(this.form.element);
-	this.magFilter.size.set(120, 18);
+	this.magFilter.size.set(150, 18);
 	this.magFilter.addValue("Nearest", THREE.NearestFilter);
 	this.magFilter.addValue("Linear", THREE.LinearFilter);
 	this.magFilter.setOnChange(function()
