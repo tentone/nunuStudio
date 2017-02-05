@@ -10,6 +10,19 @@ function TextureAsset(parent)
 	//Self pointer
 	var self = this;
 
+	this.element.ondblclick = function()
+	{
+		var tab = Interface.tab.getTab(TextureEditor, self.texture);
+
+		if(tab === null)
+		{
+			tab = Interface.tab.addTab(TextureEditor, true);
+			tab.attach(self.texture);
+		}
+
+		tab.select();
+	}
+
 	//Context menu event
 	this.element.oncontextmenu = function(event)
 	{

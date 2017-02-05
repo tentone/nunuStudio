@@ -13,10 +13,12 @@ function Asset(parent)
 	//Icon
 	this.icon = document.createElement("img");
 	this.icon.style.position = "absolute";
-	this.icon.style.bottom = "15px";
+	this.icon.style.bottom = "20px";
 	this.icon.style.right = "5px";
 	this.icon.style.width = "20px";
 	this.icon.style.height = "20px";
+	this.icon.style.pointerEvents = "none";
+	this.icon.style.opacity = 0.5;
 	this.icon.style.zIndex = 1;
 	this.element.appendChild(this.icon);
 
@@ -30,7 +32,6 @@ function Asset(parent)
 	this.text.style.whiteSpace = "nowrap";
 	this.text.style.color = Editor.theme.textColor;
 	this.text.style.height = "20px";
-	this.text.innerHTML = "";
 	this.element.appendChild(this.text);
 
 	//Element atributes

@@ -55,7 +55,7 @@ function PhysicsPanel(parent, obj)
 	//Body mass
 	this.form.addText("Mass");
 	this.mass = new NumberBox(this.form.element);
-	this.mass.size.set(80, 18);
+	this.mass.size.set(50, 18);
 	this.mass.setStep(0.1);
 	this.mass.setOnChange(function()
 	{
@@ -68,9 +68,9 @@ function PhysicsPanel(parent, obj)
 	this.form.nextRow();
 
 	//Body linear damping
-	this.form.addText("Linear Damping");
+	this.form.addText("Linear Damp.");
 	this.linearDamping = new NumberBox(this.form.element);
-	this.linearDamping.size.set(80, 18);
+	this.linearDamping.size.set(50, 18);
 	this.linearDamping.setStep(0.01);
 	this.linearDamping.setRange(0, 1);
 	this.linearDamping.setOnChange(function()
@@ -84,9 +84,9 @@ function PhysicsPanel(parent, obj)
 	this.form.nextRow();
 
 	//Body angular damping
-	this.form.addText("Angular Damping");
+	this.form.addText("Angular Damp.");
 	this.angularDamping = new NumberBox(this.form.element);
-	this.angularDamping.size.set(80, 18);
+	this.angularDamping.size.set(50, 18);
 	this.angularDamping.setStep(0.01);
 	this.angularDamping.setRange(0, 1);
 	this.angularDamping.setOnChange(function()
@@ -101,7 +101,7 @@ function PhysicsPanel(parent, obj)
 
 	//Allow sleep
 	this.allowSleep = new CheckBox(this.form.element);
-	this.form.addText("Allow sleep");
+	this.form.addText("Allow Sleep");
 	this.allowSleep.size.set(20, 15);
 	this.allowSleep.setOnChange(function()
 	{
@@ -114,9 +114,9 @@ function PhysicsPanel(parent, obj)
 	this.form.nextRow();
 
 	//Sleep speed limit
-	this.form.addText("Sleep speed limit");
+	this.form.addText("Sleep Speed");
 	this.sleepSpeedLimit = new NumberBox(this.form.element);
-	this.sleepSpeedLimit.size.set(80, 18);
+	this.sleepSpeedLimit.size.set(50, 18);
 	this.sleepSpeedLimit.setStep(0.01);
 	this.sleepSpeedLimit.setOnChange(function()
 	{
@@ -129,9 +129,9 @@ function PhysicsPanel(parent, obj)
 	this.form.nextRow();
 
 	//Sleep time limit
-	this.form.addText("Sleep time limit");
+	this.form.addText("Sleep Time");
 	this.sleepTimeLimit = new NumberBox(this.form.element);
-	this.sleepTimeLimit.size.set(80, 18);
+	this.sleepTimeLimit.size.set(50, 18);
 	this.sleepTimeLimit.setStep(0.01);
 	this.sleepTimeLimit.setOnChange(function()
 	{
@@ -145,7 +145,7 @@ function PhysicsPanel(parent, obj)
 
 	//Fixed rotation
 	this.fixedRotation = new CheckBox(this.form.element);
-	this.form.addText("Fixed rotation");
+	this.form.addText("Lock Rotation");
 	this.fixedRotation.size.set(20, 15);
 	this.fixedRotation.setOnChange(function()
 	{
@@ -158,9 +158,9 @@ function PhysicsPanel(parent, obj)
 	this.form.nextRow();
 
 	//Collising group
-	this.form.addText("Collision group");
+	this.form.addText("Collision Group");
 	this.collisionFilterGroup = new NumberBox(this.form.element);
-	this.collisionFilterGroup.size.set(80, 18);
+	this.collisionFilterGroup.size.set(30, 18);
 	this.collisionFilterGroup.setStep(1);
 	this.collisionFilterGroup.setOnChange(function()
 	{
