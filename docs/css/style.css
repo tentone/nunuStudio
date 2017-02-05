@@ -7,7 +7,7 @@ body
 	background-color: #FFFFFF;
 }
 
-h1, h2, h3, h4, h5, h6, p, .btn, .navbar-nav a, .form-control, .list-inline, small, #pricing {
+h1, h2, h3, h4, h5, h6, p, .btn, .navbar-nav a, .form-control, .list-inline, small, #examples {
 	font-family: 'Montserrat', sans-serif;
 }
 
@@ -457,16 +457,16 @@ footer {
 /*---------------Pricing Tables-------------------*/
 
 
-#pricing {
+#examples {
 	background: #333333;
 }
 
-.pricing-container {
+.examples-container {
 	padding-left: 0px;
 	padding-right: 0px;
 }
 
-.pricing-table {
+.examples-table {
 	background: transparent;
 	margin-bottom: 50px;
 	margin-top: 0px;
@@ -475,7 +475,7 @@ footer {
 	-o-transition: all 0.25s ease-in-out;
 	transition: all 0.25s ease-in-out;
 }
-.pricing-table.active {
+.examples-table.active {
 	box-shadow: 0px 0px 12px rgba(41,46,50,0.6); 
 	position: absolute;
 	margin: auto;
@@ -484,7 +484,7 @@ footer {
 	border-top-right-radius: 10px;
 }
 
-.pricing-table:hover {
+.examples-table:hover {
 	margin-top: -10px;
 	-webkit-transition: all 0.25s ease-in-out;
 	-moz-transition: all 0.25s ease-in-out;
@@ -492,7 +492,7 @@ footer {
 	transition: all 0.25s ease-in-out;
 }
 
-.pricing-table li {
+.examples-table li {
 	padding-left: 20px;
 	padding-right: 20px;
 }
@@ -515,7 +515,7 @@ footer {
 }
 
 
-.pricing-table:hover li.price  {
+.examples-table:hover li.price  {
 	background: #303236;
 	-webkit-transition: all 0.85s ease-in-out;
 	-moz-transition: all 0.85s ease-in-out;
@@ -561,7 +561,7 @@ footer {
 	letter-spacing: 1px;
 }
 
-.pricing-container .btn {
+.examples-container .btn {
 		border-radius: 0;
 }
 

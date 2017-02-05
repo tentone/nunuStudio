@@ -276,29 +276,6 @@ include("editor/Settings.js");
 //include("editor/ui/tab/ConsoleTab.js");
 //include("editor/Console.js");
 
-//WebVR polyfill
-/*if(navigator.getVRDisplays === undefined)
-{
-	include("lib/webvr-polyfill.js", function()
-	{
-		window.WebVRConfig =
-		{
-			FORCE_ENABLE_VR: true, //Forces availability of VR mode in desktop
-			CARDBOARD_UI_DISABLED: true,
-			ROTATE_INSTRUCTIONS_DISABLED: true,
-			TOUCH_PANNER_DISABLED: true,
-			MOUSE_KEYBOARD_CONTROLS_DISABLED: false,
-			K_FILTER: 1.0, //0 for accelerometer, 1 for gyro
-			PREDICTION_TIME_S: 0.04, //Time predict during fast motion
-			YAW_ONLY: false,
-			DEFER_INITIALIZATION: false,
-			ENABLE_DEPRECATED_API: false,
-			BUFFER_SCALE: 0.5,
-			DIRTY_SUBMIT_FRAME_BINDINGS: false
-		}
-	});
-}*/
-
 //Editor state
 Editor.STATE_IDLE = 8;
 Editor.STATE_EDITING = 9;
@@ -1569,6 +1546,7 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile("runtime/fullscreen.png", dir + "\\fullscreen.png");
 	FileSystem.copyFile("runtime/logo.png", dir + "\\logo.png");
 	FileSystem.copyFile("runtime/index.html", dir + "\\index.html");
+	//FileSystem.copyFile("lib/webvr-polyfill.min.js", dir + "\\webvr-polyfill.min.js");
 	FileSystem.copyFile("../build/nunu.min.js", dir + "\\nunu.min.js");
 	Editor.saveProgram(dir + "\\app.isp", true, true);
 }

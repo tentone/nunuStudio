@@ -7,7 +7,30 @@
 	</head>
 
 	<body style="background-color: #222222" onload="initialize();" onresize="resize();" oncontextmenu="return false;">
+		<!--nunuStudio lib-->
 		<script type="text/javascript" src="nunu.min.js"></script>
+
+		<!--WebVR Polyfill-->
+		<!--<script type="text/javascript">
+			window.WebVRConfig =
+			{
+				//FORCE_ENABLE_VR: true, //Forces availability of VR mode in desktop
+				//CARDBOARD_UI_DISABLED: false,
+				//ROTATE_INSTRUCTIONS_DISABLED: false,
+				//TOUCH_PANNER_DISABLED: true,
+				//MOUSE_KEYBOARD_CONTROLS_DISABLED: true,
+				//K_FILTER: 1.0, //0 for accelerometer, 1 for gyro
+				//PREDICTION_TIME_S: 0.04, //Time predict during fast motion
+				//YAW_ONLY: false,
+				//DEFER_INITIALIZATION: false,
+				//ENABLE_DEPRECATED_API: false,
+				BUFFER_SCALE: 0.5,
+				//DIRTY_SUBMIT_FRAME_BINDINGS: false
+			}
+		</script>
+		<script type="text/javascript" src="webvr-polyfill.min.js"></script>-->
+
+		<!--App code-->
 		<script type="text/javascript">
 			var app;
 
