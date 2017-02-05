@@ -6,9 +6,9 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Main container
 	this.main = new DualDivisionResizable(this.element);
-	this.main.tabPosition = 0.7;
-	this.main.tabPositionMin = 0.3;
-	this.main.tabPositionMax = 0.7;
+	this.main.tabPosition = 0.6;
+	this.main.tabPositionMin = 0.05;
+	this.main.tabPositionMax = 0.95;
 	this.main.updateInterface();
 
 	//Change main div aspect
@@ -428,7 +428,7 @@ function ParticleEditor(parent, closeable, container, index)
 	
 	for(var i = 0; i < 4; i++)
 	{
-		this.form.addText((25*i + 25) + "%");
+		this.form.addText((25*i + 25) + "%", true);
 		
 		var value = new ColorChooser(self.form.element);
 		value.size.set(80, 18);

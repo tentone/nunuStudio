@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.19 Alpha";
-Nunu.TIMESTAMP = "201702040109";
+Nunu.TIMESTAMP = "201702050401";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -31064,7 +31064,7 @@ Mouse.initialize = function() {
   Mouse.position = new THREE.Vector2(0, 0);
   Mouse.delta = new THREE.Vector2(0, 0);
   Mouse.wheel = 0;
-  Mouse._doubleClicked = !1;
+  Mouse.doubleClicked = !1;
   Mouse.canvas = null;
   Mouse.events = [];
   for (var a = 0;3 > a;a++) {
@@ -31145,7 +31145,7 @@ Mouse.buttonPressed = function(a) {
   return Mouse.keys[a].pressed;
 };
 Mouse.buttonDoubleClicked = function() {
-  return Mouse._doubleClicked;
+  return Mouse.doubleClicked;
 };
 Mouse.buttonJustPressed = function(a) {
   return Mouse.keys[a].justPressed;
@@ -31167,8 +31167,7 @@ Mouse.update = function() {
     Mouse._keys[a].justPressed && Mouse.keys[a].justPressed && (Mouse._keys[a].justPressed = !1), Mouse._keys[a].justReleased && Mouse.keys[a].justReleased && (Mouse._keys[a].justReleased = !1), Mouse.keys[a].set(Mouse._keys[a].justPressed, Mouse._keys[a].pressed, Mouse._keys[a].justReleased);
   }
   Mouse._wheelUpdated ? (Mouse.wheel = Mouse._wheel, Mouse._wheelUpdated = !1) : Mouse.wheel = 0;
-  Mouse._doubleClicked && (Mouse._doubleClicked = !0);
-  Mouse._doubleClicked = !1;
+  Mouse._doubleClicked ? (Mouse.doubleClicked = !0, Mouse._doubleClicked = !1) : Mouse.doubleClicked = !1;
   Mouse._positionUpdated ? (Mouse.delta.x = Mouse._delta.x, Mouse.delta.y = Mouse._delta.y, Mouse._delta.set(0, 0), Mouse.position.x = Mouse._position.x, Mouse.position.y = Mouse._position.y, Mouse._positionUpdated = !1) : (Mouse.delta.x = 0, Mouse.delta.y = 0);
 };
 Mouse.dispose = function() {

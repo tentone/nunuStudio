@@ -14,9 +14,8 @@ function MaterialEditor(parent, closeable, container, index)
 		self.updateInterface();
 	});
 	this.main.tabPosition = 0.5;
-	this.main.tabPositionMin = 0.3;
-	this.main.tabPositionMax = 0.7;
-	this.main.updateInterface();
+	this.main.tabPositionMin = 0.05;
+	this.main.tabPositionMax = 0.95;
 
 	//Preview division
 	this.preview = new DualDivisionResizable(this.main.divA);
@@ -28,7 +27,6 @@ function MaterialEditor(parent, closeable, container, index)
 	this.preview.tabPosition = 0.8;
 	this.preview.tabPositionMin = 0.3;
 	this.preview.tabPositionMax = 0.8;
-	this.preview.updateInterface();
 
 	//Change preview division style
 	this.preview.divA.style.overflow = "hidden";
@@ -41,7 +39,6 @@ function MaterialEditor(parent, closeable, container, index)
 	//Material preview
 	//Canvas
 	this.canvas = new Canvas(this.preview.divA);
-	this.canvas.updateInterface();
 
 	//Element atributes
 	this.children = [];
@@ -156,11 +153,14 @@ function MaterialEditor(parent, closeable, container, index)
 	});
 	this.children.push(this.skyEnabled);
 
-	//Generic Material parameters
+	//Form
 	this.form = new Form(this.main.divB);
-	this.form.position.set(10, 8);
-	this.form.spacing.set(10, 8);
+	this.form.position.set(10, 5);
+	this.form.spacing.set(5, 5);
 	
+	this.form.addText("Material Editor");
+	this.form.nextRow();
+
 	//Name
 	this.form.addText("Name");
 	this.name = new TextBox(this.form.element);
@@ -420,10 +420,10 @@ MaterialEditor.prototype.update = function()
 	}
 }
 
-//Update division Size
+//Update elements
 MaterialEditor.prototype.updateInterface = function()
 {	
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -450,7 +450,7 @@ MaterialEditor.prototype.updateInterface = function()
 
 	//Update renderer and canvas
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.camera.aspect = this.canvas.size.x/this.canvas.size.y
+	this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
 	this.camera.updateProjectionMatrix();
 
 	//Update children

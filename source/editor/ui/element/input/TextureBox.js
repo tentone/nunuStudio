@@ -102,9 +102,9 @@ function TextureBox(parent)
 	this.form.addText("Wrap Hor");
 	this.wrapS = new DropdownList(this.element);
 	this.wrapS.size.set(120, 18);
-	this.wrapS.addValue("Clamp to edge", THREE.ClampToEdgeWrapping);
+	this.wrapS.addValue("Clamp to Edge", THREE.ClampToEdgeWrapping);
 	this.wrapS.addValue("Repeat", THREE.RepeatWrapping);
-	this.wrapS.addValue("Repeat mirrored", THREE.MirroredRepeatWrapping);
+	this.wrapS.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
 	this.form.add(this.wrapS);
 	this.form.nextRow();
 
@@ -112,9 +112,9 @@ function TextureBox(parent)
 	this.form.addText("Wrap Vert");
 	this.wrapT = new DropdownList(this.element);
 	this.wrapT.size.set(120, 18);
-	this.wrapT.addValue("Clamp to edge", THREE.ClampToEdgeWrapping);
+	this.wrapT.addValue("Clamp to Edge", THREE.ClampToEdgeWrapping);
 	this.wrapT.addValue("Repeat", THREE.RepeatWrapping);
-	this.wrapT.addValue("Repeat mirrored", THREE.MirroredRepeatWrapping);
+	this.wrapT.addValue("Repeat Mirrored", THREE.MirroredRepeatWrapping);
 	this.form.add(this.wrapT);
 	this.form.nextRow();
 
