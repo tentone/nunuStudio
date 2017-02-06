@@ -1,9 +1,5 @@
-
-/* ==========================================================================
-	 Global styles
-	 ========================================================================== */
-body
-{
+/*Global styles*/
+body {
 	background-color: #FFFFFF;
 }
 
@@ -53,7 +49,7 @@ p {
 	font-weight: 400;
 }
 
-/*------------------Utilities---------------------*/
+/*Utilities*/
 a {
 	color: inherit;
 	font-weight: inherit;
@@ -80,13 +76,14 @@ a:hover, a:focus {
 	background: #222222; /* Safari */
 	color: #FFFFFF;
 }
+
 ::-moz-selection {
 	background: #222222; /* Firefox */
 	color: #FFFFFF;
 }
 
 
-/*------------------Buttons---------------------*/
+/*Buttons*/
 .btn:focus {
 	outline: 0px auto -webkit-focus-ring-color;
 	outline: none;
@@ -150,10 +147,7 @@ a:hover, a:focus {
 	transition: all 0.35s ease-in-out;
 }
 
-
-
-
-/*-----------------Margins------------------*/
+/*Margins*/
 .margin-0 {
 		margin-bottom: 0 !important;
 }
@@ -191,9 +185,7 @@ a:hover, a:focus {
 		margin-bottom: 100px !important;
 }
 
-
-/*-----------------Colors------------------*/
-
+/*Colors*/
 .black {
 	color: #222222;
 }
@@ -226,15 +218,20 @@ a:hover, a:focus {
 	background: #6d3f96;
 }
 
-
-
-/* ==========================================================================
-	 Nav Styles
-	 ========================================================================== */
+/*Navigation bar*/
+.navbar-visible {
+		border: 0px solid rgba(0, 0, 0, 0);
+		background-color: #333333;
+		margin: auto;
+		min-height: 60px;
+		padding-top: 8px;
+		position: fixed;
+		top: -60px;
+}
 
 .navbar {
 		border: 0px solid rgba(0, 0, 0, 0);
-		background: #333333;
+		background-color: #333333;
 		margin: auto;
 		min-height: 60px;
 		padding-top: 8px;
@@ -277,10 +274,7 @@ a:hover, a:focus {
 }
 
 
-
-/* ==========================================================================
-Main styles
-========================================================================== */
+/*Main styles*/
 header
 {
 	width: 100%;
@@ -336,6 +330,7 @@ header
 		top: 4px;
 		width: 4px;
 }
+
 @keyframes scrolling {
 0% {
 		opacity: 0;
@@ -349,6 +344,16 @@ header
 		opacity: 0;
 		top: 25px;
 }
+}
+
+/*nunu*/
+#nunu {
+	background: url(../img/editor.png) #222222 no-repeat center center fixed;
+	min-height: 300px;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 .pad-xl {
@@ -367,16 +372,6 @@ header
 	padding: 30px 0px;
 }
 
-
-
-#nunu {
-	background: url(../img/editor.png) #222222 no-repeat center center fixed;
-	min-height: 300px;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-}
 
 hr.line {
 	width: 100%;
@@ -401,15 +396,6 @@ hr.line {
 .iphone {
 		position: relative;
 		height: 200px;
-}
-
-.iphone img {
-		margin: 0 auto;
-		position: absolute;
-		left: 0;
-		right: 0;
-		width: 100%;
-		max-width: 440px;
 }
 
 
@@ -453,9 +439,7 @@ footer {
 }
 
 
-
-/*---------------Pricing Tables-------------------*/
-
+/*Pricing Tables-*/
 
 #examples {
 	background: #333333;
@@ -565,12 +549,7 @@ footer {
 		border-radius: 0;
 }
 
-
-
-
-/* ==========================================================================
-	 Form styles
-	 ========================================================================== */
+/*Form styles*/
 .form-control {
 		background-color: #FFFFFF;
 		background-image: none;
@@ -604,12 +583,7 @@ footer {
 		opacity: 1;
 }
 
-
-
-
-/* ==========================================================================
-	 Mobile styles
-	 ========================================================================== */
+/*Mobile styles*/
 /* Landscape phones and down */
 @media (max-width: 480px) { 
 
@@ -638,38 +612,24 @@ footer {
 
 /* Landscape phone to portrait tablet */
 @media (min-width: 481px) and (max-width: 767px) { 
-
 #nunu { 
 			background-attachment: scroll;
 	}
-
 }
-
 
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 991px) {
-
 #nunu { 
 			background-attachment: scroll;
 	}
-	
 }
 
-
-
-/* Desktops and laptops ----------- */
+/* Desktops and laptops  */
 @media (min-width: 992px) and (max-width: 1199px) {
 
 }
 		 
-
-
-/* Large screens ----------- */
+/* Large screens  */
 @media (min-width: 1200px) and (max-width: 3000px) {
 
 }   
-
-
-
-
-
