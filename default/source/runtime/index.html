@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
+	</head>
+
+	<body onload="initialize();" onresize="resize();" oncontextmenu="return false;">
+		<script type="text/javascript" src="nunu.min.js"></script>
+		<script type="text/javascript">
+			var app;
+
+			function initialize()
+			{
+				app = new NunuApp();
+				app.loadProgram("app.isp");
+				app.run();
+
+				if(!app.program.vr || !Nunu.webvrAvailable())
+				{
+					var button = document.getElementById("vr_button");
+					button.style.visibility = "hidden";
+				}
+			}
+
+			function resize()
+			{
+				app.resize();
+			}
+
+			function toggleFullscreen()
+			{
+				if(Nunu.fullscreen === true)
+				{
+					NunuApp.setFullscreen(false);
+					app.resize();
+				}
+				else
+				{
+					NunuApp.setFullscreen(true);
+					app.resize();
+				}
+			}
+
+			var vr = true;
+			function toggleVR()
+			{
+				if(app !== null)
+				{
+					vr = !vr;
+					
+					if(vr)
+					{
+						NunuApp.program.displayVR();
+					}
+					else
+					{
+						NunuApp.program.exitVR();
+					}
+				}
+			}
+		</script>
+		<div id="fullscreen_button" onclick="toggleFullscreen();" style="position:absolute; z-index: 10000; right:30px; bottom:30px">
+			<img style="position:absolute; cursor:pointer; opacity:0.4" width=25 height=25 src="fullscreen.png" onmouseenter="this.style.opacity = 1.0;" onmouseleave="this.style.opacity=0.4;"></img>
+		</div>
+		<div id = "vr_button" onclick="toggleVR();" style="position:absolute; z-index: 10000; right:70px; bottom:30px">
+			<img style="position:absolute; cursor:pointer; opacity:0.4" width=25 height=25 src="vr.png" onmouseenter="this.style.opacity = 1.0;" onmouseleave="this.style.opacity=0.4;"></img>
+		</div>
+	</body>
+</html>

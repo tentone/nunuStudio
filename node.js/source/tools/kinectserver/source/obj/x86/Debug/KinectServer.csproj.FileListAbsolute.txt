@@ -1,0 +1,8 @@
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\bin\Debug\Microsoft.Kinect.dll
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\bin\Debug\Microsoft.Kinect.xml
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\obj\x86\Debug\KinectServer.csprojResolveAssemblyReference.cache
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\bin\Debug\Fleck.dll
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\bin\Debug\server.exe
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\bin\Debug\server.pdb
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\obj\x86\Debug\server.exe
+C:\Users\Jose Ferrão\Desktop\interact-Fabrica\tools\kinectserver\source\obj\x86\Debug\server.pdb
