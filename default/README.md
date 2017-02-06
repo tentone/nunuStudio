@@ -1,0 +1,1 @@
+This editor works without node.js installed  

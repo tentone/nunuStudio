@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
+		<link rel="icon" type="image/png" href="editor/files/icon.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="editor/files/icon.png" sizes="16x16">
+	</head>
+
+<!-- Runtime dependencies -->
+<script type="text/javascript" src="lib/three/three.min.js"></script>
+<script type="text/javascript" src="lib/three/effects/VREffect.js"></script>
+<script type="text/javascript" src="lib/three/animation/Animation.js"></script>
+<script type="text/javascript" src="lib/three/animation/AnimationHandler.js"></script>
+<script type="text/javascript" src="lib/three/animation/KeyFrameAnimation.js"></script>
+
+<script type="text/javascript" src="lib/cannon.min.js"></script>
+<script type="text/javascript" src="lib/leap.min.js"></script>
+<script type="text/javascript" src="lib/stats.min.js"></script>
+<script type="text/javascript" src="lib/SPE.min.js"></script>
+<script type="text/javascript" src="lib/spine.min.js"></script>
+<script type="text/javascript" src="lib/opentype.min.js"></script>
+
+<!-- Core runtime modules -->
+<script type="text/javascript" src="core/Global.js"></script>
+<script type="text/javascript" src="core/FileSystem.js"></script>
+
+<script type="text/javascript" src="core/three/Object3D.js"></script>
+<script type="text/javascript" src="core/three/Vector3.js"></script>
+<script type="text/javascript" src="core/three/Vector2.js"></script>
+<script type="text/javascript" src="core/three/Texture.js"></script>
+<script type="text/javascript" src="core/three/LightShadow.js"></script>
+<script type="text/javascript" src="core/three/Fog.js"></script>
+<script type="text/javascript" src="core/three/Material.js"></script>
+<script type="text/javascript" src="core/three/MultiMaterial.js"></script>
+
+<script type="text/javascript" src="core/input/Key.js"></script>
+<script type="text/javascript" src="core/input/Keyboard.js"></script>
+<script type="text/javascript" src="core/input/Mouse.js"></script>
+
+<script type="text/javascript" src="core/webvr/VRControls.js"></script>
+
+<script type="text/javascript" src="core/resources/Font.js"></script>
+<script type="text/javascript" src="core/resources/Video.js"></script>
+<script type="text/javascript" src="core/resources/Audio.js"></script>
+<script type="text/javascript" src="core/resources/Image.js"></script>
+
+<script type="text/javascript" src="core/texture/CanvasTexture.js"></script>
+<script type="text/javascript" src="core/texture/VideoTexture.js"></script>
+<script type="text/javascript" src="core/texture/WebcamTexture.js"></script>
+<script type="text/javascript" src="core/texture/Texture.js"></script>
+
+<script type="text/javascript" src="core/loaders/FontLoader.js"></script>
+<script type="text/javascript" src="core/loaders/ImageLoader.js"></script>
+<script type="text/javascript" src="core/loaders/VideoLoader.js"></script>
+<script type="text/javascript" src="core/loaders/AudioLoader.js"></script>
+<script type="text/javascript" src="core/loaders/TextureLoader.js"></script>
+<script type="text/javascript" src="core/loaders/ObjectLoader.js"></script>
+<script type="text/javascript" src="core/loaders/TTFLoader.js"></script>
+
+<script type="text/javascript" src="core/objects/device/LeapMotion.js"></script>
+<script type="text/javascript" src="core/objects/device/KinectDevice.js"></script>
+<script type="text/javascript" src="core/objects/mesh/Mesh.js"></script>
+<script type="text/javascript" src="core/objects/mesh/SkinnedMesh.js"></script>
+<script type="text/javascript" src="core/objects/mesh/Text3D.js"></script>
+<script type="text/javascript" src="core/objects/sprite/Sprite.js"></script>
+<script type="text/javascript" src="core/objects/sprite/TextSprite.js"></script>
+<script type="text/javascript" src="core/objects/lights/PointLight.js"></script>
+<script type="text/javascript" src="core/objects/lights/SpotLight.js"></script>
+<script type="text/javascript" src="core/objects/lights/AmbientLight.js"></script>
+<script type="text/javascript" src="core/objects/lights/DirectionalLight.js"></script>
+<script type="text/javascript" src="core/objects/lights/HemisphereLight.js"></script>
+<script type="text/javascript" src="core/objects/lights/RectAreaLight.js"></script>
+<script type="text/javascript" src="core/objects/lights/Sky.js"></script>
+<script type="text/javascript" src="core/objects/cameras/PerspectiveCamera.js"></script>
+<script type="text/javascript" src="core/objects/cameras/OrthographicCamera.js"></script>
+<script type="text/javascript" src="core/objects/audio/AudioEmitter.js"></script>
+<script type="text/javascript" src="core/objects/audio/PositionalAudio.js"></script>
+<script type="text/javascript" src="core/objects/script/Script.js"></script>
+<script type="text/javascript" src="core/objects/physics/PhysicsObject.js"></script>
+<script type="text/javascript" src="core/objects/spine/SpineAnimation.js"></script>
+<script type="text/javascript" src="core/objects/spine/SpineTexture.js"></script>
+<script type="text/javascript" src="core/objects/Bone.js"></script>
+<script type="text/javascript" src="core/objects/Container.js"></script>
+<script type="text/javascript" src="core/objects/ParticleEmitter.js"></script>
+<script type="text/javascript" src="core/objects/Program.js"></script>
+<script type="text/javascript" src="core/objects/Scene.js"></script>
+
+<script type="text/javascript" src="core/utils/Base64Utils.js"></script>
+<script type="text/javascript" src="core/utils/ArraybufferUtils.js"></script>
+<script type="text/javascript" src="core/utils/MathUtils.js"></script>
+<script type="text/javascript" src="core/utils/ObjectUtils.js"></script>
+<script type="text/javascript" src="core/utils/BufferUtils.js"></script>
+
+<!-- Codemirror -->
+<script type="text/javascript" src="lib/codemirror/codemirror.min.js"></script>
+<script type="text/javascript" src="lib/codemirror/codemirror.css"></script>
+<script type="text/javascript" src="lib/codemirror/keymap/sublime.js"></script>
+<script type="text/javascript" src="lib/codemirror/keymap/emacs.js"></script>
+<script type="text/javascript" src="lib/codemirror/keymap/vim.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/edit/closebrackets.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/edit/matchbrackets.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/search/search.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/search/searchcursor.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/search/jump-to-line.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/hint/show-hint.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/hint/show-hint.css"></script>
+<script type="text/javascript" src="lib/codemirror/addon/hint/anyword-hint.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/dialog/dialog.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/dialog/dialog.css"></script>
+<script type="text/javascript" src="lib/codemirror/addon/selection/active-line.js"></script>
+<script type="text/javascript" src="lib/codemirror/mode/javascript.js"></script>
+<script type="text/javascript" src="lib/codemirror/mode/glsl.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/lint/lint.css"></script>
+<script type="text/javascript" src="lib/codemirror/addon/lint/lint.js"></script>
+<script type="text/javascript" src="lib/codemirror/addon/lint/javascript-lint.js"></script>
+
+<!-- Codemirror/theme -->
+<!-- <script type="text/javascript" src="lib/codemirror/theme/*"></script> -->
+
+<!-- Threejs -->
+<script type="text/javascript" src="lib/three/loaders/OBJLoader.js"></script>
+<script type="text/javascript" src="lib/three/loaders/MTLLoader.js"></script>
+<script type="text/javascript" src="lib/three/loaders/VRMLLoader.js"></script>
+<script type="text/javascript" src="lib/three/loaders/FBXLoader.js"></script>
+<script type="text/javascript" src="lib/three/loaders/GLTFLoader.js"></script>
+<script type="text/javascript" src="lib/three/loaders/ColladaLoader.js"></script>
+<script type="text/javascript" src="lib/three/loaders/PLYLoader.js"></script>
+<script type="text/javascript" src="lib/three/loaders/VTKLoader.js"></script>
+<script type="text/javascript" src="lib/three/loaders/AWDLoader.js"></script>
+<script type="text/javascript" src="lib/three/loaders/TGALoader.js"></script>
+<script type="text/javascript" src="lib/three/loaders/PCDLoader.js"></script>
+<!-- <script type="text/javascript" src="lib/three/loaders/DRACOLoader.js"></script> -->
+
+<script type="text/javascript" src="lib/jshint.min.js"></script>
+<script type="text/javascript" src="lib/jscolor.min.js"></script>
+<script type="text/javascript" src="lib/quickhull.js"></script>
+<!-- <script type="text/javascript" src="lib/draco.js"></script> -->
+
+<!-- Core modules -->
+<script type="text/javascript" src="core/utils/Mesh2shape.js"></script>
+
+<!-- Internal modules -->
+<script type="text/javascript" src="editor/ui/element/Bar.js"></script>
+<script type="text/javascript" src="editor/ui/element/Button.js"></script>
+<script type="text/javascript" src="editor/ui/element/Text.js"></script>
+<script type="text/javascript" src="editor/ui/element/Division.js"></script>
+<script type="text/javascript" src="editor/ui/element/ImageBox.js"></script>
+<script type="text/javascript" src="editor/ui/element/DivisionResizable.js"></script>
+<script type="text/javascript" src="editor/ui/element/ButtonImage.js"></script>
+<script type="text/javascript" src="editor/ui/element/ButtonDrawer.js"></script>
+<script type="text/javascript" src="editor/ui/element/Canvas.js"></script>
+<script type="text/javascript" src="editor/ui/element/DualDivisionResizable.js"></script>
+<script type="text/javascript" src="editor/ui/element/ButtonImageToggle.js"></script>
+<script type="text/javascript" src="editor/ui/element/Form.js"></script>
+
+<script type="text/javascript" src="editor/ui/element/input/Graph.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/CodeEditor.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/CheckBox.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/TextBox.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/TextArea.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/ColorChooser.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/Slider.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/DropdownList.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/NumberBox.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/CoordinatesBox.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/ImageChooser.js"></script>
+<script type="text/javascript" src="editor/ui/element/input/TextureBox.js"></script>
+
+<script type="text/javascript" src="editor/ui/DropdownMenu.js"></script>
+<script type="text/javascript" src="editor/ui/TabGroup.js"></script>
+<script type="text/javascript" src="editor/ui/TabElement.js"></script>
+<script type="text/javascript" src="editor/ui/TabButton.js"></script>
+<script type="text/javascript" src="editor/ui/TreeView.js"></script>
+<script type="text/javascript" src="editor/ui/TreeElement.js"></script>
+<script type="text/javascript" src="editor/ui/ContextMenu.js"></script>
+<script type="text/javascript" src="editor/ui/AssetExplorer.js"></script>
+
+<script type="text/javascript" src="editor/ui/asset/Asset.js"></script>
+<script type="text/javascript" src="editor/ui/asset/MaterialAsset.js"></script>
+<script type="text/javascript" src="editor/ui/asset/TextureAsset.js"></script>
+<script type="text/javascript" src="editor/ui/asset/FontAsset.js"></script>
+<script type="text/javascript" src="editor/ui/asset/AudioAsset.js"></script>
+
+<script type="text/javascript" src="editor/files/style/editor.css"></script>
+<script type="text/javascript" src="editor/ui/theme/Theme.js"></script>
+<script type="text/javascript" src="editor/ui/theme/ThemeDark.js"></script>
+<script type="text/javascript" src="editor/ui/theme/ThemeLight.js"></script>
+
+<script type="text/javascript" src="editor/ui/tab/ScriptEditor.js"></script>
+<script type="text/javascript" src="editor/ui/tab/SceneEditor.js"></script>
+<script type="text/javascript" src="editor/ui/tab/SettingsTab.js"></script>
+<script type="text/javascript" src="editor/ui/tab/ParticleEditor.js"></script>
+<script type="text/javascript" src="editor/ui/tab/AboutTab.js"></script>
+
+<script type="text/javascript" src="editor/ui/tab/MaterialEditor.js"></script>
+<script type="text/javascript" src="editor/ui/tab/materialeditor/PhongMaterialEditor.js"></script>
+<script type="text/javascript" src="editor/ui/tab/materialeditor/LambertMaterialEditor.js"></script>
+<script type="text/javascript" src="editor/ui/tab/materialeditor/BasicMaterialEditor.js"></script>
+<script type="text/javascript" src="editor/ui/tab/materialeditor/StandardMaterialEditor.js"></script>
+<script type="text/javascript" src="editor/ui/tab/materialeditor/SpriteMaterialEditor.js"></script>
+<script type="text/javascript" src="editor/ui/tab/materialeditor/ShaderMaterialEditor.js"></script>
+<script type="text/javascript" src="editor/ui/tab/materialeditor/PointMaterialEditor.js"></script>
+
+<script type="text/javascript" src="editor/ui/panels/Panel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/ObjectPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/AudioPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/ScriptPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/ScenePanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/ProgramPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/PhysicsPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/mesh/MeshPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/mesh/Text3DPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/devices/LeapPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/devices/KinectPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/cameras/PerspectiveCameraPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/cameras/OrthographicCameraPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/lights/SkyPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/lights/LightPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/lights/RectAreaLightPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/lights/HemisphereLightPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/lights/PointLightPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/lights/DirectionalLightPanel.js"></script>
+<script type="text/javascript" src="editor/ui/panels/lights/SpotLightPanel.js"></script>
+
+<script type="text/javascript" src="editor/tools/TransformControls.js"></script>
+<script type="text/javascript" src="editor/tools/GizmoMaterial.js"></script>
+<script type="text/javascript" src="editor/tools/GizmoLineMaterial.js"></script>
+<script type="text/javascript" src="editor/tools/TransformGizmo.js"></script>
+<script type="text/javascript" src="editor/tools/TransformGizmoRotate.js"></script>
+<script type="text/javascript" src="editor/tools/TransformGizmoScale.js"></script>
+<script type="text/javascript" src="editor/tools/TransformGizmoTranslate.js"></script>
+
+<script type="text/javascript" src="editor/helpers/ParticleEmitterHelper.js"></script>
+<script type="text/javascript" src="editor/helpers/ObjectIconHelper.js"></script>
+<script type="text/javascript" src="editor/helpers/PhysicsObjectHelper.js"></script>
+<script type="text/javascript" src="editor/helpers/WireframeHelper.js"></script>
+<script type="text/javascript" src="editor/helpers/BoundingBoxHelper.js"></script>
+<script type="text/javascript" src="editor/helpers/GridHelper.js"></script>
+<script type="text/javascript" src="editor/helpers/RectAreaLightHelper.js"></script>
+
+<script type="text/javascript" src="editor/utils/FontRenderer.js"></script>
+<script type="text/javascript" src="editor/utils/MaterialRenderer.js"></script>
+<script type="text/javascript" src="editor/utils/ObjectIcons.js"></script>
+
+<script type="text/javascript" src="editor/history/History.js"></script>
+<script type="text/javascript" src="editor/history/Action.js"></script>
+
+<script type="text/javascript" src="editor/DragBuffer.js"></script>
+<script type="text/javascript" src="editor/Interface.js"></script>
+<script type="text/javascript" src="editor/Settings.js"></script>
+
+<!-- Nunu global -->
+<script type="text/javascript" src="Nunu.js"></script>
+	<body onload="Editor.initialize();" onresize="Editor.resize();" oncontextmenu="return false;">
+		<script type="text/javascript" src="Editor.js"></script>
+	</body>
+</html>
