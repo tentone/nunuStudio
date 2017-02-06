@@ -25,7 +25,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/1.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/5.png)
 
 ### Examples
-[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/pong.png)](http://tentone.github.io/nunuStudio/examples/pong)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/fps.png)](http://tentone.github.io/nunuStudio/examples/fps)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/spine.png)](http://tentone.github.io/nunuStudio/examples/spine)
+[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/pong.png)](http://tentone.github.io/nunuStudio/examples/pong)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/fps.png)](http://tentone.github.io/nunuStudio/small/fps)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/spine.png)](http://tentone.github.io/nunuStudio/examples/spine)
 
 ### Todo
 - Documentation website

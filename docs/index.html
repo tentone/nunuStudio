@@ -5,16 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>nunuStudio</title>
-	<meta name="keywords" content="">
-	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		
-	<!--Porperties-->
-	<meta property="og:title" content="">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="">
-	<meta property="og:site_name" content="">
-	<meta property="og:description" content="">
 
 	<!--Styles-->
 	<link rel="stylesheet" href="css/lib/font-awesome.min.css">
@@ -25,9 +16,7 @@
 
 	<!--Javascript-->
 	<script src="js/lib/jquery-1.11.0.min.js"></script>
-	<script src="js/lib/wow.min.js"></script>
 	<script src="js/lib/bootstrap.min.js"></script>
-	<script src="js/lib/modernizr-2.7.1.js"></script>
 	<script src="js/main.js"></script>
 </head>
 
@@ -62,35 +51,36 @@
 	<!--Principal container container-->	
 	<header>
 		<div class="container">
+			<!--Live demo-->
 			<iframe style="position:absolute; left:0%; top:0%; height:100%; width:100%; border:none" src="http://tentone.github.io/nunuStudio/examples/fps"></iframe>
+			
+			<!--Logo-->
 			<div class="row">
 				<div class="col-xs-6">
 					<a href="index.html"><img src="img/logo.png" width="230" alt="Logo"></a>
 				</div>
 			</div>
 			
+			<!--Title and buttons-->
 			<div class="row header-info">
-
-				<div class="col-sm-10 col-sm-offset-1 text-center">
-
-					<h1 class="wow fadeIn">Create 3D content that run everywhere!</h1>
-					<br/>
-					<p class="lead wow fadeIn" data-wow-delay="0.5s">
+				<div class="col-sm-10 col-sm-offset-1 text-center">	
+					<h1>3D content that run everywhere!</h1>
+					<p class="lead">
 						Fully featured IDE for 3D app development for the Web.
 						<br/>
 						Design, edit, code, all in one place!
 					</p>
 					<br/>
-					<div class="row">
-						
 
+					<!--Buttons-->
+					<div class="row">
 						<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
 							<div class="row">
-								<div class="col-xs-6 text-right wow fadeInUp" data-wow-delay="1s">
+								<div class="col-xs-6 text-right">
 									<a href="https://github.com/tentone/nunuStudio" class="btn btn-secondary btn-lg">GitHub</a>
 								</div>
-								<div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1.4s">
-									<a href="#" class="btn btn-primary btn-lg">Download Beta</a>
+								<div class="col-xs-6 text-left">
+									<a href="download.html" class="btn btn-primary btn-lg">Download Beta</a>
 								</div>
 							</div> 
 						</div>
@@ -107,16 +97,17 @@
 	</div>
 	
 	<!--Built on division-->
-	<section id="nunu" class="pad-sm">
+	<section id="nunu" class="pad-xl">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
+				<div class="col-sm-8 col-sm-offset-2 text-center margin-30">
 					<h2>Built on OpenSource</h2>
 					<p class="lead">Three.js | CodeMirror | CannonJS | SPE | NWJS</p>
 					<img src="img/logo/threejs.png" height="50"></img>
 					<img src="img/logo/codemirror.png" height="50"></img>
 					<img src="img/logo/nwjs.png" height="50"></img>
 					<img src="img/logo/js.jpg" height="50"></img>
+					<img src="img/logo/webgl.png" height="50"></img>
 				</div>
 			</div>
 		</div>
@@ -129,20 +120,20 @@
 			<h2 class="black">Features</h2>
 			<div class="row">
 				<!--Graphical Editor-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
+				<div class="col-sm-4">
 					<h3>Graphical Editor</h3>
 					<p>The best user interface is the one you already know</p>
 					<img style="width:100%" src="img/screenshot/6.jpg"></img>
 
 				</div>
 				<!--WebVR-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.2s">
+				<div class="col-sm-4">
 					<h3>WebVR</h3>
 					<p>Ready for web virtual reality, on booth mobile and desktop platforms</p>
 					<img style="width:100%" src="img/webvr.jpg"></img>
 				</div>
 				<!--Physics-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.3s">
+				<div class="col-sm-4">
 					<h3>Physics</h3>
 					<p>3D physics powered by cannon.js</p>
 					<img style="width:100%" src="img/screenshot/gif/1.gif"></img>
@@ -150,71 +141,74 @@
 			</div>
 			<div class="row">
 				<!--JS Scripts-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.4s">
+				<div class="col-sm-4">
 					<h3>JS Scripts</h3>
 					<p>Easy to learn, no technical knowledge required</p>
 					<img style="width:100%" src="img/screenshot/5.jpg"></img>
 				</div>
 				<!--2D Mode-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.5s">
+				<div class="col-sm-4">
 					<h3>2D Mode</h3>
 					<p>Want 2D? No problem! Switch between 2D and 3D with the click of a button
 					</p>
 					<img style="width:100%" src="img/screenshot/7.jpg"></img>
 				</div>
 				<!--Graphics-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.6s">
+				<div class="col-sm-4">
 					<h3>Advanced Graphics</h3>
-					<p>Advanced graphics powered by three.js with support for dynamic ligths, shadows, post-processing effects, animations, etc</p>
+					<p>Graphics powered by three.js with support for dynamic ligths, shadows, post-processing effects, animations, etc</p>
 					<img style="width:100%" src="img/screenshot/8.jpg"></img>
 				</div>
 			</div>
 			<div class="row">
 				<!--Materials-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.7s">
+				<div class="col-sm-4">
 					<h3>Material Editor</h3>
 					<p>Graphical material editor similar to the ones found in 3D design tools</p>
 					<img style="width:100%" src="img/screenshot/1.jpg"></img>
 				</div>
 				<!--Particle-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.8s">
+				<div class="col-sm-4">
 					<h3>Particle</h3>
 					<p>GPU accelerated particle system powered by SPE</p>
 					<img style="width:100%" src="img/screenshot/2.jpg"></img>
 				</div>
 				<!--Dragndrop-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="0.9s">
+				<div class="col-sm-4">
 					<h3>Drag and drop</h3>
 					<p>Just drag and drop files into the editor! It just works!</p>
 					<img style="width:100%" src="img/screenshot/gif/2.gif"></img>
 				</div>
 			</div>
 			<div class="row">
-				<!--File format-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="1.0s">
-					<h3>Understands You</h3>
-					<p>Load anything you want into the editor, tons of file formats are supported. Import 3D files from 3DS, Blender, C4D, etc</p>
-				</div>
-				<!--Spine-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="1.1s">
-					<h3>WebAudio</h3>
-					<p>Audio engine built on top of web audio API with support for positional audio</p>
-				</div>
-				<!--Multiplatform-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="1.2s">
-					<h3>Multi-platform editor</h3>
-					<p>nunuStudio was build on top of nwjs it works on windows, linux and OS X.<p>
-				</div>
-			</div>
-			<div class="row">
 				<!--Spine animations-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="1.3s">
+				<div class="col-sm-4">
 					<h3>Spine animations</h3>
 					<p>Create 2D animations using esoteric spine and impor them to nunuStudio</p>
 					<img style="width:100%" src="img/screenshot/gif/3.gif"></img>
 				</div>
+				<!--WebAudio-->
+				<div class="col-sm-4">
+					<h3>WebAudio</h3>
+					<p>Audio engine built on top of web audio API with support for positional audio</p>
+					<img style="width:100%" src="img/screenshot/10.jpg"></img>
+				</div>
+				<!--Multiplatform-->
+				<div class="col-sm-4">
+					<h3>Multi-platform editor</h3>
+					<p>nunuStudio was build on top of nwjs it works on windows, linux and OS X.<p>
+					<img style="width:100%" src="img/screenshot/3.jpg"></img>
+				</div>
+			</div>
+			<div class="row">
+				<!--File format-->
+				<div class="col-sm-4">
+					<h3>Understands You</h3>
+					<p>Load anything you want into the editor, tons of file formats are supported.</p>
+					<img style="width:100%" src="img/files.jpg">
+				</div>
 				<!--Open Source-->
-				<div class="col-sm-4 wow fadeIn" data-wow-delay="1.4s">
+				<div class="col-sm-4">
 					<h3>Open Source</h3>
 					<p>nunuStudio is a open source project, everybody can colaborate and help!</p>
 					<img style="width:100%" src="img/github.jpg"></img>
@@ -227,8 +221,28 @@
 	<!--Examples-->
 	<section id="examples" class="pad-sm">
 		<div class="container">
-			<h2 class="white">Made with <img height="40" src="img/logo.png"></img></h2>
+			<h2 class="white">Made with <img height="35" src="img/logo.png"></img></h2>
 			<p class="white">Here are some examples created using nunuStudio editor</p>
+			<div class="row">
+				<!--FPS-->
+				<div class="col-sm-4">
+					<h3 class="white">FPS</h3>
+					<p class="white">Simple FPS game with physics elements</p>
+					<a href="http://tentone.github.io/nunuStudio/examples/fps"><img style="width:100%" src="img/examples/fps.jpg"></img></a>
+				</div>
+				<!--Pong-->
+				<div class="col-sm-4">
+					<h3 class="white">Pong</h3>
+					<p class="white">Local multiplayer pong game</p>
+					<a href="http://tentone.github.io/nunuStudio/examples/pong"><img style="width:100%" src="img/examples/pong.jpg"></img></a>
+				</div>
+				<!--Spine-->
+				<div class="col-sm-4">
+					<h3 class="white">Spine</h3>
+					<p class="white">Spine 2D animation example</p>
+					<a href="http://tentone.github.io/nunuStudio/examples/spine"><img style="width:100%" src="img/examples/spine.jpg"></img></a>
+				</div>
+			</div>
 		</div>
 	</section>
 
