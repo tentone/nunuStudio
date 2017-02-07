@@ -105,15 +105,15 @@ DualDivisionResizable.prototype.update = function()
 {
 	if(this.resizing)
 	{
-		if(Mouse.buttonPressed(Mouse.LEFT))
+		if(Editor.mouse.buttonPressed(Mouse.LEFT))
 		{
 			if(this.orientation == DualDivisionResizable.HORIZONTAL)
 			{	
-				this.tabPosition += Mouse.delta.x/this.size.x;
+				this.tabPosition += Editor.mouse.delta.x/this.size.x;
 			}
 			else if(this.orientation == DualDivisionResizable.VERTICAL)
 			{
-				this.tabPosition += Mouse.delta.y/this.size.y;
+				this.tabPosition += Editor.mouse.delta.y/this.size.y;
 			}
 
 			//Limit tab position

@@ -318,11 +318,9 @@ Editor.initialize = function()
 		}
 	}
 
-	//TODO <USE SYNC INPUT KEYBOARD MOUSE AND GAMEPAD>
-
 	//Initialize input
-	Keyboard.initialize();
-	Mouse.initialize();
+	Editor.keyboard = new Keyboard();
+	Editor.mouse = new Mouse();
 
 	//Load settings
 	Settings.load();
@@ -439,8 +437,8 @@ Editor.update = function()
 	requestAnimationFrame(Editor.update);
 
 	//Update input
-	Mouse.update();
-	Keyboard.update();
+	Editor.mouse.update();
+	Editor.keyboard.update();
 
 	//End performance measure
 	if(Editor.stats !== null)
@@ -456,9 +454,9 @@ Editor.update = function()
 	if(Editor.state !== Editor.STATE_TESTING)
 	{
 		//Close tab, Save and load project
-		if(Keyboard.keyPressed(Keyboard.CTRL))
+		if(Editor.keyboard.keyPressed(Keyboard.CTRL))
 		{
-			if(Keyboard.keyJustPressed(Keyboard.S))
+			if(Editor.keyboard.keyJustPressed(Keyboard.S))
 			{
 				if(Editor.openFile === null)
 				{
@@ -469,19 +467,19 @@ Editor.update = function()
 					Editor.saveProgram(undefined, false);
 				}
 			}
-			else if(Keyboard.keyJustPressed(Keyboard.L))
+			else if(Editor.keyboard.keyJustPressed(Keyboard.L))
 			{
 				Interface.loadProgram();
 			}
-			else if(Keyboard.keyJustPressed(Keyboard.W) || Keyboard.keyJustPressed(Keyboard.F4))
+			else if(Editor.keyboard.keyJustPressed(Keyboard.W) || Editor.keyboard.keyJustPressed(Keyboard.F4))
 			{
 				Interface.tab.closeActual();
 			}
-			else if(Keyboard.keyJustPressed(Keyboard.TAB) || Keyboard.keyJustPressed(Keyboard.PAGE_DOWN))
+			else if(Editor.keyboard.keyJustPressed(Keyboard.TAB) || Editor.keyboard.keyJustPressed(Keyboard.PAGE_DOWN))
 			{
 				Interface.tab.selectNextTab();
 			}
-			else if(Keyboard.keyJustPressed(Keyboard.PAGE_UP))
+			else if(Editor.keyboard.keyJustPressed(Keyboard.PAGE_UP))
 			{
 				Interface.tab.selectPreviousTab();
 			}
@@ -491,16 +489,16 @@ Editor.update = function()
 	//Editing a scene
 	if(Editor.state === Editor.STATE_EDITING)
 	{
-		//Keyboard shortcuts
-		if(Keyboard.keyJustPressed(Keyboard.DEL))
+		//Editor.keyboard shortcuts
+		if(Editor.keyboard.keyJustPressed(Keyboard.DEL))
 		{
 			Editor.deleteObject();
 		}
-		else if(Keyboard.keyJustPressed(Keyboard.F5))
+		else if(Editor.keyboard.keyJustPressed(Keyboard.F5))
 		{
 			Editor.setState(Editor.STATE_TESTING);
 		}
-		else if(Keyboard.keyJustPressed(Keyboard.F2))
+		else if(Editor.keyboard.keyJustPressed(Keyboard.F2))
 		{
 			if(Editor.selectedObject !== null)
 			{
@@ -512,29 +510,29 @@ Editor.update = function()
 				}
 			}
 		}
-		else if(Keyboard.keyPressed(Keyboard.CTRL))
+		else if(Editor.keyboard.keyPressed(Keyboard.CTRL))
 		{
 			if(Interface.panel !== null && !Interface.panel.focused)
 			{
-				if(Keyboard.keyJustPressed(Keyboard.C))
+				if(Editor.keyboard.keyJustPressed(Keyboard.C))
 				{
 					Editor.copyObject();
 				}
-				else if(Keyboard.keyJustPressed(Keyboard.V))
+				else if(Editor.keyboard.keyJustPressed(Keyboard.V))
 				{
 					Editor.pasteObject();
 				}
-				else if(Keyboard.keyJustPressed(Keyboard.X))
+				else if(Editor.keyboard.keyJustPressed(Keyboard.X))
 				{
 					Editor.cutObject();
 				}
 			}
 			
-			if(Keyboard.keyJustPressed(Keyboard.Y))
+			if(Editor.keyboard.keyJustPressed(Keyboard.Y))
 			{
 				Editor.redo();
 			}
-			else if(Keyboard.keyJustPressed(Keyboard.Z))
+			else if(Editor.keyboard.keyJustPressed(Keyboard.Z))
 			{
 				Editor.undo();
 			}
@@ -543,7 +541,7 @@ Editor.update = function()
 		//Select objects
 		if(Editor.toolMode === Editor.MODE_SELECT)
 		{
-			if(Mouse.buttonJustPressed(Mouse.LEFT) && Mouse.insideCanvas())
+			if(Editor.mouse.buttonJustPressed(Mouse.LEFT) && Editor.mouse.insideCanvas())
 			{
 				Editor.selectObjectWithMouse();
 			}
@@ -553,7 +551,7 @@ Editor.update = function()
 		else
 		{
 			//If mouse double clicked select object
-			if(Mouse.buttonDoubleClicked() && Mouse.insideCanvas())
+			if(Editor.mouse.buttonDoubleClicked() && Editor.mouse.insideCanvas())
 			{
 				Editor.selectObjectWithMouse();
 			}
@@ -565,7 +563,7 @@ Editor.update = function()
 				{
 					Editor.isEditingObject = Editor.tool.update();
 					
-					if(Mouse.buttonJustPressed(Mouse.LEFT) && Editor.isEditingObject)
+					if(Editor.mouse.buttonJustPressed(Mouse.LEFT) && Editor.isEditingObject)
 					{
 						Editor.history.push(Editor.selectedObject, Action.CHANGED);
 					}
@@ -595,18 +593,18 @@ Editor.update = function()
 		Editor.objectHelper.update();
 
 		//Check if mouse is inside canvas
-		if(Mouse.insideCanvas())
+		if(Editor.mouse.insideCanvas())
 		{
 			//Lock mouse when camera is moving
 			if(Settings.editor.lockMouse)
 			{
-				if(!Editor.isEditingObject && (Mouse.buttonJustPressed(Mouse.LEFT) || Mouse.buttonJustPressed(Mouse.RIGHT) || Mouse.buttonJustPressed(Mouse.MIDDLE)))
+				if(!Editor.isEditingObject && (Editor.mouse.buttonJustPressed(Mouse.LEFT) || Editor.mouse.buttonJustPressed(Mouse.RIGHT) || Editor.mouse.buttonJustPressed(Mouse.MIDDLE)))
 				{
-					Mouse.setLock(true);
+					Editor.mouse.setLock(true);
 				}
-				else if(Mouse.buttonJustReleased(Mouse.LEFT) || Mouse.buttonJustReleased(Mouse.RIGHT) || Mouse.buttonJustReleased(Mouse.MIDDLE))
+				else if(Editor.mouse.buttonJustReleased(Mouse.LEFT) || Editor.mouse.buttonJustReleased(Mouse.RIGHT) || Editor.mouse.buttonJustReleased(Mouse.MIDDLE))
 				{
-					Mouse.setLock(false);
+					Editor.mouse.setLock(false);
 				}
 			}
 
@@ -614,18 +612,18 @@ Editor.update = function()
 			if(Editor.cameraMode === Editor.CAMERA_ORTHOGRAPHIC)
 			{
 				//Move camera on y / x
-				if(Mouse.buttonPressed(Mouse.RIGHT))
+				if(Editor.mouse.buttonPressed(Mouse.RIGHT))
 				{
 					var ratio = Editor.camera.size / Editor.canvas.width * 2;
 
-					Editor.camera.position.x -= Mouse.delta.x * ratio;
-					Editor.camera.position.y += Mouse.delta.y * ratio;
+					Editor.camera.position.x -= Editor.mouse.delta.x * ratio;
+					Editor.camera.position.y += Editor.mouse.delta.y * ratio;
 				}
 
 				//Camera zoom
-				if(Mouse.wheel !== 0)
+				if(Editor.mouse.wheel !== 0)
 				{
-					Editor.camera.size += Mouse.wheel * Editor.camera.size / 1000;
+					Editor.camera.size += Editor.mouse.wheel * Editor.camera.size / 1000;
 
 					Editor.camera.updateProjectionMatrix();
 				}
@@ -634,10 +632,10 @@ Editor.update = function()
 			else
 			{
 				//Look camera
-				if(Mouse.buttonPressed(Mouse.LEFT) && !Editor.isEditingObject)
+				if(Editor.mouse.buttonPressed(Mouse.LEFT) && !Editor.isEditingObject)
 				{
-					Editor.cameraRotation.x -= 0.002 * Mouse.delta.x;
-					Editor.cameraRotation.y -= 0.002 * Mouse.delta.y;
+					Editor.cameraRotation.x -= 0.002 * Editor.mouse.delta.x;
+					Editor.cameraRotation.y -= 0.002 * Editor.mouse.delta.y;
 
 					//Limit Vertical Rotation to 90 degrees
 					var pid2 = 1.57;
@@ -654,7 +652,7 @@ Editor.update = function()
 				}
 
 				//Move Camera on X and Z
-				else if(Mouse.buttonPressed(Mouse.RIGHT))
+				else if(Editor.mouse.buttonPressed(Mouse.RIGHT))
 				{
 					//Move speed
 					var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0,0,0)) / 1000;
@@ -666,28 +664,28 @@ Editor.update = function()
 					//Move Camera Front and Back
 					var angleCos = Math.cos(Editor.cameraRotation.x);
 					var angleSin = Math.sin(Editor.cameraRotation.x);
-					Editor.camera.position.z += Mouse.delta.y * speed * angleCos;
-					Editor.camera.position.x += Mouse.delta.y * speed * angleSin;
+					Editor.camera.position.z += Editor.mouse.delta.y * speed * angleCos;
+					Editor.camera.position.x += Editor.mouse.delta.y * speed * angleSin;
 
 					//Move Camera Lateral
 					var angleCos = Math.cos(Editor.cameraRotation.x + MathUtils.pid2);
 					var angleSin = Math.sin(Editor.cameraRotation.x + MathUtils.pid2);
-					Editor.camera.position.z += Mouse.delta.x * speed * angleCos;
-					Editor.camera.position.x += Mouse.delta.x * speed * angleSin;
+					Editor.camera.position.z += Editor.mouse.delta.x * speed * angleCos;
+					Editor.camera.position.x += Editor.mouse.delta.x * speed * angleSin;
 				}
 				
 				//Move Camera on Y
-				else if(Mouse.buttonPressed(Mouse.MIDDLE))
+				else if(Editor.mouse.buttonPressed(Mouse.MIDDLE))
 				{
-					Editor.camera.position.y += Mouse.delta.y * 0.1;
+					Editor.camera.position.y += Editor.mouse.delta.y * 0.1;
 				}
 
 				//Move in camera direction using mouse scroll
-				if(Mouse.wheel !== 0)
+				if(Editor.mouse.wheel !== 0)
 				{
 					//Move speed
 					var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0,0,0))/2000;
-					speed *= Mouse.wheel;
+					speed *= Editor.mouse.wheel;
 
 					//Limit zoom speed
 					if(speed < 0 && speed > -0.03)
@@ -713,7 +711,7 @@ Editor.update = function()
 	{
 		Editor.programRunning.update();
 
-		if(Keyboard.keyJustPressed(Keyboard.F5))
+		if(Editor.keyboard.keyJustPressed(Keyboard.F5))
 		{
 			Editor.setState(Editor.STATE_EDITING);
 		}
@@ -1405,7 +1403,7 @@ Editor.setCameraRotation = function(cameraRotation, camera)
 //Update raycaster position from editor mouse position
 Editor.updateRaycasterFromMouse = function()
 {
-	var mouse = new THREE.Vector2((Mouse.position.x/Editor.canvas.width)*2 - 1, -(Mouse.position.y/Editor.canvas.height)*2 + 1);
+	var mouse = new THREE.Vector2((Editor.mouse.position.x/Editor.canvas.width)*2 - 1, -(Editor.mouse.position.y/Editor.canvas.height)*2 + 1);
 	Editor.raycaster.setFromCamera(mouse, Editor.camera);
 }
 
@@ -1602,6 +1600,7 @@ Editor.setState = function(state)
 		Editor.programRunning.setRenderer(Editor.renderer);
 
 		//Initialize scene
+		Editor.programRunning.setMouseKeyboard(Editor.mouse, Editor.keyboard);
 		Editor.programRunning.initialize();
 		Editor.programRunning.resize(Editor.canvas.width, Editor.canvas.height);
 
@@ -1673,7 +1672,7 @@ Editor.disposeRunningProgram = function()
 	}
 
 	//Unlock mouse
-	Mouse.setLock(false);
+	Editor.mouse.setLock(false);
 }
 
 //Set performance meter to be used
@@ -1685,7 +1684,7 @@ Editor.setPerformanceMeter = function(stats)
 //Set render canvas
 Editor.setRenderCanvas = function(canvas)
 {
-	Mouse.setCanvas(canvas);
+	Editor.mouse.setCanvas(canvas);
 	Editor.initializeRenderer(canvas);
 }
 

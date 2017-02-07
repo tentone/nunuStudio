@@ -96,7 +96,7 @@ function AudioPlayer(parent)
 		self.seekTime = self.time;
 	};
 
-	this.onMouseMove = function(event)
+	this.onEditor.mouseMove = function(event)
 	{
 		if(self.dragging)
 		{
@@ -117,7 +117,7 @@ function AudioPlayer(parent)
 		}
 	};
 
-	this.onMouseUp = function(event)
+	this.onEditor.mouseUp = function(event)
 	{
 		if(self.dragging)
 		{
@@ -133,8 +133,8 @@ function AudioPlayer(parent)
 	};
 	
 	//Window events
-	window.addEventListener("mousemove", this.onMouseMove);
-	window.addEventListener("mouseup", this.onMouseUp);
+	window.addEventListener("mousemove", this.onEditor.mouseMove);
+	window.addEventListener("mouseup", this.onEditor.mouseUp);
 
 	//Update elements
 	function draw()
@@ -300,8 +300,8 @@ AudioPlayer.prototype.destroy = function()
 		this.stop();
 
 		//Remove event listeners
-		window.removeEventListener("mousemove", this.onMouseMove);
-		window.removeEventListener("mouseup", this.onMouseUp);
+		window.removeEventListener("mousemove", this.onEditor.mouseMove);
+		window.removeEventListener("mouseup", this.onEditor.mouseUp);
 
 		//Remove element
 		this.parent.removeChild(this.element);
