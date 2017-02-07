@@ -8,7 +8,7 @@ try
 }
 catch(e){}
 
-//Read text file
+//Read file as text
 FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 {
 	if(sync === undefined)
