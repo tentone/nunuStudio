@@ -103,7 +103,7 @@ Script.prototype.setCode = function(code)
 	//Compile code and create object
 	try
 	{
-		this.script = new(new Function("Keyboard, Mouse, self, program, scene", this.code))(Keyboard, Mouse, this, this.program, this.scene);
+		this.script = new(new Function("Keyboard, Mouse, self, program, scene", this.code))(this.program.keyboard, this.program.mouse, this, this.program, this.scene);
 	}
 	catch(e)
 	{

@@ -45,6 +45,8 @@ function Program(name)
 	this.defaultCamera = null;
 
 	//Runtime variables
+	this.keyboard = null;
+	this.mouse = null;
 	this.renderer = null;
 	this.canvas = null;
 	this.scene = null;
@@ -60,6 +62,16 @@ Program.prototype = Object.create(THREE.Object3D.prototype);
 //Select initial scene and initialize that scene
 Program.prototype.initialize = function()
 {
+	//If input null create input object
+	if(this.mouse === null)
+	{
+		this.mouse = new Mouse();
+	}
+	if(this.keyboard === null)
+	{
+		this.keyboard = new keyboard();
+	}
+
 	//Get default scene
 	if(this.defaultScene !== null)
 	{
@@ -76,12 +88,13 @@ Program.prototype.initialize = function()
 	{
 		this.setScene(this.children[0]);
 	}
+}
 
-	//Set mouse lock
-	if(this.lockPointer)
-	{
-		Mouse.setLock(true);
-	}
+//Set program mouse and keyboard
+Program.prototype.setMouseKeyboard = function(mouse, keyboard)
+{
+	this.mouse = mouse;
+	this.keyboard = keyboard;
 }
 
 //Set program renderer

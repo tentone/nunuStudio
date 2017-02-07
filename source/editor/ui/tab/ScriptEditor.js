@@ -216,9 +216,9 @@ ScriptEditor.prototype.update = function()
 {
 	if(Keyboard.keyPressed(Keyboard.CTRL))
 	{
-		if(Mouse.wheel !== 0)
+		if(Editor.mouse.wheel !== 0)
 		{
-			this.setFontSize(Settings.code.fontSize - Mouse.wheel/100);
+			this.setFontSize(Settings.code.fontSize - Editor.mouse.wheel/100);
 		}
 	}
 }

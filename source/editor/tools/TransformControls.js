@@ -123,17 +123,17 @@ function TransformControls(camera, canvas)
 
 	this.update = function()
 	{
-		if(Mouse.buttonJustPressed(Mouse.LEFT))
+		if(Editor.mouse.buttonJustPressed(Mouse.LEFT))
 		{
 			onPointerDown();
 		}
 		
-		if(Mouse.buttonJustReleased(Mouse.LEFT))
+		if(Editor.mouse.buttonJustReleased(Mouse.LEFT))
 		{
 			onPointerUp();
 		}
 
-		if(Mouse.delta.x !== 0 || Mouse.delta.y !== 0)
+		if(Editor.mouse.delta.x !== 0 || Editor.mouse.delta.y !== 0)
 		{
 			onPointerHover();
 			onPointerMove();
@@ -469,8 +469,8 @@ function TransformControls(camera, canvas)
 	function intersectObjects(objects)
 	{
 		var rect = canvas.getBoundingClientRect();
-		var x = Mouse.position.x / rect.width;
-		var y = Mouse.position.y / rect.height;
+		var x = Editor.mouse.position.x / rect.width;
+		var y = Editor.mouse.position.y / rect.height;
 
 		pointerVector.set((x * 2) - 1, - (y * 2) + 1);
 		ray.setFromCamera(pointerVector, camera);

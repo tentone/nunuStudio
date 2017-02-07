@@ -233,7 +233,7 @@ function TreeElement(container)
 		var obj = DragBuffer.popDragElement(uuid);
 
 		//To avoid mouse lock after drag
-		Mouse.updateKey(Mouse.LEFT, Key.UP);
+		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
 	};
 
 	//Drop event (fired on the drop target)

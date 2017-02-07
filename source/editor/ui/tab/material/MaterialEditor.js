@@ -353,7 +353,7 @@ MaterialEditor.prototype.activate = function()
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
 	
-	Mouse.setCanvas(this.canvas.element);
+	Editor.mouse.setCanvas(this.canvas.element);
 }
 
 //Update object data
@@ -397,18 +397,18 @@ MaterialEditor.prototype.update = function()
 	}
 
 	//Move material view
-	if(Mouse.insideCanvas())
+	if(Editor.mouse.insideCanvas())
 	{
 		//Rotate object
-		if(Mouse.buttonPressed(Mouse.LEFT))
+		if(Editor.mouse.buttonPressed(Mouse.LEFT))
 		{
 			var delta = new THREE.Quaternion();
-			delta.setFromEuler(new THREE.Euler(Mouse.delta.y * 0.005, Mouse.delta.x * 0.005, 0, 'XYZ'));
+			delta.setFromEuler(new THREE.Euler(Editor.mouse.delta.y * 0.005, Editor.mouse.delta.x * 0.005, 0, 'XYZ'));
 			this.mesh.quaternion.multiplyQuaternions(delta, this.mesh.quaternion);
 		}
 
 		//Zoom
-		this.camera.position.z += Mouse.wheel * 0.003;
+		this.camera.position.z += Editor.mouse.wheel * 0.003;
 		if(this.camera.position.z > 5)
 		{
 			this.camera.position.z = 5;

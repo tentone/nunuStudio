@@ -274,9 +274,9 @@ Graph.prototype.update = function()
 			if(graph.buttons[i].pressed)
 			{
 				//Check if button still pressed
-				if(Mouse.buttonPressed(Mouse.LEFT))
+				if(Editor.mouse.buttonPressed(Mouse.LEFT))
 				{
-					graph.values[i] -= (Mouse.delta.y * ((this.max - this.min) / this.size.y));
+					graph.values[i] -= (Editor.mouse.delta.y * ((this.max - this.min) / this.size.y));
 
 					if(graph.values[i] > this.max)
 					{

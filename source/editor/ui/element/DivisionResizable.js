@@ -96,23 +96,23 @@ DivisionResizable.prototype.update = function()
 {
 	if(this.resizing)
 	{
-		if(Mouse.buttonPressed(Mouse.LEFT))
+		if(Editor.mouse.buttonPressed(Mouse.LEFT))
 		{
 			if(this.resizableSide === DivisionResizable.LEFT)
 			{	
-				this.size.x -= Mouse.delta.x;
+				this.size.x -= Editor.mouse.delta.x;
 			}
 			else if(this.resizableSide === DivisionResizable.RIGHT)
 			{
-				this.size.x += Mouse.delta.x;
+				this.size.x += Editor.mouse.delta.x;
 			}
 			else if(this.resizableSide === DivisionResizable.TOP)
 			{
-				this.size.y -= Mouse.delta.y;
+				this.size.y -= Editor.mouse.delta.y;
 			}
 			else if(this.resizableSide === DivisionResizable.BOTTOM)
 			{
-				this.size.y += Mouse.delta.y;
+				this.size.y += Editor.mouse.delta.y;
 			}
 
 			//Limit Size

@@ -1,60 +1,63 @@
 "use strict";
 
-function Keyboard(){}
-
-//Initialize keyboard
-Keyboard.initialize = function()
+function Keyboard()
 {
-	Keyboard.keys = [];
-	Keyboard.actions = [];
+	this.keys = [];
+	this.actions = [];
 
 	//Initialize Keys
 	for(var i = 0; i < 256; i++)
 	{
-		Keyboard.keys.push(new Key());
+		this.keys.push(new Key());
 	}
 
 	//Events
-	Keyboard.events = [];
+	this.events = [];
+
+	//Actions pointer
+	var actions = this.actions;
 
 	//Key down
-	Keyboard.events.push([window, "keydown", function(event)
+	this.events.push([window, "keydown", function(event)
 	{
-		Keyboard.actions.push(event.keyCode);
-		Keyboard.actions.push(Key.DOWN);
+		actions.push(event.keyCode);
+		actions.push(Key.DOWN);
 	}]);
 
 	//Key up
-	Keyboard.events.push([window, "keyup", function(event)
+	this.events.push([window, "keyup", function(event)
 	{
-		Keyboard.actions.push(event.keyCode);
-		Keyboard.actions.push(Key.UP);
+		actions.push(event.keyCode);
+		actions.push(Key.UP);
 	}]);
 
 	//Initialize events
-	for(var i = 0; i < Keyboard.events.length; i++)
+	for(var i = 0; i < this.events.length; i++)
 	{
-		var event = Keyboard.events[i];
+		var event = this.events[i];
 		event[0].addEventListener(event[1], event[2]);
 	}
 }
+
+//Prototype
+Keyboard.prototype = Keyboard;
 
 //Update key flags syncronously
 Keyboard.update = function()
 {
 	var end = 0;
 
-	while(Keyboard.actions.length > end)
+	while(this.actions.length > end)
 	{
-		var key = Keyboard.actions.shift();
-		var action = Keyboard.actions.shift();
+		var key = this.actions.shift();
+		var action = this.actions.shift();
 
-		Keyboard.keys[key].update(action);
+		this.keys[key].update(action);
 
-		if(Keyboard.keys[key].justReleased || Keyboard.keys[key].justPressed)
+		if(this.keys[key].justReleased || this.keys[key].justPressed)
 		{
-			Keyboard.actions.push(key);
-			Keyboard.actions.push(Key.RESET);
+			this.actions.push(key);
+			this.actions.push(Key.RESET);
 			end += 2;
 		}
 	}
@@ -64,45 +67,44 @@ Keyboard.update = function()
 Keyboard.reset = function()
 {
 	//Clear actions array
-	Keyboard.actions = [];
+	this.actions = [];
 
 	//Reset all keys
-	for(var i = 0; i < Keyboard.keys.length; i++)
+	for(var i = 0; i < this.keys.length; i++)
 	{
-		Keyboard.keys[i].reset();
+		this.keys[i].reset();
 	}
 }
 
 //Check if a key is pressed
 Keyboard.keyPressed = function(key)
 {
-	return key < 256 && Keyboard.keys[key].pressed;
+	return this.keys[key].pressed;
 }
 
 //Check is a key as just pressed
 Keyboard.keyJustPressed = function(key)
 {
-	return key < 256 && Keyboard.keys[key].justPressed;
+	return this.keys[key].justPressed;
 }
 
 //Check if a key was just released
 Keyboard.keyJustReleased = function(key)
 {
-	return key < 256 && Keyboard.keys[key].justReleased;
+	return this.keys[key].justReleased;
 }
 
 //Dispose keyboard events
 Keyboard.dispose = function()
 {
-	for(var i = 0; i < Keyboard.events.length; i++)
+	for(var i = 0; i < this.events.length; i++)
 	{
-		var event = Keyboard.events[i];
+		var event = this.events[i];
 		event[0].removeEventListener(event[1], event[2]);
 	}
 }
 
-//Some Keycodes
-Keyboard.BACKSPACE = 8;
+//Key codes
 Keyboard.TAB = 9;
 Keyboard.ENTER = 13;
 Keyboard.SHIFT = 16;
