@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Key</title>
+    <title>OrthographicCamera</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -95,27 +95,48 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Key Class</h1>
+<h1>OrthographicCamera Class</h1>
 <div class="box meta">
 
+        <div class="extends">
+            Extends THREE.OrthographicCamera
+        </div>
 
 
-            Module: <a href="../modules/Input.html">Input</a>
+            Module: <a href="../modules/Cameras.html">Cameras</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Key is used by Keyboard, Mouse, etc, to represent a key state</p>
+    <p>Orthographic Camera is used for 2D like image projection</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_Key" class="method item">
-    <h3 class="name"><code>Key</code></h3>
+<div id="method_OrthographicCamera" class="method item">
+    <h3 class="name"><code>OrthographicCamera</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>size</code>
+                </li>
+                <li class="arg">
+                        <code>aspect</code>
+                </li>
+                <li class="arg">
+                        <code>mode</code>
+                </li>
+                <li class="arg">
+                        <code>near</code>
+                </li>
+                <li class="arg">
+                        <code>far</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
 
 
@@ -136,6 +157,67 @@
         
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">size</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>Camera size relative to resize mode</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">aspect</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>Aspect ratio X/Y</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">mode</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>Camera resize mode (RESIZE_HORIZONTAL or RESIZE_VERTICAL)</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">near</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>Near projection plane</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">far</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>Far projection plane</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
 
 
 
@@ -147,7 +229,6 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
     </ul>
 
@@ -158,53 +239,32 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                             <li class="index-item method">
-                                <a href="#method_reset">reset</a>
+                                <a href="#method_destroy">destroy</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_set">set</a>
+                                <a href="#method_toJSON">toJSON</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_update">update</a>
+                                <a href="#method_updateProjectionMatrix">updateProjectionMatrix</a>
 
                             </li>
                     </ul>
                 </div>
 
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                            <li class="index-item property">
-                                <a href="#property_justPressed">justPressed</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_justReleased">justReleased</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_pressed">pressed</a>
-
-                            </li>
-                    </ul>
-                </div>
 
                 <div class="index-section attrs">
                     <h3>Attributes</h3>
 
-                    <ul class="index-list attrs">
+                    <ul class="index-list attrs extends">
                             <li class="index-item attr">
-                                <a href="#attr_DOWN">DOWN</a>
+                                <a href="#attr_RESIZE_HORIZONTAL">RESIZE_HORIZONTAL</a>
                             </li>
                             <li class="index-item attr">
-                                <a href="#attr_RESET">RESET</a>
-                            </li>
-                            <li class="index-item attr">
-                                <a href="#attr_UP">UP</a>
+                                <a href="#attr_RESIZE_VERTICAL">RESIZE_VERTICAL</a>
                             </li>
                     </ul>
                 </div>
@@ -214,8 +274,8 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_reset" class="method item">
-    <h3 class="name"><code>reset</code></h3>
+<div id="method_destroy" class="method item">
+    <h3 class="name"><code>destroy</code></h3>
 
         <span class="paren">()</span>
 
@@ -235,7 +295,7 @@
     </div>
 
     <div class="description">
-        <p>Reset key to default values</p>
+        <p>Destroy camera object and remove it from the scene</p>
 
     </div>
 
@@ -243,11 +303,20 @@
 
 
 </div>
-<div id="method_set" class="method item">
-    <h3 class="name"><code>set</code></h3>
+<div id="method_toJSON" class="method item">
+    <h3 class="name"><code>toJSON</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>meta</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
 
 
 
@@ -264,16 +333,41 @@
     </div>
 
     <div class="description">
-        <p>Set this key attributes manually</p>
+        <p>Create JSON description</p>
 
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
 
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">meta</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>JSON descrition</p>
+
+            </div>
+        </div>
 
 
 </div>
-<div id="method_update" class="method item">
-    <h3 class="name"><code>update</code></h3>
+<div id="method_updateProjectionMatrix" class="method item">
+    <h3 class="name"><code>updateProjectionMatrix</code></h3>
 
         <span class="paren">()</span>
 
@@ -293,7 +387,8 @@
     </div>
 
     <div class="description">
-        <p>Update Key status based on new key state</p>
+        <p>Update camera projection matrix
+Should be called after chaging projection parameters</p>
 
     </div>
 
@@ -303,89 +398,13 @@
 </div>
             </div>
 
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-<div id="property_justPressed" class="property item">
-    <h3 class="name"><code>justPressed</code></h3>
-    <span class="type">Boolean</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Indicates if this key was just pressed</p>
-
-    </div>
-
-        <p><strong>Default:</strong> false</p>
-
-
-</div>
-<div id="property_justReleased" class="property item">
-    <h3 class="name"><code>justReleased</code></h3>
-    <span class="type">Boolean</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Indicates if this key was just released</p>
-
-    </div>
-
-        <p><strong>Default:</strong> false</p>
-
-
-</div>
-<div id="property_pressed" class="property item">
-    <h3 class="name"><code>pressed</code></h3>
-    <span class="type">Boolean</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Indicates if this key is currently pressed</p>
-
-    </div>
-
-        <p><strong>Default:</strong> false</p>
-
-
-</div>
-            </div>
 
             <div id="attrs" class="api-class-tabpanel">
                 <h2 class="off-left">Attributes</h2>
 
-                    <div id="attr_DOWN" class="attr item">
-                        <a name="config_DOWN"></a> 
-                        <h3 class="name"><code>DOWN</code></h3>
+                    <div id="attr_RESIZE_HORIZONTAL" class="attr item">
+                        <a name="config_RESIZE_HORIZONTAL"></a> 
+                        <h3 class="name"><code>RESIZE_HORIZONTAL</code></h3>
                         <span class="type">Number</span>
                     
                     
@@ -403,16 +422,16 @@
                         </div>
                     
                         <div class="description">
-                            <p>Down</p>
+                            <p>Used to set camera to resize horizontally</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="attr_RESET" class="attr item">
-                        <a name="config_RESET"></a> 
-                        <h3 class="name"><code>RESET</code></h3>
+                    <div id="attr_RESIZE_VERTICAL" class="attr item">
+                        <a name="config_RESIZE_VERTICAL"></a> 
+                        <h3 class="name"><code>RESIZE_VERTICAL</code></h3>
                         <span class="type">Number</span>
                     
                     
@@ -430,34 +449,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Reset</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="attr_UP" class="attr item">
-                        <a name="config_UP"></a> 
-                        <h3 class="name"><code>UP</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Up</p>
+                            <p>Used to set camera to resize vertically</p>
                     
                         </div>
                     

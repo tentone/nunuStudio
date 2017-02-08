@@ -1,6 +1,16 @@
 "use strict";
 
-//Perspective camera from fov, aspect ration and near and far planes
+/**
+ * Perspective camera
+ * @class PerspectiveCamera
+ * @extends {THREE.PerspectiveCamera}
+ * @module Cameras
+ * @constructor
+ * @param {Number} fov Field of view
+ * @param {Number} aspect Aspect ratio
+ * @param {Number} near Near projection plane (how closer can be objects visible by this camera)
+ * @param {Number} far Far projection plane (how far can be objects visible by this camera)
+ */
 function PerspectiveCamera(fov, aspect, near, far)
 {
 	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
@@ -16,7 +26,10 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
-//Destroy camera
+/**
+ * Destroy camera object and remove it from the scene
+ * @method destroy
+ */
 PerspectiveCamera.prototype.destroy = function()
 {
 	var scene = ObjectUtils.getScene(this);
@@ -28,7 +41,11 @@ PerspectiveCamera.prototype.destroy = function()
 	THREE.Object3D.prototype.destroy.call(this);
 }
 
-//Update world transformation matrix (ignore scale)
+/**
+ * Update world transformation matrix ignoring parent scaling properties
+ * @method updateMatrixWorld
+ * @param  {boolean} force Force matrix update even if the attribute matrixWorldNeedsUpdate is not true
+ */
 PerspectiveCamera.prototype.updateMatrixWorld = function(force)
 {
 	if(this.matrixAutoUpdate === true)
@@ -59,7 +76,11 @@ PerspectiveCamera.prototype.updateMatrixWorld = function(force)
 	}
 }
 
-//Update projection matrix
+/**
+ * Update camera projection matrix
+ * Should be called after chaging projection parameters
+ * @method updateProjectionMatrix
+ */
 PerspectiveCamera.prototype.updateProjectionMatrix = function()
 {
 	var top = this.near * Math.tan(THREE.Math.DEG2RAD * 0.5 * this.fov ) / this.zoom;
@@ -75,7 +96,12 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 	this.projectionMatrix.makePerspective(left, left + width, top, top - height, this.near, this.far);
 }
 
-//Create JSON for object
+/**
+ * Create JSON description
+ * @method toJSON
+ * @param  {Object} meta
+ * @return {Object} JSON descrition
+ */
 PerspectiveCamera.prototype.toJSON = function(meta)
 {
 	var data = THREE.PerspectiveCamera.prototype.toJSON.call(this, meta);

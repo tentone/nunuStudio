@@ -1,5 +1,14 @@
 "use strict";
 
+/**
+ * Same as THREE.DirectionalLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/DirectionalLight
+ * @param {Number} hex Light color in hex RGB
+ * @param {Number} intensity Light intensity
+ * @class DirectionalLight
+ * @extends {THREE.DirectionalLight}
+ * @module Lights
+ * @constructor
+ */
 function DirectionalLight(hex, intensity)
 {
 	THREE.DirectionalLight.call(this, hex, intensity);
@@ -14,7 +23,10 @@ function DirectionalLight(hex, intensity)
 
 DirectionalLight.prototype = Object.create(THREE.DirectionalLight.prototype);
 
-//Update ligth shadow map
+/**
+ * Update light shadow map atributtes at runtime
+ * @method updateShadowMap
+ */
 DirectionalLight.prototype.updateShadowMap = function()
 {
 	this.shadow.map.dispose();
