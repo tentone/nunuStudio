@@ -3,7 +3,9 @@
     "files": {
         "..\\source\\core\\input\\Key.js": {
             "name": "..\\source\\core\\input\\Key.js",
-            "modules": {},
+            "modules": {
+                "Input": 1
+            },
             "classes": {
                 "Key": 1
             },
@@ -27,9 +29,206 @@
             },
             "fors": {},
             "namespaces": {}
+        },
+        "..\\source\\core\\objects\\audio\\AudioEmitter.js": {
+            "name": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "modules": {
+                "Audio": 1
+            },
+            "classes": {
+                "AudioEmitter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\audio\\PositionalAudio.js": {
+            "name": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "modules": {},
+            "classes": {
+                "PositionalAudio": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\cameras\\OrthographicCamera.js": {
+            "name": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "modules": {
+                "Cameras": 1
+            },
+            "classes": {
+                "OrthographicCamera": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js": {
+            "name": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "modules": {},
+            "classes": {
+                "PerspectiveCamera": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\lights\\AmbientLight.js": {
+            "name": "..\\source\\core\\objects\\lights\\AmbientLight.js",
+            "modules": {
+                "Lights": 1
+            },
+            "classes": {
+                "AmbientLight": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\lights\\DirectionalLight.js": {
+            "name": "..\\source\\core\\objects\\lights\\DirectionalLight.js",
+            "modules": {},
+            "classes": {
+                "DirectionalLight": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\lights\\HemisphereLight.js": {
+            "name": "..\\source\\core\\objects\\lights\\HemisphereLight.js",
+            "modules": {},
+            "classes": {
+                "HemisphereLight": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\lights\\PointLight.js": {
+            "name": "..\\source\\core\\objects\\lights\\PointLight.js",
+            "modules": {},
+            "classes": {
+                "PointLight": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\lights\\RectAreaLight.js": {
+            "name": "..\\source\\core\\objects\\lights\\RectAreaLight.js",
+            "modules": {},
+            "classes": {
+                "RectAreaLight": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\lights\\Sky.js": {
+            "name": "..\\source\\core\\objects\\lights\\Sky.js",
+            "modules": {},
+            "classes": {
+                "Sky": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\lights\\SpotLight.js": {
+            "name": "..\\source\\core\\objects\\lights\\SpotLight.js",
+            "modules": {},
+            "classes": {
+                "SpotLight": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\three\\Object3D.js": {
+            "name": "..\\source\\core\\three\\Object3D.js",
+            "modules": {
+                "ThreeJS": 1
+            },
+            "classes": {
+                "Object3D": 1
+            },
+            "fors": {},
+            "namespaces": {}
         }
     },
-    "modules": {},
+    "modules": {
+        "Input": {
+            "name": "Input",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Key": 1,
+                "Keyboard": 1,
+                "Mouse": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\input\\Mouse.js",
+            "line": 3,
+            "description": "Key is used by Keyboard, Mouse, etc, to represent a key state"
+        },
+        "Audio": {
+            "name": "Audio",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "AudioEmitter": 1,
+                "PositionalAudio": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 3,
+            "description": "AudioEmitter is a Object3D used to play audio inside the scene"
+        },
+        "Cameras": {
+            "name": "Cameras",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "OrthographicCamera": 1,
+                "PerspectiveCamera": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 3,
+            "description": "Orthographic Camera is used for 2D like image projection"
+        },
+        "Lights": {
+            "name": "Lights",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "AmbientLight": 1,
+                "DirectionalLight": 1,
+                "HemisphereLight": 1,
+                "PointLight": 1,
+                "RectAreaLight": 1,
+                "Sky": 1,
+                "SpotLight": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
+            "line": 3,
+            "description": "Same as THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight"
+        },
+        "ThreeJS": {
+            "name": "ThreeJS",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Object3D": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 3,
+            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at www.threejs.org.\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.\nCode examples provided for three.js should also work inside nunuStudio."
+        }
+    },
     "classes": {
         "Key": {
             "name": "Key",
@@ -39,6 +238,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "Input",
             "file": "..\\source\\core\\input\\Key.js",
             "line": 3,
             "description": "Key is used by Keyboard, Mouse, etc, to represent a key state",
@@ -52,6 +252,8 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "Input",
+            "namespace": "",
             "file": "..\\source\\core\\input\\Keyboard.js",
             "line": 3,
             "description": "Keyboard instance for input in sync with the running 3D application, is updated automatically by the runtime handler",
@@ -65,9 +267,399 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "Input",
+            "namespace": "",
             "file": "..\\source\\core\\input\\Mouse.js",
             "line": 3,
             "description": "Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler",
+            "is_constructor": 1
+        },
+        "AudioEmitter": {
+            "name": "AudioEmitter",
+            "shortname": "AudioEmitter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Audio",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 3,
+            "description": "AudioEmitter is a Object3D used to play audio inside the scene",
+            "params": [
+                {
+                    "name": "audio",
+                    "description": "Audio used by this emitter",
+                    "type": "Audio"
+                }
+            ],
+            "extends": "{THREE.Audio}",
+            "is_constructor": 1
+        },
+        "PositionalAudio": {
+            "name": "PositionalAudio",
+            "shortname": "PositionalAudio",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Audio",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 3,
+            "description": "PositionalAudio is used to play audio with positional audio effect",
+            "params": [
+                {
+                    "name": "audio",
+                    "description": "Audio used by this emitter",
+                    "type": "Audio"
+                }
+            ],
+            "extends": "{THREE.PositionalAudio}",
+            "is_constructor": 1
+        },
+        "OrthographicCamera": {
+            "name": "OrthographicCamera",
+            "shortname": "OrthographicCamera",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Cameras",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 3,
+            "description": "Orthographic Camera is used for 2D like image projection",
+            "is_constructor": 1,
+            "extends": "{THREE.OrthographicCamera}",
+            "params": [
+                {
+                    "name": "size",
+                    "description": "Camera size relative to resize mode",
+                    "type": "Number"
+                },
+                {
+                    "name": "aspect",
+                    "description": "Aspect ratio X/Y",
+                    "type": "Number"
+                },
+                {
+                    "name": "mode",
+                    "description": "Camera resize mode (RESIZE_HORIZONTAL or RESIZE_VERTICAL)",
+                    "type": "Number"
+                },
+                {
+                    "name": "near",
+                    "description": "Near projection plane",
+                    "type": "Number"
+                },
+                {
+                    "name": "far",
+                    "description": "Far projection plane",
+                    "type": "Number"
+                }
+            ]
+        },
+        "PerspectiveCamera": {
+            "name": "PerspectiveCamera",
+            "shortname": "PerspectiveCamera",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Cameras",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 3,
+            "description": "Perspective camera",
+            "extends": "{THREE.PerspectiveCamera}",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "fov",
+                    "description": "Field of view",
+                    "type": "Number"
+                },
+                {
+                    "name": "aspect",
+                    "description": "Aspect ratio",
+                    "type": "Number"
+                },
+                {
+                    "name": "near",
+                    "description": "Near projection plane (how closer can be objects visible by this camera)",
+                    "type": "Number"
+                },
+                {
+                    "name": "far",
+                    "description": "Far projection plane (how far can be objects visible by this camera)",
+                    "type": "Number"
+                }
+            ]
+        },
+        "AmbientLight": {
+            "name": "AmbientLight",
+            "shortname": "AmbientLight",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Lights",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\lights\\AmbientLight.js",
+            "line": 3,
+            "description": "Same as THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight",
+            "params": [
+                {
+                    "name": "hex",
+                    "description": "Light color in hex RGB",
+                    "type": "Number"
+                }
+            ],
+            "extends": "{THREE.AmbientLight}",
+            "is_constructor": 1
+        },
+        "DirectionalLight": {
+            "name": "DirectionalLight",
+            "shortname": "DirectionalLight",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Lights",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\lights\\DirectionalLight.js",
+            "line": 3,
+            "description": "Same as THREE.DirectionalLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/DirectionalLight",
+            "params": [
+                {
+                    "name": "hex",
+                    "description": "Light color in hex RGB",
+                    "type": "Number"
+                },
+                {
+                    "name": "intensity",
+                    "description": "Light intensity",
+                    "type": "Number"
+                }
+            ],
+            "extends": "{THREE.DirectionalLight}",
+            "is_constructor": 1
+        },
+        "HemisphereLight": {
+            "name": "HemisphereLight",
+            "shortname": "HemisphereLight",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Lights",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\lights\\HemisphereLight.js",
+            "line": 3,
+            "description": "Same as THREE.HemisphereLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/HemisphereLight",
+            "params": [
+                {
+                    "name": "skyColor",
+                    "description": "Sky light color in hex RGB",
+                    "type": "Number"
+                },
+                {
+                    "name": "groundColor",
+                    "description": "Ground light color in hex RGB",
+                    "type": "Number"
+                },
+                {
+                    "name": "intensity",
+                    "description": "Light intensity",
+                    "type": "Number"
+                }
+            ],
+            "extends": "{THREE.HemisphereLight}",
+            "is_constructor": 1
+        },
+        "PointLight": {
+            "name": "PointLight",
+            "shortname": "PointLight",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Lights",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\lights\\PointLight.js",
+            "line": 3,
+            "description": "Same as THREE.PointLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/PointLight",
+            "params": [
+                {
+                    "name": "hex",
+                    "description": "Light color in hex RGB",
+                    "type": "Number"
+                },
+                {
+                    "name": "intensity",
+                    "description": "Light intensity",
+                    "type": "Number"
+                },
+                {
+                    "name": "distance",
+                    "description": "Maximum PointLight range",
+                    "type": "Number"
+                },
+                {
+                    "name": "decay",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "extends": "{THREE.PointLight}",
+            "is_constructor": 1
+        },
+        "RectAreaLight": {
+            "name": "RectAreaLight",
+            "shortname": "RectAreaLight",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Lights",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\lights\\RectAreaLight.js",
+            "line": 3,
+            "description": "Same as THREE.RectAreaLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/RectAreaLight",
+            "params": [
+                {
+                    "name": "color",
+                    "description": "Light color in hex RGB",
+                    "type": "Number"
+                },
+                {
+                    "name": "intensity",
+                    "description": "Light intensity",
+                    "type": "Number"
+                },
+                {
+                    "name": "width",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "extends": "{THREE.RectAreaLight}",
+            "is_constructor": 1
+        },
+        "Sky": {
+            "name": "Sky",
+            "shortname": "Sky",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Lights",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 3,
+            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry",
+            "params": [
+                {
+                    "name": "autoUpdate",
+                    "description": "If true sky auto updated its state",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "dayTime",
+                    "description": "Day duration in seconds",
+                    "type": "Number"
+                },
+                {
+                    "name": "sunDistance",
+                    "description": "Distance of the sun",
+                    "type": "Number"
+                },
+                {
+                    "name": "time",
+                    "description": "Starting time",
+                    "type": "Number"
+                }
+            ],
+            "extends": "{THREE.Object3D}",
+            "is_constructor": 1
+        },
+        "SpotLight": {
+            "name": "SpotLight",
+            "shortname": "SpotLight",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Lights",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
+            "line": 3,
+            "description": "Same as THREE.SpotLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/SpotLight",
+            "params": [
+                {
+                    "name": "color",
+                    "description": "Light color in hex RGB",
+                    "type": "Number"
+                },
+                {
+                    "name": "intensity",
+                    "description": "Light intensity",
+                    "type": "Number"
+                },
+                {
+                    "name": "distance",
+                    "description": "SpotLight maximum range",
+                    "type": "Number"
+                },
+                {
+                    "name": "angle",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "exponent",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "decay",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "extends": "{THREE.SpotLight}",
+            "is_constructor": 1
+        },
+        "Object3D": {
+            "name": "Object3D",
+            "shortname": "Object3D",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ThreeJS",
+            "namespace": "",
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 3,
+            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at www.threejs.org.\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.\nCode examples provided for three.js should also work inside nunuStudio.",
             "is_constructor": 1
         }
     },
@@ -75,113 +667,125 @@
     "classitems": [
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 8,
+            "line": 9,
             "description": "Indicates if this key is currently pressed",
             "itemtype": "property",
             "name": "pressed",
             "default": "false",
             "type": "{boolean}",
-            "class": "Key"
+            "class": "Key",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 14,
+            "line": 15,
             "description": "Indicates if this key was just pressed",
             "itemtype": "property",
             "name": "justPressed",
             "default": "false",
             "type": "{boolean}",
-            "class": "Key"
+            "class": "Key",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 20,
+            "line": 21,
             "description": "Indicates if this key was just released",
             "itemtype": "property",
             "name": "justReleased",
             "default": "false",
             "type": "{boolean}",
-            "class": "Key"
+            "class": "Key",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 34,
+            "line": 35,
             "description": "Down",
             "itemtype": "attribute",
             "name": "DOWN",
             "type": "{Number}",
-            "class": "Key"
+            "class": "Key",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 40,
+            "line": 41,
             "description": "Up",
             "itemtype": "attribute",
             "name": "UP",
             "type": "{Number}",
-            "class": "Key"
+            "class": "Key",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 46,
+            "line": 47,
             "description": "Reset",
             "itemtype": "attribute",
             "name": "RESET",
             "type": "{Number}",
-            "class": "Key"
+            "class": "Key",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 53,
+            "line": 54,
             "description": "Update Key status based on new key state",
             "itemtype": "method",
             "name": "update",
-            "class": "Key"
+            "class": "Key",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 85,
+            "line": 86,
             "description": "Set this key attributes manually",
             "itemtype": "method",
             "name": "set",
-            "class": "Key"
+            "class": "Key",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 96,
+            "line": 97,
             "description": "Reset key to default values",
             "itemtype": "method",
             "name": "reset",
-            "class": "Key"
+            "class": "Key",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 9,
+            "line": 10,
             "description": "Array with keyboard keys status",
             "type": "{array}",
             "itemtype": "property",
             "name": "keys",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 57,
+            "line": 58,
             "description": "Update key flags synchronously (called automatically by the app runtime)",
             "itemtype": "method",
             "name": "update",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 81,
+            "line": 82,
             "description": "Reset keyboard status to default",
             "itemtype": "method",
             "name": "reset",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 97,
+            "line": 98,
             "description": "Check if a key is pressed",
             "itemtype": "method",
             "name": "keyPressed",
@@ -189,11 +793,12 @@
                 "description": "True is the key is currently pressed",
                 "type": "Boolean"
             },
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 107,
+            "line": 108,
             "description": "Check is a key as just pressed",
             "itemtype": "method",
             "name": "keyJustPressed",
@@ -201,11 +806,12 @@
                 "description": "True is the key was just pressed",
                 "type": "Boolean"
             },
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 117,
+            "line": 118,
             "description": "Check if a key was just released",
             "itemtype": "method",
             "name": "keyJustReleased",
@@ -213,685 +819,761 @@
                 "description": "True is the key was just pressed",
                 "type": "Boolean"
             },
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 127,
+            "line": 128,
             "description": "Dispose keyboard events (called automatically by the app runtime)",
             "itemtype": "method",
             "name": "dispose",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 140,
+            "line": 141,
             "description": "TAB key",
             "itemtype": "attribute",
             "name": "TAB",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 146,
+            "line": 147,
             "description": "ENTER key",
             "itemtype": "attribute",
             "name": "ENTER",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 152,
+            "line": 153,
             "description": "SHIFT key",
             "itemtype": "attribute",
             "name": "SHIFT",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 158,
+            "line": 159,
             "description": "CTRL key",
             "itemtype": "attribute",
             "name": "CTRL",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 164,
+            "line": 165,
             "description": "ALT key",
             "itemtype": "attribute",
             "name": "ALT",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 170,
+            "line": 171,
             "description": "CAPS_LOCK key",
             "itemtype": "attribute",
             "name": "CAPS_LOCK",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 176,
+            "line": 177,
             "description": "ESC key",
             "itemtype": "attribute",
             "name": "ESC",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 182,
+            "line": 183,
             "description": "SPACEBAR key",
             "itemtype": "attribute",
             "name": "SPACEBAR",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 188,
+            "line": 189,
             "description": "PAGE_UP key",
             "itemtype": "attribute",
             "name": "PAGE_UP",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 194,
+            "line": 195,
             "description": "PAGE_DOWN key",
             "itemtype": "attribute",
             "name": "PAGE_DOWN",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 200,
+            "line": 201,
             "description": "END key",
             "itemtype": "attribute",
             "name": "END",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 206,
+            "line": 207,
             "description": "HOME key",
             "itemtype": "attribute",
             "name": "HOME",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 212,
+            "line": 213,
             "description": "INSERT key",
             "itemtype": "attribute",
             "name": "INSERT",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 218,
+            "line": 219,
             "description": "DEL key",
             "itemtype": "attribute",
             "name": "DEL",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 225,
+            "line": 226,
             "description": "LEFT key",
             "itemtype": "attribute",
             "name": "LEFT",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 231,
+            "line": 232,
             "description": "RIGHT key",
             "itemtype": "attribute",
             "name": "RIGHT",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 237,
+            "line": 238,
             "description": "UP key",
             "itemtype": "attribute",
             "name": "UP",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 243,
+            "line": 244,
             "description": "DOWN key",
             "itemtype": "attribute",
             "name": "DOWN",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 250,
+            "line": 251,
             "description": "NUM0 key",
             "itemtype": "attribute",
             "name": "NUM0",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 256,
+            "line": 257,
             "description": "NUM1 key",
             "itemtype": "attribute",
             "name": "NUM1",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 262,
+            "line": 263,
             "description": "NUM2 key",
             "itemtype": "attribute",
             "name": "NUM2",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 268,
+            "line": 269,
             "description": "NUM3 key",
             "itemtype": "attribute",
             "name": "NUM3",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 274,
+            "line": 275,
             "description": "NUM4 key",
             "itemtype": "attribute",
             "name": "NUM4",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 280,
+            "line": 281,
             "description": "NUM5 key",
             "itemtype": "attribute",
             "name": "NUM5",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 286,
+            "line": 287,
             "description": "NUM6 key",
             "itemtype": "attribute",
             "name": "NUM6",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 292,
+            "line": 293,
             "description": "NUM7 key",
             "itemtype": "attribute",
             "name": "NUM7",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 298,
+            "line": 299,
             "description": "NUM8 key",
             "itemtype": "attribute",
             "name": "NUM8",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 304,
+            "line": 305,
             "description": "NUM9 key",
             "itemtype": "attribute",
             "name": "NUM9",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 311,
+            "line": 312,
             "description": "A key",
             "itemtype": "attribute",
             "name": "A",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 317,
+            "line": 318,
             "description": "B key",
             "itemtype": "attribute",
             "name": "B",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 323,
+            "line": 324,
             "description": "C key",
             "itemtype": "attribute",
             "name": "C",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 329,
+            "line": 330,
             "description": "D key",
             "itemtype": "attribute",
             "name": "D",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 335,
+            "line": 336,
             "description": "E key",
             "itemtype": "attribute",
             "name": "E",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 341,
+            "line": 342,
             "description": "F key",
             "itemtype": "attribute",
             "name": "F",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 347,
+            "line": 348,
             "description": "G key",
             "itemtype": "attribute",
             "name": "G",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 353,
+            "line": 354,
             "description": "H key",
             "itemtype": "attribute",
             "name": "H",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 359,
+            "line": 360,
             "description": "I key",
             "itemtype": "attribute",
             "name": "I",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 365,
+            "line": 366,
             "description": "J key",
             "itemtype": "attribute",
             "name": "J",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 371,
+            "line": 372,
             "description": "K key",
             "itemtype": "attribute",
             "name": "K",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 377,
+            "line": 378,
             "description": "L key",
             "itemtype": "attribute",
             "name": "L",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 383,
+            "line": 384,
             "description": "M key",
             "itemtype": "attribute",
             "name": "M",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 389,
+            "line": 390,
             "description": "N key",
             "itemtype": "attribute",
             "name": "N",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 395,
+            "line": 396,
             "description": "O key",
             "itemtype": "attribute",
             "name": "O",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 401,
+            "line": 402,
             "description": "P key",
             "itemtype": "attribute",
             "name": "P",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 407,
+            "line": 408,
             "description": "Q key",
             "itemtype": "attribute",
             "name": "Q",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 413,
+            "line": 414,
             "description": "R key",
             "itemtype": "attribute",
             "name": "R",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 419,
+            "line": 420,
             "description": "S key",
             "itemtype": "attribute",
             "name": "S",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 425,
+            "line": 426,
             "description": "T key",
             "itemtype": "attribute",
             "name": "T",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 431,
+            "line": 432,
             "description": "U key",
             "itemtype": "attribute",
             "name": "U",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 437,
+            "line": 438,
             "description": "V key",
             "itemtype": "attribute",
             "name": "V",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 443,
+            "line": 444,
             "description": "W key",
             "itemtype": "attribute",
             "name": "W",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 449,
+            "line": 450,
             "description": "X key",
             "itemtype": "attribute",
             "name": "X",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 455,
+            "line": 456,
             "description": "Y key",
             "itemtype": "attribute",
             "name": "Y",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 461,
+            "line": 462,
             "description": "Z key",
             "itemtype": "attribute",
             "name": "Z",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 468,
+            "line": 469,
             "description": "F1 key",
             "itemtype": "attribute",
             "name": "F1",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 474,
+            "line": 475,
             "description": "F2 key",
             "itemtype": "attribute",
             "name": "F2",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 480,
+            "line": 481,
             "description": "F3 key",
             "itemtype": "attribute",
             "name": "F3",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 486,
+            "line": 487,
             "description": "F4 key",
             "itemtype": "attribute",
             "name": "F4",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 492,
+            "line": 493,
             "description": "F5 key",
             "itemtype": "attribute",
             "name": "F5",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 498,
+            "line": 499,
             "description": "F6 key",
             "itemtype": "attribute",
             "name": "F6",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 504,
+            "line": 505,
             "description": "F7 key",
             "itemtype": "attribute",
             "name": "F7",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 510,
+            "line": 511,
             "description": "F8 key",
             "itemtype": "attribute",
             "name": "F8",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 516,
+            "line": 517,
             "description": "F9 key",
             "itemtype": "attribute",
             "name": "F9",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 522,
+            "line": 523,
             "description": "F10 key",
             "itemtype": "attribute",
             "name": "F10",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 528,
+            "line": 529,
             "description": "F11 key",
             "itemtype": "attribute",
             "name": "F11",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 534,
+            "line": 535,
             "description": "F12 key",
             "itemtype": "attribute",
             "name": "F12",
             "type": "{Number}",
-            "class": "Keyboard"
+            "class": "Keyboard",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 9,
+            "line": 10,
             "description": "Array with mouse buttons status",
             "type": "{array}",
             "itemtype": "property",
             "name": "keys",
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 15,
+            "line": 16,
             "description": "Mouse position inside of the window (coordinates in window space)",
             "type": "{Vector2}",
             "itemtype": "property",
             "name": "position",
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 21,
+            "line": 22,
             "description": "Mouse movement (coordinates in window space)",
             "type": "{Vector2}",
             "itemtype": "property",
             "name": "delta",
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 27,
+            "line": 28,
             "description": "Mouse scroll wheel movement",
             "type": "{Number}",
             "itemtype": "property",
             "name": "wheel",
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 33,
+            "line": 34,
             "description": "Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates",
             "type": "{DOM}",
             "itemtype": "property",
             "name": "canvas",
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 187,
+            "line": 188,
             "description": "LEFT mouse button",
             "itemtype": "attribute",
             "name": "LEFT",
             "type": "{Number}",
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 193,
+            "line": 194,
             "description": "MIDDLE mouse button",
             "itemtype": "attribute",
             "name": "MIDDLE",
             "type": "{Number}",
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 199,
+            "line": 200,
             "description": "RIGHT mouse button",
             "itemtype": "attribute",
             "name": "RIGHT",
             "type": "{Number}",
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 206,
+            "line": 207,
             "description": "Canvas to be used for coordinates calculation relative to that canvas",
             "itemtype": "method",
             "name": "setCanvas",
@@ -902,11 +1584,12 @@
                     "type": "DOM"
                 }
             ],
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 228,
+            "line": 229,
             "description": "Check if mouse is inside attached canvas (updated async)",
             "itemtype": "method",
             "name": "insideCanvas",
@@ -914,11 +1597,12 @@
                 "description": "True if mouse is currently inside the canvas",
                 "type": "Boolean"
             },
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 243,
+            "line": 244,
             "description": "Set mouse lock state",
             "itemtype": "method",
             "name": "setLock",
@@ -929,11 +1613,12 @@
                     "type": "Boolean"
                 }
             ],
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 285,
+            "line": 286,
             "description": "Check if mouse button is currently pressed",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -948,11 +1633,12 @@
                 "description": "True if button is currently pressed",
                 "type": "Boolean"
             },
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 296,
+            "line": 297,
             "description": "Check if Mouse button was double clicked",
             "itemtype": "method",
             "name": "buttonDoubleClicked",
@@ -960,11 +1646,12 @@
                 "description": "True if some mouse button was just double clicked",
                 "type": "Boolean"
             },
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 306,
+            "line": 307,
             "description": "Check if a mouse button was just pressed",
             "itemtype": "method",
             "name": "buttonJustPressed",
@@ -979,11 +1666,12 @@
                 "description": "True if button was just pressed",
                 "type": "Boolean"
             },
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 317,
+            "line": 318,
             "description": "Check if a mouse button was just released",
             "itemtype": "method",
             "name": "buttonJustReleased",
@@ -998,11 +1686,12 @@
                 "description": "True if button was just released",
                 "type": "Boolean"
             },
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 328,
+            "line": 329,
             "description": "Update mouse Position (automatically called by the runtime)",
             "itemtype": "method",
             "name": "updatePosition",
@@ -1028,11 +1717,12 @@
                     "type": "Number"
                 }
             ],
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 344,
+            "line": 345,
             "description": "Update a mouse button (automatically called by the runtime)",
             "params": [
                 {
@@ -1046,29 +1736,1166 @@
                     "type": "Number"
                 }
             ],
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 357,
+            "line": 358,
             "description": "Update mouse buttons state, position, wheel and delta synchronously (called automatically by the app runtime)",
             "itemtype": "method",
             "name": "update",
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 418,
+            "line": 419,
             "description": "Dispose mouse events (called automatically by the app runtime)",
             "itemtype": "method",
             "name": "dispose",
-            "class": "Mouse"
+            "class": "Mouse",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 11,
+            "description": "Audio volume",
+            "itemtype": "property",
+            "name": "valume",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 17,
+            "description": "If true the playback starts automatically",
+            "itemtype": "property",
+            "name": "autoplay",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 23,
+            "description": "Start time in seconds",
+            "itemtype": "property",
+            "name": "startTime",
+            "default": "0.0",
+            "type": "{Number}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 29,
+            "description": "If true the audio plays in loop",
+            "itemtype": "property",
+            "name": "loop",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 63,
+            "description": "Initialize audio object (called by the runtime)",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 87,
+            "description": "Dispose audio object",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 105,
+            "description": "Change audio emitter volume",
+            "itemtype": "method",
+            "name": "setVolume",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Audio volume",
+                    "type": "Number"
+                }
+            ],
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 118,
+            "description": "Create JSON description",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "JSON descrition",
+                "type": "Object"
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 142,
+            "description": "Starts playback",
+            "itemtype": "method",
+            "name": "play",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 147,
+            "description": "Pauses playback",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 152,
+            "description": "Stops playback and resets time to 0",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 157,
+            "description": "Set loop mode",
+            "params": [
+                {
+                    "name": "loop",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setLoop",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 163,
+            "description": "Set playback speed",
+            "params": [
+                {
+                    "name": "speed",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setPlaybackRate",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 169,
+            "description": "Add the filter to the filters array.",
+            "itemtype": "method",
+            "name": "setFilter",
+            "params": [
+                {
+                    "name": "filter",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 175,
+            "description": "Set the filters array to value.",
+            "itemtype": "method",
+            "name": "setFilters",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 11,
+            "description": "Audio volume",
+            "itemtype": "property",
+            "name": "valume",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 17,
+            "description": "If true the playback starts automatically",
+            "itemtype": "property",
+            "name": "autoplay",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 23,
+            "description": "Start time in seconds",
+            "itemtype": "property",
+            "name": "startTime",
+            "default": "0.0",
+            "type": "{Number}",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 29,
+            "description": "If true the audio plays in loop",
+            "itemtype": "property",
+            "name": "loop",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 62,
+            "description": "Initialize audio object (called by the runtime)",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 97,
+            "description": "Update positional audio state",
+            "itemtype": "method",
+            "name": "update",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 120,
+            "description": "Dispose audio object",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 138,
+            "description": "Change audio emitter volume",
+            "itemtype": "method",
+            "name": "setVolume",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Audio volume",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Self pointer for chaining",
+                "type": "PositionalAudio"
+            },
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 158,
+            "description": "Create JSON description",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "JSON descrition",
+                "type": "Object"
+            },
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 182,
+            "description": "Starts playback",
+            "itemtype": "method",
+            "name": "play",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 187,
+            "description": "Pauses playback",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 192,
+            "description": "Stops playback and resets time to 0",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 197,
+            "description": "Set loop mode",
+            "params": [
+                {
+                    "name": "loop",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setLoop",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 203,
+            "description": "Set playback speed",
+            "params": [
+                {
+                    "name": "speed",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setPlaybackRate",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 209,
+            "description": "Add the filter to the filters array.",
+            "itemtype": "method",
+            "name": "setFilter",
+            "params": [
+                {
+                    "name": "filter",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 215,
+            "description": "Set the filters array to value.",
+            "itemtype": "method",
+            "name": "setFilters",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 37,
+            "description": "Used to set camera to resize horizontally",
+            "itemtype": "attribute",
+            "name": "RESIZE_HORIZONTAL",
+            "type": "{Number}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 44,
+            "description": "Used to set camera to resize vertically",
+            "itemtype": "attribute",
+            "name": "RESIZE_VERTICAL",
+            "type": "{Number}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 51,
+            "description": "Destroy camera object and remove it from the scene",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 66,
+            "description": "Update camera projection matrix\nShould be called after chaging projection parameters",
+            "itemtype": "method",
+            "name": "updateProjectionMatrix",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 92,
+            "description": "Create JSON description",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "JSON descrition",
+                "type": "Object"
+            },
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 29,
+            "description": "Destroy camera object and remove it from the scene",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 44,
+            "description": "Update world transformation matrix ignoring parent scaling properties",
+            "itemtype": "method",
+            "name": "updateMatrixWorld",
+            "params": [
+                {
+                    "name": "force",
+                    "description": "Force matrix update even if the attribute matrixWorldNeedsUpdate is not true",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 79,
+            "description": "Update camera projection matrix\nShould be called after chaging projection parameters",
+            "itemtype": "method",
+            "name": "updateProjectionMatrix",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 99,
+            "description": "Create JSON description",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "JSON descrition",
+                "type": "Object"
+            },
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\DirectionalLight.js",
+            "line": 26,
+            "description": "Update light shadow map atributtes at runtime",
+            "itemtype": "method",
+            "name": "updateShadowMap",
+            "class": "DirectionalLight",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\PointLight.js",
+            "line": 29,
+            "description": "Update light shadow map atributtes at runtime",
+            "itemtype": "method",
+            "name": "updateShadowMap",
+            "class": "PointLight",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\RectAreaLight.js",
+            "line": 23,
+            "description": "Create JSON description",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "JSON descrition",
+                "type": "Object"
+            },
+            "class": "RectAreaLight",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
+            "line": 32,
+            "description": "Update light shadow map atributtes at runtime",
+            "itemtype": "method",
+            "name": "updateShadowMap",
+            "class": "SpotLight",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 13,
+            "description": "Array with object's children.",
+            "itemtype": "property",
+            "name": "children",
+            "type": "{Array}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 18,
+            "description": "When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.",
+            "itemtype": "property",
+            "name": "frustumCulled",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 24,
+            "description": "The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.",
+            "itemtype": "property",
+            "name": "layers",
+            "type": "{Layers}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 29,
+            "description": "The local transform matrix",
+            "itemtype": "property",
+            "name": "matrix",
+            "type": "{Matrix4}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 34,
+            "description": "When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.",
+            "itemtype": "property",
+            "name": "matrixAutoUpdate",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 40,
+            "description": "The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.",
+            "itemtype": "property",
+            "name": "matrixWorld",
+            "type": "{Matrix4}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 45,
+            "description": "Name of the object (doesn't need to be unique).",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 50,
+            "description": "The object's local position.",
+            "itemtype": "property",
+            "name": "position",
+            "type": "{Vector3}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 55,
+            "description": "Object's local rotation as a Quaternion.",
+            "itemtype": "property",
+            "name": "quaternion",
+            "type": "{Quaternion}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 60,
+            "description": "Object's local rotation (see Euler angles), in radians.",
+            "itemtype": "property",
+            "name": "rotation",
+            "type": "{Euler}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 65,
+            "description": "The object's local scale.",
+            "itemtype": "property",
+            "name": "scale",
+            "type": "{Vector3}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 70,
+            "description": "This is used by the lookAt method, for example, to determine the orientation of the result.",
+            "itemtype": "property",
+            "name": "up",
+            "type": "{Vector3}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 75,
+            "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
+            "itemtype": "property",
+            "name": "uuid",
+            "type": "{String}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 80,
+            "description": "Object gets rendered if true.",
+            "itemtype": "property",
+            "name": "visible",
+            "type": "{boolean}",
+            "default": "true",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 86,
+            "description": "This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.",
+            "itemtype": "property",
+            "name": "renderOrder",
+            "default": "0",
+            "type": "{Number}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 92,
+            "description": "Whether the object gets rendered into shadow map.",
+            "itemtype": "property",
+            "name": "castShadow",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 98,
+            "description": "Whether the material receives shadows.",
+            "itemtype": "property",
+            "name": "receiveShadow",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 104,
+            "description": "Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.",
+            "itemtype": "property",
+            "name": "userData",
+            "type": "{Object}",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 116,
+            "description": "Initialize the object.",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 128,
+            "description": "Update the object state.",
+            "itemtype": "method",
+            "name": "update",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 140,
+            "description": "Dispose the object (to avoid memory leaks).",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 152,
+            "description": "Remove all children from object.",
+            "itemtype": "method",
+            "name": "removeAll",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 164,
+            "description": "Destroy object, dispose and remove from its parent.",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 185,
+            "description": "Serialize object as JSON.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "resourceAccess",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "recursive",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "{Object]"
+            },
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 313,
+            "description": "Remove children from this object",
+            "params": [
+                {
+                    "name": "objects",
+                    "description": "Removes object as child of this object. An arbitrary number of objects may be removed.",
+                    "type": "Object3D"
+                }
+            ],
+            "itemtype": "method",
+            "name": "remove",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 319,
+            "description": "Rotates the object to face a point in world space.",
+            "params": [
+                {
+                    "name": "vector",
+                    "description": "A vector representing a position in world space.",
+                    "type": "Vector3"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 324,
+            "description": "Converts the vector from local space to world space.",
+            "params": [
+                {
+                    "name": "vector",
+                    "description": "vector representing a position in local (object) space.",
+                    "type": "Vector3"
+                }
+            ],
+            "itemtype": "method",
+            "name": "localToWorld",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 330,
+            "description": "Updates the vector from world space to local space.",
+            "params": [
+                {
+                    "name": "vector",
+                    "description": "A world vector",
+                    "type": "Vector3"
+                }
+            ],
+            "itemtype": "method",
+            "name": "worldToLocal",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 336,
+            "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "objects",
+                    "description": "",
+                    "type": "Object3D"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 342,
+            "description": "This updates the position, rotation and scale with the matrix.",
+            "itemtype": "method",
+            "name": "applyMatrix",
+            "params": [
+                {
+                    "name": "matrix",
+                    "description": "",
+                    "type": "Matrix4"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 348,
+            "description": "Returns a clone of this object and optionaly all descendants.",
+            "itemtype": "method",
+            "name": "clone",
+            "params": [
+                {
+                    "name": "recursive",
+                    "description": "If true, descendants of the object are also cloned. Default is true.",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 354,
+            "description": "Copy the given object into this object.",
+            "itemtype": "method",
+            "name": "copy",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                },
+                {
+                    "name": "recursive",
+                    "description": "If true, descendants of the object are also copied. Default is true.",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 361,
+            "description": "Searches through the object's children and returns the first with a matching name.",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "String to match to the children's Object3d.name property.",
+                    "type": "String"
+                }
+            ],
+            "itemtype": "method",
+            "name": "getObjectByName",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 367,
+            "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The property name to search for.",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "Value of the given property.",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "method",
+            "name": "getObjectByProperty",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 374,
+            "params": [
+                {
+                    "name": "optionalTarget",
+                    "description": "Target to set the result. Otherwise, a new Vector3 is instantiated.",
+                    "type": "Vector3"
+                }
+            ],
+            "return": {
+                "description": "Returns a vector representing the position of the object in world space.",
+                "type": "Vector3"
+            },
+            "itemtype": "method",
+            "name": "getWorldPosition",
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 380,
+            "description": "Returns a quaternion representing the rotation of the object in world space.",
+            "itemtype": "method",
+            "name": "getWorldQuaternion",
+            "params": [
+                {
+                    "name": "optionalTarget",
+                    "description": "If specified, the result will be copied into this Quaternion, otherwise a new Quaternion will be created.",
+                    "type": "Quaternion"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 386,
+            "description": "Returns the euler angles representing the rotation of the object in world space.",
+            "itemtype": "method",
+            "name": "getWorldRotation",
+            "params": [
+                {
+                    "name": "optionalTarget",
+                    "description": "If specified, the result will be copied into this Euler, otherwise a new Euler will be created.",
+                    "type": "Euler"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 392,
+            "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
+            "itemtype": "method",
+            "name": "getWorldScale",
+            "params": [
+                {
+                    "name": "optionalTarget",
+                    "description": "If specified, the result will be copied into this Vector3, otherwise a new Vector3 will be created.",
+                    "type": "Vector3"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 398,
+            "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
+            "itemtype": "method",
+            "name": "getWorldDirection",
+            "params": [
+                {
+                    "name": "optionalTarget",
+                    "description": "If specified, the result will be copied into this Vector3, otherwise a new Vector3 will be created.",
+                    "type": "Vector3"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 404,
+            "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
+            "itemtype": "method",
+            "name": "rotateOnAxis",
+            "params": [
+                {
+                    "name": "axis",
+                    "description": "A normalized vector in object space.",
+                    "type": "Vector3"
+                },
+                {
+                    "name": "angle",
+                    "description": "The angle in radians.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 411,
+            "description": "Rotates the object around x axis in local space.",
+            "itemtype": "method",
+            "name": "rotateX",
+            "params": [
+                {
+                    "name": "rad",
+                    "description": "The angle to rotate in radians.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 417,
+            "description": "Rotates the object around y axis in local space.",
+            "itemtype": "method",
+            "name": "rotateY",
+            "params": [
+                {
+                    "name": "rad",
+                    "description": "The angle to rotate in radians.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 423,
+            "description": "Rotates the object around z axis in local space.",
+            "itemtype": "method",
+            "name": "rotateZ",
+            "params": [
+                {
+                    "name": "rad",
+                    "description": "The angle to rotate in radians.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Object3D",
+            "module": "ThreeJS"
         }
     ],
     "warnings": [
         {
             "message": "Missing item type\nUpdate a mouse button (automatically called by the runtime)",
-            "line": " ..\\source\\core\\input\\Mouse.js:344"
+            "line": " ..\\source\\core\\input\\Mouse.js:345"
+        },
+        {
+            "message": "Missing item type\nRotates the object to face a point in world space.",
+            "line": " ..\\source\\core\\three\\Object3D.js:319"
         }
     ]
 }

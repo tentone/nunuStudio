@@ -1,6 +1,18 @@
 "use strict";
 
-//Orthographic Camera constructor aspect is in x/y mode
+/**
+ * Orthographic Camera is used for 2D like image projection
+ * 
+ * @class OrthographicCamera
+ * @constructor
+ * @extends {THREE.OrthographicCamera}
+ * @module Cameras
+ * @param {Number} size Camera size relative to resize mode
+ * @param {Number} aspect Aspect ratio X/Y
+ * @param {Number} mode Camera resize mode (RESIZE_HORIZONTAL or RESIZE_VERTICAL)
+ * @param {Number} near Near projection plane
+ * @param {Number} far Far projection plane
+ */
 function OrthographicCamera(size, aspect, mode, near, far)
 {
 	THREE.OrthographicCamera.call(this, -1.0, 1.0, 1.0, -1.0, near, far);
@@ -22,11 +34,24 @@ function OrthographicCamera(size, aspect, mode, near, far)
 
 OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype);
 
-//Scale mode
+/**
+ * Used to set camera to resize horizontally 
+ * @attribute RESIZE_HORIZONTAL
+ * @type {Number}
+ */
 OrthographicCamera.RESIZE_HORIZONTAL = 0;
+
+/**
+ * Used to set camera to resize vertically 
+ * @attribute RESIZE_VERTICAL
+ * @type {Number}
+ */
 OrthographicCamera.RESIZE_VERTICAL = 1;
 
-//Destroy
+/**
+ * Destroy camera object and remove it from the scene
+ * @method destroy
+ */
 OrthographicCamera.prototype.destroy = function()
 {
 	var scene = ObjectUtils.getScene(this);
@@ -38,7 +63,11 @@ OrthographicCamera.prototype.destroy = function()
 	THREE.Object3D.prototype.destroy.call(this);
 }
 
-//Update camera projection matrix
+/**
+ * Update camera projection matrix
+ * Should be called after chaging projection parameters
+ * @method updateProjectionMatrix
+ */
 OrthographicCamera.prototype.updateProjectionMatrix = function()
 {
 	//Update left right, top and bottom values from aspect and size
@@ -60,7 +89,12 @@ OrthographicCamera.prototype.updateProjectionMatrix = function()
 	THREE.OrthographicCamera.prototype.updateProjectionMatrix.call(this);
 }
 
-//Create JSON for object
+/**
+ * Create JSON description
+ * @method toJSON
+ * @param  {Object} meta
+ * @return {Object} JSON descrition
+ */
 OrthographicCamera.prototype.toJSON = function(meta)
 {
 	var data = THREE.OrthographicCamera.prototype.toJSON.call(this, meta);

@@ -1,12 +1,122 @@
 "use strict";
 
+/**
+ * This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.
+ * This page provides documentation for some of the main features of this class, the original documentation of this class can be found at www.threejs.org.
+ * All nunuStudio objects extend the Object3D class of some other higher level class from three.js.
+ * Code examples provided for three.js should also work inside nunuStudio.
+ * @class Object3D
+ * @module ThreeJS
+ * @constructor
+ */
+
+/**
+ * Array with object's children.
+ * @property children
+ * @type {Array}
+*/
+/**
+ * When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.
+ * @property frustumCulled
+ * @default true
+ * @type {boolean}
+*/
+/**
+ * The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.
+ * @property layers
+ * @type {Layers}
+*/
+/**
+ * The local transform matrix
+ * @property matrix
+ * @type {Matrix4}
+*/
+/**
+ * When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.
+ * @property matrixAutoUpdate
+ * @default true
+ * @type {boolean}
+*/
+/**
+ * The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.
+ * @property matrixWorld
+ * @type {Matrix4}
+*/
+/**
+ * Name of the object (doesn't need to be unique).
+ * @property name
+ * @type {String}
+*/
+/**
+ * The object's local position.
+ * @property position
+ * @type {Vector3}
+*/
+/**
+ * Object's local rotation as a Quaternion.
+ * @property quaternion
+ * @type {Quaternion}
+*/
+/**
+ * Object's local rotation (see Euler angles), in radians.
+ * @property rotation
+ * @type {Euler}
+*/
+/**
+ * The object's local scale.
+ * @property scale
+ * @type {Vector3}
+*/
+/**
+ * This is used by the lookAt method, for example, to determine the orientation of the result.
+ * @property up
+ * @type {Vector3}
+*/
+/**
+ * UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.
+ * @property uuid
+ * @type {String}
+ */
+/**
+ * Object gets rendered if true.
+ * @property visible
+ * @type {boolean}
+ * @default true
+ */
+/**
+ * This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.
+ * @property renderOrder
+ * @default 0
+ * @type {Number}
+*/
+/**
+ * Whether the object gets rendered into shadow map.
+ * @property castShadow
+ * @default false
+ * @type {boolean}
+*/
+/**
+ * Whether the material receives shadows.
+ * @property receiveShadow
+ * @default false
+ * @type {boolean}
+*/
+/**
+ * Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.
+ * @property userData
+ * @type {Object}
+*/
+
 //Folded attribute
 THREE.Object3D.prototype.folded = false;
 
 //Hidden attribute (hidden objects are not serialized and dont show up in the editor)
 THREE.Object3D.prototype.hidden = false;
 
-//Initialize Object
+/**
+ * Initialize the object.
+ * @method initialize
+ */
 THREE.Object3D.prototype.initialize = function()
 {
 	for(var i = 0; i < this.children.length; i++)
@@ -15,7 +125,10 @@ THREE.Object3D.prototype.initialize = function()
 	}
 }
 
-//Update object
+/**
+ * Update the object state.
+ * @method update
+ */
 THREE.Object3D.prototype.update = function()
 {
 	for(var i = 0; i < this.children.length; i++)
@@ -24,7 +137,10 @@ THREE.Object3D.prototype.update = function()
 	}
 }
 
-//Dispose object
+/**
+ * Dispose the object (to avoid memory leaks).
+ * @method dispose
+ */
 THREE.Object3D.prototype.dispose = function()
 {
 	for(var i = 0; i < this.children.length; i++)
@@ -33,7 +149,10 @@ THREE.Object3D.prototype.dispose = function()
 	}
 }
 
-//Remove all children from object
+/**
+ * Remove all children from object.
+ * @method removeAll
+ */
 THREE.Object3D.prototype.removeAll = function()
 {
 	for(var i = this.children.length - 1; i > -1; i--)
@@ -42,7 +161,10 @@ THREE.Object3D.prototype.removeAll = function()
 	}
 }
 
-//Destroy object
+/**
+ * Destroy object, dispose and remove from its parent.
+ * @method destroy
+ */
 THREE.Object3D.prototype.destroy = function()
 {
 	while(this.children.length > 0)
@@ -60,7 +182,14 @@ THREE.Object3D.prototype.destroy = function()
 	}
 }
 
-//Create JSON for object
+/**
+ * Serialize object as JSON.
+ * @method toJSON
+ * @param {Object} meta
+ * @param {Function} resourceAccess
+ * @param {boolean} recursive
+ * @return {Object]
+ */
 THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 {
 	var isRootObject = (meta === undefined);
@@ -180,3 +309,119 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		return values;
 	}
 }
+
+/**
+ * Remove children from this object
+ * @param {Object3D} objects Removes object as child of this object. An arbitrary number of objects may be removed.
+ * @method remove
+ */
+
+/**
+ * Rotates the object to face a point in world space.
+ * @param {Vector3} vector A vector representing a position in world space.
+ */
+
+/**
+ * Converts the vector from local space to world space.
+ * @param {Vector3} vector  vector representing a position in local (object) space.
+ * @method localToWorld
+ */
+
+/**
+ * Updates the vector from world space to local space.
+ * @param {Vector3} vector A world vector
+ * @method worldToLocal
+ */
+
+/**
+ * Adds object as child of this object. An arbitrary number of objects may be added.
+ * @method add
+ * @param {Object3D} objects
+ */
+
+/**
+ * This updates the position, rotation and scale with the matrix.
+ * @method applyMatrix
+ * @param {Matrix4} matrix
+ */
+
+/**
+ * Returns a clone of this object and optionaly all descendants.
+ * @method clone
+ * @param {boolean} recursive If true, descendants of the object are also cloned. Default is true.
+ */
+
+/**
+ * Copy the given object into this object.
+ * @method copy
+ * @param {Object3D} object
+ * @param {boolean} recursive If true, descendants of the object are also copied. Default is true.
+ */
+
+/**
+ * Searches through the object's children and returns the first with a matching name.
+ * @param {String} name String to match to the children's Object3d.name property.
+ * @method getObjectByName
+ */
+
+/**
+ * Searches through the object's children and returns the first with a property that matches the aclue given.
+ * @param {String} name The property name to search for.
+ * @param {Object} value Value of the given property.
+ * @method getObjectByProperty
+ */
+
+/**
+ * @param {Vector3} optionalTarget Target to set the result. Otherwise, a new Vector3 is instantiated.
+ * @return {Vector3} Returns a vector representing the position of the object in world space.
+ * @method getWorldPosition
+ */
+
+/**
+ * Returns a quaternion representing the rotation of the object in world space.
+ * @method getWorldQuaternion
+ * @param {Quaternion} optionalTarget If specified, the result will be copied into this Quaternion, otherwise a new Quaternion will be created. 
+ */
+
+/**
+ * Returns the euler angles representing the rotation of the object in world space.
+ * @method getWorldRotation
+ * @param {Euler} optionalTarget If specified, the result will be copied into this Euler, otherwise a new Euler will be created. 
+ */
+
+/**
+ * Returns a vector of the scaling factors applied to the object for each axis in world space.
+ * @method getWorldScale
+ * @param {Vector3} optionalTarget If specified, the result will be copied into this Vector3, otherwise a new Vector3 will be created. 
+ */
+
+/**
+ * Returns a vector representing the direction of object's positive z-axis in world space.
+ * @method getWorldDirection
+ * @param {Vector3} optionalTarget If specified, the result will be copied into this Vector3, otherwise a new Vector3 will be created. 
+ */
+
+/**
+ * Rotate an object along an axis in object space. The axis is assumed to be normalized..
+ * @method rotateOnAxis
+ * @param {Vector3} axis A normalized vector in object space.
+ * @param {Number} angle The angle in radians.
+ */
+
+/**
+ * Rotates the object around x axis in local space.
+ * @method rotateX
+ * @param {Number} rad The angle to rotate in radians.
+ */
+
+/**
+ * Rotates the object around y axis in local space.
+ * @method rotateY
+ * @param {Number} rad The angle to rotate in radians.
+ */
+
+/**
+ * Rotates the object around z axis in local space.
+ * @method rotateZ
+ * @param {Number} rad The angle to rotate in radians.
+ */

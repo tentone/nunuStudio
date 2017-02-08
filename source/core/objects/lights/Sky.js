@@ -1,5 +1,16 @@
 "use strict";
 
+/**
+ * Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry
+ * @param {boolean} autoUpdate If true sky auto updated its state 
+ * @param {Number} dayTime Day duration in seconds
+ * @param {Number} sunDistance Distance of the sun
+ * @param {Number} time Starting time
+ * @class Sky
+ * @extends {THREE.Object3D}
+ * @module Lights
+ * @constructor
+ */
 function Sky(autoUpdate, dayTime, sunDistance, time)
 {	
 	THREE.Object3D.call(this);

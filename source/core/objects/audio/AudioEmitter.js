@@ -1,5 +1,37 @@
 "use strict";
 
+/**
+ * AudioEmitter is a Object3D used to play audio inside the scene
+ * @param {Audio} audio Audio used by this emitter
+ * @class AudioEmitter
+ * @extends {THREE.Audio}
+ * @module Audio
+ * @constructor
+ */
+/**
+ * Audio volume
+ * @property valume
+ * @default 1.0
+ * @type {Number}
+*/
+/**
+ * If true the playback starts automatically
+ * @property autoplay
+ * @default true
+ * @type {boolean}
+*/
+/**
+ * Start time in seconds
+ * @property startTime
+ * @default 0.0
+ * @type {Number}
+*/
+/**
+ * If true the audio plays in loop
+ * @property loop
+ * @default true
+ * @type {boolean}
+*/
 function AudioEmitter(audio)
 {
 	THREE.Audio.call(this, AudioEmitter.listener);
@@ -28,7 +60,10 @@ AudioEmitter.listener = new THREE.AudioListener();
 //Super prototypes
 AudioEmitter.prototype = Object.create(THREE.Audio.prototype);
 
-//Initialize audio object
+/**
+ * Initialize audio object (called by the runtime)
+ * @method initialize
+ */
 AudioEmitter.prototype.initialize = function()
 {
 	var self = this;
@@ -49,7 +84,10 @@ AudioEmitter.prototype.initialize = function()
 	}
 }
 
-//Dispose audio object
+/**
+ * Dispose audio object
+ * @method dispose
+ */
 AudioEmitter.prototype.dispose = function()
 {
 	if(this.isPlaying)
@@ -64,7 +102,11 @@ AudioEmitter.prototype.dispose = function()
 	}
 }
 
-//Set volume
+/**
+ * Change audio emitter volume
+ * @method setVolume
+ * @param {Number} value Audio volume
+ */
 AudioEmitter.prototype.setVolume = function(value)
 {
 	this.volume = value;
@@ -73,7 +115,12 @@ AudioEmitter.prototype.setVolume = function(value)
 	return this;
 }
 
-//Create JSON description
+/**
+ * Create JSON description
+ * @method toJSON
+ * @param {Object} meta
+ * @return {Object} JSON descrition
+ */
 AudioEmitter.prototype.toJSON = function(meta)
 {
 	var audio = this.audio;
@@ -91,3 +138,42 @@ AudioEmitter.prototype.toJSON = function(meta)
 
 	return data;
 }
+
+/**
+ * Starts playback
+ * @method play
+ */
+
+/**
+ * Pauses playback
+ * @method pause
+ */
+
+/**
+ * Stops playback and resets time to 0
+ * @method pause
+ */
+
+/**
+ * Set loop mode
+ * @param {boolean} loop
+ * @method setLoop
+ */
+
+/**
+ * Set playback speed
+ * @param {Number} speed
+ * @method setPlaybackRate
+ */
+
+/**
+ * Add the filter to the filters array.
+ * @method setFilter
+ * @param {Object} filter
+ */
+
+/**
+ * Set the filters array to value.
+ * @method setFilters
+ * @param {Array} value
+ */

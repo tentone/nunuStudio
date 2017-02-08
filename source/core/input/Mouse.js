@@ -3,6 +3,7 @@
 /**
  * Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler
  * @class Mouse
+ * @module Input
  * @constructor
  */
 
