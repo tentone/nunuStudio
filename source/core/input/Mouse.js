@@ -1,5 +1,41 @@
 "use strict";
 
+/**
+ * Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler
+ * @class Mouse
+ * @constructor
+ */
+
+/**
+ * Array with mouse buttons status
+ * @type {array}
+ * @property keys
+ */
+
+/**
+ * Mouse position inside of the window (coordinates in window space)
+ * @type {Vector2}
+ * @property position
+ */
+
+/**
+ * Mouse movement (coordinates in window space)
+ * @type {Vector2}
+ * @property delta
+ */
+
+/**
+ * Mouse scroll wheel movement
+ * @type {Number}
+ * @property wheel
+ */
+
+/**
+ * Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates
+ * @type {DOM}
+ * @property canvas
+ */
+
 function Mouse()
 {
 	//Raw data
@@ -148,11 +184,30 @@ function Mouse()
 Mouse.prototype = Mouse;
 
 //Mouse Buttons
+/**
+ * LEFT mouse button
+ * @attribute LEFT
+ * @type {Number}
+ */
 Mouse.LEFT = 0;
+/**
+ * MIDDLE mouse button
+ * @attribute MIDDLE
+ * @type {Number}
+ */
 Mouse.MIDDLE = 1;
+/**
+ * RIGHT mouse button
+ * @attribute RIGHT
+ * @type {Number}
+ */
 Mouse.RIGHT = 2;
 
-//Canvas to be used for relative coordinates calculation
+/**
+ * Canvas to be used for coordinates calculation relative to that canvas
+ * @method setCanvas
+ * @param {DOM} canvas Canvas to be attached to the Mouse instance
+ */
 Mouse.setCanvas = function(canvas)
 {
 	this.canvas = canvas;
@@ -170,7 +225,11 @@ Mouse.setCanvas = function(canvas)
 	});
 }
 
-//Check if mouse is inside attached canvas
+/**
+ * Check if mouse is inside attached canvas (updated async)
+ * @method insideCanvas
+ * @return {boolean} True if mouse is currently inside the canvas
+ */
 Mouse.insideCanvas = function()
 {
 	if(this.canvas === null)
@@ -181,7 +240,11 @@ Mouse.insideCanvas = function()
 	return this.canvas.mouseInside;
 }
 
-//Set if mouse locked
+/**
+ * Set mouse lock state
+ * @method setLock
+ * @param {boolean} value If true pointer lock will be requested for the canvas attached to the Mouse instance
+ */
 Mouse.setLock = function(value)
 {
 	if(this.canvas !== null)
@@ -219,31 +282,57 @@ Mouse.setLock = function(value)
 	}
 }
 
-//Check if mouse button is pressed
+/**
+ * Check if mouse button is currently pressed
+ * @method buttonPressed
+ * @param {Number} button Button to check status of
+ * @return {boolean} True if button is currently pressed
+ */
 Mouse.buttonPressed = function(button)
 {
 	return this.keys[button].pressed;
 }
 
-//Check if Mouse button was double clicked
+/**
+ * Check if Mouse button was double clicked
+ * @method buttonDoubleClicked
+ * @return {boolean} True if some mouse button was just double clicked
+ */
 Mouse.buttonDoubleClicked = function()
 {
 	return this.doubleClicked;
 }
 
-//Check if a mouse button was just pressed
+/**
+ * Check if a mouse button was just pressed
+ * @method buttonJustPressed
+ * @param {Number} button Button to check status of
+ * @return {boolean} True if button was just pressed
+ */
 Mouse.buttonJustPressed = function(button)
 {
 	return this.keys[button].justPressed;
 }
 
-//Check if a mouse button was just released
+/**
+ * Check if a mouse button was just released
+ * @method buttonJustReleased
+ * @param {Number} button Button to check status of
+ * @return {boolean} True if button was just released
+ */
 Mouse.buttonJustReleased = function(button)
 {
 	return this.keys[button].justReleased;
 }
 
-//Update mouse Position
+/**
+ * Update mouse Position (automatically called by the runtime)
+ * @method updatePosition
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} xDiff
+ * @param {Number} yDiff
+ */
 Mouse.updatePosition = function(x, y, xDiff, yDiff)
 {
 	this._position.set(x, y);
@@ -252,7 +341,11 @@ Mouse.updatePosition = function(x, y, xDiff, yDiff)
 	this._positionUpdated = true;
 }
 
-//Update mouse Key
+/**
+ * Update a mouse button (automatically called by the runtime)
+ * @param {Number} button
+ * @param {Number} action
+ */
 Mouse.updateKey = function(button, action)
 {
 	if(button > -1)
@@ -261,7 +354,10 @@ Mouse.updateKey = function(button, action)
 	}
 }
 
-//Update mouse State (Calculate position diff)
+/**
+ * Update mouse buttons state, position, wheel and delta synchronously (called automatically by the app runtime)
+ * @method update
+ */
 Mouse.update = function()
 {
 	//Update mouse keys state
@@ -319,7 +415,10 @@ Mouse.update = function()
 	}
 }
 
-//Dispose mouse object
+/**
+ * Dispose mouse events (called automatically by the app runtime)
+ * @method dispose
+ */
 Mouse.dispose = function()
 {
 	for(var i = 0; i < this.events.length; i++)
