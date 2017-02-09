@@ -1331,9 +1331,9 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\Scene.js",
             "line": 3,
-            "description": "Scene",
+            "description": "Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.\nScene original documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene",
             "is_constructor": 1,
-            "extends": "{THREE.Object3D}"
+            "extends": "{THREE.Scene}"
         },
         "ResourceManager": {
             "name": "ResourceManager",
@@ -4644,6 +4644,440 @@
             "module": "Core"
         },
         {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 133,
+            "description": "Select initial scene and initialize that scene\nAutomatically called by the runtime",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 168,
+            "description": "Set program mouse and keyboard",
+            "itemtype": "method",
+            "name": "setMouseKeyboard",
+            "params": [
+                {
+                    "name": "mouse",
+                    "description": "",
+                    "type": "Mouse"
+                },
+                {
+                    "name": "keyboard",
+                    "description": "",
+                    "type": "Keyboard"
+                }
+            ],
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 180,
+            "description": "Set program renderer",
+            "itemtype": "method",
+            "name": "setRenderer",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "Three.js renderer to be used by this program",
+                    "type": "WebGLRenderer"
+                }
+            ],
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 191,
+            "description": "Enter VR mode",
+            "itemtype": "method",
+            "name": "displayVR",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 216,
+            "description": "Exit VR mode",
+            "itemtype": "method",
+            "name": "exitVR",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 235,
+            "description": "Update program state\nAutomatically called by the runtime",
+            "itemtype": "method",
+            "name": "update",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 245,
+            "description": "Render program to canvas\nRenderer passed as argument",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "",
+                    "type": "Renderer"
+                }
+            ],
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 293,
+            "description": "Resize program elements\nCalled by the runtime every time the window is resized",
+            "itemtype": "method",
+            "name": "resize",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Width",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "Height",
+                    "type": "Number"
+                }
+            ],
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 319,
+            "description": "Change scene during runtime, this method can receive booth a scene name or a scene object\nThis method should be used inside of script objects during runtime",
+            "itemtype": "method",
+            "name": "setScene",
+            "params": [
+                {
+                    "name": "scene",
+                    "description": "",
+                    "type": "Scene|String"
+                }
+            ],
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 347,
+            "description": "Remove Scene from program",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "scene",
+                    "description": "",
+                    "type": "Scene"
+                }
+            ],
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 368,
+            "description": "Add new scene to this program\nOn the program class only scenes can be added as children",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "scene",
+                    "description": "",
+                    "type": "Scene"
+                }
+            ],
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 389,
+            "description": "Clone program, keeping uuids and every identification attribute\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data",
+            "itemtype": "method",
+            "name": "clone",
+            "return": {
+                "description": "Cloned program",
+                "type": "Program"
+            },
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 400,
+            "description": "Set a scene as initial scene using its uuid\nThis method is used by the editor",
+            "itemtype": "method",
+            "name": "setInitialScene",
+            "params": [
+                {
+                    "name": "uuid",
+                    "description": "Scene uuid",
+                    "type": "String"
+                }
+            ],
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 411,
+            "description": "Create a scene using a default template\nThis is the scene used when creating a new program or scene inside the editor",
+            "itemtype": "method",
+            "name": "addDefaultScene",
+            "params": [
+                {
+                    "name": "material",
+                    "description": "Default material used by objects, if empty a new material is created",
+                    "type": "Material"
+                }
+            ],
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 454,
+            "description": "Dispose program data to avoid memory leaks\nCalled when exiting the program",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 486,
+            "description": "Receive external data and pass it to all script instances",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "method",
+            "name": "receiveDataApp",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 522,
+            "description": "Send data to external app instance",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "method",
+            "name": "sendDataApp",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 553,
+            "description": "Serialize object as JSON.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "exportResources",
+                    "description": "If true all resouces in the program are exported, else only resources attached to objects are exported",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 12,
+            "description": "Cannon.js world used for physics simulation",
+            "itemtype": "property",
+            "name": "world",
+            "type": "World",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 16,
+            "description": "Raycaster used for mouse interaction with 3D objects",
+            "itemtype": "property",
+            "name": "raycaster",
+            "type": "Raycaster",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 20,
+            "description": "Normalized mouse coordinates used by the raycaster",
+            "itemtype": "property",
+            "name": "mouse",
+            "type": "Vector2",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 24,
+            "description": "Program that contains this scene",
+            "itemtype": "property",
+            "name": "program",
+            "type": "Program",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 28,
+            "description": "Canvas used to draw this scene",
+            "itemtype": "property",
+            "name": "canvas",
+            "type": "DOM",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 68,
+            "description": "Initialize scene objects\nCalled automatically by the runtime",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 89,
+            "description": "Update scene\nCalled automatically by the runtime",
+            "itemtype": "method",
+            "name": "update",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 112,
+            "description": "Get camera from scene using cameras uuid",
+            "itemtype": "method",
+            "name": "getCamera",
+            "params": [
+                {
+                    "name": "uuid",
+                    "description": "UUID of the camera",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Camera if found, else null",
+                "type": "Camera"
+            },
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 143,
+            "description": "Add camera to active cameras list",
+            "itemtype": "method",
+            "name": "addCamera",
+            "params": [
+                {
+                    "name": "camera",
+                    "description": "",
+                    "type": "Camera"
+                }
+            ],
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 154,
+            "description": "Update active cameras order",
+            "itemtype": "method",
+            "name": "updateCameraOrder",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 166,
+            "description": "Remove camera from active camera list",
+            "params": [
+                {
+                    "name": "camera",
+                    "description": "Camera to be removed",
+                    "type": "Camera"
+                }
+            ],
+            "itemtype": "method",
+            "name": "removeCamera",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 180,
+            "description": "Set scene fog mode",
+            "params": [
+                {
+                    "name": "mode",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setFogMode",
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 203,
+            "description": "Serialize object as JSON\nAlso serializes physics world information",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
             "line": 20,
             "description": "Images",
@@ -5205,7 +5639,8 @@
                 }
             ],
             "return": {
-                "description": "{Object]"
+                "description": "json",
+                "type": "Object"
             },
             "class": "Object3D",
             "module": "ThreeJS"
