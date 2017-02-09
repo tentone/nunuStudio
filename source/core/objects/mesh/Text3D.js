@@ -1,5 +1,60 @@
 "use strict";
 
+/**
+ * Special mesh type used to represent 3D text
+ * @class Text3D
+ * @module Meshes
+ * @param {String} text Text to be draw
+ * @param {Material} material Material used to shade the superficie of the geometry
+ * @param {Font} font Font
+ * @param {Number} height Text height
+ * @param {boolean} bevel
+ * @param {Number} bevelThickness
+ * @param {Number} size
+ * @param {Number} curveSegments
+ * @constructor
+ * @extends {THREE.Mesh}
+ */
+/**
+ * Material is used to define how the geometry surface is shaded
+ * @property material
+ * @type {Material}
+*/
+/**
+ * Font used to draw text
+ * @property font
+ * @type {Font}
+*/
+/**
+ * Text
+ * @property text
+ * @type {String}
+*/
+/**
+ * Size of the text (depth)
+ * @property size
+ * @type {Number}
+*/
+/**
+ * Height of the text
+ * @property height
+ * @type {Number}
+*/
+/**
+ * Bevel
+ * @property bevel
+ * @type {boolean}
+*/
+/**
+ * Bevel thickness
+ * @property bevelThickness
+ * @type {Number}
+*/
+/**
+ * Bevel size
+ * @property bevelSize
+ * @type {Number}
+*/
 function Text3D(text, material, font, height, bevel, bevelThickness, bevelSize, size, curveSegments)
 {
 	THREE.Mesh.call(this, undefined, material);
@@ -26,7 +81,11 @@ function Text3D(text, material, font, height, bevel, bevelThickness, bevelSize, 
 
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
 
-//Set font
+/**
+ * Set font used by this text 3D instance
+ * @param {Font} font Font
+ * @method setFont
+ */
 Text3D.prototype.setFont = function(font)
 {
 	this.font = font;
@@ -34,7 +93,11 @@ Text3D.prototype.setFont = function(font)
 	this.setText();
 }
 
-//Set Text
+/**
+ * Set Text
+ * @param {String} text
+ * @method setText
+ */
 Text3D.prototype.setText = function(text)
 {
 	if(text !== undefined)
@@ -50,7 +113,11 @@ Text3D.prototype.setText = function(text)
 	this.updateText();
 }
 
-//Update attributes
+/**
+ * Update text geometry
+ * Should be called after chaging any attribute
+ * @method updateText
+ */
 Text3D.prototype.updateText = function()
 {
 	if(this.font !== null)
@@ -68,13 +135,20 @@ Text3D.prototype.updateText = function()
 	}
 }
 
-//Clone text 3D
+/**
+ * Clone this Text3D instance
+ * @method clone
+ * @return {Text3D} Clone of this object
+ */
 Text3D.prototype.clone = function()
 {
 	return new Text3D(this.text, this.material, this.font, this.height, this.bevel, this.bevelThickness, this.bevelSize, this.size, this.curveSegments);
 }
 
-//Dispose text object
+/**
+ * Dispose mesh along with its material and geometry
+ * @method dispose
+ */
 Text3D.prototype.dispose = function()
 {
 	if(this.material.dispose !== undefined)
@@ -93,7 +167,12 @@ Text3D.prototype.dispose = function()
 	}
 }
 
-//Create JSON for object (need to backup geometry and set to undefined to avoid it being stored)
+/**
+ * Create JSON for object
+ * Need to backup geometry and set to undefined to avoid it being stored
+ * @param {Object} meta
+ * @return {Object} json
+ */
 Text3D.prototype.toJSON = function(meta)
 {
 	var geometry = this.geometry;

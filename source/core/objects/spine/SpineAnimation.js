@@ -1,5 +1,18 @@
 "use strict";
 
+/**
+ * Spine animation object, to used with animation produced inside Esoteric spine
+ * Based on the official threejs runtime
+ * More information abou spine available here www.esotericsoftware.com
+ * @class SpineAnimation
+ * @constructor
+ * @extends {THREE.Mesh}
+ * @param {Object} json
+ * @param {String} atlas
+ * @param {String} path
+ * @param {Array} textures
+ * @module Animations
+ */
 function SpineAnimation(json, atlas, path, textures)
 {
 	if(textures !== undefined)
@@ -77,6 +90,11 @@ function SpineAnimation(json, atlas, path, textures)
 SpineAnimation.prototype = Object.create(THREE.Mesh.prototype);
 SpineAnimation.QUAD_TRIANGLES = [0, 1, 2, 2, 3, 0];
 
+/**
+ * Update animation state
+ * Automatically called by the rutime
+ * @method update
+ */
 SpineAnimation.prototype.update = function()
 {
 	var state = this.state;
@@ -92,11 +110,22 @@ SpineAnimation.prototype.update = function()
 	}
 }
 
+/**
+ * Get all available animations
+ * @method getAnimations
+ * @return {Array} Animations
+ */
 SpineAnimation.prototype.getAnimations = function()
 {
 	return this.state.data.skeletonData.animations;
 }
 
+/**
+ * Set animation from track number and name
+ * @method setAnimation
+ * @param {Number} track Track number
+ * @param {String} name Animation name
+ */
 SpineAnimation.prototype.setAnimation = function(track, name)
 {
 	try
@@ -106,12 +135,19 @@ SpineAnimation.prototype.setAnimation = function(track, name)
 	catch(e){}
 }
 
+/**
+ * Get skins in this animation
+ * @return {[type]} [description]
+ */
 SpineAnimation.prototype.getSkins = function()
 {
 	return this.state.data.skeletonData.skins;
 }
 
-//Update mesh geometry from animation state
+/**
+ * Update mesh geometry from animation state
+ * @method updateGeometry
+ */
 SpineAnimation.prototype.updateGeometry = function()
 {
 	//var geometry = this.geometry;
@@ -167,7 +203,11 @@ SpineAnimation.prototype.updateGeometry = function()
 	batcher.end();
 }
 
-//Serialize animation data
+/**
+ * Create JSON for script
+ * @param {Object} meta
+ * @return {Object} json
+ */
 SpineAnimation.prototype.toJSON = function(meta)
 {
 	//Avoid serializing geometry and material

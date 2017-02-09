@@ -1,6 +1,65 @@
 "use strict";
 
-//Program constructor
+/**
+ * Program class contains all the data of an nunuStudio program
+ * @class Program
+ * @module Core
+ * @constructor
+ * @param {String} name Program name
+ * @extends {THREE.Object3D}
+ */
+
+/**
+ * NunuRuntime instance used to communication between nunu app and the host webpage
+ * @attribute app
+ * @default null
+ */
+/**
+ * Enable virtual reality flag
+ * @attribute vr
+ * @default false
+ * @type {boolean}
+ */
+/**
+ * Virtual reality movement scale
+ * @attribute vrScale
+ * @type {Number}
+ * @default 1.0
+ */
+/**
+ * Program description
+ * @attribute description
+ * @type {String}
+ */
+/**
+ * Program author
+ * @attribute author
+ * @type {String}
+ */
+/**
+ * Program version
+ * @attribute version
+ * @type {String}
+ * @default "0"
+ */
+/**
+ * Antialiasing flag
+ * @attribute antialiasing
+ * @type {boolean}
+ * @default false
+ */
+/**
+ * If true the program is rendered with shadows
+ * @attribute shadows
+ * @type {boolean}
+ * @default true
+ */
+/**
+ * Shadow type
+ * @attribute shadowsType
+ * @type {Number}
+ * @default PCFSoftShadowMap
+ */
 function Program(name)
 {
 	THREE.Object3D.call(this);

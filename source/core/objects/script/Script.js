@@ -1,3 +1,51 @@
+/**
+ * Script objects are used to control other objects present in the scene
+ * It can access and change every object in the program and supports some events
+ *  - initialize
+ *    - Called on app initialization
+ *  - update
+ *    - Called on every frame (after the frame is rendered)
+ *  - onMouseOver
+ *    - Called on every frame if mouse is on top of one of the script children
+ *  - onResize
+ *    - Called every time the window is resized
+ *  - onAppData
+ *    - Called when receiving data sent by the host website
+ * 
+ * Code written inside scripts have access to the following attributes
+ *  - scene
+ *  - program
+ *  - self
+ *    - Same as this reference but global in the script scope
+ *  - Keyboard
+ *  - Mouse
+ * @class Script
+ * @extends {THREE.Object}
+ * @param {String} code Javascript code to be used by this script
+ * @module Script
+ */
+
+/**
+ * Javascript code attached to the script
+ * @attribute code
+ * @type {String}
+ */
+/**
+ * Compiled function used during runtime
+ * @attribute script
+ * @type {Function}
+ */
+/**
+ * Pointer to the parent program
+ * Used access program resources easier
+ * @attribute program
+ * @type {Program}
+ */
+/**
+ * Pointer to the parent scene
+ * @attribute scene
+ * @type {Scene}
+ */
 function Script(code)
 {
 	THREE.Object3D.call(this);
@@ -14,10 +62,19 @@ function Script(code)
 
 Script.prototype = Object.create(THREE.Object3D.prototype);
 
-//Default script code
+/**
+ * Default script code used when creating a new Script
+ * @attribute default
+ * @type {String}
+ */
 Script.default = "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n};\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n};\n\nthis.onMouseOver = function()\n{\n	//TODO <MOUSE OVER CHILDREN CODE>\n};\n\nthis.onResize = function()\n{\n	//TODO <RESIZE CODE>\n};";//\n\nthis.onExit = function()\n{\n	//TODO <APP EXIT CODE>\n};";
 
-//Initialize
+/**
+ * Initialize script
+ * Automatically called by the runtime
+ * Calls the script initialize method if it exists
+ * @method initialize
+ */
 Script.prototype.initialize = function()
 {
 	//Program and scene
@@ -51,7 +108,11 @@ Script.prototype.initialize = function()
 	}
 }
 
-//Update Script
+/**
+ * Update script state
+ * Calls the script update method if it exists
+ * @method update
+ */
 Script.prototype.update = function()
 {
 	if(this.script.onMouseOver !== undefined)
@@ -74,7 +135,10 @@ Script.prototype.update = function()
 	}
 }
 
-//Call resize method if available
+/**
+ * Call resize method if available
+ * @method resize
+ */
 Script.prototype.resize = function()
 {
 	if(this.script.onResize !== undefined)
@@ -83,7 +147,11 @@ Script.prototype.resize = function()
 	}
 }
 
-//Call onAppData if available
+/**
+ * Call onAppData if available
+ * @method appData
+ * @param {Object} data
+ */
 Script.prototype.appData = function(data)
 {
 	if(this.script.onAppData !== undefined)
@@ -92,7 +160,11 @@ Script.prototype.appData = function(data)
 	}
 }
 
-//Define script code
+/**
+ * Set script code
+ * @method setCode
+ * @param {String} code
+ */
 Script.prototype.setCode = function(code)
 {
 	if(code !== undefined)
@@ -112,7 +184,11 @@ Script.prototype.setCode = function(code)
 	}
 }
 
-//Create JSON for object
+/**
+ * Create JSON for script
+ * @param {Object} meta
+ * @return {Object} json
+ */
 Script.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);

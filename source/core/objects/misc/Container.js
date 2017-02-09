@@ -1,6 +1,12 @@
 "use strict";
 
-//Container constructor
+/**
+ * Containers are used to group objects together
+ * @class Container
+ * @constructor
+ * @extends {THREE.Object3D}
+ * @module Misc
+ */
 function Container()
 {
 	THREE.Object3D.call(this);
@@ -9,5 +15,4 @@ function Container()
 	this.type = "Group";
 }
 
-//Super prototype
 Container.prototype = Object.create(THREE.Object3D.prototype);

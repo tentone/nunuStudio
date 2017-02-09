@@ -70,6 +70,26 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\objects\\device\\KinectDevice.js": {
+            "name": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "modules": {
+                "Devices": 1
+            },
+            "classes": {
+                "KinectDevice": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\device\\LeapMotion.js": {
+            "name": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "modules": {},
+            "classes": {
+                "LeapMotion": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\objects\\lights\\AmbientLight.js": {
             "name": "..\\source\\core\\objects\\lights\\AmbientLight.js",
             "modules": {
@@ -135,6 +155,121 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\objects\\mesh\\Mesh.js": {
+            "name": "..\\source\\core\\objects\\mesh\\Mesh.js",
+            "modules": {
+                "Meshes": 1
+            },
+            "classes": {
+                "Mesh": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\mesh\\SkinnedMesh.js": {
+            "name": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "modules": {},
+            "classes": {
+                "SkinnedMesh": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\mesh\\Text3D.js": {
+            "name": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "modules": {},
+            "classes": {
+                "Text3D": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\misc\\Container.js": {
+            "name": "..\\source\\core\\objects\\misc\\Container.js",
+            "modules": {
+                "Misc": 1
+            },
+            "classes": {
+                "Container": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\particle\\ParticleEmitter.js": {
+            "name": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "modules": {
+                "Particles": 1
+            },
+            "classes": {
+                "ParticleEmitter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\physics\\PhysicsObject.js": {
+            "name": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "modules": {
+                "Physics": 1
+            },
+            "classes": {
+                "PhysicsObject": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\script\\Script.js": {
+            "name": "..\\source\\core\\objects\\script\\Script.js",
+            "modules": {
+                "Script": 1
+            },
+            "classes": {
+                "Script": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\spine\\SpineAnimation.js": {
+            "name": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "modules": {
+                "Animations": 1
+            },
+            "classes": {
+                "SpineAnimation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\sprite\\Sprite.js": {
+            "name": "..\\source\\core\\objects\\sprite\\Sprite.js",
+            "modules": {
+                "Sprite": 1
+            },
+            "classes": {
+                "Sprite": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\Program.js": {
+            "name": "..\\source\\core\\objects\\Program.js",
+            "modules": {
+                "Core": 1
+            },
+            "classes": {
+                "Program": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\objects\\Scene.js": {
+            "name": "..\\source\\core\\objects\\Scene.js",
+            "modules": {},
+            "classes": {
+                "Scene": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\three\\Object3D.js": {
             "name": "..\\source\\core\\three\\Object3D.js",
             "modules": {
@@ -192,7 +327,22 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
             "line": 3,
-            "description": "Orthographic Camera is used for 2D like image projection"
+            "description": "Orthographic Camera is used for 2D like image projection\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera"
+        },
+        "Devices": {
+            "name": "Devices",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "KinectDevice": 1,
+                "LeapMotion": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 3,
+            "description": "Kinect device object\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\nThe server software is available inside the tools folder in the nunuStudio repository."
         },
         "Lights": {
             "name": "Lights",
@@ -213,6 +363,121 @@
             "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
             "line": 3,
             "description": "Same as THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight"
+        },
+        "Meshes": {
+            "name": "Meshes",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Mesh": 1,
+                "SkinnedMesh": 1,
+                "Text3D": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 3,
+            "description": "Meshs are used to combine a geometry and a material forming a complete rederizable object\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh"
+        },
+        "Misc": {
+            "name": "Misc",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Container": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\misc\\Container.js",
+            "line": 3,
+            "description": "Containers are used to group objects together"
+        },
+        "Particles": {
+            "name": "Particles",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "ParticleEmitter": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 3,
+            "description": "Particle emitter is a wrapper for SPE particle systems\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
+        },
+        "Physics": {
+            "name": "Physics",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "PhysicsObject": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 3,
+            "description": "Wrapper for cannon.js Body physics objects\nDocumentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/"
+        },
+        "Script": {
+            "name": "Script",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Script": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 1,
+            "description": "Script objects are used to control other objects present in the scene\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization\n - update\n   - Called on every frame (after the frame is rendered)\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
+        },
+        "Animations": {
+            "name": "Animations",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "SpineAnimation": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 3,
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine\nBased on the official threejs runtime\nMore information abou spine available here www.esotericsoftware.com"
+        },
+        "Sprite": {
+            "name": "Sprite",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Sprite": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
+            "line": 3,
+            "description": "Sprites allways face the screen are used for 2D elements\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite"
+        },
+        "Core": {
+            "name": "Core",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Program": 1,
+                "Scene": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 3,
+            "description": "Program class contains all the data of an nunuStudio program"
         },
         "ThreeJS": {
             "name": "ThreeJS",
@@ -332,7 +597,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
             "line": 3,
-            "description": "Orthographic Camera is used for 2D like image projection",
+            "description": "Orthographic Camera is used for 2D like image projection\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera",
             "is_constructor": 1,
             "extends": "{THREE.OrthographicCamera}",
             "params": [
@@ -375,7 +640,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
             "line": 3,
-            "description": "Perspective camera",
+            "description": "Perspective camera\nBased on THREE.PerspectiveCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera",
             "extends": "{THREE.PerspectiveCamera}",
             "is_constructor": 1,
             "params": [
@@ -400,6 +665,38 @@
                     "type": "Number"
                 }
             ]
+        },
+        "KinectDevice": {
+            "name": "KinectDevice",
+            "shortname": "KinectDevice",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Devices",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 3,
+            "description": "Kinect device object\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\nThe server software is available inside the tools folder in the nunuStudio repository.",
+            "extends": "{THREE.Object3D}",
+            "is_constructor": 1
+        },
+        "LeapMotion": {
+            "name": "LeapMotion",
+            "shortname": "LeapMotion",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Devices",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 3,
+            "description": "Leap device object based on the official LeapJS runtime\nUsed to connect nunuStudio to a leap motion hand tracker, works on Windows and OSX",
+            "is_constructor": 1,
+            "extends": "{THREE.Object3D}"
         },
         "AmbientLight": {
             "name": "AmbientLight",
@@ -573,7 +870,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
             "line": 3,
-            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry",
+            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.\nThis object was by default 3 internal hidden children",
             "params": [
                 {
                     "name": "autoUpdate",
@@ -646,6 +943,290 @@
             ],
             "extends": "{THREE.SpotLight}",
             "is_constructor": 1
+        },
+        "Mesh": {
+            "name": "Mesh",
+            "shortname": "Mesh",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Meshes",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
+            "line": 3,
+            "description": "Meshs are used to combine a geometry and a material forming a complete rederizable object\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "Geometry used by this mesh",
+                    "type": "Geometry"
+                },
+                {
+                    "name": "material",
+                    "description": "Material used to shade the superficie of the geometry",
+                    "type": "Material"
+                }
+            ],
+            "is_constructor": 1,
+            "extends": "{THREE.Mesh}"
+        },
+        "SkinnedMesh": {
+            "name": "SkinnedMesh",
+            "shortname": "SkinnedMesh",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Meshes",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 3,
+            "description": "A mesh that has a Skeleton with bones that can then be used to animate the vertices of the geometry.\nBased on THREE.SkinnedMesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "Geometry used by this mesh",
+                    "type": "Geometry"
+                },
+                {
+                    "name": "material",
+                    "description": "Material used to shade the superficie of the geometry",
+                    "type": "Material"
+                }
+            ],
+            "is_constructor": 1,
+            "extends": "{THREE.SkinnedMesh}"
+        },
+        "Text3D": {
+            "name": "Text3D",
+            "shortname": "Text3D",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Meshes",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 3,
+            "description": "Special mesh type used to represent 3D text",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "Text to be draw",
+                    "type": "String"
+                },
+                {
+                    "name": "material",
+                    "description": "Material used to shade the superficie of the geometry",
+                    "type": "Material"
+                },
+                {
+                    "name": "font",
+                    "description": "Font",
+                    "type": "Font"
+                },
+                {
+                    "name": "height",
+                    "description": "Text height",
+                    "type": "Number"
+                },
+                {
+                    "name": "bevel",
+                    "description": "",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "bevelThickness",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "size",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "curveSegments",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "is_constructor": 1,
+            "extends": "{THREE.Mesh}"
+        },
+        "Container": {
+            "name": "Container",
+            "shortname": "Container",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Misc",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\misc\\Container.js",
+            "line": 3,
+            "description": "Containers are used to group objects together",
+            "is_constructor": 1,
+            "extends": "{THREE.Object3D}"
+        },
+        "ParticleEmitter": {
+            "name": "ParticleEmitter",
+            "shortname": "ParticleEmitter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Particles",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 3,
+            "description": "Particle emitter is a wrapper for SPE particle systems\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html",
+            "is_constructor": 1,
+            "extends": "{THREE.Points}"
+        },
+        "PhysicsObject": {
+            "name": "PhysicsObject",
+            "shortname": "PhysicsObject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Physics",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 3,
+            "description": "Wrapper for cannon.js Body physics objects\nDocumentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/",
+            "is_constructor": 1,
+            "extends": "{THREE.Object3D}"
+        },
+        "Script": {
+            "name": "Script",
+            "shortname": "Script",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Script",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 1,
+            "description": "Script objects are used to control other objects present in the scene\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization\n - update\n   - Called on every frame (after the frame is rendered)\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse",
+            "extends": "{THREE.Object}",
+            "params": [
+                {
+                    "name": "code",
+                    "description": "Javascript code to be used by this script",
+                    "type": "String"
+                }
+            ]
+        },
+        "SpineAnimation": {
+            "name": "SpineAnimation",
+            "shortname": "SpineAnimation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Animations",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 3,
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine\nBased on the official threejs runtime\nMore information abou spine available here www.esotericsoftware.com",
+            "is_constructor": 1,
+            "extends": "{THREE.Mesh}",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "atlas",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "path",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "textures",
+                    "description": "",
+                    "type": "Array"
+                }
+            ]
+        },
+        "Sprite": {
+            "name": "Sprite",
+            "shortname": "Sprite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Sprite",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
+            "line": 3,
+            "description": "Sprites allways face the screen are used for 2D elements\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite",
+            "params": [
+                {
+                    "name": "material",
+                    "description": "Material used to draw sprites",
+                    "type": "Material"
+                }
+            ],
+            "is_constructor": 1,
+            "extends": "{THREE.Script}"
+        },
+        "Program": {
+            "name": "Program",
+            "shortname": "Program",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 3,
+            "description": "Program class contains all the data of an nunuStudio program",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Program name",
+                    "type": "String"
+                }
+            ],
+            "extends": "{THREE.Object3D}"
+        },
+        "Scene": {
+            "name": "Scene",
+            "shortname": "Scene",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Core",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\Scene.js",
+            "line": 3,
+            "description": "Scene",
+            "is_constructor": 1,
+            "extends": "{THREE.Object3D}"
         },
         "Object3D": {
             "name": "Object3D",
@@ -2150,7 +2731,93 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 37,
+            "line": 17,
+            "description": "Camera size relative to resize mode",
+            "itemtype": "property",
+            "name": "size",
+            "default": "10.0",
+            "type": "{Number}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 23,
+            "description": "Aspect ratio X/Y",
+            "itemtype": "property",
+            "name": "aspect",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 29,
+            "description": "Camera resize mode",
+            "itemtype": "property",
+            "name": "mode",
+            "default": "RESIZE_HORIZONTAL",
+            "type": "{Number}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 35,
+            "description": "Camera viewport offset\nValues range from 0.0 to 1.0 in screen space",
+            "itemtype": "property",
+            "name": "offset",
+            "type": "{Vector2}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 41,
+            "description": "Camera viewport size\nValues range from 0.0 to 1.0 in screen space",
+            "itemtype": "property",
+            "name": "viewport",
+            "type": "{Vector2}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 47,
+            "description": "Clear screen color flag",
+            "itemtype": "property",
+            "name": "clearColor",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 53,
+            "description": "Clear depth flag",
+            "itemtype": "property",
+            "name": "clearDepth",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 59,
+            "description": "Camera draw order preference\nIf more than one camera has the same order value the draw order is undefined for those cameras",
+            "itemtype": "property",
+            "name": "order",
+            "default": "0",
+            "type": "{Number}",
+            "class": "OrthographicCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
+            "line": 87,
             "description": "Used to set camera to resize horizontally",
             "itemtype": "attribute",
             "name": "RESIZE_HORIZONTAL",
@@ -2160,7 +2827,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 44,
+            "line": 94,
             "description": "Used to set camera to resize vertically",
             "itemtype": "attribute",
             "name": "RESIZE_VERTICAL",
@@ -2170,7 +2837,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 51,
+            "line": 101,
             "description": "Destroy camera object and remove it from the scene",
             "itemtype": "method",
             "name": "destroy",
@@ -2179,7 +2846,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 66,
+            "line": 116,
             "description": "Update camera projection matrix\nShould be called after chaging projection parameters",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -2188,7 +2855,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 92,
+            "line": 142,
             "description": "Create JSON description",
             "itemtype": "method",
             "name": "toJSON",
@@ -2208,7 +2875,93 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 29,
+            "line": 16,
+            "description": "Camera field of view in degrees",
+            "itemtype": "property",
+            "name": "fov",
+            "default": "50",
+            "type": "{Number}",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 22,
+            "description": "Camera aspect ratio X/Y",
+            "itemtype": "property",
+            "name": "aspect",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 28,
+            "description": "Camera zoom",
+            "itemtype": "property",
+            "name": "zoom",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 34,
+            "description": "Camera viewport offset\nValues range from 0.0 to 1.0 in screen space",
+            "itemtype": "property",
+            "name": "offset",
+            "type": "{Vector2}",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 40,
+            "description": "Camera viewport size\nValues range from 0.0 to 1.0 in screen space",
+            "itemtype": "property",
+            "name": "viewport",
+            "type": "{Vector2}",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 46,
+            "description": "Clear screen color flag",
+            "itemtype": "property",
+            "name": "clearColor",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 52,
+            "description": "Clear depth flag",
+            "itemtype": "property",
+            "name": "clearDepth",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 58,
+            "description": "Camera draw order preference\nIf more than one camera has the same order value the draw order is undefined for those cameras",
+            "itemtype": "property",
+            "name": "order",
+            "default": "0",
+            "type": "{Number}",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
+            "line": 80,
             "description": "Destroy camera object and remove it from the scene",
             "itemtype": "method",
             "name": "destroy",
@@ -2217,7 +2970,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 44,
+            "line": 95,
             "description": "Update world transformation matrix ignoring parent scaling properties",
             "itemtype": "method",
             "name": "updateMatrixWorld",
@@ -2233,7 +2986,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 79,
+            "line": 130,
             "description": "Update camera projection matrix\nShould be called after chaging projection parameters",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -2242,7 +2995,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 99,
+            "line": 150,
             "description": "Create JSON description",
             "itemtype": "method",
             "name": "toJSON",
@@ -2259,6 +3012,490 @@
             },
             "class": "PerspectiveCamera",
             "module": "Cameras"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 14,
+            "description": "Websocket object used to connect to the data server",
+            "itemtype": "property",
+            "name": "socket",
+            "default": "127.0.0.1:8181",
+            "type": "{Object}",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 20,
+            "description": "Connected flag",
+            "itemtype": "property",
+            "name": "connected",
+            "type": "{boolean}",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 25,
+            "description": "Debug model flag",
+            "itemtype": "property",
+            "name": "debugModel",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 31,
+            "description": "Time until data is considered too obsolete to be usable",
+            "itemtype": "property",
+            "name": "dataTimeout",
+            "type": "{Number}",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 36,
+            "description": "Image data sent by the kinnect camera",
+            "itemtype": "property",
+            "name": "camera",
+            "type": "{Blob}",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 41,
+            "description": "Skeleton data sent by the kinnect",
+            "itemtype": "property",
+            "name": "data",
+            "type": "{Object}",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 99,
+            "description": "Kinect default data timeout in seconds",
+            "itemtype": "attribute",
+            "name": "DATA_TIMEOUT",
+            "type": "{Number}",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 107,
+            "description": "Kinect camera depth mode",
+            "itemtype": "attribute",
+            "name": "DEPTH",
+            "type": "{Number}",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 114,
+            "description": "Kinect camera color mode",
+            "itemtype": "attribute",
+            "name": "COLOR",
+            "type": "{Number}",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 121,
+            "description": "Kinect skeleton joint names in pairs",
+            "itemtype": "attribute",
+            "name": "JOINTS_NAME",
+            "type": "{Array}",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 133,
+            "description": "Update kinect device state",
+            "itemtype": "method",
+            "name": "update",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 195,
+            "description": "Check if there is kinect connected",
+            "itemtype": "method",
+            "name": "isConnected",
+            "return": {
+                "description": "True if there is a kinect connected",
+                "type": "Boolean"
+            },
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 205,
+            "description": "Set kinect camera mode",
+            "itemtype": "method",
+            "name": "setCameraMode",
+            "params": [
+                {
+                    "name": "mode",
+                    "description": "Camera mode",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
+            "line": 222,
+            "description": "Create JSON for object",
+            "itemtype": "method",
+            "name": "toJSON",
+            "class": "KinectDevice",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 12,
+            "description": "Debug model flag",
+            "itemtype": "property",
+            "name": "debugModel",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 18,
+            "description": "Flag to enable gesture detection",
+            "itemtype": "property",
+            "name": "gesturesEnabled",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 24,
+            "description": "Flag to enable hand pose detection",
+            "itemtype": "property",
+            "name": "posesEnabled",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 30,
+            "description": "Hand tracking mode",
+            "itemtype": "property",
+            "name": "mode",
+            "default": "DESK",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 36,
+            "description": "Flag to set arm tracking",
+            "itemtype": "property",
+            "name": "useArm",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 88,
+            "description": "Leap tracking desktop mode",
+            "itemtype": "attribute",
+            "name": "DESK",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 95,
+            "description": "Leap tracking HDM mode",
+            "itemtype": "attribute",
+            "name": "DESK",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 102,
+            "description": "Leap SWIPE gesture",
+            "itemtype": "attribute",
+            "name": "SWIPE",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 108,
+            "description": "Leap SWIPE_LEFT gesture",
+            "itemtype": "attribute",
+            "name": "SWIPE_LEFT",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 114,
+            "description": "Leap SWIPE_RIGHT gesture",
+            "itemtype": "attribute",
+            "name": "SWIPE_RIGHT",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 120,
+            "description": "Leap SWIPE_FRONT gesture",
+            "itemtype": "attribute",
+            "name": "SWIPE_FRONT",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 126,
+            "description": "Leap SWIPE_BACK gesture",
+            "itemtype": "attribute",
+            "name": "SWIPE_BACK",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 132,
+            "description": "Leap SWIPE_UP gesture",
+            "itemtype": "attribute",
+            "name": "SWIPE_UP",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 138,
+            "description": "Leap SWIPE_DOWN gesture",
+            "itemtype": "attribute",
+            "name": "SWIPE_DOWN",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 144,
+            "description": "Leap CIRCLE gesture",
+            "itemtype": "attribute",
+            "name": "CIRCLE",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 150,
+            "description": "Leap SCREEN_TAP gesture",
+            "itemtype": "attribute",
+            "name": "SCREEN_TAP",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 156,
+            "description": "Leap KEY_TAP gesture",
+            "itemtype": "attribute",
+            "name": "KEY_TAP",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 163,
+            "description": "Hand CLOSED pose",
+            "itemtype": "attribute",
+            "name": "CLOSED",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 169,
+            "description": "Hand OPEN pose",
+            "itemtype": "attribute",
+            "name": "OPEN",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 175,
+            "description": "Hand POINTING pose",
+            "itemtype": "attribute",
+            "name": "POINTING",
+            "type": "{Number}",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 182,
+            "description": "Initialize LeapMotion object\nCalled automatically by the runtime\nConnects to the websocket provided by the leap driver",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 206,
+            "description": "Update leap status\nCalled automatically by the runtime",
+            "itemtype": "method",
+            "name": "update",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 236,
+            "description": "Check if a gesture is occuring, is true while the gesture is occuring",
+            "itemtype": "method",
+            "name": "checkGesture",
+            "params": [
+                {
+                    "name": "gesture",
+                    "description": "Gesture to check",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "True if the gesture is occuring",
+                "type": "Boolean"
+            },
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 251,
+            "description": "Check if hand is in pose",
+            "params": [
+                {
+                    "name": "pose",
+                    "description": "Pose to be checked",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "True is hand is in this pose",
+                "type": "Boolean"
+            },
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 265,
+            "description": "Set hand tracking mode\nCan be set to HDM or Desktop mode",
+            "params": [
+                {
+                    "name": "mode",
+                    "description": "Mode",
+                    "type": "Number"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setMode",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 276,
+            "description": "Update leap object pose flags from collected data\nCalled automatically by the update methos",
+            "itemtype": "method",
+            "name": "updatePoses",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 350,
+            "description": "Update leap object gesture flags from collected data\nCalled automatically by the update method",
+            "itemtype": "method",
+            "name": "updateGestures",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 421,
+            "description": "Update internal hand debug model\nAutomatically called by the update method if debugModel is set to true",
+            "itemtype": "method",
+            "name": "updateDebugModel",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 483,
+            "description": "Update physics object to enable hand physics collision\nCalled by updateDebugModel automatically",
+            "itemtype": "method",
+            "name": "updatePhysics",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 547,
+            "description": "Get hand speed (temporaly normalized)",
+            "itemtype": "method",
+            "name": "getMovement",
+            "return": {
+                "description": "Hand speed",
+                "type": "Number"
+            },
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 563,
+            "description": "Create JSON for object",
+            "itemtype": "method",
+            "name": "toJSON",
+            "class": "LeapMotion",
+            "module": "Devices"
         },
         {
             "file": "..\\source\\core\\objects\\lights\\DirectionalLight.js",
@@ -2299,6 +3536,176 @@
             "module": "Lights"
         },
         {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 16,
+            "description": "Clock used to control day time",
+            "itemtype": "property",
+            "name": "clock",
+            "type": "{Clock}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 21,
+            "description": "Array with top sky colors",
+            "itemtype": "property",
+            "name": "colorTop",
+            "type": "{Array}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 26,
+            "description": "Array with bottom sky colors",
+            "itemtype": "property",
+            "name": "colorBottom",
+            "type": "{Array}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 31,
+            "description": "Sun color in hex RGB",
+            "itemtype": "property",
+            "name": "sunColor",
+            "type": "{Number}",
+            "default": "0xFFFFAA",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 37,
+            "description": "Moon color in hex RGB",
+            "itemtype": "property",
+            "name": "moonColor",
+            "type": "{Number}",
+            "default": "0x5555BB",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 43,
+            "description": "Hemisphere light used to match ambient ligth with sky color",
+            "itemtype": "property",
+            "name": "hemisphere",
+            "type": "{HemisphereLight}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 48,
+            "description": "Directional light to simulate sun light and cast shadows",
+            "itemtype": "property",
+            "name": "sun",
+            "type": "{DirectionalLight}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 53,
+            "description": "Sky mesh with material shader to calculate dinamically sky color",
+            "itemtype": "property",
+            "name": "sky",
+            "type": "{Mesh}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 58,
+            "description": "If set to true the sky auto updates its time",
+            "itemtype": "property",
+            "name": "autoUpdate",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 64,
+            "description": "Sun distance",
+            "itemtype": "property",
+            "name": "sunDistance",
+            "type": "{Number}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 69,
+            "description": "Day time in seconds",
+            "itemtype": "property",
+            "name": "dayTime",
+            "type": "{Number}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 74,
+            "description": "Current day time in seconds",
+            "itemtype": "property",
+            "name": "time",
+            "type": "{Number}",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 166,
+            "description": "Initialize sky object\nCalled automatically by the runtime",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 181,
+            "description": "Update sky state\nCalled automatically by the runtime",
+            "itemtype": "method",
+            "name": "update",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 209,
+            "description": "Update sky color and sun position\nIf autoUpdate set to true is automatically called by the update method",
+            "itemtype": "method",
+            "name": "updateSky",
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\Sky.js",
+            "line": 343,
+            "description": "Create JSON for object",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "method",
+            "name": "toJSON",
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Sky",
+            "module": "Lights"
+        },
+        {
             "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
             "line": 32,
             "description": "Update light shadow map atributtes at runtime",
@@ -2306,6 +3713,736 @@
             "name": "updateShadowMap",
             "class": "SpotLight",
             "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
+            "line": 13,
+            "description": "Geometry defined the object structure",
+            "itemtype": "property",
+            "name": "geometry",
+            "type": "{Geometry}",
+            "class": "Mesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
+            "line": 18,
+            "description": "Material is used to define how the geometry surface is shaded",
+            "itemtype": "property",
+            "name": "material",
+            "type": "{Material}",
+            "class": "Mesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
+            "line": 23,
+            "description": "Determines how the mesh triangles are constructed from the vertices.\nOnly works when the geometry is a BufferGeometry",
+            "itemtype": "property",
+            "name": "drawMode",
+            "default": "TrianglesDrawMode",
+            "class": "Mesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
+            "line": 41,
+            "description": "Dispose mesh along with its material and geometry",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Mesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 13,
+            "description": "Geometry defined the object structure",
+            "itemtype": "property",
+            "name": "geometry",
+            "type": "{Geometry}",
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 18,
+            "description": "Material is used to define how the geometry surface is shaded",
+            "itemtype": "property",
+            "name": "material",
+            "type": "{Material}",
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 23,
+            "description": "Determines how the mesh triangles are constructed from the vertices.\nOnly works when the geometry is a BufferGeometry",
+            "itemtype": "property",
+            "name": "drawMode",
+            "default": "TrianglesDrawMode",
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 29,
+            "description": "Array with the bones attached to this mesh",
+            "itemtype": "property",
+            "name": "bones",
+            "type": "{Array}",
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 46,
+            "description": "Dispose mesh along with its material and geometry",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 66,
+            "description": "Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
+            "itemtype": "method",
+            "name": "bind",
+            "params": [
+                {
+                    "name": "skeleton",
+                    "description": "",
+                    "type": "Skeleton"
+                },
+                {
+                    "name": "bindMatrix",
+                    "description": "",
+                    "type": "Matrix4"
+                }
+            ],
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 18,
+            "description": "Material is used to define how the geometry surface is shaded",
+            "itemtype": "property",
+            "name": "material",
+            "type": "{Material}",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 23,
+            "description": "Font used to draw text",
+            "itemtype": "property",
+            "name": "font",
+            "type": "{Font}",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 28,
+            "description": "Text",
+            "itemtype": "property",
+            "name": "text",
+            "type": "{String}",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 33,
+            "description": "Size of the text (depth)",
+            "itemtype": "property",
+            "name": "size",
+            "type": "{Number}",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 38,
+            "description": "Height of the text",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{Number}",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 43,
+            "description": "Bevel",
+            "itemtype": "property",
+            "name": "bevel",
+            "type": "{boolean}",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 48,
+            "description": "Bevel thickness",
+            "itemtype": "property",
+            "name": "bevelThickness",
+            "type": "{Number}",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 53,
+            "description": "Bevel size",
+            "itemtype": "property",
+            "name": "bevelSize",
+            "type": "{Number}",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 84,
+            "description": "Set font used by this text 3D instance",
+            "params": [
+                {
+                    "name": "font",
+                    "description": "Font",
+                    "type": "Font"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setFont",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 96,
+            "description": "Set Text",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setText",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 116,
+            "description": "Update text geometry\nShould be called after chaging any attribute",
+            "itemtype": "method",
+            "name": "updateText",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 138,
+            "description": "Clone this Text3D instance",
+            "itemtype": "method",
+            "name": "clone",
+            "return": {
+                "description": "Clone of this object",
+                "type": "Text3D"
+            },
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 148,
+            "description": "Dispose mesh along with its material and geometry",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
+            "line": 170,
+            "description": "Create JSON for object\nNeed to backup geometry and set to undefined to avoid it being stored",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Text3D",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 12,
+            "description": "SPE Group\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html",
+            "itemtype": "property",
+            "name": "group",
+            "type": "{SPE.Group}",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 18,
+            "description": "SPE EmitterW\nEmitter has attributes that can be used to controll the particle system\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html",
+            "itemtype": "property",
+            "name": "emitter",
+            "type": "{SPE.Emitter}",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 116,
+            "description": "Initialize particle system\nCalled automatically by the runtime",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 131,
+            "description": "Update particle emitter state\nCalled automatically by the runtime",
+            "itemtype": "method",
+            "name": "update",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 146,
+            "description": "Dispose particle emitter",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 170,
+            "description": "Create JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 12,
+            "description": "cannon.js Body object",
+            "itemtype": "attribute",
+            "name": "body",
+            "type": "{CANNON.Body}",
+            "class": "PhysicsObject",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 17,
+            "description": "cannon.js world",
+            "itemtype": "attribute",
+            "name": "world",
+            "type": "{CANNON.World}",
+            "class": "PhysicsObject",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 38,
+            "description": "Intialize physics object and add it to the scene physics world\nAutomatically called by the runtime",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "PhysicsObject",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 67,
+            "description": "Update object position and rotation based on cannon.js body\nAutomatically called by the runtime",
+            "itemtype": "method",
+            "name": "update",
+            "class": "PhysicsObject",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 87,
+            "description": "Add shape to physics object body",
+            "params": [
+                {
+                    "name": "shape",
+                    "description": "",
+                    "type": "CANNON.Shape"
+                }
+            ],
+            "itemtype": "method",
+            "name": "addShape",
+            "class": "PhysicsObject",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
+            "line": 100,
+            "description": "Create JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "PhysicsObject",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 28,
+            "description": "Javascript code attached to the script",
+            "itemtype": "attribute",
+            "name": "code",
+            "type": "{String}",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 33,
+            "description": "Compiled function used during runtime",
+            "itemtype": "attribute",
+            "name": "script",
+            "type": "{Function}",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 38,
+            "description": "Pointer to the parent program\nUsed access program resources easier",
+            "itemtype": "attribute",
+            "name": "program",
+            "type": "{Program}",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 44,
+            "description": "Pointer to the parent scene",
+            "itemtype": "attribute",
+            "name": "scene",
+            "type": "{Scene}",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 65,
+            "description": "Default script code used when creating a new Script",
+            "itemtype": "attribute",
+            "name": "default",
+            "type": "{String}",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 72,
+            "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 111,
+            "description": "Update script state\nCalls the script update method if it exists",
+            "itemtype": "method",
+            "name": "update",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 138,
+            "description": "Call resize method if available",
+            "itemtype": "method",
+            "name": "resize",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 150,
+            "description": "Call onAppData if available",
+            "itemtype": "method",
+            "name": "appData",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 163,
+            "description": "Set script code",
+            "itemtype": "method",
+            "name": "setCode",
+            "params": [
+                {
+                    "name": "code",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\script\\Script.js",
+            "line": 187,
+            "description": "Create JSON for script",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 93,
+            "description": "Update animation state\nAutomatically called by the rutime",
+            "itemtype": "method",
+            "name": "update",
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 113,
+            "description": "Get all available animations",
+            "itemtype": "method",
+            "name": "getAnimations",
+            "return": {
+                "description": "Animations",
+                "type": "Array"
+            },
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 123,
+            "description": "Set animation from track number and name",
+            "itemtype": "method",
+            "name": "setAnimation",
+            "params": [
+                {
+                    "name": "track",
+                    "description": "Track number",
+                    "type": "Number"
+                },
+                {
+                    "name": "name",
+                    "description": "Animation name",
+                    "type": "String"
+                }
+            ],
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 138,
+            "description": "Get skins in this animation",
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 147,
+            "description": "Update mesh geometry from animation state",
+            "itemtype": "method",
+            "name": "updateGeometry",
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 206,
+            "description": "Create JSON for script",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
+            "line": 13,
+            "description": "Material used to render the sprite",
+            "itemtype": "property",
+            "name": "material",
+            "type": "{Material}",
+            "class": "Sprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
+            "line": 28,
+            "description": "Dispose the sprite material",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Sprite",
+            "module": "Sprite"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 12,
+            "description": "NunuRuntime instance used to communication between nunu app and the host webpage",
+            "itemtype": "attribute",
+            "name": "app",
+            "default": "null",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 17,
+            "description": "Enable virtual reality flag",
+            "itemtype": "attribute",
+            "name": "vr",
+            "default": "false",
+            "type": "{boolean}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 23,
+            "description": "Virtual reality movement scale",
+            "itemtype": "attribute",
+            "name": "vrScale",
+            "type": "{Number}",
+            "default": "1.0",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 29,
+            "description": "Program description",
+            "itemtype": "attribute",
+            "name": "description",
+            "type": "{String}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 34,
+            "description": "Program author",
+            "itemtype": "attribute",
+            "name": "author",
+            "type": "{String}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 39,
+            "description": "Program version",
+            "itemtype": "attribute",
+            "name": "version",
+            "type": "{String}",
+            "default": "\"0\"",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 45,
+            "description": "Antialiasing flag",
+            "itemtype": "attribute",
+            "name": "antialiasing",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 51,
+            "description": "If true the program is rendered with shadows",
+            "itemtype": "attribute",
+            "name": "shadows",
+            "type": "{boolean}",
+            "default": "true",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 57,
+            "description": "Shadow type",
+            "itemtype": "attribute",
+            "name": "shadowsType",
+            "type": "{Number}",
+            "default": "PCFSoftShadowMap",
+            "class": "Program",
+            "module": "Core"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -2892,6 +5029,34 @@
         {
             "message": "Missing item type\nUpdate a mouse button (automatically called by the runtime)",
             "line": " ..\\source\\core\\input\\Mouse.js:345"
+        },
+        {
+            "message": "Missing item type\nCheck if hand is in pose",
+            "line": " ..\\source\\core\\objects\\device\\LeapMotion.js:251"
+        },
+        {
+            "message": "Missing item type\nCreate JSON for object\nNeed to backup geometry and set to undefined to avoid it being stored",
+            "line": " ..\\source\\core\\objects\\mesh\\Text3D.js:170"
+        },
+        {
+            "message": "Missing item type\nCreate JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
+            "line": " ..\\source\\core\\objects\\particle\\ParticleEmitter.js:170"
+        },
+        {
+            "message": "Missing item type\nCreate JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
+            "line": " ..\\source\\core\\objects\\physics\\PhysicsObject.js:100"
+        },
+        {
+            "message": "Missing item type\nCreate JSON for script",
+            "line": " ..\\source\\core\\objects\\script\\Script.js:187"
+        },
+        {
+            "message": "Missing item type\nGet skins in this animation",
+            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:138"
+        },
+        {
+            "message": "Missing item type\nCreate JSON for script",
+            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:206"
         },
         {
             "message": "Missing item type\nRotates the object to face a point in world space.",
