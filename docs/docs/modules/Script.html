@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ThreeJS</title>
+    <title>Script</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -117,7 +117,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>ThreeJS Module</h1>
+<h1>Script Module</h1>
 <div class="box clearfix meta">
 
 
@@ -126,10 +126,47 @@
 
 
 <div class="box intro">
-    <p>This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.
-This page provides documentation for some of the main features of this class, the original documentation of this class can be found at <a href="http://www.threejs.org">www.threejs.org</a>.
-All nunuStudio objects extend the Object3D class of some other higher level class from three.js.
-Code examples provided for three.js should also work inside nunuStudio.</p>
+    <p>Script objects are used to control other objects present in the scene
+It can access and change every object in the program and supports some events</p>
+<ul>
+<li>initialize
+<ul>
+<li>Called on app initialization</li>
+</ul>
+</li>
+<li>update
+<ul>
+<li>Called on every frame (after the frame is rendered)</li>
+</ul>
+</li>
+<li>onMouseOver
+<ul>
+<li>Called on every frame if mouse is on top of one of the script children</li>
+</ul>
+</li>
+<li>onResize
+<ul>
+<li>Called every time the window is resized</li>
+</ul>
+</li>
+<li>onAppData
+<ul>
+<li>Called when receiving data sent by the host website</li>
+</ul>
+</li>
+</ul>
+<p>Code written inside scripts have access to the following attributes</p>
+<ul>
+<li>scene</li>
+<li>program</li>
+<li>self
+<ul>
+<li>Same as this reference but global in the script scope</li>
+</ul>
+</li>
+<li>Keyboard</li>
+<li>Mouse</li>
+</ul>
 
 </div>
 
@@ -140,8 +177,8 @@ Code examples provided for three.js should also work inside nunuStudio.</p>
 
             <ul class="module-classes">
                 <li class="module-class">
-                    <a href="../classes/Object3D.html">
-                        Object3D
+                    <a href="../classes/Script.html">
+                        Script
                     </a>
                 </li>
             </ul>

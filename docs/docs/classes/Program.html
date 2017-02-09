@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Key</title>
+    <title>Program</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -117,27 +117,36 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Key Class</h1>
+<h1>Program Class</h1>
 <div class="box meta">
 
+        <div class="extends">
+            Extends THREE.Object3D
+        </div>
 
 
-            Module: <a href="../modules/Input.html">Input</a>
+            Module: <a href="../modules/Core.html">Core</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Key is used by Keyboard, Mouse, etc, to represent a key state</p>
+    <p>Program class contains all the data of an nunuStudio program</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_Key" class="method item">
-    <h3 class="name"><code>Key</code></h3>
+<div id="method_Program" class="method item">
+    <h3 class="name"><code>Program</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
 
 
@@ -158,6 +167,23 @@
         
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Program name</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
 
 
 
@@ -168,8 +194,6 @@
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
     </ul>
 
@@ -177,238 +201,53 @@
         <div id="index" class="api-class-tabpanel index">
             <h2 class="off-left">Item Index</h2>
 
-                <div class="index-section methods">
-                    <h3>Methods</h3>
 
-                    <ul class="index-list methods">
-                            <li class="index-item method">
-                                <a href="#method_reset">reset</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_set">set</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_update">update</a>
-
-                            </li>
-                    </ul>
-                </div>
-
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                            <li class="index-item property">
-                                <a href="#property_justPressed">justPressed</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_justReleased">justReleased</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_pressed">pressed</a>
-
-                            </li>
-                    </ul>
-                </div>
 
                 <div class="index-section attrs">
                     <h3>Attributes</h3>
 
-                    <ul class="index-list attrs">
+                    <ul class="index-list attrs extends">
                             <li class="index-item attr">
-                                <a href="#attr_DOWN">DOWN</a>
+                                <a href="#attr_antialiasing">antialiasing</a>
                             </li>
                             <li class="index-item attr">
-                                <a href="#attr_RESET">RESET</a>
+                                <a href="#attr_app">app</a>
                             </li>
                             <li class="index-item attr">
-                                <a href="#attr_UP">UP</a>
+                                <a href="#attr_author">author</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_description">description</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_shadows">shadows</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_shadowsType">shadowsType</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_version">version</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_vr">vr</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_vrScale">vrScale</a>
                             </li>
                     </ul>
                 </div>
 
         </div>
 
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
 
-<div id="method_reset" class="method item">
-    <h3 class="name"><code>reset</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Reset key to default values</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_set" class="method item">
-    <h3 class="name"><code>set</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Set this key attributes manually</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_update" class="method item">
-    <h3 class="name"><code>update</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Update Key status based on new key state</p>
-
-    </div>
-
-
-
-
-</div>
-            </div>
-
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-<div id="property_justPressed" class="property item">
-    <h3 class="name"><code>justPressed</code></h3>
-    <span class="type">Boolean</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Indicates if this key was just pressed</p>
-
-    </div>
-
-        <p><strong>Default:</strong> false</p>
-
-
-</div>
-<div id="property_justReleased" class="property item">
-    <h3 class="name"><code>justReleased</code></h3>
-    <span class="type">Boolean</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Indicates if this key was just released</p>
-
-    </div>
-
-        <p><strong>Default:</strong> false</p>
-
-
-</div>
-<div id="property_pressed" class="property item">
-    <h3 class="name"><code>pressed</code></h3>
-    <span class="type">Boolean</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Indicates if this key is currently pressed</p>
-
-    </div>
-
-        <p><strong>Default:</strong> false</p>
-
-
-</div>
-            </div>
 
             <div id="attrs" class="api-class-tabpanel">
                 <h2 class="off-left">Attributes</h2>
 
-                    <div id="attr_DOWN" class="attr item">
-                        <a name="config_DOWN"></a> 
-                        <h3 class="name"><code>DOWN</code></h3>
-                        <span class="type">Number</span>
+                    <div id="attr_antialiasing" class="attr item">
+                        <a name="config_antialiasing"></a> 
+                        <h3 class="name"><code>antialiasing</code></h3>
+                        <span class="type">Boolean</span>
                     
                     
                     
@@ -425,17 +264,73 @@
                         </div>
                     
                         <div class="description">
-                            <p>Down</p>
+                            <p>Antialiasing flag</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="attr_app" class="attr item">
+                        <a name="config_app"></a> 
+                        <h3 class="name"><code>app</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>NunuRuntime instance used to communication between nunu app and the host webpage</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="attr_author" class="attr item">
+                        <a name="config_author"></a> 
+                        <h3 class="name"><code>author</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Program author</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="attr_RESET" class="attr item">
-                        <a name="config_RESET"></a> 
-                        <h3 class="name"><code>RESET</code></h3>
-                        <span class="type">Number</span>
+                    <div id="attr_description" class="attr item">
+                        <a name="config_description"></a> 
+                        <h3 class="name"><code>description</code></h3>
+                        <span class="type">String</span>
                     
                     
                     
@@ -452,16 +347,44 @@
                         </div>
                     
                         <div class="description">
-                            <p>Reset</p>
+                            <p>Program description</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="attr_UP" class="attr item">
-                        <a name="config_UP"></a> 
-                        <h3 class="name"><code>UP</code></h3>
+                    <div id="attr_shadows" class="attr item">
+                        <a name="config_shadows"></a> 
+                        <h3 class="name"><code>shadows</code></h3>
+                        <span class="type">Boolean</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>If true the program is rendered with shadows</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="attr_shadowsType" class="attr item">
+                        <a name="config_shadowsType"></a> 
+                        <h3 class="name"><code>shadowsType</code></h3>
                         <span class="type">Number</span>
                     
                     
@@ -479,10 +402,95 @@
                         </div>
                     
                         <div class="description">
-                            <p>Up</p>
+                            <p>Shadow type</p>
                     
                         </div>
                     
+                            <p><strong>Default:</strong> PCFSoftShadowMap</p>
+                    
+                    
+                    </div>
+                    <div id="attr_version" class="attr item">
+                        <a name="config_version"></a> 
+                        <h3 class="name"><code>version</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Program version</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &quot;0&quot;</p>
+                    
+                    
+                    </div>
+                    <div id="attr_vr" class="attr item">
+                        <a name="config_vr"></a> 
+                        <h3 class="name"><code>vr</code></h3>
+                        <span class="type">Boolean</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Enable virtual reality flag</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="attr_vrScale" class="attr item">
+                        <a name="config_vrScale"></a> 
+                        <h3 class="name"><code>vrScale</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Virtual reality movement scale</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 1.0</p>
                     
                     
                     </div>

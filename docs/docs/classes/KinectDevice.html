@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>AudioEmitter</title>
+    <title>KinectDevice</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -117,36 +117,33 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>AudioEmitter Class</h1>
+<h1>KinectDevice Class</h1>
 <div class="box meta">
 
         <div class="extends">
-            Extends THREE.Audio
+            Extends THREE.Object3D
         </div>
 
 
-            Module: <a href="../modules/Audio.html">Audio</a>
+            Module: <a href="../modules/Devices.html">Devices</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>AudioEmitter is a Object3D used to play audio inside the scene</p>
+    <p>Kinect device object
+This object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.
+The operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.
+The server software is available inside the tools folder in the nunuStudio repository.</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_AudioEmitter" class="method item">
-    <h3 class="name"><code>AudioEmitter</code></h3>
+<div id="method_KinectDevice" class="method item">
+    <h3 class="name"><code>KinectDevice</code></h3>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>audio</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
 
 
 
@@ -167,23 +164,6 @@
         
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">audio</code>
-                        <span class="type">Audio</span>
-
-
-                    <div class="param-description">
-                        <p>Audio used by this emitter</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
 
 
 
@@ -196,6 +176,7 @@
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
     </ul>
 
     <div>
@@ -207,47 +188,19 @@
 
                     <ul class="index-list methods extends">
                             <li class="index-item method">
-                                <a href="#method_dispose">dispose</a>
+                                <a href="#method_isConnected">isConnected</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_initialize">initialize</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_pause">pause</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_pause">pause</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_play">play</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setFilter">setFilter</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setFilters">setFilters</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setLoop">setLoop</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setPlaybackRate">setPlaybackRate</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setVolume">setVolume</a>
+                                <a href="#method_setCameraMode">setCameraMode</a>
 
                             </li>
                             <li class="index-item method">
                                 <a href="#method_toJSON">toJSON</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_update">update</a>
 
                             </li>
                     </ul>
@@ -258,444 +211,63 @@
 
                     <ul class="index-list properties extends">
                             <li class="index-item property">
-                                <a href="#property_autoplay">autoplay</a>
+                                <a href="#property_camera">camera</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_loop">loop</a>
+                                <a href="#property_connected">connected</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_startTime">startTime</a>
+                                <a href="#property_data">data</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_valume">valume</a>
+                                <a href="#property_dataTimeout">dataTimeout</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_debugModel">debugModel</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_socket">socket</a>
 
                             </li>
                     </ul>
                 </div>
 
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs extends">
+                            <li class="index-item attr">
+                                <a href="#attr_COLOR">COLOR</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_DATA_TIMEOUT">DATA_TIMEOUT</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_DEPTH">DEPTH</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_JOINTS_NAME">JOINTS_NAME</a>
+                            </li>
+                    </ul>
+                </div>
 
         </div>
 
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_dispose" class="method item">
-    <h3 class="name"><code>dispose</code></h3>
+<div id="method_isConnected" class="method item">
+    <h3 class="name"><code>isConnected</code></h3>
 
         <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Dispose audio object</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_initialize" class="method item">
-    <h3 class="name"><code>initialize</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Initialize audio object (called by the runtime)</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_pause" class="method item">
-    <h3 class="name"><code>pause</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Stops playback and resets time to 0</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_pause" class="method item">
-    <h3 class="name"><code>pause</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Pauses playback</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_play" class="method item">
-    <h3 class="name"><code>play</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Starts playback</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_setFilter" class="method item">
-    <h3 class="name"><code>setFilter</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>filter</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Add the filter to the filters array.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">filter</code>
-                        <span class="type">Object</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_setFilters" class="method item">
-    <h3 class="name"><code>setFilters</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>value</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Set the filters array to value.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">value</code>
-                        <span class="type">Array</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_setLoop" class="method item">
-    <h3 class="name"><code>setLoop</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>loop</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Set loop mode</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">loop</code>
-                        <span class="type">Boolean</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_setPlaybackRate" class="method item">
-    <h3 class="name"><code>setPlaybackRate</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>speed</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Set playback speed</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">speed</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_setVolume" class="method item">
-    <h3 class="name"><code>setVolume</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>value</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Change audio emitter volume</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">value</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>Audio volume</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_toJSON" class="method item">
-    <h3 class="name"><code>toJSON</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>meta</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
 
         <span class="returns-inline">
-            <span class="type">Object</span>
+            <span class="type">Boolean</span>
         </span>
 
 
@@ -713,7 +285,51 @@
     </div>
 
     <div class="description">
-        <p>Create JSON description</p>
+        <p>Check if there is kinect connected</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Boolean</span>:
+                    <p>True if there is a kinect connected</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setCameraMode" class="method item">
+    <h3 class="name"><code>setCameraMode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>mode</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set kinect camera mode</p>
 
     </div>
 
@@ -722,27 +338,77 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">meta</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">mode</code>
+                        <span class="type">Boolean</span>
 
 
                     <div class="param-description">
-                         
+                        <p>Camera mode</p>
+
                     </div>
 
                 </li>
             </ul>
         </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
 
-            <div class="returns-description">
-                        <span class="type">Object</span>:
-                    <p>JSON descrition</p>
 
-            </div>
-        </div>
+</div>
+<div id="method_toJSON" class="method item">
+    <h3 class="name"><code>toJSON</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Create JSON for object</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_update" class="method item">
+    <h3 class="name"><code>update</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Update kinect device state</p>
+
+    </div>
+
+
 
 
 </div>
@@ -751,8 +417,31 @@
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-<div id="property_autoplay" class="property item">
-    <h3 class="name"><code>autoplay</code></h3>
+<div id="property_camera" class="property item">
+    <h3 class="name"><code>camera</code></h3>
+    <span class="type">Blob</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Image data sent by the kinnect camera</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_connected" class="property item">
+    <h3 class="name"><code>connected</code></h3>
     <span class="type">Boolean</span>
 
 
@@ -767,16 +456,61 @@
     </div>
 
     <div class="description">
-        <p>If true the playback starts automatically</p>
+        <p>Connected flag</p>
 
     </div>
 
-        <p><strong>Default:</strong> true</p>
 
 
 </div>
-<div id="property_loop" class="property item">
-    <h3 class="name"><code>loop</code></h3>
+<div id="property_data" class="property item">
+    <h3 class="name"><code>data</code></h3>
+    <span class="type">Object</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Skeleton data sent by the kinnect</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_dataTimeout" class="property item">
+    <h3 class="name"><code>dataTimeout</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Time until data is considered too obsolete to be usable</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_debugModel" class="property item">
+    <h3 class="name"><code>debugModel</code></h3>
     <span class="type">Boolean</span>
 
 
@@ -791,7 +525,7 @@
     </div>
 
     <div class="description">
-        <p>If true the audio plays in loop</p>
+        <p>Debug model flag</p>
 
     </div>
 
@@ -799,9 +533,9 @@
 
 
 </div>
-<div id="property_startTime" class="property item">
-    <h3 class="name"><code>startTime</code></h3>
-    <span class="type">Number</span>
+<div id="property_socket" class="property item">
+    <h3 class="name"><code>socket</code></h3>
+    <span class="type">Object</span>
 
 
 
@@ -815,40 +549,128 @@
     </div>
 
     <div class="description">
-        <p>Start time in seconds</p>
+        <p>Websocket object used to connect to the data server</p>
 
     </div>
 
-        <p><strong>Default:</strong> 0.0</p>
-
-
-</div>
-<div id="property_valume" class="property item">
-    <h3 class="name"><code>valume</code></h3>
-    <span class="type">Number</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Audio volume</p>
-
-    </div>
-
-        <p><strong>Default:</strong> 1.0</p>
+        <p><strong>Default:</strong> 127.0.0.1:8181</p>
 
 
 </div>
             </div>
 
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                    <div id="attr_COLOR" class="attr item">
+                        <a name="config_COLOR"></a> 
+                        <h3 class="name"><code>COLOR</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Kinect camera color mode</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="attr_DATA_TIMEOUT" class="attr item">
+                        <a name="config_DATA_TIMEOUT"></a> 
+                        <h3 class="name"><code>DATA_TIMEOUT</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Kinect default data timeout in seconds</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="attr_DEPTH" class="attr item">
+                        <a name="config_DEPTH"></a> 
+                        <h3 class="name"><code>DEPTH</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Kinect camera depth mode</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="attr_JOINTS_NAME" class="attr item">
+                        <a name="config_JOINTS_NAME"></a> 
+                        <h3 class="name"><code>JOINTS_NAME</code></h3>
+                        <span class="type">Array</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Kinect skeleton joint names in pairs</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
 
     </div>
 </div>

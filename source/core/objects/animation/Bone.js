@@ -1,6 +1,6 @@
 "use strict";
 
-//Bone constructor
+//Bone
 function Bone()
 {
 	THREE.Bone.call(this);

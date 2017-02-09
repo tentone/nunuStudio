@@ -1,6 +1,12 @@
 "use strict";
 
-//Scene constructor
+/**
+ * Scene
+ * @class Scene
+ * @module Core
+ * @constructor
+ * @extends {THREE.Object3D}
+ */
 function Scene()
 {
 	THREE.Scene.call(this);

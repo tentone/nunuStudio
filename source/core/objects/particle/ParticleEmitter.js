@@ -1,6 +1,27 @@
 "use strict";
 
-//Particle emitter constructor
+/**
+ * Particle emitter is a wrapper for SPE particle systems
+ * Documentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html
+ * @class ParticleEmitter
+ * @constructor
+ * @extends {THREE.Points}
+ * @module Particles
+ */
+
+/**
+ * SPE Group
+ * https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html
+ * @property group
+ * @type {SPE.Group}
+ */
+/**
+ * SPE EmitterW
+ * Emitter has attributes that can be used to controll the particle system
+ * https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html
+ * @property emitter
+ * @type {SPE.Emitter}
+ */
 function ParticleEmitter(group, emitter)
 {
 	//Clock
@@ -92,7 +113,11 @@ function ParticleEmitter(group, emitter)
 
 ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
 
-//Initialize particle system
+/**
+ * Initialize particle system
+ * Called automatically by the runtime
+ * @method initialize
+ */
 ParticleEmitter.prototype.initialize = function()
 {
 	for(var i = 0; i < this.children.length; i++)
@@ -103,7 +128,11 @@ ParticleEmitter.prototype.initialize = function()
 	this.clock.start();
 }
 
-//Update particle emitter
+/**
+ * Update particle emitter state
+ * Called automatically by the runtime
+ * @method update
+ */
 ParticleEmitter.prototype.update = function()
 {
 	this.group.tick(this.clock.getDelta());
@@ -114,7 +143,10 @@ ParticleEmitter.prototype.update = function()
 	}
 }
 
-//Dispose particle emitter
+/**
+ * Dispose particle emitter
+ * @method dispose
+ */
 ParticleEmitter.prototype.dispose = function()
 {
 	this.group.texture.dispose();
@@ -135,7 +167,12 @@ ParticleEmitter.prototype.updateMatrix = function ()
 	this.matrixWorldNeedsUpdate = true;
 };
 
-//JSON serializer
+/**
+ * Create JSON for object
+ * Need to backup material and geometry and set to undefined to avoid it being stored
+ * @param {Object} meta
+ * @return {Object} json
+ */
 ParticleEmitter.prototype.toJSON = function(meta)
 {
 	//Back material and geometry to avoid unwanted serialization

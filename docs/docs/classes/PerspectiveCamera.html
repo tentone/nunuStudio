@@ -40,27 +40,49 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AmbientLight.html">AmbientLight</a></li>
                                 <li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
+                                <li><a href="../classes/Container.html">Container</a></li>
                                 <li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
                                 <li><a href="../classes/HemisphereLight.html">HemisphereLight</a></li>
                                 <li><a href="../classes/Key.html">Key</a></li>
                                 <li><a href="../classes/Keyboard.html">Keyboard</a></li>
+                                <li><a href="../classes/KinectDevice.html">KinectDevice</a></li>
+                                <li><a href="../classes/LeapMotion.html">LeapMotion</a></li>
+                                <li><a href="../classes/Mesh.html">Mesh</a></li>
                                 <li><a href="../classes/Mouse.html">Mouse</a></li>
                                 <li><a href="../classes/Object3D.html">Object3D</a></li>
                                 <li><a href="../classes/OrthographicCamera.html">OrthographicCamera</a></li>
+                                <li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
                                 <li><a href="../classes/PerspectiveCamera.html">PerspectiveCamera</a></li>
+                                <li><a href="../classes/PhysicsObject.html">PhysicsObject</a></li>
                                 <li><a href="../classes/PointLight.html">PointLight</a></li>
                                 <li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
+                                <li><a href="../classes/Program.html">Program</a></li>
                                 <li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+                                <li><a href="../classes/Scene.html">Scene</a></li>
+                                <li><a href="../classes/Script.html">Script</a></li>
+                                <li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
                                 <li><a href="../classes/Sky.html">Sky</a></li>
+                                <li><a href="../classes/SpineAnimation.html">SpineAnimation</a></li>
                                 <li><a href="../classes/SpotLight.html">SpotLight</a></li>
+                                <li><a href="../classes/Sprite.html">Sprite</a></li>
+                                <li><a href="../classes/Text3D.html">Text3D</a></li>
                             </ul>
                 
                 
                             <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/Animations.html">Animations</a></li>
                                 <li><a href="../modules/Audio.html">Audio</a></li>
                                 <li><a href="../modules/Cameras.html">Cameras</a></li>
+                                <li><a href="../modules/Core.html">Core</a></li>
+                                <li><a href="../modules/Devices.html">Devices</a></li>
                                 <li><a href="../modules/Input.html">Input</a></li>
                                 <li><a href="../modules/Lights.html">Lights</a></li>
+                                <li><a href="../modules/Meshes.html">Meshes</a></li>
+                                <li><a href="../modules/Misc.html">Misc</a></li>
+                                <li><a href="../modules/Particles.html">Particles</a></li>
+                                <li><a href="../modules/Physics.html">Physics</a></li>
+                                <li><a href="../modules/Script.html">Script</a></li>
+                                <li><a href="../modules/Sprite.html">Sprite</a></li>
                                 <li><a href="../modules/ThreeJS.html">ThreeJS</a></li>
                             </ul>
                         </div>
@@ -109,7 +131,8 @@
 
 
 <div class="box intro">
-    <p>Perspective camera</p>
+    <p>Perspective camera
+Based on THREE.PerspectiveCamera, original documentation available at <a href="https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera">https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera</a></p>
 
 </div>
 
@@ -215,6 +238,7 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
     </ul>
 
     <div>
@@ -244,6 +268,44 @@
                     </ul>
                 </div>
 
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                            <li class="index-item property">
+                                <a href="#property_aspect">aspect</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_clearColor">clearColor</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_clearDepth">clearDepth</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_fov">fov</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_offset">offset</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_order">order</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_viewport">viewport</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_zoom">zoom</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
         </div>
@@ -427,6 +489,203 @@ Should be called after chaging projection parameters</p>
 </div>
             </div>
 
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+<div id="property_aspect" class="property item">
+    <h3 class="name"><code>aspect</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Camera aspect ratio X/Y</p>
+
+    </div>
+
+        <p><strong>Default:</strong> 1.0</p>
+
+
+</div>
+<div id="property_clearColor" class="property item">
+    <h3 class="name"><code>clearColor</code></h3>
+    <span class="type">Boolean</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Clear screen color flag</p>
+
+    </div>
+
+        <p><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_clearDepth" class="property item">
+    <h3 class="name"><code>clearDepth</code></h3>
+    <span class="type">Boolean</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Clear depth flag</p>
+
+    </div>
+
+        <p><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_fov" class="property item">
+    <h3 class="name"><code>fov</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Camera field of view in degrees</p>
+
+    </div>
+
+        <p><strong>Default:</strong> 50</p>
+
+
+</div>
+<div id="property_offset" class="property item">
+    <h3 class="name"><code>offset</code></h3>
+    <span class="type">Vector2</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Camera viewport offset
+Values range from 0.0 to 1.0 in screen space</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_order" class="property item">
+    <h3 class="name"><code>order</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Camera draw order preference
+If more than one camera has the same order value the draw order is undefined for those cameras</p>
+
+    </div>
+
+        <p><strong>Default:</strong> 0</p>
+
+
+</div>
+<div id="property_viewport" class="property item">
+    <h3 class="name"><code>viewport</code></h3>
+    <span class="type">Vector2</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Camera viewport size
+Values range from 0.0 to 1.0 in screen space</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_zoom" class="property item">
+    <h3 class="name"><code>zoom</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Camera zoom</p>
+
+    </div>
+
+        <p><strong>Default:</strong> 1.0</p>
+
+
+</div>
+            </div>
 
 
     </div>

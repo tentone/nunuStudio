@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Key</title>
+    <title>Script</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -117,59 +117,70 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Key Class</h1>
+<h1>Script Class</h1>
 <div class="box meta">
 
+        <div class="extends">
+            Extends THREE.Object
+        </div>
 
 
-            Module: <a href="../modules/Input.html">Input</a>
+            Module: <a href="../modules/Script.html">Script</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Key is used by Keyboard, Mouse, etc, to represent a key state</p>
+    <p>Script objects are used to control other objects present in the scene
+It can access and change every object in the program and supports some events</p>
+<ul>
+<li>initialize
+<ul>
+<li>Called on app initialization</li>
+</ul>
+</li>
+<li>update
+<ul>
+<li>Called on every frame (after the frame is rendered)</li>
+</ul>
+</li>
+<li>onMouseOver
+<ul>
+<li>Called on every frame if mouse is on top of one of the script children</li>
+</ul>
+</li>
+<li>onResize
+<ul>
+<li>Called every time the window is resized</li>
+</ul>
+</li>
+<li>onAppData
+<ul>
+<li>Called when receiving data sent by the host website</li>
+</ul>
+</li>
+</ul>
+<p>Code written inside scripts have access to the following attributes</p>
+<ul>
+<li>scene</li>
+<li>program</li>
+<li>self
+<ul>
+<li>Same as this reference but global in the script scope</li>
+</ul>
+</li>
+<li>Keyboard</li>
+<li>Mouse</li>
+</ul>
 
 </div>
 
-    <div class="constructor">
-        <h2>Constructor</h2>
-<div id="method_Key" class="method item">
-    <h3 class="name"><code>Key</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-
-
-
-</div>
-    </div>
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
     </ul>
 
@@ -180,13 +191,21 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                             <li class="index-item method">
-                                <a href="#method_reset">reset</a>
+                                <a href="#method_appData">appData</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_set">set</a>
+                                <a href="#method_initialize">initialize</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_resize">resize</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setCode">setCode</a>
 
                             </li>
                             <li class="index-item method">
@@ -196,37 +215,25 @@
                     </ul>
                 </div>
 
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                            <li class="index-item property">
-                                <a href="#property_justPressed">justPressed</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_justReleased">justReleased</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_pressed">pressed</a>
-
-                            </li>
-                    </ul>
-                </div>
 
                 <div class="index-section attrs">
                     <h3>Attributes</h3>
 
-                    <ul class="index-list attrs">
+                    <ul class="index-list attrs extends">
                             <li class="index-item attr">
-                                <a href="#attr_DOWN">DOWN</a>
+                                <a href="#attr_code">code</a>
                             </li>
                             <li class="index-item attr">
-                                <a href="#attr_RESET">RESET</a>
+                                <a href="#attr_default">default</a>
                             </li>
                             <li class="index-item attr">
-                                <a href="#attr_UP">UP</a>
+                                <a href="#attr_program">program</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_scene">scene</a>
+                            </li>
+                            <li class="index-item attr">
+                                <a href="#attr_script">script</a>
                             </li>
                     </ul>
                 </div>
@@ -236,8 +243,59 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_reset" class="method item">
-    <h3 class="name"><code>reset</code></h3>
+<div id="method_appData" class="method item">
+    <h3 class="name"><code>appData</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>data</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Call onAppData if available</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">data</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_initialize" class="method item">
+    <h3 class="name"><code>initialize</code></h3>
 
         <span class="paren">()</span>
 
@@ -257,7 +315,9 @@
     </div>
 
     <div class="description">
-        <p>Reset key to default values</p>
+        <p>Initialize script
+Automatically called by the runtime
+Calls the script initialize method if it exists</p>
 
     </div>
 
@@ -265,8 +325,8 @@
 
 
 </div>
-<div id="method_set" class="method item">
-    <h3 class="name"><code>set</code></h3>
+<div id="method_resize" class="method item">
+    <h3 class="name"><code>resize</code></h3>
 
         <span class="paren">()</span>
 
@@ -286,10 +346,61 @@
     </div>
 
     <div class="description">
-        <p>Set this key attributes manually</p>
+        <p>Call resize method if available</p>
 
     </div>
 
+
+
+
+</div>
+<div id="method_setCode" class="method item">
+    <h3 class="name"><code>setCode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>code</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set script code</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">code</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
 
 
 
@@ -315,7 +426,8 @@
     </div>
 
     <div class="description">
-        <p>Update Key status based on new key state</p>
+        <p>Update script state
+Calls the script update method if it exists</p>
 
     </div>
 
@@ -325,90 +437,14 @@
 </div>
             </div>
 
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-<div id="property_justPressed" class="property item">
-    <h3 class="name"><code>justPressed</code></h3>
-    <span class="type">Boolean</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Indicates if this key was just pressed</p>
-
-    </div>
-
-        <p><strong>Default:</strong> false</p>
-
-
-</div>
-<div id="property_justReleased" class="property item">
-    <h3 class="name"><code>justReleased</code></h3>
-    <span class="type">Boolean</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Indicates if this key was just released</p>
-
-    </div>
-
-        <p><strong>Default:</strong> false</p>
-
-
-</div>
-<div id="property_pressed" class="property item">
-    <h3 class="name"><code>pressed</code></h3>
-    <span class="type">Boolean</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Indicates if this key is currently pressed</p>
-
-    </div>
-
-        <p><strong>Default:</strong> false</p>
-
-
-</div>
-            </div>
 
             <div id="attrs" class="api-class-tabpanel">
                 <h2 class="off-left">Attributes</h2>
 
-                    <div id="attr_DOWN" class="attr item">
-                        <a name="config_DOWN"></a> 
-                        <h3 class="name"><code>DOWN</code></h3>
-                        <span class="type">Number</span>
+                    <div id="attr_code" class="attr item">
+                        <a name="config_code"></a> 
+                        <h3 class="name"><code>code</code></h3>
+                        <span class="type">String</span>
                     
                     
                     
@@ -425,17 +461,17 @@
                         </div>
                     
                         <div class="description">
-                            <p>Down</p>
+                            <p>Javascript code attached to the script</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="attr_RESET" class="attr item">
-                        <a name="config_RESET"></a> 
-                        <h3 class="name"><code>RESET</code></h3>
-                        <span class="type">Number</span>
+                    <div id="attr_default" class="attr item">
+                        <a name="config_default"></a> 
+                        <h3 class="name"><code>default</code></h3>
+                        <span class="type">String</span>
                     
                     
                     
@@ -452,17 +488,17 @@
                         </div>
                     
                         <div class="description">
-                            <p>Reset</p>
+                            <p>Default script code used when creating a new Script</p>
                     
                         </div>
                     
                     
                     
                     </div>
-                    <div id="attr_UP" class="attr item">
-                        <a name="config_UP"></a> 
-                        <h3 class="name"><code>UP</code></h3>
-                        <span class="type">Number</span>
+                    <div id="attr_program" class="attr item">
+                        <a name="config_program"></a> 
+                        <h3 class="name"><code>program</code></h3>
+                        <span class="type"><a href="../classes/Program.html" class="crosslink">Program</a></span>
                     
                     
                     
@@ -479,7 +515,62 @@
                         </div>
                     
                         <div class="description">
-                            <p>Up</p>
+                            <p>Pointer to the parent program
+                    Used access program resources easier</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="attr_scene" class="attr item">
+                        <a name="config_scene"></a> 
+                        <h3 class="name"><code>scene</code></h3>
+                        <span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a></span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Pointer to the parent scene</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="attr_script" class="attr item">
+                        <a name="config_script"></a> 
+                        <h3 class="name"><code>script</code></h3>
+                        <span class="type">Function</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Compiled function used during runtime</p>
                     
                         </div>
                     

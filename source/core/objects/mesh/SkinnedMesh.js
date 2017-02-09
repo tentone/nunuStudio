@@ -1,6 +1,36 @@
 "use strict";
 
-//Animated model constructor
+/**
+ * A mesh that has a Skeleton with bones that can then be used to animate the vertices of the geometry.
+ * Based on THREE.SkinnedMesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh
+ * @class SkinnedMesh
+ * @module Meshes
+ * @param {Geometry} geometry Geometry used by this mesh
+ * @param {Material} material Material used to shade the superficie of the geometry
+ * @constructor
+ * @extends {THREE.SkinnedMesh}
+ */
+/**
+ * Geometry defined the object structure
+ * @property geometry
+ * @type {Geometry}
+*/
+/**
+ * Material is used to define how the geometry surface is shaded
+ * @property material
+ * @type {Material}
+*/
+/**
+ * Determines how the mesh triangles are constructed from the vertices.
+ * Only works when the geometry is a BufferGeometry
+ * @property drawMode
+ * @default TrianglesDrawMode
+*/
+/**
+ * Array with the bones attached to this mesh
+ * @property bones
+ * @type {Array}
+ */
 function SkinnedMesh(geometry, material, useVertexTexture)
 {
 	THREE.SkinnedMesh.call(this, geometry, material, useVertexTexture);
@@ -11,10 +41,12 @@ function SkinnedMesh(geometry, material, useVertexTexture)
 	this.castShadow = true;
 }
 
-//Super prototypes
 SkinnedMesh.prototype = Object.create(THREE.SkinnedMesh.prototype);
 
-//Dispose model
+/**
+ * Dispose mesh along with its material and geometry
+ * @method dispose
+ */
 SkinnedMesh.prototype.dispose = function()
 {
 	//Dispose material and geometry
@@ -30,3 +62,11 @@ SkinnedMesh.prototype.dispose = function()
 		this.children[i].dispose();
 	}
 }
+
+/**
+ * Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
+ * This is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.
+ * @method bind
+ * @param {Skeleton} skeleton
+ * @param {Matrix4} bindMatrix
+ */

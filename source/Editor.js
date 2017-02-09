@@ -77,7 +77,6 @@ include("core/objects/mesh/Mesh.js");
 include("core/objects/mesh/SkinnedMesh.js");
 include("core/objects/mesh/Text3D.js");
 include("core/objects/sprite/Sprite.js");
-include("core/objects/sprite/TextSprite.js");
 include("core/objects/lights/PointLight.js");
 include("core/objects/lights/SpotLight.js");
 include("core/objects/lights/AmbientLight.js");

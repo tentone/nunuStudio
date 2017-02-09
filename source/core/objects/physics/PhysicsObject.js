@@ -1,6 +1,24 @@
 "use strict";
 
-//Physics object constructor
+/**
+ * Wrapper for cannon.js Body physics objects
+ * Documentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/
+ * @class PhysicsObject
+ * @constructor
+ * @extends {THREE.Object3D}
+ * @module Physics
+ */
+
+/**
+ * cannon.js Body object
+ * @attribute body
+ * @type {CANNON.Body}
+ */
+/**
+ * cannon.js world
+ * @attribute world
+ * @type {CANNON.World}
+ */
 function PhysicsObject()
 {
 	THREE.Object3D.call(this);
@@ -17,7 +35,11 @@ function PhysicsObject()
 
 PhysicsObject.prototype = Object.create(THREE.Object3D.prototype);
 
-//Initialize physics object
+/**
+ * Intialize physics object and add it to the scene physics world
+ * Automatically called by the runtime
+ * @method initialize
+ */
 PhysicsObject.prototype.initialize = function()
 {
 	this.body.position.copy(this.position);
@@ -42,7 +64,11 @@ PhysicsObject.prototype.initialize = function()
 	}
 }
 
-//Update physics object
+/**
+ * Update object position and rotation based on cannon.js body
+ * Automatically called by the runtime
+ * @method update
+ */
 PhysicsObject.prototype.update = function()
 {
 	this.position.copy(this.body.position);
@@ -58,7 +84,11 @@ PhysicsObject.prototype.update = function()
 	}
 }
 
-//Add shape to physics object body
+/**
+ * Add shape to physics object body
+ * @param {CANNON.Shape} shape
+ * @method addShape
+ */
 PhysicsObject.prototype.addShape = function(shape)
 {
 	if(shape instanceof CANNON.Shape)
@@ -67,7 +97,12 @@ PhysicsObject.prototype.addShape = function(shape)
 	}
 }
 
-//Create JSON for object
+/**
+ * Create JSON for object
+ * Need to backup material and geometry and set to undefined to avoid it being stored
+ * @param {Object} meta
+ * @return {Object} json
+ */
 PhysicsObject.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
