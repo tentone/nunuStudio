@@ -7,62 +7,70 @@
  * @constructor
  * @param {String} name Program name
  * @extends {THREE.Object3D}
+ * @extends {ResourceManager}
  */
 
 /**
  * NunuRuntime instance used to communication between nunu app and the host webpage
- * @attribute app
+ * @property app
  * @default null
  */
 /**
  * Enable virtual reality flag
- * @attribute vr
+ * @property vr
  * @default false
  * @type {boolean}
  */
 /**
  * Virtual reality movement scale
- * @attribute vrScale
+ * @property vrScale
  * @type {Number}
  * @default 1.0
  */
 /**
  * Program description
- * @attribute description
+ * @property description
  * @type {String}
  */
 /**
  * Program author
- * @attribute author
+ * @property author
  * @type {String}
  */
 /**
  * Program version
- * @attribute version
+ * @property version
  * @type {String}
  * @default "0"
  */
 /**
  * Antialiasing flag
- * @attribute antialiasing
+ * @property antialiasing
  * @type {boolean}
  * @default false
  */
 /**
  * If true the program is rendered with shadows
- * @attribute shadows
+ * @property shadows
  * @type {boolean}
  * @default true
  */
 /**
  * Shadow type
- * @attribute shadowsType
+ * @property shadowsType
  * @type {Number}
  * @default PCFSoftShadowMap
+ */
+/**
+ * Flag to control pointer locking
+ * @property lockPointer
+ * @type {boolean}
+ * @default false
  */
 function Program(name)
 {
 	THREE.Object3D.call(this);
+	ResourceManager.call(this);
 
 	this.type = "Program";
 
@@ -90,15 +98,6 @@ function Program(name)
 	this.shadows = true;
 	this.shadowsType = THREE.PCFSoftShadowMap;
 
-	//Resources
-	this.images = [];
-	this.videos = [];
-	this.audio = [];
-	this.fonts = [];
-	this.textures = [];
-	this.materials = [];
-	this.geometries = [];
-
 	//Defaults
 	this.defaultScene = null;
 	this.defaultCamera = null;
@@ -117,6 +116,19 @@ function Program(name)
 }
 
 Program.prototype = Object.create(THREE.Object3D.prototype);
+
+Program.prototype.getMaterialByName = ResourceManager.prototype.getMaterialByName;
+Program.prototype.addMaterial = ResourceManager.prototype.addMaterial;
+Program.prototype.removeMaterial = ResourceManager.prototype.removeMaterial;
+Program.prototype.getTextureByName = ResourceManager.prototype.getTextureByName;
+Program.prototype.addTexture = ResourceManager.prototype.addTexture;
+Program.prototype.removeTexture = ResourceManager.prototype.removeTexture;
+Program.prototype.getFontByName = ResourceManager.prototype.getFontByName;
+Program.prototype.addFont = ResourceManager.prototype.addFont;
+Program.prototype.removeFont = ResourceManager.prototype.removeFont; 
+Program.prototype.getAudioByName = ResourceManager.prototype.getAudioByName;
+Program.prototype.addAudio = ResourceManager.prototype.addAudio;
+Program.prototype.removeAudio = ResourceManager.prototype.removeAudio;
 
 //Select initial scene and initialize that scene
 Program.prototype.initialize = function()
@@ -460,248 +472,6 @@ Program.prototype.sendDataApp = function(data)
 		{
 			console.warn("nunuStudio: No app available", data);
 		}
-	}
-}
-
-//Get material by name
-Program.prototype.getMaterialByName = function(name)
-{
-	for(var i in this.materials)
-	{
-		if(this.materials[i].name === name)
-		{
-			return this.materials[i];
-		}
-	}
-
-	return null;
-}
-
-//Add material to materials list
-Program.prototype.addMaterial = function(material)
-{
-	if(material instanceof THREE.Material)
-	{
- 		this.materials[material.uuid] = material;
- 	}
-}
-
-//Remove material from materials list (also receives default used to replace)
-Program.prototype.removeMaterial = function(material, defaultMaterial, defaultMaterialSprite)
-{
-	if(defaultMaterial === undefined)
-	{
-		defaultMaterial = new THREE.MeshBasicMaterial();
-	}
-
-	if(defaultMaterialSprite === undefined)
-	{
-		defaultMaterialSprite = new THREE.SpriteMaterial();
-	}
-
-	if(material instanceof THREE.Material)
-	{
-		delete this.materials[material.uuid];
-		
-		this.traverse(function(child)
-		{
-			if(child.material !== undefined && child.material.uuid === material.uuid)
-			{
-				if(child instanceof THREE.Sprite)
-				{
-					child.material = defaultMaterialSprite;
-				}
-				else
-				{
-					child.material = defaultMaterial;
-				}
-			}
-		});
-	}
-}
-
-//Get texture by name
-Program.prototype.getTextureByName = function(name)
-{
-	for(var i in this.textures)
-	{
-		if(this.textures[i].name === name)
-		{
-			return this.textures[i];
-		}
-	}
-
-	return null;
-}
-
-//Add texture to texture list
-Program.prototype.addTexture = function(texture)
-{
- 	this.textures[texture.uuid] = texture;
-}
-
-//Remove texture from textures list (also receives default used to replace)
-Program.prototype.removeTexture = function(texture, defaultTexture)
-{
-	if(defaultTexture === undefined)
-	{
-		defaultTexture = new THREE.Texture();
-	}
-
-	if(texture instanceof THREE.Texture)
-	{
-		delete this.textures[texture.uuid];
-		
-		this.traverse(function(child)
-		{
-			if(child.material !== undefined)
-			{
-				var material = child.material;
-				
-				if(material.map != null && material.map.uuid === texture.uuid)
-				{
-					material.map = defaultTexture;
-					material.needsUpdate = true;
-				}
-				else if(material.bumpMap != null && material.bumpMap.uuid === texture.uuid)
-				{
-					material.bumpMap = defaultTexture;
-					material.needsUpdate = true;
-				}
-				else if(material.normalMap != null && material.normalMap.uuid === texture.uuid)
-				{
-					material.normalMap = defaultTexture;
-					material.needsUpdate = true;
-				}
-				else if(material.displacementMap != null && material.displacementMap.uuid === texture.uuid)
-				{
-					material.displacementMap = defaultTexture;
-					material.needsUpdate = true;
-				}
-				else if(material.specularMap != null && material.specularMap.uuid === texture.uuid)
-				{
-					material.specularMap = defaultTexture;
-					material.needsUpdate = true;
-				}
-				else if(material.emissiveMap != null && material.emissiveMap.uuid === texture.uuid)
-				{
-					material.emissiveMap = defaultTexture;
-					material.needsUpdate = true;
-				}
-				else if(material.alphaMap != null && material.alphaMap.uuid === texture.uuid)
-				{
-					material.alphaMap = defaultTexture;
-					material.needsUpdate = true;
-				}
-				else if(material.roughnessMap != null && material.roughnessMap.uuid === texture.uuid)
-				{
-					material.roughnessMap = defaultTexture;
-					material.needsUpdate = true;
-				}
-				else if(material.metalnessMap != null && material.metalnessMap.uuid === texture.uuid)
-				{
-					material.metalnessMap = defaultTexture;
-					material.needsUpdate = true;
-				}
-			}
-			else if(child instanceof ParticleEmitter)
-			{
-				if(child.group.texture.uuid === texture.uuid)
-				{
-					child.group.texture = defaultTexture;
-				}
-			}
-		});
-	}
-}
-
-//Get font by name
-Program.prototype.getFontByName = function(name)
-{
-	for(var i in this.fonts)
-	{
-		if(this.fonts[i].name === name)
-		{
-			return this.fonts[i];
-		}
-	}
-
-	return null;
-}
-
-//Add font to fonts list
-Program.prototype.addFont = function(font)
-{
-	if(font instanceof Font)
-	{
- 		this.fonts[font.uuid] = font;
- 	}
-}
-
-//Remove font from font list
-Program.prototype.removeFont = function(font, defaultFont)
-{
-	if(defaultFont === undefined)
-	{
-		defaultFont = new Font();
-	}
-
-	if(font instanceof Font)
-	{
-		delete this.fonts[font.uuid];
-		
-		this.traverse(function(child)
-		{
-			if(child.font !== undefined && child.font.uuid === font.uuid)
-			{
-				child.setFont(defaultFont);
-			}
-		});
-	}
-}
-
-//Get audio by name
-Program.prototype.getAudioByName = function(name)
-{
-	for(var i in this.audio)
-	{
-		if(this.audio[i].name === name)
-		{
-			return this.audio[i];
-		}
-	}
-
-	return null;
-}
-
-//Add audio to audio list
-Program.prototype.addAudio = function(audio)
-{
-	if(audio instanceof Audio)
-	{
- 		this.audio[audio.uuid] = audio;
- 	}
-}
-
-//Remove audio
-Program.prototype.removeAudio = function(audio, defaultAudio)
-{
-	if(defaultAudio === undefined)
-	{
-		defaultAudio = new Audio();
-	}
-
-	if(audio instanceof Audio)
-	{
-		delete this.audio[audio.uuid];
-		
-		this.traverse(function(child)
-		{
-			if(child.audio !== undefined && child.audio.uuid === audio.uuid)
-			{
-				child.setFont(defaultAudio);
-			}
-		});
 	}
 }
 

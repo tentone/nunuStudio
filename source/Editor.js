@@ -57,6 +57,7 @@ include("core/resources/Font.js");
 include("core/resources/Video.js");
 include("core/resources/Audio.js");
 include("core/resources/Image.js");
+include("core/resources/ResourceManager.js");
 
 include("core/texture/CanvasTexture.js");
 include("core/texture/VideoTexture.js");

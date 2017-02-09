@@ -1,5 +1,14 @@
 "use strict";
 
+/**
+ * Spine animation textures
+ * Based on SpineTexture from original spine runtime for three.js
+ * @class SpineTexture
+ * @module Textures
+ * @constructor
+ * @param {Texture} texture
+ */
+
 function SpineTexture(texture)
 {
 	spine.Texture.call(this, texture.image);

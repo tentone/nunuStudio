@@ -12,6 +12,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "LeapMotion",
         "Mesh",
         "Mouse",
+        "Nunu",
+        "NunuApp",
         "Object3D",
         "OrthographicCamera",
         "ParticleEmitter",
@@ -21,11 +23,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "PositionalAudio",
         "Program",
         "RectAreaLight",
+        "ResourceManager",
         "Scene",
         "Script",
         "SkinnedMesh",
         "Sky",
         "SpineAnimation",
+        "SpineTexture",
         "SpotLight",
         "Sprite",
         "Text3D"
@@ -42,8 +46,11 @@ YUI.add("yuidoc-meta", function(Y) {
         "Misc",
         "Particles",
         "Physics",
+        "Resources",
+        "Runtime",
         "Script",
         "Sprite",
+        "Textures",
         "ThreeJS"
     ],
     "allModules": [
@@ -103,6 +110,16 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "Wrapper for cannon.js Body physics objects\nDocumentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/"
         },
         {
+            "displayName": "Resources",
+            "name": "Resources",
+            "description": "Resource manager is used to manage available resources used by objects\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\nThe manager is used to manage the following types of resources\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries"
+        },
+        {
+            "displayName": "Runtime",
+            "name": "Runtime",
+            "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere"
+        },
+        {
             "displayName": "Script",
             "name": "Script",
             "description": "Script objects are used to control other objects present in the scene\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization\n - update\n   - Called on every frame (after the frame is rendered)\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
@@ -111,6 +128,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Sprite",
             "name": "Sprite",
             "description": "Sprites allways face the screen are used for 2D elements\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite"
+        },
+        {
+            "displayName": "Textures",
+            "name": "Textures",
+            "description": "Spine animation textures\nBased on SpineTexture from original spine runtime for three.js"
         },
         {
             "displayName": "ThreeJS",

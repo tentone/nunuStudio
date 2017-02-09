@@ -60,7 +60,6 @@ include("core/objects/mesh/Mesh.js");
 include("core/objects/mesh/SkinnedMesh.js");
 include("core/objects/mesh/Text3D.js");
 include("core/objects/sprite/Sprite.js");
-include("core/objects/sprite/TextSprite.js");
 include("core/objects/lights/PointLight.js");
 include("core/objects/lights/SpotLight.js");
 include("core/objects/lights/AmbientLight.js");
@@ -88,6 +87,53 @@ include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/BufferUtils.js");
 
+/**
+ * NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere
+ * @class NunuApp
+ * @module Runtime
+ * @constructor
+ * @param {DOM} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body
+ */
+
+/**
+ * Nunu Program
+ * @property program
+ * @type {Program}
+ */
+
+/**
+ * Graphics renderer in use by this NunuApp instance
+ * @property renderer
+ * @type {THREE.Renderer}
+ */
+
+/**
+ * Fullscreen flag, to set fulscreen mode the setFullScreen method should be used
+ * @property fullscreen
+ * @type {boolean}
+ * @default false
+ */
+
+/**
+ * VR flag, to set VR mode the toggleVR method should be used
+ * @property vr
+ * @type {boolean}
+ * @default false
+ */
+
+/**
+ * Canvas used to render graphics
+ * @property canvas
+ * @type {DOM}
+ */
+
+/**
+ * Flag used to controll if the canvas element is resized automatically by the nunu app instance
+ * If true the canvas is resized whenether the resize method is called
+ * @property canvasResize
+ * @type {boolean}
+ * @default false if a canvas is provided, else true
+ */
 //Nunu app contructor
 function NunuApp(canvas)
 {
@@ -140,7 +186,13 @@ function NunuApp(canvas)
 	};
 }
 
-//Load and run program (async)
+/**
+ * Load program asynchronously and run it after its loaded
+ * @method loadRunProgram
+ * @param {String} fname Name of the file to load
+ * @param {Function} onLoad onLoad callback
+ * @param {Function} onProgress onProgress callback
+ */
 NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 {
 	var loader = new ObjectLoader();
@@ -158,7 +210,11 @@ NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 	}, onProgress);
 }
 
-//Load program from file
+/**
+ * Load program from file
+ * @method loadProgram
+ * @param {String} fname Name of the file to load
+ */
 NunuApp.prototype.loadProgram = function(fname)
 {
 	var loader = new ObjectLoader();
@@ -166,7 +222,11 @@ NunuApp.prototype.loadProgram = function(fname)
 	this.program = loader.parse(JSON.parse(data));
 }
 
-//Start nunu program
+/**
+ * Start running nunu program
+ * A nunu program must be loaded before calling this method
+ * @method run
+ */
 NunuApp.prototype.run = function()
 {
 	if(this.program === null)
@@ -221,7 +281,11 @@ NunuApp.prototype.run = function()
 	update();
 }
 
-//Update nunu program
+/**
+ * Update nunu program state
+ * Automatically called by the runtime handler
+ * @method update
+ */
 NunuApp.prototype.update = function()
 {
 	this.mouse.update();
@@ -231,7 +295,13 @@ NunuApp.prototype.update = function()
 	this.program.render(this.renderer);
 }
 
-//Exit from app
+/**
+ * Exit from app
+ * This method kills the app and disposes all internal elements to avoid memory leaks
+ * Is should be called before exiting the webpage or before switching nunu programs
+ * When loading new nunu programs the same NunuApp instance can be used
+ * @method exit
+ */
 NunuApp.prototype.exit = function()
 {
 	//Remove mouse lock event from canvas
@@ -258,7 +328,11 @@ NunuApp.prototype.exit = function()
 	}
 }
 
-//Resize to fit window
+/**
+ * Resize the window
+ * Should be called whenether the host window is resized
+ * @method resize
+ */
 NunuApp.prototype.resize = function()
 {
 	if(this.canvas !== null && this.canvasResize)
@@ -276,7 +350,12 @@ NunuApp.prototype.resize = function()
 	}
 }
 
-//Send data to running application
+/**
+ * Send data to running nunu application
+ * The data sent using this method is received by scripts that implement the onAppData method
+ * @param {Object} data Data to send
+ * @method sendData
+ */
 NunuApp.prototype.sendData = function(data)
 {
 	if(this.program !== null)
@@ -285,28 +364,45 @@ NunuApp.prototype.sendData = function(data)
 	}
 }
 
-//Set on data receive callback (callback receives data as argument)
+/**
+ * Set on data receive callback
+ * Callback receives data as an argument
+ * @method setOnDataReceived
+ * @param {Function} callback Function executed whenether the nunu app running sends data to the host
+ */
 NunuApp.prototype.setOnDataReceived = function(callback)
 {
 	this.onDataReceived = callback;
 }
 
-//Set on exit callback
+/**
+ * Set on exit callback
+ * Callback is executed when exiting the nunu app
+ * @method setOnExit
+ * @param {Function} callback onExit callback
+ */
 NunuApp.prototype.setOnExit = function(callback)
 {
 	this.onExit = callback;
 }
 
-//Check if VR is available
+/**
+ * Check if VR mode is available
+ * @method vrAvailable
+ * @return {boolean} True if VR mode available
+ */
 NunuApp.prototype.vrAvailable = function()
 {
 	return this.program.vr && Nunu.webvrAvailable();	
 }
 
-//Toggle vr
+/**
+ * Toggle VR mode, only works if VR mode is available
+ * @method toggleVR
+ */
 NunuApp.prototype.toggleVR = function()
 {
-	if(this.program.vr)
+	if(this.vrAvailable())
 	{
 		if(this.vr)
 		{
@@ -325,7 +421,11 @@ NunuApp.prototype.toggleVR = function()
 	}
 }
 
-//Set fullscreen mode
+/**
+ * Set fullscreen mode
+ * @param {boolean} fullscreen Fullscreen value
+ * @param {DOM} element DOM element to go fullscren by default the rendering canvas is used
+ */
 NunuApp.prototype.setFullscreen = function(fullscreen, element)
 {
 	if(fullscreen !== undefined)
@@ -341,7 +441,7 @@ NunuApp.prototype.setFullscreen = function(fullscreen, element)
 	{
 		if(element === undefined)
 		{
-			element = document.body;
+			element = this.canvas;
 		}
 		
 		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;

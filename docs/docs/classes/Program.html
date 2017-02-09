@@ -49,6 +49,8 @@
                                 <li><a href="../classes/LeapMotion.html">LeapMotion</a></li>
                                 <li><a href="../classes/Mesh.html">Mesh</a></li>
                                 <li><a href="../classes/Mouse.html">Mouse</a></li>
+                                <li><a href="../classes/Nunu.html">Nunu</a></li>
+                                <li><a href="../classes/NunuApp.html">NunuApp</a></li>
                                 <li><a href="../classes/Object3D.html">Object3D</a></li>
                                 <li><a href="../classes/OrthographicCamera.html">OrthographicCamera</a></li>
                                 <li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
@@ -58,11 +60,13 @@
                                 <li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
                                 <li><a href="../classes/Program.html">Program</a></li>
                                 <li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+                                <li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
                                 <li><a href="../classes/Scene.html">Scene</a></li>
                                 <li><a href="../classes/Script.html">Script</a></li>
                                 <li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
                                 <li><a href="../classes/Sky.html">Sky</a></li>
                                 <li><a href="../classes/SpineAnimation.html">SpineAnimation</a></li>
+                                <li><a href="../classes/SpineTexture.html">SpineTexture</a></li>
                                 <li><a href="../classes/SpotLight.html">SpotLight</a></li>
                                 <li><a href="../classes/Sprite.html">Sprite</a></li>
                                 <li><a href="../classes/Text3D.html">Text3D</a></li>
@@ -81,8 +85,11 @@
                                 <li><a href="../modules/Misc.html">Misc</a></li>
                                 <li><a href="../modules/Particles.html">Particles</a></li>
                                 <li><a href="../modules/Physics.html">Physics</a></li>
+                                <li><a href="../modules/Resources.html">Resources</a></li>
+                                <li><a href="../modules/Runtime.html">Runtime</a></li>
                                 <li><a href="../modules/Script.html">Script</a></li>
                                 <li><a href="../modules/Sprite.html">Sprite</a></li>
+                                <li><a href="../modules/Textures.html">Textures</a></li>
                                 <li><a href="../modules/ThreeJS.html">ThreeJS</a></li>
                             </ul>
                         </div>
@@ -121,7 +128,7 @@
 <div class="box meta">
 
         <div class="extends">
-            Extends THREE.Object3D
+            Extends <a href="../classes/ResourceManager.html" class="crosslink">ResourceManager</a>
         </div>
 
 
@@ -194,7 +201,7 @@
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
     </ul>
 
     <div>
@@ -202,299 +209,300 @@
             <h2 class="off-left">Item Index</h2>
 
 
+                <div class="index-section properties">
+                    <h3>Properties</h3>
 
-                <div class="index-section attrs">
-                    <h3>Attributes</h3>
+                    <ul class="index-list properties extends">
+                            <li class="index-item property">
+                                <a href="#property_antialiasing">antialiasing</a>
 
-                    <ul class="index-list attrs extends">
-                            <li class="index-item attr">
-                                <a href="#attr_antialiasing">antialiasing</a>
                             </li>
-                            <li class="index-item attr">
-                                <a href="#attr_app">app</a>
+                            <li class="index-item property">
+                                <a href="#property_app">app</a>
+
                             </li>
-                            <li class="index-item attr">
-                                <a href="#attr_author">author</a>
+                            <li class="index-item property">
+                                <a href="#property_author">author</a>
+
                             </li>
-                            <li class="index-item attr">
-                                <a href="#attr_description">description</a>
+                            <li class="index-item property">
+                                <a href="#property_description">description</a>
+
                             </li>
-                            <li class="index-item attr">
-                                <a href="#attr_shadows">shadows</a>
+                            <li class="index-item property">
+                                <a href="#property_lockPointer">lockPointer</a>
+
                             </li>
-                            <li class="index-item attr">
-                                <a href="#attr_shadowsType">shadowsType</a>
+                            <li class="index-item property">
+                                <a href="#property_shadows">shadows</a>
+
                             </li>
-                            <li class="index-item attr">
-                                <a href="#attr_version">version</a>
+                            <li class="index-item property">
+                                <a href="#property_shadowsType">shadowsType</a>
+
                             </li>
-                            <li class="index-item attr">
-                                <a href="#attr_vr">vr</a>
+                            <li class="index-item property">
+                                <a href="#property_version">version</a>
+
                             </li>
-                            <li class="index-item attr">
-                                <a href="#attr_vrScale">vrScale</a>
+                            <li class="index-item property">
+                                <a href="#property_vr">vr</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_vrScale">vrScale</a>
+
                             </li>
                     </ul>
                 </div>
 
+
         </div>
 
 
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
 
-            <div id="attrs" class="api-class-tabpanel">
-                <h2 class="off-left">Attributes</h2>
+<div id="property_antialiasing" class="property item">
+    <h3 class="name"><code>antialiasing</code></h3>
+    <span class="type">Boolean</span>
 
-                    <div id="attr_antialiasing" class="attr item">
-                        <a name="config_antialiasing"></a> 
-                        <h3 class="name"><code>antialiasing</code></h3>
-                        <span class="type">Boolean</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Antialiasing flag</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="attr_app" class="attr item">
-                        <a name="config_app"></a> 
-                        <h3 class="name"><code>app</code></h3>
-                        <span class="type"></span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>NunuRuntime instance used to communication between nunu app and the host webpage</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="attr_author" class="attr item">
-                        <a name="config_author"></a> 
-                        <h3 class="name"><code>author</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Program author</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="attr_description" class="attr item">
-                        <a name="config_description"></a> 
-                        <h3 class="name"><code>description</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Program description</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="attr_shadows" class="attr item">
-                        <a name="config_shadows"></a> 
-                        <h3 class="name"><code>shadows</code></h3>
-                        <span class="type">Boolean</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>If true the program is rendered with shadows</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> true</p>
-                    
-                    
-                    </div>
-                    <div id="attr_shadowsType" class="attr item">
-                        <a name="config_shadowsType"></a> 
-                        <h3 class="name"><code>shadowsType</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Shadow type</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> PCFSoftShadowMap</p>
-                    
-                    
-                    </div>
-                    <div id="attr_version" class="attr item">
-                        <a name="config_version"></a> 
-                        <h3 class="name"><code>version</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Program version</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> &quot;0&quot;</p>
-                    
-                    
-                    </div>
-                    <div id="attr_vr" class="attr item">
-                        <a name="config_vr"></a> 
-                        <h3 class="name"><code>vr</code></h3>
-                        <span class="type">Boolean</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Enable virtual reality flag</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="attr_vrScale" class="attr item">
-                        <a name="config_vrScale"></a> 
-                        <h3 class="name"><code>vrScale</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Virtual reality movement scale</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> 1.0</p>
-                    
-                    
-                    </div>
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Antialiasing flag</p>
+
+    </div>
+
+        <p><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_app" class="property item">
+    <h3 class="name"><code>app</code></h3>
+    <span class="type">Unknown</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>NunuRuntime instance used to communication between nunu app and the host webpage</p>
+
+    </div>
+
+        <p><strong>Default:</strong> null</p>
+
+
+</div>
+<div id="property_author" class="property item">
+    <h3 class="name"><code>author</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Program author</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_description" class="property item">
+    <h3 class="name"><code>description</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Program description</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_lockPointer" class="property item">
+    <h3 class="name"><code>lockPointer</code></h3>
+    <span class="type">Boolean</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Flag to control pointer locking</p>
+
+    </div>
+
+        <p><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_shadows" class="property item">
+    <h3 class="name"><code>shadows</code></h3>
+    <span class="type">Boolean</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>If true the program is rendered with shadows</p>
+
+    </div>
+
+        <p><strong>Default:</strong> true</p>
+
+
+</div>
+<div id="property_shadowsType" class="property item">
+    <h3 class="name"><code>shadowsType</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Shadow type</p>
+
+    </div>
+
+        <p><strong>Default:</strong> PCFSoftShadowMap</p>
+
+
+</div>
+<div id="property_version" class="property item">
+    <h3 class="name"><code>version</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Program version</p>
+
+    </div>
+
+        <p><strong>Default:</strong> &quot;0&quot;</p>
+
+
+</div>
+<div id="property_vr" class="property item">
+    <h3 class="name"><code>vr</code></h3>
+    <span class="type">Boolean</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Enable virtual reality flag</p>
+
+    </div>
+
+        <p><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_vrScale" class="property item">
+    <h3 class="name"><code>vrScale</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Virtual reality movement scale</p>
+
+    </div>
+
+        <p><strong>Default:</strong> 1.0</p>
+
+
+</div>
             </div>
+
 
     </div>
 </div>

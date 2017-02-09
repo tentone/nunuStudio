@@ -13,6 +13,24 @@
  * @param {Array} textures
  * @module Animations
  */
+
+/**
+ * Array of SpineTextures used by the animation
+ * @property textures
+ * @type {Array}
+ */
+
+/**
+ * Animation data
+ * @property json
+ * @type {Object}
+ */
+
+/**
+ * Texture atlas information
+ * @property atlas
+ * @type {Object}
+ */
 function SpineAnimation(json, atlas, path, textures)
 {
 	if(textures !== undefined)

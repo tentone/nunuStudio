@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>PositionalAudio</title>
+    <title>ResourceManager</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -124,28 +124,174 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>PositionalAudio Class</h1>
+<h1>ResourceManager Class</h1>
 <div class="box meta">
 
-        <div class="extends">
-            Extends THREE.PositionalAudio
-        </div>
 
 
-            Module: <a href="../modules/Audio.html">Audio</a>
+            Module: <a href="../modules/Resources.html">Resources</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>PositionalAudio is used to play audio with positional audio effect</p>
+    <p>Resource manager is used to manage available resources used by objects
+The resource manager is used to extend the Program object and is not designed to be used as a standalone
+The manager is used to manage the following types of resources</p>
+<ul>
+<li>Images</li>
+<li>Videos</li>
+<li>Audio</li>
+<li>Fonts</li>
+<li>Textures</li>
+<li>Materials</li>
+<li>Geometries</li>
+</ul>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_PositionalAudio" class="method item">
-    <h3 class="name"><code>PositionalAudio</code></h3>
+<div id="method_ResourceManager" class="method item">
+    <h3 class="name"><code>ResourceManager</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+
+</div>
+    </div>
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_addAudio">addAudio</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_addFont">addFont</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_addMaterial">addMaterial</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_addTexture">addTexture</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getAudioByName">getAudioByName</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getFontByName">getFontByName</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getMaterialByName">getMaterialByName</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getTextureByName">getTextureByName</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_removeAudio">removeAudio</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_removeFont">removeFont</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_removeMaterial">removeMaterial</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_removeTexture">removeTexture</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property">
+                                <a href="#property_audio">audio</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_fonts">fonts</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_geometries">geometries</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_images">images</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_materials">materials</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_textures">textures</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_videos">videos</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_addAudio" class="method item">
+    <h3 class="name"><code>addAudio</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -171,7 +317,8 @@
     </div>
 
     <div class="description">
-        
+        <p>Add audio to audio list</p>
+
     </div>
 
         <div class="params">
@@ -184,8 +331,7 @@
 
 
                     <div class="param-description">
-                        <p>Audio used by this emitter</p>
-
+                         
                     </div>
 
                 </li>
@@ -195,256 +341,13 @@
 
 
 </div>
-    </div>
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods extends">
-                            <li class="index-item method">
-                                <a href="#method_dispose">dispose</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_initialize">initialize</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_pause">pause</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_pause">pause</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_play">play</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setFilter">setFilter</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setFilters">setFilters</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setLoop">setLoop</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setPlaybackRate">setPlaybackRate</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setVolume">setVolume</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_toJSON">toJSON</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_update">update</a>
-
-                            </li>
-                    </ul>
-                </div>
-
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties extends">
-                            <li class="index-item property">
-                                <a href="#property_autoplay">autoplay</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_loop">loop</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_startTime">startTime</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_valume">valume</a>
-
-                            </li>
-                    </ul>
-                </div>
-
-
-        </div>
-
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
-
-<div id="method_dispose" class="method item">
-    <h3 class="name"><code>dispose</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Dispose audio object</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_initialize" class="method item">
-    <h3 class="name"><code>initialize</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Initialize audio object (called by the runtime)</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_pause" class="method item">
-    <h3 class="name"><code>pause</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Pauses playback</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_pause" class="method item">
-    <h3 class="name"><code>pause</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Stops playback and resets time to 0</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_play" class="method item">
-    <h3 class="name"><code>play</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Starts playback</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_setFilter" class="method item">
-    <h3 class="name"><code>setFilter</code></h3>
+<div id="method_addFont" class="method item">
+    <h3 class="name"><code>addFont</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>filter</code>
+                        <code>font</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -465,7 +368,7 @@
     </div>
 
     <div class="description">
-        <p>Add the filter to the filters array.</p>
+        <p>Add font to fonts list</p>
 
     </div>
 
@@ -474,8 +377,8 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">filter</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">font</code>
+                        <span class="type">Font</span>
 
 
                     <div class="param-description">
@@ -489,13 +392,13 @@
 
 
 </div>
-<div id="method_setFilters" class="method item">
-    <h3 class="name"><code>setFilters</code></h3>
+<div id="method_addMaterial" class="method item">
+    <h3 class="name"><code>addMaterial</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>value</code>
+                        <code>material</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -516,7 +419,7 @@
     </div>
 
     <div class="description">
-        <p>Set the filters array to value.</p>
+        <p>Add material to materials list</p>
 
     </div>
 
@@ -525,12 +428,13 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">value</code>
-                        <span class="type">Array</span>
+                        <code class="param-name">material</code>
+                        <span class="type">Material</span>
 
 
                     <div class="param-description">
-                         
+                        <p>Material to be added</p>
+
                     </div>
 
                 </li>
@@ -540,13 +444,13 @@
 
 
 </div>
-<div id="method_setLoop" class="method item">
-    <h3 class="name"><code>setLoop</code></h3>
+<div id="method_addTexture" class="method item">
+    <h3 class="name"><code>addTexture</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>loop</code>
+                        <code>texture</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -567,7 +471,7 @@
     </div>
 
     <div class="description">
-        <p>Set loop mode</p>
+        <p>Add texture to texture list</p>
 
     </div>
 
@@ -576,8 +480,8 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">loop</code>
-                        <span class="type">Boolean</span>
+                        <code class="param-name">texture</code>
+                        <span class="type">Texture</span>
 
 
                     <div class="param-description">
@@ -591,70 +495,19 @@
 
 
 </div>
-<div id="method_setPlaybackRate" class="method item">
-    <h3 class="name"><code>setPlaybackRate</code></h3>
+<div id="method_getAudioByName" class="method item">
+    <h3 class="name"><code>getAudioByName</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>speed</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Set playback speed</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">speed</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_setVolume" class="method item">
-    <h3 class="name"><code>setVolume</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>value</code>
+                        <code>name</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
         <span class="returns-inline">
-            <span class="type"><a href="../classes/PositionalAudio.html" class="crosslink">PositionalAudio</a></span>
+            <span class="type">Audio</span>
         </span>
 
 
@@ -672,7 +525,7 @@
     </div>
 
     <div class="description">
-        <p>Change audio emitter volume</p>
+        <p>Get audio by name</p>
 
     </div>
 
@@ -681,13 +534,12 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">value</code>
-                        <span class="type">Number</span>
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>Audio volume</p>
-
+                         
                     </div>
 
                 </li>
@@ -698,27 +550,27 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="../classes/PositionalAudio.html" class="crosslink">PositionalAudio</a></span>:
-                    <p>Self pointer for chaining</p>
+                        <span class="type">Audio</span>:
+                    <p>Audio if found, else null</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_toJSON" class="method item">
-    <h3 class="name"><code>toJSON</code></h3>
+<div id="method_getFontByName" class="method item">
+    <h3 class="name"><code>getFontByName</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>meta</code>
+                        <code>name</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
         <span class="returns-inline">
-            <span class="type">Object</span>
+            <span class="type">Font</span>
         </span>
 
 
@@ -736,7 +588,7 @@
     </div>
 
     <div class="description">
-        <p>Create JSON description</p>
+        <p>Get font by name</p>
 
     </div>
 
@@ -745,8 +597,8 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">meta</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
@@ -761,18 +613,155 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Object</span>:
-                    <p>JSON descrition</p>
+                        <span class="type">Font</span>:
+                    <p>Font if found, else null</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_update" class="method item">
-    <h3 class="name"><code>update</code></h3>
+<div id="method_getMaterialByName" class="method item">
+    <h3 class="name"><code>getMaterialByName</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Material</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get material by its name</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Material name</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Material</span>:
+                    <p>Material if found else null</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getTextureByName" class="method item">
+    <h3 class="name"><code>getTextureByName</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Texture</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get texture by name</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Texture name</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Texture</span>:
+                    <p>Texture is found else null</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_removeAudio" class="method item">
+    <h3 class="name"><code>removeAudio</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>audio</code>
+                </li>
+                <li class="arg">
+                        <code>defaultAudio</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
 
 
@@ -790,11 +779,257 @@
     </div>
 
     <div class="description">
-        <p>Update positional audio state</p>
+        <p>Remove audio</p>
 
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
 
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">audio</code>
+                        <span class="type">Audio</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">defaultAudio</code>
+                        <span class="type">Audio</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_removeFont" class="method item">
+    <h3 class="name"><code>removeFont</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>font</code>
+                </li>
+                <li class="arg">
+                        <code>defaultFont</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Remove font from font list</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">font</code>
+                        <span class="type">Font</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">defaultFont</code>
+                        <span class="type">Font</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_removeMaterial" class="method item">
+    <h3 class="name"><code>removeMaterial</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>material</code>
+                </li>
+                <li class="arg">
+                        <code>defaultMaterial</code>
+                </li>
+                <li class="arg">
+                        <code>defaultMaterialSprite</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Remove material from materials list, also receives default material used to replace</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">material</code>
+                        <span class="type">Material</span>
+
+
+                    <div class="param-description">
+                        <p>Material to be removed from manager</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">defaultMaterial</code>
+                        <span class="type">Material</span>
+
+
+                    <div class="param-description">
+                        <p>Default mesh material to replace objects mesh materials</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">defaultMaterialSprite</code>
+                        <span class="type">Material</span>
+
+
+                    <div class="param-description">
+                        <p>Defaul sprite material</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_removeTexture" class="method item">
+    <h3 class="name"><code>removeTexture</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>texture</code>
+                </li>
+                <li class="arg">
+                        <code>defaultTexture</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Texture</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Remove texture from textures list (also receives default used to replace)</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">texture</code>
+                        <span class="type">Texture</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">defaultTexture</code>
+                        <span class="type">Texture</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Texture</span>:
+                    <p>Texture if found, else null</p>
+
+            </div>
+        </div>
 
 
 </div>
@@ -803,9 +1038,9 @@
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-<div id="property_autoplay" class="property item">
-    <h3 class="name"><code>autoplay</code></h3>
-    <span class="type">Boolean</span>
+<div id="property_audio" class="property item">
+    <h3 class="name"><code>audio</code></h3>
+    <span class="type">Array</span>
 
 
 
@@ -819,17 +1054,16 @@
     </div>
 
     <div class="description">
-        <p>If true the playback starts automatically</p>
+        <p>Audio</p>
 
     </div>
 
-        <p><strong>Default:</strong> true</p>
 
 
 </div>
-<div id="property_loop" class="property item">
-    <h3 class="name"><code>loop</code></h3>
-    <span class="type">Boolean</span>
+<div id="property_fonts" class="property item">
+    <h3 class="name"><code>fonts</code></h3>
+    <span class="type">Array</span>
 
 
 
@@ -843,17 +1077,16 @@
     </div>
 
     <div class="description">
-        <p>If true the audio plays in loop</p>
+        <p>Fonts</p>
 
     </div>
 
-        <p><strong>Default:</strong> true</p>
 
 
 </div>
-<div id="property_startTime" class="property item">
-    <h3 class="name"><code>startTime</code></h3>
-    <span class="type">Number</span>
+<div id="property_geometries" class="property item">
+    <h3 class="name"><code>geometries</code></h3>
+    <span class="type">Array</span>
 
 
 
@@ -867,17 +1100,16 @@
     </div>
 
     <div class="description">
-        <p>Start time in seconds</p>
+        <p>Geomtries</p>
 
     </div>
 
-        <p><strong>Default:</strong> 0.0</p>
 
 
 </div>
-<div id="property_valume" class="property item">
-    <h3 class="name"><code>valume</code></h3>
-    <span class="type">Number</span>
+<div id="property_images" class="property item">
+    <h3 class="name"><code>images</code></h3>
+    <span class="type">Array</span>
 
 
 
@@ -891,11 +1123,79 @@
     </div>
 
     <div class="description">
-        <p>Audio volume</p>
+        <p>Images</p>
 
     </div>
 
-        <p><strong>Default:</strong> 1.0</p>
+
+
+</div>
+<div id="property_materials" class="property item">
+    <h3 class="name"><code>materials</code></h3>
+    <span class="type">Array</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Materials</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_textures" class="property item">
+    <h3 class="name"><code>textures</code></h3>
+    <span class="type">Array</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Textures</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_videos" class="property item">
+    <h3 class="name"><code>videos</code></h3>
+    <span class="type">Array</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Videos</p>
+
+    </div>
+
 
 
 </div>

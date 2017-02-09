@@ -21,8 +21,8 @@
 		"toneMapping": 0,
 		"toneMappingExposure": 1,
 		"toneMappingWhitepoint": 1,
-		"antialiasing": true,
-		"shadows": true,
+		"antialiasing": false,
+		"shadows": false,
 		"shadowsType": 2
 	},
 	"code": {
