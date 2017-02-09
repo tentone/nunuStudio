@@ -130,7 +130,11 @@ Program.prototype.getAudioByName = ResourceManager.prototype.getAudioByName;
 Program.prototype.addAudio = ResourceManager.prototype.addAudio;
 Program.prototype.removeAudio = ResourceManager.prototype.removeAudio;
 
-//Select initial scene and initialize that scene
+/**
+ * Select initial scene and initialize that scene
+ * Automatically called by the runtime
+ * @method initialize
+ */
 Program.prototype.initialize = function()
 {
 	//If input null create input object
@@ -161,21 +165,33 @@ Program.prototype.initialize = function()
 	}
 }
 
-//Set program mouse and keyboard
+/**
+ * Set program mouse and keyboard
+ * @method setMouseKeyboard
+ * @param {Mouse} mouse
+ * @param {Keyboard} keyboard
+ */
 Program.prototype.setMouseKeyboard = function(mouse, keyboard)
 {
 	this.mouse = mouse;
 	this.keyboard = keyboard;
 }
 
-//Set program renderer
+/**
+ * Set program renderer
+ * @method setRenderer
+ * @param {WebGLRenderer} renderer Three.js renderer to be used by this program
+ */
 Program.prototype.setRenderer = function(renderer)
 {
 	this.renderer = renderer;
 	this.canvas = renderer.domElement;
 }
 
-//Enter VR mode
+/**
+ * Enter VR mode
+ * @method displayVR
+ */
 Program.prototype.displayVR = function()
 {
 	if(this.vr)
@@ -197,7 +213,10 @@ Program.prototype.displayVR = function()
 	}
 }
 
-//Exit VR mode
+/**
+ * Exit VR mode
+ * @method exitVR
+ */
 Program.prototype.exitVR = function()
 {
 	if(this.vr)
@@ -213,13 +232,22 @@ Program.prototype.exitVR = function()
 	}
 }
 
-//Update program
+/**
+ * Update program state
+ * Automatically called by the runtime
+ * @method update
+ */
 Program.prototype.update = function()
 {
 	this.scene.update();
 }
 
-//Render program (renderer passed as argument)
+/**
+ * Render program to canvas
+ * Renderer passed as argument
+ * @method render
+ * @param {Renderer} renderer
+ */
 Program.prototype.render = function(renderer)
 {
 	//Render as a VR application (ignores camera parameters)
@@ -262,7 +290,13 @@ Program.prototype.render = function(renderer)
 	}
 }
 
-//Resize program cameras
+/**
+ * Resize program elements
+ * Called by the runtime every time the window is resized
+ * @method resize
+ * @param {Number} x Width
+ * @param {Number} y Height
+ */
 Program.prototype.resize = function(x, y)
 {
 	//Resize cameras
@@ -282,7 +316,12 @@ Program.prototype.resize = function(x, y)
 	});
 }
 
-//Set actual scene (to be used in runtime)
+/**
+ * Change scene during runtime, this method can receive booth a scene name or a scene object
+ * This method should be used inside of script objects during runtime
+ * @method setScene
+ * @param {Scene|String} scene
+ */
 Program.prototype.setScene = function(scene)
 {
 	if(scene instanceof Scene)
@@ -305,7 +344,11 @@ Program.prototype.setScene = function(scene)
 	}
 }
 
-//Remove Scene from program
+/**
+ * Remove Scene from program
+ * @method remove
+ * @param {Scene} scene
+ */
 Program.prototype.remove = function(scene)
 {
 	var index = this.children.indexOf(scene);
@@ -322,7 +365,12 @@ Program.prototype.remove = function(scene)
 	}
 }
 
-//Add children to program (only allows Scenes to be added)
+/**
+ * Add new scene to this program
+ * On the program class only scenes can be added as children
+ * @method add
+ * @param {Scene} scene
+ */
 Program.prototype.add = function(scene)
 {
 	if(scene instanceof Scene)
@@ -338,19 +386,34 @@ Program.prototype.add = function(scene)
 	}
 }
 
-//Clone program (keep uuid and everything else)
+/**
+ * Clone program, keeping uuids and every identification attribute
+ * Clone method uses the ObjectLoad to serialize and create a new program instance with the same data
+ * @method clone
+ * @return {Program} Cloned program
+ */
 Program.prototype.clone = function()
 {
 	return new ObjectLoader().parse(this.toJSON());
 }
 
-//Set as initial scene (from uuid reference)
+/**
+ * Set a scene as initial scene using its uuid
+ * This method is used by the editor
+ * @method setInitialScene
+ * @param {String} uuid Scene uuid
+ */
 Program.prototype.setInitialScene = function(scene)
 {
 	this.defaultScene = scene.uuid;
 }
 
-//Create a default scene with sky
+/**
+ * Create a scene using a default template
+ * This is the scene used when creating a new program or scene inside the editor
+ * @method addDefaultScene
+ * @param {Material} material Default material used by objects, if empty a new material is created
+ */
 Program.prototype.addDefaultScene = function(material)
 {
 	if(material === undefined)
@@ -388,7 +451,11 @@ Program.prototype.addDefaultScene = function(material)
 	this.add(scene);
 }
 
-//Dispose program data
+/**
+ * Dispose program data to avoid memory leaks
+ * Called when exiting the program
+ * @method dispose
+ */
 Program.prototype.dispose = function()
 {
 	//Geometry
@@ -416,7 +483,11 @@ Program.prototype.dispose = function()
 	}
 }
 
-//Receive external data and pass it to all script instances
+/**
+ * Receive external data and pass it to all script instances
+ * @param {Object} data
+ * @method receiveDataApp
+ */
 Program.prototype.receiveDataApp = function(data)
 {
 	var found = false;
@@ -448,7 +519,11 @@ Program.prototype.receiveDataApp = function(data)
 	}
 }
 
-//Send data to external app instance
+/**
+ * Send data to external app instance
+ * @param {Object} data
+ * @method sendDataApp
+ */
 Program.prototype.sendDataApp = function(data)
 {
 	if(this.app !== null)
@@ -475,7 +550,13 @@ Program.prototype.sendDataApp = function(data)
 	}
 }
 
-//Create JSON for object
+/**
+ * Serialize object as JSON.
+ * @method toJSON
+ * @param {Object} meta
+ * @param {boolean} exportResources If true all resouces in the program are exported, else only resources attached to objects are exported
+ * @return {Object} json
+ */
 Program.prototype.toJSON = function(meta, exportResources)
 {
 	var self = this;

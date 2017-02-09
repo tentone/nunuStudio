@@ -1,11 +1,33 @@
 "use strict";
 
 /**
- * Scene
+ * Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.
+ * Scene original documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene
  * @class Scene
  * @module Core
  * @constructor
- * @extends {THREE.Object3D}
+ * @extends {THREE.Scene}
+ */
+
+/**
+ * Cannon.js world used for physics simulation
+ * @property {World} world
+ */
+/**
+ * Raycaster used for mouse interaction with 3D objects
+ * @property {Raycaster} raycaster
+ */
+/**
+ * Normalized mouse coordinates used by the raycaster
+ * @property {Vector2} mouse
+ */
+/**
+ * Program that contains this scene
+ * @property {Program} program
+ */
+/**
+ * Canvas used to draw this scene
+ * @property {DOM} canvas
  */
 function Scene()
 {
@@ -43,7 +65,11 @@ function Scene()
 
 Scene.prototype = Object.create(THREE.Scene.prototype);
 
-//Initialize
+/**
+ * Initialize scene objects
+ * Called automatically by the runtime
+ * @method initialize
+ */
 Scene.prototype.initialize = function()
 {
 	//Canvas and program
@@ -60,7 +86,11 @@ Scene.prototype.initialize = function()
 	}
 }
 
-//Update scene
+/**
+ * Update scene
+ * Called automatically by the runtime
+ * @method update
+ */
 Scene.prototype.update = function()
 {
 	this.mouse.set(this.program.mouse.position.x/this.canvas.width * 2 - 1, -2 * this.program.mouse.position.y/this.canvas.height + 1);
@@ -79,7 +109,12 @@ Scene.prototype.update = function()
 	}
 }
 
-//Get camera from scene using cameras uuid
+/**
+ * Get camera from scene using cameras uuid
+ * @method getCamera
+ * @param {String} uuid UUID of the camera
+ * @return {Camera} Camera if found, else null
+ */
 Scene.prototype.getCamera = function(uuid, obj)
 {
 	if(obj === undefined)
@@ -105,14 +140,21 @@ Scene.prototype.getCamera = function(uuid, obj)
 	return null;
 }
 
-//Add camera (from active cameras)
+/**
+ * Add camera to active cameras list
+ * @method addCamera
+ * @param {Camera} camera
+ */
 Scene.prototype.addCamera = function(camera)
 {
 	this.cameras.push(camera);
 	this.updateCameraOrder();
 }
 
-//Update camera order
+/**
+ * Update active cameras order
+ * @method updateCameraOrder
+ */
 Scene.prototype.updateCameraOrder = function()
 {
 	this.cameras.sort(function(a,b)
@@ -121,7 +163,11 @@ Scene.prototype.updateCameraOrder = function()
 	});
 }
 
-//Remove camera (from active cameras)
+/**
+ * Remove camera from active camera list
+ * @param {Camera} camera Camera to be removed
+ * @method removeCamera
+ */
 Scene.prototype.removeCamera = function(camera)
 {
 	var index = this.cameras.indexOf(camera);
@@ -131,7 +177,11 @@ Scene.prototype.removeCamera = function(camera)
 	}
 }
 
-//Set fog mode
+/**
+ * Set scene fog mode
+ * @param {Number} mode
+ * @method setFogMode
+ */
 Scene.prototype.setFogMode = function(mode)
 {	
 	var color = (this.fog !== null) ? this.fog.color.getHex() : "#FFFFFF";
@@ -150,7 +200,13 @@ Scene.prototype.setFogMode = function(mode)
 	}
 }
 
-//Create JSON for object
+/**
+ * Serialize object as JSON
+ * Also serializes physics world information
+ * @method toJSON
+ * @param {Object} meta
+ * @return {Object} json
+ */
 Scene.prototype.toJSON = function(meta)
 {
 	var data = THREE.Scene.prototype.toJSON.call(this, meta);
