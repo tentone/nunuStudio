@@ -241,9 +241,7 @@
         },
         "..\\source\\core\\objects\\spine\\SpineTexture.js": {
             "name": "..\\source\\core\\objects\\spine\\SpineTexture.js",
-            "modules": {
-                "Textures": 1
-            },
+            "modules": {},
             "classes": {
                 "SpineTexture": 1
             },
@@ -281,24 +279,125 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\resources\\ResourceManager.js": {
-            "name": "..\\source\\core\\resources\\ResourceManager.js",
+        "..\\source\\core\\resources\\Audio.js": {
+            "name": "..\\source\\core\\resources\\Audio.js",
             "modules": {
                 "Resources": 1
             },
+            "classes": {
+                "Audio": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\resources\\Font.js": {
+            "name": "..\\source\\core\\resources\\Font.js",
+            "modules": {},
+            "classes": {
+                "Font": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\resources\\Image.js": {
+            "name": "..\\source\\core\\resources\\Image.js",
+            "modules": {},
+            "classes": {
+                "Image": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\resources\\Resource.js": {
+            "name": "..\\source\\core\\resources\\Resource.js",
+            "modules": {},
+            "classes": {
+                "Resource": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\resources\\ResourceManager.js": {
+            "name": "..\\source\\core\\resources\\ResourceManager.js",
+            "modules": {},
             "classes": {
                 "ResourceManager": 1
             },
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\three\\Object3D.js": {
-            "name": "..\\source\\core\\three\\Object3D.js",
+        "..\\source\\core\\resources\\Video.js": {
+            "name": "..\\source\\core\\resources\\Video.js",
+            "modules": {},
+            "classes": {
+                "Video": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\texture\\CanvasTexture.js": {
+            "name": "..\\source\\core\\texture\\CanvasTexture.js",
             "modules": {
-                "ThreeJS": 1
+                "Textures": 1
             },
             "classes": {
-                "Object3D": 1
+                "CanvasTexture": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\texture\\Texture.js": {
+            "name": "..\\source\\core\\texture\\Texture.js",
+            "modules": {},
+            "classes": {
+                "Texture": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\texture\\VideoTexture.js": {
+            "name": "..\\source\\core\\texture\\VideoTexture.js",
+            "modules": {},
+            "classes": {
+                "VideoTexture": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\texture\\WebcamTexture.js": {
+            "name": "..\\source\\core\\texture\\WebcamTexture.js",
+            "modules": {},
+            "classes": {
+                "WebcamTexture": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\three\\Fog.js": {
+            "name": "..\\source\\core\\three\\Fog.js",
+            "modules": {
+                "THREE": 1
+            },
+            "classes": {
+                "THREE.Fog": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\three\\Object3D.js": {
+            "name": "..\\source\\core\\three\\Object3D.js",
+            "modules": {},
+            "classes": {
+                "THREE.Object3D": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\three\\Texture.js": {
+            "name": "..\\source\\core\\three\\Texture.js",
+            "modules": {},
+            "classes": {
+                "THREE.Texture": 1
             },
             "fors": {},
             "namespaces": {}
@@ -497,14 +596,18 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "SpineTexture": 1
+                "CanvasTexture": 1,
+                "SpineTexture": 1,
+                "Texture": 1,
+                "VideoTexture": 1,
+                "WebcamTexture": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\objects\\spine\\SpineTexture.js",
+            "file": "..\\source\\core\\texture\\WebcamTexture.js",
             "line": 3,
-            "description": "Spine animation textures\nBased on SpineTexture from original spine runtime for three.js"
+            "description": "Canvas Texture"
         },
         "Sprite": {
             "name": "Sprite",
@@ -540,28 +643,35 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "ResourceManager": 1
+                "Audio": 1,
+                "Font": 1,
+                "Image": 1,
+                "Resource": 1,
+                "ResourceManager": 1,
+                "Video": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "file": "..\\source\\core\\resources\\Video.js",
             "line": 3,
-            "description": "Resource manager is used to manage available resources used by objects\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\nThe manager is used to manage the following types of resources\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries"
+            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API"
         },
-        "ThreeJS": {
-            "name": "ThreeJS",
+        "THREE": {
+            "name": "THREE",
             "submodules": {},
             "elements": {},
             "classes": {
-                "Object3D": 1
+                "THREE.Fog": 1,
+                "THREE.Object3D": 1,
+                "THREE.Texture": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\three\\Object3D.js",
+            "file": "..\\source\\core\\three\\Texture.js",
             "line": 3,
-            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at www.threejs.org.\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.\nCode examples provided for three.js should also work inside nunuStudio."
+            "description": "Scene fog"
         },
         "Runtime": {
             "name": "Runtime",
@@ -1335,6 +1445,90 @@
             "is_constructor": 1,
             "extends": "{THREE.Scene}"
         },
+        "Audio": {
+            "name": "Audio",
+            "shortname": "Audio",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\source\\core\\resources\\Audio.js",
+            "line": 3,
+            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API",
+            "extends": "{Resource}",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL to Audio file",
+                    "type": "String"
+                }
+            ]
+        },
+        "Font": {
+            "name": "Font",
+            "shortname": "Font",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\source\\core\\resources\\Font.js",
+            "line": 3,
+            "description": "Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64)\nFont objects are used for booth 2D and 3D text",
+            "is_constructor": 1,
+            "extends": "{Resource}",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL to font file",
+                    "type": "String"
+                }
+            ]
+        },
+        "Image": {
+            "name": "Image",
+            "shortname": "Image",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\source\\core\\resources\\Image.js",
+            "line": 3,
+            "description": "Image class is used to store image data that is used to create Textures\nImages can be stored in mutiple formats but on serialization images are converted to JPEG if they are opaque or to PNG if they are transparent\nGIF images are never converted to prevert animation capabilities",
+            "is_constructor": 1,
+            "extends": "{Resource}",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL to image",
+                    "type": "String"
+                }
+            ]
+        },
+        "Resource": {
+            "name": "Resource",
+            "shortname": "Resource",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\source\\core\\resources\\Resource.js",
+            "line": 3,
+            "description": "Resource class is used to represent resources\nResources store data that is used by objects",
+            "is_constructor": 1
+        },
         "ResourceManager": {
             "name": "ResourceManager",
             "shortname": "ResourceManager",
@@ -1350,19 +1544,303 @@
             "description": "Resource manager is used to manage available resources used by objects\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\nThe manager is used to manage the following types of resources\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries",
             "is_constructor": 1
         },
-        "Object3D": {
-            "name": "Object3D",
-            "shortname": "Object3D",
+        "Video": {
+            "name": "Video",
+            "shortname": "Video",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "ThreeJS",
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\source\\core\\resources\\Video.js",
+            "line": 3,
+            "description": "Video resources are used to store video data in base64",
+            "is_constructor": 1,
+            "extends": "{Resource}",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL to video file",
+                    "type": "String"
+                }
+            ]
+        },
+        "CanvasTexture": {
+            "name": "CanvasTexture",
+            "shortname": "CanvasTexture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\source\\core\\texture\\CanvasTexture.js",
+            "line": 3,
+            "description": "Canvas Texture",
+            "is_constructor": 1,
+            "extends": "{THREE.Texture}",
+            "params": [
+                {
+                    "name": "width",
+                    "description": "Canvas width",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "Canvas height",
+                    "type": "Number"
+                },
+                {
+                    "name": "mapping",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapS",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapT",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "magFilter",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "minFilter",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "format",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "anisotropy",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "encoding",
+                    "description": "",
+                    "type": "Number"
+                }
+            ]
+        },
+        "Texture": {
+            "name": "Texture",
+            "shortname": "Texture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 3,
+            "description": "Image texture constructor, supports GIF animations",
+            "is_constructor": 1,
+            "extends": "{THREE.Texture}",
+            "params": [
+                {
+                    "name": "image",
+                    "description": "",
+                    "type": "Image"
+                },
+                {
+                    "name": "mapping",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapS",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapT",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "magFilter",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "minFilter",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "format",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "anisotropy",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "encoding",
+                    "description": "",
+                    "type": "Number"
+                }
+            ]
+        },
+        "VideoTexture": {
+            "name": "VideoTexture",
+            "shortname": "VideoTexture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 3,
+            "description": "Video texture, uses a video DOM element instead of a img element",
+            "is_constructor": 1,
+            "extends": "{THREE.Texture}",
+            "params": [
+                {
+                    "name": "video",
+                    "description": "",
+                    "type": "Video"
+                },
+                {
+                    "name": "mapping",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapS",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapT",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "anisotropy",
+                    "description": "",
+                    "type": "Number"
+                }
+            ]
+        },
+        "WebcamTexture": {
+            "name": "WebcamTexture",
+            "shortname": "WebcamTexture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\source\\core\\texture\\WebcamTexture.js",
+            "line": 3,
+            "description": "Webcam texture is used to capture and display video from a webcam",
+            "is_constructor": 1,
+            "extends": "{THREE.Texture}",
+            "params": [
+                {
+                    "name": "mapping",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapS",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapT",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "anisotropy",
+                    "description": "",
+                    "type": "Number"
+                }
+            ]
+        },
+        "THREE.Fog": {
+            "name": "THREE.Fog",
+            "shortname": "THREE.Fog",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "THREE",
+            "namespace": "",
+            "file": "..\\source\\core\\three\\Fog.js",
+            "line": 3,
+            "description": "Scene fog"
+        },
+        "THREE.Object3D": {
+            "name": "THREE.Object3D",
+            "shortname": "THREE.Object3D",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "THREE",
             "namespace": "",
             "file": "..\\source\\core\\three\\Object3D.js",
             "line": 3,
-            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at www.threejs.org.\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.\nCode examples provided for three.js should also work inside nunuStudio.",
+            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.\nCode examples provided for three.js should also work inside nunuStudio.",
+            "is_constructor": 1
+        },
+        "THREE.Texture": {
+            "name": "THREE.Texture",
+            "shortname": "THREE.Texture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "THREE",
+            "namespace": "",
+            "file": "..\\source\\core\\three\\Texture.js",
+            "line": 3,
+            "description": "THREE.Texture documentation is available at https://threejs.org/docs/index.html?q=texture#Reference/Textures/Texture",
             "is_constructor": 1
         },
         "NunuApp": {
@@ -2501,7 +2979,7 @@
             "line": 11,
             "description": "Audio volume",
             "itemtype": "property",
-            "name": "valume",
+            "name": "volume",
             "default": "1.0",
             "type": "{Number}",
             "class": "AudioEmitter",
@@ -2523,6 +3001,17 @@
             "line": 23,
             "description": "Start time in seconds",
             "itemtype": "property",
+            "name": "playbackRate",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 29,
+            "description": "Start time in seconds",
+            "itemtype": "property",
             "name": "startTime",
             "default": "0.0",
             "type": "{Number}",
@@ -2531,7 +3020,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 29,
+            "line": 35,
             "description": "If true the audio plays in loop",
             "itemtype": "property",
             "name": "loop",
@@ -2542,7 +3031,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 63,
+            "line": 69,
             "description": "Initialize audio object (called by the runtime)",
             "itemtype": "method",
             "name": "initialize",
@@ -2551,7 +3040,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 87,
+            "line": 93,
             "description": "Dispose audio object",
             "itemtype": "method",
             "name": "dispose",
@@ -2560,7 +3049,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 105,
+            "line": 111,
             "description": "Change audio emitter volume",
             "itemtype": "method",
             "name": "setVolume",
@@ -2576,7 +3065,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 118,
+            "line": 124,
             "description": "Create JSON description",
             "itemtype": "method",
             "name": "toJSON",
@@ -2596,7 +3085,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 142,
+            "line": 148,
             "description": "Starts playback",
             "itemtype": "method",
             "name": "play",
@@ -2605,7 +3094,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 147,
+            "line": 153,
             "description": "Pauses playback",
             "itemtype": "method",
             "name": "pause",
@@ -2614,7 +3103,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 152,
+            "line": 158,
             "description": "Stops playback and resets time to 0",
             "itemtype": "method",
             "name": "pause",
@@ -2623,7 +3112,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 157,
+            "line": 163,
             "description": "Set loop mode",
             "params": [
                 {
@@ -2639,7 +3128,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 163,
+            "line": 169,
             "description": "Set playback speed",
             "params": [
                 {
@@ -2655,7 +3144,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 169,
+            "line": 175,
             "description": "Add the filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -2671,7 +3160,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 175,
+            "line": 181,
             "description": "Set the filters array to value.",
             "itemtype": "method",
             "name": "setFilters",
@@ -2690,7 +3179,7 @@
             "line": 11,
             "description": "Audio volume",
             "itemtype": "property",
-            "name": "valume",
+            "name": "volume",
             "default": "1.0",
             "type": "{Number}",
             "class": "PositionalAudio",
@@ -2712,6 +3201,17 @@
             "line": 23,
             "description": "Start time in seconds",
             "itemtype": "property",
+            "name": "playbackRate",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 29,
+            "description": "Start time in seconds",
+            "itemtype": "property",
             "name": "startTime",
             "default": "0.0",
             "type": "{Number}",
@@ -2720,7 +3220,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 29,
+            "line": 35,
             "description": "If true the audio plays in loop",
             "itemtype": "property",
             "name": "loop",
@@ -2731,7 +3231,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 62,
+            "line": 68,
             "description": "Initialize audio object (called by the runtime)",
             "itemtype": "method",
             "name": "initialize",
@@ -2740,7 +3240,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 97,
+            "line": 103,
             "description": "Update positional audio state",
             "itemtype": "method",
             "name": "update",
@@ -2749,7 +3249,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 120,
+            "line": 126,
             "description": "Dispose audio object",
             "itemtype": "method",
             "name": "dispose",
@@ -2758,7 +3258,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 138,
+            "line": 144,
             "description": "Change audio emitter volume",
             "itemtype": "method",
             "name": "setVolume",
@@ -2778,7 +3278,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 158,
+            "line": 164,
             "description": "Create JSON description",
             "itemtype": "method",
             "name": "toJSON",
@@ -2798,7 +3298,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 182,
+            "line": 188,
             "description": "Starts playback",
             "itemtype": "method",
             "name": "play",
@@ -2807,7 +3307,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 187,
+            "line": 193,
             "description": "Pauses playback",
             "itemtype": "method",
             "name": "pause",
@@ -2816,7 +3316,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 192,
+            "line": 198,
             "description": "Stops playback and resets time to 0",
             "itemtype": "method",
             "name": "pause",
@@ -2825,7 +3325,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 197,
+            "line": 203,
             "description": "Set loop mode",
             "params": [
                 {
@@ -2841,7 +3341,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 203,
+            "line": 209,
             "description": "Set playback speed",
             "params": [
                 {
@@ -2857,7 +3357,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 209,
+            "line": 215,
             "description": "Add the filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -2873,7 +3373,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 215,
+            "line": 221,
             "description": "Set the filters array to value.",
             "itemtype": "method",
             "name": "setFilters",
@@ -5078,6 +5578,148 @@
             "module": "Core"
         },
         {
+            "file": "..\\source\\core\\resources\\Audio.js",
+            "line": 29,
+            "description": "Serialize audio data as JSON, audio data is serialized in Base64",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Meta"
+                }
+            ],
+            "return": {
+                "description": "data",
+                "type": "Object"
+            },
+            "class": "Audio",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Font.js",
+            "line": 58,
+            "description": "Generate font shapes used to create 3D geometries",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "size",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "divisions",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "paths",
+                "type": "Array"
+            },
+            "class": "Font",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Font.js",
+            "line": 214,
+            "description": "Serialize resource to json",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Font",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Resource.js",
+            "line": 11,
+            "description": "Resource name. Not required to be unique.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "Resource",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Resource.js",
+            "line": 16,
+            "description": "UUID unique identifier.",
+            "itemtype": "property",
+            "name": "uuid",
+            "type": "{String}",
+            "class": "Resource",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Resource.js",
+            "line": 21,
+            "description": "Resrouce type. Used to identify the type of the resource, usefull for serialization.",
+            "itemtype": "property",
+            "name": "type",
+            "type": "{String}",
+            "class": "Resource",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Resource.js",
+            "line": 26,
+            "description": "Data format (Base64, ArrayBuffer, ...)\nIndicates in witch format the data is being stored",
+            "itemtype": "property",
+            "name": "format",
+            "type": "{Object}",
+            "class": "Resource",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Resource.js",
+            "line": 32,
+            "description": "Data encoding (MP3, JPEG, MP4, ...)\nIndicated how the data is encoded",
+            "itemtype": "property",
+            "name": "encoding",
+            "type": "{String, ArrayBuffer, ...}",
+            "class": "Resource",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Resource.js",
+            "line": 38,
+            "description": "Data",
+            "itemtype": "property",
+            "name": "data",
+            "type": "{Object}",
+            "class": "Resource",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Resource.js",
+            "line": 54,
+            "description": "Serialize resource to json",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Resource",
+            "module": "Resources"
+        },
+        {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
             "line": 20,
             "description": "Images",
@@ -5385,14 +6027,275 @@
             "module": "Resources"
         },
         {
+            "file": "..\\source\\core\\resources\\Video.js",
+            "line": 29,
+            "description": "Serialize resource to json\nVideo is stores in Base64",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Video",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CanvasTexture.js",
+            "line": 22,
+            "description": "Image is used to store a DOM canvas element",
+            "itemtype": "property",
+            "name": "image",
+            "type": "{DOM}",
+            "class": "CanvasTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CanvasTexture.js",
+            "line": 27,
+            "description": "Canvas context 2D, can be used to draw content do the canvas texture",
+            "itemtype": "property",
+            "name": "context",
+            "type": "{Context2D}",
+            "class": "CanvasTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CanvasTexture.js",
+            "line": 32,
+            "description": "Canvas height",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{Number}",
+            "class": "CanvasTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CanvasTexture.js",
+            "line": 37,
+            "description": "Canvas width",
+            "itemtype": "property",
+            "name": "width",
+            "type": "{Number}",
+            "class": "CanvasTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CanvasTexture.js",
+            "line": 68,
+            "description": "Create JSON description for canvas texture, canvas image is not serialized",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "method",
+            "name": "toJSON",
+            "class": "CanvasTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 72,
+            "description": "Dispose texture",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 83,
+            "description": "Create JSON description for texture, serializes image used in the texture",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "method",
+            "name": "toJSON",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 16,
+            "description": "Video audio volume",
+            "itemtype": "property",
+            "name": "volume",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 22,
+            "description": "If true the playback starts automatically",
+            "itemtype": "property",
+            "name": "autoplay",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 28,
+            "description": "Start time in seconds",
+            "itemtype": "property",
+            "name": "playbackRate",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 34,
+            "description": "If true the video plays in loop",
+            "itemtype": "property",
+            "name": "loop",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 96,
+            "description": "Set video time in seconds",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setTime",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 106,
+            "description": "Set loop mode",
+            "params": [
+                {
+                    "name": "loop",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setLoop",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 117,
+            "description": "Set video volume",
+            "params": [
+                {
+                    "name": "volume",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setVolume",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 128,
+            "description": "Set video playback speed",
+            "itemtype": "method",
+            "name": "setPlaybackRate",
+            "params": [
+                {
+                    "name": "playbackRate",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 139,
+            "description": "Pause video playback",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 151,
+            "description": "Start playing video",
+            "itemtype": "method",
+            "name": "play",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 163,
+            "description": "Dispose video texture",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 179,
+            "description": "Create Video texture json description",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\WebcamTexture.js",
+            "line": 74,
+            "description": "Dispose webcam texture",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "WebcamTexture",
+            "module": "Textures"
+        },
+        {
             "file": "..\\source\\core\\three\\Object3D.js",
             "line": 13,
             "description": "Array with object's children.",
             "itemtype": "property",
             "name": "children",
             "type": "{Array}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5402,8 +6305,8 @@
             "name": "frustumCulled",
             "default": "true",
             "type": "{boolean}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5412,8 +6315,8 @@
             "itemtype": "property",
             "name": "layers",
             "type": "{Layers}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5422,8 +6325,8 @@
             "itemtype": "property",
             "name": "matrix",
             "type": "{Matrix4}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5433,8 +6336,8 @@
             "name": "matrixAutoUpdate",
             "default": "true",
             "type": "{boolean}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5443,8 +6346,8 @@
             "itemtype": "property",
             "name": "matrixWorld",
             "type": "{Matrix4}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5453,8 +6356,8 @@
             "itemtype": "property",
             "name": "name",
             "type": "{String}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5463,8 +6366,8 @@
             "itemtype": "property",
             "name": "position",
             "type": "{Vector3}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5473,8 +6376,8 @@
             "itemtype": "property",
             "name": "quaternion",
             "type": "{Quaternion}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5483,8 +6386,8 @@
             "itemtype": "property",
             "name": "rotation",
             "type": "{Euler}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5493,8 +6396,8 @@
             "itemtype": "property",
             "name": "scale",
             "type": "{Vector3}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5503,8 +6406,8 @@
             "itemtype": "property",
             "name": "up",
             "type": "{Vector3}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5513,8 +6416,8 @@
             "itemtype": "property",
             "name": "uuid",
             "type": "{String}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5524,8 +6427,8 @@
             "name": "visible",
             "type": "{boolean}",
             "default": "true",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5535,8 +6438,8 @@
             "name": "renderOrder",
             "default": "0",
             "type": "{Number}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5546,8 +6449,8 @@
             "name": "castShadow",
             "default": "false",
             "type": "{boolean}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5557,8 +6460,8 @@
             "name": "receiveShadow",
             "default": "false",
             "type": "{boolean}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5567,8 +6470,8 @@
             "itemtype": "property",
             "name": "userData",
             "type": "{Object}",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5576,8 +6479,8 @@
             "description": "Initialize the object.",
             "itemtype": "method",
             "name": "initialize",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5585,8 +6488,8 @@
             "description": "Update the object state.",
             "itemtype": "method",
             "name": "update",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5594,8 +6497,8 @@
             "description": "Dispose the object (to avoid memory leaks).",
             "itemtype": "method",
             "name": "dispose",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5603,8 +6506,8 @@
             "description": "Remove all children from object.",
             "itemtype": "method",
             "name": "removeAll",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5612,8 +6515,8 @@
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
             "name": "destroy",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5642,8 +6545,8 @@
                 "description": "json",
                 "type": "Object"
             },
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5658,8 +6561,8 @@
             ],
             "itemtype": "method",
             "name": "remove",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5672,8 +6575,8 @@
                     "type": "Vector3"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5688,8 +6591,8 @@
             ],
             "itemtype": "method",
             "name": "localToWorld",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5704,8 +6607,8 @@
             ],
             "itemtype": "method",
             "name": "worldToLocal",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5720,8 +6623,8 @@
                     "type": "Object3D"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5736,8 +6639,8 @@
                     "type": "Matrix4"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5752,8 +6655,8 @@
                     "type": "Boolean"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5773,8 +6676,8 @@
                     "type": "Boolean"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5789,8 +6692,8 @@
             ],
             "itemtype": "method",
             "name": "getObjectByName",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5810,8 +6713,8 @@
             ],
             "itemtype": "method",
             "name": "getObjectByProperty",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5829,8 +6732,8 @@
             },
             "itemtype": "method",
             "name": "getWorldPosition",
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5845,8 +6748,8 @@
                     "type": "Quaternion"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5861,8 +6764,8 @@
                     "type": "Euler"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5877,8 +6780,8 @@
                     "type": "Vector3"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5893,8 +6796,8 @@
                     "type": "Vector3"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5914,8 +6817,8 @@
                     "type": "Number"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5930,8 +6833,8 @@
                     "type": "Number"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5946,8 +6849,8 @@
                     "type": "Number"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5962,8 +6865,26 @@
                     "type": "Number"
                 }
             ],
-            "class": "Object3D",
-            "module": "ThreeJS"
+            "class": "THREE.Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\source\\core\\three\\Texture.js",
+            "line": 9,
+            "description": "THREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "THREE.Texture",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
@@ -6285,8 +7206,36 @@
             "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:224"
         },
         {
+            "message": "Missing item type\nSerialize audio data as JSON, audio data is serialized in Base64",
+            "line": " ..\\source\\core\\resources\\Audio.js:29"
+        },
+        {
+            "message": "Missing item type\nGenerate font shapes used to create 3D geometries",
+            "line": " ..\\source\\core\\resources\\Font.js:58"
+        },
+        {
+            "message": "Missing item type\nSerialize resource to json",
+            "line": " ..\\source\\core\\resources\\Font.js:214"
+        },
+        {
+            "message": "Missing item type\nSerialize resource to json",
+            "line": " ..\\source\\core\\resources\\Resource.js:54"
+        },
+        {
+            "message": "Missing item type\nSerialize resource to json\nVideo is stores in Base64",
+            "line": " ..\\source\\core\\resources\\Video.js:29"
+        },
+        {
+            "message": "Missing item type\nCreate Video texture json description",
+            "line": " ..\\source\\core\\texture\\VideoTexture.js:179"
+        },
+        {
             "message": "Missing item type\nRotates the object to face a point in world space.",
             "line": " ..\\source\\core\\three\\Object3D.js:319"
+        },
+        {
+            "message": "Missing item type\nTHREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
+            "line": " ..\\source\\core\\three\\Texture.js:9"
         },
         {
             "message": "Missing item type\nSet fullscreen mode",

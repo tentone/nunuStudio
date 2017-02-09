@@ -52,6 +52,10 @@ TextureLoader.prototype.parse = function(json, onLoad)
 		}
 
 		texture = new VideoTexture(this.videos[json.video]);
+		texture.loop = json.loop;
+		texture.autoplay = json.autoplay;
+		texture.playbackRate = json.playbackRate;
+		texture.volume = json.volume;
 	}
 	//Webcam texture
 	else if(category === "Webcam")

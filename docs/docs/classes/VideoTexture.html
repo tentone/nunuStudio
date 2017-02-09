@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Mesh</title>
+    <title>VideoTexture</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -135,37 +135,48 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Mesh Class</h1>
+<h1>VideoTexture Class</h1>
 <div class="box meta">
 
         <div class="extends">
-            Extends THREE.Mesh
+            Extends <a href="../classes/THREE.Texture.html" class="crosslink">THREE.Texture</a>
         </div>
 
 
-            Module: <a href="../modules/Meshes.html">Meshes</a>
+            Module: <a href="../modules/Textures.html">Textures</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Meshs are used to combine a geometry and a material forming a complete rederizable object
-Based on THREE.Mesh documentation for the object can be found at <a href="https://threejs.org/docs/index.html#Reference/Objects/Mesh">https://threejs.org/docs/index.html#Reference/Objects/Mesh</a></p>
+    <p>Video texture, uses a video DOM element instead of a img element</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_Mesh" class="method item">
-    <h3 class="name"><code>Mesh</code></h3>
+<div id="method_VideoTexture" class="method item">
+    <h3 class="name"><code>VideoTexture</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>geometry</code>
+                        <code>video</code>
                 </li>
                 <li class="arg">
-                        <code>material</code>
+                        <code>mapping</code>
+                </li>
+                <li class="arg">
+                        <code>wrapS</code>
+                </li>
+                <li class="arg">
+                        <code>wrapT</code>
+                </li>
+                <li class="arg">
+                        <code>type</code>
+                </li>
+                <li class="arg">
+                        <code>anisotropy</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -194,24 +205,62 @@ Based on THREE.Mesh documentation for the object can be found at <a href="https:
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">geometry</code>
-                        <span class="type">Geometry</span>
+                        <code class="param-name">video</code>
+                        <span class="type"><a href="../classes/Video.html" class="crosslink">Video</a></span>
 
 
                     <div class="param-description">
-                        <p>Geometry used by this mesh</p>
-
+                         
                     </div>
 
                 </li>
                 <li class="param">
-                        <code class="param-name">material</code>
-                        <span class="type">Material</span>
+                        <code class="param-name">mapping</code>
+                        <span class="type">Number</span>
 
 
                     <div class="param-description">
-                        <p>Material used to shade the superficie of the geometry</p>
+                         
+                    </div>
 
+                </li>
+                <li class="param">
+                        <code class="param-name">wrapS</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">wrapT</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">type</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">anisotropy</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                         
                     </div>
 
                 </li>
@@ -243,6 +292,30 @@ Based on THREE.Mesh documentation for the object can be found at <a href="https:
                                 <a href="#method_dispose">dispose</a>
 
                             </li>
+                            <li class="index-item method">
+                                <a href="#method_pause">pause</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_play">play</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setLoop">setLoop</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setPlaybackRate">setPlaybackRate</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setTime">setTime</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setVolume">setVolume</a>
+
+                            </li>
                     </ul>
                 </div>
 
@@ -251,15 +324,19 @@ Based on THREE.Mesh documentation for the object can be found at <a href="https:
 
                     <ul class="index-list properties extends">
                             <li class="index-item property">
-                                <a href="#property_drawMode">drawMode</a>
+                                <a href="#property_autoplay">autoplay</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_geometry">geometry</a>
+                                <a href="#property_loop">loop</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_material">material</a>
+                                <a href="#property_playbackRate">playbackRate</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_volume">volume</a>
 
                             </li>
                     </ul>
@@ -292,10 +369,272 @@ Based on THREE.Mesh documentation for the object can be found at <a href="https:
     </div>
 
     <div class="description">
-        <p>Dispose mesh along with its material and geometry</p>
+        <p>Dispose video texture</p>
 
     </div>
 
+
+
+
+</div>
+<div id="method_pause" class="method item">
+    <h3 class="name"><code>pause</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Pause video playback</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_play" class="method item">
+    <h3 class="name"><code>play</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Start playing video</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_setLoop" class="method item">
+    <h3 class="name"><code>setLoop</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>loop</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set loop mode</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">loop</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setPlaybackRate" class="method item">
+    <h3 class="name"><code>setPlaybackRate</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>playbackRate</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set video playback speed</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">playbackRate</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setTime" class="method item">
+    <h3 class="name"><code>setTime</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>time</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set video time in seconds</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">time</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setVolume" class="method item">
+    <h3 class="name"><code>setVolume</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>volume</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set video volume</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">volume</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
 
 
 
@@ -305,9 +644,9 @@ Based on THREE.Mesh documentation for the object can be found at <a href="https:
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-<div id="property_drawMode" class="property item">
-    <h3 class="name"><code>drawMode</code></h3>
-    <span class="type">Unknown</span>
+<div id="property_autoplay" class="property item">
+    <h3 class="name"><code>autoplay</code></h3>
+    <span class="type">Boolean</span>
 
 
 
@@ -321,18 +660,17 @@ Based on THREE.Mesh documentation for the object can be found at <a href="https:
     </div>
 
     <div class="description">
-        <p>Determines how the mesh triangles are constructed from the vertices.
-Only works when the geometry is a BufferGeometry</p>
+        <p>If true the playback starts automatically</p>
 
     </div>
 
-        <p><strong>Default:</strong> TrianglesDrawMode</p>
+        <p><strong>Default:</strong> true</p>
 
 
 </div>
-<div id="property_geometry" class="property item">
-    <h3 class="name"><code>geometry</code></h3>
-    <span class="type">Geometry</span>
+<div id="property_loop" class="property item">
+    <h3 class="name"><code>loop</code></h3>
+    <span class="type">Boolean</span>
 
 
 
@@ -346,16 +684,17 @@ Only works when the geometry is a BufferGeometry</p>
     </div>
 
     <div class="description">
-        <p>Geometry defined the object structure</p>
+        <p>If true the video plays in loop</p>
 
     </div>
 
+        <p><strong>Default:</strong> true</p>
 
 
 </div>
-<div id="property_material" class="property item">
-    <h3 class="name"><code>material</code></h3>
-    <span class="type">Material</span>
+<div id="property_playbackRate" class="property item">
+    <h3 class="name"><code>playbackRate</code></h3>
+    <span class="type">Number</span>
 
 
 
@@ -369,10 +708,35 @@ Only works when the geometry is a BufferGeometry</p>
     </div>
 
     <div class="description">
-        <p>Material is used to define how the geometry surface is shaded</p>
+        <p>Start time in seconds</p>
 
     </div>
 
+        <p><strong>Default:</strong> 1.0</p>
+
+
+</div>
+<div id="property_volume" class="property item">
+    <h3 class="name"><code>volume</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Video audio volume</p>
+
+    </div>
+
+        <p><strong>Default:</strong> 1.0</p>
 
 
 </div>

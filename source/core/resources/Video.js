@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Video resources are used to store video data in base64
+ * @class Video
+ * @constructor
+ * @extends {Resource}
+ * @module Resources
+ * @param {String} url URL to video file
+ */
 function Video(url)
 {
 	this.name = "video";
@@ -18,7 +26,12 @@ function Video(url)
 	}
 }
 
-//JSON serialization
+/**
+ * Serialize resource to json
+ * Video is stores in Base64
+ * @param {Object} meta
+ * @return {Object} json
+ */
 Video.prototype.toJSON = function(meta)
 {
 	if(meta.videos[this.uuid] !== undefined)

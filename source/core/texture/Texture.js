@@ -1,6 +1,22 @@
 "use strict";
 
-//Texture constructor
+/**
+ * Image texture constructor, supports GIF animations
+ * @class Texture
+ * @constructor
+ * @extends {THREE.Texture}
+ * @module Textures
+ * @param {Image} image
+ * @param {Number} mapping
+ * @param {Number} wrapS
+ * @param {Number} wrapT
+ * @param {Number} magFilter
+ * @param {Number} minFilter
+ * @param {Number} format
+ * @param {Number} type
+ * @param {Number} anisotropy
+ * @param {Number} encoding
+ */
 function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
 	//If image is a URL
@@ -51,10 +67,12 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	}
 }
 
-//Super prototypes
 Texture.prototype = Object.create(THREE.Texture.prototype);
 
-//Dispose texture
+/**
+ * Dispose texture
+ * @method dispose
+ */
 Texture.prototype.dispose = function()
 {	
 	THREE.Texture.prototype.dispose.call(this);
@@ -62,7 +80,11 @@ Texture.prototype.dispose = function()
 	this.disposed = true;
 }
 
-//Create JSON description
+/**
+ * Create JSON description for texture, serializes image used in the texture
+ * @param {Object} meta
+ * @method toJSON
+ */
 Texture.prototype.toJSON = function(meta)
 {
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);

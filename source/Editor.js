@@ -53,6 +53,7 @@ include("core/input/Mouse.js");
 
 include("core/webvr/VRControls.js");
 
+include("core/resources/Resource.js");
 include("core/resources/Font.js");
 include("core/resources/Video.js");
 include("core/resources/Audio.js");
