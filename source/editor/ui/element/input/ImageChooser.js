@@ -65,16 +65,13 @@ function ImageChooser(parent)
 		}
 	};
 
-	//On change function
+	//onChange callback
 	this.onChange = null;
 
-	//Element atributes
-	this.fitParent = false;
+	//Attributes
 	this.size = new THREE.Vector2(100, 100);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-
-	//Image
 	this.keepAspectRatio = false;
 	this.imageScale = new THREE.Vector2(1,1);
 
@@ -116,13 +113,6 @@ ImageChooser.prototype.getValue = function()
 //Update Interface
 ImageChooser.prototype.updateInterface = function()
 {
-	//Fit parent element
-	if(this.fitParent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-
 	//Set visibility
 	if(this.visible)
 	{

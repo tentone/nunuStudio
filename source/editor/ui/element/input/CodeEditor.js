@@ -40,7 +40,7 @@ function CodeEditor(parent)
 	this.code.on("keydown", function(code, event)
 	{
 		var key = event.keyCode;
-		if(!Keyboard.keyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
+		if(!Editor.keyboard.keyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
 		{
 			if(!code.state.completionActive)
 			{

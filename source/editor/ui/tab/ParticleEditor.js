@@ -52,7 +52,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.cameraDistance = 5;
 	this.updateCamera();
 
-	//-----------------------------Particle parameters------------------------------
+	//Particle attributes form
 	this.form = new Form(this.main.divB);
 	this.form.defaultTextWidth = 80;
 	this.form.position.set(10, 8);

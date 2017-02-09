@@ -1,6 +1,6 @@
 {
 	"metadata": {
-		"version": "V0.8.9.18 Alpha",
+		"version": "V0.8.9.19 Alpha",
 		"type": "NunuProgram"
 	},
 	"geometries": [
@@ -433,7 +433,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": false,
-						"matrix": [0.009999999776482582,0,0,0,0,0.000007945664947328623,-0.009999996982514858,0,0,0.009999996982514858,0.000007945664947328623,0,-7.599999904632568,4.400000095367432,-5,1],
+						"matrix": [0.009999999776482582,0,0,0,0,0.000007945664947327797,-0.009999996982514858,0,0,0.009999996982514858,0.000007945664947327797,0,-7.599999904632568,4.400000095367432,-5,1],
 						"material": "98210C36-8EEC-4134-9852-2A7879193EF4",
 						"text": "0",
 						"font": "670F0F9E-5948-4408-9A88-4D53CC4A0124",
@@ -454,7 +454,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": false,
-						"matrix": [0.009999999776482582,0,0,0,0,0.000007945664947328623,-0.009999996982514858,0,0,0.009999996982514858,0.000007945664947328623,0,6.767843723297119,4.400000095367432,-5,1],
+						"matrix": [0.009999999776482582,0,0,0,0,0.000007945664947327797,-0.009999996982514858,0,0,0.009999996982514858,0.000007945664947327797,0,6.767843723297119,4.400000095367432,-5,1],
 						"material": "98210C36-8EEC-4134-9852-2A7879193EF4",
 						"text": "0",
 						"font": "670F0F9E-5948-4408-9A88-4D53CC4A0124",
@@ -469,7 +469,7 @@
 						"uuid": "4218D997-89B6-41C9-8013-A8DD5DC47437",
 						"type": "Script",
 						"name": "game",
-						"folded": true,
+						"folded": false,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -509,27 +509,13 @@
 								"uuid": "405E44DE-66C4-4168-BC19-6E90C51FC4A9",
 								"type": "PerspectiveCamera",
 								"name": "camera",
-								"folded": true,
+								"folded": false,
 								"hidden": false,
 								"castShadow": false,
 								"receiveShadow": false,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [1,0,0,0,0,0.0007934444001875818,-0.9999997019767761,0,0,0.9999997019767761,0.0007934444001875818,0,0,13.5,13.628532409667969,1],
-								"children": [
-									{
-										"uuid": "983B760D-7D82-47B5-B81B-5B506B019425",
-										"type": "Sprite",
-										"name": "logo",
-										"folded": false,
-										"hidden": false,
-										"castShadow": false,
-										"receiveShadow": false,
-										"visible": true,
-										"matrixAutoUpdate": true,
-										"matrix": [0.05999999865889549,0,0,0,0,0.009999999776482582,0,0,0,0,1,0,0.03999999910593033,-0.05000000074505806,-0.10000000149011612,1],
-										"material": "3433CC9B-95E9-43AA-B6A7-AC1BC67D2AFF"
-									}],
+								"matrix": [1,0,0,0,0,0.0007934444001876686,-0.9999997019767762,0,0,0.9999997019767762,0.0007934444001876686,0,0,13.5,13.628532409667969,1],
 								"fov": "60",
 								"zoom": 1,
 								"near": 0.05,
@@ -617,7 +603,7 @@
 									"fog": true
 								},
 								"emitter": {
-									"uuid": "9C7066ED-7CDF-4465-ABCE-376BD2D4FF00",
+									"uuid": "D4742083-A707-440D-8EDE-5FA5FF051F87",
 									"direction": 1,
 									"particleCount": 50,
 									"duration": null,
@@ -704,7 +690,7 @@
 									}
 								}
 							}],
-						"code": "//Game objects\nvar camera;\nvar p1, p2;\nvar p1_scoreText, p2_scoreText;\nvar p1_score, p2_score;\nvar ball, particle;\nvar ballSpeed, ballSpeedAbs;\nvar state, wasGoal;\n\n//Paddle size\nvar paddleOut = 1.25;\nvar paddleCenter = 0.5;\nvar paddleSpeed = 0.15;\nvar paddleLimit = 2.7;\n\n//Wall size\nvar sideWall = 3.9;\nvar backWall = 6.5;\nvar backWallHole = 2.1;\n\n//Sprite\nvar logo;\n\n//States\nvar STATE_MENU = 0;\nvar STATE_GAME = 1;\n\n//Function to reset ball\nvar reset = function()\n{\n\tball.position.set(0,0,0);\n\tballSpeed.set(0,0,0);\n\n\tsetTimeout(function()\n\t{\n\t\tballSpeed.set(Math.random() - 0.5, 0, 0);\n\t\tballSpeed.normalize();\n\t\tballSpeed.z = (Math.random() - 0.5);\n\t\tballSpeed.normalize();\n\t\tballSpeed.multiplyScalar(ballSpeedAbs);\n\t\t\n\t\tball.position.set(0,0,0);\n\t}, 2000);\n\t\n\twasGoal = false;\n\tballSpeedAbs = 0.1;\n};\n\n//Initialize code\nthis.initialize = function()\n{\n\tcamera = this.getObjectByName(\"camera\");\n\tp1 = this.getObjectByName(\"paddle1\");\n\tp1_scoreText = this.parent.getObjectByName(\"p1_score\");\n\tp2 = this.getObjectByName(\"paddle2\");\n\tp2_scoreText = this.parent.getObjectByName(\"p2_score\");\n\tball = this.getObjectByName(\"ball\");\n\tparticle = this.getObjectByName(\"particle\");\n\tlogo = this.getObjectByName(\"logo\");\n\t\n\t//Initialize global vars\n\tstate = STATE_MENU;\n\twasGoal = false;\n\n\t//Player score\n\tp1_score = 0;\n\tp2_score = 0;\n\n\t//Ball abs speed\n\tballSpeedAbs = 0.1;\n\n\t//Ball speed\n\tballSpeed = new Vector3(Math.random() - 0.5, 0, 0);\n\tballSpeed.normalize();\n\tballSpeed.z = (Math.random() - 0.5);\n\tballSpeed.normalize();\n\tballSpeed.multiplyScalar(ballSpeedAbs);\n};\n\n//Update game logic\nthis.update = function()\n{\n\tlogo.position.x = 0.04 * camera.aspect;\n\t\n\tif(state === STATE_MENU)\n\t{\n\t\tif(Keyboard.keyPressed(Keyboard.ENTER) || Mouse.buttonJustPressed(Mouse.LEFT))\n\t\t{\n\t\t\tstate = STATE_GAME;\n\t\t}\n\t}\n\telse if(state === STATE_GAME)\n\t{\n\t\t//Move camera to pong field\n\t\tif(camera.position.z > 0)\n\t\t{\n\t\t\tcamera.position.z -= 0.3;\n\t\t}\n\n\t\t//Paddle 1 Move (Left)\n\t\tif(Keyboard.keyPressed(Keyboard.W))\n\t\t{\n\t\t\tp1.position.z -= paddleSpeed;\n\t\t\tif(p1.position.z < -paddleLimit)\n\t\t\t{\n\t\t\t\tp1.position.z = -paddleLimit;\n\t\t\t}\n\t\t}\n\t\tif(Keyboard.keyPressed(Keyboard.S))\n\t\t{\n\t\t\tp1.position.z += paddleSpeed;\n\t\t\tif(p1.position.z > paddleLimit)\n\t\t\t{\n\t\t\t\tp1.position.z = paddleLimit;\n\t\t\t}\n\t\t}\n\n\t\t//Paddle 2 Move (Right)\n\t\tif(Keyboard.keyPressed(Keyboard.UP))\n\t\t{\n\t\t\tp2.position.z -= paddleSpeed;\n\t\t\tif(p2.position.z < -paddleLimit)\n\t\t\t{\n\t\t\t\tp2.position.z = -paddleLimit;\n\t\t\t}\n\t\t}\n\t\tif(Keyboard.keyPressed(Keyboard.DOWN))\n\t\t{\n\t\t\tp2.position.z += paddleSpeed;\n\t\t\tif(p2.position.z > paddleLimit)\n\t\t\t{\n\t\t\t\tp2.position.z = paddleLimit;\n\t\t\t}\n\t\t}\n\n\t\t//Check if a goal ocured if so dont update\n\t\tif(!wasGoal)\n\t\t{\n\t\t\t//Side wall collision\n\t\t\tif(ball.position.z > sideWall)\n\t\t\t{\n\t\t\t\tballSpeed.reflect(new Vector3(0,0,1));\n\t\t\t}\n\t\t\telse if(ball.position.z < -sideWall + 0.1)\n\t\t\t{\n\t\t\t\tballSpeed.reflect(new Vector3(0,0,-1));\n\t\t\t}\n\n\t\t\t//Back wall collision p2 side\n\t\t\tif(ball.position.x > backWall)\n\t\t\t{\n\t\t\t\tif(ball.position.z < -backWallHole || ball.position.z > backWallHole)\n\t\t\t\t{\n\t\t\t\t\tballSpeed.reflect(new Vector3(1,0,0));\n\t\t\t\t}\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\twasGoal = true;\n\t\t\t\t\tp2_score++;\n\t\t\t\t\tp2_scoreText.setText(p2_score);\n\n\t\t\t\t\tsetTimeout(reset, 1000);\n\n\t\t\t\t}\n\t\t\t}\n\t\t\t//Back wall collision p1 side\n\t\t\telse if(ball.position.x < -backWall)\n\t\t\t{\n\t\t\t\tif(ball.position.z < -backWallHole || ball.position.z > backWallHole)\n\t\t\t\t{\n\t\t\t\t\tballSpeed.reflect(new Vector3(-1,0,0));\n\t\t\t\t}\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\twasGoal = true;\n\t\t\t\t\tp1_score++;\n\t\t\t\t\tp1_scoreText.setText(p1_score);\n\n\t\t\t\t\tsetTimeout(reset, 1000);\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t//Paddle 1 collision\n\t\t\tif(ball.position.x < p1.position.x + 0.4)\n\t\t\t{\n\t\t\t\tif(ball.position.z < p1.position.z + paddleOut && ball.position.z > p1.position.z - paddleOut)\n\t\t\t\t{\t\n\t\t\t\t\tballSpeed.set(1, 0, (ball.position.z - p1.position.z) / paddleOut);\n\t\t\t\t\tballSpeedAbs += 0.004;\n\t\t\t\t\tballSpeed.normalize();\n\t\t\t\t\tballSpeed.multiplyScalar(ballSpeedAbs);\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t//Paddle 2 collision\n\t\t\tif(ball.position.x > p2.position.x - 0.4)\n\t\t\t{\n\t\t\t\tif((ball.position.z < p2.position.z + paddleOut) && (ball.position.z > p2.position.z - paddleOut))\n\t\t\t\t{\t\n\t\t\t\t\tballSpeed.set(-1, 0, (ball.position.z - p2.position.z) / paddleOut);\n\t\t\t\t\tballSpeedAbs += 0.004;\n\t\t\t\t\tballSpeed.normalize();\n\t\t\t\t\tballSpeed.multiplyScalar(ballSpeedAbs);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t//Update ball position\n\t\tball.position.add(ballSpeed);\n\t}\n\n\t//Set particle position\n\tparticle.emitter.position.value = particle.emitter.position.value.set(ball.position.x, 0, ball.position.z);\n};\n\n"
+						"code": "//Game objects\nvar camera;\nvar p1, p2;\nvar p1_scoreText, p2_scoreText;\nvar p1_score, p2_score;\nvar ball, particle;\nvar ballSpeed, ballSpeedAbs;\nvar state, wasGoal;\n\n//Paddle size\nvar paddleOut = 1.25;\nvar paddleCenter = 0.5;\nvar paddleSpeed = 0.15;\nvar paddleLimit = 2.7;\n\n//Wall size\nvar sideWall = 3.9;\nvar backWall = 6.5;\nvar backWallHole = 2.1;\n\n//Sprite\nvar logo;\n\n//States\nvar STATE_MENU = 0;\nvar STATE_GAME = 1;\n\n//Function to reset ball\nvar reset = function()\n{\n\tball.position.set(0,0,0);\n\tballSpeed.set(0,0,0);\n\n\tsetTimeout(function()\n\t{\n\t\tballSpeed.set(Math.random() - 0.5, 0, 0);\n\t\tballSpeed.normalize();\n\t\tballSpeed.z = (Math.random() - 0.5);\n\t\tballSpeed.normalize();\n\t\tballSpeed.multiplyScalar(ballSpeedAbs);\n\t\t\n\t\tball.position.set(0,0,0);\n\t}, 2000);\n\t\n\twasGoal = false;\n\tballSpeedAbs = 0.1;\n};\n\n//Initialize code\nthis.initialize = function()\n{\n\tcamera = this.getObjectByName(\"camera\");\n\tp1 = this.getObjectByName(\"paddle1\");\n\tp1_scoreText = this.parent.getObjectByName(\"p1_score\");\n\tp2 = this.getObjectByName(\"paddle2\");\n\tp2_scoreText = this.parent.getObjectByName(\"p2_score\");\n\tball = this.getObjectByName(\"ball\");\n\tparticle = this.getObjectByName(\"particle\");\n\n\t//Initialize global vars\n\tstate = STATE_MENU;\n\twasGoal = false;\n\n\t//Player score\n\tp1_score = 0;\n\tp2_score = 0;\n\n\t//Ball abs speed\n\tballSpeedAbs = 0.1;\n\n\t//Ball speed\n\tballSpeed = new Vector3(Math.random() - 0.5, 0, 0);\n\tballSpeed.normalize();\n\tballSpeed.z = (Math.random() - 0.5);\n\tballSpeed.normalize();\n\tballSpeed.multiplyScalar(ballSpeedAbs);\n};\n\n//Update game logic\nthis.update = function()\n{\n\n\tif(state === STATE_MENU)\n\t{\n\t\tif(Keyboard.keyPressed(Keyboard.ENTER) || Mouse.buttonJustPressed(Mouse.LEFT))\n\t\t{\n\t\t\tstate = STATE_GAME;\n\t\t}\n\t}\n\telse if(state === STATE_GAME)\n\t{\n\t\t//Move camera to pong field\n\t\tif(camera.position.z > 0)\n\t\t{\n\t\t\tcamera.position.z -= 0.3;\n\t\t}\n\n\t\t//Paddle 1 Move (Left)\n\t\tif(Keyboard.keyPressed(Keyboard.W))\n\t\t{\n\t\t\tp1.position.z -= paddleSpeed;\n\t\t\tif(p1.position.z < -paddleLimit)\n\t\t\t{\n\t\t\t\tp1.position.z = -paddleLimit;\n\t\t\t}\n\t\t}\n\t\tif(Keyboard.keyPressed(Keyboard.S))\n\t\t{\n\t\t\tp1.position.z += paddleSpeed;\n\t\t\tif(p1.position.z > paddleLimit)\n\t\t\t{\n\t\t\t\tp1.position.z = paddleLimit;\n\t\t\t}\n\t\t}\n\n\t\t//Paddle 2 Move (Right)\n\t\tif(Keyboard.keyPressed(Keyboard.UP))\n\t\t{\n\t\t\tp2.position.z -= paddleSpeed;\n\t\t\tif(p2.position.z < -paddleLimit)\n\t\t\t{\n\t\t\t\tp2.position.z = -paddleLimit;\n\t\t\t}\n\t\t}\n\t\tif(Keyboard.keyPressed(Keyboard.DOWN))\n\t\t{\n\t\t\tp2.position.z += paddleSpeed;\n\t\t\tif(p2.position.z > paddleLimit)\n\t\t\t{\n\t\t\t\tp2.position.z = paddleLimit;\n\t\t\t}\n\t\t}\n\n\t\t//Check if a goal ocured if so dont update\n\t\tif(!wasGoal)\n\t\t{\n\t\t\t//Side wall collision\n\t\t\tif(ball.position.z > sideWall)\n\t\t\t{\n\t\t\t\tballSpeed.reflect(new Vector3(0,0,1));\n\t\t\t}\n\t\t\telse if(ball.position.z < -sideWall + 0.1)\n\t\t\t{\n\t\t\t\tballSpeed.reflect(new Vector3(0,0,-1));\n\t\t\t}\n\n\t\t\t//Back wall collision p2 side\n\t\t\tif(ball.position.x > backWall)\n\t\t\t{\n\t\t\t\tif(ball.position.z < -backWallHole || ball.position.z > backWallHole)\n\t\t\t\t{\n\t\t\t\t\tballSpeed.reflect(new Vector3(1,0,0));\n\t\t\t\t}\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\twasGoal = true;\n\t\t\t\t\tp2_score++;\n\t\t\t\t\tp2_scoreText.setText(p2_score);\n\n\t\t\t\t\tsetTimeout(reset, 1000);\n\n\t\t\t\t}\n\t\t\t}\n\t\t\t//Back wall collision p1 side\n\t\t\telse if(ball.position.x < -backWall)\n\t\t\t{\n\t\t\t\tif(ball.position.z < -backWallHole || ball.position.z > backWallHole)\n\t\t\t\t{\n\t\t\t\t\tballSpeed.reflect(new Vector3(-1,0,0));\n\t\t\t\t}\n\t\t\t\telse\n\t\t\t\t{\n\t\t\t\t\twasGoal = true;\n\t\t\t\t\tp1_score++;\n\t\t\t\t\tp1_scoreText.setText(p1_score);\n\n\t\t\t\t\tsetTimeout(reset, 1000);\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t//Paddle 1 collision\n\t\t\tif(ball.position.x < p1.position.x + 0.4)\n\t\t\t{\n\t\t\t\tif(ball.position.z < p1.position.z + paddleOut && ball.position.z > p1.position.z - paddleOut)\n\t\t\t\t{\t\n\t\t\t\t\tballSpeed.set(1, 0, (ball.position.z - p1.position.z) / paddleOut);\n\t\t\t\t\tballSpeedAbs += 0.004;\n\t\t\t\t\tballSpeed.normalize();\n\t\t\t\t\tballSpeed.multiplyScalar(ballSpeedAbs);\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t//Paddle 2 collision\n\t\t\tif(ball.position.x > p2.position.x - 0.4)\n\t\t\t{\n\t\t\t\tif((ball.position.z < p2.position.z + paddleOut) && (ball.position.z > p2.position.z - paddleOut))\n\t\t\t\t{\t\n\t\t\t\t\tballSpeed.set(-1, 0, (ball.position.z - p2.position.z) / paddleOut);\n\t\t\t\t\tballSpeedAbs += 0.004;\n\t\t\t\t\tballSpeed.normalize();\n\t\t\t\t\tballSpeed.multiplyScalar(ballSpeedAbs);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t//Update ball position\n\t\tball.position.add(ballSpeed);\n\t}\n\n\t//Set particle position\n\tparticle.emitter.position.value = particle.emitter.position.value.set(ball.position.x, 0, ball.position.z);\n};\n\n"
 					},
 					{
 						"uuid": "2DBB813F-0450-4667-9375-0CE1CED1CE61",
