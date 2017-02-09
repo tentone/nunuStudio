@@ -39,7 +39,7 @@ function ScriptEditor(parent, closeable, container, index)
 	this.code.on("keydown", function(code, event)
 	{
 		var key = event.keyCode;
-		if(!Keyboard.keyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
+		if(!Editor.keyboard.keyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
 		{
 			if(!code.state.completionActive)
 			{
@@ -214,7 +214,7 @@ ScriptEditor.prototype.setMode = function(mode)
 //Update ScriptEditor
 ScriptEditor.prototype.update = function()
 {
-	if(Keyboard.keyPressed(Keyboard.CTRL))
+	if(Editor.keyboard.keyPressed(Keyboard.CTRL))
 	{
 		if(Editor.mouse.wheel !== 0)
 		{

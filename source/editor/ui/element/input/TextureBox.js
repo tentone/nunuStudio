@@ -127,11 +127,10 @@ function TextureBox(parent)
 	this.form.add(this.repeat);
 	this.form.updateInterface();
 
-	//On change function
+	//onChange function
 	this.onchange = null;
 
-	//Element atributes
-	this.fitParent = false;
+	//Attributes
 	this.size = new THREE.Vector2(300, 100);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -272,12 +271,6 @@ TextureBox.prototype.updatePreview = function()
 //Update Interface
 TextureBox.prototype.updateInterface = function()
 {
-	if(this.fitParent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-
 	//Visibility
 	if(this.visible)
 	{
@@ -302,13 +295,13 @@ TextureBox.prototype.updateInterface = function()
 	this.alpha.width = this.size.y;
 	this.alpha.height = this.size.y;
 
-	//Auxiliar form
+	//Form
 	this.form.position.set(this.size.y + 5, 0);
 	this.form.size.set(this.size.x - this.form.position.x, this.size.y)
 	this.form.visible = this.visible;
 	this.form.updateInterface();
 
-	//Base element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
