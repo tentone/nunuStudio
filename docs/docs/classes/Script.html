@@ -49,6 +49,8 @@
                                 <li><a href="../classes/LeapMotion.html">LeapMotion</a></li>
                                 <li><a href="../classes/Mesh.html">Mesh</a></li>
                                 <li><a href="../classes/Mouse.html">Mouse</a></li>
+                                <li><a href="../classes/Nunu.html">Nunu</a></li>
+                                <li><a href="../classes/NunuApp.html">NunuApp</a></li>
                                 <li><a href="../classes/Object3D.html">Object3D</a></li>
                                 <li><a href="../classes/OrthographicCamera.html">OrthographicCamera</a></li>
                                 <li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
@@ -58,11 +60,13 @@
                                 <li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
                                 <li><a href="../classes/Program.html">Program</a></li>
                                 <li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+                                <li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
                                 <li><a href="../classes/Scene.html">Scene</a></li>
                                 <li><a href="../classes/Script.html">Script</a></li>
                                 <li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
                                 <li><a href="../classes/Sky.html">Sky</a></li>
                                 <li><a href="../classes/SpineAnimation.html">SpineAnimation</a></li>
+                                <li><a href="../classes/SpineTexture.html">SpineTexture</a></li>
                                 <li><a href="../classes/SpotLight.html">SpotLight</a></li>
                                 <li><a href="../classes/Sprite.html">Sprite</a></li>
                                 <li><a href="../classes/Text3D.html">Text3D</a></li>
@@ -81,8 +85,11 @@
                                 <li><a href="../modules/Misc.html">Misc</a></li>
                                 <li><a href="../modules/Particles.html">Particles</a></li>
                                 <li><a href="../modules/Physics.html">Physics</a></li>
+                                <li><a href="../modules/Resources.html">Resources</a></li>
+                                <li><a href="../modules/Runtime.html">Runtime</a></li>
                                 <li><a href="../modules/Script.html">Script</a></li>
                                 <li><a href="../modules/Sprite.html">Sprite</a></li>
+                                <li><a href="../modules/Textures.html">Textures</a></li>
                                 <li><a href="../modules/ThreeJS.html">ThreeJS</a></li>
                             </ul>
                         </div>
@@ -181,6 +188,7 @@ It can access and change every object in the program and supports some events</p
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
     </ul>
 
@@ -215,22 +223,31 @@ It can access and change every object in the program and supports some events</p
                     </ul>
                 </div>
 
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                            <li class="index-item property">
+                                <a href="#property_code">code</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_program">program</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_scene">scene</a>
+
+                            </li>
+                    </ul>
+                </div>
 
                 <div class="index-section attrs">
                     <h3>Attributes</h3>
 
                     <ul class="index-list attrs extends">
                             <li class="index-item attr">
-                                <a href="#attr_code">code</a>
-                            </li>
-                            <li class="index-item attr">
                                 <a href="#attr_default">default</a>
-                            </li>
-                            <li class="index-item attr">
-                                <a href="#attr_program">program</a>
-                            </li>
-                            <li class="index-item attr">
-                                <a href="#attr_scene">scene</a>
                             </li>
                             <li class="index-item attr">
                                 <a href="#attr_script">script</a>
@@ -437,37 +454,84 @@ Calls the script update method if it exists</p>
 </div>
             </div>
 
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+<div id="property_code" class="property item">
+    <h3 class="name"><code>code</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Javascript code attached to the script</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_program" class="property item">
+    <h3 class="name"><code>program</code></h3>
+    <span class="type"><a href="../classes/Program.html" class="crosslink">Program</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Pointer to the parent program
+Used access program resources easier</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_scene" class="property item">
+    <h3 class="name"><code>scene</code></h3>
+    <span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Pointer to the parent scene</p>
+
+    </div>
+
+
+
+</div>
+            </div>
 
             <div id="attrs" class="api-class-tabpanel">
                 <h2 class="off-left">Attributes</h2>
 
-                    <div id="attr_code" class="attr item">
-                        <a name="config_code"></a> 
-                        <h3 class="name"><code>code</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Javascript code attached to the script</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="attr_default" class="attr item">
                         <a name="config_default"></a> 
                         <h3 class="name"><code>default</code></h3>
@@ -489,61 +553,6 @@ Calls the script update method if it exists</p>
                     
                         <div class="description">
                             <p>Default script code used when creating a new Script</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="attr_program" class="attr item">
-                        <a name="config_program"></a> 
-                        <h3 class="name"><code>program</code></h3>
-                        <span class="type"><a href="../classes/Program.html" class="crosslink">Program</a></span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Pointer to the parent program
-                    Used access program resources easier</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="attr_scene" class="attr item">
-                        <a name="config_scene"></a> 
-                        <h3 class="name"><code>scene</code></h3>
-                        <span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a></span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Pointer to the parent scene</p>
                     
                         </div>
                     

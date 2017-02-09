@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>PositionalAudio</title>
+    <title>NunuApp</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -124,33 +124,30 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>PositionalAudio Class</h1>
+<h1>NunuApp Class</h1>
 <div class="box meta">
 
-        <div class="extends">
-            Extends THREE.PositionalAudio
-        </div>
 
 
-            Module: <a href="../modules/Audio.html">Audio</a>
+            Module: <a href="../modules/Runtime.html">Runtime</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>PositionalAudio is used to play audio with positional audio effect</p>
+    <p>NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_PositionalAudio" class="method item">
-    <h3 class="name"><code>PositionalAudio</code></h3>
+<div id="method_NunuApp" class="method item">
+    <h3 class="name"><code>NunuApp</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>audio</code>
+                        <code>canvas</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -179,12 +176,12 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">audio</code>
-                        <span class="type">Audio</span>
+                        <code class="param-name">canvas</code>
+                        <span class="type">DOM</span>
 
 
                     <div class="param-description">
-                        <p>Audio used by this emitter</p>
+                        <p>Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body</p>
 
                     </div>
 
@@ -212,53 +209,49 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods extends">
+                    <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_dispose">dispose</a>
+                                <a href="#method_exit">exit</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_initialize">initialize</a>
+                                <a href="#method_loadProgram">loadProgram</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_pause">pause</a>
+                                <a href="#method_loadRunProgram">loadRunProgram</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_pause">pause</a>
+                                <a href="#method_resize">resize</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_play">play</a>
+                                <a href="#method_run">run</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_setFilter">setFilter</a>
+                                <a href="#method_sendData">sendData</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_setFilters">setFilters</a>
+                                <a href="#method_setOnDataReceived">setOnDataReceived</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_setLoop">setLoop</a>
+                                <a href="#method_setOnExit">setOnExit</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_setPlaybackRate">setPlaybackRate</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setVolume">setVolume</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_toJSON">toJSON</a>
+                                <a href="#method_toggleVR">toggleVR</a>
 
                             </li>
                             <li class="index-item method">
                                 <a href="#method_update">update</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_vrAvailable">vrAvailable</a>
 
                             </li>
                     </ul>
@@ -267,21 +260,29 @@
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties extends">
+                    <ul class="index-list properties">
                             <li class="index-item property">
-                                <a href="#property_autoplay">autoplay</a>
+                                <a href="#property_canvas">canvas</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_loop">loop</a>
+                                <a href="#property_canvasResize">canvasResize</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_startTime">startTime</a>
+                                <a href="#property_fullscreen">fullscreen</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_valume">valume</a>
+                                <a href="#property_program">program</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_renderer">renderer</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_vr">vr</a>
 
                             </li>
                     </ul>
@@ -293,8 +294,8 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_dispose" class="method item">
-    <h3 class="name"><code>dispose</code></h3>
+<div id="method_exit" class="method item">
+    <h3 class="name"><code>exit</code></h3>
 
         <span class="paren">()</span>
 
@@ -314,7 +315,10 @@
     </div>
 
     <div class="description">
-        <p>Dispose audio object</p>
+        <p>Exit from app
+This method kills the app and disposes all internal elements to avoid memory leaks
+Is should be called before exiting the webpage or before switching nunu programs
+When loading new nunu programs the same NunuApp instance can be used</p>
 
     </div>
 
@@ -322,129 +326,13 @@
 
 
 </div>
-<div id="method_initialize" class="method item">
-    <h3 class="name"><code>initialize</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Initialize audio object (called by the runtime)</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_pause" class="method item">
-    <h3 class="name"><code>pause</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Pauses playback</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_pause" class="method item">
-    <h3 class="name"><code>pause</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Stops playback and resets time to 0</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_play" class="method item">
-    <h3 class="name"><code>play</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Starts playback</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_setFilter" class="method item">
-    <h3 class="name"><code>setFilter</code></h3>
+<div id="method_loadProgram" class="method item">
+    <h3 class="name"><code>loadProgram</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>filter</code>
+                        <code>fname</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -465,7 +353,7 @@
     </div>
 
     <div class="description">
-        <p>Add the filter to the filters array.</p>
+        <p>Load program from file</p>
 
     </div>
 
@@ -474,12 +362,206 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">filter</code>
+                        <code class="param-name">fname</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Name of the file to load</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_loadRunProgram" class="method item">
+    <h3 class="name"><code>loadRunProgram</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>fname</code>
+                </li>
+                <li class="arg">
+                        <code>onLoad</code>
+                </li>
+                <li class="arg">
+                        <code>onProgress</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Load program asynchronously and run it after its loaded</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">fname</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Name of the file to load</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">onLoad</code>
+                        <span class="type">Function</span>
+
+
+                    <div class="param-description">
+                        <p>onLoad callback</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">onProgress</code>
+                        <span class="type">Function</span>
+
+
+                    <div class="param-description">
+                        <p>onProgress callback</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_resize" class="method item">
+    <h3 class="name"><code>resize</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Resize the window
+Should be called whenether the host window is resized</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_run" class="method item">
+    <h3 class="name"><code>run</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Start running nunu program
+A nunu program must be loaded before calling this method</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_sendData" class="method item">
+    <h3 class="name"><code>sendData</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>data</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Send data to running nunu application
+The data sent using this method is received by scripts that implement the onAppData method</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">data</code>
                         <span class="type">Object</span>
 
 
                     <div class="param-description">
-                         
+                        <p>Data to send</p>
+
                     </div>
 
                 </li>
@@ -489,13 +571,13 @@
 
 
 </div>
-<div id="method_setFilters" class="method item">
-    <h3 class="name"><code>setFilters</code></h3>
+<div id="method_setOnDataReceived" class="method item">
+    <h3 class="name"><code>setOnDataReceived</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>value</code>
+                        <code>callback</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -516,7 +598,8 @@
     </div>
 
     <div class="description">
-        <p>Set the filters array to value.</p>
+        <p>Set on data receive callback
+Callback receives data as an argument</p>
 
     </div>
 
@@ -525,12 +608,13 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">value</code>
-                        <span class="type">Array</span>
+                        <code class="param-name">callback</code>
+                        <span class="type">Function</span>
 
 
                     <div class="param-description">
-                         
+                        <p>Function executed whenether the nunu app running sends data to the host</p>
+
                     </div>
 
                 </li>
@@ -540,13 +624,13 @@
 
 
 </div>
-<div id="method_setLoop" class="method item">
-    <h3 class="name"><code>setLoop</code></h3>
+<div id="method_setOnExit" class="method item">
+    <h3 class="name"><code>setOnExit</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>loop</code>
+                        <code>callback</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -567,7 +651,8 @@
     </div>
 
     <div class="description">
-        <p>Set loop mode</p>
+        <p>Set on exit callback
+Callback is executed when exiting the nunu app</p>
 
     </div>
 
@@ -576,12 +661,13 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">loop</code>
-                        <span class="type">Boolean</span>
+                        <code class="param-name">callback</code>
+                        <span class="type">Function</span>
 
 
                     <div class="param-description">
-                         
+                        <p>onExit callback</p>
+
                     </div>
 
                 </li>
@@ -591,16 +677,10 @@
 
 
 </div>
-<div id="method_setPlaybackRate" class="method item">
-    <h3 class="name"><code>setPlaybackRate</code></h3>
+<div id="method_toggleVR" class="method item">
+    <h3 class="name"><code>toggleVR</code></h3>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>speed</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
 
 
 
@@ -618,154 +698,11 @@
     </div>
 
     <div class="description">
-        <p>Set playback speed</p>
+        <p>Toggle VR mode, only works if VR mode is available</p>
 
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">speed</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_setVolume" class="method item">
-    <h3 class="name"><code>setVolume</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>value</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/PositionalAudio.html" class="crosslink">PositionalAudio</a></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Change audio emitter volume</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">value</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>Audio volume</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="../classes/PositionalAudio.html" class="crosslink">PositionalAudio</a></span>:
-                    <p>Self pointer for chaining</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_toJSON" class="method item">
-    <h3 class="name"><code>toJSON</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>meta</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Create JSON description</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">meta</code>
-                        <span class="type">Object</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Object</span>:
-                    <p>JSON descrition</p>
-
-            </div>
-        </div>
 
 
 </div>
@@ -790,11 +727,53 @@
     </div>
 
     <div class="description">
-        <p>Update positional audio state</p>
+        <p>Update nunu program state
+Automatically called by the runtime handler</p>
 
     </div>
 
 
+
+
+</div>
+<div id="method_vrAvailable" class="method item">
+    <h3 class="name"><code>vrAvailable</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Check if VR mode is available</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Boolean</span>:
+                    <p>True if VR mode available</p>
+
+            </div>
+        </div>
 
 
 </div>
@@ -803,8 +782,31 @@
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-<div id="property_autoplay" class="property item">
-    <h3 class="name"><code>autoplay</code></h3>
+<div id="property_canvas" class="property item">
+    <h3 class="name"><code>canvas</code></h3>
+    <span class="type">DOM</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Canvas used to render graphics</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_canvasResize" class="property item">
+    <h3 class="name"><code>canvasResize</code></h3>
     <span class="type">Boolean</span>
 
 
@@ -819,16 +821,17 @@
     </div>
 
     <div class="description">
-        <p>If true the playback starts automatically</p>
+        <p>Flag used to controll if the canvas element is resized automatically by the nunu app instance
+If true the canvas is resized whenether the resize method is called</p>
 
     </div>
 
-        <p><strong>Default:</strong> true</p>
+        <p><strong>Default:</strong> false if a canvas is provided, else true</p>
 
 
 </div>
-<div id="property_loop" class="property item">
-    <h3 class="name"><code>loop</code></h3>
+<div id="property_fullscreen" class="property item">
+    <h3 class="name"><code>fullscreen</code></h3>
     <span class="type">Boolean</span>
 
 
@@ -843,17 +846,17 @@
     </div>
 
     <div class="description">
-        <p>If true the audio plays in loop</p>
+        <p>Fullscreen flag, to set fulscreen mode the setFullScreen method should be used</p>
 
     </div>
 
-        <p><strong>Default:</strong> true</p>
+        <p><strong>Default:</strong> false</p>
 
 
 </div>
-<div id="property_startTime" class="property item">
-    <h3 class="name"><code>startTime</code></h3>
-    <span class="type">Number</span>
+<div id="property_program" class="property item">
+    <h3 class="name"><code>program</code></h3>
+    <span class="type"><a href="../classes/Program.html" class="crosslink">Program</a></span>
 
 
 
@@ -867,17 +870,16 @@
     </div>
 
     <div class="description">
-        <p>Start time in seconds</p>
+        <p>Nunu Program</p>
 
     </div>
 
-        <p><strong>Default:</strong> 0.0</p>
 
 
 </div>
-<div id="property_valume" class="property item">
-    <h3 class="name"><code>valume</code></h3>
-    <span class="type">Number</span>
+<div id="property_renderer" class="property item">
+    <h3 class="name"><code>renderer</code></h3>
+    <span class="type">THREE.Renderer</span>
 
 
 
@@ -891,11 +893,34 @@
     </div>
 
     <div class="description">
-        <p>Audio volume</p>
+        <p>Graphics renderer in use by this NunuApp instance</p>
 
     </div>
 
-        <p><strong>Default:</strong> 1.0</p>
+
+
+</div>
+<div id="property_vr" class="property item">
+    <h3 class="name"><code>vr</code></h3>
+    <span class="type">Boolean</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>VR flag, to set VR mode the toggleVR method should be used</p>
+
+    </div>
+
+        <p><strong>Default:</strong> false</p>
 
 
 </div>

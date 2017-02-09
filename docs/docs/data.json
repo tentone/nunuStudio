@@ -239,6 +239,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\objects\\spine\\SpineTexture.js": {
+            "name": "..\\source\\core\\objects\\spine\\SpineTexture.js",
+            "modules": {
+                "Textures": 1
+            },
+            "classes": {
+                "SpineTexture": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\objects\\sprite\\Sprite.js": {
             "name": "..\\source\\core\\objects\\sprite\\Sprite.js",
             "modules": {
@@ -270,6 +281,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\resources\\ResourceManager.js": {
+            "name": "..\\source\\core\\resources\\ResourceManager.js",
+            "modules": {
+                "Resources": 1
+            },
+            "classes": {
+                "ResourceManager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\three\\Object3D.js": {
             "name": "..\\source\\core\\three\\Object3D.js",
             "modules": {
@@ -277,6 +299,26 @@
             },
             "classes": {
                 "Object3D": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\runtime\\NunuApp.js": {
+            "name": "..\\source\\runtime\\NunuApp.js",
+            "modules": {
+                "Runtime": 1
+            },
+            "classes": {
+                "NunuApp": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\Nunu.js": {
+            "name": "..\\source\\Nunu.js",
+            "modules": {},
+            "classes": {
+                "Nunu": 1
             },
             "fors": {},
             "namespaces": {}
@@ -450,6 +492,20 @@
             "line": 3,
             "description": "Spine animation object, to used with animation produced inside Esoteric spine\nBased on the official threejs runtime\nMore information abou spine available here www.esotericsoftware.com"
         },
+        "Textures": {
+            "name": "Textures",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "SpineTexture": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\objects\\spine\\SpineTexture.js",
+            "line": 3,
+            "description": "Spine animation textures\nBased on SpineTexture from original spine runtime for three.js"
+        },
         "Sprite": {
             "name": "Sprite",
             "submodules": {},
@@ -479,6 +535,20 @@
             "line": 3,
             "description": "Program class contains all the data of an nunuStudio program"
         },
+        "Resources": {
+            "name": "Resources",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "ResourceManager": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 3,
+            "description": "Resource manager is used to manage available resources used by objects\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\nThe manager is used to manage the following types of resources\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries"
+        },
         "ThreeJS": {
             "name": "ThreeJS",
             "submodules": {},
@@ -492,6 +562,21 @@
             "file": "..\\source\\core\\three\\Object3D.js",
             "line": 3,
             "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at www.threejs.org.\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.\nCode examples provided for three.js should also work inside nunuStudio."
+        },
+        "Runtime": {
+            "name": "Runtime",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "NunuApp": 1,
+                "Nunu": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\Nunu.js",
+            "line": 12,
+            "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere"
         }
     },
     "classes": {
@@ -1166,6 +1251,28 @@
                 }
             ]
         },
+        "SpineTexture": {
+            "name": "SpineTexture",
+            "shortname": "SpineTexture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\source\\core\\objects\\spine\\SpineTexture.js",
+            "line": 3,
+            "description": "Spine animation textures\nBased on SpineTexture from original spine runtime for three.js",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "texture",
+                    "description": "",
+                    "type": "Texture"
+                }
+            ]
+        },
         "Sprite": {
             "name": "Sprite",
             "shortname": "Sprite",
@@ -1210,7 +1317,7 @@
                     "type": "String"
                 }
             ],
-            "extends": "{THREE.Object3D}"
+            "extends": "{ResourceManager}"
         },
         "Scene": {
             "name": "Scene",
@@ -1228,6 +1335,21 @@
             "is_constructor": 1,
             "extends": "{THREE.Object3D}"
         },
+        "ResourceManager": {
+            "name": "ResourceManager",
+            "shortname": "ResourceManager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 3,
+            "description": "Resource manager is used to manage available resources used by objects\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\nThe manager is used to manage the following types of resources\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries",
+            "is_constructor": 1
+        },
         "Object3D": {
             "name": "Object3D",
             "shortname": "Object3D",
@@ -1242,6 +1364,42 @@
             "line": 3,
             "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at www.threejs.org.\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.\nCode examples provided for three.js should also work inside nunuStudio.",
             "is_constructor": 1
+        },
+        "NunuApp": {
+            "name": "NunuApp",
+            "shortname": "NunuApp",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Runtime",
+            "namespace": "",
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 90,
+            "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "canvas",
+                    "description": "Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body",
+                    "type": "DOM"
+                }
+            ]
+        },
+        "Nunu": {
+            "name": "Nunu",
+            "shortname": "Nunu",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Runtime",
+            "namespace": "",
+            "file": "..\\source\\Nunu.js",
+            "line": 12,
+            "description": "Class used to store nunu version and timstamp used for development"
         }
     },
     "elements": {},
@@ -4125,7 +4283,7 @@
             "file": "..\\source\\core\\objects\\script\\Script.js",
             "line": 28,
             "description": "Javascript code attached to the script",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "code",
             "type": "{String}",
             "class": "Script",
@@ -4145,7 +4303,7 @@
             "file": "..\\source\\core\\objects\\script\\Script.js",
             "line": 38,
             "description": "Pointer to the parent program\nUsed access program resources easier",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "program",
             "type": "{Program}",
             "class": "Script",
@@ -4155,7 +4313,7 @@
             "file": "..\\source\\core\\objects\\script\\Script.js",
             "line": 44,
             "description": "Pointer to the parent scene",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "scene",
             "type": "{Scene}",
             "class": "Script",
@@ -4250,7 +4408,37 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 93,
+            "line": 17,
+            "description": "Array of SpineTextures used by the animation",
+            "itemtype": "property",
+            "name": "textures",
+            "type": "{Array}",
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 23,
+            "description": "Animation data",
+            "itemtype": "property",
+            "name": "json",
+            "type": "{Object}",
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 29,
+            "description": "Texture atlas information",
+            "itemtype": "property",
+            "name": "atlas",
+            "type": "{Object}",
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 111,
             "description": "Update animation state\nAutomatically called by the rutime",
             "itemtype": "method",
             "name": "update",
@@ -4259,7 +4447,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 113,
+            "line": 131,
             "description": "Get all available animations",
             "itemtype": "method",
             "name": "getAnimations",
@@ -4272,7 +4460,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 123,
+            "line": 141,
             "description": "Set animation from track number and name",
             "itemtype": "method",
             "name": "setAnimation",
@@ -4293,7 +4481,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 138,
+            "line": 156,
             "description": "Get skins in this animation",
             "return": {
                 "description": "[description]",
@@ -4304,7 +4492,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 147,
+            "line": 165,
             "description": "Update mesh geometry from animation state",
             "itemtype": "method",
             "name": "updateGeometry",
@@ -4313,7 +4501,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 206,
+            "line": 224,
             "description": "Create JSON for script",
             "params": [
                 {
@@ -4350,9 +4538,9 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 12,
+            "line": 13,
             "description": "NunuRuntime instance used to communication between nunu app and the host webpage",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "app",
             "default": "null",
             "class": "Program",
@@ -4360,9 +4548,9 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 17,
+            "line": 18,
             "description": "Enable virtual reality flag",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "vr",
             "default": "false",
             "type": "{boolean}",
@@ -4371,9 +4559,9 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 23,
+            "line": 24,
             "description": "Virtual reality movement scale",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "vrScale",
             "type": "{Number}",
             "default": "1.0",
@@ -4382,9 +4570,9 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 29,
+            "line": 30,
             "description": "Program description",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "description",
             "type": "{String}",
             "class": "Program",
@@ -4392,9 +4580,9 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 34,
+            "line": 35,
             "description": "Program author",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "author",
             "type": "{String}",
             "class": "Program",
@@ -4402,9 +4590,9 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 39,
+            "line": 40,
             "description": "Program version",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "version",
             "type": "{String}",
             "default": "\"0\"",
@@ -4413,9 +4601,9 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 45,
+            "line": 46,
             "description": "Antialiasing flag",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "antialiasing",
             "type": "{boolean}",
             "default": "false",
@@ -4424,9 +4612,9 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 51,
+            "line": 52,
             "description": "If true the program is rendered with shadows",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "shadows",
             "type": "{boolean}",
             "default": "true",
@@ -4435,14 +4623,332 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 57,
+            "line": 58,
             "description": "Shadow type",
-            "itemtype": "attribute",
+            "itemtype": "property",
             "name": "shadowsType",
             "type": "{Number}",
             "default": "PCFSoftShadowMap",
             "class": "Program",
             "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\objects\\Program.js",
+            "line": 64,
+            "description": "Flag to control pointer locking",
+            "itemtype": "property",
+            "name": "lockPointer",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 20,
+            "description": "Images",
+            "itemtype": "property",
+            "name": "images",
+            "type": "{Array}",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 25,
+            "description": "Videos",
+            "itemtype": "property",
+            "name": "videos",
+            "type": "{Array}",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 30,
+            "description": "Audio",
+            "itemtype": "property",
+            "name": "audio",
+            "type": "{Array}",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 35,
+            "description": "Fonts",
+            "itemtype": "property",
+            "name": "fonts",
+            "type": "{Array}",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 40,
+            "description": "Materials",
+            "itemtype": "property",
+            "name": "materials",
+            "type": "{Array}",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 45,
+            "description": "Textures",
+            "itemtype": "property",
+            "name": "textures",
+            "type": "{Array}",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 50,
+            "description": "Geomtries",
+            "itemtype": "property",
+            "name": "geometries",
+            "type": "{Array}",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 67,
+            "description": "Get material by its name",
+            "itemtype": "method",
+            "name": "getMaterialByName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Material name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Material if found else null",
+                "type": "Material"
+            },
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 86,
+            "description": "Add material to materials list",
+            "itemtype": "method",
+            "name": "addMaterial",
+            "params": [
+                {
+                    "name": "material",
+                    "description": "Material to be added",
+                    "type": "Material"
+                }
+            ],
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 99,
+            "description": "Remove material from materials list, also receives default material used to replace",
+            "itemtype": "method",
+            "name": "removeMaterial",
+            "params": [
+                {
+                    "name": "material",
+                    "description": "Material to be removed from manager",
+                    "type": "Material"
+                },
+                {
+                    "name": "defaultMaterial",
+                    "description": "Default mesh material to replace objects mesh materials",
+                    "type": "Material"
+                },
+                {
+                    "name": "defaultMaterialSprite",
+                    "description": "Defaul sprite material",
+                    "type": "Material"
+                }
+            ],
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 139,
+            "description": "Get texture by name",
+            "itemtype": "method",
+            "name": "getTextureByName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Texture name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Texture is found else null",
+                "type": "Texture"
+            },
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 158,
+            "description": "Add texture to texture list",
+            "itemtype": "method",
+            "name": "addTexture",
+            "params": [
+                {
+                    "name": "texture",
+                    "description": "",
+                    "type": "Texture"
+                }
+            ],
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 168,
+            "description": "Remove texture from textures list (also receives default used to replace)",
+            "itemtype": "method",
+            "name": "removeTexture",
+            "params": [
+                {
+                    "name": "texture",
+                    "description": "",
+                    "type": "Texture"
+                },
+                {
+                    "name": "defaultTexture",
+                    "description": "",
+                    "type": "Texture"
+                }
+            ],
+            "return": {
+                "description": "Texture if found, else null",
+                "type": "Texture"
+            },
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 249,
+            "description": "Get font by name",
+            "itemtype": "method",
+            "name": "getFontByName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Font if found, else null",
+                "type": "Font"
+            },
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 268,
+            "description": "Add font to fonts list",
+            "itemtype": "method",
+            "name": "addFont",
+            "params": [
+                {
+                    "name": "font",
+                    "description": "",
+                    "type": "Font"
+                }
+            ],
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 281,
+            "description": "Remove font from font list",
+            "itemtype": "method",
+            "name": "removeFont",
+            "params": [
+                {
+                    "name": "font",
+                    "description": "",
+                    "type": "Font"
+                },
+                {
+                    "name": "defaultFont",
+                    "description": "",
+                    "type": "Font"
+                }
+            ],
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 308,
+            "description": "Get audio by name",
+            "itemtype": "method",
+            "name": "getAudioByName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Audio if found, else null",
+                "type": "Audio"
+            },
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 327,
+            "description": "Add audio to audio list",
+            "params": [
+                {
+                    "name": "audio",
+                    "description": "",
+                    "type": "Audio"
+                }
+            ],
+            "itemtype": "method",
+            "name": "addAudio",
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\ResourceManager.js",
+            "line": 340,
+            "description": "Remove audio",
+            "params": [
+                {
+                    "name": "audio",
+                    "description": "",
+                    "type": "Audio"
+                },
+                {
+                    "name": "defaultAudio",
+                    "description": "",
+                    "type": "Audio"
+                }
+            ],
+            "itemtype": "method",
+            "name": "removeAudio",
+            "class": "ResourceManager",
+            "module": "Resources"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -5023,9 +5529,294 @@
             ],
             "class": "Object3D",
             "module": "ThreeJS"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 98,
+            "description": "Nunu Program",
+            "itemtype": "property",
+            "name": "program",
+            "type": "{Program}",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 104,
+            "description": "Graphics renderer in use by this NunuApp instance",
+            "itemtype": "property",
+            "name": "renderer",
+            "type": "{THREE.Renderer}",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 110,
+            "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
+            "itemtype": "property",
+            "name": "fullscreen",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 117,
+            "description": "VR flag, to set VR mode the toggleVR method should be used",
+            "itemtype": "property",
+            "name": "vr",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 124,
+            "description": "Canvas used to render graphics",
+            "itemtype": "property",
+            "name": "canvas",
+            "type": "{DOM}",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 130,
+            "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance\nIf true the canvas is resized whenether the resize method is called",
+            "itemtype": "property",
+            "name": "canvasResize",
+            "type": "{boolean}",
+            "default": "false if a canvas is provided, else true",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 189,
+            "description": "Load program asynchronously and run it after its loaded",
+            "itemtype": "method",
+            "name": "loadRunProgram",
+            "params": [
+                {
+                    "name": "fname",
+                    "description": "Name of the file to load",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "onLoad callback",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "onProgress callback",
+                    "type": "Function"
+                }
+            ],
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 213,
+            "description": "Load program from file",
+            "itemtype": "method",
+            "name": "loadProgram",
+            "params": [
+                {
+                    "name": "fname",
+                    "description": "Name of the file to load",
+                    "type": "String"
+                }
+            ],
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 225,
+            "description": "Start running nunu program\nA nunu program must be loaded before calling this method",
+            "itemtype": "method",
+            "name": "run",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 284,
+            "description": "Update nunu program state\nAutomatically called by the runtime handler",
+            "itemtype": "method",
+            "name": "update",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 298,
+            "description": "Exit from app\nThis method kills the app and disposes all internal elements to avoid memory leaks\nIs should be called before exiting the webpage or before switching nunu programs\nWhen loading new nunu programs the same NunuApp instance can be used",
+            "itemtype": "method",
+            "name": "exit",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 331,
+            "description": "Resize the window\nShould be called whenether the host window is resized",
+            "itemtype": "method",
+            "name": "resize",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 353,
+            "description": "Send data to running nunu application\nThe data sent using this method is received by scripts that implement the onAppData method",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Data to send",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "method",
+            "name": "sendData",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 367,
+            "description": "Set on data receive callback\nCallback receives data as an argument",
+            "itemtype": "method",
+            "name": "setOnDataReceived",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "Function executed whenether the nunu app running sends data to the host",
+                    "type": "Function"
+                }
+            ],
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 378,
+            "description": "Set on exit callback\nCallback is executed when exiting the nunu app",
+            "itemtype": "method",
+            "name": "setOnExit",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "onExit callback",
+                    "type": "Function"
+                }
+            ],
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 389,
+            "description": "Check if VR mode is available",
+            "itemtype": "method",
+            "name": "vrAvailable",
+            "return": {
+                "description": "True if VR mode available",
+                "type": "Boolean"
+            },
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 399,
+            "description": "Toggle VR mode, only works if VR mode is available",
+            "itemtype": "method",
+            "name": "toggleVR",
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\runtime\\NunuApp.js",
+            "line": 424,
+            "description": "Set fullscreen mode",
+            "params": [
+                {
+                    "name": "fullscreen",
+                    "description": "Fullscreen value",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "element",
+                    "description": "DOM element to go fullscren by default the rendering canvas is used",
+                    "type": "DOM"
+                }
+            ],
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\Nunu.js",
+            "line": 1,
+            "description": "Modules in this bundle",
+            "license": "nunuStudio:\n  license: MIT (http://opensource.org/licenses/MIT)\n  author: Tentone <tentone@outlook.com>",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\Nunu.js",
+            "line": 19,
+            "itemtype": "attribute",
+            "name": "NAME",
+            "type": "{String}",
+            "default": "\"nunuStudio\"",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\Nunu.js",
+            "line": 26,
+            "description": "Stores the nunu runtime version",
+            "itemtype": "attribute",
+            "name": "VERSION",
+            "type": "{String}",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\Nunu.js",
+            "line": 33,
+            "description": "Stores the nunu runtime timestamp",
+            "itemtype": "attribute",
+            "name": "TIMESTAMP",
+            "type": "{String}",
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\Nunu.js",
+            "line": 40,
+            "description": "Check if host has webvr enabled",
+            "itemtype": "method",
+            "name": "webvrAvailable",
+            "return": {
+                "description": "True is webVR is available",
+                "type": "Boolean"
+            },
+            "class": "Nunu",
+            "module": "Runtime"
         }
     ],
     "warnings": [
+        {
+            "message": "unknown tag: license",
+            "line": " ..\\source\\Nunu.js:1"
+        },
         {
             "message": "Missing item type\nUpdate a mouse button (automatically called by the runtime)",
             "line": " ..\\source\\core\\input\\Mouse.js:345"
@@ -5052,15 +5843,23 @@
         },
         {
             "message": "Missing item type\nGet skins in this animation",
-            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:138"
+            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:156"
         },
         {
             "message": "Missing item type\nCreate JSON for script",
-            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:206"
+            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:224"
         },
         {
             "message": "Missing item type\nRotates the object to face a point in world space.",
             "line": " ..\\source\\core\\three\\Object3D.js:319"
+        },
+        {
+            "message": "Missing item type\nSet fullscreen mode",
+            "line": " ..\\source\\runtime\\NunuApp.js:424"
+        },
+        {
+            "message": "Missing item type\nModules in this bundle",
+            "line": " ..\\source\\Nunu.js:1"
         }
     ]
 }

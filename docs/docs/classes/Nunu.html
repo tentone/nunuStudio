@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SkinnedMesh</title>
+    <title>Nunu</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -124,100 +124,28 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>SkinnedMesh Class</h1>
+<h1>Nunu Class</h1>
 <div class="box meta">
 
-        <div class="extends">
-            Extends THREE.SkinnedMesh
-        </div>
 
 
-            Module: <a href="../modules/Meshes.html">Meshes</a>
+            Module: <a href="../modules/Runtime.html">Runtime</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>A mesh that has a Skeleton with bones that can then be used to animate the vertices of the geometry.
-Based on THREE.SkinnedMesh documentation for the object can be found at <a href="https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh">https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh</a></p>
+    <p>Class used to store nunu version and timstamp used for development</p>
 
 </div>
 
-    <div class="constructor">
-        <h2>Constructor</h2>
-<div id="method_SkinnedMesh" class="method item">
-    <h3 class="name"><code>SkinnedMesh</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>geometry</code>
-                </li>
-                <li class="arg">
-                        <code>material</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">geometry</code>
-                        <span class="type">Geometry</span>
-
-
-                    <div class="param-description">
-                        <p>Geometry used by this mesh</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">material</code>
-                        <span class="type">Material</span>
-
-
-                    <div class="param-description">
-                        <p>Material used to shade the superficie of the geometry</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-    </div>
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
     </ul>
 
     <div>
@@ -227,117 +155,44 @@ Based on THREE.SkinnedMesh documentation for the object can be found at <a href=
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods extends">
+                    <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_bind">bind</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_dispose">dispose</a>
+                                <a href="#method_webvrAvailable">webvrAvailable</a>
 
                             </li>
                     </ul>
                 </div>
 
-                <div class="index-section properties">
-                    <h3>Properties</h3>
 
-                    <ul class="index-list properties extends">
-                            <li class="index-item property">
-                                <a href="#property_bones">bones</a>
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
 
+                    <ul class="index-list attrs">
+                            <li class="index-item attr">
+                                <a href="#attr_NAME">NAME</a>
                             </li>
-                            <li class="index-item property">
-                                <a href="#property_drawMode">drawMode</a>
-
+                            <li class="index-item attr">
+                                <a href="#attr_TIMESTAMP">TIMESTAMP</a>
                             </li>
-                            <li class="index-item property">
-                                <a href="#property_geometry">geometry</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_material">material</a>
-
+                            <li class="index-item attr">
+                                <a href="#attr_VERSION">VERSION</a>
                             </li>
                     </ul>
                 </div>
-
 
         </div>
 
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_bind" class="method item">
-    <h3 class="name"><code>bind</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>skeleton</code>
-                </li>
-                <li class="arg">
-                        <code>bindMatrix</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
-This is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">skeleton</code>
-                        <span class="type">Skeleton</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">bindMatrix</code>
-                        <span class="type">Matrix4</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_dispose" class="method item">
-    <h3 class="name"><code>dispose</code></h3>
+<div id="method_webvrAvailable" class="method item">
+    <h3 class="name"><code>webvrAvailable</code></h3>
 
         <span class="paren">()</span>
 
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
 
 
 
@@ -354,115 +209,111 @@ This is called automatically in the constructor, and the skeleton is created fro
     </div>
 
     <div class="description">
-        <p>Dispose mesh along with its material and geometry</p>
+        <p>Check if host has webvr enabled</p>
 
     </div>
 
 
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Boolean</span>:
+                    <p>True is webVR is available</p>
+
+            </div>
+        </div>
 
 
 </div>
             </div>
 
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
 
-<div id="property_bones" class="property item">
-    <h3 class="name"><code>bones</code></h3>
-    <span class="type">Array</span>
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
 
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Array with the bones attached to this mesh</p>
-
-    </div>
-
-
-
-</div>
-<div id="property_drawMode" class="property item">
-    <h3 class="name"><code>drawMode</code></h3>
-    <span class="type">Unknown</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Determines how the mesh triangles are constructed from the vertices.
-Only works when the geometry is a BufferGeometry</p>
-
-    </div>
-
-        <p><strong>Default:</strong> TrianglesDrawMode</p>
-
-
-</div>
-<div id="property_geometry" class="property item">
-    <h3 class="name"><code>geometry</code></h3>
-    <span class="type">Geometry</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Geometry defined the object structure</p>
-
-    </div>
-
-
-
-</div>
-<div id="property_material" class="property item">
-    <h3 class="name"><code>material</code></h3>
-    <span class="type">Material</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Material is used to define how the geometry surface is shaded</p>
-
-    </div>
-
-
-
-</div>
+                    <div id="attr_NAME" class="attr item">
+                        <a name="config_NAME"></a> 
+                        <h3 class="name"><code>NAME</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            
+                        </div>
+                    
+                            <p><strong>Default:</strong> &quot;nunuStudio&quot;</p>
+                    
+                    
+                    </div>
+                    <div id="attr_TIMESTAMP" class="attr item">
+                        <a name="config_TIMESTAMP"></a> 
+                        <h3 class="name"><code>TIMESTAMP</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Stores the nunu runtime timestamp</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="attr_VERSION" class="attr item">
+                        <a name="config_VERSION"></a> 
+                        <h3 class="name"><code>VERSION</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Stores the nunu runtime version</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
             </div>
-
 
     </div>
 </div>

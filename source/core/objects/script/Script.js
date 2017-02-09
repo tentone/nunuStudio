@@ -27,7 +27,7 @@
 
 /**
  * Javascript code attached to the script
- * @attribute code
+ * @property code
  * @type {String}
  */
 /**
@@ -38,12 +38,12 @@
 /**
  * Pointer to the parent program
  * Used access program resources easier
- * @attribute program
+ * @property program
  * @type {Program}
  */
 /**
  * Pointer to the parent scene
- * @attribute scene
+ * @property scene
  * @type {Scene}
  */
 function Script(code)

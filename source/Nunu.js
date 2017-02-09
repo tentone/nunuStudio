@@ -9,13 +9,39 @@
 
 "use strict";
 
+/**
+ * Class used to store nunu version and timstamp used for development
+ * @class Nunu
+ * @module Runtime
+ */
 function Nunu(){}
 
+/**
+ * @attribute NAME
+ * @type {String}
+ * @default "nunuStudio"
+ */
 Nunu.NAME = "nunuStudio";
-Nunu.VERSION = "V0.8.9.19 Alpha";
-Nunu.TIMESTAMP = "201702080004";
 
-//Check if webvr is available
+/**
+ * Stores the nunu runtime version
+ * @attribute VERSION
+ * @type {String}
+ */
+Nunu.VERSION = "V0.8.9.19 Alpha";
+
+/**
+ * Stores the nunu runtime timestamp
+ * @attribute TIMESTAMP
+ * @type {String}
+ */
+Nunu.TIMESTAMP = "201702091209";
+
+/**
+ * Check if host has webvr enabled
+ * @method webvrAvailable
+ * @return {boolean} True is webVR is available
+ */
 Nunu.webvrAvailable = function()
 {
 	return navigator.getVRDisplays !== undefined;
