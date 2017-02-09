@@ -1,7 +1,17 @@
 "use strict";
 
-//Webcam texture
-function WebcamTexture(mapping, wrapS, wrapT, magFilter, minFilter, type, anisotropy)
+/**
+ * Webcam texture is used to capture and display video from a webcam
+ * @class WebcamTexture
+ * @constructor
+ * @extends {THREE.Texture}
+ * @param {Number} mapping
+ * @param {Number} wrapS
+ * @param {Number} wrapT
+ * @param {Number} type
+ * @param {Number} anisotropy
+ */
+function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 {
 	var video = document.createElement("video");
 	video.autoplay = true;
@@ -59,10 +69,12 @@ function WebcamTexture(mapping, wrapS, wrapT, magFilter, minFilter, type, anisot
 	update();
 }
 
-//Super prototypes
 WebcamTexture.prototype = Object.create(THREE.Texture.prototype);
 
-//Dispose texture
+/**
+ * Dispose webcam texture
+ * @method dispose
+ */
 WebcamTexture.prototype.dispose = function()
 {	
 	THREE.Texture.prototype.dispose.call(this);

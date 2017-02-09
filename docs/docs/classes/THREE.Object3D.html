@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Object3D</title>
+    <title>THREE.Object3D</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -39,10 +39,14 @@
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AmbientLight.html">AmbientLight</a></li>
+                                <li><a href="../classes/Audio.html">Audio</a></li>
                                 <li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
+                                <li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
                                 <li><a href="../classes/Container.html">Container</a></li>
                                 <li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
+                                <li><a href="../classes/Font.html">Font</a></li>
                                 <li><a href="../classes/HemisphereLight.html">HemisphereLight</a></li>
+                                <li><a href="../classes/Image.html">Image</a></li>
                                 <li><a href="../classes/Key.html">Key</a></li>
                                 <li><a href="../classes/Keyboard.html">Keyboard</a></li>
                                 <li><a href="../classes/KinectDevice.html">KinectDevice</a></li>
@@ -51,7 +55,6 @@
                                 <li><a href="../classes/Mouse.html">Mouse</a></li>
                                 <li><a href="../classes/Nunu.html">Nunu</a></li>
                                 <li><a href="../classes/NunuApp.html">NunuApp</a></li>
-                                <li><a href="../classes/Object3D.html">Object3D</a></li>
                                 <li><a href="../classes/OrthographicCamera.html">OrthographicCamera</a></li>
                                 <li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
                                 <li><a href="../classes/PerspectiveCamera.html">PerspectiveCamera</a></li>
@@ -60,6 +63,7 @@
                                 <li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
                                 <li><a href="../classes/Program.html">Program</a></li>
                                 <li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+                                <li><a href="../classes/Resource.html">Resource</a></li>
                                 <li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
                                 <li><a href="../classes/Scene.html">Scene</a></li>
                                 <li><a href="../classes/Script.html">Script</a></li>
@@ -70,6 +74,13 @@
                                 <li><a href="../classes/SpotLight.html">SpotLight</a></li>
                                 <li><a href="../classes/Sprite.html">Sprite</a></li>
                                 <li><a href="../classes/Text3D.html">Text3D</a></li>
+                                <li><a href="../classes/Texture.html">Texture</a></li>
+                                <li><a href="../classes/THREE.Fog.html">THREE.Fog</a></li>
+                                <li><a href="../classes/THREE.Object3D.html">THREE.Object3D</a></li>
+                                <li><a href="../classes/THREE.Texture.html">THREE.Texture</a></li>
+                                <li><a href="../classes/Video.html">Video</a></li>
+                                <li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
+                                <li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
                             </ul>
                 
                 
@@ -90,7 +101,7 @@
                                 <li><a href="../modules/Script.html">Script</a></li>
                                 <li><a href="../modules/Sprite.html">Sprite</a></li>
                                 <li><a href="../modules/Textures.html">Textures</a></li>
-                                <li><a href="../modules/ThreeJS.html">ThreeJS</a></li>
+                                <li><a href="../modules/THREE.html">THREE</a></li>
                             </ul>
                         </div>
                     </div>
@@ -124,19 +135,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Object3D Class</h1>
+<h1>THREE.Object3D Class</h1>
 <div class="box meta">
 
 
 
-            Module: <a href="../modules/ThreeJS.html">ThreeJS</a>
+            Module: <a href="../modules/THREE.html">THREE</a>
 
 </div>
 
 
 <div class="box intro">
     <p>This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.
-This page provides documentation for some of the main features of this class, the original documentation of this class can be found at <a href="http://www.threejs.org">www.threejs.org</a>.
+This page provides documentation for some of the main features of this class, the original documentation of this class can be found at <a href="https://threejs.org/docs/index.html#Reference/Core/Object3D">https://threejs.org/docs/index.html#Reference/Core/Object3D</a>.
 All nunuStudio objects extend the Object3D class of some other higher level class from three.js.
 Code examples provided for three.js should also work inside nunuStudio.</p>
 
@@ -144,8 +155,8 @@ Code examples provided for three.js should also work inside nunuStudio.</p>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_Object3D" class="method item">
-    <h3 class="name"><code>Object3D</code></h3>
+<div id="method_THREE.Object3D" class="method item">
+    <h3 class="name"><code>THREE.Object3D</code></h3>
 
         <span class="paren">()</span>
 
@@ -411,7 +422,7 @@ Code examples provided for three.js should also work inside nunuStudio.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">objects</code>
-                        <span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
+                        <span class="type">Object3D</span>
 
 
                     <div class="param-description">
@@ -568,7 +579,7 @@ Code examples provided for three.js should also work inside nunuStudio.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">object</code>
-                        <span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
+                        <span class="type">Object3D</span>
 
 
                     <div class="param-description">
@@ -1158,7 +1169,7 @@ Code examples provided for three.js should also work inside nunuStudio.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">objects</code>
-                        <span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
+                        <span class="type">Object3D</span>
 
 
                     <div class="param-description">

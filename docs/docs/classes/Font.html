@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Mesh</title>
+    <title>Font</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -135,37 +135,34 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Mesh Class</h1>
+<h1>Font Class</h1>
 <div class="box meta">
 
         <div class="extends">
-            Extends THREE.Mesh
+            Extends <a href="../classes/Resource.html" class="crosslink">Resource</a>
         </div>
 
 
-            Module: <a href="../modules/Meshes.html">Meshes</a>
+            Module: <a href="../modules/Resources.html">Resources</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Meshs are used to combine a geometry and a material forming a complete rederizable object
-Based on THREE.Mesh documentation for the object can be found at <a href="https://threejs.org/docs/index.html#Reference/Objects/Mesh">https://threejs.org/docs/index.html#Reference/Objects/Mesh</a></p>
+    <p>Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64)
+Font objects are used for booth 2D and 3D text</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_Mesh" class="method item">
-    <h3 class="name"><code>Mesh</code></h3>
+<div id="method_Font" class="method item">
+    <h3 class="name"><code>Font</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>geometry</code>
-                </li>
-                <li class="arg">
-                        <code>material</code>
+                        <code>url</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -194,23 +191,12 @@ Based on THREE.Mesh documentation for the object can be found at <a href="https:
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">geometry</code>
-                        <span class="type">Geometry</span>
+                        <code class="param-name">url</code>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>Geometry used by this mesh</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">material</code>
-                        <span class="type">Material</span>
-
-
-                    <div class="param-description">
-                        <p>Material used to shade the superficie of the geometry</p>
+                        <p>URL to font file</p>
 
                     </div>
 
@@ -227,156 +213,18 @@ Based on THREE.Mesh documentation for the object can be found at <a href="https:
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
     </ul>
 
     <div>
         <div id="index" class="api-class-tabpanel index">
             <h2 class="off-left">Item Index</h2>
 
-                <div class="index-section methods">
-                    <h3>Methods</h3>
 
-                    <ul class="index-list methods extends">
-                            <li class="index-item method">
-                                <a href="#method_dispose">dispose</a>
-
-                            </li>
-                    </ul>
-                </div>
-
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties extends">
-                            <li class="index-item property">
-                                <a href="#property_drawMode">drawMode</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_geometry">geometry</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_material">material</a>
-
-                            </li>
-                    </ul>
-                </div>
 
 
         </div>
 
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
 
-<div id="method_dispose" class="method item">
-    <h3 class="name"><code>dispose</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Dispose mesh along with its material and geometry</p>
-
-    </div>
-
-
-
-
-</div>
-            </div>
-
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-<div id="property_drawMode" class="property item">
-    <h3 class="name"><code>drawMode</code></h3>
-    <span class="type">Unknown</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Determines how the mesh triangles are constructed from the vertices.
-Only works when the geometry is a BufferGeometry</p>
-
-    </div>
-
-        <p><strong>Default:</strong> TrianglesDrawMode</p>
-
-
-</div>
-<div id="property_geometry" class="property item">
-    <h3 class="name"><code>geometry</code></h3>
-    <span class="type">Geometry</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Geometry defined the object structure</p>
-
-    </div>
-
-
-
-</div>
-<div id="property_material" class="property item">
-    <h3 class="name"><code>material</code></h3>
-    <span class="type">Material</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Material is used to define how the geometry surface is shaded</p>
-
-    </div>
-
-
-
-</div>
-            </div>
 
 
     </div>

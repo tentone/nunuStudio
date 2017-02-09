@@ -10,7 +10,7 @@
  */
 /**
  * Audio volume
- * @property valume
+ * @property volume
  * @default 1.0
  * @type {Number}
 */
@@ -19,6 +19,12 @@
  * @property autoplay
  * @default true
  * @type {boolean}
+*/
+/**
+ * Start time in seconds
+ * @property playbackRate
+ * @default 1.0
+ * @type {Number}
 */
 /**
  * Start time in seconds

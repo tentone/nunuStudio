@@ -1,5 +1,15 @@
 "use strict";
 
+/**
+ * Image class is used to store image data that is used to create Textures
+ * Images can be stored in mutiple formats but on serialization images are converted to JPEG if they are opaque or to PNG if they are transparent
+ * GIF images are never converted to prevert animation capabilities
+ * @class Image
+ * @constructor
+ * @extends {Resource}
+ * @module Resources
+ * @param {String} url URL to image
+ */
 function Image(url)
 {
 	this.name = "image";

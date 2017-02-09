@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API
+ * @class Audio
+ * @extends {Resource}
+ * @constructor
+ * @module Resources
+ * @param {String} url URL to Audio file
+ */
 function Audio(url)
 {
 	this.name = "audio";
@@ -18,7 +26,11 @@ function Audio(url)
 	}
 }
 
-//JSON serialization
+/**
+ * Serialize audio data as JSON, audio data is serialized in Base64
+ * @param {meta} meta
+ * @return {Object} data
+ */
 Audio.prototype.toJSON = function(meta)
 {
 	if(meta.audio[this.uuid] !== undefined)

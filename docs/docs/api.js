@@ -2,10 +2,14 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "AmbientLight",
+        "Audio",
         "AudioEmitter",
+        "CanvasTexture",
         "Container",
         "DirectionalLight",
+        "Font",
         "HemisphereLight",
+        "Image",
         "Key",
         "Keyboard",
         "KinectDevice",
@@ -14,7 +18,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Mouse",
         "Nunu",
         "NunuApp",
-        "Object3D",
         "OrthographicCamera",
         "ParticleEmitter",
         "PerspectiveCamera",
@@ -23,6 +26,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "PositionalAudio",
         "Program",
         "RectAreaLight",
+        "Resource",
         "ResourceManager",
         "Scene",
         "Script",
@@ -32,7 +36,14 @@ YUI.add("yuidoc-meta", function(Y) {
         "SpineTexture",
         "SpotLight",
         "Sprite",
-        "Text3D"
+        "THREE.Fog",
+        "THREE.Object3D",
+        "THREE.Texture",
+        "Text3D",
+        "Texture",
+        "Video",
+        "VideoTexture",
+        "WebcamTexture"
     ],
     "modules": [
         "Animations",
@@ -50,8 +61,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Runtime",
         "Script",
         "Sprite",
-        "Textures",
-        "ThreeJS"
+        "THREE",
+        "Textures"
     ],
     "allModules": [
         {
@@ -112,7 +123,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Resources",
             "name": "Resources",
-            "description": "Resource manager is used to manage available resources used by objects\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\nThe manager is used to manage the following types of resources\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries"
+            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API"
         },
         {
             "displayName": "Runtime",
@@ -132,12 +143,12 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Textures",
             "name": "Textures",
-            "description": "Spine animation textures\nBased on SpineTexture from original spine runtime for three.js"
+            "description": "Canvas Texture"
         },
         {
-            "displayName": "ThreeJS",
-            "name": "ThreeJS",
-            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at www.threejs.org.\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.\nCode examples provided for three.js should also work inside nunuStudio."
+            "displayName": "THREE",
+            "name": "THREE",
+            "description": "Scene fog"
         }
     ],
     "elements": []
