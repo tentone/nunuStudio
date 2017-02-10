@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Mouse</title>
+    <title>Mesh2shape</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -138,59 +138,28 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Mouse Class</h1>
+<h1>Mesh2shape Class</h1>
 <div class="box meta">
 
 
 
-            Module: <a href="../modules/Input.html">Input</a>
+            Module: <a href="../modules/Physics.html">Physics</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler</p>
+    <p>Mesh2shape is used to convert ThreeJS objects to CannonJS shapes
+It is based on the original Mesh2Shape converted by @donmccurdy</p>
 
 </div>
 
-    <div class="constructor">
-        <h2>Constructor</h2>
-<div id="method_Mouse" class="method item">
-    <h3 class="name"><code>Mouse</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-
-
-
-</div>
-    </div>
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
             <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
     </ul>
 
@@ -203,87 +172,67 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_buttonDoubleClicked">buttonDoubleClicked</a>
+                                <a href="#method_createBoundingBoxShape!~YUIDOC_LINE~!* @param  geometry">createBoundingBoxShape!~YUIDOC_LINE~!* @param  geometry</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_buttonJustPressed">buttonJustPressed</a>
+                                <a href="#method_createBoundingSphereShape!~YUIDOC_LINE~!* @param  geometry">createBoundingSphereShape!~YUIDOC_LINE~!* @param  geometry</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_buttonJustReleased">buttonJustReleased</a>
+                                <a href="#method_createBoxShape!~YUIDOC_LINE~!* @param  geometry">createBoxShape!~YUIDOC_LINE~!* @param  geometry</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_buttonPressed">buttonPressed</a>
+                                <a href="#method_createConvexPolyhedron!~YUIDOC_LINE~!* @param  geometry">createConvexPolyhedron!~YUIDOC_LINE~!* @param  geometry</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_dispose">dispose</a>
+                                <a href="#method_createCylinderShape!~YUIDOC_LINE~!* @param  geometry">createCylinderShape!~YUIDOC_LINE~!* @param  geometry</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_insideCanvas">insideCanvas</a>
+                                <a href="#method_createPlaneShape!~YUIDOC_LINE~!* @param  geometry">createPlaneShape!~YUIDOC_LINE~!* @param  geometry</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_setCanvas">setCanvas</a>
+                                <a href="#method_createShape">createShape</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_setLock">setLock</a>
+                                <a href="#method_createSphereShape!~YUIDOC_LINE~!* @param  geometry">createSphereShape!~YUIDOC_LINE~!* @param  geometry</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_update">update</a>
+                                <a href="#method_createTrimeshShape!~YUIDOC_LINE~!* @param  geometry">createTrimeshShape!~YUIDOC_LINE~!* @param  geometry</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_updatePosition">updatePosition</a>
+                                <a href="#method_createTubeShape!~YUIDOC_LINE~!* @param  geometry">createTubeShape!~YUIDOC_LINE~!* @param  geometry</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getGeometry!~YUIDOC_LINE~!* @param  object">getGeometry!~YUIDOC_LINE~!* @param  object</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getMeshes!~YUIDOC_LINE~!* @param  object">getMeshes!~YUIDOC_LINE~!* @param  object</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getVertices!~YUIDOC_LINE~!* @param  geometry">getVertices!~YUIDOC_LINE~!* @param  geometry</a>
 
                             </li>
                     </ul>
                 </div>
 
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                            <li class="index-item property">
-                                <a href="#property_canvas">canvas</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_delta">delta</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_keys">keys</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_position">position</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_wheel">wheel</a>
-
-                            </li>
-                    </ul>
-                </div>
 
                 <div class="index-section attrs">
                     <h3>Attributes</h3>
 
                     <ul class="index-list attrs">
                             <li class="index-item attr">
-                                <a href="#attr_LEFT">LEFT</a>
-                            </li>
-                            <li class="index-item attr">
-                                <a href="#attr_MIDDLE">MIDDLE</a>
-                            </li>
-                            <li class="index-item attr">
-                                <a href="#attr_RIGHT">RIGHT</a>
+                                <a href="#attr_Type">Type</a>
                             </li>
                     </ul>
                 </div>
@@ -293,13 +242,13 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_buttonDoubleClicked" class="method item">
-    <h3 class="name"><code>buttonDoubleClicked</code></h3>
+<div id="method_createBoundingBoxShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
+    <h3 class="name"><code>createBoundingBoxShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
 
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Boolean</span>
+            <span class="type">CANNON.Box</span>
         </span>
 
 
@@ -317,7 +266,7 @@
     </div>
 
     <div class="description">
-        <p>Check if Mouse button was double clicked</p>
+        <p>Bounding box needs to be computed with the entire mesh, not just geometry</p>
 
     </div>
 
@@ -326,242 +275,21 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Boolean</span>:
-                    <p>True if some mouse button was just double clicked</p>
+                        <span class="type">CANNON.Box</span>:
+                    <p>shape</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_buttonJustPressed" class="method item">
-    <h3 class="name"><code>buttonJustPressed</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>button</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Boolean</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Check if a mouse button was just pressed</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">button</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>Button to check status of</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Boolean</span>:
-                    <p>True if button was just pressed</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_buttonJustReleased" class="method item">
-    <h3 class="name"><code>buttonJustReleased</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>button</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Boolean</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Check if a mouse button was just released</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">button</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>Button to check status of</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Boolean</span>:
-                    <p>True if button was just released</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_buttonPressed" class="method item">
-    <h3 class="name"><code>buttonPressed</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>button</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Boolean</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Check if mouse button is currently pressed</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">button</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>Button to check status of</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Boolean</span>:
-                    <p>True if button is currently pressed</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_dispose" class="method item">
-    <h3 class="name"><code>dispose</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Dispose mouse events (called automatically by the app runtime)</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_insideCanvas" class="method item">
-    <h3 class="name"><code>insideCanvas</code></h3>
+<div id="method_createBoundingSphereShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
+    <h3 class="name"><code>createBoundingSphereShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
 
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Boolean</span>
+            <span class="type">CANNON.Sphere</span>
         </span>
 
 
@@ -579,7 +307,7 @@
     </div>
 
     <div class="description">
-        <p>Check if mouse is inside attached canvas (updated async)</p>
+        <p>Sphere shape from bouding sphere</p>
 
     </div>
 
@@ -588,123 +316,22 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Boolean</span>:
-                    <p>True if mouse is currently inside the canvas</p>
+                        <span class="type">CANNON.Sphere</span>:
+                    <p>shape</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_setCanvas" class="method item">
-    <h3 class="name"><code>setCanvas</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>canvas</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Canvas to be used for coordinates calculation relative to that canvas</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">canvas</code>
-                        <span class="type">DOM</span>
-
-
-                    <div class="param-description">
-                        <p>Canvas to be attached to the Mouse instance</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_setLock" class="method item">
-    <h3 class="name"><code>setLock</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>value</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Set mouse lock state</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">value</code>
-                        <span class="type">Boolean</span>
-
-
-                    <div class="param-description">
-                        <p>If true pointer lock will be requested for the canvas attached to the Mouse instance</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_update" class="method item">
-    <h3 class="name"><code>update</code></h3>
+<div id="method_createBoxShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
+    <h3 class="name"><code>createBoxShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
 
         <span class="paren">()</span>
 
+        <span class="returns-inline">
+            <span class="type">CANNON.Box</span>
+        </span>
 
 
 
@@ -721,34 +348,163 @@
     </div>
 
     <div class="description">
-        <p>Update mouse buttons state, position, wheel and delta synchronously (called automatically by the app runtime)</p>
+        <p>Create box shape from geometry</p>
 
     </div>
 
 
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">CANNON.Box</span>:
+                    <p>shape</p>
+
+            </div>
+        </div>
 
 
 </div>
-<div id="method_updatePosition" class="method item">
-    <h3 class="name"><code>updatePosition</code></h3>
+<div id="method_createConvexPolyhedron!~YUIDOC_LINE~!* @param  geometry" class="method item">
+    <h3 class="name"><code>createConvexPolyhedron!~YUIDOC_LINE~!* @param  geometry</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">CANNON.Shape</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Computes 3D convex hull as a CANNON.ConvexPolyhedron</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">CANNON.Shape</span>:
+                    <p>shape</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_createCylinderShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
+    <h3 class="name"><code>createCylinderShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">CANNON.Cylinder</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Create cylinder shape from geometry</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">CANNON.Cylinder</span>:
+                    <p>shape</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_createPlaneShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
+    <h3 class="name"><code>createPlaneShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">CANNON.Box</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Plane shape from geometry</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">CANNON.Box</span>:
+                    <p>shape</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_createShape" class="method item">
+    <h3 class="name"><code>createShape</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>x</code>
+                        <code>object</code>
                 </li>
                 <li class="arg">
-                        <code>y</code>
-                </li>
-                <li class="arg">
-                        <code>xDiff</code>
-                </li>
-                <li class="arg">
-                        <code>yDiff</code>
+                        <code>type</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
+        <span class="returns-inline">
+            <span class="type">CANNON.Shape</span>
+        </span>
 
 
 
@@ -765,7 +521,7 @@
     </div>
 
     <div class="description">
-        <p>Update mouse Position (automatically called by the runtime)</p>
+        <p>Given a Object3D instance, creates a corresponding CANNON shape</p>
 
     </div>
 
@@ -774,8 +530,8 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">x</code>
-                        <span class="type">Number</span>
+                        <code class="param-name">object</code>
+                        <span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
 
 
                     <div class="param-description">
@@ -784,170 +540,289 @@
 
                 </li>
                 <li class="param">
-                        <code class="param-name">y</code>
-                        <span class="type">Number</span>
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                         
-                    </div>
+                        <p>Mesh2shape.Type</p>
 
-                </li>
-                <li class="param">
-                        <code class="param-name">xDiff</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">yDiff</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                         
                     </div>
 
                 </li>
             </ul>
         </div>
 
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">CANNON.Shape</span>:
+                    <p>shape</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_createSphereShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
+    <h3 class="name"><code>createSphereShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">CANNON.Sphere</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Sphere shape from geometry</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">CANNON.Sphere</span>:
+                    <p>shape</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_createTrimeshShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
+    <h3 class="name"><code>createTrimeshShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">CANNON.Trimesh</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Trimesh shape from geometry</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">CANNON.Trimesh</span>:
+                    <p>shape</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_createTubeShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
+    <h3 class="name"><code>createTubeShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">CANNON.Trimesh</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Sphere shape from bouding sphere</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">CANNON.Trimesh</span>:
+                    <p>shape</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getGeometry!~YUIDOC_LINE~!* @param  object" class="method item">
+    <h3 class="name"><code>getGeometry!~YUIDOC_LINE~!* @param  object</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Geometry</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Returns a single geometry for the given object
+If the object is compound, its geometries are automatically merged</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Geometry</span>:
+                    <p>Geometry that contains all merger geometry</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getMeshes!~YUIDOC_LINE~!* @param  object" class="method item">
+    <h3 class="name"><code>getMeshes!~YUIDOC_LINE~!* @param  object</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Returns a array of THREE.Mesh instances from the given object.
+If nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+                    <p>meshes found inside the Object3D</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getVertices!~YUIDOC_LINE~!* @param  geometry" class="method item">
+    <h3 class="name"><code>getVertices!~YUIDOC_LINE~!* @param  geometry</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get geometry vertices</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+                    <p>array</p>
+
+            </div>
+        </div>
 
 
 </div>
             </div>
 
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-<div id="property_canvas" class="property item">
-    <h3 class="name"><code>canvas</code></h3>
-    <span class="type">DOM</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates</p>
-
-    </div>
-
-
-
-</div>
-<div id="property_delta" class="property item">
-    <h3 class="name"><code>delta</code></h3>
-    <span class="type">Vector2</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Mouse movement (coordinates in window space)</p>
-
-    </div>
-
-
-
-</div>
-<div id="property_keys" class="property item">
-    <h3 class="name"><code>keys</code></h3>
-    <span class="type">Array</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Array with mouse buttons status</p>
-
-    </div>
-
-
-
-</div>
-<div id="property_position" class="property item">
-    <h3 class="name"><code>position</code></h3>
-    <span class="type">Vector2</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Mouse position inside of the window (coordinates in window space)</p>
-
-    </div>
-
-
-
-</div>
-<div id="property_wheel" class="property item">
-    <h3 class="name"><code>wheel</code></h3>
-    <span class="type">Number</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p>Mouse scroll wheel movement</p>
-
-    </div>
-
-
-
-</div>
-            </div>
 
             <div id="attrs" class="api-class-tabpanel">
                 <h2 class="off-left">Attributes</h2>
 
-                    <div id="attr_LEFT" class="attr item">
-                        <a name="config_LEFT"></a> 
-                        <h3 class="name"><code>LEFT</code></h3>
-                        <span class="type">Number</span>
+                    <div id="attr_Type" class="attr item">
+                        <a name="config_Type"></a> 
+                        <h3 class="name"><code>Type</code></h3>
+                        <span class="type">Object</span>
                     
                     
                     
@@ -964,61 +839,13 @@
                         </div>
                     
                         <div class="description">
-                            <p>LEFT mouse button</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="attr_MIDDLE" class="attr item">
-                        <a name="config_MIDDLE"></a> 
-                        <h3 class="name"><code>MIDDLE</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>MIDDLE mouse button</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="attr_RIGHT" class="attr item">
-                        <a name="config_RIGHT"></a> 
-                        <h3 class="name"><code>RIGHT</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>RIGHT mouse button</p>
+                            <p>Type is used to indentify the type of cannonjs</p>
+                    <ul>
+                    <li>BOX</li>
+                    <li>CYLINDER</li>
+                    <li>SPHERE</li>
+                    <li>HULL</li>
+                    </ul>
                     
                         </div>
                     

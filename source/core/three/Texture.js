@@ -1,16 +1,6 @@
 "use strict";
 
-/**
- * THREE.Texture documentation is available at https://threejs.org/docs/index.html?q=texture#Reference/Textures/Texture
- * @class THREE.Texture
- * @constructor
- */
-
-/**
- * THREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.
- * @param {Object} meta
- * @return {Object} json
- */
+//Serialization does not serialize any image data.
 THREE.Texture.prototype.toJSON = function(meta)
 {
 	//Check if this texture was already serialized

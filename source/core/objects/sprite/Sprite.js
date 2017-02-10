@@ -7,7 +7,7 @@
  * @module Sprite
  * @param {Material} material Material used to draw sprites
  * @constructor
- * @extends {THREE.Script}
+ * @extends {Script}
  */
 
 /**

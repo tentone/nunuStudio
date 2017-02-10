@@ -1,14 +1,34 @@
 "use strict";
 
+/**
+ * Base64Utils contains methods to convert from and to Base64 binary format
+ *
+ * @class Base64Utils
+ * @module BinaryData
+ * @static
+ */
 function Base64Utils(){}
 
-//Remove base64 header from data
+/**
+ * Remove base64 header from data
+ * Usefull for removing the heander from image, audio, video, etc
+ *
+ * @method removeHeader
+ * @param {String} base64
+ * @return {String} base64
+ */
 Base64Utils.removeHeader = function(data)
 {
 	return data.slice(data.search(";base64,") + 8);
 }
 
-//Create base64 string from arraybuffer
+/**
+ * Create base64 string from arraybuffer
+ *
+ * @method fromArraybuffer
+ * @param {Arraybuffer} arraybuffer
+ * @return {String} base64
+ */
 Base64Utils.fromArraybuffer = function(arraybuffer)
 {
 	var encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -58,7 +78,13 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
 	return base64;
 }
 
-//Create base64 string from binary string
+/**
+ * Create base64 string from binary string
+ *
+ * @method fromBinaryString
+ * @param {String} str
+ * @return {String} base64
+ */
 Base64Utils.fromBinaryString = function(str)
 {
 	var encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

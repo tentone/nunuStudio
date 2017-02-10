@@ -1,12 +1,12 @@
 "use strict";
 
 /**
- * Image texture constructor, supports GIF animations
+ * Image texture constructor, supports GIF animations.
  * It is based on THREE.Texture, original documentation can be found here https://threejs.org/docs/index.html#Reference/Textures/Texture
  * 
  * @class Texture
  * @constructor
- * @extends {THREE.Texture}
+ * @extends {Texture}
  * @module Textures
  * @param {Image} image
  * @param {Number} mapping
@@ -84,6 +84,7 @@ Texture.prototype.dispose = function()
 
 /**
  * Create JSON description for texture, serializes image used in the texture
+ * THREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.
  * @param {Object} meta
  * @method toJSON
  */

@@ -4,7 +4,7 @@
  * AudioEmitter is a Object3D used to play audio inside the scene
  * @param {Audio} audio Audio used by this emitter
  * @class AudioEmitter
- * @extends {THREE.Audio}
+ * @extends {Audio}
  * @module Audio
  * @constructor
  */

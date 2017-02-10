@@ -2,12 +2,16 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "AmbientLight",
+        "ArraybufferUtils",
         "Audio",
         "AudioEmitter",
+        "Base64Utils",
+        "BufferUtils",
         "CanvasTexture",
         "Container",
         "DirectionalLight",
         "FileSystem",
+        "Fog",
         "Font",
         "HemisphereLight",
         "Image",
@@ -16,7 +20,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "KinectDevice",
         "LeapMotion",
         "Mesh",
+        "Mesh2shape",
         "Mouse",
+        "Object3D",
         "OrthographicCamera",
         "ParticleEmitter",
         "PerspectiveCamera",
@@ -35,9 +41,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "SpineTexture",
         "SpotLight",
         "Sprite",
-        "THREE.Fog",
-        "THREE.Object3D",
-        "THREE.Texture",
         "Text3D",
         "Texture",
         "Video",
@@ -47,6 +50,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "modules": [
         "Animations",
         "Audio",
+        "BinaryData",
         "Cameras",
         "Core",
         "Devices",
@@ -73,6 +77,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Audio",
             "name": "Audio",
             "description": "AudioEmitter is a Object3D used to play audio inside the scene"
+        },
+        {
+            "displayName": "BinaryData",
+            "name": "BinaryData",
+            "description": "ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format"
         },
         {
             "displayName": "Cameras",
@@ -122,7 +131,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Physics",
             "name": "Physics",
-            "description": "Wrapper for cannon.js Body physics objects\nDocumentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/"
+            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes\nIt is based on the original Mesh2Shape converted by @donmccurdy"
         },
         {
             "displayName": "Resources",

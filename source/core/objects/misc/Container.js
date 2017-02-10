@@ -4,7 +4,7 @@
  * Containers are used to group objects together
  * @class Container
  * @constructor
- * @extends {THREE.Object3D}
+ * @extends {Object3D}
  * @module Misc
  */
 function Container()

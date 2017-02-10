@@ -6,7 +6,7 @@
  * 
  * @class VideoTexture
  * @constructor
- * @extends {THREE.Texture}
+ * @extends {Texture}
  * @module Textures
  * @param {Video} video
  * @param {Number} mapping

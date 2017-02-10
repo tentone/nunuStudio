@@ -8,7 +8,7 @@
  * @param {Number} width
  * @param {Number} height
  * @class RectAreaLight
- * @extends {THREE.RectAreaLight}
+ * @extends {RectAreaLight}
  * @module Lights
  * @constructor
  */

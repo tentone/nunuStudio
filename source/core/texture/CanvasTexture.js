@@ -6,7 +6,7 @@
  * 
  * @class CanvasTexture
  * @constructor
- * @extends {THREE.Texture}
+ * @extends {Texture}
  * @module Textures
  * @param {Number} width Canvas width
  * @param {Number} height Canvas height

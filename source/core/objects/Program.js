@@ -6,7 +6,7 @@
  * @module Core
  * @constructor
  * @param {String} name Program name
- * @extends {THREE.Object3D}
+ * @extends {Object3D}
  * @extends {ResourceManager}
  */
 

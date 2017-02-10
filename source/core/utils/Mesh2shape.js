@@ -1,15 +1,28 @@
-/*
-	Mesh2shape - Convert ThreeJS objects to Cannon shapes
-	@author Don McCurdy / https://github.com/donmccurdy
-*/
-
 "use strict";
+
+/**
+ * Mesh2shape is used to convert ThreeJS objects to CannonJS shapes
+ * It is based on the original Mesh2Shape converted by @donmccurdy
+ * 
+ * @author Don McCurdy (https://github.com/donmccurdy)
+ * @class Mesh2shape
+ * @static
+ * @module Physics
+ */
+function Mesh2shape(){}
 
 var PI2 = Math.PI / 2;
 
-function Mesh2shape(){}
-
-//Shape type
+/**
+ * Type is used to indentify the type of cannonjs
+ *  - BOX
+ *  - CYLINDER
+ *  - SPHERE
+ *  - HULL
+ * 
+ * @attribute Type
+ * @type {Object}
+ */
 Mesh2shape.Type =
 {
 	BOX: "Box",
@@ -18,7 +31,14 @@ Mesh2shape.Type =
 	HULL: "ConvexPolyhedron"
 };
 
-//Given a THREE.Object3D instance, creates a corresponding CANNON shape
+/**
+ * Given a Object3D instance, creates a corresponding CANNON shape
+ *
+ * @method createShape
+ * @param {Object3D} object
+ * @param {String} type Mesh2shape.Type
+ * @return {CANNON.Shape} shape
+ */
 Mesh2shape.createShape = function(object, type)
 {
 	if(type !== undefined)
@@ -81,7 +101,13 @@ Mesh2shape.createShape = function(object, type)
 	}
 };
 
-//Create box shape from geometry
+/**
+ * Create box shape from geometry
+ *
+ * @method createBoxShape
+ * * @param {Geometry} geometry
+ * @return {CANNON.Box} shape
+ */
 Mesh2shape.createBoxShape = function(geometry)
 {
 	var vertices = Mesh2shape.getVertices(geometry);
@@ -98,7 +124,13 @@ Mesh2shape.createBoxShape = function(geometry)
 	return new CANNON.Box(new CANNON.Vec3((box.max.x - box.min.x) / 2,(box.max.y - box.min.y) / 2,(box.max.z - box.min.z) / 2));
 }
 
-//Bounding box needs to be computed with the entire mesh, not just geometry
+/**
+ * Bounding box needs to be computed with the entire mesh, not just geometry
+ *
+ * @method createBoundingBoxShape
+ * * @param {Geometry} geometry
+ * @return {CANNON.Box} shape
+ */
 Mesh2shape.createBoundingBoxShape = function(object)
 {
 	var localPosition, worldPosition;
@@ -127,7 +159,13 @@ Mesh2shape.createBoundingBoxShape = function(object)
 	return shape;
 }
 
-//Computes 3D convex hull as a CANNON.ConvexPolyhedron
+/**
+ * Computes 3D convex hull as a CANNON.ConvexPolyhedron
+ *
+ * @method createConvexPolyhedron
+ * * @param {ConvexPolyhedron} geometry
+ * @return {CANNON.Shape} shape
+ */
 Mesh2shape.createConvexPolyhedron = function(object)
 {
 	var i, vertices, faces, hull;
@@ -172,7 +210,13 @@ Mesh2shape.createConvexPolyhedron = function(object)
 	return new CANNON.ConvexPolyhedron(vertices, faces);
 }
 
-//Create cylinder shape from geometry
+/**
+ * Create cylinder shape from geometry
+ *
+ * @method createCylinderShape
+ * * @param {Geometry} geometry
+ * @return {CANNON.Cylinder} shape
+ */
 Mesh2shape.createCylinderShape = function(geometry)
 {
 	var params = geometry.metadata ? geometry.metadata.parameters : geometry.parameters;
@@ -206,7 +250,13 @@ Mesh2shape.createBoundingCylinderShape = function(object, options)
 	return shape;
 }
 
-//Plane shape from geometry
+/**
+ * Plane shape from geometry
+ *
+ * @method createPlaneShape
+ * * @param {Geometry} geometry
+ * @return {CANNON.Box} shape
+ */
 Mesh2shape.createPlaneShape = function(geometry)
 {
 	geometry.computeBoundingBox();
@@ -215,14 +265,26 @@ Mesh2shape.createPlaneShape = function(geometry)
 	return new CANNON.Box(new CANNON.Vec3((box.max.x - box.min.x) / 2 || 0.1, (box.max.y - box.min.y) / 2 || 0.1, (box.max.z - box.min.z) / 2 || 0.1));
 }
 
-//Sphere shape from geometry
+/**
+ * Sphere shape from geometry
+ *
+ * @method createSphereShape
+ * * @param {Geometry} geometry
+ * @return {CANNON.Sphere} shape
+ */
 Mesh2shape.createSphereShape = function(geometry)
 {
 	var params = geometry.metadata ? geometry.metadata.parameters : geometry.parameters;
 	return new CANNON.Sphere(params.radius);
 }
 
-//Sphere shape from bouding sphere
+/**
+ * Sphere shape from bouding sphere
+ *
+ * @method createBoundingSphereShape
+ * * @param {Geometry} geometry
+ * @return {CANNON.Sphere} shape
+ */
 Mesh2shape.createBoundingSphereShape = function(object, options)
 {
 	var geometry = Mesh2shape.getGeometry(object);
@@ -230,7 +292,13 @@ Mesh2shape.createBoundingSphereShape = function(object, options)
 	return new CANNON.Sphere(options.sphereRadius || geometry.boundingSphere.radius);
 }
 
-//Tube shape from geometry
+/**
+ * Sphere shape from bouding sphere
+ *
+ * @method createTubeShape
+ * * @param {Geometry} geometry
+ * @return {CANNON.Trimesh} shape
+ */
 Mesh2shape.createTubeShape = function(geometry)
 {
 	var tmp = new THREE.BufferGeometry();
@@ -238,7 +306,13 @@ Mesh2shape.createTubeShape = function(geometry)
 	return createTrimeshShape(tmp);
 }
 
-//Trimesh shape from geometry
+/**
+ * Trimesh shape from geometry
+ * 
+ * @method createTrimeshShape
+ * * @param {Geometry} geometry
+ * @return {CANNON.Trimesh} shape
+ */
 Mesh2shape.createTrimeshShape = function(geometry)
 {
 	var indices, vertices = Mesh2shape.getVertices(geometry);
@@ -252,8 +326,14 @@ Mesh2shape.createTrimeshShape = function(geometry)
 	return new CANNON.Trimesh(vertices, indices);
 }
 
-//Returns a single geometry for the given object
-//If the object is compound, its geometries are automatically merged
+/**
+ * Returns a single geometry for the given object
+ * If the object is compound, its geometries are automatically merged
+ * 
+ * @method getGeometry
+ * * @param {Object3D} object
+ * @return {Geometry} Geometry that contains all merger geometry
+ */
 Mesh2shape.getGeometry = function(object)
 {
 	var meshes = Mesh2shape.getMeshes(object);
@@ -305,7 +385,13 @@ Mesh2shape.getGeometry = function(object)
 	return combined;
 }
 
-//Get geometry vertices
+/**
+ * Get geometry vertices
+ *
+ * @method getVertices
+ * * @param {Geometry} geometry
+ * @return {Array} array
+ */
 Mesh2shape.getVertices = function(geometry)
 {
 	if(!geometry.attributes)
@@ -315,15 +401,21 @@ Mesh2shape.getVertices = function(geometry)
 	return geometry.attributes.position.array;
 }
 
-//Returns a array of THREE.Mesh instances from the given object.
-//If nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.
+/**
+ * Returns a array of THREE.Mesh instances from the given object.
+ * If nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.
+ *
+ * @method getMeshes
+ * * @param {Object3D} object
+ * @return {Array} meshes found inside the Object3D
+ */
 Mesh2shape.getMeshes = function(object)
 {
 	var meshes = [];
 
 	object.traverse(function(child)
 	{
-		if(child.type === "Mesh")
+		if(child.type instanceof THREE.Mesh)
 		{
 			meshes.push(child);
 		}

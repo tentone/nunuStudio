@@ -5,7 +5,7 @@
  * Documentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/
  * @class PhysicsObject
  * @constructor
- * @extends {THREE.Object3D}
+ * @extends {Object3D}
  * @module Physics
  */
 
