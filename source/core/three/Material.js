@@ -1,6 +1,17 @@
 "use strict";
 
-//Dispose material
+/**
+ * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.
+ * Original documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material
+ *
+ * @class Material
+ * @module THREE
+ */
+
+/**
+ * Dispose material
+ * @method dispose
+ */
 THREE.Material.prototype.dispose = function()
 {
 	function disposeTexture(texture)

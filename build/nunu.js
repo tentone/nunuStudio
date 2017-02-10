@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.19 Alpha";
-Nunu.TIMESTAMP = "201702101540";
+Nunu.TIMESTAMP = "201702102040";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -30911,6 +30911,7 @@ THREE.Material.prototype.dispose = function() {
   a(this.roughnessMap);
   a(this.metalnessMap);
 };
+THREE.MultiMaterial.prototype.name = "material";
 THREE.MultiMaterial.prototype.dispose = function() {
   for (var a in this.materials) {
     this.materials[a].dispose();
