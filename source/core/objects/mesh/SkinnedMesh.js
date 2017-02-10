@@ -3,6 +3,7 @@
 /**
  * A mesh that has a Skeleton with bones that can then be used to animate the vertices of the geometry.
  * Based on THREE.SkinnedMesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh
+ * 
  * @class SkinnedMesh
  * @module Meshes
  * @param {Geometry} geometry Geometry used by this mesh

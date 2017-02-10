@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Canvas Texture
+ * Canvas textures can be used to draw content to the texture during runtime
+ * Canvas textures always start with black background and a red text "Canvas Texture"
+ * 
  * @class CanvasTexture
  * @constructor
  * @extends {THREE.Texture}

@@ -7,6 +7,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "CanvasTexture",
         "Container",
         "DirectionalLight",
+        "FileSystem",
         "Font",
         "HemisphereLight",
         "Image",
@@ -16,8 +17,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "LeapMotion",
         "Mesh",
         "Mouse",
-        "Nunu",
-        "NunuApp",
         "OrthographicCamera",
         "ParticleEmitter",
         "PerspectiveCamera",
@@ -51,6 +50,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Cameras",
         "Core",
         "Devices",
+        "Files",
         "Input",
         "Lights",
         "Meshes",
@@ -58,7 +58,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Particles",
         "Physics",
         "Resources",
-        "Runtime",
         "Script",
         "Sprite",
         "THREE",
@@ -89,6 +88,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Devices",
             "name": "Devices",
             "description": "Kinect device object\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\nThe server software is available inside the tools folder in the nunuStudio repository."
+        },
+        {
+            "displayName": "Files",
+            "name": "Files",
+            "description": "FileSystem is used to read and write files using nunuStudio\nSome operations are platform specific and might not work everywhere"
         },
         {
             "displayName": "Input",
@@ -126,11 +130,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API"
         },
         {
-            "displayName": "Runtime",
-            "name": "Runtime",
-            "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere"
-        },
-        {
             "displayName": "Script",
             "name": "Script",
             "description": "Script objects are used to control other objects present in the scene\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization\n - update\n   - Called on every frame (after the frame is rendered)\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
@@ -143,12 +142,12 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Textures",
             "name": "Textures",
-            "description": "Canvas Texture"
+            "description": "Canvas textures can be used to draw content to the texture during runtime\nCanvas textures always start with black background and a red text \"Canvas Texture\""
         },
         {
             "displayName": "THREE",
             "name": "THREE",
-            "description": "Scene fog"
+            "description": "Fog class is used to store fog attributes attached to a a THREE.Scene"
         }
     ],
     "elements": []

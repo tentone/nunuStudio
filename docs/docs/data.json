@@ -402,22 +402,13 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\runtime\\NunuApp.js": {
-            "name": "..\\source\\runtime\\NunuApp.js",
+        "..\\source\\core\\FileSystem.js": {
+            "name": "..\\source\\core\\FileSystem.js",
             "modules": {
-                "Runtime": 1
+                "Files": 1
             },
             "classes": {
-                "NunuApp": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\source\\Nunu.js": {
-            "name": "..\\source\\Nunu.js",
-            "modules": {},
-            "classes": {
-                "Nunu": 1
+                "FileSystem": 1
             },
             "fors": {},
             "namespaces": {}
@@ -607,7 +598,7 @@
             "tag": "module",
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
             "line": 3,
-            "description": "Canvas Texture"
+            "description": "Canvas textures can be used to draw content to the texture during runtime\nCanvas textures always start with black background and a red text \"Canvas Texture\""
         },
         "Sprite": {
             "name": "Sprite",
@@ -671,22 +662,22 @@
             "tag": "module",
             "file": "..\\source\\core\\three\\Texture.js",
             "line": 3,
-            "description": "Scene fog"
+            "description": "Fog class is used to store fog attributes attached to a a THREE.Scene"
         },
-        "Runtime": {
-            "name": "Runtime",
+        "Files": {
+            "name": "Files",
             "submodules": {},
             "elements": {},
             "classes": {
-                "NunuApp": 1,
-                "Nunu": 1
+                "FileSystem": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\Nunu.js",
-            "line": 12,
-            "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere"
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 3,
+            "description": "FileSystem is used to read and write files using nunuStudio\nSome operations are platform specific and might not work everywhere",
+            "static": 1
         }
     },
     "classes": {
@@ -1065,7 +1056,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
             "line": 3,
-            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.\nThis object was by default 3 internal hidden children",
+            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.\nThis object was by default 3 internal hidden children\n\t- Hemisphere light\n\t- Directional Light\n\t- Mesh",
             "params": [
                 {
                     "name": "autoUpdate",
@@ -1207,7 +1198,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
             "line": 3,
-            "description": "Special mesh type used to represent 3D text",
+            "description": "Special mesh type used to draw 3D text\nIt receives a Font resource that is used to triangulate and extrude font data into a 3D mesh",
             "params": [
                 {
                     "name": "text",
@@ -1579,7 +1570,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
             "line": 3,
-            "description": "Canvas Texture",
+            "description": "Canvas textures can be used to draw content to the texture during runtime\nCanvas textures always start with black background and a red text \"Canvas Texture\"",
             "is_constructor": 1,
             "extends": "{THREE.Texture}",
             "params": [
@@ -1652,7 +1643,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\Texture.js",
             "line": 3,
-            "description": "Image texture constructor, supports GIF animations",
+            "description": "Image texture constructor, supports GIF animations\nIt is based on THREE.Texture, original documentation can be found here https://threejs.org/docs/index.html#Reference/Textures/Texture",
             "is_constructor": 1,
             "extends": "{THREE.Texture}",
             "params": [
@@ -1720,7 +1711,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\VideoTexture.js",
             "line": 3,
-            "description": "Video texture, uses a video DOM element instead of a img element",
+            "description": "Video texture, uses a video DOM element instead of a img element, it is smilar to THREE.VideoTexture\nVideoTexture also provides methods for playback control",
             "is_constructor": 1,
             "extends": "{THREE.Texture}",
             "params": [
@@ -1768,7 +1759,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
             "line": 3,
-            "description": "Webcam texture is used to capture and display video from a webcam",
+            "description": "Webcam texture is used to capture and display video from a webcam in real-time\nIt uses WebRTC, the host must support it, otherwise WebcamTexture will display a black image",
             "is_constructor": 1,
             "extends": "{THREE.Texture}",
             "params": [
@@ -1811,7 +1802,7 @@
             "namespace": "",
             "file": "..\\source\\core\\three\\Fog.js",
             "line": 3,
-            "description": "Scene fog"
+            "description": "Fog class is used to store fog attributes attached to a a THREE.Scene"
         },
         "THREE.Object3D": {
             "name": "THREE.Object3D",
@@ -1843,41 +1834,19 @@
             "description": "THREE.Texture documentation is available at https://threejs.org/docs/index.html?q=texture#Reference/Textures/Texture",
             "is_constructor": 1
         },
-        "NunuApp": {
-            "name": "NunuApp",
-            "shortname": "NunuApp",
+        "FileSystem": {
+            "name": "FileSystem",
+            "shortname": "FileSystem",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "Runtime",
+            "module": "Files",
             "namespace": "",
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 90,
-            "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "canvas",
-                    "description": "Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body",
-                    "type": "DOM"
-                }
-            ]
-        },
-        "Nunu": {
-            "name": "Nunu",
-            "shortname": "Nunu",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Runtime",
-            "namespace": "",
-            "file": "..\\source\\Nunu.js",
-            "line": 12,
-            "description": "Class used to store nunu version and timstamp used for development"
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 3,
+            "description": "FileSystem is used to read and write files using nunuStudio\nSome operations are platform specific and might not work everywhere"
         }
     },
     "elements": {},
@@ -4175,7 +4144,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\RectAreaLight.js",
-            "line": 23,
+            "line": 24,
             "description": "Create JSON description",
             "itemtype": "method",
             "name": "toJSON",
@@ -4195,7 +4164,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 16,
+            "line": 20,
             "description": "Clock used to control day time",
             "itemtype": "property",
             "name": "clock",
@@ -4205,7 +4174,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 21,
+            "line": 25,
             "description": "Array with top sky colors",
             "itemtype": "property",
             "name": "colorTop",
@@ -4215,7 +4184,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 26,
+            "line": 30,
             "description": "Array with bottom sky colors",
             "itemtype": "property",
             "name": "colorBottom",
@@ -4225,7 +4194,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 31,
+            "line": 35,
             "description": "Sun color in hex RGB",
             "itemtype": "property",
             "name": "sunColor",
@@ -4236,7 +4205,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 37,
+            "line": 41,
             "description": "Moon color in hex RGB",
             "itemtype": "property",
             "name": "moonColor",
@@ -4247,7 +4216,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 43,
+            "line": 47,
             "description": "Hemisphere light used to match ambient ligth with sky color",
             "itemtype": "property",
             "name": "hemisphere",
@@ -4257,7 +4226,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 48,
+            "line": 52,
             "description": "Directional light to simulate sun light and cast shadows",
             "itemtype": "property",
             "name": "sun",
@@ -4267,7 +4236,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 53,
+            "line": 57,
             "description": "Sky mesh with material shader to calculate dinamically sky color",
             "itemtype": "property",
             "name": "sky",
@@ -4277,7 +4246,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 58,
+            "line": 62,
             "description": "If set to true the sky auto updates its time",
             "itemtype": "property",
             "name": "autoUpdate",
@@ -4288,7 +4257,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 64,
+            "line": 68,
             "description": "Sun distance",
             "itemtype": "property",
             "name": "sunDistance",
@@ -4298,7 +4267,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 69,
+            "line": 73,
             "description": "Day time in seconds",
             "itemtype": "property",
             "name": "dayTime",
@@ -4308,7 +4277,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 74,
+            "line": 78,
             "description": "Current day time in seconds",
             "itemtype": "property",
             "name": "time",
@@ -4318,7 +4287,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 166,
+            "line": 170,
             "description": "Initialize sky object\nCalled automatically by the runtime",
             "itemtype": "method",
             "name": "initialize",
@@ -4327,7 +4296,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 181,
+            "line": 185,
             "description": "Update sky state\nCalled automatically by the runtime",
             "itemtype": "method",
             "name": "update",
@@ -4336,7 +4305,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 209,
+            "line": 213,
             "description": "Update sky color and sun position\nIf autoUpdate set to true is automatically called by the update method",
             "itemtype": "method",
             "name": "updateSky",
@@ -4345,7 +4314,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 343,
+            "line": 347,
             "description": "Create JSON for object",
             "params": [
                 {
@@ -4365,7 +4334,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
-            "line": 32,
+            "line": 33,
             "description": "Update light shadow map atributtes at runtime",
             "itemtype": "method",
             "name": "updateShadowMap",
@@ -4374,7 +4343,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 13,
+            "line": 14,
             "description": "Geometry defined the object structure",
             "itemtype": "property",
             "name": "geometry",
@@ -4384,7 +4353,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 18,
+            "line": 19,
             "description": "Material is used to define how the geometry surface is shaded",
             "itemtype": "property",
             "name": "material",
@@ -4394,7 +4363,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 23,
+            "line": 24,
             "description": "Determines how the mesh triangles are constructed from the vertices.\nOnly works when the geometry is a BufferGeometry",
             "itemtype": "property",
             "name": "drawMode",
@@ -4404,7 +4373,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 41,
+            "line": 42,
             "description": "Dispose mesh along with its material and geometry",
             "itemtype": "method",
             "name": "dispose",
@@ -4413,7 +4382,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 13,
+            "line": 14,
             "description": "Geometry defined the object structure",
             "itemtype": "property",
             "name": "geometry",
@@ -4423,7 +4392,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 18,
+            "line": 19,
             "description": "Material is used to define how the geometry surface is shaded",
             "itemtype": "property",
             "name": "material",
@@ -4433,7 +4402,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 23,
+            "line": 24,
             "description": "Determines how the mesh triangles are constructed from the vertices.\nOnly works when the geometry is a BufferGeometry",
             "itemtype": "property",
             "name": "drawMode",
@@ -4443,7 +4412,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 29,
+            "line": 30,
             "description": "Array with the bones attached to this mesh",
             "itemtype": "property",
             "name": "bones",
@@ -4453,7 +4422,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 46,
+            "line": 47,
             "description": "Dispose mesh along with its material and geometry",
             "itemtype": "method",
             "name": "dispose",
@@ -4462,7 +4431,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 66,
+            "line": 67,
             "description": "Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
@@ -4483,7 +4452,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 18,
+            "line": 20,
             "description": "Material is used to define how the geometry surface is shaded",
             "itemtype": "property",
             "name": "material",
@@ -4493,7 +4462,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 23,
+            "line": 25,
             "description": "Font used to draw text",
             "itemtype": "property",
             "name": "font",
@@ -4503,7 +4472,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 28,
+            "line": 30,
             "description": "Text",
             "itemtype": "property",
             "name": "text",
@@ -4513,7 +4482,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 33,
+            "line": 35,
             "description": "Size of the text (depth)",
             "itemtype": "property",
             "name": "size",
@@ -4523,7 +4492,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 38,
+            "line": 40,
             "description": "Height of the text",
             "itemtype": "property",
             "name": "height",
@@ -4533,7 +4502,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 43,
+            "line": 45,
             "description": "Bevel",
             "itemtype": "property",
             "name": "bevel",
@@ -4543,7 +4512,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 48,
+            "line": 50,
             "description": "Bevel thickness",
             "itemtype": "property",
             "name": "bevelThickness",
@@ -4553,7 +4522,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 53,
+            "line": 55,
             "description": "Bevel size",
             "itemtype": "property",
             "name": "bevelSize",
@@ -4563,7 +4532,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 84,
+            "line": 86,
             "description": "Set font used by this text 3D instance",
             "params": [
                 {
@@ -4579,7 +4548,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 96,
+            "line": 98,
             "description": "Set Text",
             "params": [
                 {
@@ -4595,7 +4564,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 116,
+            "line": 118,
             "description": "Update text geometry\nShould be called after chaging any attribute",
             "itemtype": "method",
             "name": "updateText",
@@ -4604,7 +4573,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 138,
+            "line": 140,
             "description": "Clone this Text3D instance",
             "itemtype": "method",
             "name": "clone",
@@ -4617,7 +4586,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 148,
+            "line": 150,
             "description": "Dispose mesh along with its material and geometry",
             "itemtype": "method",
             "name": "dispose",
@@ -4626,7 +4595,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 170,
+            "line": 172,
             "description": "Create JSON for object\nNeed to backup geometry and set to undefined to avoid it being stored",
             "params": [
                 {
@@ -4890,7 +4859,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 187,
+            "line": 192,
             "description": "Create JSON for script",
             "params": [
                 {
@@ -6046,7 +6015,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 22,
+            "line": 24,
             "description": "Image is used to store a DOM canvas element",
             "itemtype": "property",
             "name": "image",
@@ -6056,7 +6025,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 27,
+            "line": 29,
             "description": "Canvas context 2D, can be used to draw content do the canvas texture",
             "itemtype": "property",
             "name": "context",
@@ -6066,7 +6035,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 32,
+            "line": 34,
             "description": "Canvas height",
             "itemtype": "property",
             "name": "height",
@@ -6076,7 +6045,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 37,
+            "line": 39,
             "description": "Canvas width",
             "itemtype": "property",
             "name": "width",
@@ -6086,7 +6055,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 68,
+            "line": 70,
             "description": "Create JSON description for canvas texture, canvas image is not serialized",
             "params": [
                 {
@@ -6102,7 +6071,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 72,
+            "line": 74,
             "description": "Dispose texture",
             "itemtype": "method",
             "name": "dispose",
@@ -6111,7 +6080,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 83,
+            "line": 85,
             "description": "Create JSON description for texture, serializes image used in the texture",
             "params": [
                 {
@@ -6127,7 +6096,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 16,
+            "line": 19,
             "description": "Video audio volume",
             "itemtype": "property",
             "name": "volume",
@@ -6138,7 +6107,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 22,
+            "line": 25,
             "description": "If true the playback starts automatically",
             "itemtype": "property",
             "name": "autoplay",
@@ -6149,7 +6118,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 28,
+            "line": 31,
             "description": "Start time in seconds",
             "itemtype": "property",
             "name": "playbackRate",
@@ -6160,7 +6129,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 34,
+            "line": 37,
             "description": "If true the video plays in loop",
             "itemtype": "property",
             "name": "loop",
@@ -6171,7 +6140,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 96,
+            "line": 99,
             "description": "Set video time in seconds",
             "params": [
                 {
@@ -6187,7 +6156,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 106,
+            "line": 109,
             "description": "Set loop mode",
             "params": [
                 {
@@ -6203,7 +6172,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 117,
+            "line": 120,
             "description": "Set video volume",
             "params": [
                 {
@@ -6219,7 +6188,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 128,
+            "line": 131,
             "description": "Set video playback speed",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -6235,7 +6204,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 139,
+            "line": 142,
             "description": "Pause video playback",
             "itemtype": "method",
             "name": "pause",
@@ -6244,7 +6213,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 151,
+            "line": 154,
             "description": "Start playing video",
             "itemtype": "method",
             "name": "play",
@@ -6253,7 +6222,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 163,
+            "line": 166,
             "description": "Dispose video texture",
             "itemtype": "method",
             "name": "dispose",
@@ -6262,7 +6231,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 179,
+            "line": 182,
             "description": "Create Video texture json description",
             "params": [
                 {
@@ -6280,12 +6249,42 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 74,
+            "line": 76,
             "description": "Dispose webcam texture",
             "itemtype": "method",
             "name": "dispose",
             "class": "WebcamTexture",
             "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\three\\Fog.js",
+            "line": 10,
+            "description": "No fog",
+            "itemtype": "attribute",
+            "name": "NONE",
+            "type": "{Number}",
+            "class": "THREE.Fog",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\source\\core\\three\\Fog.js",
+            "line": 17,
+            "description": "Linear fog",
+            "itemtype": "attribute",
+            "name": "LINEAR",
+            "type": "{Number}",
+            "class": "THREE.Fog",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\source\\core\\three\\Fog.js",
+            "line": 24,
+            "description": "Exponential fog",
+            "itemtype": "attribute",
+            "name": "EXPONENTIAL",
+            "type": "{Number}",
+            "class": "THREE.Fog",
+            "module": "THREE"
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
@@ -6887,79 +6886,21 @@
             "module": "THREE"
         },
         {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 98,
-            "description": "Nunu Program",
-            "itemtype": "property",
-            "name": "program",
-            "type": "{Program}",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 104,
-            "description": "Graphics renderer in use by this NunuApp instance",
-            "itemtype": "property",
-            "name": "renderer",
-            "type": "{THREE.Renderer}",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 110,
-            "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
-            "itemtype": "property",
-            "name": "fullscreen",
-            "type": "{boolean}",
-            "default": "false",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 117,
-            "description": "VR flag, to set VR mode the toggleVR method should be used",
-            "itemtype": "property",
-            "name": "vr",
-            "type": "{boolean}",
-            "default": "false",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 124,
-            "description": "Canvas used to render graphics",
-            "itemtype": "property",
-            "name": "canvas",
-            "type": "{DOM}",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 130,
-            "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance\nIf true the canvas is resized whenether the resize method is called",
-            "itemtype": "property",
-            "name": "canvasResize",
-            "type": "{boolean}",
-            "default": "false if a canvas is provided, else true",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 189,
-            "description": "Load program asynchronously and run it after its loaded",
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 19,
+            "description": "Read file content as text",
             "itemtype": "method",
-            "name": "loadRunProgram",
+            "name": "readFile",
             "params": [
                 {
                     "name": "fname",
-                    "description": "Name of the file to load",
+                    "description": "",
                     "type": "String"
+                },
+                {
+                    "name": "sync",
+                    "description": "If true the file will be read in sync",
+                    "type": "Boolean"
                 },
                 {
                     "name": "onLoad",
@@ -6972,206 +6913,301 @@
                     "type": "Function"
                 }
             ],
-            "class": "NunuApp",
-            "module": "Runtime"
+            "return": {
+                "description": "File content as a string",
+                "type": "String"
+            },
+            "class": "FileSystem",
+            "module": "Files"
         },
         {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 213,
-            "description": "Load program from file",
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 91,
+            "description": "Read file as arraybuffer data",
             "itemtype": "method",
-            "name": "loadProgram",
+            "name": "readFileArrayBuffer",
             "params": [
                 {
                     "name": "fname",
-                    "description": "Name of the file to load",
+                    "description": "Name of the file",
                     "type": "String"
                 }
             ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 225,
-            "description": "Start running nunu program\nA nunu program must be loaded before calling this method",
-            "itemtype": "method",
-            "name": "run",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 284,
-            "description": "Update nunu program state\nAutomatically called by the runtime handler",
-            "itemtype": "method",
-            "name": "update",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 298,
-            "description": "Exit from app\nThis method kills the app and disposes all internal elements to avoid memory leaks\nIs should be called before exiting the webpage or before switching nunu programs\nWhen loading new nunu programs the same NunuApp instance can be used",
-            "itemtype": "method",
-            "name": "exit",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 331,
-            "description": "Resize the window\nShould be called whenether the host window is resized",
-            "itemtype": "method",
-            "name": "resize",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 353,
-            "description": "Send data to running nunu application\nThe data sent using this method is received by scripts that implement the onAppData method",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Data to send",
-                    "type": "Object"
-                }
-            ],
-            "itemtype": "method",
-            "name": "sendData",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 367,
-            "description": "Set on data receive callback\nCallback receives data as an argument",
-            "itemtype": "method",
-            "name": "setOnDataReceived",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "Function executed whenether the nunu app running sends data to the host",
-                    "type": "Function"
-                }
-            ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 378,
-            "description": "Set on exit callback\nCallback is executed when exiting the nunu app",
-            "itemtype": "method",
-            "name": "setOnExit",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "onExit callback",
-                    "type": "Function"
-                }
-            ],
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 389,
-            "description": "Check if VR mode is available",
-            "itemtype": "method",
-            "name": "vrAvailable",
             "return": {
-                "description": "True if VR mode available",
-                "type": "Boolean"
+                "description": "File data as array buffer, null on error",
+                "type": "ArrayBuffer"
             },
-            "class": "NunuApp",
-            "module": "Runtime"
+            "class": "FileSystem",
+            "module": "Files"
         },
         {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 399,
-            "description": "Toggle VR mode, only works if VR mode is available",
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 125,
+            "description": "Read file as base64 data",
             "itemtype": "method",
-            "name": "toggleVR",
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 424,
-            "description": "Set fullscreen mode",
+            "name": "readFileBase64",
             "params": [
                 {
-                    "name": "fullscreen",
-                    "description": "Fullscreen value",
-                    "type": "Boolean"
+                    "name": "fname",
+                    "description": "Name of the file",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "File data in base64, null on error",
+                "type": "String"
+            },
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 150,
+            "description": "Write text file\nOnly works when running inside NWJS",
+            "itemtype": "method",
+            "name": "writeFile",
+            "params": [
+                {
+                    "name": "fname",
+                    "description": "",
+                    "type": "String"
                 },
                 {
-                    "name": "element",
-                    "description": "DOM element to go fullscren by default the rendering canvas is used",
-                    "type": "DOM"
+                    "name": "data",
+                    "description": "",
+                    "type": "String"
                 }
             ],
-            "class": "NunuApp",
-            "module": "Runtime"
+            "class": "FileSystem",
+            "module": "Files"
         },
         {
-            "file": "..\\source\\Nunu.js",
-            "line": 1,
-            "description": "Modules in this bundle",
-            "license": "nunuStudio:\n  license: MIT (http://opensource.org/licenses/MIT)\n  author: Tentone <tentone@outlook.com>",
-            "class": "Nunu",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\Nunu.js",
-            "line": 19,
-            "itemtype": "attribute",
-            "name": "NAME",
-            "type": "{String}",
-            "default": "\"nunuStudio\"",
-            "class": "Nunu",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\Nunu.js",
-            "line": 26,
-            "description": "Stores the nunu runtime version",
-            "itemtype": "attribute",
-            "name": "VERSION",
-            "type": "{String}",
-            "class": "Nunu",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\Nunu.js",
-            "line": 33,
-            "description": "Stores the nunu runtime timestamp",
-            "itemtype": "attribute",
-            "name": "TIMESTAMP",
-            "type": "{String}",
-            "class": "Nunu",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\source\\Nunu.js",
-            "line": 40,
-            "description": "Check if host has webvr enabled",
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 168,
+            "description": "Write binary file using base64 data\nOnly works when running inside NWJS",
             "itemtype": "method",
-            "name": "webvrAvailable",
+            "name": "writeFileBase64",
+            "params": [
+                {
+                    "name": "fname",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 188,
+            "description": "Copy file (cant be used to copy folders)\nOnly works when running inside NWJS",
+            "itemtype": "method",
+            "name": "copyFile",
+            "params": [
+                {
+                    "name": "src",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "dst",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 204,
+            "description": "Make a directory (dont trow exeption if directory already exists)\nOnly works when running inside NWJS",
+            "itemtype": "method",
+            "name": "makeDirectory",
+            "params": [
+                {
+                    "name": "dir",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 223,
+            "description": "Returns files in directory (returns empty array in case of error)\nOnly works when running inside NWJS",
+            "itemtype": "method",
+            "name": "getFilesDirectory",
             "return": {
-                "description": "True is webVR is available",
+                "description": "Files in the directory",
+                "type": "Array"
+            },
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 246,
+            "description": "Copy folder and all its files (includes symbolic links)\nOnly works when running inside NWJS",
+            "itemtype": "method",
+            "name": "copyFolder",
+            "params": [
+                {
+                    "name": "src",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "dest",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 287,
+            "description": "Open file chooser dialog receives onLoad callback, file filter, saveas",
+            "itemtype": "method",
+            "name": "chooseFile",
+            "params": [
+                {
+                    "name": "onLoad",
+                    "description": "onLoad callback",
+                    "type": "Function"
+                },
+                {
+                    "name": "filer",
+                    "description": "File type filter",
+                    "type": "String"
+                },
+                {
+                    "name": "saveas",
+                    "description": "Save as format",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 321,
+            "description": "Check if a file exists\nOnly works inside of NWJS",
+            "itemtype": "method",
+            "name": "fileExists",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "File path",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "True is file exists",
                 "type": "Boolean"
             },
-            "class": "Nunu",
-            "module": "Runtime"
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 339,
+            "description": "Get file name without extension from file path string\nIf input is a/b/c/abc.d output is abc",
+            "itemtype": "method",
+            "name": "getFileName",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "File path",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "File name without path and extension",
+                "type": "String"
+            },
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 352,
+            "description": "Get file name without extension\nIf input is a/b/c/abc.d output is a/b/c/abc",
+            "itemtype": "method",
+            "name": "getNameWithoutExtension",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "File path",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 365,
+            "description": "Get file directoty\nIf input is a/b/c/abc.d output is a/b/c/",
+            "itemtype": "method",
+            "name": "getFilePath",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "File path",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 378,
+            "description": "Get file extension from file path string (always in lowercase)\nIf input is a/b/c/abc.d output is d",
+            "itemtype": "method",
+            "name": "getFileExtension",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "File path",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "FileSystem",
+            "module": "Files"
         }
     ],
     "warnings": [
         {
-            "message": "unknown tag: license",
-            "line": " ..\\source\\Nunu.js:1"
+            "message": "replacing incorrect tag: returns with return",
+            "line": " ..\\source\\core\\FileSystem.js:339"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " ..\\source\\core\\FileSystem.js:352"
         },
         {
             "message": "Missing item type\nUpdate a mouse button (automatically called by the runtime)",
@@ -7183,7 +7219,7 @@
         },
         {
             "message": "Missing item type\nCreate JSON for object\nNeed to backup geometry and set to undefined to avoid it being stored",
-            "line": " ..\\source\\core\\objects\\mesh\\Text3D.js:170"
+            "line": " ..\\source\\core\\objects\\mesh\\Text3D.js:172"
         },
         {
             "message": "Missing item type\nCreate JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
@@ -7195,7 +7231,7 @@
         },
         {
             "message": "Missing item type\nCreate JSON for script",
-            "line": " ..\\source\\core\\objects\\script\\Script.js:187"
+            "line": " ..\\source\\core\\objects\\script\\Script.js:192"
         },
         {
             "message": "Missing item type\nGet skins in this animation",
@@ -7227,7 +7263,7 @@
         },
         {
             "message": "Missing item type\nCreate Video texture json description",
-            "line": " ..\\source\\core\\texture\\VideoTexture.js:179"
+            "line": " ..\\source\\core\\texture\\VideoTexture.js:182"
         },
         {
             "message": "Missing item type\nRotates the object to face a point in world space.",
@@ -7236,14 +7272,6 @@
         {
             "message": "Missing item type\nTHREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
             "line": " ..\\source\\core\\three\\Texture.js:9"
-        },
-        {
-            "message": "Missing item type\nSet fullscreen mode",
-            "line": " ..\\source\\runtime\\NunuApp.js:424"
-        },
-        {
-            "message": "Missing item type\nModules in this bundle",
-            "line": " ..\\source\\Nunu.js:1"
         }
     ]
 }

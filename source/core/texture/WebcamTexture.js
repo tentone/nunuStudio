@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Webcam texture is used to capture and display video from a webcam
+ * Webcam texture is used to capture and display video from a webcam in real-time
+ * It uses WebRTC, the host must support it, otherwise WebcamTexture will display a black image
+ * 
  * @class WebcamTexture
  * @constructor
  * @extends {THREE.Texture}

@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * FileSystem is used to read and write files using nunuStudio
+ * Some operations are platform specific and might not work everywhere
+ *
+ * @module Files
+ * @class FileSystem
+ * @static
+ */
 function FileSystem(){}
 
 try
@@ -8,7 +16,16 @@ try
 }
 catch(e){}
 
-//Read file as text
+/**
+ * Read file content as text
+ *
+ * @method readFile
+ * @param {String} fname
+ * @param {boolean} sync If true the file will be read in sync
+ * @param {Function} onLoad onLoad callback
+ * @param {Function} onProgress onProgress callback
+ * @return {String} File content as a string
+ */
 FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 {
 	if(sync === undefined)
@@ -71,7 +88,13 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 	}
 }
 
-//Read file as arraybuffer data
+/**
+ * Read file as arraybuffer data
+ *
+ * @method readFileArrayBuffer
+ * @param {String} fname Name of the file
+ * @return {ArrayBuffer} File data as array buffer, null on error
+ */
 FileSystem.readFileArrayBuffer = function(fname)
 {
 	if(FileSystem.fs !== undefined)
@@ -99,7 +122,13 @@ FileSystem.readFileArrayBuffer = function(fname)
 	}
 }
 
-//Read file as base64 data
+/**
+ * Read file as base64 data
+ *
+ * @method readFileBase64
+ * @param {String} fname Name of the file
+ * @return {String} File data in base64, null on error
+ */
 FileSystem.readFileBase64 = function(fname)
 {
 	if(FileSystem.fs !== undefined)
@@ -118,7 +147,14 @@ FileSystem.readFileBase64 = function(fname)
 	}
 }
 
-//Write text file
+/**
+ * Write text file
+ * Only works when running inside NWJS
+ *
+ * @method writeFile
+ * @param {String} fname
+ * @param {String} data
+ */
 FileSystem.writeFile = function(fname, data)
 {
 	if(FileSystem.fs !== undefined)
@@ -129,7 +165,14 @@ FileSystem.writeFile = function(fname, data)
 	}
 }
 
-//Write binary file from base64 data
+/**
+ * Write binary file using base64 data
+ * Only works when running inside NWJS
+ *
+ * @method writeFileBase64
+ * @param {String} fname
+ * @param {String} data
+ */
 FileSystem.writeFileBase64 = function(fname, data)
 {
 	if(FileSystem.fs !== undefined)
@@ -142,16 +185,29 @@ FileSystem.writeFileBase64 = function(fname, data)
 	}
 }
 
-//Copy file (cant be used to copy folders)
+/**
+ * Copy file (cant be used to copy folders)
+ * Only works when running inside NWJS
+ *
+ * @method copyFile
+ * @param {String} src
+ * @param {String} dst
+ */
 FileSystem.copyFile = function(src, dest)
 {
 	if(FileSystem.fs !== undefined)
 	{
-		FileSystem.fs.createReadStream(src).pipe(FileSystem.fs.createWriteStream(dest));
+		FileSystem.fs.createReadStream(src).pipe(FileSystem.fs.createWriteStream(dst));
 	}
 }
 
-//Make a directory (dont trow exeption if directory already exists)
+/**
+ * Make a directory (dont trow exeption if directory already exists)
+ * Only works when running inside NWJS
+ *
+ * @method makeDirectory
+ * @param {String} dir
+ */
 FileSystem.makeDirectory = function(dir)
 {
 	if(FileSystem.fs !== undefined)
@@ -164,7 +220,13 @@ FileSystem.makeDirectory = function(dir)
 	}
 }
 
-//Returns files in directory (returns empty array in case of error)
+/**
+ * Returns files in directory (returns empty array in case of error)
+ * Only works when running inside NWJS
+ *
+ * @method getFilesDirectory
+ * @return {Array} Files in the directory
+ */
 FileSystem.getFilesDirectory = function(dir)
 {
 	if(FileSystem.fs !== undefined)
@@ -181,7 +243,14 @@ FileSystem.getFilesDirectory = function(dir)
 	return [];
 }
 
-//Copy folder and all its files (includes symbolic links)
+/**
+ * Copy folder and all its files (includes symbolic links)
+ * Only works when running inside NWJS
+ *
+ * @method copyFolder
+ * @param {String} src
+ * @param {String} dest
+ */
 FileSystem.copyFolder = function(src, dest)
 {
 	if(FileSystem.fs !== undefined)
@@ -215,8 +284,15 @@ FileSystem.copyFolder = function(src, dest)
 	}
 }
 
-//Open file chooser dialog receives callback function, file filter, saveas
-FileSystem.chooseFile = function(callback, filter, saveas)
+/**
+ * Open file chooser dialog receives onLoad callback, file filter, saveas
+ *
+ * @method chooseFile
+ * @param {Function} onLoad onLoad callback
+ * @param {String} filer File type filter
+ * @param {String} saveas Save as format
+ */
+FileSystem.chooseFile = function(onLoad, filter, saveas)
 {
 	var chooser = document.createElement("input");
 	chooser.type = "file";
@@ -233,15 +309,23 @@ FileSystem.chooseFile = function(callback, filter, saveas)
 
 	chooser.onchange = function(event)
 	{
-		if(callback !== undefined)
+		if(onLoad !== undefined)
 		{
-			callback(chooser.files);
+			onLoad(chooser.files);
 		}
 	};
 	
 	chooser.click();
 }
 
+/**
+ * Check if a file exists
+ * Only works inside of NWJS
+ *
+ * @method fileExists
+ * @param {String} file File path
+ * @return {boolean} True is file exists
+ */
 FileSystem.fileExists = function(file)
 {
 	if(FileSystem.fs !== undefined)
@@ -252,25 +336,53 @@ FileSystem.fileExists = function(file)
 	return false;
 }
 
-//Get file name from file path string
+/**
+ * Get file name without extension from file path string
+ * If input is a/b/c/abc.d output is abc
+ * 
+ * @method getFileName
+ * @param {String} file File path
+ * @returns {String} File name without path and extension
+ */
 FileSystem.getFileName = function(file)
 {
 	return file.substring(file.lastIndexOf("\\") + 1, file.lastIndexOf("."));
 }
 
-//Get file name without extension
+/**
+ * Get file name without extension
+ * If input is a/b/c/abc.d output is a/b/c/abc
+ *
+ * @method getNameWithoutExtension
+ * @param {String} file File path
+ * @returns {String}
+ */
 FileSystem.getNameWithoutExtension = function(file)
 {
 	return file.substring(0, file.lastIndexOf("."));
 }
 
-//Get file directoty
+/**
+ * Get file directoty
+ * If input is a/b/c/abc.d output is a/b/c/
+ *
+ * @method getFilePath
+ * @param {String} file File path
+ * @return {String}
+ */
 FileSystem.getFilePath = function(file)
 {
 	return file.substring(0, file.lastIndexOf("\\") + 1);
 }
 
-//Get file extension from file path string (always in lowercase)
+/**
+ * Get file extension from file path string (always in lowercase)
+ * If input is a/b/c/abc.d output is d
+ *
+ * @method getFileExtension
+ * @param {String} file File path
+ * @return {String}
+ */
 FileSystem.getFileExtension = function(file)
 {
 	return file.substring(file.lastIndexOf(".") + 1, file.length).toLowerCase();
