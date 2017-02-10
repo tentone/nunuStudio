@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.19 Alpha";
-Nunu.TIMESTAMP = "201702092252";
+Nunu.TIMESTAMP = "201702101540";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -30732,7 +30732,7 @@ FileSystem.writeFileBase64 = function(a, g) {
   void 0 !== FileSystem.fs && (g = Buffer.from(Base64Utils.removeHeader(g), "base64"), a = FileSystem.fs.createWriteStream(a), a.write(g), a.end());
 };
 FileSystem.copyFile = function(a, g) {
-  void 0 !== FileSystem.fs && FileSystem.fs.createReadStream(a).pipe(FileSystem.fs.createWriteStream(g));
+  void 0 !== FileSystem.fs && FileSystem.fs.createReadStream(a).pipe(FileSystem.fs.createWriteStream(dst));
 };
 FileSystem.makeDirectory = function(a) {
   if (void 0 !== FileSystem.fs) {

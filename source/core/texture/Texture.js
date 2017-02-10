@@ -2,6 +2,8 @@
 
 /**
  * Image texture constructor, supports GIF animations
+ * It is based on THREE.Texture, original documentation can be found here https://threejs.org/docs/index.html#Reference/Textures/Texture
+ * 
  * @class Texture
  * @constructor
  * @extends {THREE.Texture}

@@ -3,6 +3,10 @@
 /**
  * Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.
  * This object was by default 3 internal hidden children
+ * 	- Hemisphere light
+ * 	- Directional Light
+ * 	- Mesh
+ * 
  * @param {boolean} autoUpdate If true sky auto updated its state 
  * @param {Number} dayTime Day duration in seconds
  * @param {Number} sunDistance Distance of the sun

@@ -2,6 +2,7 @@
 
 /**
  * Same as THREE.SpotLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/SpotLight
+ *
  * @param {Number} color Light color in hex RGB
  * @param {Number} intensity Light intensity
  * @param {Number} distance SpotLight maximum range

@@ -3,6 +3,7 @@
 /**
  * Meshs are used to combine a geometry and a material forming a complete rederizable object
  * Based on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh
+ * 
  * @class Mesh
  * @module Meshes
  * @param {Geometry} geometry Geometry used by this mesh
