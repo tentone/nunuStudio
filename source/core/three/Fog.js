@@ -1,8 +1,9 @@
 "use strict";
 
 /**
- * Fog class is used to store fog attributes attached to a a THREE.Scene
- * 
+ * Fog class is used to store fog attributes attached to a Scene
+ * Original documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2
+ *
  * @class Fog
  * @module THREE
  */

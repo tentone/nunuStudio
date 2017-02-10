@@ -19,10 +19,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "Keyboard",
         "KinectDevice",
         "LeapMotion",
+        "Material",
         "Mesh",
         "Mesh2shape",
         "Mouse",
+        "MultiMaterial",
         "Object3D",
+        "ObjectUtils",
         "OrthographicCamera",
         "ParticleEmitter",
         "PerspectiveCamera",
@@ -156,7 +159,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "THREE",
             "name": "THREE",
-            "description": "Fog class is used to store fog attributes attached to a a THREE.Scene"
+            "description": "Fog class is used to store fog attributes attached to a Scene\nOriginal documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
         }
     ],
     "elements": []
