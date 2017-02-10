@@ -4,7 +4,7 @@
  * PositionalAudio is used to play audio with positional audio effect
  * @param {Audio} audio Audio used by this emitter
  * @class PositionalAudio
- * @extends {THREE.PositionalAudio}
+ * @extends {PositionalAudio}
  * @module Audio
  * @constructor
  */

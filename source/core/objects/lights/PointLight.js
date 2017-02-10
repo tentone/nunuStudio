@@ -7,7 +7,7 @@
  * @param {Number} distance Maximum PointLight range
  * @param {Number} decay
  * @class PointLight
- * @extends {THREE.PointLight}
+ * @extends {PointLight}
  * @module Lights
  * @constructor
  */

@@ -10,7 +10,7 @@
  * @param {Number} exponent
  * @param {Number} decay
  * @class SpotLight
- * @extends {THREE.SpotLight}
+ * @extends {SpotLight}
  * @module Lights
  * @constructor
  */

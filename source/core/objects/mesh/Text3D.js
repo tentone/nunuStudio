@@ -15,7 +15,7 @@
  * @param {Number} size
  * @param {Number} curveSegments
  * @constructor
- * @extends {THREE.Mesh}
+ * @extends {Mesh}
  */
 /**
  * Material is used to define how the geometry surface is shaded

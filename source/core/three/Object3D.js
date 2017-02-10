@@ -5,7 +5,7 @@
  * This page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.
  * All nunuStudio objects extend the Object3D class of some other higher level class from three.js.
  * Code examples provided for three.js should also work inside nunuStudio.
- * @class THREE.Object3D
+ * @class Object3D
  * @module THREE
  * @constructor
  */

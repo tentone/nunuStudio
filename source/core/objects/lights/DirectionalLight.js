@@ -5,7 +5,7 @@
  * @param {Number} hex Light color in hex RGB
  * @param {Number} intensity Light intensity
  * @class DirectionalLight
- * @extends {THREE.DirectionalLight}
+ * @extends {DirectionalLight}
  * @module Lights
  * @constructor
  */

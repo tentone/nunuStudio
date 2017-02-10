@@ -6,7 +6,7 @@
  * @class Scene
  * @module Core
  * @constructor
- * @extends {THREE.Scene}
+ * @extends {Scene}
  */
 
 /**

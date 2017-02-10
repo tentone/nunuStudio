@@ -6,7 +6,7 @@
  * More information abou spine available here www.esotericsoftware.com
  * @class SpineAnimation
  * @constructor
- * @extends {THREE.Mesh}
+ * @extends {Mesh}
  * @param {Object} json
  * @param {String} atlas
  * @param {String} path

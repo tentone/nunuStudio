@@ -5,7 +5,7 @@
  * Based on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera
  * @class OrthographicCamera
  * @constructor
- * @extends {THREE.OrthographicCamera}
+ * @extends {OrthographicCamera}
  * @module Cameras
  * @param {Number} size Camera size relative to resize mode
  * @param {Number} aspect Aspect ratio X/Y

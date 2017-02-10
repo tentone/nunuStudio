@@ -6,7 +6,7 @@
  * @class LeapMotion
  * @constructor
  * @module Devices
- * @extends {THREE.Object3D}
+ * @extends {Object3D}
  */
 
 /**

@@ -6,7 +6,7 @@
  * The operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.
  * The server software is available inside the tools folder in the nunuStudio repository. 
  * @class KinectDevice
- * @extends {THREE.Object3D}
+ * @extends {Object3D}
  * @constructor
  * @module Devices
  */

@@ -3,7 +3,7 @@
 /**
  * Fog class is used to store fog attributes attached to a a THREE.Scene
  * 
- * @class THREE.Fog
+ * @class Fog
  * @module THREE
  */
 

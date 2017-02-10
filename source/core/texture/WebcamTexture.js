@@ -6,7 +6,7 @@
  * 
  * @class WebcamTexture
  * @constructor
- * @extends {THREE.Texture}
+ * @extends {Texture}
  * @param {Number} mapping
  * @param {Number} wrapS
  * @param {Number} wrapT

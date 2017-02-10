@@ -12,7 +12,7 @@
  * @param {Number} sunDistance Distance of the sun
  * @param {Number} time Starting time
  * @class Sky
- * @extends {THREE.Object3D}
+ * @extends {Object3D}
  * @module Lights
  * @constructor
  */
