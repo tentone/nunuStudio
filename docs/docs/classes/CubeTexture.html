@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio CanvasTexture</title>  
+	<title>nunuStudio CubeTexture</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -130,7 +130,7 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>CanvasTexture Class</h1>
+						<h1>CubeTexture Class</h1>
 						<div class="box meta">
 						
 								<div class="extends">
@@ -144,23 +144,21 @@
 						
 						
 						<div class="box intro">
-							<p>Canvas textures can be used to draw content to the texture during runtime
-						Canvas textures always start with black background and a red text &quot;Canvas Texture&quot;</p>
+							<p>CubeTextures represent 360 view using six images, these images correspond to the faces of a cube
+						CubeTextures can be used to simulate reflections and transparency refraction in materials
+						Is also possible to create dynamic cubetextures using the CubeCamera object</p>
 						
 						</div>
 						
 							<div class="constructor">
 								<h2>Constructor</h2>
-								<div id="method_CanvasTexture" class="method item">
-									<h3 class="name"><code>CanvasTexture</code></h3>
+								<div id="method_CubeTexture" class="method item">
+									<h3 class="name"><code>CubeTexture</code></h3>
 								
 										<div class="args">
 											<span class="paren">(</span><ul class="args-list inline commas">
 												<li class="arg">
-														<code>width</code>
-												</li>
-												<li class="arg">
-														<code>height</code>
+														<code>images</code>
 												</li>
 												<li class="arg">
 														<code>mapping</code>
@@ -216,23 +214,12 @@
 								
 											<ul class="params-list">
 												<li class="param">
-														<code class="param-name">width</code>
-														<span class="type">Number</span>
+														<code class="param-name">images</code>
+														<span class="type">Array</span>
 								
 								
 													<div class="param-description">
-														<p>Canvas width</p>
-								
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">height</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														<p>Canvas height</p>
+														<p>Image array with 6 images</p>
 								
 													</div>
 								
@@ -339,7 +326,6 @@
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
@@ -357,28 +343,6 @@
 											</ul>
 										</div>
 						
-										<div class="index-section properties">
-											<h3>Properties</h3>
-						
-											<ul class="index-list properties extends">
-													<li class="index-item property">
-														<a href="#property_context">context</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_height">height</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_image">image</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_width">width</a>
-						
-													</li>
-											</ul>
-										</div>
 						
 						
 								</div>
@@ -397,6 +361,9 @@
 														</ul><span class="paren">)</span>
 													</div>
 											
+													<span class="returns-inline">
+														<span class="type">Object</span>
+													</span>
 											
 											
 											
@@ -413,7 +380,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Create JSON description for canvas texture, canvas image is not serialized</p>
+													<p>Serialize cubetexture to JSON</p>
 											
 												</div>
 											
@@ -434,106 +401,19 @@
 														</ul>
 													</div>
 											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Object</span>:
+																<p>json</p>
+											
+														</div>
+													</div>
 											
 											</div>
 									</div>
 						
-									<div id="properties" class="api-class-tabpanel">
-										<h2 class="off-left">Properties</h2>
-						
-											<div id="property_context" class="property item">
-												<h3 class="name"><code>context</code></h3>
-												<span class="type">Context2D</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Canvas context 2D, can be used to draw content do the canvas texture</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_height" class="property item">
-												<h3 class="name"><code>height</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Canvas height</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_image" class="property item">
-												<h3 class="name"><code>image</code></h3>
-												<span class="type">DOM</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Image is used to store a DOM canvas element</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_width" class="property item">
-												<h3 class="name"><code>width</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Canvas width</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
 						
 						
 							</div>

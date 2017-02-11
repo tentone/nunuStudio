@@ -49,7 +49,7 @@ var Lang   = Y.Lang,
 
     LIST_ITEM_TEMPLATE =
         '<li class="api-list-item {typeSingular}">' +
-            '<a href="{rootPath}{typePlural}/{name}.html">{displayName}</a>' +
+            '<a href="../{typePlural}/{name}.html">{displayName}</a>' +
         '</li>';
 
 // -- Init ---------------------------------------------------------------------

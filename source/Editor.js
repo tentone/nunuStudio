@@ -64,6 +64,7 @@ include("core/texture/CanvasTexture.js");
 include("core/texture/VideoTexture.js");
 include("core/texture/WebcamTexture.js");
 include("core/texture/Texture.js");
+include("core/texture/CubeTexture.js");
 
 include("core/loaders/FontLoader.js");
 include("core/loaders/ImageLoader.js");
@@ -217,6 +218,7 @@ include("editor/ui/tab/material/ShaderMaterialEditor.js");
 include("editor/ui/tab/material/PointMaterialEditor.js");
 include("editor/ui/tab/texture/TextureEditor.js");
 include("editor/ui/tab/texture/VideoTextureEditor.js");
+include("editor/ui/tab/texture/CubeTextureEditor.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");
