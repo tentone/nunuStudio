@@ -33,10 +33,8 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.scene = new THREE.Scene();
 
 	//Cube map
-	var urls = ["data/sample.png","data/sample.png","data/sample.png","data/sample.png","data/sample.png","data/sample.png"];
-	this.texture = new THREE.CubeTextureLoader().load(urls);
-	this.texture.format = THREE.RGBFormat;
-	this.texture.mapping = THREE.CubeRefractionMapping;
+	var image = new Image("data/sample.png");
+	this.texture = new CubeTexture([image, image, image, image, image, image]);
 	this.scene.background = this.texture;
 
 	//Form
@@ -57,7 +55,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		{
 			self.texture.name = self.name.getText();
 			self.updateMaterial();
-			Editor.updateObjectViews();
+			//Editor.updateObjectViews();
 		}
 	});
 	this.form.add(this.name);
