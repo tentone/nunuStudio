@@ -75,8 +75,7 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Texture map
 	this.form.addText("Texture");
-	this.form.nextRow();
-	this.texture = new TextureBox(this.form.element);
+	this.texture = new TextureChooser(this.form.element);
 	this.texture.size.set(100, 100);
 	this.texture.updateInterface();
 	this.texture.setOnChange(function(file)
@@ -105,7 +104,7 @@ function ParticleEditor(parent, closeable, container, index)
 	//Blending mode
 	this.form.addText("Blending Mode");
 	this.blending = new DropdownList(this.form.element);
-	this.blending.size.set(120, 18);
+	this.blending.size.set(100, 18);
 	this.blending.addValue("None", THREE.NoBlending);
 	this.blending.addValue("Normal", THREE.NormalBlending);
 	this.blending.addValue("Additive", THREE.AdditiveBlending);
@@ -136,7 +135,7 @@ function ParticleEditor(parent, closeable, container, index)
 	//Particle Count
 	this.form.addText("Particle rate");
 	this.particleCount = new NumberBox(this.form.element);
-	this.particleCount.size.set(100, 18);
+	this.particleCount.size.set(50, 18);
 	this.particleCount.setStep(1);
 	this.particleCount.setOnChange(function()
 	{
@@ -149,7 +148,7 @@ function ParticleEditor(parent, closeable, container, index)
 	//Particle Duration
 	this.form.addText("Duration");
 	this.duration = new NumberBox(this.form.element);
-	this.duration.size.set(60, 18);
+	this.duration.size.set(50, 18);
 	this.duration.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.duration.setOnChange(function()
 	{
