@@ -27,14 +27,6 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 ### Examples
 [![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/pong.png)](http://tentone.github.io/nunuStudio/examples/pong)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/fps.png)](http://tentone.github.io/nunuStudio/small/fps)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/spine.png)](http://tentone.github.io/nunuStudio/examples/spine)
 
-### Todo
-- Documentation website
-- Blockly based visual block scripting
-- Audio editor
-- Editor UI
-	- CTRL-Z and CTRL-Y support
-	- File dialogs sometimes dont open/save files
-
 ### ChangeLog
 - V0.8.9.15 Alpha
 	- Added font preview in asset explorer
@@ -73,6 +65,11 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 - V0.8.9.19 Alpha
 	- Renamed variables variable_name to variableName
 	- Added Texture Editor
+	- Documentation page
+
+### Documentation
+ - Documentation for the scripting API is available on the nunu webpage
+ - nunuStudio was documented using YUIDocs
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
@@ -134,6 +131,8 @@ nunuStudio uses a number of open source projects to work properly
 	- github.com/leapmotion/leapjs
 - JSHint
 	- jshint.com
+- YUIDocs
+	- yui.github.io/yuidoc
 
 ### Installation
 - nunuStudio is intended to run with NWJS direcly on the desktop
