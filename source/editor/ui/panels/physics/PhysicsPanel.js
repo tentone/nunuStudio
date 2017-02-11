@@ -158,7 +158,7 @@ function PhysicsPanel(parent, obj)
 	this.form.nextRow();
 
 	//Collising group
-	this.form.addText("Collision Group");
+	this.form.addText("Physics Group");
 	this.collisionFilterGroup = new NumberBox(this.form.element);
 	this.collisionFilterGroup.size.set(30, 18);
 	this.collisionFilterGroup.setStep(1);

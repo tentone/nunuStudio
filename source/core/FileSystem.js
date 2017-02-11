@@ -148,8 +148,7 @@ FileSystem.readFileBase64 = function(fname)
 }
 
 /**
- * Write text file
- * Only works when running inside NWJS
+ * Write text file, when running without NWJS it writes file as a blob and autodownloads it
  *
  * @method writeFile
  * @param {String} fname
@@ -162,6 +161,22 @@ FileSystem.writeFile = function(fname, data)
 		var stream = FileSystem.fs.createWriteStream(fname, "utf8");
 		stream.write(data);
 		stream.end();
+	}
+	else
+	{
+		var blob = new Blob([data], {type:'text/plain'});
+
+		var download = document.createElement("a");
+		download.download = fname;
+		download.href = window.URL.createObjectURL(blob);
+		download.onclick = function()
+		{
+			document.body.removeChild(this);
+		};
+		download.style.display = "none";
+		document.body.appendChild(download);
+
+		download.click();
 	}
 }
 
@@ -186,7 +201,7 @@ FileSystem.writeFileBase64 = function(fname, data)
 }
 
 /**
- * Copy file (cant be used to copy folders)
+ * Copy file (cannot be used to copy folders)
  * Only works when running inside NWJS
  *
  * @method copyFile

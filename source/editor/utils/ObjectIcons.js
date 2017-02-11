@@ -7,7 +7,7 @@ function ObjectIcons(){}
 ObjectIcons.icons = [];
 
 //Default icon
-ObjectIcons.icons["Object3D"] = "editor/files/icons/tab/scene.png";
+ObjectIcons.icons["Object3D"] = "editor/files/icons/misc/scene.png";
 
 //Devices
 ObjectIcons.icons["Kinect"] = "editor/files/icons/hw/kinect.png";

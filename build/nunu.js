@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.19 Alpha";
-Nunu.TIMESTAMP = "201702110154";
+Nunu.TIMESTAMP = "201702110413";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -3243,9 +3243,9 @@ Nunu.webvrAvailable = function() {
         var n = a, k = b, q = e, G = Math.pow(2, d), g = [], p, r;
         for (p = 0;p <= G;p++) {
           g[p] = [];
-          var u = n.clone().lerp(q, p / G), U = k.clone().lerp(q, p / G), l = G - p;
-          for (r = 0;r <= l;r++) {
-            g[p][r] = 0 === r && p === G ? u : u.clone().lerp(U, r / l);
+          var u = n.clone().lerp(q, p / G), l = k.clone().lerp(q, p / G), U = G - p;
+          for (r = 0;r <= U;r++) {
+            g[p][r] = 0 === r && p === G ? u : u.clone().lerp(l, r / U);
           }
         }
         for (p = 0;p < G;p++) {
@@ -12760,17 +12760,17 @@ Nunu.webvrAvailable = function() {
       }
     }
     this.nCachedObjects_ = b;
-  }, uncache:function(d) {
-    for (var a = this._objects, b = a.length, c = this.nCachedObjects_, e = this._indicesByUUID, h = this._bindings, f = h.length, n = 0, k = arguments.length;n !== k;++n) {
+  }, uncache:function(a) {
+    for (var d = this._objects, b = d.length, c = this.nCachedObjects_, e = this._indicesByUUID, h = this._bindings, f = h.length, n = 0, k = arguments.length;n !== k;++n) {
       var q = arguments[n].uuid, g = e[q];
       if (void 0 !== g) {
         if (delete e[q], g < c) {
-          var q = --c, p = a[q], r = --b, u = a[r];
+          var q = --c, p = d[q], r = --b, u = d[r];
           e[p.uuid] = g;
-          a[g] = p;
+          d[g] = p;
           e[u.uuid] = q;
-          a[q] = u;
-          a.pop();
+          d[q] = u;
+          d.pop();
           p = 0;
           for (u = f;p !== u;++p) {
             var l = h[p], w = l[r];
@@ -12779,33 +12779,33 @@ Nunu.webvrAvailable = function() {
             l.pop();
           }
         } else {
-          for (r = --b, u = a[r], e[u.uuid] = g, a[g] = u, a.pop(), p = 0, u = f;p !== u;++p) {
+          for (r = --b, u = d[r], e[u.uuid] = g, d[g] = u, d.pop(), p = 0, u = f;p !== u;++p) {
             l = h[p], l[g] = l[r], l.pop();
           }
         }
       }
     }
     this.nCachedObjects_ = c;
-  }, subscribe_:function(a, b) {
-    var d = this._bindingsIndicesByPath, c = d[a], e = this._bindings;
+  }, subscribe_:function(d, a) {
+    var b = this._bindingsIndicesByPath, c = b[d], e = this._bindings;
     if (void 0 !== c) {
       return e[c];
     }
     var h = this._paths, f = this._parsedPaths, n = this._objects, m = this.nCachedObjects_, k = Array(n.length), c = e.length;
-    d[a] = c;
-    h.push(a);
-    f.push(b);
+    b[d] = c;
+    h.push(d);
+    f.push(a);
     e.push(k);
-    d = m;
-    for (c = n.length;d !== c;++d) {
-      k[d] = new Ja(n[d], a, b);
+    b = m;
+    for (c = n.length;b !== c;++b) {
+      k[b] = new Ja(n[b], d, a);
     }
     return k;
-  }, unsubscribe_:function(a) {
-    var d = this._bindingsIndicesByPath, b = d[a];
+  }, unsubscribe_:function(d) {
+    var a = this._bindingsIndicesByPath, b = a[d];
     if (void 0 !== b) {
       var c = this._paths, e = this._parsedPaths, h = this._bindings, f = h.length - 1, n = h[f];
-      d[a[f]] = b;
+      a[d[f]] = b;
       h[b] = n;
       h.pop();
       e[b] = e[f];
@@ -12831,12 +12831,12 @@ Nunu.webvrAvailable = function() {
     return this.enabled && !this.paused && 0 !== this.timeScale && null === this._startTime && this._mixer._isActiveAction(this);
   }, isScheduled:function() {
     return this._mixer._isActiveAction(this);
-  }, startAt:function(a) {
-    this._startTime = a;
+  }, startAt:function(d) {
+    this._startTime = d;
     return this;
-  }, setLoop:function(a, b) {
-    this.loop = a;
-    this.repetitions = b;
+  }, setLoop:function(d, a) {
+    this.loop = d;
+    this.repetitions = a;
     return this;
   }, setEffectiveWeight:function(a) {
     this.weight = a;
@@ -30726,7 +30726,20 @@ FileSystem.readFileBase64 = function(a) {
   return Base64Utils.fromBinaryString(g.response);
 };
 FileSystem.writeFile = function(a, g) {
-  void 0 !== FileSystem.fs && (a = FileSystem.fs.createWriteStream(a, "utf8"), a.write(g), a.end());
+  if (void 0 !== FileSystem.fs) {
+    a = FileSystem.fs.createWriteStream(a, "utf8"), a.write(g), a.end();
+  } else {
+    g = new Blob([g], {type:"text/plain"});
+    var l = document.createElement("a");
+    l.download = a;
+    l.href = window.URL.createObjectURL(g);
+    l.onclick = function() {
+      document.body.removeChild(this);
+    };
+    l.style.display = "none";
+    document.body.appendChild(l);
+    l.click();
+  }
 };
 FileSystem.writeFileBase64 = function(a, g) {
   void 0 !== FileSystem.fs && (g = Buffer.from(Base64Utils.removeHeader(g), "base64"), a = FileSystem.fs.createWriteStream(a), a.write(g), a.end());
