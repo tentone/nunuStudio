@@ -9,6 +9,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "BufferUtils",
         "CanvasTexture",
         "Container",
+        "CubeTexture",
         "DirectionalLight",
         "FileSystem",
         "Fog",

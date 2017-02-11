@@ -203,8 +203,6 @@ TextureEditor.prototype.activate = function()
 {
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
-	
-	//Mouse.setCanvas(this.canvas.element);
 }
 
 //Update object data

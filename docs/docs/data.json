@@ -344,6 +344,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\texture\\CubeTexture.js": {
+            "name": "..\\source\\core\\texture\\CubeTexture.js",
+            "modules": {},
+            "classes": {
+                "CubeTexture": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\texture\\Texture.js": {
             "name": "..\\source\\core\\texture\\Texture.js",
             "modules": {},
@@ -649,6 +658,7 @@
             "classes": {
                 "CanvasTexture": 1,
                 "SpineTexture": 1,
+                "CubeTexture": 1,
                 "Texture": 1,
                 "VideoTexture": 1,
                 "WebcamTexture": 1
@@ -1660,6 +1670,74 @@
                     "name": "height",
                     "description": "Canvas height",
                     "type": "Number"
+                },
+                {
+                    "name": "mapping",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapS",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "wrapT",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "magFilter",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "minFilter",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "format",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "anisotropy",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "encoding",
+                    "description": "",
+                    "type": "Number"
+                }
+            ]
+        },
+        "CubeTexture": {
+            "name": "CubeTexture",
+            "shortname": "CubeTexture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\source\\core\\texture\\CubeTexture.js",
+            "line": 3,
+            "description": "CubeTextures represent 360 view using six images, these images correspond to the faces of a cube\nCubeTextures can be used to simulate reflections and transparency refraction in materials\nIs also possible to create dynamic cubetextures using the CubeCamera object",
+            "is_constructor": 1,
+            "extends": "{Texture}",
+            "params": [
+                {
+                    "name": "images",
+                    "description": "Image array with 6 images",
+                    "type": "Array"
                 },
                 {
                     "name": "mapping",
@@ -6233,6 +6311,26 @@
             "itemtype": "method",
             "name": "toJSON",
             "class": "CanvasTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CubeTexture.js",
+            "line": 39,
+            "description": "Serialize cubetexture to JSON",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "CubeTexture",
             "module": "Textures"
         },
         {
