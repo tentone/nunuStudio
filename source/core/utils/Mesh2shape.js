@@ -49,11 +49,11 @@ Mesh2shape.createShape = function(object, type)
 		}
 		else if(type === Mesh2shape.Type.CYLINDER)
 		{
-			return Mesh2shape.createBoundingCylinderShape(object, options);
+			return Mesh2shape.createBoundingCylinderShape(object);
 		}
 		else if(type === Mesh2shape.Type.SPHERE)
 		{
-			return Mesh2shape.createBoundingSphereShape(object, options);
+			return Mesh2shape.createBoundingSphereShape(object);
 		}
 		else if(type === Mesh2shape.Type.HULL)
 		{
@@ -69,8 +69,7 @@ Mesh2shape.createShape = function(object, type)
 		return null;
 	}
 
-	type = geometry.metadata ? geometry.metadata.type : geometry.type;
-	switch(type)
+	switch(geometry.type)
 	{
 		case "BoxGeometry":
 		case "BoxBufferGeometry":
@@ -105,7 +104,7 @@ Mesh2shape.createShape = function(object, type)
  * Create box shape from geometry
  *
  * @method createBoxShape
- * * @param {Geometry} geometry
+ * @param {Geometry} geometry
  * @return {CANNON.Box} shape
  */
 Mesh2shape.createBoxShape = function(geometry)
@@ -128,7 +127,7 @@ Mesh2shape.createBoxShape = function(geometry)
  * Bounding box needs to be computed with the entire mesh, not just geometry
  *
  * @method createBoundingBoxShape
- * * @param {Geometry} geometry
+ * @param {Geometry} geometry
  * @return {CANNON.Box} shape
  */
 Mesh2shape.createBoundingBoxShape = function(object)
@@ -163,7 +162,7 @@ Mesh2shape.createBoundingBoxShape = function(object)
  * Computes 3D convex hull as a CANNON.ConvexPolyhedron
  *
  * @method createConvexPolyhedron
- * * @param {ConvexPolyhedron} geometry
+ * @param {ConvexPolyhedron} geometry
  * @return {CANNON.Shape} shape
  */
 Mesh2shape.createConvexPolyhedron = function(object)
@@ -182,16 +181,15 @@ Mesh2shape.createConvexPolyhedron = function(object)
 	}
 
 	//Perturb
-	for(i = 0; i < geometry.vertices.length; i++)
+	/*for(i = 0; i < geometry.vertices.length; i++)
 	{
 		geometry.vertices[i].x +=(Math.random() - 0.5) * 1e-4;
 		geometry.vertices[i].y +=(Math.random() - 0.5) * 1e-4;
 		geometry.vertices[i].z +=(Math.random() - 0.5) * 1e-4;
-	}
+	}*/
 
 	//Compute the 3D convex hull
 	var hull = new quickhull()(geometry);
-	console.log(hull);
 
 	//Convert from Vector3 to CANNON.Vec3
 	vertices = new Array(hull.vertices.length);
@@ -214,12 +212,12 @@ Mesh2shape.createConvexPolyhedron = function(object)
  * Create cylinder shape from geometry
  *
  * @method createCylinderShape
- * * @param {Geometry} geometry
+ * @param {Geometry} geometry
  * @return {CANNON.Cylinder} shape
  */
 Mesh2shape.createCylinderShape = function(geometry)
 {
-	var params = geometry.metadata ? geometry.metadata.parameters : geometry.parameters;
+	var params = geometry.parameters;
 
 	var shape = new CANNON.Cylinder(params.radiusTop, params.radiusBottom, params.height, params.radialSegments);
 	shape.orientation = new CANNON.Quaternion();
@@ -228,24 +226,29 @@ Mesh2shape.createCylinderShape = function(geometry)
 	return shape;
 }
 
-//Create cylinder shape from bounding cylinder
-Mesh2shape.createBoundingCylinderShape = function(object, options)
+/**
+ * Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere
+ *
+ * @method createBoundingCylinderShape
+ * @param {Object3D} object
+ * @return {CANNON.Cylinder} shape
+ */
+Mesh2shape.createBoundingCylinderShape = function(object)
 {
-	var axes = ["x", "y", "z"],
-		majorAxis = options.cylinderAxis || "y",
-		minorAxes = axes.splice(axes.indexOf(majorAxis), 1) && axes;
+	var axes = ["x", "y", "z"];
+	var minorAxes = axes.splice(axes.indexOf("y"), 1) && axes;
 
 	//Compute cylinder dimensions
 	var geometry = Mesh2shape.getGeometry(object);
 	geometry.computeBoundingBox();
 	geometry.computeBoundingSphere();
-	var height = geometry.boundingBox.max[majorAxis] - geometry.boundingBox.min[majorAxis];
+	var height = geometry.boundingBox.max["y"] - geometry.boundingBox.min["y"];
 	var radius = 0.5 * Math.max(geometry.boundingBox.max[minorAxes[0]] - geometry.boundingBox.min[minorAxes[0]],geometry.boundingBox.max[minorAxes[1]] - geometry.boundingBox.min[minorAxes[1]]);
 
 	//Create shape
 	var shape = new CANNON.Cylinder(radius, radius, height, 12);
 	shape.orientation = new CANNON.Quaternion();
-	shape.orientation.setFromEuler(majorAxis === "y" ? PI2 : 0, majorAxis === "z" ? PI2 : 0, 0, "XYZ").normalize();
+	shape.orientation.setFromEuler(PI2, 0, 0, "XYZ").normalize();
 	
 	return shape;
 }
@@ -254,49 +257,49 @@ Mesh2shape.createBoundingCylinderShape = function(object, options)
  * Plane shape from geometry
  *
  * @method createPlaneShape
- * * @param {Geometry} geometry
+ * @param {Geometry} geometry
  * @return {CANNON.Box} shape
  */
 Mesh2shape.createPlaneShape = function(geometry)
 {
 	geometry.computeBoundingBox();
-
 	var box = geometry.boundingBox;
-	return new CANNON.Box(new CANNON.Vec3((box.max.x - box.min.x) / 2 || 0.1, (box.max.y - box.min.y) / 2 || 0.1, (box.max.z - box.min.z) / 2 || 0.1));
+
+	return new CANNON.Box(new CANNON.Vec3((box.max.x - box.min.x) / 2, (box.max.y - box.min.y) / 2, (box.max.z - box.min.z) / 2));
 }
 
 /**
  * Sphere shape from geometry
  *
  * @method createSphereShape
- * * @param {Geometry} geometry
+ * @param {Geometry} geometry
  * @return {CANNON.Sphere} shape
  */
 Mesh2shape.createSphereShape = function(geometry)
 {
-	var params = geometry.metadata ? geometry.metadata.parameters : geometry.parameters;
-	return new CANNON.Sphere(params.radius);
+	return new CANNON.Sphere(geometry.parameters.radius);
 }
 
 /**
  * Sphere shape from bouding sphere
  *
  * @method createBoundingSphereShape
- * * @param {Geometry} geometry
+ * @param {Geometry} geometry
  * @return {CANNON.Sphere} shape
  */
-Mesh2shape.createBoundingSphereShape = function(object, options)
+Mesh2shape.createBoundingSphereShape = function(object)
 {
 	var geometry = Mesh2shape.getGeometry(object);
 	geometry.computeBoundingSphere();
-	return new CANNON.Sphere(options.sphereRadius || geometry.boundingSphere.radius);
+
+	return new CANNON.Sphere(geometry.boundingSphere.radius);
 }
 
 /**
  * Sphere shape from bouding sphere
  *
  * @method createTubeShape
- * * @param {Geometry} geometry
+ * @param {Geometry} geometry
  * @return {CANNON.Trimesh} shape
  */
 Mesh2shape.createTubeShape = function(geometry)
@@ -310,7 +313,7 @@ Mesh2shape.createTubeShape = function(geometry)
  * Trimesh shape from geometry
  * 
  * @method createTrimeshShape
- * * @param {Geometry} geometry
+ * @param {Geometry} geometry
  * @return {CANNON.Trimesh} shape
  */
 Mesh2shape.createTrimeshShape = function(geometry)
@@ -331,7 +334,7 @@ Mesh2shape.createTrimeshShape = function(geometry)
  * If the object is compound, its geometries are automatically merged
  * 
  * @method getGeometry
- * * @param {Object3D} object
+ * @param {Object3D} object
  * @return {Geometry} Geometry that contains all merger geometry
  */
 Mesh2shape.getGeometry = function(object)
@@ -350,46 +353,48 @@ Mesh2shape.getGeometry = function(object)
 	{
 		var position = new THREE.Vector3();
 		var quaternion = new THREE.Quaternion();
-		var scale = new THREE.Vector3();
+		var scale = new THREE.Vector3(1, 1, 1);
 
 		tmp = meshes[0].geometry.clone();
-		tmp.metadata = meshes[0].geometry.metadata;
 		meshes[0].updateMatrixWorld();
 		meshes[0].matrixWorld.decompose(position, quaternion, scale);
 
 		return tmp.scale(scale.x, scale.y, scale.z);
 	}
-
-	var combined = new THREE.Geometry();
-	var mesh;
-
-	//Recursively merge geometry, preserving local transforms
-	while((mesh = meshes.pop()))
+	//If more than one mesh found merge into single geometry
+	else
 	{
-		mesh.updateMatrixWorld();
+		var combined = new THREE.Geometry();
+		var mesh;
 
-		if(mesh.geometry instanceof THREE.BufferGeometry)
+		//Recursively merge geometry, preserving local transforms
+		while((mesh = meshes.pop()))
 		{
-			tmp.fromBufferGeometry(mesh.geometry);
-			combined.merge(tmp, mesh.matrixWorld);
+			mesh.updateMatrixWorld();
+
+			if(mesh.geometry instanceof THREE.BufferGeometry)
+			{
+				tmp.fromBufferGeometry(mesh.geometry);
+				combined.merge(tmp, mesh.matrixWorld);
+			}
+			else
+			{
+				combined.merge(mesh.geometry, mesh.matrixWorld);
+			}
 		}
-		else
-		{
-			combined.merge(mesh.geometry, mesh.matrixWorld);
-		}
+
+		var matrix = new THREE.Matrix4();
+		matrix.scale(object.scale);
+		combined.applyMatrix(matrix);
+		return combined;
 	}
-
-	var matrix = new THREE.Matrix4();
-	matrix.scale(object.scale);
-	combined.applyMatrix(matrix);
-	return combined;
 }
 
 /**
  * Get geometry vertices
  *
  * @method getVertices
- * * @param {Geometry} geometry
+ * @param {Geometry} geometry
  * @return {Array} array
  */
 Mesh2shape.getVertices = function(geometry)
@@ -406,7 +411,7 @@ Mesh2shape.getVertices = function(geometry)
  * If nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.
  *
  * @method getMeshes
- * * @param {Object3D} object
+ * @param {Object3D} object
  * @return {Array} meshes found inside the Object3D
  */
 Mesh2shape.getMeshes = function(object)
@@ -415,7 +420,7 @@ Mesh2shape.getMeshes = function(object)
 
 	object.traverse(function(child)
 	{
-		if(child.type instanceof THREE.Mesh)
+		if(child instanceof THREE.Mesh)
 		{
 			meshes.push(child);
 		}

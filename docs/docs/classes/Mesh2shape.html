@@ -163,27 +163,31 @@
 						
 											<ul class="index-list methods">
 													<li class="index-item method">
-														<a href="#method_createBoundingBoxShape!~YUIDOC_LINE~!* @param  geometry">createBoundingBoxShape!~YUIDOC_LINE~!* @param  geometry</a>
+														<a href="#method_createBoundingBoxShape">createBoundingBoxShape</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_createBoundingSphereShape!~YUIDOC_LINE~!* @param  geometry">createBoundingSphereShape!~YUIDOC_LINE~!* @param  geometry</a>
+														<a href="#method_createBoundingCylinderShape">createBoundingCylinderShape</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_createBoxShape!~YUIDOC_LINE~!* @param  geometry">createBoxShape!~YUIDOC_LINE~!* @param  geometry</a>
+														<a href="#method_createBoundingSphereShape">createBoundingSphereShape</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_createConvexPolyhedron!~YUIDOC_LINE~!* @param  geometry">createConvexPolyhedron!~YUIDOC_LINE~!* @param  geometry</a>
+														<a href="#method_createBoxShape">createBoxShape</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_createCylinderShape!~YUIDOC_LINE~!* @param  geometry">createCylinderShape!~YUIDOC_LINE~!* @param  geometry</a>
+														<a href="#method_createConvexPolyhedron">createConvexPolyhedron</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_createPlaneShape!~YUIDOC_LINE~!* @param  geometry">createPlaneShape!~YUIDOC_LINE~!* @param  geometry</a>
+														<a href="#method_createCylinderShape">createCylinderShape</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_createPlaneShape">createPlaneShape</a>
 						
 													</li>
 													<li class="index-item method">
@@ -191,27 +195,27 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_createSphereShape!~YUIDOC_LINE~!* @param  geometry">createSphereShape!~YUIDOC_LINE~!* @param  geometry</a>
+														<a href="#method_createSphereShape">createSphereShape</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_createTrimeshShape!~YUIDOC_LINE~!* @param  geometry">createTrimeshShape!~YUIDOC_LINE~!* @param  geometry</a>
+														<a href="#method_createTrimeshShape">createTrimeshShape</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_createTubeShape!~YUIDOC_LINE~!* @param  geometry">createTubeShape!~YUIDOC_LINE~!* @param  geometry</a>
+														<a href="#method_createTubeShape">createTubeShape</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_getGeometry!~YUIDOC_LINE~!* @param  object">getGeometry!~YUIDOC_LINE~!* @param  object</a>
+														<a href="#method_getGeometry">getGeometry</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_getMeshes!~YUIDOC_LINE~!* @param  object">getMeshes!~YUIDOC_LINE~!* @param  object</a>
+														<a href="#method_getMeshes">getMeshes</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_getVertices!~YUIDOC_LINE~!* @param  geometry">getVertices!~YUIDOC_LINE~!* @param  geometry</a>
+														<a href="#method_getVertices">getVertices</a>
 						
 													</li>
 											</ul>
@@ -233,10 +237,16 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_createBoundingBoxShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
-												<h3 class="name"><code>createBoundingBoxShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+											<div id="method_createBoundingBoxShape" class="method item">
+												<h3 class="name"><code>createBoundingBoxShape</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>geometry</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">CANNON.Box</span>
@@ -261,6 +271,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">geometry</code>
+																	<span class="type">Geometry</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -273,10 +299,78 @@
 													</div>
 											
 											</div>
-											<div id="method_createBoundingSphereShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
-												<h3 class="name"><code>createBoundingSphereShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+											<div id="method_createBoundingCylinderShape" class="method item">
+												<h3 class="name"><code>createBoundingCylinderShape</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>object</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">CANNON.Cylinder</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">object</code>
+																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">CANNON.Cylinder</span>:
+																<p>shape</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_createBoundingSphereShape" class="method item">
+												<h3 class="name"><code>createBoundingSphereShape</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>geometry</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">CANNON.Sphere</span>
@@ -301,6 +395,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">geometry</code>
+																	<span class="type">Geometry</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -313,10 +423,16 @@
 													</div>
 											
 											</div>
-											<div id="method_createBoxShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
-												<h3 class="name"><code>createBoxShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+											<div id="method_createBoxShape" class="method item">
+												<h3 class="name"><code>createBoxShape</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>geometry</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">CANNON.Box</span>
@@ -341,6 +457,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">geometry</code>
+																	<span class="type">Geometry</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -353,10 +485,16 @@
 													</div>
 											
 											</div>
-											<div id="method_createConvexPolyhedron!~YUIDOC_LINE~!* @param  geometry" class="method item">
-												<h3 class="name"><code>createConvexPolyhedron!~YUIDOC_LINE~!* @param  geometry</code></h3>
+											<div id="method_createConvexPolyhedron" class="method item">
+												<h3 class="name"><code>createConvexPolyhedron</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>geometry</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">CANNON.Shape</span>
@@ -381,6 +519,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">geometry</code>
+																	<span class="type">ConvexPolyhedron</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -393,10 +547,16 @@
 													</div>
 											
 											</div>
-											<div id="method_createCylinderShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
-												<h3 class="name"><code>createCylinderShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+											<div id="method_createCylinderShape" class="method item">
+												<h3 class="name"><code>createCylinderShape</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>geometry</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">CANNON.Cylinder</span>
@@ -421,6 +581,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">geometry</code>
+																	<span class="type">Geometry</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -433,10 +609,16 @@
 													</div>
 											
 											</div>
-											<div id="method_createPlaneShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
-												<h3 class="name"><code>createPlaneShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+											<div id="method_createPlaneShape" class="method item">
+												<h3 class="name"><code>createPlaneShape</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>geometry</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">CANNON.Box</span>
@@ -461,6 +643,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">geometry</code>
+																	<span class="type">Geometry</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -549,10 +747,16 @@
 													</div>
 											
 											</div>
-											<div id="method_createSphereShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
-												<h3 class="name"><code>createSphereShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+											<div id="method_createSphereShape" class="method item">
+												<h3 class="name"><code>createSphereShape</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>geometry</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">CANNON.Sphere</span>
@@ -577,6 +781,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">geometry</code>
+																	<span class="type">Geometry</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -589,10 +809,16 @@
 													</div>
 											
 											</div>
-											<div id="method_createTrimeshShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
-												<h3 class="name"><code>createTrimeshShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+											<div id="method_createTrimeshShape" class="method item">
+												<h3 class="name"><code>createTrimeshShape</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>geometry</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">CANNON.Trimesh</span>
@@ -617,6 +843,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">geometry</code>
+																	<span class="type">Geometry</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -629,10 +871,16 @@
 													</div>
 											
 											</div>
-											<div id="method_createTubeShape!~YUIDOC_LINE~!* @param  geometry" class="method item">
-												<h3 class="name"><code>createTubeShape!~YUIDOC_LINE~!* @param  geometry</code></h3>
+											<div id="method_createTubeShape" class="method item">
+												<h3 class="name"><code>createTubeShape</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>geometry</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">CANNON.Trimesh</span>
@@ -657,6 +905,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">geometry</code>
+																	<span class="type">Geometry</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -669,10 +933,16 @@
 													</div>
 											
 											</div>
-											<div id="method_getGeometry!~YUIDOC_LINE~!* @param  object" class="method item">
-												<h3 class="name"><code>getGeometry!~YUIDOC_LINE~!* @param  object</code></h3>
+											<div id="method_getGeometry" class="method item">
+												<h3 class="name"><code>getGeometry</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>object</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">Geometry</span>
@@ -698,6 +968,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">object</code>
+																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -710,10 +996,16 @@
 													</div>
 											
 											</div>
-											<div id="method_getMeshes!~YUIDOC_LINE~!* @param  object" class="method item">
-												<h3 class="name"><code>getMeshes!~YUIDOC_LINE~!* @param  object</code></h3>
+											<div id="method_getMeshes" class="method item">
+												<h3 class="name"><code>getMeshes</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>object</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">Array</span>
@@ -739,6 +1031,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">object</code>
+																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
@@ -751,10 +1059,16 @@
 													</div>
 											
 											</div>
-											<div id="method_getVertices!~YUIDOC_LINE~!* @param  geometry" class="method item">
-												<h3 class="name"><code>getVertices!~YUIDOC_LINE~!* @param  geometry</code></h3>
+											<div id="method_getVertices" class="method item">
+												<h3 class="name"><code>getVertices</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>geometry</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 													<span class="returns-inline">
 														<span class="type">Array</span>
@@ -779,6 +1093,22 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">geometry</code>
+																	<span class="type">Geometry</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 													<div class="returns">
 														<h4>Returns:</h4>
