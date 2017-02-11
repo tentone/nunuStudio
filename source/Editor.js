@@ -178,6 +178,7 @@ include("editor/ui/element/input/NumberBox.js");
 include("editor/ui/element/input/CoordinatesBox.js");
 include("editor/ui/element/input/ImageChooser.js");
 include("editor/ui/element/input/TextureBox.js");
+include("editor/ui/element/input/TextureChooser.js");
 
 include("editor/ui/DropdownMenu.js");
 include("editor/ui/TreeView.js");
