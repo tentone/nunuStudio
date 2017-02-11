@@ -3,6 +3,7 @@
 /**
  * Particle emitter is a wrapper for SPE particle systems
  * Documentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html
+ * 
  * @class ParticleEmitter
  * @constructor
  * @extends {Points}

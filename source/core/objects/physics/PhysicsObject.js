@@ -3,6 +3,7 @@
 /**
  * Wrapper for cannon.js Body physics objects
  * Documentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/
+ * 
  * @class PhysicsObject
  * @constructor
  * @extends {Object3D}

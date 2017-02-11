@@ -3,6 +3,7 @@
 /**
  * Sprites allways face the screen are used for 2D elements
  * Based on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite
+ * 
  * @class Sprite
  * @module Sprite
  * @param {Material} material Material used to draw sprites

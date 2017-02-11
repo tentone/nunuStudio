@@ -2,6 +2,7 @@
 
 /**
  * AudioEmitter is a Object3D used to play audio inside the scene
+ * 
  * @param {Audio} audio Audio used by this emitter
  * @class AudioEmitter
  * @extends {Audio}
@@ -67,7 +68,9 @@ AudioEmitter.listener = new THREE.AudioListener();
 AudioEmitter.prototype = Object.create(THREE.Audio.prototype);
 
 /**
- * Initialize audio object (called by the runtime)
+ * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True
+ * Called by the runtime
+ * 
  * @method initialize
  */
 AudioEmitter.prototype.initialize = function()
@@ -83,6 +86,7 @@ AudioEmitter.prototype.initialize = function()
 	}
 
 	this.setVolume(this.volume);
+	this.setPlaybackRate(this.playbackRate);
 
 	for(var i = 0; i < this.children.length; i++)
 	{

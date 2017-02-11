@@ -687,7 +687,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\Scene.js",
             "line": 3,
-            "description": "Program class contains all the data of an nunuStudio program"
+            "description": "Program class contains all the data of a nunuStudio program\nProgram is also used to store and manage all available resources"
         },
         "Resources": {
             "name": "Resources",
@@ -1486,7 +1486,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\Program.js",
             "line": 3,
-            "description": "Program class contains all the data of an nunuStudio program",
+            "description": "Program class contains all the data of a nunuStudio program\nProgram is also used to store and manage all available resources",
             "is_constructor": 1,
             "params": [
                 {
@@ -3111,7 +3111,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 11,
+            "line": 12,
             "description": "Audio volume",
             "itemtype": "property",
             "name": "volume",
@@ -3122,7 +3122,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 17,
+            "line": 18,
             "description": "If true the playback starts automatically",
             "itemtype": "property",
             "name": "autoplay",
@@ -3133,7 +3133,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 23,
+            "line": 24,
             "description": "Start time in seconds",
             "itemtype": "property",
             "name": "playbackRate",
@@ -3144,7 +3144,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 29,
+            "line": 30,
             "description": "Start time in seconds",
             "itemtype": "property",
             "name": "startTime",
@@ -3155,7 +3155,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 35,
+            "line": 36,
             "description": "If true the audio plays in loop",
             "itemtype": "property",
             "name": "loop",
@@ -3166,8 +3166,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 69,
-            "description": "Initialize audio object (called by the runtime)",
+            "line": 70,
+            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True\nCalled by the runtime",
             "itemtype": "method",
             "name": "initialize",
             "class": "AudioEmitter",
@@ -3175,7 +3175,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 93,
+            "line": 97,
             "description": "Dispose audio object",
             "itemtype": "method",
             "name": "dispose",
@@ -3184,7 +3184,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 111,
+            "line": 115,
             "description": "Change audio emitter volume",
             "itemtype": "method",
             "name": "setVolume",
@@ -3200,7 +3200,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 124,
+            "line": 128,
             "description": "Create JSON description",
             "itemtype": "method",
             "name": "toJSON",
@@ -3220,7 +3220,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 148,
+            "line": 152,
             "description": "Starts playback",
             "itemtype": "method",
             "name": "play",
@@ -3229,7 +3229,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 153,
+            "line": 157,
             "description": "Pauses playback",
             "itemtype": "method",
             "name": "pause",
@@ -3238,7 +3238,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 158,
+            "line": 162,
             "description": "Stops playback and resets time to 0",
             "itemtype": "method",
             "name": "pause",
@@ -3247,7 +3247,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 163,
+            "line": 167,
             "description": "Set loop mode",
             "params": [
                 {
@@ -3263,7 +3263,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 169,
+            "line": 173,
             "description": "Set playback speed",
             "params": [
                 {
@@ -3279,7 +3279,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 175,
+            "line": 179,
             "description": "Add the filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -3295,7 +3295,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 181,
+            "line": 185,
             "description": "Set the filters array to value.",
             "itemtype": "method",
             "name": "setFilters",
@@ -3311,7 +3311,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 11,
+            "line": 12,
             "description": "Audio volume",
             "itemtype": "property",
             "name": "volume",
@@ -3322,7 +3322,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 17,
+            "line": 18,
             "description": "If true the playback starts automatically",
             "itemtype": "property",
             "name": "autoplay",
@@ -3333,7 +3333,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 23,
+            "line": 24,
             "description": "Start time in seconds",
             "itemtype": "property",
             "name": "playbackRate",
@@ -3344,7 +3344,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 29,
+            "line": 30,
             "description": "Start time in seconds",
             "itemtype": "property",
             "name": "startTime",
@@ -3355,7 +3355,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 35,
+            "line": 36,
             "description": "If true the audio plays in loop",
             "itemtype": "property",
             "name": "loop",
@@ -3366,8 +3366,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 68,
-            "description": "Initialize audio object (called by the runtime)",
+            "line": 69,
+            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True\nCalled by the runtime",
             "itemtype": "method",
             "name": "initialize",
             "class": "PositionalAudio",
@@ -3375,7 +3375,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 103,
+            "line": 107,
             "description": "Update positional audio state",
             "itemtype": "method",
             "name": "update",
@@ -3384,7 +3384,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 126,
+            "line": 130,
             "description": "Dispose audio object",
             "itemtype": "method",
             "name": "dispose",
@@ -3393,7 +3393,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 144,
+            "line": 148,
             "description": "Change audio emitter volume",
             "itemtype": "method",
             "name": "setVolume",
@@ -3413,7 +3413,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 164,
+            "line": 168,
             "description": "Create JSON description",
             "itemtype": "method",
             "name": "toJSON",
@@ -3433,7 +3433,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 188,
+            "line": 192,
             "description": "Starts playback",
             "itemtype": "method",
             "name": "play",
@@ -3442,7 +3442,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 193,
+            "line": 197,
             "description": "Pauses playback",
             "itemtype": "method",
             "name": "pause",
@@ -3451,7 +3451,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 198,
+            "line": 202,
             "description": "Stops playback and resets time to 0",
             "itemtype": "method",
             "name": "pause",
@@ -3460,7 +3460,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 203,
+            "line": 207,
             "description": "Set loop mode",
             "params": [
                 {
@@ -3476,7 +3476,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 209,
+            "line": 213,
             "description": "Set playback speed",
             "params": [
                 {
@@ -3492,7 +3492,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 215,
+            "line": 219,
             "description": "Add the filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -3508,7 +3508,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 221,
+            "line": 225,
             "description": "Set the filters array to value.",
             "itemtype": "method",
             "name": "setFilters",
@@ -4779,7 +4779,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 12,
+            "line": 13,
             "description": "SPE Group\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html",
             "itemtype": "property",
             "name": "group",
@@ -4789,7 +4789,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 18,
+            "line": 19,
             "description": "SPE EmitterW\nEmitter has attributes that can be used to controll the particle system\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html",
             "itemtype": "property",
             "name": "emitter",
@@ -4799,7 +4799,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 116,
+            "line": 117,
             "description": "Initialize particle system\nCalled automatically by the runtime",
             "itemtype": "method",
             "name": "initialize",
@@ -4808,7 +4808,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 131,
+            "line": 132,
             "description": "Update particle emitter state\nCalled automatically by the runtime",
             "itemtype": "method",
             "name": "update",
@@ -4817,7 +4817,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 146,
+            "line": 147,
             "description": "Dispose particle emitter",
             "itemtype": "method",
             "name": "dispose",
@@ -4826,7 +4826,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 170,
+            "line": 171,
             "description": "Create JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
             "params": [
                 {
@@ -4844,7 +4844,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 12,
+            "line": 13,
             "description": "cannon.js Body object",
             "itemtype": "attribute",
             "name": "body",
@@ -4854,7 +4854,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 17,
+            "line": 18,
             "description": "cannon.js world",
             "itemtype": "attribute",
             "name": "world",
@@ -4864,7 +4864,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 38,
+            "line": 39,
             "description": "Intialize physics object and add it to the scene physics world\nAutomatically called by the runtime",
             "itemtype": "method",
             "name": "initialize",
@@ -4873,7 +4873,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 67,
+            "line": 68,
             "description": "Update object position and rotation based on cannon.js body\nAutomatically called by the runtime",
             "itemtype": "method",
             "name": "update",
@@ -4882,7 +4882,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 87,
+            "line": 88,
             "description": "Add shape to physics object body",
             "params": [
                 {
@@ -4898,7 +4898,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 100,
+            "line": 101,
             "description": "Create JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
             "params": [
                 {
@@ -4916,7 +4916,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 28,
+            "line": 29,
             "description": "Javascript code attached to the script",
             "itemtype": "property",
             "name": "code",
@@ -4926,7 +4926,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 33,
+            "line": 34,
             "description": "Compiled function used during runtime",
             "itemtype": "attribute",
             "name": "script",
@@ -4936,7 +4936,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 38,
+            "line": 39,
             "description": "Pointer to the parent program\nUsed access program resources easier",
             "itemtype": "property",
             "name": "program",
@@ -4946,7 +4946,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 44,
+            "line": 45,
             "description": "Pointer to the parent scene",
             "itemtype": "property",
             "name": "scene",
@@ -4956,7 +4956,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 65,
+            "line": 66,
             "description": "Default script code used when creating a new Script",
             "itemtype": "attribute",
             "name": "default",
@@ -4966,7 +4966,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 72,
+            "line": 73,
             "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
             "itemtype": "method",
             "name": "initialize",
@@ -4975,7 +4975,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 111,
+            "line": 112,
             "description": "Update script state\nCalls the script update method if it exists",
             "itemtype": "method",
             "name": "update",
@@ -4984,7 +4984,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 138,
+            "line": 139,
             "description": "Call resize method if available",
             "itemtype": "method",
             "name": "resize",
@@ -4993,7 +4993,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 150,
+            "line": 151,
             "description": "Call onAppData if available",
             "itemtype": "method",
             "name": "appData",
@@ -5009,7 +5009,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 163,
+            "line": 164,
             "description": "Set script code",
             "itemtype": "method",
             "name": "setCode",
@@ -5025,7 +5025,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 192,
+            "line": 193,
             "description": "Create JSON for script",
             "params": [
                 {
@@ -5043,7 +5043,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 17,
+            "line": 18,
             "description": "Array of SpineTextures used by the animation",
             "itemtype": "property",
             "name": "textures",
@@ -5053,7 +5053,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 23,
+            "line": 24,
             "description": "Animation data",
             "itemtype": "property",
             "name": "json",
@@ -5063,7 +5063,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 29,
+            "line": 30,
             "description": "Texture atlas information",
             "itemtype": "property",
             "name": "atlas",
@@ -5073,7 +5073,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 111,
+            "line": 112,
             "description": "Update animation state\nAutomatically called by the rutime",
             "itemtype": "method",
             "name": "update",
@@ -5082,7 +5082,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 131,
+            "line": 132,
             "description": "Get all available animations",
             "itemtype": "method",
             "name": "getAnimations",
@@ -5095,7 +5095,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 141,
+            "line": 142,
             "description": "Set animation from track number and name",
             "itemtype": "method",
             "name": "setAnimation",
@@ -5116,7 +5116,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 156,
+            "line": 157,
             "description": "Get skins in this animation",
             "return": {
                 "description": "[description]",
@@ -5127,7 +5127,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 165,
+            "line": 166,
             "description": "Update mesh geometry from animation state",
             "itemtype": "method",
             "name": "updateGeometry",
@@ -5136,7 +5136,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 224,
+            "line": 225,
             "description": "Create JSON for script",
             "params": [
                 {
@@ -5154,7 +5154,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
-            "line": 13,
+            "line": 14,
             "description": "Material used to render the sprite",
             "itemtype": "property",
             "name": "material",
@@ -5164,7 +5164,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
-            "line": 28,
+            "line": 29,
             "description": "Dispose the sprite material",
             "itemtype": "method",
             "name": "dispose",
@@ -5173,7 +5173,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 13,
+            "line": 15,
             "description": "NunuRuntime instance used to communication between nunu app and the host webpage",
             "itemtype": "property",
             "name": "app",
@@ -5183,7 +5183,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 18,
+            "line": 20,
             "description": "Enable virtual reality flag",
             "itemtype": "property",
             "name": "vr",
@@ -5194,7 +5194,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 24,
+            "line": 26,
             "description": "Virtual reality movement scale",
             "itemtype": "property",
             "name": "vrScale",
@@ -5205,7 +5205,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 30,
+            "line": 32,
             "description": "Program description",
             "itemtype": "property",
             "name": "description",
@@ -5215,7 +5215,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 35,
+            "line": 37,
             "description": "Program author",
             "itemtype": "property",
             "name": "author",
@@ -5225,7 +5225,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 40,
+            "line": 42,
             "description": "Program version",
             "itemtype": "property",
             "name": "version",
@@ -5236,7 +5236,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 46,
+            "line": 48,
             "description": "Antialiasing flag",
             "itemtype": "property",
             "name": "antialiasing",
@@ -5247,7 +5247,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 52,
+            "line": 54,
             "description": "If true the program is rendered with shadows",
             "itemtype": "property",
             "name": "shadows",
@@ -5258,7 +5258,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 58,
+            "line": 60,
             "description": "Shadow type",
             "itemtype": "property",
             "name": "shadowsType",
@@ -5269,7 +5269,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 64,
+            "line": 66,
             "description": "Flag to control pointer locking",
             "itemtype": "property",
             "name": "lockPointer",
@@ -5280,7 +5280,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 133,
+            "line": 135,
             "description": "Select initial scene and initialize that scene\nAutomatically called by the runtime",
             "itemtype": "method",
             "name": "initialize",
@@ -5289,7 +5289,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 168,
+            "line": 170,
             "description": "Set program mouse and keyboard",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -5310,7 +5310,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 180,
+            "line": 182,
             "description": "Set program renderer",
             "itemtype": "method",
             "name": "setRenderer",
@@ -5326,7 +5326,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 191,
+            "line": 193,
             "description": "Enter VR mode",
             "itemtype": "method",
             "name": "displayVR",
@@ -5335,7 +5335,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 216,
+            "line": 218,
             "description": "Exit VR mode",
             "itemtype": "method",
             "name": "exitVR",
@@ -5344,7 +5344,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 235,
+            "line": 237,
             "description": "Update program state\nAutomatically called by the runtime",
             "itemtype": "method",
             "name": "update",
@@ -5353,7 +5353,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 245,
+            "line": 247,
             "description": "Render program to canvas\nRenderer passed as argument",
             "itemtype": "method",
             "name": "render",
@@ -5369,7 +5369,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 293,
+            "line": 295,
             "description": "Resize program elements\nCalled by the runtime every time the window is resized",
             "itemtype": "method",
             "name": "resize",
@@ -5390,7 +5390,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 319,
+            "line": 321,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object\nThis method should be used inside of script objects during runtime",
             "itemtype": "method",
             "name": "setScene",
@@ -5406,7 +5406,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 347,
+            "line": 349,
             "description": "Remove Scene from program",
             "itemtype": "method",
             "name": "remove",
@@ -5422,7 +5422,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 368,
+            "line": 370,
             "description": "Add new scene to this program\nOn the program class only scenes can be added as children",
             "itemtype": "method",
             "name": "add",
@@ -5438,7 +5438,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 389,
+            "line": 391,
             "description": "Clone program, keeping uuids and every identification attribute\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data",
             "itemtype": "method",
             "name": "clone",
@@ -5451,7 +5451,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 400,
+            "line": 402,
             "description": "Set a scene as initial scene using its uuid\nThis method is used by the editor",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -5467,7 +5467,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 411,
+            "line": 413,
             "description": "Create a scene using a default template\nThis is the scene used when creating a new program or scene inside the editor",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -5483,7 +5483,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 454,
+            "line": 456,
             "description": "Dispose program data to avoid memory leaks\nCalled when exiting the program",
             "itemtype": "method",
             "name": "dispose",
@@ -5492,7 +5492,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 486,
+            "line": 488,
             "description": "Receive external data and pass it to all script instances",
             "params": [
                 {
@@ -5508,7 +5508,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 522,
+            "line": 524,
             "description": "Send data to external app instance",
             "params": [
                 {
@@ -5524,7 +5524,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 553,
+            "line": 555,
             "description": "Serialize object as JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -5549,7 +5549,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 12,
+            "line": 13,
             "description": "Cannon.js world used for physics simulation",
             "itemtype": "property",
             "name": "world",
@@ -5559,7 +5559,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 16,
+            "line": 17,
             "description": "Raycaster used for mouse interaction with 3D objects",
             "itemtype": "property",
             "name": "raycaster",
@@ -5569,7 +5569,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 20,
+            "line": 21,
             "description": "Normalized mouse coordinates used by the raycaster",
             "itemtype": "property",
             "name": "mouse",
@@ -5579,7 +5579,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 24,
+            "line": 25,
             "description": "Program that contains this scene",
             "itemtype": "property",
             "name": "program",
@@ -5589,7 +5589,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 28,
+            "line": 29,
             "description": "Canvas used to draw this scene",
             "itemtype": "property",
             "name": "canvas",
@@ -5599,7 +5599,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 68,
+            "line": 69,
             "description": "Initialize scene objects\nCalled automatically by the runtime",
             "itemtype": "method",
             "name": "initialize",
@@ -5608,7 +5608,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 89,
+            "line": 90,
             "description": "Update scene\nCalled automatically by the runtime",
             "itemtype": "method",
             "name": "update",
@@ -5617,7 +5617,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 112,
+            "line": 113,
             "description": "Get camera from scene using cameras uuid",
             "itemtype": "method",
             "name": "getCamera",
@@ -5637,7 +5637,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 143,
+            "line": 144,
             "description": "Add camera to active cameras list",
             "itemtype": "method",
             "name": "addCamera",
@@ -5653,7 +5653,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 154,
+            "line": 155,
             "description": "Update active cameras order",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -5662,7 +5662,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 166,
+            "line": 167,
             "description": "Remove camera from active camera list",
             "params": [
                 {
@@ -5678,7 +5678,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 180,
+            "line": 181,
             "description": "Set scene fog mode",
             "params": [
                 {
@@ -5694,7 +5694,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 203,
+            "line": 204,
             "description": "Serialize object as JSON\nAlso serializes physics world information",
             "itemtype": "method",
             "name": "toJSON",
@@ -7981,23 +7981,23 @@
         },
         {
             "message": "Missing item type\nCreate JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
-            "line": " ..\\source\\core\\objects\\particle\\ParticleEmitter.js:170"
+            "line": " ..\\source\\core\\objects\\particle\\ParticleEmitter.js:171"
         },
         {
             "message": "Missing item type\nCreate JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
-            "line": " ..\\source\\core\\objects\\physics\\PhysicsObject.js:100"
+            "line": " ..\\source\\core\\objects\\physics\\PhysicsObject.js:101"
         },
         {
             "message": "Missing item type\nCreate JSON for script",
-            "line": " ..\\source\\core\\objects\\script\\Script.js:192"
+            "line": " ..\\source\\core\\objects\\script\\Script.js:193"
         },
         {
             "message": "Missing item type\nGet skins in this animation",
-            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:156"
+            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:157"
         },
         {
             "message": "Missing item type\nCreate JSON for script",
-            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:224"
+            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:225"
         },
         {
             "message": "Missing item type\nSerialize audio data as JSON, audio data is serialized in Base64",

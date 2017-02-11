@@ -3,6 +3,7 @@
 /**
  * Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.
  * Scene original documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene
+ * 
  * @class Scene
  * @module Core
  * @constructor

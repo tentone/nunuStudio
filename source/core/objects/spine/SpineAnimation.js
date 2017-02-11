@@ -4,6 +4,7 @@
  * Spine animation object, to used with animation produced inside Esoteric spine
  * Based on the official threejs runtime
  * More information abou spine available here www.esotericsoftware.com
+ * 
  * @class SpineAnimation
  * @constructor
  * @extends {Mesh}
