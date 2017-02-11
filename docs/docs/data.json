@@ -6315,8 +6315,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 39,
-            "description": "Serialize cubetexture to JSON",
+            "line": 66,
+            "description": "Serialize cube texture to JSON\nAll six images of the cube texture are stored individually",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
