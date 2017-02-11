@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.19 Alpha";
-Nunu.TIMESTAMP = "201702102040";
+Nunu.TIMESTAMP = "201702110118";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -32744,6 +32744,7 @@ AudioEmitter.prototype.initialize = function() {
     a.setBuffer(g);
   });
   this.setVolume(this.volume);
+  this.setPlaybackRate(this.playbackRate);
   for (var g = 0;g < this.children.length;g++) {
     this.children[g].initialize();
   }
@@ -32795,6 +32796,7 @@ PositionalAudio.prototype.initialize = function() {
     a.setBuffer(g);
   });
   this.setVolume(this.volume);
+  this.setPlaybackRate(this.playbackRate);
   for (var g = this;null !== g.parent;) {
     g = g.parent, g instanceof Scene && (this.cameras = g.cameras);
   }

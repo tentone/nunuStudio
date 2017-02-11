@@ -14,9 +14,37 @@
 	<link rel="stylesheet" href="css/style.css">
 
 	<!--Javascript-->
-	<script src="js/lib/jquery-1.11.0.min.js"></script>
-	<script src="js/lib/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			var menu = $(".navbar");
+			$(window).bind("scroll", function(e)
+			{
+				if($(window).scrollTop() > 80)
+				{
+					if(!menu.hasClass("open"))
+					{
+						menu.addClass("open");
+					}
+				}
+				else
+				{
+					if(menu.hasClass("open"))
+					{
+						menu.removeClass("open");
+					}
+				}
+			});
+
+			$(".scroll").click(function(event)
+			{
+				event.preventDefault();
+				$("html,body").animate({scrollTop:$(this.hash).offset().top}, 800);
+			});
+		});
+	</script>
 </head>
 
 <body>
@@ -37,7 +65,6 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="index.html">Home</a></li>
-					<li><a href="news.html">News</a></li>
 					<li><a href="tutorial.html">Learn</a></li>
 					<li><a href="docs/index.html">API Documentation</a></li>
 					<li><a href="download.html">Download</a></li>
@@ -53,20 +80,19 @@
 			<!--Live demo-->
 			<iframe style="position:absolute; left:0%; top:0%; height:100%; width:100%; border:none" src="examples/fps.html"></iframe>
 			
-			<!--Logo-->
 			<div class="row">
+				<!--Logo-->
 				<div class="col-xs-6">
 					<a href="index.html"><img src="img/logo.png" width="230" alt="Logo"></a>
 				</div>
 
-				<ul class="nav navbar-nav navbar-right">
+				<!--<ul class="nav navbar-nav navbar-right">
 					<li><a href="index.html">Home</a></li>
-					<li><a href="news.html">News</a></li>
 					<li><a href="tutorial.html">Learn</a></li>
 					<li><a href="docs/index.html">API Documentation</a></li>
 					<li><a href="download.html">Download</a></li>
 					<li><a href="https://github.com/tentone/nunuStudio">GitHub</a></li>
-				</ul>
+				</ul>-->
 			</div>
 
 			<!--Title and buttons-->
@@ -84,11 +110,13 @@
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
 							<div class="row">
+								<!--Github button-->
 								<div class="col-xs-6 text-right">
 									<a href="https://github.com/tentone/nunuStudio" class="btn btn-secondary btn-lg">GitHub</a>
 								</div>
+								<!--Download-->
 								<div class="col-xs-6 text-left">
-									<a href="download.html" class="btn btn-primary btn-lg">Download</a>
+									<a href="download.html" class="btn btn-primary btn-lg">Download beta</a>
 								</div>
 							</div> 
 						</div>
