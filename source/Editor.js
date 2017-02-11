@@ -215,14 +215,15 @@ include("editor/ui/tab/material/SpriteMaterialEditor.js");
 include("editor/ui/tab/material/ShaderMaterialEditor.js");
 include("editor/ui/tab/material/PointMaterialEditor.js");
 include("editor/ui/tab/texture/TextureEditor.js");
+include("editor/ui/tab/texture/VideoTextureEditor.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");
-include("editor/ui/panels/AudioPanel.js");
-include("editor/ui/panels/ScriptPanel.js");
 include("editor/ui/panels/ScenePanel.js");
 include("editor/ui/panels/ProgramPanel.js");
-include("editor/ui/panels/PhysicsPanel.js");
+include("editor/ui/panels/audio/AudioPanel.js");
+include("editor/ui/panels/script/ScriptPanel.js");
+include("editor/ui/panels/physics/PhysicsPanel.js");
 include("editor/ui/panels/devices/LeapPanel.js");
 include("editor/ui/panels/devices/KinectPanel.js");
 include("editor/ui/panels/cameras/PerspectiveCameraPanel.js");

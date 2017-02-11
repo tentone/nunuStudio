@@ -2,6 +2,7 @@
 
 /**
  * PositionalAudio is used to play audio with positional audio effect
+ * 
  * @param {Audio} audio Audio used by this emitter
  * @class PositionalAudio
  * @extends {PositionalAudio}
@@ -66,7 +67,9 @@ function PositionalAudio(audio)
 PositionalAudio.prototype = Object.create(THREE.PositionalAudio.prototype);
 
 /**
- * Initialize audio object (called by the runtime)
+ * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True
+ * Called by the runtime
+ * 
  * @method initialize
  */
 PositionalAudio.prototype.initialize = function()
@@ -82,6 +85,7 @@ PositionalAudio.prototype.initialize = function()
 	}
 
 	this.setVolume(this.volume);
+	this.setPlaybackRate(this.playbackRate);
 
 	//Get cameras
 	var node = this;

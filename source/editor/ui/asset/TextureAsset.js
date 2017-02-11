@@ -12,11 +12,12 @@ function TextureAsset(parent)
 
 	this.element.ondblclick = function()
 	{
-		var tab = Interface.tab.getTab(TextureEditor, self.texture);
+		var Constructor = (self.texture instanceof VideoTexture) ? VideoTextureEditor : TextureEditor;
+		var tab = Interface.tab.getTab(Constructor, self.texture);
 
 		if(tab === null)
 		{
-			tab = Interface.tab.addTab(TextureEditor, true);
+			tab = Interface.tab.addTab(Constructor, true);
 			tab.attach(self.texture);
 		}
 

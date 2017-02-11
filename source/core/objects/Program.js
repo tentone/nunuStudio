@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Program class contains all the data of an nunuStudio program
+ * Program class contains all the data of a nunuStudio program
+ * Program is also used to store and manage all available resources
+ * 
  * @class Program
  * @module Core
  * @constructor
