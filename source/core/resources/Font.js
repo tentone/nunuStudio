@@ -41,7 +41,7 @@ function Font(url)
 			{
 				this.data = JSON.parse(FileSystem.readFile(url));
 				this.font = this.data;
-				this.name = this.data.original_font_information.full_name;
+				this.name = this.data.original_font_information.full_name || FileSystem.getFileName(url);
 				this.format = "json";
 			}
 			else if(this.encoding === "ttf" || this.encoding === "otf" || this.encoding === "ttc" || this.encoding === "otc")

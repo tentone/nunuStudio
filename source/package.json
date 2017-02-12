@@ -1,7 +1,7 @@
 {
 	"name": "nunuStudio",
 	"main": "editor.html",
-	"chromium-args" : "--disable-raf-throttling --enable-gpu-async-worker-context --enable-vulkan",
+	"chromium-args" : "--disable-raf-throttling --enable-gpu-async-worker-context",
 	"window":
 	{
 		"icon": "editor/files/icon.png",

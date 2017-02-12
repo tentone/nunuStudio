@@ -1,7 +1,12 @@
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/logo_border.png)
 
 # nunuStudio
-nunuStudio is a JS based framework for 3D and VR applications that run direcly on the browser without the need for addicional plugins using WebGL and WebVR
+ - nunuStudio is a three.js based framework for 3D and VR applications that runs direcly on the browser without the need for additional plugins using WebGL and WebVR.
+ - nunuStudio provides a visual scene editor, a code editor, visual tools to edit textures, materials, particle emitters, etc.
+
+### Documentation
+ - Documentation for the scripting API is available on the nunu webpage (http://tentone.github.io/nunuStudio/)
+ - nunuStudio was documented using YUIDocs
 
 ### Features
 - Visual application editor
@@ -25,7 +30,7 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/1.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/5.png)
 
 ### Examples
-[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/pong.png)](http://tentone.github.io/nunuStudio/examples/pong)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/fps.png)](http://tentone.github.io/nunuStudio/small/fps)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/spine.png)](http://tentone.github.io/nunuStudio/examples/spine)
+[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/pong.png)](http://tentone.github.io/nunuStudio/examples/pong)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/fps.png)](http://tentone.github.io/nunuStudio/examples/fps)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/spine.png)](http://tentone.github.io/nunuStudio/examples/spine)
 
 ### ChangeLog
 - V0.8.9.15 Alpha
@@ -66,10 +71,6 @@ nunuStudio is a JS based framework for 3D and VR applications that run direcly o
 	- Renamed variables variable_name to variableName
 	- Added Texture Editor
 	- Documentation page
-
-### Documentation
- - Documentation for the scripting API is available on the nunu webpage
- - nunuStudio was documented using YUIDocs
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

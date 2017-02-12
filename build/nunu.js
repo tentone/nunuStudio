@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.19 Alpha";
-Nunu.TIMESTAMP = "201702111340";
+Nunu.TIMESTAMP = "201702122351";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -31250,7 +31250,7 @@ function Font(a) {
       this.font = this.data = a, this.name = a.original_font_information.full_name, this.encoding = this.format = "json";
     } else {
       if (this.encoding = a.split(".").pop().toLowerCase(), "json" === this.encoding) {
-        this.font = this.data = JSON.parse(FileSystem.readFile(a)), this.name = this.data.original_font_information.full_name, this.format = "json";
+        this.font = this.data = JSON.parse(FileSystem.readFile(a)), this.name = this.data.original_font_information.full_name || FileSystem.getFileName(a), this.format = "json";
       } else {
         if ("ttf" === this.encoding || "otf" === this.encoding || "ttc" === this.encoding || "otc" === this.encoding) {
           this.data = FileSystem.readFileArrayBuffer(a), this.font = (new TTFLoader).parse(this.data), this.name = FileSystem.getFileName(a), this.format = "arraybuffer";
@@ -33096,7 +33096,7 @@ SpineTexture.getTextureWrap = function(a) {
 };
 function ParticleEmitter(a, g) {
   this.clock = new THREE.Clock;
-  this.group = void 0 !== a ? new SPE.Group(a) : new SPE.Group({texture:{value:new Texture(new Image("data/particle.png"))}, maxParticleCount:2E3, blending:THREE.AdditiveBlending, fog:!1, depthWrite:!1, depthTest:!0, transparent:!1, hasPerspective:!0});
+  this.group = void 0 !== a ? new SPE.Group(a) : new SPE.Group({texture:{value:null}, maxParticleCount:2E3, blending:THREE.AdditiveBlending, fog:!1, depthWrite:!1, depthTest:!0, transparent:!1, hasPerspective:!0});
   THREE.Points.call(this, this.group.geometry, this.group.material);
   this.type = "ParticleEmiter";
   this.name = "particle";

@@ -1116,12 +1116,19 @@ Editor.updateObjectPanel = function()
 //Create default resouces to be used when creating new objects
 Editor.createDefaultResouces = function()
 {
-	Editor.defaultImage = new Image("data/sample.png");
-	Editor.defaultFont = new Font("data/fonts/montserrat.json");
-	Editor.defaultAudio = new Audio("data/sample.mp3");
+	Editor.defaultImage = new Image("editor/files/default.png");
+	Editor.defaultFont = new Font("editor/files/default.json");
+	Editor.defaultAudio = new Audio("editor/files/default.mp3");
+
 	Editor.defaultTexture = new Texture(Editor.defaultImage);
+	Editor.defaultTexture.name = "default";
+
+	Editor.defaultTextureParticle = new Texture(new Image("editor/files/particle.png"));
+	Editor.defaultTextureParticle.name = "particle";
+
 	Editor.defaultMaterial = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});
 	Editor.defaultMaterial.name = "default";
+	
 	Editor.defaultSpriteMaterial = new THREE.SpriteMaterial({map: Editor.defaultTexture, color: 0xffffff});
 	Editor.defaultSpriteMaterial.name = "default";
 }
