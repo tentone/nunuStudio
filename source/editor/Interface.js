@@ -668,7 +668,9 @@ Interface.initialize = function()
 	//Particle emitter
 	Interface.addEffects.addOption(Interface.fileDir + "icons/effects/particles.png", function()
 	{
-		Editor.addToScene(new ParticleEmitter());
+		var particle = new ParticleEmitter()
+		particle.texture = Editor.defaultTextureParticle;
+		Editor.addToScene(particle);
 	}, "Particle Emitter");
 
 	//Container

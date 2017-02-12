@@ -2,6 +2,7 @@
 
 /**
  * Particle emitter is a wrapper for SPE particle systems
+ * 
  * Documentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html
  * 
  * @class ParticleEmitter
@@ -39,7 +40,7 @@ function ParticleEmitter(group, emitter)
 		{
 			texture:
 			{
-				value: new Texture(new Image("data/particle.png"))
+				value: null
 			},
 			maxParticleCount: 2000,
 			blending: THREE.AdditiveBlending,
