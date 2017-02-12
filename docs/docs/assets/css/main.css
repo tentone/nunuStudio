@@ -1,15 +1,18 @@
-html
-{
-	background:#e6e6e6;
-	color:#111111;
-	overflow-y:scroll;
-}
-
 body
 {
-	font:13px/1.4 'Lucida Grande', 'Lucida Sans Unicode', 'DejaVu Sans', 'Bitstream Vera Sans', 'Helvetica', 'Arial', sans-serif;
+	background-color:#FFFFFF;
 	margin:0;
 	padding:0;
+}
+
+h1, h2, h3, h4, h5, h6, p, code, kbd, pre, samp, div
+{
+	font:13px/1.4 'Montserrat', sans-serif;
+}
+
+p, .lead
+{
+	font-family:'Raleway', sans-serif;
 }
 
 /*Links*/
@@ -22,11 +25,11 @@ a
 {
 	display:none;
 }
+
 a:hover
 {
 	text-decoration:underline;
 }
-
 .jump
 {
 	position:absolute;
@@ -38,11 +41,13 @@ a:hover
 {
 	left:40%;
 }
+
 /*Paragraphs*/
 p
 {
 	margin:1.3em 0;
 }
+
 dd p,
 td p
 {
@@ -53,20 +58,15 @@ td p:first-child
 {
 	margin-top:0;
 }
-
 /*Headings*/
-h1,
-h2,
-h3,
-h4,
-h5,
-h6
+h1, h2, h3, h4, h5, h6
 {
-	color:#111111 !important;
+	color:#000000 !important;
 	font-weight:100;
 	line-height:1.1;
 	margin:1.1em 0 0.5em;
 }
+
 h1
 {
 	font-size:184.6%;
@@ -77,7 +77,6 @@ h2
 	font-size:153.846%;
 	margin:0 !important;
 	padding:1.5em 0 .5em 0;
-	/*border-bottom:1px solid #c3c3c3 !important;*/
 }
 h3
 {
@@ -92,21 +91,18 @@ h4
 	font-weight:normal;
 	padding:1em 0 0 0;
 }
-h5,
-h6
+h5, h6
 {
 	font-size:107.692%;
 }
+
 /*Code and examples*/
-code,
-kbd,
-pre,
-samp
+code, kbd, pre, samp
 {
-	font-family:Menlo, Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
-	font-size:92.308%;
+	font-size:95%;
 	line-height:1.35;
 }
+
 p code,
 p kbd,
 p samp

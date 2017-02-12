@@ -63,12 +63,10 @@ a
 	color:inherit;
 	font-weight:inherit;
 	font-size:inherit;
-	text-decoration:none;
 }
 
 a:hover, a:focus
 {
-	text-decoration:none;
 	color:#222222;
 	-webkit-transition:all 0.35s ease-in-out;
 	-moz-transition:all 0.35s ease-in-out;

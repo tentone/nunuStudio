@@ -2,7 +2,9 @@
 
 /**
  * Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64)
+ * 
  * Font objects are used for booth 2D and 3D text
+ * 
  * @class Font
  * @constructor
  * @extends {Resource}
