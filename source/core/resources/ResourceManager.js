@@ -2,7 +2,9 @@
 
 /**
  * Resource manager is used to manage available resources used by objects
+ * 
  * The resource manager is used to extend the Program object and is not designed to be used as a standalone
+ * 
  * The manager is used to manage the following types of resources
  *  - Images
  *  - Videos

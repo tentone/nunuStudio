@@ -2,6 +2,7 @@
 
 /**
  * Video resources are used to store video data in base64
+ * 
  * @class Video
  * @constructor
  * @extends {Resource}
