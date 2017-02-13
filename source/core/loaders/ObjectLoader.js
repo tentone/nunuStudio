@@ -506,17 +506,27 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 		case "Sky":
 			object = new Sky(data.autoUpdate, data.dayTime, data.sunDistance, data.time);
+			console.log(data);
+			
 			if(data.sun !== undefined)
 			{
 				object.sun.shadow.fromJSON(data.sun.shadow);
 			}
 			if(data.colorTop !== undefined)
 			{
-				object.colorTop = data.colorTop;
+				object.colorTop = [];
+				for(var i = 0; i < data.colorTop.length; i++)
+				{
+					object.colorTop.push(new THREE.Color(data.colorTop[i])); 
+				}
 			}
 			if(data.colorBottom !== undefined)
 			{
-				object.colorBottom = data.colorBottom;
+				object.colorBottom = [];
+				for(var i = 0; i < data.colorBottom.length; i++)
+				{
+					object.colorBottom.push(new THREE.Color(data.colorBottom[i])); 
+				}
 			}
 			if(data.sunColor !== undefined)
 			{

@@ -208,7 +208,7 @@ FileSystem.writeFileBase64 = function(fname, data)
  * @param {String} src
  * @param {String} dst
  */
-FileSystem.copyFile = function(src, dest)
+FileSystem.copyFile = function(src, dst)
 {
 	if(FileSystem.fs !== undefined)
 	{
