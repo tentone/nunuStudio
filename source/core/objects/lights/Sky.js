@@ -2,6 +2,7 @@
 
 /**
  * Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.
+ * 
  * This object was by default 3 internal hidden children
  * 	- Hemisphere light
  * 	- Directional Light
@@ -354,8 +355,18 @@ Sky.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 	
-	data.object.colorTop = this.colorTop;
-	data.object.colorBottom = this.colorBottom;
+	data.object.colorTop = [];
+	for(var i = 0; i < this.colorTop.length; i++)
+	{
+		data.object.colorTop.push(this.colorTop[i].toJSON());
+	}
+	
+	data.object.colorBottom = [];
+	for(var i = 0; i < this.colorBottom.length; i++)
+	{
+		data.object.colorBottom.push(this.colorBottom[i].toJSON());
+	}
+
 	data.object.sunColor = this.sunColor;
 	data.object.moonColor = this.moonColor;
 	
