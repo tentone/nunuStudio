@@ -13,14 +13,19 @@
 
 /**
  * SPE Group
+ * 
  * https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html
+ * 
  * @property group
  * @type {SPE.Group}
  */
 /**
- * SPE EmitterW
+ * SPE Emitter
+ * 
  * Emitter has attributes that can be used to controll the particle system
+ * 
  * https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html
+ * 
  * @property emitter
  * @type {SPE.Emitter}
  */

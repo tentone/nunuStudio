@@ -1,9 +1,12 @@
 "use strict";
 
 /**
- * Wrapper for cannon.js Body physics objects
- * Physics coordinates are always calculated in local space, they should always be placed directly inside the scene or inside containers without any offset
- * nunuStudio includes tools to create cannon shapes from three geometry objects
+ * Wrapper for cannon.js Body physics objects.
+ * 
+ * Physics coordinates are always calculated in local space, they should always be placed directly inside the scene or inside containers without any offset.
+ *
+ * nunuStudio includes tools to create cannon shapes from three geometry objects.
+ * 
  * Documentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/
  * 
  * @class PhysicsObject
@@ -69,7 +72,7 @@ PhysicsObject.prototype.initialize = function()
 }
 
 /**
- * Update object position and rotation based on cannon.js body
+ * Update object position and rotation based on cannon.js body.
  * Automatically called by the runtime
  * 
  * @method update
@@ -90,7 +93,7 @@ PhysicsObject.prototype.update = function()
 }
 
 /**
- * Add shape to physics object body
+ * Add shape to physics object body.
  * 
  * @param {CANNON.Shape} shape
  * @method addShape
@@ -104,8 +107,9 @@ PhysicsObject.prototype.addShape = function(shape)
 }
 
 /**
- * Create JSON for object
- * Need to backup material and geometry and set to undefined to avoid it being stored
+ * Create JSON for object.
+ * Need to backup material and geometry and set to undefined to avoid it being stored.
+ * 
  * @param {Object} meta
  * @return {Object} json
  */

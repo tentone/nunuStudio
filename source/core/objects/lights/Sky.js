@@ -97,7 +97,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.moonColor = 0x5555BB;
 
 	//Hemisphere light
-	this.hemisphere = new THREE.HemisphereLight(0, 0, 0.6);
+	this.hemisphere = new THREE.HemisphereLight(0, 0, 0.5);
 	this.hemisphere.color.setHSL(0.6, 1, 0.6);
 	this.hemisphere.groundColor.setHSL(0.1, 1, 0.75);
 	this.hemisphere.hidden = true;
@@ -105,7 +105,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.add(this.hemisphere);
 
 	//Sun light
-	this.sun = new THREE.DirectionalLight(this.sunColor, 0.5);
+	this.sun = new DirectionalLight(this.sunColor, 0.3);
 	this.sun.castShadow = true;
 	this.sun.hidden = true;
 	this.add(this.sun);
@@ -354,13 +354,18 @@ Sky.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 	
+	data.object.colorTop = this.colorTop;
+	data.object.colorBottom = this.colorBottom;
+	data.object.sunColor = this.sunColor;
+	data.object.moonColor = this.moonColor;
+	
 	data.object.autoUpdate = this.autoUpdate;
 	data.object.sunDistance = this.sunDistance;
 	data.object.dayTime = this.dayTime;
 	data.object.time = this.time;
 
 	data.object.sun = {};
- 	data.object.sun.shadow = this.sun.shadow.toJSON();
+	data.object.sun.shadow = this.sun.shadow.toJSON();
 
 	return data;
 }

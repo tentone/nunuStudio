@@ -1,7 +1,10 @@
 "use strict";
 
 /**
- * A mesh that has a Skeleton with bones that can then be used to animate the vertices of the geometry.
+ * SkinnedMesh is a mesh that has a Skeleton attached.
+ * 
+ * A skeleton contains bones that are used to animate the vertices of the geometry.
+ * 
  * Based on THREE.SkinnedMesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh
  * 
  * @class SkinnedMesh

@@ -575,7 +575,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
             "line": 3,
-            "description": "Meshs are used to combine a geometry and a material forming a complete rederizable object\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh"
+            "description": "A Mesh combines a geometry and a material forming a complete rederizable object\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh"
         },
         "Misc": {
             "name": "Misc",
@@ -589,7 +589,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\misc\\Container.js",
             "line": 3,
-            "description": "Containers are used to group objects together"
+            "description": "Containers are used to group objects together."
         },
         "Particles": {
             "name": "Particles",
@@ -603,7 +603,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "line": 3,
-            "description": "Particle emitter is a wrapper for SPE particle systems\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
+            "description": "Particle emitter is a wrapper for SPE particle systems\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
         },
         "Physics": {
             "name": "Physics",
@@ -1229,7 +1229,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
             "line": 3,
-            "description": "Meshs are used to combine a geometry and a material forming a complete rederizable object\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh",
+            "description": "A Mesh combines a geometry and a material forming a complete rederizable object\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh",
             "params": [
                 {
                     "name": "geometry",
@@ -1257,7 +1257,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
             "line": 3,
-            "description": "A mesh that has a Skeleton with bones that can then be used to animate the vertices of the geometry.\nBased on THREE.SkinnedMesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh",
+            "description": "SkinnedMesh is a mesh that has a Skeleton attached.\n\nA skeleton contains bones that are used to animate the vertices of the geometry.\n\nBased on THREE.SkinnedMesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh",
             "params": [
                 {
                     "name": "geometry",
@@ -1285,7 +1285,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
             "line": 3,
-            "description": "Special mesh type used to draw 3D text\nIt receives a Font resource that is used to triangulate and extrude font data into a 3D mesh",
+            "description": "Special mesh type used to draw 3D text.\n\nIt receives a Font resource that is used to triangulate and extrude font data into a 3D mesh.",
             "params": [
                 {
                     "name": "text",
@@ -1343,7 +1343,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\misc\\Container.js",
             "line": 3,
-            "description": "Containers are used to group objects together",
+            "description": "Containers are used to group objects together.",
             "is_constructor": 1,
             "extends": "{Object3D}"
         },
@@ -1359,7 +1359,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "line": 3,
-            "description": "Particle emitter is a wrapper for SPE particle systems\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html",
+            "description": "Particle emitter is a wrapper for SPE particle systems\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html",
             "is_constructor": 1,
             "extends": "{Points}"
         },
@@ -1375,7 +1375,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
             "line": 3,
-            "description": "Wrapper for cannon.js Body physics objects\nPhysics coordinates are always calculated in local space, they should always be placed directly inside the scene or inside containers without any offset\nnunuStudio includes tools to create cannon shapes from three geometry objects\nDocumentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/",
+            "description": "Wrapper for cannon.js Body physics objects.\n\nPhysics coordinates are always calculated in local space, they should always be placed directly inside the scene or inside containers without any offset.\n\nnunuStudio includes tools to create cannon shapes from three geometry objects.\n\nDocumentation for cannon.js physics available here http://schteppe.github.io/cannon.js/docs/",
             "is_constructor": 1,
             "extends": "{Object3D}"
         },
@@ -4587,7 +4587,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 14,
+            "line": 15,
             "description": "Geometry defined the object structure",
             "itemtype": "property",
             "name": "geometry",
@@ -4597,7 +4597,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 19,
+            "line": 20,
             "description": "Material is used to define how the geometry surface is shaded",
             "itemtype": "property",
             "name": "material",
@@ -4607,7 +4607,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 24,
+            "line": 25,
             "description": "Determines how the mesh triangles are constructed from the vertices.\nOnly works when the geometry is a BufferGeometry",
             "itemtype": "property",
             "name": "drawMode",
@@ -4617,7 +4617,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 42,
+            "line": 43,
             "description": "Dispose mesh along with its material and geometry",
             "itemtype": "method",
             "name": "dispose",
@@ -4626,7 +4626,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 14,
+            "line": 17,
             "description": "Geometry defined the object structure",
             "itemtype": "property",
             "name": "geometry",
@@ -4636,7 +4636,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 19,
+            "line": 22,
             "description": "Material is used to define how the geometry surface is shaded",
             "itemtype": "property",
             "name": "material",
@@ -4646,7 +4646,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 24,
+            "line": 27,
             "description": "Determines how the mesh triangles are constructed from the vertices.\nOnly works when the geometry is a BufferGeometry",
             "itemtype": "property",
             "name": "drawMode",
@@ -4656,7 +4656,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 30,
+            "line": 33,
             "description": "Array with the bones attached to this mesh",
             "itemtype": "property",
             "name": "bones",
@@ -4666,7 +4666,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 47,
+            "line": 50,
             "description": "Dispose mesh along with its material and geometry",
             "itemtype": "method",
             "name": "dispose",
@@ -4675,7 +4675,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 67,
+            "line": 70,
             "description": "Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
@@ -4696,7 +4696,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 20,
+            "line": 21,
             "description": "Material is used to define how the geometry surface is shaded",
             "itemtype": "property",
             "name": "material",
@@ -4706,7 +4706,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 25,
+            "line": 26,
             "description": "Font used to draw text",
             "itemtype": "property",
             "name": "font",
@@ -4716,7 +4716,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 30,
+            "line": 31,
             "description": "Text",
             "itemtype": "property",
             "name": "text",
@@ -4726,7 +4726,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 35,
+            "line": 36,
             "description": "Size of the text (depth)",
             "itemtype": "property",
             "name": "size",
@@ -4736,7 +4736,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 40,
+            "line": 41,
             "description": "Height of the text",
             "itemtype": "property",
             "name": "height",
@@ -4746,7 +4746,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 45,
+            "line": 46,
             "description": "Bevel",
             "itemtype": "property",
             "name": "bevel",
@@ -4756,7 +4756,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 50,
+            "line": 51,
             "description": "Bevel thickness",
             "itemtype": "property",
             "name": "bevelThickness",
@@ -4766,7 +4766,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 55,
+            "line": 56,
             "description": "Bevel size",
             "itemtype": "property",
             "name": "bevelSize",
@@ -4776,7 +4776,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 86,
+            "line": 87,
             "description": "Set font used by this text 3D instance",
             "params": [
                 {
@@ -4792,7 +4792,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 98,
+            "line": 99,
             "description": "Set Text",
             "params": [
                 {
@@ -4808,7 +4808,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 118,
+            "line": 119,
             "description": "Update text geometry\nShould be called after chaging any attribute",
             "itemtype": "method",
             "name": "updateText",
@@ -4817,7 +4817,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 140,
+            "line": 141,
             "description": "Clone this Text3D instance",
             "itemtype": "method",
             "name": "clone",
@@ -4830,7 +4830,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 150,
+            "line": 151,
             "description": "Dispose mesh along with its material and geometry",
             "itemtype": "method",
             "name": "dispose",
@@ -4839,7 +4839,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 172,
+            "line": 173,
             "description": "Create JSON for object\nNeed to backup geometry and set to undefined to avoid it being stored",
             "params": [
                 {
@@ -4857,8 +4857,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 13,
-            "description": "SPE Group\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html",
+            "line": 14,
+            "description": "SPE Group\n\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html",
             "itemtype": "property",
             "name": "group",
             "type": "{SPE.Group}",
@@ -4867,8 +4867,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 19,
-            "description": "SPE EmitterW\nEmitter has attributes that can be used to controll the particle system\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html",
+            "line": 22,
+            "description": "SPE Emitter\n\nEmitter has attributes that can be used to controll the particle system\n\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html",
             "itemtype": "property",
             "name": "emitter",
             "type": "{SPE.Emitter}",
@@ -4877,7 +4877,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 117,
+            "line": 123,
             "description": "Initialize particle system\nCalled automatically by the runtime",
             "itemtype": "method",
             "name": "initialize",
@@ -4886,7 +4886,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 132,
+            "line": 138,
             "description": "Update particle emitter state\nCalled automatically by the runtime",
             "itemtype": "method",
             "name": "update",
@@ -4895,7 +4895,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 147,
+            "line": 153,
             "description": "Dispose particle emitter",
             "itemtype": "method",
             "name": "dispose",
@@ -4904,7 +4904,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 171,
+            "line": 177,
             "description": "Create JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
             "params": [
                 {
@@ -4922,7 +4922,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 15,
+            "line": 18,
             "description": "cannon.js Body object",
             "itemtype": "attribute",
             "name": "body",
@@ -4932,7 +4932,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 20,
+            "line": 23,
             "description": "cannon.js world",
             "itemtype": "attribute",
             "name": "world",
@@ -4942,7 +4942,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 41,
+            "line": 44,
             "description": "Intialize physics object and add it to the scene physics world\nAutomatically called by the runtime",
             "itemtype": "method",
             "name": "initialize",
@@ -4951,8 +4951,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 71,
-            "description": "Update object position and rotation based on cannon.js body\nAutomatically called by the runtime",
+            "line": 74,
+            "description": "Update object position and rotation based on cannon.js body.\nAutomatically called by the runtime",
             "itemtype": "method",
             "name": "update",
             "class": "PhysicsObject",
@@ -4960,8 +4960,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 92,
-            "description": "Add shape to physics object body",
+            "line": 95,
+            "description": "Add shape to physics object body.",
             "params": [
                 {
                     "name": "shape",
@@ -4976,8 +4976,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 106,
-            "description": "Create JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
+            "line": 109,
+            "description": "Create JSON for object.\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
             "params": [
                 {
                     "name": "meta",
@@ -8089,7 +8089,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 367,
+            "line": 370,
             "description": "Get file name without extension\nIf input is a/b/c/abc.d output is a/b/c/abc",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -8109,7 +8109,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 380,
+            "line": 383,
             "description": "Get file directoty\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -8129,7 +8129,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 393,
+            "line": 399,
             "description": "Get file extension from file path string (always in lowercase)\nIf input is a/b/c/abc.d output is d",
             "itemtype": "method",
             "name": "getFileExtension",
@@ -8155,7 +8155,7 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:367"
+            "line": " ..\\source\\core\\FileSystem.js:370"
         },
         {
             "message": "Missing item type\nUpdate a mouse button (automatically called by the runtime)",
@@ -8167,15 +8167,15 @@
         },
         {
             "message": "Missing item type\nCreate JSON for object\nNeed to backup geometry and set to undefined to avoid it being stored",
-            "line": " ..\\source\\core\\objects\\mesh\\Text3D.js:172"
+            "line": " ..\\source\\core\\objects\\mesh\\Text3D.js:173"
         },
         {
             "message": "Missing item type\nCreate JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
-            "line": " ..\\source\\core\\objects\\particle\\ParticleEmitter.js:171"
+            "line": " ..\\source\\core\\objects\\particle\\ParticleEmitter.js:177"
         },
         {
-            "message": "Missing item type\nCreate JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
-            "line": " ..\\source\\core\\objects\\physics\\PhysicsObject.js:106"
+            "message": "Missing item type\nCreate JSON for object.\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
+            "line": " ..\\source\\core\\objects\\physics\\PhysicsObject.js:109"
         },
         {
             "message": "Missing item type\nCreate JSON for script",
