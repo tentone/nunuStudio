@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>nunuStudio</title>
-	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="shortcut icon" href="../../favicon.ico" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
@@ -50,8 +50,33 @@
 			<a href="../../learn.html"><h3 class="black"><u>Back</u></h3></a>
 			<h2 class="black">Editor basics</h2>
 			<h3 class="black">Editor UI Layout</h3>
-			<br/>
-			<img style="width:60%" src="layout.jpg"></img>
+			<p>The nunuStudio editor is where nunu applications are developed it provides tools for creating and editing objects inside the 3D world. If you have ever worked with another similar frameworks (unity, playcanvas, godot, etc) or with 3D modeling software (blender, maya, cinema4d, etc) some of the concepts bellow might be already familiar to you.</p>
+			<p>Objects are organized in a tree structure (visible on the red area bellow), each object has childrens, that inherit the parent object position, scale and rotation. If a parent object is moved the children object is moved with it.</p>
+			<p>Objects can be selected on the object explorer with mouse left click, when a object is selected the object panel (in blue), is filled with data regarding that object. In the object panel its possible to manually change every attribute of an object (position, name, color, etc).</p>
+			<img style="margin-left: 20%; width:60%" src="layout.png"></img>
+			<p>The left side of the window is used to choose tools and add objects to the scene, tools are used to interact direcly using the mouse with objects in the 3D space, the following tools are available:</p>
+			<ul>
+			<li><p>Selection tool, selects objects with mouse left click, objects can also be selected by double clicking on then (even if the selection tool is not active)</p></li>
+			<li><p>Move tool, used to move objects</p></li>
+			<li><p>Resize tool, used to resize objects</p></li>
+			<li><p>Rotate tool, used to rotate objects</p></li>
+			</ul>
+			<p>Bellow the tool selection zone, there is the object add zone, where its possible to select and add objects to the scene currently selected on the object explorer. When dragging the mouse over each option a new box appears showing objects for each category available.</p>
+			<p>The resource explorer zone (in green), is used to manage all available resources (images, videos, fonts, etc), import new resources into the project (clicking on the import menu or simply by dragging them into the resource explorer) or even export resources from the project to the host system.</p>
+			
+			<h3 class="black">Moving the camera</h3>
+			<p>The mouse is used to move the camera inside the editor area (gray color)</p>
+			<ul>
+			<li><p>To rotate the camera press the mouse left button and move the mouse around (the camera moves similarly similarly to how a camera moves in a FPS game).</p></li>
+			<li><p>To move the camera press the mouse right button and move the mouse</p></li>
+			<li><p>To move vertically press the mouse middle button and move the mouse up and down</p></li>
+			<li><p>To approach the camera use the mouse scrolling wheel, or pinch with your fingers if you are using a trackpad.</p></li>
+			</ul>
+
+			<h3 class="black">Adding the first object</h3>
+			<p>To add your first object to the scene (lets use as example a sphere) move the mouse to the 5th icon in left side bar, and select the sphere icon using the mouse left button.</p>
+			<p>Now select the added object with the selection tool and after that choose the move tool and try to move the added object aroud.</p>
+			<img style="margin-left: 20%; width:60%" src="add.png"></img>
 		</div>
 	</section>
 
@@ -60,9 +85,7 @@
 		<div class="container">
 			<div class="text-right">
 				<p><small>
-					nunuStudio is under MIT license
-					<br/>
-					tentone 2017
+					nunuStudio © 2016-2017 Tentone
 				</small></p>
 			</div>
 		</div>

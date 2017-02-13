@@ -361,7 +361,10 @@ FileSystem.fileExists = function(file)
  */
 FileSystem.getFileName = function(file)
 {
-	return file.substring(file.lastIndexOf("\\") + 1, file.lastIndexOf("."));
+	var a = file.lastIndexOf("\\");
+	var b = file.lastIndexOf("/");
+
+	return file.substring((a > b) ? (a + 1) : (b + 1), file.lastIndexOf("."));
 }
 
 /**
@@ -387,7 +390,10 @@ FileSystem.getNameWithoutExtension = function(file)
  */
 FileSystem.getFilePath = function(file)
 {
-	return file.substring(0, file.lastIndexOf("\\") + 1);
+	var a = file.lastIndexOf("\\");
+	var b = file.lastIndexOf("/");
+
+	return file.substring(0, (a > b) ? (a + 1) : (b + 1));
 }
 
 /**

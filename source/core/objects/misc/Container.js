@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Containers are used to group objects together
+ * Containers are used to group objects together.
  * 
  * @class Container
  * @constructor

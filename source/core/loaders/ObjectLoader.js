@@ -510,6 +510,22 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.sun.shadow.fromJSON(data.sun.shadow);
 			}
+			if(data.colorTop !== undefined)
+			{
+				object.colorTop = data.colorTop;
+			}
+			if(data.colorBottom !== undefined)
+			{
+				object.colorBottom = data.colorBottom;
+			}
+			if(data.sunColor !== undefined)
+			{
+				object.sunColor = data.sunColor;
+			}
+			if(data.moonColor !== undefined)
+			{
+				object.moonColor = data.moonColor;
+			}
 			break;
 
 		case "Scene":

@@ -29,7 +29,7 @@ function Font(url)
 		{
 			this.data = url;
 			this.font = url;
-			this.name = url.original_font_information.full_name;
+			this.name = url.original_font_information.full_name || "font";
 			this.format = "json";
 			this.encoding = "json";
 		}

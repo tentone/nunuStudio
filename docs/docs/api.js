@@ -120,17 +120,17 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Meshes",
             "name": "Meshes",
-            "description": "Meshs are used to combine a geometry and a material forming a complete rederizable object\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh"
+            "description": "A Mesh combines a geometry and a material forming a complete rederizable object\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh"
         },
         {
             "displayName": "Misc",
             "name": "Misc",
-            "description": "Containers are used to group objects together"
+            "description": "Containers are used to group objects together."
         },
         {
             "displayName": "Particles",
             "name": "Particles",
-            "description": "Particle emitter is a wrapper for SPE particle systems\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
+            "description": "Particle emitter is a wrapper for SPE particle systems\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
         },
         {
             "displayName": "Physics",

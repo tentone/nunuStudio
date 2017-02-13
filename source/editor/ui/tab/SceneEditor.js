@@ -99,6 +99,7 @@ function SceneEditor(parent, closeable, container, index)
 						Editor.updateObjectViews();
 					}
 				}
+				//Font
 				else if(FontLoader.fileIsFont(file.path))
 				{
 					if(object.font !== undefined)
