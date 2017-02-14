@@ -34,7 +34,7 @@ function ButtonImageToggle(parent)
 	this.img.style.left = "0px";
 	this.element.appendChild(this.img);
 
-	//Element atributes
+	//Attributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;

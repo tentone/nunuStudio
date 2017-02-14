@@ -38,7 +38,7 @@ function Slider(parent)
 	//On Change onChange
 	this.onchange = null;
 
-	//Element atributes
+	//Attributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;

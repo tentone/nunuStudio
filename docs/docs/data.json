@@ -6315,7 +6315,76 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
+            "line": 58,
+            "description": "Cubemap right image index",
+            "itemtype": "attribute",
+            "name": "RIGHT",
+            "type": "{Number}",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CubeTexture.js",
             "line": 66,
+            "description": "Cubemap left image index",
+            "itemtype": "attribute",
+            "name": "LEFT",
+            "type": "{Number}",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CubeTexture.js",
+            "line": 74,
+            "description": "Cubemap top image index",
+            "itemtype": "attribute",
+            "name": "TOP",
+            "type": "{Number}",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CubeTexture.js",
+            "line": 82,
+            "description": "Cubemap bottom image index",
+            "itemtype": "attribute",
+            "name": "BOTTOM",
+            "type": "{Number}",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CubeTexture.js",
+            "line": 90,
+            "description": "Cubemap front image index",
+            "itemtype": "attribute",
+            "name": "FRONT",
+            "type": "{Number}",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CubeTexture.js",
+            "line": 98,
+            "description": "Cubemap back image index",
+            "itemtype": "attribute",
+            "name": "BACK",
+            "type": "{Number}",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CubeTexture.js",
+            "line": 106,
+            "description": "Updates the CubeTexture images, should be called after changing the images attached to the texture",
+            "itemtype": "method",
+            "name": "updateImages",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CubeTexture.js",
+            "line": 138,
             "description": "Serialize cube texture to JSON\nAll six images of the cube texture are stored individually",
             "itemtype": "method",
             "name": "toJSON",

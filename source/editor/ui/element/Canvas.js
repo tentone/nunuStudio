@@ -21,7 +21,7 @@ function Canvas(parent)
 		event.preventDefault();
 	};
 
-	//Element atributes
+	//Attributes
 	this.fitParent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);

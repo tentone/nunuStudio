@@ -32,10 +32,8 @@ function CubeTextureEditor(parent, closeable, container, index)
 	//Scene
 	this.scene = new THREE.Scene();
 
-	//Cube map
-	var image = new Image("data/sample.png");
-	this.texture = new CubeTexture([image, image, image, image, image, image]);
-	this.scene.background = this.texture;
+	//Texture
+	this.texture = null;
 
 	//Form
 	this.form = new Form(this.division.divB);
@@ -55,7 +53,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 		{
 			self.texture.name = self.name.getText();
 			self.updateMaterial();
-			//Editor.updateObjectViews();
+			Editor.updateObjectViews();
 		}
 	});
 	this.form.add(this.name);
@@ -113,9 +111,116 @@ function CubeTextureEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.flipY);
 	this.form.nextRow();
+
+	//Cube texture
+	this.form.addText("Cube texture");
+	this.form.nextRow();
+
+	this.images = [];
+	
+	//Spacer
+	this.form.addDivision(100, 100);
+
+	//Top
+	this.top = new ImageChooser(this.form.element);
+	this.top.size.set(100, 100);
+	this.top.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			var image = new Image(self.top.getValue());
+			self.texture.images[CubeTexture.TOP] = image;
+			self.texture.updateImages();
+		}
+	});
+	this.form.add(this.top);
+	this.form.nextRow();
+
+	//Left
+	this.left = new ImageChooser(this.form.element);
+	this.left.size.set(100, 100);
+	this.left.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			var image = new Image(self.left.getValue());
+			self.texture.images[CubeTexture.LEFT] = image;
+			self.texture.updateImages();
+		}
+	});
+	this.form.add(this.left);
+
+	//Front
+	this.front = new ImageChooser(this.form.element);
+	this.front.size.set(100, 100);
+	this.front.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			var image = new Image(self.front.getValue());
+			self.texture.images[CubeTexture.FRONT] = image;
+			self.texture.updateImages();
+		}
+	});
+	this.form.add(this.front);
+
+	//Right
+	this.right = new ImageChooser(this.form.element);
+	this.right.size.set(100, 100);
+	this.right.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			var image = new Image(self.right.getValue());
+			self.texture.images[CubeTexture.RIGHT] = image;
+			self.texture.updateImages();
+		}
+	});
+	this.form.add(this.right);
+
+	//Back
+	this.back = new ImageChooser(this.form.element);
+	this.back.size.set(100, 100);
+	this.back.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			var image = new Image(self.back.getValue());
+			self.texture.images[CubeTexture.BACK] = image;
+			self.texture.updateImages();
+		}
+	});
+	this.form.add(this.back);
+	this.form.nextRow();
+
+	//Spacer
+	this.form.addDivision(100, 100);
+
+	//Bottom
+	this.bottom = new ImageChooser(this.form.element);
+	this.bottom.size.set(100, 100);
+	this.bottom.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			var image = new Image(self.bottom.getValue());
+			self.texture.images[CubeTexture.BOTTOM] = image;
+			self.texture.updateImages();
+		}
+	});
+	this.form.add(this.bottom);
+	this.form.nextRow();
 }
 
 CubeTextureEditor.prototype = Object.create(TabElement.prototype);
+
+CubeTextureEditor.prototype.testTexture = function()
+{
+	//Cube map
+	var image = new Image("editor/files/default.png");
+	var texture = new CubeTexture([image, image, image, image, image, image]);
+	this.attach(texture);
+}
 
 //Update test material
 CubeTextureEditor.prototype.updateMaterial = function()
@@ -153,7 +258,7 @@ CubeTextureEditor.prototype.updateMetadata = function()
 		//If not found close tab
 		if(Editor.program.textures[this.texture.uuid] === undefined)
 		{
-			this.close();
+			//this.close();
 		}
 	}
 }
@@ -161,14 +266,23 @@ CubeTextureEditor.prototype.updateMetadata = function()
 //Attach texure
 CubeTextureEditor.prototype.attach = function(texture)
 {
-	//this.texture = texture;
+	this.texture = texture;
 	this.updateMetadata();
+
+	this.scene.background = texture;
 
 	//Update form
 	this.name.setText(texture.name);
 	this.magFilter.setValue(texture.magFilter);
 	this.minFilter.setValue(texture.minFilter);
 	this.flipY.setValue(texture.flipY);
+
+	this.top.setValue(texture.images[CubeTexture.TOP].data);
+	this.bottom.setValue(texture.images[CubeTexture.BOTTOM].data);
+	this.left.setValue(texture.images[CubeTexture.LEFT].data);
+	this.right.setValue(texture.images[CubeTexture.RIGHT].data);
+	this.front.setValue(texture.images[CubeTexture.FRONT].data);
+	this.back.setValue(texture.images[CubeTexture.BACK].data);
 };
 
 //Update

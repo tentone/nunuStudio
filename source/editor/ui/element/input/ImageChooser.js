@@ -5,11 +5,11 @@ function ImageChooser(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 
-	//Alpha background
+	//Background
 	this.alpha = document.createElement("img");
 	this.alpha.style.position = "absolute";
 	this.alpha.src = "editor/files/alpha.png";
@@ -104,6 +104,12 @@ ImageChooser.prototype.setImage = function(url)
 	this.img.src = url;
 }
 
+//Set image from URL
+ImageChooser.prototype.setValue = function(url)
+{
+	this.img.src = url;
+}
+
 //Get image URL
 ImageChooser.prototype.getValue = function()
 {
@@ -113,7 +119,7 @@ ImageChooser.prototype.getValue = function()
 //Update Interface
 ImageChooser.prototype.updateInterface = function()
 {
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -127,7 +133,7 @@ ImageChooser.prototype.updateInterface = function()
 		this.alpha.style.visibility = "hidden";
 	}
 
-	//Keep image aspect ratio
+	//Keep apect ratio
 	if(this.keepAspectRatio)
 	{
 		if(this.size.x < this.size.y)
@@ -140,18 +146,19 @@ ImageChooser.prototype.updateInterface = function()
 		}
 	}
 
-	//Update img
+	//Image
 	this.img.width = this.size.x * this.imageScale.x;
 	this.img.height = this.size.y * this.imageScale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
 	
+	//Background
 	this.alpha.width = this.size.x;
 	this.alpha.height = this.size.y;
 	this.alpha.style.left = this.img.style.left;
 	this.alpha.style.top = this.img.style.top;
 
-	//Update base element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

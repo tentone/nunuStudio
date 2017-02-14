@@ -36,7 +36,7 @@ function DualDivisionResizable(parent)
 	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
 	this.element.appendChild(this.resizeTab);
 
-	//Element atributes
+	//Attributes
 	this.fitParent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);

@@ -12,7 +12,7 @@ function Division(parent)
 	this.element.style.pointerEvents = "none";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
-	//Element atributes
+	//Attributes
 	this.fitParent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
