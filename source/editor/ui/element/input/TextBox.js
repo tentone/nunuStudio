@@ -13,7 +13,7 @@ function TextBox(parent)
 	this.element.style.color = Editor.theme.textColor;
 	this.element.style.borderStyle = "none";
 
-	//Element atributes
+	//Attributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;

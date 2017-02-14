@@ -20,7 +20,7 @@ function Text(parent)
 	this.span.innerHTML = "text";
 	this.element.appendChild(this.span);
 
-	//Element atributes
+	//Attributes
 	this.fitContent = false;
 	this.fitParent = false;
 	this.size = new THREE.Vector2(0, 0);
