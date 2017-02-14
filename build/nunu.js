@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.19 Alpha";
-Nunu.TIMESTAMP = "201702131549";
+Nunu.TIMESTAMP = "201702141431";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -44,7 +44,7 @@ Nunu.webvrAvailable = function() {
     this.y = m || 0;
   }
   function b(d, m, a, c, h, e, n, f, k, q) {
-    Object.defineProperty(this, "id", {value:Ze++});
+    Object.defineProperty(this, "id", {value:$e++});
     this.uuid = la.generateUUID();
     this.name = "";
     this.image = void 0 !== d ? d : b.DEFAULT_IMAGE;
@@ -152,20 +152,20 @@ Nunu.webvrAvailable = function() {
     d.uniformMatrix2fv(this.addr, !1, m.elements || m);
   }
   function B(d, m) {
-    d.uniformMatrix3fv(this.addr, !1, m.elements || m);
+    void 0 === m.elements ? d.uniformMatrix3fv(this.addr, !1, m) : (Ge.set(m.elements), d.uniformMatrix3fv(this.addr, !1, Ge));
   }
   function C(d, m) {
-    void 0 === m.elements ? d.uniformMatrix4fv(this.addr, !1, m) : (Ge.set(m.elements), d.uniformMatrix4fv(this.addr, !1, Ge));
+    void 0 === m.elements ? d.uniformMatrix4fv(this.addr, !1, m) : (He.set(m.elements), d.uniformMatrix4fv(this.addr, !1, He));
   }
   function D(d, m, a) {
     var A = a.allocTextureUnit();
     d.uniform1i(this.addr, A);
-    a.setTexture2D(m || He, A);
+    a.setTexture2D(m || Ie, A);
   }
   function F(d, m, a) {
     var A = a.allocTextureUnit();
     d.uniform1i(this.addr, A);
-    a.setTextureCube(m || Ie, A);
+    a.setTextureCube(m || Je, A);
   }
   function E(d, m) {
     d.uniform2iv(this.addr, m);
@@ -238,14 +238,14 @@ Nunu.webvrAvailable = function() {
     var A = m.length, b = p(a, A);
     d.uniform1iv(this.addr, b);
     for (d = 0;d !== A;++d) {
-      a.setTexture2D(m[d] || He, b[d]);
+      a.setTexture2D(m[d] || Ie, b[d]);
     }
   }
   function R(d, m, a) {
     var A = m.length, b = p(a, A);
     d.uniform1iv(this.addr, b);
     for (d = 0;d !== A;++d) {
-      a.setTextureCube(m[d] || Ie, b[d]);
+      a.setTextureCube(m[d] || Je, b[d]);
     }
   }
   function W(d) {
@@ -524,7 +524,7 @@ Nunu.webvrAvailable = function() {
     };
   }
   function V() {
-    Object.defineProperty(this, "id", {value:af++});
+    Object.defineProperty(this, "id", {value:bf++});
     this.uuid = la.generateUUID();
     this.name = "";
     this.type = "Material";
@@ -589,7 +589,7 @@ Nunu.webvrAvailable = function() {
     this.radius = void 0 !== m ? m : 0;
   }
   function xa() {
-    this.elements = new Float32Array([1, 0, 0, 0, 1, 0, 0, 0, 1]);
+    this.elements = [1, 0, 0, 0, 1, 0, 0, 0, 1];
     0 < arguments.length && console.error("THREE.Matrix3: the constructor no longer reads arguments. use .set() instead.");
   }
   function wa(d, m) {
@@ -732,7 +732,7 @@ Nunu.webvrAvailable = function() {
     this.mask = 1;
   }
   function X() {
-    Object.defineProperty(this, "id", {value:bf++});
+    Object.defineProperty(this, "id", {value:cf++});
     this.uuid = la.generateUUID();
     this.name = "";
     this.type = "Object3D";
@@ -1007,7 +1007,7 @@ Nunu.webvrAvailable = function() {
     this.far = void 0 !== h ? h : 2E3;
     this.updateProjectionMatrix();
   }
-  function cf(d, m, a) {
+  function df(d, m, a) {
     var A, b, c;
     return {setMode:function(d) {
       A = d;
@@ -1023,7 +1023,7 @@ Nunu.webvrAvailable = function() {
       null === n ? console.error("THREE.WebGLBufferRenderer: using THREE.InstancedBufferGeometry but hardware does not support extension ANGLE_instanced_arrays.") : (n.drawElementsInstancedANGLE(A, G, b, e * c, h.maxInstancedCount), a.calls++, a.vertices += G * h.maxInstancedCount, A === d.TRIANGLES && (a.faces += h.maxInstancedCount * G / 3));
     }};
   }
-  function df(d, m, a) {
+  function ef(d, m, a) {
     var A;
     return {setMode:function(d) {
       A = d;
@@ -1045,7 +1045,7 @@ Nunu.webvrAvailable = function() {
       }
     }};
   }
-  function ef() {
+  function ff() {
     var d = {};
     return {get:function(m) {
       if (void 0 !== d[m.id]) {
@@ -1275,7 +1275,7 @@ Nunu.webvrAvailable = function() {
       console.warn("THREE.WebGLProgram: .attributes is now .getAttributes().");
       return this.getAttributes();
     }}});
-    this.id = ff++;
+    this.id = gf++;
     this.code = m;
     this.usedTimes = 1;
     this.program = r;
@@ -1283,7 +1283,7 @@ Nunu.webvrAvailable = function() {
     this.fragmentShader = n;
     return this;
   }
-  function gf(d, m) {
+  function hf(d, m) {
     function a(d, m) {
       var a;
       d ? d.isTexture ? a = d.encoding : d.isWebGLRenderTarget && (console.warn("THREE.WebGLPrograms.getTextureEncodingFromMap: don't use render targets as textures. Use their .texture property instead."), a = d.texture.encoding) : a = 3E3;
@@ -1337,7 +1337,7 @@ Nunu.webvrAvailable = function() {
     };
     this.programs = b;
   }
-  function hf(d, m, a) {
+  function jf(d, m, a) {
     function b(d) {
       var h = d.target;
       d = c[h.id];
@@ -1375,7 +1375,7 @@ Nunu.webvrAvailable = function() {
       return A;
     }};
   }
-  function jf(d, m, a) {
+  function kf(d, m, a) {
     function b(a, b) {
       a = a.isInterleavedBufferAttribute ? a.data : a;
       var A = m.get(a);
@@ -1395,7 +1395,7 @@ Nunu.webvrAvailable = function() {
         a.updateRange.offset + a.updateRange.count)), a.updateRange.count = 0), A.version = a.version);
       }
     }
-    var A = new hf(d, m, a);
+    var A = new jf(d, m, a);
     return {getAttributeBuffer:function(d) {
       return d.isInterleavedBufferAttribute ? m.get(d.data).__webglBuffer : m.get(d).__webglBuffer;
     }, getAttributeProperties:function(d) {
@@ -1440,7 +1440,7 @@ Nunu.webvrAvailable = function() {
       return a;
     }};
   }
-  function kf(d, m, a, b, c, h, e) {
+  function lf(d, m, a, b, c, h, e) {
     function A(d, m) {
       if (d.width > m || d.height > m) {
         m /= Math.max(d.width, d.height);
@@ -1704,7 +1704,7 @@ Nunu.webvrAvailable = function() {
       A.generateMipmaps && n(m) && 1003 !== A.minFilter && 1006 !== A.minFilter && (m = m && m.isWebGLRenderTargetCube ? d.TEXTURE_CUBE_MAP : d.TEXTURE_2D, A = b.get(A).__webglTexture, a.bindTexture(m, A), d.generateMipmap(m), a.bindTexture(m, null));
     };
   }
-  function lf() {
+  function mf() {
     var d = {};
     return {get:function(m) {
       m = m.uuid;
@@ -1717,7 +1717,7 @@ Nunu.webvrAvailable = function() {
       d = {};
     }};
   }
-  function mf(d, m, a) {
+  function nf(d, m, a) {
     function b(m, a, b) {
       var A = new Uint8Array(4), c = d.createTexture();
       d.bindTexture(m, c);
@@ -1956,7 +1956,7 @@ Nunu.webvrAvailable = function() {
       r.reset();
     }};
   }
-  function nf(d, m, a) {
+  function of(d, m, a) {
     function b(m) {
       if ("highp" === m) {
         if (0 < d.getShaderPrecisionFormat(d.VERTEX_SHADER, d.HIGH_FLOAT).precision && 0 < d.getShaderPrecisionFormat(d.FRAGMENT_SHADER, d.HIGH_FLOAT).precision) {
@@ -1978,7 +1978,7 @@ Nunu.webvrAvailable = function() {
       return A = null !== a ? d.getParameter(a.MAX_TEXTURE_MAX_ANISOTROPY_EXT) : 0;
     }, getMaxPrecision:b, precision:c, logarithmicDepthBuffer:a, maxTextures:h, maxVertexTextures:e, maxTextureSize:n, maxCubemapSize:f, maxAttributes:k, maxVertexUniforms:q, maxVaryings:g, maxFragmentUniforms:p, vertexTextures:r, floatFragmentTextures:u, floatVertexTextures:r && u};
   }
-  function of(d) {
+  function pf(d) {
     var m = {};
     return {get:function(a) {
       if (void 0 !== m[a]) {
@@ -2008,7 +2008,7 @@ Nunu.webvrAvailable = function() {
       return m[a] = b;
     }};
   }
-  function pf() {
+  function qf() {
     function d() {
       k.value !== b && (k.value = b, k.needsUpdate = 0 < c);
       a.numPlanes = c;
@@ -2510,7 +2510,7 @@ Nunu.webvrAvailable = function() {
     this.toneMappingWhitePoint = this.toneMappingExposure = this.toneMapping = 1;
     this.maxMorphTargets = 8;
     this.maxMorphNormals = 4;
-    var N = this, I = null, ba = null, P = null, ga = -1, W = "", Xa = null, ra = new f, ta = null, Db = new f, Ia = 0, V = new S(0), pb = 0, $b = x.width, Gb = x.height, Qa = 1, Y = new f(0, 0, $b, Gb), bc = !1, X = new f(0, 0, $b, Gb), Aa = new Va, qa = new pf, xa = !1, ia = !1, la = new Fa, ma = new q, fa = new h, Oc = new q, ac = new q, oa = {hash:"", ambient:[0, 0, 0], directional:[], directionalShadowMap:[], directionalShadowMatrix:[], spot:[], spotShadowMap:[], spotShadowMatrix:[], rectArea:[], 
+    var N = this, I = null, ba = null, P = null, ga = -1, W = "", Xa = null, ra = new f, ta = null, Db = new f, Ia = 0, V = new S(0), pb = 0, $b = x.width, Gb = x.height, Qa = 1, Y = new f(0, 0, $b, Gb), bc = !1, X = new f(0, 0, $b, Gb), Aa = new Va, qa = new qf, xa = !1, ia = !1, la = new Fa, ma = new q, fa = new h, Oc = new q, ac = new q, oa = {hash:"", ambient:[0, 0, 0], directional:[], directionalShadowMap:[], directionalShadowMatrix:[], spot:[], spotShadowMap:[], spotShadowMatrix:[], rectArea:[], 
     point:[], pointShadowMap:[], pointShadowMatrix:[], hemi:[], shadows:[]}, wa = {calls:0, vertices:0, faces:0, points:0};
     this.info = {render:wa, memory:{geometries:0, textures:0}, programs:null};
     var L;
@@ -2527,10 +2527,10 @@ Nunu.webvrAvailable = function() {
         return {rangeMin:1, rangeMax:1, precision:1};
       });
       x.addEventListener("webglcontextlost", b, !1);
-    } catch (qf) {
-      console.error("THREE.WebGLRenderer: " + qf);
+    } catch (rf) {
+      console.error("THREE.WebGLRenderer: " + rf);
     }
-    var ja = new of(L);
+    var ja = new pf(L);
     ja.get("WEBGL_depth_texture");
     ja.get("OES_texture_float");
     ja.get("OES_texture_float_linear");
@@ -2539,9 +2539,9 @@ Nunu.webvrAvailable = function() {
     ja.get("OES_standard_derivatives");
     ja.get("ANGLE_instanced_arrays");
     ja.get("OES_element_index_uint") && (ca.MaxIndex = 4294967296);
-    var Oa = new nf(L, ja, d), na = new mf(L, ja, y), Ra = new lf, vb = new kf(L, ja, na, Ra, Oa, y, this.info), sa = new jf(L, Ra, this.info), Eb = new gf(this, Oa), ya = new ef;
+    var Oa = new of(L, ja, d), na = new nf(L, ja, y), Ra = new mf, vb = new lf(L, ja, na, Ra, Oa, y, this.info), sa = new kf(L, Ra, this.info), Eb = new hf(this, Oa), ya = new ff;
     this.info.programs = Eb.programs;
-    var Da = new df(L, ja, wa), Ea = new cf(L, ja, wa), Pc, Ba, za, Ca;
+    var Da = new ef(L, ja, wa), Ea = new df(L, ja, wa), Pc, Ba, za, Ca;
     m();
     this.context = L;
     this.capabilities = Oa;
@@ -3021,7 +3021,7 @@ Nunu.webvrAvailable = function() {
       if (this.bones.length === m.length) {
         this.boneInverses = m.slice(0);
       } else {
-        for (console.warn("THREE.Skeleton bonInverses is the wrong length."), this.boneInverses = [], m = 0, d = this.bones.length;m < d;m++) {
+        for (console.warn("THREE.Skeleton boneInverses is the wrong length."), this.boneInverses = [], m = 0, d = this.bones.length;m < d;m++) {
           this.boneInverses.push(new q);
         }
       }
@@ -3992,7 +3992,7 @@ Nunu.webvrAvailable = function() {
   function ib(d) {
     this.manager = void 0 !== d ? d : Ya;
   }
-  function Je(d) {
+  function Ke(d) {
     this.manager = void 0 !== d ? d : Ya;
     this._parser = null;
   }
@@ -4163,11 +4163,11 @@ Nunu.webvrAvailable = function() {
     this.manager = void 0 !== d ? d : Ya;
     this.withCredentials = !1;
   }
-  function Ke(d) {
+  function Le(d) {
     this.manager = void 0 !== d ? d : Ya;
     this.texturePath = "";
   }
-  function Le(d, m, a, b, c) {
+  function Me(d, m, a, b, c) {
     m = .5 * (b - m);
     c = .5 * (c - a);
     var A = d * d;
@@ -4231,7 +4231,7 @@ Nunu.webvrAvailable = function() {
   function ne(d) {
     this.data = d;
   }
-  function Me(d) {
+  function Ne(d) {
     this.manager = void 0 !== d ? d : Ya;
   }
   function oe(d) {
@@ -4245,7 +4245,7 @@ Nunu.webvrAvailable = function() {
     this.width = void 0 !== a ? a : 10;
     this.height = void 0 !== b ? b : 10;
   }
-  function Ne() {
+  function Oe() {
     this.type = "StereoCamera";
     this.aspect = 1;
     this.eyeSep = .064;
@@ -4360,7 +4360,7 @@ Nunu.webvrAvailable = function() {
     this._mixBufferRegion = m;
     this.referenceCount = this.useCount = this.cumulativeWeight = 0;
   }
-  function Oe(d, m, a) {
+  function Pe(d, m, a) {
     a = a || Ja.parseTrackName(m);
     this._targetGroup = d;
     this._bindings = d.subscribe_(m, a);
@@ -4371,7 +4371,7 @@ Nunu.webvrAvailable = function() {
     this.node = Ja.findNode(d, this.parsedPath.nodeName) || d;
     this.rootNode = d;
   }
-  function Pe(d) {
+  function Qe(d) {
     this.uuid = la.generateUUID();
     this._objects = Array.prototype.slice.call(arguments);
     this.nCachedObjects_ = 0;
@@ -4393,7 +4393,7 @@ Nunu.webvrAvailable = function() {
       return c._bindings.length;
     }};
   }
-  function Qe(d, m, a) {
+  function Re(d, m, a) {
     this._mixer = d;
     this._clip = m;
     this._localRoot = a || null;
@@ -4420,7 +4420,7 @@ Nunu.webvrAvailable = function() {
     this.clampWhenFinished = !1;
     this.zeroSlopeAtEnd = this.zeroSlopeAtStart = !0;
   }
-  function Re(d) {
+  function Se(d) {
     this._root = d;
     this._initMemoryManager();
     this.time = this._accuIndex = 0;
@@ -4461,7 +4461,7 @@ Nunu.webvrAvailable = function() {
     ma.call(this, d, m);
     this.meshPerAttribute = a || 1;
   }
-  function Se(d, m, a, b) {
+  function Te(d, m, a, b) {
     this.ray = new sb(d, m);
     this.near = a || 0;
     this.far = b || Infinity;
@@ -4471,7 +4471,7 @@ Nunu.webvrAvailable = function() {
       return this.Points;
     }}});
   }
-  function Te(d, m) {
+  function Ue(d, m) {
     return d.distance - m.distance;
   }
   function we(d, m, a, b) {
@@ -4483,18 +4483,18 @@ Nunu.webvrAvailable = function() {
       }
     }
   }
-  function Ue(d) {
+  function Ve(d) {
     this.autoStart = void 0 !== d ? d : !0;
     this.elapsedTime = this.oldTime = this.startTime = 0;
     this.running = !1;
   }
-  function Ve(d, m, a) {
+  function We(d, m, a) {
     this.radius = void 0 !== d ? d : 1;
     this.phi = void 0 !== m ? m : 0;
     this.theta = void 0 !== a ? a : 0;
     return this;
   }
-  function We(d, m, a) {
+  function Xe(d, m, a) {
     this.radius = void 0 !== d ? d : 1;
     this.theta = void 0 !== m ? m : 0;
     this.y = void 0 !== a ? a : 0;
@@ -4798,13 +4798,13 @@ Nunu.webvrAvailable = function() {
   function $d(d, m, a, b, c, e) {
     xb.call(this, d, m, a, a, b, c, e);
   }
-  function Xe(d) {
+  function Ye(d) {
     console.warn("THREE.ClosedSplineCurve3 has been deprecated. Use THREE.CatmullRomCurve3 instead.");
     jb.call(this, d);
     this.type = "catmullrom";
     this.closed = !0;
   }
-  function Ye(d) {
+  function Ze(d) {
     console.warn("THREE.SplineCurve3 has been deprecated. Use THREE.CatmullRomCurve3 instead.");
     jb.call(this, d);
     this.type = "catmullrom";
@@ -5117,7 +5117,7 @@ Nunu.webvrAvailable = function() {
     this.y = b * m + c * a + d.y;
     return this;
   }});
-  var Ze = 0;
+  var $e = 0;
   b.DEFAULT_IMAGE = void 0;
   b.DEFAULT_MAPPING = 300;
   Object.defineProperty(b.prototype, "needsUpdate", {set:function(d) {
@@ -6420,7 +6420,7 @@ Nunu.webvrAvailable = function() {
   }, set:function(d) {
     this.image = d;
   }});
-  var He = new b, Ie = new r, Ee = [], Fe = [], Ge = new Float32Array(16);
+  var Ie = new b, Je = new r, Ee = [], Fe = [], He = new Float32Array(16), Ge = new Float32Array(9);
   ha.prototype.setValue = function(d, a) {
     for (var m = this.seq, b = 0, c = m.length;b !== c;++b) {
       var e = m[b];
@@ -6527,7 +6527,7 @@ Nunu.webvrAvailable = function() {
   normal_vert:"#define NORMAL\n#if defined( FLAT_SHADED ) || defined( USE_BUMPMAP ) || defined( USE_NORMALMAP )\n\tvarying vec3 vViewPosition;\n#endif\n#ifndef FLAT_SHADED\n\tvarying vec3 vNormal;\n#endif\n#include <uv_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <logdepthbuf_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <beginnormal_vertex>\n\t#include <morphnormal_vertex>\n\t#include <skinbase_vertex>\n\t#include <skinnormal_vertex>\n\t#include <defaultnormal_vertex>\n#ifndef FLAT_SHADED\n\tvNormal = normalize( transformedNormal );\n#endif\n\t#include <begin_vertex>\n\t#include <displacementmap_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n#if defined( FLAT_SHADED ) || defined( USE_BUMPMAP ) || defined( USE_NORMALMAP )\n\tvViewPosition = - mvPosition.xyz;\n#endif\n}\n", 
   points_frag:"uniform vec3 diffuse;\nuniform float opacity;\n#include <common>\n#include <packing>\n#include <color_pars_fragment>\n#include <map_particle_pars_fragment>\n#include <fog_pars_fragment>\n#include <shadowmap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec3 outgoingLight = vec3( 0.0 );\n\tvec4 diffuseColor = vec4( diffuse, opacity );\n\t#include <logdepthbuf_fragment>\n\t#include <map_particle_fragment>\n\t#include <color_fragment>\n\t#include <alphatest_fragment>\n\toutgoingLight = diffuseColor.rgb;\n\tgl_FragColor = vec4( outgoingLight, diffuseColor.a );\n\t#include <premultiplied_alpha_fragment>\n\t#include <tonemapping_fragment>\n\t#include <encodings_fragment>\n\t#include <fog_fragment>\n}\n", 
   points_vert:"uniform float size;\nuniform float scale;\n#include <common>\n#include <color_pars_vertex>\n#include <fog_pars_vertex>\n#include <shadowmap_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <color_vertex>\n\t#include <begin_vertex>\n\t#include <project_vertex>\n\t#ifdef USE_SIZEATTENUATION\n\t\tgl_PointSize = size * ( scale / - mvPosition.z );\n\t#else\n\t\tgl_PointSize = size;\n\t#endif\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n\t#include <worldpos_vertex>\n\t#include <shadowmap_vertex>\n\t#include <fog_vertex>\n}\n", 
-  shadow_frag:"uniform float opacity;\n#include <common>\n#include <packing>\n#include <bsdfs>\n#include <lights_pars>\n#include <shadowmap_pars_fragment>\n#include <shadowmask_pars_fragment>\nvoid main() {\n\tgl_FragColor = vec4( 0.0, 0.0, 0.0, opacity * ( 1.0 - getShadowMask() ) );\n}\n", shadow_vert:"#include <shadowmap_pars_vertex>\nvoid main() {\n\t#include <begin_vertex>\n\t#include <project_vertex>\n\t#include <worldpos_vertex>\n\t#include <shadowmap_vertex>\n}\n"}, rf = {aliceblue:15792383, 
+  shadow_frag:"uniform float opacity;\n#include <common>\n#include <packing>\n#include <bsdfs>\n#include <lights_pars>\n#include <shadowmap_pars_fragment>\n#include <shadowmask_pars_fragment>\nvoid main() {\n\tgl_FragColor = vec4( 0.0, 0.0, 0.0, opacity * ( 1.0 - getShadowMask() ) );\n}\n", shadow_vert:"#include <shadowmap_pars_vertex>\nvoid main() {\n\t#include <begin_vertex>\n\t#include <project_vertex>\n\t#include <worldpos_vertex>\n\t#include <shadowmap_vertex>\n}\n"}, sf = {aliceblue:15792383, 
   antiquewhite:16444375, aqua:65535, aquamarine:8388564, azure:15794175, beige:16119260, bisque:16770244, black:0, blanchedalmond:16772045, blue:255, blueviolet:9055202, brown:10824234, burlywood:14596231, cadetblue:6266528, chartreuse:8388352, chocolate:13789470, coral:16744272, cornflowerblue:6591981, cornsilk:16775388, crimson:14423100, cyan:65535, darkblue:139, darkcyan:35723, darkgoldenrod:12092939, darkgray:11119017, darkgreen:25600, darkgrey:11119017, darkkhaki:12433259, darkmagenta:9109643, 
   darkolivegreen:5597999, darkorange:16747520, darkorchid:10040012, darkred:9109504, darksalmon:15308410, darkseagreen:9419919, darkslateblue:4734347, darkslategray:3100495, darkslategrey:3100495, darkturquoise:52945, darkviolet:9699539, deeppink:16716947, deepskyblue:49151, dimgray:6908265, dimgrey:6908265, dodgerblue:2003199, firebrick:11674146, floralwhite:16775920, forestgreen:2263842, fuchsia:16711935, gainsboro:14474460, ghostwhite:16316671, gold:16766720, goldenrod:14329120, gray:8421504, 
   green:32768, greenyellow:11403055, grey:8421504, honeydew:15794160, hotpink:16738740, indianred:13458524, indigo:4915330, ivory:16777200, khaki:15787660, lavender:15132410, lavenderblush:16773365, lawngreen:8190976, lemonchiffon:16775885, lightblue:11393254, lightcoral:15761536, lightcyan:14745599, lightgoldenrodyellow:16448210, lightgray:13882323, lightgreen:9498256, lightgrey:13882323, lightpink:16758465, lightsalmon:16752762, lightseagreen:2142890, lightskyblue:8900346, lightslategray:7833753, 
@@ -6601,7 +6601,7 @@ Nunu.webvrAvailable = function() {
         }
       }
     }
-    d && 0 < d.length && (b = rf[d], void 0 !== b ? this.setHex(b) : console.warn("THREE.Color: Unknown color " + d));
+    d && 0 < d.length && (b = sf[d], void 0 !== b ? this.setHex(b) : console.warn("THREE.Color: Unknown color " + d));
     return this;
   }, clone:function() {
     return new this.constructor(this.r, this.g, this.b);
@@ -6813,7 +6813,7 @@ Nunu.webvrAvailable = function() {
   }, equals:function(d) {
     return d.min.equals(this.min) && d.max.equals(this.max);
   }});
-  var af = 0;
+  var bf = 0;
   Object.defineProperty(V.prototype, "needsUpdate", {get:function() {
     return this._needsUpdate;
   }, set:function(d) {
@@ -7736,7 +7736,7 @@ Nunu.webvrAvailable = function() {
   }, test:function(d) {
     return 0 !== (this.mask & d.mask);
   }});
-  var bf = 0;
+  var cf = 0;
   X.DefaultUp = new h(0, 1, 0);
   X.DefaultMatrixAutoUpdate = !0;
   Object.assign(X.prototype, g.prototype, {isObject3D:!0, applyMatrix:function(d) {
@@ -9327,7 +9327,7 @@ Nunu.webvrAvailable = function() {
     null !== this.view && (d.object.view = Object.assign({}, this.view));
     return d;
   }});
-  var ff = 0;
+  var gf = 0;
   cc.prototype.isFogExp2 = !0;
   cc.prototype.clone = function() {
     return new cc(this.color.getHex(), this.density);
@@ -10301,7 +10301,7 @@ Nunu.webvrAvailable = function() {
     this.gapSize = d.gapSize;
     return this;
   };
-  var sf = Object.freeze({ShadowMaterial:uc, SpriteMaterial:Hb, RawShaderMaterial:vc, ShaderMaterial:ua, PointsMaterial:fb, MultiMaterial:Fd, MeshPhysicalMaterial:Lb, MeshStandardMaterial:qb, MeshPhongMaterial:hb, MeshToonMaterial:Mb, MeshNormalMaterial:Nb, MeshLambertMaterial:Ob, MeshDepthMaterial:qa, MeshBasicMaterial:Ka, LineDashedMaterial:Pb, LineBasicMaterial:ya, Material:V}), wd = {enabled:!1, files:{}, add:function(d, a) {
+  var tf = Object.freeze({ShadowMaterial:uc, SpriteMaterial:Hb, RawShaderMaterial:vc, ShaderMaterial:ua, PointsMaterial:fb, MultiMaterial:Fd, MeshPhysicalMaterial:Lb, MeshStandardMaterial:qb, MeshPhongMaterial:hb, MeshToonMaterial:Mb, MeshNormalMaterial:Nb, MeshLambertMaterial:Ob, MeshDepthMaterial:qa, MeshBasicMaterial:Ka, LineDashedMaterial:Pb, LineBasicMaterial:ya, Material:V}), wd = {enabled:!1, files:{}, add:function(d, a) {
     !1 !== this.enabled && (this.files[d] = a);
   }, get:function(d) {
     if (!1 !== this.enabled) {
@@ -10350,9 +10350,9 @@ Nunu.webvrAvailable = function() {
           a && a(k);
           e.manager.itemEnd(d);
         }, 0);
-      } catch ($e) {
+      } catch (af) {
         window.setTimeout(function() {
-          c && c($e);
+          c && c(af);
           e.manager.itemError(d);
         }, 0);
       }
@@ -10391,7 +10391,7 @@ Nunu.webvrAvailable = function() {
     this.mimeType = d;
     return this;
   }});
-  Object.assign(Je.prototype, {load:function(d, a, b, c) {
+  Object.assign(Ke.prototype, {load:function(d, a, b, c) {
     function e(e) {
       n.load(d[e], function(d) {
         d = m._parser(d, !0);
@@ -11015,8 +11015,8 @@ Nunu.webvrAvailable = function() {
     }
     return null;
   }, CreateClipsFromMorphTargetSequences:function(d, a, b) {
-    for (var c = {}, e = /^([\w-]*?)([\d]+)$/, h = 0, m = d.length;h < m;h++) {
-      var f = d[h], n = f.name.match(e);
+    for (var c = {}, e = /^([\w-]*?)([\d]+)$/, m = 0, h = d.length;m < h;m++) {
+      var f = d[m], n = f.name.match(e);
       if (n && 1 < n.length) {
         var k = n[1];
         (n = c[k]) || (c[k] = n = []);
@@ -11034,24 +11034,24 @@ Nunu.webvrAvailable = function() {
     }
     var b = function(d, a, b, c, e) {
       if (0 !== b.length) {
-        var h = [], m = [];
-        Ca.flattenJSON(b, h, m, c);
-        0 !== h.length && e.push(new d(a, h, m));
+        var m = [], h = [];
+        Ca.flattenJSON(b, m, h, c);
+        0 !== m.length && e.push(new d(a, m, h));
       }
-    }, c = [], e = d.name || "default", h = d.length || -1, m = d.fps || 30;
+    }, c = [], e = d.name || "default", m = d.length || -1, h = d.fps || 30;
     d = d.hierarchy || [];
     for (var f = 0;f < d.length;f++) {
       var n = d[f].keys;
       if (n && 0 !== n.length) {
         if (n[0].morphTargets) {
-          for (var h = {}, k = 0;k < n.length;k++) {
+          for (var m = {}, k = 0;k < n.length;k++) {
             if (n[k].morphTargets) {
               for (var q = 0;q < n[k].morphTargets.length;q++) {
-                h[n[k].morphTargets[q]] = -1;
+                m[n[k].morphTargets[q]] = -1;
               }
             }
           }
-          for (var g in h) {
+          for (var g in m) {
             for (var p = [], r = [], q = 0;q !== n[k].morphTargets.length;++q) {
               var u = n[k];
               p.push(u.time);
@@ -11059,13 +11059,13 @@ Nunu.webvrAvailable = function() {
             }
             c.push(new xc(".morphTargetInfluence[" + g + "]", p, r));
           }
-          h = h.length * (m || 1);
+          m = m.length * (h || 1);
         } else {
           k = ".bones[" + a[f].name + "]", b(wc, k + ".position", n, "pos", c), b(ld, k + ".quaternion", n, "rot", c), b(wc, k + ".scale", n, "scl", c);
         }
       }
     }
-    return 0 === c.length ? null : new cb(e, h, c);
+    return 0 === c.length ? null : new cb(e, m, c);
   }});
   Object.assign(cb.prototype, {resetDuration:function() {
     for (var d = 0, a = 0, b = this.tracks.length;a !== b;++a) {
@@ -11095,7 +11095,7 @@ Nunu.webvrAvailable = function() {
       void 0 === b[d] && console.warn("THREE.MaterialLoader: Undefined texture", d);
       return b[d];
     }
-    var b = this.textures, c = new sf[d.type];
+    var b = this.textures, c = new tf[d.type];
     void 0 !== d.uuid && (c.uuid = d.uuid);
     void 0 !== d.name && (c.name = d.name);
     void 0 !== d.color && c.color.setHex(d.color);
@@ -11537,7 +11537,7 @@ Nunu.webvrAvailable = function() {
     c = yc.prototype.initMaterials(d.materials, a, this.crossOrigin);
     return {geometry:b, materials:c};
   }});
-  Object.assign(Ke.prototype, {load:function(d, a, b, c) {
+  Object.assign(Le.prototype, {load:function(d, a, b, c) {
     "" === this.texturePath && (this.texturePath = d.substring(0, d.lastIndexOf("/") + 1));
     var e = this;
     (new ib(e.manager)).load(d, function(b) {
@@ -11747,6 +11747,8 @@ Nunu.webvrAvailable = function() {
         case "HemisphereLight":
           f = new Hd(a.color, a.groundColor, a.intensity);
           break;
+        case "SkinnedMesh":
+          console.warn("THREE.ObjectLoader.parseObject() does not support SkinnedMesh yet.");
         case "Mesh":
           f = e(a.geometry);
           var m = h(a.material);
@@ -11774,8 +11776,6 @@ Nunu.webvrAvailable = function() {
         case "Group":
           f = new Sc;
           break;
-        case "SkinnedMesh":
-          console.warn("THREE.ObjectLoader.parseObject() does not support SkinnedMesh type. Instantiates Object3D instead.");
         default:
           f = new X;
       }
@@ -11997,7 +11997,7 @@ Nunu.webvrAvailable = function() {
     var a = this.points, b = (a.length - 1) * d;
     d = Math.floor(b);
     var b = b - d, c = a[0 === d ? d : d - 1], e = a[d], h = a[d > a.length - 2 ? a.length - 1 : d + 1], a = a[d > a.length - 3 ? a.length - 1 : d + 2];
-    return new l(Le(b, c.x, e.x, h.x, a.x), Le(b, c.y, e.y, h.y, a.y));
+    return new l(Me(b, c.x, e.x, h.x, a.x), Me(b, c.y, e.y, h.y, a.y));
   };
   zc.prototype = Object.create(Ua.prototype);
   zc.prototype.constructor = zc;
@@ -12225,7 +12225,7 @@ Nunu.webvrAvailable = function() {
     }
     return b;
   }});
-  Object.assign(Me.prototype, {load:function(d, a, b, c) {
+  Object.assign(Ne.prototype, {load:function(d, a, b, c) {
     var e = this;
     (new ib(this.manager)).load(d, function(d) {
       var b;
@@ -12261,7 +12261,7 @@ Nunu.webvrAvailable = function() {
     this.height = d.height;
     return this;
   }});
-  Object.assign(Ne.prototype, {update:function() {
+  Object.assign(Oe.prototype, {update:function() {
     var d, a, b, c, e, h, f, n, k = new q, g = new q;
     return function(m) {
       if (d !== this || a !== m.focus || b !== m.fov || c !== m.aspect * this.aspect || e !== m.near || h !== m.far || f !== m.zoom || n !== this.eyeSep) {
@@ -12503,7 +12503,7 @@ Nunu.webvrAvailable = function() {
       d[n] = d[n] * h + d[b + f] * c;
     }
   }});
-  Object.assign(Oe.prototype, {getValue:function(d, a) {
+  Object.assign(Pe.prototype, {getValue:function(d, a) {
     this.bind();
     var b = this._bindings[this._targetGroup.nCachedObjects_];
     void 0 !== b && b.getValue(d, a);
@@ -12520,7 +12520,7 @@ Nunu.webvrAvailable = function() {
       d[a].unbind();
     }
   }});
-  Object.assign(Ja, {Composite:Oe, create:function(d, a, b) {
+  Object.assign(Ja, {Composite:Pe, create:function(d, a, b) {
     return d && d.isAnimationObjectGroup ? new Ja.Composite(d, a, b) : new Ja(d, a, b);
   }, parseTrackName:function(d) {
     var a = /^((?:[\w-]+[\/:])*)([\w-]+)?(?:\.([\w-]+)(?:\[(.+)\])?)?\.([\w-]+)(?:\[(.+)\])?$/.exec(d);
@@ -12583,8 +12583,8 @@ Nunu.webvrAvailable = function() {
   }, function(d, a) {
     this.node[this.propertyName] = d[a];
     this.targetObject.needsUpdate = !0;
-  }, function(a, b) {
-    this.node[this.propertyName] = a[b];
+  }, function(d, a) {
+    this.node[this.propertyName] = d[a];
     this.targetObject.matrixWorldNeedsUpdate = !0;
   }], [function(a, b) {
     for (var d = this.resolvedProperty, c = 0, e = d.length;c !== e;++c) {
@@ -12712,7 +12712,7 @@ Nunu.webvrAvailable = function() {
     this.setValue = this._setValue_unbound;
   }});
   Object.assign(Ja.prototype, {_getValue_unbound:Ja.prototype.getValue, _setValue_unbound:Ja.prototype.setValue});
-  Object.assign(Pe.prototype, {isAnimationObjectGroup:!0, add:function(a) {
+  Object.assign(Qe.prototype, {isAnimationObjectGroup:!0, add:function(a) {
     for (var d = this._objects, b = d.length, c = this.nCachedObjects_, e = this._indicesByUUID, h = this._paths, f = this._parsedPaths, n = this._bindings, k = n.length, q = 0, g = arguments.length;q !== g;++q) {
       var p = arguments[q], r = p.uuid, u = e[r];
       if (void 0 === u) {
@@ -12814,7 +12814,7 @@ Nunu.webvrAvailable = function() {
       c.pop();
     }
   }});
-  Object.assign(Qe.prototype, {play:function() {
+  Object.assign(Re.prototype, {play:function() {
     this._mixer._activateAction(this);
     return this;
   }, stop:function() {
@@ -12984,7 +12984,7 @@ Nunu.webvrAvailable = function() {
     h[1] = c;
     return this;
   }});
-  Object.assign(Re.prototype, g.prototype, {_bindAction:function(a, b) {
+  Object.assign(Se.prototype, g.prototype, {_bindAction:function(a, b) {
     var d = a._localRoot || this._root, c = a._clip.tracks, e = c.length, h = a._propertyBindings;
     a = a._interpolants;
     var f = d.uuid, n = this._bindingsByRootAndName, k = n[f];
@@ -13147,7 +13147,7 @@ Nunu.webvrAvailable = function() {
     if (null === e) {
       return null;
     }
-    e = new Qe(this, e, b);
+    e = new Re(this, e, b);
     this._bindAction(e, h);
     this._addInactiveAction(e, d, c);
     return e;
@@ -13333,14 +13333,14 @@ Nunu.webvrAvailable = function() {
     this.meshPerAttribute = a.meshPerAttribute;
     return this;
   };
-  Object.assign(Se.prototype, {linePrecision:1, set:function(a, b) {
+  Object.assign(Te.prototype, {linePrecision:1, set:function(a, b) {
     this.ray.set(a, b);
   }, setFromCamera:function(a, b) {
     b && b.isPerspectiveCamera ? (this.ray.origin.setFromMatrixPosition(b.matrixWorld), this.ray.direction.set(a.x, a.y, .5).unproject(b).sub(this.ray.origin).normalize()) : b && b.isOrthographicCamera ? (this.ray.origin.set(a.x, a.y, (b.near + b.far) / (b.near - b.far)).unproject(b), this.ray.direction.set(0, 0, -1).transformDirection(b.matrixWorld)) : console.error("THREE.Raycaster: Unsupported camera type.");
   }, intersectObject:function(a, b) {
     var d = [];
     we(a, this, d, b);
-    d.sort(Te);
+    d.sort(Ue);
     return d;
   }, intersectObjects:function(a, b) {
     var d = [];
@@ -13350,10 +13350,10 @@ Nunu.webvrAvailable = function() {
     for (var c = 0, e = a.length;c < e;c++) {
       we(a[c], this, d, b);
     }
-    d.sort(Te);
+    d.sort(Ue);
     return d;
   }});
-  Object.assign(Ue.prototype, {start:function() {
+  Object.assign(Ve.prototype, {start:function() {
     this.oldTime = this.startTime = (performance || Date).now();
     this.elapsedTime = 0;
     this.running = !0;
@@ -13373,7 +13373,7 @@ Nunu.webvrAvailable = function() {
     }
     return a;
   }});
-  Object.assign(Ve.prototype, {set:function(a, b, c) {
+  Object.assign(We.prototype, {set:function(a, b, c) {
     this.radius = a;
     this.phi = b;
     this.theta = c;
@@ -13393,7 +13393,7 @@ Nunu.webvrAvailable = function() {
     0 === this.radius ? this.phi = this.theta = 0 : (this.theta = Math.atan2(a.x, a.z), this.phi = Math.acos(la.clamp(a.y / this.radius, -1, 1)));
     return this;
   }});
-  Object.assign(We.prototype, {set:function(a, b, c) {
+  Object.assign(Xe.prototype, {set:function(a, b, c) {
     this.radius = a;
     this.theta = b;
     this.y = c;
@@ -13857,8 +13857,8 @@ Nunu.webvrAvailable = function() {
     a.prototype.getPoint = b;
     return a;
   };
-  Xe.prototype = Object.create(jb.prototype);
   Ye.prototype = Object.create(jb.prototype);
+  Ze.prototype = Object.create(jb.prototype);
   ze.prototype = Object.create(jb.prototype);
   Object.assign(ze.prototype, {initFromArray:function(a) {
     console.error("THREE.Spline: .initFromArray() has been removed.");
@@ -14308,18 +14308,18 @@ Nunu.webvrAvailable = function() {
   a.CanvasTexture = Ed;
   a.DepthTexture = Tc;
   a.Texture = b;
-  a.CompressedTextureLoader = Je;
+  a.CompressedTextureLoader = Ke;
   a.DataTextureLoader = ie;
   a.CubeTextureLoader = je;
   a.TextureLoader = Gd;
-  a.ObjectLoader = Ke;
+  a.ObjectLoader = Le;
   a.MaterialLoader = Ud;
   a.BufferGeometryLoader = ke;
   a.DefaultLoadingManager = Ya;
   a.LoadingManager = he;
   a.JSONLoader = le;
   a.ImageLoader = jd;
-  a.FontLoader = Me;
+  a.FontLoader = Ne;
   a.FileLoader = ib;
   a.Loader = yc;
   a.Cache = wd;
@@ -14334,7 +14334,7 @@ Nunu.webvrAvailable = function() {
   a.AmbientLight = Nd;
   a.LightShadow = Qb;
   a.Light = Da;
-  a.StereoCamera = Ne;
+  a.StereoCamera = Oe;
   a.PerspectiveCamera = Na;
   a.OrthographicCamera = Zb;
   a.CubeCamera = Vd;
@@ -14354,8 +14354,8 @@ Nunu.webvrAvailable = function() {
   a.PropertyBinding = Ja;
   a.KeyframeTrack = Sb;
   a.AnimationUtils = Ca;
-  a.AnimationObjectGroup = Pe;
-  a.AnimationMixer = Re;
+  a.AnimationObjectGroup = Qe;
+  a.AnimationMixer = Se;
   a.AnimationClip = cb;
   a.Uniform = Wd;
   a.InstancedBufferGeometry = Xb;
@@ -14370,10 +14370,10 @@ Nunu.webvrAvailable = function() {
   a.InstancedBufferAttribute = Ec;
   a.Face3 = Ea;
   a.Object3D = X;
-  a.Raycaster = Se;
+  a.Raycaster = Te;
   a.Layers = Mc;
   a.EventDispatcher = g;
-  a.Clock = Ue;
+  a.Clock = Ve;
   a.QuaternionLinearInterpolant = Qd;
   a.LinearInterpolant = kd;
   a.DiscreteInterpolant = Pd;
@@ -14381,8 +14381,8 @@ Nunu.webvrAvailable = function() {
   a.Interpolant = Za;
   a.Triangle = Ba;
   a.Math = la;
-  a.Spherical = Ve;
-  a.Cylindrical = We;
+  a.Spherical = We;
+  a.Cylindrical = Xe;
   a.Plane = wa;
   a.Frustum = Va;
   a.Sphere = Fa;
@@ -14718,8 +14718,8 @@ Nunu.webvrAvailable = function() {
     console.warn("THREE.Float64Attribute has been removed. Use new THREE.Float64BufferAttribute() instead.");
     return new ub(a, b);
   };
-  a.ClosedSplineCurve3 = Xe;
-  a.SplineCurve3 = Ye;
+  a.ClosedSplineCurve3 = Ye;
+  a.SplineCurve3 = Ze;
   a.Spline = ze;
   a.BoundingBoxHelper = function(a, b) {
     console.warn("THREE.BoundingBoxHelper has been deprecated. Creating a THREE.BoxHelper instead.");
@@ -32017,7 +32017,6 @@ ObjectLoader.prototype.parseObject = function(a, g, l, b, f, k) {
       break;
     case "Sky":
       p = new Sky(a.autoUpdate, a.dayTime, a.sunDistance, a.time);
-      console.log(a);
       void 0 !== a.sun && p.sun.shadow.fromJSON(a.sun.shadow);
       if (void 0 !== a.colorTop) {
         for (p.colorTop = [], t = 0;t < a.colorTop.length;t++) {

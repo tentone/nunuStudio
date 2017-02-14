@@ -4345,9 +4345,10 @@
 	var arrayCacheF32 = [];
 	var arrayCacheI32 = [];
 
-	// Float32Array cache used for uploading Matrix4 uniform
+	// Float32Array caches used for uploading Matrix uniforms
 
 	var mat4array = new Float32Array( 16 );
+	var mat3array = new Float32Array( 9 );
 
 	// Flattening for arrays of vectors and matrices
 
@@ -4453,7 +4454,16 @@
 
 	function setValue3fm( gl, v ) {
 
-		gl.uniformMatrix3fv( this.addr, false, v.elements || v );
+		if ( v.elements === undefined ) {
+
+			gl.uniformMatrix3fv( this.addr, false, v );
+
+		} else {
+
+			mat3array.set( v.elements );
+			gl.uniformMatrix3fv( this.addr, false, mat3array );
+
+		}
 
 	}
 
@@ -8334,13 +8344,13 @@
 
 	function Matrix3() {
 
-		this.elements = new Float32Array( [
+		this.elements = [
 
 			1, 0, 0,
 			0, 1, 0,
 			0, 0, 1
 
-		] );
+		];
 
 		if ( arguments.length > 0 ) {
 
@@ -23147,7 +23157,7 @@
 
 			} else {
 
-				console.warn( 'THREE.Skeleton bonInverses is the wrong length.' );
+				console.warn( 'THREE.Skeleton boneInverses is the wrong length.' );
 
 				this.boneInverses = [];
 
@@ -33594,6 +33604,10 @@
 
 						break;
 
+					case 'SkinnedMesh':
+
+						console.warn( 'THREE.ObjectLoader.parseObject() does not support SkinnedMesh yet.' );
+
 					case 'Mesh':
 
 						var geometry = getGeometry( data.geometry );
@@ -33653,10 +33667,6 @@
 						object = new Group();
 
 						break;
-
-					case 'SkinnedMesh':
-
-						console.warn( 'THREE.ObjectLoader.parseObject() does not support SkinnedMesh type. Instantiates Object3D instead.' );
 
 					default:
 
