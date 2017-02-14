@@ -51,7 +51,8 @@ function RectAreaLightPanel(parent, obj)
 		}
 	});
 	this.form.add(this.width);
-
+	this.form.nextRow();
+	
 	//Rect height
 	this.form.addText("Height");
 	this.height = new NumberBox(this.form.element);
