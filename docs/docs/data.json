@@ -2097,7 +2097,7 @@
     "classitems": [
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 9,
+            "line": 10,
             "description": "Indicates if this key is currently pressed",
             "itemtype": "property",
             "name": "pressed",
@@ -2108,7 +2108,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 15,
+            "line": 16,
             "description": "Indicates if this key was just pressed",
             "itemtype": "property",
             "name": "justPressed",
@@ -2119,7 +2119,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 21,
+            "line": 22,
             "description": "Indicates if this key was just released",
             "itemtype": "property",
             "name": "justReleased",
@@ -2130,7 +2130,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 35,
+            "line": 36,
             "description": "Down",
             "itemtype": "attribute",
             "name": "DOWN",
@@ -2140,7 +2140,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 41,
+            "line": 42,
             "description": "Up",
             "itemtype": "attribute",
             "name": "UP",
@@ -2150,7 +2150,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 47,
+            "line": 48,
             "description": "Reset",
             "itemtype": "attribute",
             "name": "RESET",
@@ -2160,7 +2160,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 54,
+            "line": 55,
             "description": "Update Key status based on new key state",
             "itemtype": "method",
             "name": "update",
@@ -2169,7 +2169,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 86,
+            "line": 87,
             "description": "Set this key attributes manually",
             "itemtype": "method",
             "name": "set",
@@ -2178,7 +2178,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 97,
+            "line": 98,
             "description": "Reset key to default values",
             "itemtype": "method",
             "name": "reset",
