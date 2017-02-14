@@ -506,7 +506,6 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 		case "Sky":
 			object = new Sky(data.autoUpdate, data.dayTime, data.sunDistance, data.time);
-			console.log(data);
 			
 			if(data.sun !== undefined)
 			{

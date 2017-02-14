@@ -20,6 +20,7 @@ function CodeEditor(parent)
 		keyMap: Settings.code.keymap,
 		autoCloseBrackets: Settings.code.autoCloseBrackets,
 		styleActiveLine: Settings.code.highlightActiveLine,
+		showMatchesOnScrollbar: Settings.code.showMatchesOnScrollbar,
 		matchBrackets: true,
 		dragDrop: true,
 		indentWithTabs: true,
@@ -159,7 +160,7 @@ CodeEditor.prototype.updateInterface = function()
 	this.code.setOption("keyMap", Settings.code.keymap);
 	this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
 	this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
-
+	this.code.setOption("showMatchesOnScrollbar", Settings.code.showMatchesOnScrollbar); 
 	this.code.display.wrapper.style.fontSize = Settings.code.fontSize + "px";
 	this.code.setSize(this.size.x, this.size.y);
 	this.code.refresh();

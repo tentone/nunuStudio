@@ -11,11 +11,13 @@
 	<!--Styles-->
 	<link rel="stylesheet" href="../../css/lib/bootstrap.min.css">
 	<link rel="stylesheet" href="../../css/lib/animate.css">
+	<link rel="stylesheet" href="../../css/lib/highlight.min.css">
 	<link rel="stylesheet" href="../../css/style.css">
 
 	<!--Javascript-->
 	<script src="../../js/jquery-1.11.0.min.js"></script>
 	<script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/highlight.min.js"></script>
 </head>
 
 <body>
@@ -72,9 +74,20 @@
 			</ul>
 
 			<h3 class="black">Moving an object</h3>
-			<p>To move an object we start by attaching that object as a children of the script object, we can do that by dragging the desired object (in this tutorial we will use the cube object on the default scene)</p>
-			<p>...</p>
-
+			<p>To move an object we start by attaching that object as a children of the script object, we can do that by dragging the desired object to the script object, in this tutorial we will use the cube object on the default scene.</p>
+			<p>Lets start by testing the following code</p>
+			<pre><code>this.initialize = function()
+{
+	self.position.x += 2;
+};</code></pre>
+			<p>This code will move the cube 2 points in the x axis when the program is started, but, after the object the object is moves it stays static.</p>
+			<p>To animate an object we can instead move our code to the update method, instead of playing with the object position lets try to change now the object rotation by testing the following code.</p>
+			<pre><code>this.update = function()
+{
+	self.rotation.y += 0.01;
+};</code></pre>
+			<p>If everything works as expected you should see the following animation.</p>
+			<img src="animation.gif" style="width:50%; margin-left:25%"></img>
 		</div>
 	</section>
 

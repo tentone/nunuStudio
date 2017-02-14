@@ -109,6 +109,17 @@ function CodeSettingsTab(parent, closeable, container, index)
 	});
 	this.form.add(this.codeHighlightActiveLine);
 	this.form.nextRow();
+
+	//Show search match on scrollback
+	this.form.addText("Show match scrollbar");
+	this.showMatchesOnScrollbar = new CheckBox(this.form.element);
+	this.showMatchesOnScrollbar.size.set(20, 16);
+	this.showMatchesOnScrollbar.setOnChange(function()
+	{
+		Settings.code.showMatchesOnScrollbar = self.showMatchesOnScrollbar.getValue();
+	});
+	this.form.add(this.showMatchesOnScrollbar);
+	this.form.nextRow();
 }
 
 CodeSettingsTab.prototype = Object.create(TabElement.prototype);
@@ -125,6 +136,7 @@ CodeSettingsTab.prototype.activate = function()
 	this.codeLineWrapping.setValue(Settings.code.lineWrapping);
 	this.codeAutoCloseBrackets.setValue(Settings.code.autoCloseBrackets);
 	this.codeHighlightActiveLine.setValue(Settings.code.highlightActiveLine);
+	this.showMatchesOnScrollbar.setValue(Settings.code.showMatchesOnScrollbar);
 }
 
 //Update division Size

@@ -13,6 +13,7 @@ function ScriptEditor(parent, closeable, container, index)
 		keyMap: Settings.code.keymap,
 		autoCloseBrackets: Settings.code.autoCloseBrackets,
 		styleActiveLine: Settings.code.highlightActiveLine,
+		showMatchesOnScrollbar: Settings.code.showMatchesOnScrollbar,
 		matchBrackets: true,
 		dragDrop: true,
 		indentWithTabs: true,
@@ -165,7 +166,8 @@ ScriptEditor.prototype.activate = function()
 	this.code.setOption("keyMap", Settings.code.keymap);
 	this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
 	this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
-
+	this.code.setOption("showMatchesOnScrollbar", Settings.code.showMatchesOnScrollbar);
+	
 	//Update script
 	this.updateScript();
 }

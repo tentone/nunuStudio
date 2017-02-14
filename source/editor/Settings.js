@@ -47,6 +47,7 @@ Settings.loadDefault = function()
 	Settings.code.lineWrapping = false;
 	Settings.code.autoCloseBrackets = true;
 	Settings.code.highlightActiveLine = false;
+	Settings.code.showMatchesOnScrollbar = true;
 }
 
 //Store settings file

@@ -32,6 +32,7 @@
 		"lineNumbers": true,
 		"lineWrapping": false,
 		"autoCloseBrackets": true,
-		"highlightActiveLine": false
+		"highlightActiveLine": false,
+		"showMatchesOnScrollbar": true
 	}
 }
