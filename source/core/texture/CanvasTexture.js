@@ -1,8 +1,9 @@
 "use strict";
 
 /**
- * Canvas textures can be used to draw content to the texture during runtime
- * Canvas textures always start with black background and a red text "Canvas Texture"
+ * Canvas textures can be used to draw content to the texture during runtime, using the context property.
+ * 
+ * Canvas textures always start with black background and a red text "Canvas Texture".
  * 
  * @class CanvasTexture
  * @constructor
@@ -23,21 +24,25 @@
 
 /**
  * Image is used to store a DOM canvas element
+ * 
  * @property image
  * @type {DOM}
  */
 /**
  * Canvas context 2D, can be used to draw content do the canvas texture
+ * 
  * @property context
  * @type {Context2D}
  */
 /**
  * Canvas height
+ * 
  * @property height
  * @type {Number}
  */
 /**
  * Canvas width
+ * 
  * @property width
  * @type {Number}
  */

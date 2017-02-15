@@ -5,7 +5,7 @@ function DropdownList(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("select");
 	this.element.style.position = "absolute";
 	this.element.style.backgroundColor = Editor.theme.boxColor;

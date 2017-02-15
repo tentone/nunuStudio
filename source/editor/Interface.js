@@ -190,6 +190,16 @@ Interface.initialize = function()
 		}, "image/*");
 	}, Interface.fileDir + "icons/misc/image.png");
 
+	//Cube texture
+	importTexture.addOption("Cube Texture", function()
+	{
+		var texture = new CubeTexture([Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage]);
+		texture.name = "cube";
+		Editor.program.addTexture(texture);
+
+		Editor.updateObjectViews();
+	}, Interface.fileDir + "icons/misc/cube.png");
+
 	//Canvas texture
 	importTexture.addOption("Canvas Texture", function()
 	{

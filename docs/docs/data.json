@@ -668,7 +668,7 @@
             "tag": "module",
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
             "line": 3,
-            "description": "Canvas textures can be used to draw content to the texture during runtime\nCanvas textures always start with black background and a red text \"Canvas Texture\""
+            "description": "Canvas textures can be used to draw content to the texture during runtime, using the context property.\n\nCanvas textures always start with black background and a red text \"Canvas Texture\"."
         },
         "Sprite": {
             "name": "Sprite",
@@ -1657,7 +1657,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
             "line": 3,
-            "description": "Canvas textures can be used to draw content to the texture during runtime\nCanvas textures always start with black background and a red text \"Canvas Texture\"",
+            "description": "Canvas textures can be used to draw content to the texture during runtime, using the context property.\n\nCanvas textures always start with black background and a red text \"Canvas Texture\".",
             "is_constructor": 1,
             "extends": "{Texture}",
             "params": [
@@ -1730,7 +1730,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\CubeTexture.js",
             "line": 3,
-            "description": "CubeTextures represent 360 view using six images, these images correspond to the faces of a cube\nCubeTextures can be used to simulate reflections and transparency refraction in materials\nIs also possible to create dynamic cubetextures using the CubeCamera object",
+            "description": "CubeTextures represent 360 view using six images, these images correspond to the faces of a cube.\n\nCubeTextures can be used to simulate reflections and transparency refraction in materials.\n\nIs also possible to create dynamic cubetextures using the CubeCamera object.",
             "is_constructor": 1,
             "extends": "{Texture}",
             "params": [
@@ -1798,7 +1798,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\Texture.js",
             "line": 3,
-            "description": "Image texture constructor, supports GIF animations.\nIt is based on THREE.Texture, original documentation can be found here https://threejs.org/docs/index.html#Reference/Textures/Texture",
+            "description": "Image texture constructor, supports GIF animations.\n\nIt is based on THREE.Texture, original documentation can be found here https://threejs.org/docs/index.html#Reference/Textures/Texture",
             "is_constructor": 1,
             "extends": "{Texture}",
             "params": [
@@ -1866,7 +1866,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\VideoTexture.js",
             "line": 3,
-            "description": "Video texture, uses a video DOM element instead of a img element, it is smilar to THREE.VideoTexture\nVideoTexture also provides methods for playback control",
+            "description": "Video texture, uses a video DOM element instead of a img element.\n\nVideoTexture also provides methods for playback control",
             "is_constructor": 1,
             "extends": "{Texture}",
             "params": [
@@ -1914,7 +1914,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
             "line": 3,
-            "description": "Webcam texture is used to capture and display video from a webcam in real-time\nIt uses WebRTC, the host must support it, otherwise WebcamTexture will display a black image",
+            "description": "Webcam texture is used to capture and display video from a webcam in real-time.\n\nIt uses WebRTC, the host must support it, otherwise WebcamTexture will display a black image.",
             "is_constructor": 1,
             "extends": "{Texture}",
             "params": [
@@ -6259,7 +6259,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 24,
+            "line": 25,
             "description": "Image is used to store a DOM canvas element",
             "itemtype": "property",
             "name": "image",
@@ -6269,7 +6269,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 29,
+            "line": 31,
             "description": "Canvas context 2D, can be used to draw content do the canvas texture",
             "itemtype": "property",
             "name": "context",
@@ -6279,7 +6279,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 34,
+            "line": 37,
             "description": "Canvas height",
             "itemtype": "property",
             "name": "height",
@@ -6289,7 +6289,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 39,
+            "line": 43,
             "description": "Canvas width",
             "itemtype": "property",
             "name": "width",
@@ -6299,7 +6299,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 70,
+            "line": 75,
             "description": "Create JSON description for canvas texture, canvas image is not serialized",
             "params": [
                 {
@@ -6315,7 +6315,18 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 58,
+            "line": 25,
+            "description": "Size of each on of the texture that composte the CubeTexture",
+            "itemtype": "property",
+            "name": "size",
+            "type": "{Number}",
+            "default": "512",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\CubeTexture.js",
+            "line": 62,
             "description": "Cubemap right image index",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -6325,7 +6336,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 66,
+            "line": 70,
             "description": "Cubemap left image index",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -6335,7 +6346,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 74,
+            "line": 78,
             "description": "Cubemap top image index",
             "itemtype": "attribute",
             "name": "TOP",
@@ -6345,7 +6356,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 82,
+            "line": 86,
             "description": "Cubemap bottom image index",
             "itemtype": "attribute",
             "name": "BOTTOM",
@@ -6355,7 +6366,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 90,
+            "line": 94,
             "description": "Cubemap front image index",
             "itemtype": "attribute",
             "name": "FRONT",
@@ -6365,7 +6376,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 98,
+            "line": 102,
             "description": "Cubemap back image index",
             "itemtype": "attribute",
             "name": "BACK",
@@ -6375,7 +6386,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 106,
+            "line": 110,
             "description": "Updates the CubeTexture images, should be called after changing the images attached to the texture",
             "itemtype": "method",
             "name": "updateImages",
@@ -6384,7 +6395,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\CubeTexture.js",
-            "line": 138,
+            "line": 142,
             "description": "Serialize cube texture to JSON\nAll six images of the cube texture are stored individually",
             "itemtype": "method",
             "name": "toJSON",
@@ -6404,7 +6415,49 @@
         },
         {
             "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 74,
+            "line": 24,
+            "description": "Image attached to the texture",
+            "itemtype": "property",
+            "name": "img",
+            "type": "{Image}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 30,
+            "description": "DOM element attached to the texture",
+            "itemtype": "property",
+            "name": "image",
+            "type": "{DOM}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 36,
+            "description": "Name of the texture",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "default": "\"texture\"",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 43,
+            "description": "Flag used to know is the texture has been disposed.\n\nIs used to control animation when using a gif as a texture.",
+            "itemtype": "property",
+            "name": "disposed",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\Texture.js",
+            "line": 105,
             "description": "Dispose texture",
             "itemtype": "method",
             "name": "dispose",
@@ -6413,7 +6466,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\Texture.js",
-            "line": 85,
+            "line": 116,
             "description": "Create JSON description for texture, serializes image used in the texture\nTHREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
             "params": [
                 {
@@ -6429,7 +6482,17 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 19,
+            "line": 20,
+            "description": "Image is used to store a DOM video element",
+            "itemtype": "property",
+            "name": "image",
+            "type": "{DOM}",
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\VideoTexture.js",
+            "line": 26,
             "description": "Video audio volume",
             "itemtype": "property",
             "name": "volume",
@@ -6440,7 +6503,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 25,
+            "line": 32,
             "description": "If true the playback starts automatically",
             "itemtype": "property",
             "name": "autoplay",
@@ -6451,7 +6514,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 31,
+            "line": 38,
             "description": "Start time in seconds",
             "itemtype": "property",
             "name": "playbackRate",
@@ -6462,7 +6525,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 37,
+            "line": 44,
             "description": "If true the video plays in loop",
             "itemtype": "property",
             "name": "loop",
@@ -6473,7 +6536,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 99,
+            "line": 106,
             "description": "Set video time in seconds",
             "params": [
                 {
@@ -6489,7 +6552,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 109,
+            "line": 116,
             "description": "Set loop mode",
             "params": [
                 {
@@ -6505,7 +6568,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 120,
+            "line": 127,
             "description": "Set video volume",
             "params": [
                 {
@@ -6521,7 +6584,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 131,
+            "line": 138,
             "description": "Set video playback speed",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -6537,7 +6600,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 142,
+            "line": 149,
             "description": "Pause video playback",
             "itemtype": "method",
             "name": "pause",
@@ -6546,7 +6609,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 154,
+            "line": 161,
             "description": "Start playing video",
             "itemtype": "method",
             "name": "play",
@@ -6555,7 +6618,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 166,
+            "line": 173,
             "description": "Dispose video texture",
             "itemtype": "method",
             "name": "dispose",
@@ -6564,7 +6627,7 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 182,
+            "line": 189,
             "description": "Create Video texture json description",
             "params": [
                 {
@@ -6582,7 +6645,17 @@
         },
         {
             "file": "..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 76,
+            "line": 18,
+            "description": "Image is used to store a DOM video element",
+            "itemtype": "property",
+            "name": "image",
+            "type": "{DOM}",
+            "class": "WebcamTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\source\\core\\texture\\WebcamTexture.js",
+            "line": 84,
             "description": "Dispose webcam texture",
             "itemtype": "method",
             "name": "dispose",
@@ -8280,7 +8353,7 @@
         },
         {
             "message": "Missing item type\nCreate Video texture json description",
-            "line": " ..\\source\\core\\texture\\VideoTexture.js:182"
+            "line": " ..\\source\\core\\texture\\VideoTexture.js:189"
         },
         {
             "message": "Missing item type\nRotates the object to face a point in world space.",

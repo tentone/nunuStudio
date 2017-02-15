@@ -2,6 +2,7 @@
 
 /**
  * Image texture constructor, supports GIF animations.
+ * 
  * It is based on THREE.Texture, original documentation can be found here https://threejs.org/docs/index.html#Reference/Textures/Texture
  * 
  * @class Texture
@@ -19,6 +20,36 @@
  * @param {Number} anisotropy
  * @param {Number} encoding
  */
+
+/**
+ * Image attached to the texture
+ * 
+ * @property img
+ * @type {Image}
+ */
+/**
+ * DOM element attached to the texture
+ * 
+ * @property image
+ * @type {DOM}
+ */
+/**
+ * Name of the texture
+ * 
+ * @property name
+ * @type {String}
+ * @default "texture"
+ */
+/**
+ * Flag used to know is the texture has been disposed.
+ * 
+ * Is used to control animation when using a gif as a texture.
+ * 
+ * @property disposed
+ * @type {boolean}
+ * @default false
+ */
+
 function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
 	//If image is a URL

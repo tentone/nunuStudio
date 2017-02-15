@@ -1,8 +1,9 @@
 "use strict";
 
 /**
- * Webcam texture is used to capture and display video from a webcam in real-time
- * It uses WebRTC, the host must support it, otherwise WebcamTexture will display a black image
+ * Webcam texture is used to capture and display video from a webcam in real-time.
+ * 
+ * It uses WebRTC, the host must support it, otherwise WebcamTexture will display a black image.
  * 
  * @class WebcamTexture
  * @constructor
@@ -12,6 +13,13 @@
  * @param {Number} wrapT
  * @param {Number} type
  * @param {Number} anisotropy
+ */
+
+/**
+ * Image is used to store a DOM video element
+ * 
+ * @property image
+ * @type {DOM}
  */
 function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 {
@@ -44,9 +52,9 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 		});				
 	}
 
-	//Super constructor
 	THREE.Texture.call(this, video, mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 
+	//Disable mipmaps generation
 	this.generateMipmaps = false;
 	this.disposed = false;
 

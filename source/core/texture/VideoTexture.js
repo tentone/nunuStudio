@@ -1,7 +1,8 @@
 "use strict";
 
 /**
- * Video texture, uses a video DOM element instead of a img element, it is smilar to THREE.VideoTexture
+ * Video texture, uses a video DOM element instead of a img element.
+ * 
  * VideoTexture also provides methods for playback control
  * 
  * @class VideoTexture
@@ -16,6 +17,12 @@
  * @param {Number} anisotropy
  */
 
+/**
+ * Image is used to store a DOM video element
+ * 
+ * @property image
+ * @type {DOM}
+ */
 /**
  * Video audio volume
  * @property volume
