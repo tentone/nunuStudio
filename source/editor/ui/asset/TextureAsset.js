@@ -12,7 +12,17 @@ function TextureAsset(parent)
 
 	this.element.ondblclick = function()
 	{
-		var Constructor = (self.texture instanceof VideoTexture) ? VideoTextureEditor : TextureEditor;
+		var Constructor = TextureEditor;
+
+		if(self.texture instanceof VideoTexture)
+		{
+			Constructor = VideoTextureEditor;
+		}
+		else if(self.texture instanceof CubeTexture)
+		{
+			Constructor = CubeTextureEditor;
+		}
+		
 		var tab = Interface.tab.getTab(Constructor, self.texture);
 
 		if(tab === null)
@@ -148,8 +158,6 @@ TextureAsset.prototype.setTexture = function(texture)
 	{
 		this.preview = document.createElement("video");
 		this.preview.draggable = true;
-		this.preview.style.position = "absolute";
-		this.preview.style.top = "5px";
 		this.preview.volume = 0.0;
 		this.preview.src = texture.image.src;
 		this.preview.onload = function()
@@ -157,25 +165,60 @@ TextureAsset.prototype.setTexture = function(texture)
 			this.preview.loop = true;
 			this.preview.autostart = true;
 		};
+	}
+	//Cube texture
+	else if(texture instanceof CubeTexture)
+	{
+		this.preview = document.createElement("canvas");
+		this.preview.draggable = true;
+		this.preview.width = 128;
+		this.preview.height = 128;
 
-		this.element.appendChild(this.preview);
+		var context = this.preview.getContext("2d");
+
+		for(var i = 0; i < texture.images.length; i++)
+		{
+			var image = document.createElement("img");
+			image.index = i;
+			image.onload = function()
+			{
+				if(this.index === 2)
+				{
+					context.drawImage(this, 32, 16, 32, 32);
+				}
+				else if(this.index === 3)
+				{
+					context.drawImage(this, 32, 80, 32, 32);
+				}
+				else
+				{
+					var order = [2, 0, null, null, 1, 3]
+					context.drawImage(this, order[this.index] * 32, 48, 32, 32);
+				}
+			}
+			image.src = texture.images[i].data;
+		}
 	}
 	//Canvas texture
 	else if(texture instanceof CanvasTexture)
 	{
 		this.preview = document.createElement("img");
-		this.preview.style.position = "absolute";
-		this.preview.style.top = "5px";
 		this.preview.src = texture.image.toDataURL();
-		this.element.appendChild(this.preview);
 	}
 	//Image
 	else if(texture instanceof THREE.Texture)
 	{
 		this.preview = document.createElement("img");
-		this.preview.style.position = "absolute";
-		this.preview.style.top = "5px";
 		this.preview.src = texture.image.src;
+	}
+
+	//Add preview to parent
+	if(this.preview !== null)
+	{
+		this.preview.style.position = "absolute";
+		this.preview.style.top = "5%";
+		this.preview.style.left = "17%";
+		this.preview.style.width = "65%";
 		this.element.appendChild(this.preview);	
 	}
 
@@ -189,14 +232,4 @@ TextureAsset.prototype.updateMetadata = function()
 	{
 		this.setText(this.texture.name);
 	}
-}
-
-//Update interface
-TextureAsset.prototype.updateInterface = function()
-{
-	Asset.prototype.updateInterface.call(this);
-
-	this.preview.width = this.size.x * this.scale.x;
-	this.preview.height = this.size.y * this.scale.y;
-	this.preview.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
 }

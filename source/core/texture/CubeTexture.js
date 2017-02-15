@@ -1,9 +1,11 @@
 "use strict";
 
 /**
- * CubeTextures represent 360 view using six images, these images correspond to the faces of a cube
- * CubeTextures can be used to simulate reflections and transparency refraction in materials
- * Is also possible to create dynamic cubetextures using the CubeCamera object
+ * CubeTextures represent 360 view using six images, these images correspond to the faces of a cube.
+ * 
+ * CubeTextures can be used to simulate reflections and transparency refraction in materials.
+ * 
+ * Is also possible to create dynamic cubetextures using the CubeCamera object.
  *
  * @class CubeTexture
  * @constructor
@@ -19,6 +21,14 @@
  * @param {Number} anisotropy
  * @param {Number} encoding
  */
+
+/**
+ * Size of each on of the texture that composte the CubeTexture
+ *
+ * @property size
+ * @type {Number}
+ * @default 512
+ */
 function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
 	if(mapping === undefined)
@@ -26,21 +36,15 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 		mapping = THREE.CubeReflectionMapping;
 	}
 
-	if(images === undefined)
-	{
-		images = [];
-	}
-	
 	var array = [];
-	var self = this;
-	for(var i = 0; i < images.length; i++)
+	for(var i = 0; i < 6; i++)
 	{
 		array.push(document.createElement("canvas"));
 	}	
 
 	THREE.Texture.call(this, array, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
-	this.images = images;
+	this.images = (images !== undefined) ? images : [];
 
 	this.size = 512;
 	this.flipY = false;

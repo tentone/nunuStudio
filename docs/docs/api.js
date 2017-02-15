@@ -155,7 +155,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Textures",
             "name": "Textures",
-            "description": "Canvas textures can be used to draw content to the texture during runtime\nCanvas textures always start with black background and a red text \"Canvas Texture\""
+            "description": "Canvas textures can be used to draw content to the texture during runtime, using the context property.\n\nCanvas textures always start with black background and a red text \"Canvas Texture\"."
         },
         {
             "displayName": "THREE",

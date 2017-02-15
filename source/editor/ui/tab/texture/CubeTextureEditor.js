@@ -2,11 +2,11 @@
 
 function CubeTextureEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Texture", "editor/files/icons/misc/image.png");
+	TabElement.call(this, parent, closeable, container, index, "Texture", "editor/files/icons/misc/cube.png");
 
 	var self = this;
 
-	this.Texture = null;
+	this.texture = null;
 
 	//Dual division
 	this.division = new DualDivisionResizable(this.element);
@@ -96,6 +96,45 @@ function CubeTextureEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.magFilter);
 	this.form.nextRow();
+
+	//Mapping
+	this.form.addText("Mapping");
+	this.mapping = new DropdownList(this.form.element);
+	this.mapping.size.set(150, 18);
+	this.mapping.addValue("Reflection Mapping", THREE.CubeReflectionMapping);
+	this.mapping.addValue("Refraction Mapping", THREE.CubeRefractionMapping);
+	this.mapping.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			self.texture.mapping = self.mapping.getValue();
+			self.updateMaterial();
+		}
+	});
+	this.form.add(this.mapping);
+	this.form.nextRow();
+
+	//Size
+	this.form.addText("Size");
+	this.textureSize = new DropdownList(this.form.element);
+	this.textureSize.size.set(120, 18);
+	this.textureSize.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			self.texture.size = self.textureSize.getValue();
+			self.texture.updateImages();
+		}
+	});
+	this.form.add(this.textureSize);
+	this.form.nextRow();
+
+	//Size options
+	for(var i = 5; i < 12; i++)
+	{
+		var size = Math.pow(2, i);
+		this.textureSize.addValue(size + "x" + size, size);
+	}
 
 	//Flip Y
 	this.form.addText("Flip Y");
@@ -214,14 +253,6 @@ function CubeTextureEditor(parent, closeable, container, index)
 
 CubeTextureEditor.prototype = Object.create(TabElement.prototype);
 
-CubeTextureEditor.prototype.testTexture = function()
-{
-	//Cube map
-	var image = new Image("editor/files/default.png");
-	var texture = new CubeTexture([image, image, image, image, image, image]);
-	this.attach(texture);
-}
-
 //Update test material
 CubeTextureEditor.prototype.updateMaterial = function()
 {
@@ -258,7 +289,7 @@ CubeTextureEditor.prototype.updateMetadata = function()
 		//If not found close tab
 		if(Editor.program.textures[this.texture.uuid] === undefined)
 		{
-			//this.close();
+			this.close();
 		}
 	}
 }
@@ -275,6 +306,8 @@ CubeTextureEditor.prototype.attach = function(texture)
 	this.name.setText(texture.name);
 	this.magFilter.setValue(texture.magFilter);
 	this.minFilter.setValue(texture.minFilter);
+	this.mapping.setValue(texture.mapping);
+	this.textureSize.setValue(texture.size);
 	this.flipY.setValue(texture.flipY);
 
 	this.top.setValue(texture.images[CubeTexture.TOP].data);
