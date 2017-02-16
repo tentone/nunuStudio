@@ -11,12 +11,14 @@ function ImageChooser(parent)
 
 	//Background
 	this.alpha = document.createElement("img");
+	this.alpha.style.visibility = "inherit";
 	this.alpha.style.position = "absolute";
 	this.alpha.src = "editor/files/alpha.png";
 	this.element.appendChild(this.alpha);
 
 	//Image
 	this.img = document.createElement("img");
+	this.img.style.visibility = "inherit";
 	this.img.style.position = "absolute";
 	this.element.appendChild(this.img);
 
@@ -123,14 +125,10 @@ ImageChooser.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
-		this.img.style.visibility = "visible";
-		this.alpha.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
-		this.img.style.visibility = "hidden";
-		this.alpha.style.visibility = "hidden";
 	}
 
 	//Keep apect ratio

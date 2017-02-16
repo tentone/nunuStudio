@@ -5,25 +5,31 @@ function TextureChooser(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Base element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 
-	//Texture preview division
+	//Preview
 	this.preview = document.createElement("div");
 	this.preview.style.cursor = "pointer";
+	this.preview.style.visibility = "inherit";
 	this.preview.style.position = "absolute";
 	this.preview.style.top = "0px";
 	this.preview.style.left = "0px";
+	this.preview.style.width = "100%";
+	this.preview.style.height = "100%";
 	this.element.appendChild(this.preview);
 
 	//Alpha background
 	this.alpha = document.createElement("img");
 	this.alpha.src = "editor/files/alpha.png";
+	this.alpha.style.visibility = "inherit";
 	this.alpha.style.pointerEvents = "none";
 	this.alpha.style.position = "absolute";
 	this.alpha.style.left = "0px";
 	this.alpha.style.top = "0px";
+	this.alpha.style.width = "100%";
+	this.alpha.style.height = "100%";
 	this.preview.appendChild(this.alpha);
 
 	//Image
@@ -32,6 +38,8 @@ function TextureChooser(parent)
 	this.img.style.position = "absolute";
 	this.img.style.left = "0px";
 	this.img.style.top = "0px";
+	this.img.style.width = "100%";
+	this.img.style.height = "100%";
 	this.preview.appendChild(this.img);
 
 	//Video
@@ -43,6 +51,8 @@ function TextureChooser(parent)
 	this.video.style.position = "absolute";
 	this.video.style.left = "0px";
 	this.video.style.top = "0px";
+	this.video.style.width = "100%";
+	this.video.style.height = "100%";
 	this.preview.appendChild(this.video);
 
 	//Self pointer
@@ -62,7 +72,7 @@ function TextureChooser(parent)
 		{
 			var uuid = event.dataTransfer.getData("uuid");
 			var texture = DragBuffer.popDragElement(uuid);
-			if(texture instanceof THREE.Texture)
+			if(texture instanceof THREE.Texture && !(texture instanceof CubeTexture))
 			{
 				self.setTexture(texture);
 			}
@@ -214,25 +224,11 @@ TextureChooser.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
-		this.preview.style.visibility = "visible";
-		this.alpha.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
-		this.preview.style.visibility = "hidden";
-		this.alpha.style.visibility = "hidden";
 	}
-
-	//Preview
-	this.preview.style.width = this.size.y + "px";
-	this.preview.style.height = this.size.y + "px";
-	this.img.width = this.size.y;
-	this.img.height = this.size.y;
-	this.video.width = this.size.y;
-	this.video.height = this.size.y;
-	this.alpha.width = this.size.y;
-	this.alpha.height = this.size.y;
 
 	//Element
 	this.element.style.top = this.position.y + "px";
