@@ -74,7 +74,7 @@ function TextureChooser(parent)
 	//Onclick select image or video file
 	this.preview.onclick = function()
 	{
-		if(self.onchange !== null)
+		if(self.onChange !== null)
 		{
 			FileSystem.chooseFile(function(files)
 			{
@@ -87,7 +87,7 @@ function TextureChooser(parent)
 	};
 
 	//onChange function
-	this.onchange = null;
+	this.onChange = null;
 
 	//Attributes
 	this.size = new THREE.Vector2(300, 100);
@@ -101,10 +101,10 @@ function TextureChooser(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Set onchange onChange function
+//Set onChange onChange function
 TextureChooser.prototype.setOnChange = function(onChange)
 {
-	this.onchange = onChange;
+	this.onChange = onChange;
 }
 
 //Remove element
@@ -151,9 +151,9 @@ TextureChooser.prototype.setTexture = function(texture)
 {
 	this.setValue(texture);
 
-	if(this.onchange !== null)
+	if(this.onChange !== null)
 	{
-		this.onchange();
+		this.onChange();
 	}
 }
 
@@ -171,9 +171,9 @@ TextureChooser.prototype.loadTexture = function(file)
 		this.texture = new VideoTexture(new Video(file.path));
 	}
 
-	if(this.onchange !== null)
+	if(this.onChange !== null)
 	{
-		this.onchange();
+		this.onChange();
 	}
 
 	this.updatePreview();

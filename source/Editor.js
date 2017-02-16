@@ -183,6 +183,7 @@ include("editor/ui/element/input/CoordinatesBox.js");
 include("editor/ui/element/input/ImageChooser.js");
 include("editor/ui/element/input/TextureBox.js");
 include("editor/ui/element/input/TextureChooser.js");
+include("editor/ui/element/input/CubeTextureBox.js");
 
 include("editor/ui/DropdownMenu.js");
 include("editor/ui/TreeView.js");
@@ -1018,11 +1019,11 @@ Editor.updateObjectViews = function()
 
 	//TODO <REMOVE TEST CODE>
 	var delta = Date.now() - start;
-	//console.log("Update " + (update++) + " ObjectView: " + delta + "ms");
-	//console.log("    Treeview " + treeDelta + "ms");
-	//console.log("    Panel " + panelDelta + "ms");
-	//console.log("    Tabs " + tabsDelta + "ms");
-	//console.log("    Assets " + assetDelta + "ms\n\n");
+	console.log("Update " + (update++) + " ObjectView: " + delta + "ms");
+	console.log("    Treeview " + treeDelta + "ms");
+	console.log("    Panel " + panelDelta + "ms");
+	console.log("    Tabs " + tabsDelta + "ms");
+	console.log("    Assets " + assetDelta + "ms\n\n");
 }
 
 //Update tab names to match objects actual info

@@ -356,44 +356,25 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.envMap);
 	this.form.nextRow();
 
-	//Combine environment map
-	this.form.addText("Mode");
-	this.combine = new DropdownList(this.form.element);
-	this.combine.position.set(100, 85);
-	this.combine.size.set(120, 18);
-	this.combine.addValue("Multiply", THREE.MultiplyOperation);
-	this.combine.addValue("Mix", THREE.MixOperation);
-	this.combine.addValue("Add", THREE.AddOperation);
-	this.combine.setOnChange(function()
+	//Reflectivity
+	this.form.addText("Env. Intensity");
+	this.envMapIntensity = new NumberBox(this.form.element);
+	this.envMapIntensity.size.set(60, 18);
+	this.envMapIntensity.setStep(0.05);
+	this.envMapIntensity.updateInterface();
+	this.envMapIntensity.setOnChange(function()
 	{
 		if(self.material !== null)
 		{
-			self.material.combine = self.combine.getValue();
+			self.material.envMapIntensity = self.envMapIntensity.getValue();
 			self.material.needsUpdate = true;
 		}
 	});
-	this.form.add(this.combine);
+	this.form.add(this.envMapIntensity);
 	this.form.nextRow();
 
 	//Reflectivity
-	this.form.addText("Reflectivity");
-	this.reflectivity = new NumberBox(this.form.element);
-	this.reflectivity.size.set(60, 18);
-	this.reflectivity.setStep(0.05);
-	this.reflectivity.updateInterface();
-	this.reflectivity.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.reflectivity = self.reflectivity.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.reflectivity);
-	this.form.nextRow();
-
-	//Reflectivity
-	this.form.addText("Refraction ratio");
+	this.form.addText("Env. Refraction");
 	this.refractionRatio = new NumberBox(this.form.element);
 	this.refractionRatio.size.set(60, 18);
 	this.refractionRatio.setStep(0.05);
@@ -439,7 +420,6 @@ StandardMaterialEditor.prototype.attach = function(material, materialFile)
 	this.emissiveMap.setValue(material.emissiveMap);
 	this.alphaMap.setValue(material.alphaMap);
 	this.envMap.setValue(material.envMap);
-	this.combine.setValue(material.combine);
-	this.reflectivity.setValue(material.reflectivity);
+	this.envMapIntensity.setValue(material.envMapIntensity);
 	this.refractionRatio.setValue(material.refractionRatio);
 }

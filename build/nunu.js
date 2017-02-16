@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.20 Alpha";
-Nunu.TIMESTAMP = "201702160128";
+Nunu.TIMESTAMP = "201702161859";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -5109,12 +5109,12 @@ Nunu.webvrAvailable = function() {
     this.x = d.getX(m);
     this.y = d.getY(m);
     return this;
-  }, rotateAround:function(d, m) {
-    var a = Math.cos(m);
-    m = Math.sin(m);
+  }, rotateAround:function(d, a) {
+    var m = Math.cos(a);
+    a = Math.sin(a);
     var b = this.x - d.x, c = this.y - d.y;
-    this.x = b * a - c * m + d.x;
-    this.y = b * m + c * a + d.y;
+    this.x = b * m - c * a + d.x;
+    this.y = b * a + c * m + d.y;
     return this;
   }});
   var $e = 0;
@@ -7304,23 +7304,23 @@ Nunu.webvrAvailable = function() {
     return this;
   }, fromArray:function(d, a) {
     void 0 === a && (a = 0);
-    for (var m = 0;9 > m;m++) {
-      this.elements[m] = d[m + a];
+    for (var b = 0;9 > b;b++) {
+      this.elements[b] = d[b + a];
     }
     return this;
   }, toArray:function(d, a) {
     void 0 === d && (d = []);
     void 0 === a && (a = 0);
-    var m = this.elements;
-    d[a] = m[0];
-    d[a + 1] = m[1];
-    d[a + 2] = m[2];
-    d[a + 3] = m[3];
-    d[a + 4] = m[4];
-    d[a + 5] = m[5];
-    d[a + 6] = m[6];
-    d[a + 7] = m[7];
-    d[a + 8] = m[8];
+    var b = this.elements;
+    d[a] = b[0];
+    d[a + 1] = b[1];
+    d[a + 2] = b[2];
+    d[a + 3] = b[3];
+    d[a + 4] = b[4];
+    d[a + 5] = b[5];
+    d[a + 6] = b[6];
+    d[a + 7] = b[7];
+    d[a + 8] = b[8];
     return d;
   }});
   Object.assign(wa.prototype, {set:function(d, a) {
@@ -7337,9 +7337,9 @@ Nunu.webvrAvailable = function() {
     return this;
   }, setFromCoplanarPoints:function() {
     var d = new h, a = new h;
-    return function(m, b, c) {
-      b = d.subVectors(c, b).cross(a.subVectors(m, b)).normalize();
-      this.setFromNormalAndCoplanarPoint(b, m);
+    return function(b, m, c) {
+      m = d.subVectors(c, m).cross(a.subVectors(b, m)).normalize();
+      this.setFromNormalAndCoplanarPoint(m, b);
       return this;
     };
   }(), clone:function() {
@@ -9521,8 +9521,8 @@ Nunu.webvrAvailable = function() {
   };
   eb.prototype = Object.assign(Object.create(X.prototype), {constructor:eb, isLine:!0, raycast:function() {
     var d = new q, a = new sb, b = new Fa;
-    return function(c, m) {
-      var e = c.linePrecision, e = e * e, f = this.geometry, n = this.matrixWorld;
+    return function(c, e) {
+      var m = c.linePrecision, m = m * m, f = this.geometry, n = this.matrixWorld;
       null === f.boundingSphere && f.computeBoundingSphere();
       b.copy(f.boundingSphere);
       b.applyMatrix4(n);
@@ -9538,17 +9538,17 @@ Nunu.webvrAvailable = function() {
               k.fromArray(u, 3 * r[f]);
               q.fromArray(u, 3 * w);
               w = a.distanceSqToSegment(k, q, g, n);
-              w > e || (g.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(g), w < c.near || w > c.far || m.push({distance:w, point:n.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
+              w > m || (g.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(g), w < c.near || w > c.far || e.push({distance:w, point:n.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
             }
           } else {
             for (f = 0, l = u.length / 3 - 1;f < l;f += p) {
-              k.fromArray(u, 3 * f), q.fromArray(u, 3 * f + 3), w = a.distanceSqToSegment(k, q, g, n), w > e || (g.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(g), w < c.near || w > c.far || m.push({distance:w, point:n.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
+              k.fromArray(u, 3 * f), q.fromArray(u, 3 * f + 3), w = a.distanceSqToSegment(k, q, g, n), w > m || (g.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(g), w < c.near || w > c.far || e.push({distance:w, point:n.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
             }
           }
         } else {
           if (f.isGeometry) {
             for (k = f.vertices, q = k.length, f = 0;f < q - 1;f += p) {
-              w = a.distanceSqToSegment(k[f], k[f + 1], g, n), w > e || (g.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(g), w < c.near || w > c.far || m.push({distance:w, point:n.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
+              w = a.distanceSqToSegment(k[f], k[f + 1], g, n), w > m || (g.applyMatrix4(this.matrixWorld), w = c.ray.origin.distanceTo(g), w < c.near || w > c.far || e.push({distance:w, point:n.clone().applyMatrix4(this.matrixWorld), index:f, face:null, faceIndex:null, object:this}));
             }
           }
         }
@@ -10996,15 +10996,15 @@ Nunu.webvrAvailable = function() {
     }
     return d;
   }, CreateFromMorphTargetSequence:function(d, a, b, c) {
-    for (var e = a.length, m = [], h = 0;h < e;h++) {
+    for (var e = a.length, h = [], m = 0;m < e;m++) {
       var f = [], n = [];
-      f.push((h + e - 1) % e, h, (h + 1) % e);
+      f.push((m + e - 1) % e, m, (m + 1) % e);
       n.push(0, 1, 0);
       var k = Ca.getKeyframeOrder(f), f = Ca.sortedArray(f, 1, k), n = Ca.sortedArray(n, 1, k);
       c || 0 !== f[0] || (f.push(e), n.push(n[0]));
-      m.push((new xc(".morphTargetInfluences[" + a[h].name + "]", f, n)).scale(1 / b));
+      h.push((new xc(".morphTargetInfluences[" + a[m].name + "]", f, n)).scale(1 / b));
     }
-    return new cb(d, -1, m);
+    return new cb(d, -1, h);
   }, findByName:function(d, a) {
     var b = d;
     Array.isArray(d) || (b = d.geometry && d.geometry.animations || d.animations);
@@ -11015,8 +11015,8 @@ Nunu.webvrAvailable = function() {
     }
     return null;
   }, CreateClipsFromMorphTargetSequences:function(d, a, b) {
-    for (var c = {}, e = /^([\w-]*?)([\d]+)$/, m = 0, h = d.length;m < h;m++) {
-      var f = d[m], n = f.name.match(e);
+    for (var c = {}, e = /^([\w-]*?)([\d]+)$/, h = 0, m = d.length;h < m;h++) {
+      var f = d[h], n = f.name.match(e);
       if (n && 1 < n.length) {
         var k = n[1];
         (n = c[k]) || (c[k] = n = []);
@@ -11034,24 +11034,24 @@ Nunu.webvrAvailable = function() {
     }
     var b = function(d, a, b, c, e) {
       if (0 !== b.length) {
-        var m = [], h = [];
-        Ca.flattenJSON(b, m, h, c);
-        0 !== m.length && e.push(new d(a, m, h));
+        var h = [], m = [];
+        Ca.flattenJSON(b, h, m, c);
+        0 !== h.length && e.push(new d(a, h, m));
       }
-    }, c = [], e = d.name || "default", m = d.length || -1, h = d.fps || 30;
+    }, c = [], e = d.name || "default", h = d.length || -1, m = d.fps || 30;
     d = d.hierarchy || [];
     for (var f = 0;f < d.length;f++) {
       var n = d[f].keys;
       if (n && 0 !== n.length) {
         if (n[0].morphTargets) {
-          for (var m = {}, k = 0;k < n.length;k++) {
+          for (var h = {}, k = 0;k < n.length;k++) {
             if (n[k].morphTargets) {
               for (var q = 0;q < n[k].morphTargets.length;q++) {
-                m[n[k].morphTargets[q]] = -1;
+                h[n[k].morphTargets[q]] = -1;
               }
             }
           }
-          for (var g in m) {
+          for (var g in h) {
             for (var p = [], r = [], q = 0;q !== n[k].morphTargets.length;++q) {
               var u = n[k];
               p.push(u.time);
@@ -11059,13 +11059,13 @@ Nunu.webvrAvailable = function() {
             }
             c.push(new xc(".morphTargetInfluence[" + g + "]", p, r));
           }
-          m = m.length * (h || 1);
+          h = h.length * (m || 1);
         } else {
           k = ".bones[" + a[f].name + "]", b(wc, k + ".position", n, "pos", c), b(ld, k + ".quaternion", n, "rot", c), b(wc, k + ".scale", n, "scl", c);
         }
       }
     }
-    return 0 === c.length ? null : new cb(e, m, c);
+    return 0 === c.length ? null : new cb(e, h, c);
   }});
   Object.assign(cb.prototype, {resetDuration:function() {
     for (var d = 0, a = 0, b = this.tracks.length;a !== b;++a) {
@@ -12576,15 +12576,15 @@ Nunu.webvrAvailable = function() {
     }
   }, function(d, a) {
     d[a] = this.resolvedProperty[this.propertyIndex];
-  }, function(d, a) {
-    this.resolvedProperty.toArray(d, a);
-  }], SetterByBindingTypeAndVersioning:[[function(d, a) {
-    this.node[this.propertyName] = d[a];
-  }, function(d, a) {
-    this.node[this.propertyName] = d[a];
+  }, function(a, b) {
+    this.resolvedProperty.toArray(a, b);
+  }], SetterByBindingTypeAndVersioning:[[function(a, b) {
+    this.node[this.propertyName] = a[b];
+  }, function(a, b) {
+    this.node[this.propertyName] = a[b];
     this.targetObject.needsUpdate = !0;
-  }, function(d, a) {
-    this.node[this.propertyName] = d[a];
+  }, function(a, b) {
+    this.node[this.propertyName] = a[b];
     this.targetObject.matrixWorldNeedsUpdate = !0;
   }], [function(a, b) {
     for (var d = this.resolvedProperty, c = 0, e = d.length;c !== e;++c) {
@@ -17069,18 +17069,18 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
       for (h = 0;e > h;h++) {
         q = c[h];
         f.getVelocityAtWorldPoint(q.chassisConnectionPointWorld, p);
-        var u = 1;
+        var l = 1;
         switch(this.indexUpAxis) {
           case 1:
-            u = -1;
+            l = -1;
         }
         if (q.isInContact) {
           this.getVehicleAxisWorld(this.indexForwardAxis, g);
-          var l = g.dot(q.raycastResult.hitNormalWorld);
-          q.raycastResult.hitNormalWorld.scale(l, n);
+          var u = g.dot(q.raycastResult.hitNormalWorld);
+          q.raycastResult.hitNormalWorld.scale(u, n);
           g.vsub(n, g);
-          l = g.dot(p);
-          q.deltaRotation = u * l * b / q.radius;
+          u = g.dot(p);
+          q.deltaRotation = l * u * b / q.radius;
         }
         !q.sliding && q.isInContact || 0 === q.engineForce || !q.useCustomSlidingRotationalSpeed || (q.deltaRotation = (0 < q.engineForce ? 1 : -1) * q.customSlidingRotationalSpeed * b);
         Math.abs(q.brake) > Math.abs(q.engineForce) && (q.deltaRotation = 0);
@@ -31730,8 +31730,23 @@ TextureLoader.prototype.loadJSON = function(a, g, l, b) {
 TextureLoader.prototype.parse = function(a, g) {
   var l;
   l = a.category;
-  "Video" === l ? (void 0 === a.video && console.warn("TextureLoader: No video specified for", a.uuid), void 0 === this.videos[a.video] && console.warn("TextureLoader: Undefined video", a.video), l = new VideoTexture(this.videos[a.video]), l.loop = a.loop, l.autoplay = a.autoplay, l.playbackRate = a.playbackRate, l.volume = a.volume) : "Webcam" === l ? l = new WebcamTexture : "Canvas" === l ? l = new CanvasTexture(a.width, a.height) : (void 0 === a.image && console.warn("TextureLoader: No image specified for", 
-  a.uuid), void 0 === this.images[a.image] && console.warn("TextureLoader: Undefined image", a.image), l = new Texture(this.images[a.image]));
+  if ("Video" === l) {
+    void 0 === a.video && console.warn("TextureLoader: No video specified for", a.uuid), void 0 === this.videos[a.video] && console.warn("TextureLoader: Undefined video", a.video), l = new VideoTexture(this.videos[a.video]), l.loop = a.loop, l.autoplay = a.autoplay, l.playbackRate = a.playbackRate, l.volume = a.volume;
+  } else {
+    if ("Webcam" === l) {
+      l = new WebcamTexture;
+    } else {
+      if ("Cube" === l) {
+        l = [];
+        for (var b = 0;b < a.images.length;b++) {
+          void 0 === this.images[a.images[b]] && console.warn("nunuStudio: TextureLoader, undefined image", a.images[b]), l.push(this.images[a.images[b]]);
+        }
+        l = new CubeTexture(l);
+      } else {
+        "Canvas" === l ? l = new CanvasTexture(a.width, a.height) : (void 0 === a.image && console.warn("nunuStudio: TextureLoader, no image specified for", a.uuid), void 0 === this.images[a.image] && console.warn("nunuStudio: TextureLoader, undefined image", a.image), l = new Texture(this.images[a.image]));
+      }
+    }
+  }
   l.uuid = a.uuid;
   l.name = a.name;
   l.mapping = a.mapping;

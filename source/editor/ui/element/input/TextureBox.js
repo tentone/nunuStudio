@@ -74,7 +74,7 @@ function TextureBox(parent)
 	//Onclick select image or video file
 	this.preview.onclick = function()
 	{
-		if(self.onchange !== null)
+		if(self.onChange !== null)
 		{
 			FileSystem.chooseFile(function(files)
 			{
@@ -128,7 +128,7 @@ function TextureBox(parent)
 	this.form.updateInterface();
 
 	//onChange function
-	this.onchange = null;
+	this.onChange = null;
 
 	//Attributes
 	this.size = new THREE.Vector2(300, 100);
@@ -142,10 +142,10 @@ function TextureBox(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Set onchange onChange function
+//Set onChange onChange function
 TextureBox.prototype.setOnChange = function(onChange)
 {
-	this.onchange = onChange;
+	this.onChange = onChange;
 	this.useTexture.setOnChange(onChange);
 	this.wrapT.setOnChange(onChange);
 	this.wrapS.setOnChange(onChange);
@@ -210,9 +210,9 @@ TextureBox.prototype.setTexture = function(texture)
 {
 	this.setValue(texture);
 
-	if(this.onchange !== null)
+	if(this.onChange !== null)
 	{
-		this.onchange();
+		this.onChange();
 	}
 }
 
@@ -232,9 +232,9 @@ TextureBox.prototype.loadTexture = function(file)
 		this.useTexture.setValue(true);
 	}
 
-	if(this.onchange !== null)
+	if(this.onChange !== null)
 	{
-		this.onchange();
+		this.onChange();
 	}
 
 	this.updatePreview();

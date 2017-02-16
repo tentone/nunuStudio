@@ -20,7 +20,7 @@ function TreeElement(container)
 	this.element.style.position = "absolute";
 	this.element.style.width = container.size.x + "px";
 	this.element.style.height = "20px";
-	this.element.style.cursor = "default";
+	this.element.style.cursor = "pointer";
 	this.element.style.display = "flex";
 	this.element.style.alignItems = "center";
 	this.element.style.backgroundColor = Editor.theme.buttonLightColor;
@@ -36,17 +36,26 @@ function TreeElement(container)
 	};
 
 	//Arrow
-	this.arrow = new ImageBox(this.element);
-	this.arrow.size.set(15, 15);
-	this.arrow.position.set(5, 3);
-	this.arrow.setImage("editor/files/icons/misc/arrow_down.png");
-	this.arrow.updateInterface();
+	this.arrow = document.createElement("img");
+	this.arrow.src = "editor/files/icons/misc/arrow_down.png";
+	this.arrow.style.visibility = "inherit";
+	this.arrow.style.position = "absolute";
+	this.arrow.style.width = "15px";
+	this.arrow.style.height = "15px";
+	this.arrow.style.left = "5px";
+	this.arrow.style.top = "3px";
+	this.element.appendChild(this.arrow);
 
 	//Icon
-	this.icon = new ImageBox(this.element);
-	this.icon.size.set(15, 15);
-	this.icon.position.set(25, 3);
-	this.icon.updateInterface();
+	this.icon = document.createElement("img");
+	this.icon.src = "editor/files/icons/misc/arrow_down.png";
+	this.icon.style.visibility = "inherit";
+	this.icon.style.position = "absolute";
+	this.icon.style.width = "15px";
+	this.icon.style.height = "15px";
+	this.icon.style.left = "25px";
+	this.icon.style.top = "3px";
+	this.element.appendChild(this.icon);
 
 	//Text
 	this.label = new Text(this.element);
@@ -56,7 +65,7 @@ function TreeElement(container)
 	this.label.updateInterface();
 
 	//Element atributes
-	this.size = new THREE.Vector2(container.size.x, 20);
+	this.size = new THREE.Vector2(100, 20);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
@@ -73,7 +82,6 @@ function TreeElement(container)
 	//Mouse over event
 	this.element.onmouseenter = function()
 	{
-		this.style.cursor = "pointer";
 		this.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
@@ -82,7 +90,6 @@ function TreeElement(container)
 	{
 		if(!Editor.isObjectSelected(self.obj))
 		{
-			this.style.cursor = "default";
 			this.style.backgroundColor = Editor.theme.buttonLightColor;
 		}
 	};
@@ -314,8 +321,7 @@ function TreeElement(container)
 	};
 
 	//Arrow click
-	this.arrow.img.style.pointerEvents = "visible";
-	this.arrow.img.onclick = function()
+	this.arrow.onclick = function()
 	{
 		self.folded = !self.folded;
 		self.updateFoldedState();
@@ -329,20 +335,20 @@ function TreeElement(container)
 TreeElement.prototype.setObject = function(obj)
 {
 	this.obj = obj;
-	this.icon.setImage(ObjectIcons.get(obj.type));
+	this.icon.src = ObjectIcons.get(obj.type);
 	this.label.setText(obj.name);
 	this.folded = obj.folded;
 	
 	if(obj.folded)
 	{
-		this.arrow.setImage("editor/files/icons/misc/arrow_right.png");
+		this.arrow.src = "editor/files/icons/misc/arrow_right.png";
 	}
 }
 
 //Set icon
 TreeElement.prototype.setIcon = function(icon)
 {
-	this.icon.setImage(icon);
+	this.icon.src = icon;
 }
 
 //Set label
@@ -406,13 +412,13 @@ TreeElement.prototype.updateFoldedState = function()
 
 	if(this.folded)
 	{
-		this.arrow.setImage("editor/files/icons/misc/arrow_right.png");
+		this.arrow.src = "editor/files/icons/misc/arrow_right.png";
 		this.container.updateChildPosition();
 		this.container.updateInterface();
 	}
 	else
 	{
-		this.arrow.setImage("editor/files/icons/misc/arrow_down.png");
+		this.arrow.src = "editor/files/icons/misc/arrow_down.png";
 		this.container.updateChildPosition();
 		this.container.updateInterface();
 	}
@@ -440,14 +446,7 @@ TreeElement.prototype.setVisibility = function(value)
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	this.arrow.setVisibility(value);
-	this.icon.setVisibility(value);
-	this.label.setVisibility(value);
 }
-
-//Update
-TreeElement.prototype.update = function(){}
 
 //Update interface
 TreeElement.prototype.updateInterface = function()
@@ -471,14 +470,8 @@ TreeElement.prototype.updateInterface = function()
 	var offset = this.level * 20;
 
 	//Arrow
-	this.arrow.visible = (this.children.length > 0) && this.visible;
-	this.arrow.position.set(5 + offset, 3);
-	this.arrow.updateInterface();
-
-	//Icon
-	this.icon.visible = this.visible;
-	this.icon.position.set(25 + offset, 3);
-	this.icon.updateInterface();
+	this.arrow.style.left = (5 + offset) + "px";
+	this.icon.style.left = (25 + offset) + "px";
 
 	//Text
 	this.label.visible = this.visible;
