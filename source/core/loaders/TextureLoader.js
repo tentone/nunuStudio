@@ -62,6 +62,23 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	{
 		texture = new WebcamTexture();
 	}
+	//Cube texture
+	else if(category === "Cube")
+	{
+		var images = [];
+
+		for(var i = 0; i < json.images.length; i++)
+		{
+			if(this.images[json.images[i]] === undefined)
+			{
+				console.warn("nunuStudio: TextureLoader, undefined image", json.images[i]);
+			}
+
+			images.push(this.images[json.images[i]]);
+		}
+
+		texture = new CubeTexture(images);
+	}
 	//Canvas texture
 	else if(category === "Canvas")
 	{
@@ -72,12 +89,12 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	{
 		if(json.image === undefined)
 		{
-			console.warn("TextureLoader: No image specified for", json.uuid);
+			console.warn("nunuStudio: TextureLoader, no image specified for", json.uuid);
 		}
 
 		if(this.images[json.image] === undefined)
 		{
-			console.warn("TextureLoader: Undefined image", json.image);
+			console.warn("nunuStudio: TextureLoader, undefined image", json.image);
 		}
 
 		texture = new Texture(this.images[json.image]);

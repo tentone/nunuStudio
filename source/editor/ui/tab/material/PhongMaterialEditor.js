@@ -421,6 +421,6 @@ PhongMaterialEditor.prototype.attach = function(material, materialFile)
 	this.alphaMap.setValue(material.alphaMap);
 	this.envMap.setValue(material.envMap);
 	this.combine.setValue(material.combine);
-	this.reflectivity.setValue(material.reflectivity);
-	this.refractionRatio.setValue(material.refractionRatio);
+	this.reflectivity.setValue(material.reflectivity || 0);
+	this.refractionRatio.setValue(material.refractionRatio || 0);
 }

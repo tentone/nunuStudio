@@ -125,9 +125,6 @@ TreeView.prototype.updateChildPosition = function()
 	}
 }
 
-//Update
-TreeView.prototype.update = function(){}
-
 //Update division Size
 TreeView.prototype.updateInterface = function()
 {
@@ -141,24 +138,16 @@ TreeView.prototype.updateInterface = function()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Fit to parent
-	if(this.fitParent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight;
-	}
-
 	//Set element style
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
+	this.element.style.width = "100%";//this.size.x + "px";
+	this.element.style.height = "100%";//this.size.y + "px";
 
 	//Update childs
-	var children = this.children;
-	for(var i = 0; i < children.length; i++)
+	for(var i = 0; i < this.children.length; i++)
 	{
-		children[i].updateInterface();
+		this.children[i].updateInterface();
 	}
 }
 
