@@ -9,7 +9,9 @@
  */
 
 /**
- * Dispose material
+ * Dispose material.
+ * Also disposes textures attached to the material.
+ * 
  * @method dispose
  */
 THREE.Material.prototype.dispose = function()
@@ -33,4 +35,5 @@ THREE.Material.prototype.dispose = function()
 	disposeTexture(this.alphaMap);
 	disposeTexture(this.roughnessMap);
 	disposeTexture(this.metalnessMap);
+	disposeTexture(this.envMap);
 }

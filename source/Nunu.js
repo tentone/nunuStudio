@@ -38,7 +38,7 @@ Nunu.VERSION = "V0.8.9.20 Alpha";
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201702161859";
+Nunu.TIMESTAMP = "201702162218";
 
 /**
  * Check if host supports WebVR
