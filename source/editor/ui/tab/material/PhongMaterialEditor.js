@@ -324,21 +324,19 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	//Environment map
 	this.form.addText("Environment map");
 	this.form.nextRow();
-	/*this.envMap = new TextureBox(this.form.element);
+	this.envMap = new TextureChooser(this.form.element);
 	this.envMap.size.set(100, 100);
 	this.envMap.updateInterface();
 	this.envMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
 		{
-			var files = [file, file, file, file, file, file];
-			self.material.envMap = new THREE.CubeTextureLoader().load(files);
-			self.material.envMap.format = THREE.RGBFormat;
+			self.material.envMap = self.envMap.getValue();
 			self.material.needsUpdate = true;
 		}
 	});
 	this.form.add(this.envMap);
-	this.form.nextRow();*/
+	this.form.nextRow();
 
 	//Combine environment map
 	this.form.addText("Mode");
@@ -421,6 +419,7 @@ PhongMaterialEditor.prototype.attach = function(material, materialFile)
 	this.emissiveIntensity.setValue(material.emissiveIntensity);
 	this.emissiveMap.setValue(material.emissiveMap);
 	this.alphaMap.setValue(material.alphaMap);
+	this.envMap.setValue(material.envMap);
 	this.combine.setValue(material.combine);
 	this.reflectivity.setValue(material.reflectivity);
 	this.refractionRatio.setValue(material.refractionRatio);

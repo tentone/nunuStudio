@@ -71,6 +71,8 @@
 	- Renamed variables variable_name to variableName
 	- Added Texture Editor
 	- Documentation page
+- V0.8.9.20 Alpha
+	- Cubetexture support
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
