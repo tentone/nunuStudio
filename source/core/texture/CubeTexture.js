@@ -55,7 +55,7 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 	this.category = "Cube";
 }
 
-CubeTexture.prototype = Object.create(Texture.prototype);
+CubeTexture.prototype = Object.create(THREE.Texture.prototype);
 
 CubeTexture.prototype.isCubeTexture = true;
 
