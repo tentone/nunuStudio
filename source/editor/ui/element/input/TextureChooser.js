@@ -125,7 +125,6 @@ TextureChooser.prototype.setValue = function(texture)
 {
 	if(texture === null || texture === undefined)
 	{
-		this.useTexture.setValue(false);
 		this.texture = null;
 	}
 	else

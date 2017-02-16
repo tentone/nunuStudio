@@ -338,6 +338,75 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.alphaMap);
 	this.form.nextRow();
+	
+	//Environment map
+	this.form.addText("Environment map");
+	this.form.nextRow();
+	this.envMap = new TextureChooser(this.form.element);
+	this.envMap.size.set(100, 100);
+	this.envMap.updateInterface();
+	this.envMap.setOnChange(function(file)
+	{
+		if(self.material !== null)
+		{
+			self.material.envMap = self.envMap.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.envMap);
+	this.form.nextRow();
+
+	//Combine environment map
+	this.form.addText("Mode");
+	this.combine = new DropdownList(this.form.element);
+	this.combine.position.set(100, 85);
+	this.combine.size.set(120, 18);
+	this.combine.addValue("Multiply", THREE.MultiplyOperation);
+	this.combine.addValue("Mix", THREE.MixOperation);
+	this.combine.addValue("Add", THREE.AddOperation);
+	this.combine.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.combine = self.combine.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.combine);
+	this.form.nextRow();
+
+	//Reflectivity
+	this.form.addText("Reflectivity");
+	this.reflectivity = new NumberBox(this.form.element);
+	this.reflectivity.size.set(60, 18);
+	this.reflectivity.setStep(0.05);
+	this.reflectivity.updateInterface();
+	this.reflectivity.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.reflectivity = self.reflectivity.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.reflectivity);
+	this.form.nextRow();
+
+	//Reflectivity
+	this.form.addText("Refraction ratio");
+	this.refractionRatio = new NumberBox(this.form.element);
+	this.refractionRatio.size.set(60, 18);
+	this.refractionRatio.setStep(0.05);
+	this.refractionRatio.updateInterface();
+	this.refractionRatio.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.refractionRatio = self.refractionRatio.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.refractionRatio);
 
 	this.form.updateInterface();
 }
@@ -369,4 +438,8 @@ StandardMaterialEditor.prototype.attach = function(material, materialFile)
 	this.emissiveIntensity.setValue(material.emissiveIntensity);
 	this.emissiveMap.setValue(material.emissiveMap);
 	this.alphaMap.setValue(material.alphaMap);
+	this.envMap.setValue(material.envMap);
+	this.combine.setValue(material.combine);
+	this.reflectivity.setValue(material.reflectivity);
+	this.refractionRatio.setValue(material.refractionRatio);
 }

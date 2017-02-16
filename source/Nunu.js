@@ -11,6 +11,7 @@
 
 /**
  * Class used to store nunu version and timstamp used for development
+ * 
  * @class Nunu
  * @module Runtime
  */
@@ -25,20 +26,23 @@ Nunu.NAME = "nunuStudio";
 
 /**
  * Stores the nunu runtime version
+ * 
  * @attribute VERSION
  * @type {String}
  */
-Nunu.VERSION = "V0.8.9.19 Alpha";
+Nunu.VERSION = "V0.8.9.20 Alpha";
 
 /**
  * Stores the nunu runtime timestamp
+ * 
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201702141431";
+Nunu.TIMESTAMP = "201702160128";
 
 /**
- * Check if host has webvr enabled
+ * Check if host supports WebVR
+ * 
  * @method webvrAvailable
  * @return {boolean} True is webVR is available
  */
