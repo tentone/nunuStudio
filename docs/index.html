@@ -16,6 +16,8 @@
 	<!--Javascript-->
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+<
+	<!--Navigation bar-->
 	<script type="text/javascript">
 		$(document).ready(function()
 		{
@@ -45,9 +47,46 @@
 			});
 		});
 	</script>
+
+	<!--nunu app-->
+	<script type="text/javascript" src="examples/nunu.min.js"></script>
+	<script type="text/javascript">
+		var app;
+		var canvas, header;
+
+		function initialize()
+		{	
+			header = document.getElementById("header");
+			canvas = document.getElementById("canvas");
+			canvas.width = header.offsetWidth;
+			canvas.height = header.offsetHeight;
+
+			app = new NunuApp(canvas);
+
+			var bar = document.getElementById("bar");
+			var onProgress = function(event)
+			{
+				if(event.lengthComputable)
+				{
+					var progress = event.loaded / event.total * 100;
+					bar.style.width = progress + "%";
+				}
+			};
+
+			//Load and run nunu app
+			app.loadRunProgram("examples/fps.isp", undefined, onProgress);
+		}
+
+		function resize()
+		{
+			canvas.width = header.offsetWidth;
+			canvas.height = header.offsetHeight;
+			app.resize();
+		}
+	</script>
 </head>
 
-<body>
+<body onload="initialize();" onresize="resize();">
 	<!--Navigation bar-->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -75,11 +114,12 @@
 	</div>
 	
 	<!--Principal container container-->	
-	<header>
+	<header id="header" style="background-color:#222222">
 		<div class="container">
-			<!--Live demo-->
-			<iframe style="position:absolute; left:0%; top:0%; height:100%; width:100%; border:none" src="examples/fps.html"></iframe>
+			<!--Demo canvas-->
+			<canvas id="canvas" style="position:absolute; left:0%; top:0%; height:100%; width:100%; border:none"></canvas>
 			
+			<!--Temporary navigation bar-->
 			<div class="row">
 				<!--Logo-->
 				<div class="col-xs-6">
@@ -98,16 +138,16 @@
 			<!--Title and buttons-->
 			<div class="row header-info">
 				<div class="col-sm-10 col-sm-offset-1 text-center">	
+					<!--Slogan-->
 					<h1>3D content that runs everywhere!</h1>
 					<p class="lead">
 						Fully featured IDE for 3D app development for the Web.
 						<br/>
 						Design, edit, code, all in one place!
 					</p>
-					<br/>
-
-					<!--Buttons-->
+					
 					<div class="row">
+						<!--Buttons-->
 						<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
 							<div class="row">
 								<!--Github button-->
@@ -120,8 +160,12 @@
 								</div>
 							</div> 
 						</div>
+
+						<!--Loading bar-->
+						<div style="position:absolute; width:50%; height:7%; left:25%; top:0%; border-style:solid; border-color:#FFFFFF; border-width:2px">
+							<div id="bar" style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color:#FFFFFF">
+						</div>
 					</div>
-					
 				</div>
 			</div>
 		</div>
@@ -129,7 +173,7 @@
 	
 	<!--Mouse scroll icon-->
 	<div class="mouse-icon hidden-xs">
-			<div class="scroll"></div>
+		<div class="scroll"></div>
 	</div>
 	
 	<!--Built on division-->
