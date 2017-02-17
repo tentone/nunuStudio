@@ -2,6 +2,7 @@
 
 /**
  * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.
+ * 
  * Original documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material
  *
  * @class Material
@@ -10,7 +11,8 @@
 
 /**
  * Dispose material.
- * Also disposes textures attached to the material.
+ * 
+ * Also disposes all the textures attached to the material.
  * 
  * @method dispose
  */

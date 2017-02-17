@@ -47,6 +47,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Sprite",
         "Text3D",
         "Texture",
+        "Vector3",
         "Video",
         "VideoTexture",
         "WebcamTexture"
@@ -61,6 +62,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Files",
         "Input",
         "Lights",
+        "Math",
         "Meshes",
         "Misc",
         "Particles",
@@ -118,6 +120,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "Same as THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight"
         },
         {
+            "displayName": "Math",
+            "name": "Math",
+            "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3"
+        },
+        {
             "displayName": "Meshes",
             "name": "Meshes",
             "description": "A Mesh combines a geometry and a material forming a complete rederizable object\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh"
@@ -160,7 +167,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "THREE",
             "name": "THREE",
-            "description": "Fog class is used to store fog attributes attached to a Scene\nOriginal documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
+            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
         }
     ],
     "elements": []
