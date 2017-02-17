@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Textures</title>  
+	<title>nunuStudio Math</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -132,7 +132,7 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Textures Module</h1>
+						<h1>Math Module</h1>
 						<div class="box clearfix meta">
 						
 						
@@ -141,8 +141,14 @@
 						
 						
 						<div class="box intro">
-							<p>Canvas textures can be used to draw content to the texture during runtime, using the context property.</p>
-						<p>Canvas textures always start with black background and a red text &quot;Canvas Texture&quot;.</p>
+							<p>Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:</p>
+						<ul>
+						<li>A point in 3D space.</li>
+						<li>A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).</li>
+						<li>Any arbitrary ordered triplet of numbers.</li>
+						</ul>
+						<p>There are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.</p>
+						<p>Original documentation for Vector3 can be found here <a href="https://threejs.org/docs/index.html#Reference/Math/Vector3">https://threejs.org/docs/index.html#Reference/Math/Vector3</a></p>
 						
 						</div>
 						
@@ -153,33 +159,8 @@
 						
 									<ul class="module-classes">
 										<li class="module-class">
-											<a href="../classes/CanvasTexture.html">
-												CanvasTexture
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/CubeTexture.html">
-												CubeTexture
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/SpineTexture.html">
-												SpineTexture
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/Texture.html">
-												Texture
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/VideoTexture.html">
-												VideoTexture
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/WebcamTexture.html">
-												WebcamTexture
+											<a href="../classes/Vector3.html">
+												Vector3
 											</a>
 										</li>
 									</ul>

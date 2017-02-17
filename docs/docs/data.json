@@ -418,6 +418,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\three\\Vector3.js": {
+            "name": "..\\source\\core\\three\\Vector3.js",
+            "modules": {
+                "Math": 1
+            },
+            "classes": {
+                "Vector3": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\utils\\ArraybufferUtils.js": {
             "name": "..\\source\\core\\utils\\ArraybufferUtils.js",
             "modules": {
@@ -733,7 +744,21 @@
             "tag": "module",
             "file": "..\\source\\core\\three\\Object3D.js",
             "line": 3,
-            "description": "Fog class is used to store fog attributes attached to a Scene\nOriginal documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
+            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
+        },
+        "Math": {
+            "name": "Math",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Vector3": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\three\\Vector3.js",
+            "line": 3,
+            "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3"
         },
         "BinaryData": {
             "name": "BinaryData",
@@ -1957,7 +1982,7 @@
             "namespace": "",
             "file": "..\\source\\core\\three\\Fog.js",
             "line": 3,
-            "description": "Fog class is used to store fog attributes attached to a Scene\nOriginal documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
+            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
         },
         "Material": {
             "name": "Material",
@@ -1971,7 +1996,7 @@
             "namespace": "",
             "file": "..\\source\\core\\three\\Material.js",
             "line": 3,
-            "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
+            "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
         },
         "MultiMaterial": {
             "name": "MultiMaterial",
@@ -1985,7 +2010,7 @@
             "namespace": "",
             "file": "..\\source\\core\\three\\MultiMaterial.js",
             "line": 3,
-            "description": "A Material to define multiple materials for the same geometry. The geometry decides which material is used for which faces by the faces materialindex. The material index corresponds with the index of the material in the .materials array.\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/MultiMaterial"
+            "description": "A Material to define multiple materials for the same geometry. The geometry decides which material is used for which faces by the faces materialindex. The material index corresponds with the index of the material in the .materials array.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/MultiMaterial"
         },
         "Object3D": {
             "name": "Object3D",
@@ -2000,6 +2025,21 @@
             "file": "..\\source\\core\\three\\Object3D.js",
             "line": 3,
             "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.",
+            "is_constructor": 1
+        },
+        "Vector3": {
+            "name": "Vector3",
+            "shortname": "Vector3",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Math",
+            "namespace": "",
+            "file": "..\\source\\core\\three\\Vector3.js",
+            "line": 3,
+            "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3",
             "is_constructor": 1
         },
         "ArraybufferUtils": {
@@ -6664,7 +6704,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Fog.js",
-            "line": 11,
+            "line": 12,
             "description": "No fog",
             "itemtype": "attribute",
             "name": "NONE",
@@ -6674,7 +6714,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Fog.js",
-            "line": 18,
+            "line": 20,
             "description": "Linear fog",
             "itemtype": "attribute",
             "name": "LINEAR",
@@ -6684,7 +6724,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Fog.js",
-            "line": 25,
+            "line": 28,
             "description": "Exponential fog",
             "itemtype": "attribute",
             "name": "EXPONENTIAL",
@@ -6694,8 +6734,8 @@
         },
         {
             "file": "..\\source\\core\\three\\Material.js",
-            "line": 11,
-            "description": "Dispose material.\nAlso disposes textures attached to the material.",
+            "line": 12,
+            "description": "Dispose material.\n\nAlso disposes all the textures attached to the material.",
             "itemtype": "method",
             "name": "dispose",
             "class": "Material",
@@ -6703,7 +6743,7 @@
         },
         {
             "file": "..\\source\\core\\three\\MultiMaterial.js",
-            "line": 11,
+            "line": 12,
             "description": "UUID unique identifier.",
             "itemtype": "property",
             "name": "uuid",
@@ -6713,7 +6753,7 @@
         },
         {
             "file": "..\\source\\core\\three\\MultiMaterial.js",
-            "line": 17,
+            "line": 18,
             "description": "Resource name. Not required to be unique.",
             "itemtype": "property",
             "name": "name",
@@ -6723,7 +6763,7 @@
         },
         {
             "file": "..\\source\\core\\three\\MultiMaterial.js",
-            "line": 24,
+            "line": 25,
             "description": "Dispose materials inside the container",
             "itemtype": "method",
             "name": "dispose",
@@ -7310,6 +7350,101 @@
             ],
             "class": "Object3D",
             "module": "THREE"
+        },
+        {
+            "file": "..\\source\\core\\three\\Vector3.js",
+            "line": 19,
+            "itemtype": "property",
+            "name": "x",
+            "type": "{Number}",
+            "default": "0",
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\source\\core\\three\\Vector3.js",
+            "line": 25,
+            "itemtype": "property",
+            "name": "y",
+            "type": "{Number}",
+            "default": "0",
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\source\\core\\three\\Vector3.js",
+            "line": 31,
+            "itemtype": "property",
+            "name": "z",
+            "type": "{Number}",
+            "default": "0",
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\source\\core\\three\\Vector3.js",
+            "line": 37,
+            "description": "Create Vector3 from JSON data",
+            "itemtype": "method",
+            "name": "fromJSON",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "vector3",
+                "type": "Vector3"
+            },
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\source\\core\\three\\Vector3.js",
+            "line": 49,
+            "description": "Serialize Vector3 data to JSON",
+            "itemtype": "method",
+            "name": "toJSON",
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\source\\core\\three\\Vector3.js",
+            "line": 60,
+            "description": "Add v to this vector.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "v",
+                    "description": "",
+                    "type": "Vector3"
+                }
+            ],
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\source\\core\\three\\Vector3.js",
+            "line": 67,
+            "description": "Add the scalar value s to this vector's x, y and z values.",
+            "itemtype": "method",
+            "name": "addScalar",
+            "params": [
+                {
+                    "name": "scalar",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "Vector3",
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\ArraybufferUtils.js",

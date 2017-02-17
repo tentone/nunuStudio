@@ -2,6 +2,7 @@
 
 /**
  * A Material to define multiple materials for the same geometry. The geometry decides which material is used for which faces by the faces materialindex. The material index corresponds with the index of the material in the .materials array.
+ * 
  * Original documentation available here https://threejs.org/docs/index.html#Reference/Materials/MultiMaterial
  *
  * @class MultiMaterial
