@@ -16,8 +16,6 @@ function TextureChooser(parent)
 	this.preview.style.position = "absolute";
 	this.preview.style.top = "0px";
 	this.preview.style.left = "0px";
-	this.preview.style.width = "100%";
-	this.preview.style.height = "100%";
 	this.element.appendChild(this.preview);
 
 	//Alpha background
@@ -100,7 +98,7 @@ function TextureChooser(parent)
 	this.onChange = null;
 
 	//Attributes
-	this.size = new THREE.Vector2(300, 100);
+	this.size = new THREE.Vector2(100, 100);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 
@@ -127,33 +125,24 @@ TextureChooser.prototype.destroy = function()
 	catch(e){}
 }
 
-//Update
-TextureChooser.prototype.update = function(){}
-
 //Set texture value
 TextureChooser.prototype.setValue = function(texture)
 {
-	if(texture === null || texture === undefined)
-	{
-		this.texture = null;
-	}
-	else
+	if(texture instanceof THREE.Texture && !(texture instanceof CubeTexture))
 	{
 		this.texture = texture;
 		this.updatePreview();
+	}
+	else
+	{
+		this.texture = null;
 	}
 }
 
 //Get texture value
 TextureChooser.prototype.getValue = function()
 {
-	if(this.texture !== null)
-	{
-		this.texture.needsUpdate = true;
-		return this.texture;
-	}
-
-	return null;
+	return this.texture;
 }
 
 //Set Texture
@@ -229,6 +218,10 @@ TextureChooser.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
+
+	//Preview
+	this.preview.style.width = this.size.x + "px";
+	this.preview.style.height = this.size.y + "px";
 
 	//Element
 	this.element.style.top = this.position.y + "px";

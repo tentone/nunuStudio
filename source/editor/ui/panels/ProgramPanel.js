@@ -139,7 +139,6 @@ function ProgramPanel(parent, obj)
 	this.form.updateInterface();
 }
 
-//Super prototypes
 ProgramPanel.prototype = Object.create(Panel.prototype);
 
 //Update panel content from attached object

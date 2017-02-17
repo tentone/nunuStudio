@@ -326,7 +326,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.envMap = new TextureChooser(this.form.element);
 	this.envMap.size.set(100, 100);
-	this.envMap.updateInterface();
 	this.envMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -362,7 +361,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.reflectivity = new NumberBox(this.form.element);
 	this.reflectivity.size.set(60, 18);
 	this.reflectivity.setStep(0.05);
-	this.reflectivity.updateInterface();
 	this.reflectivity.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -379,7 +377,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.refractionRatio = new NumberBox(this.form.element);
 	this.refractionRatio.size.set(60, 18);
 	this.refractionRatio.setStep(0.05);
-	this.refractionRatio.updateInterface();
 	this.refractionRatio.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -389,8 +386,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 		}
 	});
 	this.form.add(this.refractionRatio);
-
-	this.form.updateInterface();
 }
 
 PhongMaterialEditor.prototype = Object.create(MaterialEditor.prototype);

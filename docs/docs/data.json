@@ -6695,7 +6695,7 @@
         {
             "file": "..\\source\\core\\three\\Material.js",
             "line": 11,
-            "description": "Dispose material",
+            "description": "Dispose material.\nAlso disposes textures attached to the material.",
             "itemtype": "method",
             "name": "dispose",
             "class": "Material",

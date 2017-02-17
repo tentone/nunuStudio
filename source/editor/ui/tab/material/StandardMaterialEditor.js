@@ -388,8 +388,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 		}
 	});
 	this.form.add(this.refractionRatio);
-
-	this.form.updateInterface();
 }
 
 StandardMaterialEditor.prototype = Object.create(MaterialEditor.prototype);

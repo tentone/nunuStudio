@@ -2,99 +2,7 @@
 
 function TextureBox(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
-
-	//Preview
-	this.preview = document.createElement("div");
-	this.preview.style.cursor = "pointer";
-	this.preview.style.visibility = "inherit";
-	this.preview.style.position = "absolute";
-	this.preview.style.top = "0px";
-	this.preview.style.left = "0px";
-	this.preview.style.width = "100%";
-	this.preview.style.height = "100%";
-	this.element.appendChild(this.preview);
-
-	//Alpha background
-	this.alpha = document.createElement("img");
-	this.alpha.src = "editor/files/alpha.png";
-	this.alpha.style.visibility = "inherit";
-	this.alpha.style.pointerEvents = "none";
-	this.alpha.style.position = "absolute";
-	this.alpha.style.left = "0px";
-	this.alpha.style.top = "0px";
-	this.alpha.style.width = "100%";
-	this.alpha.style.height = "100%";
-	this.preview.appendChild(this.alpha);
-
-	//Image
-	this.img = document.createElement("img");
-	this.img.style.pointerEvents = "none";
-	this.img.style.position = "absolute";
-	this.img.style.left = "0px";
-	this.img.style.top = "0px";
-	this.img.style.width = "100%";
-	this.img.style.height = "100%";
-	this.preview.appendChild(this.img);
-
-	//Video
-	this.video = document.createElement("video");
-	this.video.autoplay = true;
-	this.video.loop = true;
-	this.video.volume = 0.0;
-	this.video.style.pointerEvents = "none";
-	this.video.style.position = "absolute";
-	this.video.style.left = "0px";
-	this.video.style.top = "0px";
-	this.video.style.width = "100%";
-	this.video.style.height = "100%";
-	this.preview.appendChild(this.video);
-
-	//Self pointer
-	var self = this;
-
-	//On drop get file dropped
-	this.preview.ondrop = function(event)
-	{
-		//File dragged
-		if(event.dataTransfer.files.length > 0)
-		{
-			var file = event.dataTransfer.files[0];
-			self.loadTexture(file);
-		}
-		//Resouce dragged
-		else
-		{
-			var uuid = event.dataTransfer.getData("uuid");
-			var texture = DragBuffer.popDragElement(uuid);
-			if(texture instanceof THREE.Texture && !(texture instanceof CubeTexture))
-			{
-				self.setTexture(texture);
-			}
-		}
-
-		event.preventDefault();
-	};
-
-	//Onclick select image or video file
-	this.preview.onclick = function()
-	{
-		if(self.onChange !== null)
-		{
-			FileSystem.chooseFile(function(files)
-			{
-				if(files.length > 0)
-				{
-					self.loadTexture(files[0]);
-				}
-			}, "image/*, video/*, .tga");
-		}
-	};
+	TextureChooser.call(this, parent);
 
 	//Form
 	this.form = new Form(this.element);
@@ -136,26 +44,14 @@ function TextureBox(parent)
 	this.repeat.setValue(1, 1, 0);
 	this.form.add(this.repeat);
 	this.form.updateInterface();
-
-	//onChange function
-	this.onChange = null;
-
-	//Attributes
-	this.size = new THREE.Vector2(300, 100);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-
-	//Texture
-	this.texture = null;
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+TextureBox.prototype = Object.create(TextureChooser.prototype);
 
 //Set onChange onChange function
 TextureBox.prototype.setOnChange = function(onChange)
 {
-	this.onChange = onChange;
+	TextureChooser.prototype.setOnChange.call(this, onChange);
 
 	this.useTexture.setOnChange(onChange);
 	this.wrapT.setOnChange(onChange);
@@ -163,37 +59,23 @@ TextureBox.prototype.setOnChange = function(onChange)
 	this.repeat.setOnChange(onChange);
 }
 
-//Remove element
-TextureBox.prototype.destroy = function()
-{
-	try
-	{
-		this.parent.removeChild(this.element);
-	}
-	catch(e){}
-}
-
-//Update
-TextureBox.prototype.update = function(){}
-
 //Set texture value
 TextureBox.prototype.setValue = function(texture)
 {
-	if(texture === null || texture === undefined)
-	{
-		this.useTexture.setValue(false);
-		this.texture = null;
-	}
-	else
+	if(texture instanceof THREE.Texture && !(texture instanceof CubeTexture))
 	{
 		this.texture = texture;
 
-		//Update UI elements
 		this.useTexture.setValue(true);
 		this.wrapS.setValue(texture.wrapS);
 		this.wrapT.setValue(texture.wrapT);
 		this.repeat.setValue(texture.repeat.x, texture.repeat.y);
+
 		this.updatePreview();
+	}
+	else
+	{
+		this.texture = null;
 	}
 }
 
@@ -214,17 +96,6 @@ TextureBox.prototype.getValue = function()
 	}
 
 	return null;
-}
-
-//Set Texture
-TextureBox.prototype.setTexture = function(texture)
-{
-	this.setValue(texture);
-
-	if(this.onChange !== null)
-	{
-		this.onChange();
-	}
 }
 
 //Load texture from file
@@ -251,34 +122,6 @@ TextureBox.prototype.loadTexture = function(file)
 	this.updatePreview();
 }
 
-//Update texture preview
-TextureBox.prototype.updatePreview = function()
-{
-	var texture = this.texture;
-
-	if(texture instanceof Texture)
-	{
-		this.video.visibility = "hidden";
-		this.video.src = "";
-		this.img.visibility = "visible";
-		this.img.src = texture.image.src;
-	}
-	if(texture instanceof CanvasTexture)
-	{
-		this.video.visibility = "hidden";
-		this.video.src = "";
-		this.img.visibility = "visible";
-		this.img.src = texture.image.toDataURL();
-	}
-	else if(texture instanceof VideoTexture || texture instanceof WebcamTexture)
-	{
-		this.img.visibility = "hidden";
-		this.img.src = "";
-		this.video.visibility = "visible";
-		this.video.src = texture.image.src;
-	}
-}
-
 //Update Interface
 TextureBox.prototype.updateInterface = function()
 {
@@ -291,6 +134,10 @@ TextureBox.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
+
+	//Preview
+	this.preview.style.width = this.size.y + "px";
+	this.preview.style.height = this.size.y + "px";
 
 	//Form
 	this.form.position.set(this.size.y + 5, 0);
