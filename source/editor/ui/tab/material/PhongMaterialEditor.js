@@ -324,8 +324,9 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	//Environment map
 	this.form.addText("Environment map");
 	this.form.nextRow();
-	this.envMap = new TextureChooser(this.form.element);
+	this.envMap = new CubeTextureBox(this.form.element);
 	this.envMap.size.set(100, 100);
+	this.envMap.updateInterface();
 	this.envMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -336,6 +337,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.envMap);
 	this.form.nextRow();
+
 
 	//Combine environment map
 	this.form.addText("Mode");

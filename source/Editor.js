@@ -60,10 +60,10 @@ include("core/resources/Audio.js");
 include("core/resources/Image.js");
 include("core/resources/ResourceManager.js");
 
+include("core/texture/Texture.js");
 include("core/texture/CanvasTexture.js");
 include("core/texture/VideoTexture.js");
 include("core/texture/WebcamTexture.js");
-include("core/texture/Texture.js");
 include("core/texture/CubeTexture.js");
 
 include("core/loaders/FontLoader.js");
@@ -183,7 +183,7 @@ include("editor/ui/element/input/CoordinatesBox.js");
 include("editor/ui/element/input/ImageChooser.js");
 include("editor/ui/element/input/TextureChooser.js");
 include("editor/ui/element/input/TextureBox.js");
-//include("editor/ui/element/input/CubeTextureBox.js");
+include("editor/ui/element/input/CubeTextureBox.js");
 
 include("editor/ui/DropdownMenu.js");
 include("editor/ui/TreeView.js");
