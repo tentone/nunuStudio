@@ -273,6 +273,8 @@ CubeTextureEditor.prototype.activate = function()
 	Editor.resetEditingFlags();
 	
 	Mouse.setCanvas(this.canvas.element);
+
+	this.attach(this.texture);
 }
 
 //Update object data

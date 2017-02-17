@@ -43,10 +43,11 @@ include("core/resources/Audio.js");
 include("core/resources/Image.js");
 include("core/resources/ResourceManager.js");
 
+include("core/texture/Texture.js");
 include("core/texture/CanvasTexture.js");
 include("core/texture/VideoTexture.js");
 include("core/texture/WebcamTexture.js");
-include("core/texture/Texture.js");
+include("core/texture/CubeTexture.js");
 
 include("core/loaders/FontLoader.js");
 include("core/loaders/ImageLoader.js");

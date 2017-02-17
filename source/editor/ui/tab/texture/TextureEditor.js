@@ -203,6 +203,8 @@ TextureEditor.prototype.activate = function()
 {
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
+
+	this.attach(this.texture);
 }
 
 //Update object data
