@@ -18,12 +18,24 @@ function TreeElement(container)
 	this.element = document.createElement("div");
 	this.element.draggable = true;
 	this.element.style.position = "absolute";
-	this.element.style.width = container.size.x + "px";
+	this.element.style.width = "100%";
 	this.element.style.height = "20px";
 	this.element.style.cursor = "pointer";
 	this.element.style.display = "flex";
 	this.element.style.alignItems = "center";
-	this.element.style.backgroundColor = Editor.theme.buttonLightColor;
+
+	this.element.onmouseenter = function()
+	{
+		this.style.backgroundColor = Editor.theme.buttonOverColor;
+	};
+
+	this.element.onmouseleave = function()
+	{
+		if(!Editor.isObjectSelected(self.obj))
+		{
+			this.style.backgroundColor = Editor.theme.buttonLightColor;
+		}
+	};
 
 	this.element.ondragover = function(event)
 	{
@@ -40,11 +52,22 @@ function TreeElement(container)
 	this.arrow.src = "editor/files/icons/misc/arrow_down.png";
 	this.arrow.style.visibility = "inherit";
 	this.arrow.style.position = "absolute";
+	this.arrow.style.opacity = 0.5;
 	this.arrow.style.width = "15px";
 	this.arrow.style.height = "15px";
 	this.arrow.style.left = "5px";
 	this.arrow.style.top = "3px";
 	this.element.appendChild(this.arrow);
+
+	this.arrow.onmouseenter = function()
+	{
+		this.style.opacity = 1.0;
+	};
+
+	this.arrow.onmouseleave = function()
+	{
+		this.style.opacity = 0.5;
+	};
 
 	//Icon
 	this.icon = document.createElement("img");
@@ -58,11 +81,14 @@ function TreeElement(container)
 	this.element.appendChild(this.icon);
 
 	//Text
-	this.label = new Text(this.element);
-	this.label.position.set(45, 10);
-	this.label.fitContent = true;
-	this.label.setAlignment(Text.LEFT);
-	this.label.updateInterface();
+	this.label = document.createElement("div");
+	this.label.style.visibility = "inherit";
+	this.label.style.position = "absolute";
+	this.label.style.pointerEvents = "none";
+	this.label.style.textOverflow = "ellipsis";
+	this.label.style.whiteSpace = "nowrap";
+	this.label.style.top = "4px";
+	this.element.appendChild(this.label);
 
 	//Element atributes
 	this.size = new THREE.Vector2(100, 20);
@@ -78,21 +104,6 @@ function TreeElement(container)
 
 	//Mouse events
 	var self = this;
-
-	//Mouse over event
-	this.element.onmouseenter = function()
-	{
-		this.style.backgroundColor = Editor.theme.buttonOverColor;
-	};
-
-	//Mouse leave event
-	this.element.onmouseleave = function()
-	{
-		if(!Editor.isObjectSelected(self.obj))
-		{
-			this.style.backgroundColor = Editor.theme.buttonLightColor;
-		}
-	};
 
 	//Context menu event
 	this.element.oncontextmenu = function(event)
@@ -335,9 +346,10 @@ function TreeElement(container)
 TreeElement.prototype.setObject = function(obj)
 {
 	this.obj = obj;
-	this.icon.src = ObjectIcons.get(obj.type);
-	this.label.setText(obj.name);
 	this.folded = obj.folded;
+
+	this.setIcon(ObjectIcons.get(obj.type));
+	this.setLabel(obj.name);
 	
 	if(obj.folded)
 	{
@@ -354,7 +366,7 @@ TreeElement.prototype.setIcon = function(icon)
 //Set label
 TreeElement.prototype.setLabel = function(label)
 {
-	this.label.setText(label);
+	this.label.innerHTML = label;
 }
 
 //Add tree element from object
@@ -452,15 +464,8 @@ TreeElement.prototype.setVisibility = function(value)
 TreeElement.prototype.updateInterface = function()
 {
 	//Visibility
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
-	
+	this.element.style.visibility = (this.visible) ? "visible" : "hidden";
+
 	//Update size
 	if(this.container !== null)
 	{
@@ -470,19 +475,19 @@ TreeElement.prototype.updateInterface = function()
 	var offset = this.level * 20;
 
 	//Arrow
+	this.arrow.style.visibility = (this.obj.children.length === 0) ? "hidden" : "inherit";
 	this.arrow.style.left = (5 + offset) + "px";
+
+	//Icon
 	this.icon.style.left = (25 + offset) + "px";
 
 	//Text
-	this.label.visible = this.visible;
-	this.label.position.set(45 + offset, 10);
-	this.label.size.set(this.size.x - (45 + offset), 0);
-	this.label.updateInterface();
+	this.label.style.left = (45 + offset) + "px";
+	//this.label.style.width = (this.size.x - (45 + offset)) + "px";
 	
 	//Base
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
 
 	//Update childs
 	for(var i = 0; i < this.children.length; i++)

@@ -19,7 +19,7 @@ function TreeView(parent)
 	this.label.setAlignment(Text.LEFT);
 	this.label.updateInterface();
 
-	//Element atributes
+	//Attributes
 	this.fitParent = true;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
@@ -139,8 +139,8 @@ TreeView.prototype.updateInterface = function()
 	}
 
 	//Set element style
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
+	//this.element.style.top = this.position.y + "px";
+	//this.element.style.left = this.position.x + "px";
 	this.element.style.width = "100%";//this.size.x + "px";
 	this.element.style.height = "100%";//this.size.y + "px";
 
