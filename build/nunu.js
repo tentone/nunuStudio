@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.20 Alpha";
-Nunu.TIMESTAMP = "201702161859";
+Nunu.TIMESTAMP = "201702170013";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -5093,21 +5093,21 @@ Nunu.webvrAvailable = function() {
     return this.subVectors(m, d).multiplyScalar(a).add(d);
   }, equals:function(d) {
     return d.x === this.x && d.y === this.y;
-  }, fromArray:function(d, m) {
-    void 0 === m && (m = 0);
-    this.x = d[m];
-    this.y = d[m + 1];
+  }, fromArray:function(d, a) {
+    void 0 === a && (a = 0);
+    this.x = d[a];
+    this.y = d[a + 1];
     return this;
-  }, toArray:function(d, m) {
+  }, toArray:function(d, a) {
     void 0 === d && (d = []);
-    void 0 === m && (m = 0);
-    d[m] = this.x;
-    d[m + 1] = this.y;
+    void 0 === a && (a = 0);
+    d[a] = this.x;
+    d[a + 1] = this.y;
     return d;
-  }, fromBufferAttribute:function(d, m, a) {
-    void 0 !== a && console.warn("THREE.Vector2: offset has been removed from .fromBufferAttribute().");
-    this.x = d.getX(m);
-    this.y = d.getY(m);
+  }, fromBufferAttribute:function(d, a, b) {
+    void 0 !== b && console.warn("THREE.Vector2: offset has been removed from .fromBufferAttribute().");
+    this.x = d.getX(a);
+    this.y = d.getY(a);
     return this;
   }, rotateAround:function(d, a) {
     var m = Math.cos(a);
@@ -12532,50 +12532,50 @@ Nunu.webvrAvailable = function() {
       throw Error("can not parse propertyName from trackName: " + d);
     }
     return a;
-  }, findNode:function(d, a) {
-    if (!a || "" === a || "root" === a || "." === a || -1 === a || a === d.name || a === d.uuid) {
-      return d;
+  }, findNode:function(a, b) {
+    if (!b || "" === b || "root" === b || "." === b || -1 === b || b === a.name || b === a.uuid) {
+      return a;
     }
-    if (d.skeleton) {
-      var b = function(d) {
-        for (var b = 0;b < d.bones.length;b++) {
-          var c = d.bones[b];
-          if (c.name === a) {
+    if (a.skeleton) {
+      var d = function(a) {
+        for (var d = 0;d < a.bones.length;d++) {
+          var c = a.bones[d];
+          if (c.name === b) {
             return c;
           }
         }
         return null;
-      }(d.skeleton);
-      if (b) {
-        return b;
+      }(a.skeleton);
+      if (d) {
+        return d;
       }
     }
-    if (d.children) {
-      var c = function(d) {
-        for (var b = 0;b < d.length;b++) {
-          var e = d[b];
-          if (e.name === a || e.uuid === a || (e = c(e.children))) {
+    if (a.children) {
+      var c = function(a) {
+        for (var d = 0;d < a.length;d++) {
+          var e = a[d];
+          if (e.name === b || e.uuid === b || (e = c(e.children))) {
             return e;
           }
         }
         return null;
       };
-      if (b = c(d.children)) {
-        return b;
+      if (d = c(a.children)) {
+        return d;
       }
     }
     return null;
   }});
   Object.assign(Ja.prototype, {_getValue_unavailable:function() {
   }, _setValue_unavailable:function() {
-  }, BindingType:{Direct:0, EntireArray:1, ArrayElement:2, HasFromToArray:3}, Versioning:{None:0, NeedsUpdate:1, MatrixWorldNeedsUpdate:2}, GetterByBindingType:[function(d, a) {
-    d[a] = this.node[this.propertyName];
-  }, function(d, a) {
-    for (var b = this.resolvedProperty, c = 0, e = b.length;c !== e;++c) {
-      d[a++] = b[c];
+  }, BindingType:{Direct:0, EntireArray:1, ArrayElement:2, HasFromToArray:3}, Versioning:{None:0, NeedsUpdate:1, MatrixWorldNeedsUpdate:2}, GetterByBindingType:[function(a, b) {
+    a[b] = this.node[this.propertyName];
+  }, function(a, b) {
+    for (var d = this.resolvedProperty, c = 0, e = d.length;c !== e;++c) {
+      a[b++] = d[c];
     }
-  }, function(d, a) {
-    d[a] = this.resolvedProperty[this.propertyIndex];
+  }, function(a, b) {
+    a[b] = this.resolvedProperty[this.propertyIndex];
   }, function(a, b) {
     this.resolvedProperty.toArray(a, b);
   }], SetterByBindingTypeAndVersioning:[[function(a, b) {
@@ -12791,16 +12791,16 @@ Nunu.webvrAvailable = function() {
     if (void 0 !== c) {
       return e[c];
     }
-    var h = this._paths, f = this._parsedPaths, n = this._objects, m = this.nCachedObjects_, k = Array(n.length), c = e.length;
+    var h = this._paths, f = this._parsedPaths, n = this._objects, k = this.nCachedObjects_, m = Array(n.length), c = e.length;
     d[a] = c;
     h.push(a);
     f.push(b);
-    e.push(k);
-    d = m;
+    e.push(m);
+    d = k;
     for (c = n.length;d !== c;++d) {
-      k[d] = new Ja(n[d], a, b);
+      m[d] = new Ja(n[d], a, b);
     }
-    return k;
+    return m;
   }, unsubscribe_:function(a) {
     var d = this._bindingsIndicesByPath, b = d[a];
     if (void 0 !== b) {
@@ -20594,22 +20594,22 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
     }
     return !1;
   };
-  l.prototype.addListener = function(a, k) {
-    if ("function" != typeof k) {
+  l.prototype.addListener = function(a, g) {
+    if ("function" != typeof g) {
       throw Error("addListener only takes instances of Function");
     }
-    if (this._events || (this._events = {}), this.emit("newListener", a, k), this._events[a]) {
+    if (this._events || (this._events = {}), this.emit("newListener", a, g), this._events[a]) {
       if (b(this._events[a])) {
         if (!this._events[a].warned) {
           var c;
           (c = void 0 !== this._events.maxListeners ? this._events.maxListeners : 10) && 0 < c && this._events[a].length > c && (this._events[a].warned = !0, console.error("(node) warning: possible EventEmitter memory leak detected. %d listeners added. Use emitter.setMaxListeners() to increase limit.", this._events[a].length), console.trace());
         }
-        this._events[a].push(k);
+        this._events[a].push(g);
       } else {
-        this._events[a] = [this._events[a], k];
+        this._events[a] = [this._events[a], g];
       }
     } else {
-      this._events[a] = k;
+      this._events[a] = g;
     }
     return this;
   };
@@ -30925,6 +30925,7 @@ THREE.Material.prototype.dispose = function() {
   a(this.alphaMap);
   a(this.roughnessMap);
   a(this.metalnessMap);
+  a(this.envMap);
 };
 THREE.MultiMaterial.prototype.name = "material";
 THREE.MultiMaterial.prototype.dispose = function() {

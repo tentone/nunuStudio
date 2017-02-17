@@ -54,8 +54,6 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.vertexShader);
 	this.form.nextRow();
-
-	this.form.updateInterface();
 }
 
 ShaderMaterialEditor.prototype = Object.create(MaterialEditor.prototype);

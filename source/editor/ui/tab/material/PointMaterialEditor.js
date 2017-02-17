@@ -33,8 +33,6 @@ function PointMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.map);
 	this.form.nextRow();
-
-	this.form.updateInterface();
 }
 
 PointMaterialEditor.prototype = Object.create(MaterialEditor.prototype);

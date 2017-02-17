@@ -11,7 +11,6 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	this.skinning = new CheckBox(this.form.element);
 	this.form.addText("Skinning", true);
 	this.skinning.size.set(20, 15);
-	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -25,7 +24,6 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	this.morphTargets = new CheckBox(this.form.element);
 	this.form.addText("Morph targets", true);
 	this.morphTargets.size.set(20, 15);
-	this.morphTargets.updateInterface();
 	this.morphTargets.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -40,7 +38,6 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	this.wireframe = new CheckBox(this.form.element);
 	this.form.addText("Wireframe");
 	this.wireframe.size.set(200, 15);
-	this.wireframe.updateInterface();
 	this.wireframe.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -88,7 +85,6 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Texture map");
 	this.form.nextRow();
 	this.map = new TextureBox(this.form.element);
-	this.map.updateInterface();
 	this.map.setOnChange(function(file)
 	{
 		self.material.map = self.map.getValue();
@@ -101,7 +97,6 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Specular map");
 	this.form.nextRow();
 	this.specularMap = new TextureBox(this.form.element);
-	this.specularMap.updateInterface();
 	this.specularMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -117,7 +112,6 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Alpha map");
 	this.form.nextRow();
 	this.alphaMap = new TextureBox(this.form.element);
-	this.alphaMap.updateInterface();
 	this.alphaMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -128,8 +122,6 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.alphaMap);
 	this.form.nextRow();
-
-	this.form.updateInterface();
 }
 
 LambertMaterialEditor.prototype = Object.create(MaterialEditor.prototype);

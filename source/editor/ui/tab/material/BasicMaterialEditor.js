@@ -70,7 +70,6 @@ function BasicMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Texture map");
 	this.form.nextRow();
 	this.map = new TextureBox(this.form.element);
-	this.map.updateInterface();
 	this.map.setOnChange(function(file)
 	{
 		self.material.map = self.map.getValue();
@@ -83,7 +82,6 @@ function BasicMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Alpha map");
 	this.form.nextRow();
 	this.alphaMap = new TextureBox(this.form.element);
-	this.alphaMap.updateInterface();
 	this.alphaMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -94,8 +92,6 @@ function BasicMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.alphaMap);
 	this.form.nextRow();
-
-	this.form.updateInterface();
 }
 
 BasicMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
