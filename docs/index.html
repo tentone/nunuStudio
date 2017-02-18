@@ -21,6 +21,11 @@
 	<script type="text/javascript">
 		$(document).ready(function()
 		{
+			window.onkeydown = function(e)
+			{ 
+				return !(e.keyCode == 32 && e.target == document.body);
+			}; 
+
 			var menu = $(".navbar");
 			$(window).bind("scroll", function(e)
 			{
