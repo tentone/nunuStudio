@@ -361,11 +361,13 @@ TabGroup.prototype.updateInterface = function()
 		this.tab.style.height = (this.size.y - this.buttonSize.y) + "px";
 	}
 
-	//Update element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
+	
+	//Empty message
 	this.empty.style.width = this.size.x + "px";
 	this.empty.style.height = this.size.y + "px";
 }

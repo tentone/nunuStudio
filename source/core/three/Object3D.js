@@ -164,6 +164,17 @@ THREE.Object3D.prototype.removeAll = function()
 }
 
 /**
+ * Check if object is empty (has no childrens).
+ * 
+ * @method isEmpty
+ * @return {boolean} True is object is empty
+ */
+THREE.Object3D.prototype.isEmpty = function()
+{
+	return this.children.length === 0;
+}
+
+/**
  * Destroy object, dispose and remove from its parent.
  * @method destroy
  */

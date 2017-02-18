@@ -30822,6 +30822,9 @@ THREE.Object3D.prototype.removeAll = function() {
     this.remove(this.children[a]);
   }
 };
+THREE.Object3D.prototype.isEmpty = function() {
+  return 0 === this.children.length;
+};
 THREE.Object3D.prototype.destroy = function() {
   for (;0 < this.children.length;) {
     this.children[0].destroy();
@@ -32704,6 +32707,9 @@ Sky.prototype.update = function() {
   for (var a = 0;a < this.children.length;a++) {
     this.children[a].update();
   }
+};
+Sky.prototype.isEmpty = function() {
+  return 3 >= this.children.length;
 };
 Sky.prototype.updateSky = function() {
   var a = this.time / this.dayTime;

@@ -20,7 +20,6 @@ function TreeView(parent)
 	this.label.updateInterface();
 
 	//Attributes
-	this.fitParent = true;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -50,12 +49,12 @@ TreeView.prototype.updateView = function()
 	{
 		children[i].destroy();
 	}
+
 	this.children = [];
 
 	//Add element and update interface
 	TreeView.addSceneElement(this, this.obj);
 	this.updateChildPosition();
-	this.updateInterface();
 }
 
 //Update which object is currently selected
@@ -119,16 +118,13 @@ TreeView.prototype.updateChildPosition = function()
 {
 	var size = TreeView.updateChildPosition(this, 20, 0, false);
 
-	if(!this.fitParent)
-	{
-		this.size.y = size;
-	}
+	this.size.y = size;
 }
 
 //Update division Size
 TreeView.prototype.updateInterface = function()
 {
-	//Set Visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -138,9 +134,9 @@ TreeView.prototype.updateInterface = function()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Set element style
-	//this.element.style.top = this.position.y + "px";
-	//this.element.style.left = this.position.x + "px";
+	//Element
+	this.element.style.top = this.position.y + "px";
+	this.element.style.left = this.position.x + "px";
 	this.element.style.width = "100%";//this.size.x + "px";
 	this.element.style.height = "100%";//this.size.y + "px";
 
