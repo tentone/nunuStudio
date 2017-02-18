@@ -12,6 +12,12 @@ function TabButton(parent, tab)
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	this.element.draggable = true;
 
+	//TODO <ON DRAG>
+	/*this.element.ondrag = function(event)
+	{
+		console.log(event);
+	}*/
+
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();

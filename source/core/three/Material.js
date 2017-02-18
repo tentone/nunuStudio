@@ -281,13 +281,13 @@ THREE.Material.prototype.toJSON = function(meta)
 	data.morphTargets = this.morphTargets;
 
 	//Morph normals
-	if(this.morphNormals)
+	if(this.morphNormals !== undefined)
 	{
 		data.morphNormals = this.morphNormals;
 	}
 	
 	//Skinning
-	if(this.skinning)
+	if(this.skinning !== undefined)
 	{
 		data.skinning = this.skinning;
 	}

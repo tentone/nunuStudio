@@ -30986,8 +30986,8 @@ THREE.Material.prototype.toJSON = function(a) {
   "round" !== this.wireframeLinecap && (l.wireframeLinecap = this.wireframeLinecap);
   "round" !== this.wireframeLinejoin && (l.wireframeLinejoin = this.wireframeLinejoin);
   l.morphTargets = this.morphTargets;
-  this.morphNormals && (l.morphNormals = this.morphNormals);
-  this.skinning && (l.skinning = this.skinning);
+  void 0 !== this.morphNormals && (l.morphNormals = this.morphNormals);
+  void 0 !== this.skinning && (l.skinning = this.skinning);
   if (void 0 === a) {
     var b = f(a.textures);
     a = f(a.images);
