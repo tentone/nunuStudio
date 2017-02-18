@@ -1,8 +1,9 @@
 "use strict";
 
 /**
- * Program class contains all the data of a nunuStudio program
- * Program is also used to store and manage all available resources
+ * Program class contains all the data of a nunuStudio program.
+ * 
+ * Program is also used to store and manage all available resources.
  * 
  * @class Program
  * @module Core
@@ -133,8 +134,10 @@ Program.prototype.addAudio = ResourceManager.prototype.addAudio;
 Program.prototype.removeAudio = ResourceManager.prototype.removeAudio;
 
 /**
- * Select initial scene and initialize that scene
- * Automatically called by the runtime
+ * Select initial scene and initialize that scene.
+ * 
+ * Automatically called by the runtime.
+ * 
  * @method initialize
  */
 Program.prototype.initialize = function()
@@ -168,7 +171,8 @@ Program.prototype.initialize = function()
 }
 
 /**
- * Set program mouse and keyboard
+ * Set program mouse and keyboard.
+ * 
  * @method setMouseKeyboard
  * @param {Mouse} mouse
  * @param {Keyboard} keyboard
@@ -180,7 +184,8 @@ Program.prototype.setMouseKeyboard = function(mouse, keyboard)
 }
 
 /**
- * Set program renderer
+ * Set program renderer.
+ * 
  * @method setRenderer
  * @param {WebGLRenderer} renderer Three.js renderer to be used by this program
  */
@@ -191,7 +196,8 @@ Program.prototype.setRenderer = function(renderer)
 }
 
 /**
- * Enter VR mode
+ * Enter VR mode.
+ * 
  * @method displayVR
  */
 Program.prototype.displayVR = function()
@@ -216,7 +222,8 @@ Program.prototype.displayVR = function()
 }
 
 /**
- * Exit VR mode
+ * Exit VR mode.
+ * 
  * @method exitVR
  */
 Program.prototype.exitVR = function()
@@ -235,8 +242,10 @@ Program.prototype.exitVR = function()
 }
 
 /**
- * Update program state
- * Automatically called by the runtime
+ * Update program state.
+ * 
+ * Automatically called by the runtime.
+ * 
  * @method update
  */
 Program.prototype.update = function()
@@ -245,8 +254,10 @@ Program.prototype.update = function()
 }
 
 /**
- * Render program to canvas
- * Renderer passed as argument
+ * Render program to canvas.
+ * 
+ * Renderer passed as argument.
+ * 
  * @method render
  * @param {Renderer} renderer
  */
@@ -293,8 +304,10 @@ Program.prototype.render = function(renderer)
 }
 
 /**
- * Resize program elements
- * Called by the runtime every time the window is resized
+ * Resize program elements.
+ * 
+ * Called by the runtime every time the window is resized.
+ * 
  * @method resize
  * @param {Number} x Width
  * @param {Number} y Height
@@ -319,8 +332,10 @@ Program.prototype.resize = function(x, y)
 }
 
 /**
- * Change scene during runtime, this method can receive booth a scene name or a scene object
- * This method should be used inside of script objects during runtime
+ * Change scene during runtime, this method can receive booth a scene name or a scene object.
+ * 
+ * This method should be used inside of script objects during runtime.
+ * 
  * @method setScene
  * @param {Scene|String} scene
  */
@@ -347,7 +362,8 @@ Program.prototype.setScene = function(scene)
 }
 
 /**
- * Remove Scene from program
+ * Remove Scene from program.
+ * 
  * @method remove
  * @param {Scene} scene
  */
@@ -368,8 +384,10 @@ Program.prototype.remove = function(scene)
 }
 
 /**
- * Add new scene to this program
- * On the program class only scenes can be added as children
+ * Add new scene to this program.
+ * 
+ * On the program class only scenes can be added as children.
+ * 
  * @method add
  * @param {Scene} scene
  */
@@ -389,8 +407,10 @@ Program.prototype.add = function(scene)
 }
 
 /**
- * Clone program, keeping uuids and every identification attribute
- * Clone method uses the ObjectLoad to serialize and create a new program instance with the same data
+ * Clone program, keeping uuids and every identification attribute.
+ * 
+ * Clone method uses the ObjectLoad to serialize and create a new program instance with the same data.
+ * 
  * @method clone
  * @return {Program} Cloned program
  */
@@ -400,8 +420,10 @@ Program.prototype.clone = function()
 }
 
 /**
- * Set a scene as initial scene using its uuid
- * This method is used by the editor
+ * Set a scene as initial scene using its uuid.
+ * 
+ * This method is used by the editor.
+ * 
  * @method setInitialScene
  * @param {String} uuid Scene uuid
  */
@@ -411,8 +433,10 @@ Program.prototype.setInitialScene = function(scene)
 }
 
 /**
- * Create a scene using a default template
- * This is the scene used when creating a new program or scene inside the editor
+ * Create a scene using a default template.
+ * 
+ * This is the scene used when creating a new program or scene inside the editor.
+ * 
  * @method addDefaultScene
  * @param {Material} material Default material used by objects, if empty a new material is created
  */
@@ -454,8 +478,10 @@ Program.prototype.addDefaultScene = function(material)
 }
 
 /**
- * Dispose program data to avoid memory leaks
- * Called when exiting the program
+ * Dispose program data to avoid memory leaks.
+ * 
+ * Called when exiting the program.
+ * 
  * @method dispose
  */
 Program.prototype.dispose = function()
@@ -486,7 +512,8 @@ Program.prototype.dispose = function()
 }
 
 /**
- * Receive external data and pass it to all script instances
+ * Receive external data and pass it to all script instances.
+ * 
  * @param {Object} data
  * @method receiveDataApp
  */
@@ -522,7 +549,8 @@ Program.prototype.receiveDataApp = function(data)
 }
 
 /**
- * Send data to external app instance
+ * Send data to external app instance.
+ * 
  * @param {Object} data
  * @method sendDataApp
  */
@@ -554,6 +582,7 @@ Program.prototype.sendDataApp = function(data)
 
 /**
  * Serialize object as JSON.
+ * 
  * @method toJSON
  * @param {Object} meta
  * @param {boolean} exportResources If true all resouces in the program are exported, else only resources attached to objects are exported

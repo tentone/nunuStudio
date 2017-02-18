@@ -156,8 +156,6 @@ THREE.Material.prototype.toJSON = function(meta)
 	{
 		data.emissive = this.emissive.getHex();
 	}
-
-	//TODO <ADD TO LOADER>
 	if(this.emissiveIntensity && this.emissiveIntensity.isColor)
 	{
 		data.emissiveIntensity = this.emissiveIntensity.getHex();
@@ -169,7 +167,6 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.emissiveMap = this.emissiveMap.toJSON(meta).uuid;
 	}
 
-	//TODO <ADD TO LOADER>
 	//Ambient occlusion
 	if(this.aoMap && this.aoMap.isTexture)
 	{
@@ -192,17 +189,14 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.envMap = this.envMap.toJSON(meta).uuid;
 		data.reflectivity = this.reflectivity; //Scale behind envMap
 
-		//TODO <ADD TO LOADER>
 		if(this.combine)
 		{
 			data.combine = this.combine;
 		}
-		//TODO <ADD TO LOADER>
 		if(this.envMapIntensity)
 		{
 			data.envMapIntensity = this.envMapIntensity;
 		}
-		//TODO <ADD TO LOADER>
 		if(this.refractionRatio)
 		{
 			data.refractionRatio = this.refractionRatio;
@@ -286,14 +280,12 @@ THREE.Material.prototype.toJSON = function(meta)
 	//Morph targets
 	data.morphTargets = this.morphTargets;
 
-	//TODO <ADD TO LOADER>
 	//Morph normals
 	if(this.morphNormals)
 	{
 		data.morphNormals = this.morphNormals;
 	}
-
-	//TODO <ADD TO LOADER>
+	
 	//Skinning
 	if(this.skinning)
 	{
