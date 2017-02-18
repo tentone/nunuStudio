@@ -708,7 +708,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\Scene.js",
             "line": 3,
-            "description": "Program class contains all the data of a nunuStudio program\nProgram is also used to store and manage all available resources"
+            "description": "Program class contains all the data of a nunuStudio program.\n\nProgram is also used to store and manage all available resources."
         },
         "Resources": {
             "name": "Resources",
@@ -1521,7 +1521,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\Program.js",
             "line": 3,
-            "description": "Program class contains all the data of a nunuStudio program\nProgram is also used to store and manage all available resources",
+            "description": "Program class contains all the data of a nunuStudio program.\n\nProgram is also used to store and manage all available resources.",
             "is_constructor": 1,
             "params": [
                 {
@@ -1996,7 +1996,7 @@
             "namespace": "",
             "file": "..\\source\\core\\three\\Material.js",
             "line": 3,
-            "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
+            "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don\"t have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
         },
         "MultiMaterial": {
             "name": "MultiMaterial",
@@ -5304,7 +5304,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 15,
+            "line": 16,
             "description": "NunuRuntime instance used to communication between nunu app and the host webpage",
             "itemtype": "property",
             "name": "app",
@@ -5314,7 +5314,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 20,
+            "line": 21,
             "description": "Enable virtual reality flag",
             "itemtype": "property",
             "name": "vr",
@@ -5325,7 +5325,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 26,
+            "line": 27,
             "description": "Virtual reality movement scale",
             "itemtype": "property",
             "name": "vrScale",
@@ -5336,7 +5336,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 32,
+            "line": 33,
             "description": "Program description",
             "itemtype": "property",
             "name": "description",
@@ -5346,7 +5346,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 37,
+            "line": 38,
             "description": "Program author",
             "itemtype": "property",
             "name": "author",
@@ -5356,7 +5356,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 42,
+            "line": 43,
             "description": "Program version",
             "itemtype": "property",
             "name": "version",
@@ -5367,7 +5367,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 48,
+            "line": 49,
             "description": "Antialiasing flag",
             "itemtype": "property",
             "name": "antialiasing",
@@ -5378,7 +5378,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 54,
+            "line": 55,
             "description": "If true the program is rendered with shadows",
             "itemtype": "property",
             "name": "shadows",
@@ -5389,7 +5389,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 60,
+            "line": 61,
             "description": "Shadow type",
             "itemtype": "property",
             "name": "shadowsType",
@@ -5400,7 +5400,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 66,
+            "line": 67,
             "description": "Flag to control pointer locking",
             "itemtype": "property",
             "name": "lockPointer",
@@ -5411,8 +5411,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 135,
-            "description": "Select initial scene and initialize that scene\nAutomatically called by the runtime",
+            "line": 136,
+            "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
             "class": "Program",
@@ -5420,8 +5420,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 170,
-            "description": "Set program mouse and keyboard",
+            "line": 173,
+            "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
             "params": [
@@ -5441,8 +5441,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 182,
-            "description": "Set program renderer",
+            "line": 186,
+            "description": "Set program renderer.",
             "itemtype": "method",
             "name": "setRenderer",
             "params": [
@@ -5457,8 +5457,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 193,
-            "description": "Enter VR mode",
+            "line": 198,
+            "description": "Enter VR mode.",
             "itemtype": "method",
             "name": "displayVR",
             "class": "Program",
@@ -5466,8 +5466,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 218,
-            "description": "Exit VR mode",
+            "line": 224,
+            "description": "Exit VR mode.",
             "itemtype": "method",
             "name": "exitVR",
             "class": "Program",
@@ -5475,8 +5475,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 237,
-            "description": "Update program state\nAutomatically called by the runtime",
+            "line": 244,
+            "description": "Update program state.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
             "class": "Program",
@@ -5484,8 +5484,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 247,
-            "description": "Render program to canvas\nRenderer passed as argument",
+            "line": 256,
+            "description": "Render program to canvas.\n\nRenderer passed as argument.",
             "itemtype": "method",
             "name": "render",
             "params": [
@@ -5500,8 +5500,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 295,
-            "description": "Resize program elements\nCalled by the runtime every time the window is resized",
+            "line": 306,
+            "description": "Resize program elements.\n\nCalled by the runtime every time the window is resized.",
             "itemtype": "method",
             "name": "resize",
             "params": [
@@ -5521,8 +5521,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 321,
-            "description": "Change scene during runtime, this method can receive booth a scene name or a scene object\nThis method should be used inside of script objects during runtime",
+            "line": 334,
+            "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
             "params": [
@@ -5537,8 +5537,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 349,
-            "description": "Remove Scene from program",
+            "line": 364,
+            "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
             "params": [
@@ -5553,8 +5553,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 370,
-            "description": "Add new scene to this program\nOn the program class only scenes can be added as children",
+            "line": 386,
+            "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
             "params": [
@@ -5569,8 +5569,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 391,
-            "description": "Clone program, keeping uuids and every identification attribute\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data",
+            "line": 409,
+            "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
             "return": {
@@ -5582,8 +5582,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 402,
-            "description": "Set a scene as initial scene using its uuid\nThis method is used by the editor",
+            "line": 422,
+            "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
             "params": [
@@ -5598,8 +5598,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 413,
-            "description": "Create a scene using a default template\nThis is the scene used when creating a new program or scene inside the editor",
+            "line": 435,
+            "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
             "params": [
@@ -5614,8 +5614,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 456,
-            "description": "Dispose program data to avoid memory leaks\nCalled when exiting the program",
+            "line": 480,
+            "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
             "class": "Program",
@@ -5623,8 +5623,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 488,
-            "description": "Receive external data and pass it to all script instances",
+            "line": 514,
+            "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
                     "name": "data",
@@ -5639,8 +5639,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 524,
-            "description": "Send data to external app instance",
+            "line": 551,
+            "description": "Send data to external app instance.",
             "params": [
                 {
                     "name": "data",
@@ -5655,7 +5655,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 555,
+            "line": 583,
             "description": "Serialize object as JSON.",
             "itemtype": "method",
             "name": "toJSON",

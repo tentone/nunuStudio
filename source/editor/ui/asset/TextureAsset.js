@@ -157,20 +157,15 @@ TextureAsset.prototype.setTexture = function(texture)
 	if(texture instanceof VideoTexture || texture instanceof WebcamTexture)
 	{
 		this.preview = document.createElement("video");
-		this.preview.draggable = true;
 		this.preview.volume = 0.0;
+		this.preview.loop = true;
+		this.preview.autostart = true;
 		this.preview.src = texture.image.src;
-		this.preview.onload = function()
-		{
-			this.preview.loop = true;
-			this.preview.autostart = true;
-		};
 	}
 	//Cube texture
 	else if(texture instanceof CubeTexture)
 	{
 		this.preview = document.createElement("canvas");
-		this.preview.draggable = true;
 		this.preview.width = 128;
 		this.preview.height = 128;
 
@@ -215,6 +210,7 @@ TextureAsset.prototype.setTexture = function(texture)
 	//Add preview to parent
 	if(this.preview !== null)
 	{
+		this.preview.draggable = true;
 		this.preview.style.position = "absolute";
 		this.preview.style.top = "5%";
 		this.preview.style.left = "17%";

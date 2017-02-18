@@ -173,7 +173,7 @@ ObjectLoader.prototype.parseGeometries = function(json)
 ObjectLoader.prototype.parseMaterials = function(json, textures)
 {
 	var materials = [];
-	var loader = new THREE.MaterialLoader();
+	var loader = new MaterialLoader();
 	loader.setTextures(textures);
 
 	if(json !== undefined)

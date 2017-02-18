@@ -97,7 +97,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Core",
             "name": "Core",
-            "description": "Program class contains all the data of a nunuStudio program\nProgram is also used to store and manage all available resources"
+            "description": "Program class contains all the data of a nunuStudio program.\n\nProgram is also used to store and manage all available resources."
         },
         {
             "displayName": "Devices",
