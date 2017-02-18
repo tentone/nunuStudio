@@ -265,7 +265,7 @@ DropdownMenu.prototype.updateInterface = function()
 	this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
 	this.panel.style.visibility = visibility;
 
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -275,7 +275,7 @@ DropdownMenu.prototype.updateInterface = function()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Element position and size
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

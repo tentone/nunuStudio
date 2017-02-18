@@ -53,6 +53,7 @@ function TabButton(parent, tab)
 
 	//Icon
 	this.icon = document.createElement("img");
+	this.icon.draggable = false;
 	this.icon.style.position = "absolute";
 	this.icon.src = tab.icon;
 	this.element.appendChild(this.icon);
@@ -71,8 +72,9 @@ function TabButton(parent, tab)
 
 	//Close button
 	this.close = document.createElement("img");
+	this.close.draggable = false;
 	this.close.style.position = "absolute";
-	this.close.style.opacity = 0.6;
+	this.close.style.opacity = 0.5;
 	this.close.style.visibility = tab.closeable ? "visible" : "hidden";
 	this.close.src = "editor/files/icons/misc/close.png";
 	this.element.appendChild(this.close);
@@ -84,7 +86,7 @@ function TabButton(parent, tab)
 
 	this.close.onmouseleave = function()
 	{
-		this.style.opacity = 0.6;
+		this.style.opacity = 0.5;
 	};
 
 	this.close.onclick = function()

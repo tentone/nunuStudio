@@ -6,7 +6,7 @@ function TreeElement(container)
 	if(container !== undefined)
 	{
 		this.container = container;
-		this.parent = this.container.element;
+		this.parent = container.element;
 	}
 	else
 	{
@@ -14,7 +14,10 @@ function TreeElement(container)
 		this.parent = null;
 	}
 	
-	//Create element
+	//Self pointer
+	var self = this;
+
+	//Element
 	this.element = document.createElement("div");
 	this.element.draggable = true;
 	this.element.style.position = "absolute";
@@ -37,18 +40,9 @@ function TreeElement(container)
 		}
 	};
 
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
-
-	this.element.ondragleave = function(event)
-	{
-		event.preventDefault();
-	};
-
 	//Arrow
 	this.arrow = document.createElement("img");
+	this.arrow.draggable = false;
 	this.arrow.src = "editor/files/icons/misc/arrow_down.png";
 	this.arrow.style.visibility = "inherit";
 	this.arrow.style.position = "absolute";
@@ -71,9 +65,11 @@ function TreeElement(container)
 
 	//Icon
 	this.icon = document.createElement("img");
+	this.icon.draggable = false;
 	this.icon.src = "editor/files/icons/misc/arrow_down.png";
-	this.icon.style.visibility = "inherit";
 	this.icon.style.position = "absolute";
+	this.icon.style.visibility = "inherit";
+	this.icon.style.pointerEvents = "none";
 	this.icon.style.width = "15px";
 	this.icon.style.height = "15px";
 	this.icon.style.left = "25px";
@@ -83,15 +79,14 @@ function TreeElement(container)
 	//Text
 	this.label = document.createElement("div");
 	this.label.style.visibility = "inherit";
+	this.label.style.overflow = "hidden";
 	this.label.style.position = "absolute";
 	this.label.style.pointerEvents = "none";
-	this.label.style.textOverflow = "ellipsis";
-	this.label.style.whiteSpace = "nowrap";
 	this.label.style.top = "4px";
 	this.element.appendChild(this.label);
 
-	//Element atributes
-	this.size = new THREE.Vector2(100, 20);
+	//Attributes
+	this.size = new THREE.Vector2(0, 20);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
@@ -101,9 +96,6 @@ function TreeElement(container)
 	this.level = 0;
 	this.up = null; //Parent
 	this.children = [];
-
-	//Mouse events
-	var self = this;
 
 	//Context menu event
 	this.element.oncontextmenu = function(event)
@@ -279,6 +271,13 @@ function TreeElement(container)
 		Editor.selectObject(self.obj);
 	};
 
+	//Fold
+	this.arrow.onclick = function()
+	{
+		self.folded = !self.folded;
+		self.updateFoldedState();
+	};
+
 	//Open new script tab
 	var openScriptTab = function()
 	{
@@ -329,13 +328,6 @@ function TreeElement(container)
 		{
 			openParticleTab();
 		}
-	};
-
-	//Arrow click
-	this.arrow.onclick = function()
-	{
-		self.folded = !self.folded;
-		self.updateFoldedState();
 	};
 
 	//Add element to document
@@ -425,15 +417,13 @@ TreeElement.prototype.updateFoldedState = function()
 	if(this.folded)
 	{
 		this.arrow.src = "editor/files/icons/misc/arrow_right.png";
-		this.container.updateChildPosition();
-		this.container.updateInterface();
 	}
 	else
 	{
 		this.arrow.src = "editor/files/icons/misc/arrow_down.png";
-		this.container.updateChildPosition();
-		this.container.updateInterface();
 	}
+
+	this.container.updateChildPosition();
 }
 
 //Update parent tree element from scene data
@@ -446,11 +436,11 @@ TreeElement.prototype.updateSceneData = function()
 }
 
 //Set element visibility
-TreeElement.prototype.setVisibility = function(value)
+TreeElement.prototype.setVisibility = function(visible)
 {
-	this.visible = value;
+	this.visible = visible;
 
-	if(this.visible)
+	if(visible)
 	{
 		this.element.style.visibility = "visible";
 	}
@@ -464,18 +454,26 @@ TreeElement.prototype.setVisibility = function(value)
 TreeElement.prototype.updateInterface = function()
 {
 	//Visibility
-	this.element.style.visibility = (this.visible) ? "visible" : "hidden";
-
-	//Update size
-	if(this.container !== null)
+	if(this.visible)
 	{
-		this.size.x = this.container.size.x;
+		this.element.style.visibility = "visible";
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
 	}
 
 	var offset = this.level * 20;
 
 	//Arrow
-	this.arrow.style.visibility = (this.obj.children.length === 0) ? "hidden" : "inherit";
+	if(this.obj.isEmpty())
+	{
+		this.arrow.style.visibility = "hidden";
+	}
+	else
+	{
+		this.arrow.style.visibility = "inherit";
+	}
 	this.arrow.style.left = (5 + offset) + "px";
 
 	//Icon
@@ -483,7 +481,7 @@ TreeElement.prototype.updateInterface = function()
 
 	//Text
 	this.label.style.left = (45 + offset) + "px";
-	//this.label.style.width = (this.size.x - (45 + offset)) + "px";
+	//this.label.style.width = (this.element.offsetWidth - (45 + offset)) + "px";
 	
 	//Base
 	this.element.style.top = this.position.y + "px";

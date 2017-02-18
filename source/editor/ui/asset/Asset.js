@@ -12,11 +12,12 @@ function Asset(parent)
 
 	//Icon
 	this.icon = document.createElement("img");
+	this.icon.draggable = false;
 	this.icon.style.position = "absolute";
 	this.icon.style.bottom = "20px";
 	this.icon.style.right = "5px";
-	this.icon.style.width = "20px";
-	this.icon.style.height = "20px";
+	this.icon.style.width = "30%";
+	this.icon.style.height = "30%";
 	this.icon.style.pointerEvents = "none";
 	this.icon.style.opacity = 0.5;
 	this.icon.style.zIndex = 1;
@@ -25,6 +26,7 @@ function Asset(parent)
 	//Text
 	this.text = document.createElement("div");
 	this.text.style.position = "absolute";
+	this.text.style.visibility = "inherit";
 	this.text.style.overflow = "hidden";
 	this.text.style.textAlign = "center";
 	this.text.style.pointerEvents = "none";
@@ -32,6 +34,8 @@ function Asset(parent)
 	this.text.style.whiteSpace = "nowrap";
 	this.text.style.color = Editor.theme.textColor;
 	this.text.style.height = "20px";
+	this.text.style.width = "100%";
+	this.text.style.bottom = "0px";
 	this.element.appendChild(this.text);
 
 	//Element atributes
@@ -96,23 +100,7 @@ Asset.prototype.update = function(){}
 //Update Interface
 Asset.prototype.updateInterface = function()
 {
-	//Visibility
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.text.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-		this.text.style.visibility = "hidden";
-	}
-
-	//Update file text
-	this.text.style.top = (this.size.y - 20) + "px";
-	this.text.style.width = this.size.x + "px";
-	
-	//Update element
+	this.element.style.visibility = this.visible ? "visible" : "hidden";
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

@@ -105,7 +105,6 @@ FontAsset.prototype.updateInterface = function()
 {
 	Asset.prototype.updateInterface.call(this);
 
-	//Update image
 	this.image.width = this.size.x * this.scale.x;
 	this.image.height = this.size.y * this.scale.y;
 	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";

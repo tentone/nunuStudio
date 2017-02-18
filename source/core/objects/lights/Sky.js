@@ -171,6 +171,7 @@ Sky.prototype = Object.create(THREE.Object3D.prototype);
 /**
  * Initialize sky object
  * Called automatically by the runtime
+ * 
  * @method initialize
  */
 Sky.prototype.initialize = function()
@@ -210,6 +211,16 @@ Sky.prototype.update = function()
 	}
 }
 
+/**
+ * Check if object is empty (has no childrens).
+ * 
+ * @method isEmpty
+ * @return {boolean} True is object is empty
+ */
+Sky.prototype.isEmpty = function()
+{
+	return this.children.length <= 3;
+}
 
 /**
  * Update sky color and sun position
