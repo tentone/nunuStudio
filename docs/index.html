@@ -16,7 +16,7 @@
 	<!--Javascript-->
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-<
+
 	<!--Navigation bar-->
 	<script type="text/javascript">
 		$(document).ready(function()
@@ -64,6 +64,12 @@
 			app = new NunuApp(canvas);
 
 			var bar = document.getElementById("bar");
+
+			var onLoad = function()
+			{
+				bar.parentElement.style.visibility = "hidden";
+			};
+
 			var onProgress = function(event)
 			{
 				if(event.lengthComputable)
@@ -74,7 +80,7 @@
 			};
 
 			//Load and run nunu app
-			app.loadRunProgram("examples/fps.isp", undefined, onProgress);
+			app.loadRunProgram("examples/fps.isp", onLoad, onProgress);
 		}
 
 		function resize()

@@ -357,7 +357,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Reflectivity
-	this.form.addText("Env. Intensity");
+	this.form.addText("Intensity", true);
 	this.envMapIntensity = new NumberBox(this.form.element);
 	this.envMapIntensity.size.set(60, 18);
 	this.envMapIntensity.setStep(0.05);
@@ -374,7 +374,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Reflectivity
-	this.form.addText("Env. Refraction");
+	this.form.addText("Refraction");
 	this.refractionRatio = new NumberBox(this.form.element);
 	this.refractionRatio.size.set(60, 18);
 	this.refractionRatio.setStep(0.05);
