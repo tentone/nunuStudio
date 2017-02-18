@@ -1652,6 +1652,12 @@ Editor.setState = function(state)
 			}
 		}
 
+		//Lock mouse pointer
+		if(Editor.programRunning.lockPointer)
+		{
+			Editor.mouse.setLock(true);
+		}
+
 		//Update tab to show buttons
 		tab.updateInterface();
 
