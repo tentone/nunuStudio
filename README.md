@@ -73,6 +73,7 @@
 	- Documentation page
 - V0.8.9.20 Alpha
 	- Cubetexture support
+	- Improved material serialization
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

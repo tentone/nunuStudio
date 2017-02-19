@@ -26,18 +26,6 @@ function TabGroup(parent)
 	this.buttons.style.overflow = "hidden";
 	this.buttons.style.position = "absolute";
 	this.element.appendChild(this.buttons);
-	
-	this.buttons.ondrop = function(event)
-	{
-		//TODO <REORDER TABS>
-		event.preventDefault();
-	};
-
-	this.buttons.ondragover = function(event)
-	{
-		//TODO <REORDER TABS ICONS>
-		event.preventDefault();
-	};
 
 	//Tab
 	this.tab = document.createElement("div");
@@ -224,6 +212,25 @@ TabGroup.prototype.clear = function()
 	}
 
 	this.selectTab(-1);
+}
+
+//Change tab position from origin to target position
+TabGroup.prototype.sortTab = function(origin, target)
+{
+	if(target >= this.length)
+	{
+		var k = target - this.length;
+
+		while((k--) + 1)
+		{
+			this.options.push(undefined);
+		}
+	}
+
+	this.options.splice(target, 0, this.options.splice(origin, 1)[0]);
+
+	this.updateOptionIndex();
+	this.updateInterface();
 }
 
 //Update tabs index
