@@ -117,6 +117,7 @@ THREE.Object3D.prototype.hidden = false;
 
 /**
  * Initialize the object.
+ * 
  * @method initialize
  */
 THREE.Object3D.prototype.initialize = function()
@@ -129,6 +130,7 @@ THREE.Object3D.prototype.initialize = function()
 
 /**
  * Update the object state.
+ * 
  * @method update
  */
 THREE.Object3D.prototype.update = function()
@@ -141,6 +143,7 @@ THREE.Object3D.prototype.update = function()
 
 /**
  * Dispose the object (to avoid memory leaks).
+ * 
  * @method dispose
  */
 THREE.Object3D.prototype.dispose = function()
@@ -152,7 +155,8 @@ THREE.Object3D.prototype.dispose = function()
 }
 
 /**
- * Remove all children from object.
+ * Remove all children from the object.
+ * 
  * @method removeAll
  */
 THREE.Object3D.prototype.removeAll = function()

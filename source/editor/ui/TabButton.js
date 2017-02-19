@@ -12,11 +12,30 @@ function TabButton(parent, tab)
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	this.element.draggable = true;
 
-	//TODO <ON DRAG>
-	/*this.element.ondrag = function(event)
+	//Self pointer
+	var self = this;
+
+	//Drag control
+	var initial = new THREE.Vector2(0, 0);
+
+	this.element.ondragstart = function(event)
 	{
-		console.log(event);
-	}*/
+		initial.set(event.clientX, event.clientY);
+		event.dataTransfer.setDragImage(this.cloneNode(false), 0, 0);
+
+		this.style.zIndex = "1000";
+	};
+
+	this.element.ondrag = function(event)
+	{
+		this.style.left = (self.position.x + event.clientX - initial.x) + "px";
+	};
+
+	this.element.ondragend = function(event)
+	{
+		this.style.left = self.position.x + "px";
+		this.style.zIndex = "";
+	}
 
 	this.element.ondrop = function(event)
 	{
