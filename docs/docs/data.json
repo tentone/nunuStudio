@@ -420,9 +420,7 @@
         },
         "..\\source\\core\\three\\Vector3.js": {
             "name": "..\\source\\core\\three\\Vector3.js",
-            "modules": {
-                "Math": 1
-            },
+            "modules": {},
             "classes": {
                 "Vector3": 1
             },
@@ -454,6 +452,17 @@
             "modules": {},
             "classes": {
                 "BufferUtils": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\utils\\MathUtils.js": {
+            "name": "..\\source\\core\\utils\\MathUtils.js",
+            "modules": {
+                "Math": 1
+            },
+            "classes": {
+                "MathUtils": 1
             },
             "fors": {},
             "namespaces": {}
@@ -751,14 +760,15 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "MathUtils": 1,
                 "Vector3": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\three\\Vector3.js",
+            "file": "..\\source\\core\\utils\\MathUtils.js",
             "line": 3,
-            "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3"
+            "description": "MathUtils contains auxiliar values and function to help with mathematical operations."
         },
         "BinaryData": {
             "name": "BinaryData",
@@ -1544,7 +1554,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\Scene.js",
             "line": 3,
-            "description": "Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.\nScene original documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene",
+            "description": "Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.\n\nScene original documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.",
             "is_constructor": 1,
             "extends": "{Scene}"
         },
@@ -2085,6 +2095,21 @@
             "file": "..\\source\\core\\utils\\BufferUtils.js",
             "line": 3,
             "description": "BufferUtils contains methods to convert from and to Node.js Buffer binary format",
+            "static": 1
+        },
+        "MathUtils": {
+            "name": "MathUtils",
+            "shortname": "MathUtils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Math",
+            "namespace": "",
+            "file": "..\\source\\core\\utils\\MathUtils.js",
+            "line": 3,
+            "description": "MathUtils contains auxiliar values and function to help with mathematical operations.",
             "static": 1
         },
         "Mesh2shape": {
@@ -5680,8 +5705,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 13,
-            "description": "Cannon.js world used for physics simulation",
+            "line": 14,
+            "description": "Cannon.js world used for physics simulation.\n\nDocumentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.",
             "itemtype": "property",
             "name": "world",
             "type": "World",
@@ -5690,8 +5715,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 17,
-            "description": "Raycaster used for mouse interaction with 3D objects",
+            "line": 21,
+            "description": "Raycaster used for mouse interaction with 3D objects.",
             "itemtype": "property",
             "name": "raycaster",
             "type": "Raycaster",
@@ -5700,8 +5725,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 21,
-            "description": "Normalized mouse coordinates used by the raycaster",
+            "line": 26,
+            "description": "Normalized mouse coordinates used by the scene internal raycaster.",
             "itemtype": "property",
             "name": "mouse",
             "type": "Vector2",
@@ -5710,8 +5735,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 25,
-            "description": "Program that contains this scene",
+            "line": 31,
+            "description": "Program that contains this scene.",
             "itemtype": "property",
             "name": "program",
             "type": "Program",
@@ -5720,8 +5745,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 29,
-            "description": "Canvas used to draw this scene",
+            "line": 36,
+            "description": "Canvas used to draw this scene.",
             "itemtype": "property",
             "name": "canvas",
             "type": "DOM",
@@ -5730,8 +5755,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 69,
-            "description": "Initialize scene objects\nCalled automatically by the runtime",
+            "line": 77,
+            "description": "Initialize scene objects.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
             "class": "Scene",
@@ -5739,8 +5764,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 90,
-            "description": "Update scene\nCalled automatically by the runtime",
+            "line": 100,
+            "description": "Update scene objects and the physics world.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
             "class": "Scene",
@@ -5748,8 +5773,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 113,
-            "description": "Get camera from scene using cameras uuid",
+            "line": 125,
+            "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
             "params": [
@@ -5768,8 +5793,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 144,
-            "description": "Add camera to active cameras list",
+            "line": 157,
+            "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
             "params": [
@@ -5784,8 +5809,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 155,
-            "description": "Update active cameras order",
+            "line": 169,
+            "description": "Update active cameras order.",
             "itemtype": "method",
             "name": "updateCameraOrder",
             "class": "Scene",
@@ -5793,8 +5818,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 167,
-            "description": "Remove camera from active camera list",
+            "line": 182,
+            "description": "Remove camera from active camera list.",
             "params": [
                 {
                     "name": "camera",
@@ -5809,8 +5834,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 181,
-            "description": "Set scene fog mode",
+            "line": 197,
+            "description": "Set scene fog mode.",
             "params": [
                 {
                     "name": "mode",
@@ -5825,8 +5850,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 204,
-            "description": "Serialize object as JSON\nAlso serializes physics world information",
+            "line": 221,
+            "description": "Serialize scene as JSON.\n\nAlso serializes physics world information.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -6980,7 +7005,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 130,
+            "line": 131,
             "description": "Update the object state.",
             "itemtype": "method",
             "name": "update",
@@ -6989,7 +7014,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 142,
+            "line": 144,
             "description": "Dispose the object (to avoid memory leaks).",
             "itemtype": "method",
             "name": "dispose",
@@ -6998,8 +7023,8 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 154,
-            "description": "Remove all children from object.",
+            "line": 157,
+            "description": "Remove all children from the object.",
             "itemtype": "method",
             "name": "removeAll",
             "class": "Object3D",
@@ -7007,7 +7032,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 166,
+            "line": 170,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -7020,7 +7045,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 177,
+            "line": 181,
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
             "name": "destroy",
@@ -7029,7 +7054,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 198,
+            "line": 202,
             "description": "Serialize object as JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7059,7 +7084,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 326,
+            "line": 330,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -7075,7 +7100,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 332,
+            "line": 336,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -7089,7 +7114,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 337,
+            "line": 341,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -7105,7 +7130,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 343,
+            "line": 347,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -7121,7 +7146,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 349,
+            "line": 353,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -7137,7 +7162,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 355,
+            "line": 359,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -7153,7 +7178,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 361,
+            "line": 365,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -7169,7 +7194,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 367,
+            "line": 371,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -7190,7 +7215,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 374,
+            "line": 378,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -7206,7 +7231,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 380,
+            "line": 384,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -7227,7 +7252,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 387,
+            "line": 391,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -7246,7 +7271,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 393,
+            "line": 397,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -7262,7 +7287,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 399,
+            "line": 403,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldRotation",
@@ -7278,7 +7303,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 405,
+            "line": 409,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -7294,7 +7319,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 411,
+            "line": 415,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -7310,7 +7335,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 417,
+            "line": 421,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -7331,7 +7356,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 424,
+            "line": 428,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -7347,7 +7372,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 430,
+            "line": 434,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -7363,7 +7388,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 436,
+            "line": 440,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -7611,6 +7636,36 @@
             },
             "class": "BufferUtils",
             "module": "BinaryData"
+        },
+        {
+            "file": "..\\source\\core\\utils\\MathUtils.js",
+            "line": 12,
+            "description": "Value of PI*2. 360 degrees.",
+            "itemtype": "attribute",
+            "name": "pi2",
+            "type": "{Number}",
+            "class": "MathUtils",
+            "module": "Math"
+        },
+        {
+            "file": "..\\source\\core\\utils\\MathUtils.js",
+            "line": 20,
+            "description": "Value of PI/3. 60 degrees.",
+            "itemtype": "attribute",
+            "name": "pid3",
+            "type": "{Number}",
+            "class": "MathUtils",
+            "module": "Math"
+        },
+        {
+            "file": "..\\source\\core\\utils\\MathUtils.js",
+            "line": 28,
+            "description": "Value of PI/2. 45 degrees.",
+            "itemtype": "attribute",
+            "name": "pid2",
+            "type": "{Number}",
+            "class": "MathUtils",
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
@@ -8518,7 +8573,7 @@
         },
         {
             "message": "Missing item type\nRotates the object to face a point in world space.",
-            "line": " ..\\source\\core\\three\\Object3D.js:332"
+            "line": " ..\\source\\core\\three\\Object3D.js:336"
         }
     ]
 }

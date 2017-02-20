@@ -25,11 +25,13 @@ function TabGroup(parent)
 	this.buttons = document.createElement("div");
 	this.buttons.style.overflow = "hidden";
 	this.buttons.style.position = "absolute";
+	this.buttons.style.visibility = "inherit";
 	this.element.appendChild(this.buttons);
 
 	//Tab
 	this.tab = document.createElement("div");
 	this.tab.style.position = "absolute";
+	this.tab.style.visibility = "inherit";
 	this.element.appendChild(this.tab);
 
 	//Empty message
@@ -37,6 +39,8 @@ function TabGroup(parent)
 	this.empty.style.position = "absolute";
 	this.empty.style.textAlign = "center";
 	this.empty.style.display = "flex";
+	this.empty.style.width = "100%";
+	this.empty.style.height = "100%";
 	this.empty.style.flexDirection = "column";
 	this.empty.style.justifyContent = "center";
 	this.empty.style.pointerEvents = "none";
@@ -50,7 +54,7 @@ function TabGroup(parent)
 	
 	//Options
 	this.mode = TabGroup.TOP;
-	this.buttonSize = new THREE.Vector2(150, 27);
+	this.buttonSize = new THREE.Vector2(150, 25);
 	this.selected = -1;
 	this.options = [];
 
@@ -58,7 +62,7 @@ function TabGroup(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Button alignment
+//Tab buttons position
 TabGroup.TOP = 0;
 TabGroup.BOTTOM = 1;
 TabGroup.LEFT = 2;
@@ -214,8 +218,22 @@ TabGroup.prototype.clear = function()
 	this.selectTab(-1);
 }
 
-//Change tab position from origin to target position
-TabGroup.prototype.sortTab = function(origin, target)
+//TODO <EXPERIMENTAL STUFF>
+//Sort tabs by their index (this inverse of updateOptionIndex)
+TabGroup.prototype.sortByIndex = function()
+{
+	this.options.sort(function(a, b)
+	{
+		return a.index > b.index;
+	});
+
+	this.updateOptionIndex();
+	this.updateInterface();
+}
+
+//TODO <EXPERIMENTAL STUFF>
+//Move tab position from origin to target position
+TabGroup.prototype.moveTab = function(origin, target)
 {
 	if(target >= this.length)
 	{
@@ -308,14 +326,10 @@ TabGroup.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.tab.style.visibility = "visible";
-		this.buttons.style.visibility = "visible";
 		this.element.style.visibility = "visible";
 	}
 	else
 	{
-		this.tab.style.visibility = "hidden";
-		this.buttons.style.visibility = "hidden";
 		this.element.style.visibility = "hidden";
 	}
 
@@ -373,8 +387,4 @@ TabGroup.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-	
-	//Empty message
-	this.empty.style.width = this.size.x + "px";
-	this.empty.style.height = this.size.y + "px";
 }

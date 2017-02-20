@@ -2,7 +2,8 @@
 
 /**
  * Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.
- * Scene original documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene
+ * 
+ * Scene original documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.
  * 
  * @class Scene
  * @module Core
@@ -11,23 +12,30 @@
  */
 
 /**
- * Cannon.js world used for physics simulation
+ * Cannon.js world used for physics simulation.
+ *
+ * Documentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.
+ * 
  * @property {World} world
  */
 /**
- * Raycaster used for mouse interaction with 3D objects
+ * Raycaster used for mouse interaction with 3D objects.
+ * 
  * @property {Raycaster} raycaster
  */
 /**
- * Normalized mouse coordinates used by the raycaster
+ * Normalized mouse coordinates used by the scene internal raycaster.
+ * 
  * @property {Vector2} mouse
  */
 /**
- * Program that contains this scene
+ * Program that contains this scene.
+ * 
  * @property {Program} program
  */
 /**
- * Canvas used to draw this scene
+ * Canvas used to draw this scene.
+ * 
  * @property {DOM} canvas
  */
 function Scene()
@@ -67,8 +75,10 @@ function Scene()
 Scene.prototype = Object.create(THREE.Scene.prototype);
 
 /**
- * Initialize scene objects
- * Called automatically by the runtime
+ * Initialize scene objects.
+ * 
+ * Called automatically by the runtime.
+ * 
  * @method initialize
  */
 Scene.prototype.initialize = function()
@@ -88,8 +98,10 @@ Scene.prototype.initialize = function()
 }
 
 /**
- * Update scene
- * Called automatically by the runtime
+ * Update scene objects and the physics world.
+ * 
+ * Called automatically by the runtime.
+ * 
  * @method update
  */
 Scene.prototype.update = function()
@@ -111,7 +123,8 @@ Scene.prototype.update = function()
 }
 
 /**
- * Get camera from scene using cameras uuid
+ * Get camera from scene using cameras uuid.
+ * 
  * @method getCamera
  * @param {String} uuid UUID of the camera
  * @return {Camera} Camera if found, else null
@@ -142,7 +155,8 @@ Scene.prototype.getCamera = function(uuid, obj)
 }
 
 /**
- * Add camera to active cameras list
+ * Add camera to active cameras list.
+ * 
  * @method addCamera
  * @param {Camera} camera
  */
@@ -153,19 +167,21 @@ Scene.prototype.addCamera = function(camera)
 }
 
 /**
- * Update active cameras order
+ * Update active cameras order.
+ * 
  * @method updateCameraOrder
  */
 Scene.prototype.updateCameraOrder = function()
 {
-	this.cameras.sort(function(a,b)
+	this.cameras.sort(function(a, b)
 	{
 		return a.order < b.order;
 	});
 }
 
 /**
- * Remove camera from active camera list
+ * Remove camera from active camera list.
+ * 
  * @param {Camera} camera Camera to be removed
  * @method removeCamera
  */
@@ -179,7 +195,8 @@ Scene.prototype.removeCamera = function(camera)
 }
 
 /**
- * Set scene fog mode
+ * Set scene fog mode.
+ * 
  * @param {Number} mode
  * @method setFogMode
  */
@@ -202,8 +219,10 @@ Scene.prototype.setFogMode = function(mode)
 }
 
 /**
- * Serialize object as JSON
- * Also serializes physics world information
+ * Serialize scene as JSON.
+ * 
+ * Also serializes physics world information.
+ * 
  * @method toJSON
  * @param {Object} meta
  * @return {Object} json
