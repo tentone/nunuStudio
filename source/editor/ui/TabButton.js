@@ -8,6 +8,7 @@ function TabButton(parent, tab)
 	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
+	this.element.style.visibility = "inherit";
 	this.element.style.cursor = "pointer";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	this.element.draggable = true;
@@ -17,7 +18,7 @@ function TabButton(parent, tab)
 
 	//Drag control
 	var initial = new THREE.Vector2(0, 0);
-	//var index = 0;
+	var index = 0;
 
 	this.element.ondragstart = function(event)
 	{
@@ -32,15 +33,15 @@ function TabButton(parent, tab)
 	this.element.ondrag = function(event)
 	{
 		this.style.left = (self.position.x + event.clientX - initial.x) + "px";
+	
+		//self.tab.index = (self.position.x + event.clientX - initial.x) / self.size.x;
+		//self.tab.container.sortByIndex();
 	};
 
 	this.element.ondragend = function(event)
 	{
 		this.style.left = self.position.x + "px";
 		this.style.zIndex = "";
-
-		//self.tab.index = (self.position.x + event.clientX - initial.x) / self.size.x;
-		//self.tab.container.sortByIndex();
 	};
 
 	this.element.onmousedown = function(event)
@@ -163,16 +164,6 @@ TabButton.prototype.updateInterface = function()
 	else
 	{
 		this.element.style.backgroundColor = Editor.theme.buttonColor;
-	}
-
-	//Visibility
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
 	}
 
 	//Icon
