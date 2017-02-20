@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.20 Alpha";
-Nunu.TIMESTAMP = "201702190302";
+Nunu.TIMESTAMP = "201702200225";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -33772,6 +33772,7 @@ ArraybufferUtils.fromBuffer = function(a) {
 function MathUtils() {
 }
 MathUtils.pi2 = 2 * Math.PI;
+MathUtils.pid3 = Math.PI / 3;
 MathUtils.pid2 = Math.PI / 2;
 function ObjectUtils() {
 }

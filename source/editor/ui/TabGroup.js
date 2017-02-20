@@ -55,7 +55,7 @@ function TabGroup(parent)
 	//Options
 	this.mode = TabGroup.TOP;
 	this.buttonSize = new THREE.Vector2(150, 25);
-	this.selected = -1;
+	this.selected = null;
 	this.options = [];
 
 	//Add element to document
@@ -80,12 +80,9 @@ TabGroup.prototype.updateMetadata = function()
 //Get actual tab
 TabGroup.prototype.getActual = function()
 {
-	if(this.selected > -1)
+	if(this.selected !== null)
 	{
-		if(this.options[this.selected] !== null)
-		{
-			return this.options[this.selected];
-		}
+		return this.selected;
 	}
 
 	return null;
@@ -94,9 +91,9 @@ TabGroup.prototype.getActual = function()
 //Close actual tab if its closeable
 TabGroup.prototype.closeActual = function()
 {
-	if(this.selected > -1)
+	if(this.selected !== null)
 	{
-		if(this.options[this.selected].closeable)
+		if(this.selected.closeable)
 		{
 			this.removeTab(this.selected);
 		}
@@ -104,17 +101,25 @@ TabGroup.prototype.closeActual = function()
 }
 
 //Select tab
-TabGroup.prototype.selectTab = function(index)
+TabGroup.prototype.selectTab = function(tab)
 {
-	if(index > -1 && index < this.options.length)
+	//Tab as a TabElement object
+	if(tab instanceof TabElement)
 	{
-		this.selected = index;
-		this.options[index].activate();
+		this.selected = tab;
+		this.selected.activate();
+		this.updateInterface();
+	}
+	//Tab as a index
+	else if(typeof tab === "number" && tab > -1 && tab < this.options.length)
+	{
+		this.selected = this.options[tab];
+		this.selected.activate();
 		this.updateInterface();
 	}
 	else
 	{
-		this.selected = -1;
+		this.selected = null;
 	}
 }
 
@@ -123,7 +128,7 @@ TabGroup.prototype.selectNextTab = function()
 {
 	if(this.options.length > 0)
 	{
-		this.selectTab((this.selected + 1) % this.options.length);
+		this.selectTab((this.selected.index + 1) % this.options.length);
 	}
 }
 
@@ -132,13 +137,13 @@ TabGroup.prototype.selectPreviousTab = function()
 {
 	if(this.options.length > 0)
 	{
-		if(this.selected === 0)
+		if(this.selected.index === 0)
 		{
 			this.selectTab(this.options.length - 1);
 		}
 		else
 		{
-			this.selectTab(this.selected - 1);
+			this.selectTab(this.selected.index - 1);
 		}
 	}
 }
@@ -151,9 +156,9 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
 	tab.button = button;
 
 	this.options.push(tab);
-	if(this.selected === -1)
+	if(this.selected === null)
 	{
-		this.selectTab(0);
+		this.selectTab(tab);
 	}
 
 	return tab;
@@ -177,8 +182,10 @@ TabGroup.prototype.getTab = function(type, obj)
 }
 
 //Remove tab from group
-TabGroup.prototype.removeTab = function(index)
+TabGroup.prototype.removeTab = function(tab)
 {
+	var index = (tab instanceof TabElement) ? tab.index : tab;
+
 	if(index > -1 && index < this.options.length)
 	{
 		//Remove option from list
@@ -202,7 +209,7 @@ TabGroup.prototype.removeTab = function(index)
 		}
 		else
 		{
-			this.selectTab(-1);
+			this.selectTab(null);
 		}
 	}
 }
@@ -215,7 +222,7 @@ TabGroup.prototype.clear = function()
 		this.options.pop().destroy();
 	}
 
-	this.selectTab(-1);
+	this.selectTab(null);
 }
 
 //TODO <EXPERIMENTAL STUFF>
@@ -233,7 +240,7 @@ TabGroup.prototype.sortByIndex = function()
 
 //TODO <EXPERIMENTAL STUFF>
 //Move tab position from origin to target position
-TabGroup.prototype.moveTab = function(origin, target)
+/*TabGroup.prototype.moveTab = function(origin, target)
 {
 	if(target >= this.length)
 	{
@@ -249,7 +256,7 @@ TabGroup.prototype.moveTab = function(origin, target)
 
 	this.updateOptionIndex();
 	this.updateInterface();
-}
+}*/
 
 //Update tabs index
 TabGroup.prototype.updateOptionIndex = function()
@@ -273,9 +280,9 @@ TabGroup.prototype.destroy = function()
 //Update
 TabGroup.prototype.update = function()
 {
-	if(this.selected > -1)
+	if(this.selected !== null)
 	{
-		this.options[this.selected].update();
+		this.selected.update();
 	}
 }
 
@@ -311,7 +318,7 @@ TabGroup.prototype.updateInterface = function()
 	for(var i = 0; i < this.options.length; i++)
 	{
 		var tab = this.options[i];
-		tab.visible = this.visible && (this.selected === i);
+		tab.visible = this.visible && (this.selected === tab);
 		tab.size.copy(tabSize);
 		tab.updateInterface();
 

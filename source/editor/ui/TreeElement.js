@@ -21,7 +21,7 @@ function TreeElement(container)
 	this.element = document.createElement("div");
 	this.element.draggable = true;
 	this.element.style.position = "absolute";
-	this.element.style.width = "100%";
+	this.element.style.width = "inherit";
 	this.element.style.height = "20px";
 	this.element.style.cursor = "pointer";
 	this.element.style.display = "flex";

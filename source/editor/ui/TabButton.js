@@ -17,12 +17,12 @@ function TabButton(parent, tab)
 
 	//Drag control
 	var initial = new THREE.Vector2(0, 0);
-	var index = 0;
+	//var index = 0;
 
 	this.element.ondragstart = function(event)
 	{
 		initial.set(event.clientX, event.clientY);
-		index = self.tab.index;
+		//index = self.tab.index;
 
 		event.dataTransfer.setDragImage(this.cloneNode(false), 0, 0);
 
@@ -39,9 +39,8 @@ function TabButton(parent, tab)
 		this.style.left = self.position.x + "px";
 		this.style.zIndex = "";
 
-		self.tab.index = (self.position.x + event.clientX - initial.x) / self.size.x;
-		
-		self.tab.container.sortByIndex();
+		//self.tab.index = (self.position.x + event.clientX - initial.x) / self.size.x;
+		//self.tab.container.sortByIndex();
 	};
 
 	this.element.onmousedown = function(event)
