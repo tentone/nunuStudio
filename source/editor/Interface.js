@@ -1064,6 +1064,7 @@ Interface.updateInterface = function()
 	Interface.explorerResizable.updateInterface();
 
 	Interface.treeView.updateInterface();
+
 	if(Interface.panel !== null)
 	{
 		Interface.panel.updateInterface();

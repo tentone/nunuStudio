@@ -5,11 +5,15 @@ function Panel(parent, obj)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
 	this.element.style.cursor = "default";
+	this.element.style.top = "0px";
+	this.element.style.left = "0px";
+	this.element.style.width = "100%";
+	this.element.style.height = "100%";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Prevent Drop event
@@ -25,7 +29,6 @@ function Panel(parent, obj)
 	};
 
 	//Attributes
-	this.fitParent = true;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -159,12 +162,6 @@ Panel.prototype.destroy = function()
 //Update panel ui
 Panel.prototype.updateInterface = function()
 {
-	if(this.fitParent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-	
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -173,11 +170,6 @@ Panel.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-	
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }
 
 //Update panel information

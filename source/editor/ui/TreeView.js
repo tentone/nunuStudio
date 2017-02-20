@@ -5,11 +5,15 @@ function TreeView(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
 	this.element.style.cursor = "default";
+	this.element.style.top = "0px";
+	this.element.style.left = "0px";
+	this.element.style.width = "100%";
+	this.element.style.height = "100%";	
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Label
@@ -133,12 +137,6 @@ TreeView.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = "100%";//this.size.x + "px";
-	this.element.style.height = "100%";//this.size.y + "px";
 
 	//Update childs
 	for(var i = 0; i < this.children.length; i++)

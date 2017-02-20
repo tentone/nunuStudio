@@ -49,6 +49,9 @@ TabElement.prototype.updateMetadata = function(){}
 //Activate tab
 TabElement.prototype.activate = function(){}
 
+//Deactivate tab
+TabElement.prototype.deactivate = function(){}
+
 //Attach object to tab
 TabElement.prototype.attach = function(obj){}
 
@@ -64,19 +67,19 @@ TabElement.prototype.update = function(){}
 //Close tab
 TabElement.prototype.close = function()
 {
-	this.container.removeTab(this.index);
+	this.container.removeTab(this);
 }
 
 //Selects this tab
 TabElement.prototype.select = function()
 {
-	this.container.selectTab(this.index);
+	this.container.selectTab(this);
 }
 
 //Check if tab is selected
 TabElement.prototype.isSelected = function()
 {
-	return this.index === this.container.selected;
+	return this === this.container.selected;
 }
 
 //Destroy
