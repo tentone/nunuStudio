@@ -17,10 +17,13 @@ function TabButton(parent, tab)
 
 	//Drag control
 	var initial = new THREE.Vector2(0, 0);
+	var index = 0;
 
 	this.element.ondragstart = function(event)
 	{
 		initial.set(event.clientX, event.clientY);
+		index = self.tab.index;
+
 		event.dataTransfer.setDragImage(this.cloneNode(false), 0, 0);
 
 		this.style.zIndex = "1000";
@@ -35,16 +38,10 @@ function TabButton(parent, tab)
 	{
 		this.style.left = self.position.x + "px";
 		this.style.zIndex = "";
-	}
 
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
+		self.tab.index = (self.position.x + event.clientX - initial.x) / self.size.x;
+		
+		self.tab.container.sortByIndex();
 	};
 
 	this.element.onmousedown = function(event)
@@ -52,12 +49,12 @@ function TabButton(parent, tab)
 		//Select tab on mouse left click
 		if(event.which - 1 === Mouse.LEFT)
 		{
-			tab.container.selectTab(tab.index);
+			self.tab.container.selectTab(self.tab.index);
 		}
 		//Close tab on mouse middle click
 		else if(tab.closeable && event.which - 1 === Mouse.MIDDLE)
 		{
-			tab.container.removeTab(tab.index);
+			self.tab.container.removeTab(self.tab.index);
 		}
 	};
 
@@ -92,6 +89,7 @@ function TabButton(parent, tab)
 	this.text.style.textOverflow = "ellipsis";
 	this.text.style.whiteSpace = "nowrap";
 	this.text.style.color = Editor.theme.textColor;
+	this.text.style.top = "25%";
 	this.text.innerHTML = tab.title;
 	this.element.appendChild(this.text);
 
@@ -116,17 +114,18 @@ function TabButton(parent, tab)
 
 	this.close.onclick = function()
 	{
-		tab.close();
+		self.tab.close();
 	};
 
-	//Element atributes
-	this.size = new THREE.Vector2(150, 50);
+	//Attributes
+	this.size = new THREE.Vector2(0, 0);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
 	//Tab
 	this.tab = tab;
 
+	//Add to parent
 	this.parent.appendChild(this.element);
 }
 
@@ -184,7 +183,6 @@ TabButton.prototype.updateInterface = function()
 	this.icon.style.height = (this.size.y * 0.6) + "px";
 
 	//Text
-	this.text.style.top = "25%";
 	this.text.style.left = this.size.y + "px";
 	this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
 	this.text.style.height = this.size.y + "px";

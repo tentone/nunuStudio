@@ -21,6 +21,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "KinectDevice",
         "LeapMotion",
         "Material",
+        "MathUtils",
         "Mesh",
         "Mesh2shape",
         "Mouse",
@@ -122,7 +123,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Math",
             "name": "Math",
-            "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3"
+            "description": "MathUtils contains auxiliar values and function to help with mathematical operations."
         },
         {
             "displayName": "Meshes",
