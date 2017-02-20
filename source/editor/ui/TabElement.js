@@ -10,6 +10,8 @@ function TabElement(parent, closeable, container, index, title, icon)
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
 	this.element.style.overflow = "hidden";
+	this.element.style.width = "100%";
+	this.element.style.height = "100%";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	this.element.ondrop = function(event)
@@ -111,7 +113,14 @@ TabElement.prototype.setName = function(text)
 TabElement.prototype.updateInterface = function()
 {
 	//Visibility
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
+	if(this.visible)
+	{
+		this.element.style.visibility = "inherit";
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
+	}
 
 	//Element
 	this.element.style.width = this.size.x + "px";
