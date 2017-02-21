@@ -318,7 +318,7 @@ TabGroup.prototype.updateInterface = function()
 	for(var i = 0; i < this.options.length; i++)
 	{
 		var tab = this.options[i];
-		tab.visible = (this.selected === tab);
+		tab.visible = this.visible && (this.selected === tab);
 		tab.size.copy(tabSize);
 		tab.updateInterface();
 
