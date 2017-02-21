@@ -27,7 +27,7 @@
 	},
 	"code": {
 		"theme": "monokai",
-		"keymap": "vim",
+		"keymap": "sublime",
 		"fontSize": 14,
 		"lineNumbers": true,
 		"lineWrapping": false,

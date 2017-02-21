@@ -25,13 +25,11 @@ function TabGroup(parent)
 	this.buttons = document.createElement("div");
 	this.buttons.style.overflow = "hidden";
 	this.buttons.style.position = "absolute";
-	this.buttons.style.visibility = "inherit";
 	this.element.appendChild(this.buttons);
 
 	//Tab
 	this.tab = document.createElement("div");
 	this.tab.style.position = "absolute";
-	this.tab.style.visibility = "inherit";
 	this.element.appendChild(this.tab);
 
 	//Empty message
@@ -182,10 +180,15 @@ TabGroup.prototype.getTab = function(type, obj)
 }
 
 //Remove tab from group
-TabGroup.prototype.removeTab = function(tab)
-{
-	var index = (tab instanceof TabElement) ? tab.index : tab;
+TabGroup.prototype.removeTab = function(index)
+{	
+	//If index is an object get the actual index
+	if(index instanceof TabElement)
+	{
+		index = this.options.indexOf(index);
+	}
 
+	//Check if the index is in range
 	if(index > -1 && index < this.options.length)
 	{
 		//Remove option from list
@@ -227,36 +230,21 @@ TabGroup.prototype.clear = function()
 
 //TODO <EXPERIMENTAL STUFF>
 //Sort tabs by their index (this inverse of updateOptionIndex)
-TabGroup.prototype.sortByIndex = function()
+TabGroup.prototype.draggingTab = function(tab, position)
 {
+	/*var index = tab.index;
+	tab.index = position;
+
 	this.options.sort(function(a, b)
 	{
 		return a.index > b.index;
 	});
 
-	this.updateOptionIndex();
-	this.updateInterface();
+	tab.index = index;
+
+	//this.updateOptionIndex();
+	this.updateInterface();*/
 }
-
-//TODO <EXPERIMENTAL STUFF>
-//Move tab position from origin to target position
-/*TabGroup.prototype.moveTab = function(origin, target)
-{
-	if(target >= this.length)
-	{
-		var k = target - this.length;
-
-		while((k--) + 1)
-		{
-			this.options.push(undefined);
-		}
-	}
-
-	this.options.splice(target, 0, this.options.splice(origin, 1)[0]);
-
-	this.updateOptionIndex();
-	this.updateInterface();
-}*/
 
 //Update tabs index
 TabGroup.prototype.updateOptionIndex = function()
@@ -285,6 +273,8 @@ TabGroup.prototype.update = function()
 		this.selected.update();
 	}
 }
+
+//Recalculates the 
 
 //Update interface
 TabGroup.prototype.updateInterface = function()
@@ -332,11 +322,11 @@ TabGroup.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
 
 	if(this.mode === TabGroup.TOP)

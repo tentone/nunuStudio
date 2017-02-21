@@ -5,24 +5,10 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	MaterialEditor.call(this, parent, closeable, container, index);
 
 	var self = this;
-	
-	//Skinning
-	this.form.addText("Animation");
-	this.skinning = new CheckBox(this.form.element);
-	this.form.addText("Skinning", true);
-	this.skinning.size.set(20, 15);
-	this.skinning.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.skinning = self.skinning.getValue();
-		}
-	});
-	this.form.add(this.skinning);
 
 	//Morph targets
 	this.morphTargets = new CheckBox(this.form.element);
-	this.form.addText("Morph targets", true);
+	this.form.addText("Morph targets");
 	this.morphTargets.size.set(20, 15);
 	this.morphTargets.setOnChange(function()
 	{
@@ -130,7 +116,6 @@ LambertMaterialEditor.prototype.attach = function(material, materialFile)
 {
 	MaterialEditor.prototype.attach.call(this, material, materialFile);
 
-	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);
 	this.wireframe.setValue(material.wireframe);
 	this.shading.setValue(material.shading);

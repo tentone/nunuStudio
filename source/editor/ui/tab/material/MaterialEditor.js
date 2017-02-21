@@ -426,47 +426,47 @@ MaterialEditor.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
+
+		//Update main
+		this.main.visible = this.visible;
+		this.main.size.copy(this.size);
+		this.main.updateInterface();
+
+		//Update preview
+		this.preview.visible = this.visible;
+		this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
+		this.preview.updateInterface();
+
+		//Update canvas
+		this.canvas.visible = this.visible;
+		this.canvas.size.set(this.preview.divA.offsetWidth, this.preview.divA.offsetHeight);
+		this.canvas.updateInterface();
+
+		//Update renderer and canvas
+		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
+		this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
+		this.camera.updateProjectionMatrix();
+
+		//Update children
+		for(var i = 0; i < this.children.length; i++)
+		{
+			this.children[i].visible = this.visible;
+			this.children[i].updateInterface();
+		}
+
+		//Update form
+		this.form.visible = this.visible;
+		this.form.updateInterface();
+
+		//Update element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
-
-	//Update main
-	this.main.visible = this.visible;
-	this.main.size.copy(this.size);
-	this.main.updateInterface();
-
-	//Update preview
-	this.preview.visible = this.visible;
-	this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
-	this.preview.updateInterface();
-
-	//Update canvas
-	this.canvas.visible = this.visible;
-	this.canvas.size.set(this.preview.divA.offsetWidth, this.preview.divA.offsetHeight);
-	this.canvas.updateInterface();
-
-	//Update renderer and canvas
-	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
-	this.camera.updateProjectionMatrix();
-
-	//Update children
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].visible = this.visible;
-		this.children[i].updateInterface();
-	}
-
-	//Update form
-	this.form.visible = this.visible;
-	this.form.updateInterface();
-
-	//Update element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }

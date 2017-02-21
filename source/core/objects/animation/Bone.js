@@ -8,5 +8,4 @@ function Bone()
 	this.name = "bone";
 }
 
-//Super prototype
 Bone.prototype = Object.create(THREE.Bone.prototype);

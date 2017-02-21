@@ -642,42 +642,42 @@ ParticleEditor.prototype.updateInterface = function()
 	//Set visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
+
+		//Main container
+		this.main.visible = this.visible;
+		this.main.size.copy(this.size);
+		this.main.updateInterface();
+
+		//Canvas
+		this.canvas.visible = this.visible;
+		this.canvas.size.set(this.main.divA.offsetWidth, this.main.divA.offsetHeight);
+		this.canvas.updateInterface();
+
+		//Renderer and canvas
+		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
+		this.camera.aspect = this.canvas.size.x/this.canvas.size.y
+		this.camera.updateProjectionMatrix();
+
+		//Children
+		for(var i = 0; i < this.children.length; i++)
+		{
+			this.children[i].visible = this.visible;
+			this.children[i].updateInterface();
+		}
+
+		//Form
+		this.form.visible = this.visible;
+		this.form.updateInterface();
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
-
-	//Update main container
-	this.main.visible = this.visible;
-	this.main.size.copy(this.size);
-	this.main.updateInterface();
-
-	//Update canvas
-	this.canvas.visible = this.visible;
-	this.canvas.size.set(this.main.divA.offsetWidth, this.main.divA.offsetHeight);
-	this.canvas.updateInterface();
-
-	//Update renderer and canvas
-	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.camera.aspect = this.canvas.size.x/this.canvas.size.y
-	this.camera.updateProjectionMatrix();
-
-	//Update children
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].visible = this.visible;
-		this.children[i].updateInterface();
-	}
-
-	//Update form
-	this.form.visible = this.visible;
-	this.form.updateInterface();
-
-	//Update element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }
