@@ -8,7 +8,6 @@ function TabButton(parent, tab)
 	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
-	this.element.style.visibility = "inherit";
 	this.element.style.cursor = "pointer";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	this.element.draggable = true;
@@ -17,13 +16,14 @@ function TabButton(parent, tab)
 	var self = this;
 
 	//Drag control
-	var initial = new THREE.Vector2(0, 0);
-	var index = 0;
+	var _mouse = new THREE.Vector2(0, 0);
+	var _position = new THREE.Vector2(0, 0);
+	var _index = 0;
 
 	this.element.ondragstart = function(event)
 	{
-		initial.set(event.clientX, event.clientY);
-		//index = self.tab.index;
+		_mouse.set(event.clientX, event.clientY);
+		_position.copy(self.position);
 
 		event.dataTransfer.setDragImage(this.cloneNode(false), 0, 0);
 
@@ -32,15 +32,20 @@ function TabButton(parent, tab)
 
 	this.element.ondrag = function(event)
 	{
-		this.style.left = (self.position.x + event.clientX - initial.x) + "px";
-	
-		//self.tab.index = (self.position.x + event.clientX - initial.x) / self.size.x;
-		//self.tab.container.sortByIndex();
+		if(self.tab.container.mode === TabGroup.TOP)
+		{
+			this.style.left = (_position.x + event.clientX - _mouse.x) + "px";
+			
+			_index = (_position.x + event.clientX - _mouse.x) / self.size.x;
+
+			self.tab.container.draggingTab(self.tab, _index);
+		}
 	};
 
 	this.element.ondragend = function(event)
 	{
-		this.style.left = self.position.x + "px";
+		this.style.left = _position.x + "px";
+		this.style.top = _position.y + "px";
 		this.style.zIndex = "";
 	};
 
@@ -49,12 +54,12 @@ function TabButton(parent, tab)
 		//Select tab on mouse left click
 		if(event.which - 1 === Mouse.LEFT)
 		{
-			self.tab.container.selectTab(self.tab.index);
+			self.tab.container.selectTab(self.tab);
 		}
 		//Close tab on mouse middle click
 		else if(tab.closeable && event.which - 1 === Mouse.MIDDLE)
 		{
-			self.tab.container.removeTab(self.tab.index);
+			self.tab.container.removeTab(self.tab);
 		}
 	};
 
@@ -98,7 +103,7 @@ function TabButton(parent, tab)
 	this.close.draggable = false;
 	this.close.style.position = "absolute";
 	this.close.style.opacity = 0.5;
-	this.close.style.visibility = tab.closeable ? "visible" : "hidden";
+	this.close.style.display = (tab.closeable) ? "block" : "none";
 	this.close.src = "editor/files/icons/misc/close.png";
 	this.element.appendChild(this.close);
 	
@@ -156,6 +161,16 @@ TabButton.prototype.destroy = function()
 //Update Interface
 TabButton.prototype.updateInterface = function()
 {
+	//Visiblity
+	if(this.visible)
+	{
+		this.element.style.display = "block";
+	}
+	else
+	{
+		this.element.style.display = "none";
+	}
+
 	//Button
 	if(this.tab.isSelected())
 	{
@@ -178,7 +193,7 @@ TabButton.prototype.updateInterface = function()
 	this.text.style.height = this.size.y + "px";
 
 	//Close
-	this.close.style.visibility = this.tab.closeable ? "visible" : "hidden";
+	this.close.style.display = (this.tab.closeable) ? "block" : "none";
 	this.close.style.width = (this.size.y * 0.4) + "px";
 	this.close.style.height = (this.size.y * 0.4) + "px";
 	this.close.style.top = (this.size.y * 0.3) + "px";

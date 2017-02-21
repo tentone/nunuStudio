@@ -1019,12 +1019,12 @@ Editor.updateObjectViews = function()
 	Editor.updateAssetExplorer();
 
 	//TODO <REMOVE TEST CODE>
-	var delta = Date.now() - start;
-	console.log("Update " + (update++) + " ObjectView: " + delta + "ms");
-	console.log("    Treeview " + treeDelta + "ms");
-	console.log("    Panel " + panelDelta + "ms");
-	console.log("    Tabs " + tabsDelta + "ms");
-	console.log("    Assets " + assetDelta + "ms\n\n");
+	//var delta = Date.now() - start;
+	//console.log("Update " + (update++) + " ObjectView: " + delta + "ms");
+	//console.log("    Treeview " + treeDelta + "ms");
+	//console.log("    Panel " + panelDelta + "ms");
+	//console.log("    Tabs " + tabsDelta + "ms");
+	//console.log("    Assets " + assetDelta + "ms\n\n");
 }
 
 //Update tab names to match objects actual info

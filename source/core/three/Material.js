@@ -285,12 +285,6 @@ THREE.Material.prototype.toJSON = function(meta)
 	{
 		data.morphNormals = this.morphNormals;
 	}
-	
-	//Skinning
-	if(this.skinning !== undefined)
-	{
-		data.skinning = this.skinning;
-	}
 
 	//Copied from Object3D.toJSON
 	function extractFromCache( cache)

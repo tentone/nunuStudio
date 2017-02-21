@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.20 Alpha";
-Nunu.TIMESTAMP = "201702200225";
+Nunu.TIMESTAMP = "201702211743";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -4205,11 +4205,11 @@ Nunu.webvrAvailable = function() {
   function Vb(d) {
     this.points = void 0 === d ? [] : d;
   }
-  function yc(d, a, b, c) {
+  function yc(d, m, a, b) {
     this.v0 = d;
-    this.v1 = a;
-    this.v2 = b;
-    this.v3 = c;
+    this.v1 = m;
+    this.v2 = a;
+    this.v3 = b;
   }
   function zc(d, a, b) {
     this.v0 = d;
@@ -11023,9 +11023,9 @@ Nunu.webvrAvailable = function() {
           }
           for (var g in h) {
             for (var p = [], r = [], q = 0;q !== n[k].morphTargets.length;++q) {
-              var l = n[k];
-              p.push(l.time);
-              r.push(l.morphTarget === g ? 1 : 0);
+              var u = n[k];
+              p.push(u.time);
+              r.push(u.morphTarget === g ? 1 : 0);
             }
             c.push(new wc(".morphTargetInfluence[" + g + "]", p, r));
           }
@@ -30976,7 +30976,6 @@ THREE.Material.prototype.toJSON = function(a) {
   "round" !== this.wireframeLinejoin && (l.wireframeLinejoin = this.wireframeLinejoin);
   l.morphTargets = this.morphTargets;
   void 0 !== this.morphNormals && (l.morphNormals = this.morphNormals);
-  void 0 !== this.skinning && (l.skinning = this.skinning);
   if (void 0 === a) {
     var b = g(a.textures);
     a = g(a.images);
@@ -31861,7 +31860,6 @@ MaterialLoader.prototype.parse = function(a) {
   void 0 !== a.wireframeLinejoin && (b.wireframeLinejoin = a.wireframeLinejoin);
   void 0 !== a.morphTargets && (b.morphTargets = a.morphTargets);
   void 0 !== a.morphNormals && (b.morphNormals = a.morphNormals);
-  void 0 !== a.skinning && (b.skinning = a.skinning);
   void 0 !== a.size && (b.size = a.size);
   void 0 !== a.sizeAttenuation && (b.sizeAttenuation = a.sizeAttenuation);
   void 0 !== a.map && (b.map = g(a.map));

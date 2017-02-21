@@ -328,8 +328,7 @@ SceneEditor.prototype.updateInterface = function()
 	//Set visibilty
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
-		this.canvas.style.visibility = "visible";
+		this.element.style.display = "block";
 
 		if(Settings.general.showStats)
 		{
@@ -339,41 +338,39 @@ SceneEditor.prototype.updateInterface = function()
 		{
 			this.stats.dom.style.visibility = "hidden";
 		}
+
+		//Fullscreen button
+		this.fullscreenButton.position.x = this.position.x + this.size.x - this.fullscreenButton.size.x - 5;
+		this.fullscreenButton.position.y = this.position.y + this.size.y - this.fullscreenButton.size.y - 5;
+		this.fullscreenButton.visible = this.visible && this.showButtonsFullscreen;
+		this.fullscreenButton.updateInterface();
+
+		//VR button
+		this.vrButton.position.x = this.fullscreenButton.position.x - this.vrButton.size.x - 10;
+		this.vrButton.position.y = this.fullscreenButton.position.y;
+		this.vrButton.visible = this.visible && this.showButtonsVr;
+		this.vrButton.updateInterface();
+
+		//Camera mode button
+		this.cameraButton.position.x = this.position.x + this.size.x - this.cameraButton.size.x - 5;
+		this.cameraButton.position.y = 5;
+		this.cameraButton.visible = this.visible && this.showButtonsCameraMode;
+		this.cameraButton.updateInterface();
+
+		//Update canvas
+		this.canvas.width = this.size.x;
+		this.canvas.height = this.size.y;
+		this.canvas.style.width = this.size.x + "px";
+		this.canvas.style.height = this.size.y + "px";
+
+		//Update element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
-		this.canvas.style.visibility = "hidden";
-		this.stats.dom.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
-
-	//Fullscreen button
-	this.fullscreenButton.position.x = this.position.x + this.size.x - this.fullscreenButton.size.x - 5;
-	this.fullscreenButton.position.y = this.position.y + this.size.y - this.fullscreenButton.size.y - 5;
-	this.fullscreenButton.visible = this.visible && this.showButtonsFullscreen;
-	this.fullscreenButton.updateInterface();
-
-	//VR button
-	this.vrButton.position.x = this.fullscreenButton.position.x - this.vrButton.size.x - 10;
-	this.vrButton.position.y = this.fullscreenButton.position.y;
-	this.vrButton.visible = this.visible && this.showButtonsVr;
-	this.vrButton.updateInterface();
-
-	//Camera mode button
-	this.cameraButton.position.x = this.position.x + this.size.x - this.cameraButton.size.x - 5;
-	this.cameraButton.position.y = 5;
-	this.cameraButton.visible = this.visible && this.showButtonsCameraMode;
-	this.cameraButton.updateInterface();
-
-	//Update canvas
-	this.canvas.width = this.size.x;
-	this.canvas.height = this.size.y;
-	this.canvas.style.width = this.size.x + "px";
-	this.canvas.style.height = this.size.y + "px";
-
-	//Update element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }

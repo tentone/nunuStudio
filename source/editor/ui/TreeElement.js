@@ -21,11 +21,9 @@ function TreeElement(container)
 	this.element = document.createElement("div");
 	this.element.draggable = true;
 	this.element.style.position = "absolute";
-	this.element.style.width = "inherit";
+	this.element.style.width = "100%";
 	this.element.style.height = "20px";
 	this.element.style.cursor = "pointer";
-	this.element.style.display = "flex";
-	this.element.style.alignItems = "center";
 
 	this.element.onmouseenter = function()
 	{
@@ -44,7 +42,6 @@ function TreeElement(container)
 	this.arrow = document.createElement("img");
 	this.arrow.draggable = false;
 	this.arrow.src = "editor/files/icons/misc/arrow_down.png";
-	this.arrow.style.visibility = "inherit";
 	this.arrow.style.position = "absolute";
 	this.arrow.style.opacity = 0.5;
 	this.arrow.style.width = "15px";
@@ -68,7 +65,6 @@ function TreeElement(container)
 	this.icon.draggable = false;
 	this.icon.src = "editor/files/icons/misc/arrow_down.png";
 	this.icon.style.position = "absolute";
-	this.icon.style.visibility = "inherit";
 	this.icon.style.pointerEvents = "none";
 	this.icon.style.width = "15px";
 	this.icon.style.height = "15px";
@@ -78,7 +74,6 @@ function TreeElement(container)
 
 	//Text
 	this.label = document.createElement("div");
-	this.label.style.visibility = "inherit";
 	this.label.style.overflow = "hidden";
 	this.label.style.position = "absolute";
 	this.label.style.pointerEvents = "none";
@@ -86,7 +81,7 @@ function TreeElement(container)
 	this.element.appendChild(this.label);
 
 	//Attributes
-	this.size = new THREE.Vector2(0, 20);
+	this.size = new THREE.Vector2(0, 0);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
@@ -249,8 +244,6 @@ function TreeElement(container)
 	//Drop event (fired on the drop target)
 	this.element.ondrop = function(event)
 	{
-		event.preventDefault();
-
 		//Collect element from buffer
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = DragBuffer.popDragElement(uuid);
@@ -440,13 +433,13 @@ TreeElement.prototype.setVisibility = function(visible)
 {
 	this.visible = visible;
 
-	if(visible)
+	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
 }
 
@@ -456,40 +449,39 @@ TreeElement.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
-
-	var offset = this.level * 20;
-
-	//Arrow
-	if(this.obj.isEmpty())
-	{
-		this.arrow.style.visibility = "hidden";
-	}
-	else
-	{
-		this.arrow.style.visibility = "inherit";
-	}
-	this.arrow.style.left = (5 + offset) + "px";
-
-	//Icon
-	this.icon.style.left = (25 + offset) + "px";
-
-	//Text
-	this.label.style.left = (45 + offset) + "px";
-	//this.label.style.width = (this.element.offsetWidth - (45 + offset)) + "px";
+		this.element.style.display = "block";
 	
-	//Base
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
+		var offset = this.level * 20;
 
-	//Update childs
-	for(var i = 0; i < this.children.length; i++)
+		//Arrow
+		if(this.obj.isEmpty())
+		{
+			this.arrow.style.display = "none";
+		}
+		else
+		{
+			this.arrow.style.display = "block";
+			this.arrow.style.left = (5 + offset) + "px";
+		}
+
+		//Icon
+		this.icon.style.left = (25 + offset) + "px";
+
+		//Text
+		this.label.style.left = (45 + offset) + "px";
+
+		//Base
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+
+		//Update childs
+		for(var i = 0; i < this.children.length; i++)
+		{
+			this.children[i].updateInterface();
+		}
+	}
+	else
 	{
-		this.children[i].updateInterface();
+		this.element.style.display = "none";
 	}
 }
