@@ -165,43 +165,43 @@ TabButton.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.display = "block";
+
+		//Button
+		if(this.tab.isSelected())
+		{
+			this.element.style.backgroundColor = Editor.theme.buttonOverColor;
+		}
+		else
+		{
+			this.element.style.backgroundColor = Editor.theme.buttonColor;
+		}
+
+		//Icon
+		this.icon.style.top = (this.size.y * 0.2) + "px";
+		this.icon.style.left = (this.size.y * 0.2) + "px"
+		this.icon.style.width = (this.size.y * 0.6) + "px";
+		this.icon.style.height = (this.size.y * 0.6) + "px";
+
+		//Text
+		this.text.style.left = this.size.y + "px";
+		this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
+		this.text.style.height = this.size.y + "px";
+
+		//Close
+		this.close.style.display = (this.tab.closeable) ? "block" : "none";
+		this.close.style.width = (this.size.y * 0.4) + "px";
+		this.close.style.height = (this.size.y * 0.4) + "px";
+		this.close.style.top = (this.size.y * 0.3) + "px";
+		this.close.style.right = (this.size.y * 0.3) + "px";
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.display = "none";
 	}
-
-	//Button
-	if(this.tab.isSelected())
-	{
-		this.element.style.backgroundColor = Editor.theme.buttonOverColor;
-	}
-	else
-	{
-		this.element.style.backgroundColor = Editor.theme.buttonColor;
-	}
-
-	//Icon
-	this.icon.style.top = (this.size.y * 0.2) + "px";
-	this.icon.style.left = (this.size.y * 0.2) + "px"
-	this.icon.style.width = (this.size.y * 0.6) + "px";
-	this.icon.style.height = (this.size.y * 0.6) + "px";
-
-	//Text
-	this.text.style.left = this.size.y + "px";
-	this.text.style.width = (this.size.x - 2 * this.size.y) + "px";
-	this.text.style.height = this.size.y + "px";
-
-	//Close
-	this.close.style.display = (this.tab.closeable) ? "block" : "none";
-	this.close.style.width = (this.size.y * 0.4) + "px";
-	this.close.style.height = (this.size.y * 0.4) + "px";
-	this.close.style.top = (this.size.y * 0.3) + "px";
-	this.close.style.right = (this.size.y * 0.3) + "px";
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }
