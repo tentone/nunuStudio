@@ -121,7 +121,7 @@ ContextMenu.prototype.updateInterface = function()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Element position and size
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";

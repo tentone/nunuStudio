@@ -24,6 +24,7 @@ function TreeElement(container)
 	this.element.style.width = "100%";
 	this.element.style.height = "20px";
 	this.element.style.cursor = "pointer";
+	this.element.style.boxSizing = "border-box";
 
 	this.element.onmouseenter = function()
 	{
@@ -233,12 +234,24 @@ function TreeElement(container)
 	//Drag end (fired on the draggable object, called after of ondrop on the drop target)
 	this.element.ondragend = function(event)
 	{
+		this.style.border = "";
+
 		//Try to remove event from buffer
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = DragBuffer.popDragElement(uuid);
 
 		//To avoid mouse lock after drag
 		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
+	};
+
+	this.element.ondragover = function(event)
+	{
+		this.style.border = "thin solid #999999";
+	};
+
+	this.element.ondragleave = function()
+	{
+		this.style.border = "";
 	};
 
 	//Drop event (fired on the drop target)

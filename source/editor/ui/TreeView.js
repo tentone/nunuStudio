@@ -132,16 +132,16 @@ TreeView.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+
+		//Update childs
+		for(var i = 0; i < this.children.length; i++)
+		{
+			this.children[i].updateInterface();
+		}
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
-	}
-
-	//Update childs
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].updateInterface();
 	}
 }
 

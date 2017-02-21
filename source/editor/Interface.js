@@ -906,6 +906,7 @@ Interface.initialize = function()
 		}, Interface.fileDir + "icons/platform/linux.png");
 	}
 
+	//TODO <ADD CODE HERE>
 	if(FileSystem.fileExists("../nwjs/mac"))
 	{
 		publish.addOption("macOS", function()
