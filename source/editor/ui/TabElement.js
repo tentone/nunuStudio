@@ -10,8 +10,6 @@ function TabElement(parent, closeable, container, index, title, icon)
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
 	this.element.style.overflow = "hidden";
-	this.element.style.width = "100%";
-	this.element.style.height = "100%";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	this.element.ondrop = function(event)
@@ -115,7 +113,7 @@ TabElement.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "inherit";
+		this.element.style.visibility = "visible";
 	}
 	else
 	{
@@ -123,6 +121,8 @@ TabElement.prototype.updateInterface = function()
 	}
 
 	//Element
+	this.element.style.top = this.position.y + "px";
+	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
 }

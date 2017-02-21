@@ -49,7 +49,7 @@ Element.prototype.updateInterface = function()
 		this.size.y = this.parent.offsetHeight; 
 	}
 	
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -59,7 +59,7 @@ Element.prototype.updateInterface = function()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Update element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
