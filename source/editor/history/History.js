@@ -1,11 +1,14 @@
 "use strict";
 
 //Stores program changes history
-function History()
+function History(program)
 {
+	//Program
+	this.program = program;
+
 	//Actions list and history size limit
 	this.actions = [];
-	this.size = 20;
+	this.size = 50;
 
 	//Actual state
 	this.state = 0;
@@ -60,7 +63,7 @@ History.prototype.undo = function()
 				action.object.destroy();
 			}
 		}
-		else if(action.target === Action.TARGET_RESOURCE)
+		else if(action.target === Action.TARGET_TEXTURE)
 		{
 			//TODO <ADD CODE HERE>
 		}

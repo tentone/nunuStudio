@@ -934,10 +934,10 @@ Interface.initialize = function()
 		Editor.undo();
 	}, Interface.fileDir + "icons/misc/undo.png");
 
-	Interface.editor.addOption("Redo", function()
+	/*Interface.editor.addOption("Redo", function()
 	{
 		Editor.redo();
-	}, Interface.fileDir + "icons/misc/redo.png");
+	}, Interface.fileDir + "icons/misc/redo.png");*/
 
 	Interface.editor.addOption("Copy", function()
 	{

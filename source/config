@@ -1,0 +1,38 @@
+{
+	"general": {
+		"theme": "dark",
+		"filePreviewSize": 70,
+		"showStats": false,
+		"showUuid": false
+	},
+	"editor": {
+		"angleFormat": 0,
+		"gridSize": 500,
+		"gridSpacing": 5,
+		"gridEnabled": true,
+		"axisEnabled": true,
+		"cameraPreviewEnabled": true,
+		"cameraPreviewPercentage": 0.35,
+		"lockMouse": true,
+		"transformationSpace": "world"
+	},
+	"render": {
+		"followProject": false,
+		"toneMapping": 0,
+		"toneMappingExposure": 1,
+		"toneMappingWhitepoint": 1,
+		"antialiasing": true,
+		"shadows": true,
+		"shadowsType": 2
+	},
+	"code": {
+		"theme": "monokai",
+		"keymap": "sublime",
+		"fontSize": 14,
+		"lineNumbers": true,
+		"lineWrapping": false,
+		"autoCloseBrackets": true,
+		"highlightActiveLine": false,
+		"showMatchesOnScrollbar": true
+	}
+}

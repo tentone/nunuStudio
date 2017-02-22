@@ -18,6 +18,10 @@ function TextureAsset(parent)
 		{
 			Constructor = VideoTextureEditor;
 		}
+		else if(self.texture instanceof CanvasTexture)
+		{
+			Constructor = CanvasTextureEditor;
+		}
 		else if(self.texture instanceof CubeTexture)
 		{
 			Constructor = CubeTextureEditor;

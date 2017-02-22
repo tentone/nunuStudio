@@ -22,7 +22,7 @@
  * @type {DOM}
  */
 function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
-{
+{	
 	var video = document.createElement("video");
 	video.autoplay = true;
 	video.loop = true;
@@ -82,7 +82,8 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 WebcamTexture.prototype = Object.create(THREE.Texture.prototype);
 
 /**
- * Dispose webcam texture
+ * Dispose webcam texture.
+ * 
  * @method dispose
  */
 WebcamTexture.prototype.dispose = function()

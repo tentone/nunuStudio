@@ -259,36 +259,38 @@ TextureEditor.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
+
+		//Dual division
+		this.division.visible = this.visible;
+		this.division.size.copy(this.size);
+		this.division.updateInterface();
+
+		//Canvas
+		this.canvas.visible = this.visible;
+		this.canvas.size.set(this.division.divA.offsetWidth, this.division.divA.offsetHeight);
+		this.canvas.updateInterface();
+		
+		//Renderer
+		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
+		this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
+		this.camera.mode = (this.camera.aspect > 1) ? OrthographicCamera.RESIZE_HORIZONTAL : OrthographicCamera.RESIZE_VERTICAL;
+		this.camera.updateProjectionMatrix();
+
+		//Form
+		this.form.visible = this.visible;
+		this.form.updateInterface();
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
 	
-	//Dual division
-	this.division.visible = this.visible;
-	this.division.size.copy(this.size);
-	this.division.updateInterface();
 
-	//Canvas
-	this.canvas.visible = this.visible;
-	this.canvas.size.set(this.division.divA.offsetWidth, this.division.divA.offsetHeight);
-	this.canvas.updateInterface();
-	
-	//Renderer
-	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
-	this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
-	this.camera.mode = (this.camera.aspect > 1) ? OrthographicCamera.RESIZE_HORIZONTAL : OrthographicCamera.RESIZE_VERTICAL;
-	this.camera.updateProjectionMatrix();
-
-	//Update form
-	this.form.visible = this.visible;
-	this.form.updateInterface();
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }

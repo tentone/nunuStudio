@@ -23,25 +23,25 @@
  */
 
 /**
- * Image is used to store a DOM canvas element
+ * Image is used to store a DOM canvas element.
  * 
  * @property image
  * @type {DOM}
  */
 /**
- * Canvas context 2D, can be used to draw content do the canvas texture
+ * Canvas context 2D, can be used to draw content do the canvas texture.
  * 
  * @property context
  * @type {Context2D}
  */
 /**
- * Canvas height
+ * Canvas height.
  * 
  * @property height
  * @type {Number}
  */
 /**
- * Canvas width
+ * Canvas width.
  * 
  * @property width
  * @type {Number}
@@ -56,16 +56,9 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 	this.width = (width !== undefined) ? width : 512;
 	this.height = (height !== undefined) ? height : 512;
 
-	//Canvas size
-	this.image.width = width;
-	this.image.height = height;
-
-	//2D drawing conxtext
 	this.context = this.image.getContext("2d");
-	this.context.font = "Normal 55px Arial";
-	this.context.textAlign = "center";
-	this.context.fillStyle = "#FF0000";
-	this.context.fillText("Canvas Texture", this.width/2, this.height/2);
+
+	this.updateSize();
 
 	this.needsUpdate = true;
 }
@@ -73,7 +66,44 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 CanvasTexture.prototype = Object.create(THREE.Texture.prototype);
 
 /**
- * Create JSON description for canvas texture, canvas image is not serialized
+ * Update the size of the canvas texture.
+ *
+ * The texture is image is reset to the default.
+ *
+ * Should be called after changing the width or height properties.
+ * 
+ * @method updateSize
+ */
+CanvasTexture.prototype.updateSize = function()
+{	
+	this.image.width = this.width;
+	this.image.height = this.height;
+
+	this.context.fillStyle = "#000000";
+	this.context.fillRect(0, 0, this.width, this.height);
+	this.context.font = "Normal 55px Arial";
+	this.context.textAlign = "center";
+	this.context.fillStyle = "#FF0000";
+	this.context.fillText("Canvas Texture", this.width/2, this.height/2);
+}
+
+/**
+ * Clear canvas texture with a background color.
+ *
+ * Uses the internal context to draw a rect to fill the canvas.
+ *
+ * @method clear
+ * @param {String} color
+ */
+CanvasTexture.prototype.clear = function(color)
+{
+	this.context.fillStyle = color;
+	this.context.fillRect(0, 0, this.width, this.height);
+}
+
+/**
+ * Create JSON description for canvas texture, canvas image is not serialized.
+ * 
  * @param {Object} meta
  * @method toJSON
  */
