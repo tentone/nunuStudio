@@ -26,6 +26,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Mesh2shape",
         "Mouse",
         "MultiMaterial",
+        "Nunu",
+        "NunuApp",
         "Object3D",
         "ObjectUtils",
         "OrthographicCamera",
@@ -69,6 +71,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Particles",
         "Physics",
         "Resources",
+        "Runtime",
         "Script",
         "Sprite",
         "THREE",
@@ -149,6 +152,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Resources",
             "name": "Resources",
             "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API"
+        },
+        {
+            "displayName": "Runtime",
+            "name": "Runtime",
+            "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere"
         },
         {
             "displayName": "Script",

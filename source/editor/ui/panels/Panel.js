@@ -178,10 +178,12 @@ Panel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.name.setText(this.obj.name);
+		
 		if(this.uuid !== undefined)
 		{
 			this.uuid.setText(this.obj.uuid);
 		}
+
 		this.position.setValue(this.obj.position);
 		this.scale.setValue(this.obj.scale);
 		this.rotation.setValue(this.obj.rotation);

@@ -30,10 +30,13 @@ function AboutTab(parent, closeable, container, index)
 	this.threejs.setText("THREEJS R" + THREE.REVISION);
 
 	//NWJS version
-	this.nwjs = new Text(this.element);
-	this.nwjs.size.set(400, 0);
-	this.nwjs.setTextSize(15);
-	this.nwjs.setText((Editor.gui !== undefined) ? ("NWJS V" + process.versions['node-webkit']) : "");
+	if(Nunu.runningOnDesktop())
+	{
+		this.nwjs = new Text(this.element);
+		this.nwjs.size.set(400, 0);
+		this.nwjs.setTextSize(15);
+		this.nwjs.setText("NWJS V" + process.versions['node-webkit']);
+	}
 
 	//Codemirror version
 	this.codemirror = new Text(this.element);
@@ -93,9 +96,12 @@ AboutTab.prototype.updateInterface = function()
 		this.threejs.position.set((this.size.x-this.threejs.size.x)/2, this.timestamp.position.y + 20);
 		this.threejs.updateInterface();
 
-		this.nwjs.visible = this.visible;
-		this.nwjs.position.set((this.size.x-this.nwjs.size.x)/2, this.threejs.position.y + 20);
-		this.nwjs.updateInterface();
+		if(this.nwjs !== undefined)
+		{
+			this.nwjs.visible = this.visible;
+			this.nwjs.position.set((this.size.x-this.nwjs.size.x)/2, this.threejs.position.y + 20);
+			this.nwjs.updateInterface();
+		}
 
 		this.codemirror.visible = this.visible;
 		this.codemirror.position.set((this.size.x-this.codemirror.size.x)/2, this.nwjs.position.y + 20);

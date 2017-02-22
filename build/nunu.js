@@ -29,12 +29,30 @@
 function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
-Nunu.VERSION = "V0.8.9.20 Alpha";
-Nunu.TIMESTAMP = "201702220221";
+Nunu.VERSION = "V0.8.9.21 Alpha";
+Nunu.TIMESTAMP = "201702222321";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
-(function(a, g) {
+Nunu.webglAvailable = function() {
+  var a = ["webgl", "experimental-webgl", "webgl2", "experimental-webgl"];
+  try {
+    for (var g = document.createElement("canvas"), l = 0;l < a.length;l++) {
+      if (void 0 !== g.getContext(a[l])) {
+        return !0;
+      }
+    }
+  } catch (b) {
+  }
+  return !1;
+};
+Nunu.runningOnDesktop = function() {
+  try {
+    return "undefined" !== typeof require("nw.gui");
+  } catch (a) {
+  }
+  return !1;
+}(function(a, g) {
   "object" === typeof exports && "undefined" !== typeof module ? g(exports) : "function" === typeof define && define.amd ? define(["exports"], g) : g(a.THREE = a.THREE || {});
 })(this, function(a) {
   function g() {
@@ -4112,14 +4130,14 @@ Nunu.webvrAvailable = function() {
     this.validate();
     this.optimize();
   }
-  function vc(d, m, a, b) {
-    Rb.call(this, d, m, a, b);
+  function vc(d, a, b, c) {
+    Rb.call(this, d, a, b, c);
   }
-  function Nd(d, m, a, b) {
-    Ya.call(this, d, m, a, b);
+  function Nd(d, a, b, c) {
+    Ya.call(this, d, a, b, c);
   }
-  function kd(d, m, a, b) {
-    Rb.call(this, d, m, a, b);
+  function kd(d, a, b, c) {
+    Rb.call(this, d, a, b, c);
   }
   function wc(d, a, b, c) {
     Rb.call(this, d, a, b, c);
@@ -11023,9 +11041,9 @@ Nunu.webvrAvailable = function() {
           }
           for (var g in h) {
             for (var p = [], r = [], q = 0;q !== n[k].morphTargets.length;++q) {
-              var u = n[k];
-              p.push(u.time);
-              r.push(u.morphTarget === g ? 1 : 0);
+              var l = n[k];
+              p.push(l.time);
+              r.push(l.morphTarget === g ? 1 : 0);
             }
             c.push(new wc(".morphTargetInfluence[" + g + "]", p, r));
           }
@@ -11506,31 +11524,31 @@ Nunu.webvrAvailable = function() {
     c = xc.prototype.initMaterials(d.materials, a, this.crossOrigin);
     return {geometry:b, materials:c};
   }});
-  Object.assign(Je.prototype, {load:function(d, a, b, c) {
-    "" === this.texturePath && (this.texturePath = d.substring(0, d.lastIndexOf("/") + 1));
-    var e = this;
-    (new ib(e.manager)).load(d, function(b) {
+  Object.assign(Je.prototype, {load:function(a, b, c, e) {
+    "" === this.texturePath && (this.texturePath = a.substring(0, a.lastIndexOf("/") + 1));
+    var d = this;
+    (new ib(d.manager)).load(a, function(c) {
       var h = null;
       try {
-        h = JSON.parse(b);
+        h = JSON.parse(c);
       } catch (Q) {
-        void 0 !== c && c(Q);
-        console.error("THREE:ObjectLoader: Can't parse " + d + ".", Q.message);
+        void 0 !== e && e(Q);
+        console.error("THREE:ObjectLoader: Can't parse " + a + ".", Q.message);
         return;
       }
-      b = h.metadata;
-      void 0 === b || void 0 === b.type || "geometry" === b.type.toLowerCase() ? console.error("THREE.ObjectLoader: Can't load " + d + ". Use THREE.JSONLoader instead.") : e.parse(h, a);
-    }, b, c);
-  }, setTexturePath:function(d) {
-    this.texturePath = d;
-  }, setCrossOrigin:function(d) {
-    this.crossOrigin = d;
-  }, parse:function(d, a) {
-    var b = this.parseGeometries(d.geometries), c = this.parseImages(d.images, function() {
-      void 0 !== a && a(e);
-    }), c = this.parseTextures(d.textures, c), c = this.parseMaterials(d.materials, c), e = this.parseObject(d.object, b, c);
-    d.animations && (e.animations = this.parseAnimations(d.animations));
-    void 0 !== d.images && 0 !== d.images.length || void 0 === a || a(e);
+      c = h.metadata;
+      void 0 === c || void 0 === c.type || "geometry" === c.type.toLowerCase() ? console.error("THREE.ObjectLoader: Can't load " + a + ". Use THREE.JSONLoader instead.") : d.parse(h, b);
+    }, c, e);
+  }, setTexturePath:function(a) {
+    this.texturePath = a;
+  }, setCrossOrigin:function(a) {
+    this.crossOrigin = a;
+  }, parse:function(a, b) {
+    var d = this.parseGeometries(a.geometries), c = this.parseImages(a.images, function() {
+      void 0 !== b && b(e);
+    }), c = this.parseTextures(a.textures, c), c = this.parseMaterials(a.materials, c), e = this.parseObject(a.object, d, c);
+    a.animations && (e.animations = this.parseAnimations(a.animations));
+    void 0 !== a.images && 0 !== a.images.length || void 0 === b || b(e);
     return e;
   }, parseGeometries:function(a) {
     var d = {};
@@ -11897,8 +11915,8 @@ Nunu.webvrAvailable = function() {
     }
     return null;
   }, getLength:function() {
-    var d = this.getCurveLengths();
-    return d[d.length - 1];
+    var a = this.getCurveLengths();
+    return a[a.length - 1];
   }, updateArcLengths:function() {
     this.needsUpdate = !0;
     this.cacheLengths = null;
@@ -11907,57 +11925,57 @@ Nunu.webvrAvailable = function() {
     if (this.cacheLengths && this.cacheLengths.length === this.curves.length) {
       return this.cacheLengths;
     }
-    for (var d = [], a = 0, b = 0, c = this.curves.length;b < c;b++) {
-      a += this.curves[b].getLength(), d.push(a);
+    for (var a = [], b = 0, c = 0, e = this.curves.length;c < e;c++) {
+      b += this.curves[c].getLength(), a.push(b);
     }
-    return this.cacheLengths = d;
-  }, getSpacedPoints:function(d) {
-    void 0 === d && (d = 40);
-    for (var a = [], b = 0;b <= d;b++) {
-      a.push(this.getPoint(b / d));
+    return this.cacheLengths = a;
+  }, getSpacedPoints:function(a) {
+    void 0 === a && (a = 40);
+    for (var d = [], b = 0;b <= a;b++) {
+      d.push(this.getPoint(b / a));
     }
-    this.autoClose && a.push(a[0]);
-    return a;
-  }, getPoints:function(d) {
-    d = d || 12;
-    for (var a = [], b, c = 0, e = this.curves;c < e.length;c++) {
-      for (var h = e[c], h = h.getPoints(h && h.isEllipseCurve ? 2 * d : h && h.isLineCurve ? 1 : h && h.isSplineCurve ? d * h.points.length : d), f = 0;f < h.length;f++) {
+    this.autoClose && d.push(d[0]);
+    return d;
+  }, getPoints:function(a) {
+    a = a || 12;
+    for (var d = [], b, c = 0, e = this.curves;c < e.length;c++) {
+      for (var h = e[c], h = h.getPoints(h && h.isEllipseCurve ? 2 * a : h && h.isLineCurve ? 1 : h && h.isSplineCurve ? a * h.points.length : a), f = 0;f < h.length;f++) {
         var n = h[f];
-        b && b.equals(n) || (a.push(n), b = n);
+        b && b.equals(n) || (d.push(n), b = n);
       }
     }
-    this.autoClose && 1 < a.length && !a[a.length - 1].equals(a[0]) && a.push(a[0]);
-    return a;
-  }, createPointsGeometry:function(d) {
-    d = this.getPoints(d);
-    return this.createGeometry(d);
-  }, createSpacedPointsGeometry:function(d) {
-    d = this.getSpacedPoints(d);
-    return this.createGeometry(d);
-  }, createGeometry:function(d) {
-    for (var a = new ea, b = 0, c = d.length;b < c;b++) {
-      var e = d[b];
-      a.vertices.push(new h(e.x, e.y, e.z || 0));
+    this.autoClose && 1 < d.length && !d[d.length - 1].equals(d[0]) && d.push(d[0]);
+    return d;
+  }, createPointsGeometry:function(a) {
+    a = this.getPoints(a);
+    return this.createGeometry(a);
+  }, createSpacedPointsGeometry:function(a) {
+    a = this.getSpacedPoints(a);
+    return this.createGeometry(a);
+  }, createGeometry:function(a) {
+    for (var d = new ea, b = 0, c = a.length;b < c;b++) {
+      var e = a[b];
+      d.vertices.push(new h(e.x, e.y, e.z || 0));
     }
-    return a;
+    return d;
   }});
   zb.prototype = Object.create(Sa.prototype);
   zb.prototype.constructor = zb;
   zb.prototype.isEllipseCurve = !0;
-  zb.prototype.getPoint = function(d) {
-    for (var a = 2 * Math.PI, b = this.aEndAngle - this.aStartAngle, c = Math.abs(b) < Number.EPSILON;0 > b;) {
-      b += a;
+  zb.prototype.getPoint = function(a) {
+    for (var d = 2 * Math.PI, b = this.aEndAngle - this.aStartAngle, c = Math.abs(b) < Number.EPSILON;0 > b;) {
+      b += d;
     }
-    for (;b > a;) {
-      b -= a;
+    for (;b > d;) {
+      b -= d;
     }
-    b < Number.EPSILON && (b = c ? 0 : a);
-    !0 !== this.aClockwise || c || (b = b === a ? -a : b - a);
-    a = this.aStartAngle + d * b;
-    d = this.aX + this.xRadius * Math.cos(a);
-    var e = this.aY + this.yRadius * Math.sin(a);
-    0 !== this.aRotation && (a = Math.cos(this.aRotation), b = Math.sin(this.aRotation), c = d - this.aX, e -= this.aY, d = c * a - e * b + this.aX, e = c * b + e * a + this.aY);
-    return new l(d, e);
+    b < Number.EPSILON && (b = c ? 0 : d);
+    !0 !== this.aClockwise || c || (b = b === d ? -d : b - d);
+    d = this.aStartAngle + a * b;
+    a = this.aX + this.xRadius * Math.cos(d);
+    var e = this.aY + this.yRadius * Math.sin(d);
+    0 !== this.aRotation && (d = Math.cos(this.aRotation), b = Math.sin(this.aRotation), c = a - this.aX, e -= this.aY, a = c * d - e * b + this.aX, e = c * b + e * d + this.aY);
+    return new l(a, e);
   };
   Vb.prototype = Object.create(Sa.prototype);
   Vb.prototype.constructor = Vb;
@@ -31601,16 +31619,25 @@ function CanvasTexture(a, g, l, b, f, k, c, e, h, q, r) {
   this.category = "Canvas";
   this.width = void 0 !== a ? a : 512;
   this.height = void 0 !== g ? g : 512;
-  this.image.width = a;
-  this.image.height = g;
   this.context = this.image.getContext("2d");
+  this.updateSize();
+  this.needsUpdate = !0;
+}
+CanvasTexture.prototype = Object.create(THREE.Texture.prototype);
+CanvasTexture.prototype.updateSize = function() {
+  this.image.width = this.width;
+  this.image.height = this.height;
+  this.context.fillStyle = "#000000";
+  this.context.fillRect(0, 0, this.width, this.height);
   this.context.font = "Normal 55px Arial";
   this.context.textAlign = "center";
   this.context.fillStyle = "#FF0000";
   this.context.fillText("Canvas Texture", this.width / 2, this.height / 2);
-  this.needsUpdate = !0;
-}
-CanvasTexture.prototype = Object.create(THREE.Texture.prototype);
+};
+CanvasTexture.prototype.clear = function(a) {
+  this.context.fillStyle = a;
+  this.context.fillRect(0, 0, this.width, this.height);
+};
 CanvasTexture.prototype.toJSON = function(a) {
   a = THREE.Texture.prototype.toJSON.call(this, a);
   a.width = this.width;

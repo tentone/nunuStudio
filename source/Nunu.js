@@ -10,7 +10,9 @@
 "use strict";
 
 /**
- * Class used to store nunu version and timstamp used for development
+ * Class used to store nunu version and timstamp used for development.
+ *
+ * Also contains methods to check browser feature support.
  * 
  * @class Nunu
  * @module Runtime
@@ -18,6 +20,8 @@
 function Nunu(){}
 
 /**
+ * nunuStudio
+ * 
  * @attribute NAME
  * @type {String}
  * @default "nunuStudio"
@@ -25,28 +29,77 @@ function Nunu(){}
 Nunu.NAME = "nunuStudio";
 
 /**
- * Stores the nunu runtime version
+ * Stores the nunu runtime version.
  * 
  * @attribute VERSION
  * @type {String}
  */
-Nunu.VERSION = "V0.8.9.20 Alpha";
+Nunu.VERSION = "V0.8.9.21 Alpha";
 
 /**
- * Stores the nunu runtime dev timestamp
+ * Stores the nunu runtime dev timestamp.
  * 
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201702220221";
+Nunu.TIMESTAMP = "201702222321";
 
 /**
- * Check if host supports WebVR
+ * Check if host supports WebVR and if there is a VR display available.
  * 
  * @method webvrAvailable
- * @return {boolean} True is webVR is available
+ * @return {boolean} True is WebVR is available.
  */
 Nunu.webvrAvailable = function()
 {
 	return navigator.getVRDisplays !== undefined;
 };
+
+/**
+ * Check if host supports WebGL.
+ *
+ * @method webglAvailable
+ * @return {boolean} True if WebGL is available.
+ */
+Nunu.webglAvailable = function()
+{
+	var context = ["webgl", "experimental-webgl", "webgl2", "experimental-webgl"];
+
+	try
+	{
+		var canvas = document.createElement("canvas"); 
+		for(var i = 0; i < context.length; i++)
+		{
+			if(canvas.getContext(context[i]) !== undefined)
+			{
+				return true;
+			}
+		}
+	}
+	catch(e)
+	{
+		return false;
+	}
+
+	return false;
+}
+
+/**
+ * Check if nunu is running inside NWJS.
+ *
+ * @method runningOnDesktop
+ * @return {boolean} True if running inside NWJS 
+ */
+Nunu.runningOnDesktop = function()
+{
+	try
+	{
+		return (typeof require('nw.gui') !== "undefined");
+	}
+	catch(e)
+	{
+		return false;
+	}
+
+	return false;
+}

@@ -223,6 +223,7 @@ include("editor/ui/tab/material/ShaderMaterialEditor.js");
 include("editor/ui/tab/material/PointMaterialEditor.js");
 include("editor/ui/tab/texture/TextureEditor.js");
 include("editor/ui/tab/texture/VideoTextureEditor.js");
+include("editor/ui/tab/texture/CanvasTextureEditor.js");
 include("editor/ui/tab/texture/CubeTextureEditor.js");
 
 include("editor/ui/panels/Panel.js");
@@ -365,12 +366,12 @@ Editor.initialize = function()
 	//Performance meter
 	Editor.stats = null;
 
-	//History
-	Editor.history = new History();
-
-	//Editor program and scene
+	//Program
 	Editor.program = null;
 	Editor.programRunning = null;
+
+	//History
+	Editor.history = null;
 
 	//Renderer and canvas
 	Editor.renderer = null;
@@ -538,14 +539,14 @@ Editor.update = function()
 				}
 			}
 			
-			if(Editor.keyboard.keyJustPressed(Keyboard.Y))
-			{
-				Editor.redo();
-			}
-			else if(Editor.keyboard.keyJustPressed(Keyboard.Z))
+			if(Editor.keyboard.keyJustPressed(Keyboard.Z))
 			{
 				Editor.undo();
 			}
+			/*else if(Editor.keyboard.keyJustPressed(Keyboard.Y))
+			{
+				Editor.redo();
+			}*/
 		}
 
 		//Select objects
@@ -1465,10 +1466,13 @@ Editor.createNewProgram = function()
 	//Create new program
 	Editor.program = new Program();
 	Editor.program.addDefaultScene(Editor.defaultMaterial);
-	Editor.resetEditingFlags();
+
+	//History
+	Editor.history = new History(Editor.program);
 
 	//Reset open file
 	Editor.setOpenFile(null);
+	Editor.resetEditingFlags();
 
 	//Remove old tabs from interface
 	if(Interface.tab !== undefined)
@@ -1519,15 +1523,17 @@ Editor.loadProgram = function(fname)
 	//Load program data file
 	var loader = new ObjectLoader();
 	var data = JSON.parse(FileSystem.readFile(fname));
-	var program = loader.parse(data);
-	Editor.program = program;
-	Editor.resetEditingFlags();
+	Editor.program = loader.parse(data);
+	
+	//History
+	Editor.history = new History(Editor.program);
 
-	//Remove old tabs from interface
+	//Remove old tabs
 	Interface.tab.clear();
 
 	//Set open file
 	Editor.setOpenFile(fname);
+	Editor.resetEditingFlags();
 
 	//Add new scene tab to interface
 	if(Editor.program.scene !== null)

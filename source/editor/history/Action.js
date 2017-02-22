@@ -38,4 +38,8 @@ Action.CHANGED = 12;
 
 //Action target
 Action.TARGET_OBJECT = 20;
-Action.TARGET_RESOURCE = 21;
+Action.TARGET_TEXTURE = 21;
+Action.TARGET_MATERIAL = 22;
+Action.TARGET_AUDIO = 23;
+Action.TARGET_FONT = 24;
+Action.TARGET_GEOMETRY = 25;

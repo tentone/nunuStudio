@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Misc</title>  
+	<title>nunuStudio Nunu</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -136,34 +136,286 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Misc Module</h1>
-						<div class="box clearfix meta">
+						<h1>Nunu Class</h1>
+						<div class="box meta">
 						
 						
+						
+									Module: <a href="../modules/Runtime.html">Runtime</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Containers are used to group objects together.</p>
+							<p>Class used to store nunu version and timstamp used for development.</p>
+						<p>Also contains methods to check browser feature support.</p>
 						
 						</div>
 						
 						
-						<div class="yui3-g">
-							<div class="yui3-u-1-2">
-									<p>This namespace provides the following classes:</p>
+						<div id="classdocs" class="tabview">
+							<ul class="api-class-tabs">
+								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<ul class="module-classes">
-										<li class="module-class">
-											<a href="../classes/Container.html">
-												Container
-											</a>
-										</li>
-									</ul>
-							</div>
+									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+							</ul>
 						
-							<div class="yui3-u-1-2">
+							<div>
+								<div id="index" class="api-class-tabpanel index">
+									<h2 class="off-left">Item Index</h2>
+						
+										<div class="index-section methods">
+											<h3>Methods</h3>
+						
+											<ul class="index-list methods">
+													<li class="index-item method">
+														<a href="#method_runningOnDesktop">runningOnDesktop</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_webglAvailable">webglAvailable</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_webvrAvailable">webvrAvailable</a>
+						
+													</li>
+											</ul>
+										</div>
+						
+						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs">
+													<li class="index-item attr">
+														<a href="#attr_NAME">NAME</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_TIMESTAMP">TIMESTAMP</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_VERSION">VERSION</a>
+													</li>
+											</ul>
+										</div>
+						
+								</div>
+						
+									<div id="methods" class="api-class-tabpanel">
+										<h2 class="off-left">Methods</h2>
+						
+											<div id="method_runningOnDesktop" class="method item">
+												<h3 class="name"><code>runningOnDesktop</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type">Boolean</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Check if nunu is running inside NWJS.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Boolean</span>:
+																<p>True if running inside NWJS</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_webglAvailable" class="method item">
+												<h3 class="name"><code>webglAvailable</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type">Boolean</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Check if host supports WebGL.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Boolean</span>:
+																<p>True if WebGL is available.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_webvrAvailable" class="method item">
+												<h3 class="name"><code>webvrAvailable</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type">Boolean</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Check if host supports WebVR and if there is a VR display available.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Boolean</span>:
+																<p>True is WebVR is available.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+									</div>
+						
+						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_NAME" class="attr item">
+												<a name="config_NAME"></a> 
+												<h3 class="name"><code>NAME</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>nunuStudio</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> &quot;nunuStudio&quot;</p>
+											
+											
+											</div>
+											<div id="attr_TIMESTAMP" class="attr item">
+												<a name="config_TIMESTAMP"></a> 
+												<h3 class="name"><code>TIMESTAMP</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Stores the nunu runtime dev timestamp.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_VERSION" class="attr item">
+												<a name="config_VERSION"></a> 
+												<h3 class="name"><code>VERSION</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Stores the nunu runtime version.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
+						
 							</div>
 						</div>
 					</div>

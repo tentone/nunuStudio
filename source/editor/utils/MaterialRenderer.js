@@ -13,11 +13,11 @@ function MaterialRenderer()
 	this.scene = new THREE.Scene();
 
 	//Sphere
-	this.sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), null);
+	this.sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32));
 	this.scene.add(this.sphere);
 
 	//Sprite
-	this.sprite = new THREE.Sprite(null);
+	this.sprite = new THREE.Sprite();
 	this.sprite.scale.set(2, 2, 1);
 	this.scene.add(this.sprite);
 

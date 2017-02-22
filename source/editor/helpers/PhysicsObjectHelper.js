@@ -1,6 +1,6 @@
 "use strict";
 
-//Based on code from cannonjs debug shape renderer
+//Based on code from cannonjs debug shape renderer made by schteppe
 function PhysicsObjectHelper(obj)
 {
 	THREE.Object3D.call(this);
