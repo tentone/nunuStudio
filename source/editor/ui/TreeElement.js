@@ -61,6 +61,13 @@ function TreeElement(container)
 		this.style.opacity = 0.5;
 	};
 
+	//Fold
+	this.arrow.onclick = function()
+	{
+		self.folded = !self.folded;
+		self.updateFoldedState();
+	};
+
 	//Icon
 	this.icon = document.createElement("img");
 	this.icon.draggable = false;
@@ -231,10 +238,18 @@ function TreeElement(container)
 		}
 	};
 
+	//Clear element border
+	function clearBorder()
+	{
+		self.element.style.border = "";
+		self.element.style.borderTop = "";
+		self.element.style.borderBottom = "";
+	};
+
 	//Drag end (fired on the draggable object, called after of ondrop on the drop target)
 	this.element.ondragend = function(event)
 	{
-		this.style.border = "";
+		clearBorder();
 
 		//Try to remove event from buffer
 		var uuid = event.dataTransfer.getData("uuid");
@@ -246,28 +261,59 @@ function TreeElement(container)
 
 	this.element.ondragover = function(event)
 	{
-		this.style.border = "thin solid #999999";
+		clearBorder();
+
+		//Above
+		if(event.layerY < 5)
+		{
+			this.style.borderTop = "thin solid #999999";
+		}
+		//Bellow
+		else if(event.layerY > 15)
+		{
+			this.style.borderBottom = "thin solid #999999";
+		}
+		//Inside
+		else
+		{
+			this.style.border = "thin solid #999999";
+		}
 	};
 
 	this.element.ondragleave = function()
 	{
-		this.style.border = "";
+		clearBorder();
 	};
 
 	//Drop event (fired on the drop target)
 	this.element.ondrop = function(event)
 	{
+		clearBorder();
+
 		//Collect element from buffer
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = DragBuffer.popDragElement(uuid);
-		
-		if(obj !== null)
+
+		if(obj !== null && obj !== self.obj && !ObjectUtils.isChildOf(obj ,self.obj))
 		{
-			if(obj.uuid !== self.obj.uuid && !ObjectUtils.isChildOf(obj ,self.obj))
+			//Above
+			if(event.layerY < 5)
+			{
+				self.obj.parent.addAbove(obj, self.obj);
+			}
+			//Bellow
+			else if(event.layerY > 15)
+			{
+				//TODO <ADD CODE HERE>
+				self.obj.parent.addBellow(obj, self.obj);
+			}
+			//Inside
+			else
 			{
 				self.obj.add(obj);
-				self.updateSceneData();
 			}
+
+			self.updateSceneData();
 		}
 	};
 
@@ -277,11 +323,21 @@ function TreeElement(container)
 		Editor.selectObject(self.obj);
 	};
 
-	//Fold
-	this.arrow.onclick = function()
+	//Double click event
+	this.element.ondblclick = function()
 	{
-		self.folded = !self.folded;
-		self.updateFoldedState();
+		if(self.obj instanceof Script)
+		{
+			openScriptTab();
+		}
+		else if(self.obj instanceof Scene)
+		{
+			openSceneTab();
+		}
+		else if(self.obj instanceof ParticleEmitter)
+		{
+			openParticleTab();
+		}
 	};
 
 	//Open new script tab
@@ -317,23 +373,6 @@ function TreeElement(container)
 			tab.attach(self.obj);
 		}
 		tab.select();
-	};
-
-	//Double click event
-	this.element.ondblclick = function()
-	{
-		if(self.obj instanceof Script)
-		{
-			openScriptTab();
-		}
-		else if(self.obj instanceof Scene)
-		{
-			openSceneTab();
-		}
-		else if(self.obj instanceof ParticleEmitter)
-		{
-			openParticleTab();
-		}
 	};
 
 	//Add element to document
