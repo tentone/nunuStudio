@@ -5,7 +5,7 @@
  - nunuStudio provides a visual scene editor, a code editor, visual tools to edit textures, materials, particle emitters, etc.
 
 ### Documentation
- - Documentation for the scripting API is available on the nunu webpage (http://tentone.github.io/nunuStudio/)
+ - Documentation for the scripting API is available on the nunu webpage http://nunustudio.org
  - nunuStudio was documented using YUIDocs
 
 ### Features
@@ -74,6 +74,7 @@
 - V0.8.9.20 Alpha
 	- Cubetexture support
 	- Improved material serialization
+	- Sort objects in the explorer
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

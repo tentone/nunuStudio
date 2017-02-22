@@ -259,29 +259,43 @@ function TreeElement(container)
 		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
 	};
 
+	//Flag to avoid unecessary border reflow
+	var state = 0;
+
 	this.element.ondragover = function(event)
 	{
-		clearBorder();
-
 		//Above
 		if(event.layerY < 5)
 		{
-			this.style.borderTop = "thin solid #999999";
+			if(state !== 1)
+			{
+				state = 1;
+				clearBorder();
+				this.style.borderTop = "thin solid #999999";
+			}
 		}
 		//Bellow
 		else if(event.layerY > 15)
 		{
-			this.style.borderBottom = "thin solid #999999";
+			if(state !== 2)
+			{
+				state = 2;
+				clearBorder();
+				this.style.borderBottom = "thin solid #999999";
+			}
 		}
 		//Inside
-		else
+		else if(state !== 3)
 		{
+			state = 3;
+			clearBorder();
 			this.style.border = "thin solid #999999";
 		}
 	};
 
 	this.element.ondragleave = function()
 	{
+		state = 0;
 		clearBorder();
 	};
 
@@ -299,13 +313,18 @@ function TreeElement(container)
 			//Above
 			if(event.layerY < 5)
 			{
-				self.obj.parent.addAbove(obj, self.obj);
+				if(!(self.obj.parent instanceof Program))
+				{
+					self.obj.parent.addAbove(obj, self.obj);
+				}
 			}
 			//Bellow
 			else if(event.layerY > 15)
 			{
-				//TODO <ADD CODE HERE>
-				self.obj.parent.addBellow(obj, self.obj);
+				if(!(self.obj.parent instanceof Program))
+				{
+					self.obj.parent.addBellow(obj, self.obj);
+				}
 			}
 			//Inside
 			else
