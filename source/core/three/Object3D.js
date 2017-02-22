@@ -155,6 +155,80 @@ THREE.Object3D.prototype.dispose = function()
 }
 
 /**
+ * Add object as children of this object above the indicated children
+ *
+ * @method addAbove
+ * @param {Object3D} object
+ * @param {Number} index
+ */
+THREE.Object3D.prototype.addAbove = function(object, children)
+{
+	if(object === this)
+	{
+		console.error("THREE.Object3D.add: object can't be added as a child of itself.", object );
+		return this;
+	}
+
+	if(object && object.isObject3D)
+	{
+		if(object.parent !== null)
+		{
+			object.parent.remove(object);
+		}
+
+		object.parent = this;
+		object.dispatchEvent({type: "added"});
+
+		var index = this.children.indexOf(children);
+
+		this.children.splice(index, 0, object);
+	}
+	else
+	{
+		console.error("THREE.Object3D.add: object not an instance of THREE.Object3D.", object);
+	}
+
+	return this;
+}
+
+/**
+ * Add object as children of this object bellow the indicated children
+ *
+ * @method addBellow
+ * @param {Object3D} object
+ * @param {Number} index
+ */
+THREE.Object3D.prototype.addBellow = function(object, children)
+{
+	if(object === this)
+	{
+		console.error("THREE.Object3D.add: object can't be added as a child of itself.", object );
+		return this;
+	}
+
+	if(object && object.isObject3D)
+	{
+		if(object.parent !== null)
+		{
+			object.parent.remove(object);
+		}
+
+		object.parent = this;
+		object.dispatchEvent({type: "added"});
+
+		var index = this.children.indexOf(children) + 1;
+
+		this.children.splice(index, 0, object);
+	}
+	else
+	{
+		console.error("THREE.Object3D.add: object not an instance of THREE.Object3D.", object);
+	}
+
+	return this;
+}
+
+/**
  * Remove all children from the object.
  * 
  * @method removeAll

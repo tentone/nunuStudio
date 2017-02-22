@@ -7024,6 +7024,48 @@
         {
             "file": "..\\source\\core\\three\\Object3D.js",
             "line": 157,
+            "description": "Add object as children of this object above the indicated children",
+            "itemtype": "method",
+            "name": "addAbove",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                },
+                {
+                    "name": "index",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 194,
+            "description": "Add object as children of this object bellow the indicated children",
+            "itemtype": "method",
+            "name": "addBellow",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                },
+                {
+                    "name": "index",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\source\\core\\three\\Object3D.js",
+            "line": 231,
             "description": "Remove all children from the object.",
             "itemtype": "method",
             "name": "removeAll",
@@ -7032,7 +7074,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 170,
+            "line": 244,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -7045,7 +7087,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 181,
+            "line": 255,
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
             "name": "destroy",
@@ -7054,7 +7096,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 202,
+            "line": 276,
             "description": "Serialize object as JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7084,7 +7126,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 330,
+            "line": 404,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -7100,7 +7142,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 336,
+            "line": 410,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -7114,7 +7156,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 341,
+            "line": 415,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -7130,7 +7172,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 347,
+            "line": 421,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -7146,7 +7188,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 353,
+            "line": 427,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -7162,7 +7204,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 359,
+            "line": 433,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -7178,7 +7220,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 365,
+            "line": 439,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -7194,7 +7236,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 371,
+            "line": 445,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -7215,7 +7257,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 378,
+            "line": 452,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -7231,7 +7273,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 384,
+            "line": 458,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -7252,7 +7294,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 391,
+            "line": 465,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -7271,7 +7313,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 397,
+            "line": 471,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -7287,7 +7329,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 403,
+            "line": 477,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldRotation",
@@ -7303,7 +7345,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 409,
+            "line": 483,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -7319,7 +7361,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 415,
+            "line": 489,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -7335,7 +7377,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 421,
+            "line": 495,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -7356,7 +7398,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 428,
+            "line": 502,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -7372,7 +7414,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 434,
+            "line": 508,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -7388,7 +7430,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 440,
+            "line": 514,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -8573,7 +8615,7 @@
         },
         {
             "message": "Missing item type\nRotates the object to face a point in world space.",
-            "line": " ..\\source\\core\\three\\Object3D.js:336"
+            "line": " ..\\source\\core\\three\\Object3D.js:410"
         }
     ]
 }

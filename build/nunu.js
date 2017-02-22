@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.20 Alpha";
-Nunu.TIMESTAMP = "201702211743";
+Nunu.TIMESTAMP = "201702220221";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -3434,25 +3434,25 @@ Nunu.webvrAvailable = function() {
     b = Math.floor(b) || 8;
     c = c || 2;
     e = e || 3;
-    var f = [], n = [], k = [], q = [], F, g, p = new h, r = new h;
+    var f = [], n = [], k = [], q = [], g, F, p = new h, r = new h;
     new l;
     var u = new h, O = new h, v = new h, aa = new h, t = new h;
-    for (F = 0;F <= a;++F) {
-      for (g = F / a * c * Math.PI * 2, A(g, c, e, d, u), A(g + .01, c, e, d, O), aa.subVectors(O, u), t.addVectors(O, u), v.crossVectors(aa, t), t.crossVectors(v, aa), v.normalize(), t.normalize(), g = 0;g <= b;++g) {
-        var w = g / b * Math.PI * 2, B = -m * Math.cos(w), w = m * Math.sin(w);
+    for (g = 0;g <= a;++g) {
+      for (F = g / a * c * Math.PI * 2, A(F, c, e, d, u), A(F + .01, c, e, d, O), aa.subVectors(O, u), t.addVectors(O, u), v.crossVectors(aa, t), t.crossVectors(v, aa), v.normalize(), t.normalize(), F = 0;F <= b;++F) {
+        var w = F / b * Math.PI * 2, B = -m * Math.cos(w), w = m * Math.sin(w);
         p.x = u.x + (B * t.x + w * v.x);
         p.y = u.y + (B * t.y + w * v.y);
         p.z = u.z + (B * t.z + w * v.z);
         n.push(p.x, p.y, p.z);
         r.subVectors(p, u).normalize();
         k.push(r.x, r.y, r.z);
-        q.push(F / a);
-        q.push(g / b);
+        q.push(g / a);
+        q.push(F / b);
       }
     }
-    for (g = 1;g <= a;g++) {
-      for (F = 1;F <= b;F++) {
-        d = (b + 1) * g + (F - 1), m = (b + 1) * g + F, c = (b + 1) * (g - 1) + F, f.push((b + 1) * (g - 1) + (F - 1), d, c), f.push(d, m, c);
+    for (F = 1;F <= a;F++) {
+      for (g = 1;g <= b;g++) {
+        d = (b + 1) * F + (g - 1), m = (b + 1) * F + g, c = (b + 1) * (F - 1) + g, f.push((b + 1) * (F - 1) + (g - 1), d, c), f.push(d, m, c);
       }
     }
     this.setIndex(f);
@@ -3815,9 +3815,9 @@ Nunu.webvrAvailable = function() {
     f.push(.5, .5);
     k = 0;
     for (n = 3;k <= m;k++, n += 3) {
-      var p = a + k / m * b;
-      q.x = d * Math.cos(p);
-      q.y = d * Math.sin(p);
+      var F = a + k / m * b;
+      q.x = d * Math.cos(F);
+      q.y = d * Math.sin(F);
       A.push(q.x, q.y, q.z);
       e.push(0, 0, 1);
       g.x = (A[n] / d + 1) / 2;
@@ -4121,25 +4121,25 @@ Nunu.webvrAvailable = function() {
   function kd(d, m, a, b) {
     Rb.call(this, d, m, a, b);
   }
-  function wc(d, m, a, b) {
-    Rb.call(this, d, m, a, b);
+  function wc(d, a, b, c) {
+    Rb.call(this, d, a, b, c);
   }
-  function Od(d, m, a, b) {
-    Rb.call(this, d, m, a, b);
+  function Od(d, a, b, c) {
+    Rb.call(this, d, a, b, c);
   }
-  function Pd(d, m, a) {
-    Rb.call(this, d, m, a);
+  function Pd(d, a, b) {
+    Rb.call(this, d, a, b);
   }
-  function Qd(d, m, a, b) {
-    Rb.call(this, d, m, a, b);
+  function Qd(d, a, b, c) {
+    Rb.call(this, d, a, b, c);
   }
-  function Sb(d, m, a, b) {
+  function Sb(d, a, b, c) {
     Rb.apply(this, arguments);
   }
-  function cb(d, m, a) {
+  function cb(d, a, b) {
     this.name = d;
-    this.tracks = a;
-    this.duration = void 0 !== m ? m : -1;
+    this.tracks = b;
+    this.duration = void 0 !== a ? a : -1;
     this.uuid = ja.generateUUID();
     0 > this.duration && this.resetDuration();
     this.optimize();
@@ -4168,48 +4168,48 @@ Nunu.webvrAvailable = function() {
     this.manager = void 0 !== d ? d : Xa;
     this.texturePath = "";
   }
-  function Ke(d, m, a, b, c) {
-    m = .5 * (b - m);
-    c = .5 * (c - a);
-    var A = d * d;
-    return (2 * a - 2 * b + m + c) * d * A + (-3 * a + 3 * b - 2 * m - c) * A + m * d + a;
+  function Ke(d, a, b, c, e) {
+    a = .5 * (c - a);
+    e = .5 * (e - b);
+    var m = d * d;
+    return (2 * b - 2 * c + a + e) * d * m + (-3 * b + 3 * c - 2 * a - e) * m + a * d + b;
   }
-  function Tb(d, m, a, b) {
-    var c = 1 - d;
-    return c * c * m + 2 * (1 - d) * d * a + d * d * b;
+  function Tb(d, a, b, c) {
+    var m = 1 - d;
+    return m * m * a + 2 * (1 - d) * d * b + d * d * c;
   }
-  function Ub(d, m, a, b, c) {
-    var A = 1 - d, e = 1 - d;
-    return A * A * A * m + 3 * e * e * d * a + 3 * (1 - d) * d * d * b + d * d * d * c;
+  function Ub(d, a, b, c, e) {
+    var m = 1 - d, A = 1 - d;
+    return m * m * m * a + 3 * A * A * d * b + 3 * (1 - d) * d * d * c + d * d * d * e;
   }
   function Sa() {
   }
-  function sb(d, m) {
+  function sb(d, a) {
     this.v1 = d;
-    this.v2 = m;
+    this.v2 = a;
   }
   function ld() {
     this.curves = [];
     this.autoClose = !1;
   }
-  function zb(d, m, a, b, c, e, h, f) {
+  function zb(d, a, b, c, e, h, f, n) {
     this.aX = d;
-    this.aY = m;
-    this.xRadius = a;
-    this.yRadius = b;
-    this.aStartAngle = c;
-    this.aEndAngle = e;
-    this.aClockwise = h;
-    this.aRotation = f || 0;
+    this.aY = a;
+    this.xRadius = b;
+    this.yRadius = c;
+    this.aStartAngle = e;
+    this.aEndAngle = h;
+    this.aClockwise = f;
+    this.aRotation = n || 0;
   }
   function Vb(d) {
     this.points = void 0 === d ? [] : d;
   }
-  function yc(d, m, a, b) {
+  function yc(d, a, b, c) {
     this.v0 = d;
-    this.v1 = m;
-    this.v2 = a;
-    this.v3 = b;
+    this.v1 = a;
+    this.v2 = b;
+    this.v3 = c;
   }
   function zc(d, a, b) {
     this.v0 = d;
@@ -4758,16 +4758,16 @@ Nunu.webvrAvailable = function() {
   }
   function we() {
     var d = 0, a = 0, b = 0, c = 0;
-    return {initCatmullRom:function(m, e, h, A, f) {
-      m = f * (h - m);
-      A = f * (A - e);
+    return {initCatmullRom:function(m, e, h, A, n) {
+      m = n * (h - m);
+      A = n * (A - e);
       d = e;
       a = m;
       b = -3 * e + 3 * h - 2 * m - A;
       c = 2 * e - 2 * h + m + A;
-    }, initNonuniformCatmullRom:function(m, e, h, A, f, n, k) {
-      m = ((e - m) / f - (h - m) / (f + n) + (h - e) / n) * n;
-      A = ((h - e) / n - (A - e) / (n + k) + (A - h) / k) * n;
+    }, initNonuniformCatmullRom:function(m, e, h, A, n, f, k) {
+      m = ((e - m) / n - (h - m) / (n + f) + (h - e) / f) * f;
+      A = ((h - e) / f - (A - e) / (f + k) + (A - h) / k) * f;
       d = e;
       a = m;
       b = -3 * e + 3 * h - 2 * m - A;
@@ -6293,27 +6293,27 @@ Nunu.webvrAvailable = function() {
     return this;
   }, decompose:function() {
     var d = new h, a = new q;
-    return function(m, b, c) {
+    return function(b, m, c) {
       var e = this.elements, h = d.set(e[0], e[1], e[2]).length(), f = d.set(e[4], e[5], e[6]).length(), n = d.set(e[8], e[9], e[10]).length();
       0 > this.determinant() && (h = -h);
-      m.x = e[12];
-      m.y = e[13];
-      m.z = e[14];
-      for (m = 0;16 > m;m++) {
-        a.elements[m] = this.elements[m];
+      b.x = e[12];
+      b.y = e[13];
+      b.z = e[14];
+      for (b = 0;16 > b;b++) {
+        a.elements[b] = this.elements[b];
       }
-      m = 1 / h;
+      b = 1 / h;
       var e = 1 / f, k = 1 / n;
-      a.elements[0] *= m;
-      a.elements[1] *= m;
-      a.elements[2] *= m;
+      a.elements[0] *= b;
+      a.elements[1] *= b;
+      a.elements[2] *= b;
       a.elements[4] *= e;
       a.elements[5] *= e;
       a.elements[6] *= e;
       a.elements[8] *= k;
       a.elements[9] *= k;
       a.elements[10] *= k;
-      b.setFromRotationMatrix(a);
+      m.setFromRotationMatrix(a);
       c.x = h;
       c.y = f;
       c.z = n;
@@ -6369,30 +6369,30 @@ Nunu.webvrAvailable = function() {
     return !0;
   }, fromArray:function(d, a) {
     void 0 === a && (a = 0);
-    for (var m = 0;16 > m;m++) {
-      this.elements[m] = d[m + a];
+    for (var b = 0;16 > b;b++) {
+      this.elements[b] = d[b + a];
     }
     return this;
   }, toArray:function(d, a) {
     void 0 === d && (d = []);
     void 0 === a && (a = 0);
-    var m = this.elements;
-    d[a] = m[0];
-    d[a + 1] = m[1];
-    d[a + 2] = m[2];
-    d[a + 3] = m[3];
-    d[a + 4] = m[4];
-    d[a + 5] = m[5];
-    d[a + 6] = m[6];
-    d[a + 7] = m[7];
-    d[a + 8] = m[8];
-    d[a + 9] = m[9];
-    d[a + 10] = m[10];
-    d[a + 11] = m[11];
-    d[a + 12] = m[12];
-    d[a + 13] = m[13];
-    d[a + 14] = m[14];
-    d[a + 15] = m[15];
+    var b = this.elements;
+    d[a] = b[0];
+    d[a + 1] = b[1];
+    d[a + 2] = b[2];
+    d[a + 3] = b[3];
+    d[a + 4] = b[4];
+    d[a + 5] = b[5];
+    d[a + 6] = b[6];
+    d[a + 7] = b[7];
+    d[a + 8] = b[8];
+    d[a + 9] = b[9];
+    d[a + 10] = b[10];
+    d[a + 11] = b[11];
+    d[a + 12] = b[12];
+    d[a + 13] = b[13];
+    d[a + 14] = b[14];
+    d[a + 15] = b[15];
     return d;
   }});
   r.prototype = Object.create(b.prototype);
@@ -6405,8 +6405,8 @@ Nunu.webvrAvailable = function() {
   }});
   var Ge = new b, He = new r, Ce = [], De = [], Fe = new Float32Array(16), Ee = new Float32Array(9);
   fa.prototype.setValue = function(d, a) {
-    for (var m = this.seq, b = 0, c = m.length;b !== c;++b) {
-      var e = m[b];
+    for (var b = this.seq, m = 0, c = b.length;m !== c;++m) {
+      var e = b[m];
       e.setValue(d, a[e.id]);
     }
   };
@@ -6430,11 +6430,11 @@ Nunu.webvrAvailable = function() {
     }
   };
   wa.seqWithValue = function(d, a) {
-    for (var m = [], b = 0, c = d.length;b !== c;++b) {
-      var e = d[b];
-      e.id in a && m.push(e);
+    for (var b = [], m = 0, c = d.length;m !== c;++m) {
+      var e = d[m];
+      e.id in a && b.push(e);
     }
-    return m;
+    return b;
   };
   var Ta = {merge:function(d) {
     for (var a = {}, b = 0;b < d.length;b++) {
@@ -8380,12 +8380,12 @@ Nunu.webvrAvailable = function() {
       this.applyMatrix(d.matrix);
     };
   }(), fromBufferGeometry:function(d) {
-    function a(d, a, m, c) {
-      var e = void 0 !== n ? [p[d].clone(), p[a].clone(), p[m].clone()] : [], h = void 0 !== k ? [b.colors[d].clone(), b.colors[a].clone(), b.colors[m].clone()] : [];
-      c = new Ga(d, a, m, e, h, c);
-      b.faces.push(c);
-      void 0 !== q && b.faceVertexUvs[0].push([r[d].clone(), r[a].clone(), r[m].clone()]);
-      void 0 !== g && b.faceVertexUvs[1].push([u[d].clone(), u[a].clone(), u[m].clone()]);
+    function a(d, a, c, m) {
+      var e = void 0 !== n ? [p[d].clone(), p[a].clone(), p[c].clone()] : [], h = void 0 !== k ? [b.colors[d].clone(), b.colors[a].clone(), b.colors[c].clone()] : [];
+      m = new Ga(d, a, c, e, h, m);
+      b.faces.push(m);
+      void 0 !== q && b.faceVertexUvs[0].push([r[d].clone(), r[a].clone(), r[c].clone()]);
+      void 0 !== g && b.faceVertexUvs[1].push([u[d].clone(), u[a].clone(), u[c].clone()]);
     }
     var b = this, c = null !== d.index ? d.index.array : void 0, e = d.attributes, f = e.position.array, n = void 0 !== e.normal ? e.normal.array : void 0, k = void 0 !== e.color ? e.color.array : void 0, q = void 0 !== e.uv ? e.uv.array : void 0, g = void 0 !== e.uv2 ? e.uv2.array : void 0;
     void 0 !== g && (this.faceVertexUvs[1] = []);
@@ -9415,14 +9415,14 @@ Nunu.webvrAvailable = function() {
         a.setFromMatrixPosition(this.matrixWorld);
         b = d.distanceTo(a);
         c[0].object.visible = !0;
-        for (var e = 1, m = c.length;e < m;e++) {
+        for (var e = 1, h = c.length;e < h;e++) {
           if (b >= c[e].distance) {
             c[e - 1].object.visible = !1, c[e].object.visible = !0;
           } else {
             break;
           }
         }
-        for (;e < m;e++) {
+        for (;e < h;e++) {
           c[e].object.visible = !1;
         }
       }
@@ -9557,12 +9557,12 @@ Nunu.webvrAvailable = function() {
     var d = new q, a = new tb, b = new Ia;
     return function(c, e) {
       function m(d, b) {
-        var m = a.distanceSqToPoint(d);
-        if (m < g) {
+        var h = a.distanceSqToPoint(d);
+        if (h < g) {
           d = a.closestPointToPoint(d);
           d.applyMatrix4(k);
-          var h = c.ray.origin.distanceTo(d);
-          h < c.near || h > c.far || e.push({distance:h, distanceToRay:Math.sqrt(m), point:d.clone(), index:b, face:null, object:f});
+          var m = c.ray.origin.distanceTo(d);
+          m < c.near || m > c.far || e.push({distance:m, distanceToRay:Math.sqrt(h), point:d.clone(), index:b, face:null, object:f});
         }
       }
       var f = this, n = this.geometry, k = this.matrixWorld, q = c.params.Points.threshold;
@@ -9727,8 +9727,8 @@ Nunu.webvrAvailable = function() {
     function c(d, a, b) {
       return d.x !== a.x ? d.x < a.x ? d.x <= b.x && b.x <= a.x : a.x <= b.x && b.x <= d.x : d.y < a.y ? d.y <= b.y && b.y <= a.y : a.y <= b.y && b.y <= d.y;
     }
-    function e(d, a, b, e, m) {
-      var h = a.x - d.x, f = a.y - d.y, n = e.x - b.x, k = e.y - b.y, q = d.x - b.x, g = d.y - b.y, p = f * n - h * k, r = f * q - h * g;
+    function e(d, a, b, e, h) {
+      var m = a.x - d.x, f = a.y - d.y, n = e.x - b.x, k = e.y - b.y, q = d.x - b.x, g = d.y - b.y, p = f * n - m * k, r = f * q - m * g;
       if (Math.abs(p) > Number.EPSILON) {
         if (0 < p) {
           if (0 > r || r > p) {
@@ -9748,10 +9748,10 @@ Nunu.webvrAvailable = function() {
           }
         }
         if (0 === n) {
-          return !m || 0 !== r && r !== p ? [d] : [];
+          return !h || 0 !== r && r !== p ? [d] : [];
         }
         if (n === p) {
-          return !m || 0 !== r && r !== p ? [a] : [];
+          return !h || 0 !== r && r !== p ? [a] : [];
         }
         if (0 === r) {
           return [b];
@@ -9759,13 +9759,13 @@ Nunu.webvrAvailable = function() {
         if (r === p) {
           return [e];
         }
-        m = n / p;
-        return [{x:d.x + m * h, y:d.y + m * f}];
+        h = n / p;
+        return [{x:d.x + h * m, y:d.y + h * f}];
       }
       if (0 !== r || k * q !== n * g) {
         return [];
       }
-      f = 0 === h && 0 === f;
+      f = 0 === m && 0 === f;
       n = 0 === n && 0 === k;
       if (f && n) {
         return d.x !== b.x || d.y !== b.y ? [] : [d];
@@ -9776,18 +9776,18 @@ Nunu.webvrAvailable = function() {
       if (n) {
         return c(d, a, b) ? [b] : [];
       }
-      0 !== h ? (d.x < a.x ? (h = d, n = d.x, f = a, d = a.x) : (h = a, n = a.x, f = d, d = d.x), b.x < e.x ? (a = b, p = b.x, k = e, b = e.x) : (a = e, p = e.x, k = b, b = b.x)) : (d.y < a.y ? (h = d, n = d.y, f = a, d = a.y) : (h = a, n = a.y, f = d, d = d.y), b.y < e.y ? (a = b, p = b.y, k = e, b = e.y) : (a = e, p = e.y, k = b, b = b.y));
-      return n <= p ? d < p ? [] : d === p ? m ? [] : [a] : d <= b ? [a, f] : [a, k] : n > b ? [] : n === b ? m ? [] : [h] : d <= b ? [h, f] : [h, k];
+      0 !== m ? (d.x < a.x ? (m = d, n = d.x, f = a, d = a.x) : (m = a, n = a.x, f = d, d = d.x), b.x < e.x ? (a = b, p = b.x, k = e, b = e.x) : (a = e, p = e.x, k = b, b = b.x)) : (d.y < a.y ? (m = d, n = d.y, f = a, d = a.y) : (m = a, n = a.y, f = d, d = d.y), b.y < e.y ? (a = b, p = b.y, k = e, b = e.y) : (a = e, p = e.y, k = b, b = b.y));
+      return n <= p ? d < p ? [] : d === p ? h ? [] : [a] : d <= b ? [a, f] : [a, k] : n > b ? [] : n === b ? h ? [] : [m] : d <= b ? [m, f] : [m, k];
     }
     function h(d, a, b, c) {
-      var e = a.x - d.x, m = a.y - d.y;
+      var e = a.x - d.x, h = a.y - d.y;
       a = b.x - d.x;
       b = b.y - d.y;
-      var h = c.x - d.x;
+      var m = c.x - d.x;
       c = c.y - d.y;
-      d = e * b - m * a;
-      e = e * c - m * h;
-      return Math.abs(d) > Number.EPSILON ? (a = h * b - c * a, 0 < d ? 0 <= e && 0 <= a : 0 <= e || 0 <= a) : 0 < e;
+      d = e * b - h * a;
+      e = e * c - h * m;
+      return Math.abs(d) > Number.EPSILON ? (a = m * b - c * a, 0 < d ? 0 <= e && 0 <= a : 0 <= e || 0 <= a) : 0 < e;
     }
     b(d);
     a.forEach(b);
@@ -9828,10 +9828,10 @@ Nunu.webvrAvailable = function() {
         return !1;
       }
       function m(d, b) {
-        var c, m, h, f;
+        var c, h, m, f;
         for (c = 0;c < k.length;c++) {
-          for (m = a[k[c]], h = 0;h < m.length;h++) {
-            if (f = h + 1, f %= m.length, f = e(d, b, m[h], m[f], !0), 0 < f.length) {
+          for (h = a[k[c]], m = 0;m < h.length;m++) {
+            if (f = m + 1, f %= h.length, f = e(d, b, h[m], h[f], !0), 0 < f.length) {
               return !0;
             }
           }
@@ -10889,11 +10889,11 @@ Nunu.webvrAvailable = function() {
   }};
   vc.prototype = Object.assign(Object.create(Ab), {constructor:vc, ValueTypeName:"vector"});
   Nd.prototype = Object.assign(Object.create(Ya.prototype), {constructor:Nd, interpolate_:function(d, a, b, c) {
-    var h = this.resultBuffer, m = this.sampleValues, f = this.valueSize;
-    d *= f;
+    var h = this.resultBuffer, f = this.sampleValues, m = this.valueSize;
+    d *= m;
     a = (b - a) / (c - a);
-    for (b = d + f;d !== b;d += 4) {
-      e.slerpFlat(h, 0, m, d - f, m, d, a);
+    for (b = d + m;d !== b;d += 4) {
+      e.slerpFlat(h, 0, f, d - m, f, d, a);
     }
     return h;
   }});
@@ -11532,11 +11532,11 @@ Nunu.webvrAvailable = function() {
     d.animations && (e.animations = this.parseAnimations(d.animations));
     void 0 !== d.images && 0 !== d.images.length || void 0 === a || a(e);
     return e;
-  }, parseGeometries:function(d) {
-    var a = {};
-    if (void 0 !== d) {
-      for (var b = new je, c = new ie, e = 0, h = d.length;e < h;e++) {
-        var f, n = d[e];
+  }, parseGeometries:function(a) {
+    var d = {};
+    if (void 0 !== a) {
+      for (var b = new je, c = new ie, e = 0, h = a.length;e < h;e++) {
+        var f, n = a[e];
         switch(n.type) {
           case "PlaneGeometry":
           case "PlaneBufferGeometry":
@@ -11597,150 +11597,150 @@ Nunu.webvrAvailable = function() {
         }
         f.uuid = n.uuid;
         void 0 !== n.name && (f.name = n.name);
-        a[n.uuid] = f;
+        d[n.uuid] = f;
       }
     }
-    return a;
-  }, parseMaterials:function(d, a) {
-    var b = {};
-    if (void 0 !== d) {
+    return d;
+  }, parseMaterials:function(a, b) {
+    var d = {};
+    if (void 0 !== a) {
       var c = new Rd;
-      c.setTextures(a);
-      a = 0;
-      for (var e = d.length;a < e;a++) {
-        var h = c.parse(d[a]);
-        b[h.uuid] = h;
+      c.setTextures(b);
+      b = 0;
+      for (var e = a.length;b < e;b++) {
+        var h = c.parse(a[b]);
+        d[h.uuid] = h;
       }
     }
-    return b;
-  }, parseAnimations:function(d) {
-    for (var a = [], b = 0;b < d.length;b++) {
-      var c = cb.parse(d[b]);
-      a.push(c);
+    return d;
+  }, parseAnimations:function(a) {
+    for (var d = [], b = 0;b < a.length;b++) {
+      var c = cb.parse(a[b]);
+      d.push(c);
     }
-    return a;
-  }, parseImages:function(d, a) {
-    function b(d) {
-      c.manager.itemStart(d);
-      return h.load(d, function() {
-        c.manager.itemEnd(d);
+    return d;
+  }, parseImages:function(a, b) {
+    function d(a) {
+      c.manager.itemStart(a);
+      return h.load(a, function() {
+        c.manager.itemEnd(a);
       }, void 0, function() {
-        c.manager.itemError(d);
+        c.manager.itemError(a);
       });
     }
     var c = this, e = {};
-    if (void 0 !== d && 0 < d.length) {
-      a = new fe(a);
-      var h = new id(a);
+    if (void 0 !== a && 0 < a.length) {
+      b = new fe(b);
+      var h = new id(b);
       h.setCrossOrigin(this.crossOrigin);
-      a = 0;
-      for (var f = d.length;a < f;a++) {
-        var m = d[a], n = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(m.url) ? m.url : c.texturePath + m.url;
-        e[m.uuid] = b(n);
+      b = 0;
+      for (var f = a.length;b < f;b++) {
+        var n = a[b], m = /^(\/\/)|([a-z]+:(\/\/)?)/i.test(n.url) ? n.url : c.texturePath + n.url;
+        e[n.uuid] = d(m);
       }
     }
     return e;
-  }, parseTextures:function(d, a) {
-    function c(d, a) {
-      if ("number" === typeof d) {
-        return d;
+  }, parseTextures:function(a, c) {
+    function d(a, d) {
+      if ("number" === typeof a) {
+        return a;
       }
-      console.warn("THREE.ObjectLoader.parseTexture: Constant should be in numeric form.", d);
-      return a[d];
+      console.warn("THREE.ObjectLoader.parseTexture: Constant should be in numeric form.", a);
+      return d[a];
     }
     var e = {UVMapping:300, CubeReflectionMapping:301, CubeRefractionMapping:302, EquirectangularReflectionMapping:303, EquirectangularRefractionMapping:304, SphericalReflectionMapping:305, CubeUVReflectionMapping:306, CubeUVRefractionMapping:307}, h = {RepeatWrapping:1E3, ClampToEdgeWrapping:1001, MirroredRepeatWrapping:1002}, f = {NearestFilter:1003, NearestMipMapNearestFilter:1004, NearestMipMapLinearFilter:1005, LinearFilter:1006, LinearMipMapNearestFilter:1007, LinearMipMapLinearFilter:1008}, 
-    m = {};
-    if (void 0 !== d) {
-      for (var n = 0, k = d.length;n < k;n++) {
-        var q = d[n];
+    n = {};
+    if (void 0 !== a) {
+      for (var m = 0, k = a.length;m < k;m++) {
+        var q = a[m];
         void 0 === q.image && console.warn('THREE.ObjectLoader: No "image" specified for', q.uuid);
-        void 0 === a[q.image] && console.warn("THREE.ObjectLoader: Undefined image", q.image);
-        var g = new b(a[q.image]);
+        void 0 === c[q.image] && console.warn("THREE.ObjectLoader: Undefined image", q.image);
+        var g = new b(c[q.image]);
         g.needsUpdate = !0;
         g.uuid = q.uuid;
         void 0 !== q.name && (g.name = q.name);
-        void 0 !== q.mapping && (g.mapping = c(q.mapping, e));
+        void 0 !== q.mapping && (g.mapping = d(q.mapping, e));
         void 0 !== q.offset && g.offset.fromArray(q.offset);
         void 0 !== q.repeat && g.repeat.fromArray(q.repeat);
-        void 0 !== q.wrap && (g.wrapS = c(q.wrap[0], h), g.wrapT = c(q.wrap[1], h));
-        void 0 !== q.minFilter && (g.minFilter = c(q.minFilter, f));
-        void 0 !== q.magFilter && (g.magFilter = c(q.magFilter, f));
+        void 0 !== q.wrap && (g.wrapS = d(q.wrap[0], h), g.wrapT = d(q.wrap[1], h));
+        void 0 !== q.minFilter && (g.minFilter = d(q.minFilter, f));
+        void 0 !== q.magFilter && (g.magFilter = d(q.magFilter, f));
         void 0 !== q.anisotropy && (g.anisotropy = q.anisotropy);
         void 0 !== q.flipY && (g.flipY = q.flipY);
-        m[q.uuid] = g;
+        n[q.uuid] = g;
       }
     }
-    return m;
+    return n;
   }, parseObject:function() {
-    var d = new q;
-    return function(a, b, c) {
-      function e(a) {
-        void 0 === b[a] && console.warn("THREE.ObjectLoader: Undefined geometry", a);
-        return b[a];
+    var a = new q;
+    return function(d, b, c) {
+      function e(d) {
+        void 0 === b[d] && console.warn("THREE.ObjectLoader: Undefined geometry", d);
+        return b[d];
       }
-      function h(a) {
-        if (void 0 !== a) {
-          return void 0 === c[a] && console.warn("THREE.ObjectLoader: Undefined material", a), c[a];
+      function h(d) {
+        if (void 0 !== d) {
+          return void 0 === c[d] && console.warn("THREE.ObjectLoader: Undefined material", d), c[d];
         }
       }
       var f;
-      switch(a.type) {
+      switch(d.type) {
         case "Scene":
           f = new xd;
-          void 0 !== a.background && Number.isInteger(a.background) && (f.background = new T(a.background));
-          void 0 !== a.fog && ("Fog" === a.fog.type ? f.fog = new cc(a.fog.color, a.fog.near, a.fog.far) : "FogExp2" === a.fog.type && (f.fog = new bc(a.fog.color, a.fog.density)));
+          void 0 !== d.background && Number.isInteger(d.background) && (f.background = new T(d.background));
+          void 0 !== d.fog && ("Fog" === d.fog.type ? f.fog = new cc(d.fog.color, d.fog.near, d.fog.far) : "FogExp2" === d.fog.type && (f.fog = new bc(d.fog.color, d.fog.density)));
           break;
         case "PerspectiveCamera":
-          f = new Pa(a.fov, a.aspect, a.near, a.far);
-          void 0 !== a.focus && (f.focus = a.focus);
-          void 0 !== a.zoom && (f.zoom = a.zoom);
-          void 0 !== a.filmGauge && (f.filmGauge = a.filmGauge);
-          void 0 !== a.filmOffset && (f.filmOffset = a.filmOffset);
-          void 0 !== a.view && (f.view = Object.assign({}, a.view));
+          f = new Pa(d.fov, d.aspect, d.near, d.far);
+          void 0 !== d.focus && (f.focus = d.focus);
+          void 0 !== d.zoom && (f.zoom = d.zoom);
+          void 0 !== d.filmGauge && (f.filmGauge = d.filmGauge);
+          void 0 !== d.filmOffset && (f.filmOffset = d.filmOffset);
+          void 0 !== d.view && (f.view = Object.assign({}, d.view));
           break;
         case "OrthographicCamera":
-          f = new Zb(a.left, a.right, a.top, a.bottom, a.near, a.far);
+          f = new Zb(d.left, d.right, d.top, d.bottom, d.near, d.far);
           break;
         case "AmbientLight":
-          f = new Kd(a.color, a.intensity);
+          f = new Kd(d.color, d.intensity);
           break;
         case "DirectionalLight":
-          f = new Jd(a.color, a.intensity);
+          f = new Jd(d.color, d.intensity);
           break;
         case "PointLight":
-          f = new Hd(a.color, a.intensity, a.distance, a.decay);
+          f = new Hd(d.color, d.intensity, d.distance, d.decay);
           break;
         case "SpotLight":
-          f = new Gd(a.color, a.intensity, a.distance, a.angle, a.penumbra, a.decay);
+          f = new Gd(d.color, d.intensity, d.distance, d.angle, d.penumbra, d.decay);
           break;
         case "HemisphereLight":
-          f = new Ed(a.color, a.groundColor, a.intensity);
+          f = new Ed(d.color, d.groundColor, d.intensity);
           break;
         case "SkinnedMesh":
           console.warn("THREE.ObjectLoader.parseObject() does not support SkinnedMesh yet.");
         case "Mesh":
-          f = e(a.geometry);
-          var n = h(a.material);
+          f = e(d.geometry);
+          var n = h(d.material);
           f = f.bones && 0 < f.bones.length ? new zd(f, n) : new Ja(f, n);
           break;
         case "LOD":
           f = new Pc;
           break;
         case "Line":
-          f = new eb(e(a.geometry), h(a.material), a.mode);
+          f = new eb(e(d.geometry), h(d.material), d.mode);
           break;
         case "LineLoop":
-          f = new Ad(e(a.geometry), h(a.material));
+          f = new Ad(e(d.geometry), h(d.material));
           break;
         case "LineSegments":
-          f = new va(e(a.geometry), h(a.material));
+          f = new va(e(d.geometry), h(d.material));
           break;
         case "PointCloud":
         case "Points":
-          f = new dc(e(a.geometry), h(a.material));
+          f = new dc(e(d.geometry), h(d.material));
           break;
         case "Sprite":
-          f = new Oc(h(a.material));
+          f = new Oc(h(d.material));
           break;
         case "Group":
           f = new Rc;
@@ -11748,22 +11748,22 @@ Nunu.webvrAvailable = function() {
         default:
           f = new X;
       }
-      f.uuid = a.uuid;
-      void 0 !== a.name && (f.name = a.name);
-      void 0 !== a.matrix ? (d.fromArray(a.matrix), d.decompose(f.position, f.quaternion, f.scale)) : (void 0 !== a.position && f.position.fromArray(a.position), void 0 !== a.rotation && f.rotation.fromArray(a.rotation), void 0 !== a.quaternion && f.quaternion.fromArray(a.quaternion), void 0 !== a.scale && f.scale.fromArray(a.scale));
-      void 0 !== a.castShadow && (f.castShadow = a.castShadow);
-      void 0 !== a.receiveShadow && (f.receiveShadow = a.receiveShadow);
-      a.shadow && (void 0 !== a.shadow.bias && (f.shadow.bias = a.shadow.bias), void 0 !== a.shadow.radius && (f.shadow.radius = a.shadow.radius), void 0 !== a.shadow.mapSize && f.shadow.mapSize.fromArray(a.shadow.mapSize), void 0 !== a.shadow.camera && (f.shadow.camera = this.parseObject(a.shadow.camera)));
-      void 0 !== a.visible && (f.visible = a.visible);
-      void 0 !== a.userData && (f.userData = a.userData);
-      if (void 0 !== a.children) {
-        for (var m in a.children) {
-          f.add(this.parseObject(a.children[m], b, c));
+      f.uuid = d.uuid;
+      void 0 !== d.name && (f.name = d.name);
+      void 0 !== d.matrix ? (a.fromArray(d.matrix), a.decompose(f.position, f.quaternion, f.scale)) : (void 0 !== d.position && f.position.fromArray(d.position), void 0 !== d.rotation && f.rotation.fromArray(d.rotation), void 0 !== d.quaternion && f.quaternion.fromArray(d.quaternion), void 0 !== d.scale && f.scale.fromArray(d.scale));
+      void 0 !== d.castShadow && (f.castShadow = d.castShadow);
+      void 0 !== d.receiveShadow && (f.receiveShadow = d.receiveShadow);
+      d.shadow && (void 0 !== d.shadow.bias && (f.shadow.bias = d.shadow.bias), void 0 !== d.shadow.radius && (f.shadow.radius = d.shadow.radius), void 0 !== d.shadow.mapSize && f.shadow.mapSize.fromArray(d.shadow.mapSize), void 0 !== d.shadow.camera && (f.shadow.camera = this.parseObject(d.shadow.camera)));
+      void 0 !== d.visible && (f.visible = d.visible);
+      void 0 !== d.userData && (f.userData = d.userData);
+      if (void 0 !== d.children) {
+        for (var m in d.children) {
+          f.add(this.parseObject(d.children[m], b, c));
         }
       }
-      if ("LOD" === a.type) {
-        for (a = a.levels, n = 0;n < a.length;n++) {
-          var k = a[n];
+      if ("LOD" === d.type) {
+        for (d = d.levels, n = 0;n < d.length;n++) {
+          var k = d[n];
           m = f.getObjectByProperty("uuid", k.object);
           void 0 !== m && f.addLevel(m, k.distance);
         }
@@ -11774,46 +11774,46 @@ Nunu.webvrAvailable = function() {
   Object.assign(Sa.prototype, {getPoint:function() {
     console.warn("THREE.Curve: Warning, getPoint() not implemented!");
     return null;
-  }, getPointAt:function(a) {
-    a = this.getUtoTmapping(a);
-    return this.getPoint(a);
-  }, getPoints:function(a) {
-    void 0 === a && (a = 5);
-    for (var d = [], b = 0;b <= a;b++) {
-      d.push(this.getPoint(b / a));
+  }, getPointAt:function(d) {
+    d = this.getUtoTmapping(d);
+    return this.getPoint(d);
+  }, getPoints:function(d) {
+    void 0 === d && (d = 5);
+    for (var a = [], b = 0;b <= d;b++) {
+      a.push(this.getPoint(b / d));
     }
-    return d;
-  }, getSpacedPoints:function(a) {
-    void 0 === a && (a = 5);
-    for (var d = [], b = 0;b <= a;b++) {
-      d.push(this.getPointAt(b / a));
+    return a;
+  }, getSpacedPoints:function(d) {
+    void 0 === d && (d = 5);
+    for (var a = [], b = 0;b <= d;b++) {
+      a.push(this.getPointAt(b / d));
     }
-    return d;
+    return a;
   }, getLength:function() {
-    var a = this.getLengths();
-    return a[a.length - 1];
-  }, getLengths:function(a) {
-    void 0 === a && (a = this.__arcLengthDivisions ? this.__arcLengthDivisions : 200);
-    if (this.cacheArcLengths && this.cacheArcLengths.length === a + 1 && !this.needsUpdate) {
+    var d = this.getLengths();
+    return d[d.length - 1];
+  }, getLengths:function(d) {
+    void 0 === d && (d = this.__arcLengthDivisions ? this.__arcLengthDivisions : 200);
+    if (this.cacheArcLengths && this.cacheArcLengths.length === d + 1 && !this.needsUpdate) {
       return this.cacheArcLengths;
     }
     this.needsUpdate = !1;
-    var d = [], b, c = this.getPoint(0), e, h = 0;
-    d.push(0);
-    for (e = 1;e <= a;e++) {
-      b = this.getPoint(e / a), h += b.distanceTo(c), d.push(h), c = b;
+    var a = [], b, c = this.getPoint(0), e, h = 0;
+    a.push(0);
+    for (e = 1;e <= d;e++) {
+      b = this.getPoint(e / d), h += b.distanceTo(c), a.push(h), c = b;
     }
-    return this.cacheArcLengths = d;
+    return this.cacheArcLengths = a;
   }, updateArcLengths:function() {
     this.needsUpdate = !0;
     this.getLengths();
-  }, getUtoTmapping:function(a, b) {
-    var d = this.getLengths(), c, e = d.length;
-    a = b ? b : a * d[e - 1];
-    b = 0;
-    for (var h = e - 1, f;b <= h;) {
-      if (c = Math.floor(b + (h - b) / 2), f = d[c] - a, 0 > f) {
-        b = c + 1;
+  }, getUtoTmapping:function(d, a) {
+    var b = this.getLengths(), c, e = b.length;
+    d = a ? a : d * b[e - 1];
+    a = 0;
+    for (var h = e - 1, f;a <= h;) {
+      if (c = Math.floor(a + (h - a) / 2), f = b[c] - d, 0 > f) {
+        a = c + 1;
       } else {
         if (0 < f) {
           h = c - 1;
@@ -11824,43 +11824,43 @@ Nunu.webvrAvailable = function() {
       }
     }
     c = h;
-    if (d[c] === a) {
+    if (b[c] === d) {
       return c / (e - 1);
     }
-    b = d[c];
-    return (c + (a - b) / (d[c + 1] - b)) / (e - 1);
-  }, getTangent:function(a) {
-    var d = a - 1E-4;
-    a += 1E-4;
-    0 > d && (d = 0);
-    1 < a && (a = 1);
-    d = this.getPoint(d);
-    return this.getPoint(a).clone().sub(d).normalize();
-  }, getTangentAt:function(a) {
-    a = this.getUtoTmapping(a);
-    return this.getTangent(a);
-  }, computeFrenetFrames:function(a, b) {
-    var d = new h, c = [], e = [], f = [], n = new h, m = new q, k, g;
-    for (k = 0;k <= a;k++) {
-      g = k / a, c[k] = this.getTangentAt(g), c[k].normalize();
+    a = b[c];
+    return (c + (d - a) / (b[c + 1] - a)) / (e - 1);
+  }, getTangent:function(d) {
+    var a = d - 1E-4;
+    d += 1E-4;
+    0 > a && (a = 0);
+    1 < d && (d = 1);
+    a = this.getPoint(a);
+    return this.getPoint(d).clone().sub(a).normalize();
+  }, getTangentAt:function(d) {
+    d = this.getUtoTmapping(d);
+    return this.getTangent(d);
+  }, computeFrenetFrames:function(d, a) {
+    var b = new h, c = [], e = [], f = [], n = new h, m = new q, k, g;
+    for (k = 0;k <= d;k++) {
+      g = k / d, c[k] = this.getTangentAt(g), c[k].normalize();
     }
     e[0] = new h;
     f[0] = new h;
     k = Number.MAX_VALUE;
     g = Math.abs(c[0].x);
     var p = Math.abs(c[0].y), r = Math.abs(c[0].z);
-    g <= k && (k = g, d.set(1, 0, 0));
-    p <= k && (k = p, d.set(0, 1, 0));
-    r <= k && d.set(0, 0, 1);
-    n.crossVectors(c[0], d).normalize();
+    g <= k && (k = g, b.set(1, 0, 0));
+    p <= k && (k = p, b.set(0, 1, 0));
+    r <= k && b.set(0, 0, 1);
+    n.crossVectors(c[0], b).normalize();
     e[0].crossVectors(c[0], n);
     f[0].crossVectors(c[0], e[0]);
-    for (k = 1;k <= a;k++) {
-      e[k] = e[k - 1].clone(), f[k] = f[k - 1].clone(), n.crossVectors(c[k - 1], c[k]), n.length() > Number.EPSILON && (n.normalize(), d = Math.acos(ja.clamp(c[k - 1].dot(c[k]), -1, 1)), e[k].applyMatrix4(m.makeRotationAxis(n, d))), f[k].crossVectors(c[k], e[k]);
+    for (k = 1;k <= d;k++) {
+      e[k] = e[k - 1].clone(), f[k] = f[k - 1].clone(), n.crossVectors(c[k - 1], c[k]), n.length() > Number.EPSILON && (n.normalize(), b = Math.acos(ja.clamp(c[k - 1].dot(c[k]), -1, 1)), e[k].applyMatrix4(m.makeRotationAxis(n, b))), f[k].crossVectors(c[k], e[k]);
     }
-    if (!0 === b) {
-      for (d = Math.acos(ja.clamp(e[0].dot(e[a]), -1, 1)), d /= a, 0 < c[0].dot(n.crossVectors(e[0], e[a])) && (d = -d), k = 1;k <= a;k++) {
-        e[k].applyMatrix4(m.makeRotationAxis(c[k], d * k)), f[k].crossVectors(c[k], e[k]);
+    if (!0 === a) {
+      for (b = Math.acos(ja.clamp(e[0].dot(e[d]), -1, 1)), b /= d, 0 < c[0].dot(n.crossVectors(e[0], e[d])) && (b = -b), k = 1;k <= d;k++) {
+        e[k].applyMatrix4(m.makeRotationAxis(c[k], b * k)), f[k].crossVectors(c[k], e[k]);
       }
     }
     return {tangents:c, normals:e, binormals:f};
@@ -11868,37 +11868,37 @@ Nunu.webvrAvailable = function() {
   sb.prototype = Object.create(Sa.prototype);
   sb.prototype.constructor = sb;
   sb.prototype.isLineCurve = !0;
-  sb.prototype.getPoint = function(a) {
-    if (1 === a) {
+  sb.prototype.getPoint = function(d) {
+    if (1 === d) {
       return this.v2.clone();
     }
-    var d = this.v2.clone().sub(this.v1);
-    d.multiplyScalar(a).add(this.v1);
-    return d;
+    var a = this.v2.clone().sub(this.v1);
+    a.multiplyScalar(d).add(this.v1);
+    return a;
   };
-  sb.prototype.getPointAt = function(a) {
-    return this.getPoint(a);
+  sb.prototype.getPointAt = function(d) {
+    return this.getPoint(d);
   };
-  sb.prototype.getTangent = function(a) {
+  sb.prototype.getTangent = function(d) {
     return this.v2.clone().sub(this.v1).normalize();
   };
-  ld.prototype = Object.assign(Object.create(Sa.prototype), {constructor:ld, add:function(a) {
-    this.curves.push(a);
+  ld.prototype = Object.assign(Object.create(Sa.prototype), {constructor:ld, add:function(d) {
+    this.curves.push(d);
   }, closePath:function() {
-    var a = this.curves[0].getPoint(0), b = this.curves[this.curves.length - 1].getPoint(1);
-    a.equals(b) || this.curves.push(new sb(b, a));
-  }, getPoint:function(a) {
-    var d = a * this.getLength(), b = this.getCurveLengths();
-    for (a = 0;a < b.length;) {
-      if (b[a] >= d) {
-        return d = b[a] - d, a = this.curves[a], b = a.getLength(), a.getPointAt(0 === b ? 0 : 1 - d / b);
+    var d = this.curves[0].getPoint(0), a = this.curves[this.curves.length - 1].getPoint(1);
+    d.equals(a) || this.curves.push(new sb(a, d));
+  }, getPoint:function(d) {
+    var a = d * this.getLength(), b = this.getCurveLengths();
+    for (d = 0;d < b.length;) {
+      if (b[d] >= a) {
+        return a = b[d] - a, d = this.curves[d], b = d.getLength(), d.getPointAt(0 === b ? 0 : 1 - a / b);
       }
-      a++;
+      d++;
     }
     return null;
   }, getLength:function() {
-    var a = this.getCurveLengths();
-    return a[a.length - 1];
+    var d = this.getCurveLengths();
+    return d[d.length - 1];
   }, updateArcLengths:function() {
     this.needsUpdate = !0;
     this.cacheLengths = null;
@@ -11907,57 +11907,57 @@ Nunu.webvrAvailable = function() {
     if (this.cacheLengths && this.cacheLengths.length === this.curves.length) {
       return this.cacheLengths;
     }
-    for (var a = [], b = 0, c = 0, e = this.curves.length;c < e;c++) {
-      b += this.curves[c].getLength(), a.push(b);
+    for (var d = [], a = 0, b = 0, c = this.curves.length;b < c;b++) {
+      a += this.curves[b].getLength(), d.push(a);
     }
-    return this.cacheLengths = a;
-  }, getSpacedPoints:function(a) {
-    void 0 === a && (a = 40);
-    for (var d = [], b = 0;b <= a;b++) {
-      d.push(this.getPoint(b / a));
+    return this.cacheLengths = d;
+  }, getSpacedPoints:function(d) {
+    void 0 === d && (d = 40);
+    for (var a = [], b = 0;b <= d;b++) {
+      a.push(this.getPoint(b / d));
     }
-    this.autoClose && d.push(d[0]);
-    return d;
-  }, getPoints:function(a) {
-    a = a || 12;
-    for (var d = [], b, c = 0, e = this.curves;c < e.length;c++) {
-      for (var h = e[c], h = h.getPoints(h && h.isEllipseCurve ? 2 * a : h && h.isLineCurve ? 1 : h && h.isSplineCurve ? a * h.points.length : a), f = 0;f < h.length;f++) {
+    this.autoClose && a.push(a[0]);
+    return a;
+  }, getPoints:function(d) {
+    d = d || 12;
+    for (var a = [], b, c = 0, e = this.curves;c < e.length;c++) {
+      for (var h = e[c], h = h.getPoints(h && h.isEllipseCurve ? 2 * d : h && h.isLineCurve ? 1 : h && h.isSplineCurve ? d * h.points.length : d), f = 0;f < h.length;f++) {
         var n = h[f];
-        b && b.equals(n) || (d.push(n), b = n);
+        b && b.equals(n) || (a.push(n), b = n);
       }
     }
-    this.autoClose && 1 < d.length && !d[d.length - 1].equals(d[0]) && d.push(d[0]);
-    return d;
-  }, createPointsGeometry:function(a) {
-    a = this.getPoints(a);
-    return this.createGeometry(a);
-  }, createSpacedPointsGeometry:function(a) {
-    a = this.getSpacedPoints(a);
-    return this.createGeometry(a);
-  }, createGeometry:function(a) {
-    for (var d = new ea, b = 0, c = a.length;b < c;b++) {
-      var e = a[b];
-      d.vertices.push(new h(e.x, e.y, e.z || 0));
+    this.autoClose && 1 < a.length && !a[a.length - 1].equals(a[0]) && a.push(a[0]);
+    return a;
+  }, createPointsGeometry:function(d) {
+    d = this.getPoints(d);
+    return this.createGeometry(d);
+  }, createSpacedPointsGeometry:function(d) {
+    d = this.getSpacedPoints(d);
+    return this.createGeometry(d);
+  }, createGeometry:function(d) {
+    for (var a = new ea, b = 0, c = d.length;b < c;b++) {
+      var e = d[b];
+      a.vertices.push(new h(e.x, e.y, e.z || 0));
     }
-    return d;
+    return a;
   }});
   zb.prototype = Object.create(Sa.prototype);
   zb.prototype.constructor = zb;
   zb.prototype.isEllipseCurve = !0;
-  zb.prototype.getPoint = function(a) {
-    for (var d = 2 * Math.PI, b = this.aEndAngle - this.aStartAngle, c = Math.abs(b) < Number.EPSILON;0 > b;) {
-      b += d;
+  zb.prototype.getPoint = function(d) {
+    for (var a = 2 * Math.PI, b = this.aEndAngle - this.aStartAngle, c = Math.abs(b) < Number.EPSILON;0 > b;) {
+      b += a;
     }
-    for (;b > d;) {
-      b -= d;
+    for (;b > a;) {
+      b -= a;
     }
-    b < Number.EPSILON && (b = c ? 0 : d);
-    !0 !== this.aClockwise || c || (b = b === d ? -d : b - d);
-    d = this.aStartAngle + a * b;
-    a = this.aX + this.xRadius * Math.cos(d);
-    var e = this.aY + this.yRadius * Math.sin(d);
-    0 !== this.aRotation && (d = Math.cos(this.aRotation), b = Math.sin(this.aRotation), c = a - this.aX, e -= this.aY, a = c * d - e * b + this.aX, e = c * b + e * d + this.aY);
-    return new l(a, e);
+    b < Number.EPSILON && (b = c ? 0 : a);
+    !0 !== this.aClockwise || c || (b = b === a ? -a : b - a);
+    a = this.aStartAngle + d * b;
+    d = this.aX + this.xRadius * Math.cos(a);
+    var e = this.aY + this.yRadius * Math.sin(a);
+    0 !== this.aRotation && (a = Math.cos(this.aRotation), b = Math.sin(this.aRotation), c = d - this.aX, e -= this.aY, d = c * a - e * b + this.aX, e = c * b + e * a + this.aY);
+    return new l(d, e);
   };
   Vb.prototype = Object.create(Sa.prototype);
   Vb.prototype.constructor = Vb;
@@ -20389,16 +20389,16 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
     this.steps.splice(a, 1);
   };
   a.prototype.addWrappedStep = function(a, b) {
-    var f = this.controller, k = function(c) {
-      var e, h, k;
+    var f = this.controller, g = function(c) {
+      var e, h, g;
       e = "frame" == a ? [c] : c[a + "s"] || [];
       h = 0;
-      for (k = e.length;k > h;h++) {
+      for (g = e.length;g > h;h++) {
         b.call(f, e[h]);
       }
       return c;
     };
-    return this.addStep(k), k;
+    return this.addStep(g), g;
   };
 }, {}], 14:[function(a, g) {
   a = a("gl-matrix");
@@ -30805,6 +30805,20 @@ THREE.Object3D.prototype.dispose = function() {
   for (var a = 0;a < this.children.length;a++) {
     this.children[a].dispose();
   }
+};
+THREE.Object3D.prototype.addAbove = function(a, g) {
+  if (a === this) {
+    return console.error("THREE.Object3D.add: object can't be added as a child of itself.", a), this;
+  }
+  a && a.isObject3D ? (null !== a.parent && a.parent.remove(a), a.parent = this, a.dispatchEvent({type:"added"}), g = this.children.indexOf(g), this.children.splice(g, 0, a)) : console.error("THREE.Object3D.add: object not an instance of THREE.Object3D.", a);
+  return this;
+};
+THREE.Object3D.prototype.addBellow = function(a, g) {
+  if (a === this) {
+    return console.error("THREE.Object3D.add: object can't be added as a child of itself.", a), this;
+  }
+  a && a.isObject3D ? (null !== a.parent && a.parent.remove(a), a.parent = this, a.dispatchEvent({type:"added"}), g = this.children.indexOf(g) + 1, this.children.splice(g, 0, a)) : console.error("THREE.Object3D.add: object not an instance of THREE.Object3D.", a);
+  return this;
 };
 THREE.Object3D.prototype.removeAll = function() {
   for (var a = this.children.length - 1;-1 < a;a--) {
