@@ -42,7 +42,7 @@ Nunu.VERSION = "V0.8.9.21 Alpha";
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201702222321";
+Nunu.TIMESTAMP = "201702232316";
 
 /**
  * Check if host supports WebVR and if there is a VR display available.
@@ -54,6 +54,17 @@ Nunu.webvrAvailable = function()
 {
 	return navigator.getVRDisplays !== undefined;
 };
+
+/** 
+ * Check if host supports WebAudio.
+ *
+ * @method webAudioAvailable
+ * @return {boolean} True if WebAudio is available.
+ */
+Nunu.webAudioAvailable = function()
+{
+	return window.AudioContext !== undefined || window.webkitAudioContext !== undefined;
+}
 
 /**
  * Check if host supports WebGL.
