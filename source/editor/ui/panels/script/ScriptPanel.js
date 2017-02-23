@@ -15,6 +15,7 @@ function ScriptPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.visible = self.visible.getValue();
 		}
 	});
@@ -29,6 +30,7 @@ function ScriptPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.matrixAutoUpdate = !(self.static.getValue());
 		}
 	});

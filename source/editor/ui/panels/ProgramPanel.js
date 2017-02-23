@@ -130,6 +130,7 @@ function ProgramPanel(parent, obj)
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
+		Editor.history.push(self.obj, Action.CHANGED);
 		self.obj.shadowsType = self.shadowsType.getValue();
 	});
 	this.form.add(this.shadowsType);
