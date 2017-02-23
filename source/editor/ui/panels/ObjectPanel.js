@@ -15,8 +15,8 @@ function ObjectPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.visible = self.visible.getValue();
 			Editor.history.push(self.obj, Action.CHANGED);
+			self.obj.visible = self.visible.getValue();
 		}
 	});
 	this.form.add(this.visible);
@@ -30,8 +30,8 @@ function ObjectPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.matrixAutoUpdate = !(self.static.getValue());
 			Editor.history.push(self.obj, Action.CHANGED);
+			self.obj.matrixAutoUpdate = !(self.static.getValue());
 		}
 	});
 	this.form.add(this.static);
@@ -45,8 +45,8 @@ function ObjectPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.castShadow = self.castShadow.getValue();
 			Editor.history.push(self.obj, Action.CHANGED);
+			self.obj.castShadow = self.castShadow.getValue();
 		}
 	});
 	this.form.add(this.castShadow);
@@ -60,8 +60,8 @@ function ObjectPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.receiveShadow = self.receiveShadow.getValue();
 			Editor.history.push(self.obj, Action.CHANGED);
+			self.obj.receiveShadow = self.receiveShadow.getValue();
 		}
 	});
 	this.form.add(this.receiveShadow);

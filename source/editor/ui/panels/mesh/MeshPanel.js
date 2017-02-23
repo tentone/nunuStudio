@@ -15,6 +15,7 @@ function MeshPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.visible = self.visible.getValue();
 		}
 	});
@@ -29,6 +30,7 @@ function MeshPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.matrixAutoUpdate = !(self.static.getValue());
 		}
 	});
@@ -43,6 +45,7 @@ function MeshPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.castShadow = self.castShadow.getValue();
 		}
 	});
@@ -57,6 +60,7 @@ function MeshPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.receiveShadow = self.receiveShadow.getValue();
 		}
 	});

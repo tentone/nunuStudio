@@ -15,6 +15,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.setText(self.text.getText());
 		}
 	});
@@ -31,6 +32,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.size = self.size.getValue();
 			self.obj.setText();
 		}
@@ -48,6 +50,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.height = self.height.getValue();
 			self.obj.setText();
 		}
@@ -65,6 +68,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.curveSegments = self.curveSegments.getValue();
 			self.obj.setText();
 		}
@@ -80,6 +84,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.bevel = self.bevel.getValue();
 			self.obj.setText();
 		}
@@ -97,6 +102,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.bevelThickness = self.bevelThickness.getValue();
 			self.obj.setText();
 		}
@@ -114,6 +120,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.bevelSize = self.bevelSize.getValue();
 			self.obj.setText();
 		}
@@ -129,6 +136,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.visible = self.visible.getValue();
 		}
 	});
@@ -143,6 +151,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.matrixAutoUpdate = !(self.static.getValue());
 		}
 	});
@@ -157,6 +166,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.castShadow = self.castShadow.getValue();
 		}
 	});
@@ -171,6 +181,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.receiveShadow = self.receiveShadow.getValue();
 		}
 	});

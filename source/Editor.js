@@ -238,7 +238,7 @@ include("editor/ui/panels/devices/KinectPanel.js");
 include("editor/ui/panels/cameras/PerspectiveCameraPanel.js");
 include("editor/ui/panels/cameras/OrthographicCameraPanel.js");
 include("editor/ui/panels/lights/SkyPanel.js");
-include("editor/ui/panels/lights/LightPanel.js");
+include("editor/ui/panels/lights/AmbientLightPanel.js");
 include("editor/ui/panels/lights/RectAreaLightPanel.js");
 include("editor/ui/panels/lights/HemisphereLightPanel.js");
 include("editor/ui/panels/lights/PointLightPanel.js");
@@ -1228,7 +1228,7 @@ Editor.selectObjectPanel = function()
 			}
 			else
 			{
-				Interface.panel = new LightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+				Interface.panel = new AmbientLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 			}
 		}
 		else if(Editor.selectedObject instanceof Sky)

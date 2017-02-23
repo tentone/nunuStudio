@@ -12,6 +12,8 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
+			
 			var scale = self.scale.getValue();
 			self.obj.scale.set(scale.x, scale.y, scale.z);
 
@@ -32,6 +34,7 @@ function PhysicsPanel(parent, obj)
 					shape.radius = scale.x;
 				}
 			}
+
 		}
 	});
 
@@ -46,6 +49,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.body.type = self.type.getValue();
 		}
 	});
@@ -61,6 +65,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.body.mass = self.mass.getValue();
 		}
 	});
@@ -77,6 +82,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.body.linearDamping = self.linearDamping.getValue();
 		}
 	});
@@ -93,6 +99,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.body.angularDamping = self.angularDamping.getValue();
 		}
 	});
@@ -107,6 +114,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.body.allowSleep = self.allowSleep.getValue();
 		}
 	});
@@ -122,6 +130,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.body.sleepSpeedLimit = self.sleepSpeedLimit.getValue();
 		}
 	});
@@ -137,6 +146,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.body.sleepTimeLimit = self.sleepTimeLimit.getValue();
 		}
 	});
@@ -151,6 +161,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.body.fixedRotation = self.fixedRotation.getValue();
 		}
 	});
@@ -166,6 +177,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.push(self.obj, Action.CHANGED);
 			self.obj.body.collisionFilterGroup = self.collisionFilterGroup.getValue();
 		}
 	});
