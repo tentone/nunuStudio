@@ -8928,6 +8928,19 @@
         {
             "file": "..\\source\\Nunu.js",
             "line": 58,
+            "description": "Check if host supports WebAudio.",
+            "itemtype": "method",
+            "name": "webAudioAvailable",
+            "return": {
+                "description": "True if WebAudio is available.",
+                "type": "Boolean"
+            },
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\Nunu.js",
+            "line": 69,
             "description": "Check if host supports WebGL.",
             "itemtype": "method",
             "name": "webglAvailable",
@@ -8940,7 +8953,7 @@
         },
         {
             "file": "..\\source\\Nunu.js",
-            "line": 87,
+            "line": 98,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",
