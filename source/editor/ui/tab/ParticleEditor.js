@@ -19,7 +19,6 @@ function ParticleEditor(parent, closeable, container, index)
 	//Self pointer
 	var self = this;
 
-	//----------------------------Particle preview----------------------------
 	//Canvas
 	this.canvas = new Canvas(this.main.divA);
 	this.canvas.updateInterface();
@@ -92,6 +91,7 @@ function ParticleEditor(parent, closeable, container, index)
 	//Max particle count
 	this.form.addText("Particle count");
 	this.maxParticleCount = new NumberBox(this.form.element);
+	this.maxParticleCount.setStep(1.0);
 	this.maxParticleCount.size.set(100, 18);
 	this.maxParticleCount.setOnChange(function()
 	{

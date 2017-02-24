@@ -1,8 +1,9 @@
 "use strict";
 
 /**
- * FileSystem is used to read and write files using nunuStudio
- * Some operations are platform specific and might not work everywhere
+ * FileSystem is used to read and write files using nunuStudio.
+ * 
+ * Some operations are platform specific and might not work everywhere.
  *
  * @module Files
  * @class FileSystem
@@ -17,7 +18,7 @@ try
 catch(e){}
 
 /**
- * Read file content as text
+ * Read file content as text.
  *
  * @method readFile
  * @param {String} fname
@@ -89,7 +90,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 }
 
 /**
- * Read file as arraybuffer data
+ * Read file as arraybuffer data.
  *
  * @method readFileArrayBuffer
  * @param {String} fname Name of the file
@@ -123,7 +124,7 @@ FileSystem.readFileArrayBuffer = function(fname)
 }
 
 /**
- * Read file as base64 data
+ * Read file as base64 data.
  *
  * @method readFileBase64
  * @param {String} fname Name of the file
@@ -148,7 +149,9 @@ FileSystem.readFileBase64 = function(fname)
 }
 
 /**
- * Write text file, when running without NWJS it writes file as a blob and autodownloads it
+ * Write text file.
+ * 
+ * When running without NWJS it writes file as a blob and auto downloads it.
  *
  * @method writeFile
  * @param {String} fname
@@ -164,7 +167,7 @@ FileSystem.writeFile = function(fname, data)
 	}
 	else
 	{
-		var blob = new Blob([data], {type:'text/plain'});
+		var blob = new Blob([data], {type:"octet/stream"});
 
 		var download = document.createElement("a");
 		download.download = fname;
@@ -181,8 +184,9 @@ FileSystem.writeFile = function(fname, data)
 }
 
 /**
- * Write binary file using base64 data
- * Only works when running inside NWJS
+ * Write binary file using base64 data.
+ * 
+ * Only works when running inside NWJS.
  *
  * @method writeFileBase64
  * @param {String} fname
@@ -201,8 +205,9 @@ FileSystem.writeFileBase64 = function(fname, data)
 }
 
 /**
- * Copy file (cannot be used to copy folders)
- * Only works when running inside NWJS
+ * Copy file (cannot be used to copy folders).
+ * 
+ * Only works when running inside NWJS.
  *
  * @method copyFile
  * @param {String} src
@@ -217,8 +222,9 @@ FileSystem.copyFile = function(src, dst)
 }
 
 /**
- * Make a directory (dont trow exeption if directory already exists)
- * Only works when running inside NWJS
+ * Make a directory (dont trow exeption if directory already exists).
+ * 
+ * Only works when running inside NWJS.
  *
  * @method makeDirectory
  * @param {String} dir
@@ -236,8 +242,9 @@ FileSystem.makeDirectory = function(dir)
 }
 
 /**
- * Returns files in directory (returns empty array in case of error)
- * Only works when running inside NWJS
+ * Returns files in directory (returns empty array in case of error).
+ * 
+ * Only works when running inside NWJS.
  *
  * @method getFilesDirectory
  * @return {Array} Files in the directory
@@ -259,8 +266,9 @@ FileSystem.getFilesDirectory = function(dir)
 }
 
 /**
- * Copy folder and all its files (includes symbolic links)
- * Only works when running inside NWJS
+ * Copy folder and all its files (includes symbolic links).
+ * 
+ * Only works when running inside NWJS.
  *
  * @method copyFolder
  * @param {String} src
@@ -294,13 +302,14 @@ FileSystem.copyFolder = function(src, dest)
 			{
 				FileSystem.copyFile(source, destiny);
 			}
-			
 		}
 	}
 }
 
 /**
- * Open file chooser dialog receives onLoad callback, file filter, saveas
+ * Open file chooser dialog receives onLoad callback, file filter, saveas.
+ *
+ * The save mode dont work when running inside the browser.
  *
  * @method chooseFile
  * @param {Function} onLoad onLoad callback
@@ -317,25 +326,27 @@ FileSystem.chooseFile = function(onLoad, filter, saveas)
 		chooser.accept = filter;
 	}
 
-	if(saveas !== undefined)
-	{
-		chooser.nwsaveas = (saveas !== true) ? saveas : "file";
-	}
-
 	chooser.onchange = function(event)
 	{	
+		console.log(chooser.files);
 		if(onLoad !== undefined)
 		{
 			onLoad(chooser.files);
 		}
 	};
+
+	if(saveas !== undefined)
+	{
+		chooser.nwsaveas = (saveas !== true) ? saveas : "file";
+	}
 	
 	chooser.click();
 }
 
 /**
- * Check if a file exists
- * Only works inside of NWJS
+ * Check if a file exists.
+ * 
+ * Only works inside of NWJS.
  *
  * @method fileExists
  * @param {String} file File path
@@ -352,8 +363,9 @@ FileSystem.fileExists = function(file)
 }
 
 /**
- * Get file name without extension from file path string
- * If input is a/b/c/abc.d output is abc
+ * Get file name without extension from file path string.
+ * 
+ * If input is a/b/c/abc.d output is abc.
  * 
  * @method getFileName
  * @param {String} file File path
@@ -368,8 +380,9 @@ FileSystem.getFileName = function(file)
 }
 
 /**
- * Get file name without extension
- * If input is a/b/c/abc.d output is a/b/c/abc
+ * Get file name without extension.
+ * 
+ * If input is a/b/c/abc.d output is a/b/c/abc.
  *
  * @method getNameWithoutExtension
  * @param {String} file File path
@@ -381,7 +394,8 @@ FileSystem.getNameWithoutExtension = function(file)
 }
 
 /**
- * Get file directoty
+ * Get file directoty.
+ * 
  * If input is a/b/c/abc.d output is a/b/c/
  *
  * @method getFilePath
@@ -397,8 +411,9 @@ FileSystem.getFilePath = function(file)
 }
 
 /**
- * Get file extension from file path string (always in lowercase)
- * If input is a/b/c/abc.d output is d
+ * Get file extension from file path string (always in lowercase).
+ * 
+ * If input is a/b/c/abc.d output is d.
  *
  * @method getFileExtension
  * @param {String} file File path

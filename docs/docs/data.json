@@ -818,7 +818,7 @@
             "tag": "module",
             "file": "..\\source\\core\\FileSystem.js",
             "line": 3,
-            "description": "FileSystem is used to read and write files using nunuStudio\nSome operations are platform specific and might not work everywhere",
+            "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere.",
             "static": 1
         },
         "Runtime": {
@@ -2190,7 +2190,7 @@
             "namespace": "",
             "file": "..\\source\\core\\FileSystem.js",
             "line": 3,
-            "description": "FileSystem is used to read and write files using nunuStudio\nSome operations are platform specific and might not work everywhere"
+            "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere."
         },
         "NunuApp": {
             "name": "NunuApp",
@@ -8331,8 +8331,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 19,
-            "description": "Read file content as text",
+            "line": 20,
+            "description": "Read file content as text.",
             "itemtype": "method",
             "name": "readFile",
             "params": [
@@ -8366,8 +8366,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 91,
-            "description": "Read file as arraybuffer data",
+            "line": 92,
+            "description": "Read file as arraybuffer data.",
             "itemtype": "method",
             "name": "readFileArrayBuffer",
             "params": [
@@ -8386,8 +8386,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 125,
-            "description": "Read file as base64 data",
+            "line": 126,
+            "description": "Read file as base64 data.",
             "itemtype": "method",
             "name": "readFileBase64",
             "params": [
@@ -8406,8 +8406,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 150,
-            "description": "Write text file, when running without NWJS it writes file as a blob and autodownloads it",
+            "line": 151,
+            "description": "Write text file.\n\nWhen running without NWJS it writes file as a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFile",
             "params": [
@@ -8427,8 +8427,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 183,
-            "description": "Write binary file using base64 data\nOnly works when running inside NWJS",
+            "line": 186,
+            "description": "Write binary file using base64 data.\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "writeFileBase64",
             "params": [
@@ -8448,8 +8448,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 203,
-            "description": "Copy file (cannot be used to copy folders)\nOnly works when running inside NWJS",
+            "line": 207,
+            "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
             "params": [
@@ -8469,8 +8469,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 219,
-            "description": "Make a directory (dont trow exeption if directory already exists)\nOnly works when running inside NWJS",
+            "line": 224,
+            "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
             "params": [
@@ -8485,8 +8485,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 238,
-            "description": "Returns files in directory (returns empty array in case of error)\nOnly works when running inside NWJS",
+            "line": 244,
+            "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
             "return": {
@@ -8498,8 +8498,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 261,
-            "description": "Copy folder and all its files (includes symbolic links)\nOnly works when running inside NWJS",
+            "line": 268,
+            "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
             "params": [
@@ -8519,8 +8519,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 302,
-            "description": "Open file chooser dialog receives onLoad callback, file filter, saveas",
+            "line": 310,
+            "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nThe save mode dont work when running inside the browser.",
             "itemtype": "method",
             "name": "chooseFile",
             "params": [
@@ -8545,8 +8545,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 336,
-            "description": "Check if a file exists\nOnly works inside of NWJS",
+            "line": 346,
+            "description": "Check if a file exists.\n\nOnly works inside of NWJS.",
             "itemtype": "method",
             "name": "fileExists",
             "params": [
@@ -8565,8 +8565,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 354,
-            "description": "Get file name without extension from file path string\nIf input is a/b/c/abc.d output is abc",
+            "line": 365,
+            "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
             "params": [
@@ -8585,8 +8585,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 370,
-            "description": "Get file name without extension\nIf input is a/b/c/abc.d output is a/b/c/abc",
+            "line": 382,
+            "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
             "params": [
@@ -8605,8 +8605,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 383,
-            "description": "Get file directoty\nIf input is a/b/c/abc.d output is a/b/c/",
+            "line": 396,
+            "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
             "params": [
@@ -8625,8 +8625,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 399,
-            "description": "Get file extension from file path string (always in lowercase)\nIf input is a/b/c/abc.d output is d",
+            "line": 413,
+            "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
             "params": [
@@ -8968,11 +8968,11 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:354"
+            "line": " ..\\source\\core\\FileSystem.js:365"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:370"
+            "line": " ..\\source\\core\\FileSystem.js:382"
         },
         {
             "message": "unknown tag: license",

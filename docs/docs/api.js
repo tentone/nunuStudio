@@ -111,7 +111,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Files",
             "name": "Files",
-            "description": "FileSystem is used to read and write files using nunuStudio\nSome operations are platform specific and might not work everywhere"
+            "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere."
         },
         {
             "displayName": "Input",
