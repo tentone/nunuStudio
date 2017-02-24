@@ -1544,10 +1544,17 @@ Editor.loadProgram = function(fname)
 	}
 }
 
-//Set currently open file (also updates the editor title)
+//Set currently open file (also updates the editor title), if running in browser never shows openfile
 Editor.setOpenFile = function(fname)
 {
-	Editor.openFile = (fname !== undefined) ? fname : null;
+	if(Nunu.runningOnDesktop())
+	{
+		Editor.openFile = (fname !== undefined) ? fname : null;
+	}
+	else
+	{
+		fname = null;
+	}
 
 	if(fname === null)
 	{
@@ -1586,6 +1593,15 @@ Editor.exportLinuxProject = function(dir)
 {
 	Editor.exportWebProject(dir);
 	FileSystem.copyFolder("nwjs\\linux", dir + "\\nwjs");
+	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
+	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
+}
+
+//Export mac os project
+Editor.exportMacOSProject = function(dir)
+{
+	Editor.exportWebProject(dir);
+	FileSystem.copyFolder("nwjs\\mac", dir + "\\nwjs");
 	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
 	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
 }
