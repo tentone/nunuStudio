@@ -306,9 +306,22 @@ Editor.CAMERA_PERSPECTIVE = 21;
 Editor.initialize = function()
 {
 	Editor.fullscreen = false;
-	
+		
+	//Disable body overflow
 	document.body.style.overflow = "hidden";
 	
+	//If running on browser disable CTRL+S
+	if(!Nunu.runningOnDesktop())
+	{
+		document.onkeydown = function(event)
+		{
+			if(event.ctrlKey === true && event.keyCode === 83)
+			{
+				event.preventDefault();
+			}
+		};
+	}
+
 	//Open ISP file if dragged to the window
 	document.body.ondrop = function(event)
 	{

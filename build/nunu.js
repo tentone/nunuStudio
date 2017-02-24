@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.21 Alpha";
-Nunu.TIMESTAMP = "201702232316";
+Nunu.TIMESTAMP = "201702241609";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -30708,7 +30708,7 @@ FileSystem.writeFile = function(a, g) {
   if (void 0 !== FileSystem.fs) {
     a = FileSystem.fs.createWriteStream(a, "utf8"), a.write(g), a.end();
   } else {
-    g = new Blob([g], {type:"text/plain"});
+    g = new Blob([g], {type:"octet/stream"});
     var l = document.createElement("a");
     l.download = a;
     l.href = window.URL.createObjectURL(g);
@@ -30756,10 +30756,11 @@ FileSystem.chooseFile = function(a, g, l) {
   var b = document.createElement("input");
   b.type = "file";
   void 0 !== g && (b.accept = g);
-  void 0 !== l && (b.nwsaveas = !0 !== l ? l : "file");
   b.onchange = function(f) {
+    console.log(b.files);
     void 0 !== a && a(b.files);
   };
+  void 0 !== l && (b.nwsaveas = !0 !== l ? l : "file");
   b.click();
 };
 FileSystem.fileExists = function(a) {

@@ -1132,6 +1132,12 @@ Interface.saveProgram = function()
 	{
 		var fname = "default";
 		fname = prompt("Save As", fname);
+
+		if(!fname.endsWith(".isp"))
+		{
+			fname += ".isp";
+		}
+		
 		Editor.saveProgram(fname);
 	}
 }
