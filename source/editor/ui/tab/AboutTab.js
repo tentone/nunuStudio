@@ -104,7 +104,7 @@ AboutTab.prototype.updateInterface = function()
 		}
 
 		this.codemirror.visible = this.visible;
-		this.codemirror.position.set((this.size.x-this.codemirror.size.x)/2, this.nwjs.position.y + 20);
+		this.codemirror.position.set((this.size.x-this.codemirror.size.x)/2, this.threejs.position.y + 40);
 		this.codemirror.updateInterface();
 
 		this.cannon.visible = this.visible;

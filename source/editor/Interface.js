@@ -818,10 +818,13 @@ Interface.initialize = function()
 	}, Interface.fileDir + "icons/misc/save.png");
 
 	//Save project
-	Interface.file.addOption("Save As", function()
+	if(Nunu.runningOnDesktop())
 	{
-		Interface.saveProgram();
-	}, Interface.fileDir + "icons/misc/save.png");
+		Interface.file.addOption("Save As", function()
+		{
+			Interface.saveProgram();
+		}, Interface.fileDir + "icons/misc/save.png");
+	}
 
 	//Load Project
 	Interface.file.addOption("Load", function()
@@ -906,12 +909,22 @@ Interface.initialize = function()
 		}, Interface.fileDir + "icons/platform/linux.png");
 	}
 
-	//TODO <ADD CODE HERE>
 	if(FileSystem.fileExists("../nwjs/mac"))
 	{
 		publish.addOption("macOS", function()
 		{
-			alert("For macOS export NWJS for macOS is required");
+			FileSystem.chooseFile(function(files)
+			{
+				try
+				{
+					Editor.exportMacOSProject(files[0].path);
+					alert("Project exported");
+				}
+				catch(e)
+				{
+					alert("Error exporting project (" + e + ")");
+				}
+			}, "", Editor.program.name);
 		}, Interface.fileDir + "icons/platform/osx.png");
 	}
 
@@ -1098,18 +1111,29 @@ Interface.updateInterface = function()
 //Open to save program window
 Interface.saveProgram = function()
 {
-	FileSystem.chooseFile(function(files)
+	//Desktop
+	if(Nunu.runningOnDesktop())
 	{
-		try
+		FileSystem.chooseFile(function(files)
 		{
-			Editor.saveProgram(files[0].path);
-			alert("Project saved");
-		}
-		catch(e)
-		{
-			alert("Error saving file\n(" + e + ")");
-		}
-	}, ".isp", true);
+			try
+			{
+				Editor.saveProgram(files[0].path);
+				alert("Project saved");
+			}
+			catch(e)
+			{
+				alert("Error saving file\n(" + e + ")");
+			}
+		}, ".isp", true);
+	}
+	//Web
+	else
+	{
+		var fname = "default";
+		fname = prompt("Save As", fname);
+		Editor.saveProgram(fname);
+	}
 }
 
 //Open to load program window
@@ -1122,6 +1146,7 @@ Interface.loadProgram = function()
 			try
 			{
 				Editor.loadProgram(files[0].path);
+				
 				Editor.resetEditingFlags();
 				Editor.updateObjectViews();
 				alert("Project loaded");
