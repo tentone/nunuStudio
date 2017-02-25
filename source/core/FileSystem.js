@@ -328,7 +328,6 @@ FileSystem.chooseFile = function(onLoad, filter, saveas)
 
 	chooser.onchange = function(event)
 	{	
-		console.log(chooser.files);
 		if(onLoad !== undefined)
 		{
 			onLoad(chooser.files);

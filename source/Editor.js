@@ -334,7 +334,7 @@ Editor.initialize = function()
 			{
 				if(confirm("All unsaved changes to the project will be lost! Load file?"))
 				{
-					Editor.loadProgram(file.path);
+					Editor.loadProgramFile(file.path);
 					Editor.resetEditingFlags();
 					Editor.updateObjectViews();
 				}
@@ -439,7 +439,7 @@ Editor.initialize = function()
 	{
 		if(Editor.args[i].endsWith(".isp"))
 		{
-			Editor.loadProgram(Editor.args[i]);
+			Editor.loadProgramFile(Editor.args[i]);
 			break;
 		}
 	}
@@ -1524,10 +1524,46 @@ Editor.saveProgram = function(fname, compressed, keepDirectory)
 	}
 }
 
-//Load program from file
-Editor.loadProgram = function(fname)
-{	
-	//Dipose old program
+//Load program from file or url
+Editor.loadProgramFile = function(file)
+{
+	if(Nunu.runningOnDesktop())
+	{	
+		if(file.path !== undefined)
+		{
+			file = file.path;
+		}
+
+		var data = JSON.parse(FileSystem.readFile(file));	
+		Editor.loadProgram(data);
+		Editor.setOpenFile(file);
+	}
+	else
+	{
+		if(file instanceof File)
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				var data = JSON.parse(reader.result);
+				Editor.loadProgram(data);
+				Editor.setOpenFile(file);
+			}
+			reader.readAsText(file);
+		}
+		else
+		{
+			var data = JSON.parse(FileSystem.readFile(file));
+			Editor.loadProgram(data);
+			Editor.setOpenFile(file);
+		}
+	}
+}
+
+//Load program from json data
+Editor.loadProgram = function(data)
+{
+	//Dispose old program
 	if(Editor.program !== null)
 	{
 		Editor.program.dispose();
@@ -1535,7 +1571,6 @@ Editor.loadProgram = function(fname)
 
 	//Load program data file
 	var loader = new ObjectLoader();
-	var data = JSON.parse(FileSystem.readFile(fname));
 	Editor.program = loader.parse(data);
 	
 	//History
@@ -1545,7 +1580,6 @@ Editor.loadProgram = function(fname)
 	Interface.tab.clear();
 
 	//Set open file
-	Editor.setOpenFile(fname);
 	Editor.resetEditingFlags();
 
 	//Add new scene tab to interface

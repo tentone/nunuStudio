@@ -12,13 +12,13 @@ function TransformGizmoScale()
 	arrowGeometry.merge(mesh.geometry, mesh.matrix);
 
 	var x = new THREE.BufferGeometry();
-	x.addAttribute("position", new THREE.Float32Attribute([0, 0, 0,  1, 0, 0], 3));
+	x.addAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  1, 0, 0], 3));
 
 	var y = new THREE.BufferGeometry();
-	y.addAttribute("position", new THREE.Float32Attribute([0, 0, 0,  0, 1, 0], 3));
+	y.addAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  0, 1, 0], 3));
 
 	var z = new THREE.BufferGeometry();
-	z.addAttribute("position", new THREE.Float32Attribute([0, 0, 0,  0, 0, 1], 3));
+	z.addAttribute("position", new THREE.Float32BufferAttribute([0, 0, 0,  0, 0, 1], 3));
 
 	this.handleGizmos =
 	{

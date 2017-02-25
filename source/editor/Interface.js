@@ -1151,8 +1151,7 @@ Interface.loadProgram = function()
 		{
 			try
 			{
-				Editor.loadProgram(files[0].path);
-				
+				Editor.loadProgramFile(files[0]);
 				Editor.resetEditingFlags();
 				Editor.updateObjectViews();
 				alert("Project loaded");
