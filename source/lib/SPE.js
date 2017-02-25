@@ -1,4 +1,4 @@
-/* shader-particle-engine 1.0.5
+/* shader-particle-engine 1.0.6
  * 
  * (c) 2015 Luke Moody (http://www.github.com/squarefeet)
  *     Originally based on Lee Stemkoski's original work (https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/js/ParticleEngine.js).
@@ -430,19 +430,19 @@ SPE.TypedArrayHelper.prototype.getComponentValueAtIndex = function( index ) {
  * @param {Function=} arrayType     A reference to a TypedArray constructor. Defaults to Float32Array if none provided.
  */
 SPE.ShaderAttribute = function( type, dynamicBuffer, arrayType ) {
-    'use strict';
+	'use strict';
 
-    var typeMap = SPE.ShaderAttribute.typeSizeMap;
+	var typeMap = SPE.ShaderAttribute.typeSizeMap;
 
-    this.type = typeof type === 'string' && typeMap.hasOwnProperty( type ) ? type : 'f';
-    this.componentSize = typeMap[ this.type ];
-    this.arrayType = arrayType || Float32Array;
-    this.typedArray = null;
-    this.bufferAttribute = null;
-    this.dynamicBuffer = !!dynamicBuffer;
+	this.type = typeof type === 'string' && typeMap.hasOwnProperty( type ) ? type : 'f';
+	this.componentSize = typeMap[ this.type ];
+	this.arrayType = arrayType || Float32Array;
+	this.typedArray = null;
+	this.bufferAttribute = null;
+	this.dynamicBuffer = !!dynamicBuffer;
 
-    this.updateMin = 0;
-    this.updateMax = 0;
+	this.updateMin = 0;
+	this.updateMax = 0;
 };
 
 SPE.ShaderAttribute.constructor = SPE.ShaderAttribute;
@@ -452,47 +452,47 @@ SPE.ShaderAttribute.constructor = SPE.ShaderAttribute;
  * @enum {Number}
  */
 SPE.ShaderAttribute.typeSizeMap = {
-    /**
-     * Float
-     * @type {Number}
-     */
-    f: 1,
+	/**
+	 * Float
+	 * @type {Number}
+	 */
+	f: 1,
 
-    /**
-     * Vec2
-     * @type {Number}
-     */
-    v2: 2,
+	/**
+	 * Vec2
+	 * @type {Number}
+	 */
+	v2: 2,
 
-    /**
-     * Vec3
-     * @type {Number}
-     */
-    v3: 3,
+	/**
+	 * Vec3
+	 * @type {Number}
+	 */
+	v3: 3,
 
-    /**
-     * Vec4
-     * @type {Number}
-     */
-    v4: 4,
+	/**
+	 * Vec4
+	 * @type {Number}
+	 */
+	v4: 4,
 
-    /**
-     * Color
-     * @type {Number}
-     */
-    c: 3,
+	/**
+	 * Color
+	 * @type {Number}
+	 */
+	c: 3,
 
-    /**
-     * Mat3
-     * @type {Number}
-     */
-    m3: 9,
+	/**
+	 * Mat3
+	 * @type {Number}
+	 */
+	m3: 9,
 
-    /**
-     * Mat4
-     * @type {Number}
-     */
-    m4: 16
+	/**
+	 * Mat4
+	 * @type {Number}
+	 */
+	m4: 16
 };
 
 /**
@@ -503,10 +503,10 @@ SPE.ShaderAttribute.typeSizeMap = {
  * @param {Number} max The end of the range to mark as needing an update.
  */
 SPE.ShaderAttribute.prototype.setUpdateRange = function( min, max ) {
-    'use strict';
+	'use strict';
 
-    this.updateMin = Math.min( min * this.componentSize, this.updateMin * this.componentSize );
-    this.updateMax = Math.max( max * this.componentSize, this.updateMax * this.componentSize );
+	this.updateMin = Math.min( min * this.componentSize, this.updateMin * this.componentSize );
+	this.updateMax = Math.max( max * this.componentSize, this.updateMax * this.componentSize );
 };
 
 /**
@@ -514,16 +514,16 @@ SPE.ShaderAttribute.prototype.setUpdateRange = function( min, max ) {
  * updating. Also marks the attribute as needing an update.
  */
 SPE.ShaderAttribute.prototype.flagUpdate = function() {
-    'use strict';
+	'use strict';
 
-    var attr = this.bufferAttribute,
-        range = attr.updateRange;
+	var attr = this.bufferAttribute,
+		range = attr.updateRange;
 
-    range.offset = this.updateMin;
-    range.count = Math.min( ( this.updateMax - this.updateMin ) + this.componentSize, this.typedArray.array.length );
-    // console.log( range.offset, range.count, this.typedArray.array.length );
-    // console.log( 'flagUpdate:', range.offset, range.count );
-    attr.needsUpdate = true;
+	range.offset = this.updateMin;
+	range.count = Math.min( ( this.updateMax - this.updateMin ) + this.componentSize, this.typedArray.array.length );
+	// console.log( range.offset, range.count, this.typedArray.array.length );
+	// console.log( 'flagUpdate:', range.offset, range.count );
+	attr.needsUpdate = true;
 };
 
 
@@ -532,15 +532,15 @@ SPE.ShaderAttribute.prototype.flagUpdate = function() {
  * Reset the index update counts for this attribute
  */
 SPE.ShaderAttribute.prototype.resetUpdateRange = function() {
-    'use strict';
+	'use strict';
 
-    this.updateMin = 0;
-    this.updateMax = 0;
+	this.updateMin = 0;
+	this.updateMax = 0;
 };
 
 SPE.ShaderAttribute.prototype.resetDynamic = function() {
-    'use strict';
-    this.bufferAttribute.dynamic = this.dynamicBuffer;
+	'use strict';
+	this.bufferAttribute.dynamic = this.dynamicBuffer;
 };
 
 /**
@@ -549,23 +549,23 @@ SPE.ShaderAttribute.prototype.resetDynamic = function() {
  * @param  {Number} end The end index of the splice. Will be multiplied by the number of components for this attribute.
  */
 SPE.ShaderAttribute.prototype.splice = function( start, end ) {
-    'use strict';
+	'use strict';
 
-    this.typedArray.splice( start, end );
+	this.typedArray.splice( start, end );
 
-    // Reset the reference to the attribute's typed array
-    // since it has probably changed.
-    this.forceUpdateAll();
+	// Reset the reference to the attribute's typed array
+	// since it has probably changed.
+	this.forceUpdateAll();
 };
 
 SPE.ShaderAttribute.prototype.forceUpdateAll = function() {
-    'use strict';
+	'use strict';
 
-    this.bufferAttribute.array = this.typedArray.array;
-    this.bufferAttribute.updateRange.offset = 0;
-    this.bufferAttribute.updateRange.count = -1;
-    this.bufferAttribute.dynamic = false;
-    this.bufferAttribute.needsUpdate = true;
+	this.bufferAttribute.array = this.typedArray.array;
+	this.bufferAttribute.updateRange.offset = 0;
+	this.bufferAttribute.updateRange.count = -1;
+	this.bufferAttribute.dynamic = false;
+	this.bufferAttribute.needsUpdate = true;
 };
 
 /**
@@ -578,23 +578,23 @@ SPE.ShaderAttribute.prototype.forceUpdateAll = function() {
  * @param  {Number} size The size of the typed array to create or update to.
  */
 SPE.ShaderAttribute.prototype._ensureTypedArray = function( size ) {
-    'use strict';
+	'use strict';
 
-    // Condition that's most likely to be true at the top: no change.
-    if ( this.typedArray !== null && this.typedArray.size === size * this.componentSize ) {
-        return;
-    }
+	// Condition that's most likely to be true at the top: no change.
+	if ( this.typedArray !== null && this.typedArray.size === size * this.componentSize ) {
+		return;
+	}
 
-    // Resize the array if we need to, telling the TypedArrayHelper to
-    // ignore it's component size when evaluating size.
-    else if ( this.typedArray !== null && this.typedArray.size !== size ) {
-        this.typedArray.setSize( size );
-    }
+	// Resize the array if we need to, telling the TypedArrayHelper to
+	// ignore it's component size when evaluating size.
+	else if ( this.typedArray !== null && this.typedArray.size !== size ) {
+		this.typedArray.setSize( size );
+	}
 
-    // This condition should only occur once in an attribute's lifecycle.
-    else if ( this.typedArray === null ) {
-        this.typedArray = new SPE.TypedArrayHelper( this.arrayType, size, this.componentSize );
-    }
+	// This condition should only occur once in an attribute's lifecycle.
+	else if ( this.typedArray === null ) {
+		this.typedArray = new SPE.TypedArrayHelper( this.arrayType, size, this.componentSize );
+	}
 };
 
 
@@ -608,22 +608,32 @@ SPE.ShaderAttribute.prototype._ensureTypedArray = function( size ) {
  * @param  {Number} size The size of the typed array to create if one doesn't exist, or resize existing array to.
  */
 SPE.ShaderAttribute.prototype._createBufferAttribute = function( size ) {
-    'use strict';
+	'use strict';
 
-    // Make sure the typedArray is present and correct.
-    this._ensureTypedArray( size );
+	// Make sure the typedArray is present and correct.
+	this._ensureTypedArray( size );
 
-    // Don't create it if it already exists, but do
-    // flag that it needs updating on the next render
-    // cycle.
-    if ( this.bufferAttribute !== null ) {
-        this.bufferAttribute.array = this.typedArray.array;
-        this.bufferAttribute.needsUpdate = true;
-        return;
-    }
+	// Don't create it if it already exists, but do
+	// flag that it needs updating on the next render
+	// cycle.
+	if ( this.bufferAttribute !== null ) {
+		this.bufferAttribute.array = this.typedArray.array;
 
-    this.bufferAttribute = new THREE.BufferAttribute( this.typedArray.array, this.componentSize );
-    this.bufferAttribute.dynamic = this.dynamicBuffer;
+		// Since THREE.js version 81, dynamic count calculation was removed
+		// so I need to do it manually here.
+		//
+		// In the next minor release, I may well remove this check and force
+		// dependency on THREE r81+.
+		if ( parseFloat( THREE.REVISION ) >= 81 ) {
+			this.bufferAttribute.count = this.bufferAttribute.array.length / this.bufferAttribute.itemSize;
+		}
+
+		this.bufferAttribute.needsUpdate = true;
+		return;
+	}
+
+	this.bufferAttribute = new THREE.BufferAttribute( this.typedArray.array, this.componentSize );
+	this.bufferAttribute.dynamic = this.dynamicBuffer;
 };
 
 /**
@@ -631,14 +641,15 @@ SPE.ShaderAttribute.prototype._createBufferAttribute = function( size ) {
  * @return {Number} The length of the typed array. Will be 0 if no typed array has been created yet.
  */
 SPE.ShaderAttribute.prototype.getLength = function() {
-    'use strict';
+	'use strict';
 
-    if ( this.typedArray === null ) {
-        return 0;
-    }
+	if ( this.typedArray === null ) {
+		return 0;
+	}
 
-    return this.typedArray.array.length;
+	return this.typedArray.array.length;
 };
+
 
 SPE.shaderChunks = {
     // Register color-packing define statements.
@@ -897,184 +908,187 @@ SPE.shaderChunks = {
 };
 
 SPE.shaders = {
-    vertex: [
-        SPE.shaderChunks.defines,
-        SPE.shaderChunks.uniforms,
-        SPE.shaderChunks.attributes,
-        SPE.shaderChunks.varyings,
+	vertex: [
+		SPE.shaderChunks.defines,
+		SPE.shaderChunks.uniforms,
+		SPE.shaderChunks.attributes,
+		SPE.shaderChunks.varyings,
 
-        THREE.ShaderChunk.common,
-        THREE.ShaderChunk.logdepthbuf_pars_vertex,
+		THREE.ShaderChunk.common,
+		THREE.ShaderChunk.logdepthbuf_pars_vertex,
+		THREE.ShaderChunk.fog_pars_vertex,
 
-        SPE.shaderChunks.branchAvoidanceFunctions,
-        SPE.shaderChunks.unpackColor,
-        SPE.shaderChunks.unpackRotationAxis,
-        SPE.shaderChunks.floatOverLifetime,
-        SPE.shaderChunks.colorOverLifetime,
-        SPE.shaderChunks.paramFetchingFunctions,
-        SPE.shaderChunks.forceFetchingFunctions,
-        SPE.shaderChunks.rotationFunctions,
-
-
-        'void main() {',
+		SPE.shaderChunks.branchAvoidanceFunctions,
+		SPE.shaderChunks.unpackColor,
+		SPE.shaderChunks.unpackRotationAxis,
+		SPE.shaderChunks.floatOverLifetime,
+		SPE.shaderChunks.colorOverLifetime,
+		SPE.shaderChunks.paramFetchingFunctions,
+		SPE.shaderChunks.forceFetchingFunctions,
+		SPE.shaderChunks.rotationFunctions,
 
 
-        //
-        // Setup...
-        //
-        '    highp float age = getAge();',
-        '    highp float alive = getAlive();',
-        '    highp float maxAge = getMaxAge();',
-        '    highp float positionInTime = (age / maxAge);',
-        '    highp float isAlive = when_gt( alive, 0.0 );',
-
-        '    #ifdef SHOULD_WIGGLE_PARTICLES',
-        '        float wiggleAmount = positionInTime * getWiggle();',
-        '        float wiggleSin = isAlive * sin( wiggleAmount );',
-        '        float wiggleCos = isAlive * cos( wiggleAmount );',
-        '    #endif',
-
-        //
-        // Forces
-        //
-
-        // Get forces & position
-        '    vec3 vel = getVelocity( age );',
-        '    vec3 accel = getAcceleration( age );',
-        '    vec3 force = vec3( 0.0 );',
-        '    vec3 pos = vec3( position );',
-
-        // Calculate the required drag to apply to the forces.
-        '    float drag = 1.0 - (positionInTime * 0.5) * acceleration.w;',
-
-        // Integrate forces...
-        '    force += vel;',
-        '    force *= drag;',
-        '    force += accel * age;',
-        '    pos += force;',
+		'void main() {',
 
 
-        // Wiggly wiggly wiggle!
-        '    #ifdef SHOULD_WIGGLE_PARTICLES',
-        '        pos.x += wiggleSin;',
-        '        pos.y += wiggleCos;',
-        '        pos.z += wiggleSin;',
-        '    #endif',
+		//
+		// Setup...
+		//
+		'    highp float age = getAge();',
+		'    highp float alive = getAlive();',
+		'    highp float maxAge = getMaxAge();',
+		'    highp float positionInTime = (age / maxAge);',
+		'    highp float isAlive = when_gt( alive, 0.0 );',
+
+		'    #ifdef SHOULD_WIGGLE_PARTICLES',
+		'        float wiggleAmount = positionInTime * getWiggle();',
+		'        float wiggleSin = isAlive * sin( wiggleAmount );',
+		'        float wiggleCos = isAlive * cos( wiggleAmount );',
+		'    #endif',
+
+		//
+		// Forces
+		//
+
+		// Get forces & position
+		'    vec3 vel = getVelocity( age );',
+		'    vec3 accel = getAcceleration( age );',
+		'    vec3 force = vec3( 0.0 );',
+		'    vec3 pos = vec3( position );',
+
+		// Calculate the required drag to apply to the forces.
+		'    float drag = 1.0 - (positionInTime * 0.5) * acceleration.w;',
+
+		// Integrate forces...
+		'    force += vel;',
+		'    force *= drag;',
+		'    force += accel * age;',
+		'    pos += force;',
 
 
-        // Rotate the emitter around it's central point
-        '    #ifdef SHOULD_ROTATE_PARTICLES',
-        '        pos = getRotation( pos, positionInTime );',
-        '    #endif',
-
-        // Convert pos to a world-space value
-        '    vec4 mvPos = modelViewMatrix * vec4( pos, 1.0 );',
-
-        // Determine point size.
-        '    highp float pointSize = getFloatOverLifetime( positionInTime, size ) * isAlive;',
-
-        // Determine perspective
-        '    #ifdef HAS_PERSPECTIVE',
-        '        float perspective = scale / length( mvPos.xyz );',
-        '    #else',
-        '        float perspective = 1.0;',
-        '    #endif',
-
-        // Apply perpective to pointSize value
-        '    float pointSizePerspective = pointSize * perspective;',
+		// Wiggly wiggly wiggle!
+		'    #ifdef SHOULD_WIGGLE_PARTICLES',
+		'        pos.x += wiggleSin;',
+		'        pos.y += wiggleCos;',
+		'        pos.z += wiggleSin;',
+		'    #endif',
 
 
-        //
-        // Appearance
-        //
+		// Rotate the emitter around it's central point
+		'    #ifdef SHOULD_ROTATE_PARTICLES',
+		'        pos = getRotation( pos, positionInTime );',
+		'    #endif',
 
-        // Determine color and opacity for this particle
-        '    #ifdef COLORIZE',
-        '       vec3 c = isAlive * getColorOverLifetime(',
-        '           positionInTime,',
-        '           unpackColor( color.x ),',
-        '           unpackColor( color.y ),',
-        '           unpackColor( color.z ),',
-        '           unpackColor( color.w )',
-        '       );',
-        '    #else',
-        '       vec3 c = vec3(1.0);',
-        '    #endif',
+		// Convert pos to a world-space value
+		'    vec4 mvPosition = modelViewMatrix * vec4( pos, 1.0 );',
 
-        '    float o = isAlive * getFloatOverLifetime( positionInTime, opacity );',
+		// Determine point size.
+		'    highp float pointSize = getFloatOverLifetime( positionInTime, size ) * isAlive;',
 
-        // Assign color to vColor varying.
-        '    vColor = vec4( c, o );',
+		// Determine perspective
+		'    #ifdef HAS_PERSPECTIVE',
+		'        float perspective = scale / length( mvPosition.xyz );',
+		'    #else',
+		'        float perspective = 1.0;',
+		'    #endif',
 
-        // Determine angle
-        '    #ifdef SHOULD_ROTATE_TEXTURE',
-        '        vAngle = isAlive * getFloatOverLifetime( positionInTime, angle );',
-        '    #endif',
+		// Apply perpective to pointSize value
+		'    float pointSizePerspective = pointSize * perspective;',
 
-        // If this particle is using a sprite-sheet as a texture, we'll have to figure out
-        // what frame of the texture the particle is using at it's current position in time.
-        '    #ifdef SHOULD_CALCULATE_SPRITE',
-        '        float framesX = textureAnimation.x;',
-        '        float framesY = textureAnimation.y;',
-        '        float loopCount = textureAnimation.w;',
-        '        float totalFrames = textureAnimation.z;',
-        '        float frameNumber = mod( (positionInTime * loopCount) * totalFrames, totalFrames );',
 
-        '        float column = floor(mod( frameNumber, framesX ));',
-        '        float row = floor( (frameNumber - column) / framesX );',
+		//
+		// Appearance
+		//
 
-        '        float columnNorm = column / framesX;',
-        '        float rowNorm = row / framesY;',
+		// Determine color and opacity for this particle
+		'    #ifdef COLORIZE',
+		'       vec3 c = isAlive * getColorOverLifetime(',
+		'           positionInTime,',
+		'           unpackColor( color.x ),',
+		'           unpackColor( color.y ),',
+		'           unpackColor( color.z ),',
+		'           unpackColor( color.w )',
+		'       );',
+		'    #else',
+		'       vec3 c = vec3(1.0);',
+		'    #endif',
 
-        '        vSpriteSheet.x = 1.0 / framesX;',
-        '        vSpriteSheet.y = 1.0 / framesY;',
-        '        vSpriteSheet.z = columnNorm;',
-        '        vSpriteSheet.w = rowNorm;',
-        '    #endif',
+		'    float o = isAlive * getFloatOverLifetime( positionInTime, opacity );',
 
-        //
-        // Write values
-        //
+		// Assign color to vColor varying.
+		'    vColor = vec4( c, o );',
 
-        // Set PointSize according to size at current point in time.
-        '    gl_PointSize = pointSizePerspective;',
-        '    gl_Position = projectionMatrix * mvPos;',
+		// Determine angle
+		'    #ifdef SHOULD_ROTATE_TEXTURE',
+		'        vAngle = isAlive * getFloatOverLifetime( positionInTime, angle );',
+		'    #endif',
 
-        THREE.ShaderChunk.logdepthbuf_vertex,
+		// If this particle is using a sprite-sheet as a texture, we'll have to figure out
+		// what frame of the texture the particle is using at it's current position in time.
+		'    #ifdef SHOULD_CALCULATE_SPRITE',
+		'        float framesX = textureAnimation.x;',
+		'        float framesY = textureAnimation.y;',
+		'        float loopCount = textureAnimation.w;',
+		'        float totalFrames = textureAnimation.z;',
+		'        float frameNumber = mod( (positionInTime * loopCount) * totalFrames, totalFrames );',
 
-        '}'
-    ].join( '\n' ),
+		'        float column = floor(mod( frameNumber, framesX ));',
+		'        float row = floor( (frameNumber - column) / framesX );',
 
-    fragment: [
-        SPE.shaderChunks.uniforms,
+		'        float columnNorm = column / framesX;',
+		'        float rowNorm = row / framesY;',
 
-        THREE.ShaderChunk.common,
-        THREE.ShaderChunk.fog_pars_fragment,
-        THREE.ShaderChunk.logdepthbuf_pars_fragment,
+		'        vSpriteSheet.x = 1.0 / framesX;',
+		'        vSpriteSheet.y = 1.0 / framesY;',
+		'        vSpriteSheet.z = columnNorm;',
+		'        vSpriteSheet.w = rowNorm;',
+		'    #endif',
 
-        SPE.shaderChunks.varyings,
+		//
+		// Write values
+		//
 
-        SPE.shaderChunks.branchAvoidanceFunctions,
+		// Set PointSize according to size at current point in time.
+		'    gl_PointSize = pointSizePerspective;',
+		'    gl_Position = projectionMatrix * mvPosition;',
 
-        'void main() {',
-        '    vec3 outgoingLight = vColor.xyz;',
-        '    ',
-        '    #ifdef ALPHATEST',
-        '       if ( vColor.w < float(ALPHATEST) ) discard;',
-        '    #endif',
+		THREE.ShaderChunk.logdepthbuf_vertex,
+		THREE.ShaderChunk.fog_vertex,
 
-        SPE.shaderChunks.rotateTexture,
+		'}'
+	].join( '\n' ),
 
-        THREE.ShaderChunk.logdepthbuf_fragment,
+	fragment: [
+		SPE.shaderChunks.uniforms,
 
-        '    outgoingLight = vColor.xyz * rotatedTexture.xyz;',
+		THREE.ShaderChunk.common,
+		THREE.ShaderChunk.fog_pars_fragment,
+		THREE.ShaderChunk.logdepthbuf_pars_fragment,
 
-        THREE.ShaderChunk.fog_fragment,
+		SPE.shaderChunks.varyings,
 
-        '    gl_FragColor = vec4( outgoingLight.xyz, rotatedTexture.w * vColor.w );',
-        '}'
-    ].join( '\n' )
+		SPE.shaderChunks.branchAvoidanceFunctions,
+
+		'void main() {',
+		'    vec3 outgoingLight = vColor.xyz;',
+		'    ',
+		'    #ifdef ALPHATEST',
+		'       if ( vColor.w < float(ALPHATEST) ) discard;',
+		'    #endif',
+
+		SPE.shaderChunks.rotateTexture,
+
+		THREE.ShaderChunk.logdepthbuf_fragment,
+
+		'    outgoingLight = vColor.xyz * rotatedTexture.xyz;',
+		'    gl_FragColor = vec4( outgoingLight.xyz, rotatedTexture.w * vColor.w );',
+
+		THREE.ShaderChunk.fog_fragment,
+
+		'}'
+	].join( '\n' )
 };
+
 
 /**
  * A bunch of utility functions used throughout the library.
@@ -2278,7 +2292,11 @@ SPE.Group.prototype.getFromPool = function() {
         return pool.pop();
     }
     else if ( createNew ) {
-        return new SPE.Emitter( this._poolCreationSettings );
+        var emitter = new SPE.Emitter( this._poolCreationSettings );
+        
+        this.addEmitter( emitter );
+        
+        return emitter;
     }
 
     return null;
@@ -2530,6 +2548,7 @@ SPE.Group.prototype.dispose = function() {
     this.material.dispose();
     return this;
 };
+
 
 /**
  * An SPE.Emitter instance.
