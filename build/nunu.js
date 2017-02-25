@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.21 Alpha";
-Nunu.TIMESTAMP = "201702241609";
+Nunu.TIMESTAMP = "201702250208";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -30757,7 +30757,6 @@ FileSystem.chooseFile = function(a, g, l) {
   b.type = "file";
   void 0 !== g && (b.accept = g);
   b.onchange = function(f) {
-    console.log(b.files);
     void 0 !== a && a(b.files);
   };
   void 0 !== l && (b.nwsaveas = !0 !== l ? l : "file");

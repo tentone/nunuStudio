@@ -27,7 +27,7 @@ function TransformGizmoRotate()
 			}
 		}
 
-		geometry.addAttribute("position", new THREE.Float32Attribute(vertices, 3));
+		geometry.addAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
 		return geometry;
 	};
 
