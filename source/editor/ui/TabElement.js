@@ -35,7 +35,8 @@ function TabElement(parent, closeable, container, index, title, icon)
 	//Button
 	this.button = null;
 
-	//Tab information
+	//Container
+	this.active = false;
 	this.index = index;
 	this.container = container;
 
@@ -47,10 +48,16 @@ function TabElement(parent, closeable, container, index, title, icon)
 TabElement.prototype.updateMetadata = function(){}
 
 //Activate tab
-TabElement.prototype.activate = function(){}
+TabElement.prototype.activate = function()
+{
+	this.active = true;
+}
 
 //Deactivate tab
-TabElement.prototype.deactivate = function(){}
+TabElement.prototype.deactivate = function()
+{
+	this.active = false;
+}
 
 //Attach object to tab
 TabElement.prototype.attach = function(obj){}

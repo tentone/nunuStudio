@@ -34,139 +34,142 @@ Interface.initialize = function()
 	Interface.assetFile.position.set(0,0);
 
 	//3D Models Loader
-	Interface.assetFile.addOption("3D Models", function()
+	if(Nunu.runningOnDesktop())
 	{
-		FileSystem.chooseFile(function(files)
-		{	
-			if(files.length > 0)
-			{
-				var file = files[0].path;
-				var path = FileSystem.getFilePath(file);
-				var extension = FileSystem.getFileExtension(file);
+		Interface.assetFile.addOption("3D Models", function()
+		{
+			FileSystem.chooseFile(function(files)
+			{	
+				if(files.length > 0)
+				{
+					var file = files[0].path;
+					var path = FileSystem.getFilePath(file);
+					var extension = FileSystem.getFileExtension(file);
 
-				//Wavefront OBJ
-				if(extension === "obj")
-				{
-					var mtl = FileSystem.getNameWithoutExtension(file) + ".mtl";
-					var loader = new THREE.OBJLoader();
+					//Wavefront OBJ
+					if(extension === "obj")
+					{
+						var mtl = FileSystem.getNameWithoutExtension(file) + ".mtl";
+						var loader = new THREE.OBJLoader();
 
-					if(FileSystem.fileExists(mtl))
-					{
-						var mtlLoader = new THREE.MTLLoader()
-						mtlLoader.setPath(path);
-						var materials = mtlLoader.parse(FileSystem.readFile(mtl));
-						loader.setMaterials(materials);
-					}
+						if(FileSystem.fileExists(mtl))
+						{
+							var mtlLoader = new THREE.MTLLoader()
+							mtlLoader.setPath(path);
+							var materials = mtlLoader.parse(FileSystem.readFile(mtl));
+							loader.setMaterials(materials);
+						}
 
-					var obj = loader.parse(FileSystem.readFile(file));
-					Editor.addToScene(obj);
-				}
-				//Collada
-				else if(extension === "dae")
-				{
-					var loader = new THREE.ColladaLoader();
-					loader.options.convertUpAxis = true;
-					var collada = loader.parse(FileSystem.readFile(file));
-					var scene = collada.scene;
-					Editor.addToScene(scene);
-				}
-				//GLTF
-				else if(extension === "gltf")
-				{
-					var loader = new THREE.GLTFLoader();
-					var gltf = loader.parse(FileSystem.readFile(file));
-					if(gltf.scene !== undefined)
-					{
-						Editor.addToScene(gltf.scene);
+						var obj = loader.parse(FileSystem.readFile(file));
+						Editor.addToScene(obj);
 					}
-				}
-				//AWD
-				else if(extension === "awd")
-				{
-					var loader = new THREE.AWDLoader();
-					var awd = loader.parse(FileSystem.readFileArrayBuffer(file));
-					Editor.addToScene(awd);
-				}
-				//PLY
-				else if(extension === "ply")
-				{
-					var loader = new THREE.PLYLoader();
-					var geometry = loader.parse(FileSystem.readFile(file));
-					Editor.addToScene(new Mesh(geometry));
-				}
-				//VTK
-				else if(extension === "vtk" || extension === "vtp")
-				{
-					var loader = new THREE.VTKLoader();
-					var geometry = loader.parse(FileSystem.readFileArrayBuffer(file));
-					Editor.addToScene(new Mesh(geometry));
-				}
-				//VRML
-				else if(extension === "wrl" || extension === "vrml")
-				{
-					var loader = new THREE.VRMLLoader();
-					var scene = loader.parse(FileSystem.readFile(file));
-					for(var i = 0; i < scene.children.length; i++)
+					//Collada
+					else if(extension === "dae")
 					{
-						Editor.addToScene(scene.children[i]);
+						var loader = new THREE.ColladaLoader();
+						loader.options.convertUpAxis = true;
+						var collada = loader.parse(FileSystem.readFile(file));
+						var scene = collada.scene;
+						Editor.addToScene(scene);
 					}
-				}
-				//FBX
-				else if(extension === "fbx")
-				{
-					var loader = new THREE.FBXLoader();
-					var obj = loader.parse(FileSystem.readFile(file));
-					Editor.addToScene(obj);
-				}
-				//PCD Point Cloud Data
-				else if(extension === "pcd")
-				{
-					var loader = new THREE.PCDLoader();
-					var pcd = loader.parse(FileSystem.readFileArrayBuffer(file), file);
-					pcd.name = FileSystem.getFileName(file);
-					pcd.material.name = "points";
-					Editor.addToScene(pcd);
-				}
-				//THREE JSON Model
-				else if(extension === "json")
-				{
-					var loader = new THREE.JSONLoader();
-					var data = loader.parse(JSON.parse(FileSystem.readFile(file)));
-					var materials = data.materials;
-					var geometry = data.geometry;
+					//GLTF
+					else if(extension === "gltf")
+					{
+						var loader = new THREE.GLTFLoader();
+						var gltf = loader.parse(FileSystem.readFile(file));
+						if(gltf.scene !== undefined)
+						{
+							Editor.addToScene(gltf.scene);
+						}
+					}
+					//AWD
+					else if(extension === "awd")
+					{
+						var loader = new THREE.AWDLoader();
+						var awd = loader.parse(FileSystem.readFileArrayBuffer(file));
+						Editor.addToScene(awd);
+					}
+					//PLY
+					else if(extension === "ply")
+					{
+						var loader = new THREE.PLYLoader();
+						var geometry = loader.parse(FileSystem.readFile(file));
+						Editor.addToScene(new Mesh(geometry));
+					}
+					//VTK
+					else if(extension === "vtk" || extension === "vtp")
+					{
+						var loader = new THREE.VTKLoader();
+						var geometry = loader.parse(FileSystem.readFileArrayBuffer(file));
+						Editor.addToScene(new Mesh(geometry));
+					}
+					//VRML
+					else if(extension === "wrl" || extension === "vrml")
+					{
+						var loader = new THREE.VRMLLoader();
+						var scene = loader.parse(FileSystem.readFile(file));
+						for(var i = 0; i < scene.children.length; i++)
+						{
+							Editor.addToScene(scene.children[i]);
+						}
+					}
+					//FBX
+					else if(extension === "fbx")
+					{
+						var loader = new THREE.FBXLoader();
+						var obj = loader.parse(FileSystem.readFile(file));
+						Editor.addToScene(obj);
+					}
+					//PCD Point Cloud Data
+					else if(extension === "pcd")
+					{
+						var loader = new THREE.PCDLoader();
+						var pcd = loader.parse(FileSystem.readFileArrayBuffer(file), file);
+						pcd.name = FileSystem.getFileName(file);
+						pcd.material.name = "points";
+						Editor.addToScene(pcd);
+					}
+					//THREE JSON Model
+					else if(extension === "json")
+					{
+						var loader = new THREE.JSONLoader();
+						var data = loader.parse(JSON.parse(FileSystem.readFile(file)));
+						var materials = data.materials;
+						var geometry = data.geometry;
 
-					//Create material object
-					var material = null;
-					if(materials === undefined || materials.length === 0)
-					{
-						material = new THREE.MeshStandardMaterial();
-						material.name = "standard";
-					}
-					else if(materials.length === 1)
-					{
-						material = materials[0];
-					}
-					else if(materials.length > 1)
-					{
-						material = THREE.MultiMaterial(materials);
-					}
+						//Create material object
+						var material = null;
+						if(materials === undefined || materials.length === 0)
+						{
+							material = new THREE.MeshStandardMaterial();
+							material.name = "standard";
+						}
+						else if(materials.length === 1)
+						{
+							material = materials[0];
+						}
+						else if(materials.length > 1)
+						{
+							material = THREE.MultiMaterial(materials);
+						}
 
-					//Create model
-					var model = null;
-					if(geometry.bones.length > 0)
-					{
-						model = new SkinnedMesh(geometry, material);
-					}
-					else
-					{
-						model = new Mesh(geometry, material);
-					}
+						//Create model
+						var model = null;
+						if(geometry.bones.length > 0)
+						{
+							model = new SkinnedMesh(geometry, material);
+						}
+						else
+						{
+							model = new Mesh(geometry, material);
+						}
 
-					Editor.addToScene(model);
+						Editor.addToScene(model);
+					}
 				}
-			}
-		}, ".obj, .dae, .gltf, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json");
-	}, Interface.fileDir + "icons/models/models.png");
+			}, ".obj, .dae, .gltf, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json");
+		}, Interface.fileDir + "icons/models/models.png");
+	}
 
 	//Textures menu
 	var importTexture = Interface.assetFile.addMenu("Texture", Interface.fileDir + "icons/misc/image.png");
@@ -178,14 +181,19 @@ Interface.initialize = function()
 		{
 			if(files.length > 0)
 			{
-				var file = files[0].path;
-				var name = FileSystem.getFileName(file);
+				var file = files[0];
+				var name = file.name;
 
-				var texture = new Texture(new Image(file));
-				texture.name = name;
-				Editor.program.addTexture(texture);
+				var reader = new FileReader();
+				reader.onload = function()
+				{
+					var texture = new Texture(new Image(reader.result));
+					texture.name = name;
 
-				Editor.updateObjectViews();
+					Editor.program.addTexture(texture);
+					Editor.updateObjectViews();
+				};
+				reader.readAsDataURL(file);
 			}
 		}, "image/*");
 	}, Interface.fileDir + "icons/misc/image.png");
@@ -211,23 +219,26 @@ Interface.initialize = function()
 	}, Interface.fileDir + "icons/misc/canvas.png");
 
 	//Video texture
-	importTexture.addOption("Video Texture", function()
+	if(Nunu.runningOnDesktop())
 	{
-		FileSystem.chooseFile(function(files)
+		importTexture.addOption("Video Texture", function()
 		{
-			if(files.length > 0)
+			FileSystem.chooseFile(function(files)
 			{
-				var file = files[0].path;
-				var name = FileSystem.getFileName(file);
+				if(files.length > 0)
+				{
+					var file = files[0].path;
+					var name = FileSystem.getFileName(file);
 
-				var texture = new VideoTexture(new Video(file));
-				texture.name = name;
-				Editor.program.addTexture(texture);
+					var texture = new VideoTexture(new Video(file));
+					texture.name = name;
+					Editor.program.addTexture(texture);
 
-				Editor.updateObjectViews();
-			}
-		}, "video/*");
-	}, Interface.fileDir + "icons/misc/video.png");
+					Editor.updateObjectViews();
+				}
+			}, "video/*");
+		}, Interface.fileDir + "icons/misc/video.png");
+	}
 
 	//Webcam texture
 	importTexture.addOption("Webcam Texture", function()
@@ -240,74 +251,84 @@ Interface.initialize = function()
 	}, Interface.fileDir + "icons/hw/webcam.png");
 
 	//Load Font
-	Interface.assetFile.addOption("Font", function()
+	if(Nunu.runningOnDesktop())
 	{
-		FileSystem.chooseFile(function(files)
+		Interface.assetFile.addOption("Font", function()
 		{
-			if(files.length > 0)
+			FileSystem.chooseFile(function(files)
 			{
-				var file = files[0].path;
-				var loader = new TTFLoader();
-
-				if(confirm("Reverse font glyphs?"))
+				if(files.length > 0)
 				{
-					loader.reversed = true;
+
+					var file = files[0].path;
+					var loader = new TTFLoader();
+
+					if(confirm("Reverse font glyphs?"))
+					{
+						loader.reversed = true;
+					}
+
+					var font = new Font(file);
+					font.name = FileSystem.getFileName(file);
+
+					Editor.program.addFont(font);
+					Editor.updateObjectViews();
 				}
-
-				var font = new Font(file);
-				font.name = FileSystem.getFileName(file);
-
-				Editor.program.addFont(font);
-				Editor.updateObjectViews();
-			}
-		}, ".json, .ttf, .otf");
-	}, Interface.fileDir + "icons/misc/font.png");
+			}, ".json, .ttf, .otf");
+		}, Interface.fileDir + "icons/misc/font.png");
+	}
 
 	//Load Spine Animation
-	Interface.assetFile.addOption("Spine Animation", function()
+	if(Nunu.runningOnDesktop())
 	{
-		FileSystem.chooseFile(function(files)
+		Interface.assetFile.addOption("Spine Animation", function()
 		{
-			if(files.length > 0)
+			FileSystem.chooseFile(function(files)
 			{
-				var file = files[0].path;
+				if(files.length > 0)
+				{
+					var file = files[0].path;
 
-				var json = FileSystem.readFile(file);
-				var atlas = FileSystem.readFile(file.replace("json", "atlas"));
-				var path = file.substring(0, file.lastIndexOf("\\"));
-				
-				var animation = new SpineAnimation(json, atlas, path);
-				animation.name = FileSystem.getFileName(file);
+					var json = FileSystem.readFile(file);
+					var atlas = FileSystem.readFile(file.replace("json", "atlas"));
+					var path = file.substring(0, file.lastIndexOf("\\"));
+					
+					var animation = new SpineAnimation(json, atlas, path);
+					animation.name = FileSystem.getFileName(file);
 
-				Editor.addToScene(animation);
-				Editor.updateObjectViews();
-			}
-		}, ".json");
-	}, Interface.fileDir + "icons/misc/spine.png");
+					Editor.addToScene(animation);
+					Editor.updateObjectViews();
+				}
+			}, ".json");
+		}, Interface.fileDir + "icons/misc/spine.png");
+	}
 
 	//Load audio file
-	Interface.assetFile.addOption("Audio", function()
+	if(Nunu.runningOnDesktop())
 	{
-		FileSystem.chooseFile(function(files)
+		Interface.assetFile.addOption("Audio", function()
 		{
-			if(files.length > 0)
+			FileSystem.chooseFile(function(files)
 			{
-				var file = files[0].path;
+				if(files.length > 0)
+				{
+					var file = files[0].path;
 
-				var audio = new Audio(file);
-				audio.name = FileSystem.getFileName(file);
-				
-				Editor.program.addAudio(audio);
+					var audio = new Audio(file);
+					audio.name = FileSystem.getFileName(file);
+					
+					Editor.program.addAudio(audio);
 
-				var emitter = new AudioEmitter(audio);
-				emitter.name = audio.name;
-				Editor.addToScene(emitter);
-				
-				Editor.updateObjectViews();
-			}
-		}, "audio/*");
-	}, Interface.fileDir + "icons/misc/audio.png");
-
+					var emitter = new AudioEmitter(audio);
+					emitter.name = audio.name;
+					Editor.addToScene(emitter);
+					
+					Editor.updateObjectViews();
+				}
+			}, "audio/*");
+		}, Interface.fileDir + "icons/misc/audio.png");
+	}
+	
 	//Create material
 	Interface.assetMaterial = new DropdownMenu(Interface.assetExplorerBar.element);
 	Interface.assetMaterial.setText("Material");
@@ -854,23 +875,28 @@ Interface.initialize = function()
 		tab.select();
 	}, Interface.fileDir + "icons/misc/settings.png");
 
-	var publish = Interface.file.addMenu("Publish");
-	publish.addOption("Web", function()
+	//Publish
+	if(Nunu.runningOnDesktop())
 	{
-		FileSystem.chooseFile(function(files)
+		var publish = Interface.file.addMenu("Publish");
+		publish.addOption("Web", function()
 		{
-			try
+			FileSystem.chooseFile(function(files)
 			{
-				Editor.exportWebProject(files[0].path);
-				alert("Project exported");
-			}
-			catch(e)
-			{
-				alert("Error exporting project (" + e + ")");
-			}
-		}, "", Editor.program.name);
-	}, Interface.fileDir + "icons/platform/web.png");
+				try
+				{
+					Editor.exportWebProject(files[0].path);
+					alert("Project exported");
+				}
+				catch(e)
+				{
+					alert("Error exporting project (" + e + ")");
+				}
+			}, "", Editor.program.name);
+		}, Interface.fileDir + "icons/platform/web.png");
+	}
 
+	//Publish windows
 	if(FileSystem.fileExists("../nwjs/win"))
 	{
 		publish.addOption("Windows", function()
@@ -890,6 +916,7 @@ Interface.initialize = function()
 		}, Interface.fileDir + "icons/platform/windows.png");
 	}
 
+	//Publish linux
 	if(FileSystem.fileExists("../nwjs/linux"))
 	{
 		publish.addOption("Linux", function()
@@ -909,6 +936,7 @@ Interface.initialize = function()
 		}, Interface.fileDir + "icons/platform/linux.png");
 	}
 
+	//Publish macos
 	if(FileSystem.fileExists("../nwjs/mac"))
 	{
 		publish.addOption("macOS", function()
@@ -992,7 +1020,7 @@ Interface.initialize = function()
 			{
 				if(files.length > 0)
 				{
-					var code = FileSystem.readFile(files[0].path);
+					var code = FileSystem.readFile(files[0]);
 					var func = Function(code);
 					func();
 				}
@@ -1111,34 +1139,19 @@ Interface.updateInterface = function()
 //Open to save program window
 Interface.saveProgram = function()
 {
-	//Desktop
 	if(Nunu.runningOnDesktop())
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			try
-			{
-				Editor.saveProgram(files[0].path);
-				alert("Project saved");
-			}
-			catch(e)
-			{
-				alert("Error saving file\n(" + e + ")");
-			}
+			Editor.saveProgram(files[0].path);
 		}, ".isp", true);
 	}
-	//Web
 	else
 	{
-		var fname = "default";
-		fname = prompt("Save As", fname);
-
-		if(!fname.endsWith(".isp"))
+		FileSystem.chooseFileName(function(fname)
 		{
-			fname += ".isp";
-		}
-		
-		Editor.saveProgram(fname);
+			Editor.saveProgram(fname);
+		}, ".isp");
 	}
 }
 
@@ -1149,17 +1162,7 @@ Interface.loadProgram = function()
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			try
-			{
-				Editor.loadProgramFile(files[0]);
-				Editor.resetEditingFlags();
-				Editor.updateObjectViews();
-				alert("Project loaded");
-			}
-			catch(e)
-			{
-				alert("Error loading file\n(" + e + ")");
-			}
+			Editor.loadProgram(files[0]);
 		}, ".isp");
 	}
 }
@@ -1170,7 +1173,6 @@ Interface.newProgram = function()
 	if(confirm("All unsaved changes to the project will be lost! Create new File?"))
 	{
 		Editor.createNewProgram();
-		Editor.updateObjectViews();
 	}
 }
 

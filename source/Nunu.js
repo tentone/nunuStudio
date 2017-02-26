@@ -42,7 +42,7 @@ Nunu.VERSION = "V0.8.9.21 Alpha";
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201702251342";
+Nunu.TIMESTAMP = "201702260015";
 
 /**
  * Check if host supports WebVR and if there is a VR display available.
@@ -64,7 +64,7 @@ Nunu.webvrAvailable = function()
 Nunu.webAudioAvailable = function()
 {
 	return window.AudioContext !== undefined || window.webkitAudioContext !== undefined;
-}
+};
 
 /**
  * Check if host supports WebGL.
@@ -93,7 +93,7 @@ Nunu.webglAvailable = function()
 	}
 
 	return false;
-}
+};
 
 /**
  * Check if nunu is running inside NWJS.
@@ -103,14 +103,5 @@ Nunu.webglAvailable = function()
  */
 Nunu.runningOnDesktop = function()
 {
-	try
-	{
-		return (typeof require('nw.gui') !== "undefined");
-	}
-	catch(e)
-	{
-		return false;
-	}
-
-	return false;
-}
+	return window.nw !== undefined;
+};

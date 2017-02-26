@@ -152,6 +152,8 @@ ScriptEditor.prototype.updateMetadata = function()
 //Activate code editor
 ScriptEditor.prototype.activate = function()
 {
+	this.active = true;
+	
 	//Set editor state
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();

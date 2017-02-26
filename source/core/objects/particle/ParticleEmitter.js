@@ -116,6 +116,13 @@ function ParticleEmitter(group, emitter)
 		});
 		this.group.addEmitter(this.emitter);
 	}
+
+	//Override raycast
+	this.raycast = function()
+	{
+		return null;
+	};
+
 }
 
 ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
