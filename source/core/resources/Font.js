@@ -1,15 +1,31 @@
 "use strict";
 
 /**
- * Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64)
+ * Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64).
  * 
- * Font objects are used for booth 2D and 3D text
+ * Font objects are used for booth 2D and 3D text.
  * 
  * @class Font
  * @constructor
  * @extends {Resource}
  * @module Resources
  * @param {String} url URL to font file
+ */
+
+/**
+ * Font data, can be an ArrayBuffer or JSON.
+ *
+ * @property font
+ * @type {Object}
+ * @default null
+ */
+
+/**
+ * If true the font glyphs are reversed.
+ *
+ * @property reversed
+ * @type {boolean}
+ * @default false
  */
 function Font(url)
 {
@@ -21,44 +37,80 @@ function Font(url)
 	this.encoding = "";
 	this.data = null;
 
+	this.reversed = false;
 	this.font = null;
 
 	if(url !== undefined)
-	{
-		if(typeof url === "object")
+	{	
+		//Arraybuffer
+		if(url instanceof window.ArrayBuffer)
+		{
+			this.data = url;
+			this.loadTTF();
+			this.format = "arraybuffer";
+		}
+		//Opentype JSON
+		else if(typeof url === "object")
 		{
 			this.data = url;
 			this.font = url;
-			this.name = url.original_font_information.full_name || "font";
 			this.format = "json";
 			this.encoding = "json";
 		}
+		//URL
 		else
 		{
 			this.encoding = url.split(".").pop().toLowerCase();
+			this.name = FileSystem.getFileName(url);
 
 			if(this.encoding === "json")
 			{
 				this.data = JSON.parse(FileSystem.readFile(url));
-				this.font = this.data;
-				this.name = this.data.original_font_information.full_name || FileSystem.getFileName(url);
 				this.format = "json";
+				this.font = this.data;
 			}
 			else if(this.encoding === "ttf" || this.encoding === "otf" || this.encoding === "ttc" || this.encoding === "otc")
 			{
 				this.data = FileSystem.readFileArrayBuffer(url);
-				this.font = new TTFLoader().parse(this.data);
-				this.name = FileSystem.getFileName(url);
 				this.format = "arraybuffer";
+				this.loadTTF();
 			}
 		}
 	}
 }
 
+
 Font.prototype.isFont = true;
 
 /**
- * Generate font shapes used to create 3D geometries
+ * Reverse the font glyphs.
+ *
+ * Can be used to fix fonts that have paths defined CW.
+ *
+ * @method reverseGlyphs
+ */
+Font.prototype.reverseGlyphs = function()
+{
+	this.reversed = !this.reversed;
+
+	this.loadTTF();
+};
+
+/**
+ * Load font from data using the TTF loader.
+ * 
+ * @method loadTTF
+ */
+Font.prototype.loadTTF = function()
+{
+	var loader = new TTFLoader();
+	loader.reversed = this.reversed;
+	this.font = loader.parse(this.data);
+};
+
+/**
+ * Generate font shapes used to create 3D geometries.
+ * 
  * @param {String} text
  * @param {Number} size
  * @param {Number} divisions
@@ -211,10 +263,13 @@ Font.prototype.generateShapes = function(text, size, divisions)
 
 		return {width: glyph.ha * scale, path: path};
 	}
-}
+};
 
 /**
- * Serialize resource to json
+ * Serialize font resource to json.
+ *
+ * Font data is stored as Base64 is present in a binary format, or JSON otherwise.
+ * 
  * @param {Object} meta
  * @return {Object} json
  */
@@ -245,4 +300,4 @@ Font.prototype.toJSON = function(meta)
 	meta.fonts[this.uuid] = data;
 	
 	return data;
-}
+};

@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Video resources are used to store video data in base64
+ * Video resources are used to store video.
+ * 
+ * Video data stored in base64.
  * 
  * @class Video
  * @constructor
@@ -20,16 +22,29 @@ function Video(url)
 	this.data = null;
 
 	if(url !== undefined)
-	{
-		this.encoding = url.split(".").pop().toLowerCase();
-		this.data = "data:video/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
-		this.format = "base64";
+	{	
+		//Base64 data
+		if(url.startsWith("data:video"))
+		{
+			this.encoding = Base64Utils.getFileFormat(url);
+			this.format = "base64";
+			this.data = url;
+		}
+		//URL
+		else
+		{		
+			this.encoding = url.split(".").pop().toLowerCase();
+			this.data = "data:video/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
+			this.format = "base64";
+		}
 	}
 }
 
 /**
- * Serialize resource to json
- * Video is stores in Base64
+ * Serialize resource to json.
+ * 
+ * Video data is stored in Base64.
+ * 
  * @param {Object} meta
  * @return {Object} json
  */

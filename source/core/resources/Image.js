@@ -25,25 +25,36 @@ function Image(url)
 	
 	if(url !== undefined)
 	{
-		this.encoding = url.split(".").pop().toLowerCase();
-
-		if(this.encoding === "gif")
+		//Base64 data
+		if(url.startsWith("data:image"))
 		{
-			this.data = "data:image/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
+			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
+			this.data = url;
 		}
-		else if(this.encoding === "tga")
-		{
-			var canvas = new THREE.TGALoader().parse(FileSystem.readFileArrayBuffer(url));
-
-			this.encoding = "jpeg";
-			this.format = "base64";
-			this.data = canvas.toDataURL("image/jpeg", 0.9);
-		}
+		//URL
 		else
 		{
-			this.format = "url";
-			this.data = url;
+			this.encoding = url.split(".").pop().toLowerCase();
+
+			if(this.encoding === "gif")
+			{
+				this.data = "data:image/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
+				this.format = "base64";
+			}
+			else if(this.encoding === "tga")
+			{
+				var canvas = new THREE.TGALoader().parse(FileSystem.readFileArrayBuffer(url));
+
+				this.encoding = "jpeg";
+				this.format = "base64";
+				this.data = canvas.toDataURL("image/jpeg", 0.9);
+			}
+			else
+			{
+				this.format = "url";
+				this.data = url;
+			}
 		}
 	}
 }

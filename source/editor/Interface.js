@@ -219,26 +219,28 @@ Interface.initialize = function()
 	}, Interface.fileDir + "icons/misc/canvas.png");
 
 	//Video texture
-	if(Nunu.runningOnDesktop())
+	importTexture.addOption("Video Texture", function()
 	{
-		importTexture.addOption("Video Texture", function()
+		FileSystem.chooseFile(function(files)
 		{
-			FileSystem.chooseFile(function(files)
+			if(files.length > 0)
 			{
-				if(files.length > 0)
+				var file = files[0];
+				var name = file.name;
+
+				var reader = new FileReader();
+				reader.onload = function()
 				{
-					var file = files[0].path;
-					var name = FileSystem.getFileName(file);
-
-					var texture = new VideoTexture(new Video(file));
+					var texture = new VideoTexture(new Video(reader.result));
 					texture.name = name;
-					Editor.program.addTexture(texture);
 
+					Editor.program.addTexture(texture);
 					Editor.updateObjectViews();
-				}
-			}, "video/*");
-		}, Interface.fileDir + "icons/misc/video.png");
-	}
+				};
+				reader.readAsDataURL(file);
+			}
+		}, "video/*");
+	}, Interface.fileDir + "icons/misc/video.png");
 
 	//Webcam texture
 	importTexture.addOption("Webcam Texture", function()
@@ -251,22 +253,15 @@ Interface.initialize = function()
 	}, Interface.fileDir + "icons/hw/webcam.png");
 
 	//Load Font
-	if(Nunu.runningOnDesktop())
+	Interface.assetFile.addOption("Font", function()
 	{
-		Interface.assetFile.addOption("Font", function()
+		FileSystem.chooseFile(function(files)
 		{
-			FileSystem.chooseFile(function(files)
+			if(files.length > 0)
 			{
-				if(files.length > 0)
+				if(Nunu.runningOnDesktop())
 				{
-
 					var file = files[0].path;
-					var loader = new TTFLoader();
-
-					if(confirm("Reverse font glyphs?"))
-					{
-						loader.reversed = true;
-					}
 
 					var font = new Font(file);
 					font.name = FileSystem.getFileName(file);
@@ -274,11 +269,46 @@ Interface.initialize = function()
 					Editor.program.addFont(font);
 					Editor.updateObjectViews();
 				}
-			}, ".json, .ttf, .otf");
-		}, Interface.fileDir + "icons/misc/font.png");
-	}
+				else
+				{
+					var file = files[0];
+					var name = file.name;
+					var extension = name.split(".").pop().toLowerCase();
 
-	//Load Spine Animation
+					var reader = new FileReader();
+					reader.onload = function()
+					{
+						if(extension === "json")
+						{
+							var font = new Font(JSON.parse(reader.result));
+						}
+						else
+						{
+							var font = new Font(reader.result);
+							font.encoding = extension;
+						}
+						
+						font.name = name;
+
+						Editor.program.addFont(font);
+						Editor.updateObjectViews();
+					};
+
+
+					if(extension === "json")
+					{
+						reader.readAsText(file);
+					}
+					else
+					{
+						reader.readAsArrayBuffer(file);
+					}
+				}
+			}
+		}, ".json, .ttf, .otf");
+	}, Interface.fileDir + "icons/misc/font.png");
+
+	//Spine Animation
 	if(Nunu.runningOnDesktop())
 	{
 		Interface.assetFile.addOption("Spine Animation", function()
@@ -304,30 +334,34 @@ Interface.initialize = function()
 	}
 
 	//Load audio file
-	if(Nunu.runningOnDesktop())
+	Interface.assetFile.addOption("Audio", function()
 	{
-		Interface.assetFile.addOption("Audio", function()
+		FileSystem.chooseFile(function(files)
 		{
-			FileSystem.chooseFile(function(files)
+			if(files.length > 0)
 			{
-				if(files.length > 0)
-				{
-					var file = files[0].path;
+				var file = files[0];
+				var name = file.name;
 
-					var audio = new Audio(file);
-					audio.name = FileSystem.getFileName(file);
+				var reader = new FileReader();
+				reader.onload = function()
+				{
+					var audio = new Audio(reader.result);
+					audio.name = name;
 					
 					Editor.program.addAudio(audio);
 
 					var emitter = new AudioEmitter(audio);
-					emitter.name = audio.name;
+					emitter.name = name;
+
 					Editor.addToScene(emitter);
-					
 					Editor.updateObjectViews();
-				}
-			}, "audio/*");
-		}, Interface.fileDir + "icons/misc/audio.png");
-	}
+				};
+
+				reader.readAsArrayBuffer(file);
+			}
+		}, "audio/*");
+	}, Interface.fileDir + "icons/misc/audio.png");
 	
 	//Create material
 	Interface.assetMaterial = new DropdownMenu(Interface.assetExplorerBar.element);

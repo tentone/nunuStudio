@@ -41,6 +41,18 @@ function FontAsset(parent)
 			}
 		});
 
+		if(self.font !== null && self.font.format === "arraybuffer")
+		{
+			context.addOption("Reverse", function()
+			{
+				if(confirm("Reverse font glyphs?"))
+				{
+					self.font.reverseGlyphs();
+					self.updateMetadata();
+				}
+			});
+		}
+
 		context.addOption("Copy", function()
 		{
 			if(self.font !== null)
