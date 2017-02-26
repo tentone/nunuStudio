@@ -48,7 +48,7 @@ Settings.loadDefault = function()
 	Settings.code.autoCloseBrackets = true;
 	Settings.code.highlightActiveLine = false;
 	Settings.code.showMatchesOnScrollbar = true;
-}
+};
 
 //Store settings file
 Settings.store = function()
@@ -64,7 +64,7 @@ Settings.store = function()
 	data.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
 
 	FileSystem.writeFile("config", data);
-}
+};
 
 //Load settings file
 Settings.load = function()
@@ -82,4 +82,4 @@ Settings.load = function()
 	{
 		Settings.loadDefault();
 	}
-}
+};

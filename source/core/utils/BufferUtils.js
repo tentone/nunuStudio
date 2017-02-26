@@ -27,4 +27,4 @@ BufferUtils.fromArrayBuffer = function(array)
 	}
 
 	return buffer;
-}
+};

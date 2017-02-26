@@ -28,7 +28,7 @@ ArraybufferUtils.fromBinaryString = function(str)
 	}
 
 	return array;
-}
+};
 
 /**
  * Create arraybuffer from base64 string
@@ -65,7 +65,7 @@ ArraybufferUtils.fromBase64 = function(str)
 	}
 
 	return array;
-}
+};
 
 /**
  * Create arraybuffer from Nodejs buffer
@@ -85,4 +85,4 @@ ArraybufferUtils.fromBuffer = function(buffer)
 	}
 
 	return array;
-}
+};

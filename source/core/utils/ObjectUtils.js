@@ -36,7 +36,7 @@ ObjectUtils.getFonts = function(obj, fonts)
 	});
 
 	return fonts;
-}
+};
 
 /**
  * Get all audio files in object and childs
@@ -65,7 +65,7 @@ ObjectUtils.getAudio = function(obj, audio)
 	});
 
 	return audio;
-}
+};
 
 /**
  * Get all materials in object and childs
@@ -122,7 +122,7 @@ ObjectUtils.getMaterials = function(obj, materials)
 	});
 
 	return materials;
-}
+};
 
 /**
  * Get all textures in object and childs
@@ -191,7 +191,7 @@ ObjectUtils.getTextures = function(obj, textures)
 	});
 
 	return textures;
-}
+};
 
 /**
  * Get object scene
@@ -214,7 +214,7 @@ ObjectUtils.getScene = function(obj)
 	}
 
 	return null;
-}
+};
 
 /**
  * Get object tree root
@@ -233,7 +233,7 @@ ObjectUtils.getRoot = function(obj)
 	}
 
 	return node;
-}
+};
 
 /**
  * Set object and all its children matrixAutoUpdate value
@@ -250,7 +250,7 @@ ObjectUtils.setMatrixAutoUpdate = function(obj, value)
 	{
 		child.matrixAutoUpdate = value;
 	});
-}
+};
 
 /**
  * Set object and all children to receive shadows
@@ -267,7 +267,7 @@ ObjectUtils.setShadowReceiving = function(obj, value)
 	{
 		child.receiveShadow = value;
 	});
-}
+};
 
 /**
  * Set object and all children to cast shadows
@@ -284,7 +284,7 @@ ObjectUtils.setShadowCasting = function(obj, value)
 	{
 		child.castShadow = value;
 	});
-}
+};
 
 /**
  * Check if object is child of another object
@@ -304,4 +304,4 @@ ObjectUtils.isChildOf = function(parent, child)
 		}
 	}
 	return false;
-}
+};

@@ -1066,7 +1066,7 @@ Interface.initialize = function()
 			Editor.setState(Editor.STATE_EDITING);
 		}
 	});
-}
+};
 
 //Loop update elements
 Interface.update = function()
@@ -1075,7 +1075,7 @@ Interface.update = function()
 	Interface.assetExplorerDiv.update();
 	Interface.explorerResizable.update();
 	Interface.tab.update();
-}
+};
 
 //Update interface
 Interface.updateInterface = function()
@@ -1134,7 +1134,7 @@ Interface.updateInterface = function()
 
 	//Resize editor camera
 	Editor.resizeCamera();
-}
+};
 
 //Open to save program window
 Interface.saveProgram = function()
@@ -1153,7 +1153,7 @@ Interface.saveProgram = function()
 			Editor.saveProgram(fname);
 		}, ".isp");
 	}
-}
+};
 
 //Open to load program window
 Interface.loadProgram = function()
@@ -1165,7 +1165,7 @@ Interface.loadProgram = function()
 			Editor.loadProgram(files[0]);
 		}, ".isp");
 	}
-}
+};
 
 //Interface elemento to create new program
 Interface.newProgram = function()
@@ -1174,7 +1174,7 @@ Interface.newProgram = function()
 	{
 		Editor.createNewProgram();
 	}
-}
+};
 
 //Select object manipulation tool
 Interface.selectTool = function(tool)
@@ -1205,4 +1205,4 @@ Interface.selectTool = function(tool)
 	Interface.toolMove.updateInterface();
 	Interface.toolScale.updateInterface();
 	Interface.toolSelect.updateInterface();
-}
+};

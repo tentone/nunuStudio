@@ -13,7 +13,7 @@ DragBuffer.pushDragElement = function(obj)
 	{
 		DragBuffer.buffer.push(obj);
 	}
-}
+};
 
 //Get element from drag buffer using uuid
 DragBuffer.popDragElement = function(uuid)
@@ -28,4 +28,4 @@ DragBuffer.popDragElement = function(uuid)
 		}
 	}
 	return null;
-}
+};
