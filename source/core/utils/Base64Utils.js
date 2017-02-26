@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Base64Utils contains methods to convert from and to Base64 binary format
+ * Base64Utils contains methods to convert from and to Base64 binary format.
  *
  * @class Base64Utils
  * @module BinaryData
@@ -10,8 +10,9 @@
 function Base64Utils(){}
 
 /**
- * Remove base64 header from data
- * Usefull for removing the heander from image, audio, video, etc
+ * Remove base64 header from data.
+ * 
+ * Usefull for removing the heander from image, audio, video, etc.
  *
  * @method removeHeader
  * @param {String} base64
@@ -23,7 +24,22 @@ Base64Utils.removeHeader = function(data)
 };
 
 /**
- * Create base64 string from arraybuffer
+ * Get the file format present in the base64 string.
+ *
+ * @method getFileFormat
+ * @param  {String} data Base64 data.
+ * @return {String} File format present in the JSON data.
+ */
+Base64Utils.getFileFormat = function(data)
+{
+	var start = data.indexOf("/") + 1;
+	var end = data.indexOf(";");
+	
+	return data.substr(start, end - start);
+};
+
+/**
+ * Create base64 string from arraybuffer.
  *
  * @method fromArraybuffer
  * @param {Arraybuffer} arraybuffer
@@ -79,7 +95,7 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
 };
 
 /**
- * Create base64 string from binary string
+ * Create base64 string from binary string.
  *
  * @method fromBinaryString
  * @param {String} str

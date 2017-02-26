@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API
+ * Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API.
  * 
  * @class Audio
  * @extends {Resource}
@@ -21,9 +21,20 @@ function Audio(url)
 
 	if(url !== undefined)
 	{
-		this.data = FileSystem.readFileArrayBuffer(url);
-		this.encoding = url.split(".").pop().toLowerCase();
-		this.format = "arraybuffer";
+		//Arraybuffer data
+		if(url instanceof window.ArrayBuffer)
+		{
+			this.data = url;
+			this.encoding = "";
+			this.format = "arraybuffer";
+		}
+		//URL
+		else
+		{
+			this.data = FileSystem.readFileArrayBuffer(url);
+			this.encoding = url.split(".").pop().toLowerCase();
+			this.format = "arraybuffer";
+		}
 	}
 }
 
