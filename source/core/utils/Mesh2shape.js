@@ -121,7 +121,7 @@ Mesh2shape.createBoxShape = function(geometry)
 	var box = geometry.boundingBox;
 	
 	return new CANNON.Box(new CANNON.Vec3((box.max.x - box.min.x) / 2,(box.max.y - box.min.y) / 2,(box.max.z - box.min.z) / 2));
-}
+};
 
 /**
  * Bounding box needs to be computed with the entire mesh, not just geometry
@@ -156,7 +156,7 @@ Mesh2shape.createBoundingBoxShape = function(object)
 	}
 
 	return shape;
-}
+};
 
 /**
  * Computes 3D convex hull as a CANNON.ConvexPolyhedron
@@ -206,7 +206,7 @@ Mesh2shape.createConvexPolyhedron = function(object)
 	}
 
 	return new CANNON.ConvexPolyhedron(vertices, faces);
-}
+};
 
 /**
  * Create cylinder shape from geometry
@@ -224,7 +224,7 @@ Mesh2shape.createCylinderShape = function(geometry)
 	shape.orientation.setFromEuler(THREE.Math.degToRad(-90), 0, 0, "XYZ").normalize();
 
 	return shape;
-}
+};
 
 /**
  * Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere
@@ -251,7 +251,7 @@ Mesh2shape.createBoundingCylinderShape = function(object)
 	shape.orientation.setFromEuler(PI2, 0, 0, "XYZ").normalize();
 	
 	return shape;
-}
+};
 
 /**
  * Plane shape from geometry
@@ -266,7 +266,7 @@ Mesh2shape.createPlaneShape = function(geometry)
 	var box = geometry.boundingBox;
 
 	return new CANNON.Box(new CANNON.Vec3((box.max.x - box.min.x) / 2, (box.max.y - box.min.y) / 2, (box.max.z - box.min.z) / 2));
-}
+};
 
 /**
  * Sphere shape from geometry
@@ -278,7 +278,7 @@ Mesh2shape.createPlaneShape = function(geometry)
 Mesh2shape.createSphereShape = function(geometry)
 {
 	return new CANNON.Sphere(geometry.parameters.radius);
-}
+};
 
 /**
  * Sphere shape from bouding sphere
@@ -293,7 +293,7 @@ Mesh2shape.createBoundingSphereShape = function(object)
 	geometry.computeBoundingSphere();
 
 	return new CANNON.Sphere(geometry.boundingSphere.radius);
-}
+};
 
 /**
  * Sphere shape from bouding sphere
@@ -307,7 +307,7 @@ Mesh2shape.createTubeShape = function(geometry)
 	var tmp = new THREE.BufferGeometry();
 	tmp.fromGeometry(geometry);
 	return createTrimeshShape(tmp);
-}
+};
 
 /**
  * Trimesh shape from geometry
@@ -327,7 +327,7 @@ Mesh2shape.createTrimeshShape = function(geometry)
 
 	indices = Object.keys(vertices).map(Number);
 	return new CANNON.Trimesh(vertices, indices);
-}
+};
 
 /**
  * Returns a single geometry for the given object
@@ -388,7 +388,7 @@ Mesh2shape.getGeometry = function(object)
 		combined.applyMatrix(matrix);
 		return combined;
 	}
-}
+};
 
 /**
  * Get geometry vertices
@@ -404,7 +404,7 @@ Mesh2shape.getVertices = function(geometry)
 		geometry = new THREE.BufferGeometry().fromGeometry(geometry);
 	}
 	return geometry.attributes.position.array;
-}
+};
 
 /**
  * Returns a array of THREE.Mesh instances from the given object.
@@ -427,4 +427,4 @@ Mesh2shape.getMeshes = function(object)
 	});
 
 	return meshes;
-}
+};

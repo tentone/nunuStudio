@@ -20,7 +20,7 @@ function Base64Utils(){}
 Base64Utils.removeHeader = function(data)
 {
 	return data.slice(data.search(";base64,") + 8);
-}
+};
 
 /**
  * Create base64 string from arraybuffer
@@ -76,7 +76,7 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
 	}
 
 	return base64;
-}
+};
 
 /**
  * Create base64 string from binary string
@@ -126,4 +126,4 @@ Base64Utils.fromBinaryString = function(str)
 	}
 
 	return base64;
-}
+};

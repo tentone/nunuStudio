@@ -283,10 +283,6 @@ include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
 
-//Internal console
-//include("editor/ui/tab/ConsoleTab.js");
-//include("editor/Console.js");
-
 //Editor state
 Editor.STATE_IDLE = 8;
 Editor.STATE_EDITING = 9;
@@ -453,7 +449,7 @@ Editor.initialize = function()
 	//Update views and start update loop
 	Editor.updateObjectViews();
 	Editor.update();
-}
+};
 
 //Update Editor
 Editor.update = function()
@@ -742,7 +738,7 @@ Editor.update = function()
 	}
 
 	Editor.render();
-}
+};
 
 //Render stuff into screen
 Editor.render = function()
@@ -823,7 +819,7 @@ Editor.render = function()
 	{
 		Editor.stats.end();
 	}
-}
+};
 
 //Resize to fit window
 Editor.resize = function()
@@ -832,7 +828,7 @@ Editor.resize = function()
 	{
 		Interface.updateInterface();
 	}
-}
+};
 
 //Select a object
 Editor.selectObject = function(object)
@@ -859,7 +855,7 @@ Editor.selectObject = function(object)
 		Editor.selectedObject = null;
 		Editor.resetEditingFlags();
 	}
-}
+};
 
 //Check if object is selected
 Editor.isObjectSelected = function(obj)
@@ -869,7 +865,7 @@ Editor.isObjectSelected = function(obj)
 		return Editor.selectedObject.uuid === obj.uuid;
 	}
 	return false;
-}
+};
 
 //Add object to actual scene
 Editor.addToScene = function(obj)
@@ -882,7 +878,7 @@ Editor.addToScene = function(obj)
 
 		Editor.updateObjectViews();
 	}
-}
+};
 
 //Delete selected Object
 Editor.deleteObject = function(obj)
@@ -905,7 +901,7 @@ Editor.deleteObject = function(obj)
 
 		Editor.updateObjectViews();
 	}
-}
+};
 
 //Copy selected object
 Editor.copyObject = function(obj)
@@ -925,7 +921,7 @@ Editor.copyObject = function(obj)
 			Editor.clipboard.set(JSON.stringify(Editor.selectedObject.toJSON()), "text");
 		}
 	}
-}
+};
 
 //Cut selected object
 Editor.cutObject = function(obj)
@@ -955,7 +951,7 @@ Editor.cutObject = function(obj)
 	{
 		Editor.resetEditingFlags();
 	}
-}
+};
 
 //Paste object as children of target object
 Editor.pasteObject = function(target)
@@ -987,14 +983,14 @@ Editor.pasteObject = function(target)
 		Editor.updateObjectViews();
 	}
 	catch(e){}
-}
+};
 
 //Redo action
 Editor.redo = function()
 {
 	//TODO <ADD CODE HERE>
 	alert("Redo not implemented");
-}
+};
 
 //Undo action
 Editor.undo = function()
@@ -1016,7 +1012,7 @@ Editor.undo = function()
 	{
 		alert("Not possible to undo any further");
 	}
-}
+};
 
 //TODO <REMOVE TEST CODE>
 var update = 0;
@@ -1040,7 +1036,7 @@ Editor.updateObjectViews = function()
 	//console.log("    Panel " + panelDelta + "ms");
 	//console.log("    Tabs " + tabsDelta + "ms");
 	//console.log("    Assets " + assetDelta + "ms\n\n");
-}
+};
 
 //Update tab names to match objects actual info
 Editor.updateTabsData = function()
@@ -1052,7 +1048,7 @@ Editor.updateTabsData = function()
 
 	//TODO <REMOVE TEST CODE>
 	tabsDelta = Date.now() - start;
-}
+};
 
 //Update tree view to match actual scene
 Editor.updateTreeView = function()
@@ -1065,7 +1061,7 @@ Editor.updateTreeView = function()
 	
 	//TODO <REMOVE TEST CODE>
 	treeDelta = Date.now() - start;
-}
+};
 
 //Update assets explorer content
 Editor.updateAssetExplorer = function()
@@ -1116,7 +1112,7 @@ Editor.updateAssetExplorer = function()
 
 	//TODO <REMOVE TEST CODE>
 	assetDelta = Date.now() - start;
-}
+};
 
 //Updates object panel values
 Editor.updateObjectPanel = function()
@@ -1131,7 +1127,7 @@ Editor.updateObjectPanel = function()
 
 	//TODO <REMOVE TEST CODE>
 	panelDelta = Date.now() - start;
-}
+};
 
 //Create default resouces to be used when creating new objects
 Editor.createDefaultResouces = function()
@@ -1151,7 +1147,7 @@ Editor.createDefaultResouces = function()
 	
 	Editor.defaultSpriteMaterial = new THREE.SpriteMaterial({map: Editor.defaultTexture, color: 0xffffff});
 	Editor.defaultSpriteMaterial.name = "default";
-}
+};
 
 //Select tool to manipulate objects
 Editor.selectTool = function(tool)
@@ -1193,7 +1189,7 @@ Editor.selectTool = function(tool)
 	{
 		Editor.tool = null;
 	}
-}
+};
 
 //Update UI panel to match selected object
 Editor.selectObjectPanel = function()
@@ -1297,7 +1293,7 @@ Editor.selectObjectPanel = function()
 	{
 		Interface.panel = null;
 	}
-}
+};
 
 //Select helper to debug selected object data
 Editor.selectObjectHelper = function()
@@ -1373,7 +1369,7 @@ Editor.selectObjectHelper = function()
 			Editor.objectHelper.add(new BoundingBoxHelper(Editor.selectedObject, 0xFFFF00));
 		}
 	}
-}
+};
 
 //Resize Camera
 Editor.resizeCamera = function()
@@ -1389,7 +1385,7 @@ Editor.resizeCamera = function()
 			Editor.programRunning.resize(Editor.canvas.width, Editor.canvas.height);
 		}
 	}
-}
+};
 
 //Set camera mode (ortho or perspective)
 Editor.setCameraMode = function(mode)
@@ -1418,7 +1414,7 @@ Editor.setCameraMode = function(mode)
 
 	Editor.cameraMode = mode;
 	Editor.selectTool(Editor.toolMode);
-}
+};
 
 //Set camera rotation
 Editor.setCameraRotation = function(cameraRotation, camera)
@@ -1430,14 +1426,14 @@ Editor.setCameraRotation = function(cameraRotation, camera)
 	//Add position offset and set camera direction
 	direction.add(camera.position);
 	camera.lookAt(direction);
-}
+};
 
 //Update raycaster position from editor mouse position
 Editor.updateRaycasterFromMouse = function()
 {
 	var mouse = new THREE.Vector2((Editor.mouse.position.x/Editor.canvas.width)*2 - 1, -(Editor.mouse.position.y/Editor.canvas.height)*2 + 1);
 	Editor.raycaster.setFromCamera(mouse, Editor.camera);
-}
+};
 
 //Select objects with mouse
 Editor.selectObjectWithMouse = function()
@@ -1448,13 +1444,13 @@ Editor.selectObjectWithMouse = function()
 	{
 		Editor.selectObject(intersects[0].object);
 	}
-}
+};
 
 //Update editor raycaster with new x and y positions (normalized -1 to 1)
 Editor.updateRaycaster = function(x, y)
 {
 	Editor.raycaster.setFromCamera(new THREE.Vector2(x, y), Editor.camera);
-}
+};
 
 //Reset editing flags
 Editor.resetEditingFlags = function()
@@ -1470,7 +1466,7 @@ Editor.resetEditingFlags = function()
 	
 	Editor.selectTool(Editor.MODE_SELECT);
 	Editor.selectObjectHelper();
-}
+};
 
 //Craete new Program
 Editor.createNewProgram = function()
@@ -1497,7 +1493,7 @@ Editor.createNewProgram = function()
 		scene.attach(Editor.program.scene);
 		Interface.tab.selectTab(0);
 	}
-}
+};
 
 //Save program to file
 Editor.saveProgram = function(fname, compressed, keepDirectory)
@@ -1532,7 +1528,7 @@ Editor.saveProgram = function(fname, compressed, keepDirectory)
 	{
 		alert("Error saving file\n(" + e + ")");
 	}
-}
+};
 
 //Load program from file
 Editor.loadProgram = function(file)
@@ -1578,7 +1574,7 @@ Editor.loadProgram = function(file)
 			alert("Error loading file\n(" + e + ")");
 		}
 	});
-}
+};
 
 //Set currently open file (also updates the editor title), if running in browser never shows openfile
 Editor.setOpenFile = function(file)
@@ -1601,7 +1597,7 @@ Editor.setOpenFile = function(file)
 		Editor.openFile = null;
 		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ")";
 	}
-}
+};
 
 //Export web project
 Editor.exportWebProject = function(dir)
@@ -1614,7 +1610,7 @@ Editor.exportWebProject = function(dir)
 	//FileSystem.copyFile("lib/webvr-polyfill.min.js", dir + "\\webvr-polyfill.min.js");
 	FileSystem.copyFile("../build/nunu.min.js", dir + "\\nunu.min.js");
 	Editor.saveProgram(dir + "\\app.isp", true, true);
-}
+};
 
 //Export windows project
 Editor.exportWindowsProject = function(dir)
@@ -1623,7 +1619,7 @@ Editor.exportWindowsProject = function(dir)
 	FileSystem.copyFolder("..\\nwjs\\win", dir + "\\nwjs");
 	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
 	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".bat", "cd nwjs\nstart nw.exe ..");
-}
+};
 
 //Export linux project
 Editor.exportLinuxProject = function(dir)
@@ -1632,7 +1628,7 @@ Editor.exportLinuxProject = function(dir)
 	FileSystem.copyFolder("nwjs\\linux", dir + "\\nwjs");
 	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
 	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
-}
+};
 
 //Export mac os project
 Editor.exportMacOSProject = function(dir)
@@ -1641,7 +1637,7 @@ Editor.exportMacOSProject = function(dir)
 	FileSystem.copyFolder("nwjs\\mac", dir + "\\nwjs");
 	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
 	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
-}
+};
 
 //Set editor state
 Editor.setState = function(state)
@@ -1741,7 +1737,7 @@ Editor.setState = function(state)
 
 	//Set editor state
 	Editor.state = state;
-}
+};
 
 //Dispose running program if there is one
 Editor.disposeRunningProgram = function()
@@ -1755,20 +1751,20 @@ Editor.disposeRunningProgram = function()
 
 	//Unlock mouse
 	Editor.mouse.setLock(false);
-}
+};
 
 //Set performance meter to be used
 Editor.setPerformanceMeter = function(stats)
 {
 	Editor.stats = stats;
-}
+};
 
 //Set render canvas
 Editor.setRenderCanvas = function(canvas)
 {
 	Editor.mouse.setCanvas(canvas);
 	Editor.initializeRenderer(canvas);
-}
+};
 
 //Initialize renderer
 Editor.initializeRenderer = function(canvas)
@@ -1802,7 +1798,7 @@ Editor.initializeRenderer = function(canvas)
 
 	//Get webgl context
 	Editor.gl = Editor.renderer.context;
-}
+};
 
 //Set fullscreen mode
 Editor.setFullscreen = function(fullscreen, element)
@@ -1832,7 +1828,7 @@ Editor.setFullscreen = function(fullscreen, element)
 			document.exitFullscreen();
 		}
 	}
-}
+};
 
 //Exit editor
 Editor.exit = function()
@@ -1844,7 +1840,7 @@ Editor.exit = function()
 		Editor.gui.App.closeAllWindows();
 		Editor.gui.App.quit();
 	}
-}
+};
 
 //Include javacript or css file in project
 function include(file, onload)
