@@ -1,9 +1,11 @@
 @echo off
 echo ------------------------
 echo       nunu Studio
+echo         Runtime
 echo ------------------------
+
 echo Joining Javascript files
-node join.js ../../source/ ../../source/runtime/NunuApp.js temp.js
+node join.js ../../source/ ../../source/runtime/NunuApp.js temp.js temp.css
 
 echo Optimizing with google closure (takes a while)
 java -jar closure.jar --compilation_level SIMPLE --warning_level QUIET --formatting PRETTY_PRINT --language_in ECMASCRIPT5 --language_out ECMASCRIPT5 --js temp.js --js_output_file ../nunu.js
@@ -13,6 +15,7 @@ java -jar closure.jar --compilation_level WHITESPACE_ONLY --warning_level QUIET 
 
 echo Cleaning temporary files
 del temp.js
+del temp.css
 
 echo Done
 pause

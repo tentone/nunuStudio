@@ -8,24 +8,54 @@ if(process.argv.length > 4)
 	//Main javascript file inside of source code folder
 	var input = process.argv[3];
 
-	//Output file
-	var out = process.argv[4];
+	//JS Output file
+	var out_js = process.argv[4];
+
+	//CSS Output file
+	var out_css = process.argv[5];
 
 	//Join files
 	var code = readFile(input);
 	var includes = getIncludes(code);
-	var output = "";
+
+	var js = "", css = "";
+
 	for(var i = 0; i < includes.length; i++)
 	{
-		output += "\n" + readFile(path + includes[i]);
+		if(includes[i].endsWith(".js"))
+		{
+			js += "\n" + readFile(path + includes[i]);
+		}
+		else if(includes[i].endsWith(".css"))
+		{
+			css += "\n" + readFile(path + includes[i]);
+		}
+		else if(includes[i].endsWith("*"))
+		{
+			var fs = require("fs");
+
+			if(fs !== undefined)
+			{
+				var directory = includes[i].replace("*", "");
+				var files = fs.readdirSync(path + directory);
+				
+				for(var j = 0; j < files.length; j++)
+				{
+					includes.push(directory + files[j]);
+				}
+			}
+		}
 	}
-	output += code;
-	output = output.replace(/"use strict";/gi, "").replace(/include\(".+?"\);/gi, "").replace(/^\s*\n/gm, "") ;
-	writeFile(out, output);
+	js += code;
+	js = js.replace(/"use strict";/gi, "").replace(/include\(".+?"\);/gi, "").replace(/^\s*\n/gm, "") ;
+	
+	//Write Output
+	writeFile(out_js, js);
+	writeFile(out_css, css);
 }
 else
 {
-	console.log("Usage: <source_path> <main_js> <out_js>")
+	console.log("Usage: <source_path> <main_js> <out_js> <out_css>")
 }
 
 //Get included files
@@ -41,7 +71,9 @@ function getIncludes(code, results)
 	{
 		var sub = code.substring(index);
 		var end = sub.indexOf("\");");
-		results.push(sub.substring(9, end));
+		var include = sub.substring(9, end);
+
+		results.push(include);
 		getIncludes(sub.substring(end), results);
 	}
 
