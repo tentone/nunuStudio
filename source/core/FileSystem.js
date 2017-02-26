@@ -21,22 +21,28 @@ catch(e){}
  * Read file content as text.
  *
  * @method readFile
- * @param {String} fname
- * @param {boolean} sync If true the file will be read in sync
- * @param {Function} onLoad onLoad callback
- * @param {Function} onProgress onProgress callback
- * @return {String} File content as a string
+ * @param {String} fname URL to the file, can be also a File object.
+ * @param {boolean} sync If true the file will be read in sync.
+ * @param {Function} onLoad onLoad callback.
+ * @param {Function} onProgress onProgress callback.
+ * @return {String} File content as a string.
  */
 FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 {
+	//Sync default to true
 	if(sync === undefined)
 	{
 		sync = true;
 	}
 
-	//Check if node available
+	//NodeJS
 	if(FileSystem.fs !== undefined)
 	{
+		if(fname instanceof window.File)
+		{
+			fname = fname.path;
+		}
+
 		if(sync)
 		{
 			var data = FileSystem.fs.readFileSync(fname, "utf8");
@@ -48,6 +54,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 			
 			return data;
 		}
+		//Async
 		else
 		{
 			FileSystem.fs.readFile(fname, "utf8", function(err, data)
@@ -59,33 +66,62 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 			});
 		}
 	}
+	//Browser
 	else
 	{
-		var file = new XMLHttpRequest();
-		file.overrideMimeType("text/plain");
-		file.open("GET", fname, !sync);
-		file.onload = function()
+		//File object (always read async)
+		if(fname instanceof window.File)
 		{
-			if(file.status === 200 || file.status === 0)
+			var reader = new FileReader();
+			reader.onload = function()
 			{
 				if(onLoad !== undefined)
 				{
-					onLoad(file.responseText);
+					onLoad(reader.result);
 				}
 			}
-		};
-		
-		if(onProgress !== undefined)
-		{
-			file.onprogress = function(event)
+
+			if(onProgress !== undefined)
 			{
-				onProgress(event);
-			};
+				reader.onprogress = function(event)
+				{
+					onProgress(event);
+				};
+			}
+			
+			reader.readAsText(fname);
+
+			return reader.result;
 		}
+		//URL
+		else
+		{
+			var file = new XMLHttpRequest();
+			file.overrideMimeType("text/plain");
+			file.open("GET", fname, !sync);
+			file.onload = function()
+			{
+				if(file.status === 200 || file.status === 0)
+				{
+					if(onLoad !== undefined)
+					{
+						onLoad(file.responseText);
+					}
+				}
+			};
+			
+			if(onProgress !== undefined)
+			{
+				file.onprogress = function(event)
+				{
+					onProgress(event);
+				};
+			}
 
-		file.send(null);
+			file.send(null);
 
-		return file.responseText;
+			return file.responseText;
+		}
 	}
 }
 
@@ -154,8 +190,8 @@ FileSystem.readFileBase64 = function(fname)
  * When running without NWJS it writes file as a blob and auto downloads it.
  *
  * @method writeFile
- * @param {String} fname
- * @param {String} data
+ * @param {String} fname File name.
+ * @param {String} data Text to be written to the file.
  */
 FileSystem.writeFile = function(fname, data)
 {
@@ -309,12 +345,12 @@ FileSystem.copyFolder = function(src, dest)
 /**
  * Open file chooser dialog receives onLoad callback, file filter, saveas.
  *
- * The save mode dont work when running inside the browser.
+ * Save mode does not work inside the browser.
  *
  * @method chooseFile
  * @param {Function} onLoad onLoad callback
- * @param {String} filer File type filter
- * @param {String} saveas Save as format
+ * @param {String} filter File type filter
+ * @param {String} saveas Save as format can be also a boolean value
  */
 FileSystem.chooseFile = function(onLoad, filter, saveas)
 {
@@ -343,9 +379,36 @@ FileSystem.chooseFile = function(onLoad, filter, saveas)
 }
 
 /**
+ * Used as an alternative to chooseFile for saving files in the browser.
+ *
+ * Uses a prompt to question the user the file name.
+ * 
+ * @method chooseFileName
+ * @param {Function} onLoad onLoad callback
+ * @param {String} saveas File extension
+ */
+FileSystem.chooseFileName = function(onLoad, saveas)
+{
+	var fname = prompt("Save As", "file");
+	
+	if(fname !== null)
+	{
+		if(saveas !== undefined && !fname.endsWith(saveas))
+		{
+			fname += saveas;
+		}
+		
+		if(onLoad !== undefined)
+		{
+			onLoad(fname);
+		}
+	}
+}
+
+/**
  * Check if a file exists.
  * 
- * Only works inside of NWJS.
+ * Only works inside of NWJS. When running inside the browser always returns false.
  *
  * @method fileExists
  * @param {String} file File path
@@ -372,10 +435,15 @@ FileSystem.fileExists = function(file)
  */
 FileSystem.getFileName = function(file)
 {
-	var a = file.lastIndexOf("\\");
-	var b = file.lastIndexOf("/");
+	if(file !== undefined)
+	{
+		var a = file.lastIndexOf("\\");
+		var b = file.lastIndexOf("/");
 
-	return file.substring((a > b) ? (a + 1) : (b + 1), file.lastIndexOf("."));
+		return file.substring((a > b) ? (a + 1) : (b + 1), file.lastIndexOf("."));
+	}
+	
+	return "";
 }
 
 /**
@@ -389,7 +457,12 @@ FileSystem.getFileName = function(file)
  */
 FileSystem.getNameWithoutExtension = function(file)
 {
-	return file.substring(0, file.lastIndexOf("."));
+	if(file !== undefined)
+	{
+		return file.substring(0, file.lastIndexOf("."));
+	}
+
+	return "";
 }
 
 /**
@@ -403,10 +476,15 @@ FileSystem.getNameWithoutExtension = function(file)
  */
 FileSystem.getFilePath = function(file)
 {
-	var a = file.lastIndexOf("\\");
-	var b = file.lastIndexOf("/");
+	if(file !== undefined)
+	{
+		var a = file.lastIndexOf("\\");
+		var b = file.lastIndexOf("/");
 
-	return file.substring(0, (a > b) ? (a + 1) : (b + 1));
+		return file.substring(0, (a > b) ? (a + 1) : (b + 1));
+	}
+
+	return "";
 }
 
 /**
@@ -420,5 +498,10 @@ FileSystem.getFilePath = function(file)
  */
 FileSystem.getFileExtension = function(file)
 {
-	return file.substring(file.lastIndexOf(".") + 1, file.length).toLowerCase();
+	if(file !== undefined)
+	{
+		return file.substring(file.lastIndexOf(".") + 1, file.length).toLowerCase();
+	}
+	
+	return "";
 }

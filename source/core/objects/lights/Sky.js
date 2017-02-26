@@ -169,8 +169,9 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 Sky.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
- * Initialize sky object
- * Called automatically by the runtime
+ * Initialize sky object.
+ * 
+ * Called automatically by the runtime.
  * 
  * @method initialize
  */
@@ -185,8 +186,10 @@ Sky.prototype.initialize = function()
 }
 
 /**
- * Update sky state
- * Called automatically by the runtime
+ * Update sky state.
+ * 
+ * Called automatically by the runtime.
+ * 
  * @method update
  */
 Sky.prototype.update = function()
@@ -223,8 +226,10 @@ Sky.prototype.isEmpty = function()
 }
 
 /**
- * Update sky color and sun position
- * If autoUpdate set to true is automatically called by the update method
+ * Update sky color and sun position.
+ * 
+ * If autoUpdate set to true is automatically called by the update method.
+ * 
  * @method updateSky
  */
 Sky.prototype.updateSky = function()
@@ -357,7 +362,8 @@ Sky.prototype.updateSky = function()
 }
 
 /**
- * Create JSON for object
+ * Create JSON for object.
+ * 
  * @param {Object} meta
  * @method toJSON
  * @return {Object} json

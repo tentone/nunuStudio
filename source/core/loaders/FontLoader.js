@@ -7,8 +7,13 @@ function FontLoader(manager)
 
 FontLoader.fileIsFont = function(fname)
 {
-	fname = fname.toLocaleLowerCase();
-	return fname.endsWith("ttf") || fname.endsWith("otf") || fname.endsWith("ttc") || fname.endsWith("otc");
+	if(fname !== undefined)
+	{
+		fname = fname.toLocaleLowerCase();
+		return fname.endsWith("ttf") || fname.endsWith("otf") || fname.endsWith("ttc") || fname.endsWith("otc");
+	}
+
+	return false;
 }
 
 FontLoader.prototype.load = function(url, onLoad, onProgress, onError)

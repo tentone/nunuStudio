@@ -297,6 +297,8 @@ SceneEditor.prototype.setFullscreen = function(value)
 //Activate scene editor
 SceneEditor.prototype.activate = function()
 {
+	this.active = true;
+	
 	if(this.scene !== null)
 	{
 		Editor.program.scene = this.scene;

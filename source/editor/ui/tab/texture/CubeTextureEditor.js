@@ -269,6 +269,8 @@ CubeTextureEditor.prototype.isAttached = function(texture)
 //Activate
 CubeTextureEditor.prototype.activate = function()
 {
+	this.active = true;
+	
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
 	

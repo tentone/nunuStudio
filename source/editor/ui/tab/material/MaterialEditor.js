@@ -350,6 +350,8 @@ MaterialEditor.prototype.isAttached = function(material)
 //Activate
 MaterialEditor.prototype.activate = function()
 {
+	this.active = true;
+	
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
 	

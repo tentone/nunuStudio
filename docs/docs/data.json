@@ -4668,7 +4668,7 @@
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
             "line": 171,
-            "description": "Initialize sky object\nCalled automatically by the runtime",
+            "description": "Initialize sky object.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
             "class": "Sky",
@@ -4676,8 +4676,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 187,
-            "description": "Update sky state\nCalled automatically by the runtime",
+            "line": 188,
+            "description": "Update sky state.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
             "class": "Sky",
@@ -4685,7 +4685,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 214,
+            "line": 217,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -4698,8 +4698,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 225,
-            "description": "Update sky color and sun position\nIf autoUpdate set to true is automatically called by the update method",
+            "line": 228,
+            "description": "Update sky color and sun position.\n\nIf autoUpdate set to true is automatically called by the update method.",
             "itemtype": "method",
             "name": "updateSky",
             "class": "Sky",
@@ -4707,8 +4707,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 359,
-            "description": "Create JSON for object",
+            "line": 364,
+            "description": "Create JSON for object.",
             "params": [
                 {
                     "name": "meta",
@@ -5026,7 +5026,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 123,
+            "line": 130,
             "description": "Initialize particle system\nCalled automatically by the runtime",
             "itemtype": "method",
             "name": "initialize",
@@ -5035,7 +5035,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 138,
+            "line": 145,
             "description": "Update particle emitter state\nCalled automatically by the runtime",
             "itemtype": "method",
             "name": "update",
@@ -5044,7 +5044,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 153,
+            "line": 160,
             "description": "Dispose particle emitter",
             "itemtype": "method",
             "name": "dispose",
@@ -5053,7 +5053,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 177,
+            "line": 184,
             "description": "Create JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
             "params": [
                 {
@@ -8338,27 +8338,27 @@
             "params": [
                 {
                     "name": "fname",
-                    "description": "",
+                    "description": "URL to the file, can be also a File object.",
                     "type": "String"
                 },
                 {
                     "name": "sync",
-                    "description": "If true the file will be read in sync",
+                    "description": "If true the file will be read in sync.",
                     "type": "Boolean"
                 },
                 {
                     "name": "onLoad",
-                    "description": "onLoad callback",
+                    "description": "onLoad callback.",
                     "type": "Function"
                 },
                 {
                     "name": "onProgress",
-                    "description": "onProgress callback",
+                    "description": "onProgress callback.",
                     "type": "Function"
                 }
             ],
             "return": {
-                "description": "File content as a string",
+                "description": "File content as a string.",
                 "type": "String"
             },
             "class": "FileSystem",
@@ -8366,7 +8366,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 92,
+            "line": 128,
             "description": "Read file as arraybuffer data.",
             "itemtype": "method",
             "name": "readFileArrayBuffer",
@@ -8386,7 +8386,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 126,
+            "line": 162,
             "description": "Read file as base64 data.",
             "itemtype": "method",
             "name": "readFileBase64",
@@ -8406,19 +8406,19 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 151,
+            "line": 187,
             "description": "Write text file.\n\nWhen running without NWJS it writes file as a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFile",
             "params": [
                 {
                     "name": "fname",
-                    "description": "",
+                    "description": "File name.",
                     "type": "String"
                 },
                 {
                     "name": "data",
-                    "description": "",
+                    "description": "Text to be written to the file.",
                     "type": "String"
                 }
             ],
@@ -8427,7 +8427,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 186,
+            "line": 222,
             "description": "Write binary file using base64 data.\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "writeFileBase64",
@@ -8448,7 +8448,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 207,
+            "line": 243,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -8469,7 +8469,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 224,
+            "line": 260,
             "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -8485,7 +8485,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 244,
+            "line": 280,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -8498,7 +8498,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 268,
+            "line": 304,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -8519,8 +8519,8 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 310,
-            "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nThe save mode dont work when running inside the browser.",
+            "line": 345,
+            "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.",
             "itemtype": "method",
             "name": "chooseFile",
             "params": [
@@ -8530,13 +8530,13 @@
                     "type": "Function"
                 },
                 {
-                    "name": "filer",
+                    "name": "filter",
                     "description": "File type filter",
                     "type": "String"
                 },
                 {
                     "name": "saveas",
-                    "description": "Save as format",
+                    "description": "Save as format can be also a boolean value",
                     "type": "String"
                 }
             ],
@@ -8545,8 +8545,29 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 346,
-            "description": "Check if a file exists.\n\nOnly works inside of NWJS.",
+            "line": 381,
+            "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
+            "itemtype": "method",
+            "name": "chooseFileName",
+            "params": [
+                {
+                    "name": "onLoad",
+                    "description": "onLoad callback",
+                    "type": "Function"
+                },
+                {
+                    "name": "saveas",
+                    "description": "File extension",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 408,
+            "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
             "params": [
@@ -8565,7 +8586,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 365,
+            "line": 427,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -8585,7 +8606,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 382,
+            "line": 449,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -8605,7 +8626,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 396,
+            "line": 468,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -8625,7 +8646,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 413,
+            "line": 490,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
@@ -8968,11 +8989,11 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:365"
+            "line": " ..\\source\\core\\FileSystem.js:427"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:382"
+            "line": " ..\\source\\core\\FileSystem.js:449"
         },
         {
             "message": "unknown tag: license",
@@ -8992,7 +9013,7 @@
         },
         {
             "message": "Missing item type\nCreate JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
-            "line": " ..\\source\\core\\objects\\particle\\ParticleEmitter.js:177"
+            "line": " ..\\source\\core\\objects\\particle\\ParticleEmitter.js:184"
         },
         {
             "message": "Missing item type\nCreate JSON for object.\nNeed to backup material and geometry and set to undefined to avoid it being stored.",

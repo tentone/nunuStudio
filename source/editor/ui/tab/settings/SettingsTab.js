@@ -30,6 +30,8 @@ SettingsTab.prototype = Object.create(TabElement.prototype);
 //Activate
 SettingsTab.prototype.activate = function()
 {
+	this.active = true;
+	
 	Editor.setState(Editor.STATE_IDLE);
 }
 

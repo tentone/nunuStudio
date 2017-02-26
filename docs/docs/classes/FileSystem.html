@@ -173,6 +173,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_chooseFileName">chooseFileName</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_copyFile">copyFile</a>
 						
 													</li>
@@ -247,7 +251,7 @@
 																	<code>onLoad</code>
 															</li>
 															<li class="arg">
-																	<code>filer</code>
+																	<code>filter</code>
 															</li>
 															<li class="arg">
 																	<code>saveas</code>
@@ -272,7 +276,7 @@
 											
 												<div class="description">
 													<p>Open file chooser dialog receives onLoad callback, file filter, saveas.</p>
-											<p>The save mode dont work when running inside the browser.</p>
+											<p>Save mode does not work inside the browser.</p>
 											
 												</div>
 											
@@ -292,7 +296,7 @@
 											
 															</li>
 															<li class="param">
-																	<code class="param-name">filer</code>
+																	<code class="param-name">filter</code>
 																	<span class="type">String</span>
 											
 											
@@ -308,7 +312,73 @@
 											
 											
 																<div class="param-description">
-																	<p>Save as format</p>
+																	<p>Save as format can be also a boolean value</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_chooseFileName" class="method item">
+												<h3 class="name"><code>chooseFileName</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>onLoad</code>
+															</li>
+															<li class="arg">
+																	<code>saveas</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Used as an alternative to chooseFile for saving files in the browser.</p>
+											<p>Uses a prompt to question the user the file name.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">onLoad</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	<p>onLoad callback</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">saveas</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	<p>File extension</p>
 											
 																</div>
 											
@@ -477,7 +547,7 @@
 											
 												<div class="description">
 													<p>Check if a file exists.</p>
-											<p>Only works inside of NWJS.</p>
+											<p>Only works inside of NWJS. When running inside the browser always returns false.</p>
 											
 												</div>
 											
@@ -905,7 +975,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>URL to the file, can be also a File object.</p>
+											
 																</div>
 											
 															</li>
@@ -915,7 +986,7 @@
 											
 											
 																<div class="param-description">
-																	<p>If true the file will be read in sync</p>
+																	<p>If true the file will be read in sync.</p>
 											
 																</div>
 											
@@ -926,7 +997,7 @@
 											
 											
 																<div class="param-description">
-																	<p>onLoad callback</p>
+																	<p>onLoad callback.</p>
 											
 																</div>
 											
@@ -937,7 +1008,7 @@
 											
 											
 																<div class="param-description">
-																	<p>onProgress callback</p>
+																	<p>onProgress callback.</p>
 											
 																</div>
 											
@@ -950,7 +1021,7 @@
 											
 														<div class="returns-description">
 																	<span class="type">String</span>:
-																<p>File content as a string</p>
+																<p>File content as a string.</p>
 											
 														</div>
 													</div>
@@ -1127,7 +1198,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>File name.</p>
+											
 																</div>
 											
 															</li>
@@ -1137,7 +1209,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Text to be written to the file.</p>
+											
 																</div>
 											
 															</li>

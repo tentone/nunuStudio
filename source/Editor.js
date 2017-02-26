@@ -334,7 +334,7 @@ Editor.initialize = function()
 			{
 				if(confirm("All unsaved changes to the project will be lost! Load file?"))
 				{
-					Editor.loadProgramFile(file.path);
+					Editor.loadProgram(file.path);
 					Editor.resetEditingFlags();
 					Editor.updateObjectViews();
 				}
@@ -439,7 +439,7 @@ Editor.initialize = function()
 	{
 		if(Editor.args[i].endsWith(".isp"))
 		{
-			Editor.loadProgramFile(Editor.args[i]);
+			Editor.loadProgram(Editor.args[i]);
 			break;
 		}
 	}
@@ -992,6 +992,7 @@ Editor.pasteObject = function(target)
 //Redo action
 Editor.redo = function()
 {
+	//TODO <ADD CODE HERE>
 	alert("Redo not implemented");
 }
 
@@ -1486,6 +1487,7 @@ Editor.createNewProgram = function()
 	//Reset open file
 	Editor.setOpenFile(null);
 	Editor.resetEditingFlags();
+	Editor.updateObjectViews();
 
 	//Remove old tabs from interface
 	if(Interface.tab !== undefined)
@@ -1500,116 +1502,104 @@ Editor.createNewProgram = function()
 //Save program to file
 Editor.saveProgram = function(fname, compressed, keepDirectory)
 {
-	if(fname === undefined && Editor.openFile !== null)
+	try
 	{
-		fname = Editor.openFile;
-	}
-
-	//If compressed dont store all resources
-	if(compressed === true)
-	{
-		var json = JSON.stringify(Editor.program.toJSON());
-	}
-	else
-	{
-		var output = Editor.program.toJSON();
-		var json = JSON.stringify(output, null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
-	}
-
-	FileSystem.writeFile(fname, json);
-
-	if(keepDirectory !== true && Editor.openFile !== fname)
-	{
-		Editor.setOpenFile(fname);
-	}
-}
-
-//Load program from file or url
-Editor.loadProgramFile = function(file)
-{
-	if(Nunu.runningOnDesktop())
-	{	
-		if(file.path !== undefined)
+		if(fname === undefined && Editor.openFile !== null)
 		{
-			file = file.path;
+			fname = Editor.openFile;
 		}
 
-		var data = JSON.parse(FileSystem.readFile(file));	
-		Editor.loadProgram(data);
-		Editor.setOpenFile(file);
-	}
-	else
-	{
-		if(file instanceof File)
+		//If compressed dont store all resources
+		if(compressed === true)
 		{
-			var reader = new FileReader();
-			reader.onload = function()
-			{
-				var data = JSON.parse(reader.result);
-				Editor.loadProgram(data);
-				Editor.setOpenFile(file);
-			}
-			reader.readAsText(file);
+			var json = JSON.stringify(Editor.program.toJSON());
 		}
 		else
 		{
-			var data = JSON.parse(FileSystem.readFile(file));
-			Editor.loadProgram(data);
-			Editor.setOpenFile(file);
+			var output = Editor.program.toJSON();
+			var json = JSON.stringify(output, null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
 		}
+
+		FileSystem.writeFile(fname, json);
+
+		if(keepDirectory !== true && Editor.openFile !== fname)
+		{
+			Editor.setOpenFile(fname);
+		}
+		alert("Project saved");
+	}
+	catch(e)
+	{
+		alert("Error saving file\n(" + e + ")");
 	}
 }
 
-//Load program from json data
-Editor.loadProgram = function(data)
+//Load program from file
+Editor.loadProgram = function(file)
 {
-	//Dispose old program
-	if(Editor.program !== null)
-	{
-		Editor.program.dispose();
-	}
-
 	//Load program data file
-	var loader = new ObjectLoader();
-	Editor.program = loader.parse(data);
-	
-	//History
-	Editor.history = new History(Editor.program);
-
-	//Remove old tabs
-	Interface.tab.clear();
-
-	//Set open file
-	Editor.resetEditingFlags();
-
-	//Add new scene tab to interface
-	if(Editor.program.scene !== null)
+	FileSystem.readFile(file, false, function(data)
 	{
-		var scene = Interface.tab.addTab(SceneEditor, true);
-		scene.attach(Editor.program.scene);
-		Interface.tab.selectTab(0);
-	}
+		try
+		{
+			//Dispose old program
+			if(Editor.program !== null)
+			{
+				Editor.program.dispose();
+			}
+
+			//Load program
+			var loader = new ObjectLoader();
+			Editor.program = loader.parse(JSON.parse(data));
+
+			//Reset history
+			Editor.history = new History(Editor.program);
+
+			//Remove old tabs
+			Interface.tab.clear();
+
+			//Set open file
+			Editor.setOpenFile(file);
+			Editor.resetEditingFlags();
+			Editor.updateObjectViews();
+
+			//Add new scene tab to interface
+			if(Editor.program.scene !== null)
+			{
+				var scene = Interface.tab.addTab(SceneEditor, true);
+				scene.attach(Editor.program.scene);
+				Interface.tab.selectTab(0);
+			}
+
+			alert("Project loaded");
+		}
+		catch(e)
+		{
+			alert("Error loading file\n(" + e + ")");
+		}
+	});
 }
 
 //Set currently open file (also updates the editor title), if running in browser never shows openfile
-Editor.setOpenFile = function(fname)
+Editor.setOpenFile = function(file)
 {
-	if(Nunu.runningOnDesktop())
-	{
-		Editor.openFile = (fname !== undefined) ? fname : null;
-	}
-	else
-	{
-		fname = null;
-	}
+	if(file !== undefined && file !== null && Nunu.runningOnDesktop())
+	{	
+		if(file instanceof window.File)
+		{
+			Editor.openFile = file.path;
+		}
+		else
+		{
+			Editor.openFile = file;
+		}
 
-	if(fname === null)
-	{
-		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ")";
+		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ") (" + Editor.openFile + ")";
 	}
 	else
 	{
-		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ") (" + fname + ")";
+		Editor.openFile = null;
+		document.title = Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ")";
 	}
 }
 
