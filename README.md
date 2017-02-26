@@ -75,6 +75,9 @@
 	- Cubetexture support
 	- Improved material serialization
 	- Sort objects in the explorer
+- V0.8.9.21 Alpha
+	- Editor standalone version (@Seagat2011)
+	- Support for File API loading
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
