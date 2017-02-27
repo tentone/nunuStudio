@@ -25,31 +25,31 @@ function CheckBox(parent)
 
 	//Add element to document
 	this.parent.appendChild(this.element);
-}
+};
 
 //Set if element if disabled
 CheckBox.prototype.setDisabled = function(value)
 {
 	this.checkbox.disabled = value;
-}
+};
 
 //Set checkbox value
 CheckBox.prototype.setValue = function(value)
 {
 	this.checkbox.checked = value;
-}
+};
 
 //Get checkbox value
 CheckBox.prototype.getValue = function()
 {
 	return this.checkbox.checked;
-}
+};
 
 //Set onchange onChange
 CheckBox.prototype.setOnChange = function(onChange)
 {
 	this.element.onchange = onChange;
-}
+};
 
 //Remove element
 CheckBox.prototype.destroy = function()
@@ -59,7 +59,7 @@ CheckBox.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
 CheckBox.prototype.update = function(){}
@@ -83,4 +83,4 @@ CheckBox.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

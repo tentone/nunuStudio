@@ -46,32 +46,32 @@ function ColorChooser(parent)
 ColorChooser.prototype.setOnChange = function(onChange)
 {
 	this.element.onchange = onChange;
-}
+};
 
 //Set color
 ColorChooser.prototype.setValue = function(r, g, b)
 {
 	this.color.fromRGB(r*255, g*255, b*255);
-}
+};
 
 //Set color value hex
 ColorChooser.prototype.setValueHex = function(hex)
 {
 	hex = Math.floor(hex);
 	this.color.fromRGB(hex >> 16 & 255, hex >> 8 & 255, hex & 255);
-}
+};
 
 //Get color value
 ColorChooser.prototype.getValue = function()
 {
 	return {r: this.color.rgb[0]/255, g: this.color.rgb[1]/255, b: this.color.rgb[2]/255};
-}
+};
 
 //Get color value hex
 ColorChooser.prototype.getValueHex = function()
 {
 	return (this.color.rgb[0] << 16 ^ this.color.rgb[1] << 8 ^ this.color.rgb[2] << 0);
-}
+};
 
 //Remove element
 ColorChooser.prototype.destroy = function()
@@ -81,10 +81,10 @@ ColorChooser.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
-ColorChooser.prototype.update = function(){}
+ColorChooser.prototype.update = function(){};
 
 //Update Interface
 ColorChooser.prototype.updateInterface = function()
@@ -102,4 +102,4 @@ ColorChooser.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

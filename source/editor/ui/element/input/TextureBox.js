@@ -57,7 +57,7 @@ TextureBox.prototype.setOnChange = function(onChange)
 	this.wrapT.setOnChange(onChange);
 	this.wrapS.setOnChange(onChange);
 	this.repeat.setOnChange(onChange);
-}
+};
 
 //Set texture value
 TextureBox.prototype.setValue = function(texture)
@@ -77,7 +77,7 @@ TextureBox.prototype.setValue = function(texture)
 	{
 		this.texture = null;
 	}
-}
+};
 
 //Get texture value
 TextureBox.prototype.getValue = function()
@@ -96,42 +96,33 @@ TextureBox.prototype.getValue = function()
 	}
 
 	return null;
-}
+};
 
 //Load texture from file
 TextureBox.prototype.loadTexture = function(file)
 {
-	/*var readImageFile = function(file)
+	var self = this;
+	var onLoad = function(texture)
 	{
-		var reader = new FileReader();
-		reader.onload = function()
+		self.texture = texture;
+		self.useTexture.setValue(true);
+		self.updatePreview();
+
+		if(self.onChange !== null)
 		{
-			self.setImage(reader.result);
-			self.onChange(reader.result);
-		};
-		reader.readAsDataURL(file);
-	};*/
+			self.onChange();
+		}
+	};
 
-	//Image
-	if(file.type.startsWith("image") || file.path.endsWith("tga"))
+	if(Image.fileIsImage(file))
 	{
-		this.texture = new Texture(new Image(file.path));
-		this.useTexture.setValue(true);
+		Editor.loadTexture(file, onLoad);
 	}
-	//Video
-	else if(file.type.startsWith("video"))
+	else if(Video.fileIsVideo(file))
 	{
-		this.texture = new VideoTexture(new Video(file.path));
-		this.useTexture.setValue(true);
+		Editor.loadVideoTexture(file, onLoad);
 	}
-
-	if(this.onChange !== null)
-	{
-		this.onChange();
-	}
-
-	this.updatePreview();
-}
+};
 
 //Update Interface
 TextureBox.prototype.updateInterface = function()
@@ -161,4 +152,4 @@ TextureBox.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

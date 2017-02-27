@@ -52,61 +52,50 @@ function SceneEditor(parent, closeable, container, index)
 				//Image
 				if(file.type.startsWith("image"))
 				{
-					if(object instanceof THREE.Mesh)
+					Editor.loadTexture(file, function(texture)
 					{
-						//Create new material with selected image
-						var texture = new Texture(file.path);
-						texture.name = name;
-
-						var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-						material.name = name;
-						object.material = material;
-
-						//Update asset explorer
-						Editor.updateObjectViews();
-					}
-					else if(object instanceof THREE.Sprite)
-					{
-						//Create new material with selected image
-						var texture = new Texture(file.path);
-						texture.name = name;
-						var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
-						material.name = name;
-						object.material = material;
-
-						Editor.updateObjectViews();
-					}
+						if(object instanceof THREE.Mesh)
+						{
+							var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+							material.name = texture.name;
+							object.material = material;
+						}
+						else if(object instanceof THREE.Sprite)
+						{
+							var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
+							material.name = texture.name;
+							object.material = material;
+						}
+					});
 				}
 				//Video
 				else if(file.type.startsWith("video"))
 				{
-					if(object instanceof THREE.Mesh)
+					Editor.loadVideoTexture(file, function(texture)
 					{
-						var texture = new VideoTexture(file.path);
-						texture.name = name;
-						var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-						material.name = name;
-						object.material = material;
-						Editor.updateObjectViews();
-					}
-					else if(object instanceof THREE.Sprite)
-					{
-						var texture = new VideoTexture(file.path);
-						texture.name;
-						var material = new THREE.SpriteMaterial({map:texture, color:0xffffff});
-						material.name = name;
-						object.material = material;
-						Editor.updateObjectViews();
-					}
+						if(object instanceof THREE.Mesh)
+						{
+							var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+							material.name = texture.name;
+							object.material = material;
+						}
+						else if(object instanceof THREE.Sprite)
+						{
+							var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
+							material.name = texture.name;
+							object.material = material;
+						}
+					});
 				}
 				//Font
 				else if(Font.fileIsFont(file))
 				{
 					if(object.font !== undefined)
 					{
-						var font = new Font(file.path);
-						object.setFont(font);
-						Editor.updateObjectViews();
+						Editor.loadFont(file, function(font)
+						{
+							object.setFont(font);
+						});
 					}
 				}
 			}
@@ -136,11 +125,13 @@ function SceneEditor(parent, closeable, container, index)
 					if(object instanceof THREE.Mesh)
 					{
 						object.material = new THREE.MeshStandardMaterial({map:draggedObject, color:0xffffff, roughness: 0.6, metalness: 0.2});
+						object.material.name = draggedObject.name;
 						Editor.updateObjectViews();
 					}
 					else if(object instanceof THREE.Sprite)
 					{
 						object.material = new THREE.SpriteMaterial({map:draggedObject, color:0xffffff});
+						object.material.name = draggedObject.name;
 						Editor.updateObjectViews();
 					}
 				}
@@ -359,13 +350,13 @@ SceneEditor.prototype.updateInterface = function()
 		this.cameraButton.visible = this.visible && this.showButtonsCameraMode;
 		this.cameraButton.updateInterface();
 
-		//Update canvas
+		//Canvas
 		this.canvas.width = this.size.x;
 		this.canvas.height = this.size.y;
 		this.canvas.style.width = this.size.x + "px";
 		this.canvas.style.height = this.size.y + "px";
 
-		//Update element
+		//Element
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";

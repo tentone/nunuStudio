@@ -62,8 +62,7 @@ function TextureChooser(parent)
 		//File dragged
 		if(event.dataTransfer.files.length > 0)
 		{
-			var file = event.dataTransfer.files[0];
-			self.loadTexture(file);
+			self.loadTexture(event.dataTransfer.files[0]);
 		}
 		//Resouce dragged
 		else
@@ -113,7 +112,7 @@ function TextureChooser(parent)
 TextureChooser.prototype.setOnChange = function(onChange)
 {
 	this.onChange = onChange;
-}
+};
 
 //Remove element
 TextureChooser.prototype.destroy = function()
@@ -123,7 +122,7 @@ TextureChooser.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Set texture value
 TextureChooser.prototype.setValue = function(texture)
@@ -137,13 +136,13 @@ TextureChooser.prototype.setValue = function(texture)
 	{
 		this.texture = null;
 	}
-}
+};
 
 //Get texture value
 TextureChooser.prototype.getValue = function()
 {
 	return this.texture;
-}
+};
 
 //Set Texture
 TextureChooser.prototype.setTexture = function(texture)
@@ -154,29 +153,32 @@ TextureChooser.prototype.setTexture = function(texture)
 	{
 		this.onChange();
 	}
-}
+};
 
 //Load texture from file
 TextureChooser.prototype.loadTexture = function(file)
 {
-	//Image
-	if(file.type.startsWith("image") || file.path.endsWith("tga"))
+	var self = this;
+	var onLoad = function(texture)
 	{
-		this.texture = new Texture(new Image(file.path));
-	}
-	//Video
-	else if(file.type.startsWith("video"))
-	{
-		this.texture = new VideoTexture(new Video(file.path));
-	}
+		self.texture = texture;
+		self.updatePreview();
 
-	if(this.onChange !== null)
-	{
-		this.onChange();
-	}
+		if(self.onChange !== null)
+		{
+			self.onChange();
+		}
+	};
 
-	this.updatePreview();
-}
+	if(Image.fileIsImage(file))
+	{
+		Editor.loadTexture(file, onLoad);
+	}
+	else if(Video.fileIsVideo(file))
+	{
+		Editor.loadVideoTexture(file, onLoad);
+	}
+};
 
 //Update texture preview
 TextureChooser.prototype.updatePreview = function()
@@ -204,7 +206,7 @@ TextureChooser.prototype.updatePreview = function()
 		this.video.visibility = "visible";
 		this.video.src = texture.image.src;
 	}
-}
+};
 
 //Update Interface
 TextureChooser.prototype.updateInterface = function()
@@ -228,4 +230,4 @@ TextureChooser.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

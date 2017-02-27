@@ -108,7 +108,7 @@ CoordinatesBox.prototype.setMode = function(mode)
 		this.mode = mode;
 		this.updateInterface();
 	}
-}
+};
 
 //Set step for position box
 CoordinatesBox.prototype.setStep = function(value)
@@ -118,7 +118,7 @@ CoordinatesBox.prototype.setStep = function(value)
 	this.y.step = value;
 	this.z.step = value;
 	this.w.step = value;
-}
+};
 
 //Set coordinate range
 CoordinatesBox.prototype.setRange = function(min, max)
@@ -133,13 +133,13 @@ CoordinatesBox.prototype.setRange = function(min, max)
 	this.z.max = max;
 	this.w.min = min;
 	this.w.max = max;	
-}
+};
 
 //Get value of position box
 CoordinatesBox.prototype.getValue = function()
 {
 	return {x: parseFloat(this.x.value), y: parseFloat(this.y.value), z: parseFloat(this.z.value), w: parseFloat(this.w.value), order: this.order};
-}
+};
 
 //Set value of position box
 CoordinatesBox.prototype.setValue = function(x, y, z, w)
@@ -180,7 +180,7 @@ CoordinatesBox.prototype.setValue = function(x, y, z, w)
 		this.z.value = (z !== undefined) ? z : 0;
 		this.w.value = (w !== undefined) ? w : 0;
 	}
-}
+};
 
 //Set onchange onChange
 CoordinatesBox.prototype.setOnChange = function(onChange)
@@ -189,7 +189,7 @@ CoordinatesBox.prototype.setOnChange = function(onChange)
 	this.y.onchange = onChange;
 	this.z.onchange = onChange;
 	this.w.onchange = onChange;
-}
+};
 
 //Remove element
 CoordinatesBox.prototype.destroy = function()
@@ -199,10 +199,10 @@ CoordinatesBox.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
-CoordinatesBox.prototype.update = function(){}
+CoordinatesBox.prototype.update = function(){};
 
 //Update Interface
 CoordinatesBox.prototype.updateInterface = function()
@@ -288,4 +288,4 @@ CoordinatesBox.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

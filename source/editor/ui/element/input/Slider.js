@@ -36,7 +36,7 @@ function Slider(parent)
 	this.text.style.color = Editor.theme.textColor;
 	this.parent.appendChild(this.text);
 
-	//On Change onChange
+	//onChange
 	this.onchange = null;
 
 	//Attributes

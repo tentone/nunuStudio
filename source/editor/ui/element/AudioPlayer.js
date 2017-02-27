@@ -5,7 +5,6 @@ function AudioPlayer(parent)
 	this.parent = (parent !== undefined) ? parent : document.body;
 
 	//WebAudio context
-	//this.context = new (window.AudioContext || window.webkitAudioContext)();
 	this.context = THREE.AudioContext.getContext();
 
 	//Element

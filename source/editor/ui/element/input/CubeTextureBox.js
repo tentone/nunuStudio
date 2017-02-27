@@ -96,7 +96,7 @@ CubeTextureBox.prototype.setOnChange = function(onChange)
 	this.onChange = onChange;
 	this.useTexture.setOnChange(onChange);
 	this.mapping.setOnChange(onChange);
-}
+};
 
 //Remove element
 CubeTextureBox.prototype.destroy = function()
@@ -106,7 +106,7 @@ CubeTextureBox.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Set texture value
 CubeTextureBox.prototype.setValue = function(texture)
@@ -126,7 +126,7 @@ CubeTextureBox.prototype.setValue = function(texture)
 		this.useTexture.setValue(false);
 		this.texture = null;
 	}
-}
+};
 
 //Get texture value
 CubeTextureBox.prototype.getValue = function()
@@ -143,7 +143,7 @@ CubeTextureBox.prototype.getValue = function()
 	}
 
 	return null;
-}
+};
 
 //Set Texture
 CubeTextureBox.prototype.setTexture = function(texture)
@@ -154,7 +154,7 @@ CubeTextureBox.prototype.setTexture = function(texture)
 	{
 		this.onChange();
 	}
-}
+};
 
 //Update texture preview
 CubeTextureBox.prototype.updatePreview = function()
@@ -163,7 +163,7 @@ CubeTextureBox.prototype.updatePreview = function()
 	{
 		this.img.src = this.texture.images[0].data;
 	}
-}
+};
 
 //Update Interface
 CubeTextureBox.prototype.updateInterface = function()
@@ -193,4 +193,4 @@ CubeTextureBox.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};
