@@ -64,6 +64,7 @@ MaterialRenderer.prototype.renderMaterial = function(material, img)
 	if(img !== undefined)
 	{
 		var canvas = this.renderer.domElement;
+		canvas.toBlob = canvas.toBlob || canvas.msToBlob;
 		canvas.toBlob(function(blob)
 		{
 			var url = URL.createObjectURL(blob);

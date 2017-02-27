@@ -109,25 +109,25 @@ function CodeEditor(parent)
 CodeEditor.prototype.setMode = function(mode)
 {
 	this.code.setOption("mode", mode);
-}
+};
 
 //Set onchange callback
 CodeEditor.prototype.setOnChange = function(callback)
 {
 	this.code.on("change", callback);
-}
+};
 
 //Set text
 CodeEditor.prototype.setValue = function(text)
 {
 	this.code.setValue(text);
-}
+};
 
 //Get text
 CodeEditor.prototype.getValue = function()
 {
 	return this.code.getValue();
-}
+};
 
 //Remove element
 CodeEditor.prototype.destroy = function()
@@ -137,10 +137,10 @@ CodeEditor.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
-CodeEditor.prototype.update = function(){}
+CodeEditor.prototype.update = function(){};
 
 //Update Interface
 CodeEditor.prototype.updateInterface = function()
@@ -169,4 +169,4 @@ CodeEditor.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

@@ -60,14 +60,14 @@ Graph.prototype.addGraph = function(name, color)
 	canvas.style.marginLeft = "30px";
 	this.element.appendChild(canvas);
 	this.graph.push({canvas: canvas, name: name, color: color, values: [], buttons: [], onchange: null});
-}
+};
 
 //Attach onchange onChange to a graph
 Graph.prototype.setOnChange = function(onChange, name)
 {
 	var graph = this.getGraph(name);
 	graph.onchange = onChange;
-}
+};
 
 //Set value range
 Graph.prototype.setRange = function(min, max)
@@ -87,7 +87,7 @@ Graph.prototype.setRange = function(min, max)
 	{
 		this.updateGraph(this.graph[i]);
 	}
-}
+};
 
 //Set values to a graph
 Graph.prototype.setValue = function(values, name)
@@ -151,7 +151,7 @@ Graph.prototype.setValue = function(values, name)
 
 	//Update graph
 	this.updateGraph(graph);
-}
+};
 
 //Return value array
 Graph.prototype.getValue = function(name)
@@ -164,7 +164,7 @@ Graph.prototype.getValue = function(name)
 	}
 
 	return null;
-}
+};
 
 //Get graph object by name
 Graph.prototype.getGraph = function(name)
@@ -186,7 +186,7 @@ Graph.prototype.getGraph = function(name)
 	}
 
 	return null;
-}
+};
 
 //Update graph canvas and buttons
 Graph.prototype.updateGraph = function(graph)
@@ -215,7 +215,7 @@ Graph.prototype.updateGraph = function(graph)
 		button.style.top = y + "px";
 	}
 	context.stroke();
-}
+};
 
 //Draw background grid canvas
 Graph.prototype.updateGrid = function()
@@ -249,7 +249,7 @@ Graph.prototype.updateGrid = function()
 		context.lineTo(this.size.x, i);
 		context.stroke();
 	}
-}
+};
 
 //Remove element
 Graph.prototype.destroy = function()
@@ -259,7 +259,7 @@ Graph.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update graphs
 Graph.prototype.update = function()
@@ -301,7 +301,7 @@ Graph.prototype.update = function()
 			}
 		}
 	}
-}
+};
 
 //Update Graph Size
 Graph.prototype.updateInterface = function()
@@ -346,4 +346,4 @@ Graph.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};
