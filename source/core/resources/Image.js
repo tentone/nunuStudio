@@ -25,8 +25,16 @@ function Image(url)
 	
 	if(url !== undefined)
 	{
+		//Arraybuffer data
+		if(url instanceof window.ArrayBuffer)
+		{
+			var canvas = new THREE.TGALoader().parse(url);
+			this.encoding = "jpeg";
+			this.format = "base64";
+			this.data = canvas.toDataURL("image/jpeg", 1.0);
+		}
 		//Base64 data
-		if(url.startsWith("data:image"))
+		else if(url.startsWith("data:image"))
 		{
 			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
@@ -45,10 +53,9 @@ function Image(url)
 			else if(this.encoding === "tga")
 			{
 				var canvas = new THREE.TGALoader().parse(FileSystem.readFileArrayBuffer(url));
-
 				this.encoding = "jpeg";
 				this.format = "base64";
-				this.data = canvas.toDataURL("image/jpeg", 0.9);
+				this.data = canvas.toDataURL("image/jpeg", 1.0);
 			}
 			else
 			{
@@ -59,7 +66,37 @@ function Image(url)
 	}
 }
 
-//Encode image data to jpeg or png in base64 format
+/**
+ * Check if a file name refers to a supported binary image file.
+ *
+ * @method fileIsImage
+ * @static
+ * @param {String} file
+ * @return {boolean} True if the file refers to a supported image format.
+ */
+Image.fileIsImage = function(file)
+{
+	if(file !== undefined)
+	{
+		if(file.type.startsWith("image"))
+		{
+			return true;
+		}
+
+		file = file.name.toLocaleLowerCase();
+		return file.endsWith("tga");
+	}
+
+	return false;
+};
+
+/**
+ * Encode image data to jpeg or png in base64 format.
+ *
+ * Called automatically when serializing the image object.
+ * 
+ * @method encodeData
+ */
 Image.prototype.encodeData = function()
 {
 	if(this.format === "url")
@@ -95,12 +132,19 @@ Image.prototype.encodeData = function()
 		{
 			this.format = "base64";
 			this.encoding = "jpeg";
-			this.data = canvas.toDataURL("image/jpeg", 0.9);
+			this.data = canvas.toDataURL("image/jpeg", 1.0);
 		}
 	}
 }
 
-//JSON serialization
+/**
+ * Serialize Image resource to JSON.
+ *
+ * If image is stored as URL it is converter to PNG or JPEG.
+ * 
+ * @param {Object} meta
+ * @return {Object} json
+ */
 Image.prototype.toJSON = function(meta)
 {
 	if(meta.images[this.uuid] !== undefined)

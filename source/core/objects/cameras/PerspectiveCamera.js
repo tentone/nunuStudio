@@ -1,8 +1,10 @@
 "use strict";
 
 /**
- * Perspective camera
- * Based on THREE.PerspectiveCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera
+ * Perspective camera.
+ * 
+ * Based on THREE.PerspectiveCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera.
+ * 
  * @class PerspectiveCamera
  * @extends {PerspectiveCamera}
  * @module Cameras
@@ -14,50 +16,61 @@
  */
 
 /**
- * Camera field of view in degrees
+ * Camera field of view in degrees.
+ * 
  * @property fov
  * @default 50
  * @type {Number}
  */
 /**
- * Camera aspect ratio X/Y
+ * Camera aspect ratio X/Y.
+ * 
  * @property aspect
  * @default 1.0
  * @type {Number}
  */
 /**
- * Camera zoom
+ * Camera zoom.
+ * 
  * @property zoom
  * @default 1.0
  * @type {Number}
  */
 /**
- * Camera viewport offset
- * Values range from 0.0 to 1.0 in screen space
+ * Camera viewport offset.
+ * 
+ * Values range from 0.0 to 1.0 in screen space.
+ * 
  * @property offset
  * @type {Vector2}
 */
 /**
- * Camera viewport size
- * Values range from 0.0 to 1.0 in screen space
+ * Camera viewport size.
+ * 
+ * Values range from 0.0 to 1.0 in screen space.
+ * 
  * @property viewport
  * @type {Vector2}
 */
 /**
- * Clear screen color flag
+ * Clear screen color flag.
+ * 
  * @property clearColor
  * @default false
  * @type {boolean}
 */
 /**
- * Clear depth flag
+ * Clear depth flag.
+ * 
  * @property clearDepth
  * @default false
  * @type {boolean}
 */
 /**
- * Camera draw order preference
- * If more than one camera has the same order value the draw order is undefined for those cameras
+ * Camera draw order preference.
+ * 
+ * If more than one camera has the same order value the draw order is undefined for those cameras.
+ * 
  * @property order
  * @default 0
  * @type {Number}
@@ -78,7 +91,8 @@ function PerspectiveCamera(fov, aspect, near, far)
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
 /**
- * Destroy camera object and remove it from the scene
+ * Destroy camera object and remove it from the scene.
+ * 
  * @method destroy
  */
 PerspectiveCamera.prototype.destroy = function()
@@ -93,7 +107,8 @@ PerspectiveCamera.prototype.destroy = function()
 }
 
 /**
- * Update world transformation matrix ignoring parent scaling properties
+ * Update world transformation matrix ignoring parent scaling properties.
+ * 
  * @method updateMatrixWorld
  * @param  {boolean} force Force matrix update even if the attribute matrixWorldNeedsUpdate is not true
  */
@@ -128,8 +143,10 @@ PerspectiveCamera.prototype.updateMatrixWorld = function(force)
 }
 
 /**
- * Update camera projection matrix
- * Should be called after chaging projection parameters
+ * Update camera projection matrix.
+ * 
+ * Should be called after chaging projection parameters.
+ * 
  * @method updateProjectionMatrix
  */
 PerspectiveCamera.prototype.updateProjectionMatrix = function()
@@ -148,7 +165,8 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 }
 
 /**
- * Create JSON description
+ * Create JSON description.
+ * 
  * @method toJSON
  * @param  {Object} meta
  * @return {Object} JSON descrition

@@ -79,6 +79,25 @@ function Font(url)
 	}
 }
 
+/**
+ * Check if a file name refers to a font file.
+ *
+ * @method fileIsFont
+ * @static
+ * @param {String} fname
+ * @return {boolean} True if the fname refers to a supported font format.
+ */
+Font.fileIsFont = function(file)
+{
+	if(file !== undefined)
+	{
+		file = file.name.toLocaleLowerCase();
+
+		return file.endsWith("ttf") || file.endsWith("otf") || file.endsWith("ttc") || file.endsWith("otc") || file.endsWith("json");
+	}
+
+	return false;
+};
 
 Font.prototype.isFont = true;
 
@@ -286,6 +305,8 @@ Font.prototype.toJSON = function(meta)
 	data.type = this.type;
 	data.encoding = this.encoding;
 
+	data.reversed = this.reversed;
+	
 	if(this.format === "arraybuffer")
 	{
 		data.data = Base64Utils.fromArraybuffer(this.data);

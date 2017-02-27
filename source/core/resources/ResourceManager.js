@@ -5,7 +5,7 @@
  * 
  * The resource manager is used to extend the Program object and is not designed to be used as a standalone
  * 
- * The manager is used to manage the following types of resources
+ * The manager is used to manage the following types of resources:
  *  - Images
  *  - Videos
  *  - Audio
@@ -20,37 +20,44 @@
  */
 
 /**
- * Images
+ * Images.
+ * 
  * @property images
  * @type {Array}
  */
 /**
- * Videos
+ * Videos.
+ * 
  * @property videos
  * @type {Array}
  */
 /**
- * Audio
+ * Audio.
+ * 
  * @property audio
  * @type {Array}
  */
 /**
- * Fonts
+ * Fonts.
+ * 
  * @property fonts
  * @type {Array}
  */
 /**
- * Materials
+ * Materials.
+ * 
  * @property materials
  * @type {Array}
  */
 /**
- * Textures
+ * Textures.
+ * 
  * @property textures
  * @type {Array}
  */
 /**
- * Geomtries
+ * Geometries.
+ * 
  * @property geometries
  * @type {Array}
  */
@@ -67,7 +74,8 @@ function ResourceManager()
 }
 
 /**
- * Get material by its name
+ * Get material by its name.
+ * 
  * @method getMaterialByName
  * @param {String} name Material name
  * @return {Material} Material if found else null
@@ -86,7 +94,8 @@ ResourceManager.prototype.getMaterialByName = function(name)
 }
 
 /**
- * Add material to materials list
+ * Add material to materials list.
+ * 
  * @method addMaterial
  * @param {Material} material Material to be added
  */
@@ -99,11 +108,12 @@ ResourceManager.prototype.addMaterial = function(material)
 }
 
 /**
- * Remove material from materials list, also receives default material used to replace
+ * Remove material from materials list, also receives default material used to replace.
+ * 
  * @method removeMaterial
- * @param {Material} material Material to be removed from manager
- * @param {Material} defaultMaterial Default mesh material to replace objects mesh materials
- * @param {Material} defaultMaterialSprite Defaul sprite material
+ * @param {Material} material Material to be removed from manager.
+ * @param {Material} defaultMaterial Default mesh material to replace objects mesh materials.
+ * @param {Material} defaultMaterialSprite Defaul sprite material.
  */
 ResourceManager.prototype.removeMaterial = function(material, defaultMaterial, defaultMaterialSprite)
 {
@@ -139,10 +149,11 @@ ResourceManager.prototype.removeMaterial = function(material, defaultMaterial, d
 }
 
 /**
- * Get texture by name
+ * Get texture by name.
+ * 
  * @method getTextureByName
- * @param {String} name Texture name
- * @return {Texture} Texture is found else null
+ * @param {String} name Texture name.
+ * @return {Texture} Texture is found else null.
  */
 ResourceManager.prototype.getTextureByName = function(name)
 {
@@ -158,7 +169,8 @@ ResourceManager.prototype.getTextureByName = function(name)
 }
 
 /**
- * Add texture to texture list
+ * Add texture to texture list.
+ * 
  * @method addTexture
  * @param {Texture} texture
  */
@@ -168,7 +180,8 @@ ResourceManager.prototype.addTexture = function(texture)
 }
 
 /**
- * Remove texture from textures list (also receives default used to replace)
+ * Remove texture from textures list (also receives default used to replace).
+ * 
  * @method removeTexture
  * @param {Texture} texture
  * @param {Texture} defaultTexture
@@ -249,7 +262,8 @@ ResourceManager.prototype.removeTexture = function(texture, defaultTexture)
 }
 
 /**
- * Get font by name
+ * Get font by name.
+ * 
  * @method getFontByName
  * @param {String} name
  * @return {Font} Font if found, else null
@@ -268,7 +282,8 @@ ResourceManager.prototype.getFontByName = function(name)
 }
 
 /**
- * Add font to fonts list
+ * Add font to fonts list.
+ * 
  * @method addFont
  * @param {Font} font
  */
@@ -281,7 +296,8 @@ ResourceManager.prototype.addFont = function(font)
 }
 
 /**
- * Remove font from font list
+ * Remove font from font list.
+ * 
  * @method removeFont
  * @param {Font} font
  * @param {Font} defaultFont
@@ -308,7 +324,8 @@ ResourceManager.prototype.removeFont = function(font, defaultFont)
 }
 
 /**
- * Get audio by name
+ * Get audio by name.
+ * 
  * @method getAudioByName
  * @param {String} name
  * @return {Audio} Audio if found, else null
@@ -327,7 +344,8 @@ ResourceManager.prototype.getAudioByName = function(name)
 }
 
 /**
- * Add audio to audio list
+ * Add audio to audio list.
+ * 
  * @param {Audio} audio
  * @method addAudio
  */
@@ -340,7 +358,8 @@ ResourceManager.prototype.addAudio = function(audio)
 }
 
 /**
- * Remove audio
+ * Remove audio.
+ * 
  * @param {Audio} audio
  * @param {Audio} defaultAudio
  * @method removeAudio

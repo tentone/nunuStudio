@@ -98,7 +98,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 		{
 			self.material.shininess = self.shininess.getValue();
 			self.material.needsUpdate = true;
-			self.shininessText.setText(self.material.shininess);
 		}
 	});
 	this.form.add(this.shininess);
@@ -143,7 +142,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 		{
 			self.material.bumpScale = self.bumpScale.getValue();
 			self.material.needsUpdate = true;
-			self.bumpScaleText.setText(self.material.bumpScale);
 		}
 	});
 	this.form.add(this.bumpScale);

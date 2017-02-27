@@ -1,8 +1,10 @@
 "use strict";
 
 /**
- * Orthographic Camera is used for 2D like image projection
- * Based on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera
+ * Orthographic Camera is used for 2D like image projection.
+ * 
+ * Based on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera.
+ * 
  * @class OrthographicCamera
  * @constructor
  * @extends {OrthographicCamera}
@@ -15,50 +17,61 @@
  */
 
 /**
- * Camera size relative to resize mode
+ * Camera size relative to resize mode.
+ * 
  * @property size
  * @default 10.0
  * @type {Number}
 */
 /**
- * Aspect ratio X/Y
+ * Aspect ratio X/Y.
+ * 
  * @property aspect
  * @default 1.0
  * @type {Number}
 */
 /**
- * Camera resize mode
+ * Camera resize mode.
+ * 
  * @property mode
  * @default RESIZE_HORIZONTAL
  * @type {Number}
 */
 /**
- * Camera viewport offset
- * Values range from 0.0 to 1.0 in screen space
+ * Camera viewport offset.
+ * 
+ * Values range from 0.0 to 1.0 in screen space.
+ * 
  * @property offset
  * @type {Vector2}
 */
 /**
- * Camera viewport size
- * Values range from 0.0 to 1.0 in screen space
+ * Camera viewport size.
+ * 
+ * Values range from 0.0 to 1.0 in screen space.
+ * 
  * @property viewport
  * @type {Vector2}
 */
 /**
- * Clear screen color flag
+ * Clear screen color flag.
+ * 
  * @property clearColor
  * @default false
  * @type {boolean}
 */
 /**
- * Clear depth flag
+ * Clear depth flag.
+ * 
  * @property clearDepth
  * @default false
  * @type {boolean}
 */
 /**
- * Camera draw order preference
- * If more than one camera has the same order value the draw order is undefined for those cameras
+ * Camera draw order preference.
+ * 
+ * If more than one camera has the same order value the draw order is undefined for those cameras.
+ * 
  * @property order
  * @default 0
  * @type {Number}
@@ -92,14 +105,16 @@ OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype)
 OrthographicCamera.RESIZE_HORIZONTAL = 0;
 
 /**
- * Used to set camera to resize vertically 
+ * Used to set camera to resize vertically.
+ *  
  * @attribute RESIZE_VERTICAL
  * @type {Number}
  */
 OrthographicCamera.RESIZE_VERTICAL = 1;
 
 /**
- * Destroy camera object and remove it from the scene
+ * Destroy camera object and remove it from the scene.
+ * 
  * @method destroy
  */
 OrthographicCamera.prototype.destroy = function()
@@ -114,8 +129,10 @@ OrthographicCamera.prototype.destroy = function()
 }
 
 /**
- * Update camera projection matrix
- * Should be called after chaging projection parameters
+ * Update camera projection matrix.
+ * 
+ * Should be called after chaging projection parameters.
+ * 
  * @method updateProjectionMatrix
  */
 OrthographicCamera.prototype.updateProjectionMatrix = function()
@@ -140,7 +157,8 @@ OrthographicCamera.prototype.updateProjectionMatrix = function()
 }
 
 /**
- * Create JSON description
+ * Create JSON description.
+ * 
  * @method toJSON
  * @param  {Object} meta
  * @return {Object} JSON descrition

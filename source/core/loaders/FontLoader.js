@@ -5,17 +5,6 @@ function FontLoader(manager)
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 }
 
-FontLoader.fileIsFont = function(fname)
-{
-	if(fname !== undefined)
-	{
-		fname = fname.toLocaleLowerCase();
-		return fname.endsWith("ttf") || fname.endsWith("otf") || fname.endsWith("ttc") || fname.endsWith("otc");
-	}
-
-	return false;
-}
-
 FontLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	var loader = new THREE.FileLoader(this.manager);
@@ -35,11 +24,16 @@ FontLoader.prototype.parse = function(json)
 		font.uuid = json.uuid;
 		font.encoding = json.encoding;
 		
+		if(json.reversed !== undefined)
+		{
+			font.reversed = json.reversed;
+		}
+		
 		if(json.format === "base64")
 		{
 			font.format = "arraybuffer";
 			font.data = ArraybufferUtils.fromBase64(json.data);
-			font.font = new TTFLoader().parse(font.data);
+			font.loadTTF();
 		}
 		else
 		{

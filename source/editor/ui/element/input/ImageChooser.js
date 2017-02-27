@@ -38,8 +38,7 @@ function ImageChooser(parent)
 			//Check if its a image
 			if(file.type.startsWith("image"))
 			{
-				self.setImage(file.path);
-				self.onChange(file.path);
+				readImageFile(file);
 			}
 		}
 	};
@@ -59,12 +58,21 @@ function ImageChooser(parent)
 			{
 				if(files.length > 0)
 				{
-					var file = files[0].path;
-					self.setImage(file);
-					self.onChange(file);
+					readImageFile(files[0]);
 				}
 			}, "image/*");
 		}
+	};
+
+	var readImageFile = function(file)
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			self.setImage(reader.result);
+			self.onChange(reader.result);
+		};
+		reader.readAsDataURL(file);
 	};
 
 	//onChange callback

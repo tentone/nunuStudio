@@ -7,21 +7,11 @@ function Bar(parent)
 
 	//Create element
 	this.element = document.createElement("div");
+	this.element.draggable = false;
 	this.element.style.position = "absolute";
 	this.element.style.backgroundColor = Editor.theme.barColor;
 
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
-	
 	//Attributes
-	this.fitParent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -45,14 +35,7 @@ Bar.prototype.update = function(){}
 
 //Update division Size
 Bar.prototype.updateInterface = function()
-{
-	//Fit parent
-	if(this.fitParent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-	
+{	
 	//Set visibility
 	if(this.visible)
 	{

@@ -599,6 +599,12 @@
 
 							}
 
+							if ( 'LayerElementColor' in geometryNode.subNodes ) {
+
+								var colorInfo = getColors( geometryNode );
+
+							}
+
 							if ( 'LayerElementMaterial' in geometryNode.subNodes ) {
 
 								var materialInfo = getMaterials( geometryNode );
@@ -698,6 +704,12 @@
 
 								}
 
+								if ( colorInfo ) {
+
+									vertex.color.fromArray( getData( polygonVertexIndex, polygonIndex, vertexIndex, colorInfo ) );
+
+								}
+
 								faceVertexBuffer.push( vertex );
 
 								if ( endOfFace ) {
@@ -732,6 +744,11 @@
 							if ( bufferInfo.uvBuffer.length > 0 ) {
 
 								geo.addAttribute( 'uv', new THREE.BufferAttribute( new Float32Array( bufferInfo.uvBuffer ), 2 ) );
+
+							}
+							if ( 'LayerElementColor' in geometryNode.subNodes ) {
+
+								geo.addAttribute( 'color', new THREE.BufferAttribute( new Float32Array( bufferInfo.colorsBuffer ), 3 ) );
 
 							}
 
@@ -820,6 +837,35 @@
 
 								return {
 									dataSize: 2,
+									buffer: buffer,
+									indices: indexBuffer,
+									mappingType: mappingType,
+									referenceType: referenceType
+								};
+
+							}
+
+							/**
+							 * Parses Vertex Color information for geometry.
+							 * @param {FBXGeometryNode} geometryNode
+							 * @returns {{dataSize: number, buffer: number[], indices: number[], mappingType: string, referenceType: string}}
+							 */
+							function getColors( geometryNode ) {
+
+								var ColorNode = geometryNode.subNodes.LayerElementColor[ 0 ];
+
+								var mappingType = ColorNode.properties.MappingInformationType;
+								var referenceType = ColorNode.properties.ReferenceInformationType;
+								var buffer = parseFloatArray( ColorNode.subNodes.Colors.properties.a );
+								var indexBuffer = [];
+								if ( referenceType === 'IndexToDirect' ) {
+
+									indexBuffer = parseFloatArray( ColorNode.subNodes.ColorIndex.properties.a );
+
+								}
+
+								return {
+									dataSize: 4,
 									buffer: buffer,
 									indices: indexBuffer,
 									mappingType: mappingType,
@@ -1164,18 +1210,25 @@
 								} else {
 
 									material = new THREE.MeshBasicMaterial( { color: 0x3300ff } );
+									materials.push( material );
+
+								}
+								if ( 'color' in geometry.attributes ) {
+
+									for ( var materialIndex = 0, numMaterials = materials.length; materialIndex < numMaterials; ++materialIndex ) {
+
+										materials[ materialIndex ].vertexColors = THREE.VertexColors;
+
+									}
 
 								}
 								if ( geometry.FBX_Deformer ) {
 
 									for ( var materialsIndex = 0, materialsLength = materials.length; materialsIndex < materialsLength; ++ materialsIndex ) {
 
-										var material = materials[ materialsIndex ];
-
-										material.skinning = true;
+										materials[ materialsIndex ].skinning = true;
 
 									}
-									material.skinning = true;
 									model = new THREE.SkinnedMesh( geometry, material );
 
 								} else {
@@ -1399,7 +1452,7 @@
 
 				/**
 				 * @type {{
-				     curves: Map<number, {
+						 curves: Map<number, {
 						 T: {
 							id: number;
 							attr: string;
@@ -1519,7 +1572,7 @@
 						}
 					 }>,
 					 layers: Map<number, {
-					 	T: {
+						T: {
 							id: number;
 							attr: string;
 							internalID: number;
@@ -1943,7 +1996,7 @@
 
 					/**
 					 * @type {{
-					 	T: {
+						T: {
 							id: number;
 							attr: string;
 							internalID: number;
@@ -3085,6 +3138,12 @@
 		this.uv = new THREE.Vector2( );
 
 		/**
+		 * Color of the vertex
+		 * @type {THREE.Vector3}
+		 */
+		this.color = new THREE.Vector3();
+
+		/**
 		 * Indices of the bones vertex is influenced by.
 		 * @type {THREE.Vector4}
 		 */
@@ -3119,6 +3178,7 @@
 			var vertexBuffer = this.position.toArray();
 			var normalBuffer = this.normal.toArray();
 			var uvBuffer = this.uv.toArray();
+			var colorBuffer = this.color.toArray();
 			var skinIndexBuffer = this.skinIndices.toArray();
 			var skinWeightBuffer = this.skinWeights.toArray();
 
@@ -3126,6 +3186,7 @@
 				vertexBuffer: vertexBuffer,
 				normalBuffer: normalBuffer,
 				uvBuffer: uvBuffer,
+				colorBuffer: colorBuffer,
 				skinIndexBuffer: skinIndexBuffer,
 				skinWeightBuffer: skinWeightBuffer,
 			};
@@ -3167,6 +3228,7 @@
 			var vertexBuffer = [];
 			var normalBuffer = [];
 			var uvBuffer = [];
+			var colorsBuffer = [];
 			var skinIndexBuffer = [];
 			var skinWeightBuffer = [];
 
@@ -3178,6 +3240,7 @@
 				vertexBuffer = vertexBuffer.concat( flatVertex.vertexBuffer );
 				normalBuffer = normalBuffer.concat( flatVertex.normalBuffer );
 				uvBuffer = uvBuffer.concat( flatVertex.uvBuffer );
+				colorsBuffer = colorsBuffer.concat( flatVertex.colorBuffer );
 				skinIndexBuffer = skinIndexBuffer.concat( flatVertex.skinIndexBuffer );
 				skinWeightBuffer = skinWeightBuffer.concat( flatVertex.skinWeightBuffer );
 
@@ -3187,6 +3250,7 @@
 				vertexBuffer: vertexBuffer,
 				normalBuffer: normalBuffer,
 				uvBuffer: uvBuffer,
+				colorsBuffer: colorsBuffer,
 				skinIndexBuffer: skinIndexBuffer,
 				skinWeightBuffer: skinWeightBuffer,
 			};
@@ -3245,6 +3309,7 @@
 			var vertexBuffer = [];
 			var normalBuffer = [];
 			var uvBuffer = [];
+			var colorsBuffer = [];
 			var skinIndexBuffer = [];
 			var skinWeightBuffer = [];
 
@@ -3259,6 +3324,7 @@
 				vertexBuffer = vertexBuffer.concat( flatTriangle.vertexBuffer );
 				normalBuffer = normalBuffer.concat( flatTriangle.normalBuffer );
 				uvBuffer = uvBuffer.concat( flatTriangle.uvBuffer );
+				colorsBuffer = colorsBuffer.concat( flatTriangle.colorsBuffer );
 				skinIndexBuffer = skinIndexBuffer.concat( flatTriangle.skinIndexBuffer );
 				skinWeightBuffer = skinWeightBuffer.concat( flatTriangle.skinWeightBuffer );
 				materialIndexBuffer = materialIndexBuffer.concat( [ materialIndex, materialIndex, materialIndex ] );
@@ -3269,6 +3335,7 @@
 				vertexBuffer: vertexBuffer,
 				normalBuffer: normalBuffer,
 				uvBuffer: uvBuffer,
+				colorsBuffer: colorsBuffer,
 				skinIndexBuffer: skinIndexBuffer,
 				skinWeightBuffer: skinWeightBuffer,
 				materialIndexBuffer: materialIndexBuffer
@@ -3305,6 +3372,7 @@
 			var vertexBuffer = [];
 			var normalBuffer = [];
 			var uvBuffer = [];
+			var colorsBuffer = [];
 			var skinIndexBuffer = [];
 			var skinWeightBuffer = [];
 
@@ -3317,6 +3385,7 @@
 				vertexBuffer = vertexBuffer.concat( flatFace.vertexBuffer );
 				normalBuffer = normalBuffer.concat( flatFace.normalBuffer );
 				uvBuffer = uvBuffer.concat( flatFace.uvBuffer );
+				colorsBuffer = colorsBuffer.concat( flatFace.colorsBuffer );
 				skinIndexBuffer = skinIndexBuffer.concat( flatFace.skinIndexBuffer );
 				skinWeightBuffer = skinWeightBuffer.concat( flatFace.skinWeightBuffer );
 				materialIndexBuffer = materialIndexBuffer.concat( flatFace.materialIndexBuffer );
@@ -3327,6 +3396,7 @@
 				vertexBuffer: vertexBuffer,
 				normalBuffer: normalBuffer,
 				uvBuffer: uvBuffer,
+				colorsBuffer: colorsBuffer,
 				skinIndexBuffer: skinIndexBuffer,
 				skinWeightBuffer: skinWeightBuffer,
 				materialIndexBuffer: materialIndexBuffer

@@ -11,6 +11,7 @@ function Slider(parent)
 	//Slider
 	this.element = document.createElement("input");
 	this.element.style.position = "absolute";
+	this.element.style.display = "block";
 	this.element.type = "range";
 	this.element.min = "0";
 	this.element.max = "100";
@@ -39,8 +40,8 @@ function Slider(parent)
 	this.onchange = null;
 
 	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
+	this.size = new THREE.Vector2(0, 0);
+	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
 	//Add element to document

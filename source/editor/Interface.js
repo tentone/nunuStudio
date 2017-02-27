@@ -182,18 +182,7 @@ Interface.initialize = function()
 			if(files.length > 0)
 			{
 				var file = files[0];
-				var name = file.name;
-
-				var reader = new FileReader();
-				reader.onload = function()
-				{
-					var texture = new Texture(new Image(reader.result));
-					texture.name = name;
-
-					Editor.program.addTexture(texture);
-					Editor.updateObjectViews();
-				};
-				reader.readAsDataURL(file);
+				Editor.loadTexture(file);
 			}
 		}, "image/*");
 	}, Interface.fileDir + "icons/misc/image.png");
@@ -226,18 +215,7 @@ Interface.initialize = function()
 			if(files.length > 0)
 			{
 				var file = files[0];
-				var name = file.name;
-
-				var reader = new FileReader();
-				reader.onload = function()
-				{
-					var texture = new VideoTexture(new Video(reader.result));
-					texture.name = name;
-
-					Editor.program.addTexture(texture);
-					Editor.updateObjectViews();
-				};
-				reader.readAsDataURL(file);
+				Editor.loadVideoTexture(file);
 			}
 		}, "video/*");
 	}, Interface.fileDir + "icons/misc/video.png");
@@ -259,51 +237,7 @@ Interface.initialize = function()
 		{
 			if(files.length > 0)
 			{
-				if(Nunu.runningOnDesktop())
-				{
-					var file = files[0].path;
-
-					var font = new Font(file);
-					font.name = FileSystem.getFileName(file);
-
-					Editor.program.addFont(font);
-					Editor.updateObjectViews();
-				}
-				else
-				{
-					var file = files[0];
-					var name = file.name;
-					var extension = name.split(".").pop().toLowerCase();
-
-					var reader = new FileReader();
-					reader.onload = function()
-					{
-						if(extension === "json")
-						{
-							var font = new Font(JSON.parse(reader.result));
-						}
-						else
-						{
-							var font = new Font(reader.result);
-							font.encoding = extension;
-						}
-						
-						font.name = name;
-
-						Editor.program.addFont(font);
-						Editor.updateObjectViews();
-					};
-
-
-					if(extension === "json")
-					{
-						reader.readAsText(file);
-					}
-					else
-					{
-						reader.readAsArrayBuffer(file);
-					}
-				}
+				Editor.loadFont(files[0]);
 			}
 		}, ".json, .ttf, .otf");
 	}, Interface.fileDir + "icons/misc/font.png");
@@ -340,25 +274,7 @@ Interface.initialize = function()
 		{
 			if(files.length > 0)
 			{
-				var file = files[0];
-				var name = file.name;
-
-				var reader = new FileReader();
-				reader.onload = function()
-				{
-					var audio = new Audio(reader.result);
-					audio.name = name;
-					
-					Editor.program.addAudio(audio);
-
-					var emitter = new AudioEmitter(audio);
-					emitter.name = name;
-
-					Editor.addToScene(emitter);
-					Editor.updateObjectViews();
-				};
-
-				reader.readAsArrayBuffer(file);
+				Editor.loadAudio(files[0]);
 			}
 		}, "audio/*");
 	}, Interface.fileDir + "icons/misc/audio.png");
@@ -913,6 +829,8 @@ Interface.initialize = function()
 	if(Nunu.runningOnDesktop())
 	{
 		var publish = Interface.file.addMenu("Publish");
+
+		//Publish web
 		publish.addOption("Web", function()
 		{
 			FileSystem.chooseFile(function(files)
@@ -928,66 +846,66 @@ Interface.initialize = function()
 				}
 			}, "", Editor.program.name);
 		}, Interface.fileDir + "icons/platform/web.png");
-	}
 
-	//Publish windows
-	if(FileSystem.fileExists("../nwjs/win"))
-	{
-		publish.addOption("Windows", function()
+		//Publish windows
+		if(FileSystem.fileExists("../nwjs/win"))
 		{
-			FileSystem.chooseFile(function(files)
+			publish.addOption("Windows", function()
 			{
-				try
+				FileSystem.chooseFile(function(files)
 				{
-					Editor.exportWindowsProject(files[0].path);
-					alert("Project exported");
-				}
-				catch(e)
-				{
-					alert("Error exporting project (" + e + ")");
-				}
-			}, "", Editor.program.name);
-		}, Interface.fileDir + "icons/platform/windows.png");
-	}
+					try
+					{
+						Editor.exportWindowsProject(files[0].path);
+						alert("Project exported");
+					}
+					catch(e)
+					{
+						alert("Error exporting project (" + e + ")");
+					}
+				}, "", Editor.program.name);
+			}, Interface.fileDir + "icons/platform/windows.png");
+		}
 
-	//Publish linux
-	if(FileSystem.fileExists("../nwjs/linux"))
-	{
-		publish.addOption("Linux", function()
+		//Publish linux
+		if(FileSystem.fileExists("../nwjs/linux"))
 		{
-			FileSystem.chooseFile(function(files)
+			publish.addOption("Linux", function()
 			{
-				try
+				FileSystem.chooseFile(function(files)
 				{
-					Editor.exportLinuxProject(files[0].path);
-					alert("Project exported");
-				}
-				catch(e)
-				{
-					alert("Error exporting project (" + e + ")");
-				}
-			}, "", Editor.program.name);
-		}, Interface.fileDir + "icons/platform/linux.png");
-	}
+					try
+					{
+						Editor.exportLinuxProject(files[0].path);
+						alert("Project exported");
+					}
+					catch(e)
+					{
+						alert("Error exporting project (" + e + ")");
+					}
+				}, "", Editor.program.name);
+			}, Interface.fileDir + "icons/platform/linux.png");
+		}
 
-	//Publish macos
-	if(FileSystem.fileExists("../nwjs/mac"))
-	{
-		publish.addOption("macOS", function()
+		//Publish macos
+		if(FileSystem.fileExists("../nwjs/mac"))
 		{
-			FileSystem.chooseFile(function(files)
+			publish.addOption("macOS", function()
 			{
-				try
+				FileSystem.chooseFile(function(files)
 				{
-					Editor.exportMacOSProject(files[0].path);
-					alert("Project exported");
-				}
-				catch(e)
-				{
-					alert("Error exporting project (" + e + ")");
-				}
-			}, "", Editor.program.name);
-		}, Interface.fileDir + "icons/platform/osx.png");
+					try
+					{
+						Editor.exportMacOSProject(files[0].path);
+						alert("Project exported");
+					}
+					catch(e)
+					{
+						alert("Error exporting project (" + e + ")");
+					}
+				}, "", Editor.program.name);
+			}, Interface.fileDir + "icons/platform/osx.png");
+		}
 	}
 
 	Interface.file.addOption("Exit", function()

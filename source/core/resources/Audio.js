@@ -39,7 +39,31 @@ function Audio(url)
 }
 
 /**
- * Serialize audio data as JSON, audio data is serialized in Base64
+ * Check if a file name refers to a supported audio file.
+ *
+ * @method fileIsAudio
+ * @static
+ * @param {String} file
+ * @return {boolean} True if the file refers to a supported audio format.
+ */
+Audio.fileIsAudio = function(file)
+{
+	if(file !== undefined)
+	{
+		if(file.type.startsWith("audio"))
+		{
+			return true;
+		}
+	}
+
+	return false;
+};
+
+/**
+ * Serialize audio data as JSON.
+ * 
+ * Audio data is serialized in Base64.
+ * 
  * @param {meta} meta
  * @return {Object} data
  */

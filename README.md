@@ -79,6 +79,7 @@
 	- Editor standalone version (@Seagat2011)
 	- Support for File API loading
 	- Added reverse glyphs option to Font asset
+	- Improved font preview
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

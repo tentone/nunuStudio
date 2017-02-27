@@ -41,6 +41,27 @@ function Video(url)
 }
 
 /**
+ * Check if a file name refers to a supported video file.
+ *
+ * @method fileIsVideo
+ * @static
+ * @param {String} file
+ * @return {boolean} True if the file refers to a supported video format.
+ */
+Video.fileIsVideo = function(file)
+{
+	if(file !== undefined)
+	{
+		if(file.type.startsWith("video"))
+		{
+			return true;
+		}
+	}
+
+	return false;
+};
+
+/**
  * Serialize resource to json.
  * 
  * Video data is stored in Base64.
