@@ -615,7 +615,7 @@ Editor.update = function()
 		if(Editor.mouse.insideCanvas())
 		{
 			//Lock mouse when camera is moving
-			if(Settings.editor.lockMouse)
+			if(Settings.editor.lockMouse && Nunu.runningOnDesktop())
 			{
 				if(!Editor.isEditingObject && (Editor.mouse.buttonJustPressed(Mouse.LEFT) || Editor.mouse.buttonJustPressed(Mouse.RIGHT) || Editor.mouse.buttonJustPressed(Mouse.MIDDLE)))
 				{
@@ -1521,6 +1521,7 @@ Editor.saveProgram = function(fname, compressed, keepDirectory)
 		{
 			Editor.setOpenFile(fname);
 		}
+
 		alert("Project saved");
 	}
 	catch(e)
@@ -1532,8 +1533,9 @@ Editor.saveProgram = function(fname, compressed, keepDirectory)
 //Load program from file
 Editor.loadProgram = function(file)
 {
-	//Load program data file
-	FileSystem.readFile(file, false, function(data)
+	var reader = new FileReader();
+
+	reader.onload = function()
 	{
 		try
 		{
@@ -1545,7 +1547,7 @@ Editor.loadProgram = function(file)
 
 			//Load program
 			var loader = new ObjectLoader();
-			Editor.program = loader.parse(JSON.parse(data));
+			Editor.program = loader.parse(JSON.parse(reader.result));
 
 			//Reset history
 			Editor.history = new History(Editor.program);
@@ -1572,7 +1574,9 @@ Editor.loadProgram = function(file)
 		{
 			alert("Error loading file\n(" + e + ")");
 		}
-	});
+	};
+
+	reader.readAsText(file);
 };
 
 //Load texture from file object
@@ -1625,6 +1629,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 		Editor.program.addTexture(texture);
 		Editor.updateObjectViews();
 	};
+
 	reader.readAsDataURL(file);
 };
 
@@ -1688,6 +1693,193 @@ Editor.loadFont = function(file, onLoad)
 	else
 	{
 		reader.readAsArrayBuffer(file);
+	}
+};
+
+//Load geometry from file object
+Editor.loadGeometry = function(file, onLoad)
+{
+	var name = file.name;
+	var extension = FileSystem.getFileExtension(name);
+
+	//Wavefront OBJ
+	if(extension === "obj")
+	{
+		var loader = new THREE.OBJLoader();
+
+		//Try to load MTL
+		if(Nunu.runningOnDesktop())
+		{
+			var path = FileSystem.getFilePath(file.path);
+			var mtl = FileSystem.getNameWithoutExtension(file.path) + ".mtl";
+
+			if(FileSystem.fileExists(mtl))
+			{
+				var mtlLoader = new THREE.MTLLoader()
+				mtlLoader.setPath(path);
+				var materials = mtlLoader.parse(FileSystem.readFile(mtl));
+				loader.setMaterials(materials);
+			}
+		}
+
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var obj = loader.parse(reader.result);
+			Editor.addToScene(obj);
+		};
+		reader.readAsText(file);
+	}
+	//Collada
+	else if(extension === "dae")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.ColladaLoader();
+			loader.options.convertUpAxis = true;
+			var collada = loader.parse(reader.result);
+			var scene = collada.scene;
+			Editor.addToScene(scene);
+		};
+		reader.readAsText(file);
+	}
+	//GLTF
+	else if(extension === "gltf")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.GLTFLoader();
+			var gltf = loader.parse(reader.result);
+			if(gltf.scene !== undefined)
+			{
+				Editor.addToScene(gltf.scene);
+			}
+		};
+		reader.readAsText(file);
+	}
+	//AWD
+	else if(extension === "awd")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.AWDLoader();
+			var awd = loader.parse(reader.result);
+			Editor.addToScene(awd);
+		};
+		reader.readAsArrayBuffer(file);
+	}
+	//PLY
+	else if(extension === "ply")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.PLYLoader();
+			var geometry = loader.parse(reader.result);
+			Editor.addToScene(new Mesh(geometry));
+		};
+		reader.readAsText(file);
+	}
+	//VTK
+	else if(extension === "vtk" || extension === "vtp")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.VTKLoader();
+			var geometry = loader.parse(reader.result);
+			Editor.addToScene(new Mesh(geometry));
+		};
+		reader.readAsArrayBuffer(file);
+	}
+	//VRML
+	else if(extension === "wrl" || extension === "vrml")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.VRMLLoader();
+			var scene = loader.parse(reader.result);
+
+			//TODO <AVOID REPEATED MATERIALS>
+			//
+			for(var i = 0; i < scene.children.length; i++)
+			{
+				Editor.addToScene(scene.children[i]);
+			}
+		};
+		reader.readAsText(file);
+	}
+	//FBX
+	else if(extension === "fbx")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.FBXLoader();
+			var obj = loader.parse(reader.result);
+			Editor.addToScene(obj);
+		};
+		reader.readAsText(file);
+	}
+	//PCD Point Cloud Data
+	else if(extension === "pcd")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.PCDLoader();
+			var pcd = loader.parse(file.result, file.name);
+			pcd.name = FileSystem.getFileName(file);
+			pcd.material.name = "points";
+			Editor.addToScene(pcd);
+		};
+		reader.readAsArrayBuffer(file);
+	}
+	//THREE JSON Model
+	else if(extension === "json")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.JSONLoader();
+			var data = loader.parse(JSON.parse(FileSystem.readFile(file)));
+			var materials = data.materials;
+			var geometry = data.geometry;
+
+			//Material
+			var material = null;
+			if(materials === undefined || materials.length === 0)
+			{
+				material = new THREE.MeshStandardMaterial();
+				material.name = "standard";
+			}
+			else if(materials.length === 1)
+			{
+				material = materials[0];
+			}
+			else if(materials.length > 1)
+			{
+				material = materials;
+			}
+
+			//Mesh
+			var mesh = null;
+			if(geometry.bones.length > 0)
+			{
+				mesh = new SkinnedMesh(geometry, material);
+			}
+			else
+			{
+				mesh = new Mesh(geometry, material);
+			}
+
+			Editor.addToScene(mesh);
+		};
+		reader.readAsText();
 	}
 };
 

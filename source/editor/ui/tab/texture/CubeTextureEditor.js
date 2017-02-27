@@ -17,7 +17,8 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.division.tabPosition = 0.5;
 	this.division.tabPositionMin = 0.3;
 	this.division.tabPositionMax = 0.7;
-
+	this.division.divB.style.overflow = "auto";
+	
 	//Canvas
 	this.canvas = new Canvas(this.division.divA);
 

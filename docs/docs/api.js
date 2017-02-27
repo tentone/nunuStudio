@@ -86,7 +86,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Audio",
             "name": "Audio",
-            "description": "AudioEmitter is a Object3D used to play audio inside the scene"
+            "description": "AudioEmitter is a Object3D used to play audio inside the scene."
         },
         {
             "displayName": "BinaryData",
@@ -96,7 +96,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Cameras",
             "name": "Cameras",
-            "description": "Orthographic Camera is used for 2D like image projection\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera"
+            "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera."
         },
         {
             "displayName": "Core",
@@ -106,7 +106,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Devices",
             "name": "Devices",
-            "description": "Kinect device object\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\nThe server software is available inside the tools folder in the nunuStudio repository."
+            "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository."
         },
         {
             "displayName": "Files",
@@ -146,12 +146,12 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Physics",
             "name": "Physics",
-            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes\nIt is based on the original Mesh2Shape converted by @donmccurdy"
+            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
         },
         {
             "displayName": "Resources",
             "name": "Resources",
-            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API"
+            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API."
         },
         {
             "displayName": "Runtime",

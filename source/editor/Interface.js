@@ -34,142 +34,16 @@ Interface.initialize = function()
 	Interface.assetFile.position.set(0,0);
 
 	//3D Models Loader
-	if(Nunu.runningOnDesktop())
+	Interface.assetFile.addOption("3D Models", function()
 	{
-		Interface.assetFile.addOption("3D Models", function()
-		{
-			FileSystem.chooseFile(function(files)
-			{	
-				if(files.length > 0)
-				{
-					var file = files[0].path;
-					var path = FileSystem.getFilePath(file);
-					var extension = FileSystem.getFileExtension(file);
-
-					//Wavefront OBJ
-					if(extension === "obj")
-					{
-						var mtl = FileSystem.getNameWithoutExtension(file) + ".mtl";
-						var loader = new THREE.OBJLoader();
-
-						if(FileSystem.fileExists(mtl))
-						{
-							var mtlLoader = new THREE.MTLLoader()
-							mtlLoader.setPath(path);
-							var materials = mtlLoader.parse(FileSystem.readFile(mtl));
-							loader.setMaterials(materials);
-						}
-
-						var obj = loader.parse(FileSystem.readFile(file));
-						Editor.addToScene(obj);
-					}
-					//Collada
-					else if(extension === "dae")
-					{
-						var loader = new THREE.ColladaLoader();
-						loader.options.convertUpAxis = true;
-						var collada = loader.parse(FileSystem.readFile(file));
-						var scene = collada.scene;
-						Editor.addToScene(scene);
-					}
-					//GLTF
-					else if(extension === "gltf")
-					{
-						var loader = new THREE.GLTFLoader();
-						var gltf = loader.parse(FileSystem.readFile(file));
-						if(gltf.scene !== undefined)
-						{
-							Editor.addToScene(gltf.scene);
-						}
-					}
-					//AWD
-					else if(extension === "awd")
-					{
-						var loader = new THREE.AWDLoader();
-						var awd = loader.parse(FileSystem.readFileArrayBuffer(file));
-						Editor.addToScene(awd);
-					}
-					//PLY
-					else if(extension === "ply")
-					{
-						var loader = new THREE.PLYLoader();
-						var geometry = loader.parse(FileSystem.readFile(file));
-						Editor.addToScene(new Mesh(geometry));
-					}
-					//VTK
-					else if(extension === "vtk" || extension === "vtp")
-					{
-						var loader = new THREE.VTKLoader();
-						var geometry = loader.parse(FileSystem.readFileArrayBuffer(file));
-						Editor.addToScene(new Mesh(geometry));
-					}
-					//VRML
-					else if(extension === "wrl" || extension === "vrml")
-					{
-						var loader = new THREE.VRMLLoader();
-						var scene = loader.parse(FileSystem.readFile(file));
-						for(var i = 0; i < scene.children.length; i++)
-						{
-							Editor.addToScene(scene.children[i]);
-						}
-					}
-					//FBX
-					else if(extension === "fbx")
-					{
-						var loader = new THREE.FBXLoader();
-						var obj = loader.parse(FileSystem.readFile(file));
-						Editor.addToScene(obj);
-					}
-					//PCD Point Cloud Data
-					else if(extension === "pcd")
-					{
-						var loader = new THREE.PCDLoader();
-						var pcd = loader.parse(FileSystem.readFileArrayBuffer(file), file);
-						pcd.name = FileSystem.getFileName(file);
-						pcd.material.name = "points";
-						Editor.addToScene(pcd);
-					}
-					//THREE JSON Model
-					else if(extension === "json")
-					{
-						var loader = new THREE.JSONLoader();
-						var data = loader.parse(JSON.parse(FileSystem.readFile(file)));
-						var materials = data.materials;
-						var geometry = data.geometry;
-
-						//Create material object
-						var material = null;
-						if(materials === undefined || materials.length === 0)
-						{
-							material = new THREE.MeshStandardMaterial();
-							material.name = "standard";
-						}
-						else if(materials.length === 1)
-						{
-							material = materials[0];
-						}
-						else if(materials.length > 1)
-						{
-							material = THREE.MultiMaterial(materials);
-						}
-
-						//Create model
-						var model = null;
-						if(geometry.bones.length > 0)
-						{
-							model = new SkinnedMesh(geometry, material);
-						}
-						else
-						{
-							model = new Mesh(geometry, material);
-						}
-
-						Editor.addToScene(model);
-					}
-				}
-			}, ".obj, .dae, .gltf, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json");
-		}, Interface.fileDir + "icons/models/models.png");
-	}
+		FileSystem.chooseFile(function(files)
+		{	
+			if(files.length > 0)
+			{
+				Editor.loadGeometry(files[0]);
+			}
+		}, ".obj, .dae, .gltf, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json");
+	}, Interface.fileDir + "icons/models/models.png");
 
 	//Textures menu
 	var importTexture = Interface.assetFile.addMenu("Texture", Interface.fileDir + "icons/misc/image.png");
@@ -181,8 +55,7 @@ Interface.initialize = function()
 		{
 			if(files.length > 0)
 			{
-				var file = files[0];
-				Editor.loadTexture(file);
+				Editor.loadTexture(files[0]);
 			}
 		}, "image/*");
 	}, Interface.fileDir + "icons/misc/image.png");
@@ -214,8 +87,7 @@ Interface.initialize = function()
 		{
 			if(files.length > 0)
 			{
-				var file = files[0];
-				Editor.loadVideoTexture(file);
+				Editor.loadVideoTexture(files[0]);
 			}
 		}, "video/*");
 	}, Interface.fileDir + "icons/misc/video.png");

@@ -549,7 +549,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
             "line": 3,
-            "description": "AudioEmitter is a Object3D used to play audio inside the scene"
+            "description": "AudioEmitter is a Object3D used to play audio inside the scene."
         },
         "Cameras": {
             "name": "Cameras",
@@ -564,7 +564,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
             "line": 3,
-            "description": "Orthographic Camera is used for 2D like image projection\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera"
+            "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera."
         },
         "Devices": {
             "name": "Devices",
@@ -579,7 +579,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
             "line": 3,
-            "description": "Kinect device object\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\nThe server software is available inside the tools folder in the nunuStudio repository."
+            "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository."
         },
         "Lights": {
             "name": "Lights",
@@ -661,7 +661,7 @@
             "tag": "module",
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
             "line": 3,
-            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes\nIt is based on the original Mesh2Shape converted by @donmccurdy"
+            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
         },
         "Script": {
             "name": "Script",
@@ -756,7 +756,7 @@
             "tag": "module",
             "file": "..\\source\\core\\resources\\Video.js",
             "line": 3,
-            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API"
+            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API."
         },
         "THREE": {
             "name": "THREE",
@@ -894,7 +894,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
             "line": 3,
-            "description": "AudioEmitter is a Object3D used to play audio inside the scene",
+            "description": "AudioEmitter is a Object3D used to play audio inside the scene.",
             "params": [
                 {
                     "name": "audio",
@@ -917,7 +917,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
             "line": 3,
-            "description": "PositionalAudio is used to play audio with positional audio effect",
+            "description": "PositionalAudio is used to play audio with positional audio effect.\n\nUsing the positional audio object the sound is controlled by the camera that renders first position.",
             "params": [
                 {
                     "name": "audio",
@@ -940,7 +940,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
             "line": 3,
-            "description": "Orthographic Camera is used for 2D like image projection\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera",
+            "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera.",
             "is_constructor": 1,
             "extends": "{OrthographicCamera}",
             "params": [
@@ -983,7 +983,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
             "line": 3,
-            "description": "Perspective camera\nBased on THREE.PerspectiveCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera",
+            "description": "Perspective camera.\n\nBased on THREE.PerspectiveCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera.",
             "extends": "{PerspectiveCamera}",
             "is_constructor": 1,
             "params": [
@@ -1021,7 +1021,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
             "line": 3,
-            "description": "Kinect device object\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\nThe server software is available inside the tools folder in the nunuStudio repository.",
+            "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository.",
             "extends": "{Object3D}",
             "is_constructor": 1
         },
@@ -1037,7 +1037,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
             "line": 3,
-            "description": "Leap device object based on the official LeapJS runtime\nUsed to connect nunuStudio to a leap motion hand tracker, works on Windows and OSX",
+            "description": "Leap device object based on the official LeapJS runtime.\n\nUsed to connect nunuStudio to a leap motion hand tracker, works on Windows and OSX.",
             "is_constructor": 1,
             "extends": "{Object3D}"
         },
@@ -1605,7 +1605,7 @@
             "namespace": "",
             "file": "..\\source\\core\\resources\\Audio.js",
             "line": 3,
-            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API",
+            "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API.",
             "extends": "{Resource}",
             "is_constructor": 1,
             "params": [
@@ -1628,7 +1628,7 @@
             "namespace": "",
             "file": "..\\source\\core\\resources\\Font.js",
             "line": 3,
-            "description": "Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64)\n\nFont objects are used for booth 2D and 3D text",
+            "description": "Font class stores font data, font data can be stored as an opentype json or as a TTF file (stored in Base64).\n\nFont objects are used for booth 2D and 3D text.",
             "is_constructor": 1,
             "extends": "{Resource}",
             "params": [
@@ -1674,7 +1674,7 @@
             "namespace": "",
             "file": "..\\source\\core\\resources\\Resource.js",
             "line": 3,
-            "description": "Resource class is used to represent resources\n\nResources store data that is used by objects",
+            "description": "Resource class is used to represent resources.\n\nResources store data that is used by objects.",
             "is_constructor": 1
         },
         "ResourceManager": {
@@ -1689,7 +1689,7 @@
             "namespace": "",
             "file": "..\\source\\core\\resources\\ResourceManager.js",
             "line": 3,
-            "description": "Resource manager is used to manage available resources used by objects\n\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\n\nThe manager is used to manage the following types of resources\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries",
+            "description": "Resource manager is used to manage available resources used by objects\n\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\n\nThe manager is used to manage the following types of resources:\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries",
             "is_constructor": 1
         },
         "Video": {
@@ -1704,7 +1704,7 @@
             "namespace": "",
             "file": "..\\source\\core\\resources\\Video.js",
             "line": 3,
-            "description": "Video resources are used to store video data in base64",
+            "description": "Video resources are used to store video.\n\nVideo data stored in base64.",
             "is_constructor": 1,
             "extends": "{Resource}",
             "params": [
@@ -2114,7 +2114,7 @@
             "namespace": "",
             "file": "..\\source\\core\\utils\\Base64Utils.js",
             "line": 3,
-            "description": "Base64Utils contains methods to convert from and to Base64 binary format",
+            "description": "Base64Utils contains methods to convert from and to Base64 binary format.",
             "static": 1
         },
         "BufferUtils": {
@@ -2159,7 +2159,7 @@
             "namespace": "",
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
             "line": 3,
-            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes\nIt is based on the original Mesh2Shape converted by @donmccurdy",
+            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy.",
             "author": "Don McCurdy (https://github.com/donmccurdy)",
             "static": 1
         },
@@ -3381,7 +3381,7 @@
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
             "line": 70,
-            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True\nCalled by the runtime",
+            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.\n\nCalled by the runtime.",
             "itemtype": "method",
             "name": "initialize",
             "class": "AudioEmitter",
@@ -3389,8 +3389,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 97,
-            "description": "Dispose audio object",
+            "line": 98,
+            "description": "Dispose audio object.",
             "itemtype": "method",
             "name": "dispose",
             "class": "AudioEmitter",
@@ -3398,8 +3398,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 115,
-            "description": "Change audio emitter volume",
+            "line": 117,
+            "description": "Change audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
             "params": [
@@ -3414,8 +3414,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 128,
-            "description": "Create JSON description",
+            "line": 131,
+            "description": "Create JSON description.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -3434,7 +3434,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 152,
+            "line": 156,
             "description": "Starts playback",
             "itemtype": "method",
             "name": "play",
@@ -3443,7 +3443,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 157,
+            "line": 161,
             "description": "Pauses playback",
             "itemtype": "method",
             "name": "pause",
@@ -3452,7 +3452,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 162,
+            "line": 166,
             "description": "Stops playback and resets time to 0",
             "itemtype": "method",
             "name": "pause",
@@ -3461,7 +3461,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 167,
+            "line": 171,
             "description": "Set loop mode",
             "params": [
                 {
@@ -3477,7 +3477,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 173,
+            "line": 177,
             "description": "Set playback speed",
             "params": [
                 {
@@ -3493,7 +3493,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 179,
+            "line": 183,
             "description": "Add the filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -3509,7 +3509,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 185,
+            "line": 189,
             "description": "Set the filters array to value.",
             "itemtype": "method",
             "name": "setFilters",
@@ -3525,7 +3525,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 12,
+            "line": 14,
             "description": "Audio volume",
             "itemtype": "property",
             "name": "volume",
@@ -3536,7 +3536,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 18,
+            "line": 20,
             "description": "If true the playback starts automatically",
             "itemtype": "property",
             "name": "autoplay",
@@ -3547,7 +3547,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 24,
+            "line": 26,
             "description": "Start time in seconds",
             "itemtype": "property",
             "name": "playbackRate",
@@ -3558,7 +3558,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 30,
+            "line": 32,
             "description": "Start time in seconds",
             "itemtype": "property",
             "name": "startTime",
@@ -3569,7 +3569,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 36,
+            "line": 38,
             "description": "If true the audio plays in loop",
             "itemtype": "property",
             "name": "loop",
@@ -3580,8 +3580,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 69,
-            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True\nCalled by the runtime",
+            "line": 71,
+            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.\n\nCalled by the runtime.",
             "itemtype": "method",
             "name": "initialize",
             "class": "PositionalAudio",
@@ -3589,8 +3589,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 107,
-            "description": "Update positional audio state",
+            "line": 110,
+            "description": "Update positional audio state.",
             "itemtype": "method",
             "name": "update",
             "class": "PositionalAudio",
@@ -3598,8 +3598,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 130,
-            "description": "Dispose audio object",
+            "line": 134,
+            "description": "Dispose audio object.",
             "itemtype": "method",
             "name": "dispose",
             "class": "PositionalAudio",
@@ -3607,8 +3607,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 148,
-            "description": "Change audio emitter volume",
+            "line": 153,
+            "description": "Change audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
             "params": [
@@ -3628,7 +3628,7 @@
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
             "line": 168,
-            "description": "Create JSON description",
+            "description": "Create JSON description.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -3647,7 +3647,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 192,
+            "line": 193,
             "description": "Starts playback",
             "itemtype": "method",
             "name": "play",
@@ -3656,7 +3656,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 197,
+            "line": 198,
             "description": "Pauses playback",
             "itemtype": "method",
             "name": "pause",
@@ -3665,7 +3665,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 202,
+            "line": 203,
             "description": "Stops playback and resets time to 0",
             "itemtype": "method",
             "name": "pause",
@@ -3674,7 +3674,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 207,
+            "line": 208,
             "description": "Set loop mode",
             "params": [
                 {
@@ -3690,7 +3690,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 213,
+            "line": 214,
             "description": "Set playback speed",
             "params": [
                 {
@@ -3706,7 +3706,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 219,
+            "line": 220,
             "description": "Add the filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -3722,7 +3722,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 225,
+            "line": 226,
             "description": "Set the filters array to value.",
             "itemtype": "method",
             "name": "setFilters",
@@ -3738,8 +3738,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 17,
-            "description": "Camera size relative to resize mode",
+            "line": 19,
+            "description": "Camera size relative to resize mode.",
             "itemtype": "property",
             "name": "size",
             "default": "10.0",
@@ -3749,8 +3749,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 23,
-            "description": "Aspect ratio X/Y",
+            "line": 26,
+            "description": "Aspect ratio X/Y.",
             "itemtype": "property",
             "name": "aspect",
             "default": "1.0",
@@ -3760,8 +3760,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 29,
-            "description": "Camera resize mode",
+            "line": 33,
+            "description": "Camera resize mode.",
             "itemtype": "property",
             "name": "mode",
             "default": "RESIZE_HORIZONTAL",
@@ -3771,8 +3771,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 35,
-            "description": "Camera viewport offset\nValues range from 0.0 to 1.0 in screen space",
+            "line": 40,
+            "description": "Camera viewport offset.\n\nValues range from 0.0 to 1.0 in screen space.",
             "itemtype": "property",
             "name": "offset",
             "type": "{Vector2}",
@@ -3781,8 +3781,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 41,
-            "description": "Camera viewport size\nValues range from 0.0 to 1.0 in screen space",
+            "line": 48,
+            "description": "Camera viewport size.\n\nValues range from 0.0 to 1.0 in screen space.",
             "itemtype": "property",
             "name": "viewport",
             "type": "{Vector2}",
@@ -3791,8 +3791,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 47,
-            "description": "Clear screen color flag",
+            "line": 56,
+            "description": "Clear screen color flag.",
             "itemtype": "property",
             "name": "clearColor",
             "default": "false",
@@ -3802,8 +3802,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 53,
-            "description": "Clear depth flag",
+            "line": 63,
+            "description": "Clear depth flag.",
             "itemtype": "property",
             "name": "clearDepth",
             "default": "false",
@@ -3813,8 +3813,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 59,
-            "description": "Camera draw order preference\nIf more than one camera has the same order value the draw order is undefined for those cameras",
+            "line": 70,
+            "description": "Camera draw order preference.\n\nIf more than one camera has the same order value the draw order is undefined for those cameras.",
             "itemtype": "property",
             "name": "order",
             "default": "0",
@@ -3824,7 +3824,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 87,
+            "line": 100,
             "description": "Used to set camera to resize horizontally",
             "itemtype": "attribute",
             "name": "RESIZE_HORIZONTAL",
@@ -3834,8 +3834,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 94,
-            "description": "Used to set camera to resize vertically",
+            "line": 107,
+            "description": "Used to set camera to resize vertically.",
             "itemtype": "attribute",
             "name": "RESIZE_VERTICAL",
             "type": "{Number}",
@@ -3844,8 +3844,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 101,
-            "description": "Destroy camera object and remove it from the scene",
+            "line": 115,
+            "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
             "class": "OrthographicCamera",
@@ -3853,8 +3853,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 116,
-            "description": "Update camera projection matrix\nShould be called after chaging projection parameters",
+            "line": 131,
+            "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
             "class": "OrthographicCamera",
@@ -3862,8 +3862,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 142,
-            "description": "Create JSON description",
+            "line": 159,
+            "description": "Create JSON description.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -3882,8 +3882,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 16,
-            "description": "Camera field of view in degrees",
+            "line": 18,
+            "description": "Camera field of view in degrees.",
             "itemtype": "property",
             "name": "fov",
             "default": "50",
@@ -3893,8 +3893,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 22,
-            "description": "Camera aspect ratio X/Y",
+            "line": 25,
+            "description": "Camera aspect ratio X/Y.",
             "itemtype": "property",
             "name": "aspect",
             "default": "1.0",
@@ -3904,8 +3904,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 28,
-            "description": "Camera zoom",
+            "line": 32,
+            "description": "Camera zoom.",
             "itemtype": "property",
             "name": "zoom",
             "default": "1.0",
@@ -3915,8 +3915,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 34,
-            "description": "Camera viewport offset\nValues range from 0.0 to 1.0 in screen space",
+            "line": 39,
+            "description": "Camera viewport offset.\n\nValues range from 0.0 to 1.0 in screen space.",
             "itemtype": "property",
             "name": "offset",
             "type": "{Vector2}",
@@ -3925,8 +3925,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 40,
-            "description": "Camera viewport size\nValues range from 0.0 to 1.0 in screen space",
+            "line": 47,
+            "description": "Camera viewport size.\n\nValues range from 0.0 to 1.0 in screen space.",
             "itemtype": "property",
             "name": "viewport",
             "type": "{Vector2}",
@@ -3935,8 +3935,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 46,
-            "description": "Clear screen color flag",
+            "line": 55,
+            "description": "Clear screen color flag.",
             "itemtype": "property",
             "name": "clearColor",
             "default": "false",
@@ -3946,8 +3946,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 52,
-            "description": "Clear depth flag",
+            "line": 62,
+            "description": "Clear depth flag.",
             "itemtype": "property",
             "name": "clearDepth",
             "default": "false",
@@ -3957,8 +3957,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 58,
-            "description": "Camera draw order preference\nIf more than one camera has the same order value the draw order is undefined for those cameras",
+            "line": 69,
+            "description": "Camera draw order preference.\n\nIf more than one camera has the same order value the draw order is undefined for those cameras.",
             "itemtype": "property",
             "name": "order",
             "default": "0",
@@ -3968,8 +3968,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 80,
-            "description": "Destroy camera object and remove it from the scene",
+            "line": 93,
+            "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
             "class": "PerspectiveCamera",
@@ -3977,8 +3977,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 95,
-            "description": "Update world transformation matrix ignoring parent scaling properties",
+            "line": 109,
+            "description": "Update world transformation matrix ignoring parent scaling properties.",
             "itemtype": "method",
             "name": "updateMatrixWorld",
             "params": [
@@ -3993,8 +3993,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 130,
-            "description": "Update camera projection matrix\nShould be called after chaging projection parameters",
+            "line": 145,
+            "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
             "class": "PerspectiveCamera",
@@ -4002,8 +4002,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 150,
-            "description": "Create JSON description",
+            "line": 167,
+            "description": "Create JSON description.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -4022,8 +4022,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 14,
-            "description": "Websocket object used to connect to the data server",
+            "line": 18,
+            "description": "Websocket object used to connect to the data server.",
             "itemtype": "property",
             "name": "socket",
             "default": "127.0.0.1:8181",
@@ -4033,8 +4033,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 20,
-            "description": "Connected flag",
+            "line": 25,
+            "description": "Connected flag.",
             "itemtype": "property",
             "name": "connected",
             "type": "{boolean}",
@@ -4043,8 +4043,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 25,
-            "description": "Debug model flag",
+            "line": 31,
+            "description": "Debug model flag.",
             "itemtype": "property",
             "name": "debugModel",
             "default": "true",
@@ -4054,8 +4054,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 31,
-            "description": "Time until data is considered too obsolete to be usable",
+            "line": 38,
+            "description": "Time until data is considered too obsolete to be usable.",
             "itemtype": "property",
             "name": "dataTimeout",
             "type": "{Number}",
@@ -4064,8 +4064,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 36,
-            "description": "Image data sent by the kinnect camera",
+            "line": 44,
+            "description": "Image data sent by the kinnect camera.",
             "itemtype": "property",
             "name": "camera",
             "type": "{Blob}",
@@ -4074,8 +4074,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 41,
-            "description": "Skeleton data sent by the kinnect",
+            "line": 50,
+            "description": "Skeleton data sent by the kinnect.",
             "itemtype": "property",
             "name": "data",
             "type": "{Object}",
@@ -4084,8 +4084,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 99,
-            "description": "Kinect default data timeout in seconds",
+            "line": 109,
+            "description": "Kinect default data timeout in seconds.",
             "itemtype": "attribute",
             "name": "DATA_TIMEOUT",
             "type": "{Number}",
@@ -4094,8 +4094,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 107,
-            "description": "Kinect camera depth mode",
+            "line": 118,
+            "description": "Kinect camera depth mode.",
             "itemtype": "attribute",
             "name": "DEPTH",
             "type": "{Number}",
@@ -4104,8 +4104,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 114,
-            "description": "Kinect camera color mode",
+            "line": 126,
+            "description": "Kinect camera color mode.",
             "itemtype": "attribute",
             "name": "COLOR",
             "type": "{Number}",
@@ -4114,8 +4114,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 121,
-            "description": "Kinect skeleton joint names in pairs",
+            "line": 134,
+            "description": "Kinect skeleton joint names in pairs.",
             "itemtype": "attribute",
             "name": "JOINTS_NAME",
             "type": "{Array}",
@@ -4124,8 +4124,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 133,
-            "description": "Update kinect device state",
+            "line": 147,
+            "description": "Update kinect device state.",
             "itemtype": "method",
             "name": "update",
             "class": "KinectDevice",
@@ -4133,8 +4133,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 195,
-            "description": "Check if there is kinect connected",
+            "line": 210,
+            "description": "Check if there is kinect connected.",
             "itemtype": "method",
             "name": "isConnected",
             "return": {
@@ -4146,8 +4146,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 205,
-            "description": "Set kinect camera mode",
+            "line": 221,
+            "description": "Set kinect camera mode.",
             "itemtype": "method",
             "name": "setCameraMode",
             "params": [
@@ -4162,8 +4162,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
-            "line": 222,
-            "description": "Create JSON for object",
+            "line": 239,
+            "description": "Create JSON for object.",
             "itemtype": "method",
             "name": "toJSON",
             "class": "KinectDevice",
@@ -4171,8 +4171,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 12,
-            "description": "Debug model flag",
+            "line": 14,
+            "description": "Debug model flag.",
             "itemtype": "property",
             "name": "debugModel",
             "default": "true",
@@ -4182,8 +4182,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 18,
-            "description": "Flag to enable gesture detection",
+            "line": 21,
+            "description": "Flag to enable gesture detection.",
             "itemtype": "property",
             "name": "gesturesEnabled",
             "default": "true",
@@ -4193,8 +4193,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 24,
-            "description": "Flag to enable hand pose detection",
+            "line": 28,
+            "description": "Flag to enable hand pose detection.",
             "itemtype": "property",
             "name": "posesEnabled",
             "default": "true",
@@ -4204,8 +4204,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 30,
-            "description": "Hand tracking mode",
+            "line": 35,
+            "description": "Hand tracking mode.",
             "itemtype": "property",
             "name": "mode",
             "default": "DESK",
@@ -4215,8 +4215,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 36,
-            "description": "Flag to set arm tracking",
+            "line": 42,
+            "description": "Flag to set arm tracking.",
             "itemtype": "property",
             "name": "useArm",
             "default": "false",
@@ -4226,7 +4226,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 88,
+            "line": 95,
             "description": "Leap tracking desktop mode",
             "itemtype": "attribute",
             "name": "DESK",
@@ -4236,7 +4236,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 95,
+            "line": 102,
             "description": "Leap tracking HDM mode",
             "itemtype": "attribute",
             "name": "DESK",
@@ -4246,7 +4246,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 102,
+            "line": 109,
             "description": "Leap SWIPE gesture",
             "itemtype": "attribute",
             "name": "SWIPE",
@@ -4256,7 +4256,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 108,
+            "line": 115,
             "description": "Leap SWIPE_LEFT gesture",
             "itemtype": "attribute",
             "name": "SWIPE_LEFT",
@@ -4266,7 +4266,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 114,
+            "line": 121,
             "description": "Leap SWIPE_RIGHT gesture",
             "itemtype": "attribute",
             "name": "SWIPE_RIGHT",
@@ -4276,7 +4276,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 120,
+            "line": 127,
             "description": "Leap SWIPE_FRONT gesture",
             "itemtype": "attribute",
             "name": "SWIPE_FRONT",
@@ -4286,7 +4286,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 126,
+            "line": 133,
             "description": "Leap SWIPE_BACK gesture",
             "itemtype": "attribute",
             "name": "SWIPE_BACK",
@@ -4296,7 +4296,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 132,
+            "line": 139,
             "description": "Leap SWIPE_UP gesture",
             "itemtype": "attribute",
             "name": "SWIPE_UP",
@@ -4306,7 +4306,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 138,
+            "line": 145,
             "description": "Leap SWIPE_DOWN gesture",
             "itemtype": "attribute",
             "name": "SWIPE_DOWN",
@@ -4316,7 +4316,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 144,
+            "line": 151,
             "description": "Leap CIRCLE gesture",
             "itemtype": "attribute",
             "name": "CIRCLE",
@@ -4326,7 +4326,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 150,
+            "line": 157,
             "description": "Leap SCREEN_TAP gesture",
             "itemtype": "attribute",
             "name": "SCREEN_TAP",
@@ -4336,7 +4336,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 156,
+            "line": 163,
             "description": "Leap KEY_TAP gesture",
             "itemtype": "attribute",
             "name": "KEY_TAP",
@@ -4346,7 +4346,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 163,
+            "line": 170,
             "description": "Hand CLOSED pose",
             "itemtype": "attribute",
             "name": "CLOSED",
@@ -4356,7 +4356,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 169,
+            "line": 176,
             "description": "Hand OPEN pose",
             "itemtype": "attribute",
             "name": "OPEN",
@@ -4366,7 +4366,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 175,
+            "line": 182,
             "description": "Hand POINTING pose",
             "itemtype": "attribute",
             "name": "POINTING",
@@ -4376,8 +4376,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 182,
-            "description": "Initialize LeapMotion object\nCalled automatically by the runtime\nConnects to the websocket provided by the leap driver",
+            "line": 189,
+            "description": "Initialize LeapMotion object.\n\nCalled automatically by the runtime.\n\nConnects to the websocket provided by the leap driver.",
             "itemtype": "method",
             "name": "initialize",
             "class": "LeapMotion",
@@ -4385,8 +4385,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 206,
-            "description": "Update leap status\nCalled automatically by the runtime",
+            "line": 216,
+            "description": "Update leap status.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
             "class": "LeapMotion",
@@ -4394,8 +4394,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 236,
-            "description": "Check if a gesture is occuring, is true while the gesture is occuring",
+            "line": 248,
+            "description": "Check if a gesture is occuring, is true while the gesture is occuring.",
             "itemtype": "method",
             "name": "checkGesture",
             "params": [
@@ -4414,8 +4414,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 251,
-            "description": "Check if hand is in pose",
+            "line": 264,
+            "description": "Check if hand is in pose.",
             "params": [
                 {
                     "name": "pose",
@@ -4432,8 +4432,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 265,
-            "description": "Set hand tracking mode\nCan be set to HDM or Desktop mode",
+            "line": 279,
+            "description": "Set hand tracking mode.\n\nCan be set to HDM or Desktop mode.",
             "params": [
                 {
                     "name": "mode",
@@ -4448,8 +4448,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 276,
-            "description": "Update leap object pose flags from collected data\nCalled automatically by the update methos",
+            "line": 292,
+            "description": "Update leap object pose flags from collected data.\n\nCalled automatically by the update methos.",
             "itemtype": "method",
             "name": "updatePoses",
             "class": "LeapMotion",
@@ -4457,8 +4457,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 350,
-            "description": "Update leap object gesture flags from collected data\nCalled automatically by the update method",
+            "line": 368,
+            "description": "Update leap object gesture flags from collected data.\n\nCalled automatically by the update method.",
             "itemtype": "method",
             "name": "updateGestures",
             "class": "LeapMotion",
@@ -4466,8 +4466,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 421,
-            "description": "Update internal hand debug model\nAutomatically called by the update method if debugModel is set to true",
+            "line": 441,
+            "description": "Update internal hand debug model.\n\nAutomatically called by the update method if debugModel is set to true.",
             "itemtype": "method",
             "name": "updateDebugModel",
             "class": "LeapMotion",
@@ -4475,8 +4475,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 483,
-            "description": "Update physics object to enable hand physics collision\nCalled by updateDebugModel automatically",
+            "line": 505,
+            "description": "Update physics object to enable hand physics collision.\n\nCalled by updateDebugModel automatically.",
             "itemtype": "method",
             "name": "updatePhysics",
             "class": "LeapMotion",
@@ -4484,8 +4484,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 547,
-            "description": "Get hand speed (temporaly normalized)",
+            "line": 571,
+            "description": "Get hand speed (temporaly normalized).",
             "itemtype": "method",
             "name": "getMovement",
             "return": {
@@ -4497,8 +4497,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 563,
-            "description": "Create JSON for object",
+            "line": 588,
+            "description": "Create JSON for object.",
             "itemtype": "method",
             "name": "toJSON",
             "class": "LeapMotion",
@@ -5941,8 +5941,29 @@
         },
         {
             "file": "..\\source\\core\\resources\\Audio.js",
-            "line": 30,
-            "description": "Serialize audio data as JSON, audio data is serialized in Base64",
+            "line": 41,
+            "description": "Check if a file name refers to a supported audio file.",
+            "itemtype": "method",
+            "name": "fileIsAudio",
+            "static": 1,
+            "params": [
+                {
+                    "name": "file",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "True if the file refers to a supported audio format.",
+                "type": "Boolean"
+            },
+            "class": "Audio",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Audio.js",
+            "line": 62,
+            "description": "Serialize audio data as JSON.\n\nAudio data is serialized in Base64.",
             "params": [
                 {
                     "name": "meta",
@@ -5959,8 +5980,69 @@
         },
         {
             "file": "..\\source\\core\\resources\\Font.js",
-            "line": 60,
-            "description": "Generate font shapes used to create 3D geometries",
+            "line": 15,
+            "description": "Font data, can be an ArrayBuffer or JSON.",
+            "itemtype": "property",
+            "name": "font",
+            "type": "{Object}",
+            "default": "null",
+            "class": "Font",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Font.js",
+            "line": 23,
+            "description": "If true the font glyphs are reversed.",
+            "itemtype": "property",
+            "name": "reversed",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "Font",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Font.js",
+            "line": 82,
+            "description": "Check if a file name refers to a font file.",
+            "itemtype": "method",
+            "name": "fileIsFont",
+            "static": 1,
+            "params": [
+                {
+                    "name": "fname",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "True if the fname refers to a supported font format.",
+                "type": "Boolean"
+            },
+            "class": "Font",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Font.js",
+            "line": 104,
+            "description": "Reverse the font glyphs.\n\nCan be used to fix fonts that have paths defined CW.",
+            "itemtype": "method",
+            "name": "reverseGlyphs",
+            "class": "Font",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Font.js",
+            "line": 118,
+            "description": "Load font from data using the TTF loader.",
+            "itemtype": "method",
+            "name": "loadTTF",
+            "class": "Font",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Font.js",
+            "line": 130,
+            "description": "Generate font shapes used to create 3D geometries.",
             "params": [
                 {
                     "name": "text",
@@ -5987,8 +6069,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\Font.js",
-            "line": 216,
-            "description": "Serialize resource to json",
+            "line": 287,
+            "description": "Serialize font resource to json.\n\nFont data is stored as Base64 is present in a binary format, or JSON otherwise.",
             "params": [
                 {
                     "name": "meta",
@@ -6004,6 +6086,54 @@
             "module": "Resources"
         },
         {
+            "file": "..\\source\\core\\resources\\Image.js",
+            "line": 69,
+            "description": "Check if a file name refers to a supported binary image file.",
+            "itemtype": "method",
+            "name": "fileIsImage",
+            "static": 1,
+            "params": [
+                {
+                    "name": "file",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "True if the file refers to a supported image format.",
+                "type": "Boolean"
+            },
+            "class": "Image",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Image.js",
+            "line": 93,
+            "description": "Encode image data to jpeg or png in base64 format.\n\nCalled automatically when serializing the image object.",
+            "itemtype": "method",
+            "name": "encodeData",
+            "class": "Image",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Image.js",
+            "line": 140,
+            "description": "Serialize Image resource to JSON.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "Image",
+            "module": "Resources"
+        },
+        {
             "file": "..\\source\\core\\resources\\Resource.js",
             "line": 13,
             "description": "Resource name. Not required to be unique.",
@@ -6015,7 +6145,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\Resource.js",
-            "line": 18,
+            "line": 19,
             "description": "UUID unique identifier.",
             "itemtype": "property",
             "name": "uuid",
@@ -6025,7 +6155,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\Resource.js",
-            "line": 23,
+            "line": 25,
             "description": "Resrouce type. Used to identify the type of the resource, usefull for serialization.",
             "itemtype": "property",
             "name": "type",
@@ -6035,8 +6165,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\Resource.js",
-            "line": 28,
-            "description": "Data format (Base64, ArrayBuffer, ...)\nIndicates in witch format the data is being stored",
+            "line": 31,
+            "description": "Data format (Base64, ArrayBuffer, ...).\n\nIndicates in witch format the data is being stored.",
             "itemtype": "property",
             "name": "format",
             "type": "{Object}",
@@ -6045,8 +6175,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\Resource.js",
-            "line": 34,
-            "description": "Data encoding (MP3, JPEG, MP4, ...)\nIndicated how the data is encoded",
+            "line": 39,
+            "description": "Data encoding (MP3, JPEG, MP4, ...).\n\nIndicated how the data is encoded.",
             "itemtype": "property",
             "name": "encoding",
             "type": "{String, ArrayBuffer, ...}",
@@ -6055,8 +6185,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\Resource.js",
-            "line": 40,
-            "description": "Data",
+            "line": 47,
+            "description": "Data.",
             "itemtype": "property",
             "name": "data",
             "type": "{Object}",
@@ -6065,8 +6195,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\Resource.js",
-            "line": 56,
-            "description": "Serialize resource to json",
+            "line": 64,
+            "description": "Serialize resource to json.",
             "params": [
                 {
                     "name": "meta",
@@ -6084,7 +6214,7 @@
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
             "line": 22,
-            "description": "Images",
+            "description": "Images.",
             "itemtype": "property",
             "name": "images",
             "type": "{Array}",
@@ -6093,8 +6223,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 27,
-            "description": "Videos",
+            "line": 28,
+            "description": "Videos.",
             "itemtype": "property",
             "name": "videos",
             "type": "{Array}",
@@ -6103,8 +6233,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 32,
-            "description": "Audio",
+            "line": 34,
+            "description": "Audio.",
             "itemtype": "property",
             "name": "audio",
             "type": "{Array}",
@@ -6113,8 +6243,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 37,
-            "description": "Fonts",
+            "line": 40,
+            "description": "Fonts.",
             "itemtype": "property",
             "name": "fonts",
             "type": "{Array}",
@@ -6123,8 +6253,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 42,
-            "description": "Materials",
+            "line": 46,
+            "description": "Materials.",
             "itemtype": "property",
             "name": "materials",
             "type": "{Array}",
@@ -6133,8 +6263,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 47,
-            "description": "Textures",
+            "line": 52,
+            "description": "Textures.",
             "itemtype": "property",
             "name": "textures",
             "type": "{Array}",
@@ -6143,8 +6273,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 52,
-            "description": "Geomtries",
+            "line": 58,
+            "description": "Geometries.",
             "itemtype": "property",
             "name": "geometries",
             "type": "{Array}",
@@ -6153,8 +6283,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 69,
-            "description": "Get material by its name",
+            "line": 76,
+            "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
             "params": [
@@ -6173,8 +6303,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 88,
-            "description": "Add material to materials list",
+            "line": 96,
+            "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
             "params": [
@@ -6189,24 +6319,24 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 101,
-            "description": "Remove material from materials list, also receives default material used to replace",
+            "line": 110,
+            "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
             "params": [
                 {
                     "name": "material",
-                    "description": "Material to be removed from manager",
+                    "description": "Material to be removed from manager.",
                     "type": "Material"
                 },
                 {
                     "name": "defaultMaterial",
-                    "description": "Default mesh material to replace objects mesh materials",
+                    "description": "Default mesh material to replace objects mesh materials.",
                     "type": "Material"
                 },
                 {
                     "name": "defaultMaterialSprite",
-                    "description": "Defaul sprite material",
+                    "description": "Defaul sprite material.",
                     "type": "Material"
                 }
             ],
@@ -6215,19 +6345,19 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 141,
-            "description": "Get texture by name",
+            "line": 151,
+            "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
             "params": [
                 {
                     "name": "name",
-                    "description": "Texture name",
+                    "description": "Texture name.",
                     "type": "String"
                 }
             ],
             "return": {
-                "description": "Texture is found else null",
+                "description": "Texture is found else null.",
                 "type": "Texture"
             },
             "class": "ResourceManager",
@@ -6235,8 +6365,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 160,
-            "description": "Add texture to texture list",
+            "line": 171,
+            "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
             "params": [
@@ -6251,8 +6381,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 170,
-            "description": "Remove texture from textures list (also receives default used to replace)",
+            "line": 182,
+            "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
             "params": [
@@ -6276,8 +6406,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 251,
-            "description": "Get font by name",
+            "line": 264,
+            "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
             "params": [
@@ -6296,8 +6426,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 270,
-            "description": "Add font to fonts list",
+            "line": 284,
+            "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
             "params": [
@@ -6312,8 +6442,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 283,
-            "description": "Remove font from font list",
+            "line": 298,
+            "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
             "params": [
@@ -6333,8 +6463,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 310,
-            "description": "Get audio by name",
+            "line": 326,
+            "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
             "params": [
@@ -6353,8 +6483,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 329,
-            "description": "Add audio to audio list",
+            "line": 346,
+            "description": "Add audio to audio list.",
             "params": [
                 {
                     "name": "audio",
@@ -6369,8 +6499,8 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 342,
-            "description": "Remove audio",
+            "line": 360,
+            "description": "Remove audio.",
             "params": [
                 {
                     "name": "audio",
@@ -6390,8 +6520,29 @@
         },
         {
             "file": "..\\source\\core\\resources\\Video.js",
-            "line": 30,
-            "description": "Serialize resource to json\nVideo is stores in Base64",
+            "line": 43,
+            "description": "Check if a file name refers to a supported video file.",
+            "itemtype": "method",
+            "name": "fileIsVideo",
+            "static": 1,
+            "params": [
+                {
+                    "name": "file",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "True if the file refers to a supported video format.",
+                "type": "Boolean"
+            },
+            "class": "Video",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\source\\core\\resources\\Video.js",
+            "line": 64,
+            "description": "Serialize resource to json.\n\nVideo data is stored in Base64.",
             "params": [
                 {
                     "name": "meta",
@@ -7698,7 +7849,7 @@
         {
             "file": "..\\source\\core\\utils\\Base64Utils.js",
             "line": 12,
-            "description": "Remove base64 header from data\nUsefull for removing the heander from image, audio, video, etc",
+            "description": "Remove base64 header from data.\n\nUsefull for removing the heander from image, audio, video, etc.",
             "itemtype": "method",
             "name": "removeHeader",
             "params": [
@@ -7717,8 +7868,28 @@
         },
         {
             "file": "..\\source\\core\\utils\\Base64Utils.js",
-            "line": 25,
-            "description": "Create base64 string from arraybuffer",
+            "line": 26,
+            "description": "Get the file format present in the base64 string.",
+            "itemtype": "method",
+            "name": "getFileFormat",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Base64 data.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "File format present in the JSON data.",
+                "type": "String"
+            },
+            "class": "Base64Utils",
+            "module": "BinaryData"
+        },
+        {
+            "file": "..\\source\\core\\utils\\Base64Utils.js",
+            "line": 41,
+            "description": "Create base64 string from arraybuffer.",
             "itemtype": "method",
             "name": "fromArraybuffer",
             "params": [
@@ -7737,8 +7908,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Base64Utils.js",
-            "line": 81,
-            "description": "Create base64 string from binary string",
+            "line": 97,
+            "description": "Create base64 string from binary string.",
             "itemtype": "method",
             "name": "fromBinaryString",
             "params": [
@@ -7807,8 +7978,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 16,
-            "description": "Type is used to indentify the type of cannonjs\n - BOX\n - CYLINDER\n - SPHERE\n - HULL",
+            "line": 17,
+            "description": "Type is used to indentify the type of cannonjs:\n - BOX\n - CYLINDER\n - SPHERE\n - HULL",
             "itemtype": "attribute",
             "name": "Type",
             "type": "{Object}",
@@ -7817,8 +7988,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 34,
-            "description": "Given a Object3D instance, creates a corresponding CANNON shape",
+            "line": 35,
+            "description": "Given a Object3D instance, creates a corresponding CANNON shape.",
             "itemtype": "method",
             "name": "createShape",
             "params": [
@@ -7842,8 +8013,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 103,
-            "description": "Create box shape from geometry",
+            "line": 104,
+            "description": "Create box shape from geometry.",
             "itemtype": "method",
             "name": "createBoxShape",
             "params": [
@@ -7862,8 +8033,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 126,
-            "description": "Bounding box needs to be computed with the entire mesh, not just geometry",
+            "line": 127,
+            "description": "Bounding box needs to be computed with the entire mesh, not just geometry.",
             "itemtype": "method",
             "name": "createBoundingBoxShape",
             "params": [
@@ -7882,8 +8053,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 161,
-            "description": "Computes 3D convex hull as a CANNON.ConvexPolyhedron",
+            "line": 162,
+            "description": "Computes 3D convex hull as a CANNON.ConvexPolyhedron.",
             "itemtype": "method",
             "name": "createConvexPolyhedron",
             "params": [
@@ -7902,8 +8073,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 211,
-            "description": "Create cylinder shape from geometry",
+            "line": 212,
+            "description": "Create cylinder shape from geometry.",
             "itemtype": "method",
             "name": "createCylinderShape",
             "params": [
@@ -7922,8 +8093,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 229,
-            "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere",
+            "line": 230,
+            "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingCylinderShape",
             "params": [
@@ -7942,8 +8113,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 256,
-            "description": "Plane shape from geometry",
+            "line": 257,
+            "description": "Plane shape from geometry.",
             "itemtype": "method",
             "name": "createPlaneShape",
             "params": [
@@ -7962,8 +8133,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 271,
-            "description": "Sphere shape from geometry",
+            "line": 272,
+            "description": "Sphere shape from geometry.",
             "itemtype": "method",
             "name": "createSphereShape",
             "params": [
@@ -7982,8 +8153,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 283,
-            "description": "Sphere shape from bouding sphere",
+            "line": 284,
+            "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingSphereShape",
             "params": [
@@ -8002,8 +8173,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 298,
-            "description": "Sphere shape from bouding sphere",
+            "line": 299,
+            "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createTubeShape",
             "params": [
@@ -8022,8 +8193,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 312,
-            "description": "Trimesh shape from geometry",
+            "line": 313,
+            "description": "Trimesh shape from geometry.",
             "itemtype": "method",
             "name": "createTrimeshShape",
             "params": [
@@ -8042,8 +8213,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 332,
-            "description": "Returns a single geometry for the given object\nIf the object is compound, its geometries are automatically merged",
+            "line": 333,
+            "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
             "itemtype": "method",
             "name": "getGeometry",
             "params": [
@@ -8062,8 +8233,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 393,
-            "description": "Get geometry vertices",
+            "line": 395,
+            "description": "Get geometry vertices.",
             "itemtype": "method",
             "name": "getVertices",
             "params": [
@@ -8082,8 +8253,8 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 409,
-            "description": "Returns a array of THREE.Mesh instances from the given object.\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
+            "line": 411,
+            "description": "Returns a array of THREE.Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
             "itemtype": "method",
             "name": "getMeshes",
             "params": [
@@ -8338,7 +8509,7 @@
             "params": [
                 {
                     "name": "fname",
-                    "description": "URL to the file, can be also a File object.",
+                    "description": "URL to the file.",
                     "type": "String"
                 },
                 {
@@ -8358,7 +8529,7 @@
                 }
             ],
             "return": {
-                "description": "File content as a string.",
+                "description": "File content as a string, null if reading async.",
                 "type": "String"
             },
             "class": "FileSystem",
@@ -8366,7 +8537,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 128,
+            "line": 98,
             "description": "Read file as arraybuffer data.",
             "itemtype": "method",
             "name": "readFileArrayBuffer",
@@ -8386,7 +8557,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 162,
+            "line": 132,
             "description": "Read file as base64 data.",
             "itemtype": "method",
             "name": "readFileBase64",
@@ -8406,7 +8577,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 187,
+            "line": 157,
             "description": "Write text file.\n\nWhen running without NWJS it writes file as a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFile",
@@ -8427,7 +8598,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 222,
+            "line": 192,
             "description": "Write binary file using base64 data.\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "writeFileBase64",
@@ -8448,7 +8619,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 243,
+            "line": 213,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -8469,7 +8640,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 260,
+            "line": 230,
             "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -8485,7 +8656,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 280,
+            "line": 250,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -8498,7 +8669,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 304,
+            "line": 274,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -8519,7 +8690,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 345,
+            "line": 315,
             "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.",
             "itemtype": "method",
             "name": "chooseFile",
@@ -8545,7 +8716,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 381,
+            "line": 351,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -8566,7 +8737,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 408,
+            "line": 378,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -8586,7 +8757,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 427,
+            "line": 397,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -8606,7 +8777,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 449,
+            "line": 419,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -8626,7 +8797,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 468,
+            "line": 438,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -8646,7 +8817,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 490,
+            "line": 460,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
@@ -8989,11 +9160,11 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:427"
+            "line": " ..\\source\\core\\FileSystem.js:397"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:449"
+            "line": " ..\\source\\core\\FileSystem.js:419"
         },
         {
             "message": "unknown tag: license",
@@ -9004,8 +9175,8 @@
             "line": " ..\\source\\core\\input\\Mouse.js:345"
         },
         {
-            "message": "Missing item type\nCheck if hand is in pose",
-            "line": " ..\\source\\core\\objects\\device\\LeapMotion.js:251"
+            "message": "Missing item type\nCheck if hand is in pose.",
+            "line": " ..\\source\\core\\objects\\device\\LeapMotion.js:264"
         },
         {
             "message": "Missing item type\nCreate JSON for object\nNeed to backup geometry and set to undefined to avoid it being stored",
@@ -9032,24 +9203,28 @@
             "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:225"
         },
         {
-            "message": "Missing item type\nSerialize audio data as JSON, audio data is serialized in Base64",
-            "line": " ..\\source\\core\\resources\\Audio.js:30"
+            "message": "Missing item type\nSerialize audio data as JSON.\n\nAudio data is serialized in Base64.",
+            "line": " ..\\source\\core\\resources\\Audio.js:62"
         },
         {
-            "message": "Missing item type\nGenerate font shapes used to create 3D geometries",
-            "line": " ..\\source\\core\\resources\\Font.js:60"
+            "message": "Missing item type\nGenerate font shapes used to create 3D geometries.",
+            "line": " ..\\source\\core\\resources\\Font.js:130"
         },
         {
-            "message": "Missing item type\nSerialize resource to json",
-            "line": " ..\\source\\core\\resources\\Font.js:216"
+            "message": "Missing item type\nSerialize font resource to json.\n\nFont data is stored as Base64 is present in a binary format, or JSON otherwise.",
+            "line": " ..\\source\\core\\resources\\Font.js:287"
         },
         {
-            "message": "Missing item type\nSerialize resource to json",
-            "line": " ..\\source\\core\\resources\\Resource.js:56"
+            "message": "Missing item type\nSerialize Image resource to JSON.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
+            "line": " ..\\source\\core\\resources\\Image.js:140"
         },
         {
-            "message": "Missing item type\nSerialize resource to json\nVideo is stores in Base64",
-            "line": " ..\\source\\core\\resources\\Video.js:30"
+            "message": "Missing item type\nSerialize resource to json.",
+            "line": " ..\\source\\core\\resources\\Resource.js:64"
+        },
+        {
+            "message": "Missing item type\nSerialize resource to json.\n\nVideo data is stored in Base64.",
+            "line": " ..\\source\\core\\resources\\Video.js:64"
         },
         {
             "message": "Missing item type\nCreate Video texture json description",

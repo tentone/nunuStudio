@@ -61,7 +61,7 @@ Nunu.runningOnDesktop = function() {
     this.x = d || 0;
     this.y = n || 0;
   }
-  function b(d, n, a, c, g, e, m, k, h, q) {
+  function b(d, n, a, c, g, e, h, m, k, q) {
     Object.defineProperty(this, "id", {value:$e++});
     this.uuid = la.generateUUID();
     this.name = "";
@@ -72,9 +72,9 @@ Nunu.runningOnDesktop = function() {
     this.wrapT = void 0 !== c ? c : 1001;
     this.magFilter = void 0 !== g ? g : 1006;
     this.minFilter = void 0 !== e ? e : 1008;
-    this.anisotropy = void 0 !== h ? h : 1;
-    this.format = void 0 !== m ? m : 1023;
-    this.type = void 0 !== k ? k : 1009;
+    this.anisotropy = void 0 !== k ? k : 1;
+    this.format = void 0 !== h ? h : 1023;
+    this.type = void 0 !== m ? m : 1009;
     this.offset = new l(0, 0);
     this.repeat = new l(1, 1);
     this.generateMipmaps = !0;
@@ -124,17 +124,17 @@ Nunu.runningOnDesktop = function() {
     this.elements = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
     0 < arguments.length && console.error("THREE.Matrix4: the constructor no longer reads arguments. use .set() instead.");
   }
-  function r(d, n, a, c, g, e, m, k, h, q, f, r) {
-    b.call(this, null, e, m, k, h, q, c, g, f, r);
+  function r(d, n, a, c, g, e, h, m, k, q, f, r) {
+    b.call(this, null, e, h, m, k, q, c, g, f, r);
     this.image = {data:d, width:n, height:a};
-    this.magFilter = void 0 !== h ? h : 1003;
+    this.magFilter = void 0 !== k ? k : 1003;
     this.minFilter = void 0 !== q ? q : 1003;
     this.flipY = this.generateMipmaps = !1;
     this.unpackAlignment = 1;
   }
-  function w(d, n, a, c, g, e, m, h, k, q) {
+  function w(d, n, a, c, g, e, h, m, k, q) {
     d = void 0 !== d ? d : [];
-    b.call(this, d, void 0 !== n ? n : 301, a, c, g, e, m, h, k, q);
+    b.call(this, d, void 0 !== n ? n : 301, a, c, g, e, h, m, k, q);
     this.flipY = !1;
   }
   function p(d, n, a) {
@@ -330,11 +330,11 @@ Nunu.runningOnDesktop = function() {
     this.renderer = a;
     a = d.getProgramParameter(n, d.ACTIVE_UNIFORMS);
     for (var A = 0;A < a;++A) {
-      var b = d.getActiveUniform(n, A), c = d.getUniformLocation(n, b.name), g = this, e = b.name, m = e.length;
+      var b = d.getActiveUniform(n, A), c = d.getUniformLocation(n, b.name), g = this, e = b.name, h = e.length;
       for (Xd.lastIndex = 0;;) {
-        var h = Xd.exec(e), k = Xd.lastIndex, q = h[1], f = h[3];
-        "]" === h[2] && (q |= 0);
-        if (void 0 === f || "[" === f && k + 2 === m) {
+        var m = Xd.exec(e), k = Xd.lastIndex, q = m[1], f = m[3];
+        "]" === m[2] && (q |= 0);
+        if (void 0 === f || "[" === f && k + 2 === h) {
           e = g;
           b = void 0 === f ? new V(q, b, c) : new ga(q, b, c);
           e.seq.push(b);
@@ -354,7 +354,7 @@ Nunu.runningOnDesktop = function() {
     this.max = void 0 !== n ? n : new l(-Infinity, -Infinity);
   }
   function qa(d, n) {
-    var a, b, c, e, h, m, k, q, f, r, p = d.context, u = d.state, w, t, v, B, y;
+    var a, b, c, e, m, h, k, q, f, r, p = d.context, u = d.state, w, t, v, B, y;
     this.render = function(A, G, O) {
       if (0 !== n.length) {
         A = new g;
@@ -400,8 +400,8 @@ Nunu.runningOnDesktop = function() {
           b = p.getUniformLocation(v, "map");
           c = p.getUniformLocation(v, "occlusionMap");
           e = p.getUniformLocation(v, "opacity");
-          h = p.getUniformLocation(v, "color");
-          m = p.getUniformLocation(v, "scale");
+          m = p.getUniformLocation(v, "color");
+          h = p.getUniformLocation(v, "scale");
           k = p.getUniformLocation(v, "rotation");
           q = p.getUniformLocation(v, "screenPosition");
         }
@@ -427,7 +427,7 @@ Nunu.runningOnDesktop = function() {
             u.bindTexture(p.TEXTURE_2D, B);
             p.copyTexImage2D(p.TEXTURE_2D, 0, p.RGB, Ab.x, Ab.y, 16, 16, 0);
             p.uniform1i(a, 0);
-            p.uniform2f(m, z.x, z.y);
+            p.uniform2f(h, z.x, z.y);
             p.uniform3f(q, D.x, D.y, D.z);
             u.disable(p.BLEND);
             u.enable(p.DEPTH_TEST);
@@ -446,7 +446,7 @@ Nunu.runningOnDesktop = function() {
             u.enable(p.BLEND);
             for (var C = 0, af = F.lensFlares.length;C < af;C++) {
               var Ja = F.lensFlares[C];
-              .001 < Ja.opacity && .001 < Ja.scale && (D.x = Ja.x, D.y = Ja.y, D.z = Ja.z, x = Ja.size * Ja.scale / O.w, z.x = x * Y, z.y = x, p.uniform3f(q, D.x, D.y, D.z), p.uniform2f(m, z.x, z.y), p.uniform1f(k, Ja.rotation), p.uniform1f(e, Ja.opacity), p.uniform3f(h, Ja.color.r, Ja.color.g, Ja.color.b), u.setBlending(Ja.blending, Ja.blendEquation, Ja.blendSrc, Ja.blendDst), d.setTexture2D(Ja.texture, 1), p.drawElements(p.TRIANGLES, 6, p.UNSIGNED_SHORT, 0));
+              .001 < Ja.opacity && .001 < Ja.scale && (D.x = Ja.x, D.y = Ja.y, D.z = Ja.z, x = Ja.size * Ja.scale / O.w, z.x = x * Y, z.y = x, p.uniform3f(q, D.x, D.y, D.z), p.uniform2f(h, z.x, z.y), p.uniform1f(k, Ja.rotation), p.uniform1f(e, Ja.opacity), p.uniform3f(m, Ja.color.r, Ja.color.g, Ja.color.b), u.setBlending(Ja.blending, Ja.blendEquation, Ja.blendSrc, Ja.blendDst), d.setTexture2D(Ja.texture, 1), p.drawElements(p.TRIANGLES, 6, p.UNSIGNED_SHORT, 0));
             }
           }
         }
@@ -1149,15 +1149,15 @@ Nunu.runningOnDesktop = function() {
       a.geometries++;
       return c;
     }, update:function(a) {
-      var b = a.index, A = a.attributes;
-      null !== b && n.update(b, d.ELEMENT_ARRAY_BUFFER);
-      for (var c in A) {
-        n.update(A[c], d.ARRAY_BUFFER);
+      var A = a.index, b = a.attributes;
+      null !== A && n.update(A, d.ELEMENT_ARRAY_BUFFER);
+      for (var c in b) {
+        n.update(b[c], d.ARRAY_BUFFER);
       }
       a = a.morphAttributes;
       for (c in a) {
-        for (var b = a[c], A = 0, g = b.length;A < g;A++) {
-          n.update(b[A], d.ARRAY_BUFFER);
+        for (var A = a[c], b = 0, g = A.length;b < g;b++) {
+          n.update(A[b], d.ARRAY_BUFFER);
         }
       }
     }, getWireframeAttribute:function(a) {
@@ -3852,55 +3852,55 @@ Nunu.runningOnDesktop = function() {
       a.applyMatrix4(p);
       n.push(new yd(a.clone(), b.clone()));
     }
-    function A(d, a) {
-      for (var n = [], c = .5 * Math.abs(b.dot(a)), A = 0;A < d.length;A += 3) {
+    function A(d, n) {
+      for (var a = [], c = .5 * Math.abs(b.dot(n)), A = 0;A < d.length;A += 3) {
         var g, m, h, k, q, f, G;
-        g = d[A + 0].position.dot(a) - c;
-        m = d[A + 1].position.dot(a) - c;
-        h = d[A + 2].position.dot(a) - c;
+        g = d[A + 0].position.dot(n) - c;
+        m = d[A + 1].position.dot(n) - c;
+        h = d[A + 2].position.dot(n) - c;
         g = 0 < g;
         m = 0 < m;
         h = 0 < h;
         switch((g ? 1 : 0) + (m ? 1 : 0) + (h ? 1 : 0)) {
           case 0:
-            n.push(d[A]);
-            n.push(d[A + 1]);
-            n.push(d[A + 2]);
+            a.push(d[A]);
+            a.push(d[A + 1]);
+            a.push(d[A + 2]);
             break;
           case 1:
-            g && (k = d[A + 1], q = d[A + 2], f = e(d[A], k, a, c), G = e(d[A], q, a, c));
+            g && (k = d[A + 1], q = d[A + 2], f = e(d[A], k, n, c), G = e(d[A], q, n, c));
             if (m) {
               k = d[A];
               q = d[A + 2];
-              f = e(d[A + 1], k, a, c);
-              G = e(d[A + 1], q, a, c);
-              n.push(f);
-              n.push(q.clone());
-              n.push(k.clone());
-              n.push(q.clone());
-              n.push(f.clone());
-              n.push(G);
+              f = e(d[A + 1], k, n, c);
+              G = e(d[A + 1], q, n, c);
+              a.push(f);
+              a.push(q.clone());
+              a.push(k.clone());
+              a.push(q.clone());
+              a.push(f.clone());
+              a.push(G);
               break;
             }
-            h && (k = d[A], q = d[A + 1], f = e(d[A + 2], k, a, c), G = e(d[A + 2], q, a, c));
-            n.push(k.clone());
-            n.push(q.clone());
-            n.push(f);
-            n.push(G);
-            n.push(f.clone());
-            n.push(q.clone());
+            h && (k = d[A], q = d[A + 1], f = e(d[A + 2], k, n, c), G = e(d[A + 2], q, n, c));
+            a.push(k.clone());
+            a.push(q.clone());
+            a.push(f);
+            a.push(G);
+            a.push(f.clone());
+            a.push(q.clone());
             break;
           case 2:
-            g || (k = d[A].clone(), q = e(k, d[A + 1], a, c), f = e(k, d[A + 2], a, c), n.push(k), n.push(q), n.push(f)), m || (k = d[A + 1].clone(), q = e(k, d[A + 2], a, c), f = e(k, d[A], a, c), n.push(k), n.push(q), n.push(f)), h || (k = d[A + 2].clone(), q = e(k, d[A], a, c), f = e(k, d[A + 1], a, c), n.push(k), n.push(q), n.push(f));
+            g || (k = d[A].clone(), q = e(k, d[A + 1], n, c), f = e(k, d[A + 2], n, c), a.push(k), a.push(q), a.push(f)), m || (k = d[A + 1].clone(), q = e(k, d[A + 2], n, c), f = e(k, d[A], n, c), a.push(k), a.push(q), a.push(f)), h || (k = d[A + 2].clone(), q = e(k, d[A], n, c), f = e(k, d[A + 1], n, c), a.push(k), a.push(q), a.push(f));
         }
       }
-      return n;
+      return a;
     }
-    function e(d, n, a, b) {
-      var c = d.position.dot(a) - b;
-      a = n.position.dot(a) - b;
-      c /= c - a;
-      return new yd(new g(d.position.x + c * (n.position.x - d.position.x), d.position.y + c * (n.position.y - d.position.y), d.position.z + c * (n.position.z - d.position.z)), new g(d.normal.x + c * (n.normal.x - d.normal.x), d.normal.y + c * (n.normal.y - d.normal.y), d.normal.z + c * (n.normal.z - d.normal.z)));
+    function e(d, a, n, b) {
+      var c = d.position.dot(n) - b;
+      n = a.position.dot(n) - b;
+      c /= c - n;
+      return new yd(new g(d.position.x + c * (a.position.x - d.position.x), d.position.y + c * (a.position.y - d.position.y), d.position.z + c * (a.position.z - d.position.z)), new g(d.normal.x + c * (a.normal.x - d.normal.x), d.normal.y + c * (a.normal.y - d.normal.y), d.normal.z + c * (a.normal.z - d.normal.z)));
     }
     aa.call(this);
     this.type = "DecalGeometry";
@@ -3909,38 +3909,38 @@ Nunu.runningOnDesktop = function() {
     G.setPosition(n);
     var p = (new q).getInverse(G);
     (function() {
-      var n;
-      n = new aa;
-      var a = [], e = new g, q = new g;
-      d.geometry.isGeometry ? n.fromGeometry(d.geometry) : n.copy(d.geometry);
-      var p = n.attributes.position, r = n.attributes.normal;
-      if (null !== n.index) {
-        var l = n.index;
-        for (n = 0;n < l.count;n++) {
-          e.fromBufferAttribute(p, l.getX(n)), q.fromBufferAttribute(r, l.getX(n)), c(a, e, q);
+      var a;
+      a = new aa;
+      var n = [], e = new g, q = new g;
+      d.geometry.isGeometry ? a.fromGeometry(d.geometry) : a.copy(d.geometry);
+      var p = a.attributes.position, r = a.attributes.normal;
+      if (null !== a.index) {
+        var l = a.index;
+        for (a = 0;a < l.count;a++) {
+          e.fromBufferAttribute(p, l.getX(a)), q.fromBufferAttribute(r, l.getX(a)), c(n, e, q);
         }
       } else {
-        for (n = 0;n < p.count;n++) {
-          e.fromBufferAttribute(p, n), q.fromBufferAttribute(r, n), c(a, e, q);
+        for (a = 0;a < p.count;a++) {
+          e.fromBufferAttribute(p, a), q.fromBufferAttribute(r, a), c(n, e, q);
         }
       }
-      a = A(a, f.set(1, 0, 0));
-      a = A(a, f.set(-1, 0, 0));
-      a = A(a, f.set(0, 1, 0));
-      a = A(a, f.set(0, -1, 0));
-      a = A(a, f.set(0, 0, 1));
-      a = A(a, f.set(0, 0, -1));
-      for (n = 0;n < a.length;n++) {
-        e = a[n], k.push(.5 + e.position.x / b.x, .5 + e.position.y / b.y), e.position.applyMatrix4(G), m.push(e.position.x, e.position.y, e.position.z), h.push(e.normal.x, e.normal.y, e.normal.z);
+      n = A(n, f.set(1, 0, 0));
+      n = A(n, f.set(-1, 0, 0));
+      n = A(n, f.set(0, 1, 0));
+      n = A(n, f.set(0, -1, 0));
+      n = A(n, f.set(0, 0, 1));
+      n = A(n, f.set(0, 0, -1));
+      for (a = 0;a < n.length;a++) {
+        e = n[a], k.push(.5 + e.position.x / b.x, .5 + e.position.y / b.y), e.position.applyMatrix4(G), m.push(e.position.x, e.position.y, e.position.z), h.push(e.normal.x, e.normal.y, e.normal.z);
       }
     })();
     this.addAttribute("position", new T(m, 3));
     this.addAttribute("normal", new T(h, 3));
     this.addAttribute("uv", new T(k, 2));
   }
-  function yd(d, n) {
+  function yd(d, a) {
     this.position = d;
-    this.normal = n;
+    this.normal = a;
   }
   function mc() {
     ua.call(this, {uniforms:Pa.merge([ka.lights, {opacity:{value:1}}]), vertexShader:ha.shadow_vert, fragmentShader:ha.shadow_frag});
@@ -4072,31 +4072,31 @@ Nunu.runningOnDesktop = function() {
     this.lights = !1;
     this.setValues(d);
   }
-  function de(d, n, a) {
-    var b = this, c = !1, A = 0, g = 0;
+  function de(d, a, b) {
+    var n = this, c = !1, A = 0, g = 0;
     this.onStart = void 0;
     this.onLoad = d;
-    this.onProgress = n;
-    this.onError = a;
+    this.onProgress = a;
+    this.onError = b;
     this.itemStart = function(d) {
       g++;
-      if (!1 === c && void 0 !== b.onStart) {
-        b.onStart(d, A, g);
+      if (!1 === c && void 0 !== n.onStart) {
+        n.onStart(d, A, g);
       }
       c = !0;
     };
     this.itemEnd = function(d) {
       A++;
-      if (void 0 !== b.onProgress) {
-        b.onProgress(d, A, g);
+      if (void 0 !== n.onProgress) {
+        n.onProgress(d, A, g);
       }
-      if (A === g && (c = !1, void 0 !== b.onLoad)) {
-        b.onLoad();
+      if (A === g && (c = !1, void 0 !== n.onLoad)) {
+        n.onLoad();
       }
     };
     this.itemError = function(d) {
-      if (void 0 !== b.onError) {
-        b.onError(d);
+      if (void 0 !== n.onError) {
+        n.onError(d);
       }
     };
   }
@@ -4120,20 +4120,20 @@ Nunu.runningOnDesktop = function() {
   function zd(d) {
     this.manager = void 0 !== d ? d : Ta;
   }
-  function xa(d, n) {
+  function xa(d, a) {
     X.call(this);
     this.type = "Light";
     this.color = new W(d);
-    this.intensity = void 0 !== n ? n : 1;
+    this.intensity = void 0 !== a ? a : 1;
     this.receiveShadow = void 0;
   }
-  function Ad(d, n, a) {
-    xa.call(this, d, a);
+  function Ad(d, a, b) {
+    xa.call(this, d, b);
     this.type = "HemisphereLight";
     this.castShadow = void 0;
     this.position.copy(X.DefaultUp);
     this.updateMatrix();
-    this.groundColor = new W(n);
+    this.groundColor = new W(a);
   }
   function Mb(d) {
     this.camera = d;
@@ -4146,8 +4146,8 @@ Nunu.runningOnDesktop = function() {
   function Bd() {
     Mb.call(this, new La(50, 1, .5, 500));
   }
-  function Cd(d, n, a, b, c, g) {
-    xa.call(this, d, n);
+  function Cd(d, a, b, c, g, e) {
+    xa.call(this, d, a);
     this.type = "SpotLight";
     this.position.copy(X.DefaultUp);
     this.updateMatrix();
@@ -4157,54 +4157,54 @@ Nunu.runningOnDesktop = function() {
     }, set:function(d) {
       this.intensity = d / Math.PI;
     }});
-    this.distance = void 0 !== a ? a : 0;
-    this.angle = void 0 !== b ? b : Math.PI / 3;
-    this.penumbra = void 0 !== c ? c : 0;
-    this.decay = void 0 !== g ? g : 1;
+    this.distance = void 0 !== b ? b : 0;
+    this.angle = void 0 !== c ? c : Math.PI / 3;
+    this.penumbra = void 0 !== g ? g : 0;
+    this.decay = void 0 !== e ? e : 1;
     this.shadow = new Bd;
   }
-  function Dd(d, n, a, b) {
-    xa.call(this, d, n);
+  function Dd(d, a, b, c) {
+    xa.call(this, d, a);
     this.type = "PointLight";
     Object.defineProperty(this, "power", {get:function() {
       return 4 * this.intensity * Math.PI;
     }, set:function(d) {
       this.intensity = d / (4 * Math.PI);
     }});
-    this.distance = void 0 !== a ? a : 0;
-    this.decay = void 0 !== b ? b : 1;
+    this.distance = void 0 !== b ? b : 0;
+    this.decay = void 0 !== c ? c : 1;
     this.shadow = new Mb(new La(90, 1, .5, 500));
   }
   function Ed() {
     Mb.call(this, new Ub(-5, 5, 5, -5, .5, 500));
   }
-  function Fd(d, n) {
-    xa.call(this, d, n);
+  function Fd(d, a) {
+    xa.call(this, d, a);
     this.type = "DirectionalLight";
     this.position.copy(X.DefaultUp);
     this.updateMatrix();
     this.target = new X;
     this.shadow = new Ed;
   }
-  function Gd(d, n) {
-    xa.call(this, d, n);
+  function Gd(d, a) {
+    xa.call(this, d, a);
     this.type = "AmbientLight";
     this.castShadow = void 0;
   }
-  function Hd(d, n, a, b) {
-    xa.call(this, d, n);
+  function Hd(d, a, b, c) {
+    xa.call(this, d, a);
     this.type = "RectAreaLight";
     this.position.set(0, 1, 0);
     this.updateMatrix();
-    this.width = void 0 !== a ? a : 10;
-    this.height = void 0 !== b ? b : 10;
+    this.width = void 0 !== b ? b : 10;
+    this.height = void 0 !== c ? c : 10;
   }
-  function Ua(d, n, a, b) {
+  function Ua(d, a, b, c) {
     this.parameterPositions = d;
     this._cachedIndex = 0;
-    this.resultBuffer = void 0 !== b ? b : new n.constructor(a);
-    this.sampleValues = n;
-    this.valueSize = a;
+    this.resultBuffer = void 0 !== c ? c : new a.constructor(b);
+    this.sampleValues = a;
+    this.valueSize = b;
   }
   function Id(d, a, b, c) {
     Ua.call(this, d, a, b, c);
@@ -6409,27 +6409,27 @@ Nunu.runningOnDesktop = function() {
     return this;
   }, decompose:function() {
     var d = new g, a = new q;
-    return function(n, b, c) {
+    return function(b, n, c) {
       var g = this.elements, e = d.set(g[0], g[1], g[2]).length(), m = d.set(g[4], g[5], g[6]).length(), h = d.set(g[8], g[9], g[10]).length();
       0 > this.determinant() && (e = -e);
-      n.x = g[12];
-      n.y = g[13];
-      n.z = g[14];
-      for (n = 0;16 > n;n++) {
-        a.elements[n] = this.elements[n];
+      b.x = g[12];
+      b.y = g[13];
+      b.z = g[14];
+      for (b = 0;16 > b;b++) {
+        a.elements[b] = this.elements[b];
       }
-      n = 1 / e;
+      b = 1 / e;
       var g = 1 / m, k = 1 / h;
-      a.elements[0] *= n;
-      a.elements[1] *= n;
-      a.elements[2] *= n;
+      a.elements[0] *= b;
+      a.elements[1] *= b;
+      a.elements[2] *= b;
       a.elements[4] *= g;
       a.elements[5] *= g;
       a.elements[6] *= g;
       a.elements[8] *= k;
       a.elements[9] *= k;
       a.elements[10] *= k;
-      b.setFromRotationMatrix(a);
+      n.setFromRotationMatrix(a);
       c.x = e;
       c.y = m;
       c.z = h;
@@ -6485,30 +6485,30 @@ Nunu.runningOnDesktop = function() {
     return !0;
   }, fromArray:function(d, a) {
     void 0 === a && (a = 0);
-    for (var n = 0;16 > n;n++) {
-      this.elements[n] = d[n + a];
+    for (var b = 0;16 > b;b++) {
+      this.elements[b] = d[b + a];
     }
     return this;
   }, toArray:function(d, a) {
     void 0 === d && (d = []);
     void 0 === a && (a = 0);
-    var n = this.elements;
-    d[a] = n[0];
-    d[a + 1] = n[1];
-    d[a + 2] = n[2];
-    d[a + 3] = n[3];
-    d[a + 4] = n[4];
-    d[a + 5] = n[5];
-    d[a + 6] = n[6];
-    d[a + 7] = n[7];
-    d[a + 8] = n[8];
-    d[a + 9] = n[9];
-    d[a + 10] = n[10];
-    d[a + 11] = n[11];
-    d[a + 12] = n[12];
-    d[a + 13] = n[13];
-    d[a + 14] = n[14];
-    d[a + 15] = n[15];
+    var b = this.elements;
+    d[a] = b[0];
+    d[a + 1] = b[1];
+    d[a + 2] = b[2];
+    d[a + 3] = b[3];
+    d[a + 4] = b[4];
+    d[a + 5] = b[5];
+    d[a + 6] = b[6];
+    d[a + 7] = b[7];
+    d[a + 8] = b[8];
+    d[a + 9] = b[9];
+    d[a + 10] = b[10];
+    d[a + 11] = b[11];
+    d[a + 12] = b[12];
+    d[a + 13] = b[13];
+    d[a + 14] = b[14];
+    d[a + 15] = b[15];
     return d;
   }});
   r.prototype = Object.create(b.prototype);
@@ -6524,8 +6524,8 @@ Nunu.runningOnDesktop = function() {
   }});
   var Ge = new b, He = new w, Ce = [], De = [], Fe = new Float32Array(16), Ee = new Float32Array(9);
   ta.prototype.setValue = function(d, a) {
-    for (var n = this.seq, b = 0, c = n.length;b !== c;++b) {
-      var g = n[b];
+    for (var b = this.seq, n = 0, c = b.length;n !== c;++n) {
+      var g = b[n];
       g.setValue(d, a[g.id]);
     }
   };
@@ -6549,11 +6549,11 @@ Nunu.runningOnDesktop = function() {
     }
   };
   ma.seqWithValue = function(d, a) {
-    for (var n = [], b = 0, c = d.length;b !== c;++b) {
-      var g = d[b];
-      g.id in a && n.push(g);
+    for (var b = [], n = 0, c = d.length;n !== c;++n) {
+      var g = d[n];
+      g.id in a && b.push(g);
     }
-    return n;
+    return b;
   };
   var xf = {aliceblue:15792383, antiquewhite:16444375, aqua:65535, aquamarine:8388564, azure:15794175, beige:16119260, bisque:16770244, black:0, blanchedalmond:16772045, blue:255, blueviolet:9055202, brown:10824234, burlywood:14596231, cadetblue:6266528, chartreuse:8388352, chocolate:13789470, coral:16744272, cornflowerblue:6591981, cornsilk:16775388, crimson:14423100, cyan:65535, darkblue:139, darkcyan:35723, darkgoldenrod:12092939, darkgray:11119017, darkgreen:25600, darkgrey:11119017, darkkhaki:12433259, 
   darkmagenta:9109643, darkolivegreen:5597999, darkorange:16747520, darkorchid:10040012, darkred:9109504, darksalmon:15308410, darkseagreen:9419919, darkslateblue:4734347, darkslategray:3100495, darkslategrey:3100495, darkturquoise:52945, darkviolet:9699539, deeppink:16716947, deepskyblue:49151, dimgray:6908265, dimgrey:6908265, dodgerblue:2003199, firebrick:11674146, floralwhite:16775920, forestgreen:2263842, fuchsia:16711935, gainsboro:14474460, ghostwhite:16316671, gold:16766720, goldenrod:14329120, 
@@ -9209,50 +9209,50 @@ Nunu.runningOnDesktop = function() {
       }
     }
   }, raycast:function() {
-    function d(d, a, b, c, e, n, g) {
+    function d(d, a, b, c, e, g, n) {
       Ga.barycoordFromPoint(d, a, b, c, B);
       e.multiplyScalar(B.x);
-      n.multiplyScalar(B.y);
-      g.multiplyScalar(B.z);
-      e.add(n).add(g);
+      g.multiplyScalar(B.y);
+      n.multiplyScalar(B.z);
+      e.add(g).add(n);
       return e.clone();
     }
-    function a(d, a, b, c, e, n, g) {
+    function a(d, a, b, c, e, g, n) {
       var m = d.material;
-      if (null === (1 === m.side ? b.intersectTriangle(n, e, c, !0, g) : b.intersectTriangle(c, e, n, 2 !== m.side, g))) {
+      if (null === (1 === m.side ? b.intersectTriangle(g, e, c, !0, n) : b.intersectTriangle(c, e, g, 2 !== m.side, n))) {
         return null;
       }
-      z.copy(g);
+      z.copy(n);
       z.applyMatrix4(d.matrixWorld);
       b = a.ray.origin.distanceTo(z);
       return b < a.near || b > a.far ? null : {distance:b, point:z.clone(), object:d};
     }
-    function b(b, c, e, n, g, m, q, p) {
-      h.fromBufferAttribute(n, m);
-      k.fromBufferAttribute(n, q);
-      f.fromBufferAttribute(n, p);
+    function b(b, c, e, g, n, m, q, p) {
+      h.fromBufferAttribute(g, m);
+      k.fromBufferAttribute(g, q);
+      f.fromBufferAttribute(g, p);
       if (b = a(b, c, e, h, k, f, y)) {
-        g && (w.fromBufferAttribute(g, m), t.fromBufferAttribute(g, q), v.fromBufferAttribute(g, p), b.uv = d(y, h, k, f, w, t, v)), b.face = new Ca(m, q, p, Ga.normal(h, k, f)), b.faceIndex = m;
+        n && (w.fromBufferAttribute(n, m), t.fromBufferAttribute(n, q), v.fromBufferAttribute(n, p), b.uv = d(y, h, k, f, w, t, v)), b.face = new Ca(m, q, p, Ga.normal(h, k, f)), b.faceIndex = m;
       }
       return b;
     }
     var c = new q, e = new ob, m = new ca, h = new g, k = new g, f = new g, p = new g, r = new g, u = new g, w = new l, t = new l, v = new l, B = new g, y = new g, z = new g;
-    return function(n, g) {
+    return function(g, n) {
       var q = this.geometry, l = this.material, A = this.matrixWorld;
-      if (void 0 !== l && (null === q.boundingSphere && q.computeBoundingSphere(), m.copy(q.boundingSphere), m.applyMatrix4(A), !1 !== n.ray.intersectsSphere(m) && (c.getInverse(A), e.copy(n.ray).applyMatrix4(c), null === q.boundingBox || !1 !== e.intersectsBox(q.boundingBox)))) {
+      if (void 0 !== l && (null === q.boundingSphere && q.computeBoundingSphere(), m.copy(q.boundingSphere), m.applyMatrix4(A), !1 !== g.ray.intersectsSphere(m) && (c.getInverse(A), e.copy(g.ray).applyMatrix4(c), null === q.boundingBox || !1 !== e.intersectsBox(q.boundingBox)))) {
         var B;
         if (q.isBufferGeometry) {
           var G, z, l = q.index, x = q.attributes.position, A = q.attributes.uv, O, D;
           if (null !== l) {
             for (O = 0, D = l.count;O < D;O += 3) {
-              if (q = l.getX(O), G = l.getX(O + 1), z = l.getX(O + 2), B = b(this, n, e, x, A, q, G, z)) {
-                B.faceIndex = Math.floor(O / 3), g.push(B);
+              if (q = l.getX(O), G = l.getX(O + 1), z = l.getX(O + 2), B = b(this, g, e, x, A, q, G, z)) {
+                B.faceIndex = Math.floor(O / 3), n.push(B);
               }
             }
           } else {
             for (O = 0, D = x.count;O < D;O += 3) {
-              if (q = O, G = O + 1, z = O + 2, B = b(this, n, e, x, A, q, G, z)) {
-                B.index = q, g.push(B);
+              if (q = O, G = O + 1, z = O + 2, B = b(this, g, e, x, A, q, G, z)) {
+                B.index = q, n.push(B);
               }
             }
           }
@@ -9292,8 +9292,8 @@ Nunu.runningOnDesktop = function() {
                   z = k;
                   E = f;
                 }
-                if (B = a(this, n, e, G, z, E, y)) {
-                  x && x[C] && (Y = x[C], w.copy(Y[0]), t.copy(Y[1]), v.copy(Y[2]), B.uv = d(y, G, z, E, w, t, v)), B.face = F, B.faceIndex = C, g.push(B);
+                if (B = a(this, g, e, G, z, E, y)) {
+                  x && x[C] && (Y = x[C], w.copy(Y[0]), t.copy(Y[1]), v.copy(Y[2]), B.uv = d(y, G, z, E, w, t, v)), B.face = F, B.faceIndex = C, n.push(B);
                 }
               }
             }
@@ -10822,64 +10822,64 @@ Nunu.runningOnDesktop = function() {
   }});
   Object.assign(Ua.prototype, {beforeStart_:Ua.prototype.copySampleValue_, afterEnd_:Ua.prototype.copySampleValue_});
   Id.prototype = Object.assign(Object.create(Ua.prototype), {constructor:Id, DefaultSettings_:{endingStart:2400, endingEnd:2400}, intervalChanged_:function(d, a, b) {
-    var c = this.parameterPositions, e = d - 2, g = d + 1, n = c[e], m = c[g];
-    if (void 0 === n) {
+    var c = this.parameterPositions, e = d - 2, g = d + 1, m = c[e], n = c[g];
+    if (void 0 === m) {
       switch(this.getSettings_().endingStart) {
         case 2401:
           e = d;
-          n = 2 * a - b;
+          m = 2 * a - b;
           break;
         case 2402:
           e = c.length - 2;
-          n = a + c[e] - c[e + 1];
+          m = a + c[e] - c[e + 1];
           break;
         default:
-          e = d, n = b;
+          e = d, m = b;
       }
     }
-    if (void 0 === m) {
+    if (void 0 === n) {
       switch(this.getSettings_().endingEnd) {
         case 2401:
           g = d;
-          m = 2 * b - a;
+          n = 2 * b - a;
           break;
         case 2402:
           g = 1;
-          m = b + c[1] - c[0];
+          n = b + c[1] - c[0];
           break;
         default:
-          g = d - 1, m = a;
+          g = d - 1, n = a;
       }
     }
     d = .5 * (b - a);
     c = this.valueSize;
-    this._weightPrev = d / (a - n);
-    this._weightNext = d / (m - b);
+    this._weightPrev = d / (a - m);
+    this._weightNext = d / (n - b);
     this._offsetPrev = e * c;
     this._offsetNext = g * c;
   }, interpolate_:function(d, a, b, c) {
-    var e = this.resultBuffer, g = this.sampleValues, n = this.valueSize;
-    d *= n;
-    var m = d - n, h = this._offsetPrev, k = this._offsetNext, q = this._weightPrev, f = this._weightNext, p = (b - a) / (c - a);
+    var e = this.resultBuffer, g = this.sampleValues, m = this.valueSize;
+    d *= m;
+    var n = d - m, h = this._offsetPrev, k = this._offsetNext, q = this._weightPrev, f = this._weightNext, p = (b - a) / (c - a);
     b = p * p;
     c = b * p;
     a = -q * c + 2 * q * b - q * p;
     q = (1 + q) * c + (-1.5 - 2 * q) * b + (-.5 + q) * p + 1;
     p = (-1 - f) * c + (1.5 + f) * b + .5 * p;
     f = f * c - f * b;
-    for (b = 0;b !== n;++b) {
-      e[b] = a * g[h + b] + q * g[m + b] + p * g[d + b] + f * g[k + b];
+    for (b = 0;b !== m;++b) {
+      e[b] = a * g[h + b] + q * g[n + b] + p * g[d + b] + f * g[k + b];
     }
     return e;
   }});
   bd.prototype = Object.assign(Object.create(Ua.prototype), {constructor:bd, interpolate_:function(d, a, b, c) {
-    var e = this.resultBuffer, g = this.sampleValues, n = this.valueSize;
-    d *= n;
-    var m = d - n;
+    var e = this.resultBuffer, g = this.sampleValues, m = this.valueSize;
+    d *= m;
+    var n = d - m;
     a = (b - a) / (c - a);
     b = 1 - a;
-    for (c = 0;c !== n;++c) {
-      e[c] = g[m + c] * b + g[d + c] * a;
+    for (c = 0;c !== m;++c) {
+      e[c] = g[n + c] * b + g[d + c] * a;
     }
     return e;
   }});
@@ -11195,9 +11195,9 @@ Nunu.runningOnDesktop = function() {
   }, setTextures:function(d) {
     this.textures = d;
   }, parse:function(d) {
-    function a(d) {
-      void 0 === b[d] && console.warn("THREE.MaterialLoader: Undefined texture", d);
-      return b[d];
+    function a(a) {
+      void 0 === b[a] && console.warn("THREE.MaterialLoader: Undefined texture", a);
+      return b[a];
     }
     var b = this.textures, c = new yf[d.type];
     void 0 !== d.uuid && (c.uuid = d.uuid);
@@ -11264,35 +11264,35 @@ Nunu.runningOnDesktop = function() {
     }
     return c;
   }});
-  Object.assign(ge.prototype, {load:function(d, a, b, c) {
-    var e = this;
-    (new db(e.manager)).load(d, function(d) {
-      a(e.parse(JSON.parse(d)));
-    }, b, c);
-  }, parse:function(d) {
-    var a = new aa, b = d.data.index, c = {Int8Array:Int8Array, Uint8Array:Uint8Array, Uint8ClampedArray:Uint8ClampedArray, Int16Array:Int16Array, Uint16Array:Uint16Array, Int32Array:Int32Array, Uint32Array:Uint32Array, Float32Array:Float32Array, Float64Array:Float64Array};
-    void 0 !== b && (b = new c[b.type](b.array), a.setIndex(new ja(b, 1)));
-    var e = d.data.attributes, m;
+  Object.assign(ge.prototype, {load:function(a, b, c, e) {
+    var d = this;
+    (new db(d.manager)).load(a, function(a) {
+      b(d.parse(JSON.parse(a)));
+    }, c, e);
+  }, parse:function(a) {
+    var d = new aa, b = a.data.index, c = {Int8Array:Int8Array, Uint8Array:Uint8Array, Uint8ClampedArray:Uint8ClampedArray, Int16Array:Int16Array, Uint16Array:Uint16Array, Int32Array:Int32Array, Uint32Array:Uint32Array, Float32Array:Float32Array, Float64Array:Float64Array};
+    void 0 !== b && (b = new c[b.type](b.array), d.setIndex(new ja(b, 1)));
+    var e = a.data.attributes, m;
     for (m in e) {
       var h = e[m], b = new c[h.type](h.array);
-      a.addAttribute(m, new ja(b, h.itemSize, h.normalized));
+      d.addAttribute(m, new ja(b, h.itemSize, h.normalized));
     }
-    c = d.data.groups || d.data.drawcalls || d.data.offsets;
+    c = a.data.groups || a.data.drawcalls || a.data.offsets;
     if (void 0 !== c) {
       for (m = 0, b = c.length;m !== b;++m) {
-        e = c[m], a.addGroup(e.start, e.count, e.materialIndex);
+        e = c[m], d.addGroup(e.start, e.count, e.materialIndex);
       }
     }
-    d = d.data.boundingSphere;
-    void 0 !== d && (c = new g, void 0 !== d.center && c.fromArray(d.center), a.boundingSphere = new ca(c, d.radius));
-    return a;
+    a = a.data.boundingSphere;
+    void 0 !== a && (c = new g, void 0 !== a.center && c.fromArray(a.center), d.boundingSphere = new ca(c, a.radius));
+    return d;
   }});
-  qc.Handlers = {handlers:[], add:function(d, a) {
-    this.handlers.push(d, a);
-  }, get:function(d) {
-    for (var a = this.handlers, b = 0, c = a.length;b < c;b += 2) {
-      var e = a[b + 1];
-      if (a[b].test(d)) {
+  qc.Handlers = {handlers:[], add:function(a, b) {
+    this.handlers.push(a, b);
+  }, get:function(a) {
+    for (var d = this.handlers, b = 0, c = d.length;b < c;b += 2) {
+      var e = d[b + 1];
+      if (d[b].test(a)) {
         return e;
       }
     }
@@ -11313,17 +11313,17 @@ Nunu.runningOnDesktop = function() {
   }, createMaterial:function() {
     var a = {NoBlending:0, NormalBlending:1, AdditiveBlending:2, SubtractiveBlending:3, MultiplyBlending:4, CustomBlending:5}, b = new W, c = new zd, e = new Od;
     return function(d, g, m) {
-      function n(d, a, b, e, n) {
-        d = g + d;
-        var k = qc.Handlers.get(d);
-        null !== k ? d = k.load(d) : (c.setCrossOrigin(m), d = c.load(d));
-        void 0 !== a && (d.repeat.fromArray(a), 1 !== a[0] && (d.wrapS = 1E3), 1 !== a[1] && (d.wrapT = 1E3));
-        void 0 !== b && d.offset.fromArray(b);
-        void 0 !== e && ("repeat" === e[0] && (d.wrapS = 1E3), "mirror" === e[0] && (d.wrapS = 1002), "repeat" === e[1] && (d.wrapT = 1E3), "mirror" === e[1] && (d.wrapT = 1002));
-        void 0 !== n && (d.anisotropy = n);
-        a = la.generateUUID();
-        h[a] = d;
-        return a;
+      function n(a, d, b, e, n) {
+        a = g + a;
+        var k = qc.Handlers.get(a);
+        null !== k ? a = k.load(a) : (c.setCrossOrigin(m), a = c.load(a));
+        void 0 !== d && (a.repeat.fromArray(d), 1 !== d[0] && (a.wrapS = 1E3), 1 !== d[1] && (a.wrapT = 1E3));
+        void 0 !== b && a.offset.fromArray(b);
+        void 0 !== e && ("repeat" === e[0] && (a.wrapS = 1E3), "mirror" === e[0] && (a.wrapS = 1002), "repeat" === e[1] && (a.wrapT = 1E3), "mirror" === e[1] && (a.wrapT = 1002));
+        void 0 !== n && (a.anisotropy = n);
+        d = la.generateUUID();
+        h[d] = a;
+        return d;
       }
       var h = {}, k = {uuid:la.generateUUID(), type:"MeshLambertMaterial"}, q;
       for (q in d) {
@@ -11482,48 +11482,48 @@ Nunu.runningOnDesktop = function() {
       return e.parse(k);
     };
   }()});
-  Object.assign(he.prototype, {load:function(d, a, b, c) {
-    var e = this, g = this.texturePath && "string" === typeof this.texturePath ? this.texturePath : qc.prototype.extractUrlBase(d), m = new db(this.manager);
+  Object.assign(he.prototype, {load:function(a, b, c, e) {
+    var d = this, g = this.texturePath && "string" === typeof this.texturePath ? this.texturePath : qc.prototype.extractUrlBase(a), m = new db(this.manager);
     m.setWithCredentials(this.withCredentials);
-    m.load(d, function(b) {
-      b = JSON.parse(b);
-      var c = b.metadata;
-      if (void 0 !== c && (c = c.type, void 0 !== c)) {
-        if ("object" === c.toLowerCase()) {
-          console.error("THREE.JSONLoader: " + d + " should be loaded with THREE.ObjectLoader instead.");
+    m.load(a, function(c) {
+      c = JSON.parse(c);
+      var e = c.metadata;
+      if (void 0 !== e && (e = e.type, void 0 !== e)) {
+        if ("object" === e.toLowerCase()) {
+          console.error("THREE.JSONLoader: " + a + " should be loaded with THREE.ObjectLoader instead.");
           return;
         }
-        if ("scene" === c.toLowerCase()) {
-          console.error("THREE.JSONLoader: " + d + " should be loaded with THREE.SceneLoader instead.");
+        if ("scene" === e.toLowerCase()) {
+          console.error("THREE.JSONLoader: " + a + " should be loaded with THREE.SceneLoader instead.");
           return;
         }
       }
-      b = e.parse(b, g);
-      a(b.geometry, b.materials);
-    }, b, c);
-  }, setTexturePath:function(d) {
-    this.texturePath = d;
-  }, parse:function(d, a) {
-    var b = new ea, c = void 0 !== d.scale ? 1 / d.scale : 1;
-    (function(a) {
-      var c, e, m, n, h, k, q, f, p, r, u, w, t, v = d.faces;
-      k = d.vertices;
-      var B = d.normals, y = d.colors, A = 0;
-      if (void 0 !== d.uvs) {
-        for (c = 0;c < d.uvs.length;c++) {
-          d.uvs[c].length && A++;
+      c = d.parse(c, g);
+      b(c.geometry, c.materials);
+    }, c, e);
+  }, setTexturePath:function(a) {
+    this.texturePath = a;
+  }, parse:function(a, b) {
+    var d = new ea, c = void 0 !== a.scale ? 1 / a.scale : 1;
+    (function(b) {
+      var c, e, m, n, h, k, q, f, p, r, u, w, t, v = a.faces;
+      k = a.vertices;
+      var B = a.normals, y = a.colors, A = 0;
+      if (void 0 !== a.uvs) {
+        for (c = 0;c < a.uvs.length;c++) {
+          a.uvs[c].length && A++;
         }
         for (c = 0;c < A;c++) {
-          b.faceVertexUvs[c] = [];
+          d.faceVertexUvs[c] = [];
         }
       }
       n = 0;
       for (h = k.length;n < h;) {
-        c = new g, c.x = k[n++] * a, c.y = k[n++] * a, c.z = k[n++] * a, b.vertices.push(c);
+        c = new g, c.x = k[n++] * b, c.y = k[n++] * b, c.z = k[n++] * b, d.vertices.push(c);
       }
       n = 0;
       for (h = v.length;n < h;) {
-        if (a = v[n++], p = a & 1, m = a & 2, c = a & 8, q = a & 16, r = a & 32, k = a & 64, a &= 128, p) {
+        if (b = v[n++], p = b & 1, m = b & 2, c = b & 8, q = b & 16, r = b & 32, k = b & 64, b &= 128, p) {
           p = new Ca;
           p.a = v[n];
           p.b = v[n + 1];
@@ -11534,11 +11534,11 @@ Nunu.runningOnDesktop = function() {
           u.c = v[n + 3];
           n += 4;
           m && (m = v[n++], p.materialIndex = m, u.materialIndex = m);
-          m = b.faces.length;
+          m = d.faces.length;
           if (c) {
             for (c = 0;c < A;c++) {
-              for (w = d.uvs[c], b.faceVertexUvs[c][m] = [], b.faceVertexUvs[c][m + 1] = [], e = 0;4 > e;e++) {
-                f = v[n++], t = w[2 * f], f = w[2 * f + 1], t = new l(t, f), 2 !== e && b.faceVertexUvs[c][m].push(t), 0 !== e && b.faceVertexUvs[c][m + 1].push(t);
+              for (w = a.uvs[c], d.faceVertexUvs[c][m] = [], d.faceVertexUvs[c][m + 1] = [], e = 0;4 > e;e++) {
+                f = v[n++], t = w[2 * f], f = w[2 * f + 1], t = new l(t, f), 2 !== e && d.faceVertexUvs[c][m].push(t), 0 !== e && d.faceVertexUvs[c][m + 1].push(t);
               }
             }
           }
@@ -11549,24 +11549,24 @@ Nunu.runningOnDesktop = function() {
             }
           }
           k && (k = v[n++], k = y[k], p.color.setHex(k), u.color.setHex(k));
-          if (a) {
+          if (b) {
             for (c = 0;4 > c;c++) {
               k = v[n++], k = y[k], 2 !== c && p.vertexColors.push(new W(k)), 0 !== c && u.vertexColors.push(new W(k));
             }
           }
-          b.faces.push(p);
-          b.faces.push(u);
+          d.faces.push(p);
+          d.faces.push(u);
         } else {
           p = new Ca;
           p.a = v[n++];
           p.b = v[n++];
           p.c = v[n++];
           m && (m = v[n++], p.materialIndex = m);
-          m = b.faces.length;
+          m = d.faces.length;
           if (c) {
             for (c = 0;c < A;c++) {
-              for (w = d.uvs[c], b.faceVertexUvs[c][m] = [], e = 0;3 > e;e++) {
-                f = v[n++], t = w[2 * f], f = w[2 * f + 1], t = new l(t, f), b.faceVertexUvs[c][m].push(t);
+              for (w = a.uvs[c], d.faceVertexUvs[c][m] = [], e = 0;3 > e;e++) {
+                f = v[n++], t = w[2 * f], f = w[2 * f + 1], t = new l(t, f), d.faceVertexUvs[c][m].push(t);
               }
             }
           }
@@ -11577,69 +11577,69 @@ Nunu.runningOnDesktop = function() {
             }
           }
           k && (k = v[n++], p.color.setHex(y[k]));
-          if (a) {
+          if (b) {
             for (c = 0;3 > c;c++) {
               k = v[n++], p.vertexColors.push(new W(y[k]));
             }
           }
-          b.faces.push(p);
+          d.faces.push(p);
         }
       }
     })(c);
     (function() {
-      var a = void 0 !== d.influencesPerVertex ? d.influencesPerVertex : 2;
-      if (d.skinWeights) {
-        for (var c = 0, e = d.skinWeights.length;c < e;c += a) {
-          b.skinWeights.push(new h(d.skinWeights[c], 1 < a ? d.skinWeights[c + 1] : 0, 2 < a ? d.skinWeights[c + 2] : 0, 3 < a ? d.skinWeights[c + 3] : 0));
+      var b = void 0 !== a.influencesPerVertex ? a.influencesPerVertex : 2;
+      if (a.skinWeights) {
+        for (var c = 0, e = a.skinWeights.length;c < e;c += b) {
+          d.skinWeights.push(new h(a.skinWeights[c], 1 < b ? a.skinWeights[c + 1] : 0, 2 < b ? a.skinWeights[c + 2] : 0, 3 < b ? a.skinWeights[c + 3] : 0));
         }
       }
-      if (d.skinIndices) {
-        for (c = 0, e = d.skinIndices.length;c < e;c += a) {
-          b.skinIndices.push(new h(d.skinIndices[c], 1 < a ? d.skinIndices[c + 1] : 0, 2 < a ? d.skinIndices[c + 2] : 0, 3 < a ? d.skinIndices[c + 3] : 0));
+      if (a.skinIndices) {
+        for (c = 0, e = a.skinIndices.length;c < e;c += b) {
+          d.skinIndices.push(new h(a.skinIndices[c], 1 < b ? a.skinIndices[c + 1] : 0, 2 < b ? a.skinIndices[c + 2] : 0, 3 < b ? a.skinIndices[c + 3] : 0));
         }
       }
-      b.bones = d.bones;
-      b.bones && 0 < b.bones.length && (b.skinWeights.length !== b.skinIndices.length || b.skinIndices.length !== b.vertices.length) && console.warn("When skinning, number of vertices (" + b.vertices.length + "), skinIndices (" + b.skinIndices.length + "), and skinWeights (" + b.skinWeights.length + ") should match.");
+      d.bones = a.bones;
+      d.bones && 0 < d.bones.length && (d.skinWeights.length !== d.skinIndices.length || d.skinIndices.length !== d.vertices.length) && console.warn("When skinning, number of vertices (" + d.vertices.length + "), skinIndices (" + d.skinIndices.length + "), and skinWeights (" + d.skinWeights.length + ") should match.");
     })();
-    (function(a) {
-      if (void 0 !== d.morphTargets) {
-        for (var c = 0, e = d.morphTargets.length;c < e;c++) {
-          b.morphTargets[c] = {};
-          b.morphTargets[c].name = d.morphTargets[c].name;
-          b.morphTargets[c].vertices = [];
-          for (var m = b.morphTargets[c].vertices, n = d.morphTargets[c].vertices, h = 0, k = n.length;h < k;h += 3) {
+    (function(b) {
+      if (void 0 !== a.morphTargets) {
+        for (var c = 0, e = a.morphTargets.length;c < e;c++) {
+          d.morphTargets[c] = {};
+          d.morphTargets[c].name = a.morphTargets[c].name;
+          d.morphTargets[c].vertices = [];
+          for (var m = d.morphTargets[c].vertices, n = a.morphTargets[c].vertices, h = 0, k = n.length;h < k;h += 3) {
             var q = new g;
-            q.x = n[h] * a;
-            q.y = n[h + 1] * a;
-            q.z = n[h + 2] * a;
+            q.x = n[h] * b;
+            q.y = n[h + 1] * b;
+            q.z = n[h + 2] * b;
             m.push(q);
           }
         }
       }
-      if (void 0 !== d.morphColors && 0 < d.morphColors.length) {
-        for (console.warn('THREE.JSONLoader: "morphColors" no longer supported. Using them as face colors.'), a = b.faces, m = d.morphColors[0].colors, c = 0, e = a.length;c < e;c++) {
-          a[c].color.fromArray(m, 3 * c);
+      if (void 0 !== a.morphColors && 0 < a.morphColors.length) {
+        for (console.warn('THREE.JSONLoader: "morphColors" no longer supported. Using them as face colors.'), b = d.faces, m = a.morphColors[0].colors, c = 0, e = b.length;c < e;c++) {
+          b[c].color.fromArray(m, 3 * c);
         }
       }
     })(c);
     (function() {
-      var a = [], c = [];
-      void 0 !== d.animation && c.push(d.animation);
-      void 0 !== d.animations && (d.animations.length ? c = c.concat(d.animations) : c.push(d.animations));
+      var b = [], c = [];
+      void 0 !== a.animation && c.push(a.animation);
+      void 0 !== a.animations && (a.animations.length ? c = c.concat(a.animations) : c.push(a.animations));
       for (var e = 0;e < c.length;e++) {
-        var g = Za.parseAnimation(c[e], b.bones);
-        g && a.push(g);
+        var g = Za.parseAnimation(c[e], d.bones);
+        g && b.push(g);
       }
-      b.morphTargets && (c = Za.CreateClipsFromMorphTargetSequences(b.morphTargets, 10), a = a.concat(c));
-      0 < a.length && (b.animations = a);
+      d.morphTargets && (c = Za.CreateClipsFromMorphTargetSequences(d.morphTargets, 10), b = b.concat(c));
+      0 < b.length && (d.animations = b);
     })();
-    b.computeFaceNormals();
-    b.computeBoundingSphere();
-    if (void 0 === d.materials || 0 === d.materials.length) {
-      return {geometry:b};
+    d.computeFaceNormals();
+    d.computeBoundingSphere();
+    if (void 0 === a.materials || 0 === a.materials.length) {
+      return {geometry:d};
     }
-    c = qc.prototype.initMaterials(d.materials, a, this.crossOrigin);
-    return {geometry:b, materials:c};
+    c = qc.prototype.initMaterials(a.materials, b, this.crossOrigin);
+    return {geometry:d, materials:c};
   }});
   Object.assign(Le.prototype, {load:function(a, b, c, e) {
     "" === this.texturePath && (this.texturePath = a.substring(0, a.lastIndexOf("/") + 1));
@@ -11809,13 +11809,13 @@ Nunu.runningOnDesktop = function() {
   }, parseObject:function() {
     var a = new q;
     return function(d, b, c) {
-      function e(d) {
-        void 0 === b[d] && console.warn("THREE.ObjectLoader: Undefined geometry", d);
-        return b[d];
+      function e(a) {
+        void 0 === b[a] && console.warn("THREE.ObjectLoader: Undefined geometry", a);
+        return b[a];
       }
-      function g(d) {
-        if (void 0 !== d) {
-          return void 0 === c[d] && console.warn("THREE.ObjectLoader: Undefined material", d), c[d];
+      function g(a) {
+        if (void 0 !== a) {
+          return void 0 === c[a] && console.warn("THREE.ObjectLoader: Undefined material", a), c[a];
         }
       }
       var m;
@@ -11912,46 +11912,46 @@ Nunu.runningOnDesktop = function() {
   Object.assign(Na.prototype, {getPoint:function() {
     console.warn("THREE.Curve: Warning, getPoint() not implemented!");
     return null;
-  }, getPointAt:function(d) {
-    d = this.getUtoTmapping(d);
-    return this.getPoint(d);
-  }, getPoints:function(d) {
-    void 0 === d && (d = 5);
-    for (var a = [], b = 0;b <= d;b++) {
-      a.push(this.getPoint(b / d));
+  }, getPointAt:function(a) {
+    a = this.getUtoTmapping(a);
+    return this.getPoint(a);
+  }, getPoints:function(a) {
+    void 0 === a && (a = 5);
+    for (var d = [], b = 0;b <= a;b++) {
+      d.push(this.getPoint(b / a));
     }
-    return a;
-  }, getSpacedPoints:function(d) {
-    void 0 === d && (d = 5);
-    for (var a = [], b = 0;b <= d;b++) {
-      a.push(this.getPointAt(b / d));
+    return d;
+  }, getSpacedPoints:function(a) {
+    void 0 === a && (a = 5);
+    for (var d = [], b = 0;b <= a;b++) {
+      d.push(this.getPointAt(b / a));
     }
-    return a;
+    return d;
   }, getLength:function() {
-    var d = this.getLengths();
-    return d[d.length - 1];
-  }, getLengths:function(d) {
-    void 0 === d && (d = this.__arcLengthDivisions ? this.__arcLengthDivisions : 200);
-    if (this.cacheArcLengths && this.cacheArcLengths.length === d + 1 && !this.needsUpdate) {
+    var a = this.getLengths();
+    return a[a.length - 1];
+  }, getLengths:function(a) {
+    void 0 === a && (a = this.__arcLengthDivisions ? this.__arcLengthDivisions : 200);
+    if (this.cacheArcLengths && this.cacheArcLengths.length === a + 1 && !this.needsUpdate) {
       return this.cacheArcLengths;
     }
     this.needsUpdate = !1;
-    var a = [], b, c = this.getPoint(0), e, g = 0;
-    a.push(0);
-    for (e = 1;e <= d;e++) {
-      b = this.getPoint(e / d), g += b.distanceTo(c), a.push(g), c = b;
+    var d = [], b, c = this.getPoint(0), e, g = 0;
+    d.push(0);
+    for (e = 1;e <= a;e++) {
+      b = this.getPoint(e / a), g += b.distanceTo(c), d.push(g), c = b;
     }
-    return this.cacheArcLengths = a;
+    return this.cacheArcLengths = d;
   }, updateArcLengths:function() {
     this.needsUpdate = !0;
     this.getLengths();
-  }, getUtoTmapping:function(d, a) {
-    var b = this.getLengths(), c, e = b.length;
-    d = a ? a : d * b[e - 1];
-    a = 0;
-    for (var g = e - 1, m;a <= g;) {
-      if (c = Math.floor(a + (g - a) / 2), m = b[c] - d, 0 > m) {
-        a = c + 1;
+  }, getUtoTmapping:function(a, b) {
+    var d = this.getLengths(), c, e = d.length;
+    a = b ? b : a * d[e - 1];
+    b = 0;
+    for (var g = e - 1, m;b <= g;) {
+      if (c = Math.floor(b + (g - b) / 2), m = d[c] - a, 0 > m) {
+        b = c + 1;
       } else {
         if (0 < m) {
           g = c - 1;
@@ -11962,43 +11962,43 @@ Nunu.runningOnDesktop = function() {
       }
     }
     c = g;
-    if (b[c] === d) {
+    if (d[c] === a) {
       return c / (e - 1);
     }
-    a = b[c];
-    return (c + (d - a) / (b[c + 1] - a)) / (e - 1);
-  }, getTangent:function(d) {
-    var a = d - 1E-4;
-    d += 1E-4;
-    0 > a && (a = 0);
-    1 < d && (d = 1);
-    a = this.getPoint(a);
-    return this.getPoint(d).clone().sub(a).normalize();
-  }, getTangentAt:function(d) {
-    d = this.getUtoTmapping(d);
-    return this.getTangent(d);
-  }, computeFrenetFrames:function(d, a) {
-    var b = new g, c = [], e = [], m = [], h = new g, n = new q, k, f;
-    for (k = 0;k <= d;k++) {
-      f = k / d, c[k] = this.getTangentAt(f), c[k].normalize();
+    b = d[c];
+    return (c + (a - b) / (d[c + 1] - b)) / (e - 1);
+  }, getTangent:function(a) {
+    var d = a - 1E-4;
+    a += 1E-4;
+    0 > d && (d = 0);
+    1 < a && (a = 1);
+    d = this.getPoint(d);
+    return this.getPoint(a).clone().sub(d).normalize();
+  }, getTangentAt:function(a) {
+    a = this.getUtoTmapping(a);
+    return this.getTangent(a);
+  }, computeFrenetFrames:function(a, b) {
+    var d = new g, c = [], e = [], m = [], h = new g, n = new q, k, f;
+    for (k = 0;k <= a;k++) {
+      f = k / a, c[k] = this.getTangentAt(f), c[k].normalize();
     }
     e[0] = new g;
     m[0] = new g;
     k = Number.MAX_VALUE;
     f = Math.abs(c[0].x);
     var p = Math.abs(c[0].y), r = Math.abs(c[0].z);
-    f <= k && (k = f, b.set(1, 0, 0));
-    p <= k && (k = p, b.set(0, 1, 0));
-    r <= k && b.set(0, 0, 1);
-    h.crossVectors(c[0], b).normalize();
+    f <= k && (k = f, d.set(1, 0, 0));
+    p <= k && (k = p, d.set(0, 1, 0));
+    r <= k && d.set(0, 0, 1);
+    h.crossVectors(c[0], d).normalize();
     e[0].crossVectors(c[0], h);
     m[0].crossVectors(c[0], e[0]);
-    for (k = 1;k <= d;k++) {
-      e[k] = e[k - 1].clone(), m[k] = m[k - 1].clone(), h.crossVectors(c[k - 1], c[k]), h.length() > Number.EPSILON && (h.normalize(), b = Math.acos(la.clamp(c[k - 1].dot(c[k]), -1, 1)), e[k].applyMatrix4(n.makeRotationAxis(h, b))), m[k].crossVectors(c[k], e[k]);
+    for (k = 1;k <= a;k++) {
+      e[k] = e[k - 1].clone(), m[k] = m[k - 1].clone(), h.crossVectors(c[k - 1], c[k]), h.length() > Number.EPSILON && (h.normalize(), d = Math.acos(la.clamp(c[k - 1].dot(c[k]), -1, 1)), e[k].applyMatrix4(n.makeRotationAxis(h, d))), m[k].crossVectors(c[k], e[k]);
     }
-    if (!0 === a) {
-      for (b = Math.acos(la.clamp(e[0].dot(e[d]), -1, 1)), b /= d, 0 < c[0].dot(h.crossVectors(e[0], e[d])) && (b = -b), k = 1;k <= d;k++) {
-        e[k].applyMatrix4(n.makeRotationAxis(c[k], b * k)), m[k].crossVectors(c[k], e[k]);
+    if (!0 === b) {
+      for (d = Math.acos(la.clamp(e[0].dot(e[a]), -1, 1)), d /= a, 0 < c[0].dot(h.crossVectors(e[0], e[a])) && (d = -d), k = 1;k <= a;k++) {
+        e[k].applyMatrix4(n.makeRotationAxis(c[k], d * k)), m[k].crossVectors(c[k], e[k]);
       }
     }
     return {tangents:c, normals:e, binormals:m};
@@ -12006,25 +12006,25 @@ Nunu.runningOnDesktop = function() {
   nb.prototype = Object.create(Na.prototype);
   nb.prototype.constructor = nb;
   nb.prototype.isLineCurve = !0;
-  nb.prototype.getPoint = function(d) {
-    if (1 === d) {
+  nb.prototype.getPoint = function(a) {
+    if (1 === a) {
       return this.v2.clone();
     }
-    var a = this.v2.clone().sub(this.v1);
-    a.multiplyScalar(d).add(this.v1);
-    return a;
+    var d = this.v2.clone().sub(this.v1);
+    d.multiplyScalar(a).add(this.v1);
+    return d;
   };
-  nb.prototype.getPointAt = function(d) {
-    return this.getPoint(d);
+  nb.prototype.getPointAt = function(a) {
+    return this.getPoint(a);
   };
-  nb.prototype.getTangent = function(d) {
+  nb.prototype.getTangent = function(a) {
     return this.v2.clone().sub(this.v1).normalize();
   };
-  dd.prototype = Object.assign(Object.create(Na.prototype), {constructor:dd, add:function(d) {
-    this.curves.push(d);
+  dd.prototype = Object.assign(Object.create(Na.prototype), {constructor:dd, add:function(a) {
+    this.curves.push(a);
   }, closePath:function() {
-    var d = this.curves[0].getPoint(0), a = this.curves[this.curves.length - 1].getPoint(1);
-    d.equals(a) || this.curves.push(new nb(a, d));
+    var a = this.curves[0].getPoint(0), b = this.curves[this.curves.length - 1].getPoint(1);
+    a.equals(b) || this.curves.push(new nb(b, a));
   }, getPoint:function(a) {
     var d = a * this.getLength(), b = this.getCurveLengths();
     for (a = 0;a < b.length;) {
@@ -17666,12 +17666,12 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
         f = g[k];
         c.vmult(f, f);
         b.vadd(f, f);
-        var q = f.x, l = f.y, f = f.z;
+        var q = f.x, p = f.y, f = f.z;
         q > h.x && (h.x = q);
-        l > h.y && (h.y = l);
+        p > h.y && (h.y = p);
         f > h.z && (h.z = f);
         q < e.x && (e.x = q);
-        l < e.y && (e.y = l);
+        p < e.y && (e.y = p);
         f < e.z && (e.z = f);
       }
     };
@@ -17702,8 +17702,8 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
         for (var h = b[m], k = h.length, f = 0;f !== k;f++) {
           c[h[f]].vsub(c[h[(f + 1) % k]], e);
           e.normalize();
-          for (var q = !1, l = 0;l !== g.length;l++) {
-            if (g[l].almostEquals(e) || g[l].almostEquals(e)) {
+          for (var q = !1, p = 0;p !== g.length;p++) {
+            if (g[p].almostEquals(e) || g[p].almostEquals(e)) {
               q = !0;
               break;
             }
@@ -17743,21 +17743,21 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
       return b.computeNormal(this.vertices[c[0]], this.vertices[c[1]], this.vertices[c[2]], e);
     };
     var r = new k;
-    b.prototype.clipAgainstHull = function(b, c, e, g, m, h, f, q, l) {
-      for (var p = -1, u = -Number.MAX_VALUE, w = 0;w < e.faces.length;w++) {
+    b.prototype.clipAgainstHull = function(b, c, e, g, m, h, f, q, p) {
+      for (var l = -1, u = -Number.MAX_VALUE, w = 0;w < e.faces.length;w++) {
         r.copy(e.faceNormals[w]);
         m.vmult(r, r);
         var B = r.dot(h);
-        B > u && (u = B, p = w);
+        B > u && (u = B, l = w);
       }
-      for (var u = [], w = e.faces[p], B = w.length, t = 0;B > t;t++) {
+      for (var u = [], w = e.faces[l], B = w.length, t = 0;B > t;t++) {
         var v = e.vertices[w[t]], y = new k;
         y.copy(v);
         m.vmult(y, y);
         g.vadd(y, y);
         u.push(y);
       }
-      0 <= p && this.clipFaceAgainstHull(h, b, c, u, f, q, l);
+      0 <= l && this.clipFaceAgainstHull(h, b, c, u, f, q, p);
     };
     var w = new k, p = new k, t = new k, v = new k, y = new k, x = new k;
     b.prototype.findSeparatingAxis = function(b, c, e, g, m, h, k, f) {
@@ -17848,24 +17848,24 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
     };
     var C = new k, E = new k, F = new k, z = new k, J = new k, I = new k, Q = new k, L = new k;
     b.prototype.clipFaceAgainstHull = function(b, c, e, g, m, h, k) {
-      for (var f = [], q = -1, l = Number.MAX_VALUE, p = 0;p < this.faces.length;p++) {
-        C.copy(this.faceNormals[p]);
+      for (var f = [], q = -1, p = Number.MAX_VALUE, l = 0;l < this.faces.length;l++) {
+        C.copy(this.faceNormals[l]);
         e.vmult(C, C);
         var u = C.dot(b);
-        l > u && (l = u, q = p);
+        p > u && (p = u, q = l);
       }
       if (!(0 > q)) {
         b = this.faces[q];
         b.connectedFaces = [];
-        for (l = 0;l < this.faces.length;l++) {
-          for (p = 0;p < this.faces[l].length;p++) {
-            -1 !== b.indexOf(this.faces[l][p]) && l !== q && -1 === b.connectedFaces.indexOf(l) && b.connectedFaces.push(l);
+        for (p = 0;p < this.faces.length;p++) {
+          for (l = 0;l < this.faces[p].length;l++) {
+            -1 !== b.indexOf(this.faces[p][l]) && p !== q && -1 === b.connectedFaces.indexOf(p) && b.connectedFaces.push(p);
           }
         }
-        l = (g.length, b.length);
-        for (p = 0;l > p;p++) {
-          u = this.vertices[b[p]];
-          u.vsub(this.vertices[b[(p + 1) % l]], E);
+        p = (g.length, b.length);
+        for (l = 0;p > l;l++) {
+          u = this.vertices[b[l]];
+          u.vsub(this.vertices[b[(l + 1) % p]], E);
           F.copy(E);
           e.vmult(F, F);
           c.vadd(F, F);
@@ -17877,7 +17877,7 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
           I.copy(u);
           e.vmult(I, I);
           c.vadd(I, I);
-          u = (-I.dot(J), b.connectedFaces[p]);
+          u = (-I.dot(J), b.connectedFaces[l]);
           Q.copy(this.faceNormals[u]);
           u = this.getPlaneConstantOfFace(u);
           L.copy(Q);
@@ -17895,9 +17895,9 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
         L.copy(Q);
         e.vmult(L, L);
         u -= L.dot(c);
-        for (l = 0;l < g.length;l++) {
-          if (c = L.dot(g[l]) + u, m >= c && (console.log("clamped: depth=" + c + " to minDist=" + (m + "")), c = m), h >= c) {
-            e = g[l], 0 >= c && k.push({point:e, normal:L, depth:c});
+        for (p = 0;p < g.length;p++) {
+          if (c = L.dot(g[p]) + u, m >= c && (console.log("clamped: depth=" + c + " to minDist=" + (m + "")), c = m), h >= c) {
+            e = g[p], 0 >= c && k.push({point:e, normal:L, depth:c});
           }
         }
       }
@@ -17907,21 +17907,21 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
       if (2 > f) {
         return c;
       }
-      var q = b[b.length - 1], l = b[0];
+      var q = b[b.length - 1], p = b[0];
       m = e.dot(q) + g;
-      for (var p = 0;f > p;p++) {
-        if (l = b[p], h = e.dot(l) + g, 0 > m) {
+      for (var l = 0;f > l;l++) {
+        if (p = b[l], h = e.dot(p) + g, 0 > m) {
           if (0 > h) {
             var u = new k;
-            u.copy(l);
+            u.copy(p);
           } else {
-            u = new k, q.lerp(l, m / (m - h), u);
+            u = new k, q.lerp(p, m / (m - h), u);
           }
           c.push(u);
         } else {
-          0 > h && (u = new k, q.lerp(l, m / (m - h), u), c.push(u), c.push(l));
+          0 > h && (u = new k, q.lerp(p, m / (m - h), u), c.push(u), c.push(p));
         }
-        q = l;
+        q = p;
         m = h;
       }
       return c;
@@ -17965,17 +17965,17 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
     };
     var N = new k;
     b.prototype.calculateWorldAABB = function(b, c, e, g) {
-      for (var m, h, k, f, q, l, p = this.vertices.length, u = this.vertices, r = 0;p > r;r++) {
+      for (var m, h, k, f, q, p, l = this.vertices.length, u = this.vertices, r = 0;l > r;r++) {
         N.copy(u[r]);
         c.vmult(N, N);
         b.vadd(N, N);
         var w = N;
         w.x < m || void 0 === m ? m = w.x : (w.x > f || void 0 === f) && (f = w.x);
         w.y < h || void 0 === h ? h = w.y : (w.y > q || void 0 === q) && (q = w.y);
-        w.z < k || void 0 === k ? k = w.z : (w.z > l || void 0 === l) && (l = w.z);
+        w.z < k || void 0 === k ? k = w.z : (w.z > p || void 0 === p) && (p = w.z);
       }
       e.set(m, h, k);
-      g.set(f, q, l);
+      g.set(f, q, p);
     };
     b.prototype.volume = function() {
       return 4 * Math.PI * this.boundingSphereRadius / 3;
@@ -18012,9 +18012,9 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
         c = (this.faces[k].length, m[k]);
         var f = e[g[k][0]], q = H;
         b.vsub(f, q);
-        var q = c.dot(q), l = ba;
-        P.vsub(f, l);
-        c = c.dot(l);
+        var q = c.dot(q), p = ba;
+        P.vsub(f, p);
+        c = c.dot(p);
         if (0 > q && 0 < c || 0 < q && 0 > c) {
           return !1;
         }
@@ -30798,37 +30798,25 @@ try {
 FileSystem.readFile = function(a, f, l, b) {
   void 0 === f && (f = !0);
   if (void 0 !== FileSystem.fs) {
-    a instanceof window.File && (a = a.path);
     if (f) {
       return a = FileSystem.fs.readFileSync(a, "utf8"), void 0 !== l && l(a), a;
     }
     FileSystem.fs.readFile(a, "utf8", function(a, b) {
       void 0 !== l && l(b);
     });
-  } else {
-    if (a instanceof window.File) {
-      var h = new FileReader;
-      h.onload = function() {
-        void 0 !== l && l(h.result);
-      };
-      void 0 !== b && (h.onprogress = function(a) {
-        b(a);
-      });
-      h.readAsText(a);
-      return h.result;
-    }
-    var k = new XMLHttpRequest;
-    k.overrideMimeType("text/plain");
-    k.open("GET", a, !f);
-    k.onload = function() {
-      200 !== k.status && 0 !== k.status || void 0 === l || l(k.responseText);
-    };
-    void 0 !== b && (k.onprogress = function(a) {
-      b(a);
-    });
-    k.send(null);
-    return k.responseText;
+    return null;
   }
+  var h = new XMLHttpRequest;
+  h.overrideMimeType("text/plain");
+  h.open("GET", a, !f);
+  h.onload = function() {
+    200 !== h.status && 0 !== h.status || void 0 === l || l(h.responseText);
+  };
+  void 0 !== b && (h.onprogress = function(a) {
+    b(a);
+  });
+  h.send(null);
+  return h.responseText;
 };
 FileSystem.readFileArrayBuffer = function(a) {
   if (void 0 !== FileSystem.fs) {
