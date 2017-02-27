@@ -1,8 +1,9 @@
 "use strict";
 
 /**
- * Mesh2shape is used to convert ThreeJS objects to CannonJS shapes
- * It is based on the original Mesh2Shape converted by @donmccurdy
+ * Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.
+ * 
+ * It is based on the original Mesh2Shape converted by @donmccurdy.
  * 
  * @author Don McCurdy (https://github.com/donmccurdy)
  * @class Mesh2shape
@@ -14,7 +15,7 @@ function Mesh2shape(){}
 var PI2 = Math.PI / 2;
 
 /**
- * Type is used to indentify the type of cannonjs
+ * Type is used to indentify the type of cannonjs:
  *  - BOX
  *  - CYLINDER
  *  - SPHERE
@@ -32,7 +33,7 @@ Mesh2shape.Type =
 };
 
 /**
- * Given a Object3D instance, creates a corresponding CANNON shape
+ * Given a Object3D instance, creates a corresponding CANNON shape.
  *
  * @method createShape
  * @param {Object3D} object
@@ -101,7 +102,7 @@ Mesh2shape.createShape = function(object, type)
 };
 
 /**
- * Create box shape from geometry
+ * Create box shape from geometry.
  *
  * @method createBoxShape
  * @param {Geometry} geometry
@@ -124,7 +125,7 @@ Mesh2shape.createBoxShape = function(geometry)
 };
 
 /**
- * Bounding box needs to be computed with the entire mesh, not just geometry
+ * Bounding box needs to be computed with the entire mesh, not just geometry.
  *
  * @method createBoundingBoxShape
  * @param {Geometry} geometry
@@ -159,7 +160,7 @@ Mesh2shape.createBoundingBoxShape = function(object)
 };
 
 /**
- * Computes 3D convex hull as a CANNON.ConvexPolyhedron
+ * Computes 3D convex hull as a CANNON.ConvexPolyhedron.
  *
  * @method createConvexPolyhedron
  * @param {ConvexPolyhedron} geometry
@@ -209,7 +210,7 @@ Mesh2shape.createConvexPolyhedron = function(object)
 };
 
 /**
- * Create cylinder shape from geometry
+ * Create cylinder shape from geometry.
  *
  * @method createCylinderShape
  * @param {Geometry} geometry
@@ -227,7 +228,7 @@ Mesh2shape.createCylinderShape = function(geometry)
 };
 
 /**
- * Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere
+ * Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.
  *
  * @method createBoundingCylinderShape
  * @param {Object3D} object
@@ -254,7 +255,7 @@ Mesh2shape.createBoundingCylinderShape = function(object)
 };
 
 /**
- * Plane shape from geometry
+ * Plane shape from geometry.
  *
  * @method createPlaneShape
  * @param {Geometry} geometry
@@ -269,7 +270,7 @@ Mesh2shape.createPlaneShape = function(geometry)
 };
 
 /**
- * Sphere shape from geometry
+ * Sphere shape from geometry.
  *
  * @method createSphereShape
  * @param {Geometry} geometry
@@ -281,7 +282,7 @@ Mesh2shape.createSphereShape = function(geometry)
 };
 
 /**
- * Sphere shape from bouding sphere
+ * Sphere shape from bouding sphere.
  *
  * @method createBoundingSphereShape
  * @param {Geometry} geometry
@@ -296,7 +297,7 @@ Mesh2shape.createBoundingSphereShape = function(object)
 };
 
 /**
- * Sphere shape from bouding sphere
+ * Sphere shape from bouding sphere.
  *
  * @method createTubeShape
  * @param {Geometry} geometry
@@ -310,7 +311,7 @@ Mesh2shape.createTubeShape = function(geometry)
 };
 
 /**
- * Trimesh shape from geometry
+ * Trimesh shape from geometry.
  * 
  * @method createTrimeshShape
  * @param {Geometry} geometry
@@ -330,8 +331,9 @@ Mesh2shape.createTrimeshShape = function(geometry)
 };
 
 /**
- * Returns a single geometry for the given object
- * If the object is compound, its geometries are automatically merged
+ * Returns a single geometry for the given object.
+ * 
+ * If the object is compound, its geometries are automatically merged.
  * 
  * @method getGeometry
  * @param {Object3D} object
@@ -391,7 +393,7 @@ Mesh2shape.getGeometry = function(object)
 };
 
 /**
- * Get geometry vertices
+ * Get geometry vertices.
  *
  * @method getVertices
  * @param {Geometry} geometry
@@ -408,6 +410,7 @@ Mesh2shape.getVertices = function(geometry)
 
 /**
  * Returns a array of THREE.Mesh instances from the given object.
+ * 
  * If nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.
  *
  * @method getMeshes

@@ -4,65 +4,43 @@ function AssetExplorer(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "assetExplorer" + AssetExplorer.id;
-	AssetExplorer.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
-	this.element.style.cursor = "default";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Drop event
 	this.element.ondrop = function(event)
 	{
-		//Dragged file into object
+		//Dragged file into explorer
 		if(event.dataTransfer.files.length > 0)
 		{
 			var file = event.dataTransfer.files[0];
-			var name = FileSystem.getFileName(file.path);
+			var name = file.name;
 
 			//Image
-			if(file.type.startsWith("image"))
+			if(Image.fileIsImage(file))
 			{
-				var texture = new Texture(file.path);
-				texture.name = name;
-				Editor.program.addTexture(texture);
-				Editor.updateAssetExplorer();
+				Editor.loadTexture(file);
 			}
 			//Video
-			else if(file.type.startsWith("video"))
+			else if(Video.fileIsVideo(file))
 			{
-				var texture = new VideoTexture(file.path);
-				texture.name = name;
-				Editor.program.addTexture(texture);
-				Editor.updateAssetExplorer();
+				Editor.loadVideoTexture(file);
 			}
 			//Audio
-			else if(file.type.startsWith("audio"))
+			else if(Audio.fileIsAudio(file))
 			{
-				var audio = new Audio(file.path);
-				audio.name = name;
-				Editor.program.addAudio(audio);
-				Editor.updateAssetExplorer();
+				Editor.loadAudio(file);
 			}
 			//Font
-			else if(FontLoader.fileIsFont(file.path))
+			else if(Font.fileIsFont(file))
 			{
-				var font = new Font(file.path);
-				Editor.program.addFont(font);
-				Editor.updateAssetExplorer();
+				Editor.loadFont(file);
 			}
 		}
-	};
-
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
 	};
 
 	//Element atributes
@@ -78,9 +56,6 @@ function AssetExplorer(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//AssetExplorer conter
-AssetExplorer.id = 0;
 
 //Remove all files
 AssetExplorer.prototype.clear = function()
@@ -111,36 +86,34 @@ AssetExplorer.prototype.destroy = function()
 	catch(e){}
 }
 
-//Update AssetExplorer
-AssetExplorer.prototype.update = function(){}
-
-//Update division Size
+//Update division
 AssetExplorer.prototype.updateInterface = function()
 {
-	//Element visibility
+	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
+
+		//Asset position
+		var filesRow = Math.floor(this.files.length / ((this.files.length * (this.filesSize.x+this.filesSpacing)) / this.size.x));
+		for(var i = 0; i < this.files.length; i++)
+		{
+			var row = Math.floor(i / filesRow);
+			var col = i % filesRow;
+
+			this.files[i].position.x = (col * this.filesSize.x) + ((col + 1) * this.filesSpacing);
+			this.files[i].position.y = (row * this.filesSize.y) + ((row + 1) * this.filesSpacing);
+			this.files[i].updateInterface();
+		}
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
-
-	//Update file position
-	var filesPerRow = Math.floor(this.files.length / ((this.files.length * (this.filesSize.x+this.filesSpacing)) / this.size.x));
-	for(var i = 0; i < this.files.length; i++)
-	{
-		var row = Math.floor(i / filesPerRow);
-		var col = i % filesPerRow;
-		this.files[i].position.x = (col * this.filesSize.x) + ((col+1) * this.filesSpacing);
-		this.files[i].position.y = (row * this.filesSize.y) + ((row+1) * this.filesSpacing);
-		this.files[i].updateInterface();
-	}
-
-	//Update element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }

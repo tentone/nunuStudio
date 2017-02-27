@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * PositionalAudio is used to play audio with positional audio effect
+ * PositionalAudio is used to play audio with positional audio effect.
+ *
+ * Using the positional audio object the sound is controlled by the camera that renders first position.
  * 
  * @param {Audio} audio Audio used by this emitter
  * @class PositionalAudio
@@ -67,8 +69,9 @@ function PositionalAudio(audio)
 PositionalAudio.prototype = Object.create(THREE.PositionalAudio.prototype);
 
 /**
- * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True
- * Called by the runtime
+ * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.
+ * 
+ * Called by the runtime.
  * 
  * @method initialize
  */
@@ -105,7 +108,8 @@ PositionalAudio.prototype.initialize = function()
 }
 
 /**
- * Update positional audio state
+ * Update positional audio state.
+ * 
  * @method update
  */
 PositionalAudio.prototype.update = function()
@@ -128,7 +132,8 @@ PositionalAudio.prototype.update = function()
 }
 
 /**
- * Dispose audio object
+ * Dispose audio object.
+ * 
  * @method dispose
  */
 PositionalAudio.prototype.dispose = function()
@@ -146,7 +151,8 @@ PositionalAudio.prototype.dispose = function()
 }
 
 /**
- * Change audio emitter volume
+ * Change audio emitter volume.
+ * 
  * @method setVolume
  * @param {Number} value Audio volume
  * @return {PositionalAudio} Self pointer for chaining
@@ -159,14 +165,9 @@ PositionalAudio.prototype.setVolume = function(value)
 	return this;
 }
 
-//Update world matrix
-/*PositionalAudio.prototype.updateMatrixWorld = function(force)
-{
-	Object3D.prototype.updateMatrixWorld.call(this, force);
-}*/
-
 /**
- * Create JSON description
+ * Create JSON description.
+ * 
  * @method toJSON
  * @param  {Object} meta
  * @return {Object} JSON descrition

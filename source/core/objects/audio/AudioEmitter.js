@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * AudioEmitter is a Object3D used to play audio inside the scene
+ * AudioEmitter is a Object3D used to play audio inside the scene.
  * 
  * @param {Audio} audio Audio used by this emitter
  * @class AudioEmitter
@@ -68,8 +68,9 @@ AudioEmitter.listener = new THREE.AudioListener();
 AudioEmitter.prototype = Object.create(THREE.Audio.prototype);
 
 /**
- * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True
- * Called by the runtime
+ * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.
+ * 
+ * Called by the runtime.
  * 
  * @method initialize
  */
@@ -95,7 +96,8 @@ AudioEmitter.prototype.initialize = function()
 }
 
 /**
- * Dispose audio object
+ * Dispose audio object.
+ * 
  * @method dispose
  */
 AudioEmitter.prototype.dispose = function()
@@ -113,7 +115,8 @@ AudioEmitter.prototype.dispose = function()
 }
 
 /**
- * Change audio emitter volume
+ * Change audio emitter volume.
+ * 
  * @method setVolume
  * @param {Number} value Audio volume
  */
@@ -126,7 +129,8 @@ AudioEmitter.prototype.setVolume = function(value)
 }
 
 /**
- * Create JSON description
+ * Create JSON description.
+ * 
  * @method toJSON
  * @param {Object} meta
  * @return {Object} JSON descrition

@@ -6,7 +6,6 @@ function Editor(){}
 try
 {
 	Editor.fs = require("fs");
-	Editor.os = require("os");
 	Editor.gui = require("nw.gui");
 	
 	Editor.clipboard = Editor.gui.Clipboard.get();
@@ -318,6 +317,19 @@ Editor.initialize = function()
 		};
 	}
 
+	//Set windows close event
+	if(Editor.gui !== undefined)
+	{
+		//Close event
+		Editor.gui.Window.get().on("close", function()
+		{
+			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
+			{
+				Editor.exit();
+			}
+		});
+	}
+
 	//Open ISP file if dragged to the window
 	document.body.ondrop = function(event)
 	{
@@ -330,7 +342,7 @@ Editor.initialize = function()
 			{
 				if(confirm("All unsaved changes to the project will be lost! Load file?"))
 				{
-					Editor.loadProgram(file.path);
+					Editor.loadProgram(file);
 					Editor.resetEditingFlags();
 					Editor.updateObjectViews();
 				}
@@ -347,19 +359,6 @@ Editor.initialize = function()
 
 	//Load interface theme
 	Editor.theme = Theme.get(Settings.general.theme);
-
-	//Set windows close event
-	if(Editor.gui !== undefined)
-	{
-		//Close event
-		Editor.gui.Window.get().on("close", function()
-		{
-			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
-			{
-				Editor.exit();
-			}
-		});
-	}
 	
 	//Editor initial state
 	Editor.toolMode = Editor.MODE_SELECT;
@@ -1574,6 +1573,122 @@ Editor.loadProgram = function(file)
 			alert("Error loading file\n(" + e + ")");
 		}
 	});
+};
+
+//Load texture from file object
+Editor.loadTexture = function(file, onLoad)
+{
+	var name = FileSystem.getFileName(file.name);
+	var extension = file.name.split(".").pop().toLowerCase();
+	var reader = new FileReader();
+
+	reader.onload = function()
+	{
+		var texture = new Texture(new Image(reader.result));
+		texture.name = name;
+
+		if(onLoad !== undefined)
+		{
+			onLoad(texture);
+		}
+
+		Editor.program.addTexture(texture);
+		Editor.updateObjectViews();
+	};
+
+	if(extension === "tga")
+	{
+		reader.readAsArrayBuffer(file);
+	}
+	else
+	{
+		reader.readAsDataURL(file);
+	}
+};
+
+//Load video texture from file object
+Editor.loadVideoTexture = function(file, onLoad)
+{
+	var name = FileSystem.getFileName(file.name);
+
+	var reader = new FileReader();
+	reader.onload = function()
+	{
+		var texture = new VideoTexture(new Video(reader.result));
+		texture.name = name;
+
+		if(onLoad !== undefined)
+		{
+			onLoad(texture);
+		}
+
+		Editor.program.addTexture(texture);
+		Editor.updateObjectViews();
+	};
+	reader.readAsDataURL(file);
+};
+
+//Load audio from file object
+Editor.loadAudio = function(file, onLoad)
+{
+	var name = FileSystem.getFileName(file.name);
+	var reader = new FileReader();
+
+	reader.onload = function()
+	{
+		var audio = new Audio(reader.result);
+		audio.name = name;
+		
+		if(onLoad !== undefined)
+		{
+			onLoad(audio);
+		}
+
+		Editor.program.addAudio(audio);
+		Editor.updateObjectViews();
+	};
+
+	reader.readAsArrayBuffer(file);
+};
+
+//Load font from file object
+Editor.loadFont = function(file, onLoad)
+{
+	var name = FileSystem.getFileName(file.name);
+	var extension = file.name.split(".").pop().toLowerCase();
+	var reader = new FileReader();
+	
+	reader.onload = function()
+	{
+		if(extension === "json")
+		{
+			var font = new Font(JSON.parse(reader.result));
+		}
+		else
+		{
+			var font = new Font(reader.result);
+			font.encoding = extension;
+		}
+		font.name = name;
+
+		if(onLoad !== undefined)
+		{
+			onLoad(font);
+		}
+
+		Editor.program.addFont(font);
+		Editor.updateObjectViews();
+	};
+
+
+	if(extension === "json")
+	{
+		reader.readAsText(file);
+	}
+	else
+	{
+		reader.readAsArrayBuffer(file);
+	}
 };
 
 //Set currently open file (also updates the editor title), if running in browser never shows openfile

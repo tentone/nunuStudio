@@ -101,6 +101,17 @@ TextureBox.prototype.getValue = function()
 //Load texture from file
 TextureBox.prototype.loadTexture = function(file)
 {
+	/*var readImageFile = function(file)
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			self.setImage(reader.result);
+			self.onChange(reader.result);
+		};
+		reader.readAsDataURL(file);
+	};*/
+
 	//Image
 	if(file.type.startsWith("image") || file.path.endsWith("tga"))
 	{

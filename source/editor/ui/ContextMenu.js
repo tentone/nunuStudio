@@ -4,14 +4,9 @@ function ContextMenu(parent)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//ID
-	var id = "ctx" + Button.id;
-	ContextMenu.id++;
 
 	//Create element
 	this.element = document.createElement("div");
-	this.element.id = id;
 	this.element.style.position = "absolute";
 	this.element.style.zIndex = "300";
 
@@ -38,9 +33,6 @@ function ContextMenu(parent)
 	//Add element to document
 	this.parent.appendChild(this.element);
 }
-
-//ContextMenu ID counter
-ContextMenu.id = 0;
 
 //Set Text
 ContextMenu.prototype.setText = function(text)

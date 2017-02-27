@@ -1,8 +1,10 @@
 "use strict";
 
 /**
- * Leap device object based on the official LeapJS runtime
- * Used to connect nunuStudio to a leap motion hand tracker, works on Windows and OSX
+ * Leap device object based on the official LeapJS runtime.
+ * 
+ * Used to connect nunuStudio to a leap motion hand tracker, works on Windows and OSX.
+ * 
  * @class LeapMotion
  * @constructor
  * @module Devices
@@ -10,31 +12,36 @@
  */
 
 /**
- * Debug model flag
+ * Debug model flag.
+ * 
  * @property debugModel
  * @default true
  * @type {boolean}
  */
 /**
- * Flag to enable gesture detection
+ * Flag to enable gesture detection.
+ * 
  * @property gesturesEnabled
  * @default true
  * @type {boolean}
  */
 /**
- * Flag to enable hand pose detection
+ * Flag to enable hand pose detection.
+ * 
  * @property posesEnabled
  * @default true
  * @type {boolean}
  */
 /**
- * Hand tracking mode
+ * Hand tracking mode.
+ * 
  * @property mode
  * @default DESK
  * @type {Number}
  */
 /**
- * Flag to set arm tracking
+ * Flag to set arm tracking.
+ * 
  * @property useArm
  * @default false
  * @type {boolean}
@@ -180,9 +187,12 @@ LeapMotion.OPEN = 1;
 LeapMotion.POINTING = 2;
 
 /**
- * Initialize LeapMotion object
- * Called automatically by the runtime
- * Connects to the websocket provided by the leap driver
+ * Initialize LeapMotion object.
+ * 
+ * Called automatically by the runtime.
+ * 
+ * Connects to the websocket provided by the leap driver.
+ * 
  * @method initialize
  */
 LeapMotion.prototype.initialize = function()
@@ -204,8 +214,10 @@ LeapMotion.prototype.initialize = function()
 }
 
 /**
- * Update leap status
- * Called automatically by the runtime
+ * Update leap status.
+ * 
+ * Called automatically by the runtime.
+ * 
  * @method update
  */
 LeapMotion.prototype.update = function()
@@ -234,7 +246,8 @@ LeapMotion.prototype.update = function()
 }
 
 /**
- * Check if a gesture is occuring, is true while the gesture is occuring
+ * Check if a gesture is occuring, is true while the gesture is occuring.
+ * 
  * @method checkGesture
  * @param {Number} gesture Gesture to check
  * @return {boolean} True if the gesture is occuring
@@ -249,7 +262,8 @@ LeapMotion.prototype.checkGesture = function(gesture)
 }
 
 /**
- * Check if hand is in pose
+ * Check if hand is in pose.
+ * 
  * @param {Number} pose Pose to be checked
  * @return {boolean} True is hand is in this pose
  */
@@ -263,8 +277,10 @@ LeapMotion.prototype.checkPose = function(pose)
 }
 
 /**
- * Set hand tracking mode
- * Can be set to HDM or Desktop mode
+ * Set hand tracking mode.
+ * 
+ * Can be set to HDM or Desktop mode.
+ * 
  * @param {Number} mode Mode
  * @method setMode
  */
@@ -274,8 +290,10 @@ LeapMotion.prototype.setMode = function(mode)
 }
 
 /**
- * Update leap object pose flags from collected data
- * Called automatically by the update methos
+ * Update leap object pose flags from collected data.
+ * 
+ * Called automatically by the update methos.
+ * 
  * @method updatePoses
  */
 LeapMotion.prototype.updatePoses = function()
@@ -348,8 +366,10 @@ LeapMotion.prototype.updatePoses = function()
 }
 
 /**
- * Update leap object gesture flags from collected data
- * Called automatically by the update method
+ * Update leap object gesture flags from collected data.
+ * 
+ * Called automatically by the update method.
+ * 
  * @method updateGestures
  */
 LeapMotion.prototype.updateGestures = function()
@@ -419,8 +439,10 @@ LeapMotion.prototype.updateGestures = function()
 }
 
 /**
- * Update internal hand debug model
- * Automatically called by the update method if debugModel is set to true
+ * Update internal hand debug model.
+ * 
+ * Automatically called by the update method if debugModel is set to true.
+ * 
  * @method updateDebugModel
  */
 LeapMotion.prototype.updateDebugModel = function()
@@ -481,8 +503,10 @@ LeapMotion.prototype.updateDebugModel = function()
 }
 
 /**
- * Update physics object to enable hand physics collision
- * Called by updateDebugModel automatically
+ * Update physics object to enable hand physics collision.
+ * 
+ * Called by updateDebugModel automatically.
+ * 
  * @method updatePhysics
  */
 LeapMotion.prototype.updatePhysics = function()
@@ -545,7 +569,8 @@ LeapMotion.prototype.updateMesh = function(bone, mesh)
 }
 
 /**
- * Get hand speed (temporaly normalized)
+ * Get hand speed (temporaly normalized).
+ * 
  * @method getMovement
  * @return {Number} Hand speed
  */
@@ -561,7 +586,8 @@ LeapMotion.prototype.getMovement = function()
 }
 
 /**
- * Create JSON for object
+ * Create JSON for object.
+ * 
  * @method toJSON
  */
 LeapMotion.prototype.toJSON = function(meta)

@@ -46,7 +46,7 @@ function SceneEditor(parent, closeable, container, index)
 			if(intersections.length > 0 && event.dataTransfer.files.length > 0)
 			{
 				var file = event.dataTransfer.files[0];
-				var name = FileSystem.getFileName(file.path);
+				var name = FileSystem.getFileName(file.name);
 				var object = intersections[0].object;
 
 				//Image
@@ -100,7 +100,7 @@ function SceneEditor(parent, closeable, container, index)
 					}
 				}
 				//Font
-				else if(FontLoader.fileIsFont(file.path))
+				else if(Font.fileIsFont(file))
 				{
 					if(object.font !== undefined)
 					{

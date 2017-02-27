@@ -37,6 +37,9 @@ FontRenderer.prototype.renderFont = function(font, img)
 	this.text.position.x = -(box.max.x - box.min.x) / 2;
 	this.text.position.y = -(box.max.y - box.min.y) / 2;
 
+	this.camera.size = box.max.x - box.min.x;
+	this.camera.updateProjectionMatrix();
+	
 	this.renderer.render(this.scene, this.camera);
 
 	//Create image blob and set as image source
