@@ -21,11 +21,11 @@ catch(e){}
  * Read file content as text.
  *
  * @method readFile
- * @param {String} fname URL to the file, can be also a File object.
+ * @param {String} fname URL to the file.
  * @param {boolean} sync If true the file will be read in sync.
  * @param {Function} onLoad onLoad callback.
  * @param {Function} onProgress onProgress callback.
- * @return {String} File content as a string.
+ * @return {String} File content as a string, null if reading async.
  */
 FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 {
@@ -38,11 +38,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 	//NodeJS
 	if(FileSystem.fs !== undefined)
 	{
-		if(fname instanceof window.File)
-		{
-			fname = fname.path;
-		}
-
+		//Sync
 		if(sync)
 		{
 			var data = FileSystem.fs.readFileSync(fname, "utf8");
@@ -64,64 +60,38 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 					onLoad(data);
 				}
 			});
+
+			return null;
 		}
 	}
 	//Browser
 	else
 	{
-		//File object (always read async)
-		if(fname instanceof window.File)
+		var file = new XMLHttpRequest();
+		file.overrideMimeType("text/plain");
+		file.open("GET", fname, !sync);
+		file.onload = function()
 		{
-			var reader = new FileReader();
-			reader.onload = function()
+			if(file.status === 200 || file.status === 0)
 			{
 				if(onLoad !== undefined)
 				{
-					onLoad(reader.result);
+					onLoad(file.responseText);
 				}
 			}
-
-			if(onProgress !== undefined)
-			{
-				reader.onprogress = function(event)
-				{
-					onProgress(event);
-				};
-			}
-			
-			reader.readAsText(fname);
-
-			return reader.result;
-		}
-		//URL
-		else
+		};
+		
+		if(onProgress !== undefined)
 		{
-			var file = new XMLHttpRequest();
-			file.overrideMimeType("text/plain");
-			file.open("GET", fname, !sync);
-			file.onload = function()
+			file.onprogress = function(event)
 			{
-				if(file.status === 200 || file.status === 0)
-				{
-					if(onLoad !== undefined)
-					{
-						onLoad(file.responseText);
-					}
-				}
+				onProgress(event);
 			};
-			
-			if(onProgress !== undefined)
-			{
-				file.onprogress = function(event)
-				{
-					onProgress(event);
-				};
-			}
-
-			file.send(null);
-
-			return file.responseText;
 		}
+
+		file.send(null);
+
+		return file.responseText;
 	}
 }
 
