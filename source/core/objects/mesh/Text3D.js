@@ -94,7 +94,7 @@ Text3D.prototype.setFont = function(font)
 	this.font = font;
 	
 	this.setText();
-}
+};
 
 /**
  * Set Text
@@ -114,7 +114,7 @@ Text3D.prototype.setText = function(text)
 	}
 	
 	this.updateText();
-}
+};
 
 /**
  * Update text geometry
@@ -136,7 +136,7 @@ Text3D.prototype.updateText = function()
 			bevelThickness: this.bevelThickness
 		});
 	}
-}
+};
 
 /**
  * Clone this Text3D instance
@@ -146,7 +146,7 @@ Text3D.prototype.updateText = function()
 Text3D.prototype.clone = function()
 {
 	return new Text3D(this.text, this.material, this.font, this.height, this.bevel, this.bevelThickness, this.bevelSize, this.size, this.curveSegments);
-}
+};
 
 /**
  * Dispose mesh along with its material and geometry
@@ -168,7 +168,7 @@ Text3D.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
-}
+};
 
 /**
  * Create JSON for object
@@ -201,4 +201,4 @@ Text3D.prototype.toJSON = function(meta)
 	this.geometry = geometry;
 
 	return data;
-}
+};

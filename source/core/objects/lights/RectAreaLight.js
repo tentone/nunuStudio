@@ -35,4 +35,4 @@ RectAreaLight.prototype.toJSON = function(meta)
 	data.object.height = this.height;
 
 	return data;
-}
+};

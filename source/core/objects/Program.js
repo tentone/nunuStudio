@@ -168,7 +168,7 @@ Program.prototype.initialize = function()
 	{
 		this.setScene(this.children[0]);
 	}
-}
+};
 
 /**
  * Set program mouse and keyboard.
@@ -181,7 +181,7 @@ Program.prototype.setMouseKeyboard = function(mouse, keyboard)
 {
 	this.mouse = mouse;
 	this.keyboard = keyboard;
-}
+};
 
 /**
  * Set program renderer.
@@ -193,7 +193,7 @@ Program.prototype.setRenderer = function(renderer)
 {
 	this.renderer = renderer;
 	this.canvas = renderer.domElement;
-}
+};
 
 /**
  * Enter VR mode.
@@ -219,7 +219,7 @@ Program.prototype.displayVR = function()
 			console.warn("nunuStudio: Failed to enter in VR mode", e);
 		}		
 	}
-}
+};
 
 /**
  * Exit VR mode.
@@ -239,7 +239,7 @@ Program.prototype.exitVR = function()
 			this.vrEffect = null;
 		}
 	}
-}
+};
 
 /**
  * Update program state.
@@ -251,7 +251,7 @@ Program.prototype.exitVR = function()
 Program.prototype.update = function()
 {
 	this.scene.update();
-}
+};
 
 /**
  * Render program to canvas.
@@ -301,7 +301,7 @@ Program.prototype.render = function(renderer)
 
 		renderer.setScissorTest(false);
 	}
-}
+};
 
 /**
  * Resize program elements.
@@ -329,7 +329,7 @@ Program.prototype.resize = function(x, y)
 			child.resize();
 		}
 	});
-}
+};
 
 /**
  * Change scene during runtime, this method can receive booth a scene name or a scene object.
@@ -359,7 +359,7 @@ Program.prototype.setScene = function(scene)
 			this.scene.cameras.push(this.defaultCamera);
 		}
 	}
-}
+};
 
 /**
  * Remove Scene from program.
@@ -381,7 +381,7 @@ Program.prototype.remove = function(scene)
 	{
 		this.scene = null;
 	}
-}
+};
 
 /**
  * Add new scene to this program.
@@ -404,7 +404,7 @@ Program.prototype.add = function(scene)
 			this.scene = this.children[0];
 		}
 	}
-}
+};
 
 /**
  * Clone program, keeping uuids and every identification attribute.
@@ -417,7 +417,7 @@ Program.prototype.add = function(scene)
 Program.prototype.clone = function()
 {
 	return new ObjectLoader().parse(this.toJSON());
-}
+};
 
 /**
  * Set a scene as initial scene using its uuid.
@@ -430,7 +430,7 @@ Program.prototype.clone = function()
 Program.prototype.setInitialScene = function(scene)
 {
 	this.defaultScene = scene.uuid;
-}
+};
 
 /**
  * Create a scene using a default template.
@@ -475,7 +475,7 @@ Program.prototype.addDefaultScene = function(material)
 
 	//Add scene to program
 	this.add(scene);
-}
+};
 
 /**
  * Dispose program data to avoid memory leaks.
@@ -509,7 +509,7 @@ Program.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
-}
+};
 
 /**
  * Receive external data and pass it to all script instances.
@@ -546,7 +546,7 @@ Program.prototype.receiveDataApp = function(data)
 			console.warn("nunuStudio: No script with onAppData found", data);
 		}
 	}
-}
+};
 
 /**
  * Send data to external app instance.
@@ -578,7 +578,7 @@ Program.prototype.sendDataApp = function(data)
 			console.warn("nunuStudio: No app available", data);
 		}
 	}
-}
+};
 
 /**
  * Serialize object as JSON.
@@ -666,4 +666,4 @@ Program.prototype.toJSON = function(meta, exportResources)
 	data.object.shadowsType = this.shadowsType;
 
 	return data;
-}
+};

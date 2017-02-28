@@ -205,7 +205,7 @@ KinectDevice.prototype.update = function()
 	{
 		this.children[i].update();
 	}
-}
+};
 
 /**
  * Check if there is kinect connected.
@@ -216,7 +216,7 @@ KinectDevice.prototype.update = function()
 KinectDevice.prototype.isConnected = function()
 {
 	return this.connected;
-}
+};
 
 /**
  * Set kinect camera mode.
@@ -234,7 +234,7 @@ KinectDevice.prototype.setCameraMode = function(mode)
 	{
 		socket.send("Depth");
 	}
-}
+};
 
 /**
  * Create JSON for object.
@@ -248,4 +248,4 @@ KinectDevice.prototype.toJSON = function(meta)
 	data.object.debugModel = this.debugModel;
 
 	return data;
-}
+};

@@ -21,13 +21,13 @@ TTFLoader.prototype.load = function(url, onLoad, onProgress, onError)
 			onLoad(json);
 		}
 	}, onProgress, onError);
-}
+};
 
 TTFLoader.prototype.parse = function(arraybuffer)
 {
 	var font = opentype.parse(arraybuffer);
 	return TTFLoader.convert(font, this.reversed);
-}
+};
 
 TTFLoader.convert = function(font, reversed)
 {
@@ -106,7 +106,7 @@ TTFLoader.convert = function(font, reversed)
 	};
 
 	return data;
-}
+};
 
 TTFLoader.reverseCommands = function(commands)
 {
@@ -163,4 +163,4 @@ TTFLoader.reverseCommands = function(commands)
 	});
 	
 	return reversed;
-}
+};

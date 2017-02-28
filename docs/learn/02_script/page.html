@@ -89,6 +89,22 @@
 };</code></pre>
 			<p>If everything works as expected you should see the following animation.</p>
 			<img src="animation.gif" style="width:50%; margin-left:25%"></img>
+
+			<h3 class="black">Keyboard and Mouse input</h3>
+			<p>Its possible to use the keyboard and mouse to move objects around. This can be done using the Keyboard and Mouse objects inside scripts. The code bellow rotates an object in the y axis using the mouse delta, and moves the object aroud using keyboard arrow keys.</p>
+			<pre><code>this.update = function()
+{
+	self.rotation.y += Mouse.delta.x * 0.01;
+
+	if(Keyboard.keyPressed(Keyboard.LEFT))
+	{
+		self.position.x -= 0.1;
+	}
+	if(Keyboard.keyPressed(Keyboard.RIGHT))
+	{
+		self.position.x += 0.1;
+	}
+};</code></pre>
 		</div>
 	</section>
 

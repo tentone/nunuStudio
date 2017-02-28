@@ -1,18 +1,18 @@
 "use strict";
 
 /**
- * Keyboard instance for input in sync with the running 3D application, is updated automatically by the runtime handler
+ * Keyboard instance for input in sync with the running 3D application, is updated automatically by the runtime handler.
+ * 
  * @class Keyboard
  * @module Input
  * @constructor
  */
 
 /**
- * Array with keyboard keys status
+ * Array with keyboard keys status.
  * @type {array}
  * @property keys
  */
-
 function Keyboard()
 {
 	this.keys = [];
@@ -56,7 +56,8 @@ function Keyboard()
 Keyboard.prototype = Keyboard;
 
 /**
- * Update key flags synchronously (called automatically by the app runtime)
+ * Update key flags synchronously (called automatically by the app runtime).
+ * 
  * @method update
  */
 Keyboard.update = function()
@@ -77,7 +78,7 @@ Keyboard.update = function()
 			end += 2;
 		}
 	}
-}
+};
 
 /**
  * Reset keyboard status to default
@@ -93,7 +94,7 @@ Keyboard.reset = function()
 	{
 		this.keys[i].reset();
 	}
-}
+};
 
 /**
  * Check if a key is pressed
@@ -103,7 +104,7 @@ Keyboard.reset = function()
 Keyboard.keyPressed = function(key)
 {
 	return this.keys[key].pressed;
-}
+};
 
 /**
  * Check is a key as just pressed
@@ -113,7 +114,7 @@ Keyboard.keyPressed = function(key)
 Keyboard.keyJustPressed = function(key)
 {
 	return this.keys[key].justPressed;
-}
+};
 
 /**
  * Check if a key was just released
@@ -123,7 +124,7 @@ Keyboard.keyJustPressed = function(key)
 Keyboard.keyJustReleased = function(key)
 {
 	return this.keys[key].justReleased;
-}
+};
 
 /**
  * Dispose keyboard events (called automatically by the app runtime)
@@ -136,7 +137,7 @@ Keyboard.dispose = function()
 		var event = this.events[i];
 		event[0].removeEventListener(event[1], event[2]);
 	}
-}
+};
 
 /**
  * TAB key

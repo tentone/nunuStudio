@@ -107,11 +107,14 @@ function SpineAnimation(json, atlas, path, textures)
 }
 
 SpineAnimation.prototype = Object.create(THREE.Mesh.prototype);
+
 SpineAnimation.QUAD_TRIANGLES = [0, 1, 2, 2, 3, 0];
 
 /**
- * Update animation state
- * Automatically called by the rutime
+ * Update animation state.
+ * 
+ * Automatically called by the runtime.
+ * 
  * @method update
  */
 SpineAnimation.prototype.update = function()
@@ -127,10 +130,11 @@ SpineAnimation.prototype.update = function()
 	{
 		this.children[i].update();
 	}
-}
+};
 
 /**
- * Get all available animations
+ * Get all available animations.
+ * 
  * @method getAnimations
  * @return {Array} Animations
  */
@@ -140,7 +144,8 @@ SpineAnimation.prototype.getAnimations = function()
 }
 
 /**
- * Set animation from track number and name
+ * Set animation from track number and name.
+ * 
  * @method setAnimation
  * @param {Number} track Track number
  * @param {String} name Animation name
@@ -152,19 +157,21 @@ SpineAnimation.prototype.setAnimation = function(track, name)
 		this.state.setAnimation(track, name, true);
 	}
 	catch(e){}
-}
+};
 
 /**
- * Get skins in this animation
+ * Get skins in this animation.
+ * 
  * @return {[type]} [description]
  */
 SpineAnimation.prototype.getSkins = function()
 {
 	return this.state.data.skeletonData.skins;
-}
+};
 
 /**
- * Update mesh geometry from animation state
+ * Update mesh geometry from animation state.
+ * 
  * @method updateGeometry
  */
 SpineAnimation.prototype.updateGeometry = function()
@@ -219,11 +226,13 @@ SpineAnimation.prototype.updateGeometry = function()
 			z += this.zOffset;
 		}
 	}
+	
 	batcher.end();
-}
+};
 
 /**
- * Create JSON for script
+ * Create JSON for spine animation.
+ * 
  * @param {Object} meta
  * @return {Object} json
  */
@@ -257,4 +266,4 @@ SpineAnimation.prototype.toJSON = function(meta)
 	this.material = material;
 
 	return data;
-}
+};

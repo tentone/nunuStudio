@@ -85,4 +85,4 @@ Audio.prototype.toJSON = function(meta)
 	meta.audio[this.uuid] = data;
 
 	return data;
-}
+};

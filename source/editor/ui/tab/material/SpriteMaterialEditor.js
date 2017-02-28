@@ -26,7 +26,6 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.rotation = new NumberBox(this.form.element);
 	this.rotation.size.set(60, 18);
 	this.rotation.setStep(0.01);
-	this.rotation.updateInterface();
 	this.rotation.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -43,7 +42,6 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.map = new TextureBox(this.form.element);
 	this.map.size.set(100, 100);
-	this.map.updateInterface();
 	this.map.setOnChange(function(file)
 	{
 		self.material.map = self.map.getValue();

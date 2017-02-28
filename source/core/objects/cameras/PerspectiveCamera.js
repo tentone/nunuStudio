@@ -104,7 +104,7 @@ PerspectiveCamera.prototype.destroy = function()
 	}
 	
 	THREE.Object3D.prototype.destroy.call(this);
-}
+};
 
 /**
  * Update world transformation matrix ignoring parent scaling properties.
@@ -140,7 +140,7 @@ PerspectiveCamera.prototype.updateMatrixWorld = function(force)
 	{
 		children[i].updateMatrixWorld(force);
 	}
-}
+};
 
 /**
  * Update camera projection matrix.
@@ -162,7 +162,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 	}
 
 	this.projectionMatrix.makePerspective(left, left + width, top, top - height, this.near, this.far);
-}
+};
 
 /**
  * Create JSON description.
@@ -182,4 +182,4 @@ PerspectiveCamera.prototype.toJSON = function(meta)
 	data.object.order = this.order;
 	
 	return data;
-}
+};

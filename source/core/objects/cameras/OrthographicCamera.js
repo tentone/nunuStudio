@@ -126,7 +126,7 @@ OrthographicCamera.prototype.destroy = function()
 	}
 	
 	THREE.Object3D.prototype.destroy.call(this);
-}
+};
 
 /**
  * Update camera projection matrix.
@@ -154,7 +154,7 @@ OrthographicCamera.prototype.updateProjectionMatrix = function()
 	}
 
 	THREE.OrthographicCamera.prototype.updateProjectionMatrix.call(this);
-}
+};
 
 /**
  * Create JSON description.
@@ -178,4 +178,4 @@ OrthographicCamera.prototype.toJSON = function(meta)
 	data.object.order = this.order;
 
 	return data;
-}
+};

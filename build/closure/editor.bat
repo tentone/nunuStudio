@@ -1,6 +1,5 @@
 @echo off
 echo ------------------------
-echo       nunu Studio
 echo         Editor
 echo ------------------------
 
@@ -17,4 +16,3 @@ echo Cleaning temporary files
 del temp.js
 
 echo Done
-pause

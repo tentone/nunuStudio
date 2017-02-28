@@ -25,7 +25,6 @@ function PointMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Texture map");
 	this.form.nextRow();
 	this.map = new TextureBox(this.form.element);
-	this.map.updateInterface();
 	this.map.setOnChange(function(file)
 	{
 		self.material.map = self.map.getValue();

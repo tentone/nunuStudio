@@ -95,7 +95,7 @@ Scene.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
-}
+};
 
 /**
  * Update scene objects and the physics world.
@@ -120,7 +120,7 @@ Scene.prototype.update = function()
 	{
 		this.children[i].update();
 	}
-}
+};
 
 /**
  * Get camera from scene using cameras uuid.
@@ -152,7 +152,7 @@ Scene.prototype.getCamera = function(uuid, obj)
 	}
 
 	return null;
-}
+};
 
 /**
  * Add camera to active cameras list.
@@ -164,7 +164,7 @@ Scene.prototype.addCamera = function(camera)
 {
 	this.cameras.push(camera);
 	this.updateCameraOrder();
-}
+};
 
 /**
  * Update active cameras order.
@@ -177,7 +177,7 @@ Scene.prototype.updateCameraOrder = function()
 	{
 		return a.order < b.order;
 	});
-}
+};
 
 /**
  * Remove camera from active camera list.
@@ -192,7 +192,7 @@ Scene.prototype.removeCamera = function(camera)
 	{
 		this.cameras.splice(index, 1);
 	}
-}
+};
 
 /**
  * Set scene fog mode.
@@ -216,7 +216,7 @@ Scene.prototype.setFogMode = function(mode)
 	{
 		this.fog = null;
 	}
-}
+};
 
 /**
  * Serialize scene as JSON.
@@ -246,4 +246,4 @@ Scene.prototype.toJSON = function(meta)
 	data.object.world.solver.iterations = this.world.solver.iterations;
 
 	return data;
-}
+};

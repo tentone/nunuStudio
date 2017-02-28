@@ -65,7 +65,7 @@ SkinnedMesh.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
-}
+};
 
 /**
  * Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.

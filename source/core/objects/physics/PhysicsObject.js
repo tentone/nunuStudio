@@ -42,8 +42,9 @@ function PhysicsObject()
 PhysicsObject.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
- * Intialize physics object and add it to the scene physics world
- * Automatically called by the runtime
+ * Intialize physics object and add it to the scene physics world.
+ * 
+ * Automatically called by the runtime.
  * 
  * @method initialize
  */
@@ -69,11 +70,12 @@ PhysicsObject.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
-}
+};
 
 /**
  * Update object position and rotation based on cannon.js body.
- * Automatically called by the runtime
+ * 
+ * Automatically called by the runtime.
  * 
  * @method update
  */
@@ -90,7 +92,7 @@ PhysicsObject.prototype.update = function()
 	{
 		this.children[i].update();
 	}
-}
+};
 
 /**
  * Add shape to physics object body.
@@ -104,7 +106,7 @@ PhysicsObject.prototype.addShape = function(shape)
 	{
 		this.body.addShape(shape);
 	}
-}
+};
 
 /**
  * Create JSON for object.
@@ -170,4 +172,4 @@ PhysicsObject.prototype.toJSON = function(meta)
 	}
 
 	return data;
-}
+};

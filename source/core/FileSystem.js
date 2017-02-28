@@ -93,7 +93,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 
 		return file.responseText;
 	}
-}
+};
 
 /**
  * Read file as arraybuffer data.
@@ -127,7 +127,7 @@ FileSystem.readFileArrayBuffer = function(fname)
 
 		return ArraybufferUtils.fromBinaryString(file.response);
 	}
-}
+};
 
 /**
  * Read file as base64 data.
@@ -152,7 +152,7 @@ FileSystem.readFileBase64 = function(fname)
 
 		return Base64Utils.fromBinaryString(file.response);
 	}
-}
+};
 
 /**
  * Write text file.
@@ -187,7 +187,7 @@ FileSystem.writeFile = function(fname, data)
 
 		download.click();
 	}
-}
+};
 
 /**
  * Write binary file using base64 data.
@@ -208,7 +208,7 @@ FileSystem.writeFileBase64 = function(fname, data)
 		stream.write(buffer);
 		stream.end();
 	}
-}
+};
 
 /**
  * Copy file (cannot be used to copy folders).
@@ -225,7 +225,7 @@ FileSystem.copyFile = function(src, dst)
 	{
 		FileSystem.fs.createReadStream(src).pipe(FileSystem.fs.createWriteStream(dst));
 	}
-}
+};
 
 /**
  * Make a directory (dont trow exeption if directory already exists).
@@ -245,7 +245,7 @@ FileSystem.makeDirectory = function(dir)
 		}
 		catch(e){}
 	}
-}
+};
 
 /**
  * Returns files in directory (returns empty array in case of error).
@@ -269,7 +269,7 @@ FileSystem.getFilesDirectory = function(dir)
 		}
 	}
 	return [];
-}
+};
 
 /**
  * Copy folder and all its files (includes symbolic links).
@@ -310,7 +310,7 @@ FileSystem.copyFolder = function(src, dest)
 			}
 		}
 	}
-}
+};
 
 /**
  * Open file chooser dialog receives onLoad callback, file filter, saveas.
@@ -346,7 +346,7 @@ FileSystem.chooseFile = function(onLoad, filter, saveas)
 	}
 	
 	chooser.click();
-}
+};
 
 /**
  * Used as an alternative to chooseFile for saving files in the browser.
@@ -373,7 +373,7 @@ FileSystem.chooseFileName = function(onLoad, saveas)
 			onLoad(fname);
 		}
 	}
-}
+};
 
 /**
  * Check if a file exists.
@@ -392,7 +392,7 @@ FileSystem.fileExists = function(file)
 	}
 
 	return false;
-}
+};
 
 /**
  * Get file name without extension from file path string.
@@ -414,7 +414,7 @@ FileSystem.getFileName = function(file)
 	}
 	
 	return "";
-}
+};
 
 /**
  * Get file name without extension.
@@ -433,7 +433,7 @@ FileSystem.getNameWithoutExtension = function(file)
 	}
 
 	return "";
-}
+};
 
 /**
  * Get file directoty.
@@ -455,7 +455,7 @@ FileSystem.getFilePath = function(file)
 	}
 
 	return "";
-}
+};
 
 /**
  * Get file extension from file path string (always in lowercase).
@@ -474,4 +474,4 @@ FileSystem.getFileExtension = function(file)
 	}
 	
 	return "";
-}
+};

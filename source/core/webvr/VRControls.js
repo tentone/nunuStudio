@@ -89,13 +89,13 @@ VRControls.prototype.update = function()
 			this.object.quaternion.copy(this.quaternion);
 		}
 	}
-}
+};
 
 //Dispose vr controls
 VRControls.prototype.dispose = function()
 {
 	this.vrInput = null;
-}
+};
 
 //Reset pose
 VRControls.prototype.resetPose = function()
@@ -104,10 +104,10 @@ VRControls.prototype.resetPose = function()
 	{
 		this.vrInput.resetPose();
 	}
-}
+};
 
 //Attach object to VRControls
 VRControls.prototype.attachObject = function(object)
 {
 	this.object = object;
-}
+};

@@ -135,7 +135,7 @@ Image.prototype.encodeData = function()
 			this.data = canvas.toDataURL("image/jpeg", 1.0);
 		}
 	}
-}
+};
 
 /**
  * Serialize Image resource to JSON.
@@ -165,4 +165,4 @@ Image.prototype.toJSON = function(meta)
 	meta.images[this.uuid] = data;
 
 	return data;
-}
+};

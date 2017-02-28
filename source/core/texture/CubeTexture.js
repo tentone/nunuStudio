@@ -137,7 +137,7 @@ CubeTexture.prototype.updateImages = function()
 			self.needsUpdate = true;
 		};
 	}
-}
+};
 
 /**
  * Serialize cube texture to JSON
@@ -160,4 +160,4 @@ CubeTexture.prototype.toJSON = function(meta)
 	}
 
 	return data;
-}
+};

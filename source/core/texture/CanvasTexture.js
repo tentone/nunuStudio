@@ -85,7 +85,7 @@ CanvasTexture.prototype.updateSize = function()
 	this.context.textAlign = "center";
 	this.context.fillStyle = "#FF0000";
 	this.context.fillText("Canvas Texture", this.width/2, this.height/2);
-}
+};
 
 /**
  * Clear canvas texture with a background color.
@@ -99,7 +99,7 @@ CanvasTexture.prototype.clear = function(color)
 {
 	this.context.fillStyle = color;
 	this.context.fillRect(0, 0, this.width, this.height);
-}
+};
 
 /**
  * Create JSON description for canvas texture, canvas image is not serialized.
@@ -115,4 +115,4 @@ CanvasTexture.prototype.toJSON = function(meta)
 	data.height = this.height;
 
 	return data;
-}
+};

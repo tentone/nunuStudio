@@ -400,15 +400,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\three\\MultiMaterial.js": {
-            "name": "..\\source\\core\\three\\MultiMaterial.js",
-            "modules": {},
-            "classes": {
-                "MultiMaterial": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\three\\Object3D.js": {
             "name": "..\\source\\core\\three\\Object3D.js",
             "modules": {},
@@ -765,7 +756,6 @@
             "classes": {
                 "Fog": 1,
                 "Material": 1,
-                "MultiMaterial": 1,
                 "Object3D": 1
             },
             "fors": {},
@@ -864,7 +854,7 @@
             "namespace": "",
             "file": "..\\source\\core\\input\\Keyboard.js",
             "line": 3,
-            "description": "Keyboard instance for input in sync with the running 3D application, is updated automatically by the runtime handler",
+            "description": "Keyboard instance for input in sync with the running 3D application, is updated automatically by the runtime handler.",
             "is_constructor": 1
         },
         "Mouse": {
@@ -879,7 +869,7 @@
             "namespace": "",
             "file": "..\\source\\core\\input\\Mouse.js",
             "line": 3,
-            "description": "Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler",
+            "description": "Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler.",
             "is_constructor": 1
         },
         "AudioEmitter": {
@@ -1936,7 +1926,7 @@
             "namespace": "",
             "file": "..\\source\\core\\texture\\VideoTexture.js",
             "line": 3,
-            "description": "Video texture, uses a video DOM element instead of a img element.\n\nVideoTexture also provides methods for playback control",
+            "description": "Video texture, uses a video DOM element instead of a img element.\n\nVideoTexture also provides methods for playback control.",
             "is_constructor": 1,
             "extends": "{Texture}",
             "params": [
@@ -2042,20 +2032,6 @@
             "file": "..\\source\\core\\three\\Material.js",
             "line": 3,
             "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don\"t have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
-        },
-        "MultiMaterial": {
-            "name": "MultiMaterial",
-            "shortname": "MultiMaterial",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "THREE",
-            "namespace": "",
-            "file": "..\\source\\core\\three\\MultiMaterial.js",
-            "line": 3,
-            "description": "A Material to define multiple materials for the same geometry. The geometry decides which material is used for which faces by the faces materialindex. The material index corresponds with the index of the material in the .materials array.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/MultiMaterial"
         },
         "Object3D": {
             "name": "Object3D",
@@ -2203,7 +2179,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 94,
+            "line": 93,
             "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere",
             "is_constructor": 1,
             "params": [
@@ -2323,8 +2299,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 10,
-            "description": "Array with keyboard keys status",
+            "line": 11,
+            "description": "Array with keyboard keys status.",
             "type": "{array}",
             "itemtype": "property",
             "name": "keys",
@@ -2334,7 +2310,7 @@
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
             "line": 58,
-            "description": "Update key flags synchronously (called automatically by the app runtime)",
+            "description": "Update key flags synchronously (called automatically by the app runtime).",
             "itemtype": "method",
             "name": "update",
             "class": "Keyboard",
@@ -2342,7 +2318,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 82,
+            "line": 83,
             "description": "Reset keyboard status to default",
             "itemtype": "method",
             "name": "reset",
@@ -2351,7 +2327,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 98,
+            "line": 99,
             "description": "Check if a key is pressed",
             "itemtype": "method",
             "name": "keyPressed",
@@ -2364,7 +2340,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 108,
+            "line": 109,
             "description": "Check is a key as just pressed",
             "itemtype": "method",
             "name": "keyJustPressed",
@@ -2377,7 +2353,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 118,
+            "line": 119,
             "description": "Check if a key was just released",
             "itemtype": "method",
             "name": "keyJustReleased",
@@ -2390,7 +2366,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 128,
+            "line": 129,
             "description": "Dispose keyboard events (called automatically by the app runtime)",
             "itemtype": "method",
             "name": "dispose",
@@ -2399,7 +2375,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 141,
+            "line": 142,
             "description": "TAB key",
             "itemtype": "attribute",
             "name": "TAB",
@@ -2409,7 +2385,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 147,
+            "line": 148,
             "description": "ENTER key",
             "itemtype": "attribute",
             "name": "ENTER",
@@ -2419,7 +2395,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 153,
+            "line": 154,
             "description": "SHIFT key",
             "itemtype": "attribute",
             "name": "SHIFT",
@@ -2429,7 +2405,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 159,
+            "line": 160,
             "description": "CTRL key",
             "itemtype": "attribute",
             "name": "CTRL",
@@ -2439,7 +2415,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 165,
+            "line": 166,
             "description": "ALT key",
             "itemtype": "attribute",
             "name": "ALT",
@@ -2449,7 +2425,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 171,
+            "line": 172,
             "description": "CAPS_LOCK key",
             "itemtype": "attribute",
             "name": "CAPS_LOCK",
@@ -2459,7 +2435,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 177,
+            "line": 178,
             "description": "ESC key",
             "itemtype": "attribute",
             "name": "ESC",
@@ -2469,7 +2445,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 183,
+            "line": 184,
             "description": "SPACEBAR key",
             "itemtype": "attribute",
             "name": "SPACEBAR",
@@ -2479,7 +2455,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 189,
+            "line": 190,
             "description": "PAGE_UP key",
             "itemtype": "attribute",
             "name": "PAGE_UP",
@@ -2489,7 +2465,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 195,
+            "line": 196,
             "description": "PAGE_DOWN key",
             "itemtype": "attribute",
             "name": "PAGE_DOWN",
@@ -2499,7 +2475,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 201,
+            "line": 202,
             "description": "END key",
             "itemtype": "attribute",
             "name": "END",
@@ -2509,7 +2485,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 207,
+            "line": 208,
             "description": "HOME key",
             "itemtype": "attribute",
             "name": "HOME",
@@ -2519,7 +2495,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 213,
+            "line": 214,
             "description": "INSERT key",
             "itemtype": "attribute",
             "name": "INSERT",
@@ -2529,7 +2505,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 219,
+            "line": 220,
             "description": "DEL key",
             "itemtype": "attribute",
             "name": "DEL",
@@ -2539,7 +2515,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 226,
+            "line": 227,
             "description": "LEFT key",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -2549,7 +2525,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 232,
+            "line": 233,
             "description": "RIGHT key",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -2559,7 +2535,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 238,
+            "line": 239,
             "description": "UP key",
             "itemtype": "attribute",
             "name": "UP",
@@ -2569,7 +2545,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 244,
+            "line": 245,
             "description": "DOWN key",
             "itemtype": "attribute",
             "name": "DOWN",
@@ -2579,7 +2555,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 251,
+            "line": 252,
             "description": "NUM0 key",
             "itemtype": "attribute",
             "name": "NUM0",
@@ -2589,7 +2565,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 257,
+            "line": 258,
             "description": "NUM1 key",
             "itemtype": "attribute",
             "name": "NUM1",
@@ -2599,7 +2575,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 263,
+            "line": 264,
             "description": "NUM2 key",
             "itemtype": "attribute",
             "name": "NUM2",
@@ -2609,7 +2585,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 269,
+            "line": 270,
             "description": "NUM3 key",
             "itemtype": "attribute",
             "name": "NUM3",
@@ -2619,7 +2595,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 275,
+            "line": 276,
             "description": "NUM4 key",
             "itemtype": "attribute",
             "name": "NUM4",
@@ -2629,7 +2605,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 281,
+            "line": 282,
             "description": "NUM5 key",
             "itemtype": "attribute",
             "name": "NUM5",
@@ -2639,7 +2615,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 287,
+            "line": 288,
             "description": "NUM6 key",
             "itemtype": "attribute",
             "name": "NUM6",
@@ -2649,7 +2625,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 293,
+            "line": 294,
             "description": "NUM7 key",
             "itemtype": "attribute",
             "name": "NUM7",
@@ -2659,7 +2635,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 299,
+            "line": 300,
             "description": "NUM8 key",
             "itemtype": "attribute",
             "name": "NUM8",
@@ -2669,7 +2645,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 305,
+            "line": 306,
             "description": "NUM9 key",
             "itemtype": "attribute",
             "name": "NUM9",
@@ -2679,7 +2655,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 312,
+            "line": 313,
             "description": "A key",
             "itemtype": "attribute",
             "name": "A",
@@ -2689,7 +2665,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 318,
+            "line": 319,
             "description": "B key",
             "itemtype": "attribute",
             "name": "B",
@@ -2699,7 +2675,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 324,
+            "line": 325,
             "description": "C key",
             "itemtype": "attribute",
             "name": "C",
@@ -2709,7 +2685,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 330,
+            "line": 331,
             "description": "D key",
             "itemtype": "attribute",
             "name": "D",
@@ -2719,7 +2695,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 336,
+            "line": 337,
             "description": "E key",
             "itemtype": "attribute",
             "name": "E",
@@ -2729,7 +2705,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 342,
+            "line": 343,
             "description": "F key",
             "itemtype": "attribute",
             "name": "F",
@@ -2739,7 +2715,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 348,
+            "line": 349,
             "description": "G key",
             "itemtype": "attribute",
             "name": "G",
@@ -2749,7 +2725,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 354,
+            "line": 355,
             "description": "H key",
             "itemtype": "attribute",
             "name": "H",
@@ -2759,7 +2735,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 360,
+            "line": 361,
             "description": "I key",
             "itemtype": "attribute",
             "name": "I",
@@ -2769,7 +2745,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 366,
+            "line": 367,
             "description": "J key",
             "itemtype": "attribute",
             "name": "J",
@@ -2779,7 +2755,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 372,
+            "line": 373,
             "description": "K key",
             "itemtype": "attribute",
             "name": "K",
@@ -2789,7 +2765,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 378,
+            "line": 379,
             "description": "L key",
             "itemtype": "attribute",
             "name": "L",
@@ -2799,7 +2775,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 384,
+            "line": 385,
             "description": "M key",
             "itemtype": "attribute",
             "name": "M",
@@ -2809,7 +2785,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 390,
+            "line": 391,
             "description": "N key",
             "itemtype": "attribute",
             "name": "N",
@@ -2819,7 +2795,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 396,
+            "line": 397,
             "description": "O key",
             "itemtype": "attribute",
             "name": "O",
@@ -2829,7 +2805,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 402,
+            "line": 403,
             "description": "P key",
             "itemtype": "attribute",
             "name": "P",
@@ -2839,7 +2815,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 408,
+            "line": 409,
             "description": "Q key",
             "itemtype": "attribute",
             "name": "Q",
@@ -2849,7 +2825,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 414,
+            "line": 415,
             "description": "R key",
             "itemtype": "attribute",
             "name": "R",
@@ -2859,7 +2835,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 420,
+            "line": 421,
             "description": "S key",
             "itemtype": "attribute",
             "name": "S",
@@ -2869,7 +2845,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 426,
+            "line": 427,
             "description": "T key",
             "itemtype": "attribute",
             "name": "T",
@@ -2879,7 +2855,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 432,
+            "line": 433,
             "description": "U key",
             "itemtype": "attribute",
             "name": "U",
@@ -2889,7 +2865,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 438,
+            "line": 439,
             "description": "V key",
             "itemtype": "attribute",
             "name": "V",
@@ -2899,7 +2875,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 444,
+            "line": 445,
             "description": "W key",
             "itemtype": "attribute",
             "name": "W",
@@ -2909,7 +2885,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 450,
+            "line": 451,
             "description": "X key",
             "itemtype": "attribute",
             "name": "X",
@@ -2919,7 +2895,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 456,
+            "line": 457,
             "description": "Y key",
             "itemtype": "attribute",
             "name": "Y",
@@ -2929,7 +2905,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 462,
+            "line": 463,
             "description": "Z key",
             "itemtype": "attribute",
             "name": "Z",
@@ -2939,7 +2915,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 469,
+            "line": 470,
             "description": "F1 key",
             "itemtype": "attribute",
             "name": "F1",
@@ -2949,7 +2925,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 475,
+            "line": 476,
             "description": "F2 key",
             "itemtype": "attribute",
             "name": "F2",
@@ -2959,7 +2935,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 481,
+            "line": 482,
             "description": "F3 key",
             "itemtype": "attribute",
             "name": "F3",
@@ -2969,7 +2945,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 487,
+            "line": 488,
             "description": "F4 key",
             "itemtype": "attribute",
             "name": "F4",
@@ -2979,7 +2955,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 493,
+            "line": 494,
             "description": "F5 key",
             "itemtype": "attribute",
             "name": "F5",
@@ -2989,7 +2965,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 499,
+            "line": 500,
             "description": "F6 key",
             "itemtype": "attribute",
             "name": "F6",
@@ -2999,7 +2975,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 505,
+            "line": 506,
             "description": "F7 key",
             "itemtype": "attribute",
             "name": "F7",
@@ -3009,7 +2985,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 511,
+            "line": 512,
             "description": "F8 key",
             "itemtype": "attribute",
             "name": "F8",
@@ -3019,7 +2995,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 517,
+            "line": 518,
             "description": "F9 key",
             "itemtype": "attribute",
             "name": "F9",
@@ -3029,7 +3005,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 523,
+            "line": 524,
             "description": "F10 key",
             "itemtype": "attribute",
             "name": "F10",
@@ -3039,7 +3015,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 529,
+            "line": 530,
             "description": "F11 key",
             "itemtype": "attribute",
             "name": "F11",
@@ -3049,7 +3025,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 535,
+            "line": 536,
             "description": "F12 key",
             "itemtype": "attribute",
             "name": "F12",
@@ -3059,7 +3035,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 10,
+            "line": 11,
             "description": "Array with mouse buttons status",
             "type": "{array}",
             "itemtype": "property",
@@ -3069,7 +3045,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 16,
+            "line": 17,
             "description": "Mouse position inside of the window (coordinates in window space)",
             "type": "{Vector2}",
             "itemtype": "property",
@@ -3079,7 +3055,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 22,
+            "line": 23,
             "description": "Mouse movement (coordinates in window space)",
             "type": "{Vector2}",
             "itemtype": "property",
@@ -3089,7 +3065,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 28,
+            "line": 29,
             "description": "Mouse scroll wheel movement",
             "type": "{Number}",
             "itemtype": "property",
@@ -3099,7 +3075,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 34,
+            "line": 35,
             "description": "Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates",
             "type": "{DOM}",
             "itemtype": "property",
@@ -3140,7 +3116,7 @@
         {
             "file": "..\\source\\core\\input\\Mouse.js",
             "line": 207,
-            "description": "Canvas to be used for coordinates calculation relative to that canvas",
+            "description": "Canvas to be used for coordinates calculation relative to that canvas.",
             "itemtype": "method",
             "name": "setCanvas",
             "params": [
@@ -3155,8 +3131,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 229,
-            "description": "Check if mouse is inside attached canvas (updated async)",
+            "line": 230,
+            "description": "Check if mouse is inside attached canvas (updated async).",
             "itemtype": "method",
             "name": "insideCanvas",
             "return": {
@@ -3168,8 +3144,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 244,
-            "description": "Set mouse lock state",
+            "line": 246,
+            "description": "Set mouse lock state.",
             "itemtype": "method",
             "name": "setLock",
             "params": [
@@ -3184,8 +3160,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 286,
-            "description": "Check if mouse button is currently pressed",
+            "line": 289,
+            "description": "Check if mouse button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
             "params": [
@@ -3204,8 +3180,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 297,
-            "description": "Check if Mouse button was double clicked",
+            "line": 301,
+            "description": "Check if Mouse button was double clicked.",
             "itemtype": "method",
             "name": "buttonDoubleClicked",
             "return": {
@@ -3217,8 +3193,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 307,
-            "description": "Check if a mouse button was just pressed",
+            "line": 312,
+            "description": "Check if a mouse button was just pressed.",
             "itemtype": "method",
             "name": "buttonJustPressed",
             "params": [
@@ -3237,8 +3213,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 318,
-            "description": "Check if a mouse button was just released",
+            "line": 324,
+            "description": "Check if a mouse button was just released.",
             "itemtype": "method",
             "name": "buttonJustReleased",
             "params": [
@@ -3257,8 +3233,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 329,
-            "description": "Update mouse Position (automatically called by the runtime)",
+            "line": 336,
+            "description": "Update mouse Position (automatically called by the runtime).",
             "itemtype": "method",
             "name": "updatePosition",
             "params": [
@@ -3288,7 +3264,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 345,
+            "line": 353,
             "description": "Update a mouse button (automatically called by the runtime)",
             "params": [
                 {
@@ -3307,8 +3283,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 358,
-            "description": "Update mouse buttons state, position, wheel and delta synchronously (called automatically by the app runtime)",
+            "line": 366,
+            "description": "Update mouse buttons state, position, wheel and delta synchronously (called automatically by the app runtime).",
             "itemtype": "method",
             "name": "update",
             "class": "Mouse",
@@ -3316,8 +3292,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 419,
-            "description": "Dispose mouse events (called automatically by the app runtime)",
+            "line": 428,
+            "description": "Dispose mouse events (called automatically by the app runtime).",
             "itemtype": "method",
             "name": "dispose",
             "class": "Mouse",
@@ -5027,7 +5003,7 @@
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "line": 130,
-            "description": "Initialize particle system\nCalled automatically by the runtime",
+            "description": "Initialize particle system.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
             "class": "ParticleEmitter",
@@ -5035,8 +5011,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 145,
-            "description": "Update particle emitter state\nCalled automatically by the runtime",
+            "line": 147,
+            "description": "Update particle emitter state.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
             "class": "ParticleEmitter",
@@ -5044,7 +5020,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 160,
+            "line": 164,
             "description": "Dispose particle emitter",
             "itemtype": "method",
             "name": "dispose",
@@ -5053,8 +5029,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 184,
-            "description": "Create JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
+            "line": 188,
+            "description": "Create JSON for object.\n\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
             "params": [
                 {
                     "name": "meta",
@@ -5092,7 +5068,7 @@
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
             "line": 44,
-            "description": "Intialize physics object and add it to the scene physics world\nAutomatically called by the runtime",
+            "description": "Intialize physics object and add it to the scene physics world.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
             "class": "PhysicsObject",
@@ -5100,8 +5076,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 74,
-            "description": "Update object position and rotation based on cannon.js body.\nAutomatically called by the runtime",
+            "line": 75,
+            "description": "Update object position and rotation based on cannon.js body.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
             "class": "PhysicsObject",
@@ -5109,7 +5085,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 95,
+            "line": 97,
             "description": "Add shape to physics object body.",
             "params": [
                 {
@@ -5125,7 +5101,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 109,
+            "line": 111,
             "description": "Create JSON for object.\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
             "params": [
                 {
@@ -5203,7 +5179,7 @@
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
             "line": 112,
-            "description": "Update script state\nCalls the script update method if it exists",
+            "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
             "class": "Script",
@@ -5211,8 +5187,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 139,
-            "description": "Call resize method if available",
+            "line": 141,
+            "description": "Call resize method if available.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "resize",
             "class": "Script",
@@ -5220,8 +5196,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 151,
-            "description": "Call onAppData if available",
+            "line": 156,
+            "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
             "params": [
@@ -5236,8 +5212,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 164,
-            "description": "Set script code",
+            "line": 172,
+            "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended.",
             "itemtype": "method",
             "name": "setCode",
             "params": [
@@ -5252,8 +5228,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 193,
-            "description": "Create JSON for script",
+            "line": 204,
+            "description": "Create JSON for script.",
             "params": [
                 {
                     "name": "meta",
@@ -5300,8 +5276,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 112,
-            "description": "Update animation state\nAutomatically called by the rutime",
+            "line": 113,
+            "description": "Update animation state.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
             "class": "SpineAnimation",
@@ -5309,8 +5285,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 132,
-            "description": "Get all available animations",
+            "line": 135,
+            "description": "Get all available animations.",
             "itemtype": "method",
             "name": "getAnimations",
             "return": {
@@ -5322,8 +5298,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 142,
-            "description": "Set animation from track number and name",
+            "line": 146,
+            "description": "Set animation from track number and name.",
             "itemtype": "method",
             "name": "setAnimation",
             "params": [
@@ -5343,8 +5319,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 157,
-            "description": "Get skins in this animation",
+            "line": 162,
+            "description": "Get skins in this animation.",
             "return": {
                 "description": "[description]",
                 "type": "[type]"
@@ -5354,8 +5330,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 166,
-            "description": "Update mesh geometry from animation state",
+            "line": 172,
+            "description": "Update mesh geometry from animation state.",
             "itemtype": "method",
             "name": "updateGeometry",
             "class": "SpineAnimation",
@@ -5363,8 +5339,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 225,
-            "description": "Create JSON for script",
+            "line": 233,
+            "description": "Create JSON for spine animation.",
             "params": [
                 {
                     "name": "meta",
@@ -6862,7 +6838,7 @@
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
             "line": 106,
-            "description": "Set video time in seconds",
+            "description": "Set video time in seconds.",
             "params": [
                 {
                     "name": "time",
@@ -6877,8 +6853,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 116,
-            "description": "Set loop mode",
+            "line": 117,
+            "description": "Set loop mode.",
             "params": [
                 {
                     "name": "loop",
@@ -6893,8 +6869,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 127,
-            "description": "Set video volume",
+            "line": 129,
+            "description": "Set video volume.",
             "params": [
                 {
                     "name": "volume",
@@ -6909,8 +6885,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 138,
-            "description": "Set video playback speed",
+            "line": 141,
+            "description": "Set video playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
             "params": [
@@ -6925,8 +6901,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 149,
-            "description": "Pause video playback",
+            "line": 153,
+            "description": "Pause video playback.",
             "itemtype": "method",
             "name": "pause",
             "class": "VideoTexture",
@@ -6934,8 +6910,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 161,
-            "description": "Start playing video",
+            "line": 166,
+            "description": "Start playing video.",
             "itemtype": "method",
             "name": "play",
             "class": "VideoTexture",
@@ -6943,8 +6919,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 173,
-            "description": "Dispose video texture",
+            "line": 179,
+            "description": "Dispose video texture.",
             "itemtype": "method",
             "name": "dispose",
             "class": "VideoTexture",
@@ -6952,8 +6928,8 @@
         },
         {
             "file": "..\\source\\core\\texture\\VideoTexture.js",
-            "line": 189,
-            "description": "Create Video texture json description",
+            "line": 196,
+            "description": "Create Video texture json description.",
             "params": [
                 {
                     "name": "meta",
@@ -7024,35 +7000,6 @@
             "itemtype": "method",
             "name": "dispose",
             "class": "Material",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\source\\core\\three\\MultiMaterial.js",
-            "line": 12,
-            "description": "UUID unique identifier.",
-            "itemtype": "property",
-            "name": "uuid",
-            "type": "{String}",
-            "class": "MultiMaterial",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\source\\core\\three\\MultiMaterial.js",
-            "line": 18,
-            "description": "Resource name. Not required to be unique.",
-            "itemtype": "property",
-            "name": "name",
-            "type": "{String}",
-            "class": "MultiMaterial",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\source\\core\\three\\MultiMaterial.js",
-            "line": 25,
-            "description": "Dispose materials inside the container",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "MultiMaterial",
             "module": "THREE"
         },
         {
@@ -8837,7 +8784,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 102,
+            "line": 101,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -8847,7 +8794,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 108,
+            "line": 107,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -8857,7 +8804,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 114,
+            "line": 113,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -8868,7 +8815,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 121,
+            "line": 120,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -8879,7 +8826,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 128,
+            "line": 127,
             "description": "Canvas used to render graphics",
             "itemtype": "property",
             "name": "canvas",
@@ -8889,7 +8836,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 134,
+            "line": 133,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance\nIf true the canvas is resized whenether the resize method is called",
             "itemtype": "property",
             "name": "canvasResize",
@@ -8900,7 +8847,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 193,
+            "line": 192,
             "description": "Load program asynchronously and run it after its loaded",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -8926,7 +8873,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 217,
+            "line": 216,
             "description": "Load program from file",
             "itemtype": "method",
             "name": "loadProgram",
@@ -8942,7 +8889,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 229,
+            "line": 228,
             "description": "Start running nunu program\nA nunu program must be loaded before calling this method",
             "itemtype": "method",
             "name": "run",
@@ -8951,7 +8898,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 288,
+            "line": 287,
             "description": "Update nunu program state\nAutomatically called by the runtime handler",
             "itemtype": "method",
             "name": "update",
@@ -8960,7 +8907,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 302,
+            "line": 301,
             "description": "Exit from app\nThis method kills the app and disposes all internal elements to avoid memory leaks\nIs should be called before exiting the webpage or before switching nunu programs\nWhen loading new nunu programs the same NunuApp instance can be used",
             "itemtype": "method",
             "name": "exit",
@@ -8969,7 +8916,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 335,
+            "line": 334,
             "description": "Resize the window\nShould be called whenether the host window is resized",
             "itemtype": "method",
             "name": "resize",
@@ -8978,7 +8925,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 357,
+            "line": 356,
             "description": "Send data to running nunu application\nThe data sent using this method is received by scripts that implement the onAppData method",
             "params": [
                 {
@@ -8994,7 +8941,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 371,
+            "line": 370,
             "description": "Set on data receive callback\nCallback receives data as an argument",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -9010,7 +8957,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 382,
+            "line": 381,
             "description": "Set on exit callback\nCallback is executed when exiting the nunu app",
             "itemtype": "method",
             "name": "setOnExit",
@@ -9026,7 +8973,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 393,
+            "line": 392,
             "description": "Check if VR mode is available",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -9039,7 +8986,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 403,
+            "line": 402,
             "description": "Toggle VR mode, only works if VR mode is available",
             "itemtype": "method",
             "name": "toggleVR",
@@ -9048,7 +8995,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 428,
+            "line": 427,
             "description": "Set fullscreen mode",
             "params": [
                 {
@@ -9172,7 +9119,7 @@
         },
         {
             "message": "Missing item type\nUpdate a mouse button (automatically called by the runtime)",
-            "line": " ..\\source\\core\\input\\Mouse.js:345"
+            "line": " ..\\source\\core\\input\\Mouse.js:353"
         },
         {
             "message": "Missing item type\nCheck if hand is in pose.",
@@ -9183,24 +9130,24 @@
             "line": " ..\\source\\core\\objects\\mesh\\Text3D.js:173"
         },
         {
-            "message": "Missing item type\nCreate JSON for object\nNeed to backup material and geometry and set to undefined to avoid it being stored",
-            "line": " ..\\source\\core\\objects\\particle\\ParticleEmitter.js:184"
+            "message": "Missing item type\nCreate JSON for object.\n\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
+            "line": " ..\\source\\core\\objects\\particle\\ParticleEmitter.js:188"
         },
         {
             "message": "Missing item type\nCreate JSON for object.\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
-            "line": " ..\\source\\core\\objects\\physics\\PhysicsObject.js:109"
+            "line": " ..\\source\\core\\objects\\physics\\PhysicsObject.js:111"
         },
         {
-            "message": "Missing item type\nCreate JSON for script",
-            "line": " ..\\source\\core\\objects\\script\\Script.js:193"
+            "message": "Missing item type\nCreate JSON for script.",
+            "line": " ..\\source\\core\\objects\\script\\Script.js:204"
         },
         {
-            "message": "Missing item type\nGet skins in this animation",
-            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:157"
+            "message": "Missing item type\nGet skins in this animation.",
+            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:162"
         },
         {
-            "message": "Missing item type\nCreate JSON for script",
-            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:225"
+            "message": "Missing item type\nCreate JSON for spine animation.",
+            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:233"
         },
         {
             "message": "Missing item type\nSerialize audio data as JSON.\n\nAudio data is serialized in Base64.",
@@ -9227,8 +9174,8 @@
             "line": " ..\\source\\core\\resources\\Video.js:64"
         },
         {
-            "message": "Missing item type\nCreate Video texture json description",
-            "line": " ..\\source\\core\\texture\\VideoTexture.js:189"
+            "message": "Missing item type\nCreate Video texture json description.",
+            "line": " ..\\source\\core\\texture\\VideoTexture.js:196"
         },
         {
             "message": "Missing item type\nRotates the object to face a point in world space.",
@@ -9236,7 +9183,7 @@
         },
         {
             "message": "Missing item type\nSet fullscreen mode",
-            "line": " ..\\source\\runtime\\NunuApp.js:428"
+            "line": " ..\\source\\runtime\\NunuApp.js:427"
         },
         {
             "message": "Missing item type\nModules in this bundle",

@@ -91,7 +91,7 @@ ResourceManager.prototype.getMaterialByName = function(name)
 	}
 
 	return null;
-}
+};
 
 /**
  * Add material to materials list.
@@ -105,7 +105,7 @@ ResourceManager.prototype.addMaterial = function(material)
 	{
  		this.materials[material.uuid] = material;
  	}
-}
+};
 
 /**
  * Remove material from materials list, also receives default material used to replace.
@@ -146,7 +146,7 @@ ResourceManager.prototype.removeMaterial = function(material, defaultMaterial, d
 			}
 		});
 	}
-}
+};
 
 /**
  * Get texture by name.
@@ -166,7 +166,7 @@ ResourceManager.prototype.getTextureByName = function(name)
 	}
 
 	return null;
-}
+};
 
 /**
  * Add texture to texture list.
@@ -177,7 +177,7 @@ ResourceManager.prototype.getTextureByName = function(name)
 ResourceManager.prototype.addTexture = function(texture)
 {
  	this.textures[texture.uuid] = texture;
-}
+};
 
 /**
  * Remove texture from textures list (also receives default used to replace).
@@ -259,7 +259,7 @@ ResourceManager.prototype.removeTexture = function(texture, defaultTexture)
 			}
 		});
 	}
-}
+};
 
 /**
  * Get font by name.
@@ -279,7 +279,7 @@ ResourceManager.prototype.getFontByName = function(name)
 	}
 
 	return null;
-}
+};
 
 /**
  * Add font to fonts list.
@@ -321,7 +321,7 @@ ResourceManager.prototype.removeFont = function(font, defaultFont)
 			}
 		});
 	}
-}
+};
 
 /**
  * Get audio by name.
@@ -341,7 +341,7 @@ ResourceManager.prototype.getAudioByName = function(name)
 	}
 
 	return null;
-}
+};
 
 /**
  * Add audio to audio list.
@@ -355,7 +355,7 @@ ResourceManager.prototype.addAudio = function(audio)
 	{
  		this.audio[audio.uuid] = audio;
  	}
-}
+};
 
 /**
  * Remove audio.
@@ -383,4 +383,4 @@ ResourceManager.prototype.removeAudio = function(audio, defaultAudio)
 			}
 		});
 	}
-}
+};

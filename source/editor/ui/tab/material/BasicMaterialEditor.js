@@ -10,7 +10,6 @@ function BasicMaterialEditor(parent, closeable, container, index)
 	this.morphTargets = new CheckBox(this.form.element);
 	this.form.addText("Morph targets");
 	this.morphTargets.size.set(20, 15);
-	this.morphTargets.updateInterface();
 	this.morphTargets.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -25,7 +24,6 @@ function BasicMaterialEditor(parent, closeable, container, index)
 	this.wireframe = new CheckBox(this.form.element);
 	this.form.addText("Wireframe");
 	this.wireframe.size.set(200, 15);
-	this.wireframe.updateInterface();
 	this.wireframe.setOnChange(function()
 	{
 		if(self.material !== null)

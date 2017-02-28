@@ -21,7 +21,7 @@ TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}
 
 	return texture;
-}
+};
 
 TextureLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 {
@@ -31,7 +31,7 @@ TextureLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 	{
 		self.parse(JSON.parse(text), onLoad);
 	}, onProgress, onError);
-}
+};
 
 TextureLoader.prototype.parse = function(json, onLoad)
 {
@@ -121,22 +121,22 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	}
 
 	return texture;
-}
+};
 
 TextureLoader.prototype.setImages = function(images)
 {
 	this.images = images;
 	return this;
-}
+};
 
 TextureLoader.prototype.setVideos = function(videos)
 {
 	this.videos = videos;
 	return this;
-}
+};
 
 TextureLoader.prototype.setFonts = function(fonts)
 {
 	this.fonts = fonts;
 	return this;
-}
+};

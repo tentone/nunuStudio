@@ -200,7 +200,6 @@ function MaterialEditor(parent, closeable, container, index)
 	this.depthTest = new CheckBox(this.form.element);
 	this.form.addText("Test", true);
 	this.depthTest.size.set(20, 15);
-	this.depthTest.updateInterface();
 	this.depthTest.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -215,7 +214,6 @@ function MaterialEditor(parent, closeable, container, index)
 	this.depthWrite = new CheckBox(this.form.element);
 	this.form.addText("Write", true);
 	this.depthWrite.size.set(20, 15);
-	this.depthWrite.updateInterface();
 	this.depthWrite.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -296,9 +294,6 @@ function MaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.blending);
 	this.form.nextRow();
-
-	//Update form
-	this.form.updateInterface();
 }
 
 MaterialEditor.prototype = Object.create(TabElement.prototype);
@@ -430,34 +425,34 @@ MaterialEditor.prototype.updateInterface = function()
 	{
 		this.element.style.display = "block";
 
-		//Update main
+		//Main
 		this.main.visible = this.visible;
 		this.main.size.copy(this.size);
 		this.main.updateInterface();
 
-		//Update preview
+		//Preview
 		this.preview.visible = this.visible;
 		this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
 		this.preview.updateInterface();
 
-		//Update canvas
+		//Canvas
 		this.canvas.visible = this.visible;
 		this.canvas.size.set(this.preview.divA.offsetWidth, this.preview.divA.offsetHeight);
 		this.canvas.updateInterface();
 
-		//Update renderer and canvas
+		//Renderer and canvas
 		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 		this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
 
-		//Update children
+		//Children
 		for(var i = 0; i < this.children.length; i++)
 		{
 			this.children[i].visible = this.visible;
 			this.children[i].updateInterface();
 		}
 
-		//Update form
+		//Form
 		this.form.visible = this.visible;
 		this.form.updateInterface();
 

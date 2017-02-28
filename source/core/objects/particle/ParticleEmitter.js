@@ -128,8 +128,10 @@ function ParticleEmitter(group, emitter)
 ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
 
 /**
- * Initialize particle system
- * Called automatically by the runtime
+ * Initialize particle system.
+ * 
+ * Called automatically by the runtime.
+ * 
  * @method initialize
  */
 ParticleEmitter.prototype.initialize = function()
@@ -140,11 +142,13 @@ ParticleEmitter.prototype.initialize = function()
 	}
 
 	this.clock.start();
-}
+};
 
 /**
- * Update particle emitter state
- * Called automatically by the runtime
+ * Update particle emitter state.
+ * 
+ * Called automatically by the runtime.
+ * 
  * @method update
  */
 ParticleEmitter.prototype.update = function()
@@ -155,7 +159,7 @@ ParticleEmitter.prototype.update = function()
 	{
 		this.children[i].update();
 	}
-}
+};
 
 /**
  * Dispose particle emitter
@@ -169,7 +173,7 @@ ParticleEmitter.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
-}
+};
 
 //Update matrix world
 ParticleEmitter.prototype.updateMatrix = function ()
@@ -182,8 +186,10 @@ ParticleEmitter.prototype.updateMatrix = function ()
 };
 
 /**
- * Create JSON for object
- * Need to backup material and geometry and set to undefined to avoid it being stored
+ * Create JSON for object.
+ * 
+ * Need to backup material and geometry and set to undefined to avoid it being stored.
+ * 
  * @param {Object} meta
  * @return {Object} json
  */
@@ -276,4 +282,4 @@ ParticleEmitter.prototype.toJSON = function(meta)
 	data.object.emitter.color.spread = this.emitter.color.spread;
 
 	return data;
-}
+};

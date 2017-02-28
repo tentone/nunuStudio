@@ -21,7 +21,7 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	{
 		self.parse(JSON.parse(text), onLoad);
 	}, onProgress, onError);
-}
+};
 
 //Parse a json object representation
 ObjectLoader.prototype.parse = function(json, onLoad)
@@ -49,19 +49,19 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 	}
 
 	return object;
-}
+};
 
 //Set base texture path
 ObjectLoader.prototype.setTexturePath = function(value)
 {
 	this.texturePath = value;
-}
+};
 
 //Set cross origin
 ObjectLoader.prototype.setCrossOrigin = function(value)
 {
 	this.crossOrigin = value;
-}
+};
 
 //Parse geometries
 ObjectLoader.prototype.parseGeometries = function(json)
@@ -167,7 +167,7 @@ ObjectLoader.prototype.parseGeometries = function(json)
 	}
 
 	return geometries;
-}
+};
 
 //Parse all materials
 ObjectLoader.prototype.parseMaterials = function(json, textures)
@@ -186,7 +186,7 @@ ObjectLoader.prototype.parseMaterials = function(json, textures)
 	}
 
 	return materials;
-}
+};
 
 //Parse animations
 ObjectLoader.prototype.parseAnimations = function(json)
@@ -200,7 +200,7 @@ ObjectLoader.prototype.parseAnimations = function(json)
 	}
 
 	return animations;
-}
+};
 
 //Parse images
 ObjectLoader.prototype.parseImages = function(json)
@@ -217,7 +217,7 @@ ObjectLoader.prototype.parseImages = function(json)
 	}
 
 	return images;
-}
+};
 
 //Parse videos
 ObjectLoader.prototype.parseVideos = function(json)
@@ -234,7 +234,7 @@ ObjectLoader.prototype.parseVideos = function(json)
 	}
 
 	return videos;
-}
+};
 
 //Parse audio
 ObjectLoader.prototype.parseAudio = function(json)
@@ -251,7 +251,7 @@ ObjectLoader.prototype.parseAudio = function(json)
 	}
 
 	return audio;
-}
+};
 
 //Parse fonts
 ObjectLoader.prototype.parseFonts = function(json)
@@ -268,7 +268,7 @@ ObjectLoader.prototype.parseFonts = function(json)
 	}
 
 	return fonts;
-}
+};
 
 //Parse textures
 ObjectLoader.prototype.parseTextures = function(json, images, videos)
@@ -289,7 +289,7 @@ ObjectLoader.prototype.parseTextures = function(json, images, videos)
 	}
 	
 	return textures;
-}
+};
 
 //Parse objects
 ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts)
@@ -829,4 +829,4 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	}
 
 	return object;
-}
+};

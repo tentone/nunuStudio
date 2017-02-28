@@ -12,7 +12,7 @@ FontLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	{
 		onLoad(new Font(JSON.parse(text)));
 	}, onProgress, onError);
-}
+};
 
 FontLoader.prototype.parse = function(json)
 {
@@ -48,4 +48,4 @@ FontLoader.prototype.parse = function(json)
 	{
 		return new Font(json);
 	}
-}
+};

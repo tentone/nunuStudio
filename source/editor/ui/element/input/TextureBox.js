@@ -43,7 +43,6 @@ function TextureBox(parent)
 	this.repeat.size.set(120, 18);
 	this.repeat.setValue(1, 1, 0);
 	this.form.add(this.repeat);
-	this.form.updateInterface();
 }
 
 TextureBox.prototype = Object.create(TextureChooser.prototype);

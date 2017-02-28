@@ -93,7 +93,7 @@ AudioEmitter.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
-}
+};
 
 /**
  * Dispose audio object.
@@ -112,7 +112,7 @@ AudioEmitter.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
-}
+};
 
 /**
  * Change audio emitter volume.
@@ -126,7 +126,7 @@ AudioEmitter.prototype.setVolume = function(value)
 	this.gain.gain.value = value;
 
 	return this;
-}
+};
 
 /**
  * Create JSON description.
@@ -151,7 +151,7 @@ AudioEmitter.prototype.toJSON = function(meta)
 	data.object.loop = this.loop;
 
 	return data;
-}
+};
 
 /**
  * Starts playback

@@ -183,7 +183,7 @@ Sky.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
-}
+};
 
 /**
  * Update sky state.
@@ -212,7 +212,7 @@ Sky.prototype.update = function()
 	{
 		this.children[i].update();
 	}
-}
+};
 
 /**
  * Check if object is empty (has no childrens).
@@ -223,7 +223,7 @@ Sky.prototype.update = function()
 Sky.prototype.isEmpty = function()
 {
 	return this.children.length <= 3;
-}
+};
 
 /**
  * Update sky color and sun position.
@@ -359,7 +359,7 @@ Sky.prototype.updateSky = function()
 		this.sun.position.x = this.sunDistance * Math.cos(rotation + Math.PI);
 		this.sun.position.y = this.sunDistance * Math.sin(rotation + Math.PI);	
 	}
-}
+};
 
 /**
  * Create JSON for object.
@@ -396,4 +396,4 @@ Sky.prototype.toJSON = function(meta)
 	data.object.sun.shadow = this.sun.shadow.toJSON();
 
 	return data;
-}
+};

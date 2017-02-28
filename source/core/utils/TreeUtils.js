@@ -24,7 +24,7 @@ Tree.prototype.add = function(tree)
 		this.children.push(tree);
 		return tree;
 	}	
-}
+};
 
 //Remove element from tree
 Tree.prototype.remove = function(tree)
@@ -39,7 +39,7 @@ Tree.prototype.remove = function(tree)
 			return;
 		}
 	}
-}
+};
 
 //Clone tree (keeps tree children uuid)
 Tree.prototype.clone = function(tree)
@@ -54,7 +54,7 @@ Tree.prototype.clone = function(tree)
 	}
 
 	return tree;
-}
+};
 
 //Print tree
 Tree.prototype.print = function(level)
@@ -76,7 +76,7 @@ Tree.prototype.print = function(level)
 		console.log(space + this.children[i].value + "(" + this.children[i].uuid + ")");
 		this.children[i].print(level + 1);
 	}
-}
+};
 
 function TreeUtils(){}
 
@@ -188,7 +188,7 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 	}
 
 	return diffs;
-}
+};
 
 TreeUtils.test = function()
 {
@@ -239,4 +239,4 @@ TreeUtils.test = function()
 
 	console.log("\nCompare B to A");
 	console.log(TreeUtils.compare(treeB, treeA));
-}
+};
