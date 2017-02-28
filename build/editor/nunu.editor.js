@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.21 Alpha";
-Nunu.TIMESTAMP = "201702280226";
+Nunu.TIMESTAMP = "201702281424";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -31807,7 +31807,7 @@ CubeTexture.FRONT = 4;
 CubeTexture.BACK = 5;
 CubeTexture.prototype.updateImages = function() {
   for (var a = this, c = 0;c < this.images.length;c++) {
-    "string" === typeof this.images[c] && (this.images[c] = new Image(images[c]));
+    "string" === typeof this.images[c] && (this.images[c] = new Image(this.images[c]));
     var d = document.createElement("img");
     d.index = c;
     d.src = this.images[c].data;
@@ -62790,7 +62790,7 @@ TextureAsset.prototype.setTexture = function(a) {
       a instanceof CanvasTexture ? (this.preview = document.createElement("img"), this.preview.src = a.image.toDataURL()) : a instanceof THREE.Texture && (this.preview = document.createElement("img"), this.preview.src = a.image.src);
     }
   }
-  null !== this.preview && (this.preview.draggable = !0, this.preview.style.position = "absolute", this.preview.style.top = "5%", this.preview.style.left = "17%", this.preview.style.width = "65%", this.element.appendChild(this.preview));
+  null !== this.preview && (this.preview.draggable = !0, this.preview.style.position = "absolute", this.preview.style.top = "5%", this.preview.style.left = "17%", this.preview.style.width = "65%", this.preview.style.height = "65%", this.element.appendChild(this.preview));
   this.updateMetadata();
 };
 TextureAsset.prototype.updateMetadata = function() {
@@ -62862,6 +62862,13 @@ function AudioAsset(a) {
     var b = new ContextMenu;
     b.size.set(130, 20);
     b.position.set(a.clientX - 5, a.clientY - 5);
+    b.addOption("Create Emitter", function() {
+      if (null !== c.audio) {
+        var a = new AudioEmitter(c.audio);
+        a.name = c.audio.name;
+        Editor.addToScene(a);
+      }
+    });
     b.addOption("Rename", function() {
       null !== c.audio && (c.audio.name = prompt("Rename audio", c.audio.name), Editor.updateObjectViews());
     });
