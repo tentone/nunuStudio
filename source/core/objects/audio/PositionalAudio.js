@@ -105,7 +105,7 @@ PositionalAudio.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
-}
+};
 
 /**
  * Update positional audio state.
@@ -129,7 +129,7 @@ PositionalAudio.prototype.update = function()
 	{
 		this.children[i].update();
 	}
-}
+};
 
 /**
  * Dispose audio object.
@@ -148,7 +148,7 @@ PositionalAudio.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
-}
+};
 
 /**
  * Change audio emitter volume.
@@ -163,7 +163,7 @@ PositionalAudio.prototype.setVolume = function(value)
 	this.gain.gain.value = value;
 
 	return this;
-}
+};
 
 /**
  * Create JSON description.
@@ -188,7 +188,7 @@ PositionalAudio.prototype.toJSON = function(meta)
 	data.object.loop = this.loop;
 
 	return data;
-}
+};
 
 /**
  * Starts playback

@@ -44,7 +44,7 @@
 THREE.Vector3.fromJSON = function(data)
 {
 	return new THREE.Vector3(data.x, data.y, data.z);
-}
+};
 
 /**
  * Serialize Vector3 data to JSON
@@ -55,7 +55,7 @@ THREE.Vector3.fromJSON = function(data)
 THREE.Vector3.prototype.toJSON = function()
 {
 	return {x: this.x, y: this.y, z: this.z};
-}
+};
 
 /**
  * Add v to this vector.

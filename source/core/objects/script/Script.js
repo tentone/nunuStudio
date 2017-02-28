@@ -107,11 +107,13 @@ Script.prototype.initialize = function()
 	{
 		this.script.initialize.call(this);
 	}
-}
+};
 
 /**
- * Update script state
- * Calls the script update method if it exists
+ * Update script state.
+ * 
+ * Calls the script update method if it exists.
+ * 
  * @method update
  */
 Script.prototype.update = function()
@@ -134,10 +136,13 @@ Script.prototype.update = function()
 	{
 		this.children[i].update();
 	}
-}
+};
 
 /**
- * Call resize method if available
+ * Call resize method if available.
+ *
+ * Called automatically by the runtime.
+ * 
  * @method resize
  */
 Script.prototype.resize = function()
@@ -146,10 +151,13 @@ Script.prototype.resize = function()
 	{
 		this.script.onResize.call(this);
 	}
-}
+};
 
 /**
- * Call onAppData if available
+ * Call onAppData if available.
+ *
+ * Called automatically every time external data is passed to the runtime.
+ * 
  * @method appData
  * @param {Object} data
  */
@@ -159,10 +167,13 @@ Script.prototype.appData = function(data)
 	{
 		this.script.onAppData.call(this);
 	}
-}
+};
 
 /**
- * Set script code
+ * Set script code.
+ * 
+ * Can be used to dinamically change the script code. However it is not recommended.
+ * 
  * @method setCode
  * @param {String} code
  */
@@ -188,10 +199,11 @@ Script.prototype.setCode = function(code)
 		console.warn("nunuStudio: Error compiling script code", e);
 		this.script = new(function(){})();
 	}
-}
+};
 
 /**
- * Create JSON for script
+ * Create JSON for script.
+ * 
  * @param {Object} meta
  * @return {Object} json
  */
@@ -202,4 +214,4 @@ Script.prototype.toJSON = function(meta)
 	data.object.code = this.code;
 
 	return data;
-}
+};

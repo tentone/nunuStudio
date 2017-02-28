@@ -77,7 +77,7 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 		}
 	};
 	update();
-}
+};
 
 WebcamTexture.prototype = Object.create(THREE.Texture.prototype);
 
@@ -95,4 +95,4 @@ WebcamTexture.prototype.dispose = function()
 	{
 		this.image.pause();
 	}
-}
+};

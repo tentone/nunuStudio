@@ -111,7 +111,7 @@ Texture.prototype.dispose = function()
 	THREE.Texture.prototype.dispose.call(this);
 
 	this.disposed = true;
-}
+};
 
 /**
  * Create JSON description for texture, serializes image used in the texture
@@ -127,4 +127,4 @@ Texture.prototype.toJSON = function(meta)
 	data.image = image.uuid;
 
 	return data;
-}
+};

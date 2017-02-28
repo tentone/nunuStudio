@@ -13,7 +13,7 @@ ImageLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 	{
 		self.parse(JSON.parse(text), onLoad);
 	}, onProgress, onError);
-}
+};
 
 ImageLoader.prototype.parse = function(json, onLoad)
 {
@@ -26,4 +26,4 @@ ImageLoader.prototype.parse = function(json, onLoad)
 	image.data = json.data;
 	
 	return image;
-}
+};

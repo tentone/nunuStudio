@@ -12,7 +12,7 @@ AudioLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	{
 		self.parse(JSON.parse(text), onLoad);
 	}, onProgress, onError);
-}
+};
 
 AudioLoader.prototype.parse = function(json)
 {
@@ -25,4 +25,4 @@ AudioLoader.prototype.parse = function(json)
 	audio.data = ArraybufferUtils.fromBase64(json.data);
 
 	return audio;
-}
+};

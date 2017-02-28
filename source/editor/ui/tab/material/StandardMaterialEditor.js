@@ -10,7 +10,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.morphTargets = new CheckBox(this.form.element);
 	this.form.addText("Morph targets");
 	this.morphTargets.size.set(20, 15);
-	this.morphTargets.updateInterface();
 	this.morphTargets.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -25,7 +24,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.wireframe = new CheckBox(this.form.element);
 	this.form.addText("Wireframe");
 	this.wireframe.size.set(200, 15);
-	this.wireframe.updateInterface();
 	this.wireframe.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -75,7 +73,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.roughness.size.set(160, 18);
 	this.roughness.setRange(0, 1);
 	this.roughness.setStep(0.01);
-	this.roughness.updateInterface();
 	this.roughness.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -93,7 +90,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.metalness.size.set(160, 18);
 	this.metalness.setRange(0, 1);
 	this.metalness.setStep(0.01);
-	this.metalness.updateInterface();
 	this.metalness.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -110,7 +106,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.map = new TextureBox(this.form.element);
 	this.map.size.set(100, 100);
-	this.map.updateInterface();
 	this.map.setOnChange(function(file)
 	{
 		self.material.map = self.map.getValue();
@@ -124,7 +119,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.roughnessMap = new TextureBox(this.form.element);
 	this.roughnessMap.size.set(100, 100);
-	this.roughnessMap.updateInterface();
 	this.roughnessMap.setOnChange(function(file)
 	{
 		self.material.roughnessMap = self.roughnessMap.getValue();
@@ -138,7 +132,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.metalnessMap = new TextureBox(this.form.element);
 	this.metalnessMap.size.set(100, 100);
-	this.metalnessMap.updateInterface();
 	this.metalnessMap.setOnChange(function(file)
 	{
 		self.material.metalnessMap = self.metalnessMap.getValue();
@@ -152,7 +145,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.bumpMap = new TextureBox(this.form.element);
 	this.bumpMap.size.set(100, 100);
-	this.bumpMap.updateInterface();
 	this.bumpMap.setOnChange(function(file)
 	{
 		self.material.bumpMap = self.bumpMap.getValue();
@@ -167,7 +159,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.bumpScale.size.set(160, 18);
 	this.bumpScale.setRange(0, 1);
 	this.bumpScale.setStep(0.01);
-	this.bumpScale.updateInterface();
 	this.bumpScale.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -184,7 +175,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.normalMap = new TextureBox(this.form.element);
 	this.normalMap.size.set(100, 100);
-	this.normalMap.updateInterface();
 	this.normalMap.setOnChange(function(file)
 	{
 		self.material.normalMap = self.normalMap.getValue();
@@ -214,7 +204,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.displacementMap = new TextureBox(this.form.element);
 	this.displacementMap.size.set(100, 100);
-	this.displacementMap.updateInterface();
 	this.displacementMap.setOnChange(function(file)
 	{
 		self.material.displacementMap = self.displacementMap.getValue();
@@ -229,7 +218,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.displacementScale = new NumberBox(this.form.element);
 	this.displacementScale.size.set(60, 18);
 	this.displacementScale.setStep(0.05);
-	this.displacementScale.updateInterface();
 	this.displacementScale.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -246,7 +234,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.displacementBias = new NumberBox(this.form.element);
 	this.displacementBias.size.set(60, 18);
 	this.displacementBias.setStep(0.1);
-	this.displacementBias.updateInterface();
 	this.displacementBias.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -263,7 +250,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.emissiveMap = new TextureBox(this.form.element);
 	this.emissiveMap.size.set(100, 100);
-	this.emissiveMap.updateInterface();
 	this.emissiveMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -295,7 +281,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.emissiveIntensity = new NumberBox(this.form.element);
 	this.emissiveIntensity.size.set(60, 18);
 	this.emissiveIntensity.setStep(0.1);
-	this.emissiveIntensity.updateInterface();
 	this.emissiveIntensity.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -312,7 +297,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.alphaMap = new TextureBox(this.form.element);
 	this.alphaMap.size.set(100, 100);
-	this.alphaMap.updateInterface();
 	this.alphaMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -329,7 +313,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.envMap = new CubeTextureBox(this.form.element);
 	this.envMap.size.set(100, 100);
-	this.envMap.updateInterface();
 	this.envMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -346,7 +329,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.envMapIntensity = new NumberBox(this.form.element);
 	this.envMapIntensity.size.set(60, 18);
 	this.envMapIntensity.setStep(0.05);
-	this.envMapIntensity.updateInterface();
 	this.envMapIntensity.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -363,7 +345,6 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.refractionRatio = new NumberBox(this.form.element);
 	this.refractionRatio.size.set(60, 18);
 	this.refractionRatio.setStep(0.05);
-	this.refractionRatio.updateInterface();
 	this.refractionRatio.setOnChange(function()
 	{
 		if(self.material !== null)

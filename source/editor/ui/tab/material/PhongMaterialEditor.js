@@ -73,7 +73,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Specular");
 	this.specular = new ColorChooser(this.form.element);
 	this.specular.size.set(100, 18);
-	this.specular.updateInterface();
 	this.specular.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -91,7 +90,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.shininess.size.set(160, 18);
 	this.shininess.setRange(0, 250);
 	this.shininess.setStep(0.1);
-	this.shininess.updateInterface();
 	this.shininess.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -107,7 +105,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Texture map");
 	this.form.nextRow();
 	this.map = new TextureBox(this.form.element);
-	this.map.updateInterface();
 	this.map.setOnChange(function(file)
 	{
 		self.material.map = self.map.getValue();
@@ -120,7 +117,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Bump map");
 	this.form.nextRow();
 	this.bumpMap = new TextureBox(this.form.element);
-	this.bumpMap.updateInterface();
 	this.bumpMap.setOnChange(function(file)
 	{
 		self.material.bumpMap = self.bumpMap.getValue();
@@ -135,7 +131,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.bumpScale.size.set(160, 18);
 	this.bumpScale.setRange(0, 1);
 	this.bumpScale.setStep(0.01);
-	this.bumpScale.updateInterface();
 	this.bumpScale.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -151,7 +146,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Normal map");
 	this.form.nextRow();
 	this.normalMap = new TextureBox(this.form.element);
-	this.normalMap.updateInterface();
 	this.normalMap.setOnChange(function(file)
 	{
 		self.material.normalMap = self.normalMap.getValue();
@@ -180,7 +174,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Displacement Map");
 	this.form.nextRow();
 	this.displacementMap = new TextureBox(this.form.element);
-	this.displacementMap.updateInterface();
 	this.displacementMap.setOnChange(function(file)
 	{
 		self.material.displacementMap = self.displacementMap.getValue();
@@ -195,7 +188,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.displacementScale = new NumberBox(this.form.element);
 	this.displacementScale.size.set(60, 18);
 	this.displacementScale.setStep(0.05);
-	this.displacementScale.updateInterface();
 	this.displacementScale.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -212,7 +204,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.displacementBias = new NumberBox(this.form.element);
 	this.displacementBias.size.set(60, 18);
 	this.displacementBias.setStep(0.1);
-	this.displacementBias.updateInterface();
 	this.displacementBias.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -228,7 +219,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Specular map");
 	this.form.nextRow();
 	this.specularMap = new TextureBox(this.form.element);
-	this.specularMap.updateInterface();
 	this.specularMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -244,7 +234,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Emissive map");
 	this.form.nextRow();
 	this.emissiveMap = new TextureBox(this.form.element);
-	this.emissiveMap.updateInterface();
 	this.emissiveMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -276,7 +265,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.emissiveIntensity = new NumberBox(this.form.element);
 	this.emissiveIntensity.size.set(60, 18);
 	this.emissiveIntensity.setStep(0.1);
-	this.emissiveIntensity.updateInterface();
 	this.emissiveIntensity.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -292,7 +280,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Alpha map");
 	this.form.nextRow();
 	this.alphaMap = new TextureBox(this.form.element);
-	this.alphaMap.updateInterface();
 	this.alphaMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -309,7 +296,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	this.envMap = new CubeTextureBox(this.form.element);
 	this.envMap.size.set(100, 100);
-	this.envMap.updateInterface();
 	this.envMap.setOnChange(function(file)
 	{
 		if(self.material !== null)

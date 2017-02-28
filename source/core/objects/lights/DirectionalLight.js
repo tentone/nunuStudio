@@ -32,4 +32,4 @@ DirectionalLight.prototype.updateShadowMap = function()
 	this.shadow.map.dispose();
 	this.shadow.map = null;
 	this.shadow.camera.updateProjectionMatrix();
-}
+};

@@ -3,7 +3,7 @@
 		"theme": "dark",
 		"filePreviewSize": 70,
 		"showStats": true,
-		"showUuid": false
+		"showUUID": false
 	},
 	"editor": {
 		"angleFormat": 0,

@@ -126,7 +126,7 @@ THREE.Object3D.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
-}
+};
 
 /**
  * Update the object state.
@@ -139,7 +139,7 @@ THREE.Object3D.prototype.update = function()
 	{
 		this.children[i].update();
 	}
-}
+};
 
 /**
  * Dispose the object (to avoid memory leaks).
@@ -152,7 +152,7 @@ THREE.Object3D.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
-}
+};
 
 /**
  * Add object as children of this object above the indicated children
@@ -189,7 +189,7 @@ THREE.Object3D.prototype.addAbove = function(object, children)
 	}
 
 	return this;
-}
+};
 
 /**
  * Add object as children of this object bellow the indicated children
@@ -226,7 +226,7 @@ THREE.Object3D.prototype.addBellow = function(object, children)
 	}
 
 	return this;
-}
+};
 
 /**
  * Remove all children from the object.
@@ -239,7 +239,7 @@ THREE.Object3D.prototype.removeAll = function()
 	{
 		this.remove(this.children[i]);
 	}
-}
+};
 
 /**
  * Check if object is empty (has no childrens).
@@ -250,7 +250,7 @@ THREE.Object3D.prototype.removeAll = function()
 THREE.Object3D.prototype.isEmpty = function()
 {
 	return this.children.length === 0;
-}
+};
 
 /**
  * Destroy object, dispose and remove from its parent.
@@ -271,7 +271,7 @@ THREE.Object3D.prototype.destroy = function()
 		}
 		this.parent.remove(this);
 	}
-}
+};
 
 /**
  * Serialize object as JSON.
@@ -399,7 +399,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 
 		return values;
 	}
-}
+};
 
 /**
  * Remove children from this object

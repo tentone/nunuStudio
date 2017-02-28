@@ -75,4 +75,4 @@ Resource.prototype.toJSON = function(meta)
 	data.type = this.type;
 	
 	data.encoding = this.encoding;
-}
+};

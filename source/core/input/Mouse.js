@@ -1,7 +1,8 @@
 "use strict";
 
 /**
- * Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler
+ * Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler.
+ * 
  * @class Mouse
  * @module Input
  * @constructor
@@ -36,7 +37,6 @@
  * @type {DOM}
  * @property canvas
  */
-
 function Mouse()
 {
 	//Raw data
@@ -205,7 +205,8 @@ Mouse.MIDDLE = 1;
 Mouse.RIGHT = 2;
 
 /**
- * Canvas to be used for coordinates calculation relative to that canvas
+ * Canvas to be used for coordinates calculation relative to that canvas.
+ * 
  * @method setCanvas
  * @param {DOM} canvas Canvas to be attached to the Mouse instance
  */
@@ -224,10 +225,11 @@ Mouse.setCanvas = function(canvas)
 	{
 		this.mouseInside = false;
 	});
-}
+};
 
 /**
- * Check if mouse is inside attached canvas (updated async)
+ * Check if mouse is inside attached canvas (updated async).
+ * 
  * @method insideCanvas
  * @return {boolean} True if mouse is currently inside the canvas
  */
@@ -239,10 +241,11 @@ Mouse.insideCanvas = function()
 	}
 	
 	return this.canvas.mouseInside;
-}
+};
 
 /**
- * Set mouse lock state
+ * Set mouse lock state.
+ * 
  * @method setLock
  * @param {boolean} value If true pointer lock will be requested for the canvas attached to the Mouse instance
  */
@@ -281,10 +284,11 @@ Mouse.setLock = function(value)
 			}
 		}
 	}
-}
+};
 
 /**
- * Check if mouse button is currently pressed
+ * Check if mouse button is currently pressed.
+ * 
  * @method buttonPressed
  * @param {Number} button Button to check status of
  * @return {boolean} True if button is currently pressed
@@ -292,20 +296,22 @@ Mouse.setLock = function(value)
 Mouse.buttonPressed = function(button)
 {
 	return this.keys[button].pressed;
-}
+};
 
 /**
- * Check if Mouse button was double clicked
+ * Check if Mouse button was double clicked.
+ * 
  * @method buttonDoubleClicked
  * @return {boolean} True if some mouse button was just double clicked
  */
 Mouse.buttonDoubleClicked = function()
 {
 	return this.doubleClicked;
-}
+};
 
 /**
- * Check if a mouse button was just pressed
+ * Check if a mouse button was just pressed.
+ * 
  * @method buttonJustPressed
  * @param {Number} button Button to check status of
  * @return {boolean} True if button was just pressed
@@ -313,10 +319,11 @@ Mouse.buttonDoubleClicked = function()
 Mouse.buttonJustPressed = function(button)
 {
 	return this.keys[button].justPressed;
-}
+};
 
 /**
- * Check if a mouse button was just released
+ * Check if a mouse button was just released.
+ * 
  * @method buttonJustReleased
  * @param {Number} button Button to check status of
  * @return {boolean} True if button was just released
@@ -324,10 +331,11 @@ Mouse.buttonJustPressed = function(button)
 Mouse.buttonJustReleased = function(button)
 {
 	return this.keys[button].justReleased;
-}
+};
 
 /**
- * Update mouse Position (automatically called by the runtime)
+ * Update mouse Position (automatically called by the runtime).
+ * 
  * @method updatePosition
  * @param {Number} x
  * @param {Number} y
@@ -340,7 +348,7 @@ Mouse.updatePosition = function(x, y, xDiff, yDiff)
 	this._delta.x += xDiff;
 	this._delta.y += yDiff;
 	this._positionUpdated = true;
-}
+};
 
 /**
  * Update a mouse button (automatically called by the runtime)
@@ -353,10 +361,11 @@ Mouse.updateKey = function(button, action)
 	{
 		this._keys[button].update(action);
 	}
-}
+};
 
 /**
- * Update mouse buttons state, position, wheel and delta synchronously (called automatically by the app runtime)
+ * Update mouse buttons state, position, wheel and delta synchronously (called automatically by the app runtime).
+ * 
  * @method update
  */
 Mouse.update = function()
@@ -414,10 +423,11 @@ Mouse.update = function()
 		this.delta.x = 0;
 		this.delta.y = 0;
 	}
-}
+};
 
 /**
- * Dispose mouse events (called automatically by the app runtime)
+ * Dispose mouse events (called automatically by the app runtime).
+ * 
  * @method dispose
  */
 Mouse.dispose = function()
@@ -427,4 +437,4 @@ Mouse.dispose = function()
 		var event = this.events[i];
 		event[0].removeEventListener(event[1], event[2]);
 	}
-}
+};

@@ -58,4 +58,4 @@ Mesh.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
-}
+};

@@ -20,7 +20,7 @@ MaterialLoader.prototype.load = function(url, onLoad, onProgress, onError)
 MaterialLoader.prototype.setTextures = function(value)
 {
 	this.textures = value;
-}
+};
 
 MaterialLoader.prototype.parse = function(json)
 {
@@ -333,4 +333,4 @@ MaterialLoader.prototype.parse = function(json)
 	}
 
 	return material;
-}
+};

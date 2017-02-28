@@ -211,7 +211,7 @@ LeapMotion.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
-}
+};
 
 /**
  * Update leap status.
@@ -243,7 +243,7 @@ LeapMotion.prototype.update = function()
 	{
 		this.children[i].update();
 	}
-}
+};
 
 /**
  * Check if a gesture is occuring, is true while the gesture is occuring.
@@ -259,7 +259,7 @@ LeapMotion.prototype.checkGesture = function(gesture)
 		return this.gesture[gesture];
 	}
 	return false;
-}
+};
 
 /**
  * Check if hand is in pose.
@@ -274,7 +274,7 @@ LeapMotion.prototype.checkPose = function(pose)
 		return this.pose[pose];
 	}
 	return false;
-}
+};
 
 /**
  * Set hand tracking mode.
@@ -287,7 +287,7 @@ LeapMotion.prototype.checkPose = function(pose)
 LeapMotion.prototype.setMode = function(mode)
 {
 	this.mode = mode;
-}
+};
 
 /**
  * Update leap object pose flags from collected data.
@@ -363,7 +363,7 @@ LeapMotion.prototype.updatePoses = function()
 			this.pose[LeapMotion.POINTING] = false;
 		}
 	}
-}
+};
 
 /**
  * Update leap object gesture flags from collected data.
@@ -436,7 +436,7 @@ LeapMotion.prototype.updateGestures = function()
 			}
 		});
 	}
-}
+};
 
 /**
  * Update internal hand debug model.
@@ -500,7 +500,7 @@ LeapMotion.prototype.updateDebugModel = function()
 	{
 		this.updatePhysics()
 	}
-}
+};
 
 /**
  * Update physics object to enable hand physics collision.
@@ -544,7 +544,7 @@ LeapMotion.prototype.updatePhysics = function()
 		this.physicsBodys.push(body);
 		this.physicsWorld.addBody(body);
 	});
-}
+};
 
 //Add mesh to hand instance
 LeapMotion.prototype.addMesh = function(meshes)
@@ -554,7 +554,7 @@ LeapMotion.prototype.addMesh = function(meshes)
 	mesh.receiveShadow = this.receiveShadow;
 	meshes.push(mesh);
 	return mesh;
-}
+};
 
 //Update mesh position and size
 LeapMotion.prototype.updateMesh = function(bone, mesh)
@@ -566,7 +566,7 @@ LeapMotion.prototype.updateMesh = function(bone, mesh)
 	mesh.scale.set(bone.width/150, bone.width/150, bone.length/150);
 
 	this.add(mesh);
-}
+};
 
 /**
  * Get hand speed (temporaly normalized).
@@ -583,7 +583,7 @@ LeapMotion.prototype.getMovement = function()
 	speed.divideScalar(this.data.currentFrameRate);
 
 	return speed;
-}
+};
 
 /**
  * Create JSON for object.
@@ -602,4 +602,4 @@ LeapMotion.prototype.toJSON = function(meta)
 	data.object.useArm = this.useArm;
 
 	return data;
-}
+};

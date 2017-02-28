@@ -71,7 +71,7 @@ function Panel(parent, obj)
 	this.form.nextRow();
 
 	//UUID
-	if(Settings.general.showUuid)
+	if(Settings.general.showUUID)
 	{
 		this.form.addText("UUID");
 		this.uuid = this.form.addText("");

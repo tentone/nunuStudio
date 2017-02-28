@@ -1,6 +1,5 @@
 @echo off
 echo ------------------------
-echo       nunu Studio
 echo         Runtime
 echo ------------------------
 
@@ -18,4 +17,3 @@ del temp.js
 del temp.css
 
 echo Done
-pause

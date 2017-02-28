@@ -82,7 +82,7 @@ Key.prototype.update = function(action)
 		this.justReleased = false;
 		this.justPressed = false;
 	}
-}
+};
 
 /**
  * Set this key attributes manually
@@ -93,7 +93,7 @@ Key.prototype.set = function(justPressed, pressed, justReleased)
 	this.justPressed = justPressed;
 	this.pressed = pressed;
 	this.justReleased = justReleased;
-}
+};
 
 /**
  * Reset key to default values
@@ -104,4 +104,4 @@ Key.prototype.reset = function()
 	this.justPressed = false;
 	this.pressed = false;
 	this.justReleased = false;
-}
+};

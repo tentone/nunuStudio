@@ -87,4 +87,4 @@ Video.prototype.toJSON = function(meta)
 	meta.videos[this.uuid] = data;
 
 	return data;
-}
+};

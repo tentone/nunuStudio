@@ -9,7 +9,6 @@ function ParticleEditor(parent, closeable, container, index)
 	this.main.tabPosition = 0.6;
 	this.main.tabPositionMin = 0.05;
 	this.main.tabPositionMax = 0.95;
-	this.main.updateInterface();
 
 	//Change main div aspect
 	this.main.divB.style.overflow = "auto";
@@ -21,7 +20,6 @@ function ParticleEditor(parent, closeable, container, index)
 
 	//Canvas
 	this.canvas = new Canvas(this.main.divA);
-	this.canvas.updateInterface();
 
 	//Element atributes
 	this.children = [];
@@ -76,7 +74,6 @@ function ParticleEditor(parent, closeable, container, index)
 	this.form.addText("Texture");
 	this.texture = new TextureChooser(this.form.element);
 	this.texture.size.set(100, 100);
-	this.texture.updateInterface();
 	this.texture.setOnChange(function(file)
 	{
 		self.particle.group.texture = self.texture.getValue();

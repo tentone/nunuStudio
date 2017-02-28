@@ -14,7 +14,7 @@ Settings.loadDefault = function()
 	Settings.general.theme = "dark";
 	Settings.general.filePreviewSize = 70;
 	Settings.general.showStats = false;
-	Settings.general.showUuid = false;
+	Settings.general.showUUID = false;
 
 	//Editor settings
 	Settings.editor = {};

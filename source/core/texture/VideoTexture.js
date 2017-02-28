@@ -3,7 +3,7 @@
 /**
  * Video texture, uses a video DOM element instead of a img element.
  * 
- * VideoTexture also provides methods for playback control
+ * VideoTexture also provides methods for playback control.
  * 
  * @class VideoTexture
  * @constructor
@@ -104,7 +104,8 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 VideoTexture.prototype = Object.create(THREE.Texture.prototype);
 
 /**
- * Set video time in seconds
+ * Set video time in seconds.
+ * 
  * @param {Number} time
  * @method setTime
  */
@@ -114,7 +115,8 @@ VideoTexture.prototype.setTime = function(time)
 }
 
 /**
- * Set loop mode
+ * Set loop mode.
+ * 
  * @param {boolean} loop
  * @method setLoop
  */
@@ -122,10 +124,11 @@ VideoTexture.prototype.setLoop = function(loop)
 {
 	this.loop = loop;
 	this.image.loop = loop;
-}
+};
 
 /**
- * Set video volume
+ * Set video volume.
+ * 
  * @param {Number} volume
  * @method setVolume
  */
@@ -133,10 +136,11 @@ VideoTexture.prototype.setVolume = function(volume)
 {
 	this.volume = (volume >= 0 && volume <= 1) ? volume : (volume >= 0) ? 1.0 : 0.0;
 	this.image.volume = this.volume;
-}
+};
 
 /**
- * Set video playback speed
+ * Set video playback speed.
+ * 
  * @method setPlaybackRate
  * @param {Number} playbackRate
  */
@@ -144,10 +148,11 @@ VideoTexture.prototype.setPlaybackRate = function(playbackRate)
 {
 	this.playbackRate = playbackRate;
 	this.image.playbackRate = playbackRate;
-}
+};
 
 /**
- * Pause video playback
+ * Pause video playback.
+ * 
  * @method pause
  */
 VideoTexture.prototype.pause = function()
@@ -156,10 +161,11 @@ VideoTexture.prototype.pause = function()
 	{
 		this.image.pause();
 	}
-}
+};
 
 /**
- * Start playing video
+ * Start playing video.
+ * 
  * @method play
  */
 VideoTexture.prototype.play = function()
@@ -168,10 +174,11 @@ VideoTexture.prototype.play = function()
 	{
 		this.image.play();
 	}
-}
+};
 
 /**
- * Dispose video texture
+ * Dispose video texture.
+ * 
  * @method dispose
  */
 VideoTexture.prototype.dispose = function()
@@ -184,10 +191,11 @@ VideoTexture.prototype.dispose = function()
 	{
 		this.image.pause();
 	}
-}
+};
 
 /**
- * Create Video texture json description
+ * Create Video texture json description.
+ * 
  * @param {Object} meta
  * @return {Object} json
  */
@@ -203,4 +211,4 @@ VideoTexture.prototype.toJSON = function(meta)
 	data.volume = this.volume;
 
 	return data;
-}
+};

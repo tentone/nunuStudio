@@ -44,7 +44,6 @@ include("core/three/Texture.js");
 include("core/three/LightShadow.js");
 include("core/three/Fog.js");
 include("core/three/Material.js");
-include("core/three/MultiMaterial.js");
 
 include("core/input/Key.js");
 include("core/input/Keyboard.js");
@@ -305,12 +304,12 @@ Editor.initialize = function()
 	//Disable body overflow
 	document.body.style.overflow = "hidden";
 	
-	//If running on browser disable CTRL+S
+	//If running on browser disable CTRL+ANY | F5
 	if(!Nunu.runningOnDesktop())
 	{
 		document.onkeydown = function(event)
 		{
-			if(event.ctrlKey === true && event.keyCode === 83)
+			if(event.keyCode === 116 || event.ctrlKey === true)
 			{
 				event.preventDefault();
 			}

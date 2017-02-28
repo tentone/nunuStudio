@@ -38,7 +38,7 @@ THREE.Material.prototype.dispose = function()
 	disposeTexture(this.roughnessMap);
 	disposeTexture(this.metalnessMap);
 	disposeTexture(this.envMap);
-}
+};
 
 THREE.Material.prototype.toJSON = function(meta)
 {
@@ -318,4 +318,4 @@ THREE.Material.prototype.toJSON = function(meta)
 	}
 
 	return data;
-}
+};

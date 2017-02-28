@@ -41,4 +41,4 @@ Sprite.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
-}
+};

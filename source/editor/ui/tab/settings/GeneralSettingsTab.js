@@ -51,14 +51,14 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	//Show UUID
 	this.form.addText("Show object UUID");
-	this.showUuid = new CheckBox(this.form.element);
-	this.showUuid.size.set(20, 16);
-	this.showUuid.setOnChange(function()
+	this.showUUID = new CheckBox(this.form.element);
+	this.showUUID.size.set(20, 16);
+	this.showUUID.setOnChange(function()
 	{
-		Settings.general.showUuid = self.showUuid.getValue();
+		Settings.general.showUUID = self.showUUID.getValue();
 		Editor.selectObjectPanel();
 	});
-	this.form.add(this.showUuid);
+	this.form.add(this.showUUID);
 	this.form.nextRow();
 
 	//Blank Space
@@ -276,7 +276,7 @@ GeneralSettingsTab.prototype.activate = function()
 	this.theme.setValue(Settings.general.theme);
 	this.filePreviewSize.setValue(Settings.general.filePreviewSize);
 	this.showStats.setValue(Settings.general.showStats);
-	this.showUuid.setValue(Settings.general.showUuid);
+	this.showUUID.setValue(Settings.general.showUUID);
 
 	//Editor
 	this.gridEnabled.setValue(Settings.editor.gridEnabled);

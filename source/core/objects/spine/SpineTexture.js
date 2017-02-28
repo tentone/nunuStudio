@@ -9,14 +9,13 @@
  * @constructor
  * @param {Texture} texture
  */
-
 function SpineTexture(texture)
 {
 	spine.Texture.call(this, texture.image);
 	
 	this.texture = texture;
 	this.texture.flipY = false;
-}
+};
 
 SpineTexture.prototype = Object.create(spine.Texture.prototype);
 
@@ -24,18 +23,18 @@ SpineTexture.prototype.setFilters = function (minFilter, magFilter)
 {
 	this.texture.minFilter = SpineTexture.getTextureFilter(minFilter);
 	this.texture.magFilter = SpineTexture.getTextureFilter(magFilter);
-}
+};
 
 SpineTexture.prototype.setWraps = function (uWrap, vWrap)
 {
 	this.texture.wrapS = SpineTexture.getTextureWrap(uWrap);
 	this.texture.wrapT = SpineTexture.getTextureWrap(vWrap);
-}
+};
 
 SpineTexture.prototype.dispose = function()
 {
 	this.texture.dispose();
-}
+};
 
 SpineTexture.getTextureFilter = function(filter)
 {
@@ -69,7 +68,7 @@ SpineTexture.getTextureFilter = function(filter)
 	}
 
 	return null;
-}
+};
 
 SpineTexture.getTextureWrap = function(wrap)
 {
@@ -85,4 +84,4 @@ SpineTexture.getTextureWrap = function(wrap)
 	{
 		return THREE.RepeatWrapping;
 	}
-}
+};

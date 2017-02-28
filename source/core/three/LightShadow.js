@@ -20,7 +20,7 @@ THREE.LightShadow.prototype.toJSON = function()
 	data.camera.right = this.camera.right;
 
 	return data;
-}
+};
 
 THREE.LightShadow.prototype.fromJSON = function(data)
 {
@@ -47,4 +47,4 @@ THREE.LightShadow.prototype.fromJSON = function(data)
 		this.camera.near = camera.near;
 		this.camera.far = camera.far;
 	}
-}
+};

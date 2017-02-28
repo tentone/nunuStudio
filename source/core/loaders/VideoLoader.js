@@ -13,7 +13,7 @@ VideoLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	{
 		self.parse(JSON.parse(text), onLoad);
 	}, onProgress, onError);
-}
+};
 
 VideoLoader.prototype.parse = function(json, onLoad)
 {
@@ -26,4 +26,4 @@ VideoLoader.prototype.parse = function(json, onLoad)
 	video.data = json.data;
 	
 	return video;
-}
+};
