@@ -219,6 +219,7 @@ TextureAsset.prototype.setTexture = function(texture)
 		this.preview.style.top = "5%";
 		this.preview.style.left = "17%";
 		this.preview.style.width = "65%";
+		this.preview.style.height = "65%";
 		this.element.appendChild(this.preview);	
 	}
 

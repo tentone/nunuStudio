@@ -120,7 +120,7 @@ CubeTexture.prototype.updateImages = function()
 	{
 		if(typeof this.images[i] === "string")
 		{
-			this.images[i] = new Image(images[i]);
+			this.images[i] = new Image(this.images[i]);
 		}
 
 		var image = document.createElement("img");

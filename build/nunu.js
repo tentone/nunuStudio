@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.21 Alpha";
-Nunu.TIMESTAMP = "201702280226";
+Nunu.TIMESTAMP = "201702281424";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -31802,7 +31802,7 @@ CubeTexture.FRONT = 4;
 CubeTexture.BACK = 5;
 CubeTexture.prototype.updateImages = function() {
   for (var a = this, g = 0;g < this.images.length;g++) {
-    "string" === typeof this.images[g] && (this.images[g] = new Image(images[g]));
+    "string" === typeof this.images[g] && (this.images[g] = new Image(this.images[g]));
     var l = document.createElement("img");
     l.index = g;
     l.src = this.images[g].data;

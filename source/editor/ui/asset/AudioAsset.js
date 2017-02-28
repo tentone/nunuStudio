@@ -23,6 +23,16 @@ function AudioAsset(parent)
 		context.size.set(130, 20);
 		context.position.set(event.clientX - 5, event.clientY - 5);
 		
+		context.addOption("Create Emitter", function()
+		{
+			if(self.audio !== null)
+			{
+				var emitter = new AudioEmitter(self.audio);
+				emitter.name = self.audio.name;
+				Editor.addToScene(emitter);
+			}
+		});
+
 		context.addOption("Rename", function()
 		{
 			if(self.audio !== null)
