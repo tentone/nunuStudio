@@ -99,49 +99,67 @@ function SceneEditor(parent, closeable, container, index)
 					}
 				}
 			}
-			//Dragged resource into object
-			else if(intersections.length > 0 && draggedObject !== null)
+			//Dragged resource
+			else if(draggedObject !== null)
 			{
-				var object = intersections[0].object;
+				//Object intersected
+				if(intersections.length > 0)
+				{
+					var object = intersections[0].object;
 
-				if(draggedObject instanceof THREE.SpriteMaterial)
-				{
-					if(object instanceof THREE.Sprite)
+					if(draggedObject instanceof THREE.SpriteMaterial)
 					{
-						object.material = draggedObject;
-						Editor.updateObjectViews();
+						if(object instanceof THREE.Sprite)
+						{
+							object.material = draggedObject;
+							Editor.updateObjectViews();
+						}
+					}
+					else if(draggedObject instanceof THREE.Material)
+					{
+						if(object instanceof THREE.Mesh)
+						{
+							object.material = draggedObject;
+							Editor.updateObjectViews();
+						}
+					}
+					else if(draggedObject instanceof CubeTexture)
+					{
+						if(object.material !== undefined && object.material.envMap !== undefined)
+						{
+							object.material.envMap = draggedObject;
+						}
+					}
+					else if(draggedObject instanceof THREE.Texture)
+					{
+						if(object instanceof THREE.Mesh)
+						{
+							object.material = new THREE.MeshStandardMaterial({map:draggedObject, color:0xffffff, roughness: 0.6, metalness: 0.2});
+							object.material.name = draggedObject.name;
+							Editor.updateObjectViews();
+						}
+						else if(object instanceof THREE.Sprite)
+						{
+							object.material = new THREE.SpriteMaterial({map:draggedObject, color:0xffffff});
+							object.material.name = draggedObject.name;
+							Editor.updateObjectViews();
+						}
+					}
+					else if(draggedObject instanceof Font)
+					{
+						if(object.font !== undefined)
+						{
+							object.setFont(draggedObject);
+							Editor.updateObjectViews();
+						}
 					}
 				}
-				else if(draggedObject instanceof THREE.Material)
+
+				if(draggedObject instanceof Audio)
 				{
-					if(object instanceof THREE.Mesh)
-					{
-						object.material = draggedObject;
-						Editor.updateObjectViews();
-					}
-				}
-				else if(draggedObject instanceof THREE.Texture)
-				{
-					if(object instanceof THREE.Mesh)
-					{
-						object.material = new THREE.MeshStandardMaterial({map:draggedObject, color:0xffffff, roughness: 0.6, metalness: 0.2});
-						object.material.name = draggedObject.name;
-						Editor.updateObjectViews();
-					}
-					else if(object instanceof THREE.Sprite)
-					{
-						object.material = new THREE.SpriteMaterial({map:draggedObject, color:0xffffff});
-						object.material.name = draggedObject.name;
-						Editor.updateObjectViews();
-					}
-				}
-				else if(draggedObject instanceof Font)
-				{
-					if(object.font !== undefined)
-					{
-						object.setFont(draggedObject);
-						Editor.updateObjectViews();
-					}
+					var audio = new AudioEmitter(draggedObject);
+					audio.name = draggedObject.name;
+					Editor.addToScene(audio);
 				}
 			}
 		}

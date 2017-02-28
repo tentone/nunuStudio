@@ -32,20 +32,30 @@ function ScenePanel(parent, obj)
 	//Background color
 	this.form.addText("Background");
 	this.background = new ColorChooser(this.form.element);
-	this.background.size.set(80, 18);
+	this.background.size.set(100, 18);
 	this.background.setValue(0, 0, 0);
 	this.background.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{	
-			if(self.obj.background === null)
-			{
-				self.obj.background = new THREE.Color();
-			}
-			self.obj.background.setHex(self.background.getValueHex());
+			self.obj.background = new THREE.Color(self.background.getValueHex());
 		}
 	});
 	this.form.add(this.background);
+	this.form.nextRow();
+
+	//Background texture
+	this.form.addText("");
+	this.backgroundTexture = new TextureChooser(this.form.element);
+	this.backgroundTexture.acceptAll = true;
+	this.backgroundTexture.setOnChange(function(file)
+	{
+		if(self.obj !== null)
+		{	
+			self.obj.background = self.backgroundTexture.getValue();
+		}
+	});
+	this.form.add(this.backgroundTexture);
 	this.form.nextRow();
 
 	//Fog
@@ -212,7 +222,14 @@ ScenePanel.prototype.updatePanel = function()
 
 		if(this.obj.background !== null)
 		{
-			this.background.setValue(this.obj.background.r, this.obj.background.g, this.obj.background.b);
+			if(this.obj.background instanceof THREE.Color)
+			{
+				this.background.setValue(this.obj.background.r, this.obj.background.g, this.obj.background.b);
+			}
+			else if(this.obj.background instanceof THREE.Texture)
+			{
+				this.backgroundTexture.setValue(this.obj.background);
+			}
 		}
 
 		this.gravity.setValue(this.obj.world.gravity.x, this.obj.world.gravity.y, this.obj.world.gravity.z);

@@ -322,7 +322,6 @@ MaterialLoader.prototype.parse = function(json)
 		material.gradientMap = getTexture(json.gradientMap);
 	}
 
-	//TODO <REMOVE MULTI MATERIAL>
 	//MultiMaterial
 	if(json.materials !== undefined)
 	{

@@ -229,7 +229,28 @@ Scene.prototype.setFogMode = function(mode)
  */
 Scene.prototype.toJSON = function(meta)
 {
-	var data = THREE.Scene.prototype.toJSON.call(this, meta);
+	var background = this.background;
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	{
+		if(background instanceof THREE.Color)
+		{
+			background = background.toJSON(meta);
+		}
+		else if(background instanceof THREE.Texture)
+		{
+			background = background.toJSON(meta).uuid;
+		}
+	});
+
+	if(background !== null)
+	{
+		data.object.background = background;
+	}
+
+	if(this.fog !== null)
+	{
+		data.object.fog = this.fog.toJSON();
+	}
 
 	data.object.cameras = [];
 	for(var i = 0; i < this.cameras.length; i++)

@@ -69,7 +69,7 @@ function TextureChooser(parent)
 		{
 			var uuid = event.dataTransfer.getData("uuid");
 			var texture = DragBuffer.popDragElement(uuid);
-			if(texture instanceof THREE.Texture && !(texture instanceof CubeTexture))
+			if(texture instanceof THREE.Texture && (self.acceptAll || !(texture instanceof CubeTexture)))
 			{
 				self.setTexture(texture);
 			}
@@ -95,6 +95,7 @@ function TextureChooser(parent)
 
 	//onChange function
 	this.onChange = null;
+	this.acceptAll = false;
 
 	//Attributes
 	this.size = new THREE.Vector2(100, 100);
@@ -127,7 +128,7 @@ TextureChooser.prototype.destroy = function()
 //Set texture value
 TextureChooser.prototype.setValue = function(texture)
 {
-	if(texture instanceof THREE.Texture && !(texture instanceof CubeTexture))
+	if(texture instanceof THREE.Texture)
 	{
 		this.texture = texture;
 		this.updatePreview();
@@ -187,24 +188,32 @@ TextureChooser.prototype.updatePreview = function()
 
 	if(texture instanceof Texture)
 	{
-		this.video.visibility = "hidden";
-		this.video.src = "";
-		this.img.visibility = "visible";
+		this.video.display = "none";
+		this.img.display = "block";
 		this.img.src = texture.image.src;
 	}
 	if(texture instanceof CanvasTexture)
 	{
-		this.video.visibility = "hidden";
-		this.video.src = "";
-		this.img.visibility = "visible";
+		this.video.display = "none";
+		this.img.display = "block";
 		this.img.src = texture.image.toDataURL();
 	}
 	else if(texture instanceof VideoTexture || texture instanceof WebcamTexture)
 	{
-		this.img.visibility = "hidden";
-		this.img.src = "";
-		this.video.visibility = "visible";
+		this.img.display = "none";
+		this.video.display = "block";
 		this.video.src = texture.image.src;
+	}
+	else if(texture instanceof CubeTexture)
+	{
+		this.video.display = "none";
+		this.img.display = "block";
+		this.img.src = texture.image[0].toDataURL();
+	}
+	else
+	{
+		this.img.display = "none";
+		this.video.display = "none";
 	}
 };
 

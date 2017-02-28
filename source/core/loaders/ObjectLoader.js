@@ -545,6 +545,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				{
 					object.background = new THREE.Color(data.background);
 				}
+				else
+				{
+					object.background = getTexture(data.background);
+				}
 			}
 			if(data.fog !== undefined)
 			{
