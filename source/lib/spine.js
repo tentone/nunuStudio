@@ -976,7 +976,7 @@ var spine;
 						next.delay = 0;
 						next.trackTime = nextTime + delta * next.timeScale;
 						current.trackTime += currentDelta;
-						this.setCurrent(i, next);
+						this.setCurrent(i, next, true);
 						while (next.mixingFrom != null) {
 							next.mixTime += currentDelta;
 							next = next.mixingFrom;
@@ -1051,6 +1051,7 @@ var spine;
 					}
 				}
 				this.queueEvents(current, animationTime);
+				events.length = 0;
 				current.nextAnimationLast = animationTime;
 				current.nextTrackLast = current.trackTime;
 			}
@@ -1094,12 +1095,16 @@ var spine;
 					timeline.apply(skeleton, animationLast, animationTime, events, alpha, setupPose, true);
 				}
 			}
-			this.queueEvents(from, animationTime);
+			if (entry.mixDuration > 0)
+				this.queueEvents(from, animationTime);
+			this.events.length = 0;
 			from.nextAnimationLast = animationTime;
 			from.nextTrackLast = from.trackTime;
 			return mix;
 		};
 		AnimationState.prototype.applyRotateTimeline = function (timeline, skeleton, time, alpha, setupPose, timelinesRotation, i, firstFrame) {
+			if (firstFrame)
+				timelinesRotation[i] = 0;
 			if (alpha == 1) {
 				timeline.apply(skeleton, 0, time, null, 1, setupPose, false);
 				return;
@@ -1128,12 +1133,7 @@ var spine;
 			var r1 = setupPose ? bone.data.rotation : bone.rotation;
 			var total = 0, diff = r2 - r1;
 			if (diff == 0) {
-				if (firstFrame) {
-					timelinesRotation[i] = 0;
-					total = 0;
-				}
-				else
-					total = timelinesRotation[i];
+				total = timelinesRotation[i];
 			}
 			else {
 				diff -= (16384 - ((16384.499999999996 - diff / 360) | 0)) * 360;
@@ -1185,14 +1185,14 @@ var spine;
 					continue;
 				this.queue.event(entry, events[i]);
 			}
-			this.events.length = 0;
 		};
 		AnimationState.prototype.clearTracks = function () {
+			var oldDrainDisabled = this.queue.drainDisabled;
 			this.queue.drainDisabled = true;
 			for (var i = 0, n = this.tracks.length; i < n; i++)
 				this.clearTrack(i);
 			this.tracks.length = 0;
-			this.queue.drainDisabled = false;
+			this.queue.drainDisabled = oldDrainDisabled;
 			this.queue.drain();
 		};
 		AnimationState.prototype.clearTrack = function (trackIndex) {
@@ -1215,14 +1215,16 @@ var spine;
 			this.tracks[current.trackIndex] = null;
 			this.queue.drain();
 		};
-		AnimationState.prototype.setCurrent = function (index, current) {
+		AnimationState.prototype.setCurrent = function (index, current, interrupt) {
 			var from = this.expandToIndex(index);
 			this.tracks[index] = current;
 			if (from != null) {
-				this.queue.interrupt(from);
+				if (interrupt)
+					this.queue.interrupt(from);
 				current.mixingFrom = from;
 				current.mixTime = 0;
-				if (from.mixingFrom != null)
+				from.timelinesRotation.length = 0;
+				if (from.mixingFrom != null && from.mixDuration > 0)
 					current.mixAlpha *= Math.min(from.mixTime / from.mixDuration, 1);
 			}
 			this.queue.start(current);
@@ -1236,6 +1238,7 @@ var spine;
 		AnimationState.prototype.setAnimationWith = function (trackIndex, animation, loop) {
 			if (animation == null)
 				throw new Error("animation cannot be null.");
+			var interrupt = true;
 			var current = this.expandToIndex(trackIndex);
 			if (current != null) {
 				if (current.nextTrackLast == -1) {
@@ -1244,12 +1247,13 @@ var spine;
 					this.queue.end(current);
 					this.disposeNext(current);
 					current = current.mixingFrom;
+					interrupt = false;
 				}
 				else
 					this.disposeNext(current);
 			}
 			var entry = this.trackEntry(trackIndex, animation, loop, current);
-			this.setCurrent(trackIndex, entry);
+			this.setCurrent(trackIndex, entry, interrupt);
 			this.queue.drain();
 			return entry;
 		};
@@ -1269,7 +1273,7 @@ var spine;
 			}
 			var entry = this.trackEntry(trackIndex, animation, loop, last);
 			if (last == null) {
-				this.setCurrent(trackIndex, entry);
+				this.setCurrent(trackIndex, entry, true);
 				this.queue.drain();
 			}
 			else {
@@ -1300,13 +1304,14 @@ var spine;
 			return entry;
 		};
 		AnimationState.prototype.setEmptyAnimations = function (mixDuration) {
+			var oldDrainDisabled = this.queue.drainDisabled;
 			this.queue.drainDisabled = true;
 			for (var i = 0, n = this.tracks.length; i < n; i++) {
 				var current = this.tracks[i];
 				if (current != null)
 					this.setEmptyAnimation(current.trackIndex, mixDuration);
 			}
-			this.queue.drainDisabled = false;
+			this.queue.drainDisabled = oldDrainDisabled;
 			this.queue.drain();
 		};
 		AnimationState.prototype.expandToIndex = function (index) {
@@ -1332,7 +1337,7 @@ var spine;
 			entry.trackTime = 0;
 			entry.trackLast = -1;
 			entry.nextTrackLast = -1;
-			entry.trackEnd = loop ? Number.MAX_VALUE : entry.animationEnd;
+			entry.trackEnd = Number.MAX_VALUE;
 			entry.timeScale = 1;
 			entry.alpha = 1;
 			entry.mixAlpha = 1;
@@ -1986,6 +1991,7 @@ var spine;
 				this.regionUVs = parentMesh.regionUVs;
 				this.triangles = parentMesh.triangles;
 				this.hullLength = parentMesh.hullLength;
+				this.worldVerticesLength = parentMesh.worldVerticesLength;
 			}
 		};
 		return MeshAttachment;
@@ -3308,6 +3314,7 @@ var spine;
 		Skeleton.prototype.updateCache = function () {
 			var updateCache = this._updateCache;
 			updateCache.length = 0;
+			this.updateCacheReset.length = 0;
 			var bones = this.bones;
 			for (var i = 0, n = bones.length; i < n; i++)
 				bones[i].sorted = false;
