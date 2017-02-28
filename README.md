@@ -80,6 +80,8 @@
 	- Support for File API loading
 	- Added reverse glyphs option to Font asset
 	- Improved font preview
+	- Added support for Textures as scene background
+	- Drag and drop CubeTextures
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

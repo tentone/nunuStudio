@@ -400,6 +400,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\three\\MultiMaterial.js": {
+            "name": "..\\source\\core\\three\\MultiMaterial.js",
+            "modules": {},
+            "classes": {
+                "MultiMaterial": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\three\\Object3D.js": {
             "name": "..\\source\\core\\three\\Object3D.js",
             "modules": {},
@@ -756,6 +765,7 @@
             "classes": {
                 "Fog": 1,
                 "Material": 1,
+                "MultiMaterial": 1,
                 "Object3D": 1
             },
             "fors": {},
@@ -1641,7 +1651,7 @@
             "namespace": "",
             "file": "..\\source\\core\\resources\\Image.js",
             "line": 3,
-            "description": "Image class is used to store image data that is used to create Textures\n\nImages can be stored in mutiple formats but on serialization images are converted to JPEG if they are opaque or to PNG if they are transparent\n\nGIF images are never converted to prevert animation capabilities",
+            "description": "Image class is used to store image data that is used to create Textures.\n\nImages can be stored in mutiple formats but on serialization images are converted to JPEG if they are opaque or to PNG if they are transparent.\n\nGIF images are never converted to prevert animation capabilities.",
             "is_constructor": 1,
             "extends": "{Resource}",
             "params": [
@@ -2033,6 +2043,20 @@
             "line": 3,
             "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don\"t have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
         },
+        "MultiMaterial": {
+            "name": "MultiMaterial",
+            "shortname": "MultiMaterial",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "THREE",
+            "namespace": "",
+            "file": "..\\source\\core\\three\\MultiMaterial.js",
+            "line": 3,
+            "description": "A Material to define multiple materials for the same geometry. The geometry decides which material is used for which faces by the faces materialindex. The material index corresponds with the index of the material in the .materials array.\n\nMultiMaterials have been deprectaed in threejs R85 but some of the loaders still use it.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/MultiMaterial."
+        },
         "Object3D": {
             "name": "Object3D",
             "shortname": "Object3D",
@@ -2179,7 +2203,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 93,
+            "line": 94,
             "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere",
             "is_constructor": 1,
             "params": [
@@ -7003,6 +7027,35 @@
             "module": "THREE"
         },
         {
+            "file": "..\\source\\core\\three\\MultiMaterial.js",
+            "line": 14,
+            "description": "UUID unique identifier.",
+            "itemtype": "property",
+            "name": "uuid",
+            "type": "{String}",
+            "class": "MultiMaterial",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\source\\core\\three\\MultiMaterial.js",
+            "line": 20,
+            "description": "Resource name. Not required to be unique.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "MultiMaterial",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\source\\core\\three\\MultiMaterial.js",
+            "line": 27,
+            "description": "Dispose materials inside the container",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "MultiMaterial",
+            "module": "THREE"
+        },
+        {
             "file": "..\\source\\core\\three\\Object3D.js",
             "line": 15,
             "description": "Array with object's children.",
@@ -8784,7 +8837,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 101,
+            "line": 102,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -8794,7 +8847,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 107,
+            "line": 108,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -8804,7 +8857,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 113,
+            "line": 114,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -8815,7 +8868,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 120,
+            "line": 121,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -8826,7 +8879,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 127,
+            "line": 128,
             "description": "Canvas used to render graphics",
             "itemtype": "property",
             "name": "canvas",
@@ -8836,7 +8889,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 133,
+            "line": 134,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance\nIf true the canvas is resized whenether the resize method is called",
             "itemtype": "property",
             "name": "canvasResize",
@@ -8847,7 +8900,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 192,
+            "line": 193,
             "description": "Load program asynchronously and run it after its loaded",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -8873,7 +8926,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 216,
+            "line": 217,
             "description": "Load program from file",
             "itemtype": "method",
             "name": "loadProgram",
@@ -8889,7 +8942,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 228,
+            "line": 229,
             "description": "Start running nunu program\nA nunu program must be loaded before calling this method",
             "itemtype": "method",
             "name": "run",
@@ -8898,7 +8951,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 287,
+            "line": 288,
             "description": "Update nunu program state\nAutomatically called by the runtime handler",
             "itemtype": "method",
             "name": "update",
@@ -8907,7 +8960,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 301,
+            "line": 302,
             "description": "Exit from app\nThis method kills the app and disposes all internal elements to avoid memory leaks\nIs should be called before exiting the webpage or before switching nunu programs\nWhen loading new nunu programs the same NunuApp instance can be used",
             "itemtype": "method",
             "name": "exit",
@@ -8916,7 +8969,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 334,
+            "line": 335,
             "description": "Resize the window\nShould be called whenether the host window is resized",
             "itemtype": "method",
             "name": "resize",
@@ -8925,7 +8978,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 356,
+            "line": 357,
             "description": "Send data to running nunu application\nThe data sent using this method is received by scripts that implement the onAppData method",
             "params": [
                 {
@@ -8941,7 +8994,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 370,
+            "line": 371,
             "description": "Set on data receive callback\nCallback receives data as an argument",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -8957,7 +9010,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 381,
+            "line": 382,
             "description": "Set on exit callback\nCallback is executed when exiting the nunu app",
             "itemtype": "method",
             "name": "setOnExit",
@@ -8973,7 +9026,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 392,
+            "line": 393,
             "description": "Check if VR mode is available",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -8986,7 +9039,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 402,
+            "line": 403,
             "description": "Toggle VR mode, only works if VR mode is available",
             "itemtype": "method",
             "name": "toggleVR",
@@ -8995,7 +9048,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 427,
+            "line": 428,
             "description": "Set fullscreen mode",
             "params": [
                 {
@@ -9183,7 +9236,7 @@
         },
         {
             "message": "Missing item type\nSet fullscreen mode",
-            "line": " ..\\source\\runtime\\NunuApp.js:427"
+            "line": " ..\\source\\runtime\\NunuApp.js:428"
         },
         {
             "message": "Missing item type\nModules in this bundle",

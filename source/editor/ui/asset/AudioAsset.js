@@ -63,6 +63,27 @@ function AudioAsset(parent)
 			}
 		});
 	};
+
+	//Drag start
+	this.element.ondragstart = function(event)
+	{
+		//Insert into drag buffer
+		if(self.audio !== null)
+		{
+			event.dataTransfer.setData("uuid", self.audio.uuid);
+			DragBuffer.pushDragElement(self.audio);
+		}
+
+		//To avoid camera movement
+		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
+	};
+
+	//Drag end (called after of ondrop)
+	this.element.ondragend = function(event)
+	{
+		var uuid = event.dataTransfer.getData("uuid");
+		var obj = DragBuffer.popDragElement(uuid);
+	};
 }
 
 AudioAsset.prototype = Object.create(Asset.prototype);

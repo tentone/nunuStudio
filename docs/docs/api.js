@@ -25,6 +25,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Mesh",
         "Mesh2shape",
         "Mouse",
+        "MultiMaterial",
         "Nunu",
         "NunuApp",
         "Object3D",
