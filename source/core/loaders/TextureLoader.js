@@ -123,6 +123,8 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	return texture;
 };
 
+TextureLoader.prototype.setCrossOrigin = function(url){};
+
 TextureLoader.prototype.setImages = function(images)
 {
 	this.images = images;
