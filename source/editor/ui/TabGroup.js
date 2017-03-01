@@ -228,23 +228,17 @@ TabGroup.prototype.clear = function()
 	this.selectTab(null);
 }
 
-//TODO <EXPERIMENTAL STUFF>
-//Sort tabs by their index (this inverse of updateOptionIndex)
-TabGroup.prototype.draggingTab = function(tab, position)
+//Move tab from position to another
+TabGroup.prototype.moveButton = function(origin, destination)
 {
-	/*var index = tab.index;
-	tab.index = position;
+	var button = this.options[origin];
 
-	this.options.sort(function(a, b)
-	{
-		return a.index > b.index;
-	});
+	this.options.splice(origin, 1);
+	this.options.splice(destination, 0, button);
 
-	tab.index = index;
-
-	//this.updateOptionIndex();
-	this.updateInterface();*/
-}
+	this.updateOptionIndex();
+	this.updateInterface();
+};
 
 //Update tabs index
 TabGroup.prototype.updateOptionIndex = function()
@@ -311,7 +305,7 @@ TabGroup.prototype.updateInterface = function()
 		for(var i = 0; i < this.options.length; i++)
 		{
 			var tab = this.options[i];
-			tab.visible = this.visible && (this.selected === tab);
+			tab.visible = (this.selected === tab);
 			tab.size.copy(tabSize);
 			tab.updateInterface();
 

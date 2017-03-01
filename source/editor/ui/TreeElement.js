@@ -26,19 +26,6 @@ function TreeElement(container)
 	this.element.style.cursor = "pointer";
 	this.element.style.boxSizing = "border-box";
 
-	this.element.onmouseenter = function()
-	{
-		this.style.backgroundColor = Editor.theme.buttonOverColor;
-	};
-
-	this.element.onmouseleave = function()
-	{
-		if(!Editor.isObjectSelected(self.obj))
-		{
-			this.style.backgroundColor = Editor.theme.buttonLightColor;
-		}
-	};
-
 	//Arrow
 	this.arrow = document.createElement("img");
 	this.arrow.draggable = false;
@@ -70,7 +57,6 @@ function TreeElement(container)
 
 	//Icon
 	this.icon = document.createElement("img");
-	this.icon.draggable = false;
 	this.icon.src = "editor/files/icons/misc/arrow_down.png";
 	this.icon.style.position = "absolute";
 	this.icon.style.pointerEvents = "none";
@@ -100,7 +86,100 @@ function TreeElement(container)
 	this.up = null; //Parent
 	this.children = [];
 
-	//Context menu event
+	//Mouse enter
+	this.element.onmouseenter = function()
+	{
+		this.style.backgroundColor = Editor.theme.buttonOverColor;
+	};
+
+	//Mouse leave
+	this.element.onmouseleave = function()
+	{
+		if(!Editor.isObjectSelected(self.obj))
+		{
+			this.style.backgroundColor = Editor.theme.buttonLightColor;
+		}
+	};
+
+	//Drag state
+	var state = 0;
+
+	//Clear element border
+	function clearBorder()
+	{
+		self.element.style.border = "";
+		self.element.style.borderTop = "";
+		self.element.style.borderBottom = "";
+	};
+
+	//Drag start
+	this.element.ondragstart = function(event)
+	{
+		if(!(self.obj instanceof Scene))
+		{
+			event.dataTransfer.setData("uuid", self.obj.uuid);
+			DragBuffer.pushDragElement(self.obj);
+		}
+	};
+
+	//Drag end
+	this.element.ondragend = function(event)
+	{
+		clearBorder();
+		event.preventDefault();
+
+		//Try to remove event from buffer
+		var uuid = event.dataTransfer.getData("uuid");
+		var obj = DragBuffer.popDragElement(uuid);
+
+		//Avoid mouse lock
+		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
+	};
+
+	//Drag over
+	this.element.ondragover = function(event)
+	{
+		event.preventDefault();
+
+		//Above
+		if(event.layerY < 5)
+		{
+			if(state !== 1)
+			{
+				state = 1;
+				clearBorder();
+				this.style.borderTop = "thin solid #999999";
+			}
+		}
+		//Bellow
+		else if(event.layerY > 15)
+		{
+			if(state !== 2)
+			{
+				state = 2;
+				clearBorder();
+				this.style.borderBottom = "thin solid #999999";
+			}
+		}
+		//Inside
+		else if(state !== 3)
+		{
+			state = 3;
+			clearBorder();
+			this.style.border = "thin solid #999999";
+		}
+	};
+
+	//Drag leave
+	this.element.ondragleave = function()
+	{
+		event.preventDefault();
+		clearBorder();
+
+		state = 0;
+	};
+
+	//Context menu
 	this.element.oncontextmenu = function(event)
 	{
 		if(self.obj !== null)
@@ -228,87 +307,17 @@ function TreeElement(container)
 		}
 	};
 
-	//Drag start (fired on the draggable object)
-	this.element.ondragstart = function(event)
-	{
-		if(!(self.obj instanceof Scene))
-		{
-			event.dataTransfer.setData("uuid", self.obj.uuid);
-			DragBuffer.pushDragElement(self.obj);
-		}
-	};
-
-	//Clear element border
-	function clearBorder()
-	{
-		self.element.style.border = "";
-		self.element.style.borderTop = "";
-		self.element.style.borderBottom = "";
-	};
-
-	//Drag end (fired on the draggable object, called after of ondrop on the drop target)
-	this.element.ondragend = function(event)
-	{
-		clearBorder();
-
-		//Try to remove event from buffer
-		var uuid = event.dataTransfer.getData("uuid");
-		var obj = DragBuffer.popDragElement(uuid);
-
-		//To avoid mouse lock after drag
-		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
-	};
-
-	//Flag to avoid unecessary border reflow
-	var state = 0;
-
-	this.element.ondragover = function(event)
-	{
-		//Above
-		if(event.layerY < 5)
-		{
-			if(state !== 1)
-			{
-				state = 1;
-				clearBorder();
-				this.style.borderTop = "thin solid #999999";
-			}
-		}
-		//Bellow
-		else if(event.layerY > 15)
-		{
-			if(state !== 2)
-			{
-				state = 2;
-				clearBorder();
-				this.style.borderBottom = "thin solid #999999";
-			}
-		}
-		//Inside
-		else if(state !== 3)
-		{
-			state = 3;
-			clearBorder();
-			this.style.border = "thin solid #999999";
-		}
-	};
-
-	this.element.ondragleave = function()
-	{
-		state = 0;
-		clearBorder();
-	};
-
 	//Drop event (fired on the drop target)
 	this.element.ondrop = function(event)
 	{
+		event.preventDefault();
 		clearBorder();
 
 		//Collect element from buffer
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = DragBuffer.popDragElement(uuid);
 
-		if(obj !== null && obj !== self.obj && !ObjectUtils.isChildOf(obj ,self.obj))
+		if(obj !== undefined && obj !== self.obj && !ObjectUtils.isChildOf(obj ,self.obj))
 		{
 			//Above
 			if(event.layerY < 5)
@@ -336,13 +345,13 @@ function TreeElement(container)
 		}
 	};
 
-	//Object select event
+	//Click
 	this.element.onclick = function()
 	{
 		Editor.selectObject(self.obj);
 	};
 
-	//Double click event
+	//Double click
 	this.element.ondblclick = function()
 	{
 		if(self.obj instanceof Script)

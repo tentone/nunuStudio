@@ -7,80 +7,15 @@ function TabButton(parent, tab)
 
 	//Element
 	this.element = document.createElement("div");
+	this.element.draggable = true;
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "pointer";
+	this.element.style.boxSizing = "border-box";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
-	this.element.draggable = true;
-
-	//Self pointer
-	var self = this;
-
-	//Drag control
-	var _mouse = new THREE.Vector2(0, 0);
-	var _position = new THREE.Vector2(0, 0);
-	var _index = 0;
-
-	this.element.ondragstart = function(event)
-	{
-		_mouse.set(event.clientX, event.clientY);
-		_position.copy(self.position);
-
-		event.dataTransfer.setDragImage(this.cloneNode(false), 0, 0);
-
-		this.style.zIndex = "1000";
-	};
-
-	this.element.ondrag = function(event)
-	{
-		if(self.tab.container.mode === TabGroup.TOP)
-		{
-			this.style.left = (_position.x + event.clientX - _mouse.x) + "px";
-			
-			_index = (_position.x + event.clientX - _mouse.x) / self.size.x;
-
-			self.tab.container.draggingTab(self.tab, _index);
-		}
-	};
-
-	this.element.ondragend = function(event)
-	{
-		this.style.left = _position.x + "px";
-		this.style.top = _position.y + "px";
-		this.style.zIndex = "";
-	};
-
-	this.element.onmousedown = function(event)
-	{
-		//Select tab on mouse left click
-		if(event.which - 1 === Mouse.LEFT)
-		{
-			self.tab.container.selectTab(self.tab);
-		}
-		//Close tab on mouse middle click
-		else if(tab.closeable && event.which - 1 === Mouse.MIDDLE)
-		{
-			self.tab.container.removeTab(self.tab);
-		}
-	};
-
-	//Mouse over and mouse out events
-	this.element.onmouseenter = function()
-	{
-		this.style.backgroundColor = Editor.theme.buttonOverColor;
-	};
-
-	//Mouse leave event
-	this.element.onmouseleave = function()
-	{
-		if(!tab.isSelected())
-		{
-			this.style.backgroundColor = Editor.theme.buttonColor;
-		}
-	};
 
 	//Icon
 	this.icon = document.createElement("img");
-	this.icon.draggable = false;
+	this.icon.style.pointerEvents = "none";
 	this.icon.style.position = "absolute";
 	this.icon.src = tab.icon;
 	this.element.appendChild(this.icon);
@@ -106,7 +41,7 @@ function TabButton(parent, tab)
 	this.close.style.display = (tab.closeable) ? "block" : "none";
 	this.close.src = "editor/files/icons/misc/close.png";
 	this.element.appendChild(this.close);
-	
+
 	this.close.onmouseenter = function()
 	{
 		this.style.opacity = 1.0;
@@ -129,6 +64,144 @@ function TabButton(parent, tab)
 
 	//Tab
 	this.tab = tab;
+
+	//Self pointer
+	var self = this;
+
+	//Drag state
+	var dragState = 0;
+
+	//Drag control
+	this.element.ondragstart = function(event)
+	{
+		event.dataTransfer.setData("tab", self.tab.index);
+		dragState = 0;
+	};
+
+	//Drag drop
+	this.element.ondrop = function(event)
+	{
+		event.preventDefault();
+		this.style.borderLeft = "";
+		this.style.borderRight = "";
+
+		var index = event.dataTransfer.getData("tab");
+		if(index !== "")
+		{
+			index = parseInt(index);
+
+			if(index !== self.tab.index)
+			{	
+				//Before
+				if(dragState === 1)
+				{
+					if(index < self.tab.index)
+					{
+						self.tab.container.moveButton(index, self.tab.index - 1);
+					}
+					else
+					{
+						self.tab.container.moveButton(index, self.tab.index);
+					}
+				}
+				//After
+				else if(dragState === 2)
+				{
+					if(index < self.tab.index)
+					{
+						self.tab.container.moveButton(index, self.tab.index);
+					}
+					else
+					{
+						self.tab.container.moveButton(index, self.tab.index + 1);
+					}
+					self.tab.container.moveButton(index, self.tab.index);
+				}
+			}
+		}
+	};
+
+	//Drag over
+	this.element.ondragover = function(event)
+	{
+		if(event.layerX < self.size.x * 0.2)
+		{
+			if(dragState !== 1)
+			{
+				dragState = 1;
+				this.style.borderRight = "";
+				this.style.borderLeft = "thick solid #999999";
+			}
+		}
+		else if(event.layerX > self.size.x * 0.8)
+		{
+			if(dragState !== 2)
+			{
+				dragState = 2;
+				this.style.borderLeft = "";
+				this.style.borderRight = "thick solid #999999";
+			}
+		}
+		else
+		{
+			if(dragState !== 0)
+			{
+				dragState = 0;
+				this.style.borderLeft = "";
+				this.style.borderRight = "";
+			}
+		}
+	}
+
+	//Drag leave
+	this.element.ondragleave = function(event)
+	{
+		event.preventDefault();
+		dragState = 0;
+		this.style.borderLeft = "";
+		this.style.borderRight = "";
+	}
+
+	//Drag end
+	this.element.ondragend = function(event)
+	{
+		event.preventDefault();
+		dragState = 0;
+		this.style.borderLeft = "";
+		this.style.borderRight = "";
+
+		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
+	}
+
+	//Mouse click
+	this.element.onclick = function(event)
+	{
+		//Select tab on mouse left click
+		if(event.which - 1 === Mouse.LEFT)
+		{
+			self.tab.container.selectTab(self.tab);
+		}
+		//Close tab on mouse middle click
+		else if(tab.closeable && event.which - 1 === Mouse.MIDDLE)
+		{
+			self.tab.container.removeTab(self.tab);
+		}
+	};
+
+	//Mouse enter
+	this.element.onmouseenter = function()
+	{
+		this.style.backgroundColor = Editor.theme.buttonOverColor;
+	};
+
+	//Mouse leave
+	this.element.onmouseleave = function()
+	{
+		if(!tab.isSelected())
+		{
+			this.style.backgroundColor = Editor.theme.buttonColor;
+		}
+	};
 
 	//Add to parent
 	this.parent.appendChild(this.element);

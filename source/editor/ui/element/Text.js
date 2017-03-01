@@ -5,7 +5,7 @@ function Text(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.display = "flex";
@@ -13,8 +13,8 @@ function Text(parent)
 	this.element.style.alignItems = "center";
 	this.element.style.pointerEvents = "none";
 	this.element.style.color = Editor.theme.textColor;
-	
-	//Span element
+
+	//Span
 	this.span = document.createElement("span");
 	this.span.style.whiteSpace = "nowrap";
 	this.span.innerHTML = "text";
