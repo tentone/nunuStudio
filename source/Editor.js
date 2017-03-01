@@ -2,20 +2,6 @@
 
 function Editor(){}
 
-//Node modules
-try
-{
-	Editor.fs = require("fs");
-	Editor.gui = require("nw.gui");
-	
-	Editor.clipboard = Editor.gui.Clipboard.get();
-	Editor.args = Editor.gui.App.argv;
-}
-catch(e)
-{
-	Editor.args = [];
-}
-
 //Nunu global
 include("Nunu.js");
 
@@ -278,6 +264,7 @@ include("editor/utils/ObjectIcons.js");
 include("editor/history/History.js");
 include("editor/history/Action.js");
 
+include("editor/Clipboard.js");
 include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
@@ -300,6 +287,18 @@ Editor.CAMERA_PERSPECTIVE = 21;
 //Initialize Main
 Editor.initialize = function()
 {
+	try
+	{	
+		Editor.gui = require("nw.gui");	
+		Editor.clipboard = Editor.gui.Clipboard.get();
+		Editor.args = Editor.gui.App.argv;
+	}
+	catch(e)
+	{
+		Editor.clipboard = new Clipboard();
+		Editor.args = [];
+	}
+
 	Editor.fullscreen = false;
 		
 	//Disable body overflow
@@ -2178,32 +2177,33 @@ function include(file, onload)
 		css.rel = "stylesheet";
 		document.body.appendChild(css);
 	}
-	else if(file.endsWith("*"))
+	else if(window.require !== undefined)
 	{
-		if(Editor.fs !== undefined)
+		var fs = require("fs");
+		if(fs !== undefined)
 		{
-			var directory = file.replace("*", "");
-			var files = Editor.fs.readdirSync(directory);
-			for(var i = 0; i < files.length; i++)
+			if(file.endsWith("*"))
 			{
-				include(directory + files[i]);
-			}
-		}
-	}
-	else
-	{
-		if(Editor.fs !== undefined)
-		{
-			var directory = file + "/";
-			try
-			{
-				var files = Editor.fs.readdirSync(directory);
+				var directory = file.replace("*", "");
+				var files = fs.readdirSync(directory);
 				for(var i = 0; i < files.length; i++)
 				{
 					include(directory + files[i]);
 				}
 			}
-			catch(e){}
+			else
+			{
+				var directory = file + "/";
+				try
+				{
+					var files = fs.readdirSync(directory);
+					for(var i = 0; i < files.length; i++)
+					{
+						include(directory + files[i]);
+					}
+				}
+				catch(e){}
+			}
 		}
 	}
 }
