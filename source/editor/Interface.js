@@ -780,13 +780,17 @@ Interface.initialize = function()
 		}
 	}
 
-	Interface.file.addOption("Exit", function()
+	//Exit
+	if(Nunu.runningOnDesktop())
 	{
-		if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
+		Interface.file.addOption("Exit", function()
 		{
-			Editor.exit();
-		}
-	}, Interface.fileDir + "icons/misc/exit.png");
+			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
+			{
+				Editor.exit();
+			}
+		}, Interface.fileDir + "icons/misc/exit.png");
+	}
 
 	//Editor
 	Interface.editor = new DropdownMenu();

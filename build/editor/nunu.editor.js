@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.21 Alpha";
-Nunu.TIMESTAMP = "201702281829";
+Nunu.TIMESTAMP = "201703011625";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -110,20 +110,20 @@ Nunu.runningOnDesktop = function() {
     this.stencilBuffer = void 0 !== c.stencilBuffer ? c.stencilBuffer : !0;
     this.depthTexture = void 0 !== c.depthTexture ? c.depthTexture : null;
   }
-  function h(p, a, b) {
-    g.call(this, p, a, b);
+  function h(a, F, b) {
+    g.call(this, a, F, b);
     this.activeMipMapLevel = this.activeCubeFace = 0;
   }
-  function k(a, F, b, c) {
+  function k(a, b, c, d) {
     this._x = a || 0;
-    this._y = F || 0;
-    this._z = b || 0;
-    this._w = void 0 !== c ? c : 1;
+    this._y = b || 0;
+    this._z = c || 0;
+    this._w = void 0 !== d ? d : 1;
   }
-  function m(a, F, b) {
+  function m(a, b, c) {
     this.x = a || 0;
-    this.y = F || 0;
-    this.z = b || 0;
+    this.y = b || 0;
+    this.z = c || 0;
   }
   function l() {
     this.elements = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
@@ -142,16 +142,16 @@ Nunu.runningOnDesktop = function() {
     b.call(this, a, void 0 !== F ? F : 301, c, d, e, f, g, h, q, k);
     this.flipY = !1;
   }
-  function r(a, F, b) {
+  function r(a, b, c) {
     var p = a[0];
     if (0 >= p || 0 < p) {
       return a;
     }
-    var c = F * b, d = nb[c];
-    void 0 === d && (d = new Float32Array(c), nb[c] = d);
-    if (0 !== F) {
-      for (p.toArray(d, 0), p = 1, c = 0;p !== F;++p) {
-        c += b, a[p].toArray(d, c);
+    var F = b * c, d = nb[F];
+    void 0 === d && (d = new Float32Array(F), nb[F] = d);
+    if (0 !== b) {
+      for (p.toArray(d, 0), p = 1, F = 0;p !== b;++p) {
+        F += c, a[p].toArray(d, F);
       }
     }
     return d;
@@ -1215,9 +1215,9 @@ Nunu.runningOnDesktop = function() {
   function $b(a, b, c) {
     var p = {};
     return {update:function(a) {
-      var d = c.frame, F = a.geometry, e = b.get(a, F);
-      p[e.id] !== d && (F.isGeometry && e.updateFromObject(a), b.update(e), p[e.id] = d);
-      return e;
+      var d = c.frame, e = a.geometry, F = b.get(a, e);
+      p[F.id] !== d && (e.isGeometry && F.updateFromObject(a), b.update(F), p[F.id] = d);
+      return F;
     }, clear:function() {
       p = {};
     }};
@@ -4293,14 +4293,14 @@ Nunu.runningOnDesktop = function() {
     f.up.set(0, 0, -1);
     f.lookAt(new m(0, -1, 0));
     this.add(f);
-    var g = new Sa(90, 1, a, b);
-    g.up.set(0, -1, 0);
-    g.lookAt(new m(0, 0, 1));
-    this.add(g);
     var F = new Sa(90, 1, a, b);
     F.up.set(0, -1, 0);
-    F.lookAt(new m(0, 0, -1));
+    F.lookAt(new m(0, 0, 1));
     this.add(F);
+    var g = new Sa(90, 1, a, b);
+    g.up.set(0, -1, 0);
+    g.lookAt(new m(0, 0, -1));
+    this.add(g);
     this.renderTarget = new h(c, c, {format:1022, magFilter:1006, minFilter:1006});
     this.renderTarget.texture.name = "CubeCamera";
     this.updateCubeMap = function(a, b) {
@@ -4316,10 +4316,10 @@ Nunu.runningOnDesktop = function() {
       c.activeCubeFace = 3;
       a.render(b, f, c);
       c.activeCubeFace = 4;
-      a.render(b, g, c);
+      a.render(b, F, c);
       c.texture.generateMipmaps = h;
       c.activeCubeFace = 5;
-      a.render(b, F, c);
+      a.render(b, g, c);
       a.setRenderTarget(null);
     };
   }
@@ -5584,11 +5584,11 @@ Nunu.runningOnDesktop = function() {
     this.onChangeCallback();
     return this;
   }, setFromRotationMatrix:function(a) {
-    var p = a.elements, b = p[0];
-    a = p[4];
-    var c = p[8], d = p[1], e = p[5], f = p[9], g = p[2], h = p[6], p = p[10], q = b + e + p;
-    0 < q ? (b = .5 / Math.sqrt(q + 1), this._w = .25 / b, this._x = (h - f) * b, this._y = (c - g) * b, this._z = (d - a) * b) : b > e && b > p ? (b = 2 * Math.sqrt(1 + b - e - p), this._w = (h - f) / b, this._x = .25 * b, this._y = (a + d) / b, this._z = (c + g) / b) : e > p ? (b = 2 * Math.sqrt(1 + e - b - p), this._w = (c - g) / b, this._x = (a + d) / b, this._y = .25 * b, this._z = (f + h) / b) : (b = 2 * Math.sqrt(1 + p - b - e), this._w = (d - a) / b, this._x = (c + g) / b, this._y = (f + 
-    h) / b, this._z = .25 * b);
+    var b = a.elements, p = b[0];
+    a = b[4];
+    var c = b[8], d = b[1], e = b[5], f = b[9], g = b[2], h = b[6], b = b[10], q = p + e + b;
+    0 < q ? (p = .5 / Math.sqrt(q + 1), this._w = .25 / p, this._x = (h - f) * p, this._y = (c - g) * p, this._z = (d - a) * p) : p > e && p > b ? (p = 2 * Math.sqrt(1 + p - e - b), this._w = (h - f) / p, this._x = .25 * p, this._y = (a + d) / p, this._z = (c + g) / p) : e > b ? (p = 2 * Math.sqrt(1 + e - p - b), this._w = (c - g) / p, this._x = (a + d) / p, this._y = .25 * p, this._z = (f + h) / p) : (p = 2 * Math.sqrt(1 + b - p - e), this._w = (d - a) / p, this._x = (c + g) / p, this._y = (f + 
+    h) / p, this._z = .25 * p);
     this.onChangeCallback();
     return this;
   }, setFromUnitVectors:function() {
@@ -7531,15 +7531,15 @@ Nunu.runningOnDesktop = function() {
     };
   }(), distanceSqToSegment:function() {
     var a = new m, b = new m, c = new m;
-    return function(p, d, e, f) {
-      a.copy(p).add(d).multiplyScalar(.5);
-      b.copy(d).sub(p).normalize();
+    return function(d, p, e, f) {
+      a.copy(d).add(p).multiplyScalar(.5);
+      b.copy(p).sub(d).normalize();
       c.copy(this.origin).sub(a);
-      var g = .5 * p.distanceTo(d), h = -this.direction.dot(b), q = c.dot(this.direction), k = -c.dot(b), m = c.lengthSq(), l = Math.abs(1 - h * h), n;
-      0 < l ? (p = h * k - q, d = h * q - k, n = g * l, 0 <= p ? d >= -n ? d <= n ? (g = 1 / l, p *= g, d *= g, h = p * (p + h * d + 2 * q) + d * (h * p + d + 2 * k) + m) : (d = g, p = Math.max(0, -(h * d + q)), h = -p * p + d * (d + 2 * k) + m) : (d = -g, p = Math.max(0, -(h * d + q)), h = -p * p + d * (d + 2 * k) + m) : d <= -n ? (p = Math.max(0, -(-h * g + q)), d = 0 < p ? -g : Math.min(Math.max(-g, -k), g), h = -p * p + d * (d + 2 * k) + m) : d <= n ? (p = 0, d = Math.min(Math.max(-g, -k), g), 
-      h = d * (d + 2 * k) + m) : (p = Math.max(0, -(h * g + q)), d = 0 < p ? g : Math.min(Math.max(-g, -k), g), h = -p * p + d * (d + 2 * k) + m)) : (d = 0 < h ? -g : g, p = Math.max(0, -(h * d + q)), h = -p * p + d * (d + 2 * k) + m);
-      e && e.copy(this.direction).multiplyScalar(p).add(this.origin);
-      f && f.copy(b).multiplyScalar(d).add(a);
+      var g = .5 * d.distanceTo(p), h = -this.direction.dot(b), q = c.dot(this.direction), k = -c.dot(b), m = c.lengthSq(), l = Math.abs(1 - h * h), n;
+      0 < l ? (d = h * k - q, p = h * q - k, n = g * l, 0 <= d ? p >= -n ? p <= n ? (g = 1 / l, d *= g, p *= g, h = d * (d + h * p + 2 * q) + p * (h * d + p + 2 * k) + m) : (p = g, d = Math.max(0, -(h * p + q)), h = -d * d + p * (p + 2 * k) + m) : (p = -g, d = Math.max(0, -(h * p + q)), h = -d * d + p * (p + 2 * k) + m) : p <= -n ? (d = Math.max(0, -(-h * g + q)), p = 0 < d ? -g : Math.min(Math.max(-g, -k), g), h = -d * d + p * (p + 2 * k) + m) : p <= n ? (d = 0, p = Math.min(Math.max(-g, -k), g), 
+      h = p * (p + 2 * k) + m) : (d = Math.max(0, -(h * g + q)), p = 0 < d ? g : Math.min(Math.max(-g, -k), g), h = -d * d + p * (p + 2 * k) + m)) : (p = 0 < h ? -g : g, d = Math.max(0, -(h * p + q)), h = -d * d + p * (p + 2 * k) + m);
+      e && e.copy(this.direction).multiplyScalar(d).add(this.origin);
+      f && f.copy(b).multiplyScalar(p).add(a);
       return h;
     };
   }(), intersectSphere:function() {
@@ -9010,8 +9010,8 @@ Nunu.runningOnDesktop = function() {
       var c = this.attributes, d;
       for (d in c) {
         if (void 0 !== a.attributes[d]) {
-          for (var e = c[d].array, f = a.attributes[d], p = f.array, g = 0, f = f.itemSize * b;g < p.length;g++, f++) {
-            e[f] = p[g];
+          for (var e = c[d].array, p = a.attributes[d], f = p.array, g = 0, p = p.itemSize * b;g < f.length;g++, p++) {
+            e[p] = f[g];
           }
         }
       }
@@ -9526,33 +9526,33 @@ Nunu.runningOnDesktop = function() {
   Mc.prototype = Object.assign(Object.create(aa.prototype), {constructor:Mc, isLine:!0, raycast:function() {
     var a = new l, b = new xa, c = new Ya;
     return function(d, e) {
-      var f = d.linePrecision, f = f * f, g = this.geometry, p = this.matrixWorld;
-      null === g.boundingSphere && g.computeBoundingSphere();
-      c.copy(g.boundingSphere);
-      c.applyMatrix4(p);
+      var f = d.linePrecision, f = f * f, p = this.geometry, g = this.matrixWorld;
+      null === p.boundingSphere && p.computeBoundingSphere();
+      c.copy(p.boundingSphere);
+      c.applyMatrix4(g);
       if (!1 !== d.ray.intersectsSphere(c)) {
-        a.getInverse(p);
+        a.getInverse(g);
         b.copy(d.ray).applyMatrix4(a);
-        var h = new m, q = new m, p = new m, k = new m, l = this && this.isLineSegments ? 2 : 1;
-        if (g.isBufferGeometry) {
-          var n = g.index, r = g.attributes.position.array;
+        var h = new m, q = new m, g = new m, k = new m, l = this && this.isLineSegments ? 2 : 1;
+        if (p.isBufferGeometry) {
+          var n = p.index, r = p.attributes.position.array;
           if (null !== n) {
-            for (var n = n.array, g = 0, u = n.length - 1;g < u;g += l) {
-              var v = n[g + 1];
-              h.fromArray(r, 3 * n[g]);
+            for (var n = n.array, p = 0, u = n.length - 1;p < u;p += l) {
+              var v = n[p + 1];
+              h.fromArray(r, 3 * n[p]);
               q.fromArray(r, 3 * v);
-              v = b.distanceSqToSegment(h, q, k, p);
-              v > f || (k.applyMatrix4(this.matrixWorld), v = d.ray.origin.distanceTo(k), v < d.near || v > d.far || e.push({distance:v, point:p.clone().applyMatrix4(this.matrixWorld), index:g, face:null, faceIndex:null, object:this}));
+              v = b.distanceSqToSegment(h, q, k, g);
+              v > f || (k.applyMatrix4(this.matrixWorld), v = d.ray.origin.distanceTo(k), v < d.near || v > d.far || e.push({distance:v, point:g.clone().applyMatrix4(this.matrixWorld), index:p, face:null, faceIndex:null, object:this}));
             }
           } else {
-            for (g = 0, u = r.length / 3 - 1;g < u;g += l) {
-              h.fromArray(r, 3 * g), q.fromArray(r, 3 * g + 3), v = b.distanceSqToSegment(h, q, k, p), v > f || (k.applyMatrix4(this.matrixWorld), v = d.ray.origin.distanceTo(k), v < d.near || v > d.far || e.push({distance:v, point:p.clone().applyMatrix4(this.matrixWorld), index:g, face:null, faceIndex:null, object:this}));
+            for (p = 0, u = r.length / 3 - 1;p < u;p += l) {
+              h.fromArray(r, 3 * p), q.fromArray(r, 3 * p + 3), v = b.distanceSqToSegment(h, q, k, g), v > f || (k.applyMatrix4(this.matrixWorld), v = d.ray.origin.distanceTo(k), v < d.near || v > d.far || e.push({distance:v, point:g.clone().applyMatrix4(this.matrixWorld), index:p, face:null, faceIndex:null, object:this}));
             }
           }
         } else {
-          if (g.isGeometry) {
-            for (h = g.vertices, q = h.length, g = 0;g < q - 1;g += l) {
-              v = b.distanceSqToSegment(h[g], h[g + 1], k, p), v > f || (k.applyMatrix4(this.matrixWorld), v = d.ray.origin.distanceTo(k), v < d.near || v > d.far || e.push({distance:v, point:p.clone().applyMatrix4(this.matrixWorld), index:g, face:null, faceIndex:null, object:this}));
+          if (p.isGeometry) {
+            for (h = p.vertices, q = h.length, p = 0;p < q - 1;p += l) {
+              v = b.distanceSqToSegment(h[p], h[p + 1], k, g), v > f || (k.applyMatrix4(this.matrixWorld), v = d.ray.origin.distanceTo(k), v < d.near || v > d.far || e.push({distance:v, point:g.clone().applyMatrix4(this.matrixWorld), index:p, face:null, faceIndex:null, object:this}));
             }
           }
         }
@@ -9582,34 +9582,34 @@ Nunu.runningOnDesktop = function() {
         if (f < k) {
           a = b.closestPointToPoint(a);
           a.applyMatrix4(h);
-          var p = d.ray.origin.distanceTo(a);
-          p < d.near || p > d.far || e.push({distance:p, distanceToRay:Math.sqrt(f), point:a.clone(), index:c, face:null, object:g});
+          var g = d.ray.origin.distanceTo(a);
+          g < d.near || g > d.far || e.push({distance:g, distanceToRay:Math.sqrt(f), point:a.clone(), index:c, face:null, object:p});
         }
       }
-      var g = this, p = this.geometry, h = this.matrixWorld, q = d.params.Points.threshold;
-      null === p.boundingSphere && p.computeBoundingSphere();
-      c.copy(p.boundingSphere);
+      var p = this, g = this.geometry, h = this.matrixWorld, q = d.params.Points.threshold;
+      null === g.boundingSphere && g.computeBoundingSphere();
+      c.copy(g.boundingSphere);
       c.applyMatrix4(h);
       c.radius += q;
       if (!1 !== d.ray.intersectsSphere(c)) {
         a.getInverse(h);
         b.copy(d.ray).applyMatrix4(a);
         var q = q / ((this.scale.x + this.scale.y + this.scale.z) / 3), k = q * q, q = new m;
-        if (p.isBufferGeometry) {
-          var l = p.index, p = p.attributes.position.array;
+        if (g.isBufferGeometry) {
+          var l = g.index, g = g.attributes.position.array;
           if (null !== l) {
             for (var n = l.array, l = 0, r = n.length;l < r;l++) {
               var u = n[l];
-              q.fromArray(p, 3 * u);
+              q.fromArray(g, 3 * u);
               f(q, u);
             }
           } else {
-            for (l = 0, n = p.length / 3;l < n;l++) {
-              q.fromArray(p, 3 * l), f(q, l);
+            for (l = 0, n = g.length / 3;l < n;l++) {
+              q.fromArray(g, 3 * l), f(q, l);
             }
           }
         } else {
-          for (q = p.vertices, l = 0, n = q.length;l < n;l++) {
+          for (q = g.vertices, l = 0, n = q.length;l < n;l++) {
             f(q[l], l);
           }
         }
@@ -12128,11 +12128,11 @@ Nunu.runningOnDesktop = function() {
     }
     var k = !e(f[0].getPoints()), k = a ? !k : k;
     h = [];
-    var m = [], l = [], p = 0, n;
-    m[p] = void 0;
-    l[p] = [];
+    var m = [], p = [], l = 0, n;
+    m[l] = void 0;
+    p[l] = [];
     for (var r = 0, u = f.length;r < u;r++) {
-      g = f[r], n = g.getPoints(), b = e(n), (b = a ? !b : b) ? (!k && m[p] && p++, m[p] = {s:new Sc, p:n}, m[p].s.curves = g.curves, k && p++, l[p] = []) : l[p].push({h:g, p:n[0]});
+      g = f[r], n = g.getPoints(), b = e(n), (b = a ? !b : b) ? (!k && m[l] && l++, m[l] = {s:new Sc, p:n}, m[l].s.curves = g.curves, k && l++, p[l] = []) : p[l].push({h:g, p:n[0]});
     }
     if (!m[0]) {
       return c(f);
@@ -12146,20 +12146,20 @@ Nunu.runningOnDesktop = function() {
       }
       e = 0;
       for (f = m.length;e < f;e++) {
-        for (b = l[e], k = 0;k < b.length;k++) {
-          p = b[k];
+        for (b = p[e], k = 0;k < b.length;k++) {
+          l = b[k];
           n = !0;
           for (u = 0;u < m.length;u++) {
-            d(p.p, m[u].p) && (e !== u && g.push({froms:e, tos:u, hole:k}), n ? (n = !1, h[u].push(p)) : r = !0);
+            d(l.p, m[u].p) && (e !== u && g.push({froms:e, tos:u, hole:k}), n ? (n = !1, h[u].push(l)) : r = !0);
           }
-          n && h[e].push(p);
+          n && h[e].push(l);
         }
       }
-      0 < g.length && (r || (l = h));
+      0 < g.length && (r || (p = h));
     }
     r = 0;
     for (e = m.length;r < e;r++) {
-      for (h = m[r].s, q.push(h), g = l[r], f = 0, b = g.length;f < b;f++) {
+      for (h = m[r].s, q.push(h), g = p[r], f = 0, b = g.length;f < b;f++) {
         h.holes.push(g[f].h);
       }
     }
@@ -18985,9 +18985,9 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
     b.prototype[e.types.SPHERE | e.types.CONVEXPOLYHEDRON] = b.prototype.sphereConvex = function(b, c, d, e, f, g, h, q) {
       f = this.v3pool;
       d.vsub(e, Ya);
-      for (var k = c.faceNormals, m = c.faces, l = c.vertices, n = b.radius, u = 0;u !== l.length;u++) {
+      for (var k = c.faceNormals, l = c.faces, m = c.vertices, n = b.radius, u = 0;u !== m.length;u++) {
         var r = Aa;
-        g.vmult(l[u], r);
+        g.vmult(m[u], r);
         e.vadd(r, r);
         var z = qa;
         if (r.vsub(d, z), z.norm2() < n * n) {
@@ -18995,11 +18995,11 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
         }
       }
       u = 0;
-      for (r = m.length;u !== r;u++) {
-        var z = m[u], v = xa;
+      for (r = l.length;u !== r;u++) {
+        var z = l[u], v = xa;
         g.vmult(k[u], v);
         var t = eb;
-        g.vmult(l[z[0]], t);
+        g.vmult(m[z[0]], t);
         t.vadd(e, t);
         var w = fb;
         v.mult(-n, w);
@@ -19011,7 +19011,7 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
         if (d.vsub(t, x), 0 > w && 0 < x.dot(v)) {
           for (var t = [], x = 0, y = z.length;x !== y;x++) {
             var A = f.get();
-            g.vmult(l[z[x]], A);
+            g.vmult(m[z[x]], A);
             e.vadd(A, A);
             t.push(A);
           }
@@ -19060,8 +19060,8 @@ THREE.KeyFrameAnimation.prototype = {constructor:THREE.KeyFrameAnimation, play:f
           for (x = 0;x !== z.length;x++) {
             v = f.get();
             w = f.get();
-            g.vmult(l[z[(x + 1) % z.length]], v);
-            g.vmult(l[z[(x + 2) % z.length]], w);
+            g.vmult(m[z[(x + 1) % z.length]], v);
+            g.vmult(m[z[(x + 2) % z.length]], w);
             e.vadd(v, v);
             e.vadd(w, w);
             H = Ma;
@@ -59637,9 +59637,14 @@ Mesh2shape.getMeshes = function(a) {
 function Bar(a) {
   this.parent = void 0 !== a ? a : document.body;
   this.element = document.createElement("div");
-  this.element.draggable = !1;
   this.element.style.position = "absolute";
   this.element.style.backgroundColor = Editor.theme.barColor;
+  this.element.ondrop = function(a) {
+    a.preventDefault();
+  };
+  this.element.ondragover = function(a) {
+    a.preventDefault();
+  };
   this.size = new THREE.Vector2(0, 0);
   this.position = new THREE.Vector2(0, 0);
   this.visible = !0;
@@ -59654,11 +59659,7 @@ Bar.prototype.destroy = function() {
 Bar.prototype.update = function() {
 };
 Bar.prototype.updateInterface = function() {
-  this.element.style.visibility = this.visible ? "visible" : "hidden";
-  this.element.style.top = this.position.y + "px";
-  this.element.style.left = this.position.x + "px";
-  this.element.style.width = this.size.x + "px";
-  this.element.style.height = this.size.y + "px";
+  this.visible ? (this.element.style.display = "block", this.element.style.top = this.position.y + "px", this.element.style.left = this.position.x + "px", this.element.style.width = this.size.x + "px", this.element.style.height = this.size.y + "px") : this.element.style.display = "none";
 };
 function Button(a) {
   this.parent = void 0 !== a ? a : document.body;
@@ -61934,12 +61935,6 @@ function TreeElement(a) {
   this.element.style.height = "20px";
   this.element.style.cursor = "pointer";
   this.element.style.boxSizing = "border-box";
-  this.element.onmouseenter = function() {
-    this.style.backgroundColor = Editor.theme.buttonOverColor;
-  };
-  this.element.onmouseleave = function() {
-    Editor.isObjectSelected(d.obj) || (this.style.backgroundColor = Editor.theme.buttonLightColor);
-  };
   this.arrow = document.createElement("img");
   this.arrow.draggable = !1;
   this.arrow.src = "editor/files/icons/misc/arrow_down.png";
@@ -61961,7 +61956,6 @@ function TreeElement(a) {
     d.updateFoldedState();
   };
   this.icon = document.createElement("img");
-  this.icon.draggable = !1;
   this.icon.src = "editor/files/icons/misc/arrow_down.png";
   this.icon.style.position = "absolute";
   this.icon.style.pointerEvents = "none";
@@ -61984,6 +61978,32 @@ function TreeElement(a) {
   this.level = 0;
   this.up = null;
   this.children = [];
+  this.element.onmouseenter = function() {
+    this.style.backgroundColor = Editor.theme.buttonOverColor;
+  };
+  this.element.onmouseleave = function() {
+    Editor.isObjectSelected(d.obj) || (this.style.backgroundColor = Editor.theme.buttonLightColor);
+  };
+  var b = 0;
+  this.element.ondragstart = function(a) {
+    d.obj instanceof Scene || (a.dataTransfer.setData("uuid", d.obj.uuid), DragBuffer.pushDragElement(d.obj));
+  };
+  this.element.ondragend = function(a) {
+    c();
+    a.preventDefault();
+    a = a.dataTransfer.getData("uuid");
+    DragBuffer.popDragElement(a);
+    Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
+  };
+  this.element.ondragover = function(a) {
+    a.preventDefault();
+    5 > a.layerY ? 1 !== b && (b = 1, c(), this.style.borderTop = "thin solid #999999") : 15 < a.layerY ? 2 !== b && (b = 2, c(), this.style.borderBottom = "thin solid #999999") : 3 !== b && (b = 3, c(), this.style.border = "thin solid #999999");
+  };
+  this.element.ondragleave = function() {
+    event.preventDefault();
+    c();
+    b = 0;
+  };
   this.element.oncontextmenu = function(a) {
     if (null !== d.obj) {
       var b = d.obj instanceof Program, c = d.obj instanceof Scene, k = new ContextMenu;
@@ -62034,27 +62054,11 @@ function TreeElement(a) {
       });
     }
   };
-  this.element.ondragstart = function(a) {
-    d.obj instanceof Scene || (a.dataTransfer.setData("uuid", d.obj.uuid), DragBuffer.pushDragElement(d.obj));
-  };
-  this.element.ondragend = function(a) {
-    c();
-    a = a.dataTransfer.getData("uuid");
-    DragBuffer.popDragElement(a);
-    Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
-  };
-  var b = 0;
-  this.element.ondragover = function(a) {
-    5 > a.layerY ? 1 !== b && (b = 1, c(), this.style.borderTop = "thin solid #999999") : 15 < a.layerY ? 2 !== b && (b = 2, c(), this.style.borderBottom = "thin solid #999999") : 3 !== b && (b = 3, c(), this.style.border = "thin solid #999999");
-  };
-  this.element.ondragleave = function() {
-    b = 0;
-    c();
-  };
   this.element.ondrop = function(a) {
+    a.preventDefault();
     c();
     var b = a.dataTransfer.getData("uuid"), b = DragBuffer.popDragElement(b);
-    null === b || b === d.obj || ObjectUtils.isChildOf(b, d.obj) || (5 > a.layerY ? d.obj.parent instanceof Program || d.obj.parent.addAbove(b, d.obj) : 15 < a.layerY ? d.obj.parent instanceof Program || d.obj.parent.addBellow(b, d.obj) : d.obj.add(b), d.updateSceneData());
+    void 0 === b || b === d.obj || ObjectUtils.isChildOf(b, d.obj) || (5 > a.layerY ? d.obj.parent instanceof Program || d.obj.parent.addAbove(b, d.obj) : 15 < a.layerY ? d.obj.parent instanceof Program || d.obj.parent.addBellow(b, d.obj) : d.obj.add(b), d.updateSceneData());
   };
   this.element.onclick = function() {
     Editor.selectObject(d.obj);
@@ -62342,7 +62346,12 @@ TabGroup.prototype.clear = function() {
   }
   this.selectTab(null);
 };
-TabGroup.prototype.draggingTab = function(a, c) {
+TabGroup.prototype.moveButton = function(a, c) {
+  var d = this.options[a];
+  this.options.splice(a, 1);
+  this.options.splice(c, 0, d);
+  this.updateOptionIndex();
+  this.updateInterface();
 };
 TabGroup.prototype.updateOptionIndex = function() {
   for (var a = 0;a < this.options.length;a++) {
@@ -62371,7 +62380,7 @@ TabGroup.prototype.updateInterface = function() {
     }
     for (var b = 0;b < this.options.length;b++) {
       var e = this.options[b];
-      e.visible = this.visible && this.selected === e;
+      e.visible = this.selected === e;
       e.size.copy(a);
       e.updateInterface();
       e = e.button;
@@ -62461,36 +62470,13 @@ TabElement.prototype.updateInterface = function() {
 function TabButton(a, c) {
   this.parent = void 0 !== a ? a : document.body;
   this.element = document.createElement("div");
+  this.element.draggable = !0;
   this.element.style.position = "absolute";
   this.element.style.cursor = "pointer";
+  this.element.style.boxSizing = "border-box";
   this.element.style.backgroundColor = Editor.theme.buttonColor;
-  this.element.draggable = !0;
-  var d = this, b = new THREE.Vector2(0, 0), e = new THREE.Vector2(0, 0), g = 0;
-  this.element.ondragstart = function(a) {
-    b.set(a.clientX, a.clientY);
-    e.copy(d.position);
-    a.dataTransfer.setDragImage(this.cloneNode(!1), 0, 0);
-    this.style.zIndex = "1000";
-  };
-  this.element.ondrag = function(a) {
-    d.tab.container.mode === TabGroup.TOP && (this.style.left = e.x + a.clientX - b.x + "px", g = (e.x + a.clientX - b.x) / d.size.x, d.tab.container.draggingTab(d.tab, g));
-  };
-  this.element.ondragend = function(a) {
-    this.style.left = e.x + "px";
-    this.style.top = e.y + "px";
-    this.style.zIndex = "";
-  };
-  this.element.onmousedown = function(a) {
-    a.which - 1 === Mouse.LEFT ? d.tab.container.selectTab(d.tab) : c.closeable && a.which - 1 === Mouse.MIDDLE && d.tab.container.removeTab(d.tab);
-  };
-  this.element.onmouseenter = function() {
-    this.style.backgroundColor = Editor.theme.buttonOverColor;
-  };
-  this.element.onmouseleave = function() {
-    c.isSelected() || (this.style.backgroundColor = Editor.theme.buttonColor);
-  };
   this.icon = document.createElement("img");
-  this.icon.draggable = !1;
+  this.icon.style.pointerEvents = "none";
   this.icon.style.position = "absolute";
   this.icon.src = c.icon;
   this.element.appendChild(this.icon);
@@ -62525,6 +62511,43 @@ function TabButton(a, c) {
   this.position = new THREE.Vector2(0, 0);
   this.visible = !0;
   this.tab = c;
+  var d = this, b = 0;
+  this.element.ondragstart = function(a) {
+    a.dataTransfer.setData("tab", d.tab.index);
+    b = 0;
+  };
+  this.element.ondrop = function(a) {
+    a.preventDefault();
+    this.style.borderLeft = "";
+    this.style.borderRight = "";
+    a = a.dataTransfer.getData("tab");
+    "" !== a && (a = parseInt(a), a !== d.tab.index && (1 === b ? a < d.tab.index ? d.tab.container.moveButton(a, d.tab.index - 1) : d.tab.container.moveButton(a, d.tab.index) : 2 === b && (a < d.tab.index ? d.tab.container.moveButton(a, d.tab.index) : d.tab.container.moveButton(a, d.tab.index + 1), d.tab.container.moveButton(a, d.tab.index))));
+  };
+  this.element.ondragover = function(a) {
+    a.layerX < .2 * d.size.x ? 1 !== b && (b = 1, this.style.borderRight = "", this.style.borderLeft = "thick solid #999999") : a.layerX > .8 * d.size.x ? 2 !== b && (b = 2, this.style.borderLeft = "", this.style.borderRight = "thick solid #999999") : 0 !== b && (b = 0, this.style.borderLeft = "", this.style.borderRight = "");
+  };
+  this.element.ondragleave = function(a) {
+    a.preventDefault();
+    b = 0;
+    this.style.borderLeft = "";
+    this.style.borderRight = "";
+  };
+  this.element.ondragend = function(a) {
+    a.preventDefault();
+    b = 0;
+    this.style.borderLeft = "";
+    this.style.borderRight = "";
+    Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
+  };
+  this.element.onclick = function(a) {
+    a.which - 1 === Mouse.LEFT ? d.tab.container.selectTab(d.tab) : c.closeable && a.which - 1 === Mouse.MIDDLE && d.tab.container.removeTab(d.tab);
+  };
+  this.element.onmouseenter = function() {
+    this.style.backgroundColor = Editor.theme.buttonOverColor;
+  };
+  this.element.onmouseleave = function() {
+    c.isSelected() || (this.style.backgroundColor = Editor.theme.buttonColor);
+  };
   this.parent.appendChild(this.element);
 }
 TabButton.prototype.setIcon = function(a) {
@@ -68586,7 +68609,7 @@ Interface.initialize = function() {
       }
     }, "", Editor.program.name);
   }, Interface.fileDir + "icons/platform/osx.png"));
-  Interface.file.addOption("Exit", function() {
+  Nunu.runningOnDesktop() && Interface.file.addOption("Exit", function() {
     confirm("All unsaved changes to the project will be lost! Do you really wanna exit?") && Editor.exit();
   }, Interface.fileDir + "icons/misc/exit.png");
   Interface.editor = new DropdownMenu;
