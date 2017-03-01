@@ -1707,7 +1707,7 @@ Editor.loadGeometry = function(file, onLoad)
 	{
 		var loader = new THREE.OBJLoader();
 
-		//Try to load MTL
+		//Look for MTL file
 		if(Nunu.runningOnDesktop())
 		{
 			var path = FileSystem.getFilePath(file.path);
@@ -1804,8 +1804,6 @@ Editor.loadGeometry = function(file, onLoad)
 			var loader = new THREE.VRMLLoader();
 			var scene = loader.parse(reader.result);
 
-			//TODO <AVOID REPEATED MATERIALS>
-			//
 			for(var i = 0; i < scene.children.length; i++)
 			{
 				Editor.addToScene(scene.children[i]);
@@ -2085,10 +2083,19 @@ Editor.initializeRenderer = function(canvas)
 		Editor.canvas = canvas;
 	}
 
-	//Get rendering quality settings
-	var antialiasing = Settings.render.followProject ? Editor.program.antialiasing : Settings.render.antialiasing;
-	var shadows = Settings.render.followProject ? Editor.program.shadows : Settings.render.shadows;
-	var shadowsType = Settings.render.followProject ? Editor.program.shadowsType : Settings.render.shadowsType;
+	//Rendering quality settings
+	if(Settings.render.followProject)
+	{
+		var antialiasing = Editor.program.antialiasing;
+		var shadows = Editor.program.shadows;
+		var shadowsType = Editor.program.shadowsType;
+	}
+	else
+	{
+		var antialiasing = Settings.render.antialiasing;
+		var shadows = Settings.render.shadows;
+		var shadowsType = Settings.render.shadowsType;
+	}
 
 	//Dispose old renderer
 	if(Editor.renderer !== null)
