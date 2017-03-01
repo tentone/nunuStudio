@@ -124,22 +124,22 @@ function TabButton(parent, tab)
 	//Drag over
 	this.element.ondragover = function(event)
 	{
-		if(event.layerX < self.size.x * 0.2)
-		{
-			if(dragState !== 1)
-			{
-				dragState = 1;
-				this.style.borderRight = "";
-				this.style.borderLeft = "thick solid #999999";
-			}
-		}
-		else if(event.layerX > self.size.x * 0.8)
+		if(event.layerX > self.size.x * 0.8 || event.target !== this)
 		{
 			if(dragState !== 2)
 			{
 				dragState = 2;
 				this.style.borderLeft = "";
 				this.style.borderRight = "thick solid #999999";
+			}
+		}
+		else if(event.layerX < self.size.x * 0.2)
+		{
+			if(dragState !== 1)
+			{
+				dragState = 1;
+				this.style.borderRight = "";
+				this.style.borderLeft = "thick solid #999999";
 			}
 		}
 		else

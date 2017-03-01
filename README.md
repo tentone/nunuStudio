@@ -82,6 +82,7 @@
 	- Improved font preview
 	- Added support for Textures as scene background
 	- Drag and drop CubeTextures
+	- Drag and drop tabs in editor
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

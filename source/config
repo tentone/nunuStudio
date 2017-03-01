@@ -26,7 +26,7 @@
 		"shadowsType": 2
 	},
 	"code": {
-		"theme": "elegant",
+		"theme": "monokai",
 		"keymap": "sublime",
 		"fontSize": 14,
 		"lineNumbers": true,

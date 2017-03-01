@@ -138,38 +138,25 @@ function MaterialAsset(parent)
 			}
 		});
 
-
 		context.addOption("Duplicate", function()
 		{
 			if(self.material !== null)
 			{
 				try
 				{
-					//Object loader
+					//Serialize
 					var json = self.material.toJSON();
+
+					//Loader
 					var loader = new ObjectLoader();
+					loader = new MaterialLoader();
+					loader.setTextures(Editor.program.textures);
 
-					//Load images
-					var images = loader.parseImages(json.images);
-					for(var i = 0; i < images.length; i++)
-					{
-						images[i].uuid = THREE.Math.generateUUID();
-					}
-
-					//Load textures
-					var textures = loader.parseTextures(json.textures, images);
-					for(i = 0; i < textures.length; i++)
-					{
-						textures[i].uuid = THREE.Math.generateUUID();
-					}
-
-					//Load Material
-					loader = new THREE.MaterialLoader();
-					loader.setTextures(textures);
+					//Load
 					var material = loader.parse(json); 
 					material.uuid = THREE.Math.generateUUID();
 					
-					//Add material
+					//Add
 					Editor.program.addMaterial(material);
 					Editor.updateAssetExplorer();
 				}
