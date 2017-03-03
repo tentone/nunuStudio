@@ -20,6 +20,7 @@ var MeshNormalMaterial = THREE.MeshNormalMaterial;
 var MeshPhongMaterial = THREE.MeshPhongMaterial;
 var MeshPhysicalMaterial = THREE.MeshPhysicalMaterial;
 var MeshStandardMaterial = THREE.MeshStandardMaterial;
+var MeshToonMaterial = THREE.MeshToonMaterial;
 var MultiMaterial = THREE.MultiMaterial;
 var PointsMaterial = THREE.PointsMaterial;
 var RawShaderMaterial = THREE.RawShaderMaterial;

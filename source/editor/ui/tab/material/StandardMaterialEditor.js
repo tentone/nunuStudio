@@ -38,7 +38,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Shading");
 	this.shading = new DropdownList(this.form.element);
 	this.shading.position.set(100, 85);
-	this.shading.size.set(120, 18);
+	this.shading.size.set(100, 18);
 	this.shading.addValue("Smooth", THREE.SmoothShading);
 	this.shading.addValue("Flat", THREE.FlatShading);
 	this.shading.setOnChange(function()
@@ -214,7 +214,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map scale
-	this.form.addText("Displacement Scale", true);
+	this.form.addText("Scale");
 	this.displacementScale = new NumberBox(this.form.element);
 	this.displacementScale.size.set(60, 18);
 	this.displacementScale.setStep(0.05);
@@ -230,7 +230,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map bias
-	this.form.addText("Displacement Bias", true);
+	this.form.addText("Bias");
 	this.displacementBias = new NumberBox(this.form.element);
 	this.displacementBias.size.set(60, 18);
 	this.displacementBias.setStep(0.1);
@@ -325,7 +325,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Reflectivity
-	this.form.addText("Intensity", true);
+	this.form.addText("Intensity");
 	this.envMapIntensity = new NumberBox(this.form.element);
 	this.envMapIntensity.size.set(60, 18);
 	this.envMapIntensity.setStep(0.05);

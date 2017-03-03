@@ -104,7 +104,7 @@ TabElement.prototype.destroy = function()
 TabElement.prototype.setIcon = function(icon)
 {
 	this.icon = icon;
-	this.button.icon.setImage(icon);
+	this.button.setIcon(icon);
 }
 
 //Set button title

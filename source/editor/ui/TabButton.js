@@ -211,7 +211,7 @@ function TabButton(parent, tab)
 TabButton.prototype.setIcon = function(icon)
 {
 	this.tab.icon = icon;
-	this.icon.setImage(icon);
+	this.icon.src = icon;
 }
 
 //Set button name

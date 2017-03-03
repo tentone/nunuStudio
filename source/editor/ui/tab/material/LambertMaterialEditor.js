@@ -38,7 +38,7 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Shading");
 	this.shading = new DropdownList(this.form.element);
 	this.shading.position.set(100, 85);
-	this.shading.size.set(120, 18);
+	this.shading.size.set(100, 18);
 	this.shading.addValue("Smooth", THREE.SmoothShading);
 	this.shading.addValue("Flat", THREE.FlatShading);
 	this.shading.setOnChange(function()

@@ -33,7 +33,6 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.preview.divA.style.backgroundColor = Editor.theme.panelColor;
 
 	//Change main division style
-	this.main.divB.style.overflow = "auto";
 	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
 
 	//Material preview
@@ -153,13 +152,20 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	});
 	this.children.push(this.skyEnabled);
 
+	//Tab container
+	this.tab = new TabGroup(this.main.divB);
+	this.tab.element.style.backgroundColor = Editor.theme.barColor;
+	this.tab.buttonSize.set(150, 25);
+
+	//General
+	this.general = this.tab.addTab(TabElement, false);
+	this.general.setIcon("editor/files/icons/misc/material.png");
+	this.general.setName("Material");
+
 	//Form
-	this.form = new Form(this.main.divB);
+	this.form = new Form(this.general.element);
 	this.form.position.set(10, 5);
 	this.form.spacing.set(5, 5);
-	
-	this.form.addText("Material Editor");
-	this.form.nextRow();
 
 	//Name
 	this.form.addText("Name");
@@ -275,12 +281,14 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.wireframe);
 	this.form.nextRow();
 
-	//Fragment shaders
-	this.form.addText("Fragment shader");
-	this.form.nextRow();
-	this.fragmentShader = new CodeEditor(this.form.element);
+	//Fragment tab
+	this.fragmentTab = this.tab.addTab(TabElement, false); 
+	this.fragmentTab.setIcon("editor/files/icons/misc/code.png");
+	this.fragmentTab.setName("Fragment");
+
+	//Fragment editor
+	this.fragmentShader = new CodeEditor(this.fragmentTab.element);
 	this.fragmentShader.setMode("glsl");
-	this.fragmentShader.size.set(400, 500);
 	this.fragmentShader.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -289,15 +297,15 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 			self.material.needsUpdate = true;
 		}
 	});
-	this.form.add(this.fragmentShader);
-	this.form.nextRow();
 
-	//Vertex shaders
-	this.form.addText("Vertex shader");
-	this.form.nextRow();
-	this.vertexShader = new CodeEditor(this.form.element);
+	//Vertex tab
+	this.vertexTab = this.tab.addTab(TabElement, false);
+	this.vertexTab.setIcon("editor/files/icons/misc/code.png");
+	this.vertexTab.setName("Vertex");
+
+	//Vertex editor
+	this.vertexShader = new CodeEditor(this.vertexTab.element);
 	this.vertexShader.setMode("glsl");
-	this.vertexShader.size.set(400, 500);
 	this.vertexShader.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -306,8 +314,6 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 			self.material.needsUpdate = true;
 		}
 	});
-	this.form.add(this.vertexShader);
-	this.form.nextRow();
 }
 
 ShaderMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
@@ -350,3 +356,65 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 	this.fragmentShader.setValue(material.fragmentShader);
 	this.vertexShader.setValue(material.vertexShader);
 };
+
+ShaderMaterialEditor.prototype.updateInterface = function()
+{
+	//Visibility
+	if(this.visible)
+	{
+		this.element.style.display = "block";
+
+		//Main
+		this.main.visible = this.visible;
+		this.main.size.copy(this.size);
+		this.main.updateInterface();
+
+		//Preview
+		this.preview.visible = this.visible;
+		this.preview.size.set(this.size.x * this.main.tabPosition, this.size.y);
+		this.preview.updateInterface();
+
+		//Canvas
+		this.canvas.visible = this.visible;
+		this.canvas.size.set(this.preview.divA.offsetWidth, this.preview.divA.offsetHeight);
+		this.canvas.updateInterface();
+
+		//Renderer and canvas
+		this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
+		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
+		this.camera.updateProjectionMatrix();
+
+		//Children
+		for(var i = 0; i < this.children.length; i++)
+		{
+			this.children[i].visible = this.visible;
+			this.children[i].updateInterface();
+		}
+
+		//Tab size
+		this.tab.size.set(this.size.x - this.canvas.size.x - 5, this.size.y);
+		this.tab.updateInterface();
+
+		//Form
+		this.form.visible = this.visible;
+		this.form.updateInterface();
+
+		//Fragment editor
+		this.fragmentShader.size.copy(this.tab.size);
+		this.fragmentShader.updateInterface();
+
+		//Vertex editor
+		this.vertexShader.size.copy(this.tab.size);
+		this.vertexShader.updateInterface();
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
+	}
+	else
+	{
+		this.element.style.display = "none";
+	}
+}
