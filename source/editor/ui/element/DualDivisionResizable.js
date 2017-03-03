@@ -177,7 +177,7 @@ DualDivisionResizable.prototype.updateInterface = function()
 		this.divA.style.height = this.size.y + "px";
 
 		this.divB.style.top = "0px";
-		this.divB.style.left = tabPositionAbs + "px";
+		this.divB.style.left = (tabPositionAbs + this.tabSize) + "px";
 		this.divB.style.width = (this.size.x - tabPositionAbs - this.tabSize)+ "px";
 		this.divB.style.height = this.size.y + "px";
 		

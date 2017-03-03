@@ -157,7 +157,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form = new Form(this.main.divB);
 	this.form.position.set(10, 5);
 	this.form.spacing.set(5, 5);
-	
+	this.form.defaultTextWidth = 100;
+
 	this.form.addText("Material Editor");
 	this.form.nextRow();
 
@@ -180,7 +181,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.addText("Side");
 	this.side = new DropdownList(this.form.element);
 	this.side.position.set(100, 85);
-	this.side.size.set(150, 18);
+	this.side.size.set(100, 18);
 	this.side.addValue("Front", THREE.FrontSide);
 	this.side.addValue("Back", THREE.BackSide);
 	this.side.addValue("Double", THREE.DoubleSide);

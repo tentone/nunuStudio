@@ -74,12 +74,11 @@ AboutTab.prototype.activate = function()
 //Update division Size
 AboutTab.prototype.updateInterface = function()
 {
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.display = "block";
 
-		//About elements
 		this.logo.position.set((this.size.x-this.logo.size.x)/2, (this.size.y*0.5-this.logo.size.y)/2);
 		this.logo.updateInterface();
 

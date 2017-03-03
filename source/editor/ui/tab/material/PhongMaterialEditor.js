@@ -40,7 +40,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Shading");
 	this.shading = new DropdownList(this.form.element);
 	this.shading.position.set(100, 85);
-	this.shading.size.set(120, 18);
+	this.shading.size.set(100, 18);
 	this.shading.addValue("Smooth", THREE.SmoothShading);
 	this.shading.addValue("Flat", THREE.FlatShading);
 	this.shading.setOnChange(function()
@@ -125,8 +125,8 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.bumpMap);
 	this.form.nextRow();
 
-	//Bump map scale
-	this.form.addText("Bump scale");
+	//Bump scale
+	this.form.addText("Scale");
 	this.bumpScale = new Slider(this.form.element);
 	this.bumpScale.size.set(160, 18);
 	this.bumpScale.setRange(0, 1);
@@ -184,7 +184,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map scale
-	this.form.addText("Displacement Scale", true);
+	this.form.addText("Scale");
 	this.displacementScale = new NumberBox(this.form.element);
 	this.displacementScale.size.set(60, 18);
 	this.displacementScale.setStep(0.05);
@@ -200,7 +200,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map bias
-	this.form.addText("Displacement Bias", true);
+	this.form.addText("Bias");
 	this.displacementBias = new NumberBox(this.form.element);
 	this.displacementBias.size.set(60, 18);
 	this.displacementBias.setStep(0.1);
@@ -343,8 +343,8 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.reflectivity);
 	this.form.nextRow();
 
-	//Reflectivity
-	this.form.addText("Refraction ratio");
+	//Refraction
+	this.form.addText("Refraction Ratio");
 	this.refractionRatio = new NumberBox(this.form.element);
 	this.refractionRatio.size.set(60, 18);
 	this.refractionRatio.setStep(0.05);
