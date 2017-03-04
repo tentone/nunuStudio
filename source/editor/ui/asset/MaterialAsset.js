@@ -202,7 +202,7 @@ MaterialAsset.prototype.destroy = function()
 {
 	Asset.prototype.destroy.call(this);
 	this.restoreMaterial();
-}
+};
 
 //Set object to file
 MaterialAsset.prototype.setMaterial = function(material)
@@ -212,7 +212,7 @@ MaterialAsset.prototype.setMaterial = function(material)
 		this.material = material;
 		this.updateMetadata();
 	}
-}
+};
 
 //Highlight material
 MaterialAsset.prototype.highlightMaterial = function()
@@ -226,7 +226,7 @@ MaterialAsset.prototype.highlightMaterial = function()
 			this.materialHighlighted = true;
 		}
 	}
-}
+};
 
 //Restore material to normal color
 MaterialAsset.prototype.restoreMaterial = function()
@@ -242,7 +242,7 @@ MaterialAsset.prototype.restoreMaterial = function()
 			}
 		}
 	}
-}
+};
 
 //Update material preview
 MaterialAsset.prototype.updateMetadata = function()
@@ -252,7 +252,7 @@ MaterialAsset.prototype.updateMetadata = function()
 		Editor.materialRenderer.renderMaterial(this.material, this.image);
 		this.setText(this.material.name);
 	}
-}
+};
 
 //Update interface
 MaterialAsset.prototype.updateInterface = function()
@@ -262,4 +262,4 @@ MaterialAsset.prototype.updateInterface = function()
 	this.image.width = this.size.x * this.scale.x;
 	this.image.height = this.size.y * this.scale.y;
 	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
-}
+};

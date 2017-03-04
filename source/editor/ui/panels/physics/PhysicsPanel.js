@@ -208,4 +208,4 @@ PhysicsPanel.prototype.updatePanel = function()
 		this.fixedRotation.setValue(this.obj.body.fixedRotation);
 		this.collisionFilterGroup.setValue(this.obj.body.collisionFilterGroup);
 	}
-}
+};

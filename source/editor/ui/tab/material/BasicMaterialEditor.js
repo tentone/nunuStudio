@@ -88,4 +88,4 @@ BasicMaterialEditor.prototype.attach = function(material, materialFile)
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.map.setValue(material.map);
 	this.alphaMap.setValue(material.alphaMap);
-}
+};

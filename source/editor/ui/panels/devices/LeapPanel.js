@@ -83,4 +83,4 @@ LeapPanel.prototype.updatePanel = function()
 		this.gesturesEnabled.setValue(this.obj.gesturesEnabled);
 		this.posesEnabled.setValue(this.obj.posesEnabled);
 	}
-}
+};

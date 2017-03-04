@@ -40,7 +40,7 @@ Form.prototype.add = function(elem)
 			this.element.appendChild(elem.element);
 		}
 	}
-}
+};
 
 //Create text element
 Form.prototype.addText = function(text, fit)
@@ -53,16 +53,7 @@ Form.prototype.addText = function(text, fit)
 	this.add(element);
 
 	return element;
-}
-
-//Create separator
-Form.prototype.addSeparator = function()
-{
-	var separator = new FormSeparator(this.element);
-	this.add(separator);
-
-	return separator;
-}
+};
 
 //Create division
 Form.prototype.addDivision = function(x, y)
@@ -72,13 +63,13 @@ Form.prototype.addDivision = function(x, y)
 	this.add(division);
 
 	return division;
-}
+};
 
 //Add new row to form
 Form.prototype.nextRow = function()
 {
 	this.rows.push([]);
-}
+};
 
 //Add last row from form
 Form.prototype.removeLastRow = function()
@@ -92,7 +83,7 @@ Form.prototype.removeLastRow = function()
 			row[i].destroy();
 		}
 	}
-}
+};
 
 //Remove element
 Form.prototype.destroy = function()
@@ -102,15 +93,15 @@ Form.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
-Form.prototype.update = function(){}
+Form.prototype.update = function(){};
 
 //Update interface
 Form.prototype.updateInterface = function()
 {
-	//Set visiblity
+	//Visiblity
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -168,9 +159,9 @@ Form.prototype.updateInterface = function()
 	//Set size y
 	size.y = position.y;
 
-	//Update element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.height = this.size.y + "px";
 	this.element.style.width = this.size.x + "px";	
-}
+};

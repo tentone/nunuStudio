@@ -37,10 +37,10 @@ Bar.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update Bar
-Bar.prototype.update = function(){}
+Bar.prototype.update = function(){};
 
 //Update division Size
 Bar.prototype.updateInterface = function()
@@ -60,4 +60,4 @@ Bar.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};

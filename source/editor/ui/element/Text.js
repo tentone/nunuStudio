@@ -22,7 +22,6 @@ function Text(parent)
 
 	//Attributes
 	this.fitContent = false;
-	this.fitParent = false;
 	this.size = new THREE.Vector2(0, 0);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
@@ -39,19 +38,19 @@ Text.LEFT = 1;
 Text.prototype.setText = function(text)
 {
 	this.span.innerHTML = text;
-}
+};
 
 //Set Text Size
 Text.prototype.setTextSize = function(size)
 {
 	this.element.style.fontSize = size + "px";
-}
+};
 
 //Set Text Color
 Text.prototype.setTextColor = function(color)
 {
 	this.element.style.color = color;
-}
+};
 
 //Set text alignment
 Text.prototype.setAlignment = function(align)
@@ -64,7 +63,7 @@ Text.prototype.setAlignment = function(align)
 	{
 		this.element.style.justifyContent = "";
 	}
-}
+};
 
 //Remove element
 Text.prototype.destroy = function()
@@ -74,7 +73,7 @@ Text.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Set text visibility
 Text.prototype.setVisibility = function(value)
@@ -91,21 +90,14 @@ Text.prototype.setVisibility = function(value)
 		this.element.style.visibility = "hidden";
 		this.span.style.visibility = "hidden";
 	}
-}
+};
 
 //Update
-Text.prototype.update = function(){}
+Text.prototype.update = function(){};
 
 //Update Interface
 Text.prototype.updateInterface = function()
 {
-	//Fit parent
-	if(this.fitParent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-
 	//Fit size to text
 	if(this.fitContent)
 	{
@@ -113,7 +105,7 @@ Text.prototype.updateInterface = function()
 		//this.size.y = this.span.clientHeight;
 	}
 
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -125,9 +117,9 @@ Text.prototype.updateInterface = function()
 		this.span.style.visibility = "hidden";
 	}
 
-	//Update base element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

@@ -55,13 +55,13 @@ function Button(parent)
 Button.prototype.add = function(element)
 {
 	this.children.push(element);
-}
+};
 
 //Set Button text
 Button.prototype.setText = function(text)
 {
 	this.text.setText(text);
-}
+};
 
 //Remove element from document
 Button.prototype.destroy = function()
@@ -76,16 +76,16 @@ Button.prototype.destroy = function()
 	{
 		this.children[i].destroy();
 	}
-}
+};
 
 //Update status
-Button.prototype.update = function(){}
+Button.prototype.update = function(){};
 
 //Set button callback function
 Button.prototype.setCallback = function(callback)
 {
 	this.element.onclick = callback;
-}
+};
 
 //Update Button Size
 Button.prototype.updateInterface = function()
@@ -113,4 +113,4 @@ Button.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

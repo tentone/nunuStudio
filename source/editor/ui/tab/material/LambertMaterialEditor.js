@@ -123,4 +123,4 @@ LambertMaterialEditor.prototype.attach = function(material, materialFile)
 	this.map.setValue(material.map);
 	this.specularMap.setValue(material.specularMap);
 	this.alphaMap.setValue(material.alphaMap);
-}
+};

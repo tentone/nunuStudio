@@ -388,4 +388,4 @@ PhongMaterialEditor.prototype.attach = function(material, materialFile)
 	this.combine.setValue(material.combine);
 	this.reflectivity.setValue(material.reflectivity || 0);
 	this.refractionRatio.setValue(material.refractionRatio || 0);
-}
+};

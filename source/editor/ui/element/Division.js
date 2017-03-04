@@ -13,7 +13,6 @@ function Division(parent)
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	//Attributes
-	this.fitParent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -30,22 +29,15 @@ Division.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
-Division.prototype.update = function(){}
+Division.prototype.update = function(){};
 
 //Update division Size
 Division.prototype.updateInterface = function()
 {
-	//Fit parent
-	if(this.fitParent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-	
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -55,9 +47,9 @@ Division.prototype.updateInterface = function()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Update element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

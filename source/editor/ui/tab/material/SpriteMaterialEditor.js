@@ -60,4 +60,4 @@ SpriteMaterialEditor.prototype.attach = function(material, materialFile)
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.rotation.setValue(material.rotation);
 	this.map.setValue(material.map);
-}
+};

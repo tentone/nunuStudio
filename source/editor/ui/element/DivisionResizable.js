@@ -5,7 +5,7 @@ function DivisionResizable(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
@@ -78,7 +78,7 @@ DivisionResizable.BOTTOM = 3;
 DivisionResizable.prototype.setOnResize = function(callback)
 {
 	this.onResize = callback;
-}
+};
 
 //Remove element
 DivisionResizable.prototype.destroy = function()
@@ -89,7 +89,7 @@ DivisionResizable.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update status
 DivisionResizable.prototype.update = function()
@@ -147,12 +147,12 @@ DivisionResizable.prototype.update = function()
 			this.resizing = false;
 		}
 	}
-}
+};
 
 //Update DivisionResizable Size
 DivisionResizable.prototype.updateInterface = function()
 {
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.resizeTab.style.visibility = "visible";
@@ -245,4 +245,4 @@ DivisionResizable.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = (this.size.y - this.resizeTabSize) + "px";
 	}
-}
+};

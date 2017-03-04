@@ -115,7 +115,7 @@ ButtonDrawer.prototype.destroy = function()
 	{
 		this.options[k].destroy();
 	}
-}
+};
 
 //Add new Option to dropdown menu
 ButtonDrawer.prototype.addOption = function(image, callback, altText)
@@ -149,7 +149,7 @@ ButtonDrawer.prototype.addOption = function(image, callback, altText)
 	button.position.x = this.optionsSize.x * ((this.options.length - 1) % this.optionsPerLine);
 	button.position.y = this.optionsSize.y * Math.floor((this.options.length - 1) / this.optionsPerLine);
 	button.updateInterface();
-}
+};
 
 //Remove option from dropdown menu
 ButtonDrawer.prototype.removeOption = function(index)
@@ -161,24 +161,24 @@ ButtonDrawer.prototype.removeOption = function(index)
 		this.updatePanelSize();
 		this.updateInterface();
 	}
-}
+};
 
 //Set button draw icon image
 ButtonDrawer.prototype.setImage = function(image)
 {
 	this.image = image;
 	this.img.src = this.image;
-}
+};
 
 //Update
-ButtonDrawer.prototype.update = function(){}
+ButtonDrawer.prototype.update = function(){};
 
 //Updates drawer panel size
 ButtonDrawer.prototype.updatePanelSize = function()
 {
 	this.panelSize.x = (this.optionsSize.x * this.optionsPerLine);
 	this.panelSize.y = (this.optionsSize.y * (Math.floor((this.options.length - 1) / this.optionsPerLine) + 1));
-}
+};
 
 //Update drawer options position and size (should be called after change in options displacement variables)
 ButtonDrawer.prototype.updateOptions = function()
@@ -192,7 +192,7 @@ ButtonDrawer.prototype.updateOptions = function()
 		this.options[i].visible = (this.expanded && this.visible);
 		this.options[i].updateInterface();
 	}
-}
+};
 
 //Update Interface
 ButtonDrawer.prototype.updateInterface = function()
@@ -242,4 +242,4 @@ ButtonDrawer.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

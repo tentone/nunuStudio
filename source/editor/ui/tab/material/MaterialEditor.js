@@ -28,13 +28,12 @@ function MaterialEditor(parent, closeable, container, index)
 	this.preview.tabPositionMin = 0.3;
 	this.preview.tabPositionMax = 0.8;
 
-	//Change preview division style
+	//Division style
 	this.preview.divA.style.overflow = "hidden";
 	this.preview.divA.style.backgroundColor = Editor.theme.panelColor;
-
-	//Change main division style
 	this.main.divB.style.overflow = "auto";
 	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
+	this.preview.divB.style.overflow = "auto";
 
 	//Material preview
 	//Canvas
@@ -80,33 +79,21 @@ function MaterialEditor(parent, closeable, container, index)
 	this.sprite.visible = false;
 	this.scene.add(this.sprite);
 
-	//Material preview configuration
-	//Text
-	var text = new Text(this.preview.divB);
-	text.setAlignment(Text.LEFT);
-	text.setText("Configuration");
-	text.position.set(10, 20);
-	text.fitContent = true;
-	text.updateInterface();
-	this.children.push(text);
+	//Preview configuration
+	this.previewForm = new Form(this.preview.divB);
+	this.previewForm.position.set(10, 5);
+	this.previewForm.spacing.set(5, 5);
+	this.previewForm.addText("Configuration");
+	this.previewForm.nextRow();
 
 	//Test model
-	var text = new Text(this.preview.divB);
-	text.setAlignment(Text.LEFT);
-	text.setText("Test Model");
-	text.position.set(10, 45);
-	text.fitContent = true;
-	text.updateInterface();
-	this.children.push(text);
-
-	this.testModel = new DropdownList(this.preview.divB);
-	this.testModel.position.set(80, 35);
-	this.testModel.size.set(150, 18);
+	this.previewForm.addText("Test Model");
+	this.testModel = new DropdownList(this.previewForm.element);
+	this.testModel.size.set(100, 18);
 	this.testModel.addValue("Sphere", 0);
 	this.testModel.addValue("Torus", 1);
 	this.testModel.addValue("Cube", 2);
 	this.testModel.addValue("Torus Knot", 3);
-	this.testModel.updateInterface();
 	this.testModel.setOnChange(function()
 	{
 		var value = self.testModel.getSelectedIndex();
@@ -124,43 +111,33 @@ function MaterialEditor(parent, closeable, container, index)
 		//Cube
 		else if(value === 2)
 		{
-			self.mesh.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 64, 64, 64);
+			self.mesh.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 32, 32, 32);
 		}
 		//Torus Knot
 		else if(value === 3)
 		{
 			self.mesh.geometry = new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64);
-		}	
+		}
 	});
-	this.children.push(this.testModel);
+	this.previewForm.add(this.testModel);
+	this.previewForm.nextRow();
 
-	//Sky enabled
-	this.skyText = new Text(this.preview.divB);
-	this.skyText.size.set(0, 20);
-	this.skyText.position.set(10, 60);
-	this.skyText.setAlignment(Text.LEFT);
-	this.skyText.setText("Enable sky");
-	this.children.push(this.skyText);
-
-	this.skyEnabled = new CheckBox(this.preview.divB);
-	this.skyEnabled.size.set(200, 15);
-	this.skyEnabled.position.set(80, 60);
+	//Sky
+	this.previewForm.addText("Enable sky");
+	this.skyEnabled = new CheckBox(this.previewForm.element);
+	this.skyEnabled.size.set(20, 15);
 	this.skyEnabled.setValue(true);
-	this.skyEnabled.updateInterface();
 	this.skyEnabled.setOnChange(function()
 	{
 		self.sky.visible = self.skyEnabled.getValue();
 	});
-	this.children.push(this.skyEnabled);
+	this.previewForm.add(this.skyEnabled);
 
 	//Form
 	this.form = new Form(this.main.divB);
 	this.form.position.set(10, 5);
 	this.form.spacing.set(5, 5);
 	this.form.defaultTextWidth = 100;
-
-	this.form.addText("Material Editor");
-	this.form.nextRow();
 
 	//Name
 	this.form.addText("Name");
@@ -335,13 +312,13 @@ MaterialEditor.prototype.attach = function(material, asset)
 	this.opacity.setValue(material.opacity);
 	this.alphaTest.setValue(material.alphaTest);
 	this.blending.setValue(material.blending);	
-}
+};
 
 //Check if material is attached to tab
 MaterialEditor.prototype.isAttached = function(material)
 {
 	return this.material === material;
-}
+};
 
 //Activate
 MaterialEditor.prototype.activate = function()
@@ -352,7 +329,7 @@ MaterialEditor.prototype.activate = function()
 	Editor.resetEditingFlags();
 	
 	Editor.mouse.setCanvas(this.canvas.element);
-}
+};
 
 //Update object data
 MaterialEditor.prototype.updateMetadata = function()
@@ -371,7 +348,7 @@ MaterialEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-}
+};
 
 //Update material editor
 MaterialEditor.prototype.update = function()
@@ -416,7 +393,7 @@ MaterialEditor.prototype.update = function()
 			this.camera.position.z = -1.5;
 		}
 	}
-}
+};
 
 //Update elements
 MaterialEditor.prototype.updateInterface = function()
@@ -446,18 +423,15 @@ MaterialEditor.prototype.updateInterface = function()
 		this.camera.aspect = this.canvas.size.x/this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
 
-		//Children
-		for(var i = 0; i < this.children.length; i++)
-		{
-			this.children[i].visible = this.visible;
-			this.children[i].updateInterface();
-		}
+		//Preview form
+		this.previewForm.visible = this.visible;
+		this.previewForm.updateInterface();
 
 		//Form
 		this.form.visible = this.visible;
 		this.form.updateInterface();
 
-		//Update element
+		//Element
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
@@ -467,4 +441,4 @@ MaterialEditor.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};

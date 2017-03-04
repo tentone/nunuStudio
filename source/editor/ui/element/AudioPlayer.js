@@ -199,7 +199,7 @@ AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
 			onLoad(buffer);
 		}
 	}.bind(this));
-}
+};
 
 //Connect audio source
 AudioPlayer.prototype.connect = function()
@@ -212,13 +212,13 @@ AudioPlayer.prototype.connect = function()
 	this.source = this.context.createBufferSource();
 	this.source.buffer = this.buffer;
 	this.source.connect(this.context.destination);
-}
+};
 
 //Disconnect source
 AudioPlayer.prototype.disconnect = function()
 {
 	this.source.disconnect();
-}
+};
 
 //Play audio
 AudioPlayer.prototype.play = function(time)
@@ -236,7 +236,7 @@ AudioPlayer.prototype.play = function(time)
 	this.playing = true;
 
 	this.icon.src = "editor/files/icons/misc/pause.png";
-}
+};
 
 //Pause audio
 AudioPlayer.prototype.pause = function()
@@ -249,7 +249,7 @@ AudioPlayer.prototype.pause = function()
 
 		this.icon.src = "editor/files/icons/misc/play.png";
 	}
-}
+};
 
 //Stop audio playback
 AudioPlayer.prototype.stop = function()
@@ -262,7 +262,7 @@ AudioPlayer.prototype.stop = function()
 
 		this.icon.src = "editor/files/icons/misc/play.png";
 	}
-}
+};
 
 //Seek time
 AudioPlayer.prototype.seek = function(time)
@@ -275,7 +275,7 @@ AudioPlayer.prototype.seek = function(time)
 	{
 		this.time = time;
 	}
-}
+};
 
 //Toggle play/pause
 AudioPlayer.prototype.toggle = function()
@@ -288,7 +288,7 @@ AudioPlayer.prototype.toggle = function()
 	{
 		this.pause();
 	}
-}
+};
 
 //Remove element
 AudioPlayer.prototype.destroy = function()
@@ -307,10 +307,10 @@ AudioPlayer.prototype.destroy = function()
 		this.parent = null;
 	}
 	catch(e){}
-}
+};
 
 //Update
-AudioPlayer.prototype.update = function(){}
+AudioPlayer.prototype.update = function(){};
 
 //Update division Size
 AudioPlayer.prototype.updateInterface = function()
@@ -345,4 +345,4 @@ AudioPlayer.prototype.updateInterface = function()
 	this.scrubber.style.width = (this.size.y * 0.2) + "px";
 	this.scrubber.style.height = (this.size.y * 0.6) + "px";
 	this.scrubber.style.top = (-this.size.y * 0.2) + "px";
-}
+};

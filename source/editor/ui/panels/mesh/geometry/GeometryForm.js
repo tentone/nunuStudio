@@ -34,4 +34,4 @@ GeometryForm.create = function(form, obj)
 	}
 	
 	return null;
-}
+};

@@ -227,4 +227,4 @@ DirectionalLightPanel.prototype.updatePanel = function()
 		this.shadowTop.setValue(this.obj.shadow.camera.top);
 		this.shadowBottom.setValue(this.obj.shadow.camera.bottom);
 	}
-}
+};

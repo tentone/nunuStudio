@@ -278,4 +278,4 @@ SkyPanel.prototype.updatePanel = function()
 		this.shadowTop.setValue(this.obj.sun.shadow.camera.top);
 		this.shadowBottom.setValue(this.obj.sun.shadow.camera.bottom);
 	}
-}
+};

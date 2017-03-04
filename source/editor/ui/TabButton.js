@@ -176,13 +176,14 @@ function TabButton(parent, tab)
 	//Mouse click
 	this.element.onclick = function(event)
 	{
-		//Select tab on mouse left click
-		if(event.which - 1 === Mouse.LEFT)
-		{
-			self.tab.container.selectTab(self.tab);
-		}
+		self.tab.container.selectTab(self.tab);
+	};
+
+	//Mouse down
+	this.element.onmousedown = function(event)
+	{
 		//Close tab on mouse middle click
-		else if(tab.closeable && event.which - 1 === Mouse.MIDDLE)
+		if(tab.closeable && event.which - 1 === Mouse.MIDDLE)
 		{
 			self.tab.container.removeTab(self.tab);
 		}

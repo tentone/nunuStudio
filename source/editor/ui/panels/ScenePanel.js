@@ -166,9 +166,6 @@ function ScenePanel(parent, obj)
 	//Add exponential fog form
 	this.form.add(this.fogExponentialForm);
 	this.form.nextRow();
-
-	//this.form.addSeparator();
-	//this.form.nextRow();
 	
 	//Physics world
 	this.form.addText("Physics world");
@@ -234,7 +231,7 @@ ScenePanel.prototype.updatePanel = function()
 
 		this.gravity.setValue(this.obj.world.gravity.x, this.obj.world.gravity.y, this.obj.world.gravity.z);
 	}
-}
+};
 
 //Update wich forms should be visible in the panel
 ScenePanel.prototype.updateForms = function()
@@ -249,4 +246,4 @@ ScenePanel.prototype.updateForms = function()
 		this.fogExponentialForm.updateInterface();
 		this.form.updateInterface();
 	}
-}
+};

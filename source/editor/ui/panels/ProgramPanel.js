@@ -159,4 +159,4 @@ ProgramPanel.prototype.updatePanel = function()
 		this.shadowsType.setValue(this.obj.shadowsType);
 		this.antialiasing.setValue(this.obj.antialiasing);
 	}
-}
+};
