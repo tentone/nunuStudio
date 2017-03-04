@@ -61523,8 +61523,8 @@ TextureChooser.prototype.loadTexture = function(a) {
 };
 TextureChooser.prototype.updatePreview = function() {
   var a = this.texture;
-  a instanceof Texture && (this.video.display = "none", this.img.display = "block", this.img.src = a.image.src);
-  a instanceof CanvasTexture ? (this.video.display = "none", this.img.display = "block", this.img.src = a.image.toDataURL()) : a instanceof VideoTexture || a instanceof WebcamTexture ? (this.img.display = "none", this.video.display = "block", this.video.src = a.image.src) : a instanceof CubeTexture ? (this.video.display = "none", this.img.display = "block", this.img.src = a.image[0].toDataURL()) : (this.img.display = "none", this.video.display = "none");
+  a instanceof CanvasTexture ? (this.video.style.display = "none", this.img.style.display = "block", this.img.src = a.image.toDataURL()) : a instanceof VideoTexture || a instanceof WebcamTexture ? (this.img.style.display = "none", this.video.style.display = "block", this.video.src = a.image.src) : a instanceof CubeTexture ? (this.video.style.display = "none", this.img.style.display = "block", this.img.src = a.image[0].toDataURL()) : a instanceof Texture ? (this.video.style.display = "none", this.img.style.display = 
+  "block", this.img.src = a.image.src) : (this.img.style.display = "none", this.video.style.display = "none");
 };
 TextureChooser.prototype.updateInterface = function() {
   this.element.style.visibility = this.visible ? "visible" : "hidden";
@@ -69139,9 +69139,9 @@ Editor.loadTexture = function(a, c) {
   e.onload = function() {
     var a = new Texture(new Image(e.result));
     a.name = d;
-    void 0 !== c && c(a);
     Editor.program.addTexture(a);
     Editor.updateObjectViews();
+    void 0 !== c && c(a);
   };
   "tga" === b ? e.readAsArrayBuffer(a) : e.readAsDataURL(a);
 };
@@ -69150,9 +69150,9 @@ Editor.loadVideoTexture = function(a, c) {
   b.onload = function() {
     var a = new VideoTexture(new Video(b.result));
     a.name = d;
-    void 0 !== c && c(a);
     Editor.program.addTexture(a);
     Editor.updateObjectViews();
+    void 0 !== c && c(a);
   };
   b.readAsDataURL(a);
 };
