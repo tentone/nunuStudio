@@ -186,34 +186,34 @@ TextureChooser.prototype.updatePreview = function()
 {
 	var texture = this.texture;
 
-	if(texture instanceof Texture)
-	{
-		this.video.display = "none";
-		this.img.display = "block";
-		this.img.src = texture.image.src;
-	}
 	if(texture instanceof CanvasTexture)
 	{
-		this.video.display = "none";
-		this.img.display = "block";
+		this.video.style.display = "none";
+		this.img.style.display = "block";
 		this.img.src = texture.image.toDataURL();
 	}
 	else if(texture instanceof VideoTexture || texture instanceof WebcamTexture)
 	{
-		this.img.display = "none";
-		this.video.display = "block";
+		this.img.style.display = "none";
+		this.video.style.display = "block";
 		this.video.src = texture.image.src;
 	}
 	else if(texture instanceof CubeTexture)
 	{
-		this.video.display = "none";
-		this.img.display = "block";
+		this.video.style.display = "none";
+		this.img.style.display = "block";
 		this.img.src = texture.image[0].toDataURL();
+	}
+	else if(texture instanceof Texture)
+	{
+		this.video.style.display = "none";
+		this.img.style.display = "block";
+		this.img.src = texture.image.src;
 	}
 	else
 	{
-		this.img.display = "none";
-		this.video.display = "none";
+		this.img.style.display = "none";
+		this.video.style.display = "none";
 	}
 };
 

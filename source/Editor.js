@@ -1601,13 +1601,13 @@ Editor.loadTexture = function(file, onLoad)
 		var texture = new Texture(new Image(reader.result));
 		texture.name = name;
 
+		Editor.program.addTexture(texture);
+		Editor.updateObjectViews();
+
 		if(onLoad !== undefined)
 		{
 			onLoad(texture);
 		}
-
-		Editor.program.addTexture(texture);
-		Editor.updateObjectViews();
 	};
 
 	if(extension === "tga")
@@ -1631,13 +1631,13 @@ Editor.loadVideoTexture = function(file, onLoad)
 		var texture = new VideoTexture(new Video(reader.result));
 		texture.name = name;
 
+		Editor.program.addTexture(texture);
+		Editor.updateObjectViews();
+
 		if(onLoad !== undefined)
 		{
 			onLoad(texture);
 		}
-
-		Editor.program.addTexture(texture);
-		Editor.updateObjectViews();
 	};
 
 	reader.readAsDataURL(file);
