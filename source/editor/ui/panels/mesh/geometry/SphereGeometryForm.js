@@ -66,8 +66,7 @@ SphereGeometryForm.prototype.updateGeometry = function()
 	{
 		this.obj.geometry = new SphereGeometry(this.radius.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
 	}
-
-}
+};
 
 SphereGeometryForm.prototype.updateValues = function()
 {
@@ -75,4 +74,4 @@ SphereGeometryForm.prototype.updateValues = function()
 	this.widthSegments.setValue(this.obj.geometry.parameters.widthSegments || 8);
 	this.heightSegments.setValue(this.obj.geometry.parameters.heightSegments || 6);
 	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
-}
+};

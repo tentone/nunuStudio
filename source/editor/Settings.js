@@ -50,7 +50,7 @@ Settings.loadDefault = function()
 	Settings.code.showMatchesOnScrollbar = true;
 };
 
-//Store settings file
+//Store settings
 Settings.store = function()
 {
 	var data = JSON.stringify(
@@ -62,16 +62,32 @@ Settings.store = function()
 	}, null, "\t");
 
 	data.replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
-
-	FileSystem.writeFile("config", data);
+	
+	//Store file
+	if(Nunu.runningOnDesktop())
+	{
+		FileSystem.writeFile("config", data);
+	}
+	//Cookie
+	else
+	{
+		Cookies.set("config", data);
+	}
 };
 
-//Load settings file
+//Load settings
 Settings.load = function()
 {
 	try
 	{
-		var data = JSON.parse(FileSystem.readFile("config"));
+		if(Nunu.runningOnDesktop())
+		{
+			var data = JSON.parse(FileSystem.readFile("config"));
+		}
+		else
+		{
+			var data = JSON.parse(Cookies.get("config"));
+		}
 		
 		Settings.general = data.general;
 		Settings.editor = data.editor;

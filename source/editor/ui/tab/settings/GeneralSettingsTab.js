@@ -256,7 +256,6 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
 	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
-	//this.shadowsType.addValue("PCSS Soft", THREE.PCSSSoftShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
 		Settings.render.shadowsType = self.shadowsType.getValue();
@@ -293,12 +292,12 @@ GeneralSettingsTab.prototype.activate = function()
 	this.antialiasing.setValue(Settings.render.antialiasing);
 	this.shadows.setValue(Settings.render.shadows);
 	this.shadowsType.setValue(Settings.render.shadowsType);
-}
+};
 
 //Update division Size
 GeneralSettingsTab.prototype.updateInterface = function()
 {
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -312,9 +311,9 @@ GeneralSettingsTab.prototype.updateInterface = function()
 	this.form.visible = this.visible;
 	this.form.updateInterface();
 
-	//Update base element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

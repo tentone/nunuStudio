@@ -51,23 +51,23 @@ ButtonImage.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
-ButtonImage.prototype.update = function(){}
+ButtonImage.prototype.update = function(){};
 
 //Set button callback function
 ButtonImage.prototype.setCallback = function(callback)
 {
 	this.element.onclick = callback;
-}
+};
 
 //Set ButtonImage
 ButtonImage.prototype.setImage = function(image)
 {
 	this.image = image;
 	this.img.src = this.image;
-}
+};
 
 //Set alt text
 ButtonImage.prototype.setAltText = function(altText)
@@ -95,7 +95,7 @@ ButtonImage.prototype.setAltText = function(altText)
 		text.visible = false;
 		text.updateInterface();
 	}
-}
+};
 
 //Set button image visibility
 ButtonImage.prototype.setVisibility = function(visible)
@@ -112,12 +112,12 @@ ButtonImage.prototype.setVisibility = function(visible)
 		this.element.style.visibility = "hidden";
 		this.img.style.visibility = "hidden";
 	}
-}
+};
 
 //Update Interface
 ButtonImage.prototype.updateInterface = function()
 {
-	//Update visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -129,15 +129,15 @@ ButtonImage.prototype.updateInterface = function()
 		this.img.style.visibility = "hidden";
 	}
 
-	//Update image
+	//Image
 	this.img.width = this.size.x * this.imageScale.x;
 	this.img.height = this.size.y * this.imageScale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
 	
-	//Update main element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

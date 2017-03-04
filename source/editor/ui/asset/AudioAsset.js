@@ -96,7 +96,7 @@ AudioAsset.prototype.setAudio = function(audio)
 		this.audio = audio;
 		this.updateMetadata();
 	}
-}
+};
 
 //Update material preview
 AudioAsset.prototype.updateMetadata = function()
@@ -108,7 +108,7 @@ AudioAsset.prototype.updateMetadata = function()
 
 		this.setText(this.audio.name);
 	}
-}
+};
 
 //Update interface
 AudioAsset.prototype.updateInterface = function()
@@ -119,4 +119,4 @@ AudioAsset.prototype.updateInterface = function()
 	this.image.width = this.size.x * this.scale.x;
 	this.image.height = this.size.y * this.scale.y;
 	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
-}
+};

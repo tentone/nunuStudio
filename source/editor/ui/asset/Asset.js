@@ -70,19 +70,19 @@ Asset.prototype.setParent = function(parent)
 		this.parent = parent;
 		this.parent.appendChild(this.element);
 	}
-}
+};
 
 //Set file icon
 Asset.prototype.setIcon = function(icon)
 {
 	this.icon.src = icon;
-}
+};
 
 //Set file label
 Asset.prototype.setText = function(text)
 {
 	this.text.innerHTML = text;
-}
+};
 
 //Remove element
 Asset.prototype.destroy = function()
@@ -92,10 +92,10 @@ Asset.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
-Asset.prototype.update = function(){}
+Asset.prototype.update = function(){};
 
 //Update Interface
 Asset.prototype.updateInterface = function()
@@ -105,4 +105,4 @@ Asset.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

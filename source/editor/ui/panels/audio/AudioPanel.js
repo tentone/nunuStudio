@@ -108,7 +108,7 @@ AudioPanel.prototype.destroy = function()
 		this.player.destroy();
 	}
 	catch(e){}
-}
+};
 
 //Update panel content from attached object
 AudioPanel.prototype.updatePanel = function()
@@ -124,4 +124,4 @@ AudioPanel.prototype.updatePanel = function()
 		this.loop.setValue(this.obj.loop);
 		this.playbackRate.setValue(this.obj.playbackRate);
 	}
-}
+};

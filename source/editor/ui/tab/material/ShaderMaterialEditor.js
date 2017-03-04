@@ -25,15 +25,15 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	});
 	this.preview.orientation = DualDivisionResizable.VERTICAL;
 	this.preview.tabPosition = 0.8;
-	this.preview.tabPositionMin = 0.3;
-	this.preview.tabPositionMax = 0.8;
+	this.preview.tabPositionMin = 0.05;
+	this.preview.tabPositionMax = 0.95;
 
-	//Change preview division style
+	//Division style
 	this.preview.divA.style.overflow = "hidden";
 	this.preview.divA.style.backgroundColor = Editor.theme.panelColor;
-
-	//Change main division style
+	this.main.divB.style.overflow = "auto";
 	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
+	this.preview.divB.style.overflow = "auto";
 
 	//Material preview
 	//Canvas
@@ -79,33 +79,21 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.sprite.visible = false;
 	this.scene.add(this.sprite);
 
-	//Material preview configuration
-	//Text
-	var text = new Text(this.preview.divB);
-	text.setAlignment(Text.LEFT);
-	text.setText("Configuration");
-	text.position.set(10, 20);
-	text.fitContent = true;
-	text.updateInterface();
-	this.children.push(text);
+	//Preview configuration
+	this.previewForm = new Form(this.preview.divB);
+	this.previewForm.position.set(10, 5);
+	this.previewForm.spacing.set(5, 5);
+	this.previewForm.addText("Configuration");
+	this.previewForm.nextRow();
 
 	//Test model
-	var text = new Text(this.preview.divB);
-	text.setAlignment(Text.LEFT);
-	text.setText("Test Model");
-	text.position.set(10, 45);
-	text.fitContent = true;
-	text.updateInterface();
-	this.children.push(text);
-
-	this.testModel = new DropdownList(this.preview.divB);
-	this.testModel.position.set(80, 35);
-	this.testModel.size.set(150, 18);
+	this.previewForm.addText("Test Model");
+	this.testModel = new DropdownList(this.previewForm.element);
+	this.testModel.size.set(100, 18);
 	this.testModel.addValue("Sphere", 0);
 	this.testModel.addValue("Torus", 1);
 	this.testModel.addValue("Cube", 2);
 	this.testModel.addValue("Torus Knot", 3);
-	this.testModel.updateInterface();
 	this.testModel.setOnChange(function()
 	{
 		var value = self.testModel.getSelectedIndex();
@@ -123,34 +111,27 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 		//Cube
 		else if(value === 2)
 		{
-			self.mesh.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 64, 64, 64);
+			self.mesh.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 32, 32, 32);
 		}
 		//Torus Knot
 		else if(value === 3)
 		{
 			self.mesh.geometry = new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64);
-		}	
+		}
 	});
-	this.children.push(this.testModel);
+	this.previewForm.add(this.testModel);
+	this.previewForm.nextRow();
 
-	//Sky enabled
-	this.skyText = new Text(this.preview.divB);
-	this.skyText.size.set(0, 20);
-	this.skyText.position.set(10, 60);
-	this.skyText.setAlignment(Text.LEFT);
-	this.skyText.setText("Enable sky");
-	this.children.push(this.skyText);
-
-	this.skyEnabled = new CheckBox(this.preview.divB);
-	this.skyEnabled.size.set(200, 15);
-	this.skyEnabled.position.set(80, 60);
+	//Sky
+	this.previewForm.addText("Enable sky");
+	this.skyEnabled = new CheckBox(this.previewForm.element);
+	this.skyEnabled.size.set(20, 15);
 	this.skyEnabled.setValue(true);
-	this.skyEnabled.updateInterface();
 	this.skyEnabled.setOnChange(function()
 	{
 		self.sky.visible = self.skyEnabled.getValue();
 	});
-	this.children.push(this.skyEnabled);
+	this.previewForm.add(this.skyEnabled);
 
 	//Tab container
 	this.tab = new TabGroup(this.main.divB);
@@ -351,7 +332,6 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 	this.depthWrite.setValue(material.depthWrite);
 	this.transparent.setValue(material.transparent);
 	this.blending.setValue(material.blending);	
-
 	this.wireframe.setValue(material.wireframe);
 	this.fragmentShader.setValue(material.fragmentShader);
 	this.vertexShader.setValue(material.vertexShader);
@@ -384,16 +364,13 @@ ShaderMaterialEditor.prototype.updateInterface = function()
 		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
 
-		//Children
-		for(var i = 0; i < this.children.length; i++)
-		{
-			this.children[i].visible = this.visible;
-			this.children[i].updateInterface();
-		}
-
 		//Tab size
 		this.tab.size.set(this.size.x - this.canvas.size.x - 5, this.size.y);
 		this.tab.updateInterface();
+
+		//Preview form
+		this.previewForm.visible = this.visible;
+		this.previewForm.updateInterface();
 
 		//Form
 		this.form.visible = this.visible;
@@ -417,4 +394,4 @@ ShaderMaterialEditor.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};

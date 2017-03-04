@@ -74,8 +74,7 @@ ConeGeometryForm.prototype.updateGeometry = function()
 	{
 		this.obj.geometry = new ConeGeometry(this.radius.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
 	}
-
-}
+};
 
 ConeGeometryForm.prototype.updateValues = function()
 {
@@ -84,4 +83,4 @@ ConeGeometryForm.prototype.updateValues = function()
 	this.radialSegments.setValue(this.obj.geometry.parameters.radialSegments || 8);
 	this.heightSegments.setValue(this.obj.geometry.parameters.heightSegments || 1);
 	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
-}
+};

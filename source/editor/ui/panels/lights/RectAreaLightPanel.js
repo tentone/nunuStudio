@@ -117,4 +117,4 @@ RectAreaLightPanel.prototype.updatePanel = function()
 		this.visible.setValue(this.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
-}
+};

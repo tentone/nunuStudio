@@ -86,4 +86,4 @@ ObjectPanel.prototype.updatePanel = function()
 		this.castShadow.setValue(this.obj.castShadow);
 		this.receiveShadow.setValue(this.obj.receiveShadow);
 	}
-}
+};

@@ -385,4 +385,4 @@ StandardMaterialEditor.prototype.attach = function(material, materialFile)
 	this.envMap.setValue(material.envMap);
 	this.envMapIntensity.setValue(material.envMapIntensity);
 	this.refractionRatio.setValue(material.refractionRatio);
-}
+};

@@ -133,6 +133,8 @@ include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/PCDLoader.js");
 
+//Libs
+include("lib/jscookie.min.js");
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/quickhull.js");
@@ -153,7 +155,6 @@ include("editor/ui/element/Canvas.js");
 include("editor/ui/element/DualDivisionResizable.js");
 include("editor/ui/element/ButtonImageToggle.js");
 include("editor/ui/element/Form.js");
-include("editor/ui/element/FormSeparator.js");
 include("editor/ui/element/AudioPlayer.js");
 
 include("editor/ui/element/input/Graph.js");
@@ -187,9 +188,10 @@ include("editor/ui/asset/FontAsset.js");
 include("editor/ui/asset/AudioAsset.js");
 
 include("editor/files/style/editor.css");
-include("editor/ui/theme/Theme.js");
-include("editor/ui/theme/ThemeDark.js");
-include("editor/ui/theme/ThemeLight.js");
+
+include("editor/theme/Theme.js");
+include("editor/theme/ThemeDark.js");
+include("editor/theme/CodemirrorThemes.js");
 
 include("editor/ui/tab/ScriptEditor.js");
 include("editor/ui/tab/SceneEditor.js");
@@ -325,8 +327,17 @@ Editor.initialize = function()
 			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
 			{
 				Editor.exit();
+				Editor.gui.App.closeAllWindows();
+				Editor.gui.App.quit();
 			}
 		});
+	}
+	else
+	{
+		window.onbeforeunload = function(event)
+		{
+			Editor.exit();
+		};
 	}
 
 	//Open ISP file if dragged to the window
@@ -2147,12 +2158,6 @@ Editor.setFullscreen = function(fullscreen, element)
 Editor.exit = function()
 {
 	Settings.store();
-
-	if(Editor.gui !== undefined)
-	{
-		Editor.gui.App.closeAllWindows();
-		Editor.gui.App.quit();
-	}
 };
 
 //Include javacript or css file in project

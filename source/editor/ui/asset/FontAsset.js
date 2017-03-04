@@ -99,7 +99,7 @@ FontAsset.prototype.setFont = function(font)
 		this.font = font;
 		this.updateMetadata();
 	}
-}
+};
 
 //Update material preview
 FontAsset.prototype.updateMetadata = function()
@@ -110,7 +110,7 @@ FontAsset.prototype.updateMetadata = function()
 
 		this.setText(this.font.name);
 	}
-}
+};
 
 //Update interface
 FontAsset.prototype.updateInterface = function()
@@ -120,4 +120,4 @@ FontAsset.prototype.updateInterface = function()
 	this.image.width = this.size.x * this.scale.x;
 	this.image.height = this.size.y * this.scale.y;
 	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";
-}
+};

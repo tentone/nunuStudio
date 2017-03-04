@@ -83,8 +83,7 @@ CylinderGeometryForm.prototype.updateGeometry = function()
 	{
 		this.obj.geometry = new CylinderGeometry(this.radiusTop.getValue(), this.radiusBottom.getValue(), this.height.getValue(), this.radialSegments.getValue(), this.heightSegments.getValue());
 	}
-
-}
+};
 
 CylinderGeometryForm.prototype.updateValues = function()
 {
@@ -94,4 +93,4 @@ CylinderGeometryForm.prototype.updateValues = function()
 	this.radialSegments.setValue(this.obj.geometry.parameters.radialSegments || 8);
 	this.heightSegments.setValue(this.obj.geometry.parameters.heightSegments || 1);
 	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
-}
+};

@@ -19,7 +19,6 @@ function ImageBox(parent)
 	this.element.appendChild(this.img);
 
 	//Attributes
-	this.fitParent = false;
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -36,7 +35,7 @@ function ImageBox(parent)
 ImageBox.prototype.setCallback = function(callback)
 {
 	this.element.onclick = callback;
-}
+};
 
 //Remove element
 ImageBox.prototype.destroy = function()
@@ -46,16 +45,16 @@ ImageBox.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
-ImageBox.prototype.update = function(){}
+ImageBox.prototype.update = function(){};
 
 //Set ImageBox
 ImageBox.prototype.setImage = function(image)
 {
 	this.img.src = image;
-}
+};
 
 //Set element visibility
 ImageBox.prototype.setVisibility = function(value)
@@ -72,19 +71,12 @@ ImageBox.prototype.setVisibility = function(value)
 		this.element.style.visibility = "hidden";
 		this.img.style.visibility = "hidden";
 	}
-}
+};
 
 //Update Interface
 ImageBox.prototype.updateInterface = function()
 {
-	//Fit parent element
-	if(this.fitParent)
-	{
-		this.size.x = this.parent.offsetWidth;
-		this.size.y = this.parent.offsetHeight; 
-	}
-
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -109,15 +101,15 @@ ImageBox.prototype.updateInterface = function()
 		}
 	}
 
-	//Update img
+	//Image
 	this.img.width = this.size.x * this.imageScale.x;
 	this.img.height = this.size.y * this.imageScale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
 	
-	//Update base element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

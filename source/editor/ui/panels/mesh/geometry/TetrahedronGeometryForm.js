@@ -60,12 +60,11 @@ TetrahedronGeometryForm.prototype.updateGeometry = function()
 	{
 		this.obj.geometry = new TetrahedronGeometry(this.radius.getValue(), this.detail.getValue());
 	}
-
-}
+};
 
 TetrahedronGeometryForm.prototype.updateValues = function()
 {
 	this.radius.setValue(this.obj.geometry.parameters.radius || 2);
 	this.detail.setValue(this.obj.geometry.parameters.detail || 1);
 	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
-}
+};

@@ -224,7 +224,7 @@ TextureAsset.prototype.setTexture = function(texture)
 	}
 
 	this.updateMetadata();
-}
+};
 
 //Update material preview
 TextureAsset.prototype.updateMetadata = function()
@@ -233,4 +233,4 @@ TextureAsset.prototype.updateMetadata = function()
 	{
 		this.setText(this.texture.name);
 	}
-}
+};

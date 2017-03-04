@@ -147,7 +147,7 @@ Panel.prototype.attach = function(obj)
 	{
 		this.obj = null;
 	}
-}
+};
 
 //Remove element
 Panel.prototype.destroy = function()
@@ -157,7 +157,7 @@ Panel.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update panel ui
 Panel.prototype.updateInterface = function()
@@ -170,7 +170,7 @@ Panel.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-}
+};
 
 //Update panel information
 Panel.prototype.updatePanel = function()
@@ -188,4 +188,4 @@ Panel.prototype.updatePanel = function()
 		this.scale.setValue(this.obj.scale);
 		this.rotation.setValue(this.obj.rotation);
 	}
-}
+};

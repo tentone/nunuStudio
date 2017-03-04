@@ -211,4 +211,4 @@ OrthographicCameraPanel.prototype.updatePanel = function()
 		this.clearColor.setValue(this.obj.clearColor);
 		this.clearDepth.setValue(this.obj.clearDepth);
 	}
-}
+};

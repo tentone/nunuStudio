@@ -77,10 +77,10 @@ ButtonImageToggle.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
-ButtonImageToggle.prototype.update = function(){}
+ButtonImageToggle.prototype.update = function(){};
 
 //Set button callback function
 ButtonImageToggle.prototype.setCallback = function(callback)
@@ -91,13 +91,13 @@ ButtonImageToggle.prototype.setCallback = function(callback)
 		self.selected = !self.selected;
 		callback();	
 	};
-}
+};
 
 //Set ButtonImageToggle
 ButtonImageToggle.prototype.setImage = function(image)
 {
 	this.img.src = image;
-}
+};
 
 //Update Interface
 ButtonImageToggle.prototype.updateInterface = function()
@@ -122,15 +122,15 @@ ButtonImageToggle.prototype.updateInterface = function()
 		this.element.style.backgroundColor = Editor.theme.buttonColor;
 	}
 
-	//Update image
+	//Image
 	this.img.width = this.size.x * this.imageScale.x;
 	this.img.height = this.size.y * this.imageScale.y;
 	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
 	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
 	
-	//Update element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

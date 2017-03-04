@@ -54,4 +54,4 @@ ScriptPanel.prototype.updatePanel = function()
 		this.visible.setValue(this.obj.visible);
 		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
-}
+};

@@ -30,12 +30,10 @@ function CodeSettingsTab(parent, closeable, container, index)
 	this.form.add(this.codeTheme);
 	this.form.nextRow();
 
-	//Get codemirror themes available
-	var files = FileSystem.getFilesDirectory("lib/codemirror/theme/");
-	for(var i = 0; i < files.length; i++)
+	var themes = CodemirrorThemes.list;
+	for(var i = 0; i < themes.length; i++)
 	{
-		var theme = files[i].replace(".css", "");
-		this.codeTheme.addValue(theme, theme);
+		this.codeTheme.addValue(themes[i], themes[i]);
 	}
 
 	//Code keymap
@@ -137,7 +135,7 @@ CodeSettingsTab.prototype.activate = function()
 	this.codeAutoCloseBrackets.setValue(Settings.code.autoCloseBrackets);
 	this.codeHighlightActiveLine.setValue(Settings.code.highlightActiveLine);
 	this.showMatchesOnScrollbar.setValue(Settings.code.showMatchesOnScrollbar);
-}
+}; 
 
 //Update division Size
 CodeSettingsTab.prototype.updateInterface = function()
@@ -156,9 +154,9 @@ CodeSettingsTab.prototype.updateInterface = function()
 	this.form.visible = this.visible;
 	this.form.updateInterface();
 
-	//Update base element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};

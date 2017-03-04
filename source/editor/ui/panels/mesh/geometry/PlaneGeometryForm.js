@@ -74,8 +74,7 @@ PlaneGeometryForm.prototype.updateGeometry = function()
 	{
 		this.obj.geometry = new PlaneGeometry(this.width.getValue(), this.height.getValue(), this.widthSegments.getValue(), this.heightSegments.getValue());
 	}
-
-}
+};
 
 PlaneGeometryForm.prototype.updateValues = function()
 {
@@ -84,5 +83,4 @@ PlaneGeometryForm.prototype.updateValues = function()
 	this.widthSegments.setValue(this.obj.geometry.parameters.widthSegments || 1);
 	this.heightSegments.setValue(this.obj.geometry.parameters.heightSegments || 1);
 	this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
-
-}
+};

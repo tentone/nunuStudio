@@ -197,4 +197,4 @@ SpotLightPanel.prototype.updatePanel = function()
 		this.shadowNear.setValue(this.obj.shadow.camera.near);
 		this.shadowFar.setValue(this.obj.shadow.camera.far);
 	}
-}
+};

@@ -36,4 +36,4 @@ KinectPanel.prototype.updatePanel = function()
 	{
 		this.debugModel.setValue(this.obj.debugModel);
 	}
-}
+};
