@@ -14,11 +14,11 @@ function SettingsTab(parent, closeable, container, index)
 	this.general = this.tab.addTab(GeneralSettingsTab, false);
 	this.general.activate();
 	
+	//Rendering
+	this.rendering = this.tab.addTab(RenderSettingsTab, false);
+
 	//Code
 	this.code = this.tab.addTab(CodeSettingsTab, false);
-
-	//About
-	//this.about = this.tab.addTab(AboutTab, false);
 }
 
 SettingsTab.prototype = Object.create(TabElement.prototype);

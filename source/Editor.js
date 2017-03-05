@@ -200,6 +200,7 @@ include("editor/ui/tab/AboutTab.js");
 include("editor/ui/tab/settings/SettingsTab.js");
 include("editor/ui/tab/settings/CodeSettingsTab.js");
 include("editor/ui/tab/settings/GeneralSettingsTab.js");
+include("editor/ui/tab/settings/RenderSettingsTab.js");
 include("editor/ui/tab/material/MaterialEditor.js");
 include("editor/ui/tab/material/PhongMaterialEditor.js");
 include("editor/ui/tab/material/LambertMaterialEditor.js");
@@ -306,12 +307,12 @@ Editor.initialize = function()
 	//Disable body overflow
 	document.body.style.overflow = "hidden";
 	
-	//If running on browser disable CTRL+ANY | F5
+	//If running on browser disable CTRL+key and F5
 	if(!Nunu.runningOnDesktop())
 	{
 		document.onkeydown = function(event)
 		{
-			if(event.keyCode === 116 || event.ctrlKey === true)
+			if(event.keyCode === 116 || event.ctrlKey === true && event.keyCode !== 67 && event.keyCode !== 86)
 			{
 				event.preventDefault();
 			}
@@ -684,7 +685,7 @@ Editor.update = function()
 				else if(Editor.mouse.buttonPressed(Mouse.RIGHT))
 				{
 					//Move speed
-					var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0,0,0)) / 1000;
+					var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 1000;
 					if(speed < 0.02)
 					{
 						speed = 0.02;
@@ -713,7 +714,7 @@ Editor.update = function()
 				if(Editor.mouse.wheel !== 0)
 				{
 					//Move speed
-					var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0,0,0))/2000;
+					var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 2000;
 					speed *= Editor.mouse.wheel;
 
 					//Limit zoom speed
