@@ -6,6 +6,9 @@ function MaterialRenderer()
 	this.renderer = new THREE.WebGLRenderer({alpha: true});
 	this.renderer.setSize(128, 128);
 	
+	//Canvas
+	this.canvas = this.renderer.domElement;
+	
 	//Camera
 	this.camera = new OrthographicCamera(2.15, 1);
 
@@ -37,10 +40,10 @@ MaterialRenderer.prototype.setSize = function(x, y)
 	this.renderer.setSize(x, y);
 }
 
-//Render material to internal canvas and copy image to html image element
-MaterialRenderer.prototype.renderMaterial = function(material, img)
+//Render material to internal canvas and create dataURL that is passed to onRender callback
+MaterialRenderer.prototype.renderMaterial = function(material, onRender)
 {
-	//Render material
+	//Set material
 	if(material instanceof THREE.SpriteMaterial)
 	{
 		this.sphere.visible = false;
@@ -58,17 +61,9 @@ MaterialRenderer.prototype.renderMaterial = function(material, img)
 		this.camera.position.set(0, 0, 1.5);
 	}
 
+	//Render
 	this.renderer.render(this.scene, this.camera);
 
-	//Create image blob and set as image source
-	if(img !== undefined)
-	{
-		var canvas = this.renderer.domElement;
-		canvas.toBlob = canvas.toBlob || canvas.msToBlob;
-		canvas.toBlob(function(blob)
-		{
-			var url = URL.createObjectURL(blob);
-			img.src = url;
-		});
-	}
+	//Callback
+	onRender(this.canvas.toDataURL());
 }

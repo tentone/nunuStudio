@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.21 Alpha";
-Nunu.TIMESTAMP = "201703040300";
+Nunu.TIMESTAMP = "201703050206";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -1058,10 +1058,10 @@ Nunu.runningOnDesktop = function() {
     var a = [], b = -1, c = [], d = -1;
     return {opaque:a, transparent:c, init:function() {
       d = b = -1;
-    }, push:function(p, D, e, f, g) {
+    }, push:function(p, e, D, f, g) {
       var h, q;
-      e.transparent ? (h = c, q = ++d) : (h = a, q = ++b);
-      (q = h[q]) ? (q.id = p.id, q.object = p, q.geometry = D, q.material = e, q.program = e.program, q.renderOrder = p.renderOrder, q.z = f, q.group = g) : (q = {id:p.id, object:p, geometry:D, material:e, program:e.program, renderOrder:p.renderOrder, z:f, group:g}, h.push(q));
+      D.transparent ? (h = c, q = ++d) : (h = a, q = ++b);
+      (q = h[q]) ? (q.id = p.id, q.object = p, q.geometry = e, q.material = D, q.program = D.program, q.renderOrder = p.renderOrder, q.z = f, q.group = g) : (q = {id:p.id, object:p, geometry:e, material:D, program:D.program, renderOrder:p.renderOrder, z:f, group:g}, h.push(q));
     }, finish:function() {
       a.length = b + 1;
       c.length = d + 1;
@@ -7531,15 +7531,15 @@ Nunu.runningOnDesktop = function() {
     };
   }(), distanceSqToSegment:function() {
     var a = new m, b = new m, c = new m;
-    return function(d, p, e, f) {
-      a.copy(d).add(p).multiplyScalar(.5);
-      b.copy(p).sub(d).normalize();
+    return function(p, d, e, f) {
+      a.copy(p).add(d).multiplyScalar(.5);
+      b.copy(d).sub(p).normalize();
       c.copy(this.origin).sub(a);
-      var g = .5 * d.distanceTo(p), h = -this.direction.dot(b), q = c.dot(this.direction), k = -c.dot(b), m = c.lengthSq(), l = Math.abs(1 - h * h), n;
-      0 < l ? (d = h * k - q, p = h * q - k, n = g * l, 0 <= d ? p >= -n ? p <= n ? (g = 1 / l, d *= g, p *= g, h = d * (d + h * p + 2 * q) + p * (h * d + p + 2 * k) + m) : (p = g, d = Math.max(0, -(h * p + q)), h = -d * d + p * (p + 2 * k) + m) : (p = -g, d = Math.max(0, -(h * p + q)), h = -d * d + p * (p + 2 * k) + m) : p <= -n ? (d = Math.max(0, -(-h * g + q)), p = 0 < d ? -g : Math.min(Math.max(-g, -k), g), h = -d * d + p * (p + 2 * k) + m) : p <= n ? (d = 0, p = Math.min(Math.max(-g, -k), g), 
-      h = p * (p + 2 * k) + m) : (d = Math.max(0, -(h * g + q)), p = 0 < d ? g : Math.min(Math.max(-g, -k), g), h = -d * d + p * (p + 2 * k) + m)) : (p = 0 < h ? -g : g, d = Math.max(0, -(h * p + q)), h = -d * d + p * (p + 2 * k) + m);
-      e && e.copy(this.direction).multiplyScalar(d).add(this.origin);
-      f && f.copy(b).multiplyScalar(p).add(a);
+      var g = .5 * p.distanceTo(d), h = -this.direction.dot(b), q = c.dot(this.direction), k = -c.dot(b), m = c.lengthSq(), l = Math.abs(1 - h * h), n;
+      0 < l ? (p = h * k - q, d = h * q - k, n = g * l, 0 <= p ? d >= -n ? d <= n ? (g = 1 / l, p *= g, d *= g, h = p * (p + h * d + 2 * q) + d * (h * p + d + 2 * k) + m) : (d = g, p = Math.max(0, -(h * d + q)), h = -p * p + d * (d + 2 * k) + m) : (d = -g, p = Math.max(0, -(h * d + q)), h = -p * p + d * (d + 2 * k) + m) : d <= -n ? (p = Math.max(0, -(-h * g + q)), d = 0 < p ? -g : Math.min(Math.max(-g, -k), g), h = -p * p + d * (d + 2 * k) + m) : d <= n ? (p = 0, d = Math.min(Math.max(-g, -k), g), 
+      h = d * (d + 2 * k) + m) : (p = Math.max(0, -(h * g + q)), d = 0 < p ? g : Math.min(Math.max(-g, -k), g), h = -p * p + d * (d + 2 * k) + m)) : (d = 0 < h ? -g : g, p = Math.max(0, -(h * d + q)), h = -p * p + d * (d + 2 * k) + m);
+      e && e.copy(this.direction).multiplyScalar(p).add(this.origin);
+      f && f.copy(b).multiplyScalar(d).add(a);
       return h;
     };
   }(), intersectSphere:function() {
@@ -62755,7 +62755,13 @@ MaterialAsset.prototype.restoreMaterial = function() {
   this.materialHighlighted && this.material instanceof THREE.Material && void 0 !== this.material.color && (this.material.color.copy(this.materialColor), this.materialHighlighted = !1);
 };
 MaterialAsset.prototype.updateMetadata = function() {
-  null !== this.material && (Editor.materialRenderer.renderMaterial(this.material, this.image), this.setText(this.material.name));
+  if (null !== this.material) {
+    var a = this.image;
+    Editor.materialRenderer.renderMaterial(this.material, function(c) {
+      a.src = c;
+    });
+    this.setText(this.material.name);
+  }
 };
 MaterialAsset.prototype.updateInterface = function() {
   Asset.prototype.updateInterface.call(this);
@@ -63701,7 +63707,6 @@ function SettingsTab(a, c, d, b) {
   this.general = this.tab.addTab(GeneralSettingsTab, !1);
   this.general.activate();
   this.code = this.tab.addTab(CodeSettingsTab, !1);
-  this.about = this.tab.addTab(AboutTab, !1);
 }
 SettingsTab.prototype = Object.create(TabElement.prototype);
 SettingsTab.prototype.activate = function() {
@@ -64809,6 +64814,24 @@ function StandardMaterialEditor(a, c, d, b) {
     null !== e.material && (e.material.refractionRatio = e.refractionRatio.getValue(), e.material.needsUpdate = !0);
   });
   this.form.add(this.refractionRatio);
+  this.form.nextRow();
+  this.form.addText("Ambient Occlusion");
+  this.form.nextRow();
+  this.aoMap = new TextureBox(this.form.element);
+  this.aoMap.size.set(100, 100);
+  this.aoMap.setOnChange(function(a) {
+    null !== e.material && (e.material.aoMap = e.aoMap.getValue(), e.material.needsUpdate = !0);
+  });
+  this.form.add(this.aoMap);
+  this.form.nextRow();
+  this.form.addText("Intensity");
+  this.aoMapIntensity = new NumberBox(this.form.element);
+  this.aoMapIntensity.size.set(60, 18);
+  this.aoMapIntensity.setStep(.05);
+  this.aoMapIntensity.setOnChange(function() {
+    null !== e.material && (e.material.aoMapIntensity = e.aoMapIntensity.getValue(), e.material.needsUpdate = !0);
+  });
+  this.form.add(this.aoMapIntensity);
 }
 StandardMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 StandardMaterialEditor.prototype.attach = function(a, c) {
@@ -64836,6 +64859,8 @@ StandardMaterialEditor.prototype.attach = function(a, c) {
   this.envMap.setValue(a.envMap);
   this.envMapIntensity.setValue(a.envMapIntensity);
   this.refractionRatio.setValue(a.refractionRatio);
+  this.aoMap.setValue(a.aoMap);
+  this.aoMapIntensity.setValue(a.aoMapIntensity);
 };
 function SpriteMaterialEditor(a, c, d, b) {
   MaterialEditor.call(this, a, c, d, b);
@@ -67985,6 +68010,7 @@ FontRenderer.prototype.renderFont = function(a, c) {
 function MaterialRenderer() {
   this.renderer = new THREE.WebGLRenderer({alpha:!0});
   this.renderer.setSize(128, 128);
+  this.canvas = this.renderer.domElement;
   this.camera = new OrthographicCamera(2.15, 1);
   this.scene = new THREE.Scene;
   this.sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32));
@@ -68004,10 +68030,7 @@ MaterialRenderer.prototype.setSize = function(a, c) {
 MaterialRenderer.prototype.renderMaterial = function(a, c) {
   a instanceof THREE.SpriteMaterial ? (this.sphere.visible = !1, this.sprite.visible = !0, this.sprite.material = a, this.camera.position.set(0, 0, .5)) : (this.sprite.visible = !1, this.sphere.visible = !0, this.sphere.material = a, this.camera.position.set(0, 0, 1.5));
   this.renderer.render(this.scene, this.camera);
-  void 0 !== c && (a = this.renderer.domElement, a.toBlob = a.toBlob || a.msToBlob, a.toBlob(function(a) {
-    a = URL.createObjectURL(a);
-    c.src = a;
-  }));
+  c(this.canvas.toDataURL());
 };
 function ObjectIcons() {
 }
