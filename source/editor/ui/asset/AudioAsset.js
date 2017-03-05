@@ -103,7 +103,6 @@ AudioAsset.prototype.updateMetadata = function()
 {
 	if(this.audio !== null)
 	{
-		//TODO <AUDIO PREVIEW GRAPH>
 		this.image.src = Interface.fileDir + "icons/misc/audio.png";
 
 		this.setText(this.audio.name);
