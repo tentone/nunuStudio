@@ -9,14 +9,14 @@ Settings.DEGREES = 1;
 //Load default settings
 Settings.loadDefault = function()
 {
-	//General settings
+	//General
 	Settings.general = {};
 	Settings.general.theme = "dark";
 	Settings.general.filePreviewSize = 70;
 	Settings.general.showStats = false;
 	Settings.general.showUUID = false;
 
-	//Editor settings
+	//Editor
 	Settings.editor = {};
 	Settings.editor.angleFormat = Settings.RADIANS;
 	Settings.editor.gridSize = 500;
@@ -28,7 +28,7 @@ Settings.loadDefault = function()
 	Settings.editor.lockMouse = true;
 	Settings.editor.transformationSpace = "world";
 
-	//Rendering settings
+	//Rendering
 	Settings.render = {};
 	Settings.render.followProject = false;
 	Settings.render.toneMapping = THREE.NoToneMapping;
@@ -38,7 +38,7 @@ Settings.loadDefault = function()
 	Settings.render.shadows = true;
 	Settings.render.shadowsType = THREE.PCFSoftShadowMap;
 
-	//Code editor settings
+	//Code editor
 	Settings.code = {};
 	Settings.code.theme = "monokai";
 	Settings.code.keymap = "sublime";

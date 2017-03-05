@@ -205,7 +205,7 @@ ScriptEditor.prototype.updateScript = function()
 {
 	if(this.script !== null)
 	{
-		this.script.setCode(this.code.getValue());
+		this.script.code = this.code.getValue();
 	}
 }
 

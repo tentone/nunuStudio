@@ -117,7 +117,9 @@ function CodeSettingsTab(parent, closeable, container, index)
 		Settings.code.showMatchesOnScrollbar = self.showMatchesOnScrollbar.getValue();
 	});
 	this.form.add(this.showMatchesOnScrollbar);
-	this.form.nextRow();
+
+	//Update form
+	this.form.updateInterface();
 }
 
 CodeSettingsTab.prototype = Object.create(TabElement.prototype);
@@ -140,23 +142,19 @@ CodeSettingsTab.prototype.activate = function()
 //Update division Size
 CodeSettingsTab.prototype.updateInterface = function()
 {
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
-	
-	//Form
-	this.form.visible = this.visible;
-	this.form.updateInterface();
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };

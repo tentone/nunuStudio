@@ -206,62 +206,9 @@ function GeneralSettingsTab(parent, closeable, container, index)
 		Editor.updateAssetExplorer();
 	});
 	this.form.add(this.filePreviewSize);
-	this.form.nextRow();
-
-	//Blank Space
-	this.form.addText("");
-	this.form.nextRow();
-
-	//Renderer settings
-	this.form.addText("Rendering Quality");
-	this.form.nextRow();
-
-	//Use project settings
-	this.form.addText("Follow project");
-	this.followProject = new CheckBox(this.form.element);
-	this.followProject.size.set(20, 16);
-	this.followProject.setOnChange(function()
-	{
-		Settings.render.followProject = self.followProject.getValue();
-	});
-	this.form.add(this.followProject);
-	this.form.nextRow();
-
-	//Antialiasing
-	this.form.addText("Antialiasing");
-	this.antialiasing = new CheckBox(this.form.element);
-	this.antialiasing.size.set(20, 16);
-	this.antialiasing.setOnChange(function()
-	{
-		Settings.render.antialiasing = self.antialiasing.getValue();
-	});
-	this.form.add(this.antialiasing);
-	this.form.nextRow();
-
-	//Shadows
-	this.form.addText("Shadows");
-	this.shadows = new CheckBox(this.form.element);
-	this.shadows.size.set(20, 15);
-	this.shadows.setOnChange(function()
-	{	
-		Settings.render.shadows = self.shadows.getValue();
-	});
-	this.form.add(this.shadows);
-	this.form.nextRow();
-
-	//Shadows settings
-	this.form.addText("Shadows type");
-	this.shadowsType = new DropdownList(this.form.element);
-	this.shadowsType.size.set(150, 20);
-	this.shadowsType.addValue("Basic", THREE.BasicShadowMap);
-	this.shadowsType.addValue("PCF", THREE.PCFShadowMap);
-	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
-	this.shadowsType.setOnChange(function()
-	{
-		Settings.render.shadowsType = self.shadowsType.getValue();
-	});
-	this.form.add(this.shadowsType);
-	this.form.nextRow();
+	
+	//Update form
+	this.form.updateInterface();
 }
 
 GeneralSettingsTab.prototype = Object.create(TabElement.prototype);
@@ -286,12 +233,6 @@ GeneralSettingsTab.prototype.activate = function()
 	this.transformationSpace.setValue(Settings.editor.transformationSpace);
 	this.cameraPreviewEnabled.setValue(Settings.editor.cameraPreviewEnabled);
 	this.cameraPreviewPercentage.setValue(Settings.editor.cameraPreviewPercentage);
-
-	//Render
-	this.followProject.setValue(Settings.render.followProject);
-	this.antialiasing.setValue(Settings.render.antialiasing);
-	this.shadows.setValue(Settings.render.shadows);
-	this.shadowsType.setValue(Settings.render.shadowsType);
 };
 
 //Update division Size
@@ -300,20 +241,16 @@ GeneralSettingsTab.prototype.updateInterface = function()
 	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
-	
-	//Form
-	this.form.visible = this.visible;
-	this.form.updateInterface();
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };
