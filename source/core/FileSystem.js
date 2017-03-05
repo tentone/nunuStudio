@@ -36,7 +36,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 	}
 
 	//NodeJS
-	if(FileSystem.fs !== undefined)
+	if(FileSystem.fs !== undefined && FileSystem.fs.existsSync(file))
 	{
 		//Sync
 		if(sync)
@@ -91,7 +91,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 
 		file.send(null);
 
-		return file.responseText;
+		return file.response;
 	}
 };
 
@@ -207,6 +207,23 @@ FileSystem.writeFileBase64 = function(fname, data)
 		var stream = FileSystem.fs.createWriteStream(fname);
 		stream.write(buffer);
 		stream.end();
+	}
+	else
+	{
+		var array = ArraybufferUtils.fromBase64(Base64Utils.removeHeader(data));
+		var blob = new Blob([array]);
+
+		var download = document.createElement("a");
+		download.download = fname;
+		download.href = window.URL.createObjectURL(blob);
+		download.onclick = function()
+		{
+			document.body.removeChild(this);
+		};
+		download.style.display = "none";
+		document.body.appendChild(download);
+
+		download.click();
 	}
 };
 

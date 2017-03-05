@@ -83,14 +83,24 @@ function TextureAsset(parent)
 				var image = self.texture.img;
 				image.encodeData();
 
-				FileSystem.chooseFile(function(files)
+				if(Nunu.runningOnDesktop())
 				{
-					if(files.length > 0)
+					FileSystem.chooseFile(function(files)
 					{
-						var file = files[0].path;
+						if(files.length > 0)
+						{
+							var file = files[0].path;
+							FileSystem.writeFileBase64(file, image.data);
+						}
+					}, "." + image.encoding, true);
+				}
+				else
+				{
+					FileSystem.chooseFileName(function(file)
+					{
 						FileSystem.writeFileBase64(file, image.data);
-					}
-				}, "." + image.encoding , true);
+					}, "." + image.encoding);
+				}
 			});
 		}
 		else if(self.texture instanceof VideoTexture)
@@ -99,14 +109,24 @@ function TextureAsset(parent)
 			{
 				var video = self.texture.video;
 				
-				FileSystem.chooseFile(function(files)
+				if(Nunu.runningOnDesktop())
 				{
-					if(files.length > 0)
+					FileSystem.chooseFile(function(files)
 					{
-						var file = files[0].path;
+						if(files.length > 0)
+						{
+							var file = files[0].path;
+							FileSystem.writeFileBase64(file, video.data);
+						}
+					}, "." + video.encoding , true);
+				}
+				else
+				{
+					FileSystem.chooseFileName(function(file)
+					{
 						FileSystem.writeFileBase64(file, video.data);
-					}
-				}, "." + video.encoding , true);
+					}, "." + video.encoding);
+				}
 			});
 		}
 
