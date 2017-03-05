@@ -45,11 +45,11 @@ function TabGroup(parent)
 	this.empty.innerHTML = "Open new tab to edit content or create new project";
 	this.tab.appendChild(this.empty);
 
-	//Element atributes
+	//Attributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
-	
+
 	//Options
 	this.mode = TabGroup.TOP;
 	this.buttonSize = new THREE.Vector2(150, 25);

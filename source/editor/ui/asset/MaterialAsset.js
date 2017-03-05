@@ -249,7 +249,11 @@ MaterialAsset.prototype.updateMetadata = function()
 {
 	if(this.material !== null)
 	{
-		Editor.materialRenderer.renderMaterial(this.material, this.image);
+		var image = this.image;
+		Editor.materialRenderer.renderMaterial(this.material, function(url)
+		{
+			image.src = url;
+		});
 		this.setText(this.material.name);
 	}
 };

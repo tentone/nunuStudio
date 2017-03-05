@@ -354,6 +354,38 @@ function StandardMaterialEditor(parent, closeable, container, index)
 		}
 	});
 	this.form.add(this.refractionRatio);
+	this.form.nextRow();
+	
+	//Ambient Occlusion map
+	this.form.addText("Ambient Occlusion");
+	this.form.nextRow();
+	this.aoMap = new TextureBox(this.form.element);
+	this.aoMap.size.set(100, 100);
+	this.aoMap.setOnChange(function(file)
+	{
+		if(self.material !== null)
+		{
+			self.material.aoMap = self.aoMap.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.aoMap);
+	this.form.nextRow();
+
+	//Ambient Occlusion intensity
+	this.form.addText("Intensity");
+	this.aoMapIntensity = new NumberBox(this.form.element);
+	this.aoMapIntensity.size.set(60, 18);
+	this.aoMapIntensity.setStep(0.05);
+	this.aoMapIntensity.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.aoMapIntensity = self.aoMapIntensity.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.aoMapIntensity);
 }
 
 StandardMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
@@ -385,4 +417,6 @@ StandardMaterialEditor.prototype.attach = function(material, materialFile)
 	this.envMap.setValue(material.envMap);
 	this.envMapIntensity.setValue(material.envMapIntensity);
 	this.refractionRatio.setValue(material.refractionRatio);
+	this.aoMap.setValue(material.aoMap);
+	this.aoMapIntensity.setValue(material.aoMapIntensity);
 };
