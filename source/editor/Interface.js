@@ -780,6 +780,62 @@ Interface.initialize = function()
 		}
 	}
 
+	//Export menu
+	var exportMenu = Interface.file.addMenu("Export");
+
+	//Export OBJ
+	exportMenu.addOption("Wavefront OBJ", function()
+	{
+		if(Nunu.runningOnDesktop())
+		{
+			FileSystem.chooseFile(function(files)
+			{
+				if(files.length > 0)
+				{
+					var exporter = new THREE.OBJExporter();
+					var data = exporter.parse(Editor.program);
+					FileSystem.writeFile(files[0].path, data);
+				}
+			}, ".obj", true);
+		}
+		else
+		{
+			FileSystem.chooseFileName(function(fname)
+			{
+				var exporter = new THREE.OBJExporter();
+				var data = exporter.parse(Editor.program);
+				FileSystem.writeFile(fname, data);
+			}, ".obj");
+		}
+	}, Interface.fileDir + "icons/misc/scene.png");
+
+	//Export STL
+	exportMenu.addOption("STL", function()
+	{
+		if(Nunu.runningOnDesktop())
+		{
+			FileSystem.chooseFile(function(files)
+			{
+				if(files.length > 0)
+				{
+					var exporter = new THREE.STLExporter();
+					var data = exporter.parse(Editor.program);
+					FileSystem.writeFile(files[0].path, data);
+				}
+			}, ".stl", true);
+		}
+		else
+		{
+			FileSystem.chooseFileName(function(fname)
+			{
+				var exporter = new THREE.STLExporter();
+				var data = exporter.parse(Editor.program);
+				FileSystem.writeFile(fname, data);
+			}, ".stl");
+		}
+	}, Interface.fileDir + "icons/misc/scene.png");
+
+
 	//Exit
 	if(Nunu.runningOnDesktop())
 	{
