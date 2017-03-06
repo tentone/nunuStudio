@@ -120,7 +120,7 @@ include("lib/codemirror/addon/lint/lint.js");
 include("lib/codemirror/addon/lint/javascript-lint.js");
 include("lib/codemirror/theme/*");
 
-//Threejs
+//threejs
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/VRMLLoader.js");
@@ -133,14 +133,14 @@ include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/PCDLoader.js");
 
+include("lib/three/exporters/OBJExporter.js");
+include("lib/three/exporters/STLExporter.js");
+
 //Libs
 include("lib/jscookie.min.js");
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/quickhull.js");
-
-//Core modules
-include("core/utils/Mesh2shape.js");
 
 //Internal modules
 include("editor/ui/element/Bar.js");
@@ -260,6 +260,7 @@ include("editor/helpers/BoundingBoxHelper.js");
 include("editor/helpers/GridHelper.js");
 include("editor/helpers/RectAreaLightHelper.js");
 
+include("editor/utils/Mesh2shape.js");
 include("editor/utils/FontRenderer.js");
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
