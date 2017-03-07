@@ -2,10 +2,9 @@
 
 function Editor(){}
 
-//Nunu global
+//Runtime
 include("Nunu.js");
 
-//Runtime dependencies
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
 include("lib/three/animation/Animation.js");
@@ -19,7 +18,6 @@ include("lib/SPE.min.js");
 include("lib/spine.min.js");
 include("lib/opentype.min.js");
 
-//Core runtime modules
 include("core/Global.js");
 include("core/FileSystem.js");
 
@@ -93,7 +91,7 @@ include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/BufferUtils.js");
 
-//Codemirror
+//Editor
 include("lib/codemirror/codemirror.min.js");
 include("lib/codemirror/codemirror.css");
 include("lib/codemirror/keymap/sublime.js");
@@ -120,7 +118,6 @@ include("lib/codemirror/addon/lint/lint.js");
 include("lib/codemirror/addon/lint/javascript-lint.js");
 include("lib/codemirror/theme/*");
 
-//threejs
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/VRMLLoader.js");
@@ -136,13 +133,11 @@ include("lib/three/loaders/PCDLoader.js");
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
 
-//Libs
 include("lib/jscookie.min.js");
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/quickhull.js");
 
-//Internal modules
 include("editor/ui/element/Bar.js");
 include("editor/ui/element/Button.js");
 include("editor/ui/element/Text.js");

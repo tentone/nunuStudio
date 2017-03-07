@@ -13477,11 +13477,13 @@
 
 			}
 
-			data.vertices = vertices;
-			data.normals = normals;
-			if ( colors.length > 0 ) data.colors = colors;
-			if ( uvs.length > 0 ) data.uvs = [ uvs ]; // temporal backward compatibility
-			data.faces = faces;
+			data.data = {};
+
+			data.data.vertices = vertices;
+			data.data.normals = normals;
+			if ( colors.length > 0 ) data.data.colors = colors;
+			if ( uvs.length > 0 ) data.data.uvs = [ uvs ]; // temporal backward compatibility
+			data.data.faces = faces;
 
 			return data;
 
@@ -23080,8 +23082,6 @@
 
 	function Skeleton( bones, boneInverses ) {
 
-		this.identityMatrix = new Matrix4();
-
 		// copy the bone array
 
 		bones = bones || [];
@@ -23107,7 +23107,7 @@
 
 				this.boneInverses = [];
 
-				for ( var b = 0, bl = this.bones.length; b < bl; b ++ ) {
+				for ( var i = 0, il = this.bones.length; i < il; i ++ ) {
 
 					this.boneInverses.push( new Matrix4() );
 
@@ -23125,13 +23125,13 @@
 
 			this.boneInverses = [];
 
-			for ( var b = 0, bl = this.bones.length; b < bl; b ++ ) {
+			for ( var i = 0, il = this.bones.length; i < il; i ++ ) {
 
 				var inverse = new Matrix4();
 
-				if ( this.bones[ b ] ) {
+				if ( this.bones[ i ] ) {
 
-					inverse.getInverse( this.bones[ b ].matrixWorld );
+					inverse.getInverse( this.bones[ i ].matrixWorld );
 
 				}
 
@@ -23143,17 +23143,17 @@
 
 		pose: function () {
 
-			var bone;
+			var bone, i, il;
 
 			// recover the bind-time world matrices
 
-			for ( var b = 0, bl = this.bones.length; b < bl; b ++ ) {
+			for ( i = 0, il = this.bones.length; i < il; i ++ ) {
 
-				bone = this.bones[ b ];
+				bone = this.bones[ i ];
 
 				if ( bone ) {
 
-					bone.matrixWorld.getInverse( this.boneInverses[ b ] );
+					bone.matrixWorld.getInverse( this.boneInverses[ i ] );
 
 				}
 
@@ -23161,9 +23161,9 @@
 
 			// compute the local matrices, positions, rotations and scales
 
-			for ( var b = 0, bl = this.bones.length; b < bl; b ++ ) {
+			for ( i = 0, il = this.bones.length; i < il; i ++ ) {
 
-				bone = this.bones[ b ];
+				bone = this.bones[ i ];
 
 				if ( bone ) {
 
@@ -23189,6 +23189,7 @@
 		update: ( function () {
 
 			var offsetMatrix = new Matrix4();
+			var identityMatrix = new Matrix4();
 
 			return function update() {
 
@@ -23199,14 +23200,14 @@
 
 				// flatten bone matrices to array
 
-				for ( var b = 0, bl = bones.length; b < bl; b ++ ) {
+				for ( var i = 0, il = bones.length; i < il; i ++ ) {
 
 					// compute the offset between the current and the original transform
 
-					var matrix = bones[ b ] ? bones[ b ].matrixWorld : this.identityMatrix;
+					var matrix = bones[ i ] ? bones[ i ].matrixWorld : identityMatrix;
 
-					offsetMatrix.multiplyMatrices( matrix, boneInverses[ b ] );
-					offsetMatrix.toArray( boneMatrices, b * 16 );
+					offsetMatrix.multiplyMatrices( matrix, boneInverses[ i ] );
+					offsetMatrix.toArray( boneMatrices, i * 16 );
 
 				}
 
@@ -23264,58 +23265,16 @@
 
 		this.type = 'SkinnedMesh';
 
-		this.bindMode = "attached";
+		this.bindMode = 'attached';
 		this.bindMatrix = new Matrix4();
 		this.bindMatrixInverse = new Matrix4();
 
-		// init bones
+		var bones = this.initBones();
+		var skeleton = new Skeleton( bones );
 
-		// TODO: remove bone creation as there is no reason (other than
-		// convenience) for THREE.SkinnedMesh to do this.
-
-		var bones = [];
-
-		if ( this.geometry && this.geometry.bones !== undefined ) {
-
-			var bone, gbone;
-
-			for ( var b = 0, bl = this.geometry.bones.length; b < bl; ++ b ) {
-
-				gbone = this.geometry.bones[ b ];
-
-				bone = new Bone();
-				bones.push( bone );
-
-				bone.name = gbone.name;
-				bone.position.fromArray( gbone.pos );
-				bone.quaternion.fromArray( gbone.rotq );
-				if ( gbone.scl !== undefined ) bone.scale.fromArray( gbone.scl );
-
-			}
-
-			for ( var b = 0, bl = this.geometry.bones.length; b < bl; ++ b ) {
-
-				gbone = this.geometry.bones[ b ];
-
-				if ( gbone.parent !== - 1 && gbone.parent !== null &&
-						bones[ gbone.parent ] !== undefined ) {
-
-					bones[ gbone.parent ].add( bones[ b ] );
-
-				} else {
-
-					this.add( bones[ b ] );
-
-				}
-
-			}
-
-		}
+		this.bind( skeleton, this.matrixWorld );
 
 		this.normalizeSkinWeights();
-
-		this.updateMatrixWorld( true );
-		this.bind( new Skeleton( bones ), this.matrixWorld );
 
 	}
 
@@ -23324,6 +23283,66 @@
 		constructor: SkinnedMesh,
 
 		isSkinnedMesh: true,
+
+		initBones: function () {
+
+			var bones = [], bone, gbone;
+			var i, il;
+
+			if ( this.geometry && this.geometry.bones !== undefined ) {
+
+				// first, create array of 'Bone' objects from geometry data
+
+				for ( i = 0, il = this.geometry.bones.length; i < il; i ++ ) {
+
+					gbone = this.geometry.bones[ i ];
+
+					// create new 'Bone' object
+
+					bone = new Bone();
+					bones.push( bone );
+
+					// apply values
+
+					bone.name = gbone.name;
+					bone.position.fromArray( gbone.pos );
+					bone.quaternion.fromArray( gbone.rotq );
+					if ( gbone.scl !== undefined ) bone.scale.fromArray( gbone.scl );
+
+				}
+
+				// second, create bone hierarchy
+
+				for ( i = 0, il = this.geometry.bones.length; i < il; i ++ ) {
+
+					gbone = this.geometry.bones[ i ];
+
+					if ( ( gbone.parent !== - 1 ) && ( gbone.parent !== null ) && ( bones[ gbone.parent ] !== undefined ) ) {
+
+						// subsequent bones in the hierarchy
+
+						bones[ gbone.parent ].add( bones[ i ] );
+
+					} else {
+
+						// topmost bone, immediate child of the skinned mesh
+
+						this.add( bones[ i ] );
+
+					}
+
+				}
+
+			}
+
+			// now the bones are part of the scene graph and children of the skinned mesh.
+			// let's update the corresponding matrices
+
+			this.updateMatrixWorld( true );
+
+			return bones;
+
+		},
 
 		bind: function ( skeleton, bindMatrix ) {
 
@@ -23352,13 +23371,15 @@
 
 		normalizeSkinWeights: function () {
 
+			var scale, i;
+
 			if ( this.geometry && this.geometry.isGeometry ) {
 
-				for ( var i = 0; i < this.geometry.skinWeights.length; i ++ ) {
+				for ( i = 0; i < this.geometry.skinWeights.length; i ++ ) {
 
 					var sw = this.geometry.skinWeights[ i ];
 
-					var scale = 1.0 / sw.lengthManhattan();
+					scale = 1.0 / sw.lengthManhattan();
 
 					if ( scale !== Infinity ) {
 
@@ -23378,14 +23399,14 @@
 
 				var skinWeight = this.geometry.attributes.skinWeight;
 
-				for ( var i = 0; i < skinWeight.count; i ++ ) {
+				for ( i = 0; i < skinWeight.count; i ++ ) {
 
 					vec.x = skinWeight.getX( i );
 					vec.y = skinWeight.getY( i );
 					vec.z = skinWeight.getZ( i );
 					vec.w = skinWeight.getW( i );
 
-					var scale = 1.0 / vec.lengthManhattan();
+					scale = 1.0 / vec.lengthManhattan();
 
 					if ( scale !== Infinity ) {
 
@@ -23405,21 +23426,21 @@
 
 		},
 
-		updateMatrixWorld: function () {
+		updateMatrixWorld: function ( force ) {
 
-			Mesh.prototype.updateMatrixWorld.call( this, true );
+			Mesh.prototype.updateMatrixWorld.call( this, force );
 
-			if ( this.bindMode === "attached" ) {
+			if ( this.bindMode === 'attached' ) {
 
 				this.bindMatrixInverse.getInverse( this.matrixWorld );
 
-			} else if ( this.bindMode === "detached" ) {
+			} else if ( this.bindMode === 'detached' ) {
 
 				this.bindMatrixInverse.getInverse( this.bindMatrix );
 
 			} else {
 
-				console.warn( 'THREE.SkinnedMesh unrecognized bindMode: ' + this.bindMode );
+				console.warn( 'THREE.SkinnedMesh: Unrecognized bindMode: ' + this.bindMode );
 
 			}
 
@@ -26741,11 +26762,9 @@
 
 			}
 			
-			if (options.extrudeMaterial !== undefined){
-				
-				scope.addGroup( start, verticesArray.length/3 -start, options.extrudeMaterial !== undefined ? options.extrudeMaterial : 1);
-				
-			}
+
+			scope.addGroup( start, verticesArray.length/3 -start, options.extrudeMaterial !== undefined ? options.extrudeMaterial : 1);
+
 
 		}
 
@@ -32642,21 +32661,9 @@
 
 		},
 
-		parse: function ( json, texturePath ) {
+		parse: ( function () {
 
-			var geometry = new Geometry(),
-			scale = ( json.scale !== undefined ) ? 1.0 / json.scale : 1.0;
-
-			parseModel( scale );
-
-			parseSkin();
-			parseMorphing( scale );
-			parseAnimations();
-
-			geometry.computeFaceNormals();
-			geometry.computeBoundingSphere();
-
-			function parseModel( scale ) {
+			function parseModel( json, geometry ) {
 
 				function isBitSet( value, position ) {
 
@@ -32666,27 +32673,30 @@
 
 				var i, j, fi,
 
-				offset, zLength,
+					offset, zLength,
 
-			colorIndex, normalIndex, uvIndex, materialIndex,
+					colorIndex, normalIndex, uvIndex, materialIndex,
 
-				type,
-				isQuad,
-				hasMaterial,
-				hasFaceVertexUv,
-				hasFaceNormal, hasFaceVertexNormal,
-				hasFaceColor, hasFaceVertexColor,
+					type,
+					isQuad,
+					hasMaterial,
+					hasFaceVertexUv,
+					hasFaceNormal, hasFaceVertexNormal,
+					hasFaceColor, hasFaceVertexColor,
 
-			vertex, face, faceA, faceB, hex, normal,
+					vertex, face, faceA, faceB, hex, normal,
 
-				uvLayer, uv, u, v,
+					uvLayer, uv, u, v,
 
-				faces = json.faces,
-				vertices = json.vertices,
-				normals = json.normals,
-				colors = json.colors,
+					faces = json.faces,
+					vertices = json.vertices,
+					normals = json.normals,
+					colors = json.colors,
 
-				nUvLayers = 0;
+					scale = json.scale,
+
+					nUvLayers = 0;
+
 
 				if ( json.uvs !== undefined ) {
 
@@ -32728,14 +32738,13 @@
 
 					type = faces[ offset ++ ];
 
-
-					isQuad              = isBitSet( type, 0 );
-					hasMaterial         = isBitSet( type, 1 );
-					hasFaceVertexUv     = isBitSet( type, 3 );
-					hasFaceNormal       = isBitSet( type, 4 );
+					isQuad = isBitSet( type, 0 );
+					hasMaterial = isBitSet( type, 1 );
+					hasFaceVertexUv = isBitSet( type, 3 );
+					hasFaceNormal = isBitSet( type, 4 );
 					hasFaceVertexNormal = isBitSet( type, 5 );
-					hasFaceColor	     = isBitSet( type, 6 );
-					hasFaceVertexColor  = isBitSet( type, 7 );
+					hasFaceColor = isBitSet( type, 6 );
+					hasFaceVertexColor = isBitSet( type, 7 );
 
 					// console.log("type", type, "bits", isQuad, hasMaterial, hasFaceVertexUv, hasFaceNormal, hasFaceVertexNormal, hasFaceColor, hasFaceVertexColor);
 
@@ -32956,7 +32965,7 @@
 
 			}
 
-			function parseSkin() {
+			function parseSkin( json, geometry ) {
 
 				var influencesPerVertex = ( json.influencesPerVertex !== undefined ) ? json.influencesPerVertex : 2;
 
@@ -32964,7 +32973,7 @@
 
 					for ( var i = 0, l = json.skinWeights.length; i < l; i += influencesPerVertex ) {
 
-						var x =                               json.skinWeights[ i ];
+						var x = json.skinWeights[ i ];
 						var y = ( influencesPerVertex > 1 ) ? json.skinWeights[ i + 1 ] : 0;
 						var z = ( influencesPerVertex > 2 ) ? json.skinWeights[ i + 2 ] : 0;
 						var w = ( influencesPerVertex > 3 ) ? json.skinWeights[ i + 3 ] : 0;
@@ -32979,7 +32988,7 @@
 
 					for ( var i = 0, l = json.skinIndices.length; i < l; i += influencesPerVertex ) {
 
-						var a =                               json.skinIndices[ i ];
+						var a = json.skinIndices[ i ];
 						var b = ( influencesPerVertex > 1 ) ? json.skinIndices[ i + 1 ] : 0;
 						var c = ( influencesPerVertex > 2 ) ? json.skinIndices[ i + 2 ] : 0;
 						var d = ( influencesPerVertex > 3 ) ? json.skinIndices[ i + 3 ] : 0;
@@ -33001,7 +33010,9 @@
 
 			}
 
-			function parseMorphing( scale ) {
+			function parseMorphing( json, geometry ) {
+
+				var scale = json.scale;
 
 				if ( json.morphTargets !== undefined ) {
 
@@ -33046,7 +33057,7 @@
 
 			}
 
-			function parseAnimations() {
+			function parseAnimations( json, geometry ) {
 
 				var outputAnimations = [];
 
@@ -33093,19 +33104,50 @@
 
 			}
 
-			if ( json.materials === undefined || json.materials.length === 0 ) {
+			return function ( json, texturePath ) {
 
-				return { geometry: geometry };
+				if ( json.data !== undefined ) {
 
-			} else {
+					// Geometry 4.0 spec
+					json = json.data;
 
-				var materials = Loader.prototype.initMaterials( json.materials, texturePath, this.crossOrigin );
+				}
 
-				return { geometry: geometry, materials: materials };
+				if ( json.scale !== undefined ) {
 
-			}
+					json.scale = 1.0 / json.scale;
 
-		}
+				} else {
+
+					json.scale = 1.0;
+
+				}
+
+				var geometry = new Geometry();
+
+				parseModel( json, geometry );
+				parseSkin( json, geometry );
+				parseMorphing( json, geometry );
+				parseAnimations( json, geometry );
+
+				geometry.computeFaceNormals();
+				geometry.computeBoundingSphere();
+
+				if ( json.materials === undefined || json.materials.length === 0 ) {
+
+					return { geometry: geometry };
+
+				} else {
+
+					var materials = Loader.prototype.initMaterials( json.materials, texturePath, this.crossOrigin );
+
+					return { geometry: geometry, materials: materials };
+
+				}
+
+			};
+
+		} )()
 
 	} );
 
