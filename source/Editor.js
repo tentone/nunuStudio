@@ -91,6 +91,10 @@ include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/BufferUtils.js");
 
+//Tests
+include("test/TDSLoader.js");
+include("test/jdataview.js");
+
 //Editor
 include("lib/codemirror/codemirror.min.js");
 include("lib/codemirror/codemirror.css");
@@ -1736,6 +1740,18 @@ Editor.loadGeometry = function(file, onLoad)
 			Editor.addToScene(obj);
 		};
 		reader.readAsText(file);
+	}
+	//3DS
+	else if(extension === "3ds")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.TDSLoader();
+			var group = loader.parse(reader.result);
+			Editor.addToScene(group);
+		};
+		reader.readAsBinaryString(file);
 	}
 	//Collada
 	else if(extension === "dae")
