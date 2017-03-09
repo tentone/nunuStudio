@@ -1853,9 +1853,9 @@ Editor.loadGeometry = function(file, onLoad)
 		reader.onload = function()
 		{
 			var loader = new THREE.PCDLoader();
-			var pcd = loader.parse(file.result, file.name);
-			pcd.name = FileSystem.getFileName(file);
+			var pcd = loader.parse(reader.result, file.name);
 			pcd.material.name = "points";
+
 			Editor.addToScene(pcd);
 		};
 		reader.readAsArrayBuffer(file);

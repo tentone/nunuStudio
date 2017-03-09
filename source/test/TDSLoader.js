@@ -134,38 +134,50 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 			material.name = this.readString(data, 64);
 			console.log("   Name: " + material.name);
 		}
+		else if(next === MAT_WIRE)
+		{
+			var value = this.readByte(data);
+			console.log("   Wireframe: " + value);
+			//material.wireframe = true;
+		}
+		else if(next === MAT_TWO_SIDE)
+		{
+			var value = this.readByte(data);
+			console.log("   DoubleSided: " + value);
+			//TODO <ADD CODE HERE>
+		}
 		else if(next === MAT_AMBIENT)
 		{
-			material.color = this.readColor(data);
-			console.log("   Ambient Color: " + material.color);
+			console.log("   Ambient color");
+			material.emissive = this.readColor(data);
 		}
 		else if(next === MAT_DIFFUSE)
 		{
-			var diffuseColor = this.readColor(data);
-			console.log("   Diffuse Color: " + diffuseColor);
-			//TODO <ADD CODE HERE>
+			console.log("   Diffuse Color");
+			material.color = this.readColor(data);
 		}
 		else if(next === MAT_SPECULAR)
 		{
+			console.log("   Specular Color");
 			material.specular = this.readColor(data);
-			console.log("   Specular Color: " + material.specular);
 		}
 		else if(next === MAT_TEXMAP)
 		{
-			var map = this.readString(data, 64);
-			console.log("   Map : " + map);
+			console.log("   Map");
+			var map = this.readMap(data);
 			//TODO <ADD CODE HERE>
 		}
 		else if(next === MAT_BUMPMAP)
 		{
-			var bumpMap = this.readString(data, 64);
-			console.log("   Bump : " + bumpMap);
+			console.log("   BumpMap");
+			var bumpMap = this.readMap(data);
 			//TODO <ADD CODE HERE>
 		}
 		else if(next === MAT_SHININESS)
 		{
 			var shininess = this.readByte(data);
 			console.log("   Shininess : " + shininess);
+			//TODO <ADD CODE HERE>
 		}
 		else
 		{
@@ -191,18 +203,24 @@ THREE.TDSLoader.prototype.readColor = function(data)
 		var r = this.readByte(data);
 		var g = this.readByte(data);
 		var b = this.readByte(data);
-		color.setHex(r << 16 | g << 8 | b);
+
+		color.setRGB(r / 255, g / 255, b / 255);
+
+		console.log("      Color: " + color.r + ", " + color.g + ", " + color.b);
 	}
 	else if(chunk.id === COLOR_F || chunk.id === LIN_COLOR_F)
 	{
 		var r = this.readFloat(data);
 		var g = this.readFloat(data);
 		var b = this.readFloat(data);
+		
 		color.setRGB(r, g, b);
+
+		console.log("      Color: " + color.r + ", " + color.g + ", " + color.b);
 	}
 	else
 	{
-		console.log("   Unknown color chunk: " + c.toString(16));
+		console.log("      Unknown color chunk: " + c.toString(16));
 	}
 
 	this.endChunk(chunk);
@@ -250,6 +268,7 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 		else if(next === TEX_VERTS)
 		{
 			var texels = this.readWord(data);
+
 			for(var i = 0; i < texels; i++)
 			{
 				geometry.faceVertexUvs.push(new THREE.Vector2(this.readFloat(data), this.readFloat(data)));
@@ -342,6 +361,30 @@ THREE.TDSLoader.prototype.readFaceArray = function(data, mesh)
 
 	this.endChunk(chunk);
 };
+
+//Read texture map
+THREE.TDSLoader.prototype.readMap = function(data)
+{
+	var chunk = this.readChunk(data);
+	var next = this.nextChunk(data, chunk);
+
+	while(next !== 0)
+	{
+		if(next === MAT_MAPNAME)
+		{
+			var name = this.readString(data, 128);
+			console.log("      MapName: " + name);
+		}
+		else
+		{
+			console.log("Unknown named object chunk: " + next.toString(16));
+		}
+
+		next = this.nextChunk(data, chunk);
+	}
+
+	this.endChunk(chunk);
+}
 
 //Read material group
 THREE.TDSLoader.prototype.readMaterialGroup = function(data)
