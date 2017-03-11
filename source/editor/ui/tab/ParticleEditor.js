@@ -586,9 +586,6 @@ ParticleEditor.prototype.activate = function()
 //Update material editor
 ParticleEditor.prototype.update = function()
 {
-	//Main division
-	this.main.update();
-
 	//Graphs
 	this.opacity.update();
 	this.scale.update();

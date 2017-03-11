@@ -149,7 +149,7 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 		else if(next === MAT_AMBIENT)
 		{
 			console.log("   Ambient color");
-			material.emissive = this.readColor(data);
+			//material.emissive = this.readColor(data);
 		}
 		else if(next === MAT_DIFFUSE)
 		{
@@ -271,7 +271,7 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 
 			for(var i = 0; i < texels; i++)
 			{
-				geometry.faceVertexUvs.push(new THREE.Vector2(this.readFloat(data), this.readFloat(data)));
+				//geometry.faceVertexUvs.push(new THREE.Vector2(this.readFloat(data), this.readFloat(data)));
 			}
 
 			console.log("   UV: " + texels);
