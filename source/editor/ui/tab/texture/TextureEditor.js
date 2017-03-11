@@ -251,7 +251,6 @@ TextureEditor.prototype.attach = function(texture)
 //Update
 TextureEditor.prototype.update = function()
 {
-	this.division.update();
 	this.renderer.render(this.scene, this.camera);
 }
 

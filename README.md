@@ -83,6 +83,8 @@
 	- Added support for Textures as scene background
 	- Drag and drop CubeTextures
 	- Drag and drop tabs in editor
+- V0.8.9.22 Alpha
+	- Removed editor state, tabs are self updated
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

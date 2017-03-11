@@ -34,8 +34,8 @@
 function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
-Nunu.VERSION = "V0.8.9.21 Alpha";
-Nunu.TIMESTAMP = "201703111521";
+Nunu.VERSION = "V0.8.9.22 Alpha";
+Nunu.TIMESTAMP = "201703112258";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -34130,8 +34130,8 @@ THREE.TDSLoader.prototype.readMeshData = function(a) {
 };
 THREE.TDSLoader.prototype.readMaterialEntry = function(a) {
   for (var b = this.readChunk(a), e = this.nextChunk(a, b), d = new THREE.MeshPhongMaterial;0 !== e;) {
-    e === MAT_NAME ? (d.name = this.readString(a, 64), console.log("   Name: " + d.name)) : e === MAT_WIRE ? (e = this.readByte(a), console.log("   Wireframe: " + e)) : e === MAT_TWO_SIDE ? (e = this.readByte(a), console.log("   DoubleSided: " + e)) : e === MAT_AMBIENT ? (console.log("   Ambient color"), d.emissive = this.readColor(a)) : e === MAT_DIFFUSE ? (console.log("   Diffuse Color"), d.color = this.readColor(a)) : e === MAT_SPECULAR ? (console.log("   Specular Color"), d.specular = this.readColor(a)) : 
-    e === MAT_TEXMAP ? (console.log("   Map"), this.readMap(a)) : e === MAT_BUMPMAP ? (console.log("   BumpMap"), this.readMap(a)) : e === MAT_SHININESS ? (e = this.readByte(a), console.log("   Shininess : " + e)) : console.log("   Unknown material chunk: " + e.toString(16)), e = this.nextChunk(a, b);
+    e === MAT_NAME ? (d.name = this.readString(a, 64), console.log("   Name: " + d.name)) : e === MAT_WIRE ? (e = this.readByte(a), console.log("   Wireframe: " + e)) : e === MAT_TWO_SIDE ? (e = this.readByte(a), console.log("   DoubleSided: " + e)) : e === MAT_AMBIENT ? console.log("   Ambient color") : e === MAT_DIFFUSE ? (console.log("   Diffuse Color"), d.color = this.readColor(a)) : e === MAT_SPECULAR ? (console.log("   Specular Color"), d.specular = this.readColor(a)) : e === MAT_TEXMAP ? (console.log("   Map"), 
+    this.readMap(a)) : e === MAT_BUMPMAP ? (console.log("   BumpMap"), this.readMap(a)) : e === MAT_SHININESS ? (e = this.readByte(a), console.log("   Shininess : " + e)) : console.log("   Unknown material chunk: " + e.toString(16)), e = this.nextChunk(a, b);
   }
   this.endChunk(b);
   this.materials[d.name] = d;
@@ -34169,7 +34169,6 @@ THREE.TDSLoader.prototype.readMesh = function(a) {
           if (e === TEX_VERTS) {
             k = this.readWord(a);
             for (e = 0;e < k;e++) {
-              d.faceVertexUvs.push(new THREE.Vector2(this.readFloat(a), this.readFloat(a)));
             }
             console.log("   UV: " + k);
           } else {
@@ -64148,7 +64147,6 @@ ParticleEditor.prototype.activate = function() {
   Editor.mouse.setCanvas(this.canvas.element);
 };
 ParticleEditor.prototype.update = function() {
-  this.main.update();
   this.opacity.update();
   this.scale.update();
   this.angle.update();
@@ -65787,7 +65785,6 @@ TextureEditor.prototype.attach = function(a) {
   this.flipY.setValue(a.flipY);
 };
 TextureEditor.prototype.update = function() {
-  this.division.update();
   this.renderer.render(this.scene, this.camera);
 };
 TextureEditor.prototype.updateInterface = function() {
@@ -69556,7 +69553,6 @@ Editor.initialize = function() {
   Editor.update();
 };
 Editor.update = function() {
-  requestAnimationFrame(Editor.update);
   Editor.mouse.update();
   Editor.keyboard.update();
   null !== Editor.stats && Editor.stats.begin();
@@ -69611,6 +69607,7 @@ Editor.update = function() {
   } else {
     Editor.state === Editor.STATE_TESTING && (Editor.programRunning.update(), Editor.keyboard.keyJustPressed(Keyboard.F5) && Editor.setState(Editor.STATE_EDITING));
   }
+  requestAnimationFrame(Editor.update);
   Editor.render();
 };
 Editor.render = function() {

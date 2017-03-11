@@ -473,8 +473,6 @@ Editor.initialize = function()
 //Update Editor
 Editor.update = function()
 {
-	requestAnimationFrame(Editor.update);
-
 	//Update input
 	Editor.mouse.update();
 	Editor.keyboard.update();
@@ -751,6 +749,8 @@ Editor.update = function()
 		}
 	}
 
+	requestAnimationFrame(Editor.update);
+	
 	Editor.render();
 };
 
