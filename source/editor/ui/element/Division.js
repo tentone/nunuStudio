@@ -31,25 +31,23 @@ Division.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-Division.prototype.update = function(){};
-
 //Update division Size
 Division.prototype.updateInterface = function()
 {
 	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
+		
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
 
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };

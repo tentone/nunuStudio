@@ -61,9 +61,6 @@ CheckBox.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-CheckBox.prototype.update = function(){}
-
 //Update Interface
 CheckBox.prototype.updateInterface = function()
 {

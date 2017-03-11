@@ -40,9 +40,6 @@ Canvas.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-Canvas.prototype.update = function(){};
-
 //Update division Size
 Canvas.prototype.updateInterface = function()
 {

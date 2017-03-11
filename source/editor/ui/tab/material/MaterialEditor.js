@@ -323,7 +323,7 @@ MaterialEditor.prototype.isAttached = function(material)
 //Activate
 MaterialEditor.prototype.activate = function()
 {
-	this.active = true;
+	TabElement.prototype.activate.call(this);
 	
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();
@@ -353,10 +353,6 @@ MaterialEditor.prototype.updateMetadata = function()
 //Update material editor
 MaterialEditor.prototype.update = function()
 {
-	//Update UI
-	this.main.update();
-	this.preview.update();
-
 	//Render Material
 	if(this.material !== null)
 	{

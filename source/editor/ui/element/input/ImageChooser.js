@@ -105,9 +105,6 @@ ImageChooser.prototype.destroy = function()
 	catch(e){}
 }
 
-//Update
-ImageChooser.prototype.update = function(){}
-
 //Set image from URL
 ImageChooser.prototype.setImage = function(url)
 {

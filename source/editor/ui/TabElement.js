@@ -51,6 +51,22 @@ TabElement.prototype.updateMetadata = function(){}
 TabElement.prototype.activate = function()
 {
 	this.active = true;
+
+	if(this.update !== undefined)
+	{
+		var self = this;
+
+		var update = function()
+		{
+			self.update();
+			if(self.active)
+			{
+				requestAnimationFrame(update);
+			}
+		}
+
+		update();
+	}
 }
 
 //Deactivate tab
@@ -67,9 +83,6 @@ TabElement.prototype.isAttached = function(obj)
 {
 	return false;
 }
-
-//Update
-TabElement.prototype.update = function(){}
 
 //Close tab
 TabElement.prototype.close = function()

@@ -24,19 +24,10 @@ function DivisionResizable(parent)
 
 	//Create division resize tab
 	this.resizeTab = document.createElement("div");
+	this.resizeTab.draggable = false;
 	this.resizeTab.style.position = "absolute";
 	this.resizeTab.style.cursor = "e-resize";
 	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
-
-	this.resizeTab.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	this.resizeTab.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
 
 	//Attributes
 	this.size = new THREE.Vector2(0,0);
@@ -48,17 +39,78 @@ function DivisionResizable(parent)
 	this.resizeSizeMin = 0;
 	this.resizeTabSize = 5;
 	this.resizableSide = DivisionResizable.LEFT;
-	this.resizing = false;
 
 	//Self pointer
 	var self = this;
+	var resizing = false;
 
 	//On mouse down start resizing
 	this.resizeTab.onmousedown = function(event)
 	{
-		self.resizing = true;
+		resizing = true;
+		requestAnimationFrame(resizeDivision);
 	};
 
+	var resizeDivision = function()
+	{
+		if(Editor.mouse.buttonPressed(Mouse.LEFT))
+		{
+			if(self.resizableSide === DivisionResizable.LEFT)
+			{	
+				self.size.x -= Editor.mouse.delta.x;
+			}
+			else if(self.resizableSide === DivisionResizable.RIGHT)
+			{
+				self.size.x += Editor.mouse.delta.x;
+			}
+			else if(self.resizableSide === DivisionResizable.TOP)
+			{
+				self.size.y -= Editor.mouse.delta.y;
+			}
+			else if(self.resizableSide === DivisionResizable.BOTTOM)
+			{
+				self.size.y += Editor.mouse.delta.y;
+			}
+
+			//Limit Size
+			if(self.resizableSide === DivisionResizable.BOTTOM || self.resizableSide === DivisionResizable.TOP)
+			{
+				if(self.size.y < (self.resizeTabSize + self.resizeSizeMin))
+				{
+					self.size.y = self.resizeTabSize + self.resizeSizeMin;
+				}
+				else if(self.size.y > self.resizeSizeMax)
+				{
+					self.size.y = self.resizeSizeMax;
+				}
+			}
+			else
+			{
+				if(self.size.x < (self.resizeTabSize + self.resizeSizeMin))
+				{
+					self.size.x = (self.resizeTabSize + self.resizeSizeMin);
+				}
+				else if(self.size.x > self.resizeSizeMax)
+				{
+					self.size.x = self.resizeSizeMax;
+				}	
+			}
+
+			//onResize callback
+			self.onResize();
+		}
+		else
+		{
+			resizing = false;
+		}
+
+		if(resizing)
+		{
+			requestAnimationFrame(resizeDivision);
+		}
+	};
+
+	//onResize callback
 	this.onResize = function()
 	{
 		Interface.updateInterface();
@@ -89,64 +141,6 @@ DivisionResizable.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-};
-
-//Update status
-DivisionResizable.prototype.update = function()
-{
-	if(this.resizing)
-	{
-		if(Editor.mouse.buttonPressed(Mouse.LEFT))
-		{
-			if(this.resizableSide === DivisionResizable.LEFT)
-			{	
-				this.size.x -= Editor.mouse.delta.x;
-			}
-			else if(this.resizableSide === DivisionResizable.RIGHT)
-			{
-				this.size.x += Editor.mouse.delta.x;
-			}
-			else if(this.resizableSide === DivisionResizable.TOP)
-			{
-				this.size.y -= Editor.mouse.delta.y;
-			}
-			else if(this.resizableSide === DivisionResizable.BOTTOM)
-			{
-				this.size.y += Editor.mouse.delta.y;
-			}
-
-			//Limit Size
-			if(this.resizableSide === DivisionResizable.BOTTOM || this.resizableSide === DivisionResizable.TOP)
-			{
-				if(this.size.y < (this.resizeTabSize + this.resizeSizeMin))
-				{
-					this.size.y = this.resizeTabSize + this.resizeSizeMin;
-				}
-				else if(this.size.y > this.resizeSizeMax)
-				{
-					this.size.y = this.resizeSizeMax;
-				}
-			}
-			else
-			{
-				if(this.size.x < (this.resizeTabSize + this.resizeSizeMin))
-				{
-					this.size.x = (this.resizeTabSize + this.resizeSizeMin);
-				}
-				else if(this.size.x > this.resizeSizeMax)
-				{
-					this.size.x = this.resizeSizeMax;
-				}	
-			}
-
-			//onResize callback
-			this.onResize();
-		}
-		else
-		{
-			this.resizing = false;
-		}
-	}
 };
 
 //Update DivisionResizable Size

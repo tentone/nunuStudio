@@ -78,9 +78,6 @@ Button.prototype.destroy = function()
 	}
 };
 
-//Update status
-Button.prototype.update = function(){};
-
 //Set button callback function
 Button.prototype.setCallback = function(callback)
 {

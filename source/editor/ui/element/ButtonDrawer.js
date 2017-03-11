@@ -170,9 +170,6 @@ ButtonDrawer.prototype.setImage = function(image)
 	this.img.src = this.image;
 };
 
-//Update
-ButtonDrawer.prototype.update = function(){};
-
 //Updates drawer panel size
 ButtonDrawer.prototype.updatePanelSize = function()
 {

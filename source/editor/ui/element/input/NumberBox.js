@@ -70,9 +70,6 @@ NumberBox.prototype.destroy = function()
 	catch(e){}
 }
 
-//Update
-NumberBox.prototype.update = function(){}
-
 //Update Interface
 NumberBox.prototype.updateInterface = function()
 {

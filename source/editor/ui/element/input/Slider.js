@@ -97,9 +97,6 @@ Slider.prototype.destroy = function()
 	catch(e){}
 }
 
-//Update
-Slider.prototype.update = function(){}
-
 //Update Interface
 Slider.prototype.updateInterface = function()
 {

@@ -307,12 +307,15 @@ Editor.initialize = function()
 	//Disable body overflow
 	document.body.style.overflow = "hidden";
 	
-	//If running on browser disable CTRL+key and F5
+	//If running on browser disable some key combinations
 	if(!Nunu.runningOnDesktop())
 	{
+		var allowedKeys = [67, 86, 65, 88];
+
 		document.onkeydown = function(event)
 		{
-			if(event.keyCode === 116 || event.ctrlKey === true && event.keyCode !== 67 && event.keyCode !== 86)
+			//If F1-F12 or CTRL+Key prevent default
+			if((event.keyCode > 112 && event.keyCode < 122) || (event.ctrlKey && allowedKeys.indexOf(event.keyCode) === -1))
 			{
 				event.preventDefault();
 			}
@@ -340,6 +343,12 @@ Editor.initialize = function()
 			Editor.exit();
 		};
 	}
+
+	//Disable context menu
+	document.body.oncontextmenu = function(event)
+	{
+		return false;
+	};
 
 	//Open ISP file if dragged to the window
 	document.body.ondrop = function(event)
@@ -477,7 +486,6 @@ Editor.update = function()
 	}
 
 	//Update editor interface
-	Interface.update();
 	Editor.isEditingObject = false;
 
 	//If not on test mode
@@ -562,10 +570,6 @@ Editor.update = function()
 			{
 				Editor.undo();
 			}
-			/*else if(Editor.keyboard.keyJustPressed(Keyboard.Y))
-			{
-				Editor.redo();
-			}*/
 		}
 
 		//Select objects
@@ -1935,7 +1939,6 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile("runtime/fullscreen.png", dir + "\\fullscreen.png");
 	FileSystem.copyFile("runtime/logo.png", dir + "\\logo.png");
 	FileSystem.copyFile("runtime/index.html", dir + "\\index.html");
-	//FileSystem.copyFile("lib/webvr-polyfill.min.js", dir + "\\webvr-polyfill.min.js");
 	FileSystem.copyFile("../build/nunu.min.js", dir + "\\nunu.min.js");
 	Editor.saveProgram(dir + "\\app.isp", true, true);
 };

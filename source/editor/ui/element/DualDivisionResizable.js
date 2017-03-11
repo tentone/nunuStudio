@@ -29,20 +29,11 @@ function DualDivisionResizable(parent)
 
 	//Resize tab
 	this.resizeTab = document.createElement("div");
+	this.resizeTab.draggable = false;
 	this.resizeTab.style.position = "absolute";
 	this.resizeTab.style.cursor = "e-resize";
 	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
 	this.element.appendChild(this.resizeTab);
-
-	this.resizeTab.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	this.resizeTab.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
 	
 	//Attributes
 	this.size = new THREE.Vector2(0,0);
@@ -55,17 +46,54 @@ function DualDivisionResizable(parent)
 	this.tabPositionMin = 0;
 	this.tabSize = 5;
 	this.orientation = DualDivisionResizable.HORIZONTAL;
-	this.resizing = false;
 
 	//Self pointer
 	var self = this;
+	var resizing = false;
 
 	//Tab mouse down
 	this.resizeTab.onmousedown = function(event)
 	{
-		self.resizing = true;
+		resizing = true;
+		requestAnimationFrame(resizeDivision);
 	};
 	
+	var resizeDivision = function()
+	{
+		if(Editor.mouse.buttonPressed(Mouse.LEFT))
+		{
+			if(self.orientation == DualDivisionResizable.HORIZONTAL)
+			{	
+				self.tabPosition += Editor.mouse.delta.x/self.size.x;
+			}
+			else if(self.orientation == DualDivisionResizable.VERTICAL)
+			{
+				self.tabPosition += Editor.mouse.delta.y/self.size.y;
+			}
+
+			//Limit tab position
+			if(self.tabPosition > self.tabPositionMax)
+			{
+				self.tabPosition = self.tabPositionMax;
+			}
+			else if(self.tabPosition < self.tabPositionMin)
+			{
+				self.tabPosition = self.tabPositionMin;
+			}
+
+			self.onResize();
+		}
+		else
+		{
+			resizing = false;
+		}
+
+		if(resizing)
+		{
+			requestAnimationFrame(resizeDivision);
+		}
+	};
+
 	//onResize callback
 	this.onResize = function()
 	{
@@ -94,42 +122,6 @@ DualDivisionResizable.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-};
-
-//Update status
-DualDivisionResizable.prototype.update = function()
-{
-	if(this.resizing)
-	{
-		if(Editor.mouse.buttonPressed(Mouse.LEFT))
-		{
-			if(this.orientation == DualDivisionResizable.HORIZONTAL)
-			{	
-				this.tabPosition += Editor.mouse.delta.x/this.size.x;
-			}
-			else if(this.orientation == DualDivisionResizable.VERTICAL)
-			{
-				this.tabPosition += Editor.mouse.delta.y/this.size.y;
-			}
-
-			//Limit tab position
-			if(this.tabPosition > this.tabPositionMax)
-			{
-				this.tabPosition = this.tabPositionMax;
-			}
-			else if(this.tabPosition < this.tabPositionMin)
-			{
-				this.tabPosition = this.tabPositionMin;
-			}
-
-			//onResize callback
-			this.onResize();
-		}
-		else
-		{
-			this.resizing = false;
-		}
-	}
 };
 
 //Update interface

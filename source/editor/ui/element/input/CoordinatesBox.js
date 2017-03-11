@@ -201,9 +201,6 @@ CoordinatesBox.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-CoordinatesBox.prototype.update = function(){};
-
 //Update Interface
 CoordinatesBox.prototype.updateInterface = function()
 {

@@ -56,9 +56,6 @@ TextBox.prototype.destroy = function()
 	catch(e){}
 }
 
-//Update
-TextBox.prototype.update = function(){}
-
 //Update Interface
 TextBox.prototype.updateInterface = function()
 {

@@ -95,9 +95,6 @@ DropdownList.prototype.destroy = function()
 	catch(e){}
 }
 
-//Update
-DropdownList.prototype.update = function(){}
-
 //Update Interface
 DropdownList.prototype.updateInterface = function()
 {

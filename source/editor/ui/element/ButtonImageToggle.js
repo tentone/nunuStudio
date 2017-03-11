@@ -79,9 +79,6 @@ ButtonImageToggle.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-ButtonImageToggle.prototype.update = function(){};
-
 //Set button callback function
 ButtonImageToggle.prototype.setCallback = function(callback)
 {

@@ -254,6 +254,7 @@ MaterialAsset.prototype.updateMetadata = function()
 		{
 			image.src = url;
 		});
+		
 		this.setText(this.material.name);
 	}
 };

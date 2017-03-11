@@ -92,9 +92,6 @@ Text.prototype.setVisibility = function(value)
 	}
 };
 
-//Update
-Text.prototype.update = function(){};
-
 //Update Interface
 Text.prototype.updateInterface = function()
 {
