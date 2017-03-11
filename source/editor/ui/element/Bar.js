@@ -39,9 +39,6 @@ Bar.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update Bar
-Bar.prototype.update = function(){};
-
 //Update division Size
 Bar.prototype.updateInterface = function()
 {	

@@ -306,7 +306,7 @@ SceneEditor.prototype.setFullscreen = function(value)
 //Activate scene editor
 SceneEditor.prototype.activate = function()
 {
-	this.active = true;
+	TabElement.prototype.activate.call(this);
 	
 	if(this.scene !== null)
 	{

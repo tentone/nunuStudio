@@ -6,6 +6,9 @@ function FontRenderer()
 	this.renderer = new THREE.WebGLRenderer({alpha: true});
 	this.renderer.setSize(128, 128);
 	
+	//Canvas
+	this.canvas = this.renderer.domElement;
+	
 	//Camera
 	this.camera = new OrthographicCamera(3, 1);
 
@@ -27,7 +30,7 @@ FontRenderer.prototype.setSize = function(x, y)
 }
 
 //Render material to internal canvas and copy image to html image element
-FontRenderer.prototype.renderFont = function(font, img)
+FontRenderer.prototype.renderFont = function(font, onRender)
 {
 	this.text.setFont(font);
 
@@ -42,15 +45,6 @@ FontRenderer.prototype.renderFont = function(font, img)
 	
 	this.renderer.render(this.scene, this.camera);
 
-	//Create image blob and set as image source
-	if(img !== undefined)
-	{
-		var canvas = this.renderer.domElement;
-		canvas.toBlob = canvas.toBlob || canvas.msToBlob;
-		canvas.toBlob(function(blob)
-		{
-			var url = URL.createObjectURL(blob);
-			img.src = url;
-		});
-	}
+	//Callback
+	onRender(this.canvas.toDataURL());
 }

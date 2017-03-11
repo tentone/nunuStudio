@@ -55,9 +55,6 @@ ContextMenu.prototype.destroy = function()
 	}
 }
 
-//Update
-ContextMenu.prototype.update = function(){}
-
 //Remove option from dropdown menu
 ContextMenu.prototype.removeOption = function(index)
 {

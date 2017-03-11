@@ -83,9 +83,6 @@ ColorChooser.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-ColorChooser.prototype.update = function(){};
-
 //Update Interface
 ColorChooser.prototype.updateInterface = function()
 {

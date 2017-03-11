@@ -58,9 +58,6 @@ TextArea.prototype.destroy = function()
 	catch(e){}
 }
 
-//Update
-TextArea.prototype.update = function(){}
-
 //Update Interface
 TextArea.prototype.updateInterface = function()
 {

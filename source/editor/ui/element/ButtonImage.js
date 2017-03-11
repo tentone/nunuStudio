@@ -53,9 +53,6 @@ ButtonImage.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-ButtonImage.prototype.update = function(){};
-
 //Set button callback function
 ButtonImage.prototype.setCallback = function(callback)
 {

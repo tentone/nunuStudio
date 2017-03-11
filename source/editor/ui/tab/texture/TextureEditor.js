@@ -201,7 +201,7 @@ TextureEditor.prototype.isAttached = function(texture)
 //Activate
 TextureEditor.prototype.activate = function()
 {
-	this.active = true;
+	TabElement.prototype.activate.call(this);
 	
 	Editor.setState(Editor.STATE_IDLE);
 	Editor.resetEditingFlags();

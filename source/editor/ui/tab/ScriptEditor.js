@@ -152,7 +152,7 @@ ScriptEditor.prototype.updateMetadata = function()
 //Activate code editor
 ScriptEditor.prototype.activate = function()
 {
-	this.active = true;
+	TabElement.prototype.activate.call(this);
 	
 	//Set editor state
 	Editor.setState(Editor.STATE_IDLE);

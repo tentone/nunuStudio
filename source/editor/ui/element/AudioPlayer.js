@@ -309,9 +309,6 @@ AudioPlayer.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-AudioPlayer.prototype.update = function(){};
-
 //Update division Size
 AudioPlayer.prototype.updateInterface = function()
 {

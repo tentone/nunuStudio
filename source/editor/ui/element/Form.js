@@ -95,9 +95,6 @@ Form.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-Form.prototype.update = function(){};
-
 //Update interface
 Form.prototype.updateInterface = function()
 {

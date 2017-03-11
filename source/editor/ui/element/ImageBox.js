@@ -47,9 +47,6 @@ ImageBox.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-ImageBox.prototype.update = function(){};
-
 //Set ImageBox
 ImageBox.prototype.setImage = function(image)
 {

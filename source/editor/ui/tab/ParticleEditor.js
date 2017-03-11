@@ -573,7 +573,7 @@ ParticleEditor.prototype.updateCamera = function()
 //Activate code editor
 ParticleEditor.prototype.activate = function()
 {
-	this.active = true;
+	TabElement.prototype.activate.call(this);
 		
 	//Set editor state
 	Editor.setState(Editor.STATE_IDLE);

@@ -859,11 +859,6 @@ Interface.initialize = function()
 		Editor.undo();
 	}, Interface.fileDir + "icons/misc/undo.png");
 
-	/*Interface.editor.addOption("Redo", function()
-	{
-		Editor.redo();
-	}, Interface.fileDir + "icons/misc/redo.png");*/
-
 	Interface.editor.addOption("Copy", function()
 	{
 		Editor.copyObject();
@@ -950,15 +945,6 @@ Interface.initialize = function()
 			Editor.setState(Editor.STATE_EDITING);
 		}
 	});
-};
-
-//Loop update elements
-Interface.update = function()
-{
-	Interface.explorer.update();
-	Interface.assetExplorerDiv.update();
-	Interface.explorerResizable.update();
-	Interface.tab.update();
 };
 
 //Update interface

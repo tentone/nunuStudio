@@ -93,6 +93,7 @@ TabGroup.prototype.closeActual = function()
 	{
 		if(this.selected.closeable)
 		{
+			this.selected.deactivate();
 			this.removeTab(this.selected);
 		}
 	}
@@ -101,6 +102,11 @@ TabGroup.prototype.closeActual = function()
 //Select tab
 TabGroup.prototype.selectTab = function(tab)
 {
+	if(this.selected !== null)
+	{
+		this.selected.deactivate();
+	}
+
 	//Tab as a TabElement object
 	if(tab instanceof TabElement)
 	{

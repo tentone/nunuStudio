@@ -94,9 +94,6 @@ Asset.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-Asset.prototype.update = function(){};
-
 //Update Interface
 Asset.prototype.updateInterface = function()
 {

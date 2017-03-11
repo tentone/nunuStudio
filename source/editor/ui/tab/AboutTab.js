@@ -68,6 +68,8 @@ AboutTab.prototype = Object.create(TabElement.prototype);
 //Activate
 AboutTab.prototype.activate = function()
 {
+	TabElement.prototype.activate.call(this);
+	
 	Editor.setState(Editor.STATE_IDLE);
 }
 

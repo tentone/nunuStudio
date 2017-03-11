@@ -123,9 +123,6 @@ DropdownMenu.prototype.destroy = function()
 	catch(e){}
 }
 
-//Update
-DropdownMenu.prototype.update = function(){}
-
 //Remove option from dropdown menu
 DropdownMenu.prototype.removeOption = function(index)
 {

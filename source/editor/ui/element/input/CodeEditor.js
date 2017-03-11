@@ -139,9 +139,6 @@ CodeEditor.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-CodeEditor.prototype.update = function(){};
-
 //Update Interface
 CodeEditor.prototype.updateInterface = function()
 {
