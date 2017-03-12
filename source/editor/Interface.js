@@ -936,14 +936,17 @@ Interface.initialize = function()
 	Interface.run.updateInterface();
 	Interface.run.setCallback(function()
 	{
-		if(Editor.state === Editor.STATE_EDITING)
+		//TODO <CHANGE RUN CODE>
+		alert("Reimplement run code");
+		
+		/*if(Editor.state === Editor.STATE_EDITING)
 		{
 			Editor.setState(Editor.STATE_TESTING);
 		}
 		else if(Editor.state === Editor.STATE_TESTING)
 		{
 			Editor.setState(Editor.STATE_EDITING);
-		}
+		}*/
 	});
 };
 
@@ -1001,9 +1004,6 @@ Interface.updateInterface = function()
 	Interface.tab.size.x = (size.x - Interface.toolBar.size.x - Interface.explorer.size.x);
 	Interface.tab.size.y = (size.y - Interface.topBar.size.y - Interface.assetExplorerDiv.size.y); 
 	Interface.tab.updateInterface();
-
-	//Resize editor camera
-	Editor.resizeCamera();
 };
 
 //Open to save program window

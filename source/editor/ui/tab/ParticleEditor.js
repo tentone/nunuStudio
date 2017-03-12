@@ -24,12 +24,12 @@ function ParticleEditor(parent, closeable, container, index)
 	//Element atributes
 	this.children = [];
 
-	//Particle renderer and scene
+	//Renderer
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.render.antialiasing});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 	this.renderer.shadowMap.enabled = false;
 	
-	//Particle preview scene
+	//Particle preview
 	this.scene = new Scene();
 	this.scene.add(new AmbientLight(0xffffff));
 	var grid = new THREE.GridHelper(50, 50, 0x888888);
@@ -49,7 +49,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.cameraDistance = 5;
 	this.updateCamera();
 
-	//Particle attributes form
+	//Form
 	this.form = new Form(this.main.divB);
 	this.form.defaultTextWidth = 80;
 	this.form.position.set(10, 8);
@@ -576,7 +576,7 @@ ParticleEditor.prototype.activate = function()
 	TabElement.prototype.activate.call(this);
 		
 	//Set editor state
-	Editor.setState(Editor.STATE_IDLE);
+	
 	Editor.resetEditingFlags();
 	
 	//Set mouse canvas

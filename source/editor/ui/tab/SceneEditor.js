@@ -9,6 +9,29 @@ function SceneEditor(parent, closeable, container, index)
 	this.canvas.style.position = "absolute";
 	this.element.appendChild(this.canvas);
 
+	//Renderer
+	this.renderer = null;
+
+	//Initialize renderer
+	this.initializeRenderer();
+
+	//Raycaster
+	this.raycaster = new THREE.Raycaster(); 
+
+	//State
+	this.state = null;
+
+	//Test program
+	this.programRunning = null;
+
+	//Scene
+	this.scene = null;
+
+	//Mouse and keyboard
+	this.keyboard = new Keyboard();
+	this.mouse = new Mouse();
+	this.mouse.setCanvas(this.canvas);
+
 	//Performance meter
 	this.stats = new Stats();
 	this.stats.dom.style.position = "absolute";
@@ -16,6 +39,37 @@ function SceneEditor(parent, closeable, container, index)
 	this.stats.dom.style.top = "0px";
 	this.stats.dom.style.zIndex = "0";
 	this.element.appendChild(this.stats.dom);
+
+	//Debug Elements
+	this.toolScene = new THREE.Scene();
+	this.toolSceneTop = new THREE.Scene();
+
+	//Grid and axis helpers
+	this.gridHelper = new GridHelper(Settings.editor.gridSize, Settings.editor.gridSpacing, 0x888888);
+	this.gridHelper.visible = Settings.editor.gridEnabled;
+	this.toolScene.add(this.gridHelper);
+
+	this.axisHelper = new THREE.AxisHelper(Settings.editor.gridSize);
+	this.axisHelper.material.depthWrite = false;
+	this.axisHelper.material.transparent = true;
+	this.axisHelper.material.opacity = 1;
+	this.axisHelper.visible = Settings.editor.axisEnabled;
+	this.toolScene.add(this.axisHelper);
+
+	//Object helper container
+	this.objectHelper = new THREE.Scene();
+	this.toolScene.add(this.objectHelper);
+
+	//Tool container
+	this.toolContainer = new THREE.Scene();
+	this.toolSceneTop.add(this.toolContainer);
+
+	//Editor Camera
+	this.cameraMode = SceneEditor.CAMERA_PERSPECTIVE;
+	this.cameraRotation = new THREE.Vector2(0, 0);
+	this.setCameraMode(SceneEditor.CAMERA_PERSPECTIVE);
+
+	this.isEditingObject = false;
 
 	//Self pointer
 	var self = this;
@@ -40,7 +94,7 @@ function SceneEditor(parent, closeable, container, index)
 			var draggedObject = DragBuffer.popDragElement(uuid);
 
 			//Check intersected objects
-			var intersections = Editor.raycaster.intersectObjects(self.scene.children, true);
+			var intersections = this.raycaster.intersectObjects(self.scene.children, true);
 
 			//Dragged file into object
 			if(intersections.length > 0 && event.dataTransfer.files.length > 0)
@@ -233,21 +287,26 @@ function SceneEditor(parent, closeable, container, index)
 
 	this.cameraButton.setCallback(function()
 	{
-		Editor.setCameraMode();
+		self.setCameraMode();
 
-		if(Editor.cameraMode === Editor.CAMERA_ORTHOGRAPHIC)
+		if(self.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
 		{
 			self.cameraButton.setImage("editor/files/icons/misc/2d.png");
 		}
-		else if(Editor.cameraMode === Editor.CAMERA_PERSPECTIVE)
+		else if(self.cameraMode === SceneEditor.CAMERA_PERSPECTIVE)
 		{
 			self.cameraButton.setImage("editor/files/icons/misc/3d.png");
 		}
 	});
-
-	//Scene
-	this.scene = null;
 }
+
+//State
+SceneEditor.EDITING = 9;
+SceneEditor.TESTING = 11;
+
+//Camera mode
+SceneEditor.CAMERA_ORTHOGRAPHIC = 20;
+SceneEditor.CAMERA_PERSPECTIVE = 21;
 
 SceneEditor.prototype = Object.create(TabElement.prototype);
 
@@ -274,7 +333,7 @@ SceneEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-}
+};
 
 //Set fullscreen mode
 SceneEditor.prototype.setFullscreen = function(value)
@@ -290,7 +349,7 @@ SceneEditor.prototype.setFullscreen = function(value)
 		this.size.set(window.screen.width, window.screen.height);
 		this.updateInterface();
 
-		Editor.resizeCamera();
+		this.resizeCamera();
 	}
 	else
 	{
@@ -301,23 +360,42 @@ SceneEditor.prototype.setFullscreen = function(value)
 		this.element.style.zIndex = 0;
 		Interface.updateInterface();
 	}
-}
+};
 
-//Activate scene editor
+//Activate
 SceneEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
-	
+
 	if(this.scene !== null)
 	{
 		Editor.program.scene = this.scene;
 	}
 
-	Editor.setPerformanceMeter(this.stats);
-	Editor.setRenderCanvas(this.canvas);
-	Editor.setState(Editor.STATE_EDITING);
+	this.setState(SceneEditor.EDITING);
+
+	//Reset buttons
 	Editor.resetEditingFlags();
 	Editor.resize();
+};
+
+//Deactivate
+SceneEditor.prototype.deactivate = function()
+{
+	TabElement.prototype.deactivate.call(this);
+
+	//Hide run button
+	Interface.run.visible = false;
+	Interface.run.updateInterface();
+};
+
+//Destroy
+TabElement.prototype.destroy = function()
+{
+	TabElement.prototype.destroy.call(this);
+
+	this.mouse.dispose();
+	this.keyboard.dispose();
 }
 
 //Set scene
@@ -325,15 +403,549 @@ SceneEditor.prototype.attach = function(scene)
 {
 	this.scene = scene;
 	this.updateMetadata();
-}
+};
 
 //Check if scene is attached
 SceneEditor.prototype.isAttached = function(scene)
 {
 	return this.scene === scene;
+};
+
+//Update scene editor logic
+SceneEditor.prototype.update = function()
+{
+	this.mouse.update();
+	this.keyboard.update();
+
+	if(this.stats !== null)
+	{
+		this.stats.begin();
+	}
+
+	this.isEditingObject = false;
+
+	if(this.state = SceneEditor.EDITING)
+	{
+		//Keyboard shortcuts
+		if(this.keyboard.keyJustPressed(Keyboard.DEL))
+		{
+			Editor.deleteObject();
+		}
+		else if(this.keyboard.keyJustPressed(Keyboard.F5))
+		{
+			this.setState(SceneEditor.TESTING);
+		}
+		else if(this.keyboard.keyJustPressed(Keyboard.F2))
+		{
+			if(Editor.selectedObject !== null)
+			{
+				var name = prompt("Rename object", Editor.selectedObject.name);
+				if(name !== null && name !== "")
+				{
+					Editor.selectedObject.name = name;
+					Editor.updateObjectViews();
+				}
+			}
+		}
+		else if(this.keyboard.keyPressed(Keyboard.CTRL))
+		{
+			if(Interface.panel !== null && !Interface.panel.focused)
+			{
+				if(this.keyboard.keyJustPressed(Keyboard.C))
+				{
+					Editor.copyObject();
+				}
+				else if(this.keyboard.keyJustPressed(Keyboard.V))
+				{
+					Editor.pasteObject();
+				}
+				else if(this.keyboard.keyJustPressed(Keyboard.X))
+				{
+					Editor.cutObject();
+				}
+			}
+			
+			if(this.keyboard.keyJustPressed(Keyboard.Z))
+			{
+				Editor.undo();
+			}
+		}
+
+		//Select objects
+		if(Editor.toolMode === Editor.MODE_SELECT)
+		{
+			if(this.mouse.buttonJustPressed(Mouse.LEFT) && this.mouse.insideCanvas())
+			{
+				this.selectObjectWithMouse();
+			}
+
+			this.isEditingObject = false;
+		}
+		else
+		{
+			//If mouse double clicked select object
+			if(this.mouse.buttonDoubleClicked() && this.mouse.insideCanvas())
+			{
+				this.selectObjectWithMouse();
+			}
+
+			//If no object selected update tool
+			if(Editor.selectedObject !== null)
+			{
+				if(Editor.tool !== null)
+				{
+					this.isEditingObject = Editor.tool.update();
+					
+					if(this.mouse.buttonJustPressed(Mouse.LEFT) && this.isEditingObject)
+					{
+						Editor.history.push(Editor.selectedObject, Action.CHANGED);
+					}
+
+					if(this.isEditingObject)
+					{
+						Editor.updateObjectPanel();
+					}
+				}
+				else
+				{
+					this.isEditingObject = false;
+				}
+			}
+		}
+		
+		//Update object transformation matrix
+		if(Editor.selectedObject !== null)
+		{	
+			if(!Editor.selectedObject.matrixAutoUpdate)
+			{
+				Editor.selectedObject.updateMatrix();
+			}
+		}
+
+		//Update object helper
+		this.objectHelper.update();
+
+		//Check if mouse is inside canvas
+		if(this.mouse.insideCanvas())
+		{
+			//Lock mouse when camera is moving
+			if(Settings.editor.lockMouse && Nunu.runningOnDesktop())
+			{
+				if(!this.isEditingObject && (this.mouse.buttonJustPressed(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.RIGHT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)))
+				{
+					this.mouse.setLock(true);
+				}
+				else if(this.mouse.buttonJustReleased(Mouse.LEFT) || this.mouse.buttonJustReleased(Mouse.RIGHT) || this.mouse.buttonJustReleased(Mouse.MIDDLE))
+				{
+					this.mouse.setLock(false);
+				}
+			}
+
+			//Orthographic camera (2D mode)
+			if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
+			{
+				//Move camera on y / x
+				if(this.mouse.buttonPressed(Mouse.RIGHT))
+				{
+					var ratio = this.camera.size / this.canvas.width * 2;
+
+					this.camera.position.x -= this.mouse.delta.x * ratio;
+					this.camera.position.y += this.mouse.delta.y * ratio;
+				}
+
+				//Camera zoom
+				if(this.mouse.wheel !== 0)
+				{
+					this.camera.size += this.mouse.wheel * this.camera.size / 1000;
+
+					this.camera.updateProjectionMatrix();
+				}
+			}
+			//Perpesctive camera
+			else
+			{
+				//Look camera
+				if(this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject)
+				{
+					this.cameraRotation.x -= 0.002 * this.mouse.delta.x;
+					this.cameraRotation.y -= 0.002 * this.mouse.delta.y;
+
+					//Limit Vertical Rotation to 90 degrees
+					var pid2 = 1.57;
+					if(this.cameraRotation.y < -pid2)
+					{
+						this.cameraRotation.y = -pid2;
+					}
+					else if(this.cameraRotation.y > pid2)
+					{
+						this.cameraRotation.y = pid2;
+					}
+
+					this.setCameraRotation(this.cameraRotation, this.camera);
+				}
+
+				//Move Camera on X and Z
+				else if(this.mouse.buttonPressed(Mouse.RIGHT))
+				{
+					//Move speed
+					var speed = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 1000;
+					if(speed < 0.02)
+					{
+						speed = 0.02;
+					}
+
+					//Move Camera Front and Back
+					var angleCos = Math.cos(this.cameraRotation.x);
+					var angleSin = Math.sin(this.cameraRotation.x);
+					this.camera.position.z += this.mouse.delta.y * speed * angleCos;
+					this.camera.position.x += this.mouse.delta.y * speed * angleSin;
+
+					//Move Camera Lateral
+					var angleCos = Math.cos(this.cameraRotation.x + MathUtils.pid2);
+					var angleSin = Math.sin(this.cameraRotation.x + MathUtils.pid2);
+					this.camera.position.z += this.mouse.delta.x * speed * angleCos;
+					this.camera.position.x += this.mouse.delta.x * speed * angleSin;
+				}
+				
+				//Move Camera on Y
+				else if(this.mouse.buttonPressed(Mouse.MIDDLE))
+				{
+					this.camera.position.y += this.mouse.delta.y * 0.1;
+				}
+
+				//Move in camera direction using mouse scroll
+				if(this.mouse.wheel !== 0)
+				{
+					//Move speed
+					var speed = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 2000;
+					speed *= this.mouse.wheel;
+
+					//Limit zoom speed
+					if(speed < 0 && speed > -0.03)
+					{
+						speed = -0.03;
+					}
+					else if(speed > 0 && speed < 0.03)
+					{
+						speed = 0.03;
+					}
+
+					//Move camera
+					var direction = this.camera.getWorldDirection();
+					this.camera.position.x -= speed * direction.x;
+					this.camera.position.y -= speed * direction.y;
+					this.camera.position.z -= speed * direction.z;
+				}
+			}
+		}
+	}
+	else if(this.state === SceneEditor.TESTING)
+	{
+		this.programRunning.update();
+
+		if(this.keyboard.keyJustPressed(Keyboard.F5))
+		{
+			this.setState(SceneEditor.EDITING);
+		}
+	}
+
+	this.render();
+
+	if(this.stats !== null)
+	{
+		this.stats.end();
+	}
+};
+
+//Scene render
+SceneEditor.prototype.render = function()
+{
+	var renderer = this.renderer;
+	renderer.clear();
+
+	if(this.state === SceneEditor.EDITING)
+	{
+		//Render scene
+		renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
+		renderer.render(Editor.program.scene, this.camera);
+
+		//Render tools
+		renderer.render(this.toolScene, this.camera);
+		renderer.clearDepth();
+		renderer.render(this.toolSceneTop, this.camera);
+
+		//Render camera preview
+		if(Settings.editor.cameraPreviewEnabled && (Editor.selectedObject instanceof THREE.Camera || Editor.program.scene.cameras.length > 0))
+		{
+			var width = Settings.editor.cameraPreviewPercentage * this.canvas.width;
+			var height = Settings.editor.cameraPreviewPercentage * this.canvas.height;
+			var offset = this.canvas.width - width - 10;
+
+			renderer.setScissorTest(true);
+			renderer.setViewport(offset, 10, width, height);
+			renderer.setScissor(offset, 10, width, height);
+			renderer.clear();
+
+			//Preview selected camera
+			if(Editor.selectedObject instanceof THREE.Camera)
+			{
+				var camera = Editor.selectedObject;
+				camera.aspect = width / height;
+				camera.updateProjectionMatrix();
+
+				renderer.setViewport(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+				renderer.setScissor(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+
+				renderer.render(Editor.program.scene, camera);
+			}
+			//Preview all cameras in use
+			else
+			{
+				var scene = Editor.program.scene;
+				for(var i = 0; i < scene.cameras.length; i++)
+				{
+					var camera = scene.cameras[i];
+					camera.aspect = width / height;
+					camera.updateProjectionMatrix();
+					
+					if(camera.clearColor)
+					{
+						renderer.clearColor();
+					}
+					if(camera.clearDepth)
+					{
+						renderer.clearDepth();
+					}
+
+					renderer.setViewport(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+					renderer.setScissor(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+					renderer.render(scene, camera);
+				}
+			}
+
+			renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
+		}
+	}
+	else if(this.state === SceneEditor.TESTING)
+	{
+		this.programRunning.render(renderer, this.canvas.width, this.canvas.height);
+	}
+};
+
+//Initialize renderer
+SceneEditor.prototype.initializeRenderer = function()
+{
+	//Rendering quality settings
+	if(Settings.render.followProject)
+	{
+		var antialiasing = Editor.program.antialiasing;
+		var shadows = Editor.program.shadows;
+		var shadowsType = Editor.program.shadowsType;
+	}
+	else
+	{
+		var antialiasing = Settings.render.antialiasing;
+		var shadows = Settings.render.shadows;
+		var shadowsType = Settings.render.shadowsType;
+	}
+
+	//Dispose old renderer
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+	}
+
+	//Create renderer
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, antialias: antialiasing});
+	this.renderer.setSize(this.canvas.width, this.canvas.height);
+	this.renderer.shadowMap.enabled = shadows;
+	this.renderer.shadowMap.type = shadowsType;
+	this.renderer.autoClear = false;
 }
 
-//Update division Size
+//Update raycaster position from editor mouse position
+SceneEditor.prototype.updateRaycasterFromMouse = function()
+{
+	var mouse = new THREE.Vector2((this.mouse.position.x / this.canvas.width) * 2 - 1, -(this.mouse.position.y / this.canvas.height) * 2 + 1);
+	this.raycaster.setFromCamera(mouse, this.camera);
+};
+
+//Select objects with mouse
+SceneEditor.prototype.selectObjectWithMouse = function()
+{
+	this.updateRaycasterFromMouse();
+
+	var intersects = this.raycaster.intersectObjects(Editor.program.scene.children, true);
+	if(intersects.length > 0)
+	{
+		Editor.selectObject(intersects[0].object);
+	}
+};
+
+//Update editor raycaster with new x and y positions (normalized -1 to 1)
+SceneEditor.prototype.updateRaycaster = function(x, y)
+{
+	this.raycaster.setFromCamera(new THREE.Vector2(x, y), this.camera);
+};
+
+//Set camera mode (ortho or perspective)
+SceneEditor.prototype.setCameraMode = function(mode)
+{
+	if(mode === undefined)
+	{
+		mode = (this.cameraMode === SceneEditor.CAMERA_PERSPECTIVE) ? SceneEditor.CAMERA_ORTHOGRAPHIC : SceneEditor.CAMERA_PERSPECTIVE;
+	}
+	
+	var aspect = (this.canvas !== null) ? this.canvas.width/this.canvas.height : 1.0;
+
+	if(mode === SceneEditor.CAMERA_ORTHOGRAPHIC)
+	{
+		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL);
+		this.camera.position.set(0, 0, 20);
+		this.gridHelper.rotation.x = Math.PI / 2;
+	}
+	else if(mode === SceneEditor.CAMERA_PERSPECTIVE)
+	{
+		this.camera = new PerspectiveCamera(60, aspect);
+		this.camera.position.set(0, 3, 5);
+		this.cameraRotation.set(3.14, 0);
+		this.gridHelper.rotation.x = 0;
+		this.setCameraRotation(this.cameraRotation, this.camera);
+	}
+
+	this.cameraMode = mode;
+	Editor.selectTool(Editor.toolMode);
+};
+
+//Set camera rotation
+SceneEditor.prototype.setCameraRotation = function(cameraRotation, camera)
+{
+	//Calculate direction vector
+	var cosAngleY = Math.cos(cameraRotation.y);
+	var direction = new THREE.Vector3(Math.sin(cameraRotation.x)*cosAngleY, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cosAngleY);
+
+	//Add position offset and set camera direction
+	direction.add(camera.position);
+	camera.lookAt(direction);
+};
+
+//Set scene editor state
+SceneEditor.prototype.setState = function(state)
+{
+	if(state === SceneEditor.EDITING)
+	{
+		//Set run button text
+		Interface.run.setText("Run");
+		Interface.run.visible = true;
+		Interface.run.updateInterface();
+
+		//Dispose running program
+		this.disposeRunningProgram();
+
+		//Set buttons
+		this.showButtonsFullscreen = false;
+		this.showButtonsVr = false;
+		this.showButtonsCameraMode = true;
+	}
+	else if(state === SceneEditor.TESTING)
+	{
+		//Copy program
+		this.programRunning = Editor.program.clone();
+
+		//Use editor camera as default camera for program
+		this.programRunning.defaultCamera = this.camera;
+		this.programRunning.setRenderer(this.renderer);
+
+		//Initialize scene
+		this.programRunning.setMouseKeyboard(this.mouse, this.keyboard);
+		this.programRunning.initialize();
+		this.programRunning.resize(this.canvas.width, this.canvas.height);
+
+		//Show full screen and VR buttons
+		this.showButtonsFullscreen = true;
+		this.showButtonsCameraMode = false;
+
+		//If program uses VR set button
+		if(this.programRunning.vr)
+		{
+			if(Nunu.webvrAvailable())
+			{
+				//Show VR button
+				this.showButtonsVr = true;
+
+				//Create VR switch callback
+				var vr = true;
+				this.vrButton.setCallback(function()
+				{
+					if(vr)
+					{
+						this.programRunning.displayVR();
+					}
+					else
+					{
+						this.programRunning.exitVR();
+					}
+
+					vr = !vr;
+				});
+			}
+		}
+
+		//Lock mouse pointer
+		if(this.programRunning.lockPointer)
+		{
+			this.mouse.setLock(true);
+		}
+
+		//Update tab to show buttons
+		this.updateInterface();
+
+		//Set renderer size
+		this.renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
+		this.renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
+
+		//Set run button text
+		Interface.run.setText("Stop");
+		Interface.run.visible = true;
+		Interface.run.updateInterface();
+	}
+
+	//Set editor state
+	this.state = state;
+};
+
+
+//Resize scene editor camera
+SceneEditor.prototype.resizeCamera = function()
+{
+	if(this.canvas !== null && this.renderer !== null)
+	{
+		this.renderer.setSize(this.canvas.width, this.canvas.height);
+		this.camera.aspect = this.canvas.width/this.canvas.height;
+		this.camera.updateProjectionMatrix();
+
+		if(this.state === SceneEditor.TESTING)
+		{
+			this.programRunning.resize(this.canvas.width, this.canvas.height);
+		}
+	}
+};
+
+//Dispose running program if there is one
+SceneEditor.prototype.disposeRunningProgram = function()
+{
+	//Dispose running program if there is one
+	if(this.programRunning !== null)
+	{
+		this.programRunning.dispose();
+		this.programRunning = null;
+	}
+
+	//Unlock mouse
+	this.mouse.setLock(false);
+};
+
+//Update scene editor interface
 SceneEditor.prototype.updateInterface = function()
 {
 	//Set visibilty
@@ -353,19 +965,19 @@ SceneEditor.prototype.updateInterface = function()
 		//Fullscreen button
 		this.fullscreenButton.position.x = this.position.x + this.size.x - this.fullscreenButton.size.x - 5;
 		this.fullscreenButton.position.y = this.position.y + this.size.y - this.fullscreenButton.size.y - 5;
-		this.fullscreenButton.visible = this.visible && this.showButtonsFullscreen;
+		this.fullscreenButton.visible = this.showButtonsFullscreen;
 		this.fullscreenButton.updateInterface();
 
 		//VR button
 		this.vrButton.position.x = this.fullscreenButton.position.x - this.vrButton.size.x - 10;
 		this.vrButton.position.y = this.fullscreenButton.position.y;
-		this.vrButton.visible = this.visible && this.showButtonsVr;
+		this.vrButton.visible = this.showButtonsVr;
 		this.vrButton.updateInterface();
 
 		//Camera mode button
 		this.cameraButton.position.x = this.position.x + this.size.x - this.cameraButton.size.x - 5;
 		this.cameraButton.position.y = 5;
-		this.cameraButton.visible = this.visible && this.showButtonsCameraMode;
+		this.cameraButton.visible = this.showButtonsCameraMode;
 		this.cameraButton.updateInterface();
 
 		//Canvas
@@ -384,4 +996,4 @@ SceneEditor.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};

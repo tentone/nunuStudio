@@ -56,7 +56,9 @@ function Keyboard()
 Keyboard.prototype = Keyboard;
 
 /**
- * Update key flags synchronously (called automatically by the app runtime).
+ * Update key flags synchronously.
+ * 
+ * Called automatically by the app runtime.
  * 
  * @method update
  */
@@ -81,7 +83,8 @@ Keyboard.update = function()
 };
 
 /**
- * Reset keyboard status to default
+ * Reset keyboard status to default.
+ * 
  * @method reset
  */
 Keyboard.reset = function()
@@ -97,7 +100,8 @@ Keyboard.reset = function()
 };
 
 /**
- * Check if a key is pressed
+ * Check if a key is pressed.
+ * 
  * @method keyPressed
  * @return {boolean} True is the key is currently pressed
  */
@@ -107,7 +111,8 @@ Keyboard.keyPressed = function(key)
 };
 
 /**
- * Check is a key as just pressed
+ * Check is a key as just pressed.
+ * 
  * @method keyJustPressed
  * @return {boolean} True is the key was just pressed
  */
@@ -117,7 +122,8 @@ Keyboard.keyJustPressed = function(key)
 };
 
 /**
- * Check if a key was just released
+ * Check if a key was just released.
+ * 
  * @method keyJustReleased
  * @return {boolean} True is the key was just pressed
  */
@@ -127,7 +133,10 @@ Keyboard.keyJustReleased = function(key)
 };
 
 /**
- * Dispose keyboard events (called automatically by the app runtime)
+ * Dispose keyboard events.
+ * 
+ * Called automatically by the app runtime.
+ * 
  * @method dispose
  */
 Keyboard.dispose = function()

@@ -203,7 +203,7 @@ TextureEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 	
-	Editor.setState(Editor.STATE_IDLE);
+	
 	Editor.resetEditingFlags();
 
 	this.attach(this.texture);

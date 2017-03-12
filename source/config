@@ -2,7 +2,7 @@
 	"general": {
 		"theme": "dark",
 		"filePreviewSize": 70,
-		"showStats": false,
+		"showStats": true,
 		"showUUID": true
 	},
 	"editor": {

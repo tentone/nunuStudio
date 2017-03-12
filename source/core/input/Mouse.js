@@ -334,7 +334,9 @@ Mouse.buttonJustReleased = function(button)
 };
 
 /**
- * Update mouse Position (automatically called by the runtime).
+ * Update mouse Position.
+ *
+ * Automatically called by the runtime.
  * 
  * @method updatePosition
  * @param {Number} x
@@ -351,7 +353,10 @@ Mouse.updatePosition = function(x, y, xDiff, yDiff)
 };
 
 /**
- * Update a mouse button (automatically called by the runtime)
+ * Update a mouse button.
+ * 
+ * Automatically called by the runtime.
+ * 
  * @param {Number} button
  * @param {Number} action
  */
@@ -364,7 +369,9 @@ Mouse.updateKey = function(button, action)
 };
 
 /**
- * Update mouse buttons state, position, wheel and delta synchronously (called automatically by the app runtime).
+ * Update mouse buttons state, position, wheel and delta synchronously.
+ * 
+ * Called automatically by the app runtime.
  * 
  * @method update
  */
