@@ -325,7 +325,7 @@ MaterialEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 	
-	Editor.setState(Editor.STATE_IDLE);
+	
 	Editor.resetEditingFlags();
 	
 	Editor.mouse.setCanvas(this.canvas.element);

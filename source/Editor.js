@@ -272,22 +272,13 @@ include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
 
-//Editor state
-Editor.STATE_IDLE = 8;
-Editor.STATE_EDITING = 9;
-Editor.STATE_TESTING = 11;
-
-//Editor editing modes
+//Editor tools
 Editor.MODE_SELECT = 0;
 Editor.MODE_MOVE = 1;
 Editor.MODE_SCALE = 2;
 Editor.MODE_ROTATE = 3;
 
-//Editor camera mode
-Editor.CAMERA_ORTHOGRAPHIC = 20;
-Editor.CAMERA_PERSPECTIVE = 21;
-
-//Initialize Main
+//Initialize editor
 Editor.initialize = function()
 {
 	try
@@ -382,29 +373,21 @@ Editor.initialize = function()
 	
 	//Editor initial state
 	Editor.toolMode = Editor.MODE_SELECT;
-	Editor.state = Editor.STATE_EDITING;
+
+	//Editing tool
+	Editor.tool = null;
 
 	//Open file
 	Editor.openFile = null;
 
 	//Editor Selected object
 	Editor.selectedObject = null;
-	Editor.isEditingObject = false;
-
-	//Performance meter
-	Editor.stats = null;
 
 	//Program
 	Editor.program = null;
-	Editor.programRunning = null;
 
 	//History
 	Editor.history = null;
-
-	//Renderer and canvas
-	Editor.renderer = null;
-	Editor.canvas = null;
-	Editor.gl = null;
 
 	//Material renderer for material previews
 	Editor.materialRenderer = new MaterialRenderer();
@@ -415,39 +398,6 @@ Editor.initialize = function()
 
 	//Initialize User Interface
 	Interface.initialize();
-
-	//Debug Elements
-	Editor.toolScene = new THREE.Scene();
-	Editor.toolSceneTop = new THREE.Scene();
-
-	//Raycaster
-	Editor.raycaster = new THREE.Raycaster(); 
-
-	//Grid and axis helpers
-	Editor.gridHelper = new GridHelper(Settings.editor.gridSize, Settings.editor.gridSpacing, 0x888888);
-	Editor.gridHelper.visible = Settings.editor.gridEnabled;
-	Editor.toolScene.add(Editor.gridHelper);
-
-	Editor.axisHelper = new THREE.AxisHelper(Settings.editor.gridSize);
-	Editor.axisHelper.material.depthWrite = false;
-	Editor.axisHelper.material.transparent = true;
-	Editor.axisHelper.material.opacity = 1;
-	Editor.axisHelper.visible = Settings.editor.axisEnabled;
-	Editor.toolScene.add(Editor.axisHelper);
-
-	//Object helper container
-	Editor.objectHelper = new THREE.Scene();
-	Editor.toolScene.add(Editor.objectHelper);
-
-	//Tool container
-	Editor.toolContainer = new THREE.Scene();
-	Editor.toolSceneTop.add(Editor.toolContainer);
-	Editor.tool = null;
-
-	//Editor Camera
-	Editor.cameraMode = Editor.CAMERA_PERSPECTIVE;
-	Editor.cameraRotation = new THREE.Vector2(0, 0);
-	Editor.setCameraMode(Editor.CAMERA_PERSPECTIVE);
 	
 	//Check is some .isp file passed as argument
 	for(var i = 0; i < Editor.args.length; i++)
@@ -477,362 +427,39 @@ Editor.update = function()
 	Editor.mouse.update();
 	Editor.keyboard.update();
 
-	//End performance measure
-	if(Editor.stats !== null)
+	//Keyboard shortcuts
+	if(Editor.keyboard.keyPressed(Keyboard.CTRL))
 	{
-		Editor.stats.begin();
-	}
-
-	//Update editor interface
-	Editor.isEditingObject = false;
-
-	//If not on test mode
-	if(Editor.state !== Editor.STATE_TESTING)
-	{
-		//Close tab, Save and load project
-		if(Editor.keyboard.keyPressed(Keyboard.CTRL))
+		if(Editor.keyboard.keyJustPressed(Keyboard.S))
 		{
-			if(Editor.keyboard.keyJustPressed(Keyboard.S))
+			if(Editor.openFile === null)
 			{
-				if(Editor.openFile === null)
-				{
-					Interface.saveProgram();
-				}
-				else
-				{
-					Editor.saveProgram(undefined, false);
-				}
+				Interface.saveProgram();
 			}
-			else if(Editor.keyboard.keyJustPressed(Keyboard.L))
-			{
-				Interface.loadProgram();
-			}
-			else if(Editor.keyboard.keyJustPressed(Keyboard.W) || Editor.keyboard.keyJustPressed(Keyboard.F4))
-			{
-				Interface.tab.closeActual();
-			}
-			else if(Editor.keyboard.keyJustPressed(Keyboard.TAB) || Editor.keyboard.keyJustPressed(Keyboard.PAGE_DOWN))
-			{
-				Interface.tab.selectNextTab();
-			}
-			else if(Editor.keyboard.keyJustPressed(Keyboard.PAGE_UP))
-			{
-				Interface.tab.selectPreviousTab();
-			}
-		}
-	}
-
-	//Editing a scene
-	if(Editor.state === Editor.STATE_EDITING)
-	{
-		//Editor.keyboard shortcuts
-		if(Editor.keyboard.keyJustPressed(Keyboard.DEL))
-		{
-			Editor.deleteObject();
-		}
-		else if(Editor.keyboard.keyJustPressed(Keyboard.F5))
-		{
-			Editor.setState(Editor.STATE_TESTING);
-		}
-		else if(Editor.keyboard.keyJustPressed(Keyboard.F2))
-		{
-			if(Editor.selectedObject !== null)
-			{
-				var name = prompt("Rename object", Editor.selectedObject.name);
-				if(name !== null && name !== "")
-				{
-					Editor.selectedObject.name = name;
-					Editor.updateObjectViews();
-				}
-			}
-		}
-		else if(Editor.keyboard.keyPressed(Keyboard.CTRL))
-		{
-			if(Interface.panel !== null && !Interface.panel.focused)
-			{
-				if(Editor.keyboard.keyJustPressed(Keyboard.C))
-				{
-					Editor.copyObject();
-				}
-				else if(Editor.keyboard.keyJustPressed(Keyboard.V))
-				{
-					Editor.pasteObject();
-				}
-				else if(Editor.keyboard.keyJustPressed(Keyboard.X))
-				{
-					Editor.cutObject();
-				}
-			}
-			
-			if(Editor.keyboard.keyJustPressed(Keyboard.Z))
-			{
-				Editor.undo();
-			}
-		}
-
-		//Select objects
-		if(Editor.toolMode === Editor.MODE_SELECT)
-		{
-			if(Editor.mouse.buttonJustPressed(Mouse.LEFT) && Editor.mouse.insideCanvas())
-			{
-				Editor.selectObjectWithMouse();
-			}
-
-			Editor.isEditingObject = false;
-		}
-		else
-		{
-			//If mouse double clicked select object
-			if(Editor.mouse.buttonDoubleClicked() && Editor.mouse.insideCanvas())
-			{
-				Editor.selectObjectWithMouse();
-			}
-
-			//If no object selected update tool
-			if(Editor.selectedObject !== null)
-			{
-				if(Editor.tool !== null)
-				{
-					Editor.isEditingObject = Editor.tool.update();
-					
-					if(Editor.mouse.buttonJustPressed(Mouse.LEFT) && Editor.isEditingObject)
-					{
-						Editor.history.push(Editor.selectedObject, Action.CHANGED);
-					}
-
-					if(Editor.isEditingObject)
-					{
-						Editor.updateObjectPanel();
-					}
-				}
-				else
-				{
-					Editor.isEditingObject = false;
-				}
-			}
-		}
-		
-		//Update object transformation matrix
-		if(Editor.selectedObject !== null)
-		{	
-			if(!Editor.selectedObject.matrixAutoUpdate)
-			{
-				Editor.selectedObject.updateMatrix();
-			}
-		}
-
-		//Update object helper
-		Editor.objectHelper.update();
-
-		//Check if mouse is inside canvas
-		if(Editor.mouse.insideCanvas())
-		{
-			//Lock mouse when camera is moving
-			if(Settings.editor.lockMouse && Nunu.runningOnDesktop())
-			{
-				if(!Editor.isEditingObject && (Editor.mouse.buttonJustPressed(Mouse.LEFT) || Editor.mouse.buttonJustPressed(Mouse.RIGHT) || Editor.mouse.buttonJustPressed(Mouse.MIDDLE)))
-				{
-					Editor.mouse.setLock(true);
-				}
-				else if(Editor.mouse.buttonJustReleased(Mouse.LEFT) || Editor.mouse.buttonJustReleased(Mouse.RIGHT) || Editor.mouse.buttonJustReleased(Mouse.MIDDLE))
-				{
-					Editor.mouse.setLock(false);
-				}
-			}
-
-			//Orthographic camera (2D mode)
-			if(Editor.cameraMode === Editor.CAMERA_ORTHOGRAPHIC)
-			{
-				//Move camera on y / x
-				if(Editor.mouse.buttonPressed(Mouse.RIGHT))
-				{
-					var ratio = Editor.camera.size / Editor.canvas.width * 2;
-
-					Editor.camera.position.x -= Editor.mouse.delta.x * ratio;
-					Editor.camera.position.y += Editor.mouse.delta.y * ratio;
-				}
-
-				//Camera zoom
-				if(Editor.mouse.wheel !== 0)
-				{
-					Editor.camera.size += Editor.mouse.wheel * Editor.camera.size / 1000;
-
-					Editor.camera.updateProjectionMatrix();
-				}
-			}
-			//Perpesctive camera
 			else
 			{
-				//Look camera
-				if(Editor.mouse.buttonPressed(Mouse.LEFT) && !Editor.isEditingObject)
-				{
-					Editor.cameraRotation.x -= 0.002 * Editor.mouse.delta.x;
-					Editor.cameraRotation.y -= 0.002 * Editor.mouse.delta.y;
-
-					//Limit Vertical Rotation to 90 degrees
-					var pid2 = 1.57;
-					if(Editor.cameraRotation.y < -pid2)
-					{
-						Editor.cameraRotation.y = -pid2;
-					}
-					else if(Editor.cameraRotation.y > pid2)
-					{
-						Editor.cameraRotation.y = pid2;
-					}
-
-					Editor.setCameraRotation(Editor.cameraRotation, Editor.camera);
-				}
-
-				//Move Camera on X and Z
-				else if(Editor.mouse.buttonPressed(Mouse.RIGHT))
-				{
-					//Move speed
-					var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 1000;
-					if(speed < 0.02)
-					{
-						speed = 0.02;
-					}
-
-					//Move Camera Front and Back
-					var angleCos = Math.cos(Editor.cameraRotation.x);
-					var angleSin = Math.sin(Editor.cameraRotation.x);
-					Editor.camera.position.z += Editor.mouse.delta.y * speed * angleCos;
-					Editor.camera.position.x += Editor.mouse.delta.y * speed * angleSin;
-
-					//Move Camera Lateral
-					var angleCos = Math.cos(Editor.cameraRotation.x + MathUtils.pid2);
-					var angleSin = Math.sin(Editor.cameraRotation.x + MathUtils.pid2);
-					Editor.camera.position.z += Editor.mouse.delta.x * speed * angleCos;
-					Editor.camera.position.x += Editor.mouse.delta.x * speed * angleSin;
-				}
-				
-				//Move Camera on Y
-				else if(Editor.mouse.buttonPressed(Mouse.MIDDLE))
-				{
-					Editor.camera.position.y += Editor.mouse.delta.y * 0.1;
-				}
-
-				//Move in camera direction using mouse scroll
-				if(Editor.mouse.wheel !== 0)
-				{
-					//Move speed
-					var speed = Editor.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 2000;
-					speed *= Editor.mouse.wheel;
-
-					//Limit zoom speed
-					if(speed < 0 && speed > -0.03)
-					{
-						speed = -0.03;
-					}
-					else if(speed > 0 && speed < 0.03)
-					{
-						speed = 0.03;
-					}
-
-					//Move camera
-					var direction = Editor.camera.getWorldDirection();
-					Editor.camera.position.x -= speed * direction.x;
-					Editor.camera.position.y -= speed * direction.y;
-					Editor.camera.position.z -= speed * direction.z;
-				}
+				Editor.saveProgram(undefined, false);
 			}
 		}
-	}
-	//Update Scene if on test mode
-	else if(Editor.state === Editor.STATE_TESTING)
-	{
-		Editor.programRunning.update();
-
-		if(Editor.keyboard.keyJustPressed(Keyboard.F5))
+		else if(Editor.keyboard.keyJustPressed(Keyboard.L))
 		{
-			Editor.setState(Editor.STATE_EDITING);
+			Interface.loadProgram();
+		}
+		else if(Editor.keyboard.keyJustPressed(Keyboard.W) || Editor.keyboard.keyJustPressed(Keyboard.F4))
+		{
+			Interface.tab.closeActual();
+		}
+		else if(Editor.keyboard.keyJustPressed(Keyboard.TAB) || Editor.keyboard.keyJustPressed(Keyboard.PAGE_DOWN))
+		{
+			Interface.tab.selectNextTab();
+		}
+		else if(Editor.keyboard.keyJustPressed(Keyboard.PAGE_UP))
+		{
+			Interface.tab.selectPreviousTab();
 		}
 	}
 
 	requestAnimationFrame(Editor.update);
-	
-	Editor.render();
-};
-
-//Render stuff into screen
-Editor.render = function()
-{
-	var renderer = Editor.renderer;	
-	renderer.clear();
-
-	if(Editor.state === Editor.STATE_EDITING)
-	{
-		//Render scene
-		renderer.setViewport(0, 0, Editor.canvas.width, Editor.canvas.height);
-		renderer.render(Editor.program.scene, Editor.camera);
-
-		//Render tools
-		renderer.render(Editor.toolScene, Editor.camera);
-		renderer.clearDepth();
-		renderer.render(Editor.toolSceneTop, Editor.camera);
-
-		//Render camera preview
-		if(Settings.editor.cameraPreviewEnabled && (Editor.selectedObject instanceof THREE.Camera || Editor.program.scene.cameras.length > 0))
-		{
-			var width = Settings.editor.cameraPreviewPercentage * Editor.canvas.width;
-			var height = Settings.editor.cameraPreviewPercentage * Editor.canvas.height;
-			var offset = Editor.canvas.width - width - 10;
-
-			renderer.setScissorTest(true);
-			renderer.setViewport(offset, 10, width, height);
-			renderer.setScissor(offset, 10, width, height);
-			renderer.clear();
-
-			//Preview selected camera
-			if(Editor.selectedObject instanceof THREE.Camera)
-			{
-				var camera = Editor.selectedObject;
-				camera.aspect = width / height;
-				camera.updateProjectionMatrix();
-
-				renderer.setViewport(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-				renderer.setScissor(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-
-				renderer.render(Editor.program.scene, camera);
-			}
-			//Preview all cameras in use
-			else
-			{
-				var scene = Editor.program.scene;
-				for(var i = 0; i < scene.cameras.length; i++)
-				{
-					var camera = scene.cameras[i];
-					camera.aspect = width / height;
-					camera.updateProjectionMatrix();
-					
-					if(camera.clearColor)
-					{
-						renderer.clearColor();
-					}
-					if(camera.clearDepth)
-					{
-						renderer.clearDepth();
-					}
-
-					renderer.setViewport(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-					renderer.setScissor(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-					renderer.render(scene, camera);
-				}
-			}
-
-			renderer.setScissor(0, 0, Editor.canvas.width, Editor.canvas.height);
-		}
-	}
-	else if(Editor.state === Editor.STATE_TESTING)
-	{
-		Editor.programRunning.render(renderer, Editor.canvas.width, Editor.canvas.height);
-	}
-
-	//End performance measure
-	if(Editor.stats !== null)
-	{
-		Editor.stats.end();
-	}
 };
 
 //Resize to fit window
@@ -852,6 +479,9 @@ Editor.selectObject = function(object)
 		Editor.selectedObject = object;
 
 		Editor.selectObjectPanel();
+
+		//TODO <CHANGE THIS>
+		/*
 		Editor.selectObjectHelper();
 
 		if(Editor.tool !== null)
@@ -862,7 +492,7 @@ Editor.selectObject = function(object)
 		else
 		{
 			Editor.selectTool(Editor.toolMode);
-		}
+		}*/
 	}
 	else
 	{
@@ -1003,7 +633,6 @@ Editor.pasteObject = function(target)
 Editor.redo = function()
 {
 	//TODO <ADD CODE HERE>
-	alert("Redo not implemented");
 };
 
 //Undo action
@@ -1166,7 +795,8 @@ Editor.createDefaultResouces = function()
 //Select tool to manipulate objects
 Editor.selectTool = function(tool)
 {
-	Editor.toolMode = tool;
+	//TODO <CHANGE THIS>
+	/*Editor.toolMode = tool;
 	Editor.toolContainer.removeAll();
 	
 	if(Editor.tool !== null)
@@ -1202,7 +832,7 @@ Editor.selectTool = function(tool)
 	else
 	{
 		Editor.tool = null;
-	}
+	}*/
 };
 
 //Update UI panel to match selected object
@@ -1385,92 +1015,10 @@ Editor.selectObjectHelper = function()
 	}
 };
 
-//Resize Camera
-Editor.resizeCamera = function()
-{
-	if(Editor.canvas !== null && Editor.renderer !== null)
-	{
-		Editor.renderer.setSize(Editor.canvas.width, Editor.canvas.height);
-		Editor.camera.aspect = Editor.canvas.width/Editor.canvas.height;
-		Editor.camera.updateProjectionMatrix();
-
-		if(Editor.state === Editor.STATE_TESTING)
-		{
-			Editor.programRunning.resize(Editor.canvas.width, Editor.canvas.height);
-		}
-	}
-};
-
-//Set camera mode (ortho or perspective)
-Editor.setCameraMode = function(mode)
-{
-	if(mode === undefined)
-	{
-		mode = (Editor.cameraMode === Editor.CAMERA_PERSPECTIVE) ? Editor.CAMERA_ORTHOGRAPHIC : Editor.CAMERA_PERSPECTIVE;
-	}
-	
-	var aspect = (Editor.canvas !== null) ? Editor.canvas.width/Editor.canvas.height : 1.0;
-
-	if(mode === Editor.CAMERA_ORTHOGRAPHIC)
-	{
-		Editor.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL);
-		Editor.camera.position.set(0, 0, 20);
-		Editor.gridHelper.rotation.x = Math.PI / 2;
-	}
-	else if(mode === Editor.CAMERA_PERSPECTIVE)
-	{
-		Editor.camera = new PerspectiveCamera(60, aspect);
-		Editor.camera.position.set(0, 3, 5);
-		Editor.cameraRotation.set(3.14, 0);
-		Editor.gridHelper.rotation.x = 0;
-		Editor.setCameraRotation(Editor.cameraRotation, Editor.camera);
-	}
-
-	Editor.cameraMode = mode;
-	Editor.selectTool(Editor.toolMode);
-};
-
-//Set camera rotation
-Editor.setCameraRotation = function(cameraRotation, camera)
-{
-	//Calculate direction vector
-	var cosAngleY = Math.cos(cameraRotation.y);
-	var direction = new THREE.Vector3(Math.sin(cameraRotation.x)*cosAngleY, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cosAngleY);
-
-	//Add position offset and set camera direction
-	direction.add(camera.position);
-	camera.lookAt(direction);
-};
-
-//Update raycaster position from editor mouse position
-Editor.updateRaycasterFromMouse = function()
-{
-	var mouse = new THREE.Vector2((Editor.mouse.position.x/Editor.canvas.width)*2 - 1, -(Editor.mouse.position.y/Editor.canvas.height)*2 + 1);
-	Editor.raycaster.setFromCamera(mouse, Editor.camera);
-};
-
-//Select objects with mouse
-Editor.selectObjectWithMouse = function()
-{
-	Editor.updateRaycasterFromMouse();
-	var intersects = Editor.raycaster.intersectObjects(Editor.program.scene.children, true);
-	if(intersects.length > 0)
-	{
-		Editor.selectObject(intersects[0].object);
-	}
-};
-
-//Update editor raycaster with new x and y positions (normalized -1 to 1)
-Editor.updateRaycaster = function(x, y)
-{
-	Editor.raycaster.setFromCamera(new THREE.Vector2(x, y), Editor.camera);
-};
-
 //Reset editing flags
 Editor.resetEditingFlags = function()
 {
 	Editor.selectedObject = null;
-	Editor.isEditingObject = false;
 	
 	if(Interface.panel !== null)
 	{
@@ -1478,8 +1026,9 @@ Editor.resetEditingFlags = function()
 		Interface.panel = null;
 	}
 	
-	Editor.selectTool(Editor.MODE_SELECT);
-	Editor.selectObjectHelper();
+	//TODO <CHANGE THIS>
+	//Editor.selectTool(Editor.MODE_SELECT);
+	//Editor.selectObjectHelper();
 };
 
 //Craete new Program
@@ -1968,176 +1517,6 @@ Editor.exportMacOSProject = function(dir)
 	FileSystem.copyFolder("nwjs\\mac", dir + "\\nwjs");
 	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
 	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
-};
-
-//Set editor state
-Editor.setState = function(state)
-{
-	if(state === Editor.STATE_EDITING)
-	{
-		//Dispose running program
-		Editor.disposeRunningProgram();
-
-		//Set run button text
-		Interface.run.setText("Run");
-		Interface.run.visible = true;
-		Interface.run.updateInterface();
-
-		//Hide fullscreen and VR buttons
-		var tab = Interface.tab.getActual();
-		if(tab instanceof SceneEditor)
-		{
-			tab.showButtonsFullscreen = false;
-			tab.showButtonsVr = false;
-			tab.showButtonsCameraMode = true;
-			tab.updateInterface();
-		}
-	}
-	else if(state === Editor.STATE_TESTING)
-	{
-		//Copy program
-		Editor.programRunning = Editor.program.clone();
-
-		//Use editor camera as default camera for program
-		Editor.programRunning.defaultCamera = Editor.camera;
-		Editor.programRunning.setRenderer(Editor.renderer);
-
-		//Initialize scene
-		Editor.programRunning.setMouseKeyboard(Editor.mouse, Editor.keyboard);
-		Editor.programRunning.initialize();
-		Editor.programRunning.resize(Editor.canvas.width, Editor.canvas.height);
-
-		//Show full screen and VR buttons
-		var tab = Interface.tab.getActual();
-		tab.showButtonsFullscreen = true;
-		tab.showButtonsCameraMode = false;
-
-		//If program uses VR set button
-		if(Editor.programRunning.vr)
-		{
-			if(Nunu.webvrAvailable())
-			{
-				//Show VR button
-				tab.showButtonsVr = true;
-
-				//Create VR switch callback
-				var vr = true;
-				tab.vrButton.setCallback(function()
-				{
-					if(vr)
-					{
-						Editor.programRunning.displayVR();
-					}
-					else
-					{
-						Editor.programRunning.exitVR();
-					}
-
-					vr = !vr;
-				});
-			}
-		}
-
-		//Lock mouse pointer
-		if(Editor.programRunning.lockPointer)
-		{
-			Editor.mouse.setLock(true);
-		}
-
-		//Update tab to show buttons
-		tab.updateInterface();
-
-		//Set renderer size
-		Editor.renderer.setViewport(0, 0, Editor.canvas.width, Editor.canvas.height);
-		Editor.renderer.setScissor(0, 0, Editor.canvas.width, Editor.canvas.height);
-
-		//Set run button text
-		Interface.run.setText("Stop");
-		Interface.run.visible = true;
-		Interface.run.updateInterface();
-	}
-	else if(state === Editor.STATE_IDLE)
-	{
-		//Dispose running program
-		Editor.disposeRunningProgram();
-
-		//Hide run button
-		Interface.run.visible = false;
-		Interface.run.updateInterface();
-	}
-
-	//Set editor state
-	Editor.state = state;
-};
-
-//Dispose running program if there is one
-Editor.disposeRunningProgram = function()
-{
-	//Dispose running program if there is one
-	if(Editor.programRunning !== null)
-	{
-		Editor.programRunning.dispose();
-		Editor.programRunning = null;
-	}
-
-	//Unlock mouse
-	Editor.mouse.setLock(false);
-};
-
-//Set performance meter to be used
-Editor.setPerformanceMeter = function(stats)
-{
-	Editor.stats = stats;
-};
-
-//Set render canvas
-Editor.setRenderCanvas = function(canvas)
-{
-	Editor.mouse.setCanvas(canvas);
-	Editor.initializeRenderer(canvas);
-};
-
-//Initialize renderer
-Editor.initializeRenderer = function(canvas)
-{
-	if(canvas === undefined)
-	{
-		canvas = Editor.canvas;
-	}
-	else
-	{
-		Editor.canvas = canvas;
-	}
-
-	//Rendering quality settings
-	if(Settings.render.followProject)
-	{
-		var antialiasing = Editor.program.antialiasing;
-		var shadows = Editor.program.shadows;
-		var shadowsType = Editor.program.shadowsType;
-	}
-	else
-	{
-		var antialiasing = Settings.render.antialiasing;
-		var shadows = Settings.render.shadows;
-		var shadowsType = Settings.render.shadowsType;
-	}
-
-	//Dispose old renderer
-	if(Editor.renderer !== null)
-	{
-		Editor.renderer.dispose();
-	}
-
-	//Create renderer
-	Editor.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: antialiasing});
-	Editor.renderer.setSize(canvas.width, canvas.height);
-	Editor.renderer.shadowMap.enabled = shadows;
-	Editor.renderer.shadowMap.type = shadowsType;
-	Editor.renderer.autoClear = false;
-
-	//Get webgl context
-	Editor.gl = Editor.renderer.context;
 };
 
 //Set fullscreen mode

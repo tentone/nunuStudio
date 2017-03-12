@@ -216,7 +216,7 @@ GeneralSettingsTab.prototype = Object.create(TabElement.prototype);
 //Activate
 GeneralSettingsTab.prototype.activate = function()
 {
-	Editor.setState(Editor.STATE_IDLE);
+	
 
 	//General
 	this.theme.setValue(Settings.general.theme);

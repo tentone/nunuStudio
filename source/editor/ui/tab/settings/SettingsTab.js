@@ -28,7 +28,7 @@ SettingsTab.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 	
-	Editor.setState(Editor.STATE_IDLE);
+	
 };
 
 //Update division Size

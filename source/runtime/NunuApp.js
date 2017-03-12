@@ -132,8 +132,10 @@ include("core/utils/BufferUtils.js");
  */
 
 /**
- * Flag used to controll if the canvas element is resized automatically by the nunu app instance
- * If true the canvas is resized whenether the resize method is called
+ * Flag used to controll if the canvas element is resized automatically by the nunu app instance.
+ * 
+ * If true the canvas is resized whenether the resize method is called.
+ * 
  * @property canvasResize
  * @type {boolean}
  * @default false if a canvas is provided, else true
@@ -191,7 +193,8 @@ function NunuApp(canvas)
 }
 
 /**
- * Load program asynchronously and run it after its loaded
+ * Load program asynchronously and run it after its loaded.
+ * 
  * @method loadRunProgram
  * @param {String} fname Name of the file to load
  * @param {Function} onLoad onLoad callback
@@ -215,7 +218,8 @@ NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 }
 
 /**
- * Load program from file
+ * Load program from file.
+ * 
  * @method loadProgram
  * @param {String} fname Name of the file to load
  */
@@ -227,8 +231,10 @@ NunuApp.prototype.loadProgram = function(fname)
 }
 
 /**
- * Start running nunu program
- * A nunu program must be loaded before calling this method
+ * Start running nunu program.
+ * 
+ * A nunu program must be loaded before calling this method.
+ * 
  * @method run
  */
 NunuApp.prototype.run = function()
@@ -286,8 +292,10 @@ NunuApp.prototype.run = function()
 }
 
 /**
- * Update nunu program state
- * Automatically called by the runtime handler
+ * Update nunu program state.
+ * 
+ * Automatically called by the runtime handler.
+ * 
  * @method update
  */
 NunuApp.prototype.update = function()
@@ -300,10 +308,14 @@ NunuApp.prototype.update = function()
 }
 
 /**
- * Exit from app
- * This method kills the app and disposes all internal elements to avoid memory leaks
- * Is should be called before exiting the webpage or before switching nunu programs
- * When loading new nunu programs the same NunuApp instance can be used
+ * Exit from app.
+ * 
+ * This method kills the app and disposes all internal elements to avoid memory leaks.
+ * 
+ * Is should be called before exiting the webpage or before switching nunu programs.
+ * 
+ * When loading new nunu programs the same NunuApp instance can be used.
+ * 
  * @method exit
  */
 NunuApp.prototype.exit = function()
@@ -333,8 +345,10 @@ NunuApp.prototype.exit = function()
 }
 
 /**
- * Resize the window
- * Should be called whenether the host window is resized
+ * Resize the window.
+ * 
+ * Should be called whenether the host window is resized.
+ * 
  * @method resize
  */
 NunuApp.prototype.resize = function()
@@ -355,8 +369,10 @@ NunuApp.prototype.resize = function()
 }
 
 /**
- * Send data to running nunu application
- * The data sent using this method is received by scripts that implement the onAppData method
+ * Send data to running nunu application.
+ * 
+ * The data sent using this method is received by scripts that implement the onAppData method.
+ * 
  * @param {Object} data Data to send
  * @method sendData
  */
@@ -369,8 +385,10 @@ NunuApp.prototype.sendData = function(data)
 }
 
 /**
- * Set on data receive callback
- * Callback receives data as an argument
+ * Set on data receive callback.
+ * 
+ * Callback receives data as an argument.
+ * 
  * @method setOnDataReceived
  * @param {Function} callback Function executed whenether the nunu app running sends data to the host
  */
@@ -380,8 +398,10 @@ NunuApp.prototype.setOnDataReceived = function(callback)
 }
 
 /**
- * Set on exit callback
- * Callback is executed when exiting the nunu app
+ * Set on exit callback.
+ * 
+ * Callback is executed when exiting the nunu app.
+ * 
  * @method setOnExit
  * @param {Function} callback onExit callback
  */
@@ -391,7 +411,8 @@ NunuApp.prototype.setOnExit = function(callback)
 }
 
 /**
- * Check if VR mode is available
+ * Check if VR mode is available.
+ * 
  * @method vrAvailable
  * @return {boolean} True if VR mode available
  */
@@ -401,7 +422,8 @@ NunuApp.prototype.vrAvailable = function()
 }
 
 /**
- * Toggle VR mode, only works if VR mode is available
+ * Toggle VR mode, only works if VR mode is available.
+ * 
  * @method toggleVR
  */
 NunuApp.prototype.toggleVR = function()
@@ -427,7 +449,8 @@ NunuApp.prototype.toggleVR = function()
 
 /**
  * Set fullscreen mode
- * @param {boolean} fullscreen Fullscreen value
+ * 
+ * @param {boolean} fullscreen If true go to fullscren if false exit fullscreen mode
  * @param {DOM} element DOM element to go fullscren by default the rendering canvas is used
  */
 NunuApp.prototype.setFullscreen = function(fullscreen, element)

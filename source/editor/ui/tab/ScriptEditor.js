@@ -155,7 +155,7 @@ ScriptEditor.prototype.activate = function()
 	TabElement.prototype.activate.call(this);
 	
 	//Set editor state
-	Editor.setState(Editor.STATE_IDLE);
+	
 	Editor.resetEditingFlags();
 
 	//Set font size
