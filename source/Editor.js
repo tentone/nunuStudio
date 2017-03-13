@@ -361,21 +361,18 @@ Editor.initialize = function()
 		}
 	}
 
-	//Initialize input
+	//Input
 	Editor.keyboard = new Keyboard();
 	Editor.mouse = new Mouse();
 
 	//Load settings
 	Settings.load();
 
-	//Load interface theme
+	//Load theme
 	Editor.theme = Theme.get(Settings.general.theme);
 	
-	//Editor initial state
+	//Editor tool
 	Editor.toolMode = Editor.SELECT;
-
-	//Editing tool
-	Editor.tool = null;
 
 	//Open file
 	Editor.openFile = null;
@@ -899,82 +896,6 @@ Editor.selectObjectPanel = function()
 	else
 	{
 		Interface.panel = null;
-	}
-};
-
-//Select helper to debug selected object data
-Editor.selectObjectHelper = function()
-{
-	Editor.objectHelper.removeAll();
-
-	if(Editor.selectedObject !== null)
-	{
-		//Camera
-		if(Editor.selectedObject instanceof THREE.Camera)
-		{
-			Editor.objectHelper.add(new THREE.CameraHelper(Editor.selectedObject));
-			Editor.objectHelper.add(new ObjectIconHelper(Editor.selectedObject, Interface.fileDir + "icons/camera/camera.png"));
-		}
-		//Light
-		else if(Editor.selectedObject instanceof THREE.Light)
-		{
-			//Directional light
-			if(Editor.selectedObject instanceof THREE.DirectionalLight)
-			{
-				Editor.objectHelper.add(new THREE.DirectionalLightHelper(Editor.selectedObject, 1));
-			}
-			//Point light
-			else if(Editor.selectedObject instanceof THREE.PointLight)
-			{
-				Editor.objectHelper.add(new THREE.PointLightHelper(Editor.selectedObject, 1));
-			}
-			//RectArea light
-			else if(Editor.selectedObject instanceof THREE.RectAreaLight)
-			{
-				Editor.objectHelper.add(new RectAreaLightHelper(Editor.selectedObject));
-			}
-			//Spot light
-			else if(Editor.selectedObject instanceof THREE.SpotLight)
-			{
-				Editor.objectHelper.add(new THREE.SpotLightHelper(Editor.selectedObject));
-			}
-			//Hemisphere light
-			else if(Editor.selectedObject instanceof THREE.HemisphereLight)
-			{
-				Editor.objectHelper.add(new THREE.HemisphereLightHelper(Editor.selectedObject, 1));
-			}
-		}
-		//Particle
-		else if(Editor.selectedObject instanceof ParticleEmitter)
-		{
-			Editor.objectHelper.add(new ParticleEmitterHelper(Editor.selectedObject));
-		}
-		//Physics
-		else if(Editor.selectedObject instanceof PhysicsObject)
-		{
-			Editor.objectHelper.add(new PhysicsObjectHelper(Editor.selectedObject));
-		}
-		//Script or Audio
-		else if(Editor.selectedObject instanceof Script || Editor.selectedObject instanceof THREE.Audio)
-		{
-			Editor.objectHelper.add(new ObjectIconHelper(Editor.selectedObject, ObjectIcons.get(Editor.selectedObject.type)));
-		}
-		//Animated Mesh
-		else if(Editor.selectedObject instanceof THREE.SkinnedMesh)
-		{
-			Editor.objectHelper.add(new WireframeHelper(Editor.selectedObject, 0xFFFF00));
-			Editor.objectHelper.add(new THREE.SkeletonHelper(Editor.selectedObject));
-		}
-		//Mesh
-		else if(Editor.selectedObject instanceof THREE.Mesh)
-		{
-			Editor.objectHelper.add(new WireframeHelper(Editor.selectedObject, 0xFFFF00));
-		}
-		//Object 3D
-		else if(Editor.selectedObject instanceof THREE.Object3D)
-		{
-			Editor.objectHelper.add(new BoundingBoxHelper(Editor.selectedObject, 0xFFFF00));
-		}
 	}
 };
 
