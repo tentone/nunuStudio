@@ -5,12 +5,12 @@ function ContextMenu(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.zIndex = "300";
 
-	//Atributes
+	//Attributes
 	this.size = new THREE.Vector2(130,20);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -18,17 +18,14 @@ function ContextMenu(parent)
 	//Options
 	this.options = [];
 
-	//Click event
+	//Self pointer
 	var self = this;
 
-	//Mouse over and mouse out events
+	//Mouse leave
 	this.element.onmouseleave = function()
 	{
 		self.destroy();
 	};
-
-	//Update element
-	this.updateInterface();
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -38,7 +35,7 @@ function ContextMenu(parent)
 ContextMenu.prototype.setText = function(text)
 {
 	this.text.setText(text);
-}
+};
 
 //Remove element
 ContextMenu.prototype.destroy = function()
@@ -53,7 +50,7 @@ ContextMenu.prototype.destroy = function()
 	{
 		this.options[k].destroy();
 	}
-}
+};
 
 //Remove option from dropdown menu
 ContextMenu.prototype.removeOption = function(index)
@@ -63,7 +60,7 @@ ContextMenu.prototype.removeOption = function(index)
 		this.options[index].destroy();
 		this.options.splice(index, 1);
 	}
-}
+};
 
 //Add new Option to dropdown menu
 ContextMenu.prototype.addOption = function(name, callback)
@@ -86,12 +83,12 @@ ContextMenu.prototype.addOption = function(name, callback)
 
 	this.options.push(button);
 	this.updateInterface();
-}
+};
 
 //Update interface
 ContextMenu.prototype.updateInterface = function()
 {
-	//Update Options
+	//Options
 	for(var i = 0; i < this.options.length; i++)
 	{
 		this.options[i].size.set(this.size.x, this.size.y);
@@ -100,7 +97,7 @@ ContextMenu.prototype.updateInterface = function()
 		this.options[i].updateInterface();
 	}
 
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -115,4 +112,4 @@ ContextMenu.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = (this.size.y * this.options.length)+ "px";
-}
+};

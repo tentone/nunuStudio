@@ -574,10 +574,6 @@ ParticleEditor.prototype.updateCamera = function()
 ParticleEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
-		
-	//Set editor state
-	
-	Editor.resetEditingFlags();
 	
 	//Set mouse canvas
 	Editor.mouse.setCanvas(this.canvas.element);

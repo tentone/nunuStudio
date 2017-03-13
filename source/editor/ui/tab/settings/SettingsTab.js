@@ -23,14 +23,6 @@ function SettingsTab(parent, closeable, container, index)
 
 SettingsTab.prototype = Object.create(TabElement.prototype);
 
-//Activate
-SettingsTab.prototype.activate = function()
-{
-	TabElement.prototype.activate.call(this);
-	
-	
-};
-
 //Update division Size
 SettingsTab.prototype.updateInterface = function()
 {

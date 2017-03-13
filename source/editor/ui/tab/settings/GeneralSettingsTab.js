@@ -149,7 +149,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.transformationSpace.setOnChange(function()
 	{
 		Settings.editor.transformationSpace = self.transformationSpace.getValue();
-		if(Editor.tool !== null && Editor.toolMode !== Editor.MODE_SCALE)
+		if(Editor.tool !== null && Editor.toolMode !== Editor.SCALE)
 		{
 			Editor.tool.setSpace(Settings.editor.transformationSpace);
 		}
@@ -216,8 +216,6 @@ GeneralSettingsTab.prototype = Object.create(TabElement.prototype);
 //Activate
 GeneralSettingsTab.prototype.activate = function()
 {
-	
-
 	//General
 	this.theme.setValue(Settings.general.theme);
 	this.filePreviewSize.setValue(Settings.general.filePreviewSize);

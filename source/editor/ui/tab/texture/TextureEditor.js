@@ -67,7 +67,7 @@ function TextureEditor(parent, closeable, container, index)
 		if(self.texture !== null)
 		{
 			self.texture.name = self.name.getText();
-			self.updateMaterial();
+			self.updatePreview();
 			Editor.updateObjectViews();
 		}
 	});
@@ -86,7 +86,7 @@ function TextureEditor(parent, closeable, container, index)
 		if(self.texture !== null)
 		{
 			self.texture.wrapS = self.wrapS.getValue();
-			self.updateMaterial();
+			self.updatePreview();
 		}
 	});
 	this.form.add(this.wrapS);
@@ -104,7 +104,7 @@ function TextureEditor(parent, closeable, container, index)
 		if(self.texture !== null)
 		{
 			self.texture.wrapT = self.wrapT.getValue();
-			self.updateMaterial();
+			self.updatePreview();
 		}
 	});
 	this.form.add(this.wrapT);
@@ -122,7 +122,7 @@ function TextureEditor(parent, closeable, container, index)
 		{
 			var value = self.repeat.getValue();
 			self.texture.repeat.set(value.x, value.y);
-			self.updateMaterial();
+			self.updatePreview();
 		}
 	});
 	this.form.add(this.repeat);
@@ -143,7 +143,7 @@ function TextureEditor(parent, closeable, container, index)
 		if(self.texture !== null)
 		{
 			self.texture.minFilter = self.minFilter.getValue();
-			self.updateMaterial();
+			self.updatePreview();
 		}
 	});
 	this.form.add(this.minFilter);
@@ -160,7 +160,7 @@ function TextureEditor(parent, closeable, container, index)
 		if(self.texture !== null)
 		{
 			self.texture.magFilter = self.magFilter.getValue();
-			self.updateMaterial();
+			self.updatePreview();
 		}
 	});
 	this.form.add(this.magFilter);
@@ -175,7 +175,7 @@ function TextureEditor(parent, closeable, container, index)
 		if(self.texture !== null)
 		{
 			self.texture.flipY = self.flipY.getValue();
-			self.updateMaterial();
+			self.updatePreview();
 		}
 	});
 	this.form.add(this.flipY);
@@ -185,7 +185,7 @@ function TextureEditor(parent, closeable, container, index)
 TextureEditor.prototype = Object.create(TabElement.prototype);
 
 //Update test material
-TextureEditor.prototype.updateMaterial = function()
+TextureEditor.prototype.updatePreview = function()
 {
 	this.sprite.material.map.needsUpdate = true;
 
@@ -196,17 +196,6 @@ TextureEditor.prototype.updateMaterial = function()
 TextureEditor.prototype.isAttached = function(texture)
 {
 	return this.texture === texture;
-}
-
-//Activate
-TextureEditor.prototype.activate = function()
-{
-	TabElement.prototype.activate.call(this);
-	
-	
-	Editor.resetEditingFlags();
-
-	this.attach(this.texture);
 }
 
 //Update object data

@@ -156,9 +156,6 @@ function TextureAsset(parent)
 			event.dataTransfer.setData("uuid", self.texture.uuid);
 			DragBuffer.pushDragElement(self.texture);
 		}
-
-		//To avoid camera movement
-		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
 	};
 
 	//Drag end (called after of ondrop)

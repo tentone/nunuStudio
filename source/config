@@ -3,7 +3,7 @@
 		"theme": "dark",
 		"filePreviewSize": 70,
 		"showStats": true,
-		"showUUID": true
+		"showUUID": false
 	},
 	"editor": {
 		"angleFormat": 0,
@@ -28,7 +28,7 @@
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"fontSize": 12,
+		"fontSize": 14,
 		"lineNumbers": true,
 		"lineWrapping": false,
 		"autoCloseBrackets": true,

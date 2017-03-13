@@ -420,19 +420,19 @@ TreeElement.prototype.setObject = function(obj)
 	{
 		this.arrow.src = "editor/files/icons/misc/arrow_right.png";
 	}
-}
+};
 
 //Set icon
 TreeElement.prototype.setIcon = function(icon)
 {
 	this.icon.src = icon;
-}
+};
 
 //Set label
 TreeElement.prototype.setLabel = function(label)
 {
 	this.label.innerHTML = label;
-}
+};
 
 //Add tree element from object
 TreeElement.prototype.addObject = function(obj)
@@ -443,7 +443,7 @@ TreeElement.prototype.addObject = function(obj)
 	
 	this.children.push(element);
 	return element;
-}
+};
 
 //Add tree element
 TreeElement.prototype.add = function(label, icon)
@@ -462,7 +462,7 @@ TreeElement.prototype.add = function(label, icon)
 
 	this.children.push(element);
 	return element;
-}
+};
 
 //Remove element
 TreeElement.prototype.destroy = function()
@@ -477,7 +477,7 @@ TreeElement.prototype.destroy = function()
 	{
 		this.children[i].destroy();
 	}
-}
+};
 
 //Update folded state for this tree element
 TreeElement.prototype.updateFoldedState = function()
@@ -497,7 +497,7 @@ TreeElement.prototype.updateFoldedState = function()
 	}
 
 	this.container.updateChildPosition();
-}
+};
 
 //Update parent tree element from scene data
 TreeElement.prototype.updateSceneData = function()
@@ -506,7 +506,7 @@ TreeElement.prototype.updateSceneData = function()
 	{
 		this.container.updateView();
 	}
-}
+};
 
 //Set element visibility
 TreeElement.prototype.setVisibility = function(visible)
@@ -521,7 +521,7 @@ TreeElement.prototype.setVisibility = function(visible)
 	{
 		this.element.style.display = "none";
 	}
-}
+};
 
 //Update interface
 TreeElement.prototype.updateInterface = function()
@@ -564,4 +564,4 @@ TreeElement.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};

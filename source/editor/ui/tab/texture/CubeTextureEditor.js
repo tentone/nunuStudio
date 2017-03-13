@@ -271,13 +271,8 @@ CubeTextureEditor.prototype.isAttached = function(texture)
 CubeTextureEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
-	
-	
-	Editor.resetEditingFlags();
-	
-	Mouse.setCanvas(this.canvas.element);
 
-	this.attach(this.texture);
+	Mouse.setCanvas(this.canvas.element);
 }
 
 //Update object data
@@ -326,8 +321,6 @@ CubeTextureEditor.prototype.attach = function(texture)
 //Update
 CubeTextureEditor.prototype.update = function()
 {
-	this.division.update();
-
 	if(Editor.mouse.buttonPressed(Mouse.LEFT))
 	{
 		var delta = Editor.mouse.delta.x * 0.004;

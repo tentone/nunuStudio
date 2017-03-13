@@ -64,7 +64,7 @@ AssetExplorer.prototype.clear = function()
 	{
 		this.files.pop().destroy();
 	}
-}
+};
 
 //Add file to explorer
 AssetExplorer.prototype.add = function(file)
@@ -74,7 +74,7 @@ AssetExplorer.prototype.add = function(file)
 	file.updateInterface();
 
 	this.files.push(file);
-}
+};
 
 //Remove element
 AssetExplorer.prototype.destroy = function()
@@ -84,7 +84,7 @@ AssetExplorer.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update division
 AssetExplorer.prototype.updateInterface = function()
@@ -116,4 +116,4 @@ AssetExplorer.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};

@@ -5,7 +5,7 @@ function DropdownMenu(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.zIndex = "100";
@@ -31,18 +31,18 @@ function DropdownMenu(parent)
 	this.text.position.set(0, 0);
 	this.text.size.set(0 , 0);
 
-	//Options Panel
+	//Panel
 	this.panel = document.createElement("div");
 	this.panel.style.position = "absolute";
 	this.panel.style.cursor = "default";
 	this.panel.style.zIndex = "200";
 
-	//Atributes
+	//Attributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 
-	//Children elements
+	//Children
 	this.children = [];
 
 	//Options
@@ -51,10 +51,10 @@ function DropdownMenu(parent)
 	this.options = [];
 	this.expanded = false;
 
-	//Click event
+	//Self pointer
 	var self = this;
 
-	//Mouse over and mouse out events
+	//Mouse over
 	this.element.onmouseover = function()
 	{
 		self.expanded = true;
@@ -63,6 +63,7 @@ function DropdownMenu(parent)
 		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
+	//Mouse leave
 	this.element.onmouseleave = function()
 	{
 		self.expanded = false;
@@ -71,12 +72,14 @@ function DropdownMenu(parent)
 		self.element.style.backgroundColor = Editor.theme.buttonColor;
 	};
 	
+	//Mouve over
 	this.panel.onmouseover = function()
 	{
 		self.expanded = true;
 		self.updateInterface();
 	};
 
+	//Mouse leave
 	this.panel.onmouseleave = function()
 	{
 		self.expanded = false;
@@ -98,19 +101,19 @@ DropdownMenu.RIGHT = 3;
 DropdownMenu.prototype.add = function(element)
 {
 	this.children.push(element);
-}
+};
 
 //Set location to where options should open
 DropdownMenu.prototype.setLocation = function(location)
 {
 	this.optionsLocation = location;
-}
+};
 
 //Set Text
 DropdownMenu.prototype.setText = function(text)
 {
 	this.text.setText(text);
-}
+};
 
 //Remove element
 DropdownMenu.prototype.destroy = function()
@@ -121,7 +124,7 @@ DropdownMenu.prototype.destroy = function()
 		this.parent.removeChild(this.panel);
 	}
 	catch(e){}
-}
+};
 
 //Remove option from dropdown menu
 DropdownMenu.prototype.removeOption = function(index)
@@ -132,7 +135,7 @@ DropdownMenu.prototype.removeOption = function(index)
 		this.options.splice(index, 1);
 		this.updateInterface();
 	}
-}
+};
 
 //Add new Option to dropdown menu
 DropdownMenu.prototype.addOption = function(name, callback, icon)
@@ -165,7 +168,7 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
 	this.updateInterface();
 
 	return button;
-}
+};
 
 //Add new Option to dropdown menu
 DropdownMenu.prototype.addMenu = function(name, icon)
@@ -196,7 +199,7 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 	this.updateInterface();
 
 	return menu;
-}
+};
 
 //Update interface
 DropdownMenu.prototype.updateInterface = function()
@@ -277,4 +280,4 @@ DropdownMenu.prototype.updateInterface = function()
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
 	this.element.style.height = this.size.y + "px";
-}
+};
