@@ -38,7 +38,7 @@ function MaterialRenderer()
 MaterialRenderer.prototype.setSize = function(x, y)
 {
 	this.renderer.setSize(x, y);
-}
+};
 
 //Render material to internal canvas and create dataURL that is passed to onRender callback
 MaterialRenderer.prototype.renderMaterial = function(material, onRender)
@@ -66,4 +66,4 @@ MaterialRenderer.prototype.renderMaterial = function(material, onRender)
 
 	//Callback
 	onRender(this.canvas.toDataURL());
-}
+};

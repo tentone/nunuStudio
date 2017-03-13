@@ -27,7 +27,7 @@ function FontRenderer()
 FontRenderer.prototype.setSize = function(x, y)
 {
 	this.renderer.setSize(x, y);
-}
+};
 
 //Render material to internal canvas and copy image to html image element
 FontRenderer.prototype.renderFont = function(font, onRender)
@@ -47,4 +47,4 @@ FontRenderer.prototype.renderFont = function(font, onRender)
 
 	//Callback
 	onRender(this.canvas.toDataURL());
-}
+};

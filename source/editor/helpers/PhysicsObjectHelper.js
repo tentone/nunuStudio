@@ -95,15 +95,12 @@ PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
 
 	var geo = mesh.geometry;
 
-	return 
-	(
-		(geo instanceof THREE.SphereGeometry && shape instanceof CANNON.Sphere) ||
-		(geo instanceof THREE.BoxGeometry && shape instanceof CANNON.Box) ||
-		(geo instanceof THREE.PlaneGeometry && shape instanceof CANNON.Plane) ||
-		(geo.id === shape.geometryId && shape instanceof CANNON.ConvexPolyhedron) ||
-		(geo.id === shape.geometryId && shape instanceof CANNON.Trimesh) ||
-		(geo.id === shape.geometryId && shape instanceof CANNON.Heightfield)
-	);
+	return (geo instanceof THREE.SphereGeometry && shape instanceof CANNON.Sphere) ||
+	(geo instanceof THREE.BoxGeometry && shape instanceof CANNON.Box) ||
+	(geo instanceof THREE.PlaneGeometry && shape instanceof CANNON.Plane) ||
+	(geo.id === shape.geometryId && shape instanceof CANNON.ConvexPolyhedron) ||
+	(geo.id === shape.geometryId && shape instanceof CANNON.Trimesh) ||
+	(geo.id === shape.geometryId && shape instanceof CANNON.Heightfield);
 }
 
 PhysicsObjectHelper.prototype.createMesh = function(shape)

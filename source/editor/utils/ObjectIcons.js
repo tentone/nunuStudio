@@ -55,4 +55,4 @@ ObjectIcons.icons["Group"] = "editor/files/icons/effects/container.png";
 ObjectIcons.get = function(type)
 {
 	return ObjectIcons.icons[type];
-}
+};

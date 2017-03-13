@@ -74,8 +74,6 @@ RenderSettingsTab.prototype = Object.create(TabElement.prototype);
 //Activate
 RenderSettingsTab.prototype.activate = function()
 {
-	
-
 	this.followProject.setValue(Settings.render.followProject);
 	this.antialiasing.setValue(Settings.render.antialiasing);
 	this.shadows.setValue(Settings.render.shadows);

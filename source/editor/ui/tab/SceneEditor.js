@@ -386,7 +386,17 @@ SceneEditor.prototype.activate = function()
 //Update settings
 SceneEditor.prototype.updateSettings = function()
 {
+	this.gridHelper.visible = Settings.editor.gridEnabled;
+	this.gridHelper.setSize(Settings.editor.gridSize);
+	this.gridHelper.setSpacing(Settings.editor.gridSpacing);
+	this.gridHelper.update();
 
+	this.axisHelper.visible = Settings.editor.axisEnabled;
+
+	if(this.tool !== null && Editor.toolMode !== Editor.SCALE)
+	{
+		this.tool.setSpace(Settings.editor.transformationSpace);
+	}
 };
 
 //Deactivate
