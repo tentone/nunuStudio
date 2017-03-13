@@ -934,7 +934,7 @@ SceneEditor.prototype.selectTool = function(tool)
 	}
 
 	//TODO <CHECK THIS>
-	Interface.selectTool(tool);
+	//Interface.selectTool(tool);
 
 	if(Editor.selectedObject !== null && tool !== Editor.SELECT)
 	{
@@ -962,6 +962,82 @@ SceneEditor.prototype.selectTool = function(tool)
 	else
 	{
 		this.tool = null;
+	}
+};
+
+//Select helper to debug selected object data
+SceneEditor.prototype.selectObjectHelper = function()
+{
+	this.objectHelper.removeAll();
+
+	if(Editor.selectedObject !== null)
+	{
+		//Camera
+		if(Editor.selectedObject instanceof THREE.Camera)
+		{
+			this.objectHelper.add(new THREE.CameraHelper(Editor.selectedObject));
+			this.objectHelper.add(new ObjectIconHelper(Editor.selectedObject, Interface.fileDir + "icons/camera/camera.png"));
+		}
+		//Light
+		else if(Editor.selectedObject instanceof THREE.Light)
+		{
+			//Directional light
+			if(Editor.selectedObject instanceof THREE.DirectionalLight)
+			{
+				this.objectHelper.add(new THREE.DirectionalLightHelper(Editor.selectedObject, 1));
+			}
+			//Point light
+			else if(Editor.selectedObject instanceof THREE.PointLight)
+			{
+				this.objectHelper.add(new THREE.PointLightHelper(Editor.selectedObject, 1));
+			}
+			//RectArea light
+			else if(Editor.selectedObject instanceof THREE.RectAreaLight)
+			{
+				this.objectHelper.add(new RectAreaLightHelper(Editor.selectedObject));
+			}
+			//Spot light
+			else if(Editor.selectedObject instanceof THREE.SpotLight)
+			{
+				this.objectHelper.add(new THREE.SpotLightHelper(Editor.selectedObject));
+			}
+			//Hemisphere light
+			else if(Editor.selectedObject instanceof THREE.HemisphereLight)
+			{
+				this.objectHelper.add(new THREE.HemisphereLightHelper(Editor.selectedObject, 1));
+			}
+		}
+		//Particle
+		else if(Editor.selectedObject instanceof ParticleEmitter)
+		{
+			this.objectHelper.add(new ParticleEmitterHelper(Editor.selectedObject));
+		}
+		//Physics
+		else if(Editor.selectedObject instanceof PhysicsObject)
+		{
+			this.objectHelper.add(new PhysicsObjectHelper(Editor.selectedObject));
+		}
+		//Script or Audio
+		else if(Editor.selectedObject instanceof Script || Editor.selectedObject instanceof THREE.Audio)
+		{
+			this.objectHelper.add(new ObjectIconHelper(Editor.selectedObject, ObjectIcons.get(Editor.selectedObject.type)));
+		}
+		//Animated Mesh
+		else if(Editor.selectedObject instanceof THREE.SkinnedMesh)
+		{
+			this.objectHelper.add(new WireframeHelper(Editor.selectedObject, 0xFFFF00));
+			this.objectHelper.add(new THREE.SkeletonHelper(Editor.selectedObject));
+		}
+		//Mesh
+		else if(Editor.selectedObject instanceof THREE.Mesh)
+		{
+			this.objectHelper.add(new WireframeHelper(Editor.selectedObject, 0xFFFF00));
+		}
+		//Object 3D
+		else if(Editor.selectedObject instanceof THREE.Object3D)
+		{
+			this.objectHelper.add(new BoundingBoxHelper(Editor.selectedObject, 0xFFFF00));
+		}
 	}
 };
 
