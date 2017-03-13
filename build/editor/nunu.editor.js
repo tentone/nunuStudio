@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.22 Alpha";
-Nunu.TIMESTAMP = "201703131611";
+Nunu.TIMESTAMP = "201703131747";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -68647,7 +68647,7 @@ GridHelper.prototype.update = function() {
   for (var b = 2 * Math.round(this.size / this.spacing), e = 2 * this.size / b, d = [], f = 0, k = -this.size;f <= b;f++, k += e) {
     d.push(-this.size, 0, k, this.size, 0, k), d.push(k, 0, -this.size, k, 0, this.size);
   }
-  a.addAttribute("position", new THREE.Float32Attribute(d, 3));
+  a.addAttribute("position", new THREE.Float32BufferAttribute(d, 3));
 };
 function RectAreaLightHelper(a) {
   this.material = new THREE.MeshBasicMaterial;
