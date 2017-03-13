@@ -27,6 +27,10 @@ function SceneEditor(parent, closeable, container, index)
 	//Scene
 	this.scene = null;
 
+	//Tools
+	this.toolMode = Editor.SELECT;
+	this.tool = null;
+
 	//Mouse and keyboard
 	this.keyboard = new Keyboard();
 	this.mouse = new Mouse();
@@ -69,6 +73,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraRotation = new THREE.Vector2(0, 0);
 	this.setCameraMode(SceneEditor.CAMERA_PERSPECTIVE);
 
+	//Editing object flag
 	this.isEditingObject = false;
 
 	//Self pointer
@@ -87,14 +92,14 @@ function SceneEditor(parent, closeable, container, index)
 
 			//Update raycaster direction
 			var position = new THREE.Vector2(event.clientX - rect.left, event.clientY - rect.top);
-			Editor.updateRaycaster(position.x / self.canvas.width * 2 - 1, -2 * position.y / self.canvas.height + 1);
+			self.updateRaycaster(position.x / self.canvas.width * 2 - 1, -2 * position.y / self.canvas.height + 1);
 
 			//Get object from drag buffer
 			var uuid = event.dataTransfer.getData("uuid");
 			var draggedObject = DragBuffer.popDragElement(uuid);
 
 			//Check intersected objects
-			var intersections = this.raycaster.intersectObjects(self.scene.children, true);
+			var intersections = self.raycaster.intersectObjects(self.scene.children, true);
 
 			//Dragged file into object
 			if(intersections.length > 0 && event.dataTransfer.files.length > 0)
@@ -217,6 +222,8 @@ function SceneEditor(parent, closeable, container, index)
 				}
 			}
 		}
+
+		self.mouse.updateKey(Mouse.LEFT, Key.UP);
 	};
 
 	//Prevent deafault when object dragged over
@@ -390,7 +397,7 @@ SceneEditor.prototype.deactivate = function()
 };
 
 //Destroy
-TabElement.prototype.destroy = function()
+SceneEditor.prototype.destroy = function()
 {
 	TabElement.prototype.destroy.call(this);
 
@@ -424,7 +431,7 @@ SceneEditor.prototype.update = function()
 
 	this.isEditingObject = false;
 
-	if(this.state = SceneEditor.EDITING)
+	if(this.state === SceneEditor.EDITING)
 	{
 		//Keyboard shortcuts
 		if(this.keyboard.keyJustPressed(Keyboard.DEL))
@@ -472,7 +479,7 @@ SceneEditor.prototype.update = function()
 		}
 
 		//Select objects
-		if(Editor.toolMode === Editor.MODE_SELECT)
+		if(this.toolMode === Editor.SELECT)
 		{
 			if(this.mouse.buttonJustPressed(Mouse.LEFT) && this.mouse.insideCanvas())
 			{
@@ -492,9 +499,9 @@ SceneEditor.prototype.update = function()
 			//If no object selected update tool
 			if(Editor.selectedObject !== null)
 			{
-				if(Editor.tool !== null)
+				if(this.tool !== null)
 				{
-					this.isEditingObject = Editor.tool.update();
+					this.isEditingObject = this.tool.update();
 					
 					if(this.mouse.buttonJustPressed(Mouse.LEFT) && this.isEditingObject)
 					{
@@ -557,11 +564,10 @@ SceneEditor.prototype.update = function()
 				if(this.mouse.wheel !== 0)
 				{
 					this.camera.size += this.mouse.wheel * this.camera.size / 1000;
-
 					this.camera.updateProjectionMatrix();
 				}
 			}
-			//Perpesctive camera
+			//Perspective camera
 			else
 			{
 				//Look camera
@@ -661,10 +667,12 @@ SceneEditor.prototype.update = function()
 SceneEditor.prototype.render = function()
 {
 	var renderer = this.renderer;
-	renderer.clear();
 
 	if(this.state === SceneEditor.EDITING)
 	{
+		//Clear
+		renderer.clear();
+
 		//Render scene
 		renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
 		renderer.render(Editor.program.scene, this.camera);
@@ -674,7 +682,7 @@ SceneEditor.prototype.render = function()
 		renderer.clearDepth();
 		renderer.render(this.toolSceneTop, this.camera);
 
-		//Render camera preview
+		//Camera preview
 		if(Settings.editor.cameraPreviewEnabled && (Editor.selectedObject instanceof THREE.Camera || Editor.program.scene.cameras.length > 0))
 		{
 			var width = Settings.editor.cameraPreviewPercentage * this.canvas.width;
@@ -814,7 +822,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	}
 
 	this.cameraMode = mode;
-	Editor.selectTool(Editor.toolMode);
+	this.selectTool(this.toolMode);
 };
 
 //Set camera rotation
@@ -832,6 +840,8 @@ SceneEditor.prototype.setCameraRotation = function(cameraRotation, camera)
 //Set scene editor state
 SceneEditor.prototype.setState = function(state)
 {
+	this.state = state;
+
 	if(state === SceneEditor.EDITING)
 	{
 		//Set run button text
@@ -846,6 +856,9 @@ SceneEditor.prototype.setState = function(state)
 		this.showButtonsFullscreen = false;
 		this.showButtonsVr = false;
 		this.showButtonsCameraMode = true;
+
+		//Update interface
+		this.updateInterface();
 	}
 	else if(state === SceneEditor.TESTING)
 	{
@@ -897,9 +910,6 @@ SceneEditor.prototype.setState = function(state)
 			this.mouse.setLock(true);
 		}
 
-		//Update tab to show buttons
-		this.updateInterface();
-
 		//Set renderer size
 		this.renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
 		this.renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
@@ -908,12 +918,54 @@ SceneEditor.prototype.setState = function(state)
 		Interface.run.setText("Stop");
 		Interface.run.visible = true;
 		Interface.run.updateInterface();
-	}
 
-	//Set editor state
-	this.state = state;
+		//Update interface
+		this.updateInterface();
+	}
 };
 
+//Select editing tool
+SceneEditor.prototype.selectTool = function(tool)
+{
+	this.toolMode = tool;
+	this.toolContainer.removeAll();
+	
+	if(this.tool !== null)
+	{
+		this.tool.dispose();
+	}
+
+	//TODO <CHECK THIS>
+	Interface.selectTool(tool);
+
+	if(Editor.selectedObject !== null && tool !== Editor.SELECT)
+	{
+		if(tool === Editor.MOVE)
+		{
+			this.tool = new TransformControls();
+			this.tool.setMode("translate");
+			this.tool.setSpace(Settings.editor.transformationSpace);
+		}
+		else if(tool === Editor.SCALE)
+		{
+			this.tool = new TransformControls();
+			this.tool.setMode("scale");
+		}
+		else if(tool === Editor.ROTATE)
+		{
+			this.tool = new TransformControls();
+			this.tool.setMode("rotate");
+			this.tool.setSpace(Settings.editor.transformationSpace);
+		}
+		
+		this.tool.attach(Editor.selectedObject);
+		this.toolContainer.add(this.tool);
+	}
+	else
+	{
+		this.tool = null;
+	}
+};
 
 //Resize scene editor camera
 SceneEditor.prototype.resizeCamera = function()
@@ -985,6 +1037,9 @@ SceneEditor.prototype.updateInterface = function()
 		this.canvas.height = this.size.y;
 		this.canvas.style.width = this.size.x + "px";
 		this.canvas.style.height = this.size.y + "px";
+
+		//Renderer
+		this.resizeCamera();
 
 		//Element
 		this.element.style.top = this.position.y + "px";

@@ -282,7 +282,7 @@ Interface.initialize = function()
 	Interface.toolSelect.updateInterface();
 	Interface.toolSelect.setCallback(function()
 	{
-		Editor.selectTool(Editor.MODE_SELECT);
+		Editor.selectTool(Editor.SELECT);
 	});
 
 	//Move
@@ -294,7 +294,7 @@ Interface.initialize = function()
 	Interface.toolMove.updateInterface();
 	Interface.toolMove.setCallback(function()
 	{
-		Editor.selectTool(Editor.MODE_MOVE);
+		Editor.selectTool(Editor.MOVE);
 	});
 
 	//Resize
@@ -306,7 +306,7 @@ Interface.initialize = function()
 	Interface.toolScale.updateInterface();
 	Interface.toolScale.setCallback(function()
 	{
-		Editor.selectTool(Editor.MODE_SCALE);
+		Editor.selectTool(Editor.SCALE);
 	});
 
 	//Rotate
@@ -318,7 +318,7 @@ Interface.initialize = function()
 	Interface.toolRotate.updateInterface();
 	Interface.toolRotate.setCallback(function()
 	{
-		Editor.selectTool(Editor.MODE_ROTATE);
+		Editor.selectTool(Editor.ROTATE);
 	});
  
 	//Add Text
@@ -1054,19 +1054,19 @@ Interface.selectTool = function(tool)
 	Interface.toolScale.selected = false;
 	Interface.toolRotate.selected = false;
 
-	if(tool === Editor.MODE_SELECT)
+	if(tool === Editor.SELECT)
 	{
 		Interface.toolSelect.selected = true;
 	}
-	else if(tool === Editor.MODE_MOVE)
+	else if(tool === Editor.MOVE)
 	{
 		Interface.toolMove.selected = true;
 	}
-	else if(tool === Editor.MODE_ROTATE)
+	else if(tool === Editor.ROTATE)
 	{
 		Interface.toolRotate.selected = true;
 	}
-	else if(tool === Editor.MODE_SCALE)
+	else if(tool === Editor.SCALE)
 	{
 		Interface.toolScale.selected = true;
 	}

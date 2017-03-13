@@ -180,9 +180,6 @@ function MaterialAsset(parent)
 			event.dataTransfer.setData("uuid", self.material.uuid);
 			DragBuffer.pushDragElement(self.material);
 		}
-
-		//To avoid camera movement
-		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
 	};
 
 	//Drag end (called after of ondrop)

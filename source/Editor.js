@@ -272,11 +272,11 @@ include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
 
-//Editor tools
-Editor.MODE_SELECT = 0;
-Editor.MODE_MOVE = 1;
-Editor.MODE_SCALE = 2;
-Editor.MODE_ROTATE = 3;
+//Editor
+Editor.SELECT = 0;
+Editor.MOVE = 1;
+Editor.SCALE = 2;
+Editor.ROTATE = 3;
 
 //Initialize editor
 Editor.initialize = function()
@@ -372,7 +372,7 @@ Editor.initialize = function()
 	Editor.theme = Theme.get(Settings.general.theme);
 	
 	//Editor initial state
-	Editor.toolMode = Editor.MODE_SELECT;
+	Editor.toolMode = Editor.SELECT;
 
 	//Editing tool
 	Editor.tool = null;
@@ -519,7 +519,6 @@ Editor.addToScene = function(obj)
 		Editor.program.scene.add(obj);
 
 		Editor.history.push(obj, Action.ADDED);
-
 		Editor.updateObjectViews();
 	}
 };
@@ -795,44 +794,8 @@ Editor.createDefaultResouces = function()
 //Select tool to manipulate objects
 Editor.selectTool = function(tool)
 {
-	//TODO <CHANGE THIS>
-	/*Editor.toolMode = tool;
-	Editor.toolContainer.removeAll();
-	
-	if(Editor.tool !== null)
-	{
-		Editor.tool.dispose();	
-	}
-
-	Interface.selectTool(tool);
-
-	if(Editor.selectedObject !== null && tool !== Editor.MODE_SELECT)
-	{
-		if(tool === Editor.MODE_MOVE)
-		{
-			Editor.tool = new TransformControls();
-			Editor.tool.setMode("translate");
-			Editor.tool.setSpace(Settings.editor.transformationSpace);
-		}
-		else if(tool === Editor.MODE_SCALE)
-		{
-			Editor.tool = new TransformControls();
-			Editor.tool.setMode("scale");
-		}
-		else if(tool === Editor.MODE_ROTATE)
-		{
-			Editor.tool = new TransformControls();
-			Editor.tool.setMode("rotate");
-			Editor.tool.setSpace(Settings.editor.transformationSpace);
-		}
-		
-		Editor.tool.attach(Editor.selectedObject);
-		Editor.toolContainer.add(Editor.tool);
-	}
-	else
-	{
-		Editor.tool = null;
-	}*/
+	//TODO <ADD CODE HERE>
+	//TODO <GLOBAL SELECT TOOL>
 };
 
 //Update UI panel to match selected object
@@ -1027,35 +990,34 @@ Editor.resetEditingFlags = function()
 	}
 	
 	//TODO <CHANGE THIS>
-	//Editor.selectTool(Editor.MODE_SELECT);
+	//Editor.selectTool(Editor.SELECT);
 	//Editor.selectObjectHelper();
 };
 
 //Craete new Program
 Editor.createNewProgram = function()
 {
+	//Reset resources
 	Editor.createDefaultResouces();
 
-	//Create new program
+	//Create program
 	Editor.program = new Program();
 	Editor.program.addDefaultScene(Editor.defaultMaterial);
 
 	//History
 	Editor.history = new History(Editor.program);
 
-	//Reset open file
+	//Reset editor
 	Editor.setOpenFile(null);
 	Editor.resetEditingFlags();
 	Editor.updateObjectViews();
 
-	//Remove old tabs from interface
-	if(Interface.tab !== undefined)
-	{
-		Interface.tab.clear();
-		var scene = Interface.tab.addTab(SceneEditor, true);
-		scene.attach(Editor.program.scene);
-		Interface.tab.selectTab(0);
-	}
+	//Clear tabs
+	Interface.tab.clear();
+
+	//Scene tab
+	var scene = Interface.tab.addTab(SceneEditor, true);
+	scene.attach(Editor.program.scene);
 };
 
 //Save program to file

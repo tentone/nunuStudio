@@ -75,9 +75,6 @@ function FontAsset(parent)
 			event.dataTransfer.setData("uuid", self.font.uuid);
 			DragBuffer.pushDragElement(self.font);
 		}
-
-		//To avoid camera movement
-		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
 	};
 
 	//Drag end (called after of ondrop)

@@ -73,9 +73,6 @@ function AudioAsset(parent)
 			event.dataTransfer.setData("uuid", self.audio.uuid);
 			DragBuffer.pushDragElement(self.audio);
 		}
-
-		//To avoid camera movement
-		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
 	};
 
 	//Drag end (called after of ondrop)

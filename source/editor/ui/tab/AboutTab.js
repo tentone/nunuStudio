@@ -65,14 +65,6 @@ function AboutTab(parent, closeable, container, index)
 
 AboutTab.prototype = Object.create(TabElement.prototype);
 
-//Activate
-AboutTab.prototype.activate = function()
-{
-	TabElement.prototype.activate.call(this);
-	
-	
-}
-
 //Update division Size
 AboutTab.prototype.updateInterface = function()
 {

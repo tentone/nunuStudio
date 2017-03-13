@@ -73,7 +73,7 @@ TabGroup.prototype.updateMetadata = function()
 	{
 		this.options[i].updateMetadata();
 	}
-}
+};
 
 //Get actual tab
 TabGroup.prototype.getActual = function()
@@ -84,7 +84,7 @@ TabGroup.prototype.getActual = function()
 	}
 
 	return null;
-}
+};
 
 //Close actual tab if its closeable
 TabGroup.prototype.closeActual = function()
@@ -97,7 +97,7 @@ TabGroup.prototype.closeActual = function()
 			this.removeTab(this.selected);
 		}
 	}
-}
+};
 
 //Select tab
 TabGroup.prototype.selectTab = function(tab)
@@ -125,7 +125,7 @@ TabGroup.prototype.selectTab = function(tab)
 	{
 		this.selected = null;
 	}
-}
+};
 
 //Select next tab
 TabGroup.prototype.selectNextTab = function()
@@ -134,7 +134,7 @@ TabGroup.prototype.selectNextTab = function()
 	{
 		this.selectTab((this.selected.index + 1) % this.options.length);
 	}
-}
+};
 
 //Select previous tab
 TabGroup.prototype.selectPreviousTab = function()
@@ -150,7 +150,7 @@ TabGroup.prototype.selectPreviousTab = function()
 			this.selectTab(this.selected.index - 1);
 		}
 	}
-}
+};
 
 //Add new option to tab grounp
 TabGroup.prototype.addTab = function(TabConstructor, closeable)
@@ -166,7 +166,7 @@ TabGroup.prototype.addTab = function(TabConstructor, closeable)
 	}
 
 	return tab;
-}
+};
 
 //Get tab from tab type and attached object is there is any
 TabGroup.prototype.getTab = function(type, obj)
@@ -183,7 +183,7 @@ TabGroup.prototype.getTab = function(type, obj)
 	}
 
 	return null;
-}
+};
 
 //Remove tab from group
 TabGroup.prototype.removeTab = function(index)
@@ -221,7 +221,7 @@ TabGroup.prototype.removeTab = function(index)
 			this.selectTab(null);
 		}
 	}
-}
+};
 
 //Remove all tabs
 TabGroup.prototype.clear = function()
@@ -232,7 +232,7 @@ TabGroup.prototype.clear = function()
 	}
 
 	this.selectTab(null);
-}
+};
 
 //Move tab from position to another
 TabGroup.prototype.moveButton = function(origin, destination)
@@ -253,7 +253,7 @@ TabGroup.prototype.updateOptionIndex = function()
 	{
 		this.options[i].index = i;
 	}
-}
+};
 
 //Remove element
 TabGroup.prototype.destroy = function()
@@ -263,7 +263,7 @@ TabGroup.prototype.destroy = function()
 		this.parent.removeChild(this.element);
 	}
 	catch(e){}
-}
+};
 
 //Update
 TabGroup.prototype.update = function()
@@ -272,7 +272,7 @@ TabGroup.prototype.update = function()
 	{
 		this.selected.update();
 	}
-}
+};
 
 //Update interface
 TabGroup.prototype.updateInterface = function()
@@ -381,4 +381,4 @@ TabGroup.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};
