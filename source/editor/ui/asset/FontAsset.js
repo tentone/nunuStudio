@@ -64,6 +64,8 @@ function FontAsset(parent)
 				catch(e){}
 			}
 		});
+		
+		context.updateInterface();
 	};
 
 	//Drag start

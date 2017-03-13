@@ -272,13 +272,13 @@ include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
 
-//Editor
+//Tool
 Editor.SELECT = 0;
 Editor.MOVE = 1;
 Editor.SCALE = 2;
 Editor.ROTATE = 3;
 
-//Initialize editor
+//Initialize
 Editor.initialize = function()
 {
 	try
@@ -370,14 +370,11 @@ Editor.initialize = function()
 
 	//Load theme
 	Editor.theme = Theme.get(Settings.general.theme);
-	
-	//Editor tool
-	Editor.toolMode = Editor.SELECT;
 
 	//Open file
 	Editor.openFile = null;
 
-	//Editor Selected object
+	//Selected object
 	Editor.selectedObject = null;
 
 	//Program
@@ -477,23 +474,12 @@ Editor.selectObject = function(object)
 
 		Editor.selectObjectPanel();
 
-		//TODO <CHANGE THIS>
-		/*
 		Editor.selectObjectHelper();
-
-		if(Editor.tool !== null)
-		{
-			Editor.tool.detach();
-			Editor.tool.attach(object);
-		}
-		else
-		{
-			Editor.selectTool(Editor.toolMode);
-		}*/
+		Editor.selectTool();
 	}
 	else
 	{
-		Editor.selectedObject = null;
+		Editor.clearSelection();
 		Editor.resetEditingFlags();
 	}
 };
@@ -505,7 +491,14 @@ Editor.isObjectSelected = function(obj)
 	{
 		return Editor.selectedObject.uuid === obj.uuid;
 	}
+
 	return false;
+};
+
+//Clear object selectio
+Editor.clearSelection = function()
+{
+	Editor.selectedObject = null;
 };
 
 //Add object to actual scene
@@ -791,8 +784,21 @@ Editor.createDefaultResouces = function()
 //Select tool to manipulate objects
 Editor.selectTool = function(tool)
 {
-	//TODO <ADD CODE HERE>
-	//TODO <GLOBAL SELECT TOOL>
+	var tab = Interface.tab.getActual();
+	if(tab instanceof SceneEditor)
+	{
+		tab.selectTool(tool);
+	}
+};
+
+//Select objecct helper
+Editor.selectObjectHelper = function(tool)
+{
+	var tab = Interface.tab.getActual();
+	if(tab instanceof SceneEditor)
+	{
+		tab.selectObjectHelper();
+	}
 };
 
 //Update UI panel to match selected object
@@ -902,7 +908,7 @@ Editor.selectObjectPanel = function()
 //Reset editing flags
 Editor.resetEditingFlags = function()
 {
-	Editor.selectedObject = null;
+	Editor.clearSelection();
 	
 	if(Interface.panel !== null)
 	{
@@ -910,9 +916,8 @@ Editor.resetEditingFlags = function()
 		Interface.panel = null;
 	}
 	
-	//TODO <CHANGE THIS>
-	//Editor.selectTool(Editor.SELECT);
-	//Editor.selectObjectHelper();
+	Editor.selectTool(Editor.SELECT);
+	Editor.selectObjectHelper();
 };
 
 //Craete new Program
@@ -1012,7 +1017,6 @@ Editor.loadProgram = function(file)
 			{
 				var scene = Interface.tab.addTab(SceneEditor, true);
 				scene.attach(Editor.program.scene);
-				Interface.tab.selectTab(0);
 			}
 
 			alert("Project loaded");

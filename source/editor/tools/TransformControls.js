@@ -2,12 +2,9 @@
 
 "use strict";
 
-function TransformControls(camera, canvas)
+function TransformControls(camera, canvas, mouse)
 {
 	THREE.Object3D.call(this);
-
-	var camera = (camera !== undefined) ? camera : Editor.camera;
-	var canvas = (canvas !== undefined) ? canvas : Editor.canvas;
 	
 	this.object = null;
 	this.visible = false;
@@ -16,9 +13,10 @@ function TransformControls(camera, canvas)
 	this.axis = null;
 
 	var self = this;
-	var mode = (mode !== undefined) ? mode : "translate";
+	
+	var mode = "translate";
 	var dragging = false;
-	var editing = false; //Editing object flag
+	var editing = false;
 	var gizmo =
 	{
 		"translate": new TransformGizmoTranslate(),
@@ -123,17 +121,17 @@ function TransformControls(camera, canvas)
 
 	this.update = function()
 	{
-		if(Editor.mouse.buttonJustPressed(Mouse.LEFT))
+		if(mouse.buttonJustPressed(Mouse.LEFT))
 		{
 			onPointerDown();
 		}
 		
-		if(Editor.mouse.buttonJustReleased(Mouse.LEFT))
+		if(mouse.buttonJustReleased(Mouse.LEFT))
 		{
 			onPointerUp();
 		}
 
-		if(Editor.mouse.delta.x !== 0 || Editor.mouse.delta.y !== 0)
+		if(mouse.delta.x !== 0 || mouse.delta.y !== 0)
 		{
 			onPointerHover();
 			onPointerMove();
@@ -469,8 +467,8 @@ function TransformControls(camera, canvas)
 	function intersectObjects(objects)
 	{
 		var rect = canvas.getBoundingClientRect();
-		var x = Editor.mouse.position.x / rect.width;
-		var y = Editor.mouse.position.y / rect.height;
+		var x = mouse.position.x / rect.width;
+		var y = mouse.position.y / rect.height;
 
 		pointerVector.set((x * 2) - 1, - (y * 2) + 1);
 		ray.setFromCamera(pointerVector, camera);

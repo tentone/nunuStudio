@@ -145,6 +145,8 @@ function TextureAsset(parent)
 				catch(e){}
 			}
 		});
+		
+		context.updateInterface();
 	};
 
 	//Drag start

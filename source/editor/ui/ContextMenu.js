@@ -70,19 +70,15 @@ ContextMenu.prototype.addOption = function(name, callback)
 	button.text.setAlignment(Text.LEFT);
 	button.text.position.x = 25;
 	button.setText(name);
-	button.visible = this.expanded;
-	button.updateInterface();
 
 	var self = this;
 	button.setCallback(function()
 	{
 		callback();
-		self.updateInterface();
 		self.destroy();
 	});
 
 	this.options.push(button);
-	this.updateInterface();
 };
 
 //Update interface

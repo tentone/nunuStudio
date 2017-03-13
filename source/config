@@ -2,8 +2,8 @@
 	"general": {
 		"theme": "dark",
 		"filePreviewSize": 70,
-		"showStats": false,
-		"showUUID": false
+		"showStats": true,
+		"showUUID": true
 	},
 	"editor": {
 		"angleFormat": 0,
@@ -14,7 +14,7 @@
 		"cameraPreviewEnabled": true,
 		"cameraPreviewPercentage": 0.35,
 		"lockMouse": true,
-		"transformationSpace": "world"
+		"transformationSpace": "local"
 	},
 	"render": {
 		"followProject": false,

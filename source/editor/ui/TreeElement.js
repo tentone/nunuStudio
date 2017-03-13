@@ -185,27 +185,27 @@ function TreeElement(container)
 			var program = self.obj instanceof Program;
 			var scene = self.obj instanceof Scene;
 
-			//Context menu object
-			var menu = new ContextMenu();
-			menu.size.set(140, 20);
-			menu.position.set(event.clientX - 5, event.clientY - 5);
+			//Context menu
+			var context = new ContextMenu();
+			context.size.set(140, 20);
+			context.position.set(event.clientX - 5, event.clientY - 5);
 			
 			//Open tab for object editor
 			if(self.obj instanceof Script)
 			{
-				menu.addOption("Script editor", openScriptTab);
+				context.addOption("Script editor", openScriptTab);
 			}
 			else if(self.obj instanceof Scene)
 			{
-				menu.addOption("Scene editor", openSceneTab);
+				context.addOption("Scene editor", openSceneTab);
 			}
 			else if(self.obj instanceof ParticleEmitter)
 			{
-				menu.addOption("Particle editor", openParticleTab);
+				context.addOption("Particle editor", openParticleTab);
 			}
 
 			//Rename Object
-			menu.addOption("Rename", function()
+			context.addOption("Rename", function()
 			{
 				var name = prompt("Rename object", self.obj.name);
 				if(name !== null && name !== "")
@@ -217,7 +217,7 @@ function TreeElement(container)
 
 			if(!program)
 			{
-				menu.addOption("Delete", function()
+				context.addOption("Delete", function()
 				{
 					Editor.deleteObject(self.obj);
 				});
@@ -226,7 +226,7 @@ function TreeElement(container)
 			if(!scene && !program)
 			{
 				//Create physics shape to match object
-				menu.addOption("Add physics", function()
+				context.addOption("Add physics", function()
 				{
 					var physics = new PhysicsObject();
 					physics.addShape(Mesh2shape.createShape(self.obj));
@@ -237,21 +237,21 @@ function TreeElement(container)
 				});
 
 				//Set object and children to static mode
-				menu.addOption("Set static", function()
+				context.addOption("Set static", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
 					Editor.updateObjectViews();
 				});
 
 				//Set object and children to dynamic mode
-				menu.addOption("Set dynamic", function()
+				context.addOption("Set dynamic", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, true);
 					Editor.updateObjectViews();
 				});
 
 				//Set object and children shadow casting mode
-				menu.addOption("Enable shadows", function()
+				context.addOption("Enable shadows", function()
 				{
 					ObjectUtils.setShadowCasting(self.obj, true);
 					ObjectUtils.setShadowReceiving(self.obj, true);
@@ -260,7 +260,7 @@ function TreeElement(container)
 				});
 
 				//Set object and children shadow casting mode
-				menu.addOption("Disable shadows", function()
+				context.addOption("Disable shadows", function()
 				{
 					ObjectUtils.setShadowCasting(self.obj, false);
 					ObjectUtils.setShadowReceiving(self.obj, false);
@@ -269,7 +269,7 @@ function TreeElement(container)
 				});
 
 				//Duplicate object
-				menu.addOption("Duplicate", function()
+				context.addOption("Duplicate", function()
 				{
 					var obj = new ObjectLoader().parse(self.obj.toJSON());
 					obj.traverse(function(child)
@@ -281,13 +281,13 @@ function TreeElement(container)
 				});
 
 				//Copy object
-				menu.addOption("Copy", function()
+				context.addOption("Copy", function()
 				{
 					Editor.copyObject(self.obj);
 				});
 
 				//Cut object
-				menu.addOption("Cut", function()
+				context.addOption("Cut", function()
 				{
 					Editor.cutObject(self.obj);
 				});
@@ -296,11 +296,13 @@ function TreeElement(container)
 			if(!program)
 			{
 				//Paste object form clipboard
-				menu.addOption("Paste", function()
+				context.addOption("Paste", function()
 				{
 					Editor.pasteObject(self.obj);
 				});
 			}
+
+			context.updateInterface();
 		}
 	};
 

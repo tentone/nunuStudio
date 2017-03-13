@@ -9,7 +9,10 @@ function ParticleEmitterHelper(particle)
 
 	if(particle instanceof ParticleEmitter)
 	{
-		this.runtime = new ObjectLoader().parse(particle.toJSON());
+		var json = particle.toJSON();
+		json.object.children = [];
+
+		this.runtime = new ObjectLoader().parse(json);
 		this.runtime.initialize();
 		this.add(this.runtime);
 	}

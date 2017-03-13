@@ -166,6 +166,8 @@ function MaterialAsset(parent)
 				}
 			}
 		});
+
+		context.updateInterface();
 	};
 
 	//Drag start

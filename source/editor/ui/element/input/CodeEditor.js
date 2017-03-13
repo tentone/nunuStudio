@@ -94,6 +94,8 @@ function CodeEditor(parent)
 		{
 			self.code.execCommand("redo");
 		});
+		
+		context.updateInterface();
 	};
 
 	//Attributes
