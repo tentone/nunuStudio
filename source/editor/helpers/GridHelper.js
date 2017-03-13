@@ -45,5 +45,5 @@ GridHelper.prototype.update = function()
 		vertices.push(k, 0, -this.size, k, 0, this.size);
 	}
 
-	geometry.addAttribute("position", new THREE.Float32Attribute(vertices, 3));
+	geometry.addAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
 }
