@@ -140,7 +140,7 @@ function Mouse()
 	//Input
 	else
 	{
-		//Move event
+		//Move
 		this.events.push([window, "mousemove", function(event)
 		{
 			if(self.canvas !== null)
@@ -154,14 +154,20 @@ function Mouse()
 			}
 		}]);
 
-		//Button pressed event
+		//Button pressed
 		this.events.push([window, "mousedown", function(event)
 		{
 			self.updateKey(event.which - 1, Key.DOWN);
 		}]);
 
-		//Button released event
+		//Button released
 		this.events.push([window, "mouseup", function(event)
+		{
+			self.updateKey(event.which - 1, Key.UP);
+		}]);
+
+		//Drag start
+		this.events.push([window, "dragstart", function(event)
 		{
 			self.updateKey(event.which - 1, Key.UP);
 		}]);
