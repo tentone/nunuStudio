@@ -475,7 +475,7 @@ Interface.initialize = function()
 	//Prespective camera
 	Interface.addCamera.addOption(Interface.fileDir + "icons/camera/prespective.png", function()
 	{
-		Editor.addToScene(new PerspectiveCamera(60, Editor.canvas.width/Editor.canvas.height));
+		Editor.addToScene(new PerspectiveCamera(60, 1));
 	}, "Prespective Camera");
 
 	//Orthographic camera

@@ -131,9 +131,6 @@ function TreeElement(container)
 		//Try to remove event from buffer
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = DragBuffer.popDragElement(uuid);
-
-		//Avoid mouse lock
-		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
 	};
 
 	//Drag over
@@ -317,7 +314,7 @@ function TreeElement(container)
 		var uuid = event.dataTransfer.getData("uuid");
 		var obj = DragBuffer.popDragElement(uuid);
 
-		if(obj !== undefined && obj !== self.obj && !ObjectUtils.isChildOf(obj ,self.obj))
+		if(obj instanceof THREE.Object3D && obj !== self.obj && !ObjectUtils.isChildOf(obj ,self.obj))
 		{
 			//Above
 			if(event.layerY < 5)

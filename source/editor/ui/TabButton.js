@@ -157,6 +157,7 @@ function TabButton(parent, tab)
 	this.element.ondragleave = function(event)
 	{
 		event.preventDefault();
+		
 		dragState = 0;
 		this.style.borderLeft = "";
 		this.style.borderRight = "";
@@ -166,11 +167,10 @@ function TabButton(parent, tab)
 	this.element.ondragend = function(event)
 	{
 		event.preventDefault();
+
 		dragState = 0;
 		this.style.borderLeft = "";
 		this.style.borderRight = "";
-
-		Editor.mouse.updateKey(Mouse.LEFT, Key.UP);
 	}
 
 	//Mouse click

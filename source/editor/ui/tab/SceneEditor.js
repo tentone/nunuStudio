@@ -222,8 +222,6 @@ function SceneEditor(parent, closeable, container, index)
 				}
 			}
 		}
-
-		self.mouse.updateKey(Mouse.LEFT, Key.UP);
 	};
 
 	//Prevent deafault when object dragged over
