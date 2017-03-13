@@ -99,6 +99,7 @@ function ScriptEditor(parent, closeable, container, index)
 		{
 			self.code.execCommand("redo");
 		});
+		context.updateInterface();
 	};
 
 	//Script attached to code editor
@@ -153,10 +154,6 @@ ScriptEditor.prototype.updateMetadata = function()
 ScriptEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
-	
-	//Set editor state
-	
-	Editor.resetEditingFlags();
 
 	//Set font size
 	this.setFontSize(Settings.code.fontSize);

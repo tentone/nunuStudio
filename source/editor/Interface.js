@@ -282,7 +282,7 @@ Interface.initialize = function()
 	Interface.toolSelect.updateInterface();
 	Interface.toolSelect.setCallback(function()
 	{
-		Editor.selectTool(Editor.SELECT);
+		Interface.selectTool(Editor.SELECT);
 	});
 
 	//Move
@@ -294,7 +294,7 @@ Interface.initialize = function()
 	Interface.toolMove.updateInterface();
 	Interface.toolMove.setCallback(function()
 	{
-		Editor.selectTool(Editor.MOVE);
+		Interface.selectTool(Editor.MOVE);
 	});
 
 	//Resize
@@ -306,7 +306,7 @@ Interface.initialize = function()
 	Interface.toolScale.updateInterface();
 	Interface.toolScale.setCallback(function()
 	{
-		Editor.selectTool(Editor.SCALE);
+		Interface.selectTool(Editor.SCALE);
 	});
 
 	//Rotate
@@ -318,7 +318,7 @@ Interface.initialize = function()
 	Interface.toolRotate.updateInterface();
 	Interface.toolRotate.setCallback(function()
 	{
-		Editor.selectTool(Editor.ROTATE);
+		Interface.selectTool(Editor.ROTATE);
 	});
  
 	//Add Text
@@ -936,17 +936,18 @@ Interface.initialize = function()
 	Interface.run.updateInterface();
 	Interface.run.setCallback(function()
 	{
-		//TODO <CHANGE RUN CODE>
-		alert("Reimplement run code");
-		
-		/*if(Editor.state === Editor.STATE_EDITING)
+		var tab = Interface.tab.getActual();
+		if(tab instanceof SceneEditor)
 		{
-			Editor.setState(Editor.STATE_TESTING);
+			if(tab.state === SceneEditor.EDITING)
+			{
+				tab.setState(SceneEditor.TESTING);
+			}
+			else if(tab.state === SceneEditor.TESTING)
+			{
+				tab.setState(SceneEditor.EDITING);
+			}
 		}
-		else if(Editor.state === Editor.STATE_TESTING)
-		{
-			Editor.setState(Editor.STATE_EDITING);
-		}*/
 	});
 };
 
@@ -1070,6 +1071,8 @@ Interface.selectTool = function(tool)
 	{
 		Interface.toolScale.selected = true;
 	}
+
+	Editor.selectTool(tool);
 
 	Interface.toolRotate.updateInterface();
 	Interface.toolMove.updateInterface();

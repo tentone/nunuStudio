@@ -265,15 +265,6 @@ TabGroup.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update
-TabGroup.prototype.update = function()
-{
-	if(this.selected !== null)
-	{
-		this.selected.update();
-	}
-};
-
 //Update interface
 TabGroup.prototype.updateInterface = function()
 {

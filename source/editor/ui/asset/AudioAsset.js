@@ -62,6 +62,8 @@ function AudioAsset(parent)
 				catch(e){}
 			}
 		});
+
+		context.updateInterface();
 	};
 
 	//Drag start

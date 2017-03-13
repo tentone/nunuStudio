@@ -149,10 +149,15 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.transformationSpace.setOnChange(function()
 	{
 		Settings.editor.transformationSpace = self.transformationSpace.getValue();
-		if(Editor.tool !== null && Editor.toolMode !== Editor.SCALE)
+
+		//TODO <EDIT CODE>
+		
+		alert("Reimplement tool change!");
+		
+		/*if(Editor.tool !== null && Editor.toolMode !== Editor.SCALE)
 		{
 			Editor.tool.setSpace(Settings.editor.transformationSpace);
-		}
+		}*/
 	});
 	this.form.add(this.transformationSpace);
 	this.form.nextRow();

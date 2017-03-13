@@ -1,6 +1,6 @@
 {
 	"metadata": {
-		"version": "V0.8.9.21 Alpha",
+		"version": "V0.8.9.22 Alpha",
 		"type": "NunuProgram"
 	},
 	"geometries": [
@@ -59,8 +59,8 @@
 			"depthTest": true,
 			"depthWrite": true,
 			"color": 16777215,
-			"roughness": "0.35",
-			"metalness": "0.53",
+			"roughness": "0.61",
+			"metalness": "0.55",
 			"map": "744E4772-C13B-41A2-BA2B-B1C3DFFE89A6",
 			"normalMap": "9F911EF9-5024-4875-AA0A-D5EDABDAFFA5",
 			"normalScale": [1,1],
@@ -87,6 +87,21 @@
 		},
 		{
 			"uuid": "3F8A0D06-8ACF-4D7B-8D34-766249832639",
+			"type": "MeshStandardMaterial",
+			"name": "default",
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"color": 16777215,
+			"roughness": 0.6,
+			"metalness": 0.2,
+			"emissive": 0,
+			"aoMapIntensity": 1,
+			"morphTargets": false,
+			"morphNormals": false
+		},
+		{
+			"uuid": "244CAF4B-B379-4A91-82F2-8EAFCDC66F70",
 			"type": "MeshStandardMaterial",
 			"name": "default",
 			"depthFunc": 3,
@@ -280,7 +295,7 @@
 						"uuid": "979D9D3B-02FD-4306-84D2-3B619AE3179C",
 						"type": "Mesh",
 						"name": "sky",
-						"folded": true,
+						"folded": false,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -297,18 +312,47 @@
 								"folded": false,
 								"hidden": false,
 								"visible": true,
-								"matrixAutoUpdate": true,
-								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1],
+								"matrixAutoUpdate": false,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-0.00021191900823279083,0.01676499878921236,0,1],
 								"color": 9212835,
 								"intensity": 1,
 								"groundColor": 5593413
+							},
+							{
+								"uuid": "0B12FC2B-7546-49FD-80B6-C3543AED2700",
+								"type": "DirectionalLight",
+								"name": "directional",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,-0.004785693744810263,0.007957863864368662,0,1],
+								"color": 4473924,
+								"intensity": 1,
+								"shadow": {
+									"bias": 0,
+									"radius": 1,
+									"mapSize": {
+										"x": 1024,
+										"y": 1024
+									},
+									"camera": {
+										"top": 50,
+										"bottom": -50,
+										"far": 10000,
+										"near": 0.5,
+										"left": -50,
+										"right": 50
+									}
+								}
 							}]
 					},
 					{
 						"uuid": "6DD309A9-B606-488F-8FD9-BEBBBB3E299C",
 						"type": "Physics",
 						"name": "ground",
-						"folded": true,
+						"folded": false,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -351,7 +395,7 @@
 						"uuid": "BDFD6569-DF8E-4545-BCDA-BA5BE850E177",
 						"type": "Physics",
 						"name": "player",
-						"folded": true,
+						"folded": false,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -375,7 +419,7 @@
 								"near": 0.1,
 								"far": 1000000,
 								"focus": 10,
-								"aspect": 1.8837675350701406,
+								"aspect": 1.9922330097087377,
 								"filmGauge": 35,
 								"filmOffset": 0,
 								"clearColor": false,
@@ -409,7 +453,7 @@
 								"visible": true,
 								"matrixAutoUpdate": true,
 								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
-								"code": "var body;\nvar camera;\nvar cameraRotation;\n\nthis.initialize = function()\n{\n\tcameraRotation = new Vector2(0, 0);\n\tcamera = this.parent.getObjectByName(\"camera\");\n\tbody = this.parent.body;\n\t\n\tdirectional = this.scene.getObjectByName(\"directional\");\n\t\n\tvar scene = this.scene;\n\tvar world = this.world;\n\tvar crate = this.program.getMaterialByName(\"crate\");\n\n\tfor(var i = 0; i < 30; i++)\n\t{\n\t\tvar physics = new PhysicsObject();\n\n\t\tphysics.addShape(new Box(new CANNON.Vec3(0.5, 0.5, 0.5)));\n\t\tphysics.add(new Mesh(new BoxGeometry(1, 1, 1), crate));\n\n\n\t\tphysics.position.set(Math.random() * 50 - 25, Math.random() * 200 + 5, Math.random() * 50 - 25);\n\t\tscene.add(physics);\n\t\t\n\t\tphysics.initialize();\n\t}\n};\n\nthis.update = function()\n{\n\t//Update camera rotation\n\tcameraRotation.x -= Mouse.delta.x * 0.005;\n\tcameraRotation.y -= Mouse.delta.y * 0.005;\n\n\t//Limit Vertical Rotation to near 90 degrees\n\tif(cameraRotation.y < -1.57)\n\t{\n\t\tcameraRotation.y = -1.57;\n\t}\n\telse if(cameraRotation.y > 1.57)\n\t{\n\t\tcameraRotation.y = 1.57;\n\t}\n\n\t//Update camera rotation (euler)\n\tvar cosAngleY = Math.cos(cameraRotation.y);\n\tvar direction = new Vector3(Math.sin(cameraRotation.x)*cosAngleY, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cosAngleY);\n\tdirection.add(camera.position);\n\tcamera.lookAt(direction);\n\n\tvar speed = 10;\n\tif(Keyboard.keyPressed(Keyboard.SHIFT))\n\t{\n\t\tspeed += 5;\n\t}\n\n\t//Move player\n\tif(Keyboard.keyPressed(Keyboard.W))\n\t{\n\t\tbody.velocity.x = speed * Math.sin(cameraRotation.x);\n\t\tbody.velocity.z = speed * Math.cos(cameraRotation.x);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.S))\n\t{\n\t\tbody.velocity.x = -speed * Math.sin(cameraRotation.x);\n\t\tbody.velocity.z = -speed * Math.cos(cameraRotation.x);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.A))\n\t{\n\t\tbody.velocity.x = speed * Math.sin(cameraRotation.x + MathUtils.pid2);\n\t\tbody.velocity.z = speed * Math.cos(cameraRotation.x + MathUtils.pid2);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.D))\n\t{\n\t\tbody.velocity.x = -speed * Math.sin(cameraRotation.x + MathUtils.pid2);\n\t\tbody.velocity.z = -speed * Math.cos(cameraRotation.x + MathUtils.pid2);\n\t}\n\n\tif(Keyboard.keyJustPressed(Keyboard.SPACEBAR))\n\t{\n\t\tbody.velocity.y += 15;\n\t}\n};"
+								"code": "var body;\nvar camera;\nvar cameraRotation;\n\nthis.initialize = function()\n{\n\tcameraRotation = new Vector2(0, 0);\n\tcamera = this.parent.getObjectByName(\"camera\");\n\tbody = this.parent.body;\n\t\n\tdirectional = this.scene.getObjectByName(\"directional\");\n\t\n\tvar scene = this.scene;\n\tvar world = this.world;\n\tvar crate = this.program.getMaterialByName(\"crate\");\n\tvar box = new BoxBufferGeometry(1, 1, 1);\n\tvar physicsBox = new Box(new CANNON.Vec3(0.5, 0.5, 0.5));\n\t\n\tfor(var i = 0; i < 150; i++)\n\t{\n\t\tvar physics = new PhysicsObject();\n\n\t\tphysics.addShape(physicsBox);\n\t\tphysics.add(new Mesh(box, crate));\n\n\t\tphysics.position.set(Math.random() * 50 - 25, Math.random() * 100 + 5, Math.random() * 50 - 25);\n\t\tscene.add(physics);\n\t\t\n\t\tphysics.initialize();\n\t}\n};\n\nthis.update = function()\n{\n\t//Update camera rotation\n\tcameraRotation.x -= Mouse.delta.x * 0.005;\n\tcameraRotation.y -= Mouse.delta.y * 0.005;\n\n\t//Limit Vertical Rotation to near 90 degrees\n\tif(cameraRotation.y < -1.57)\n\t{\n\t\tcameraRotation.y = -1.57;\n\t}\n\telse if(cameraRotation.y > 1.57)\n\t{\n\t\tcameraRotation.y = 1.57;\n\t}\n\n\t//Update camera rotation (euler)\n\tvar cosAngleY = Math.cos(cameraRotation.y);\n\tvar direction = new Vector3(Math.sin(cameraRotation.x)*cosAngleY, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cosAngleY);\n\tdirection.add(camera.position);\n\tcamera.lookAt(direction);\n\n\tvar speed = 10;\n\tif(Keyboard.keyPressed(Keyboard.SHIFT))\n\t{\n\t\tspeed += 5;\n\t}\n\n\t//Move player\n\tif(Keyboard.keyPressed(Keyboard.W))\n\t{\n\t\tbody.velocity.x = speed * Math.sin(cameraRotation.x);\n\t\tbody.velocity.z = speed * Math.cos(cameraRotation.x);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.S))\n\t{\n\t\tbody.velocity.x = -speed * Math.sin(cameraRotation.x);\n\t\tbody.velocity.z = -speed * Math.cos(cameraRotation.x);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.A))\n\t{\n\t\tbody.velocity.x = speed * Math.sin(cameraRotation.x + MathUtils.pid2);\n\t\tbody.velocity.z = speed * Math.cos(cameraRotation.x + MathUtils.pid2);\n\t}\n\tif(Keyboard.keyPressed(Keyboard.D))\n\t{\n\t\tbody.velocity.x = -speed * Math.sin(cameraRotation.x + MathUtils.pid2);\n\t\tbody.velocity.z = -speed * Math.cos(cameraRotation.x + MathUtils.pid2);\n\t}\n\n\tif(Keyboard.keyJustPressed(Keyboard.SPACEBAR))\n\t{\n\t\tbody.velocity.y += 15;\n\t}\n};"
 							}],
 						"body": {
 							"type": 1,

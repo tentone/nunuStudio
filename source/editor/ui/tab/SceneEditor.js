@@ -11,8 +11,6 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Renderer
 	this.renderer = null;
-
-	//Initialize renderer
 	this.initializeRenderer();
 
 	//Raycaster
@@ -31,7 +29,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.toolMode = Editor.SELECT;
 	this.tool = null;
 
-	//Mouse and keyboard
+	//Input
 	this.keyboard = new Keyboard();
 	this.mouse = new Mouse();
 	this.mouse.setCanvas(this.canvas);
@@ -68,7 +66,8 @@ function SceneEditor(parent, closeable, container, index)
 	this.toolContainer = new THREE.Scene();
 	this.toolSceneTop.add(this.toolContainer);
 
-	//Editor Camera
+	//Camera
+	this.cameras = null;
 	this.cameraMode = SceneEditor.CAMERA_PERSPECTIVE;
 	this.cameraRotation = new THREE.Vector2(0, 0);
 	this.setCameraMode(SceneEditor.CAMERA_PERSPECTIVE);
@@ -377,11 +376,17 @@ SceneEditor.prototype.activate = function()
 		Editor.program.scene = this.scene;
 	}
 
+	this.updateSettings();
 	this.setState(SceneEditor.EDITING);
-
-	//Reset buttons
-	Editor.resetEditingFlags();
+	
+	Interface.selectTool(Editor.SELECT);
 	Editor.resize();
+};
+
+//Update settings
+SceneEditor.prototype.updateSettings = function()
+{
+
 };
 
 //Deactivate
@@ -802,7 +807,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 		mode = (this.cameraMode === SceneEditor.CAMERA_PERSPECTIVE) ? SceneEditor.CAMERA_ORTHOGRAPHIC : SceneEditor.CAMERA_PERSPECTIVE;
 	}
 	
-	var aspect = (this.canvas !== null) ? this.canvas.width/this.canvas.height : 1.0;
+	var aspect = (this.canvas !== null) ? this.canvas.width / this.canvas.height : 1.0;
 
 	if(mode === SceneEditor.CAMERA_ORTHOGRAPHIC)
 	{
@@ -924,38 +929,39 @@ SceneEditor.prototype.setState = function(state)
 
 //Select editing tool
 SceneEditor.prototype.selectTool = function(tool)
-{
-	this.toolMode = tool;
+{	
+	if(tool !== undefined)
+	{
+		this.toolMode = tool;
+	}
+
 	this.toolContainer.removeAll();
-	
+
 	if(this.tool !== null)
 	{
 		this.tool.dispose();
 	}
 
-	//TODO <CHECK THIS>
-	//Interface.selectTool(tool);
-
-	if(Editor.selectedObject !== null && tool !== Editor.SELECT)
+	if(Editor.selectedObject !== null && this.toolMode !== Editor.SELECT)
 	{
-		if(tool === Editor.MOVE)
+		if(this.toolMode === Editor.MOVE)
 		{
-			this.tool = new TransformControls();
+			this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
 			this.tool.setMode("translate");
 			this.tool.setSpace(Settings.editor.transformationSpace);
 		}
-		else if(tool === Editor.SCALE)
+		else if(this.toolMode === Editor.SCALE)
 		{
-			this.tool = new TransformControls();
+			this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
 			this.tool.setMode("scale");
 		}
-		else if(tool === Editor.ROTATE)
+		else if(this.toolMode === Editor.ROTATE)
 		{
-			this.tool = new TransformControls();
+			this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
 			this.tool.setMode("rotate");
 			this.tool.setSpace(Settings.editor.transformationSpace);
 		}
-		
+
 		this.tool.attach(Editor.selectedObject);
 		this.toolContainer.add(this.tool);
 	}
