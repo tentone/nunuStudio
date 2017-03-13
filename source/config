@@ -8,7 +8,7 @@
 	"editor": {
 		"angleFormat": 0,
 		"gridSize": 500,
-		"gridSpacing": 5,
+		"gridSpacing": 0,
 		"gridEnabled": true,
 		"axisEnabled": true,
 		"cameraPreviewEnabled": true,

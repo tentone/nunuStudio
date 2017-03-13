@@ -76,7 +76,6 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.gridEnabled.setOnChange(function()
 	{
 		Settings.editor.gridEnabled = self.gridEnabled.getValue();
-		Editor.gridHelper.visible = Settings.editor.gridEnabled;
 	});
 	this.form.add(this.gridEnabled);
 	this.form.nextRow();
@@ -85,16 +84,11 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.addText("Grid size");
 	this.gridSize = new NumberBox(this.form.element);
 	this.gridSize.size.set(60, 18);
-	this.gridSize.setRange(0, Number.MAX_SAFE_INTEGER);
-	this.gridSize.setStep(0.05);
+	this.gridSize.setRange(1.0, Number.MAX_SAFE_INTEGER);
+	this.gridSize.setStep(0.1);
 	this.gridSize.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Settings.editor.gridSize = self.gridSize.getValue();
-			Editor.gridHelper.setSize(Settings.editor.gridSize);
-			Editor.gridHelper.update();
-		}
+		Settings.editor.gridSize = self.gridSize.getValue();
 	});
 	this.form.add(this.gridSize);
 	this.form.nextRow();
@@ -103,16 +97,11 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.addText("Grid spacing");
 	this.gridSpacing = new NumberBox(this.form.element);
 	this.gridSpacing.size.set(60, 18);
-	this.gridSpacing.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.gridSpacing.setRange(1.0, Number.MAX_SAFE_INTEGER);
 	this.gridSpacing.setStep(1.0);
 	this.gridSpacing.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Settings.editor.gridSpacing = self.gridSpacing.getValue();
-			Editor.gridHelper.setSpacing(Settings.editor.gridSpacing);
-			Editor.gridHelper.update();
-		}
+		Settings.editor.gridSpacing = self.gridSpacing.getValue();
 	});
 	this.form.add(this.gridSpacing);
 	this.form.nextRow();
@@ -124,7 +113,6 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.axisEnabled.setOnChange(function()
 	{
 		Settings.editor.axisEnabled = self.axisEnabled.getValue();
-		Editor.axisHelper.visible = Settings.editor.axisEnabled;
 	});
 	this.form.add(this.axisEnabled);
 	this.form.nextRow();
@@ -149,15 +137,6 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.transformationSpace.setOnChange(function()
 	{
 		Settings.editor.transformationSpace = self.transformationSpace.getValue();
-
-		//TODO <EDIT CODE>
-		
-		alert("Reimplement tool change!");
-		
-		/*if(Editor.tool !== null && Editor.toolMode !== Editor.SCALE)
-		{
-			Editor.tool.setSpace(Settings.editor.transformationSpace);
-		}*/
 	});
 	this.form.add(this.transformationSpace);
 	this.form.nextRow();
@@ -181,10 +160,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.cameraPreviewPercentage.setStep(0.05);
 	this.cameraPreviewPercentage.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Settings.editor.cameraPreviewPercentage = self.cameraPreviewPercentage.getValue();
-		}
+		Settings.editor.cameraPreviewPercentage = self.cameraPreviewPercentage.getValue();
 	});
 	this.form.add(this.cameraPreviewPercentage);
 	this.form.nextRow();

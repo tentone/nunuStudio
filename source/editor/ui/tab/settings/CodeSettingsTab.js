@@ -127,8 +127,6 @@ CodeSettingsTab.prototype = Object.create(TabElement.prototype);
 //Activate
 CodeSettingsTab.prototype.activate = function()
 {
-	
-
 	this.codeTheme.setValue(Settings.code.theme);
 	this.codeFontSize.setValue(Settings.code.fontSize);
 	this.codeKeymap.setValue(Settings.code.keymap);
