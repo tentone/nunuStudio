@@ -41,7 +41,7 @@ MaterialRenderer.prototype.setSize = function(x, y)
 };
 
 //Render material to internal canvas and create dataURL that is passed to onRender callback
-MaterialRenderer.prototype.renderMaterial = function(material, onRender)
+MaterialRenderer.prototype.render = function(material, onRender)
 {
 	//Set material
 	if(material instanceof THREE.SpriteMaterial)

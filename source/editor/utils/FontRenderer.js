@@ -15,11 +15,10 @@ function FontRenderer()
 	//Scene
 	this.scene = new THREE.Scene();
 
-	//Sphere
+	//Text
 	this.text = new Text3D("Abc", new THREE.MeshBasicMaterial({color: 0xFFFFFF}), null);
 	this.text.curveSegments = 10;
 	this.text.position.z = -3;
-
 	this.scene.add(this.text);
 }
 
@@ -30,7 +29,7 @@ FontRenderer.prototype.setSize = function(x, y)
 };
 
 //Render material to internal canvas and copy image to html image element
-FontRenderer.prototype.renderFont = function(font, onRender)
+FontRenderer.prototype.render = function(font, onRender)
 {
 	this.text.setFont(font);
 

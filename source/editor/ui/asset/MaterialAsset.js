@@ -249,7 +249,7 @@ MaterialAsset.prototype.updateMetadata = function()
 	if(this.material !== null)
 	{
 		var image = this.image;
-		Editor.materialRenderer.renderMaterial(this.material, function(url)
+		Editor.materialRenderer.render(this.material, function(url)
 		{
 			image.src = url;
 		});

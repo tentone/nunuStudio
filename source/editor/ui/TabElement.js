@@ -85,7 +85,10 @@ TabElement.prototype.deactivate = function()
 //Attach object to tab
 TabElement.prototype.attach = function(obj){};
 
-//Check if object is attached to tab
+//Update tab settings
+TabElement.prototype.updateSettings = function(){};
+
+//Check if an object is attached to the tab
 TabElement.prototype.isAttached = function(obj)
 {
 	return false;

@@ -14,20 +14,9 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.form.defaultTextWidth = 125;
 	this.form.position.set(5, 5);
 	this.form.spacing.set(5, 5);
-
+	
 	//Renderer settings
 	this.form.addText("Renderer Quality");
-	this.form.nextRow();
-
-	//Use project settings
-	this.form.addText("Follow project");
-	this.followProject = new CheckBox(this.form.element);
-	this.followProject.size.set(20, 16);
-	this.followProject.setOnChange(function()
-	{
-		Settings.render.followProject = self.followProject.getValue();
-	});
-	this.form.add(this.followProject);
 	this.form.nextRow();
 
 	//Antialiasing
@@ -64,6 +53,63 @@ function RenderSettingsTab(parent, closeable, container, index)
 		Settings.render.shadowsType = self.shadowsType.getValue();
 	});
 	this.form.add(this.shadowsType);
+	this.form.nextRow();
+
+	//Tonemapping
+	this.form.addText("Tonemapping");
+	this.toneMapping = new DropdownList(this.form.element);
+	this.toneMapping.size.set(150, 20);
+	this.toneMapping.addValue("None", THREE.NoToneMapping);
+	this.toneMapping.addValue("Linear", THREE.LinearToneMapping);
+	this.toneMapping.addValue("Reinhard", THREE.ReinhardToneMapping);
+	this.toneMapping.addValue("Uncharted", THREE.Uncharted2ToneMapping);
+	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
+	this.toneMapping.setOnChange(function()
+	{
+		Settings.render.toneMapping = self.toneMapping.getValue();
+	});
+	this.form.add(this.toneMapping);
+	this.form.nextRow();
+
+	//Tonemapping exposure
+	this.form.addText("Exposure");
+	this.toneMappingExposure = new NumberBox(this.form.element);
+	this.toneMappingExposure.size.set(40, 18);
+	this.toneMappingExposure.setRange(0.0, Number.MAX_SAFE_INTEGER);
+	this.toneMappingExposure.setStep(0.1);
+	this.toneMappingExposure.setOnChange(function()
+	{
+		Settings.render.toneMappingExposure = self.toneMappingExposure.getValue();
+	});
+	this.form.add(this.toneMappingExposure);
+	this.form.nextRow();
+
+	//Tonemapping whitepoint
+	this.form.addText("Whitepoint");
+	this.toneMappingWhitePoint = new NumberBox(this.form.element);
+	this.toneMappingWhitePoint.size.set(40, 18);
+	this.toneMappingWhitePoint.setRange(0.0, Number.MAX_SAFE_INTEGER);
+	this.toneMappingWhitePoint.setStep(0.1);
+	this.toneMappingWhitePoint.setOnChange(function()
+	{
+		Settings.render.toneMappingWhitePoint = self.toneMappingWhitePoint.getValue();
+	});
+	this.form.add(this.toneMappingWhitePoint);
+	this.form.nextRow();
+
+	this.form.addText("");
+	this.form.nextRow();
+
+	//Use project settings
+	this.form.addText("Follow project");
+	this.followProject = new CheckBox(this.form.element);
+	this.followProject.size.set(20, 16);
+	this.followProject.setOnChange(function()
+	{
+		Settings.render.followProject = self.followProject.getValue();
+	});
+	this.form.add(this.followProject);
+	this.form.nextRow();
 
 	//Update form
 	this.form.updateInterface();
@@ -78,6 +124,9 @@ RenderSettingsTab.prototype.activate = function()
 	this.antialiasing.setValue(Settings.render.antialiasing);
 	this.shadows.setValue(Settings.render.shadows);
 	this.shadowsType.setValue(Settings.render.shadowsType);
+	this.toneMapping.setValue(Settings.render.toneMapping);
+	this.toneMappingExposure.setValue(Settings.render.toneMappingExposure);
+	this.toneMappingWhitePoint.setValue(Settings.render.toneMappingWhitePoint);
 };
 
 //Update division Size

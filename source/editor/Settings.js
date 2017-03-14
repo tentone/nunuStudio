@@ -31,9 +31,9 @@ Settings.loadDefault = function()
 	//Rendering
 	Settings.render = {};
 	Settings.render.followProject = false;
-	Settings.render.toneMapping = THREE.NoToneMapping;
+	Settings.render.toneMapping = THREE.LinearToneMapping;
 	Settings.render.toneMappingExposure = 1.0;
-	Settings.render.toneMappingWhitepoint = 1.0;
+	Settings.render.toneMappingWhitePoint = 1.0;
 	Settings.render.antialiasing = true;
 	Settings.render.shadows = true;
 	Settings.render.shadowsType = THREE.PCFSoftShadowMap;

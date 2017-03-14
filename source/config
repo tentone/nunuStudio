@@ -2,25 +2,27 @@
 	"general": {
 		"theme": "dark",
 		"filePreviewSize": 70,
-		"showStats": true,
-		"showUUID": true
+		"showStats": false,
+		"showUUID": false
 	},
 	"editor": {
 		"angleFormat": 0,
 		"gridSize": 500,
-		"gridSpacing": 0,
+		"gridSpacing": 5,
 		"gridEnabled": true,
 		"axisEnabled": true,
 		"cameraPreviewEnabled": true,
 		"cameraPreviewPercentage": 0.35,
 		"lockMouse": true,
-		"transformationSpace": "local"
+		"transformationSpace": "world",
+		"toneMappingExposure": 5,
+		"toneMappingWhitePoint": 8
 	},
 	"render": {
 		"followProject": false,
-		"toneMapping": 0,
-		"toneMappingExposure": 1,
-		"toneMappingWhitepoint": 1,
+		"toneMapping": 4,
+		"toneMappingExposure": 5,
+		"toneMappingWhitePoint": 3,
 		"antialiasing": true,
 		"shadows": true,
 		"shadowsType": 2
