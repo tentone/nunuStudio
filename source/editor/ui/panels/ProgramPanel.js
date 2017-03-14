@@ -136,6 +136,51 @@ function ProgramPanel(parent, obj)
 	this.form.add(this.shadowsType);
 	this.form.nextRow();
 
+	//Tonemapping
+	this.form.addText("Tonemapping");
+	this.toneMapping = new DropdownList(this.form.element);
+	this.toneMapping.size.set(120, 20);
+	this.toneMapping.addValue("None", THREE.NoToneMapping);
+	this.toneMapping.addValue("Linear", THREE.LinearToneMapping);
+	this.toneMapping.addValue("Reinhard", THREE.ReinhardToneMapping);
+	this.toneMapping.addValue("Uncharted", THREE.Uncharted2ToneMapping);
+	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
+	this.toneMapping.setOnChange(function()
+	{
+		Editor.history.push(self.obj, Action.CHANGED);
+		self.obj.toneMapping = self.toneMapping.getValue();
+	});
+	this.form.add(this.toneMapping);
+	this.form.nextRow();
+
+	//Tonemapping exposure
+	this.form.addText("Exposure");
+	this.toneMappingExposure = new NumberBox(this.form.element);
+	this.toneMappingExposure.size.set(40, 18);
+	this.toneMappingExposure.setRange(0.0, Number.MAX_SAFE_INTEGER);
+	this.toneMappingExposure.setStep(0.1);
+	this.toneMappingExposure.setOnChange(function()
+	{
+		Editor.history.push(self.obj, Action.CHANGED);
+		self.obj.toneMappingExposure = self.toneMappingExposure.getValue();
+	});
+	this.form.add(this.toneMappingExposure);
+	this.form.nextRow();
+
+	//Tonemapping whitepoint
+	this.form.addText("Whitepoint");
+	this.toneMappingWhitePoint = new NumberBox(this.form.element);
+	this.toneMappingWhitePoint.size.set(40, 18);
+	this.toneMappingWhitePoint.setRange(0.0, Number.MAX_SAFE_INTEGER);
+	this.toneMappingWhitePoint.setStep(0.1);
+	this.toneMappingWhitePoint.setOnChange(function()
+	{
+		Editor.history.push(self.obj, Action.CHANGED);
+		self.obj.toneMappingWhitePoint = self.toneMappingWhitePoint.getValue();
+	});
+	this.form.add(this.toneMappingWhitePoint);
+	this.form.nextRow();
+
 	//Update form
 	this.form.updateInterface();
 }
@@ -158,5 +203,8 @@ ProgramPanel.prototype.updatePanel = function()
 		this.shadows.setValue(this.obj.shadows);
 		this.shadowsType.setValue(this.obj.shadowsType);
 		this.antialiasing.setValue(this.obj.antialiasing);
+		this.toneMapping.setValue(this.obj.toneMapping);
+		this.toneMappingExposure.setValue(this.obj.toneMappingExposure);
+		this.toneMappingWhitePoint.setValue(this.obj.toneMappingWhitePoint);					
 	}
 };

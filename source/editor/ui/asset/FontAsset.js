@@ -106,7 +106,7 @@ FontAsset.prototype.updateMetadata = function()
 	if(this.font !== null)
 	{
 		var image = this.image;
-		Editor.fontRenderer.renderFont(this.font, function(url)
+		Editor.fontRenderer.render(this.font, function(url)
 		{
 			image.src = url;
 		});

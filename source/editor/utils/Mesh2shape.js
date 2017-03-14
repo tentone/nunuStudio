@@ -96,7 +96,6 @@ Mesh2shape.createShape = function(object, type)
 			return Mesh2shape.createConvexPolyhedron(object);
 
 		default:
-			console.warn("Unrecognized geometry: Using bounding box as shape.", geometry.type);
 			return Mesh2shape.createBoxShape(geometry);
 	}
 };

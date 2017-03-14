@@ -6,9 +6,6 @@ include("Nunu.js");
 //Runtime dependencies
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
-include("lib/three/animation/Animation.js");
-include("lib/three/animation/AnimationHandler.js");
-include("lib/three/animation/KeyFrameAnimation.js");
 
 include("lib/cannon.min.js");
 include("lib/leap.min.js");

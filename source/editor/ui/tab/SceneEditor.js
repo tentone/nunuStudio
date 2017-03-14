@@ -386,6 +386,9 @@ SceneEditor.prototype.activate = function()
 //Update settings
 SceneEditor.prototype.updateSettings = function()
 {
+	//TODO <RENDERER SETTINGS>
+
+	//Grid
 	this.gridHelper.visible = Settings.editor.gridEnabled;
 	this.gridHelper.setSize(Settings.editor.gridSize);
 	this.gridHelper.setSpacing(Settings.editor.gridSpacing);
@@ -393,6 +396,7 @@ SceneEditor.prototype.updateSettings = function()
 
 	this.axisHelper.visible = Settings.editor.axisEnabled;
 
+	//Tool
 	if(this.tool !== null && Editor.toolMode !== Editor.SCALE)
 	{
 		this.tool.setSpace(Settings.editor.transformationSpace);
@@ -762,12 +766,18 @@ SceneEditor.prototype.initializeRenderer = function()
 		var antialiasing = Editor.program.antialiasing;
 		var shadows = Editor.program.shadows;
 		var shadowsType = Editor.program.shadowsType;
+		var toneMapping = Editor.program.toneMapping;
+		var toneMappingExposure = Editor.program.toneMappingExposure;
+		var toneMappingWhitePoint = Editor.program.toneMappingWhitePoint;
 	}
 	else
 	{
 		var antialiasing = Settings.render.antialiasing;
 		var shadows = Settings.render.shadows;
 		var shadowsType = Settings.render.shadowsType;
+		var toneMapping = Settings.render.toneMapping;
+		var toneMappingExposure = Settings.render.toneMappingExposure;
+		var toneMappingWhitePoint = Settings.render.toneMappingWhitePoint;
 	}
 
 	//Dispose old renderer
@@ -781,6 +791,9 @@ SceneEditor.prototype.initializeRenderer = function()
 	this.renderer.setSize(this.canvas.width, this.canvas.height);
 	this.renderer.shadowMap.enabled = shadows;
 	this.renderer.shadowMap.type = shadowsType;
+	this.renderer.toneMapping = toneMapping;
+	this.renderer.toneMappingExposure = toneMappingExposure;
+	this.renderer.toneMappingWhitePoint = toneMappingWhitePoint;
 	this.renderer.autoClear = false;
 }
 

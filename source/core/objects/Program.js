@@ -100,6 +100,9 @@ function Program(name)
 	this.antialiasing = false;
 	this.shadows = true;
 	this.shadowsType = THREE.PCFSoftShadowMap;
+	this.toneMapping = THREE.NoToneMapping;
+	this.toneMappingExposure = 1.0;
+	this.toneMappingWhitePoint = 1.0;
 
 	//Defaults
 	this.defaultScene = null;
@@ -653,7 +656,7 @@ Program.prototype.toJSON = function(meta, exportResources)
 	data.object.description = this.description;
 	data.object.version = this.version;
 
-	//Misc
+	//Pointer
 	data.object.lockPointer = this.lockPointer;
 
 	//VR
@@ -664,6 +667,9 @@ Program.prototype.toJSON = function(meta, exportResources)
 	data.object.antialiasing = this.antialiasing;
 	data.object.shadows = this.shadows;
 	data.object.shadowsType = this.shadowsType;
+	data.object.toneMapping = this.toneMapping;
+	data.object.toneMappingExposure = this.toneMappingExposure;
+	data.object.toneMappingWhitePoint = this.toneMappingWhitePoint;
 
 	return data;
 };
