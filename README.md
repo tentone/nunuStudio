@@ -5,7 +5,7 @@
  - nunuStudio provides a visual scene editor, a code editor, visual tools to edit textures, materials, particle emitters, etc.
 
 ### Documentation
- - Documentation for the scripting API is available on the nunu webpage http://nunustudio.org
+ - Documentation for the scripting API is available on the nunu webpage https://nunustudio.org
  - nunuStudio was documented using YUIDocs
 
 ### Features
@@ -21,9 +21,9 @@
 - NWJS and Cordova used for easy desktop and mobile deployment
 - Physics engine (cannon.js)
 - SPE particle system
+- Compatible with WebVR V1.1
 - Microsoft Kinect and Leap Motion support
 	- Microsoft Kinect only supported in Windows projects
-- WebVR 1.1 compatible
 
 ### Screenshots
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/2.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/3.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/4.png)
