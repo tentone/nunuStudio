@@ -1,27 +1,57 @@
 "use strict";
 
+/**
+ * MaterialLoader can be used to load external materials.
+ *
+ * @class MaterialLoader
+ * @constructor
+ * @module Loaders
+ * @param {Object} manager
+ */
 function MaterialLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 	this.textures = {};
 }
 
+/**
+ * Load material file from URL.
+ *
+ * @method load
+ * @param {String} url
+ * @param {Function} onLoad
+ * @param {Function} onProgress
+ * @param {Function} onError
+ */
 MaterialLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
-	var scope = this;
+	var self = this;
 
-	var loader = new FileLoader(scope.manager);
+	var loader = new FileLoader(self.manager);
 	loader.load(url, function(text)
 	{
-		onLoad(scope.parse(JSON.parse(text)));
+		onLoad(self.parse(JSON.parse(text)));
 	}, onProgress, onError);
 };
 
+/**
+ * Set texture array to be used when loading materials
+ *
+ * @method setTextures
+ * @param {Array} value
+ */
 MaterialLoader.prototype.setTextures = function(value)
 {
 	this.textures = value;
 };
 
+/**
+ * Parse material JSON.
+ *
+ * @method parse
+ * @param {Object} json
+ * @return {Material} material
+ */
 MaterialLoader.prototype.parse = function(json)
 {
 	var textures = this.textures;

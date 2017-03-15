@@ -31924,11 +31924,11 @@ function ImageLoader(a) {
 ImageLoader.prototype.loadJSON = function(a, b, e, d) {
   var f = this;
   (new THREE.FileLoader(this.manager)).load(a, function(a) {
-    f.parse(JSON.parse(a), b);
+    b(f.parse(JSON.parse(a)));
   }, e, d);
 };
-ImageLoader.prototype.parse = function(a, b) {
-  b = new Image;
+ImageLoader.prototype.parse = function(a) {
+  var b = new Image;
   b.name = a.name;
   b.uuid = a.uuid;
   b.format = a.format;
@@ -31942,11 +31942,11 @@ function VideoLoader(a) {
 VideoLoader.prototype.load = function(a, b, e, d) {
   var f = this;
   (new THREE.FileLoader(this.manager)).load(a, function(a) {
-    f.parse(JSON.parse(a), b);
+    b(f.parse(JSON.parse(a)));
   }, e, d);
 };
-VideoLoader.prototype.parse = function(a, b) {
-  b = new Video;
+VideoLoader.prototype.parse = function(a) {
+  var b = new Video;
   b.name = a.name;
   b.uuid = a.uuid;
   b.format = a.format;
@@ -31959,7 +31959,7 @@ function AudioLoader(a) {
 }
 AudioLoader.prototype.load = function(a, b, e, d) {
   (new THREE.FileLoader(this.manager)).load(a, function(a) {
-    self.parse(JSON.parse(a), b);
+    b(self.parse(JSON.parse(a)));
   }, e, d);
 };
 AudioLoader.prototype.parse = function(a) {
@@ -32064,6 +32064,20 @@ function TextureLoader(a) {
   this.fonts = [];
 }
 THREE.TextureLoader = TextureLoader;
+TextureLoader.prototype.setCrossOrigin = function(a) {
+};
+TextureLoader.prototype.setImages = function(a) {
+  this.images = a;
+  return this;
+};
+TextureLoader.prototype.setVideos = function(a) {
+  this.videos = a;
+  return this;
+};
+TextureLoader.prototype.setFonts = function(a) {
+  this.fonts = a;
+  return this;
+};
 TextureLoader.prototype.load = function(a, b, e, d) {
   a = new Texture(a);
   void 0 !== b && b(a);
@@ -32108,20 +32122,6 @@ TextureLoader.prototype.parse = function(a, b) {
   e.flipY = a.flipY;
   void 0 !== b && b(e);
   return e;
-};
-TextureLoader.prototype.setCrossOrigin = function(a) {
-};
-TextureLoader.prototype.setImages = function(a) {
-  this.images = a;
-  return this;
-};
-TextureLoader.prototype.setVideos = function(a) {
-  this.videos = a;
-  return this;
-};
-TextureLoader.prototype.setFonts = function(a) {
-  this.fonts = a;
-  return this;
 };
 function ObjectLoader(a) {
   this.manager = void 0 !== a ? a : THREE.DefaultLoadingManager;
@@ -32383,7 +32383,8 @@ ObjectLoader.prototype.parseObject = function(a, b, e, d, f, k) {
       break;
     case "Sky":
       t = new Sky(a.autoUpdate, a.dayTime, a.sunDistance, a.time);
-      void 0 !== a.sun && t.sun.shadow.fromJSON(a.sun.shadow);
+      void 0
+       !== a.sun && t.sun.shadow.fromJSON(a.sun.shadow);
       if (void 0 !== a.colorTop) {
         for (t.colorTop = [], w = 0;w < a.colorTop.length;w++) {
           t.colorTop.push(new THREE.Color(a.colorTop[w]));
@@ -36610,7 +36611,7 @@ NODE_ID = 45104, NODE_HDR = 45072, PIVOT = 45075, INSTANCE_NAME = 45073, MORPH_S
     Nd(a);
     var b = a.getCursor(), d = b, e = b;
     a.options.lineWrapping || (d = b.ch ? K(b.line, b.ch - 1) : b, e = K(b.line, b.ch + 1));
-    a.curOp.scrollToPos = {from:d, to:e, margin:a.options.cursorScrollMargin, isCursor:!0};
+    a.curOp.scrollToPos = {from:d, to:e, margin:a.options.cursorScrollMargin, isCursor:!.0};
   }
   function Nd(a) {
     var b = a.curOp.scrollToPos;
@@ -44904,7 +44905,7 @@ NODE_ID = 45104, NODE_HDR = 45072, PIVOT = 45075, INSTANCE_NAME = 45073, MORPH_S
       }
       var g = k(a, e);
       f(0);
-    }, b.async = !0, b.supportsSelection = !0, b) : (f = b.getHelper(b.getCursor(), "hintWords")) ? function(b) {
+    }, b.async = ! 0.0, b.supportsSelection = !0, b) : (f = b.getHelper(b.getCursor(), "hintWords")) ? function(b) {
       return a.hint.fromList(b, {words:f});
     } : a.hint.anyword ? function(b, d) {
       return a.hint.anyword(b, d);
@@ -61858,7 +61859,7 @@ function ImageChooser(a) {
   var b = this;
   this.element.ondrop = function(a) {
     a.preventDefault();
-    0 < a.dataTransfer.files.length && (a = a.dataTransfer.files[0], a.type.startsWith("image") && e(a));
+    0 < a.dataTransfer.files.length && (a = a.dataTransfer.files[0], Image.fileIsImage(a) && e(a));
   };
   this.element.ondragover = function(a) {
     a.preventDefault();
@@ -61866,7 +61867,7 @@ function ImageChooser(a) {
   this.element.onclick = function() {
     null !== b.onChange && FileSystem.chooseFile(function(a) {
       0 < a.length && e(a[0]);
-    }, "image/*");
+    }, "image/*, .tga");
   };
   var e = function(a) {
     var d = new FileReader;
@@ -63601,7 +63602,6 @@ function SceneEditor(a, b, e, d) {
   this.canvas.style.position = "absolute";
   this.element.appendChild(this.canvas);
   this.renderer = null;
-  this.initializeRenderer();
   this.raycaster = new THREE.Raycaster;
   this.scene = this.programRunning = this.state = null;
   this.toolMode = Editor.SELECT;
@@ -63742,10 +63742,16 @@ SceneEditor.prototype.setFullscreen = function(a) {
 SceneEditor.prototype.activate = function() {
   TabElement.prototype.activate.call(this);
   null !== this.scene && (Editor.program.scene = this.scene);
+  this.initializeRenderer();
   this.updateSettings();
   this.setState(SceneEditor.EDITING);
   Interface.selectTool(Editor.SELECT);
   Editor.resize();
+};
+SceneEditor.prototype.deactivate = function() {
+  TabElement.prototype.deactivate.call(this);
+  Interface.run.visible = !1;
+  Interface.run.updateInterface();
 };
 SceneEditor.prototype.updateSettings = function() {
   this.gridHelper.visible = Settings.editor.gridEnabled;
@@ -63754,11 +63760,6 @@ SceneEditor.prototype.updateSettings = function() {
   this.gridHelper.update();
   this.axisHelper.visible = Settings.editor.axisEnabled;
   null !== this.tool && Editor.toolMode !== Editor.SCALE && this.tool.setSpace(Settings.editor.transformationSpace);
-};
-SceneEditor.prototype.deactivate = function() {
-  TabElement.prototype.deactivate.call(this);
-  Interface.run.visible = !1;
-  Interface.run.updateInterface();
 };
 SceneEditor.prototype.destroy = function() {
   TabElement.prototype.destroy.call(this);

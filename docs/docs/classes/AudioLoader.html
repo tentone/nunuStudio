@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Particles</title>  
+	<title>nunuStudio AudioLoader</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -142,35 +142,262 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Particles Module</h1>
-						<div class="box clearfix meta">
+						<h1>AudioLoader Class</h1>
+						<div class="box meta">
 						
 						
+						
+									Module: <a href="../modules/Loaders.html">Loaders</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Particle emitter is a wrapper for SPE particle systems</p>
-						<p>Documentation for SPE particle engine can be found here <a href="https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html">https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html</a></p>
+							<p>Audio loader can be used to load external audio resources.</p>
 						
 						</div>
 						
-						
-						<div class="yui3-g">
-							<div class="yui3-u-1-2">
-									<p>This namespace provides the following classes:</p>
-						
-									<ul class="module-classes">
-										<li class="module-class">
-											<a href="../classes/ParticleEmitter.html">
-												ParticleEmitter
-											</a>
-										</li>
-									</ul>
+							<div class="constructor">
+								<h2>Constructor</h2>
+								<div id="method_AudioLoader" class="method item">
+									<h3 class="name"><code>AudioLoader</code></h3>
+								
+										<div class="args">
+											<span class="paren">(</span><ul class="args-list inline commas">
+												<li class="arg">
+														<code>manager</code>
+												</li>
+											</ul><span class="paren">)</span>
+										</div>
+								
+								
+								
+								
+								
+								
+								
+								
+									<div class="meta">
+												<p>
+										</p>
+								
+								
+								
+									</div>
+								
+									<div class="description">
+										
+									</div>
+								
+										<div class="params">
+											<h4>Parameters:</h4>
+								
+											<ul class="params-list">
+												<li class="param">
+														<code class="param-name">manager</code>
+														<span class="type">Object</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+											</ul>
+										</div>
+								
+								
+								</div>
 							</div>
 						
-							<div class="yui3-u-1-2">
+						<div id="classdocs" class="tabview">
+							<ul class="api-class-tabs">
+								<li class="api-class-tab index"><a href="#index">Index</a></li>
+						
+									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+							</ul>
+						
+							<div>
+								<div id="index" class="api-class-tabpanel index">
+									<h2 class="off-left">Item Index</h2>
+						
+										<div class="index-section methods">
+											<h3>Methods</h3>
+						
+											<ul class="index-list methods">
+													<li class="index-item method">
+														<a href="#method_load">load</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_parse">parse</a>
+						
+													</li>
+											</ul>
+										</div>
+						
+						
+						
+								</div>
+						
+									<div id="methods" class="api-class-tabpanel">
+										<h2 class="off-left">Methods</h2>
+						
+											<div id="method_load" class="method item">
+												<h3 class="name"><code>load</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>url</code>
+															</li>
+															<li class="arg">
+																	<code>onLoad</code>
+															</li>
+															<li class="arg">
+																	<code>onProgress</code>
+															</li>
+															<li class="arg">
+																	<code>onError</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Load audio file from URL.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">url</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">onLoad</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">onProgress</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">onError</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_parse" class="method item">
+												<h3 class="name"><code>parse</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type"><a href="../classes/Audio.html" class="crosslink">Audio</a></span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse audio json and return resource.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type"><a href="../classes/Audio.html" class="crosslink">Audio</a></span>:
+																<p>Audio resource</p>
+											
+														</div>
+													</div>
+											
+											</div>
+									</div>
+						
+						
+						
 							</div>
 						</div>
 					</div>

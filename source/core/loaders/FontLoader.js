@@ -1,10 +1,27 @@
 "use strict";
 
+/**
+ * FontLoader can be used to load external font resources.
+ *
+ * @class FontLoader
+ * @constructor
+ * @module Loaders
+ * @param {Object} manager
+ */
 function FontLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 }
 
+/**
+ * Load font file from URL.
+ *
+ * @method load
+ * @param {String} url
+ * @param {Function} onLoad
+ * @param {Function} onProgress
+ * @param {Function} onError
+ */
 FontLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	var loader = new THREE.FileLoader(this.manager);
@@ -14,6 +31,13 @@ FontLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}, onProgress, onError);
 };
 
+/**
+ * Parse font json and return resource.
+ *
+ * @method parse
+ * @param {Object} json
+ * @return {Font} Font resource
+ */
 FontLoader.prototype.parse = function(json)
 {
 	if(json.data !== undefined)
