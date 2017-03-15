@@ -6,7 +6,6 @@ function ObjectLoader(manager)
 	this.texturePath = "";
 }
 
-//Load object from file url
 ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	if(this.texturePath === "")
@@ -15,15 +14,14 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}
 
 	var self = this;
+	
 	var loader = new THREE.FileLoader(this.manager);
-
 	loader.load(url, function(text)
 	{
 		self.parse(JSON.parse(text), onLoad);
 	}, onProgress, onError);
 };
 
-//Parse a json object representation
 ObjectLoader.prototype.parse = function(json, onLoad)
 {
 	var geometries = this.parseGeometries(json.geometries);
@@ -51,19 +49,16 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 	return object;
 };
 
-//Set base texture path
 ObjectLoader.prototype.setTexturePath = function(value)
 {
 	this.texturePath = value;
 };
 
-//Set cross origin
 ObjectLoader.prototype.setCrossOrigin = function(value)
 {
 	this.crossOrigin = value;
 };
 
-//Parse geometries
 ObjectLoader.prototype.parseGeometries = function(json)
 {
 	var geometries = [];
@@ -169,7 +164,6 @@ ObjectLoader.prototype.parseGeometries = function(json)
 	return geometries;
 };
 
-//Parse all materials
 ObjectLoader.prototype.parseMaterials = function(json, textures)
 {
 	var materials = [];
@@ -188,7 +182,6 @@ ObjectLoader.prototype.parseMaterials = function(json, textures)
 	return materials;
 };
 
-//Parse animations
 ObjectLoader.prototype.parseAnimations = function(json)
 {
 	var animations = [];
@@ -202,7 +195,6 @@ ObjectLoader.prototype.parseAnimations = function(json)
 	return animations;
 };
 
-//Parse images
 ObjectLoader.prototype.parseImages = function(json)
 {
 	var loader = new ImageLoader();
@@ -219,7 +211,6 @@ ObjectLoader.prototype.parseImages = function(json)
 	return images;
 };
 
-//Parse videos
 ObjectLoader.prototype.parseVideos = function(json)
 {
 	var loader = new VideoLoader();
@@ -236,7 +227,6 @@ ObjectLoader.prototype.parseVideos = function(json)
 	return videos;
 };
 
-//Parse audio
 ObjectLoader.prototype.parseAudio = function(json)
 {
 	var loader = new AudioLoader();
@@ -253,7 +243,6 @@ ObjectLoader.prototype.parseAudio = function(json)
 	return audio;
 };
 
-//Parse fonts
 ObjectLoader.prototype.parseFonts = function(json)
 {
 	var loader = new FontLoader();
@@ -270,7 +259,6 @@ ObjectLoader.prototype.parseFonts = function(json)
 	return fonts;
 };
 
-//Parse textures
 ObjectLoader.prototype.parseTextures = function(json, images, videos)
 {
 	var loader = new TextureLoader();
@@ -291,7 +279,6 @@ ObjectLoader.prototype.parseTextures = function(json, images, videos)
 	return textures;
 };
 
-//Parse objects
 ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts)
 {
 	var matrix = new THREE.Matrix4();

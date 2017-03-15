@@ -30,6 +30,53 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\loaders\\AudioLoader.js": {
+            "name": "..\\source\\core\\loaders\\AudioLoader.js",
+            "modules": {
+                "Loaders": 1
+            },
+            "classes": {
+                "AudioLoader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\loaders\\FontLoader.js": {
+            "name": "..\\source\\core\\loaders\\FontLoader.js",
+            "modules": {},
+            "classes": {
+                "FontLoader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\loaders\\ImageLoader.js": {
+            "name": "..\\source\\core\\loaders\\ImageLoader.js",
+            "modules": {},
+            "classes": {
+                "ImageLoader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\loaders\\MaterialLoader.js": {
+            "name": "..\\source\\core\\loaders\\MaterialLoader.js",
+            "modules": {},
+            "classes": {
+                "MaterialLoader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\core\\loaders\\VideoLoader.js": {
+            "name": "..\\source\\core\\loaders\\VideoLoader.js",
+            "modules": {},
+            "classes": {
+                "VideoLoader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\objects\\audio\\AudioEmitter.js": {
             "name": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
             "modules": {
@@ -467,17 +514,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\utils\\Mesh2shape.js": {
-            "name": "..\\source\\core\\utils\\Mesh2shape.js",
-            "modules": {
-                "Physics": 1
-            },
-            "classes": {
-                "Mesh2shape": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\utils\\ObjectUtils.js": {
             "name": "..\\source\\core\\utils\\ObjectUtils.js",
             "modules": {},
@@ -498,6 +534,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\editor\\utils\\Mesh2shape.js": {
+            "name": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "modules": {
+                "Physics": 1
+            },
+            "classes": {
+                "Mesh2shape": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\runtime\\NunuApp.js": {
             "name": "..\\source\\runtime\\NunuApp.js",
             "modules": {
@@ -506,6 +553,13 @@
             "classes": {
                 "NunuApp": 1
             },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\source\\test\\TDSLoader.js": {
+            "name": "..\\source\\test\\TDSLoader.js",
+            "modules": {},
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -535,6 +589,24 @@
             "file": "..\\source\\core\\input\\Mouse.js",
             "line": 3,
             "description": "Key is used by Keyboard, Mouse, etc, to represent a key state"
+        },
+        "Loaders": {
+            "name": "Loaders",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "AudioLoader": 1,
+                "FontLoader": 1,
+                "ImageLoader": 1,
+                "MaterialLoader": 1,
+                "VideoLoader": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\loaders\\VideoLoader.js",
+            "line": 3,
+            "description": "Audio loader can be used to load external audio resources."
         },
         "Audio": {
             "name": "Audio",
@@ -647,19 +719,16 @@
         },
         "Physics": {
             "name": "Physics",
-            "submodules": {
-                "undefined": 1
-            },
+            "submodules": {},
             "elements": {},
             "classes": {
                 "Mesh2shape": 1,
-                "PhysicsObject": 1,
-                "ObjectUtils": 1
+                "PhysicsObject": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\utils\\ObjectUtils.js",
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
             "line": 3,
             "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
         },
@@ -777,16 +846,19 @@
         },
         "Math": {
             "name": "Math",
-            "submodules": {},
+            "submodules": {
+                "undefined": 1
+            },
             "elements": {},
             "classes": {
                 "MathUtils": 1,
-                "Vector3": 1
+                "Vector3": 1,
+                "ObjectUtils": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\source\\core\\utils\\MathUtils.js",
+            "file": "..\\source\\core\\utils\\ObjectUtils.js",
             "line": 3,
             "description": "MathUtils contains auxiliar values and function to help with mathematical operations."
         },
@@ -881,6 +953,116 @@
             "line": 3,
             "description": "Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler.",
             "is_constructor": 1
+        },
+        "AudioLoader": {
+            "name": "AudioLoader",
+            "shortname": "AudioLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Loaders",
+            "namespace": "",
+            "file": "..\\source\\core\\loaders\\AudioLoader.js",
+            "line": 3,
+            "description": "Audio loader can be used to load external audio resources.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "manager",
+                    "description": "",
+                    "type": "Object"
+                }
+            ]
+        },
+        "FontLoader": {
+            "name": "FontLoader",
+            "shortname": "FontLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Loaders",
+            "namespace": "",
+            "file": "..\\source\\core\\loaders\\FontLoader.js",
+            "line": 3,
+            "description": "FontLoader can be used to load external font resources.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "manager",
+                    "description": "",
+                    "type": "Object"
+                }
+            ]
+        },
+        "ImageLoader": {
+            "name": "ImageLoader",
+            "shortname": "ImageLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Loaders",
+            "namespace": "",
+            "file": "..\\source\\core\\loaders\\ImageLoader.js",
+            "line": 3,
+            "description": "ImageLoader can be used to load external image resources.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "manager",
+                    "description": "",
+                    "type": "Object"
+                }
+            ]
+        },
+        "MaterialLoader": {
+            "name": "MaterialLoader",
+            "shortname": "MaterialLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Loaders",
+            "namespace": "",
+            "file": "..\\source\\core\\loaders\\MaterialLoader.js",
+            "line": 3,
+            "description": "MaterialLoader can be used to load external materials.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "manager",
+                    "description": "",
+                    "type": "Object"
+                }
+            ]
+        },
+        "VideoLoader": {
+            "name": "VideoLoader",
+            "shortname": "VideoLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Loaders",
+            "namespace": "",
+            "file": "..\\source\\core\\loaders\\VideoLoader.js",
+            "line": 3,
+            "description": "VideoLoader can be used to load external video resources.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "manager",
+                    "description": "",
+                    "type": "Object"
+                }
+            ]
         },
         "AudioEmitter": {
             "name": "AudioEmitter",
@@ -2147,22 +2329,6 @@
             "description": "MathUtils contains auxiliar values and function to help with mathematical operations.",
             "static": 1
         },
-        "Mesh2shape": {
-            "name": "Mesh2shape",
-            "shortname": "Mesh2shape",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Physics",
-            "namespace": "",
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 3,
-            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy.",
-            "author": "Don McCurdy (https://github.com/donmccurdy)",
-            "static": 1
-        },
         "ObjectUtils": {
             "name": "ObjectUtils",
             "shortname": "ObjectUtils",
@@ -2171,7 +2337,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "Physics",
+            "module": "Math",
             "namespace": "",
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
             "line": 3,
@@ -2192,6 +2358,22 @@
             "line": 3,
             "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere."
         },
+        "Mesh2shape": {
+            "name": "Mesh2shape",
+            "shortname": "Mesh2shape",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Physics",
+            "namespace": "",
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 3,
+            "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy.",
+            "author": "Don McCurdy (https://github.com/donmccurdy)",
+            "static": 1
+        },
         "NunuApp": {
             "name": "NunuApp",
             "shortname": "NunuApp",
@@ -2203,7 +2385,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 94,
+            "line": 91,
             "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere",
             "is_constructor": 1,
             "params": [
@@ -2334,7 +2516,7 @@
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
             "line": 58,
-            "description": "Update key flags synchronously (called automatically by the app runtime).",
+            "description": "Update key flags synchronously.\n\nCalled automatically by the app runtime.",
             "itemtype": "method",
             "name": "update",
             "class": "Keyboard",
@@ -2342,8 +2524,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 83,
-            "description": "Reset keyboard status to default",
+            "line": 85,
+            "description": "Reset keyboard status to default.",
             "itemtype": "method",
             "name": "reset",
             "class": "Keyboard",
@@ -2351,8 +2533,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 99,
-            "description": "Check if a key is pressed",
+            "line": 102,
+            "description": "Check if a key is pressed.",
             "itemtype": "method",
             "name": "keyPressed",
             "return": {
@@ -2364,8 +2546,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 109,
-            "description": "Check is a key as just pressed",
+            "line": 113,
+            "description": "Check is a key as just pressed.",
             "itemtype": "method",
             "name": "keyJustPressed",
             "return": {
@@ -2377,8 +2559,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 119,
-            "description": "Check if a key was just released",
+            "line": 124,
+            "description": "Check if a key was just released.",
             "itemtype": "method",
             "name": "keyJustReleased",
             "return": {
@@ -2390,8 +2572,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 129,
-            "description": "Dispose keyboard events (called automatically by the app runtime)",
+            "line": 135,
+            "description": "Dispose keyboard events.\n\nCalled automatically by the app runtime.",
             "itemtype": "method",
             "name": "dispose",
             "class": "Keyboard",
@@ -2399,7 +2581,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 142,
+            "line": 151,
             "description": "TAB key",
             "itemtype": "attribute",
             "name": "TAB",
@@ -2409,7 +2591,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 148,
+            "line": 157,
             "description": "ENTER key",
             "itemtype": "attribute",
             "name": "ENTER",
@@ -2419,7 +2601,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 154,
+            "line": 163,
             "description": "SHIFT key",
             "itemtype": "attribute",
             "name": "SHIFT",
@@ -2429,7 +2611,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 160,
+            "line": 169,
             "description": "CTRL key",
             "itemtype": "attribute",
             "name": "CTRL",
@@ -2439,7 +2621,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 166,
+            "line": 175,
             "description": "ALT key",
             "itemtype": "attribute",
             "name": "ALT",
@@ -2449,7 +2631,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 172,
+            "line": 181,
             "description": "CAPS_LOCK key",
             "itemtype": "attribute",
             "name": "CAPS_LOCK",
@@ -2459,7 +2641,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 178,
+            "line": 187,
             "description": "ESC key",
             "itemtype": "attribute",
             "name": "ESC",
@@ -2469,7 +2651,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 184,
+            "line": 193,
             "description": "SPACEBAR key",
             "itemtype": "attribute",
             "name": "SPACEBAR",
@@ -2479,7 +2661,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 190,
+            "line": 199,
             "description": "PAGE_UP key",
             "itemtype": "attribute",
             "name": "PAGE_UP",
@@ -2489,7 +2671,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 196,
+            "line": 205,
             "description": "PAGE_DOWN key",
             "itemtype": "attribute",
             "name": "PAGE_DOWN",
@@ -2499,7 +2681,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 202,
+            "line": 211,
             "description": "END key",
             "itemtype": "attribute",
             "name": "END",
@@ -2509,7 +2691,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 208,
+            "line": 217,
             "description": "HOME key",
             "itemtype": "attribute",
             "name": "HOME",
@@ -2519,7 +2701,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 214,
+            "line": 223,
             "description": "INSERT key",
             "itemtype": "attribute",
             "name": "INSERT",
@@ -2529,7 +2711,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 220,
+            "line": 229,
             "description": "DEL key",
             "itemtype": "attribute",
             "name": "DEL",
@@ -2539,7 +2721,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 227,
+            "line": 236,
             "description": "LEFT key",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -2549,7 +2731,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 233,
+            "line": 242,
             "description": "RIGHT key",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -2559,7 +2741,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 239,
+            "line": 248,
             "description": "UP key",
             "itemtype": "attribute",
             "name": "UP",
@@ -2569,7 +2751,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 245,
+            "line": 254,
             "description": "DOWN key",
             "itemtype": "attribute",
             "name": "DOWN",
@@ -2579,7 +2761,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 252,
+            "line": 261,
             "description": "NUM0 key",
             "itemtype": "attribute",
             "name": "NUM0",
@@ -2589,7 +2771,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 258,
+            "line": 267,
             "description": "NUM1 key",
             "itemtype": "attribute",
             "name": "NUM1",
@@ -2599,7 +2781,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 264,
+            "line": 273,
             "description": "NUM2 key",
             "itemtype": "attribute",
             "name": "NUM2",
@@ -2609,7 +2791,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 270,
+            "line": 279,
             "description": "NUM3 key",
             "itemtype": "attribute",
             "name": "NUM3",
@@ -2619,7 +2801,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 276,
+            "line": 285,
             "description": "NUM4 key",
             "itemtype": "attribute",
             "name": "NUM4",
@@ -2629,7 +2811,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 282,
+            "line": 291,
             "description": "NUM5 key",
             "itemtype": "attribute",
             "name": "NUM5",
@@ -2639,7 +2821,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 288,
+            "line": 297,
             "description": "NUM6 key",
             "itemtype": "attribute",
             "name": "NUM6",
@@ -2649,7 +2831,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 294,
+            "line": 303,
             "description": "NUM7 key",
             "itemtype": "attribute",
             "name": "NUM7",
@@ -2659,7 +2841,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 300,
+            "line": 309,
             "description": "NUM8 key",
             "itemtype": "attribute",
             "name": "NUM8",
@@ -2669,7 +2851,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 306,
+            "line": 315,
             "description": "NUM9 key",
             "itemtype": "attribute",
             "name": "NUM9",
@@ -2679,7 +2861,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 313,
+            "line": 322,
             "description": "A key",
             "itemtype": "attribute",
             "name": "A",
@@ -2689,7 +2871,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 319,
+            "line": 328,
             "description": "B key",
             "itemtype": "attribute",
             "name": "B",
@@ -2699,7 +2881,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 325,
+            "line": 334,
             "description": "C key",
             "itemtype": "attribute",
             "name": "C",
@@ -2709,7 +2891,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 331,
+            "line": 340,
             "description": "D key",
             "itemtype": "attribute",
             "name": "D",
@@ -2719,7 +2901,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 337,
+            "line": 346,
             "description": "E key",
             "itemtype": "attribute",
             "name": "E",
@@ -2729,7 +2911,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 343,
+            "line": 352,
             "description": "F key",
             "itemtype": "attribute",
             "name": "F",
@@ -2739,7 +2921,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 349,
+            "line": 358,
             "description": "G key",
             "itemtype": "attribute",
             "name": "G",
@@ -2749,7 +2931,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 355,
+            "line": 364,
             "description": "H key",
             "itemtype": "attribute",
             "name": "H",
@@ -2759,7 +2941,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 361,
+            "line": 370,
             "description": "I key",
             "itemtype": "attribute",
             "name": "I",
@@ -2769,7 +2951,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 367,
+            "line": 376,
             "description": "J key",
             "itemtype": "attribute",
             "name": "J",
@@ -2779,7 +2961,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 373,
+            "line": 382,
             "description": "K key",
             "itemtype": "attribute",
             "name": "K",
@@ -2789,7 +2971,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 379,
+            "line": 388,
             "description": "L key",
             "itemtype": "attribute",
             "name": "L",
@@ -2799,7 +2981,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 385,
+            "line": 394,
             "description": "M key",
             "itemtype": "attribute",
             "name": "M",
@@ -2809,7 +2991,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 391,
+            "line": 400,
             "description": "N key",
             "itemtype": "attribute",
             "name": "N",
@@ -2819,7 +3001,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 397,
+            "line": 406,
             "description": "O key",
             "itemtype": "attribute",
             "name": "O",
@@ -2829,7 +3011,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 403,
+            "line": 412,
             "description": "P key",
             "itemtype": "attribute",
             "name": "P",
@@ -2839,7 +3021,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 409,
+            "line": 418,
             "description": "Q key",
             "itemtype": "attribute",
             "name": "Q",
@@ -2849,7 +3031,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 415,
+            "line": 424,
             "description": "R key",
             "itemtype": "attribute",
             "name": "R",
@@ -2859,7 +3041,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 421,
+            "line": 430,
             "description": "S key",
             "itemtype": "attribute",
             "name": "S",
@@ -2869,7 +3051,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 427,
+            "line": 436,
             "description": "T key",
             "itemtype": "attribute",
             "name": "T",
@@ -2879,7 +3061,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 433,
+            "line": 442,
             "description": "U key",
             "itemtype": "attribute",
             "name": "U",
@@ -2889,7 +3071,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 439,
+            "line": 448,
             "description": "V key",
             "itemtype": "attribute",
             "name": "V",
@@ -2899,7 +3081,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 445,
+            "line": 454,
             "description": "W key",
             "itemtype": "attribute",
             "name": "W",
@@ -2909,7 +3091,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 451,
+            "line": 460,
             "description": "X key",
             "itemtype": "attribute",
             "name": "X",
@@ -2919,7 +3101,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 457,
+            "line": 466,
             "description": "Y key",
             "itemtype": "attribute",
             "name": "Y",
@@ -2929,7 +3111,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 463,
+            "line": 472,
             "description": "Z key",
             "itemtype": "attribute",
             "name": "Z",
@@ -2939,7 +3121,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 470,
+            "line": 479,
             "description": "F1 key",
             "itemtype": "attribute",
             "name": "F1",
@@ -2949,7 +3131,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 476,
+            "line": 485,
             "description": "F2 key",
             "itemtype": "attribute",
             "name": "F2",
@@ -2959,7 +3141,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 482,
+            "line": 491,
             "description": "F3 key",
             "itemtype": "attribute",
             "name": "F3",
@@ -2969,7 +3151,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 488,
+            "line": 497,
             "description": "F4 key",
             "itemtype": "attribute",
             "name": "F4",
@@ -2979,7 +3161,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 494,
+            "line": 503,
             "description": "F5 key",
             "itemtype": "attribute",
             "name": "F5",
@@ -2989,7 +3171,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 500,
+            "line": 509,
             "description": "F6 key",
             "itemtype": "attribute",
             "name": "F6",
@@ -2999,7 +3181,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 506,
+            "line": 515,
             "description": "F7 key",
             "itemtype": "attribute",
             "name": "F7",
@@ -3009,7 +3191,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 512,
+            "line": 521,
             "description": "F8 key",
             "itemtype": "attribute",
             "name": "F8",
@@ -3019,7 +3201,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 518,
+            "line": 527,
             "description": "F9 key",
             "itemtype": "attribute",
             "name": "F9",
@@ -3029,7 +3211,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 524,
+            "line": 533,
             "description": "F10 key",
             "itemtype": "attribute",
             "name": "F10",
@@ -3039,7 +3221,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 530,
+            "line": 539,
             "description": "F11 key",
             "itemtype": "attribute",
             "name": "F11",
@@ -3049,7 +3231,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 536,
+            "line": 545,
             "description": "F12 key",
             "itemtype": "attribute",
             "name": "F12",
@@ -3109,7 +3291,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 188,
+            "line": 194,
             "description": "LEFT mouse button",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -3119,7 +3301,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 194,
+            "line": 200,
             "description": "MIDDLE mouse button",
             "itemtype": "attribute",
             "name": "MIDDLE",
@@ -3129,7 +3311,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 200,
+            "line": 206,
             "description": "RIGHT mouse button",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -3139,7 +3321,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 207,
+            "line": 213,
             "description": "Canvas to be used for coordinates calculation relative to that canvas.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -3155,7 +3337,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 230,
+            "line": 236,
             "description": "Check if mouse is inside attached canvas (updated async).",
             "itemtype": "method",
             "name": "insideCanvas",
@@ -3168,7 +3350,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 246,
+            "line": 252,
             "description": "Set mouse lock state.",
             "itemtype": "method",
             "name": "setLock",
@@ -3184,7 +3366,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 289,
+            "line": 295,
             "description": "Check if mouse button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -3204,7 +3386,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 301,
+            "line": 307,
             "description": "Check if Mouse button was double clicked.",
             "itemtype": "method",
             "name": "buttonDoubleClicked",
@@ -3217,7 +3399,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 312,
+            "line": 318,
             "description": "Check if a mouse button was just pressed.",
             "itemtype": "method",
             "name": "buttonJustPressed",
@@ -3237,7 +3419,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 324,
+            "line": 330,
             "description": "Check if a mouse button was just released.",
             "itemtype": "method",
             "name": "buttonJustReleased",
@@ -3257,8 +3439,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 336,
-            "description": "Update mouse Position (automatically called by the runtime).",
+            "line": 342,
+            "description": "Update mouse Position.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updatePosition",
             "params": [
@@ -3288,8 +3470,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 353,
-            "description": "Update a mouse button (automatically called by the runtime)",
+            "line": 361,
+            "description": "Update a mouse button.\n\nAutomatically called by the runtime.",
             "params": [
                 {
                     "name": "button",
@@ -3307,8 +3489,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 366,
-            "description": "Update mouse buttons state, position, wheel and delta synchronously (called automatically by the app runtime).",
+            "line": 377,
+            "description": "Update mouse buttons state, position, wheel and delta synchronously.\n\nCalled automatically by the app runtime.",
             "itemtype": "method",
             "name": "update",
             "class": "Mouse",
@@ -3316,12 +3498,283 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 428,
+            "line": 441,
             "description": "Dispose mouse events (called automatically by the app runtime).",
             "itemtype": "method",
             "name": "dispose",
             "class": "Mouse",
             "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\AudioLoader.js",
+            "line": 16,
+            "description": "Load audio file from URL.",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "AudioLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\AudioLoader.js",
+            "line": 34,
+            "description": "Parse audio json and return resource.",
+            "itemtype": "method",
+            "name": "parse",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Audio resource",
+                "type": "Audio"
+            },
+            "class": "AudioLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\FontLoader.js",
+            "line": 16,
+            "description": "Load font file from URL.",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "FontLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\FontLoader.js",
+            "line": 34,
+            "description": "Parse font json and return resource.",
+            "itemtype": "method",
+            "name": "parse",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Font resource",
+                "type": "Font"
+            },
+            "class": "FontLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ImageLoader.js",
+            "line": 16,
+            "description": "Load image resource from url.",
+            "itemtype": "method",
+            "name": "loadJSON",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "ImageLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ImageLoader.js",
+            "line": 36,
+            "description": "Parse image json and return resource.",
+            "itemtype": "method",
+            "name": "parse",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Image resource",
+                "type": "Image"
+            },
+            "class": "ImageLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\MaterialLoader.js",
+            "line": 17,
+            "description": "Load material file from URL.",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "MaterialLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\MaterialLoader.js",
+            "line": 37,
+            "description": "Set texture array to be used when loading materials",
+            "itemtype": "method",
+            "name": "setTextures",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "class": "MaterialLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\MaterialLoader.js",
+            "line": 48,
+            "description": "Parse material JSON.",
+            "itemtype": "method",
+            "name": "parse",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "material",
+                "type": "Material"
+            },
+            "class": "MaterialLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\VideoLoader.js",
+            "line": 16,
+            "description": "Load video resource from URL.",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "VideoLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\VideoLoader.js",
+            "line": 36,
+            "description": "Parse material JSON.",
+            "itemtype": "method",
+            "name": "parse",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "material",
+                "type": "Material"
+            },
+            "class": "VideoLoader",
+            "module": "Loaders"
         },
         {
             "file": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
@@ -5507,7 +5960,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 136,
+            "line": 139,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -5516,7 +5969,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 173,
+            "line": 176,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -5537,7 +5990,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 186,
+            "line": 189,
             "description": "Set program renderer.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -5553,7 +6006,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 198,
+            "line": 201,
             "description": "Enter VR mode.",
             "itemtype": "method",
             "name": "displayVR",
@@ -5562,7 +6015,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 224,
+            "line": 227,
             "description": "Exit VR mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -5571,7 +6024,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 244,
+            "line": 247,
             "description": "Update program state.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -5580,7 +6033,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 256,
+            "line": 259,
             "description": "Render program to canvas.\n\nRenderer passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -5596,7 +6049,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 306,
+            "line": 309,
             "description": "Resize program elements.\n\nCalled by the runtime every time the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -5617,7 +6070,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 334,
+            "line": 337,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -5633,7 +6086,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 364,
+            "line": 367,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -5649,7 +6102,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 386,
+            "line": 389,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -5665,7 +6118,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 409,
+            "line": 412,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -5678,7 +6131,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 422,
+            "line": 425,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -5694,7 +6147,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 435,
+            "line": 438,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -5710,7 +6163,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 480,
+            "line": 483,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -5719,7 +6172,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 514,
+            "line": 517,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -5735,7 +6188,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 551,
+            "line": 554,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -5751,7 +6204,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Program.js",
-            "line": 583,
+            "line": 586,
             "description": "Serialize object as JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7977,301 +8430,6 @@
             "module": "Math"
         },
         {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 17,
-            "description": "Type is used to indentify the type of cannonjs:\n - BOX\n - CYLINDER\n - SPHERE\n - HULL",
-            "itemtype": "attribute",
-            "name": "Type",
-            "type": "{Object}",
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 35,
-            "description": "Given a Object3D instance, creates a corresponding CANNON shape.",
-            "itemtype": "method",
-            "name": "createShape",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "",
-                    "type": "Object3D"
-                },
-                {
-                    "name": "type",
-                    "description": "Mesh2shape.Type",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Shape"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 104,
-            "description": "Create box shape from geometry.",
-            "itemtype": "method",
-            "name": "createBoxShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Box"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 127,
-            "description": "Bounding box needs to be computed with the entire mesh, not just geometry.",
-            "itemtype": "method",
-            "name": "createBoundingBoxShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Box"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 162,
-            "description": "Computes 3D convex hull as a CANNON.ConvexPolyhedron.",
-            "itemtype": "method",
-            "name": "createConvexPolyhedron",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "ConvexPolyhedron"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Shape"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 212,
-            "description": "Create cylinder shape from geometry.",
-            "itemtype": "method",
-            "name": "createCylinderShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Cylinder"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 230,
-            "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
-            "itemtype": "method",
-            "name": "createBoundingCylinderShape",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "",
-                    "type": "Object3D"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Cylinder"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 257,
-            "description": "Plane shape from geometry.",
-            "itemtype": "method",
-            "name": "createPlaneShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Box"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 272,
-            "description": "Sphere shape from geometry.",
-            "itemtype": "method",
-            "name": "createSphereShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Sphere"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 284,
-            "description": "Sphere shape from bouding sphere.",
-            "itemtype": "method",
-            "name": "createBoundingSphereShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Sphere"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 299,
-            "description": "Sphere shape from bouding sphere.",
-            "itemtype": "method",
-            "name": "createTubeShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Trimesh"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 313,
-            "description": "Trimesh shape from geometry.",
-            "itemtype": "method",
-            "name": "createTrimeshShape",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "shape",
-                "type": "CANNON.Trimesh"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 333,
-            "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
-            "itemtype": "method",
-            "name": "getGeometry",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "",
-                    "type": "Object3D"
-                }
-            ],
-            "return": {
-                "description": "Geometry that contains all merger geometry",
-                "type": "Geometry"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 395,
-            "description": "Get geometry vertices.",
-            "itemtype": "method",
-            "name": "getVertices",
-            "params": [
-                {
-                    "name": "geometry",
-                    "description": "",
-                    "type": "Geometry"
-                }
-            ],
-            "return": {
-                "description": "array",
-                "type": "Array"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
-            "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 411,
-            "description": "Returns a array of THREE.Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
-            "itemtype": "method",
-            "name": "getMeshes",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "",
-                    "type": "Object3D"
-                }
-            ],
-            "return": {
-                "description": "meshes found inside the Object3D",
-                "type": "Array"
-            },
-            "class": "Mesh2shape",
-            "module": "Physics"
-        },
-        {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
             "line": 12,
             "description": "Get all fonts in a object and childs",
@@ -8294,7 +8452,7 @@
                 "type": "Array"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
@@ -8319,7 +8477,7 @@
                 "type": "Array"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
@@ -8345,7 +8503,7 @@
                 }
             ],
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
@@ -8370,7 +8528,7 @@
                 "type": "Array"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
@@ -8390,7 +8548,7 @@
                 "type": "Object3D"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
@@ -8410,7 +8568,7 @@
                 "type": "Object3D"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
@@ -8431,7 +8589,7 @@
                 }
             ],
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
@@ -8452,7 +8610,7 @@
                 }
             ],
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
@@ -8473,7 +8631,7 @@
                 }
             ],
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
@@ -8498,7 +8656,7 @@
                 "type": "Boolean"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Math"
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
@@ -8619,7 +8777,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 213,
+            "line": 230,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -8640,7 +8798,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 230,
+            "line": 247,
             "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -8656,7 +8814,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 250,
+            "line": 267,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -8669,7 +8827,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 274,
+            "line": 291,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -8690,7 +8848,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 315,
+            "line": 332,
             "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.",
             "itemtype": "method",
             "name": "chooseFile",
@@ -8716,7 +8874,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 351,
+            "line": 368,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -8737,7 +8895,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 378,
+            "line": 395,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -8757,7 +8915,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 397,
+            "line": 414,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -8777,7 +8935,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 419,
+            "line": 436,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -8797,7 +8955,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 438,
+            "line": 455,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -8817,7 +8975,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 460,
+            "line": 477,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
@@ -8836,8 +8994,303 @@
             "module": "Files"
         },
         {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 17,
+            "description": "Type is used to indentify the type of cannonjs:\n - BOX\n - CYLINDER\n - SPHERE\n - HULL",
+            "itemtype": "attribute",
+            "name": "Type",
+            "type": "{Object}",
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 35,
+            "description": "Given a Object3D instance, creates a corresponding CANNON shape.",
+            "itemtype": "method",
+            "name": "createShape",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                },
+                {
+                    "name": "type",
+                    "description": "Mesh2shape.Type",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Shape"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 103,
+            "description": "Create box shape from geometry.",
+            "itemtype": "method",
+            "name": "createBoxShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Box"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 126,
+            "description": "Bounding box needs to be computed with the entire mesh, not just geometry.",
+            "itemtype": "method",
+            "name": "createBoundingBoxShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Box"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 161,
+            "description": "Computes 3D convex hull as a CANNON.ConvexPolyhedron.",
+            "itemtype": "method",
+            "name": "createConvexPolyhedron",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "ConvexPolyhedron"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Shape"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 211,
+            "description": "Create cylinder shape from geometry.",
+            "itemtype": "method",
+            "name": "createCylinderShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Cylinder"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 229,
+            "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
+            "itemtype": "method",
+            "name": "createBoundingCylinderShape",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Cylinder"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 256,
+            "description": "Plane shape from geometry.",
+            "itemtype": "method",
+            "name": "createPlaneShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Box"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 271,
+            "description": "Sphere shape from geometry.",
+            "itemtype": "method",
+            "name": "createSphereShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Sphere"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 283,
+            "description": "Sphere shape from bouding sphere.",
+            "itemtype": "method",
+            "name": "createBoundingSphereShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Sphere"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 298,
+            "description": "Sphere shape from bouding sphere.",
+            "itemtype": "method",
+            "name": "createTubeShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Trimesh"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 312,
+            "description": "Trimesh shape from geometry.",
+            "itemtype": "method",
+            "name": "createTrimeshShape",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "shape",
+                "type": "CANNON.Trimesh"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 332,
+            "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
+            "itemtype": "method",
+            "name": "getGeometry",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                }
+            ],
+            "return": {
+                "description": "Geometry that contains all merger geometry",
+                "type": "Geometry"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 394,
+            "description": "Get geometry vertices.",
+            "itemtype": "method",
+            "name": "getVertices",
+            "params": [
+                {
+                    "name": "geometry",
+                    "description": "",
+                    "type": "Geometry"
+                }
+            ],
+            "return": {
+                "description": "array",
+                "type": "Array"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
+            "file": "..\\source\\editor\\utils\\Mesh2shape.js",
+            "line": 410,
+            "description": "Returns a array of THREE.Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
+            "itemtype": "method",
+            "name": "getMeshes",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object3D"
+                }
+            ],
+            "return": {
+                "description": "meshes found inside the Object3D",
+                "type": "Array"
+            },
+            "class": "Mesh2shape",
+            "module": "Physics"
+        },
+        {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 102,
+            "line": 99,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -8847,7 +9300,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 108,
+            "line": 105,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -8857,7 +9310,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 114,
+            "line": 111,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -8868,7 +9321,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 121,
+            "line": 118,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -8879,7 +9332,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 128,
+            "line": 125,
             "description": "Canvas used to render graphics",
             "itemtype": "property",
             "name": "canvas",
@@ -8889,8 +9342,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 134,
-            "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance\nIf true the canvas is resized whenether the resize method is called",
+            "line": 131,
+            "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasResize",
             "type": "{boolean}",
@@ -8900,8 +9353,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 193,
-            "description": "Load program asynchronously and run it after its loaded",
+            "line": 192,
+            "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
             "params": [
@@ -8927,7 +9380,7 @@
         {
             "file": "..\\source\\runtime\\NunuApp.js",
             "line": 217,
-            "description": "Load program from file",
+            "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
             "params": [
@@ -8942,8 +9395,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 229,
-            "description": "Start running nunu program\nA nunu program must be loaded before calling this method",
+            "line": 230,
+            "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
             "class": "NunuApp",
@@ -8951,8 +9404,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 288,
-            "description": "Update nunu program state\nAutomatically called by the runtime handler",
+            "line": 291,
+            "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
             "class": "NunuApp",
@@ -8960,8 +9413,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 302,
-            "description": "Exit from app\nThis method kills the app and disposes all internal elements to avoid memory leaks\nIs should be called before exiting the webpage or before switching nunu programs\nWhen loading new nunu programs the same NunuApp instance can be used",
+            "line": 307,
+            "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
             "class": "NunuApp",
@@ -8969,8 +9422,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 335,
-            "description": "Resize the window\nShould be called whenether the host window is resized",
+            "line": 344,
+            "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
             "class": "NunuApp",
@@ -8978,8 +9431,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 357,
-            "description": "Send data to running nunu application\nThe data sent using this method is received by scripts that implement the onAppData method",
+            "line": 368,
+            "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
                     "name": "data",
@@ -8994,8 +9447,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 371,
-            "description": "Set on data receive callback\nCallback receives data as an argument",
+            "line": 384,
+            "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
             "params": [
@@ -9010,8 +9463,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 382,
-            "description": "Set on exit callback\nCallback is executed when exiting the nunu app",
+            "line": 397,
+            "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
             "params": [
@@ -9026,8 +9479,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 393,
-            "description": "Check if VR mode is available",
+            "line": 410,
+            "description": "Check if VR mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
             "return": {
@@ -9039,8 +9492,8 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 403,
-            "description": "Toggle VR mode, only works if VR mode is available",
+            "line": 421,
+            "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
             "class": "NunuApp",
@@ -9048,12 +9501,12 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 428,
+            "line": 447,
             "description": "Set fullscreen mode",
             "params": [
                 {
                     "name": "fullscreen",
-                    "description": "Fullscreen value",
+                    "description": "If true go to fullscren if false exit fullscreen mode",
                     "type": "Boolean"
                 },
                 {
@@ -9063,6 +9516,14 @@
                 }
             ],
             "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\source\\test\\TDSLoader.js",
+            "line": 1,
+            "description": "Autodesk 3DS threee.js file loader based on lib3ds",
+            "author": "@timknip",
+            "class": "Nunu",
             "module": "Runtime"
         },
         {
@@ -9160,19 +9621,19 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:397"
+            "line": " ..\\source\\core\\FileSystem.js:414"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:419"
+            "line": " ..\\source\\core\\FileSystem.js:436"
         },
         {
             "message": "unknown tag: license",
             "line": " ..\\source\\Nunu.js:1"
         },
         {
-            "message": "Missing item type\nUpdate a mouse button (automatically called by the runtime)",
-            "line": " ..\\source\\core\\input\\Mouse.js:353"
+            "message": "Missing item type\nUpdate a mouse button.\n\nAutomatically called by the runtime.",
+            "line": " ..\\source\\core\\input\\Mouse.js:361"
         },
         {
             "message": "Missing item type\nCheck if hand is in pose.",
@@ -9236,7 +9697,11 @@
         },
         {
             "message": "Missing item type\nSet fullscreen mode",
-            "line": " ..\\source\\runtime\\NunuApp.js:428"
+            "line": " ..\\source\\runtime\\NunuApp.js:447"
+        },
+        {
+            "message": "Missing item type\nAutodesk 3DS threee.js file loader based on lib3ds",
+            "line": " ..\\source\\test\\TDSLoader.js:1"
         },
         {
             "message": "Missing item type\nModules in this bundle",

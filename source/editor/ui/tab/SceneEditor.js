@@ -11,7 +11,6 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Renderer
 	this.renderer = null;
-	this.initializeRenderer();
 
 	//Raycaster
 	this.raycaster = new THREE.Raycaster(); 
@@ -376,11 +375,22 @@ SceneEditor.prototype.activate = function()
 		Editor.program.scene = this.scene;
 	}
 
+	this.initializeRenderer();
 	this.updateSettings();
 	this.setState(SceneEditor.EDITING);
-	
+
 	Interface.selectTool(Editor.SELECT);
 	Editor.resize();
+};
+
+//Deactivate
+SceneEditor.prototype.deactivate = function()
+{
+	TabElement.prototype.deactivate.call(this);
+
+	//Hide run button
+	Interface.run.visible = false;
+	Interface.run.updateInterface();
 };
 
 //Update settings
@@ -401,16 +411,6 @@ SceneEditor.prototype.updateSettings = function()
 	{
 		this.tool.setSpace(Settings.editor.transformationSpace);
 	}
-};
-
-//Deactivate
-SceneEditor.prototype.deactivate = function()
-{
-	TabElement.prototype.deactivate.call(this);
-
-	//Hide run button
-	Interface.run.visible = false;
-	Interface.run.updateInterface();
 };
 
 //Destroy

@@ -11,6 +11,26 @@ function TextureLoader(manager)
 
 THREE.TextureLoader = TextureLoader;
 
+TextureLoader.prototype.setCrossOrigin = function(url){};
+
+TextureLoader.prototype.setImages = function(images)
+{
+	this.images = images;
+	return this;
+};
+
+TextureLoader.prototype.setVideos = function(videos)
+{
+	this.videos = videos;
+	return this;
+};
+
+TextureLoader.prototype.setFonts = function(fonts)
+{
+	this.fonts = fonts;
+	return this;
+};
+
 TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	var texture = new Texture(url);
@@ -26,6 +46,7 @@ TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 TextureLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 {
 	var self = this;
+	
 	var loader = new THREE.FileLoader(this.manager);
 	loader.load(url, function(text)
 	{
@@ -121,24 +142,4 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	}
 
 	return texture;
-};
-
-TextureLoader.prototype.setCrossOrigin = function(url){};
-
-TextureLoader.prototype.setImages = function(images)
-{
-	this.images = images;
-	return this;
-};
-
-TextureLoader.prototype.setVideos = function(videos)
-{
-	this.videos = videos;
-	return this;
-};
-
-TextureLoader.prototype.setFonts = function(fonts)
-{
-	this.fonts = fonts;
-	return this;
 };

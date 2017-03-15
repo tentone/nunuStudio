@@ -5,6 +5,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ArraybufferUtils",
         "Audio",
         "AudioEmitter",
+        "AudioLoader",
         "Base64Utils",
         "BufferUtils",
         "CanvasTexture",
@@ -14,13 +15,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "FileSystem",
         "Fog",
         "Font",
+        "FontLoader",
         "HemisphereLight",
         "Image",
+        "ImageLoader",
         "Key",
         "Keyboard",
         "KinectDevice",
         "LeapMotion",
         "Material",
+        "MaterialLoader",
         "MathUtils",
         "Mesh",
         "Mesh2shape",
@@ -52,6 +56,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Texture",
         "Vector3",
         "Video",
+        "VideoLoader",
         "VideoTexture",
         "WebcamTexture"
     ],
@@ -65,6 +70,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Files",
         "Input",
         "Lights",
+        "Loaders",
         "Math",
         "Meshes",
         "Misc",
@@ -122,6 +128,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Lights",
             "name": "Lights",
             "description": "Same as THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight"
+        },
+        {
+            "displayName": "Loaders",
+            "name": "Loaders",
+            "description": "Audio loader can be used to load external audio resources."
         },
         {
             "displayName": "Math",

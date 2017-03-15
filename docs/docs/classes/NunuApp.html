@@ -36,6 +36,7 @@
 								<li><a href="../classes/ArraybufferUtils.html">ArraybufferUtils</a></li>
 								<li><a href="../classes/Audio.html">Audio</a></li>
 								<li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
+								<li><a href="../classes/AudioLoader.html">AudioLoader</a></li>
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
@@ -45,13 +46,16 @@
 								<li><a href="../classes/FileSystem.html">FileSystem</a></li>
 								<li><a href="../classes/Fog.html">Fog</a></li>
 								<li><a href="../classes/Font.html">Font</a></li>
+								<li><a href="../classes/FontLoader.html">FontLoader</a></li>
 								<li><a href="../classes/HemisphereLight.html">HemisphereLight</a></li>
 								<li><a href="../classes/Image.html">Image</a></li>
+								<li><a href="../classes/ImageLoader.html">ImageLoader</a></li>
 								<li><a href="../classes/Key.html">Key</a></li>
 								<li><a href="../classes/Keyboard.html">Keyboard</a></li>
 								<li><a href="../classes/KinectDevice.html">KinectDevice</a></li>
 								<li><a href="../classes/LeapMotion.html">LeapMotion</a></li>
 								<li><a href="../classes/Material.html">Material</a></li>
+								<li><a href="../classes/MaterialLoader.html">MaterialLoader</a></li>
 								<li><a href="../classes/MathUtils.html">MathUtils</a></li>
 								<li><a href="../classes/Mesh.html">Mesh</a></li>
 								<li><a href="../classes/Mesh2shape.html">Mesh2shape</a></li>
@@ -83,6 +87,7 @@
 								<li><a href="../classes/Texture.html">Texture</a></li>
 								<li><a href="../classes/Vector3.html">Vector3</a></li>
 								<li><a href="../classes/Video.html">Video</a></li>
+								<li><a href="../classes/VideoLoader.html">VideoLoader</a></li>
 								<li><a href="../classes/VideoTexture.html">VideoTexture</a></li>
 								<li><a href="../classes/WebcamTexture.html">WebcamTexture</a></li>
 							</ul>
@@ -97,6 +102,7 @@
 								<li><a href="../modules/Files.html">Files</a></li>
 								<li><a href="../modules/Input.html">Input</a></li>
 								<li><a href="../modules/Lights.html">Lights</a></li>
+								<li><a href="../modules/Loaders.html">Loaders</a></li>
 								<li><a href="../modules/Math.html">Math</a></li>
 								<li><a href="../modules/Meshes.html">Meshes</a></li>
 								<li><a href="../modules/Misc.html">Misc</a></li>
@@ -326,10 +332,10 @@
 												</div>
 											
 												<div class="description">
-													<p>Exit from app
-											This method kills the app and disposes all internal elements to avoid memory leaks
-											Is should be called before exiting the webpage or before switching nunu programs
-											When loading new nunu programs the same NunuApp instance can be used</p>
+													<p>Exit from app.</p>
+											<p>This method kills the app and disposes all internal elements to avoid memory leaks.</p>
+											<p>Is should be called before exiting the webpage or before switching nunu programs.</p>
+											<p>When loading new nunu programs the same NunuApp instance can be used.</p>
 											
 												</div>
 											
@@ -363,7 +369,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Load program from file</p>
+													<p>Load program from file.</p>
 											
 												</div>
 											
@@ -420,7 +426,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Load program asynchronously and run it after its loaded</p>
+													<p>Load program asynchronously and run it after its loaded.</p>
 											
 												</div>
 											
@@ -487,8 +493,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Resize the window
-											Should be called whenether the host window is resized</p>
+													<p>Resize the window.</p>
+											<p>Should be called whenether the host window is resized.</p>
 											
 												</div>
 											
@@ -516,8 +522,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Start running nunu program
-											A nunu program must be loaded before calling this method</p>
+													<p>Start running nunu program.</p>
+											<p>A nunu program must be loaded before calling this method.</p>
 											
 												</div>
 											
@@ -551,8 +557,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Send data to running nunu application
-											The data sent using this method is received by scripts that implement the onAppData method</p>
+													<p>Send data to running nunu application.</p>
+											<p>The data sent using this method is received by scripts that implement the onAppData method.</p>
 											
 												</div>
 											
@@ -603,8 +609,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Set on data receive callback
-											Callback receives data as an argument</p>
+													<p>Set on data receive callback.</p>
+											<p>Callback receives data as an argument.</p>
 											
 												</div>
 											
@@ -655,8 +661,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Set on exit callback
-											Callback is executed when exiting the nunu app</p>
+													<p>Set on exit callback.</p>
+											<p>Callback is executed when exiting the nunu app.</p>
 											
 												</div>
 											
@@ -701,7 +707,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Toggle VR mode, only works if VR mode is available</p>
+													<p>Toggle VR mode, only works if VR mode is available.</p>
 											
 												</div>
 											
@@ -729,8 +735,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Update nunu program state
-											Automatically called by the runtime handler</p>
+													<p>Update nunu program state.</p>
+											<p>Automatically called by the runtime handler.</p>
 											
 												</div>
 											
@@ -761,7 +767,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Check if VR mode is available</p>
+													<p>Check if VR mode is available.</p>
 											
 												</div>
 											
@@ -821,8 +827,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Flag used to controll if the canvas element is resized automatically by the nunu app instance
-											If true the canvas is resized whenether the resize method is called</p>
+													<p>Flag used to controll if the canvas element is resized automatically by the nunu app instance.</p>
+											<p>If true the canvas is resized whenether the resize method is called.</p>
 											
 												</div>
 											

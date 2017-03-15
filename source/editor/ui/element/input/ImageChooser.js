@@ -36,7 +36,7 @@ function ImageChooser(parent)
 			var file = event.dataTransfer.files[0];
 
 			//Check if its a image
-			if(file.type.startsWith("image"))
+			if(Image.fileIsImage(file))
 			{
 				readImageFile(file);
 			}
@@ -60,7 +60,7 @@ function ImageChooser(parent)
 				{
 					readImageFile(files[0]);
 				}
-			}, "image/*");
+			}, "image/*, .tga");
 		}
 	};
 
