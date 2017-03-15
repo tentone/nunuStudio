@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.22 Alpha";
-Nunu.TIMESTAMP = "201703140126";
+Nunu.TIMESTAMP = "201703150233";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -862,10 +862,13 @@ Nunu.runningOnDesktop = function() {
     this.groupsNeedUpdate = this.uvsNeedUpdate = this.colorsNeedUpdate = this.normalsNeedUpdate = this.verticesNeedUpdate = !1;
   }
   function nb(d) {
-    for (var n = d.length, a = -Infinity;n--;) {
-      d[n] > a && (a = d[n]);
+    if (0 === d.length) {
+      return -Infinity;
     }
-    return a;
+    for (var n = d[0], a = 1;a < d.length;++a) {
+      d[a] > n && (n = d[a]);
+    }
+    return n;
   }
   function ga() {
     Object.defineProperty(this, "id", {value:$d++});

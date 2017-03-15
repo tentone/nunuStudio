@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.22 Alpha";
-Nunu.TIMESTAMP = "201703140126";
+Nunu.TIMESTAMP = "201703150233";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -867,10 +867,13 @@ Nunu.runningOnDesktop = function() {
     this.groupsNeedUpdate = this.uvsNeedUpdate = this.colorsNeedUpdate = this.normalsNeedUpdate = this.verticesNeedUpdate = !1;
   }
   function kb(a) {
-    for (var r = a.length, b = -Infinity;r--;) {
-      a[r] > b && (b = a[r]);
+    if (0 === a.length) {
+      return -Infinity;
     }
-    return b;
+    for (var r = a[0], b = 1;b < a.length;++b) {
+      a[b] > r && (r = a[b]);
+    }
+    return r;
   }
   function ga() {
     Object.defineProperty(this, "id", {value:ff++});
@@ -40282,7 +40285,7 @@ NODE_ID = 45104, NODE_HDR = 45072, PIVOT = 45075, INSTANCE_NAME = 45073, MORPH_S
     }, He, !0);
     b("showCursorWhenSelecting", !1, td, !0);
     b("resetSelectionOnContextMenu", !0);
-    b("lineWiseCopyCut", ! 0);
+    b("lineWiseCopyCut", !0);
     b("readOnly", !1, function(a, b) {
       "nocursor" == b ? (vc(a), a.display.input.blur(), a.display.disabled = !0) : a.display.disabled = !1;
       a.display.input.readOnlyChanged(b);
@@ -46969,13 +46972,10 @@ THREE.VRMLLoader.prototype = {constructor:THREE.VRMLLoader, isRecordingPoints:!1
     return a * Math.PI / 180;
   }
   THREE.FBXLoader = function(a) {
-    THREE.Loader.call(this);
     this.manager = void 0 !== a ? a : THREE.DefaultLoadingManager;
     this.fileLoader = new THREE.FileLoader(this.manager);
     this.textureLoader = new THREE.TextureLoader(this.manager);
   };
-  Object.assign(THREE.FBXLoader.prototype, THREE.Loader.prototype);
-  THREE.FBXLoader.prototype.constructor = THREE.FBXLoader;
   Object.assign(THREE.FBXLoader.prototype, {load:function(a, b, d, e) {
     var f = this, g = a.split(/[\\\/]/);
     g.pop();
