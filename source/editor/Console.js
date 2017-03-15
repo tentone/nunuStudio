@@ -1,8 +1,9 @@
 "use strict";
 
 var _console = console;
+
 var console = {};
-console.history = [];
+console.messages = [];
 
 console.log = function()
 {
