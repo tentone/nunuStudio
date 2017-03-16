@@ -70,6 +70,7 @@ function Resource()
 Resource.prototype.toJSON = function(meta)
 {
 	var data = {};
+	
 	data.name = this.name;
 	data.uuid = this.uuid;
 	data.type = this.type;

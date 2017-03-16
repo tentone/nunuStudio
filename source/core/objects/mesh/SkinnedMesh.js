@@ -14,6 +14,7 @@
  * @constructor
  * @extends {SkinnedMesh}
  */
+
 /**
  * Geometry defined the object structure
  * @property geometry
@@ -48,19 +49,20 @@ function SkinnedMesh(geometry, material, useVertexTexture)
 SkinnedMesh.prototype = Object.create(THREE.SkinnedMesh.prototype);
 
 /**
- * Dispose mesh along with its material and geometry
+ * Dispose mesh along with its material and geometry.
+ * 
  * @method dispose
  */
 SkinnedMesh.prototype.dispose = function()
 {
-	//Dispose material and geometry
+	//Material and geometry
 	if(this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
 	this.geometry.dispose();
 
-	//Dispose children
+	//Children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].dispose();
@@ -69,7 +71,9 @@ SkinnedMesh.prototype.dispose = function()
 
 /**
  * Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
+ * 
  * This is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.
+ * 
  * @method bind
  * @param {Skeleton} skeleton
  * @param {Matrix4} bindMatrix

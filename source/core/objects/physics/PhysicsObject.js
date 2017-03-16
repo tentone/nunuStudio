@@ -65,7 +65,7 @@ PhysicsObject.prototype.initialize = function()
 		}
 	}
 
-	//Update children
+	//Children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();

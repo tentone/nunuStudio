@@ -1,9 +1,9 @@
 "use strict";
 
 /**
- * A Mesh combines a geometry and a material forming a complete rederizable object
+ * A Mesh combines a geometry and a material forming a complete rederizable object.
  * 
- * Based on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh
+ * Based on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh.
  * 
  * @class Mesh
  * @module Meshes
@@ -13,18 +13,22 @@
  * @extends {Mesh}
  */
 /**
- * Geometry defined the object structure
+ * Geometry defined the object structure.
+ * 
  * @property geometry
  * @type {Geometry}
 */
 /**
- * Material is used to define how the geometry surface is shaded
+ * Material is used to define how the geometry surface is shaded.
+ * 
  * @property material
  * @type {Material}
 */
 /**
  * Determines how the mesh triangles are constructed from the vertices.
- * Only works when the geometry is a BufferGeometry
+ * 
+ * Only works when the geometry is a BufferGeometry.
+ * 
  * @property drawMode
  * @default TrianglesDrawMode
 */
@@ -41,19 +45,20 @@ function Mesh(geometry, material)
 Mesh.prototype = Object.create(THREE.Mesh.prototype);
 
 /**
- * Dispose mesh along with its material and geometry
+ * Dispose mesh along with its material and geometry.
+ * 
  * @method dispose
  */
 Mesh.prototype.dispose = function()
 {
-	//Dispose material and geometry
+	//Material and geometry
 	if(this.material !== null && this.material.dispose !== undefined)
 	{
 		this.material.dispose();
 	}
 	this.geometry.dispose();
 
-	//Dispose children
+	//Children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].dispose();
