@@ -1,11 +1,30 @@
 "use strict";
 
+/**
+ * Objectloader can be used to load any external objects.
+ *
+ * Can parse be used to load on runtime resources and objects from external isp project files.
+ *
+ * @constructor
+ * @class ObjectLoader
+ * @module Loaders
+ * @param {Object} manager
+ */
 function ObjectLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 	this.texturePath = "";
 }
 
+/**
+ * Load object file from URL.
+ *
+ * @method load
+ * @param {String} url
+ * @param {Function} onLoad
+ * @param {Function} onProgress
+ * @param {Function} onError
+ */
 ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	if(this.texturePath === "")
@@ -22,6 +41,14 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}, onProgress, onError);
 };
 
+
+/**
+ * Parse object JSON.
+ *
+ * @method parse
+ * @param {Object} json
+ * @return {Object} object
+ */
 ObjectLoader.prototype.parse = function(json, onLoad)
 {
 	var geometries = this.parseGeometries(json.geometries);
@@ -49,16 +76,35 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 	return object;
 };
 
+/**
+ * Define base path for external texture loading.
+ *
+ * @method setTexturePath
+ * @param {String} path
+ */
 ObjectLoader.prototype.setTexturePath = function(value)
 {
 	this.texturePath = value;
 };
 
+/**
+ * Set cross origin.
+ *
+ * @method setCrossOrigin
+ * @param {String} value
+ */
 ObjectLoader.prototype.setCrossOrigin = function(value)
 {
 	this.crossOrigin = value;
 };
 
+/**
+ * Parse geometries on json.
+ *
+ * @method parseGeometries
+ * @param {Object} json
+ * @return {Array} geometries
+ */
 ObjectLoader.prototype.parseGeometries = function(json)
 {
 	var geometries = [];
@@ -164,6 +210,13 @@ ObjectLoader.prototype.parseGeometries = function(json)
 	return geometries;
 };
 
+/**
+ * Parse materials on json.
+ *
+ * @method parseMaterials
+ * @param {Object} json
+ * @return {Array} materials
+ */
 ObjectLoader.prototype.parseMaterials = function(json, textures)
 {
 	var materials = [];
@@ -182,6 +235,13 @@ ObjectLoader.prototype.parseMaterials = function(json, textures)
 	return materials;
 };
 
+/**
+ * Parse animations on json.
+ *
+ * @method parseAnimations
+ * @param {Object} json
+ * @return {Array} animations
+ */
 ObjectLoader.prototype.parseAnimations = function(json)
 {
 	var animations = [];
@@ -195,6 +255,13 @@ ObjectLoader.prototype.parseAnimations = function(json)
 	return animations;
 };
 
+/**
+ * Parse images on json.
+ *
+ * @method parseImages
+ * @param {Object} json
+ * @return {Array} images
+ */
 ObjectLoader.prototype.parseImages = function(json)
 {
 	var loader = new ImageLoader();
@@ -211,6 +278,13 @@ ObjectLoader.prototype.parseImages = function(json)
 	return images;
 };
 
+/**
+ * Parse videos on json.
+ *
+ * @method parseVideos
+ * @param {Object} json
+ * @return {Array} videos
+ */
 ObjectLoader.prototype.parseVideos = function(json)
 {
 	var loader = new VideoLoader();
@@ -227,6 +301,13 @@ ObjectLoader.prototype.parseVideos = function(json)
 	return videos;
 };
 
+/**
+ * Parse audio on json.
+ *
+ * @method parseAudio
+ * @param {Object} json
+ * @return {Array} audio
+ */
 ObjectLoader.prototype.parseAudio = function(json)
 {
 	var loader = new AudioLoader();
@@ -243,6 +324,13 @@ ObjectLoader.prototype.parseAudio = function(json)
 	return audio;
 };
 
+/**
+ * Parse fonts on json.
+ *
+ * @method parseFonts
+ * @param {Object} json
+ * @return {Array} fonts
+ */
 ObjectLoader.prototype.parseFonts = function(json)
 {
 	var loader = new FontLoader();
@@ -259,6 +347,15 @@ ObjectLoader.prototype.parseFonts = function(json)
 	return fonts;
 };
 
+/**
+ * Parse textures on json.
+ *
+ * @method parseTextures
+ * @param {Object} json
+ * @param {Array} images
+ * @param {Array} videos
+ * @return {Array} textures
+ */
 ObjectLoader.prototype.parseTextures = function(json, images, videos)
 {
 	var loader = new TextureLoader();
@@ -279,6 +376,18 @@ ObjectLoader.prototype.parseTextures = function(json, images, videos)
 	return textures;
 };
 
+/**
+ * Parse objects on json.
+ *
+ * @method parseObjects
+ * @param {Object} json
+ * @param {Array} geometries
+ * @param {Array} materials
+ * @param {Array} textures
+ * @param {Array} audio
+ * @param {Array} fonts
+ * @return {Array} objects
+ */
 ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts)
 {
 	var matrix = new THREE.Matrix4();

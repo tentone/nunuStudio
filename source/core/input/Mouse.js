@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler.
+ * Mouse instance for input in sync with the running 3D application.
+ *
+ * The mouse object provided by scripts is automatically updated by the runtime handler.
  * 
  * @class Mouse
  * @module Input
@@ -13,25 +15,21 @@
  * @type {array}
  * @property keys
  */
-
 /**
  * Mouse position inside of the window (coordinates in window space)
  * @type {Vector2}
  * @property position
  */
-
 /**
  * Mouse movement (coordinates in window space)
  * @type {Vector2}
  * @property delta
  */
-
 /**
  * Mouse scroll wheel movement
  * @type {Number}
  * @property wheel
  */
-
 /**
  * Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates
  * @type {DOM}

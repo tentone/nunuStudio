@@ -3,7 +3,7 @@
 /**
  * PositionalAudio is used to play audio with positional audio effect.
  *
- * Using the positional audio object the sound is controlled by the camera that renders first position.
+ * Using the positional audio object the sound is controlled by the camera that renders first.
  * 
  * @param {Audio} audio Audio used by this emitter
  * @class PositionalAudio
