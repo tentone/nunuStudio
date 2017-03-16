@@ -1,12 +1,13 @@
 "use strict";
 
 /**
- * Key is used by Keyboard, Mouse, etc, to represent a key state
+ * Key is used by Keyboard, Mouse, etc, to represent a key state.
  *
  * @class Key
  * @module Input
  * @constructor
 */
+
 /**
  * Indicates if this key is currently pressed
  * @property pressed
@@ -25,7 +26,6 @@
  * @default false
  * @type {boolean}
 */
-
 function Key()
 {
 	this.pressed = false;

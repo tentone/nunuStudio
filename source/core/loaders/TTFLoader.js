@@ -1,5 +1,3 @@
-//Based on typeface.js online converter made by gero3
-
 "use strict";
 
 function TTFLoader(manager)

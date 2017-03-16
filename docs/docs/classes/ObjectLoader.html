@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Program</title>  
+	<title>nunuStudio ObjectLoader</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -143,34 +143,31 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Program Class</h1>
+						<h1>ObjectLoader Class</h1>
 						<div class="box meta">
 						
-								<div class="extends">
-									Extends <a href="../classes/ResourceManager.html" class="crosslink">ResourceManager</a>
-								</div>
 						
 						
-									Module: <a href="../modules/Core.html">Core</a>
+									Module: <a href="../modules/Loaders.html">Loaders</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Program class contains all the data of a nunuStudio program.</p>
-						<p>Program is also used to store and manage all available resources.</p>
+							<p>Objectloader can be used to load any external objects.</p>
+						<p>Can parse be used to load on runtime resources and objects from external isp project files.</p>
 						
 						</div>
 						
 							<div class="constructor">
 								<h2>Constructor</h2>
-								<div id="method_Program" class="method item">
-									<h3 class="name"><code>Program</code></h3>
+								<div id="method_ObjectLoader" class="method item">
+									<h3 class="name"><code>ObjectLoader</code></h3>
 								
 										<div class="args">
 											<span class="paren">(</span><ul class="args-list inline commas">
 												<li class="arg">
-														<code>name</code>
+														<code>manager</code>
 												</li>
 											</ul><span class="paren">)</span>
 										</div>
@@ -199,13 +196,12 @@
 								
 											<ul class="params-list">
 												<li class="param">
-														<code class="param-name">name</code>
-														<span class="type">String</span>
+														<code class="param-name">manager</code>
+														<span class="type">Object</span>
 								
 								
 													<div class="param-description">
-														<p>Program name</p>
-								
+														 
 													</div>
 								
 												</li>
@@ -221,7 +217,6 @@
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
@@ -231,128 +226,62 @@
 										<div class="index-section methods">
 											<h3>Methods</h3>
 						
-											<ul class="index-list methods extends">
+											<ul class="index-list methods">
 													<li class="index-item method">
-														<a href="#method_add">add</a>
+														<a href="#method_load">load</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_addDefaultScene">addDefaultScene</a>
+														<a href="#method_parse">parse</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_clone">clone</a>
+														<a href="#method_parseAnimations">parseAnimations</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_displayVR">displayVR</a>
+														<a href="#method_parseAudio">parseAudio</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_dispose">dispose</a>
+														<a href="#method_parseFonts">parseFonts</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_exitVR">exitVR</a>
+														<a href="#method_parseGeometries">parseGeometries</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_initialize">initialize</a>
+														<a href="#method_parseImages">parseImages</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_receiveDataApp">receiveDataApp</a>
+														<a href="#method_parseMaterials">parseMaterials</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_remove">remove</a>
+														<a href="#method_parseObjects">parseObjects</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_render">render</a>
+														<a href="#method_parseTextures">parseTextures</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_resize">resize</a>
+														<a href="#method_parseVideos">parseVideos</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_sendDataApp">sendDataApp</a>
+														<a href="#method_setCrossOrigin">setCrossOrigin</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_setInitialScene">setInitialScene</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setMouseKeyboard">setMouseKeyboard</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setRenderer">setRenderer</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setScene">setScene</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_toJSON">toJSON</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_update">update</a>
+														<a href="#method_setTexturePath">setTexturePath</a>
 						
 													</li>
 											</ul>
 										</div>
 						
-										<div class="index-section properties">
-											<h3>Properties</h3>
-						
-											<ul class="index-list properties extends">
-													<li class="index-item property">
-														<a href="#property_antialiasing">antialiasing</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_app">app</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_author">author</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_description">description</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_lockPointer">lockPointer</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_shadows">shadows</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_shadowsType">shadowsType</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_version">version</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_vr">vr</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_vrScale">vrScale</a>
-						
-													</li>
-											</ul>
-										</div>
 						
 						
 								</div>
@@ -360,13 +289,22 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_add" class="method item">
-												<h3 class="name"><code>add</code></h3>
+											<div id="method_load" class="method item">
+												<h3 class="name"><code>load</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>scene</code>
+																	<code>url</code>
+															</li>
+															<li class="arg">
+																	<code>onLoad</code>
+															</li>
+															<li class="arg">
+																	<code>onProgress</code>
+															</li>
+															<li class="arg">
+																	<code>onError</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -387,8 +325,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Add new scene to this program.</p>
-											<p>On the program class only scenes can be added as children.</p>
+													<p>Load object file from URL.</p>
 											
 												</div>
 											
@@ -397,587 +334,18 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">scene</code>
-																	<span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a></span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_addDefaultScene" class="method item">
-												<h3 class="name"><code>addDefaultScene</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>material</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Create a scene using a default template.</p>
-											<p>This is the scene used when creating a new program or scene inside the editor.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">material</code>
-																	<span class="type"><a href="../classes/Material.html" class="crosslink">Material</a></span>
-											
-											
-																<div class="param-description">
-																	<p>Default material used by objects, if empty a new material is created</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_clone" class="method item">
-												<h3 class="name"><code>clone</code></h3>
-											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type"><a href="../classes/Program.html" class="crosslink">Program</a></span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Clone program, keeping uuids and every identification attribute.</p>
-											<p>Clone method uses the ObjectLoad to serialize and create a new program instance with the same data.</p>
-											
-												</div>
-											
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type"><a href="../classes/Program.html" class="crosslink">Program</a></span>:
-																<p>Cloned program</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_displayVR" class="method item">
-												<h3 class="name"><code>displayVR</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Enter VR mode.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_dispose" class="method item">
-												<h3 class="name"><code>dispose</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Dispose program data to avoid memory leaks.</p>
-											<p>Called when exiting the program.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_exitVR" class="method item">
-												<h3 class="name"><code>exitVR</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Exit VR mode.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_initialize" class="method item">
-												<h3 class="name"><code>initialize</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Select initial scene and initialize that scene.</p>
-											<p>Automatically called by the runtime.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_receiveDataApp" class="method item">
-												<h3 class="name"><code>receiveDataApp</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>data</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Receive external data and pass it to all script instances.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">data</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_remove" class="method item">
-												<h3 class="name"><code>remove</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>scene</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Remove Scene from program.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">scene</code>
-																	<span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a></span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_render" class="method item">
-												<h3 class="name"><code>render</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>renderer</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Render program to canvas.</p>
-											<p>Renderer passed as argument.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">renderer</code>
-																	<span class="type">Renderer</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_resize" class="method item">
-												<h3 class="name"><code>resize</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>x</code>
-															</li>
-															<li class="arg">
-																	<code>y</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Resize program elements.</p>
-											<p>Called by the runtime every time the window is resized.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">x</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Width</p>
-											
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">y</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Height</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_sendDataApp" class="method item">
-												<h3 class="name"><code>sendDataApp</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>data</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Send data to external app instance.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">data</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setInitialScene" class="method item">
-												<h3 class="name"><code>setInitialScene</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>uuid</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set a scene as initial scene using its uuid.</p>
-											<p>This method is used by the editor.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">uuid</code>
+																	<code class="param-name">url</code>
 																	<span class="type">String</span>
 											
 											
 																<div class="param-description">
-																	<p>Scene uuid</p>
-											
+																	 
 																</div>
 											
 															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setMouseKeyboard" class="method item">
-												<h3 class="name"><code>setMouseKeyboard</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>mouse</code>
-															</li>
-															<li class="arg">
-																	<code>keyboard</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set program mouse and keyboard.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">mouse</code>
-																	<span class="type"><a href="../classes/Mouse.html" class="crosslink">Mouse</a></span>
+																	<code class="param-name">onLoad</code>
+																	<span class="type">Function</span>
 											
 											
 																<div class="param-description">
@@ -986,8 +354,18 @@
 											
 															</li>
 															<li class="param">
-																	<code class="param-name">keyboard</code>
-																	<span class="type"><a href="../classes/Keyboard.html" class="crosslink">Keyboard</a></span>
+																	<code class="param-name">onProgress</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">onError</code>
+																	<span class="type">Function</span>
 											
 											
 																<div class="param-description">
@@ -1000,118 +378,13 @@
 											
 											
 											</div>
-											<div id="method_setRenderer" class="method item">
-												<h3 class="name"><code>setRenderer</code></h3>
+											<div id="method_parse" class="method item">
+												<h3 class="name"><code>parse</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>renderer</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set program renderer.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">renderer</code>
-																	<span class="type">WebGLRenderer</span>
-											
-											
-																<div class="param-description">
-																	<p>Three.js renderer to be used by this program</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setScene" class="method item">
-												<h3 class="name"><code>setScene</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>scene</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Change scene during runtime, this method can receive booth a scene name or a scene object.</p>
-											<p>This method should be used inside of script objects during runtime.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">scene</code>
-																	<span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a> | String</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_toJSON" class="method item">
-												<h3 class="name"><code>toJSON</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>meta</code>
-															</li>
-															<li class="arg">
-																	<code>exportResources</code>
+																	<code>json</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -1135,7 +408,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Serialize object as JSON.</p>
+													<p>Parse object JSON.</p>
 											
 												</div>
 											
@@ -1144,23 +417,12 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">meta</code>
+																	<code class="param-name">json</code>
 																	<span class="type">Object</span>
 											
 											
 																<div class="param-description">
 																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">exportResources</code>
-																	<span class="type">Boolean</span>
-											
-											
-																<div class="param-description">
-																	<p>If true all resouces in the program are exported, else only resources attached to objects are exported</p>
-											
 																</div>
 											
 															</li>
@@ -1172,16 +434,671 @@
 											
 														<div class="returns-description">
 																	<span class="type">Object</span>:
-																<p>json</p>
+																<p>object</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_update" class="method item">
-												<h3 class="name"><code>update</code></h3>
+											<div id="method_parseAnimations" class="method item">
+												<h3 class="name"><code>parseAnimations</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Array</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse animations on json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Array</span>:
+																<p>animations</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_parseAudio" class="method item">
+												<h3 class="name"><code>parseAudio</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Array</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse audio on json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Array</span>:
+																<p>audio</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_parseFonts" class="method item">
+												<h3 class="name"><code>parseFonts</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Array</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse fonts on json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Array</span>:
+																<p>fonts</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_parseGeometries" class="method item">
+												<h3 class="name"><code>parseGeometries</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Array</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse geometries on json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Array</span>:
+																<p>geometries</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_parseImages" class="method item">
+												<h3 class="name"><code>parseImages</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Array</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse images on json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Array</span>:
+																<p>images</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_parseMaterials" class="method item">
+												<h3 class="name"><code>parseMaterials</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Array</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse materials on json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Array</span>:
+																<p>materials</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_parseObjects" class="method item">
+												<h3 class="name"><code>parseObjects</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+															<li class="arg">
+																	<code>geometries</code>
+															</li>
+															<li class="arg">
+																	<code>materials</code>
+															</li>
+															<li class="arg">
+																	<code>textures</code>
+															</li>
+															<li class="arg">
+																	<code>audio</code>
+															</li>
+															<li class="arg">
+																	<code>fonts</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Array</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse objects on json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">geometries</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">materials</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">textures</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">audio</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">fonts</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Array</span>:
+																<p>objects</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_parseTextures" class="method item">
+												<h3 class="name"><code>parseTextures</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+															<li class="arg">
+																	<code>images</code>
+															</li>
+															<li class="arg">
+																	<code>videos</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Array</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse textures on json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">images</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">videos</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Array</span>:
+																<p>textures</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_parseVideos" class="method item">
+												<h3 class="name"><code>parseVideos</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Array</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse videos on json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Array</span>:
+																<p>videos</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_setCrossOrigin" class="method item">
+												<h3 class="name"><code>setCrossOrigin</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>value</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 											
 											
@@ -1199,258 +1116,81 @@
 												</div>
 											
 												<div class="description">
-													<p>Update program state.</p>
-											<p>Automatically called by the runtime.</p>
+													<p>Set cross origin.</p>
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">value</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_setTexturePath" class="method item">
+												<h3 class="name"><code>setTexturePath</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>path</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Define base path for external texture loading.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">path</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 											
 											</div>
 									</div>
 						
-									<div id="properties" class="api-class-tabpanel">
-										<h2 class="off-left">Properties</h2>
-						
-											<div id="property_antialiasing" class="property item">
-												<h3 class="name"><code>antialiasing</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Antialiasing flag</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> false</p>
-											
-											
-											</div>
-											<div id="property_app" class="property item">
-												<h3 class="name"><code>app</code></h3>
-												<span class="type">Unknown</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>NunuRuntime instance used to communication between nunu app and the host webpage</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> null</p>
-											
-											
-											</div>
-											<div id="property_author" class="property item">
-												<h3 class="name"><code>author</code></h3>
-												<span class="type">String</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Program author</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_description" class="property item">
-												<h3 class="name"><code>description</code></h3>
-												<span class="type">String</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Program description</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_lockPointer" class="property item">
-												<h3 class="name"><code>lockPointer</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Flag to control pointer locking</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> false</p>
-											
-											
-											</div>
-											<div id="property_shadows" class="property item">
-												<h3 class="name"><code>shadows</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>If true the program is rendered with shadows</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> true</p>
-											
-											
-											</div>
-											<div id="property_shadowsType" class="property item">
-												<h3 class="name"><code>shadowsType</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Shadow type</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> PCFSoftShadowMap</p>
-											
-											
-											</div>
-											<div id="property_version" class="property item">
-												<h3 class="name"><code>version</code></h3>
-												<span class="type">String</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Program version</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> &quot;0&quot;</p>
-											
-											
-											</div>
-											<div id="property_vr" class="property item">
-												<h3 class="name"><code>vr</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Enable virtual reality flag</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> false</p>
-											
-											
-											</div>
-											<div id="property_vrScale" class="property item">
-												<h3 class="name"><code>vrScale</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Virtual reality movement scale</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> 1.0</p>
-											
-											
-											</div>
-									</div>
 						
 						
 							</div>

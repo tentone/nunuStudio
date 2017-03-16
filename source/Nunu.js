@@ -34,7 +34,7 @@ Nunu.NAME = "nunuStudio";
  * @attribute VERSION
  * @type {String}
  */
-Nunu.VERSION = "V0.8.9.22 Alpha";
+Nunu.VERSION = "V0.8.9.23 Alpha";
 
 /**
  * Stores the nunu runtime dev timestamp.
@@ -42,7 +42,7 @@ Nunu.VERSION = "V0.8.9.22 Alpha";
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201703150233";
+Nunu.TIMESTAMP = "201703152314";
 
 /**
  * Check if host supports WebVR and if there is a VR display available.

@@ -47,7 +47,6 @@ THREE.TDSLoader.prototype.parse = function(data)
 	return this.group;
 };
 
-
 THREE.TDSLoader.prototype.readFile = function(fileContents)
 {
 	var data = new jDataView(fileContents, 0, undefined, true);

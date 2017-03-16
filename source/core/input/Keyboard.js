@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Keyboard instance for input in sync with the running 3D application, is updated automatically by the runtime handler.
+ * Keyboard instance for input in sync with the running 3D application.
+ * 
+ * The keyboard object provided by scripts is automatically updated by the runtime handler.
  * 
  * @class Keyboard
  * @module Input

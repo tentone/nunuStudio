@@ -33,6 +33,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Nunu",
         "NunuApp",
         "Object3D",
+        "ObjectLoader",
         "ObjectUtils",
         "OrthographicCamera",
         "ParticleEmitter",
@@ -122,7 +123,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Input",
             "name": "Input",
-            "description": "Key is used by Keyboard, Mouse, etc, to represent a key state"
+            "description": "Key is used by Keyboard, Mouse, etc, to represent a key state."
         },
         {
             "displayName": "Lights",

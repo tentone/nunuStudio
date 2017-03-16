@@ -68,6 +68,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\loaders\\ObjectLoader.js": {
+            "name": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "modules": {},
+            "classes": {
+                "ObjectLoader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\loaders\\VideoLoader.js": {
             "name": "..\\source\\core\\loaders\\VideoLoader.js",
             "modules": {},
@@ -588,7 +597,7 @@
             "tag": "module",
             "file": "..\\source\\core\\input\\Mouse.js",
             "line": 3,
-            "description": "Key is used by Keyboard, Mouse, etc, to represent a key state"
+            "description": "Key is used by Keyboard, Mouse, etc, to represent a key state."
         },
         "Loaders": {
             "name": "Loaders",
@@ -599,6 +608,7 @@
                 "FontLoader": 1,
                 "ImageLoader": 1,
                 "MaterialLoader": 1,
+                "ObjectLoader": 1,
                 "VideoLoader": 1
             },
             "fors": {},
@@ -921,7 +931,7 @@
             "module": "Input",
             "file": "..\\source\\core\\input\\Key.js",
             "line": 3,
-            "description": "Key is used by Keyboard, Mouse, etc, to represent a key state",
+            "description": "Key is used by Keyboard, Mouse, etc, to represent a key state.",
             "is_constructor": 1
         },
         "Keyboard": {
@@ -936,7 +946,7 @@
             "namespace": "",
             "file": "..\\source\\core\\input\\Keyboard.js",
             "line": 3,
-            "description": "Keyboard instance for input in sync with the running 3D application, is updated automatically by the runtime handler.",
+            "description": "Keyboard instance for input in sync with the running 3D application.\n\nThe keyboard object provided by scripts is automatically updated by the runtime handler.",
             "is_constructor": 1
         },
         "Mouse": {
@@ -951,7 +961,7 @@
             "namespace": "",
             "file": "..\\source\\core\\input\\Mouse.js",
             "line": 3,
-            "description": "Mouse instance for input in sync with the running 3D application, is updated automatically by the runtime handler.",
+            "description": "Mouse instance for input in sync with the running 3D application.\n\nThe mouse object provided by scripts is automatically updated by the runtime handler.",
             "is_constructor": 1
         },
         "AudioLoader": {
@@ -1042,6 +1052,28 @@
                 }
             ]
         },
+        "ObjectLoader": {
+            "name": "ObjectLoader",
+            "shortname": "ObjectLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Loaders",
+            "namespace": "",
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 3,
+            "description": "Objectloader can be used to load any external objects.\n\nCan parse be used to load on runtime resources and objects from external isp project files.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "manager",
+                    "description": "",
+                    "type": "Object"
+                }
+            ]
+        },
         "VideoLoader": {
             "name": "VideoLoader",
             "shortname": "VideoLoader",
@@ -1099,7 +1131,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
             "line": 3,
-            "description": "PositionalAudio is used to play audio with positional audio effect.\n\nUsing the positional audio object the sound is controlled by the camera that renders first position.",
+            "description": "PositionalAudio is used to play audio with positional audio effect.\n\nUsing the positional audio object the sound is controlled by the camera that renders first.",
             "params": [
                 {
                     "name": "audio",
@@ -2415,7 +2447,7 @@
     "classitems": [
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 10,
+            "line": 11,
             "description": "Indicates if this key is currently pressed",
             "itemtype": "property",
             "name": "pressed",
@@ -2426,7 +2458,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 16,
+            "line": 17,
             "description": "Indicates if this key was just pressed",
             "itemtype": "property",
             "name": "justPressed",
@@ -2437,7 +2469,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 22,
+            "line": 23,
             "description": "Indicates if this key was just released",
             "itemtype": "property",
             "name": "justReleased",
@@ -2505,7 +2537,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 11,
+            "line": 13,
             "description": "Array with keyboard keys status.",
             "type": "{array}",
             "itemtype": "property",
@@ -2515,7 +2547,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 58,
+            "line": 60,
             "description": "Update key flags synchronously.\n\nCalled automatically by the app runtime.",
             "itemtype": "method",
             "name": "update",
@@ -2524,7 +2556,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 85,
+            "line": 87,
             "description": "Reset keyboard status to default.",
             "itemtype": "method",
             "name": "reset",
@@ -2533,7 +2565,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 102,
+            "line": 104,
             "description": "Check if a key is pressed.",
             "itemtype": "method",
             "name": "keyPressed",
@@ -2546,7 +2578,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 113,
+            "line": 115,
             "description": "Check is a key as just pressed.",
             "itemtype": "method",
             "name": "keyJustPressed",
@@ -2559,7 +2591,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 124,
+            "line": 126,
             "description": "Check if a key was just released.",
             "itemtype": "method",
             "name": "keyJustReleased",
@@ -2572,7 +2604,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 135,
+            "line": 137,
             "description": "Dispose keyboard events.\n\nCalled automatically by the app runtime.",
             "itemtype": "method",
             "name": "dispose",
@@ -2581,7 +2613,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 151,
+            "line": 153,
             "description": "TAB key",
             "itemtype": "attribute",
             "name": "TAB",
@@ -2591,7 +2623,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 157,
+            "line": 159,
             "description": "ENTER key",
             "itemtype": "attribute",
             "name": "ENTER",
@@ -2601,7 +2633,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 163,
+            "line": 165,
             "description": "SHIFT key",
             "itemtype": "attribute",
             "name": "SHIFT",
@@ -2611,7 +2643,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 169,
+            "line": 171,
             "description": "CTRL key",
             "itemtype": "attribute",
             "name": "CTRL",
@@ -2621,7 +2653,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 175,
+            "line": 177,
             "description": "ALT key",
             "itemtype": "attribute",
             "name": "ALT",
@@ -2631,7 +2663,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 181,
+            "line": 183,
             "description": "CAPS_LOCK key",
             "itemtype": "attribute",
             "name": "CAPS_LOCK",
@@ -2641,7 +2673,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 187,
+            "line": 189,
             "description": "ESC key",
             "itemtype": "attribute",
             "name": "ESC",
@@ -2651,7 +2683,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 193,
+            "line": 195,
             "description": "SPACEBAR key",
             "itemtype": "attribute",
             "name": "SPACEBAR",
@@ -2661,7 +2693,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 199,
+            "line": 201,
             "description": "PAGE_UP key",
             "itemtype": "attribute",
             "name": "PAGE_UP",
@@ -2671,7 +2703,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 205,
+            "line": 207,
             "description": "PAGE_DOWN key",
             "itemtype": "attribute",
             "name": "PAGE_DOWN",
@@ -2681,7 +2713,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 211,
+            "line": 213,
             "description": "END key",
             "itemtype": "attribute",
             "name": "END",
@@ -2691,7 +2723,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 217,
+            "line": 219,
             "description": "HOME key",
             "itemtype": "attribute",
             "name": "HOME",
@@ -2701,7 +2733,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 223,
+            "line": 225,
             "description": "INSERT key",
             "itemtype": "attribute",
             "name": "INSERT",
@@ -2711,7 +2743,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 229,
+            "line": 231,
             "description": "DEL key",
             "itemtype": "attribute",
             "name": "DEL",
@@ -2721,7 +2753,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 236,
+            "line": 238,
             "description": "LEFT key",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -2731,7 +2763,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 242,
+            "line": 244,
             "description": "RIGHT key",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -2741,7 +2773,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 248,
+            "line": 250,
             "description": "UP key",
             "itemtype": "attribute",
             "name": "UP",
@@ -2751,7 +2783,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 254,
+            "line": 256,
             "description": "DOWN key",
             "itemtype": "attribute",
             "name": "DOWN",
@@ -2761,7 +2793,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 261,
+            "line": 263,
             "description": "NUM0 key",
             "itemtype": "attribute",
             "name": "NUM0",
@@ -2771,7 +2803,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 267,
+            "line": 269,
             "description": "NUM1 key",
             "itemtype": "attribute",
             "name": "NUM1",
@@ -2781,7 +2813,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 273,
+            "line": 275,
             "description": "NUM2 key",
             "itemtype": "attribute",
             "name": "NUM2",
@@ -2791,7 +2823,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 279,
+            "line": 281,
             "description": "NUM3 key",
             "itemtype": "attribute",
             "name": "NUM3",
@@ -2801,7 +2833,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 285,
+            "line": 287,
             "description": "NUM4 key",
             "itemtype": "attribute",
             "name": "NUM4",
@@ -2811,7 +2843,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 291,
+            "line": 293,
             "description": "NUM5 key",
             "itemtype": "attribute",
             "name": "NUM5",
@@ -2821,7 +2853,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 297,
+            "line": 299,
             "description": "NUM6 key",
             "itemtype": "attribute",
             "name": "NUM6",
@@ -2831,7 +2863,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 303,
+            "line": 305,
             "description": "NUM7 key",
             "itemtype": "attribute",
             "name": "NUM7",
@@ -2841,7 +2873,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 309,
+            "line": 311,
             "description": "NUM8 key",
             "itemtype": "attribute",
             "name": "NUM8",
@@ -2851,7 +2883,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 315,
+            "line": 317,
             "description": "NUM9 key",
             "itemtype": "attribute",
             "name": "NUM9",
@@ -2861,7 +2893,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 322,
+            "line": 324,
             "description": "A key",
             "itemtype": "attribute",
             "name": "A",
@@ -2871,7 +2903,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 328,
+            "line": 330,
             "description": "B key",
             "itemtype": "attribute",
             "name": "B",
@@ -2881,7 +2913,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 334,
+            "line": 336,
             "description": "C key",
             "itemtype": "attribute",
             "name": "C",
@@ -2891,7 +2923,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 340,
+            "line": 342,
             "description": "D key",
             "itemtype": "attribute",
             "name": "D",
@@ -2901,7 +2933,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 346,
+            "line": 348,
             "description": "E key",
             "itemtype": "attribute",
             "name": "E",
@@ -2911,7 +2943,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 352,
+            "line": 354,
             "description": "F key",
             "itemtype": "attribute",
             "name": "F",
@@ -2921,7 +2953,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 358,
+            "line": 360,
             "description": "G key",
             "itemtype": "attribute",
             "name": "G",
@@ -2931,7 +2963,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 364,
+            "line": 366,
             "description": "H key",
             "itemtype": "attribute",
             "name": "H",
@@ -2941,7 +2973,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 370,
+            "line": 372,
             "description": "I key",
             "itemtype": "attribute",
             "name": "I",
@@ -2951,7 +2983,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 376,
+            "line": 378,
             "description": "J key",
             "itemtype": "attribute",
             "name": "J",
@@ -2961,7 +2993,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 382,
+            "line": 384,
             "description": "K key",
             "itemtype": "attribute",
             "name": "K",
@@ -2971,7 +3003,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 388,
+            "line": 390,
             "description": "L key",
             "itemtype": "attribute",
             "name": "L",
@@ -2981,7 +3013,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 394,
+            "line": 396,
             "description": "M key",
             "itemtype": "attribute",
             "name": "M",
@@ -2991,7 +3023,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 400,
+            "line": 402,
             "description": "N key",
             "itemtype": "attribute",
             "name": "N",
@@ -3001,7 +3033,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 406,
+            "line": 408,
             "description": "O key",
             "itemtype": "attribute",
             "name": "O",
@@ -3011,7 +3043,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 412,
+            "line": 414,
             "description": "P key",
             "itemtype": "attribute",
             "name": "P",
@@ -3021,7 +3053,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 418,
+            "line": 420,
             "description": "Q key",
             "itemtype": "attribute",
             "name": "Q",
@@ -3031,7 +3063,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 424,
+            "line": 426,
             "description": "R key",
             "itemtype": "attribute",
             "name": "R",
@@ -3041,7 +3073,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 430,
+            "line": 432,
             "description": "S key",
             "itemtype": "attribute",
             "name": "S",
@@ -3051,7 +3083,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 436,
+            "line": 438,
             "description": "T key",
             "itemtype": "attribute",
             "name": "T",
@@ -3061,7 +3093,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 442,
+            "line": 444,
             "description": "U key",
             "itemtype": "attribute",
             "name": "U",
@@ -3071,7 +3103,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 448,
+            "line": 450,
             "description": "V key",
             "itemtype": "attribute",
             "name": "V",
@@ -3081,7 +3113,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 454,
+            "line": 456,
             "description": "W key",
             "itemtype": "attribute",
             "name": "W",
@@ -3091,7 +3123,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 460,
+            "line": 462,
             "description": "X key",
             "itemtype": "attribute",
             "name": "X",
@@ -3101,7 +3133,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 466,
+            "line": 468,
             "description": "Y key",
             "itemtype": "attribute",
             "name": "Y",
@@ -3111,7 +3143,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 472,
+            "line": 474,
             "description": "Z key",
             "itemtype": "attribute",
             "name": "Z",
@@ -3121,7 +3153,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 479,
+            "line": 481,
             "description": "F1 key",
             "itemtype": "attribute",
             "name": "F1",
@@ -3131,7 +3163,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 485,
+            "line": 487,
             "description": "F2 key",
             "itemtype": "attribute",
             "name": "F2",
@@ -3141,7 +3173,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 491,
+            "line": 493,
             "description": "F3 key",
             "itemtype": "attribute",
             "name": "F3",
@@ -3151,7 +3183,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 497,
+            "line": 499,
             "description": "F4 key",
             "itemtype": "attribute",
             "name": "F4",
@@ -3161,7 +3193,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 503,
+            "line": 505,
             "description": "F5 key",
             "itemtype": "attribute",
             "name": "F5",
@@ -3171,7 +3203,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 509,
+            "line": 511,
             "description": "F6 key",
             "itemtype": "attribute",
             "name": "F6",
@@ -3181,7 +3213,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 515,
+            "line": 517,
             "description": "F7 key",
             "itemtype": "attribute",
             "name": "F7",
@@ -3191,7 +3223,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 521,
+            "line": 523,
             "description": "F8 key",
             "itemtype": "attribute",
             "name": "F8",
@@ -3201,7 +3233,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 527,
+            "line": 529,
             "description": "F9 key",
             "itemtype": "attribute",
             "name": "F9",
@@ -3211,7 +3243,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 533,
+            "line": 535,
             "description": "F10 key",
             "itemtype": "attribute",
             "name": "F10",
@@ -3221,7 +3253,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 539,
+            "line": 541,
             "description": "F11 key",
             "itemtype": "attribute",
             "name": "F11",
@@ -3231,7 +3263,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Keyboard.js",
-            "line": 545,
+            "line": 547,
             "description": "F12 key",
             "itemtype": "attribute",
             "name": "F12",
@@ -3241,7 +3273,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 11,
+            "line": 13,
             "description": "Array with mouse buttons status",
             "type": "{array}",
             "itemtype": "property",
@@ -3251,7 +3283,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 17,
+            "line": 18,
             "description": "Mouse position inside of the window (coordinates in window space)",
             "type": "{Vector2}",
             "itemtype": "property",
@@ -3271,7 +3303,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 29,
+            "line": 28,
             "description": "Mouse scroll wheel movement",
             "type": "{Number}",
             "itemtype": "property",
@@ -3281,7 +3313,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 35,
+            "line": 33,
             "description": "Canvas attached to this mouse instance used to calculate position and delta in canvas space coordinates",
             "type": "{DOM}",
             "itemtype": "property",
@@ -3291,7 +3323,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 194,
+            "line": 192,
             "description": "LEFT mouse button",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -3301,7 +3333,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 200,
+            "line": 198,
             "description": "MIDDLE mouse button",
             "itemtype": "attribute",
             "name": "MIDDLE",
@@ -3311,7 +3343,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 206,
+            "line": 204,
             "description": "RIGHT mouse button",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -3321,7 +3353,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 213,
+            "line": 211,
             "description": "Canvas to be used for coordinates calculation relative to that canvas.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -3337,7 +3369,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 236,
+            "line": 234,
             "description": "Check if mouse is inside attached canvas (updated async).",
             "itemtype": "method",
             "name": "insideCanvas",
@@ -3350,7 +3382,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 252,
+            "line": 250,
             "description": "Set mouse lock state.",
             "itemtype": "method",
             "name": "setLock",
@@ -3366,7 +3398,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 295,
+            "line": 293,
             "description": "Check if mouse button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -3386,7 +3418,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 307,
+            "line": 305,
             "description": "Check if Mouse button was double clicked.",
             "itemtype": "method",
             "name": "buttonDoubleClicked",
@@ -3399,7 +3431,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 318,
+            "line": 316,
             "description": "Check if a mouse button was just pressed.",
             "itemtype": "method",
             "name": "buttonJustPressed",
@@ -3419,7 +3451,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 330,
+            "line": 328,
             "description": "Check if a mouse button was just released.",
             "itemtype": "method",
             "name": "buttonJustReleased",
@@ -3439,7 +3471,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 342,
+            "line": 340,
             "description": "Update mouse Position.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updatePosition",
@@ -3470,7 +3502,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 361,
+            "line": 359,
             "description": "Update a mouse button.\n\nAutomatically called by the runtime.",
             "params": [
                 {
@@ -3489,7 +3521,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 377,
+            "line": 375,
             "description": "Update mouse buttons state, position, wheel and delta synchronously.\n\nCalled automatically by the app runtime.",
             "itemtype": "method",
             "name": "update",
@@ -3498,7 +3530,7 @@
         },
         {
             "file": "..\\source\\core\\input\\Mouse.js",
-            "line": 441,
+            "line": 439,
             "description": "Dispose mouse events (called automatically by the app runtime).",
             "itemtype": "method",
             "name": "dispose",
@@ -3723,6 +3755,304 @@
                 "type": "Material"
             },
             "class": "MaterialLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 19,
+            "description": "Load object file from URL.",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 45,
+            "description": "Parse object JSON.",
+            "itemtype": "method",
+            "name": "parse",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "object",
+                "type": "Object"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 79,
+            "description": "Define base path for external texture loading.",
+            "itemtype": "method",
+            "name": "setTexturePath",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 90,
+            "description": "Set cross origin.",
+            "itemtype": "method",
+            "name": "setCrossOrigin",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 101,
+            "description": "Parse geometries on json.",
+            "itemtype": "method",
+            "name": "parseGeometries",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "geometries",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 213,
+            "description": "Parse materials on json.",
+            "itemtype": "method",
+            "name": "parseMaterials",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "materials",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 238,
+            "description": "Parse animations on json.",
+            "itemtype": "method",
+            "name": "parseAnimations",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "animations",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 258,
+            "description": "Parse images on json.",
+            "itemtype": "method",
+            "name": "parseImages",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "images",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 281,
+            "description": "Parse videos on json.",
+            "itemtype": "method",
+            "name": "parseVideos",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "videos",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 304,
+            "description": "Parse audio on json.",
+            "itemtype": "method",
+            "name": "parseAudio",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "audio",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 327,
+            "description": "Parse fonts on json.",
+            "itemtype": "method",
+            "name": "parseFonts",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "fonts",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 350,
+            "description": "Parse textures on json.",
+            "itemtype": "method",
+            "name": "parseTextures",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "images",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "videos",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "textures",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 379,
+            "description": "Parse objects on json.",
+            "itemtype": "method",
+            "name": "parseObjects",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "geometries",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "materials",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "textures",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "audio",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "fonts",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "objects",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
             "module": "Loaders"
         },
         {
@@ -9633,7 +9963,7 @@
         },
         {
             "message": "Missing item type\nUpdate a mouse button.\n\nAutomatically called by the runtime.",
-            "line": " ..\\source\\core\\input\\Mouse.js:361"
+            "line": " ..\\source\\core\\input\\Mouse.js:359"
         },
         {
             "message": "Missing item type\nCheck if hand is in pose.",
