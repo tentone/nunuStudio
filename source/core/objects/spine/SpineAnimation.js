@@ -1,9 +1,11 @@
 "use strict";
 
 /**
- * Spine animation object, to used with animation produced inside Esoteric spine
- * Based on the official threejs runtime
- * More information abou spine available here www.esotericsoftware.com
+ * Spine animation object, to used with animation produced inside Esoteric spine.
+ * 
+ * Based on the official threejs runtime.
+ * 
+ * More information abou spine available here www.esotericsoftware.com.
  * 
  * @class SpineAnimation
  * @constructor
@@ -20,13 +22,11 @@
  * @property textures
  * @type {Array}
  */
-
 /**
  * Animation data
  * @property json
  * @type {Object}
  */
-
 /**
  * Texture atlas information
  * @property atlas
@@ -176,12 +176,6 @@ SpineAnimation.prototype.getSkins = function()
  */
 SpineAnimation.prototype.updateGeometry = function()
 {
-	//var geometry = this.geometry;
-	//var numVertices = 0;
-	//var verticesLength = 0;
-	//var indicesLength = 0;
-	//var blendMode = null;
-
 	var vertices = null, triangles = null;
 	var drawOrder = this.skeleton.drawOrder;
 	var z = 0;

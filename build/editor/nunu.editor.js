@@ -32624,8 +32624,6 @@ function LeapMotion() {
   this.armMeshes = [];
   this.material = new THREE.MeshPhongMaterial;
   this.geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-  this.physicsWorld = null;
-  this.physicsBodys = [];
   this.gesture = [];
   for (var a = 0;10 > a;a++) {
     this.gesture[a] = !1;
@@ -32721,33 +32719,6 @@ LeapMotion.prototype.updateDebugModel = function() {
     }
     this.showArm && (f = f.arm, k = this.armMeshes[e++] || this.addMesh(this.armMeshes), this.updateMesh(f, k), k.scale.set(f.width / 1200, f.width / 300, f.length / 150));
   }
-  null !== this.physicsWorld && this.updatePhysics();
-};
-LeapMotion.prototype.updatePhysics = function() {
-  for (var a = 0;a < this.physicsBodys.length;a++) {
-    this.physicsWorld.removeBody(this.physicsBodys[a].pop());
-  }
-  this.children.forEach(function(a, e) {
-    a = new THREE.BoundingBoxHelper(a);
-    a.update();
-    e = new THREE.Vector3(a.box.max.x - a.box.min.x, a.box.max.y - a.box.min.y, a.box.max.z - a.box.min.z);
-    e.x *= this.scale.x;
-    e.y *= this.scale.y;
-    e.z *= this.scale.z;
-    e.divideScalar(2);
-    a = a.box.center();
-    a.x *= this.scale.x;
-    a.y *= this.scale.y;
-    a.z *= this.scale.z;
-    a.add(this.position);
-    e = new CANNON.Box(new CANNON.Vec3(e.x, e.y, e.z));
-    var b = new CANNON.Body({mass:0});
-    b.addShape(e);
-    b.position.set(a.x - this.position.x, a.y - this.position.y, a.z - this.position.z);
-    b.updateMassProperties();
-    this.physicsBodys.push(b);
-    this.physicsWorld.addBody(b);
-  });
 };
 LeapMotion.prototype.addMesh = function(a) {
   var b = new Mesh(this.geometry, this.material);
@@ -38127,7 +38098,7 @@ NODE_ID = 45104, NODE_HDR = 45072, PIVOT = 45075, INSTANCE_NAME = 45073, MORPH_S
     var n, t, u = p.sel, v = u.ranges;
     f && !b.shiftKey ? (t = p.sel.contains(d), n = -1 < t ? v[t] : new Xa(d, d)) : (n = p.sel.primary(), t = p.sel.primIndex);
     if (r ? b.shiftKey && b.metaKey : b.altKey) {
-      e = "rect", f || (n = new Xa(d, d)), d = vc(a, b, !0, !0), t = -1;
+      e = "rect", f || (n = new Xa(d, d)), d = vc(a, b, ! 0, !0), t = -1;
     } else {
       if ("double" == e) {
         var x = a.findWordAt(d);
@@ -69428,6 +69399,9 @@ Interface.initialize = function() {
   Interface.addEffects.addOption(Interface.fileDir + "icons/misc/audio_positional.png", function() {
     Editor.addToScene(new PositionalAudio(Editor.defaultAudio));
   }, "Positional Audio");
+  Interface.addEffects.addOption(Interface.fileDir + "icons/effects/bone.png", function() {
+    Editor.addToScene(new Sprite(Editor.defaultSpriteMaterial));
+  }, "Animation");
   Interface.addPhysics = new ButtonDrawer;
   Interface.addPhysics.setImage(Interface.fileDir + "icons/misc/physics.png");
   Interface.addPhysics.optionsPerLine = 3;

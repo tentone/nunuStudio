@@ -85,7 +85,8 @@ function Text3D(text, material, font, height, bevel, bevelThickness, bevelSize, 
 Text3D.prototype = Object.create(THREE.Mesh.prototype);
 
 /**
- * Set font used by this text 3D instance
+ * Set font used by this text 3D instance.
+ * 
  * @param {Font} font Font
  * @method setFont
  */
@@ -97,7 +98,8 @@ Text3D.prototype.setFont = function(font)
 };
 
 /**
- * Set Text
+ * Change text.
+ * 
  * @param {String} text
  * @method setText
  */
@@ -117,8 +119,10 @@ Text3D.prototype.setText = function(text)
 };
 
 /**
- * Update text geometry
- * Should be called after chaging any attribute
+ * Update text geometry.
+ * 
+ * Should be called after chaging any attribute.
+ * 
  * @method updateText
  */
 Text3D.prototype.updateText = function()
@@ -139,7 +143,8 @@ Text3D.prototype.updateText = function()
 };
 
 /**
- * Clone this Text3D instance
+ * Clone this Text3D instance.
+ * 
  * @method clone
  * @return {Text3D} Clone of this object
  */
@@ -149,7 +154,8 @@ Text3D.prototype.clone = function()
 };
 
 /**
- * Dispose mesh along with its material and geometry
+ * Dispose mesh along with its material and geometry.
+ * 
  * @method dispose
  */
 Text3D.prototype.dispose = function()
@@ -171,8 +177,10 @@ Text3D.prototype.dispose = function()
 };
 
 /**
- * Create JSON for object
- * Need to backup geometry and set to undefined to avoid it being stored
+ * Create JSON for object.
+ * 
+ * Need to backup geometry and set to undefined to avoid it being stored.
+ * 
  * @param {Object} meta
  * @return {Object} json
  */

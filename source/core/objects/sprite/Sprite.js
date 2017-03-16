@@ -1,8 +1,9 @@
 "use strict";
 
 /**
- * Sprites allways face the screen are used for 2D elements
- * Based on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite
+ * Sprites allways face the screen are used for 2D elements.
+ * 
+ * Based on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite.
  * 
  * @class Sprite
  * @module Sprite
@@ -27,7 +28,8 @@ function Sprite(material)
 Sprite.prototype = Object.create(THREE.Sprite.prototype);
 
 /**
- * Dispose the sprite material
+ * Dispose the sprite material.
+ * 
  * @method dispose
  */
 Sprite.prototype.dispose = function()

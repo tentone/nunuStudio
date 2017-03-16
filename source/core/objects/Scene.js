@@ -15,27 +15,22 @@
  * Cannon.js world used for physics simulation.
  *
  * Documentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.
- * 
  * @property {World} world
  */
 /**
  * Raycaster used for mouse interaction with 3D objects.
- * 
  * @property {Raycaster} raycaster
  */
 /**
  * Normalized mouse coordinates used by the scene internal raycaster.
- * 
  * @property {Vector2} mouse
  */
 /**
  * Program that contains this scene.
- * 
  * @property {Program} program
  */
 /**
  * Canvas used to draw this scene.
- * 
  * @property {DOM} canvas
  */
 function Scene()

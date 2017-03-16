@@ -68,10 +68,6 @@ function LeapMotion()
 	this.material = new THREE.MeshPhongMaterial();
 	this.geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 
-	//Physics
-	this.physicsWorld = null;
-	this.physicsBodys = [];
-
 	//Gesture
 	this.gesture = []
 	for(var i = 0; i < 10; i++)
@@ -206,7 +202,7 @@ LeapMotion.prototype.initialize = function()
 		self.data = data;
 	}).connect();
 
-	//Initialize children
+	//Children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
@@ -465,7 +461,7 @@ LeapMotion.prototype.updateDebugModel = function()
 	var countBones = 0;
 	var countArms = 0;
 
-	//TODO <CHECK THIS CODE USED TO BE FOR OF ...>
+	//TODO <CHECK THIS CODE>
 	for(var i = 0; i < this.data.hands.length; i++)
 	{
 		var hand = this.data.hands[i];
@@ -494,56 +490,6 @@ LeapMotion.prototype.updateDebugModel = function()
 			armMesh.scale.set(arm.width/1200, arm.width/300, arm.length/150);
 		}
 	}
-
-	//Update Leap Hand
-	if(this.physicsWorld !== null)
-	{
-		this.updatePhysics()
-	}
-};
-
-/**
- * Update physics object to enable hand physics collision.
- * 
- * Called by updateDebugModel automatically.
- * 
- * @method updatePhysics
- */
-LeapMotion.prototype.updatePhysics = function()
-{	
-	//Remove all physics bodys
-	for(var i = 0; i < this.physicsBodys.length; i++)
-	{
-		this.physicsWorld.removeBody(this.physicsBodys[i].pop());
-	};
-
-	//Create new physics bodys
-	this.children.forEach(function(children, j)
-	{
-		var box = new THREE.BoundingBoxHelper(children);
-		box.update();
-
-		var hs = new THREE.Vector3(box.box.max.x - box.box.min.x, box.box.max.y - box.box.min.y, box.box.max.z - box.box.min.z);
-		hs.x *= this.scale.x;
-		hs.y *= this.scale.y;
-		hs.z *= this.scale.z;
-		hs.divideScalar(2);
-
-		var pos = box.box.center();
-		pos.x *= this.scale.x;
-		pos.y *= this.scale.y;
-		pos.z *= this.scale.z;
-		pos.add(this.position);
-
-		var shape = new CANNON.Box(new CANNON.Vec3(hs.x, hs.y, hs.z));
-		var body = new CANNON.Body({mass:0});
-		body.addShape(shape);
-		body.position.set(pos.x - this.position.x, pos.y - this.position.y, pos.z - this.position.z);
-		body.updateMassProperties();
-
-		this.physicsBodys.push(body);
-		this.physicsWorld.addBody(body);
-	});
 };
 
 //Add mesh to hand instance
