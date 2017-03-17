@@ -38,7 +38,7 @@ function Asset(parent)
 	this.text.style.bottom = "0px";
 	this.element.appendChild(this.text);
 
-	//Element atributes
+	//Attributes
 	this.size = new THREE.Vector2(0, 0);
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
@@ -46,13 +46,13 @@ function Asset(parent)
 	//Icon scale
 	this.scale = new THREE.Vector2(0.65, 0.65);
 
-	//Mouse over event
+	//Mouse enter
 	this.element.onmouseenter = function()
 	{
 		this.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
 
-	//Mouse leave event
+	//Mouse leave
 	this.element.onmouseleave = function()
 	{
 		this.style.backgroundColor = "";
@@ -97,7 +97,15 @@ Asset.prototype.destroy = function()
 //Update Interface
 Asset.prototype.updateInterface = function()
 {
-	this.element.style.visibility = this.visible ? "visible" : "hidden";
+	if(this.visible)
+	{
+		this.element.style.visibility = "visible";
+	}
+	else
+	{
+		this.element.style.visibility = "hidden";
+	}
+
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
