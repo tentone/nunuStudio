@@ -2,13 +2,11 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "AmbientLight",
-        "Animation",
         "ArraybufferUtils",
         "Audio",
         "AudioEmitter",
         "AudioLoader",
         "Base64Utils",
-        "Bone",
         "BufferUtils",
         "CanvasTexture",
         "Container",
@@ -64,7 +62,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "WebcamTexture"
     ],
     "modules": [
-        "Animation",
         "Animations",
         "Audio",
         "BinaryData",
@@ -89,14 +86,9 @@ YUI.add("yuidoc-meta", function(Y) {
     ],
     "allModules": [
         {
-            "displayName": "Animation",
-            "name": "Animation",
-            "description": "Animation object is an object that can be keyframe animated."
-        },
-        {
             "displayName": "Animations",
             "name": "Animations",
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official threejs runtime.\n\nMore information abou spine available here www.esotericsoftware.com."
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine\nBased on the official threejs runtime\nMore information abou spine available here www.esotericsoftware.com"
         },
         {
             "displayName": "Audio",
@@ -121,7 +113,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Devices",
             "name": "Devices",
-            "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect V1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository."
+            "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository."
         },
         {
             "displayName": "Files",
@@ -151,7 +143,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Meshes",
             "name": "Meshes",
-            "description": "A Mesh combines a geometry and a material forming a complete rederizable object.\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh."
+            "description": "A Mesh combines a geometry and a material forming a complete rederizable object\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh"
         },
         {
             "displayName": "Misc",
@@ -186,7 +178,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Sprite",
             "name": "Sprite",
-            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite."
+            "description": "Sprites allways face the screen are used for 2D elements\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite"
         },
         {
             "displayName": "Textures",

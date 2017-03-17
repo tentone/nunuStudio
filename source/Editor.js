@@ -7,9 +7,6 @@ include("Nunu.js");
 
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
-include("lib/three/animation/Animation.js");
-include("lib/three/animation/AnimationHandler.js");
-include("lib/three/animation/KeyFrameAnimation.js");
 
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
@@ -133,6 +130,11 @@ include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/PCDLoader.js");
+include("lib/three/loaders/STLLoader.js");
+
+include("lib/three/animation/Animation.js");
+include("lib/three/animation/AnimationHandler.js");
+include("lib/three/animation/KeyFrameAnimation.js");
 
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
@@ -1300,6 +1302,19 @@ Editor.loadGeometry = function(file, onLoad)
 		};
 		reader.readAsArrayBuffer(file);
 	}
+	//STL
+	else if(extension === "stl")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.STLLoader();
+			var geometry = loader.parse(reader.result);
+
+			Editor.addToScene(new Mesh(geometry, Editor.defaultMaterial));
+		};
+		reader.readAsArrayBuffer(file);
+	}
 	//THREE JSON Model
 	else if(extension === "json")
 	{
@@ -1315,8 +1330,7 @@ Editor.loadGeometry = function(file, onLoad)
 			var material = null;
 			if(materials === undefined || materials.length === 0)
 			{
-				material = new THREE.MeshStandardMaterial();
-				material.name = "standard";
+				material = Editor.defaultMaterial;
 			}
 			else if(materials.length === 1)
 			{

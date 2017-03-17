@@ -86,26 +86,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\core\\objects\\animation\\Animation.js": {
-            "name": "..\\source\\core\\objects\\animation\\Animation.js",
-            "modules": {
-                "Animation": 1
-            },
-            "classes": {
-                "Animation": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\source\\core\\objects\\animation\\Bone.js": {
-            "name": "..\\source\\core\\objects\\animation\\Bone.js",
-            "modules": {},
-            "classes": {
-                "Bone": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\core\\objects\\audio\\AudioEmitter.js": {
             "name": "..\\source\\core\\objects\\audio\\AudioEmitter.js",
             "modules": {
@@ -638,21 +618,6 @@
             "line": 3,
             "description": "Audio loader can be used to load external audio resources."
         },
-        "Animation": {
-            "name": "Animation",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "Animation": 1,
-                "Bone": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "..\\source\\core\\objects\\animation\\Bone.js",
-            "line": 3,
-            "description": "Animation object is an object that can be keyframe animated."
-        },
         "Audio": {
             "name": "Audio",
             "submodules": {},
@@ -696,7 +661,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
             "line": 3,
-            "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect V1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository."
+            "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository."
         },
         "Lights": {
             "name": "Lights",
@@ -732,7 +697,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
             "line": 3,
-            "description": "A Mesh combines a geometry and a material forming a complete rederizable object.\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh."
+            "description": "A Mesh combines a geometry and a material forming a complete rederizable object\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh"
         },
         "Misc": {
             "name": "Misc",
@@ -803,7 +768,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 3,
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official threejs runtime.\n\nMore information abou spine available here www.esotericsoftware.com."
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine\nBased on the official threejs runtime\nMore information abou spine available here www.esotericsoftware.com"
         },
         "Textures": {
             "name": "Textures",
@@ -836,7 +801,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
             "line": 3,
-            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite."
+            "description": "Sprites allways face the screen are used for 2D elements\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite"
         },
         "Core": {
             "name": "Core",
@@ -1131,37 +1096,6 @@
                 }
             ]
         },
-        "Animation": {
-            "name": "Animation",
-            "shortname": "Animation",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Animation",
-            "namespace": "",
-            "file": "..\\source\\core\\objects\\animation\\Animation.js",
-            "line": 3,
-            "description": "Animation object is an object that can be keyframe animated.",
-            "is_constructor": 1,
-            "extends": "{Object3D}"
-        },
-        "Bone": {
-            "name": "Bone",
-            "shortname": "Bone",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Animation",
-            "namespace": "",
-            "file": "..\\source\\core\\objects\\animation\\Bone.js",
-            "line": 3,
-            "description": "Bone represents a bone joint for skeletal animation.\n\nMore information about bones can be found here https://threejs.org/docs/index.html?q=bon#Reference/Objects/Bone.",
-            "is_constructor": 1
-        },
         "AudioEmitter": {
             "name": "AudioEmitter",
             "shortname": "AudioEmitter",
@@ -1301,7 +1235,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\device\\KinectDevice.js",
             "line": 3,
-            "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect V1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository.",
+            "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect v1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository.",
             "extends": "{Object3D}",
             "is_constructor": 1
         },
@@ -1579,7 +1513,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
             "line": 3,
-            "description": "A Mesh combines a geometry and a material forming a complete rederizable object.\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh.",
+            "description": "A Mesh combines a geometry and a material forming a complete rederizable object\n\nBased on THREE.Mesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Mesh",
             "params": [
                 {
                     "name": "geometry",
@@ -1763,7 +1697,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 3,
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official threejs runtime.\n\nMore information abou spine available here www.esotericsoftware.com.",
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine\nBased on the official threejs runtime\nMore information abou spine available here www.esotericsoftware.com",
             "is_constructor": 1,
             "extends": "{Mesh}",
             "params": [
@@ -1823,7 +1757,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
             "line": 3,
-            "description": "Sprites allways face the screen are used for 2D elements.\n\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite.",
+            "description": "Sprites allways face the screen are used for 2D elements\nBased on THREE.Sprite documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/Sprite",
             "params": [
                 {
                     "name": "material",
@@ -5075,7 +5009,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 91,
+            "line": 95,
             "description": "Leap tracking desktop mode",
             "itemtype": "attribute",
             "name": "DESK",
@@ -5085,7 +5019,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 98,
+            "line": 102,
             "description": "Leap tracking HDM mode",
             "itemtype": "attribute",
             "name": "DESK",
@@ -5095,7 +5029,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 105,
+            "line": 109,
             "description": "Leap SWIPE gesture",
             "itemtype": "attribute",
             "name": "SWIPE",
@@ -5105,7 +5039,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 111,
+            "line": 115,
             "description": "Leap SWIPE_LEFT gesture",
             "itemtype": "attribute",
             "name": "SWIPE_LEFT",
@@ -5115,7 +5049,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 117,
+            "line": 121,
             "description": "Leap SWIPE_RIGHT gesture",
             "itemtype": "attribute",
             "name": "SWIPE_RIGHT",
@@ -5125,7 +5059,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 123,
+            "line": 127,
             "description": "Leap SWIPE_FRONT gesture",
             "itemtype": "attribute",
             "name": "SWIPE_FRONT",
@@ -5135,7 +5069,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 129,
+            "line": 133,
             "description": "Leap SWIPE_BACK gesture",
             "itemtype": "attribute",
             "name": "SWIPE_BACK",
@@ -5145,7 +5079,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 135,
+            "line": 139,
             "description": "Leap SWIPE_UP gesture",
             "itemtype": "attribute",
             "name": "SWIPE_UP",
@@ -5155,7 +5089,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 141,
+            "line": 145,
             "description": "Leap SWIPE_DOWN gesture",
             "itemtype": "attribute",
             "name": "SWIPE_DOWN",
@@ -5165,7 +5099,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 147,
+            "line": 151,
             "description": "Leap CIRCLE gesture",
             "itemtype": "attribute",
             "name": "CIRCLE",
@@ -5175,7 +5109,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 153,
+            "line": 157,
             "description": "Leap SCREEN_TAP gesture",
             "itemtype": "attribute",
             "name": "SCREEN_TAP",
@@ -5185,7 +5119,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 159,
+            "line": 163,
             "description": "Leap KEY_TAP gesture",
             "itemtype": "attribute",
             "name": "KEY_TAP",
@@ -5195,7 +5129,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 166,
+            "line": 170,
             "description": "Hand CLOSED pose",
             "itemtype": "attribute",
             "name": "CLOSED",
@@ -5205,7 +5139,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 172,
+            "line": 176,
             "description": "Hand OPEN pose",
             "itemtype": "attribute",
             "name": "OPEN",
@@ -5215,7 +5149,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 178,
+            "line": 182,
             "description": "Hand POINTING pose",
             "itemtype": "attribute",
             "name": "POINTING",
@@ -5225,7 +5159,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 185,
+            "line": 189,
             "description": "Initialize LeapMotion object.\n\nCalled automatically by the runtime.\n\nConnects to the websocket provided by the leap driver.",
             "itemtype": "method",
             "name": "initialize",
@@ -5234,7 +5168,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 212,
+            "line": 216,
             "description": "Update leap status.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -5243,7 +5177,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 244,
+            "line": 248,
             "description": "Check if a gesture is occuring, is true while the gesture is occuring.",
             "itemtype": "method",
             "name": "checkGesture",
@@ -5263,7 +5197,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 260,
+            "line": 264,
             "description": "Check if hand is in pose.",
             "params": [
                 {
@@ -5281,7 +5215,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 275,
+            "line": 279,
             "description": "Set hand tracking mode.\n\nCan be set to HDM or Desktop mode.",
             "params": [
                 {
@@ -5297,7 +5231,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 288,
+            "line": 292,
             "description": "Update leap object pose flags from collected data.\n\nCalled automatically by the update methos.",
             "itemtype": "method",
             "name": "updatePoses",
@@ -5306,7 +5240,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 364,
+            "line": 368,
             "description": "Update leap object gesture flags from collected data.\n\nCalled automatically by the update method.",
             "itemtype": "method",
             "name": "updateGestures",
@@ -5315,7 +5249,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 437,
+            "line": 441,
             "description": "Update internal hand debug model.\n\nAutomatically called by the update method if debugModel is set to true.",
             "itemtype": "method",
             "name": "updateDebugModel",
@@ -5324,7 +5258,16 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 517,
+            "line": 505,
+            "description": "Update physics object to enable hand physics collision.\n\nCalled by updateDebugModel automatically.",
+            "itemtype": "method",
+            "name": "updatePhysics",
+            "class": "LeapMotion",
+            "module": "Devices"
+        },
+        {
+            "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
+            "line": 571,
             "description": "Get hand speed (temporaly normalized).",
             "itemtype": "method",
             "name": "getMovement",
@@ -5337,7 +5280,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\device\\LeapMotion.js",
-            "line": 534,
+            "line": 588,
             "description": "Create JSON for object.",
             "itemtype": "method",
             "name": "toJSON",
@@ -5577,7 +5520,7 @@
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
             "line": 15,
-            "description": "Geometry defined the object structure.",
+            "description": "Geometry defined the object structure",
             "itemtype": "property",
             "name": "geometry",
             "type": "{Geometry}",
@@ -5586,8 +5529,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 21,
-            "description": "Material is used to define how the geometry surface is shaded.",
+            "line": 20,
+            "description": "Material is used to define how the geometry surface is shaded",
             "itemtype": "property",
             "name": "material",
             "type": "{Material}",
@@ -5596,8 +5539,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 27,
-            "description": "Determines how the mesh triangles are constructed from the vertices.\n\nOnly works when the geometry is a BufferGeometry.",
+            "line": 25,
+            "description": "Determines how the mesh triangles are constructed from the vertices.\nOnly works when the geometry is a BufferGeometry",
             "itemtype": "property",
             "name": "drawMode",
             "default": "TrianglesDrawMode",
@@ -5606,8 +5549,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 47,
-            "description": "Dispose mesh along with its material and geometry.",
+            "line": 43,
+            "description": "Dispose mesh along with its material and geometry",
             "itemtype": "method",
             "name": "dispose",
             "class": "Mesh",
@@ -5615,7 +5558,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 18,
+            "line": 17,
             "description": "Geometry defined the object structure",
             "itemtype": "property",
             "name": "geometry",
@@ -5625,7 +5568,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 23,
+            "line": 22,
             "description": "Material is used to define how the geometry surface is shaded",
             "itemtype": "property",
             "name": "material",
@@ -5635,7 +5578,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 28,
+            "line": 27,
             "description": "Determines how the mesh triangles are constructed from the vertices.\nOnly works when the geometry is a BufferGeometry",
             "itemtype": "property",
             "name": "drawMode",
@@ -5645,7 +5588,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 34,
+            "line": 33,
             "description": "Array with the bones attached to this mesh",
             "itemtype": "property",
             "name": "bones",
@@ -5655,8 +5598,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 51,
-            "description": "Dispose mesh along with its material and geometry.",
+            "line": 50,
+            "description": "Dispose mesh along with its material and geometry",
             "itemtype": "method",
             "name": "dispose",
             "class": "SkinnedMesh",
@@ -5664,8 +5607,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 72,
-            "description": "Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
+            "line": 70,
+            "description": "Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
             "params": [
@@ -5766,7 +5709,7 @@
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
             "line": 87,
-            "description": "Set font used by this text 3D instance.",
+            "description": "Set font used by this text 3D instance",
             "params": [
                 {
                     "name": "font",
@@ -5781,8 +5724,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 100,
-            "description": "Change text.",
+            "line": 99,
+            "description": "Set Text",
             "params": [
                 {
                     "name": "text",
@@ -5797,8 +5740,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 121,
-            "description": "Update text geometry.\n\nShould be called after chaging any attribute.",
+            "line": 119,
+            "description": "Update text geometry\nShould be called after chaging any attribute",
             "itemtype": "method",
             "name": "updateText",
             "class": "Text3D",
@@ -5806,8 +5749,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 145,
-            "description": "Clone this Text3D instance.",
+            "line": 141,
+            "description": "Clone this Text3D instance",
             "itemtype": "method",
             "name": "clone",
             "return": {
@@ -5819,8 +5762,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 156,
-            "description": "Dispose mesh along with its material and geometry.",
+            "line": 151,
+            "description": "Dispose mesh along with its material and geometry",
             "itemtype": "method",
             "name": "dispose",
             "class": "Text3D",
@@ -5828,8 +5771,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 179,
-            "description": "Create JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
+            "line": 173,
+            "description": "Create JSON for object\nNeed to backup geometry and set to undefined to avoid it being stored",
             "params": [
                 {
                     "name": "meta",
@@ -6110,7 +6053,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 20,
+            "line": 18,
             "description": "Array of SpineTextures used by the animation",
             "itemtype": "property",
             "name": "textures",
@@ -6120,7 +6063,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 25,
+            "line": 24,
             "description": "Animation data",
             "itemtype": "property",
             "name": "json",
@@ -6203,7 +6146,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 227,
+            "line": 233,
             "description": "Create JSON for spine animation.",
             "params": [
                 {
@@ -6221,7 +6164,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
-            "line": 15,
+            "line": 14,
             "description": "Material used to render the sprite",
             "itemtype": "property",
             "name": "material",
@@ -6231,8 +6174,8 @@
         },
         {
             "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
-            "line": 30,
-            "description": "Dispose the sprite material.",
+            "line": 29,
+            "description": "Dispose the sprite material",
             "itemtype": "method",
             "name": "dispose",
             "class": "Sprite",
@@ -6626,7 +6569,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 20,
+            "line": 21,
             "description": "Raycaster used for mouse interaction with 3D objects.",
             "itemtype": "property",
             "name": "raycaster",
@@ -6636,7 +6579,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 24,
+            "line": 26,
             "description": "Normalized mouse coordinates used by the scene internal raycaster.",
             "itemtype": "property",
             "name": "mouse",
@@ -6646,7 +6589,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 28,
+            "line": 31,
             "description": "Program that contains this scene.",
             "itemtype": "property",
             "name": "program",
@@ -6656,7 +6599,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 32,
+            "line": 36,
             "description": "Canvas used to draw this scene.",
             "itemtype": "property",
             "name": "canvas",
@@ -6666,7 +6609,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 72,
+            "line": 77,
             "description": "Initialize scene objects.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -6675,7 +6618,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 95,
+            "line": 100,
             "description": "Update scene objects and the physics world.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -6684,7 +6627,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 120,
+            "line": 125,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -6704,7 +6647,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 152,
+            "line": 157,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -6720,7 +6663,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 164,
+            "line": 169,
             "description": "Update active cameras order.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -6729,7 +6672,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 177,
+            "line": 182,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -6745,7 +6688,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 192,
+            "line": 197,
             "description": "Set scene fog mode.",
             "params": [
                 {
@@ -6761,7 +6704,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\Scene.js",
-            "line": 216,
+            "line": 221,
             "description": "Serialize scene as JSON.\n\nAlso serializes physics world information.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10024,11 +9967,11 @@
         },
         {
             "message": "Missing item type\nCheck if hand is in pose.",
-            "line": " ..\\source\\core\\objects\\device\\LeapMotion.js:260"
+            "line": " ..\\source\\core\\objects\\device\\LeapMotion.js:264"
         },
         {
-            "message": "Missing item type\nCreate JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
-            "line": " ..\\source\\core\\objects\\mesh\\Text3D.js:179"
+            "message": "Missing item type\nCreate JSON for object\nNeed to backup geometry and set to undefined to avoid it being stored",
+            "line": " ..\\source\\core\\objects\\mesh\\Text3D.js:173"
         },
         {
             "message": "Missing item type\nCreate JSON for object.\n\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
@@ -10048,7 +9991,7 @@
         },
         {
             "message": "Missing item type\nCreate JSON for spine animation.",
-            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:227"
+            "line": " ..\\source\\core\\objects\\spine\\SpineAnimation.js:233"
         },
         {
             "message": "Missing item type\nSerialize audio data as JSON.\n\nAudio data is serialized in Base64.",

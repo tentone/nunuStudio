@@ -42,7 +42,7 @@ Interface.initialize = function()
 			{
 				Editor.loadGeometry(files[0]);
 			}
-		}, ".obj, .dae, .gltf, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds");
+		}, ".obj, .dae, .gltf, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x");
 	}, Interface.fileDir + "icons/models/models.png");
 
 	//Textures menu
@@ -543,12 +543,6 @@ Interface.initialize = function()
 	{
 		Editor.addToScene(new PositionalAudio(Editor.defaultAudio));
 	}, "Positional Audio");
-
-	//Animation
-	Interface.addEffects.addOption(Interface.fileDir + "icons/effects/bone.png", function()
-	{
-		Editor.addToScene(new Sprite(Editor.defaultSpriteMaterial));
-	}, "Animation");
 
 	//Physics
 	Interface.addPhysics = new ButtonDrawer();
