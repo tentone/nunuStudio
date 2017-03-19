@@ -77,6 +77,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\loaders\\TextureLoader.js": {
+            "name": "..\\source\\core\\loaders\\TextureLoader.js",
+            "modules": {},
+            "classes": {
+                "TextureLoader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\loaders\\VideoLoader.js": {
             "name": "..\\source\\core\\loaders\\VideoLoader.js",
             "modules": {},
@@ -629,6 +638,7 @@
                 "ImageLoader": 1,
                 "MaterialLoader": 1,
                 "ObjectLoader": 1,
+                "TextureLoader": 1,
                 "VideoLoader": 1
             },
             "fors": {},
@@ -651,7 +661,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\animation\\Bone.js",
             "line": 3,
-            "description": "Animation object is an object that can be keyframe animated."
+            "description": "Animation object is an object that can be keyframe animated.\n\nAnimation objects work the same way a container does, the only diference its the fact that they have attached an animation."
         },
         "Audio": {
             "name": "Audio",
@@ -1109,6 +1119,28 @@
                 }
             ]
         },
+        "TextureLoader": {
+            "name": "TextureLoader",
+            "shortname": "TextureLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Loaders",
+            "namespace": "",
+            "file": "..\\source\\core\\loaders\\TextureLoader.js",
+            "line": 3,
+            "description": "TextureLoader can be used to load external textures.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "manager",
+                    "description": "",
+                    "type": "Object"
+                }
+            ]
+        },
         "VideoLoader": {
             "name": "VideoLoader",
             "shortname": "VideoLoader",
@@ -1143,7 +1175,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\animation\\Animation.js",
             "line": 3,
-            "description": "Animation object is an object that can be keyframe animated.",
+            "description": "Animation object is an object that can be keyframe animated.\n\nAnimation objects work the same way a container does, the only diference its the fact that they have attached an animation.",
             "is_constructor": 1,
             "extends": "{Object3D}"
         },
@@ -4122,6 +4154,137 @@
             "module": "Loaders"
         },
         {
+            "file": "..\\source\\core\\loaders\\TextureLoader.js",
+            "line": 24,
+            "description": "Set list of images to be used by this loader.",
+            "itemtype": "method",
+            "name": "setImages",
+            "params": [
+                {
+                    "name": "images",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "class": "TextureLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\TextureLoader.js",
+            "line": 36,
+            "description": "Set list of videos to be used by this loader.",
+            "itemtype": "method",
+            "name": "setVideos",
+            "params": [
+                {
+                    "name": "videos",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "class": "TextureLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\TextureLoader.js",
+            "line": 48,
+            "description": "Set list of fonts to be used by this loader.",
+            "itemtype": "method",
+            "name": "setFonts",
+            "params": [
+                {
+                    "name": "fonts",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "class": "TextureLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\TextureLoader.js",
+            "line": 60,
+            "description": "Load texture from URL.",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "TextureLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\TextureLoader.js",
+            "line": 81,
+            "description": "Load texture object from JSON.",
+            "itemtype": "method",
+            "name": "loadJSON",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "TextureLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\TextureLoader.js",
+            "line": 101,
+            "description": "Parse a texture object JSON description.",
+            "itemtype": "method",
+            "name": "parse",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "TextureLoader",
+            "module": "Loaders"
+        },
+        {
             "file": "..\\source\\core\\loaders\\VideoLoader.js",
             "line": 16,
             "description": "Load video resource from URL.",
@@ -4447,7 +4610,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 134,
+            "line": 137,
             "description": "Dispose audio object.",
             "itemtype": "method",
             "name": "dispose",
@@ -4456,7 +4619,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 153,
+            "line": 156,
             "description": "Change audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
@@ -4476,7 +4639,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 168,
+            "line": 171,
             "description": "Create JSON description.",
             "itemtype": "method",
             "name": "toJSON",
@@ -4496,7 +4659,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 193,
+            "line": 196,
             "description": "Starts playback",
             "itemtype": "method",
             "name": "play",
@@ -4505,7 +4668,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 198,
+            "line": 201,
             "description": "Pauses playback",
             "itemtype": "method",
             "name": "pause",
@@ -4514,7 +4677,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 203,
+            "line": 206,
             "description": "Stops playback and resets time to 0",
             "itemtype": "method",
             "name": "pause",
@@ -4523,7 +4686,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 208,
+            "line": 211,
             "description": "Set loop mode",
             "params": [
                 {
@@ -4539,7 +4702,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 214,
+            "line": 217,
             "description": "Set playback speed",
             "params": [
                 {
@@ -4555,7 +4718,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 220,
+            "line": 223,
             "description": "Add the filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -4571,7 +4734,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 226,
+            "line": 229,
             "description": "Set the filters array to value.",
             "itemtype": "method",
             "name": "setFilters",
@@ -9144,7 +9307,7 @@
         {
             "file": "..\\source\\core\\FileSystem.js",
             "line": 192,
-            "description": "Write binary file using base64 data.\n\nOnly works when running inside NWJS.",
+            "description": "Write binary file using base64 data.",
             "itemtype": "method",
             "name": "writeFileBase64",
             "params": [
@@ -9164,7 +9327,28 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 230,
+            "line": 228,
+            "description": "Write binary file using arraybuffer data.",
+            "itemtype": "method",
+            "name": "writeFileArrayBuffer",
+            "params": [
+                {
+                    "name": "fname",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 262,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -9185,7 +9369,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 247,
+            "line": 279,
             "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -9201,7 +9385,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 267,
+            "line": 299,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -9214,7 +9398,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 291,
+            "line": 323,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -9235,7 +9419,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 332,
+            "line": 364,
             "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.",
             "itemtype": "method",
             "name": "chooseFile",
@@ -9261,7 +9445,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 368,
+            "line": 400,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -9282,7 +9466,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 395,
+            "line": 427,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -9302,7 +9486,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 414,
+            "line": 446,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -9322,7 +9506,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 436,
+            "line": 468,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -9342,7 +9526,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 455,
+            "line": 487,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -9362,7 +9546,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 477,
+            "line": 509,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
@@ -10008,11 +10192,11 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:414"
+            "line": " ..\\source\\core\\FileSystem.js:446"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:436"
+            "line": " ..\\source\\core\\FileSystem.js:468"
         },
         {
             "message": "unknown tag: license",

@@ -57,6 +57,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Sprite",
         "Text3D",
         "Texture",
+        "TextureLoader",
         "Vector3",
         "Video",
         "VideoLoader",
@@ -91,7 +92,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Animation",
             "name": "Animation",
-            "description": "Animation object is an object that can be keyframe animated."
+            "description": "Animation object is an object that can be keyframe animated.\n\nAnimation objects work the same way a container does, the only diference its the fact that they have attached an animation."
         },
         {
             "displayName": "Animations",

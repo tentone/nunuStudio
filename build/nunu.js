@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.23 Alpha";
-Nunu.TIMESTAMP = "201703190214";
+Nunu.TIMESTAMP = "201703190355";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -2157,7 +2157,7 @@ Nunu.runningOnDesktop = function() {
     function k(d, m) {
       return Math.abs(m[0]) - Math.abs(d[0]);
     }
-    function p(d, m, a) {
+    function g(d, m, a) {
       if (d.visible) {
         if (d.layers.test(m.layers)) {
           if (d.isLight) {
@@ -2194,11 +2194,11 @@ Nunu.runningOnDesktop = function() {
         d = d.children;
         h = 0;
         for (e = d.length;h < e;h++) {
-          p(d[h], m, a);
+          g(d[h], m, a);
         }
       }
     }
-    function g(d, m, a, b) {
+    function p(d, m, a, b) {
       for (var A = 0, h = d.length;A < h;A++) {
         var c = d[A], e = c.object, n = c.geometry, f = void 0 === b ? c.material : b, c = c.group;
         e.onBeforeRender(J, m, a, n, f, c);
@@ -2824,7 +2824,7 @@ Nunu.runningOnDesktop = function() {
         Z = Sa.init(this.clippingPlanes, za, m);
         V = td.get(d, m);
         V.init();
-        p(d, m, J.sortObjects);
+        g(d, m, J.sortObjects);
         V.finish();
         !0 === J.sortObjects && V.sort();
         Z && Sa.beginShadows();
@@ -2925,7 +2925,7 @@ Nunu.runningOnDesktop = function() {
         wa.update(Ea), J.renderBufferDirect(Da, null, Ea.geometry, Ea.material, Ea, null)) : A && A.isTexture && (void 0 === Ha && (Ha = new Wb(-1, 1, 1, -1, 0, 1), Fa = new Ia(new Cb(2, 2), new La({depthTest:!1, depthWrite:!1, fog:!1}))), Fa.material.map = A, wa.update(Fa), J.renderBufferDirect(Ha, null, Fa.geometry, Fa.material, Fa, null));
         b = V.opaque;
         A = V.transparent;
-        d.overrideMaterial ? (c = d.overrideMaterial, b.length && g(b, d, m, c), A.length && g(A, d, m, c)) : (b.length && g(b, d, m), A.length && g(A, d, m));
+        d.overrideMaterial ? (c = d.overrideMaterial, b.length && p(b, d, m, c), A.length && p(A, d, m, c)) : (b.length && p(b, d, m), A.length && p(A, d, m));
         Pa.render(d, m);
         Qa.render(d, m, ca);
         a && tb.updateRenderTargetMipmap(a);
@@ -3564,7 +3564,7 @@ Nunu.runningOnDesktop = function() {
     c = void 0 !== c ? c : 2 * Math.PI;
     e = void 0 !== e ? e : 0;
     n = void 0 !== n ? n : Math.PI;
-    var A = e + n, f, k, q = 0, E = [], g = new h, p = new h, r = [], u = [], R = [], l = [];
+    var A = e + n, f, k, q = 0, E = [], g = new h, p = new h, r = [], u = [], l = [], R = [];
     for (k = 0;k <= a;k++) {
       var v = [], t = k / a;
       for (f = 0;f <= m;f++) {
@@ -3574,8 +3574,8 @@ Nunu.runningOnDesktop = function() {
         g.z = d * Math.sin(b + U * c) * Math.sin(e + t * n);
         u.push(g.x, g.y, g.z);
         p.set(g.x, g.y, g.z).normalize();
-        R.push(p.x, p.y, p.z);
-        l.push(U, 1 - t);
+        l.push(p.x, p.y, p.z);
+        R.push(U, 1 - t);
         v.push(q++);
       }
       E.push(v);
@@ -3587,8 +3587,8 @@ Nunu.runningOnDesktop = function() {
     }
     this.setIndex(r);
     this.addAttribute("position", new X(u, 3));
-    this.addAttribute("normal", new X(R, 3));
-    this.addAttribute("uv", new X(l, 2));
+    this.addAttribute("normal", new X(l, 3));
+    this.addAttribute("uv", new X(R, 2));
   }
   function Yc(d, m, a, b, c, h) {
     fa.call(this);
@@ -4657,27 +4657,27 @@ Nunu.runningOnDesktop = function() {
     a = new ya({vertexColors:2});
     va.call(this, m, a);
   }
-  function Sd(d, m, a, b, c, h) {
+  function Sd(d, a, b, c, h, e) {
     d = d || 10;
-    m = m || 16;
-    a = a || 8;
-    b = b || 64;
-    c = new Y(void 0 !== c ? c : 4473924);
-    h = new Y(void 0 !== h ? h : 8947848);
-    var A = [], e = [], n, f, k, q, g;
-    for (k = 0;k <= m;k++) {
-      f = k / m * 2 * Math.PI, n = Math.sin(f) * d, f = Math.cos(f) * d, A.push(0, 0, 0), A.push(n, 0, f), g = k & 1 ? c : h, e.push(g.r, g.g, g.b), e.push(g.r, g.g, g.b);
-    }
+    a = a || 16;
+    b = b || 8;
+    c = c || 64;
+    h = new Y(void 0 !== h ? h : 4473924);
+    e = new Y(void 0 !== e ? e : 8947848);
+    var m = [], A = [], n, f, k, q, g;
     for (k = 0;k <= a;k++) {
-      for (g = k & 1 ? c : h, q = d - d / a * k, m = 0;m < b;m++) {
-        f = m / b * 2 * Math.PI, n = Math.sin(f) * q, f = Math.cos(f) * q, A.push(n, 0, f), e.push(g.r, g.g, g.b), f = (m + 1) / b * 2 * Math.PI, n = Math.sin(f) * q, f = Math.cos(f) * q, A.push(n, 0, f), e.push(g.r, g.g, g.b);
+      f = k / a * 2 * Math.PI, n = Math.sin(f) * d, f = Math.cos(f) * d, m.push(0, 0, 0), m.push(n, 0, f), g = k & 1 ? h : e, A.push(g.r, g.g, g.b), A.push(g.r, g.g, g.b);
+    }
+    for (k = 0;k <= b;k++) {
+      for (g = k & 1 ? h : e, q = d - d / b * k, a = 0;a < c;a++) {
+        f = a / c * 2 * Math.PI, n = Math.sin(f) * q, f = Math.cos(f) * q, m.push(n, 0, f), A.push(g.r, g.g, g.b), f = (a + 1) / c * 2 * Math.PI, n = Math.sin(f) * q, f = Math.cos(f) * q, m.push(n, 0, f), A.push(g.r, g.g, g.b);
       }
     }
     d = new da;
-    d.addAttribute("position", new X(A, 3));
-    d.addAttribute("color", new X(e, 3));
-    A = new ya({vertexColors:2});
-    va.call(this, d, A);
+    d.addAttribute("position", new X(m, 3));
+    d.addAttribute("color", new X(A, 3));
+    m = new ya({vertexColors:2});
+    va.call(this, d, m);
   }
   function kd(d, a, b, c) {
     this.object = d;
@@ -4799,13 +4799,13 @@ Nunu.runningOnDesktop = function() {
       a = m;
       b = -3 * h + 3 * e - 2 * m - A;
       c = 2 * h - 2 * e + m + A;
-    }, initNonuniformCatmullRom:function(m, h, A, e, f, n, k) {
-      m = ((h - m) / f - (A - m) / (f + n) + (A - h) / n) * n;
-      e = ((A - h) / n - (e - h) / (n + k) + (e - A) / k) * n;
+    }, initNonuniformCatmullRom:function(m, h, e, A, f, n, k) {
+      m = ((h - m) / f - (e - m) / (f + n) + (e - h) / n) * n;
+      A = ((e - h) / n - (A - h) / (n + k) + (A - e) / k) * n;
       d = h;
       a = m;
-      b = -3 * h + 3 * A - 2 * m - e;
-      c = 2 * h - 2 * A + m + e;
+      b = -3 * h + 3 * e - 2 * m - A;
+      c = 2 * h - 2 * e + m + A;
     }, calc:function(m) {
       var h = m * m;
       return d + a * m + b * h + c * h * m;
@@ -13737,9 +13737,9 @@ Nunu.runningOnDesktop = function() {
       this.object.updateMatrixWorld(!0);
       c.getNormalMatrix(this.object.matrixWorld);
       for (var d = this.object.matrixWorld, e = this.geometry.attributes.position, h = this.object.geometry, f = h.vertices, h = h.faces, n = 0, k = 0, q = h.length;k < q;k++) {
-        var m = h[k], g = m.normal;
-        a.copy(f[m.a]).add(f[m.b]).add(f[m.c]).divideScalar(3).applyMatrix4(d);
-        b.copy(g).applyMatrix3(c).normalize().multiplyScalar(this.size).add(a);
+        var g = h[k], m = g.normal;
+        a.copy(f[g.a]).add(f[g.b]).add(f[g.c]).divideScalar(3).applyMatrix4(d);
+        b.copy(m).applyMatrix3(c).normalize().multiplyScalar(this.size).add(a);
         e.setXYZ(n, a.x, a.y, a.z);
         n += 1;
         e.setXYZ(n, b.x, b.y, b.z);
@@ -30579,6 +30579,22 @@ FileSystem.writeFileBase64 = function(a, g) {
     l.click();
   }
 };
+FileSystem.writeFileArrayBuffer = function(a, g) {
+  if (void 0 !== FileSystem.fs) {
+    g = BufferUtils.fromArrayBuffer(g), a = FileSystem.fs.createWriteStream(a), a.write(g), a.end();
+  } else {
+    g = new Blob([g]);
+    var l = document.createElement("a");
+    l.download = a;
+    l.href = window.URL.createObjectURL(g);
+    l.onclick = function() {
+      document.body.removeChild(this);
+    };
+    l.style.display = "none";
+    document.body.appendChild(l);
+    l.click();
+  }
+};
 FileSystem.copyFile = function(a, g) {
   void 0 !== FileSystem.fs && FileSystem.fs.createReadStream(a).pipe(FileSystem.fs.createWriteStream(g));
 };
@@ -32938,9 +32954,7 @@ PositionalAudio.prototype.initialize = function() {
   }
 };
 PositionalAudio.prototype.update = function() {
-  this.tempA.setFromMatrixPosition(this.matrixWorld);
-  0 < this.cameras.length && (this.tempB.setFromMatrixPosition(this.cameras[0].matrixWorld), this.tempA.sub(this.tempB));
-  this.panner.setPosition(this.tempA.x, this.tempA.y, this.tempA.z);
+  0 < this.cameras.length ? (this.tempA.setFromMatrixPosition(this.matrixWorld), this.tempB.setFromMatrixPosition(this.cameras[0].matrixWorld), this.tempA.sub(this.tempB), this.panner.setPosition(this.tempA.x, this.tempA.y, this.tempA.z)) : this.panner.setPosition(0, 0, 0);
   for (var a = 0;a < this.children.length;a++) {
     this.children[a].update();
   }
