@@ -1,5 +1,13 @@
 "use strict";
 
+/**
+ * TextureLoader can be used to load external textures.
+ *
+ * @constructor
+ * @class TextureLoader
+ * @module Loaders
+ * @param {Object} manager
+ */
 function TextureLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
@@ -13,24 +21,51 @@ THREE.TextureLoader = TextureLoader;
 
 TextureLoader.prototype.setCrossOrigin = function(url){};
 
+/**
+ * Set list of images to be used by this loader.
+ *
+ * @method setImages
+ * @param {Array} images
+ */
 TextureLoader.prototype.setImages = function(images)
 {
 	this.images = images;
 	return this;
 };
 
+/**
+ * Set list of videos to be used by this loader.
+ *
+ * @method setVideos
+ * @param {Array} videos
+ */
 TextureLoader.prototype.setVideos = function(videos)
 {
 	this.videos = videos;
 	return this;
 };
 
+/**
+ * Set list of fonts to be used by this loader.
+ *
+ * @method setFonts
+ * @param {Array} fonts
+ */
 TextureLoader.prototype.setFonts = function(fonts)
 {
 	this.fonts = fonts;
 	return this;
 };
 
+/**
+ * Load texture from URL.
+ *
+ * @method load
+ * @param {String} url
+ * @param {Function} onLoad
+ * @param {Function} onProgress
+ * @param {Function} onError
+ */
 TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	var texture = new Texture(url);
@@ -43,6 +78,15 @@ TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	return texture;
 };
 
+/**
+ * Load texture object from JSON.
+ *
+ * @method loadJSON
+ * @param {String} url
+ * @param {Function} onLoad
+ * @param {Function} onProgress
+ * @param {Function} onError
+ */
 TextureLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 {
 	var self = this;
@@ -54,6 +98,13 @@ TextureLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
 	}, onProgress, onError);
 };
 
+/**
+ * Parse a texture object JSON description.
+ *
+ * @method parse
+ * @param {String} url
+ * @param {Function} onLoad
+ */
 TextureLoader.prototype.parse = function(json, onLoad)
 {
 	var texture = null;

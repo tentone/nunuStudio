@@ -9,7 +9,7 @@ function ConsoleTab(parent, closeable, container, index)
 
 ConsoleTab.prototype = Object.create(TabElement.prototype);
 
-//Update division Size
+//Update console tab
 ConsoleTab.prototype.updateInterface = function()
 {
 	//Visibility

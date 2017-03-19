@@ -114,15 +114,18 @@ PositionalAudio.prototype.initialize = function()
  */
 PositionalAudio.prototype.update = function()
 {
-	this.tempA.setFromMatrixPosition(this.matrixWorld);
-
 	if(this.cameras.length > 0)
 	{
+		this.tempA.setFromMatrixPosition(this.matrixWorld);
 		this.tempB.setFromMatrixPosition(this.cameras[0].matrixWorld);
+		
 		this.tempA.sub(this.tempB);
+		this.panner.setPosition(this.tempA.x, this.tempA.y, this.tempA.z);
 	}
-
-	this.panner.setPosition(this.tempA.x, this.tempA.y, this.tempA.z);
+	else
+	{
+		this.panner.setPosition(0, 0, 0);
+	}
 
 	//Update children
 	for(var i = 0; i < this.children.length; i++)

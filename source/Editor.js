@@ -138,6 +138,7 @@ include("lib/three/animation/KeyFrameAnimation.js");
 
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
+include("lib/three/exporters/STLBinaryExporter.js");
 
 include("lib/jscookie.min.js");
 include("lib/jshint.min.js");

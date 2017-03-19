@@ -835,6 +835,31 @@ Interface.initialize = function()
 		}
 	}, Interface.fileDir + "icons/misc/scene.png");
 
+	//Export Binary STL
+	exportMenu.addOption("Binary STL", function()
+	{
+		if(Nunu.runningOnDesktop())
+		{
+			FileSystem.chooseFile(function(files)
+			{
+				if(files.length > 0)
+				{
+					var exporter = new THREE.STLBinaryExporter();
+					var data = exporter.parse(Editor.program);
+					FileSystem.writeFileArrayBuffer(files[0].path, data.buffer);
+				}
+			}, ".stl", true);
+		}
+		else
+		{
+			FileSystem.chooseFileName(function(fname)
+			{
+				var exporter = new THREE.STLBinaryExporter();
+				var data = exporter.parse(Editor.program);
+				FileSystem.writeFileArrayBuffer(fname, data.buffer);
+			}, ".stl");
+		}
+	}, Interface.fileDir + "icons/misc/scene.png");
 
 	//Exit
 	if(Nunu.runningOnDesktop())
