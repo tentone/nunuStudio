@@ -41,6 +41,28 @@ function AudioAsset(parent)
 				Editor.updateObjectViews();
 			}
 		});
+
+		context.addOption("Export Audio", function()
+		{
+			if(Nunu.runningOnDesktop())
+			{
+				FileSystem.chooseFile(function(files)
+				{
+					if(files.length > 0)
+					{
+						var file = files[0].path;
+						FileSystem.writeFileArrayBuffer(file, self.audio.data);
+					}
+				}, "." + self.audio.encoding, true);
+			}
+			else
+			{
+				FileSystem.chooseFileName(function(file)
+				{
+					FileSystem.writeFileArrayBuffer(file, self.audio.data);
+				}, "." + self.audio.encoding);
+			}
+		});
 		
 		context.addOption("Delete", function()
 		{
