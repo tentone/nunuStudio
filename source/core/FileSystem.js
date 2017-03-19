@@ -191,8 +191,6 @@ FileSystem.writeFile = function(fname, data)
 
 /**
  * Write binary file using base64 data.
- * 
- * Only works when running inside NWJS.
  *
  * @method writeFileBase64
  * @param {String} fname
@@ -212,6 +210,40 @@ FileSystem.writeFileBase64 = function(fname, data)
 	{
 		var array = ArraybufferUtils.fromBase64(Base64Utils.removeHeader(data));
 		var blob = new Blob([array]);
+
+		var download = document.createElement("a");
+		download.download = fname;
+		download.href = window.URL.createObjectURL(blob);
+		download.onclick = function()
+		{
+			document.body.removeChild(this);
+		};
+		download.style.display = "none";
+		document.body.appendChild(download);
+
+		download.click();
+	}
+};
+
+/**
+ * Write binary file using arraybuffer data. 
+ *
+ * @method writeFileArrayBuffer
+ * @param {String} fname
+ * @param {String} data
+ */
+FileSystem.writeFileArrayBuffer = function(fname, data)
+{	
+	if(FileSystem.fs !== undefined)
+	{
+		var buffer = BufferUtils.fromArrayBuffer(data);
+		var stream = FileSystem.fs.createWriteStream(fname);
+		stream.write(buffer);
+		stream.end();
+	}
+	else
+	{
+		var blob = new Blob([data]);
 
 		var download = document.createElement("a");
 		download.download = fname;
