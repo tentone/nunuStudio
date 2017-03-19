@@ -90,11 +90,12 @@
 	- Removed editor state, tabs are self updated
 - V0.8.9.23 Alpha
 	- Added support for STL files
+	- Fixed locked keys in Keyboard after alerts, prompts, etc
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
 - To embed applications made inside nunuStudio in web pages the following code can be used
-- nunuStudio can export full page web apps with a fullscreen and vr buttons by default
+- nunuStudio can export full page web apps with a fullscreen and vr buttons by default but the following code can be used to embed nunu applications inside other webpages
 
 ```javascript
  var app = new NunuApp();
@@ -160,6 +161,11 @@ nunuStudio uses a number of open source projects to work properly
 	- Download the last release from the github repository and unzip it
 	- Run the start.sh or start.bat file (depending on your OS)
 - There is also a fully functional web version available on the project webpage
+
+### Building
+- To build nunuStudio Java, NodeJS and Windows are required
+- After installing the required software run the build.bat file inside the build/tools folder
+- The building system generates builds for the runtime and for the editor
 
 ### License
 - nunuStudio uses a MIT license (Available on GitHub page)

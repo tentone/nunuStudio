@@ -31,6 +31,7 @@ function Keyboard()
 
 	//Actions pointer
 	var actions = this.actions;
+	var self = this;
 
 	//Key down
 	this.events.push([window, "keydown", function(event)
@@ -44,6 +45,12 @@ function Keyboard()
 	{
 		actions.push(event.keyCode);
 		actions.push(Key.UP);
+	}]);
+
+	//Reset
+	this.events.push([window, "focus", function(event)
+	{
+		self.reset();
 	}]);
 
 	//Initialize events
@@ -86,14 +93,13 @@ Keyboard.update = function()
 
 /**
  * Reset keyboard status to default.
+ *
+ * Does not clean the action list.
  * 
  * @method reset
  */
 Keyboard.reset = function()
 {
-	//Clear actions array
-	this.actions = [];
-
 	//Reset all keys
 	for(var i = 0; i < this.keys.length; i++)
 	{
