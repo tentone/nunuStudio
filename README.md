@@ -160,7 +160,8 @@ nunuStudio uses a number of open source projects to work properly
 	- Linux and Windows are supported
 	- Download the last release from the github repository and unzip it
 	- Run the start.sh or start.bat file (depending on your OS)
-- There is also a fully functional web version available on the project webpage
+- There is also a web version available on the project webpage
+	- The web version cant export projects
 
 ### Building
 - To build nunuStudio Java, NodeJS and Windows are required
