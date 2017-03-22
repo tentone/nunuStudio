@@ -180,14 +180,6 @@ Mesh2shape.createConvexPolyhedron = function(object)
 		return null;
 	}
 
-	//Perturb
-	/*for(i = 0; i < geometry.vertices.length; i++)
-	{
-		geometry.vertices[i].x +=(Math.random() - 0.5) * 1e-4;
-		geometry.vertices[i].y +=(Math.random() - 0.5) * 1e-4;
-		geometry.vertices[i].z +=(Math.random() - 0.5) * 1e-4;
-	}*/
-
 	//Compute the 3D convex hull
 	var hull = new quickhull()(geometry);
 

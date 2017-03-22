@@ -52,7 +52,7 @@ ContextMenu.prototype.destroy = function()
 	}
 };
 
-//Remove option from dropdown menu
+//Remove option from context menu
 ContextMenu.prototype.removeOption = function(index)
 {
 	if(index >= 0 && index < this.options.length)
@@ -62,7 +62,7 @@ ContextMenu.prototype.removeOption = function(index)
 	}
 };
 
-//Add new Option to dropdown menu
+//Add new option to context menu
 ContextMenu.prototype.addOption = function(name, callback)
 {
 	var button = new Button(this.element);
@@ -79,6 +79,26 @@ ContextMenu.prototype.addOption = function(name, callback)
 	});
 
 	this.options.push(button);
+};
+
+//Add new menu to context
+ContextMenu.prototype.addMenu = function(name)
+{
+	var menu = new DropdownMenu(this.element);
+	menu.setText(name);
+	menu.setLocation(DropdownMenu.LEFT);
+	menu.text.setAlignment(Text.LEFT);
+	menu.text.position.set(25, 0);
+
+	var arrow = new ImageBox(menu.element);
+	arrow.setImage("editor/files/icons/misc/arrow_right.png");
+	arrow.size.set(12, 12);
+	arrow.position.set(this.size.x - 20, 3);
+	menu.add(arrow);
+
+	this.options.push(menu);
+
+	return menu;
 };
 
 //Update interface
