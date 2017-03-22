@@ -225,6 +225,7 @@ function TreeElement(container)
 
 			if(!scene && !program)
 			{
+
 				//Create physics shape to match object
 				context.addOption("Add physics", function()
 				{
@@ -236,22 +237,27 @@ function TreeElement(container)
 					Editor.updateObjectViews();
 				});
 
+				var autoUpdate = context.addMenu("Static");
+
 				//Set object and children to static mode
-				context.addOption("Set static", function()
+				autoUpdate.addOption("Static", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, false);
 					Editor.updateObjectViews();
 				});
 
 				//Set object and children to dynamic mode
-				context.addOption("Set dynamic", function()
+				autoUpdate.addOption("Dynamic", function()
 				{
 					ObjectUtils.setMatrixAutoUpdate(self.obj, true);
 					Editor.updateObjectViews();
 				});
 
+
+				var shadow = context.addMenu("Shadows");
+
 				//Set object and children shadow casting mode
-				context.addOption("Enable shadows", function()
+				shadow.addOption("Enable", function()
 				{
 					ObjectUtils.setShadowCasting(self.obj, true);
 					ObjectUtils.setShadowReceiving(self.obj, true);
@@ -260,7 +266,7 @@ function TreeElement(container)
 				});
 
 				//Set object and children shadow casting mode
-				context.addOption("Disable shadows", function()
+				shadow.addOption("Disable", function()
 				{
 					ObjectUtils.setShadowCasting(self.obj, false);
 					ObjectUtils.setShadowReceiving(self.obj, false);

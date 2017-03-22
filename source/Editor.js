@@ -199,6 +199,7 @@ include("editor/ui/tab/ScriptEditor.js");
 include("editor/ui/tab/SceneEditor.js");
 include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
+include("editor/ui/tab/CameraTab.js");
 include("editor/ui/tab/settings/SettingsTab.js");
 include("editor/ui/tab/settings/CodeSettingsTab.js");
 include("editor/ui/tab/settings/GeneralSettingsTab.js");

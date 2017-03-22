@@ -2,7 +2,7 @@
 
 function CameraTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Console", "editor/files/icons/misc/console.png");
+	TabElement.call(this, parent, closeable, container, index, "Console", "editor/files/icons/camera/camera.png");
 
 	this.camera = null;
 
