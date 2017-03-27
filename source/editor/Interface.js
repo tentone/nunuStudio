@@ -924,7 +924,7 @@ Interface.initialize = function()
 			{
 				if(files.length > 0)
 				{
-					var code = FileSystem.readFile(files[0]);
+					var code = FileSystem.readFile(files[0].path);
 					var func = Function(code);
 					func();
 				}

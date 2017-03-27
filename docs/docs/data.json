@@ -9661,7 +9661,7 @@
         },
         {
             "file": "..\\source\\editor\\utils\\Mesh2shape.js",
-            "line": 211,
+            "line": 203,
             "description": "Create cylinder shape from geometry.",
             "itemtype": "method",
             "name": "createCylinderShape",
@@ -9681,7 +9681,7 @@
         },
         {
             "file": "..\\source\\editor\\utils\\Mesh2shape.js",
-            "line": 229,
+            "line": 221,
             "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingCylinderShape",
@@ -9701,7 +9701,7 @@
         },
         {
             "file": "..\\source\\editor\\utils\\Mesh2shape.js",
-            "line": 256,
+            "line": 248,
             "description": "Plane shape from geometry.",
             "itemtype": "method",
             "name": "createPlaneShape",
@@ -9721,7 +9721,7 @@
         },
         {
             "file": "..\\source\\editor\\utils\\Mesh2shape.js",
-            "line": 271,
+            "line": 263,
             "description": "Sphere shape from geometry.",
             "itemtype": "method",
             "name": "createSphereShape",
@@ -9741,7 +9741,7 @@
         },
         {
             "file": "..\\source\\editor\\utils\\Mesh2shape.js",
-            "line": 283,
+            "line": 275,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingSphereShape",
@@ -9761,7 +9761,7 @@
         },
         {
             "file": "..\\source\\editor\\utils\\Mesh2shape.js",
-            "line": 298,
+            "line": 290,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createTubeShape",
@@ -9781,7 +9781,7 @@
         },
         {
             "file": "..\\source\\editor\\utils\\Mesh2shape.js",
-            "line": 312,
+            "line": 304,
             "description": "Trimesh shape from geometry.",
             "itemtype": "method",
             "name": "createTrimeshShape",
@@ -9801,7 +9801,7 @@
         },
         {
             "file": "..\\source\\editor\\utils\\Mesh2shape.js",
-            "line": 332,
+            "line": 324,
             "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
             "itemtype": "method",
             "name": "getGeometry",
@@ -9821,7 +9821,7 @@
         },
         {
             "file": "..\\source\\editor\\utils\\Mesh2shape.js",
-            "line": 394,
+            "line": 386,
             "description": "Get geometry vertices.",
             "itemtype": "method",
             "name": "getVertices",
@@ -9841,7 +9841,7 @@
         },
         {
             "file": "..\\source\\editor\\utils\\Mesh2shape.js",
-            "line": 410,
+            "line": 402,
             "description": "Returns a array of THREE.Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
             "itemtype": "method",
             "name": "getMeshes",

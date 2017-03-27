@@ -203,7 +203,15 @@ function TreeElement(container)
 			{
 				context.addOption("Particle editor", openParticleTab);
 			}
-
+			else if(self.obj instanceof Program)
+			{
+				context.addOption("Add scene", function()
+				{
+					Editor.program.addDefaultScene();
+					Editor.updateObjectViews();
+				});			
+			}
+			
 			//Rename Object
 			context.addOption("Rename", function()
 			{
