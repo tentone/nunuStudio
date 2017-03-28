@@ -310,7 +310,7 @@ Editor.initialize = function()
 		document.onkeydown = function(event)
 		{
 			//If F1-F12 or CTRL+Key prevent default
-			if((event.keyCode > 112 && event.keyCode < 122) || (event.ctrlKey && allowedKeys.indexOf(event.keyCode) === -1))
+			if((event.keyCode > 112 && event.keyCode < 122) || (!event.altKey && event.ctrlKey && allowedKeys.indexOf(event.keyCode) === -1))
 			{
 				event.preventDefault();
 			}
