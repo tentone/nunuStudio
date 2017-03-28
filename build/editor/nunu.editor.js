@@ -35,7 +35,11 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.23 Alpha";
+<<<<<<< Updated upstream
 Nunu.TIMESTAMP = "201703272237";
+=======
+Nunu.TIMESTAMP = "201703281634";
+>>>>>>> Stashed changes
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -69943,7 +69947,7 @@ Editor.initialize = function() {
   if (!Nunu.runningOnDesktop()) {
     var a = [67, 86, 65, 88];
     document.onkeydown = function(b) {
-      (112 < b.keyCode && 122 > b.keyCode || b.ctrlKey && -1 === a.indexOf(b.keyCode)) && b.preventDefault();
+      (112 < b.keyCode && 122 > b.keyCode || !b.altKey && b.ctrlKey && -1 === a.indexOf(b.keyCode)) && b.preventDefault();
     };
   }
   if (void 0 !== Editor.gui) {
