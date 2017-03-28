@@ -28,11 +28,7 @@
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-<<<<<<< Updated upstream
-		"fontSize": 14,
-=======
 		"fontSize": 17,
->>>>>>> Stashed changes
 		"lineNumbers": true,
 		"lineWrapping": false,
 		"autoCloseBrackets": true,

@@ -42,11 +42,7 @@ Nunu.VERSION = "V0.8.9.23 Alpha";
  * @attribute TIMESTAMP
  * @type {String}
  */
-<<<<<<< Updated upstream
-Nunu.TIMESTAMP = "201703272237";
-=======
 Nunu.TIMESTAMP = "201703281634";
->>>>>>> Stashed changes
 
 /**
  * Check if host supports WebVR and if there is a VR display available.
