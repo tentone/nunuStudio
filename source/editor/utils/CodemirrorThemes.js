@@ -1,0 +1,47 @@
+"use strict";
+
+function CodemirrorThemes(){}
+
+CodemirrorThemes.list =
+[
+	"abcdef",
+	"ambiance",
+	"bespin",
+	"blackboard",
+	"cobalt",
+	"colorforth",
+	"dracula",
+	"eclipse",
+	"elegant",
+	"erlang-dark",
+	"hopscotch",
+	"icecoder",
+	"isotope",
+	"lesser-dark",
+	"liquibyte",
+	"material",
+	"mbo",
+	"mdn-like",
+	"midnight",
+	"monokai",
+	"neat",
+	"neo",
+	"night",
+	"paraiso-dark",
+	"paraiso-light",
+	"pastel-on-dark",
+	"railscasts",
+	"rubyblue",
+	"seti",
+	"solarized",
+	"the-matrix",
+	"tomorrow-night-bright",
+	"tomorrow-night-eighties",
+	"ttcn",
+	"twilight",
+	"vibrant-ink",
+	"xq-dark",
+	"xq-light",
+	"yeti",
+	"zenburn"
+];

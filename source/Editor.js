@@ -193,7 +193,6 @@ include("editor/files/style/editor.css");
 
 include("editor/theme/Theme.js");
 include("editor/theme/ThemeDark.js");
-include("editor/theme/CodemirrorThemes.js");
 
 include("editor/ui/tab/ScriptEditor.js");
 include("editor/ui/tab/SceneEditor.js");
@@ -267,6 +266,7 @@ include("editor/utils/Mesh2shape.js");
 include("editor/utils/FontRenderer.js");
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
+include("editor/utils/CodemirrorThemes.js");
 
 include("editor/history/History.js");
 include("editor/history/Action.js");
