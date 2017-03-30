@@ -1,6 +1,17 @@
 {
     "project": {},
     "files": {
+        "..\\source\\core\\controls\\VRControls.js": {
+            "name": "..\\source\\core\\controls\\VRControls.js",
+            "modules": {
+                "VirtualReality": 1
+            },
+            "classes": {
+                "VRControls": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\input\\Key.js": {
             "name": "..\\source\\core\\input\\Key.js",
             "modules": {
@@ -612,6 +623,20 @@
         }
     },
     "modules": {
+        "VirtualReality": {
+            "name": "VirtualReality",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "VRControls": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\source\\core\\controls\\VRControls.js",
+            "line": 3,
+            "description": "VRControl is used to get input from an HDM device.\n\nAn object can be attached to the VRControls object to be automatically updated with the HDM Movement."
+        },
         "Input": {
             "name": "Input",
             "submodules": {},
@@ -965,6 +990,33 @@
         }
     },
     "classes": {
+        "VRControls": {
+            "name": "VRControls",
+            "shortname": "VRControls",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "VirtualReality",
+            "file": "..\\source\\core\\controls\\VRControls.js",
+            "line": 3,
+            "description": "VRControl is used to get input from an HDM device.\n\nAn object can be attached to the VRControls object to be automatically updated with the HDM Movement.",
+            "is_constructor": 1,
+            "author": "dmarcos (https://github.com/dmarcos)",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to be attached.",
+                    "type": "Object3D"
+                },
+                {
+                    "name": "onError",
+                    "description": "onError callback.",
+                    "type": "Function"
+                }
+            ]
+        },
         "Key": {
             "name": "Key",
             "shortname": "Key",
@@ -974,6 +1026,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Input",
+            "namespace": "",
             "file": "..\\source\\core\\input\\Key.js",
             "line": 3,
             "description": "Key is used by Keyboard, Mouse, etc, to represent a key state.",
@@ -2544,9 +2597,52 @@
     "elements": {},
     "classitems": [
         {
+            "file": "..\\source\\core\\controls\\VRControls.js",
+            "line": 66,
+            "description": "Update VRControls object state.",
+            "itemtype": "method",
+            "name": "update",
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
+            "file": "..\\source\\core\\controls\\VRControls.js",
+            "line": 110,
+            "description": "Dispose object.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
+            "file": "..\\source\\core\\controls\\VRControls.js",
+            "line": 120,
+            "description": "Reset the HDM pose.",
+            "itemtype": "method",
+            "name": "resetPose",
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
+            "file": "..\\source\\core\\controls\\VRControls.js",
+            "line": 133,
+            "description": "Attach an object to the VRControls.",
+            "itemtype": "method",
+            "name": "attachObject",
+            "params": [
+                {
+                    "name": "Object",
+                    "description": "to be attached.",
+                    "type": "Object3D"
+                }
+            ],
+            "class": "VRControls",
+            "module": "VirtualReality"
+        },
+        {
             "file": "..\\source\\core\\input\\Key.js",
             "line": 11,
-            "description": "Indicates if this key is currently pressed",
+            "description": "Indicates if this key is currently pressed.",
             "itemtype": "property",
             "name": "pressed",
             "default": "false",
@@ -2557,7 +2653,7 @@
         {
             "file": "..\\source\\core\\input\\Key.js",
             "line": 17,
-            "description": "Indicates if this key was just pressed",
+            "description": "Indicates if this key was just pressed.",
             "itemtype": "property",
             "name": "justPressed",
             "default": "false",
@@ -2568,7 +2664,7 @@
         {
             "file": "..\\source\\core\\input\\Key.js",
             "line": 23,
-            "description": "Indicates if this key was just released",
+            "description": "Indicates if this key was just released.",
             "itemtype": "property",
             "name": "justReleased",
             "default": "false",
@@ -2609,7 +2705,7 @@
         {
             "file": "..\\source\\core\\input\\Key.js",
             "line": 55,
-            "description": "Update Key status based on new key state",
+            "description": "Update Key status based on new key state.",
             "itemtype": "method",
             "name": "update",
             "class": "Key",
@@ -2617,8 +2713,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 87,
-            "description": "Set this key attributes manually",
+            "line": 88,
+            "description": "Set this key attributes manually.",
             "itemtype": "method",
             "name": "set",
             "class": "Key",
@@ -2626,8 +2722,8 @@
         },
         {
             "file": "..\\source\\core\\input\\Key.js",
-            "line": 98,
-            "description": "Reset key to default values",
+            "line": 100,
+            "description": "Reset key to default values.",
             "itemtype": "method",
             "name": "reset",
             "class": "Key",
