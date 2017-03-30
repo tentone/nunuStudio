@@ -7,7 +7,7 @@ function BoundingBoxHelper(object, hex)
 	this.object = object;
 	this.box = new Box3();
 
-	Mesh.call(this, new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: color, wireframe: true}));
+	Mesh.call(this, new THREE.BoxBufferGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: color, wireframe: true}));
 }
 
 BoundingBoxHelper.prototype = Object.create(Mesh.prototype);
