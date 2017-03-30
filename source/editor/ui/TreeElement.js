@@ -379,6 +379,21 @@ function TreeElement(container)
 		{
 			openParticleTab();
 		}
+		else if(self.obj instanceof THREE.Camera)
+		{
+			openCameraTab();
+		}
+	};
+
+	var openCameraTab = function()
+	{
+		var tab = Interface.tab.getTab(CameraEditor, self.obj);
+		if(tab === null)
+		{
+			tab = Interface.tab.addTab(CameraEditor, true);
+			tab.attach(self.obj);
+		}
+		tab.select();
 	};
 
 	//Open new script tab

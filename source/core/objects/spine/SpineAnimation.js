@@ -18,17 +18,17 @@
  */
 
 /**
- * Array of SpineTextures used by the animation
+ * Array of SpineTextures used by the animation.
  * @property textures
  * @type {Array}
  */
 /**
- * Animation data
+ * Animation data.
  * @property json
  * @type {Object}
  */
 /**
- * Texture atlas information
+ * Texture atlas information.
  * @property atlas
  * @type {Object}
  */

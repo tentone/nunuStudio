@@ -106,6 +106,30 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.gridSpacing);
 	this.form.nextRow();
 
+	//Snap to grid
+	this.form.addText("Snap to grid");
+	this.snapToGrid = new CheckBox(this.form.element);
+	this.snapToGrid.size.set(20, 16);
+	this.snapToGrid.setOnChange(function()
+	{
+		Settings.editor.snapToGrid = self.snapToGrid.getValue();
+	});
+	this.form.add(this.snapToGrid);
+	this.form.nextRow();
+
+	//Snap angle
+	this.form.addText("Snap angle");
+	this.snapAngle = new NumberBox(this.form.element);
+	this.snapAngle.size.set(60, 18);
+	this.snapAngle.setRange(0.01, 3.14);
+	this.snapAngle.setStep(0.01);
+	this.snapAngle.setOnChange(function()
+	{
+		Settings.editor.snapAngle = self.snapAngle.getValue();
+	});
+	this.form.add(this.snapAngle);
+	this.form.nextRow();
+
 	//Enable Axis
 	this.form.addText("Show axis");
 	this.axisEnabled = new CheckBox(this.form.element);
@@ -204,6 +228,8 @@ GeneralSettingsTab.prototype.activate = function()
 	this.showUUID.setValue(Settings.general.showUUID);
 
 	//Editor
+	this.snapToGrid.setValue(Settings.editor.snapToGrid);
+	this.snapAngle.setValue(Settings.editor.snapAngle);
 	this.gridEnabled.setValue(Settings.editor.gridEnabled);
 	this.gridSize.setValue(Settings.editor.gridSize);
 	this.gridSpacing.setValue(Settings.editor.gridSpacing);

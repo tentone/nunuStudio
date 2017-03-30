@@ -2,7 +2,6 @@
 
 function Settings(){}
 
-//Constants
 Settings.RADIANS = 0;
 Settings.DEGREES = 1;
 
@@ -19,6 +18,8 @@ Settings.loadDefault = function()
 	//Editor
 	Settings.editor = {};
 	Settings.editor.angleFormat = Settings.RADIANS;
+	Settings.editor.snapToGrid = false;
+	Settings.editor.snapAngle = 0.1;
 	Settings.editor.gridSize = 500;
 	Settings.editor.gridSpacing = 5;
 	Settings.editor.gridEnabled = true;

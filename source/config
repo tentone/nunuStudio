@@ -7,6 +7,8 @@
 	},
 	"editor": {
 		"angleFormat": 0,
+		"snapToGrid": false,
+		"snapAngle": 0.1,
 		"gridSize": 500,
 		"gridSpacing": 5,
 		"gridEnabled": true,
