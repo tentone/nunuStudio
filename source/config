@@ -28,11 +28,7 @@
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-<<<<<<< HEAD
 		"fontSize": 14,
-=======
-		"fontSize": 17.105555267333983,
->>>>>>> master
 		"lineNumbers": true,
 		"lineWrapping": false,
 		"autoCloseBrackets": true,
