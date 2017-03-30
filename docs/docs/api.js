@@ -58,6 +58,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Text3D",
         "Texture",
         "TextureLoader",
+        "VRControls",
         "Vector3",
         "Video",
         "VideoLoader",
@@ -86,7 +87,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Script",
         "Sprite",
         "THREE",
-        "Textures"
+        "Textures",
+        "VirtualReality"
     ],
     "allModules": [
         {
@@ -198,6 +200,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "THREE",
             "name": "THREE",
             "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
+        },
+        {
+            "displayName": "VirtualReality",
+            "name": "VirtualReality",
+            "description": "VRControl is used to get input from an HDM device.\n\nAn object can be attached to the VRControls object to be automatically updated with the HDM Movement."
         }
     ],
     "elements": []
