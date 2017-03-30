@@ -1,0 +1,238 @@
+{
+	"metadata": {
+		"version": "V0.8.9.23 Alpha",
+		"type": "NunuProgram"
+	},
+	"geometries": [
+		{
+			"uuid": "D83FB7E2-4E51-4C54-A324-6165AE7B6AAD",
+			"type": "BoxBufferGeometry",
+			"name": "geometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		},
+		{
+			"uuid": "6C13F2EE-463C-4B35-84DD-F534E031A1EB",
+			"type": "BoxBufferGeometry",
+			"name": "geometry",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		}],
+	"materials": [
+		{
+			"uuid": "54EC16D8-6125-4BF1-9EA9-133BF0F644DE",
+			"type": "MeshStandardMaterial",
+			"name": "default",
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"color": 16777215,
+			"roughness": 0.6,
+			"metalness": 0.2,
+			"emissive": 0,
+			"aoMapIntensity": 1,
+			"morphTargets": false,
+			"morphNormals": false
+		}],
+	"textures": [],
+	"images": [],
+	"videos": [],
+	"audio": [],
+	"fonts": [],
+	"object": {
+		"uuid": "9E26396B-759B-4147-AA19-2CD7E6BF8A7E",
+		"type": "Program",
+		"name": "program",
+		"folded": false,
+		"hidden": false,
+		"castShadow": false,
+		"receiveShadow": false,
+		"visible": true,
+		"matrixAutoUpdate": false,
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+			{
+				"uuid": "C13D4F6E-236E-4937-BF69-C46212A784D3",
+				"type": "Scene",
+				"name": "scene",
+				"folded": false,
+				"hidden": false,
+				"castShadow": false,
+				"receiveShadow": false,
+				"visible": true,
+				"matrixAutoUpdate": false,
+				"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+				"children": [
+					{
+						"uuid": "25397C06-685B-416D-A3F9-E4E4ECBAA52E",
+						"type": "Sky",
+						"name": "sky",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"children": [],
+						"colorTop": [7844859,30463,220086,9273],
+						"colorBottom": [15461606,16777215,16705495,26023],
+						"sunColor": 16777130,
+						"moonColor": 5592507,
+						"autoUpdate": false,
+						"sunDistance": 100,
+						"dayTime": 120,
+						"time": 75,
+						"sun": {
+							"shadow": {
+								"bias": 0,
+								"radius": 1,
+								"mapSize": {
+									"x": 2048,
+									"y": 2048
+								},
+								"camera": {
+									"top": 20,
+									"bottom": -20,
+									"far": 10000,
+									"near": 0.5,
+									"left": -20,
+									"right": 20
+								}
+							}
+						}
+					},
+					{
+						"uuid": "D68F25B7-2318-4FFE-98EE-4DD37C86D80F",
+						"type": "Mesh",
+						"name": "ground",
+						"folded": false,
+						"hidden": false,
+						"castShadow": true,
+						"receiveShadow": true,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1000,0,0,0,0,1,0,0,0,0,1000,0,0,-1,0,1],
+						"geometry": "D83FB7E2-4E51-4C54-A324-6165AE7B6AAD",
+						"material": "54EC16D8-6125-4BF1-9EA9-133BF0F644DE"
+					},
+					{
+						"uuid": "A64E54FA-BCA3-4FB4-BE10-1D0CC3B5E007",
+						"type": "Physics",
+						"name": "box",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+						"children": [
+							{
+								"uuid": "C9E201B9-CF01-4D27-85F5-71A6CBB4C5AE",
+								"type": "Mesh",
+								"name": "cube",
+								"folded": false,
+								"hidden": false,
+								"castShadow": true,
+								"receiveShadow": true,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"geometry": "6C13F2EE-463C-4B35-84DD-F534E031A1EB",
+								"material": "54EC16D8-6125-4BF1-9EA9-133BF0F644DE"
+							},
+							{
+								"uuid": "C582978E-5BAB-4A77-B5FF-C6816822EAA5",
+								"type": "Script",
+								"name": "script",
+								"folded": false,
+								"hidden": false,
+								"castShadow": false,
+								"receiveShadow": false,
+								"visible": true,
+								"matrixAutoUpdate": true,
+								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+								"code": "var body;\n\nthis.initialize = function()\n{\n\tbody = self.parent.body;\n};\n\nthis.update = function()\n{\n\tif(Keyboard.keyPressed(Keyboard.A))\n\t{\n\t\tbody.velocity.x -= 0.2;\n\t}\n\tif(Keyboard.keyPressed(Keyboard.D))\n\t{\n\t\tbody.velocity.x += 0.2;\n\t}\n\tif(Keyboard.keyPressed(Keyboard.W))\n\t{\n\t\tbody.velocity.z -= 0.2;\n\t}\n\tif(Keyboard.keyPressed(Keyboard.S))\n\t{\n\t\tbody.velocity.z += 0.2;\n\t}\n\t\n\tif(Keyboard.keyJustPressed(Keyboard.SPACEBAR))\n\t{\n\t\tbody.velocity.y += 5;\n\t}\n};"
+							}],
+						"body": {
+							"type": 1,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 4,
+									"halfExtents": {
+										"x": 0.5,
+										"y": 0.5,
+										"z": 0.5
+									}
+								}]
+						}
+					},
+					{
+						"uuid": "2ACB8627-FF23-47AE-BDCD-B0E5B0146C8E",
+						"type": "Physics",
+						"name": "ground",
+						"folded": false,
+						"hidden": false,
+						"castShadow": false,
+						"receiveShadow": false,
+						"visible": true,
+						"matrixAutoUpdate": true,
+						"matrix": [1,0,0,0,0,0.0007963267107332639,-0.9999996829318347,0,0,0.9999996829318347,0.0007963267107332639,0,0,-0.5,0,1],
+						"body": {
+							"type": 4,
+							"mass": 1,
+							"linearDamping": 0.01,
+							"angularDamping": 0.01,
+							"allowSleep": true,
+							"sleepSpeedLimit": 0.1,
+							"sleepTimeLimit": 1,
+							"collisionFilterGroup": 1,
+							"collisionFilterMask": 1,
+							"fixedRotation": false,
+							"shapes": [
+								{
+									"type": 2
+								}]
+						}
+					}],
+				"cameras": [],
+				"world": {
+					"gravity": {
+						"x": 0,
+						"y": -9.8,
+						"z": 0
+					},
+					"quatNormalizeSkip": 0,
+					"quatNormalizeFast": false,
+					"solver": {
+						"tolerance": 0.05,
+						"iterations": 7
+					}
+				}
+			}],
+		"author": "",
+		"description": "",
+		"version": "0",
+		"lockPointer": false,
+		"vr": false,
+		"vrScale": 1,
+		"antialiasing": false,
+		"shadows": true,
+		"shadowsType": 2,
+		"toneMapping": 0,
+		"toneMappingExposure": 1,
+		"toneMappingWhitePoint": 1
+	}
+}
