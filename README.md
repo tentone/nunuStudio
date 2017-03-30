@@ -91,6 +91,7 @@
 - V0.8.9.23 Alpha
 	- Added support for STL files
 	- Fixed locked keys in Keyboard after alerts, prompts, etc
+	- Added support for nested menu in ContextMenus
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

@@ -9,7 +9,7 @@ function PhysicsObjectHelper(obj)
 
 	this.meshes = [];
 
-	this.material = new THREE.MeshBasicMaterial({color: 0x00ff00, wireframe: true});
+	this.material = new THREE.MeshBasicMaterial({color: 0x00FF00, wireframe: true});
 	this.sphere = new THREE.SphereBufferGeometry(1, 12, 12);
 	this.box = new THREE.BoxBufferGeometry(1, 1, 1);
 	this.plane = new THREE.PlaneBufferGeometry(100, 100, 20, 20);
@@ -93,14 +93,12 @@ PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
 		return false;
 	}
 
-	var geo = mesh.geometry;
+	var geometry = mesh.geometry;
 
-	return (geo instanceof THREE.SphereGeometry && shape instanceof CANNON.Sphere) ||
-	(geo instanceof THREE.BoxGeometry && shape instanceof CANNON.Box) ||
-	(geo instanceof THREE.PlaneGeometry && shape instanceof CANNON.Plane) ||
-	(geo.id === shape.geometryId && shape instanceof CANNON.ConvexPolyhedron) ||
-	(geo.id === shape.geometryId && shape instanceof CANNON.Trimesh) ||
-	(geo.id === shape.geometryId && shape instanceof CANNON.Heightfield);
+	return (geometry instanceof THREE.SphereGeometry && shape instanceof CANNON.Sphere) ||
+	(geometry instanceof THREE.BoxGeometry && shape instanceof CANNON.Box) ||
+	(geometry instanceof THREE.PlaneGeometry && shape instanceof CANNON.Plane) ||
+	(geometry.id === shape.geometryId && (shape instanceof CANNON.ConvexPolyhedron || shape instanceof CANNON.Trimesh) || shape instanceof CANNON.Heightfield);
 }
 
 PhysicsObjectHelper.prototype.createMesh = function(shape)
