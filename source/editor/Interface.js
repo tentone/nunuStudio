@@ -324,7 +324,7 @@ Interface.initialize = function()
 	//Add Text
 	Interface.addText = new Text(Interface.toolBar.element);
 	Interface.addText.setText("Add");
-	Interface.addText.position.set(Interface.toolBar.size.x/2, 240);
+	Interface.addText.position.set(Interface.toolBar.size.x / 2, 240);
 	Interface.addText.updateInterface();
 
 	//Add Models

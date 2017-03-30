@@ -1,6 +1,18 @@
 "use strict";
 
-//Based on VRControl created by dmarcos (https://github.com/dmarcos) and mrdoob (http://mrdoob.com)
+/**
+ * VRControl is used to get input from an HDM device.
+ * 
+ * An object can be attached to the VRControls object to be automatically updated with the HDM Movement.
+ *
+ * @class VRControls
+ * @constructor
+ * @module VirtualReality
+ * @author mrdoob (http://mrdoob.com)
+ * @author dmarcos (https://github.com/dmarcos)
+ * @param {Object3D} object  Object to be attached.
+ * @param {Function} onError onError callback.
+ */
 function VRControls(object, onError)
 {
 	this.vrInput = null;
@@ -51,7 +63,11 @@ function VRControls(object, onError)
 	}
 }
 
-//Update vr controls
+/**
+ * Update VRControls object state.
+ * 
+ * @method update
+ */
 VRControls.prototype.update = function()
 {
 	if(this.vrInput !== null)
@@ -91,13 +107,21 @@ VRControls.prototype.update = function()
 	}
 };
 
-//Dispose vr controls
+/**
+ * Dispose object.
+ * 
+ * @method dispose
+ */
 VRControls.prototype.dispose = function()
 {
 	this.vrInput = null;
 };
 
-//Reset pose
+/**
+ * Reset the HDM pose.
+ * 
+ * @method resetPose
+ */
 VRControls.prototype.resetPose = function()
 {
 	if(this.vrInput !== null)
@@ -106,7 +130,12 @@ VRControls.prototype.resetPose = function()
 	}
 };
 
-//Attach object to VRControls
+/**
+ * Attach an object to the VRControls.
+ *
+ * @method attachObject
+ * @param {Object3D} Object to be attached.
+ */
 VRControls.prototype.attachObject = function(object)
 {
 	this.object = object;

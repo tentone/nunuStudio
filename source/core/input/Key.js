@@ -9,19 +9,19 @@
 */
 
 /**
- * Indicates if this key is currently pressed
+ * Indicates if this key is currently pressed.
  * @property pressed
  * @default false
  * @type {boolean}
 */
 /**
- * Indicates if this key was just pressed
+ * Indicates if this key was just pressed.
  * @property justPressed
  * @default false
  * @type {boolean}
 */
 /**
- * Indicates if this key was just released
+ * Indicates if this key was just released.
  * @property justReleased
  * @default false
  * @type {boolean}
@@ -53,7 +53,8 @@ Key.UP = 1;
 Key.RESET = 0;
 
 /**
- * Update Key status based on new key state
+ * Update Key status based on new key state.
+ * 
  * @method update
  */
 Key.prototype.update = function(action)
@@ -85,7 +86,8 @@ Key.prototype.update = function(action)
 };
 
 /**
- * Set this key attributes manually
+ * Set this key attributes manually.
+ * 
  * @method set
  */
 Key.prototype.set = function(justPressed, pressed, justReleased)
@@ -96,7 +98,8 @@ Key.prototype.set = function(justPressed, pressed, justReleased)
 };
 
 /**
- * Reset key to default values
+ * Reset key to default values.
+ * 
  * @method reset
 */
 Key.prototype.reset = function()
