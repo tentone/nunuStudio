@@ -13,7 +13,7 @@
  */
 
 /**
- * Material used to render the sprite
+ * Material used to render the sprite.
  * @property material
  * @type {Material}
 */

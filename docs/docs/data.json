@@ -6370,7 +6370,7 @@
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 20,
-            "description": "Array of SpineTextures used by the animation",
+            "description": "Array of SpineTextures used by the animation.",
             "itemtype": "property",
             "name": "textures",
             "type": "{Array}",
@@ -6380,7 +6380,7 @@
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 25,
-            "description": "Animation data",
+            "description": "Animation data.",
             "itemtype": "property",
             "name": "json",
             "type": "{Object}",
@@ -6390,7 +6390,7 @@
         {
             "file": "..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 30,
-            "description": "Texture atlas information",
+            "description": "Texture atlas information.",
             "itemtype": "property",
             "name": "atlas",
             "type": "{Object}",
@@ -6481,7 +6481,7 @@
         {
             "file": "..\\source\\core\\objects\\sprite\\Sprite.js",
             "line": 15,
-            "description": "Material used to render the sprite",
+            "description": "Material used to render the sprite.",
             "itemtype": "property",
             "name": "material",
             "type": "{Material}",

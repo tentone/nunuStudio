@@ -12,6 +12,9 @@ function TransformControls(camera, canvas, mouse)
 	this.size = 1;
 	this.axis = null;
 
+	this.snap = false;
+	this.gridSpacing = 1;
+
 	var self = this;
 	
 	var mode = "translate";
@@ -45,6 +48,16 @@ function TransformControls(camera, canvas, mouse)
 	var lookAtMatrix = new THREE.Matrix4();
 	var eye = new THREE.Vector3();
 
+	var parentRotationMatrix  = new THREE.Matrix4();
+	var parentScale = new THREE.Vector3();
+
+	var worldPosition = new THREE.Vector3();
+	var worldRotation = new THREE.Euler();
+	var worldRotationMatrix = new THREE.Matrix4();
+
+	var camPosition = new THREE.Vector3();
+	var camRotation = new THREE.Euler();
+
 	var tempMatrix = new THREE.Matrix4();
 	var tempVector = new THREE.Vector3();
 	var tempQuaternion = new THREE.Quaternion();
@@ -61,15 +74,6 @@ function TransformControls(camera, canvas, mouse)
 	var oldPosition = new THREE.Vector3();
 	var oldScale = new THREE.Vector3();
 	var oldRotationMatrix = new THREE.Matrix4();
-
-	var parentRotationMatrix  = new THREE.Matrix4();
-	var parentScale = new THREE.Vector3();
-
-	var worldPosition = new THREE.Vector3();
-	var worldRotation = new THREE.Euler();
-	var worldRotationMatrix = new THREE.Matrix4();
-	var camPosition = new THREE.Vector3();
-	var camRotation = new THREE.Euler();
 
 	this.attach = function(object)
 	{
