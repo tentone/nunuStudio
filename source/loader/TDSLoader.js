@@ -23,21 +23,22 @@ THREE.TDSLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	var scope = this;
 
 	var loader = new THREE.FileLoader(this.manager);
-	loader.setMimeType("text/plain; charset=x-user-defined");
+	loader.setResponseType("arraybuffer");
 	loader.load(url, function(data)
 	{
+		console.log(data);
 		onLoad(scope.parse(data));
 	}, onProgress, onError);
 };
 
-THREE.TDSLoader.prototype.parse = function(data)
+THREE.TDSLoader.prototype.parse = function(arraybuffer)
 {
 	this.group = new THREE.Group();
 	this.position = 0;
 	this.materials = [];
 	this.meshes = [];
 
-	this.readFile(data);
+	this.readFile(arraybuffer);
 
 	for(var i = 0; i < this.meshes.length; i++)
 	{
@@ -47,9 +48,10 @@ THREE.TDSLoader.prototype.parse = function(data)
 	return this.group;
 };
 
-THREE.TDSLoader.prototype.readFile = function(fileContents)
+THREE.TDSLoader.prototype.readFile = function(arraybuffer)
 {
-	var data = new jDataView(fileContents, 0, undefined, true);
+	//var data = new jDataView(fileContents, 0, undefined, true);
+	var data = new DataView(arraybuffer);
 	var chunk = this.readChunk(data);
 
 	if(chunk.id === MLIBMAGIC || chunk.id === CMAGIC || chunk.id === M3DMAGIC)
@@ -137,7 +139,7 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 		{
 			var value = this.readByte(data);
 			console.log("   Wireframe: " + value);
-			//material.wireframe = true;
+			material.wireframe = true;
 		}
 		else if(next === MAT_TWO_SIDE)
 		{
@@ -487,7 +489,7 @@ THREE.TDSLoader.prototype.resetPosition = function(data, chunk)
 
 THREE.TDSLoader.prototype.readByte = function(data)
 {
-	var v = data.getUint8(this.position);
+	var v = data.getUint8(this.position, true);
 	this.position += 1;
 	return v;
 };
@@ -496,7 +498,7 @@ THREE.TDSLoader.prototype.readFloat = function(data)
 {
 	try
 	{
-		var v = data.getFloat32(this.position);
+		var v = data.getFloat32(this.position, true);
 		this.position += 4;
 		return v;
 	}
@@ -508,28 +510,28 @@ THREE.TDSLoader.prototype.readFloat = function(data)
 
 THREE.TDSLoader.prototype.readInt = function(data)
 {
-	var v = data.getInt32(this.position);
+	var v = data.getInt32(this.position, true);
 	this.position += 4;
 	return v;
 };
 
 THREE.TDSLoader.prototype.readShort = function(data)
 {
-	var v = data.getInt16(this.position);
+	var v = data.getInt16(this.position, true);
 	this.position += 2;
 	return v;
 };
 
 THREE.TDSLoader.prototype.readDWord = function(data)
 {
-	var v = data.getUint32(this.position);
+	var v = data.getUint32(this.position, true);
 	this.position += 4;
 	return v;
 };
 
 THREE.TDSLoader.prototype.readWord = function(data)
 {
-	var v = data.getUint16(this.position);
+	var v = data.getUint16(this.position, true);
 	this.position += 2;
 	return v;
 };
