@@ -231,9 +231,9 @@ function TreeElement(container)
 				});
 			}
 
-			if(!scene && !program)
-			{
 
+			if(self.obj instanceof THREE.Mesh)
+			{
 				//Create physics shape to match object
 				context.addOption("Add physics", function()
 				{
@@ -244,7 +244,10 @@ function TreeElement(container)
 					Editor.addToScene(physics);
 					Editor.updateObjectViews();
 				});
+			}
 
+			if(!scene && !program)
+			{
 				var autoUpdate = context.addMenu("Static");
 
 				//Set object and children to static mode
