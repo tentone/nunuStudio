@@ -92,6 +92,7 @@
 	- Added support for STL files
 	- Fixed locked keys in Keyboard after alerts, prompts, etc
 	- Added support for nested menu in ContextMenus
+	- Support for 3DS files
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

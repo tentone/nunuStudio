@@ -88,9 +88,8 @@ include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/BufferUtils.js");
 
-//Tests
-include("test/TDSLoader.js");
-include("test/jdataview.js");
+//Loader
+include("loader/TDSLoader.js");
 
 //Editor
 include("lib/codemirror/codemirror.min.js");
@@ -1195,7 +1194,7 @@ Editor.loadGeometry = function(file, onLoad)
 			var group = loader.parse(reader.result);
 			Editor.addToScene(group);
 		};
-		reader.readAsBinaryString(file);
+		reader.readAsArrayBuffer(file);
 	}
 	//Collada
 	else if(extension === "dae")
