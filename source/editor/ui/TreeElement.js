@@ -231,14 +231,45 @@ function TreeElement(container)
 				});
 			}
 
-
+			//Add physics object
 			if(self.obj instanceof THREE.Mesh)
 			{
-				//Create physics shape to match object
-				context.addOption("Add physics", function()
+				var physics = context.addMenu("Add physics");
+
+				physics.addOption("Box", function()
 				{
 					var physics = new PhysicsObject();
-					physics.addShape(Mesh2shape.createShape(self.obj));
+					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.BOX));
+					physics.name = self.obj.name;
+					
+					Editor.addToScene(physics);
+					Editor.updateObjectViews();
+				});
+
+				physics.addOption("Sphere", function()
+				{
+					var physics = new PhysicsObject();
+					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.SPHERE));
+					physics.name = self.obj.name;
+					
+					Editor.addToScene(physics);
+					Editor.updateObjectViews();
+				});
+
+				physics.addOption("ConvexHull", function()
+				{
+					var physics = new PhysicsObject();
+					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.HULL));
+					physics.name = self.obj.name;
+					
+					Editor.addToScene(physics);
+					Editor.updateObjectViews();
+				});
+
+				physics.addOption("Cylinder", function()
+				{
+					var physics = new PhysicsObject();
+					physics.addShape(Mesh2shape.createShape(self.obj, Mesh2shape.Type.CYLINDER));
 					physics.name = self.obj.name;
 					
 					Editor.addToScene(physics);

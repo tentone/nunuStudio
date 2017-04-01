@@ -132,12 +132,8 @@ Mesh2shape.createBoxShape = function(geometry)
  */
 Mesh2shape.createBoundingBoxShape = function(object)
 {
-	var localPosition, worldPosition;
-	
-	var helper = new THREE.BoundingBoxHelper(object);
-	helper.update();
-	
-	var box = helper.box;
+	var box = new Box3();
+	box.setFromObject(object);
 
 	if(!isFinite(box.min.lengthSq()))
 	{
@@ -147,13 +143,15 @@ Mesh2shape.createBoundingBoxShape = function(object)
 	var shape = new CANNON.Box(new CANNON.Vec3((box.max.x - box.min.x) / 2, (box.max.y - box.min.y) / 2, (box.max.z - box.min.z) / 2));
 
 	object.updateMatrixWorld();
-	worldPosition = new THREE.Vector3();
+
+	var worldPosition = new THREE.Vector3();
 	worldPosition.setFromMatrixPosition(object.matrixWorld);
-	localPosition = helper.position.sub(worldPosition);
+
+	/*var localPosition = helper.position.sub(worldPosition);
 	if(localPosition.lengthSq())
 	{
 		shape.offset = localPosition;
-	}
+	}*/
 
 	return shape;
 };
@@ -213,7 +211,7 @@ Mesh2shape.createCylinderShape = function(geometry)
 
 	var shape = new CANNON.Cylinder(params.radiusTop, params.radiusBottom, params.height, params.radialSegments);
 	shape.orientation = new CANNON.Quaternion();
-	shape.orientation.setFromEuler(THREE.Math.degToRad(-90), 0, 0, "XYZ").normalize();
+	shape.orientation.setFromEuler(0, 0, 0, "XYZ").normalize();
 
 	return shape;
 };
@@ -234,7 +232,8 @@ Mesh2shape.createBoundingCylinderShape = function(object)
 	var geometry = Mesh2shape.getGeometry(object);
 	geometry.computeBoundingBox();
 	geometry.computeBoundingSphere();
-	var height = geometry.boundingBox.max["y"] - geometry.boundingBox.min["y"];
+	
+	var height = geometry.boundingBox.max.y - geometry.boundingBox.min.y;
 	var radius = 0.5 * Math.max(geometry.boundingBox.max[minorAxes[0]] - geometry.boundingBox.min[minorAxes[0]],geometry.boundingBox.max[minorAxes[1]] - geometry.boundingBox.min[minorAxes[1]]);
 
 	//Create shape
