@@ -328,35 +328,37 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		object.userData = this.userData;
 	}
 
-	//If there is geometry store it
+	//Serialize geometry
 	if(this.geometry !== undefined)
 	{
-		if(meta.geometries[this.geometry.uuid] === undefined)
-		{
-			meta.geometries[this.geometry.uuid] = this.geometry.toJSON(meta);
-		}
-
-		object.geometry = this.geometry.uuid;
+		object.geometry = serialize(meta.geometries, this.geometry);
 	}
 
-	//If there is a material store it
+	//Serialize material
 	if(this.material !== undefined)
 	{
-		if(meta.materials[this.material.uuid] === undefined)
+		if(this.material instanceof THREE.Material)
 		{
-			meta.materials[this.material.uuid] = this.material.toJSON(meta);
+			object.material = serialize(meta.materials, this.material);
 		}
-
-		object.material = this.material.uuid;
+		else if(this.material instanceof Array)
+		{
+			var uuids = [];
+			for(var i = 0; i < this.material.length; i++)
+			{
+				uuids.push(serialize(meta.materials, this.material[i]));
+			}
+			object.material = uuids;
+		}
 	}
 
-	//Resource access callback
+	//resouceAccess callback
 	if(resourceAccess !== undefined)
 	{
 		resourceAccess(meta, object);
 	}
 
-	//Serialize children data
+	//Serialize children
 	if(recursive !== false && this.children.length > 0)
 	{
 		object.children = [];
@@ -384,6 +386,17 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 
 	output.object = object;
 	return output;
+
+	//Auxiliar function to add resource to respective library
+	function serialize(library, element)
+	{
+		if(library[element.uuid] === undefined)
+		{
+			library[element.uuid] = element.toJSON(meta);
+		}
+
+		return element.uuid;
+	}
 
 	//Extract data from the cache hash remove metadata on each item and return as array
 	function extractFromCache(cache)

@@ -102,20 +102,26 @@ ObjectUtils.getMaterials = function(obj, materials)
 			{
 				add(child.material);
 			}
-			else if(child.material instanceof THREE.MultiMaterial)
+			else if(child.material instanceof Array)
 			{
-				var array = child.material.materials;
-				for(var j = 0; j < array.length; j++)
+				for(var j = 0; j < child.material.length; j++)
 				{
-					add(array[j]);
+					add(child.material[j]);
 				}
 			}
-
-			if(child.materials !== undefined)
+			else if(child.materials instanceof Array)
 			{
 				for(var j = 0; j < child.materials.length; j++)
 				{
 					add(child.materials[j]);
+				}
+			}
+			else if(child.material instanceof THREE.MultiMaterial)
+			{
+				var materials = child.material.materials;
+				for(var j = 0; j < materials.length; j++)
+				{
+					add(materials[j]);
 				}
 			}
 		}
@@ -175,15 +181,30 @@ ObjectUtils.getTextures = function(obj, textures)
 			{
 				addFromMaterial(child.material);
 			}
+			else if(child.material instanceof Array)
+			{
+				for(var j = 0; j < child.material.length; j++)
+				{
+					addFromMaterial(child.material[j]);
+				}
+			}
+			else if(child.materials instanceof Array)
+			{
+				for(var j = 0; j < child.materials.length; j++)
+				{
+					addFromMaterial(child.materials[j]);
+				}
+			}
 			else if(child.material instanceof THREE.MultiMaterial)
 			{
-				var array = child.material.materials;
-				for(var j = 0; j < array.length; j++)
+				var materials = child.material.materials;
+				for(var j = 0; j < materials.length; j++)
 				{
-					addFromMaterial(array[j]);
+					addFromMaterial(materials[j]);
 				}
 			}
 		}
+
 		if(child.texture !== undefined)
 		{
 			add(child.texture);

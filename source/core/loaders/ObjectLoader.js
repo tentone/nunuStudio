@@ -413,10 +413,22 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 	function getMaterial(uuid)
 	{
+		if(uuid instanceof Array)
+		{
+			var array = [];
+			for(var i = 0; i < uuid.length; i++)
+			{
+				array.push(materials[uuid[i]]);
+			}
+			
+			return array;
+		}
+
 		if(materials[uuid] === undefined)
 		{
 			console.warn("ObjectLoader: Undefined material", uuid);
 		}
+
 		return materials[uuid];
 	}
 
@@ -578,7 +590,6 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.defaultScene = data.defaultScene;
 			}
-			
 			break;
 
 		case "LeapDevice":
@@ -771,11 +782,18 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 
 		case "Mesh":
-			object = new Mesh(getGeometry(data.geometry), getMaterial(data.material));
-			break;
-
 		case "SkinnedMesh":
-			object = new SkinnedMesh(getGeometry(data.geometry), getMaterial(data.material));
+			var geometry = getGeometry(data.geometry);
+			var material = getMaterial(data.material);
+
+			if(geometry.bones && geometry.bones.length > 0)
+			{
+				object = new SkinnedMesh(geometry, material);
+			}
+			else
+			{
+				object = new Mesh(geometry, material);
+			}
 			break;
 
 		case "LOD":
@@ -784,6 +802,14 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 		case "Line":
 			object = new THREE.Line(getGeometry(data.geometry), getMaterial(data.material), data.mode);
+			break;
+
+		case "LineLoop":
+			object = new THREE.LineLoop(getGeometry(data.geometry), getMaterial(data.material));
+			break;
+
+		case "LineSegments":
+			object = new THREE.LineSegments(getGeometry(data.geometry), getMaterial(data.material));
 			break;
 
 		case "PointCloud":
