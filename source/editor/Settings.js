@@ -18,7 +18,7 @@ Settings.loadDefault = function()
 	//Editor
 	Settings.editor = {};
 	Settings.editor.angleFormat = Settings.RADIANS;
-	Settings.editor.snapToGrid = false;
+	Settings.editor.snap = false;
 	Settings.editor.snapAngle = 0.1;
 	Settings.editor.gridSize = 500;
 	Settings.editor.gridSpacing = 5;

@@ -94,6 +94,8 @@
 	- Added support for nested menu in ContextMenus
 	- Support for 3DS files
 	- CircleGeometry
+- V0.8.9.24 Alpha
+	- Added snap to grid
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

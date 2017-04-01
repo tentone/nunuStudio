@@ -17,10 +17,27 @@
 	<!--Javascript-->
 	<script src="../../js/jquery-1.11.0.min.js"></script>
 	<script src="../../js/bootstrap.min.js"></script>
-	<script src="../../js/highlight.min.js"></script>
+	<script src="../../examples/nunu.min.js"></script>
+	<script>
+		var app, canvas;
+
+		function initialize()
+		{	
+			canvas = document.getElementById("canvas");
+			app = new NunuApp(canvas);
+			app.loadRunProgram("cameras.isp");
+		}
+
+		function resize()
+		{
+			canvas.width = canvas.offsetWidth;
+			canvas.height = canvas.offsetHeight;
+			app.resize();
+		}
+	</script>
 </head>
 
-<body>
+<body onload="initialize();" onresize="resize();">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse open" style="padding-top:8px; min-height:60px">
 		<div class="container">
@@ -76,7 +93,10 @@
 				<li><p>Resize mode: Defines how the camera is resized when the window size changes, if set to horizontal mode, the vertical size of the camera stays the same and the horizontal size changes on resize, if set to vertical mode, the horizontal stays locked and the vertical size changes.</p></li>
 			</ul>
 			
-			<img src="comparison.png" style="width:60%; margin-left:20%"></img>
+			<h3 class="black">Comparison</h3>
+			<p>In the demo bellow we can se booth a perspective camera (on the left) and a orthographic camera (on the right) in action.</p>
+			<p>To try this demo in the editor you can download the ISP project file <a href="cameras.isp">here</a>.</p>
+			<canvas id="canvas" width="800" height="480" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
 
 			<h3 class="black">Cube Camera</h3>
 			<p>Cube cameras are composed of 6 internal perspective cameras aligned to capture an entire 360 projection of the scene.</p>
