@@ -972,6 +972,8 @@ SceneEditor.prototype.selectTool = function(tool)
 			this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
 			this.tool.setMode("translate");
 			this.tool.setSpace(Settings.editor.transformationSpace);
+			this.tool.setTranslationSnap(5);
+			this.tool.setRotationSnap(THREE.Math.degToRad(15));
 		}
 		else if(this.toolMode === Editor.SCALE)
 		{
@@ -1001,71 +1003,73 @@ SceneEditor.prototype.selectObjectHelper = function()
 
 	if(Editor.selectedObject !== null)
 	{
+		var object = Editor.selectedObject;
+
 		//Camera
-		if(Editor.selectedObject instanceof THREE.Camera)
+		if(object instanceof THREE.Camera)
 		{
-			this.objectHelper.add(new THREE.CameraHelper(Editor.selectedObject));
-			this.objectHelper.add(new ObjectIconHelper(Editor.selectedObject, Interface.fileDir + "icons/camera/camera.png"));
+			this.objectHelper.add(new THREE.CameraHelper(object));
+			this.objectHelper.add(new ObjectIconHelper(object, Interface.fileDir + "icons/camera/camera.png"));
 		}
 		//Light
-		else if(Editor.selectedObject instanceof THREE.Light)
+		else if(object instanceof THREE.Light)
 		{
 			//Directional light
-			if(Editor.selectedObject instanceof THREE.DirectionalLight)
+			if(object instanceof THREE.DirectionalLight)
 			{
-				this.objectHelper.add(new THREE.DirectionalLightHelper(Editor.selectedObject, 1));
+				this.objectHelper.add(new THREE.DirectionalLightHelper(object, 1));
 			}
 			//Point light
-			else if(Editor.selectedObject instanceof THREE.PointLight)
+			else if(object instanceof THREE.PointLight)
 			{
-				this.objectHelper.add(new THREE.PointLightHelper(Editor.selectedObject, 1));
+				this.objectHelper.add(new THREE.PointLightHelper(object, 1));
 			}
 			//RectArea light
-			else if(Editor.selectedObject instanceof THREE.RectAreaLight)
+			else if(object instanceof THREE.RectAreaLight)
 			{
-				this.objectHelper.add(new RectAreaLightHelper(Editor.selectedObject));
+				this.objectHelper.add(new RectAreaLightHelper(object));
 			}
 			//Spot light
-			else if(Editor.selectedObject instanceof THREE.SpotLight)
+			else if(object instanceof THREE.SpotLight)
 			{
-				this.objectHelper.add(new THREE.SpotLightHelper(Editor.selectedObject));
+				this.objectHelper.add(new THREE.SpotLightHelper(object));
 			}
 			//Hemisphere light
-			else if(Editor.selectedObject instanceof THREE.HemisphereLight)
+			else if(object instanceof THREE.HemisphereLight)
 			{
-				this.objectHelper.add(new THREE.HemisphereLightHelper(Editor.selectedObject, 1));
+				this.objectHelper.add(new THREE.HemisphereLightHelper(object, 1));
 			}
 		}
 		//Particle
-		else if(Editor.selectedObject instanceof ParticleEmitter)
+		else if(object instanceof ParticleEmitter)
 		{
-			this.objectHelper.add(new ParticleEmitterHelper(Editor.selectedObject));
+			this.objectHelper.add(new ParticleEmitterHelper(object));
 		}
 		//Physics
-		else if(Editor.selectedObject instanceof PhysicsObject)
+		else if(object instanceof PhysicsObject)
 		{
-			this.objectHelper.add(new PhysicsObjectHelper(Editor.selectedObject));
+			this.objectHelper.add(new PhysicsObjectHelper(object));
 		}
 		//Script or Audio
-		else if(Editor.selectedObject instanceof Script || Editor.selectedObject instanceof THREE.Audio)
+		else if(object instanceof Script || object instanceof THREE.Audio)
 		{
-			this.objectHelper.add(new ObjectIconHelper(Editor.selectedObject, ObjectIcons.get(Editor.selectedObject.type)));
+			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 		//Animated Mesh
-		else if(Editor.selectedObject instanceof THREE.SkinnedMesh)
+		else if(object instanceof THREE.SkinnedMesh)
 		{
-			this.objectHelper.add(new WireframeHelper(Editor.selectedObject, 0xFFFF00));
-			this.objectHelper.add(new THREE.SkeletonHelper(Editor.selectedObject));
+			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
+			this.objectHelper.add(new THREE.SkeletonHelper(object));
 		}
 		//Mesh
-		else if(Editor.selectedObject instanceof THREE.Mesh)
+		else if(object instanceof THREE.Mesh)
 		{
-			this.objectHelper.add(new WireframeHelper(Editor.selectedObject, 0xFFFF00));
+			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
 		//Object 3D
-		else if(Editor.selectedObject instanceof THREE.Object3D)
+		else if(object instanceof THREE.Object3D)
 		{
-			this.objectHelper.add(new BoundingBoxHelper(Editor.selectedObject, 0xFFFF00));
+			this.objectHelper.add(new BoundingBoxHelper(object, 0x00FFFF));
 		}
 	}
 };

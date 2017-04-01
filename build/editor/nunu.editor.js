@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.23 Alpha";
-Nunu.TIMESTAMP = "201704010107";
+Nunu.TIMESTAMP = "201704011225";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -64051,15 +64051,17 @@ SceneEditor.prototype.selectTool = function(a) {
   void 0 !== a && (this.toolMode = a);
   this.toolContainer.removeAll();
   null !== this.tool && this.tool.dispose();
-  null !== Editor.selectedObject && this.toolMode !== Editor.SELECT ? (this.toolMode === Editor.MOVE ? (this.tool = new TransformControls(this.camera, this.canvas, this.mouse), this.tool.setMode("translate"), this.tool.setSpace(Settings.editor.transformationSpace)) : this.toolMode === Editor.SCALE ? (this.tool = new TransformControls(this.camera, this.canvas, this.mouse), this.tool.setMode("scale")) : this.toolMode === Editor.ROTATE && (this.tool = new TransformControls(this.camera, this.canvas, 
-  this.mouse), this.tool.setMode("rotate"), this.tool.setSpace(Settings.editor.transformationSpace)), this.tool.attach(Editor.selectedObject), this.toolContainer.add(this.tool)) : this.tool = null;
+  null !== Editor.selectedObject && this.toolMode !== Editor.SELECT ? (this.toolMode === Editor.MOVE ? (this.tool = new TransformControls(this.camera, this.canvas, this.mouse), this.tool.setMode("translate"), this.tool.setSpace(Settings.editor.transformationSpace), this.tool.setTranslationSnap(5), this.tool.setRotationSnap(THREE.Math.degToRad(15))) : this.toolMode === Editor.SCALE ? (this.tool = new TransformControls(this.camera, this.canvas, this.mouse), this.tool.setMode("scale")) : this.toolMode === 
+  Editor.ROTATE && (this.tool = new TransformControls(this.camera, this.canvas, this.mouse), this.tool.setMode("rotate"), this.tool.setSpace(Settings.editor.transformationSpace)), this.tool.attach(Editor.selectedObject), this.toolContainer.add(this.tool)) : this.tool = null;
 };
 SceneEditor.prototype.selectObjectHelper = function() {
   this.objectHelper.removeAll();
-  null !== Editor.selectedObject && (Editor.selectedObject instanceof THREE.Camera ? (this.objectHelper.add(new THREE.CameraHelper(Editor.selectedObject)), this.objectHelper.add(new ObjectIconHelper(Editor.selectedObject, Interface.fileDir + "icons/camera/camera.png"))) : Editor.selectedObject instanceof THREE.Light ? Editor.selectedObject instanceof THREE.DirectionalLight ? this.objectHelper.add(new THREE.DirectionalLightHelper(Editor.selectedObject, 1)) : Editor.selectedObject instanceof THREE.PointLight ? 
-  this.objectHelper.add(new THREE.PointLightHelper(Editor.selectedObject, 1)) : Editor.selectedObject instanceof THREE.RectAreaLight ? this.objectHelper.add(new RectAreaLightHelper(Editor.selectedObject)) : Editor.selectedObject instanceof THREE.SpotLight ? this.objectHelper.add(new THREE.SpotLightHelper(Editor.selectedObject)) : Editor.selectedObject instanceof THREE.HemisphereLight && this.objectHelper.add(new THREE.HemisphereLightHelper(Editor.selectedObject, 1)) : Editor.selectedObject instanceof 
-  ParticleEmitter ? this.objectHelper.add(new ParticleEmitterHelper(Editor.selectedObject)) : Editor.selectedObject instanceof PhysicsObject ? this.objectHelper.add(new PhysicsObjectHelper(Editor.selectedObject)) : Editor.selectedObject instanceof Script || Editor.selectedObject instanceof THREE.Audio ? this.objectHelper.add(new ObjectIconHelper(Editor.selectedObject, ObjectIcons.get(Editor.selectedObject.type))) : Editor.selectedObject instanceof THREE.SkinnedMesh ? (this.objectHelper.add(new WireframeHelper(Editor.selectedObject, 
-  16776960)), this.objectHelper.add(new THREE.SkeletonHelper(Editor.selectedObject))) : Editor.selectedObject instanceof THREE.Mesh ? this.objectHelper.add(new WireframeHelper(Editor.selectedObject, 16776960)) : Editor.selectedObject instanceof THREE.Object3D && this.objectHelper.add(new BoundingBoxHelper(Editor.selectedObject, 16776960)));
+  if (null !== Editor.selectedObject) {
+    var a = Editor.selectedObject;
+    a instanceof THREE.Camera ? (this.objectHelper.add(new THREE.CameraHelper(a)), this.objectHelper.add(new ObjectIconHelper(a, Interface.fileDir + "icons/camera/camera.png"))) : a instanceof THREE.Light ? a instanceof THREE.DirectionalLight ? this.objectHelper.add(new THREE.DirectionalLightHelper(a, 1)) : a instanceof THREE.PointLight ? this.objectHelper.add(new THREE.PointLightHelper(a, 1)) : a instanceof THREE.RectAreaLight ? this.objectHelper.add(new RectAreaLightHelper(a)) : a instanceof THREE.SpotLight ? 
+    this.objectHelper.add(new THREE.SpotLightHelper(a)) : a instanceof THREE.HemisphereLight && this.objectHelper.add(new THREE.HemisphereLightHelper(a, 1)) : a instanceof ParticleEmitter ? this.objectHelper.add(new ParticleEmitterHelper(a)) : a instanceof PhysicsObject ? this.objectHelper.add(new PhysicsObjectHelper(a)) : a instanceof Script || a instanceof THREE.Audio ? this.objectHelper.add(new ObjectIconHelper(a, ObjectIcons.get(a.type))) : a instanceof THREE.SkinnedMesh ? (this.objectHelper.add(new WireframeHelper(a, 
+    16776960)), this.objectHelper.add(new THREE.SkeletonHelper(a))) : a instanceof THREE.Mesh ? this.objectHelper.add(new WireframeHelper(a, 16776960)) : a instanceof THREE.Object3D && this.objectHelper.add(new BoundingBoxHelper(a, 65535));
+  }
 };
 SceneEditor.prototype.resizeCamera = function() {
   null !== this.canvas && null !== this.renderer && (this.renderer.setSize(this.canvas.width, this.canvas.height), this.camera.aspect = this.canvas.width / this.canvas.height, this.camera.updateProjectionMatrix(), this.state === SceneEditor.TESTING && this.programRunning.resize(this.canvas.width, this.canvas.height));
@@ -68070,7 +68072,8 @@ function GeometryForm() {
 }
 GeometryForm.create = function(a, b) {
   return b.geometry instanceof THREE.BoxGeometry || b.geometry instanceof THREE.BoxBufferGeometry ? new BoxGeometryForm(a, b) : b.geometry instanceof THREE.SphereGeometry || b.geometry instanceof THREE.SphereBufferGeometry ? new SphereGeometryForm(a, b) : b.geometry instanceof THREE.TorusGeometry || b.geometry instanceof THREE.TorusBufferGeometry ? new TorusGeometryForm(a, b) : b.geometry instanceof THREE.PlaneGeometry || b.geometry instanceof THREE.PlaneBufferGeometry ? new PlaneGeometryForm(a, 
-  b) : b.geometry instanceof THREE.ConeGeometry || b.geometry instanceof THREE.ConeBufferGeometry ? new ConeGeometryForm(a, b) : b.geometry instanceof THREE.CylinderGeometry || b.geometry instanceof THREE.CylinderBufferGeometry ? new CylinderGeometryForm(a, b) : b.geometry instanceof THREE.TetrahedronGeometry || b.geometry instanceof THREE.TetrahedronBufferGeometry ? new TetrahedronGeometryForm(a, b) : null;
+  b) : b.geometry instanceof THREE.ConeGeometry || b.geometry instanceof THREE.ConeBufferGeometry ? new ConeGeometryForm(a, b) : b.geometry instanceof THREE.CylinderGeometry || b.geometry instanceof THREE.CylinderBufferGeometry ? new CylinderGeometryForm(a, b) : b.geometry instanceof THREE.TetrahedronGeometry || b.geometry instanceof THREE.TetrahedronBufferGeometry ? new TetrahedronGeometryForm(a, b) : b.geometry instanceof THREE.CircleGeometry || b.geometry instanceof THREE.CircleBufferGeometry ? 
+  new CircleGeometryForm(a, b) : null;
 };
 function BoxGeometryForm(a, b) {
   this.form = a;
@@ -68473,6 +68476,64 @@ TetrahedronGeometryForm.prototype.updateValues = function() {
   this.detail.setValue(this.obj.geometry.parameters.detail || 1);
   this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
 };
+function CircleGeometryForm(a, b) {
+  this.form = a;
+  this.obj = b;
+  var e = this;
+  a = function() {
+    e.updateGeometry();
+  };
+  this.form.addText("Circle Geometry");
+  this.form.nextRow();
+  this.form.addText("Radius", !0);
+  this.radius = new NumberBox(this.form.element);
+  this.radius.size.set(40, 18);
+  this.radius.setStep(.1);
+  this.radius.setRange(0, Number.MAX_SAFE_INTEGER);
+  this.radius.setOnChange(a);
+  this.form.add(this.radius);
+  this.form.nextRow();
+  this.form.addText("Segments", !0);
+  this.segments = new NumberBox(this.form.element);
+  this.segments.size.set(40, 18);
+  this.segments.setStep(1);
+  this.segments.setRange(0, Number.MAX_SAFE_INTEGER);
+  this.segments.setOnChange(a);
+  this.form.add(this.segments);
+  this.form.nextRow();
+  this.form.addText("Theta start", !0);
+  this.thetaStart = new NumberBox(this.form.element);
+  this.thetaStart.size.set(40, 18);
+  this.thetaStart.setStep(.1);
+  this.thetaStart.setOnChange(a);
+  this.form.add(this.thetaStart);
+  this.form.nextRow();
+  this.form.addText("Theta length", !0);
+  this.thetaLength = new NumberBox(this.form.element);
+  this.thetaLength.size.set(40, 18);
+  this.thetaLength.setStep(.1);
+  this.thetaLength.setOnChange(a);
+  this.form.add(this.thetaLength);
+  this.form.nextRow();
+  this.buffer = new CheckBox(this.form.element);
+  this.form.addText("Buffered");
+  this.buffer.size.set(20, 15);
+  this.buffer.setOnChange(a);
+  this.form.add(this.buffer);
+  this.form.nextRow();
+  this.updateValues();
+}
+CircleGeometryForm.prototype.updateGeometry = function() {
+  this.obj.geometry.dispose();
+  this.buffer.getValue() ? this.obj.geometry = new CircleBufferGeometry(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue()) : this.obj.geometry = new CircleGeometry(this.radius.getValue(), this.segments.getValue(), this.thetaStart.getValue(), this.thetaLength.getValue());
+};
+CircleGeometryForm.prototype.updateValues = function() {
+  this.radius.setValue(this.obj.geometry.parameters.radius || 1);
+  this.segments.setValue(this.obj.geometry.parameters.segments || 32);
+  this.thetaStart.setValue(this.obj.geometry.parameters.thetaStart || 0);
+  this.thetaLength.setValue(this.obj.geometry.parameters.thetaLength || 2 * Math.PI);
+  this.buffer.setValue(this.obj.geometry instanceof THREE.BufferGeometry);
+};
 function TransformControls(a, b, e) {
   function d() {
     if (null !== g.object && !0 !== l) {
@@ -68495,7 +68556,8 @@ function TransformControls(a, b, e) {
   this.size = 1;
   this.axis = null;
   this.snap = !1;
-  this.gridSpacing = 1;
+  this.translationSnap = 1;
+  this.rotationSnap = 0;
   var g = this, k = "translate", l = !1, n = !1, m = {translate:new TransformGizmoTranslate, rotate:new TransformGizmoRotate, scale:new TransformGizmoScale}, p;
   for (p in m) {
     var h = m[p];
@@ -68505,14 +68567,14 @@ function TransformControls(a, b, e) {
   var t = new THREE.Raycaster, v = new THREE.Vector2, u = new THREE.Vector3, x = new THREE.Vector3, y = new THREE.Vector3, r = new THREE.Vector3, w = 1, A = new THREE.Matrix4, B = new THREE.Vector3, D = new THREE.Matrix4, G = new THREE.Vector3, z = new THREE.Vector3, C = new THREE.Euler, H = new THREE.Matrix4, M = new THREE.Vector3, R = new THREE.Euler, N = new THREE.Matrix4, L = new THREE.Vector3, I = new THREE.Quaternion, F = new THREE.Vector3(1, 0, 0), X = new THREE.Vector3(0, 1, 0), J = new THREE.Vector3(0, 
   0, 1), K = new THREE.Quaternion, ga = new THREE.Quaternion, V = new THREE.Quaternion, Z = new THREE.Quaternion, P = new THREE.Quaternion, S = new THREE.Vector3, T = new THREE.Vector3, ra = new THREE.Matrix4;
   this.attach = function(a) {
-    this.object = a;
-    this.visible = !0;
-    this.updateScale();
+    g.object = a;
+    g.visible = !0;
+    g.updateScale();
   };
   this.detach = function() {
-    this.object = null;
-    this.visible = !1;
-    this.axis = null;
+    g.object = null;
+    g.visible = !1;
+    g.axis = null;
   };
   this.getMode = function() {
     return k;
@@ -68523,15 +68585,21 @@ function TransformControls(a, b, e) {
     for (var b in m) {
       m[b].visible = b === k;
     }
-    this.updateScale();
+    g.updateScale();
   };
   this.setSize = function(a) {
-    this.size = a;
-    this.updateScale();
+    g.size = a;
+    g.updateScale();
   };
   this.setSpace = function(a) {
-    this.space = a;
-    this.updateScale();
+    g.space = a;
+    g.updateScale();
+  };
+  this.setTranslationSnap = function(a) {
+    g.translationSnap = a;
+  };
+  this.setRotationSnap = function(a) {
+    g.rotationSnap = a;
   };
   this.update = function() {
     if (e.buttonJustPressed(Mouse.LEFT) && null !== g.object && !0 !== l) {
@@ -68563,11 +68631,11 @@ function TransformControls(a, b, e) {
         g.updateScale();
       }
     }
-    this.updateScale();
+    g.updateScale();
     return n;
   };
   this.updateScale = function() {
-    null !== this.object && (z.setFromMatrixPosition(this.object.matrixWorld), C.setFromRotationMatrix(N.extractRotation(this.object.matrixWorld)), M.setFromMatrixPosition(a.matrixWorld), R.setFromRotationMatrix(N.extractRotation(a.matrixWorld)), this.position.copy(z), w = a instanceof THREE.PerspectiveCamera ? z.distanceTo(M) / 6 * this.size : a.size / 6 * this.size, this.scale.set(w, w, w), B.copy(M).sub(z).normalize(), "local" === this.space ? m[k].update(C, B) : "world" === this.space && m[k].update(new THREE.Euler, 
+    null !== g.object && (z.setFromMatrixPosition(this.object.matrixWorld), C.setFromRotationMatrix(N.extractRotation(this.object.matrixWorld)), M.setFromMatrixPosition(a.matrixWorld), R.setFromRotationMatrix(N.extractRotation(a.matrixWorld)), g.position.copy(z), w = a instanceof THREE.PerspectiveCamera ? z.distanceTo(M) / 6 * g.size : a.size / 6 * g.size, g.scale.set(w, w, w), B.copy(M).sub(z).normalize(), "local" === g.space ? m[k].update(C, B) : "world" === g.space && m[k].update(new THREE.Euler, 
     B), m[k].highlight(this.axis));
   };
 }
@@ -68874,12 +68942,12 @@ function BoundingBoxHelper(a, b) {
   this.object = a;
   this.box = new Box3;
   Mesh.call(this, new THREE.BoxBufferGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color:b, wireframe:!0}));
-}
-BoundingBoxHelper.prototype = Object.create(Mesh.prototype);
-BoundingBoxHelper.prototype.update = function() {
   this.box.setFromObject(this.object);
   this.box.getSize(this.scale);
   this.box.getCenter(this.position);
+}
+BoundingBoxHelper.prototype = Object.create(Mesh.prototype);
+BoundingBoxHelper.prototype.update = function() {
 };
 function GridHelper(a, b, e) {
   this.size = void 0 !== a ? a : 100;
@@ -69317,6 +69385,11 @@ Interface.initialize = function() {
     var a = new Text3D("text", Editor.defaultMaterial, Editor.defaultFont);
     Editor.addToScene(a);
   }, "3D Text");
+  Interface.addModel.addOption(Interface.fileDir + "icons/models/pyramid.png", function() {
+    var a = new THREE.TetrahedronGeometry(1, 0), a = new Mesh(a, Editor.defaultMaterial);
+    a.name = "tetrahedron";
+    Editor.addToScene(a);
+  }, "Tetrahedron");
   Interface.addModel.addOption(Interface.fileDir + "icons/models/plane.png", function() {
     var a = new THREE.PlaneBufferGeometry(1, 1), a = new Mesh(a, Editor.defaultMaterial);
     a.receiveShadow = !0;
@@ -69324,11 +69397,13 @@ Interface.initialize = function() {
     a.name = "plane";
     Editor.addToScene(a);
   }, "Plane");
-  Interface.addModel.addOption(Interface.fileDir + "icons/models/pyramid.png", function() {
-    var a = new THREE.TetrahedronGeometry(1, 0), a = new Mesh(a, Editor.defaultMaterial);
-    a.name = "tetrahedron";
+  Interface.addModel.addOption(Interface.fileDir + "icons/models/circle.png", function() {
+    var a = new THREE.CircleBufferGeometry(1, 32), a = new Mesh(a, Editor.defaultMaterial);
+    a.receiveShadow = !0;
+    a.castShadow = !0;
+    a.name = "circle";
     Editor.addToScene(a);
-  }, "Tetrahedron");
+  }, "Cicle");
   Interface.addLight = new ButtonDrawer;
   Interface.addLight.setImage(Interface.fileDir + "icons/lights/point.png");
   Interface.addLight.imageScale.set(.7, .7);

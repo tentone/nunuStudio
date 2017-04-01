@@ -18,7 +18,7 @@ function BoxGeometryForm(form, obj)
 	this.form.nextRow();
 	
 	//Size
-	this.form.addText("Size")
+	this.form.addText("Size");
 	this.form.addText("X", true);
 	this.width = new NumberBox(this.form.element);
 	this.width.size.set(40, 18);
@@ -42,7 +42,7 @@ function BoxGeometryForm(form, obj)
 	this.form.nextRow();
 
 	//Segments
-	this.form.addText("Segments")
+	this.form.addText("Segments");
 	this.form.addText("X", true);
 	this.widthSegments = new NumberBox(this.form.element);
 	this.widthSegments.size.set(40, 18);

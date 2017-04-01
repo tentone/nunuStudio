@@ -32,6 +32,10 @@ GeometryForm.create = function(form, obj)
 	{
 		return new TetrahedronGeometryForm(form, obj);
 	}
-	
+	else if(obj.geometry instanceof THREE.CircleGeometry || obj.geometry instanceof THREE.CircleBufferGeometry)
+	{
+		return new CircleGeometryForm(form, obj);
+	}
+
 	return null;
 };
