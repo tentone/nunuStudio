@@ -13,7 +13,8 @@ function TransformControls(camera, canvas, mouse)
 	this.axis = null;
 
 	this.snap = false;
-	this.gridSpacing = 1;
+	this.translationSnap = 1;
+	this.rotationSnap = 0;
 
 	var self = this;
 	
@@ -77,16 +78,16 @@ function TransformControls(camera, canvas, mouse)
 
 	this.attach = function(object)
 	{
-		this.object = object;
-		this.visible = true;
-		this.updateScale();
+		self.object = object;
+		self.visible = true;
+		self.updateScale();
 	};
 
 	this.detach = function()
 	{
-		this.object = null;
-		this.visible = false;
-		this.axis = null;
+		self.object = null;
+		self.visible = false;
+		self.axis = null;
 	};
 
 	this.getMode = function()
@@ -108,19 +109,29 @@ function TransformControls(camera, canvas, mouse)
 			gizmo[type].visible = (type === mode);
 		}
 
-		this.updateScale();
+		self.updateScale();
 	};
 
 	this.setSize = function(size)
 	{
-		this.size = size;
-		this.updateScale();
+		self.size = size;
+		self.updateScale();
 	};
 
 	this.setSpace = function(space)
 	{
-		this.space = space;
-		this.updateScale();
+		self.space = space;
+		self.updateScale();
+	};
+
+	this.setTranslationSnap = function(translationSnap)
+	{
+		self.translationSnap = translationSnap;
+	};
+
+	this.setRotationSnap = function(rotationSnap)
+	{
+		self.rotationSnap = rotationSnap;
 	};
 
 	this.update = function()
@@ -141,14 +152,14 @@ function TransformControls(camera, canvas, mouse)
 			onPointerMove();
 		}
 
-		this.updateScale();
+		self.updateScale();
 
 		return editing;
 	};
 
 	this.updateScale = function()
 	{
-		if(this.object === null)
+		if(self.object === null)
 		{
 			return;
 		}
@@ -161,26 +172,26 @@ function TransformControls(camera, canvas, mouse)
 		camPosition.setFromMatrixPosition(camera.matrixWorld);
 		camRotation.setFromRotationMatrix(tempMatrix.extractRotation(camera.matrixWorld));
 
-		this.position.copy(worldPosition);
+		self.position.copy(worldPosition);
 
 		if(camera instanceof THREE.PerspectiveCamera)
 		{
-			scale = worldPosition.distanceTo(camPosition) / 6 * this.size;
-			this.scale.set(scale, scale, scale);
+			scale = worldPosition.distanceTo(camPosition) / 6 * self.size;
+			self.scale.set(scale, scale, scale);
 		}
 		else
 		{
-			scale = camera.size / 6 * this.size;
-			this.scale.set(scale, scale, scale);
+			scale = camera.size / 6 * self.size;
+			self.scale.set(scale, scale, scale);
 		}
 		
 		eye.copy(camPosition).sub(worldPosition).normalize();
 
-		if(this.space === "local")
+		if(self.space === "local")
 		{
 			gizmo[mode].update(worldRotation, eye);
 		}
-		else if(this.space === "world")
+		else if(self.space === "world")
 		{
 			gizmo[mode].update(new THREE.Euler(), eye);
 		}

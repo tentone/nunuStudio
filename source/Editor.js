@@ -245,6 +245,7 @@ include("editor/ui/panels/mesh/geometry/PlaneGeometryForm.js");
 include("editor/ui/panels/mesh/geometry/ConeGeometryForm.js");
 include("editor/ui/panels/mesh/geometry/CylinderGeometryForm.js");
 include("editor/ui/panels/mesh/geometry/TetrahedronGeometryForm.js");
+include("editor/ui/panels/mesh/geometry/CircleGeometryForm.js");
 
 include("editor/tools/TransformControls.js");
 include("editor/tools/GizmoMaterial.js");

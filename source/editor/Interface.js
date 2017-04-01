@@ -389,6 +389,15 @@ Interface.initialize = function()
 		Editor.addToScene(model);
 	}, "3D Text");
 
+	//Tetrahedron
+	Interface.addModel.addOption(Interface.fileDir + "icons/models/pyramid.png", function()
+	{
+		var geometry = new THREE.TetrahedronGeometry(1, 0);
+		var model = new Mesh(geometry, Editor.defaultMaterial);
+		model.name = "tetrahedron";
+		Editor.addToScene(model);
+	}, "Tetrahedron");
+
 	//Plane
 	Interface.addModel.addOption(Interface.fileDir + "icons/models/plane.png", function()
 	{
@@ -400,14 +409,16 @@ Interface.initialize = function()
 		Editor.addToScene(model);
 	}, "Plane");
 
-	//Tetrahedron
-	Interface.addModel.addOption(Interface.fileDir + "icons/models/pyramid.png", function()
+	//Circle
+	Interface.addModel.addOption(Interface.fileDir + "icons/models/circle.png", function()
 	{
-		var geometry = new THREE.TetrahedronGeometry(1, 0);
+		var geometry = new THREE.CircleBufferGeometry(1, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
-		model.name = "tetrahedron";
+		model.receiveShadow = true;
+		model.castShadow = true;
+		model.name = "circle";
 		Editor.addToScene(model);
-	}, "Tetrahedron");
+	}, "Cicle");
 
 	//Add lights
 	Interface.addLight = new ButtonDrawer();
