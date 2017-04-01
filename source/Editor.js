@@ -87,6 +87,7 @@ include("core/utils/ArraybufferUtils.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/BufferUtils.js");
+include("core/utils/Mesh2shape.js");
 
 //Loader
 include("loader/TDSLoader.js");
@@ -261,7 +262,6 @@ include("editor/helpers/BoundingBoxHelper.js");
 include("editor/helpers/GridHelper.js");
 include("editor/helpers/RectAreaLightHelper.js");
 
-include("editor/utils/Mesh2shape.js");
 include("editor/utils/FontRenderer.js");
 include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");

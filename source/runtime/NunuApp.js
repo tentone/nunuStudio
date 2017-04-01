@@ -87,6 +87,7 @@ include("core/utils/ArraybufferUtils.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/BufferUtils.js");
+include("core/utils/Mesh2shape.js");
 
 /**
  * NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere

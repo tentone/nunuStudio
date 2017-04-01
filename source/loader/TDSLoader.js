@@ -1,15 +1,18 @@
 /**
- * Autodesk 3DS threee.js file loader based on lib3ds
+ * Autodesk 3DS threee.js file loader based on lib3ds.
  * 
- * @author @tentone
+ * Loads geometry with uv and materials basic properties.
+ * 
  * @author @timknip
+ * @author @tentone
  */
 
 "use strict";
 
 THREE.TDSLoader = function(manager)
 {
-	this.manager = (manager !==undefined) ? manager : THREE.DefaultLoadingManager;
+	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+	this.debug = true;
 
 	this.group = null;
 	this.position = 0;
@@ -26,7 +29,6 @@ THREE.TDSLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	loader.setResponseType("arraybuffer");
 	loader.load(url, function(data)
 	{
-		console.log(data);
 		onLoad(scope.parse(data));
 	}, onProgress, onError);
 };
@@ -50,7 +52,6 @@ THREE.TDSLoader.prototype.parse = function(arraybuffer)
 
 THREE.TDSLoader.prototype.readFile = function(arraybuffer)
 {
-	//var data = new jDataView(fileContents, 0, undefined, true);
 	var data = new DataView(arraybuffer);
 	var chunk = this.readChunk(data);
 
@@ -63,7 +64,7 @@ THREE.TDSLoader.prototype.readFile = function(arraybuffer)
 			if(next === M3D_VERSION)
 			{
 				var version = this.readDWord(data);
-				console.log("3DS file version: " + version);
+				this.debugMessage("3DS file version: " + version);
 			}
 			else if(next === MDATA)
 			{
@@ -72,17 +73,16 @@ THREE.TDSLoader.prototype.readFile = function(arraybuffer)
 			}
 			else
 			{
-				console.log("Unknown main chunk: " + next.toString(16));
+				this.debugMessage("Unknown main chunk: " + next.toString(16));
 			}
 
 			next = this.nextChunk(data, chunk);
 		}
 	}
 	
-	console.log("Parsed " + this.meshes.length + " meshes");
+	this.debugMessage("Parsed " + this.meshes.length + " meshes");
 };
 
-//Read mesh data
 THREE.TDSLoader.prototype.readMeshData = function(data)
 {
 	var chunk = this.readChunk(data);
@@ -93,29 +93,29 @@ THREE.TDSLoader.prototype.readMeshData = function(data)
 		if(next === MESH_VERSION)
 		{
 			var version =  + this.readDWord(data);
-			console.log("Mesh Version: " + version);
+			this.debugMessage("Mesh Version: " + version);
 		}
 		else if(next === MASTER_SCALE)
 		{
 			var scale = this.readFloat(data);
-			console.log("Master scale: " + scale);
+			this.debugMessage("Master scale: " + scale);
 			this.group.scale.set(scale, scale, scale);
 		}
 		else if(next === NAMED_OBJECT)
 		{
-			console.log("Named Object");
+			this.debugMessage("Named Object");
 			this.resetPosition(data);
 			this.readNamedObject(data);
 		}
 		else if(next === MAT_ENTRY)
 		{
-			console.log("Material");
+			this.debugMessage("Material");
 			this.resetPosition(data);
 			this.readMaterialEntry(data);
 		}
 		else
 		{
-			console.log("Unknown MDATA chunk: " + next.toString(16));
+			this.debugMessage("Unknown MDATA chunk: " + next.toString(16));
 		}
 
 		next = this.nextChunk(data, chunk);
@@ -133,56 +133,65 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 		if(next === MAT_NAME)
 		{
 			material.name = this.readString(data, 64);
-			console.log("   Name: " + material.name);
+			this.debugMessage("   Name: " + material.name);
 		}
 		else if(next === MAT_WIRE)
 		{
-			var value = this.readByte(data);
-			console.log("   Wireframe: " + value);
+			this.debugMessage("   Wireframe");
 			material.wireframe = true;
+		}
+		else if(next === MAT_WIRE_SIZE)
+		{
+			var value = this.readByte(data);
+			material.wireframeLinewidth = value;
+			this.debugMessage("   Wireframe Thickness: " + value);
 		}
 		else if(next === MAT_TWO_SIDE)
 		{
-			var value = this.readByte(data);
-			console.log("   DoubleSided: " + value);
-			//TODO <ADD CODE HERE>
+			material.side = THREE.DoubleSide;
+			this.debugMessage("   DoubleSided");
 		}
-		else if(next === MAT_AMBIENT)
+		else if(next === MAT_ADDITIVE)
 		{
-			console.log("   Ambient color");
-			//material.emissive = this.readColor(data);
+			this.debugMessage("   Additive Blending");
+			material.blending = THREE.AdditiveBlending;
 		}
 		else if(next === MAT_DIFFUSE)
 		{
-			console.log("   Diffuse Color");
+			this.debugMessage("   Diffuse Color");
 			material.color = this.readColor(data);
 		}
 		else if(next === MAT_SPECULAR)
 		{
-			console.log("   Specular Color");
+			this.debugMessage("   Specular Color");
 			material.specular = this.readColor(data);
+		}
+		else if(next === MAT_AMBIENT)
+		{
+			this.debugMessage("   Ambient color");
+			material.color = this.readColor(data);
+		}
+		else if(next === MAT_SHININESS)
+		{
+			var shininess = this.readWord(data);
+			material.shininess = shininess;
+			this.debugMessage("   Shininess : " + shininess);
 		}
 		else if(next === MAT_TEXMAP)
 		{
-			console.log("   Map");
-			var map = this.readMap(data);
+			this.debugMessage("   Map");
+			//var map = this.readMap(data);
 			//TODO <ADD CODE HERE>
 		}
 		else if(next === MAT_BUMPMAP)
 		{
-			console.log("   BumpMap");
-			var bumpMap = this.readMap(data);
-			//TODO <ADD CODE HERE>
-		}
-		else if(next === MAT_SHININESS)
-		{
-			var shininess = this.readByte(data);
-			console.log("   Shininess : " + shininess);
+			this.debugMessage("   BumpMap");
+			//var bumpMap = this.readMap(data);
 			//TODO <ADD CODE HERE>
 		}
 		else
 		{
-			console.log("   Unknown material chunk: " + next.toString(16));
+			this.debugMessage("   Unknown material chunk: " + next.toString(16));
 		}
 
 		next = this.nextChunk(data, chunk);
@@ -193,7 +202,6 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 	this.materials[material.name] = material;
 };
 
-//Read color and return a three color object
 THREE.TDSLoader.prototype.readColor = function(data)
 {
 	var chunk = this.readChunk(data);
@@ -207,7 +215,7 @@ THREE.TDSLoader.prototype.readColor = function(data)
 
 		color.setRGB(r / 255, g / 255, b / 255);
 
-		console.log("      Color: " + color.r + ", " + color.g + ", " + color.b);
+		this.debugMessage("      Color: " + color.r + ", " + color.g + ", " + color.b);
 	}
 	else if(chunk.id === COLOR_F || chunk.id === LIN_COLOR_F)
 	{
@@ -217,49 +225,39 @@ THREE.TDSLoader.prototype.readColor = function(data)
 		
 		color.setRGB(r, g, b);
 
-		console.log("      Color: " + color.r + ", " + color.g + ", " + color.b);
+		this.debugMessage("      Color: " + color.r + ", " + color.g + ", " + color.b);
 	}
 	else
 	{
-		console.log("      Unknown color chunk: " + c.toString(16));
+		this.debugMessage("      Unknown color chunk: " + c.toString(16));
 	}
 
 	this.endChunk(chunk);
 	return color;
 };
 
-//Read mesh
 THREE.TDSLoader.prototype.readMesh = function(data)
 {
 	var chunk = this.readChunk(data);
 	var next = this.nextChunk(data, chunk);
 
 	var geometry = new THREE.Geometry();
-	var material = new THREE.MeshBasicMaterial({color:0xFFFFFF});
+	var material = new THREE.MeshPhongMaterial();
 	var mesh = new THREE.Mesh(geometry, material);
+	mesh.name = "mesh";
 
 	while(next !== 0)
 	{
-		if(next === MESH_COLOR)
-		{
-			var color = this.readByte(data);
-
-			console.log("   Color: " + color);
-		}
-		else if(next === POINT_ARRAY)
+		if(next === POINT_ARRAY)
 		{
 			var points = this.readWord(data);
+
 			for(var i = 0; i < points; i++)
 			{
-				var vertex = [];
-				for(var j = 0; j < 3; j++)
-				{
-					vertex.push(this.readFloat(data));
-				}
-				geometry.vertices.push(new THREE.Vector3(vertex[0], vertex[1], vertex[2]));
+				geometry.vertices.push(new THREE.Vector3(this.readFloat(data), this.readFloat(data), this.readFloat(data)));
 			}
 
-			console.log("   Vertex: " + points);
+			this.debugMessage("   Vertex: " + points);
 		}
 		else if(next === FACE_ARRAY)
 		{
@@ -272,18 +270,19 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 
 			for(var i = 0; i < texels; i++)
 			{
-				//geometry.faceVertexUvs.push(new THREE.Vector2(this.readFloat(data), this.readFloat(data)));
+				//geometry.faceVertexUvs[0].push(new THREE.Vector2(this.readFloat(data), this.readFloat(data)));
 			}
 
-			console.log("   UV: " + texels);
+			this.debugMessage("   UV: " + texels);
 		}
 		else if(next === MESH_MATRIX)
 		{
+			this.debugMessage("   Matrix");
 			//TODO <ADD CODE HERE>
 		}
 		else
 		{
-			console.log("   Unknown mesh chunk: " + next.toString(16));
+			this.debugMessage("   Unknown mesh chunk: " + next.toString(16));
 		}
 
 		next = this.nextChunk(data, chunk);
@@ -294,25 +293,18 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 	return mesh;
 };
 
-//Read geometry face group array
 THREE.TDSLoader.prototype.readFaceArray = function(data, mesh)
 {
 	var chunk = this.readChunk(data);
 	var faces = this.readWord(data);
 
-	console.log("   Faces: " + faces);
+	this.debugMessage("   Faces: " + faces);
 
 	for(var i = 0; i < faces; ++i)
 	{
-		var face = [];
-		face.push(this.readWord(data));
-		face.push(this.readWord(data));
-		face.push(this.readWord(data));
+		mesh.geometry.faces.push(new THREE.Face3(this.readWord(data), this.readWord(data), this.readWord(data)));
 
-		//Visibility
 		var visibility = this.readWord(data);
-
-		mesh.geometry.faces.push(new THREE.Face3(face[0], face[1], face[2]));
 	}
 
 	//The rest of the FACE_ARRAY chunk is subchunks
@@ -322,9 +314,10 @@ THREE.TDSLoader.prototype.readFaceArray = function(data, mesh)
 
 		if(chunk.id === MSH_MAT_GROUP)
 		{
-			console.log("      Material Group");
-			
+			this.debugMessage("      Material Group");
+
 			this.resetPosition(data);
+
 			var group = this.readMaterialGroup(data);
 
 			var material = this.materials[group.name];
@@ -337,24 +330,15 @@ THREE.TDSLoader.prototype.readFaceArray = function(data, mesh)
 					material.name = mesh.name;
 				}
 			}
-
-			//TODO <USE FACE INDEX TO SET MULTI MATERIAL>
-
-			//var faceIdxs = group.faceIdxs;
-			//for(var i = 0; i < faceIdxs.length; i++)
-			//{
-			//	var face = mesh.faceL[faceIdxs[i]];
-			//	face.material = group.name;
-			//}
 		}
 		else if(chunk.id === SMOOTH_GROUP)
 		{
-			console.log("      Smooth Group");
+			this.debugMessage("      Smooth Group");
 			//TODO <ADD CODE HERE>
 		}
 		else
 		{
-			console.log("      Unknown face array chunk: " + c.toString(16));
+			this.debugMessage("      Unknown face array chunk: " + chunk.toString(16));
 		}
 
 		this.endChunk(chunk);
@@ -363,7 +347,6 @@ THREE.TDSLoader.prototype.readFaceArray = function(data, mesh)
 	this.endChunk(chunk);
 };
 
-//Read texture map
 THREE.TDSLoader.prototype.readMap = function(data)
 {
 	var chunk = this.readChunk(data);
@@ -374,11 +357,11 @@ THREE.TDSLoader.prototype.readMap = function(data)
 		if(next === MAT_MAPNAME)
 		{
 			var name = this.readString(data, 128);
-			console.log("      MapName: " + name);
+			this.debugMessage("      MapName: " + name);
 		}
 		else
 		{
-			console.log("Unknown named object chunk: " + next.toString(16));
+			this.debugMessage("      Unknown named object chunk: " + next.toString(16));
 		}
 
 		next = this.nextChunk(data, chunk);
@@ -387,27 +370,24 @@ THREE.TDSLoader.prototype.readMap = function(data)
 	this.endChunk(chunk);
 }
 
-//Read material group
 THREE.TDSLoader.prototype.readMaterialGroup = function(data)
 {
 	var chunk = this.readChunk(data);
-
 	var name = this.readString(data, 64);
 	var numFaces = this.readWord(data);
 	
-	console.log("         Name: " + name);
-	console.log("         Faces: " + numFaces);
+	this.debugMessage("         Name: " + name);
+	this.debugMessage("         Faces: " + numFaces);
 
-	var faceIdxs = [];
+	var index = [];
 	for(var i = 0; i < numFaces; ++i)
 	{
-		faceIdxs.push(this.readWord(data));
+		index.push(this.readWord(data));
 	}
 
-	return {name: name, faceIdxs: faceIdxs};
+	return {name: name, index: index};
 };
 
-//Read name objects
 THREE.TDSLoader.prototype.readNamedObject = function(data)
 {
 	var chunk = this.readChunk(data);
@@ -421,11 +401,12 @@ THREE.TDSLoader.prototype.readNamedObject = function(data)
 		{
 			this.resetPosition(data);
 			var mesh = this.readMesh(data);
+			mesh.name = name;
 			this.meshes.push(mesh);
 		}
 		else
 		{
-			console.log("Unknown named object chunk: " + next.toString(16));
+			this.debugMessage("Unknown named object chunk: " + next.toString(16));
 		}
 
 		next = this.nextChunk(data, chunk);
@@ -434,18 +415,10 @@ THREE.TDSLoader.prototype.readNamedObject = function(data)
 	this.endChunk(chunk);
 };
 
-//Read data chunk and return is as an chunk object
 THREE.TDSLoader.prototype.readChunk = function(data)
 {
-	var Chunk = function()
-	{
-		this.cur = 0;
-		this.id = 0;
-		this.size = 0;
-		this.end = 0;
-	};
+	var chunk = {};
 
-	var chunk = new Chunk();
 	chunk.cur = this.position;
 	chunk.id = this.readWord(data);
 	chunk.size = this.readDWord(data);
@@ -477,7 +450,7 @@ THREE.TDSLoader.prototype.nextChunk = function(data, chunk)
 	}
 	catch(e)
 	{
-		console.log("Unable to read chunk at " + this.position);
+		this.debugMessage("Unable to read chunk at " + this.position);
 		return 0;
 	}
 };
@@ -504,7 +477,7 @@ THREE.TDSLoader.prototype.readFloat = function(data)
 	}
 	catch(e)
 	{
-		console.log(e + " " + this.position + " " + data.byteLength);
+		this.debugMessage(e + " " + this.position + " " + data.byteLength);
 	}
 };
 
@@ -552,6 +525,14 @@ THREE.TDSLoader.prototype.readString = function(data, maxLength)
 	}
 
 	return s;
+};
+
+THREE.TDSLoader.prototype.debugMessage = function(message)
+{
+	if(this.debug)
+	{
+		console.log(message);
+	}
 };
 
 var NULL_CHUNK = 0x0000;
