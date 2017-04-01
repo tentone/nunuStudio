@@ -108,13 +108,13 @@ function GeneralSettingsTab(parent, closeable, container, index)
 
 	//Snap to grid
 	this.form.addText("Snap to grid");
-	this.snapToGrid = new CheckBox(this.form.element);
-	this.snapToGrid.size.set(20, 16);
-	this.snapToGrid.setOnChange(function()
+	this.snap = new CheckBox(this.form.element);
+	this.snap.size.set(20, 16);
+	this.snap.setOnChange(function()
 	{
-		Settings.editor.snapToGrid = self.snapToGrid.getValue();
+		Settings.editor.snap = self.snap.getValue();
 	});
-	this.form.add(this.snapToGrid);
+	this.form.add(this.snap);
 	this.form.nextRow();
 
 	//Snap angle
@@ -228,7 +228,7 @@ GeneralSettingsTab.prototype.activate = function()
 	this.showUUID.setValue(Settings.general.showUUID);
 
 	//Editor
-	this.snapToGrid.setValue(Settings.editor.snapToGrid);
+	this.snap.setValue(Settings.editor.snap);
 	this.snapAngle.setValue(Settings.editor.snapAngle);
 	this.gridEnabled.setValue(Settings.editor.gridEnabled);
 	this.gridSize.setValue(Settings.editor.gridSize);

@@ -14,7 +14,7 @@ function TransformControls(camera, canvas, mouse)
 
 	this.snap = false;
 	this.translationSnap = 1;
-	this.rotationSnap = 0;
+	this.rotationSnap = 0.1;
 
 	var self = this;
 	
@@ -114,24 +114,29 @@ function TransformControls(camera, canvas, mouse)
 
 	this.setSize = function(size)
 	{
-		self.size = size;
-		self.updateScale();
+		this.size = size;
+		this.updateScale();
 	};
 
 	this.setSpace = function(space)
 	{
-		self.space = space;
-		self.updateScale();
+		this.space = space;
+		this.updateScale();
+	};
+
+	this.setSnap = function(snap)
+	{
+		this.snap = snap;
 	};
 
 	this.setTranslationSnap = function(translationSnap)
 	{
-		self.translationSnap = translationSnap;
+		this.translationSnap = translationSnap;
 	};
 
 	this.setRotationSnap = function(rotationSnap)
 	{
-		self.rotationSnap = rotationSnap;
+		this.rotationSnap = rotationSnap;
 	};
 
 	this.update = function()
@@ -152,14 +157,14 @@ function TransformControls(camera, canvas, mouse)
 			onPointerMove();
 		}
 
-		self.updateScale();
+		this.updateScale();
 
 		return editing;
 	};
 
 	this.updateScale = function()
 	{
-		if(self.object === null)
+		if(this.object === null)
 		{
 			return;
 		}
@@ -172,26 +177,26 @@ function TransformControls(camera, canvas, mouse)
 		camPosition.setFromMatrixPosition(camera.matrixWorld);
 		camRotation.setFromRotationMatrix(tempMatrix.extractRotation(camera.matrixWorld));
 
-		self.position.copy(worldPosition);
+		this.position.copy(worldPosition);
 
 		if(camera instanceof THREE.PerspectiveCamera)
 		{
-			scale = worldPosition.distanceTo(camPosition) / 6 * self.size;
-			self.scale.set(scale, scale, scale);
+			scale = worldPosition.distanceTo(camPosition) / 6 * this.size;
+			this.scale.set(scale, scale, scale);
 		}
 		else
 		{
-			scale = camera.size / 6 * self.size;
-			self.scale.set(scale, scale, scale);
+			scale = camera.size / 6 * this.size;
+			this.scale.set(scale, scale, scale);
 		}
 		
 		eye.copy(camPosition).sub(worldPosition).normalize();
 
-		if(self.space === "local")
+		if(this.space === "local")
 		{
 			gizmo[mode].update(worldRotation, eye);
 		}
-		else if(self.space === "world")
+		else if(this.space === "world")
 		{
 			gizmo[mode].update(new THREE.Euler(), eye);
 		}
@@ -314,60 +319,83 @@ function TransformControls(camera, canvas, mouse)
 				self.object.position.copy(oldPosition);
 				self.object.position.add(point);
 			}
+
+			if(self.snap)
+			{
+				if(self.space === "local")
+				{
+					self.object.position.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
+				}
+
+				if(self.axis.search("X") !== -1)
+				{
+					self.object.position.x = Math.round(self.object.position.x / self.translationSnap) * self.translationSnap;
+				}
+				if(self.axis.search("Y") !== -1)
+				{
+					self.object.position.y = Math.round(self.object.position.y / self.translationSnap) * self.translationSnap;
+				}
+				if(self.axis.search("Z") !== -1)
+				{
+					self.object.position.z = Math.round(self.object.position.z / self.translationSnap) * self.translationSnap;
+				}
+
+				if(self.space === "local" )
+				{
+					self.object.position.applyMatrix4(worldRotationMatrix);
+				}
+			}
 		}
 		else if(mode === "scale")
 		{
 			point.sub(offset);
 			point.multiply(parentScale);
 
-			if(self.space === "local")
+			if(self.axis === "XYZ")
 			{
-				if(self.axis === "XYZ")
-				{
-					scale = 1 + ((point.y) / Math.max(oldScale.x, oldScale.y, oldScale.z));
+				scale = 1 + ((point.y) / Math.max(oldScale.x, oldScale.y, oldScale.z));
 
-					self.object.scale.x = oldScale.x * scale;
-					self.object.scale.y = oldScale.y * scale;
-					self.object.scale.z = oldScale.z * scale;
+				self.object.scale.x = oldScale.x * scale;
+				self.object.scale.y = oldScale.y * scale;
+				self.object.scale.z = oldScale.z * scale;
+			}
+			else
+			{
+				point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
+
+				if(self.axis === "X")
+				{
+					self.object.scale.x = oldScale.x * (1 + point.x / oldScale.x);
 				}
-				else
+				else if(self.axis === "Y")
 				{
-					point.applyMatrix4(tempMatrix.getInverse(worldRotationMatrix));
-
-					if(self.axis === "X")
-					{
-						self.object.scale.x = oldScale.x * (1 + point.x / oldScale.x);
-					}
-					else if(self.axis === "Y")
-					{
-						self.object.scale.y = oldScale.y * (1 + point.y / oldScale.y);
-					}
-					else if(self.axis === "Z")
-					{
-						self.object.scale.z = oldScale.z * (1 + point.z / oldScale.z);
-					}
+					self.object.scale.y = oldScale.y * (1 + point.y / oldScale.y);
 				}
-
-				//Update physics objects
-				if(self.object instanceof PhysicsObject)
+				else if(self.axis === "Z")
 				{
-					var shapes = self.object.body.shapes;
-					var scale = self.object.scale;
+					self.object.scale.z = oldScale.z * (1 + point.z / oldScale.z);
+				}
+			}
 
-					for(var i = 0; i < shapes.length; i++)
+			//Update physics objects
+			if(self.object instanceof PhysicsObject)
+			{
+				var shapes = self.object.body.shapes;
+				var scale = self.object.scale;
+
+				for(var i = 0; i < shapes.length; i++)
+				{
+					var shape = shapes[i];
+					
+					if(shape.type === CANNON.Shape.types.BOX)
 					{
-						var shape = shapes[i];
-						
-						if(shape.type === CANNON.Shape.types.BOX)
-						{
-							shape.halfExtents.x = scale.x / 2.0;
-							shape.halfExtents.y = scale.y / 2.0;
-							shape.halfExtents.z = scale.z / 2.0;
-						}
-						else if(shape.type === CANNON.Shape.types.SPHERE)
-						{
-							shape.radius = scale.x;
-						}
+						shape.halfExtents.x = scale.x / 2.0;
+						shape.halfExtents.y = scale.y / 2.0;
+						shape.halfExtents.z = scale.z / 2.0;
+					}
+					else if(shape.type === CANNON.Shape.types.SPHERE)
+					{
+						shape.radius = scale.x;
 					}
 				}
 			}
@@ -420,9 +448,19 @@ function TransformControls(camera, canvas, mouse)
 				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
 
 				quaternionXYZ.setFromRotationMatrix(oldRotationMatrix);
-				quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
-				quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
-				quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
+
+				if(self.snap)
+				{
+					quaternionX.setFromAxisAngle(unitX, Math.round((rotation.x - offsetRotation.x) / self.rotationSnap) * self.rotationSnap);
+					quaternionY.setFromAxisAngle(unitY, Math.round((rotation.y - offsetRotation.y) / self.rotationSnap) * self.rotationSnap);
+					quaternionZ.setFromAxisAngle(unitZ, Math.round((rotation.z - offsetRotation.z) / self.rotationSnap) * self.rotationSnap);
+				}
+				else
+				{
+					quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
+					quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
+					quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
+				}
 
 				if(self.axis === "X")
 				{
@@ -445,9 +483,19 @@ function TransformControls(camera, canvas, mouse)
 				offsetRotation.set(Math.atan2(tempVector.z, tempVector.y), Math.atan2(tempVector.x, tempVector.z), Math.atan2(tempVector.y, tempVector.x));
 				tempQuaternion.setFromRotationMatrix(tempMatrix.getInverse(parentRotationMatrix));
 
-				quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
-				quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
-				quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
+				if(self.snap)
+				{
+					quaternionX.setFromAxisAngle(unitX, Math.round((rotation.x - offsetRotation.x) / self.rotationSnap) * self.rotationSnap);
+					quaternionY.setFromAxisAngle(unitY, Math.round((rotation.y - offsetRotation.y) / self.rotationSnap) * self.rotationSnap);
+					quaternionZ.setFromAxisAngle(unitZ, Math.round((rotation.z - offsetRotation.z) / self.rotationSnap) * self.rotationSnap);
+				}
+				else
+				{
+					quaternionX.setFromAxisAngle(unitX, rotation.x - offsetRotation.x);
+					quaternionY.setFromAxisAngle(unitY, rotation.y - offsetRotation.y);
+					quaternionZ.setFromAxisAngle(unitZ, rotation.z - offsetRotation.z);
+				}
+
 				quaternionXYZ.setFromRotationMatrix(worldRotationMatrix);
 
 				if(self.axis === "X")

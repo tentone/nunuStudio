@@ -410,6 +410,9 @@ SceneEditor.prototype.updateSettings = function()
 	if(this.tool !== null && Editor.toolMode !== Editor.SCALE)
 	{
 		this.tool.setSpace(Settings.editor.transformationSpace);
+		this.tool.setSnap(Settings.editor.snap);
+		this.tool.setTranslationSnap(Settings.editor.gridSpacing);
+		this.tool.setRotationSnap(Settings.editor.snapAngle);
 	}
 };
 
@@ -971,9 +974,6 @@ SceneEditor.prototype.selectTool = function(tool)
 		{
 			this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
 			this.tool.setMode("translate");
-			this.tool.setSpace(Settings.editor.transformationSpace);
-			this.tool.setTranslationSnap(5);
-			this.tool.setRotationSnap(THREE.Math.degToRad(15));
 		}
 		else if(this.toolMode === Editor.SCALE)
 		{
@@ -984,8 +984,12 @@ SceneEditor.prototype.selectTool = function(tool)
 		{
 			this.tool = new TransformControls(this.camera, this.canvas, this.mouse);
 			this.tool.setMode("rotate");
-			this.tool.setSpace(Settings.editor.transformationSpace);
 		}
+		
+		this.tool.setSpace(Settings.editor.transformationSpace);
+		this.tool.setSnap(Settings.editor.snap);
+		this.tool.setTranslationSnap(Settings.editor.gridSpacing);
+		this.tool.setRotationSnap(Settings.editor.snapAngle);
 
 		this.tool.attach(Editor.selectedObject);
 		this.toolContainer.add(this.tool);

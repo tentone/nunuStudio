@@ -29,8 +29,8 @@
 function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
-Nunu.VERSION = "V0.8.9.23 Alpha";
-Nunu.TIMESTAMP = "201704011225";
+Nunu.VERSION = "V0.8.9.24 Alpha";
+Nunu.TIMESTAMP = "201704011333";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
