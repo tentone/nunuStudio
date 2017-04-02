@@ -41,6 +41,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\source\\core\\loaders\\external\\TDSLoader.js": {
+            "name": "..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\source\\core\\loaders\\AudioLoader.js": {
             "name": "..\\source\\core\\loaders\\AudioLoader.js",
             "modules": {
@@ -594,13 +601,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\source\\loader\\TDSLoader.js": {
-            "name": "..\\source\\loader\\TDSLoader.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\source\\runtime\\NunuApp.js": {
             "name": "..\\source\\runtime\\NunuApp.js",
             "modules": {
@@ -925,7 +925,7 @@
             "tag": "module",
             "file": "..\\source\\core\\three\\Object3D.js",
             "line": 3,
-            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
+            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
         },
         "Math": {
             "name": "Math",
@@ -2392,7 +2392,7 @@
             "namespace": "",
             "file": "..\\source\\core\\three\\Fog.js",
             "line": 3,
-            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for linear fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
+            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
         },
         "Material": {
             "name": "Material",
@@ -3729,6 +3729,14 @@
             "itemtype": "method",
             "name": "dispose",
             "class": "Mouse",
+            "module": "Input"
+        },
+        {
+            "file": "..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 1,
+            "description": "Autodesk 3DS threee.js file loader based on lib3ds.\n\nLoads geometry with uv and materials basic properties.",
+            "author": "@tentone",
+            "class": "AudioLoader",
             "module": "Input"
         },
         {
@@ -8472,7 +8480,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 404,
+            "line": 417,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -8488,7 +8496,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 410,
+            "line": 423,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -8502,7 +8510,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 415,
+            "line": 428,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -8518,7 +8526,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 421,
+            "line": 434,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -8534,7 +8542,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 427,
+            "line": 440,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -8550,7 +8558,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 433,
+            "line": 446,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -8566,7 +8574,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 439,
+            "line": 452,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -8582,7 +8590,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 445,
+            "line": 458,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -8603,7 +8611,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 452,
+            "line": 465,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -8619,7 +8627,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 458,
+            "line": 471,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -8640,7 +8648,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 465,
+            "line": 478,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -8659,7 +8667,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 471,
+            "line": 484,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -8675,7 +8683,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 477,
+            "line": 490,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldRotation",
@@ -8691,7 +8699,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 483,
+            "line": 496,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -8707,7 +8715,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 489,
+            "line": 502,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -8723,7 +8731,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 495,
+            "line": 508,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -8744,7 +8752,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 502,
+            "line": 515,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -8760,7 +8768,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 508,
+            "line": 521,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -8776,7 +8784,7 @@
         },
         {
             "file": "..\\source\\core\\three\\Object3D.js",
-            "line": 514,
+            "line": 527,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -9152,7 +9160,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 161,
+            "line": 159,
             "description": "Computes 3D convex hull as a CANNON.ConvexPolyhedron.",
             "itemtype": "method",
             "name": "createConvexPolyhedron",
@@ -9172,7 +9180,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 203,
+            "line": 201,
             "description": "Create cylinder shape from geometry.",
             "itemtype": "method",
             "name": "createCylinderShape",
@@ -9192,7 +9200,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 221,
+            "line": 219,
             "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingCylinderShape",
@@ -9212,7 +9220,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 248,
+            "line": 247,
             "description": "Plane shape from geometry.",
             "itemtype": "method",
             "name": "createPlaneShape",
@@ -9232,7 +9240,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 263,
+            "line": 262,
             "description": "Sphere shape from geometry.",
             "itemtype": "method",
             "name": "createSphereShape",
@@ -9252,7 +9260,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 275,
+            "line": 274,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingSphereShape",
@@ -9272,7 +9280,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 290,
+            "line": 289,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createTubeShape",
@@ -9292,7 +9300,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 304,
+            "line": 303,
             "description": "Trimesh shape from geometry.",
             "itemtype": "method",
             "name": "createTrimeshShape",
@@ -9312,7 +9320,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 324,
+            "line": 323,
             "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
             "itemtype": "method",
             "name": "getGeometry",
@@ -9332,7 +9340,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 386,
+            "line": 385,
             "description": "Get geometry vertices.",
             "itemtype": "method",
             "name": "getVertices",
@@ -9352,7 +9360,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 402,
+            "line": 401,
             "description": "Returns a array of THREE.Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
             "itemtype": "method",
             "name": "getMeshes",
@@ -9448,7 +9456,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 127,
+            "line": 133,
             "description": "Get all textures in object and childs",
             "itemtype": "method",
             "name": "getTextures",
@@ -9473,7 +9481,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 196,
+            "line": 217,
             "description": "Get object scene",
             "itemtype": "method",
             "name": "getScene",
@@ -9493,7 +9501,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 219,
+            "line": 240,
             "description": "Get object tree root",
             "itemtype": "method",
             "name": "getRoot",
@@ -9513,7 +9521,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 238,
+            "line": 259,
             "description": "Set object and all its children matrixAutoUpdate value",
             "itemtype": "method",
             "name": "setMatrixAutoUpdate",
@@ -9534,7 +9542,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 255,
+            "line": 276,
             "description": "Set object and all children to receive shadows",
             "itemtype": "method",
             "name": "setShadowReceiving",
@@ -9555,7 +9563,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 272,
+            "line": 293,
             "description": "Set object and all children to cast shadows",
             "itemtype": "method",
             "name": "setShadowCasting",
@@ -9576,7 +9584,7 @@
         },
         {
             "file": "..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 289,
+            "line": 310,
             "description": "Check if object is child of another object",
             "itemtype": "method",
             "name": "isChildOf",
@@ -9956,14 +9964,6 @@
             "module": "Files"
         },
         {
-            "file": "..\\source\\loader\\TDSLoader.js",
-            "line": 1,
-            "description": "Autodesk 3DS threee.js file loader based on lib3ds.\n\nLoads geometry with uv and materials basic properties.",
-            "author": "@tentone",
-            "class": "NunuApp",
-            "module": "Files"
-        },
-        {
             "file": "..\\source\\runtime\\NunuApp.js",
             "line": 100,
             "description": "Nunu Program",
@@ -10303,6 +10303,10 @@
             "line": " ..\\source\\core\\input\\Mouse.js:359"
         },
         {
+            "message": "Missing item type\nAutodesk 3DS threee.js file loader based on lib3ds.\n\nLoads geometry with uv and materials basic properties.",
+            "line": " ..\\source\\core\\loaders\\external\\TDSLoader.js:1"
+        },
+        {
             "message": "Missing item type\nCheck if hand is in pose.",
             "line": " ..\\source\\core\\objects\\device\\LeapMotion.js:260"
         },
@@ -10360,11 +10364,7 @@
         },
         {
             "message": "Missing item type\nRotates the object to face a point in world space.",
-            "line": " ..\\source\\core\\three\\Object3D.js:410"
-        },
-        {
-            "message": "Missing item type\nAutodesk 3DS threee.js file loader based on lib3ds.\n\nLoads geometry with uv and materials basic properties.",
-            "line": " ..\\source\\loader\\TDSLoader.js:1"
+            "line": " ..\\source\\core\\three\\Object3D.js:423"
         },
         {
             "message": "Missing item type\nSet fullscreen mode",

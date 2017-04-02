@@ -151,8 +151,8 @@ CubeTexture.prototype.toJSON = function(meta)
 {
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);
 
+	data.size = this.size;
 	data.images = [];
-
 	for(var i = 0; i < this.images.length; i++)
 	{	
 		var image = this.images[i].toJSON(meta);
