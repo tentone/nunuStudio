@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704020042";
+Nunu.TIMESTAMP = "201704021405";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -31756,6 +31756,7 @@ CubeTexture.prototype.updateImages = function() {
 };
 CubeTexture.prototype.toJSON = function(a) {
   var b = THREE.Texture.prototype.toJSON.call(this, a);
+  b.size = this.size;
   b.images = [];
   for (var e = 0;e < this.images.length;e++) {
     var d = this.images[e].toJSON(a);
@@ -31969,6 +31970,7 @@ TextureLoader.prototype.parse = function(a, b) {
           void 0 === this.images[a.images[d]] && console.warn("nunuStudio: TextureLoader, undefined image", a.images[d]), e.push(this.images[a.images[d]]);
         }
         e = new CubeTexture(e);
+        void 0 !== a.size && (e.size = a.size);
       } else {
         "Canvas" === e ? e = new CanvasTexture(a.width, a.height) : (void 0 === a.image && console.warn("nunuStudio: TextureLoader, no image specified for", a.uuid), void 0 === this.images[a.image] && console.warn("nunuStudio: TextureLoader, undefined image", a.image), e = new Texture(this.images[a.image]));
       }
@@ -67352,6 +67354,22 @@ OrthographicCameraPanel.prototype.updatePanel = function() {
 function SkyPanel(a, b) {
   Panel.call(this, a, b);
   var e = this;
+  this.visible = new CheckBox(this.form.element);
+  this.form.addText("Visible");
+  this.visible.size.set(20, 15);
+  this.visible.setOnChange(function() {
+    null !== e.obj && (e.obj.visible = e.visible.getValue());
+  });
+  this.form.add(this.visible);
+  this.form.nextRow();
+  this.static = new CheckBox(this.form.element);
+  this.form.addText("Static Object");
+  this.static.size.set(20, 15);
+  this.static.setOnChange(function() {
+    null !== e.obj && (e.obj.matrixAutoUpdate = !e.static.getValue());
+  });
+  this.form.add(this.static);
+  this.form.nextRow();
   this.autoUpdate = new CheckBox(this.form.element);
   this.form.addText("Auto update");
   this.autoUpdate.size.set(20, 15);
@@ -67490,8 +67508,8 @@ function SkyPanel(a, b) {
 SkyPanel.prototype = Object.create(Panel.prototype);
 SkyPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.autoUpdate.setValue(this.obj.autoUpdate), this.dayTime.setValue(this.obj.dayTime), this.time.setValue(this.obj.time), this.sunDistance.setValue(this.obj.sunDistance), this.castShadow.setValue(this.obj.sun.castShadow), this.shadowWidth.setValue(this.obj.sun.shadow.mapSize.width), this.shadowHeight.setValue(this.obj.sun.shadow.mapSize.height), this.shadowNear.setValue(this.obj.sun.shadow.camera.near), this.shadowFar.setValue(this.obj.sun.shadow.camera.far), this.shadowLeft.setValue(this.obj.sun.shadow.camera.left), 
-  this.shadowRight.setValue(this.obj.sun.shadow.camera.right), this.shadowTop.setValue(this.obj.sun.shadow.camera.top), this.shadowBottom.setValue(this.obj.sun.shadow.camera.bottom));
+  null !== this.obj && (this.visible.setValue(this.obj.visible), this.static.setValue(!this.obj.matrixAutoUpdate), this.autoUpdate.setValue(this.obj.autoUpdate), this.dayTime.setValue(this.obj.dayTime), this.time.setValue(this.obj.time), this.sunDistance.setValue(this.obj.sunDistance), this.castShadow.setValue(this.obj.sun.castShadow), this.shadowWidth.setValue(this.obj.sun.shadow.mapSize.width), this.shadowHeight.setValue(this.obj.sun.shadow.mapSize.height), this.shadowNear.setValue(this.obj.sun.shadow.camera.near), 
+  this.shadowFar.setValue(this.obj.sun.shadow.camera.far), this.shadowLeft.setValue(this.obj.sun.shadow.camera.left), this.shadowRight.setValue(this.obj.sun.shadow.camera.right), this.shadowTop.setValue(this.obj.sun.shadow.camera.top), this.shadowBottom.setValue(this.obj.sun.shadow.camera.bottom));
 };
 function AmbientLightPanel(a, b) {
   Panel.call(this, a, b);

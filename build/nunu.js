@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704020042";
+Nunu.TIMESTAMP = "201704021405";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -4165,8 +4165,8 @@ Nunu.runningOnDesktop = function() {
   function sc(d, n, a, b) {
     Pb.call(this, d, n, a, b);
   }
-  function Md(d, n, a, b) {
-    Pb.call(this, d, n, a, b);
+  function Md(d, a, b, c) {
+    Pb.call(this, d, a, b, c);
   }
   function Nd(d, a, b) {
     Pb.call(this, d, a, b);
@@ -9889,14 +9889,14 @@ Nunu.runningOnDesktop = function() {
       return g <= p ? d < p ? [] : d === p ? n ? [] : [a] : d <= b ? [a, m] : [a, k] : g > b ? [] : g === b ? n ? [] : [h] : d <= b ? [h, m] : [h, k];
     }
     function n(d, a, b, c) {
-      var e = a.x - d.x, n = a.y - d.y;
+      var e = a.x - d.x, h = a.y - d.y;
       a = b.x - d.x;
       b = b.y - d.y;
-      var h = c.x - d.x;
+      var n = c.x - d.x;
       c = c.y - d.y;
-      d = e * b - n * a;
-      e = e * c - n * h;
-      return Math.abs(d) > Number.EPSILON ? (a = h * b - c * a, 0 < d ? 0 <= e && 0 <= a : 0 <= e || 0 <= a) : 0 < e;
+      d = e * b - h * a;
+      e = e * c - h * n;
+      return Math.abs(d) > Number.EPSILON ? (a = n * b - c * a, 0 < d ? 0 <= e && 0 <= a : 0 <= e || 0 <= a) : 0 < e;
     }
     b(d);
     a.forEach(b);
@@ -11134,22 +11134,22 @@ Nunu.runningOnDesktop = function() {
       a.push(Qb.toJSON(b[c]));
     }
     return d;
-  }, CreateFromMorphTargetSequence:function(d, a, b, c) {
-    for (var e = a.length, h = [], m = 0;m < e;m++) {
+  }, CreateFromMorphTargetSequence:function(a, b, c, e) {
+    for (var d = b.length, h = [], m = 0;m < d;m++) {
       var n = [], g = [];
-      n.push((m + e - 1) % e, m, (m + 1) % e);
+      n.push((m + d - 1) % d, m, (m + 1) % d);
       g.push(0, 1, 0);
       var k = Da.getKeyframeOrder(n), n = Da.sortedArray(n, 1, k), g = Da.sortedArray(g, 1, k);
-      c || 0 !== n[0] || (n.push(e), g.push(g[0]));
-      h.push((new sc(".morphTargetInfluences[" + a[m].name + "]", n, g)).scale(1 / b));
+      e || 0 !== n[0] || (n.push(d), g.push(g[0]));
+      h.push((new sc(".morphTargetInfluences[" + b[m].name + "]", n, g)).scale(1 / c));
     }
-    return new bb(d, -1, h);
-  }, findByName:function(a, b) {
-    var d = a;
-    Array.isArray(a) || (d = a.geometry && a.geometry.animations || a.animations);
-    for (a = 0;a < d.length;a++) {
-      if (d[a].name === b) {
-        return d[a];
+    return new bb(a, -1, h);
+  }, findByName:function(d, a) {
+    var b = d;
+    Array.isArray(d) || (b = d.geometry && d.geometry.animations || d.animations);
+    for (d = 0;d < b.length;d++) {
+      if (b[d].name === a) {
+        return b[d];
       }
     }
     return null;
@@ -11350,19 +11350,19 @@ Nunu.runningOnDesktop = function() {
   }, createMaterial:function() {
     var a = {NoBlending:0, NormalBlending:1, AdditiveBlending:2, SubtractiveBlending:3, MultiplyBlending:4, CustomBlending:5}, b = new Z, c = new Ad, e = new Pd;
     return function(d, h, m) {
-      function n(a, d, b, e, n) {
+      function g(a, d, b, e, g) {
         a = h + a;
         var k = tc.Handlers.get(a);
         null !== k ? a = k.load(a) : (c.setCrossOrigin(m), a = c.load(a));
         void 0 !== d && (a.repeat.fromArray(d), 1 !== d[0] && (a.wrapS = 1E3), 1 !== d[1] && (a.wrapT = 1E3));
         void 0 !== b && a.offset.fromArray(b);
         void 0 !== e && ("repeat" === e[0] && (a.wrapS = 1E3), "mirror" === e[0] && (a.wrapS = 1002), "repeat" === e[1] && (a.wrapT = 1E3), "mirror" === e[1] && (a.wrapT = 1002));
-        void 0 !== n && (a.anisotropy = n);
+        void 0 !== g && (a.anisotropy = g);
         d = na.generateUUID();
-        g[d] = a;
+        n[d] = a;
         return d;
       }
-      var g = {}, k = {uuid:na.generateUUID(), type:"MeshLambertMaterial"}, q;
+      var n = {}, k = {uuid:na.generateUUID(), type:"MeshLambertMaterial"}, q;
       for (q in d) {
         var f = d[q];
         switch(q) {
@@ -11399,7 +11399,7 @@ Nunu.runningOnDesktop = function() {
             "standard" === f.toLowerCase() && (k.type = "MeshStandardMaterial");
             break;
           case "mapDiffuse":
-            k.map = n(f, d.mapDiffuseRepeat, d.mapDiffuseOffset, d.mapDiffuseWrap, d.mapDiffuseAnisotropy);
+            k.map = g(f, d.mapDiffuseRepeat, d.mapDiffuseOffset, d.mapDiffuseWrap, d.mapDiffuseAnisotropy);
             break;
           case "mapDiffuseRepeat":
           case "mapDiffuseOffset":
@@ -11407,7 +11407,7 @@ Nunu.runningOnDesktop = function() {
           case "mapDiffuseAnisotropy":
             break;
           case "mapEmissive":
-            k.emissiveMap = n(f, d.mapEmissiveRepeat, d.mapEmissiveOffset, d.mapEmissiveWrap, d.mapEmissiveAnisotropy);
+            k.emissiveMap = g(f, d.mapEmissiveRepeat, d.mapEmissiveOffset, d.mapEmissiveWrap, d.mapEmissiveAnisotropy);
             break;
           case "mapEmissiveRepeat":
           case "mapEmissiveOffset":
@@ -11415,7 +11415,7 @@ Nunu.runningOnDesktop = function() {
           case "mapEmissiveAnisotropy":
             break;
           case "mapLight":
-            k.lightMap = n(f, d.mapLightRepeat, d.mapLightOffset, d.mapLightWrap, d.mapLightAnisotropy);
+            k.lightMap = g(f, d.mapLightRepeat, d.mapLightOffset, d.mapLightWrap, d.mapLightAnisotropy);
             break;
           case "mapLightRepeat":
           case "mapLightOffset":
@@ -11423,7 +11423,7 @@ Nunu.runningOnDesktop = function() {
           case "mapLightAnisotropy":
             break;
           case "mapAO":
-            k.aoMap = n(f, d.mapAORepeat, d.mapAOOffset, d.mapAOWrap, d.mapAOAnisotropy);
+            k.aoMap = g(f, d.mapAORepeat, d.mapAOOffset, d.mapAOWrap, d.mapAOAnisotropy);
             break;
           case "mapAORepeat":
           case "mapAOOffset":
@@ -11431,7 +11431,7 @@ Nunu.runningOnDesktop = function() {
           case "mapAOAnisotropy":
             break;
           case "mapBump":
-            k.bumpMap = n(f, d.mapBumpRepeat, d.mapBumpOffset, d.mapBumpWrap, d.mapBumpAnisotropy);
+            k.bumpMap = g(f, d.mapBumpRepeat, d.mapBumpOffset, d.mapBumpWrap, d.mapBumpAnisotropy);
             break;
           case "mapBumpScale":
             k.bumpScale = f;
@@ -11442,7 +11442,7 @@ Nunu.runningOnDesktop = function() {
           case "mapBumpAnisotropy":
             break;
           case "mapNormal":
-            k.normalMap = n(f, d.mapNormalRepeat, d.mapNormalOffset, d.mapNormalWrap, d.mapNormalAnisotropy);
+            k.normalMap = g(f, d.mapNormalRepeat, d.mapNormalOffset, d.mapNormalWrap, d.mapNormalAnisotropy);
             break;
           case "mapNormalFactor":
             k.normalScale = [f, f];
@@ -11453,7 +11453,7 @@ Nunu.runningOnDesktop = function() {
           case "mapNormalAnisotropy":
             break;
           case "mapSpecular":
-            k.specularMap = n(f, d.mapSpecularRepeat, d.mapSpecularOffset, d.mapSpecularWrap, d.mapSpecularAnisotropy);
+            k.specularMap = g(f, d.mapSpecularRepeat, d.mapSpecularOffset, d.mapSpecularWrap, d.mapSpecularAnisotropy);
             break;
           case "mapSpecularRepeat":
           case "mapSpecularOffset":
@@ -11461,7 +11461,7 @@ Nunu.runningOnDesktop = function() {
           case "mapSpecularAnisotropy":
             break;
           case "mapMetalness":
-            k.metalnessMap = n(f, d.mapMetalnessRepeat, d.mapMetalnessOffset, d.mapMetalnessWrap, d.mapMetalnessAnisotropy);
+            k.metalnessMap = g(f, d.mapMetalnessRepeat, d.mapMetalnessOffset, d.mapMetalnessWrap, d.mapMetalnessAnisotropy);
             break;
           case "mapMetalnessRepeat":
           case "mapMetalnessOffset":
@@ -11469,7 +11469,7 @@ Nunu.runningOnDesktop = function() {
           case "mapMetalnessAnisotropy":
             break;
           case "mapRoughness":
-            k.roughnessMap = n(f, d.mapRoughnessRepeat, d.mapRoughnessOffset, d.mapRoughnessWrap, d.mapRoughnessAnisotropy);
+            k.roughnessMap = g(f, d.mapRoughnessRepeat, d.mapRoughnessOffset, d.mapRoughnessWrap, d.mapRoughnessAnisotropy);
             break;
           case "mapRoughnessRepeat":
           case "mapRoughnessOffset":
@@ -11477,7 +11477,7 @@ Nunu.runningOnDesktop = function() {
           case "mapRoughnessAnisotropy":
             break;
           case "mapAlpha":
-            k.alphaMap = n(f, d.mapAlphaRepeat, d.mapAlphaOffset, d.mapAlphaWrap, d.mapAlphaAnisotropy);
+            k.alphaMap = g(f, d.mapAlphaRepeat, d.mapAlphaOffset, d.mapAlphaWrap, d.mapAlphaAnisotropy);
             break;
           case "mapAlphaRepeat":
           case "mapAlphaOffset":
@@ -11515,7 +11515,7 @@ Nunu.runningOnDesktop = function() {
       "MeshBasicMaterial" === k.type && delete k.emissive;
       "MeshPhongMaterial" !== k.type && delete k.specular;
       1 > k.opacity && (k.transparent = !0);
-      e.setTextures(g);
+      e.setTextures(n);
       return e.parse(k);
     };
   }()});
@@ -13803,9 +13803,9 @@ Nunu.runningOnDesktop = function() {
       this.object.updateMatrixWorld(!0);
       c.getNormalMatrix(this.object.matrixWorld);
       for (var d = this.object.matrixWorld, e = this.geometry.attributes.position, h = this.object.geometry, m = h.vertices, h = h.faces, g = 0, k = 0, q = h.length;k < q;k++) {
-        var f = h[k], n = f.normal;
+        var f = h[k], p = f.normal;
         a.copy(m[f.a]).add(m[f.b]).add(m[f.c]).divideScalar(3).applyMatrix4(d);
-        b.copy(n).applyMatrix3(c).normalize().multiplyScalar(this.size).add(a);
+        b.copy(p).applyMatrix3(c).normalize().multiplyScalar(this.size).add(a);
         e.setXYZ(g, a.x, a.y, a.z);
         g += 1;
         e.setXYZ(g, b.x, b.y, b.z);
@@ -16537,8 +16537,8 @@ THREE.VREffect = function(a, f) {
       c = c || new g;
       var e = b.x, h = b.y, k = b.z;
       b = this.x;
-      var f = this.y, q = this.z, m = this.w, t = m * e + f * k - q * h, r = m * h + q * e - b * k, l = m * k + b * h - f * e, e = -b * e - f * h - q * k;
-      return c.x = t * m + e * -b + r * -q - l * -f, c.y = r * m + e * -f + l * -b - t * -q, c.z = l * m + e * -q + t * -f - r * -b, c;
+      var f = this.y, q = this.z, m = this.w, t = m * e + f * k - q * h, l = m * h + q * e - b * k, r = m * k + b * h - f * e, e = -b * e - f * h - q * k;
+      return c.x = t * m + e * -b + l * -q - r * -f, c.y = l * m + e * -f + r * -b - t * -q, c.z = r * m + e * -q + t * -f - l * -b, c;
     };
     b.prototype.copy = function(b) {
       return this.x = b.x, this.y = b.y, this.z = b.z, this.w = b.w, this;
@@ -28267,8 +28267,8 @@ var __extends = this && this.__extends || function(a, f) {
       return e;
     };
     b.getOffset = function(b, c, e) {
-      for (var f = 0, h = 0;e > h;h += 1) {
-        f <<= 8, f += b.getUint8(c + h);
+      for (var f = 0, g = 0;e > g;g += 1) {
+        f <<= 8, f += b.getUint8(c + g);
       }
       return f;
     };
@@ -28320,8 +28320,8 @@ var __extends = this && this.__extends || function(a, f) {
     k.prototype.parseString = function(b) {
       var c = this.data, e = this.offset + this.relativeOffset, f = "";
       this.relativeOffset += b;
-      for (var h = 0;b > h;h++) {
-        f += String.fromCharCode(c.getUint8(e + h));
+      for (var g = 0;b > g;g++) {
+        f += String.fromCharCode(c.getUint8(e + g));
       }
       return f;
     };
@@ -28342,8 +28342,8 @@ var __extends = this && this.__extends || function(a, f) {
     };
     k.prototype.parseOffset16List = k.prototype.parseUShortList = function(b) {
       void 0 === b && (b = this.parseUShort());
-      for (var c = Array(b), e = this.data, f = this.offset + this.relativeOffset, h = 0;b > h;h++) {
-        c[h] = e.getUint16(f), f += 2;
+      for (var c = Array(b), e = this.data, f = this.offset + this.relativeOffset, g = 0;b > g;g++) {
+        c[g] = e.getUint16(f), f += 2;
       }
       return this.relativeOffset += 2 * b, c;
     };
@@ -28356,12 +28356,12 @@ var __extends = this && this.__extends || function(a, f) {
     };
     k.prototype.parseRecordList = function(b, c) {
       c || (c = b, b = this.parseUShort());
-      for (var e = Array(b), f = Object.keys(c), h = 0;b > h;h++) {
-        for (var g = {}, k = 0;k < f.length;k++) {
+      for (var e = Array(b), f = Object.keys(c), g = 0;b > g;g++) {
+        for (var h = {}, k = 0;k < f.length;k++) {
           var l = f[k];
-          g[l] = c[l].call(this);
+          h[l] = c[l].call(this);
         }
-        e[h] = g;
+        e[g] = h;
       }
       return e;
     };
@@ -28370,8 +28370,8 @@ var __extends = this && this.__extends || function(a, f) {
         return b.call(this);
       }
       for (var c = Object.keys(b), e = {}, f = 0;f < c.length;f++) {
-        var h = c[f];
-        e[h] = b[h].call(this);
+        var g = c[f];
+        e[g] = b[g].call(this);
       }
       return e;
     };
@@ -28380,22 +28380,22 @@ var __extends = this && this.__extends || function(a, f) {
       return 0 < c ? (new k(this.data, this.offset + c)).parseStruct(b) : void 0;
     };
     k.prototype.parseListOfLists = function(b) {
-      for (var c = this.parseOffset16List(), e = c.length, f = this.relativeOffset, h = Array(e), g = 0;e > g;g++) {
-        var k = c[g];
+      for (var c = this.parseOffset16List(), e = c.length, f = this.relativeOffset, g = Array(e), h = 0;e > h;h++) {
+        var k = c[h];
         if (0 !== k) {
           if (this.relativeOffset = k, b) {
             for (var l = this.parseOffset16List(), m = Array(l.length), q = 0;q < l.length;q++) {
               this.relativeOffset = k + l[q], m[q] = b.call(this);
             }
-            h[g] = m;
+            g[h] = m;
           } else {
-            h[g] = this.parseUShortList();
+            g[h] = this.parseUShortList();
           }
         } else {
-          h[g] = void 0;
+          g[h] = void 0;
         }
       }
-      return this.relativeOffset = f, h;
+      return this.relativeOffset = f, g;
     };
     k.prototype.parseCoverage = function() {
       var b = this.offset + this.relativeOffset, e = this.parseUShort(), f = this.parseUShort();
@@ -28448,8 +28448,8 @@ var __extends = this && this.__extends || function(a, f) {
       return this.parsePointer(k.list(k.pointer(function() {
         var e = this.parseUShort();
         c.argument(1 <= e && 8 >= e, "GSUB lookup type " + e + " unknown.");
-        var f = this.parseUShort(), h = 16 & f;
-        return {lookupType:e, lookupFlag:f, subtables:this.parseList(k.pointer(b[e])), markFilteringSet:h ? this.parseUShort() : void 0};
+        var f = this.parseUShort(), g = 16 & f;
+        return {lookupType:e, lookupFlag:f, subtables:this.parseList(k.pointer(b[e])), markFilteringSet:g ? this.parseUShort() : void 0};
       })));
     };
     b.Parser = k;
@@ -31751,6 +31751,7 @@ CubeTexture.prototype.updateImages = function() {
 };
 CubeTexture.prototype.toJSON = function(a) {
   var f = THREE.Texture.prototype.toJSON.call(this, a);
+  f.size = this.size;
   f.images = [];
   for (var l = 0;l < this.images.length;l++) {
     var b = this.images[l].toJSON(a);
@@ -31964,6 +31965,7 @@ TextureLoader.prototype.parse = function(a, f) {
           void 0 === this.images[a.images[b]] && console.warn("nunuStudio: TextureLoader, undefined image", a.images[b]), l.push(this.images[a.images[b]]);
         }
         l = new CubeTexture(l);
+        void 0 !== a.size && (l.size = a.size);
       } else {
         "Canvas" === l ? l = new CanvasTexture(a.width, a.height) : (void 0 === a.image && console.warn("nunuStudio: TextureLoader, no image specified for", a.uuid), void 0 === this.images[a.image] && console.warn("nunuStudio: TextureLoader, undefined image", a.image), l = new Texture(this.images[a.image]));
       }
