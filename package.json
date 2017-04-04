@@ -1,0 +1,33 @@
+{
+  "name": "nunu",
+  "version": "0.8.9-alpha",
+  "description": "a three.js based framework for 3D and VR applications that runs direcly on the browser",
+  "main": "build/nunu.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build:dev": "node ./build/js",
+    "build:prod": "NODE_ENV=production node ./build/js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tentone/nunuStudio.git"
+  },
+  "keywords": [
+    "three.js",
+    "editor",
+    "webgl",
+    "engine"
+  ],
+  "author": "Tentone",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tentone/nunuStudio/issues"
+  },
+  "homepage": "https://github.com/tentone/nunuStudio#readme",
+  "devDependencies": {
+    "google-closure-compiler-js": "^20170218.0.0",
+    "rimraf": "^2.6.1"
+  }
+}
