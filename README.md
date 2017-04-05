@@ -96,7 +96,8 @@
 	- CircleGeometry
 - V0.8.9.24 Alpha
 	- Added snap to grid
-
+	- First version of NodeJS build system (@GGAlanSmithee)
+	
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
 - To embed applications made inside nunuStudio in web pages the following code can be used
