@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704061136";
+Nunu.TIMESTAMP = "201704070017";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -2162,31 +2162,29 @@ Nunu.runningOnDesktop = function() {
     }
     function f(d, n, a) {
       if (d.visible) {
-        if (d.layers.test(n.layers)) {
-          if (d.isLight) {
-            D.push(d);
+        if (d.isLight) {
+          D.push(d);
+        } else {
+          if (d.isSprite) {
+            d.frustumCulled && !Y.intersectsSprite(d) || I.push(d);
           } else {
-            if (d.isSprite) {
-              d.frustumCulled && !Y.intersectsSprite(d) || I.push(d);
+            if (d.isLensFlare) {
+              ca.push(d);
             } else {
-              if (d.isLensFlare) {
-                ca.push(d);
+              if (d.isImmediateRenderObject) {
+                a && sa.setFromMatrixPosition(d.matrixWorld).applyMatrix4(Ba), V.push(d, null, d.material, sa.z, null);
               } else {
-                if (d.isImmediateRenderObject) {
-                  a && sa.setFromMatrixPosition(d.matrixWorld).applyMatrix4(Ba), V.push(d, null, d.material, sa.z, null);
-                } else {
-                  if (d.isMesh || d.isLine || d.isPoints) {
-                    if (d.isSkinnedMesh && d.skeleton.update(), !d.frustumCulled || Y.intersectsObject(d)) {
-                      a && sa.setFromMatrixPosition(d.matrixWorld).applyMatrix4(Ba);
-                      var b = xa.update(d), A = d.material;
-                      if (Array.isArray(A)) {
-                        for (var c = b.groups, h = 0, e = c.length;h < e;h++) {
-                          var g = c[h], m = A[g.materialIndex];
-                          m && m.visible && V.push(d, b, m, sa.z, g);
-                        }
-                      } else {
-                        A.visible && V.push(d, b, A, sa.z, null);
+                if (d.isMesh || d.isLine || d.isPoints) {
+                  if (d.isSkinnedMesh && d.skeleton.update(), !d.frustumCulled || Y.intersectsObject(d)) {
+                    a && sa.setFromMatrixPosition(d.matrixWorld).applyMatrix4(Ba);
+                    var b = xa.update(d), A = d.material;
+                    if (Array.isArray(A)) {
+                      for (var c = b.groups, h = 0, e = c.length;h < e;h++) {
+                        var g = c[h], m = A[g.materialIndex];
+                        m && m.visible && V.push(d, b, m, sa.z, g);
                       }
+                    } else {
+                      A.visible && V.push(d, b, A, sa.z, null);
                     }
                   }
                 }
@@ -2220,9 +2218,7 @@ Nunu.runningOnDesktop = function() {
       }
     }
     function t(d, n, a, b, A, c) {
-      d.modelViewMatrix.multiplyMatrices(a.matrixWorldInverse, d.matrixWorld);
-      d.normalMatrix.getNormalMatrix(d.modelViewMatrix);
-      d.isImmediateRenderObject ? (qa.setMaterial(A), n = l(a, n.fog, A, d), M = "", m(d, n, A)) : J.renderBufferDirect(a, n.fog, b, A, d, c);
+      !1 !== d.layers.test(a.layers) && (d.modelViewMatrix.multiplyMatrices(a.matrixWorldInverse, d.matrixWorld), d.normalMatrix.getNormalMatrix(d.modelViewMatrix), d.isImmediateRenderObject ? (qa.setMaterial(A), n = l(a, n.fog, A, d), M = "", m(d, n, A)) : J.renderBufferDirect(a, n.fog, b, A, d, c));
     }
     function l(d, n, a, b) {
       T = 0;
@@ -4162,8 +4158,8 @@ Nunu.runningOnDesktop = function() {
   function fd(d, n, a, b) {
     Qb.call(this, d, n, a, b);
   }
-  function tc(d, n, a, b) {
-    Qb.call(this, d, n, a, b);
+  function tc(d, a, b, c) {
+    Qb.call(this, d, a, b, c);
   }
   function Nd(d, a, b, c) {
     Qb.call(this, d, a, b, c);
@@ -10860,39 +10856,39 @@ Nunu.runningOnDesktop = function() {
   }});
   Object.assign(Ya.prototype, {beforeStart_:Ya.prototype.copySampleValue_, afterEnd_:Ya.prototype.copySampleValue_});
   Kd.prototype = Object.assign(Object.create(Ya.prototype), {constructor:Kd, DefaultSettings_:{endingStart:2400, endingEnd:2400}, intervalChanged_:function(d, a, b) {
-    var c = this.parameterPositions, e = d - 2, h = d + 1, n = c[e], m = c[h];
-    if (void 0 === n) {
+    var c = this.parameterPositions, e = d - 2, h = d + 1, m = c[e], n = c[h];
+    if (void 0 === m) {
       switch(this.getSettings_().endingStart) {
         case 2401:
           e = d;
-          n = 2 * a - b;
+          m = 2 * a - b;
           break;
         case 2402:
           e = c.length - 2;
-          n = a + c[e] - c[e + 1];
+          m = a + c[e] - c[e + 1];
           break;
         default:
-          e = d, n = b;
+          e = d, m = b;
       }
     }
-    if (void 0 === m) {
+    if (void 0 === n) {
       switch(this.getSettings_().endingEnd) {
         case 2401:
           h = d;
-          m = 2 * b - a;
+          n = 2 * b - a;
           break;
         case 2402:
           h = 1;
-          m = b + c[1] - c[0];
+          n = b + c[1] - c[0];
           break;
         default:
-          h = d - 1, m = a;
+          h = d - 1, n = a;
       }
     }
     d = .5 * (b - a);
     c = this.valueSize;
-    this._weightPrev = d / (a - n);
-    this._weightNext = d / (m - b);
+    this._weightPrev = d / (a - m);
+    this._weightNext = d / (n - b);
     this._offsetPrev = e * c;
     this._offsetNext = h * c;
   }, interpolate_:function(d, a, b, c) {

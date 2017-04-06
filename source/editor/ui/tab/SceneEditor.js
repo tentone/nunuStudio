@@ -1084,7 +1084,7 @@ SceneEditor.prototype.resizeCamera = function()
 	if(this.canvas !== null && this.renderer !== null)
 	{
 		this.renderer.setSize(this.canvas.width, this.canvas.height);
-		this.camera.aspect = this.canvas.width/this.canvas.height;
+		this.camera.aspect = this.canvas.width / this.canvas.height;
 		this.camera.updateProjectionMatrix();
 
 		if(this.state === SceneEditor.TESTING)
