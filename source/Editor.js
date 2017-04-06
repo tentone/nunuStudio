@@ -294,6 +294,16 @@ Editor.initialize = function()
 	{
 		Editor.clipboard = new Clipboard();
 		Editor.args = [];
+
+		var parameters = location.search.substring(1).split("&");
+		for(var i = 0; i < parameters.length; i++)
+		{
+			var entry = parameters[i].split("=")[1];
+			if(entry !== undefined)
+			{
+				Editor.args.push(entry);
+			}
+		}
 	}
 
 	Editor.fullscreen = false;
@@ -649,61 +659,31 @@ Editor.undo = function()
 	}
 };
 
-//TODO <REMOVE TEST CODE>
-var update = 0;
-var treeDelta, assetDelta, tabsDelta, panelDelta;
-
 //Update all object views
 Editor.updateObjectViews = function()
 {
-	//TODO <REMOVE TEST CODE>
-	var start = Date.now();
-
 	Editor.updateTreeView();
 	Editor.updateObjectPanel();
 	Editor.updateTabsData();
 	Editor.updateAssetExplorer();
-
-	//TODO <REMOVE TEST CODE>
-	//var delta = Date.now() - start;
-	//console.log("Update " + (update++) + " ObjectView: " + delta + "ms");
-	//console.log("    Treeview " + treeDelta + "ms");
-	//console.log("    Panel " + panelDelta + "ms");
-	//console.log("    Tabs " + tabsDelta + "ms");
-	//console.log("    Assets " + assetDelta + "ms\n\n");
 };
 
 //Update tab names to match objects actual info
 Editor.updateTabsData = function()
 {
-	//TODO <REMOVE TEST CODE>
-	var start = Date.now();
-
 	Interface.tab.updateMetadata();
-
-	//TODO <REMOVE TEST CODE>
-	tabsDelta = Date.now() - start;
 };
 
 //Update tree view to match actual scene
 Editor.updateTreeView = function()
 {
-	//TODO <REMOVE TEST CODE>
-	var start = Date.now();
-
 	Interface.treeView.attachObject(Editor.program);
 	Interface.treeView.updateView();
-	
-	//TODO <REMOVE TEST CODE>
-	treeDelta = Date.now() - start;
 };
 
 //Update assets explorer content
 Editor.updateAssetExplorer = function()
 {
-	//TODO <REMOVE TEST CODE>
-	var start = Date.now();
-
 	//Clean asset explorer
 	Interface.assetExplorer.clear();
 	
@@ -744,24 +724,15 @@ Editor.updateAssetExplorer = function()
 	}
 
 	Interface.assetExplorer.updateInterface();
-
-	//TODO <REMOVE TEST CODE>
-	assetDelta = Date.now() - start;
 };
 
 //Updates object panel values
 Editor.updateObjectPanel = function()
 {
-	//TODO <REMOVE TEST CODE>
-	var start = Date.now();
-
 	if(Interface.panel !== null)
 	{
 		Interface.panel.updatePanel();
 	}
-
-	//TODO <REMOVE TEST CODE>
-	panelDelta = Date.now() - start;
 };
 
 //Create default resouces to be used when creating new objects
@@ -984,9 +955,7 @@ Editor.saveProgram = function(fname, compressed, keepDirectory)
 //Load program from file
 Editor.loadProgram = function(file)
 {
-	var reader = new FileReader();
-
-	reader.onload = function()
+	var onload = function()
 	{
 		try
 		{
@@ -1026,7 +995,18 @@ Editor.loadProgram = function(file)
 		}
 	};
 
-	reader.readAsText(file);
+	if(file instanceof File)
+	{
+		var reader = new FileReader();
+		reader.onload = onload;
+		reader.readAsText(file);
+	}
+	else if(typeof file === "string")
+	{
+		var reader = {};
+		reader.result = FileSystem.readFile(file);
+		onload();
+	}
 };
 
 //Load texture from file object
