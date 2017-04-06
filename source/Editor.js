@@ -221,7 +221,6 @@ include("editor/ui/panels/ObjectPanel.js");
 include("editor/ui/panels/ScenePanel.js");
 include("editor/ui/panels/ProgramPanel.js");
 include("editor/ui/panels/audio/AudioPanel.js");
-include("editor/ui/panels/script/ScriptPanel.js");
 include("editor/ui/panels/physics/PhysicsPanel.js");
 include("editor/ui/panels/devices/LeapPanel.js");
 include("editor/ui/panels/devices/KinectPanel.js");
@@ -866,10 +865,6 @@ Editor.selectObjectPanel = function()
 		else if(Editor.selectedObject instanceof KinectDevice)
 		{
 			Interface.panel = new KinectPanel(Interface.explorerResizable.divB, Editor.selectedObject);
-		}
-		else if(Editor.selectedObject instanceof Script)
-		{
-			Interface.panel = new ScriptPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
 		else if(Editor.selectedObject instanceof PerspectiveCamera)
 		{

@@ -77,21 +77,6 @@ function AudioPanel(parent, obj)
 	this.form.add(this.loop);
 	this.form.nextRow();
 
-	//Static
-	this.form.addText("Static Object");
-	this.static = new CheckBox(this.form.element);
-	this.static.size.set(20, 15);
-	this.static.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.matrixAutoUpdate = !(self.static.getValue());
-			Editor.history.push(self.obj, Action.CHANGED);
-		}
-	});
-	this.form.add(this.static);
-	this.form.nextRow();
-
 	//Update form
 	this.form.updateInterface();
 }

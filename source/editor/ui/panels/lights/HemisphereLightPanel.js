@@ -37,34 +37,6 @@ function HemisphereLightPanel(parent, obj)
 	this.form.add(this.groundColor);
 	this.form.nextRow();
 
-	//Visible
-	this.visible = new CheckBox(this.form.element);
-	this.form.addText("Visible");
-	this.visible.size.set(20, 15);
-	this.visible.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.visible = self.visible.getValue();
-		}
-	});
-	this.form.add(this.visible);
-	this.form.nextRow();
-
-	//Static
-	this.static = new CheckBox(this.form.element);
-	this.form.addText("Static Object");
-	this.static.size.set(20, 15);
-	this.static.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.matrixAutoUpdate = !(self.static.getValue());
-		}
-	});
-	this.form.add(this.static);
-	this.form.nextRow();
-
 	//Update form
 	this.form.updateInterface();
 }
@@ -81,7 +53,5 @@ HemisphereLightPanel.prototype.updatePanel = function()
 	{
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.groundColor.setValue(this.obj.groundColor.r, this.obj.groundColor.g, this.obj.groundColor.b);
-		this.visible.setValue(this.visible);
-		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
 };

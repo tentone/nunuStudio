@@ -129,6 +129,36 @@ function Panel(parent, obj)
 	this.form.add(this.rotation);
 	this.form.nextRow();
 
+	//Visible
+	this.visible = new CheckBox(this.form.element);
+	this.form.addText("Visible");
+	this.visible.size.set(20, 15);
+	this.visible.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			Editor.history.push(self.obj, Action.CHANGED);
+			self.obj.visible = self.visible.getValue();
+		}
+	});
+	this.form.add(this.visible);
+	this.form.nextRow();
+
+	//Static
+	this.static = new CheckBox(this.form.element);
+	this.form.addText("Static Object");
+	this.static.size.set(20, 15);
+	this.static.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			Editor.history.push(self.obj, Action.CHANGED);
+			self.obj.matrixAutoUpdate = !(self.static.getValue());
+		}
+	});
+	this.form.add(this.static);
+	this.form.nextRow();
+
 	//Attach object
 	this.attach(obj);
 
@@ -187,5 +217,7 @@ Panel.prototype.updatePanel = function()
 		this.position.setValue(this.obj.position);
 		this.scale.setValue(this.obj.scale);
 		this.rotation.setValue(this.obj.rotation);
+		this.visible.setValue(this.obj.visible);
+		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
 };
