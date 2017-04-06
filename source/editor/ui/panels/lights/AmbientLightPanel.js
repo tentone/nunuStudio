@@ -22,34 +22,6 @@ function AmbientLightPanel(parent, obj)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Visible
-	this.visible = new CheckBox(this.form.element);
-	this.form.addText("Visible");
-	this.visible.size.set(20, 15);
-	this.visible.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.visible = self.visible.getValue();
-		}
-	});
-	this.form.add(this.visible);
-	this.form.nextRow();
-
-	//Static
-	this.static = new CheckBox(this.form.element);
-	this.form.addText("Static Object");
-	this.static.size.set(20, 15);
-	this.static.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.matrixAutoUpdate = !(self.static.getValue());
-		}
-	});
-	this.form.add(this.static);
-	this.form.nextRow();
-
 	//Update form
 	this.form.updateInterface();
 }
@@ -64,7 +36,5 @@ AmbientLightPanel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
-		this.visible.setValue(this.visible);
-		this.static.setValue(!this.obj.matrixAutoUpdate);
 	}
 };

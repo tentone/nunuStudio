@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704051147";
+Nunu.TIMESTAMP = "201704061136";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -266,17 +266,17 @@ Nunu.runningOnDesktop = function() {
     a.uniformMatrix4fv(this.addr, !1, t(b, this.size, 16));
   }
   function U(a, b, d) {
-    var q = b.length, e = v(d, q);
-    a.uniform1iv(this.addr, e);
+    var q = b.length, E = v(d, q);
+    a.uniform1iv(this.addr, E);
     for (a = 0;a !== q;++a) {
-      d.setTexture2D(b[a] || Gc, e[a]);
+      d.setTexture2D(b[a] || Gc, E[a]);
     }
   }
   function Y(a, b, d) {
-    var q = b.length, e = v(d, q);
-    a.uniform1iv(this.addr, e);
+    var q = b.length, E = v(d, q);
+    a.uniform1iv(this.addr, E);
     for (a = 0;a !== q;++a) {
-      d.setTextureCube(b[a] || Zd, e[a]);
+      d.setTextureCube(b[a] || Zd, E[a]);
     }
   }
   function P(a) {
@@ -335,15 +335,15 @@ Nunu.runningOnDesktop = function() {
     this.renderer = d;
     d = a.getProgramParameter(b, a.ACTIVE_UNIFORMS);
     for (var q = 0;q < d;++q) {
-      var e = a.getActiveUniform(b, q), E = a.getUniformLocation(b, e.name), f = this, g = e.name, h = g.length;
+      var E = a.getActiveUniform(b, q), e = a.getUniformLocation(b, E.name), f = this, g = E.name, h = g.length;
       for (pf.lastIndex = 0;;) {
         var k = pf.exec(g), r = pf.lastIndex, l = k[1], n = k[3];
         "]" === k[2] && (l |= 0);
         if (void 0 === n || "[" === n && r + 2 === h) {
           g = f;
-          e = void 0 === n ? new S(l, e, E) : new ga(l, e, E);
-          g.seq.push(e);
-          g.map[e.id] = e;
+          E = void 0 === n ? new S(l, E, e) : new ga(l, E, e);
+          g.seq.push(E);
+          g.map[E.id] = E;
           break;
         } else {
           n = f.map[l], void 0 === n && (n = new ta(l), l = f, f = n, l.seq.push(f), l.map[f.id] = f), f = n;
@@ -466,7 +466,7 @@ Nunu.runningOnDesktop = function() {
     function q(a, q) {
       return a.renderOrder !== q.renderOrder ? a.renderOrder - q.renderOrder : a.z !== q.z ? q.z - a.z : q.id - a.id;
     }
-    var e, E, f, g, h, k, r, m, p, w, t, u, A, x, v, y, B, z = a.context, aa = a.state, K, D, F, C, S = new n, Ea = new l, G = new n;
+    var E, e, f, g, h, k, r, m, p, w, t, u, A, x, v, y, B, z = a.context, aa = a.state, K, D, F, C, S = new n, Ea = new l, G = new n;
     this.render = function(l, n) {
       if (0 !== b.length) {
         if (void 0 === F) {
@@ -488,8 +488,8 @@ Nunu.runningOnDesktop = function() {
           F = N;
           y = z.getAttribLocation(F, "position");
           B = z.getAttribLocation(F, "uv");
-          e = z.getUniformLocation(F, "uvOffset");
-          E = z.getUniformLocation(F, "uvScale");
+          E = z.getUniformLocation(F, "uvOffset");
+          e = z.getUniformLocation(F, "uvScale");
           f = z.getUniformLocation(F, "rotation");
           g = z.getUniformLocation(F, "scale");
           h = z.getUniformLocation(F, "color");
@@ -538,7 +538,7 @@ Nunu.runningOnDesktop = function() {
         X = 0;
         for (pa = b.length;X < pa;X++) {
           var Xa = b[X], Da = Xa.material;
-          !1 !== Da.visible && (z.uniform1f(v, Da.alphaTest), z.uniformMatrix4fv(m, !1, Xa.modelViewMatrix.elements), Xa.matrixWorld.decompose(S, Ea, G), n[0] = G.x, n[1] = G.y, Xa = 0, l.fog && Da.fog && (Xa = ja), N !== Xa && (z.uniform1i(w, Xa), N = Xa), null !== Da.map ? (z.uniform2f(e, Da.map.offset.x, Da.map.offset.y), z.uniform2f(E, Da.map.repeat.x, Da.map.repeat.y)) : (z.uniform2f(e, 0, 0), z.uniform2f(E, 1, 1)), z.uniform1f(r, Da.opacity), z.uniform3f(h, Da.color.r, Da.color.g, Da.color.b), 
+          !1 !== Da.visible && (z.uniform1f(v, Da.alphaTest), z.uniformMatrix4fv(m, !1, Xa.modelViewMatrix.elements), Xa.matrixWorld.decompose(S, Ea, G), n[0] = G.x, n[1] = G.y, Xa = 0, l.fog && Da.fog && (Xa = ja), N !== Xa && (z.uniform1i(w, Xa), N = Xa), null !== Da.map ? (z.uniform2f(E, Da.map.offset.x, Da.map.offset.y), z.uniform2f(e, Da.map.repeat.x, Da.map.repeat.y)) : (z.uniform2f(E, 0, 0), z.uniform2f(e, 1, 1)), z.uniform1f(r, Da.opacity), z.uniform3f(h, Da.color.r, Da.color.g, Da.color.b), 
           z.uniform1f(f, Da.rotation), z.uniform2fv(g, n), aa.setBlending(Da.blending, Da.blendEquation, Da.blendSrc, Da.blendDst), aa.buffers.depth.setTest(Da.depthTest), aa.buffers.depth.setMask(Da.depthWrite), Da.map ? a.setTexture2D(Da.map, 0) : a.setTexture2D(C, 0), z.drawElements(z.TRIANGLES, 6, z.UNSIGNED_SHORT, 0));
         }
         aa.enable(z.CULL_FACE);
@@ -625,13 +625,13 @@ Nunu.runningOnDesktop = function() {
     this.planes = [void 0 !== a ? a : new Sa, void 0 !== b ? b : new Sa, void 0 !== d ? d : new Sa, void 0 !== e ? e : new Sa, void 0 !== f ? f : new Sa, void 0 !== g ? g : new Sa];
   }
   function Fa(a, b, d, h) {
-    function q(q, b, d, e) {
-      var E = q.geometry, f;
+    function q(q, b, d, E) {
+      var e = q.geometry, f;
       f = A;
       var g = q.customDepthMaterial;
       d && (f = x, g = q.customDistanceMaterial);
-      g ? f = g : (g = !1, b.morphTargets && (E && E.isBufferGeometry ? g = E.morphAttributes && E.morphAttributes.position && 0 < E.morphAttributes.position.length : E && E.isGeometry && (g = E.morphTargets && 0 < E.morphTargets.length)), q.isSkinnedMesh && !1 === b.skinning && console.warn("THREE.WebGLShadowMap: THREE.SkinnedMesh with material.skinning set to false:", q), q = q.isSkinnedMesh && b.skinning, E = 0, g && (E |= 1), q && (E |= 2), f = f[E]);
-      a.localClippingEnabled && !0 === b.clipShadows && 0 !== b.clippingPlanes.length && (E = f.uuid, g = b.uuid, q = v[E], void 0 === q && (q = {}, v[E] = q), E = q[g], void 0 === E && (E = f.clone(), q[g] = E), f = E);
+      g ? f = g : (g = !1, b.morphTargets && (e && e.isBufferGeometry ? g = e.morphAttributes && e.morphAttributes.position && 0 < e.morphAttributes.position.length : e && e.isGeometry && (g = e.morphTargets && 0 < e.morphTargets.length)), q.isSkinnedMesh && !1 === b.skinning && console.warn("THREE.WebGLShadowMap: THREE.SkinnedMesh with material.skinning set to false:", q), q = q.isSkinnedMesh && b.skinning, e = 0, g && (e |= 1), q && (e |= 2), f = f[e]);
+      a.localClippingEnabled && !0 === b.clipShadows && 0 !== b.clippingPlanes.length && (e = f.uuid, g = b.uuid, q = v[e], void 0 === q && (q = {}, v[e] = q), e = q[g], void 0 === e && (e = f.clone(), q[g] = e), f = e);
       f.visible = b.visible;
       f.wireframe = b.wireframe;
       g = b.side;
@@ -642,7 +642,7 @@ Nunu.runningOnDesktop = function() {
       f.clippingPlanes = b.clippingPlanes;
       f.wireframeLinewidth = b.wireframeLinewidth;
       f.linewidth = b.linewidth;
-      d && void 0 !== f.uniforms.lightPos && f.uniforms.lightPos.value.copy(e);
+      d && void 0 !== f.uniforms.lightPos && f.uniforms.lightPos.value.copy(E);
       return f;
     }
     function E(b, e, f, g) {
@@ -3847,28 +3847,28 @@ Nunu.runningOnDesktop = function() {
     b = void 0 !== b ? Math.max(3, b) : 8;
     d = void 0 !== d ? d : 0;
     f = void 0 !== f ? f : 2 * Math.PI;
-    var q = [], g = [], E = [], h = [], k, r, l = new n, m = new e;
+    var q = [], g = [], h = [], E = [], k, r, l = new n, m = new e;
     g.push(0, 0, 0);
-    E.push(0, 0, 1);
-    h.push(.5, .5);
+    h.push(0, 0, 1);
+    E.push(.5, .5);
     r = 0;
     for (k = 3;r <= b;r++, k += 3) {
       var p = d + r / b * f;
       l.x = a * Math.cos(p);
       l.y = a * Math.sin(p);
       g.push(l.x, l.y, l.z);
-      E.push(0, 0, 1);
+      h.push(0, 0, 1);
       m.x = (g[k] / a + 1) / 2;
       m.y = (g[k + 1] / a + 1) / 2;
-      h.push(m.x, m.y);
+      E.push(m.x, m.y);
     }
     for (k = 1;k <= b;k++) {
       q.push(k, k + 1, 0);
     }
     this.setIndex(q);
     this.addAttribute("position", new ca(g, 3));
-    this.addAttribute("normal", new ca(E, 3));
-    this.addAttribute("uv", new ca(h, 2));
+    this.addAttribute("normal", new ca(h, 3));
+    this.addAttribute("uv", new ca(E, 2));
   }
   function ad() {
     ua.call(this, {uniforms:rc.merge([Ma.lights, {opacity:{value:1}}]), vertexShader:kb.shadow_vert, fragmentShader:kb.shadow_frag});
@@ -7284,7 +7284,7 @@ Nunu.runningOnDesktop = function() {
   }, applyToBufferAttribute:function() {
     var a = new n;
     return function(b) {
-      for (var d = 0, e = b.count;d < e;d++) {
+      for (var d = 0, q = b.count;d < q;d++) {
         a.x = b.getX(d), a.y = b.getY(d), a.z = b.getZ(d), a.applyMatrix3(this), b.setXYZ(d, a.x, a.y, a.z);
       }
       return b;
@@ -66585,27 +66585,6 @@ function Panel(a, b) {
   });
   this.form.add(this.rotation);
   this.form.nextRow();
-  this.attach(b);
-  this.parent.appendChild(this.element);
-}
-Panel.prototype.attach = function(a) {
-  this.obj = a instanceof THREE.Object3D ? a : null;
-};
-Panel.prototype.destroy = function() {
-  try {
-    this.parent.removeChild(this.element);
-  } catch (a) {
-  }
-};
-Panel.prototype.updateInterface = function() {
-  this.element.style.visibility = this.visible ? "visible" : "hidden";
-};
-Panel.prototype.updatePanel = function() {
-  null !== this.obj && (this.name.setText(this.obj.name), void 0 !== this.uuid && this.uuid.setText(this.obj.uuid), this.position.setValue(this.obj.position), this.scale.setValue(this.obj.scale), this.rotation.setValue(this.obj.rotation));
-};
-function ObjectPanel(a, b) {
-  Panel.call(this, a, b);
-  var e = this;
   this.visible = new CheckBox(this.form.element);
   this.form.addText("Visible");
   this.visible.size.set(20, 15);
@@ -66622,6 +66601,27 @@ function ObjectPanel(a, b) {
   });
   this.form.add(this.static);
   this.form.nextRow();
+  this.attach(b);
+  this.parent.appendChild(this.element);
+}
+Panel.prototype.attach = function(a) {
+  this.obj = a instanceof THREE.Object3D ? a : null;
+};
+Panel.prototype.destroy = function() {
+  try {
+    this.parent.removeChild(this.element);
+  } catch (a) {
+  }
+};
+Panel.prototype.updateInterface = function() {
+  this.element.style.visibility = this.visible ? "visible" : "hidden";
+};
+Panel.prototype.updatePanel = function() {
+  null !== this.obj && (this.name.setText(this.obj.name), void 0 !== this.uuid && this.uuid.setText(this.obj.uuid), this.position.setValue(this.obj.position), this.scale.setValue(this.obj.scale), this.rotation.setValue(this.obj.rotation), this.visible.setValue(this.obj.visible), this.static.setValue(!this.obj.matrixAutoUpdate));
+};
+function ObjectPanel(a, b) {
+  Panel.call(this, a, b);
+  var e = this;
   this.castShadow = new CheckBox(this.form.element);
   this.form.addText("Cast Shadow");
   this.castShadow.size.set(20, 15);
@@ -66643,7 +66643,7 @@ function ObjectPanel(a, b) {
 ObjectPanel.prototype = Object.create(Panel.prototype);
 ObjectPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.visible.setValue(this.obj.visible), this.static.setValue(!this.obj.matrixAutoUpdate), this.castShadow.setValue(this.obj.castShadow), this.receiveShadow.setValue(this.obj.receiveShadow));
+  null !== this.obj && (this.castShadow.setValue(this.obj.castShadow), this.receiveShadow.setValue(this.obj.receiveShadow));
 };
 function ScenePanel(a, b) {
   Panel.call(this, a, b);
@@ -66934,14 +66934,6 @@ function AudioPanel(a, b) {
   });
   this.form.add(this.loop);
   this.form.nextRow();
-  this.form.addText("Static Object");
-  this.static = new CheckBox(this.form.element);
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (e.obj.matrixAutoUpdate = !e.static.getValue(), Editor.history.push(e.obj, Action.CHANGED));
-  });
-  this.form.add(this.static);
-  this.form.nextRow();
   this.form.updateInterface();
 }
 AudioPanel.prototype = Object.create(Panel.prototype);
@@ -66954,32 +66946,6 @@ AudioPanel.prototype.destroy = function() {
 AudioPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
   null !== this.obj && (this.player.setAudioBuffer(this.obj.audio.data), this.volume.setValue(this.obj.volume), this.static.setValue(!this.obj.matrixAutoUpdate), this.autoplay.setValue(this.obj.autoplay), this.loop.setValue(this.obj.loop), this.playbackRate.setValue(this.obj.playbackRate));
-};
-function ScriptPanel(a, b) {
-  Panel.call(this, a, b);
-  var e = this;
-  this.visible = new CheckBox(this.form.element);
-  this.form.addText("Visible");
-  this.visible.size.set(20, 15);
-  this.visible.setOnChange(function() {
-    null !== e.obj && (Editor.history.push(e.obj, Action.CHANGED), e.obj.visible = e.visible.getValue());
-  });
-  this.form.add(this.visible);
-  this.form.nextRow();
-  this.static = new CheckBox(this.form.element);
-  this.form.addText("Static Object");
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (Editor.history.push(e.obj, Action.CHANGED), e.obj.matrixAutoUpdate = !e.static.getValue());
-  });
-  this.form.add(this.static);
-  this.form.nextRow();
-  this.form.updateInterface();
-}
-ScriptPanel.prototype = Object.create(Panel.prototype);
-ScriptPanel.prototype.updatePanel = function() {
-  Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.visible.setValue(this.obj.visible), this.static.setValue(!this.obj.matrixAutoUpdate));
 };
 function PhysicsPanel(a, b) {
   Panel.call(this, a, b);
@@ -67359,22 +67325,6 @@ OrthographicCameraPanel.prototype.updatePanel = function() {
 function SkyPanel(a, b) {
   Panel.call(this, a, b);
   var e = this;
-  this.visible = new CheckBox(this.form.element);
-  this.form.addText("Visible");
-  this.visible.size.set(20, 15);
-  this.visible.setOnChange(function() {
-    null !== e.obj && (e.obj.visible = e.visible.getValue());
-  });
-  this.form.add(this.visible);
-  this.form.nextRow();
-  this.static = new CheckBox(this.form.element);
-  this.form.addText("Static Object");
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (e.obj.matrixAutoUpdate = !e.static.getValue());
-  });
-  this.form.add(this.static);
-  this.form.nextRow();
   this.autoUpdate = new CheckBox(this.form.element);
   this.form.addText("Auto update");
   this.autoUpdate.size.set(20, 15);
@@ -67513,8 +67463,8 @@ function SkyPanel(a, b) {
 SkyPanel.prototype = Object.create(Panel.prototype);
 SkyPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.visible.setValue(this.obj.visible), this.static.setValue(!this.obj.matrixAutoUpdate), this.autoUpdate.setValue(this.obj.autoUpdate), this.dayTime.setValue(this.obj.dayTime), this.time.setValue(this.obj.time), this.sunDistance.setValue(this.obj.sunDistance), this.castShadow.setValue(this.obj.sun.castShadow), this.shadowWidth.setValue(this.obj.sun.shadow.mapSize.width), this.shadowHeight.setValue(this.obj.sun.shadow.mapSize.height), this.shadowNear.setValue(this.obj.sun.shadow.camera.near), 
-  this.shadowFar.setValue(this.obj.sun.shadow.camera.far), this.shadowLeft.setValue(this.obj.sun.shadow.camera.left), this.shadowRight.setValue(this.obj.sun.shadow.camera.right), this.shadowTop.setValue(this.obj.sun.shadow.camera.top), this.shadowBottom.setValue(this.obj.sun.shadow.camera.bottom));
+  null !== this.obj && (this.autoUpdate.setValue(this.obj.autoUpdate), this.dayTime.setValue(this.obj.dayTime), this.time.setValue(this.obj.time), this.sunDistance.setValue(this.obj.sunDistance), this.castShadow.setValue(this.obj.sun.castShadow), this.shadowWidth.setValue(this.obj.sun.shadow.mapSize.width), this.shadowHeight.setValue(this.obj.sun.shadow.mapSize.height), this.shadowNear.setValue(this.obj.sun.shadow.camera.near), this.shadowFar.setValue(this.obj.sun.shadow.camera.far), this.shadowLeft.setValue(this.obj.sun.shadow.camera.left), 
+  this.shadowRight.setValue(this.obj.sun.shadow.camera.right), this.shadowTop.setValue(this.obj.sun.shadow.camera.top), this.shadowBottom.setValue(this.obj.sun.shadow.camera.bottom));
 };
 function AmbientLightPanel(a, b) {
   Panel.call(this, a, b);
@@ -67530,28 +67480,12 @@ function AmbientLightPanel(a, b) {
   });
   this.form.add(this.color);
   this.form.nextRow();
-  this.visible = new CheckBox(this.form.element);
-  this.form.addText("Visible");
-  this.visible.size.set(20, 15);
-  this.visible.setOnChange(function() {
-    null !== e.obj && (e.obj.visible = e.visible.getValue());
-  });
-  this.form.add(this.visible);
-  this.form.nextRow();
-  this.static = new CheckBox(this.form.element);
-  this.form.addText("Static Object");
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (e.obj.matrixAutoUpdate = !e.static.getValue());
-  });
-  this.form.add(this.static);
-  this.form.nextRow();
   this.form.updateInterface();
 }
 AmbientLightPanel.prototype = Object.create(Panel.prototype);
 AmbientLightPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.visible.setValue(this.visible), this.static.setValue(!this.obj.matrixAutoUpdate));
+  null !== this.obj && this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 };
 function RectAreaLightPanel(a, b) {
   Panel.call(this, a, b);
@@ -67595,28 +67529,12 @@ function RectAreaLightPanel(a, b) {
   });
   this.form.add(this.height);
   this.form.nextRow();
-  this.visible = new CheckBox(this.form.element);
-  this.form.addText("Visible");
-  this.visible.size.set(20, 15);
-  this.visible.setOnChange(function() {
-    null !== e.obj && (e.obj.visible = e.visible.getValue());
-  });
-  this.form.add(this.visible);
-  this.form.nextRow();
-  this.static = new CheckBox(this.form.element);
-  this.form.addText("Static Object");
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (e.obj.matrixAutoUpdate = !e.static.getValue());
-  });
-  this.form.add(this.static);
-  this.form.nextRow();
   this.form.updateInterface();
 }
 RectAreaLightPanel.prototype = Object.create(Panel.prototype);
 RectAreaLightPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.intensity.setValue(this.obj.intensity), this.width.setValue(this.obj.width), this.height.setValue(this.obj.height), this.visible.setValue(this.visible), this.static.setValue(!this.obj.matrixAutoUpdate));
+  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.intensity.setValue(this.obj.intensity), this.width.setValue(this.obj.width), this.height.setValue(this.obj.height));
 };
 function HemisphereLightPanel(a, b) {
   Panel.call(this, a, b);
@@ -67643,28 +67561,12 @@ function HemisphereLightPanel(a, b) {
   });
   this.form.add(this.groundColor);
   this.form.nextRow();
-  this.visible = new CheckBox(this.form.element);
-  this.form.addText("Visible");
-  this.visible.size.set(20, 15);
-  this.visible.setOnChange(function() {
-    null !== e.obj && (e.obj.visible = e.visible.getValue());
-  });
-  this.form.add(this.visible);
-  this.form.nextRow();
-  this.static = new CheckBox(this.form.element);
-  this.form.addText("Static Object");
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (e.obj.matrixAutoUpdate = !e.static.getValue());
-  });
-  this.form.add(this.static);
-  this.form.nextRow();
   this.form.updateInterface();
 }
 HemisphereLightPanel.prototype = Object.create(Panel.prototype);
 HemisphereLightPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.groundColor.setValue(this.obj.groundColor.r, this.obj.groundColor.g, this.obj.groundColor.b), this.visible.setValue(this.visible), this.static.setValue(!this.obj.matrixAutoUpdate));
+  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.groundColor.setValue(this.obj.groundColor.r, this.obj.groundColor.g, this.obj.groundColor.b));
 };
 function PointLightPanel(a, b) {
   Panel.call(this, a, b);
@@ -67699,22 +67601,6 @@ function PointLightPanel(a, b) {
     null !== e.obj && (e.obj.intensity = e.intensity.getValue());
   });
   this.form.add(this.intensity);
-  this.form.nextRow();
-  this.visible = new CheckBox(this.form.element);
-  this.form.addText("Visible");
-  this.visible.size.set(20, 15);
-  this.visible.setOnChange(function() {
-    null !== e.obj && (e.obj.visible = e.visible.getValue());
-  });
-  this.form.add(this.visible);
-  this.form.nextRow();
-  this.static = new CheckBox(this.form.element);
-  this.form.addText("Static Object");
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (e.obj.matrixAutoUpdate = !e.static.getValue());
-  });
-  this.form.add(this.static);
   this.form.nextRow();
   this.form.addText("Shadows");
   this.form.nextRow();
@@ -67769,7 +67655,7 @@ function PointLightPanel(a, b) {
 PointLightPanel.prototype = Object.create(Panel.prototype);
 PointLightPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.distance.setValue(this.obj.distance), this.intensity.setValue(this.obj.intensity), this.visible.setValue(this.obj.visible), this.static.setValue(!this.obj.matrixAutoUpdate), this.castShadow.setValue(this.obj.castShadow), this.shadowWidth.setValue(this.obj.shadow.mapSize.width), this.shadowHeight.setValue(this.obj.shadow.mapSize.height), this.shadowNear.setValue(this.obj.shadow.camera.near), this.shadowFar.setValue(this.obj.shadow.camera.far));
+  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.distance.setValue(this.obj.distance), this.intensity.setValue(this.obj.intensity), this.castShadow.setValue(this.obj.castShadow), this.shadowWidth.setValue(this.obj.shadow.mapSize.width), this.shadowHeight.setValue(this.obj.shadow.mapSize.height), this.shadowNear.setValue(this.obj.shadow.camera.near), this.shadowFar.setValue(this.obj.shadow.camera.far));
 };
 function DirectionalLightPanel(a, b) {
   Panel.call(this, a, b);
@@ -67784,22 +67670,6 @@ function DirectionalLightPanel(a, b) {
     }
   });
   this.form.add(this.color);
-  this.form.nextRow();
-  this.visible = new CheckBox(this.form.element);
-  this.form.addText("Visible");
-  this.visible.size.set(20, 15);
-  this.visible.setOnChange(function() {
-    null !== e.obj && (e.obj.visible = e.visible.getValue());
-  });
-  this.form.add(this.visible);
-  this.form.nextRow();
-  this.static = new CheckBox(this.form.element);
-  this.form.addText("Static Object");
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (e.obj.matrixAutoUpdate = !e.static.getValue());
-  });
-  this.form.add(this.static);
   this.form.nextRow();
   this.form.addText("Shadows");
   this.form.nextRow();
@@ -67890,8 +67760,8 @@ function DirectionalLightPanel(a, b) {
 DirectionalLightPanel.prototype = Object.create(Panel.prototype);
 DirectionalLightPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.visible.setValue(this.obj.visible), this.static.setValue(!this.obj.matrixAutoUpdate), this.castShadow.setValue(this.obj.castShadow), this.shadowWidth.setValue(this.obj.shadow.mapSize.width), this.shadowHeight.setValue(this.obj.shadow.mapSize.height), this.shadowNear.setValue(this.obj.shadow.camera.near), this.shadowFar.setValue(this.obj.shadow.camera.far), this.shadowLeft.setValue(this.obj.shadow.camera.left), 
-  this.shadowRight.setValue(this.obj.shadow.camera.right), this.shadowTop.setValue(this.obj.shadow.camera.top), this.shadowBottom.setValue(this.obj.shadow.camera.bottom));
+  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.castShadow.setValue(this.obj.castShadow), this.shadowWidth.setValue(this.obj.shadow.mapSize.width), this.shadowHeight.setValue(this.obj.shadow.mapSize.height), this.shadowNear.setValue(this.obj.shadow.camera.near), this.shadowFar.setValue(this.obj.shadow.camera.far), this.shadowLeft.setValue(this.obj.shadow.camera.left), this.shadowRight.setValue(this.obj.shadow.camera.right), this.shadowTop.setValue(this.obj.shadow.camera.top), 
+  this.shadowBottom.setValue(this.obj.shadow.camera.bottom));
 };
 function SpotLightPanel(a, b) {
   Panel.call(this, a, b);
@@ -67928,22 +67798,6 @@ function SpotLightPanel(a, b) {
     null !== e.obj && (e.obj.angle = e.angle.getValue(), e.angleText.setText(e.obj.angle));
   });
   this.form.add(this.angle);
-  this.form.nextRow();
-  this.visible = new CheckBox(this.form.element);
-  this.form.addText("Visible");
-  this.visible.size.set(20, 15);
-  this.visible.setOnChange(function() {
-    null !== e.obj && (e.obj.visible = e.visible.getValue());
-  });
-  this.form.add(this.visible);
-  this.form.nextRow();
-  this.static = new CheckBox(this.form.element);
-  this.form.addText("Static Object");
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (e.obj.matrixAutoUpdate = !e.static.getValue());
-  });
-  this.form.add(this.static);
   this.form.nextRow();
   this.form.addText("Shadows");
   this.form.nextRow();
@@ -67998,27 +67852,11 @@ function SpotLightPanel(a, b) {
 SpotLightPanel.prototype = Object.create(Panel.prototype);
 SpotLightPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.angle.setValue(this.obj.angle), this.penumbra.setValue(this.obj.penumbra), this.visible.setValue(this.obj.visible), this.static.setValue(!this.obj.matrixAutoUpdate), this.castShadow.setValue(this.obj.castShadow), this.shadowWidth.setValue(this.obj.shadow.mapSize.width), this.shadowHeight.setValue(this.obj.shadow.mapSize.height), this.shadowNear.setValue(this.obj.shadow.camera.near), this.shadowFar.setValue(this.obj.shadow.camera.far));
+  null !== this.obj && (this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b), this.angle.setValue(this.obj.angle), this.penumbra.setValue(this.obj.penumbra), this.castShadow.setValue(this.obj.castShadow), this.shadowWidth.setValue(this.obj.shadow.mapSize.width), this.shadowHeight.setValue(this.obj.shadow.mapSize.height), this.shadowNear.setValue(this.obj.shadow.camera.near), this.shadowFar.setValue(this.obj.shadow.camera.far));
 };
 function MeshPanel(a, b) {
   Panel.call(this, a, b);
   var e = this;
-  this.visible = new CheckBox(this.form.element);
-  this.form.addText("Visible");
-  this.visible.size.set(20, 15);
-  this.visible.setOnChange(function() {
-    null !== e.obj && (Editor.history.push(e.obj, Action.CHANGED), e.obj.visible = e.visible.getValue());
-  });
-  this.form.add(this.visible);
-  this.form.nextRow();
-  this.static = new CheckBox(this.form.element);
-  this.form.addText("Static Object");
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (Editor.history.push(e.obj, Action.CHANGED), e.obj.matrixAutoUpdate = !e.static.getValue());
-  });
-  this.form.add(this.static);
-  this.form.nextRow();
   this.castShadow = new CheckBox(this.form.element);
   this.form.addText("Cast Shadow");
   this.castShadow.size.set(20, 15);
@@ -68041,11 +67879,27 @@ function MeshPanel(a, b) {
 MeshPanel.prototype = Object.create(Panel.prototype);
 MeshPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (null !== this.geometry && this.geometry.updateValues(), this.visible.setValue(this.obj.visible), this.static.setValue(!this.obj.matrixAutoUpdate), this.castShadow.setValue(this.obj.castShadow), this.receiveShadow.setValue(this.obj.receiveShadow));
+  null !== this.obj && (null !== this.geometry && this.geometry.updateValues(), this.castShadow.setValue(this.obj.castShadow), this.receiveShadow.setValue(this.obj.receiveShadow));
 };
 function Text3DPanel(a, b) {
   Panel.call(this, a, b);
   var e = this;
+  this.castShadow = new CheckBox(this.form.element);
+  this.form.addText("Cast Shadow");
+  this.castShadow.size.set(20, 15);
+  this.castShadow.setOnChange(function() {
+    null !== e.obj && (Editor.history.push(e.obj, Action.CHANGED), e.obj.castShadow = e.castShadow.getValue());
+  });
+  this.form.add(this.castShadow);
+  this.form.nextRow();
+  this.receiveShadow = new CheckBox(this.form.element);
+  this.form.addText("React Shadow");
+  this.receiveShadow.size.set(20, 15);
+  this.receiveShadow.setOnChange(function() {
+    null !== e.obj && (Editor.history.push(e.obj, Action.CHANGED), e.obj.receiveShadow = e.receiveShadow.getValue());
+  });
+  this.form.add(this.receiveShadow);
+  this.form.nextRow();
   this.form.addText("Text");
   this.text = new TextArea(this.form.element);
   this.text.size.set(190, 60);
@@ -68112,44 +67966,12 @@ function Text3DPanel(a, b) {
   });
   this.form.add(this.bevelSize);
   this.form.nextRow();
-  this.visible = new CheckBox(this.form.element);
-  this.form.addText("Visible");
-  this.visible.size.set(20, 15);
-  this.visible.setOnChange(function() {
-    null !== e.obj && (Editor.history.push(e.obj, Action.CHANGED), e.obj.visible = e.visible.getValue());
-  });
-  this.form.add(this.visible);
-  this.form.nextRow();
-  this.static = new CheckBox(this.form.element);
-  this.form.addText("Static Object");
-  this.static.size.set(20, 15);
-  this.static.setOnChange(function() {
-    null !== e.obj && (Editor.history.push(e.obj, Action.CHANGED), e.obj.matrixAutoUpdate = !e.static.getValue());
-  });
-  this.form.add(this.static);
-  this.form.nextRow();
-  this.castShadow = new CheckBox(this.form.element);
-  this.form.addText("Cast Shadow");
-  this.castShadow.size.set(20, 15);
-  this.castShadow.setOnChange(function() {
-    null !== e.obj && (Editor.history.push(e.obj, Action.CHANGED), e.obj.castShadow = e.castShadow.getValue());
-  });
-  this.form.add(this.castShadow);
-  this.form.nextRow();
-  this.receiveShadow = new CheckBox(this.form.element);
-  this.form.addText("React Shadow");
-  this.receiveShadow.size.set(20, 15);
-  this.receiveShadow.setOnChange(function() {
-    null !== e.obj && (Editor.history.push(e.obj, Action.CHANGED), e.obj.receiveShadow = e.receiveShadow.getValue());
-  });
-  this.form.add(this.receiveShadow);
-  this.form.nextRow();
   this.form.updateInterface();
 }
 Text3DPanel.prototype = Object.create(Panel.prototype);
 Text3DPanel.prototype.updatePanel = function() {
   Panel.prototype.updatePanel.call(this);
-  null !== this.obj && (this.text.setText(this.obj.text), this.size.setValue(this.obj.size), this.height.setValue(this.obj.height), this.curveSegments.setValue(this.obj.curveSegments), this.bevel.setValue(this.obj.bevel), this.bevelThickness.setValue(this.obj.bevelThickness), this.bevelSize.setValue(this.obj.bevelSize), this.castShadow.setValue(this.obj.castShadow), this.receiveShadow.setValue(this.obj.receiveShadow), this.visible.setValue(this.obj.visible), this.static.setValue(!this.obj.matrixAutoUpdate));
+  null !== this.obj && (this.castShadow.setValue(this.obj.castShadow), this.receiveShadow.setValue(this.obj.receiveShadow), this.text.setText(this.obj.text), this.size.setValue(this.obj.size), this.height.setValue(this.obj.height), this.curveSegments.setValue(this.obj.curveSegments), this.bevel.setValue(this.obj.bevel), this.bevelThickness.setValue(this.obj.bevelThickness), this.bevelSize.setValue(this.obj.bevelSize));
 };
 function GeometryForm() {
 }
@@ -70092,9 +69914,9 @@ Editor.selectObjectPanel = function() {
   null !== Interface.panel && Interface.panel.destroy();
   null !== Editor.selectedObject ? (Interface.panel = Editor.selectedObject instanceof THREE.Mesh ? Editor.selectedObject instanceof Text3D ? new Text3DPanel(Interface.explorerResizable.divB, Editor.selectedObject) : new MeshPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof THREE.Light ? Editor.selectedObject instanceof THREE.PointLight ? new PointLightPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof 
   THREE.RectAreaLight ? new RectAreaLightPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof THREE.SpotLight ? new SpotLightPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof THREE.DirectionalLight ? new DirectionalLightPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof THREE.HemisphereLight ? new HemisphereLightPanel(Interface.explorerResizable.divB, Editor.selectedObject) : 
-  new AmbientLightPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof Sky ? new SkyPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof LeapMotion ? new LeapPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof KinectDevice ? new KinectPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof Script ? new ScriptPanel(Interface.explorerResizable.divB, 
-  Editor.selectedObject) : Editor.selectedObject instanceof PerspectiveCamera ? new PerspectiveCameraPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof OrthographicCamera ? new OrthographicCameraPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof THREE.Audio ? new AudioPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof Scene ? new ScenePanel(Interface.explorerResizable.divB, 
-  Editor.selectedObject) : Editor.selectedObject instanceof Program ? new ProgramPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof PhysicsObject ? new PhysicsPanel(Interface.explorerResizable.divB, Editor.selectedObject) : new ObjectPanel(Interface.explorerResizable.divB, Editor.selectedObject), Interface.panel.updatePanel(), Interface.panel.updateInterface()) : Interface.panel = null;
+  new AmbientLightPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof Sky ? new SkyPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof LeapMotion ? new LeapPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof KinectDevice ? new KinectPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof PerspectiveCamera ? new PerspectiveCameraPanel(Interface.explorerResizable.divB, 
+  Editor.selectedObject) : Editor.selectedObject instanceof OrthographicCamera ? new OrthographicCameraPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof THREE.Audio ? new AudioPanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof Scene ? new ScenePanel(Interface.explorerResizable.divB, Editor.selectedObject) : Editor.selectedObject instanceof Program ? new ProgramPanel(Interface.explorerResizable.divB, Editor.selectedObject) : 
+  Editor.selectedObject instanceof PhysicsObject ? new PhysicsPanel(Interface.explorerResizable.divB, Editor.selectedObject) : new ObjectPanel(Interface.explorerResizable.divB, Editor.selectedObject), Interface.panel.updatePanel(), Interface.panel.updateInterface()) : Interface.panel = null;
 };
 Editor.resetEditingFlags = function() {
   Editor.clearSelection();

@@ -57,34 +57,6 @@ function SpotLightPanel(parent, obj)
 	});
 	this.form.add(this.angle);
 	this.form.nextRow();
-	
-	//Visible
-	this.visible = new CheckBox(this.form.element);
-	this.form.addText("Visible");
-	this.visible.size.set(20, 15);
-	this.visible.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.visible = self.visible.getValue();
-		}
-	});
-	this.form.add(this.visible);
-	this.form.nextRow();
-
-	//Static
-	this.static = new CheckBox(this.form.element);
-	this.form.addText("Static Object");
-	this.static.size.set(20, 15);
-	this.static.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.matrixAutoUpdate = !(self.static.getValue());
-		}
-	});
-	this.form.add(this.static);
-	this.form.nextRow();
 
 	//Shadow map
 	this.form.addText("Shadows");
@@ -188,8 +160,6 @@ SpotLightPanel.prototype.updatePanel = function()
 		this.color.setValue(this.obj.color.r, this.obj.color.g, this.obj.color.b);
 		this.angle.setValue(this.obj.angle);
 		this.penumbra.setValue(this.obj.penumbra);
-		this.visible.setValue(this.obj.visible);
-		this.static.setValue(!this.obj.matrixAutoUpdate);
 		
 		this.castShadow.setValue(this.obj.castShadow);
 		this.shadowWidth.setValue(this.obj.shadow.mapSize.width);
