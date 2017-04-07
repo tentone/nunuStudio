@@ -301,7 +301,7 @@ Editor.initialize = function()
 			var entry = parameters[i].split("=")[1];
 			if(entry !== undefined)
 			{
-				Editor.args.push(entry);
+				Editor.args.push(unescape(entry));
 			}
 		}
 	}
