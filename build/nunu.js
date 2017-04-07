@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704070017";
+Nunu.TIMESTAMP = "201704071343";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -4149,14 +4149,14 @@ Nunu.runningOnDesktop = function() {
     this.validate();
     this.optimize();
   }
-  function sc(d, n, a, b) {
-    Qb.call(this, d, n, a, b);
+  function sc(d, a, b, c) {
+    Qb.call(this, d, a, b, c);
   }
-  function Md(d, n, a, b) {
-    Ya.call(this, d, n, a, b);
+  function Md(d, a, b, c) {
+    Ya.call(this, d, a, b, c);
   }
-  function fd(d, n, a, b) {
-    Qb.call(this, d, n, a, b);
+  function fd(d, a, b, c) {
+    Qb.call(this, d, a, b, c);
   }
   function tc(d, a, b, c) {
     Qb.call(this, d, a, b, c);
@@ -9832,8 +9832,8 @@ Nunu.runningOnDesktop = function() {
     function c(d, a, b) {
       return d.x !== a.x ? d.x < a.x ? d.x <= b.x && b.x <= a.x : a.x <= b.x && b.x <= d.x : d.y < a.y ? d.y <= b.y && b.y <= a.y : a.y <= b.y && b.y <= d.y;
     }
-    function e(d, a, b, e, n) {
-      var h = a.x - d.x, m = a.y - d.y, g = e.x - b.x, k = e.y - b.y, q = d.x - b.x, f = d.y - b.y, p = m * g - h * k, r = m * q - h * f;
+    function e(d, a, b, e, h) {
+      var n = a.x - d.x, m = a.y - d.y, g = e.x - b.x, k = e.y - b.y, q = d.x - b.x, f = d.y - b.y, p = m * g - n * k, r = m * q - n * f;
       if (Math.abs(p) > Number.EPSILON) {
         if (0 < p) {
           if (0 > r || r > p) {
@@ -9853,10 +9853,10 @@ Nunu.runningOnDesktop = function() {
           }
         }
         if (0 === g) {
-          return !n || 0 !== r && r !== p ? [d] : [];
+          return !h || 0 !== r && r !== p ? [d] : [];
         }
         if (g === p) {
-          return !n || 0 !== r && r !== p ? [a] : [];
+          return !h || 0 !== r && r !== p ? [a] : [];
         }
         if (0 === r) {
           return [b];
@@ -9864,13 +9864,13 @@ Nunu.runningOnDesktop = function() {
         if (r === p) {
           return [e];
         }
-        n = g / p;
-        return [{x:d.x + n * h, y:d.y + n * m}];
+        h = g / p;
+        return [{x:d.x + h * n, y:d.y + h * m}];
       }
       if (0 !== r || k * q !== g * f) {
         return [];
       }
-      m = 0 === h && 0 === m;
+      m = 0 === n && 0 === m;
       g = 0 === g && 0 === k;
       if (m && g) {
         return d.x !== b.x || d.y !== b.y ? [] : [d];
@@ -9881,8 +9881,8 @@ Nunu.runningOnDesktop = function() {
       if (g) {
         return c(d, a, b) ? [b] : [];
       }
-      0 !== h ? (d.x < a.x ? (h = d, g = d.x, m = a, d = a.x) : (h = a, g = a.x, m = d, d = d.x), b.x < e.x ? (a = b, p = b.x, k = e, b = e.x) : (a = e, p = e.x, k = b, b = b.x)) : (d.y < a.y ? (h = d, g = d.y, m = a, d = a.y) : (h = a, g = a.y, m = d, d = d.y), b.y < e.y ? (a = b, p = b.y, k = e, b = e.y) : (a = e, p = e.y, k = b, b = b.y));
-      return g <= p ? d < p ? [] : d === p ? n ? [] : [a] : d <= b ? [a, m] : [a, k] : g > b ? [] : g === b ? n ? [] : [h] : d <= b ? [h, m] : [h, k];
+      0 !== n ? (d.x < a.x ? (n = d, g = d.x, m = a, d = a.x) : (n = a, g = a.x, m = d, d = d.x), b.x < e.x ? (a = b, p = b.x, k = e, b = e.x) : (a = e, p = e.x, k = b, b = b.x)) : (d.y < a.y ? (n = d, g = d.y, m = a, d = a.y) : (n = a, g = a.y, m = d, d = d.y), b.y < e.y ? (a = b, p = b.y, k = e, b = e.y) : (a = e, p = e.y, k = b, b = b.y));
+      return g <= p ? d < p ? [] : d === p ? h ? [] : [a] : d <= b ? [a, m] : [a, k] : g > b ? [] : g === b ? h ? [] : [n] : d <= b ? [n, m] : [n, k];
     }
     function n(d, a, b, c) {
       var e = a.x - d.x, h = a.y - d.y;
@@ -11126,23 +11126,23 @@ Nunu.runningOnDesktop = function() {
       a.push(Rb.parse(b[e]).scale(c));
     }
     return new bb(d.name, d.duration, a);
-  }, toJSON:function(d) {
-    var a = [], b = d.tracks;
-    d = {name:d.name, duration:d.duration, tracks:a};
+  }, toJSON:function(a) {
+    var d = [], b = a.tracks;
+    a = {name:a.name, duration:a.duration, tracks:d};
     for (var c = 0, e = b.length;c !== e;++c) {
-      a.push(Rb.toJSON(b[c]));
+      d.push(Rb.toJSON(b[c]));
     }
-    return d;
-  }, CreateFromMorphTargetSequence:function(d, a, b, c) {
-    for (var e = a.length, h = [], m = 0;m < e;m++) {
+    return a;
+  }, CreateFromMorphTargetSequence:function(a, b, c, e) {
+    for (var d = b.length, h = [], m = 0;m < d;m++) {
       var n = [], g = [];
-      n.push((m + e - 1) % e, m, (m + 1) % e);
+      n.push((m + d - 1) % d, m, (m + 1) % d);
       g.push(0, 1, 0);
       var k = Da.getKeyframeOrder(n), n = Da.sortedArray(n, 1, k), g = Da.sortedArray(g, 1, k);
-      c || 0 !== n[0] || (n.push(e), g.push(g[0]));
-      h.push((new tc(".morphTargetInfluences[" + a[m].name + "]", n, g)).scale(1 / b));
+      e || 0 !== n[0] || (n.push(d), g.push(g[0]));
+      h.push((new tc(".morphTargetInfluences[" + b[m].name + "]", n, g)).scale(1 / c));
     }
-    return new bb(d, -1, h);
+    return new bb(a, -1, h);
   }, findByName:function(a, b) {
     var d = a;
     Array.isArray(a) || (d = a.geometry && a.geometry.animations || a.animations);
@@ -11350,19 +11350,19 @@ Nunu.runningOnDesktop = function() {
   }, createMaterial:function() {
     var a = {NoBlending:0, NormalBlending:1, AdditiveBlending:2, SubtractiveBlending:3, MultiplyBlending:4, CustomBlending:5}, b = new Z, c = new Bd, e = new Qd;
     return function(d, h, m) {
-      function n(a, d, b, e, n) {
+      function g(a, d, b, e, g) {
         a = h + a;
         var k = uc.Handlers.get(a);
         null !== k ? a = k.load(a) : (c.setCrossOrigin(m), a = c.load(a));
         void 0 !== d && (a.repeat.fromArray(d), 1 !== d[0] && (a.wrapS = 1E3), 1 !== d[1] && (a.wrapT = 1E3));
         void 0 !== b && a.offset.fromArray(b);
         void 0 !== e && ("repeat" === e[0] && (a.wrapS = 1E3), "mirror" === e[0] && (a.wrapS = 1002), "repeat" === e[1] && (a.wrapT = 1E3), "mirror" === e[1] && (a.wrapT = 1002));
-        void 0 !== n && (a.anisotropy = n);
+        void 0 !== g && (a.anisotropy = g);
         d = na.generateUUID();
-        g[d] = a;
+        n[d] = a;
         return d;
       }
-      var g = {}, k = {uuid:na.generateUUID(), type:"MeshLambertMaterial"}, q;
+      var n = {}, k = {uuid:na.generateUUID(), type:"MeshLambertMaterial"}, q;
       for (q in d) {
         var f = d[q];
         switch(q) {
@@ -11399,7 +11399,7 @@ Nunu.runningOnDesktop = function() {
             "standard" === f.toLowerCase() && (k.type = "MeshStandardMaterial");
             break;
           case "mapDiffuse":
-            k.map = n(f, d.mapDiffuseRepeat, d.mapDiffuseOffset, d.mapDiffuseWrap, d.mapDiffuseAnisotropy);
+            k.map = g(f, d.mapDiffuseRepeat, d.mapDiffuseOffset, d.mapDiffuseWrap, d.mapDiffuseAnisotropy);
             break;
           case "mapDiffuseRepeat":
           case "mapDiffuseOffset":
@@ -11407,7 +11407,7 @@ Nunu.runningOnDesktop = function() {
           case "mapDiffuseAnisotropy":
             break;
           case "mapEmissive":
-            k.emissiveMap = n(f, d.mapEmissiveRepeat, d.mapEmissiveOffset, d.mapEmissiveWrap, d.mapEmissiveAnisotropy);
+            k.emissiveMap = g(f, d.mapEmissiveRepeat, d.mapEmissiveOffset, d.mapEmissiveWrap, d.mapEmissiveAnisotropy);
             break;
           case "mapEmissiveRepeat":
           case "mapEmissiveOffset":
@@ -11415,7 +11415,7 @@ Nunu.runningOnDesktop = function() {
           case "mapEmissiveAnisotropy":
             break;
           case "mapLight":
-            k.lightMap = n(f, d.mapLightRepeat, d.mapLightOffset, d.mapLightWrap, d.mapLightAnisotropy);
+            k.lightMap = g(f, d.mapLightRepeat, d.mapLightOffset, d.mapLightWrap, d.mapLightAnisotropy);
             break;
           case "mapLightRepeat":
           case "mapLightOffset":
@@ -11423,7 +11423,7 @@ Nunu.runningOnDesktop = function() {
           case "mapLightAnisotropy":
             break;
           case "mapAO":
-            k.aoMap = n(f, d.mapAORepeat, d.mapAOOffset, d.mapAOWrap, d.mapAOAnisotropy);
+            k.aoMap = g(f, d.mapAORepeat, d.mapAOOffset, d.mapAOWrap, d.mapAOAnisotropy);
             break;
           case "mapAORepeat":
           case "mapAOOffset":
@@ -11431,7 +11431,7 @@ Nunu.runningOnDesktop = function() {
           case "mapAOAnisotropy":
             break;
           case "mapBump":
-            k.bumpMap = n(f, d.mapBumpRepeat, d.mapBumpOffset, d.mapBumpWrap, d.mapBumpAnisotropy);
+            k.bumpMap = g(f, d.mapBumpRepeat, d.mapBumpOffset, d.mapBumpWrap, d.mapBumpAnisotropy);
             break;
           case "mapBumpScale":
             k.bumpScale = f;
@@ -11442,7 +11442,7 @@ Nunu.runningOnDesktop = function() {
           case "mapBumpAnisotropy":
             break;
           case "mapNormal":
-            k.normalMap = n(f, d.mapNormalRepeat, d.mapNormalOffset, d.mapNormalWrap, d.mapNormalAnisotropy);
+            k.normalMap = g(f, d.mapNormalRepeat, d.mapNormalOffset, d.mapNormalWrap, d.mapNormalAnisotropy);
             break;
           case "mapNormalFactor":
             k.normalScale = [f, f];
@@ -11453,7 +11453,7 @@ Nunu.runningOnDesktop = function() {
           case "mapNormalAnisotropy":
             break;
           case "mapSpecular":
-            k.specularMap = n(f, d.mapSpecularRepeat, d.mapSpecularOffset, d.mapSpecularWrap, d.mapSpecularAnisotropy);
+            k.specularMap = g(f, d.mapSpecularRepeat, d.mapSpecularOffset, d.mapSpecularWrap, d.mapSpecularAnisotropy);
             break;
           case "mapSpecularRepeat":
           case "mapSpecularOffset":
@@ -11461,7 +11461,7 @@ Nunu.runningOnDesktop = function() {
           case "mapSpecularAnisotropy":
             break;
           case "mapMetalness":
-            k.metalnessMap = n(f, d.mapMetalnessRepeat, d.mapMetalnessOffset, d.mapMetalnessWrap, d.mapMetalnessAnisotropy);
+            k.metalnessMap = g(f, d.mapMetalnessRepeat, d.mapMetalnessOffset, d.mapMetalnessWrap, d.mapMetalnessAnisotropy);
             break;
           case "mapMetalnessRepeat":
           case "mapMetalnessOffset":
@@ -11469,7 +11469,7 @@ Nunu.runningOnDesktop = function() {
           case "mapMetalnessAnisotropy":
             break;
           case "mapRoughness":
-            k.roughnessMap = n(f, d.mapRoughnessRepeat, d.mapRoughnessOffset, d.mapRoughnessWrap, d.mapRoughnessAnisotropy);
+            k.roughnessMap = g(f, d.mapRoughnessRepeat, d.mapRoughnessOffset, d.mapRoughnessWrap, d.mapRoughnessAnisotropy);
             break;
           case "mapRoughnessRepeat":
           case "mapRoughnessOffset":
@@ -11477,7 +11477,7 @@ Nunu.runningOnDesktop = function() {
           case "mapRoughnessAnisotropy":
             break;
           case "mapAlpha":
-            k.alphaMap = n(f, d.mapAlphaRepeat, d.mapAlphaOffset, d.mapAlphaWrap, d.mapAlphaAnisotropy);
+            k.alphaMap = g(f, d.mapAlphaRepeat, d.mapAlphaOffset, d.mapAlphaWrap, d.mapAlphaAnisotropy);
             break;
           case "mapAlphaRepeat":
           case "mapAlphaOffset":
@@ -11515,7 +11515,7 @@ Nunu.runningOnDesktop = function() {
       "MeshBasicMaterial" === k.type && delete k.emissive;
       "MeshPhongMaterial" !== k.type && delete k.specular;
       1 > k.opacity && (k.transparent = !0);
-      e.setTextures(g);
+      e.setTextures(n);
       return e.parse(k);
     };
   }()});
@@ -13804,9 +13804,9 @@ Nunu.runningOnDesktop = function() {
       this.object.updateMatrixWorld(!0);
       c.getNormalMatrix(this.object.matrixWorld);
       for (var d = this.object.matrixWorld, e = this.geometry.attributes.position, h = this.object.geometry, m = h.vertices, h = h.faces, g = 0, k = 0, q = h.length;k < q;k++) {
-        var f = h[k], n = f.normal;
+        var f = h[k], p = f.normal;
         a.copy(m[f.a]).add(m[f.b]).add(m[f.c]).divideScalar(3).applyMatrix4(d);
-        b.copy(n).applyMatrix3(c).normalize().multiplyScalar(this.size).add(a);
+        b.copy(p).applyMatrix3(c).normalize().multiplyScalar(this.size).add(a);
         e.setXYZ(g, a.x, a.y, a.z);
         g += 1;
         e.setXYZ(g, b.x, b.y, b.z);
@@ -27039,27 +27039,27 @@ var __extends = this && this.__extends || function(a, f) {
         f[c] = a[b];
       }
     };
-    a.setArraySize = function(a, f, k) {
-      void 0 === k && (k = 0);
+    a.setArraySize = function(a, g, f) {
+      void 0 === f && (f = 0);
       var b = a.length;
-      if (b == f) {
+      if (b == g) {
         return a;
       }
-      a.length = f;
-      if (b < f) {
-        for (;b < f;b++) {
-          a[b] = k;
+      a.length = g;
+      if (b < g) {
+        for (;b < g;b++) {
+          a[b] = f;
         }
       }
       return a;
     };
-    a.ensureArrayCapacity = function(b, f, k) {
-      void 0 === k && (k = 0);
-      return b.length >= f ? b : a.setArraySize(b, f, k);
+    a.ensureArrayCapacity = function(b, g, f) {
+      void 0 === f && (f = 0);
+      return b.length >= g ? b : a.setArraySize(b, g, f);
     };
-    a.newArray = function(a, f) {
+    a.newArray = function(a, g) {
       for (var b = Array(a), c = 0;c < a;c++) {
-        b[c] = f;
+        b[c] = g;
       }
       return b;
     };
@@ -27068,8 +27068,8 @@ var __extends = this && this.__extends || function(a, f) {
         return new Float32Array(b);
       }
       b = Array(b);
-      for (var f = 0;f < b.length;f++) {
-        b[f] = 0;
+      for (var g = 0;g < b.length;g++) {
+        b[g] = 0;
       }
       return b;
     };
@@ -27665,13 +27665,13 @@ var __extends = this && this.__extends || function(a, f) {
     b.CffEncoding = c;
     b.GlyphNames = e;
     b.addGlyphNames = function(b) {
-      for (var c, e = b.tables.cmap.glyphIndexMap, f = Object.keys(e), h = 0;h < f.length;h += 1) {
-        var g = f[h];
-        c = b.glyphs.get(e[g]);
-        c.addUnicode(parseInt(g));
+      for (var c, e = b.tables.cmap.glyphIndexMap, f = Object.keys(e), g = 0;g < f.length;g += 1) {
+        var h = f[g];
+        c = b.glyphs.get(e[h]);
+        c.addUnicode(parseInt(h));
       }
-      for (h = 0;h < b.glyphs.length;h += 1) {
-        c = b.glyphs.get(h), b.cffEncoding ? c.name = b.cffEncoding.charset[h] : b.glyphNames.names && (c.name = b.glyphNames.glyphIndexToName(h));
+      for (g = 0;g < b.glyphs.length;g += 1) {
+        c = b.glyphs.get(g), b.cffEncoding ? c.name = b.cffEncoding.charset[g] : b.glyphNames.names && (c.name = b.glyphNames.glyphIndexToName(g));
       }
     };
   }, {}], 5:[function(f, l, b) {
@@ -27721,45 +27721,45 @@ var __extends = this && this.__extends || function(a, f) {
       var e = this.getGposKerningValue;
       return e ? e(b, c) : this.kerningPairs[b + "," + c] || 0;
     };
-    g.prototype.forEachGlyph = function(b, c, e, f, h, g) {
+    g.prototype.forEachGlyph = function(b, c, e, f, g, h) {
       c = void 0 !== c ? c : 0;
       e = void 0 !== e ? e : 0;
       f = void 0 !== f ? f : 72;
-      h = h || {};
-      var k = void 0 === h.kerning ? !0 : h.kerning, l = 1 / this.unitsPerEm * f;
+      g = g || {};
+      var k = void 0 === g.kerning ? !0 : g.kerning, l = 1 / this.unitsPerEm * f;
       b = this.stringToGlyphs(b);
       for (var p = 0;p < b.length;p += 1) {
         var q = b[p];
-        if (g(q, c, e, f, h), q.advanceWidth && (c += q.advanceWidth * l), k && p < b.length - 1) {
+        if (h(q, c, e, f, g), q.advanceWidth && (c += q.advanceWidth * l), k && p < b.length - 1) {
           q = this.getKerningValue(q, b[p + 1]), c += q * l;
         }
       }
     };
-    g.prototype.getPath = function(b, c, e, f, h) {
-      var g = new k.Path;
-      return this.forEachGlyph(b, c, e, f, h, function(b, c, e, f) {
+    g.prototype.getPath = function(b, c, e, f, g) {
+      var h = new k.Path;
+      return this.forEachGlyph(b, c, e, f, g, function(b, c, e, f) {
         b = b.getPath(c, e, f);
-        g.extend(b);
-      }), g;
+        h.extend(b);
+      }), h;
     };
-    g.prototype.getPaths = function(b, c, e, f, h) {
-      var g = [];
-      return this.forEachGlyph(b, c, e, f, h, function(b, c, e, f) {
+    g.prototype.getPaths = function(b, c, e, f, g) {
+      var h = [];
+      return this.forEachGlyph(b, c, e, f, g, function(b, c, e, f) {
         b = b.getPath(c, e, f);
-        g.push(b);
-      }), g;
+        h.push(b);
+      }), h;
     };
-    g.prototype.draw = function(b, c, e, f, h, g) {
-      this.getPath(c, e, f, h, g).draw(b);
+    g.prototype.draw = function(b, c, e, f, g, h) {
+      this.getPath(c, e, f, g, h).draw(b);
     };
-    g.prototype.drawPoints = function(b, c, e, f, h, g) {
-      this.forEachGlyph(c, e, f, h, g, function(c, e, f, h) {
-        c.drawPoints(b, e, f, h);
+    g.prototype.drawPoints = function(b, c, e, f, g, h) {
+      this.forEachGlyph(c, e, f, g, h, function(c, e, f, g) {
+        c.drawPoints(b, e, f, g);
       });
     };
-    g.prototype.drawMetrics = function(b, c, e, f, h, g) {
-      this.forEachGlyph(c, e, f, h, g, function(c, e, f, h) {
-        c.drawMetrics(b, e, f, h);
+    g.prototype.drawMetrics = function(b, c, e, f, g, h) {
+      this.forEachGlyph(c, e, f, g, h, function(c, e, f, g) {
+        c.drawMetrics(b, e, f, g);
       });
     };
     g.prototype.getEnglishName = function(b) {
@@ -27791,11 +27791,11 @@ var __extends = this && this.__extends || function(a, f) {
       return c;
     };
     g.prototype.download = function() {
-      var b = this.getEnglishName("fontFamily"), c = this.getEnglishName("fontSubfamily"), e = b.replace(/\s/g, "") + "-" + c + ".otf", h = this.toArrayBuffer();
-      r.isBrowser() ? (window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem, window.requestFileSystem(window.TEMPORARY, h.byteLength, function(b) {
+      var b = this.getEnglishName("fontFamily"), c = this.getEnglishName("fontSubfamily"), e = b.replace(/\s/g, "") + "-" + c + ".otf", g = this.toArrayBuffer();
+      r.isBrowser() ? (window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem, window.requestFileSystem(window.TEMPORARY, g.byteLength, function(b) {
         b.root.getFile(e, {create:!0}, function(b) {
           b.createWriter(function(c) {
-            var e = new DataView(h), e = new Blob([e], {type:"font/opentype"});
+            var e = new DataView(g), e = new Blob([e], {type:"font/opentype"});
             c.write(e);
             c.addEventListener("writeend", function() {
               location.href = b.toURL();
@@ -27804,7 +27804,7 @@ var __extends = this && this.__extends || function(a, f) {
         });
       }, function(b) {
         throw Error(b.name + ": " + b.message);
-      })) : (b = f("fs"), c = r.arrayBufferToNodeBuffer(h), b.writeFileSync(e, c));
+      })) : (b = f("fs"), c = r.arrayBufferToNodeBuffer(g), b.writeFileSync(e, c));
     };
     g.prototype.fsSelectionValues = {ITALIC:1, UNDERSCORE:2, NEGATIVE:4, OUTLINED:8, STRIKEOUT:16, BOLD:32, REGULAR:64, USER_TYPO_METRICS:128, WWS:256, OBLIQUE:512};
     g.prototype.usWidthClasses = {ULTRA_CONDENSED:1, EXTRA_CONDENSED:2, CONDENSED:3, SEMI_CONDENSED:4, MEDIUM:5, SEMI_EXPANDED:6, EXPANDED:7, EXTRA_EXPANDED:8, ULTRA_EXPANDED:9};
@@ -27857,31 +27857,31 @@ var __extends = this && this.__extends || function(a, f) {
         return [];
       }
       for (var b = [], e = [], f = 0;f < this.points.length;f += 1) {
-        var h = this.points[f];
-        e.push(h);
-        h.lastPointOfContour && (b.push(e), e = []);
+        var g = this.points[f];
+        e.push(g);
+        g.lastPointOfContour && (b.push(e), e = []);
       }
       return c.argument(0 === e.length, "There are still points left in the current contour."), b;
     };
     k.prototype.getMetrics = function() {
       for (var b = this.path.commands, c = [], e = [], f = 0;f < b.length;f += 1) {
-        var h = b[f];
-        "Z" !== h.type && (c.push(h.x), e.push(h.y));
-        "Q" !== h.type && "C" !== h.type || (c.push(h.x1), e.push(h.y1));
-        "C" === h.type && (c.push(h.x2), e.push(h.y2));
+        var g = b[f];
+        "Z" !== g.type && (c.push(g.x), e.push(g.y));
+        "Q" !== g.type && "C" !== g.type || (c.push(g.x1), e.push(g.y1));
+        "C" === g.type && (c.push(g.x2), e.push(g.y2));
       }
       b = {xMin:Math.min.apply(null, c), yMin:Math.min.apply(null, e), xMax:Math.max.apply(null, c), yMax:Math.max.apply(null, e), leftSideBearing:this.leftSideBearing};
       return isFinite(b.xMin) || (b.xMin = 0), isFinite(b.xMax) || (b.xMax = this.advanceWidth), isFinite(b.yMin) || (b.yMin = 0), isFinite(b.yMax) || (b.yMax = 0), b.rightSideBearing = this.advanceWidth - b.leftSideBearing - (b.xMax - b.xMin), b;
     };
-    k.prototype.draw = function(b, c, e, f, h) {
-      this.getPath(c, e, f, h).draw(b);
+    k.prototype.draw = function(b, c, e, f, g) {
+      this.getPath(c, e, f, g).draw(b);
     };
     k.prototype.drawPoints = function(b, c, e, f) {
-      function h(c, e, f, h) {
-        var g = 2 * Math.PI;
+      function g(c, e, f, g) {
+        var h = 2 * Math.PI;
         b.beginPath();
         for (var k = 0;k < c.length;k += 1) {
-          b.moveTo(e + c[k].x * h, f + c[k].y * h), b.arc(e + c[k].x * h, f + c[k].y * h, 2, 0, g, !1);
+          b.moveTo(e + c[k].x * g, f + c[k].y * g), b.arc(e + c[k].x * g, f + c[k].y * g, 2, 0, h, !1);
         }
         b.closePath();
         b.fill();
@@ -27889,33 +27889,33 @@ var __extends = this && this.__extends || function(a, f) {
       c = void 0 !== c ? c : 0;
       e = void 0 !== e ? e : 0;
       f = 1 / this.path.unitsPerEm * (void 0 !== f ? f : 24);
-      for (var g = [], k = [], l = this.path, m = 0;m < l.commands.length;m += 1) {
+      for (var h = [], k = [], l = this.path, m = 0;m < l.commands.length;m += 1) {
         var p = l.commands[m];
-        void 0 !== p.x && g.push({x:p.x, y:-p.y});
+        void 0 !== p.x && h.push({x:p.x, y:-p.y});
         void 0 !== p.x1 && k.push({x:p.x1, y:-p.y1});
         void 0 !== p.x2 && k.push({x:p.x2, y:-p.y2});
       }
       b.fillStyle = "blue";
-      h(g, c, e, f);
+      g(h, c, e, f);
       b.fillStyle = "red";
-      h(k, c, e, f);
+      g(k, c, e, f);
     };
-    k.prototype.drawMetrics = function(b, c, f, h) {
+    k.prototype.drawMetrics = function(b, c, f, g) {
       c = void 0 !== c ? c : 0;
       f = void 0 !== f ? f : 0;
-      h = 1 / this.path.unitsPerEm * (void 0 !== h ? h : 24);
+      g = 1 / this.path.unitsPerEm * (void 0 !== g ? g : 24);
       b.lineWidth = 1;
       b.strokeStyle = "black";
       e.line(b, c, -1E4, c, 1E4);
       e.line(b, -1E4, f, 1E4, f);
-      var g = this.xMin || 0, k = this.yMin || 0, l = this.xMax || 0, p = this.yMax || 0, m = this.advanceWidth || 0;
+      var h = this.xMin || 0, k = this.yMin || 0, l = this.xMax || 0, p = this.yMax || 0, m = this.advanceWidth || 0;
       b.strokeStyle = "blue";
-      e.line(b, c + g * h, -1E4, c + g * h, 1E4);
-      e.line(b, c + l * h, -1E4, c + l * h, 1E4);
-      e.line(b, -1E4, f + -k * h, 1E4, f + -k * h);
-      e.line(b, -1E4, f + -p * h, 1E4, f + -p * h);
+      e.line(b, c + h * g, -1E4, c + h * g, 1E4);
+      e.line(b, c + l * g, -1E4, c + l * g, 1E4);
+      e.line(b, -1E4, f + -k * g, 1E4, f + -k * g);
+      e.line(b, -1E4, f + -p * g, 1E4, f + -p * g);
       b.strokeStyle = "green";
-      e.line(b, c + m * h, -1E4, c + m * h, 1E4);
+      e.line(b, c + m * g, -1E4, c + m * g, 1E4);
     };
     b.Glyph = k;
   }, {"./check":2, "./draw":3, "./path":11}], 7:[function(f, l, b) {
@@ -32768,10 +32768,18 @@ function SpotLight(a, f, l, b, g, k) {
   this.shadow.mapSize.height = 512;
 }
 SpotLight.prototype = Object.create(THREE.SpotLight.prototype);
+SpotLight.prototype.setTarget = function(a) {
+  this.target = a;
+};
 SpotLight.prototype.updateShadowMap = function() {
   this.shadow.map.dispose();
   this.shadow.map = null;
   this.shadow.camera.updateProjectionMatrix();
+};
+SpotLight.prototype.toJSON = function(a) {
+  a = THREE.Light.prototype.toJSON.call(this, a);
+  a.object.target = this.target.uuid;
+  return a;
 };
 function AmbientLight(a) {
   THREE.AmbientLight.call(this, a);

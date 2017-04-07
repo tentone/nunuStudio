@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704070017";
+Nunu.TIMESTAMP = "201704071343";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -32773,10 +32773,18 @@ function SpotLight(a, b, e, d, f, g) {
   this.shadow.mapSize.height = 512;
 }
 SpotLight.prototype = Object.create(THREE.SpotLight.prototype);
+SpotLight.prototype.setTarget = function(a) {
+  this.target = a;
+};
 SpotLight.prototype.updateShadowMap = function() {
   this.shadow.map.dispose();
   this.shadow.map = null;
   this.shadow.camera.updateProjectionMatrix();
+};
+SpotLight.prototype.toJSON = function(a) {
+  a = THREE.Light.prototype.toJSON.call(this, a);
+  a.object.target = this.target.uuid;
+  return a;
 };
 function AmbientLight(a) {
   THREE.AmbientLight.call(this, a);
@@ -36980,7 +36988,7 @@ NODE_ID = 45104, NODE_HDR = 45072, PIVOT = 45075, INSTANCE_NAME = 45073, MORPH_S
       b = oe(a, b, d);
     }
     var e = d && d.bias || (0 > K(b.primary().head, a.sel.primary().head) ? -1 : 1);
-    bd(a, Sd(a, b, e, !0));
+    bd(a, Sd(a, b, e, !0 ));
     d && !1 === d.scroll || !a.cm || dc(a.cm);
   }
   function bd(a, b) {
@@ -69753,7 +69761,7 @@ Editor.initialize = function() {
     Editor.args = [];
     for (var a = location.search.substring(1).split("&"), b = 0;b < a.length;b++) {
       var e = a[b].split("=")[1];
-      void 0 !== e && Editor.args.push(e);
+      void 0 !== e && Editor.args.push(unescape(e));
     }
   }
   Editor.fullscreen = !1;
