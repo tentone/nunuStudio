@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704080137";
+Nunu.TIMESTAMP = "201704081923";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -63986,11 +63986,11 @@ SceneEditor.prototype.update = function() {
   null !== this.stats && this.stats.begin();
   this.isEditingObject = !1;
   if (this.state === SceneEditor.EDITING) {
-    if (this.keyboard.keyJustPressed(Keyboard.DEL)) {
-      Editor.deleteObject();
+    if (this.keyboard.keyJustPressed(Keyboard.F5)) {
+      this.setState(SceneEditor.TESTING);
     } else {
-      if (this.keyboard.keyJustPressed(Keyboard.F5)) {
-        this.setState(SceneEditor.TESTING);
+      if (this.keyboard.keyJustPressed(Keyboard.DEL)) {
+        Editor.deleteObject();
       } else {
         if (this.keyboard.keyJustPressed(Keyboard.F2)) {
           if (null !== Editor.selectedObject) {
@@ -64010,9 +64010,8 @@ SceneEditor.prototype.update = function() {
       if (Settings.editor.lockMouse && Nunu.runningOnDesktop() && (!this.isEditingObject && (this.mouse.buttonJustPressed(Mouse.LEFT) || this.mouse.buttonJustPressed(Mouse.RIGHT) || this.mouse.buttonJustPressed(Mouse.MIDDLE)) ? this.mouse.setLock(!0) : (this.mouse.buttonJustReleased(Mouse.LEFT) || this.mouse.buttonJustReleased(Mouse.RIGHT) || this.mouse.buttonJustReleased(Mouse.MIDDLE)) && this.mouse.setLock(!1)), this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC) {
         this.mouse.buttonPressed(Mouse.RIGHT) && (a = this.camera.size / this.canvas.width * 2, this.camera.position.x -= this.mouse.delta.x * a, this.camera.position.y += this.mouse.delta.y * a), 0 !== this.mouse.wheel && (this.camera.size += this.mouse.wheel * this.camera.size / 1E3, this.camera.updateProjectionMatrix());
       } else {
-        if (this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject) {
-          this.cameraRotation.x -= .002 * this.mouse.delta.x, this.cameraRotation.y -= .002 * this.mouse.delta.y, -1.57 > this.cameraRotation.y ? this.cameraRotation.y = -1.57 : 1.57 < this.cameraRotation.y && (this.cameraRotation.y = 1.57), this.setCameraRotation(this.cameraRotation, this.camera);
-        } else {
+        if (Settings.editor.navigation === Settings.FREE) {
+          this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject && (this.cameraRotation.y = Settings.editor.invertNavigation ? this.cameraRotation.y + .002 * this.mouse.delta.y : this.cameraRotation.y - .002 * this.mouse.delta.y, this.cameraRotation.x -= .002 * this.mouse.delta.x, -1.57 > this.cameraRotation.y ? this.cameraRotation.y = -1.57 : 1.57 < this.cameraRotation.y && (this.cameraRotation.y = 1.57), this.setCameraRotation(this.cameraRotation, this.camera));
           if (this.mouse.buttonPressed(Mouse.RIGHT)) {
             a = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 1E3;
             .02 > a && (a = .02);
@@ -64023,11 +64022,16 @@ SceneEditor.prototype.update = function() {
             e = Math.sin(this.cameraRotation.x + MathUtils.pid2);
             this.camera.position.z += this.mouse.delta.x * a * b;
             this.camera.position.x += this.mouse.delta.x * a * e;
-          } else {
-            this.mouse.buttonPressed(Mouse.MIDDLE) && (this.camera.position.y += .1 * this.mouse.delta.y);
           }
+          this.mouse.buttonPressed(Mouse.MIDDLE) && (this.camera.position.y += .1 * this.mouse.delta.y);
+          0 !== this.mouse.wheel && (a = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 2E3, a *= this.mouse.wheel, 0 > a && -.03 < a ? a = -.03 : 0 < a && .03 > a && (a = .03), b = this.camera.getWorldDirection(), b.multiplyScalar(a), this.camera.position.sub(b));
+          Editor.keyboard.keyPressed(Keyboard.W) && (b = this.camera.getWorldDirection(), b.multiplyScalar(.5), this.camera.position.add(b));
+          Editor.keyboard.keyPressed(Keyboard.S) && (b = this.camera.getWorldDirection(), b.multiplyScalar(.5), this.camera.position.sub(b));
+          Editor.keyboard.keyPressed(Keyboard.A);
+          Editor.keyboard.keyPressed(Keyboard.D);
+        } else {
+          Settings.editor.navigation === Settings.ORBIT && this.mouse.buttonPressed(Mouse.LEFT);
         }
-        0 !== this.mouse.wheel && (a = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 2E3, a *= this.mouse.wheel, 0 > a && -.03 < a ? a = -.03 : 0 < a && .03 > a && (a = .03), b = this.camera.getWorldDirection(), this.camera.position.x -= a * b.x, this.camera.position.y -= a * b.y, this.camera.position.z -= a * b.z);
       }
     }
   } else {
@@ -65089,6 +65093,24 @@ function GeneralSettingsTab(a, b, e, d) {
   });
   this.form.add(this.transformationSpace);
   this.form.nextRow();
+  this.form.addText("Navigation mode");
+  this.navigation = new DropdownList(this.form.element);
+  this.navigation.size.set(150, 20);
+  this.navigation.addValue("Free", Settings.FREE);
+  this.navigation.addValue("Orbit", Settings.ORBIT);
+  this.navigation.setOnChange(function() {
+    Settings.editor.navigation = f.navigation.getValue();
+  });
+  this.form.add(this.navigation);
+  this.form.nextRow();
+  this.form.addText("Invert Navigation");
+  this.invertNavigation = new CheckBox(this.form.element);
+  this.invertNavigation.size.set(20, 16);
+  this.invertNavigation.setOnChange(function() {
+    Settings.editor.invertNavigation = f.invertNavigation.getValue();
+  });
+  this.form.add(this.invertNavigation);
+  this.form.nextRow();
   this.form.addText("Camera preview");
   this.cameraPreviewEnabled = new CheckBox(this.form.element);
   this.cameraPreviewEnabled.size.set(20, 16);
@@ -65138,6 +65160,8 @@ GeneralSettingsTab.prototype.activate = function() {
   this.gridSpacing.setValue(Settings.editor.gridSpacing);
   this.axisEnabled.setValue(Settings.editor.axisEnabled);
   this.lockMouse.setValue(Settings.editor.lockMouse);
+  this.navigation.setValue(Settings.editor.navigation);
+  this.invertNavigation.setValue(Settings.editor.invertNavigation);
   this.transformationSpace.setValue(Settings.editor.transformationSpace);
   this.cameraPreviewEnabled.setValue(Settings.editor.cameraPreviewEnabled);
   this.cameraPreviewPercentage.setValue(Settings.editor.cameraPreviewPercentage);
@@ -69709,6 +69733,8 @@ function Settings() {
 }
 Settings.RADIANS = 0;
 Settings.DEGREES = 1;
+Settings.FREE = 10;
+Settings.ORBIT = 11;
 Settings.loadDefault = function() {
   Settings.general = {};
   Settings.general.theme = "dark";
@@ -69727,6 +69753,8 @@ Settings.loadDefault = function() {
   Settings.editor.cameraPreviewPercentage = .35;
   Settings.editor.lockMouse = !0;
   Settings.editor.transformationSpace = "world";
+  Settings.editor.navigation = Settings.FREE;
+  Settings.editor.invertNavigation = !1;
   Settings.render = {};
   Settings.render.followProject = !1;
   Settings.render.toneMapping = THREE.LinearToneMapping;
