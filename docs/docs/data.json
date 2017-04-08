@@ -1616,7 +1616,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
             "line": 3,
-            "description": "Same as THREE.SpotLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/SpotLight",
+            "description": "Same as THREE.SpotLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/SpotLight\n\nSpotLight has a target that is always represented in words coordinates, and can be moved to change where the light is pointing at.",
             "params": [
                 {
                     "name": "color",
@@ -2568,7 +2568,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 92,
+            "line": 89,
             "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere",
             "is_constructor": 1,
             "params": [
@@ -5834,10 +5834,38 @@
         },
         {
             "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
-            "line": 33,
+            "line": 35,
+            "description": "SpotLight looks to the target object coordinates.\nThe target object should always be at the scene root.",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "Target object.",
+                    "type": "Object3D"
+                }
+            ],
+            "class": "SpotLight",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
+            "line": 45,
             "description": "Update light shadow map atributtes at runtime",
             "itemtype": "method",
             "name": "updateShadowMap",
+            "class": "SpotLight",
+            "module": "Lights"
+        },
+        {
+            "file": "..\\source\\core\\objects\\lights\\SpotLight.js",
+            "line": 56,
+            "description": "Serialize SpotLight data to JSON.",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Meta.",
+                    "type": "Object"
+                }
+            ],
             "class": "SpotLight",
             "module": "Lights"
         },
@@ -9965,7 +9993,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 100,
+            "line": 97,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -9975,7 +10003,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 106,
+            "line": 103,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -9985,7 +10013,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 112,
+            "line": 109,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -9996,7 +10024,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 119,
+            "line": 116,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -10007,7 +10035,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 126,
+            "line": 123,
             "description": "Canvas used to render graphics",
             "itemtype": "property",
             "name": "canvas",
@@ -10017,7 +10045,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 132,
+            "line": 129,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasResize",
@@ -10028,7 +10056,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 193,
+            "line": 190,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -10054,7 +10082,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 218,
+            "line": 215,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -10070,7 +10098,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 231,
+            "line": 228,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -10079,7 +10107,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 292,
+            "line": 289,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -10088,7 +10116,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 308,
+            "line": 305,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -10097,7 +10125,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 345,
+            "line": 342,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -10106,7 +10134,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 369,
+            "line": 366,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -10122,7 +10150,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 385,
+            "line": 382,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -10138,7 +10166,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 398,
+            "line": 395,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -10154,7 +10182,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 411,
+            "line": 408,
             "description": "Check if VR mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -10167,7 +10195,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 422,
+            "line": 419,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -10176,7 +10204,7 @@
         },
         {
             "file": "..\\source\\runtime\\NunuApp.js",
-            "line": 448,
+            "line": 445,
             "description": "Set fullscreen mode",
             "params": [
                 {
@@ -10311,6 +10339,14 @@
             "line": " ..\\source\\core\\objects\\device\\LeapMotion.js:260"
         },
         {
+            "message": "Missing item type\nSpotLight looks to the target object coordinates.\nThe target object should always be at the scene root.",
+            "line": " ..\\source\\core\\objects\\lights\\SpotLight.js:35"
+        },
+        {
+            "message": "Missing item type\nSerialize SpotLight data to JSON.",
+            "line": " ..\\source\\core\\objects\\lights\\SpotLight.js:56"
+        },
+        {
             "message": "Missing item type\nCreate JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
             "line": " ..\\source\\core\\objects\\mesh\\Text3D.js:179"
         },
@@ -10368,7 +10404,7 @@
         },
         {
             "message": "Missing item type\nSet fullscreen mode",
-            "line": " ..\\source\\runtime\\NunuApp.js:448"
+            "line": " ..\\source\\runtime\\NunuApp.js:445"
         },
         {
             "message": "Missing item type\nModules in this bundle",
