@@ -16,7 +16,9 @@
 		"cameraPreviewEnabled": true,
 		"cameraPreviewPercentage": 0.35,
 		"lockMouse": true,
-		"transformationSpace": "world"
+		"transformationSpace": "world",
+		"navigation": 10,
+		"invertNavigation": false
 	},
 	"render": {
 		"followProject": false,

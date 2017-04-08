@@ -165,6 +165,30 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.transformationSpace);
 	this.form.nextRow();
 
+	//Navigation
+	this.form.addText("Navigation mode");
+	this.navigation = new DropdownList(this.form.element);
+	this.navigation.size.set(150, 20);
+	this.navigation.addValue("Free", Settings.FREE);
+	this.navigation.addValue("Orbit", Settings.ORBIT);
+	this.navigation.setOnChange(function()
+	{
+		Settings.editor.navigation = self.navigation.getValue();
+	});
+	this.form.add(this.navigation);
+	this.form.nextRow();
+
+	//Invert navigation
+	this.form.addText("Invert Navigation");
+	this.invertNavigation = new CheckBox(this.form.element);
+	this.invertNavigation.size.set(20, 16);
+	this.invertNavigation.setOnChange(function()
+	{
+		Settings.editor.invertNavigation = self.invertNavigation.getValue();
+	});
+	this.form.add(this.invertNavigation);
+	this.form.nextRow();
+
 	//Enable camera preview
 	this.form.addText("Camera preview");
 	this.cameraPreviewEnabled = new CheckBox(this.form.element);
@@ -235,6 +259,8 @@ GeneralSettingsTab.prototype.activate = function()
 	this.gridSpacing.setValue(Settings.editor.gridSpacing);
 	this.axisEnabled.setValue(Settings.editor.axisEnabled);
 	this.lockMouse.setValue(Settings.editor.lockMouse);
+	this.navigation.setValue(Settings.editor.navigation);
+	this.invertNavigation.setValue(Settings.editor.invertNavigation);
 	this.transformationSpace.setValue(Settings.editor.transformationSpace);
 	this.cameraPreviewEnabled.setValue(Settings.editor.cameraPreviewEnabled);
 	this.cameraPreviewPercentage.setValue(Settings.editor.cameraPreviewPercentage);

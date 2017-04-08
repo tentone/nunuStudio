@@ -453,14 +453,13 @@ SceneEditor.prototype.update = function()
 
 	if(this.state === SceneEditor.EDITING)
 	{
-		//Keyboard shortcuts
-		if(this.keyboard.keyJustPressed(Keyboard.DEL))
-		{
-			Editor.deleteObject();
-		}
-		else if(this.keyboard.keyJustPressed(Keyboard.F5))
+		if(this.keyboard.keyJustPressed(Keyboard.F5))
 		{
 			this.setState(SceneEditor.TESTING);
+		}
+		else if(this.keyboard.keyJustPressed(Keyboard.DEL))
+		{
+			Editor.deleteObject();
 		}
 		else if(this.keyboard.keyJustPressed(Keyboard.F2))
 		{
@@ -590,77 +589,126 @@ SceneEditor.prototype.update = function()
 			//Perspective camera
 			else
 			{
-				//Look camera
-				if(this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject)
+				if(Settings.editor.navigation === Settings.FREE)
 				{
-					this.cameraRotation.x -= 0.002 * this.mouse.delta.x;
-					this.cameraRotation.y -= 0.002 * this.mouse.delta.y;
-
-					//Limit Vertical Rotation to 90 degrees
-					var pid2 = 1.57;
-					if(this.cameraRotation.y < -pid2)
+					//Look camera
+					if(this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject)
 					{
-						this.cameraRotation.y = -pid2;
-					}
-					else if(this.cameraRotation.y > pid2)
-					{
-						this.cameraRotation.y = pid2;
+						if(Settings.editor.invertNavigation)
+						{
+							this.cameraRotation.y += 0.002 * this.mouse.delta.y;
+						}
+						else
+						{
+							this.cameraRotation.y -= 0.002 * this.mouse.delta.y;
+						}
+
+						this.cameraRotation.x -= 0.002 * this.mouse.delta.x;
+						
+
+						//Limit Vertical Rotation to 90 degrees
+						var pid2 = 1.57;
+						if(this.cameraRotation.y < -pid2)
+						{
+							this.cameraRotation.y = -pid2;
+						}
+						else if(this.cameraRotation.y > pid2)
+						{
+							this.cameraRotation.y = pid2;
+						}
+
+						this.setCameraRotation(this.cameraRotation, this.camera);
 					}
 
-					this.setCameraRotation(this.cameraRotation, this.camera);
+					//Move Camera on X and Z
+					if(this.mouse.buttonPressed(Mouse.RIGHT))
+					{
+						//Move speed
+						var speed = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 1000;
+						if(speed < 0.02)
+						{
+							speed = 0.02;
+						}
+
+						//Move Camera Front and Back
+						var angleCos = Math.cos(this.cameraRotation.x);
+						var angleSin = Math.sin(this.cameraRotation.x);
+						this.camera.position.z += this.mouse.delta.y * speed * angleCos;
+						this.camera.position.x += this.mouse.delta.y * speed * angleSin;
+
+						//Move Camera Lateral
+						var angleCos = Math.cos(this.cameraRotation.x + MathUtils.pid2);
+						var angleSin = Math.sin(this.cameraRotation.x + MathUtils.pid2);
+						this.camera.position.z += this.mouse.delta.x * speed * angleCos;
+						this.camera.position.x += this.mouse.delta.x * speed * angleSin;
+					}
+					
+					//Move Camera on Y
+					if(this.mouse.buttonPressed(Mouse.MIDDLE))
+					{
+						this.camera.position.y += this.mouse.delta.y * 0.1;
+					}
+
+					//Move in camera direction using mouse scroll
+					if(this.mouse.wheel !== 0)
+					{
+						//Move speed
+						var speed = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 2000;
+						speed *= this.mouse.wheel;
+
+						//Limit zoom speed
+						if(speed < 0 && speed > -0.03)
+						{
+							speed = -0.03;
+						}
+						else if(speed > 0 && speed < 0.03)
+						{
+							speed = 0.03;
+						}
+
+						//Move camera
+						var direction = this.camera.getWorldDirection();
+						direction.multiplyScalar(speed);
+						this.camera.position.sub(direction);
+					}
+
+					//WASD movement
+					if(Editor.keyboard.keyPressed(Keyboard.W))
+					{
+						var direction = this.camera.getWorldDirection();
+						direction.multiplyScalar(0.5);
+						this.camera.position.add(direction);
+					}
+					if(Editor.keyboard.keyPressed(Keyboard.S))
+					{
+						var direction = this.camera.getWorldDirection();
+						direction.multiplyScalar(0.5);
+						this.camera.position.sub(direction);
+					}
+					if(Editor.keyboard.keyPressed(Keyboard.A))
+					{
+						//TODO <ADD CODE HERE>
+					}
+					if(Editor.keyboard.keyPressed(Keyboard.D))
+					{
+						//TODO <ADD CODE HERE>
+					}
 				}
-
-				//Move Camera on X and Z
-				else if(this.mouse.buttonPressed(Mouse.RIGHT))
+				else if(Settings.editor.navigation === Settings.ORBIT)
 				{
-					//Move speed
-					var speed = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 1000;
-					if(speed < 0.02)
+					if(this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject)
 					{
-						speed = 0.02;
+						if(Settings.editor.invertNavigation)
+						{
+							//TODO <ADD CODE HERE>
+						}
+						else
+						{
+							//TODO <ADD CODE HERE>
+						}
+
+						//TODO <ADD CODE HERE>
 					}
-
-					//Move Camera Front and Back
-					var angleCos = Math.cos(this.cameraRotation.x);
-					var angleSin = Math.sin(this.cameraRotation.x);
-					this.camera.position.z += this.mouse.delta.y * speed * angleCos;
-					this.camera.position.x += this.mouse.delta.y * speed * angleSin;
-
-					//Move Camera Lateral
-					var angleCos = Math.cos(this.cameraRotation.x + MathUtils.pid2);
-					var angleSin = Math.sin(this.cameraRotation.x + MathUtils.pid2);
-					this.camera.position.z += this.mouse.delta.x * speed * angleCos;
-					this.camera.position.x += this.mouse.delta.x * speed * angleSin;
-				}
-				
-				//Move Camera on Y
-				else if(this.mouse.buttonPressed(Mouse.MIDDLE))
-				{
-					this.camera.position.y += this.mouse.delta.y * 0.1;
-				}
-
-				//Move in camera direction using mouse scroll
-				if(this.mouse.wheel !== 0)
-				{
-					//Move speed
-					var speed = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 2000;
-					speed *= this.mouse.wheel;
-
-					//Limit zoom speed
-					if(speed < 0 && speed > -0.03)
-					{
-						speed = -0.03;
-					}
-					else if(speed > 0 && speed < 0.03)
-					{
-						speed = 0.03;
-					}
-
-					//Move camera
-					var direction = this.camera.getWorldDirection();
-					this.camera.position.x -= speed * direction.x;
-					this.camera.position.y -= speed * direction.y;
-					this.camera.position.z -= speed * direction.z;
 				}
 			}
 		}

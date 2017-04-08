@@ -2,8 +2,13 @@
 
 function Settings(){}
 
+//Angles
 Settings.RADIANS = 0;
 Settings.DEGREES = 1;
+
+//Navigation
+Settings.FREE = 10;
+Settings.ORBIT = 11;
 
 //Load default settings
 Settings.loadDefault = function()
@@ -28,8 +33,10 @@ Settings.loadDefault = function()
 	Settings.editor.cameraPreviewPercentage = 0.35;
 	Settings.editor.lockMouse = true;
 	Settings.editor.transformationSpace = "world";
+	Settings.editor.navigation = Settings.FREE;
+	Settings.editor.invertNavigation = false;
 
-	//Rendering
+	//Render
 	Settings.render = {};
 	Settings.render.followProject = false;
 	Settings.render.toneMapping = THREE.LinearToneMapping;
@@ -39,7 +46,7 @@ Settings.loadDefault = function()
 	Settings.render.shadows = true;
 	Settings.render.shadowsType = THREE.PCFSoftShadowMap;
 
-	//Code editor
+	//Code
 	Settings.code = {};
 	Settings.code.theme = "monokai";
 	Settings.code.keymap = "sublime";
