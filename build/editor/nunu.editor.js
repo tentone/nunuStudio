@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704081923";
+Nunu.TIMESTAMP = "201704090028";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -63837,9 +63837,11 @@ function SceneEditor(a, b, e, d) {
   this.toolScene.add(this.objectHelper);
   this.toolContainer = new THREE.Scene;
   this.toolSceneTop.add(this.toolContainer);
+  this.cameraRotation = new THREE.Vector2(0, 0);
+  this.cameraLookAt = new THREE.Vector3(0, 0, 0);
+  this.cameraDistance = 10;
   this.cameras = null;
   this.cameraMode = SceneEditor.CAMERA_PERSPECTIVE;
-  this.cameraRotation = new THREE.Vector2(0, 0);
   this.setCameraMode(SceneEditor.CAMERA_PERSPECTIVE);
   this.isEditingObject = !1;
   var f = this;
@@ -63853,7 +63855,7 @@ function SceneEditor(a, b, e, d) {
         a = a.dataTransfer.files[0];
         FileSystem.getFileName(a.name);
         var e = d[0].object;
-        a.type.startsWith("image") ? Editor.loadTexture(a, function(a) {
+        Image.fileIsImage(a) ? Editor.loadTexture(a, function(a) {
           if (e instanceof THREE.Mesh) {
             var b = new THREE.MeshStandardMaterial({map:a, color:16777215, roughness:.6, metalness:.2});
             b.name = a.name;
@@ -63861,7 +63863,7 @@ function SceneEditor(a, b, e, d) {
           } else {
             e instanceof THREE.Sprite && (b = new THREE.SpriteMaterial({map:a, color:16777215}), b.name = a.name, e.material = b);
           }
-        }) : a.type.startsWith("video") ? Editor.loadVideoTexture(a, function(a) {
+        }) : Video.fileIsVideo(a) ? Editor.loadVideoTexture(a, function(a) {
           if (e instanceof THREE.Mesh) {
             var b = new THREE.MeshStandardMaterial({map:a, color:16777215, roughness:.6, metalness:.2});
             b.name = a.name;
@@ -64027,10 +64029,12 @@ SceneEditor.prototype.update = function() {
           0 !== this.mouse.wheel && (a = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 2E3, a *= this.mouse.wheel, 0 > a && -.03 < a ? a = -.03 : 0 < a && .03 > a && (a = .03), b = this.camera.getWorldDirection(), b.multiplyScalar(a), this.camera.position.sub(b));
           Editor.keyboard.keyPressed(Keyboard.W) && (b = this.camera.getWorldDirection(), b.multiplyScalar(.5), this.camera.position.add(b));
           Editor.keyboard.keyPressed(Keyboard.S) && (b = this.camera.getWorldDirection(), b.multiplyScalar(.5), this.camera.position.sub(b));
-          Editor.keyboard.keyPressed(Keyboard.A);
-          Editor.keyboard.keyPressed(Keyboard.D);
+          Editor.keyboard.keyPressed(Keyboard.A) && (b = new THREE.Vector3(Math.sin(this.cameraRotation.x - 1.57), 0, Math.cos(this.cameraRotation.x - 1.57)), b.normalize(), b.multiplyScalar(.5), this.camera.position.sub(b));
+          Editor.keyboard.keyPressed(Keyboard.D) && (b = new THREE.Vector3(Math.sin(this.cameraRotation.x + 1.57), 0, Math.cos(this.cameraRotation.x + 1.57)), b.normalize(), b.multiplyScalar(.5), this.camera.position.sub(b));
         } else {
-          Settings.editor.navigation === Settings.ORBIT && this.mouse.buttonPressed(Mouse.LEFT);
+          Settings.editor.navigation === Settings.ORBIT && (this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject && (this.cameraRotation.y = Settings.editor.invertNavigation ? this.cameraRotation.y + .002 * this.mouse.delta.y : this.cameraRotation.y - .002 * this.mouse.delta.y, this.cameraRotation.x -= .002 * this.mouse.delta.x, -1.57 > this.cameraRotation.y ? this.cameraRotation.y = -1.57 : 1.57 < this.cameraRotation.y && (this.cameraRotation.y = 1.57)), 0 !== this.mouse.wheel && (this.cameraDistance += 
+          this.camera.position.distanceTo(this.cameraLookAt) / 1500 * this.mouse.wheel, 0 > this.cameraDistance && (this.cameraDistance = 0)), this.mouse.buttonPressed(Mouse.MIDDLE) && (this.cameraDistance += .1 * this.mouse.delta.y, 0 > this.cameraDistance && (this.cameraDistance = 0)), this.mouse.buttonPressed(Mouse.RIGHT) && (b = this.camera.getWorldDirection(), b.y = 0, b.normalize(), b.multiplyScalar(.1 * this.mouse.delta.y), this.cameraLookAt.add(b)), a = Math.cos(this.cameraRotation.y), a = 
+          new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x) * a, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x) * a), this.camera.position.copy(a), this.camera.position.add(this.cameraLookAt), this.camera.lookAt(this.cameraLookAt));
         }
       }
     }
