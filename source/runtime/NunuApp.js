@@ -1,9 +1,7 @@
 "use strict";
 
-//Nunu global
 include("Nunu.js");
 
-//Runtime dependencies
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
 
@@ -14,7 +12,6 @@ include("lib/SPE.min.js");
 include("lib/spine.min.js");
 include("lib/opentype.min.js");
 
-//Core runtime modules
 include("core/Global.js");
 include("core/FileSystem.js");
 

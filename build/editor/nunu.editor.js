@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704071343";
+Nunu.TIMESTAMP = "201704080137";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -1039,17 +1039,17 @@ Nunu.runningOnDesktop = function() {
       b.isInterleavedBufferAttribute && (b = b.data);
       var e = q[b.uuid];
       if (void 0 === e) {
-        var e = b.uuid, E = b, f = E.array;
-        b = E.dynamic ? a.DYNAMIC_DRAW : a.STATIC_DRAW;
+        var e = b.uuid, f = b, E = f.array;
+        b = f.dynamic ? a.DYNAMIC_DRAW : a.STATIC_DRAW;
         var g = a.createBuffer();
         a.bindBuffer(d, g);
-        a.bufferData(d, f, b);
-        E.onUploadCallback();
+        a.bufferData(d, E, b);
+        f.onUploadCallback();
         b = a.FLOAT;
-        f instanceof Float32Array ? b = a.FLOAT : f instanceof Float64Array ? console.warn("Unsupported data buffer format: Float64Array") : f instanceof Uint16Array ? b = a.UNSIGNED_SHORT : f instanceof Int16Array ? b = a.SHORT : f instanceof Uint32Array ? b = a.UNSIGNED_INT : f instanceof Int32Array ? b = a.INT : f instanceof Int8Array ? b = a.BYTE : f instanceof Uint8Array && (b = a.UNSIGNED_BYTE);
-        q[e] = {buffer:g, type:b, bytesPerElement:f.BYTES_PER_ELEMENT, version:E.version};
+        E instanceof Float32Array ? b = a.FLOAT : E instanceof Float64Array ? console.warn("Unsupported data buffer format: Float64Array") : E instanceof Uint16Array ? b = a.UNSIGNED_SHORT : E instanceof Int16Array ? b = a.SHORT : E instanceof Uint32Array ? b = a.UNSIGNED_INT : E instanceof Int32Array ? b = a.INT : E instanceof Int8Array ? b = a.BYTE : E instanceof Uint8Array && (b = a.UNSIGNED_BYTE);
+        q[e] = {buffer:g, type:b, bytesPerElement:E.BYTES_PER_ELEMENT, version:f.version};
       } else {
-        e.version < b.version && (E = b, f = E.array, g = E.updateRange, a.bindBuffer(d, e.buffer), !1 === E.dynamic ? a.bufferData(d, f, a.STATIC_DRAW) : -1 === g.count ? a.bufferSubData(d, 0, f) : 0 === g.count ? console.error("THREE.WebGLObjects.updateBuffer: dynamic THREE.BufferAttribute marked as needsUpdate but updateRange.count is 0, ensure you are using set methods or updating manually.") : (a.bufferSubData(d, g.offset * f.BYTES_PER_ELEMENT, f.subarray(g.offset, g.offset + g.count)), g.count = 
+        e.version < b.version && (f = b, E = f.array, g = f.updateRange, a.bindBuffer(d, e.buffer), !1 === f.dynamic ? a.bufferData(d, E, a.STATIC_DRAW) : -1 === g.count ? a.bufferSubData(d, 0, E) : 0 === g.count ? console.error("THREE.WebGLObjects.updateBuffer: dynamic THREE.BufferAttribute marked as needsUpdate but updateRange.count is 0, ensure you are using set methods or updating manually.") : (a.bufferSubData(d, g.offset * E.BYTES_PER_ELEMENT, E.subarray(g.offset, g.offset + g.count)), g.count = 
         0), e.version = b.version);
       }
     }};
@@ -3843,28 +3843,28 @@ Nunu.runningOnDesktop = function() {
     b = void 0 !== b ? Math.max(3, b) : 8;
     d = void 0 !== d ? d : 0;
     f = void 0 !== f ? f : 2 * Math.PI;
-    var q = [], g = [], h = [], E = [], k, r, l = new n, m = new e;
+    var q = [], g = [], E = [], h = [], k, r, l = new n, m = new e;
     g.push(0, 0, 0);
-    h.push(0, 0, 1);
-    E.push(.5, .5);
+    E.push(0, 0, 1);
+    h.push(.5, .5);
     r = 0;
     for (k = 3;r <= b;r++, k += 3) {
       var p = d + r / b * f;
       l.x = a * Math.cos(p);
       l.y = a * Math.sin(p);
       g.push(l.x, l.y, l.z);
-      h.push(0, 0, 1);
+      E.push(0, 0, 1);
       m.x = (g[k] / a + 1) / 2;
       m.y = (g[k + 1] / a + 1) / 2;
-      E.push(m.x, m.y);
+      h.push(m.x, m.y);
     }
     for (k = 1;k <= b;k++) {
       q.push(k, k + 1, 0);
     }
     this.setIndex(q);
     this.addAttribute("position", new da(g, 3));
-    this.addAttribute("normal", new da(h, 3));
-    this.addAttribute("uv", new da(E, 2));
+    this.addAttribute("normal", new da(E, 3));
+    this.addAttribute("uv", new da(h, 2));
   }
   function ad() {
     ta.call(this, {uniforms:rc.merge([La.lights, {opacity:{value:1}}]), vertexShader:kb.shadow_vert, fragmentShader:kb.shadow_frag});
@@ -7292,13 +7292,13 @@ Nunu.runningOnDesktop = function() {
   }, multiplyMatrices:function(a, b) {
     a = a.elements;
     b = b.elements;
-    var d = this.elements, q = a[0], e = a[3], f = a[6], g = a[1], h = a[4], k = a[7], r = a[2], l = a[5];
+    var d = this.elements, e = a[0], q = a[3], f = a[6], g = a[1], h = a[4], k = a[7], r = a[2], l = a[5];
     a = a[8];
     var n = b[0], m = b[3], p = b[6], w = b[1], t = b[4], E = b[7], u = b[2], A = b[5];
     b = b[8];
-    d[0] = q * n + e * w + f * u;
-    d[3] = q * m + e * t + f * A;
-    d[6] = q * p + e * E + f * b;
+    d[0] = e * n + q * w + f * u;
+    d[3] = e * m + q * t + f * A;
+    d[6] = e * p + q * E + f * b;
     d[1] = g * n + h * w + k * u;
     d[4] = g * m + h * t + k * A;
     d[7] = g * p + h * E + k * b;
@@ -33474,7 +33474,7 @@ function Program(a) {
   this.toneMapping = THREE.NoToneMapping;
   this.toneMappingWhitePoint = this.toneMappingExposure = 1;
   this.scene = this.canvas = this.renderer = this.mouse = this.keyboard = this.defaultCamera = this.defaultScene = null;
-  this.useVr = !1;
+  this.useVR = !1;
   this.vrControls = this.vrEffect = null;
 }
 Program.prototype = Object.create(THREE.Object3D.prototype);
@@ -33515,20 +33515,20 @@ Program.prototype.setRenderer = function(a) {
 Program.prototype.displayVR = function() {
   if (this.vr) {
     try {
-      this.useVr = !0, this.vrEffect = new THREE.VREffect(this.renderer), this.vrEffect.setFullScreen(!0);
+      this.useVR = !0, this.vrEffect = new THREE.VREffect(this.renderer), this.vrEffect.setFullScreen(!0);
     } catch (a) {
-      this.useVr = !1, this.vrEffect = null, console.warn("nunuStudio: Failed to enter in VR mode", a);
+      this.useVR = !1, this.vrEffect = null, console.warn("nunuStudio: Failed to enter in VR mode", a);
     }
   }
 };
 Program.prototype.exitVR = function() {
-  this.vr && (this.useVr = !1, null != this.vrEffect && (this.vrEffect.setFullScreen(!1), this.vrEffect.dispose(), this.vrEffect = null));
+  this.vr && (this.useVR = !1, null != this.vrEffect && (this.vrEffect.setFullScreen(!1), this.vrEffect.dispose(), this.vrEffect = null));
 };
 Program.prototype.update = function() {
   this.scene.update();
 };
 Program.prototype.render = function(a) {
-  if (this.useVr) {
+  if (this.useVR) {
     for (var b = 0;b < this.scene.cameras.length;b++) {
       var e = this.scene.cameras[b];
       this.vrEffect.render(this.scene, e);
@@ -36988,7 +36988,7 @@ NODE_ID = 45104, NODE_HDR = 45072, PIVOT = 45075, INSTANCE_NAME = 45073, MORPH_S
       b = oe(a, b, d);
     }
     var e = d && d.bias || (0 > K(b.primary().head, a.sel.primary().head) ? -1 : 1);
-    bd(a, Sd(a, b, e, !0 ));
+    bd(a, Sd(a, b, e, !0));
     d && !1 === d.scroll || !a.cm || dc(a.cm);
   }
   function bd(a, b) {
@@ -61279,12 +61279,25 @@ Graph.prototype.setOnChange = function(a, b) {
 Graph.prototype.setRange = function(a, b) {
   this.min = a;
   this.max = b;
-  a = (this.max - this.min) / (this.scale.length - 1);
-  for (b = 0;b < this.scale.length;b++) {
-    this.scale[this.scale.length - 1 - b].innerHTML = this.min + a * b;
+  for (var e in this.graph) {
+    for (var d = this.graph[e], f = 0;f < d.values.length;f++) {
+      if (d.values[f] < a) {
+        if (d.values[f] = a, null !== d.onchange) {
+          d.onchange(d.values);
+        }
+      } else {
+        if (d.values[f] > b && (d.values[f] = b, null !== d.onchange)) {
+          d.onchange(d.values);
+        }
+      }
+    }
   }
-  for (b = 0;b < this.graph.length;b++) {
-    this.updateGraph(this.graph[b]);
+  a = (this.max - this.min) / (this.scale.length - 1);
+  for (e = 0;e < this.scale.length;e++) {
+    this.scale[this.scale.length - 1 - e].innerHTML = this.min + a * e;
+  }
+  for (e = 0;e < this.graph.length;e++) {
+    this.updateGraph(this.graph[e]);
   }
 };
 Graph.prototype.setValue = function(a, b) {
@@ -61300,6 +61313,7 @@ Graph.prototype.setValue = function(a, b) {
     e.style.width = "10px";
     e.style.height = "10px";
     e.pressed = !1;
+    e.index = b.buttons.length;
     e.onmousedown = function() {
       this.pressed = !0;
     };

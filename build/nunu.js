@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704071343";
+Nunu.TIMESTAMP = "201704080137";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -33469,7 +33469,7 @@ function Program(a) {
   this.toneMapping = THREE.NoToneMapping;
   this.toneMappingWhitePoint = this.toneMappingExposure = 1;
   this.scene = this.canvas = this.renderer = this.mouse = this.keyboard = this.defaultCamera = this.defaultScene = null;
-  this.useVr = !1;
+  this.useVR = !1;
   this.vrControls = this.vrEffect = null;
 }
 Program.prototype = Object.create(THREE.Object3D.prototype);
@@ -33510,20 +33510,20 @@ Program.prototype.setRenderer = function(a) {
 Program.prototype.displayVR = function() {
   if (this.vr) {
     try {
-      this.useVr = !0, this.vrEffect = new THREE.VREffect(this.renderer), this.vrEffect.setFullScreen(!0);
+      this.useVR = !0, this.vrEffect = new THREE.VREffect(this.renderer), this.vrEffect.setFullScreen(!0);
     } catch (a) {
-      this.useVr = !1, this.vrEffect = null, console.warn("nunuStudio: Failed to enter in VR mode", a);
+      this.useVR = !1, this.vrEffect = null, console.warn("nunuStudio: Failed to enter in VR mode", a);
     }
   }
 };
 Program.prototype.exitVR = function() {
-  this.vr && (this.useVr = !1, null != this.vrEffect && (this.vrEffect.setFullScreen(!1), this.vrEffect.dispose(), this.vrEffect = null));
+  this.vr && (this.useVR = !1, null != this.vrEffect && (this.vrEffect.setFullScreen(!1), this.vrEffect.dispose(), this.vrEffect = null));
 };
 Program.prototype.update = function() {
   this.scene.update();
 };
 Program.prototype.render = function(a) {
-  if (this.useVr) {
+  if (this.useVR) {
     for (var f = 0;f < this.scene.cameras.length;f++) {
       var l = this.scene.cameras[f];
       this.vrEffect.render(this.scene, l);
