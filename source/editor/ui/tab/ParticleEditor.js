@@ -596,14 +596,13 @@ ParticleEditor.prototype.update = function()
 			this.cameraRotation.y -= 0.003 * Editor.mouse.delta.y;
 
 			//Limit Vertical Rotation to 90 degrees
-			var pid2 = 1.57;
-			if(this.cameraRotation.y < -pid2)
+			if(this.cameraRotation.y < -1.57)
 			{
-				this.cameraRotation.y = -pid2;
+				this.cameraRotation.y = -1.57;
 			}
-			else if(this.cameraRotation.y > pid2)
+			else if(this.cameraRotation.y > 1.57)
 			{
-				this.cameraRotation.y = pid2;
+				this.cameraRotation.y = 1.57;
 			}
 		}
 

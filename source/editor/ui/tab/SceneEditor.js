@@ -41,15 +41,16 @@ function SceneEditor(parent, closeable, container, index)
 	this.stats.dom.style.zIndex = "0";
 	this.element.appendChild(this.stats.dom);
 
-	//Debug Elements
+	//Tool scene
 	this.toolScene = new THREE.Scene();
 	this.toolSceneTop = new THREE.Scene();
 
-	//Grid and axis helpers
+	//Grid
 	this.gridHelper = new GridHelper(Settings.editor.gridSize, Settings.editor.gridSpacing, 0x888888);
 	this.gridHelper.visible = Settings.editor.gridEnabled;
 	this.toolScene.add(this.gridHelper);
 
+	//Axis
 	this.axisHelper = new THREE.AxisHelper(Settings.editor.gridSize);
 	this.axisHelper.material.depthWrite = false;
 	this.axisHelper.material.transparent = true;
@@ -65,10 +66,14 @@ function SceneEditor(parent, closeable, container, index)
 	this.toolContainer = new THREE.Scene();
 	this.toolSceneTop.add(this.toolContainer);
 
+	//Navigation
+	this.cameraRotation = new THREE.Vector2(0, 0);
+	this.cameraLookAt = new THREE.Vector3(0, 0, 0);
+	this.cameraDistance = 10;
+
 	//Camera
 	this.cameras = null;
 	this.cameraMode = SceneEditor.CAMERA_PERSPECTIVE;
-	this.cameraRotation = new THREE.Vector2(0, 0);
 	this.setCameraMode(SceneEditor.CAMERA_PERSPECTIVE);
 
 	//Editing object flag
@@ -107,7 +112,7 @@ function SceneEditor(parent, closeable, container, index)
 				var object = intersections[0].object;
 
 				//Image
-				if(file.type.startsWith("image"))
+				if(Image.fileIsImage(file))
 				{
 					Editor.loadTexture(file, function(texture)
 					{
@@ -126,7 +131,7 @@ function SceneEditor(parent, closeable, container, index)
 					});
 				}
 				//Video
-				else if(file.type.startsWith("video"))
+				else if(Video.fileIsVideo(file))
 				{
 					Editor.loadVideoTexture(file, function(texture)
 					{
@@ -607,14 +612,13 @@ SceneEditor.prototype.update = function()
 						
 
 						//Limit Vertical Rotation to 90 degrees
-						var pid2 = 1.57;
-						if(this.cameraRotation.y < -pid2)
+						if(this.cameraRotation.y < -1.57)
 						{
-							this.cameraRotation.y = -pid2;
+							this.cameraRotation.y = -1.57;
 						}
-						else if(this.cameraRotation.y > pid2)
+						else if(this.cameraRotation.y > 1.57)
 						{
-							this.cameraRotation.y = pid2;
+							this.cameraRotation.y = 1.57;
 						}
 
 						this.setCameraRotation(this.cameraRotation, this.camera);
@@ -687,28 +691,82 @@ SceneEditor.prototype.update = function()
 					}
 					if(Editor.keyboard.keyPressed(Keyboard.A))
 					{
-						//TODO <ADD CODE HERE>
+						var direction = new THREE.Vector3(Math.sin(this.cameraRotation.x - 1.57), 0, Math.cos(this.cameraRotation.x - 1.57));
+						direction.normalize();
+						direction.multiplyScalar(0.5);
+						this.camera.position.sub(direction);
 					}
 					if(Editor.keyboard.keyPressed(Keyboard.D))
 					{
-						//TODO <ADD CODE HERE>
+						var direction = new THREE.Vector3(Math.sin(this.cameraRotation.x + 1.57), 0, Math.cos(this.cameraRotation.x + 1.57));
+						direction.normalize();
+						direction.multiplyScalar(0.5);
+						this.camera.position.sub(direction);
 					}
 				}
 				else if(Settings.editor.navigation === Settings.ORBIT)
 				{
+					//Look around
 					if(this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject)
 					{
 						if(Settings.editor.invertNavigation)
 						{
-							//TODO <ADD CODE HERE>
+							this.cameraRotation.y += 0.002 * this.mouse.delta.y;
 						}
 						else
 						{
-							//TODO <ADD CODE HERE>
+							this.cameraRotation.y -= 0.002 * this.mouse.delta.y;
 						}
 
-						//TODO <ADD CODE HERE>
+						this.cameraRotation.x -= 0.002 * this.mouse.delta.x;
+
+						if(this.cameraRotation.y < -1.57)
+						{
+							this.cameraRotation.y = -1.57;
+						}
+						else if(this.cameraRotation.y > 1.57)
+						{
+							this.cameraRotation.y = 1.57;
+						}
 					}
+
+					//Zoom
+					if(this.mouse.wheel !== 0)
+					{
+						this.cameraDistance += this.camera.position.distanceTo(this.cameraLookAt) / 1500 * this.mouse.wheel;
+						if(this.cameraDistance < 0)
+						{
+							this.cameraDistance = 0;
+						}
+					}
+
+					if(this.mouse.buttonPressed(Mouse.MIDDLE))
+					{
+						this.cameraDistance += this.mouse.delta.y * 0.1;
+						if(this.cameraDistance < 0)
+						{
+							this.cameraDistance = 0;
+						}
+					}
+
+					//Move target point
+					if(this.mouse.buttonPressed(Mouse.RIGHT))
+					{
+						var direction = this.camera.getWorldDirection();
+						direction.y = 0;
+						direction.normalize();
+						direction.multiplyScalar(this.mouse.delta.y * 0.1);
+						this.cameraLookAt.add(direction);
+
+						//TODO <LATERAL MOVEMENT>
+					}
+
+					//Update camera position and direction
+					var cosAngleY = Math.cos(this.cameraRotation.y);
+					var position = new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x)*cosAngleY, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x)*cosAngleY);
+					this.camera.position.copy(position);
+					this.camera.position.add(this.cameraLookAt);
+					this.camera.lookAt(this.cameraLookAt);
 				}
 			}
 		}
