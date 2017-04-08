@@ -116,7 +116,7 @@ function Program(name)
 	this.scene = null;
 
 	//VR objects
-	this.useVr = false;
+	this.useVR = false;
 	this.vrEffect = null;
 	this.vrControls = null;
 }
@@ -209,14 +209,14 @@ Program.prototype.displayVR = function()
 	{
 		try
 		{
-			this.useVr = true;
+			this.useVR = true;
 
 			this.vrEffect = new THREE.VREffect(this.renderer);
 			this.vrEffect.setFullScreen(true);
 		}
 		catch(e)
 		{
-			this.useVr = false;
+			this.useVR = false;
 			this.vrEffect = null;
 
 			console.warn("nunuStudio: Failed to enter in VR mode", e);
@@ -233,7 +233,7 @@ Program.prototype.exitVR = function()
 {
 	if(this.vr)
 	{
-		this.useVr = false;
+		this.useVR = false;
 
 		if(this.vrEffect != null)
 		{
@@ -267,7 +267,7 @@ Program.prototype.update = function()
 Program.prototype.render = function(renderer)
 {
 	//Render as a VR application (ignores camera parameters)
-	if(this.useVr)
+	if(this.useVR)
 	{
 		for(var i = 0; i < this.scene.cameras.length; i++)
 		{

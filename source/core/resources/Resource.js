@@ -74,6 +74,7 @@ Resource.prototype.toJSON = function(meta)
 	data.name = this.name;
 	data.uuid = this.uuid;
 	data.type = this.type;
-	
+
+	data.format = this.format;
 	data.encoding = this.encoding;
 };

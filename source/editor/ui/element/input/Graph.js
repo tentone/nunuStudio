@@ -5,7 +5,7 @@ function Graph(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
@@ -16,7 +16,7 @@ function Graph(parent)
 	this.grid.style.marginLeft = "30px";
 	this.element.appendChild(this.grid);
 
-	//Graph array
+	//Graphs
 	this.graph = [];
 
 	//Graph
@@ -59,6 +59,7 @@ Graph.prototype.addGraph = function(name, color)
 	canvas.style.position = "absolute";
 	canvas.style.marginLeft = "30px";
 	this.element.appendChild(canvas);
+
 	this.graph.push({canvas: canvas, name: name, color: color, values: [], buttons: [], onchange: null});
 };
 
@@ -74,6 +75,34 @@ Graph.prototype.setRange = function(min, max)
 {
 	this.min = min;
 	this.max = max;
+
+	//Limit graphs values
+	for(var i in this.graph)
+	{
+		var graph = this.graph[i];
+
+		for(var j = 0; j < graph.values.length; j++)
+		{
+			if(graph.values[j] < min)
+			{
+				graph.values[j] = min;
+
+				if(graph.onchange !== null)
+				{
+					graph.onchange(graph.values);
+				}
+			}
+			else if(graph.values[j] > max)
+			{
+				graph.values[j] = max;
+
+				if(graph.onchange !== null)
+				{
+					graph.onchange(graph.values);
+				}
+			}
+		}
+	}
 
 	//Update scale elements
 	var step = (this.max - this.min) / (this.scale.length - 1);
@@ -110,10 +139,13 @@ Graph.prototype.setValue = function(values, name)
 		button.style.width = "10px";
 		button.style.height = "10px";
 		button.pressed = false;
+		button.index = graph.buttons.length;
+		
 		button.onmousedown = function()
 		{
 			this.pressed = true;
-		}
+		};
+
 		this.element.appendChild(button);
 		graph.buttons.push(button);
 	}
@@ -261,7 +293,7 @@ Graph.prototype.destroy = function()
 	catch(e){}
 };
 
-//Update graphs
+//Update graph buttons state
 Graph.prototype.update = function()
 {
 	for(var j = 0; j < this.graph.length; j++)
@@ -336,12 +368,12 @@ Graph.prototype.updateInterface = function()
 
 	//Scale
 	var step = (this.size.y - 14) / (this.scale.length - 1);
-	for(i = 0; i < this.scale.length; i++)
+	for(var i = 0; i < this.scale.length; i++)
 	{
-		this.scale[i].style.top = (i * step)+ "px";
+		this.scale[i].style.top = (i * step) + "px";
 	}
 
-	//Update element
+	//Element
 	this.element.style.top = this.position.y + "px";
 	this.element.style.left = this.position.x + "px";
 	this.element.style.width = this.size.x + "px";
