@@ -14,10 +14,10 @@
 		"gridEnabled": true,
 		"axisEnabled": true,
 		"cameraPreviewEnabled": true,
-		"cameraPreviewPercentage": "0.55",
+		"cameraPreviewPercentage": 0.35,
 		"lockMouse": true,
 		"transformationSpace": "world",
-		"navigation": 11,
+		"navigation": 10,
 		"invertNavigation": false
 	},
 	"render": {
