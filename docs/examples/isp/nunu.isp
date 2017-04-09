@@ -360,7 +360,7 @@
 						"uuid": "E4E7AD55-9E1B-4833-B8AB-BD71FCB9DE00",
 						"type": "Script",
 						"name": "script",
-						"folded": true,
+						"folded": false,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -384,7 +384,7 @@
 								"near": 1,
 								"far": 1000,
 								"focus": 10,
-								"aspect": 1.9922330097087377,
+								"aspect": 1.8076923076923077,
 								"filmGauge": 35,
 								"filmOffset": 0,
 								"clearColor": false,
@@ -393,7 +393,7 @@
 								"offset": [0,0],
 								"order": 0
 							}],
-						"code": "var camera, speed;\nvar time, clock;\nvar material, geometry, shape;\n\nthis.initialize = function()\n{\n\tgeometry = new SphereBufferGeometry(0.2, 32, 32);\n\tmaterial = program.getMaterialByName(\"balls\");\n\tshape = new CANNON.Sphere(0.2);\n\t\n\ttime = 0;\n\tclock = new Clock();\n\tclock.start();\n\t\n\tspeed = 0;\n\tcamera = self.children[0];\n};\n\nthis.update = function()\n{\n\ttime += clock.getDelta();\n\tcamera.position.x = 0.15 * Math.cos(time);\n\t\n\t\n\tif(Mouse.buttonPressed(Mouse.LEFT))\n\t{\n\t\tspeed = -Mouse.delta.x * 0.003;\n\t\tself.rotation.y += speed;\n\t}\n\telse\n\t{\n\t\tspeed *= 0.98;\n\t\tself.rotation.y += speed + 0.001;\n\t}\n\t\n\n\tif(Mouse.buttonJustPressed(Mouse.RIGHT))\n\t{\n\t\tvar mesh = new Mesh(geometry, material);\n\t\t//mesh.matrixAutoUpdate = false;\t\t\n\t\tvar physics = new PhysicsObject();\n\t\tphysics.position.set(3 * Math.random() - 1.5, 5, 3 * Math.random() - 1.5);\n\t\tphysics.addShape(shape);\n\t\tphysics.add(mesh);\n\t\tscene.add(physics);\n\t\t\n\t\tphysics.initialize();\n\t}\n};\n"
+						"code": "var camera, speed;\nvar time, clock;\nvar camera;\nvar material, geometry, shape;\n\nthis.initialize = function()\n{\n\tcamera = scene.getObjectByName(\"camera\");\n\t\n\tgeometry = new SphereBufferGeometry(0.2, 32, 32);\n\tmaterial = program.getMaterialByName(\"balls\");\n\tshape = new CANNON.Sphere(0.2);\n\t\n\ttime = 0;\n\tclock = new Clock();\n\tclock.start();\n\t\n\tspeed = 0;\n\tcamera = self.children[0];\n};\n\nthis.update = function()\n{\n\ttime += clock.getDelta();\n\tcamera.position.x = 0.15 * Math.cos(time);\n\t\n\t\n\tif(Mouse.buttonPressed(Mouse.LEFT))\n\t{\n\t\tspeed = -Mouse.delta.x * 0.003;\n\t\tself.rotation.y += speed;\n\t}\n\telse\n\t{\n\t\tspeed *= 0.98;\n\t\tself.rotation.y += speed + 0.001;\n\t}\n\t\n\n\tif(Mouse.buttonJustPressed(Mouse.LEFT))\n\t{\n\t\tvar position = camera.getWorldPosition();\n\t\tvar direction = camera.getWorldDirection();\n\t\tdirection.multiplyScalar(20);\n\t\t\n\t\tvar mesh = new Mesh(geometry, material);\n\t\tmesh.matrixAutoUpdate = false;\t\t\n\t\tvar physics = new PhysicsObject();\n\t\tphysics.position.set(position.x, position.y, position.z);\n\t\tphysics.body.velocity.set(direction.x, direction.y, direction.z);\n\t\tphysics.addShape(shape);\n\t\tphysics.add(mesh);\n\t\tscene.add(physics);\n\t\t\n\t\tphysics.initialize();\n\t}\n};\n"
 					},
 					{
 						"uuid": "68619591-1954-4392-B00F-4F091EE8CC03",
@@ -426,7 +426,7 @@
 							"fog": false
 						},
 						"emitter": {
-							"uuid": "0B109D52-8E56-4311-A70F-2D303E736F94",
+							"uuid": "84E6EBDC-AEAB-4A8C-A3BD-37CD9F8DE886",
 							"direction": 1,
 							"particleCount": 500,
 							"duration": null,
@@ -517,7 +517,7 @@
 						"uuid": "FB343737-CB8E-4DBA-A74E-357B96F0955D",
 						"type": "Group",
 						"name": "container",
-						"folded": true,
+						"folded": false,
 						"hidden": false,
 						"castShadow": true,
 						"receiveShadow": true,
@@ -583,7 +583,7 @@
 								"receiveShadow": true,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [0.29655266126234936,0.9529326029134312,0.06305532017880866,0,-0.9545252915148609,0.29787074647594397,-0.012429249870014971,0,-0.030626572721836137,-0.05650197074879251,0.9979326331696005,0,-3.062890824238096,7.2162030267641875,1.8793081683007469,1],
+								"matrix": [0.29655266126234936,0.9529326029134312,0.06305532017880866,0,-0.9545252915148609,0.29787074647594397,-0.012429249870014961,0,-0.03062657272183613,-0.0565019707487925,0.9979326331696003,0,-3.062890824238096,7.2162030267641875,1.8793081683007469,1],
 								"children": [
 									{
 										"uuid": "E161DB71-294F-4910-8464-923264050F5B",
@@ -679,7 +679,7 @@
 								"receiveShadow": true,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [0.00603856683220938,-0.9906415317305705,0.1363557527980469,0,0.9999463031618044,0.004833550964670409,-0.009166655775613522,0,0.0084217874379253,0.13640378438878092,0.9906175251330696,0,2.158597274375427,6.2313192312786345,2.4223543303620416,1],
+								"matrix": [0.00603856683220938,-0.9906415317305705,0.1363557527980469,0,0.9999463031618043,0.0048335509646704085,-0.009166655775613522,0,0.0084217874379253,0.13640378438878092,0.9906175251330696,0,2.158597274375427,6.2313192312786345,2.4223543303620416,1],
 								"children": [
 									{
 										"uuid": "FADDF453-C835-4973-834C-650758E2C6A9",
@@ -727,7 +727,7 @@
 								"receiveShadow": true,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [0.8663035457059687,-0.4955221420828889,0.06305532017880863,0,0.4971533328349846,0.8675736726058111,-0.01242924987001503,0,-0.048546167184790934,0.042115665812731164,0.9979326331696008,0,2.7074557702647235,15.272503054320264,-0.5596594220308855,1],
+								"matrix": [0.8663035457059687,-0.4955221420828889,0.06305532017880865,0,0.4971533328349846,0.8675736726058111,-0.012429249870015029,0,-0.04854616718479094,0.04211566581273118,0.9979326331696007,0,2.7074557702647235,15.272503054320264,-0.5596594220308855,1],
 								"children": [
 									{
 										"uuid": "7317F36E-7059-4659-918E-27FFC0EAF29F",
@@ -775,7 +775,7 @@
 								"receiveShadow": true,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [0.8663035457059687,-0.4955221420828889,0.06305532017880863,0,0.4971533328349846,0.8675736726058111,-0.012429249870015027,0,-0.048546167184790934,0.04211566581273117,0.9979326331696009,0,1.0641258133553713,4.6138488101516515,-1.8724536408007886,1],
+								"matrix": [0.8663035457059687,-0.4955221420828889,0.06305532017880863,0,0.4971533328349846,0.8675736726058111,-0.01242924987001503,0,-0.048546167184790934,0.042115665812731164,0.9979326331696008,0,1.0641258133553713,4.6138488101516515,-1.8724536408007886,1],
 								"children": [
 									{
 										"uuid": "D0EF040C-5EFF-4411-BBFC-BD5A3C42F644",
@@ -823,7 +823,7 @@
 								"receiveShadow": true,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [0.8663035457059687,-0.4955221420828889,0.06305532017880865,0,0.4971533328349846,0.8675736726058111,-0.012429249870015029,0,-0.04854616718479094,0.04211566581273118,0.9979326331696007,0,4.129655425663842,9.758551688158581,3.600949680713967,1],
+								"matrix": [0.8663035457059687,-0.4955221420828889,0.06305532017880866,0,0.4971533328349846,0.8675736726058111,-0.012429249870015034,0,-0.04854616718479094,0.04211566581273118,0.9979326331696006,0,4.129655425663842,9.758551688158581,3.600949680713967,1],
 								"children": [
 									{
 										"uuid": "BEBF6F44-B32D-459D-BD58-9AC7987EED12",
@@ -871,7 +871,7 @@
 								"receiveShadow": true,
 								"visible": true,
 								"matrixAutoUpdate": true,
-								"matrix": [0.8663035457059687,-0.4955221420828889,0.06305532017880866,0,0.4971533328349846,0.8675736726058111,-0.012429249870015034,0,-0.04854616718479094,0.04211566581273118,0.9979326331696006,0,-2.5872732215257486,8.872023038642016,3.0918268978626653,1],
+								"matrix": [0.8663035457059687,-0.4955221420828889,0.06305532017880867,0,0.4971533328349846,0.8675736726058111,-0.012429249870015034,0,-0.04854616718479095,0.04211566581273118,0.9979326331696005,0,-2.5872732215257486,8.872023038642016,3.0918268978626653,1],
 								"children": [
 									{
 										"uuid": "B1EAAD9B-4FFA-4909-84D1-0198A6CD5F91",
@@ -1241,7 +1241,7 @@
 						"uuid": "54F5B2CF-81CF-46AE-96EB-327B261D14A8",
 						"type": "Physics",
 						"name": "white",
-						"folded": true,
+						"folded": false,
 						"hidden": false,
 						"castShadow": false,
 						"receiveShadow": false,
@@ -1255,7 +1255,7 @@
 								"name": "point",
 								"folded": false,
 								"hidden": false,
-								"castShadow": false,
+								"castShadow": true,
 								"visible": true,
 								"matrixAutoUpdate": false,
 								"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0.24004163445354842,0,1],
