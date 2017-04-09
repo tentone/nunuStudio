@@ -42,7 +42,7 @@ Interface.initialize = function()
 			{
 				Editor.loadGeometry(files[0]);
 			}
-		}, ".obj, .dae, .gltf, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x");
+		}, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x");
 	}, Interface.fileDir + "icons/models/models.png");
 
 	//Textures menu

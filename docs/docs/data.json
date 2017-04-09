@@ -7541,7 +7541,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 264,
+            "line": 271,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -7561,7 +7561,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 284,
+            "line": 291,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -7577,7 +7577,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 298,
+            "line": 305,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -7598,7 +7598,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 326,
+            "line": 333,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -7618,7 +7618,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 346,
+            "line": 353,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -7634,7 +7634,7 @@
         },
         {
             "file": "..\\source\\core\\resources\\ResourceManager.js",
-            "line": 360,
+            "line": 367,
             "description": "Remove audio.",
             "params": [
                 {

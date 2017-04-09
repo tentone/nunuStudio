@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704090028";
+Nunu.TIMESTAMP = "201704091205";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -31532,8 +31532,9 @@ ResourceManager.prototype.addTexture = function(a) {
 ResourceManager.prototype.removeTexture = function(a, b) {
   void 0 === b && (b = new THREE.Texture);
   a instanceof THREE.Texture && (delete this.textures[a.uuid], this.traverse(function(e) {
-    void 0 !== e.material ? (e = e.material, null != e.map && e.map.uuid === a.uuid ? (e.map = b, e.needsUpdate = !0) : null != e.bumpMap && e.bumpMap.uuid === a.uuid ? (e.bumpMap = b, e.needsUpdate = !0) : null != e.normalMap && e.normalMap.uuid === a.uuid ? (e.normalMap = b, e.needsUpdate = !0) : null != e.displacementMap && e.displacementMap.uuid === a.uuid ? (e.displacementMap = b, e.needsUpdate = !0) : null != e.specularMap && e.specularMap.uuid === a.uuid ? (e.specularMap = b, e.needsUpdate = 
-    !0) : null != e.emissiveMap && e.emissiveMap.uuid === a.uuid ? (e.emissiveMap = b, e.needsUpdate = !0) : null != e.alphaMap && e.alphaMap.uuid === a.uuid ? (e.alphaMap = b, e.needsUpdate = !0) : null != e.roughnessMap && e.roughnessMap.uuid === a.uuid ? (e.roughnessMap = b, e.needsUpdate = !0) : null != e.metalnessMap && e.metalnessMap.uuid === a.uuid && (e.metalnessMap = b, e.needsUpdate = !0)) : e instanceof ParticleEmitter && e.group.texture.uuid === a.uuid && (e.group.texture = b);
+    void 0 !== e.material ? (e = e.material, null != e.map && e.map.uuid === a.uuid && (e.map = b, e.needsUpdate = !0), null != e.bumpMap && e.bumpMap.uuid === a.uuid && (e.bumpMap = b, e.needsUpdate = !0), null != e.normalMap && e.normalMap.uuid === a.uuid && (e.normalMap = b, e.needsUpdate = !0), null != e.displacementMap && e.displacementMap.uuid === a.uuid && (e.displacementMap = b, e.needsUpdate = !0), null != e.specularMap && e.specularMap.uuid === a.uuid && (e.specularMap = b, e.needsUpdate = 
+    !0), null != e.emissiveMap && e.emissiveMap.uuid === a.uuid && (e.emissiveMap = b, e.needsUpdate = !0), null != e.alphaMap && e.alphaMap.uuid === a.uuid && (e.alphaMap = b, e.needsUpdate = !0), null != e.roughnessMap && e.roughnessMap.uuid === a.uuid && (e.roughnessMap = b, e.needsUpdate = !0), null != e.metalnessMap && e.metalnessMap.uuid === a.uuid && (e.metalnessMap = b, e.needsUpdate = !0), null != e.envMap && e.envMap.uuid === a.uuid && (e.envMap = null, e.needsUpdate = !0)) : e instanceof 
+    ParticleEmitter && e.group.texture.uuid === a.uuid && (e.group.texture = b);
   }));
 };
 ResourceManager.prototype.getFontByName = function(a) {
@@ -63933,6 +63934,8 @@ SceneEditor.EDITING = 9;
 SceneEditor.TESTING = 11;
 SceneEditor.CAMERA_ORTHOGRAPHIC = 20;
 SceneEditor.CAMERA_PERSPECTIVE = 21;
+SceneEditor.UP = new THREE.Vector3(0, 1, 0);
+SceneEditor.ZERO = new THREE.Vector3(0, 0, 0);
 SceneEditor.prototype = Object.create(TabElement.prototype);
 SceneEditor.prototype.updateMetadata = function() {
   if (null !== this.scene) {
@@ -64015,7 +64018,7 @@ SceneEditor.prototype.update = function() {
         if (Settings.editor.navigation === Settings.FREE) {
           this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject && (this.cameraRotation.y = Settings.editor.invertNavigation ? this.cameraRotation.y + .002 * this.mouse.delta.y : this.cameraRotation.y - .002 * this.mouse.delta.y, this.cameraRotation.x -= .002 * this.mouse.delta.x, -1.57 > this.cameraRotation.y ? this.cameraRotation.y = -1.57 : 1.57 < this.cameraRotation.y && (this.cameraRotation.y = 1.57), this.setCameraRotation(this.cameraRotation, this.camera));
           if (this.mouse.buttonPressed(Mouse.RIGHT)) {
-            a = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 1E3;
+            a = this.camera.position.distanceTo(SceneEditor.ZERO) / 1E3;
             .02 > a && (a = .02);
             var b = Math.cos(this.cameraRotation.x), e = Math.sin(this.cameraRotation.x);
             this.camera.position.z += this.mouse.delta.y * a * b;
@@ -64026,15 +64029,15 @@ SceneEditor.prototype.update = function() {
             this.camera.position.x += this.mouse.delta.x * a * e;
           }
           this.mouse.buttonPressed(Mouse.MIDDLE) && (this.camera.position.y += .1 * this.mouse.delta.y);
-          0 !== this.mouse.wheel && (a = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 2E3, a *= this.mouse.wheel, 0 > a && -.03 < a ? a = -.03 : 0 < a && .03 > a && (a = .03), b = this.camera.getWorldDirection(), b.multiplyScalar(a), this.camera.position.sub(b));
+          0 !== this.mouse.wheel && (a = this.camera.position.distanceTo(SceneEditor.ZERO) / 2E3, a *= this.mouse.wheel, 0 > a && -.03 < a ? a = -.03 : 0 < a && .03 > a && (a = .03), b = this.camera.getWorldDirection(), b.multiplyScalar(a), this.camera.position.sub(b));
           Editor.keyboard.keyPressed(Keyboard.W) && (b = this.camera.getWorldDirection(), b.multiplyScalar(.5), this.camera.position.add(b));
           Editor.keyboard.keyPressed(Keyboard.S) && (b = this.camera.getWorldDirection(), b.multiplyScalar(.5), this.camera.position.sub(b));
           Editor.keyboard.keyPressed(Keyboard.A) && (b = new THREE.Vector3(Math.sin(this.cameraRotation.x - 1.57), 0, Math.cos(this.cameraRotation.x - 1.57)), b.normalize(), b.multiplyScalar(.5), this.camera.position.sub(b));
           Editor.keyboard.keyPressed(Keyboard.D) && (b = new THREE.Vector3(Math.sin(this.cameraRotation.x + 1.57), 0, Math.cos(this.cameraRotation.x + 1.57)), b.normalize(), b.multiplyScalar(.5), this.camera.position.sub(b));
         } else {
           Settings.editor.navigation === Settings.ORBIT && (this.mouse.buttonPressed(Mouse.LEFT) && !this.isEditingObject && (this.cameraRotation.y = Settings.editor.invertNavigation ? this.cameraRotation.y + .002 * this.mouse.delta.y : this.cameraRotation.y - .002 * this.mouse.delta.y, this.cameraRotation.x -= .002 * this.mouse.delta.x, -1.57 > this.cameraRotation.y ? this.cameraRotation.y = -1.57 : 1.57 < this.cameraRotation.y && (this.cameraRotation.y = 1.57)), 0 !== this.mouse.wheel && (this.cameraDistance += 
-          this.camera.position.distanceTo(this.cameraLookAt) / 1500 * this.mouse.wheel, 0 > this.cameraDistance && (this.cameraDistance = 0)), this.mouse.buttonPressed(Mouse.MIDDLE) && (this.cameraDistance += .1 * this.mouse.delta.y, 0 > this.cameraDistance && (this.cameraDistance = 0)), this.mouse.buttonPressed(Mouse.RIGHT) && (b = this.camera.getWorldDirection(), b.y = 0, b.normalize(), b.multiplyScalar(.1 * this.mouse.delta.y), this.cameraLookAt.add(b)), a = Math.cos(this.cameraRotation.y), a = 
-          new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x) * a, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x) * a), this.camera.position.copy(a), this.camera.position.add(this.cameraLookAt), this.camera.lookAt(this.cameraLookAt));
+          this.camera.position.distanceTo(this.cameraLookAt) / 1500 * this.mouse.wheel, 0 > this.cameraDistance && (this.cameraDistance = 0)), this.mouse.buttonPressed(Mouse.MIDDLE) && (this.cameraDistance += .1 * this.mouse.delta.y, 0 > this.cameraDistance && (this.cameraDistance = 0)), this.mouse.buttonPressed(Mouse.RIGHT) && (b = this.camera.getWorldDirection(), b.y = 0, b.normalize(), this.cameraLookAt.x += b.x * this.mouse.delta.y * .1, this.cameraLookAt.z += b.z * this.mouse.delta.y * .1, b.applyAxisAngle(SceneEditor.UP, 
+          1.57), this.cameraLookAt.x += b.x * this.mouse.delta.x * .1, this.cameraLookAt.z += b.z * this.mouse.delta.x * .1), a = Math.cos(this.cameraRotation.y), a = new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x) * a, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x) * a), this.camera.position.copy(a), this.camera.position.add(this.cameraLookAt), this.camera.lookAt(this.cameraLookAt));
         }
       }
     }
@@ -64102,7 +64105,8 @@ SceneEditor.prototype.updateRaycaster = function(a, b) {
 SceneEditor.prototype.setCameraMode = function(a) {
   void 0 === a && (a = this.cameraMode === SceneEditor.CAMERA_PERSPECTIVE ? SceneEditor.CAMERA_ORTHOGRAPHIC : SceneEditor.CAMERA_PERSPECTIVE);
   var b = null !== this.canvas ? this.canvas.width / this.canvas.height : 1;
-  a === SceneEditor.CAMERA_ORTHOGRAPHIC ? (this.camera = new OrthographicCamera(10, b, OrthographicCamera.RESIZE_HORIZONTAL), this.camera.position.set(0, 0, 20), this.gridHelper.rotation.x = Math.PI / 2) : a === SceneEditor.CAMERA_PERSPECTIVE && (this.camera = new PerspectiveCamera(60, b), this.camera.position.set(0, 3, 5), this.cameraRotation.set(3.14, 0), this.gridHelper.rotation.x = 0, this.setCameraRotation(this.cameraRotation, this.camera));
+  a === SceneEditor.CAMERA_ORTHOGRAPHIC ? (this.camera = new OrthographicCamera(10, b, OrthographicCamera.RESIZE_HORIZONTAL), this.camera.position.set(0, 0, 20), this.gridHelper.rotation.x = Math.PI / 2) : a === SceneEditor.CAMERA_PERSPECTIVE && (this.camera = new PerspectiveCamera(60, b), this.camera.position.set(0, 3, 5), this.cameraRotation.set(3.14, 0), this.cameraLookAt.set(0, 0, 0), this.cameraDistance = 10, this.setCameraRotation(this.cameraRotation, this.camera), this.gridHelper.rotation.x = 
+  0);
   this.cameraMode = a;
   this.selectTool(this.toolMode);
 };
@@ -65053,6 +65057,14 @@ function GeneralSettingsTab(a, b, e, d) {
   });
   this.form.add(this.gridSpacing);
   this.form.nextRow();
+  this.form.addText("Show axis");
+  this.axisEnabled = new CheckBox(this.form.element);
+  this.axisEnabled.size.set(20, 16);
+  this.axisEnabled.setOnChange(function() {
+    Settings.editor.axisEnabled = f.axisEnabled.getValue();
+  });
+  this.form.add(this.axisEnabled);
+  this.form.nextRow();
   this.form.addText("Snap to grid");
   this.snap = new CheckBox(this.form.element);
   this.snap.size.set(20, 16);
@@ -65071,22 +65083,6 @@ function GeneralSettingsTab(a, b, e, d) {
   });
   this.form.add(this.snapAngle);
   this.form.nextRow();
-  this.form.addText("Show axis");
-  this.axisEnabled = new CheckBox(this.form.element);
-  this.axisEnabled.size.set(20, 16);
-  this.axisEnabled.setOnChange(function() {
-    Settings.editor.axisEnabled = f.axisEnabled.getValue();
-  });
-  this.form.add(this.axisEnabled);
-  this.form.nextRow();
-  this.form.addText("Lock mouse editor");
-  this.lockMouse = new CheckBox(this.form.element);
-  this.lockMouse.size.set(20, 16);
-  this.lockMouse.setOnChange(function() {
-    Settings.editor.lockMouse = f.lockMouse.getValue();
-  });
-  this.form.add(this.lockMouse);
-  this.form.nextRow();
   this.form.addText("Transformations space");
   this.transformationSpace = new DropdownList(this.form.element);
   this.transformationSpace.size.set(150, 20);
@@ -65097,7 +65093,11 @@ function GeneralSettingsTab(a, b, e, d) {
   });
   this.form.add(this.transformationSpace);
   this.form.nextRow();
-  this.form.addText("Navigation mode");
+  this.form.addText("");
+  this.form.nextRow();
+  this.form.addText("Navigation");
+  this.form.nextRow();
+  this.form.addText("Navigation Mode");
   this.navigation = new DropdownList(this.form.element);
   this.navigation.size.set(150, 20);
   this.navigation.addValue("Free", Settings.FREE);
@@ -65107,7 +65107,7 @@ function GeneralSettingsTab(a, b, e, d) {
   });
   this.form.add(this.navigation);
   this.form.nextRow();
-  this.form.addText("Invert Navigation");
+  this.form.addText("Invert Vertical");
   this.invertNavigation = new CheckBox(this.form.element);
   this.invertNavigation.size.set(20, 16);
   this.invertNavigation.setOnChange(function() {
@@ -65115,7 +65115,19 @@ function GeneralSettingsTab(a, b, e, d) {
   });
   this.form.add(this.invertNavigation);
   this.form.nextRow();
-  this.form.addText("Camera preview");
+  this.form.addText("Lock mouse");
+  this.lockMouse = new CheckBox(this.form.element);
+  this.lockMouse.size.set(20, 16);
+  this.lockMouse.setOnChange(function() {
+    Settings.editor.lockMouse = f.lockMouse.getValue();
+  });
+  this.form.add(this.lockMouse);
+  this.form.nextRow();
+  this.form.addText("");
+  this.form.nextRow();
+  this.form.addText("Camera Preview");
+  this.form.nextRow();
+  this.form.addText("Show preview");
   this.cameraPreviewEnabled = new CheckBox(this.form.element);
   this.cameraPreviewEnabled.size.set(20, 16);
   this.cameraPreviewEnabled.setOnChange(function() {
@@ -65140,7 +65152,7 @@ function GeneralSettingsTab(a, b, e, d) {
   this.form.addText("Preview size");
   this.filePreviewSize = new NumberBox(this.form.element);
   this.filePreviewSize.size.set(60, 18);
-  this.filePreviewSize.setRange(60, 500);
+  this.filePreviewSize.setRange(50, 200);
   this.filePreviewSize.setStep(1);
   this.filePreviewSize.setOnChange(function() {
     var a = f.filePreviewSize.getValue();
@@ -69149,7 +69161,7 @@ Interface.initialize = function() {
   Interface.assetFile.addOption("3D Models", function() {
     FileSystem.chooseFile(function(a) {
       0 < a.length && Editor.loadGeometry(a[0]);
-    }, ".obj, .dae, .gltf, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x");
+    }, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x");
   }, Interface.fileDir + "icons/models/models.png");
   var a = Interface.assetFile.addMenu("Texture", Interface.fileDir + "icons/misc/image.png");
   a.addOption("Texture", function() {
@@ -70117,7 +70129,7 @@ Editor.loadGeometry = function(a, b) {
       a.options.convertUpAxis = !0;
       a = a.parse(g.result).scene;
       Editor.addToScene(a);
-    }, g.readAsText(a)) : "gltf" === b ? (g = new FileReader, g.onload = function() {
+    }, g.readAsText(a)) : "gltf" === b || "glb" === b ? (g = new FileReader, g.onload = function() {
       var a = (new THREE.GLTFLoader).parse(g.result);
       void 0 !== a.scene && Editor.addToScene(a.scene);
     }, g.readAsText(a)) : "awd" === b ? (g = new FileReader, g.onload = function() {
@@ -70171,13 +70183,13 @@ Editor.exportWindowsProject = function(a) {
 };
 Editor.exportLinuxProject = function(a) {
   Editor.exportWebProject(a);
-  FileSystem.copyFolder("nwjs\\linux", a + "\\nwjs");
+  FileSystem.copyFolder("..\\nwjs\\linux", a + "\\nwjs");
   FileSystem.writeFile(a + "\\package.json", JSON.stringify({name:Editor.program.name, main:"index.html", window:{frame:!0}}));
   FileSystem.writeFile(a + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
 };
 Editor.exportMacOSProject = function(a) {
   Editor.exportWebProject(a);
-  FileSystem.copyFolder("nwjs\\mac", a + "\\nwjs");
+  FileSystem.copyFolder("..\\nwjs\\mac", a + "\\nwjs");
   FileSystem.writeFile(a + "\\package.json", JSON.stringify({name:Editor.program.name, main:"index.html", window:{frame:!0}}));
   FileSystem.writeFile(a + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
 };
