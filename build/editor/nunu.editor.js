@@ -69544,7 +69544,7 @@ Interface.initialize = function() {
     Interface.newProgram();
   }, Interface.fileDir + "icons/misc/new.png");
   Interface.file.addOption("Save", function() {
-    null !== Editor.openFile ? Editor.saveProgram(void 0, !1) : Interface.saveProgram();
+    null !== Editor.openFile ? Editor.saveProgram(void 0, !0) : Interface.saveProgram();
   }, Interface.fileDir + "icons/misc/save.png");
   Nunu.runningOnDesktop() && Interface.file.addOption("Save As", function() {
     Interface.saveProgram();

@@ -663,7 +663,7 @@ Interface.initialize = function()
 	{
 		if(Editor.openFile !== null)
 		{
-			Editor.saveProgram(undefined, false);
+			Editor.saveProgram(undefined, true);
 		}
 		else
 		{
