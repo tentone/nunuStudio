@@ -945,15 +945,20 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	{
 		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL);
 		this.camera.position.set(0, 0, 20);
+		
 		this.gridHelper.rotation.x = Math.PI / 2;
 	}
 	else if(mode === SceneEditor.CAMERA_PERSPECTIVE)
 	{
 		this.camera = new PerspectiveCamera(60, aspect);
 		this.camera.position.set(0, 3, 5);
+
 		this.cameraRotation.set(3.14, 0);
-		this.gridHelper.rotation.x = 0;
+		this.cameraLookAt.set(0, 0, 0);
+		this.cameraDistance = 10;
 		this.setCameraRotation(this.cameraRotation, this.camera);
+
+		this.gridHelper.rotation.x = 0;
 	}
 
 	this.cameraMode = mode;
