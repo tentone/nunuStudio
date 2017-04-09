@@ -106,6 +106,17 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.gridSpacing);
 	this.form.nextRow();
 
+	//Enable Axis
+	this.form.addText("Show axis");
+	this.axisEnabled = new CheckBox(this.form.element);
+	this.axisEnabled.size.set(20, 16);
+	this.axisEnabled.setOnChange(function()
+	{
+		Settings.editor.axisEnabled = self.axisEnabled.getValue();
+	});
+	this.form.add(this.axisEnabled);
+	this.form.nextRow();
+
 	//Snap to grid
 	this.form.addText("Snap to grid");
 	this.snap = new CheckBox(this.form.element);
@@ -130,28 +141,6 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.snapAngle);
 	this.form.nextRow();
 
-	//Enable Axis
-	this.form.addText("Show axis");
-	this.axisEnabled = new CheckBox(this.form.element);
-	this.axisEnabled.size.set(20, 16);
-	this.axisEnabled.setOnChange(function()
-	{
-		Settings.editor.axisEnabled = self.axisEnabled.getValue();
-	});
-	this.form.add(this.axisEnabled);
-	this.form.nextRow();
-
-	//Mouse lock on camera move
-	this.form.addText("Lock mouse editor");
-	this.lockMouse = new CheckBox(this.form.element);
-	this.lockMouse.size.set(20, 16);
-	this.lockMouse.setOnChange(function()
-	{
-		Settings.editor.lockMouse = self.lockMouse.getValue();
-	});
-	this.form.add(this.lockMouse);
-	this.form.nextRow();
-
 	//Tranformations space
 	this.form.addText("Transformations space");
 	this.transformationSpace = new DropdownList(this.form.element);
@@ -165,8 +154,16 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.transformationSpace);
 	this.form.nextRow();
 
+	//Blank Space
+	this.form.addText("");
+	this.form.nextRow();
+
+	//Scene editor
+	this.form.addText("Navigation");
+	this.form.nextRow();
+
 	//Navigation
-	this.form.addText("Navigation mode");
+	this.form.addText("Navigation Mode");
 	this.navigation = new DropdownList(this.form.element);
 	this.navigation.size.set(150, 20);
 	this.navigation.addValue("Free", Settings.FREE);
@@ -179,7 +176,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Invert navigation
-	this.form.addText("Invert Navigation");
+	this.form.addText("Invert Vertical");
 	this.invertNavigation = new CheckBox(this.form.element);
 	this.invertNavigation.size.set(20, 16);
 	this.invertNavigation.setOnChange(function()
@@ -189,8 +186,27 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.invertNavigation);
 	this.form.nextRow();
 
+	//Mouse lock on camera move
+	this.form.addText("Lock mouse");
+	this.lockMouse = new CheckBox(this.form.element);
+	this.lockMouse.size.set(20, 16);
+	this.lockMouse.setOnChange(function()
+	{
+		Settings.editor.lockMouse = self.lockMouse.getValue();
+	});
+	this.form.add(this.lockMouse);
+	this.form.nextRow();
+
+	//Blank Space
+	this.form.addText("");
+	this.form.nextRow();
+
+	//Scene editor
+	this.form.addText("Camera Preview");
+	this.form.nextRow();
+
 	//Enable camera preview
-	this.form.addText("Camera preview");
+	this.form.addText("Show preview");
 	this.cameraPreviewEnabled = new CheckBox(this.form.element);
 	this.cameraPreviewEnabled.size.set(20, 16);
 	this.cameraPreviewEnabled.setOnChange(function()
@@ -225,7 +241,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.addText("Preview size");
 	this.filePreviewSize = new NumberBox(this.form.element);
 	this.filePreviewSize.size.set(60, 18);
-	this.filePreviewSize.setRange(60, 500);
+	this.filePreviewSize.setRange(50, 200);
 	this.filePreviewSize.setStep(1);
 	this.filePreviewSize.setOnChange(function()
 	{

@@ -1187,7 +1187,7 @@ Editor.loadGeometry = function(file, onLoad)
 		reader.readAsText(file);
 	}
 	//GLTF
-	else if(extension === "gltf")
+	else if(extension === "gltf" || extension === "glb")
 	{
 		var reader = new FileReader();
 		reader.onload = function()
@@ -1383,7 +1383,7 @@ Editor.exportWindowsProject = function(dir)
 Editor.exportLinuxProject = function(dir)
 {
 	Editor.exportWebProject(dir);
-	FileSystem.copyFolder("nwjs\\linux", dir + "\\nwjs");
+	FileSystem.copyFolder("..\\nwjs\\linux", dir + "\\nwjs");
 	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
 	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
 };
@@ -1392,7 +1392,7 @@ Editor.exportLinuxProject = function(dir)
 Editor.exportMacOSProject = function(dir)
 {
 	Editor.exportWebProject(dir);
-	FileSystem.copyFolder("nwjs\\mac", dir + "\\nwjs");
+	FileSystem.copyFolder("..\\nwjs\\mac", dir + "\\nwjs");
 	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
 	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
 };

@@ -98,6 +98,7 @@
 	- Added snap to grid
 	- First version of NodeJS build system (@GGAlanSmithee)
 	- Open ISP as url argument on web version
+	- Support for orbit navigation
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

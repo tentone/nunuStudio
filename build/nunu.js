@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.24 Alpha";
-Nunu.TIMESTAMP = "201704090028";
+Nunu.TIMESTAMP = "201704091205";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -4135,17 +4135,17 @@ Nunu.runningOnDesktop = function() {
   function Ld(d, n, a, b) {
     Ya.call(this, d, n, a, b);
   }
-  function Qb(d, n, a, b) {
+  function Qb(d, a, b, c) {
     if (void 0 === d) {
       throw Error("track name is undefined");
     }
-    if (void 0 === n || 0 === n.length) {
+    if (void 0 === a || 0 === a.length) {
       throw Error("no keyframes in track named " + d);
     }
     this.name = d;
-    this.times = Da.convertArray(n, this.TimeBufferType);
-    this.values = Da.convertArray(a, this.ValueBufferType);
-    this.setInterpolation(b || this.DefaultInterpolation);
+    this.times = Da.convertArray(a, this.TimeBufferType);
+    this.values = Da.convertArray(b, this.ValueBufferType);
+    this.setInterpolation(c || this.DefaultInterpolation);
     this.validate();
     this.optimize();
   }
@@ -11096,8 +11096,8 @@ Nunu.runningOnDesktop = function() {
     }
     a.type = d.ValueTypeName;
     return a;
-  }, _getTrackTypeForValueTypeName:function(d) {
-    switch(d.toLowerCase()) {
+  }, _getTrackTypeForValueTypeName:function(a) {
+    switch(a.toLowerCase()) {
       case "scalar":
       case "double":
       case "float":
@@ -11119,13 +11119,13 @@ Nunu.runningOnDesktop = function() {
       case "string":
         return Nd;
     }
-    throw Error("Unsupported typeName: " + d);
+    throw Error("Unsupported typeName: " + a);
   }});
-  Object.assign(bb, {parse:function(d) {
-    for (var a = [], b = d.tracks, c = 1 / (d.fps || 1), e = 0, h = b.length;e !== h;++e) {
-      a.push(Rb.parse(b[e]).scale(c));
+  Object.assign(bb, {parse:function(a) {
+    for (var d = [], b = a.tracks, c = 1 / (a.fps || 1), e = 0, h = b.length;e !== h;++e) {
+      d.push(Rb.parse(b[e]).scale(c));
     }
-    return new bb(d.name, d.duration, a);
+    return new bb(a.name, a.duration, d);
   }, toJSON:function(a) {
     var d = [], b = a.tracks;
     a = {name:a.name, duration:a.duration, tracks:d};
@@ -17623,24 +17623,24 @@ THREE.VREffect = function(a, f) {
     };
     var D = new k, F = new k, G = new k, x = new k, K = new k, I = new k, M = new k, J = new k;
     b.prototype.clipFaceAgainstHull = function(b, c, e, h, m, g, k) {
-      for (var f = [], q = -1, p = Number.MAX_VALUE, t = 0;t < this.faces.length;t++) {
-        D.copy(this.faceNormals[t]);
+      for (var f = [], q = -1, p = Number.MAX_VALUE, l = 0;l < this.faces.length;l++) {
+        D.copy(this.faceNormals[l]);
         e.vmult(D, D);
-        var l = D.dot(b);
-        p > l && (p = l, q = t);
+        var t = D.dot(b);
+        p > t && (p = t, q = l);
       }
       if (!(0 > q)) {
         b = this.faces[q];
         b.connectedFaces = [];
         for (p = 0;p < this.faces.length;p++) {
-          for (t = 0;t < this.faces[p].length;t++) {
-            -1 !== b.indexOf(this.faces[p][t]) && p !== q && -1 === b.connectedFaces.indexOf(p) && b.connectedFaces.push(p);
+          for (l = 0;l < this.faces[p].length;l++) {
+            -1 !== b.indexOf(this.faces[p][l]) && p !== q && -1 === b.connectedFaces.indexOf(p) && b.connectedFaces.push(p);
           }
         }
         p = (h.length, b.length);
-        for (t = 0;p > t;t++) {
-          l = this.vertices[b[t]];
-          l.vsub(this.vertices[b[(t + 1) % p]], F);
+        for (l = 0;p > l;l++) {
+          t = this.vertices[b[l]];
+          t.vsub(this.vertices[b[(l + 1) % p]], F);
           G.copy(F);
           e.vmult(G, G);
           c.vadd(G, G);
@@ -17649,16 +17649,16 @@ THREE.VREffect = function(a, f) {
           c.vadd(x, x);
           G.cross(x, K);
           K.negate(K);
-          I.copy(l);
+          I.copy(t);
           e.vmult(I, I);
           c.vadd(I, I);
-          l = (-I.dot(K), b.connectedFaces[t]);
-          M.copy(this.faceNormals[l]);
-          l = this.getPlaneConstantOfFace(l);
+          t = (-I.dot(K), b.connectedFaces[l]);
+          M.copy(this.faceNormals[t]);
+          t = this.getPlaneConstantOfFace(t);
           J.copy(M);
           e.vmult(J, J);
-          l -= J.dot(c);
-          for (this.clipFaceAgainstPlane(h, f, J, l);h.length;) {
+          t -= J.dot(c);
+          for (this.clipFaceAgainstPlane(h, f, J, t);h.length;) {
             h.shift();
           }
           for (;f.length;) {
@@ -17666,12 +17666,12 @@ THREE.VREffect = function(a, f) {
           }
         }
         M.copy(this.faceNormals[q]);
-        l = this.getPlaneConstantOfFace(q);
+        t = this.getPlaneConstantOfFace(q);
         J.copy(M);
         e.vmult(J, J);
-        l -= J.dot(c);
+        t -= J.dot(c);
         for (p = 0;p < h.length;p++) {
-          if (c = J.dot(h[p]) + l, m >= c && (console.log("clamped: depth=" + c + " to minDist=" + (m + "")), c = m), g >= c) {
+          if (c = J.dot(h[p]) + t, m >= c && (console.log("clamped: depth=" + c + " to minDist=" + (m + "")), c = m), g >= c) {
             e = h[p], 0 >= c && k.push({point:e, normal:J, depth:c});
           }
         }
@@ -17684,17 +17684,17 @@ THREE.VREffect = function(a, f) {
       }
       var q = b[b.length - 1], p = b[0];
       m = e.dot(q) + h;
-      for (var t = 0;f > t;t++) {
-        if (p = b[t], g = e.dot(p) + h, 0 > m) {
+      for (var l = 0;f > l;l++) {
+        if (p = b[l], g = e.dot(p) + h, 0 > m) {
           if (0 > g) {
-            var l = new k;
-            l.copy(p);
+            var t = new k;
+            t.copy(p);
           } else {
-            l = new k, q.lerp(p, m / (m - g), l);
+            t = new k, q.lerp(p, m / (m - g), t);
           }
-          c.push(l);
+          c.push(t);
         } else {
-          0 > g && (l = new k, q.lerp(p, m / (m - g), l), c.push(l), c.push(p));
+          0 > g && (t = new k, q.lerp(p, m / (m - g), t), c.push(t), c.push(p));
         }
         q = p;
         m = g;
@@ -17740,8 +17740,8 @@ THREE.VREffect = function(a, f) {
     };
     var P = new k;
     b.prototype.calculateWorldAABB = function(b, c, e, h) {
-      for (var m, g, k, f, q, p, l = this.vertices.length, t = this.vertices, r = 0;l > r;r++) {
-        P.copy(t[r]);
+      for (var m, g, k, f, q, p, t = this.vertices.length, l = this.vertices, r = 0;t > r;r++) {
+        P.copy(l[r]);
         c.vmult(P, P);
         b.vadd(P, P);
         var v = P;
@@ -31527,8 +31527,9 @@ ResourceManager.prototype.addTexture = function(a) {
 ResourceManager.prototype.removeTexture = function(a, f) {
   void 0 === f && (f = new THREE.Texture);
   a instanceof THREE.Texture && (delete this.textures[a.uuid], this.traverse(function(l) {
-    void 0 !== l.material ? (l = l.material, null != l.map && l.map.uuid === a.uuid ? (l.map = f, l.needsUpdate = !0) : null != l.bumpMap && l.bumpMap.uuid === a.uuid ? (l.bumpMap = f, l.needsUpdate = !0) : null != l.normalMap && l.normalMap.uuid === a.uuid ? (l.normalMap = f, l.needsUpdate = !0) : null != l.displacementMap && l.displacementMap.uuid === a.uuid ? (l.displacementMap = f, l.needsUpdate = !0) : null != l.specularMap && l.specularMap.uuid === a.uuid ? (l.specularMap = f, l.needsUpdate = 
-    !0) : null != l.emissiveMap && l.emissiveMap.uuid === a.uuid ? (l.emissiveMap = f, l.needsUpdate = !0) : null != l.alphaMap && l.alphaMap.uuid === a.uuid ? (l.alphaMap = f, l.needsUpdate = !0) : null != l.roughnessMap && l.roughnessMap.uuid === a.uuid ? (l.roughnessMap = f, l.needsUpdate = !0) : null != l.metalnessMap && l.metalnessMap.uuid === a.uuid && (l.metalnessMap = f, l.needsUpdate = !0)) : l instanceof ParticleEmitter && l.group.texture.uuid === a.uuid && (l.group.texture = f);
+    void 0 !== l.material ? (l = l.material, null != l.map && l.map.uuid === a.uuid && (l.map = f, l.needsUpdate = !0), null != l.bumpMap && l.bumpMap.uuid === a.uuid && (l.bumpMap = f, l.needsUpdate = !0), null != l.normalMap && l.normalMap.uuid === a.uuid && (l.normalMap = f, l.needsUpdate = !0), null != l.displacementMap && l.displacementMap.uuid === a.uuid && (l.displacementMap = f, l.needsUpdate = !0), null != l.specularMap && l.specularMap.uuid === a.uuid && (l.specularMap = f, l.needsUpdate = 
+    !0), null != l.emissiveMap && l.emissiveMap.uuid === a.uuid && (l.emissiveMap = f, l.needsUpdate = !0), null != l.alphaMap && l.alphaMap.uuid === a.uuid && (l.alphaMap = f, l.needsUpdate = !0), null != l.roughnessMap && l.roughnessMap.uuid === a.uuid && (l.roughnessMap = f, l.needsUpdate = !0), null != l.metalnessMap && l.metalnessMap.uuid === a.uuid && (l.metalnessMap = f, l.needsUpdate = !0), null != l.envMap && l.envMap.uuid === a.uuid && (l.envMap = null, l.needsUpdate = !0)) : l instanceof 
+    ParticleEmitter && l.group.texture.uuid === a.uuid && (l.group.texture = f);
   }));
 };
 ResourceManager.prototype.getFontByName = function(a) {

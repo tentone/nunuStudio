@@ -316,6 +316,10 @@ SceneEditor.TESTING = 11;
 SceneEditor.CAMERA_ORTHOGRAPHIC = 20;
 SceneEditor.CAMERA_PERSPECTIVE = 21;
 
+//Constants
+SceneEditor.UP = new THREE.Vector3(0, 1, 0);
+SceneEditor.ZERO = new THREE.Vector3(0, 0, 0);
+
 SceneEditor.prototype = Object.create(TabElement.prototype);
 
 //Update container object data
@@ -628,7 +632,7 @@ SceneEditor.prototype.update = function()
 					if(this.mouse.buttonPressed(Mouse.RIGHT))
 					{
 						//Move speed
-						var speed = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 1000;
+						var speed = this.camera.position.distanceTo(SceneEditor.ZERO) / 1000;
 						if(speed < 0.02)
 						{
 							speed = 0.02;
@@ -657,7 +661,7 @@ SceneEditor.prototype.update = function()
 					if(this.mouse.wheel !== 0)
 					{
 						//Move speed
-						var speed = this.camera.position.distanceTo(new THREE.Vector3(0, 0, 0)) / 2000;
+						var speed = this.camera.position.distanceTo(SceneEditor.ZERO) / 2000;
 						speed *= this.mouse.wheel;
 
 						//Limit zoom speed
@@ -755,10 +759,14 @@ SceneEditor.prototype.update = function()
 						var direction = this.camera.getWorldDirection();
 						direction.y = 0;
 						direction.normalize();
-						direction.multiplyScalar(this.mouse.delta.y * 0.1);
-						this.cameraLookAt.add(direction);
 
-						//TODO <LATERAL MOVEMENT>
+						this.cameraLookAt.x += direction.x * this.mouse.delta.y * 0.1;
+						this.cameraLookAt.z += direction.z * this.mouse.delta.y * 0.1;
+
+						direction.applyAxisAngle(SceneEditor.UP, 1.57)
+
+						this.cameraLookAt.x += direction.x * this.mouse.delta.x * 0.1;
+						this.cameraLookAt.z += direction.z * this.mouse.delta.x * 0.1;
 					}
 
 					//Update camera position and direction

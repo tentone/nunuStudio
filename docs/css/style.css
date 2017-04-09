@@ -458,18 +458,6 @@ hr.line
 	color:#fdc05d;
 }
 
-.iphone
-{
-	position:relative;
-	height:200px;
-}
-
-
-#invite
-{
-	background:#f2f2f2;
-}
-
 .fa-envelope-o
 {
 	color:#CFCFCF;
@@ -484,17 +472,6 @@ hr.line
 	-webkit-border-radius:30px;
 	border-radius:30px;
 	margin:auto;
-}
-
-.news-container
-{
-	padding:10px 0px 20px;
-	border-bottom:1px dotted #d9d9d9;
-}
-
-.news-img
-{
-	padding-right:20px;
 }
 
 footer
@@ -562,32 +539,6 @@ footer
 	padding:10px;
 	border-top-left-radius:10px;
 	border-top-right-radius:10px;
-}
-
-.price
-{
-	background:none repeat scroll 0 0 #222222;
-	color:#FFFFFF;
-	font-size:32px;
-	font-weight:bold;
-	padding-bottom:20px;
-	padding-top:20px;
-}
-
-
-.examples-table:hover li.price 
-{
-	background:#303236;
-	-webkit-transition:all 0.85s ease-in-out;
-	-moz-transition:all 0.85s ease-in-out;
-	-o-transition:all 0.85s ease-in-out;
-	transition:all 0.85s ease-in-out;
-}
-
-.price small
-{
-	font-weight:300;
-	color:#999999;
 }
 
 .info
@@ -716,16 +667,4 @@ footer
 	{
 		background-attachment:scroll;
 	}
-}
-
-/* Desktops and laptops  */
-@media (min-width:992px) and (max-width:1199px)
-{
-
-}
-	 
-/* Large screens  */
-@media (min-width:1200px) and (max-width:3000px)
-{
-
 }
