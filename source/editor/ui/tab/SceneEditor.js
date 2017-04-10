@@ -817,7 +817,7 @@ SceneEditor.prototype.render = function()
 		renderer.render(this.toolSceneTop, this.camera);
 
 		//Camera preview
-		if(Settings.editor.cameraPreviewEnabled && (Editor.selectedObject instanceof THREE.Camera || Editor.program.scene.cameras.length > 0))
+		if(Settings.editor.cameraPreviewEnabled)
 		{
 			var width = Settings.editor.cameraPreviewPercentage * this.canvas.width;
 			var height = Settings.editor.cameraPreviewPercentage * this.canvas.height;
@@ -826,23 +826,24 @@ SceneEditor.prototype.render = function()
 			renderer.setScissorTest(true);
 			renderer.setViewport(offset, 10, width, height);
 			renderer.setScissor(offset, 10, width, height);
-			renderer.clear();
 
 			//Preview selected camera
-			if(Editor.selectedObject instanceof THREE.Camera)
+			if(Editor.selectedObject instanceof PerspectiveCamera || Editor.selectedObject instanceof OrthographicCamera)
 			{
 				var camera = Editor.selectedObject;
 				camera.aspect = width / height;
 				camera.updateProjectionMatrix();
 
+				renderer.clear();
 				renderer.setViewport(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 				renderer.setScissor(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-
 				renderer.render(Editor.program.scene, camera);
 			}
 			//Preview all cameras in use
-			else
+			else if(Editor.program.scene.cameras.length > 0)
 			{
+				renderer.clear();
+
 				var scene = Editor.program.scene;
 				for(var i = 0; i < scene.cameras.length; i++)
 				{
@@ -865,6 +866,7 @@ SceneEditor.prototype.render = function()
 				}
 			}
 
+			renderer.setScissorTest(false);
 			renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
 		}
 	}

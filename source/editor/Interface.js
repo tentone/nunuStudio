@@ -543,6 +543,12 @@ Interface.initialize = function()
 		Editor.addToScene(new Container());
 	}, "Container");
 
+	//Cube Camera
+	Interface.addEffects.addOption(Interface.fileDir + "icons/misc/probe.png", function()
+	{
+		Editor.addToScene(new CubeCamera());
+	}, "Cube Camera")
+
 	//Audio
 	Interface.addEffects.addOption(Interface.fileDir + "icons/misc/audio.png", function()
 	{

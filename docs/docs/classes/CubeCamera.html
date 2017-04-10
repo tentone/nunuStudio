@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio VideoTexture</title>  
+	<title>nunuStudio CubeCamera</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -150,52 +150,31 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>VideoTexture Class</h1>
+						<h1>CubeCamera Class</h1>
 						<div class="box meta">
 						
 								<div class="extends">
-									Extends <a href="../classes/Texture.html" class="crosslink">Texture</a>
+									Extends <a href="../classes/Object3D.html" class="crosslink">Object3D</a>
 								</div>
 						
 						
-									Module: <a href="../modules/Textures.html">Textures</a>
+									Module: <a href="../modules/Misc.html">Misc</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Video texture, uses a video DOM element instead of a img element.</p>
-						<p>VideoTexture also provides methods for playback control.</p>
+							<p>Reflection probes are used to create CubeTextures dinamically.</p>
+						<p>These CubeTextures can be attributed to materials programatically.</p>
 						
 						</div>
 						
 							<div class="constructor">
 								<h2>Constructor</h2>
-								<div id="method_VideoTexture" class="method item">
-									<h3 class="name"><code>VideoTexture</code></h3>
+								<div id="method_CubeCamera" class="method item">
+									<h3 class="name"><code>CubeCamera</code></h3>
 								
-										<div class="args">
-											<span class="paren">(</span><ul class="args-list inline commas">
-												<li class="arg">
-														<code>video</code>
-												</li>
-												<li class="arg">
-														<code>mapping</code>
-												</li>
-												<li class="arg">
-														<code>wrapS</code>
-												</li>
-												<li class="arg">
-														<code>wrapT</code>
-												</li>
-												<li class="arg">
-														<code>type</code>
-												</li>
-												<li class="arg">
-														<code>anisotropy</code>
-												</li>
-											</ul><span class="paren">)</span>
-										</div>
+										<span class="paren">()</span>
 								
 								
 								
@@ -216,72 +195,6 @@
 										
 									</div>
 								
-										<div class="params">
-											<h4>Parameters:</h4>
-								
-											<ul class="params-list">
-												<li class="param">
-														<code class="param-name">video</code>
-														<span class="type"><a href="../classes/Video.html" class="crosslink">Video</a></span>
-								
-								
-													<div class="param-description">
-														 
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">mapping</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														 
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">wrapS</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														 
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">wrapT</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														 
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">type</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														 
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">anisotropy</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														 
-													</div>
-								
-												</li>
-											</ul>
-										</div>
 								
 								
 								</div>
@@ -308,27 +221,19 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_pause">pause</a>
+														<a href="#method_initialize">initialize</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_play">play</a>
+														<a href="#method_setResolution">setResolution</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_setLoop">setLoop</a>
+														<a href="#method_toJSON">toJSON</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_setPlaybackRate">setPlaybackRate</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setTime">setTime</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setVolume">setVolume</a>
+														<a href="#method_updateCubeMap">updateCubeMap</a>
 						
 													</li>
 											</ul>
@@ -339,23 +244,27 @@
 						
 											<ul class="index-list properties extends">
 													<li class="index-item property">
-														<a href="#property_autoplay">autoplay</a>
+														<a href="#property_cameras">cameras</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_image">image</a>
+														<a href="#property_cube">cube</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_loop">loop</a>
+														<a href="#property_far">far</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_playbackRate">playbackRate</a>
+														<a href="#property_near">near</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_volume">volume</a>
+														<a href="#property_resolution">resolution</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_target">target</a>
 						
 													</li>
 											</ul>
@@ -388,15 +297,15 @@
 												</div>
 											
 												<div class="description">
-													<p>Dispose video texture.</p>
+													<p>Disposes the CubeCamera.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="method_pause" class="method item">
-												<h3 class="name"><code>pause</code></h3>
+											<div id="method_initialize" class="method item">
+												<h3 class="name"><code>initialize</code></h3>
 											
 													<span class="paren">()</span>
 											
@@ -416,48 +325,20 @@
 												</div>
 											
 												<div class="description">
-													<p>Pause video playback.</p>
+													<p>Initialize CubeCamera object.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="method_play" class="method item">
-												<h3 class="name"><code>play</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Start playing video.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_setLoop" class="method item">
-												<h3 class="name"><code>setLoop</code></h3>
+											<div id="method_setResolution" class="method item">
+												<h3 class="name"><code>setResolution</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>loop</code>
+																	<code>resolution</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -478,7 +359,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Set loop mode.</p>
+													<p>Set the CubeCamera resolution.</p>
 											
 												</div>
 											
@@ -487,12 +368,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">loop</code>
-																	<span class="type">Boolean</span>
+																	<code class="param-name">resolution</code>
+																	<span class="type">Number</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>CubeCamera resolution (per face). Should be a 2 pot.</p>
+											
 																</div>
 											
 															</li>
@@ -501,17 +383,20 @@
 											
 											
 											</div>
-											<div id="method_setPlaybackRate" class="method item">
-												<h3 class="name"><code>setPlaybackRate</code></h3>
+											<div id="method_toJSON" class="method item">
+												<h3 class="name"><code>toJSON</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>playbackRate</code>
+																	<code>meta</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
+													<span class="returns-inline">
+														<span class="type">Object</span>
+													</span>
 											
 											
 											
@@ -528,7 +413,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Set video playback speed.</p>
+													<p>Serialize CubeCamera data to JSON.</p>
 											
 												</div>
 											
@@ -537,27 +422,40 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">playbackRate</code>
-																	<span class="type">Number</span>
+																	<code class="param-name">meta</code>
+																	<span class="type">Object</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Meta data.</p>
+											
 																</div>
 											
 															</li>
 														</ul>
 													</div>
 											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Object</span>:
+																<p>JSON description.</p>
+											
+														</div>
+													</div>
 											
 											</div>
-											<div id="method_setTime" class="method item">
-												<h3 class="name"><code>setTime</code></h3>
+											<div id="method_updateCubeMap" class="method item">
+												<h3 class="name"><code>updateCubeMap</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>time</code>
+																	<code>renderer</code>
+															</li>
+															<li class="arg">
+																	<code>scene</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -578,7 +476,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Set video time in seconds.</p>
+													<p>Render new cube faces.</p>
+											<p>Should be called every time a change in the scene is made.</p>
 											
 												</div>
 											
@@ -587,62 +486,24 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">time</code>
-																	<span class="type">Number</span>
+																	<code class="param-name">renderer</code>
+																	<span class="type">WebGLRenderer</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Renderer to be used.</p>
+											
 																</div>
 											
 															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setVolume" class="method item">
-												<h3 class="name"><code>setVolume</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>volume</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set video volume.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">volume</code>
-																	<span class="type">Number</span>
+																	<code class="param-name">scene</code>
+																	<span class="type"><a href="../classes/Scene.html" class="crosslink">Scene</a></span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Scene to be renderer.</p>
+											
 																</div>
 											
 															</li>
@@ -656,9 +517,9 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
-											<div id="property_autoplay" class="property item">
-												<h3 class="name"><code>autoplay</code></h3>
-												<span class="type">Boolean</span>
+											<div id="property_cameras" class="property item">
+												<h3 class="name"><code>cameras</code></h3>
+												<span class="type">Array</span>
 											
 											
 											
@@ -672,17 +533,16 @@
 												</div>
 											
 												<div class="description">
-													<p>If true the playback starts automatically</p>
+													<p>Array of 6 cameras used to render each face of the cube.</p>
 											
 												</div>
 											
-													<p><strong>Default:</strong> true</p>
 											
 											
 											</div>
-											<div id="property_image" class="property item">
-												<h3 class="name"><code>image</code></h3>
-												<span class="type">DOM</span>
+											<div id="property_cube" class="property item">
+												<h3 class="name"><code>cube</code></h3>
+												<span class="type"><a href="../classes/CubeTexture.html" class="crosslink">CubeTexture</a></span>
 											
 											
 											
@@ -696,39 +556,16 @@
 												</div>
 											
 												<div class="description">
-													<p>Image is used to store a DOM video element</p>
+													<p>CubeTexture generated by this CubeCamera.</p>
+											<p>Can be attached to materials as envMap.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="property_loop" class="property item">
-												<h3 class="name"><code>loop</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>If true the video plays in loop</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> true</p>
-											
-											
-											</div>
-											<div id="property_playbackRate" class="property item">
-												<h3 class="name"><code>playbackRate</code></h3>
+											<div id="property_far" class="property item">
+												<h3 class="name"><code>far</code></h3>
 												<span class="type">Number</span>
 											
 											
@@ -743,16 +580,15 @@
 												</div>
 											
 												<div class="description">
-													<p>Start time in seconds</p>
+													<p>CubeCamera far plane.</p>
 											
 												</div>
 											
-													<p><strong>Default:</strong> 1.0</p>
 											
 											
 											</div>
-											<div id="property_volume" class="property item">
-												<h3 class="name"><code>volume</code></h3>
+											<div id="property_near" class="property item">
+												<h3 class="name"><code>near</code></h3>
 												<span class="type">Number</span>
 											
 											
@@ -767,11 +603,56 @@
 												</div>
 											
 												<div class="description">
-													<p>Video audio volume</p>
+													<p>CubeCamera near plane.</p>
 											
 												</div>
 											
-													<p><strong>Default:</strong> 1.0</p>
+											
+											
+											</div>
+											<div id="property_resolution" class="property item">
+												<h3 class="name"><code>resolution</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Resolution of each face. Should be a 2pot.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_target" class="property item">
+												<h3 class="name"><code>target</code></h3>
+												<span class="type">WebGLRenderTargetCube</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>WebGL cube render target to where the scene is rendered.</p>
+											
+												</div>
+											
 											
 											
 											</div>
