@@ -1012,63 +1012,73 @@ SceneEditor.prototype.setState = function(state)
 	}
 	else if(state === SceneEditor.TESTING)
 	{
-		//Copy program
-		this.programRunning = Editor.program.clone();
-
-		//Use editor camera as default camera for program
-		this.programRunning.defaultCamera = this.camera;
-		this.programRunning.setRenderer(this.renderer);
-
-		//Initialize scene
-		this.programRunning.setMouseKeyboard(this.mouse, this.keyboard);
-		this.programRunning.initialize();
-		this.programRunning.resize(this.canvas.width, this.canvas.height);
-
-		//Show full screen and VR buttons
-		this.showButtonsFullscreen = true;
-		this.showButtonsCameraMode = false;
-
-		//If program uses VR set button
-		if(this.programRunning.vr)
+		try
 		{
-			if(Nunu.webvrAvailable())
+			//Copy program
+			this.programRunning = Editor.program.clone();
+
+			//Use editor camera as default camera for program
+			this.programRunning.defaultCamera = this.camera;
+			this.programRunning.setRenderer(this.renderer);
+
+			//Initialize scene
+			this.programRunning.setMouseKeyboard(this.mouse, this.keyboard);
+			this.programRunning.initialize();
+			this.programRunning.resize(this.canvas.width, this.canvas.height);
+
+			//Show full screen and VR buttons
+			this.showButtonsFullscreen = true;
+			this.showButtonsCameraMode = false;
+
+			//If program uses VR set button
+			if(this.programRunning.vr)
 			{
-				//Show VR button
-				this.showButtonsVr = true;
-
-				//Create VR switch callback
-				var vr = true;
-				this.vrButton.setCallback(function()
+				if(Nunu.webvrAvailable())
 				{
-					if(vr)
-					{
-						this.programRunning.displayVR();
-					}
-					else
-					{
-						this.programRunning.exitVR();
-					}
+					//Show VR button
+					this.showButtonsVr = true;
 
-					vr = !vr;
-				});
+					//Create VR switch callback
+					var vr = true;
+					this.vrButton.setCallback(function()
+					{
+						if(vr)
+						{
+							this.programRunning.displayVR();
+						}
+						else
+						{
+							this.programRunning.exitVR();
+						}
+
+						vr = !vr;
+					});
+				}
 			}
-		}
 
-		//Lock mouse pointer
-		if(this.programRunning.lockPointer)
+			//Lock mouse pointer
+			if(this.programRunning.lockPointer)
+			{
+				this.mouse.setLock(true);
+			}
+
+			//Set renderer size
+			this.renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
+			this.renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
+
+			//Set run button text
+			Interface.run.setText("Stop");
+			Interface.run.visible = true;
+			Interface.run.updateInterface();
+		}
+		catch(e)
 		{
-			this.mouse.setLock(true);
+			this.state = SceneEditor.EDITING;
+			this.programRunning.dispose();
+			this.programRunning = null;
+
+			alert("Error testing program \n(" + e + ")");
 		}
-
-		//Set renderer size
-		this.renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
-		this.renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
-
-		//Set run button text
-		Interface.run.setText("Stop");
-		Interface.run.visible = true;
-		Interface.run.updateInterface();
-
 		//Update interface
 		this.updateInterface();
 	}

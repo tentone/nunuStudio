@@ -260,108 +260,6 @@ FileSystem.writeFileArrayBuffer = function(fname, data)
 };
 
 /**
- * Copy file (cannot be used to copy folders).
- * 
- * Only works when running inside NWJS.
- *
- * @method copyFile
- * @param {String} src
- * @param {String} dst
- */
-FileSystem.copyFile = function(src, dst)
-{
-	if(FileSystem.fs !== undefined)
-	{
-		FileSystem.fs.createReadStream(src).pipe(FileSystem.fs.createWriteStream(dst));
-	}
-};
-
-/**
- * Make a directory (dont trow exeption if directory already exists).
- * 
- * Only works when running inside NWJS.
- *
- * @method makeDirectory
- * @param {String} dir
- */
-FileSystem.makeDirectory = function(dir)
-{
-	if(FileSystem.fs !== undefined)
-	{
-		try
-		{
-			FileSystem.fs.mkdirSync(dir);
-		}
-		catch(e){}
-	}
-};
-
-/**
- * Returns files in directory (returns empty array in case of error).
- * 
- * Only works when running inside NWJS.
- *
- * @method getFilesDirectory
- * @return {Array} Files in the directory
- */
-FileSystem.getFilesDirectory = function(dir)
-{
-	if(FileSystem.fs !== undefined)
-	{
-		try
-		{
-			return FileSystem.fs.readdirSync(dir);
-		}
-		catch(e)
-		{
-			return [];
-		}
-	}
-	return [];
-};
-
-/**
- * Copy folder and all its files (includes symbolic links).
- * 
- * Only works when running inside NWJS.
- *
- * @method copyFolder
- * @param {String} src
- * @param {String} dest
- */
-FileSystem.copyFolder = function(src, dest)
-{
-	if(FileSystem.fs !== undefined)
-	{
-		FileSystem.makeDirectory(dest);
-		var files = FileSystem.fs.readdirSync(src);
-
-		for(var i = 0; i < files.length; i++)
-		{
-			var source = src + "\\" + files[i];
-			var destiny = dest + "\\" + files[i];
-			var current = FileSystem.fs.statSync(source);
-			
-			//Directory
-			if(current.isDirectory())
-			{
-				FileSystem.copyFolder(source, destiny);
-			}
-			//Symbolic link
-			else if(current.isSymbolicLink())
-			{
-				FileSystem.fs.symlinkSync(FileSystem.fs.readlinkSync(source), destiny);
-			}
-			//File
-			else
-			{
-				FileSystem.copyFile(source, destiny);
-			}
-		}
-	}
-};
-
-/**
  * Open file chooser dialog receives onLoad callback, file filter, saveas.
  *
  * Save mode does not work inside the browser.
@@ -425,6 +323,114 @@ FileSystem.chooseFileName = function(onLoad, saveas)
 };
 
 /**
+ * Copy file (cannot be used to copy folders).
+ * 
+ * Only works when running inside NWJS.
+ *
+ * @method copyFile
+ * @param {String} src
+ * @param {String} dst
+ */
+FileSystem.copyFile = function(src, dst)
+{
+	if(FileSystem.fs !== undefined)
+	{
+		src.replace(new RegExp("/", 'g'), "\\");
+		dst.replace(new RegExp("/", 'g'), "\\");
+
+		FileSystem.fs.createReadStream(src).pipe(FileSystem.fs.createWriteStream(dst));
+	}
+};
+
+/**
+ * Make a directory (dont trow exeption if directory already exists).
+ * 
+ * Only works when running inside NWJS.
+ *
+ * @method makeDirectory
+ * @param {String} dir
+ */
+FileSystem.makeDirectory = function(dir)
+{
+	if(FileSystem.fs !== undefined)
+	{
+		dir.replace(new RegExp("/", 'g'), "\\");
+		FileSystem.fs.mkdirSync(dir);
+	}
+};
+
+/**
+ * Returns files in directory (returns empty array in case of error).
+ * 
+ * Only works when running inside NWJS.
+ *
+ * @method getFilesDirectory
+ * @return {Array} Files in the directory
+ */
+FileSystem.getFilesDirectory = function(dir)
+{
+	if(FileSystem.fs !== undefined)
+	{
+		try
+		{
+			dir.replace(new RegExp("/", 'g'), "\\");
+
+			return FileSystem.fs.readdirSync(dir);
+		}
+		catch(e)
+		{
+			return [];
+		}
+	}
+
+	return [];
+};
+
+/**
+ * Copy folder and all its files (includes symbolic links).
+ * 
+ * Only works when running inside NWJS.
+ *
+ * @method copyFolder
+ * @param {String} src
+ * @param {String} dst
+ */
+FileSystem.copyFolder = function(src, dst)
+{
+	if(FileSystem.fs !== undefined)
+	{
+		src.replace(new RegExp("/", 'g'), "\\");
+		dst.replace(new RegExp("/", 'g'), "\\");
+
+		FileSystem.makeDirectory(dst);
+		var files = FileSystem.fs.readdirSync(src);
+
+		for(var i = 0; i < files.length; i++)
+		{
+			var source = src + "\\" + files[i];
+			var destiny = dst + "\\" + files[i];
+			var current = FileSystem.fs.statSync(source);
+			
+			//Directory
+			if(current.isDirectory())
+			{
+				FileSystem.copyFolder(source, destiny);
+			}
+			//Symbolic link
+			else if(current.isSymbolicLink())
+			{
+				FileSystem.fs.symlinkSync(FileSystem.fs.readlinkSync(source), destiny);
+			}
+			//File
+			else
+			{
+				FileSystem.copyFile(source, destiny);
+			}
+		}
+	}
+};
+
+/**
  * Check if a file exists.
  * 
  * Only works inside of NWJS. When running inside the browser always returns false.
@@ -437,6 +443,8 @@ FileSystem.fileExists = function(file)
 {
 	if(FileSystem.fs !== undefined)
 	{
+		file.replace(new RegExp("/", 'g'), "\\");
+
 		return FileSystem.fs.existsSync(file);
 	}
 

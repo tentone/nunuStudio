@@ -94,7 +94,7 @@ include("core/utils/Mesh2shape.js");
 include("core/loaders/external/TDSLoader.js");
 
 //Editor
-include("lib/codemirror/codemirror.min.js");
+include("lib/codemirror/codemirror.js");
 include("lib/codemirror/codemirror.css");
 include("lib/codemirror/keymap/sublime.js");
 include("lib/codemirror/keymap/emacs.js");
@@ -105,6 +105,7 @@ include("lib/codemirror/addon/scroll/annotatescrollbar.js");
 include("lib/codemirror/addon/search/search.js");
 include("lib/codemirror/addon/search/searchcursor.js");
 include("lib/codemirror/addon/search/jump-to-line.js");
+include("lib/codemirror/addon/search/match-highlighter.js");
 include("lib/codemirror/addon/search/matchesonscrollbar.js");
 include("lib/codemirror/addon/search/matchesonscrollbar.css");
 include("lib/codemirror/addon/hint/show-hint.js");
@@ -113,6 +114,7 @@ include("lib/codemirror/addon/hint/anyword-hint.js");
 include("lib/codemirror/addon/dialog/dialog.js");
 include("lib/codemirror/addon/dialog/dialog.css");
 include("lib/codemirror/addon/selection/active-line.js");
+include("lib/codemirror/addon/selection/selection-pointer.js");
 include("lib/codemirror/mode/javascript.js");
 include("lib/codemirror/mode/glsl.js");
 include("lib/codemirror/addon/lint/lint.css");
@@ -234,6 +236,7 @@ include("editor/ui/panels/lights/HemisphereLightPanel.js");
 include("editor/ui/panels/lights/PointLightPanel.js");
 include("editor/ui/panels/lights/DirectionalLightPanel.js");
 include("editor/ui/panels/lights/SpotLightPanel.js");
+include("editor/ui/panels/misc/CubeCameraPanel.js");
 include("editor/ui/panels/mesh/MeshPanel.js");
 include("editor/ui/panels/mesh/Text3DPanel.js");
 
@@ -850,6 +853,10 @@ Editor.selectObjectPanel = function()
 		{
 			Interface.panel = new AudioPanel(Interface.explorerResizable.divB, Editor.selectedObject);
 		}
+		else if(Editor.selectedObject instanceof CubeCamera)
+		{
+			Interface.panel = new CubeCameraPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+		}
 		else if(Editor.selectedObject instanceof Scene)
 		{
 			Interface.panel = new ScenePanel(Interface.explorerResizable.divB, Editor.selectedObject);
@@ -1363,39 +1370,49 @@ Editor.setOpenFile = function(file)
 Editor.exportWebProject = function(dir)
 {
 	FileSystem.makeDirectory(dir);
-	FileSystem.copyFile("runtime/vr.png", dir + "\\vr.png");
-	FileSystem.copyFile("runtime/fullscreen.png", dir + "\\fullscreen.png");
-	FileSystem.copyFile("runtime/logo.png", dir + "\\logo.png");
-	FileSystem.copyFile("runtime/index.html", dir + "\\index.html");
-	FileSystem.copyFile("../build/nunu.min.js", dir + "\\nunu.min.js");
+	FileSystem.copyFile("runtime\\vr.png", dir + "\\vr.png");
+	FileSystem.copyFile("runtime\\fullscreen.png", dir + "\\fullscreen.png");
+	FileSystem.copyFile("runtime\\logo.png", dir + "\\logo.png");
+	FileSystem.copyFile("runtime\\index.html", dir + "\\index.html");
+	FileSystem.copyFile("..\\build\\nunu.min.js", dir + "\\nunu.min.js");
+	
 	Editor.saveProgram(dir + "\\app.isp", true, true);
+};
+
+//Export NWJS project
+Editor.exportNWJSProject = function(dir)
+{
+	Editor.exportWebProject(dir + "\\package.nw");
+	FileSystem.writeFile(dir + "\\package.nw\\package.json", JSON.stringify(
+	{
+		name: Editor.program.name,
+		main: "index.html",
+		window:
+		{
+			frame: true
+		}
+	}));
 };
 
 //Export windows project
 Editor.exportWindowsProject = function(dir)
 {
-	Editor.exportWebProject(dir);
-	FileSystem.copyFolder("..\\nwjs\\win", dir + "\\nwjs");
-	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
-	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".bat", "cd nwjs\nstart nw.exe ..");
+	FileSystem.copyFolder("..\\nwjs\\win", dir);
+	Editor.exportNWJSProject(dir);
 };
 
 //Export linux project
 Editor.exportLinuxProject = function(dir)
 {
-	Editor.exportWebProject(dir);
-	FileSystem.copyFolder("..\\nwjs\\linux", dir + "\\nwjs");
-	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
-	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
+	FileSystem.copyFolder("..\\nwjs\\linux", dir);
+	Editor.exportNWJSProject(dir);
 };
 
 //Export mac os project
 Editor.exportMacOSProject = function(dir)
 {
-	Editor.exportWebProject(dir);
-	FileSystem.copyFolder("..\\nwjs\\mac", dir + "\\nwjs");
-	FileSystem.writeFile(dir + "\\package.json", JSON.stringify({name: Editor.program.name,main: "index.html",window:{frame: true}}));
-	FileSystem.writeFile(dir + "\\" + Editor.program.name + ".sh", "cd nwjs\n./nw ..");
+	FileSystem.copyFolder("..\\nwjs\\osx", dir);
+	Editor.exportNWJSProject(dir);
 };
 
 //Set fullscreen mode
