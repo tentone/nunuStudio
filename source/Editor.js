@@ -5,7 +5,7 @@ function Editor(){}
 //Runtime
 include("Nunu.js");
 
-include("lib/three/three.min.js");
+include("lib/three/three.js");
 include("lib/three/effects/VREffect.js");
 
 include("lib/cannon.min.js");
@@ -79,6 +79,7 @@ include("core/objects/spine/SpineTexture.js");
 include("core/objects/particle/ParticleEmitter.js");
 include("core/objects/animation/Bone.js");
 include("core/objects/misc/Container.js");
+include("core/objects/misc/CubeCamera.js");
 include("core/objects/Program.js");
 include("core/objects/Scene.js");
 

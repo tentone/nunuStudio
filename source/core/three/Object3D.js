@@ -142,7 +142,7 @@ THREE.Object3D.prototype.update = function()
 };
 
 /**
- * Dispose the object (to avoid memory leaks).
+ * Disposes the object (to avoid memory leaks).
  * 
  * @method dispose
  */

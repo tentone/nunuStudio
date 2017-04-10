@@ -48,6 +48,7 @@ ObjectIcons.icons["PositionalAudio"] = "editor/files/icons/misc/audio_positional
 ObjectIcons.icons["Physics"] = "editor/files/icons/misc/physics.png";
 
 //Others
+ObjectIcons.icons["CubeCamera"] = "editor/files/icons/misc/probe.png";
 ObjectIcons.icons["Bone"] = "editor/files/icons/misc/bone.png";
 ObjectIcons.icons["Group"] = "editor/files/icons/effects/container.png";
 
