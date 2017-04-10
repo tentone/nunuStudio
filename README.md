@@ -99,6 +99,8 @@
 	- First version of NodeJS build system (@GGAlanSmithee)
 	- Open ISP as url argument on web version
 	- Support for orbit navigation
+- V0.8.9.25 Alpha
+	- Added CubeCamera
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

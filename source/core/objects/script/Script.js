@@ -1,5 +1,6 @@
 /**
- * Script objects are used to control other objects present in the scene
+ * Script objects are used to control other objects present in the scene.
+ * 
  * It can access and change every object in the program and supports some events
  *  - initialize
  *    - Called on app initialization
@@ -12,7 +13,7 @@
  *  - onAppData
  *    - Called when receiving data sent by the host website
  * 
- * Code written inside scripts have access to the following attributes
+ * Code written inside scripts have access to the following attributes:
  *  - scene
  *  - program
  *  - self
@@ -55,7 +56,7 @@ function Script(code)
 	this.name = "script";
 
 	this.script = null;
-	this.code = (code !== undefined) ? code : Script.default 
+	this.code = (code !== undefined) ? code : Script.DEFAULT 
 
 	this.program = null;
 	this.scene = null;
@@ -64,11 +65,11 @@ function Script(code)
 Script.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
- * Default script code used when creating a new Script
- * @attribute default
+ * Default script code used when creating a new Script.
+ * @attribute DEFAULT
  * @type {String}
  */
-Script.default = "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n};\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n};\n\nthis.onMouseOver = function()\n{\n	//TODO <MOUSE OVER CHILDREN CODE>\n};\n\nthis.onResize = function()\n{\n	//TODO <RESIZE CODE>\n};";//\n\nthis.onExit = function()\n{\n	//TODO <APP EXIT CODE>\n};";
+Script.DEFAULT = "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n};\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n};\n";
 
 /**
  * Initialize script
