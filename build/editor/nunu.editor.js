@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.25 Alpha";
-Nunu.TIMESTAMP = "201704101600";
+Nunu.TIMESTAMP = "201704101817";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -7309,7 +7309,7 @@ Nunu.runningOnDesktop = function() {
     a && a.isMatrix4 && console.error("THREE.Matrix3.getInverse no longer takes a Matrix4 argument.");
     var d = a.elements;
     a = this.elements;
-    var e = d[0], q = d[1], f = d[2], g = d[3], h = d[4], k = d[5], r = d[6], l = d[7], d = d[8], n = d * h - k * l, m = k * r - d * g, p = l * g - h * r, t = e * n + q * m + f * p;
+    var q = d[0], e = d[1], f = d[2], g = d[3], h = d[4], k = d[5], r = d[6], l = d[7], d = d[8], n = d * h - k * l, m = k * r - d * g, p = l * g - h * r, t = q * n + e * m + f * p;
     if (0 === t) {
       if (!0 === b) {
         throw Error("THREE.Matrix3.getInverse(): can't invert matrix, determinant is 0");
@@ -7319,14 +7319,14 @@ Nunu.runningOnDesktop = function() {
     }
     b = 1 / t;
     a[0] = n * b;
-    a[1] = (f * l - d * q) * b;
-    a[2] = (k * q - f * h) * b;
+    a[1] = (f * l - d * e) * b;
+    a[2] = (k * e - f * h) * b;
     a[3] = m * b;
-    a[4] = (d * e - f * r) * b;
-    a[5] = (f * g - k * e) * b;
+    a[4] = (d * q - f * r) * b;
+    a[5] = (f * g - k * q) * b;
     a[6] = p * b;
-    a[7] = (q * r - l * e) * b;
-    a[8] = (h * e - q * g) * b;
+    a[7] = (e * r - l * q) * b;
+    a[8] = (h * q - e * g) * b;
     return this;
   }, transpose:function() {
     var a, b = this.elements;
@@ -33494,9 +33494,12 @@ CubeCamera.prototype.setResolution = function(a) {
   this.target.setSize(a, a);
 };
 CubeCamera.prototype.updateCubeMap = function(a, b) {
-  for (var e = 0;6 > e;e++) {
-    this.cameras[e].updateMatrixWorld(), this.target.activeCubeFace = e, a.render(b, this.cameras[e], this.target);
+  var e = a.autoClear;
+  a.autoClear = !0;
+  for (var d = 0;6 > d;d++) {
+    this.cameras[d].updateMatrixWorld(), this.target.activeCubeFace = d, a.render(b, this.cameras[d], this.target);
   }
+  a.autoClear = e;
 };
 CubeCamera.prototype.dispose = function() {
   for (var a = 0;a < this.children.length;a++) {
@@ -33605,7 +33608,7 @@ Program.prototype.resize = function(a, b) {
 };
 Program.prototype.setScene = function(a) {
   a instanceof Scene ? this.scene = a : "string" === typeof a && (this.scene = this.getObjectByName(a));
-  null !== this.scene && (this.scene.initialize(), 0 === this.scene.cameras.length && this.scene.cameras.push(this.defaultCamera));
+  null !== this.scene && (0 === this.scene.cameras.length && this.scene.cameras.push(this.defaultCamera), this.scene.initialize());
 };
 Program.prototype.remove = function(a) {
   var b = this.children.indexOf(a);

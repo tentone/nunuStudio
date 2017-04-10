@@ -130,12 +130,17 @@ CubeCamera.prototype.setResolution = function(resolution)
  */
 CubeCamera.prototype.updateCubeMap = function(renderer, scene)
 {
+	var autoClear = renderer.autoClear;
+	renderer.autoClear = true;
+
 	for(var i = 0; i < 6; i++)
 	{
 		this.cameras[i].updateMatrixWorld();
 		this.target.activeCubeFace = i;
 		renderer.render(scene, this.cameras[i], this.target);
 	}
+
+	renderer.autoClear = autoClear;
 };
 
 /**

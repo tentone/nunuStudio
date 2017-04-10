@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.25 Alpha";
-Nunu.TIMESTAMP = "201704101600";
+Nunu.TIMESTAMP = "201704101817";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -3813,10 +3813,10 @@ Nunu.runningOnDesktop = function() {
     this.addAttribute("normal", new Y(g, 3));
     this.addAttribute("uv", new Y(p, 2));
   }
-  function ad(d, m, a, b, c, h, e) {
-    Jb.call(this, 0, d, m, a, b, c, h, e);
+  function ad(d, a, b, c, h, e, f) {
+    Jb.call(this, 0, d, a, b, c, h, e, f);
     this.type = "ConeGeometry";
-    this.parameters = {radius:d, height:m, radialSegments:a, heightSegments:b, openEnded:c, thetaStart:h, thetaLength:e};
+    this.parameters = {radius:d, height:a, radialSegments:b, heightSegments:c, openEnded:h, thetaStart:e, thetaLength:f};
   }
   function bd(d, a, b, c, h, e, f) {
     vb.call(this, 0, d, a, b, c, h, e, f);
@@ -4799,16 +4799,16 @@ Nunu.runningOnDesktop = function() {
   }
   function ye() {
     var d = 0, a = 0, b = 0, c = 0;
-    return {initCatmullRom:function(m, e, A, h, n) {
-      m = n * (A - m);
-      h = n * (h - e);
+    return {initCatmullRom:function(m, e, A, h, f) {
+      m = f * (A - m);
+      h = f * (h - e);
       d = e;
       a = m;
       b = -3 * e + 3 * A - 2 * m - h;
       c = 2 * e - 2 * A + m + h;
-    }, initNonuniformCatmullRom:function(m, e, A, h, n, f, k) {
-      m = ((e - m) / n - (A - m) / (n + f) + (A - e) / f) * f;
-      h = ((A - e) / f - (h - e) / (f + k) + (h - A) / k) * f;
+    }, initNonuniformCatmullRom:function(m, e, A, h, f, n, k) {
+      m = ((e - m) / f - (A - m) / (f + n) + (A - e) / n) * n;
+      h = ((A - e) / n - (h - e) / (n + k) + (h - A) / k) * n;
       d = e;
       a = m;
       b = -3 * e + 3 * A - 2 * m - h;
@@ -9661,12 +9661,12 @@ Nunu.runningOnDesktop = function() {
     var d = new q, a = new rb, b = new Ca;
     return function(c, e) {
       function m(d, b) {
-        var m = a.distanceSqToPoint(d);
-        if (m < g) {
+        var h = a.distanceSqToPoint(d);
+        if (h < g) {
           d = a.closestPointToPoint(d);
           d.applyMatrix4(k);
-          var h = c.ray.origin.distanceTo(d);
-          h < c.near || h > c.far || e.push({distance:h, distanceToRay:Math.sqrt(m), point:d.clone(), index:b, face:null, object:f});
+          var m = c.ray.origin.distanceTo(d);
+          m < c.near || m > c.far || e.push({distance:m, distanceToRay:Math.sqrt(h), point:d.clone(), index:b, face:null, object:f});
         }
       }
       var f = this, n = this.geometry, k = this.matrixWorld, q = c.params.Points.threshold;
@@ -10744,9 +10744,9 @@ Nunu.runningOnDesktop = function() {
     });
     return b;
   }, sortedArray:function(d, a, b) {
-    for (var c = d.length, e = new d.constructor(c), h = 0, m = 0;m !== c;++h) {
-      for (var f = b[h] * a, n = 0;n !== a;++n) {
-        e[m++] = d[f + n];
+    for (var c = d.length, e = new d.constructor(c), h = 0, f = 0;f !== c;++h) {
+      for (var m = b[h] * a, n = 0;n !== a;++n) {
+        e[f++] = d[m + n];
       }
     }
     return e;
@@ -10963,10 +10963,10 @@ Nunu.runningOnDesktop = function() {
     }
   }, getValueSize:function() {
     return this.values.length / this.times.length;
-  }, shift:function(d) {
-    if (0 !== d) {
-      for (var a = this.times, b = 0, c = a.length;b !== c;++b) {
-        a[b] += d;
+  }, shift:function(a) {
+    if (0 !== a) {
+      for (var d = this.times, b = 0, c = d.length;b !== c;++b) {
+        d[b] += a;
       }
     }
     return this;
@@ -16588,15 +16588,15 @@ THREE.VREffect = function(a, g) {
       g = g || new f;
       return k.vsub(b, g), h.conjugate(c), c.vmult(g, g), g;
     };
-    b.prototype.pointToLocal = function(c, h) {
-      return b.pointToLocalFrame(this.position, this.quaternion, c, h);
+    b.prototype.pointToLocal = function(c, f) {
+      return b.pointToLocalFrame(this.position, this.quaternion, c, f);
     };
     b.pointToWorldFrame = function(b, c, k, g) {
       g = g || new f;
       return c.vmult(k, g), g.vadd(b, g), g;
     };
-    b.prototype.pointToWorld = function(c, h) {
-      return b.pointToWorldFrame(this.position, this.quaternion, c, h);
+    b.prototype.pointToWorld = function(c, f) {
+      return b.pointToWorldFrame(this.position, this.quaternion, c, f);
     };
     b.prototype.vectorToWorldFrame = function(b, c) {
       c = c || new f;
@@ -33493,9 +33493,12 @@ CubeCamera.prototype.setResolution = function(a) {
   this.target.setSize(a, a);
 };
 CubeCamera.prototype.updateCubeMap = function(a, g) {
-  for (var l = 0;6 > l;l++) {
-    this.cameras[l].updateMatrixWorld(), this.target.activeCubeFace = l, a.render(g, this.cameras[l], this.target);
+  var l = a.autoClear;
+  a.autoClear = !0;
+  for (var b = 0;6 > b;b++) {
+    this.cameras[b].updateMatrixWorld(), this.target.activeCubeFace = b, a.render(g, this.cameras[b], this.target);
   }
+  a.autoClear = l;
 };
 CubeCamera.prototype.dispose = function() {
   for (var a = 0;a < this.children.length;a++) {
@@ -33604,7 +33607,7 @@ Program.prototype.resize = function(a, g) {
 };
 Program.prototype.setScene = function(a) {
   a instanceof Scene ? this.scene = a : "string" === typeof a && (this.scene = this.getObjectByName(a));
-  null !== this.scene && (this.scene.initialize(), 0 === this.scene.cameras.length && this.scene.cameras.push(this.defaultCamera));
+  null !== this.scene && (0 === this.scene.cameras.length && this.scene.cameras.push(this.defaultCamera), this.scene.initialize());
 };
 Program.prototype.remove = function(a) {
   var g = this.children.indexOf(a);
