@@ -35,7 +35,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.25 Alpha";
-Nunu.TIMESTAMP = "201704101817";
+Nunu.TIMESTAMP = "201704110130";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -7309,7 +7309,7 @@ Nunu.runningOnDesktop = function() {
     a && a.isMatrix4 && console.error("THREE.Matrix3.getInverse no longer takes a Matrix4 argument.");
     var d = a.elements;
     a = this.elements;
-    var q = d[0], e = d[1], f = d[2], g = d[3], h = d[4], k = d[5], r = d[6], l = d[7], d = d[8], n = d * h - k * l, m = k * r - d * g, p = l * g - h * r, t = q * n + e * m + f * p;
+    var e = d[0], q = d[1], f = d[2], g = d[3], h = d[4], k = d[5], r = d[6], l = d[7], d = d[8], n = d * h - k * l, m = k * r - d * g, p = l * g - h * r, t = e * n + q * m + f * p;
     if (0 === t) {
       if (!0 === b) {
         throw Error("THREE.Matrix3.getInverse(): can't invert matrix, determinant is 0");
@@ -7319,14 +7319,14 @@ Nunu.runningOnDesktop = function() {
     }
     b = 1 / t;
     a[0] = n * b;
-    a[1] = (f * l - d * e) * b;
-    a[2] = (k * e - f * h) * b;
+    a[1] = (f * l - d * q) * b;
+    a[2] = (k * q - f * h) * b;
     a[3] = m * b;
-    a[4] = (d * q - f * r) * b;
-    a[5] = (f * g - k * q) * b;
+    a[4] = (d * e - f * r) * b;
+    a[5] = (f * g - k * e) * b;
     a[6] = p * b;
-    a[7] = (e * r - l * q) * b;
-    a[8] = (h * q - e * g) * b;
+    a[7] = (q * r - l * e) * b;
+    a[8] = (h * e - q * g) * b;
     return this;
   }, transpose:function() {
     var a, b = this.elements;
@@ -30947,6 +30947,7 @@ THREE.Material.prototype.toJSON = function(a) {
   1 < this.wireframeLinewidth && (e.wireframeLinewidth = this.wireframeLinewidth);
   "round" !== this.wireframeLinecap && (e.wireframeLinecap = this.wireframeLinecap);
   "round" !== this.wireframeLinejoin && (e.wireframeLinejoin = this.wireframeLinejoin);
+  e.skinning = this.skinning;
   e.morphTargets = this.morphTargets;
   void 0 !== this.morphNormals && (e.morphNormals = this.morphNormals);
   if (void 0 === a) {
@@ -31881,6 +31882,7 @@ MaterialLoader.prototype.parse = function(a) {
   void 0 !== a.wireframeLinejoin && (d.wireframeLinejoin = a.wireframeLinejoin);
   void 0 !== a.morphTargets && (d.morphTargets = a.morphTargets);
   void 0 !== a.morphNormals && (d.morphNormals = a.morphNormals);
+  void 0 !== a.skinning && (d.skinning = a.skinning);
   void 0 !== a.size && (d.size = a.size);
   void 0 !== a.sizeAttenuation && (d.sizeAttenuation = a.sizeAttenuation);
   void 0 !== a.map && (d.map = b(a.map));
@@ -44498,7 +44500,7 @@ NODE_ID = 45104, NODE_HDR = 45072, PIVOT = 45075, INSTANCE_NAME = 45073, MORPH_S
   }
   function d(a) {
     var b = a.state.matchHighlighter;
-    b.active || (b.active = !0, f(a, b));
+    b.active || (b.active = ! 0.0, f(a, b));
   }
   function f(a, b) {
     clearTimeout(b.timeout);
@@ -64526,7 +64528,7 @@ SceneEditor.prototype.selectObjectHelper = function() {
     var a = Editor.selectedObject;
     a instanceof THREE.Camera ? (this.objectHelper.add(new THREE.CameraHelper(a)), this.objectHelper.add(new ObjectIconHelper(a, Interface.fileDir + "icons/camera/camera.png"))) : a instanceof THREE.Light ? a instanceof THREE.DirectionalLight ? this.objectHelper.add(new THREE.DirectionalLightHelper(a, 1)) : a instanceof THREE.PointLight ? this.objectHelper.add(new THREE.PointLightHelper(a, 1)) : a instanceof THREE.RectAreaLight ? this.objectHelper.add(new RectAreaLightHelper(a)) : a instanceof THREE.SpotLight ? 
     this.objectHelper.add(new THREE.SpotLightHelper(a)) : a instanceof THREE.HemisphereLight && this.objectHelper.add(new THREE.HemisphereLightHelper(a, 1)) : a instanceof ParticleEmitter ? this.objectHelper.add(new ParticleEmitterHelper(a)) : a instanceof PhysicsObject ? this.objectHelper.add(new PhysicsObjectHelper(a)) : a instanceof Script || a instanceof THREE.Audio ? this.objectHelper.add(new ObjectIconHelper(a, ObjectIcons.get(a.type))) : a instanceof THREE.SkinnedMesh ? (this.objectHelper.add(new WireframeHelper(a, 
-    16776960)), this.objectHelper.add(new THREE.SkeletonHelper(a))) : a instanceof THREE.Mesh ? this.objectHelper.add(new WireframeHelper(a, 16776960)) : a instanceof THREE.Object3D && this.objectHelper.add(new BoundingBoxHelper(a, 65535));
+    16776960)), this.objectHelper.add(new THREE.SkeletonHelper(a))) : a instanceof THREE.Mesh ? this.objectHelper.add(new WireframeHelper(a, 16776960)) : a instanceof Container && this.objectHelper.add(new BoundingBoxHelper(a, 16776960));
   }
 };
 SceneEditor.prototype.resizeCamera = function() {
@@ -65848,6 +65850,15 @@ MaterialEditor.prototype.updateInterface = function() {
 function PhongMaterialEditor(a, b, e, d) {
   MaterialEditor.call(this, a, b, e, d);
   var f = this;
+  this.skinning = new CheckBox(this.form.element);
+  this.form.addText("Skinning");
+  this.skinning.size.set(20, 15);
+  this.skinning.updateInterface();
+  this.skinning.setOnChange(function() {
+    null !== f.material && (f.material.skinning = f.skinning.getValue());
+  });
+  this.form.add(this.skinning);
+  this.form.nextRow();
   this.morphTargets = new CheckBox(this.form.element);
   this.form.addText("Morph targets");
   this.morphTargets.size.set(20, 15);
@@ -66060,6 +66071,7 @@ function PhongMaterialEditor(a, b, e, d) {
 PhongMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 PhongMaterialEditor.prototype.attach = function(a, b) {
   MaterialEditor.prototype.attach.call(this, a, b);
+  this.skinning.setValue(a.skinning);
   this.morphTargets.setValue(a.morphTargets);
   this.wireframe.setValue(a.wireframe);
   this.shading.setValue(a.shading);
@@ -66087,6 +66099,15 @@ PhongMaterialEditor.prototype.attach = function(a, b) {
 function LambertMaterialEditor(a, b, e, d) {
   MaterialEditor.call(this, a, b, e, d);
   var f = this;
+  this.skinning = new CheckBox(this.form.element);
+  this.form.addText("Skinning");
+  this.skinning.size.set(20, 15);
+  this.skinning.updateInterface();
+  this.skinning.setOnChange(function() {
+    null !== f.material && (f.material.skinning = f.skinning.getValue());
+  });
+  this.form.add(this.skinning);
+  this.form.nextRow();
   this.morphTargets = new CheckBox(this.form.element);
   this.form.addText("Morph targets");
   this.morphTargets.size.set(20, 15);
@@ -66151,6 +66172,7 @@ function LambertMaterialEditor(a, b, e, d) {
 LambertMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 LambertMaterialEditor.prototype.attach = function(a, b) {
   MaterialEditor.prototype.attach.call(this, a, b);
+  this.skinning.setValue(a.skinning);
   this.morphTargets.setValue(a.morphTargets);
   this.wireframe.setValue(a.wireframe);
   this.shading.setValue(a.shading);
@@ -66162,6 +66184,15 @@ LambertMaterialEditor.prototype.attach = function(a, b) {
 function BasicMaterialEditor(a, b, e, d) {
   MaterialEditor.call(this, a, b, e, d);
   var f = this;
+  this.skinning = new CheckBox(this.form.element);
+  this.form.addText("Skinning");
+  this.skinning.size.set(20, 15);
+  this.skinning.updateInterface();
+  this.skinning.setOnChange(function() {
+    null !== f.material && (f.material.skinning = f.skinning.getValue());
+  });
+  this.form.add(this.skinning);
+  this.form.nextRow();
   this.morphTargets = new CheckBox(this.form.element);
   this.form.addText("Morph targets");
   this.morphTargets.size.set(20, 15);
@@ -66207,6 +66238,7 @@ function BasicMaterialEditor(a, b, e, d) {
 BasicMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 BasicMaterialEditor.prototype.attach = function(a, b) {
   MaterialEditor.prototype.attach.call(this, a, b);
+  this.skinning.setValue(a.skinning);
   this.morphTargets.setValue(a.morphTargets);
   this.wireframe.setValue(a.wireframe);
   this.color.setValue(a.color.r, a.color.g, a.color.b);
@@ -66216,6 +66248,15 @@ BasicMaterialEditor.prototype.attach = function(a, b) {
 function StandardMaterialEditor(a, b, e, d) {
   MaterialEditor.call(this, a, b, e, d);
   var f = this;
+  this.skinning = new CheckBox(this.form.element);
+  this.form.addText("Skinning");
+  this.skinning.size.set(20, 15);
+  this.skinning.updateInterface();
+  this.skinning.setOnChange(function() {
+    null !== f.material && (f.material.skinning = f.skinning.getValue());
+  });
+  this.form.add(this.skinning);
+  this.form.nextRow();
   this.morphTargets = new CheckBox(this.form.element);
   this.form.addText("Morph targets");
   this.morphTargets.size.set(20, 15);
@@ -66452,6 +66493,7 @@ function StandardMaterialEditor(a, b, e, d) {
 StandardMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 StandardMaterialEditor.prototype.attach = function(a, b) {
   MaterialEditor.prototype.attach.call(this, a, b);
+  this.skinning.setValue(a.skinning);
   this.morphTargets.setValue(a.morphTargets);
   this.wireframe.setValue(a.wireframe);
   this.shading.setValue(a.shading);
@@ -69548,7 +69590,7 @@ Interface.initialize = function() {
   Interface.assetFile.addOption("3D Models", function() {
     FileSystem.chooseFile(function(a) {
       0 < a.length && Editor.loadGeometry(a[0]);
-    }, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x");
+    }, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x, .js");
   }, Interface.fileDir + "icons/models/models.png");
   var a = Interface.assetFile.addMenu("Texture", Interface.fileDir + "icons/misc/image.png");
   a.addOption("Texture", function() {
@@ -70511,46 +70553,88 @@ Editor.loadGeometry = function(a, b) {
     };
     h.readAsText(a);
   } else {
-    "3ds" === b ? (h = new FileReader, h.onload = function() {
-      var a = (new THREE.TDSLoader).parse(h.result);
-      Editor.addToScene(a);
-    }, h.readAsArrayBuffer(a)) : "dae" === b ? (h = new FileReader, h.onload = function() {
-      var a = new THREE.ColladaLoader;
-      a.options.convertUpAxis = !0;
-      a = a.parse(h.result).scene;
-      Editor.addToScene(a);
-    }, h.readAsText(a)) : "gltf" === b || "glb" === b ? (h = new FileReader, h.onload = function() {
-      var a = (new THREE.GLTFLoader).parse(h.result);
-      void 0 !== a.scene && Editor.addToScene(a.scene);
-    }, h.readAsText(a)) : "awd" === b ? (h = new FileReader, h.onload = function() {
-      var a = (new THREE.AWDLoader).parse(h.result);
-      Editor.addToScene(a);
-    }, h.readAsArrayBuffer(a)) : "ply" === b ? (h = new FileReader, h.onload = function() {
-      var a = (new THREE.PLYLoader).parse(h.result);
-      Editor.addToScene(new Mesh(a));
-    }, h.readAsText(a)) : "vtk" === b || "vtp" === b ? (h = new FileReader, h.onload = function() {
-      var a = (new THREE.VTKLoader).parse(h.result);
-      Editor.addToScene(new Mesh(a));
-    }, h.readAsArrayBuffer(a)) : "wrl" === b || "vrml" === b ? (h = new FileReader, h.onload = function() {
-      for (var a = (new THREE.VRMLLoader).parse(h.result), b = 0;b < a.children.length;b++) {
-        Editor.addToScene(a.children[b]);
+    if ("3ds" === b) {
+      h = new FileReader, h.onload = function() {
+        var a = (new THREE.TDSLoader).parse(h.result);
+        Editor.addToScene(a);
+      }, h.readAsArrayBuffer(a);
+    } else {
+      if ("dae" === b) {
+        h = new FileReader, h.onload = function() {
+          var a = new THREE.ColladaLoader;
+          a.options.convertUpAxis = !0;
+          a = a.parse(h.result).scene;
+          Editor.addToScene(a);
+        }, h.readAsText(a);
+      } else {
+        if ("gltf" === b || "glb" === b) {
+          h = new FileReader, h.onload = function() {
+            var a = (new THREE.GLTFLoader).parse(h.result);
+            void 0 !== a.scene && Editor.addToScene(a.scene);
+          }, h.readAsText(a);
+        } else {
+          if ("awd" === b) {
+            h = new FileReader, h.onload = function() {
+              var a = (new THREE.AWDLoader).parse(h.result);
+              Editor.addToScene(a);
+            }, h.readAsArrayBuffer(a);
+          } else {
+            if ("ply" === b) {
+              h = new FileReader, h.onload = function() {
+                var a = (new THREE.PLYLoader).parse(h.result);
+                Editor.addToScene(new Mesh(a));
+              }, h.readAsText(a);
+            } else {
+              if ("vtk" === b || "vtp" === b) {
+                h = new FileReader, h.onload = function() {
+                  var a = (new THREE.VTKLoader).parse(h.result);
+                  Editor.addToScene(new Mesh(a));
+                }, h.readAsArrayBuffer(a);
+              } else {
+                if ("wrl" === b || "vrml" === b) {
+                  h = new FileReader, h.onload = function() {
+                    for (var a = (new THREE.VRMLLoader).parse(h.result), b = 0;b < a.children.length;b++) {
+                      Editor.addToScene(a.children[b]);
+                    }
+                  }, h.readAsText(a);
+                } else {
+                  if ("fbx" === b) {
+                    h = new FileReader, h.onload = function() {
+                      var a = (new THREE.FBXLoader).parse(h.result);
+                      Editor.addToScene(a);
+                    }, h.readAsText(a);
+                  } else {
+                    if ("pcd" === b) {
+                      h = new FileReader, h.onload = function() {
+                        var b = (new THREE.PCDLoader).parse(h.result, a.name);
+                        b.material.name = "points";
+                        Editor.addToScene(b);
+                      }, h.readAsArrayBuffer(a);
+                    } else {
+                      if ("stl" === b) {
+                        h = new FileReader, h.onload = function() {
+                          var a = (new THREE.STLLoader).parse(h.result);
+                          Editor.addToScene(new Mesh(a, Editor.defaultMaterial));
+                        }, h.readAsArrayBuffer(a);
+                      } else {
+                        if ("json" === b || "js" === b) {
+                          h = new FileReader, h.onload = function() {
+                            var a = (new THREE.JSONLoader).parse(JSON.parse(h.result)), b = a.materials, a = a.geometry, d = null;
+                            void 0 === b || 0 === b.length ? d = Editor.defaultMaterial : 1 === b.length ? d = b[0] : 1 < b.length && (d = b);
+                            b = 0 < a.bones.length ? new SkinnedMesh(a, d) : new Mesh(a, d);
+                            Editor.addToScene(b);
+                          }, h.readAsText(a);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    }, h.readAsText(a)) : "fbx" === b ? (h = new FileReader, h.onload = function() {
-      var a = (new THREE.FBXLoader).parse(h.result);
-      Editor.addToScene(a);
-    }, h.readAsText(a)) : "pcd" === b ? (h = new FileReader, h.onload = function() {
-      var b = (new THREE.PCDLoader).parse(h.result, a.name);
-      b.material.name = "points";
-      Editor.addToScene(b);
-    }, h.readAsArrayBuffer(a)) : "stl" === b ? (h = new FileReader, h.onload = function() {
-      var a = (new THREE.STLLoader).parse(h.result);
-      Editor.addToScene(new Mesh(a, Editor.defaultMaterial));
-    }, h.readAsArrayBuffer(a)) : "json" === b && (h = new FileReader, h.onload = function() {
-      var b = (new THREE.JSONLoader).parse(JSON.parse(FileSystem.readFile(a))), d = b.materials, b = b.geometry, e = null;
-      void 0 === d || 0 === d.length ? e = Editor.defaultMaterial : 1 === d.length ? e = d[0] : 1 < d.length && (e = d);
-      d = 0 < b.bones.length ? new SkinnedMesh(b, e) : new Mesh(b, e);
-      Editor.addToScene(d);
-    }, h.readAsText());
+    }
   }
 };
 Editor.setOpenFile = function(a) {

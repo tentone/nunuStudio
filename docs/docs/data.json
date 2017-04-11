@@ -837,7 +837,7 @@
             "tag": "module",
             "file": "..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization\n - update\n   - Called on every frame (after the frame is rendered)\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization\n - update\n   - Called on every frame (after the frame is rendered)\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
         },
         "Animations": {
             "name": "Animations",
@@ -1853,7 +1853,7 @@
             "namespace": "",
             "file": "..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization\n - update\n   - Called on every frame (after the frame is rendered)\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse",
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization\n - update\n   - Called on every frame (after the frame is rendered)\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse",
             "extends": "{Object}",
             "params": [
                 {
@@ -6274,7 +6274,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 141,
+            "line": 146,
             "description": "Disposes the CubeCamera.",
             "itemtype": "method",
             "name": "dispose",
@@ -6283,7 +6283,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 154,
+            "line": 159,
             "description": "Serialize CubeCamera data to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -6440,7 +6440,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 29,
+            "line": 30,
             "description": "Javascript code attached to the script",
             "itemtype": "property",
             "name": "code",
@@ -6450,7 +6450,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 34,
+            "line": 35,
             "description": "Compiled function used during runtime",
             "itemtype": "attribute",
             "name": "script",
@@ -6460,7 +6460,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 39,
+            "line": 40,
             "description": "Pointer to the parent program\nUsed access program resources easier",
             "itemtype": "property",
             "name": "program",
@@ -6470,7 +6470,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 45,
+            "line": 46,
             "description": "Pointer to the parent scene",
             "itemtype": "property",
             "name": "scene",
@@ -6480,17 +6480,17 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 66,
-            "description": "Default script code used when creating a new Script",
+            "line": 67,
+            "description": "Default script code used when creating a new Script.",
             "itemtype": "attribute",
-            "name": "default",
+            "name": "DEFAULT",
             "type": "{String}",
             "class": "Script",
             "module": "Script"
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 73,
+            "line": 74,
             "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
             "itemtype": "method",
             "name": "initialize",
@@ -6499,7 +6499,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 112,
+            "line": 113,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -6508,7 +6508,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 141,
+            "line": 142,
             "description": "Call resize method if available.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "resize",
@@ -6517,7 +6517,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 156,
+            "line": 157,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -6533,7 +6533,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 172,
+            "line": 173,
             "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended.",
             "itemtype": "method",
             "name": "setCode",
@@ -6549,7 +6549,7 @@
         },
         {
             "file": "..\\source\\core\\objects\\script\\Script.js",
-            "line": 204,
+            "line": 205,
             "description": "Create JSON for script.",
             "params": [
                 {
@@ -9938,77 +9938,6 @@
         {
             "file": "..\\source\\core\\FileSystem.js",
             "line": 262,
-            "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
-            "itemtype": "method",
-            "name": "copyFile",
-            "params": [
-                {
-                    "name": "src",
-                    "description": "",
-                    "type": "String"
-                },
-                {
-                    "name": "dst",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "class": "FileSystem",
-            "module": "Files"
-        },
-        {
-            "file": "..\\source\\core\\FileSystem.js",
-            "line": 279,
-            "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
-            "itemtype": "method",
-            "name": "makeDirectory",
-            "params": [
-                {
-                    "name": "dir",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "class": "FileSystem",
-            "module": "Files"
-        },
-        {
-            "file": "..\\source\\core\\FileSystem.js",
-            "line": 299,
-            "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
-            "itemtype": "method",
-            "name": "getFilesDirectory",
-            "return": {
-                "description": "Files in the directory",
-                "type": "Array"
-            },
-            "class": "FileSystem",
-            "module": "Files"
-        },
-        {
-            "file": "..\\source\\core\\FileSystem.js",
-            "line": 323,
-            "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
-            "itemtype": "method",
-            "name": "copyFolder",
-            "params": [
-                {
-                    "name": "src",
-                    "description": "",
-                    "type": "String"
-                },
-                {
-                    "name": "dest",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "class": "FileSystem",
-            "module": "Files"
-        },
-        {
-            "file": "..\\source\\core\\FileSystem.js",
-            "line": 364,
             "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.",
             "itemtype": "method",
             "name": "chooseFile",
@@ -10034,7 +9963,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 400,
+            "line": 298,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -10055,7 +9984,78 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 427,
+            "line": 325,
+            "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
+            "itemtype": "method",
+            "name": "copyFile",
+            "params": [
+                {
+                    "name": "src",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "dst",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 345,
+            "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
+            "itemtype": "method",
+            "name": "makeDirectory",
+            "params": [
+                {
+                    "name": "dir",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 362,
+            "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
+            "itemtype": "method",
+            "name": "getFilesDirectory",
+            "return": {
+                "description": "Files in the directory",
+                "type": "Array"
+            },
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 389,
+            "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
+            "itemtype": "method",
+            "name": "copyFolder",
+            "params": [
+                {
+                    "name": "src",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "dst",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\source\\core\\FileSystem.js",
+            "line": 433,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -10075,7 +10075,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 446,
+            "line": 454,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -10095,7 +10095,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 468,
+            "line": 476,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -10115,7 +10115,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 487,
+            "line": 495,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -10135,7 +10135,7 @@
         },
         {
             "file": "..\\source\\core\\FileSystem.js",
-            "line": 509,
+            "line": 517,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
@@ -10478,11 +10478,11 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:446"
+            "line": " ..\\source\\core\\FileSystem.js:454"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\source\\core\\FileSystem.js:468"
+            "line": " ..\\source\\core\\FileSystem.js:476"
         },
         {
             "message": "unknown tag: license",
@@ -10522,7 +10522,7 @@
         },
         {
             "message": "Missing item type\nCreate JSON for script.",
-            "line": " ..\\source\\core\\objects\\script\\Script.js:204"
+            "line": " ..\\source\\core\\objects\\script\\Script.js:205"
         },
         {
             "message": "Missing item type\nGet skins in this animation.",

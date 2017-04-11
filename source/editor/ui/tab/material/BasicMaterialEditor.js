@@ -6,6 +6,21 @@ function BasicMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
+	//Skinning
+	this.skinning = new CheckBox(this.form.element);
+	this.form.addText("Skinning");
+	this.skinning.size.set(20, 15);
+	this.skinning.updateInterface();
+	this.skinning.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.skinning = self.skinning.getValue();
+		}
+	});
+	this.form.add(this.skinning);
+	this.form.nextRow();
+
 	//Morph targets
 	this.morphTargets = new CheckBox(this.form.element);
 	this.form.addText("Morph targets");
@@ -83,6 +98,7 @@ BasicMaterialEditor.prototype.attach = function(material, materialFile)
 {
 	MaterialEditor.prototype.attach.call(this, material, materialFile);
 
+	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);
 	this.wireframe.setValue(material.wireframe);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);

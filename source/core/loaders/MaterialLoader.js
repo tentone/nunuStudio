@@ -213,6 +213,12 @@ MaterialLoader.prototype.parse = function(json)
 		material.morphNormals = json.morphNormals;
 	}
 
+	//Skinning
+	if(json.skinning !== undefined)
+	{
+		material.skinning = json.skinning;
+	}
+
 	//Size (PointsMaterial)
 	if(json.size !== undefined)
 	{
