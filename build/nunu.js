@@ -30,7 +30,7 @@ function Nunu() {
 }
 Nunu.NAME = "nunuStudio";
 Nunu.VERSION = "V0.8.9.25 Alpha";
-Nunu.TIMESTAMP = "201704101817";
+Nunu.TIMESTAMP = "201704110130";
 Nunu.webvrAvailable = function() {
   return void 0 !== navigator.getVRDisplays;
 };
@@ -30946,6 +30946,7 @@ THREE.Material.prototype.toJSON = function(a) {
   1 < this.wireframeLinewidth && (l.wireframeLinewidth = this.wireframeLinewidth);
   "round" !== this.wireframeLinecap && (l.wireframeLinecap = this.wireframeLinecap);
   "round" !== this.wireframeLinejoin && (l.wireframeLinejoin = this.wireframeLinejoin);
+  l.skinning = this.skinning;
   l.morphTargets = this.morphTargets;
   void 0 !== this.morphNormals && (l.morphNormals = this.morphNormals);
   if (void 0 === a) {
@@ -31880,6 +31881,7 @@ MaterialLoader.prototype.parse = function(a) {
   void 0 !== a.wireframeLinejoin && (b.wireframeLinejoin = a.wireframeLinejoin);
   void 0 !== a.morphTargets && (b.morphTargets = a.morphTargets);
   void 0 !== a.morphNormals && (b.morphNormals = a.morphNormals);
+  void 0 !== a.skinning && (b.skinning = a.skinning);
   void 0 !== a.size && (b.size = a.size);
   void 0 !== a.sizeAttenuation && (b.sizeAttenuation = a.sizeAttenuation);
   void 0 !== a.map && (b.map = g(a.map));

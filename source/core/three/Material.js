@@ -277,6 +277,9 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.wireframeLinejoin = this.wireframeLinejoin;
 	}
 
+	//Skinning
+	data.skinning = this.skinning;
+
 	//Morph targets
 	data.morphTargets = this.morphTargets;
 

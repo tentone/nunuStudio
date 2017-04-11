@@ -17,7 +17,7 @@
 		"cameraPreviewPercentage": 0.35,
 		"lockMouse": true,
 		"transformationSpace": "world",
-		"navigation": 10,
+		"navigation": 11,
 		"invertNavigation": false
 	},
 	"render": {

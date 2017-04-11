@@ -1202,9 +1202,9 @@ SceneEditor.prototype.selectObjectHelper = function()
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
 		//Object 3D
-		else if(object instanceof THREE.Object3D)
+		else if(object instanceof Container)
 		{
-			this.objectHelper.add(new BoundingBoxHelper(object, 0x00FFFF));
+			this.objectHelper.add(new BoundingBoxHelper(object, 0xFFFF00));
 		}
 	}
 };

@@ -1301,13 +1301,13 @@ Editor.loadGeometry = function(file, onLoad)
 		reader.readAsArrayBuffer(file);
 	}
 	//THREE JSON Model
-	else if(extension === "json")
+	else if(extension === "json" || extension === "js")
 	{
 		var reader = new FileReader();
 		reader.onload = function()
 		{
 			var loader = new THREE.JSONLoader();
-			var data = loader.parse(JSON.parse(FileSystem.readFile(file)));
+			var data = loader.parse(JSON.parse(reader.result));
 			var materials = data.materials;
 			var geometry = data.geometry;
 
@@ -1339,7 +1339,7 @@ Editor.loadGeometry = function(file, onLoad)
 
 			Editor.addToScene(mesh);
 		};
-		reader.readAsText();
+		reader.readAsText(file);
 	}
 };
 
