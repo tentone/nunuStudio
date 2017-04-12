@@ -65121,7 +65121,7 @@ function CubeTextureEditor(a, b, e, d) {
   });
   this.form.add(this.textureSize);
   this.form.nextRow();
-  for (a = 5;12 > a;a++) {
+  for (a = 2;12 > a;a++) {
     b = Math.pow(2, a), this.textureSize.addValue(b + "x" + b, b);
   }
   this.form.addText("Flip Y");

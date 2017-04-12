@@ -4,7 +4,17 @@ body
 	background-color:#FFFFFF;
 }
 
-h1, h2, h3, h4, h5, h6, p, .btn, .navbar-nav a, .form-control, .list-inline, small, #examples
+.noselect
+{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none; 
+}
+
+h1, h2, h3, h4, h5, h6, p, .btn, .navbar-nav a, .list-inline, small, #examples
 {
 	font-family:'Montserrat', sans-serif;
 }
@@ -491,47 +501,6 @@ footer
 	background:#333333;
 }
 
-.examples-container
-{
-	padding-left:0px;
-	padding-right:0px;
-}
-
-.examples-table
-{
-	background:transparent;
-	margin-bottom:50px;
-	margin-top:0px;
-	-webkit-transition:all 0.25s ease-in-out;
-	-moz-transition:all 0.25s ease-in-out;
-	-o-transition:all 0.25s ease-in-out;
-	transition:all 0.25s ease-in-out;
-}
-.examples-table.active
-{
-	box-shadow:0px 0px 12px rgba(41,46,50,0.6); 
-	position:absolute;
-	margin:auto;
-	z-index:200;
-	border-top-left-radius:10px;
-	border-top-right-radius:10px;
-}
-
-.examples-table:hover
-{
-	margin-top:-10px;
-	-webkit-transition:all 0.25s ease-in-out;
-	-moz-transition:all 0.25s ease-in-out;
-	-o-transition:all 0.25s ease-in-out;
-	transition:all 0.25s ease-in-out;
-}
-
-.examples-table li
-{
-	padding-left:20px;
-	padding-right:20px;
-}
-
 .headline
 {
 	background:#222222;
@@ -582,44 +551,6 @@ footer
 .examples-container .btn
 {
 	border-radius:0;
-}
-
-/*Form styles*/
-.form-control
-{
-	background-color:#FFFFFF;
-	background-image:none;
-	border:0px solid transparent;
-	border-radius:4px;
-	box-shadow:0 1px 1px rgba(0, 0, 0, 0.075) inset;
-	color:#999999;
-	display:block;
-	font-size:15px;
-	height:60px;
-	line-height:1.42857;
-	padding:6px 12px;
-	transition:border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-}
-
-.form-control::-moz-placeholder
-{
-	color:#d9d9d9;
-	font-size:15px;
-	opacity:1;
-}
-
-.form-control::-webkit-placeholder, .form-control::-o-placeholder
-{
-	color:#d9d9d9;
-	font-size:15px;
-	opacity:1;
-}
-
-.form-control::-o-placeholder
-{
-	color:#d9d9d9;
-	font-size:15px;
-	opacity:1;
 }
 
 /*Mobile styles*/

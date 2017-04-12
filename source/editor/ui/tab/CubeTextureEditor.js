@@ -131,7 +131,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Size options
-	for(var i = 5; i < 12; i++)
+	for(var i = 2; i < 12; i++)
 	{
 		var size = Math.pow(2, i);
 		this.textureSize.addValue(size + "x" + size, size);
