@@ -310,11 +310,28 @@ Editor.initialize = function()
 		}
 	}
 
-	Editor.fullscreen = false;
+	//Check WebGL Support
+	if(!Nunu.webglAvailable())
+	{
+		alert("WebGL is not supported or its disabled!\nnunuStudio cannot run!");
+
+		if(Nunu.runningOnDesktop())
+		{
+			Editor.exit();
+			Editor.gui.App.closeAllWindows();
+			Editor.gui.App.quit();
+		}
+	}
 		
 	//Disable body overflow
 	document.body.style.overflow = "hidden";
 	
+	//Disable context menu
+	document.body.oncontextmenu = function(event)
+	{
+		return false;
+	};
+
 	//If running on browser disable some key combinations
 	if(!Nunu.runningOnDesktop())
 	{
@@ -352,12 +369,6 @@ Editor.initialize = function()
 		};
 	}
 
-	//Disable context menu
-	document.body.oncontextmenu = function(event)
-	{
-		return false;
-	};
-
 	//Open ISP file if dragged to the window
 	document.body.ondrop = function(event)
 	{
@@ -377,6 +388,9 @@ Editor.initialize = function()
 			}
 		}
 	}
+	
+	//Fullscreen
+	Editor.fullscreen = false;
 
 	//Input
 	Editor.keyboard = new Keyboard();
