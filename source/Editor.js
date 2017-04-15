@@ -279,11 +279,13 @@ include("editor/DragBuffer.js");
 include("editor/Interface.js");
 include("editor/Settings.js");
 
-//Tool
 Editor.SELECT = 0;
 Editor.MOVE = 1;
 Editor.SCALE = 2;
 Editor.ROTATE = 3;
+
+Editor.filePath = "editor\\files\\";
+Editor.NWJSPath = "..\\nwjs\\";
 
 //Initialize
 Editor.initialize = function()
@@ -1411,21 +1413,21 @@ Editor.exportNWJSProject = function(dir)
 //Export windows project
 Editor.exportWindowsProject = function(dir)
 {
-	FileSystem.copyFolder("..\\nwjs\\win", dir);
+	FileSystem.copyFolder(Editor.NWJSPath + "win", dir);
 	Editor.exportNWJSProject(dir);
 };
 
 //Export linux project
 Editor.exportLinuxProject = function(dir)
 {
-	FileSystem.copyFolder("..\\nwjs\\linux", dir);
+	FileSystem.copyFolder(Editor.NWJSPath + "linux", dir);
 	Editor.exportNWJSProject(dir);
 };
 
 //Export mac os project
 Editor.exportMacOSProject = function(dir)
 {
-	FileSystem.copyFolder("..\\nwjs\\osx", dir);
+	FileSystem.copyFolder(Editor.NWJSPath + "mac", dir);
 	Editor.exportNWJSProject(dir);
 };
 

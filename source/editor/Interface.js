@@ -5,9 +5,6 @@ function Interface(){}
 //Initialize interface
 Interface.initialize = function()
 {
-	//File directory
-	Interface.fileDir = "editor/files/";
-
 	//Tab Container
 	Interface.tab = new TabGroup();
 
@@ -43,10 +40,10 @@ Interface.initialize = function()
 				Editor.loadGeometry(files[0]);
 			}
 		}, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x, .js");
-	}, Interface.fileDir + "icons/models/models.png");
+	}, Editor.filePath + "icons/models/models.png");
 
 	//Textures menu
-	var importTexture = Interface.assetFile.addMenu("Texture", Interface.fileDir + "icons/misc/image.png");
+	var importTexture = Interface.assetFile.addMenu("Texture", Editor.filePath + "icons/misc/image.png");
 
 	//Image texture
 	importTexture.addOption("Texture", function()
@@ -58,7 +55,7 @@ Interface.initialize = function()
 				Editor.loadTexture(files[0]);
 			}
 		}, "image/*");
-	}, Interface.fileDir + "icons/misc/image.png");
+	}, Editor.filePath + "icons/misc/image.png");
 
 	//Cube texture
 	importTexture.addOption("Cube Texture", function()
@@ -68,7 +65,7 @@ Interface.initialize = function()
 		Editor.program.addTexture(texture);
 
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/cube.png");
+	}, Editor.filePath + "icons/misc/cube.png");
 
 	//Canvas texture
 	importTexture.addOption("Canvas Texture", function()
@@ -78,7 +75,7 @@ Interface.initialize = function()
 		Editor.program.addTexture(texture);
 
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/canvas.png");
+	}, Editor.filePath + "icons/misc/canvas.png");
 
 	//Video texture
 	importTexture.addOption("Video Texture", function()
@@ -90,7 +87,7 @@ Interface.initialize = function()
 				Editor.loadVideoTexture(files[0]);
 			}
 		}, "video/*");
-	}, Interface.fileDir + "icons/misc/video.png");
+	}, Editor.filePath + "icons/misc/video.png");
 
 	//Webcam texture
 	importTexture.addOption("Webcam Texture", function()
@@ -100,7 +97,7 @@ Interface.initialize = function()
 		Editor.program.addTexture(texture);
 
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/hw/webcam.png");
+	}, Editor.filePath + "icons/hw/webcam.png");
 
 	//Load Font
 	Interface.assetFile.addOption("Font", function()
@@ -112,7 +109,7 @@ Interface.initialize = function()
 				Editor.loadFont(files[0]);
 			}
 		}, ".json, .ttf, .otf");
-	}, Interface.fileDir + "icons/misc/font.png");
+	}, Editor.filePath + "icons/misc/font.png");
 
 	//Spine Animation
 	if(Nunu.runningOnDesktop())
@@ -136,7 +133,7 @@ Interface.initialize = function()
 					Editor.updateObjectViews();
 				}
 			}, ".json");
-		}, Interface.fileDir + "icons/misc/spine.png");
+		}, Editor.filePath + "icons/misc/spine.png");
 	}
 
 	//Load audio file
@@ -149,7 +146,7 @@ Interface.initialize = function()
 				Editor.loadAudio(files[0]);
 			}
 		}, "audio/*");
-	}, Interface.fileDir + "icons/misc/audio.png");
+	}, Editor.filePath + "icons/misc/audio.png");
 	
 	//Create material
 	Interface.assetMaterial = new DropdownMenu(Interface.assetExplorerBar.element);
@@ -163,7 +160,7 @@ Interface.initialize = function()
 		material.name = "standard";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/material.png");
+	}, Editor.filePath + "icons/misc/material.png");
 
 	Interface.assetMaterial.addOption("Phong material", function()
 	{
@@ -171,7 +168,7 @@ Interface.initialize = function()
 		material.name = "phong";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/material.png");
+	}, Editor.filePath + "icons/misc/material.png");
 	
 	Interface.assetMaterial.addOption("Basic material", function()
 	{
@@ -179,7 +176,7 @@ Interface.initialize = function()
 		material.name = "basic";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/material.png");
+	}, Editor.filePath + "icons/misc/material.png");
 
 	Interface.assetMaterial.addOption("Sprite material", function()
 	{
@@ -187,7 +184,7 @@ Interface.initialize = function()
 		material.name = "sprite";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/image.png");
+	}, Editor.filePath + "icons/misc/image.png");
 
 	Interface.assetMaterial.addOption("Toon material", function()
 	{
@@ -195,7 +192,7 @@ Interface.initialize = function()
 		material.name = "toon";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/material.png");
+	}, Editor.filePath + "icons/misc/material.png");
 
 	Interface.assetMaterial.addOption("Lambert material", function()
 	{
@@ -203,7 +200,7 @@ Interface.initialize = function()
 		material.name = "lambert";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/material.png");
+	}, Editor.filePath + "icons/misc/material.png");
 	
 	var materialOthers = Interface.assetMaterial.addMenu("Others");
 	materialOthers.addOption("Shader material", function()
@@ -212,7 +209,7 @@ Interface.initialize = function()
 		material.name = "shader";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/script/script.png");
+	}, Editor.filePath + "icons/script/script.png");
 
 	materialOthers.addOption("Normal material", function()
 	{
@@ -220,7 +217,7 @@ Interface.initialize = function()
 		material.name = "normal";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/material.png");
+	}, Editor.filePath + "icons/misc/material.png");
 	
 	materialOthers.addOption("Depth material", function()
 	{
@@ -228,7 +225,7 @@ Interface.initialize = function()
 		material.name = "depth";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/material.png");
+	}, Editor.filePath + "icons/misc/material.png");
 
 	//Explorer
 	Interface.explorer = new DivisionResizable();
@@ -275,7 +272,7 @@ Interface.initialize = function()
 	//Select
 	Interface.toolSelect = new ButtonImageToggle();
 	Interface.toolSelect.selected = true;
-	Interface.toolSelect.setImage(Interface.fileDir + "icons/tools/select.png");
+	Interface.toolSelect.setImage(Editor.filePath + "icons/tools/select.png");
 	Interface.toolSelect.imageScale.set(0.7, 0.7);
 	Interface.toolSelect.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolSelect.position.set(0, 80);
@@ -287,7 +284,7 @@ Interface.initialize = function()
 
 	//Move
 	Interface.toolMove = new ButtonImageToggle();
-	Interface.toolMove.setImage(Interface.fileDir + "icons/tools/move.png");
+	Interface.toolMove.setImage(Editor.filePath + "icons/tools/move.png");
 	Interface.toolMove.imageScale.set(0.7, 0.7);
 	Interface.toolMove.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolMove.position.set(0, 120);
@@ -299,7 +296,7 @@ Interface.initialize = function()
 
 	//Resize
 	Interface.toolScale = new ButtonImageToggle();
-	Interface.toolScale.setImage(Interface.fileDir + "icons/tools/resize.png");
+	Interface.toolScale.setImage(Editor.filePath + "icons/tools/resize.png");
 	Interface.toolScale.imageScale.set(0.7, 0.7);
 	Interface.toolScale.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolScale.position.set(0, 160);
@@ -311,7 +308,7 @@ Interface.initialize = function()
 
 	//Rotate
 	Interface.toolRotate = new ButtonImageToggle();
-	Interface.toolRotate.setImage(Interface.fileDir + "icons/tools/rotate.png");
+	Interface.toolRotate.setImage(Editor.filePath + "icons/tools/rotate.png");
 	Interface.toolRotate.imageScale.set(0.7, 0.7);
 	Interface.toolRotate.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolRotate.position.set(0, 200);
@@ -329,7 +326,7 @@ Interface.initialize = function()
 
 	//Add Models
 	Interface.addModel = new ButtonDrawer();
-	Interface.addModel.setImage(Interface.fileDir + "icons/models/models.png");
+	Interface.addModel.setImage(Editor.filePath + "icons/models/models.png");
 	Interface.addModel.imageScale.set(0.7, 0.7);
 	Interface.addModel.optionsScale.set(0.7, 0.7);
 	Interface.addModel.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
@@ -338,7 +335,7 @@ Interface.initialize = function()
 	Interface.addModel.updateInterface();
 
 	//Cube
-	Interface.addModel.addOption(Interface.fileDir + "icons/models/cube.png", function()
+	Interface.addModel.addOption(Editor.filePath + "icons/models/cube.png", function()
 	{
 		var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -347,7 +344,7 @@ Interface.initialize = function()
 	}, "Cube");
 
 	//Cylinder
-	Interface.addModel.addOption(Interface.fileDir + "icons/models/cylinder.png", function()
+	Interface.addModel.addOption(Editor.filePath + "icons/models/cylinder.png", function()
 	{
 		var geometry = new THREE.CylinderBufferGeometry(1, 1, 2, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -356,7 +353,7 @@ Interface.initialize = function()
 	}, "Cylinder");
 
 	//Sphere
-	Interface.addModel.addOption(Interface.fileDir + "icons/models/sphere.png", function()
+	Interface.addModel.addOption(Editor.filePath + "icons/models/sphere.png", function()
 	{
 		var geometry = new THREE.SphereBufferGeometry(1, 32, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -365,7 +362,7 @@ Interface.initialize = function()
 	}, "Sphere");
 
 	//Torus
-	Interface.addModel.addOption(Interface.fileDir + "icons/models/torus.png", function()
+	Interface.addModel.addOption(Editor.filePath + "icons/models/torus.png", function()
 	{
 		var geometry = new THREE.TorusBufferGeometry(1, 0.5, 16, 96);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -374,7 +371,7 @@ Interface.initialize = function()
 	}, "Torus");
 
 	//Cone
-	Interface.addModel.addOption(Interface.fileDir + "icons/models/cone.png", function()
+	Interface.addModel.addOption(Editor.filePath + "icons/models/cone.png", function()
 	{
 		var geometry = new THREE.ConeBufferGeometry(1, 2, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -383,14 +380,14 @@ Interface.initialize = function()
 	}, "Cone");
 
 	//Text
-	Interface.addModel.addOption(Interface.fileDir + "icons/models/text.png", function()
+	Interface.addModel.addOption(Editor.filePath + "icons/models/text.png", function()
 	{
 		var model = new Text3D("text", Editor.defaultMaterial, Editor.defaultFont);
 		Editor.addToScene(model);
 	}, "3D Text");
 
 	//Tetrahedron
-	Interface.addModel.addOption(Interface.fileDir + "icons/models/pyramid.png", function()
+	Interface.addModel.addOption(Editor.filePath + "icons/models/pyramid.png", function()
 	{
 		var geometry = new THREE.TetrahedronGeometry(1, 0);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -399,7 +396,7 @@ Interface.initialize = function()
 	}, "Tetrahedron");
 
 	//Plane
-	Interface.addModel.addOption(Interface.fileDir + "icons/models/plane.png", function()
+	Interface.addModel.addOption(Editor.filePath + "icons/models/plane.png", function()
 	{
 		var geometry = new THREE.PlaneBufferGeometry(1,1);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -410,7 +407,7 @@ Interface.initialize = function()
 	}, "Plane");
 
 	//Circle
-	Interface.addModel.addOption(Interface.fileDir + "icons/models/circle.png", function()
+	Interface.addModel.addOption(Editor.filePath + "icons/models/circle.png", function()
 	{
 		var geometry = new THREE.CircleBufferGeometry(1, 32);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
@@ -422,7 +419,7 @@ Interface.initialize = function()
 
 	//Add lights
 	Interface.addLight = new ButtonDrawer();
-	Interface.addLight.setImage(Interface.fileDir + "icons/lights/point.png");
+	Interface.addLight.setImage(Editor.filePath + "icons/lights/point.png");
 	Interface.addLight.imageScale.set(0.7, 0.7);
 	Interface.addLight.optionsScale.set(0.7, 0.7);
 	Interface.addLight.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
@@ -431,50 +428,50 @@ Interface.initialize = function()
 	Interface.addLight.updateInterface();
 
 	//Point Light
-	Interface.addLight.addOption(Interface.fileDir + "icons/lights/point.png", function()
+	Interface.addLight.addOption(Editor.filePath + "icons/lights/point.png", function()
 	{
 		Editor.addToScene(new PointLight(0x444444));
 	}, "Point Light");
 
 	//Ambient Light
-	Interface.addLight.addOption(Interface.fileDir + "icons/lights/ambient.png", function()
+	Interface.addLight.addOption(Editor.filePath + "icons/lights/ambient.png", function()
 	{
 		Editor.addToScene(new AmbientLight(0x444444));
 	}, "Ambient Light");
 
 	//Spot Light
-	Interface.addLight.addOption(Interface.fileDir + "icons/lights/spot.png", function()
+	Interface.addLight.addOption(Editor.filePath + "icons/lights/spot.png", function()
 	{
 		Editor.addToScene(new SpotLight(0x444444));
 	}, "Spot Light");
 
 	//Directional Light
-	Interface.addLight.addOption(Interface.fileDir + "icons/lights/directional.png", function()
+	Interface.addLight.addOption(Editor.filePath + "icons/lights/directional.png", function()
 	{
 		Editor.addToScene(new DirectionalLight(0x444444));
 	}, "Directional Light");
 
 	//Hemisphere Light
-	Interface.addLight.addOption(Interface.fileDir + "icons/lights/hemisphere.png", function()
+	Interface.addLight.addOption(Editor.filePath + "icons/lights/hemisphere.png", function()
 	{
 		Editor.addToScene(new HemisphereLight(0x444444));
 	}, "Hemisphere Light");
 
 	//RectArea Light
-	Interface.addLight.addOption(Interface.fileDir + "icons/lights/rectarea.png", function()
+	Interface.addLight.addOption(Editor.filePath + "icons/lights/rectarea.png", function()
 	{
 		Editor.addToScene(new RectAreaLight(0x444444, 100, 1, 1));
 	}, "RectArea Light");
 
 	//Sky
-	Interface.addLight.addOption(Interface.fileDir + "icons/lights/sky.png", function()
+	Interface.addLight.addOption(Editor.filePath + "icons/lights/sky.png", function()
 	{
 		Editor.addToScene(new Sky());
 	}, "Sky");
 
 	//Add camera
 	Interface.addCamera = new ButtonDrawer();
-	Interface.addCamera.setImage(Interface.fileDir + "icons/camera/camera.png");
+	Interface.addCamera.setImage(Editor.filePath + "icons/camera/camera.png");
 	Interface.addCamera.optionsPerLine = 2;
 	Interface.addCamera.imageScale.set(0.7, 0.7);
 	Interface.addCamera.optionsScale.set(0.7, 0.7);
@@ -484,20 +481,20 @@ Interface.initialize = function()
 	Interface.addCamera.updateInterface();
 
 	//Prespective camera
-	Interface.addCamera.addOption(Interface.fileDir + "icons/camera/prespective.png", function()
+	Interface.addCamera.addOption(Editor.filePath + "icons/camera/prespective.png", function()
 	{
 		Editor.addToScene(new PerspectiveCamera(60, 1));
 	}, "Prespective Camera");
 
 	//Orthographic camera
-	Interface.addCamera.addOption(Interface.fileDir + "icons/camera/orthographic.png", function()
+	Interface.addCamera.addOption(Editor.filePath + "icons/camera/orthographic.png", function()
 	{
 		Editor.addToScene(new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL));
 	}, "Othographic Camera");
 
 	//Add script
 	Interface.addScript = new ButtonDrawer();
-	Interface.addScript.setImage(Interface.fileDir + "icons/script/script.png");
+	Interface.addScript.setImage(Editor.filePath + "icons/script/script.png");
 	Interface.addScript.optionsPerLine = 1;
 	Interface.addScript.imageScale.set(0.7, 0.7);
 	Interface.addScript.optionsScale.set(0.7, 0.7);
@@ -507,14 +504,14 @@ Interface.initialize = function()
 	Interface.addScript.updateInterface();
 
 	//Javascript script
-	Interface.addScript.addOption(Interface.fileDir + "icons/script/script.png", function()
+	Interface.addScript.addOption(Editor.filePath + "icons/script/script.png", function()
 	{
 		Editor.addToScene(new Script());
 	}, "JS Script");
 
 	//Sprites and effects
 	Interface.addEffects = new ButtonDrawer();
-	Interface.addEffects.setImage(Interface.fileDir + "icons/effects/particles.png");
+	Interface.addEffects.setImage(Editor.filePath + "icons/effects/particles.png");
 	Interface.addEffects.optionsPerLine = 3;
 	Interface.addEffects.imageScale.set(0.7, 0.7);
 	Interface.addEffects.optionsScale.set(0.7, 0.7);
@@ -524,13 +521,13 @@ Interface.initialize = function()
 	Interface.addEffects.updateInterface();
 
 	//Sprite
-	Interface.addEffects.addOption(Interface.fileDir + "icons/effects/sprite.png", function()
+	Interface.addEffects.addOption(Editor.filePath + "icons/effects/sprite.png", function()
 	{
 		Editor.addToScene(new Sprite(Editor.defaultSpriteMaterial));
 	}, "Sprite");
 
 	//Particle emitter
-	Interface.addEffects.addOption(Interface.fileDir + "icons/effects/particles.png", function()
+	Interface.addEffects.addOption(Editor.filePath + "icons/effects/particles.png", function()
 	{
 		var particle = new ParticleEmitter()
 		particle.texture = Editor.defaultTextureParticle;
@@ -538,32 +535,32 @@ Interface.initialize = function()
 	}, "Particle Emitter");
 
 	//Container
-	Interface.addEffects.addOption(Interface.fileDir + "icons/effects/container.png", function()
+	Interface.addEffects.addOption(Editor.filePath + "icons/effects/container.png", function()
 	{
 		Editor.addToScene(new Container());
 	}, "Container");
 
 	//Cube Camera
-	Interface.addEffects.addOption(Interface.fileDir + "icons/misc/probe.png", function()
+	Interface.addEffects.addOption(Editor.filePath + "icons/misc/probe.png", function()
 	{
 		Editor.addToScene(new CubeCamera());
 	}, "Cube Camera")
 
 	//Audio
-	Interface.addEffects.addOption(Interface.fileDir + "icons/misc/audio.png", function()
+	Interface.addEffects.addOption(Editor.filePath + "icons/misc/audio.png", function()
 	{
 		Editor.addToScene(new AudioEmitter(Editor.defaultAudio));
 	}, "Audio");
 
 	//Positional Audio
-	Interface.addEffects.addOption(Interface.fileDir + "icons/misc/audio_positional.png", function()
+	Interface.addEffects.addOption(Editor.filePath + "icons/misc/audio_positional.png", function()
 	{
 		Editor.addToScene(new PositionalAudio(Editor.defaultAudio));
 	}, "Positional Audio");
 
 	//Physics
 	Interface.addPhysics = new ButtonDrawer();
-	Interface.addPhysics.setImage(Interface.fileDir + "icons/misc/physics.png");
+	Interface.addPhysics.setImage(Editor.filePath + "icons/misc/physics.png");
 	Interface.addPhysics.optionsPerLine = 3;
 	Interface.addPhysics.imageScale.set(0.7, 0.7);
 	Interface.addPhysics.optionsScale.set(0.7, 0.7);
@@ -573,7 +570,7 @@ Interface.initialize = function()
 	Interface.addPhysics.updateInterface();
 
 	//Physics box
-	Interface.addPhysics.addOption(Interface.fileDir + "icons/models/cube.png", function()
+	Interface.addPhysics.addOption(Editor.filePath + "icons/models/cube.png", function()
 	{
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5)));
@@ -582,7 +579,7 @@ Interface.initialize = function()
 	}, "Box");
 
 	//Physics sphere
-	Interface.addPhysics.addOption(Interface.fileDir + "icons/models/sphere.png", function()
+	Interface.addPhysics.addOption(Editor.filePath + "icons/models/sphere.png", function()
 	{
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Sphere(1.0));
@@ -591,7 +588,7 @@ Interface.initialize = function()
 	}, "Sphere");
 
 	//Physics Cylinder
-	Interface.addPhysics.addOption(Interface.fileDir + "icons/models/cylinder.png", function()
+	Interface.addPhysics.addOption(Editor.filePath + "icons/models/cylinder.png", function()
 	{
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Cylinder(1.0, 1.0, 2.0, 8));
@@ -600,7 +597,7 @@ Interface.initialize = function()
 	}, "Cylinder");
 
 	//Physics Plane
-	Interface.addPhysics.addOption(Interface.fileDir + "icons/models/plane.png", function()
+	Interface.addPhysics.addOption(Editor.filePath + "icons/models/plane.png", function()
 	{
 		var obj = new PhysicsObject();
 		obj.rotation.x = -1.57;
@@ -611,7 +608,7 @@ Interface.initialize = function()
 	}, "Ground");
 
 	//Physics Particle
-	Interface.addPhysics.addOption(Interface.fileDir + "icons/models/point.png", function()
+	Interface.addPhysics.addOption(Editor.filePath + "icons/models/point.png", function()
 	{
 		var obj = new PhysicsObject();
 		obj.body.addShape(new CANNON.Particle());
@@ -621,7 +618,7 @@ Interface.initialize = function()
 
 	//Add device
 	Interface.addDevice = new ButtonDrawer();
-	Interface.addDevice.setImage(Interface.fileDir + "icons/hw/hw.png");
+	Interface.addDevice.setImage(Editor.filePath + "icons/hw/hw.png");
 	Interface.addDevice.optionsPerLine = 2;
 	Interface.addDevice.imageScale.set(0.7, 0.7);
 	Interface.addDevice.optionsScale.set(0.7, 0.7);
@@ -631,13 +628,13 @@ Interface.initialize = function()
 	Interface.addDevice.updateInterface();
 
 	//Leap Hand
-	Interface.addDevice.addOption(Interface.fileDir + "icons/hw/leap.png", function()
+	Interface.addDevice.addOption(Editor.filePath + "icons/hw/leap.png", function()
 	{
 		Editor.addToScene(new LeapMotion());
 	}, "Leap Motion");
 
 	//Kinect Skeleton
-	Interface.addDevice.addOption(Interface.fileDir + "icons/hw/kinect.png", function()
+	Interface.addDevice.addOption(Editor.filePath + "icons/hw/kinect.png", function()
 	{
 		Editor.addToScene(new KinectDevice());
 	}, "Microsoft Kinect");
@@ -662,7 +659,7 @@ Interface.initialize = function()
 	Interface.file.addOption("New", function()
 	{
 		Interface.newProgram();
-	}, Interface.fileDir + "icons/misc/new.png");
+	}, Editor.filePath + "icons/misc/new.png");
 
 	//Save project
 	Interface.file.addOption("Save", function()
@@ -675,7 +672,7 @@ Interface.initialize = function()
 		{
 			Interface.saveProgram();
 		}
-	}, Interface.fileDir + "icons/misc/save.png");
+	}, Editor.filePath + "icons/misc/save.png");
 
 	//Save project
 	if(Nunu.runningOnDesktop())
@@ -683,7 +680,7 @@ Interface.initialize = function()
 		Interface.file.addOption("Save As", function()
 		{
 			Interface.saveProgram();
-		}, Interface.fileDir + "icons/misc/save.png");
+		}, Editor.filePath + "icons/misc/save.png");
 	}
 
 	//Load Project
@@ -701,7 +698,7 @@ Interface.initialize = function()
 			tab = Interface.tab.addTab(ConsoleTab, true);
 		}
 		tab.select();
-	}, Interface.fileDir + "icons/misc/console.png");*/
+	}, Editor.filePath + "icons/misc/console.png");*/
 
 	//Settings
 	Interface.file.addOption("Settings", function()
@@ -712,7 +709,7 @@ Interface.initialize = function()
 			tab = Interface.tab.addTab(SettingsTab, true);
 		}
 		tab.select();
-	}, Interface.fileDir + "icons/misc/settings.png");
+	}, Editor.filePath + "icons/misc/settings.png");
 
 	//Publish
 	if(Nunu.runningOnDesktop())
@@ -734,10 +731,10 @@ Interface.initialize = function()
 					alert("Error exporting project (" + e + ")");
 				}
 			}, "", Editor.program.name);
-		}, Interface.fileDir + "icons/platform/web.png");
+		}, Editor.filePath + "icons/platform/web.png");
 
 		//Publish windows
-		if(FileSystem.fileExists("../nwjs/win"))
+		if(FileSystem.fileExists(Editor.NWJSPath + "win"))
 		{
 			publish.addOption("Windows", function()
 			{
@@ -753,11 +750,11 @@ Interface.initialize = function()
 						alert("Error exporting project (" + e + ")");
 					}
 				}, "", Editor.program.name);
-			}, Interface.fileDir + "icons/platform/windows.png");
+			}, Editor.filePath + "icons/platform/windows.png");
 		}
 
 		//Publish linux
-		if(FileSystem.fileExists("../nwjs/linux"))
+		if(FileSystem.fileExists(Editor.NWJSPath + "linux"))
 		{
 			publish.addOption("Linux", function()
 			{
@@ -773,11 +770,11 @@ Interface.initialize = function()
 						alert("Error exporting project (" + e + ")");
 					}
 				}, "", Editor.program.name);
-			}, Interface.fileDir + "icons/platform/linux.png");
+			}, Editor.filePath + "icons/platform/linux.png");
 		}
 
 		//Publish macos
-		if(FileSystem.fileExists("../nwjs/mac"))
+		if(FileSystem.fileExists(Editor.NWJSPath + "mac"))
 		{
 			publish.addOption("macOS", function()
 			{
@@ -793,7 +790,7 @@ Interface.initialize = function()
 						alert("Error exporting project (" + e + ")");
 					}
 				}, "", Editor.program.name);
-			}, Interface.fileDir + "icons/platform/osx.png");
+			}, Editor.filePath + "icons/platform/osx.png");
 		}
 	}
 
@@ -824,7 +821,7 @@ Interface.initialize = function()
 				FileSystem.writeFile(fname, data);
 			}, ".obj");
 		}
-	}, Interface.fileDir + "icons/misc/scene.png");
+	}, Editor.filePath + "icons/misc/scene.png");
 
 	//Export STL
 	exportMenu.addOption("STL", function()
@@ -850,7 +847,7 @@ Interface.initialize = function()
 				FileSystem.writeFile(fname, data);
 			}, ".stl");
 		}
-	}, Interface.fileDir + "icons/misc/scene.png");
+	}, Editor.filePath + "icons/misc/scene.png");
 
 	//Export Binary STL
 	exportMenu.addOption("Binary STL", function()
@@ -876,7 +873,7 @@ Interface.initialize = function()
 				FileSystem.writeFileArrayBuffer(fname, data.buffer);
 			}, ".stl");
 		}
-	}, Interface.fileDir + "icons/misc/scene.png");
+	}, Editor.filePath + "icons/misc/scene.png");
 
 	//Exit
 	if(Nunu.runningOnDesktop())
@@ -887,7 +884,7 @@ Interface.initialize = function()
 			{
 				Editor.exit();
 			}
-		}, Interface.fileDir + "icons/misc/exit.png");
+		}, Editor.filePath + "icons/misc/exit.png");
 	}
 
 	//Editor
@@ -899,27 +896,27 @@ Interface.initialize = function()
 	Interface.editor.addOption("Undo", function()
 	{
 		Editor.undo();
-	}, Interface.fileDir + "icons/misc/undo.png");
+	}, Editor.filePath + "icons/misc/undo.png");
 
 	Interface.editor.addOption("Copy", function()
 	{
 		Editor.copyObject();
-	}, Interface.fileDir + "icons/misc/copy.png");
+	}, Editor.filePath + "icons/misc/copy.png");
 	
 	Interface.editor.addOption("Cut", function()
 	{
 		Editor.cutObject();
-	}, Interface.fileDir + "icons/misc/cut.png");
+	}, Editor.filePath + "icons/misc/cut.png");
 
 	Interface.editor.addOption("Paste", function()
 	{
 		Editor.pasteObject();
-	}, Interface.fileDir + "icons/misc/paste.png");
+	}, Editor.filePath + "icons/misc/paste.png");
 
 	Interface.editor.addOption("Delete", function()
 	{
 		Editor.deleteObject();
-	}, Interface.fileDir + "icons/misc/delete.png");
+	}, Editor.filePath + "icons/misc/delete.png");
 
 	//Project
 	Interface.project = new DropdownMenu();
@@ -931,7 +928,7 @@ Interface.initialize = function()
 	{
 		Editor.program.addDefaultScene();
 		Editor.updateObjectViews();
-	}, Interface.fileDir + "icons/misc/add.png");
+	}, Editor.filePath + "icons/misc/add.png");
 
 	Interface.project.addOption("Execute script", function()
 	{
@@ -951,7 +948,7 @@ Interface.initialize = function()
 				alert("Error: " + error);
 			}
 		}, ".js");
-	}, Interface.fileDir + "icons/script/script.png");
+	}, Editor.filePath + "icons/script/script.png");
 
 	//About
 	Interface.about = new Button();
