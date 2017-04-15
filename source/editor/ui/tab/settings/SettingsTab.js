@@ -2,7 +2,7 @@
 
 function SettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Settings", "editor/files/icons/misc/settings.png");
+	TabElement.call(this, parent, closeable, container, index, "Settings", Editor.filePath + "icons/misc/settings.png");
 
 	//Tab Group
 	this.tab = new TabGroup(this.element);

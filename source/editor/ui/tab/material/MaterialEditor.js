@@ -2,7 +2,7 @@
 
 function MaterialEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Material", "editor/files/icons/misc/material.png");
+	TabElement.call(this, parent, closeable, container, index, "Material", Editor.filePath + "icons/misc/material.png");
 
 	//Self pointer
 	var self = this;

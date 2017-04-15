@@ -2,7 +2,7 @@
 
 function ShaderMaterialEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Material", "editor/files/icons/misc/material.png");
+	TabElement.call(this, parent, closeable, container, index, "Material", Editor.filePath + "icons/misc/material.png");
 
 	//Self pointer
 	var self = this;
@@ -140,7 +140,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	//General
 	this.general = this.tab.addTab(TabElement, false);
-	this.general.setIcon("editor/files/icons/misc/material.png");
+	this.general.setIcon(Editor.filePath + "icons/misc/material.png");
 	this.general.setName("Material");
 
 	//Form
@@ -264,7 +264,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	//Fragment tab
 	this.fragmentTab = this.tab.addTab(TabElement, false); 
-	this.fragmentTab.setIcon("editor/files/icons/misc/code.png");
+	this.fragmentTab.setIcon(Editor.filePath + "icons/misc/code.png");
 	this.fragmentTab.setName("Fragment");
 
 	//Fragment editor
@@ -281,7 +281,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	//Vertex tab
 	this.vertexTab = this.tab.addTab(TabElement, false);
-	this.vertexTab.setIcon("editor/files/icons/misc/code.png");
+	this.vertexTab.setIcon(Editor.filePath + "icons/misc/code.png");
 	this.vertexTab.setName("Vertex");
 
 	//Vertex editor

@@ -2,7 +2,7 @@
 
 function ParticleEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Particle", "editor/files/icons/effects/particles.png");
+	TabElement.call(this, parent, closeable, container, index, "Particle", Editor.filePath + "icons/effects/particles.png");
 
 	//Main container
 	this.main = new DualDivisionResizable(this.element);

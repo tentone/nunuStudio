@@ -645,7 +645,7 @@ Interface.initialize = function()
 
 	//Editor Logo
 	Interface.image = new ImageBox();
-	Interface.image.setImage("editor/files/logo.png");
+	Interface.image.setImage(Editor.filePath + "logo.png");
 	Interface.image.size.set(108, 18);
 	Interface.image.updateInterface();
 

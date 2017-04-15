@@ -2,7 +2,7 @@
 
 function CodeSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Code Editor", "editor/files/icons/script/script.png");
+	TabElement.call(this, parent, closeable, container, index, "Code Editor", Editor.filePath + "icons/script/script.png");
 	
 	this.element.style.overflow = "auto";
 

@@ -5,7 +5,7 @@ function MaterialAsset(parent)
 	Asset.call(this, parent);
 
 	this.material = null;
-	this.setIcon(Interface.fileDir + "icons/misc/material.png");
+	this.setIcon(Editor.filePath + "icons/misc/material.png");
 	
 	//Self pointer
 	var self = this;
