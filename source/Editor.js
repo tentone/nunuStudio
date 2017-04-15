@@ -5,7 +5,7 @@ function Editor(){}
 //Runtime
 include("Nunu.js");
 
-include("lib/three/three.js");
+include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
 
 include("lib/cannon.min.js");

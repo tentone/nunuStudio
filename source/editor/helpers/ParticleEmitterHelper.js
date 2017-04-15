@@ -24,10 +24,11 @@ ParticleEmitterHelper.prototype.update = function()
 {
 	if(this.runtime !== null)
 	{
-		this.runtime.position.copy(this.particle.position);
-		this.runtime.rotation.copy(this.particle.rotation);
-		this.runtime.scale.copy(this.particle.scale);
+		this.particle.getWorldPosition(this.runtime.position);
+		this.particle.getWorldRotation(this.runtime.rotation);
+		this.particle.getWorldScale(this.runtime.scale);
 		this.runtime.updateMatrix();
+		
 		this.runtime.update();
 	}
 }
