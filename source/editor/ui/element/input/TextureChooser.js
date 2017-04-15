@@ -20,7 +20,7 @@ function TextureChooser(parent)
 
 	//Alpha background
 	this.alpha = document.createElement("img");
-	this.alpha.src = "editor/files/alpha.png";
+	this.alpha.src = Editor.filePath + "alpha.png";
 	this.alpha.style.visibility = "inherit";
 	this.alpha.style.pointerEvents = "none";
 	this.alpha.style.position = "absolute";

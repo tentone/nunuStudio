@@ -19,7 +19,7 @@ function CubeTextureBox(parent)
 
 	//Alpha background
 	this.alpha = document.createElement("img");
-	this.alpha.src = "editor/files/alpha.png";
+	this.alpha.src = Editor.filePath + "alpha.png";
 	this.alpha.style.pointerEvents = "none";
 	this.alpha.style.position = "absolute";
 	this.alpha.style.left = "0px";

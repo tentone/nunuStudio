@@ -29,7 +29,7 @@ function TreeElement(container)
 	//Arrow
 	this.arrow = document.createElement("img");
 	this.arrow.draggable = false;
-	this.arrow.src = "editor/files/icons/misc/arrow_down.png";
+	this.arrow.src = Editor.filePath + "icons/misc/arrow_down.png";
 	this.arrow.style.position = "absolute";
 	this.arrow.style.opacity = 0.5;
 	this.arrow.style.width = "15px";
@@ -57,7 +57,7 @@ function TreeElement(container)
 
 	//Icon
 	this.icon = document.createElement("img");
-	this.icon.src = "editor/files/icons/misc/arrow_down.png";
+	this.icon.src = Editor.filePath + "icons/misc/arrow_down.png";
 	this.icon.style.position = "absolute";
 	this.icon.style.pointerEvents = "none";
 	this.icon.style.width = "15px";
@@ -480,7 +480,7 @@ TreeElement.prototype.setObject = function(obj)
 	
 	if(obj.folded)
 	{
-		this.arrow.src = "editor/files/icons/misc/arrow_right.png";
+		this.arrow.src = Editor.filePath + "icons/misc/arrow_right.png";
 	}
 };
 
@@ -551,11 +551,11 @@ TreeElement.prototype.updateFoldedState = function()
 
 	if(this.folded)
 	{
-		this.arrow.src = "editor/files/icons/misc/arrow_right.png";
+		this.arrow.src = Editor.filePath + "icons/misc/arrow_right.png";
 	}
 	else
 	{
-		this.arrow.src = "editor/files/icons/misc/arrow_down.png";
+		this.arrow.src = Editor.filePath + "icons/misc/arrow_down.png";
 	}
 
 	this.container.updateChildPosition();

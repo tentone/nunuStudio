@@ -39,7 +39,7 @@ function TabButton(parent, tab)
 	this.close.style.position = "absolute";
 	this.close.style.opacity = 0.5;
 	this.close.style.display = (tab.closeable) ? "block" : "none";
-	this.close.src = "editor/files/icons/misc/close.png";
+	this.close.src = Editor.filePath + "icons/misc/close.png";
 	this.element.appendChild(this.close);
 
 	this.close.onmouseenter = function()

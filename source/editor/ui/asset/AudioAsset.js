@@ -5,7 +5,7 @@ function AudioAsset(parent)
 	Asset.call(this, parent);
 
 	this.audio = null;
-	this.setIcon(Interface.fileDir + "icons/misc/audio.png");
+	this.setIcon(Editor.filePath + "icons/misc/audio.png");
 	
 	//Self pointer
 	var self = this;
@@ -124,7 +124,7 @@ AudioAsset.prototype.updateMetadata = function()
 {
 	if(this.audio !== null)
 	{
-		this.image.src = Interface.fileDir + "icons/misc/audio.png";
+		this.image.src = Editor.filePath + "icons/misc/audio.png";
 
 		this.setText(this.audio.name);
 	}

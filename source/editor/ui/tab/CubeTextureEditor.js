@@ -2,7 +2,7 @@
 
 function CubeTextureEditor(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Texture", "editor/files/icons/misc/cube.png");
+	TabElement.call(this, parent, closeable, container, index, "Texture", Editor.filePath + "icons/misc/cube.png");
 
 	var self = this;
 

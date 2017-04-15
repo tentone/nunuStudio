@@ -190,7 +190,7 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 	}
 
 	var arrow = new ImageBox(menu.element);
-	arrow.setImage("editor/files/icons/misc/arrow_right.png");
+	arrow.setImage(Editor.filePath + "icons/misc/arrow_right.png");
 	arrow.size.set(12, 12);
 	arrow.position.set(this.optionsSize.x - 20, 3);
 	menu.add(arrow);

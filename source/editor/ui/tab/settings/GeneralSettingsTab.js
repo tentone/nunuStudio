@@ -2,7 +2,7 @@
 
 function GeneralSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "General", "editor/files/icons/misc/tool.png");
+	TabElement.call(this, parent, closeable, container, index, "General", Editor.filePath + "icons/misc/tool.png");
 
 	this.element.style.overflow = "auto";
 

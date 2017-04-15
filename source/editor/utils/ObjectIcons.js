@@ -7,50 +7,50 @@ function ObjectIcons(){}
 ObjectIcons.icons = [];
 
 //Default icon
-ObjectIcons.icons["Object3D"] = "editor/files/icons/misc/scene.png";
+ObjectIcons.icons["Object3D"] = Editor.filePath + "icons/misc/scene.png";
 
 //Devices
-ObjectIcons.icons["Kinect"] = "editor/files/icons/hw/kinect.png";
-ObjectIcons.icons["LeapDevice"] = "editor/files/icons/hw/leap.png";
+ObjectIcons.icons["Kinect"] = Editor.filePath + "icons/hw/kinect.png";
+ObjectIcons.icons["LeapDevice"] = Editor.filePath + "icons/hw/leap.png";
 
 //Ligths
-ObjectIcons.icons["Sky"] = "editor/files/icons/lights/sky.png";
-ObjectIcons.icons["SpotLight"] = "editor/files/icons/lights/spot.png";
-ObjectIcons.icons["PointLight"] = "editor/files/icons/lights/point.png";
-ObjectIcons.icons["HemisphereLight"] = "editor/files/icons/lights/hemisphere.png";
-ObjectIcons.icons["DirectionalLight"] = "editor/files/icons/lights/directional.png";
-ObjectIcons.icons["AmbientLight"] = "editor/files/icons/lights/ambient.png";
-ObjectIcons.icons["RectAreaLight"] = "editor/files/icons/lights/rectarea.png";
+ObjectIcons.icons["Sky"] = Editor.filePath + "icons/lights/sky.png";
+ObjectIcons.icons["SpotLight"] = Editor.filePath + "icons/lights/spot.png";
+ObjectIcons.icons["PointLight"] = Editor.filePath + "icons/lights/point.png";
+ObjectIcons.icons["HemisphereLight"] = Editor.filePath + "icons/lights/hemisphere.png";
+ObjectIcons.icons["DirectionalLight"] = Editor.filePath + "icons/lights/directional.png";
+ObjectIcons.icons["AmbientLight"] = Editor.filePath + "icons/lights/ambient.png";
+ObjectIcons.icons["RectAreaLight"] = Editor.filePath + "icons/lights/rectarea.png";
 
 //Cameras
-ObjectIcons.icons["PerspectiveCamera"] = "editor/files/icons/camera/prespective.png";
-ObjectIcons.icons["OrthographicCamera"] = "editor/files/icons/camera/orthographic.png";
+ObjectIcons.icons["PerspectiveCamera"] = Editor.filePath + "icons/camera/prespective.png";
+ObjectIcons.icons["OrthographicCamera"] = Editor.filePath + "icons/camera/orthographic.png";
 
 //Objects
-ObjectIcons.icons["SpineAnimation"] = "editor/files/icons/misc/spine.png";
-ObjectIcons.icons["Mesh"] = "editor/files/icons/models/cube.png";
-ObjectIcons.icons["SkinnedMesh"] = "editor/files/icons/misc/skeleton.png";
-ObjectIcons.icons["ParticleEmiter"] = "editor/files/icons/effects/particles.png";
-ObjectIcons.icons["Script"] = "editor/files/icons/script/script.png";
-ObjectIcons.icons["Sprite"] = "editor/files/icons/misc/image.png";
-ObjectIcons.icons["Text3D"] = "editor/files/icons/models/text.png";
-ObjectIcons.icons["Points"] = "editor/files/icons/models/points.png";
+ObjectIcons.icons["SpineAnimation"] = Editor.filePath + "icons/misc/spine.png";
+ObjectIcons.icons["Mesh"] = Editor.filePath + "icons/models/cube.png";
+ObjectIcons.icons["SkinnedMesh"] = Editor.filePath + "icons/misc/skeleton.png";
+ObjectIcons.icons["ParticleEmiter"] = Editor.filePath + "icons/effects/particles.png";
+ObjectIcons.icons["Script"] = Editor.filePath + "icons/script/script.png";
+ObjectIcons.icons["Sprite"] = Editor.filePath + "icons/misc/image.png";
+ObjectIcons.icons["Text3D"] = Editor.filePath + "icons/models/text.png";
+ObjectIcons.icons["Points"] = Editor.filePath + "icons/models/points.png";
 
 //Program
-ObjectIcons.icons["Program"] = "editor/files/icons/script/script.png";
-ObjectIcons.icons["Scene"] = "editor/files/icons/models/models.png";
+ObjectIcons.icons["Program"] = Editor.filePath + "icons/script/script.png";
+ObjectIcons.icons["Scene"] = Editor.filePath + "icons/models/models.png";
 
 //Audio
-ObjectIcons.icons["Audio"] = "editor/files/icons/misc/audio.png";
-ObjectIcons.icons["PositionalAudio"] = "editor/files/icons/misc/audio_positional.png";
+ObjectIcons.icons["Audio"] = Editor.filePath + "icons/misc/audio.png";
+ObjectIcons.icons["PositionalAudio"] = Editor.filePath + "icons/misc/audio_positional.png";
 
 //Physics
-ObjectIcons.icons["Physics"] = "editor/files/icons/misc/physics.png";
+ObjectIcons.icons["Physics"] = Editor.filePath + "icons/misc/physics.png";
 
 //Others
-ObjectIcons.icons["CubeCamera"] = "editor/files/icons/misc/probe.png";
-ObjectIcons.icons["Bone"] = "editor/files/icons/misc/bone.png";
-ObjectIcons.icons["Group"] = "editor/files/icons/effects/container.png";
+ObjectIcons.icons["CubeCamera"] = Editor.filePath + "icons/misc/probe.png";
+ObjectIcons.icons["Bone"] = Editor.filePath + "icons/misc/bone.png";
+ObjectIcons.icons["Group"] = Editor.filePath + "icons/effects/container.png";
 
 //Get icon path from object type
 ObjectIcons.get = function(type)

@@ -2,7 +2,7 @@
 
 function RenderSettingsTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Render", "editor/files/icons/misc/scene.png");
+	TabElement.call(this, parent, closeable, container, index, "Render", Editor.filePath + "icons/misc/scene.png");
 
 	this.element.style.overflow = "auto";
 

@@ -5,7 +5,7 @@ function TextureAsset(parent)
 	Asset.call(this, parent);
 
 	this.texture = null;
-	this.setIcon(Interface.fileDir + "icons/misc/image.png");
+	this.setIcon(Editor.filePath + "icons/misc/image.png");
 
 	//Self pointer
 	var self = this;

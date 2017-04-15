@@ -5,7 +5,7 @@ function FontAsset(parent)
 	Asset.call(this, parent);
 
 	this.font = null;
-	this.setIcon(Interface.fileDir + "icons/misc/font.png");
+	this.setIcon(Editor.filePath + "icons/misc/font.png");
 	
 	//Self pointer
 	var self = this;

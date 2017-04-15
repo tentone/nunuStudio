@@ -148,6 +148,11 @@ include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/quickhull.js");
 
+include("editor/style.css");
+
+include("editor/theme/Theme.js");
+include("editor/theme/ThemeDark.js");
+
 include("editor/ui/element/Bar.js");
 include("editor/ui/element/Button.js");
 include("editor/ui/element/Text.js");
@@ -191,11 +196,6 @@ include("editor/ui/asset/MaterialAsset.js");
 include("editor/ui/asset/TextureAsset.js");
 include("editor/ui/asset/FontAsset.js");
 include("editor/ui/asset/AudioAsset.js");
-
-include("editor/files/style/editor.css");
-
-include("editor/theme/Theme.js");
-include("editor/theme/ThemeDark.js");
 
 include("editor/ui/tab/ScriptEditor.js");
 include("editor/ui/tab/SceneEditor.js");
@@ -758,14 +758,14 @@ Editor.updateObjectPanel = function()
 //Create default resouces to be used when creating new objects
 Editor.createDefaultResouces = function()
 {
-	Editor.defaultImage = new Image("editor/files/default.png");
-	Editor.defaultFont = new Font("editor/files/default.json");
-	Editor.defaultAudio = new Audio("editor/files/default.mp3");
+	Editor.defaultImage = new Image(Editor.filePath + "default.png");
+	Editor.defaultFont = new Font(Editor.filePath + "default.json");
+	Editor.defaultAudio = new Audio(Editor.filePath + "default.mp3");
 
 	Editor.defaultTexture = new Texture(Editor.defaultImage);
 	Editor.defaultTexture.name = "default";
 
-	Editor.defaultTextureParticle = new Texture(new Image("editor/files/particle.png"));
+	Editor.defaultTextureParticle = new Texture(new Image(Editor.filePath + "particle.png"));
 	Editor.defaultTextureParticle.name = "particle";
 
 	Editor.defaultMaterial = new THREE.MeshStandardMaterial({roughness: 0.6, metalness: 0.2});

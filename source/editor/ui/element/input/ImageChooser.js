@@ -13,7 +13,7 @@ function ImageChooser(parent)
 	this.alpha = document.createElement("img");
 	this.alpha.style.visibility = "inherit";
 	this.alpha.style.position = "absolute";
-	this.alpha.src = "editor/files/alpha.png";
+	this.alpha.src = Editor.filePath + "alpha.png";
 	this.element.appendChild(this.alpha);
 
 	//Image

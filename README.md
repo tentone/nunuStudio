@@ -112,27 +112,27 @@
  app.setCanvas(canvas);
  app.load("app.isp");
  app.run();
- 
- //On exit callback
- app.onExit(function()
- {
- 	//TODO <Exit callback>
- });
 
  //Resize app
  function resize()
  {
  	app.resize();
  }
+
+ //On exit callback (optional)
+ app.onExit(function()
+ {
+ 	//TODO <Exit callback>
+ });
  
- //Toggle fullscreen
+ //Toggle fullscreen (optional)
  function toggleFullscreen()
  {
  	app.setFullscreen();
  	app.resize();
  }
  
- //Toggle VR mode (if available)
+ //Toggle VR mode (optional, if available)
  function toggleVR()
  {
  	if(app.vrAvailable())
@@ -143,7 +143,7 @@
 ```
 
 ### Tech
-nunuStudio uses a number of open source projects to work properly
+nunuStudio is built on top of a number of open source projects
 - NWJS
 	- nwjs.io
 - three.js
@@ -171,12 +171,14 @@ nunuStudio uses a number of open source projects to work properly
 	- Download the last release from the github repository and unzip it
 	- Run the start.sh or start.bat file (depending on your OS)
 - There is also a web version available on the project webpage
-	- The web version cant export projects
+	- The web version cannot export desktop projects
 
 ### Building
-- To build nunuStudio Java, NodeJS and Windows are required
-- After installing the required software run the build.bat file inside the build/tools folder
-- The building system generates builds for the runtime and for the editor
+- nunuStudio uses a custom solution for module management
+- To build nunuStudio Java and NodeJS are required
+	- Javascript is optimized and minified using Google closure
+	- Documentation generation requires YuiDocs to be installed (npm -g install yuidocjs)
+- The building system generates minified builds for the runtime and for the editor
 
 ### License
 - nunuStudio uses a MIT license (Available on GitHub page)
