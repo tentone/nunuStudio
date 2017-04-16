@@ -39,7 +39,7 @@
 /**
  * Data encoding (MP3, JPEG, MP4, ...).
  * 
- * Indicated how the data is encoded.
+ * Indicates how the data is encoded.
  * 
  * @property encoding
  * @type {String, ArrayBuffer, ...}
@@ -75,7 +75,7 @@ Resource.prototype.toJSON = function(meta)
 	data.name = this.name;
 	data.uuid = this.uuid;
 	data.type = this.type;
-
 	data.format = this.format;
 	data.encoding = this.encoding;
+	data.data = this.data;
 };

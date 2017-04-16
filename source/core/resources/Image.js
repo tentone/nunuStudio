@@ -11,7 +11,7 @@
  * @constructor
  * @extends {Resource}
  * @module Resources
- * @param {String} url URL to image
+ * @param {String} data Can be URL to image, ArrayBuffer for TGA data or base64 encoded data.
  */
 function Image(url)
 {
@@ -28,10 +28,7 @@ function Image(url)
 		//Arraybuffer data
 		if(url instanceof window.ArrayBuffer)
 		{
-			var canvas = new THREE.TGALoader().parse(url);
-			this.encoding = "jpeg";
-			this.format = "base64";
-			this.data = canvas.toDataURL("image/jpeg", 1.0);
+			this.loadTGAData(url);
 		}
 		//Base64 data
 		else if(url.startsWith("data:image"))
@@ -39,6 +36,11 @@ function Image(url)
 			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
 			this.data = url;
+
+			if(this.encoding !== "gif")
+			{
+				this.encodeData();
+			}
 		}
 		//URL
 		else
@@ -52,10 +54,7 @@ function Image(url)
 			}
 			else if(this.encoding === "tga")
 			{
-				var canvas = new THREE.TGALoader().parse(FileSystem.readFileArrayBuffer(url));
-				this.encoding = "jpeg";
-				this.format = "base64";
-				this.data = canvas.toDataURL("image/jpeg", 1.0);
+				this.loadTGAData(FileSystem.readFileArrayBuffer(url));
 			}
 			else
 			{
@@ -91,49 +90,63 @@ Image.fileIsImage = function(file)
 };
 
 /**
- * Encode image data to jpeg or png in base64 format.
+ * Load .tga file from ArrayBuffer data.
  *
- * Called automatically when serializing the image object.
+ * After loading data is converted to JPEG format and stored in base64 encoding.
+ * 
+ * @method loadTGAData
+ */
+Image.loadTGAData = function(data)
+{
+	var canvas = new THREE.TGALoader().parse(data);
+	this.encoding = "jpeg";
+	this.format = "base64";
+	this.data = canvas.toDataURL("image/jpeg", 1.0);
+}
+
+/**
+ * Compresses image data to JPEG or PNG and stores in base64 encoding.
+ *
+ * If the image has transparency it is stored as PNG otherwise the image is stored in JPEG with 1.0 quality.
+ *
+ * Can be used to compress data and save space.
  * 
  * @method encodeData
  */
 Image.prototype.encodeData = function()
 {
-	if(this.format === "url")
+	var image = document.createElement("img");
+	image.src = this.data;
+
+	var canvas = document.createElement("canvas");
+	canvas.width = image.width;
+	canvas.height = image.height;
+
+	var context = canvas.getContext("2d");
+	context.drawImage(image, 0, 0, image.width, image.height);
+
+	var transparent = false;
+	var data = context.getImageData(0, 0, image.width, image.height).data;
+	for(var i = 3; i < data.length; i += 4)
 	{
-		var image = document.createElement("img");
-		image.src = this.data;
-
-		var canvas = document.createElement("canvas");
-		canvas.width = image.width;
-		canvas.height = image.height;
-
-		var context = canvas.getContext("2d");
-		context.drawImage(image, 0, 0, image.width, image.height);
-
-		var transparent = false;
-		var data = context.getImageData(0, 0, image.width, image.height).data;
-		for(var i = 3; i < data.length; i += 4)
+		if(data[i] !== 255)
 		{
-			if(data[i] !== 255)
-			{
-				transparent = true;
-				break;
-			}
+			transparent = true;
+			break;
 		}
+	}
 
-		if(transparent)
-		{
-			this.format = "base64";
-			this.encoding = "png";
-			this.data = canvas.toDataURL("image/png");
-		}
-		else
-		{
-			this.format = "base64";
-			this.encoding = "jpeg";
-			this.data = canvas.toDataURL("image/jpeg", 1.0);
-		}
+	if(transparent)
+	{
+		this.format = "base64";
+		this.encoding = "png";
+		this.data = canvas.toDataURL("image/png");
+	}
+	else
+	{
+		this.format = "base64";
+		this.encoding = "jpeg";
+		this.data = canvas.toDataURL("image/jpeg", 1.0);
 	}
 };
 
@@ -152,8 +165,11 @@ Image.prototype.toJSON = function(meta)
 	{
 		return meta.images[this.uuid];
 	}
-	
-	this.encodeData();
+
+	if(this.format === "url")
+	{
+		this.encodeData();
+	}
 
 	var data = {};
 	data.name = this.name;

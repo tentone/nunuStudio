@@ -2041,8 +2041,8 @@
             "extends": "{Resource}",
             "params": [
                 {
-                    "name": "url",
-                    "description": "URL to image",
+                    "name": "data",
+                    "description": "Can be URL to image, ArrayBuffer for TGA data or base64 encoded data.",
                     "type": "String"
                 }
             ]
@@ -7395,7 +7395,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 69,
+            "line": 68,
             "description": "Check if a file name refers to a supported binary image file.",
             "itemtype": "method",
             "name": "fileIsImage",
@@ -7416,8 +7416,17 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 93,
-            "description": "Encode image data to jpeg or png in base64 format.\n\nCalled automatically when serializing the image object.",
+            "line": 92,
+            "description": "Load .tga file from ArrayBuffer data.\n\nAfter loading data is converted to JPEG format and stored in base64 encoding.",
+            "itemtype": "method",
+            "name": "loadTGAData",
+            "class": "Image",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\Image.js",
+            "line": 107,
+            "description": "Compresses image data to JPEG or PNG and stores in base64 encoding.\n\nIf the image has transparency it is stored as PNG otherwise the image is stored in JPEG with 1.0 quality.\n\nCan be used to compress data and save space.",
             "itemtype": "method",
             "name": "encodeData",
             "class": "Image",
@@ -7425,7 +7434,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 140,
+            "line": 153,
             "description": "Serialize Image resource to JSON.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7486,7 +7495,7 @@
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
             "line": 39,
-            "description": "Data encoding (MP3, JPEG, MP4, ...).\n\nIndicated how the data is encoded.",
+            "description": "Data encoding (MP3, JPEG, MP4, ...).\n\nIndicates how the data is encoded.",
             "itemtype": "property",
             "name": "encoding",
             "type": "{String, ArrayBuffer, ...}",

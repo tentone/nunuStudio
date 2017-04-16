@@ -178,7 +178,7 @@
 										<div class="args">
 											<span class="paren">(</span><ul class="args-list inline commas">
 												<li class="arg">
-														<code>url</code>
+														<code>data</code>
 												</li>
 											</ul><span class="paren">)</span>
 										</div>
@@ -207,12 +207,12 @@
 								
 											<ul class="params-list">
 												<li class="param">
-														<code class="param-name">url</code>
+														<code class="param-name">data</code>
 														<span class="type">String</span>
 								
 								
 													<div class="param-description">
-														<p>URL to image</p>
+														<p>Can be URL to image, ArrayBuffer for TGA data or base64 encoded data.</p>
 								
 													</div>
 								
@@ -249,6 +249,10 @@
 															<span class="flag static">static</span>
 													</li>
 													<li class="index-item method">
+														<a href="#method_loadTGAData">loadTGAData</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_toJSON">toJSON</a>
 						
 													</li>
@@ -283,8 +287,9 @@
 												</div>
 											
 												<div class="description">
-													<p>Encode image data to jpeg or png in base64 format.</p>
-											<p>Called automatically when serializing the image object.</p>
+													<p>Compresses image data to JPEG or PNG and stores in base64 encoding.</p>
+											<p>If the image has transparency it is stored as PNG otherwise the image is stored in JPEG with 1.0 quality.</p>
+											<p>Can be used to compress data and save space.</p>
 											
 												</div>
 											
@@ -352,6 +357,35 @@
 											
 														</div>
 													</div>
+											
+											</div>
+											<div id="method_loadTGAData" class="method item">
+												<h3 class="name"><code>loadTGAData</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Load .tga file from ArrayBuffer data.</p>
+											<p>After loading data is converted to JPEG format and stored in base64 encoding.</p>
+											
+												</div>
+											
+											
 											
 											</div>
 											<div id="method_toJSON" class="method item">
