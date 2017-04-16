@@ -315,7 +315,7 @@ Editor.initialize = function()
 	//Check WebGL Support
 	if(!Nunu.webglAvailable())
 	{
-		alert("WebGL is not supported or its disabled!\nnunuStudio cannot run!");
+		alert("WebGL is not supported or is disabled!\nnunuStudio cannot run!");
 
 		if(Nunu.runningOnDesktop())
 		{
@@ -711,7 +711,7 @@ Editor.updateAssetExplorer = function()
 	var materials = ObjectUtils.getMaterials(Editor.program, Editor.program.materials);
 	for(var i in materials)
 	{
-		var file = new MaterialAsset(Interface.assetExplorer.element);
+		var file = new MaterialAsset(Interface.assetExplorer.assets);
 		file.setMaterial(materials[i]);
 		Interface.assetExplorer.add(file);
 	}
@@ -720,7 +720,7 @@ Editor.updateAssetExplorer = function()
 	var textures = ObjectUtils.getTextures(Editor.program, Editor.program.textures);
 	for(var i in textures)
 	{
-		var file = new TextureAsset(Interface.assetExplorer.element);
+		var file = new TextureAsset(Interface.assetExplorer.assets);
 		file.setTexture(textures[i]);
 		Interface.assetExplorer.add(file);
 	}
@@ -729,7 +729,7 @@ Editor.updateAssetExplorer = function()
 	var fonts = ObjectUtils.getFonts(Editor.program, Editor.program.fonts);
 	for(var i in fonts)
 	{
-		var file = new FontAsset(Interface.assetExplorer.element);
+		var file = new FontAsset(Interface.assetExplorer.assets);
 		file.setFont(fonts[i]);
 		Interface.assetExplorer.add(file);
 	}
@@ -738,7 +738,7 @@ Editor.updateAssetExplorer = function()
 	var audio = ObjectUtils.getAudio(Editor.program, Editor.program.audio);
 	for(var i in audio)
 	{
-		var file = new AudioAsset(Interface.assetExplorer.element);
+		var file = new AudioAsset(Interface.assetExplorer.assets);
 		file.setAudio(audio[i]);
 		Interface.assetExplorer.add(file);
 	}

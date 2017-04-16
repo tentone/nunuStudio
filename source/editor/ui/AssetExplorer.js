@@ -5,11 +5,19 @@ function AssetExplorer(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
-	this.element.style.overflow = "auto";
+	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
+
+	//Assets
+	this.assets = document.createElement("div");
+	this.assets.style.position = "absolute";
+	this.assets.style.overflow = "auto";
+	this.assets.style.top = "20px";
+	this.assets.style.width = "100%";
+	this.element.appendChild(this.assets);
 
 	//Drop event
 	this.element.ondrop = function(event)
@@ -43,7 +51,216 @@ function AssetExplorer(parent)
 		}
 	};
 
-	//Element atributes
+	//Bar
+	this.bar = new Bar(this.element);
+	this.bar.element.style.width = "100%";
+	this.bar.element.style.height = "20px";
+
+	//Import Files
+	var menu = new DropdownMenu(this.bar.element);
+	menu.setText("Import");
+	menu.size.set(100, 20);
+	menu.position.set(0,0);
+
+	//3D Models Loader
+	menu.addOption("3D Models", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{	
+			if(files.length > 0)
+			{
+				Editor.loadGeometry(files[0]);
+			}
+		}, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x, .js");
+	}, Editor.filePath + "icons/models/models.png");
+
+	//Textures menu
+	var texture = menu.addMenu("Texture", Editor.filePath + "icons/misc/image.png");
+
+	//Image texture
+	texture.addOption("Texture", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			if(files.length > 0)
+			{
+				Editor.loadTexture(files[0]);
+			}
+		}, "image/*");
+	}, Editor.filePath + "icons/misc/image.png");
+
+	//Cube texture
+	texture.addOption("Cube Texture", function()
+	{
+		var texture = new CubeTexture([Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage]);
+		texture.name = "cube";
+		Editor.program.addTexture(texture);
+
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/cube.png");
+
+	//Canvas texture
+	texture.addOption("Canvas Texture", function()
+	{
+		var texture = new CanvasTexture(512, 512);
+		texture.name = "canvas";
+		Editor.program.addTexture(texture);
+
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/canvas.png");
+
+	//Video texture
+	texture.addOption("Video Texture", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			if(files.length > 0)
+			{
+				Editor.loadVideoTexture(files[0]);
+			}
+		}, "video/*");
+	}, Editor.filePath + "icons/misc/video.png");
+
+	//Webcam texture
+	texture.addOption("Webcam Texture", function()
+	{
+		var texture = new WebcamTexture();
+		texture.name = "webcam";
+		Editor.program.addTexture(texture);
+
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/hw/webcam.png");
+
+	//Load Font
+	menu.addOption("Font", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			if(files.length > 0)
+			{
+				Editor.loadFont(files[0]);
+			}
+		}, ".json, .ttf, .otf");
+	}, Editor.filePath + "icons/misc/font.png");
+
+	//Spine Animation
+	if(Nunu.runningOnDesktop())
+	{
+		menu.addOption("Spine Animation", function()
+		{
+			FileSystem.chooseFile(function(files)
+			{
+				if(files.length > 0)
+				{
+					var file = files[0].path;
+
+					var json = FileSystem.readFile(file);
+					var atlas = FileSystem.readFile(file.replace("json", "atlas"));
+					var path = file.substring(0, file.lastIndexOf("\\"));
+					
+					var animation = new SpineAnimation(json, atlas, path);
+					animation.name = FileSystem.getFileName(file);
+
+					Editor.addToScene(animation);
+					Editor.updateObjectViews();
+				}
+			}, ".json");
+		}, Editor.filePath + "icons/misc/spine.png");
+	}
+
+	//Load audio file
+	menu.addOption("Audio", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			if(files.length > 0)
+			{
+				Editor.loadAudio(files[0]);
+			}
+		}, "audio/*");
+	}, Editor.filePath + "icons/misc/audio.png");
+	
+	//Create material
+	var material = new DropdownMenu(this.bar.element);
+	material.setText("Material");
+	material.size.set(100, 20);
+	material.position.set(100,0);
+
+	material.addOption("Standard material", function()
+	{
+		var material = new THREE.MeshStandardMaterial();
+		material.name = "standard";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+
+	material.addOption("Phong material", function()
+	{
+		var material = new THREE.MeshPhongMaterial();
+		material.name = "phong";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+	
+	material.addOption("Basic material", function()
+	{
+		var material = new THREE.MeshBasicMaterial();
+		material.name = "basic";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+
+	material.addOption("Sprite material", function()
+	{
+		var material = new THREE.SpriteMaterial({color: 0xffffff});
+		material.name = "sprite";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/image.png");
+
+	material.addOption("Toon material", function()
+	{
+		var material = new THREE.MeshToonMaterial();
+		material.name = "toon";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+
+	material.addOption("Lambert material", function()
+	{
+		var material = new THREE.MeshLambertMaterial();
+		material.name = "lambert";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+	
+	var others = material.addMenu("Others");
+
+	others.addOption("Shader material", function()
+	{
+		var material = new THREE.ShaderMaterial();
+		material.name = "shader";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/script/script.png");
+
+	others.addOption("Normal material", function()
+	{
+		var material = new THREE.MeshNormalMaterial();
+		material.name = "normal";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+	
+	others.addOption("Depth material", function()
+	{
+		var material = new THREE.MeshDepthMaterial();
+		material.name = "depth";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+	
+	//Attributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
@@ -69,7 +286,7 @@ AssetExplorer.prototype.clear = function()
 //Add file to explorer
 AssetExplorer.prototype.add = function(file)
 {
-	file.setParent(this.element);
+	file.setParent(this.assets);
 	file.size.copy(this.filesSize);
 	file.updateInterface();
 
@@ -95,7 +312,7 @@ AssetExplorer.prototype.updateInterface = function()
 		this.element.style.display = "block";
 
 		//Asset position
-		var filesRow = Math.floor(this.files.length / ((this.files.length * (this.filesSize.x+this.filesSpacing)) / this.size.x));
+		var filesRow = Math.floor(this.files.length / ((this.files.length * (this.filesSize.x + this.filesSpacing)) / this.size.x));
 		for(var i = 0; i < this.files.length; i++)
 		{
 			var row = Math.floor(i / filesRow);
@@ -105,6 +322,9 @@ AssetExplorer.prototype.updateInterface = function()
 			this.files[i].position.y = (row * this.filesSize.y) + ((row + 1) * this.filesSpacing);
 			this.files[i].updateInterface();
 		}
+
+		//Asset
+		this.assets.style.height = (this.size.y - 20) + "px";
 
 		//Element
 		this.element.style.top = this.position.y + "px";

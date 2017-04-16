@@ -19,8 +19,8 @@ function Asset(parent)
 	this.icon.style.width = "30%";
 	this.icon.style.height = "30%";
 	this.icon.style.pointerEvents = "none";
-	this.icon.style.opacity = 0.5;
-	this.icon.style.zIndex = 1;
+	this.icon.style.opacity = "0.5";
+	this.icon.style.zIndex = "1";
 	this.element.appendChild(this.icon);
 
 	//Text
