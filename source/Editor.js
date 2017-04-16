@@ -1459,8 +1459,6 @@ Editor.setFullscreen = function(fullscreen, element)
 	}
 };
 
-var included = [];
-
 //Include javacript or css file in project
 function include(file, onload)
 {
@@ -1475,7 +1473,6 @@ function include(file, onload)
 			js.onload = onload;
 		}
 
-		included[file] = js;
 		document.body.appendChild(js);
 	}
 	else if(file.endsWith(".css"))
@@ -1484,7 +1481,6 @@ function include(file, onload)
 		css.href = file;
 		css.rel = "stylesheet";
 
-		included[file] = css;
 		document.body.appendChild(css);
 	}
 	else if(window.require !== undefined)
@@ -1514,6 +1510,7 @@ function include(file, onload)
 				}
 				catch(e){}
 			}
+			
 		}
 	}
 }

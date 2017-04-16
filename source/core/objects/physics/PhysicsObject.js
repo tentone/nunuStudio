@@ -16,12 +16,13 @@
  */
 
 /**
- * cannon.js Body object
+ * Physiscs body
  * @attribute body
  * @type {CANNON.Body}
  */
+
 /**
- * cannon.js world
+ * Physics world
  * @attribute world
  * @type {CANNON.World}
  */
@@ -35,6 +36,28 @@ function PhysicsObject()
 	this.body = new CANNON.Body();
 	this.body.type = CANNON.Body.DYNAMIC;
 	this.body.mass = 1.0;
+
+	this.body.material = new CANNON.Material("default");
+	
+	/*
+	[position] Vec3 optional
+	[velocity] Vec3 optional
+	this.torque = new Vec3();
+	[angularVelocity] Vec3 optional
+	[quaternion] Quaternion optional
+	[mass] Number optional
+	[material] Material optional
+	[type] Number optional
+	[linearDamping=0.01] Number optional
+	[angularDamping=0.01] Number optional
+	[allowSleep=true] Boolean optional
+	[sleepSpeedLimit=0.1] Number optional
+	[sleepTimeLimit=1] Number optional
+	[collisionFilterGroup=1] Number optional
+	[collisionFilterMask=1] Number optional
+	[fixedRotation=false] Boolean optional
+	[shape]
+	*/
 
 	this.world = null;
 }
@@ -50,10 +73,16 @@ PhysicsObject.prototype = Object.create(THREE.Object3D.prototype);
  */
 PhysicsObject.prototype.initialize = function()
 {
+	/*var position = this.getWorldPosition();
+	this.body.position.copy(position);
+
+	var quaternion = this.getWorldQuaternion();
+	this.body.quaternion.copy(quaternion);*/
+	
 	this.body.position.copy(this.position);
 	this.body.quaternion.copy(this.quaternion);
-	
-	//Get physics world
+
+	//Physics world
 	var node = this;
 	while(node.parent !== null)
 	{
