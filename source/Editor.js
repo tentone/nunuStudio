@@ -307,7 +307,9 @@ Editor.initialize = function()
 			var entry = parameters[i].split("=")[1];
 			if(entry !== undefined)
 			{
-				Editor.args.push(unescape(entry));
+				entry = unescape(entry);
+				entry = entry.replace(new RegExp("\"", "g"), "");
+				Editor.args.push(entry);
 			}
 		}
 	}
@@ -319,7 +321,7 @@ Editor.initialize = function()
 
 		if(Nunu.runningOnDesktop())
 		{
-			Editor.exit();
+			Settings.store();
 			Editor.gui.App.closeAllWindows();
 			Editor.gui.App.quit();
 		}
@@ -334,11 +336,23 @@ Editor.initialize = function()
 		return false;
 	};
 
-	//If running on browser disable some key combinations
-	if(!Nunu.runningOnDesktop())
+	if(Nunu.runningOnDesktop())
 	{
+		//Handle window close event
+		Editor.gui.Window.get().on("close", function()
+		{
+			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
+			{
+				Settings.store();
+				Editor.gui.App.closeAllWindows();
+				Editor.gui.App.quit();
+			}
+		});
+	}
+	else
+	{
+		//Prevent some key combinations
 		var allowedKeys = [67, 86, 65, 88];
-
 		document.onkeydown = function(event)
 		{
 			//If F1-F12 or CTRL+Key prevent default
@@ -347,27 +361,11 @@ Editor.initialize = function()
 				event.preventDefault();
 			}
 		};
-	}
 
-	//Set windows close event
-	if(Editor.gui !== undefined)
-	{
-		//Close event
-		Editor.gui.Window.get().on("close", function()
-		{
-			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
-			{
-				Editor.exit();
-				Editor.gui.App.closeAllWindows();
-				Editor.gui.App.quit();
-			}
-		});
-	}
-	else
-	{
+		//Store settings when exiting the page
 		window.onbeforeunload = function(event)
 		{
-			Editor.exit();
+			Settings.store();
 		};
 	}
 
@@ -1461,11 +1459,7 @@ Editor.setFullscreen = function(fullscreen, element)
 	}
 };
 
-//Exit editor
-Editor.exit = function()
-{
-	Settings.store();
-};
+var included = [];
 
 //Include javacript or css file in project
 function include(file, onload)
@@ -1480,6 +1474,8 @@ function include(file, onload)
 		{
 			js.onload = onload;
 		}
+
+		included[file] = js;
 		document.body.appendChild(js);
 	}
 	else if(file.endsWith(".css"))
@@ -1487,6 +1483,8 @@ function include(file, onload)
 		var css = document.createElement("link");
 		css.href = file;
 		css.rel = "stylesheet";
+
+		included[file] = css;
 		document.body.appendChild(css);
 	}
 	else if(window.require !== undefined)
