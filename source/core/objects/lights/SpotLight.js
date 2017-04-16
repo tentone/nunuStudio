@@ -34,7 +34,10 @@ SpotLight.prototype = Object.create(THREE.SpotLight.prototype);
 
 /**
  * SpotLight looks to the target object coordinates.
+ * 
  * The target object should always be at the scene root.
+ *
+ * @method setTarget
  * @param {Object3D} target Target object.
  */
 SpotLight.prototype.setTarget = function(target)
@@ -43,7 +46,8 @@ SpotLight.prototype.setTarget = function(target)
 }
 
 /**
- * Update light shadow map atributtes at runtime
+ * Update light shadow map atributtes at runtime.
+ * 
  * @method updateShadowMap
  */
 SpotLight.prototype.updateShadowMap = function()
@@ -55,6 +59,8 @@ SpotLight.prototype.updateShadowMap = function()
 
 /**
  * Serialize SpotLight data to JSON.
+ *
+ * @method toJSON
  * @param {Object} meta Meta.
  */
 SpotLight.prototype.toJSON = function(meta)

@@ -180,7 +180,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Runtime",
             "name": "Runtime",
-            "description": "NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere"
+            "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages."
         },
         {
             "displayName": "Script",

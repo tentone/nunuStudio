@@ -160,8 +160,9 @@ SpineAnimation.prototype.setAnimation = function(track, name)
 };
 
 /**
- * Get skins in this animation.
- * 
+ * Get skins available for this animation.
+ *
+ * @method getSkins
  * @return {[type]} [description]
  */
 SpineAnimation.prototype.getSkins = function()
@@ -226,7 +227,8 @@ SpineAnimation.prototype.updateGeometry = function()
 
 /**
  * Create JSON for spine animation.
- * 
+ *
+ * @method toJSON
  * @param {Object} meta
  * @return {Object} json
  */

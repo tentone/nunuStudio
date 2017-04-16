@@ -195,7 +195,8 @@ VideoTexture.prototype.dispose = function()
 
 /**
  * Create Video texture json description.
- * 
+ *
+ * @method toJSON
  * @param {Object} meta
  * @return {Object} json
  */

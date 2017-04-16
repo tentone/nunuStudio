@@ -458,7 +458,7 @@ FileSystem.fileExists = function(file)
  * 
  * @method getFileName
  * @param {String} file File path
- * @returns {String} File name without path and extension
+ * @return {String} File name without path and extension
  */
 FileSystem.getFileName = function(file)
 {
@@ -480,7 +480,7 @@ FileSystem.getFileName = function(file)
  *
  * @method getNameWithoutExtension
  * @param {String} file File path
- * @returns {String}
+ * @return {String}
  */
 FileSystem.getNameWithoutExtension = function(file)
 {

@@ -88,7 +88,10 @@ include("core/utils/BufferUtils.js");
 include("core/utils/Mesh2shape.js");
 
 /**
- * NunuApp is used to load .isp files into a webpage, it controls all the runtime elements necessary to embed nunu apps anywhere
+ * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.
+ *
+ * .isp files can be loaded directly into webpages.
+ * 
  * @class NunuApp
  * @module Runtime
  * @constructor
@@ -136,7 +139,6 @@ include("core/utils/Mesh2shape.js");
  * @type {boolean}
  * @default false if a canvas is provided, else true
  */
-//Nunu app contructor
 function NunuApp(canvas)
 {
 	//Program and renderer
@@ -445,7 +447,8 @@ NunuApp.prototype.toggleVR = function()
 
 /**
  * Set fullscreen mode
- * 
+ *
+ * @method setFullscreen
  * @param {boolean} fullscreen If true go to fullscren if false exit fullscreen mode
  * @param {DOM} element DOM element to go fullscren by default the rendering canvas is used
  */

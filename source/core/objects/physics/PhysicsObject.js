@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Wrapper for cannon.js Body physics objects.
+ * Wrapper for cannon.js physics objects.
  * 
  * Physics coordinates are always calculated in local space, they should always be placed directly inside the scene or inside containers without any offset.
  *
@@ -16,7 +16,24 @@
  */
 
 /**
- * Physiscs body
+ * Physics body contains the following attributes, provived by cannon.js
+ *  - position Vec3
+ *  - velocity Vec3
+ *  - torque Vec3
+ *  - angularVelocity Vec3
+ *  - quaternion Quaternion
+ *  - mass Number
+ *  - material Material
+ *  - type Number
+ *  - linearDamping Number
+ *  - angularDamping Number
+ *  - allowSleep Boolean
+ *  - sleepSpeedLimit Number
+ *  - sleepTimeLimit Number
+ *  - collisionFilterGroup Number
+ *  - collisionFilterMask Number
+ *  - fixedRotation Boolean
+ *  - shape Array
  * @attribute body
  * @type {CANNON.Body}
  */
@@ -38,26 +55,6 @@ function PhysicsObject()
 	this.body.mass = 1.0;
 
 	this.body.material = new CANNON.Material("default");
-	
-	/*
-	[position] Vec3 optional
-	[velocity] Vec3 optional
-	this.torque = new Vec3();
-	[angularVelocity] Vec3 optional
-	[quaternion] Quaternion optional
-	[mass] Number optional
-	[material] Material optional
-	[type] Number optional
-	[linearDamping=0.01] Number optional
-	[angularDamping=0.01] Number optional
-	[allowSleep=true] Boolean optional
-	[sleepSpeedLimit=0.1] Number optional
-	[sleepTimeLimit=1] Number optional
-	[collisionFilterGroup=1] Number optional
-	[collisionFilterMask=1] Number optional
-	[fixedRotation=false] Boolean optional
-	[shape]
-	*/
 
 	this.world = null;
 }
@@ -140,7 +137,8 @@ PhysicsObject.prototype.addShape = function(shape)
 /**
  * Create JSON for object.
  * Need to backup material and geometry and set to undefined to avoid it being stored.
- * 
+ *
+ * @method toJSON
  * @param {Object} meta
  * @return {Object} json
  */

@@ -259,7 +259,8 @@ LeapMotion.prototype.checkGesture = function(gesture)
 
 /**
  * Check if hand is in pose.
- * 
+ *
+ * @method checkPose
  * @param {Number} pose Pose to be checked
  * @return {boolean} True is hand is in this pose
  */
@@ -277,8 +278,8 @@ LeapMotion.prototype.checkPose = function(pose)
  * 
  * Can be set to HDM or Desktop mode.
  * 
- * @param {Number} mode Mode
  * @method setMode
+ * @param {Number} mode Mode
  */
 LeapMotion.prototype.setMode = function(mode)
 {

@@ -129,7 +129,8 @@ Font.prototype.loadTTF = function()
 
 /**
  * Generate font shapes used to create 3D geometries.
- * 
+ *
+ * @method generateShapes
  * @param {String} text
  * @param {Number} size
  * @param {Number} divisions
@@ -288,7 +289,8 @@ Font.prototype.generateShapes = function(text, size, divisions)
  * Serialize font resource to json.
  *
  * Font data is stored as Base64 is present in a binary format, or JSON otherwise.
- * 
+ *
+ * @method toJSON
  * @param {Object} meta
  * @return {Object} json
  */

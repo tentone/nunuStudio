@@ -360,7 +360,8 @@ Mouse.updatePosition = function(x, y, xDiff, yDiff)
  * Update a mouse button.
  * 
  * Automatically called by the runtime.
- * 
+ *
+ * @method updateKey
  * @param {Number} button
  * @param {Number} action
  */

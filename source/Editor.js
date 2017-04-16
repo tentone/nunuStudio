@@ -2,6 +2,9 @@
 
 function Editor(){}
 
+Editor.filePath = "editor\\files\\";
+Editor.NWJSPath = "..\\nwjs\\";
+
 //Runtime
 include("Nunu.js");
 
@@ -283,9 +286,6 @@ Editor.SELECT = 0;
 Editor.MOVE = 1;
 Editor.SCALE = 2;
 Editor.ROTATE = 3;
-
-Editor.filePath = "editor\\files\\";
-Editor.NWJSPath = "..\\nwjs\\";
 
 //Initialize
 Editor.initialize = function()

@@ -141,7 +141,8 @@ Image.prototype.encodeData = function()
  * Serialize Image resource to JSON.
  *
  * If image is stored as URL it is converter to PNG or JPEG.
- * 
+ *
+ * @method toJSON
  * @param {Object} meta
  * @return {Object} json
  */
