@@ -21,7 +21,8 @@ console.log("-------------------------------------------------------------------
 console.log(" Joining files");
 var out = join(sourcePath, sourcePath + editorMain);
 writeFile(buildPath + "nunu.editor.js.temp", out.js);
-writeFile(buildPath + "nunu.editor.css", out.css);
+var css = compressCSS(out.css);
+writeFile(buildPath + "nunu.editor.css", css);
 console.log(" Optimizing with closure");
 closure("SIMPLE", "PRETTY_PRINT", "ECMASCRIPT5", "ECMASCRIPT5", buildPath + "nunu.editor.js.temp", buildPath + "nunu.editor.js");
 console.log(" Minifyng with closure");
@@ -94,6 +95,16 @@ function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
 			console.log("Error compiling with google closure, check if java is installed and try again.");
 		}
 	});
+}
+
+function compressCSS(code)
+{
+	return code.replace(/(\/\*([\s\S]*?)\*\/)/gm, "").replace(new RegExp("\n\n", "g"), "\n");
+}
+
+function removeJSComments(code)
+{
+	return code.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, "");
 }
 
 function join(path, main)

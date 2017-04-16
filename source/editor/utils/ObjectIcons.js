@@ -1,15 +1,10 @@
 "use strict";
 
-//List of object icon path by object type
 function ObjectIcons(){}
 
-ObjectIcons.path = Editor.filePath + "icons/";
-
-//Create icon map
+ObjectIcons.path = "editor/files/icons/";
+ObjectIcons.default = ObjectIcons.path + "misc/question.png";
 ObjectIcons.icons = [];
-
-//Default icon
-ObjectIcons.icons["Object3D"] = ObjectIcons.path + "misc/scene.png";
 
 //Devices
 ObjectIcons.icons["Kinect"] = ObjectIcons.path + "hw/kinect.png";
@@ -50,6 +45,7 @@ ObjectIcons.icons["PositionalAudio"] = ObjectIcons.path + "misc/audio_positional
 ObjectIcons.icons["Physics"] = ObjectIcons.path + "misc/physics.png";
 
 //Others
+ObjectIcons.icons["Object3D"] = ObjectIcons.path + "misc/scene.png";
 ObjectIcons.icons["CubeCamera"] = ObjectIcons.path + "misc/probe.png";
 ObjectIcons.icons["Bone"] = ObjectIcons.path + "misc/bone.png";
 ObjectIcons.icons["Group"] = ObjectIcons.path + "effects/container.png";
@@ -57,5 +53,5 @@ ObjectIcons.icons["Group"] = ObjectIcons.path + "effects/container.png";
 //Get icon path from object type
 ObjectIcons.get = function(type)
 {
-	return ObjectIcons.icons[type];
+	return ObjectIcons.icons[type] || ObjectIcons.default;
 };
