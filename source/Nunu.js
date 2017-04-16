@@ -1,18 +1,12 @@
-/**
- * Modules in this bundle
- * @license
- *
- * nunuStudio:
- *   license: MIT (http://opensource.org/licenses/MIT)
- *   author: Tentone <tentone@outlook.com>
- */
-
 "use strict";
 
 /**
- * Class used to store nunu version and timstamp used for development.
+ * nunuStudio
+ * MIT license (http://opensource.org/licenses/MIT)
+ *   
+ * Class used to store nunuStudio development version and timestamp.
  *
- * Also contains methods to check browser feature support.
+ * Contains methods to check browser feature support.
  * 
  * @class Nunu
  * @module Runtime
@@ -42,7 +36,7 @@ Nunu.VERSION = "V0.8.9.25 Alpha";
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201704160255";
+Nunu.TIMESTAMP = "201704161850";
 
 /**
  * Check if host supports WebVR and if there is a VR display available.

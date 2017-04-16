@@ -423,6 +423,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 /**
  * Rotates the object to face a point in world space.
  * @param {Vector3} vector A vector representing a position in world space.
+ * @method lookAt
  */
 
 /**

@@ -180,7 +180,8 @@ Text3D.prototype.dispose = function()
  * Create JSON for object.
  * 
  * Need to backup geometry and set to undefined to avoid it being stored.
- * 
+ *
+ * @method toJSON
  * @param {Object} meta
  * @return {Object} json
  */

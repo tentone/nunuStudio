@@ -63,7 +63,8 @@ function Resource()
 
 /**
  * Serialize resource to json.
- * 
+ *
+ * @method toJSON
  * @param {Object} meta
  * @return {Object} json
  */

@@ -1,55 +1,87 @@
 "use strict";
 
-console.log("------------------------");
-console.log("       nunuStudio");
-console.log("------------------------");
-console.log("        Editor");
-console.log("------------------------");
+var sourcePath = "../../source/";
+var buildPath = "../";
+
+var runtimeMain = "runtime/NunuApp.js";
+var editorMain = "Editor.js";
+
+var examplesPath = "../../docs/examples/";
+var editorWebPath = "../../docs/editor/";
+
+var docsPath = "../../docs/docs";
+var docsThemePath = "../../docs/theme";
+
+console.log("----------------------------------------------------------------------");
+console.log("                              nunuStudio");
+console.log("                    github.com/tentone/nunuStudio");
+console.log("----------------------------------------------------------------------");
+console.log("                                Editor");
+console.log("----------------------------------------------------------------------");
 console.log(" Joining files");
-
-var out = join("../../source/", "../../source/Editor.js");
-
-writeFile("../nunu.editor.js.temp", out.js);
-writeFile("../nunu.editor.css", out.css);
-
+var out = join(sourcePath, sourcePath + editorMain);
+writeFile(buildPath + "nunu.editor.js.temp", out.js);
+writeFile(buildPath + "nunu.editor.css", out.css);
 console.log(" Optimizing with closure");
-closure("SIMPLE", "PRETTY_PRINT", "ECMASCRIPT5", "ECMASCRIPT5", "../nunu.editor.js.temp", "../nunu.editor.js");
-
+closure("SIMPLE", "PRETTY_PRINT", "ECMASCRIPT5", "ECMASCRIPT5", buildPath + "nunu.editor.js.temp", buildPath + "nunu.editor.js");
 console.log(" Minifyng with closure");
-closure("WHITESPACE_ONLY", "SINGLE_QUOTES", "ECMASCRIPT5", "ECMASCRIPT5", "../nunu.editor.js", "../nunu.editor.min.js");
-
+closure("WHITESPACE_ONLY", "SINGLE_QUOTES", "ECMASCRIPT5", "ECMASCRIPT5", buildPath + "nunu.editor.js", buildPath + "nunu.editor.min.js");
 console.log(" Removing temporary files");
 deleteFile("../nunu.editor.js");
 deleteFile("../nunu.editor.js.temp");
 
-console.log("------------------------");
-console.log("        Runtime");
-console.log("------------------------");
-
-var out = join("../../source/", "../../source/runtime/NunuApp.js");
-
-writeFile("../nunu.js.temp", out.js);
-
+console.log("----------------------------------------------------------------------");
+console.log("                              Runtime");
+console.log("----------------------------------------------------------------------");
+var out = join(sourcePath, sourcePath + runtimeMain);
+writeFile(buildPath + "nunu.js.temp", out.js);
 console.log(" Optimizing with closure");
-closure("SIMPLE", "PRETTY_PRINT", "ECMASCRIPT5", "ECMASCRIPT5", "../nunu.js.temp", "../nunu.js");
-
+closure("SIMPLE", "PRETTY_PRINT", "ECMASCRIPT5", "ECMASCRIPT5", buildPath + "nunu.js.temp", buildPath + "nunu.js");
 console.log(" Minifyng with closure");
-closure("WHITESPACE_ONLY", "SINGLE_QUOTES", "ECMASCRIPT5", "ECMASCRIPT5", "../nunu.js", "../nunu.min.js");
-
+closure("WHITESPACE_ONLY", "SINGLE_QUOTES", "ECMASCRIPT5", "ECMASCRIPT5", buildPath + "nunu.js", buildPath + "nunu.min.js");
 console.log(" Removing temporary files");
-deleteFile("../nunu.js");
-deleteFile("../nunu.js.temp");
+deleteFile(buildPath + "nunu.js");
+deleteFile(buildPath + "nunu.js.temp");
 
-console.log("------------------------");
-console.log("    Updating Webpage");
-console.log("------------------------");
-
-console.log(" Copying runtime files");
-copyFile("../nunu.min.js", "../../docs/examples/nunu.min.js");
-
+console.log("----------------------------------------------------------------------");
+console.log("                           Updating Webpage");
+console.log("----------------------------------------------------------------------");
+console.log(" Copying runtime build");
+copyFile(buildPath + "nunu.min.js", examplesPath + "nunu.min.js");
+console.log(" Removing old editor files");
+deleteFolder(editorWebPath + "editor/files");
 console.log(" Copying editor files");
-copyFile("../nunu.editor.min.js", "../../docs/editor/nunu.editor.min.js");
-copyFile("../nunu.editor.css", "../../docs/editor/nunu.editor.css");
+copyFolder(sourcePath + "editor/files", editorWebPath + "editor/files");
+console.log(" Copying editor build");
+copyFile(buildPath + "nunu.editor.min.js", editorWebPath + "nunu.editor.min.js");
+copyFile(buildPath + "nunu.editor.css", editorWebPath + "nunu.editor.css");
+
+console.log("----------------------------------------------------------------------");
+console.log("                      Generating documentation");
+console.log("----------------------------------------------------------------------");
+//console.log(" Installing YiuDocJS from NPM");
+//require("child_process").execSync("npm -g install yuidocjs", function(error, stdout, stderr){});
+console.log(" Removing old files");
+deleteFolder("../../docs/docs");
+console.log(" Generating Docs");
+var command = "yuidoc -o " + docsPath + " -N -C -t " + docsThemePath + " -x lib " + sourcePath;
+require("child_process").execSync(command, function(error, stdout, stderr)
+{
+	console.log(stdout);
+	console.log("");
+});
+
+//console.log("----------------------------------------------------------------------");
+//console.log("                       Packaging nunuStudio");
+//console.log("----------------------------------------------------------------------");
+//console.log(" Not implemented");
+
+console.log("----------------------------------------------------------------------");
+console.log("                  Done! Press any key to exit");
+console.log("----------------------------------------------------------------------");
+process.stdin.setRawMode(true);
+process.stdin.resume();
+process.stdin.on("data", process.exit.bind(process, 0));
 
 function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
 {
@@ -66,7 +98,6 @@ function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
 
 function join(path, main)
 {
-	//Join files
 	var code = readFile(main);
 	var includes = getIncludes(code);
 
@@ -151,16 +182,13 @@ function copyFolder(src, dst)
 
 	if(fs !== undefined)
 	{
-		src.replace(new RegExp("/", 'g'), "\\");
-		dst.replace(new RegExp("/", 'g'), "\\");
-
 		makeDirectory(dst);
 		var files = fs.readdirSync(src);
 
 		for(var i = 0; i < files.length; i++)
 		{
-			var source = src + "\\" + files[i];
-			var destiny = dst + "\\" + files[i];
+			var source = src + "/" + files[i];
+			var destiny = dst + "/" + files[i];
 			var current = fs.statSync(source);
 			
 			//Directory
@@ -188,9 +216,6 @@ function copyFile(src, dst)
 
 	if(fs !== undefined)
 	{
-		src.replace(new RegExp("/", 'g'), "\\");
-		dst.replace(new RegExp("/", 'g'), "\\");
-
 		fs.createReadStream(src).pipe(fs.createWriteStream(dst));
 	}
 }
@@ -201,8 +226,34 @@ function makeDirectory(dir)
 
 	if(fs !== undefined)
 	{
-		dir.replace(new RegExp("/", 'g'), "\\");
 		fs.mkdirSync(dir);
+	}
+}
+
+function deleteFolder(path)
+{
+	var fs = require("fs");
+
+	if(fs !== undefined)
+	{
+		if(fs.existsSync(path))
+		{
+			fs.readdirSync(path).forEach(function(file,index)
+			{
+				var curPath = path + "/" + file;
+
+				if(fs.lstatSync(curPath).isDirectory())
+				{
+					deleteFolder(curPath);
+				}
+				else
+				{
+					fs.unlinkSync(curPath);
+				}
+			});
+
+			fs.rmdirSync(path);
+		}
 	}
 }
 
@@ -212,7 +263,6 @@ function deleteFile(fname)
 
 	if(fs !== undefined)
 	{
-		fname.replace(new RegExp("/", 'g'), "\\");
-		fs.unlink(fname);
+		fs.unlinkSync(fname);
 	}
 }

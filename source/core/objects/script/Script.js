@@ -204,7 +204,8 @@ Script.prototype.setCode = function(code)
 
 /**
  * Create JSON for script.
- * 
+ *
+ * @method toJSON
  * @param {Object} meta
  * @return {Object} json
  */

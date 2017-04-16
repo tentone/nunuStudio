@@ -1,2 +1,1 @@
 node build.js
-pause

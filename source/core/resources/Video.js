@@ -65,7 +65,8 @@ Video.fileIsVideo = function(file)
  * Serialize resource to json.
  * 
  * Video data is stored in Base64.
- * 
+ *
+ * @method toJSON
  * @param {Object} meta
  * @return {Object} json
  */

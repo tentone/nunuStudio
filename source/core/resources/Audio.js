@@ -63,7 +63,8 @@ Audio.fileIsAudio = function(file)
  * Serialize audio data as JSON.
  * 
  * Audio data is serialized in Base64.
- * 
+ *
+ * @method toJSON
  * @param {meta} meta
  * @return {Object} data
  */
