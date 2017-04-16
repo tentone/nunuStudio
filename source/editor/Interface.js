@@ -2,231 +2,22 @@
 
 function Interface(){}
 
-//Initialize interface
 Interface.initialize = function()
 {
 	//Tab Container
 	Interface.tab = new TabGroup();
 
 	//Asset Manager
-	Interface.assetExplorerDiv = new DivisionResizable();
-	Interface.assetExplorerDiv.resizableSide = DivisionResizable.TOP;
-	Interface.assetExplorerDiv.size.y = 150;
-	Interface.assetExplorerDiv.resizeSizeMin = 100;
-	Interface.assetExplorerDiv.resizeSizeMax = 400;
+	Interface.bottomDiv = new DivisionResizable();
+	Interface.bottomDiv.resizableSide = DivisionResizable.TOP;
+	Interface.bottomDiv.size.y = 150;
+	Interface.bottomDiv.resizeSizeMin = 100;
+	Interface.bottomDiv.resizeSizeMax = 400;
 
 	//Asset explorer
-	Interface.assetExplorer = new AssetExplorer(Interface.assetExplorerDiv.element);
+	Interface.assetExplorer = new AssetExplorer(Interface.bottomDiv.element);
 	Interface.assetExplorer.filesSize.set(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
 	
-	//Asset explorer menu bar
-	Interface.assetExplorerBar = new Bar(Interface.assetExplorerDiv.element);
-	Interface.assetExplorerBar.position.set(0, 0);
-	Interface.assetExplorerBar.size.y = 20;
-
-	//Import Files
-	Interface.assetFile = new DropdownMenu(Interface.assetExplorerBar.element);
-	Interface.assetFile.setText("Import");
-	Interface.assetFile.size.set(100, Interface.assetExplorerBar.size.y);
-	Interface.assetFile.position.set(0,0);
-
-	//3D Models Loader
-	Interface.assetFile.addOption("3D Models", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{	
-			if(files.length > 0)
-			{
-				Editor.loadGeometry(files[0]);
-			}
-		}, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x, .js");
-	}, Editor.filePath + "icons/models/models.png");
-
-	//Textures menu
-	var importTexture = Interface.assetFile.addMenu("Texture", Editor.filePath + "icons/misc/image.png");
-
-	//Image texture
-	importTexture.addOption("Texture", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				Editor.loadTexture(files[0]);
-			}
-		}, "image/*");
-	}, Editor.filePath + "icons/misc/image.png");
-
-	//Cube texture
-	importTexture.addOption("Cube Texture", function()
-	{
-		var texture = new CubeTexture([Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage, Editor.defaultImage]);
-		texture.name = "cube";
-		Editor.program.addTexture(texture);
-
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/cube.png");
-
-	//Canvas texture
-	importTexture.addOption("Canvas Texture", function()
-	{
-		var texture = new CanvasTexture(512, 512);
-		texture.name = "canvas";
-		Editor.program.addTexture(texture);
-
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/canvas.png");
-
-	//Video texture
-	importTexture.addOption("Video Texture", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				Editor.loadVideoTexture(files[0]);
-			}
-		}, "video/*");
-	}, Editor.filePath + "icons/misc/video.png");
-
-	//Webcam texture
-	importTexture.addOption("Webcam Texture", function()
-	{
-		var texture = new WebcamTexture();
-		texture.name = "webcam";
-		Editor.program.addTexture(texture);
-
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/hw/webcam.png");
-
-	//Load Font
-	Interface.assetFile.addOption("Font", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				Editor.loadFont(files[0]);
-			}
-		}, ".json, .ttf, .otf");
-	}, Editor.filePath + "icons/misc/font.png");
-
-	//Spine Animation
-	if(Nunu.runningOnDesktop())
-	{
-		Interface.assetFile.addOption("Spine Animation", function()
-		{
-			FileSystem.chooseFile(function(files)
-			{
-				if(files.length > 0)
-				{
-					var file = files[0].path;
-
-					var json = FileSystem.readFile(file);
-					var atlas = FileSystem.readFile(file.replace("json", "atlas"));
-					var path = file.substring(0, file.lastIndexOf("\\"));
-					
-					var animation = new SpineAnimation(json, atlas, path);
-					animation.name = FileSystem.getFileName(file);
-
-					Editor.addToScene(animation);
-					Editor.updateObjectViews();
-				}
-			}, ".json");
-		}, Editor.filePath + "icons/misc/spine.png");
-	}
-
-	//Load audio file
-	Interface.assetFile.addOption("Audio", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			if(files.length > 0)
-			{
-				Editor.loadAudio(files[0]);
-			}
-		}, "audio/*");
-	}, Editor.filePath + "icons/misc/audio.png");
-	
-	//Create material
-	Interface.assetMaterial = new DropdownMenu(Interface.assetExplorerBar.element);
-	Interface.assetMaterial.setText("Material");
-	Interface.assetMaterial.size.set(100, Interface.assetExplorerBar.size.y);
-	Interface.assetMaterial.position.set(100,0);
-
-	Interface.assetMaterial.addOption("Standard material", function()
-	{
-		var material = new THREE.MeshStandardMaterial();
-		material.name = "standard";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/material.png");
-
-	Interface.assetMaterial.addOption("Phong material", function()
-	{
-		var material = new THREE.MeshPhongMaterial();
-		material.name = "phong";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/material.png");
-	
-	Interface.assetMaterial.addOption("Basic material", function()
-	{
-		var material = new THREE.MeshBasicMaterial();
-		material.name = "basic";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/material.png");
-
-	Interface.assetMaterial.addOption("Sprite material", function()
-	{
-		var material = new THREE.SpriteMaterial({color: 0xffffff});
-		material.name = "sprite";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/image.png");
-
-	Interface.assetMaterial.addOption("Toon material", function()
-	{
-		var material = new THREE.MeshToonMaterial();
-		material.name = "toon";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/material.png");
-
-	Interface.assetMaterial.addOption("Lambert material", function()
-	{
-		var material = new THREE.MeshLambertMaterial();
-		material.name = "lambert";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/material.png");
-	
-	var materialOthers = Interface.assetMaterial.addMenu("Others");
-	materialOthers.addOption("Shader material", function()
-	{
-		var material = new THREE.ShaderMaterial();
-		material.name = "shader";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/script/script.png");
-
-	materialOthers.addOption("Normal material", function()
-	{
-		var material = new THREE.MeshNormalMaterial();
-		material.name = "normal";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/material.png");
-	
-	materialOthers.addOption("Depth material", function()
-	{
-		var material = new THREE.MeshDepthMaterial();
-		material.name = "depth";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/material.png");
-
 	//Explorer
 	Interface.explorer = new DivisionResizable();
 	Interface.explorer.size.x = 300;
@@ -234,10 +25,6 @@ Interface.initialize = function()
 	Interface.explorer.setOnResize(function()
 	{
 		Interface.updateInterface();
-		if(Interface.panel !== null)
-		{
-			Interface.panel.updateInterface();
-		}
 	});
 
 	Interface.explorerResizable = new DualDivisionResizable(Interface.explorer.element);
@@ -256,7 +43,7 @@ Interface.initialize = function()
 	//Project explorer
 	Interface.treeView = new TreeView(Interface.explorerResizable.divA);
 
-	//Object panel variables
+	//Object panel
 	Interface.panel = new Panel(Interface.explorerResizable.divB);
 
 	//Tool Bar
@@ -1025,24 +812,24 @@ Interface.updateInterface = function()
 		Interface.panel.updateInterface();
 	}
 	
-	//Asset Explorer
-	Interface.assetExplorerDiv.size.x = size.x - Interface.explorer.size.x - Interface.toolBar.size.x;
-	Interface.assetExplorerDiv.position.set(Interface.toolBar.size.x, size.y - Interface.assetExplorerDiv.size.y);
-	Interface.assetExplorerDiv.resizeSizeMax = size.y * 0.6;
-	Interface.assetExplorerDiv.updateInterface();
+	//Bottom division
+	Interface.bottomDiv.size.x = size.x - Interface.explorer.size.x - Interface.toolBar.size.x;
+	Interface.bottomDiv.position.set(Interface.toolBar.size.x, size.y - Interface.bottomDiv.size.y);
+	Interface.bottomDiv.resizeSizeMax = size.y * 0.6;
+	Interface.bottomDiv.updateInterface();
 
-	Interface.assetExplorerBar.size.x = Interface.assetExplorerDiv.size.x;
-	Interface.assetExplorerBar.updateInterface();
+	//Interface.assetExplorerBar.size.x = Interface.bottomDiv.size.x;
+	//Interface.assetExplorerBar.updateInterface();
 
-	Interface.assetExplorer.size.x = Interface.assetExplorerDiv.size.x;
-	Interface.assetExplorer.position.y = Interface.assetExplorerBar.size.y;
-	Interface.assetExplorer.size.y = Interface.assetExplorerDiv.size.y - Interface.assetExplorer.position.y;
+	//Asset explorere
+	Interface.assetExplorer.size.x = Interface.bottomDiv.size.x;
+	Interface.assetExplorer.size.y = Interface.bottomDiv.size.y;
 	Interface.assetExplorer.updateInterface();
 
 	//Tab Container
 	Interface.tab.position.set(Interface.toolBar.size.x, Interface.topBar.size.y);
 	Interface.tab.size.x = (size.x - Interface.toolBar.size.x - Interface.explorer.size.x);
-	Interface.tab.size.y = (size.y - Interface.topBar.size.y - Interface.assetExplorerDiv.size.y); 
+	Interface.tab.size.y = (size.y - Interface.topBar.size.y - Interface.bottomDiv.size.y); 
 	Interface.tab.updateInterface();
 };
 
