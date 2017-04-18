@@ -19,6 +19,7 @@
  * @property group
  * @type {SPE.Group}
  */
+
 /**
  * SPE Emitter
  * 
@@ -29,11 +30,9 @@
  * @property emitter
  * @type {SPE.Emitter}
  */
+
 function ParticleEmitter(group, emitter)
 {
-	//Clock
-	this.clock = new THREE.Clock();
-
 	//Group
 	if(group !== undefined)
 	{
@@ -41,23 +40,10 @@ function ParticleEmitter(group, emitter)
 	}
 	else
 	{
-		this.group = new SPE.Group(
-		{
-			texture:
-			{
-				value: null
-			},
-			maxParticleCount: 2000,
-			blending: THREE.AdditiveBlending,
-			fog: false,
-			depthWrite: false,
-			depthTest: true,
-			transparent: false,
-			hasPerspective: true
-		});
+		this.group = new SPE.Group(ParticleEmitter.defaultGroup);
 	}
 
-	//Points constructor
+	//Super constructor
 	THREE.Points.call(this, this.group.geometry, this.group.material);
 
 	this.type = "ParticleEmiter";
@@ -89,43 +75,51 @@ function ParticleEmitter(group, emitter)
 	}
 	else
 	{
-		this.emitter = new SPE.Emitter(
-		{		
-			particleCount: 2000,
-			type: SPE.distributions.BOX,
-			maxAge:
-			{
-				value: 3,
-				spread: 0
-			},
-			velocity:
-			{
-				value: new THREE.Vector3(0, 25, 0),
-				spread: new THREE.Vector3(10, 10, 10)
-			},
-			acceleration:
-			{
-				value: new THREE.Vector3(0, -10, 0),
-				spread: new THREE.Vector3(10, 0, 10)
-			},
-			color:
-			{
-				value: [new THREE.Color(1, 1, 1)],
-				spread: [new THREE.Vector3(0, 0, 0)]
-			}
-		});
+		this.emitter = new SPE.Emitter(ParticleEmitter.defaultEmitter);
 		this.group.addEmitter(this.emitter);
 	}
+
+	//Clock
+	this.clock = new THREE.Clock();
 
 	//Override raycast
 	this.raycast = function()
 	{
 		return null;
 	};
-
 }
 
 ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
+
+ParticleEmitter.defaultEmitter =
+{		
+	particleCount: 2000,
+	velocity:
+	{
+		value: new THREE.Vector3(0, 25, 0),
+		spread: new THREE.Vector3(10, 10, 10)
+	},
+	acceleration:
+	{
+		value: new THREE.Vector3(0, -10, 0),
+		spread: new THREE.Vector3(10, 0, 10)
+	}
+};
+
+ParticleEmitter.defaultGroup = 
+{
+	texture:
+	{
+		value: null
+	},
+	maxParticleCount: 2000,
+	blending: THREE.AdditiveBlending,
+	fog: false,
+	depthWrite: false,
+	depthTest: true,
+	transparent: false,
+	hasPerspective: true
+};
 
 /**
  * Initialize particle system.
@@ -162,7 +156,8 @@ ParticleEmitter.prototype.update = function()
 };
 
 /**
- * Dispose particle emitter
+ * Dispose particle emitter.
+ * 
  * @method dispose
  */
 ParticleEmitter.prototype.dispose = function()
@@ -175,20 +170,8 @@ ParticleEmitter.prototype.dispose = function()
 	}
 };
 
-//Update matrix world
-ParticleEmitter.prototype.updateMatrix = function ()
-{
-	this.matrix.makeRotationFromQuaternion(this.quaternion);
-	this.matrix.scale(this.scale);
-	this.matrix.setPosition(this.position);
-
-	this.matrixWorldNeedsUpdate = true;
-};
-
 /**
- * Create JSON for object.
- * 
- * Need to backup material and geometry and set to undefined to avoid it being stored.
+ * Serialize object as JSON.
  *
  * @method toJSON
  * @param {Object} meta
@@ -196,46 +179,47 @@ ParticleEmitter.prototype.updateMatrix = function ()
  */
 ParticleEmitter.prototype.toJSON = function(meta)
 {
-	//Back material and geometry to avoid unwanted serialization
 	var material = this.material;
 	var geometry = this.geometry;
 	this.material = undefined;
 	this.geometry = undefined;
 
-	//Call object3d to json
 	var texture = this.group.texture;
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{	
 		texture = texture.toJSON(meta);
 	});
 
-	//Restore material and geometry
 	this.material = material;
 	this.geometry = geometry;
 
-	//Group attributes
+	//Group 
 	data.object.group = {};
 	data.object.group.texture = {};
 	data.object.group.texture.value = texture.uuid;
-	data.object.group.textureFrames = this.group.textureFrames;
-	data.object.group.textureFrameCount = this.group.textureFrameCount
-	data.object.group.textureLoop = this.group.textureLoop;
+	data.object.group.texture.frames = this.group.textureFrames.toArray();
+	data.object.group.texture.frameCount = this.group.textureFrameCount
+	data.object.group.texture.loop = this.group.textureLoop;
+	data.object.group.fixedTimeStep = this.group.fixedTimeStep;
 	data.object.group.hasPerspective = this.group.hasPerspective;
 	data.object.group.colorize = this.group.colorize;
 	data.object.group.maxParticleCount = this.group.maxParticleCount;
+	data.object.group.transparent = this.group.transparent;
 	data.object.group.blending = this.group.blending;
-	data.object.group.scale = this.group.scale;
+	data.object.group.alphaTest = this.group.alphaTest;
 	data.object.group.depthWrite = this.group.depthWrite;
 	data.object.group.depthTest = this.group.depthTest;
 	data.object.group.fog = this.group.fog;
+	data.object.group.scale = this.group.scale;
 
-	//Emitter attributes
+	//Emitter
 	data.object.emitter = {};
 	data.object.emitter.uuid = this.emitter.uuid;
+	data.object.emitter.type = this.emitter.type;
 	data.object.emitter.direction = this.emitter.direction;
 	data.object.emitter.particleCount = this.emitter.particleCount;
 	data.object.emitter.duration = this.emitter.duration;
-	data.object.emitter.type = this.emitter.type;
+	data.object.emitter.isStatic = this.emitter.isStatic;
 
 	//Max age
 	data.object.emitter.maxAge = {};
@@ -244,18 +228,20 @@ ParticleEmitter.prototype.toJSON = function(meta)
 
 	//Position
 	data.object.emitter.position = {};
-	data.object.emitter.position.value = this.emitter.position.value;
-	data.object.emitter.position.spread = this.emitter.position.spread;
+	data.object.emitter.position.value = this.emitter.position.value.toArray();
+	data.object.emitter.position.spread = this.emitter.position.spread.toArray();
+	//data.object.emitter.position.radius = this.emitter.position.radius;
+	//data.object.emitter.position.radiusScale = this.emitter.position.radiusScale.toArray();
 
 	//Velocity
 	data.object.emitter.velocity = {};
-	data.object.emitter.velocity.value = this.emitter.velocity.value;
-	data.object.emitter.velocity.spread = this.emitter.velocity.spread;
+	data.object.emitter.velocity.value = this.emitter.velocity.value.toArray();
+	data.object.emitter.velocity.spread = this.emitter.velocity.spread.toArray();
 
 	//Acceleration
 	data.object.emitter.acceleration = {};
-	data.object.emitter.acceleration.value = this.emitter.acceleration.value;
-	data.object.emitter.acceleration.spread = this.emitter.acceleration.spread;
+	data.object.emitter.acceleration.value = this.emitter.acceleration.value.toArray();
+	data.object.emitter.acceleration.spread = this.emitter.acceleration.spread.toArray();
 
 	//Wiggle
 	data.object.emitter.wiggle = {};
@@ -280,7 +266,11 @@ ParticleEmitter.prototype.toJSON = function(meta)
 	//Color
 	data.object.emitter.color = {};
 	data.object.emitter.color.value = this.emitter.color.value;
-	data.object.emitter.color.spread = this.emitter.color.spread;
+	data.object.emitter.color.spread = [];
+	for(var i = 0; i < this.emitter.color.spread.length; i++)
+	{
+		data.object.emitter.color.spread.push(this.emitter.color.spread[i].toArray());
+	}
 
 	return data;
 };

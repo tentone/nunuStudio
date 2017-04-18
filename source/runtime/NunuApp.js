@@ -16,8 +16,6 @@ include("core/Global.js");
 include("core/FileSystem.js");
 
 include("core/three/Object3D.js");
-include("core/three/Vector3.js");
-include("core/three/Vector2.js");
 include("core/three/Texture.js");
 include("core/three/LightShadow.js");
 include("core/three/Fog.js");

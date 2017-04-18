@@ -525,30 +525,41 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 
 		case "ParticleEmiter":
+			function loadVector3(data)
+			{
+				if(Array.isArray(data))
+				{
+					return new THREE.Vector3().fromArray(data);
+				}
+				else
+				{
+					return new THREE.Vector3(data.x, data.y, data.z);
+				}
+			}
+
 			if(data.group !== undefined)
 			{
 				var group = data.group;
 				group.texture.value = getTexture(group.texture.value);
-				group.textureFrames = THREE.Vector2(group.textureFrames);
+				group.texture.frames = new THREE.Vector2().fromArray(group.texture.frames || [1, 1]);
 			}
 			if(data.emitter !== undefined)
 			{
 				var emitter = data.emitter;
-				emitter.position.value = THREE.Vector3.fromJSON(emitter.position.value);
-				emitter.position.spread = THREE.Vector3.fromJSON(emitter.position.spread);
-				emitter.velocity.value = THREE.Vector3.fromJSON(emitter.velocity.value);
-				emitter.velocity.spread = THREE.Vector3.fromJSON(emitter.velocity.spread);
-				emitter.acceleration.value = THREE.Vector3.fromJSON(emitter.acceleration.value);
-				emitter.acceleration.spread = THREE.Vector3.fromJSON(emitter.acceleration.spread);
+				emitter.position.value = loadVector3(emitter.position.value);
+				emitter.position.spread = loadVector3(emitter.position.spread);
+				emitter.velocity.value = loadVector3(emitter.velocity.value);
+				emitter.velocity.spread = loadVector3(emitter.velocity.spread);
+				emitter.acceleration.value = loadVector3(emitter.acceleration.value);
+				emitter.acceleration.spread = loadVector3(emitter.acceleration.spread);
 				
 				for(var i = 0; i < emitter.color.value.length; i++)
 				{
 					emitter.color.value[i] = new THREE.Color(emitter.color.value[i]);
-					emitter.color.spread[i] = THREE.Vector3.fromJSON(emitter.color.spread[i]);
+					emitter.color.spread[i] = loadVector3(emitter.color.spread[i]);
 				}
 			}
 
-			
 			object = new ParticleEmitter(data.group, data.emitter);
 
 			break;

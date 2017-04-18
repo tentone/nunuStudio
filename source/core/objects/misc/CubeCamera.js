@@ -55,6 +55,7 @@ function CubeCamera(near, far, resolution)
 	this.near = (near !== undefined) ? near : 0.01;
 	this.far = (far !== undefined) ? far : 10000;
 	this.resolution = (resolution !== undefined) ? resolution : 256;
+	this.autoUpdate = false;
 
 	this.cameras = [];
 	for(var i = 0; i < 6; i++)
@@ -96,16 +97,54 @@ CubeCamera.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
  * Initialize CubeCamera object.
+ * 
+ * Gets the attached scene and the renderer in use.
  *
  * @method initialize
  */
 CubeCamera.prototype.initialize = function()
 {
+	var node = this;
+	while(node.parent !== null)
+	{
+		node = node.parent;
+		if(node instanceof Scene)
+		{
+			this.scene = node;
+		}
+		else if(node instanceof Program)
+		{
+			this.renderer = node.renderer;
+		}
+	}
+
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
 	}
 };
+
+
+/**
+ * Update CubeCamera object.
+ *
+ * If autoUpdate is set to true the CubeCamera updates the CubeTexture automatically.
+ * 
+ * @method update
+ */
+CubeCamera.prototype.update = function()
+{
+	if(this.autoUpdate)
+	{
+		this.updateCubeMap(this.renderer, this.scene);
+	}
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].update();
+	}
+};
+
 
 /**
  * Set the CubeCamera resolution.
@@ -168,6 +207,7 @@ CubeCamera.prototype.toJSON = function(meta)
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.resolution = this.resolution;
+	data.object.autoUpdate = this.autoUpdate;
 	data.object.far = this.far;
 	data.object.near = this.near;
 
