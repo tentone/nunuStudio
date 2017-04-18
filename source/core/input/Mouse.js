@@ -185,10 +185,8 @@ function Mouse()
 	}
 }
 
-//Prototype
 Mouse.prototype = Mouse;
 
-//Mouse Buttons
 /**
  * LEFT mouse button
  * @attribute LEFT

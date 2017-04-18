@@ -61,7 +61,6 @@ function Keyboard()
 	}
 }
 
-//Prototype
 Keyboard.prototype = Keyboard;
 
 /**
