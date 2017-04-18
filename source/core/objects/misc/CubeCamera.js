@@ -45,7 +45,7 @@
  * @property target
  * @type {WebGLRenderTargetCube}
  */
-function CubeCamera(near, far, resolution)
+function CubeCamera(near, far, resolution, autoUpdate)
 {
 	THREE.Object3D.call(this);
 
@@ -55,7 +55,7 @@ function CubeCamera(near, far, resolution)
 	this.near = (near !== undefined) ? near : 0.01;
 	this.far = (far !== undefined) ? far : 10000;
 	this.resolution = (resolution !== undefined) ? resolution : 256;
-	this.autoUpdate = false;
+	this.autoUpdate = (autoUpdate !== undefined) ? autoUpdate : false;
 
 	this.cameras = [];
 	for(var i = 0; i < 6; i++)
@@ -196,7 +196,7 @@ CubeCamera.prototype.dispose = function()
 };
 
 /**
- * Serialize CubeCamera data to JSON.
+ * Serialize data to JSON.
  *
  * @method toJSON
  * @param {Object} meta Meta data.
@@ -206,10 +206,10 @@ CubeCamera.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
+	data.object.near = this.near;
+	data.object.far = this.far;
 	data.object.resolution = this.resolution;
 	data.object.autoUpdate = this.autoUpdate;
-	data.object.far = this.far;
-	data.object.near = this.near;
 
 	return data;
 };

@@ -663,7 +663,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 
 		case "CubeCamera":
-			object = new CubeCamera(data.near, data.far, data.resolution);
+			object = new CubeCamera(data.near, data.far, data.resolution, data.autoUpdate);
 			break;
 			
 		case "Scene":
