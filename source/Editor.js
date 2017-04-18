@@ -2,8 +2,8 @@
 
 function Editor(){}
 
-Editor.filePath = "editor\\files\\";
-Editor.NWJSPath = "..\\nwjs\\";
+Editor.filePath = "editor/files/";
+Editor.NWJSPath = "../nwjs/";
 
 //Runtime
 include("Nunu.js");
@@ -15,7 +15,7 @@ include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
-include("lib/spine.min.js");
+include("lib/spine.js");
 include("lib/opentype.min.js");
 
 include("core/Global.js");
@@ -1382,20 +1382,20 @@ Editor.setOpenFile = function(file)
 Editor.exportWebProject = function(dir)
 {
 	FileSystem.makeDirectory(dir);
-	FileSystem.copyFile("runtime\\vr.png", dir + "\\vr.png");
-	FileSystem.copyFile("runtime\\fullscreen.png", dir + "\\fullscreen.png");
-	FileSystem.copyFile("runtime\\logo.png", dir + "\\logo.png");
-	FileSystem.copyFile("runtime\\index.html", dir + "\\index.html");
-	FileSystem.copyFile("..\\build\\nunu.min.js", dir + "\\nunu.min.js");
+	FileSystem.copyFile("runtime/vr.png", dir + "/vr.png");
+	FileSystem.copyFile("runtime/fullscreen.png", dir + "/fullscreen.png");
+	FileSystem.copyFile("runtime/logo.png", dir + "/logo.png");
+	FileSystem.copyFile("runtime/index.html", dir + "/index.html");
+	FileSystem.copyFile("../build/nunu.min.js", dir + "/nunu.min.js");
 	
-	Editor.saveProgram(dir + "\\app.isp", true, true);
+	Editor.saveProgram(dir + "/app.isp", true, true);
 };
 
 //Export NWJS project
 Editor.exportNWJSProject = function(dir)
 {
-	Editor.exportWebProject(dir + "\\package.nw");
-	FileSystem.writeFile(dir + "\\package.nw\\package.json", JSON.stringify(
+	Editor.exportWebProject(dir + "/package.nw");
+	FileSystem.writeFile(dir + "/package.nw/package.json", JSON.stringify(
 	{
 		name: Editor.program.name,
 		main: "index.html",
