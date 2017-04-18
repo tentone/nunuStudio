@@ -93,7 +93,7 @@ include("core/utils/Mesh2shape.js");
  * @class NunuApp
  * @module Runtime
  * @constructor
- * @param {DOM} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body
+ * @param {DOM} canvas Canvas to be used by the runtime, if no canvas is provided a new one is created and added to the document.body, to create a new NunuApp without canvas a null value can be passed.
  */
 
 /**
@@ -123,7 +123,7 @@ include("core/utils/Mesh2shape.js");
  */
 
 /**
- * Canvas used to render graphics
+ * Canvas used to render graphics.
  * @property canvas
  * @type {DOM}
  */
@@ -143,9 +143,10 @@ function NunuApp(canvas)
 	this.program = null;
 	this.renderer = null;
 
-	//Fullscreen controll
 	this.fullscreen = false;
 	this.vr = false;
+
+	this.running = false;
 
 	//Canvas
 	if(canvas === undefined)
@@ -198,20 +199,15 @@ function NunuApp(canvas)
  */
 NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 {
-	var loader = new ObjectLoader();
-	var app = this;
-
-	FileSystem.readFile(fname, false, function(data)
+	this.loadProgramAsync(fname, function(app)
 	{
-		app.program = loader.parse(JSON.parse(data));
 		app.run();
-
 		if(onLoad !== undefined)
 		{
-			onLoad();
+			onLoad(app);
 		}
 	}, onProgress);
-}
+};
 
 /**
  * Load program from file.
@@ -224,7 +220,31 @@ NunuApp.prototype.loadProgram = function(fname)
 	var loader = new ObjectLoader();
 	var data = FileSystem.readFile(fname);
 	this.program = loader.parse(JSON.parse(data));
-}
+};
+
+/**
+ * Load program from file, asynchronously.
+ * 
+ * @method loadProgram
+ * @param {String} fname Name of the file to load
+ * @param {Function} onLoad onLoad callback. Receives as argument the loaded application.
+ * @param {Function} onProgress onProgress callback
+ */
+NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
+{
+	var loader = new ObjectLoader();
+	var app = this;
+
+	FileSystem.readFile(fname, false, function(data)
+	{
+		app.program = loader.parse(JSON.parse(data));
+		
+		if(onLoad !== undefined)
+		{
+			onLoad(app);
+		}
+	}, onProgress);
+};
 
 /**
  * Start running nunu program.
@@ -274,18 +294,8 @@ NunuApp.prototype.run = function()
 		this.canvas.addEventListener("click", this.lockMouse, false);
 	}
 
-	//Update loop
-	var self = this;
-	var update = function()
-	{
-		if(self.program !== null)
-		{
-			requestAnimationFrame(update);
-			self.update();
-		}
-	};
-	update();
-}
+	this.resume();
+};
 
 /**
  * Update nunu program state.
@@ -301,7 +311,7 @@ NunuApp.prototype.update = function()
 
 	this.program.update();
 	this.program.render(this.renderer);
-}
+};
 
 /**
  * Exit from app.
@@ -338,7 +348,52 @@ NunuApp.prototype.exit = function()
 	{
 		this.onExit();
 	}
-}
+};
+
+/**
+ * Resume the paused application.
+ *
+ * Starts a new update cycle and sets the running flag.
+ *
+ * @method resume
+ */
+NunuApp.prototype.resume = function()
+{
+	var self = this;
+	var update = function()
+	{
+		if(self.program !== null && self.running)
+		{
+			requestAnimationFrame(update);
+			self.update();
+		}
+	};
+
+	this.running = true;
+	update();
+};
+
+/**
+ * Pause the running application.
+ *
+ * @method pause
+ */
+NunuApp.prototype.pause = function()
+{
+	this.running = false;
+};
+
+/**
+ * Set the canvas to be used for rendering.
+ *
+ * @method setCanvas
+ * @param {DOM} canvas Canvas
+ */
+NunuApp.prototype.setCanvas = function(canvas)
+{
+	this.canvas = canvas;
+	this.canvasResize = false;
+};
 
 /**
  * Resize the window.
@@ -362,7 +417,7 @@ NunuApp.prototype.resize = function()
 		this.renderer.setSize(this.canvas.width, this.canvas.height);
 		this.program.resize(this.canvas.width, this.canvas.height);
 	}
-}
+};
 
 /**
  * Send data to running nunu application.
@@ -378,7 +433,7 @@ NunuApp.prototype.sendData = function(data)
 	{
 		this.program.receiveDataApp(data);
 	}
-}
+};
 
 /**
  * Set on data receive callback.
@@ -391,7 +446,7 @@ NunuApp.prototype.sendData = function(data)
 NunuApp.prototype.setOnDataReceived = function(callback)
 {
 	this.onDataReceived = callback;
-}
+};
 
 /**
  * Set on exit callback.
@@ -404,7 +459,7 @@ NunuApp.prototype.setOnDataReceived = function(callback)
 NunuApp.prototype.setOnExit = function(callback)
 {
 	this.onExit = callback;
-}
+};
 
 /**
  * Check if VR mode is available.
@@ -415,7 +470,7 @@ NunuApp.prototype.setOnExit = function(callback)
 NunuApp.prototype.vrAvailable = function()
 {
 	return this.program.vr && Nunu.webvrAvailable();	
-}
+};
 
 /**
  * Toggle VR mode, only works if VR mode is available.
@@ -441,7 +496,7 @@ NunuApp.prototype.toggleVR = function()
 	{
 		console.warn("nunuStudio: loaded program is not VR enabled");
 	}
-}
+};
 
 /**
  * Set fullscreen mode
@@ -484,4 +539,4 @@ NunuApp.prototype.setFullscreen = function(fullscreen, element)
 			document.exitFullscreen();
 		}
 	}
-}
+};
