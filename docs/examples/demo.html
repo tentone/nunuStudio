@@ -2,14 +2,14 @@
 
 <html>
 	<head>
-		<title>Pong</title>
+		<title>nunuStudio</title>
 		<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	</head>
 
 	<body style="background-color: #222222" onload="initialize();" onresize="resize();" oncontextmenu="return false;">
 		<script type="text/javascript" src="nunu.min.js"></script>
-		<script type="text/javascript">
+		<script type="text/javascript">		
 			var app;
 
 			//Initialize app
@@ -47,8 +47,17 @@
 					}
 				};
 
-				//Load and run nunu app
-				app.loadRunProgram("isp/pong.isp", onLoad, onProgress);
+				var parameters = location.search.substring(1).split("&");
+				if(parameters.length > 0)
+				{
+					var entry = unescape(parameters[0].split("=")[1]).replace(new RegExp("\"", "g"), "");
+
+					app.loadRunProgram(entry, onLoad, onProgress);
+				}
+				else
+				{
+					alert("ISP file not found!");
+				}
 			}
 
 			//Resize nunu app (must be called every time the window is resized)
