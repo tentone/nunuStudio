@@ -156,7 +156,7 @@ function AssetExplorer(parent)
 
 					var json = FileSystem.readFile(file);
 					var atlas = FileSystem.readFile(file.replace("json", "atlas"));
-					var path = file.substring(0, file.lastIndexOf("\\"));
+					var path = FileSystem.getFilePath(file);
 					
 					var animation = new SpineAnimation(json, atlas, path);
 					animation.name = FileSystem.getFileName(file);
