@@ -2588,7 +2588,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 90,
+            "line": 88,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -6223,8 +6223,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 97,
-            "description": "Initialize CubeCamera object.",
+            "line": 98,
+            "description": "Initialize CubeCamera object.\n\nGets the attached scene and the renderer in use.",
             "itemtype": "method",
             "name": "initialize",
             "class": "CubeCamera",
@@ -6232,7 +6232,16 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 110,
+            "line": 128,
+            "description": "Update CubeCamera object.\n\nIf autoUpdate is set to true the CubeCamera updates the CubeTexture automatically.",
+            "itemtype": "method",
+            "name": "update",
+            "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
+            "line": 149,
             "description": "Set the CubeCamera resolution.",
             "itemtype": "method",
             "name": "setResolution",
@@ -6248,7 +6257,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 122,
+            "line": 161,
             "description": "Render new cube faces. \n\nShould be called every time a change in the scene is made.",
             "itemtype": "method",
             "name": "updateCubeMap",
@@ -6269,7 +6278,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 146,
+            "line": 185,
             "description": "Disposes the CubeCamera.",
             "itemtype": "method",
             "name": "dispose",
@@ -6278,7 +6287,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 159,
+            "line": 198,
             "description": "Serialize CubeCamera data to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -6308,7 +6317,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 22,
+            "line": 23,
             "description": "SPE Emitter\n\nEmitter has attributes that can be used to controll the particle system\n\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html",
             "itemtype": "property",
             "name": "emitter",
@@ -6318,7 +6327,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 130,
+            "line": 124,
             "description": "Initialize particle system.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -6327,7 +6336,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 147,
+            "line": 141,
             "description": "Update particle emitter state.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -6336,8 +6345,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 164,
-            "description": "Dispose particle emitter",
+            "line": 158,
+            "description": "Dispose particle emitter.",
             "itemtype": "method",
             "name": "dispose",
             "class": "ParticleEmitter",
@@ -6345,8 +6354,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 188,
-            "description": "Create JSON for object.\n\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
+            "line": 173,
+            "description": "Serialize object as JSON.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -6385,7 +6394,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 64,
+            "line": 62,
             "description": "Intialize physics object and add it to the scene physics world.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -6394,7 +6403,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 101,
+            "line": 99,
             "description": "Update object position and rotation based on cannon.js body.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -6403,7 +6412,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 123,
+            "line": 121,
             "description": "Add shape to physics object body.",
             "params": [
                 {
@@ -6419,7 +6428,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 137,
+            "line": 135,
             "description": "Create JSON for object.\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9051,39 +9060,6 @@
         {
             "file": "..\\..\\source\\core\\three\\Vector3.js",
             "line": 37,
-            "description": "Create Vector3 from JSON data",
-            "itemtype": "method",
-            "name": "fromJSON",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "vector3",
-                "type": "Vector3"
-            },
-            "class": "Vector3",
-            "module": "Math"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\Vector3.js",
-            "line": 49,
-            "description": "Serialize Vector3 data to JSON",
-            "itemtype": "method",
-            "name": "toJSON",
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
-            "class": "Vector3",
-            "module": "Math"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\Vector3.js",
-            "line": 60,
             "description": "Add v to this vector.",
             "itemtype": "method",
             "name": "add",
@@ -9099,7 +9075,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Vector3.js",
-            "line": 67,
+            "line": 44,
             "description": "Add the scalar value s to this vector's x, y and z values.",
             "itemtype": "method",
             "name": "addScalar",
@@ -10185,7 +10161,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 101,
+            "line": 99,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -10195,7 +10171,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 107,
+            "line": 105,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -10205,7 +10181,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 113,
+            "line": 111,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -10216,7 +10192,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 120,
+            "line": 118,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -10227,7 +10203,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 127,
+            "line": 125,
             "description": "Canvas used to render graphics",
             "itemtype": "property",
             "name": "canvas",
@@ -10237,7 +10213,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 133,
+            "line": 131,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasResize",
@@ -10248,7 +10224,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 193,
+            "line": 191,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -10274,7 +10250,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 218,
+            "line": 216,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -10290,7 +10266,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 231,
+            "line": 229,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -10299,7 +10275,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 292,
+            "line": 290,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -10308,7 +10284,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 308,
+            "line": 306,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -10317,7 +10293,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 345,
+            "line": 343,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -10326,7 +10302,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 369,
+            "line": 367,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -10342,7 +10318,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 385,
+            "line": 383,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -10358,7 +10334,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 398,
+            "line": 396,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -10374,7 +10350,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 411,
+            "line": 409,
             "description": "Check if VR mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -10387,7 +10363,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 422,
+            "line": 420,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -10396,7 +10372,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 448,
+            "line": 446,
             "description": "Set fullscreen mode",
             "itemtype": "method",
             "name": "setFullscreen",

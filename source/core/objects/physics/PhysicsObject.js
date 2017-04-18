@@ -54,8 +54,6 @@ function PhysicsObject()
 	this.body.type = CANNON.Body.DYNAMIC;
 	this.body.mass = 1.0;
 
-	this.body.material = new CANNON.Material("default");
-
 	this.world = null;
 }
 

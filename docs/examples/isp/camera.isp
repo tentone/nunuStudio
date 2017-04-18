@@ -1,6 +1,6 @@
 {
 	"metadata": {
-		"version": "V0.8.9.22 Alpha",
+		"version": "V0.8.9.25 Alpha",
 		"type": "NunuProgram"
 	},
 	"geometries": [
@@ -48,6 +48,7 @@
 			"envMap": "E1F809FA-83D0-4DDF-B8BE-8B3CB3683D67",
 			"envMapIntensity": 0.6,
 			"refractionRatio": 0.98,
+			"skinning": false,
 			"morphTargets": false,
 			"morphNormals": false
 		},
@@ -69,6 +70,7 @@
 			"envMap": "E1F809FA-83D0-4DDF-B8BE-8B3CB3683D67",
 			"envMapIntensity": 0.7,
 			"refractionRatio": 0.98,
+			"skinning": false,
 			"morphTargets": false,
 			"morphNormals": false
 		},
@@ -83,6 +85,7 @@
 			"map": "30810B9F-EF4F-45E8-AD7E-81FE0121C024",
 			"aoMapIntensity": 1,
 			"side": 1,
+			"skinning": false,
 			"morphTargets": false
 		},
 		{
@@ -97,6 +100,7 @@
 			"metalness": 0.2,
 			"emissive": 0,
 			"aoMapIntensity": 1,
+			"skinning": false,
 			"morphTargets": false,
 			"morphNormals": false
 		},
@@ -112,6 +116,7 @@
 			"metalness": 0.2,
 			"emissive": 0,
 			"aoMapIntensity": 1,
+			"skinning": false,
 			"morphTargets": false,
 			"morphNormals": false
 		}],
@@ -170,6 +175,7 @@
 			"magFilter": 1006,
 			"anisotropy": 1,
 			"flipY": false,
+			"size": 512,
 			"images": [
 				"8AF0CEFF-2619-489B-915C-508DD0A6DE80",
 				"081ECF55-C615-4AC4-8376-832404359242",
@@ -419,7 +425,7 @@
 								"near": 0.1,
 								"far": 1000000,
 								"focus": 10,
-								"aspect": 1.9922330097087377,
+								"aspect": 1.8076923076923077,
 								"filmGauge": 35,
 								"filmOffset": 0,
 								"clearColor": false,
@@ -501,6 +507,9 @@
 		"vrScale": 1,
 		"antialiasing": false,
 		"shadows": true,
-		"shadowsType": 2
+		"shadowsType": 2,
+		"toneMapping": 0,
+		"toneMappingExposure": 1,
+		"toneMappingWhitePoint": 1
 	}
 }

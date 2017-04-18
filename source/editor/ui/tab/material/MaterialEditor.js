@@ -35,39 +35,33 @@ function MaterialEditor(parent, closeable, container, index)
 	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
 	this.preview.divB.style.overflow = "auto";
 
-	//Material preview
 	//Canvas
 	this.canvas = new Canvas(this.preview.divA);
 
-	//Element atributes
+	//Children
 	this.children = [];
-	
-	//Material UI File element
+
+	//Material and corresponding asset
+	this.material = null;
 	this.asset = null;
 
-	//Attached material
-	this.material = null;
-
-	//Material renderer and scene
+	//Renderer
 	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas.element, antialias: Settings.render.antialiasing});
 	this.renderer.setSize(this.canvas.size.x, this.canvas.size.y);
 	this.renderer.shadowMap.enabled = Settings.render.shadows;
 	this.renderer.shadowMap.type = Settings.render.shadowsType;
 
-	//Material camera
-	this.camera = new THREE.PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y);
+	//Camera
+	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x/this.canvas.size.y);
 
-	//Material preview scene
+	//Preview scene
 	this.scene = new THREE.Scene();
 	this.sky = new Sky();
-	var sun = this.sky.sun;
-	sun.shadow.camera.left = -5;
-	sun.shadow.camera.right = 5;
-	sun.shadow.camera.top = 5;
-	sun.shadow.camera.bottom = -5;
 	this.scene.add(this.sky);
-	this.scene.add(new PointLight(0x666666));
-	this.scene.add(new AmbientLight(0x555555));
+	this.pointLight = new PointLight(0x777777);
+	this.scene.add(this.pointLight);
+	this.ambientLight = new AmbientLight(0x555555);
+	this.scene.add(this.ambientLight);
 
 	this.mesh = new THREE.Mesh(new THREE.SphereBufferGeometry(1, 64, 64), null);
 	this.mesh.position.set(0, 0, -2.5);
@@ -123,7 +117,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.previewForm.nextRow();
 
 	//Sky
-	this.previewForm.addText("Enable sky");
+	this.previewForm.addText("Sky");
 	this.skyEnabled = new CheckBox(this.previewForm.element);
 	this.skyEnabled.size.set(20, 15);
 	this.skyEnabled.setValue(true);
@@ -132,6 +126,18 @@ function MaterialEditor(parent, closeable, container, index)
 		self.sky.visible = self.skyEnabled.getValue();
 	});
 	this.previewForm.add(this.skyEnabled);
+	this.previewForm.nextRow();
+
+	//Point Light
+	this.previewForm.addText("Point Light");
+	this.lightEnabled = new CheckBox(this.previewForm.element);
+	this.lightEnabled.size.set(20, 15);
+	this.lightEnabled.setValue(true);
+	this.lightEnabled.setOnChange(function()
+	{
+		self.pointLight.visible = self.lightEnabled.getValue();
+	});
+	this.previewForm.add(this.lightEnabled);
 
 	//Form
 	this.form = new Form(this.main.divB);
@@ -311,7 +317,7 @@ MaterialEditor.prototype.attach = function(material, asset)
 	this.transparent.setValue(material.transparent);
 	this.opacity.setValue(material.opacity);
 	this.alphaTest.setValue(material.alphaTest);
-	this.blending.setValue(material.blending);	
+	this.blending.setValue(material.blending);
 };
 
 //Check if material is attached to tab

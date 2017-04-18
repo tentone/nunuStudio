@@ -1,6 +1,6 @@
 {
 	"metadata": {
-		"version": "V0.8.9.16 Alpha",
+		"version": "V0.8.9.25 Alpha",
 		"type": "NunuProgram"
 	},
 	"geometries": [
@@ -37,102 +37,116 @@
 			"uuid": "8BF8CB0F-F534-4923-94F8-11B327628A90",
 			"type": "MeshStandardMaterial",
 			"name": "default",
-			"color": 16777215,
-			"roughness": 0.6,
-			"metalness": 0.2,
-			"emissive": 0,
-			"map": "E2FE3BE7-245B-410E-9144-490231D047BE",
 			"depthFunc": 3,
 			"depthTest": true,
 			"depthWrite": true,
+			"color": 16777215,
+			"roughness": 0.6,
+			"metalness": 0.2,
+			"map": "E2FE3BE7-245B-410E-9144-490231D047BE",
+			"emissive": 0,
+			"aoMapIntensity": 1,
 			"skinning": false,
-			"morphTargets": false
+			"morphTargets": false,
+			"morphNormals": false
 		},
 		{
 			"uuid": "1D50F332-C6BF-47D0-979A-4144F14311F8",
 			"type": "MeshStandardMaterial",
 			"name": "standard",
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
 			"color": 16777215,
 			"roughness": "0",
 			"metalness": "0",
 			"emissive": 0,
-			"depthFunc": 3,
-			"depthTest": true,
-			"depthWrite": true,
+			"aoMapIntensity": 1,
 			"skinning": false,
-			"morphTargets": false
+			"morphTargets": false,
+			"morphNormals": false
 		},
 		{
 			"uuid": "C56271DC-CF98-40E2-99D3-927322ACB413",
 			"type": "MeshStandardMaterial",
 			"name": "Cobbles.png",
-			"color": 16777215,
-			"roughness": 0.6,
-			"metalness": "0.01",
-			"emissive": 0,
-			"map": "EDF3D1A2-BE8F-4D77-B4AF-4762BEE75A4C",
 			"depthFunc": 3,
 			"depthTest": true,
 			"depthWrite": true,
+			"color": 16777215,
+			"roughness": 0.6,
+			"metalness": "0.01",
+			"map": "EDF3D1A2-BE8F-4D77-B4AF-4762BEE75A4C",
+			"emissive": 0,
+			"aoMapIntensity": 1,
 			"skinning": false,
-			"morphTargets": false
+			"morphTargets": false,
+			"morphNormals": false
 		},
 		{
 			"uuid": "D09D0008-9C68-4FDE-B499-8A819709F25B",
 			"type": "MeshStandardMaterial",
 			"name": "Grass_01_D.jpg",
-			"color": 16777215,
-			"roughness": 0.6,
-			"metalness": 0.2,
-			"emissive": 0,
-			"map": "5A2B1492-638F-464E-B4FC-AE3D07BA7320",
 			"depthFunc": 3,
 			"depthTest": true,
 			"depthWrite": true,
+			"color": 16777215,
+			"roughness": 0.6,
+			"metalness": 0.2,
+			"map": "5A2B1492-638F-464E-B4FC-AE3D07BA7320",
+			"emissive": 0,
+			"aoMapIntensity": 1,
 			"skinning": false,
-			"morphTargets": false
+			"morphTargets": false,
+			"morphNormals": false
 		},
 		{
 			"uuid": "D3A83FF5-AFCD-4E16-911F-B2D34506CFE5",
 			"type": "MeshStandardMaterial",
 			"name": "default",
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
 			"color": 16777215,
 			"roughness": 0.6,
 			"metalness": 0.2,
 			"emissive": 0,
-			"depthFunc": 3,
-			"depthTest": true,
-			"depthWrite": true,
+			"aoMapIntensity": 1,
 			"skinning": false,
-			"morphTargets": false
+			"morphTargets": false,
+			"morphNormals": false
 		},
 		{
 			"uuid": "47A07B5C-7DD2-426F-B112-2DA3F5727F4B",
 			"type": "MeshStandardMaterial",
 			"name": "default",
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
 			"color": 16777215,
 			"roughness": 0.6,
 			"metalness": 0.2,
 			"emissive": 0,
-			"depthFunc": 3,
-			"depthTest": true,
-			"depthWrite": true,
+			"aoMapIntensity": 1,
 			"skinning": false,
-			"morphTargets": false
+			"morphTargets": false,
+			"morphNormals": false
 		},
 		{
 			"uuid": "2D9378A4-3901-4B6D-8DAF-5E84926E3FC6",
 			"type": "MeshStandardMaterial",
 			"name": "default",
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
 			"color": 16777215,
 			"roughness": 0.6,
 			"metalness": 0.2,
 			"emissive": 0,
-			"depthFunc": 3,
-			"depthTest": true,
-			"depthWrite": true,
+			"aoMapIntensity": 1,
 			"skinning": false,
-			"morphTargets": false
+			"morphTargets": false,
+			"morphNormals": false
 		}],
 	"textures": [
 		{
@@ -254,6 +268,7 @@
 			"uuid": "3B160346-C721-47FE-9920-D9CEFFAD9998",
 			"type": "Font",
 			"encoding": "json",
+			"reversed": false,
 			"data": {
 				"glyphs": {
 					"0": {
@@ -3509,6 +3524,10 @@
 						"matrixAutoUpdate": true,
 						"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 						"children": [],
+						"colorTop": [7844859,30463,220086,9273],
+						"colorBottom": [15461606,16777215,16705495,26023],
+						"sunColor": 16777130,
+						"moonColor": 5592507,
 						"autoUpdate": false,
 						"sunDistance": 500,
 						"dayTime": 30,
@@ -3556,19 +3575,20 @@
 						"receiveShadow": false,
 						"visible": true,
 						"matrixAutoUpdate": true,
-						"matrix": [0.056338708847761154,0,0.9984117150306702,0,0,1,0,0,-0.9984117150306702,0,0.056338708847761154,0,-1.6951199769973755,0,1.9872660636901855,1],
+						"matrix": [0.056338708847761425,0,0.99841171503067,0,0,1,0,0,-0.99841171503067,0,0.056338708847761425,0,-1.6951199769973755,0,1.9872660636901855,1],
 						"fov": "60",
 						"zoom": 1,
 						"near": 0.1,
 						"far": 100000,
 						"focus": 10,
-						"aspect": 2.011764705882353,
+						"aspect": 1.8076923076923077,
 						"filmGauge": 35,
 						"filmOffset": 0,
 						"clearColor": false,
 						"clearDepth": false,
 						"viewport": [1,1],
-						"offset": [0,0]
+						"offset": [0,0],
+						"order": 0
 					},
 					{
 						"uuid": "7270F5A5-9EB4-4007-8A61-58E17FED4EA7",
@@ -3580,7 +3600,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": false,
-						"matrix": [0.4464990496635437,0,0.35521242022514343,0,0,0.5705587267875671,0,0,-0.35521242022514343,0,0.4464990496635437,0,1.596606969833374,-0.22971756756305695,3.1795856952667236,1],
+						"matrix": [0.44649904966354365,0,0.3552124202251435,0,0,0.5705587267875671,0,0,-0.3552124202251435,0,0.44649904966354365,0,1.596606969833374,-0.22971756756305695,3.1795856952667236,1],
 						"geometry": "12FD32E5-4A61-4975-839D-89510A29AEDE",
 						"material": "8BF8CB0F-F534-4923-94F8-11B327628A90"
 					},
@@ -3594,7 +3614,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": false,
-						"matrix": [1.1734033823013306,0.21235884726047516,-1.0504099130630493,0,-0.1525563895702362,1.6984988451004028,0.17296209931373596,0,1.0622867345809937,-0.024915659800171852,1.181633710861206,0,2.1700284481048584,-0.017475102096796036,5.217995643615723,1],
+						"matrix": [1.173403376437547,0.21235885605602578,-1.0504099178771849,0,-0.1525563800830789,1.6984988463406838,0.17296209551227804,0,1.0622867297668583,-0.02491566332450592,1.1816337151513294,0,2.1700284481048584,-0.017475102096796036,5.217995643615723,1],
 						"geometry": "B23D3D49-C455-4B22-BD3D-83F6C124AB94",
 						"material": "C56271DC-CF98-40E2-99D3-927322ACB413"
 					},
@@ -3608,7 +3628,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": false,
-						"matrix": [-0.0001950651640072465,0,0.0011985193705186248,0,0,0.0012142894556745887,0,0,-0.0011985193705186248,0,-0.0001950651640072465,0,0.8612696528434753,-0.5224084854125977,2.3811910152435303,1],
+						"matrix": [-0.00019506516400724685,0,0.001198519370518625,0,0,0.0012142894556745887,0,0,-0.001198519370518625,0,-0.00019506516400724685,0,0.8612696528434753,-0.5224084854125977,2.3811910152435303,1],
 						"geometry": "46593E86-72B4-4F11-AC7B-8C1C3D93C917",
 						"material": "1D50F332-C6BF-47D0-979A-4144F14311F8"
 					},
@@ -3634,7 +3654,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": false,
-						"matrix": [0.523164689540863,0,0.2276751548051834,0,0,0.5705587267875671,0,0,-0.2276751548051834,0,0.523164689540863,0,1.7976146936416626,0.3371044397354126,3.6830296516418457,1],
+						"matrix": [0.523164689540863,0,0.22767515480518344,0,0,0.5705587267875671,0,0,-0.22767515480518344,0,0.523164689540863,0,1.7976146936416626,0.3371044397354126,3.6830296516418457,1],
 						"geometry": "12FD32E5-4A61-4975-839D-89510A29AEDE",
 						"material": "8BF8CB0F-F534-4923-94F8-11B327628A90"
 					},
@@ -3662,7 +3682,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": false,
-						"matrix": [1.1710234880447388,0.16500243544578552,0.35508817434310913,0,-0.17641176283359528,1.319730520248413,-0.03147507831454277,0,-0.35575878620147705,-0.019359422847628593,1.1822309494018555,0,0.4788475036621094,-0.017475102096796036,-0.20618198812007904,1],
+						"matrix": [1.1710234862199482,0.1650024339171404,0.35508818107221296,0,-0.17641176448243995,1.319730520017621,-0.031475078752160816,0,-0.3557587794723739,-0.019359423253344558,1.1822309514203688,0,0.4788475036621094,-0.017475102096796036,-0.20618198812007904,1],
 						"geometry": "B23D3D49-C455-4B22-BD3D-83F6C124AB94",
 						"material": "C56271DC-CF98-40E2-99D3-927322ACB413"
 					},
@@ -3676,7 +3696,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": false,
-						"matrix": [-0.00018734551849775016,0,0.0007777542341500521,0,0,0.0007999999797903001,0,0,-0.0007777542341500521,0,-0.00018734551849775016,0,1.6478700637817383,0.09144937247037888,2.943739414215088,1],
+						"matrix": [-0.00018734551849774968,0,0.000777754234150052,0,0,0.0007999999797903001,0,0,-0.000777754234150052,0,-0.00018734551849774968,0,1.6478700637817383,0.09144937247037888,2.943739414215088,1],
 						"material": "D3A83FF5-AFCD-4E16-911F-B2D34506CFE5",
 						"text": "Press spacebar to jump!",
 						"font": "3B160346-C721-47FE-9920-D9CEFFAD9998",
@@ -3697,7 +3717,7 @@
 						"receiveShadow": true,
 						"visible": true,
 						"matrixAutoUpdate": true,
-						"matrix": [7.720403800703934e-7,0,0.0009999996982514858,0,0,0.0010000000474974513,0,0,-0.0009999996982514858,0,7.720403800703934e-7,0,0.41249990463256836,-0.5,-0.4126320481300354,1],
+						"matrix": [7.720403800705706e-7,0,0.0009999996982514858,0,0,0.0010000000474974513,0,0,-0.0009999996982514858,0,7.720403800705706e-7,0,0.41249990463256836,-0.5,-0.4126320481300354,1],
 						"children": [
 							{
 								"uuid": "E9EC039A-C73A-449C-902C-CDE43713EC10",
@@ -3731,7 +3751,7 @@
 					"quatNormalizeSkip": 0,
 					"quatNormalizeFast": false,
 					"solver": {
-						"tolerance": 0.1,
+						"tolerance": 0.05,
 						"iterations": 7
 					}
 				}
@@ -3744,6 +3764,9 @@
 		"vrScale": 1,
 		"antialiasing": false,
 		"shadows": true,
-		"shadowsType": 2
+		"shadowsType": 2,
+		"toneMapping": 0,
+		"toneMappingExposure": 1,
+		"toneMappingWhitePoint": 1
 	}
 }
