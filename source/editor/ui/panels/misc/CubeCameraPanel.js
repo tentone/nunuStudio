@@ -7,6 +7,22 @@ function CubeCameraPanel(parent, obj)
 	//Self pointer
 	var self = this;
 
+	//Auto update
+	this.form.addText("Auto update");
+	this.autoUpdate = new CheckBox(this.form.element);
+	this.autoUpdate.size.set(20, 15);
+	this.autoUpdate.position.set(5, 85);
+	this.autoUpdate.updateInterface();
+	this.autoUpdate.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.autoUpdate = self.autoUpdate.getValue();
+		}
+	});
+	this.form.add(this.autoUpdate);
+	this.form.nextRow();
+
 	//Resolution
 	this.form.addText("Resolution");
 	this.resolution = new DropdownList(this.form.element);
@@ -39,6 +55,7 @@ CubeCameraPanel.prototype.updatePanel = function()
 	
 	if(this.obj !== null)
 	{
+		this.autoUpdate.setValue(this.obj.autoUpdate);
 		this.resolution.setValue(this.obj.resolution);
 	}
 };

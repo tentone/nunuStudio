@@ -6288,7 +6288,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
             "line": 198,
-            "description": "Serialize CubeCamera data to JSON.",
+            "description": "Serialize data to JSON.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
