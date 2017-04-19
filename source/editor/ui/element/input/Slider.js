@@ -89,12 +89,15 @@ Slider.prototype.getValue = function()
 //Remove element
 Slider.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
+	}
+	
+	if(this.parent.contains(this.text))
+	{
 		this.parent.removeChild(this.text);
 	}
-	catch(e){}
 }
 
 //Update Interface

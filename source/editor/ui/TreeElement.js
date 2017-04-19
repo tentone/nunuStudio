@@ -529,11 +529,10 @@ TreeElement.prototype.add = function(label, icon)
 //Remove element
 TreeElement.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 	
 	for(var i = 0; i < this.children.length; i++)
 	{

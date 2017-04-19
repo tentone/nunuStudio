@@ -6673,7 +6673,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 228,
-            "description": "Create JSON for spine animation.",
+            "description": "Serialize spine animation as JSON.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [

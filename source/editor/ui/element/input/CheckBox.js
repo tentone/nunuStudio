@@ -54,11 +54,10 @@ CheckBox.prototype.setOnChange = function(onChange)
 //Remove element
 CheckBox.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Update Interface

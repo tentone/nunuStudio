@@ -781,7 +781,16 @@ SceneEditor.prototype.update = function()
 	}
 	else if(this.state === SceneEditor.TESTING)
 	{
-		this.programRunning.update();
+		try
+		{
+			this.programRunning.update();
+		}
+		catch(e)
+		{
+			this.setState(SceneEditor.EDITING);
+			alert("Error testing program\nState update caused an error\n" + e.stack);
+		}
+		
 
 		if(this.keyboard.keyJustPressed(Keyboard.F5))
 		{
@@ -872,7 +881,15 @@ SceneEditor.prototype.render = function()
 	}
 	else if(this.state === SceneEditor.TESTING)
 	{
-		this.programRunning.render(renderer, this.canvas.width, this.canvas.height);
+		try
+		{
+			this.programRunning.render(renderer, this.canvas.width, this.canvas.height);
+		}
+		catch(e)
+		{
+			this.setState(SceneEditor.EDITING);
+			alert("Error testing program\nRender caused an error\n" + e.stack);
+		}
 	}
 };
 
@@ -1073,11 +1090,8 @@ SceneEditor.prototype.setState = function(state)
 		}
 		catch(e)
 		{
-			this.state = SceneEditor.EDITING;
-			this.programRunning.dispose();
-			this.programRunning = null;
-
-			alert("Error testing program \n(" + e + ")");
+			this.setState(SceneEditor.EDITING);
+			alert("Error testing program\nInitialization caused an error\n" + e.stack);
 		}
 		//Update interface
 		this.updateInterface();

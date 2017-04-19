@@ -51,11 +51,10 @@ TextArea.prototype.getText = function()
 //Remove element
 TextArea.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 }
 
 //Update Interface

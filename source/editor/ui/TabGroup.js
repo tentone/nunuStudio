@@ -258,11 +258,10 @@ TabGroup.prototype.updateOptionIndex = function()
 //Remove element
 TabGroup.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Update interface

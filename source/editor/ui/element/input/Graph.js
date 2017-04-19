@@ -286,11 +286,10 @@ Graph.prototype.updateGrid = function()
 //Remove element
 Graph.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Update graph buttons state

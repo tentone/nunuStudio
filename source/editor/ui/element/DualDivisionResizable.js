@@ -117,11 +117,10 @@ DualDivisionResizable.prototype.setOnResize = function(callback)
 //Remove element
 DualDivisionResizable.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Update interface

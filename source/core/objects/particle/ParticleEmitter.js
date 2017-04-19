@@ -117,7 +117,7 @@ ParticleEmitter.defaultGroup =
 	fog: false,
 	depthWrite: false,
 	depthTest: true,
-	transparent: false,
+	transparent: true,
 	hasPerspective: true
 };
 

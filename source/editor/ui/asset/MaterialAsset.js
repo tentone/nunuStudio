@@ -162,7 +162,7 @@ function MaterialAsset(parent)
 				}
 				catch(e)
 				{
-					alert("Material duplication failed\n(" + e + ")");
+					alert("Material duplication failed\n" + e.stack);
 				}
 			}
 		});

@@ -46,11 +46,10 @@ function ButtonImage(parent)
 //Remove element
 ButtonImage.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Set button callback function

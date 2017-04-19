@@ -40,11 +40,10 @@ ImageBox.prototype.setCallback = function(callback)
 //Remove element
 ImageBox.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Set ImageBox

@@ -107,11 +107,10 @@ TreeView.prototype.add = function(text, icon)
 TreeView.prototype.destroy = function()
 {
 	//Remove main element
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 
 	//Clear children list
 	this.children = [];
