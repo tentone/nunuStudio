@@ -296,11 +296,10 @@ AssetExplorer.prototype.add = function(file)
 //Remove element
 AssetExplorer.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Update division

@@ -182,11 +182,10 @@ Panel.prototype.attach = function(obj)
 //Remove element
 Panel.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Update panel ui

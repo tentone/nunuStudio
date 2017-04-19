@@ -49,11 +49,10 @@ TextBox.prototype.getText = function()
 //Remove element
 TextBox.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 }
 
 //Update Interface

@@ -63,11 +63,10 @@ NumberBox.prototype.getValue = function()
 //Remove element
 NumberBox.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 }
 
 //Update Interface

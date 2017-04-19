@@ -58,7 +58,7 @@ function SpineAnimation(json, atlas, path, textures)
 		
 		var textureAtlas = new spine.TextureAtlas(atlas, function(file)
 		{
-			var texture = new SpineTexture(new Texture(new Image(path + "\\" + file)));
+			var texture = new SpineTexture(new Texture(new Image(path + "/" + file)));
 			var image = texture.texture.image;
 			image.width = 1024;
 			image.height = 1024;
@@ -226,7 +226,7 @@ SpineAnimation.prototype.updateGeometry = function()
 };
 
 /**
- * Create JSON for spine animation.
+ * Serialize spine animation as JSON.
  *
  * @method toJSON
  * @param {Object} meta

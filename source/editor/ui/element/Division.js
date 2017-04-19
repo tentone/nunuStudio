@@ -24,11 +24,10 @@ function Division(parent)
 //Remove element
 Division.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Update division Size

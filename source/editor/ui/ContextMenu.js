@@ -40,11 +40,10 @@ ContextMenu.prototype.setText = function(text)
 //Remove element
 ContextMenu.prototype.destroy = function()
 {	
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 
 	for(var k = 0; k < this.options.length; k++)
 	{

@@ -72,11 +72,10 @@ function ButtonImageToggle(parent)
 //Remove element
 ButtonImageToggle.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Set button callback function

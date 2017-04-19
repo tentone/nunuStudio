@@ -76,11 +76,10 @@ ColorChooser.prototype.getValueHex = function()
 //Remove element
 ColorChooser.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Update Interface

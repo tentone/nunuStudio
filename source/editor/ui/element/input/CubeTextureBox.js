@@ -101,11 +101,10 @@ CubeTextureBox.prototype.setOnChange = function(onChange)
 //Remove element
 CubeTextureBox.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
 };
 
 //Set texture value
