@@ -8140,7 +8140,7 @@
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
             "line": 20,
-            "description": "Image is used to store a DOM video element",
+            "description": "Image is used to store a DOM video element.",
             "itemtype": "property",
             "name": "image",
             "type": "{DOM}",
@@ -8149,8 +8149,8 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 26,
-            "description": "Video audio volume",
+            "line": 25,
+            "description": "Video audio volume, its a values between 1.0 and 0.0",
             "itemtype": "property",
             "name": "volume",
             "default": "1.0",
@@ -8160,8 +8160,8 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 32,
-            "description": "If true the playback starts automatically",
+            "line": 31,
+            "description": "If true the video starts playing automatically.",
             "itemtype": "property",
             "name": "autoplay",
             "default": "true",
@@ -8171,8 +8171,8 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 38,
-            "description": "Start time in seconds",
+            "line": 37,
+            "description": "Start time in seconds.",
             "itemtype": "property",
             "name": "playbackRate",
             "default": "1.0",
@@ -8182,8 +8182,8 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 44,
-            "description": "If true the video plays in loop",
+            "line": 43,
+            "description": "If true the video plays in loop.",
             "itemtype": "property",
             "name": "loop",
             "default": "true",
@@ -8193,7 +8193,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 106,
+            "line": 104,
             "description": "Set video time in seconds.",
             "params": [
                 {
@@ -8209,7 +8209,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 117,
+            "line": 115,
             "description": "Set loop mode.",
             "params": [
                 {
@@ -8225,7 +8225,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 129,
+            "line": 127,
             "description": "Set video volume.",
             "params": [
                 {
@@ -8241,7 +8241,23 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 141,
+            "line": 139,
+            "description": "Set autoplay value.\n\nIf the image is already playing it will not stop playing.",
+            "itemtype": "method",
+            "name": "setAutoPlay",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "If true the video will play automatically.",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "VideoTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
+            "line": 153,
             "description": "Set video playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -8257,7 +8273,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 153,
+            "line": 165,
             "description": "Pause video playback.",
             "itemtype": "method",
             "name": "pause",
@@ -8266,7 +8282,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 166,
+            "line": 178,
             "description": "Start playing video.",
             "itemtype": "method",
             "name": "play",
@@ -8275,8 +8291,8 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 179,
-            "description": "Dispose video texture.",
+            "line": 191,
+            "description": "Dispose video texture.\n\nStops the video and cleans the DOM video element inside the VideoTexture.",
             "itemtype": "method",
             "name": "dispose",
             "class": "VideoTexture",
@@ -8284,7 +8300,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\VideoTexture.js",
-            "line": 196,
+            "line": 209,
             "description": "Create Video texture json description.",
             "itemtype": "method",
             "name": "toJSON",

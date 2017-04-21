@@ -18,31 +18,30 @@
  */
 
 /**
- * Image is used to store a DOM video element
- * 
+ * Image is used to store a DOM video element.
  * @property image
  * @type {DOM}
  */
 /**
- * Video audio volume
+ * Video audio volume, its a values between 1.0 and 0.0
  * @property volume
  * @default 1.0
  * @type {Number}
 */
 /**
- * If true the playback starts automatically
+ * If true the video starts playing automatically.
  * @property autoplay
  * @default true
  * @type {boolean}
 */
 /**
- * Start time in seconds
+ * Start time in seconds.
  * @property playbackRate
  * @default 1.0
  * @type {Number}
 */
 /**
- * If true the video plays in loop
+ * If true the video plays in loop.
  * @property loop
  * @default true
  * @type {boolean}
@@ -70,7 +69,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	this.category = "Video";
 
 	//Controls
-	this.autoplay = true;
+	this.autoplay = false;
 	this.loop = true;
 	this.playbackRate = 1.0;
 	this.volume = 1.0;
@@ -81,19 +80,18 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	this.image.playbackRate = this.playbackRate;
 	this.image.loop = this.loop;
 	this.image.volume = this.volume;
-	
+
 	//Video update loop
 	var texture = this;
 	var video = this.image;
 	function update()
 	{
-		if(video.readyState >= video.HAVE_CURRENT_DATA)
-		{
-			texture.needsUpdate = true;
-		}
-
 		if(!texture.disposed)
 		{
+			if(video.readyState >= video.HAVE_CURRENT_DATA)
+			{
+				texture.needsUpdate = true;
+			}
 			requestAnimationFrame(update);
 		}
 	};
@@ -139,6 +137,20 @@ VideoTexture.prototype.setVolume = function(volume)
 };
 
 /**
+ * Set autoplay value.
+ *
+ * If the image is already playing it will not stop playing.
+ *
+ * @method setAutoPlay
+ * @param {boolean} value If true the video will play automatically.
+ */
+VideoTexture.prototype.setAutoPlay = function(value)
+{
+	this.autoplay = value;
+	this.image.autoplay = this.autoplay;
+}
+
+/**
  * Set video playback speed.
  * 
  * @method setPlaybackRate
@@ -178,6 +190,8 @@ VideoTexture.prototype.play = function()
 
 /**
  * Dispose video texture.
+ *
+ * Stops the video and cleans the DOM video element inside the VideoTexture.
  * 
  * @method dispose
  */
@@ -187,10 +201,9 @@ VideoTexture.prototype.dispose = function()
 
 	this.disposed = true;
 	
-	if(!this.image.paused)
-	{
-		this.image.pause();
-	}
+	this.image.pause();
+	this.image.src = "";
+	this.image.load();
 };
 
 /**
