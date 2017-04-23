@@ -89,6 +89,32 @@ function AssetExplorer(parent)
 		}, "image/*");
 	}, Editor.filePath + "icons/misc/image.png");
 
+	//Spritesheet texture
+	texture.addOption("SpriteSheet Texture", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			if(files.length > 0)
+			{
+				var file = files[0];
+				var name = FileSystem.getFileName(file.name);
+				var extension = file.name.split(".").pop().toLowerCase();
+				var reader = new FileReader();
+
+				reader.onload = function()
+				{
+					var texture = new SpriteSheetTexture(new Image(reader.result), 1, 1 ,1);
+					texture.name = name;
+
+					Editor.program.addTexture(texture);
+					Editor.updateObjectViews();
+				};
+
+				reader.readAsDataURL(file);
+			}
+		}, "image/*");
+	}, Editor.filePath + "icons/misc/bone.png");
+
 	//Cube texture
 	texture.addOption("Cube Texture", function()
 	{

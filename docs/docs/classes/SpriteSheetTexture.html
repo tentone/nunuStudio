@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Sprite</title>  
+	<title>nunuStudio SpriteSheetTexture</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -151,34 +151,52 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Sprite Class</h1>
+						<h1>SpriteSheetTexture Class</h1>
 						<div class="box meta">
 						
 								<div class="extends">
-									Extends <a href="../classes/Script.html" class="crosslink">Script</a>
+									Extends <a href="../classes/Texture.html" class="crosslink">Texture</a>
 								</div>
 						
 						
-									Module: <a href="../modules/Sprite.html">Sprite</a>
+									Module: <a href="../modules/Textures.html">Textures</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Sprites allways face the screen are used for 2D elements.</p>
-						<p>Based on THREE.Sprite documentation for the object can be found at <a href="https://threejs.org/docs/index.html#Reference/Objects/Sprite">https://threejs.org/docs/index.html#Reference/Objects/Sprite</a>.</p>
+							<p>SpriteSheet texture, can be used load spritesheet animations as textures.</p>
+						<p>Images are played row by row, changing every animationSpeed seconds.</p>
 						
 						</div>
 						
 							<div class="constructor">
 								<h2>Constructor</h2>
-								<div id="method_Sprite" class="method item">
-									<h3 class="name"><code>Sprite</code></h3>
+								<div id="method_SpriteSheetTexture" class="method item">
+									<h3 class="name"><code>SpriteSheetTexture</code></h3>
 								
 										<div class="args">
 											<span class="paren">(</span><ul class="args-list inline commas">
 												<li class="arg">
-														<code>material</code>
+														<code>image</code>
+												</li>
+												<li class="arg">
+														<code>framesHorizontal</code>
+												</li>
+												<li class="arg">
+														<code>framesVertical</code>
+												</li>
+												<li class="arg">
+														<code>totalFrames</code>
+												</li>
+												<li class="arg">
+														<code>mapping</code>
+												</li>
+												<li class="arg">
+														<code>type</code>
+												</li>
+												<li class="arg">
+														<code>anisotropy</code>
 												</li>
 											</ul><span class="paren">)</span>
 										</div>
@@ -207,13 +225,72 @@
 								
 											<ul class="params-list">
 												<li class="param">
-														<code class="param-name">material</code>
-														<span class="type"><a href="../classes/Material.html" class="crosslink">Material</a></span>
+														<code class="param-name">image</code>
+														<span class="type"><a href="../classes/Image.html" class="crosslink">Image</a></span>
 								
 								
 													<div class="param-description">
-														<p>Material used to draw sprites</p>
+														 
+													</div>
 								
+												</li>
+												<li class="param">
+														<code class="param-name">framesHorizontal</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">framesVertical</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">totalFrames</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">mapping</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">type</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">anisotropy</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														 
 													</div>
 								
 												</li>
@@ -244,6 +321,14 @@
 														<a href="#method_dispose">dispose</a>
 						
 													</li>
+													<li class="index-item method">
+														<a href="#method_setPlaybackRate">setPlaybackRate</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_toJSON">toJSON</a>
+						
+													</li>
 											</ul>
 										</div>
 						
@@ -252,7 +337,23 @@
 						
 											<ul class="index-list properties extends">
 													<li class="index-item property">
-														<a href="#property_material">material</a>
+														<a href="#property_animationSpeed">animationSpeed</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_framesHorizontal">framesHorizontal</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_framesVertical">framesVertical</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_loop">loop</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_totalFrames">totalFrames</a>
 						
 													</li>
 											</ul>
@@ -285,11 +386,123 @@
 												</div>
 											
 												<div class="description">
-													<p>Dispose the sprite material.</p>
+													<p>Dispose spritesheet texture.</p>
 											
 												</div>
 											
 											
+											
+											</div>
+											<div id="method_setPlaybackRate" class="method item">
+												<h3 class="name"><code>setPlaybackRate</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>playbackRate</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Set video playback speed.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">playbackRate</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_toJSON" class="method item">
+												<h3 class="name"><code>toJSON</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>meta</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Object</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Create texture json description.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">meta</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Object</span>:
+																<p>json</p>
+											
+														</div>
+													</div>
 											
 											</div>
 									</div>
@@ -297,9 +510,9 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
-											<div id="property_material" class="property item">
-												<h3 class="name"><code>material</code></h3>
-												<span class="type"><a href="../classes/Material.html" class="crosslink">Material</a></span>
+											<div id="property_animationSpeed" class="property item">
+												<h3 class="name"><code>animationSpeed</code></h3>
+												<span class="type">Number</span>
 											
 											
 											
@@ -313,10 +526,108 @@
 												</div>
 											
 												<div class="description">
-													<p>Material used to render the sprite.</p>
+													<p>Animation speed in seconds.</p>
 											
 												</div>
 											
+													<p><strong>Default:</strong> 0.1</p>
+											
+											
+											</div>
+											<div id="property_framesHorizontal" class="property item">
+												<h3 class="name"><code>framesHorizontal</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Spritesheet number of frames horizontally.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> 1.0</p>
+											
+											
+											</div>
+											<div id="property_framesVertical" class="property item">
+												<h3 class="name"><code>framesVertical</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Spritesheet number of frames vertically.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> 1.0</p>
+											
+											
+											</div>
+											<div id="property_loop" class="property item">
+												<h3 class="name"><code>loop</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>If true the animation plays in loop.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> true</p>
+											
+											
+											</div>
+											<div id="property_totalFrames" class="property item">
+												<h3 class="name"><code>totalFrames</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Total number of frames present in the texture.</p>
+											<p>Sometimes a NxM spritesheet doest not have all spaces filled, this parameter is used to take care of those cases.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> 1</p>
 											
 											
 											</div>

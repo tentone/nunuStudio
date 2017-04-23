@@ -56,6 +56,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "SpineTexture",
         "SpotLight",
         "Sprite",
+        "SpriteSheetTexture",
         "Text3D",
         "Texture",
         "TextureLoader",
