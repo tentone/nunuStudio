@@ -180,6 +180,8 @@ TextureLoader.prototype.parse = function(json, onLoad)
 			texture = new SpriteSheetTexture(this.images[json.image], json.framesHorizontal, json.framesVertical, json.totalFrames);
 			texture.loop = json.loop;
 			texture.animationSpeed = json.animationSpeed;
+			texture.beginFrame = json.beginFrame;
+			texture.endFrame = json.endFrame;
 		}
 		//Texture
 		else

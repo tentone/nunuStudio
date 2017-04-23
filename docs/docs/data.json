@@ -2263,7 +2263,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
             "line": 3,
-            "description": "SpriteSheet texture, can be used load spritesheet animations as textures.\n\nImages are played row by row, changing every animationSpeed seconds.",
+            "description": "SpriteSheet texture, can be used load spritesheet animations as textures.\n\nThe images have to be aligned in a grid without overlapping if the spritesheet is not full the last rows or blocks should be empty.\n\nImages are played row by row, changing every animationSpeed seconds.",
             "is_constructor": 1,
             "extends": "{Texture}",
             "params": [
@@ -7498,6 +7498,19 @@
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
             "line": 102,
+            "description": "Check if this image has alpha channel.\n\nThis checks the file encoding if the file a gif or a png is assumed that the file has alpha channel.",
+            "itemtype": "method",
+            "name": "hasTransparency",
+            "return": {
+                "description": "True if the image is encoded as PNG or GIF",
+                "type": "Boolean"
+            },
+            "class": "Image",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\Image.js",
+            "line": 115,
             "description": "Compresses image data to JPEG or PNG and stores in base64 encoding.\n\nIf the image has transparency it is stored as PNG otherwise the image is stored in JPEG with 1.0 quality.\n\nCan be used to compress data and save space.",
             "itemtype": "method",
             "name": "encodeData",
@@ -7506,7 +7519,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 148,
+            "line": 161,
             "description": "Serialize Image resource to JSON.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8135,7 +8148,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 21,
+            "line": 23,
             "description": "If true the animation plays in loop.",
             "itemtype": "property",
             "name": "loop",
@@ -8146,7 +8159,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 27,
+            "line": 29,
             "description": "Animation speed in seconds.",
             "itemtype": "property",
             "name": "animationSpeed",
@@ -8157,7 +8170,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 33,
+            "line": 35,
             "description": "Spritesheet number of frames horizontally.",
             "itemtype": "property",
             "name": "framesHorizontal",
@@ -8168,7 +8181,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 39,
+            "line": 41,
             "description": "Spritesheet number of frames vertically.",
             "itemtype": "property",
             "name": "framesVertical",
@@ -8179,7 +8192,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 45,
+            "line": 47,
             "description": "Total number of frames present in the texture.\n\nSometimes a NxM spritesheet doest not have all spaces filled, this parameter is used to take care of those cases.",
             "itemtype": "property",
             "name": "totalFrames",
@@ -8190,13 +8203,34 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 143,
-            "description": "Set video playback speed.",
+            "line": 55,
+            "description": "The offset frame can be ajusted to control in which frame the animation starts.",
+            "itemtype": "property",
+            "name": "beginFrame",
+            "default": "0",
+            "type": "{Number}",
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 62,
+            "description": "The offset frame can be ajusted to control in which frame the animation ends.",
+            "itemtype": "property",
+            "name": "endFrame",
+            "type": "{Number}",
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 204,
+            "description": "Set animation playback speed.",
             "itemtype": "method",
-            "name": "setPlaybackRate",
+            "name": "setAnimationSpeed",
             "params": [
                 {
-                    "name": "playbackRate",
+                    "name": "animationSpeed",
                     "description": "",
                     "type": "Number"
                 }
@@ -8206,7 +8240,49 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 154,
+            "line": 215,
+            "description": "Set the sprite sheet grid dimension.",
+            "itemtype": "method",
+            "name": "setFrameGrid",
+            "params": [
+                {
+                    "name": "framesHorizontal",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "framesVertical",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 229,
+            "description": "Set frames to be used for this animation.\n\nFrame starts counting from 0.",
+            "itemtype": "method",
+            "name": "setAnimationFrames",
+            "params": [
+                {
+                    "name": "beginFrame",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "endFrame",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 244,
             "description": "Dispose spritesheet texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -8215,7 +8291,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 166,
+            "line": 256,
             "description": "Create texture json description.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8277,7 +8353,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 105,
+            "line": 104,
             "description": "Dispose texture",
             "itemtype": "method",
             "name": "dispose",
@@ -8286,7 +8362,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 116,
+            "line": 115,
             "description": "Create JSON description for texture, serializes image used in the texture\nTHREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
             "params": [
                 {
