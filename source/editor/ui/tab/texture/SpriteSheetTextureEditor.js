@@ -20,6 +20,10 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 			var value = self.frames.getValue();
 			self.texture.framesHorizontal = value.x;
 			self.texture.framesVertical = value.y;
+
+			self.totalFrames.setValue(self.texture.totalFrames);
+			self.beginFrame.setValue(self.texture.beginFrame);
+			self.endFrame.setValue(self.texture.endFrame);
 		}
 	});
 	this.form.add(this.frames);
@@ -36,6 +40,8 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 		if(self.texture !== null)
 		{
 			self.texture.totalFrames = self.totalFrames.getValue();
+			self.beginFrame.setValue(self.texture.beginFrame);
+			self.endFrame.setValue(self.texture.endFrame);
 		}
 	});
 	this.form.add(this.totalFrames);

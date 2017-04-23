@@ -34,20 +34,24 @@
 */
 /**
  * Spritesheet number of frames horizontally.
+ *
+ * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
  * @property framesHorizontal
  * @default 1.0
  * @type {Number}
 */
 /**
  * Spritesheet number of frames vertically.
+ *
+ * When this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.
  * @property framesVertical
  * @default 1.0
  * @type {Number}
 */
 /**
  * Total number of frames present in the texture.
- *
- * Sometimes a NxM spritesheet doest not have all spaces filled, this parameter is used to take care of those cases.
+ * 
+ * Sometimes a NxM spritesheet does not have all spaces filled, this parameter is used to take care of those cases.
  * @property totalFrames
  * @default 1
  * @type {Number}
@@ -108,6 +112,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 			{
 				self._framesHorizontal = value;
 				self.repeat.x = 1 / value;
+				self.totalFrames = self._framesHorizontal * self._framesVertical;
 			}
 		},
 		framesVertical:
@@ -120,6 +125,7 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 			{
 				self._framesVertical = value;
 				self.repeat.y = 1 / value;
+				self.totalFrames = self._framesHorizontal * self._framesVertical;
 			}
 		},
 		endFrame:
@@ -215,6 +221,8 @@ SpriteSheetTexture.prototype.setAnimationSpeed = function(animationSpeed)
 /**
  * Set the sprite sheet grid dimension.
  *
+ * Automatically sets the totalFrame value to framesHorizontal * framesVertical.
+ * 	
  * @method setFrameGrid
  * @param {Number} framesHorizontal
  * @param {Number} framesVertical
@@ -223,7 +231,8 @@ SpriteSheetTexture.prototype.setFrameGrid = function(framesHorizontal, framesVer
 {
 	this._framesHorizontal = framesHorizontal;
 	this._framesVertical = framesVertical;
-	this.repeat.set(1 / this._framesHorizontal, 1 / this._framesVertical);
+	this._totalFrames = framesHorizontal * framesVertical;
+	this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
 };
 
 /**
