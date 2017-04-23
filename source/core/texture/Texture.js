@@ -66,23 +66,21 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 		this.img = image;
 	}
 
-	//Texture constructor
+	//Super constructor
 	THREE.Texture.call(this, document.createElement("img"), mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
-	//If the image is not transparent use RBG instead of RGBA to save space
-	var transparent = this.img.encoding === "png" || this.img.encoding === "gif";
-	var texture = this;
+	var self = this;
 
 	this.name = "texture";
 	this.category = "Image";
 	this.disposed = false;
-	this.format = transparent ? THREE.RGBAFormat : THREE.RGBFormat;
+	this.format = this.img.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
 
 	//Image source
 	this.image.src = this.img.data;
 	this.image.onload = function()
 	{
-		texture.needsUpdate = true;
+		self.needsUpdate = true;
 	}
 
 	//Check if image is animated
@@ -90,12 +88,13 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	{
 		function update()
 		{
-			if(!texture.disposed)
+			if(!self.disposed)
 			{
-				texture.needsUpdate = true;
+				self.needsUpdate = true;
 				requestAnimationFrame(update);
 			}
 		};
+		
 		update();
 	}
 }

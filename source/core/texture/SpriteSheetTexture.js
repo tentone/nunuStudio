@@ -3,6 +3,8 @@
 /**
  * SpriteSheet texture, can be used load spritesheet animations as textures.
  *
+ * The images have to be aligned in a grid without overlapping if the spritesheet is not full the last rows or blocks should be empty.
+ * 
  * Images are played row by row, changing every animationSpeed seconds.
  * 
  * @class SpriteSheetTexture
@@ -50,6 +52,19 @@
  * @default 1
  * @type {Number}
 */
+/**
+ * The offset frame can be ajusted to control in which frame the animation starts.
+ * 
+ * @property beginFrame
+ * @default 0
+ * @type {Number}
+ */
+/**
+ * The offset frame can be ajusted to control in which frame the animation ends.
+ * 
+ * @property endFrame
+ * @type {Number}
+ */
 function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames, mapping, type, anisotropy)
 {
 	if(typeof image === "string")
@@ -68,17 +83,17 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 	this.name = "animation";
 	this.category = "SpriteSheet";
 	this.disposed = false;
-
-	//Animation
+	this.format = this.img.hasTransparency() ? THREE.RGBAFormat : THREE.RGBFormat;
+	this.repeat.set(1 / framesHorizontal, 1 / framesVertical);
+	
 	this.loop = true;
 	this.animationSpeed = 0.1;
-	this.totalFrames = totalFrames;
+
+	this._totalFrames = totalFrames;
+	this._beginFrame = 0;
+	this._endFrame = 0;
 	this._framesHorizontal = framesHorizontal;
 	this._framesVertical = framesVertical;
-
-	//Runtime
-	this.repeat.set(1 / this._framesHorizontal, 1 / this._framesVertical);
-	this.currentFrame = 0;
 
 	var self = this;
 	Object.defineProperties(this,
@@ -106,9 +121,52 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 				self._framesVertical = value;
 				self.repeat.y = 1 / value;
 			}
+		},
+		endFrame:
+		{
+			get: function()
+			{
+				return self._endFrame;
+			},
+			set: function(value)
+			{
+				if(value > self._totalFrames)
+				{
+					value = self._totalFrames;
+				}
+				self._endFrame = value;
+			}
+		},
+		beginFrame:
+		{
+			get: function()
+			{
+				return self._beginFrame;
+			},
+			set: function(value)
+			{
+				if(value < 0)
+				{
+					value = 0;
+				}
+				self.currentFrame = value;
+				self._beginFrame = value;
+			}
+		},
+		totalFrames:
+		{
+			get: function()
+			{
+				return self._totalFrames;
+			},
+			set: function(value)
+			{
+				self._beginFrame = 0;
+				self._endFrame = value;
+				self._totalFrames = value;
+			}
 		}
 	});
-
 
 	//Image source
 	this.image.src = this.img.data;
@@ -117,17 +175,20 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 		self.needsUpdate = true;
 	}
 	
+	this.currentFrame = 0;
+
 	//Update loop
 	function update()
 	{
 		self.currentFrame++;
-		if(self.currentFrame >= self.totalFrames)
+
+		if(self.currentFrame >= self._endFrame)
 		{
-			self.currentFrame = 0;
+			self.currentFrame = self._beginFrame;
 		}
 
 		self.offset.x = (self.currentFrame % self.framesHorizontal) / self.framesHorizontal;
-		self.offset.y = Math.floor(self.currentFrame / self.framesHorizontal) / self.framesVertical;
+		self.offset.y = (1 - self.repeat.y) - Math.floor(self.currentFrame / self.framesHorizontal) / self.framesVertical;
 
 		if(!self.disposed)
 		{
@@ -141,14 +202,43 @@ function SpriteSheetTexture(image, framesHorizontal, framesVertical, totalFrames
 SpriteSheetTexture.prototype = Object.create(THREE.Texture.prototype);
 
 /**
- * Set video playback speed.
+ * Set animation playback speed.
  * 
- * @method setPlaybackRate
- * @param {Number} playbackRate
+ * @method setAnimationSpeed
+ * @param {Number} animationSpeed
  */
-SpriteSheetTexture.prototype.setAnimationSpeed = function(playbackRate)
+SpriteSheetTexture.prototype.setAnimationSpeed = function(animationSpeed)
 {
 	this.animationSpeed = animationSpeed;
+};
+
+/**
+ * Set the sprite sheet grid dimension.
+ *
+ * @method setFrameGrid
+ * @param {Number} framesHorizontal
+ * @param {Number} framesVertical
+ */
+SpriteSheetTexture.prototype.setFrameGrid = function(framesHorizontal, framesVertical)
+{
+	this._framesHorizontal = framesHorizontal;
+	this._framesVertical = framesVertical;
+	this.repeat.set(1 / this._framesHorizontal, 1 / this._framesVertical);
+};
+
+/**
+ * Set frames to be used for this animation.
+ *
+ * Frame starts counting from 0.
+ * 
+ * @method setAnimationFrames
+ * @param {Number} beginFrame
+ * @param {Number} endFrame
+ */
+SpriteSheetTexture.prototype.setAnimationFrames = function(beginFrame, endFrame)
+{
+	this.beginFrame = beginFrame;
+	this.endFrame = endFrame;
 };
 
 /**
@@ -180,7 +270,9 @@ SpriteSheetTexture.prototype.toJSON = function(meta)
 	data.animationSpeed = this.animationSpeed;
 	data.framesHorizontal = this._framesHorizontal;
 	data.framesVertical = this._framesVertical;
-	data.totalFrames = this.totalFrames;
+	data.totalFrames = this._totalFrames;
+	data.beginFrame = this._beginFrame;
+	data.endFrame = this._endFrame;
 
 	return data;
 };

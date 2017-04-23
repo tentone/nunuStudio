@@ -52,12 +52,12 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 
 	this.name = "canvas";
 	this.category = "Canvas";
+	this.format = THREE.RGBAFormat;
 
 	this.width = (width !== undefined) ? width : 512;
 	this.height = (height !== undefined) ? height : 512;
 
 	this.context = this.image.getContext("2d");
-
 	this.updateSize();
 
 	this.needsUpdate = true;

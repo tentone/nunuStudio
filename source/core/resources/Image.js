@@ -97,7 +97,20 @@ Image.loadTGAData = function(data)
 	this.encoding = "jpeg";
 	this.format = "base64";
 	this.data = canvas.toDataURL("image/jpeg", 1.0);
-}
+};
+
+/**
+ * Check if this image has alpha channel.
+ *
+ * This checks the file encoding if the file a gif or a png is assumed that the file has alpha channel.
+ *
+ * @method hasTransparency
+ * @return {boolean} True if the image is encoded as PNG or GIF
+ */
+Image.prototype.hasTransparency = function()
+{
+	return this.encoding === "png" || this.encoding === "gif";
+};
 
 /**
  * Compresses image data to JPEG or PNG and stores in base64 encoding.

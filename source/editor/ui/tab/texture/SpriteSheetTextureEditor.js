@@ -26,7 +26,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Total frames
-	this.form.addText("Frames");
+	this.form.addText("Total frames");
 	this.totalFrames = new NumberBox(this.form.element);
 	this.totalFrames.size.set(60, 18);
 	this.totalFrames.setStep(1.0);
@@ -39,6 +39,38 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 		}
 	});
 	this.form.add(this.totalFrames);
+	this.form.nextRow();
+
+	//Begin frame
+	this.form.addText("Begin frame");
+	this.beginFrame = new NumberBox(this.form.element);
+	this.beginFrame.size.set(60, 18);
+	this.beginFrame.setStep(1.0);
+	this.beginFrame.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.beginFrame.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			self.texture.beginFrame = self.beginFrame.getValue();
+		}
+	});
+	this.form.add(this.beginFrame);
+	this.form.nextRow();
+
+	//End frame
+	this.form.addText("End frame");
+	this.endFrame = new NumberBox(this.form.element);
+	this.endFrame.size.set(60, 18);
+	this.endFrame.setStep(1.0);
+	this.endFrame.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.endFrame.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			self.texture.endFrame = self.endFrame.getValue();
+		}
+	});
+	this.form.add(this.endFrame);
 	this.form.nextRow();
 
 	//Speed
@@ -66,5 +98,7 @@ SpriteSheetTextureEditor.prototype.attach = function(texture)
 
 	this.frames.setValue(this.texture.framesHorizontal, this.texture.framesVertical);
 	this.totalFrames.setValue(this.texture.totalFrames);
+	this.beginFrame.setValue(this.texture.beginFrame);
+	this.endFrame.setValue(this.texture.endFrame);
 	this.animationSpeed.setValue(this.texture.animationSpeed);
 };
