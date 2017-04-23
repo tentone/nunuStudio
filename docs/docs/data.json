@@ -8171,7 +8171,7 @@
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
             "line": 35,
-            "description": "Spritesheet number of frames horizontally.",
+            "description": "Spritesheet number of frames horizontally.\n\nWhen this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.",
             "itemtype": "property",
             "name": "framesHorizontal",
             "default": "1.0",
@@ -8181,8 +8181,8 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 41,
-            "description": "Spritesheet number of frames vertically.",
+            "line": 43,
+            "description": "Spritesheet number of frames vertically.\n\nWhen this values is changed the totalFrames value is automatically updated to framesHorizontal * framesVertical.",
             "itemtype": "property",
             "name": "framesVertical",
             "default": "1.0",
@@ -8192,8 +8192,8 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 47,
-            "description": "Total number of frames present in the texture.\n\nSometimes a NxM spritesheet doest not have all spaces filled, this parameter is used to take care of those cases.",
+            "line": 51,
+            "description": "Total number of frames present in the texture.\n\nSometimes a NxM spritesheet does not have all spaces filled, this parameter is used to take care of those cases.",
             "itemtype": "property",
             "name": "totalFrames",
             "default": "1",
@@ -8203,7 +8203,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 55,
+            "line": 59,
             "description": "The offset frame can be ajusted to control in which frame the animation starts.",
             "itemtype": "property",
             "name": "beginFrame",
@@ -8214,7 +8214,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 62,
+            "line": 66,
             "description": "The offset frame can be ajusted to control in which frame the animation ends.",
             "itemtype": "property",
             "name": "endFrame",
@@ -8224,7 +8224,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 204,
+            "line": 210,
             "description": "Set animation playback speed.",
             "itemtype": "method",
             "name": "setAnimationSpeed",
@@ -8240,8 +8240,8 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 215,
-            "description": "Set the sprite sheet grid dimension.",
+            "line": 221,
+            "description": "Set the sprite sheet grid dimension.\n\nAutomatically sets the totalFrame value to framesHorizontal * framesVertical.",
             "itemtype": "method",
             "name": "setFrameGrid",
             "params": [
@@ -8261,7 +8261,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 229,
+            "line": 238,
             "description": "Set frames to be used for this animation.\n\nFrame starts counting from 0.",
             "itemtype": "method",
             "name": "setAnimationFrames",
@@ -8282,7 +8282,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 244,
+            "line": 253,
             "description": "Dispose spritesheet texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -8291,7 +8291,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
-            "line": 256,
+            "line": 265,
             "description": "Create texture json description.",
             "itemtype": "method",
             "name": "toJSON",
