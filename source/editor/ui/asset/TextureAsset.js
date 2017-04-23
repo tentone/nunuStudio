@@ -26,7 +26,10 @@ function TextureAsset(parent)
 		{
 			Constructor = CubeTextureEditor;
 		}
-		
+		else if(self.texture instanceof SpriteSheetTexture)
+		{
+			Constructor = SpriteSheetTextureEditor;
+		}
 		var tab = Interface.tab.getTab(Constructor, self.texture);
 
 		if(tab === null)

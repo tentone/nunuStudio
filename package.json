@@ -1,6 +1,6 @@
 {
 	"name": "nunuStudio",
-	"description": "a three.js based framework for 3D and VR applications that runs direcly on the browser",
+	"description": "A three.js based framework for 3D and VR applications that runs direcly on the browser",
 	"main": "build/nunu.js",
 	"directories":
 	{
@@ -8,8 +8,8 @@
 	},
 	"scripts":
 	{
-		"build:dev": "node ./build/js",
-		"build:prod": "NODE_ENV=production node ./build/js"
+		"build:dev": "node ./build/build.js",
+		"build:prod": "node ./build/build.js"
 	},
 	"repository":
 	{
@@ -28,10 +28,5 @@
 	{
 		"url": "https://github.com/tentone/nunuStudio/issues"
 	},
-	"homepage": "https://www.nunustudio.org",
-	"devDependencies":
-	{
-		"google-closure-compiler-js": "^20170218.0.0",
-		"rimraf": "^2.6.1"
-	}
+	"homepage": "https://www.nunustudio.org"
 }

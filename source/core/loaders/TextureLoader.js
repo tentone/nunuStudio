@@ -174,7 +174,18 @@ TextureLoader.prototype.parse = function(json, onLoad)
 			console.warn("nunuStudio: TextureLoader, undefined image", json.image);
 		}
 
-		texture = new Texture(this.images[json.image]);
+		//SpriteSheet texture
+		if(category === "SpriteSheet")
+		{
+			texture = new SpriteSheetTexture(this.images[json.image], json.framesHorizontal, json.framesVertical, json.totalFrames);
+			texture.loop = json.loop;
+			texture.animationSpeed = json.animationSpeed;
+		}
+		//Texture
+		else
+		{
+			texture = new Texture(this.images[json.image]);
+		}
 	}
 
 	texture.uuid = json.uuid;

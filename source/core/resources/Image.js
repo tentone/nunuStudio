@@ -36,11 +36,6 @@ function Image(url)
 			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
 			this.data = url;
-
-			if(this.encoding !== "gif")
-			{
-				this.encodeData();
-			}
 		}
 		//URL
 		else

@@ -50,7 +50,7 @@ function ParticleEmitter(group, emitter)
 	this.name = "particle";
 	this.frustumCulled = false;
 
-	//Texture
+	//Group
 	var group = this.group;
 	Object.defineProperties(this,
 	{

@@ -458,6 +458,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\texture\\SpriteSheetTexture.js": {
+            "name": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "modules": {},
+            "classes": {
+                "SpriteSheetTexture": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\texture\\Texture.js": {
             "name": "..\\..\\source\\core\\texture\\Texture.js",
             "modules": {},
@@ -854,6 +863,7 @@
                 "CanvasTexture": 1,
                 "SpineTexture": 1,
                 "CubeTexture": 1,
+                "SpriteSheetTexture": 1,
                 "Texture": 1,
                 "VideoTexture": 1,
                 "WebcamTexture": 1
@@ -2241,6 +2251,59 @@
                 }
             ]
         },
+        "SpriteSheetTexture": {
+            "name": "SpriteSheetTexture",
+            "shortname": "SpriteSheetTexture",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Textures",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 3,
+            "description": "SpriteSheet texture, can be used load spritesheet animations as textures.\n\nImages are played row by row, changing every animationSpeed seconds.",
+            "is_constructor": 1,
+            "extends": "{Texture}",
+            "params": [
+                {
+                    "name": "image",
+                    "description": "",
+                    "type": "Image"
+                },
+                {
+                    "name": "framesHorizontal",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "framesVertical",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "totalFrames",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "mapping",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "anisotropy",
+                    "description": "",
+                    "type": "Number"
+                }
+            ]
+        },
         "Texture": {
             "name": "Texture",
             "shortname": "Texture",
@@ -2588,7 +2651,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 88,
+            "line": 89,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -7404,7 +7467,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 68,
+            "line": 63,
             "description": "Check if a file name refers to a supported binary image file.",
             "itemtype": "method",
             "name": "fileIsImage",
@@ -7425,7 +7488,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 92,
+            "line": 87,
             "description": "Load .tga file from ArrayBuffer data.\n\nAfter loading data is converted to JPEG format and stored in base64 encoding.",
             "itemtype": "method",
             "name": "loadTGAData",
@@ -7434,7 +7497,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 107,
+            "line": 102,
             "description": "Compresses image data to JPEG or PNG and stores in base64 encoding.\n\nIf the image has transparency it is stored as PNG otherwise the image is stored in JPEG with 1.0 quality.\n\nCan be used to compress data and save space.",
             "itemtype": "method",
             "name": "encodeData",
@@ -7443,7 +7506,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 153,
+            "line": 148,
             "description": "Serialize Image resource to JSON.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8068,6 +8131,106 @@
                 "type": "Object"
             },
             "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 21,
+            "description": "If true the animation plays in loop.",
+            "itemtype": "property",
+            "name": "loop",
+            "default": "true",
+            "type": "{boolean}",
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 27,
+            "description": "Animation speed in seconds.",
+            "itemtype": "property",
+            "name": "animationSpeed",
+            "default": "0.1",
+            "type": "{Number}",
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 33,
+            "description": "Spritesheet number of frames horizontally.",
+            "itemtype": "property",
+            "name": "framesHorizontal",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 39,
+            "description": "Spritesheet number of frames vertically.",
+            "itemtype": "property",
+            "name": "framesVertical",
+            "default": "1.0",
+            "type": "{Number}",
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 45,
+            "description": "Total number of frames present in the texture.\n\nSometimes a NxM spritesheet doest not have all spaces filled, this parameter is used to take care of those cases.",
+            "itemtype": "property",
+            "name": "totalFrames",
+            "default": "1",
+            "type": "{Number}",
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 143,
+            "description": "Set video playback speed.",
+            "itemtype": "method",
+            "name": "setPlaybackRate",
+            "params": [
+                {
+                    "name": "playbackRate",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 154,
+            "description": "Dispose spritesheet texture.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "SpriteSheetTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
+            "line": 166,
+            "description": "Create texture json description.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
+            },
+            "class": "SpriteSheetTexture",
             "module": "Textures"
         },
         {
@@ -10177,7 +10340,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 99,
+            "line": 100,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -10187,7 +10350,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 105,
+            "line": 106,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -10197,7 +10360,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 111,
+            "line": 112,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -10208,7 +10371,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 118,
+            "line": 119,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -10219,7 +10382,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 125,
+            "line": 126,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -10229,7 +10392,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 131,
+            "line": 132,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasResize",
@@ -10240,7 +10403,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 192,
+            "line": 193,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -10266,7 +10429,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 212,
+            "line": 213,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -10282,7 +10445,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 225,
+            "line": 226,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -10308,7 +10471,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 249,
+            "line": 250,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -10317,7 +10480,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 300,
+            "line": 301,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -10326,7 +10489,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 316,
+            "line": 317,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -10335,7 +10498,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 353,
+            "line": 354,
             "description": "Resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -10344,7 +10507,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 376,
+            "line": 377,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -10353,7 +10516,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 386,
+            "line": 387,
             "description": "Set the canvas to be used for rendering.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -10369,7 +10532,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 398,
+            "line": 399,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -10378,7 +10541,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 422,
+            "line": 423,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -10394,7 +10557,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 438,
+            "line": 439,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -10410,7 +10573,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 451,
+            "line": 452,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -10426,7 +10589,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 464,
+            "line": 465,
             "description": "Check if VR mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -10439,7 +10602,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 475,
+            "line": 476,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -10448,7 +10611,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 501,
+            "line": 502,
             "description": "Set fullscreen mode",
             "itemtype": "method",
             "name": "setFullscreen",

@@ -101,6 +101,7 @@
 	- Support for orbit navigation
 - V0.8.9.25 Alpha
 	- Added CubeCamera
+	- Added SpriteSheet texture animation support
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

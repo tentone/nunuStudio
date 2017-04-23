@@ -818,9 +818,6 @@ Interface.updateInterface = function()
 	Interface.bottomDiv.resizeSizeMax = size.y * 0.6;
 	Interface.bottomDiv.updateInterface();
 
-	//Interface.assetExplorerBar.size.x = Interface.bottomDiv.size.x;
-	//Interface.assetExplorerBar.updateInterface();
-
 	//Asset explorere
 	Interface.assetExplorer.size.x = Interface.bottomDiv.size.x;
 	Interface.assetExplorer.size.y = Interface.bottomDiv.size.y;

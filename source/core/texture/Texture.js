@@ -78,7 +78,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	this.disposed = false;
 	this.format = transparent ? THREE.RGBAFormat : THREE.RGBFormat;
 
-	//Set image source
+	//Image source
 	this.image.src = this.img.data;
 	this.image.onload = function()
 	{
