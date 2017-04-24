@@ -203,7 +203,7 @@ TextureChooser.prototype.updatePreview = function()
 		this.img.style.display = "block";
 		this.img.src = texture.image[0].toDataURL();
 	}
-	else if(texture instanceof Texture)
+	else if(texture instanceof Texture || texture instanceof SpriteSheetTexture)
 	{
 		this.video.style.display = "none";
 		this.img.style.display = "block";
