@@ -165,12 +165,17 @@
 						<ul>
 						<li>initialize
 						<ul>
-						<li>Called on app initialization</li>
+						<li>Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.</li>
 						</ul>
 						</li>
 						<li>update
 						<ul>
-						<li>Called on every frame (after the frame is rendered)</li>
+						<li>Called on every frame after rendering</li>
+						</ul>
+						</li>
+						<li>dispose
+						<ul>
+						<li>Called when disposing the program</li>
 						</ul>
 						</li>
 						<li>onMouseOver

@@ -170,12 +170,17 @@
 						<ul>
 						<li>initialize
 						<ul>
-						<li>Called on app initialization</li>
+						<li>Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.</li>
 						</ul>
 						</li>
 						<li>update
 						<ul>
-						<li>Called on every frame (after the frame is rendered)</li>
+						<li>Called on every frame after rendering</li>
+						</ul>
+						</li>
+						<li>dispose
+						<ul>
+						<li>Called when disposing the program</li>
 						</ul>
 						</li>
 						<li>onMouseOver
@@ -232,6 +237,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_dispose">dispose</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_initialize">initialize</a>
 						
 													</li>
@@ -279,6 +288,9 @@
 											<ul class="index-list attrs extends">
 													<li class="index-item attr">
 														<a href="#attr_DEFAULT">DEFAULT</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_METHODS">METHODS</a>
 													</li>
 													<li class="index-item attr">
 														<a href="#attr_script">script</a>
@@ -339,6 +351,35 @@
 															</li>
 														</ul>
 													</div>
+											
+											
+											</div>
+											<div id="method_dispose" class="method item">
+												<h3 class="name"><code>dispose</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Disposes the script, can be used to clear resources when the program exits.</p>
+											<p>Calls the script dispose method if it exists.</p>
+											
+												</div>
+											
 											
 											
 											</div>
@@ -429,7 +470,7 @@
 											
 												<div class="description">
 													<p>Set script code.</p>
-											<p>Can be used to dinamically change the script code. However it is not recommended.</p>
+											<p>Can be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.</p>
 											
 												</div>
 											
@@ -644,6 +685,33 @@
 											
 												<div class="description">
 													<p>Default script code used when creating a new Script.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_METHODS" class="attr item">
+												<a name="config_METHODS"></a> 
+												<h3 class="name"><code>METHODS</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>List of methods that a script can implement.</p>
 											
 												</div>
 											

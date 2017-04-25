@@ -839,7 +839,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization\n - update\n   - Called on every frame (after the frame is rendered)\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
         },
         "Animations": {
             "name": "Animations",
@@ -1856,7 +1856,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization\n - update\n   - Called on every frame (after the frame is rendered)\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse",
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse",
             "extends": "{Object}",
             "params": [
                 {
@@ -6511,7 +6511,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 30,
+            "line": 32,
             "description": "Javascript code attached to the script",
             "itemtype": "property",
             "name": "code",
@@ -6521,7 +6521,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 35,
+            "line": 37,
             "description": "Compiled function used during runtime",
             "itemtype": "attribute",
             "name": "script",
@@ -6531,7 +6531,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 40,
+            "line": 42,
             "description": "Pointer to the parent program\nUsed access program resources easier",
             "itemtype": "property",
             "name": "program",
@@ -6541,7 +6541,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 46,
+            "line": 48,
             "description": "Pointer to the parent scene",
             "itemtype": "property",
             "name": "scene",
@@ -6551,7 +6551,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 67,
+            "line": 69,
             "description": "Default script code used when creating a new Script.",
             "itemtype": "attribute",
             "name": "DEFAULT",
@@ -6561,7 +6561,17 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 74,
+            "line": 76,
+            "description": "List of methods that a script can implement.",
+            "itemtype": "attribute",
+            "name": "METHODS",
+            "type": "{Array}",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 83,
             "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
             "itemtype": "method",
             "name": "initialize",
@@ -6570,7 +6580,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 113,
+            "line": 122,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -6579,7 +6589,16 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 142,
+            "line": 151,
+            "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 171,
             "description": "Call resize method if available.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "resize",
@@ -6588,7 +6607,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 157,
+            "line": 186,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -6604,8 +6623,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 173,
-            "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended.",
+            "line": 202,
+            "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "setCode",
             "params": [
@@ -6620,7 +6639,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 205,
+            "line": 250,
             "description": "Create JSON for script.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7812,7 +7831,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 271,
+            "line": 269,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -7832,7 +7851,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 291,
+            "line": 289,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -7848,7 +7867,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 305,
+            "line": 303,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -7869,7 +7888,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 333,
+            "line": 331,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -7889,7 +7908,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 353,
+            "line": 351,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -7905,7 +7924,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 367,
+            "line": 365,
             "description": "Remove audio.",
             "params": [
                 {
