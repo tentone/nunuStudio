@@ -3,9 +3,11 @@
  * 
  * It can access and change every object in the program and supports some events
  *  - initialize
- *    - Called on app initialization
+ *    - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.
  *  - update
- *    - Called on every frame (after the frame is rendered)
+ *    - Called on every frame after rendering
+ *  - dispose
+ *    - Called when disposing the program
  *  - onMouseOver
  *    - Called on every frame if mouse is on top of one of the script children
  *  - onResize
@@ -69,7 +71,14 @@ Script.prototype = Object.create(THREE.Object3D.prototype);
  * @attribute DEFAULT
  * @type {String}
  */
-Script.DEFAULT = "this.initialize = function()\n{\n	//TODO <INITIALIZATION CODE>\n};\n\nthis.update = function()\n{\n	//TODO <UPDATE CODE>\n};\n";
+Script.DEFAULT = "function initialize()\n{\n	//TODO <INITIALIZATION CODE>\n}\n\nfunction update()\n{\n	//TODO <UPDATE CODE>\n}\n";
+
+/**
+ * List of methods that a script can implement.
+ * @attribute METHODS
+ * @type {Array}
+ */
+Script.METHODS = ["initialize", "update", "dispose", "onMouseOver", "onResize", "onAppData"];
 
 /**
  * Initialize script
@@ -140,6 +149,26 @@ Script.prototype.update = function()
 };
 
 /**
+ * Disposes the script, can be used to clear resources when the program exits.
+ * 
+ * Calls the script dispose method if it exists.
+ * 
+ * @method dispose
+ */
+Script.prototype.dispose = function()
+{
+	if(this.script.dispose !== undefined)
+	{
+		this.script.dispose.call(this);
+	}
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].dispose();
+	}
+}
+
+/**
  * Call resize method if available.
  *
  * Called automatically by the runtime.
@@ -173,7 +202,7 @@ Script.prototype.appData = function(data)
 /**
  * Set script code.
  * 
- * Can be used to dinamically change the script code. However it is not recommended.
+ * Can be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.
  * 
  * @method setCode
  * @param {String} code
@@ -188,11 +217,27 @@ Script.prototype.setCode = function(code)
 	//Compile code and create object
 	try
 	{
-		var Constructor = new Function("Keyboard, Mouse, self, program, scene", this.code);
-
-		if(this.program !== null)
+		var code = this.code;
+		for(var i = 0; i < Script.METHODS.length; i++)
 		{
-			this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene);
+			method = Script.METHODS[i];
+			code += "\nif(this." + method + " == undefined && typeof " + method + " !== 'undefined'){this." + method + " = " + method + ";}";
+		}
+
+		//Compile code
+		var Constructor = new Function("Keyboard, Mouse, self, program, scene", code);
+
+		try
+		{
+			if(this.program !== null)
+			{
+				this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene);
+			}
+		}
+		catch(e)
+		{
+			console.warn("nunuStudio: Error initializing script code", e);
+			this.script = new(function(){})();
 		}
 	}
 	catch(e)

@@ -66,8 +66,8 @@ function ResourceManager()
 	this.images = [];
 	this.videos = [];
 	this.audio = [];
+	
 	this.fonts = [];
-
 	this.materials = [];
 	this.textures = [];
 	this.geometries = [];
@@ -189,8 +189,6 @@ ResourceManager.prototype.addTexture = function(texture)
  */
 ResourceManager.prototype.removeTexture = function(texture, defaultTexture)
 {
-
-
 	if(defaultTexture === undefined)
 	{
 		defaultTexture = new THREE.Texture();
