@@ -27,7 +27,7 @@ ObjectIcons.icons["OrthographicCamera"] = ObjectIcons.path + "camera/orthographi
 ObjectIcons.icons["SpineAnimation"] = ObjectIcons.path + "misc/spine.png";
 ObjectIcons.icons["Mesh"] = ObjectIcons.path + "models/cube.png";
 ObjectIcons.icons["SkinnedMesh"] = ObjectIcons.path + "misc/skeleton.png";
-ObjectIcons.icons["ParticleEmiter"] = ObjectIcons.path + "effects/particles.png";
+ObjectIcons.icons["ParticleEmiter"] = ObjectIcons.path + "misc/particles.png";
 ObjectIcons.icons["Script"] = ObjectIcons.path + "script/script.png";
 ObjectIcons.icons["Sprite"] = ObjectIcons.path + "misc/image.png";
 ObjectIcons.icons["Text3D"] = ObjectIcons.path + "models/text.png";
@@ -48,7 +48,7 @@ ObjectIcons.icons["Physics"] = ObjectIcons.path + "misc/physics.png";
 ObjectIcons.icons["Object3D"] = ObjectIcons.path + "misc/scene.png";
 ObjectIcons.icons["CubeCamera"] = ObjectIcons.path + "misc/probe.png";
 ObjectIcons.icons["Bone"] = ObjectIcons.path + "misc/bone.png";
-ObjectIcons.icons["Group"] = ObjectIcons.path + "effects/container.png";
+ObjectIcons.icons["Group"] = ObjectIcons.path + "misc/container.png";
 
 //Get icon path from object type
 ObjectIcons.get = function(type)

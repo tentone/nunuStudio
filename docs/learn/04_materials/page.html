@@ -17,9 +17,28 @@
 	<script src="../../js/jquery.min.js"></script>
 	<script src="../../js/bootstrap.min.js"></script>
 	<script src="../../js/highlight.min.js"></script>
+	<script src="../../examples/nunu.min.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+		var app, canvas;
+
+		function initialize()
+		{	
+			canvas = document.getElementById("canvas");
+			app = new NunuApp(canvas);
+			app.loadRunProgram("materials.isp");
+		}
+
+		function resize()
+		{
+			canvas.width = canvas.offsetWidth;
+			canvas.height = canvas.offsetHeight;
+			app.resize();
+		}
+	</script>
 </head>
 
-<body>
+<body onload="initialize();" onresize="resize();">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse open" style="padding-top:8px; min-height:60px">
 		<div class="container">
@@ -40,7 +59,7 @@
 					<li><a href="../../learn.html">Learn</a></li>
 					<li><a href="../../docs">API Documentation</a></li>
 					<li><a href="../../download.html">Download</a></li>
-					<li><a href="../../https://www.github.com/tentone/nunuStudio">GitHub</a></li>
+					<li><a href="https://www.github.com/tentone/nunuStudio">GitHub</a></li>
 				</ul>
 			</div>
 		</div>
@@ -55,14 +74,15 @@
 			<h3 class="black">Material types</h3>
 			<p>There are various types of materials available inside nunuStudio. More information about material types can be found <a href="https://threejs.org/docs/index.html#Reference/Materials/Material">here</a>. Here is a list of some of the most important material types:</p>
 			<ul>
-				<li><p>Basic material - A material for drawing geometries in a simple shaded way. This material is not affected by lights.</p></li>
-				<li><p>Phong material - A material for shiny surfaces with specular highlight.</p></li>
 				<li><p>Standard material - A standard physically based material. Physically based rendering (PBR) has recently become the standard in many 3D applications, such as Unity, Unreal and 3D Studio Max. More infomation abou PBR <a href="https://www.marmoset.co/posts/basic-theory-of-physically-based-rendering/">here</a>.</p></li>
+				<li><p>Phong material - A material for shiny surfaces with specular highlight.</p></li>
 				<li><p>Lambert material - A material for non-shiny surfaces, without specular highlights.</p></li>
+				<li><p>Basic material - A material for drawing geometries in a simple shaded way. This material is not affected by lights.</p></li>
 				<li><p>Sprite material - Special type of material to be used with sprite objects.</p></li>
 				<li><p>Shader material - Shader materials can be customized using GLSL code.</p></li>
 			</ul>
-			<img src="types.png" style="width:60%; margin-left:20%"></img>
+			<p>The example bellow shows 4 different material types running, from the left to the right we have a Standard material, Phong material, Lambert material and a Basic Material, as we can se the Standard (PBR) and Phong materials are more detailed, the lambert material has basic light support (per vertex light calculation) and the basic material does not react to light.</p>
+			<canvas id="canvas" width="800" height="400" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
 
 			<h3 class="black">Adding Materials</h3>
 			<p>Materials can be crated by clicking on the Material option in the resource explorer, and selecting the type of material desired.</p>
