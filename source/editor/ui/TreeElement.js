@@ -205,7 +205,7 @@ function TreeElement(container)
 			}
 			else if(self.obj instanceof Program)
 			{
-				context.addOption("Add scene", function()
+				context.addOption("Create scene", function()
 				{
 					Editor.program.addDefaultScene();
 					Editor.updateObjectViews();
@@ -215,12 +215,7 @@ function TreeElement(container)
 			//Rename Object
 			context.addOption("Rename", function()
 			{
-				var name = prompt("Rename object", self.obj.name);
-				if(name !== null && name !== "")
-				{
-					self.obj.name = name;
-					Editor.updateObjectViews();
-				}
+				Editor.renameObject(self.obj);
 			});
 
 			if(!program)

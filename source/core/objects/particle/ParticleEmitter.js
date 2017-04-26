@@ -81,12 +81,6 @@ function ParticleEmitter(group, emitter)
 
 	//Clock
 	this.clock = new THREE.Clock();
-
-	//Override raycast
-	this.raycast = function()
-	{
-		return null;
-	};
 }
 
 ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
@@ -124,8 +118,6 @@ ParticleEmitter.defaultGroup =
 /**
  * Initialize particle system.
  * 
- * Called automatically by the runtime.
- * 
  * @method initialize
  */
 ParticleEmitter.prototype.initialize = function()
@@ -140,8 +132,6 @@ ParticleEmitter.prototype.initialize = function()
 
 /**
  * Update particle emitter state.
- * 
- * Called automatically by the runtime.
  * 
  * @method update
  */
@@ -168,6 +158,16 @@ ParticleEmitter.prototype.dispose = function()
 	{
 		this.children[i].dispose();
 	}
+};
+
+/**
+ * Particle emitter cannot be detected by raycaster.
+ * 
+ * @method raycast
+ */
+ParticleEmitter.prototype.raycast = function()
+{
+	return null;
 };
 
 /**

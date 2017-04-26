@@ -26,7 +26,7 @@ function ConeGeometryForm(form, obj)
 	this.form.add(this.radius);
 	this.form.nextRow();
 
-	this.form.addText("Height")
+	this.form.addText("Height");
 	this.height = new NumberBox(this.form.element);
 	this.height.size.set(40, 18);
 	this.height.setStep(0.1);
@@ -35,16 +35,18 @@ function ConeGeometryForm(form, obj)
 	this.form.nextRow();
 
 	//Segments
-	this.form.addText("Segments")
+	this.form.addText("Segments");
 	this.form.addText("R", true);
 	this.radialSegments = new NumberBox(this.form.element);
 	this.radialSegments.size.set(40, 18);
+	this.radialSegments.setRange(3, Number.MAX_SAFE_INTEGER);
 	this.radialSegments.setStep(1);
 	this.radialSegments.setOnChange(updateGeometry);
 	this.form.add(this.radialSegments);
 
 	this.form.addText("H", true);
 	this.heightSegments = new NumberBox(this.form.element);
+	this.heightSegments.setRange(1, Number.MAX_SAFE_INTEGER);
 	this.heightSegments.size.set(40, 18);
 	this.heightSegments.setStep(1);
 	this.heightSegments.setOnChange(updateGeometry);

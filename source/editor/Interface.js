@@ -298,7 +298,7 @@ Interface.initialize = function()
 
 	//Sprites and effects
 	Interface.addEffects = new ButtonDrawer();
-	Interface.addEffects.setImage(Editor.filePath + "icons/effects/particles.png");
+	Interface.addEffects.setImage(Editor.filePath + "icons/misc/particles.png");
 	Interface.addEffects.optionsPerLine = 3;
 	Interface.addEffects.imageScale.set(0.7, 0.7);
 	Interface.addEffects.optionsScale.set(0.7, 0.7);
@@ -308,13 +308,13 @@ Interface.initialize = function()
 	Interface.addEffects.updateInterface();
 
 	//Sprite
-	Interface.addEffects.addOption(Editor.filePath + "icons/effects/sprite.png", function()
+	Interface.addEffects.addOption(Editor.filePath + "icons/misc/sprite.png", function()
 	{
 		Editor.addToScene(new Sprite(Editor.defaultSpriteMaterial));
 	}, "Sprite");
 
 	//Particle emitter
-	Interface.addEffects.addOption(Editor.filePath + "icons/effects/particles.png", function()
+	Interface.addEffects.addOption(Editor.filePath + "icons/misc/particles.png", function()
 	{
 		var particle = new ParticleEmitter()
 		particle.texture = Editor.defaultTextureParticle;
@@ -322,7 +322,7 @@ Interface.initialize = function()
 	}, "Particle Emitter");
 
 	//Container
-	Interface.addEffects.addOption(Editor.filePath + "icons/effects/container.png", function()
+	Interface.addEffects.addOption(Editor.filePath + "icons/misc/container.png", function()
 	{
 		Editor.addToScene(new Container());
 	}, "Container");

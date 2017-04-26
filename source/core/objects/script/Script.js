@@ -157,7 +157,7 @@ Script.prototype.update = function()
  */
 Script.prototype.dispose = function()
 {
-	if(this.script.dispose !== undefined)
+	if(this.script !== null && this.script.dispose !== undefined)
 	{
 		this.script.dispose.call(this);
 	}

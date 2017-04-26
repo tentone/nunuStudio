@@ -483,7 +483,11 @@ Editor.update = function()
 			Interface.tab.selectPreviousTab();
 		}
 	}
-
+	else if(Editor.keyboard.keyJustPressed(Keyboard.F2))
+	{
+		Editor.renameObject();
+	}
+		
 	requestAnimationFrame(Editor.update);
 };
 
@@ -540,6 +544,22 @@ Editor.addToScene = function(obj)
 		Editor.program.scene.add(obj);
 
 		Editor.history.push(obj, Action.ADDED);
+		Editor.updateObjectViews();
+	}
+};
+
+//Rename object
+Editor.renameObject = function(obj)
+{
+	if(obj === undefined)
+	{
+		obj = Editor.selectedObject;
+	}
+
+	var name = prompt("Rename object", obj.name);
+	if(name !== null && name !== "")
+	{
+		obj.name = name;
 		Editor.updateObjectViews();
 	}
 };

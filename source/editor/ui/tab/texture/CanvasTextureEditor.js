@@ -16,7 +16,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 		{
 			self.texture.width = self.width.getValue();
 			self.texture.updateSize();
-			self.updateMaterial();
+			self.updatePreview();
 		}
 	});
 	this.form.add(this.width);
@@ -32,7 +32,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 		{
 			self.texture.height = self.height.getValue();
 			self.texture.updateSize();
-			self.updateMaterial();
+			self.updatePreview();
 		}
 	});
 	this.form.add(this.height);
