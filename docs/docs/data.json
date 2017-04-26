@@ -10552,7 +10552,7 @@
             "line": 226,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
-            "name": "loadProgram",
+            "name": "loadProgramAsync",
             "params": [
                 {
                     "name": "fname",

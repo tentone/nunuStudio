@@ -226,7 +226,7 @@ NunuApp.prototype.loadProgram = function(fname)
 /**
  * Load program from file, asynchronously.
  * 
- * @method loadProgram
+ * @method loadProgramAsync
  * @param {String} fname Name of the file to load
  * @param {Function} onLoad onLoad callback. Receives as argument the loaded application.
  * @param {Function} onProgress onProgress callback
