@@ -192,7 +192,7 @@ function TransformControls(camera, canvas, mouse)
 		
 		eye.copy(camPosition).sub(worldPosition).normalize();
 
-		if(this.space === "local")
+		if(this.space === "local" || mode === "scale")
 		{
 			gizmo[mode].update(worldRotation, eye);
 		}

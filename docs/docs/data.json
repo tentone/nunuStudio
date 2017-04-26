@@ -6390,8 +6390,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 124,
-            "description": "Initialize particle system.\n\nCalled automatically by the runtime.",
+            "line": 118,
+            "description": "Initialize particle system.",
             "itemtype": "method",
             "name": "initialize",
             "class": "ParticleEmitter",
@@ -6399,8 +6399,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 141,
-            "description": "Update particle emitter state.\n\nCalled automatically by the runtime.",
+            "line": 133,
+            "description": "Update particle emitter state.",
             "itemtype": "method",
             "name": "update",
             "class": "ParticleEmitter",
@@ -6408,10 +6408,19 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 158,
+            "line": 148,
             "description": "Dispose particle emitter.",
             "itemtype": "method",
             "name": "dispose",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 163,
+            "description": "Particle emitter cannot be detected by raycaster.",
+            "itemtype": "method",
+            "name": "raycast",
             "class": "ParticleEmitter",
             "module": "Particles"
         },
@@ -8026,7 +8035,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CanvasTexture.js",
-            "line": 68,
+            "line": 66,
             "description": "Update the size of the canvas texture.\n\nThe texture is image is reset to the default.\n\nShould be called after changing the width or height properties.",
             "itemtype": "method",
             "name": "updateSize",
@@ -9555,7 +9564,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 17,
+            "line": 15,
             "description": "Type is used to indentify the type of cannonjs:\n - BOX\n - CYLINDER\n - SPHERE\n - HULL",
             "itemtype": "attribute",
             "name": "Type",
@@ -9565,7 +9574,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 35,
+            "line": 33,
             "description": "Given a Object3D instance, creates a corresponding CANNON shape.",
             "itemtype": "method",
             "name": "createShape",
@@ -9590,7 +9599,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 103,
+            "line": 101,
             "description": "Create box shape from geometry.",
             "itemtype": "method",
             "name": "createBoxShape",
@@ -9610,7 +9619,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 126,
+            "line": 124,
             "description": "Bounding box needs to be computed with the entire mesh, not just geometry.",
             "itemtype": "method",
             "name": "createBoundingBoxShape",
@@ -9630,7 +9639,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 159,
+            "line": 157,
             "description": "Computes 3D convex hull as a CANNON.ConvexPolyhedron.",
             "itemtype": "method",
             "name": "createConvexPolyhedron",
@@ -9650,7 +9659,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 201,
+            "line": 199,
             "description": "Create cylinder shape from geometry.",
             "itemtype": "method",
             "name": "createCylinderShape",
@@ -9670,7 +9679,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 219,
+            "line": 217,
             "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingCylinderShape",
@@ -9690,7 +9699,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 247,
+            "line": 245,
             "description": "Plane shape from geometry.",
             "itemtype": "method",
             "name": "createPlaneShape",
@@ -9710,7 +9719,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 262,
+            "line": 260,
             "description": "Sphere shape from geometry.",
             "itemtype": "method",
             "name": "createSphereShape",
@@ -9730,7 +9739,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 274,
+            "line": 272,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingSphereShape",
@@ -9750,7 +9759,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 289,
+            "line": 287,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createTubeShape",
@@ -9770,7 +9779,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 303,
+            "line": 301,
             "description": "Trimesh shape from geometry.",
             "itemtype": "method",
             "name": "createTrimeshShape",
@@ -9790,7 +9799,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 323,
+            "line": 321,
             "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
             "itemtype": "method",
             "name": "getGeometry",
@@ -9810,7 +9819,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 385,
+            "line": 383,
             "description": "Get geometry vertices.",
             "itemtype": "method",
             "name": "getVertices",
@@ -9830,7 +9839,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 401,
+            "line": 399,
             "description": "Returns a array of THREE.Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
             "itemtype": "method",
             "name": "getMeshes",

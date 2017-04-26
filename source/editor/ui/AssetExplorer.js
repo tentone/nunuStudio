@@ -113,7 +113,7 @@ function AssetExplorer(parent)
 				reader.readAsDataURL(file);
 			}
 		}, "image/*");
-	}, Editor.filePath + "icons/misc/bone.png");
+	}, Editor.filePath + "icons/misc/grid.png");
 
 	//Cube texture
 	texture.addOption("Cube Texture", function()

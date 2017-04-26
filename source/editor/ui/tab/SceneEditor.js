@@ -240,17 +240,22 @@ function SceneEditor(parent, closeable, container, index)
 
 	//Fullscreen button
 	this.fullscreenButton = new ButtonImage(this.element);
-	this.fullscreenButton.size.set(25, 25);
+	this.fullscreenButton.size.set(30, 30);
 	this.fullscreenButton.setImage(Editor.filePath + "icons/misc/fullscreen.png");
+	this.fullscreenButton.setAltText("Toggle fullscreen");
 	this.fullscreenButton.visible = false;
-	this.fullscreenButton.updateInterface();
+	this.fullscreenButton.imageScale.set(0.8, 0.8);
+	this.fullscreenButton.element.style.backgroundColor = "#333333";
+	this.fullscreenButton.element.style.borderRadius = "5px";
+	this.fullscreenButton.element.style.opacity = 0.5;
+
 	this.fullscreenButton.element.onmouseenter = function()
 	{
-		self.fullscreenButton.img.style.opacity = 0.5;
+		self.fullscreenButton.element.style.opacity = 1.0;
 	};
 	this.fullscreenButton.element.onmouseleave = function()
 	{
-		self.fullscreenButton.img.style.opacity = 1.0;
+		self.fullscreenButton.element.style.opacity = 0.5;
 	};
 
 	var fullscreen = true;
@@ -262,35 +267,42 @@ function SceneEditor(parent, closeable, container, index)
 
 	//VR button
 	this.vrButton = new ButtonImage(this.element);
-	this.vrButton.size.set(25, 25);
+	this.vrButton.size.set(30, 30);
 	this.vrButton.setImage(Editor.filePath + "icons/misc/vr.png");
+	this.vrButton.setAltText("Toggle VR mode");
 	this.vrButton.visible = false;
-	this.vrButton.updateInterface();
+	this.vrButton.imageScale.set(0.8, 0.8);
+	this.vrButton.element.style.backgroundColor = "#333333";
+	this.vrButton.element.style.borderRadius = "5px";
+	this.vrButton.element.style.opacity = 0.5;
+
 	this.vrButton.element.onmouseenter = function()
 	{
-		self.vrButton.img.style.opacity = 0.5;
+		self.vrButton.element.style.opacity = 1.0;
 	};
 	this.vrButton.element.onmouseleave = function()
 	{
-		self.vrButton.img.style.opacity = 1.0;
+		self.vrButton.element.style.opacity = 0.5;
 	};
 
 	//Camera mode button
 	this.cameraButton = new ButtonImage(this.element);
-	this.cameraButton.size.set(25, 25);
+	this.cameraButton.size.set(30, 30);
 	this.cameraButton.setImage(Editor.filePath + "icons/misc/3d.png");
 	this.cameraButton.setAltText("Change camera mode");
-	this.cameraButton.visible = true;
-	this.cameraButton.updateInterface();
+	this.cameraButton.imageScale.set(0.8, 0.8);
+	this.cameraButton.element.style.backgroundColor = "#333333";
+	this.cameraButton.element.style.borderRadius = "5px";
+	this.cameraButton.element.style.opacity = 0.5;
 
 	this.cameraButton.element.onmouseenter = function()
 	{
-		self.cameraButton.img.style.opacity = 0.5;
+		self.cameraButton.element.style.opacity = 1.0;
 	};
 
 	this.cameraButton.element.onmouseleave = function()
 	{
-		self.cameraButton.img.style.opacity = 1.0;
+		self.cameraButton.element.style.opacity = 0.5;
 	};
 
 	this.cameraButton.setCallback(function()
@@ -348,28 +360,18 @@ SceneEditor.prototype.updateMetadata = function()
 };
 
 //Set fullscreen mode
-SceneEditor.prototype.setFullscreen = function(value)
+SceneEditor.prototype.setFullscreen = function(fullscreen)
 {
-	//Apply fullscreen mode
-	if(value)
+	if(fullscreen)
 	{
-		//Set to fullscreen mode
 		Editor.setFullscreen(true, this.element);
-
-		this.element.style.zIndex = 10000;
 		this.position.set(0, 0);	
 		this.size.set(window.screen.width, window.screen.height);
 		this.updateInterface();
-
-		this.resizeCamera();
 	}
 	else
 	{
-		//Leave fullscreen mode
 		Editor.setFullscreen(false);
-	
-		//Restore elements
-		this.element.style.zIndex = 0;
 		Interface.updateInterface();
 	}
 };
@@ -469,18 +471,6 @@ SceneEditor.prototype.update = function()
 		else if(this.keyboard.keyJustPressed(Keyboard.DEL))
 		{
 			Editor.deleteObject();
-		}
-		else if(this.keyboard.keyJustPressed(Keyboard.F2))
-		{
-			if(Editor.selectedObject !== null)
-			{
-				var name = prompt("Rename object", Editor.selectedObject.name);
-				if(name !== null && name !== "")
-				{
-					Editor.selectedObject.name = name;
-					Editor.updateObjectViews();
-				}
-			}
 		}
 		else if(this.keyboard.keyPressed(Keyboard.CTRL))
 		{
@@ -1245,6 +1235,7 @@ SceneEditor.prototype.disposeRunningProgram = function()
 	//Dispose running program if there is one
 	if(this.programRunning !== null)
 	{
+		this.setFullscreen(false);
 		this.programRunning.dispose();
 		this.programRunning = null;
 	}

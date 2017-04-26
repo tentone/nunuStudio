@@ -12,8 +12,6 @@
  */
 function Mesh2shape(){}
 
-var PI2 = Math.PI / 2;
-
 /**
  * Type is used to indentify the type of cannonjs:
  *  - BOX
@@ -239,7 +237,7 @@ Mesh2shape.createBoundingCylinderShape = function(object)
 	//Create shape
 	var shape = new CANNON.Cylinder(radius, radius, height, 12);
 	shape.orientation = new CANNON.Quaternion();
-	shape.orientation.setFromEuler(PI2, 0, 0, "XYZ").normalize();
+	shape.orientation.setFromEuler(Math.PI / 2, 0, 0, "XYZ").normalize();
 	
 	return shape;
 };

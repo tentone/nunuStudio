@@ -18,7 +18,7 @@ function SphereGeometryForm(form, obj)
 	this.form.nextRow();
 
 	//Radius
-	this.form.addText("Radius")
+	this.form.addText("Radius");
 	this.radius = new NumberBox(this.form.element);
 	this.radius.size.set(40, 18);
 	this.radius.setStep(0.1);
@@ -27,7 +27,7 @@ function SphereGeometryForm(form, obj)
 	this.form.nextRow();
 
 	//Segments
-	this.form.addText("Segments")
+	this.form.addText("Segments");
 	this.form.addText("W", true);
 	this.widthSegments = new NumberBox(this.form.element);
 	this.widthSegments.size.set(40, 18);

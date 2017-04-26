@@ -59,8 +59,6 @@ function CanvasTexture(width, height, mapping, wrapS, wrapT, magFilter, minFilte
 
 	this.context = this.image.getContext("2d");
 	this.updateSize();
-
-	this.needsUpdate = true;
 }
 
 CanvasTexture.prototype = Object.create(THREE.Texture.prototype);
@@ -81,10 +79,12 @@ CanvasTexture.prototype.updateSize = function()
 
 	this.context.fillStyle = "#000000";
 	this.context.fillRect(0, 0, this.width, this.height);
-	this.context.font = "Normal 55px Arial";
+	this.context.font = "Normal " + Math.round(this.width / 12) +  "px Arial";
 	this.context.textAlign = "center";
 	this.context.fillStyle = "#FF0000";
 	this.context.fillText("Canvas Texture", this.width/2, this.height/2);
+
+	this.needsUpdate = true;
 };
 
 /**

@@ -18,9 +18,9 @@ function CircleGeometryForm(form, obj)
 	this.form.nextRow();
 	
 	//Radius
-	this.form.addText("Radius", true);
+	this.form.addText("Radius");
 	this.radius = new NumberBox(this.form.element);
-	this.radius.size.set(40, 18);
+	this.radius.size.set(60, 18);
 	this.radius.setStep(0.1);
 	this.radius.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.radius.setOnChange(updateGeometry);
@@ -28,28 +28,28 @@ function CircleGeometryForm(form, obj)
 	this.form.nextRow();
 
 	//Segments
-	this.form.addText("Segments", true);
+	this.form.addText("Segments");
 	this.segments = new NumberBox(this.form.element);
-	this.segments.size.set(40, 18);
+	this.segments.size.set(60, 18);
 	this.segments.setStep(1.0);
-	this.segments.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.segments.setRange(3, Number.MAX_SAFE_INTEGER);
 	this.segments.setOnChange(updateGeometry);
 	this.form.add(this.segments);
 	this.form.nextRow();
 
 	//Theta start
-	this.form.addText("Theta start", true);
+	this.form.addText("Theta start");
 	this.thetaStart = new NumberBox(this.form.element);
-	this.thetaStart.size.set(40, 18);
+	this.thetaStart.size.set(60, 18);
 	this.thetaStart.setStep(0.1);
 	this.thetaStart.setOnChange(updateGeometry);
 	this.form.add(this.thetaStart);
 	this.form.nextRow();
 
 	//Theta length
-	this.form.addText("Theta length", true);
+	this.form.addText("Theta length");
 	this.thetaLength = new NumberBox(this.form.element);
-	this.thetaLength.size.set(40, 18);
+	this.thetaLength.size.set(60, 18);
 	this.thetaLength.setStep(0.1);
 	this.thetaLength.setOnChange(updateGeometry);
 	this.form.add(this.thetaLength);
