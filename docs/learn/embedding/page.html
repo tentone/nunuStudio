@@ -17,29 +17,12 @@
 	<script src="../../js/jquery.min.js"></script>
 	<script src="../../js/bootstrap.min.js"></script>
 	<script src="../../js/highlight.min.js"></script>
-	<script src="../../examples/nunu.min.js"></script>
 	<script>
 		hljs.initHighlightingOnLoad();
-		var app, canvas;
-
-		function initialize()
-		{	
-			canvas = document.getElementById("canvas");
-			app = new NunuApp(canvas);
-			app.loadRunProgram("physics.isp");
-		}
-
-		function resize()
-		{
-			canvas.width = canvas.offsetWidth;
-			canvas.height = canvas.offsetHeight;
-			app.resize();
-		}
-
 	</script>
 </head>
 
-<body onload="initialize();" onresize="resize();">
+<body>
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse open" style="padding-top:8px; min-height:60px">
 		<div class="container">
@@ -76,31 +59,75 @@
 			<h3 class="black">Preparing the page</h3>
 			<p>First we need to import the nunu.min.js file to the webpage, this javascript file includes all the code required to run a nunuStudio aplication.</p>
 			<p>After including the runtime file a canvas to display the application is needed, add a canvas to your html code.</p>
-			<pre><code class="xml hljs">&lt;script type="text/javascript" src="nunu.min.js"&gt;&lt;/script&gt;
+			<pre><code class="xml hljs">&lt;!--Import nunuStudio runtime--&gt;
+&lt;script type="text/javascript" src="nunu.min.js"&gt;&lt;/script&gt;
+
+&lt;!--Canvas used to draw content--&gt;
 &lt;canvas id="canvas"&gt;&lt;/canvas&gt;</code></pre>
 
 
 			<h3 class="black">NunuApp object</h3>
-			<p>...</p>
+			<p>Now lets create a new javascript script with the code bellow, this code creates a new NunuApp instance that will use the provided canvas to render the application.</p>
+			<p>If you dont want to start running the application immediately you can use the loadProgramAsync() or loadProgram() (not recommended, this blocks the page until all files are loaded), these will load the application files and decode them but will not start running the application immediately, this can be used for preloading applications into an webpage, after the app gets loaded the run() method can be used to start it and the exit() method can be used to kill the application and dispose all resources used.</p>
 			<pre><code class="javascript">var app, canvas;
 
+//Should be called after page load
 function initialize()
 {
+	//Get the canvas that will be used to draw content
 	canvas = document.getElementById("canvas");
+
+	//Create new NunuApp intance
 	app = new NunuApp(canvas);
-	app.loadRunProgram("physics.isp");
+
+	//Load and run the "app.isp" file
+	app.loadRunProgram("app.isp");
 }
 
+//Should be called every time the window is resized
 function resize()
 {
+	//Update canvas width and height properties
 	canvas.width = canvas.offsetWidth;
 	canvas.height = canvas.offsetHeight;
+
+	//Resize app
 	app.resize();
 }</code></pre>
 
+			<p>To finish we need to call the initialize method after the page loads, and the resize method every time the canvas is resized. To do this we can add the code bellow to the document body declaration.</p>
+			<pre><code class="xml hljs">&lt;body onload="initialize();" onresize="resize();"&gt;
+...
+&lt;/body&gt;</code></pre>
+
 			<h3 class="black">Adding a loading bar</h3>
-			<p>...</p>
+			<p>Booth the loadRunProgram() and the loadProgramAsync() methods provide a onProgress callback field, this callback returns a value from 0.0 to 1.0 that indicates loading progress, this value can be used to control a loading bar.</p>
+			<p>A simple way to create a loading bar is by adding a couple of divisions, the code bellow is used for the default loading bar created when exporting web projects directly from the nunuStudio editor.</p>
+			<pre><code class="xml hljs">&lt;!--Loading bar frame--&gt;
+&lt;div style="position:absolute; width:100%; height:7%; left:0%; top:120%; border-style:solid; border-color:#FFFFFF; border-width:2px"&gt;
+	&lt;!--Loading bar--&gt;
+	&lt;div id="bar" style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color:#FFFFFF"&gt;
+&lt;/div&gt;</code></pre>
+
+			<p>To control the created bar the following code can be used.</p>
+			<pre><code class="javascript">//onProgress callback
+var bar = document.getElementById("bar");
+var onProgress = function(event)
+{
+	if(event.lengthComputable)
+	{
+		var progress = event.loaded / event.total * 100;
+		bar.style.width = progress + "%";
+	}
+};
+
+//onLoad callback
+var onLoad = function(){};
+
+//Load and run nunu app
+app.loadRunProgram("app.isp", onLoad, onProgress);</code></pre>
 	</section>
+
 
 	<!--Footer-->
 	<footer>
