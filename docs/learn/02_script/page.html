@@ -17,10 +17,29 @@
 	<script src="../../js/jquery.min.js"></script>
 	<script src="../../js/bootstrap.min.js"></script>
 	<script src="../../js/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
+	<script src="../../examples/nunu.min.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+
+		var app, canvas;
+
+		function initialize()
+		{	
+			canvas = document.getElementById("canvas");
+			app = new NunuApp(canvas);
+			app.loadRunProgram("first.isp");
+		}
+
+		function resize()
+		{
+			canvas.width = canvas.offsetWidth;
+			canvas.height = canvas.offsetHeight;
+			app.resize();
+		}
+	</script>
 </head>
 
-<body>
+<body onload="initialize();" onresize="resize();">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse open" style="padding-top:8px; min-height:60px">
 		<div class="container">
@@ -41,7 +60,7 @@
 					<li><a href="../../learn.html">Learn</a></li>
 					<li><a href="../../docs">API Documentation</a></li>
 					<li><a href="../../download.html">Download</a></li>
-					<li><a href="../../https://www.github.com/tentone/nunuStudio">GitHub</a></li>
+					<li><a href="https://www.github.com/tentone/nunuStudio">GitHub</a></li>
 				</ul>
 			</div>
 		</div>
@@ -76,22 +95,23 @@
 			<h3 class="black">Moving an object</h3>
 			<p>To move an object we start by attaching that object as a children of the script object, we can do that by dragging the desired object to the script object, in this tutorial we will use the cube object on the default scene.</p>
 			<p>Lets start by testing the following code</p>
-			<pre><code>this.initialize = function()
+			<pre><code>function initialize()
 {
 	self.position.x += 2;
-};</code></pre>
+}</code></pre>
 			<p>This code will move the cube 2 points in the x axis when the program is started, but, after the object the object is moves it stays static.</p>
 			<p>To animate an object we can instead move our code to the update method, instead of playing with the object position lets try to change now the object rotation by testing the following code.</p>
-			<pre><code>this.update = function()
+			<pre><code>function update()
 {
 	self.rotation.y += 0.01;
-};</code></pre>
+}</code></pre>
 			<p>If everything works as expected you should see the following animation.</p>
-			<img src="animation.gif" style="width:50%; margin-left:25%"></img>
+			<p>To try this example in the editor you can download the ISP project file <a href="first.isp">here</a> or open it on the <a href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/02_script/first.isp">Web Editor</a>.</p>
+			<canvas id="canvas" width="800" height="480" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
 
 			<h3 class="black">Keyboard and Mouse input</h3>
 			<p>Its possible to use the keyboard and mouse to move objects around. This can be done using the Keyboard and Mouse objects inside scripts. The code bellow rotates an object in the y axis using the mouse delta, and moves the object aroud using keyboard arrow keys.</p>
-			<pre><code>this.update = function()
+			<pre><code>function update()
 {
 	self.rotation.y += Mouse.delta.x * 0.01;
 
@@ -103,7 +123,7 @@
 	{
 		self.position.x += 0.1;
 	}
-};</code></pre>
+}</code></pre>
 		</div>
 	</section>
 
