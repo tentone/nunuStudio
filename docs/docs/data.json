@@ -2765,7 +2765,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 73,
+            "line": 75,
             "description": "Disconnect this gamepad object.",
             "itemtype": "method",
             "name": "disconnect",
@@ -2774,7 +2774,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 88,
+            "line": 90,
             "description": "Set vendor and product id for this gamepad.",
             "itemtype": "method",
             "name": "setProductVendor",
@@ -2790,7 +2790,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 121,
+            "line": 123,
             "description": "Update the gamepad state.\n\nShould be called every frame before checking the buttons values.",
             "itemtype": "method",
             "name": "update",
@@ -2799,7 +2799,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 141,
+            "line": 143,
             "description": "Get analog button value [0...1]",
             "itemtype": "method",
             "name": "getAnalogueButton",
@@ -2819,7 +2819,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 153,
+            "line": 155,
             "description": "Get axis value [-1...1]",
             "itemtype": "method",
             "name": "getAxis",
@@ -2839,7 +2839,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 165,
+            "line": 167,
             "description": "Check if gamepad button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -2859,7 +2859,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 177,
+            "line": 179,
             "description": "Check if a gamepad button was just pressed.",
             "itemtype": "method",
             "name": "buttonJustPressed",
@@ -2879,7 +2879,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 189,
+            "line": 191,
             "description": "Check if a gamepad button was just released.",
             "itemtype": "method",
             "name": "buttonJustReleased",
@@ -2894,6 +2894,296 @@
                 "description": "True if button was just released",
                 "type": "Boolean"
             },
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 203,
+            "description": "Gamepad LEFT button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "LEFT",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 210,
+            "description": "Gamepad RIGHT button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "RIGHT",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 217,
+            "description": "Gamepad DOWN button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "DOWN",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 224,
+            "description": "Gamepad UP button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "UP",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 231,
+            "description": "Gamepad SELECT button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "SELECT",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 238,
+            "description": "Gamepad START button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "START",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 245,
+            "description": "Gamepad HOME button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "HOME",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 253,
+            "description": "Gamepad LEFT_TRIGGER_A button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "LEFT_TRIGGER_A",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 260,
+            "description": "Gamepad LEFT_TRIGGER_B button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "LEFT_TRIGGER_B",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 268,
+            "description": "Gamepad RIGHT_TRIGGER_A button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "RIGHT_TRIGGER_A",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 275,
+            "description": "Gamepad RIGHT_TRIGGER_B button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "RIGHT_TRIGGER_B",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 283,
+            "description": "Gamepad L1 button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "L1",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 290,
+            "description": "Gamepad L2 button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "L2",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 297,
+            "description": "Gamepad L3 button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "L3",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 305,
+            "description": "Gamepad R1 button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "R1",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 312,
+            "description": "Gamepad R2 button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "R2",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 319,
+            "description": "Gamepad R3 button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "R3",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 327,
+            "description": "Gamepad A button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "A",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 334,
+            "description": "Gamepad B button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "B",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 341,
+            "description": "Gamepad C button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "C",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 348,
+            "description": "Gamepad D button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "D",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 356,
+            "description": "Gamepad X button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "X",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 363,
+            "description": "Gamepad Y button.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "Y",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 371,
+            "description": "Gamepad LEFT_ANALOGUE_BUT axis.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "LEFT_ANALOGUE_BUT",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 378,
+            "description": "Gamepad LEFT_ANALOGUE_HOR axis.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "LEFT_ANALOGUE_HOR",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 385,
+            "description": "Gamepad LEFT_ANALOGUE_VERT axis.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "LEFT_ANALOGUE_VERT",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 393,
+            "description": "Gamepad RIGHT_ANALOGUE_BUT axis.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "RIGHT_ANALOGUE_BUT",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 400,
+            "description": "Gamepad RIGHT_ANALOGUE_HOR axis.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "RIGHT_ANALOGUE_HOR",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 407,
+            "description": "Gamepad RIGHT_ANALOGUE_VERT axis.",
+            "type": "{Number}",
+            "itemtype": "attribute",
+            "name": "RIGHT_ANALOGUE_VERT",
             "class": "Gamepad",
             "module": "Input"
         },
