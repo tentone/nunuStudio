@@ -48,6 +48,8 @@ Gamepad.prototype.setGamepad = function(gamepad)
 {	
 	if(gamepad !== undefined && gamepad !== null)
 	{
+		console.log(gamepad);
+
 		//Store gamepad and its index
 		this.index = gamepad.index;
 		this.gamepad = gamepad;
@@ -159,7 +161,7 @@ Gamepad.prototype.getAnalogueButton = function(button)
  */
 Gamepad.prototype.getAxis = function(axis)
 {
-	return (axis > this.gamepad.axes.length || axis < 0) ? 0 : this.gamepad.axes[button].value;
+	return (axis > this.gamepad.axes.length || axis < 0) ? 0 : this.gamepad.axes[axis];
 };
 
 /**
@@ -198,26 +200,213 @@ Gamepad.prototype.buttonJustReleased = function(button)
 	return (button > this.buttons.length || button < 0) ? false : this.buttons[button].justReleased;
 };
 
+/**
+ * Gamepad LEFT button.
+ * @type {Number}
+ * @attribute LEFT
+ */
 Gamepad.LEFT = 14;
+
+/**
+ * Gamepad RIGHT button.
+ * @type {Number}
+ * @attribute RIGHT
+ */
 Gamepad.RIGHT = 15;
-Gamepad.DOWN = 13
+
+/**
+ * Gamepad DOWN button.
+ * @type {Number}
+ * @attribute DOWN
+ */
+Gamepad.DOWN = 13;
+
+/**
+ * Gamepad UP button.
+ * @type {Number}
+ * @attribute UP
+ */
 Gamepad.UP = 12;
 
+/**
+ * Gamepad SELECT button.
+ * @type {Number}
+ * @attribute SELECT
+ */
 Gamepad.SELECT = 8;
+
+/**
+ * Gamepad START button.
+ * @type {Number}
+ * @attribute START
+ */
 Gamepad.START = 9;
+
+/**
+ * Gamepad HOME button.
+ * @type {Number}
+ * @attribute HOME
+ */
 Gamepad.HOME = 16;
 
+
+/**
+ * Gamepad LEFT_TRIGGER_A button.
+ * @type {Number}
+ * @attribute LEFT_TRIGGER_A
+ */
 Gamepad.LEFT_TRIGGER_A = 4;
+
+/**
+ * Gamepad LEFT_TRIGGER_B button.
+ * @type {Number}
+ * @attribute LEFT_TRIGGER_B
+ */
 Gamepad.LEFT_TRIGGER_B = 6;
+
+
+/**
+ * Gamepad RIGHT_TRIGGER_A button.
+ * @type {Number}
+ * @attribute RIGHT_TRIGGER_A
+ */
 Gamepad.RIGHT_TRIGGER_A = 5;
+
+/**
+ * Gamepad RIGHT_TRIGGER_B button.
+ * @type {Number}
+ * @attribute RIGHT_TRIGGER_B
+ */
 Gamepad.RIGHT_TRIGGER_B = 7;
 
+
+/**
+ * Gamepad L1 button.
+ * @type {Number}
+ * @attribute L1
+ */
+Gamepad.L1 = 4;
+
+/**
+ * Gamepad L2 button.
+ * @type {Number}
+ * @attribute L2
+ */
+Gamepad.L2 = 6;
+
+/**
+ * Gamepad L3 button.
+ * @type {Number}
+ * @attribute L3
+ */
+Gamepad.L3 = 6;
+
+
+/**
+ * Gamepad R1 button.
+ * @type {Number}
+ * @attribute R1
+ */
+Gamepad.R1 = 5;
+
+/**
+ * Gamepad R2 button.
+ * @type {Number}
+ * @attribute R2
+ */
+Gamepad.R2 = 7;
+
+/**
+ * Gamepad R3 button.
+ * @type {Number}
+ * @attribute R3
+ */
+Gamepad.R3 = 11;
+
+
+/**
+ * Gamepad A button.
+ * @type {Number}
+ * @attribute A
+ */
 Gamepad.A = 0;
+
+/**
+ * Gamepad B button.
+ * @type {Number}
+ * @attribute B
+ */
 Gamepad.B = 1;
+
+/**
+ * Gamepad C button.
+ * @type {Number}
+ * @attribute C
+ */
 Gamepad.C = 2;
+
+/**
+ * Gamepad D button.
+ * @type {Number}
+ * @attribute D
+ */
 Gamepad.D = 3;
 
+
+/**
+ * Gamepad X button.
+ * @type {Number}
+ * @attribute X
+ */
+Gamepad.X = 2;
+
+/**
+ * Gamepad Y button.
+ * @type {Number}
+ * @attribute Y
+ */
+Gamepad.Y = 3;
+
+
+/**
+ * Gamepad LEFT_ANALOGUE_BUT axis.
+ * @type {Number}
+ * @attribute LEFT_ANALOGUE_BUT
+ */
+Gamepad.LEFT_ANALOGUE_BUT = 10;
+
+/**
+ * Gamepad LEFT_ANALOGUE_HOR axis.
+ * @type {Number}
+ * @attribute LEFT_ANALOGUE_HOR
+ */
 Gamepad.LEFT_ANALOGUE_HOR = 0;
+
+/**
+ * Gamepad LEFT_ANALOGUE_VERT axis.
+ * @type {Number}
+ * @attribute LEFT_ANALOGUE_VERT
+ */
 Gamepad.LEFT_ANALOGUE_VERT = 1;
+
+
+/**
+ * Gamepad RIGHT_ANALOGUE_BUT axis.
+ * @type {Number}
+ * @attribute RIGHT_ANALOGUE_BUT
+ */
+Gamepad.RIGHT_ANALOGUE_BUT = 11;
+
+/**
+ * Gamepad RIGHT_ANALOGUE_HOR axis.
+ * @type {Number}
+ * @attribute RIGHT_ANALOGUE_HOR
+ */
 Gamepad.RIGHT_ANALOGUE_HOR = 2;
+
+/**
+ * Gamepad RIGHT_ANALOGUE_VERT axis.
+ * @type {Number}
+ * @attribute RIGHT_ANALOGUE_VERT
+ */
 Gamepad.RIGHT_ANALOGUE_VERT = 3;
