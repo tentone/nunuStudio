@@ -582,7 +582,7 @@ Interface.initialize = function()
 	}
 
 	//Export menu
-	var exportMenu = Interface.file.addMenu("Export");
+	var exportMenu = Interface.file.addMenu("Export", Editor.filePath + "icons/misc/export.png");
 
 	//Export OBJ
 	exportMenu.addOption("Wavefront OBJ", function()

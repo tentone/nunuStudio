@@ -336,7 +336,7 @@ Mouse.buttonJustReleased = function(button)
 };
 
 /**
- * Update mouse Position.
+ * Update mouse position.
  *
  * Automatically called by the runtime.
  * 

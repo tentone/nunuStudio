@@ -19,6 +19,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Fog",
         "Font",
         "FontLoader",
+        "Gamepad",
         "HemisphereLight",
         "Image",
         "ImageLoader",
@@ -136,7 +137,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Input",
             "name": "Input",
-            "description": "Key is used by Keyboard, Mouse, etc, to represent a key state."
+            "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/."
         },
         {
             "displayName": "Lights",

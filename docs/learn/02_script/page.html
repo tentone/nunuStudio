@@ -124,6 +124,35 @@
 		self.position.x += 0.1;
 	}
 }</code></pre>
+
+			<h3 class="black">Getting objects</h3>
+			<p>Its possible to access other objects and resources with scripts, in the example bellow we use the scene.getObjectByName() method to get an object by its name (in this case an object named box), if multiple objects with the same name are found the first one is returned.</p>
+			<p>Resources are stored in the program, similarly the methods program.getMaterialByName(), program.getTextureByName(), etc can be used to get them, (check the ResourceManager API documentation page for more information).</p>
+			<pre><code>var object;
+
+function initialize()
+{
+	object = scene.getObjectByName("box");
+}
+
+function update()
+{
+	object.rotation.y += 0.01;
+}</code></pre>
+
+			<p>Another way to access objects its by navigating the tree structure, every object has a parent and children, the parent points to the object above and children is an array of all objects bellow.</p>
+			<p>In the following code we get the first object placed inside the scripts and make it rotate without rotating the script itself. Be careful when accessing children or parent objects directly since it depends on the object placement in the project a change can break the code.</p>
+			<pre><code>var object;
+
+function initialize()
+{
+	object = self.children[0];
+}
+
+function update()
+{
+	object.rotation.y += 0.01;
+}</code></pre>
 		</div>
 	</section>
 
