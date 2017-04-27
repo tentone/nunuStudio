@@ -12,11 +12,20 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\input\\Key.js": {
-            "name": "..\\..\\source\\core\\input\\Key.js",
+        "..\\..\\source\\core\\input\\Gamepad.js": {
+            "name": "..\\..\\source\\core\\input\\Gamepad.js",
             "modules": {
                 "Input": 1
             },
+            "classes": {
+                "Gamepad": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\input\\Key.js": {
+            "name": "..\\..\\source\\core\\input\\Key.js",
+            "modules": {},
             "classes": {
                 "Key": 1
             },
@@ -653,6 +662,7 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "Gamepad": 1,
                 "Key": 1,
                 "Keyboard": 1,
                 "Mouse": 1
@@ -662,7 +672,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\input\\Mouse.js",
             "line": 3,
-            "description": "Key is used by Keyboard, Mouse, etc, to represent a key state."
+            "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/."
         },
         "Loaders": {
             "name": "Loaders",
@@ -1029,6 +1039,21 @@
                     "type": "Function"
                 }
             ]
+        },
+        "Gamepad": {
+            "name": "Gamepad",
+            "shortname": "Gamepad",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Input",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 3,
+            "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/.",
+            "is_constructor": 1
         },
         "Key": {
             "name": "Key",
@@ -2651,7 +2676,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 89,
+            "line": 90,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -2721,6 +2746,156 @@
             ],
             "class": "VRControls",
             "module": "VirtualReality"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 41,
+            "description": "Set which gamepad should be used by this Gamepad instance.",
+            "params": [
+                {
+                    "name": "Browser",
+                    "description": "gamepad object.",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "method",
+            "name": "setGamepad",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 73,
+            "description": "Disconnect this gamepad object.",
+            "itemtype": "method",
+            "name": "disconnect",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 88,
+            "description": "Set vendor and product id for this gamepad.",
+            "itemtype": "method",
+            "name": "setProductVendor",
+            "params": [
+                {
+                    "name": "gamepad",
+                    "description": "Gamepad object.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 121,
+            "description": "Update the gamepad state.\n\nShould be called every frame before checking the buttons values.",
+            "itemtype": "method",
+            "name": "update",
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 141,
+            "description": "Get analog button value [0...1]",
+            "itemtype": "method",
+            "name": "getAnalogueButton",
+            "params": [
+                {
+                    "name": "button",
+                    "description": "Button to get analogue value from.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Value between 0 and 1 depending how hard the button is pressed.",
+                "type": "Number"
+            },
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 153,
+            "description": "Get axis value [-1...1]",
+            "itemtype": "method",
+            "name": "getAxis",
+            "params": [
+                {
+                    "name": "Axis",
+                    "description": "to get value from.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Value between -1 and 1 depending on the axis direction",
+                "type": "Number"
+            },
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 165,
+            "description": "Check if gamepad button is currently pressed.",
+            "itemtype": "method",
+            "name": "buttonPressed",
+            "params": [
+                {
+                    "name": "button",
+                    "description": "Button to check status of",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "True if button is currently pressed",
+                "type": "Boolean"
+            },
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 177,
+            "description": "Check if a gamepad button was just pressed.",
+            "itemtype": "method",
+            "name": "buttonJustPressed",
+            "params": [
+                {
+                    "name": "button",
+                    "description": "Button to check status of",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "True if button was just pressed",
+                "type": "Boolean"
+            },
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 189,
+            "description": "Check if a gamepad button was just released.",
+            "itemtype": "method",
+            "name": "buttonJustReleased",
+            "params": [
+                {
+                    "name": "button",
+                    "description": "Button to check status of",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "True if button was just released",
+                "type": "Boolean"
+            },
+            "class": "Gamepad",
+            "module": "Input"
         },
         {
             "file": "..\\..\\source\\core\\input\\Key.js",
@@ -3749,7 +3924,7 @@
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
             "line": 338,
-            "description": "Update mouse Position.\n\nAutomatically called by the runtime.",
+            "description": "Update mouse position.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updatePosition",
             "params": [
@@ -10444,7 +10619,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 100,
+            "line": 101,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -10454,7 +10629,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 106,
+            "line": 107,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -10464,7 +10639,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 112,
+            "line": 113,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -10475,7 +10650,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 119,
+            "line": 120,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -10486,7 +10661,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 126,
+            "line": 127,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -10496,7 +10671,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 132,
+            "line": 133,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasResize",
@@ -10507,7 +10682,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 193,
+            "line": 194,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -10533,7 +10708,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 213,
+            "line": 214,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -10549,7 +10724,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 226,
+            "line": 227,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -10575,7 +10750,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 250,
+            "line": 251,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -10584,7 +10759,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 301,
+            "line": 302,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -10593,7 +10768,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 317,
+            "line": 318,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -10602,7 +10777,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 354,
+            "line": 355,
             "description": "Resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -10611,7 +10786,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 377,
+            "line": 378,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -10620,7 +10795,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 387,
+            "line": 388,
             "description": "Set the canvas to be used for rendering.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -10636,7 +10811,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 399,
+            "line": 400,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -10645,7 +10820,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 423,
+            "line": 424,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -10661,7 +10836,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 439,
+            "line": 440,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -10677,7 +10852,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 452,
+            "line": 453,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -10693,7 +10868,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 465,
+            "line": 466,
             "description": "Check if VR mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -10706,7 +10881,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 476,
+            "line": 477,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -10715,7 +10890,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 502,
+            "line": 503,
             "description": "Set fullscreen mode",
             "itemtype": "method",
             "name": "setFullscreen",
