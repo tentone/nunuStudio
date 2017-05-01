@@ -9,38 +9,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="../../css/lib/bootstrap.min.css">
-	<link rel="stylesheet" href="../../css/lib/highlight.min.css">
-	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../lib/highlight.min.css">
+	<link rel="stylesheet" href="../../style.css">
 
 	<!--Javascript-->
-	<script src="../../js/jquery.min.js"></script>
-	<script src="../../js/bootstrap.min.js"></script>
-	<script src="../../js/highlight.min.js"></script>
-	<script src="../../examples/nunu.min.js"></script>
-	<script>
-		hljs.initHighlightingOnLoad();
-
-		var app, canvas;
-
-		function initialize()
-		{	
-			canvas = document.getElementById("canvas");
-			app = new NunuApp(canvas);
-			app.loadRunProgram("first.isp");
-			resize();
-		}
-
-		function resize()
-		{
-			canvas.width = document.body.offsetWidth * 0.5;
-			canvas.height = document.body.offsetWidth * 0.35;
-			app.resize();
-		}
-	</script>
+	<script src="../../lib/jquery.min.js"></script>
+	<script src="../../lib/bootstrap.min.js"></script>
+	<script src="../../lib/highlight.min.js"></script>
+	<script src="../../editor/nunu.min.js"></script>
+	<script src="../js/embed.js"></script>
 </head>
 
-<body onload="initialize();" onresize="resize();">
+<body onload="initialize('first.isp');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse open" style="padding-top:8px; min-height:60px">
 		<div class="container">
@@ -108,7 +89,7 @@
 }</code></pre>
 			<p>If everything works as expected you should see the following animation.</p>
 			<p>To try this example in the editor you can download the ISP project file <a href="first.isp">here</a> or open it on the <a href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/02_script/first.isp">Web Editor</a>.</p>
-			<canvas id="canvas" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
+			<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 
 			<h3 class="black">Keyboard and Mouse input</h3>
 			<p>Its possible to use the keyboard and mouse to move objects around. This can be done using the Keyboard and Mouse objects inside scripts. The code bellow rotates an object in the y axis using the mouse delta, and moves the object aroud using keyboard arrow keys.</p>

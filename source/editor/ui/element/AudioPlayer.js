@@ -46,21 +46,21 @@ function AudioPlayer(parent)
 	//Track
 	this.track = document.createElement("div");
 	this.track.style.position = "absolute";
-	this.track.style.backgroundColor = "#222222";
-	//this.track.style.cursor = "pointer";
+	this.track.style.backgroundColor = Editor.theme.audioTrack;
+	this.track.style.cursor = "pointer";
 	this.element.appendChild(this.track);
 
 	//Progress
 	this.progress = document.createElement("div");
 	this.progress.style.position = "absolute";
-	this.progress.style.backgroundColor = "#555555";
+	this.progress.style.backgroundColor = Editor.theme.audioProgress;
 	this.progress.style.height = "100%";
 	this.track.appendChild(this.progress);
 
 	//Scrubber
 	this.scrubber = document.createElement("div");
 	this.scrubber.style.position = "absolute";
-	this.scrubber.style.backgroundColor = "#FFFFFF";
+	this.scrubber.style.backgroundColor = Editor.theme.audioScrubber;
 	this.scrubber.style.cursor = "pointer";
 	this.track.appendChild(this.scrubber);
 
@@ -295,12 +295,12 @@ AudioPlayer.prototype.destroy = function()
 {
 	try
 	{
-		//Stop audio playback
-		this.stop();
-
 		//Remove event listeners
 		window.removeEventListener("mousemove", this.onMouseMove);
 		window.removeEventListener("mouseup", this.onMouseUp);
+
+		//Stop audio playback
+		this.stop();
 
 		//Remove element
 		this.parent.removeChild(this.element);
@@ -312,7 +312,7 @@ AudioPlayer.prototype.destroy = function()
 //Update division Size
 AudioPlayer.prototype.updateInterface = function()
 {
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";

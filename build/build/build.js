@@ -47,13 +47,12 @@ deleteFile(buildPath + "nunu.js.temp");
 console.log("----------------------------------------------------------------------");
 console.log("                           Updating Webpage");
 console.log("----------------------------------------------------------------------");
-console.log(" Copying runtime build");
-copyFile(buildPath + "nunu.min.js", examplesPath + "nunu.min.js");
 console.log(" Removing old editor files");
 deleteFolder(editorWebPath + "editor/files");
 console.log(" Copying editor files");
 copyFolder(sourcePath + "editor/files", editorWebPath + "editor/files");
 console.log(" Copying editor build");
+copyFile(buildPath + "nunu.min.js", editorWebPath + "nunu.min.js");
 copyFile(buildPath + "nunu.editor.min.js", editorWebPath + "nunu.editor.min.js");
 copyFile(buildPath + "nunu.editor.css", editorWebPath + "nunu.editor.css");
 

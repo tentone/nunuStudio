@@ -1200,7 +1200,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
             "line": 3,
-            "description": "Objectloader can be used to load any external objects.\n\nCan parse be used to load on runtime resources and objects from external isp project files.",
+            "description": "Objectloader can be used to load external objects from files.\n\nCan parse be used to load on runtime resources and objects from external isp project files.",
             "is_constructor": 1,
             "params": [
                 {
@@ -2750,7 +2750,7 @@
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
             "line": 41,
-            "description": "Set which gamepad should be used by this Gamepad instance.",
+            "description": "Set which gamepad should be used by this Gamepad instance.\n\nCan be used to override the gamepad attached to this object and enable multiple gamepad support.",
             "params": [
                 {
                     "name": "Browser",
@@ -2775,7 +2775,7 @@
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
             "line": 90,
-            "description": "Set vendor and product id for this gamepad.",
+            "description": "Get vendor id and product id for the connected gamepad.",
             "itemtype": "method",
             "name": "setProductVendor",
             "params": [
@@ -2800,7 +2800,7 @@
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
             "line": 143,
-            "description": "Get analog button value [0...1]",
+            "description": "Get analog button value between 0 and 1.\n\nIf the button is not analog enabled it will return 0 if button is not pressed or 1 if the button is pressed.",
             "itemtype": "method",
             "name": "getAnalogueButton",
             "params": [
@@ -2819,8 +2819,8 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 155,
-            "description": "Get axis value [-1...1]",
+            "line": 157,
+            "description": "Get axis value between -1 and 1 depending on the direction.",
             "itemtype": "method",
             "name": "getAxis",
             "params": [
@@ -2839,7 +2839,27 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 167,
+            "line": 169,
+            "description": "Check if a button exists in the connected Gamepad.",
+            "itemtype": "method",
+            "name": "buttonExists",
+            "params": [
+                {
+                    "name": "button",
+                    "description": "Button to check status of",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "True if button exists in the connected gamepad.",
+                "type": "Boolean"
+            },
+            "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gamepad.js",
+            "line": 181,
             "description": "Check if gamepad button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -2859,7 +2879,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 179,
+            "line": 193,
             "description": "Check if a gamepad button was just pressed.",
             "itemtype": "method",
             "name": "buttonJustPressed",
@@ -2879,7 +2899,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 191,
+            "line": 205,
             "description": "Check if a gamepad button was just released.",
             "itemtype": "method",
             "name": "buttonJustReleased",
@@ -2899,7 +2919,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 203,
+            "line": 217,
             "description": "Gamepad LEFT button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -2909,7 +2929,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 210,
+            "line": 224,
             "description": "Gamepad RIGHT button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -2919,7 +2939,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 217,
+            "line": 231,
             "description": "Gamepad DOWN button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -2929,7 +2949,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 224,
+            "line": 238,
             "description": "Gamepad UP button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -2939,7 +2959,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 231,
+            "line": 245,
             "description": "Gamepad SELECT button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -2949,7 +2969,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 238,
+            "line": 252,
             "description": "Gamepad START button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -2959,7 +2979,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 245,
+            "line": 259,
             "description": "Gamepad HOME button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -2969,7 +2989,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 253,
+            "line": 266,
             "description": "Gamepad LEFT_TRIGGER_A button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -2979,7 +2999,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 260,
+            "line": 273,
             "description": "Gamepad LEFT_TRIGGER_B button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -2989,7 +3009,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 268,
+            "line": 280,
             "description": "Gamepad RIGHT_TRIGGER_A button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -2999,7 +3019,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 275,
+            "line": 287,
             "description": "Gamepad RIGHT_TRIGGER_B button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3009,7 +3029,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 283,
+            "line": 294,
             "description": "Gamepad L1 button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3019,7 +3039,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 290,
+            "line": 301,
             "description": "Gamepad L2 button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3029,7 +3049,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 297,
+            "line": 308,
             "description": "Gamepad L3 button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3039,7 +3059,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 305,
+            "line": 315,
             "description": "Gamepad R1 button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3049,7 +3069,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 312,
+            "line": 322,
             "description": "Gamepad R2 button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3059,7 +3079,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 319,
+            "line": 329,
             "description": "Gamepad R3 button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3069,7 +3089,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 327,
+            "line": 336,
             "description": "Gamepad A button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3079,7 +3099,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 334,
+            "line": 343,
             "description": "Gamepad B button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3089,7 +3109,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 341,
+            "line": 350,
             "description": "Gamepad C button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3099,7 +3119,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 348,
+            "line": 357,
             "description": "Gamepad D button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3109,7 +3129,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 356,
+            "line": 364,
             "description": "Gamepad X button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3119,7 +3139,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 363,
+            "line": 371,
             "description": "Gamepad Y button.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3129,7 +3149,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 371,
+            "line": 378,
             "description": "Gamepad LEFT_ANALOGUE_BUT axis.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3139,7 +3159,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 378,
+            "line": 385,
             "description": "Gamepad LEFT_ANALOGUE_HOR axis.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3149,7 +3169,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 385,
+            "line": 392,
             "description": "Gamepad LEFT_ANALOGUE_VERT axis.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3159,7 +3179,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 393,
+            "line": 399,
             "description": "Gamepad RIGHT_ANALOGUE_BUT axis.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3169,7 +3189,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 400,
+            "line": 406,
             "description": "Gamepad RIGHT_ANALOGUE_HOR axis.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -3179,7 +3199,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
-            "line": 407,
+            "line": 413,
             "description": "Gamepad RIGHT_ANALOGUE_VERT axis.",
             "type": "{Number}",
             "itemtype": "attribute",
@@ -4535,18 +4555,23 @@
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
             "line": 45,
-            "description": "Parse object JSON.",
+            "description": "Parse JSON object.\n\nData can be loaded from a file using the FileSystem methods and parsed to an Object using JSON.parse() method.",
             "itemtype": "method",
             "name": "parse",
             "params": [
                 {
                     "name": "json",
-                    "description": "",
+                    "description": "JSON data to be loaded.",
                     "type": "Object"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "onLoad callback.",
+                    "type": "Function"
                 }
             ],
             "return": {
-                "description": "object",
+                "description": "Program loaded from json data.",
                 "type": "Object"
             },
             "class": "ObjectLoader",
@@ -4554,7 +4579,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 79,
+            "line": 82,
             "description": "Define base path for external texture loading.",
             "itemtype": "method",
             "name": "setTexturePath",
@@ -4570,13 +4595,13 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 90,
+            "line": 93,
             "description": "Set cross origin.",
             "itemtype": "method",
             "name": "setCrossOrigin",
             "params": [
                 {
-                    "name": "value",
+                    "name": "origin",
                     "description": "",
                     "type": "String"
                 }
@@ -4586,8 +4611,8 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 101,
-            "description": "Parse geometries on json.",
+            "line": 104,
+            "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseGeometries",
             "params": [
@@ -4606,7 +4631,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 213,
+            "line": 216,
             "description": "Parse materials on json.",
             "itemtype": "method",
             "name": "parseMaterials",
@@ -4626,7 +4651,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 238,
+            "line": 241,
             "description": "Parse animations on json.",
             "itemtype": "method",
             "name": "parseAnimations",
@@ -4646,7 +4671,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 258,
+            "line": 261,
             "description": "Parse images on json.",
             "itemtype": "method",
             "name": "parseImages",
@@ -4666,7 +4691,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 281,
+            "line": 284,
             "description": "Parse videos on json.",
             "itemtype": "method",
             "name": "parseVideos",
@@ -4686,7 +4711,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 304,
+            "line": 307,
             "description": "Parse audio on json.",
             "itemtype": "method",
             "name": "parseAudio",
@@ -4706,7 +4731,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 327,
+            "line": 330,
             "description": "Parse fonts on json.",
             "itemtype": "method",
             "name": "parseFonts",
@@ -4726,7 +4751,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 350,
+            "line": 353,
             "description": "Parse textures on json.",
             "itemtype": "method",
             "name": "parseTextures",
@@ -4756,7 +4781,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 379,
+            "line": 382,
             "description": "Parse objects on json.",
             "itemtype": "method",
             "name": "parseObjects",
