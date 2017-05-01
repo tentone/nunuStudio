@@ -25,12 +25,13 @@
 			canvas = document.getElementById("canvas");
 			app = new NunuApp(canvas);
 			app.loadRunProgram("cameras.isp");
+			resize();
 		}
 
 		function resize()
 		{
-			canvas.width = canvas.offsetWidth;
-			canvas.height = canvas.offsetHeight;
+			canvas.width = document.body.offsetWidth * 0.5;
+			canvas.height = document.body.offsetWidth * 0.35;
 			app.resize();
 		}
 	</script>

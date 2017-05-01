@@ -28,12 +28,13 @@
 			canvas = document.getElementById("canvas");
 			app = new NunuApp(canvas);
 			app.loadRunProgram("first.isp");
+			resize();
 		}
 
 		function resize()
 		{
-			canvas.width = canvas.offsetWidth;
-			canvas.height = canvas.offsetHeight;
+			canvas.width = document.body.offsetWidth * 0.5;
+			canvas.height = document.body.offsetWidth * 0.35;
 			app.resize();
 		}
 	</script>
@@ -107,7 +108,7 @@
 }</code></pre>
 			<p>If everything works as expected you should see the following animation.</p>
 			<p>To try this example in the editor you can download the ISP project file <a href="first.isp">here</a> or open it on the <a href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/02_script/first.isp">Web Editor</a>.</p>
-			<canvas id="canvas" width="800" height="480" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
+			<canvas id="canvas" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
 
 			<h3 class="black">Keyboard and Mouse input</h3>
 			<p>Its possible to use the keyboard and mouse to move objects around. This can be done using the Keyboard and Mouse objects inside scripts. The code bellow rotates an object in the y axis using the mouse delta, and moves the object aroud using keyboard arrow keys.</p>
