@@ -1,10 +1,10 @@
 "use strict";
 
 /**
- * Objectloader can be used to load any external objects.
+ * Objectloader can be used to load external objects from files.
  *
  * Can parse be used to load on runtime resources and objects from external isp project files.
- *
+ * 
  * @constructor
  * @class ObjectLoader
  * @module Loaders
@@ -43,11 +43,14 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
 
 
 /**
- * Parse object JSON.
+ * Parse JSON object.
+ * 
+ * Data can be loaded from a file using the FileSystem methods and parsed to an Object using JSON.parse() method.
  *
  * @method parse
- * @param {Object} json
- * @return {Object} object
+ * @param {Object} json JSON data to be loaded.
+ * @param {Function} onLoad onLoad callback.
+ * @return {Object} Program loaded from json data.
  */
 ObjectLoader.prototype.parse = function(json, onLoad)
 {
@@ -82,24 +85,24 @@ ObjectLoader.prototype.parse = function(json, onLoad)
  * @method setTexturePath
  * @param {String} path
  */
-ObjectLoader.prototype.setTexturePath = function(value)
+ObjectLoader.prototype.setTexturePath = function(path)
 {
-	this.texturePath = value;
+	this.texturePath = path;
 };
 
 /**
  * Set cross origin.
  *
  * @method setCrossOrigin
- * @param {String} value
+ * @param {String} origin
  */
-ObjectLoader.prototype.setCrossOrigin = function(value)
+ObjectLoader.prototype.setCrossOrigin = function(origin)
 {
-	this.crossOrigin = value;
+	this.crossOrigin = origin;
 };
 
 /**
- * Parse geometries on json.
+ * Parse geometries on JSON.
  *
  * @method parseGeometries
  * @param {Object} json

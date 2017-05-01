@@ -9,35 +9,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="../../css/lib/bootstrap.min.css">
-	<link rel="stylesheet" href="../../css/lib/highlight.min.css">
-	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../../lib/highlight.min.css">
+	<link rel="stylesheet" href="../../style.css">
 
 	<!--Javascript-->
-	<script src="../../js/jquery.min.js"></script>
-	<script src="../../js/bootstrap.min.js"></script>
-	<script src="../../examples/nunu.min.js"></script>
-	<script>
-		var app, canvas;
-
-		function initialize()
-		{	
-			canvas = document.getElementById("canvas");
-			app = new NunuApp(canvas);
-			app.loadRunProgram("cameras.isp");
-			resize();
-		}
-
-		function resize()
-		{
-			canvas.width = document.body.offsetWidth * 0.5;
-			canvas.height = document.body.offsetWidth * 0.35;
-			app.resize();
-		}
-	</script>
+	<script src="../../lib/jquery.min.js"></script>
+	<script src="../../lib/bootstrap.min.js"></script>
+	<script src="../../editor/nunu.min.js"></script>
+	<script src="../js/embed.js"></script>
 </head>
 
-<body onload="initialize();" onresize="resize();">
+<body onload="initialize('cameras.isp');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse open" style="padding-top:8px; min-height:60px">
 		<div class="container">

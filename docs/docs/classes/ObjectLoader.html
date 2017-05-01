@@ -163,7 +163,7 @@
 						
 						
 						<div class="box intro">
-							<p>Objectloader can be used to load any external objects.</p>
+							<p>Objectloader can be used to load external objects from files.</p>
 						<p>Can parse be used to load on runtime resources and objects from external isp project files.</p>
 						
 						</div>
@@ -395,6 +395,9 @@
 															<li class="arg">
 																	<code>json</code>
 															</li>
+															<li class="arg">
+																	<code>onLoad</code>
+															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
@@ -417,7 +420,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse object JSON.</p>
+													<p>Parse JSON object.</p>
+											<p>Data can be loaded from a file using the FileSystem methods and parsed to an Object using JSON.parse() method.</p>
 											
 												</div>
 											
@@ -431,7 +435,19 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>JSON data to be loaded.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">onLoad</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	<p>onLoad callback.</p>
+											
 																</div>
 											
 															</li>
@@ -443,7 +459,7 @@
 											
 														<div class="returns-description">
 																	<span class="type">Object</span>:
-																<p>object</p>
+																<p>Program loaded from json data.</p>
 											
 														</div>
 													</div>
@@ -665,7 +681,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse geometries on json.</p>
+													<p>Parse geometries on JSON.</p>
 											
 												</div>
 											
@@ -1104,7 +1120,7 @@
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>value</code>
+																	<code>origin</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -1134,7 +1150,7 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">value</code>
+																	<code class="param-name">origin</code>
 																	<span class="type">String</span>
 											
 											

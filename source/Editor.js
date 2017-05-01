@@ -3,6 +3,7 @@
 function Editor(){}
 
 Editor.filePath = "editor/files/";
+Editor.runtimePath = "runtime/";
 Editor.NWJSPath = "../nwjs/";
 
 //Runtime
@@ -1405,10 +1406,10 @@ Editor.setOpenFile = function(file)
 Editor.exportWebProject = function(dir)
 {
 	FileSystem.makeDirectory(dir);
-	FileSystem.copyFile("runtime/vr.png", dir + "/vr.png");
-	FileSystem.copyFile("runtime/fullscreen.png", dir + "/fullscreen.png");
-	FileSystem.copyFile("runtime/logo.png", dir + "/logo.png");
-	FileSystem.copyFile("runtime/index.html", dir + "/index.html");
+	FileSystem.copyFile(Editor.runtimePath + "vr.png", dir + "/vr.png");
+	FileSystem.copyFile(Editor.runtimePath + "fullscreen.png", dir + "/fullscreen.png");
+	FileSystem.copyFile(Editor.runtimePath + "logo.png", dir + "/logo.png");
+	FileSystem.copyFile(Editor.runtimePath + "index.html", dir + "/index.html");
 	FileSystem.copyFile("../build/nunu.min.js", dir + "/nunu.min.js");
 	
 	Editor.saveProgram(dir + "/app.isp", true, true);

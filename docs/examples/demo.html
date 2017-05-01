@@ -8,7 +8,7 @@
 	</head>
 
 	<body style="background-color: #222222" onload="initialize();" onresize="resize();" oncontextmenu="return false;">
-		<script type="text/javascript" src="nunu.min.js"></script>
+		<script type="text/javascript" src="../editor/nunu.min.js"></script>
 		<script type="text/javascript">		
 			var app;
 
@@ -29,11 +29,11 @@
 					if(app.vrAvailable())
 					{
 						button = document.getElementById("vr");
-						button.style.visibility = "visible";
+						button.style.display = "none";
 					}
 
 					//Remove logo and loading bar
-					document.body.removeChild(logo);
+					logo.style.display = "none";
 				};
 
 				//On progress callback
@@ -70,14 +70,12 @@
 			function toggleFullscreen()
 			{
 				app.setFullscreen();
-				app.resize();
 			}
 
 			//Toggle VR mode
 			function toggleVR()
 			{
 				app.toggleVR();
-				app.resize();
 			}
 		</script>
 

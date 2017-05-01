@@ -40,6 +40,8 @@ function Gamepad()
 
 /**
  * Set which gamepad should be used by this Gamepad instance.
+ *
+ * Can be used to override the gamepad attached to this object and enable multiple gamepad support.
  * 
  * @param {Object} Browser gamepad object.
  * @method setGamepad
@@ -48,8 +50,6 @@ Gamepad.prototype.setGamepad = function(gamepad)
 {	
 	if(gamepad !== undefined && gamepad !== null)
 	{
-		console.log(gamepad);
-
 		//Store gamepad and its index
 		this.index = gamepad.index;
 		this.gamepad = gamepad;
@@ -88,7 +88,7 @@ Gamepad.prototype.disconnect = function()
 };
 
 /**
- * Set vendor and product id for this gamepad.
+ * Get vendor id and product id for the connected gamepad.
  *
  * @method setProductVendor
  * @param {Object} gamepad Gamepad object.
@@ -141,7 +141,9 @@ Gamepad.prototype.update = function()
 };
 
 /**
- * Get analog button value [0...1]
+ * Get analog button value between 0 and 1.
+ *
+ * If the button is not analog enabled it will return 0 if button is not pressed or 1 if the button is pressed.
  *
  * @method getAnalogueButton
  * @param {Number} button Button to get analogue value from.
@@ -153,7 +155,7 @@ Gamepad.prototype.getAnalogueButton = function(button)
 };
 
 /**
- * Get axis value [-1...1]
+ * Get axis value between -1 and 1 depending on the direction.
  *
  * @method getAxis
  * @param {Number} Axis to get value from.
@@ -165,6 +167,18 @@ Gamepad.prototype.getAxis = function(axis)
 };
 
 /**
+ * Check if a button exists in the connected Gamepad.
+ * 
+ * @method buttonExists
+ * @param {Number} button Button to check status of
+ * @return {boolean} True if button exists in the connected gamepad.
+ */
+Gamepad.prototype.buttonExists = function(button)
+{
+	return button >= 0 && button < this.buttons.length;
+};
+
+/**
  * Check if gamepad button is currently pressed.
  * 
  * @method buttonPressed
@@ -173,7 +187,7 @@ Gamepad.prototype.getAxis = function(axis)
  */
 Gamepad.prototype.buttonPressed = function(button)
 {
-	return (button > this.buttons.length) ? false : this.buttons[button].pressed;
+	return this.buttons[button] ? this.buttons[button].pressed : false;
 };
 
 /**
@@ -185,7 +199,7 @@ Gamepad.prototype.buttonPressed = function(button)
  */
 Gamepad.prototype.buttonJustPressed = function(button)
 {
-	return (button > this.buttons.length || button < 0) ? false : this.buttons[button].justPressed;
+	return this.buttons[button] ? this.buttons[button].justPressed : false;
 };
 
 /**
@@ -197,7 +211,7 @@ Gamepad.prototype.buttonJustPressed = function(button)
  */
 Gamepad.prototype.buttonJustReleased = function(button)
 {
-	return (button > this.buttons.length || button < 0) ? false : this.buttons[button].justReleased;
+	return this.buttons[button] ? this.buttons[button].justReleased : false;
 };
 
 /**
@@ -249,7 +263,6 @@ Gamepad.START = 9;
  */
 Gamepad.HOME = 16;
 
-
 /**
  * Gamepad LEFT_TRIGGER_A button.
  * @type {Number}
@@ -264,7 +277,6 @@ Gamepad.LEFT_TRIGGER_A = 4;
  */
 Gamepad.LEFT_TRIGGER_B = 6;
 
-
 /**
  * Gamepad RIGHT_TRIGGER_A button.
  * @type {Number}
@@ -278,7 +290,6 @@ Gamepad.RIGHT_TRIGGER_A = 5;
  * @attribute RIGHT_TRIGGER_B
  */
 Gamepad.RIGHT_TRIGGER_B = 7;
-
 
 /**
  * Gamepad L1 button.
@@ -301,7 +312,6 @@ Gamepad.L2 = 6;
  */
 Gamepad.L3 = 6;
 
-
 /**
  * Gamepad R1 button.
  * @type {Number}
@@ -322,7 +332,6 @@ Gamepad.R2 = 7;
  * @attribute R3
  */
 Gamepad.R3 = 11;
-
 
 /**
  * Gamepad A button.
@@ -352,7 +361,6 @@ Gamepad.C = 2;
  */
 Gamepad.D = 3;
 
-
 /**
  * Gamepad X button.
  * @type {Number}
@@ -366,7 +374,6 @@ Gamepad.X = 2;
  * @attribute Y
  */
 Gamepad.Y = 3;
-
 
 /**
  * Gamepad LEFT_ANALOGUE_BUT axis.
@@ -388,7 +395,6 @@ Gamepad.LEFT_ANALOGUE_HOR = 0;
  * @attribute LEFT_ANALOGUE_VERT
  */
 Gamepad.LEFT_ANALOGUE_VERT = 1;
-
 
 /**
  * Gamepad RIGHT_ANALOGUE_BUT axis.

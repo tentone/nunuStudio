@@ -5,19 +5,19 @@
 <head>
 	<meta charset="utf-8">
 	<title>nunuStudio</title>
-	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="shortcut icon" href="favicon.ico"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<!--Styles-->
-	<link rel="stylesheet" href="css/lib/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="lib/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
 
 	<!--Javascript-->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="lib/jquery.min.js"></script>
+	<script src="lib/bootstrap.min.js"></script>
 
 	<!--nunu app-->
-	<script type="text/javascript" src="examples/nunu.min.js"></script>
+	<script type="text/javascript" src="editor/nunu.min.js"></script>
 	<script type="text/javascript">
 		var app;
 		var canvas, header;
@@ -94,7 +94,7 @@
 			<canvas id="canvas" style="position:absolute; left:0%; top:0%; height:100%; width:100%; border:none"></canvas>
 
 			<!--Title and buttons-->
-			<div class="row header-info">
+			<div class="header-info">
 				<div class="col-sm-10 col-sm-offset-1 text-center">	
 					<!--Slogan-->
 					<h1 class="noselect">3D content that runs everywhere!</h1>
@@ -104,25 +104,22 @@
 						Design, edit, code, all in one place!
 					</p>
 					
+					<!--Buttons-->
 					<div class="row">
-						<!--Buttons-->
-						<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
-							<div class="row">
-								<!--Github button-->
-								<div class="col-xs-6 text-right">
-									<a href="https://www.github.com/tentone/nunuStudio" class="btn btn-secondary btn-lg">GitHub</a>
-								</div>
-								<!--Download-->
-								<div class="col-xs-6 text-left">
-									<a href="download.html" class="btn btn-primary btn-lg">Try Now</a>
-								</div>
-							</div> 
+						<!--Github button-->
+						<div class="col-xs-6 text-right">
+							<a href="https://www.github.com/tentone/nunuStudio" class="btn btn-secondary btn-lg">GitHub</a>
 						</div>
+						<!--Download-->
+						<div class="col-xs-6 text-left">
+							<a href="download.html" class="btn btn-primary btn-lg">Download</a>
+						</div>
+					</div> 
 
-						<!--Loading bar-->
-						<div style="position:absolute; width:50%; height:7%; left:25%; top:0%; border-style:solid; border-color:#FFFFFF; border-width:2px">
-							<div id="bar" style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color:#FFFFFF">
-						</div>
+
+					<!--Loading bar-->
+					<div style="position:absolute; width:50%; height:7%; left:25%; top:0%; border-style:solid; border-color:#FFFFFF; border-width:2px">
+						<div id="bar" style="position:absolute; width:0%; height:100%; left:0%; top:0%; background-color:#FFFFFF">
 					</div>
 				</div>
 			</div>
@@ -132,16 +129,14 @@
 	<!--Built on division-->
 	<section id="nunu" class="pad-xl">
 		<div class="container">
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2 text-center margin-30">
-					<h2>Built on OpenSource</h2>
-					<p class="lead">Three.js | CodeMirror | CannonJS | SPE | NWJS</p>
-					<img src="img/logo/threejs.png" height="50"></img>
-					<img src="img/logo/codemirror.png" height="50"></img>
-					<img src="img/logo/nwjs.png" height="50"></img>
-					<img src="img/logo/js.jpg" height="50"></img>
-					<img src="img/logo/webgl.png" height="50"></img>
-				</div>
+			<div class="text-center">
+				<h2>Built on OpenSource</h2>
+				<p class="lead">Three.js | CodeMirror | CannonJS | SPE | NWJS</p>
+				<img src="img/logo/threejs.png" height="50"></img>
+				<img src="img/logo/codemirror.png" height="50"></img>
+				<img src="img/logo/nwjs.png" height="50"></img>
+				<img src="img/logo/js.jpg" height="50"></img>
+				<img src="img/logo/webgl.png" height="50"></img>
 			</div>
 		</div>
 	</section>
@@ -153,96 +148,80 @@
 			<h2 class="black">Features</h2>
 			<div class="row">
 				<!--Graphical Editor-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>Graphical Editor</h3>
 					<p>What you see is what you get. Familiar user interface similar to the ones you already know.</p>
 					<img style="width:100%" src="img/screenshot/6.jpg"></img>
 				</div>
 				<!--Graphics-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>3D Graphics</h3>
 					<p>Graphics powered by three.js with support for dynamic ligths, shadows, post-processing effects, animations, etc.</p>
 					<img style="width:100%" src="img/screenshot/8.jpg"></img>
 				</div>
 				<!--Physics-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>Physics</h3>
 					<p>Fully features 3D physics engine powered by cannon.js</p>
 					<img style="width:100%" src="img/screenshot/gif/1.gif"></img>
 				</div>
-			</div>
-			<div class="row">
 				<!--JS Scripts-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>JS Scripts</h3>
 					<p>Easy to learn language, familiar for web and game developers.</p>
 					<img style="width:100%" src="img/screenshot/5.jpg"></img>
 				</div>
+			</div>
+			<div class="row">
 				<!--2D Mode-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>2D Mode</h3>
 					<p>Want 2D? No problem! Switch between 2D and 3D with the click of a button.</p>
 					<img style="width:100%" src="img/screenshot/7.jpg"></img>
 				</div>
 				<!--WebVR-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>WebVR</h3>
 					<p>Ready for web virtual reality, on both mobile and desktop platforms.</p>
 					<img style="width:100%" src="img/webvr.jpg"></img>
 				</div>
-			</div>
-			<div class="row">
 				<!--Materials-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>Material Editor</h3>
 					<p>Graphical material editor similar to the ones found in 3D design tools.</p>
 					<img style="width:100%" src="img/screenshot/1.jpg"></img>
 				</div>
 				<!--Particle-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>Particle</h3>
 					<p>GPU accelerated particle system powered by SPE.</p>
 					<img style="width:100%" src="img/screenshot/2.jpg"></img>
 				</div>
+			</div>
+			<div class="row">
 				<!--Dragndrop-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>Drag and drop</h3>
 					<p>Drag and drop files into the editor, it just works.</p>
 					<img style="width:100%" src="img/screenshot/gif/2.gif"></img>
 				</div>
-			</div>
-			<div class="row">
 				<!--Spine animations-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>Spine animations</h3>
 					<p>Create 2D animations using Esoteric spine animation tool and import them to nunuStudio.</p>
 					<img style="width:100%" src="img/screenshot/gif/3.gif"></img>
 				</div>
 				<!--WebAudio-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>WebAudio</h3>
 					<p>Audio engine built on top of web audio API with support for positional audio.</p>
 					<img style="width:100%" src="img/screenshot/10.jpg"></img>
 				</div>
 				<!--Multiplatform-->
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<h3>Multi-platform editor</h3>
 					<p>nunuStudio was build on top of nwjs it works on windows, linux and OS X.<p>
 					<img style="width:100%" src="img/screenshot/3.jpg"></img>
-				</div>
-			</div>
-			<div class="row">
-				<!--File format-->
-				<div class="col-sm-4">
-					<h3>Understands You</h3>
-					<p>Load anything you want into the editor, tons of file formats are supported.</p>
-					<img style="width:100%" src="img/files.jpg">
-				</div>
-				<!--Open Source-->
-				<div class="col-sm-4">
-					<h3>Open Source</h3>
-					<p>nunuStudio is a open source project, everybody can colaborate and help.</p>
-					<img style="width:100%" src="img/github.jpg"></img>
 				</div>
 			</div>
 		</div>

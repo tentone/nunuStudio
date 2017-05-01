@@ -4,8 +4,8 @@ function ThemeDark()
 {
 	//Metadata
 	this.name = "dark";
-	this.info = "";
-	this.version = "V1.0";
+	this.info = "default nunuStudio theme";
+	this.version = "v1.0";
 	this.author = "Tentone";
 
 	//Font
@@ -15,12 +15,19 @@ function ThemeDark()
 	this.barColor = "#222222";
 	this.panelColor = "#333333";
 	this.resizeTabColor = "#222222";
-	this.buttonColor = "#222222";
-	this.buttonOverColor = "#555555";
-	this.buttonLightColor = "#333333";
 	this.boxColor = "#444444";
 	this.textColor = "#FFFFFF";
 	this.iconColor = "#FFFFFF";
+
+	//Button
+	this.buttonColor = "#222222";
+	this.buttonOverColor = "#555555";
+	this.buttonLightColor = "#333333";
+	
+	//Audio player
+	this.audioTrack = "#222222";
+	this.audioScrubber = "#FFFFFF";
+	this.audioProgress = "#555555";
 
 	//Body
 	document.body.style.fontFamily = this.font;
