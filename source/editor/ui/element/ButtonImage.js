@@ -5,27 +5,28 @@ function ButtonImage(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 	
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "pointer";
 
 	//Image
-	this.img = document.createElement("img");
-	this.img.style.pointerEvents = "none";
-	this.img.style.position = "absolute";
-	this.img.style.top = "0px";
-	this.img.style.left = "0px";
-	this.element.appendChild(this.img);
+	this.icon = document.createElement("img");
+	this.icon.style.pointerEvents = "none";
+	this.icon.style.position = "absolute";
+	this.icon.style.top = "15%";
+	this.icon.style.left = "15%";
+	this.icon.style.width = "70%";
+	this.icon.style.height = "70%";
+	this.element.appendChild(this.icon);
 
 	//Attributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 
-	//Image and Callback
-	this.imageScale = new THREE.Vector2(1,1);
-	this.image = "";
+	//Image scale
+	this.imageScale = new THREE.Vector2(0.7, 0.7);
 
 	//Mouse over event
 	this.element.onmouseenter = function()
@@ -58,17 +59,27 @@ ButtonImage.prototype.setCallback = function(callback)
 	this.element.onclick = callback;
 };
 
-//Set ButtonImage
+//Set image
 ButtonImage.prototype.setImage = function(image)
 {
-	this.image = image;
-	this.img.src = this.image;
+	this.icon.src = image;
+};
+
+//Set image scale
+ButtonImage.prototype.setImageScale = function(x, y)
+{
+	this.imageScale.set(x, y);
+	
+	this.icon.style.top = (1 - y) / 2;
+	this.icon.style.left = (1 - x) / 2;
+	this.icon.style.width = x;
+	this.icon.style.height = y;
 };
 
 //Set alt text
 ButtonImage.prototype.setAltText = function(altText)
 {
-	var text = new Text();//this.element);
+	var text = new Text();
 	text.element.style.background = Editor.theme.barColor;
 	text.element.style.zIndex = "300";
 	text.setText(altText);
@@ -93,23 +104,6 @@ ButtonImage.prototype.setAltText = function(altText)
 	}
 };
 
-//Set button image visibility
-ButtonImage.prototype.setVisibility = function(visible)
-{
-	this.visible = visible;
-
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.img.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-		this.img.style.visibility = "hidden";
-	}
-};
-
 //Update Interface
 ButtonImage.prototype.updateInterface = function()
 {
@@ -117,23 +111,15 @@ ButtonImage.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
-		this.img.style.visibility = "visible";
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
-		this.img.style.visibility = "hidden";
 	}
-
-	//Image
-	this.img.width = this.size.x * this.imageScale.x;
-	this.img.height = this.size.y * this.imageScale.y;
-	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
-	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
-	
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };

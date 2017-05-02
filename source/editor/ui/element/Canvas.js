@@ -9,13 +9,13 @@ function Canvas(parent)
 	this.element = document.createElement("canvas");
 	this.element.style.position = "absolute";
 
-	//Prevent Drop event
+	//Prevent drop event
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
 	};
 
-	//Prevent deafault when object dragged over
+	//Prevent dragged over event
 	this.element.ondragover = function(event)
 	{
 		event.preventDefault();

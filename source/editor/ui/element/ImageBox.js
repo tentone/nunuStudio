@@ -52,23 +52,6 @@ ImageBox.prototype.setImage = function(image)
 	this.img.src = image;
 };
 
-//Set element visibility
-ImageBox.prototype.setVisibility = function(value)
-{
-	this.visible = value;
-
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.img.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-		this.img.style.visibility = "hidden";
-	}
-};
-
 //Update Interface
 ImageBox.prototype.updateInterface = function()
 {
@@ -76,12 +59,10 @@ ImageBox.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
-		this.img.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
-		this.img.style.visibility = "hidden";
 	}
 
 	//Keep image aspect ratio

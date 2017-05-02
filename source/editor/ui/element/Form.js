@@ -9,7 +9,7 @@ function Form(parent)
 	this.element = document.createElement("div");
 	this.element.style.overflow = "visible";
 	this.element.style.position = "absolute";
-
+	
 	//Attributes
 	this.size = new THREE.Vector2(0, 0);
 	this.position = new THREE.Vector2(0, 0);
@@ -100,64 +100,63 @@ Form.prototype.updateInterface = function()
 	//Visiblity
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-	}
+		//Position tracker and size
+		var x = 0, y = 0;
+		var size = this.size.set(0, 0);
 
-	//Position and size trackers
-	var position = new THREE.Vector2(0, 0);
-	var size = this.size.set(0, 0);
-
-	//Updated attached elements
-	for(var i = 0; i < this.rows.length; i++)
-	{
-		var maxSizeY = 0;
-		for(var j = 0; j < this.rows[i].length; j++)
+		//Updated attached elements
+		for(var i = 0; i < this.rows.length; i++)
 		{
-			var element = this.rows[i][j];
-			
-			if(element.visible)
+			var maxSizeY = 0;
+			for(var j = 0; j < this.rows[i].length; j++)
 			{
-				//Update element
-				element.position.set(position.x, position.y);
-				element.visible = this.visible;
-				element.updateInterface();
+				var element = this.rows[i][j];
 				
-				//Restore visibility
-				element.visible = true;
-
-				//Update position tracker
-				if(element.size.y > maxSizeY)
+				if(element.visible)
 				{
-					maxSizeY = element.size.y;
+					//Update element
+					element.position.set(x, y);
+					element.visible = this.visible;
+					element.updateInterface();
+					
+					//Restore visibility
+					element.visible = true;
+
+					//Update position tracker
+					if(element.size.y > maxSizeY)
+					{
+						maxSizeY = element.size.y;
+					}
+					x += element.size.x + this.spacing.x;
 				}
-				position.x += element.size.x + this.spacing.x;
+			}
+
+			//Update form size x
+			if(size.x < x)
+			{
+				size.x = x;
+			}
+
+			//Update position tracker
+			if(x !== 0)
+			{
+				x = 0;
+				y += maxSizeY + this.spacing.y;
 			}
 		}
 
-		//Update form size x
-		if(size.x < position.x)
-		{
-			size.x = position.x;
-		}
+		//Set size y
+		size.y = y;
 
-		//Update position tracker
-		if(position.x !== 0)
-		{
-			position.x = 0;
-			position.y += maxSizeY + this.spacing.y;
-		}
+		//Element
+		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.height = this.size.y + "px";
+		this.element.style.width = this.size.x + "px";
 	}
-
-	//Set size y
-	size.y = position.y;
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.height = this.size.y + "px";
-	this.element.style.width = this.size.x + "px";	
+	else
+	{
+		this.element.style.display = "none";
+	}
 };
