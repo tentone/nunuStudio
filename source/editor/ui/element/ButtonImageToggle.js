@@ -5,7 +5,7 @@ function ButtonImageToggle(parent)
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
 
-	//Create element
+	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "pointer";
@@ -14,35 +14,36 @@ function ButtonImageToggle(parent)
 	this.element.style.alignItems = "center";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	
-	//Prevent Drop event
+	//Prevent drop event
 	this.element.ondrop = function(event)
 	{
 		event.preventDefault();
 	};
 
-	//Prevent deafault when object dragged over
+	//Prevent drag over event
 	this.element.ondragover = function(event)
 	{
 		event.preventDefault();
 	};
 
 	//Image
-	this.img = document.createElement("img");
-	this.img.style.position = "absolute";
-	this.img.style.pointerEvents = "none";
-	this.img.style.top = "0px";
-	this.img.style.left = "0px";
-	this.element.appendChild(this.img);
+	this.icon = document.createElement("img");
+	this.icon.style.position = "absolute";
+	this.icon.style.pointerEvents = "none";
+	this.icon.style.top = "15%";
+	this.icon.style.left = "15%";
+	this.icon.style.width = "70%";
+	this.icon.style.height = "70%";
+	this.element.appendChild(this.icon);
 
 	//Attributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
 	this.visible = true;
 
-	//Image and Callback
+	//Image
 	this.selected = false;
-	this.imageScale = new THREE.Vector2(1,1);
-	this.image = "";
+	this.imageScale = new THREE.Vector2(0.7, 0.7);
 
 	//Click event
 	var self = this;
@@ -89,10 +90,21 @@ ButtonImageToggle.prototype.setCallback = function(callback)
 	};
 };
 
-//Set ButtonImageToggle
+//Set image
 ButtonImageToggle.prototype.setImage = function(image)
 {
-	this.img.src = image;
+	this.icon.src = image;
+};
+
+//Set image scale
+ButtonImageToggle.prototype.setImageScale = function(x, y)
+{
+	this.imageScale.set(x, y);
+	
+	this.icon.style.top = (1 - y) / 2;
+	this.icon.style.left = (1 - x) / 2;
+	this.icon.style.width = x;
+	this.icon.style.height = y;
 };
 
 //Update Interface
@@ -102,31 +114,25 @@ ButtonImageToggle.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+		
+		//Selected
+		if(this.selected)
+		{
+			this.element.style.backgroundColor = Editor.theme.buttonOverColor;
+		}
+		else
+		{
+			this.element.style.backgroundColor = Editor.theme.buttonColor;
+		}
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	//Set selected
-	if(this.selected)
-	{
-		this.element.style.backgroundColor = Editor.theme.buttonOverColor;
-	}
-	else
-	{
-		this.element.style.backgroundColor = Editor.theme.buttonColor;
-	}
-
-	//Image
-	this.img.width = this.size.x * this.imageScale.x;
-	this.img.height = this.size.y * this.imageScale.y;
-	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
-	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
-	
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };

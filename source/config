@@ -27,7 +27,7 @@
 		"toneMappingWhitePoint": 1,
 		"antialiasing": true,
 		"shadows": true,
-		"shadowsType": 2
+		"shadowsType": 1
 	},
 	"code": {
 		"theme": "monokai",

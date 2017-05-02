@@ -14,12 +14,20 @@ function ImageChooser(parent)
 	this.alpha.style.visibility = "inherit";
 	this.alpha.style.position = "absolute";
 	this.alpha.src = Editor.filePath + "alpha.png";
+	this.alpha.style.left = "0px";
+	this.alpha.style.top = "0px";
+	this.alpha.style.width = "100%";
+	this.alpha.style.height = "100%";
 	this.element.appendChild(this.alpha);
 
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.visibility = "inherit";
 	this.img.style.position = "absolute";
+	this.img.style.left = "0px";
+	this.img.style.top = "0px";
+	this.img.style.width = "100%";
+	this.img.style.height = "100%";
 	this.element.appendChild(this.img);
 
 	//Self pointer
@@ -69,7 +77,7 @@ function ImageChooser(parent)
 		var reader = new FileReader();
 		reader.onload = function()
 		{
-			self.setImage(reader.result);
+			self.setValue(reader.result);
 			self.onChange(reader.result);
 		};
 		reader.readAsDataURL(file);
@@ -80,10 +88,8 @@ function ImageChooser(parent)
 
 	//Attributes
 	this.size = new THREE.Vector2(100, 100);
-	this.position = new THREE.Vector2(0,0);
+	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
-	this.keepAspectRatio = false;
-	this.imageScale = new THREE.Vector2(1,1);
 
 	//Add element to document
 	this.parent.appendChild(this.element);
@@ -104,13 +110,7 @@ ImageChooser.prototype.destroy = function()
 	}
 }
 
-//Set image from URL
-ImageChooser.prototype.setImage = function(url)
-{
-	this.img.src = url;
-}
-
-//Set image from URL
+//Set image URL
 ImageChooser.prototype.setValue = function(url)
 {
 	this.img.src = url;
@@ -135,7 +135,7 @@ ImageChooser.prototype.updateInterface = function()
 		this.element.style.visibility = "hidden";
 	}
 
-	//Keep apect ratio
+	//Keep aspect ratio
 	if(this.keepAspectRatio)
 	{
 		if(this.size.x < this.size.y)
@@ -147,18 +147,6 @@ ImageChooser.prototype.updateInterface = function()
 			this.size.x = this.size.y * this.img.naturalWidth / this.img.naturalHeight;
 		}
 	}
-
-	//Image
-	this.img.width = this.size.x * this.imageScale.x;
-	this.img.height = this.size.y * this.imageScale.y;
-	this.img.style.left = ((this.size.x - (this.size.x * this.imageScale.x))/2) + "px";
-	this.img.style.top = ((this.size.y - (this.size.y * this.imageScale.y))/2) + "px";
-	
-	//Background
-	this.alpha.width = this.size.x;
-	this.alpha.height = this.size.y;
-	this.alpha.style.left = this.img.style.left;
-	this.alpha.style.top = this.img.style.top;
 
 	//Element
 	this.element.style.top = this.position.y + "px";

@@ -30,9 +30,10 @@ function Text(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Text alignment
+//Alignment
 Text.CENTER = 0;
 Text.LEFT = 1;
+Text.RIGHT = 2;
 
 //Set Text
 Text.prototype.setText = function(text)
@@ -61,7 +62,7 @@ Text.prototype.setAlignment = function(align)
 	}
 	else if(align === Text.LEFT)
 	{
-		this.element.style.justifyContent = "";
+		this.element.style.justifyContent = "left";
 	}
 };
 
@@ -71,23 +72,6 @@ Text.prototype.destroy = function()
 	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
-	}
-};
-
-//Set text visibility
-Text.prototype.setVisibility = function(value)
-{
-	this.visible = value;
-
-	if(this.visible)
-	{
-		this.element.style.visibility = "visible";
-		this.span.style.visibility = "visible";
-	}
-	else
-	{
-		this.element.style.visibility = "hidden";
-		this.span.style.visibility = "hidden";
 	}
 };
 
@@ -105,12 +89,10 @@ Text.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
-		this.span.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
-		this.span.style.visibility = "hidden";
 	}
 
 	//Element

@@ -53,14 +53,13 @@ Interface.initialize = function()
 	//Tools text
 	Interface.toolText = new Text(Interface.toolBar.element);
 	Interface.toolText.setText("Tools");
-	Interface.toolText.position.set(Interface.toolBar.size.x/2, 40);
+	Interface.toolText.position.set(Interface.toolBar.size.x / 2, 40);
 	Interface.toolText.updateInterface();
 
 	//Select
 	Interface.toolSelect = new ButtonImageToggle();
 	Interface.toolSelect.selected = true;
 	Interface.toolSelect.setImage(Editor.filePath + "icons/tools/select.png");
-	Interface.toolSelect.imageScale.set(0.7, 0.7);
 	Interface.toolSelect.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolSelect.position.set(0, 80);
 	Interface.toolSelect.updateInterface();
@@ -72,7 +71,6 @@ Interface.initialize = function()
 	//Move
 	Interface.toolMove = new ButtonImageToggle();
 	Interface.toolMove.setImage(Editor.filePath + "icons/tools/move.png");
-	Interface.toolMove.imageScale.set(0.7, 0.7);
 	Interface.toolMove.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolMove.position.set(0, 120);
 	Interface.toolMove.updateInterface();
@@ -84,7 +82,6 @@ Interface.initialize = function()
 	//Resize
 	Interface.toolScale = new ButtonImageToggle();
 	Interface.toolScale.setImage(Editor.filePath + "icons/tools/resize.png");
-	Interface.toolScale.imageScale.set(0.7, 0.7);
 	Interface.toolScale.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolScale.position.set(0, 160);
 	Interface.toolScale.updateInterface();
@@ -96,7 +93,6 @@ Interface.initialize = function()
 	//Rotate
 	Interface.toolRotate = new ButtonImageToggle();
 	Interface.toolRotate.setImage(Editor.filePath + "icons/tools/rotate.png");
-	Interface.toolRotate.imageScale.set(0.7, 0.7);
 	Interface.toolRotate.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolRotate.position.set(0, 200);
 	Interface.toolRotate.updateInterface();
@@ -114,8 +110,6 @@ Interface.initialize = function()
 	//Add Models
 	Interface.addModel = new ButtonDrawer();
 	Interface.addModel.setImage(Editor.filePath + "icons/models/models.png");
-	Interface.addModel.imageScale.set(0.7, 0.7);
-	Interface.addModel.optionsScale.set(0.7, 0.7);
 	Interface.addModel.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addModel.position.set(0, 280);
 	Interface.addModel.optionsSize.set(40, 40);
@@ -207,8 +201,6 @@ Interface.initialize = function()
 	//Add lights
 	Interface.addLight = new ButtonDrawer();
 	Interface.addLight.setImage(Editor.filePath + "icons/lights/point.png");
-	Interface.addLight.imageScale.set(0.7, 0.7);
-	Interface.addLight.optionsScale.set(0.7, 0.7);
 	Interface.addLight.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addLight.position.set(0, 320);
 	Interface.addLight.optionsSize.set(40, 40);
@@ -260,8 +252,6 @@ Interface.initialize = function()
 	Interface.addCamera = new ButtonDrawer();
 	Interface.addCamera.setImage(Editor.filePath + "icons/camera/camera.png");
 	Interface.addCamera.optionsPerLine = 2;
-	Interface.addCamera.imageScale.set(0.7, 0.7);
-	Interface.addCamera.optionsScale.set(0.7, 0.7);
 	Interface.addCamera.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addCamera.position.set(0, 360);
 	Interface.addCamera.optionsSize.set(40, 40);
@@ -283,8 +273,6 @@ Interface.initialize = function()
 	Interface.addScript = new ButtonDrawer();
 	Interface.addScript.setImage(Editor.filePath + "icons/script/script.png");
 	Interface.addScript.optionsPerLine = 1;
-	Interface.addScript.imageScale.set(0.7, 0.7);
-	Interface.addScript.optionsScale.set(0.7, 0.7);
 	Interface.addScript.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addScript.position.set(0, 400);
 	Interface.addScript.optionsSize.set(40, 40);
@@ -300,8 +288,6 @@ Interface.initialize = function()
 	Interface.addEffects = new ButtonDrawer();
 	Interface.addEffects.setImage(Editor.filePath + "icons/misc/particles.png");
 	Interface.addEffects.optionsPerLine = 3;
-	Interface.addEffects.imageScale.set(0.7, 0.7);
-	Interface.addEffects.optionsScale.set(0.7, 0.7);
 	Interface.addEffects.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addEffects.position.set(0, 440);
 	Interface.addEffects.optionsSize.set(40, 40);
@@ -349,8 +335,6 @@ Interface.initialize = function()
 	Interface.addPhysics = new ButtonDrawer();
 	Interface.addPhysics.setImage(Editor.filePath + "icons/misc/physics.png");
 	Interface.addPhysics.optionsPerLine = 3;
-	Interface.addPhysics.imageScale.set(0.7, 0.7);
-	Interface.addPhysics.optionsScale.set(0.7, 0.7);
 	Interface.addPhysics.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addPhysics.position.set(0, 480);
 	Interface.addPhysics.optionsSize.set(40, 40);
@@ -407,8 +391,6 @@ Interface.initialize = function()
 	Interface.addDevice = new ButtonDrawer();
 	Interface.addDevice.setImage(Editor.filePath + "icons/hw/hw.png");
 	Interface.addDevice.optionsPerLine = 2;
-	Interface.addDevice.imageScale.set(0.7, 0.7);
-	Interface.addDevice.optionsScale.set(0.7, 0.7);
 	Interface.addDevice.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addDevice.position.set(0, 520);
 	Interface.addDevice.optionsSize.set(40, 40);
