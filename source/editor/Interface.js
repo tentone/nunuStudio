@@ -456,7 +456,7 @@ Interface.initialize = function()
 	Interface.file.addOption("Load", function()
 	{
 		Interface.loadProgram();
-	});
+	}, Editor.filePath + "icons/misc/load.png");
 
 	//Console
 	/*Interface.file.addOption("Console", function()
@@ -483,7 +483,7 @@ Interface.initialize = function()
 	//Publish
 	if(Nunu.runningOnDesktop())
 	{
-		var publish = Interface.file.addMenu("Publish");
+		var publish = Interface.file.addMenu("Publish", Editor.filePath + "icons/misc/publish.png");
 
 		//Publish web
 		publish.addOption("Web", function()

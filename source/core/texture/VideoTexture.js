@@ -69,7 +69,7 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	this.category = "Video";
 
 	//Controls
-	this.autoplay = false;
+	this.autoplay = true;
 	this.loop = true;
 	this.playbackRate = 1.0;
 	this.volume = 1.0;

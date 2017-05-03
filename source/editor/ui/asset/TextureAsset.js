@@ -30,8 +30,9 @@ function TextureAsset(parent)
 		{
 			Constructor = SpriteSheetTextureEditor;
 		}
-		var tab = Interface.tab.getTab(Constructor, self.texture);
 
+		var tab = Interface.tab.getTab(Constructor, self.texture);
+		
 		if(tab === null)
 		{
 			tab = Interface.tab.addTab(Constructor, true);
