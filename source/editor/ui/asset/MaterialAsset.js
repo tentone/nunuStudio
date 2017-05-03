@@ -130,7 +130,6 @@ function MaterialAsset(parent)
 				try
 				{
 					Editor.clipboard.set(JSON.stringify(self.material.toJSON()), "text");
-
 					Editor.program.removeMaterial(self.material, Editor.defaultMaterial, Editor.defaultSpriteMaterial);
 					Editor.updateObjectViews();
 				}
@@ -148,8 +147,7 @@ function MaterialAsset(parent)
 					var json = self.material.toJSON();
 
 					//Loader
-					var loader = new ObjectLoader();
-					loader = new MaterialLoader();
+					var loader = new MaterialLoader();
 					loader.setTextures(Editor.program.textures);
 
 					//Load
@@ -200,6 +198,7 @@ MaterialAsset.prototype = Object.create(Asset.prototype);
 MaterialAsset.prototype.destroy = function()
 {
 	Asset.prototype.destroy.call(this);
+
 	this.restoreMaterial();
 };
 
@@ -216,14 +215,11 @@ MaterialAsset.prototype.setMaterial = function(material)
 //Highlight material
 MaterialAsset.prototype.highlightMaterial = function()
 {
-	if(this.material instanceof THREE.Material)
+	if(this.material instanceof THREE.Material && this.material.color !== undefined)
 	{
-		if(this.material.color !== undefined)
-		{
-			this.materialColor.copy(this.material.color);
-			this.material.color.setRGB(1, 1, 0);
-			this.materialHighlighted = true;
-		}
+		this.materialColor.copy(this.material.color);
+		this.material.color.setRGB(1, 1, 0);
+		this.materialHighlighted = true;
 	}
 };
 
@@ -232,13 +228,10 @@ MaterialAsset.prototype.restoreMaterial = function()
 {
 	if(this.materialHighlighted)
 	{
-		if(this.material instanceof THREE.Material)
+		if(this.material instanceof THREE.Material && this.material.color !== undefined)
 		{
-			if(this.material.color !== undefined)
-			{
-				this.material.color.copy(this.materialColor);
-				this.materialHighlighted = false;
-			}
+			this.material.color.copy(this.materialColor);
+			this.materialHighlighted = false;
 		}
 	}
 };

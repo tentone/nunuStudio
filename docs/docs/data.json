@@ -4875,7 +4875,7 @@
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
             "line": 60,
-            "description": "Load texture from URL.",
+            "description": "Load texture from URL.\n\nDoes the same as creating a new Texture object.",
             "itemtype": "method",
             "name": "load",
             "params": [
@@ -4905,7 +4905,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 81,
+            "line": 83,
             "description": "Load texture object from JSON.",
             "itemtype": "method",
             "name": "loadJSON",
@@ -4936,7 +4936,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 101,
+            "line": 103,
             "description": "Parse a texture object JSON description.",
             "itemtype": "method",
             "name": "parse",
@@ -7399,7 +7399,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 139,
+            "line": 125,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -7408,7 +7408,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 176,
+            "line": 162,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -7429,7 +7429,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 189,
+            "line": 175,
             "description": "Set program renderer.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -7445,7 +7445,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 201,
+            "line": 187,
             "description": "Enter VR mode.",
             "itemtype": "method",
             "name": "displayVR",
@@ -7454,7 +7454,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 227,
+            "line": 213,
             "description": "Exit VR mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -7463,7 +7463,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 247,
+            "line": 233,
             "description": "Update program state.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -7472,7 +7472,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 259,
+            "line": 245,
             "description": "Render program to canvas.\n\nRenderer passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -7488,7 +7488,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 309,
+            "line": 295,
             "description": "Resize program elements.\n\nCalled by the runtime every time the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -7509,7 +7509,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 337,
+            "line": 323,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -7525,7 +7525,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 367,
+            "line": 353,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -7541,7 +7541,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 389,
+            "line": 375,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -7557,7 +7557,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 412,
+            "line": 398,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -7570,7 +7570,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 425,
+            "line": 411,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -7586,7 +7586,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 438,
+            "line": 424,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -7602,7 +7602,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 483,
+            "line": 469,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -7611,7 +7611,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 517,
+            "line": 503,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -7627,7 +7627,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 554,
+            "line": 540,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -7643,7 +7643,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 586,
+            "line": 572,
             "description": "Serialize object as JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8016,7 +8016,7 @@
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
             "line": 102,
-            "description": "Check if this image has alpha channel.\n\nThis checks the file encoding if the file a gif or a png is assumed that the file has alpha channel.",
+            "description": "Check if this image has alpha channel.\n\nThis checks the file encoding if the file a GIF or a PNG is assumed that the file has alpha channel.",
             "itemtype": "method",
             "name": "hasTransparency",
             "return": {
@@ -8207,7 +8207,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 76,
+            "line": 79,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -8227,7 +8227,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 96,
+            "line": 99,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -8243,7 +8243,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 110,
+            "line": 113,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -8269,7 +8269,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 151,
+            "line": 154,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -8289,7 +8289,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 171,
+            "line": 174,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -8305,7 +8305,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 182,
+            "line": 185,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -8330,7 +8330,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 269,
+            "line": 272,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -8350,7 +8350,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 289,
+            "line": 292,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -8366,7 +8366,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 303,
+            "line": 306,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -8387,7 +8387,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 331,
+            "line": 334,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -8407,7 +8407,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 351,
+            "line": 354,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -8423,7 +8423,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 365,
+            "line": 368,
             "description": "Remove audio.",
             "params": [
                 {
@@ -10451,7 +10451,7 @@
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
             "line": 217,
-            "description": "Get object scene",
+            "description": "Get object scene.",
             "itemtype": "method",
             "name": "getScene",
             "params": [
@@ -10471,7 +10471,7 @@
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
             "line": 240,
-            "description": "Get object tree root",
+            "description": "Get object tree root.\n\nFor a object placed inside a running scene the root is always the program.",
             "itemtype": "method",
             "name": "getRoot",
             "params": [
@@ -10490,7 +10490,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 259,
+            "line": 261,
             "description": "Set object and all its children matrixAutoUpdate value",
             "itemtype": "method",
             "name": "setMatrixAutoUpdate",
@@ -10511,7 +10511,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 276,
+            "line": 278,
             "description": "Set object and all children to receive shadows",
             "itemtype": "method",
             "name": "setShadowReceiving",
@@ -10532,7 +10532,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 293,
+            "line": 295,
             "description": "Set object and all children to cast shadows",
             "itemtype": "method",
             "name": "setShadowCasting",
@@ -10553,7 +10553,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 310,
+            "line": 312,
             "description": "Check if object is child of another object",
             "itemtype": "method",
             "name": "isChildOf",

@@ -60,6 +60,8 @@ TextureLoader.prototype.setFonts = function(fonts)
 /**
  * Load texture from URL.
  *
+ * Does the same as creating a new Texture object.
+ * 
  * @method load
  * @param {String} url
  * @param {Function} onLoad

@@ -63,15 +63,18 @@
  */
 function ResourceManager()
 {
+	THREE.Object3D.call(this);
+	
 	this.images = [];
 	this.videos = [];
 	this.audio = [];
-	
 	this.fonts = [];
 	this.materials = [];
 	this.textures = [];
 	this.geometries = [];
 }
+
+ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
  * Get material by its name.

@@ -215,7 +215,7 @@ ObjectUtils.getTextures = function(obj, textures)
 };
 
 /**
- * Get object scene
+ * Get object scene.
  *
  * @method getScene
  * @param {Object3D} obj
@@ -238,7 +238,9 @@ ObjectUtils.getScene = function(obj)
 };
 
 /**
- * Get object tree root
+ * Get object tree root.
+ *
+ * For a object placed inside a running scene the root is always the program.
  *
  * @method getRoot
  * @param {Object3D} obj

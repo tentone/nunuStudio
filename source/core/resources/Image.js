@@ -102,7 +102,7 @@ Image.loadTGAData = function(data)
 /**
  * Check if this image has alpha channel.
  *
- * This checks the file encoding if the file a gif or a png is assumed that the file has alpha channel.
+ * This checks the file encoding if the file a GIF or a PNG is assumed that the file has alpha channel.
  *
  * @method hasTransparency
  * @return {boolean} True if the image is encoded as PNG or GIF
