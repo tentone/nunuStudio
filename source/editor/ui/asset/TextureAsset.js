@@ -148,7 +148,45 @@ function TextureAsset(parent)
 				catch(e){}
 			}
 		});
-		
+
+		context.addOption("Duplicate", function()
+		{
+			if(self.texture !== null)
+			{
+				try
+				{
+					var resources =
+					{
+						videos: {},
+						images: {},
+						fonts: {},
+						textures: {}
+					};
+
+					//Serialize
+					var json = self.texture.toJSON(resources);
+					var images = ObjectLoader.prototype.parseImages.call(this, resources.images);
+					var videos = ObjectLoader.prototype.parseVideos.call(this, resources.videos);
+
+					//Loader
+					var loader = new TextureLoader();
+					loader.setImages(images);
+					loader.setVideos(videos);
+
+					//Load
+					var texture = loader.parse(json); 
+					texture.uuid = THREE.Math.generateUUID();
+					
+					//Add
+					Editor.program.addTexture(texture);
+					Editor.updateAssetExplorer();
+				}
+				catch(e)
+				{
+					alert("Texture duplication failed\n" + e.stack);
+				}
+			}
+		});
 		context.updateInterface();
 	};
 

@@ -228,7 +228,7 @@ ObjectLoader.prototype.parseMaterials = function(json, textures)
 
 	if(json !== undefined)
 	{
-		for(var i = 0; i < json.length; i++)
+		for(var i in json)
 		{
 			var material = loader.parse(json[i]);
 			materials[material.uuid] = material;
@@ -272,7 +272,7 @@ ObjectLoader.prototype.parseImages = function(json)
 
 	if(json !== undefined)
 	{
-		for(var i = 0; i < json.length; i++)
+		for(var i in json)
 		{
 			images[json[i].uuid] = loader.parse(json[i]);
 		}
@@ -295,7 +295,7 @@ ObjectLoader.prototype.parseVideos = function(json)
 
 	if(json !== undefined)
 	{
-		for(var i = 0; i < json.length; i++)
+		for(var i in json)
 		{
 			videos[json[i].uuid] = loader.parse(json[i]);
 		}
@@ -318,7 +318,7 @@ ObjectLoader.prototype.parseAudio = function(json)
 
 	if(json !== undefined)
 	{
-		for(var i = 0; i < json.length; i++)
+		for(var i in json)
 		{
 			audio[json[i].uuid] = loader.parse(json[i]);
 		}
@@ -341,7 +341,7 @@ ObjectLoader.prototype.parseFonts = function(json)
 
 	if(json !== undefined)
 	{
-		for(var i = 0; i < json.length; i++)
+		for(var i in json)
 		{
 			fonts[json[i].uuid] = loader.parse(json[i]);
 		}
@@ -369,7 +369,7 @@ ObjectLoader.prototype.parseTextures = function(json, images, videos)
 
 	if(json !== undefined)
 	{
-		for(var i = 0; i < json.length; i++)
+		for(var i in json)
 		{
 			var texture = loader.parse(json[i]);
 			textures[texture.uuid] = texture;

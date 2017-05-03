@@ -9,7 +9,7 @@
  * @module Core
  * @constructor
  * @param {String} name Program name
- * @extends {Object3D}
+ * @extends {ResourceManager}
  * @extends {ResourceManager}
  */
 
@@ -72,7 +72,6 @@
  */
 function Program(name)
 {
-	THREE.Object3D.call(this);
 	ResourceManager.call(this);
 
 	this.type = "Program";
@@ -121,20 +120,7 @@ function Program(name)
 	this.vrControls = null;
 }
 
-Program.prototype = Object.create(THREE.Object3D.prototype);
-
-Program.prototype.getMaterialByName = ResourceManager.prototype.getMaterialByName;
-Program.prototype.addMaterial = ResourceManager.prototype.addMaterial;
-Program.prototype.removeMaterial = ResourceManager.prototype.removeMaterial;
-Program.prototype.getTextureByName = ResourceManager.prototype.getTextureByName;
-Program.prototype.addTexture = ResourceManager.prototype.addTexture;
-Program.prototype.removeTexture = ResourceManager.prototype.removeTexture;
-Program.prototype.getFontByName = ResourceManager.prototype.getFontByName;
-Program.prototype.addFont = ResourceManager.prototype.addFont;
-Program.prototype.removeFont = ResourceManager.prototype.removeFont; 
-Program.prototype.getAudioByName = ResourceManager.prototype.getAudioByName;
-Program.prototype.addAudio = ResourceManager.prototype.addAudio;
-Program.prototype.removeAudio = ResourceManager.prototype.removeAudio;
+Program.prototype = Object.create(ResourceManager.prototype);
 
 /**
  * Select initial scene and initialize that scene.
