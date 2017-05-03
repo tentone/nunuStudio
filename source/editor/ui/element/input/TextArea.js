@@ -14,6 +14,8 @@ function TextArea(parent)
 	this.element.style.fontFamily = Editor.theme.font;
 	this.element.style.color = Editor.theme.textColor;
 	this.element.style.borderStyle = "none";
+	this.element.style.boxSizing = "border-box";
+	this.element.style.borderRadius = "4px";
 	
 	//Attributes
 	this.size = new THREE.Vector2(0,0);

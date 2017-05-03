@@ -15,6 +15,8 @@ function CoordinatesBox(parent)
 	this.xText.style.width = "15px";
 	this.xText.style.textAlign = "center";
 	this.xText.style.verticalAlign = "middle";
+	//this.xText.style.backgroundColor = "#AA0000";
+	//this.xText.style.borderRadius = "4px";
 	this.xText.innerHTML = "X";
 	this.element.appendChild(this.xText);
 
@@ -26,6 +28,9 @@ function CoordinatesBox(parent)
 	this.x.style.borderStyle = "none";
 	this.x.style.position = "absolute";
 	this.x.style.left = "15px";
+	this.x.style.boxSizing = "border-box";
+	this.x.style.textIndent = "4px";
+	this.x.style.borderRadius = "4px";
 	this.element.appendChild(this.x);
 
 	//Y Text
@@ -34,6 +39,8 @@ function CoordinatesBox(parent)
 	this.yText.style.width = "15px";
 	this.yText.style.textAlign = "center";
 	this.yText.style.verticalAlign = "middle";
+	//this.yText.style.backgroundColor = "#00AA00";
+	//this.yText.style.borderRadius = "4px";
 	this.yText.innerHTML = "Y";
 	this.element.appendChild(this.yText);
 
@@ -44,6 +51,9 @@ function CoordinatesBox(parent)
 	this.y.style.color = Editor.theme.textColor;
 	this.y.style.borderStyle = "none";
 	this.y.style.position = "absolute";
+	this.y.style.boxSizing = "border-box";
+	this.y.style.textIndent = "4px";
+	this.y.style.borderRadius = "4px";
 	this.element.appendChild(this.y);
 
 	//Z Text
@@ -52,6 +62,8 @@ function CoordinatesBox(parent)
 	this.zText.style.width = "15px";
 	this.zText.style.textAlign = "center";
 	this.zText.style.verticalAlign = "middle";
+	//this.zText.style.backgroundColor = "#0000AA";
+	//this.zText.style.borderRadius = "4px";
 	this.zText.innerHTML = "Z";
 	this.element.appendChild(this.zText);
 
@@ -62,6 +74,9 @@ function CoordinatesBox(parent)
 	this.z.style.color = Editor.theme.textColor;
 	this.z.style.borderStyle = "none";
 	this.z.style.position = "absolute";
+	this.z.style.boxSizing = "border-box";
+	this.z.style.textIndent = "4px";
+	this.z.style.borderRadius = "4px";
 	this.element.appendChild(this.z);
 
 	//W Text
@@ -206,77 +221,60 @@ CoordinatesBox.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
-		this.x.style.visibility = "visible";
-		this.xText.style.visibility = "visible";
-		this.y.style.visibility = "visible";
-		this.yText.style.visibility = "visible";
 
-		if(this.mode === CoordinatesBox.VECTOR2)
+		var sizeX = Math.round((this.size.x - this.mode * 15) / this.mode);
+		var sizeY = this.size.y + "px";
+
+		this.xText.style.height = sizeY;
+		this.xText.style.lineHeight = sizeY;
+		this.x.style.width = sizeX + "px";
+
+		this.yText.style.left = (15 + sizeX) + "px";
+		this.yText.style.height = sizeY;
+		this.yText.style.lineHeight = sizeY;
+		this.y.style.left = (30 + sizeX) + "px";
+		this.y.style.width = sizeX + "px";
+
+		if(this.mode >= CoordinatesBox.VECTOR3)
+		{
+			this.zText.style.left = (30 + (2 * sizeX)) + "px";
+			this.zText.style.height = sizeY;
+			this.zText.style.lineHeight = sizeY;
+			this.z.style.left = (45 + (2 * sizeX)) + "px";
+			this.z.style.width = sizeX + "px";
+
+			if(this.mode === CoordinatesBox.QUATERNION)
+			{
+				this.wText.style.left = (45 + (3 * sizeX)) + "px";
+				this.wText.style.height = sizeY;
+				this.wText.style.lineHeight = sizeY;
+				this.w.style.left = (60 + (3 * sizeX)) + "px";
+				this.w.style.width = sizeX + "px";
+
+				this.zText.style.visibility = "visible";
+				this.z.style.visibility = "visible";
+				this.w.style.visibility = "visible";
+				this.wText.style.visibility = "visible";
+			}
+			else
+			{
+				this.zText.style.visibility = "visible";
+				this.z.style.visibility = "visible";
+				this.w.style.visibility = "hidden";
+				this.wText.style.visibility = "hidden";
+			}
+		}
+		else
 		{
 			this.z.style.visibility = "hidden";
 			this.zText.style.visibility = "hidden";
 			this.w.style.visibility = "hidden";
 			this.wText.style.visibility = "hidden";
 		}
-		else if(this.mode === CoordinatesBox.VECTOR3)
-		{
-			this.zText.style.visibility = "visible";
-			this.z.style.visibility = "visible";
-			this.w.style.visibility = "hidden";
-			this.wText.style.visibility = "hidden";
-		}
-		else if(this.mode === CoordinatesBox.QUATERNION)
-		{
-			this.zText.style.visibility = "visible";
-			this.z.style.visibility = "visible";
-			this.w.style.visibility = "visible";
-			this.wText.style.visibility = "visible";
-		}
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
-		this.x.style.visibility = "hidden";
-		this.xText.style.visibility = "hidden";
-		this.y.style.visibility = "hidden";
-		this.yText.style.visibility = "hidden";
-		this.z.style.visibility = "hidden";
-		this.zText.style.visibility = "hidden";
-	}
-
-	var sizeX = Math.round((this.size.x - this.mode * 15) / this.mode);
-	var sizeY = this.size.y + "px";
-
-	this.xText.style.height = sizeY;
-	this.xText.style.lineHeight = sizeY;
-	this.x.style.width = sizeX + "px";
-	this.x.style.height = (this.size.y - 2) + "px";
-
-	this.yText.style.left = (15 + sizeX) + "px";
-	this.yText.style.height = sizeY;
-	this.yText.style.lineHeight = sizeY;
-	this.y.style.left = (30 + sizeX) + "px";
-	this.y.style.width = sizeX + "px";
-	this.y.style.height = (this.size.y - 2) + "px";
-
-	if(this.mode >= CoordinatesBox.VECTOR3)
-	{
-		this.zText.style.left = (30 + (2 * sizeX)) + "px";
-		this.zText.style.height = sizeY;
-		this.zText.style.lineHeight = sizeY;
-		this.z.style.left = (45 + (2 * sizeX)) + "px";
-		this.z.style.width = sizeX + "px";
-		this.z.style.height = (this.size.y - 2) + "px";
-
-		if(this.mode === CoordinatesBox.QUATERNION)
-		{
-			this.wText.style.left = (45 + (3 * sizeX)) + "px";
-			this.wText.style.height = sizeY;
-			this.wText.style.lineHeight = sizeY;
-			this.w.style.left = (60 + (3 * sizeX)) + "px";
-			this.w.style.width = sizeX + "px";
-			this.w.style.height = (this.size.y - 2) + "px";
-		}
 	}
 
 	//Main element
