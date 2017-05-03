@@ -103,6 +103,7 @@
 	- Added CubeCamera
 	- Added SpriteSheet texture animation support
 	- Gamepad support
+	- Improved UI elements
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
