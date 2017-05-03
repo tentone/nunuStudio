@@ -12,7 +12,10 @@ function ColorChooser(parent)
 	this.element.style.backgroundColor = Editor.theme.boxColor;
 	this.element.style.color = Editor.theme.textColor;
 	this.element.style.borderStyle = "none";
-
+	this.element.style.boxSizing = "border-box";
+	this.element.style.textIndent = "4px";
+	this.element.style.borderRadius = "4px";
+	
 	//Color chooser
 	this.color = new jscolor(this.element);
 	this.color.backgroundColor = Editor.theme.boxColor;

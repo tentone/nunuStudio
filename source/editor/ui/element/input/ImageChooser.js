@@ -18,12 +18,14 @@ function ImageChooser(parent)
 	this.alpha.style.top = "0px";
 	this.alpha.style.width = "100%";
 	this.alpha.style.height = "100%";
+	this.alpha.style.borderStyle = "none";
 	this.element.appendChild(this.alpha);
 
 	//Image
 	this.img = document.createElement("img");
 	this.img.style.visibility = "inherit";
 	this.img.style.position = "absolute";
+	this.img.style.borderStyle = "none";
 	this.img.style.left = "0px";
 	this.img.style.top = "0px";
 	this.img.style.width = "100%";

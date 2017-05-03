@@ -11,8 +11,12 @@ function TextBox(parent)
 	this.element.style.position = "absolute";
 	this.element.style.backgroundColor = Editor.theme.boxColor;
 	this.element.style.color = Editor.theme.textColor;
+	this.element.style.margin = "0";
 	this.element.style.borderStyle = "none";
-
+	this.element.style.boxSizing = "border-box";
+	this.element.style.textIndent = "4px";
+	this.element.style.borderRadius = "4px";
+	
 	//Attributes
 	this.size = new THREE.Vector2(0,0);
 	this.position = new THREE.Vector2(0,0);
