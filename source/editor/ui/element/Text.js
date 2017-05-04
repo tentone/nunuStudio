@@ -64,6 +64,10 @@ Text.prototype.setAlignment = function(align)
 	{
 		this.element.style.justifyContent = "left";
 	}
+	else if(align === Text.RIGHT)
+	{
+		this.element.style.justifyContent = "right";
+	}
 };
 
 //Remove element

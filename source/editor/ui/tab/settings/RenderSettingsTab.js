@@ -74,7 +74,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	//Tonemapping exposure
 	this.form.addText("Exposure");
 	this.toneMappingExposure = new NumberBox(this.form.element);
-	this.toneMappingExposure.size.set(40, 18);
+	this.toneMappingExposure.size.set(60, 18);
 	this.toneMappingExposure.setRange(0.0, Number.MAX_SAFE_INTEGER);
 	this.toneMappingExposure.setStep(0.1);
 	this.toneMappingExposure.setOnChange(function()
@@ -87,7 +87,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	//Tonemapping whitepoint
 	this.form.addText("Whitepoint");
 	this.toneMappingWhitePoint = new NumberBox(this.form.element);
-	this.toneMappingWhitePoint.size.set(40, 18);
+	this.toneMappingWhitePoint.size.set(60, 18);
 	this.toneMappingWhitePoint.setRange(0.0, Number.MAX_SAFE_INTEGER);
 	this.toneMappingWhitePoint.setStep(0.1);
 	this.toneMappingWhitePoint.setOnChange(function()

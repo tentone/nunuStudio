@@ -23,13 +23,19 @@ function Button(parent)
 	{
 		event.preventDefault();
 	};
-	
+
+	//Icon
+	this.icon = document.createElement("img");
+	this.icon.style.position = "absolute";
+	this.icon.style.display = "none";
+	this.icon.style.left = "5px";
+	this.icon.style.top = "3px";
+	this.icon.style.width = "12px";
+	this.icon.style.height = "12px";
+	this.element.appendChild(this.icon);
+
 	//Text
 	this.text = new Text(this.element);
-	this.text.setText("text");
-
-	//Children elements
-	this.children = [];
 
 	//Attributes
 	this.size = new THREE.Vector2(0,0);
@@ -51,16 +57,17 @@ function Button(parent)
 	this.parent.appendChild(this.element);
 }
 
-//Add extra element to button
-Button.prototype.add = function(element)
-{
-	this.children.push(element);
-};
-
 //Set Button text
 Button.prototype.setText = function(text)
 {
 	this.text.setText(text);
+};
+
+//Set button icon
+Button.prototype.setIcon = function(icon)
+{
+	this.icon.style.display = "block";
+	this.icon.src = icon;
 };
 
 //Remove element from document
@@ -69,11 +76,6 @@ Button.prototype.destroy = function()
 	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
-	}
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].destroy();
 	}
 };
 
@@ -93,12 +95,6 @@ Button.prototype.updateInterface = function()
 	else
 	{
 		this.element.style.visibility = "hidden";
-	}
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].visible = this.visible;
-		this.children[i].updateInterface();
 	}
 
 	this.text.size.set(this.size.x, this.size.y);
