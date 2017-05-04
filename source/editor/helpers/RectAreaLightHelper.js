@@ -23,4 +23,4 @@ RectAreaLightHelper.prototype.update = function()
 		this.rotation.copy(this.light.rotation);
 		this.scale.set(this.light.width, this.light.height, 1);
 	}
-}
+};

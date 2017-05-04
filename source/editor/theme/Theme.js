@@ -11,10 +11,10 @@ Theme.register = function(theme, name)
 {
 	Theme.list.push(name);
 	Theme.theme[name] = theme;
-}
+};
 
 //Get a theme instance
 Theme.get = function(name)
 {
 	return new Theme.theme[name]();
-}
+};
