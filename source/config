@@ -22,7 +22,7 @@
 	},
 	"render": {
 		"followProject": false,
-		"toneMapping": 1,
+		"toneMapping": 0,
 		"toneMappingExposure": 1.1,
 		"toneMappingWhitePoint": 1,
 		"antialiasing": true,

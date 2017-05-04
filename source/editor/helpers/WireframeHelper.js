@@ -21,4 +21,4 @@ WireframeHelper.prototype.update = function()
 		this.matrix = this.obj.matrixWorld;
 		this.geometry = this.obj.geometry;
 	}
-}
+};

@@ -13,20 +13,19 @@ function GridHelper(size, spacing, color)
 	THREE.LineSegments.call(this, new THREE.BufferGeometry(), material);
 
 	this.update();
-}
+};
 
 GridHelper.prototype = Object.create(THREE.LineSegments.prototype);
 
 GridHelper.prototype.setSize = function(size)
 {
 	this.size = size;
-}
+};
 
 GridHelper.prototype.setSpacing = function(spacing)
 {
 	this.spacing = spacing;
-}
-
+};
 
 GridHelper.prototype.update = function()
 {
@@ -46,4 +45,4 @@ GridHelper.prototype.update = function()
 	}
 
 	geometry.addAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
-}
+};

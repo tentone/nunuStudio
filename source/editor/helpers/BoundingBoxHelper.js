@@ -16,4 +16,9 @@ function BoundingBoxHelper(object, hex)
 
 BoundingBoxHelper.prototype = Object.create(Mesh.prototype);
 
-BoundingBoxHelper.prototype.update = function(){}
+BoundingBoxHelper.prototype.update = function()
+{
+	this.box.setFromObject(this.object);
+	this.box.getSize(this.scale);
+	this.box.getCenter(this.position);
+};

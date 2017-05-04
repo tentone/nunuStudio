@@ -70,7 +70,7 @@ PhysicsObjectHelper.prototype.update = function()
 	}
 
 	meshes.length = meshIndex;
-}
+};
 
 PhysicsObjectHelper.prototype.updateMesh = function(index, body, shape)
 {
@@ -84,7 +84,7 @@ PhysicsObjectHelper.prototype.updateMesh = function(index, body, shape)
 		mesh = this.meshes[index] = this.createMesh(shape);
 	}
 	this.scaleMesh(mesh, shape);
-}
+};
 
 PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
 {
@@ -99,7 +99,7 @@ PhysicsObjectHelper.prototype.typeMatch = function(mesh, shape)
 	(geometry instanceof THREE.BoxGeometry && shape instanceof CANNON.Box) ||
 	(geometry instanceof THREE.PlaneGeometry && shape instanceof CANNON.Plane) ||
 	(geometry.id === shape.geometryId && (shape instanceof CANNON.ConvexPolyhedron || shape instanceof CANNON.Trimesh) || shape instanceof CANNON.Heightfield);
-}
+};
 
 PhysicsObjectHelper.prototype.createMesh = function(shape)
 {
@@ -212,7 +212,7 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 	}
 
 	return mesh;
-}
+};
 
 PhysicsObjectHelper.prototype.scaleMesh = function(mesh, shape)
 {
@@ -244,4 +244,4 @@ PhysicsObjectHelper.prototype.scaleMesh = function(mesh, shape)
 	{
 		mesh.scale.set(1, 1, 1);
 	}
-}
+};

@@ -25,10 +25,8 @@ ParticleEmitterHelper.prototype.update = function()
 	if(this.runtime !== null)
 	{
 		this.particle.getWorldPosition(this.runtime.position);
-		this.particle.getWorldRotation(this.runtime.rotation);
+		this.particle.getWorldQuaternion(this.runtime.quaternion);
 		this.particle.getWorldScale(this.runtime.scale);
-		this.runtime.updateMatrix();
-		
 		this.runtime.update();
 	}
 }

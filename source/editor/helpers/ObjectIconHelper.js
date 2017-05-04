@@ -15,4 +15,4 @@ ObjectIconHelper.prototype.update = function()
 	{
 		this.obj.getWorldPosition(this.position);
 	}
-}
+};
