@@ -86,14 +86,9 @@ ContextMenu.prototype.addMenu = function(name)
 	var menu = new DropdownMenu(this.element);
 	menu.setText(name);
 	menu.setLocation(DropdownMenu.LEFT);
+	menu.showArrow();
 	menu.text.setAlignment(Text.LEFT);
 	menu.text.position.set(25, 0);
-
-	var arrow = new ImageBox(menu.element);
-	arrow.setImage(Editor.filePath + "icons/misc/arrow_right.png");
-	arrow.size.set(12, 12);
-	arrow.position.set(this.size.x - 20, 3);
-	menu.add(arrow);
 
 	this.options.push(menu);
 
