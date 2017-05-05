@@ -165,7 +165,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 };
 
 /**
- * Create JSON description.
+ * Serialize object to JSON.
  * 
  * @method toJSON
  * @param  {Object} meta

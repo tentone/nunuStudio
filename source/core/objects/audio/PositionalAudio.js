@@ -1,64 +1,38 @@
 "use strict";
 
 /**
- * PositionalAudio is used to play audio with positional audio effect.
+ * PositionalAudio is used to play audio with positional audio effect using a WebAudio panner.
  *
- * Using the positional audio object the sound is controlled by the camera that renders first.
- * 
+ * Using the positional audio object the sound is controlled by the camera that renders first in the scene.
+ *
  * @param {Audio} audio Audio used by this emitter
  * @class PositionalAudio
- * @extends {PositionalAudio}
+ * @extends {AudioEmitter}
  * @module Audio
  * @constructor
  */
-/**
- * Audio volume
- * @property volume
- * @default 1.0
- * @type {Number}
-*/
-/**
- * If true the playback starts automatically
- * @property autoplay
- * @default true
- * @type {boolean}
-*/
-/**
- * Start time in seconds
- * @property playbackRate
- * @default 1.0
- * @type {Number}
-*/
-/**
- * Start time in seconds
- * @property startTime
- * @default 0.0
- * @type {Number}
-*/
-/**
- * If true the audio plays in loop
- * @property loop
- * @default true
- * @type {boolean}
-*/
 function PositionalAudio(audio)
 {
-	THREE.PositionalAudio.call(this, AudioEmitter.listener);
+	AudioEmitter.call(this, audio);
 
-	this.name = "audio";
 	this.type = "PositionalAudio";
+	this.matrixAutoUpdate = true;
 
-	this.audio = (audio !== undefined) ? audio : null;
+	//Attributes
+	this.distanceModel = "inverse";
+	this.panningModel = "HRTF";
 
-	this.volume = 1.0;
-
-	this.autoplay = true;
-	this.playbackRate = 1.0;
-	this.startTime = 0;
-	this.loop = true;
-	
-	this.isPlaying = false;
-	this.hasPlaybackControl = true;
+	//Create panner
+	this.panner = this.context.createPanner();
+	this.panner.connect(this.gain);
+	this.panner.panningModel = this.panningModel;
+	this.panner.distanceModel = this.distanceModel;
+	this.panner.refDistance = 1;
+	this.panner.maxDistance = 10000;
+	this.panner.rolloffFactor = 1;
+	this.panner.coneInnerAngle = 360;
+	this.panner.coneOuterAngle = 0;
+	this.panner.coneOuterGain = 0;
 
 	//Runtime variables
 	this.cameras = null;
@@ -66,12 +40,10 @@ function PositionalAudio(audio)
 	this.tempB = new THREE.Vector3();
 }
 
-PositionalAudio.prototype = Object.create(THREE.PositionalAudio.prototype);
+PositionalAudio.prototype = Object.create(AudioEmitter.prototype);
 
 /**
  * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.
- * 
- * Called by the runtime.
  * 
  * @method initialize
  */
@@ -90,7 +62,6 @@ PositionalAudio.prototype.initialize = function()
 	this.setVolume(this.volume);
 	this.setPlaybackRate(this.playbackRate);
 
-	//Get cameras
 	var node = this;
 	while(node.parent !== null)
 	{
@@ -108,7 +79,7 @@ PositionalAudio.prototype.initialize = function()
 };
 
 /**
- * Update positional audio state.
+ * Update positional audio panner relative to the camera.
  * 
  * @method update
  */
@@ -127,7 +98,6 @@ PositionalAudio.prototype.update = function()
 		this.panner.setPosition(0, 0, 0);
 	}
 
-	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();
@@ -135,41 +105,117 @@ PositionalAudio.prototype.update = function()
 };
 
 /**
- * Dispose audio object.
+ * Get output audio node.
  * 
- * @method dispose
+ * @method getOutput
+ * @return {Object} Output audio node.
  */
-PositionalAudio.prototype.dispose = function()
+PositionalAudio.prototype.getOutput = function()
 {
-	if(this.isPlaying)
-	{
-		this.stop();
-		this.disconnect();
-	}
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].dispose();
-	}
+	return this.panner;
 };
 
 /**
- * Change audio emitter volume.
+ * Get reference distance.
  * 
- * @method setVolume
- * @param {Number} value Audio volume
- * @return {PositionalAudio} Self pointer for chaining
+ * @method getRefDistance
+ * @return {Number} Reference distance.
  */
-PositionalAudio.prototype.setVolume = function(value)
+PositionalAudio.prototype.getRefDistance = function()
 {
-	this.volume = value;
-	this.gain.gain.value = value;
-
-	return this;
+	return this.panner.refDistance;
 };
 
 /**
- * Create JSON description.
+ * Set reference distance.
+ * 
+ * @method setRefDistance
+ * @param {Number} value Reference distance.
+ */
+PositionalAudio.prototype.setRefDistance = function(value)
+{
+	this.panner.refDistance = value;
+};
+
+/**
+ * Get rolloff factor.
+ * 
+ * @method getRolloffFactor
+ * @return {Number} Rolloff factor.
+ */
+PositionalAudio.prototype.getRolloffFactor = function()
+{
+	return this.panner.rolloffFactor;
+};
+
+/**
+ * Set rolloff factor.
+ * 
+ * @method setRolloffFactor
+ * @param {Number} value Rolloff factor.
+ */
+PositionalAudio.prototype.setRolloffFactor = function(value)
+{
+	this.panner.rolloffFactor = value;
+};
+
+
+/**
+ * Get distance model in use by this audio emitter.
+ *
+ * @method getDistanceModel
+ * @return {String} Distance model.
+ */
+PositionalAudio.prototype.getDistanceModel = function()
+{
+	return this.panner.distanceModel;
+};
+
+/**
+ * Set distance model to be used.
+ *
+ * Distance model defined how the emitter controls its volume from its position in the world, relative to the camera.
+ *
+ * By default the mode used is "inverse", can be also set to:
+ *  - "linear": A linear distance model calculating the gain induced by the distance according to
+ *    - 1 - rolloffFactor * (distance - refDistance) / (maxDistance - refDistance)
+ *  - "inverse": An inverse distance model calculating the gain induced by the distance according to:
+ *    - refDistance / (refDistance + rolloffFactor * (distance - refDistance))
+ *  - "exponential": An exponential distance model calculating the gain induced by the distance according to:
+ *    - pow(distance / refDistance, -rolloffFactor).
+ * 
+ * @method setDistanceModel
+ * @param {String} model Distance Model to be used.
+ */
+PositionalAudio.prototype.setDistanceModel = function(distanceModel)
+{
+	this.panner.distanceModel = distanceModel;
+};
+
+/**
+ * Get maximum distance for this audio emitter.
+ *
+ * @method getMaxDistance
+ * @return Maximum distance.
+ */
+PositionalAudio.prototype.getMaxDistance = function()
+{
+	return this.panner.maxDistance;
+};
+
+/**
+ * Set maximum distance for this audio emitter.
+ *
+ * @method setMaxDistance
+ * @param {Number} value Maximum distance.
+ */
+PositionalAudio.prototype.setMaxDistance = function(value)
+{
+	this.panner.maxDistance = value;
+};
+
+/**
+ * Serialize object to JSON.
  * 
  * @method toJSON
  * @param  {Object} meta
@@ -177,57 +223,11 @@ PositionalAudio.prototype.setVolume = function(value)
  */
 PositionalAudio.prototype.toJSON = function(meta)
 {
-	var audio = this.audio;
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
-	{
-		audio = audio.toJSON(meta);
-	});
+	var data = AudioEmitter.prototype.toJSON.call(this, meta);
 
-	data.object.audio = audio.uuid;
-	data.object.volume = this.volume;
-	data.object.autoplay = this.autoplay;
-	data.object.startTime = this.startTime;
-	data.object.playbackRate = this.playbackRate;
-	data.object.loop = this.loop;
+	//data.object.distanceModel = distanceModel;
+	//data.object.panningModel = panningModel;
 
 	return data;
 };
 
-/**
- * Starts playback
- * @method play
- */
-
-/**
- * Pauses playback
- * @method pause
- */
-
-/**
- * Stops playback and resets time to 0
- * @method pause
- */
-
-/**
- * Set loop mode
- * @param {boolean} loop
- * @method setLoop
- */
-
-/**
- * Set playback speed
- * @param {Number} speed
- * @method setPlaybackRate
- */
-
-/**
- * Add the filter to the filters array.
- * @method setFilter
- * @param {Object} filter
- */
-
-/**
- * Set the filters array to value.
- * @method setFilters
- * @param {Array} value
- */
