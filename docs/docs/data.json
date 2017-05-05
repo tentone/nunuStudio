@@ -1298,6 +1298,7 @@
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
             "line": 3,
             "description": "AudioEmitter is a Object3D used to play audio inside the scene.",
+            "author": "Reece Aaron Lecrivain",
             "params": [
                 {
                     "name": "audio",
@@ -1320,7 +1321,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
             "line": 3,
-            "description": "PositionalAudio is used to play audio with positional audio effect.\n\nUsing the positional audio object the sound is controlled by the camera that renders first.",
+            "description": "PositionalAudio is used to play audio with positional audio effect using a WebAudio panner.\n\nUsing the positional audio object the sound is controlled by the camera that renders first in the scene.",
             "params": [
                 {
                     "name": "audio",
@@ -1328,7 +1329,7 @@
                     "type": "Audio"
                 }
             ],
-            "extends": "{PositionalAudio}",
+            "extends": "{AudioEmitter}",
             "is_constructor": 1
         },
         "OrthographicCamera": {
@@ -5008,8 +5009,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 12,
-            "description": "Audio volume",
+            "line": 14,
+            "description": "Audio volume.",
             "itemtype": "property",
             "name": "volume",
             "default": "1.0",
@@ -5019,8 +5020,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 18,
-            "description": "If true the playback starts automatically",
+            "line": 20,
+            "description": "If true the playback starts automatically.",
             "itemtype": "property",
             "name": "autoplay",
             "default": "true",
@@ -5030,8 +5031,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 24,
-            "description": "Start time in seconds",
+            "line": 26,
+            "description": "Start time in seconds.",
             "itemtype": "property",
             "name": "playbackRate",
             "default": "1.0",
@@ -5041,8 +5042,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 30,
-            "description": "Start time in seconds",
+            "line": 32,
+            "description": "Start time in seconds.",
             "itemtype": "property",
             "name": "startTime",
             "default": "0.0",
@@ -5052,8 +5053,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 36,
-            "description": "If true the audio plays in loop",
+            "line": 38,
+            "description": "If true the audio plays in loop.",
             "itemtype": "property",
             "name": "loop",
             "default": "true",
@@ -5063,8 +5064,29 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 70,
-            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.\n\nCalled by the runtime.",
+            "line": 44,
+            "description": "Audio source type, can have the following values:\n - empty\n - buffer\n - audioNode",
+            "itemtype": "property",
+            "name": "sourceType",
+            "type": "{String}",
+            "default": "{\"empty\"}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 85,
+            "description": "Default WebAudio listener shared by audio emitters.",
+            "itemtype": "attribute",
+            "name": "listenet",
+            "type": "{WebAudioListener}",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 95,
+            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.",
             "itemtype": "method",
             "name": "initialize",
             "class": "AudioEmitter",
@@ -5072,226 +5094,63 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 98,
-            "description": "Dispose audio object.",
+            "line": 121,
+            "description": "Play audio.",
             "itemtype": "method",
-            "name": "dispose",
-            "class": "AudioEmitter",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 117,
-            "description": "Change audio emitter volume.",
-            "itemtype": "method",
-            "name": "setVolume",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "Audio volume",
-                    "type": "Number"
-                }
-            ],
-            "class": "AudioEmitter",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 131,
-            "description": "Create JSON description.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
+            "name": "play",
             "return": {
-                "description": "JSON descrition",
-                "type": "Object"
+                "description": "Self pointer for chaining",
+                "type": "AudioEmitter"
             },
             "class": "AudioEmitter",
             "module": "Audio"
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 156,
-            "description": "Starts playback",
-            "itemtype": "method",
-            "name": "play",
-            "class": "AudioEmitter",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 161,
-            "description": "Pauses playback",
+            "line": 149,
+            "description": "Pauses audio playback.",
             "itemtype": "method",
             "name": "pause",
+            "return": {
+                "description": "Self pointer for chaining",
+                "type": "AudioEmitter"
+            },
             "class": "AudioEmitter",
             "module": "Audio"
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 166,
-            "description": "Stops playback and resets time to 0",
+            "line": 164,
+            "description": "Stops audio playback and resets time to 0.",
             "itemtype": "method",
             "name": "pause",
+            "return": {
+                "description": "Self pointer for chaining",
+                "type": "AudioEmitter"
+            },
             "class": "AudioEmitter",
             "module": "Audio"
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 171,
-            "description": "Set loop mode",
+            "line": 179,
+            "description": "Get audio emitter volume.",
             "params": [
                 {
-                    "name": "loop",
-                    "description": "",
-                    "type": "Boolean"
-                }
-            ],
-            "itemtype": "method",
-            "name": "setLoop",
-            "class": "AudioEmitter",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 177,
-            "description": "Set playback speed",
-            "params": [
-                {
-                    "name": "speed",
+                    "name": "volume",
                     "description": "",
                     "type": "Number"
                 }
             ],
             "itemtype": "method",
-            "name": "setPlaybackRate",
+            "name": "getVolume",
             "class": "AudioEmitter",
             "module": "Audio"
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 183,
-            "description": "Add the filter to the filters array.",
-            "itemtype": "method",
-            "name": "setFilter",
-            "params": [
-                {
-                    "name": "filter",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "class": "AudioEmitter",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 189,
-            "description": "Set the filters array to value.",
-            "itemtype": "method",
-            "name": "setFilters",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "",
-                    "type": "Array"
-                }
-            ],
-            "class": "AudioEmitter",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 14,
-            "description": "Audio volume",
-            "itemtype": "property",
-            "name": "volume",
-            "default": "1.0",
-            "type": "{Number}",
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 20,
-            "description": "If true the playback starts automatically",
-            "itemtype": "property",
-            "name": "autoplay",
-            "default": "true",
-            "type": "{boolean}",
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 26,
-            "description": "Start time in seconds",
-            "itemtype": "property",
-            "name": "playbackRate",
-            "default": "1.0",
-            "type": "{Number}",
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 32,
-            "description": "Start time in seconds",
-            "itemtype": "property",
-            "name": "startTime",
-            "default": "0.0",
-            "type": "{Number}",
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 38,
-            "description": "If true the audio plays in loop",
-            "itemtype": "property",
-            "name": "loop",
-            "default": "true",
-            "type": "{boolean}",
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 71,
-            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.\n\nCalled by the runtime.",
-            "itemtype": "method",
-            "name": "initialize",
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 110,
-            "description": "Update positional audio state.",
-            "itemtype": "method",
-            "name": "update",
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 137,
-            "description": "Dispose audio object.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 156,
-            "description": "Change audio emitter volume.",
+            "line": 190,
+            "description": "Set audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
             "params": [
@@ -5303,15 +5162,191 @@
             ],
             "return": {
                 "description": "Self pointer for chaining",
-                "type": "PositionalAudio"
+                "type": "AudioEmitter"
             },
-            "class": "PositionalAudio",
+            "class": "AudioEmitter",
             "module": "Audio"
         },
         {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 171,
-            "description": "Create JSON description.",
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 205,
+            "description": "Set loop mode. If loop set to True the audio repeats after ending.",
+            "itemtype": "method",
+            "name": "setLoop",
+            "params": [
+                {
+                    "name": "loop",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "Self pointer for chaining",
+                "type": "AudioEmitter"
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 224,
+            "description": "Get loop mode.",
+            "itemtype": "method",
+            "name": "getLoop",
+            "return": {
+                "description": "Loop mode.",
+                "type": "Boolean"
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 235,
+            "description": "Set playback speed.",
+            "itemtype": "method",
+            "name": "setPlaybackRate",
+            "params": [
+                {
+                    "name": "speed",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Self pointer for chaining",
+                "type": "AudioEmitter"
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 254,
+            "description": "Get the playback speed.",
+            "itemtype": "method",
+            "name": "getPlaybackRate",
+            "return": {
+                "description": "Playback speed.",
+                "type": "Number"
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 265,
+            "description": "Get Array with all the filters applied to this audio emitter.",
+            "itemtype": "method",
+            "name": "getFilters",
+            "return": {
+                "description": "Filters in this audio emitter.",
+                "type": "Array"
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 276,
+            "description": "Set the entire filters array.",
+            "itemtype": "method",
+            "name": "setFilters",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "Self pointer for chaining",
+                "type": "AudioEmitter"
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 304,
+            "description": "Get a filter to the filters array.",
+            "itemtype": "method",
+            "name": "getFilter",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "Index of the filter.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Filter."
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 316,
+            "description": "Set a filter to the filters array.",
+            "itemtype": "method",
+            "name": "setFilter",
+            "params": [
+                {
+                    "name": "filter",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 327,
+            "description": "Change the source audio node.",
+            "itemtype": "method",
+            "name": "setNodeSource",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Self pointer for chaining",
+                "type": "AudioEmitter"
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 344,
+            "description": "Get output audio node.",
+            "itemtype": "method",
+            "name": "getOutput",
+            "return": {
+                "description": "Output audio node.",
+                "type": "Object"
+            },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 355,
+            "description": "Dispose audio object, stops the playback and disconnects audio node.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
+            "line": 374,
+            "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -5325,97 +5360,172 @@
                 "description": "JSON descrition",
                 "type": "Object"
             },
+            "class": "AudioEmitter",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 45,
+            "description": "Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.",
+            "itemtype": "method",
+            "name": "initialize",
             "class": "PositionalAudio",
             "module": "Audio"
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 196,
-            "description": "Starts playback",
+            "line": 81,
+            "description": "Update positional audio panner relative to the camera.",
             "itemtype": "method",
-            "name": "play",
+            "name": "update",
             "class": "PositionalAudio",
             "module": "Audio"
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 201,
-            "description": "Pauses playback",
+            "line": 107,
+            "description": "Get output audio node.",
             "itemtype": "method",
-            "name": "pause",
+            "name": "getOutput",
+            "return": {
+                "description": "Output audio node.",
+                "type": "Object"
+            },
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 118,
+            "description": "Get reference distance.",
+            "itemtype": "method",
+            "name": "getRefDistance",
+            "return": {
+                "description": "Reference distance.",
+                "type": "Number"
+            },
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 129,
+            "description": "Set reference distance.",
+            "itemtype": "method",
+            "name": "setRefDistance",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Reference distance.",
+                    "type": "Number"
+                }
+            ],
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 140,
+            "description": "Get rolloff factor.",
+            "itemtype": "method",
+            "name": "getRolloffFactor",
+            "return": {
+                "description": "Rolloff factor.",
+                "type": "Number"
+            },
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 151,
+            "description": "Set rolloff factor.",
+            "itemtype": "method",
+            "name": "setRolloffFactor",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Rolloff factor.",
+                    "type": "Number"
+                }
+            ],
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 163,
+            "description": "Get distance model in use by this audio emitter.",
+            "itemtype": "method",
+            "name": "getDistanceModel",
+            "return": {
+                "description": "Distance model.",
+                "type": "String"
+            },
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 174,
+            "description": "Set distance model to be used.\n\nDistance model defined how the emitter controls its volume from its position in the world, relative to the camera.\n\nBy default the mode used is \"inverse\", can be also set to:\n - \"linear\": A linear distance model calculating the gain induced by the distance according to\n   - 1 - rolloffFactor * (distance - refDistance) / (maxDistance - refDistance)\n - \"inverse\": An inverse distance model calculating the gain induced by the distance according to:\n   - refDistance / (refDistance + rolloffFactor * (distance - refDistance))\n - \"exponential\": An exponential distance model calculating the gain induced by the distance according to:\n   - pow(distance / refDistance, -rolloffFactor).",
+            "itemtype": "method",
+            "name": "setDistanceModel",
+            "params": [
+                {
+                    "name": "model",
+                    "description": "Distance Model to be used.",
+                    "type": "String"
+                }
+            ],
+            "class": "PositionalAudio",
+            "module": "Audio"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
+            "line": 195,
+            "description": "Get maximum distance for this audio emitter.",
+            "itemtype": "method",
+            "name": "getMaxDistance",
+            "return": {
+                "description": "Maximum distance."
+            },
             "class": "PositionalAudio",
             "module": "Audio"
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
             "line": 206,
-            "description": "Stops playback and resets time to 0",
+            "description": "Set maximum distance for this audio emitter.",
             "itemtype": "method",
-            "name": "pause",
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 211,
-            "description": "Set loop mode",
+            "name": "setMaxDistance",
             "params": [
                 {
-                    "name": "loop",
-                    "description": "",
-                    "type": "Boolean"
+                    "name": "value",
+                    "description": "Maximum distance.",
+                    "type": "Number"
                 }
             ],
-            "itemtype": "method",
-            "name": "setLoop",
             "class": "PositionalAudio",
             "module": "Audio"
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
             "line": 217,
-            "description": "Set playback speed",
+            "description": "Serialize object to JSON.",
+            "itemtype": "method",
+            "name": "toJSON",
             "params": [
                 {
-                    "name": "speed",
-                    "description": "",
-                    "type": "Number"
-                }
-            ],
-            "itemtype": "method",
-            "name": "setPlaybackRate",
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 223,
-            "description": "Add the filter to the filters array.",
-            "itemtype": "method",
-            "name": "setFilter",
-            "params": [
-                {
-                    "name": "filter",
+                    "name": "meta",
                     "description": "",
                     "type": "Object"
                 }
             ],
-            "class": "PositionalAudio",
-            "module": "Audio"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 229,
-            "description": "Set the filters array to value.",
-            "itemtype": "method",
-            "name": "setFilters",
-            "params": [
-                {
-                    "name": "value",
-                    "description": "",
-                    "type": "Array"
-                }
-            ],
+            "return": {
+                "description": "JSON descrition",
+                "type": "Object"
+            },
             "class": "PositionalAudio",
             "module": "Audio"
         },
@@ -5546,7 +5656,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
             "line": 159,
-            "description": "Create JSON description.",
+            "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -5686,7 +5796,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
             "line": 167,
-            "description": "Create JSON description.",
+            "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [

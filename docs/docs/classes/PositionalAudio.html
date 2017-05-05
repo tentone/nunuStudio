@@ -156,7 +156,7 @@
 						<div class="box meta">
 						
 								<div class="extends">
-									Extends <a href="../classes/PositionalAudio.html" class="crosslink">PositionalAudio</a>
+									Extends <a href="../classes/AudioEmitter.html" class="crosslink">AudioEmitter</a>
 								</div>
 						
 						
@@ -166,8 +166,8 @@
 						
 						
 						<div class="box intro">
-							<p>PositionalAudio is used to play audio with positional audio effect.</p>
-						<p>Using the positional audio object the sound is controlled by the camera that renders first.</p>
+							<p>PositionalAudio is used to play audio with positional audio effect using a WebAudio panner.</p>
+						<p>Using the positional audio object the sound is controlled by the camera that renders first in the scene.</p>
 						
 						</div>
 						
@@ -230,7 +230,6 @@
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
@@ -242,7 +241,23 @@
 						
 											<ul class="index-list methods extends">
 													<li class="index-item method">
-														<a href="#method_dispose">dispose</a>
+														<a href="#method_getDistanceModel">getDistanceModel</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_getMaxDistance">getMaxDistance</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_getOutput">getOutput</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_getRefDistance">getRefDistance</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_getRolloffFactor">getRolloffFactor</a>
 						
 													</li>
 													<li class="index-item method">
@@ -250,35 +265,19 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_pause">pause</a>
+														<a href="#method_setDistanceModel">setDistanceModel</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_pause">pause</a>
+														<a href="#method_setMaxDistance">setMaxDistance</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_play">play</a>
+														<a href="#method_setRefDistance">setRefDistance</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_setFilter">setFilter</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setFilters">setFilters</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setLoop">setLoop</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setPlaybackRate">setPlaybackRate</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_setVolume">setVolume</a>
+														<a href="#method_setRolloffFactor">setRolloffFactor</a>
 						
 													</li>
 													<li class="index-item method">
@@ -292,32 +291,6 @@
 											</ul>
 										</div>
 						
-										<div class="index-section properties">
-											<h3>Properties</h3>
-						
-											<ul class="index-list properties extends">
-													<li class="index-item property">
-														<a href="#property_autoplay">autoplay</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_loop">loop</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_playbackRate">playbackRate</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_startTime">startTime</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_volume">volume</a>
-						
-													</li>
-											</ul>
-										</div>
 						
 						
 								</div>
@@ -325,11 +298,14 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_dispose" class="method item">
-												<h3 class="name"><code>dispose</code></h3>
+											<div id="method_getDistanceModel" class="method item">
+												<h3 class="name"><code>getDistanceModel</code></h3>
 											
 													<span class="paren">()</span>
 											
+													<span class="returns-inline">
+														<span class="type">String</span>
+													</span>
 											
 											
 											
@@ -346,11 +322,179 @@
 												</div>
 											
 												<div class="description">
-													<p>Dispose audio object.</p>
+													<p>Get distance model in use by this audio emitter.</p>
 											
 												</div>
 											
 											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">String</span>:
+																<p>Distance model.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_getMaxDistance" class="method item">
+												<h3 class="name"><code>getMaxDistance</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type"></span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get maximum distance for this audio emitter.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																<p>Maximum distance.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_getOutput" class="method item">
+												<h3 class="name"><code>getOutput</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type">Object</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get output audio node.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Object</span>:
+																<p>Output audio node.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_getRefDistance" class="method item">
+												<h3 class="name"><code>getRefDistance</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type">Number</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get reference distance.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Number</span>:
+																<p>Reference distance.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_getRolloffFactor" class="method item">
+												<h3 class="name"><code>getRolloffFactor</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type">Number</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get rolloff factor.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Number</span>:
+																<p>Rolloff factor.</p>
+											
+														</div>
+													</div>
 											
 											</div>
 											<div id="method_initialize" class="method item">
@@ -375,104 +519,19 @@
 											
 												<div class="description">
 													<p>Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.</p>
-											<p>Called by the runtime.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="method_pause" class="method item">
-												<h3 class="name"><code>pause</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Pauses playback</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_pause" class="method item">
-												<h3 class="name"><code>pause</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Stops playback and resets time to 0</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_play" class="method item">
-												<h3 class="name"><code>play</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Starts playback</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_setFilter" class="method item">
-												<h3 class="name"><code>setFilter</code></h3>
+											<div id="method_setDistanceModel" class="method item">
+												<h3 class="name"><code>setDistanceModel</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>filter</code>
+																	<code>model</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -493,7 +552,26 @@
 												</div>
 											
 												<div class="description">
-													<p>Add the filter to the filters array.</p>
+													<p>Set distance model to be used.</p>
+											<p>Distance model defined how the emitter controls its volume from its position in the world, relative to the camera.</p>
+											<p>By default the mode used is &quot;inverse&quot;, can be also set to:</p>
+											<ul>
+											<li>&quot;linear&quot;: A linear distance model calculating the gain induced by the distance according to
+											<ul>
+											<li>1 - rolloffFactor * (distance - refDistance) / (maxDistance - refDistance)</li>
+											</ul>
+											</li>
+											<li>&quot;inverse&quot;: An inverse distance model calculating the gain induced by the distance according to:
+											<ul>
+											<li>refDistance / (refDistance + rolloffFactor * (distance - refDistance))</li>
+											</ul>
+											</li>
+											<li>&quot;exponential&quot;: An exponential distance model calculating the gain induced by the distance according to:
+											<ul>
+											<li>pow(distance / refDistance, -rolloffFactor).</li>
+											</ul>
+											</li>
+											</ul>
 											
 												</div>
 											
@@ -502,12 +580,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">filter</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">model</code>
+																	<span class="type">String</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Distance Model to be used.</p>
+											
 																</div>
 											
 															</li>
@@ -516,8 +595,8 @@
 											
 											
 											</div>
-											<div id="method_setFilters" class="method item">
-												<h3 class="name"><code>setFilters</code></h3>
+											<div id="method_setMaxDistance" class="method item">
+												<h3 class="name"><code>setMaxDistance</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
@@ -543,7 +622,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Set the filters array to value.</p>
+													<p>Set maximum distance for this audio emitter.</p>
 											
 												</div>
 											
@@ -553,111 +632,12 @@
 														<ul class="params-list">
 															<li class="param">
 																	<code class="param-name">value</code>
-																	<span class="type">Array</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setLoop" class="method item">
-												<h3 class="name"><code>setLoop</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>loop</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set loop mode</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">loop</code>
-																	<span class="type">Boolean</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setPlaybackRate" class="method item">
-												<h3 class="name"><code>setPlaybackRate</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>speed</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set playback speed</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">speed</code>
 																	<span class="type">Number</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Maximum distance.</p>
+											
 																</div>
 											
 															</li>
@@ -666,8 +646,8 @@
 											
 											
 											</div>
-											<div id="method_setVolume" class="method item">
-												<h3 class="name"><code>setVolume</code></h3>
+											<div id="method_setRefDistance" class="method item">
+												<h3 class="name"><code>setRefDistance</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
@@ -677,9 +657,6 @@
 														</ul><span class="paren">)</span>
 													</div>
 											
-													<span class="returns-inline">
-														<span class="type"><a href="../classes/PositionalAudio.html" class="crosslink">PositionalAudio</a></span>
-													</span>
 											
 											
 											
@@ -696,7 +673,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Change audio emitter volume.</p>
+													<p>Set reference distance.</p>
 											
 												</div>
 											
@@ -710,7 +687,7 @@
 											
 											
 																<div class="param-description">
-																	<p>Audio volume</p>
+																	<p>Reference distance.</p>
 											
 																</div>
 											
@@ -718,15 +695,57 @@
 														</ul>
 													</div>
 											
-													<div class="returns">
-														<h4>Returns:</h4>
 											
-														<div class="returns-description">
-																	<span class="type"><a href="../classes/PositionalAudio.html" class="crosslink">PositionalAudio</a></span>:
-																<p>Self pointer for chaining</p>
+											</div>
+											<div id="method_setRolloffFactor" class="method item">
+												<h3 class="name"><code>setRolloffFactor</code></h3>
 											
-														</div>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>value</code>
+															</li>
+														</ul><span class="paren">)</span>
 													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Set rolloff factor.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">value</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Rolloff factor.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
 											
 											</div>
 											<div id="method_toJSON" class="method item">
@@ -759,7 +778,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Create JSON description.</p>
+													<p>Serialize object to JSON.</p>
 											
 												</div>
 											
@@ -812,7 +831,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Update positional audio state.</p>
+													<p>Update positional audio panner relative to the camera.</p>
 											
 												</div>
 											
@@ -821,130 +840,6 @@
 											</div>
 									</div>
 						
-									<div id="properties" class="api-class-tabpanel">
-										<h2 class="off-left">Properties</h2>
-						
-											<div id="property_autoplay" class="property item">
-												<h3 class="name"><code>autoplay</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>If true the playback starts automatically</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> true</p>
-											
-											
-											</div>
-											<div id="property_loop" class="property item">
-												<h3 class="name"><code>loop</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>If true the audio plays in loop</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> true</p>
-											
-											
-											</div>
-											<div id="property_playbackRate" class="property item">
-												<h3 class="name"><code>playbackRate</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Start time in seconds</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> 1.0</p>
-											
-											
-											</div>
-											<div id="property_startTime" class="property item">
-												<h3 class="name"><code>startTime</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Start time in seconds</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> 0.0</p>
-											
-											
-											</div>
-											<div id="property_volume" class="property item">
-												<h3 class="name"><code>volume</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Audio volume</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> 1.0</p>
-											
-											
-											</div>
-									</div>
 						
 						
 							</div>
