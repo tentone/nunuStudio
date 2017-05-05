@@ -107,10 +107,38 @@ ButtonImageToggle.prototype.setImageScale = function(x, y)
 	this.icon.style.height = y;
 };
 
+//Set alt text
+ButtonImageToggle.prototype.setAltText = function(altText)
+{
+	var text = new Text();
+	text.element.style.background = Editor.theme.barColor;
+	text.element.style.zIndex = "1000";
+	text.setText(altText);
+	text.visible = false;
+	text.fitContent = true;
+	text.updateInterface();
+
+	//Mouse mouse move event
+	this.element.onmousemove = function(event)
+	{
+		text.size.set(0, 20);
+		text.position.set(event.clientX - text.size.x/2, event.clientY - 30);
+		text.visible = true;
+		text.updateInterface();
+	};
+
+	//Mouse out event (to avoid overlap with mouse leave event)
+	this.element.onmouseout = function()
+	{
+		text.visible = false;
+		text.updateInterface();
+	}
+};
+
 //Update Interface
 ButtonImageToggle.prototype.updateInterface = function()
 {
-	//Set visibility
+	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";

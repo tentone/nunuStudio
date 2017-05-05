@@ -82,26 +82,28 @@ Text.prototype.destroy = function()
 //Update Interface
 Text.prototype.updateInterface = function()
 {
-	//Fit size to text
-	if(this.fitContent)
-	{
-		this.size.x = this.span.clientWidth;
-		//this.size.y = this.span.clientHeight;
-	}
-
 	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+
+		//Fit size to text
+		if(this.fitContent)
+		{
+			this.size.x = this.span.clientWidth;
+			//this.size.y = this.span.clientHeight;
+		}
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 	}
 
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
+
 };
