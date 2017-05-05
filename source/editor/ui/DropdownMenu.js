@@ -8,7 +8,6 @@ function DropdownMenu(parent)
 	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
-	this.element.style.zIndex = "100";
 	this.element.style.display = "flex";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";

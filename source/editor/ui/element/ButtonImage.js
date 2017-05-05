@@ -81,7 +81,7 @@ ButtonImage.prototype.setAltText = function(altText)
 {
 	var text = new Text();
 	text.element.style.background = Editor.theme.barColor;
-	text.element.style.zIndex = "300";
+	text.element.style.zIndex = "1000";
 	text.setText(altText);
 	text.visible = false;
 	text.fitContent = true;
