@@ -29,7 +29,7 @@ function DirectionalLightPanel(parent, obj)
 	//Cast shadow
 	this.castShadow = new CheckBox(this.form.element);
 	this.form.addText("Cast Shadows");
-	this.castShadow.size.set(20, 15);
+	this.castShadow.size.set(15, 15);
 	this.castShadow.position.set(5, 85);
 	this.castShadow.updateInterface();
 	this.castShadow.setOnChange(function()

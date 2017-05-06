@@ -169,7 +169,7 @@ function TextureEditor(parent, closeable, container, index)
 	//Flip Y
 	this.form.addText("Flip Y");
 	this.flipY = new CheckBox(this.form.element);
-	this.flipY.size.set(20, 15);
+	this.flipY.size.set(15, 15);
 	this.flipY.setOnChange(function()
 	{
 		if(self.texture !== null)

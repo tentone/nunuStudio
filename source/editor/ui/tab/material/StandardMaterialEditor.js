@@ -9,7 +9,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	//Skinning
 	this.skinning = new CheckBox(this.form.element);
 	this.form.addText("Skinning");
-	this.skinning.size.set(20, 15);
+	this.skinning.size.set(15, 15);
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
 	{
@@ -24,7 +24,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	//Morph targets
 	this.morphTargets = new CheckBox(this.form.element);
 	this.form.addText("Morph targets");
-	this.morphTargets.size.set(20, 15);
+	this.morphTargets.size.set(15, 15);
 	this.morphTargets.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -38,7 +38,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	//Wireframe
 	this.wireframe = new CheckBox(this.form.element);
 	this.form.addText("Wireframe");
-	this.wireframe.size.set(200, 15);
+	this.wireframe.size.set(15, 15);
 	this.wireframe.setOnChange(function()
 	{
 		if(self.material !== null)

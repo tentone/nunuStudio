@@ -11,7 +11,7 @@ function Slider(parent)
 	//Slider
 	this.element = document.createElement("input");
 	this.element.style.position = "absolute";
-	this.element.style.display = "block";
+	this.element.style.boxSizing = "border-box";
 	this.element.type = "range";
 	this.element.min = "0";
 	this.element.max = "100";
@@ -28,7 +28,6 @@ function Slider(parent)
 	this.text = document.createElement("div");
 	this.text.style.position = "absolute";
 	this.text.style.pointerEvents = "none";
-	this.text.style.marginLeft = "5px";
 	this.text.style.display = "flex";
 	this.text.style.flexDirection = "column";
 	this.text.style.justifyContent = "center";
@@ -106,14 +105,16 @@ Slider.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+		this.text.style.visibility = "visible";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
+		this.text.style.visibility = "hiden";
 	}
 
 	this.text.style.top = this.position.y + "px";
-	this.text.style.left = (this.position.x + this.size.x) + "px";
+	this.text.style.left = (this.position.x + this.size.x + 13) + "px";
 	this.text.style.height = this.size.y + "px";
 
 	this.element.style.top = this.position.y + "px";

@@ -8,8 +8,10 @@ function CheckBox(parent)
 	//Element
 	this.element = document.createElement("input");
 	this.element.style.position = "absolute";
+	this.element.style.display = "block";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.cursor = "pointer";
+	this.element.style.appearance = "none";
 	this.element.type = "checkbox";
 
 	//Attributes

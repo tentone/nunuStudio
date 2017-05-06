@@ -125,7 +125,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	//Sky
 	this.previewForm.addText("Enable sky");
 	this.skyEnabled = new CheckBox(this.previewForm.element);
-	this.skyEnabled.size.set(20, 15);
+	this.skyEnabled.size.set(15, 15);
 	this.skyEnabled.setValue(true);
 	this.skyEnabled.setOnChange(function()
 	{
@@ -186,7 +186,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Depth");
 	this.depthTest = new CheckBox(this.form.element);
 	this.form.addText("Test", true);
-	this.depthTest.size.set(20, 15);
+	this.depthTest.size.set(15, 15);
 	this.depthTest.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -200,7 +200,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	//Write depth
 	this.depthWrite = new CheckBox(this.form.element);
 	this.form.addText("Write", true);
-	this.depthWrite.size.set(20, 15);
+	this.depthWrite.size.set(15, 15);
 	this.depthWrite.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -251,7 +251,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	//Wireframe
 	this.wireframe = new CheckBox(this.form.element);
 	this.form.addText("Wireframe");
-	this.wireframe.size.set(200, 15);
+	this.wireframe.size.set(15, 15);
 	this.wireframe.setOnChange(function()
 	{
 		if(self.material !== null)

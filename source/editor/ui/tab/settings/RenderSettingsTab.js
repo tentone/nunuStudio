@@ -33,7 +33,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	//Shadows
 	this.form.addText("Shadows");
 	this.shadows = new CheckBox(this.form.element);
-	this.shadows.size.set(20, 15);
+	this.shadows.size.set(15, 15);
 	this.shadows.setOnChange(function()
 	{	
 		Settings.render.shadows = self.shadows.getValue();
