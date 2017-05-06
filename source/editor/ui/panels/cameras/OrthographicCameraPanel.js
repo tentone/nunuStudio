@@ -45,7 +45,7 @@ function OrthographicCameraPanel(parent, obj)
 	//Camera used
 	this.use = new CheckBox(this.form.element);
 	this.form.addText("Use camera");
-	this.use.size.set(20, 15);
+	this.use.size.set(15, 15);
 	this.use.setOnChange(function()
 	{
 		if(self.obj !== null && self.scene !== null)
@@ -154,7 +154,7 @@ function OrthographicCameraPanel(parent, obj)
 	//Clear color
 	this.form.addText("Clear color");
 	this.clearColor = new CheckBox(this.form.element);
-	this.clearColor.size.set(20, 15);
+	this.clearColor.size.set(15, 15);
 	this.clearColor.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -168,7 +168,7 @@ function OrthographicCameraPanel(parent, obj)
 	//Clear depth
 	this.clearDepth = new CheckBox(this.form.element);
 	this.form.addText("Clear depth");
-	this.clearDepth.size.set(20, 15);
+	this.clearDepth.size.set(15, 15);
 	this.clearDepth.setOnChange(function()
 	{
 		if(self.obj !== null)

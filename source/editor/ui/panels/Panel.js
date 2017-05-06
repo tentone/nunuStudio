@@ -132,7 +132,7 @@ function Panel(parent, obj)
 	//Visible
 	this.visible = new CheckBox(this.form.element);
 	this.form.addText("Visible");
-	this.visible.size.set(20, 15);
+	this.visible.size.set(15, 15);
 	this.visible.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -147,7 +147,7 @@ function Panel(parent, obj)
 	//Static
 	this.static = new CheckBox(this.form.element);
 	this.form.addText("Static Object");
-	this.static.size.set(20, 15);
+	this.static.size.set(15, 15);
 	this.static.setOnChange(function()
 	{
 		if(self.obj !== null)

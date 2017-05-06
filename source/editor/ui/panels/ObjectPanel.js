@@ -10,7 +10,7 @@ function ObjectPanel(parent, obj)
 	//Cast shadow
 	this.castShadow = new CheckBox(this.form.element);
 	this.form.addText("Cast Shadow");
-	this.castShadow.size.set(20, 15);
+	this.castShadow.size.set(15, 15);
 	this.castShadow.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -25,7 +25,7 @@ function ObjectPanel(parent, obj)
 	//Receive shadow
 	this.receiveShadow = new CheckBox(this.form.element);
 	this.form.addText("React Shadow");
-	this.receiveShadow.size.set(20, 15);
+	this.receiveShadow.size.set(15, 15);
 	this.receiveShadow.setOnChange(function()
 	{
 		if(self.obj !== null)

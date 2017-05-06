@@ -126,6 +126,12 @@ AudioEmitter.prototype.initialize = function()
  */
 AudioEmitter.prototype.play = function()
 {
+	if(this.buffer === null)
+	{
+		console.warn("nunuStudio: Audio buffer not ready, audio will not play.");
+		return;
+	}
+
 	if(this.isPlaying)
 	{
 		console.warn("nunuStudio: Audio is already playing, its only possible to control the last playing instance.");
@@ -139,7 +145,6 @@ AudioEmitter.prototype.play = function()
 	source.start(0, this.startTime);
 
 	this.isPlaying = true;
-
 	this.source = source;
 
 	return this.connect();

@@ -44,7 +44,7 @@ function ProgramPanel(parent, obj)
 	//Mouse lock
 	this.lockPointer = new CheckBox(this.form.element);
 	this.form.addText("Lock pointer");
-	this.lockPointer.size.set(20, 15);
+	this.lockPointer.size.set(15, 15);
 	this.lockPointer.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -62,7 +62,7 @@ function ProgramPanel(parent, obj)
 	//VR Enabled
 	this.vr = new CheckBox(this.form.element);
 	this.form.addText("VR Enabled");
-	this.vr.size.set(20, 15);
+	this.vr.size.set(15, 15);
 	this.vr.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -96,7 +96,7 @@ function ProgramPanel(parent, obj)
 	//Antialiasing
 	this.antialiasing = new CheckBox(this.form.element);
 	this.form.addText("Antialiasing");
-	this.antialiasing.size.set(20, 15);
+	this.antialiasing.size.set(15, 15);
 	this.antialiasing.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -110,7 +110,7 @@ function ProgramPanel(parent, obj)
 	//Shadows
 	this.shadows = new CheckBox(this.form.element);
 	this.form.addText("Shadows");
-	this.shadows.size.set(20, 15);
+	this.shadows.size.set(15, 15);
 	this.shadows.setOnChange(function()
 	{
 		if(self.obj !== null)

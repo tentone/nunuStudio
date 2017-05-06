@@ -119,7 +119,7 @@ function MaterialEditor(parent, closeable, container, index)
 	//Sky
 	this.previewForm.addText("Sky");
 	this.skyEnabled = new CheckBox(this.previewForm.element);
-	this.skyEnabled.size.set(20, 15);
+	this.skyEnabled.size.set(15, 15);
 	this.skyEnabled.setValue(true);
 	this.skyEnabled.setOnChange(function()
 	{
@@ -131,7 +131,7 @@ function MaterialEditor(parent, closeable, container, index)
 	//Point Light
 	this.previewForm.addText("Point Light");
 	this.lightEnabled = new CheckBox(this.previewForm.element);
-	this.lightEnabled.size.set(20, 15);
+	this.lightEnabled.size.set(15, 15);
 	this.lightEnabled.setValue(true);
 	this.lightEnabled.setOnChange(function()
 	{
@@ -183,7 +183,7 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.addText("Depth");
 	this.depthTest = new CheckBox(this.form.element);
 	this.form.addText("Test", true);
-	this.depthTest.size.set(20, 15);
+	this.depthTest.size.set(15, 15);
 	this.depthTest.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -197,7 +197,7 @@ function MaterialEditor(parent, closeable, container, index)
 	//Write depth
 	this.depthWrite = new CheckBox(this.form.element);
 	this.form.addText("Write", true);
-	this.depthWrite.size.set(20, 15);
+	this.depthWrite.size.set(15, 15);
 	this.depthWrite.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -210,9 +210,9 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Transparent
-	this.transparent = new CheckBox(this.form.element);
 	this.form.addText("Transparent");
-	this.transparent.size.set(200, 15);
+	this.transparent = new CheckBox(this.form.element);
+	this.transparent.size.set(15, 15);
 	this.transparent.setOnChange(function()
 	{
 		if(self.material !== null)

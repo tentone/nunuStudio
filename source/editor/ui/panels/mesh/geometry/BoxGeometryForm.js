@@ -68,7 +68,7 @@ function BoxGeometryForm(form, obj)
 	//Buffer
 	this.buffer = new CheckBox(this.form.element);
 	this.form.addText("Buffered");
-	this.buffer.size.set(20, 15);
+	this.buffer.size.set(15, 15);
 	this.buffer.setOnChange(updateGeometry);
 	this.form.add(this.buffer);
 	this.form.nextRow();
