@@ -25,15 +25,10 @@
 - Physics engine (cannon.js)
 - SPE particle system
 - Compatible with WebVR V1.1
-- Microsoft Kinect and Leap Motion support
-	- Microsoft Kinect only supported in Windows projects
 
 ### Screenshots
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/2.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/3.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/4.png)
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/1.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/5.png)
-
-### Examples
-[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/pong.png)](http://tentone.github.io/nunuStudio/examples/pong)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/fps.png)](http://tentone.github.io/nunuStudio/examples/fps)[![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/examples/small/spine.png)](http://tentone.github.io/nunuStudio/examples/spine)
 
 ### ChangeLog
 - V0.8.9.15 Alpha
@@ -104,6 +99,8 @@
 	- Added SpriteSheet texture animation support
 	- Gamepad support
 	- Improved UI elements
+- V0.8.9.26 Alpha
+	- Improved audio implementation
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
