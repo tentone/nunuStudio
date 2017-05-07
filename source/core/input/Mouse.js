@@ -103,34 +103,35 @@ function Mouse()
 		//Auxiliar variables to calculate touch delta
 		var lastTouch = new Vector2(0, 0);
 
-		//Touch screen pressed event
+		//Touch start event
 		this.events.push([window, "touchstart", function(event)
 		{
 			var touch = event.touches[0];
+
+			self.updatePosition(touch.clientX, touch.clientY, touch.clientX - lastTouch.x, touch.clientY - lastTouch.y);
+
 			lastTouch.set(touch.clientX, touch.clientY);
 			self.updateKey(Mouse.LEFT, Key.DOWN);
 		}]);
 
-		//Touch screen released event
+		//Touch end event
 		this.events.push([window, "touchend", function(event)
 		{
 			self.updateKey(Mouse.LEFT, Key.UP);
 		}]);
 
-		//Touch screen move event
-		this.events.push([window, "touchmove", function(event)
+		//Touch cancel event
+		this.events.push([window, "touchcancel", function(event)
+		{
+			self.updateKey(Mouse.LEFT, Key.UP);
+		}]);
+
+		//Touch move event
+		this.events.push([document.body, "touchmove", function(event)
 		{
 			var touch = event.touches[0];
 
-			if(self.canvas !== null)
-			{
-				var rect = self.canvas.getBoundingClientRect();
-				self.updatePosition(touch.clientX - rect.left, touch.clientY - rect.top, touch.clientX - lastTouch.x, touch.clientY - lastTouch.y);
-			}
-			else
-			{
-				self.updatePosition(touch.clientX, touch.clientY, touch.clientX - lastTouch.x, touch.clientY - lastTouch.y);
-			}
+			self.updatePosition(touch.clientX, touch.clientY, touch.clientX - lastTouch.x, touch.clientY - lastTouch.y);
 
 			lastTouch.set(touch.clientX, touch.clientY);
 		}]);
@@ -141,15 +142,7 @@ function Mouse()
 		//Move
 		this.events.push([window, "mousemove", function(event)
 		{
-			if(self.canvas !== null)
-			{
-				var rect = self.canvas.getBoundingClientRect();
-				self.updatePosition(event.clientX - rect.left, event.clientY - rect.top, event.movementX, event.movementY);
-			}
-			else
-			{
-				self.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
-			}
+			self.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
 		}]);
 
 		//Button pressed
@@ -348,6 +341,13 @@ Mouse.buttonJustReleased = function(button)
  */
 Mouse.updatePosition = function(x, y, xDiff, yDiff)
 {
+	if(this.canvas !== null)
+	{
+		var rect = this.canvas.getBoundingClientRect();
+		x -= rect.left;
+		y -= rect.top;
+	}
+
 	this._position.set(x, y);
 	this._delta.x += xDiff;
 	this._delta.y += yDiff;
@@ -373,8 +373,6 @@ Mouse.updateKey = function(button, action)
 
 /**
  * Update mouse buttons state, position, wheel and delta synchronously.
- * 
- * Called automatically by the app runtime.
  * 
  * @method update
  */
@@ -436,7 +434,7 @@ Mouse.update = function()
 };
 
 /**
- * Dispose mouse events (called automatically by the app runtime).
+ * Dispose mouse events.
  * 
  * @method dispose
  */
