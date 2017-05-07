@@ -190,7 +190,7 @@ function TreeElement(container)
 			context.size.set(140, 20);
 			context.position.set(event.clientX - 5, event.clientY - 5);
 			
-			//Open tab for object editor
+			//Open editor
 			if(self.obj instanceof Script)
 			{
 				context.addOption("Script editor", openScriptTab);
@@ -212,12 +212,13 @@ function TreeElement(container)
 				});			
 			}
 			
-			//Rename Object
+			//Rename
 			context.addOption("Rename", function()
 			{
 				Editor.renameObject(self.obj);
 			});
 
+			//Delete
 			if(!program)
 			{
 				context.addOption("Delete", function()

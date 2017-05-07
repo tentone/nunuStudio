@@ -961,7 +961,7 @@ Editor.createNewProgram = function()
 };
 
 //Save program to file
-Editor.saveProgram = function(fname, compressed, keepDirectory)
+Editor.saveProgram = function(fname, compressed, keepDirectory, suppressMessage)
 {
 	try
 	{
@@ -987,8 +987,11 @@ Editor.saveProgram = function(fname, compressed, keepDirectory)
 		{
 			Editor.setOpenFile(fname);
 		}
-
-		alert("Project saved");
+		
+		if(suppressMessage !== true)
+		{
+			alert("Project saved");
+		}
 	}
 	catch(e)
 	{
@@ -1412,7 +1415,7 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile(Editor.runtimePath + "index.html", dir + "/index.html");
 	FileSystem.copyFile(FileSystem.fileExists("nunu.min.js") ? "nunu.min.js" : "../build/nunu.min.js", dir + "/nunu.min.js");
 	
-	Editor.saveProgram(dir + "/app.isp", true, true);
+	Editor.saveProgram(dir + "/app.isp", true, true, true);
 };
 
 //Export NWJS project
@@ -1450,6 +1453,14 @@ Editor.exportMacOSProject = function(dir)
 	FileSystem.copyFolder(Editor.NWJSPath + "mac", dir);
 	Editor.exportNWJSProject(dir);
 };
+
+//Export object
+/*Editor.exportObject = function(obj, fname)
+{
+	var data = JSON.stringify(obj.toJSON());
+
+	//TODO <ADD CODE HERE>
+}*/
 
 //Set fullscreen mode
 Editor.setFullscreen = function(fullscreen, element)
