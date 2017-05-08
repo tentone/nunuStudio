@@ -1200,7 +1200,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
             "line": 3,
-            "description": "Objectloader can be used to load external objects from files.\n\nCan parse be used to load on runtime resources and objects from external isp project files.",
+            "description": "Objectloader can be used to load external objects from files.\n\nAlso loads all resources attached to the objects being loaded.\n\nCan parse be used to load on runtime resources and objects from external isp project files.",
             "is_constructor": 1,
             "params": [
                 {
@@ -4086,7 +4086,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 183,
+            "line": 181,
             "description": "LEFT mouse button",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -4096,7 +4096,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 189,
+            "line": 187,
             "description": "MIDDLE mouse button",
             "itemtype": "attribute",
             "name": "MIDDLE",
@@ -4106,7 +4106,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 195,
+            "line": 193,
             "description": "RIGHT mouse button",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -4116,7 +4116,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 202,
+            "line": 200,
             "description": "Canvas to be used for coordinates calculation relative to that canvas.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -4132,7 +4132,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 225,
+            "line": 223,
             "description": "Check if mouse is inside attached canvas (updated async).",
             "itemtype": "method",
             "name": "insideCanvas",
@@ -4145,7 +4145,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 241,
+            "line": 239,
             "description": "Set mouse lock state.",
             "itemtype": "method",
             "name": "setLock",
@@ -4161,7 +4161,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 284,
+            "line": 282,
             "description": "Check if mouse button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -4181,7 +4181,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 296,
+            "line": 294,
             "description": "Check if Mouse button was double clicked.",
             "itemtype": "method",
             "name": "buttonDoubleClicked",
@@ -4194,7 +4194,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 307,
+            "line": 305,
             "description": "Check if a mouse button was just pressed.",
             "itemtype": "method",
             "name": "buttonJustPressed",
@@ -4214,7 +4214,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 319,
+            "line": 317,
             "description": "Check if a mouse button was just released.",
             "itemtype": "method",
             "name": "buttonJustReleased",
@@ -4234,7 +4234,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 331,
+            "line": 329,
             "description": "Update mouse position.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updatePosition",
@@ -4265,7 +4265,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 357,
+            "line": 355,
             "description": "Update a mouse button.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updateKey",
@@ -4286,7 +4286,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 374,
+            "line": 372,
             "description": "Update mouse buttons state, position, wheel and delta synchronously.",
             "itemtype": "method",
             "name": "update",
@@ -4295,7 +4295,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 436,
+            "line": 434,
             "description": "Dispose mouse events.",
             "itemtype": "method",
             "name": "dispose",
@@ -4524,7 +4524,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 19,
+            "line": 21,
             "description": "Load object file from URL.",
             "itemtype": "method",
             "name": "load",
@@ -4555,7 +4555,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 45,
+            "line": 47,
             "description": "Parse JSON object.\n\nData can be loaded from a file using the FileSystem methods and parsed to an Object using JSON.parse() method.",
             "itemtype": "method",
             "name": "parse",
@@ -4580,7 +4580,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 82,
+            "line": 84,
             "description": "Define base path for external texture loading.",
             "itemtype": "method",
             "name": "setTexturePath",
@@ -4596,7 +4596,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 93,
+            "line": 95,
             "description": "Set cross origin.",
             "itemtype": "method",
             "name": "setCrossOrigin",
@@ -4612,7 +4612,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 104,
+            "line": 106,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseGeometries",
@@ -4632,7 +4632,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 216,
+            "line": 218,
             "description": "Parse materials on json.",
             "itemtype": "method",
             "name": "parseMaterials",
@@ -4652,7 +4652,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 241,
+            "line": 243,
             "description": "Parse animations on json.",
             "itemtype": "method",
             "name": "parseAnimations",
@@ -4672,7 +4672,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 261,
+            "line": 263,
             "description": "Parse images on json.",
             "itemtype": "method",
             "name": "parseImages",
@@ -4692,7 +4692,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 284,
+            "line": 286,
             "description": "Parse videos on json.",
             "itemtype": "method",
             "name": "parseVideos",
@@ -4712,7 +4712,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 307,
+            "line": 309,
             "description": "Parse audio on json.",
             "itemtype": "method",
             "name": "parseAudio",
@@ -4732,7 +4732,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 330,
+            "line": 332,
             "description": "Parse fonts on json.",
             "itemtype": "method",
             "name": "parseFonts",
@@ -4752,7 +4752,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 353,
+            "line": 355,
             "description": "Parse textures on json.",
             "itemtype": "method",
             "name": "parseTextures",
@@ -4782,7 +4782,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 382,
+            "line": 384,
             "description": "Parse objects on json.",
             "itemtype": "method",
             "name": "parseObjects",

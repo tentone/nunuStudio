@@ -246,7 +246,7 @@ a:hover, a:focus
 .navbar
 {
 	border:0px solid rgba(0, 0, 0, 0);
-	background-color:#333333;
+	background-color:#333333EE;
 	margin:auto;
 	min-height:60px;
 	padding-top:8px;
@@ -288,23 +288,17 @@ header
 	width:100%;
 	padding:20px 10px 60px 10px;
 	height:100vh;
-
 	overflow:hidden;
-	background-size:cover;
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
 }
 
 .header-info
 {
 	position:absolute;
-	bottom:0;
 	width:100%;
 	left:0;
 	right:0;
 	margin-left:0px;
-	margin-bottom:12%;
+	margin-top:20%;
 }
 
 /*nunu*/
