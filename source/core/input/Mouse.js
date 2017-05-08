@@ -109,8 +109,6 @@ function Mouse()
 			var touch = event.touches[0];
 
 			self.updatePosition(touch.clientX, touch.clientY, touch.clientX - lastTouch.x, touch.clientY - lastTouch.y);
-
-			lastTouch.set(touch.clientX, touch.clientY);
 			self.updateKey(Mouse.LEFT, Key.DOWN);
 		}]);
 

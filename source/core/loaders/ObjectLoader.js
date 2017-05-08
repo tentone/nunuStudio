@@ -3,6 +3,8 @@
 /**
  * Objectloader can be used to load external objects from files.
  *
+ * Also loads all resources attached to the objects being loaded.
+ * 
  * Can parse be used to load on runtime resources and objects from external isp project files.
  * 
  * @constructor

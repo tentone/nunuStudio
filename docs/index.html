@@ -26,8 +26,7 @@
 		{	
 			header = document.getElementById("header");
 			canvas = document.getElementById("canvas");
-			canvas.width = header.offsetWidth;
-			canvas.height = header.offsetHeight;
+
 
 			app = new NunuApp(canvas);
 
@@ -49,6 +48,7 @@
 
 			//Load and run nunu app
 			app.loadRunProgram("examples/isp/nunu.isp", onLoad, onProgress);
+			resize();
 		}
 
 		function resize()
@@ -62,7 +62,7 @@
 
 <body onload="initialize();" onresize="resize();">
 	<!--Navigation bar-->
-	<div class="navbar navbar-fixed-top navbar-inverse open" style="padding-top: 8px; min-height:60px">
+	<div class="navbar navbar-fixed-top navbar-inverse open">
 		<div class="container">
 			<!--Mobile>-->
 			<div class="navbar-header">
@@ -91,7 +91,7 @@
 	<header id="header" style="background-color:#222222">
 		<div class="container">
 			<!--Demo canvas-->
-			<canvas id="canvas" style="position:absolute; left:0%; top:0%; height:100%; width:100%; border:none"></canvas>
+			<canvas id="canvas" style="position:absolute; left:0%; top:0%; border:none"></canvas>
 
 			<!--Title and buttons-->
 			<div class="header-info">
