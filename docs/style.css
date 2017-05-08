@@ -15,6 +15,17 @@ h1, h2, h3, h4, h5, h6, .btn, .navbar-nav a, .list-inline, small, #examples
 	font-family:'Montserrat', sans-serif;
 }
 
+.feature-img
+{
+	border-radius:10px;
+	width:100%;
+}
+
+.madewith-preview
+{
+	border-radius:10px;
+	width:100%;
+}
 
 .noselect
 {
@@ -55,7 +66,6 @@ h3
 	font-size:21px;
 	line-height:26px;
 	color:#FFFFFF;
-	font-weight:400;
 }
 
 p
@@ -181,68 +191,6 @@ a:hover, a:focus
 	transition:all 0.35s ease-in-out;
 }
 
-/*Margins*/
-.margin-0
-{
-	margin-bottom:0 !important;
-}
-.margin-10
-{
-	margin-bottom:10px !important;
-}
-.margin-15
-{
-	margin-bottom:15px !important;
-}
-.margin-20
-{
-	margin-bottom:20px !important;
-}
-.margin-30
-{
-	margin-bottom:30px !important;
-}
-.margin-40
-{
-	margin-bottom:40px !important;
-}
-.margin-50
-{
-	margin-bottom:50px !important;
-}
-.margin-60
-{
-	margin-bottom:60px !important;
-}
-.margin-70
-{
-	margin-bottom:70px !important;
-}
-.margin-80
-{
-	margin-bottom:80px !important;
-}
-.margin-90
-{
-	margin-bottom:90px !important;
-}
-.margin-100
-{
-	margin-bottom:100px !important;
-}
-
-/*Navigation bar*/
-.navbar-visible
-{
-	border:0px solid rgba(0, 0, 0, 0);
-	background-color:#333333;
-	margin:auto;
-	min-height:60px;
-	padding-top:8px;
-	position:fixed;
-	top:-60px;
-}
-
 .navbar
 {
 	border:0px solid rgba(0, 0, 0, 0);
@@ -251,13 +199,8 @@ a:hover, a:focus
 	min-height:60px;
 	padding-top:8px;
 	position:fixed;
-	top:-60px;
-	transition:top 0.4s ease 0s;
-}
-
-.navbar.open
-{
 	top:0;
+	transition:top 0.4s ease 0s;
 }
 
 .nav > li > a
@@ -265,16 +208,6 @@ a:hover, a:focus
 	position:relative;
 	display:block;
 	padding:10px 10px;
-}
-
-.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form
-{
-	border-color:#CFCFCF;
-}
-
-.navbar-inverse .navbar-toggle
-{
-	border-color:transparent;
 }
 
 .logo img
@@ -286,19 +219,9 @@ a:hover, a:focus
 header
 {
 	width:100%;
-	padding:20px 10px 60px 10px;
-	height:100vh;
+	background-color:#222222;
+	height:80vh;
 	overflow:hidden;
-}
-
-.header-info
-{
-	position:absolute;
-	width:100%;
-	left:0;
-	right:0;
-	margin-left:0px;
-	margin-top:20%;
 }
 
 /*nunu*/
