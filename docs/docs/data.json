@@ -11367,7 +11367,7 @@
         },
         {
             "file": "..\\..\\source\\Nunu.js",
-            "line": 41,
+            "line": 43,
             "description": "Check if host supports WebVR and if there is a VR display available.",
             "itemtype": "method",
             "name": "webvrAvailable",
@@ -11380,7 +11380,7 @@
         },
         {
             "file": "..\\..\\source\\Nunu.js",
-            "line": 52,
+            "line": 54,
             "description": "Check if host supports WebAudio.",
             "itemtype": "method",
             "name": "webAudioAvailable",
@@ -11393,7 +11393,7 @@
         },
         {
             "file": "..\\..\\source\\Nunu.js",
-            "line": 63,
+            "line": 65,
             "description": "Check if host supports WebGL.",
             "itemtype": "method",
             "name": "webglAvailable",
@@ -11406,7 +11406,7 @@
         },
         {
             "file": "..\\..\\source\\Nunu.js",
-            "line": 92,
+            "line": 94,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",

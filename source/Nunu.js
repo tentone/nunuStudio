@@ -38,6 +38,8 @@ Nunu.VERSION = "V0.8.9.26 Alpha";
  */
 Nunu.TIMESTAMP = "201705091550";
 
+//console.log(Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ")");
+
 /**
  * Check if host supports WebVR and if there is a VR display available.
  * 
