@@ -108,8 +108,10 @@ function Mouse()
 		{
 			var touch = event.touches[0];
 
-			self.updatePosition(touch.clientX, touch.clientY, touch.clientX - lastTouch.x, touch.clientY - lastTouch.y);
+			self.updatePosition(touch.clientX, touch.clientY, 0, 0);
 			self.updateKey(Mouse.LEFT, Key.DOWN);
+
+			lastTouch.set(touch.clientX, touch.clientY);
 		}]);
 
 		//Touch end event
