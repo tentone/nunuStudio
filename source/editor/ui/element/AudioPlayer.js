@@ -74,7 +74,7 @@ function AudioPlayer(parent)
 	this.playing = false;
 	this.loop = false;
 
-	//Drag controll
+	//Drag control
 	this.seekStart = 0;
 	this.seekTime = 0;
 	this.seekProgress = 0;
@@ -83,7 +83,7 @@ function AudioPlayer(parent)
 	//Self pointer
 	var self = this;
 
-	this.button. onclick = function()
+	this.button.onclick = function()
 	{
 		self.toggle();
 	};
@@ -93,6 +93,11 @@ function AudioPlayer(parent)
 		self.dragging = true;
 		self.seekStart = event.pageX;
 		self.seekTime = self.time;
+	};
+
+	this.track.onclick = function()
+	{
+		//TODO <ADD CODE HERE>
 	};
 
 	this.onMouseMove = function(event)
@@ -128,7 +133,6 @@ function AudioPlayer(parent)
 				self.play(self.time);
 			}
 		}
-		
 	};
 	
 	//Window events
@@ -339,7 +343,7 @@ AudioPlayer.prototype.updateInterface = function()
 	this.track.style.height = (this.size.y * 0.2) + "px";
 
 	//Scrubber
-	this.scrubber.style.width = (this.size.y * 0.2) + "px";
-	this.scrubber.style.height = (this.size.y * 0.6) + "px";
-	this.scrubber.style.top = (-this.size.y * 0.2) + "px";
+	this.scrubber.style.width = "6px";
+	this.scrubber.style.height = (this.size.y * 0.8) + "px";
+	this.scrubber.style.top = (-this.size.y * 0.3) + "px";
 };
