@@ -12,6 +12,8 @@ function CheckBox(parent)
 	this.element.style.boxSizing = "border-box";
 	this.element.style.cursor = "pointer";
 	this.element.style.appearance = "none";
+	this.element.style.MozAppearance = "none";
+	this.element.style.webkitAppearance = "none";
 	this.element.type = "checkbox";
 
 	//Attributes
