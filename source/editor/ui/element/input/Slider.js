@@ -12,9 +12,9 @@ function Slider(parent)
 	this.element = document.createElement("input");
 	this.element.style.position = "absolute";
 	this.element.style.boxSizing = "border-box";
-	this.element.style.appearance = "none";
-	this.element.style.MozAppearance = "none";
-	this.element.style.webkitAppearance = "none";
+	//this.element.style.appearance = "none";
+	//this.element.style.MozAppearance = "none";
+	//this.element.style.webkitAppearance = "none";
 	this.element.type = "range";
 	this.element.min = "0";
 	this.element.max = "100";
