@@ -22,7 +22,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	//Antialiasing
 	this.form.addText("Antialiasing");
 	this.antialiasing = new CheckBox(this.form.element);
-	this.antialiasing.size.set(20, 16);
+	this.antialiasing.size.set(15, 15);
 	this.antialiasing.setOnChange(function()
 	{
 		Settings.render.antialiasing = self.antialiasing.getValue();
@@ -103,7 +103,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	//Use project settings
 	this.form.addText("Follow project");
 	this.followProject = new CheckBox(this.form.element);
-	this.followProject.size.set(20, 16);
+	this.followProject.size.set(15, 15);
 	this.followProject.setOnChange(function()
 	{
 		Settings.render.followProject = self.followProject.getValue();

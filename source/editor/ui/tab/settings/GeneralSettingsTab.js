@@ -41,7 +41,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Show stats
 	this.form.addText("Performance info");
 	this.showStats = new CheckBox(this.form.element);
-	this.showStats.size.set(20, 16);
+	this.showStats.size.set(15, 15);
 	this.showStats.setOnChange(function()
 	{
 		Settings.general.showStats = self.showStats.getValue();
@@ -52,7 +52,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Show UUID
 	this.form.addText("Show object UUID");
 	this.showUUID = new CheckBox(this.form.element);
-	this.showUUID.size.set(20, 16);
+	this.showUUID.size.set(15, 15);
 	this.showUUID.setOnChange(function()
 	{
 		Settings.general.showUUID = self.showUUID.getValue();
@@ -72,7 +72,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Enable Grid
 	this.form.addText("Show grid");
 	this.gridEnabled = new CheckBox(this.form.element);
-	this.gridEnabled.size.set(20, 16);
+	this.gridEnabled.size.set(15, 15);
 	this.gridEnabled.setOnChange(function()
 	{
 		Settings.editor.gridEnabled = self.gridEnabled.getValue();
@@ -109,7 +109,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Enable Axis
 	this.form.addText("Show axis");
 	this.axisEnabled = new CheckBox(this.form.element);
-	this.axisEnabled.size.set(20, 16);
+	this.axisEnabled.size.set(15, 15);
 	this.axisEnabled.setOnChange(function()
 	{
 		Settings.editor.axisEnabled = self.axisEnabled.getValue();
@@ -120,7 +120,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Snap to grid
 	this.form.addText("Snap to grid");
 	this.snap = new CheckBox(this.form.element);
-	this.snap.size.set(20, 16);
+	this.snap.size.set(15, 15);
 	this.snap.setOnChange(function()
 	{
 		Settings.editor.snap = self.snap.getValue();
@@ -178,7 +178,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Invert navigation
 	this.form.addText("Invert Vertical");
 	this.invertNavigation = new CheckBox(this.form.element);
-	this.invertNavigation.size.set(20, 16);
+	this.invertNavigation.size.set(15, 15);
 	this.invertNavigation.setOnChange(function()
 	{
 		Settings.editor.invertNavigation = self.invertNavigation.getValue();
@@ -189,7 +189,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Mouse lock on camera move
 	this.form.addText("Lock mouse");
 	this.lockMouse = new CheckBox(this.form.element);
-	this.lockMouse.size.set(20, 16);
+	this.lockMouse.size.set(15, 15);
 	this.lockMouse.setOnChange(function()
 	{
 		Settings.editor.lockMouse = self.lockMouse.getValue();
@@ -208,7 +208,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Enable camera preview
 	this.form.addText("Show preview");
 	this.cameraPreviewEnabled = new CheckBox(this.form.element);
-	this.cameraPreviewEnabled.size.set(20, 16);
+	this.cameraPreviewEnabled.size.set(15, 15);
 	this.cameraPreviewEnabled.setOnChange(function()
 	{
 		Settings.editor.cameraPreviewEnabled = self.cameraPreviewEnabled.getValue();

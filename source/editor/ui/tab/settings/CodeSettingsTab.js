@@ -67,7 +67,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Show line numbers
 	this.form.addText("Show line number");
 	this.codeLineNumbers = new CheckBox(this.form.element);
-	this.codeLineNumbers.size.set(20, 16);
+	this.codeLineNumbers.size.set(15, 15);
 	this.codeLineNumbers.setOnChange(function()
 	{
 		Settings.code.lineNumbers = self.codeLineNumbers.getValue();
@@ -78,7 +78,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Line wrapping
 	this.form.addText("Line wrap");
 	this.codeLineWrapping = new CheckBox(this.form.element);
-	this.codeLineWrapping.size.set(20, 16);
+	this.codeLineWrapping.size.set(15, 15);
 	this.codeLineWrapping.setOnChange(function()
 	{
 		Settings.code.lineWrapping = self.codeLineWrapping.getValue();
@@ -89,7 +89,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Auto close brackets
 	this.form.addText("Auto close brackets");
 	this.codeAutoCloseBrackets = new CheckBox(this.form.element);
-	this.codeAutoCloseBrackets.size.set(20, 16);
+	this.codeAutoCloseBrackets.size.set(15, 15);
 	this.codeAutoCloseBrackets.setOnChange(function()
 	{
 		Settings.code.autoCloseBrackets = self.codeAutoCloseBrackets.getValue();
@@ -100,7 +100,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Highlight active line
 	this.form.addText("Highlight line");
 	this.codeHighlightActiveLine = new CheckBox(this.form.element);
-	this.codeHighlightActiveLine.size.set(20, 16);
+	this.codeHighlightActiveLine.size.set(15, 15);
 	this.codeHighlightActiveLine.setOnChange(function()
 	{
 		Settings.code.highlightActiveLine = self.codeHighlightActiveLine.getValue();
@@ -111,7 +111,7 @@ function CodeSettingsTab(parent, closeable, container, index)
 	//Show search match on scrollback
 	this.form.addText("Show match scrollbar");
 	this.showMatchesOnScrollbar = new CheckBox(this.form.element);
-	this.showMatchesOnScrollbar.size.set(20, 16);
+	this.showMatchesOnScrollbar.size.set(15, 15);
 	this.showMatchesOnScrollbar.setOnChange(function()
 	{
 		Settings.code.showMatchesOnScrollbar = self.showMatchesOnScrollbar.getValue();
