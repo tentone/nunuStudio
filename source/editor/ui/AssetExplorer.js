@@ -23,9 +23,9 @@ function AssetExplorer(parent)
 	this.element.ondrop = function(event)
 	{
 		//Dragged file into explorer
-		if(event.dataTransfer.files.length > 0)
+		for(var i = 0; i < event.dataTransfer.files.length; i++)
 		{
-			var file = event.dataTransfer.files[0];
+			var file = event.dataTransfer.files[i];
 			var name = file.name;
 
 			//Image
