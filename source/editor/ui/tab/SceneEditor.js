@@ -128,6 +128,7 @@ function SceneEditor(parent, closeable, container, index)
 							material.name = texture.name;
 							object.material = material;
 						}
+						Editor.updateObjectViews();
 					});
 				}
 				//Video
@@ -147,6 +148,7 @@ function SceneEditor(parent, closeable, container, index)
 							material.name = texture.name;
 							object.material = material;
 						}
+						Editor.updateObjectViews();
 					});
 				}
 				//Font
@@ -187,9 +189,10 @@ function SceneEditor(parent, closeable, container, index)
 					}
 					else if(draggedObject instanceof CubeTexture)
 					{
-						if(object.material !== undefined && object.material.envMap !== undefined)
+						if(object.material instanceof THREE.Material)
 						{
 							object.material.envMap = draggedObject;
+							Editor.updateObjectViews();
 						}
 					}
 					else if(draggedObject instanceof THREE.Texture)
