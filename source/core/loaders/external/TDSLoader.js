@@ -267,10 +267,11 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 		else if(next === TEX_VERTS)
 		{
 			var texels = this.readWord(data);
-
+			
+			var uvs = [];
 			for(var i = 0; i < texels; i++)
 			{
-				//geometry.faceVertexUvs[0].push(new THREE.Vector2(this.readFloat(data), this.readFloat(data)));
+				uvs.push(new THREE.Vector2(this.readFloat(data), this.readFloat(data)));
 			}
 
 			this.debugMessage("   UV: " + texels);
