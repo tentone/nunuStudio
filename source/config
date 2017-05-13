@@ -2,7 +2,7 @@
 	"general": {
 		"theme": "dark",
 		"filePreviewSize": 70,
-		"showStats": true,
+		"showStats": false,
 		"showUUID": false
 	},
 	"editor": {
@@ -22,8 +22,8 @@
 	},
 	"render": {
 		"followProject": false,
-		"toneMapping": 0,
-		"toneMappingExposure": 1.1,
+		"toneMapping": 1,
+		"toneMappingExposure": 1,
 		"toneMappingWhitePoint": 1,
 		"antialiasing": true,
 		"shadows": true,
