@@ -1617,7 +1617,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
             "line": 3,
-            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.\n\nThis object was by default 3 internal hidden children\n\t- Hemisphere light\n\t- Directional Light\n\t- Mesh",
+            "description": "Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.\n\nThis object is composed by 3 internal objects\n\t- Hemisphere light\n\t- Directional Light\n\t- Mesh",
             "params": [
                 {
                     "name": "autoUpdate",

@@ -21,6 +21,84 @@ function SkyPanel(parent, obj)
 	this.form.add(this.autoUpdate);
 	this.form.nextRow();
 
+	//Sky color
+	this.form.addText("Sky color");
+	this.form.nextRow();
+
+	//Top color
+	this.form.addText("Top color");
+	this.colorTop = [];
+	for(var i = 0; i < 4; i++)
+	{
+		this.colorTop.push(new ColorChooser(this.form.element));
+		this.colorTop[i].element.index = i;
+		this.colorTop[i].size.set(42, 18);
+		this.colorTop[i].setOnChange(function()
+		{
+			if(self.obj !== null)
+			{
+				var color = self.colorTop[this.index].getValue();
+				self.obj.colorTop[this.index].setRGB(color.r, color.g, color.b);
+				self.obj.updateSky();
+			}
+		});
+		this.form.add(this.colorTop[i]);
+	}
+	this.form.nextRow();
+
+	//Bottom color
+	this.form.addText("Bottom color");
+	this.colorBottom = [];
+	for(var i = 0; i < 4; i++)
+	{
+		this.colorBottom.push(new ColorChooser(this.form.element));
+		this.colorBottom[i].element.index = i;
+		this.colorBottom[i].size.set(42, 18);
+		this.colorBottom[i].setOnChange(function()
+		{
+			if(self.obj !== null)
+			{
+				var color = self.colorBottom[this.index].getValue();
+				self.obj.colorBottom[this.index].setRGB(color.r, color.g, color.b);
+				self.obj.updateSky();
+			}
+		});
+		this.form.add(this.colorBottom[i]);
+	}
+	this.form.nextRow();
+
+	this.form.addText("Sun Color");
+	this.sunColor = new ColorChooser(this.form.element);
+	this.sunColor.size.set(80, 18);
+	this.sunColor.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.sunColor = self.sunColor.getValueHex();
+			self.obj.updateSky();
+		}
+	});
+	this.form.add(this.sunColor);
+	this.form.nextRow();
+
+	this.form.addText("Moon Color");
+	this.moonColor = new ColorChooser(this.form.element);
+	this.moonColor.size.set(80, 18);
+	this.moonColor.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.moonColor = self.moonColor.getValueHex();
+			self.obj.updateSky();
+		}
+	});
+	this.form.add(this.moonColor);
+	this.form.nextRow();
+
+	//Day time
+	this.form.addText("Day time");
+	this.form.nextRow();
+
 	//Day time
 	this.form.addText("Day duration");
 	this.dayTime = new NumberBox(this.form.element);
@@ -264,6 +342,15 @@ SkyPanel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.autoUpdate.setValue(this.obj.autoUpdate);
+
+		for(var i = 0; i < 4; i++)
+		{
+			this.colorBottom[i].setValue(this.obj.colorBottom[i].r, this.obj.colorBottom[i].g, this.obj.colorBottom[i].b);
+			this.colorTop[i].setValue(this.obj.colorTop[i].r, this.obj.colorTop[i].g, this.obj.colorTop[i].b);
+		}
+		this.sunColor.setValueHex(this.obj.sunColor);
+		this.moonColor.setValueHex(this.obj.moonColor);
+
 		this.dayTime.setValue(this.obj.dayTime);
 		this.time.setValue(this.obj.time);
 		this.sunDistance.setValue(this.obj.sunDistance);

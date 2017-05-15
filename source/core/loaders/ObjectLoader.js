@@ -640,7 +640,13 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			if(data.sun !== undefined)
 			{
 				object.sun.shadow.fromJSON(data.sun.shadow);
+				
+				if(data.sun.castShadow !== undefined)
+				{
+					object.sun.castShadow = data.sun.castShadow;
+				}
 			}
+
 			if(data.colorTop !== undefined)
 			{
 				object.colorTop = [];

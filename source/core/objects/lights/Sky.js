@@ -3,7 +3,7 @@
 /**
  * Sky class if composed of a HemisphereLight, DirectionalLight and a dynamic generated Sky sphere geometry.
  * 
- * This object was by default 3 internal hidden children
+ * This object is composed by 3 internal objects
  * 	- Hemisphere light
  * 	- Directional Light
  * 	- Mesh
@@ -393,6 +393,7 @@ Sky.prototype.toJSON = function(meta)
 	data.object.time = this.time;
 
 	data.object.sun = {};
+	data.object.sun.castShadow = this.sun.castShadow;
 	data.object.sun.shadow = this.sun.shadow.toJSON();
 
 	return data;
