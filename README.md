@@ -101,6 +101,7 @@
 	- Improved UI elements
 - V0.8.9.26 Alpha
 	- Improved audio implementation
+	- Control sky colors on UI
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
