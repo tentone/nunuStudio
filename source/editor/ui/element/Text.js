@@ -87,11 +87,11 @@ Text.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "visible";
 
-		//Fit size to text
+		//Fit text
 		if(this.fitContent)
 		{
 			this.size.x = this.span.clientWidth;
-			//this.size.y = this.span.clientHeight;
+			this.size.y = this.span.clientHeight;
 		}
 
 		//Element
