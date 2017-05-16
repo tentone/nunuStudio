@@ -10,9 +10,6 @@ function ButtonDrawer(parent)
 	this.element.style.position = "absolute";
 	this.element.style.zIndex = "200";
 	this.element.style.cursor = "pointer";
-	this.element.style.display = "flex";
-	this.element.style.justifyContent = "center";
-	this.element.style.alignItems = "center";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	
 	//Prevent drop event
