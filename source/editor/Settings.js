@@ -35,6 +35,7 @@ Settings.loadDefault = function()
 	Settings.editor.transformationSpace = "world";
 	Settings.editor.navigation = Settings.FREE;
 	Settings.editor.invertNavigation = false;
+	Settings.editor.keyboardNavigation = true;
 
 	//Render
 	Settings.render = {};

@@ -674,31 +674,34 @@ SceneEditor.prototype.update = function()
 					}
 
 					//WASD movement
-					if(Editor.keyboard.keyPressed(Keyboard.W))
+					if(Settings.editor.keyboardNavigation)
 					{
-						var direction = this.camera.getWorldDirection();
-						direction.multiplyScalar(0.5);
-						this.camera.position.add(direction);
-					}
-					if(Editor.keyboard.keyPressed(Keyboard.S))
-					{
-						var direction = this.camera.getWorldDirection();
-						direction.multiplyScalar(0.5);
-						this.camera.position.sub(direction);
-					}
-					if(Editor.keyboard.keyPressed(Keyboard.A))
-					{
-						var direction = new THREE.Vector3(Math.sin(this.cameraRotation.x - 1.57), 0, Math.cos(this.cameraRotation.x - 1.57));
-						direction.normalize();
-						direction.multiplyScalar(0.5);
-						this.camera.position.sub(direction);
-					}
-					if(Editor.keyboard.keyPressed(Keyboard.D))
-					{
-						var direction = new THREE.Vector3(Math.sin(this.cameraRotation.x + 1.57), 0, Math.cos(this.cameraRotation.x + 1.57));
-						direction.normalize();
-						direction.multiplyScalar(0.5);
-						this.camera.position.sub(direction);
+						if(Editor.keyboard.keyPressed(Keyboard.W))
+						{
+							var direction = this.camera.getWorldDirection();
+							direction.multiplyScalar(0.5);
+							this.camera.position.add(direction);
+						}
+						if(Editor.keyboard.keyPressed(Keyboard.S))
+						{
+							var direction = this.camera.getWorldDirection();
+							direction.multiplyScalar(0.5);
+							this.camera.position.sub(direction);
+						}
+						if(Editor.keyboard.keyPressed(Keyboard.A))
+						{
+							var direction = new THREE.Vector3(Math.sin(this.cameraRotation.x - 1.57), 0, Math.cos(this.cameraRotation.x - 1.57));
+							direction.normalize();
+							direction.multiplyScalar(0.5);
+							this.camera.position.sub(direction);
+						}
+						if(Editor.keyboard.keyPressed(Keyboard.D))
+						{
+							var direction = new THREE.Vector3(Math.sin(this.cameraRotation.x + 1.57), 0, Math.cos(this.cameraRotation.x + 1.57));
+							direction.normalize();
+							direction.multiplyScalar(0.5);
+							this.camera.position.sub(direction);
+						}
 					}
 				}
 				else if(Settings.editor.navigation === Settings.ORBIT)
@@ -746,6 +749,49 @@ SceneEditor.prototype.update = function()
 						}
 					}
 
+					//WASD movement
+					if(Settings.editor.keyboardNavigation)
+					{
+						if(Editor.keyboard.keyPressed(Keyboard.W))
+						{
+							var direction = this.camera.getWorldDirection();
+							direction.y = 0;
+							direction.normalize();
+
+							this.cameraLookAt.x += direction.x * 0.25
+							this.cameraLookAt.z += direction.z * 0.25;
+						}
+						if(Editor.keyboard.keyPressed(Keyboard.S))
+						{
+							var direction = this.camera.getWorldDirection();
+							direction.y = 0;
+							direction.normalize();
+
+							this.cameraLookAt.x -= direction.x * 0.25;
+							this.cameraLookAt.z -= direction.z * 0.25;
+						}
+						if(Editor.keyboard.keyPressed(Keyboard.D))
+						{
+							var direction = this.camera.getWorldDirection();
+							direction.y = 0;
+							direction.normalize();
+							direction.applyAxisAngle(SceneEditor.UP, 1.57);
+
+							this.cameraLookAt.x -= direction.x * 0.25;
+							this.cameraLookAt.z -= direction.z * 0.25;
+						}
+						if(Editor.keyboard.keyPressed(Keyboard.A))
+						{
+							var direction = this.camera.getWorldDirection();
+							direction.y = 0;
+							direction.normalize();
+							direction.applyAxisAngle(SceneEditor.UP, 1.57);
+
+							this.cameraLookAt.x += direction.x * 0.25;
+							this.cameraLookAt.z += direction.z * 0.25;
+						}
+					}
+
 					//Move target point
 					if(this.mouse.buttonPressed(Mouse.RIGHT))
 					{
@@ -756,7 +802,7 @@ SceneEditor.prototype.update = function()
 						this.cameraLookAt.x += direction.x * this.mouse.delta.y * 0.1;
 						this.cameraLookAt.z += direction.z * this.mouse.delta.y * 0.1;
 
-						direction.applyAxisAngle(SceneEditor.UP, 1.57)
+						direction.applyAxisAngle(SceneEditor.UP, 1.57);
 
 						this.cameraLookAt.x += direction.x * this.mouse.delta.x * 0.1;
 						this.cameraLookAt.z += direction.z * this.mouse.delta.x * 0.1;

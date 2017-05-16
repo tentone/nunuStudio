@@ -6,20 +6,6 @@ function SkyPanel(parent, obj)
 
 	//Self pointer
 	var self = this;
-	
-	//Auto update
-	this.autoUpdate = new CheckBox(this.form.element);
-	this.form.addText("Auto update");
-	this.autoUpdate.size.set(15, 15);
-	this.autoUpdate.setOnChange(function()
-	{
-		if(self.obj !== null)
-		{
-			self.obj.autoUpdate = self.autoUpdate.getValue();
-		}
-	});
-	this.form.add(this.autoUpdate);
-	this.form.nextRow();
 
 	//Sky color
 	this.form.addText("Sky color");
@@ -97,6 +83,20 @@ function SkyPanel(parent, obj)
 
 	//Day time
 	this.form.addText("Day time");
+	this.form.nextRow();
+
+	//Auto update
+	this.autoUpdate = new CheckBox(this.form.element);
+	this.form.addText("Auto update");
+	this.autoUpdate.size.set(15, 15);
+	this.autoUpdate.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.autoUpdate = self.autoUpdate.getValue();
+		}
+	});
+	this.form.add(this.autoUpdate);
 	this.form.nextRow();
 
 	//Day time
@@ -341,8 +341,6 @@ SkyPanel.prototype.updatePanel = function()
 	
 	if(this.obj !== null)
 	{
-		this.autoUpdate.setValue(this.obj.autoUpdate);
-
 		for(var i = 0; i < 4; i++)
 		{
 			this.colorBottom[i].setValue(this.obj.colorBottom[i].r, this.obj.colorBottom[i].g, this.obj.colorBottom[i].b);
@@ -351,6 +349,7 @@ SkyPanel.prototype.updatePanel = function()
 		this.sunColor.setValueHex(this.obj.sunColor);
 		this.moonColor.setValueHex(this.obj.moonColor);
 
+		this.autoUpdate.setValue(this.obj.autoUpdate);
 		this.dayTime.setValue(this.obj.dayTime);
 		this.time.setValue(this.obj.time);
 		this.sunDistance.setValue(this.obj.sunDistance);

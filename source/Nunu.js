@@ -36,7 +36,7 @@ Nunu.VERSION = "V0.8.9.26 Alpha";
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201705150213";
+Nunu.TIMESTAMP = "201705160210";
 
 //console.log(Nunu.NAME + " " + Nunu.VERSION + " (" + Nunu.TIMESTAMP + ")");
 

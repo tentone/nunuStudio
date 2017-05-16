@@ -4,7 +4,7 @@ function FontRenderer()
 {
 	//Renderer
 	this.renderer = new THREE.WebGLRenderer({alpha: true});
-	this.renderer.setSize(128, 128);
+	this.renderer.setSize(96, 96);
 	
 	//Canvas
 	this.canvas = this.renderer.domElement;
