@@ -1387,7 +1387,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
             "line": 3,
-            "description": "Perspective camera.\n\nBased on THREE.PerspectiveCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera.",
+            "description": "Perspective camera, used for 3D scenes with objects getting smaller as they get away from the camera.\n\nBased on THREE.PerspectiveCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/PerspectiveCamera.",
             "extends": "{PerspectiveCamera}",
             "is_constructor": 1,
             "params": [
@@ -1441,7 +1441,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\device\\LeapMotion.js",
             "line": 3,
-            "description": "Leap device object based on the official LeapJS runtime.\n\nUsed to connect nunuStudio to a leap motion hand tracker, works on Windows and OSX.",
+            "description": "Leap device object based on the official LeapJS runtime.\n\nUsed to connect nunuStudio to a leap motion hand tracker, works on Windows and MacOS.",
             "is_constructor": 1,
             "extends": "{Object3D}"
         },

@@ -3,7 +3,7 @@
 /**
  * Leap device object based on the official LeapJS runtime.
  * 
- * Used to connect nunuStudio to a leap motion hand tracker, works on Windows and OSX.
+ * Used to connect nunuStudio to a leap motion hand tracker, works on Windows and MacOS.
  * 
  * @class LeapMotion
  * @constructor

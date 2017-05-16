@@ -197,6 +197,17 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.lockMouse);
 	this.form.nextRow();
 
+	//Keyboard navigation
+	this.form.addText("Keyboard navigation");
+	this.keyboardNavigation = new CheckBox(this.form.element);
+	this.keyboardNavigation.size.set(15, 15);
+	this.keyboardNavigation.setOnChange(function()
+	{
+		Settings.editor.keyboardNavigation = self.keyboardNavigation.getValue();
+	});
+	this.form.add(this.keyboardNavigation);
+	this.form.nextRow();
+
 	//Blank Space
 	this.form.addText("");
 	this.form.nextRow();
@@ -274,12 +285,19 @@ GeneralSettingsTab.prototype.activate = function()
 	this.gridSize.setValue(Settings.editor.gridSize);
 	this.gridSpacing.setValue(Settings.editor.gridSpacing);
 	this.axisEnabled.setValue(Settings.editor.axisEnabled);
+
+	//Navigation
 	this.lockMouse.setValue(Settings.editor.lockMouse);
 	this.navigation.setValue(Settings.editor.navigation);
 	this.invertNavigation.setValue(Settings.editor.invertNavigation);
-	this.transformationSpace.setValue(Settings.editor.transformationSpace);
+	this.keyboardNavigation.setValue(Settings.editor.keyboardNavigation);
+
+	//Camera preview
 	this.cameraPreviewEnabled.setValue(Settings.editor.cameraPreviewEnabled);
 	this.cameraPreviewPercentage.setValue(Settings.editor.cameraPreviewPercentage);
+	
+	//Transformations
+	this.transformationSpace.setValue(Settings.editor.transformationSpace);
 };
 
 //Update division Size

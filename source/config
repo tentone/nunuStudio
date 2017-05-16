@@ -18,7 +18,8 @@
 		"lockMouse": true,
 		"transformationSpace": "world",
 		"navigation": 10,
-		"invertNavigation": false
+		"invertNavigation": false,
+		"keyboardNavigation": false
 	},
 	"render": {
 		"followProject": false,
@@ -30,7 +31,7 @@
 		"shadowsType": 2
 	},
 	"code": {
-		"theme": "monokai",
+		"theme": "hopscotch",
 		"keymap": "sublime",
 		"fontSize": 14,
 		"lineNumbers": true,
