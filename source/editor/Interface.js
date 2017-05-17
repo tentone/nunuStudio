@@ -485,10 +485,10 @@ Interface.initialize = function()
 	}, Editor.filePath + "icons/misc/settings.png");
 
 	//Publish
+	var publish = Interface.file.addMenu("Publish", Editor.filePath + "icons/misc/publish.png");
+
 	if(Nunu.runningOnDesktop())
 	{
-		var publish = Interface.file.addMenu("Publish", Editor.filePath + "icons/misc/publish.png");
-
 		//Publish web
 		publish.addOption("Web", function()
 		{
@@ -565,6 +565,18 @@ Interface.initialize = function()
 				}, "", Editor.program.name);
 			}, Editor.filePath + "icons/platform/osx.png");
 		}
+	}
+	//Running on web browser
+	else
+	{
+		publish.addOption("Web", function()
+		{
+			FileSystem.chooseFileName(function(fname)
+			{
+				Editor.exportWebProjectZip(fname);
+				alert("Project exported");
+			}, ".zip");
+		}, Editor.filePath + "icons/platform/web.png");
 	}
 
 	//Export menu
