@@ -45,16 +45,16 @@
  * @type {String, ArrayBuffer, ...}
  */
 /**
- * Data.
+ * Resource data.
  * 
  * @property data
  * @type {Object}
  */
-function Resource()
+function Resource(name, type)
 {
-	this.name = "";
+	this.name = name;
 	this.uuid = THREE.Math.generateUUID();
-	this.type = "";
+	this.type = type;
 
 	this.format = "";
 	this.encoding = ""
@@ -63,6 +63,8 @@ function Resource()
 
 /**
  * Serialize resource to json.
+ *
+ * Only serializes name, uuid and type.
  *
  * @method toJSON
  * @param {Object} meta
@@ -75,7 +77,6 @@ Resource.prototype.toJSON = function(meta)
 	data.name = this.name;
 	data.uuid = this.uuid;
 	data.type = this.type;
-	data.format = this.format;
-	data.encoding = this.encoding;
-	data.data = this.data;
+
+	return data;
 };

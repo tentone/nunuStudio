@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Image texture constructor, supports GIF animations.
+ * Image texture constructor, with support for GIF animations.
  * 
  * It is based on THREE.Texture, original documentation can be found here https://threejs.org/docs/index.html#Reference/Textures/Texture
  * 

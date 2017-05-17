@@ -15,13 +15,7 @@
  */
 function Image(url)
 {
-	this.name = "image";
-	this.uuid = THREE.Math.generateUUID();
-	this.type = "Image";
-
-	this.format = "";
-	this.encoding = ""
-	this.data = null;
+	Resource.call(this, "image", "Image");
 	
 	if(url !== undefined)
 	{
@@ -59,6 +53,8 @@ function Image(url)
 		}
 	}
 }
+
+Image.prototype = Object.create(Resource.prototype);
 
 /**
  * Check if a file name refers to a supported binary image file.
@@ -159,7 +155,7 @@ Image.prototype.encodeData = function()
 };
 
 /**
- * Serialize Image resource to JSON.
+ * Serialize Image resource to json.
  *
  * If image is stored as URL it is converter to PNG or JPEG.
  *
@@ -169,6 +165,8 @@ Image.prototype.encodeData = function()
  */
 Image.prototype.toJSON = function(meta)
 {
+	var data = Resource.prototype.toJSON.call(this, meta);
+
 	if(meta.images[this.uuid] !== undefined)
 	{
 		return meta.images[this.uuid];
@@ -179,10 +177,6 @@ Image.prototype.toJSON = function(meta)
 		this.encodeData();
 	}
 
-	var data = {};
-	data.name = this.name;
-	data.uuid = this.uuid;
-	data.type = this.type;
 	data.encoding = this.encoding;
 	data.format = this.format;
 	data.data = this.data;

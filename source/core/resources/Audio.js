@@ -11,13 +11,7 @@
  */
 function Audio(url)
 {
-	this.name = "audio";
-	this.uuid = THREE.Math.generateUUID();
-	this.type = "Audio";
-
-	this.format = "";
-	this.encoding = ""
-	this.data = null;
+	Resource.call(this, "audio", "Audio");
 
 	if(url !== undefined)
 	{
@@ -37,6 +31,8 @@ function Audio(url)
 		}
 	}
 }
+
+Audio.prototype = Object.create(Resource.prototype);
 
 /**
  * Check if a file name refers to a supported audio file.
@@ -60,7 +56,7 @@ Audio.fileIsAudio = function(file)
 };
 
 /**
- * Serialize audio data as JSON.
+ * Serialize audio data as json.
  * 
  * Audio data is serialized in Base64.
  *
@@ -70,15 +66,13 @@ Audio.fileIsAudio = function(file)
  */
 Audio.prototype.toJSON = function(meta)
 {
+	var data = Resource.prototype.toJSON.call(this, meta);
+
 	if(meta.audio[this.uuid] !== undefined)
 	{
 		return meta.audio[this.uuid];
 	}
 
-	var data = {};
-	data.name = this.name;
-	data.uuid = this.uuid;
-	data.type = this.type;
 	data.encoding = this.encoding;
 	data.data = Base64Utils.fromArraybuffer(this.data);
 	data.format = "base64";
