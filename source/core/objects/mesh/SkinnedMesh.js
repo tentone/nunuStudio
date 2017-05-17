@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * SkinnedMesh is a mesh that has a Skeleton attached.
+ * SkinnedMesh is a Mesh that has a Skeleton attached.
  * 
  * A skeleton contains bones that are used to animate the vertices of the geometry.
  * 

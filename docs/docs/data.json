@@ -550,6 +550,24 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\utils\\struct\\Tree.js": {
+            "name": "..\\..\\source\\core\\utils\\struct\\Tree.js",
+            "modules": {},
+            "classes": {
+                "Tree": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\utils\\struct\\TreeUtils.js": {
+            "name": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
+            "modules": {},
+            "classes": {
+                "TreeUtils": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\utils\\ArraybufferUtils.js": {
             "name": "..\\..\\source\\core\\utils\\ArraybufferUtils.js",
             "modules": {
@@ -772,7 +790,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\objects\\lights\\SpotLight.js",
             "line": 3,
-            "description": "Same as THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight"
+            "description": "Ambient lights are used to create base ilumanition for the scene.\n\nThey are not influenced by position, scale or rotation.\n\nBased on THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight"
         },
         "Meshes": {
             "name": "Meshes",
@@ -956,7 +974,9 @@
             "elements": {},
             "classes": {
                 "MathUtils": 1,
-                "Vector3": 1
+                "Vector3": 1,
+                "Tree": 1,
+                "TreeUtils": 1
             },
             "fors": {},
             "namespaces": {},
@@ -1282,7 +1302,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\animation\\Bone.js",
             "line": 3,
-            "description": "Bone represents a bone joint for skeletal animation.\n\nMore information about bones can be found here https://threejs.org/docs/index.html?q=bon#Reference/Objects/Bone.",
+            "description": "Bone represents a bone joint for skeletal animation.\n\nMore information about Bone can be found here https://threejs.org/docs/index.html?q=bon#Reference/Objects/Bone.",
             "is_constructor": 1
         },
         "AudioEmitter": {
@@ -1457,7 +1477,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\lights\\AmbientLight.js",
             "line": 3,
-            "description": "Same as THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight",
+            "description": "Ambient lights are used to create base ilumanition for the scene.\n\nThey are not influenced by position, scale or rotation.\n\nBased on THREE.AmbientLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/AmbientLight",
             "params": [
                 {
                     "name": "hex",
@@ -1480,7 +1500,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\lights\\DirectionalLight.js",
             "line": 3,
-            "description": "Same as THREE.DirectionalLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/DirectionalLight",
+            "description": "A light that gets emitted in a specific direction.\n\nThis light will behave as though it is infinitely far away and the rays produced from it are all parallel.\n\nBased on THREE.DirectionalLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/DirectionalLight",
             "params": [
                 {
                     "name": "hex",
@@ -1508,7 +1528,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\lights\\HemisphereLight.js",
             "line": 3,
-            "description": "Same as THREE.HemisphereLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/HemisphereLight",
+            "description": "A light source positioned directly above the scene, with color fading from the sky color to the ground color.\n\nBased on THREE.HemisphereLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/HemisphereLight",
             "params": [
                 {
                     "name": "skyColor",
@@ -1541,7 +1561,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\lights\\PointLight.js",
             "line": 3,
-            "description": "Same as THREE.PointLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/PointLight",
+            "description": "PointLights emit light from a single point in all directions.\n\nBased on THREE.PointLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/PointLight",
             "params": [
                 {
                     "name": "hex",
@@ -1579,7 +1599,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\lights\\RectAreaLight.js",
             "line": 3,
-            "description": "Same as THREE.RectAreaLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/RectAreaLight",
+            "description": "A RectAreLight emit light from a rectagular surface.\n\nBased on THREE.RectAreaLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/RectAreaLight",
             "params": [
                 {
                     "name": "color",
@@ -1655,7 +1675,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\lights\\SpotLight.js",
             "line": 3,
-            "description": "Same as THREE.SpotLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/SpotLight\n\nSpotLight has a target that is always represented in words coordinates, and can be moved to change where the light is pointing at.",
+            "description": "A SpotLight emit light from a point in a specific direction in a cone volume.\n\nSpotLight has a target that is always represented in words coordinates, and can be moved to change where the light is pointing at.\n\nBased on THREE.SpotLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/SpotLight",
             "params": [
                 {
                     "name": "color",
@@ -1731,7 +1751,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
             "line": 3,
-            "description": "SkinnedMesh is a mesh that has a Skeleton attached.\n\nA skeleton contains bones that are used to animate the vertices of the geometry.\n\nBased on THREE.SkinnedMesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh",
+            "description": "SkinnedMesh is a Mesh that has a Skeleton attached.\n\nA skeleton contains bones that are used to animate the vertices of the geometry.\n\nBased on THREE.SkinnedMesh documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Objects/SkinnedMesh",
             "params": [
                 {
                     "name": "geometry",
@@ -2560,6 +2580,35 @@
             "line": 3,
             "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3",
             "is_constructor": 1
+        },
+        "Tree": {
+            "name": "Tree",
+            "shortname": "Tree",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Math",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
+            "line": 3,
+            "description": "Tree structure used to represent Trees.\n\nEvery tree stores Trees as children and have a parent children.\n\nIf the parent is null then the Tree is the root."
+        },
+        "TreeUtils": {
+            "name": "TreeUtils",
+            "shortname": "TreeUtils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Math",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
+            "line": 3,
+            "description": "TreeUtils used to compare Tree.\n\nCan also be used to compare Object structure.",
+            "static": 1
         },
         "ArraybufferUtils": {
             "name": "ArraybufferUtils",
@@ -5078,7 +5127,7 @@
             "line": 85,
             "description": "Default WebAudio listener shared by audio emitters.",
             "itemtype": "attribute",
-            "name": "listenet",
+            "name": "listener",
             "type": "{WebAudioListener}",
             "class": "AudioEmitter",
             "module": "Audio"
@@ -6292,7 +6341,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\DirectionalLight.js",
-            "line": 26,
+            "line": 31,
             "description": "Update light shadow map atributtes at runtime",
             "itemtype": "method",
             "name": "updateShadowMap",
@@ -6301,7 +6350,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\PointLight.js",
-            "line": 29,
+            "line": 32,
             "description": "Update light shadow map atributtes at runtime",
             "itemtype": "method",
             "name": "updateShadowMap",
@@ -6310,7 +6359,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\RectAreaLight.js",
-            "line": 24,
+            "line": 26,
             "description": "Create JSON description",
             "itemtype": "method",
             "name": "toJSON",
@@ -6513,7 +6562,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\SpotLight.js",
-            "line": 35,
+            "line": 37,
             "description": "SpotLight looks to the target object coordinates.\n\nThe target object should always be at the scene root.",
             "itemtype": "method",
             "name": "setTarget",
@@ -6529,7 +6578,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\SpotLight.js",
-            "line": 48,
+            "line": 50,
             "description": "Update light shadow map atributtes at runtime.",
             "itemtype": "method",
             "name": "updateShadowMap",
@@ -6538,7 +6587,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\SpotLight.js",
-            "line": 60,
+            "line": 62,
             "description": "Serialize SpotLight data to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -6951,7 +7000,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
             "line": 198,
-            "description": "Serialize data to JSON.",
+            "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -7027,7 +7076,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "line": 173,
-            "description": "Serialize object as JSON.",
+            "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -7754,7 +7803,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
             "line": 572,
-            "description": "Serialize object as JSON.",
+            "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -9460,7 +9509,27 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 118,
+            "line": 113,
+            "description": "Folded attribute is used only for editing, if true the object shows as folded in the object explorer.",
+            "itemtype": "property",
+            "name": "folded",
+            "type": "{boolean}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "line": 120,
+            "description": "Hidden objects do not show in the editor.",
+            "itemtype": "property",
+            "name": "hidden",
+            "type": "{boolean}",
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "line": 127,
             "description": "Initialize the object.",
             "itemtype": "method",
             "name": "initialize",
@@ -9469,7 +9538,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 131,
+            "line": 140,
             "description": "Update the object state.",
             "itemtype": "method",
             "name": "update",
@@ -9478,7 +9547,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 144,
+            "line": 153,
             "description": "Disposes the object (to avoid memory leaks).",
             "itemtype": "method",
             "name": "dispose",
@@ -9487,7 +9556,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 157,
+            "line": 166,
             "description": "Add object as children of this object above the indicated children",
             "itemtype": "method",
             "name": "addAbove",
@@ -9508,7 +9577,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 194,
+            "line": 203,
             "description": "Add object as children of this object bellow the indicated children",
             "itemtype": "method",
             "name": "addBellow",
@@ -9529,7 +9598,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 231,
+            "line": 240,
             "description": "Remove all children from the object.",
             "itemtype": "method",
             "name": "removeAll",
@@ -9538,7 +9607,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 244,
+            "line": 253,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -9551,7 +9620,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 255,
+            "line": 264,
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
             "name": "destroy",
@@ -9560,8 +9629,8 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 276,
-            "description": "Serialize object as JSON.",
+            "line": 285,
+            "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [
@@ -9590,7 +9659,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 417,
+            "line": 426,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -9606,7 +9675,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 423,
+            "line": 432,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -9622,7 +9691,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 429,
+            "line": 438,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -9638,7 +9707,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 435,
+            "line": 444,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -9654,7 +9723,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 441,
+            "line": 450,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -9670,7 +9739,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 447,
+            "line": 456,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -9686,7 +9755,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 453,
+            "line": 462,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -9702,7 +9771,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 459,
+            "line": 468,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -9723,7 +9792,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 466,
+            "line": 475,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -9739,7 +9808,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 472,
+            "line": 481,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -9760,7 +9829,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 479,
+            "line": 488,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -9779,7 +9848,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 485,
+            "line": 494,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -9795,7 +9864,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 491,
+            "line": 500,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldRotation",
@@ -9811,7 +9880,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 497,
+            "line": 506,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -9827,7 +9896,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 503,
+            "line": 512,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -9843,7 +9912,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 509,
+            "line": 518,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -9864,7 +9933,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 516,
+            "line": 525,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -9880,7 +9949,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 522,
+            "line": 531,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -9896,7 +9965,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 528,
+            "line": 537,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -9973,6 +10042,147 @@
             "module": "Math"
         },
         {
+            "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
+            "line": 21,
+            "description": "Add new element to tree.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "tree",
+                    "description": "Object to be added to the three, if object is not a tree a new tree is created automatically.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
+            "line": 44,
+            "description": "Remove element from tree.",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "tree",
+                    "description": "Element to be removed from the three",
+                    "type": "Tree"
+                }
+            ],
+            "class": "Tree",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
+            "line": 64,
+            "description": "Clone tree recursively.\n\nThe cloned tree has the same UUID.",
+            "itemtype": "method",
+            "name": "clone",
+            "return": {
+                "description": "Cloned tree.",
+                "type": "Tree"
+            },
+            "class": "Tree",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
+            "line": 86,
+            "description": "Print tree into console, recursively.",
+            "itemtype": "method",
+            "name": "print",
+            "params": [
+                {
+                    "name": "level",
+                    "description": "Recursive parameter, not required.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Tree",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
+            "line": 13,
+            "description": "Flag used to indicate ADDED diff.",
+            "itemtype": "attribute",
+            "name": "DIFF_ADDED",
+            "type": "{Number}",
+            "class": "TreeUtils",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
+            "line": 21,
+            "description": "Flag used to indicate REMOVED diff.",
+            "itemtype": "attribute",
+            "name": "DIFF_REMOVED",
+            "type": "{Number}",
+            "class": "TreeUtils",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
+            "line": 29,
+            "description": "Flag used to indicate MOVED diff.",
+            "itemtype": "attribute",
+            "name": "DIFF_MOVED",
+            "type": "{Number}",
+            "class": "TreeUtils",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
+            "line": 37,
+            "description": "Compare two trees and return list of changes.\n\nA is compared to B, A is the oldest version of tree and B the newest.\n\nElements inside Trees are compared using their UUID.\n\nThe array returned from this method contains objects in the format {status:<Operation>, uuid: <UUID>, from: <Tree>, to: <Tree>}",
+            "static": 1,
+            "itemtype": "method",
+            "name": "compare",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Old version of Tree.",
+                    "type": "Tree"
+                },
+                {
+                    "name": "b",
+                    "description": "New version of Tree.",
+                    "type": "Tree"
+                },
+                {
+                    "name": "diffs",
+                    "description": "Recursive parameter not required.",
+                    "type": "Array"
+                },
+                {
+                    "name": "pathA",
+                    "description": "Recursive parameter not required.",
+                    "type": "Array"
+                },
+                {
+                    "name": "pathB",
+                    "description": "Recursive parameter not required.",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "Array with diffs between A and B.",
+                "type": "Array"
+            },
+            "class": "TreeUtils",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
+            "line": 159,
+            "description": "Unit test for tree comparison.\n\nPrints information into the console.",
+            "itemtype": "method",
+            "name": "test",
+            "class": "TreeUtils",
+            "module": "Math"
+        },
+        {
             "file": "..\\..\\source\\core\\utils\\ArraybufferUtils.js",
             "line": 12,
             "description": "Create arraybuffer from binary string",
@@ -10035,6 +10245,16 @@
         {
             "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
             "line": 12,
+            "description": "Charset used to encode binary data.",
+            "itemtype": "attribute",
+            "name": "encoding",
+            "type": "{String}",
+            "class": "Base64Utils",
+            "module": "BinaryData"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
+            "line": 20,
             "description": "Remove base64 header from data.\n\nUsefull for removing the heander from image, audio, video, etc.",
             "itemtype": "method",
             "name": "removeHeader",
@@ -10054,7 +10274,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
-            "line": 26,
+            "line": 34,
             "description": "Get the file format present in the base64 string.",
             "itemtype": "method",
             "name": "getFileFormat",
@@ -10074,7 +10294,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
-            "line": 41,
+            "line": 49,
             "description": "Create base64 string from arraybuffer.",
             "itemtype": "method",
             "name": "fromArraybuffer",
@@ -10094,7 +10314,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
-            "line": 97,
+            "line": 104,
             "description": "Create base64 string from binary string.",
             "itemtype": "method",
             "name": "fromBinaryString",
@@ -10459,7 +10679,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 12,
+            "line": 11,
             "description": "Get all fonts in a object and childs",
             "itemtype": "method",
             "name": "getFonts",
@@ -10484,7 +10704,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 41,
+            "line": 40,
             "description": "Get all audio files in object and childs",
             "itemtype": "method",
             "name": "getAudio",
@@ -10509,7 +10729,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 70,
+            "line": 69,
             "description": "Get all materials in object and childs",
             "itemtype": "method",
             "name": "getMaterials",
@@ -10535,7 +10755,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 133,
+            "line": 132,
             "description": "Get all textures in object and childs",
             "itemtype": "method",
             "name": "getTextures",
@@ -10560,7 +10780,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 217,
+            "line": 216,
             "description": "Get object scene.",
             "itemtype": "method",
             "name": "getScene",
@@ -10580,7 +10800,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 240,
+            "line": 239,
             "description": "Get object tree root.\n\nFor a object placed inside a running scene the root is always the program.",
             "itemtype": "method",
             "name": "getRoot",
@@ -10600,7 +10820,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 261,
+            "line": 260,
             "description": "Set object and all its children matrixAutoUpdate value",
             "itemtype": "method",
             "name": "setMatrixAutoUpdate",
@@ -10621,7 +10841,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 278,
+            "line": 277,
             "description": "Set object and all children to receive shadows",
             "itemtype": "method",
             "name": "setShadowReceiving",
@@ -10642,7 +10862,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 295,
+            "line": 294,
             "description": "Set object and all children to cast shadows",
             "itemtype": "method",
             "name": "setShadowCasting",
@@ -10663,7 +10883,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 312,
+            "line": 311,
             "description": "Check if object is child of another object",
             "itemtype": "method",
             "name": "isChildOf",

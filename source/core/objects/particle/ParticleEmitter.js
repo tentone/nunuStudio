@@ -171,7 +171,7 @@ ParticleEmitter.prototype.raycast = function()
 };
 
 /**
- * Serialize object as JSON.
+ * Serialize object to JSON.
  *
  * @method toJSON
  * @param {Object} meta

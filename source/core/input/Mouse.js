@@ -97,7 +97,7 @@ function Mouse()
 		}]);
 	}
 
-	//Touchscreen input
+	//Touchscreen input events
 	if("ontouchstart" in window || navigator.msMaxTouchPoints > 0)
 	{
 		//Auxiliar variables to calculate touch delta
@@ -136,7 +136,7 @@ function Mouse()
 			lastTouch.set(touch.clientX, touch.clientY);
 		}]);
 	}
-	//Input
+	//Mouse input events
 	else
 	{
 		//Move

@@ -10,6 +10,14 @@
 function Base64Utils(){}
 
 /**
+ * Charset used to encode binary data.
+ *
+ * @attribute encoding
+ * @type {String}
+ */
+Base64Utils.encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+/**
  * Remove base64 header from data.
  * 
  * Usefull for removing the heander from image, audio, video, etc.
@@ -47,7 +55,6 @@ Base64Utils.getFileFormat = function(data)
  */
 Base64Utils.fromArraybuffer = function(arraybuffer)
 {
-	var encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 	var base64 = "";
 
 	var view = new Uint8Array(arraybuffer);
@@ -67,7 +74,7 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
 		c = (chunk & 4032) >> 6;
 		d = chunk & 63;
 
-		base64 += encoding[a] + encoding[b] + encoding[c] + encoding[d]
+		base64 += Base64Utils.encoding[a] + Base64Utils.encoding[b] + Base64Utils.encoding[c] + Base64Utils.encoding[d]
 	}
 
 	//Remaining bytes
@@ -78,7 +85,7 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
 		a = (chunk & 252) >> 2;
 		b = (chunk & 3) << 4;
 
-		base64 += encoding[a] + encoding[b] + "==";
+		base64 += Base64Utils.encoding[a] + Base64Utils.encoding[b] + "==";
 	}
 	else if(remainder === 2)
 	{
@@ -88,7 +95,7 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
 		b = (chunk & 1008) >> 4;
 		c = (chunk & 15) << 2;
 
-		base64 += encoding[a] + encoding[b] + encoding[c] + "=";
+		base64 += Base64Utils.encoding[a] + Base64Utils.encoding[b] + Base64Utils.encoding[c] + "=";
 	}
 
 	return base64;
@@ -103,7 +110,6 @@ Base64Utils.fromArraybuffer = function(arraybuffer)
  */
 Base64Utils.fromBinaryString = function(str)
 {
-	var encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 	var base64 = "";
 	var remainder = str.length % 3;
 	var length = str.length - remainder;
@@ -116,18 +122,18 @@ Base64Utils.fromBinaryString = function(str)
 		b = str.charCodeAt(i + 1);
 		c = str.charCodeAt(i + 2);
 
-		base64 += encoding.charAt(a >> 2);
-		base64 += encoding.charAt(((a & 0x3) << 4) | ((b & 0xF0) >> 4));
-		base64 += encoding.charAt(((b & 0xF) << 2) | ((c & 0xC0) >> 6));
-		base64 += encoding.charAt(c & 0x3F);
+		base64 += Base64Utils.encoding.charAt(a >> 2);
+		base64 += Base64Utils.encoding.charAt(((a & 0x3) << 4) | ((b & 0xF0) >> 4));
+		base64 += Base64Utils.encoding.charAt(((b & 0xF) << 2) | ((c & 0xC0) >> 6));
+		base64 += Base64Utils.encoding.charAt(c & 0x3F);
 	}
 	
 	if(remainder === 1)
 	{
 		a = str.charCodeAt(i) & 0xff;
 
-		base64 += encoding.charAt(a >> 2);
-		base64 += encoding.charAt((a & 0x3) << 4);
+		base64 += Base64Utils.encoding.charAt(a >> 2);
+		base64 += Base64Utils.encoding.charAt((a & 0x3) << 4);
 		base64 += "==";
 	}
 	else if(remainder === 2)
@@ -135,9 +141,9 @@ Base64Utils.fromBinaryString = function(str)
 		a = str.charCodeAt(i) & 0xff;
 		b = str.charCodeAt(i + 1);
 
-		base64 += encoding.charAt(a >> 2);
-		base64 += encoding.charAt(((a & 0x3) << 4) | ((b & 0xF0) >> 4));
-		base64 += encoding.charAt((b & 0xF) << 2);
+		base64 += Base64Utils.encoding.charAt(a >> 2);
+		base64 += Base64Utils.encoding.charAt(((a & 0x3) << 4) | ((b & 0xF0) >> 4));
+		base64 += Base64Utils.encoding.charAt((b & 0xF) << 2);
 		base64 += "=";
 	}
 

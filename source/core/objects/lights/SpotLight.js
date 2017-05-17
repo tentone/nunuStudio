@@ -1,10 +1,12 @@
 "use strict";
 
 /**
- * Same as THREE.SpotLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/SpotLight
- *
+ * A SpotLight emit light from a point in a specific direction in a cone volume.
+ * 
  * SpotLight has a target that is always represented in words coordinates, and can be moved to change where the light is pointing at.
  * 
+ * Based on THREE.SpotLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/SpotLight
+ *
  * @param {Number} color Light color in hex RGB
  * @param {Number} intensity Light intensity
  * @param {Number} distance SpotLight maximum range

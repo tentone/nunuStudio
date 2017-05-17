@@ -1,7 +1,10 @@
 "use strict";
 
 /**
- * Same as THREE.PointLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/PointLight
+ * PointLights emit light from a single point in all directions.
+ * 
+ * Based on THREE.PointLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/PointLight
+ * 
  * @param {Number} hex Light color in hex RGB
  * @param {Number} intensity Light intensity
  * @param {Number} distance Maximum PointLight range

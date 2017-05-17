@@ -3,7 +3,7 @@
 /**
  * Bone represents a bone joint for skeletal animation.
  *
- * More information about bones can be found here https://threejs.org/docs/index.html?q=bon#Reference/Objects/Bone.
+ * More information about Bone can be found here https://threejs.org/docs/index.html?q=bon#Reference/Objects/Bone.
  *
  * @class Bone
  * @module Animation

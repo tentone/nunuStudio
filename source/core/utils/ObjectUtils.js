@@ -6,7 +6,6 @@
  * @class ObjectUtils
  * @static
  */
-
 function ObjectUtils(){}
 
 /**
