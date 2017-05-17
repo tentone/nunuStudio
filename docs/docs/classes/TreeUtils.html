@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Lights</title>  
+	<title>nunuStudio TreeUtils</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -154,66 +154,314 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Lights Module</h1>
-						<div class="box clearfix meta">
+						<h1>TreeUtils Class</h1>
+						<div class="box meta">
 						
 						
+						
+									Module: <a href="../modules/Math.html">Math</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Ambient lights are used to create base ilumanition for the scene.</p>
-						<p>They are not influenced by position, scale or rotation.</p>
-						<p>Based on THREE.AmbientLight documentation for the object can be found at <a href="https://threejs.org/docs/index.html#Reference/Lights/AmbientLight">https://threejs.org/docs/index.html#Reference/Lights/AmbientLight</a></p>
+							<p>TreeUtils used to compare Tree.</p>
+						<p>Can also be used to compare Object structure.</p>
 						
 						</div>
 						
 						
-						<div class="yui3-g">
-							<div class="yui3-u-1-2">
-									<p>This namespace provides the following classes:</p>
+						<div id="classdocs" class="tabview">
+							<ul class="api-class-tabs">
+								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<ul class="module-classes">
-										<li class="module-class">
-											<a href="../classes/AmbientLight.html">
-												AmbientLight
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/DirectionalLight.html">
-												DirectionalLight
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/HemisphereLight.html">
-												HemisphereLight
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/PointLight.html">
-												PointLight
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/RectAreaLight.html">
-												RectAreaLight
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/Sky.html">
-												Sky
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/SpotLight.html">
-												SpotLight
-											</a>
-										</li>
-									</ul>
-							</div>
+									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+							</ul>
 						
-							<div class="yui3-u-1-2">
+							<div>
+								<div id="index" class="api-class-tabpanel index">
+									<h2 class="off-left">Item Index</h2>
+						
+										<div class="index-section methods">
+											<h3>Methods</h3>
+						
+											<ul class="index-list methods">
+													<li class="index-item method">
+														<a href="#method_compare">compare</a>
+						
+															<span class="flag static">static</span>
+													</li>
+													<li class="index-item method">
+														<a href="#method_test">test</a>
+						
+													</li>
+											</ul>
+										</div>
+						
+						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs">
+													<li class="index-item attr">
+														<a href="#attr_DIFF_ADDED">DIFF_ADDED</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_DIFF_MOVED">DIFF_MOVED</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_DIFF_REMOVED">DIFF_REMOVED</a>
+													</li>
+											</ul>
+										</div>
+						
+								</div>
+						
+									<div id="methods" class="api-class-tabpanel">
+										<h2 class="off-left">Methods</h2>
+						
+											<div id="method_compare" class="method item">
+												<h3 class="name"><code>compare</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>a</code>
+															</li>
+															<li class="arg">
+																	<code>b</code>
+															</li>
+															<li class="arg">
+																	<code>diffs</code>
+															</li>
+															<li class="arg">
+																	<code>pathA</code>
+															</li>
+															<li class="arg">
+																	<code>pathB</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Array</span>
+													</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Compare two trees and return list of changes.</p>
+											<p>A is compared to B, A is the oldest version of tree and B the newest.</p>
+											<p>Elements inside Trees are compared using their UUID.</p>
+											<p>The array returned from this method contains objects in the format {status:<Operation>, uuid: <UUID>, from: <Tree>, to: <Tree>}</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">a</code>
+																	<span class="type"><a href="../classes/Tree.html" class="crosslink">Tree</a></span>
+											
+											
+																<div class="param-description">
+																	<p>Old version of Tree.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">b</code>
+																	<span class="type"><a href="../classes/Tree.html" class="crosslink">Tree</a></span>
+											
+											
+																<div class="param-description">
+																	<p>New version of Tree.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">diffs</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	<p>Recursive parameter not required.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">pathA</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	<p>Recursive parameter not required.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">pathB</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	<p>Recursive parameter not required.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Array</span>:
+																<p>Array with diffs between A and B.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_test" class="method item">
+												<h3 class="name"><code>test</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Unit test for tree comparison.</p>
+											<p>Prints information into the console.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
+						
+						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_DIFF_ADDED" class="attr item">
+												<a name="config_DIFF_ADDED"></a> 
+												<h3 class="name"><code>DIFF_ADDED</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Flag used to indicate ADDED diff.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_DIFF_MOVED" class="attr item">
+												<a name="config_DIFF_MOVED"></a> 
+												<h3 class="name"><code>DIFF_MOVED</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Flag used to indicate MOVED diff.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_DIFF_REMOVED" class="attr item">
+												<a name="config_DIFF_REMOVED"></a> 
+												<h3 class="name"><code>DIFF_REMOVED</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Flag used to indicate REMOVED diff.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
+						
 							</div>
 						</div>
 					</div>

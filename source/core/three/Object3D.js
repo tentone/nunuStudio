@@ -109,10 +109,19 @@
  * @type {Object}
 */
 
-//Folded attribute
+
+/**
+ * Folded attribute is used only for editing, if true the object shows as folded in the object explorer.
+ * @property folded
+ * @type {boolean}
+*/
 THREE.Object3D.prototype.folded = false;
 
-//Hidden attribute (hidden objects are not serialized and dont show up in the editor)
+/**
+ * Hidden objects do not show in the editor.
+ * @property hidden
+ * @type {boolean}
+*/
 THREE.Object3D.prototype.hidden = false;
 
 /**
@@ -274,7 +283,7 @@ THREE.Object3D.prototype.destroy = function()
 };
 
 /**
- * Serialize object as JSON.
+ * Serialize object to JSON.
  * @method toJSON
  * @param {Object} meta
  * @param {Function} resourceAccess

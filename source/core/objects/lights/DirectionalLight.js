@@ -1,7 +1,12 @@
 "use strict";
 
 /**
- * Same as THREE.DirectionalLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/DirectionalLight
+ * A light that gets emitted in a specific direction.
+ * 
+ * This light will behave as though it is infinitely far away and the rays produced from it are all parallel.
+ * 
+ * Based on THREE.DirectionalLight documentation for the object can be found at https://threejs.org/docs/index.html#Reference/Lights/DirectionalLight
+ * 
  * @param {Number} hex Light color in hex RGB
  * @param {Number} intensity Light intensity
  * @class DirectionalLight

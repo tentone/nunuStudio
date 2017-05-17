@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Lights</title>  
+	<title>nunuStudio Tree</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -154,66 +154,263 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Lights Module</h1>
-						<div class="box clearfix meta">
+						<h1>Tree Class</h1>
+						<div class="box meta">
 						
 						
+						
+									Module: <a href="../modules/Math.html">Math</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Ambient lights are used to create base ilumanition for the scene.</p>
-						<p>They are not influenced by position, scale or rotation.</p>
-						<p>Based on THREE.AmbientLight documentation for the object can be found at <a href="https://threejs.org/docs/index.html#Reference/Lights/AmbientLight">https://threejs.org/docs/index.html#Reference/Lights/AmbientLight</a></p>
+							<p>Tree structure used to represent Trees.</p>
+						<p>Every tree stores Trees as children and have a parent children.</p>
+						<p>If the parent is null then the Tree is the root.</p>
 						
 						</div>
 						
 						
-						<div class="yui3-g">
-							<div class="yui3-u-1-2">
-									<p>This namespace provides the following classes:</p>
+						<div id="classdocs" class="tabview">
+							<ul class="api-class-tabs">
+								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<ul class="module-classes">
-										<li class="module-class">
-											<a href="../classes/AmbientLight.html">
-												AmbientLight
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/DirectionalLight.html">
-												DirectionalLight
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/HemisphereLight.html">
-												HemisphereLight
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/PointLight.html">
-												PointLight
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/RectAreaLight.html">
-												RectAreaLight
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/Sky.html">
-												Sky
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/SpotLight.html">
-												SpotLight
-											</a>
-										</li>
-									</ul>
-							</div>
+									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+							</ul>
 						
-							<div class="yui3-u-1-2">
+							<div>
+								<div id="index" class="api-class-tabpanel index">
+									<h2 class="off-left">Item Index</h2>
+						
+										<div class="index-section methods">
+											<h3>Methods</h3>
+						
+											<ul class="index-list methods">
+													<li class="index-item method">
+														<a href="#method_add">add</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_clone">clone</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_print">print</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_remove">remove</a>
+						
+													</li>
+											</ul>
+										</div>
+						
+						
+						
+								</div>
+						
+									<div id="methods" class="api-class-tabpanel">
+										<h2 class="off-left">Methods</h2>
+						
+											<div id="method_add" class="method item">
+												<h3 class="name"><code>add</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>tree</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Add new element to tree.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">tree</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	<p>Object to be added to the three, if object is not a tree a new tree is created automatically.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_clone" class="method item">
+												<h3 class="name"><code>clone</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type"><a href="../classes/Tree.html" class="crosslink">Tree</a></span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Clone tree recursively.</p>
+											<p>The cloned tree has the same UUID.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type"><a href="../classes/Tree.html" class="crosslink">Tree</a></span>:
+																<p>Cloned tree.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_print" class="method item">
+												<h3 class="name"><code>print</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>level</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Print tree into console, recursively.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">level</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Recursive parameter, not required.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_remove" class="method item">
+												<h3 class="name"><code>remove</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>tree</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Remove element from tree.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">tree</code>
+																	<span class="type"><a href="../classes/Tree.html" class="crosslink">Tree</a></span>
+											
+											
+																<div class="param-description">
+																	<p>Element to be removed from the three</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+									</div>
+						
+						
+						
 							</div>
 						</div>
 					</div>

@@ -196,7 +196,7 @@ CubeCamera.prototype.dispose = function()
 };
 
 /**
- * Serialize data to JSON.
+ * Serialize object to JSON.
  *
  * @method toJSON
  * @param {Object} meta Meta data.

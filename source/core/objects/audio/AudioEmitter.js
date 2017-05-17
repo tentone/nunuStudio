@@ -85,7 +85,7 @@ function AudioEmitter(audio)
 /**
  * Default WebAudio listener shared by audio emitters.
  *
- * @attribute listenet
+ * @attribute listener
  * @type {WebAudioListener}
  */
 AudioEmitter.listener = new THREE.AudioListener();

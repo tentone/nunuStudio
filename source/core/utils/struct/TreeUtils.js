@@ -1,91 +1,57 @@
 "use strict";
 
-function Tree(value)
-{
-	this.value = (value !== undefined) ? value : null;
-	this.uuid = Math.ceil(Math.random() * 65536);
-	this.parent = null;
-	this.children = [];
-}
-
-//Add element to tree
-Tree.prototype.add = function(tree)
-{
-	if(tree instanceof Tree)
-	{
-		this.children.push(tree);
-		tree.parent = this;
-		return tree;
-	}
-	else
-	{
-		var tree = new Tree(tree);
-		tree.parent = this;
-		this.children.push(tree);
-		return tree;
-	}	
-};
-
-//Remove element from tree
-Tree.prototype.remove = function(tree)
-{
-	var uuid = (typeof tree === "number") ? tree : tree.uuid;
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		if(this.children[i].uuid === uuid)
-		{
-			this.children.splice(i, 1);
-			return;
-		}
-	}
-};
-
-//Clone tree (keeps tree children uuid)
-Tree.prototype.clone = function(tree)
-{
-	var tree = new Tree();
-	tree.uuid = this.uuid;
-	tree.value = this.value;
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		tree.add(this.children[i].clone());
-	}
-
-	return tree;
-};
-
-//Print tree
-Tree.prototype.print = function(level)
-{
-	if(level === undefined)
-	{
-		level = 1;
-	}
-
-	var space = "";
-	for(var i = level - 1; i > 0; i--)
-	{
-		space += "----";
-	}
-	space += "--->";
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		console.log(space + this.children[i].value + "(" + this.children[i].uuid + ")");
-		this.children[i].print(level + 1);
-	}
-};
-
+/**
+ * TreeUtils used to compare Tree.
+ *
+ * Can also be used to compare Object structure.
+ *
+ * @static
+ * @class TreeUtils
+ */
 function TreeUtils(){}
 
-//Tree changes code
+/**
+ * Flag used to indicate ADDED diff.
+ * 
+ * @attribute DIFF_ADDED
+ * @type {Number}
+ */
 TreeUtils.DIFF_ADDED = 0;
+
+/**
+ * Flag used to indicate REMOVED diff.
+ * 
+ * @attribute DIFF_REMOVED
+ * @type {Number}
+ */
 TreeUtils.DIFF_REMOVED = 1;
+
+/**
+ * Flag used to indicate MOVED diff.
+ * 
+ * @attribute DIFF_MOVED
+ * @type {Number}
+ */
 TreeUtils.DIFF_MOVED = 2;
 
-//Compare two trees and return list of changes (a is the oldest version of tree and b the newest)
+/**
+ * Compare two trees and return list of changes.
+ *
+ * A is compared to B, A is the oldest version of tree and B the newest.
+ *
+ * Elements inside Trees are compared using their UUID.
+ *
+ * The array returned from this method contains objects in the format {status:<Operation>, uuid: <UUID>, from: <Tree>, to: <Tree>}
+ *
+ * @static
+ * @method compare
+ * @param {Tree} a Old version of Tree.
+ * @param {Tree} b New version of Tree.
+ * @param {Array} diffs Recursive parameter not required.
+ * @param {Array} pathA Recursive parameter not required.
+ * @param {Array} pathB Recursive parameter not required.
+ * @return {Array} Array with diffs between A and B.
+ */
 TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 {
 	//Differences array
@@ -190,6 +156,13 @@ TreeUtils.compare = function(a, b, diffs, pathA, pathB)
 	return diffs;
 };
 
+/**
+ * Unit test for tree comparison.
+ *
+ * Prints information into the console.
+ * 
+ * @method test
+ */
 TreeUtils.test = function()
 {
 	console.log("Tree Comparison");
