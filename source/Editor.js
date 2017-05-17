@@ -151,6 +151,7 @@ include("lib/three/exporters/STLBinaryExporter.js");
 include("lib/jscookie.min.js");
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
+include("lib/jszip.min.js");
 include("lib/quickhull.js");
 
 include("editor/style.css");
@@ -1418,6 +1419,32 @@ Editor.exportWebProject = function(dir)
 	
 	Editor.saveProgram(dir + "/app.isp", true, true, true);
 };
+
+//Export web project as a zip package
+Editor.exportWebProjectZip = function(fname)
+{
+	var zip = new JSZip();
+	zip.file("index.html", FileSystem.readFile(Editor.runtimePath + "index.html"));
+	zip.file("nunu.min.js", FileSystem.readFile("nunu.min.js"));
+	zip.file("app.isp", JSON.stringify(Editor.program.toJSON()));
+	zip.file("logo.png", FileSystem.readFileBase64(Editor.runtimePath + "logo.png"), {base64: true});
+	zip.file("fullscreen.png", FileSystem.readFileBase64(Editor.runtimePath + "fullscreen.png"), {base64: true});
+	zip.file("vr.png", FileSystem.readFileBase64(Editor.runtimePath + "vr.png"), {base64: true});
+
+	zip.generateAsync({type:"blob"}).then(function(content)
+	{
+		var download = document.createElement("a");
+		download.download = fname;
+		download.href = window.URL.createObjectURL(content);
+		download.style.display = "none";
+		download.onclick = function()
+		{
+			document.body.removeChild(this);
+		};
+		document.body.appendChild(download);
+		download.click();
+	});
+}
 
 //Export NWJS project
 Editor.exportNWJSProject = function(dir)

@@ -178,11 +178,11 @@ FileSystem.writeFile = function(fname, data)
 		var download = document.createElement("a");
 		download.download = fname;
 		download.href = window.URL.createObjectURL(blob);
+		download.style.display = "none";
 		download.onclick = function()
 		{
 			document.body.removeChild(this);
 		};
-		download.style.display = "none";
 		document.body.appendChild(download);
 
 		download.click();
