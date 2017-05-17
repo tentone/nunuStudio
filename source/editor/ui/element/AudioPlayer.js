@@ -52,6 +52,7 @@ function AudioPlayer(parent)
 
 	//Progress
 	this.progress = document.createElement("div");
+	this.progress.style.pointerEvents = "none";
 	this.progress.style.position = "absolute";
 	this.progress.style.backgroundColor = Editor.theme.audioProgress;
 	this.progress.style.height = "100%";
@@ -62,6 +63,7 @@ function AudioPlayer(parent)
 	this.scrubber.style.position = "absolute";
 	this.scrubber.style.backgroundColor = Editor.theme.audioScrubber;
 	this.scrubber.style.cursor = "pointer";
+	this.scrubber.style.width = "6px";
 	this.track.appendChild(this.scrubber);
 
 	//Audio source and buffer
@@ -95,9 +97,19 @@ function AudioPlayer(parent)
 		self.seekTime = self.time;
 	};
 
-	this.track.onclick = function()
+	this.track.onclick = function(event)
 	{
-		//TODO <ADD CODE HERE>
+		var progress = event.layerX / this.offsetWidth;
+		self.time = progress * self.buffer.duration;
+
+		if(self.playing)
+		{
+			self.play(self.time);
+		}
+
+		progress *= 100;
+		self.progress.style.width = progress + "%";
+		self.scrubber.style.left = progress + "%";
 	};
 
 	this.onMouseMove = function(event)
@@ -343,7 +355,6 @@ AudioPlayer.prototype.updateInterface = function()
 	this.track.style.height = (this.size.y * 0.2) + "px";
 
 	//Scrubber
-	this.scrubber.style.width = "6px";
 	this.scrubber.style.height = (this.size.y * 0.8) + "px";
 	this.scrubber.style.top = (-this.size.y * 0.3) + "px";
 };
