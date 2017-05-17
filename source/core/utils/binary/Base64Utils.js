@@ -4,7 +4,7 @@
  * Base64Utils contains methods to convert from and to Base64 binary format.
  *
  * @class Base64Utils
- * @module BinaryData
+ * @module BinaryUtils
  * @static
  */
 function Base64Utils(){}

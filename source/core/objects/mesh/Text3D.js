@@ -139,6 +139,8 @@ Text3D.prototype.updateText = function()
 			bevelSize: this.bevelSize,
 			bevelThickness: this.bevelThickness
 		});
+
+		
 	}
 };
 

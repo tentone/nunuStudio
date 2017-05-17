@@ -6,6 +6,7 @@
  * It is based on the original Mesh2Shape converted by @donmccurdy.
  * 
  * @author Don McCurdy (https://github.com/donmccurdy)
+ * @author tentone
  * @class Mesh2shape
  * @static
  * @module Physics

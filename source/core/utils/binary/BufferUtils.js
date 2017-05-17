@@ -4,7 +4,7 @@
  * BufferUtils contains methods to convert from and to Node.js Buffer binary format
  * 
  * @class BufferUtils
- * @module BinaryData
+ * @module BinaryUtils
  * @static
  */
 function BufferUtils(){}

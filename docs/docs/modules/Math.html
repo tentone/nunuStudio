@@ -106,7 +106,7 @@
 								<li><a href="../modules/Animation.html">Animation</a></li>
 								<li><a href="../modules/Animations.html">Animations</a></li>
 								<li><a href="../modules/Audio.html">Audio</a></li>
-								<li><a href="../modules/BinaryData.html">BinaryData</a></li>
+								<li><a href="../modules/BinaryUtils.html">BinaryUtils</a></li>
 								<li><a href="../modules/Cameras.html">Cameras</a></li>
 								<li><a href="../modules/Core.html">Core</a></li>
 								<li><a href="../modules/Devices.html">Devices</a></li>
@@ -125,6 +125,7 @@
 								<li><a href="../modules/Sprite.html">Sprite</a></li>
 								<li><a href="../modules/Textures.html">Textures</a></li>
 								<li><a href="../modules/THREE.html">THREE</a></li>
+								<li><a href="../modules/Utils.html">Utils</a></li>
 								<li><a href="../modules/VirtualReality.html">VirtualReality</a></li>
 							</ul>
 						</div>
@@ -163,7 +164,14 @@
 						
 						
 						<div class="box intro">
-							<p>MathUtils contains auxiliar values and function to help with mathematical operations.</p>
+							<p>Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:</p>
+						<ul>
+						<li>A point in 3D space.</li>
+						<li>A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).</li>
+						<li>Any arbitrary ordered triplet of numbers.</li>
+						</ul>
+						<p>There are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.</p>
+						<p>Original documentation for Vector3 can be found here <a href="https://threejs.org/docs/index.html#Reference/Math/Vector3">https://threejs.org/docs/index.html#Reference/Math/Vector3</a></p>
 						
 						</div>
 						
@@ -173,21 +181,6 @@
 									<p>This namespace provides the following classes:</p>
 						
 									<ul class="module-classes">
-										<li class="module-class">
-											<a href="../classes/MathUtils.html">
-												MathUtils
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/Tree.html">
-												Tree
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/TreeUtils.html">
-												TreeUtils
-											</a>
-										</li>
 										<li class="module-class">
 											<a href="../classes/Vector3.html">
 												Vector3

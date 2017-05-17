@@ -370,6 +370,8 @@ function ParticleEditor(parent, closeable, container, index)
 	}, "spread");
 	this.form.add(this.angle);
 	this.form.nextRow();
+
+	//Min angle
 	this.form.addText("Min", true);
 	this.angleMin = new NumberBox(this.form.element);
 	this.angleMin.size.set(50, 18);
@@ -380,6 +382,8 @@ function ParticleEditor(parent, closeable, container, index)
 		self.angle.setRange(min, max);
 	});
 	this.form.add(this.angleMin);
+	
+	//Max angle
 	this.form.addText("Max", true);
 	this.angleMax = new NumberBox(this.form.element);
 	this.angleMax.size.set(50, 18);

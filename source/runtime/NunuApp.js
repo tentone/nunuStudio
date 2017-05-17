@@ -80,11 +80,12 @@ include("core/objects/misc/CubeCamera.js");
 include("core/objects/Program.js");
 include("core/objects/Scene.js");
 
-include("core/utils/Base64Utils.js");
-include("core/utils/ArraybufferUtils.js");
+include("core/utils/binary/Base64Utils.js");
+include("core/utils/binary/ArraybufferUtils.js");
+include("core/utils/binary/BufferUtils.js");
+
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
-include("core/utils/BufferUtils.js");
 include("core/utils/Mesh2shape.js");
 
 /**

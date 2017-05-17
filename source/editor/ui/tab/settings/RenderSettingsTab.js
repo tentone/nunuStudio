@@ -97,9 +97,6 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();
 
-	this.form.addText("");
-	this.form.nextRow();
-
 	//Use project settings
 	this.form.addText("Follow project");
 	this.followProject = new CheckBox(this.form.element);

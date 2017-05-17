@@ -1,6 +1,6 @@
 "use strict";
 
-function Graph(parent)
+function Graph(parent, name, color)
 {
 	//Parent
 	this.parent = (parent !== undefined) ? parent : document.body;
@@ -24,7 +24,9 @@ function Graph(parent)
 	canvas.style.position = "absolute";
 	canvas.style.marginLeft = "30px";
 	this.element.appendChild(canvas);
-	this.graph.push({canvas: canvas, name: "default", color: "#FFFFFF", values: [], buttons: [], onchange: null});
+
+	//Default graph
+	this.graph.push({canvas: canvas, name: (name !== undefined) ? name : "default", color: (color !== undefined) ? color : "#FFFFFF", values: [], buttons: [], onchange: null});
 	
 	//Scale
 	this.scale = [];
