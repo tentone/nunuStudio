@@ -13,13 +13,7 @@
  */
 function Video(url)
 {
-	this.name = "video";
-	this.uuid = THREE.Math.generateUUID();
-	this.type = "Video";
-
-	this.format = "";
-	this.encoding = ""
-	this.data = null;
+	Resource.call(this, "video", "Video");
 
 	if(url !== undefined)
 	{	
@@ -39,6 +33,8 @@ function Video(url)
 		}
 	}
 }
+
+Video.prototype = Object.create(Resource.prototype);
 
 /**
  * Check if a file name refers to a supported video file.
@@ -72,15 +68,13 @@ Video.fileIsVideo = function(file)
  */
 Video.prototype.toJSON = function(meta)
 {
+	var data = Resource.prototype.toJSON.call(this, meta);
+	
 	if(meta.videos[this.uuid] !== undefined)
 	{
 		return meta.videos[this.uuid];
 	}
 
-	var data = {};
-	data.name = this.name;
-	data.uuid = this.uuid;
-	data.type = this.type;
 	data.encoding = this.encoding;
 	data.format = this.format;
 	data.data = this.data;

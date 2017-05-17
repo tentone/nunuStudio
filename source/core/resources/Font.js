@@ -29,13 +29,7 @@
  */
 function Font(url)
 {
-	this.name = "font";
-	this.uuid = THREE.Math.generateUUID();
-	this.type = "Font";
-
-	this.format = "";
-	this.encoding = "";
-	this.data = null;
+	Resource.call(this, "font", "Font");
 
 	this.reversed = false;
 	this.font = null;
@@ -78,6 +72,8 @@ function Font(url)
 		}
 	}
 }
+
+Font.prototype = Object.create(Resource.prototype);
 
 /**
  * Check if a file name refers to a font file.
@@ -296,17 +292,14 @@ Font.prototype.generateShapes = function(text, size, divisions)
  */
 Font.prototype.toJSON = function(meta)
 {
+	var data = Resource.prototype.toJSON.call(this, meta);
+
 	if(meta.fonts[this.uuid] !== undefined)
 	{
 		return meta.fonts[this.uuid];
 	}
 
-	var data = {};
-	data.name = this.name;
-	data.uuid = this.uuid;
-	data.type = this.type;
 	data.encoding = this.encoding;
-
 	data.reversed = this.reversed;
 	
 	if(this.format === "arraybuffer")
