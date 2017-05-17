@@ -4,7 +4,7 @@
  * MathUtils contains auxiliar values and function to help with mathematical operations.
  *
  * @class MathUtils
- * @module Math
+ * @module Utils
  * @static
  */
 function MathUtils(){}

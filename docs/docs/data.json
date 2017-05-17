@@ -543,9 +543,40 @@
         },
         "..\\..\\source\\core\\three\\Vector3.js": {
             "name": "..\\..\\source\\core\\three\\Vector3.js",
-            "modules": {},
+            "modules": {
+                "Math": 1
+            },
             "classes": {
                 "Vector3": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\utils\\binary\\ArraybufferUtils.js": {
+            "name": "..\\..\\source\\core\\utils\\binary\\ArraybufferUtils.js",
+            "modules": {
+                "BinaryUtils": 1
+            },
+            "classes": {
+                "ArraybufferUtils": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\utils\\binary\\Base64Utils.js": {
+            "name": "..\\..\\source\\core\\utils\\binary\\Base64Utils.js",
+            "modules": {},
+            "classes": {
+                "Base64Utils": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\utils\\binary\\BufferUtils.js": {
+            "name": "..\\..\\source\\core\\utils\\binary\\BufferUtils.js",
+            "modules": {},
+            "classes": {
+                "BufferUtils": 1
             },
             "fors": {},
             "namespaces": {}
@@ -568,40 +599,9 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\utils\\ArraybufferUtils.js": {
-            "name": "..\\..\\source\\core\\utils\\ArraybufferUtils.js",
-            "modules": {
-                "BinaryData": 1
-            },
-            "classes": {
-                "ArraybufferUtils": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\utils\\Base64Utils.js": {
-            "name": "..\\..\\source\\core\\utils\\Base64Utils.js",
-            "modules": {},
-            "classes": {
-                "Base64Utils": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\utils\\BufferUtils.js": {
-            "name": "..\\..\\source\\core\\utils\\BufferUtils.js",
-            "modules": {},
-            "classes": {
-                "BufferUtils": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\utils\\MathUtils.js": {
             "name": "..\\..\\source\\core\\utils\\MathUtils.js",
-            "modules": {
-                "Math": 1
-            },
+            "modules": {},
             "classes": {
                 "MathUtils": 1
             },
@@ -621,7 +621,9 @@
         },
         "..\\..\\source\\core\\utils\\ObjectUtils.js": {
             "name": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "modules": {},
+            "modules": {
+                "Utils": 1
+            },
             "classes": {
                 "ObjectUtils": 1
             },
@@ -839,19 +841,16 @@
         },
         "Physics": {
             "name": "Physics",
-            "submodules": {
-                "undefined": 1
-            },
+            "submodules": {},
             "elements": {},
             "classes": {
                 "Mesh2shape": 1,
-                "PhysicsObject": 1,
-                "ObjectUtils": 1
+                "PhysicsObject": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
+            "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
             "line": 3,
             "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
         },
@@ -973,33 +972,49 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "MathUtils": 1,
-                "Vector3": 1,
+                "Vector3": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\..\\source\\core\\three\\Vector3.js",
+            "line": 3,
+            "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3"
+        },
+        "BinaryUtils": {
+            "name": "BinaryUtils",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "ArraybufferUtils": 1,
+                "Base64Utils": 1,
+                "BufferUtils": 1,
                 "Tree": 1,
                 "TreeUtils": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\utils\\MathUtils.js",
+            "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
             "line": 3,
-            "description": "MathUtils contains auxiliar values and function to help with mathematical operations."
+            "description": "ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format"
         },
-        "BinaryData": {
-            "name": "BinaryData",
-            "submodules": {},
+        "Utils": {
+            "name": "Utils",
+            "submodules": {
+                "undefined": 1
+            },
             "elements": {},
             "classes": {
-                "ArraybufferUtils": 1,
-                "Base64Utils": 1,
-                "BufferUtils": 1
+                "ObjectUtils": 1,
+                "MathUtils": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\utils\\BufferUtils.js",
+            "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
             "line": 3,
-            "description": "ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format"
+            "description": "ObjectUtils is a collection of methods to apply operations to Object3D objects"
         },
         "Files": {
             "name": "Files",
@@ -2581,6 +2596,51 @@
             "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3",
             "is_constructor": 1
         },
+        "ArraybufferUtils": {
+            "name": "ArraybufferUtils",
+            "shortname": "ArraybufferUtils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "BinaryUtils",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\binary\\ArraybufferUtils.js",
+            "line": 3,
+            "description": "ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format",
+            "static": 1
+        },
+        "Base64Utils": {
+            "name": "Base64Utils",
+            "shortname": "Base64Utils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "BinaryUtils",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\binary\\Base64Utils.js",
+            "line": 3,
+            "description": "Base64Utils contains methods to convert from and to Base64 binary format.",
+            "static": 1
+        },
+        "BufferUtils": {
+            "name": "BufferUtils",
+            "shortname": "BufferUtils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "BinaryUtils",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\binary\\BufferUtils.js",
+            "line": 3,
+            "description": "BufferUtils contains methods to convert from and to Node.js Buffer binary format",
+            "static": 1
+        },
         "Tree": {
             "name": "Tree",
             "shortname": "Tree",
@@ -2589,7 +2649,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "Math",
+            "module": "BinaryUtils",
             "namespace": "",
             "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
             "line": 3,
@@ -2603,56 +2663,11 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "Math",
+            "module": "BinaryUtils",
             "namespace": "",
             "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
             "line": 3,
             "description": "TreeUtils used to compare Tree.\n\nCan also be used to compare Object structure.",
-            "static": 1
-        },
-        "ArraybufferUtils": {
-            "name": "ArraybufferUtils",
-            "shortname": "ArraybufferUtils",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "BinaryData",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\utils\\ArraybufferUtils.js",
-            "line": 3,
-            "description": "ArraybufferUtils contains methods to convert from and to ArrayBuffer binary format",
-            "static": 1
-        },
-        "Base64Utils": {
-            "name": "Base64Utils",
-            "shortname": "Base64Utils",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "BinaryData",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
-            "line": 3,
-            "description": "Base64Utils contains methods to convert from and to Base64 binary format.",
-            "static": 1
-        },
-        "BufferUtils": {
-            "name": "BufferUtils",
-            "shortname": "BufferUtils",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "BinaryData",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\utils\\BufferUtils.js",
-            "line": 3,
-            "description": "BufferUtils contains methods to convert from and to Node.js Buffer binary format",
             "static": 1
         },
         "MathUtils": {
@@ -2663,7 +2678,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "Math",
+            "module": "Utils",
             "namespace": "",
             "file": "..\\..\\source\\core\\utils\\MathUtils.js",
             "line": 3,
@@ -2683,7 +2698,7 @@
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
             "line": 3,
             "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy.",
-            "author": "Don McCurdy (https://github.com/donmccurdy)",
+            "author": "tentone",
             "static": 1
         },
         "ObjectUtils": {
@@ -2694,7 +2709,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "Physics",
+            "module": "Utils",
             "namespace": "",
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
             "line": 3,
@@ -2726,7 +2741,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 90,
+            "line": 91,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -6833,7 +6848,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 145,
+            "line": 147,
             "description": "Clone this Text3D instance.",
             "itemtype": "method",
             "name": "clone",
@@ -6846,7 +6861,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 156,
+            "line": 158,
             "description": "Dispose mesh along with its material and geometry.",
             "itemtype": "method",
             "name": "dispose",
@@ -6855,7 +6870,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
-            "line": 179,
+            "line": 181,
             "description": "Create JSON for object.\n\nNeed to backup geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10042,6 +10057,176 @@
             "module": "Math"
         },
         {
+            "file": "..\\..\\source\\core\\utils\\binary\\ArraybufferUtils.js",
+            "line": 12,
+            "description": "Create arraybuffer from binary string",
+            "itemtype": "method",
+            "name": "fromBinaryString",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "data",
+                "type": "Arraybuffer"
+            },
+            "class": "ArraybufferUtils",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\binary\\ArraybufferUtils.js",
+            "line": 33,
+            "description": "Create arraybuffer from base64 string",
+            "itemtype": "method",
+            "name": "fromBase64",
+            "params": [
+                {
+                    "name": "base64",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "data",
+                "type": "Arraybuffer"
+            },
+            "class": "ArraybufferUtils",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\binary\\ArraybufferUtils.js",
+            "line": 70,
+            "description": "Create arraybuffer from Nodejs buffer",
+            "itemtype": "method",
+            "name": "fromBuffer",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "",
+                    "type": "Buffer"
+                }
+            ],
+            "return": {
+                "description": "data",
+                "type": "Arraybuffer"
+            },
+            "class": "ArraybufferUtils",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\binary\\Base64Utils.js",
+            "line": 12,
+            "description": "Charset used to encode binary data.",
+            "itemtype": "attribute",
+            "name": "encoding",
+            "type": "{String}",
+            "class": "Base64Utils",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\binary\\Base64Utils.js",
+            "line": 20,
+            "description": "Remove base64 header from data.\n\nUsefull for removing the heander from image, audio, video, etc.",
+            "itemtype": "method",
+            "name": "removeHeader",
+            "params": [
+                {
+                    "name": "base64",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "base64",
+                "type": "String"
+            },
+            "class": "Base64Utils",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\binary\\Base64Utils.js",
+            "line": 34,
+            "description": "Get the file format present in the base64 string.",
+            "itemtype": "method",
+            "name": "getFileFormat",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Base64 data.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "File format present in the JSON data.",
+                "type": "String"
+            },
+            "class": "Base64Utils",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\binary\\Base64Utils.js",
+            "line": 49,
+            "description": "Create base64 string from arraybuffer.",
+            "itemtype": "method",
+            "name": "fromArraybuffer",
+            "params": [
+                {
+                    "name": "arraybuffer",
+                    "description": "",
+                    "type": "Arraybuffer"
+                }
+            ],
+            "return": {
+                "description": "base64",
+                "type": "String"
+            },
+            "class": "Base64Utils",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\binary\\Base64Utils.js",
+            "line": 104,
+            "description": "Create base64 string from binary string.",
+            "itemtype": "method",
+            "name": "fromBinaryString",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "base64",
+                "type": "String"
+            },
+            "class": "Base64Utils",
+            "module": "BinaryUtils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\binary\\BufferUtils.js",
+            "line": 12,
+            "description": "Create nodejs buffer from arraybuffer",
+            "itemtype": "method",
+            "name": "fromArrayBuffer",
+            "params": [
+                {
+                    "name": "array",
+                    "description": "",
+                    "type": "Arraybuffer"
+                }
+            ],
+            "return": {
+                "description": "buffer",
+                "type": "Buffer"
+            },
+            "class": "BufferUtils",
+            "module": "BinaryUtils"
+        },
+        {
             "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
             "line": 21,
             "description": "Add new element to tree.",
@@ -10055,7 +10240,7 @@
                 }
             ],
             "class": "Tree",
-            "module": "Math"
+            "module": "BinaryUtils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
@@ -10071,7 +10256,7 @@
                 }
             ],
             "class": "Tree",
-            "module": "Math"
+            "module": "BinaryUtils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
@@ -10084,7 +10269,7 @@
                 "type": "Tree"
             },
             "class": "Tree",
-            "module": "Math"
+            "module": "BinaryUtils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
@@ -10100,7 +10285,7 @@
                 }
             ],
             "class": "Tree",
-            "module": "Math"
+            "module": "BinaryUtils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
@@ -10110,7 +10295,7 @@
             "name": "DIFF_ADDED",
             "type": "{Number}",
             "class": "TreeUtils",
-            "module": "Math"
+            "module": "BinaryUtils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
@@ -10120,7 +10305,7 @@
             "name": "DIFF_REMOVED",
             "type": "{Number}",
             "class": "TreeUtils",
-            "module": "Math"
+            "module": "BinaryUtils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
@@ -10130,7 +10315,7 @@
             "name": "DIFF_MOVED",
             "type": "{Number}",
             "class": "TreeUtils",
-            "module": "Math"
+            "module": "BinaryUtils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
@@ -10171,7 +10356,7 @@
                 "type": "Array"
             },
             "class": "TreeUtils",
-            "module": "Math"
+            "module": "BinaryUtils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\struct\\TreeUtils.js",
@@ -10180,177 +10365,7 @@
             "itemtype": "method",
             "name": "test",
             "class": "TreeUtils",
-            "module": "Math"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ArraybufferUtils.js",
-            "line": 12,
-            "description": "Create arraybuffer from binary string",
-            "itemtype": "method",
-            "name": "fromBinaryString",
-            "params": [
-                {
-                    "name": "str",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "data",
-                "type": "Arraybuffer"
-            },
-            "class": "ArraybufferUtils",
-            "module": "BinaryData"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ArraybufferUtils.js",
-            "line": 33,
-            "description": "Create arraybuffer from base64 string",
-            "itemtype": "method",
-            "name": "fromBase64",
-            "params": [
-                {
-                    "name": "base64",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "data",
-                "type": "Arraybuffer"
-            },
-            "class": "ArraybufferUtils",
-            "module": "BinaryData"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\ArraybufferUtils.js",
-            "line": 70,
-            "description": "Create arraybuffer from Nodejs buffer",
-            "itemtype": "method",
-            "name": "fromBuffer",
-            "params": [
-                {
-                    "name": "buffer",
-                    "description": "",
-                    "type": "Buffer"
-                }
-            ],
-            "return": {
-                "description": "data",
-                "type": "Arraybuffer"
-            },
-            "class": "ArraybufferUtils",
-            "module": "BinaryData"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
-            "line": 12,
-            "description": "Charset used to encode binary data.",
-            "itemtype": "attribute",
-            "name": "encoding",
-            "type": "{String}",
-            "class": "Base64Utils",
-            "module": "BinaryData"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
-            "line": 20,
-            "description": "Remove base64 header from data.\n\nUsefull for removing the heander from image, audio, video, etc.",
-            "itemtype": "method",
-            "name": "removeHeader",
-            "params": [
-                {
-                    "name": "base64",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "base64",
-                "type": "String"
-            },
-            "class": "Base64Utils",
-            "module": "BinaryData"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
-            "line": 34,
-            "description": "Get the file format present in the base64 string.",
-            "itemtype": "method",
-            "name": "getFileFormat",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Base64 data.",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "File format present in the JSON data.",
-                "type": "String"
-            },
-            "class": "Base64Utils",
-            "module": "BinaryData"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
-            "line": 49,
-            "description": "Create base64 string from arraybuffer.",
-            "itemtype": "method",
-            "name": "fromArraybuffer",
-            "params": [
-                {
-                    "name": "arraybuffer",
-                    "description": "",
-                    "type": "Arraybuffer"
-                }
-            ],
-            "return": {
-                "description": "base64",
-                "type": "String"
-            },
-            "class": "Base64Utils",
-            "module": "BinaryData"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\Base64Utils.js",
-            "line": 104,
-            "description": "Create base64 string from binary string.",
-            "itemtype": "method",
-            "name": "fromBinaryString",
-            "params": [
-                {
-                    "name": "str",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "base64",
-                "type": "String"
-            },
-            "class": "Base64Utils",
-            "module": "BinaryData"
-        },
-        {
-            "file": "..\\..\\source\\core\\utils\\BufferUtils.js",
-            "line": 12,
-            "description": "Create nodejs buffer from arraybuffer",
-            "itemtype": "method",
-            "name": "fromArrayBuffer",
-            "params": [
-                {
-                    "name": "array",
-                    "description": "",
-                    "type": "Arraybuffer"
-                }
-            ],
-            "return": {
-                "description": "buffer",
-                "type": "Buffer"
-            },
-            "class": "BufferUtils",
-            "module": "BinaryData"
+            "module": "BinaryUtils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\MathUtils.js",
@@ -10360,7 +10375,7 @@
             "name": "pi2",
             "type": "{Number}",
             "class": "MathUtils",
-            "module": "Math"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\MathUtils.js",
@@ -10370,7 +10385,7 @@
             "name": "pid3",
             "type": "{Number}",
             "class": "MathUtils",
-            "module": "Math"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\MathUtils.js",
@@ -10380,11 +10395,11 @@
             "name": "pid2",
             "type": "{Number}",
             "class": "MathUtils",
-            "module": "Math"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 15,
+            "line": 16,
             "description": "Type is used to indentify the type of cannonjs:\n - BOX\n - CYLINDER\n - SPHERE\n - HULL",
             "itemtype": "attribute",
             "name": "Type",
@@ -10394,7 +10409,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 33,
+            "line": 34,
             "description": "Given a Object3D instance, creates a corresponding CANNON shape.",
             "itemtype": "method",
             "name": "createShape",
@@ -10419,7 +10434,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 101,
+            "line": 102,
             "description": "Create box shape from geometry.",
             "itemtype": "method",
             "name": "createBoxShape",
@@ -10439,7 +10454,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 124,
+            "line": 125,
             "description": "Bounding box needs to be computed with the entire mesh, not just geometry.",
             "itemtype": "method",
             "name": "createBoundingBoxShape",
@@ -10459,7 +10474,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 157,
+            "line": 158,
             "description": "Computes 3D convex hull as a CANNON.ConvexPolyhedron.",
             "itemtype": "method",
             "name": "createConvexPolyhedron",
@@ -10479,7 +10494,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 199,
+            "line": 200,
             "description": "Create cylinder shape from geometry.",
             "itemtype": "method",
             "name": "createCylinderShape",
@@ -10499,7 +10514,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 217,
+            "line": 218,
             "description": "Create cylinder shape from bounding cylinder calculated from bounding box and bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingCylinderShape",
@@ -10519,7 +10534,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 245,
+            "line": 246,
             "description": "Plane shape from geometry.",
             "itemtype": "method",
             "name": "createPlaneShape",
@@ -10539,7 +10554,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 260,
+            "line": 261,
             "description": "Sphere shape from geometry.",
             "itemtype": "method",
             "name": "createSphereShape",
@@ -10559,7 +10574,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 272,
+            "line": 273,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createBoundingSphereShape",
@@ -10579,7 +10594,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 287,
+            "line": 288,
             "description": "Sphere shape from bouding sphere.",
             "itemtype": "method",
             "name": "createTubeShape",
@@ -10599,7 +10614,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 301,
+            "line": 302,
             "description": "Trimesh shape from geometry.",
             "itemtype": "method",
             "name": "createTrimeshShape",
@@ -10619,7 +10634,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 321,
+            "line": 322,
             "description": "Returns a single geometry for the given object.\n\nIf the object is compound, its geometries are automatically merged.",
             "itemtype": "method",
             "name": "getGeometry",
@@ -10639,7 +10654,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 383,
+            "line": 384,
             "description": "Get geometry vertices.",
             "itemtype": "method",
             "name": "getVertices",
@@ -10659,7 +10674,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\Mesh2shape.js",
-            "line": 399,
+            "line": 400,
             "description": "Returns a array of THREE.Mesh instances from the given object.\n\nIf nested transformations are found, they are applied to child meshes as mesh.userData.matrix, so that each mesh has its position/rotation/scale independently of all of its parents except the top-level object.",
             "itemtype": "method",
             "name": "getMeshes",
@@ -10679,7 +10694,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 11,
+            "line": 12,
             "description": "Get all fonts in a object and childs",
             "itemtype": "method",
             "name": "getFonts",
@@ -10700,11 +10715,11 @@
                 "type": "Array"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 40,
+            "line": 41,
             "description": "Get all audio files in object and childs",
             "itemtype": "method",
             "name": "getAudio",
@@ -10725,11 +10740,11 @@
                 "type": "Array"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 69,
+            "line": 70,
             "description": "Get all materials in object and childs",
             "itemtype": "method",
             "name": "getMaterials",
@@ -10751,11 +10766,11 @@
                 }
             ],
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 132,
+            "line": 133,
             "description": "Get all textures in object and childs",
             "itemtype": "method",
             "name": "getTextures",
@@ -10776,11 +10791,11 @@
                 "type": "Array"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 216,
+            "line": 217,
             "description": "Get object scene.",
             "itemtype": "method",
             "name": "getScene",
@@ -10796,11 +10811,11 @@
                 "type": "Object3D"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 239,
+            "line": 240,
             "description": "Get object tree root.\n\nFor a object placed inside a running scene the root is always the program.",
             "itemtype": "method",
             "name": "getRoot",
@@ -10816,11 +10831,11 @@
                 "type": "Object3D"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 260,
+            "line": 261,
             "description": "Set object and all its children matrixAutoUpdate value",
             "itemtype": "method",
             "name": "setMatrixAutoUpdate",
@@ -10837,11 +10852,11 @@
                 }
             ],
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 277,
+            "line": 278,
             "description": "Set object and all children to receive shadows",
             "itemtype": "method",
             "name": "setShadowReceiving",
@@ -10858,11 +10873,11 @@
                 }
             ],
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 294,
+            "line": 295,
             "description": "Set object and all children to cast shadows",
             "itemtype": "method",
             "name": "setShadowCasting",
@@ -10879,11 +10894,11 @@
                 }
             ],
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\utils\\ObjectUtils.js",
-            "line": 311,
+            "line": 312,
             "description": "Check if object is child of another object",
             "itemtype": "method",
             "name": "isChildOf",
@@ -10904,7 +10919,7 @@
                 "type": "Boolean"
             },
             "class": "ObjectUtils",
-            "module": "Physics"
+            "module": "Utils"
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
@@ -11264,7 +11279,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 101,
+            "line": 102,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -11274,7 +11289,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 107,
+            "line": 108,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -11284,7 +11299,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 113,
+            "line": 114,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -11295,7 +11310,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 120,
+            "line": 121,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -11306,7 +11321,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 127,
+            "line": 128,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -11316,7 +11331,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 133,
+            "line": 134,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasResize",
@@ -11327,7 +11342,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 194,
+            "line": 195,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -11353,7 +11368,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 214,
+            "line": 215,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -11369,7 +11384,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 227,
+            "line": 228,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -11395,7 +11410,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 251,
+            "line": 252,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -11404,7 +11419,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 302,
+            "line": 303,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -11413,7 +11428,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 318,
+            "line": 319,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -11422,7 +11437,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 355,
+            "line": 356,
             "description": "Resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -11431,7 +11446,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 378,
+            "line": 379,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -11440,7 +11455,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 388,
+            "line": 389,
             "description": "Set the canvas to be used for rendering.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -11456,7 +11471,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 400,
+            "line": 401,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -11465,7 +11480,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 424,
+            "line": 425,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -11481,7 +11496,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 440,
+            "line": 441,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -11497,7 +11512,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 453,
+            "line": 454,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -11513,7 +11528,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 466,
+            "line": 467,
             "description": "Check if VR mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -11526,7 +11541,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 477,
+            "line": 478,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -11535,7 +11550,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 503,
+            "line": 504,
             "description": "Set fullscreen mode",
             "itemtype": "method",
             "name": "setFullscreen",

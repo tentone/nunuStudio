@@ -4,6 +4,7 @@
  * ObjectUtils is a collection of methods to apply operations to Object3D objects
  *
  * @class ObjectUtils
+ * @module Utils
  * @static
  */
 function ObjectUtils(){}
