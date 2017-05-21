@@ -15,6 +15,11 @@ h1, h2, h3, h4, h5, h6, .btn, .navbar-nav a, .list-inline, small, #examples
 	font-family:'Montserrat', sans-serif;
 }
 
+.underline
+{
+	text-decoration: underline;
+}
+
 .feature-img
 {
 	border-radius:10px;

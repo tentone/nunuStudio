@@ -3,7 +3,7 @@ if(hljs !== undefined)
 	hljs.initHighlightingOnLoad();
 }
 
-var apps = [];
+var nunuApps = [];
 
 function initialize(fname, canvasId)
 {	
@@ -11,7 +11,7 @@ function initialize(fname, canvasId)
 	var app = new NunuApp(canvas);
 	app.loadRunProgram(fname);
 
-	apps.push({canvas:canvas, app:app});
+	nunuApps.push({canvas:canvas, app:app});
 	
 	resize();
 	document.body.onresize = resize;
@@ -19,10 +19,10 @@ function initialize(fname, canvasId)
 
 function resize()
 {
-	for(var i = 0; i < apps.length; i++)
+	for(var i = 0; i < nunuApps.length; i++)
 	{
-		apps[i].canvas.width = apps[i].canvas.parentElement.offsetWidth * 0.8;
-		apps[i].canvas.height = apps[i].canvas.parentElement.offsetWidth * 0.4;
-		apps[i].app.resize();
+		nunuApps[i].canvas.width = nunuApps[i].canvas.parentElement.offsetWidth * 0.8;
+		nunuApps[i].canvas.height = nunuApps[i].canvas.parentElement.offsetWidth * 0.4;
+		nunuApps[i].app.resize();
 	}
 }
