@@ -16,29 +16,12 @@
 	<!--Javascript-->
 	<script src="../../lib/jquery.min.js"></script>
 	<script src="../../lib/bootstrap.min.js"></script>
+	<script src="../../editor/nunu.min.js"></script>
 	<script src="../../lib/highlight.min.js"></script>
-	<script>
-		hljs.initHighlightingOnLoad();
-		/*var app, canvas;
-
-		function initialize()
-		{	
-			canvas = document.getElementById("canvas");
-			app = new NunuApp(canvas);
-			app.loadRunProgram("first.isp");
-			resize();
-		}
-
-		function resize()
-		{
-			canvas.width = document.body.offsetWidth * 0.5;
-			canvas.height = document.body.offsetWidth * 0.35;
-			app.resize();
-		}*/
-	</script>
+	<script src="../js/embed.js"></script>
 </head>
 
-<body>
+<body onload="initialize('particle.isp',  'canvas');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -69,17 +52,37 @@
 		<div class="container">
 			<a href="../../learn.html"><h3 class="black"><u>Back</u></h3></a>
 			<h2 class="black">Particles</h2>
-			<p>nunuStudio particle engine is powered by the SPE engine, the particle object encapsulates a SPE.Emitter and a SPE.Group that can be easily edited in the Particle Editor, but more Emitters can be added progamatically during runtime.</p>
-			<p>Documentation about the SPE engine can be found <a href="https://github.com/squarefeet/ShaderParticleEngine">here</a>.</p>
-			<p>To add a new particle object select it from the tool bar. All new particles are created with the particle fountain template.</p>
+			<p>nunuStudio particle engine is powered by the SPE, the particle object encapsulates a SPE.Emitter and a SPE.Group that can be easily edited in the Particle Editor, but more Emitters can be added programmatically during runtime.</p>
+			<p>More detailed documentation about the SPE engine can be found <a class="underline" href="https://github.com/squarefeet/ShaderParticleEngine">here</a>.</p>
+			<p>To add a new particle object select it from the tool bar. All new particle objects are created with the default template.</p>
 			<img src="select.png" style="width:20%; margin-left:40%"></img>
 
 			<h3 class="black">Particle Editor</h3>
-			<p>The particle editor can be used to customize every aspect of a particle object using a visual tool. 
-			</p>
-			<p>To open the particle editor, simply doubli click on the particle object in the object explorer</p>
-
+			<p>The particle editor can be used to customize the particle object. To open the particle editor, double click on the particle object in the object explorer, a new tab with the particle editor will open.</p>
 			<img src="editor.png" style="width:60%; margin-left:20%"></img>
+			<br/>
+			<p>Here are some of the basic properties of a particle emitter. Its possible to control these properties using scripts as well.</p>
+			<ul>
+				<li><p>Particle Count - Maximum number of particles</p></li>
+				<li><p>Texture - Particle emitter have a texture attached to them this texture to them.</p></li>
+				<li><p>Direction - If set backwards the particle starts at its endind position.</p></li>
+				<li><p>Particle Rate - How many particles to emitt relative to the age of a particle.</p></li>
+				<li><p>Emitter Type - Shape of the emitter (Box, Circle or Sphere).</p></li>
+				<li><p>Max Age - Age of the particles created.</p></li>
+				<li><p>Position - Position of the particle on creation relative to the emitter.</p></li>
+				<li><p>Velocity - Velocity of the particle on creation.</p></li>
+				<li><p>Acceleration - Acceleration of the particle.</p></li>
+				<li><p>Rotation - Rotation of the particle along its lifespan.</p></li>
+				<li><p>Color - Color of the particle along its lifespan.</p></li>
+			</ul>
+
+			<h3 class="black">Example</h3>
+			<p>In the demo bellow we can see a particle emitter object in action. To try this example in the editor you can download the <a class="underline" href="cameras.isp">ISP project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/05_particles/particle.isp">Web Editor</a>.</p>
+			<canvas id="canvas" width="800" height="400" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
+
+			<!--<h3 class="black">Scripting</h3>-->
+			<!--TODO-->
+
 		</div>
 	</section>
 
