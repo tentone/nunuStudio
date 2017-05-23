@@ -115,7 +115,7 @@ function TextureEditor(parent, closeable, container, index)
 	this.repeat = new CoordinatesBox(this.form.element);
 	this.repeat.setMode(CoordinatesBox.VECTOR2);
 	this.repeat.size.set(120, 18);
-	this.repeat.setValue(1, 1, 0);
+	this.repeat.setStep(0.01);
 	this.repeat.setOnChange(function()
 	{
 		if(self.texture !== null)
@@ -126,6 +126,24 @@ function TextureEditor(parent, closeable, container, index)
 		}
 	});
 	this.form.add(this.repeat);
+	this.form.nextRow();
+
+	//Offset
+	this.form.addText("Offset");
+	this.offset = new CoordinatesBox(this.form.element);
+	this.offset.setMode(CoordinatesBox.VECTOR2);
+	this.offset.size.set(120, 18);
+	this.offset.setStep(0.01);
+	this.offset.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			var value = self.offset.getValue();
+			self.texture.offset.set(value.x, value.y);
+			self.updatePreview();
+		}
+	});
+	this.form.add(this.offset);
 	this.form.nextRow();
 
 	//Minification filter
@@ -232,6 +250,7 @@ TextureEditor.prototype.attach = function(texture)
 	this.wrapT.setValue(texture.wrapT);
 	this.wrapS.setValue(texture.wrapS);
 	this.repeat.setValue(texture.repeat);
+	this.offset.setValue(texture.offset);
 	this.magFilter.setValue(texture.magFilter);
 	this.minFilter.setValue(texture.minFilter);
 	this.flipY.setValue(texture.flipY);
