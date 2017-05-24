@@ -106,6 +106,24 @@ function TextureAsset(parent)
 					}, "." + image.encoding);
 				}
 			});
+
+			context.addOption("Fit aspect ratio", function()
+			{
+				var image = self.texture.image;
+				var aspect = image.width / image.height;
+
+				if(aspect > 1)
+				{
+					self.texture.repeat.y = aspect;
+					self.texture.offset.y = -(1 - 1/aspect);
+				}
+				else
+				{
+					self.texture.repeat.x = 1/aspect;
+					self.texture.offset.x = -(1 - aspect)
+				}
+
+			});
 		}
 		else if(self.texture instanceof VideoTexture)
 		{

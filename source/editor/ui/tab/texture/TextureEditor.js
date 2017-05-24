@@ -202,6 +202,24 @@ function TextureEditor(parent, closeable, container, index)
 
 TextureEditor.prototype = Object.create(TabElement.prototype);
 
+//Activate
+TextureEditor.prototype.activate = function()
+{
+	TabElement.prototype.activate.call(this);
+	
+	this.updatePreview();
+
+	var texture = this.texture;
+	this.name.setText(texture.name);
+	this.wrapT.setValue(texture.wrapT);
+	this.wrapS.setValue(texture.wrapS);
+	this.repeat.setValue(texture.repeat);
+	this.offset.setValue(texture.offset);
+	this.magFilter.setValue(texture.magFilter);
+	this.minFilter.setValue(texture.minFilter);
+	this.flipY.setValue(texture.flipY);
+};
+
 //Update test material
 TextureEditor.prototype.updatePreview = function()
 {
@@ -239,21 +257,10 @@ TextureEditor.prototype.updateMetadata = function()
 TextureEditor.prototype.attach = function(texture)
 {
 	this.texture = texture;
-	this.updateMetadata();
-
-	//Update sprite material
 	this.sprite.material.map = texture;
-	this.sprite.material.needsUpdate = true;
-
-	//Update form
-	this.name.setText(texture.name);
-	this.wrapT.setValue(texture.wrapT);
-	this.wrapS.setValue(texture.wrapS);
-	this.repeat.setValue(texture.repeat);
-	this.offset.setValue(texture.offset);
-	this.magFilter.setValue(texture.magFilter);
-	this.minFilter.setValue(texture.minFilter);
-	this.flipY.setValue(texture.flipY);
+	
+	this.updateMetadata();
+	this.updatePreview();
 };
 
 //Update
