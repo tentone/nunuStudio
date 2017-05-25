@@ -144,10 +144,6 @@ include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/PCDLoader.js");
 include("lib/three/loaders/STLLoader.js");
 
-include("lib/three/animation/Animation.js");
-include("lib/three/animation/AnimationHandler.js");
-include("lib/three/animation/KeyFrameAnimation.js");
-
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
 include("lib/three/exporters/STLBinaryExporter.js");
