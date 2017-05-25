@@ -46,7 +46,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
 
     // Extend the 'normal' keywords with the TypeScript language extensions
     if (isTS) {
-      var type = {type: "variable", style: "variable-3"};
+      var type = {type: "variable", style: "type"};
       var tsKeywords = {
         // object-like things
         "interface": kw("class"),
@@ -60,9 +60,6 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
         "private": kw("modifier"),
         "protected": kw("modifier"),
         "abstract": kw("modifier"),
-
-        // operators
-        "as": operator,
 
         // types
         "string": type, "number": type, "boolean": type, "any": type
@@ -439,6 +436,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     if (type == "(") return contCommasep(expressionNoComma, ")", "call", me);
     if (type == ".") return cont(property, me);
     if (type == "[") return cont(pushlex("]"), maybeexpression, expect("]"), poplex, me);
+    if (isTS && value == "as") { cx.marked = "keyword"; return cont(typeexpr, me) }
   }
   function quasi(type, value) {
     if (type != "quasi") return pass();
@@ -545,9 +543,9 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     }
   }
   function typeexpr(type) {
-    if (type == "variable") {cx.marked = "variable-3"; return cont(afterType);}
+    if (type == "variable") {cx.marked = "type"; return cont(afterType);}
     if (type == "string" || type == "number" || type == "atom") return cont(afterType);
-    if (type == "{") return cont(pushlex("}"), commasep(typeprop, "}", ",;"), poplex)
+    if (type == "{") return cont(pushlex("}"), commasep(typeprop, "}", ",;"), poplex, afterType)
     if (type == "(") return cont(commasep(typearg, ")"), maybeReturnType)
   }
   function maybeReturnType(type) {
@@ -561,6 +559,8 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       return cont(typeprop)
     } else if (type == ":") {
       return cont(typeexpr)
+    } else if (type == "[") {
+      return cont(expression, maybetype, expect("]"), typeprop)
     }
   }
   function typearg(type) {
