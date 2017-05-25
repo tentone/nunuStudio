@@ -392,7 +392,7 @@ SceneEditor.prototype.activate = function()
 	this.initializeRenderer();
 	this.updateSettings();
 	this.setState(SceneEditor.EDITING);
-
+	
 	Interface.selectTool(Editor.SELECT);
 	Editor.resize();
 };

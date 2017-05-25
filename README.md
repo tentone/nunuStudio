@@ -104,7 +104,8 @@
 	- Control sky colors on UI
 	- Keyboard navigation in orbit mode
 	- Export projects from web version
-
+	- Calculate texture offset and repeat to fit aspect ratio in square
+	
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
 - To embed applications made inside nunuStudio in web pages the following code can be used
