@@ -35,12 +35,8 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
 	this.preview.divB.style.overflow = "auto";
 
-	//Material preview
-	//Canvas
+	//Preview Canvas
 	this.canvas = new Canvas(this.preview.divA);
-
-	//Element atributes
-	this.children = [];
 	
 	//Material UI File element
 	this.asset = null;

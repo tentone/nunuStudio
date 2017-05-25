@@ -4,13 +4,19 @@ function CodemirrorThemes(){}
 
 CodemirrorThemes.list =
 [
+	"3024-night",
+	"3024-day",
 	"abcdef",
 	"ambiance",
+	"base16-light",
+	"base16-dark",
 	"bespin",
 	"blackboard",
 	"cobalt",
 	"colorforth",
 	"dracula",
+	"duotone-light",
+	"duotone-dark",
 	"eclipse",
 	"elegant",
 	"erlang-dark",
@@ -30,6 +36,7 @@ CodemirrorThemes.list =
 	"paraiso-dark",
 	"paraiso-light",
 	"pastel-on-dark",
+	"panda-syntax",
 	"railscasts",
 	"rubyblue",
 	"seti",
