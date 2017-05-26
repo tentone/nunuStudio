@@ -37,20 +37,6 @@ function ScriptEditor(parent, closeable, container, index)
 		}
 	});
 
-	//Key pressed event
-	/*this.code.on("keydown", function(cm, event)
-	{
-		var key = event.keyCode;
-
-		if(!Editor.keyboard.keyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
-		{
-			if(!cm.state.completionActive)
-			{
-				CodeMirror.commands.autocomplete(cm, null);
-			}
-		}
-	});*/
-
 	//Change
 	this.code.on("change", function(cm)
 	{
@@ -62,23 +48,31 @@ function ScriptEditor(parent, closeable, container, index)
 		self.updateScript();
 	});
 
+	//Cursor activity event
 	this.code.on("cursorActivity", function(cm)
 	{
 		server.updateArgHints(cm);
 	});
 
+	//Key pressed event
 	this.code.on("keypress", function(cm, event)
 	{
-		var typed = String.fromCharCode(event.keyCode);
+		var typed = String.fromCharCode(event.charCode);
 
 		if(/[\w\.]/.exec(typed))
 		{
 			server.complete(cm);
+
+			//If there is no tern sugestion suggest already used words
+			if(cm.state.completionActive == null || cm.state.completionActive.widget === null)
+			{
+				CodeMirror.commands.autocomplete(cm, null);
+			}
 		}
 	});
 
 	//Context menu event
-	this.element.oncontextmenu = function()
+	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu();
 		context.size.set(130, 20);
