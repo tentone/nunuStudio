@@ -32,8 +32,8 @@
 	},
 	"code": {
 		"theme": "monokai",
-		"keymap": "default",
-		"fontSize": 16,
+		"keymap": "sublime",
+		"fontSize": 14,
 		"lineNumbers": true,
 		"lineWrapping": false,
 		"autoCloseBrackets": true,
