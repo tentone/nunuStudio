@@ -8,14 +8,7 @@ function ScriptEditor(parent, closeable, container, index)
 	this.code = new CodeMirror(this.element,
 	{
 		value: "",
-		lineNumbers: Settings.code.lineNumbers,
-		lineWrapping: Settings.code.lineWrapping,
-		keyMap: Settings.code.keymap,
-		autoCloseBrackets: Settings.code.autoCloseBrackets,
-		styleActiveLine: Settings.code.highlightActiveLine,
-		showMatchesOnScrollbar: Settings.code.showMatchesOnScrollbar,
 		matchBrackets: true,
-		dragDrop: true,
 		indentWithTabs: true,
 		indentUnit: 4,
 		tabSize: 4,
@@ -27,11 +20,8 @@ function ScriptEditor(parent, closeable, container, index)
 		gutters: ["CodeMirror-lint-markers"]
 	});
 
-	this.code.setOption("theme", Settings.code.theme);
 	this.code.setOption("mode", "javascript");
-
-	//Set editor font size
-	this.setFontSize(Settings.code.fontSize);
+	this.updateSettings();
 
 	//Self pointer
 	var self = this;
@@ -108,6 +98,21 @@ function ScriptEditor(parent, closeable, container, index)
 
 ScriptEditor.prototype = Object.create(TabElement.prototype);
 
+//Update script editor settings
+ScriptEditor.prototype.updateSettings = function()
+{
+	this.setFontSize(Settings.code.fontSize);
+
+	this.code.setOption("theme", Settings.code.theme);
+	this.code.setOption("lineNumbers", Settings.code.lineNumbers);
+	this.code.setOption("lineWrapping", Settings.code.lineWrapping);
+	this.code.setOption("keyMap", Settings.code.keymap);
+	this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
+	this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
+	this.code.setOption("showMatchesOnScrollbar", Settings.code.showMatchesOnScrollbar);
+	this.code.setOption("dragDrop", Settings.code.dragFiles);
+};
+
 //Set code editor font size
 ScriptEditor.prototype.setFontSize = function(size)
 {
@@ -120,7 +125,7 @@ ScriptEditor.prototype.setFontSize = function(size)
 
 	this.code.display.wrapper.style.fontSize = size + "px";
 	this.code.refresh();
-}
+};
 
 //Update object data
 ScriptEditor.prototype.updateMetadata = function()
@@ -148,46 +153,35 @@ ScriptEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-}
+};
 
 //Activate code editor
 ScriptEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	//Set font size
-	this.setFontSize(Settings.code.fontSize);
+	this.updateSettings();
 
-	//Update editor settings
-	this.code.setOption("theme", Settings.code.theme);
-	this.code.setOption("lineNumbers", Settings.code.lineNumbers);
-	this.code.setOption("lineWrapping", Settings.code.lineWrapping);
-	this.code.setOption("keyMap", Settings.code.keymap);
-	this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
-	this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
-	this.code.setOption("showMatchesOnScrollbar", Settings.code.showMatchesOnScrollbar);
-	
-	//Update script
 	this.updateScript();
-}
+};
 
 //Return editor text
 ScriptEditor.prototype.getText = function()
 {
 	return this.code.getValue();
-}
+};
 
 //Set editor text
 ScriptEditor.prototype.setText = function(text)
 {
 	this.code.setValue(text);
-}
+};
 
 //Check if script is attached to editor
 ScriptEditor.prototype.isAttached = function(script)
 {
 	return this.script === script;
-}
+};
 
 //Attach Script to code editor
 ScriptEditor.prototype.attach = function(script)
@@ -195,7 +189,7 @@ ScriptEditor.prototype.attach = function(script)
 	this.script = script;
 	this.setText(script.code);
 	this.updateMetadata();
-}
+};
 
 //Update attached script
 ScriptEditor.prototype.updateScript = function()
@@ -204,13 +198,13 @@ ScriptEditor.prototype.updateScript = function()
 	{
 		this.script.code = this.code.getValue();
 	}
-}
+};
 
 //Set language mode (javascript, glsl, etc)
 ScriptEditor.prototype.setMode = function(mode)
 {
 	this.code.setOption("mode", mode);
-}
+};
 
 //Update ScriptEditor
 ScriptEditor.prototype.update = function()
@@ -222,7 +216,7 @@ ScriptEditor.prototype.update = function()
 			this.setFontSize(Settings.code.fontSize - Editor.mouse.wheel/100);
 		}
 	}
-}
+};
 
 //Update division Size
 ScriptEditor.prototype.updateInterface = function()
@@ -242,4 +236,4 @@ ScriptEditor.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};

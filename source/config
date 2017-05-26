@@ -32,12 +32,13 @@
 	},
 	"code": {
 		"theme": "monokai",
-		"keymap": "sublime",
-		"fontSize": 14,
+		"keymap": "default",
+		"fontSize": 16,
 		"lineNumbers": true,
 		"lineWrapping": false,
 		"autoCloseBrackets": true,
 		"highlightActiveLine": false,
-		"showMatchesOnScrollbar": true
+		"showMatchesOnScrollbar": true,
+		"dragFiles": true
 	}
 }

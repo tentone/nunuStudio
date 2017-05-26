@@ -117,6 +117,17 @@ function CodeSettingsTab(parent, closeable, container, index)
 		Settings.code.showMatchesOnScrollbar = self.showMatchesOnScrollbar.getValue();
 	});
 	this.form.add(this.showMatchesOnScrollbar);
+	this.form.nextRow();
+	
+	//File drag
+	this.form.addText("Drag files");
+	this.dragFiles = new CheckBox(this.form.element);
+	this.dragFiles.size.set(15, 15);
+	this.dragFiles.setOnChange(function()
+	{
+		Settings.code.dragFiles = self.dragFiles.getValue();
+	});
+	this.form.add(this.dragFiles);
 
 	//Update form
 	this.form.updateInterface();
@@ -135,6 +146,7 @@ CodeSettingsTab.prototype.activate = function()
 	this.codeAutoCloseBrackets.setValue(Settings.code.autoCloseBrackets);
 	this.codeHighlightActiveLine.setValue(Settings.code.highlightActiveLine);
 	this.showMatchesOnScrollbar.setValue(Settings.code.showMatchesOnScrollbar);
+	this.dragFiles.setValue(Settings.code.dragFiles);
 }; 
 
 //Update division Size
