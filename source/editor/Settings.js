@@ -57,6 +57,7 @@ Settings.loadDefault = function()
 	Settings.code.autoCloseBrackets = true;
 	Settings.code.highlightActiveLine = false;
 	Settings.code.showMatchesOnScrollbar = true;
+	Settings.code.dragFiles = true;
 };
 
 //Store settings
