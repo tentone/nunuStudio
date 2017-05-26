@@ -14,7 +14,8 @@ function ScriptEditor(parent, closeable, container, index)
 		tabSize: 4,
 		hintOptions:
 		{
-			hint: CodeMirror.hint.anyword
+			hint: CodeMirror.hint.anyword,
+			completeSingle: false
 		},
 		lint: true,
 		gutters: ["CodeMirror-lint-markers"]
@@ -26,23 +27,54 @@ function ScriptEditor(parent, closeable, container, index)
 	//Self pointer
 	var self = this;
 
-	//Key pressed event
-	this.code.on("keydown", function(code, event)
+	//Tern server
+	var server = new CodeMirror.TernServer(
 	{
-		var key = event.keyCode;
-		if(!Editor.keyboard.keyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
+		caseInsensitive: false,
+		plugins:
 		{
-			if(!code.state.completionActive)
-			{
-				CodeMirror.commands.autocomplete(code, null, {completeSingle: false});
-			}
+			threejs: null
 		}
 	});
 
-	//Change
-	this.code.on("change", function()
+	//Key pressed event
+	/*this.code.on("keydown", function(cm, event)
 	{
+		var key = event.keyCode;
+
+		if(!Editor.keyboard.keyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
+		{
+			if(!cm.state.completionActive)
+			{
+				CodeMirror.commands.autocomplete(cm, null);
+			}
+		}
+	});*/
+
+	//Change
+	this.code.on("change", function(cm)
+	{
+		if(!cm.state.focused)
+		{
+			return;
+		}
+
 		self.updateScript();
+	});
+
+	this.code.on("cursorActivity", function(cm)
+	{
+		server.updateArgHints(cm);
+	});
+
+	this.code.on("keypress", function(cm, event)
+	{
+		var typed = String.fromCharCode(event.keyCode);
+
+		if(/[\w\.]/.exec(typed))
+		{
+			server.complete(cm);
+		}
 	});
 
 	//Context menu event
@@ -52,6 +84,12 @@ function ScriptEditor(parent, closeable, container, index)
 		context.size.set(130, 20);
 		context.position.set(event.clientX - 5, event.clientY - 5);
 		
+		var refactor = context.addMenu("Refactor");
+		refactor.addOption("Rename", function()
+		{
+			server.rename(self.code);
+		});
+
 		context.addOption("Copy", function()
 		{
 			var text = self.code.getSelection();

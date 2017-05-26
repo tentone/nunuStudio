@@ -126,7 +126,22 @@ include("lib/codemirror/addon/selection/selection-pointer.js");
 include("lib/codemirror/addon/lint/lint.css");
 include("lib/codemirror/addon/lint/lint.js");
 include("lib/codemirror/addon/lint/javascript-lint.js");
+include("lib/codemirror/addon/tern/tern.js");
+include("lib/codemirror/addon/tern/tern.css");
 include("lib/codemirror/theme/*");
+
+include("lib/acorn/acorn.js");
+include("lib/acorn/acorn_loose.js");
+include("lib/acorn/walk.js");
+
+include("lib/tern/signal.js");
+include("lib/tern/tern.js");
+include("lib/tern/def.js");
+include("lib/tern/comment.js");
+include("lib/tern/infer.js");
+include("lib/tern/doc_comment.js");
+
+include("lib/three/tern/threejs.js");
 
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
