@@ -1,19 +1,14 @@
-"use strict";
-
-tern.registerPlugin("threejs", function(server, options)
 {
-	return {
-		defs : {
 	"!name": "threejs",
 	"Original": {
-		"!url": "http://threejs.org/docs/#Reference/Original",
+		"!url": "http://threejs.org/docs/#api/Original",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
 		"!doc": "todo"
 	},
 	"Camera": {
-		"!url": "http://threejs.org/docs/#Reference/cameras/Camera",
+		"!url": "http://threejs.org/docs/#api/cameras/Camera",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"matrixWorldInverse": {
@@ -33,7 +28,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"CubeCamera": {
-		"!url": "http://threejs.org/docs/#Reference/cameras/CubeCamera",
+		"!url": "http://threejs.org/docs/#api/cameras/CubeCamera",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"renderTarget": {
@@ -49,7 +44,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(near: number, far: number, cubeResolution: number)"
 	},
 	"OrthographicCamera": {
-		"!url": "http://threejs.org/docs/#Reference/cameras/OrthographicCamera",
+		"!url": "http://threejs.org/docs/#api/cameras/OrthographicCamera",
 		"prototype": {
 			"!proto": "Camera.prototype",
 			"left": {
@@ -85,7 +80,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(left: number, right: number, top: number, bottom: number, near: number, far: number)"
 	},
 	"PerspectiveCamera": {
-		"!url": "http://threejs.org/docs/#Reference/cameras/PerspectiveCamera",
+		"!url": "http://threejs.org/docs/#api/cameras/PerspectiveCamera",
 		"prototype": {
 			"!proto": "Camera.prototype",
 			"fov": {
@@ -121,27 +116,27 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(fov: number, aspect: number, near: number, far: number)"
 	},
 	"CustomBlendingEquations": {
-		"!url": "http://threejs.org/docs/#Reference/constants/CustomBlendingEquations",
+		"!url": "http://threejs.org/docs/#api/constants/CustomBlendingEquations",
 		"prototype": {}
 	},
 	"GLState": {
-		"!url": "http://threejs.org/docs/#Reference/constants/GLState",
+		"!url": "http://threejs.org/docs/#api/constants/GLState",
 		"prototype": {}
 	},
 	"Materials": {
-		"!url": "http://threejs.org/docs/#Reference/constants/Materials",
+		"!url": "http://threejs.org/docs/#api/constants/Materials",
 		"prototype": {}
 	},
 	"ShadowingTypes": {
-		"!url": "http://threejs.org/docs/#Reference/constants/ShadowingTypes",
+		"!url": "http://threejs.org/docs/#api/constants/ShadowingTypes",
 		"prototype": {}
 	},
 	"Textures": {
-		"!url": "http://threejs.org/docs/#Reference/constants/Textures",
+		"!url": "http://threejs.org/docs/#api/constants/Textures",
 		"prototype": {}
 	},
 	"BufferAttribute": {
-		"!url": "http://threejs.org/docs/#Reference/core/BufferAttribute",
+		"!url": "http://threejs.org/docs/#api/core/BufferAttribute",
 		"prototype": {
 			"array": {
 				"!type": "[]",
@@ -192,7 +187,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(array: [], itemSize: number)"
 	},
 	"BufferGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/core/BufferGeometry",
+		"!url": "http://threejs.org/docs/#api/core/BufferGeometry",
 		"prototype": {
 			"id": {
 				"!type": "number",
@@ -263,7 +258,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"Clock": {
-		"!url": "http://threejs.org/docs/#Reference/core/Clock",
+		"!url": "http://threejs.org/docs/#api/core/Clock",
 		"prototype": {
 			"autoStart": {
 				"!type": "bool",
@@ -306,7 +301,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(autoStart: bool)"
 	},
 	"EventDispatcher": {
-		"!url": "http://threejs.org/docs/#Reference/core/EventDispatcher",
+		"!url": "http://threejs.org/docs/#api/core/EventDispatcher",
 		"prototype": {
 			"addEventListener": {
 				"!type": "fn(type: string, listener: function)",
@@ -329,7 +324,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"Face3": {
-		"!url": "http://threejs.org/docs/#Reference/core/Face3",
+		"!url": "http://threejs.org/docs/#api/core/Face3",
 		"prototype": {
 			"a": {
 				"!type": "number",
@@ -372,7 +367,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(a: number, b: number, c: number, normal: +Vector3, color: +Color, materialIndex: number)"
 	},
 	"Geometry": {
-		"!url": "http://threejs.org/docs/#Reference/core/Geometry",
+		"!url": "http://threejs.org/docs/#api/core/Geometry",
 		"prototype": {
 			"id": {
 				"!type": "number",
@@ -503,7 +498,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"Object3D": {
-		"!url": "http://threejs.org/docs/#Reference/core/Object3D",
+		"!url": "http://threejs.org/docs/#api/core/Object3D",
 		"prototype": {
 			"id": {
 				"!type": "number",
@@ -658,7 +653,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"Raycaster": {
-		"!url": "http://threejs.org/docs/#Reference/core/Raycaster",
+		"!url": "http://threejs.org/docs/#api/core/Raycaster",
 		"prototype": {
 			"ray": {
 				"!type": "+Ray",
@@ -697,7 +692,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(origin: +Vector3, direction: +Vector3, near: number, far: number)"
 	},
 	"Lut": {
-		"!url": "http://threejs.org/docs/#Reference/examples/Lut",
+		"!url": "http://threejs.org/docs/#api/examples/Lut",
 		"prototype": {
 			"minV": {
 				"!type": "number",
@@ -740,7 +735,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(colormap, numberOfColors)"
 	},
 	"CombinedCamera": {
-		"!url": "http://threejs.org/docs/#Reference/examples/cameras/CombinedCamera",
+		"!url": "http://threejs.org/docs/#api/examples/cameras/CombinedCamera",
 		"prototype": {
 			"!proto": "Camera.prototype",
 			"fov": {
@@ -848,7 +843,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(width: number, height: number, fov: number, near: number, far: number, orthoNear: number, orthoFar: number)"
 	},
 	"FontUtils": {
-		"!url": "http://threejs.org/docs/#Reference/extras/FontUtils",
+		"!url": "http://threejs.org/docs/#api/extras/FontUtils",
 		"prototype": {
 			"divisions": {
 				"!type": "number",
@@ -902,12 +897,12 @@ tern.registerPlugin("threejs", function(server, options)
 		"!doc": "A class for text operations in three.js (See [page:TextGeometry])"
 	},
 	"GeometryUtils": {
-		"!url": "http://threejs.org/docs/#Reference/extras/GeometryUtils",
+		"!url": "http://threejs.org/docs/#api/extras/GeometryUtils",
 		"prototype": {},
 		"!doc": "Contains handy functions geometry manipulations."
 	},
 	"ImageUtils": {
-		"!url": "http://threejs.org/docs/#Reference/extras/ImageUtils",
+		"!url": "http://threejs.org/docs/#api/extras/ImageUtils",
 		"prototype": {
 			"crossOrigin": {
 				"!type": "string",
@@ -945,7 +940,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!doc": "A Helper class to ease the loading of images of different types."
 	},
 	"SceneUtils": {
-		"!url": "http://threejs.org/docs/#Reference/extras/SceneUtils",
+		"!url": "http://threejs.org/docs/#api/extras/SceneUtils",
 		"prototype": {
 			"createMultiMaterialObject": {
 				"!type": "fn(geometry: +Geometry, materials: []) -> +Object3D",
@@ -963,7 +958,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!doc": "A class containing useful utility functions for scene manipulation."
 	},
 	"Curve": {
-		"!url": "http://threejs.org/docs/#Reference/extras/core/Curve",
+		"!url": "http://threejs.org/docs/#api/extras/core/Curve",
 		"prototype": {
 			"getPoint": {
 				"!type": "fn(t) -> Vector",
@@ -1010,7 +1005,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"CurvePath": {
-		"!url": "http://threejs.org/docs/#Reference/extras/core/CurvePath",
+		"!url": "http://threejs.org/docs/#api/extras/core/CurvePath",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"curves": {
@@ -1078,7 +1073,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"Gyroscope": {
-		"!url": "http://threejs.org/docs/#Reference/extras/core/Gyroscope",
+		"!url": "http://threejs.org/docs/#api/extras/core/Gyroscope",
 		"prototype": {
 			"!proto": "Object3D.prototype"
 		},
@@ -1086,7 +1081,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"Path": {
-		"!url": "http://threejs.org/docs/#Reference/extras/core/Path",
+		"!url": "http://threejs.org/docs/#api/extras/core/Path",
 		"prototype": {
 			"!proto": "CurvePath.prototype",
 			"actions": {
@@ -1138,7 +1133,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(points: todo)"
 	},
 	"Shape": {
-		"!url": "http://threejs.org/docs/#Reference/extras/core/Shape",
+		"!url": "http://threejs.org/docs/#api/extras/core/Shape",
 		"prototype": {
 			"!proto": "Path.prototype",
 			"holes": {
@@ -1178,14 +1173,14 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"ArcCurve": {
-		"!url": "http://threejs.org/docs/#Reference/extras/curves/ArcCurve",
+		"!url": "http://threejs.org/docs/#api/extras/curves/ArcCurve",
 		"prototype": {
 			"!proto": "EllipseCurve.prototype"
 		},
 		"!doc": "Alias for [page:EllipseCurve]"
 	},
 	"CubicBezierCurve": {
-		"!url": "http://threejs.org/docs/#Reference/extras/curves/CubicBezierCurve",
+		"!url": "http://threejs.org/docs/#api/extras/curves/CubicBezierCurve",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v0": "+Vector2",
@@ -1196,7 +1191,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!doc": "Create a smooth 2d <a href=\"http://en.wikipedia.org/wiki/B%C3%A9zier_curve#mediaviewer/File:Bezier_curve.svg\" target=\"_blank\">cubic bezier curve</a>."
 	},
 	"CubicBezierCurve3": {
-		"!url": "http://threejs.org/docs/#Reference/extras/curves/CubicBezierCurve3",
+		"!url": "http://threejs.org/docs/#api/extras/curves/CubicBezierCurve3",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v0": "+Vector3",
@@ -1208,7 +1203,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(v0: +Vector3, v1: +Vector3, v2: +Vector3, v3: +Vector3)"
 	},
 	"EllipseCurve": {
-		"!url": "http://threejs.org/docs/#Reference/extras/curves/EllipseCurve",
+		"!url": "http://threejs.org/docs/#api/extras/curves/EllipseCurve",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"aX": "number",
@@ -1223,7 +1218,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(aX: number, aY: number, xRadius: number, yRadius: number, aStartAngle: Radians, aEndAngle: Radians, aClockwise: bool)"
 	},
 	"LineCurve": {
-		"!url": "http://threejs.org/docs/#Reference/extras/curves/LineCurve",
+		"!url": "http://threejs.org/docs/#api/extras/curves/LineCurve",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v1": "+Vector2",
@@ -1233,7 +1228,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(v1: +Vector2, v2: +Vector2)"
 	},
 	"LineCurve3": {
-		"!url": "http://threejs.org/docs/#Reference/extras/curves/LineCurve3",
+		"!url": "http://threejs.org/docs/#api/extras/curves/LineCurve3",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v1": "+Vector3",
@@ -1243,7 +1238,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(v1: +Vector3, v2: +Vector3)"
 	},
 	"QuadraticBezierCurve": {
-		"!url": "http://threejs.org/docs/#Reference/extras/curves/QuadraticBezierCurve",
+		"!url": "http://threejs.org/docs/#api/extras/curves/QuadraticBezierCurve",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v0": "+Vector2",
@@ -1254,7 +1249,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(v0: +Vector2, v1: +Vector2, v2: +Vector2)"
 	},
 	"QuadraticBezierCurve3": {
-		"!url": "http://threejs.org/docs/#Reference/extras/curves/QuadraticBezierCurve3",
+		"!url": "http://threejs.org/docs/#api/extras/curves/QuadraticBezierCurve3",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"v0": "+Vector3",
@@ -1265,7 +1260,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(v0: +Vector3, v1: +Vector3, v2: +Vector3)"
 	},
 	"SplineCurve": {
-		"!url": "http://threejs.org/docs/#Reference/extras/curves/SplineCurve",
+		"!url": "http://threejs.org/docs/#api/extras/curves/SplineCurve",
 		"prototype": {
 			"!proto": "Curve.prototype",
 			"points": "[]"
@@ -1274,7 +1269,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(points: [])"
 	},
 	"BoxGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/BoxGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/BoxGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1282,7 +1277,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(width: number, height: number, depth: number, widthSegments: number, heightSegments: number, depthSegments: number)"
 	},
 	"CircleGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/CircleGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/CircleGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1290,14 +1285,14 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(radius: number, segments: number, thetaStart: number, thetaLength: number)"
 	},
 	"CubeGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/CubeGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/CubeGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
 		"!doc": "Renamed CubeGeometry to BoxGeometry. see [page:BoxGeometry]."
 	},
 	"CylinderGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/CylinderGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/CylinderGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1305,7 +1300,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(radiusTop: number, radiusBottom: number, height: number, radiusSegments: number, heightSegments: number, openEnded: bool, thetaStart: number, thetaLength: number)"
 	},
 	"DodecahedronGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/DodecahedronGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/DodecahedronGeometry",
 		"prototype": {
 			"!proto": "PolyhedronGeometry.prototype",
 			"parameters": {
@@ -1317,7 +1312,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(radius: number, detail: number)"
 	},
 	"ExtrudeGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/ExtrudeGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/ExtrudeGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype",
 			"addShapeList": {
@@ -1333,7 +1328,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(shapes: [], options: object)"
 	},
 	"IcosahedronGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/IcosahedronGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/IcosahedronGeometry",
 		"prototype": {
 			"!proto": "PolyhedronGeometry.prototype",
 			"parameters": {
@@ -1345,7 +1340,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(radius: number, detail: number)"
 	},
 	"LatheGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/LatheGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/LatheGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1353,7 +1348,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(points: [], segments: number, phiStart: number, phiLength: number)"
 	},
 	"OctahedronGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/OctahedronGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/OctahedronGeometry",
 		"prototype": {
 			"!proto": "PolyhedronGeometry.prototype",
 			"parameters": {
@@ -1365,7 +1360,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(radius: number, detail: number)"
 	},
 	"ParametricGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/ParametricGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/ParametricGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1373,7 +1368,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(func: function, slices: number, stacks: number)"
 	},
 	"PlaneGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/PlaneGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/PlaneGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1381,7 +1376,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(width: number, height: number, widthSegments: number, heightSegments: number)"
 	},
 	"PolyhedronGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/PolyhedronGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/PolyhedronGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype",
 			"parameters": {
@@ -1393,7 +1388,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(vertices: [], faces: [], radius: number, detail: number)"
 	},
 	"RingGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/RingGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/RingGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1401,7 +1396,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(innerRadius: number, outerRadius: number, thetaSegments: number, phiSegments: number, thetaStart: number, thetaLength: number)"
 	},
 	"ShapeGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/ShapeGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/ShapeGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype",
 			"addShape": {
@@ -1413,7 +1408,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(shapes: [], options: object)"
 	},
 	"SphereGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/SphereGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/SphereGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1421,7 +1416,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(radius: number, widthSegments: number, heightSegments: number, phiStart: number, phiLength: number, thetaStart: number, thetaLength: number)"
 	},
 	"TetrahedronGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/TetrahedronGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/TetrahedronGeometry",
 		"prototype": {
 			"!proto": "PolyhedronGeometry.prototype",
 			"parameters": {
@@ -1433,7 +1428,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(radius: number, detail: number)"
 	},
 	"TextGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/TextGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/TextGeometry",
 		"prototype": {
 			"!proto": "ExtrudeGeometry.prototype"
 		},
@@ -1441,7 +1436,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(text: string, parameters: object)"
 	},
 	"TorusGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/TorusGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/TorusGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1449,7 +1444,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(radius: number, tube: number, radialSegments: number, tubularSegments: number, arc: number)"
 	},
 	"TorusKnotGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/TorusKnotGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/TorusKnotGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype"
 		},
@@ -1457,7 +1452,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(radius: number, tube: number, radialSegments: number, tubularSegments: number, p: number, q: number, heightScale: number)"
 	},
 	"TubeGeometry": {
-		"!url": "http://threejs.org/docs/#Reference/geometries/TubeGeometry",
+		"!url": "http://threejs.org/docs/#api/geometries/TubeGeometry",
 		"prototype": {
 			"!proto": "Geometry.prototype",
 			"parameters": {
@@ -1481,7 +1476,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(path: +Curve, segments: number, radius: number, radiusSegments: number, closed: bool)"
 	},
 	"ArrowHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/ArrowHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/ArrowHelper",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"line": {
@@ -1509,7 +1504,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(dir: +Vector3, origin: +Vector3, length: number, hex: number, headLength: number, headWidth: number)"
 	},
 	"AxisHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/AxisHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/AxisHelper",
 		"prototype": {
 			"!proto": "Line.prototype"
 		},
@@ -1517,7 +1512,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(size: number)"
 	},
 	"BoundingBoxHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/BoundingBoxHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/BoundingBoxHelper",
 		"prototype": {
 			"!proto": "Mesh.prototype",
 			"object": {
@@ -1537,7 +1532,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(object: +Object3D, hex: number)"
 	},
 	"BoxHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/BoxHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/BoxHelper",
 		"prototype": {
 			"!proto": "Line.prototype",
 			"update": {
@@ -1549,7 +1544,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(object: +Object3D)"
 	},
 	"CameraHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/CameraHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/CameraHelper",
 		"prototype": {
 			"!proto": "Line.prototype",
 			"pointMap": {
@@ -1569,7 +1564,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(camera: +Camera)"
 	},
 	"DirectionalLightHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/DirectionalLightHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/DirectionalLightHelper",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"lightPlane": {
@@ -1593,7 +1588,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(light: +DirectionalLight, size: number)"
 	},
 	"EdgesHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/EdgesHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/EdgesHelper",
 		"prototype": {
 			"!proto": "Line.prototype"
 		},
@@ -1601,7 +1596,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(object: +Object3D, color: +Color, thresholdAngle: number)"
 	},
 	"FaceNormalsHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/FaceNormalsHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/FaceNormalsHelper",
 		"prototype": {
 			"!proto": "Line.prototype",
 			"object": {
@@ -1617,7 +1612,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(object: +Object3D, size: number, color: +Color, linewidth: number)"
 	},
 	"GridHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/GridHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/GridHelper",
 		"prototype": {
 			"!proto": "Line.prototype"
 		},
@@ -1625,7 +1620,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(size: number, step: number)"
 	},
 	"HemisphereLightHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/HemisphereLightHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/HemisphereLightHelper",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"lightSphere": {
@@ -1645,7 +1640,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(light: +HemisphereLight, sphereSize: number)"
 	},
 	"PointLightHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/PointLightHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/PointLightHelper",
 		"prototype": {
 			"!proto": "Mesh.prototype",
 			"lightSphere": {
@@ -1665,7 +1660,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(light: todo, sphereSize: todo)"
 	},
 	"SpotLightHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/SpotLightHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/SpotLightHelper",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"lightSphere": {
@@ -1689,7 +1684,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(light: todo, sphereSize: todo)"
 	},
 	"VertexNormalsHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/VertexNormalsHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/VertexNormalsHelper",
 		"prototype": {
 			"!proto": "Line.prototype",
 			"object": {
@@ -1705,7 +1700,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(object: +Object3D, size: number, color: +Color, linewidth: number)"
 	},
 	"WireframeHelper": {
-		"!url": "http://threejs.org/docs/#Reference/extras/helpers/WireframeHelper",
+		"!url": "http://threejs.org/docs/#api/extras/helpers/WireframeHelper",
 		"prototype": {
 			"!proto": "Line.prototype"
 		},
@@ -1713,7 +1708,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(object: +Object3D, color: +Color)"
 	},
 	"ImmediateRenderObject": {
-		"!url": "http://threejs.org/docs/#Reference/extras/objects/ImmediateRenderObject",
+		"!url": "http://threejs.org/docs/#api/extras/objects/ImmediateRenderObject",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"render": {
@@ -1725,7 +1720,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"MorphBlendMesh": {
-		"!url": "http://threejs.org/docs/#Reference/extras/objects/MorphBlendMesh",
+		"!url": "http://threejs.org/docs/#api/extras/objects/MorphBlendMesh",
 		"prototype": {
 			"!proto": "Mesh.prototype",
 			"animationsMap": {
@@ -1793,7 +1788,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(geometry: todo, material: todo)"
 	},
 	"AmbientLight": {
-		"!url": "http://threejs.org/docs/#Reference/lights/AmbientLight",
+		"!url": "http://threejs.org/docs/#api/lights/AmbientLight",
 		"prototype": {
 			"!proto": "Light.prototype"
 		},
@@ -1801,7 +1796,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(hex: number)"
 	},
 	"DirectionalLight": {
-		"!url": "http://threejs.org/docs/#Reference/lights/DirectionalLight",
+		"!url": "http://threejs.org/docs/#api/lights/DirectionalLight",
 		"prototype": {
 			"!proto": "Light.prototype",
 			"target": {
@@ -1817,7 +1812,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(hex: number, intensity: number)"
 	},
 	"HemisphereLight": {
-		"!url": "http://threejs.org/docs/#Reference/lights/HemisphereLight",
+		"!url": "http://threejs.org/docs/#api/lights/HemisphereLight",
 		"prototype": {
 			"!proto": "Light.prototype",
 			"groundColor": {
@@ -1833,7 +1828,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(skyColorHex: number, groundColorHex: number, intensity: number)"
 	},
 	"Light": {
-		"!url": "http://threejs.org/docs/#Reference/lights/Light",
+		"!url": "http://threejs.org/docs/#api/lights/Light",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"color": {
@@ -1845,7 +1840,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(hex: number)"
 	},
 	"PointLight": {
-		"!url": "http://threejs.org/docs/#Reference/lights/PointLight",
+		"!url": "http://threejs.org/docs/#api/lights/PointLight",
 		"prototype": {
 			"!proto": "Light.prototype",
 			"intensity": {
@@ -1861,7 +1856,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(hex: number, intensity: number, distance: number)"
 	},
 	"SpotLight": {
-		"!url": "http://threejs.org/docs/#Reference/lights/SpotLight",
+		"!url": "http://threejs.org/docs/#api/lights/SpotLight",
 		"prototype": {
 			"!proto": "Light.prototype",
 			"target": {
@@ -1889,7 +1884,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(hex: number, intensity: number, distance: todo, angle: todo, exponent: todo)"
 	},
 	"BabylonLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/BabylonLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/BabylonLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -1904,7 +1899,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"BufferGeometryLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/BufferGeometryLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/BufferGeometryLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -1919,7 +1914,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"Cache": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/Cache",
+		"!url": "http://threejs.org/docs/#api/loaders/Cache",
 		"prototype": {
 			"files": {
 				"!type": "object",
@@ -1946,7 +1941,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"ColladaLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/ColladaLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/ColladaLoader",
 		"prototype": {
 			"options": {
 				"!type": "[]",
@@ -1977,7 +1972,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"ImageLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/ImageLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/ImageLoader",
 		"prototype": {
 			"crossOrigin": {
 				"!type": "string",
@@ -1996,7 +1991,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"JSONLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/JSONLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/JSONLoader",
 		"prototype": {
 			"!proto": "Loader.prototype",
 			"withCredentials": {
@@ -2044,7 +2039,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"Loader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/Loader",
+		"!url": "http://threejs.org/docs/#api/loaders/Loader",
 		"prototype": {
 			"onLoadStart": {
 				"!type": "function",
@@ -2083,7 +2078,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"LoadingManager": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/LoadingManager",
+		"!url": "http://threejs.org/docs/#api/loaders/LoadingManager",
 		"prototype": {
 			"onLoad": {
 				"!type": "function",
@@ -2110,7 +2105,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(onLoad: function, onProgress: function, onError: function)"
 	},
 	"MTLLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/MTLLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/MTLLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2125,7 +2120,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(baseUrl: string, options: object, crossOrigin: string)"
 	},
 	"MaterialLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/MaterialLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/MaterialLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2144,7 +2139,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"OBJLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/OBJLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/OBJLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2159,7 +2154,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"OBJMTLLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/OBJMTLLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/OBJMTLLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(objUrl: string, mtlUrl: string, onLoad: function, onProgress: function, onError: function)",
@@ -2174,7 +2169,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"ObjectLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/ObjectLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/ObjectLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2193,7 +2188,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"PDBLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/PDBLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/PDBLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2212,7 +2207,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"SVGLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/SVGLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/SVGLoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function)",
@@ -2223,7 +2218,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"TGALoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/TGALoader",
+		"!url": "http://threejs.org/docs/#api/loaders/TGALoader",
 		"prototype": {
 			"load": {
 				"!type": "fn(url: string, onLoad: function, onProgress: function, onError: function) -> +DataTexture",
@@ -2234,7 +2229,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"TextureLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/TextureLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/TextureLoader",
 		"prototype": {
 			"crossOrigin": {
 				"!type": "string",
@@ -2249,7 +2244,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"FileLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/FileLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/FileLoader",
 		"prototype": {
 			"cache": {
 				"!type": "+Cache",
@@ -2280,7 +2275,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(manager: +LoadingManager)"
 	},
 	"GLTFLoader": {
-		"!url": "http://threejs.org/docs/#Reference/loaders/GLTFLoader",
+		"!url": "http://threejs.org/docs/#api/loaders/GLTFLoader",
 		"prototype": {
 			"!proto": "Loader.prototype",
 			"load": {
@@ -2292,7 +2287,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"LineBasicMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/LineBasicMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/LineBasicMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2324,7 +2319,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"LineDashedMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/LineDashedMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/LineDashedMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2360,7 +2355,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"Material": {
-		"!url": "http://threejs.org/docs/#Reference/materials/Material",
+		"!url": "http://threejs.org/docs/#api/materials/Material",
 		"prototype": {
 			"id": {
 				"!type": "number",
@@ -2443,7 +2438,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"MeshBasicMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/MeshBasicMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/MeshBasicMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2523,7 +2518,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"MeshDepthMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/MeshDepthMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/MeshDepthMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"morphTargets": {
@@ -2543,7 +2538,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"MultiMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/MultiMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/MultiMaterial",
 		"prototype": {
 			"materials": {
 				"!type": "[]",
@@ -2554,7 +2549,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(materials: [])"
 	},
 	"MeshLambertMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/MeshLambertMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/MeshLambertMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2650,7 +2645,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"MeshNormalMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/MeshNormalMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/MeshNormalMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"wireframe": {
@@ -2670,7 +2665,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"MeshPhongMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/MeshPhongMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/MeshPhongMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2794,7 +2789,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"PointCloudMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/PointCloudMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/PointCloudMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2826,14 +2821,14 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"RawShaderMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/RawShaderMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/RawShaderMaterial",
 		"prototype": {
 			"!proto": "ShaderMaterial.prototype"
 		},
 		"!doc": "This class works just like [page:ShaderMaterial], except that definitions of built-in uniforms and attributes are not automatically prepended to the GLSL shader code."
 	},
 	"ShaderMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/ShaderMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/ShaderMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"uniforms": {
@@ -2909,7 +2904,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"SpriteCanvasMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/SpriteCanvasMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/SpriteCanvasMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2925,7 +2920,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"SpriteMaterial": {
-		"!url": "http://threejs.org/docs/#Reference/materials/SpriteMaterial",
+		"!url": "http://threejs.org/docs/#api/materials/SpriteMaterial",
 		"prototype": {
 			"!proto": "Material.prototype",
 			"color": {
@@ -2949,7 +2944,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"Box2": {
-		"!url": "http://threejs.org/docs/#Reference/math/Box2",
+		"!url": "http://threejs.org/docs/#api/math/Box2",
 		"prototype": {
 			"min": {
 				"!type": "+Vector2",
@@ -3052,7 +3047,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(min: +Vector2, max: +Vector2)"
 	},
 	"Box3": {
-		"!url": "http://threejs.org/docs/#Reference/math/Box3",
+		"!url": "http://threejs.org/docs/#api/math/Box3",
 		"prototype": {
 			"min": {
 				"!type": "+Vector3",
@@ -3167,7 +3162,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(min: +Vector3, max: +Vector3)"
 	},
 	"Color": {
-		"!url": "http://threejs.org/docs/#Reference/math/Color",
+		"!url": "http://threejs.org/docs/#api/math/Color",
 		"prototype": {
 			"r": {
 				"!type": "number",
@@ -3278,7 +3273,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(value)"
 	},
 	"Euler": {
-		"!url": "http://threejs.org/docs/#Reference/math/Euler",
+		"!url": "http://threejs.org/docs/#api/math/Euler",
 		"prototype": {
 			"x": "number",
 			"y": "number",
@@ -3333,7 +3328,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(x: number, y: number, z: number, order: string)"
 	},
 	"Frustum": {
-		"!url": "http://threejs.org/docs/#Reference/math/Frustum",
+		"!url": "http://threejs.org/docs/#api/math/Frustum",
 		"prototype": {
 			"planes": {
 				"!type": "[]",
@@ -3372,7 +3367,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(p0: +Plane, p1: +Plane, p2: +Plane, p3: +Plane, p4: +Plane, p5: +Plane)"
 	},
 	"Line3": {
-		"!url": "http://threejs.org/docs/#Reference/math/Line3",
+		"!url": "http://threejs.org/docs/#api/math/Line3",
 		"prototype": {
 			"start": "+Vector3",
 			"end": "+Vector3",
@@ -3429,7 +3424,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(start: +Vector3, end: +Vector3)"
 	},
 	"Math": {
-		"!url": "http://threejs.org/docs/#Reference/math/Math",
+		"!url": "http://threejs.org/docs/#api/math/Math",
 		"prototype": {
 			"clamp": {
 				"!type": "fn(x: number, a: number, b: number) -> number",
@@ -3483,7 +3478,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!doc": "Math utility functions"
 	},
 	"Matrix3": {
-		"!url": "http://threejs.org/docs/#Reference/math/Matrix3",
+		"!url": "http://threejs.org/docs/#api/math/Matrix3",
 		"prototype": {
 			"elements": {
 				"!type": "Float32Array",
@@ -3538,7 +3533,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(n11: number, n12: number, n13: number, n21: number, n22: number, n23: number, n31: number, n32: number, n33: number)"
 	},
 	"Matrix4": {
-		"!url": "http://threejs.org/docs/#Reference/math/Matrix4",
+		"!url": "http://threejs.org/docs/#api/math/Matrix4",
 		"prototype": {
 			"elements": {
 				"!type": "Float32Array",
@@ -3677,7 +3672,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(n11: number, n12: number, n13: number, n14: number, n21: number, n22: number, n23: number, n24: number, n31: number, n32: number, n33: number, n34: number, n41: number, n42: number, n43: number, n44: number)"
 	},
 	"Plane": {
-		"!url": "http://threejs.org/docs/#Reference/math/Plane",
+		"!url": "http://threejs.org/docs/#api/math/Plane",
 		"prototype": {
 			"normal": "+Vector3",
 			"constant": "number",
@@ -3758,7 +3753,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(normal: +Vector3, constant: number)"
 	},
 	"Quaternion": {
-		"!url": "http://threejs.org/docs/#Reference/math/Quaternion",
+		"!url": "http://threejs.org/docs/#api/math/Quaternion",
 		"prototype": {
 			"x": "number",
 			"y": "number",
@@ -3845,7 +3840,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(x: number, y: number, z: number, w: number)"
 	},
 	"Ray": {
-		"!url": "http://threejs.org/docs/#Reference/math/Ray",
+		"!url": "http://threejs.org/docs/#api/math/Ray",
 		"prototype": {
 			"origin": {
 				"!type": "+Vector3",
@@ -3908,7 +3903,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(origin: +Vector3, direction: +Vector3)"
 	},
 	"Sphere": {
-		"!url": "http://threejs.org/docs/#Reference/math/Sphere",
+		"!url": "http://threejs.org/docs/#api/math/Sphere",
 		"prototype": {
 			"center": "+Vector3",
 			"radius": "number",
@@ -3965,7 +3960,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(center: +Vector3, radius: number)"
 	},
 	"Triangle": {
-		"!url": "http://threejs.org/docs/#Reference/math/Triangle",
+		"!url": "http://threejs.org/docs/#api/math/Triangle",
 		"prototype": {
 			"a": {
 				"!type": "+Vector3",
@@ -4028,7 +4023,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(a: +Vector3, b: +Vector3, c: +Vector3)"
 	},
 	"Vector2": {
-		"!url": "http://threejs.org/docs/#Reference/math/Vector2",
+		"!url": "http://threejs.org/docs/#api/math/Vector2",
 		"prototype": {
 			"x": "number",
 			"y": "number",
@@ -4177,7 +4172,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(x: number, y: number)"
 	},
 	"Vector3": {
-		"!url": "http://threejs.org/docs/#Reference/math/Vector3",
+		"!url": "http://threejs.org/docs/#api/math/Vector3",
 		"prototype": {
 			"x": "number",
 			"y": "number",
@@ -4419,7 +4414,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(x: number, y: number, z: number)"
 	},
 	"Vector4": {
-		"!url": "http://threejs.org/docs/#Reference/math/Vector4",
+		"!url": "http://threejs.org/docs/#api/math/Vector4",
 		"prototype": {
 			"x": "number",
 			"y": "number",
@@ -4586,7 +4581,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(x: number, y: number, z: number, w: number)"
 	},
 	"Bone": {
-		"!url": "http://threejs.org/docs/#Reference/objects/Bone",
+		"!url": "http://threejs.org/docs/#api/objects/Bone",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"skinMatrix": {
@@ -4606,7 +4601,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(belongsToSkin: +SkinnedMesh)"
 	},
 	"LOD": {
-		"!url": "http://threejs.org/docs/#Reference/objects/LOD",
+		"!url": "http://threejs.org/docs/#api/objects/LOD",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"objects": {
@@ -4630,7 +4625,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"LensFlare": {
-		"!url": "http://threejs.org/docs/#Reference/objects/LensFlare",
+		"!url": "http://threejs.org/docs/#api/objects/LensFlare",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"lensFlares": {
@@ -4654,7 +4649,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(texture: todo, size: todo, distance: todo, blending: todo, color: todo)"
 	},
 	"Line": {
-		"!url": "http://threejs.org/docs/#Reference/objects/Line",
+		"!url": "http://threejs.org/docs/#api/objects/Line",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"geometry": {
@@ -4678,7 +4673,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(geometry: +Geometry, material: +Material, type: number)"
 	},
 	"Mesh": {
-		"!url": "http://threejs.org/docs/#Reference/objects/Mesh",
+		"!url": "http://threejs.org/docs/#api/objects/Mesh",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"geometry": {
@@ -4706,7 +4701,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(geometry: +Geometry, material: +Material)"
 	},
 	"MorphAnimMesh": {
-		"!url": "http://threejs.org/docs/#Reference/objects/MorphAnimMesh",
+		"!url": "http://threejs.org/docs/#api/objects/MorphAnimMesh",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"directionBackwards": {
@@ -4782,7 +4777,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(geometry: todo, material: todo)"
 	},
 	"PointCloud": {
-		"!url": "http://threejs.org/docs/#Reference/objects/PointCloud",
+		"!url": "http://threejs.org/docs/#api/objects/PointCloud",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"geometry": {
@@ -4806,7 +4801,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(geometry: +Geometry, material: +Material)"
 	},
 	"SkinnedMesh": {
-		"!url": "http://threejs.org/docs/#Reference/objects/SkinnedMesh",
+		"!url": "http://threejs.org/docs/#api/objects/SkinnedMesh",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"bones": {
@@ -4838,7 +4833,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(geometry: +Geometry, material: +Material, useVertexTexture: boolean)"
 	},
 	"Sprite": {
-		"!url": "http://threejs.org/docs/#Reference/objects/Sprite",
+		"!url": "http://threejs.org/docs/#api/objects/Sprite",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"material": {
@@ -4854,7 +4849,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(material: +Material)"
 	},
 	"CanvasRenderer": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/CanvasRenderer",
+		"!url": "http://threejs.org/docs/#api/renderers/CanvasRenderer",
 		"prototype": {
 			"info": {
 				"!type": "object",
@@ -4909,7 +4904,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"WebGLRenderTarget": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/WebGLRenderTarget",
+		"!url": "http://threejs.org/docs/#api/renderers/WebGLRenderTarget",
 		"prototype": {
 			"wrapS": {
 				"!type": "number",
@@ -4976,7 +4971,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(width: number, height: number, options: object)"
 	},
 	"WebGLRenderTargetCube": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/WebGLRenderTargetCube",
+		"!url": "http://threejs.org/docs/#api/renderers/WebGLRenderTargetCube",
 		"prototype": {
 			"!proto": "WebGLRenderTarget.prototype",
 			"activeCubeFace": {
@@ -4988,7 +4983,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(width: number, height: number, options: object)"
 	},
 	"WebGLRenderer": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/WebGLRenderer",
+		"!url": "http://threejs.org/docs/#api/renderers/WebGLRenderer",
 		"prototype": {
 			"domElement": {
 				"!type": "DOMElement",
@@ -5183,27 +5178,27 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(parameters: object)"
 	},
 	"ShaderChunk": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/shaders/ShaderChunk",
+		"!url": "http://threejs.org/docs/#api/renderers/shaders/ShaderChunk",
 		"prototype": {},
 		"!doc": "Shader chunks for WebLG Shader library"
 	},
 	"ShaderLib": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/shaders/ShaderLib",
+		"!url": "http://threejs.org/docs/#api/renderers/shaders/ShaderLib",
 		"prototype": {},
 		"!doc": "Webgl Shader Library for three.js"
 	},
 	"UniformsLib": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/shaders/UniformsLib",
+		"!url": "http://threejs.org/docs/#api/renderers/shaders/UniformsLib",
 		"prototype": {},
 		"!doc": "Uniforms library for shared webgl shaders"
 	},
 	"UniformsUtils": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/shaders/UniformsUtils",
+		"!url": "http://threejs.org/docs/#api/renderers/shaders/UniformsUtils",
 		"prototype": {},
 		"!doc": "Uniform Utilities. Support merging and cloning of uniform variables"
 	},
 	"WebGLProgram": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/webgl/WebGLProgram",
+		"!url": "http://threejs.org/docs/#api/renderers/webgl/WebGLProgram",
 		"prototype": {
 			"uniforms": "object",
 			"attributes": "object",
@@ -5218,12 +5213,12 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(renderer: +WebGLRenderer, code: object, material: +Material, parameters: object)"
 	},
 	"WebGLShader": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/webgl/WebGLShader",
+		"!url": "http://threejs.org/docs/#api/renderers/webgl/WebGLShader",
 		"prototype": {},
 		"!doc": "todo"
 	},
 	"LensFlarePlugin": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/webgl/plugins/LensFlarePlugin",
+		"!url": "http://threejs.org/docs/#api/renderers/webgl/plugins/LensFlarePlugin",
 		"prototype": {
 			"render": {
 				"!type": "fn(scene: +Scene, camera: +Camera, viewportWidth: number, viewportHeight: number)",
@@ -5234,7 +5229,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"ShadowMapPlugin": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/webgl/plugins/ShadowMapPlugin",
+		"!url": "http://threejs.org/docs/#api/renderers/webgl/plugins/ShadowMapPlugin",
 		"prototype": {
 			"render": {
 				"!type": "fn(scene: +Scene, camera: +Camera)",
@@ -5245,7 +5240,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"SpritePlugin": {
-		"!url": "http://threejs.org/docs/#Reference/renderers/webgl/plugins/SpritePlugin",
+		"!url": "http://threejs.org/docs/#api/renderers/webgl/plugins/SpritePlugin",
 		"prototype": {
 			"render": {
 				"!type": "fn(scene: +Scene, camera: +Camera)",
@@ -5256,7 +5251,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"Fog": {
-		"!url": "http://threejs.org/docs/#Reference/scenes/Fog",
+		"!url": "http://threejs.org/docs/#api/scenes/Fog",
 		"prototype": {
 			"name": {
 				"!type": "string",
@@ -5283,7 +5278,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(hex: number, near: number, far: number)"
 	},
 	"FogExp2": {
-		"!url": "http://threejs.org/docs/#Reference/scenes/FogExp2",
+		"!url": "http://threejs.org/docs/#api/scenes/FogExp2",
 		"prototype": {
 			"name": {
 				"!type": "string",
@@ -5306,7 +5301,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(hex: number, density: number)"
 	},
 	"Scene": {
-		"!url": "http://threejs.org/docs/#Reference/scenes/Scene",
+		"!url": "http://threejs.org/docs/#api/scenes/Scene",
 		"prototype": {
 			"!proto": "Object3D.prototype",
 			"fog": {
@@ -5326,7 +5321,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn()"
 	},
 	"CompressedTexture": {
-		"!url": "http://threejs.org/docs/#Reference/textures/CompressedTexture",
+		"!url": "http://threejs.org/docs/#api/textures/CompressedTexture",
 		"prototype": {
 			"!proto": "Texture.prototype",
 			"flipY": {
@@ -5342,7 +5337,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(mipmaps: [], width: number, height: number, format: number, type: number, mapping: number, wrapS: number, wrapT: number, magFilter: number, minFilter: number, anisotropy: number)"
 	},
 	"DataTexture": {
-		"!url": "http://threejs.org/docs/#Reference/textures/DataTexture",
+		"!url": "http://threejs.org/docs/#api/textures/DataTexture",
 		"prototype": {
 			"!proto": "Texture.prototype"
 		},
@@ -5350,7 +5345,7 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(data: ArraybufferView, width: number, height: number, format: number, type: number, mapping: number, wrapS: number, wrapT: number, magFilter: number, minFilter: number, anisotropy: number)"
 	},
 	"Texture": {
-		"!url": "http://threejs.org/docs/#Reference/textures/Texture",
+		"!url": "http://threejs.org/docs/#api/textures/Texture",
 		"prototype": {
 			"id": {
 				"!type": "number",
@@ -5437,6 +5432,3 @@ tern.registerPlugin("threejs", function(server, options)
 		"!type": "fn(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy)"
 	}
 }
-}
-}
-);

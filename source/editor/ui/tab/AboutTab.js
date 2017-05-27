@@ -51,12 +51,20 @@ function AboutTab(parent, closeable, container, index)
 	this.codemirror.setText("CodeMirror V" + CodeMirror.version);
 
 	//CannonJS version
-	this.cannon = new Text(this.element),
+	this.cannon = new Text(this.element);
 	this.cannon.element.style.top = "80%";
 	this.cannon.element.style.left = "25%";
 	this.cannon.element.style.width = "50%";
 	this.cannon.setTextSize(15);
 	this.cannon.setText("CannonJS V" + CANNON.version);
+
+	//TernJS
+	this.tern = new Text(this.element);
+	this.tern.element.style.top = "80%";
+	this.tern.element.style.left = "0%";
+	this.tern.element.style.width = "50%";
+	this.tern.setTextSize(15);
+	this.tern.setText("TernJS V" + tern.version);
 
 	//NWJS version
 	if(Nunu.runningOnDesktop())

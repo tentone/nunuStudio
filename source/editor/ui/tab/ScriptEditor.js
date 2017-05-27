@@ -28,14 +28,20 @@ function ScriptEditor(parent, closeable, container, index)
 	var self = this;
 
 	//Tern server
-	var server = new CodeMirror.TernServer(
+	this.server = new CodeMirror.TernServer(
 	{
 		caseInsensitive: false,
+		defs: Editor.ternDefinitions,
 		plugins:
 		{
 			threejs: null
 		}
 	});
+
+	this.code.setOption("extraKeys",
+	{
+		"Ctrl-Space": function(cm){self.server.complete(cm);}
+	})
 
 	//Change
 	this.code.on("change", function(cm)
@@ -51,7 +57,7 @@ function ScriptEditor(parent, closeable, container, index)
 	//Cursor activity event
 	this.code.on("cursorActivity", function(cm)
 	{
-		server.updateArgHints(cm);
+		self.server.updateArgHints(cm);
 	});
 
 	//Key pressed event
@@ -61,9 +67,9 @@ function ScriptEditor(parent, closeable, container, index)
 
 		if(/[\w\.]/.exec(typed))
 		{
-			server.complete(cm);
+			self.server.complete(cm);
 
-			//If there is no tern sugestion suggest already used words
+			//If there is no tern sugestion suggest known words
 			if(cm.state.completionActive == null || cm.state.completionActive.widget === null)
 			{
 				CodeMirror.commands.autocomplete(cm, null);
@@ -81,7 +87,16 @@ function ScriptEditor(parent, closeable, container, index)
 		var refactor = context.addMenu("Refactor");
 		refactor.addOption("Rename", function()
 		{
-			server.rename(self.code);
+			self.server.rename(self.code);
+		});
+		refactor.addOption("Select", function()
+		{
+			self.server.selectName(self.code);
+		});
+
+		context.addOption("Documentation", function()
+		{
+			self.server.jumpToDef(self.code);
 		});
 
 		context.addOption("Copy", function()
