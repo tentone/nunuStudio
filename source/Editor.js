@@ -139,9 +139,7 @@ include("lib/tern/tern.js");
 include("lib/tern/def.js");
 include("lib/tern/comment.js");
 include("lib/tern/infer.js");
-include("lib/tern/doc_comment.js");
-
-include("lib/three/tern/threejs.js");
+include("lib/tern/plugin/doc_comment.js");
 
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/MTLLoader.js");
@@ -343,6 +341,12 @@ Editor.initialize = function()
 		}
 	}
 		
+	//Register tern plugins
+	Editor.ternDefinitions = [];
+	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Editor.filePath + "tern/threejs.json")));
+	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Editor.filePath + "tern/browser.json")));
+	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Editor.filePath + "tern/ecmascript.json")));
+
 	//Disable body overflow
 	document.body.style.overflow = "hidden";
 	
