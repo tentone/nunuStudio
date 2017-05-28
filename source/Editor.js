@@ -33,6 +33,7 @@ include("core/input/Key.js");
 include("core/input/Keyboard.js");
 include("core/input/Mouse.js");
 include("core/input/Gamepad.js");
+include("core/input/Gyroscope.js");
 
 include("core/controls/VRControls.js");
 

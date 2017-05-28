@@ -23,6 +23,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\input\\Gyroscope.js": {
+            "name": "..\\..\\source\\core\\input\\Gyroscope.js",
+            "modules": {},
+            "classes": {
+                "Gyroscope": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\input\\Key.js": {
             "name": "..\\..\\source\\core\\input\\Key.js",
             "modules": {},
@@ -683,6 +692,7 @@
             "elements": {},
             "classes": {
                 "Gamepad": 1,
+                "Gyroscope": 1,
                 "Key": 1,
                 "Keyboard": 1,
                 "Mouse": 1
@@ -1088,6 +1098,21 @@
             "file": "..\\..\\source\\core\\input\\Gamepad.js",
             "line": 3,
             "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/.",
+            "is_constructor": 1
+        },
+        "Gyroscope": {
+            "name": "Gyroscope",
+            "shortname": "Gyroscope",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Input",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\input\\Gyroscope.js",
+            "line": 3,
+            "description": "Gyroscope object can be used to get the orientation from the device.",
             "is_constructor": 1
         },
         "Key": {
@@ -2741,7 +2766,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 91,
+            "line": 92,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -3270,6 +3295,71 @@
             "itemtype": "attribute",
             "name": "RIGHT_ANALOGUE_VERT",
             "class": "Gamepad",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gyroscope.js",
+            "line": 10,
+            "description": "Alpha rotation.",
+            "itemtype": "property",
+            "name": "alpha",
+            "type": "{Number}",
+            "class": "Gyroscope",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gyroscope.js",
+            "line": 15,
+            "description": "Beta rotation.",
+            "itemtype": "property",
+            "name": "beta",
+            "type": "{Number}",
+            "class": "Gyroscope",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gyroscope.js",
+            "line": 20,
+            "description": "Gamma rotation.",
+            "itemtype": "property",
+            "name": "gamma",
+            "type": "{Number}",
+            "class": "Gyroscope",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gyroscope.js",
+            "line": 25,
+            "description": "Device orientation.",
+            "itemtype": "property",
+            "name": "orientation",
+            "type": "{Number}",
+            "class": "Gyroscope",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gyroscope.js",
+            "line": 63,
+            "description": "Sets a object rotation to match the device orientation.\n\nThe angles alpha, beta and gamma form a set of intrinsic Tait-Bryan angles of type ZXY",
+            "itemtype": "method",
+            "name": "setObjectQuaternion",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to oriented.",
+                    "type": "Object3D"
+                }
+            ],
+            "class": "Gyroscope",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\input\\Gyroscope.js",
+            "line": 87,
+            "description": "Dispose the gyroscope controller.\n\nCleans all events created by this controller.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Gyroscope",
             "module": "Input"
         },
         {
@@ -11279,7 +11369,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 102,
+            "line": 103,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -11289,7 +11379,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 108,
+            "line": 109,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -11299,7 +11389,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 114,
+            "line": 115,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -11310,7 +11400,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 121,
+            "line": 122,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -11321,7 +11411,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 128,
+            "line": 129,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -11331,7 +11421,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 134,
+            "line": 135,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasResize",
@@ -11342,7 +11432,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 195,
+            "line": 196,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -11368,7 +11458,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 215,
+            "line": 216,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -11384,7 +11474,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 228,
+            "line": 229,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -11410,7 +11500,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 252,
+            "line": 253,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -11419,7 +11509,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 303,
+            "line": 304,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -11428,7 +11518,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 319,
+            "line": 320,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -11437,7 +11527,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 356,
+            "line": 357,
             "description": "Resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -11446,7 +11536,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 379,
+            "line": 380,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -11455,7 +11545,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 389,
+            "line": 390,
             "description": "Set the canvas to be used for rendering.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -11471,7 +11561,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 401,
+            "line": 402,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -11480,7 +11570,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 425,
+            "line": 426,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -11496,7 +11586,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 441,
+            "line": 442,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -11512,7 +11602,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 454,
+            "line": 455,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -11528,7 +11618,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 467,
+            "line": 468,
             "description": "Check if VR mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -11541,7 +11631,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 478,
+            "line": 479,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -11550,7 +11640,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 504,
+            "line": 505,
             "description": "Set fullscreen mode",
             "itemtype": "method",
             "name": "setFullscreen",

@@ -18,7 +18,7 @@ function VRControls(object, onError)
 	this.vrInput = null;
 	this.scale = 1; //Scale from real units to world units
 	this.standing = false;
-	this.userHeight = 1.6; //Meters
+	this.userHeight = 1.7; //Meters
 	this.object = null;
 
 	if(object !== undefined)
