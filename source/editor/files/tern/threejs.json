@@ -1,12 +1,5 @@
 {
 	"!name": "threejs",
-	"Original": {
-		"!url": "http://threejs.org/docs/#api/Original",
-		"prototype": {
-			"!proto": "Geometry.prototype"
-		},
-		"!doc": "todo"
-	},
 	"Camera": {
 		"!url": "http://threejs.org/docs/#api/cameras/Camera",
 		"prototype": {
@@ -1068,14 +1061,6 @@
 				"!type": "fn() -> todo",
 				"!doc": "todo"
 			}
-		},
-		"!doc": "todo",
-		"!type": "fn()"
-	},
-	"Gyroscope": {
-		"!url": "http://threejs.org/docs/#api/extras/core/Gyroscope",
-		"prototype": {
-			"!proto": "Object3D.prototype"
 		},
 		"!doc": "todo",
 		"!type": "fn()"
