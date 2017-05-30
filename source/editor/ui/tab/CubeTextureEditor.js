@@ -171,6 +171,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.top.getValue());
 			self.texture.images[CubeTexture.TOP] = image;
 			self.texture.updateImages();
+			Editor.updateAssetExplorer();
 		}
 	});
 	this.form.add(this.top);
@@ -186,6 +187,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.left.getValue());
 			self.texture.images[CubeTexture.LEFT] = image;
 			self.texture.updateImages();
+			Editor.updateAssetExplorer();
 		}
 	});
 	this.form.add(this.left);
@@ -200,6 +202,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.front.getValue());
 			self.texture.images[CubeTexture.FRONT] = image;
 			self.texture.updateImages();
+			Editor.updateAssetExplorer();
 		}
 	});
 	this.form.add(this.front);
@@ -214,6 +217,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.right.getValue());
 			self.texture.images[CubeTexture.RIGHT] = image;
 			self.texture.updateImages();
+			Editor.updateAssetExplorer();
 		}
 	});
 	this.form.add(this.right);
@@ -228,6 +232,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.back.getValue());
 			self.texture.images[CubeTexture.BACK] = image;
 			self.texture.updateImages();
+			Editor.updateAssetExplorer();
 		}
 	});
 	this.form.add(this.back);
@@ -246,6 +251,7 @@ function CubeTextureEditor(parent, closeable, container, index)
 			var image = new Image(self.bottom.getValue());
 			self.texture.images[CubeTexture.BOTTOM] = image;
 			self.texture.updateImages();
+			Editor.updateAssetExplorer();
 		}
 	});
 	this.form.add(this.bottom);
@@ -258,6 +264,7 @@ CubeTextureEditor.prototype = Object.create(TabElement.prototype);
 CubeTextureEditor.prototype.updateMaterial = function()
 {
 	this.texture.needsUpdate = true;
+	
 	//TODO <ADD CHANGE TO HISTORY>
 }
 

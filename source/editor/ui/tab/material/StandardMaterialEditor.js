@@ -387,7 +387,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.aoMap);
 	this.form.nextRow();
 
-	//Ambient Occlusion intensity
+	//Ambient Occlusion
 	this.form.addText("Intensity");
 	this.aoMapIntensity = new NumberBox(this.form.element);
 	this.aoMapIntensity.size.set(60, 18);
@@ -401,6 +401,7 @@ function StandardMaterialEditor(parent, closeable, container, index)
 		}
 	});
 	this.form.add(this.aoMapIntensity);
+	this.form.nextRow();
 }
 
 StandardMaterialEditor.prototype = Object.create(MaterialEditor.prototype);

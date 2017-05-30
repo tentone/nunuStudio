@@ -211,11 +211,19 @@ function AssetExplorer(parent)
 	material.setText("Material");
 	material.size.set(100, 20);
 	material.position.set(100,0);
-
+	
 	material.addOption("Standard material", function()
 	{
 		var material = new THREE.MeshStandardMaterial();
 		material.name = "standard";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+
+	material.addOption("Physical material", function()
+	{
+		var material = new THREE.MeshPhysicalMaterial();
+		material.name = "physical";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
 	}, Editor.filePath + "icons/misc/material.png");
@@ -259,16 +267,16 @@ function AssetExplorer(parent)
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
 	}, Editor.filePath + "icons/misc/material.png");
-	
-	var others = material.addMenu("Others");
 
-	others.addOption("Shader material", function()
+	material.addOption("Shader material", function()
 	{
 		var material = new THREE.ShaderMaterial();
 		material.name = "shader";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
 	}, Editor.filePath + "icons/script/script.png");
+
+	var others = material.addMenu("Others");
 
 	others.addOption("Normal material", function()
 	{
