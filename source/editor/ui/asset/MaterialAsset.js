@@ -57,6 +57,10 @@ function MaterialAsset(parent)
 				{
 					tab = Interface.tab.addTab(BasicMaterialEditor, true);
 				}
+				else if(self.material instanceof THREE.MeshPhysicalMaterial)
+				{
+					tab = Interface.tab.addTab(PhysicalMaterialEditor, true);
+				}
 				else if(self.material instanceof THREE.MeshStandardMaterial)
 				{
 					tab = Interface.tab.addTab(StandardMaterialEditor, true);

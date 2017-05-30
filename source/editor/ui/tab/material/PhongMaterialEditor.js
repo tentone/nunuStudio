@@ -322,7 +322,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.envMap);
 	this.form.nextRow();
 
-
 	//Combine environment map
 	this.form.addText("Mode");
 	this.combine = new DropdownList(this.form.element);

@@ -232,6 +232,7 @@ include("editor/ui/tab/material/StandardMaterialEditor.js");
 include("editor/ui/tab/material/SpriteMaterialEditor.js");
 include("editor/ui/tab/material/PointMaterialEditor.js");
 include("editor/ui/tab/material/ShaderMaterialEditor.js");
+include("editor/ui/tab/material/PhysicalMaterialEditor.js");
 include("editor/ui/tab/texture/TextureEditor.js");
 include("editor/ui/tab/texture/VideoTextureEditor.js");
 include("editor/ui/tab/texture/CanvasTextureEditor.js");
