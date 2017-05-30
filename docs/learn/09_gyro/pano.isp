@@ -7,6 +7,7 @@
 		{
 			"uuid": "44CCA315-F114-43A7-8756-12DC761048DF",
 			"type": "CylinderBufferGeometry",
+			"name": "geometry",
 			"radiusTop": 2,
 			"radiusBottom": 2,
 			"height": 2.3,
@@ -16,6 +17,7 @@
 		{
 			"uuid": "1BE4C423-4064-43F3-B64C-5617BAE1B445",
 			"type": "CircleBufferGeometry",
+			"name": "geometry",
 			"radius": 5,
 			"segments": 32,
 			"thetaStart": 0,
@@ -55,7 +57,7 @@
 			"depthFunc": 3,
 			"depthTest": true,
 			"depthWrite": true,
-			"color": 13223601,
+			"color": 12034964,
 			"aoMapIntensity": 1,
 			"skinning": false,
 			"morphTargets": false
@@ -3047,7 +3049,7 @@
 						"near": 0.1,
 						"far": 2000,
 						"focus": 10,
-						"aspect": 1.8076923076923077,
+						"aspect": 2.0991379310344827,
 						"filmGauge": 35,
 						"filmOffset": 0,
 						"clearColor": false,

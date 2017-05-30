@@ -21,7 +21,7 @@
 	<script src="../js/embed.js"></script>
 </head>
 
-<body onload="initialize('gyro.isp');">
+<body onload="initialize('gyro.isp', 'canvas'); initialize('pano.isp', 'pano');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -83,6 +83,12 @@ function dispose()
 
 			<p>If everything works as expected you should see something similar to the example running bellow. To try this example in the editor you can download the <a class="underline" href="gyro.isp">ISP project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/09_gyro/gyro.isp">Web Editor</a>.</p>
 			<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+
+			<p>The gyroscope can be used to easily create interactive panoramic visualizations for mobile devices, the example bellow shows a panoramic picture of the University of Aveiro.</p>
+			<p>The picture used in this example was taken by Filipe Freitas and its available for download <a href="http://mapio.net/pic/p-14966927/">here</a>.</p>
+			<img style="margin-left:10%; width:80%" src="ua.jpg"></img>
+			<p>To try this example in the editor you can download the <a class="underline" href="pano.isp">ISP project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/09_gyro/pano.isp">Web Editor</a>.</p>
+			<canvas id="pano" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 		</div>
 	</section>
 
