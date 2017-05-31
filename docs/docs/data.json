@@ -7536,6 +7536,97 @@
             "module": "Animations"
         },
         {
+            "file": "..\\..\\source\\core\\objects\\spine\\SpineTexture.js",
+            "line": 22,
+            "description": "Set minimification and magnification filters.",
+            "itemtype": "method",
+            "name": "setFilters",
+            "params": [
+                {
+                    "name": "minFilter",
+                    "description": "Minification filter.",
+                    "type": "Number"
+                },
+                {
+                    "name": "magFilter",
+                    "description": "Magnification filter.",
+                    "type": "Number"
+                }
+            ],
+            "class": "SpineTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\spine\\SpineTexture.js",
+            "line": 35,
+            "description": "Se UV wrap mode.",
+            "itemtype": "method",
+            "name": "setWraps",
+            "params": [
+                {
+                    "name": "uWrap",
+                    "description": "U wrap mode.",
+                    "type": "Number"
+                },
+                {
+                    "name": "vWrap",
+                    "description": "V wrap mode.",
+                    "type": "Number"
+                }
+            ],
+            "class": "SpineTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\spine\\SpineTexture.js",
+            "line": 48,
+            "description": "Dispose spine animation texture.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "SpineTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\spine\\SpineTexture.js",
+            "line": 58,
+            "description": "Get texture filtering mode.",
+            "itemtype": "method",
+            "name": "getTextureFilter",
+            "params": [
+                {
+                    "name": "filter",
+                    "description": "Filter to get.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Texture filtering mode.",
+                "type": "Number"
+            },
+            "class": "SpineTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\spine\\SpineTexture.js",
+            "line": 99,
+            "description": "Get texture wrap mode.",
+            "itemtype": "method",
+            "name": "getTextureWrap",
+            "params": [
+                {
+                    "name": "wrap",
+                    "description": "Wrap to get mode of.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Wrap mode.",
+                "type": "Number"
+            },
+            "class": "SpineTexture",
+            "module": "Textures"
+        },
+        {
             "file": "..\\..\\source\\core\\objects\\sprite\\Sprite.js",
             "line": 15,
             "description": "Material used to render the sprite.",
@@ -7663,7 +7754,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 125,
+            "line": 124,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -7672,7 +7763,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 162,
+            "line": 161,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -7693,7 +7784,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 175,
+            "line": 174,
             "description": "Set program renderer.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -7709,7 +7800,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 187,
+            "line": 186,
             "description": "Enter VR mode.",
             "itemtype": "method",
             "name": "displayVR",
@@ -7718,7 +7809,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 213,
+            "line": 210,
             "description": "Exit VR mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -7727,7 +7818,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 233,
+            "line": 230,
             "description": "Update program state.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -7736,8 +7827,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 245,
-            "description": "Render program to canvas.\n\nRenderer passed as argument.",
+            "line": 242,
+            "description": "Render program to specified canvas.\n\nRenderer passed as argument.",
             "itemtype": "method",
             "name": "render",
             "params": [
@@ -7752,7 +7843,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 295,
+            "line": 292,
             "description": "Resize program elements.\n\nCalled by the runtime every time the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -7773,7 +7864,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 323,
+            "line": 320,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -7789,7 +7880,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 353,
+            "line": 350,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -7805,7 +7896,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 375,
+            "line": 372,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -7821,7 +7912,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 398,
+            "line": 395,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -7834,7 +7925,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 411,
+            "line": 408,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -7850,7 +7941,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 424,
+            "line": 421,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -7866,7 +7957,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 469,
+            "line": 466,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -7875,7 +7966,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 503,
+            "line": 500,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -7891,7 +7982,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 540,
+            "line": 537,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -7907,7 +7998,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 572,
+            "line": 569,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
