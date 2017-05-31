@@ -141,6 +141,12 @@ include("core/utils/Mesh2shape.js");
  * @type {boolean}
  * @default false if a canvas is provided, else true
  */
+
+/**
+ * Lock and hide mouse pointer to the canvas.
+ *
+ * @method lockMouse
+ */
 function NunuApp(canvas)
 {
 	//Program and renderer
@@ -206,6 +212,7 @@ NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
 	this.loadProgramAsync(fname, function(app)
 	{
 		app.run();
+
 		if(onLoad !== undefined)
 		{
 			onLoad(app);
@@ -466,14 +473,14 @@ NunuApp.prototype.setOnExit = function(callback)
 };
 
 /**
- * Check if VR mode is available.
+ * Check if virtual reality mode is available.
  * 
  * @method vrAvailable
  * @return {boolean} True if VR mode available
  */
 NunuApp.prototype.vrAvailable = function()
 {
-	return this.program.vr && Nunu.webvrAvailable();	
+	return this.program !== null && this.program.vr && Nunu.webvrAvailable();	
 };
 
 /**
