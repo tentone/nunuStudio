@@ -334,13 +334,7 @@ Editor.initialize = function()
 	if(!Nunu.webglAvailable())
 	{
 		alert("WebGL is not supported or is disabled!\nnunuStudio cannot run!");
-
-		if(Nunu.runningOnDesktop())
-		{
-			Settings.store();
-			Editor.gui.App.closeAllWindows();
-			Editor.gui.App.quit();
-		}
+		Editor.exit();
 	}
 		
 	//Register tern plugins
@@ -365,9 +359,7 @@ Editor.initialize = function()
 		{
 			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
 			{
-				Settings.store();
-				Editor.gui.App.closeAllWindows();
-				Editor.gui.App.quit();
+				Editor.exit();
 			}
 		});
 	}
@@ -1535,6 +1527,17 @@ Editor.setFullscreen = function(fullscreen, element)
 		{
 			document.exitFullscreen();
 		}
+	}
+};
+
+//Exit the editor
+Editor.exit = function()
+{
+	if(Nunu.runningOnDesktop())
+	{
+		Settings.store();
+		Editor.gui.App.closeAllWindows();
+		Editor.gui.App.quit();
 	}
 };
 
