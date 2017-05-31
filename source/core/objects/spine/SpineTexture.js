@@ -19,23 +19,49 @@ function SpineTexture(texture)
 
 SpineTexture.prototype = Object.create(spine.Texture.prototype);
 
+/**
+ * Set minimification and magnification filters.
+ *
+ * @method setFilters
+ * @param {Number} minFilter Minification filter.
+ * @param {Number} magFilter Magnification filter.
+ */
 SpineTexture.prototype.setFilters = function (minFilter, magFilter)
 {
 	this.texture.minFilter = SpineTexture.getTextureFilter(minFilter);
 	this.texture.magFilter = SpineTexture.getTextureFilter(magFilter);
 };
 
+/**
+ * Se UV wrap mode.
+ *
+ * @method setWraps
+ * @param {Number} uWrap U wrap mode.
+ * @param {Number} vWrap V wrap mode.
+ */
 SpineTexture.prototype.setWraps = function (uWrap, vWrap)
 {
 	this.texture.wrapS = SpineTexture.getTextureWrap(uWrap);
 	this.texture.wrapT = SpineTexture.getTextureWrap(vWrap);
 };
 
+/**
+ * Dispose spine animation texture.
+ *
+ * @method dispose 
+ */
 SpineTexture.prototype.dispose = function()
 {
 	this.texture.dispose();
 };
 
+/**
+ * Get texture filtering mode.
+ *
+ * @method getTextureFilter
+ * @param {Number} filter Filter to get.
+ * @return {Number} Texture filtering mode.
+ */
 SpineTexture.getTextureFilter = function(filter)
 {
 	if(filter === spine.TextureFilter.Linear)
@@ -70,6 +96,13 @@ SpineTexture.getTextureFilter = function(filter)
 	return null;
 };
 
+/**
+ * Get texture wrap mode.
+ *
+ * @method getTextureWrap
+ * @param  {Number} wrap Wrap to get mode of.
+ * @return {Number} Wrap mode.
+ */
 SpineTexture.getTextureWrap = function(wrap)
 {
 	if(wrap === spine.TextureWrap.ClampToEdge)

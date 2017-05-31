@@ -117,7 +117,6 @@ function Program(name)
 	//VR objects
 	this.useVR = false;
 	this.vrEffect = null;
-	this.vrControls = null;
 }
 
 Program.prototype = Object.create(ResourceManager.prototype);
@@ -196,7 +195,6 @@ Program.prototype.displayVR = function()
 		try
 		{
 			this.useVR = true;
-
 			this.vrEffect = new THREE.VREffect(this.renderer);
 			this.vrEffect.setFullScreen(true);
 		}
@@ -204,7 +202,6 @@ Program.prototype.displayVR = function()
 		{
 			this.useVR = false;
 			this.vrEffect = null;
-
 			console.warn("nunuStudio: Failed to enter in VR mode", e);
 		}		
 	}
@@ -243,8 +240,8 @@ Program.prototype.update = function()
 };
 
 /**
- * Render program to canvas.
- * 
+ * Render program to specified canvas.
+ *
  * Renderer passed as argument.
  * 
  * @method render
