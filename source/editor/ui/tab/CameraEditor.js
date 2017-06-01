@@ -26,6 +26,19 @@ function CameraEditor(parent, closeable, container, index)
 
 CameraEditor.prototype = Object.create(TabElement.prototype);
 
+//Destroy
+CameraEditor.prototype.destroy = function()
+{
+	TabElement.prototype.destroy.call(this);
+
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+		this.renderer.forceContextLoss();
+		this.renderer = null;
+	}
+};
+
 CameraEditor.prototype.update = function()
 {
 	if(this.camera !== null)

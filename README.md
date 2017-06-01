@@ -106,6 +106,8 @@
 	- Export projects from web version
 	- Calculate texture offset and repeat to fit aspect ratio in square
 	- Code autocomplete from documentation
+	- Keep file name on web version
+	- Force webgl context loss when tabs closed
 	
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

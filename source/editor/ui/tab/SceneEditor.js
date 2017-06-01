@@ -437,6 +437,13 @@ SceneEditor.prototype.destroy = function()
 
 	this.mouse.dispose();
 	this.keyboard.dispose();
+
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+		this.renderer.forceContextLoss();
+		this.renderer = null;
+	}
 }
 
 //Set scene
@@ -848,6 +855,11 @@ SceneEditor.prototype.update = function()
 //Scene render
 SceneEditor.prototype.render = function()
 {
+	if(this.renderer === null)
+	{
+		return;
+	}
+
 	var renderer = this.renderer;
 
 	if(this.state === SceneEditor.EDITING)

@@ -280,7 +280,8 @@ NunuApp.prototype.run = function()
 	this.renderer.toneMappingExposure = this.program.toneMappingExposure;
 	this.renderer.toneMappingWhitePoint = this.program.toneMappingWhitePoint;
 	this.renderer.setSize(this.canvas.width, this.canvas.height);
-
+	this.renderer.setPixelRatio(window.devicePixelRatio);
+	
 	//Mouse and Keyboard input
 	this.keyboard = new Keyboard();
 	this.mouse = new Mouse();

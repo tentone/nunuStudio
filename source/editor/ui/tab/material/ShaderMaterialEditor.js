@@ -295,6 +295,18 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 ShaderMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
+ShaderMaterialEditor.prototype.destroy = function()
+{
+	TabElement.prototype.destroy.call(this);
+
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+		this.renderer.forceContextLoss();
+		this.renderer = null;
+	}
+};
+
 ShaderMaterialEditor.prototype.attach = function(material, asset)
 {
 	//Check is if sprite material and ajust preview

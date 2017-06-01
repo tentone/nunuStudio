@@ -266,21 +266,34 @@ CubeTextureEditor.prototype.updateMaterial = function()
 	this.texture.needsUpdate = true;
 	
 	//TODO <ADD CHANGE TO HISTORY>
-}
+};
 
 //Check if texture is attached to tab
 CubeTextureEditor.prototype.isAttached = function(texture)
 {
 	return this.texture === texture;
-}
+};
 
 //Activate
 CubeTextureEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	Mouse.setCanvas(this.canvas.element);
-}
+	Editor.mouse.setCanvas(this.canvas.element);
+};
+
+//Destroy
+CubeTextureEditor.prototype.destroy = function()
+{
+	TabElement.prototype.destroy.call(this);
+
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+		this.renderer.forceContextLoss();
+		this.renderer = null;
+	}
+};
 
 //Update object data
 CubeTextureEditor.prototype.updateMetadata = function()
@@ -299,7 +312,7 @@ CubeTextureEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-}
+};
 
 //Attach texure
 CubeTextureEditor.prototype.attach = function(texture)
@@ -335,7 +348,7 @@ CubeTextureEditor.prototype.update = function()
 	}
 
 	this.renderer.render(this.scene, this.camera);
-}
+};
 
 //Update
 CubeTextureEditor.prototype.updateInterface = function()
@@ -374,4 +387,4 @@ CubeTextureEditor.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};

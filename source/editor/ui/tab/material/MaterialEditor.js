@@ -334,6 +334,19 @@ MaterialEditor.prototype.activate = function()
 	Editor.mouse.setCanvas(this.canvas.element);
 };
 
+//Destroy
+MaterialEditor.prototype.destroy = function()
+{
+	TabElement.prototype.destroy.call(this);
+
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+		this.renderer.forceContextLoss();
+		this.renderer = null;
+	}
+};
+
 //Update object data
 MaterialEditor.prototype.updateMetadata = function()
 {
