@@ -173,15 +173,27 @@ Program.prototype.setMouseKeyboard = function(mouse, keyboard)
 };
 
 /**
- * Set program renderer.
- * 
+ * Set program renderer to be used by this program.
+ *
  * @method setRenderer
  * @param {WebGLRenderer} renderer Three.js renderer to be used by this program
+ * @param {bool} configure If true also configures renderer to match rendering quality specified in the program.
  */
-Program.prototype.setRenderer = function(renderer)
+Program.prototype.setRenderer = function(renderer, configure)
 {
 	this.renderer = renderer;
+	this.renderer.autoClear = false;
+
 	this.canvas = renderer.domElement;
+	
+	if(configure)
+	{	
+		this.renderer.shadowMap.enabled = this.shadows;
+		this.renderer.shadowMap.type = this.shadowsType;
+		this.renderer.toneMapping = this.toneMapping;
+		this.renderer.toneMappingExposure = this.toneMappingExposure;
+		this.renderer.toneMappingWhitePoint = this.toneMappingWhitePoint;
+	}
 };
 
 /**
