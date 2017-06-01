@@ -448,13 +448,10 @@ Interface.initialize = function()
 	}, Editor.filePath + "icons/misc/save.png");
 
 	//Save project
-	if(Nunu.runningOnDesktop())
+	Interface.file.addOption("Save As", function()
 	{
-		Interface.file.addOption("Save As", function()
-		{
-			Interface.saveProgram();
-		}, Editor.filePath + "icons/misc/save.png");
-	}
+		Interface.saveProgram();
+	}, Editor.filePath + "icons/misc/save.png");
 
 	//Load Project
 	Interface.file.addOption("Load", function()
@@ -843,7 +840,7 @@ Interface.saveProgram = function()
 		FileSystem.chooseFileName(function(fname)
 		{
 			Editor.saveProgram(fname);
-		}, ".isp");
+		}, ".isp", Editor.openFile !== null ? Editor.openFile : "file");
 	}
 };
 

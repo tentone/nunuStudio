@@ -304,9 +304,9 @@ FileSystem.chooseFile = function(onLoad, filter, saveas)
  * @param {Function} onLoad onLoad callback
  * @param {String} saveas File extension
  */
-FileSystem.chooseFileName = function(onLoad, saveas)
+FileSystem.chooseFileName = function(onLoad, saveas, name)
 {
-	var fname = prompt("Save As", "file");
+	var fname = prompt("Save As", name !== undefined ? name : "file");
 	
 	if(fname !== null)
 	{
