@@ -1397,11 +1397,18 @@ Editor.loadGeometry = function(file, onLoad)
 //Set currently open file (also updates the editor title), if running in browser never shows openfile
 Editor.setOpenFile = function(file)
 {
-	if(file !== undefined && file !== null && Nunu.runningOnDesktop())
+	if(file !== undefined && file !== null)
 	{	
 		if(file instanceof window.File)
 		{
-			Editor.openFile = file.path;
+			if(Nunu.runningOnDesktop())
+			{
+				Editor.openFile = file.path;
+			}
+			else
+			{
+				Editor.openFile = file.name;
+			}
 		}
 		else
 		{
