@@ -15626,9 +15626,9 @@
 
 		isCamera: true,
 
-		copy: function ( source ) {
+		copy: function ( source, recursive ) {
 
-			Object3D.prototype.copy.call( this, source );
+			Object3D.prototype.copy.call( this, source, recursive );
 
 			this.matrixWorldInverse.copy( source.matrixWorldInverse );
 			this.projectionMatrix.copy( source.projectionMatrix );
@@ -15697,9 +15697,9 @@
 
 		isPerspectiveCamera: true,
 
-		copy: function ( source ) {
+		copy: function ( source, recursive ) {
 
-			Camera.prototype.copy.call( this, source );
+			Camera.prototype.copy.call( this, source, recursive );
 
 			this.fov = source.fov;
 			this.zoom = source.zoom;
@@ -15912,9 +15912,9 @@
 
 		isOrthographicCamera: true,
 
-		copy: function ( source ) {
+		copy: function ( source, recursive ) {
 
-			Camera.prototype.copy.call( this, source );
+			Camera.prototype.copy.call( this, source, recursive );
 
 			this.left = source.left;
 			this.right = source.right;
@@ -26411,7 +26411,6 @@
 
 		if ( typeof ( shapes ) === "undefined" ) {
 
-			shapes = [];
 			return;
 
 		}
@@ -26566,8 +26565,6 @@
 
 			}
 
-			reverse = false; // If vertices are in order now, we shouldn't need to worry about them again (hopefully)!
-
 		}
 
 
@@ -26611,7 +26608,7 @@
 			// inPt' is the intersection of the two lines parallel to the two
 			//  adjacent edges of inPt at a distance of 1 unit on the left side.
 
-			var v_trans_x, v_trans_y, shrink_by = 1; // resulting translation vector for inPt
+			var v_trans_x, v_trans_y, shrink_by; // resulting translation vector for inPt
 
 			// good reading for geometry algorithms (here: line-line intersection)
 			// http://geomalgorithms.com/a05-_intersect-1.html
@@ -40541,9 +40538,29 @@
 	 * @author Mugen87 / https://github.com/Mugen87
 	 */
 
+	function getBoneList( object ) {
+
+		var boneList = [];
+
+		if ( object && object.isBone ) {
+
+			boneList.push( object );
+
+		}
+
+		for ( var i = 0; i < object.children.length; i ++ ) {
+
+			boneList.push.apply( boneList, getBoneList( object.children[ i ] ) );
+
+		}
+
+		return boneList;
+
+	}
+
 	function SkeletonHelper( object ) {
 
-		this.bones = this.getBoneList( object );
+		var bones = getBoneList( object );
 
 		var geometry = new BufferGeometry();
 
@@ -40553,9 +40570,9 @@
 		var color1 = new Color( 0, 0, 1 );
 		var color2 = new Color( 0, 1, 0 );
 
-		for ( var i = 0; i < this.bones.length; i ++ ) {
+		for ( var i = 0; i < bones.length; i ++ ) {
 
-			var bone = this.bones[ i ];
+			var bone = bones[ i ];
 
 			if ( bone.parent && bone.parent.isBone ) {
 
@@ -40576,55 +40593,37 @@
 		LineSegments.call( this, geometry, material );
 
 		this.root = object;
+		this.bones = bones;
 
 		this.matrix = object.matrixWorld;
 		this.matrixAutoUpdate = false;
 
-		this.update();
+		this.onBeforeRender();
 
 	}
-
 
 	SkeletonHelper.prototype = Object.create( LineSegments.prototype );
 	SkeletonHelper.prototype.constructor = SkeletonHelper;
 
-	SkeletonHelper.prototype.getBoneList = function( object ) {
-
-		var boneList = [];
-
-		if ( object && object.isBone ) {
-
-			boneList.push( object );
-
-		}
-
-		for ( var i = 0; i < object.children.length; i ++ ) {
-
-			boneList.push.apply( boneList, this.getBoneList( object.children[ i ] ) );
-
-		}
-
-		return boneList;
-
-	};
-
-	SkeletonHelper.prototype.update = function () {
+	SkeletonHelper.prototype.onBeforeRender = function () {
 
 		var vector = new Vector3();
 
 		var boneMatrix = new Matrix4();
 		var matrixWorldInv = new Matrix4();
 
-		return function update() {
+		return function onBeforeRender() {
+
+			var bones = this.bones;
 
 			var geometry = this.geometry;
 			var position = geometry.getAttribute( 'position' );
 
 			matrixWorldInv.getInverse( this.root.matrixWorld );
 
-			for ( var i = 0, j = 0; i < this.bones.length; i ++ ) {
+			for ( var i = 0, j = 0; i < bones.length; i ++ ) {
 
-				var bone = this.bones[ i ];
+				var bone = bones[ i ];
 
 				if ( bone.parent && bone.parent.isBone ) {
 
@@ -42182,6 +42181,12 @@
 
 		console.error( 'THREE.GridHelper: setColors() has been deprecated, pass them in the constructor instead.' );
 
+	};
+
+	SkeletonHelper.prototype.update = function () {
+
+		console.error( 'THREE.SkeletonHelper: update() no longer needs to be called.' );
+		
 	};
 
 	function WireframeHelper( object, hex ) {

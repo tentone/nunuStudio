@@ -40,7 +40,7 @@ function Scene()
 	this.name = "scene";
 	this.matrixAutoUpdate = false;
 
-	//Physics world
+	//Physics
 	this.world = new CANNON.World();
 	this.world.defaultContactMaterial.contactEquationStiffness = 1e9;
 	this.world.defaultContactMaterial.contactEquationRelaxation = 4;

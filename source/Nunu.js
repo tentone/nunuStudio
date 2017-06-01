@@ -36,7 +36,7 @@ Nunu.VERSION = "V0.8.9.26 Alpha";
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201706010202";
+Nunu.TIMESTAMP = "201706011957";
 
 /**
  * Check if host supports WebVR and if there is a VR display available.
@@ -72,7 +72,7 @@ Nunu.webglAvailable = function()
 	{
 		var canvas = document.createElement("canvas"); 
 		var context = canvas.getContext("webgl");
-		var extensions = context.getSupportedExtensions();
+		//var extensions = context.getSupportedExtensions();
 		return true;
 	}
 	catch(e)

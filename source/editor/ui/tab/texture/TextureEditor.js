@@ -220,6 +220,19 @@ TextureEditor.prototype.activate = function()
 	this.flipY.setValue(texture.flipY);
 };
 
+//Destroy
+TextureEditor.prototype.destroy = function()
+{
+	TabElement.prototype.destroy.call(this);
+
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+		this.renderer.forceContextLoss();
+		this.renderer = null;
+	}
+};
+
 //Update test material
 TextureEditor.prototype.updatePreview = function()
 {

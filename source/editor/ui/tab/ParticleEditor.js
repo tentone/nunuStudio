@@ -475,7 +475,7 @@ ParticleEditor.prototype.updateMetadata = function()
 			this.close();
 		}
 	}
-}
+};
 
 //Attach particle to particle editor
 ParticleEditor.prototype.attach = function(particle)
@@ -536,13 +536,13 @@ ParticleEditor.prototype.attach = function(particle)
 
 	//Create runtime particle to preview particle
 	this.updateRuntimeParticle();
-}
+};
 
 //Check if particle is attached to tab
 ParticleEditor.prototype.isAttached = function(particle)
 {
 	return this.particle === particle;
-}
+};
 
 //Updates runtime particle to match attached particle
 ParticleEditor.prototype.updateRuntimeParticle = function()
@@ -562,7 +562,7 @@ ParticleEditor.prototype.updateRuntimeParticle = function()
 		this.particleRuntime.initialize();
 		this.scene.add(this.particleRuntime);
 	}
-}
+};
 
 //Update camera position and rotation from variables
 ParticleEditor.prototype.updateCamera = function()
@@ -572,7 +572,7 @@ ParticleEditor.prototype.updateCamera = function()
 	var position = new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x)*cosAngleY, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x)*cosAngleY);
 	this.camera.position.copy(position);
 	this.camera.lookAt(new THREE.Vector3(0, 0, 0));
-}
+};
 
 //Activate code editor
 ParticleEditor.prototype.activate = function()
@@ -580,7 +580,20 @@ ParticleEditor.prototype.activate = function()
 	TabElement.prototype.activate.call(this);
 
 	Editor.mouse.setCanvas(this.canvas.element);
-}
+};
+
+//Destroy
+ParticleEditor.prototype.destroy = function()
+{
+	TabElement.prototype.destroy.call(this);
+	
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+		this.renderer.forceContextLoss();
+		this.renderer = null;
+	}
+};
 
 //Update material editor
 ParticleEditor.prototype.update = function()
@@ -628,7 +641,7 @@ ParticleEditor.prototype.update = function()
 
 	//Render editor scene
 	this.renderer.render(this.scene, this.camera);
-}
+};
 
 //Update division Size
 ParticleEditor.prototype.updateInterface = function()
@@ -674,4 +687,4 @@ ParticleEditor.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-}
+};
