@@ -111,7 +111,7 @@ Script.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
-
+	
 	//Initialize script
 	if(this.script.initialize !== undefined)
 	{

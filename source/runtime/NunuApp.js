@@ -243,16 +243,16 @@ NunuApp.prototype.loadProgram = function(fname)
  */
 NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 {
-	var loader = new ObjectLoader();
-	var app = this;
+	var self = this;
 
 	FileSystem.readFile(fname, false, function(data)
 	{
-		app.program = loader.parse(JSON.parse(data));
+		var loader = new ObjectLoader();
+		self.program = loader.parse(JSON.parse(data));
 		
 		if(onLoad !== undefined)
 		{
-			onLoad(app);
+			onLoad(self);
 		}
 	}, onProgress);
 };
@@ -273,10 +273,12 @@ NunuApp.prototype.run = function()
 	}
 
 	//WebGL renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, antialias: true});
-	this.renderer.autoClear = false;
-	this.renderer.shadowMap.enabled = true;
-	this.renderer.shadowMap.type = THREE.PCFShadowMap;
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, antialias: this.program.antialiasing});
+	this.renderer.shadowMap.enabled = this.program.shadows;
+	this.renderer.shadowMap.type = this.program.shadowsType;
+	this.renderer.toneMapping = this.program.toneMapping;
+	this.renderer.toneMappingExposure = this.program.toneMappingExposure;
+	this.renderer.toneMappingWhitePoint = this.program.toneMappingWhitePoint;
 	this.renderer.setSize(this.canvas.width, this.canvas.height);
 
 	//Mouse and Keyboard input
@@ -343,16 +345,33 @@ NunuApp.prototype.exit = function()
 		this.canvas.removeEventListener("click", this.lockMouse, false);
 	}
 
-	//Dispose and remove program
+	//Dispose program
 	if(this.program !== null)
 	{
 		this.program.dispose();
 		this.program = null;
 	}
 
-	//Dispose keyboard and mouse
-	this.mouse.dispose();
-	this.keyboard.dispose();
+	//Dispose renderer
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+		this.renderer = null;
+	}
+
+	//Dispose mouse
+	if(this.mouse !== null)
+	{
+		this.mouse.dispose();
+		this.mouse = null;
+	}
+
+	//Dispose keyboard
+	if(this.keyboard !== null)
+	{
+		this.keyboard.dispose();
+		this.keyboard = null;
+	}
 
 	//Run onExit callback if any
 	if(this.onExit !== undefined)
@@ -370,18 +389,21 @@ NunuApp.prototype.exit = function()
  */
 NunuApp.prototype.resume = function()
 {
-	var self = this;
-	var update = function()
+	if(this.program !== null)
 	{
-		if(self.program !== null && self.running)
+		var self = this;
+		var update = function()
 		{
-			requestAnimationFrame(update);
-			self.update();
-		}
-	};
+			if(self.running)
+			{
+				self.update();
+				requestAnimationFrame(update);
+			}
+		};
 
-	this.running = true;
-	update();
+		this.running = true;
+		update();
+	}
 };
 
 /**
