@@ -7495,7 +7495,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 162,
+            "line": 165,
             "description": "Get skins available for this animation.",
             "itemtype": "method",
             "name": "getSkins",
@@ -7508,7 +7508,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 173,
+            "line": 176,
             "description": "Update mesh geometry from animation state.",
             "itemtype": "method",
             "name": "updateGeometry",
@@ -7517,7 +7517,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 228,
+            "line": 231,
             "description": "Serialize spine animation as JSON.",
             "itemtype": "method",
             "name": "toJSON",
