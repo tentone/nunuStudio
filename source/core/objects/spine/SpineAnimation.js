@@ -156,7 +156,10 @@ SpineAnimation.prototype.setAnimation = function(track, name)
 	{
 		this.state.setAnimation(track, name, true);
 	}
-	catch(e){}
+	catch(e)
+	{
+		console.warn("nunuStudio: Error trying to set spine animation " + name + " on track " + track);
+	}
 };
 
 /**

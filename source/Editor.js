@@ -680,7 +680,10 @@ Editor.pasteObject = function(target)
 		
 		Editor.updateObjectViews();
 	}
-	catch(e){}
+	catch(e)
+	{
+		alert("Error pasting object");
+	}
 };
 
 //Redo action
