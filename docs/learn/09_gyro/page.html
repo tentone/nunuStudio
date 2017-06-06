@@ -83,10 +83,21 @@ function dispose()
 
 			<p>If everything works as expected you should see something similar to the example running bellow. To try this example in the editor you can download the <a class="underline" href="gyro.isp">ISP project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/09_gyro/gyro.isp">Web Editor</a>.</p>
 			<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			<br/>
 
-			<p>The gyroscope can be used to easily create interactive panoramic visualizations for mobile devices, the example bellow shows a panoramic picture of the University of Aveiro.</p>
-			<p>The picture used in this example was taken by Filipe Freitas and its available for download <a href="http://mapio.net/pic/p-14966927/">here</a>.</p>
-			<img style="margin-left:10%; width:80%" src="ua.jpg"></img>
+			<h3 class="black">Panoramic</h3>
+			<p>The gyroscope can be used to easily create interactive panoramic visualizations for mobile devices, we can do this very simply using a cubemap.</p>
+			<p>A cubemap is a representation of a 360 scene using 6 images each one representing the face of a cube. For this example we will use the following images.</p>
+			<p>The picture used in this example was taken by Emil Persson and its available for download <a href="http://www.humus.name">here</a> (licensed under a Creative Commons Attribution 3.0).</p>
+
+			<img style="margin-left:20%; width:60%" src="preview.jpg"></img>
+
+			<p>To create a new cube map select Import, Texture, CubeMap in Asset Explorer a new asset will be created, double click the new asset and a cube map editor tab will open, now simply drag the sides of your cube map to the correct position in the editor.</p>
+
+			<img style="margin-left:20%; width:60%" src="editor.jpg"></img>
+
+			<p>To set this cubemap as the scene background, select the scene object in the object explorer and drag the cubemap asset to the background texture box.</p>
+			
 			<p>To try this example in the editor you can download the <a class="underline" href="pano.isp">ISP project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/09_gyro/pano.isp">Web Editor</a>.</p>
 			<canvas id="pano" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 		</div>

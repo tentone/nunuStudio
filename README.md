@@ -108,7 +108,9 @@
 	- Code autocomplete from documentation
 	- Keep file name on web version
 	- Force webgl context loss when tabs closed
-	
+- V0.9.0 Beta
+	- Division property for HTML elements
+
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
 - To embed applications made inside nunuStudio in web pages the following code can be used

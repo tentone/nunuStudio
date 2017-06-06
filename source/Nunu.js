@@ -28,7 +28,7 @@ Nunu.NAME = "nunuStudio";
  * @attribute VERSION
  * @type {String}
  */
-Nunu.VERSION = "V0.8.9.26 Alpha";
+Nunu.VERSION = "V0.9.0 Beta";
 
 /**
  * Stores the nunu runtime dev timestamp.
@@ -36,7 +36,7 @@ Nunu.VERSION = "V0.8.9.26 Alpha";
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201706060028";
+Nunu.TIMESTAMP = "201706060222";
 
 /**
  * Check if host supports WebVR and if there is a VR display available.
@@ -61,7 +61,7 @@ Nunu.webAudioAvailable = function()
 };
 
 /**
- * Check if host supports WebGL, only checks for WebGL 1 support.
+ * Check if host supports WebGL, only checks for WebGL 1.0 support.
  *
  * @method webglAvailable
  * @return {boolean} True if WebGL is available.
@@ -71,8 +71,8 @@ Nunu.webglAvailable = function()
 	try
 	{
 		var canvas = document.createElement("canvas"); 
-		var context = canvas.getContext("webgl");
-		//var extensions = context.getSupportedExtensions();
+		var context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+		var extensions = context.getSupportedExtensions();
 		return true;
 	}
 	catch(e)

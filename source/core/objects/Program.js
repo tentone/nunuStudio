@@ -99,9 +99,14 @@
  * @default null
  */
 /**
- * Canvas being used to draw
- * Can be used to attach HTML elements but should be cleaned on dispose.
+ * Canvas being used to draw content.
  * @property canvas
+ * @type {DOM}
+ * @default null
+ */
+/**
+ * DOM Division element that can be used to add html content to the app.
+ * @property division
  * @type {DOM}
  * @default null
  */
@@ -147,8 +152,10 @@ function Program(name)
 	this.keyboard = null;
 	this.mouse = null;
 	this.renderer = null;
-	this.canvas = null;
 	this.scene = null;
+
+	this.canvas = null;
+	this.division = null;
 
 	//VR objects
 	this.useVR = false;
@@ -221,6 +228,7 @@ Program.prototype.setRenderer = function(renderer, configure)
 	this.renderer.autoClear = false;
 
 	this.canvas = renderer.domElement;
+	this.division = this.canvas.parentElement;
 	
 	if(configure)
 	{	
