@@ -55,6 +55,20 @@ function ProgramPanel(parent, obj)
 	this.form.add(this.lockPointer);
 	this.form.nextRow();
 	
+	//Handle pixel ratio
+	this.handlePixelRatio = new CheckBox(this.form.element);
+	this.form.addText("Pixel Ratio");
+	this.handlePixelRatio.size.set(15, 15);
+	this.handlePixelRatio.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.handlePixelRatio = self.handlePixelRatio.getValue();
+		}
+	});
+	this.form.add(this.handlePixelRatio);
+	this.form.nextRow()
+
 	//VR
 	this.form.addText("Virtual Reality");
 	this.form.nextRow();
@@ -197,6 +211,7 @@ ProgramPanel.prototype.updatePanel = function()
 		this.author.setText(this.obj.author);
 		this.version.setText(this.obj.version);
 		this.lockPointer.setValue(this.obj.lockPointer);
+		this.handlePixelRatio.setValue(this.obj.handlePixelRatio);
 		this.vr.setValue(this.obj.vr);
 		this.vrScale.setValue(this.obj.vrScale);
 

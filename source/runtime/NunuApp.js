@@ -4,6 +4,7 @@ include("Nunu.js");
 
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
+include("lib/three/controls/VRControls.js");
 
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
@@ -153,9 +154,9 @@ function NunuApp(canvas)
 	this.program = null;
 	this.renderer = null;
 
+	//Runtime control
 	this.fullscreen = false;
 	this.vr = false;
-
 	this.running = false;
 
 	//Canvas
@@ -169,9 +170,7 @@ function NunuApp(canvas)
 		this.canvas.style.height = window.innerHeight + "px";
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
-		
 		document.body.appendChild(this.canvas);
-
 		this.canvasResize = true;
 	}
 	else
@@ -180,21 +179,14 @@ function NunuApp(canvas)
 		this.canvasResize = false;
 	}
 
-	//Lock pointer function
+	//Canvas lock pointer
 	var canvas = this.canvas;
+	canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
 	this.lockMouse = function()
 	{
 		if(canvas.requestPointerLock)
 		{
 			canvas.requestPointerLock();
-		}
-		else if(canvas.mozRequestPointerLock)
-		{
-			canvas.mozRequestPointerLock();
-		}
-		else if(canvas.webkitRequestPointerLock)
-		{
-			canvas.webkitRequestPointerLock();
 		}
 	};
 }
@@ -280,7 +272,11 @@ NunuApp.prototype.run = function()
 	this.renderer.toneMappingExposure = this.program.toneMappingExposure;
 	this.renderer.toneMappingWhitePoint = this.program.toneMappingWhitePoint;
 	this.renderer.setSize(this.canvas.width, this.canvas.height);
-	//this.renderer.setPixelRatio(window.devicePixelRatio);
+	
+	if(this.program.handlePixelRatio)
+	{
+		this.renderer.setPixelRatio(window.devicePixelRatio);
+	}
 	
 	//Mouse and Keyboard input
 	this.keyboard = new Keyboard();
@@ -533,11 +529,11 @@ NunuApp.prototype.toggleVR = function()
 };
 
 /**
- * Set fullscreen mode
+ * Set a element to fullscreen mode, if none is passed the document body is used.
  *
  * @method setFullscreen
  * @param {boolean} fullscreen If true go to fullscren if false exit fullscreen mode
- * @param {DOM} element DOM element to go fullscren by default the rendering canvas is used
+ * @param {DOM} element DOM element to go fullscren by default the document body is used
  */
 NunuApp.prototype.setFullscreen = function(fullscreen, element)
 {
@@ -550,11 +546,12 @@ NunuApp.prototype.setFullscreen = function(fullscreen, element)
 		this.fullscreen = !this.fullscreen;
 	}
 
+	//Enter fullscreen
 	if(this.fullscreen)
 	{
 		if(element === undefined)
 		{
-			element = this.canvas;
+			element = document.body;
 		}
 		
 		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
@@ -564,6 +561,7 @@ NunuApp.prototype.setFullscreen = function(fullscreen, element)
 			element.requestFullscreen();
 		}
 	}
+	//Exit fullscreen
 	else
 	{
 		document.exitFullscreen = document.exitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;

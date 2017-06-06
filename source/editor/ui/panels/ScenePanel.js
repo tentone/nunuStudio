@@ -168,7 +168,7 @@ function ScenePanel(parent, obj)
 	this.form.nextRow();
 	
 	//Physics world
-	this.form.addText("Physics world");
+	this.form.addText("Physics");
 	this.form.nextRow();
 
 	//Gravity
@@ -183,6 +183,36 @@ function ScenePanel(parent, obj)
 		}
 	});
 	this.form.add(this.gravity);
+	this.form.nextRow();
+
+	this.form.addText("Tolerance");
+	this.tolerance = new NumberBox(this.form.element);
+	this.tolerance.size.set(50, 18);
+	this.tolerance.setRange(0, 1000);
+	this.tolerance.setStep(0.01);
+	this.tolerance.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.world.solver.tolerance = self.tolerance.getValue();
+		}
+	});
+	this.form.add(this.tolerance);
+	this.form.nextRow();
+
+	this.form.addText("Iterations");
+	this.iterations = new NumberBox(this.form.element);
+	this.iterations.size.set(50, 18);
+	this.iterations.setRange(0, 1000);
+	this.iterations.setStep(1);
+	this.iterations.setOnChange(function()
+	{
+		if(self.iterations !== null)
+		{
+			self.obj.world.solver.iterations = self.iterations.getValue();
+		}
+	});
+	this.form.add(this.iterations);
 	this.form.nextRow();
 }
 
@@ -230,6 +260,8 @@ ScenePanel.prototype.updatePanel = function()
 		}
 
 		this.gravity.setValue(this.obj.world.gravity.x, this.obj.world.gravity.y, this.obj.world.gravity.z);
+		this.tolerance.setValue(this.obj.world.solver.tolerance);
+		this.iterations.setValue(this.obj.world.solver.iterations);
 	}
 };
 
