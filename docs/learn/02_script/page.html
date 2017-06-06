@@ -68,10 +68,11 @@
 			</ul>
 
 			<h3 class="black">Initialization and update</h3>
-			<p>In this tutorial we will be working only with the initialize and update methods.</p>
+			<p>In this tutorial we will be working only with the initialize, update and dispose methods.</p>
 			<ul>
 				<li><p>Initialize - The initialize method is called when the scene is loaded, it is normally used to create new objects programmatically, get object from the scene, initialize variables, etc.</p></li>
 				<li><p>Update - The update method is called each frame before drawing the scene into the screen, it can be used to control object, get input values, change object attributes, etc.</p></li>
+				<li><p>Dispose - The dispose method is called when the program is being closed, should be used to cleanup objects, disconnect from data streams, etc.</p></li>
 			</ul>
 
 			<h3 class="black">Moving an object</h3>
@@ -135,6 +136,27 @@ function update()
 {
 	object.rotation.y += 0.01;
 }</code></pre>
+			
+			<h3>HTML Elements</h3>
+			<p>Its possible to attach dom elements to the program created. To do this we can use the division property of the program that gives us access to a DOM division element (parent of the canvas element used to draw content) where we can add HTML elements.</p>
+			<p>The example below demonstrates how to create a new red division with size 50 x 50 add it to the program and remove it when the program is being closed.</p>
+			<pre><code>var element = document.createElement("div");
+element.style.width = "100px";
+element.style.height = "100px";
+element.style.position = "absolute";
+element.style.top = "0px";
+element.style.backgroundColor = "#FF0000";
+
+function initialize()
+{
+	program.division.appendChild(element);
+}
+
+function dispose()
+{
+	program.division.removeChild(element);
+}</code></pre>
+
 		</div>
 	</section>
 

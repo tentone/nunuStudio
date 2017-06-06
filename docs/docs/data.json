@@ -7717,7 +7717,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
             "line": 101,
-            "description": "Canvas being used to draw\nCan be used to attach HTML elements but should be cleaned on dispose.",
+            "description": "Canvas being used to draw content.",
             "itemtype": "property",
             "name": "canvas",
             "type": "{DOM}",
@@ -7727,7 +7727,18 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 161,
+            "line": 107,
+            "description": "DOM Division element that can be used to add html content to the app.",
+            "itemtype": "property",
+            "name": "division",
+            "type": "{DOM}",
+            "default": "null",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 168,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -7736,7 +7747,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 198,
+            "line": 205,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -7757,7 +7768,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 211,
+            "line": 218,
             "description": "Set program renderer to be used by this program.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -7778,7 +7789,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 235,
+            "line": 243,
             "description": "Enter VR mode.",
             "itemtype": "method",
             "name": "displayVR",
@@ -7787,7 +7798,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 261,
+            "line": 269,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -7796,7 +7807,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 280,
+            "line": 288,
             "description": "Update program state.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -7805,7 +7816,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 292,
+            "line": 300,
             "description": "Render program to canvas.\n\nRenderer passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -7821,7 +7832,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 342,
+            "line": 350,
             "description": "Resize program elements.\n\nCalled by the runtime every time the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -7842,7 +7853,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 370,
+            "line": 378,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -7858,7 +7869,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 400,
+            "line": 408,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -7874,7 +7885,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 422,
+            "line": 430,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -7890,7 +7901,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 445,
+            "line": 453,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -7903,7 +7914,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 458,
+            "line": 466,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -7919,7 +7930,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 471,
+            "line": 479,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -7935,7 +7946,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 516,
+            "line": 524,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -7944,7 +7955,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 550,
+            "line": 558,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -7960,7 +7971,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 587,
+            "line": 595,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -7976,7 +7987,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 619,
+            "line": 627,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11797,7 +11808,7 @@
         {
             "file": "..\\..\\source\\Nunu.js",
             "line": 63,
-            "description": "Check if host supports WebGL, only checks for WebGL 1 support.",
+            "description": "Check if host supports WebGL, only checks for WebGL 1.0 support.",
             "itemtype": "method",
             "name": "webglAvailable",
             "return": {
