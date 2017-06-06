@@ -19,6 +19,25 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.form.addText("Renderer Quality");
 	this.form.nextRow();
 
+	//Use project settings
+	this.form.addText("Follow project");
+	this.followProject = new CheckBox(this.form.element);
+	this.followProject.size.set(15, 15);
+	this.followProject.setOnChange(function()
+	{
+		Settings.render.followProject = self.followProject.getValue();
+	});
+	this.form.add(this.followProject);
+	this.form.nextRow();
+
+	//Space
+	this.form.addText("");
+	this.form.nextRow();
+
+	//Editor rendering quality
+	this.form.addText("Editor Rendering Quality");
+	this.form.nextRow();
+
 	//Antialiasing
 	this.form.addText("Antialiasing");
 	this.antialiasing = new CheckBox(this.form.element);
@@ -95,17 +114,6 @@ function RenderSettingsTab(parent, closeable, container, index)
 		Settings.render.toneMappingWhitePoint = self.toneMappingWhitePoint.getValue();
 	});
 	this.form.add(this.toneMappingWhitePoint);
-	this.form.nextRow();
-
-	//Use project settings
-	this.form.addText("Follow project");
-	this.followProject = new CheckBox(this.form.element);
-	this.followProject.size.set(15, 15);
-	this.followProject.setOnChange(function()
-	{
-		Settings.render.followProject = self.followProject.getValue();
-	});
-	this.form.add(this.followProject);
 	this.form.nextRow();
 
 	//Update form

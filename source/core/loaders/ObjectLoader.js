@@ -606,6 +606,12 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.defaultScene = data.defaultScene;
 			}
+			
+			if(data.handlePixelRatio !== undefined)
+			{
+				object.handlePixelRatio = data.handlePixelRatio;	
+			}
+
 			break;
 
 		case "LeapDevice":

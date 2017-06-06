@@ -337,11 +337,31 @@
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_canvas">canvas</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_description">description</a>
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_handlePixelRatio">handlePixelRatio</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_keyboard">keyboard</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_lockPointer">lockPointer</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_mouse">mouse</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_renderer">renderer</a>
 						
 													</li>
 													<li class="index-item property">
@@ -350,6 +370,10 @@
 													</li>
 													<li class="index-item property">
 														<a href="#property_shadowsType">shadowsType</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_toneMapping">toneMapping</a>
 						
 													</li>
 													<li class="index-item property">
@@ -595,7 +619,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Exit VR mode.</p>
+													<p>Exit virtual relity mode.</p>
 											
 												</div>
 											
@@ -1068,7 +1092,7 @@
 											
 											
 																<div class="param-description">
-																	<p>If true also configures renderer to match rendering quality specified in the program.</p>
+																	<p>If true also updates renderer configuration to match rendering quality specified in the program.</p>
 											
 																</div>
 											
@@ -1310,6 +1334,31 @@
 											
 											
 											</div>
+											<div id="property_canvas" class="property item">
+												<h3 class="name"><code>canvas</code></h3>
+												<span class="type">DOM</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Canvas being used to draw
+											Can be used to attach HTML elements but should be cleaned on dispose.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> null</p>
+											
+											
+											</div>
 											<div id="property_description" class="property item">
 												<h3 class="name"><code>description</code></h3>
 												<span class="type">String</span>
@@ -1327,6 +1376,53 @@
 											
 												<div class="description">
 													<p>Program description</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_handlePixelRatio" class="property item">
+												<h3 class="name"><code>handlePixelRatio</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Flag to indicate if the runtime should handle device pixel ratio</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> false</p>
+											
+											
+											</div>
+											<div id="property_keyboard" class="property item">
+												<h3 class="name"><code>keyboard</code></h3>
+												<span class="type"><a href="../classes/Keyboard.html" class="crosslink">Keyboard</a></span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Keyboard input object</p>
 											
 												</div>
 											
@@ -1354,6 +1450,53 @@
 												</div>
 											
 													<p><strong>Default:</strong> false</p>
+											
+											
+											</div>
+											<div id="property_mouse" class="property item">
+												<h3 class="name"><code>mouse</code></h3>
+												<span class="type"><a href="../classes/Mouse.html" class="crosslink">Mouse</a></span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Mouse input object</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_renderer" class="property item">
+												<h3 class="name"><code>renderer</code></h3>
+												<span class="type">WebGLRenderer</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Threejs WebGLRenderer being used</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> null</p>
 											
 											
 											</div>
@@ -1402,6 +1545,30 @@
 												</div>
 											
 													<p><strong>Default:</strong> PCFSoftShadowMap</p>
+											
+											
+											</div>
+											<div id="property_toneMapping" class="property item">
+												<h3 class="name"><code>toneMapping</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Tonemapping mode</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> NoToneMapping</p>
 											
 											
 											</div>

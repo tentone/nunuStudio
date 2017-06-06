@@ -13,12 +13,13 @@
 
 /**
  * Cannon.js world used for physics simulation.
- *
+ * The world is configured by default with a NaiveBroadphase and a SplitSolver.
  * Documentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.
  * @property {World} world
  */
 /**
  * Raycaster used for mouse interaction with 3D objects.
+ * This raycaster is automatically updated using the first camera being drawn.
  * @property {Raycaster} raycaster
  */
 /**
@@ -102,7 +103,6 @@ Scene.prototype.initialize = function()
 Scene.prototype.update = function()
 {
 	this.mouse.set(this.program.mouse.position.x/this.canvas.width * 2 - 1, -2 * this.program.mouse.position.y/this.canvas.height + 1);
-
 	if(this.cameras.length > 0)
 	{
 		this.raycaster.setFromCamera(this.mouse, this.cameras[0]);

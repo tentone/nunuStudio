@@ -2766,7 +2766,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 92,
+            "line": 93,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -7653,6 +7653,17 @@
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
             "line": 67,
+            "description": "Tonemapping mode",
+            "itemtype": "property",
+            "name": "toneMapping",
+            "type": "{Number}",
+            "default": "NoToneMapping",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 73,
             "description": "Flag to control pointer locking",
             "itemtype": "property",
             "name": "lockPointer",
@@ -7663,7 +7674,60 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 125,
+            "line": 79,
+            "description": "Flag to indicate if the runtime should handle device pixel ratio",
+            "itemtype": "property",
+            "name": "handlePixelRatio",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 85,
+            "description": "Keyboard input object",
+            "itemtype": "property",
+            "name": "keyboard",
+            "type": "{Keyboard}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 90,
+            "description": "Mouse input object",
+            "itemtype": "property",
+            "name": "mouse",
+            "type": "{Mouse}",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 95,
+            "description": "Threejs WebGLRenderer being used",
+            "itemtype": "property",
+            "name": "renderer",
+            "type": "{WebGLRenderer}",
+            "default": "null",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 101,
+            "description": "Canvas being used to draw\nCan be used to attach HTML elements but should be cleaned on dispose.",
+            "itemtype": "property",
+            "name": "canvas",
+            "type": "{DOM}",
+            "default": "null",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\Program.js",
+            "line": 161,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -7672,7 +7736,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 162,
+            "line": 198,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -7693,7 +7757,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 175,
+            "line": 211,
             "description": "Set program renderer to be used by this program.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -7705,7 +7769,7 @@
                 },
                 {
                     "name": "configure",
-                    "description": "If true also configures renderer to match rendering quality specified in the program.",
+                    "description": "If true also updates renderer configuration to match rendering quality specified in the program.",
                     "type": "Bool"
                 }
             ],
@@ -7714,7 +7778,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 199,
+            "line": 235,
             "description": "Enter VR mode.",
             "itemtype": "method",
             "name": "displayVR",
@@ -7723,8 +7787,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 225,
-            "description": "Exit VR mode.",
+            "line": 261,
+            "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
             "class": "Program",
@@ -7732,7 +7796,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 245,
+            "line": 280,
             "description": "Update program state.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -7741,7 +7805,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 257,
+            "line": 292,
             "description": "Render program to canvas.\n\nRenderer passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -7757,7 +7821,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 307,
+            "line": 342,
             "description": "Resize program elements.\n\nCalled by the runtime every time the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -7778,7 +7842,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 335,
+            "line": 370,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -7794,7 +7858,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 365,
+            "line": 400,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -7810,7 +7874,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 387,
+            "line": 422,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -7826,7 +7890,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 410,
+            "line": 445,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -7839,7 +7903,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 423,
+            "line": 458,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -7855,7 +7919,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 436,
+            "line": 471,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -7871,7 +7935,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 481,
+            "line": 516,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -7880,7 +7944,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 515,
+            "line": 550,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -7896,7 +7960,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 552,
+            "line": 587,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -7912,7 +7976,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 584,
+            "line": 619,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7938,7 +8002,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
             "line": 14,
-            "description": "Cannon.js world used for physics simulation.\n\nDocumentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.",
+            "description": "Cannon.js world used for physics simulation.\nThe world is configured by default with a NaiveBroadphase and a SplitSolver.\nDocumentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.",
             "itemtype": "property",
             "name": "world",
             "type": "World",
@@ -7948,7 +8012,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
             "line": 20,
-            "description": "Raycaster used for mouse interaction with 3D objects.",
+            "description": "Raycaster used for mouse interaction with 3D objects.\nThis raycaster is automatically updated using the first camera being drawn.",
             "itemtype": "property",
             "name": "raycaster",
             "type": "Raycaster",
@@ -7957,7 +8021,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 24,
+            "line": 25,
             "description": "Normalized mouse coordinates used by the scene internal raycaster.",
             "itemtype": "property",
             "name": "mouse",
@@ -7967,7 +8031,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 28,
+            "line": 29,
             "description": "Program that contains this scene.",
             "itemtype": "property",
             "name": "program",
@@ -7977,7 +8041,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 32,
+            "line": 33,
             "description": "Canvas used to draw this scene.",
             "itemtype": "property",
             "name": "canvas",
@@ -7987,7 +8051,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 72,
+            "line": 73,
             "description": "Initialize scene objects.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -7996,7 +8060,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 95,
+            "line": 96,
             "description": "Update scene objects and the physics world.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -11374,7 +11438,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 103,
+            "line": 104,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -11384,7 +11448,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 109,
+            "line": 110,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -11394,7 +11458,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 115,
+            "line": 116,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -11405,7 +11469,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 122,
+            "line": 123,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -11416,7 +11480,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 129,
+            "line": 130,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -11426,7 +11490,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 135,
+            "line": 136,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasResize",
@@ -11437,7 +11501,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 145,
+            "line": 146,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -11446,7 +11510,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 202,
+            "line": 194,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -11472,7 +11536,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 223,
+            "line": 215,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -11488,7 +11552,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 236,
+            "line": 228,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -11514,7 +11578,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 260,
+            "line": 252,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -11523,7 +11587,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 314,
+            "line": 310,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -11532,7 +11596,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 330,
+            "line": 326,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -11541,7 +11605,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 384,
+            "line": 380,
             "description": "Resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -11550,7 +11614,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 410,
+            "line": 406,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -11559,7 +11623,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 420,
+            "line": 416,
             "description": "Set the canvas to be used for rendering.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -11575,7 +11639,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 432,
+            "line": 428,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -11584,7 +11648,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 456,
+            "line": 452,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -11600,7 +11664,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 472,
+            "line": 468,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -11616,7 +11680,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 485,
+            "line": 481,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -11632,7 +11696,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 498,
+            "line": 494,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -11645,7 +11709,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 509,
+            "line": 505,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -11654,8 +11718,8 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 535,
-            "description": "Set fullscreen mode",
+            "line": 531,
+            "description": "Set a element to fullscreen mode, if none is passed the document body is used.",
             "itemtype": "method",
             "name": "setFullscreen",
             "params": [
@@ -11666,7 +11730,7 @@
                 },
                 {
                     "name": "element",
-                    "description": "DOM element to go fullscren by default the rendering canvas is used",
+                    "description": "DOM element to go fullscren by default the document body is used",
                     "type": "DOM"
                 }
             ],

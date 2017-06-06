@@ -65,10 +65,45 @@
  * @default PCFSoftShadowMap
  */
 /**
+ * Tonemapping mode
+ * @property toneMapping
+ * @type {Number}
+ * @default NoToneMapping
+ */
+/**
  * Flag to control pointer locking
  * @property lockPointer
  * @type {boolean}
  * @default false
+ */
+/**
+ * Flag to indicate if the runtime should handle device pixel ratio
+ * @property handlePixelRatio
+ * @type {boolean}
+ * @default false
+ */
+/**
+ * Keyboard input object
+ * @property keyboard
+ * @type {Keyboard}
+ */
+/**
+ * Mouse input object
+ * @property mouse
+ * @type {Mouse}
+ */
+/**
+ * Threejs WebGLRenderer being used
+ * @property renderer
+ * @type {WebGLRenderer}
+ * @default null
+ */
+/**
+ * Canvas being used to draw
+ * Can be used to attach HTML elements but should be cleaned on dispose.
+ * @property canvas
+ * @type {DOM}
+ * @default null
  */
 function Program(name)
 {
@@ -90,6 +125,7 @@ function Program(name)
 
 	//Hardware flags
 	this.lockPointer = false;
+	this.handlePixelRatio = false;
 
 	//VR flags
 	this.vr = false;
@@ -177,7 +213,7 @@ Program.prototype.setMouseKeyboard = function(mouse, keyboard)
  *
  * @method setRenderer
  * @param {WebGLRenderer} renderer Three.js renderer to be used by this program
- * @param {bool} configure If true also configures renderer to match rendering quality specified in the program.
+ * @param {bool} configure If true also updates renderer configuration to match rendering quality specified in the program.
  */
 Program.prototype.setRenderer = function(renderer, configure)
 {
@@ -208,22 +244,22 @@ Program.prototype.displayVR = function()
 		try
 		{
 			this.useVR = true;
-
 			this.vrEffect = new THREE.VREffect(this.renderer);
+			this.vrEffect.setSize(window.innerWidth, window.innerHeight);
 			this.vrEffect.setFullScreen(true);
 		}
 		catch(e)
 		{
 			this.useVR = false;
 			this.vrEffect = null;
-
+			this.vrControls = null;
 			console.warn("nunuStudio: Failed to enter in VR mode", e);
 		}		
 	}
 };
 
 /**
- * Exit VR mode.
+ * Exit virtual relity mode.
  * 
  * @method exitVR
  */
@@ -232,7 +268,6 @@ Program.prototype.exitVR = function()
 	if(this.vr)
 	{
 		this.useVR = false;
-
 		if(this.vrEffect != null)
 		{
 			this.vrEffect.setFullScreen(false);
@@ -656,7 +691,8 @@ Program.prototype.toJSON = function(meta, exportResources)
 
 	//Pointer
 	data.object.lockPointer = this.lockPointer;
-
+	data.object.handlePixelRatio = this.handlePixelRatio;
+	
 	//VR
 	data.object.vr = this.vr;
 	data.object.vrScale = this.vrScale;
