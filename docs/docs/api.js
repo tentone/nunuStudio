@@ -2,13 +2,11 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "AmbientLight",
-        "Animation",
         "ArraybufferUtils",
         "Audio",
         "AudioEmitter",
         "AudioLoader",
         "Base64Utils",
-        "Bone",
         "BufferUtils",
         "CanvasTexture",
         "Container",
@@ -72,7 +70,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "WebcamTexture"
     ],
     "modules": [
-        "Animation",
         "Animations",
         "Audio",
         "BinaryUtils",
@@ -98,11 +95,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "VirtualReality"
     ],
     "allModules": [
-        {
-            "displayName": "Animation",
-            "name": "Animation",
-            "description": "Animation object is an object that can be keyframe animated.\n\nAnimation objects work the same way a container does, the only diference its the fact that they have attached an animation."
-        },
         {
             "displayName": "Animations",
             "name": "Animations",

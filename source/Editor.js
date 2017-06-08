@@ -83,7 +83,6 @@ include("core/objects/physics/PhysicsObject.js");
 include("core/objects/spine/SpineAnimation.js");
 include("core/objects/spine/SpineTexture.js");
 include("core/objects/particle/ParticleEmitter.js");
-include("core/objects/animation/Bone.js");
 include("core/objects/misc/Container.js");
 include("core/objects/misc/CubeCamera.js");
 include("core/objects/Program.js");

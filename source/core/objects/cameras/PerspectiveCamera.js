@@ -86,6 +86,8 @@ function PerspectiveCamera(fov, aspect, near, far)
 	this.clearColor = false;
 	this.clearDepth = false;
 	this.order = 0;
+
+	this.effects = [];
 }
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
@@ -107,42 +109,6 @@ PerspectiveCamera.prototype.destroy = function()
 };
 
 /**
- * Update world transformation matrix ignoring parent scaling properties.
- * 
- * @method updateMatrixWorld
- * @param  {boolean} force Force matrix update even if the attribute matrixWorldNeedsUpdate is not true
- */
-PerspectiveCamera.prototype.updateMatrixWorld = function(force)
-{
-	if(this.matrixAutoUpdate === true)
-	{
-		this.updateMatrix();
-	}
-
-	if(this.matrixWorldNeedsUpdate === true || force === true)
-	{
-		if(this.parent !== null)
-		{
-			this.matrixWorld.multiplyMatrices(this.parent.matrixWorld, this.matrix);
-		}
-		else
-		{
-			this.matrixWorld = this.matrix;
-		}
-
-		this.matrixWorldNeedsUpdate = false;
-		force = true;
-	}
-
-	//Update children
-	var children = this.children;
-	for(var i = 0; i < children.length; i ++)
-	{
-		children[i].updateMatrixWorld(force);
-	}
-};
-
-/**
  * Update camera projection matrix.
  * 
  * Should be called after chaging projection parameters.
@@ -154,7 +120,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
 	var top = this.near * Math.tan(THREE.Math.DEG2RAD * 0.5 * this.fov ) / this.zoom;
 	var height = 2 * top;
 	var width = this.aspect * height * ((this.viewport !== undefined) ? (this.viewport.x / this.viewport.y) : 1.0);
-	var left = - 0.5 * width;
+	var left = -0.5 * width;
 
 	if(this.filmOffset !== 0)
 	{

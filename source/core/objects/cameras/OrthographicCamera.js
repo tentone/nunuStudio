@@ -91,7 +91,9 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.clearColor = false;
 	this.clearDepth = false;
 	this.order = 0;
-	
+
+	this.effects = [];
+
 	this.updateProjectionMatrix();
 }
 
