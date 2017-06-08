@@ -124,26 +124,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\objects\\animation\\Animation.js": {
-            "name": "..\\..\\source\\core\\objects\\animation\\Animation.js",
-            "modules": {
-                "Animation": 1
-            },
-            "classes": {
-                "Animation": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\objects\\animation\\Bone.js": {
-            "name": "..\\..\\source\\core\\objects\\animation\\Bone.js",
-            "modules": {},
-            "classes": {
-                "Bone": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js": {
             "name": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
             "modules": {
@@ -724,21 +704,6 @@
             "line": 3,
             "description": "Audio loader can be used to load external audio resources."
         },
-        "Animation": {
-            "name": "Animation",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "Animation": 1,
-                "Bone": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "..\\..\\source\\core\\objects\\animation\\Bone.js",
-            "line": 3,
-            "description": "Animation object is an object that can be keyframe animated.\n\nAnimation objects work the same way a container does, the only diference its the fact that they have attached an animation."
-        },
         "Audio": {
             "name": "Audio",
             "submodules": {},
@@ -1313,37 +1278,6 @@
                     "type": "Object"
                 }
             ]
-        },
-        "Animation": {
-            "name": "Animation",
-            "shortname": "Animation",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Animation",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\objects\\animation\\Animation.js",
-            "line": 3,
-            "description": "Animation object is an object that can be keyframe animated.\n\nAnimation objects work the same way a container does, the only diference its the fact that they have attached an animation.",
-            "is_constructor": 1,
-            "extends": "{Object3D}"
-        },
-        "Bone": {
-            "name": "Bone",
-            "shortname": "Bone",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Animation",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\objects\\animation\\Bone.js",
-            "line": 3,
-            "description": "Bone represents a bone joint for skeletal animation.\n\nMore information about Bone can be found here https://threejs.org/docs/index.html?q=bon#Reference/Objects/Bone.",
-            "is_constructor": 1
         },
         "AudioEmitter": {
             "name": "AudioEmitter",
@@ -2766,7 +2700,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 93,
+            "line": 92,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -5771,7 +5705,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 100,
+            "line": 102,
             "description": "Used to set camera to resize horizontally",
             "itemtype": "attribute",
             "name": "RESIZE_HORIZONTAL",
@@ -5781,7 +5715,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 107,
+            "line": 109,
             "description": "Used to set camera to resize vertically.",
             "itemtype": "attribute",
             "name": "RESIZE_VERTICAL",
@@ -5791,7 +5725,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 115,
+            "line": 117,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -5800,7 +5734,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 131,
+            "line": 133,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -5809,7 +5743,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 159,
+            "line": 161,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -5915,7 +5849,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 93,
+            "line": 95,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -5924,23 +5858,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 109,
-            "description": "Update world transformation matrix ignoring parent scaling properties.",
-            "itemtype": "method",
-            "name": "updateMatrixWorld",
-            "params": [
-                {
-                    "name": "force",
-                    "description": "Force matrix update even if the attribute matrixWorldNeedsUpdate is not true",
-                    "type": "Boolean"
-                }
-            ],
-            "class": "PerspectiveCamera",
-            "module": "Cameras"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 145,
+            "line": 111,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -5949,7 +5867,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 167,
+            "line": 133,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11449,7 +11367,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 104,
+            "line": 103,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -11459,7 +11377,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 110,
+            "line": 109,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -11469,7 +11387,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 116,
+            "line": 115,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -11480,7 +11398,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 123,
+            "line": 122,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -11491,7 +11409,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 130,
+            "line": 129,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -11501,7 +11419,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 136,
+            "line": 135,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasResize",
@@ -11512,7 +11430,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 146,
+            "line": 145,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -11521,7 +11439,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 194,
+            "line": 193,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -11547,7 +11465,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 215,
+            "line": 214,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -11563,7 +11481,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 228,
+            "line": 227,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -11589,7 +11507,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 252,
+            "line": 251,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -11598,7 +11516,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 310,
+            "line": 309,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -11607,7 +11525,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 326,
+            "line": 325,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -11616,7 +11534,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 380,
+            "line": 379,
             "description": "Resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -11625,7 +11543,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 406,
+            "line": 405,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -11634,7 +11552,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 416,
+            "line": 415,
             "description": "Set the canvas to be used for rendering.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -11650,7 +11568,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 428,
+            "line": 427,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -11659,7 +11577,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 452,
+            "line": 451,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -11675,7 +11593,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 468,
+            "line": 467,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -11691,7 +11609,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 481,
+            "line": 480,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -11707,7 +11625,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 494,
+            "line": 493,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -11720,7 +11638,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 505,
+            "line": 504,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -11729,7 +11647,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 531,
+            "line": 530,
             "description": "Set a element to fullscreen mode, if none is passed the document body is used.",
             "itemtype": "method",
             "name": "setFullscreen",

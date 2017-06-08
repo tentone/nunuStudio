@@ -2164,7 +2164,7 @@
 
 		setFromEuler: function ( euler, update ) {
 
-			if ( ( euler && euler.isEuler ) === false ) {
+			if ( ! ( euler && euler.isEuler ) ) {
 
 				throw new Error( 'THREE.Quaternion: .setFromEuler() now expects an Euler rotation rather than a Vector3 and order.' );
 
@@ -2810,7 +2810,7 @@
 
 			return function applyEuler( euler ) {
 
-				if ( ( euler && euler.isEuler ) === false ) {
+				if ( ! ( euler && euler.isEuler ) ) {
 
 					console.error( 'THREE.Vector3: .applyEuler() now expects an Euler rotation rather than a Vector3 and order.' );
 
@@ -3450,7 +3450,7 @@
 
 		makeRotationFromEuler: function ( euler ) {
 
-			if ( ( euler && euler.isEuler ) === false ) {
+			if ( ! ( euler && euler.isEuler ) ) {
 
 				console.error( 'THREE.Matrix: .makeRotationFromEuler() now expects a Euler rotation rather than a Vector3 and order.' );
 
@@ -4514,7 +4514,7 @@
 			case 0x8b5b: return setValue3fm; // _MAT3
 			case 0x8b5c: return setValue4fm; // _MAT4
 
-			case 0x8b5e: return setValueT1; // SAMPLER_2D
+			case 0x8b5e: case 0x8d66: return setValueT1; // SAMPLER_2D, SAMPLER_EXTERNAL_OES
 			case 0x8b60: return setValueT6; // SAMPLER_CUBE
 
 			case 0x1404: case 0x8b56: return setValue1i; // INT, BOOL
@@ -9244,7 +9244,6 @@
 					_lookTarget.setFromMatrixPosition( light.target.matrixWorld );
 					shadowCamera.lookAt( _lookTarget );
 					shadowCamera.updateMatrixWorld();
-					shadowCamera.matrixWorldInverse.getInverse( shadowCamera.matrixWorld );
 
 					// compute shadow matrix
 
@@ -9275,7 +9274,6 @@
 						shadowCamera.up.copy( cubeUps[ face ] );
 						shadowCamera.lookAt( _lookTarget );
 						shadowCamera.updateMatrixWorld();
-						shadowCamera.matrixWorldInverse.getInverse( shadowCamera.matrixWorld );
 
 						var vpDimensions = cube2DViewPorts[ face ];
 						_state.viewport( vpDimensions );
@@ -9997,10 +9995,8 @@
 
 		applyMatrix4: function ( matrix4 ) {
 
-			this.direction.add( this.origin ).applyMatrix4( matrix4 );
 			this.origin.applyMatrix4( matrix4 );
-			this.direction.sub( this.origin );
-			this.direction.normalize();
+			this.direction.transformDirection( matrix4 );
 
 			return this;
 
@@ -13099,7 +13095,7 @@
 
 		merge: function ( geometry, matrix, materialIndexOffset ) {
 
-			if ( ( geometry && geometry.isGeometry ) === false ) {
+			if ( ! ( geometry && geometry.isGeometry ) ) {
 
 				console.error( 'THREE.Geometry.merge(): geometry not an instance of THREE.Geometry.', geometry );
 				return;
@@ -13219,7 +13215,7 @@
 
 		mergeMesh: function ( mesh ) {
 
-			if ( ( mesh && mesh.isMesh ) === false ) {
+			if ( ! ( mesh && mesh.isMesh ) ) {
 
 				console.error( 'THREE.Geometry.mergeMesh(): mesh not an instance of THREE.Mesh.', mesh );
 				return;
@@ -13889,7 +13885,7 @@
 
 		addAttribute: function ( name, attribute ) {
 
-			if ( ( attribute && attribute.isBufferAttribute ) === false && ( attribute && attribute.isInterleavedBufferAttribute ) === false ) {
+			if ( ! ( attribute && attribute.isBufferAttribute ) && ! ( attribute && attribute.isInterleavedBufferAttribute ) ) {
 
 				console.warn( 'THREE.BufferGeometry: .addAttribute() now expects ( name, attribute ).' );
 
@@ -14599,7 +14595,7 @@
 
 		merge: function ( geometry, offset ) {
 
-			if ( ( geometry && geometry.isBufferGeometry ) === false ) {
+			if ( ! ( geometry && geometry.isBufferGeometry ) ) {
 
 				console.error( 'THREE.BufferGeometry.merge(): geometry not an instance of THREE.BufferGeometry.', geometry );
 				return;
@@ -15653,6 +15649,14 @@
 
 		}(),
 
+		updateMatrixWorld: function ( force ) {
+
+			Object3D.prototype.updateMatrixWorld.call( this, force );
+
+			this.matrixWorldInverse.getInverse( this.matrixWorld );
+
+		},
+
 		clone: function () {
 
 			return new this.constructor().copy( this );
@@ -16345,32 +16349,18 @@
 
 		}
 
-		var type, size;
+		var type, bytesPerElement;
 
-		function setIndex( index ) {
+		function setIndex( value ) {
 
-			if ( index.array instanceof Uint32Array && extensions.get( 'OES_element_index_uint' ) ) {
-
-				type = gl.UNSIGNED_INT;
-				size = 4;
-
-			} else if ( index.array instanceof Uint16Array ) {
-
-				type = gl.UNSIGNED_SHORT;
-				size = 2;
-
-			} else {
-
-				type = gl.UNSIGNED_BYTE;
-				size = 1;
-
-			}
+			type = value.type;
+			bytesPerElement = value.bytesPerElement;
 
 		}
 
 		function render( start, count ) {
 
-			gl.drawElements( mode, count, type, start * size );
+			gl.drawElements( mode, count, type, start * bytesPerElement );
 
 			infoRender.calls ++;
 			infoRender.vertices += count;
@@ -16390,7 +16380,7 @@
 
 			}
 
-			extension.drawElementsInstancedANGLE( mode, count, type, start * size, geometry.maxInstancedCount );
+			extension.drawElementsInstancedANGLE( mode, count, type, start * bytesPerElement, geometry.maxInstancedCount );
 
 			infoRender.calls ++;
 			infoRender.vertices += count * geometry.maxInstancedCount;
@@ -17885,6 +17875,13 @@
 
 		}
 
+		function textureNeedsGenerateMipmaps( texture, isPowerOfTwo ) {
+
+			return texture.generateMipmaps && isPowerOfTwo &&
+				texture.minFilter !== NearestFilter && texture.minFilter !== LinearFilter;
+
+		}
+
 		// Fallback filters for non-power-of-2 textures
 
 		function filterFallback( f ) {
@@ -18122,7 +18119,7 @@
 
 					}
 
-					if ( texture.generateMipmaps && isPowerOfTwoImage ) {
+					if ( textureNeedsGenerateMipmaps( texture, isPowerOfTwoImage ) ) {
 
 						_gl.generateMipmap( _gl.TEXTURE_CUBE_MAP );
 
@@ -18371,7 +18368,7 @@
 
 			}
 
-			if ( texture.generateMipmaps && isPowerOfTwoImage ) _gl.generateMipmap( _gl.TEXTURE_2D );
+			if ( textureNeedsGenerateMipmaps( texture, isPowerOfTwoImage ) ) _gl.generateMipmap( _gl.TEXTURE_2D );
 
 			textureProperties.__version = texture.version;
 
@@ -18549,7 +18546,7 @@
 
 				}
 
-				if ( renderTarget.texture.generateMipmaps && isTargetPowerOfTwo ) _gl.generateMipmap( _gl.TEXTURE_CUBE_MAP );
+				if ( textureNeedsGenerateMipmaps( renderTarget.texture, isTargetPowerOfTwo ) ) _gl.generateMipmap( _gl.TEXTURE_CUBE_MAP );
 				state.bindTexture( _gl.TEXTURE_CUBE_MAP, null );
 
 			} else {
@@ -18558,7 +18555,7 @@
 				setTextureParameters( _gl.TEXTURE_2D, renderTarget.texture, isTargetPowerOfTwo );
 				setupFrameBufferTexture( renderTargetProperties.__webglFramebuffer, renderTarget, _gl.COLOR_ATTACHMENT0, _gl.TEXTURE_2D );
 
-				if ( renderTarget.texture.generateMipmaps && isTargetPowerOfTwo ) _gl.generateMipmap( _gl.TEXTURE_2D );
+				if ( textureNeedsGenerateMipmaps( renderTarget.texture, isTargetPowerOfTwo ) ) _gl.generateMipmap( _gl.TEXTURE_2D );
 				state.bindTexture( _gl.TEXTURE_2D, null );
 
 			}
@@ -18576,12 +18573,11 @@
 		function updateRenderTargetMipmap( renderTarget ) {
 
 			var texture = renderTarget.texture;
+			var isTargetPowerOfTwo = isPowerOfTwo( renderTarget );
 
-			if ( texture.generateMipmaps && isPowerOfTwo( renderTarget ) &&
-					texture.minFilter !== NearestFilter &&
-					texture.minFilter !== LinearFilter ) {
+			if ( textureNeedsGenerateMipmaps( texture, isTargetPowerOfTwo ) ) {
 
-				var target = (renderTarget && renderTarget.isWebGLRenderTargetCube) ? _gl.TEXTURE_CUBE_MAP : _gl.TEXTURE_2D;
+				var target = renderTarget.isWebGLRenderTargetCube ? _gl.TEXTURE_CUBE_MAP : _gl.TEXTURE_2D;
 				var webglTexture = properties.get( texture ).__webglTexture;
 
 				state.bindTexture( target, webglTexture );
@@ -20274,7 +20270,7 @@
 
 			_pixelRatio = value;
 
-			this.setSize( _viewport.z, _viewport.w, false );
+			this.setSize( _width, _height, false );
 
 		};
 
@@ -20308,13 +20304,15 @@
 
 		this.setViewport = function ( x, y, width, height ) {
 
-			state.viewport( _viewport.set( x, y, width, height ) );
+			_viewport.set( x, _height - y - height, width, height );
+			state.viewport( _currentViewport.copy( _viewport ).multiplyScalar( _pixelRatio ) );
 
 		};
 
 		this.setScissor = function ( x, y, width, height ) {
 
-			state.scissor( _scissor.set( x, y, width, height ) );
+			_scissor.set( x, _height - y - height, width, height );
+			state.scissor( _currentScissor.copy( _scissor ).multiplyScalar( _pixelRatio ) );
 
 		};
 
@@ -20655,12 +20653,15 @@
 
 			}
 
+			var attribute;
 			var renderer = bufferRenderer;
 
 			if ( index !== null ) {
 
+				attribute = attributes.get( index );
+
 				renderer = indexedBufferRenderer;
-				renderer.setIndex( index );
+				renderer.setIndex( attribute );
 
 			}
 
@@ -20670,7 +20671,7 @@
 
 				if ( index !== null ) {
 
-					_gl.bindBuffer( _gl.ELEMENT_ARRAY_BUFFER, attributes.get( index ).buffer );
+					_gl.bindBuffer( _gl.ELEMENT_ARRAY_BUFFER, attribute.buffer );
 
 				}
 
@@ -20813,11 +20814,11 @@
 						var normalized = geometryAttribute.normalized;
 						var size = geometryAttribute.itemSize;
 
-						var attributeProperties = attributes.get( geometryAttribute );
+						var attribute = attributes.get( geometryAttribute );
 
-						var buffer = attributeProperties.buffer;
-						var type = attributeProperties.type;
-						var bytesPerElement = attributeProperties.bytesPerElement;
+						var buffer = attribute.buffer;
+						var type = attribute.type;
+						var bytesPerElement = attribute.bytesPerElement;
 
 						if ( geometryAttribute.isInterleavedBufferAttribute ) {
 
@@ -20950,7 +20951,7 @@
 
 		this.render = function ( scene, camera, renderTarget, forceClear ) {
 
-			if ( camera !== undefined && camera.isCamera !== true ) {
+			if ( ! ( camera && camera.isCamera ) ) {
 
 				console.error( 'THREE.WebGLRenderer.render: camera is not an instance of THREE.Camera.' );
 				return;
@@ -20972,8 +20973,6 @@
 			camera.onBeforeRender( _this );
 
 			if ( camera.parent === null ) camera.updateMatrixWorld();
-
-			camera.matrixWorldInverse.getInverse( camera.matrixWorld );
 
 			_projScreenMatrix.multiplyMatrices( camera.projectionMatrix, camera.matrixWorldInverse );
 			_frustum.setFromMatrix( _projScreenMatrix );
@@ -21145,7 +21144,7 @@
 			state.buffers.depth.setMask( true );
 			state.buffers.color.setMask( true );
 
-			if ( camera.isArrayCamera && camera.enabled ) {
+			if ( camera.isArrayCamera ) {
 
 				_this.setScissorTest( false );
 
@@ -21319,7 +21318,7 @@
 
 				object.onBeforeRender( _this, scene, camera, geometry, material, group );
 
-				if ( camera.isArrayCamera && camera.enabled ) {
+				if ( camera.isArrayCamera ) {
 
 					var cameras = camera.cameras;
 
@@ -21328,14 +21327,13 @@
 						var camera2 = cameras[ j ];
 						var bounds = camera2.bounds;
 
-						_this.setViewport(
-							bounds.x * _width * _pixelRatio, bounds.y * _height * _pixelRatio,
-							bounds.z * _width * _pixelRatio, bounds.w * _height * _pixelRatio
-						);
-						_this.setScissor(
-							bounds.x * _width * _pixelRatio, bounds.y * _height * _pixelRatio,
-							bounds.z * _width * _pixelRatio, bounds.w * _height * _pixelRatio
-						);
+						var x = bounds.x * _width;
+						var y = bounds.y * _height;
+						var width = bounds.z * _width;
+						var height = bounds.w * _height;
+
+						_this.setViewport( x, y, width, height );
+						_this.setScissor( x, y, width, height );
 						_this.setScissorTest( true );
 
 						renderObject( object, scene, camera2, geometry, material, group );
@@ -22560,7 +22558,7 @@
 
 		this.readRenderTargetPixels = function ( renderTarget, x, y, width, height, buffer ) {
 
-			if ( ( renderTarget && renderTarget.isWebGLRenderTarget ) === false ) {
+			if ( ! ( renderTarget && renderTarget.isWebGLRenderTarget ) ) {
 
 				console.error( 'THREE.WebGLRenderer.readRenderTargetPixels: renderTarget is not THREE.WebGLRenderTarget.' );
 				return;
@@ -27213,7 +27211,7 @@
 
 		var font = parameters.font;
 
-		if ( ( font && font.isFont ) === false ) {
+		if ( ! ( font && font.isFont ) ) {
 
 			console.error( 'THREE.TextGeometry: font parameter is not an instance of THREE.Font.' );
 			return new Geometry();
@@ -32473,7 +32471,8 @@
 	var TYPED_ARRAYS = {
 		Int8Array: Int8Array,
 		Uint8Array: Uint8Array,
-		Uint8ClampedArray: Uint8ClampedArray,
+		// Workaround for IE11 pre KB2929437. See #11440
+		Uint8ClampedArray: typeof Uint8ClampedArray !== 'undefined' ? Uint8ClampedArray : Uint8Array,
 		Int16Array: Int16Array,
 		Uint16Array: Uint16Array,
 		Int32Array: Int32Array,
@@ -35999,7 +35998,6 @@
 
 		PerspectiveCamera.call( this );
 
-		this.enabled = false;
 		this.cameras = array || [];
 
 	}
@@ -41918,9 +41916,7 @@
 
 		attach: function ( child, scene, parent ) {
 
-			var matrixWorldInverse = new Matrix4();
-			matrixWorldInverse.getInverse( parent.matrixWorld );
-			child.applyMatrix( matrixWorldInverse );
+			child.applyMatrix( new Matrix4().getInverse( parent.matrixWorld ) );
 
 			scene.remove( child );
 			parent.add( child );
