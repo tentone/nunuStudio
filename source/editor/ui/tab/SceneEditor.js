@@ -881,11 +881,14 @@ SceneEditor.prototype.render = function()
 		{
 			var width = Settings.editor.cameraPreviewPercentage * this.canvas.width;
 			var height = Settings.editor.cameraPreviewPercentage * this.canvas.height;
-			var offset = this.canvas.width - width - 10;
+
+			var position = Settings.editor.cameraPreviewPosition;
+			var x = (position === Settings.BOTTOM_RIGHT || position === Settings.TOP_RIGHT) ? this.canvas.width - width - 10 : 10;
+			var y = (position === Settings.BOTTOM_RIGHT || position === Settings.BOTTOM_LEFT) ? this.canvas.height - height - 10 : 10;
 
 			renderer.setScissorTest(true);
-			renderer.setViewport(offset, 10, width, height);
-			renderer.setScissor(offset, 10, width, height);
+			renderer.setViewport(x, y, width, height);
+			renderer.setScissor(x, y, width, height);
 
 			//Preview selected camera
 			if(Editor.selectedObject instanceof PerspectiveCamera || Editor.selectedObject instanceof OrthographicCamera)
@@ -895,8 +898,8 @@ SceneEditor.prototype.render = function()
 				camera.updateProjectionMatrix();
 
 				renderer.clear();
-				renderer.setViewport(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-				renderer.setScissor(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+				renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+				renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 				renderer.render(Editor.program.scene, camera);
 			}
 			//Preview all cameras in use
@@ -920,8 +923,8 @@ SceneEditor.prototype.render = function()
 						renderer.clearDepth();
 					}
 
-					renderer.setViewport(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-					renderer.setScissor(offset + width * camera.offset.x, 10 + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+					renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+					renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 					renderer.render(scene, camera);
 				}
 			}
