@@ -240,6 +240,22 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.cameraPreviewPercentage);
 	this.form.nextRow();
 
+	//Navigation
+	this.form.addText("Position");
+	this.cameraPreviewPosition = new DropdownList(this.form.element);
+	this.cameraPreviewPosition.size.set(150, 20);
+	this.cameraPreviewPosition.addValue("Bottom Right", Settings.BOTTOM_RIGHT);
+	this.cameraPreviewPosition.addValue("Bottom Left", Settings.BOTTOM_LEFT);
+	this.cameraPreviewPosition.addValue("Top Right", Settings.TOP_RIGHT);
+	this.cameraPreviewPosition.addValue("Top Left", Settings.TOP_LEFT);
+	this.cameraPreviewPosition.setOnChange(function()
+	{
+		Settings.editor.cameraPreviewPosition = self.cameraPreviewPosition.getValue();
+	});
+	this.form.add(this.cameraPreviewPosition);
+	this.form.nextRow();
+
+
 	//Blank Space
 	this.form.addText("");
 	this.form.nextRow();
@@ -295,7 +311,8 @@ GeneralSettingsTab.prototype.activate = function()
 	//Camera preview
 	this.cameraPreviewEnabled.setValue(Settings.editor.cameraPreviewEnabled);
 	this.cameraPreviewPercentage.setValue(Settings.editor.cameraPreviewPercentage);
-	
+	this.cameraPreviewPosition.setValue(Settings.editor.cameraPreviewPosition);
+
 	//Transformations
 	this.transformationSpace.setValue(Settings.editor.transformationSpace);
 };

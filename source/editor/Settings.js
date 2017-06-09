@@ -10,6 +10,12 @@ Settings.DEGREES = 1;
 Settings.FREE = 10;
 Settings.ORBIT = 11;
 
+//Position
+Settings.TOP_LEFT = 20;
+Settings.TOP_RIGHT = 21;
+Settings.BOTTOM_LEFT = 22;
+Settings.BOTTOM_RIGHT = 23;
+
 //Load default settings
 Settings.loadDefault = function()
 {
@@ -31,6 +37,7 @@ Settings.loadDefault = function()
 	Settings.editor.axisEnabled = true;
 	Settings.editor.cameraPreviewEnabled = true;
 	Settings.editor.cameraPreviewPercentage = 0.35;
+	Settings.editor.cameraPreviewPosition = Settings.BOTTOM_RIGHT;
 	Settings.editor.lockMouse = true;
 	Settings.editor.transformationSpace = "world";
 	Settings.editor.navigation = Settings.FREE;

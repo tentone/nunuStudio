@@ -110,6 +110,7 @@
 	- Force webgl context loss when tabs closed
 - V0.9.0 Beta
 	- Division property for HTML elements
+	- Camera preview positioning
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
