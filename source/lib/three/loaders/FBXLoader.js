@@ -100,17 +100,15 @@
 
 				if ( ! isFbxFormatASCII( FBXText ) ) {
 
-					throw new Error( 'FBXLoader: Unknown format.' );
 					self.manager.itemError( url );
-					return;
+					throw new Error( 'FBXLoader: Unknown format.' );
 
 				}
 
 				if ( getFbxVersion( FBXText ) < 7000 ) {
 
-					throw new Error( 'FBXLoader: FBX version not supported for file at ' + url + ', FileVersion: ' + getFbxVersion( FBXText ) );
 					self.manager.itemError( url );
-					return;
+					throw new Error( 'FBXLoader: FBX version not supported for file at ' + url + ', FileVersion: ' + getFbxVersion( FBXText ) );
 
 				}
 
@@ -423,7 +421,7 @@
 
 		var material;
 
-		switch ( type ) {
+		switch ( type.toLowerCase() ) {
 
 			case 'phong':
 				material = new THREE.MeshPhongMaterial();
@@ -510,11 +508,19 @@
 					parameters.map = textureMap.get( relationship.ID );
 					break;
 
-				case " \"AmbientColor":
+				case "Bump":
 				case " \"Bump":
+					parameters.bumpMap = textureMap.get( relationship.ID );
+					break;
+
+				case "NormalMap":
+				case " \"NormalMap":
+					parameters.normalMap = textureMap.get( relationship.ID );
+					break;
+
+				case " \"AmbientColor":
 				case " \"EmissiveColor":
 				case "AmbientColor":
-				case "Bump":
 				case "EmissiveColor":
 				default:
 					console.warn( 'Unknown texture application of type ' + type + ', skipping texture' );
@@ -1362,7 +1368,7 @@
 						}
 						if ( materials.length > 1 ) {
 
-							material = new THREE.MultiMaterial( materials );
+							material = materials;
 
 						} else if ( materials.length > 0 ) {
 
@@ -3932,7 +3938,7 @@
 
 			// footer size: 160bytes + 16-byte alignment padding
 			// - 16bytes: magic
-			// - padding til 16-byte alignment
+			// - padding til 16-byte alignment (at least 1byte?)
 			//   (seems like some exporters embed fixed 15bytes?)
 			// - 4bytes: magic
 			// - 4bytes: version
@@ -3940,7 +3946,7 @@
 			// - 16bytes: magic
 			if ( reader.size() % 16 === 0 ) {
 
-				return ( ( reader.getOffset() + 160 + 15 ) & ~0xf ) >= reader.size();
+				return ( ( reader.getOffset() + 160 + 16 ) & ~0xf ) >= reader.size();
 
 			} else {
 
@@ -4252,7 +4258,7 @@
 
 					if ( window.Zlib === undefined ) {
 
-						throw new Error( 'FBXLoader: Import https://github.com/imaya/zlib.js' );
+						throw new Error( 'FBXLoader: Import inflate.min.js from https://github.com/imaya/zlib.js' );
 
 					}
 
@@ -4951,6 +4957,12 @@
 		if ( to === undefined ) to = buffer.byteLength;
 
 		var array = new Uint8Array( buffer, from, to );
+
+		if ( window.TextDecoder !== undefined ) {
+
+			return new TextDecoder().decode( array );
+
+		}
 
 		var s = '';
 

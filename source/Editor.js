@@ -142,10 +142,10 @@ include("lib/tern/comment.js");
 include("lib/tern/infer.js");
 include("lib/tern/plugin/doc_comment.js");
 
-include("lib/three/loaders/OBJLoader.js");
+include("lib/three/loaders/OBJLoader2.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/VRMLLoader.js");
-include("lib/three/loaders/FBXLoader2.js");
+include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/PLYLoader.js");
@@ -1197,7 +1197,7 @@ Editor.loadGeometry = function(file, onLoad)
 	//Wavefront OBJ
 	if(extension === "obj")
 	{
-		var loader = new THREE.OBJLoader();
+		var loader = new THREE.OBJLoader2();
 
 		//Look for MTL file
 		if(Nunu.runningOnDesktop())
@@ -1220,7 +1220,7 @@ Editor.loadGeometry = function(file, onLoad)
 			var obj = loader.parse(reader.result);
 			Editor.addToScene(obj);
 		};
-		reader.readAsText(file);
+		reader.readAsArrayBuffer(file);
 	}
 	//3DS
 	else if(extension === "3ds")
