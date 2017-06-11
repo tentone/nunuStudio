@@ -15,7 +15,7 @@
 		"axisEnabled": true,
 		"cameraPreviewEnabled": true,
 		"cameraPreviewPercentage": "0.3",
-		"cameraPreviewPosition": 21,
+		"cameraPreviewPosition": 23,
 		"lockMouse": true,
 		"transformationSpace": "world",
 		"navigation": 10,
