@@ -67,10 +67,10 @@ Nunu.webvrAvailable = function()
 /**
  * Used to get the first VR display available, the display is returned as argument of the getDisplay function.
  * 
- * @method getVRDisplay
+ * @method getVRDisplays
  * @param {Function} getDisplay Function used to get the display, receives the display as argument.
  */
-Nunu.getVRDisplay = function(getDisplay)
+Nunu.getVRDisplays = function(getDisplay)
 {
 	if(navigator.getVRDisplays === undefined)
 	{

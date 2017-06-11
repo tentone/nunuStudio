@@ -7656,7 +7656,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 168,
+            "line": 177,
             "description": "Select initial scene and initialize that scene.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -7665,7 +7665,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 205,
+            "line": 226,
             "description": "Set program mouse and keyboard.",
             "itemtype": "method",
             "name": "setMouseKeyboard",
@@ -7686,7 +7686,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 218,
+            "line": 239,
             "description": "Set program renderer to be used by this program.",
             "itemtype": "method",
             "name": "setRenderer",
@@ -7707,7 +7707,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 243,
+            "line": 264,
             "description": "Enter VR mode.",
             "itemtype": "method",
             "name": "displayVR",
@@ -7716,7 +7716,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 269,
+            "line": 288,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -7725,8 +7725,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 288,
-            "description": "Update program state.\n\nAutomatically called by the runtime.",
+            "line": 302,
+            "description": "Update program state, this updated all current scene children elements.",
             "itemtype": "method",
             "name": "update",
             "class": "Program",
@@ -7734,7 +7734,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 300,
+            "line": 312,
             "description": "Render program to canvas.\n\nRenderer passed as argument.",
             "itemtype": "method",
             "name": "render",
@@ -7750,7 +7750,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 350,
+            "line": 362,
             "description": "Resize program elements.\n\nCalled by the runtime every time the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -7771,7 +7771,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 378,
+            "line": 390,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -7787,7 +7787,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 408,
+            "line": 420,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -7803,7 +7803,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 430,
+            "line": 442,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -7819,7 +7819,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 453,
+            "line": 465,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -7832,7 +7832,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 466,
+            "line": 478,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -7848,7 +7848,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 479,
+            "line": 491,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -7864,7 +7864,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 524,
+            "line": 536,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -7873,7 +7873,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 558,
+            "line": 576,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -7889,7 +7889,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 595,
+            "line": 613,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -7905,7 +7905,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 627,
+            "line": 645,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11715,7 +11715,7 @@
             "line": 67,
             "description": "Used to get the first VR display available, the display is returned as argument of the getDisplay function.",
             "itemtype": "method",
-            "name": "getVRDisplay",
+            "name": "getVRDisplays",
             "params": [
                 {
                     "name": "getDisplay",
