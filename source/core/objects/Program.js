@@ -163,13 +163,17 @@ function Program(name)
 	this.effect = null;
 	this.controls = null;
 
-	/*window.addEventListener("vrdisplaypresentchange", function()
+	//VR display present change
+	var self = this;
+	this.onVrDisplayPresentChange = function()
 	{
-		if(!display.isPresenting)
+		if(self.display !== null && !self.display.isPresenting)
 		{
-			this.useVR = false;
+			self.useVR = false;
 		}
-	}, false);*/
+	};
+
+	window.addEventListener("vrdisplaypresentchange", this.onVrDisplayPresentChange, false);
 }
 
 Program.prototype = Object.create(ResourceManager.prototype);
@@ -218,6 +222,7 @@ Program.prototype.initialize = function()
 		Nunu.getVRDisplays(function(display)
 		{
 			self.display = display;
+			self.controls = new VRControls();
 			self.effect = new THREE.VREffect(self.renderer);
 		});
 	}
@@ -262,7 +267,11 @@ Program.prototype.setRenderer = function(renderer, configure)
 };
 
 /**
- * Enter VR mode.
+ * Enter virtual reality mode.
+ *
+ * To enter virtual reality mode a WebVR enabled browser is required.
+ *
+ * When displaying VR content the display.requestAnimationFrame should be used to call the render method.
  * 
  * @method displayVR
  */
@@ -325,6 +334,7 @@ Program.prototype.render = function(renderer)
 		for(var i = 0; i < this.scene.cameras.length; i++)
 		{
 			var camera = this.scene.cameras[i];
+			this.controls.update(camera);
 			this.effect.render(this.scene, camera);
 		}
 	}
@@ -370,6 +380,11 @@ Program.prototype.render = function(renderer)
  */
 Program.prototype.resize = function(x, y)
 {
+	if(this.effect !== null)
+	{
+		this.effect.setSize(x, y);
+	}
+
 	//Resize cameras
 	for(var i = 0; i < this.scene.cameras.length; i++)
 	{
@@ -542,6 +557,8 @@ Program.prototype.addDefaultScene = function(material)
  */
 Program.prototype.dispose = function()
 {
+	window.removeEventListener("vrdisplaypresentchange", this.onVrDisplayPresentChange);
+
 	//Geometry
 	for(var i in this.geometries)
 	{

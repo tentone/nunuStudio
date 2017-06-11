@@ -377,7 +377,7 @@ NunuApp.prototype.exit = function()
 };
 
 /**
- * Resume the paused application.
+ * Start or resume the paused application.
  *
  * Starts a new update cycle and sets the running flag.
  *
@@ -385,19 +385,28 @@ NunuApp.prototype.exit = function()
  */
 NunuApp.prototype.resume = function()
 {
-	if(this.program !== null)
+	if(this.program !== null && !this.running)
 	{
+		this.running = true;
+
 		var self = this;
 		var update = function()
 		{
 			if(self.running)
 			{
 				self.update();
-				requestAnimationFrame(update);
+
+				if(self.program.useVR)
+				{
+					self.program.display.requestAnimationFrame(update);
+				}
+				else
+				{
+					requestAnimationFrame(update);
+				}
 			}
 		};
 
-		this.running = true;
 		update();
 	}
 };

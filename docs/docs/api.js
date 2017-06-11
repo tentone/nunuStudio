@@ -208,7 +208,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "VirtualReality",
             "name": "VirtualReality",
-            "description": "VRControl is used to get input from an HDM device.\n\nAn object can be attached to the VRControls object to be automatically updated with the HDM Movement."
+            "description": "VRControl is used to get input from an HDM device and apply it to an Object."
         }
     ],
     "elements": []

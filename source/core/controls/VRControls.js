@@ -1,78 +1,91 @@
 "use strict";
 
 /**
- * VRControl is used to get input from an HDM device.
- * 
- * An object can be attached to the VRControls object to be automatically updated with the HDM Movement.
+ * VRControl is used to get input from an HDM device and apply it to an Object.
  *
  * @class VRControls
  * @constructor
  * @module VirtualReality
  * @author mrdoob (http://mrdoob.com)
  * @author dmarcos (https://github.com/dmarcos)
- * @param {Object3D} object  Object to be attached.
- * @param {Function} onError onError callback.
  */
-function VRControls(object, onError)
+/**
+ * VR display.
+ * @property display
+ * @type {Object}
+ */
+/**
+ * Scale from real units to world units.
+ * @property scale
+ * @type {Number}
+ */
+/**
+ * Standing property, is set true the user height will be added to the position of the HMD.
+ * @property standing
+ * @type {boolean}
+ */
+/**
+ * User height, used to calibrate when the user is standing.
+ * @property userHeight
+ * @type {Number}
+ */
+function VRControls()
 {
-	this.vrInput = null;
-	this.scale = 1; //Scale from real units to world units
+	this.display = null;
+	this.scale = 1;
 	this.standing = false;
-	this.userHeight = 1.7; //Meters
-	this.object = null;
+	this.userHeight = 1.6;
 
-	if(object !== undefined)
+	//VR Frame data
+	this.frameData = null;
+	if(VRFrameData !== undefined)
 	{
-		this.object = object;
+		this.frameData = new VRFrameData();
 	}
 
 	//Position and rotation matrix
 	this.position = new THREE.Vector3();
 	this.quaternion = new THREE.Quaternion();
 
-	//Self pointer
-	var self = this;
-
-	//Get VR Display devices
+	//Get vr display devices
 	if(navigator.getVRDisplays !== undefined)
 	{
-		navigator.getVRDisplays().then(gotVRDevices);
-	}
-
-	//Return VR display devices
-	function gotVRDevices(devices)
-	{
-		//Get first VRDisplay found
-		for(var i = 0; i < devices.length; i ++)
+		var self = this;
+		navigator.getVRDisplays().then(function(devices)
 		{
-			if(("VRDisplay" in window && devices[i] instanceof VRDisplay) || ("PositionSensorVRDevice" in window && devices[i] instanceof PositionSensorVRDevice))
+			if(devices.length > 0)
 			{
-				self.vrInput = devices[i];
-				break;
+				self.display = devices[0];
 			}
-		}
-
-		//If no display found call onError
-		if(!self.vrInput)
-		{
-			if(onError)
+			else
 			{
-				onError("VR input not available");
+				console.warn("nunuStudio: No vr display is available.");
 			}
-		}
-	}
+		});
+	}	
 }
 
 /**
  * Update VRControls object state.
  * 
  * @method update
+ * @param {Object3D} object Object to be updated
  */
-VRControls.prototype.update = function()
+VRControls.prototype.update = function(object)
 {
-	if(this.vrInput !== null)
+	if(this.display !== null)
 	{
-		var pose = this.vrInput.getPose();
+		var pose;
+
+		if(this.display.getFrameData)
+		{
+			this.display.getFrameData(this.frameData);
+			pose = this.frameData.pose;
+		}
+		else
+		{
+			pose = this.display.getPose();
+		}
 
 		//Orientation
 		if(pose.orientation !== null)
@@ -99,10 +112,10 @@ VRControls.prototype.update = function()
 		//Scale
 		this.position.multiplyScalar(this.scale);
 
-		if(this.object !== null)
+		if(object !== null)
 		{
-			this.object.position.copy(this.position);
-			this.object.quaternion.copy(this.quaternion);
+			object.position.copy(this.position);
+			object.quaternion.copy(this.quaternion);
 		}
 	}
 };
@@ -114,7 +127,7 @@ VRControls.prototype.update = function()
  */
 VRControls.prototype.dispose = function()
 {
-	this.vrInput = null;
+	this.display = null;
 };
 
 /**
@@ -124,19 +137,8 @@ VRControls.prototype.dispose = function()
  */
 VRControls.prototype.resetPose = function()
 {
-	if(this.vrInput !== null)
+	if(this.display !== null)
 	{
-		this.vrInput.resetPose();
+		this.display.resetPose();
 	}
-};
-
-/**
- * Attach an object to the VRControls.
- *
- * @method attachObject
- * @param {Object3D} Object to be attached.
- */
-VRControls.prototype.attachObject = function(object)
-{
-	this.object = object;
 };
