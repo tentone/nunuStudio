@@ -159,8 +159,17 @@ function Program(name)
 
 	//VR objects
 	this.useVR = false;
-	this.vrEffect = null;
-	this.vrControls = null;
+	this.display = null;
+	this.effect = null;
+	this.controls = null;
+
+	/*window.addEventListener("vrdisplaypresentchange", function()
+	{
+		if(!display.isPresenting)
+		{
+			this.useVR = false;
+		}
+	}, false);*/
 }
 
 Program.prototype = Object.create(ResourceManager.prototype);
@@ -179,6 +188,7 @@ Program.prototype.initialize = function()
 	{
 		this.mouse = new Mouse();
 	}
+
 	if(this.keyboard === null)
 	{
 		this.keyboard = new keyboard();
@@ -199,6 +209,17 @@ Program.prototype.initialize = function()
 	else if(this.children.length > 0)
 	{
 		this.setScene(this.children[0]);
+	}
+
+	if(this.vr)
+	{
+		var self = this;
+
+		Nunu.getVRDisplays(function(display)
+		{
+			self.display = display;
+			self.effect = new THREE.effect(self.renderer);
+		});
 	}
 };
 
@@ -251,16 +272,14 @@ Program.prototype.displayVR = function()
 	{
 		try
 		{
-			this.useVR = true;
-			this.vrEffect = new THREE.VREffect(this.renderer);
-			this.vrEffect.setSize(window.innerWidth, window.innerHeight);
-			this.vrEffect.setFullScreen(true);
+			if(!this.display.isPresenting)
+			{
+				this.display.requestPresent([{source : this.canvas}]);
+				this.useVR = true;
+			}
 		}
 		catch(e)
 		{
-			this.useVR = false;
-			this.vrEffect = null;
-			this.vrControls = null;
 			console.warn("nunuStudio: Failed to enter in VR mode", e);
 		}		
 	}
@@ -273,22 +292,15 @@ Program.prototype.displayVR = function()
  */
 Program.prototype.exitVR = function()
 {
-	if(this.vr)
+	if(this.display.isPresenting)
 	{
+		this.display.exitPresent();
 		this.useVR = false;
-		if(this.vrEffect != null)
-		{
-			this.vrEffect.setFullScreen(false);
-			this.vrEffect.dispose();
-			this.vrEffect = null;
-		}
 	}
 };
 
 /**
- * Update program state.
- * 
- * Automatically called by the runtime.
+ * Update program state, this updated all current scene children elements.
  * 
  * @method update
  */
@@ -313,7 +325,7 @@ Program.prototype.render = function(renderer)
 		for(var i = 0; i < this.scene.cameras.length; i++)
 		{
 			var camera = this.scene.cameras[i];
-			this.vrEffect.render(this.scene, camera);
+			this.effect.render(this.scene, camera);
 		}
 	}
 	//Render normally
@@ -552,6 +564,12 @@ Program.prototype.dispose = function()
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].dispose();
+	}
+
+	//VR Effect
+	if(this.effect !== null)
+	{
+		this.effect.dispose();
 	}
 };
 
