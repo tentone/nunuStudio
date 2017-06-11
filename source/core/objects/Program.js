@@ -218,7 +218,7 @@ Program.prototype.initialize = function()
 		Nunu.getVRDisplays(function(display)
 		{
 			self.display = display;
-			self.effect = new THREE.effect(self.renderer);
+			self.effect = new THREE.VREffect(self.renderer);
 		});
 	}
 };
