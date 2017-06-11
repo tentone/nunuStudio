@@ -11712,7 +11712,23 @@
         },
         {
             "file": "..\\..\\source\\Nunu.js",
-            "line": 52,
+            "line": 67,
+            "description": "Used to get the first VR display available, the display is returned as argument of the getDisplay function.",
+            "itemtype": "method",
+            "name": "getVRDisplay",
+            "params": [
+                {
+                    "name": "getDisplay",
+                    "description": "Function used to get the display, receives the display as argument.",
+                    "type": "Function"
+                }
+            ],
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\..\\source\\Nunu.js",
+            "line": 94,
             "description": "Check if host supports WebAudio.",
             "itemtype": "method",
             "name": "webAudioAvailable",
@@ -11725,7 +11741,7 @@
         },
         {
             "file": "..\\..\\source\\Nunu.js",
-            "line": 63,
+            "line": 105,
             "description": "Check if host supports WebGL, only checks for WebGL 1.0 support.",
             "itemtype": "method",
             "name": "webglAvailable",
@@ -11738,7 +11754,7 @@
         },
         {
             "file": "..\\..\\source\\Nunu.js",
-            "line": 86,
+            "line": 128,
             "description": "Check if nunu is running inside NWJS.",
             "itemtype": "method",
             "name": "runningOnDesktop",

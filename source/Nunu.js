@@ -36,7 +36,7 @@ Nunu.VERSION = "V0.9.0 Beta";
  * @attribute TIMESTAMP
  * @type {String}
  */
-Nunu.TIMESTAMP = "201706102022";
+Nunu.TIMESTAMP = "201706110121";
 
 /**
  * Check if host supports WebVR and if there is a VR display available.
@@ -46,7 +46,49 @@ Nunu.TIMESTAMP = "201706102022";
  */
 Nunu.webvrAvailable = function()
 {
-	return navigator.getVRDisplays !== undefined;
+	if(navigator.getVRDisplays === undefined)
+	{
+		return false;
+	}
+
+	var hasDisplay = true;
+	navigator.getVRDisplays().then(function(displays)
+	{
+		if(displays.length === 0)
+		{
+			console.warn("nunuStudio: WebVR supported but no display is available.");
+			hasDisplay = false;
+		}
+	});
+
+	return hasDisplay;
+};
+
+/**
+ * Used to get the first VR display available, the display is returned as argument of the getDisplay function.
+ * 
+ * @method getVRDisplay
+ * @param {Function} getDisplay Function used to get the display, receives the display as argument.
+ */
+Nunu.getVRDisplay = function(getDisplay)
+{
+	if(navigator.getVRDisplays === undefined)
+	{
+		console.warn("nunuStudio: WebVR is not supported.");
+		return;
+	}
+
+	navigator.getVRDisplays().then(function(displays)
+	{
+		if(displays.length > 0)
+		{
+			getDisplay(displays[0]);
+		}
+		else
+		{
+			console.warn("nunuStudio: WebVR supported but no display is available.");
+		}
+	});
 };
 
 /** 
