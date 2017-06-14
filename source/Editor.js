@@ -142,18 +142,19 @@ include("lib/tern/comment.js");
 include("lib/tern/infer.js");
 include("lib/tern/plugin/doc_comment.js");
 
-include("lib/three/loaders/OBJLoader2.js");
-include("lib/three/loaders/MTLLoader.js");
-include("lib/three/loaders/VRMLLoader.js");
+include("lib/three/loaders/3MFLoader.js");
+include("lib/three/loaders/AWDLoader.js");
+include("lib/three/loaders/ColladaLoader2.js");
 include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
-include("lib/three/loaders/ColladaLoader.js");
-include("lib/three/loaders/PLYLoader.js");
-include("lib/three/loaders/VTKLoader.js");
-include("lib/three/loaders/AWDLoader.js");
-include("lib/three/loaders/TGALoader.js");
+include("lib/three/loaders/MTLLoader.js");
+include("lib/three/loaders/OBJLoader2.js");
 include("lib/three/loaders/PCDLoader.js");
+include("lib/three/loaders/PLYLoader.js");
 include("lib/three/loaders/STLLoader.js");
+include("lib/three/loaders/VRMLLoader.js");
+include("lib/three/loaders/VTKLoader.js");
+include("lib/three/loaders/TGALoader.js");
 
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
@@ -1241,7 +1242,6 @@ Editor.loadGeometry = function(file, onLoad)
 		reader.onload = function()
 		{
 			var loader = new THREE.ColladaLoader();
-			loader.options.convertUpAxis = true;
 			var collada = loader.parse(reader.result);
 			var scene = collada.scene;
 			Editor.addToScene(scene);
@@ -1262,6 +1262,18 @@ Editor.loadGeometry = function(file, onLoad)
 			}
 		};
 		reader.readAsText(file);
+	}
+	//3MF
+	else if(extension === "3mf")
+	{
+		var reader = new FileReader();
+		reader.onload = function()
+		{
+			var loader = new THREE.ThreeMFLoader();
+			var obj = loader.parse(reader.result);
+			Editor.addToScene(obj);
+		};
+		reader.readAsArrayBuffer(file);
 	}
 	//AWD
 	else if(extension === "awd")
