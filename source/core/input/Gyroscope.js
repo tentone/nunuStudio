@@ -34,30 +34,26 @@ function Gyroscope()
 	this.gamma = 0;
 	this.orientation = 0;
 
-	this.events = [];
+	this.events = new EventManager();
 
 	var self = this;
 
 	//Orientation
-	this.events.push([window, "orientationchange", function(event)
+	this.events.add(window, "orientationchange", function(event)
 	{
 		self.orientation = THREE.Math.degToRad(window.orientation);
-	}]);
+	});
 
 	//Device orientation
-	this.events.push([window, "deviceorientation", function(event)
+	this.events.add(window, "deviceorientation", function(event)
 	{
 		self.alpha = THREE.Math.degToRad(event.alpha);
 		self.beta = THREE.Math.degToRad(event.beta);
 		self.gamma = THREE.Math.degToRad(event.gamma);
-	}]);
+	});
 
 	//Initialize events
-	for(var i = 0; i < this.events.length; i++)
-	{
-		var event = this.events[i];
-		event[0].addEventListener(event[1], event[2]);
-	}
+	this.events.create();
 }
 
 /**
@@ -93,9 +89,5 @@ Gyroscope.prototype.setObjectQuaternion = function()
  */
 Gyroscope.prototype.dispose = function()
 {
-	for(var i = 0; i < this.events.length; i++)
-	{
-		var event = this.events[i];
-		event[0].removeEventListener(event[1], event[2]);
-	}
+	this.events.destroy();
 };

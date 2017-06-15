@@ -137,7 +137,7 @@ function Program(name)
 	this.vrScale = 1;
 
 	//Render quality
-	this.antialiasing = false;
+	this.antialiasing = true;
 	this.shadows = true;
 	this.shadowsType = THREE.PCFSoftShadowMap;
 	this.toneMapping = THREE.NoToneMapping;

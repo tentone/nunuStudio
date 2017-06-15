@@ -237,12 +237,14 @@ Script.prototype.setCode = function(code)
 		catch(e)
 		{
 			console.warn("nunuStudio: Error initializing script code", e);
+			throw "Error initializing script code";
 			this.script = new(function(){})();
 		}
 	}
 	catch(e)
 	{
 		console.warn("nunuStudio: Error compiling script code", e);
+		throw "Error compiling script code";
 		this.script = new(function(){})();
 	}
 };
