@@ -20,13 +20,16 @@ function Action(object, type, target, parent, state)
 	this.order = -1;
 
 	//Try to get object order
-	var children = this.parent.children;
-	for(var i = 0; i < children.length; i++)
+	if(this.parent !== null)
 	{
-		if(object.uuid === children[i].uuid)
+		var children = this.parent.children;
+		for(var i = 0; i < children.length; i++)
 		{
-			this.order = i;
-			break;
+			if(object.uuid === children[i].uuid)
+			{
+				this.order = i;
+				break;
+			}
 		}
 	}
 }

@@ -42,13 +42,13 @@ function SceneEditor(parent, closeable, container, index)
 	this.element.appendChild(this.stats.dom);
 
 	//Tool scene
+	this.helperScene = new THREE.Scene();
 	this.toolScene = new THREE.Scene();
-	this.toolSceneTop = new THREE.Scene();
 
 	//Grid
 	this.gridHelper = new GridHelper(Settings.editor.gridSize, Settings.editor.gridSpacing, 0x888888);
 	this.gridHelper.visible = Settings.editor.gridEnabled;
-	this.toolScene.add(this.gridHelper);
+	this.helperScene.add(this.gridHelper);
 
 	//Axis
 	this.axisHelper = new THREE.AxisHelper(Settings.editor.gridSize);
@@ -56,15 +56,15 @@ function SceneEditor(parent, closeable, container, index)
 	this.axisHelper.material.transparent = true;
 	this.axisHelper.material.opacity = 1;
 	this.axisHelper.visible = Settings.editor.axisEnabled;
-	this.toolScene.add(this.axisHelper);
+	this.helperScene.add(this.axisHelper);
 
 	//Object helper container
 	this.objectHelper = new THREE.Scene();
-	this.toolScene.add(this.objectHelper);
+	this.helperScene.add(this.objectHelper);
 
 	//Tool container
 	this.toolContainer = new THREE.Scene();
-	this.toolSceneTop.add(this.toolContainer);
+	this.toolScene.add(this.toolContainer);
 
 	//Navigation
 	this.cameraRotation = new THREE.Vector2(0, 0);
@@ -72,7 +72,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.cameraDistance = 10;
 
 	//Camera
-	this.cameras = null;
+	this.camera = null;
 	this.cameraMode = SceneEditor.CAMERA_PERSPECTIVE;
 	this.setCameraMode(SceneEditor.CAMERA_PERSPECTIVE);
 
@@ -873,9 +873,9 @@ SceneEditor.prototype.render = function()
 		renderer.render(Editor.program.scene, this.camera);
 
 		//Render tools
-		renderer.render(this.toolScene, this.camera);
+		renderer.render(this.helperScene, this.camera);
 		renderer.clearDepth();
-		renderer.render(this.toolSceneTop, this.camera);
+		renderer.render(this.toolScene, this.camera);
 
 		//Camera preview
 		if(Settings.editor.cameraPreviewEnabled)

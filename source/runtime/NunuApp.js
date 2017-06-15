@@ -4,7 +4,6 @@ include("Nunu.js");
 
 include("lib/three/three.min.js");
 include("lib/three/effects/VREffect.js");
-include("lib/three/controls/VRControls.js");
 
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
@@ -85,6 +84,7 @@ include("core/utils/binary/Base64Utils.js");
 include("core/utils/binary/ArraybufferUtils.js");
 include("core/utils/binary/BufferUtils.js");
 
+include("core/utils/EventManager.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");

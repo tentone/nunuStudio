@@ -63,10 +63,7 @@ History.prototype.undo = function()
 				action.object.destroy();
 			}
 		}
-		else if(action.target === Action.TARGET_TEXTURE)
-		{
-			//TODO <ADD CODE HERE>
-		}
+
 		return action;
 	}
 

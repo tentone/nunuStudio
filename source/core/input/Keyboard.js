@@ -27,38 +27,34 @@ function Keyboard()
 	}
 
 	//Events
-	this.events = [];
+	this.events = new EventManager();
 
 	//Actions pointer
 	var actions = this.actions;
 	var self = this;
 
 	//Key down
-	this.events.push([window, "keydown", function(event)
+	this.events.add(window, "keydown", function(event)
 	{
 		actions.push(event.keyCode);
 		actions.push(Key.DOWN);
-	}]);
+	});
 
 	//Key up
-	this.events.push([window, "keyup", function(event)
+	this.events.add(window, "keyup", function(event)
 	{
 		actions.push(event.keyCode);
 		actions.push(Key.UP);
-	}]);
+	});
 
 	//Reset
-	this.events.push([window, "focus", function(event)
+	this.events.add(window, "focus", function(event)
 	{
 		self.reset();
-	}]);
+	});
 
 	//Initialize events
-	for(var i = 0; i < this.events.length; i++)
-	{
-		var event = this.events[i];
-		event[0].addEventListener(event[1], event[2]);
-	}
+	this.events.create();
 }
 
 Keyboard.prototype = Keyboard;
@@ -144,11 +140,7 @@ Keyboard.keyJustReleased = function(key)
  */
 Keyboard.dispose = function()
 {
-	for(var i = 0; i < this.events.length; i++)
-	{
-		var event = this.events[i];
-		event[0].removeEventListener(event[1], event[2]);
-	}
+	this.events.destroy();
 };
 
 /**

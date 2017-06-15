@@ -13,6 +13,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "CubeCamera",
         "CubeTexture",
         "DirectionalLight",
+        "EventManager",
         "FileSystem",
         "Fog",
         "Font",

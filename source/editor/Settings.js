@@ -46,7 +46,7 @@ Settings.loadDefault = function()
 
 	//Render
 	Settings.render = {};
-	Settings.render.followProject = false;
+	Settings.render.followProject = true;
 	Settings.render.toneMapping = THREE.LinearToneMapping;
 	Settings.render.toneMappingExposure = 1.0;
 	Settings.render.toneMappingWhitePoint = 1.0;

@@ -14,7 +14,7 @@
 		"gridEnabled": true,
 		"axisEnabled": true,
 		"cameraPreviewEnabled": true,
-		"cameraPreviewPercentage": "0.3",
+		"cameraPreviewPercentage": 0.35,
 		"cameraPreviewPosition": 23,
 		"lockMouse": true,
 		"transformationSpace": "world",
@@ -23,7 +23,7 @@
 		"keyboardNavigation": true
 	},
 	"render": {
-		"followProject": false,
+		"followProject": true,
 		"toneMapping": 1,
 		"toneMappingExposure": 1,
 		"toneMappingWhitePoint": 1,
