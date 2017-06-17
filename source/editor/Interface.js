@@ -439,7 +439,7 @@ Interface.initialize = function()
 	{
 		if(Editor.openFile !== null)
 		{
-			Editor.saveProgram(undefined, true);
+			Editor.saveProgram(undefined);
 		}
 		else
 		{
@@ -458,17 +458,6 @@ Interface.initialize = function()
 	{
 		Interface.loadProgram();
 	}, Editor.filePath + "icons/misc/load.png");
-
-	//Console
-	/*Interface.file.addOption("Console", function()
-	{
-		var tab = Interface.tab.getTab(ConsoleTab);
-		if(tab === null)
-		{
-			tab = Interface.tab.addTab(ConsoleTab, true);
-		}
-		tab.select();
-	}, Editor.filePath + "icons/misc/console.png");*/
 
 	//Settings
 	Interface.file.addOption("Settings", function()
@@ -656,6 +645,39 @@ Interface.initialize = function()
 			}, ".stl");
 		}
 	}, Editor.filePath + "icons/misc/scene.png");
+
+	var binary = Interface.file.addMenu("Binary", Editor.filePath + "icons/misc/publish.png");
+
+	//Save project binary
+	binary.addOption("Save Binary As", function()
+	{
+		if(Nunu.runningOnDesktop())
+		{
+			FileSystem.chooseFile(function(files)
+			{
+				Editor.saveProgram(files[0].path, true);
+			}, ".nsp", true);
+		}
+		else
+		{
+			FileSystem.chooseFileName(function(fname)
+			{
+				Editor.saveProgram(fname, true);
+			}, ".nsp", Editor.openFile !== null ? Editor.openFile : "file");
+		}
+	}, Editor.filePath + "icons/misc/save.png");
+
+	//Load project binary
+	binary.addOption("Load Binary", function()
+	{
+		if(confirm("All unsaved changes to the project will be lost! Load file?"))
+		{
+			FileSystem.chooseFile(function(files)
+			{
+				Editor.loadProgram(files[0], true);
+			}, ".nsp");
+		}
+	}, Editor.filePath + "icons/misc/load.png");
 
 	//Exit
 	if(Nunu.runningOnDesktop())

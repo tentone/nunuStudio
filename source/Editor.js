@@ -19,6 +19,10 @@ include("lib/SPE.min.js");
 include("lib/spine.js");
 include("lib/opentype.min.js");
 
+include("lib/bytebuffer.min.js");
+include("lib/long.min.js");
+include("lib/PSON.min.js");
+
 include("core/Global.js");
 include("core/FileSystem.js");
 
@@ -478,7 +482,7 @@ Editor.update = function()
 			}
 			else
 			{
-				Editor.saveProgram(undefined, false);
+				Editor.saveProgram();
 			}
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.L))
@@ -977,7 +981,7 @@ Editor.createNewProgram = function()
 };
 
 //Save program to file
-Editor.saveProgram = function(fname, compressed, keepDirectory, suppressMessage)
+Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 {
 	try
 	{
@@ -986,18 +990,20 @@ Editor.saveProgram = function(fname, compressed, keepDirectory, suppressMessage)
 			fname = Editor.openFile;
 		}
 
-		//If compressed dont store all resources
-		if(compressed === true)
+		if(binary === true)
 		{
-			var json = JSON.stringify(Editor.program.toJSON());
+			fname = fname.replace(".isp", ".nsp");
+			var pson = new dcodeIO.PSON.ProgressivePair();
+			var data = pson.encode(Editor.program.toJSON());
+			FileSystem.writeFileArrayBuffer(fname, data.buffer);
 		}
 		else
 		{
-			var output = Editor.program.toJSON();
-			var json = JSON.stringify(output, null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
+			fname = fname.replace(".nsp", ".isp");
+			var json = JSON.stringify(Editor.program.toJSON());
+			//var json = JSON.stringify(Editor.program.toJSON(), null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
+			FileSystem.writeFile(fname, json);
 		}
-
-		FileSystem.writeFile(fname, json);
 
 		if(keepDirectory !== true && Editor.openFile !== fname)
 		{
@@ -1012,11 +1018,12 @@ Editor.saveProgram = function(fname, compressed, keepDirectory, suppressMessage)
 	catch(e)
 	{
 		alert("Error saving file\n(" + e + ")");
+		console.error("nunuStudio: Error saving file", e);
 	}
 };
 
 //Load program from file
-Editor.loadProgram = function(file)
+Editor.loadProgram = function(file, binary)
 {
 	var onload = function()
 	{
@@ -1028,9 +1035,18 @@ Editor.loadProgram = function(file)
 				Editor.program.dispose();
 			}
 
-			//Load program
 			var loader = new ObjectLoader();
-			Editor.program = loader.parse(JSON.parse(reader.result));
+
+			if(binary === true)
+			{
+				var pson = new dcodeIO.PSON.ProgressivePair();
+				var data = pson.decode(reader.result);
+				Editor.program = loader.parse(data);
+			}
+			else
+			{
+				Editor.program = loader.parse(JSON.parse(reader.result));
+			}
 
 			//Reset history
 			Editor.history = new History(Editor.program);
@@ -1055,6 +1071,7 @@ Editor.loadProgram = function(file)
 		catch(e)
 		{
 			alert("Error loading file\n(" + e + ")");
+			console.error("nunuStudio: Error loading file", e);
 		}
 	};
 
@@ -1062,12 +1079,26 @@ Editor.loadProgram = function(file)
 	{
 		var reader = new FileReader();
 		reader.onload = onload;
-		reader.readAsText(file);
+		if(binary === true)
+		{
+			reader.readAsArrayBuffer(file);
+		}
+		else
+		{
+			reader.readAsText(file);
+		}
 	}
 	else if(typeof file === "string")
 	{
 		var reader = {};
-		reader.result = FileSystem.readFile(file);
+		if(binary === true)
+		{
+			reader.result = FileSystem.readFileArrayBuffer(file);
+		}
+		else
+		{
+			reader.result = FileSystem.readFile(file);
+		}
 		onload();
 	}
 };
@@ -1449,7 +1480,7 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile(Editor.runtimePath + "index.html", dir + "/index.html");
 	FileSystem.copyFile(FileSystem.fileExists("nunu.min.js") ? "nunu.min.js" : "../build/nunu.min.js", dir + "/nunu.min.js");
 	
-	Editor.saveProgram(dir + "/app.isp", true, true, true);
+	Editor.saveProgram(dir + "/app.isp", false, true, true);
 };
 
 //Export web project as a zip package
