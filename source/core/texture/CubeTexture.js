@@ -48,6 +48,7 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 
 	this.size = 512;
 	this.flipY = false;
+	this.mode = CubeTexture.CUBE;
 
 	this.updateImages();
 
@@ -108,6 +109,23 @@ CubeTexture.FRONT = 4;
 CubeTexture.BACK = 5;
 
 /**
+ * CubeMap mode, 6 images used as source for the texture.
+ *
+ * @attribute CUBE
+ * @type {Number}
+ */
+CubeTexture.CUBE = 20;
+
+/**
+ * Equirectangular projection mode, 1 single image used as source.
+ *
+ * @attribute EQUIRECTANGULAR
+ * @type {Number}
+ */
+CubeTexture.EQUIRECTANGULAR = 21;
+
+
+/**
  * Updates the CubeTexture images, should be called after changing the images attached to the texture
  * 
  * @method updateImages
@@ -116,26 +134,33 @@ CubeTexture.prototype.updateImages = function()
 {
 	var self = this;
 
-	for(var i = 0; i < this.images.length; i++)
+	if(this.mode === CubeTexture.CUBE)
 	{
-		if(typeof this.images[i] === "string")
+		for(var i = 0; i < this.images.length; i++)
 		{
-			this.images[i] = new Image(this.images[i]);
+			if(typeof this.images[i] === "string")
+			{
+				this.images[i] = new Image(this.images[i]);
+			}
+
+			var image = document.createElement("img");
+			image.index = i;
+			image.src = this.images[i].data;
+			image.onload = function()
+			{
+				self.image[this.index].width = self.size;
+				self.image[this.index].height = self.size;
+
+				var context = self.image[this.index].getContext("2d");
+				context.drawImage(this, 0, 0, self.size, self.size);
+
+				self.needsUpdate = true;
+			};
 		}
-
-		var image = document.createElement("img");
-		image.index = i;
-		image.src = this.images[i].data;
-		image.onload = function()
-		{
-			self.image[this.index].width = self.size;
-			self.image[this.index].height = self.size;
-
-			var context = self.image[this.index].getContext("2d");
-			context.drawImage(this, 0, 0, self.size, self.size);
-
-			self.needsUpdate = true;
-		};
+	}
+	else if(this.mode === CubeTexture.EQUIRECTANGULAR)
+	{
+		//TODO <ADD CODE HERE>
 	}
 };
 
