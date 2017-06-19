@@ -223,9 +223,21 @@ NunuApp.prototype.loadRunProgram = function(fname, onLoad, onProgress)
  */
 NunuApp.prototype.loadProgram = function(fname)
 {
-	var loader = new ObjectLoader();
-	var data = FileSystem.readFile(fname);
-	this.program = loader.parse(JSON.parse(data));
+	//JSON project
+	if(fname.endsWith(".isp"))
+	{
+		var loader = new ObjectLoader();
+		var data = FileSystem.readFile(fname);
+		this.program = loader.parse(JSON.parse(data));
+	}
+	//Binary project
+	else if(fname.endsWith(".nsp"))
+	{
+		var loader = new ObjectLoader();
+		var data = FileSystem.readFileArrayBuffer(fname);
+		var pson = new dcodeIO.PSON.ProgressivePair();
+		this.program = loader.parse(pson.decode(data));
+	}
 };
 
 /**
@@ -240,16 +252,35 @@ NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 {
 	var self = this;
 
-	FileSystem.readFile(fname, false, function(data)
+	//JSON project
+	if(fname.endsWith(".isp"))
 	{
-		var loader = new ObjectLoader();
-		self.program = loader.parse(JSON.parse(data));
-		
-		if(onLoad !== undefined)
+		FileSystem.readFile(fname, false, function(data)
 		{
-			onLoad(self);
-		}
-	}, onProgress);
+			var loader = new ObjectLoader();
+			self.program = loader.parse(JSON.parse(data));
+			
+			if(onLoad !== undefined)
+			{
+				onLoad(self);
+			}
+		}, onProgress);
+	}
+	//Binary project
+	else if(fname.endsWith(".nsp"))
+	{
+		FileSystem.readFileArrayBuffer(fname, false, function(data)
+		{
+			var loader = new ObjectLoader();
+			var pson = new dcodeIO.PSON.ProgressivePair();
+			self.program = loader.parse(pson.decode(data));
+
+			if(onLoad !== undefined)
+			{
+				onLoad(self);
+			}
+		}, onProgress);
+	}
 };
 
 /**
