@@ -8883,7 +8883,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 62,
+            "line": 63,
             "description": "Cubemap right image index",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -8893,7 +8893,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 70,
+            "line": 71,
             "description": "Cubemap left image index",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -8903,7 +8903,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 78,
+            "line": 79,
             "description": "Cubemap top image index",
             "itemtype": "attribute",
             "name": "TOP",
@@ -8913,7 +8913,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 86,
+            "line": 87,
             "description": "Cubemap bottom image index",
             "itemtype": "attribute",
             "name": "BOTTOM",
@@ -8923,7 +8923,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 94,
+            "line": 95,
             "description": "Cubemap front image index",
             "itemtype": "attribute",
             "name": "FRONT",
@@ -8933,7 +8933,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 102,
+            "line": 103,
             "description": "Cubemap back image index",
             "itemtype": "attribute",
             "name": "BACK",
@@ -8943,7 +8943,27 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 110,
+            "line": 111,
+            "description": "CubeMap mode, 6 images used as source for the texture.",
+            "itemtype": "attribute",
+            "name": "CUBE",
+            "type": "{Number}",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
+            "line": 119,
+            "description": "Equirectangular projection mode, 1 single image used as source.",
+            "itemtype": "attribute",
+            "name": "EQUIRECTANGULAR",
+            "type": "{Number}",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
+            "line": 128,
             "description": "Updates the CubeTexture images, should be called after changing the images attached to the texture",
             "itemtype": "method",
             "name": "updateImages",
@@ -8952,7 +8972,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 142,
+            "line": 167,
             "description": "Serialize cube texture to JSON\nAll six images of the cube texture are stored individually",
             "itemtype": "method",
             "name": "toJSON",
@@ -11134,7 +11154,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 98,
+            "line": 95,
             "description": "Read file as arraybuffer data.",
             "itemtype": "method",
             "name": "readFileArrayBuffer",
@@ -11143,6 +11163,16 @@
                     "name": "fname",
                     "description": "Name of the file",
                     "type": "String"
+                },
+                {
+                    "name": "sync",
+                    "description": "If true the file will be read in sync.",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "onLoad callback.",
+                    "type": "Function"
                 }
             ],
             "return": {
@@ -11154,7 +11184,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 132,
+            "line": 171,
             "description": "Read file as base64 data.",
             "itemtype": "method",
             "name": "readFileBase64",
@@ -11174,7 +11204,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 157,
+            "line": 198,
             "description": "Write text file.\n\nWhen running without NWJS it writes file as a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFile",
@@ -11195,7 +11225,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 192,
+            "line": 233,
             "description": "Write binary file using base64 data.",
             "itemtype": "method",
             "name": "writeFileBase64",
@@ -11216,7 +11246,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 228,
+            "line": 269,
             "description": "Write binary file using arraybuffer data.",
             "itemtype": "method",
             "name": "writeFileArrayBuffer",
@@ -11237,7 +11267,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 262,
+            "line": 303,
             "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.",
             "itemtype": "method",
             "name": "chooseFile",
@@ -11263,7 +11293,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 298,
+            "line": 339,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -11284,7 +11314,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 325,
+            "line": 366,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -11305,7 +11335,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 345,
+            "line": 386,
             "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -11321,7 +11351,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 362,
+            "line": 403,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -11334,7 +11364,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 389,
+            "line": 430,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -11355,7 +11385,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 433,
+            "line": 474,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -11375,7 +11405,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 454,
+            "line": 495,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -11395,7 +11425,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 476,
+            "line": 517,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -11415,7 +11445,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 495,
+            "line": 536,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -11435,7 +11465,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 517,
+            "line": 558,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
@@ -11569,7 +11599,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 231,
+            "line": 243,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -11595,7 +11625,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 255,
+            "line": 286,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -11604,7 +11634,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 313,
+            "line": 344,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -11613,7 +11643,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 329,
+            "line": 360,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -11622,7 +11652,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 383,
+            "line": 414,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -11631,7 +11661,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 418,
+            "line": 449,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -11640,7 +11670,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 428,
+            "line": 459,
             "description": "Set the canvas to be used for rendering.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -11656,7 +11686,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 440,
+            "line": 471,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -11665,7 +11695,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 464,
+            "line": 495,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -11681,7 +11711,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 480,
+            "line": 511,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -11697,7 +11727,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 493,
+            "line": 524,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -11713,7 +11743,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 506,
+            "line": 537,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -11726,7 +11756,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 517,
+            "line": 548,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -11735,7 +11765,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 543,
+            "line": 574,
             "description": "Set a element to fullscreen mode, if none is passed the document body is used.",
             "itemtype": "method",
             "name": "setFullscreen",

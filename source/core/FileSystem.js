@@ -53,7 +53,7 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 		//Async
 		else
 		{
-			FileSystem.fs.readFile(fname, "utf8", function(err, data)
+			FileSystem.fs.readFile(fname, "utf8", function(error, data)
 			{
 				if(onLoad !== undefined)
 				{
@@ -72,12 +72,9 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 		file.open("GET", fname, !sync);
 		file.onload = function()
 		{
-			if(file.status === 200 || file.status === 0)
+			if((file.status === 200 || file.status === 0) && onLoad !== undefined)
 			{
-				if(onLoad !== undefined)
-				{
-					onLoad(file.responseText);
-				}
+				onLoad(file.response);
 			}
 		};
 		
@@ -100,29 +97,71 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
  *
  * @method readFileArrayBuffer
  * @param {String} fname Name of the file
+ * @param {boolean} sync If true the file will be read in sync.
+ * @param {Function} onLoad onLoad callback.
  * @return {ArrayBuffer} File data as array buffer, null on error
  */
-FileSystem.readFileArrayBuffer = function(fname)
+FileSystem.readFileArrayBuffer = function(fname, sync, onLoad)
 {
+	if(sync === undefined)
+	{
+		sync = true;
+	}
+
+	//NodeJS
 	if(FileSystem.fs !== undefined)
 	{
-		var buffer = FileSystem.fs.readFileSync(fname);
-		var length = buffer.length;
-		var array = new ArrayBuffer(length);
-		var view = new Uint8Array(array);
-
-		for(var i = 0; i < length; i++)
+		if(sync)
 		{
-			view[i] = buffer[i];
-		}
+			var buffer = FileSystem.fs.readFileSync(fname);
+			var length = buffer.length;
+			var array = new ArrayBuffer(length);
+			var view = new Uint8Array(array);
 
-		return array;
+			for(var i = 0; i < length; i++)
+			{
+				view[i] = buffer[i];
+			}
+
+			return array;
+		}
+		else
+		{
+			FileSystem.fs.readFile(fname, function(error, buffer)
+			{
+				if(onLoad !== undefined)
+				{
+					var length = buffer.length;
+					var array = new ArrayBuffer(length);
+					var view = new Uint8Array(array);
+
+					for(var i = 0; i < length; i++)
+					{
+						view[i] = buffer[i];
+					}
+
+					onLoad(array);
+				}
+			});
+
+			return null;
+		}
 	}
+	//Browser
 	else
 	{
 		var file = new XMLHttpRequest();
-		file.open("GET", fname, false);
+		file.open("GET", fname, !sync);
 		file.overrideMimeType("text/plain; charset=x-user-defined");
+
+		file.onload = function()
+		{
+			if((file.status === 200 || file.status === 0) && onLoad !== undefined)
+			{
+				onLoad(ArraybufferUtils.fromBinaryString(file.response));
+			}
+		};
+
 		file.send(null);
 
 		return ArraybufferUtils.fromBinaryString(file.response);
@@ -138,11 +177,13 @@ FileSystem.readFileArrayBuffer = function(fname)
  */
 FileSystem.readFileBase64 = function(fname)
 {
+	//NodeJS
 	if(FileSystem.fs !== undefined)
 	{
 		var buffer = FileSystem.fs.readFileSync(fname);
 		return new Buffer(buffer).toString("base64");
 	}
+	//Browser
 	else
 	{
 		var file = new XMLHttpRequest();
