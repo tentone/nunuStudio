@@ -141,7 +141,7 @@ include("core/utils/Mesh2shape.js");
  * 
  * If true the canvas is resized whenether the resize method is called.
  * 
- * @property canvasResize
+ * @property canvasFitWindow
  * @type {boolean}
  * @default false if a canvas is provided, else true
  */
@@ -174,12 +174,12 @@ function NunuApp(canvas)
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
 		document.body.appendChild(this.canvas);
-		this.canvasResize = true;
+		this.canvasFitWindow = true;
 	}
 	else
 	{
 		this.canvas = canvas;
-		this.canvasResize = false;
+		this.canvasFitWindow = false;
 	}
 
 	//Canvas lock pointer
@@ -465,7 +465,7 @@ NunuApp.prototype.pause = function()
 NunuApp.prototype.setCanvas = function(canvas)
 {
 	this.canvas = canvas;
-	this.canvasResize = false;
+	this.canvasFitWindow = false;
 };
 
 /**
@@ -477,7 +477,7 @@ NunuApp.prototype.setCanvas = function(canvas)
  */
 NunuApp.prototype.resize = function()
 {
-	if(this.canvas !== null && this.canvasResize)
+	if(this.canvas !== null && this.canvasFitWindow)
 	{
 		this.canvas.style.width = window.innerWidth + "px";
 		this.canvas.style.height = window.innerHeight + "px";

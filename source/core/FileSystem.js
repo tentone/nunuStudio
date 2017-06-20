@@ -38,7 +38,6 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 	//NodeJS
 	if(FileSystem.fs !== undefined && FileSystem.fs.existsSync(file))
 	{
-		//Sync
 		if(sync)
 		{
 			var data = FileSystem.fs.readFileSync(fname, "utf8");
@@ -50,7 +49,6 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
 			
 			return data;
 		}
-		//Async
 		else
 		{
 			FileSystem.fs.readFile(fname, "utf8", function(error, data)
@@ -99,9 +97,10 @@ FileSystem.readFile = function(fname, sync, onLoad, onProgress)
  * @param {String} fname Name of the file
  * @param {boolean} sync If true the file will be read in sync.
  * @param {Function} onLoad onLoad callback.
+ * @param {Function} onProgress onProgress callback.
  * @return {ArrayBuffer} File data as array buffer, null on error
  */
-FileSystem.readFileArrayBuffer = function(fname, sync, onLoad)
+FileSystem.readFileArrayBuffer = function(fname, sync, onLoad, onProgress)
 {
 	if(sync === undefined)
 	{
@@ -162,6 +161,14 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad)
 			}
 		};
 
+		if(onProgress !== undefined)
+		{
+			file.onprogress = function(event)
+			{
+				onProgress(event);
+			};
+		}
+
 		file.send(null);
 
 		return ArraybufferUtils.fromBinaryString(file.response);
@@ -173,22 +180,62 @@ FileSystem.readFileArrayBuffer = function(fname, sync, onLoad)
  *
  * @method readFileBase64
  * @param {String} fname Name of the file
+ * @param {boolean} sync If true the file will be read in sync.
+ * @param {Function} onLoad onLoad callback.
+ * @param {Function} onProgress onProgress callback.
  * @return {String} File data in base64, null on error
  */
-FileSystem.readFileBase64 = function(fname)
+FileSystem.readFileBase64 = function(fname, sync, onLoad, onProgress)
 {
+	if(sync === undefined)
+	{
+		sync = true;
+	}
+	
 	//NodeJS
 	if(FileSystem.fs !== undefined)
 	{
-		var buffer = FileSystem.fs.readFileSync(fname);
-		return new Buffer(buffer).toString("base64");
+		if(sync)
+		{
+			var buffer = FileSystem.fs.readFileSync(fname);
+			return new Buffer(buffer).toString("base64");
+		}
+		else
+		{
+			FileSystem.fs.readFile(fname, function(error, buffer)
+			{
+				if(onLoad !== undefined)
+				{
+					onLoad(new Buffer(buffer).toString("base64"));
+				}
+			});
+
+			return null;
+		}
 	}
 	//Browser
 	else
 	{
 		var file = new XMLHttpRequest();
-		file.open("GET", fname, false);
+		file.open("GET", fname, !sync);
 		file.overrideMimeType("text/plain; charset=x-user-defined");
+		
+		file.onload = function()
+		{
+			if((file.status === 200 || file.status === 0) && onLoad !== undefined)
+			{
+				onLoad(Base64Utils.fromBinaryString(file.response));
+			}
+		};
+
+		if(onProgress !== undefined)
+		{
+			file.onprogress = function(event)
+			{
+				onProgress(event);
+			};
+		}
+
 		file.send(null);
 
 		return Base64Utils.fromBinaryString(file.response);

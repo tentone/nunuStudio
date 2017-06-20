@@ -11154,7 +11154,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 95,
+            "line": 93,
             "description": "Read file as arraybuffer data.",
             "itemtype": "method",
             "name": "readFileArrayBuffer",
@@ -11173,6 +11173,11 @@
                     "name": "onLoad",
                     "description": "onLoad callback.",
                     "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "onProgress callback.",
+                    "type": "Function"
                 }
             ],
             "return": {
@@ -11184,7 +11189,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 171,
+            "line": 178,
             "description": "Read file as base64 data.",
             "itemtype": "method",
             "name": "readFileBase64",
@@ -11193,6 +11198,21 @@
                     "name": "fname",
                     "description": "Name of the file",
                     "type": "String"
+                },
+                {
+                    "name": "sync",
+                    "description": "If true the file will be read in sync.",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "onLoad callback.",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "onProgress callback.",
+                    "type": "Function"
                 }
             ],
             "return": {
@@ -11204,7 +11224,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 198,
+            "line": 245,
             "description": "Write text file.\n\nWhen running without NWJS it writes file as a blob and auto downloads it.",
             "itemtype": "method",
             "name": "writeFile",
@@ -11225,7 +11245,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 233,
+            "line": 280,
             "description": "Write binary file using base64 data.",
             "itemtype": "method",
             "name": "writeFileBase64",
@@ -11246,7 +11266,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 269,
+            "line": 316,
             "description": "Write binary file using arraybuffer data.",
             "itemtype": "method",
             "name": "writeFileArrayBuffer",
@@ -11267,7 +11287,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 303,
+            "line": 350,
             "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.",
             "itemtype": "method",
             "name": "chooseFile",
@@ -11293,7 +11313,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 339,
+            "line": 386,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -11314,7 +11334,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 366,
+            "line": 413,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -11335,7 +11355,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 386,
+            "line": 433,
             "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -11351,7 +11371,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 403,
+            "line": 450,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -11364,7 +11384,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 430,
+            "line": 477,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -11385,7 +11405,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 474,
+            "line": 521,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -11405,7 +11425,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 495,
+            "line": 542,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -11425,7 +11445,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 517,
+            "line": 564,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -11445,7 +11465,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 536,
+            "line": 583,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -11465,7 +11485,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 558,
+            "line": 605,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
@@ -11540,7 +11560,7 @@
             "line": 139,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
-            "name": "canvasResize",
+            "name": "canvasFitWindow",
             "type": "{boolean}",
             "default": "false if a canvas is provided, else true",
             "class": "NunuApp",
