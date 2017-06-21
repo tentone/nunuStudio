@@ -265,7 +265,12 @@ ParticleEmitter.prototype.toJSON = function(meta)
 
 	//Color
 	data.object.emitter.color = {};
-	data.object.emitter.color.value = this.emitter.color.value;
+	data.object.emitter.color.value = [];
+	for(var i = 0; i < this.emitter.color.value.length; i++)
+	{
+		data.object.emitter.color.value.push(this.emitter.color.value[i].getHex());
+	}
+
 	data.object.emitter.color.spread = [];
 	for(var i = 0; i < this.emitter.color.spread.length; i++)
 	{
