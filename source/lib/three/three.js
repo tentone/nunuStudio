@@ -187,7 +187,7 @@
 
 	} );
 
-	var REVISION = '86dev';
+	var REVISION = '86';
 	var MOUSE = { LEFT: 0, MIDDLE: 1, RIGHT: 2 };
 	var CullFaceNone = 0;
 	var CullFaceBack = 1;
@@ -20697,6 +20697,15 @@
 
 		};
 
+		this.getDrawingBufferSize = function () {
+
+			return {
+				width: _width * _pixelRatio,
+				height: _height * _pixelRatio
+			};
+
+		};
+
 		this.setDrawingBufferSize = function ( width, height, pixelRatio ) {
 
 			_width = width;
@@ -29346,7 +29355,7 @@
 
 	function MeshNormalMaterial( parameters ) {
 
-		Material.call( this, parameters );
+		Material.call( this );
 
 		this.type = 'MeshNormalMaterial';
 
