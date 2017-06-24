@@ -10,7 +10,7 @@
  * @class CubeTexture
  * @constructor
  * @extends {Texture}
- * @param {Array} images Image array with 6 images
+ * @param {Array} images Image array
  * @param {Number} mapping
  * @param {Number} wrapS
  * @param {Number} wrapT
@@ -23,11 +23,19 @@
  */
 
 /**
- * Size of each on of the texture that composte the CubeTexture
+ * Size of each one of the texture that compose the CubeTexture.
  *
  * @property size
  * @type {Number}
  * @default 512
+ */
+
+/**
+ * Cube texture mode, the mode specifies how the cube texture is created.
+ *
+ * Source format may vary from a mode to another.
+ * @property mode
+ * @type {Number}
  */
 function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
 {
@@ -216,14 +224,13 @@ CubeTexture.prototype.updateImages = function()
 		image.src = this.images[0].data;
 		image.onload = function()
 		{
-			var x = this.naturalHeight / 3;
-			var y = this.naturalWidth / 4; 
+			var x = this.naturalWidth / 4;
+			var y = this.naturalHeight / 3; 
 
 			self.image[CubeTexture.LEFT].getContext("2d").drawImage(this, 0, y, x, y, 0, 0, self.size, self.size);
 			self.image[CubeTexture.FRONT].getContext("2d").drawImage(this, x, y, x, y, 0, 0, self.size, self.size);
 			self.image[CubeTexture.RIGHT].getContext("2d").drawImage(this, x * 2, y, x, y, 0, 0, self.size, self.size);
 			self.image[CubeTexture.BACK].getContext("2d").drawImage(this, x * 3, y, x, y, 0, 0, self.size, self.size);
-
 			self.image[CubeTexture.TOP].getContext("2d").drawImage(this, x, 0, x, y, 0, 0, self.size, self.size);
 			self.image[CubeTexture.BOTTOM].getContext("2d").drawImage(this, x, y * 2, x, y, 0, 0, self.size, self.size);
 
@@ -242,7 +249,21 @@ CubeTexture.prototype.updateImages = function()
 		image.src = this.images[0].data;
 		image.onload = function()
 		{
-			//TODO <ADD CODE HERE>
+			var canvas = document.createElement("canvas");
+			canvas.width = image.naturalWidth;
+			canvas.height = image.naturalHeight;
+
+			var context = canvas.getContext("2d");
+			context.drawImage(image, 0, 0);
+			var data = context.getImageData(0, 0, canvas.width, canvas.height);
+
+			var faces = ["pz", "nz", "px", "nx", "py", "ny"];
+
+			for(var i = 0; i < faces.length; i++)
+			{
+				var out = renderFace(data, faces[i], Math.PI, self.size);
+				self.image[i].getContext("2d").putImageData(out, 0, 0);
+			}
 			
 			self.needsUpdate = true;
 		};
@@ -273,3 +294,163 @@ CubeTexture.prototype.toJSON = function(meta)
 
 	return data;
 };
+
+
+function kernelResample(read, write, a, kernel)
+{
+	var width = read.width, height = read.height, data = read.data;
+
+	var readIndex = function(x, y)
+	{
+		return 4 * (y * width + x);
+	};
+
+	var twoA = 2 * a;
+	var xMax = width - 1;
+	var yMax = height - 1;
+	var xKernel = new Array(4);
+	var yKernel = new Array(4);
+
+	return function(xFrom, yFrom, to)
+	{
+		var xl = Math.floor(xFrom);
+		var yl = Math.floor(yFrom);
+		var xStart = xl - a + 1;
+		var yStart = yl - a + 1;
+
+		for(var i = 0; i < twoA; i++)
+		{
+			xKernel[i] = kernel(xFrom - (xStart + i));
+			yKernel[i] = kernel(yFrom - (yStart + i));
+		}
+
+		for(var channel = 0; channel < 3; channel++)
+		{
+			var q = 0;
+
+			for(var i = 0; i < twoA; i++)
+			{
+				var y = yStart + i;
+				var yClamped = clamp(y, 0, yMax);
+				var p = 0;
+
+				for (var j = 0; j < twoA; j++)
+				{
+					var x = xStart + j;
+					var index = readIndex(clamp(x, 0, xMax), yClamped);
+					p += data[index + channel] * xKernel[j];
+				}
+
+				q += p * yKernel[i];
+			}
+
+			write.data[to + channel] = Math.round(q);
+		}
+	};
+}
+
+var orientations =
+{
+	pz: function(out, x, y)
+	{
+		out.x = -1;
+		out.y = -x;
+		out.z = -y;
+	},
+	nz: function(out, x, y)
+	{
+		out.x = 1;
+		out.y = x;
+		out.z = -y;
+	},
+	px: function(out, x, y)
+	{
+		out.x = x;
+		out.y = -1;
+		out.z = -y;
+	},
+	nx: function(out, x, y)
+	{
+		out.x = -x;
+		out.y = 1;
+		out.z = -y;
+	},
+	py: function(out, x, y)
+	{
+		out.x = -y;
+		out.y = -x;
+		out.z = 1;
+	},
+	ny: function(out, x, y)
+	{
+		out.x = y;
+		out.y = -x;
+		out.z = -1;
+	}
+};
+
+function copyPixelLanczos(read, write, grid)
+{
+	var kernel = function(x)
+	{
+		if(x === 0)
+		{
+			return 1;
+		}
+		else
+		{
+			var xp = Math.PI * x;
+			return 3 * Math.sin(xp) * Math.sin(xp / 3) / (xp * xp);
+		}
+	};
+
+	return kernelResample(read, write, 3, kernel);
+}
+
+
+var renderFace = function(readData, face, rotation, size, interpolation)
+{
+	var faceWidth = size;
+	var faceHeight = size;
+
+	var cube = {};
+	var orientation = orientations[face];
+
+	var writeData = new ImageData(faceWidth, faceHeight);
+
+	var copyPixel = copyPixelLanczos(readData, writeData);//interpolation === "linear" ? copyPixelBilinear(readData, writeData) : interpolation === "cubic" ? copyPixelBicubic(readData, writeData) : interpolation === "lanczos" ? copyPixelLanczos(readData, writeData) : copyPixelNearest(readData, writeData);
+
+	for(var x = 0; x < faceWidth; x++)
+	{
+		for (var y = 0; y < faceHeight; y++)
+		{
+			var to = 4 * (y * faceWidth + x);
+
+			// fill alpha channel
+			writeData.data[to + 3] = 255;
+
+			// get position on cube face
+			// cube is centered at the origin with a side length of 2
+			orientation(cube, 2 * (x + 0.5) / faceWidth - 1, 2 * (y + 0.5) / faceHeight - 1);
+
+			// project cube face onto unit sphere by converting cartesian to spherical coordinates
+			var r = Math.sqrt(cube.x * cube.x + cube.y * cube.y + cube.z * cube.z);
+			var lon = mod(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
+			var lat = Math.acos(cube.z / r);
+
+			copyPixel(readData.width * lon / Math.PI / 2 - 0.5, readData.height * lat / Math.PI - 0.5, to);
+		}
+	}
+
+	return writeData;
+}
+
+function clamp(x, min, max)
+{
+	return Math.min(max, Math.max(x, min));
+}
+
+function mod(x, n)
+{
+	return (x % n + n) % n;
+}

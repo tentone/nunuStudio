@@ -2219,7 +2219,7 @@
             "params": [
                 {
                     "name": "images",
-                    "description": "Image array with 6 images",
+                    "description": "Image array",
                     "type": "Array"
                 },
                 {
@@ -8913,7 +8913,7 @@
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
             "line": 25,
-            "description": "Size of each on of the texture that composte the CubeTexture",
+            "description": "Size of each one of the texture that compose the CubeTexture.",
             "itemtype": "property",
             "name": "size",
             "type": "{Number}",
@@ -8923,7 +8923,17 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 66,
+            "line": 33,
+            "description": "Cube texture mode, the mode specifies how the cube texture is created.\n\nSource format may vary from a mode to another.",
+            "itemtype": "property",
+            "name": "mode",
+            "type": "{Number}",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
+            "line": 74,
             "description": "Cubemap right image index",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -8933,7 +8943,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 74,
+            "line": 82,
             "description": "Cubemap left image index",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -8943,7 +8953,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 82,
+            "line": 90,
             "description": "Cubemap top image index",
             "itemtype": "attribute",
             "name": "TOP",
@@ -8953,7 +8963,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 90,
+            "line": 98,
             "description": "Cubemap bottom image index",
             "itemtype": "attribute",
             "name": "BOTTOM",
@@ -8963,7 +8973,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 98,
+            "line": 106,
             "description": "Cubemap front image index",
             "itemtype": "attribute",
             "name": "FRONT",
@@ -8973,7 +8983,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 106,
+            "line": 114,
             "description": "Cubemap back image index",
             "itemtype": "attribute",
             "name": "BACK",
@@ -8983,7 +8993,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 114,
+            "line": 122,
             "description": "CubeMap mode, 6 images used as source for the texture.",
             "itemtype": "attribute",
             "name": "CUBE",
@@ -8993,7 +9003,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 122,
+            "line": 130,
             "description": "CubeMap mode, single image used as source.",
             "itemtype": "attribute",
             "name": "CROSS",
@@ -9003,7 +9013,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 130,
+            "line": 138,
             "description": "Equirectangular projection mode, 1 single image used as source.\n\nSource image should have a 2:1 aspect ratio.",
             "itemtype": "attribute",
             "name": "EQUIRECTANGULAR",
@@ -9013,7 +9023,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 141,
+            "line": 149,
             "description": "Set resolution of each face of the cubemap.\n\nThe size has to be a power of 2.",
             "itemtype": "method",
             "name": "setSize",
@@ -9029,7 +9039,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 162,
+            "line": 170,
             "description": "Set mode and update images.",
             "itemtype": "method",
             "name": "setMode",
@@ -9045,7 +9055,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 174,
+            "line": 182,
             "description": "Updates the CubeTexture images, should be called after changing the images attached to the texture",
             "itemtype": "method",
             "name": "updateImages",
@@ -9054,7 +9064,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 252,
+            "line": 273,
             "description": "Serialize cube texture to JSON\nAll six images of the cube texture are stored individually",
             "itemtype": "method",
             "name": "toJSON",
