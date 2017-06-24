@@ -77,6 +77,46 @@ function ResourceManager()
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
 
 /**
+ * Get image by name.
+ * 
+ * @method getImageByName
+ * @param {String} name Image name
+ * @return {Image} Image if found else null
+ */
+ResourceManager.prototype.getImageByName = function(name)
+{
+	for(var i in this.images)
+	{
+		if(this.images[i].name === name)
+		{
+			return this.images[i];
+		}
+	}
+
+	return null;
+};
+
+/**
+ * Get video by name.
+ * 
+ * @method getVideoByName
+ * @param {String} name Video name
+ * @return {Video} Video if found else null
+ */
+ResourceManager.prototype.getVideoByName = function(name)
+{
+	for(var i in this.videos)
+	{
+		if(this.videos[i].name === name)
+		{
+			return this.videos[i];
+		}
+	}
+
+	return null;
+};
+
+/**
  * Get material by its name.
  * 
  * @method getMaterialByName
