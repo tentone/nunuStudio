@@ -8954,7 +8954,7 @@
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
             "line": 119,
-            "description": "Equirectangular projection mode, 1 single image used as source.",
+            "description": "Equirectangular projection mode, 1 single image used as source.\n\nSource image should have a 2:1 aspect ratio.",
             "itemtype": "attribute",
             "name": "EQUIRECTANGULAR",
             "type": "{Number}",
@@ -8963,7 +8963,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 128,
+            "line": 130,
             "description": "Updates the CubeTexture images, should be called after changing the images attached to the texture",
             "itemtype": "method",
             "name": "updateImages",
@@ -8972,7 +8972,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 167,
+            "line": 169,
             "description": "Serialize cube texture to JSON\nAll six images of the cube texture are stored individually",
             "itemtype": "method",
             "name": "toJSON",
