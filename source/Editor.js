@@ -338,7 +338,7 @@ Editor.initialize = function()
 	//Check WebGL Support
 	if(!Nunu.webglAvailable())
 	{
-		alert("WebGL is not supported or is disabled!\nnunuStudio cannot run!");
+		Editor.alert("WebGL is not supported or is disabled!\nnunuStudio cannot run!");
 		Editor.exit();
 	}
 		
@@ -687,7 +687,7 @@ Editor.pasteObject = function(target)
 	}
 	catch(e)
 	{
-		alert("Error pasting object");
+		Editor.alert("Error pasting object");
 	}
 };
 
@@ -715,7 +715,7 @@ Editor.undo = function()
 	}
 	else
 	{
-		alert("Not possible to undo any further");
+		Editor.alert("Not possible to undo any further");
 	}
 };
 
@@ -1012,12 +1012,12 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 		
 		if(suppressMessage !== true)
 		{
-			alert("Project saved");
+			Editor.alert("Project saved");
 		}
 	}
 	catch(e)
 	{
-		alert("Error saving file\n(" + e + ")");
+		Editor.alert("Error saving file\n(" + e + ")");
 		console.error("nunuStudio: Error saving file", e);
 	}
 };
@@ -1066,11 +1066,11 @@ Editor.loadProgram = function(file, binary)
 				scene.attach(Editor.program.scene);
 			}
 
-			alert("Project loaded");
+			Editor.alert("Project loaded");
 		}
 		catch(e)
 		{
-			alert("Error loading file\n(" + e + ")");
+			Editor.alert("Error loading file\n(" + e + ")");
 			console.error("nunuStudio: Error loading file", e);
 		}
 	};
@@ -1581,6 +1581,18 @@ Editor.setFullscreen = function(fullscreen, element)
 			document.exitFullscreen();
 		}
 	}
+};
+
+//Confirmation box
+Editor.confirm = function(message)
+{
+	return confirm(message);
+};
+
+//Show alert box editor
+Editor.alert = function(message)
+{
+	alert(message);
 };
 
 //Exit the editor

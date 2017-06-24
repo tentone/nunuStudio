@@ -483,11 +483,11 @@ Interface.initialize = function()
 				try
 				{
 					Editor.exportWebProject(files[0].path);
-					alert("Project exported");
+					Editor.alert("Project exported");
 				}
 				catch(e)
 				{
-					alert("Error exporting project (" + e + ")");
+					Editor.alert("Error exporting project (" + e + ")");
 				}
 			}, "", Editor.program.name);
 		}, Editor.filePath + "icons/platform/web.png");
@@ -502,11 +502,11 @@ Interface.initialize = function()
 					try
 					{
 						Editor.exportWindowsProject(files[0].path);
-						alert("Project exported");
+						Editor.alert("Project exported");
 					}
 					catch(e)
 					{
-						alert("Error exporting project (" + e + ")");
+						Editor.alert("Error exporting project (" + e + ")");
 					}
 				}, "", Editor.program.name);
 			}, Editor.filePath + "icons/platform/windows.png");
@@ -522,11 +522,11 @@ Interface.initialize = function()
 					try
 					{
 						Editor.exportLinuxProject(files[0].path);
-						alert("Project exported");
+						Editor.alert("Project exported");
 					}
 					catch(e)
 					{
-						alert("Error exporting project (" + e + ")");
+						Editor.alert("Error exporting project (" + e + ")");
 					}
 				}, "", Editor.program.name);
 			}, Editor.filePath + "icons/platform/linux.png");
@@ -542,11 +542,11 @@ Interface.initialize = function()
 					try
 					{
 						Editor.exportMacOSProject(files[0].path);
-						alert("Project exported");
+						Editor.alert("Project exported");
 					}
 					catch(e)
 					{
-						alert("Error exporting project (" + e + ")");
+						Editor.alert("Error exporting project (" + e + ")");
 					}
 				}, "", Editor.program.name);
 			}, Editor.filePath + "icons/platform/osx.png");
@@ -560,7 +560,7 @@ Interface.initialize = function()
 			FileSystem.chooseFileName(function(fname)
 			{
 				Editor.exportWebProjectZip(fname);
-				alert("Project exported");
+				Editor.alert("Project exported");
 			}, ".zip");
 		}, Editor.filePath + "icons/platform/web.png");
 	}
@@ -670,7 +670,7 @@ Interface.initialize = function()
 	//Load project binary
 	binary.addOption("Load Binary", function()
 	{
-		if(confirm("All unsaved changes to the project will be lost! Load file?"))
+		if(Editor.confirm("All unsaved changes to the project will be lost! Load file?"))
 		{
 			FileSystem.chooseFile(function(files)
 			{
@@ -684,7 +684,7 @@ Interface.initialize = function()
 	{
 		Interface.file.addOption("Exit", function()
 		{
-			if(confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
+			if(Editor.confirm("All unsaved changes to the project will be lost! Do you really wanna exit?"))
 			{
 				Editor.exit();
 			}
@@ -749,7 +749,7 @@ Interface.initialize = function()
 			}
 			catch(error)
 			{
-				alert("Error: " + error);
+				Editor.alert("Error: " + error);
 			}
 		}, ".js");
 	}, Editor.filePath + "icons/script/script.png");
@@ -869,7 +869,7 @@ Interface.saveProgram = function()
 //Open to load program window
 Interface.loadProgram = function()
 {
-	if(confirm("All unsaved changes to the project will be lost! Load file?"))
+	if(Editor.confirm("All unsaved changes to the project will be lost! Load file?"))
 	{
 		FileSystem.chooseFile(function(files)
 		{
@@ -881,7 +881,7 @@ Interface.loadProgram = function()
 //Interface elemento to create new program
 Interface.newProgram = function()
 {
-	if(confirm("All unsaved changes to the project will be lost! Create new File?"))
+	if(Editor.confirm("All unsaved changes to the project will be lost! Create new File?"))
 	{
 		Editor.createNewProgram();
 	}

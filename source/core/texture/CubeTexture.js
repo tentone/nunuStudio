@@ -119,6 +119,8 @@ CubeTexture.CUBE = 20;
 /**
  * Equirectangular projection mode, 1 single image used as source.
  *
+ * Source image should have a 2:1 aspect ratio.
+ *
  * @attribute EQUIRECTANGULAR
  * @type {Number}
  */

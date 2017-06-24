@@ -18,64 +18,33 @@ function AboutTab(parent, closeable, container, index)
 	this.logo.src = Editor.filePath + "logo.png";
 	this.element.appendChild(this.logo);
 
-	//Version info
+	//Version
 	this.name = new Text(this.element);
 	this.name.element.style.top = "30%";
-	this.name.element.style.left = "25%";
-	this.name.element.style.width = "50%";
-	this.name.setTextSize(30);
-	this.name.setText(Nunu.NAME + " " + Nunu.VERSION);
+	this.name.element.style.left = "0%";
+	this.name.element.style.width = "100%";
+	this.name.setTextSize(25);
+	this.name.setAlignment(Text.CENTER);
+	this.name.setText(Nunu.NAME + " " + Nunu.VERSION + "<br/>Build " + Nunu.TIMESTAMP);
 
-	//Build info
-	this.timestamp = new Text(this.element);
-	this.timestamp.element.style.top = "50%";
-	this.timestamp.element.style.left = "25%";
-	this.timestamp.element.style.width = "50%";
-	this.timestamp.setTextSize(20);
-	this.timestamp.setText("Build " + Nunu.TIMESTAMP);
+	//Libraries
+	var libs = "three.js R" + THREE.REVISION;
+	libs += "<br/>CodeMirror V" + CodeMirror.version;
+	libs += "<br/>CannonJS V" + CANNON.version;
+	libs += "<br/>TernJS V" + tern.version;
 
-	//ThreeJS version
-	this.threejs = new Text(this.element);
-	this.threejs.element.style.top = "60%";
-	this.threejs.element.style.left = "25%";
-	this.threejs.element.style.width = "50%";
-	this.threejs.setTextSize(15);
-	this.threejs.setText("THREEJS R" + THREE.REVISION);
-
-	//Codemirror version
-	this.codemirror = new Text(this.element);
-	this.codemirror.element.style.top = "70%";
-	this.codemirror.element.style.left = "25%";
-	this.codemirror.element.style.width = "50%";
-	this.codemirror.setTextSize(15);
-	this.codemirror.setText("CodeMirror V" + CodeMirror.version);
-
-	//CannonJS version
-	this.cannon = new Text(this.element);
-	this.cannon.element.style.top = "80%";
-	this.cannon.element.style.left = "25%";
-	this.cannon.element.style.width = "50%";
-	this.cannon.setTextSize(15);
-	this.cannon.setText("CannonJS V" + CANNON.version);
-
-	//TernJS
-	this.tern = new Text(this.element);
-	this.tern.element.style.top = "80%";
-	this.tern.element.style.left = "0%";
-	this.tern.element.style.width = "50%";
-	this.tern.setTextSize(15);
-	this.tern.setText("TernJS V" + tern.version);
-
-	//NWJS version
 	if(Nunu.runningOnDesktop())
 	{
-		this.nwjs = new Text(this.element);
-		this.nwjs.element.style.top = "90%";
-		this.nwjs.element.style.left = "25%";
-		this.nwjs.element.style.width = "50%";
-		this.nwjs.setTextSize(15);
-		this.nwjs.setText("NWJS V" + process.versions['node-webkit']);
+		libs += "<br/>NWJS V" + process.versions['node-webkit'];
 	}
+
+	this.libs = new Text(this.element);
+	this.libs.element.style.top = "50%";
+	this.libs.element.style.left = "0%";
+	this.libs.element.style.width = "100%";
+	this.libs.setAlignment(Text.CENTER);
+	this.libs.setTextSize(20);
+	this.libs.setText(libs);
 }
 
 AboutTab.prototype = Object.create(TabElement.prototype);
@@ -88,7 +57,6 @@ AboutTab.prototype.updateInterface = function()
 	{
 		this.element.style.display = "block";
 
-		//Element
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
@@ -98,5 +66,4 @@ AboutTab.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-
-}
+};
