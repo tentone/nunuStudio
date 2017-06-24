@@ -8514,6 +8514,46 @@
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
             "line": 79,
+            "description": "Get image by name.",
+            "itemtype": "method",
+            "name": "getImageByName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Image name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Image if found else null",
+                "type": "Image"
+            },
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
+            "line": 99,
+            "description": "Get video by name.",
+            "itemtype": "method",
+            "name": "getVideoByName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Video name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Video if found else null",
+                "type": "Video"
+            },
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
+            "line": 119,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -8533,7 +8573,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 99,
+            "line": 139,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -8549,7 +8589,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 113,
+            "line": 153,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -8575,7 +8615,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 154,
+            "line": 194,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -8595,7 +8635,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 174,
+            "line": 214,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -8611,7 +8651,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 185,
+            "line": 225,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -8636,7 +8676,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 272,
+            "line": 312,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -8656,7 +8696,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 292,
+            "line": 332,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -8672,7 +8712,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 306,
+            "line": 346,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -8693,7 +8733,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 334,
+            "line": 374,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -8713,7 +8753,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 354,
+            "line": 394,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -8729,7 +8769,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 368,
+            "line": 408,
             "description": "Remove audio.",
             "params": [
                 {
@@ -8883,7 +8923,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 63,
+            "line": 66,
             "description": "Cubemap right image index",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -8893,7 +8933,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 71,
+            "line": 74,
             "description": "Cubemap left image index",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -8903,7 +8943,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 79,
+            "line": 82,
             "description": "Cubemap top image index",
             "itemtype": "attribute",
             "name": "TOP",
@@ -8913,7 +8953,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 87,
+            "line": 90,
             "description": "Cubemap bottom image index",
             "itemtype": "attribute",
             "name": "BOTTOM",
@@ -8923,7 +8963,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 95,
+            "line": 98,
             "description": "Cubemap front image index",
             "itemtype": "attribute",
             "name": "FRONT",
@@ -8933,7 +8973,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 103,
+            "line": 106,
             "description": "Cubemap back image index",
             "itemtype": "attribute",
             "name": "BACK",
@@ -8943,7 +8983,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 111,
+            "line": 114,
             "description": "CubeMap mode, 6 images used as source for the texture.",
             "itemtype": "attribute",
             "name": "CUBE",
@@ -8953,7 +8993,17 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 119,
+            "line": 122,
+            "description": "CubeMap mode, single image used as source.",
+            "itemtype": "attribute",
+            "name": "CROSS",
+            "type": "{Number}",
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
+            "line": 130,
             "description": "Equirectangular projection mode, 1 single image used as source.\n\nSource image should have a 2:1 aspect ratio.",
             "itemtype": "attribute",
             "name": "EQUIRECTANGULAR",
@@ -8963,7 +9013,39 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 130,
+            "line": 141,
+            "description": "Set resolution of each face of the cubemap.\n\nThe size has to be a power of 2.",
+            "itemtype": "method",
+            "name": "setSize",
+            "params": [
+                {
+                    "name": "size",
+                    "description": "Cube face resolution.",
+                    "type": "Number"
+                }
+            ],
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
+            "line": 162,
+            "description": "Set mode and update images.",
+            "itemtype": "method",
+            "name": "setMode",
+            "params": [
+                {
+                    "name": "mode",
+                    "description": "Mode to be used.",
+                    "type": "Number"
+                }
+            ],
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
+            "line": 174,
             "description": "Updates the CubeTexture images, should be called after changing the images attached to the texture",
             "itemtype": "method",
             "name": "updateImages",
@@ -8972,7 +9054,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 169,
+            "line": 252,
             "description": "Serialize cube texture to JSON\nAll six images of the cube texture are stored individually",
             "itemtype": "method",
             "name": "toJSON",

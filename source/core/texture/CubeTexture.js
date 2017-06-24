@@ -48,9 +48,12 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 
 	this.size = 512;
 	this.flipY = false;
-	this.mode = CubeTexture.CUBE;
+	this.mode = (this.images.length === 6) ? CubeTexture.CUBE : CubeTexture.EQUIRECTANGULAR;
 
-	this.updateImages();
+	if(this.images.length > 0)
+	{
+		this.updateImages();
+	}
 
 	this.name = "cubetexture";
 	this.category = "Cube";
@@ -117,6 +120,14 @@ CubeTexture.BACK = 5;
 CubeTexture.CUBE = 20;
 
 /**
+ * CubeMap mode, single image used as source.
+ *
+ * @attribute CROSS
+ * @type {Number}
+ */
+CubeTexture.CROSS = 21;
+
+/**
  * Equirectangular projection mode, 1 single image used as source.
  *
  * Source image should have a 2:1 aspect ratio.
@@ -124,8 +135,41 @@ CubeTexture.CUBE = 20;
  * @attribute EQUIRECTANGULAR
  * @type {Number}
  */
-CubeTexture.EQUIRECTANGULAR = 21;
+CubeTexture.EQUIRECTANGULAR = 22;
 
+
+/**
+ * Set resolution of each face of the cubemap.
+ *
+ * The size has to be a power of 2.
+ * 
+ * @method setSize
+ * @param {Number} size Cube face resolution.
+ */
+CubeTexture.prototype.setSize = function(size)
+{
+	if((size & (size - 1)) !== 0)
+	{
+		console.warn("nunuStudio: CubeTexture new size is not a power of two.");
+		return;
+	}
+
+	this.size = size;
+	this.updateImages();
+}
+
+
+/**
+ * Set mode and update images.
+ * 
+ * @method setMode
+ * @param {Number} mode Mode to be used.
+ */
+CubeTexture.prototype.setMode = function(mode)
+{
+	this.mode = mode;
+	this.updateImages();
+}
 
 /**
  * Updates the CubeTexture images, should be called after changing the images attached to the texture
@@ -160,9 +204,48 @@ CubeTexture.prototype.updateImages = function()
 			};
 		}
 	}
+	else if(this.mode === CubeTexture.CROSS)
+	{
+		for(var i = 0; i < this.image.length; i++)
+		{
+			this.image[i].width = this.size;
+			this.image[i].height = this.size;
+		}
+
+		var image = document.createElement("img");
+		image.src = this.images[0].data;
+		image.onload = function()
+		{
+			var x = this.naturalHeight / 3;
+			var y = this.naturalWidth / 4; 
+
+			self.image[CubeTexture.LEFT].getContext("2d").drawImage(this, 0, y, x, y, 0, 0, self.size, self.size);
+			self.image[CubeTexture.FRONT].getContext("2d").drawImage(this, x, y, x, y, 0, 0, self.size, self.size);
+			self.image[CubeTexture.RIGHT].getContext("2d").drawImage(this, x * 2, y, x, y, 0, 0, self.size, self.size);
+			self.image[CubeTexture.BACK].getContext("2d").drawImage(this, x * 3, y, x, y, 0, 0, self.size, self.size);
+
+			self.image[CubeTexture.TOP].getContext("2d").drawImage(this, x, 0, x, y, 0, 0, self.size, self.size);
+			self.image[CubeTexture.BOTTOM].getContext("2d").drawImage(this, x, y * 2, x, y, 0, 0, self.size, self.size);
+
+			self.needsUpdate = true;
+		};
+	}
 	else if(this.mode === CubeTexture.EQUIRECTANGULAR)
 	{
-		//TODO <ADD CODE HERE>
+		for(var i = 0; i < this.image.length; i++)
+		{
+			this.image[i].width = this.size;
+			this.image[i].height = this.size;
+		}
+		
+		var image = document.createElement("img");
+		image.src = this.images[0].data;
+		image.onload = function()
+		{
+			//TODO <ADD CODE HERE>
+			
+			self.needsUpdate = true;
+		};
 	}
 };
 
@@ -179,6 +262,8 @@ CubeTexture.prototype.toJSON = function(meta)
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);
 
 	data.size = this.size;
+	data.mode = this.mode;
+
 	data.images = [];
 	for(var i = 0; i < this.images.length; i++)
 	{	
