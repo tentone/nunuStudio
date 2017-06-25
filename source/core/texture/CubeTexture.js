@@ -257,11 +257,9 @@ CubeTexture.prototype.updateImages = function()
 			context.drawImage(image, 0, 0);
 			var data = context.getImageData(0, 0, canvas.width, canvas.height);
 
-			var faces = ["pz", "nz", "px", "nx", "py", "ny"];
-
-			for(var i = 0; i < faces.length; i++)
+			for(var i = 0; i < 6; i++)
 			{
-				var out = renderFace(data, faces[i], Math.PI, self.size);
+				var out = renderFace(data, i, Math.PI, self.size);
 				self.image[i].getContext("2d").putImageData(out, 0, 0);
 			}
 			
@@ -350,46 +348,46 @@ function kernelResample(read, write, a, kernel)
 }
 
 var orientations =
-{
-	pz: function(out, x, y)
-	{
-		out.x = -1;
-		out.y = -x;
-		out.z = -y;
-	},
-	nz: function(out, x, y)
-	{
-		out.x = 1;
-		out.y = x;
-		out.z = -y;
-	},
-	px: function(out, x, y)
+[
+	function(out, x, y)
 	{
 		out.x = x;
 		out.y = -1;
 		out.z = -y;
 	},
-	nx: function(out, x, y)
+	function(out, x, y)
 	{
 		out.x = -x;
 		out.y = 1;
 		out.z = -y;
 	},
-	py: function(out, x, y)
+	function(out, x, y)
 	{
 		out.x = -y;
 		out.y = -x;
 		out.z = 1;
 	},
-	ny: function(out, x, y)
+	function(out, x, y)
 	{
 		out.x = y;
 		out.y = -x;
 		out.z = -1;
+	},
+	function(out, x, y)
+	{
+		out.x = -1;
+		out.y = -x;
+		out.z = -y;
+	},
+	function(out, x, y)
+	{
+		out.x = 1;
+		out.y = x;
+		out.z = -y;
 	}
-};
+];
 
-function copyPixelLanczos(read, write, grid)
+function copyPixelLanczos(read, write)
 {
 	var kernel = function(x)
 	{
@@ -407,7 +405,6 @@ function copyPixelLanczos(read, write, grid)
 	return kernelResample(read, write, 3, kernel);
 }
 
-
 var renderFace = function(readData, face, rotation, size, interpolation)
 {
 	var faceWidth = size;
@@ -418,7 +415,7 @@ var renderFace = function(readData, face, rotation, size, interpolation)
 
 	var writeData = new ImageData(faceWidth, faceHeight);
 
-	var copyPixel = copyPixelLanczos(readData, writeData);//interpolation === "linear" ? copyPixelBilinear(readData, writeData) : interpolation === "cubic" ? copyPixelBicubic(readData, writeData) : interpolation === "lanczos" ? copyPixelLanczos(readData, writeData) : copyPixelNearest(readData, writeData);
+	var copyPixel = copyPixelLanczos(readData, writeData);
 
 	for(var x = 0; x < faceWidth; x++)
 	{
@@ -426,14 +423,13 @@ var renderFace = function(readData, face, rotation, size, interpolation)
 		{
 			var to = 4 * (y * faceWidth + x);
 
-			// fill alpha channel
+			//fill alpha channel
 			writeData.data[to + 3] = 255;
 
-			// get position on cube face
-			// cube is centered at the origin with a side length of 2
+			//get position on cube face cube is centered at the origin with a side length of 2
 			orientation(cube, 2 * (x + 0.5) / faceWidth - 1, 2 * (y + 0.5) / faceHeight - 1);
 
-			// project cube face onto unit sphere by converting cartesian to spherical coordinates
+			//project cube face onto unit sphere by converting cartesian to spherical coordinates
 			var r = Math.sqrt(cube.x * cube.x + cube.y * cube.y + cube.z * cube.z);
 			var lon = mod(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
 			var lat = Math.acos(cube.z / r);
