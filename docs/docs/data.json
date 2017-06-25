@@ -9065,26 +9065,6 @@
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
             "line": 271,
-            "description": "Serialize cube texture to JSON\nAll six images of the cube texture are stored individually",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "json",
-                "type": "Object"
-            },
-            "class": "CubeTexture",
-            "module": "Textures"
-        },
-        {
-            "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 296,
             "description": "Resample an image pixel from ImageData to ImageData, using bilinear interpolation.",
             "itemtype": "method",
             "name": "resampleBilinear",
@@ -9120,7 +9100,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 333,
+            "line": 309,
             "description": "Render a cube face from equirectangular projection.",
             "itemtype": "method",
             "name": "renderEquirectFace",
@@ -9149,6 +9129,26 @@
             "return": {
                 "description": "Face data.",
                 "type": "ImageData"
+            },
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
+            "line": 379,
+            "description": "Serialize cube texture to JSON.\n\nAll images of the cube texture are stored individually.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "json",
+                "type": "Object"
             },
             "class": "CubeTexture",
             "module": "Textures"
