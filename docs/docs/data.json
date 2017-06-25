@@ -9083,6 +9083,77 @@
             "module": "Textures"
         },
         {
+            "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
+            "line": 296,
+            "description": "Resample an image pixel from ImageData to ImageData, using bilinear interpolation.",
+            "itemtype": "method",
+            "name": "resampleBilinear",
+            "params": [
+                {
+                    "name": "read",
+                    "description": "Where to read data from.",
+                    "type": "ImageData"
+                },
+                {
+                    "name": "write",
+                    "description": "Where to write data.",
+                    "type": "ImageData"
+                },
+                {
+                    "name": "x",
+                    "description": "Origin pixel x.",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "Origin pixel y.",
+                    "type": "Number"
+                },
+                {
+                    "name": "index",
+                    "description": "Target index.",
+                    "type": "Number"
+                }
+            ],
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
+            "line": 333,
+            "description": "Render a cube face from equirectangular projection.",
+            "itemtype": "method",
+            "name": "renderEquirectFace",
+            "params": [
+                {
+                    "name": "read",
+                    "description": "Equirectangular image.",
+                    "type": "ImageData"
+                },
+                {
+                    "name": "face",
+                    "description": "Face to render.",
+                    "type": "Number"
+                },
+                {
+                    "name": "rotation",
+                    "description": "Image rotation",
+                    "type": "Number"
+                },
+                {
+                    "name": "size",
+                    "description": "Face size.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Face data.",
+                "type": "ImageData"
+            },
+            "class": "CubeTexture",
+            "module": "Textures"
+        },
+        {
             "file": "..\\..\\source\\core\\texture\\SpriteSheetTexture.js",
             "line": 23,
             "description": "If true the animation plays in loop.",
