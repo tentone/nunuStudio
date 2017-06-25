@@ -111,6 +111,7 @@
 - V0.9.0 Beta
 	- Division property for HTML elements
 	- Camera preview positioning
+	- Cubemaps from equirectangular projection
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

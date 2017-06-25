@@ -151,12 +151,10 @@ TextureLoader.prototype.parse = function(json, onLoad)
 			images.push(this.images[json.images[i]]);
 		}
 
-		texture = new CubeTexture(images);
-
-		if(json.size !== undefined)
-		{
-			texture.size = json.size;
-		}
+		texture = new CubeTexture();
+		texture.setImages(images, json.mode);
+		texture.setSize(json.size);
+		texture.updateImages();
 	}
 	//Canvas texture
 	else if(category === "Canvas")

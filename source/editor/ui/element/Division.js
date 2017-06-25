@@ -48,5 +48,4 @@ Division.prototype.updateInterface = function()
 	{
 		this.element.style.display = "none";
 	}
-
 };

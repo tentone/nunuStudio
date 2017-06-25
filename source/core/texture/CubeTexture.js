@@ -56,7 +56,7 @@ function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format
 
 	this.size = 512;
 	this.flipY = false;
-	this.mode = (this.images.length === 6) ? CubeTexture.CUBE : CubeTexture.EQUIRECTANGULAR;
+	this.mode = (this.images.length === 6) ? CubeTexture.CUBE : CubeTexture.CROSS;
 
 	if(this.images.length > 0)
 	{
@@ -163,21 +163,24 @@ CubeTexture.prototype.setSize = function(size)
 	}
 
 	this.size = size;
-	this.updateImages();
-}
-
+};
 
 /**
- * Set mode and update images.
- * 
- * @method setMode
+ * Set new images for this cube texture.
+ *
+ * @method setImages
+ * @param {Array} images Cube texture images.
  * @param {Number} mode Mode to be used.
  */
-CubeTexture.prototype.setMode = function(mode)
+CubeTexture.prototype.setImages = function(images, mode)
 {
-	this.mode = mode;
-	this.updateImages();
-}
+	if(mode !== undefined)
+	{
+		this.mode = mode;
+	}
+	
+	this.images = images;
+};
 
 /**
  * Updates the CubeTexture images, should be called after changing the images attached to the texture
@@ -304,7 +307,7 @@ CubeTexture.resampleBilinear = function(read, write, x, y, index)
 		
 		write.data[index + k] = Math.ceil(a * (1 - yf) + b * yf);
 	}
-}
+};
 
 /**
  * Render a cube face from equirectangular projection.
@@ -319,7 +322,7 @@ CubeTexture.resampleBilinear = function(read, write, x, y, index)
 CubeTexture.renderEquirectFace = function(read, face, rotation, size)
 {
 	var out = new ImageData(size, size);
-	var orientation = CubeTexture.orientations[face];
+	var orientation = CubeTexture.faces[face];
 
 	for(var x = 0; x < size; x++)
 	{
@@ -348,7 +351,7 @@ CubeTexture.renderEquirectFace = function(read, face, rotation, size)
 	return out;
 };
 
-CubeTexture.orientations =
+CubeTexture.faces =
 [
 	function(x, y)
 	{

@@ -26,6 +26,7 @@ function ImageChooser(parent)
 	this.img.style.visibility = "inherit";
 	this.img.style.position = "absolute";
 	this.img.style.borderStyle = "none";
+	this.img.style.cursor = "pointer";
 	this.img.style.left = "0px";
 	this.img.style.top = "0px";
 	this.img.style.width = "100%";

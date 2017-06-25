@@ -248,34 +248,43 @@ TextureAsset.prototype.setTexture = function(texture)
 	//Cube texture
 	else if(texture instanceof CubeTexture)
 	{
-		this.preview = document.createElement("canvas");
-		this.preview.width = 128;
-		this.preview.height = 128;
-
-		var context = this.preview.getContext("2d");
-
-		for(var i = 0; i < texture.images.length; i++)
+		if(texture.mode === CubeTexture.CUBE)
 		{
-			var image = document.createElement("img");
-			image.index = i;
-			image.onload = function()
+			this.preview = document.createElement("canvas");
+			this.preview.width = 128;
+			this.preview.height = 128;
+
+			var context = this.preview.getContext("2d");
+
+			for(var i = 0; i < texture.images.length; i++)
 			{
-				if(this.index === 2)
+				var image = document.createElement("img");
+				image.index = i;
+				image.onload = function()
 				{
-					context.drawImage(this, 32, 16, 32, 32);
+					if(this.index === 2)
+					{
+						context.drawImage(this, 32, 16, 32, 32);
+					}
+					else if(this.index === 3)
+					{
+						context.drawImage(this, 32, 80, 32, 32);
+					}
+					else
+					{
+						var order = [2, 0, null, null, 1, 3]
+						context.drawImage(this, order[this.index] * 32, 48, 32, 32);
+					}
 				}
-				else if(this.index === 3)
-				{
-					context.drawImage(this, 32, 80, 32, 32);
-				}
-				else
-				{
-					var order = [2, 0, null, null, 1, 3]
-					context.drawImage(this, order[this.index] * 32, 48, 32, 32);
-				}
+				image.src = texture.images[i].data;
 			}
-			image.src = texture.images[i].data;
 		}
+		else
+		{
+			this.preview = document.createElement("img");
+			this.preview.src = texture.images[0].data;
+		}
+
 	}
 	//Canvas texture
 	else if(texture instanceof CanvasTexture)
