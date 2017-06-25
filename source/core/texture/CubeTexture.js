@@ -259,7 +259,7 @@ CubeTexture.prototype.updateImages = function()
 
 			for(var i = 0; i < 6; i++)
 			{
-				var out = renderFace(data, i, Math.PI, self.size);
+				var out = CubeTexture.renderEquirectFace(data, i, Math.PI, self.size);
 				self.image[i].getContext("2d").putImageData(out, 0, 0);
 			}
 			
@@ -294,14 +294,11 @@ CubeTexture.prototype.toJSON = function(meta)
 };
 
 
-function kernelResample(read, write, a, kernel)
+CubeTexture.kernelResample = function(read, write, a, kernel)
 {
-	var width = read.width, height = read.height, data = read.data;
-
-	var readIndex = function(x, y)
-	{
-		return 4 * (y * width + x);
-	};
+	var width = read.width;
+	var height = read.height;
+	var data = read.data;
 
 	var twoA = 2 * a;
 	var xMax = width - 1;
@@ -322,72 +319,60 @@ function kernelResample(read, write, a, kernel)
 			yKernel[i] = kernel(yFrom - (yStart + i));
 		}
 
-		for(var channel = 0; channel < 3; channel++)
+		for(var k = 0; k < 3; k++)
 		{
 			var q = 0;
 
 			for(var i = 0; i < twoA; i++)
 			{
 				var y = yStart + i;
-				var yClamped = clamp(y, 0, yMax);
+				var yClamped = THREE.Math.clamp(y, 0, yMax);
 				var p = 0;
 
-				for (var j = 0; j < twoA; j++)
+				for(var j = 0; j < twoA; j++)
 				{
 					var x = xStart + j;
-					var index = readIndex(clamp(x, 0, xMax), yClamped);
-					p += data[index + channel] * xKernel[j];
+					var index = 4 * (yClamped * width + THREE.Math.clamp(x, 0, xMax));
+					p += data[index + k] * xKernel[j];
 				}
 
 				q += p * yKernel[i];
 			}
 
-			write.data[to + channel] = Math.round(q);
+			write.data[to + k] = Math.round(q);
 		}
 	};
 }
 
-var orientations =
+CubeTexture.orientations =
 [
-	function(out, x, y)
+	function(x, y)
 	{
-		out.x = x;
-		out.y = -1;
-		out.z = -y;
+		return new THREE.Vector3(x, -1, -y);
 	},
-	function(out, x, y)
+	function(x, y)
 	{
-		out.x = -x;
-		out.y = 1;
-		out.z = -y;
+		return new THREE.Vector3(-x, 1, -y);
 	},
-	function(out, x, y)
+	function(x, y)
 	{
-		out.x = -y;
-		out.y = -x;
-		out.z = 1;
+		return new THREE.Vector3(-y, -x, 1);
 	},
-	function(out, x, y)
+	function(x, y)
 	{
-		out.x = y;
-		out.y = -x;
-		out.z = -1;
+		return new THREE.Vector3(y, -x, -1);
 	},
-	function(out, x, y)
+	function(x, y)
 	{
-		out.x = -1;
-		out.y = -x;
-		out.z = -y;
+		return new THREE.Vector3(-1, -x, -y);
 	},
-	function(out, x, y)
+	function(x, y)
 	{
-		out.x = 1;
-		out.y = x;
-		out.z = -y;
+		return new THREE.Vector3(1, x, -y);
 	}
 ];
 
-function copyPixelLanczos(read, write)
+CubeTexture.resampleLanczos = function(read, write)
 {
 	var kernel = function(x)
 	{
@@ -402,51 +387,52 @@ function copyPixelLanczos(read, write)
 		}
 	};
 
-	return kernelResample(read, write, 3, kernel);
+	return CubeTexture.kernelResample(read, write, 3, kernel);
 }
 
-var renderFace = function(readData, face, rotation, size, interpolation)
+CubeTexture.resampleNearest = function(read, write)
 {
-	var faceWidth = size;
-	var faceHeight = size;
+	var width = read.width;
+	var height = read.height;
+	var data = read.data;
 
-	var cube = {};
-	var orientation = orientations[face];
-
-	var writeData = new ImageData(faceWidth, faceHeight);
-
-	var copyPixel = copyPixelLanczos(readData, writeData);
-
-	for(var x = 0; x < faceWidth; x++)
+	return function(xFrom, yFrom, to)
 	{
-		for (var y = 0; y < faceHeight; y++)
+		var nearest = 4 * (THREE.Math.clamp(Math.round(yFrom), 0, height - 1) * width + THREE.Math.clamp(Math.round(xFrom), 0, width - 1));
+
+		for(var k = 0; k < 3; k++)
 		{
-			var to = 4 * (y * faceWidth + x);
+			write.data[to + k] = data[nearest + k];
+		}
+	};
+};
 
-			//fill alpha channel
-			writeData.data[to + 3] = 255;
+CubeTexture.renderEquirectFace = function(readData, face, rotation, size, interpolation)
+{
+	var writeData = new ImageData(size, size);
+	var orientation = CubeTexture.orientations[face];
+	var copyPixel = CubeTexture.resampleLanczos(readData, writeData);
 
-			//get position on cube face cube is centered at the origin with a side length of 2
-			orientation(cube, 2 * (x + 0.5) / faceWidth - 1, 2 * (y + 0.5) / faceHeight - 1);
+	for(var x = 0; x < size; x++)
+	{
+		for(var y = 0; y < size; y++)
+		{
+			var index = 4 * (y * size + x);
 
-			//project cube face onto unit sphere by converting cartesian to spherical coordinates
+			//Fill alpha channel
+			writeData.data[index + 3] = 255;
+
+			//Get position on cube face cube is centered at the origin with a side length of 2
+			var cube = orientation(2 * (x + 0.5) / size - 1, 2 * (y + 0.5) / size - 1);
+
+			//Project cube face onto unit sphere by converting cartesian to spherical coordinates
 			var r = Math.sqrt(cube.x * cube.x + cube.y * cube.y + cube.z * cube.z);
-			var lon = mod(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
+			var lon = THREE.Math.euclideanModulo(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
 			var lat = Math.acos(cube.z / r);
 
-			copyPixel(readData.width * lon / Math.PI / 2 - 0.5, readData.height * lat / Math.PI - 0.5, to);
+			copyPixel(readData.width * lon / Math.PI / 2 - 0.5, readData.height * lat / Math.PI - 0.5, index);
 		}
 	}
 
 	return writeData;
-}
-
-function clamp(x, min, max)
-{
-	return Math.min(max, Math.max(x, min));
-}
-
-function mod(x, n)
-{
-	return (x % n + n) % n;
-}
+};
