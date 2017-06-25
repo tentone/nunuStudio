@@ -269,31 +269,6 @@ CubeTexture.prototype.updateImages = function()
 };
 
 /**
- * Serialize cube texture to JSON
- * All six images of the cube texture are stored individually
- * 
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
-CubeTexture.prototype.toJSON = function(meta)
-{
-	var data = THREE.Texture.prototype.toJSON.call(this, meta);
-
-	data.size = this.size;
-	data.mode = this.mode;
-
-	data.images = [];
-	for(var i = 0; i < this.images.length; i++)
-	{	
-		var image = this.images[i].toJSON(meta);
-		data.images.push(image.uuid);
-	}
-
-	return data;
-};
-
-/**
  * Resample an image pixel from ImageData to ImageData, using bilinear interpolation.
  *
  * @method resampleBilinear
@@ -317,16 +292,17 @@ CubeTexture.resampleBilinear = function(read, write, x, y, index)
 	var yr = THREE.Math.clamp(Math.ceil(y), 0, height - 1);
 	var yf = y - yl;
 
-	var p00 = 4 * (yl * width + xl);
-	var p10 = 4 * (yl * width + xr);
-	var p01 = 4 * (yr * width + xl);
-	var p11 = 4 * (yr * width + xr);
+	var ll = 4 * (yl * width + xl);
+	var lr = 4 * (yl * width + xr);
+	var rl = 4 * (yr * width + xl);
+	var rr = 4 * (yr * width + xr);
 
 	for(var k = 0; k < 3; k++)
 	{
-		var p0 = data[p00 + k] * (1 - xf) + data[p10 + k] * xf;
-		var p1 = data[p01 + k] * (1 - xf) + data[p11 + k] * xf;
-		write.data[index + k] = Math.ceil(p0 * (1 - yf) + p1 * yf);
+		var a = data[ll + k] * (1 - xf) + data[lr + k] * xf;
+		var b = data[rl + k] * (1 - xf) + data[rr + k] * xf;
+		
+		write.data[index + k] = Math.ceil(a * (1 - yf) + b * yf);
 	}
 }
 
@@ -362,10 +338,10 @@ CubeTexture.renderEquirectFace = function(read, face, rotation, size)
 			var lon = THREE.Math.euclideanModulo(Math.atan2(cube.y, cube.x) + rotation, 2 * Math.PI);
 			var lat = Math.acos(cube.z / r);
 
-			var x = read.width * lon / Math.PI / 2 - 0.5;
-			var y = read.height * lat / Math.PI - 0.5;
+			var px = read.width * lon / Math.PI / 2 - 0.5;
+			var py = read.height * lat / Math.PI - 0.5;
 
-			CubeTexture.resampleBilinear(read, out, x, y, index);
+			CubeTexture.resampleBilinear(read, out, px, py, index);
 		}
 	}
 
@@ -399,3 +375,29 @@ CubeTexture.orientations =
 		return new THREE.Vector3(1, x, -y);
 	}
 ];
+
+/**
+ * Serialize cube texture to JSON.
+ * 
+ * All images of the cube texture are stored individually.
+ * 
+ * @method toJSON
+ * @param {Object} meta
+ * @return {Object} json
+ */
+CubeTexture.prototype.toJSON = function(meta)
+{
+	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+
+	data.size = this.size;
+	data.mode = this.mode;
+
+	data.images = [];
+	for(var i = 0; i < this.images.length; i++)
+	{	
+		var image = this.images[i].toJSON(meta);
+		data.images.push(image.uuid);
+	}
+
+	return data;
+};
