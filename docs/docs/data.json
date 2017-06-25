@@ -9039,11 +9039,16 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 170,
-            "description": "Set mode and update images.",
+            "line": 168,
+            "description": "Set new images for this cube texture.",
             "itemtype": "method",
-            "name": "setMode",
+            "name": "setImages",
             "params": [
+                {
+                    "name": "images",
+                    "description": "Cube texture images.",
+                    "type": "Array"
+                },
                 {
                     "name": "mode",
                     "description": "Mode to be used.",
@@ -9055,7 +9060,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 182,
+            "line": 185,
             "description": "Updates the CubeTexture images, should be called after changing the images attached to the texture",
             "itemtype": "method",
             "name": "updateImages",
@@ -9064,7 +9069,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 271,
+            "line": 274,
             "description": "Resample an image pixel from ImageData to ImageData, using bilinear interpolation.",
             "itemtype": "method",
             "name": "resampleBilinear",
@@ -9100,7 +9105,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 309,
+            "line": 312,
             "description": "Render a cube face from equirectangular projection.",
             "itemtype": "method",
             "name": "renderEquirectFace",
@@ -9135,7 +9140,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\CubeTexture.js",
-            "line": 379,
+            "line": 382,
             "description": "Serialize cube texture to JSON.\n\nAll images of the cube texture are stored individually.",
             "itemtype": "method",
             "name": "toJSON",
