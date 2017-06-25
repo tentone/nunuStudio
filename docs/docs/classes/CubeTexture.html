@@ -363,6 +363,14 @@
 						
 											<ul class="index-list methods extends">
 													<li class="index-item method">
+														<a href="#method_renderEquirectFace">renderEquirectFace</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_resampleBilinear">resampleBilinear</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_setMode">setMode</a>
 						
 													</li>
@@ -435,6 +443,218 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
+											<div id="method_renderEquirectFace" class="method item">
+												<h3 class="name"><code>renderEquirectFace</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>read</code>
+															</li>
+															<li class="arg">
+																	<code>face</code>
+															</li>
+															<li class="arg">
+																	<code>rotation</code>
+															</li>
+															<li class="arg">
+																	<code>size</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">ImageData</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Render a cube face from equirectangular projection.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">read</code>
+																	<span class="type">ImageData</span>
+											
+											
+																<div class="param-description">
+																	<p>Equirectangular image.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">face</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Face to render.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">rotation</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Image rotation</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">size</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Face size.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">ImageData</span>:
+																<p>Face data.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_resampleBilinear" class="method item">
+												<h3 class="name"><code>resampleBilinear</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>read</code>
+															</li>
+															<li class="arg">
+																	<code>write</code>
+															</li>
+															<li class="arg">
+																	<code>x</code>
+															</li>
+															<li class="arg">
+																	<code>y</code>
+															</li>
+															<li class="arg">
+																	<code>index</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Resample an image pixel from ImageData to ImageData, using bilinear interpolation.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">read</code>
+																	<span class="type">ImageData</span>
+											
+											
+																<div class="param-description">
+																	<p>Where to read data from.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">write</code>
+																	<span class="type">ImageData</span>
+											
+											
+																<div class="param-description">
+																	<p>Where to write data.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">x</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Origin pixel x.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">y</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Origin pixel y.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">index</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Target index.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
 											<div id="method_setMode" class="method item">
 												<h3 class="name"><code>setMode</code></h3>
 											
