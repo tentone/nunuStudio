@@ -97,7 +97,7 @@ function AudioPlayer(parent)
 		self.seekTime = self.time;
 	};
 
-	this.track.onclick = function(event)
+	this.track.onmousemove = function(event)
 	{
 		var progress = event.layerX / this.offsetWidth;
 		self.time = progress * self.buffer.duration;
