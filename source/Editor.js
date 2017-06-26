@@ -494,7 +494,7 @@ Editor.update = function()
 			}
 			else
 			{
-				Editor.saveProgram();
+				Editor.saveProgram(undefined, true);
 			}
 		}
 		else if(Editor.keyboard.keyJustPressed(Keyboard.L))
@@ -1005,9 +1005,11 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 		if(binary === true)
 		{
 			fname = fname.replace(".isp", ".nsp");
+
 			var pson = new dcodeIO.PSON.ProgressivePair();
 			var data = pson.encode(Editor.program.toJSON());
-			FileSystem.writeFileArrayBuffer(fname, data.buffer);
+
+			FileSystem.writeFileArrayBuffer(fname, data.buffer.slice(0, data.limit));
 		}
 		else
 		{
@@ -1500,7 +1502,7 @@ Editor.exportWebProject = function(dir)
 	FileSystem.copyFile(Editor.runtimePath + "index.html", dir + "/index.html");
 	FileSystem.copyFile(FileSystem.fileExists("nunu.min.js") ? "nunu.min.js" : "../build/nunu.min.js", dir + "/nunu.min.js");
 	
-	Editor.saveProgram(dir + "/app.isp", false, true, true);
+	Editor.saveProgram(dir + "/app.nsp", true, true, true);
 };
 
 //Export web project as a zip package

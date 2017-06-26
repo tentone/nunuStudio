@@ -87,7 +87,7 @@ Image.fileIsImage = function(file)
  * 
  * @method loadTGAData
  */
-Image.loadTGAData = function(data)
+Image.prototype.loadTGAData = function(data)
 {
 	var canvas = new THREE.TGALoader().parse(data);
 	this.encoding = "jpeg";
