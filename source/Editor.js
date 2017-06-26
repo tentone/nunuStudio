@@ -175,6 +175,7 @@ include("editor/style.css");
 include("editor/theme/Theme.js");
 include("editor/theme/ThemeDark.js");
 
+include("editor/ui/element/Message.js");
 include("editor/ui/element/Bar.js");
 include("editor/ui/element/Button.js");
 include("editor/ui/element/Text.js");

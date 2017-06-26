@@ -7,6 +7,9 @@ Interface.initialize = function()
 	//Tab Container
 	Interface.tab = new TabGroup();
 
+	//Message
+	Interface.message = new Message();
+	
 	//Asset Manager
 	Interface.bottomDiv = new DivisionResizable();
 	Interface.bottomDiv.resizableSide = DivisionResizable.TOP;
