@@ -4959,7 +4959,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 24,
+            "line": 26,
             "description": "Set list of images to be used by this loader.",
             "itemtype": "method",
             "name": "setImages",
@@ -4975,7 +4975,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 36,
+            "line": 38,
             "description": "Set list of videos to be used by this loader.",
             "itemtype": "method",
             "name": "setVideos",
@@ -4991,7 +4991,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 48,
+            "line": 50,
             "description": "Set list of fonts to be used by this loader.",
             "itemtype": "method",
             "name": "setFonts",
@@ -5007,7 +5007,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 60,
+            "line": 62,
             "description": "Load texture from URL.\n\nDoes the same as creating a new Texture object.",
             "itemtype": "method",
             "name": "load",
@@ -5038,7 +5038,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 83,
+            "line": 85,
             "description": "Load texture object from JSON.",
             "itemtype": "method",
             "name": "loadJSON",
@@ -5069,7 +5069,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 103,
+            "line": 105,
             "description": "Parse a texture object JSON description.",
             "itemtype": "method",
             "name": "parse",

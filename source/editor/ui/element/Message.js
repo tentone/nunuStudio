@@ -14,8 +14,7 @@ function Message(parent)
 	this.element.style.width = "100%";
 	this.element.style.height = "100%";
 	this.element.style.zIndex = "10000000";
-	this.element.style.backgroundColor = "#000000";
-	this.element.style.opacity = "0.5";
+	this.element.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
 	this.element.style.alignItems = "center";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignText = "center";

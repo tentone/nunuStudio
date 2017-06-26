@@ -21,6 +21,8 @@ THREE.TextureLoader = TextureLoader;
 
 TextureLoader.prototype.setCrossOrigin = function(url){};
 
+TextureLoader.prototype.setPath = function(path){};
+
 /**
  * Set list of images to be used by this loader.
  *
