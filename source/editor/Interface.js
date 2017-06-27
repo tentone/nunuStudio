@@ -843,8 +843,13 @@ Interface.loadProgram = function()
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			Editor.loadProgram(files[0]);
-		}, ".isp");
+			if(files.length > 0)
+			{
+				var file = files[0];
+
+				Editor.loadProgram(file, file.name.endsWith(".nsp"));
+			}
+		}, ".isp, .nsp");
 	}
 };
 
