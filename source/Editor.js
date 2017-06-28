@@ -1511,7 +1511,11 @@ Editor.exportWebProjectZip = function(fname)
 	var zip = new JSZip();
 	zip.file("index.html", FileSystem.readFile(Editor.runtimePath + "index.html"));
 	zip.file("nunu.min.js", FileSystem.readFile("nunu.min.js"));
-	zip.file("app.isp", JSON.stringify(Editor.program.toJSON()));
+	
+	var pson = new dcodeIO.PSON.ProgressivePair();
+	var data = pson.encode(Editor.program.toJSON());
+	zip.file("app.nsp", Base64Utils.fromArraybuffer(data.buffer.slice(0, data.limit)), {base64: true});
+
 	zip.file("logo.png", FileSystem.readFileBase64(Editor.runtimePath + "logo.png"), {base64: true});
 	zip.file("fullscreen.png", FileSystem.readFileBase64(Editor.runtimePath + "fullscreen.png"), {base64: true});
 	zip.file("vr.png", FileSystem.readFileBase64(Editor.runtimePath + "vr.png"), {base64: true});
