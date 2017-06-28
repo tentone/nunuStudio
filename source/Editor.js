@@ -1006,10 +1006,9 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 		{
 			fname = fname.replace(".isp", ".nsp");
 
-			var pson = new dcodeIO.PSON.ProgressivePair();
-			var data = pson.encode(Editor.program.toJSON());
-
-			FileSystem.writeFileArrayBuffer(fname, data.buffer.slice(0, data.limit));
+			var pson = new dcodeIO.PSON.StaticPair();
+			var data = pson.toArrayBuffer(Editor.program.toJSON());
+			FileSystem.writeFileArrayBuffer(fname, data);
 		}
 		else
 		{
@@ -1053,7 +1052,7 @@ Editor.loadProgram = function(file, binary)
 
 			if(binary === true)
 			{
-				var pson = new dcodeIO.PSON.ProgressivePair();
+				var pson = new dcodeIO.PSON.StaticPair();
 				var data = pson.decode(reader.result);
 				Editor.program = loader.parse(data);
 			}
@@ -1512,9 +1511,10 @@ Editor.exportWebProjectZip = function(fname)
 	zip.file("index.html", FileSystem.readFile(Editor.runtimePath + "index.html"));
 	zip.file("nunu.min.js", FileSystem.readFile("nunu.min.js"));
 	
-	var pson = new dcodeIO.PSON.ProgressivePair();
-	var data = pson.encode(Editor.program.toJSON());
-	zip.file("app.nsp", Base64Utils.fromArraybuffer(data.buffer.slice(0, data.limit)), {base64: true});
+	var pson = new dcodeIO.PSON.StaticPair();
+	var data = pson.toArrayBuffer(Editor.program.toJSON());
+
+	zip.file("app.nsp", Base64Utils.fromArraybuffer(data), {base64: true});
 
 	zip.file("logo.png", FileSystem.readFileBase64(Editor.runtimePath + "logo.png"), {base64: true});
 	zip.file("fullscreen.png", FileSystem.readFileBase64(Editor.runtimePath + "fullscreen.png"), {base64: true});

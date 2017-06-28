@@ -235,7 +235,7 @@ NunuApp.prototype.loadProgram = function(fname)
 	{
 		var loader = new ObjectLoader();
 		var data = FileSystem.readFileArrayBuffer(fname);
-		var pson = new dcodeIO.PSON.ProgressivePair();
+		var pson = new dcodeIO.PSON.StaticPair();
 		this.program = loader.parse(pson.decode(data));
 	}
 };
@@ -272,7 +272,7 @@ NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 		FileSystem.readFileArrayBuffer(fname, false, function(data)
 		{
 			var loader = new ObjectLoader();
-			var pson = new dcodeIO.PSON.ProgressivePair();
+			var pson = new dcodeIO.PSON.StaticPair();
 			self.program = loader.parse(pson.decode(data));
 
 			if(onLoad !== undefined)
