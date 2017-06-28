@@ -825,14 +825,14 @@ Interface.saveProgram = function()
 		FileSystem.chooseFile(function(files)
 		{
 			Editor.saveProgram(files[0].path, true);
-		}, ".isp", true);
+		}, ".nsp", true);
 	}
 	else
 	{
 		FileSystem.chooseFileName(function(fname)
 		{
 			Editor.saveProgram(fname, true);
-		}, ".isp", Editor.openFile !== null ? Editor.openFile : "file");
+		}, ".nsp", Editor.openFile !== null ? Editor.openFile : "file");
 	}
 };
 
