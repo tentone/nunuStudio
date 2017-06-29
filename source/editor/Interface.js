@@ -65,7 +65,7 @@ Interface.initialize = function()
 	Interface.toolSelect.setImage(Editor.filePath + "icons/tools/select.png");
 	Interface.toolSelect.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolSelect.position.set(0, 80);
-	Interface.toolSelect.setAltText("Select");
+	Interface.toolSelect.setAltText("Select (CTRL+1)");
 	Interface.toolSelect.updateInterface();
 	Interface.toolSelect.setCallback(function()
 	{
@@ -77,7 +77,7 @@ Interface.initialize = function()
 	Interface.toolMove.setImage(Editor.filePath + "icons/tools/move.png");
 	Interface.toolMove.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolMove.position.set(0, 120);
-	Interface.toolMove.setAltText("Move");
+	Interface.toolMove.setAltText("Move (CTRL+2)");
 	Interface.toolMove.updateInterface();
 	Interface.toolMove.setCallback(function()
 	{
@@ -89,7 +89,7 @@ Interface.initialize = function()
 	Interface.toolScale.setImage(Editor.filePath + "icons/tools/resize.png");
 	Interface.toolScale.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolScale.position.set(0, 160);
-	Interface.toolScale.setAltText("Scale");
+	Interface.toolScale.setAltText("Scale (CTRL+3)");
 	Interface.toolScale.updateInterface();
 	Interface.toolScale.setCallback(function()
 	{
@@ -101,7 +101,7 @@ Interface.initialize = function()
 	Interface.toolRotate.setImage(Editor.filePath + "icons/tools/rotate.png");
 	Interface.toolRotate.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.toolRotate.position.set(0, 200);
-	Interface.toolRotate.setAltText("Rotate");
+	Interface.toolRotate.setAltText("Rotate (CTRL+4)");
 	Interface.toolRotate.updateInterface();
 	Interface.toolRotate.setCallback(function()
 	{

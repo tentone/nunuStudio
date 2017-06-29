@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio MathUtils</title>  
+	<title>nunuStudio Skeleton</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -156,18 +156,18 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>MathUtils Class</h1>
+						<h1>Skeleton Class</h1>
 						<div class="box meta">
 						
 						
 						
-									Module: <a href="../modules/Utils.html">Utils</a>
+									Module: <a href="../modules/Animation.html">Animation</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>MathUtils contains auxiliar values and function to help with mathematical operations.</p>
+							<p>Use an array of bones to create a skeleton that can be used by a SkinnedMesh.</p>
 						
 						</div>
 						
@@ -176,45 +176,125 @@
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
-									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
 								<div id="index" class="api-class-tabpanel index">
 									<h2 class="off-left">Item Index</h2>
 						
+										<div class="index-section methods">
+											<h3>Methods</h3>
 						
+											<ul class="index-list methods">
+													<li class="index-item method">
+														<a href="#method_toJSON">toJSON</a>
 						
-										<div class="index-section attrs">
-											<h3>Attributes</h3>
-						
-											<ul class="index-list attrs">
-													<li class="index-item attr">
-														<a href="#attr_pi2">pi2</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_pid2">pid2</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_pid3">pid3</a>
 													</li>
 											</ul>
 										</div>
 						
+										<div class="index-section properties">
+											<h3>Properties</h3>
+						
+											<ul class="index-list properties">
+													<li class="index-item property">
+														<a href="#property_boneInverses">boneInverses</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_boneMatrices">boneMatrices</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_bones">bones</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_boneTexture">boneTexture</a>
+						
+													</li>
+											</ul>
+										</div>
+						
+						
 								</div>
 						
+									<div id="methods" class="api-class-tabpanel">
+										<h2 class="off-left">Methods</h2>
 						
-						
-									<div id="attrs" class="api-class-tabpanel">
-										<h2 class="off-left">Attributes</h2>
-						
-											<div id="attr_pi2" class="attr item">
-												<a name="config_pi2"></a> 
-												<h3 class="name"><code>pi2</code></h3>
-												<span class="type">Number</span>
+											<div id="method_toJSON" class="method item">
+												<h3 class="name"><code>toJSON</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>meta</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Object</span>
+													</span>
 											
 											
 											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Serialize skeleton to json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">meta</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	<p>Meta.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Object</span>:
+																<p>Serialized data.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+									</div>
+						
+									<div id="properties" class="api-class-tabpanel">
+										<h2 class="off-left">Properties</h2>
+						
+											<div id="property_boneInverses" class="property item">
+												<h3 class="name"><code>boneInverses</code></h3>
+												<span class="type">Array</span>
 											
 											
 											
@@ -228,20 +308,16 @@
 												</div>
 											
 												<div class="description">
-													<p>Value of PI*2. 360 degrees.</p>
+													<p>An array of Matrix4s that represent the inverse of the matrixWorld of the individual bones.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="attr_pid2" class="attr item">
-												<a name="config_pid2"></a> 
-												<h3 class="name"><code>pid2</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
+											<div id="property_boneMatrices" class="property item">
+												<h3 class="name"><code>boneMatrices</code></h3>
+												<span class="type">ArrayBuffer</span>
 											
 											
 											
@@ -255,20 +331,16 @@
 												</div>
 											
 												<div class="description">
-													<p>Value of PI/2. 45 degrees.</p>
+													<p>The array buffer holding the bone data when using a vertex texture.</p>
 											
 												</div>
 											
 											
 											
 											</div>
-											<div id="attr_pid3" class="attr item">
-												<a name="config_pid3"></a> 
-												<h3 class="name"><code>pid3</code></h3>
-												<span class="type">Number</span>
-											
-											
-											
+											<div id="property_bones" class="property item">
+												<h3 class="name"><code>bones</code></h3>
+												<span class="type">Array</span>
 											
 											
 											
@@ -282,7 +354,30 @@
 												</div>
 											
 												<div class="description">
-													<p>Value of PI/3. 60 degrees.</p>
+													<p>The array of bones. Note this is a copy of the original array, not a reference, so you can modify the original array without effecting this one.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_boneTexture" class="property item">
+												<h3 class="name"><code>boneTexture</code></h3>
+												<span class="type">DataTexture</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>The DataTexture holding the bone data when using a vertex texture.</p>
 											
 												</div>
 											
@@ -290,6 +385,7 @@
 											
 											</div>
 									</div>
+						
 						
 							</div>
 						</div>

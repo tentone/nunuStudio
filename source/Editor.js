@@ -10,7 +10,12 @@ Editor.NWJSPath = "../nwjs/";
 include("Nunu.js");
 
 include("lib/three/three.min.js");
+
 include("lib/three/effects/VREffect.js");
+
+include("lib/three/curves/NURBSCurve.js");
+include("lib/three/curves/NURBSSurface.js");
+include("lib/three/curves/NURBSUtils.js");
 
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
@@ -88,6 +93,7 @@ include("core/objects/spine/SpineTexture.js");
 include("core/objects/particle/ParticleEmitter.js");
 include("core/objects/misc/Container.js");
 include("core/objects/misc/CubeCamera.js");
+include("core/objects/animation/Skeleton.js");
 include("core/objects/Program.js");
 include("core/objects/Scene.js");
 
@@ -159,10 +165,6 @@ include("lib/three/loaders/STLLoader.js");
 include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/TGALoader.js");
-
-include("lib/three/curves/NURBSCurve.js");
-include("lib/three/curves/NURBSSurface.js");
-include("lib/three/curves/NURBSUtils.js");
 
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
@@ -490,7 +492,23 @@ Editor.update = function()
 	//Keyboard shortcuts
 	if(Editor.keyboard.keyPressed(Keyboard.CTRL))
 	{
-		if(Editor.keyboard.keyJustPressed(Keyboard.S))
+		if(Editor.keyboard.keyJustPressed(Keyboard.NUM1))
+		{
+			Interface.selectTool(Editor.SELECT);
+		}
+		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM2))
+		{
+			Interface.selectTool(Editor.MOVE);
+		}
+		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM3))
+		{
+			Interface.selectTool(Editor.SCALE);
+		}
+		else if(Editor.keyboard.keyJustPressed(Keyboard.NUM4))
+		{
+			Interface.selectTool(Editor.ROTATE);
+		}
+		else if(Editor.keyboard.keyJustPressed(Keyboard.S))
 		{
 			if(Editor.openFile === null)
 			{

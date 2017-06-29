@@ -51,6 +51,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ResourceManager",
         "Scene",
         "Script",
+        "Skeleton",
         "SkinnedMesh",
         "Sky",
         "SpineAnimation",
@@ -71,6 +72,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "WebcamTexture"
     ],
     "modules": [
+        "Animation",
         "Animations",
         "Audio",
         "BinaryUtils",
@@ -96,6 +98,11 @@ YUI.add("yuidoc-meta", function(Y) {
         "VirtualReality"
     ],
     "allModules": [
+        {
+            "displayName": "Animation",
+            "name": "Animation",
+            "description": "Use an array of bones to create a skeleton that can be used by a SkinnedMesh."
+        },
         {
             "displayName": "Animations",
             "name": "Animations",

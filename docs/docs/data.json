@@ -124,6 +124,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\objects\\animation\\Skeleton.js": {
+            "name": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
+            "modules": {
+                "Animation": 1
+            },
+            "classes": {
+                "Skeleton": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js": {
             "name": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
             "modules": {
@@ -713,6 +724,20 @@
             "line": 3,
             "description": "Audio loader can be used to load external audio resources."
         },
+        "Animation": {
+            "name": "Animation",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Skeleton": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
+            "line": 3,
+            "description": "Use an array of bones to create a skeleton that can be used by a SkinnedMesh."
+        },
         "Audio": {
             "name": "Audio",
             "submodules": {},
@@ -1274,6 +1299,33 @@
                     "name": "manager",
                     "description": "",
                     "type": "Object"
+                }
+            ]
+        },
+        "Skeleton": {
+            "name": "Skeleton",
+            "shortname": "Skeleton",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Animation",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
+            "line": 3,
+            "description": "Use an array of bones to create a skeleton that can be used by a SkinnedMesh.",
+            "author": "takahirox",
+            "params": [
+                {
+                    "name": "bones",
+                    "description": "Bone array.",
+                    "type": "Array"
+                },
+                {
+                    "name": "boneInverses",
+                    "description": "An array of Matrix4.",
+                    "type": "Array"
                 }
             ]
         },
@@ -2713,7 +2765,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 96,
+            "line": 102,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -4712,7 +4764,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 84,
+            "line": 90,
             "description": "Define base path for external texture loading.",
             "itemtype": "method",
             "name": "setTexturePath",
@@ -4728,7 +4780,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 95,
+            "line": 101,
             "description": "Set cross origin.",
             "itemtype": "method",
             "name": "setCrossOrigin",
@@ -4744,7 +4796,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 106,
+            "line": 112,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseGeometries",
@@ -4764,7 +4816,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 218,
+            "line": 224,
             "description": "Parse materials on json.",
             "itemtype": "method",
             "name": "parseMaterials",
@@ -4784,7 +4836,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 243,
+            "line": 249,
             "description": "Parse animations on json.",
             "itemtype": "method",
             "name": "parseAnimations",
@@ -4804,7 +4856,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 263,
+            "line": 269,
             "description": "Parse images on json.",
             "itemtype": "method",
             "name": "parseImages",
@@ -4824,7 +4876,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 286,
+            "line": 292,
             "description": "Parse videos on json.",
             "itemtype": "method",
             "name": "parseVideos",
@@ -4844,7 +4896,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 309,
+            "line": 315,
             "description": "Parse audio on json.",
             "itemtype": "method",
             "name": "parseAudio",
@@ -4864,7 +4916,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 332,
+            "line": 338,
             "description": "Parse fonts on json.",
             "itemtype": "method",
             "name": "parseFonts",
@@ -4884,7 +4936,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 355,
+            "line": 361,
             "description": "Parse textures on json.",
             "itemtype": "method",
             "name": "parseTextures",
@@ -4914,8 +4966,50 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 384,
-            "description": "Parse objects on json.",
+            "line": 390,
+            "description": "Parse skeletons from json.",
+            "itemtype": "method",
+            "name": "parseSkeletons",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 437,
+            "description": "Auxiliar method to bind skeletons to loaded objects.",
+            "itemtype": "method",
+            "name": "bindSkeletons",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object3D that contains objects",
+                    "type": "Object3D"
+                },
+                {
+                    "name": "skeletons",
+                    "description": "Array of skeletons to be binded.",
+                    "type": "Array"
+                }
+            ],
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 470,
+            "description": "Parse objects from json.",
             "itemtype": "method",
             "name": "parseObjects",
             "params": [
@@ -5158,6 +5252,66 @@
             },
             "class": "VideoLoader",
             "module": "Loaders"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
+            "line": 13,
+            "description": "The array of bones. Note this is a copy of the original array, not a reference, so you can modify the original array without effecting this one.",
+            "itemtype": "property",
+            "name": "bones",
+            "type": "{Array}",
+            "class": "Skeleton",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
+            "line": 19,
+            "description": "An array of Matrix4s that represent the inverse of the matrixWorld of the individual bones.",
+            "itemtype": "property",
+            "name": "boneInverses",
+            "type": "{Array}",
+            "class": "Skeleton",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
+            "line": 26,
+            "description": "The array buffer holding the bone data when using a vertex texture.",
+            "itemtype": "property",
+            "name": "boneMatrices",
+            "type": "{ArrayBuffer}",
+            "class": "Skeleton",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
+            "line": 33,
+            "description": "The DataTexture holding the bone data when using a vertex texture.",
+            "itemtype": "property",
+            "name": "boneTexture",
+            "type": "{DataTexture}",
+            "class": "Skeleton",
+            "module": "Animation"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
+            "line": 78,
+            "description": "Serialize skeleton to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Meta.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Serialized data.",
+                "type": "Object"
+            },
+            "class": "Skeleton",
+            "module": "Animation"
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
@@ -6779,7 +6933,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
             "line": 72,
-            "description": "Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
+            "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
             "params": [
@@ -10014,7 +10168,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 426,
+            "line": 447,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -10030,7 +10184,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 432,
+            "line": 453,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -10046,7 +10200,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 438,
+            "line": 459,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -10062,7 +10216,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 444,
+            "line": 465,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -10078,7 +10232,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 450,
+            "line": 471,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -10094,7 +10248,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 456,
+            "line": 477,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -10110,7 +10264,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 462,
+            "line": 483,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -10126,7 +10280,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 468,
+            "line": 489,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -10147,7 +10301,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 475,
+            "line": 496,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -10163,7 +10317,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 481,
+            "line": 502,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -10184,7 +10338,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 488,
+            "line": 509,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -10203,7 +10357,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 494,
+            "line": 515,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -10219,7 +10373,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 500,
+            "line": 521,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldRotation",
@@ -10235,7 +10389,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 506,
+            "line": 527,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -10251,7 +10405,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 512,
+            "line": 533,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -10267,7 +10421,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 518,
+            "line": 539,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -10288,7 +10442,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 525,
+            "line": 546,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -10304,7 +10458,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 531,
+            "line": 552,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -10320,7 +10474,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 537,
+            "line": 558,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -11693,7 +11847,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 107,
+            "line": 113,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -11703,7 +11857,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 113,
+            "line": 119,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -11713,7 +11867,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 119,
+            "line": 125,
             "description": "Fullscreen flag, to set fulscreen mode the setFullScreen method should be used",
             "itemtype": "property",
             "name": "fullscreen",
@@ -11724,7 +11878,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 126,
+            "line": 132,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -11735,7 +11889,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 133,
+            "line": 139,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -11745,7 +11899,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 139,
+            "line": 145,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -11756,7 +11910,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 149,
+            "line": 155,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -11765,7 +11919,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 197,
+            "line": 203,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -11791,7 +11945,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 218,
+            "line": 224,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -11807,7 +11961,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 243,
+            "line": 249,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -11833,7 +11987,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 286,
+            "line": 292,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -11842,7 +11996,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 344,
+            "line": 350,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -11851,7 +12005,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 360,
+            "line": 366,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -11860,7 +12014,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 414,
+            "line": 420,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -11869,7 +12023,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 449,
+            "line": 455,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -11878,7 +12032,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 459,
+            "line": 465,
             "description": "Set the canvas to be used for rendering.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -11894,7 +12048,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 471,
+            "line": 477,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -11903,7 +12057,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 495,
+            "line": 501,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -11919,7 +12073,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 511,
+            "line": 517,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -11935,7 +12089,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 524,
+            "line": 530,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -11951,7 +12105,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 537,
+            "line": 543,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -11964,7 +12118,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 548,
+            "line": 554,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -11973,7 +12127,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 574,
+            "line": 580,
             "description": "Set a element to fullscreen mode, if none is passed the document body is used.",
             "itemtype": "method",
             "name": "setFullscreen",
