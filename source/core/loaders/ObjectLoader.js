@@ -858,7 +858,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 
 		case "Bone":
-			object = new Bone();
+			object = new THREE.Bone();
 			break;
 
 		default:

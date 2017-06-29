@@ -11,6 +11,9 @@
 function TextureLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+	
+	this.path = "";
+	this.crossOrigin = "";
 
 	this.images = [];
 	this.videos = [];
@@ -19,9 +22,24 @@ function TextureLoader(manager)
 
 THREE.TextureLoader = TextureLoader;
 
-TextureLoader.prototype.setCrossOrigin = function(url){};
+TextureLoader.prototype.setCrossOrigin = function(url)
+{
+	this.crossOrigin = url;
+	return this;
+};
 
-TextureLoader.prototype.setPath = function(path){};
+/**
+ * Set base path for texture loading.
+ * 
+ * @method setPath
+ * @param {String} path Path
+ * @return {TextureLoader} Self for chaining.
+ */
+TextureLoader.prototype.setPath = function(path)
+{
+	this.path = path;
+	return this;
+};
 
 /**
  * Set list of images to be used by this loader.
@@ -72,14 +90,27 @@ TextureLoader.prototype.setFonts = function(fonts)
  */
 TextureLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
-	var texture = new Texture(url);
-
-	if(onLoad !== undefined)
+	try
 	{
-		onLoad(texture);
-	}
+		var texture = new Texture(this.path + url);
 
-	return texture;
+		if(onLoad !== undefined)
+		{
+			onLoad(texture);
+		}
+
+		return texture;
+	}
+	catch(e)
+	{
+		if(onError !== undefined)
+		{
+			onError(e);
+		}
+
+		console.warn("nunuStudio: Texture not found", e);
+		return new Texture();
+	}
 };
 
 /**
