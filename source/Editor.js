@@ -160,6 +160,10 @@ include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/TGALoader.js");
 
+include("lib/three/curves/NURBSCurve.js");
+include("lib/three/curves/NURBSSurface.js");
+include("lib/three/curves/NURBSUtils.js");
+
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
 include("lib/three/exporters/STLBinaryExporter.js");
@@ -1379,11 +1383,24 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.FBXLoader();
-				var obj = loader.parse(reader.result);
-				Editor.addToScene(obj);
+				try
+				{
+					var loader = new THREE.FBXLoader();
+					var object = loader.parse(reader.result);
+
+					//TODO <OBJECT ANIMATIONS>
+					//object.animations
+					
+					Editor.addToScene(object);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading .fbx file");
+					console.warn("nunuStudio: Error loading fbx file", e);
+				}
+
 			};
-			reader.readAsText(file);
+			reader.readAsArrayBuffer(file);
 		}
 		//PCD Point Cloud Data
 		else if(extension === "pcd")

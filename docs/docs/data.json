@@ -4959,7 +4959,27 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 26,
+            "line": 31,
+            "description": "Set base path for texture loading.",
+            "itemtype": "method",
+            "name": "setPath",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "Path",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Self for chaining.",
+                "type": "TextureLoader"
+            },
+            "class": "TextureLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
+            "line": 44,
             "description": "Set list of images to be used by this loader.",
             "itemtype": "method",
             "name": "setImages",
@@ -4975,7 +4995,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 38,
+            "line": 56,
             "description": "Set list of videos to be used by this loader.",
             "itemtype": "method",
             "name": "setVideos",
@@ -4991,7 +5011,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 50,
+            "line": 68,
             "description": "Set list of fonts to be used by this loader.",
             "itemtype": "method",
             "name": "setFonts",
@@ -5007,7 +5027,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 62,
+            "line": 80,
             "description": "Load texture from URL.\n\nDoes the same as creating a new Texture object.",
             "itemtype": "method",
             "name": "load",
@@ -5038,7 +5058,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 85,
+            "line": 116,
             "description": "Load texture object from JSON.",
             "itemtype": "method",
             "name": "loadJSON",
@@ -5069,7 +5089,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\TextureLoader.js",
-            "line": 105,
+            "line": 136,
             "description": "Parse a texture object JSON description.",
             "itemtype": "method",
             "name": "parse",
