@@ -150,7 +150,7 @@ include("lib/three/loaders/3MFLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/ColladaLoader2.js");
 include("lib/three/loaders/FBXLoader.js");
-include("lib/three/loaders/GLTFLoader.js");
+include("lib/three/loaders/GLTF2Loader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/PCDLoader.js");
@@ -1248,30 +1248,39 @@ Editor.loadGeometry = function(file, onLoad)
 		//Wavefront OBJ
 		if(extension === "obj")
 		{
-			var loader = new THREE.OBJLoader();
-
-			//Look for MTL file
-			if(Nunu.runningOnDesktop())
+			try
 			{
-				var path = FileSystem.getFilePath(file.path);
-				var mtl = FileSystem.getNameWithoutExtension(file.path) + ".mtl";
+				var loader = new THREE.OBJLoader();
 
-				if(FileSystem.fileExists(mtl))
+				//Look for MTL file
+				if(Nunu.runningOnDesktop())
 				{
-					var mtlLoader = new THREE.MTLLoader()
-					mtlLoader.setPath(path);
-					var materials = mtlLoader.parse(FileSystem.readFile(mtl));
-					loader.setMaterials(materials);
+					var path = FileSystem.getFilePath(file.path);
+					var mtl = FileSystem.getNameWithoutExtension(file.path) + ".mtl";
+
+					if(FileSystem.fileExists(mtl))
+					{
+						var mtlLoader = new THREE.MTLLoader()
+						mtlLoader.setPath(path);
+						var materials = mtlLoader.parse(FileSystem.readFile(mtl));
+						loader.setMaterials(materials);
+					}
 				}
+
+				var reader = new FileReader();
+				reader.onload = function()
+				{
+					var obj = loader.parse(reader.result);
+					Editor.addToScene(obj);
+				};
+				reader.readAsText(file);
+			}
+			catch(e)
+			{
+				Editor.alert("Error loading file");
+				console.error("nunuStudio: Error loading file", e);
 			}
 
-			var reader = new FileReader();
-			reader.onload = function()
-			{
-				var obj = loader.parse(reader.result);
-				Editor.addToScene(obj);
-			};
-			reader.readAsText(file);
 		}
 		//3DS
 		else if(extension === "3ds")
@@ -1279,9 +1288,17 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.TDSLoader();
-				var group = loader.parse(reader.result);
-				Editor.addToScene(group);
+				try
+				{
+					var loader = new THREE.TDSLoader();
+					var group = loader.parse(reader.result);
+					Editor.addToScene(group);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
 			};
 			reader.readAsArrayBuffer(file);
 		}
@@ -1291,10 +1308,18 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.ColladaLoader();
-				var collada = loader.parse(reader.result);
-				var scene = collada.scene;
-				Editor.addToScene(scene);
+				try
+				{
+					var loader = new THREE.ColladaLoader();
+					var collada = loader.parse(reader.result);
+					var scene = collada.scene;
+					Editor.addToScene(scene);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
 			};
 			reader.readAsText(file);
 		}
@@ -1304,14 +1329,24 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.GLTFLoader();
-				var gltf = loader.parse(reader.result);
-				if(gltf.scene !== undefined)
+				try
 				{
-					Editor.addToScene(gltf.scene);
+					var loader = new THREE.GLTF2Loader();
+					loader.parse(reader.result, function(gltf)
+					{
+						if(gltf.scene !== undefined)
+						{
+							Editor.addToScene(gltf.scene);
+						}
+					});
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
 				}
 			};
-			reader.readAsText(file);
+			reader.readAsArrayBuffer(file);
 		}
 		//3MF
 		else if(extension === "3mf")
@@ -1319,9 +1354,17 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.ThreeMFLoader();
-				var obj = loader.parse(reader.result);
-				Editor.addToScene(obj);
+				try
+				{
+					var loader = new THREE.ThreeMFLoader();
+					var obj = loader.parse(reader.result);
+					Editor.addToScene(obj);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
 			};
 			reader.readAsArrayBuffer(file);
 		}
@@ -1331,9 +1374,17 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.AWDLoader();
-				var awd = loader.parse(reader.result);
-				Editor.addToScene(awd);
+				try
+				{
+					var loader = new THREE.AWDLoader();
+					var awd = loader.parse(reader.result);
+					Editor.addToScene(awd);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
 			};
 			reader.readAsArrayBuffer(file);
 		}
@@ -1343,9 +1394,17 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.PLYLoader();
-				var geometry = loader.parse(reader.result);
-				Editor.addToScene(new Mesh(geometry));
+				try
+				{
+					var loader = new THREE.PLYLoader();
+					var geometry = loader.parse(reader.result);
+					Editor.addToScene(new Mesh(geometry));
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
 			};
 			reader.readAsText(file);
 		}
@@ -1355,9 +1414,17 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.VTKLoader();
-				var geometry = loader.parse(reader.result);
-				Editor.addToScene(new Mesh(geometry));
+				try
+				{
+					var loader = new THREE.VTKLoader();
+					var geometry = loader.parse(reader.result);
+					Editor.addToScene(new Mesh(geometry));
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
 			};
 			reader.readAsArrayBuffer(file);
 		}
@@ -1367,12 +1434,20 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.VRMLLoader();
-				var scene = loader.parse(reader.result);
-
-				for(var i = 0; i < scene.children.length; i++)
+				try
 				{
-					Editor.addToScene(scene.children[i]);
+					var loader = new THREE.VRMLLoader();
+					var scene = loader.parse(reader.result);
+
+					for(var i = 0; i < scene.children.length; i++)
+					{
+						Editor.addToScene(scene.children[i]);
+					}
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
 				}
 			};
 			reader.readAsText(file);
@@ -1395,10 +1470,9 @@ Editor.loadGeometry = function(file, onLoad)
 				}
 				catch(e)
 				{
-					Editor.alert("Error loading .fbx file");
-					console.warn("nunuStudio: Error loading fbx file", e);
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
 				}
-
 			};
 			reader.readAsArrayBuffer(file);
 		}
@@ -1408,11 +1482,19 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.PCDLoader();
-				var pcd = loader.parse(reader.result, file.name);
-				pcd.material.name = "points";
+				try
+				{
+					var loader = new THREE.PCDLoader();
+					var pcd = loader.parse(reader.result, file.name);
+					pcd.material.name = "points";
 
-				Editor.addToScene(pcd);
+					Editor.addToScene(pcd);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
 			};
 			reader.readAsArrayBuffer(file);
 		}
@@ -1422,10 +1504,18 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.STLLoader();
-				var geometry = loader.parse(reader.result);
+				try
+				{
+					var loader = new THREE.STLLoader();
+					var geometry = loader.parse(reader.result);
 
-				Editor.addToScene(new Mesh(geometry, Editor.defaultMaterial));
+					Editor.addToScene(new Mesh(geometry, Editor.defaultMaterial));
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
 			};
 			reader.readAsArrayBuffer(file);
 		}
@@ -1435,46 +1525,58 @@ Editor.loadGeometry = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new THREE.JSONLoader();
-				var data = loader.parse(JSON.parse(reader.result));
-				var materials = data.materials;
-				var geometry = data.geometry;
+				try
+				{
+					var loader = new THREE.JSONLoader();
+					var data = loader.parse(JSON.parse(reader.result));
+					var materials = data.materials;
+					var geometry = data.geometry;
 
-				//Material
-				var material = null;
-				if(materials === undefined || materials.length === 0)
-				{
-					material = Editor.defaultMaterial;
-				}
-				else if(materials.length === 1)
-				{
-					material = materials[0];
-				}
-				else if(materials.length > 1)
-				{
-					material = materials;
-				}
+					//Material
+					var material = null;
+					if(materials === undefined || materials.length === 0)
+					{
+						material = Editor.defaultMaterial;
+					}
+					else if(materials.length === 1)
+					{
+						material = materials[0];
+					}
+					else if(materials.length > 1)
+					{
+						material = materials;
+					}
 
-				//Mesh
-				var mesh = null;
-				if(geometry.bones.length > 0)
-				{
-					mesh = new SkinnedMesh(geometry, material);
-				}
-				else
-				{
-					mesh = new Mesh(geometry, material);
-				}
+					//Mesh
+					var mesh = null;
+					if(geometry.bones.length > 0)
+					{
+						mesh = new SkinnedMesh(geometry, material);
+					}
+					else
+					{
+						mesh = new Mesh(geometry, material);
+					}
 
-				Editor.addToScene(mesh);
+					Editor.addToScene(mesh);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
 			};
 			reader.readAsText(file);
+		}
+		else
+		{
+			Editor.alert("Unknown file format!");
 		}
 	}
 	catch(e)
 	{
 		Editor.alert("Error importing file (" + e + ")");
-		console.log("nunuStudio: Error importing file", e);
+		console.error("nunuStudio: Error importing file", e);
 	}
 };
 
