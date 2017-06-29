@@ -82,6 +82,7 @@
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
 								<li><a href="../classes/Scene.html">Scene</a></li>
 								<li><a href="../classes/Script.html">Script</a></li>
+								<li><a href="../classes/Skeleton.html">Skeleton</a></li>
 								<li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
 								<li><a href="../classes/Sky.html">Sky</a></li>
 								<li><a href="../classes/SpineAnimation.html">SpineAnimation</a></li>
@@ -103,6 +104,7 @@
 							</ul>
 				
 							<ul id="api-modules" class="apis modules">
+								<li><a href="../modules/Animation.html">Animation</a></li>
 								<li><a href="../modules/Animations.html">Animations</a></li>
 								<li><a href="../modules/Audio.html">Audio</a></li>
 								<li><a href="../modules/BinaryUtils.html">BinaryUtils</a></li>
@@ -240,6 +242,10 @@
 						
 											<ul class="index-list methods">
 													<li class="index-item method">
+														<a href="#method_bindSkeletons">bindSkeletons</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_load">load</a>
 						
 													</li>
@@ -276,6 +282,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_parseSkeletons">parseSkeletons</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_parseTextures">parseTextures</a>
 						
 													</li>
@@ -301,6 +311,71 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
+											<div id="method_bindSkeletons" class="method item">
+												<h3 class="name"><code>bindSkeletons</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>object</code>
+															</li>
+															<li class="arg">
+																	<code>skeletons</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Auxiliar method to bind skeletons to loaded objects.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">object</code>
+																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
+											
+											
+																<div class="param-description">
+																	<p>Object3D that contains objects</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">skeletons</code>
+																	<span class="type">Array</span>
+											
+											
+																<div class="param-description">
+																	<p>Array of skeletons to be binded.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
 											<div id="method_load" class="method item">
 												<h3 class="name"><code>load</code></h3>
 											
@@ -885,7 +960,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse objects on json.</p>
+													<p>Parse objects from json.</p>
 											
 												</div>
 											
@@ -965,6 +1040,69 @@
 											
 														</div>
 													</div>
+											
+											</div>
+											<div id="method_parseSkeletons" class="method item">
+												<h3 class="name"><code>parseSkeletons</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+															<li class="arg">
+																	<code>object</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse skeletons from json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">object</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
 											
 											</div>
 											<div id="method_parseTextures" class="method item">

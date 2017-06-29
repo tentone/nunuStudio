@@ -70,7 +70,7 @@ SkinnedMesh.prototype.dispose = function()
 };
 
 /**
- * Bind a skeleton to the skinned mesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
+ * Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.
  * 
  * This is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.
  * 

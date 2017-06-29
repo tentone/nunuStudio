@@ -80,6 +80,11 @@ MaterialLoader.prototype.parse = function(json)
 	//Color
 	if(json.color !== undefined)
 	{
+		if(material.color === undefined)
+		{
+			material.color = new THREE.Color();
+		}
+
 		material.color.setHex(json.color);
 	}
 	
@@ -96,12 +101,22 @@ MaterialLoader.prototype.parse = function(json)
 	//Emissive
 	if(json.emissive !== undefined)
 	{
+		if(material.emissive === undefined)
+		{
+			material.emissive = new THREE.Color();
+		}
+
 		material.emissive.setHex(json.emissive);
 	}
 
 	//Specular
 	if(json.specular !== undefined)
 	{
+		if(material.specular === undefined)
+		{
+			material.specular = new THREE.Color();
+		}
+
 		material.specular.setHex(json.specular);
 	}
 
