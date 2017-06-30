@@ -187,7 +187,7 @@
 
 	} );
 
-	var REVISION = '86';
+	var REVISION = '87dev';
 	var MOUSE = { LEFT: 0, MIDDLE: 1, RIGHT: 2 };
 	var CullFaceNone = 0;
 	var CullFaceBack = 1;
@@ -3465,7 +3465,7 @@
 
 			if ( ! ( euler && euler.isEuler ) ) {
 
-				console.error( 'THREE.Matrix: .makeRotationFromEuler() now expects a Euler rotation rather than a Vector3 and order.' );
+				console.error( 'THREE.Matrix4: .makeRotationFromEuler() now expects a Euler rotation rather than a Vector3 and order.' );
 
 			}
 
@@ -3876,7 +3876,7 @@
 
 			if ( det === 0 ) {
 
-				var msg = "THREE.Matrix4.getInverse(): can't invert matrix, determinant is 0";
+				var msg = "THREE.Matrix4: .getInverse() can't invert matrix, determinant is 0";
 
 				if ( throwOnDegenerate === true ) {
 
@@ -5782,9 +5782,9 @@
 
 	var depth_vert = "#include <common>\n#include <uv_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <skinbase_vertex>\n\t#ifdef USE_DISPLACEMENTMAP\n\t\t#include <beginnormal_vertex>\n\t\t#include <morphnormal_vertex>\n\t\t#include <skinnormal_vertex>\n\t#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n}\n";
 
-	var distanceRGBA_frag = "uniform vec3 lightPos;\nvarying vec4 vWorldPosition;\n#include <common>\n#include <packing>\n#include <clipping_planes_pars_fragment>\nvoid main () {\n\t#include <clipping_planes_fragment>\n\tgl_FragColor = packDepthToRGBA( length( vWorldPosition.xyz - lightPos.xyz ) / 1000.0 );\n}\n";
+	var distanceRGBA_frag = "uniform vec3 lightPos;\nvarying vec4 vWorldPosition;\n#include <common>\n#include <packing>\n#include <uv_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main () {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( 1.0 );\n\t#include <map_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\tgl_FragColor = packDepthToRGBA( length( vWorldPosition.xyz - lightPos.xyz ) / 1000.0 );\n}\n";
 
-	var distanceRGBA_vert = "varying vec4 vWorldPosition;\n#include <common>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <skinbase_vertex>\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <project_vertex>\n\t#include <worldpos_vertex>\n\t#include <clipping_planes_vertex>\n\tvWorldPosition = worldPosition;\n}\n";
+	var distanceRGBA_vert = "varying vec4 vWorldPosition;\n#include <common>\n#include <uv_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <skinbase_vertex>\n\t#ifdef USE_DISPLACEMENTMAP\n\t\t#include <beginnormal_vertex>\n\t\t#include <morphnormal_vertex>\n\t\t#include <skinnormal_vertex>\n\t#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <worldpos_vertex>\n\t#include <clipping_planes_vertex>\n\tvWorldPosition = worldPosition;\n}\n";
 
 	var equirect_frag = "uniform sampler2D tEquirect;\nuniform float tFlip;\nvarying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tvec3 direction = normalize( vWorldPosition );\n\tvec2 sampleUV;\n\tsampleUV.y = saturate( tFlip * direction.y * -0.5 + 0.5 );\n\tsampleUV.x = atan( direction.z, direction.x ) * RECIPROCAL_PI2 + 0.5;\n\tgl_FragColor = texture2D( tEquirect, sampleUV );\n}\n";
 
@@ -6122,9 +6122,13 @@
 
 		distanceRGBA: {
 
-			uniforms: {
-				lightPos: { value: new Vector3() }
-			},
+			uniforms: UniformsUtils.merge( [
+				UniformsLib.common,
+				UniformsLib.displacementmap,
+				{
+					lightPos: { value: new Vector3() }
+				}
+			] ),
 
 			vertexShader: ShaderChunk.distanceRGBA_vert,
 			fragmentShader: ShaderChunk.distanceRGBA_frag
@@ -6571,7 +6575,7 @@
 
 			}
 
-			gl.useProgram( program );
+			state.useProgram( program );
 
 			state.initAttributes();
 			state.enableAttribute( attributes.vertex );
@@ -6718,7 +6722,7 @@
 			state.enable( gl.DEPTH_TEST );
 			state.buffers.depth.setMask( true );
 
-			renderer.resetGLState();
+			state.reset();
 
 		};
 
@@ -6747,6 +6751,21 @@
 		}
 
 	}
+
+	/**
+	 * @author mrdoob / http://mrdoob.com/
+	 */
+
+	function CanvasTexture( canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy ) {
+
+		Texture.call( this, canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy );
+
+		this.needsUpdate = true;
+
+	}
+
+	CanvasTexture.prototype = Object.create( Texture.prototype );
+	CanvasTexture.prototype.constructor = CanvasTexture;
 
 	/**
 	 * @author mikael emtinger / http://gomo.se/
@@ -6830,8 +6849,7 @@
 			context.fillStyle = 'white';
 			context.fillRect( 0, 0, 8, 8 );
 
-			texture = new Texture( canvas );
-			texture.needsUpdate = true;
+			texture = new CanvasTexture( canvas );
 
 		}
 
@@ -6847,7 +6865,7 @@
 
 			}
 
-			gl.useProgram( program );
+			state.useProgram( program );
 
 			state.initAttributes();
 			state.enableAttribute( attributes.position );
@@ -6995,7 +7013,7 @@
 
 			state.enable( gl.CULL_FACE );
 
-			renderer.resetGLState();
+			state.reset();
 
 		};
 
@@ -8503,7 +8521,7 @@
 
 			if ( matrix && matrix.isMatrix4 ) {
 
-				console.error( "THREE.Matrix3.getInverse no longer takes a Matrix4 argument." );
+				console.error( "THREE.Matrix3: .getInverse() no longer takes a Matrix4 argument." );
 
 			}
 
@@ -8522,7 +8540,7 @@
 
 			if ( det === 0 ) {
 
-				var msg = "THREE.Matrix3.getInverse(): can't invert matrix, determinant is 0";
+				var msg = "THREE.Matrix3: .getInverse() can't invert matrix, determinant is 0";
 
 				if ( throwOnDegenerate === true ) {
 
@@ -8680,7 +8698,7 @@
 		setFromNormalAndCoplanarPoint: function ( normal, point ) {
 
 			this.normal.copy( normal );
-			this.constant = - point.dot( this.normal );	// must be this.normal, not normal, as this.normal is normalized
+			this.constant = - point.dot( this.normal );
 
 			return this;
 
@@ -8755,16 +8773,9 @@
 
 		projectPoint: function ( point, optionalTarget ) {
 
-			return this.orthoPoint( point, optionalTarget ).sub( point ).negate();
-
-		},
-
-		orthoPoint: function ( point, optionalTarget ) {
-
-			var perpendicularMagnitude = this.distanceToPoint( point );
-
 			var result = optionalTarget || new Vector3();
-			return result.copy( this.normal ).multiplyScalar( perpendicularMagnitude );
+
+			return result.copy( this.normal ).multiplyScalar( - this.distanceToPoint( point ) ).add( point );
 
 		},
 
@@ -8834,6 +8845,7 @@
 		coplanarPoint: function ( optionalTarget ) {
 
 			var result = optionalTarget || new Vector3();
+
 			return result.copy( this.normal ).multiplyScalar( - this.constant );
 
 		},
@@ -8845,14 +8857,12 @@
 
 			return function applyMatrix4( matrix, optionalNormalMatrix ) {
 
+				var normalMatrix = optionalNormalMatrix || m1.getNormalMatrix( matrix );
+
 				var referencePoint = this.coplanarPoint( v1 ).applyMatrix4( matrix );
 
-				// transform normal based on theory here:
-				// http://www.songho.ca/opengl/gl_normaltransform.html
-				var normalMatrix = optionalNormalMatrix || m1.getNormalMatrix( matrix );
 				var normal = this.normal.applyMatrix3( normalMatrix ).normalize();
 
-				// recalculate constant (like in setFromNormalAndCoplanarPoint)
 				this.constant = - referencePoint.dot( normal );
 
 				return this;
@@ -8863,7 +8873,7 @@
 
 		translate: function ( offset ) {
 
-			this.constant = this.constant - offset.dot( this.normal );
+			this.constant -= offset.dot( this.normal );
 
 			return this;
 
@@ -9443,6 +9453,7 @@
 
 			result.clipShadows = material.clipShadows;
 			result.clippingPlanes = material.clippingPlanes;
+			result.clipIntersection = material.clipIntersection;
 
 			result.wireframeLinewidth = material.wireframeLinewidth;
 			result.linewidth = material.linewidth;
@@ -14207,23 +14218,27 @@
 
 		normalizeNormals: function () {
 
-			var normals = this.attributes.normal;
+			var vector = new Vector3();
 
-			var x, y, z, n;
+			return function normalizeNormals() {
 
-			for ( var i = 0, il = normals.count; i < il; i ++ ) {
+				var normals = this.attributes.normal;
 
-				x = normals.getX( i );
-				y = normals.getY( i );
-				z = normals.getZ( i );
+				for ( var i = 0, il = normals.count; i < il; i ++ ) {
 
-				n = 1.0 / Math.sqrt( x * x + y * y + z * z );
+					vector.x = normals.getX( i );
+					vector.y = normals.getY( i );
+					vector.z = normals.getZ( i );
 
-				normals.setXYZ( i, x * n, y * n, z * n );
+					vector.normalize();
 
-			}
+					normals.setXYZ( i, vector.x, vector.y, vector.z );
 
-		},
+				}
+
+			};
+
+		}(),
 
 		toNonIndexed: function () {
 
@@ -15958,10 +15973,9 @@
 
 			}
 
-			function checkIntersection( object, raycaster, ray, pA, pB, pC, point ) {
+			function checkIntersection( object, material, raycaster, ray, pA, pB, pC, point ) {
 
 				var intersect;
-				var material = object.material;
 
 				if ( material.side === BackSide ) {
 
@@ -15996,7 +16010,7 @@
 				vB.fromBufferAttribute( position, b );
 				vC.fromBufferAttribute( position, c );
 
-				var intersection = checkIntersection( object, raycaster, ray, vA, vB, vC, intersectionPoint );
+				var intersection = checkIntersection( object, object.material, raycaster, ray, vA, vB, vC, intersectionPoint );
 
 				if ( intersection ) {
 
@@ -16159,7 +16173,7 @@
 
 						}
 
-						intersection = checkIntersection( this, raycaster, ray, fvA, fvB, fvC, intersectionPoint );
+						intersection = checkIntersection( this, faceMaterial, raycaster, ray, fvA, fvB, fvC, intersectionPoint );
 
 						if ( intersection ) {
 
@@ -16531,6 +16545,7 @@
 			infoRender.vertices += count;
 
 			if ( mode === gl.TRIANGLES ) infoRender.faces += count / 3;
+			else if ( mode === gl.POINTS ) infoRender.points += count;
 
 		}
 
@@ -16551,6 +16566,7 @@
 			infoRender.vertices += count * geometry.maxInstancedCount;
 
 			if ( mode === gl.TRIANGLES ) infoRender.faces += geometry.maxInstancedCount * count / 3;
+			else if ( mode === gl.POINTS ) infoRender.points += geometry.maxInstancedCount * count;
 
 		}
 
@@ -16585,6 +16601,7 @@
 			infoRender.vertices += count;
 
 			if ( mode === gl.TRIANGLES ) infoRender.faces += count / 3;
+			else if ( mode === gl.POINTS ) infoRender.points += count;
 
 		}
 
@@ -16617,6 +16634,7 @@
 			infoRender.vertices += count * geometry.maxInstancedCount;
 
 			if ( mode === gl.TRIANGLES ) infoRender.faces += geometry.maxInstancedCount * count / 3;
+			else if ( mode === gl.POINTS ) infoRender.points += geometry.maxInstancedCount * count;
 
 		}
 
@@ -19127,6 +19145,8 @@
 
 		var compressedTextureFormats = null;
 
+		var currentProgram = null;
+
 		var currentBlending = null;
 		var currentBlendEquation = null;
 		var currentBlendSrc = null;
@@ -19180,25 +19200,23 @@
 		emptyTextures[ gl.TEXTURE_2D ] = createTexture( gl.TEXTURE_2D, gl.TEXTURE_2D, 1 );
 		emptyTextures[ gl.TEXTURE_CUBE_MAP ] = createTexture( gl.TEXTURE_CUBE_MAP, gl.TEXTURE_CUBE_MAP_POSITIVE_X, 6 );
 
+		// init
+
+		colorBuffer.setClear( 0, 0, 0, 1 );
+		depthBuffer.setClear( 1 );
+		stencilBuffer.setClear( 0 );
+
+		enable( gl.DEPTH_TEST );
+		depthBuffer.setFunc( LessEqualDepth );
+
+		setFlipSided( false );
+		setCullFace( CullFaceBack );
+		enable( gl.CULL_FACE );
+
+		enable( gl.BLEND );
+		setBlending( NormalBlending );
+
 		//
-
-		function init() {
-
-			colorBuffer.setClear( 0, 0, 0, 1 );
-			depthBuffer.setClear( 1 );
-			stencilBuffer.setClear( 0 );
-
-			enable( gl.DEPTH_TEST );
-			depthBuffer.setFunc( LessEqualDepth );
-
-			setFlipSided( false );
-			setCullFace( CullFaceBack );
-			enable( gl.CULL_FACE );
-
-			enable( gl.BLEND );
-			setBlending( NormalBlending );
-
-		}
 
 		function initAttributes() {
 
@@ -19314,6 +19332,22 @@
 			}
 
 			return compressedTextureFormats;
+
+		}
+
+		function useProgram( program ) {
+
+			if ( currentProgram !== program ) {
+
+				gl.useProgram( program );
+
+				currentProgram = program;
+
+				return true;
+
+			}
+
+			return false;
 
 		}
 
@@ -19684,6 +19718,8 @@
 			currentTextureSlot = null;
 			currentBoundTextures = {};
 
+			currentProgram = null;
+
 			currentBlending = null;
 
 			currentFlipSided = null;
@@ -19703,7 +19739,6 @@
 				stencil: stencilBuffer
 			},
 
-			init: init,
 			initAttributes: initAttributes,
 			enableAttribute: enableAttribute,
 			enableAttributeAndDivisor: enableAttributeAndDivisor,
@@ -19711,6 +19746,8 @@
 			enable: enable,
 			disable: disable,
 			getCompressedTextureFormats: getCompressedTextureFormats,
+
+			useProgram: useProgram,
 
 			setBlending: setBlending,
 			setMaterial: setMaterial,
@@ -20373,9 +20410,10 @@
 
 		var _this = this,
 
+			_isContextLost = false,
+
 			// internal state cache
 
-			_currentProgram = null,
 			_currentRenderTarget = null,
 			_currentFramebuffer = null,
 			_currentMaterialId = - 1,
@@ -20516,6 +20554,7 @@
 			}
 
 			_canvas.addEventListener( 'webglcontextlost', onContextLost, false );
+			_canvas.addEventListener( 'webglcontextrestored', onContextRestore, false );
 
 		} catch ( error ) {
 
@@ -20523,42 +20562,56 @@
 
 		}
 
-		var extensions = new WebGLExtensions( _gl );
+		var extensions, capabilities, state;
+		var properties, textures, attributes, geometries, objects;
+		var programCache, lightCache, renderLists;
 
-		extensions.get( 'WEBGL_depth_texture' );
-		extensions.get( 'OES_texture_float' );
-		extensions.get( 'OES_texture_float_linear' );
-		extensions.get( 'OES_texture_half_float' );
-		extensions.get( 'OES_texture_half_float_linear' );
-		extensions.get( 'OES_standard_derivatives' );
-		extensions.get( 'ANGLE_instanced_arrays' );
+		var background, bufferRenderer, indexedBufferRenderer;
 
-		if ( extensions.get( 'OES_element_index_uint' ) ) {
+		function initGLContext() {
 
-			BufferGeometry.MaxIndex = 4294967296;
+			extensions = new WebGLExtensions( _gl );
+			extensions.get( 'WEBGL_depth_texture' );
+			extensions.get( 'OES_texture_float' );
+			extensions.get( 'OES_texture_float_linear' );
+			extensions.get( 'OES_texture_half_float' );
+			extensions.get( 'OES_texture_half_float_linear' );
+			extensions.get( 'OES_standard_derivatives' );
+			extensions.get( 'ANGLE_instanced_arrays' );
+
+			if ( extensions.get( 'OES_element_index_uint' ) ) {
+
+				BufferGeometry.MaxIndex = 4294967296;
+
+			}
+
+			capabilities = new WebGLCapabilities( _gl, extensions, parameters );
+
+			state = new WebGLState( _gl, extensions, paramThreeToGL );
+			state.scissor( _currentScissor.copy( _scissor ).multiplyScalar( _pixelRatio ) );
+			state.viewport( _currentViewport.copy( _viewport ).multiplyScalar( _pixelRatio ) );
+
+			properties = new WebGLProperties();
+			textures = new WebGLTextures( _gl, extensions, state, properties, capabilities, paramThreeToGL, _infoMemory );
+			attributes = new WebGLAttributes( _gl );
+			geometries = new WebGLGeometries( _gl, attributes, _infoMemory );
+			objects = new WebGLObjects( _gl, geometries, _infoRender );
+			programCache = new WebGLPrograms( _this, capabilities );
+			lightCache = new WebGLLights();
+			renderLists = new WebGLRenderLists();
+
+			background = new WebGLBackground( _this, state, objects, _premultipliedAlpha );
+
+			bufferRenderer = new WebGLBufferRenderer( _gl, extensions, _infoRender );
+			indexedBufferRenderer = new WebGLIndexedBufferRenderer( _gl, extensions, _infoRender );
+
+			_this.info.programs = programCache.programs;
 
 		}
 
-		var capabilities = new WebGLCapabilities( _gl, extensions, parameters );
+		initGLContext();
 
-		var state = new WebGLState( _gl, extensions, paramThreeToGL );
-
-		var properties = new WebGLProperties();
-		var textures = new WebGLTextures( _gl, extensions, state, properties, capabilities, paramThreeToGL, _infoMemory );
-		var attributes = new WebGLAttributes( _gl );
-		var geometries = new WebGLGeometries( _gl, attributes, _infoMemory );
-		var objects = new WebGLObjects( _gl, geometries, _infoRender );
-		var programCache = new WebGLPrograms( this, capabilities );
-		var lightCache = new WebGLLights();
-		var renderLists = new WebGLRenderLists();
-
-		var background = new WebGLBackground( this, state, objects, _premultipliedAlpha );
-		var vr = new WebVRManager( this );
-
-		this.info.programs = programCache.programs;
-
-		var bufferRenderer = new WebGLBufferRenderer( _gl, extensions, _infoRender );
-		var indexedBufferRenderer = new WebGLIndexedBufferRenderer( _gl, extensions, _infoRender );
+		var vr = new WebVRManager( _this );
 
 		//
 
@@ -20567,29 +20620,6 @@
 			return _currentRenderTarget === null ? _pixelRatio : 1;
 
 		}
-
-		function setDefaultGLState() {
-
-			state.init();
-
-			state.scissor( _currentScissor.copy( _scissor ).multiplyScalar( _pixelRatio ) );
-			state.viewport( _currentViewport.copy( _viewport ).multiplyScalar( _pixelRatio ) );
-
-		}
-
-		function resetGLState() {
-
-			_currentProgram = null;
-			_currentCamera = null;
-
-			_currentGeometryProgram = '';
-			_currentMaterialId = - 1;
-
-			state.reset();
-
-		}
-
-		setDefaultGLState();
 
 		this.context = _gl;
 		this.capabilities = capabilities;
@@ -20629,6 +20659,13 @@
 
 			var extension = extensions.get( 'WEBGL_lose_context' );
 			if ( extension ) extension.loseContext();
+
+		};
+
+		this.forceContextRestore = function () {
+
+			var extension = extensions.get( 'WEBGL_lose_context' );
+			if ( extension ) extension.restoreContext();
 
 		};
 
@@ -20784,13 +20821,12 @@
 
 		};
 
-		// Reset
-
-		this.resetGLState = resetGLState;
+		//
 
 		this.dispose = function () {
 
 			_canvas.removeEventListener( 'webglcontextlost', onContextLost, false );
+			_canvas.removeEventListener( 'webglcontextrestored', onContextRestore, false );
 
 			renderLists.dispose();
 
@@ -20802,11 +20838,19 @@
 
 			event.preventDefault();
 
-			resetGLState();
-			setDefaultGLState();
+			console.log( 'THREE.WebGLRenderer: Context Lost.' );
 
-			properties.clear();
-			objects.clear();
+			_isContextLost = true;
+
+		}
+
+		function onContextRestore( event ) {
+
+			console.log( 'THREE.WebGLRenderer: Context Restored.' );
+
+			_isContextLost = false;
+
+			initGLContext();
 
 		}
 
@@ -21365,6 +21409,8 @@
 
 			}
 
+			if ( _isContextLost ) return;
+
 			// reset caching for this frame
 
 			_currentGeometryProgram = '';
@@ -21702,10 +21748,10 @@
 
 		function renderObject( object, scene, camera, geometry, material, group ) {
 
+			object.onBeforeRender( _this, scene, camera, geometry, material, group );
+
 			object.modelViewMatrix.multiplyMatrices( camera.matrixWorldInverse, object.matrixWorld );
 			object.normalMatrix.getNormalMatrix( object.modelViewMatrix );
-
-			object.onBeforeRender( _this, scene, camera, geometry, material, group );
 
 			if ( object.isImmediateRenderObject ) {
 
@@ -21939,10 +21985,7 @@
 				p_uniforms = program.getUniforms(),
 				m_uniforms = materialProperties.shader.uniforms;
 
-			if ( program.id !== _currentProgram ) {
-
-				_gl.useProgram( program.program );
-				_currentProgram = program.id;
+			if ( state.useProgram( program.program ) ) {
 
 				refreshProgram = true;
 				refreshMaterial = true;
@@ -24530,21 +24573,6 @@
 	CompressedTexture.prototype.constructor = CompressedTexture;
 
 	CompressedTexture.prototype.isCompressedTexture = true;
-
-	/**
-	 * @author mrdoob / http://mrdoob.com/
-	 */
-
-	function CanvasTexture( canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy ) {
-
-		Texture.call( this, canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy );
-
-		this.needsUpdate = true;
-
-	}
-
-	CanvasTexture.prototype = Object.create( Texture.prototype );
-	CanvasTexture.prototype.constructor = CanvasTexture;
 
 	/**
 	 * @author Matt DesLauriers / @mattdesl
@@ -40650,7 +40678,7 @@
 	/**
 	 * @author mrdoob / http://mrdoob.com/
 	 * @author WestLangley / http://github.com/WestLangley
-	*/
+	 */
 
 	function VertexNormalsHelper( object, size, hex, linewidth ) {
 
@@ -40795,9 +40823,9 @@
 	 * @author alteredq / http://alteredqualia.com/
 	 * @author mrdoob / http://mrdoob.com/
 	 * @author WestLangley / http://github.com/WestLangley
-	*/
+	 */
 
-	function SpotLightHelper( light ) {
+	function SpotLightHelper( light, color ) {
 
 		Object3D.call( this );
 
@@ -40806,6 +40834,8 @@
 
 		this.matrix = light.matrixWorld;
 		this.matrixAutoUpdate = false;
+
+		this.color = color;
 
 		var geometry = new BufferGeometry();
 
@@ -40869,7 +40899,15 @@
 
 			this.cone.lookAt( vector2.sub( vector ) );
 
-			this.cone.material.color.copy( this.light.color );
+			if ( this.color !== undefined ) {
+
+				this.cone.material.color.set( this.color );
+
+			} else {
+
+				this.cone.material.color.copy( this.light.color );
+
+			}
 
 		};
 
@@ -40997,19 +41035,23 @@
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	function PointLightHelper( light, sphereSize ) {
+	function PointLightHelper( light, sphereSize, color ) {
 
 		this.light = light;
 		this.light.updateMatrixWorld();
 
+		this.color = color;
+
 		var geometry = new SphereBufferGeometry( sphereSize, 4, 2 );
 		var material = new MeshBasicMaterial( { wireframe: true, fog: false } );
-		material.color.copy( this.light.color );
 
 		Mesh.call( this, geometry, material );
 
 		this.matrix = this.light.matrixWorld;
 		this.matrixAutoUpdate = false;
+
+		this.update();
+
 
 		/*
 		var distanceGeometry = new THREE.IcosahedronGeometry( 1, 2 );
@@ -41047,7 +41089,15 @@
 
 	PointLightHelper.prototype.update = function () {
 
-		this.material.color.copy( this.light.color );
+		if ( this.color !== undefined ) {
+
+			this.material.color.set( this.color );
+
+		} else {
+
+			this.material.color.copy( this.light.color );
+
+		}
 
 		/*
 		var d = this.light.distance;
@@ -41072,7 +41122,7 @@
 	 * @author WestLangley / http://github.com/WestLangley
 	 */
 
-	function RectAreaLightHelper( light ) {
+	function RectAreaLightHelper( light, color ) {
 
 		Object3D.call( this );
 
@@ -41082,13 +41132,17 @@
 		this.matrix = light.matrixWorld;
 		this.matrixAutoUpdate = false;
 
-		var material = new LineBasicMaterial( { color: light.color } );
+		this.color = color;
+
+		var material = new LineBasicMaterial( { fog: false } );
 
 		var geometry = new BufferGeometry();
 
 		geometry.addAttribute( 'position', new BufferAttribute( new Float32Array( 5 * 3 ), 3 ) );
 
-		this.add( new Line( geometry, material ) );
+		this.line = new Line( geometry, material );
+		this.add( this.line );
+
 
 		this.update();
 
@@ -41106,18 +41160,12 @@
 
 	RectAreaLightHelper.prototype.update = function () {
 
-		var line = this.children[ 0 ];
-
-		// update material
-
-		line.material.color.copy( this.light.color );
-
 		// calculate new dimensions of the helper
 
 		var hx = this.light.width * 0.5;
 		var hy = this.light.height * 0.5;
 
-		var position = line.geometry.attributes.position;
+		var position = this.line.geometry.attributes.position;
 		var array = position.array;
 
 		// update vertices
@@ -41130,6 +41178,16 @@
 
 		position.needsUpdate = true;
 
+		if ( this.color !== undefined ) {
+
+			this.line.material.color.set( this.color );
+
+		} else {
+
+			this.line.material.color.copy( this.light.color );
+
+		}
+
 	};
 
 	/**
@@ -41138,7 +41196,7 @@
 	 * @author Mugen87 / https://github.com/Mugen87
 	 */
 
-	function HemisphereLightHelper( light, size ) {
+	function HemisphereLightHelper( light, size, color ) {
 
 		Object3D.call( this );
 
@@ -41148,17 +41206,20 @@
 		this.matrix = light.matrixWorld;
 		this.matrixAutoUpdate = false;
 
+		this.color = color;
+
 		var geometry = new OctahedronBufferGeometry( size );
 		geometry.rotateY( Math.PI * 0.5 );
 
-		var material = new MeshBasicMaterial( { vertexColors: VertexColors, wireframe: true } );
+		this.material = new MeshBasicMaterial( { wireframe: true, fog: false } );
+		if ( this.color === undefined ) this.material.vertexColors = VertexColors;
 
 		var position = geometry.getAttribute( 'position' );
 		var colors = new Float32Array( position.count * 3 );
 
 		geometry.addAttribute( 'color', new BufferAttribute( colors, 3 ) );
 
-		this.add( new Mesh( geometry, material ) );
+		this.add( new Mesh( geometry, this.material ) );
 
 		this.update();
 
@@ -41185,22 +41246,30 @@
 
 			var mesh = this.children[ 0 ];
 
-			var colors = mesh.geometry.getAttribute( 'color' );
+			if ( this.color !== undefined ) {
 
-			color1.copy( this.light.color );
-			color2.copy( this.light.groundColor );
+				this.material.color.set( this.color );
 
-			for ( var i = 0, l = colors.count; i < l; i ++ ) {
+			} else {
 
-				var color = ( i < ( l / 2 ) ) ? color1 : color2;
+				var colors = mesh.geometry.getAttribute( 'color' );
 
-				colors.setXYZ( i, color.r, color.g, color.b );
+				color1.copy( this.light.color );
+				color2.copy( this.light.groundColor );
+
+				for ( var i = 0, l = colors.count; i < l; i ++ ) {
+
+					var color = ( i < ( l / 2 ) ) ? color1 : color2;
+
+					colors.setXYZ( i, color.r, color.g, color.b );
+
+				}
+
+				colors.needsUpdate = true;
 
 			}
 
 			mesh.lookAt( vector.setFromMatrixPosition( this.light.matrixWorld ).negate() );
-
-			colors.needsUpdate = true;
 
 		};
 
@@ -41340,7 +41409,7 @@
 	/**
 	 * @author mrdoob / http://mrdoob.com/
 	 * @author WestLangley / http://github.com/WestLangley
-	*/
+	 */
 
 	function FaceNormalsHelper( object, size, hex, linewidth ) {
 
@@ -41452,7 +41521,7 @@
 	 * @author WestLangley / http://github.com/WestLangley
 	 */
 
-	function DirectionalLightHelper( light, size ) {
+	function DirectionalLightHelper( light, size, color ) {
 
 		Object3D.call( this );
 
@@ -41461,6 +41530,8 @@
 
 		this.matrix = light.matrixWorld;
 		this.matrixAutoUpdate = false;
+
+		this.color = color;
 
 		if ( size === undefined ) size = 1;
 
@@ -41475,12 +41546,14 @@
 
 		var material = new LineBasicMaterial( { fog: false } );
 
-		this.add( new Line( geometry, material ) );
+		this.lightPlane = new Line( geometry, material );
+		this.add( this.lightPlane );
 
 		geometry = new BufferGeometry();
 		geometry.addAttribute( 'position', new Float32BufferAttribute( [ 0, 0, 0, 0, 0, 1 ], 3 ) );
 
-		this.add( new Line( geometry, material ));
+		this.targetLine = new Line( geometry, material );
+		this.add( this.targetLine );
 
 		this.update();
 
@@ -41491,13 +41564,10 @@
 
 	DirectionalLightHelper.prototype.dispose = function () {
 
-		var lightPlane = this.children[ 0 ];
-		var targetLine = this.children[ 1 ];
-
-		lightPlane.geometry.dispose();
-		lightPlane.material.dispose();
-		targetLine.geometry.dispose();
-		targetLine.material.dispose();
+		this.lightPlane.geometry.dispose();
+		this.lightPlane.material.dispose();
+		this.targetLine.geometry.dispose();
+		this.targetLine.material.dispose();
 
 	};
 
@@ -41513,14 +41583,22 @@
 			v2.setFromMatrixPosition( this.light.target.matrixWorld );
 			v3.subVectors( v2, v1 );
 
-			var lightPlane = this.children[ 0 ];
-			var targetLine = this.children[ 1 ];
+			this.lightPlane.lookAt( v3 );
 
-			lightPlane.lookAt( v3 );
-			lightPlane.material.color.copy( this.light.color );
+			if ( this.color !== undefined ) {
 
-			targetLine.lookAt( v3 );
-			targetLine.scale.z = v3.length();
+				this.lightPlane.material.color.set( this.color );
+				this.targetLine.material.color.set( this.color );
+
+			} else {
+
+				this.lightPlane.material.color.copy( this.light.color );
+				this.targetLine.material.color.copy( this.light.color );
+
+			}
+
+			this.targetLine.lookAt( v3 );
+			this.targetLine.scale.z = v3.length();
 
 		};
 
@@ -41819,6 +41897,108 @@
 		this.update();
 
 		return this;
+
+	};
+
+	/**
+	 * @author WestLangley / http://github.com/WestLangley
+	 */
+
+	function Box3Helper( box, hex ) {
+
+		this.type = 'Box3Helper';
+
+		this.box = box;
+
+		var color = ( hex !== undefined ) ? hex : 0xffff00;
+
+		var indices = new Uint16Array( [ 0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2, 6, 3, 7 ] );
+
+		var positions = [ 1, 1, 1, - 1, 1, 1, - 1, - 1, 1, 1, - 1, 1, 1, 1, - 1, - 1, 1, - 1, - 1, - 1, - 1, 1, - 1, - 1 ];
+
+		var geometry = new BufferGeometry();
+
+		geometry.setIndex( new BufferAttribute( indices, 1 ) );
+
+		geometry.addAttribute( 'position', new Float32BufferAttribute( positions, 3 ) );
+
+		LineSegments.call( this, geometry, new LineBasicMaterial( { color: color } ) );
+
+		this.geometry.computeBoundingSphere();
+
+		this.onBeforeRender();
+
+	}
+
+	Box3Helper.prototype = Object.create( LineSegments.prototype );
+	Box3Helper.prototype.constructor = Box3Helper;
+
+	Box3Helper.prototype.onBeforeRender = function () {
+
+		var box = this.box;
+
+		if ( box.isEmpty() ) return;
+
+		box.getCenter( this.position );
+
+		box.getSize( this.scale );
+
+		this.scale.multiplyScalar( 0.5 );
+
+	};
+
+	/**
+	 * @author WestLangley / http://github.com/WestLangley
+	 */
+
+	function PlaneHelper( plane, size, hex ) {
+
+		this.type = 'PlaneHelper';
+
+		this.plane = plane;
+
+		this.size = ( size === undefined ) ? 1 : size;
+
+		var color = ( hex !== undefined ) ? hex : 0xffff00;
+
+		var positions = [ 1, - 1, 1, - 1, 1, 1, - 1, - 1, 1, 1, 1, 1, - 1, 1, 1, - 1, - 1, 1, 1, - 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0 ];
+
+		var geometry = new BufferGeometry();
+		geometry.addAttribute( 'position', new Float32BufferAttribute( positions, 3 ) );
+		geometry.computeBoundingSphere();
+
+		Line.call( this, geometry, new LineBasicMaterial( { color: color } ) );
+
+		//
+
+		var positions2 = [ 1, 1, 1, - 1, 1, 1, - 1, - 1, 1, 1, 1, 1, - 1, - 1, 1, 1, - 1, 1 ];
+
+		var geometry2 = new BufferGeometry();
+		geometry2.addAttribute( 'position', new Float32BufferAttribute( positions2, 3 ) );
+		geometry2.computeBoundingSphere();
+
+		this.add( new Mesh( geometry2, new MeshBasicMaterial( { color: color, opacity: 0.2, transparent: true, depthWrite: false } ) ) );
+
+		//
+
+		this.onBeforeRender();
+
+	}
+
+	PlaneHelper.prototype = Object.create( Line.prototype );
+	PlaneHelper.prototype.constructor = PlaneHelper;
+
+	PlaneHelper.prototype.onBeforeRender = function () {
+
+		var scale = - this.plane.constant;
+
+		if ( Math.abs( scale ) < 1e-8 ) scale = 1e-8; // sign does not matter
+
+		this.scale.set( 0.5 * this.size, 0.5 * this.size, scale );
+
+		this.lookAt( this.plane.normal );
+
+		this.updateMatrixWorld();
 
 	};
 
@@ -43856,6 +44036,8 @@
 	exports.DirectionalLightHelper = DirectionalLightHelper;
 	exports.CameraHelper = CameraHelper;
 	exports.BoxHelper = BoxHelper;
+	exports.Box3Helper = Box3Helper;
+	exports.PlaneHelper = PlaneHelper;
 	exports.ArrowHelper = ArrowHelper;
 	exports.AxisHelper = AxisHelper;
 	exports.CatmullRomCurve3 = CatmullRomCurve3;
