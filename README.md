@@ -113,6 +113,9 @@
 	- Camera preview positioning
 	- Cubemaps from equirectangular projection
 	- Binary project files
+	
+	
+	
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
