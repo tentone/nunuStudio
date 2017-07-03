@@ -224,7 +224,7 @@ Scene.prototype.setFogMode = function(mode)
  */
 Scene.prototype.toJSON = function(meta)
 {
-	if(this.parent !== null && this.parent.type !== "Program")
+	if(this.parent.type !== "Program")
 	{
 		this.type = "Group";
 		console.warn("nunuStudio: Scene is not on top level serializing as Group.");
