@@ -105,11 +105,11 @@ Settings.load = function()
 		{
 			var data = JSON.parse(Cookies.get("config"));
 		}
-		
-		Settings.general = data.general;
-		Settings.editor = data.editor;
-		Settings.render = data.render;
-		Settings.code = data.code;
+
+		for(var i in data)
+		{
+			Settings[i] = data[i];
+		}
 	}
 	catch(e)
 	{
