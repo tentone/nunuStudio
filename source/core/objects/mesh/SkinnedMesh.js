@@ -78,3 +78,34 @@ SkinnedMesh.prototype.dispose = function()
  * @param {Skeleton} skeleton
  * @param {Matrix4} bindMatrix
  */
+
+/**
+ * Serializa skinned mesh to json.
+ *
+ * @method toJSON
+ * @param {Object} meta Metadata
+ */
+SkinnedMesh.prototype.toJSON = function(meta)
+{
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+
+	if(this.bindMode !== undefined)
+	{
+		data.object.bindMode = this.bindMode;
+	}
+
+	if(this.bindMatrix !== undefined)
+	{
+		data.object.bindMatrix = this.bindMatrix.toArray();
+	}
+
+	if(this.skeleton !== undefined)
+	{
+		if(meta.skeletons[this.skeleton.uuid] === undefined)
+		{
+			meta.skeletons[this.skeleton.uuid] = this.skeleton.toJSON(meta);
+		}
+
+		data.object.skeleton = this.skeleton.uuid;
+	}
+};
