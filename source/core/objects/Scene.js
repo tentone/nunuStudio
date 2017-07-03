@@ -224,6 +224,13 @@ Scene.prototype.setFogMode = function(mode)
  */
 Scene.prototype.toJSON = function(meta)
 {
+	if(this.parent !== null && this.parent.type !== "Program")
+	{
+		this.type = "Group";
+		console.warn("nunuStudio: Scene is not on top level serializing as Group.");
+		return THREE.Object3D.prototype.toJSON.call(this, meta);
+	}
+
 	var background = this.background;
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{
