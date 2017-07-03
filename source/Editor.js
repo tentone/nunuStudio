@@ -1354,7 +1354,10 @@ Editor.loadGeometry = function(file, onLoad)
 					{
 						if(gltf.scene !== undefined)
 						{
-							Editor.addToScene(gltf.scene);
+							for(var i = 0; i < gltf.scene.children.length; i++)
+							{
+								Editor.addToScene(gltf.scene.children[i]);
+							}
 						}
 					});
 				}
