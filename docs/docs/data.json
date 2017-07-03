@@ -6952,6 +6952,22 @@
             "module": "Meshes"
         },
         {
+            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 82,
+            "description": "Serializa skinned mesh to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Metadata",
+                    "type": "Object"
+                }
+            ],
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
             "line": 21,
             "description": "Material is used to define how the geometry surface is shaded",
@@ -10168,7 +10184,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 447,
+            "line": 428,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -10184,7 +10200,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 453,
+            "line": 434,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -10200,7 +10216,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 459,
+            "line": 440,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -10216,7 +10232,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 465,
+            "line": 446,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -10232,7 +10248,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 471,
+            "line": 452,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -10248,7 +10264,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 477,
+            "line": 458,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -10264,7 +10280,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 483,
+            "line": 464,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -10280,7 +10296,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 489,
+            "line": 470,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -10301,7 +10317,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 496,
+            "line": 477,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -10317,7 +10333,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 502,
+            "line": 483,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -10338,7 +10354,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 509,
+            "line": 490,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -10357,7 +10373,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 515,
+            "line": 496,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -10373,7 +10389,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 521,
+            "line": 502,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldRotation",
@@ -10389,7 +10405,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 527,
+            "line": 508,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -10405,7 +10421,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 533,
+            "line": 514,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -10421,7 +10437,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 539,
+            "line": 520,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -10442,7 +10458,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 546,
+            "line": 527,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -10458,7 +10474,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 552,
+            "line": 533,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -10474,7 +10490,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\Object3D.js",
-            "line": 558,
+            "line": 539,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -11630,13 +11646,13 @@
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
             "line": 350,
-            "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.",
+            "description": "Open file chooser dialog receives onLoad callback, file filter, saveas.\n\nSave mode does not work inside the browser.\n\nThe onLoad callback receives as array of files as parameter.",
             "itemtype": "method",
             "name": "chooseFile",
             "params": [
                 {
                     "name": "onLoad",
-                    "description": "onLoad callback",
+                    "description": "onLoad callback that receives array of files choosen as parameter",
                     "type": "Function"
                 },
                 {
@@ -11655,7 +11671,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 386,
+            "line": 392,
             "description": "Used as an alternative to chooseFile for saving files in the browser.\n\nUses a prompt to question the user the file name.",
             "itemtype": "method",
             "name": "chooseFileName",
@@ -11676,7 +11692,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 413,
+            "line": 419,
             "description": "Copy file (cannot be used to copy folders).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFile",
@@ -11697,7 +11713,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 433,
+            "line": 439,
             "description": "Make a directory (dont trow exeption if directory already exists).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "makeDirectory",
@@ -11713,7 +11729,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 450,
+            "line": 456,
             "description": "Returns files in directory (returns empty array in case of error).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "getFilesDirectory",
@@ -11726,7 +11742,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 477,
+            "line": 483,
             "description": "Copy folder and all its files (includes symbolic links).\n\nOnly works when running inside NWJS.",
             "itemtype": "method",
             "name": "copyFolder",
@@ -11747,7 +11763,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 521,
+            "line": 527,
             "description": "Check if a file exists.\n\nOnly works inside of NWJS. When running inside the browser always returns false.",
             "itemtype": "method",
             "name": "fileExists",
@@ -11767,7 +11783,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 542,
+            "line": 548,
             "description": "Get file name without extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.",
             "itemtype": "method",
             "name": "getFileName",
@@ -11787,7 +11803,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 564,
+            "line": 570,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -11807,7 +11823,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 583,
+            "line": 589,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -11827,7 +11843,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 605,
+            "line": 611,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",

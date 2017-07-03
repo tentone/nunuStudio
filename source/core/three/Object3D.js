@@ -338,25 +338,6 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		object.userData = this.userData;
 	}
 
-	//SkinnedMesh specific
-	if(this.bindMode !== undefined)
-	{
-		object.bindMode = this.bindMode;
-	}
-	if(this.bindMatrix !== undefined)
-	{
-		object.bindMatrix = this.bindMatrix.toArray();
-	}
-	if(this.skeleton !== undefined)
-	{
-		if(meta.skeletons[this.skeleton.uuid] === undefined)
-		{
-			meta.skeletons[this.skeleton.uuid] = this.skeleton.toJSON(meta);
-		}
-
-		object.skeleton = this.skeleton.uuid;
-	}
-
 	//Serialize geometry
 	if(this.geometry !== undefined)
 	{

@@ -352,8 +352,10 @@ FileSystem.writeFileArrayBuffer = function(fname, data)
  *
  * Save mode does not work inside the browser.
  *
+ * The onLoad callback receives as array of files as parameter.
+ *
  * @method chooseFile
- * @param {Function} onLoad onLoad callback
+ * @param {Function} onLoad onLoad callback that receives array of files choosen as parameter
  * @param {String} filter File type filter
  * @param {String} saveas Save as format can be also a boolean value
  */
@@ -361,6 +363,8 @@ FileSystem.chooseFile = function(onLoad, filter, saveas)
 {
 	var chooser = document.createElement("input");
 	chooser.type = "file";
+	chooser.style.display = "none";
+	document.body.appendChild(chooser);
 
 	if(filter !== undefined)
 	{
@@ -373,6 +377,8 @@ FileSystem.chooseFile = function(onLoad, filter, saveas)
 		{
 			onLoad(chooser.files);
 		}
+
+		document.body.removeChild(chooser);
 	};
 
 	if(saveas !== undefined)
