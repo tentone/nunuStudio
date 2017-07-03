@@ -1,3 +1,4 @@
 *.db
 *.log
 node_modules
+nwjs
