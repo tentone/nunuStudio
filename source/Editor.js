@@ -540,7 +540,7 @@ Editor.update = function()
 	{
 		Editor.renameObject();
 	}
-		
+
 	requestAnimationFrame(Editor.update);
 };
 
@@ -620,23 +620,28 @@ Editor.renameObject = function(obj)
 //Delete selected Object
 Editor.deleteObject = function(obj)
 {
-	if(obj === undefined)
-	{
-		obj = Editor.selectedObject;
-	}
-	
-	if(obj instanceof THREE.Object3D)
-	{
-		if(Editor.isObjectSelected(obj))
+	var del = confirm("Delete object?");
+
+	if(del)
+	{ 
+		if(obj === undefined)
 		{
-			Editor.resetEditingFlags();
+			obj = Editor.selectedObject;
 		}
-
-		Editor.history.push(obj, Action.REMOVED);
 		
-		obj.destroy();
+		if(obj instanceof THREE.Object3D)
+		{
+			if(Editor.isObjectSelected(obj))
+			{
+				Editor.resetEditingFlags();
+			}
 
-		Editor.updateObjectViews();
+			Editor.history.push(obj, Action.REMOVED);
+			
+			obj.destroy();
+
+			Editor.updateObjectViews();
+		}
 	}
 };
 
