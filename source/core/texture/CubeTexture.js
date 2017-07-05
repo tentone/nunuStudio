@@ -174,11 +174,7 @@ CubeTexture.prototype.setSize = function(size)
  */
 CubeTexture.prototype.setImages = function(images, mode)
 {
-	if(mode !== undefined)
-	{
-		this.mode = mode;
-	}
-	
+	this.mode = (mode !== undefined) ? mode : CubeTexture.CUBE;
 	this.images = images;
 };
 

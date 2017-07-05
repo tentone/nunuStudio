@@ -52,6 +52,10 @@ function Image(url)
 			}
 		}
 	}
+	else
+	{
+		this.createSolidColor();
+	}
 }
 
 Image.prototype = Object.create(Resource.prototype);
@@ -78,6 +82,30 @@ Image.fileIsImage = function(file)
 	}
 
 	return false;
+};
+
+/**
+ * Create a new image with 1x1 resolution with solid color.
+ *
+ * Can be called externally on data load error to load dummy data.
+ *
+ * @method createSolidColor
+ * @param {String} color Color code
+ */
+Image.prototype.createSolidColor = function(color)
+{
+	this.format = "base64";
+	this.encoding = "png";
+
+	var canvas = document.createElement("canvas");
+	canvas.width = 1;
+	canvas.height = 1;
+
+	var context = canvas.getContext("2d");
+	context.fillStyle = (color !== undefined) ? color : MathUtils.randomColor();
+	context.fillRect(0, 0, 1, 1);
+
+	this.data = canvas.toDataURL("image/png");
 };
 
 /**
@@ -129,6 +157,7 @@ Image.prototype.encodeData = function()
 	var context = canvas.getContext("2d");
 	context.drawImage(image, 0, 0, image.width, image.height);
 
+	//Check if the image has some tranparency
 	var transparent = false;
 	var data = context.getImageData(0, 0, image.width, image.height).data;
 	for(var i = 3; i < data.length; i += 4)
@@ -140,6 +169,7 @@ Image.prototype.encodeData = function()
 		}
 	}
 
+	//Encode data
 	if(transparent)
 	{
 		this.format = "base64";

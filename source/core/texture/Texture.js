@@ -78,10 +78,17 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 
 	//Image source
 	this.image.src = this.img.data;
+	
 	this.image.onload = function()
 	{
 		self.needsUpdate = true;
-	}
+	};
+
+	this.image.onerror = function()
+	{
+		self.img.createSolidColor();
+		self.image.src = self.img.data;
+	};
 
 	//Check if image is animated
 	if(this.img.encoding === "gif")
@@ -93,7 +100,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 				self.needsUpdate = true;
 				requestAnimationFrame(update);
 			}
-		};
+		}
 		
 		update();
 	}

@@ -112,7 +112,7 @@
 			<pre><code>var audio;
 var time, clock;
 
-this.initialize = function()
+function initialize()
 {
 	audio = scene.getObjectByName("test");
 	
@@ -120,9 +120,9 @@ this.initialize = function()
 	clock.start();
 	
 	time = 0;
-};
+}
 
-this.update = function()
+function update()
 {
 	time += clock.getDelta();
 	
@@ -140,7 +140,7 @@ this.update = function()
 		audio.setVolume(1.0);
 		audio.play();
 	}
-};</code></pre>
+}</code></pre>
 		</div>
 	</section>
 
