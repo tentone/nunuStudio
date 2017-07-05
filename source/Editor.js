@@ -1716,14 +1716,6 @@ Editor.exportMacOSProject = function(dir)
 	Editor.exportNWJSProject(dir);
 };
 
-//Export object
-/*Editor.exportObject = function(obj, fname)
-{
-	var data = JSON.stringify(obj.toJSON());
-
-	//TODO <ADD CODE HERE>
-}*/
-
 //Set fullscreen mode
 Editor.setFullscreen = function(fullscreen, element)
 {
