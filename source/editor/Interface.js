@@ -19,8 +19,8 @@ Interface.initialize = function()
 
 	//Bottom tab
 	Interface.bottomTab = new TabGroup(Interface.bottomDiv.element);
-	Interface.bottomTab.mode = TabGroup.BOTTOM;
-	Interface.bottomTab.buttonSize = new THREE.Vector2(130, 22);
+	Interface.bottomTab.mode = TabGroup.LEFT;
+	Interface.bottomTab.buttonSize = new THREE.Vector2(25, 25);
 	Interface.bottomTab.element.style.backgroundColor = Editor.theme.barColor;
 
 	//Asset explorer
