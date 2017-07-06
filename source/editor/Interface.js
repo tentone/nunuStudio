@@ -4,23 +4,31 @@ function Interface(){}
 
 Interface.initialize = function()
 {
-	//Tab Container
+	//Main tab container
 	Interface.tab = new TabGroup();
 
 	//Message
 	Interface.message = new Message();
 	
-	//Asset Manager
+	//Bottom resizable division
 	Interface.bottomDiv = new DivisionResizable();
 	Interface.bottomDiv.resizableSide = DivisionResizable.TOP;
 	Interface.bottomDiv.size.y = 150;
 	Interface.bottomDiv.resizeSizeMin = 100;
 	Interface.bottomDiv.resizeSizeMax = 400;
 
+	//Bottom tab
+	Interface.bottomTab = new TabGroup(Interface.bottomDiv.element);
+	Interface.bottomTab.mode = TabGroup.BOTTOM;
+	Interface.bottomTab.buttonSize = new THREE.Vector2(130, 22);
+	Interface.bottomTab.element.style.backgroundColor = Editor.theme.barColor;
+
 	//Asset explorer
-	Interface.assetExplorer = new AssetExplorer(Interface.bottomDiv.element);
+	Interface.assetExplorer = Interface.bottomTab.addTab(AssetExplorer, false);
 	Interface.assetExplorer.filesSize.set(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
-	
+
+	Interface.console = Interface.bottomTab.addTab(ConsoleTab, false);
+
 	//Explorer
 	Interface.explorer = new DivisionResizable();
 	Interface.explorer.size.x = 300;
@@ -802,14 +810,14 @@ Interface.updateInterface = function()
 	//Bottom division
 	Interface.bottomDiv.size.x = size.x - Interface.explorer.size.x - Interface.toolBar.size.x;
 	Interface.bottomDiv.position.set(Interface.toolBar.size.x, size.y - Interface.bottomDiv.size.y);
-	Interface.bottomDiv.resizeSizeMax = size.y * 0.6;
+	Interface.bottomDiv.resizeSizeMax = size.y * 0.7;
 	Interface.bottomDiv.updateInterface();
 
-	//Asset explorere
-	Interface.assetExplorer.size.x = Interface.bottomDiv.size.x;
-	Interface.assetExplorer.size.y = Interface.bottomDiv.size.y;
-	Interface.assetExplorer.updateInterface();
-
+	//Bottom tab group
+	Interface.bottomTab.size.x = Interface.bottomDiv.size.x;
+	Interface.bottomTab.size.y = Interface.bottomDiv.size.y - 5;
+	Interface.bottomTab.updateInterface();
+	
 	//Tab Container
 	Interface.tab.position.set(Interface.toolBar.size.x, Interface.topBar.size.y);
 	Interface.tab.size.x = (size.x - Interface.toolBar.size.x - Interface.explorer.size.x);

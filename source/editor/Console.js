@@ -7,16 +7,31 @@ console.messages = [];
 
 console.log = function()
 {
+	if(Interface.console !== undefined)
+	{
+		Interface.console.log(arguments);
+	}
+
 	_console.log.apply(null, arguments);
 };
 
 console.warn = function()
 {
+	if(Interface.console !== undefined)
+	{
+		Interface.console.warn(arguments);
+	}
+
 	_console.warn.apply(null, arguments);
 };
 
 console.error = function()
 {
+	if(Interface.console !== undefined)
+	{
+		Interface.console.error(arguments);
+	}
+
 	_console.error.apply(null, arguments);
 };
 
