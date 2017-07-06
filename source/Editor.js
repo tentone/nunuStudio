@@ -215,7 +215,6 @@ include("editor/ui/DropdownMenu.js");
 include("editor/ui/TreeView.js");
 include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
-include("editor/ui/AssetExplorer.js");
 include("editor/ui/TabGroup.js");
 include("editor/ui/TabElement.js");
 include("editor/ui/TabButton.js");
@@ -226,6 +225,8 @@ include("editor/ui/asset/TextureAsset.js");
 include("editor/ui/asset/FontAsset.js");
 include("editor/ui/asset/AudioAsset.js");
 
+include("editor/ui/tab/ConsoleTab.js");
+include("editor/ui/tab/AssetExplorer.js");
 include("editor/ui/tab/ScriptEditor.js");
 include("editor/ui/tab/SceneEditor.js");
 include("editor/ui/tab/ParticleEditor.js");
@@ -305,6 +306,7 @@ include("editor/utils/CodemirrorThemes.js");
 include("editor/history/History.js");
 include("editor/history/Action.js");
 
+include("editor/Console.js");
 include("editor/Clipboard.js");
 include("editor/DragBuffer.js");
 include("editor/Interface.js");
