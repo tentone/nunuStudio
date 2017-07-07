@@ -4,6 +4,8 @@ function ConsoleTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Console", Editor.filePath + "icons/misc/console.png");
 
+	this.history = [];
+
 	this.console = document.createElement("div");
 	this.console.style.overflow = "auto";
 	this.console.style.top = "0px";
@@ -35,7 +37,7 @@ function ConsoleTab(parent, closeable, container, index)
 
 	this.code.onkeydown = function(event)
 	{
-		if(event.keyCode === 13)
+		if(event.keyCode === Keyboard.ENTER)
 		{
 			try
 			{
@@ -46,22 +48,74 @@ function ConsoleTab(parent, closeable, container, index)
 				console.error(e);
 			}
 
+			self.history.push(this.value);
 			this.value = "";
+		}
+		else if(event.keyCode === Keyboard.UP)
+		{
+			if(self.history.length > 0)
+			{
+				this.value = self.history.pop();
+			}
 		}
 	};
 }
 
 ConsoleTab.prototype = Object.create(TabElement.prototype);
 
+
+ConsoleTab.createNessage = function(object)
+{
+	var log = document.createElement("div");
+	//log.style.borderBottomStyle = "solid";
+	//log.style.borderWidth = "1px";
+	//log.style.borderColor = "#222222";
+	log.style.width = "100%";
+	log.style.color = "#FFFFFF";
+
+	if(object instanceof Image)
+	{
+		var image = args[i];
+
+		var img = document.createElement("img");
+		img.src = image.data;
+		img.height = 70;
+		log.appendChild(img);
+
+		var table = document.createElement("table");
+		table.style.display = "inline-block";
+
+		var name = table.insertRow(0);
+		name.insertCell(0).innerHTML = "Name";
+		name.insertCell(1).innerHTML = image.name;
+
+		var uuid = table.insertRow(1);
+		uuid.insertCell(0).innerHTML = "UUID";
+		uuid.insertCell(1).innerHTML = image.uuid;
+
+		var format = table.insertRow(2);
+		format.insertCell(0).innerHTML = "Format";
+		format.insertCell(1).innerHTML = image.format;
+
+		var encoding = table.insertRow(3);
+		encoding.insertCell(0).innerHTML = "Encoding";
+		encoding.insertCell(1).innerHTML = image.encoding;
+		log.appendChild(table);
+	}
+	else
+	{
+		log.innerHTML = args[i];
+	}
+
+	return log;
+};
+
 //Normal log messsage
 ConsoleTab.prototype.log = function(args)
 {
 	for(var i = 0; i < args.length; i++)
 	{
-		var log = document.createElement("p");
-		log.innerHTML = args[i];
-
-		this.console.appendChild(log);
+		this.console.appendChild(ConsoleTab.createNessage(args[i]));
 	}
 
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
@@ -72,10 +126,8 @@ ConsoleTab.prototype.warn = function(args)
 {
 	for(var i = 0; i < args.length; i++)
 	{
-		var log = document.createElement("p");
+		var log = ConsoleTab.createNessage(args[i]);
 		log.style.color = "#FFFF00";
-		log.innerHTML = args[i];
-
 		this.console.appendChild(log);
 	}
 
@@ -87,10 +139,8 @@ ConsoleTab.prototype.error = function(args)
 {
 	for(var i = 0; i < args.length; i++)
 	{
-		var log = document.createElement("p");
+		var log = ConsoleTab.createNessage(args[i]);
 		log.style.color = "#FF0000";
-		log.innerHTML = args[i];
-
 		this.console.appendChild(log);
 	}
 
@@ -117,3 +167,4 @@ ConsoleTab.prototype.updateInterface = function()
 		this.element.style.display = "none";
 	}
 };
+
