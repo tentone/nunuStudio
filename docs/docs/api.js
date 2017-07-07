@@ -49,6 +49,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "RectAreaLight",
         "Resource",
         "ResourceManager",
+        "RoundedBoxBufferGeometry",
         "Scene",
         "Script",
         "Skeleton",
@@ -80,6 +81,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Core",
         "Devices",
         "Files",
+        "Geometry",
         "Input",
         "Lights",
         "Loaders",
@@ -137,6 +139,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Files",
             "name": "Files",
             "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere."
+        },
+        {
+            "displayName": "Geometry",
+            "name": "Geometry",
+            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normal and uv."
         },
         {
             "displayName": "Input",

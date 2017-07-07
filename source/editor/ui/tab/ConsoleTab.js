@@ -63,51 +63,85 @@ function ConsoleTab(parent, closeable, container, index)
 
 ConsoleTab.prototype = Object.create(TabElement.prototype);
 
-
+//Create a new log division element and fill with information from the object
 ConsoleTab.createNessage = function(object)
 {
 	var log = document.createElement("div");
-	//log.style.borderBottomStyle = "solid";
-	//log.style.borderWidth = "1px";
-	//log.style.borderColor = "#222222";
 	log.style.width = "100%";
 	log.style.color = "#FFFFFF";
 
 	if(object instanceof Image)
 	{
-		var image = args[i];
-
-		var img = document.createElement("img");
-		img.src = image.data;
-		img.height = 70;
-		log.appendChild(img);
+		var preview = document.createElement("img");
+		preview.src = object.data;
+		preview.height = 70;
+		log.appendChild(preview);
 
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
 
-		var name = table.insertRow(0);
+		var type = table.insertRow(0);
+		type.insertCell(0).innerHTML = "Image";
+
+		var name = table.insertRow(1);
 		name.insertCell(0).innerHTML = "Name";
-		name.insertCell(1).innerHTML = image.name;
+		name.insertCell(1).innerHTML = object.name;
 
-		var uuid = table.insertRow(1);
+		var uuid = table.insertRow(2);
 		uuid.insertCell(0).innerHTML = "UUID";
-		uuid.insertCell(1).innerHTML = image.uuid;
+		uuid.insertCell(1).innerHTML = object.uuid;
 
-		var format = table.insertRow(2);
+		var format = table.insertRow(3);
 		format.insertCell(0).innerHTML = "Format";
-		format.insertCell(1).innerHTML = image.format;
+		format.insertCell(1).innerHTML = object.format;
 
-		var encoding = table.insertRow(3);
+		var encoding = table.insertRow(4);
 		encoding.insertCell(0).innerHTML = "Encoding";
-		encoding.insertCell(1).innerHTML = image.encoding;
+		encoding.insertCell(1).innerHTML = object.encoding;
+
 		log.appendChild(table);
+	}
+	else if(object instanceof THREE.Texture)
+	{
+		var preview = TexturePreview.generate(object);
+		preview.height = 70;
+		log.appendChild(preview);
+
+		var table = document.createElement("table");
+		table.style.display = "inline-block";
+
+		var type = table.insertRow(0);
+		type.insertCell(0).innerHTML = "Texture";
+
+		var name = table.insertRow(1);
+		name.insertCell(0).innerHTML = "Name";
+		name.insertCell(1).innerHTML = object.name;
+
+		var uuid = table.insertRow(2);
+		uuid.insertCell(0).innerHTML = "UUID";
+		uuid.insertCell(1).innerHTML = object.uuid;
+
+		log.appendChild(table);
+	}
+	else if(object === null)
+	{
+		log.innerHTML = "null";
 	}
 	else
 	{
-		log.innerHTML = args[i];
+		log.innerHTML = object;
 	}
 
 	return log;
+};
+
+ConsoleTab.createBar = function()
+{
+	var bar = document.createElement("div");
+	bar.style.width = "100%";
+	bar.style.height = "1px";
+	bar.style.backgroundColor = Editor.theme.barColor;
+	return bar;
 };
 
 //Normal log messsage
@@ -118,6 +152,7 @@ ConsoleTab.prototype.log = function(args)
 		this.console.appendChild(ConsoleTab.createNessage(args[i]));
 	}
 
+	this.console.appendChild(ConsoleTab.createBar());
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
@@ -131,6 +166,7 @@ ConsoleTab.prototype.warn = function(args)
 		this.console.appendChild(log);
 	}
 
+	this.console.appendChild(ConsoleTab.createBar());
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
@@ -144,13 +180,13 @@ ConsoleTab.prototype.error = function(args)
 		this.console.appendChild(log);
 	}
 
+	this.console.appendChild(ConsoleTab.createBar());
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
 //Update interface
 ConsoleTab.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.display = "block";

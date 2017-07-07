@@ -235,71 +235,8 @@ TextureAsset.prototype = Object.create(Asset.prototype);
 TextureAsset.prototype.setTexture = function(texture)
 {
 	this.texture = texture;
+	this.preview = TexturePreview.generate(texture);
 
-	//Video
-	if(texture instanceof VideoTexture || texture instanceof WebcamTexture)
-	{
-		this.preview = document.createElement("video");
-		this.preview.volume = 0.0;
-		this.preview.loop = true;
-		this.preview.autostart = true;
-		this.preview.src = texture.image.src;
-	}
-	//Cube texture
-	else if(texture instanceof CubeTexture)
-	{
-		if(texture.mode === CubeTexture.CUBE)
-		{
-			this.preview = document.createElement("canvas");
-			this.preview.width = 128;
-			this.preview.height = 128;
-
-			var context = this.preview.getContext("2d");
-
-			for(var i = 0; i < texture.images.length; i++)
-			{
-				var image = document.createElement("img");
-				image.index = i;
-				image.onload = function()
-				{
-					if(this.index === 2)
-					{
-						context.drawImage(this, 32, 16, 32, 32);
-					}
-					else if(this.index === 3)
-					{
-						context.drawImage(this, 32, 80, 32, 32);
-					}
-					else
-					{
-						var order = [2, 0, null, null, 1, 3]
-						context.drawImage(this, order[this.index] * 32, 48, 32, 32);
-					}
-				}
-				image.src = texture.images[i].data;
-			}
-		}
-		else
-		{
-			this.preview = document.createElement("img");
-			this.preview.src = texture.images[0].data;
-		}
-
-	}
-	//Canvas texture
-	else if(texture instanceof CanvasTexture)
-	{
-		this.preview = document.createElement("img");
-		this.preview.src = texture.image.toDataURL();
-	}
-	//Image
-	else if(texture instanceof THREE.Texture)
-	{
-		this.preview = document.createElement("img");
-		this.preview.src = texture.image.src;
-	}
-
-	//Add preview to parent
 	if(this.preview !== null)
 	{
 		this.preview.draggable = true;

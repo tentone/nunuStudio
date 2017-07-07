@@ -12,6 +12,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\geometries\\RoundedBoxBufferGeometry.js": {
+            "name": "..\\..\\source\\core\\geometries\\RoundedBoxBufferGeometry.js",
+            "modules": {
+                "Geometry": 1
+            },
+            "classes": {
+                "RoundedBoxBufferGeometry": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\input\\Gamepad.js": {
             "name": "..\\..\\source\\core\\input\\Gamepad.js",
             "modules": {
@@ -686,6 +697,49 @@
             "line": 3,
             "description": "VRControl is used to get input from an HDM device and apply it to an Object."
         },
+        "Geometry": {
+            "name": "Geometry",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "RoundedBoxBufferGeometry": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\..\\source\\core\\geometries\\RoundedBoxBufferGeometry.js",
+            "line": 3,
+            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normal and uv.",
+            "author": "pailhead",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "width",
+                    "description": "Box width.",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "Box height.",
+                    "type": "Number"
+                },
+                {
+                    "name": "depth",
+                    "description": "Box depth.",
+                    "type": "Number"
+                },
+                {
+                    "name": "radius",
+                    "description": "Corner round radius.",
+                    "type": "Number"
+                },
+                {
+                    "name": "radiusSegments",
+                    "description": "Corner radius segments.",
+                    "type": "Number"
+                }
+            ]
+        },
         "Input": {
             "name": "Input",
             "submodules": {},
@@ -1072,6 +1126,22 @@
             "description": "VRControl is used to get input from an HDM device and apply it to an Object.",
             "is_constructor": 1,
             "author": "dmarcos (https://github.com/dmarcos)"
+        },
+        "RoundedBoxBufferGeometry": {
+            "name": "RoundedBoxBufferGeometry",
+            "shortname": "RoundedBoxBufferGeometry",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Geometry",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\geometries\\RoundedBoxBufferGeometry.js",
+            "line": 3,
+            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normal and uv.",
+            "author": "pailhead",
+            "is_constructor": 1
         },
         "Gamepad": {
             "name": "Gamepad",
