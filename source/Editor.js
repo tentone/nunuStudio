@@ -219,6 +219,8 @@ include("editor/ui/TabGroup.js");
 include("editor/ui/TabElement.js");
 include("editor/ui/TabButton.js");
 
+include("editor/ui/preview/TexturePreview.js");
+
 include("editor/ui/asset/Asset.js");
 include("editor/ui/asset/MaterialAsset.js");
 include("editor/ui/asset/TextureAsset.js");
