@@ -588,21 +588,14 @@ NunuApp.prototype.toggleVR = function()
  */
 NunuApp.prototype.setFullscreen = function(fullscreen, element)
 {
-	if(fullscreen !== undefined)
-	{
-		this.fullscreen = fullscreen;
-	}
-	else
-	{
-		this.fullscreen = !this.fullscreen;
-	}
+	this.fullscreen = (fullscreen !== undefined) ? fullscreen : !this.fullscreen;
 
 	//Enter fullscreen
 	if(this.fullscreen)
 	{
 		if(element === undefined)
 		{
-			element = document.body;
+			element = this.canvas;//document.body;
 		}
 		
 		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;

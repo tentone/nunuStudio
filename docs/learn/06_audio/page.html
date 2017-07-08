@@ -16,11 +16,12 @@
 	<!--Javascript-->
 	<script src="../../lib/jquery.min.js"></script>
 	<script src="../../lib/bootstrap.min.js"></script>
+	<script src="../../editor/nunu.min.js"></script>
 	<script src="../../lib/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>	
+	<script src="../js/embed.js"></script>
 </head>
 
-<body>
+<body onload="initialize('audio.nsp',  'canvas');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -141,6 +142,11 @@ function update()
 		audio.play();
 	}
 }</code></pre>
+			<h3 class="black">Example project</h3>
+			<p>The example bellow shows how to controll a positional audio object. When the mouse left button is pressed the sound starts playing, and when it is pressed again it stops. To try this example in the editor you can download the <a class="underline" href="audio.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/06_audio/audio.nsp">Web Editor</a>.</p>
+			<div>
+				<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
 		</div>
 	</section>
 

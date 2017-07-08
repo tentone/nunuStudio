@@ -74,8 +74,9 @@
 			<h3 class="black">Comparison</h3>
 			<p>In the demo bellow we can see booth a perspective camera (on the left) and a orthographic camera (on the right) in action.</p>
 			<p>To try this example in the editor you can download the <a class="underline" href="cameras.isp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/03_camera/cameras.isp">Web Editor</a>.</p>
-			<canvas id="canvas" width="800" height="480" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
-
+			<div>
+				<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
 			<h3 class="black">Viewport</h3>
 			<p>The zone on the screen where the camera draws can be controlled using the viewport attributes. This allows for multiple cameras to be displayed at the same time on one screen.</p>
 			<ul>
@@ -84,9 +85,9 @@
 			</ul>
 			<p>In the example bellow the booth cameras have a viewport of (1.0, 0.5) this means that the cameras ocupy 100% of the screen in the horizontal and half the screen in the vertical. And position for the camera on the bottom (0,0), and (0, 0.5) for the top camera. These positions are relative to the bottom left corner of the viewports. The bottom camera start on the bottom left of the screen and the top camera starts at 50% of the vertical size of the screen.</p>
 			<p>To try this example in the editor you can download the <a class="underline" href="viewport.isp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/03_camera/viewport.isp">Web Editor</a>.</p>
-
-			<canvas id="viewport" width="800" height="480" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
-
+			<div>
+				<canvas id="viewport" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
 			<h3 class="black">Cube Camera</h3>
 			<p>Cube cameras are composed of 6 internal perspective cameras aligned to capture an entire 360 projection of the scene.</p>
 			<p>These type of cameras can be added from the object bar, and can be programmatically attached to the scene (as background) or to materials (as environment map) and are used essencially to create reflection/refraction effects.</p>

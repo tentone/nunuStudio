@@ -9,7 +9,52 @@ function initialize(fname, canvasId)
 {	
 	var canvas = document.getElementById(canvasId || "canvas");
 	var app = new NunuApp(canvas);
-	app.loadRunProgram(fname);
+
+
+	var onLoad = function()
+	{
+		//Fullscreen Button
+		var fs = document.createElement("div");
+		fs.style.backgroundColor = "#333333";
+		fs.style.color = "#FFFFFF";
+		fs.style.width = "20%";
+		fs.style.height = "30px";
+		fs.style.borderRadius = "5px";
+		fs.style.marginLeft = "40%";
+		fs.style.textAlign = "center";
+		fs.innerHTML = "<b>Fullscreen</b>";
+		fs.onclick = function()
+		{
+			app.setFullscreen();
+			resize();
+		};
+		canvas.parentElement.appendChild(fs);
+
+		//VR Button
+		if(app.vrAvailable())
+		{
+			Nunu.getVRDisplays(function(display)
+			{
+				var vr = document.createElement("div");
+				vr.style.backgroundColor = "#333333";
+				vr.style.color = "#FFFFFF";
+				vr.style.width = "20%";
+				vr.style.height = "30px";
+				vr.style.borderRadius = "5px";
+				vr.style.marginLeft = "40%";
+				vr.style.textAlign = "center";
+				vr.innerHTML = "<b>Enter VR</b>";
+				vr.onclick = function()
+				{
+					app.toggleVR();
+				};
+				canvas.parentElement.appendChild(vr);
+			});
+		}
+	};
+
+
+	app.loadRunProgram(fname, onLoad);
 
 	nunuApps.push({canvas:canvas, app:app});
 	
