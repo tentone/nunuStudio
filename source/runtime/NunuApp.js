@@ -24,6 +24,8 @@ include("lib/PSON.min.js");
 include("core/Global.js");
 include("core/FileSystem.js");
 
+include("core/three/BufferGeometry.js");
+include("core/three/BufferGeometryLoader.js");
 include("core/three/Object3D.js");
 include("core/three/Texture.js");
 include("core/three/LightShadow.js");
