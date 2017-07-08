@@ -220,6 +220,9 @@ include("editor/ui/TabElement.js");
 include("editor/ui/TabButton.js");
 
 include("editor/ui/preview/TexturePreview.js");
+include("editor/ui/preview/MaterialPreview.js");
+include("editor/ui/preview/renderer/FontRenderer.js");
+include("editor/ui/preview/renderer/MaterialRenderer.js");
 
 include("editor/ui/asset/Asset.js");
 include("editor/ui/asset/MaterialAsset.js");
@@ -300,8 +303,6 @@ include("editor/helpers/BoundingBoxHelper.js");
 include("editor/helpers/GridHelper.js");
 include("editor/helpers/RectAreaLightHelper.js");
 
-include("editor/utils/FontRenderer.js");
-include("editor/utils/MaterialRenderer.js");
 include("editor/utils/ObjectIcons.js");
 include("editor/utils/CodemirrorThemes.js");
 
@@ -450,10 +451,6 @@ Editor.initialize = function()
 	//History
 	Editor.history = null;
 
-	//Material renderer for material previews
-	Editor.materialRenderer = new MaterialRenderer();
-	Editor.fontRenderer = new FontRenderer();
-	
 	//Default resources
 	Editor.createDefaultResouces();
 

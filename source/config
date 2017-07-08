@@ -20,7 +20,7 @@
 		"transformationSpace": "world",
 		"navigation": 10,
 		"invertNavigation": false,
-		"keyboardNavigation": true
+		"keyboardNavigation": false
 	},
 	"render": {
 		"followProject": true,

@@ -34,6 +34,16 @@ function MaterialRenderer()
 	this.scene.add(point);
 }
 
+MaterialRenderer.render = function(material, onRender)
+{
+	if(MaterialRenderer.instance === undefined)
+	{
+		MaterialRenderer.instance = new MaterialRenderer();
+	}
+
+	MaterialRenderer.instance.render(material, onRender);
+};
+
 //Set render size
 MaterialRenderer.prototype.setSize = function(x, y)
 {

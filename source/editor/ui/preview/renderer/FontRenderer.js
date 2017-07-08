@@ -22,6 +22,16 @@ function FontRenderer()
 	this.scene.add(this.text);
 }
 
+FontRenderer.render = function(material, onRender)
+{
+	if(FontRenderer.instance === undefined)
+	{
+		FontRenderer.instance = new FontRenderer();
+	}
+
+	FontRenderer.instance.render(material, onRender);
+};
+
 //Set render size
 FontRenderer.prototype.setSize = function(x, y)
 {
