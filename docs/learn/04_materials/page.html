@@ -65,8 +65,9 @@
 				<li><p>Shader material - Shader materials can be customized using GLSL code.</p></li>
 			</ul>
 			<p>The example bellow shows 4 different material types running, from the left to the right we have a Standard material, Phong material, Lambert material and a Basic Material, as we can se the Standard (PBR) and Phong materials are more detailed, the lambert material has basic light support (per vertex light calculation) and the basic material does not react to light.</p>
-			<canvas id="canvas" width="800" height="400" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
-
+			<div>
+				<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
 			<h3 class="black">Creating materials</h3>
 			<p>Materials can be crated by clicking on the Material option in the resource explorer, and selecting the type of material desired.</p>
 			<img src="selector.png" style="width:30%; margin-left:35%"></img>
@@ -94,7 +95,9 @@
 			<img src="textures/roughness.jpg" style="width:20%; margin:0; float:left;"></img>
 			
 			<p>The example bellow demonstrates how this different textures influence the material appearance, to try this example in the editor you can download the <a class="underline" href="rock.isp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/05_materials/rock.isp">Web Editor</a>.</p>
-			<canvas id="rock" width="800" height="400" style="padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;"></canvas>
+			<div>
+				<canvas id="rock" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
 			<h3 class="black">Applying materials</h3>
 			<p>To apply a material to an object select the scene editor and drag the material from the resource explorer to the desired object.</p>
 			<p>Another way to create materials is by dragging an external image or video file direcly to a object in the scene explorer, this will create a Standard or Sprite material (depending on the object) automatically using the provided file as a texture.</p>
