@@ -74,7 +74,7 @@ ConsoleTab.createNessage = function(object)
 	{
 		var preview = document.createElement("img");
 		preview.src = object.data;
-		preview.height = 70;
+		preview.height = 60;
 		log.appendChild(preview);
 
 		var table = document.createElement("table");
@@ -104,14 +104,15 @@ ConsoleTab.createNessage = function(object)
 	else if(object instanceof THREE.Texture)
 	{
 		var preview = TexturePreview.generate(object);
-		preview.height = 70;
+		preview.height = 60;
 		log.appendChild(preview);
 
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
 
 		var type = table.insertRow(0);
-		type.insertCell(0).innerHTML = "Texture";
+		type.insertCell(0).innerHTML = "Type";
+		type.insertCell(1).innerHTML = object.type;
 
 		var name = table.insertRow(1);
 		name.insertCell(0).innerHTML = "Name";
@@ -120,6 +121,80 @@ ConsoleTab.createNessage = function(object)
 		var uuid = table.insertRow(2);
 		uuid.insertCell(0).innerHTML = "UUID";
 		uuid.insertCell(1).innerHTML = object.uuid;
+
+		log.appendChild(table);
+	}
+	else if(object instanceof THREE.Material)
+	{
+		var preview = MaterialPreview.generate(object);
+		preview.height = 60;
+		log.appendChild(preview);
+
+		var table = document.createElement("table");
+		table.style.display = "inline-block";
+
+		var type = table.insertRow(0);
+		type.insertCell(0).innerHTML = "Type";
+		type.insertCell(1).innerHTML = object.type;
+
+		var name = table.insertRow(1);
+		name.insertCell(0).innerHTML = "Name";
+		name.insertCell(1).innerHTML = object.name;
+
+		var uuid = table.insertRow(2);
+		uuid.insertCell(0).innerHTML = "UUID";
+		uuid.insertCell(1).innerHTML = object.uuid;
+
+		log.appendChild(table);
+	}
+	else if(object instanceof THREE.Vector2)
+	{
+		var table = document.createElement("table");
+		table.style.display = "inline-block";
+
+		var coord = table.insertRow(0);
+		coord.insertCell(0).innerHTML = "X";
+		coord.insertCell(1).innerHTML = "Y";
+
+		var value = table.insertRow(1);
+		value.insertCell(0).innerHTML = object.x;
+		value.insertCell(1).innerHTML = object.y;
+
+		log.appendChild(table);
+	}
+	else if(object instanceof THREE.Vector3)
+	{
+		var table = document.createElement("table");
+		table.style.display = "inline-block";
+
+		var coord = table.insertRow(0);
+		coord.insertCell(0).innerHTML = "X";
+		coord.insertCell(1).innerHTML = "Y";
+		coord.insertCell(2).innerHTML = "Z";
+
+		var value = table.insertRow(1);
+		value.insertCell(0).innerHTML = object.x;
+		value.insertCell(1).innerHTML = object.y;
+		value.insertCell(2).innerHTML = object.z;
+
+		log.appendChild(table);
+	}
+	else if(object instanceof THREE.Vector4)
+	{
+		var table = document.createElement("table");
+		table.style.display = "inline-block";
+
+		var coord = table.insertRow(0);
+		coord.insertCell(0).innerHTML = "X";
+		coord.insertCell(1).innerHTML = "Y";
+		coord.insertCell(2).innerHTML = "Z";
+		coord.insertCell(2).innerHTML = "W";
+
+		var value = table.insertRow(1);
+		value.insertCell(0).innerHTML = object.x;
+		value.insertCell(1).innerHTML = object.y;
+		value.insertCell(2).innerHTML = object.z;
+		value.insertCell(2).innerHTML = object.w;
 
 		log.appendChild(table);
 	}
@@ -140,6 +215,8 @@ ConsoleTab.createBar = function()
 	var bar = document.createElement("div");
 	bar.style.width = "100%";
 	bar.style.height = "1px";
+	bar.style.marginTop = "4px";
+	bar.style.marginBottom = "4px";
 	bar.style.backgroundColor = Editor.theme.barColor;
 	return bar;
 };
