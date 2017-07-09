@@ -12032,7 +12032,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 189,
+            "line": 188,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -12041,7 +12041,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 256,
+            "line": 255,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -12067,7 +12067,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 277,
+            "line": 276,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -12083,7 +12083,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 302,
+            "line": 301,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -12109,7 +12109,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 345,
+            "line": 344,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -12118,7 +12118,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 361,
+            "line": 360,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -12127,7 +12127,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 412,
+            "line": 411,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -12136,7 +12136,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 446,
+            "line": 445,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -12145,7 +12145,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 456,
+            "line": 455,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -12161,7 +12161,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 470,
+            "line": 469,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -12170,7 +12170,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 494,
+            "line": 493,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -12186,7 +12186,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 510,
+            "line": 509,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -12202,7 +12202,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 523,
+            "line": 522,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -12218,7 +12218,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 536,
+            "line": 535,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -12231,7 +12231,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 547,
+            "line": 546,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -12240,20 +12240,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 573,
-            "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
-            "itemtype": "method",
-            "name": "isFullscreen",
-            "return": {
-                "description": "True if there is some element in fullscreen mode.",
-                "type": "Boolean"
-            },
-            "class": "NunuApp",
-            "module": "Runtime"
-        },
-        {
-            "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 586,
+            "line": 570,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",
@@ -12361,6 +12348,19 @@
             "name": "runningOnDesktop",
             "return": {
                 "description": "True if running inside NWJS",
+                "type": "Boolean"
+            },
+            "class": "Nunu",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\..\\source\\Nunu.js",
+            "line": 124,
+            "description": "Check if there is some element on fullscreen mode.\n\nReturns true even the fullscreen element is not related with the app.",
+            "itemtype": "method",
+            "name": "isFullscreen",
+            "return": {
+                "description": "True if there is some element in fullscreen mode.",
                 "type": "Boolean"
             },
             "class": "Nunu",

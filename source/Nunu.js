@@ -120,3 +120,16 @@ Nunu.runningOnDesktop = function()
 {
 	return window.nw !== undefined;
 };
+
+/**
+ * Check if there is some element on fullscreen mode.
+ *
+ * Returns true even the fullscreen element is not related with the app.
+ * 
+ * @method isFullscreen
+ * @return {boolean} True if there is some element in fullscreen mode.
+ */
+Nunu.isFullscreen = function()
+{
+	return document.webkitIsFullScreen || document.mozFullScreen || document.webkitIsFullScreen || document.webkitIsFullScreen || document.fullscreen || false;
+};

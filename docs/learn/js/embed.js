@@ -64,7 +64,7 @@ function resize()
 {
 	for(var i = 0; i < nunuApps.length; i++)
 	{
-		if(nunuApps[i].app.isFullscreen())
+		if(Nunu.isFullscreen())
 		{
 			nunuApps[i].canvas.width = window.innerWidth;
 			nunuApps[i].canvas.height = window.innerHeight;
