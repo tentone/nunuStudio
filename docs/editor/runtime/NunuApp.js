@@ -421,13 +421,20 @@ NunuApp.prototype.resume = function()
 	if(this.program !== null && !this.running)
 	{
 		var self = this;
-		var callNextFrame = this.program.useVR ? this.program.display.requestAnimationFrame : requestAnimationFrame;
 		var update = function()
 		{
 			if(self.running)
 			{
 				self.update();
-				callNextFrame(update);
+
+				if(self.program.useVR)
+				{
+					self.program.display.requestAnimationFrame(update);
+				}
+				else
+				{
+					requestAnimationFrame(update);
+				}
 			}
 		};
 
