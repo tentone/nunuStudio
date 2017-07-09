@@ -159,7 +159,6 @@ function NunuApp(canvas)
 	this.renderer = null;
 
 	//Runtime control
-	this.vr = false;
 	this.running = false;
 
 	//Event manager
@@ -553,15 +552,13 @@ NunuApp.prototype.toggleVR = function()
 {
 	if(this.vrAvailable())
 	{
-		if(this.vr)
+		if(this.program.useVR)
 		{
 			this.program.exitVR();
-			this.vr = false;
 		}
 		else
 		{
 			this.program.displayVR();
-			this.vr = true;
 		}
 	}
 	else
@@ -571,19 +568,6 @@ NunuApp.prototype.toggleVR = function()
 };
 
 /**
- * Check if there is some element on fullscreen mode.
- *
- * Returns true even the fullscreen element is not related with the app.
- * 
- * @method isFullscreen
- * @return {boolean} True if there is some element in fullscreen mode.
- */
-NunuApp.prototype.isFullscreen = function()
-{
-	return document.webkitIsFullScreen || document.mozFullScreen || document.webkitIsFullScreen || document.webkitIsFullScreen || document.fullscreen || false;
-}
-
-/**
  * Set a element to fullscreen mode, if none is passed the rendering canvas is used.
  *
  * @method toggleFullscreen
@@ -591,7 +575,7 @@ NunuApp.prototype.isFullscreen = function()
  */
 NunuApp.prototype.toggleFullscreen = function(element)
 {
-	var fullscreen = this.isFullscreen();
+	var fullscreen = Nunu.isFullscreen();
 
 	//Enter fullscreen
 	if(!fullscreen)
