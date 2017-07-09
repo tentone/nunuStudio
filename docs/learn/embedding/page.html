@@ -99,7 +99,34 @@ function resize()
 			<pre><code class="xml hljs">&lt;body onload="initialize();" onresize="resize();"&gt;
 ...
 &lt;/body&gt;</code></pre>
+			
+			<!--Toggle fullscreen and VR-->
+			<h3 class="black">Toggle Fullscreen and VR</h3>
+			<p>To toggle fullscreen its possible to use the toggleFullscreen method present in the app object, for VR its recomended to check if the browser supports WebVR and if there is a VRDisplay available before creating a button to toggle vr mode. To check for VR support use the following code.</p>
+			<pre><code class="javascript">//Toggle fullscreen mode
+function toggleFullscreen()
+{
+	app.toggleFullscreen(document.body);
+}
 
+//Toggle VR mode
+function toggleVR()
+{
+	app.toggleVR();
+}
+
+//Check if VR is available
+if(app.vrAvailable())
+{
+	//Check if there are displays available add button
+	Nunu.getVRDisplays(function(display)
+	{
+		button = document.getElementById("vr");
+		button.style.visibility = "visible";
+	});
+}</code></pre>
+			
+			<!--Loading Bar-->
 			<h3 class="black">Adding a loading bar</h3>
 			<p>Booth the loadRunProgram() and the loadProgramAsync() methods provide a onProgress callback field, this callback returns a value from 0.0 to 1.0 that indicates loading progress, this value can be used to control a loading bar.</p>
 			<p>A simple way to create a loading bar is by adding a couple of divisions, the code bellow is used for the default loading bar created when exporting web projects directly from the nunuStudio editor.</p>

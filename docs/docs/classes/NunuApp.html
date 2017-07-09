@@ -249,6 +249,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_isFullscreen">isFullscreen</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_loadProgram">loadProgram</a>
 						
 													</li>
@@ -289,15 +293,15 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_setFullscreen">setFullscreen</a>
-						
-													</li>
-													<li class="index-item method">
 														<a href="#method_setOnDataReceived">setOnDataReceived</a>
 						
 													</li>
 													<li class="index-item method">
 														<a href="#method_setOnExit">setOnExit</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_toggleFullscreen">toggleFullscreen</a>
 						
 													</li>
 													<li class="index-item method">
@@ -325,10 +329,6 @@
 													</li>
 													<li class="index-item property">
 														<a href="#property_canvasFitWindow">canvasFitWindow</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_fullscreen">fullscreen</a>
 						
 													</li>
 													<li class="index-item property">
@@ -381,6 +381,47 @@
 												</div>
 											
 											
+											
+											</div>
+											<div id="method_isFullscreen" class="method item">
+												<h3 class="name"><code>isFullscreen</code></h3>
+											
+													<span class="paren">()</span>
+											
+													<span class="returns-inline">
+														<span class="type">Boolean</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Check if there is some element on fullscreen mode.</p>
+											<p>Returns true even the fullscreen element is not related with the app.</p>
+											
+												</div>
+											
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Boolean</span>:
+																<p>True if there is some element in fullscreen mode.</p>
+											
+														</div>
+													</div>
 											
 											</div>
 											<div id="method_loadProgram" class="method item">
@@ -815,6 +856,7 @@
 											
 												<div class="description">
 													<p>Set the canvas to be used for rendering.</p>
+											<p>Should be set before starting the program.</p>
 											
 												</div>
 											
@@ -829,71 +871,6 @@
 											
 																<div class="param-description">
 																	<p>Canvas</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_setFullscreen" class="method item">
-												<h3 class="name"><code>setFullscreen</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>fullscreen</code>
-															</li>
-															<li class="arg">
-																	<code>element</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set a element to fullscreen mode, if none is passed the document body is used.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">fullscreen</code>
-																	<span class="type">Boolean</span>
-											
-											
-																<div class="param-description">
-																	<p>If true go to fullscren if false exit fullscreen mode</p>
-											
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">element</code>
-																	<span class="type">DOM</span>
-											
-											
-																<div class="param-description">
-																	<p>DOM element to go fullscren by default the document body is used</p>
 											
 																</div>
 											
@@ -998,6 +975,57 @@
 											
 																<div class="param-description">
 																	<p>onExit callback</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_toggleFullscreen" class="method item">
+												<h3 class="name"><code>toggleFullscreen</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>element</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Set a element to fullscreen mode, if none is passed the rendering canvas is used.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">element</code>
+																	<span class="type">DOM</span>
+											
+											
+																<div class="param-description">
+																	<p>DOM element to go fullscren by default the rendering canvas is used</p>
 											
 																</div>
 											
@@ -1154,30 +1182,6 @@
 												</div>
 											
 													<p><strong>Default:</strong> false if a canvas is provided, else true</p>
-											
-											
-											</div>
-											<div id="property_fullscreen" class="property item">
-												<h3 class="name"><code>fullscreen</code></h3>
-												<span class="type">Boolean</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Fullscreen flag, to set fulscreen mode the setFullScreen method should be used</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> false</p>
 											
 											
 											</div>
