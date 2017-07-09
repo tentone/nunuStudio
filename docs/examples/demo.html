@@ -28,10 +28,14 @@
 					//Check if VR is available
 					if(app.vrAvailable())
 					{
-						button = document.getElementById("vr");
-						button.style.visibility = "visible";
+						//If there are displays available add button
+						Nunu.getVRDisplays(function(display)
+						{
+							button = document.getElementById("vr");
+							button.style.visibility = "visible";
+						});
 					}
-
+					
 					//Remove logo and loading bar
 					document.body.removeChild(logo);
 				};

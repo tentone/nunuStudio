@@ -223,6 +223,8 @@ TextureLoader.prototype.parse = function(json, onLoad)
 		}
 	}
 
+	texture.needsUpdate = true;
+	
 	texture.uuid = json.uuid;
 	texture.name = json.name;
 	texture.mapping = json.mapping;

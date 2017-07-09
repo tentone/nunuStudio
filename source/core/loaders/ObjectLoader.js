@@ -1022,6 +1022,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		{
 			object.rotation.fromArray(data.rotation);
 		}
+		if(data.quaternion !== undefined)
+		{
+			object.quaternion.fromArray(data.quaternion);
+		}
 		if(data.scale !== undefined)
 		{
 			object.scale.fromArray(data.scale);
