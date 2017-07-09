@@ -125,13 +125,6 @@ include("core/utils/Mesh2shape.js");
  */
 
 /**
- * Fullscreen flag, to set fulscreen mode the setFullScreen method should be used
- * @property fullscreen
- * @type {boolean}
- * @default false
- */
-
-/**
  * VR flag, to set VR mode the toggleVR method should be used
  * @property vr
  * @type {boolean}
@@ -166,9 +159,11 @@ function NunuApp(canvas)
 	this.renderer = null;
 
 	//Runtime control
-	this.fullscreen = false;
 	this.vr = false;
 	this.running = false;
+
+	//Event manager
+	this.events = new EventManager();
 
 	//Canvas
 	if(canvas === undefined)
@@ -189,18 +184,74 @@ function NunuApp(canvas)
 		this.canvas = canvas;
 		this.canvasFitWindow = false;
 	}
-
-	//Canvas lock pointer
-	var canvas = this.canvas;
-	canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
-	this.lockMouse = function()
-	{
-		if(canvas.requestPointerLock)
-		{
-			canvas.requestPointerLock();
-		}
-	};
 }
+
+/**
+ * Start running nunu program.
+ * 
+ * A nunu program must be loaded before calling this method.
+ * 
+ * @method run
+ */
+NunuApp.prototype.run = function()
+{
+	if(this.program === null)
+	{
+		console.warn("nunuStudio: no program is loaded [app.loadPogram(fname)]");
+		return;
+	}
+
+	//WebGL renderer
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, antialias: this.program.antialiasing});
+	this.renderer.shadowMap.enabled = this.program.shadows;
+	this.renderer.shadowMap.type = this.program.shadowsType;
+	this.renderer.toneMapping = this.program.toneMapping;
+	this.renderer.toneMappingExposure = this.program.toneMappingExposure;
+	this.renderer.toneMappingWhitePoint = this.program.toneMappingWhitePoint;
+	this.renderer.setSize(this.canvas.width, this.canvas.height);
+	
+	if(this.program.handlePixelRatio)
+	{
+		this.renderer.setPixelRatio(window.devicePixelRatio);
+	}
+	
+	//Mouse and Keyboard input
+	this.keyboard = new Keyboard();
+	this.mouse = new Mouse();
+	this.mouse.setCanvas(this.canvas);
+
+	//Attach this runtime to program
+	this.program.app = this;
+
+	//Create default camera
+	this.program.defaultCamera = new PerspectiveCamera(60, this.canvas.width/this.canvas.height, 0.1, 1000000);
+	this.program.defaultCamera.position.set(0, 5, -5);
+
+	//Set renderer
+	this.program.setRenderer(this.renderer);
+	this.program.setMouseKeyboard(this.mouse, this.keyboard);
+	
+	//Initialize program
+	this.program.initialize();
+	this.program.resize(this.canvas.width, this.canvas.height);
+
+	//Lock mouse pointer
+	if(this.program.lockPointer)
+	{
+		var canvas = this.canvas;
+		canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
+		this.events.add(canvas, "click", function()
+		{
+			if(canvas.requestPointerLock)
+			{
+				canvas.requestPointerLock();
+			}
+		});
+	}
+
+	this.events.create();
+	this.resume();
+};
 
 /**
  * Load program asynchronously and run it after its loaded.
@@ -292,64 +343,6 @@ NunuApp.prototype.loadProgramAsync = function(fname, onLoad, onProgress)
 };
 
 /**
- * Start running nunu program.
- * 
- * A nunu program must be loaded before calling this method.
- * 
- * @method run
- */
-NunuApp.prototype.run = function()
-{
-	if(this.program === null)
-	{
-		console.warn("nunuStudio: no program is loaded [app.loadPogram(fname)]");
-		return;
-	}
-
-	//WebGL renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, antialias: this.program.antialiasing});
-	this.renderer.shadowMap.enabled = this.program.shadows;
-	this.renderer.shadowMap.type = this.program.shadowsType;
-	this.renderer.toneMapping = this.program.toneMapping;
-	this.renderer.toneMappingExposure = this.program.toneMappingExposure;
-	this.renderer.toneMappingWhitePoint = this.program.toneMappingWhitePoint;
-	this.renderer.setSize(this.canvas.width, this.canvas.height);
-	
-	if(this.program.handlePixelRatio)
-	{
-		this.renderer.setPixelRatio(window.devicePixelRatio);
-	}
-	
-	//Mouse and Keyboard input
-	this.keyboard = new Keyboard();
-	this.mouse = new Mouse();
-	this.mouse.setCanvas(this.canvas);
-
-	//Attach this runtime to program
-	this.program.app = this;
-
-	//Create default camera
-	this.program.defaultCamera = new PerspectiveCamera(60, this.canvas.width/this.canvas.height, 0.1, 1000000);
-	this.program.defaultCamera.position.set(0, 5, -5);
-
-	//Set renderer
-	this.program.setRenderer(this.renderer);
-	this.program.setMouseKeyboard(this.mouse, this.keyboard);
-	
-	//Initialize program
-	this.program.initialize();
-	this.program.resize(this.canvas.width, this.canvas.height);
-
-	//Lock mouse pointer
-	if(this.program.lockPointer)
-	{
-		this.canvas.addEventListener("click", this.lockMouse, false);
-	}
-
-	this.resume();
-};
-
-/**
  * Update nunu program state.
  * 
  * Automatically called by the runtime handler.
@@ -378,11 +371,8 @@ NunuApp.prototype.update = function()
  */
 NunuApp.prototype.exit = function()
 {
-	//Remove mouse lock event from canvas
-	if(this.program.lockPointer)
-	{
-		this.canvas.removeEventListener("click", this.lockMouse, false);
-	}
+	//Destroy events
+	this.events.destroy();
 
 	//Dispose program
 	if(this.program !== null)
@@ -430,26 +420,18 @@ NunuApp.prototype.resume = function()
 {
 	if(this.program !== null && !this.running)
 	{
-		this.running = true;
-
 		var self = this;
+		var callNextFrame = (this.program.useVR) ? this.program.display.requestAnimationFrame : requestAnimationFrame;
 		var update = function()
 		{
 			if(self.running)
 			{
 				self.update();
-
-				if(self.program.useVR)
-				{
-					self.program.display.requestAnimationFrame(update);
-				}
-				else
-				{
-					requestAnimationFrame(update);
-				}
+				callNextFrame(update);
 			}
 		};
 
+		this.running = true;
 		update();
 	}
 };
@@ -466,6 +448,8 @@ NunuApp.prototype.pause = function()
 
 /**
  * Set the canvas to be used for rendering.
+ *
+ * Should be set before starting the program.
  *
  * @method setCanvas
  * @param {DOM} canvas Canvas
@@ -580,22 +564,34 @@ NunuApp.prototype.toggleVR = function()
 };
 
 /**
- * Set a element to fullscreen mode, if none is passed the document body is used.
+ * Check if there is some element on fullscreen mode.
  *
- * @method setFullscreen
- * @param {boolean} fullscreen If true go to fullscren if false exit fullscreen mode
- * @param {DOM} element DOM element to go fullscren by default the document body is used
+ * Returns true even the fullscreen element is not related with the app.
+ * 
+ * @method isFullscreen
+ * @return {boolean} True if there is some element in fullscreen mode.
  */
-NunuApp.prototype.setFullscreen = function(fullscreen, element)
+NunuApp.prototype.isFullscreen = function()
 {
-	this.fullscreen = (fullscreen !== undefined) ? fullscreen : !this.fullscreen;
+	return document.webkitIsFullScreen || document.mozFullScreen || document.webkitIsFullScreen || document.webkitIsFullScreen || document.fullscreen || false;
+}
+
+/**
+ * Set a element to fullscreen mode, if none is passed the rendering canvas is used.
+ *
+ * @method toggleFullscreen
+ * @param {DOM} element DOM element to go fullscren by default the rendering canvas is used
+ */
+NunuApp.prototype.toggleFullscreen = function(element)
+{
+	var fullscreen = this.isFullscreen();
 
 	//Enter fullscreen
-	if(this.fullscreen)
+	if(!fullscreen)
 	{
 		if(element === undefined)
 		{
-			element = this.canvas;//document.body;
+			element = this.canvas;
 		}
 		
 		element.requestFullscreen = element.requestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen || element.msRequestFullscreen;
