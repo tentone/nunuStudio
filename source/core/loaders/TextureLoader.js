@@ -168,6 +168,11 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	else if(category === "Webcam")
 	{
 		texture = new WebcamTexture();
+
+		if(json.mode !== undefined)
+		{
+			texture.mode = json.mode;
+		}
 	}
 	//Cube texture
 	else if(category === "Cube")

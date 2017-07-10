@@ -27,12 +27,62 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	video.autoplay = true;
 	video.loop = true;
 
+	THREE.Texture.call(this, video, mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
+
+	//Disable mipmaps generation
+	this.generateMipmaps = false;
+	this.disposed = false;
+
+	//Attributes
+	this.name = "webcam";
+	this.category = "Webcam";	
+	this.mode = WebcamTexture.USER;
+
+	//Media stream
+	this.stream = null;
+
+	//Connect to camera
+	this.connect();
+
+	//Webcam video update loop
+	var self = this;
+	function update()
+	{
+		if(video.readyState >= video.HAVE_CURRENT_DATA)
+		{
+			self.needsUpdate = true;
+		}
+
+		if(!self.disposed)
+		{
+			requestAnimationFrame(update);
+		}
+	};
+	requestAnimationFrame(update);
+};
+
+WebcamTexture.USER = 21;
+WebcamTexture.ENVIRONMENT = 22;
+
+WebcamTexture.prototype = Object.create(THREE.Texture.prototype);
+
+/**
+ * Connect to camera.
+ *
+ * @method connect
+ */
+WebcamTexture.prototype.connect = function()
+{
+	var constrains = (this.mode === WebcamTexture.USER) ? {facingMode: "user"} : {facingMode: {exact: "environment"}};
+	var self = this;
+
 	//Chorme
 	if(navigator.webkitGetUserMedia)
 	{
-		navigator.webkitGetUserMedia({video:true}, function(stream)
+		navigator.webkitGetUserMedia({video:constrains}, function(stream)
 		{
-			video.src = URL.createObjectURL(stream);
+			console.log(stream);
+			self.image.src = URL.createObjectURL(stream);
 		},
 		function(error)
 		{
@@ -42,44 +92,33 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	//Firefox
 	else if(navigator.mediaDevices.getUserMedia)
 	{
-		navigator.mediaDevices.getUserMedia({video:true}).then(function(stream)
+		navigator.mediaDevices.getUserMedia({video:constrains}).then(function(stream)
 		{
-			video.src = URL.createObjectURL(stream);
+			console.log(stream);
+			self.image.src = URL.createObjectURL(stream);
 		})
 		.catch(function(error)
 		{
 			console.warn("nunuStudio: No webcam available");
 		});				
 	}
-
-	THREE.Texture.call(this, video, mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
-
-	//Disable mipmaps generation
-	this.generateMipmaps = false;
-	this.disposed = false;
-
-	//Name
-	this.name = "webcam";
-	this.category = "Webcam";
-
-	//Webcam video update loop
-	var texture = this;
-	function update()
-	{
-		if(video.readyState >= video.HAVE_CURRENT_DATA)
-		{
-			texture.needsUpdate = true;
-		}
-
-		if(!texture.disposed)
-		{
-			requestAnimationFrame(update);
-		}
-	};
-	update();
 };
 
-WebcamTexture.prototype = Object.create(THREE.Texture.prototype);
+/**
+ * Disconnect from camera.
+ *
+ * @method disconnect
+ */
+WebcamTexture.prototype.disconnect = function()
+{
+	//TODO <ADD CODE HERE>
+	
+	/*var tracks = stream.getTracks();
+	for(var i = 0; i < tracks.length; i++)
+	{
+		tracks.stop();
+	}*/
+};
 
 /**
  * Dispose webcam texture.
@@ -95,4 +134,19 @@ WebcamTexture.prototype.dispose = function()
 	{
 		this.image.pause();
 	}
+};
+
+/**
+ * Serialize webcam texture to JSON.
+ *
+ * @method toJSON
+ * @param {Object} meta Metadata.
+ */
+WebcamTexture.prototype.toJSON = function(meta)
+{
+	var data = THREE.Texture.prototype.toJSON.call(this, meta);
+
+	data.mode = this.mode;
+
+	return data;
 };
