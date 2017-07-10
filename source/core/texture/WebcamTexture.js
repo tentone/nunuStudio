@@ -36,7 +36,7 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	//Attributes
 	this.name = "webcam";
 	this.category = "Webcam";	
-	this.mode = WebcamTexture.USER;
+	this.mode = WebcamTexture.ENVIRONMENT;
 
 	//Media stream
 	this.stream = null;
@@ -81,7 +81,7 @@ WebcamTexture.prototype.connect = function()
 	{
 		navigator.webkitGetUserMedia({video:constrains}, function(stream)
 		{
-			console.log(stream);
+			self.stream = stream;
 			self.image.src = URL.createObjectURL(stream);
 		},
 		function(error)
@@ -94,7 +94,7 @@ WebcamTexture.prototype.connect = function()
 	{
 		navigator.mediaDevices.getUserMedia({video:constrains}).then(function(stream)
 		{
-			console.log(stream);
+			self.stream = stream;
 			self.image.src = URL.createObjectURL(stream);
 		})
 		.catch(function(error)
@@ -111,13 +111,11 @@ WebcamTexture.prototype.connect = function()
  */
 WebcamTexture.prototype.disconnect = function()
 {
-	//TODO <ADD CODE HERE>
-	
-	/*var tracks = stream.getTracks();
+	var tracks = this.stream.getTracks();
 	for(var i = 0; i < tracks.length; i++)
 	{
-		tracks.stop();
-	}*/
+		tracks[i].stop();
+	}
 };
 
 /**
@@ -129,7 +127,9 @@ WebcamTexture.prototype.dispose = function()
 {	
 	THREE.Texture.prototype.dispose.call(this);
 
+	this.disconnect();
 	this.disposed = true;
+
 	if(!this.image.paused)
 	{
 		this.image.pause();
