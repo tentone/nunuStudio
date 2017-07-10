@@ -36,7 +36,7 @@ function WebcamTexture(mapping, wrapS, wrapT, type, anisotropy)
 	//Attributes
 	this.name = "webcam";
 	this.category = "Webcam";	
-	this.mode = WebcamTexture.ENVIRONMENT;
+	this.mode = WebcamTexture.USER;
 
 	//Media stream
 	this.stream = null;
