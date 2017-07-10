@@ -9642,7 +9642,7 @@
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
             "line": 111,
-            "description": "Dispose texture",
+            "description": "Dispose texture.",
             "itemtype": "method",
             "name": "dispose",
             "class": "Texture",
@@ -9650,7 +9650,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 122,
+            "line": 123,
             "description": "Create JSON description for texture, serializes image used in the texture\nTHREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
             "params": [
                 {
@@ -9857,10 +9857,44 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 84,
+            "line": 69,
+            "description": "Connect to camera.",
+            "itemtype": "method",
+            "name": "connect",
+            "class": "WebcamTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
+            "line": 107,
+            "description": "Disconnect from camera.",
+            "itemtype": "method",
+            "name": "disconnect",
+            "class": "WebcamTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
+            "line": 123,
             "description": "Dispose webcam texture.",
             "itemtype": "method",
             "name": "dispose",
+            "class": "WebcamTexture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
+            "line": 139,
+            "description": "Serialize webcam texture to JSON.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Metadata.",
+                    "type": "Object"
+                }
+            ],
             "class": "WebcamTexture",
             "module": "Textures"
         },

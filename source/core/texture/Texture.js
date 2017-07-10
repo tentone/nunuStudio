@@ -109,7 +109,8 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 Texture.prototype = Object.create(THREE.Texture.prototype);
 
 /**
- * Dispose texture
+ * Dispose texture.
+ * 
  * @method dispose
  */
 Texture.prototype.dispose = function()
@@ -122,6 +123,7 @@ Texture.prototype.dispose = function()
 /**
  * Create JSON description for texture, serializes image used in the texture
  * THREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.
+ *
  * @param {Object} meta
  * @method toJSON
  */
