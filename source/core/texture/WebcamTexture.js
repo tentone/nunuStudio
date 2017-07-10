@@ -79,7 +79,7 @@ WebcamTexture.prototype.connect = function()
 	//Chorme
 	if(navigator.webkitGetUserMedia)
 	{
-		navigator.webkitGetUserMedia({video:constrains}, function(stream)
+		navigator.webkitGetUserMedia({video:true}, function(stream)
 		{
 			self.stream = stream;
 			self.image.src = URL.createObjectURL(stream);
