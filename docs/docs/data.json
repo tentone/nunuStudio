@@ -9875,7 +9875,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 123,
+            "line": 121,
             "description": "Dispose webcam texture.",
             "itemtype": "method",
             "name": "dispose",
