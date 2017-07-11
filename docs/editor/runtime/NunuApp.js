@@ -15,6 +15,7 @@ include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.js");
+include("lib/aruco.js");
 include("lib/opentype.min.js");
 
 include("lib/bytebuffer.min.js");
