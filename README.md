@@ -27,8 +27,8 @@
 - Compatible with WebVR V1.1
 
 ### Screenshots
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/2.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/3.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/4.png)
-![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/1.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/screenshot/small/5.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/2.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/3.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/4.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/1.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/5.png)
 
 ### ChangeLog
 - V0.8.9.15 Alpha
