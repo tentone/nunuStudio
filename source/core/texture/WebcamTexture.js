@@ -111,10 +111,13 @@ WebcamTexture.prototype.connect = function()
  */
 WebcamTexture.prototype.disconnect = function()
 {
-	var tracks = this.stream.getTracks();
-	for(var i = 0; i < tracks.length; i++)
+	if(this.stream !== null)
 	{
-		tracks[i].stop();
+		var tracks = this.stream.getTracks();
+		for(var i = 0; i < tracks.length; i++)
+		{
+			tracks[i].stop();
+		}
 	}
 };
 

@@ -2835,7 +2835,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 104,
+            "line": 105,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -9875,7 +9875,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 121,
+            "line": 124,
             "description": "Dispose webcam texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -9884,7 +9884,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 139,
+            "line": 142,
             "description": "Serialize webcam texture to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12005,7 +12005,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 115,
+            "line": 116,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -12015,7 +12015,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 121,
+            "line": 122,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -12025,7 +12025,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 127,
+            "line": 128,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -12036,7 +12036,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 134,
+            "line": 135,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -12046,7 +12046,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 140,
+            "line": 141,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -12057,7 +12057,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 150,
+            "line": 151,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -12066,7 +12066,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 188,
+            "line": 189,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -12075,7 +12075,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 255,
+            "line": 256,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -12101,7 +12101,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 276,
+            "line": 277,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -12117,7 +12117,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 301,
+            "line": 302,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -12143,7 +12143,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 344,
+            "line": 345,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -12152,7 +12152,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 360,
+            "line": 361,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -12161,7 +12161,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 411,
+            "line": 412,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -12170,7 +12170,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 445,
+            "line": 446,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -12179,7 +12179,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 455,
+            "line": 456,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -12195,7 +12195,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 469,
+            "line": 470,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -12204,7 +12204,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 493,
+            "line": 494,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -12220,7 +12220,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 509,
+            "line": 510,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -12236,7 +12236,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 522,
+            "line": 523,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -12252,7 +12252,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 535,
+            "line": 536,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -12265,7 +12265,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 546,
+            "line": 547,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -12274,7 +12274,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 570,
+            "line": 571,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",
