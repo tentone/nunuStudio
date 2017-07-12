@@ -3,7 +3,9 @@
 /**
  * RoundedBox Buffer Geometry.
  *
- * Creates a box with rounded corners, with normal and uv.
+ * Creates a box with rounded corners, with normals.
+ *
+ * There is no UV coordinates.
  * 
  * @author pailhead
  * @module Geometry
