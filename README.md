@@ -115,6 +115,7 @@
 	- Binary project files
 - V0.9.1 Beta
 	- Internal debug console
+	- Desktop auto update mechanism
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages

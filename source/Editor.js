@@ -382,6 +382,9 @@ Editor.initialize = function()
 				Editor.exit();
 			}
 		});
+
+		//Try to update the editor
+		Editor.updateNunu();
 	}
 	else
 	{
@@ -1760,6 +1763,47 @@ Editor.confirm = function(message)
 Editor.alert = function(message)
 {
 	alert(message);
+};
+
+//Update nunuStudio editor version using build from github repo
+Editor.updateNunu = function(silent)
+{
+	if(silent === undefined)
+	{
+		silent = true;
+	}
+
+	try
+	{
+		var url = "https://raw.githubusercontent.com/tentone/nunuStudio/master/build/nunu.editor.min.js";
+
+		FileSystem.readFile(url, false, function(data)
+		{	
+			var token = "Nunu.TIMESTAMP";
+			var pos = data.search(token);
+			var timestamp = data.slice(pos + token.length + 2, pos + token.length + 14);
+
+			if(parseInt(timestamp) > parseInt(Editor.TIMESTAMP))
+			{
+				FileSystem.writeFile("nunu.min.js", data);
+				Editor.alert("nunuStudio updated\nRestart the editor");
+			}
+			else
+			{
+				if(!silent)
+				{
+					Editor.alert("nunuStudio already up to date!");
+				}
+			}
+		});
+	}
+	catch(e)
+	{
+		if(!silent)
+		{
+			Editor.alert("Failed to fetch update files!");
+		}
+	}
 };
 
 //Exit the editor
