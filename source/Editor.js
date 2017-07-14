@@ -144,6 +144,9 @@ include("lib/codemirror/addon/tern/tern.js");
 include("lib/codemirror/addon/tern/tern.css");
 include("lib/codemirror/theme/*");
 
+include("lib/jsontree/jsonTree.js");
+include("lib/jsontree/jsonTree.css");
+
 include("lib/acorn/acorn.js");
 include("lib/acorn/acorn_loose.js");
 include("lib/acorn/walk.js");

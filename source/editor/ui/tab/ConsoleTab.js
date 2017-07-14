@@ -202,6 +202,15 @@ ConsoleTab.createNessage = function(object)
 	{
 		log.innerHTML = "null";
 	}
+	/*else if(object instanceof Function || object instanceof Error)
+	{
+		log.innerHTML = object;
+	}
+	else if(object instanceof Object)
+	{
+		_console.log(object);
+		jsonTree.create(object, log);
+	}*/
 	else
 	{
 		log.innerHTML = object;
