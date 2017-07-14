@@ -139,6 +139,9 @@ function ScriptEditor(parent, closeable, container, index)
 		context.updateInterface();
 	};
 
+	//Scroll position
+	this.scroll = null;
+
 	//Script attached to code editor
 	this.script = null;
 }
@@ -169,9 +172,7 @@ ScriptEditor.prototype.setFontSize = function(size)
 	}
 
 	Settings.code.fontSize = size;
-
 	this.code.display.wrapper.style.fontSize = size + "px";
-	this.code.refresh();
 };
 
 //Update object data
@@ -208,7 +209,6 @@ ScriptEditor.prototype.activate = function()
 	TabElement.prototype.activate.call(this);
 
 	this.updateSettings();
-
 	this.updateScript();
 };
 

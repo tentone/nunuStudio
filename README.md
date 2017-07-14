@@ -1,4 +1,4 @@
-![https://www.nunustudio.org](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/logo.png)
+![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/logo.png)
 
  - nunuStudio is a three.js based framework for 3D and VR applications that runs direcly on the browser without the need for additional plugins using WebGL, WebAudio and WebVR.
  - nunuStudio provides a visual scene editor, a code editor, visual tools to edit textures, materials, particle emitters, etc.
