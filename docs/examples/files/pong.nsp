@@ -1602,13 +1602,12 @@ tø¬	ø¤	ø¢	 ÖÒÔøğøòtøª	ø¬	ø¢	 ØÖÔøğøòøòtø®	øø¦	 v~tøø¨	øŒ 
 
 tø”ø¬	øª	  ÖØøôøòøòtø’ø”øª	  Øøôøòtø–øø®	 vöüuuidü$6182DE9B-127D-4105-BFF9-FE8DC46F6523ütypeüSphereBufferGeometryünameügeometryüradiusüwidthSegments üheightSegments ü	materials÷öüuuidü$98210C36-8EEC-4134-9852-2A7879193EF4ütypeüMeshPhongMaterialünameüpaddleü	depthFuncü	depthTestñü
 depthWriteñücolorøşÿÿüspecularøäÉ“ü	shininessü0üemissive üaoMapIntensityüskinningòümorphTargetsòümorphNormalsòöüuuidü$90BAE593-C30E-4A55-A663-82ECEF5AF471ütypeüMeshPhongMaterialünameüballü	depthFuncü	depthTestñü
-depthWriteñücolorø€€øüspecularøÊ—¯ü	shininessü24.3üemissive üaoMapIntensityüskinningòümorphTargetsòümorphNormalsòöüuuidü$F0B4573E-3E4E-4BC1-AD23-8FE27E3CC0F3ütypeüMeshStandardMaterialünameü
-ground.pngü	depthFuncü	depthTestñü
-depthWriteñücolorøşÿÿü	roughnessü1ü	metalnessûš™™™™™É?ümapü$6F5C9D22-879A-42EA-9AF6-BFC2C65F0216üemissive üaoMapIntensityüskinningòümorphTargetsòümorphNormalsòöüuuidü$E3F13CDC-5EBC-4DFB-AD49-61DB5785A43FütypeüMeshStandardMaterialünameüwood.pngü	depthFuncü	depthTestñü
-depthWriteñücolorøşÿÿü	roughnessû333333ã?ü	metalnessûš™™™™™É?ümapü$2B601A8A-51CC-4DF7-8243-21ACAD623BBCüemissive üaoMapIntensityüskinningòümorphTargetsòümorphNormalsòöüuuidü$7A6DFF3D-6408-48F8-9435-A31095E34F90ütypeüMeshStandardMaterialünameü	stone.pngü	depthFuncü	depthTestñü
-depthWriteñücolorøşÿÿü	roughnessû333333ã?ü	metalnessûš™™™™™É?ümapü$3517CF83-287F-4917-A71E-3AE1CD4546D0üemissive üaoMapIntensityüskinningòümorphTargetsòümorphNormalsòö	üuuidü$36989CC4-34AA-46E4-A50B-3B1C6C933C42ütypeüSpriteMaterialünameü	title.pngü	depthFuncü	depthTestñü
+depthWriteñücolorø€€øüspecularøÊ—¯ü	shininessü24.3üemissive üaoMapIntensityüskinningòümorphTargetsòümorphNormalsòöüuuidü$F0B4573E-3E4E-4BC1-AD23-8FE27E3CC0F3ütypeüMeshStandardMaterialünameügroundü	depthFuncü	depthTestñü
+depthWriteñücolorøşÿÿü	roughnessü1ü	metalnessûš™™™™™É?ümapü$6F5C9D22-879A-42EA-9AF6-BFC2C65F0216üemissive üaoMapIntensityüskinningòümorphTargetsòümorphNormalsòöüuuidü$E3F13CDC-5EBC-4DFB-AD49-61DB5785A43FütypeüMeshStandardMaterialünameüwoodü	depthFuncü	depthTestñü
+depthWriteñücolorøşÿÿü	roughnessû333333ã?ü	metalnessûš™™™™™É?ümapü$2B601A8A-51CC-4DF7-8243-21ACAD623BBCüemissive üaoMapIntensityüskinningòümorphTargetsòümorphNormalsòöüuuidü$7A6DFF3D-6408-48F8-9435-A31095E34F90ütypeüMeshStandardMaterialünameüstoneü	depthFuncü	depthTestñü
+depthWriteñücolorøşÿÿü	roughnessû333333ã?ü	metalnessûš™™™™™É?ümapü$3517CF83-287F-4917-A71E-3AE1CD4546D0üemissive üaoMapIntensityüskinningòümorphTargetsòümorphNormalsòö	üuuidü$36989CC4-34AA-46E4-A50B-3B1C6C933C42ütypeüSpriteMaterialünameütitleü	depthFuncü	depthTestñü
 depthWriteñücolorøşÿÿümapü$70611342-BE5A-435D-A53F-45B67333CA0Dü	alphaTestü0.76ö	üuuidü$3433CC9B-95E9-43AA-B6A7-AC1BC67D2AFFütypeüSpriteMaterialünameüdefaultü	depthFuncü	depthTestñü
-depthWriteñücolorøşÿÿümapü$520011CB-8B3D-46FB-A11B-23D9BB9F61D8ü	alphaTestü0.51ö	üuuidü$99E6D340-51DE-43B7-8F5B-2CA504975325ütypeüSpriteMaterialünameü	start.pngü	depthFuncü	depthTestñü
+depthWriteñücolorøşÿÿümapü$520011CB-8B3D-46FB-A11B-23D9BB9F61D8ü	alphaTestü0.51ö	üuuidü$99E6D340-51DE-43B7-8F5B-2CA504975325ütypeüSpriteMaterialünameüstartü	depthFuncü	depthTestñü
 depthWriteñücolorøşÿÿümapü$8CC55EFF-D4E4-4B0F-818F-769F177363E9ü	alphaTestü0.66ütextures÷öüuuidü$6F5C9D22-879A-42EA-9AF6-BFC2C65F0216ünameütextureücategoryüImageümappingøØürepeat÷(üoffset÷  üwrap÷øĞøĞü	minFilterøÖü	magFilterøÜü
 anisotropyüflipYñüimageü$532AD0D1-20B8-4083-8A0A-6ABB45C2A461öüuuidü$2B601A8A-51CC-4DF7-8243-21ACAD623BBCünameütextureücategoryüImageümappingøØürepeat÷üoffset÷  üwrap÷øÒøÒü	minFilterøàü	magFilterøÜü
 anisotropyüflipYñüimageü$81028547-766A-40A1-8B61-3C225BA1A257öüuuidü$3517CF83-287F-4917-A71E-3AE1CD4546D0ünameütextureücategoryüImageümappingøØürepeat÷üoffset÷  üwrap÷øÒøÒü	minFilterøàü	magFilterøÜü
@@ -1627,7 +1626,7 @@ castShadowñüreceiveShadowñüvisibleñümatrixAutoUpdateòümatrix÷û{®Gáz„?    û
 castShadowòüreceiveShadowòüvisibleñümatrixAutoUpdateòümatrix÷           ûÄB­iŞñÀüchildren÷öüuuidü$68835483-3469-497E-AC53-365E07A44CD7ütypeüMeshünameüpaddle1üfoldedòühiddenòü
 castShadowñüreceiveShadowñüvisibleñümatrixAutoUpdateñümatrix÷û333333ã?           ügeometryü$82C62753-39CF-42FC-ABA2-1DDADE58E40Fümaterialü$98210C36-8EEC-4134-9852-2A7879193EF4öüuuidü$8E66978E-E6E3-4CBC-90B2-87179C7CB8FBütypeüMeshünameüpaddle2üfoldedòühiddenòü
 castShadowñüreceiveShadowñüvisibleñümatrixAutoUpdateñümatrix÷û333333ã?           ügeometryü$82C62753-39CF-42FC-ABA2-1DDADE58E40Fümaterialü$98210C36-8EEC-4134-9852-2A7879193EF4öüuuidü$405E44DE-66C4-4168-BC19-6E90C51FC4A9ütypeüPerspectiveCameraünameücameraüfoldedòühiddenòü
-castShadowòüreceiveShadowòüvisibleñümatrixAutoUpdateñümatrix÷    ûœ;ëâ6J?  ûœ;ëâ6J?  ûE°d€…)@ûoƒÀÊA+@üfovü60üzoomünearüfarÈüfocusüaspectûÛÚÅçu @ü	filmGaugeFü
+castShadowòüreceiveShadowòüvisibleñümatrixAutoUpdateñümatrix÷    ûœ;ëâ6J?  ûœ;ëâ6J?  ûE°d€…)@ûoƒÀÊA+@üfovü60üzoomünearüfarÈüfocusüaspectûÅNìÄNìü?ü	filmGaugeFü
 filmOffset ü
 clearColoròü
 clearDepthòüviewport÷üoffset÷  üorderöüuuidü$342DF529-54D5-41BD-899F-24AE45D89CA1ütypeüMeshünameüstonesüfoldedòühiddenòü
@@ -1636,7 +1635,9 @@ castShadowñüreceiveShadowñüvisibleñümatrixAutoUpdateòümatrix÷ûyé&1¬|?    û
 castShadowñüreceiveShadowñüvisibleñümatrixAutoUpdateñümatrix÷ûŒÛh oà?    ûŒÛh oà?    ûŒÛh oà?    ügeometryü$6182DE9B-127D-4105-BFF9-FE8DC46F6523ümaterialü$90BAE593-C30E-4A55-A663-82ECEF5AF471öüuuidü$C7953867-B990-4F74-8D7C-11CE684917E2ütypeüParticleEmiterünameüparticleüfoldedòühiddenòü
 castShadowòüreceiveShadowòüvisibleñümatrixAutoUpdateòümatrix÷            ügroupöütextureöüvalueü$188ECD3E-1096-46DC-815E-2085B48F8450üframes÷ü
 frameCountüloopüfixedTimeStepûü©ñÒMb?ühasPerspectiveñücolorizeñümaxParticleCountdütransparentñüblendingü	alphaTest ü
-depthWriteòü	depthTestñüfogñüscaleøØüemitteröüuuidü$2FBB46C4-3EC9-45F1-A078-1F7F58E9034Bütypeü	directionüparticleCountdüdurationğüisStaticòümaxAgeöüvalueú   ?üspread üpositionöüvalue÷   üspread÷   üvelocityöüvalue÷   üspread÷ üaccelerationöüvalue÷   üspread÷üwiggleöüvalue üspread üopacityöüvalue÷ûš™™™™™©?ûÍÌÌÌÌÌà?ûNÑ‘\şCà? üspread÷   ûÒo_Î‘?üsizeöüvalue÷üspread÷    üangleöüvalue÷    üspread÷    ücoloröüvalue÷øşÿÿøÆÿøíıø€€øüspread÷÷÷÷÷ücodeüÖ$var clock, time = 0;
+depthWriteòü	depthTestñüfogñüscaleøØüemitteröüuuidü$3992B05C-C6D3-48B4-AE78-3A85526ACAECütypeü	directionüparticleCountdüdurationğüisStaticòümaxAgeöüvalueú   ?üspread üpositionöüvalue÷   üspread÷   üvelocityöüvalue÷   üspread÷ üaccelerationöüvalue÷   üspread÷üwiggleöüvalue üspread üopacityöüvalue÷ûš™™™™™©?ûÍÌÌÌÌÌà?ûNÑ‘\şCà? üspread÷   ûÒo_Î‘?üsizeöüvalue÷üspread÷    üangleöüvalue÷    üspread÷    ücoloröüvalue÷øşÿÿøÆÿøíıø€€øüspread÷÷÷÷÷ücodeüŞ$
+//Time
+var clock, time = 0;
 
 //Game objects
 var camera;
@@ -1664,27 +1665,6 @@ var logo;
 //States
 var STATE_MENU = 0;
 var STATE_GAME = 1;
-
-//Function to reset ball
-var reset = function()
-{
-	ball.position.set(0,0,0);
-	ballSpeed.set(0,0,0);
-
-	setTimeout(function()
-	{
-		ballSpeed.set(Math.random() - 0.5, 0, 0);
-		ballSpeed.normalize();
-		ballSpeed.z = (Math.random() - 0.5);
-		ballSpeed.normalize();
-		ballSpeed.multiplyScalar(ballSpeedAbs);
-		
-		ball.position.set(0,0,0);
-	}, 2000);
-	
-	wasGoal = false;
-	ballSpeedAbs = 0.1;
-};
 
 //Initialize code
 function initialize()
@@ -1861,10 +1841,31 @@ function update()
 	}
 }
 
+//Function to reset ball
+var reset = function()
+{
+	ball.position.set(0,0,0);
+	ballSpeed.set(0,0,0);
+
+	setTimeout(function()
+	{
+		ballSpeed.set(Math.random() - 0.5, 0, 0);
+		ballSpeed.normalize();
+		ballSpeed.z = (Math.random() - 0.5);
+		ballSpeed.normalize();
+		ballSpeed.multiplyScalar(ballSpeedAbs);
+		
+		ball.position.set(0,0,0);
+	}, 2000);
+	
+	wasGoal = false;
+	ballSpeedAbs = 0.1;
+};
+
 ö
-üuuidü$2DBB813F-0450-4667-9375-0CE1CED1CE61ütypeüAmbientLightünameüambientüfoldedòühiddenòüvisibleñümatrixAutoUpdateòümatrix÷            ücolorøô­Äü	intensityöüuuidü$51A882CF-1261-4682-83DA-0B8B9BD0A7F1ütypeüParticleEmiterünameüparticleüfoldedòühiddenòü
+üuuidü$2DBB813F-0450-4667-9375-0CE1CED1CE61ütypeüAmbientLightünameüambientüfoldedòühiddenòüvisibleñümatrixAutoUpdateòümatrix÷            ücolorø¦Îœ	ü	intensityöüuuidü$51A882CF-1261-4682-83DA-0B8B9BD0A7F1ütypeüParticleEmiterünameüparticleüfoldedòühiddenòü
 castShadowòüreceiveShadowòüvisibleñümatrixAutoUpdateòümatrix÷           ügroupöütextureöüvalueü$188ECD3E-1096-46DC-815E-2085B48F8450üframes÷ü
 frameCountüloopüfixedTimeStepûü©ñÒMb?ühasPerspectiveñücolorizeñümaxParticleCountøütransparentñüblendingü	alphaTest ü
-depthWriteòü	depthTestñüfogñüscaleøØüemitteröüuuidü$FABF2F9C-A96F-4E5D-83BA-54C6247A268Dütypeü	directionüparticleCountøüdurationğüisStaticòümaxAgeöüvalueüspreadüpositionöüvalue÷   üspread÷(<üvelocityöüvalue÷   üspread÷üaccelerationöüvalue÷   üspread÷   üwiggleöüvalue üspread üopacityöüvalue÷ûš™™™™™©?ûÍÌÌÌÌÌà?ûNÑ‘\şCà? üspread÷   ûÒo_Î‘?üsizeöüvalue÷üspread÷    üangleöüvalue÷    üspread÷    ücoloröüvalue÷øşÿÿøÆÿøíıø€€øüspread÷÷÷÷÷öüuuidü$1D29B7C4-EE8B-4127-9097-8ECC5195C2C9ütypeüDirectionalLightünameügrassüfoldedòühiddenòü
+depthWriteòü	depthTestñüfogñüscaleøØüemitteröüuuidü$505209E3-7480-44ED-B711-EACF00E78CC9ütypeü	directionüparticleCountøüdurationğüisStaticòümaxAgeöüvalueüspreadüpositionöüvalue÷   üspread÷(<üvelocityöüvalue÷   üspread÷üaccelerationöüvalue÷   üspread÷   üwiggleöüvalue üspread üopacityöüvalue÷ûš™™™™™©?ûÍÌÌÌÌÌà?ûNÑ‘\şCà? üspread÷   ûÒo_Î‘?üsizeöüvalue÷üspread÷    üangleöüvalue÷    üspread÷    ücoloröüvalue÷øşÿÿøÆÿøíıø€€øüspread÷÷÷÷÷öüuuidü$1D29B7C4-EE8B-4127-9097-8ECC5195C2C9ütypeüDirectionalLightünameügrassüfoldedòühiddenòü
 castShadowñüvisibleñümatrixAutoUpdateñümatrix÷         ûÓ¹"{+'+Àû8Î·«úV#@ ücolorøöíÛü	intensityüshadowöübias üradiusümapSizeöüxø€üyø€ücameraöütopûš™™™™™)@übottomûffffff!Àüfarø œünearú   ?üleftûÍÌÌÌÌÌ'Àüright ücameras÷ü$405E44DE-66C4-4168-BC19-6E90C51FC4A9üworldöügravityöüx üyüz üquatNormalizeSkip üquatNormalizeFastòüsolveröü	toleranceûš™™™™™©?ü
-iterationsüauthorütentoneüdescriptionõüversionü1ülockPointeròühandlePixelRatioòüvròüvrScaleüantialiasingñüshadowsñüshadowsTypeütoneMapping ütoneMappingExposureütoneMappingWhitePoint
+iterationsüauthorütentoneüdescriptionõüversionü1ülockPointeròühandlePixelRatioòüvròüvrScaleüantialiasingñüshadowsñüshadowsTypeütoneMappingütoneMappingExposureütoneMappingWhitePoint
