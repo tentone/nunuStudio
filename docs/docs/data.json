@@ -709,7 +709,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\geometries\\RoundedBoxBufferGeometry.js",
             "line": 3,
-            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normal and uv.",
+            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normals.\n\nThere is no UV coordinates.",
             "author": "pailhead",
             "is_constructor": 1,
             "params": [
@@ -1139,7 +1139,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\geometries\\RoundedBoxBufferGeometry.js",
             "line": 3,
-            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normal and uv.",
+            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normals.\n\nThere is no UV coordinates.",
             "author": "pailhead",
             "is_constructor": 1
         },

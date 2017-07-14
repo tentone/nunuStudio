@@ -143,7 +143,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Geometry",
             "name": "Geometry",
-            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normal and uv."
+            "description": "RoundedBox Buffer Geometry.\n\nCreates a box with rounded corners, with normals.\n\nThere is no UV coordinates."
         },
         {
             "displayName": "Input",
