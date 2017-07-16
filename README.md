@@ -118,6 +118,7 @@
 - V0.9.1 Beta
 	- Internal debug console
 	- Desktop auto update mechanism
+	- Fixed some code editor bugs
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
