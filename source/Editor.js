@@ -1009,6 +1009,11 @@ Editor.createNewProgram = function()
 	//Reset resources
 	Editor.createDefaultResouces();
 
+	if(Editor.program !== null)
+	{
+		Editor.program.dispose();
+	}
+
 	//Create program
 	Editor.program = new Program();
 	Editor.program.addDefaultScene(Editor.defaultMaterial);

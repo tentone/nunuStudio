@@ -53,22 +53,22 @@ function PhongMaterialEditor(parent, closeable, container, index)
 
 	//Shading mode
 	this.form.addText("Shading");
-	this.shading = new DropdownList(this.form.element);
-	this.shading.position.set(100, 85);
-	this.shading.size.set(100, 18);
-	this.shading.addValue("Smooth", THREE.SmoothShading);
-	this.shading.addValue("Flat", THREE.FlatShading);
-	this.shading.setOnChange(function()
+	this.flatShading = new DropdownList(this.form.element);
+	this.flatShading.position.set(100, 85);
+	this.flatShading.size.set(100, 18);
+	this.flatShading.addValue("Smooth", false);
+	this.flatShading.addValue("Flat", true);
+	this.flatShading.setOnChange(function()
 	{
 		if(self.material !== null)
 		{
-			self.material.shading = self.shading.getValue();
+			self.material.flatShading = self.flatShading.getValue();
 			self.material.needsUpdate = true;
 		}
 	});
-	this.form.add(this.shading);
+	this.form.add(this.flatShading);
 	this.form.nextRow();
-
+	
 	//Color
 	this.form.addText("Color");
 	this.color = new ColorChooser(this.form.element);
@@ -382,7 +382,7 @@ PhongMaterialEditor.prototype.attach = function(material, materialFile)
 	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);
 	this.wireframe.setValue(material.wireframe);
-	this.shading.setValue(material.shading);
+	this.flatShading.setValue(material.flatShading);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.specular.setValue(material.specular.r, material.specular.g, material.specular.b);
 	this.shininess.setValue(material.shininess);
