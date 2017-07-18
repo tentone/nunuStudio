@@ -150,7 +150,7 @@ MaterialLoader.prototype.parse = function(json)
 		material.fragmentShader = json.fragmentShader;
 	}
 	
-	//Shading 
+
 	if(json.vertexColors !== undefined)
 	{
 		material.vertexColors = json.vertexColors;
@@ -159,10 +159,8 @@ MaterialLoader.prototype.parse = function(json)
 	{
 		material.fog = json.fog;
 	}
-	if(json.shading !== undefined)
-	{
-		material.shading = json.shading;
-	}
+
+	//Blending
 	if(json.blending !== undefined)
 	{
 		material.blending = json.blending;
@@ -170,6 +168,16 @@ MaterialLoader.prototype.parse = function(json)
 	if(json.side !== undefined)
 	{
 		material.side = json.side;
+	}
+
+	//Shading
+	if(json.shading !== undefined)
+	{
+		material.flatShading = (json.shading === 1); //THREE.FlatShading
+	}
+	if(json.flatShading !== undefined)
+	{
+		material.flatShading = json.flatShading;
 	}
 
 	//Opacity and transparency

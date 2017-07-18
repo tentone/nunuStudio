@@ -224,10 +224,6 @@ THREE.Material.prototype.toJSON = function(meta)
 	{
 		data.blending = this.blending;
 	}
-	if(this.shading !== THREE.SmoothShading)
-	{
-		data.shading = this.shading;
-	}
 	if(this.side !== THREE.FrontSide)
 	{
 		data.side = this.side;
@@ -236,6 +232,8 @@ THREE.Material.prototype.toJSON = function(meta)
 	{
 		data.vertexColors = this.vertexColors;
 	}
+
+	data.flatShading = this.flatShading;
 
 	//Opacity
 	if(this.opacity < 1)
