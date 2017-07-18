@@ -13,6 +13,7 @@ function ThemeDark()
 
 	//Color
 	this.barColor = "#222222";
+	this.sepColor = "#292929";
 	this.panelColor = "#333333";
 	this.resizeTabColor = "#222222";
 	this.boxColor = "#444444";
