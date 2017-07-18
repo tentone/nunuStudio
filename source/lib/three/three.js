@@ -5772,7 +5772,7 @@
 
 	var uv2_vertex = "#if defined( USE_LIGHTMAP ) || defined( USE_AOMAP )\n\tvUv2 = uv2;\n#endif";
 
-	var worldpos_vertex = "#if defined( USE_ENVMAP ) || defined( PHONG ) || defined( PHYSICAL ) || defined( LAMBERT ) || defined ( USE_SHADOWMAP )\n\tvec4 worldPosition = modelMatrix * vec4( transformed, 1.0 );\n#endif\n";
+	var worldpos_vertex = "#if defined( USE_ENVMAP ) || defined( PHONG ) || defined( PHYSICAL ) || defined( LAMBERT ) || defined( DISTANCE ) || defined ( USE_SHADOWMAP )\n\tvec4 worldPosition = modelMatrix * vec4( transformed, 1.0 );\n#endif\n";
 
 	var cube_frag = "uniform samplerCube tCube;\nuniform float tFlip;\nuniform float opacity;\nvarying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tgl_FragColor = textureCube( tCube, vec3( tFlip * vWorldPosition.x, vWorldPosition.yz ) );\n\tgl_FragColor.a *= opacity;\n}\n";
 
@@ -5782,9 +5782,9 @@
 
 	var depth_vert = "#include <common>\n#include <uv_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <skinbase_vertex>\n\t#ifdef USE_DISPLACEMENTMAP\n\t\t#include <beginnormal_vertex>\n\t\t#include <morphnormal_vertex>\n\t\t#include <skinnormal_vertex>\n\t#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n}\n";
 
-	var distanceRGBA_frag = "uniform vec3 lightPos;\nuniform float shadowCameraNear;\nuniform float shadowCameraFar;\nvarying vec4 vWorldPosition;\n#include <common>\n#include <packing>\n#include <uv_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main () {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( 1.0 );\n\t#include <map_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\tfloat dist = length( vWorldPosition.xyz - lightPos.xyz );\n\tdist = ( dist - shadowCameraNear ) / ( shadowCameraFar - shadowCameraNear );\n\tdist = saturate( dist );\n\tgl_FragColor = packDepthToRGBA( dist );\n}\n";
+	var distanceRGBA_frag = "#define DISTANCE\nuniform vec3 referencePosition;\nuniform float nearDistance;\nuniform float farDistance;\nvarying vec3 vWorldPosition;\n#include <common>\n#include <packing>\n#include <uv_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main () {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( 1.0 );\n\t#include <map_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\tfloat dist = length( vWorldPosition - referencePosition );\n\tdist = ( dist - nearDistance ) / ( farDistance - nearDistance );\n\tdist = saturate( dist );\n\tgl_FragColor = packDepthToRGBA( dist );\n}\n";
 
-	var distanceRGBA_vert = "varying vec4 vWorldPosition;\n#include <common>\n#include <uv_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <skinbase_vertex>\n\t#ifdef USE_DISPLACEMENTMAP\n\t\t#include <beginnormal_vertex>\n\t\t#include <morphnormal_vertex>\n\t\t#include <skinnormal_vertex>\n\t#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <worldpos_vertex>\n\t#include <clipping_planes_vertex>\n\tvWorldPosition = worldPosition;\n}\n";
+	var distanceRGBA_vert = "#define DISTANCE\nvarying vec3 vWorldPosition;\n#include <common>\n#include <uv_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <skinbase_vertex>\n\t#ifdef USE_DISPLACEMENTMAP\n\t\t#include <beginnormal_vertex>\n\t\t#include <morphnormal_vertex>\n\t\t#include <skinnormal_vertex>\n\t#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <worldpos_vertex>\n\t#include <clipping_planes_vertex>\n\tvWorldPosition = worldPosition.xyz;\n}\n";
 
 	var equirect_frag = "uniform sampler2D tEquirect;\nuniform float tFlip;\nvarying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tvec3 direction = normalize( vWorldPosition );\n\tvec2 sampleUV;\n\tsampleUV.y = saturate( tFlip * direction.y * -0.5 + 0.5 );\n\tsampleUV.x = atan( direction.z, direction.x ) * RECIPROCAL_PI2 + 0.5;\n\tgl_FragColor = texture2D( tEquirect, sampleUV );\n}\n";
 
@@ -6125,9 +6125,9 @@
 				UniformsLib.common,
 				UniformsLib.displacementmap,
 				{
-					lightPos: { value: new Vector3() },
-					shadowCameraNear: { value: 1 },
-					shadowCameraFar: { value: 1000 }
+					referencePosition: { value: new Vector3() },
+					nearDistance: { value: 1 },
+					farDistance: { value: 1000 }
 				}
 			] ),
 
@@ -6375,10 +6375,7 @@
 	 * @author alteredq / http://alteredqualia.com/
 	 */
 
-	function LensFlarePlugin( renderer, flares ) {
-
-		var gl = renderer.context;
-		var state = renderer.state;
+	function WebGLFlareRenderer( renderer, gl, state, capabilities ) {
 
 		var vertexBuffer, elementBuffer;
 		var shader, program, attributes, uniforms;
@@ -6549,7 +6546,7 @@
 		 *         reads these back and calculates occlusion.
 		 */
 
-		this.render = function ( scene, camera, viewport ) {
+		this.render = function ( flares, scene, camera, viewport ) {
 
 			if ( flares.length === 0 ) return;
 
@@ -6734,7 +6731,7 @@
 			var fragmentShader = gl.createShader( gl.FRAGMENT_SHADER );
 			var vertexShader = gl.createShader( gl.VERTEX_SHADER );
 
-			var prefix = "precision " + renderer.getPrecision() + " float;\n";
+			var prefix = "precision " + capabilities.precision + " float;\n";
 
 			gl.shaderSource( fragmentShader, prefix + shader.fragmentShader );
 			gl.shaderSource( vertexShader, prefix + shader.vertexShader );
@@ -6773,10 +6770,7 @@
 	 * @author alteredq / http://alteredqualia.com/
 	 */
 
-	function SpritePlugin( renderer, sprites ) {
-
-		var gl = renderer.context;
-		var state = renderer.state;
+	function WebGLSpriteRenderer( renderer, gl, state, capabilities ) {
 
 		var vertexBuffer, elementBuffer;
 		var program, attributes, uniforms;
@@ -6854,7 +6848,7 @@
 
 		}
 
-		this.render = function ( scene, camera ) {
+		this.render = function ( sprites, scene, camera ) {
 
 			if ( sprites.length === 0 ) return;
 
@@ -7027,7 +7021,7 @@
 
 			gl.shaderSource( vertexShader, [
 
-				'precision ' + renderer.getPrecision() + ' float;',
+				'precision ' + capabilities.precision + ' float;',
 
 				'#define SHADER_NAME ' + 'SpriteMaterial',
 
@@ -7067,7 +7061,7 @@
 
 			gl.shaderSource( fragmentShader, [
 
-				'precision ' + renderer.getPrecision() + ' float;',
+				'precision ' + capabilities.precision + ' float;',
 
 				'#define SHADER_NAME ' + 'SpriteMaterial',
 
@@ -7689,6 +7683,85 @@
 
 		this.wireframe = source.wireframe;
 		this.wireframeLinewidth = source.wireframeLinewidth;
+
+		return this;
+
+	};
+
+	/**
+	 * @author WestLangley / http://github.com/WestLangley
+	 *
+	 * parameters = {
+	 *
+	 *  referencePosition: <float>,
+	 *  nearDistance: <float>,
+	 *  farDistance: <float>,
+	 *
+	 *  skinning: <bool>,
+	 *  morphTargets: <bool>,
+	 *
+	 *  map: new THREE.Texture( <Image> ),
+	 *
+	 *  alphaMap: new THREE.Texture( <Image> ),
+	 *
+	 *  displacementMap: new THREE.Texture( <Image> ),
+	 *  displacementScale: <float>,
+	 *  displacementBias: <float>
+	 *
+	 * }
+	 */
+
+	function MeshDistanceMaterial( parameters ) {
+
+		Material.call( this );
+
+		this.type = 'MeshDistanceMaterial';
+
+		this.referencePosition = new THREE.Vector3();
+		this.nearDistance = 1;
+		this.farDistance = 1000;
+
+		this.skinning = false;
+		this.morphTargets = false;
+
+		this.map = null;
+
+		this.alphaMap = null;
+
+		this.displacementMap = null;
+		this.displacementScale = 1;
+		this.displacementBias = 0;
+
+		this.fog = false;
+		this.lights = false;
+
+		this.setValues( parameters );
+
+	}
+
+	MeshDistanceMaterial.prototype = Object.create( Material.prototype );
+	MeshDistanceMaterial.prototype.constructor = MeshDistanceMaterial;
+
+	MeshDistanceMaterial.prototype.isMeshDistanceMaterial = true;
+
+	MeshDistanceMaterial.prototype.copy = function ( source ) {
+
+		Material.prototype.copy.call( this, source );
+
+		this.referencePosition.copy( source.referencePosition );
+		this.nearDistance = source.nearDistance;
+		this.farDistance = source.farDistance;
+
+		this.skinning = source.skinning;
+		this.morphTargets = source.morphTargets;
+
+		this.map = source.map;
+
+		this.alphaMap = source.alphaMap;
+
+		this.displacementMap = source.displacementMap;
+		this.displacementScale = source.displacementScale;
+		this.displacementBias = source.displacementBias;
 
 		return this;
 
@@ -9097,7 +9170,7 @@
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	function WebGLShadowMap( _renderer, _shadows, _objects, capabilities ) {
+	function WebGLShadowMap( _renderer, _shadows, _objects, maxTextureSize ) {
 
 		var _gl = _renderer.context,
 			_state = _renderer.state,
@@ -9105,7 +9178,7 @@
 			_projScreenMatrix = new Matrix4(),
 
 			_shadowMapSize = new Vector2(),
-			_maxShadowMapSize = new Vector2( capabilities.maxTextureSize, capabilities.maxTextureSize ),
+			_maxShadowMapSize = new Vector2( maxTextureSize, maxTextureSize ),
 
 			_lookTarget = new Vector3(),
 			_lightPositionWorld = new Vector3(),
@@ -9137,34 +9210,29 @@
 
 		// init
 
-		var depthMaterialTemplate = new MeshDepthMaterial();
-		depthMaterialTemplate.depthPacking = RGBADepthPacking;
-		depthMaterialTemplate.clipping = true;
-
-		var distanceShader = ShaderLib[ "distanceRGBA" ];
-		var distanceUniforms = UniformsUtils.clone( distanceShader.uniforms );
-
 		for ( var i = 0; i !== _NumberOfMaterialVariants; ++ i ) {
 
 			var useMorphing = ( i & _MorphingFlag ) !== 0;
 			var useSkinning = ( i & _SkinningFlag ) !== 0;
 
-			var depthMaterial = depthMaterialTemplate.clone();
-			depthMaterial.morphTargets = useMorphing;
-			depthMaterial.skinning = useSkinning;
+			var depthMaterial = new MeshDepthMaterial( {
+
+				depthPacking: RGBADepthPacking,
+
+				morphTargets: useMorphing,
+				skinning: useSkinning
+
+			} );
 
 			_depthMaterials[ i ] = depthMaterial;
 
-			var distanceMaterial = new ShaderMaterial( {
-				defines: {
-					'USE_SHADOWMAP': ''
-				},
-				uniforms: distanceUniforms,
-				vertexShader: distanceShader.vertexShader,
-				fragmentShader: distanceShader.fragmentShader,
+			//
+
+			var distanceMaterial = new MeshDistanceMaterial( {
+
 				morphTargets: useMorphing,
-				skinning: useSkinning,
-				clipping: true
+				skinning: useSkinning
+
 			} );
 
 			_distanceMaterials[ i ] = distanceMaterial;
@@ -9466,11 +9534,11 @@
 			result.wireframeLinewidth = material.wireframeLinewidth;
 			result.linewidth = material.linewidth;
 
-			if ( isPointLight && result.uniforms.lightPos !== undefined ) {
+			if ( isPointLight && result.isMeshDistanceMaterial ) {
 
-				result.uniforms.lightPos.value.copy( lightPositionWorld );
-				result.uniforms.shadowCameraNear.value = shadowCameraNear;
-				result.uniforms.shadowCameraFar.value = shadowCameraFar;
+				result.referencePosition.copy( lightPositionWorld );
+				result.nearDistance = shadowCameraNear;
+				result.farDistance = shadowCameraFar;
 
 			}
 
@@ -17456,11 +17524,10 @@
 
 	}
 
-	function WebGLProgram( renderer, code, material, shader, parameters ) {
+	function WebGLProgram( renderer, extensions, code, material, shader, parameters ) {
 
 		var gl = renderer.context;
 
-		var extensions = material.extensions;
 		var defines = material.defines;
 
 		var vertexShader = shader.vertexShader;
@@ -17540,7 +17607,7 @@
 
 		//
 
-		var customExtensions = generateExtensions( extensions, parameters, renderer.extensions );
+		var customExtensions = generateExtensions( material.extensions, parameters, extensions );
 
 		var customDefines = generateDefines( defines );
 
@@ -17621,7 +17688,7 @@
 				parameters.sizeAttenuation ? '#define USE_SIZEATTENUATION' : '',
 
 				parameters.logarithmicDepthBuffer ? '#define USE_LOGDEPTHBUF' : '',
-				parameters.logarithmicDepthBuffer && renderer.extensions.get( 'EXT_frag_depth' ) ? '#define USE_LOGDEPTHBUF_EXT' : '',
+				parameters.logarithmicDepthBuffer && extensions.get( 'EXT_frag_depth' ) ? '#define USE_LOGDEPTHBUF_EXT' : '',
 
 				'uniform mat4 modelMatrix;',
 				'uniform mat4 modelViewMatrix;',
@@ -17728,9 +17795,9 @@
 				parameters.physicallyCorrectLights ? "#define PHYSICALLY_CORRECT_LIGHTS" : '',
 
 				parameters.logarithmicDepthBuffer ? '#define USE_LOGDEPTHBUF' : '',
-				parameters.logarithmicDepthBuffer && renderer.extensions.get( 'EXT_frag_depth' ) ? '#define USE_LOGDEPTHBUF_EXT' : '',
+				parameters.logarithmicDepthBuffer && extensions.get( 'EXT_frag_depth' ) ? '#define USE_LOGDEPTHBUF_EXT' : '',
 
-				parameters.envMap && renderer.extensions.get( 'EXT_shader_texture_lod' ) ? '#define TEXTURE_LOD_EXT' : '',
+				parameters.envMap && extensions.get( 'EXT_shader_texture_lod' ) ? '#define TEXTURE_LOD_EXT' : '',
 
 				'uniform mat4 viewMatrix;',
 				'uniform vec3 cameraPosition;',
@@ -17857,12 +17924,11 @@
 
 		var cachedUniforms;
 
-		this.getUniforms = function() {
+		this.getUniforms = function () {
 
 			if ( cachedUniforms === undefined ) {
 
-				cachedUniforms =
-					new WebGLUniforms( gl, program, renderer );
+				cachedUniforms = new WebGLUniforms( gl, program, renderer );
 
 			}
 
@@ -17874,7 +17940,7 @@
 
 		var cachedAttributes;
 
-		this.getAttributes = function() {
+		this.getAttributes = function () {
 
 			if ( cachedAttributes === undefined ) {
 
@@ -17937,12 +18003,13 @@
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	function WebGLPrograms( renderer, capabilities ) {
+	function WebGLPrograms( renderer, extensions, capabilities ) {
 
 		var programs = [];
 
 		var shaderIDs = {
 			MeshDepthMaterial: 'depth',
+			MeshDistanceMaterial: 'distanceRGBA',
 			MeshNormalMaterial: 'normal',
 			MeshBasicMaterial: 'basic',
 			MeshLambertMaterial: 'lambert',
@@ -18043,7 +18110,7 @@
 			// (not to blow over maxLights budget)
 
 			var maxBones = object.isSkinnedMesh ? allocateBones( object ) : 0;
-			var precision = renderer.getPrecision();
+			var precision = capabilities.precision;
 
 			if ( material.precision !== null ) {
 
@@ -18201,7 +18268,7 @@
 
 			if ( program === undefined ) {
 
-				program = new WebGLProgram( renderer, code, material, shader, parameters );
+				program = new WebGLProgram( renderer, extensions, code, material, shader, parameters );
 				programs.push( program );
 
 			}
@@ -20608,8 +20675,8 @@
 
 		var morphInfluences = new Float32Array( 8 );
 
-		var sprites = [];
-		var lensFlares = [];
+		var spritesArray = [];
+		var flaresArray = [];
 
 		// public properties
 
@@ -20729,6 +20796,11 @@
 
 		};
 
+		function getTargetPixelRatio() {
+
+			return _currentRenderTarget === null ? _pixelRatio : 1;
+
+		}
 
 		// initialize
 
@@ -20787,6 +20859,7 @@
 		var programCache, renderLists;
 
 		var background, bufferRenderer, indexedBufferRenderer;
+		var flareRenderer, spriteRenderer;
 
 		function initGLContext() {
 
@@ -20816,7 +20889,7 @@
 			attributes = new WebGLAttributes( _gl );
 			geometries = new WebGLGeometries( _gl, attributes, _infoMemory );
 			objects = new WebGLObjects( _gl, geometries, _infoRender );
-			programCache = new WebGLPrograms( _this, capabilities );
+			programCache = new WebGLPrograms( _this, extensions, capabilities );
 			lights = new WebGLLights();
 			renderLists = new WebGLRenderLists();
 
@@ -20825,41 +20898,33 @@
 			bufferRenderer = new WebGLBufferRenderer( _gl, extensions, _infoRender );
 			indexedBufferRenderer = new WebGLIndexedBufferRenderer( _gl, extensions, _infoRender );
 
+			flareRenderer = new WebGLFlareRenderer( _this, _gl, state, capabilities );
+			spriteRenderer = new WebGLSpriteRenderer( _this, _gl, state, capabilities );
+
 			_this.info.programs = programCache.programs;
+
+			_this.context = _gl;
+			_this.capabilities = capabilities;
+			_this.extensions = extensions;
+			_this.properties = properties;
+			_this.renderLists = renderLists;
+			_this.state = state;
 
 		}
 
 		initGLContext();
 
+		// vr
+
 		var vr = new WebVRManager( _this );
 
-		//
-
-		function getTargetPixelRatio() {
-
-			return _currentRenderTarget === null ? _pixelRatio : 1;
-
-		}
-
-		this.context = _gl;
-		this.capabilities = capabilities;
-		this.extensions = extensions;
-		this.properties = properties;
-		this.renderLists = renderLists;
-		this.state = state;
 		this.vr = vr;
 
 		// shadow map
 
-		var shadowMap = new WebGLShadowMap( this, shadowsArray, objects, capabilities );
+		var shadowMap = new WebGLShadowMap( _this, shadowsArray, objects, capabilities.maxTextureSize );
 
 		this.shadowMap = shadowMap;
-
-
-		// Plugins
-
-		var spritePlugin = new SpritePlugin( this, sprites );
-		var lensFlarePlugin = new LensFlarePlugin( this, lensFlares );
 
 		// API
 
@@ -20886,18 +20951,6 @@
 
 			var extension = extensions.get( 'WEBGL_lose_context' );
 			if ( extension ) extension.restoreContext();
-
-		};
-
-		this.getMaxAnisotropy = function () {
-
-			return capabilities.getMaxAnisotropy();
-
-		};
-
-		this.getPrecision = function () {
-
-			return capabilities.precision;
 
 		};
 
@@ -21668,8 +21721,8 @@
 			lightsArray.length = 0;
 			shadowsArray.length = 0;
 
-			sprites.length = 0;
-			lensFlares.length = 0;
+			spritesArray.length = 0;
+			flaresArray.length = 0;
 
 			_localClippingEnabled = this.localClippingEnabled;
 			_clippingEnabled = _clipping.init( this.clippingPlanes, _localClippingEnabled, camera );
@@ -21741,10 +21794,10 @@
 
 			}
 
-			// custom render plugins (post pass)
+			// custom renderers
 
-			spritePlugin.render( scene, camera );
-			lensFlarePlugin.render( scene, camera, _currentViewport );
+			spriteRenderer.render( spritesArray, scene, camera );
+			flareRenderer.render( flaresArray, scene, camera, _currentViewport );
 
 			// Generate mipmap if we're using any kind of mipmap filtering
 
@@ -21847,13 +21900,13 @@
 
 					if ( ! object.frustumCulled || _frustum.intersectsSprite( object ) ) {
 
-						sprites.push( object );
+						spritesArray.push( object );
 
 					}
 
 				} else if ( object.isLensFlare ) {
 
-					lensFlares.push( object );
+					flaresArray.push( object );
 
 				} else if ( object.isImmediateRenderObject ) {
 
@@ -22378,7 +22431,8 @@
 					material.isMeshPhongMaterial ||
 					material.isMeshStandardMaterial ||
 					material.isMeshNormalMaterial ||
-					material.isMeshDepthMaterial ) {
+					material.isMeshDepthMaterial ||
+					material.isMeshDistanceMaterial ) {
 
 					refreshUniformsCommon( m_uniforms, material );
 
@@ -22421,13 +22475,11 @@
 
 				} else if ( material.isMeshDepthMaterial ) {
 
-					if ( material.displacementMap ) {
+					refreshUniformsDepth( m_uniforms, material );
 
-						m_uniforms.displacementMap.value = material.displacementMap;
-						m_uniforms.displacementScale.value = material.displacementScale;
-						m_uniforms.displacementBias.value = material.displacementBias;
+				} else if ( material.isMeshDistanceMaterial ) {
 
-					}
+					refreshUniformsDistance( m_uniforms, material );
 
 				} else if ( material.isMeshNormalMaterial ) {
 
@@ -22735,6 +22787,34 @@
 			uniforms.clearCoatRoughness.value = material.clearCoatRoughness;
 
 			refreshUniformsStandard( uniforms, material );
+
+		}
+
+		function refreshUniformsDepth( uniforms, material ) {
+
+			if ( material.displacementMap ) {
+
+				uniforms.displacementMap.value = material.displacementMap;
+				uniforms.displacementScale.value = material.displacementScale;
+				uniforms.displacementBias.value = material.displacementBias;
+
+			}
+
+		}
+
+		function refreshUniformsDistance( uniforms, material ) {
+
+			if ( material.displacementMap ) {
+
+				uniforms.displacementMap.value = material.displacementMap;
+				uniforms.displacementScale.value = material.displacementScale;
+				uniforms.displacementBias.value = material.displacementBias;
+
+			}
+
+			uniforms.referencePosition.value.copy( material.referencePosition );
+			uniforms.nearDistance.value = material.nearDistance;
+			uniforms.farDistance.value = material.farDistance;
 
 		}
 
@@ -29646,6 +29726,7 @@
 		MeshNormalMaterial: MeshNormalMaterial,
 		MeshLambertMaterial: MeshLambertMaterial,
 		MeshDepthMaterial: MeshDepthMaterial,
+		MeshDistanceMaterial: MeshDistanceMaterial,
 		MeshBasicMaterial: MeshBasicMaterial,
 		LineDashedMaterial: LineDashedMaterial,
 		LineBasicMaterial: LineBasicMaterial,
@@ -42720,7 +42801,7 @@
 	SkeletonHelper.prototype.update = function () {
 
 		console.error( 'THREE.SkeletonHelper: update() no longer needs to be called.' );
-		
+
 	};
 
 	function WireframeHelper( object, hex ) {
@@ -43499,6 +43580,20 @@
 
 		},
 
+		getMaxAnisotropy: function () {
+
+			console.warn( 'THREE.WebGLRenderer: .getMaxAnisotropy() is now .capabilities.getMaxAnisotropy().' );
+			return this.capabilities.getMaxAnisotropy();
+
+		},
+
+		getPrecision: function () {
+
+			console.warn( 'THREE.WebGLRenderer: .getPrecision() is now .capabilities.precision.' );
+			return this.capabilities.precision;
+
+		},
+
 		supportsFloatTextures: function () {
 
 			console.warn( 'THREE.WebGLRenderer: .supportsFloatTextures() is now .extensions.get( \'OES_texture_float\' ).' );
@@ -44137,6 +44232,7 @@
 	exports.MeshNormalMaterial = MeshNormalMaterial;
 	exports.MeshLambertMaterial = MeshLambertMaterial;
 	exports.MeshDepthMaterial = MeshDepthMaterial;
+	exports.MeshDistanceMaterial = MeshDistanceMaterial;
 	exports.MeshBasicMaterial = MeshBasicMaterial;
 	exports.LineDashedMaterial = LineDashedMaterial;
 	exports.LineBasicMaterial = LineBasicMaterial;

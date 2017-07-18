@@ -64,7 +64,7 @@ function ConsoleTab(parent, closeable, container, index)
 ConsoleTab.prototype = Object.create(TabElement.prototype);
 
 //Create a new log division element and fill with information from the object
-ConsoleTab.createNessage = function(object)
+ConsoleTab.createMessage = function(object)
 {
 	var log = document.createElement("div");
 	log.style.width = "100%";
@@ -202,14 +202,21 @@ ConsoleTab.createNessage = function(object)
 	{
 		log.innerHTML = "null";
 	}
-	/*else if(object instanceof Function || object instanceof Error)
+	/*else if(object instanceof Object)
 	{
-		log.innerHTML = object;
-	}
-	else if(object instanceof Object)
-	{
-		_console.log(object);
-		jsonTree.create(object, log);
+		try
+		{
+			jsonTree.create(object, log);
+
+			for(var i = 0; i < log.children.length; i++)
+			{
+				log.children[i].style.color = "#FFFFFF";
+			}
+		}
+		catch(e)
+		{
+			log.innerHTML = object;
+		}
 	}*/
 	else
 	{
@@ -235,7 +242,7 @@ ConsoleTab.prototype.log = function(args)
 {
 	for(var i = 0; i < args.length; i++)
 	{
-		this.console.appendChild(ConsoleTab.createNessage(args[i]));
+		this.console.appendChild(ConsoleTab.createMessage(args[i]));
 	}
 
 	this.console.appendChild(ConsoleTab.createBar());
@@ -247,7 +254,7 @@ ConsoleTab.prototype.warn = function(args)
 {
 	for(var i = 0; i < args.length; i++)
 	{
-		var log = ConsoleTab.createNessage(args[i]);
+		var log = ConsoleTab.createMessage(args[i]);
 		log.style.color = "#FFFF00";
 		this.console.appendChild(log);
 	}
@@ -261,7 +268,7 @@ ConsoleTab.prototype.error = function(args)
 {
 	for(var i = 0; i < args.length; i++)
 	{
-		var log = ConsoleTab.createNessage(args[i]);
+		var log = ConsoleTab.createMessage(args[i]);
 		log.style.color = "#FF0000";
 		this.console.appendChild(log);
 	}
