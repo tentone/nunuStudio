@@ -272,11 +272,11 @@ Interface.initialize = function()
 	Interface.addCamera.optionsSize.set(40, 40);
 	Interface.addCamera.updateInterface();
 
-	//Prespective camera
+	//Perspective camera
 	Interface.addCamera.addOption(Editor.filePath + "icons/camera/prespective.png", function()
 	{
 		Editor.addToScene(new PerspectiveCamera(60, 1));
-	}, "Prespective Camera");
+	}, "Perspective Camera");
 
 	//Orthographic camera
 	Interface.addCamera.addOption(Editor.filePath + "icons/camera/orthographic.png", function()
