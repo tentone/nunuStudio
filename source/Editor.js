@@ -9,7 +9,7 @@ Editor.NWJSPath = "../nwjs/";
 //Runtime
 include("Nunu.js");
 
-include("lib/three/three.min.js");
+include("lib/three/three.js");
 
 include("lib/three/effects/VREffect.js");
 
@@ -17,12 +17,12 @@ include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");
 
+include("lib/aruco.js");
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.js");
-include("lib/aruco.js");
 include("lib/opentype.min.js");
 
 include("lib/bytebuffer.min.js");
@@ -109,10 +109,9 @@ include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");
 
-//Loaders
+//Editor
 include("core/loaders/external/TDSLoader.js");
 
-//Editor
 include("lib/codemirror/codemirror.js");
 include("lib/codemirror/codemirror.css");
 include("lib/codemirror/keymap/sublime.js");
@@ -143,9 +142,6 @@ include("lib/codemirror/addon/lint/javascript-lint.js");
 include("lib/codemirror/addon/tern/tern.js");
 include("lib/codemirror/addon/tern/tern.css");
 include("lib/codemirror/theme/*");
-
-//include("lib/jsontree/jsonTree.js");
-//include("lib/jsontree/jsonTree.css");
 
 include("lib/acorn/acorn.js");
 include("lib/acorn/acorn_loose.js");
@@ -315,7 +311,7 @@ include("editor/utils/CodemirrorThemes.js");
 include("editor/history/History.js");
 include("editor/history/Action.js");
 
-include("editor/Console.js");
+//include("editor/Console.js");
 include("editor/Clipboard.js");
 include("editor/DragBuffer.js");
 include("editor/Interface.js");
