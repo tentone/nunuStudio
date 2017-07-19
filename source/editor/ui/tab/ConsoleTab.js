@@ -204,19 +204,7 @@ ConsoleTab.createMessage = function(object)
 	}
 	/*else if(object instanceof Object)
 	{
-		try
-		{
-			jsonTree.create(object, log);
-
-			for(var i = 0; i < log.children.length; i++)
-			{
-				log.children[i].style.color = "#FFFFFF";
-			}
-		}
-		catch(e)
-		{
-			log.innerHTML = object;
-		}
+		log.innerHTML = object;
 	}*/
 	else
 	{
