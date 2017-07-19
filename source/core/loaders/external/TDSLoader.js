@@ -340,8 +340,37 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 		}
 		else if(next === MESH_MATRIX)
 		{
-			this.debugMessage("   Tranformation Matrix (TODO)");
-			//TODO <ADD CODE HERE>
+			this.debugMessage("   Translation Matrix");
+
+			//TODO <CHECK WHY THE MATRIX IS NOT BEING APPLIED>
+
+			var values = [];
+			for(var i = 0; i < 12; i++)
+			{
+				values[i] = this.readFloat(data);
+			}
+
+			var matrix = new THREE.Matrix4();
+
+			matrix.elements[0] = values[0];
+			matrix.elements[1] = values[6];
+			matrix.elements[2] = values[3];
+			matrix.elements[3] = values[9];
+
+			matrix.elements[4] = values[2];
+			matrix.elements[5] = values[8];
+			matrix.elements[6] = values[5];
+			matrix.elements[7] = values[11];
+
+			matrix.elements[8] = values[1];
+			matrix.elements[9] = values[7];
+			matrix.elements[10] = values[4];
+			matrix.elements[11] = values[10];
+
+			matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
+			
+			console.log(matrix);
+			console.log(mesh);
 		}
 		else
 		{
