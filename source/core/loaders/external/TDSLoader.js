@@ -354,13 +354,16 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 
 	if(!useBufferGeometry)
 	{
-		//geometry.faceVertexUvs[0][faceIndex][vertexIndex]
-		var faceUV = [];
-		for(var i = 0; i < geometry.faces.length; i++)
+		if(uvs.length > 0)
 		{
-			faceUV.push([uvs[geometry.faces[i].a], uvs[geometry.faces[i].b], uvs[geometry.faces[i].c]]);
+			//geometry.faceVertexUvs[0][faceIndex][vertexIndex]
+			var faceUV = [];
+			for(var i = 0; i < geometry.faces.length; i++)
+			{
+				faceUV.push([uvs[geometry.faces[i].a], uvs[geometry.faces[i].b], uvs[geometry.faces[i].c]]);
+			}
+			geometry.faceVertexUvs[0] = faceUV;
 		}
-		geometry.faceVertexUvs[0] = faceUV;
 
 		geometry.computeVertexNormals();
 	}
