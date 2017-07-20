@@ -342,8 +342,6 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 		{
 			this.debugMessage("   Translation Matrix");
 
-			//TODO <CHECK WHY THE MATRIX IS NOT BEING APPLIED>
-
 			var values = [];
 			for(var i = 0; i < 12; i++)
 			{
@@ -367,10 +365,11 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 			matrix.elements[10] = values[4];
 			matrix.elements[11] = values[10];
 
+			matrix.transpose();
 			matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
-			
-			console.log(matrix);
-			console.log(mesh);
+
+			this.debugMessage(matrix);
+			this.debugMessage(mesh);
 		}
 		else
 		{
