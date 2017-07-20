@@ -367,7 +367,7 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 
 			matrix.transpose();
 			matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
-
+			
 			this.debugMessage(matrix);
 			this.debugMessage(mesh);
 		}
@@ -623,6 +623,7 @@ THREE.TDSLoader.prototype.readString = function(data, maxLength)
 	for(var i = 0; i < maxLength; i++)
 	{
 		var c = this.readByte(data);
+
 		if(!c)
 		{
 			break;

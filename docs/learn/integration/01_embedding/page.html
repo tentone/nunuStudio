@@ -80,8 +80,8 @@ function initialize()
 	//Create new NunuApp intance
 	app = new NunuApp(canvas);
 
-	//Load and run the "app.isp" file
-	app.loadRunProgram("app.isp");
+	//Load and run the "app.nsp" file
+	app.loadRunProgram("app.nsp");
 }
 
 //Should be called every time the window is resized
@@ -152,7 +152,7 @@ var onProgress = function(event)
 var onLoad = function(){};
 
 //Load and run nunu app
-app.loadRunProgram("app.isp", onLoad, onProgress);</code></pre>
+app.loadRunProgram("app.nsp", onLoad, onProgress);</code></pre>
 	</section>
 
 
