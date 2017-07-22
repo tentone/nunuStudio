@@ -311,7 +311,7 @@ include("editor/utils/CodemirrorThemes.js");
 include("editor/history/History.js");
 include("editor/history/Action.js");
 
-//include("editor/Console.js");
+include("editor/Console.js");
 include("editor/Clipboard.js");
 include("editor/DragBuffer.js");
 include("editor/Interface.js");
