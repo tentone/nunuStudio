@@ -128,7 +128,7 @@
 ```javascript
  var app = new NunuApp();
  app.setCanvas(canvas);
- app.load("app.isp");
+ app.load("app.nsp");
  app.run();
 
  //Resize app
@@ -146,8 +146,8 @@
  //Toggle fullscreen (optional)
  function toggleFullscreen()
  {
- 	app.setFullscreen();
- 	app.resize();
+ 	app.toggleFullscreen();
+ 	
  }
  
  //Toggle VR mode (optional, if available)
