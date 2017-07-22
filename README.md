@@ -120,6 +120,29 @@
 	- Desktop auto update mechanism
 	- Fixed some code editor bugs
 
+### Tech
+nunuStudio is built on top of a number of open source projects
+- NWJS
+	- nwjs.io
+- three.js
+	- github.com/mrdoob/three.js
+- opentype
+	- opentype.js.org
+- SPE
+	- github.com/squarefeet/ShaderParticleEngine
+- Cannon.JS
+	- schteppe.github.io/cannon.js
+- JSColor
+	- jscolor.com
+- CodeMirror
+	- codemirror.net
+- LeapJS
+	- github.com/leapmotion/leapjs
+- JSHint
+	- jshint.com
+- YUIDocs
+	- yui.github.io/yuidoc
+
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
 - To embed applications made inside nunuStudio in web pages the following code can be used
@@ -160,29 +183,6 @@
  }
 ```
 
-### Tech
-nunuStudio is built on top of a number of open source projects
-- NWJS
-	- nwjs.io
-- three.js
-	- github.com/mrdoob/three.js
-- opentype
-	- opentype.js.org
-- SPE
-	- github.com/squarefeet/ShaderParticleEngine
-- Cannon.JS
-	- schteppe.github.io/cannon.js
-- JSColor
-	- jscolor.com
-- CodeMirror
-	- codemirror.net
-- LeapJS
-	- github.com/leapmotion/leapjs
-- JSHint
-	- jshint.com
-- YUIDocs
-	- yui.github.io/yuidoc
-
 ### Installation
 - nunuStudio is intended to run with NWJS direcly on the desktop
 	- Linux and Windows are supported
@@ -197,6 +197,8 @@ nunuStudio is built on top of a number of open source projects
 	- Javascript is optimized and minified using Google closure
 	- Documentation generation requires YuiDocs to be installed (npm -g install yuidocjs)
 - The building system generates minified builds for the runtime and for the editor
+- To build nunu (editor, runtime and documentation), navigate to the nunu/build/build directory and run "node build.js"
+- The build system is compatible with windows, linux and macos.
 
 ### License
 - nunuStudio uses a MIT license (Available on GitHub page)
