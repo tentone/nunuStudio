@@ -8678,7 +8678,7 @@
                 }
             ],
             "return": {
-                "description": "True if the fname refers to a supported font format.",
+                "description": "True if the fname refers to a supported format.",
                 "type": "Boolean"
             },
             "class": "Model",

@@ -17,14 +17,12 @@ THREE.ColladaLoader.prototype = {
 
 		var scope = this;
 
-		var resourceDirectory = url.split( /[\\\/]/ );
-		resourceDirectory.pop();
-		resourceDirectory = resourceDirectory.join( '/' ) + '/';
+		var path = THREE.Loader.prototype.extractUrlBase( url );
 
 		var loader = new THREE.FileLoader( scope.manager );
 		loader.load( url, function ( text ) {
 
-			onLoad( scope.parse( text, resourceDirectory ) );
+			onLoad( scope.parse( text, path ) );
 
 		}, onProgress, onError );
 
@@ -46,7 +44,7 @@ THREE.ColladaLoader.prototype = {
 
 	},
 
-	parse: function ( text, resourceDirectory ) {
+	parse: function ( text, path ) {
 
 		function getElementsByTagName( xml, name ) {
 
@@ -500,13 +498,7 @@ THREE.ColladaLoader.prototype = {
 				var time = keyframe.time;
 				var value = keyframe.value;
 
-				matrix.set(
-					value[ 0 ], value[ 1 ], value[ 2 ], value[ 3 ],
-					value[ 4 ], value[ 5 ], value[ 6 ], value[ 7 ],
-					value[ 8 ], value[ 9 ], value[ 10 ], value[ 11 ],
-					value[ 12 ], value[ 13 ], value[ 14 ], value[ 15 ]
-				);
-
+				matrix.fromArray( value ).transpose();
 				matrix.decompose( position, quaternion, scale );
 
 				times.push( time );
@@ -1893,6 +1885,24 @@ THREE.ColladaLoader.prototype = {
 
 		}
 
+		function groupPrimitives( primitives ) {
+
+			var build = {};
+
+			for ( var i = 0; i < primitives.length; i ++ ) {
+
+				var primitive = primitives[ i ];
+
+				if ( build[ primitive.type ] === undefined ) build[ primitive.type ] = [];
+
+				build[ primitive.type ].push( primitive );
+
+			}
+
+			return build;
+
+		}
+
 		function buildGeometry( data ) {
 
 			var build = {};
@@ -1903,6 +1913,27 @@ THREE.ColladaLoader.prototype = {
 
 			if ( primitives.length === 0 ) return {};
 
+			// our goal is to create one buffer geoemtry for a single type of primitives
+			// first, we group all primitives by their type
+
+			var groupedPrimitives = groupPrimitives( primitives );
+
+			for ( var type in groupedPrimitives ) {
+
+				// second, we create for each type of primitives (polylist,triangles or lines) a buffer geometry
+
+				build[ type ] = buildGeometryType( groupedPrimitives[ type ], sources, vertices );
+
+			}
+
+			return build;
+
+		}
+
+		function buildGeometryType( primitives, sources, vertices ) {
+
+			var build = {};
+
 			var position = { array: [], stride: 0 };
 			var normal = { array: [], stride: 0 };
 			var uv = { array: [], stride: 0 };
@@ -1912,7 +1943,6 @@ THREE.ColladaLoader.prototype = {
 			var skinWeight = { array: [], stride: 4 };
 
 			var geometry = new THREE.BufferGeometry();
-			geometry.name = data.name || '';
 
 			var materialKeys = [];
 
@@ -1933,7 +1963,16 @@ THREE.ColladaLoader.prototype = {
 
 				// groups
 
-				count = primitive.count * 3 * triangleCount;
+				if ( primitive.type === 'lines' || primitive.type === 'linestrips' ) {
+
+					count = primitive.count * 2;
+
+				} else {
+
+					count = primitive.count * 3 * triangleCount;
+
+				}
+
 				geometry.addGroup( start, count, p );
 				start += count;
 
@@ -1952,17 +1991,39 @@ THREE.ColladaLoader.prototype = {
 						case 'VERTEX':
 							for ( var key in vertices ) {
 
-								if ( key === 'POSITION' ) {
+								var id =  vertices[ key ];
 
-									buildGeometryData( primitive, sources[ vertices[ key ] ], input.offset, position.array );
-									position.stride = sources[ vertices[ key ] ].stride;
+								switch ( key ) {
 
-									if ( sources.skinWeights && sources.skinIndices ) {
+									case 'POSITION':
+										buildGeometryData( primitive, sources[ id ], input.offset, position.array );
+										position.stride = sources[ id ].stride;
 
-										buildGeometryData( primitive, sources.skinIndices, input.offset, skinIndex.array );
-										buildGeometryData( primitive, sources.skinWeights, input.offset, skinWeight.array );
+										if ( sources.skinWeights && sources.skinIndices ) {
 
-									}
+											buildGeometryData( primitive, sources.skinIndices, input.offset, skinIndex.array );
+											buildGeometryData( primitive, sources.skinWeights, input.offset, skinWeight.array );
+
+										}
+										break;
+
+									case 'NORMAL':
+										buildGeometryData( primitive, sources[ id ], input.offset, normal.array );
+										normal.stride = sources[ id ].stride;
+										break;
+
+									case 'COLOR':
+										buildGeometryData( primitive, sources[ id ], input.offset, color.array );
+										color.stride = sources[ id ].stride;
+										break;
+
+									case 'TEXCOORD':
+										buildGeometryData( primitive, sources[ id ], input.offset, uv.array );
+										uv.stride = sources[ id ].stride;
+										break;
+
+									default:
+										console.warn( 'THREE.ColladaLoader: Semantic "%s" not handled in geometry build process.', key );
 
 								}
 
@@ -2793,7 +2854,7 @@ THREE.ColladaLoader.prototype = {
 
 		}
 
-		function getSkeleton( skeletons, joints ) {
+		function buildSkeleton( skeletons, joints ) {
 
 			var boneData = [];
 			var sortedBoneData = [];
@@ -2901,7 +2962,6 @@ THREE.ColladaLoader.prototype = {
 						// ensure a correct animation of the model.
 
 						 boneInverse = new THREE.Matrix4();
-						 console.warn( 'THREE.ColladaLoader: Missing data for bone: %s.', object.name );
 
 					}
 
@@ -2926,11 +2986,15 @@ THREE.ColladaLoader.prototype = {
 			var instanceGeometries = data.instanceGeometries;
 			var instanceNodes = data.instanceNodes;
 
+			// nodes
+
 			for ( var i = 0, l = nodes.length; i < l; i ++ ) {
 
 				objects.push( getNode( nodes[ i ] ) );
 
 			}
+
+			// instance cameras
 
 			for ( var i = 0, l = instanceCameras.length; i < l; i ++ ) {
 
@@ -2938,25 +3002,38 @@ THREE.ColladaLoader.prototype = {
 
 			}
 
+			// instance controllers
+
 			for ( var i = 0, l = instanceControllers.length; i < l; i ++ ) {
 
 				var instance = instanceControllers[ i ];
 				var controller = getController( instance.id );
-				var geometry = getGeometry( controller.id );
-				var materials = resolveMaterialBinding( geometry.materialKeys, instance.materials );
-				var object = getObject( geometry, materials );
+				var geometries = getGeometry( controller.id );
+				var newObjects = buildObjects( geometries, instance.materials );
 
 				var skeletons = instance.skeletons;
 				var joints = controller.skin.joints;
 
-				var skeleton = getSkeleton( skeletons, joints );
+				var skeleton = buildSkeleton( skeletons, joints );
 
-				object.bind( skeleton, controller.skin.bindMatrix );
-				object.normalizeSkinWeights();
+				for ( var j = 0, jl = newObjects.length; j < jl; j ++ ) {
 
-				objects.push( object );
+					var object = newObjects[ j ];
+
+					if ( object.isSkinnedMesh ) {
+
+						object.bind( skeleton, controller.skin.bindMatrix );
+						object.normalizeSkinWeights();
+
+					}
+
+					objects.push( object );
+
+				}
 
 			}
+
+			// instance lights
 
 			for ( var i = 0, l = instanceLights.length; i < l; i ++ ) {
 
@@ -2964,15 +3041,27 @@ THREE.ColladaLoader.prototype = {
 
 			}
 
+			// instance geometries
+
 			for ( var i = 0, l = instanceGeometries.length; i < l; i ++ ) {
 
 				var instance = instanceGeometries[ i ];
-				var geometry = getGeometry( instance.id );
-				var materials = resolveMaterialBinding( geometry.materialKeys, instance.materials );
-				var object = getObject( geometry, materials );
-				objects.push( object );
+
+				// a single geometry instance in collada can lead to multiple object3Ds.
+				// this is the case when primitives are combined like triangles and lines
+
+				var geometries = getGeometry( instance.id );
+				var newObjects = buildObjects( geometries, instance.materials );
+
+				for ( var j = 0, jl = newObjects.length; j < jl; j ++ ) {
+
+					objects.push( newObjects[ j ] );
+
+				}
 
 			}
+
+			// instance nodes
 
 			for ( var i = 0, l = instanceNodes.length; i < l; i ++ ) {
 
@@ -3021,50 +3110,60 @@ THREE.ColladaLoader.prototype = {
 
 		}
 
-		function getObject( geometry, materials ) {
+		function buildObjects( geometries, instanceMaterials ) {
 
-			var object;
+			var objects = [];
 
-			var skinning = ( geometry.data.attributes.skinIndex !== undefined );
+			for ( var type in geometries ) {
 
-			if ( skinning ) {
+				var geometry = geometries[ type ];
 
-				for ( var i = 0, l = materials.length; i < l; i ++ ) {
+				var materials = resolveMaterialBinding( geometry.materialKeys, instanceMaterials );
 
-					materials[ i ].skinning = true;
+				var skinning = ( geometry.data.attributes.skinIndex !== undefined );
+
+				if ( skinning ) {
+
+					for ( var i = 0, l = materials.length; i < l; i ++ ) {
+
+						materials[ i ].skinning = true;
+
+					}
 
 				}
 
+				var material = ( materials.length === 1 ) ? materials[ 0 ] : materials;
+
+				switch ( type ) {
+
+					case 'lines':
+						object = new THREE.LineSegments( geometry.data, material );
+						break;
+
+					case 'linestrips':
+						object = new THREE.Line( geometry.data, material );
+						break;
+
+					case 'triangles':
+					case 'polylist':
+						if ( skinning ) {
+
+							object = new THREE.SkinnedMesh( geometry.data, material );
+
+						} else {
+
+							object = new THREE.Mesh( geometry.data, material );
+
+						}
+						break;
+
+				}
+
+				objects.push( object );
+
 			}
 
-			var material = ( materials.length === 1 ) ? materials[ 0 ] : materials;
-
-			switch ( geometry.type ) {
-
-				case 'lines':
-					object = new THREE.LineSegments( geometry.data, material );
-					break;
-
-				case 'linestrips':
-					object = new THREE.Line( geometry.data, material );
-					break;
-
-				case 'triangles':
-				case 'polylist':
-					if ( skinning ) {
-
-						object = new THREE.SkinnedMesh( geometry.data, material );
-
-					} else {
-
-						object = new THREE.Mesh( geometry.data, material );
-
-					}
-					break;
-
-			}
-
-			return object;
+			return objects;
 
 		}
 
@@ -3106,7 +3205,17 @@ THREE.ColladaLoader.prototype = {
 
 				var child = children[ i ];
 
-				group.add( getNode( child.id ) );
+				if ( child.id === null ) {
+
+					group.add( buildNode( child ) );
+
+				} else {
+
+					// if there is an ID, let's try to get the finished build (e.g. joints are already build)
+
+					group.add( getNode( child.id ) );
+
+				}
 
 			}
 
@@ -3191,7 +3300,8 @@ THREE.ColladaLoader.prototype = {
 		console.log( 'THREE.ColladaLoader: File version', version );
 
 		var asset = parseAsset( getElementsByTagName( collada, 'asset' )[ 0 ] );
-		var textureLoader = new THREE.TextureLoader( this.manager ).setPath( resourceDirectory );
+		var textureLoader = new THREE.TextureLoader( this.manager );
+		textureLoader.setPath( path ).setCrossOrigin( this.crossOrigin );
 
 		//
 

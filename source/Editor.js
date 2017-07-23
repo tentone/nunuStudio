@@ -162,6 +162,7 @@ include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/GLTF2Loader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/OBJLoader.js");
+include("lib/three/loaders/OBJLoader2.js");
 include("lib/three/loaders/PCDLoader.js");
 include("lib/three/loaders/PLYLoader.js");
 include("lib/three/loaders/STLLoader.js");
@@ -1285,29 +1286,64 @@ Editor.loadModel = function(file, onLoad)
 		{
 			try
 			{
-				var loader = new THREE.OBJLoader();
+				var materials = null;
 
 				//Look for MTL file
 				if(Nunu.runningOnDesktop())
 				{
-					var path = FileSystem.getFilePath(file.path);
-					var mtl = FileSystem.getNameWithoutExtension(file.path) + ".mtl";
-
-					if(FileSystem.fileExists(mtl))
+					try
 					{
-						var mtlLoader = new THREE.MTLLoader()
-						mtlLoader.setPath(path);
-						var materials = mtlLoader.parse(FileSystem.readFile(mtl));
-						loader.setMaterials(materials);
+						var path = FileSystem.getFilePath(file.path);
+						var mtl = FileSystem.getNameWithoutExtension(file.path) + ".mtl";
+
+						if(FileSystem.fileExists(mtl))
+						{
+							var mtlLoader = new THREE.MTLLoader()
+							mtlLoader.setPath(path);
+							materials = mtlLoader.parse(FileSystem.readFile(mtl));
+						}
+					}
+					catch(f)
+					{
+						console.error("nunuStudio: Error loading mtl file", e);
 					}
 				}
 
 				var reader = new FileReader();
 				reader.onload = function()
 				{
-					var obj = loader.parse(reader.result);
-					Editor.addToScene(obj);
+					//Try loading with OBJLoader1
+					try
+					{
+						var loader = new THREE.OBJLoader();
+						if(materials !== null)
+						{
+							loader.setMaterials(materials);
+						}
+						var obj = loader.parse(reader.result);
+						Editor.addToScene(obj);
+					}
+					catch(e)
+					{
+						//Try loading with OBJLoader2
+						try
+						{
+							var loader = new THREE.OBJLoader2();
+							if(materials !== null)
+							{
+								loader.setMaterials(materials);
+							}
+							var obj = loader.parseText(reader.result);
+							Editor.addToScene(obj);
+						}
+						catch(f)
+						{
+							Editor.alert("Error loading file");
+							console.error("nunuStudio: Error loading file", f);
+						}
+					}
 				};
+
 				reader.readAsText(file);
 			}
 			catch(e)
@@ -1609,6 +1645,7 @@ Editor.loadModel = function(file, onLoad)
 		else
 		{
 			Editor.alert("Unknown file format!");
+			console.warn("nunuStudio: Unknown file format");
 		}
 	}
 	catch(e)

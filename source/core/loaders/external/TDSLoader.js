@@ -352,7 +352,7 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 			}
 
 			var matrix = new THREE.Matrix4();
-			
+
 			//X Line
 			matrix.elements[0] = values[0];
 			matrix.elements[1] = values[6];
@@ -360,16 +360,16 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 			matrix.elements[3] = values[9];
 
 			//Y Line
-			matrix.elements[4] = values[2];
-			matrix.elements[5] = values[8];
-			matrix.elements[6] = values[5];
-			matrix.elements[7] = values[11];
+			matrix.elements[4] = -values[2];
+			matrix.elements[5] = -values[8];
+			matrix.elements[6] = -values[5];
+			matrix.elements[7] = -values[11];
 
 			//Z Line
 			matrix.elements[8] = values[1];
 			matrix.elements[9] = values[7];
 			matrix.elements[10] = values[4];
-			matrix.elements[11] = values[10];
+			matrix.elements[11] = -values[10];
 
 			//W Line
 			matrix.elements[12] = 0;
