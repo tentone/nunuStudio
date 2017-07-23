@@ -104,63 +104,74 @@ function SceneEditor(parent, closeable, container, index)
 			//Check intersected objects
 			var intersections = self.raycaster.intersectObjects(self.scene.children, true);
 
-			//Dragged file into object
-			if(intersections.length > 0 && event.dataTransfer.files.length > 0)
+			//Dragged file
+			if(event.dataTransfer.files.length > 0)
 			{
 				var file = event.dataTransfer.files[0];
 				var name = FileSystem.getFileName(file.name);
-				var object = intersections[0].object;
+				
+				//Check if mouse instersects and object
+				if(intersections.length > 0)
+				{
+					var object = intersections[0].object;
 
-				//Image
-				if(Image.fileIsImage(file))
-				{
-					Editor.loadTexture(file, function(texture)
+					//Image
+					if(Image.fileIsImage(file))
 					{
-						if(object instanceof THREE.Mesh)
+						Editor.loadTexture(file, function(texture)
 						{
-							var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-							material.name = texture.name;
-							object.material = material;
-						}
-						else if(object instanceof THREE.Sprite)
-						{
-							var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
-							material.name = texture.name;
-							object.material = material;
-						}
-						Editor.updateObjectViews();
-					});
-				}
-				//Video
-				else if(Video.fileIsVideo(file))
-				{
-					Editor.loadVideoTexture(file, function(texture)
-					{
-						if(object instanceof THREE.Mesh)
-						{
-							var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
-							material.name = texture.name;
-							object.material = material;
-						}
-						else if(object instanceof THREE.Sprite)
-						{
-							var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
-							material.name = texture.name;
-							object.material = material;
-						}
-						Editor.updateObjectViews();
-					});
-				}
-				//Font
-				else if(Font.fileIsFont(file))
-				{
-					if(object.font !== undefined)
-					{
-						Editor.loadFont(file, function(font)
-						{
-							object.setFont(font);
+							if(object instanceof THREE.Mesh)
+							{
+								var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+								material.name = texture.name;
+								object.material = material;
+							}
+							else if(object instanceof THREE.Sprite)
+							{
+								var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
+								material.name = texture.name;
+								object.material = material;
+							}
+							Editor.updateObjectViews();
 						});
 					}
+					//Video
+					else if(Video.fileIsVideo(file))
+					{
+						Editor.loadVideoTexture(file, function(texture)
+						{
+							if(object instanceof THREE.Mesh)
+							{
+								var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
+								material.name = texture.name;
+								object.material = material;
+							}
+							else if(object instanceof THREE.Sprite)
+							{
+								var material = new THREE.SpriteMaterial({map: texture, color: 0xffffff});
+								material.name = texture.name;
+								object.material = material;
+							}
+							Editor.updateObjectViews();
+						});
+					}
+					//Font
+					else if(Font.fileIsFont(file))
+					{
+						if(object.font !== undefined)
+						{
+							Editor.loadFont(file, function(font)
+							{
+								object.setFont(font);
+							});
+						}
+					}
+				}
+
+				//Model
+				if(Model.fileIsModel(file))
+				{
+					Editor.loadModel(file);
 				}
 			}
 			//Dragged resource

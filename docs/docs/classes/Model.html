@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Physics</title>  
+	<title>nunuStudio Model</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -159,40 +159,153 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Physics Module</h1>
-						<div class="box clearfix meta">
+						<h1>Model Class</h1>
+						<div class="box meta">
+						
+								<div class="extends">
+									Extends <a href="../classes/Resource.html" class="crosslink">Resource</a>
+								</div>
 						
 						
+									Module: <a href="../modules/Resources.html">Resources</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.</p>
-						<p>It is based on the original Mesh2Shape converted by @donmccurdy.</p>
+							<p>Model is used to load and check file type for external 3D models, animations, scenes etc.</p>
+						<p>It wraps other threejs loaders and loads files using them depending on file format.</p>
 						
 						</div>
 						
-						
-						<div class="yui3-g">
-							<div class="yui3-u-1-2">
-									<p>This namespace provides the following classes:</p>
-						
-									<ul class="module-classes">
-										<li class="module-class">
-											<a href="../classes/Mesh2shape.html">
-												Mesh2shape
-											</a>
-										</li>
-										<li class="module-class">
-											<a href="../classes/PhysicsObject.html">
-												PhysicsObject
-											</a>
-										</li>
-									</ul>
+							<div class="constructor">
+								<h2>Constructor</h2>
+								<div id="method_Model" class="method item">
+									<h3 class="name"><code>Model</code></h3>
+								
+										<span class="paren">()</span>
+								
+								
+								
+								
+								
+								
+								
+								
+									<div class="meta">
+												<p>
+										</p>
+								
+								
+								
+									</div>
+								
+									<div class="description">
+										
+									</div>
+								
+								
+								
+								</div>
 							</div>
 						
-							<div class="yui3-u-1-2">
+						<div id="classdocs" class="tabview">
+							<ul class="api-class-tabs">
+								<li class="api-class-tab index"><a href="#index">Index</a></li>
+						
+									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+							</ul>
+						
+							<div>
+								<div id="index" class="api-class-tabpanel index">
+									<h2 class="off-left">Item Index</h2>
+						
+										<div class="index-section methods">
+											<h3>Methods</h3>
+						
+											<ul class="index-list methods extends">
+													<li class="index-item method">
+														<a href="#method_fileIsFont">fileIsFont</a>
+						
+															<span class="flag static">static</span>
+													</li>
+											</ul>
+										</div>
+						
+						
+						
+								</div>
+						
+									<div id="methods" class="api-class-tabpanel">
+										<h2 class="off-left">Methods</h2>
+						
+											<div id="method_fileIsFont" class="method item">
+												<h3 class="name"><code>fileIsFont</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>file</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Boolean</span>
+													</span>
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Check if a file name refers to a 3D geometry file.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">file</code>
+																	<span class="type">File</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Boolean</span>:
+																<p>True if the fname refers to a supported font format.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+									</div>
+						
+						
+						
 							</div>
 						</div>
 					</div>

@@ -32,6 +32,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "MathUtils",
         "Mesh",
         "Mesh2shape",
+        "Model",
         "Mouse",
         "MultiMaterial",
         "Nunu",

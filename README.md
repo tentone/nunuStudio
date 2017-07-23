@@ -117,8 +117,8 @@
 	- Binary project files
 - V0.9.1 Beta
 	- Internal debug console
-	- Desktop auto update mechanism
-	- Fixed some code editor bugs
+	- Desktop auto update mechanism (auto download build from github)
+	- Load 3D file drag and drop
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
