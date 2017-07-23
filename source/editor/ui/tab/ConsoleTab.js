@@ -198,6 +198,37 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
+	else if(object instanceof THREE.Matrix4)
+	{
+		var table = document.createElement("table");
+		table.style.display = "inline-block";
+
+		for(var i = 0, j = 0; i < 16; i += 4, j++)
+		{
+			var row = table.insertRow(j);
+			row.insertCell(0).innerHTML = object.elements[i];
+			row.insertCell(1).innerHTML = object.elements[i + 1];
+			row.insertCell(2).innerHTML = object.elements[i + 2];
+			row.insertCell(3).innerHTML = object.elements[i + 3];
+		}
+
+		log.appendChild(table);
+	}
+	else if(object instanceof THREE.Matrix3)
+	{
+		var table = document.createElement("table");
+		table.style.display = "inline-block";
+
+		for(var i = 0, j = 0; i < 9; i += 3, j++)
+		{
+			var row = table.insertRow(j);
+			row.insertCell(0).innerHTML = object.elements[i];
+			row.insertCell(1).innerHTML = object.elements[i + 1];
+			row.insertCell(2).innerHTML = object.elements[i + 2];
+		}
+
+		log.appendChild(table);
+	}
 	else if(object === null)
 	{
 		log.innerHTML = "null";

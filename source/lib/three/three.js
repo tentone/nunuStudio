@@ -1089,7 +1089,17 @@
 					canvas.width = image.width;
 					canvas.height = image.height;
 
-					canvas.getContext( '2d' ).drawImage( image, 0, 0, image.width, image.height );
+					var context = canvas.getContext( '2d' );
+
+					if ( image instanceof ImageData ) {
+
+						context.putImageData( image, 0, 0 );
+
+					} else {
+
+						context.drawImage( image, 0, 0, image.width, image.height );
+
+					}
 
 				}
 
@@ -5379,8 +5389,17 @@
 			map: { value: null },
 			offsetRepeat: { value: new Vector4( 0, 0, 1, 1 ) },
 
-			specularMap: { value: null },
 			alphaMap: { value: null },
+
+		},
+
+		specularmap: {
+
+			specularMap: { value: null },
+
+		},
+
+		envmap: {
 
 			envMap: { value: null },
 			flipEnvMap: { value: - 1 },
@@ -5786,7 +5805,7 @@
 
 	var distanceRGBA_vert = "#define DISTANCE\nvarying vec3 vWorldPosition;\n#include <common>\n#include <uv_pars_vertex>\n#include <displacementmap_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <skinning_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <uv_vertex>\n\t#include <skinbase_vertex>\n\t#ifdef USE_DISPLACEMENTMAP\n\t\t#include <beginnormal_vertex>\n\t\t#include <morphnormal_vertex>\n\t\t#include <skinnormal_vertex>\n\t#endif\n\t#include <begin_vertex>\n\t#include <morphtarget_vertex>\n\t#include <skinning_vertex>\n\t#include <displacementmap_vertex>\n\t#include <project_vertex>\n\t#include <worldpos_vertex>\n\t#include <clipping_planes_vertex>\n\tvWorldPosition = worldPosition.xyz;\n}\n";
 
-	var equirect_frag = "uniform sampler2D tEquirect;\nuniform float tFlip;\nvarying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tvec3 direction = normalize( vWorldPosition );\n\tvec2 sampleUV;\n\tsampleUV.y = saturate( tFlip * direction.y * -0.5 + 0.5 );\n\tsampleUV.x = atan( direction.z, direction.x ) * RECIPROCAL_PI2 + 0.5;\n\tgl_FragColor = texture2D( tEquirect, sampleUV );\n}\n";
+	var equirect_frag = "uniform sampler2D tEquirect;\nvarying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tvec3 direction = normalize( vWorldPosition );\n\tvec2 sampleUV;\n\tsampleUV.y = asin( clamp( direction.y, - 1.0, 1.0 ) ) * RECIPROCAL_PI + 0.5;\n\tsampleUV.x = atan( direction.z, direction.x ) * RECIPROCAL_PI2 + 0.5;\n\tgl_FragColor = texture2D( tEquirect, sampleUV );\n}\n";
 
 	var equirect_vert = "varying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tvWorldPosition = transformDirection( position, modelMatrix );\n\t#include <begin_vertex>\n\t#include <project_vertex>\n}\n";
 
@@ -5947,6 +5966,8 @@
 
 			uniforms: UniformsUtils.merge( [
 				UniformsLib.common,
+				UniformsLib.specularmap,
+				UniformsLib.envmap,
 				UniformsLib.aomap,
 				UniformsLib.lightmap,
 				UniformsLib.fog
@@ -5961,6 +5982,8 @@
 
 			uniforms: UniformsUtils.merge( [
 				UniformsLib.common,
+				UniformsLib.specularmap,
+				UniformsLib.envmap,
 				UniformsLib.aomap,
 				UniformsLib.lightmap,
 				UniformsLib.emissivemap,
@@ -5980,6 +6003,8 @@
 
 			uniforms: UniformsUtils.merge( [
 				UniformsLib.common,
+				UniformsLib.specularmap,
+				UniformsLib.envmap,
 				UniformsLib.aomap,
 				UniformsLib.lightmap,
 				UniformsLib.emissivemap,
@@ -6005,6 +6030,7 @@
 
 			uniforms: UniformsUtils.merge( [
 				UniformsLib.common,
+				UniformsLib.envmap,
 				UniformsLib.aomap,
 				UniformsLib.lightmap,
 				UniformsLib.emissivemap,
@@ -6103,15 +6129,10 @@
 
 		},
 
-		/* -------------------------------------------------------------------------
-		//	Cube map shader
-		 ------------------------------------------------------------------------- */
-
 		equirect: {
 
 			uniforms: {
 				tEquirect: { value: null },
-				tFlip: { value: - 1 }
 			},
 
 			vertexShader: ShaderChunk.equirect_vert,
@@ -6375,7 +6396,7 @@
 	 * @author alteredq / http://alteredqualia.com/
 	 */
 
-	function WebGLFlareRenderer( renderer, gl, state, capabilities ) {
+	function WebGLFlareRenderer( renderer, gl, state, textures, capabilities ) {
 
 		var vertexBuffer, elementBuffer;
 		var shader, program, attributes, uniforms;
@@ -6702,7 +6723,8 @@
 							gl.uniform3f( uniforms.color, sprite.color.r, sprite.color.g, sprite.color.b );
 
 							state.setBlending( sprite.blending, sprite.blendEquation, sprite.blendSrc, sprite.blendDst );
-							renderer.setTexture2D( sprite.texture, 1 );
+
+							textures.setTexture2D( sprite.texture, 1 );
 
 							gl.drawElements( gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0 );
 
@@ -6770,7 +6792,7 @@
 	 * @author alteredq / http://alteredqualia.com/
 	 */
 
-	function WebGLSpriteRenderer( renderer, gl, state, capabilities ) {
+	function WebGLSpriteRenderer( renderer, gl, state, textures, capabilities ) {
 
 		var vertexBuffer, elementBuffer;
 		var program, attributes, uniforms;
@@ -6988,15 +7010,7 @@
 				state.buffers.depth.setTest( material.depthTest );
 				state.buffers.depth.setMask( material.depthWrite );
 
-				if ( material.map ) {
-
-					renderer.setTexture2D( material.map, 0 );
-
-				} else {
-
-					renderer.setTexture2D( texture, 0 );
-
-				}
+				textures.setTexture2D( material.map || texture, 0 );
 
 				gl.drawElements( gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0 );
 
@@ -7717,7 +7731,7 @@
 
 		this.type = 'MeshDistanceMaterial';
 
-		this.referencePosition = new THREE.Vector3();
+		this.referencePosition = new Vector3();
 		this.nearDistance = 1;
 		this.farDistance = 1000;
 
@@ -8353,15 +8367,7 @@
 
 		intersectsPlane: function ( plane ) {
 
-			// We use the following equation to compute the signed distance from
-			// the center of the sphere to the plane.
-			//
-			// distance = q * n - d
-			//
-			// If this distance is greater than the radius of the sphere,
-			// then there is no intersection.
-
-			return Math.abs( this.center.dot( plane.normal ) - plane.constant ) <= this.radius;
+			return Math.abs( plane.distanceToPoint( this.center ) ) <= this.radius;
 
 		},
 
@@ -8752,6 +8758,8 @@
 	 */
 
 	function Plane( normal, constant ) {
+
+		// normal is assumed to be normalized
 
 		this.normal = ( normal !== undefined ) ? normal : new Vector3( 1, 0, 0 );
 		this.constant = ( constant !== undefined ) ? constant : 0;
@@ -9170,11 +9178,9 @@
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	function WebGLShadowMap( _renderer, _shadows, _objects, maxTextureSize ) {
+	function WebGLShadowMap( _renderer, _objects, maxTextureSize ) {
 
-		var _gl = _renderer.context,
-			_state = _renderer.state,
-			_frustum = new Frustum(),
+		var _frustum = new Frustum(),
 			_projScreenMatrix = new Matrix4(),
 
 			_shadowMapSize = new Vector2(),
@@ -9253,12 +9259,16 @@
 		this.renderReverseSided = true;
 		this.renderSingleSided = true;
 
-		this.render = function ( scene, camera ) {
+		this.render = function ( lights, scene, camera ) {
 
 			if ( scope.enabled === false ) return;
 			if ( scope.autoUpdate === false && scope.needsUpdate === false ) return;
 
-			if ( _shadows.length === 0 ) return;
+			if ( lights.length === 0 ) return;
+
+			// TODO Clean up (needed in case of contextlost)
+			var _gl = _renderer.context;
+			var _state = _renderer.state;
 
 			// Set GL state for depth map.
 			_state.disable( _gl.BLEND );
@@ -9270,9 +9280,9 @@
 
 			var faceCount;
 
-			for ( var i = 0, il = _shadows.length; i < il; i ++ ) {
+			for ( var i = 0, il = lights.length; i < il; i ++ ) {
 
-				var light = _shadows[ i ];
+				var light = lights[ i ];
 				var shadow = light.shadow;
 				var isPointLight = light && light.isPointLight;
 
@@ -9411,11 +9421,6 @@
 				}
 
 			}
-
-			// Restore GL state.
-			var clearColor = _renderer.getClearColor();
-			var clearAlpha = _renderer.getClearAlpha();
-			_renderer.setClearColor( clearColor, clearAlpha );
 
 			scope.needsUpdate = false;
 
@@ -16295,7 +16300,7 @@
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	function WebGLBackground( renderer, state, objects, premultipliedAlpha ) {
+	function WebGLBackground( renderer, state, geometries, premultipliedAlpha ) {
 
 		var clearColor = new Color( 0x000000 );
 		var clearAlpha = 0;
@@ -16353,7 +16358,7 @@
 				boxMesh.material.uniforms[ "tCube" ].value = background;
 				boxMesh.modelViewMatrix.multiplyMatrices( boxCamera.matrixWorldInverse, boxMesh.matrixWorld );
 
-				objects.update( boxMesh );
+				geometries.update( boxMesh.geometry );
 
 				renderer.renderBufferDirect( boxCamera, null, boxMesh.geometry, boxMesh.material, boxMesh, null );
 
@@ -16372,7 +16377,7 @@
 
 				planeMesh.material.map = background;
 
-				objects.update( planeMesh );
+				geometries.update( planeMesh.geometry );
 
 				renderer.renderBufferDirect( planeCamera, null, planeMesh.geometry, planeMesh.material, planeMesh, null );
 
@@ -16467,53 +16472,26 @@
 
 	function WebGLRenderList() {
 
-		var opaque = [];
-		var opaqueLastIndex = - 1;
+		var renderItems = [];
+		var renderItemsIndex = 0;
 
+		var opaque = [];
 		var transparent = [];
-		var transparentLastIndex = - 1;
 
 		function init() {
 
-			opaqueLastIndex = - 1;
-			transparentLastIndex = - 1;
+			renderItemsIndex = 0;
+
+			opaque.length = 0;
+			transparent.length = 0;
 
 		}
 
 		function push( object, geometry, material, z, group ) {
 
-			var array, index;
+			var renderItem = renderItems[ renderItemsIndex ];
 
-			// allocate the next position in the appropriate array
-
-			if ( material.transparent ) {
-
-				array = transparent;
-				index = ++ transparentLastIndex;
-
-			} else {
-
-				array = opaque;
-				index = ++ opaqueLastIndex;
-
-			}
-
-			// recycle existing render item or grow the array
-
-			var renderItem = array[ index ];
-
-			if ( renderItem ) {
-
-				renderItem.id = object.id;
-				renderItem.object = object;
-				renderItem.geometry = geometry;
-				renderItem.material = material;
-				renderItem.program = material.program;
-				renderItem.renderOrder = object.renderOrder;
-				renderItem.z = z;
-				renderItem.group = group;
-
-			} else {
+			if ( renderItem === undefined ) {
 
 				renderItem = {
 					id: object.id,
@@ -16526,17 +16504,24 @@
 					group: group
 				};
 
-				// assert( index === array.length );
-				array.push( renderItem );
+				renderItems[ renderItemsIndex ] = renderItem;
+
+			} else {
+
+				renderItem.id = object.id;
+				renderItem.object = object;
+				renderItem.geometry = geometry;
+				renderItem.material = material;
+				renderItem.program = material.program;
+				renderItem.renderOrder = object.renderOrder;
+				renderItem.z = z;
+				renderItem.group = group;
 
 			}
 
-		}
+			( material.transparent === true ? transparent : opaque ).push( renderItem );
 
-		function finish() {
-
-			opaque.length = opaqueLastIndex + 1;
-			transparent.length = transparentLastIndex + 1;
+			renderItemsIndex ++;
 
 		}
 
@@ -16553,7 +16538,6 @@
 
 			init: init,
 			push: push,
-			finish: finish,
 
 			sort: sort
 		};
@@ -17243,7 +17227,7 @@
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	function WebGLObjects( gl, geometries, infoRender ) {
+	function WebGLObjects( geometries, infoRender ) {
 
 		var updateList = {};
 
@@ -20418,6 +20402,12 @@
 
 		};
 
+		this.dispose = function() {
+
+			window.removeEventListener( 'vrdisplaypresentchange', onVRDisplayPresentChange );
+
+		};
+
 	}
 
 	/**
@@ -20888,18 +20878,18 @@
 			textures = new WebGLTextures( _gl, extensions, state, properties, capabilities, paramThreeToGL, _infoMemory );
 			attributes = new WebGLAttributes( _gl );
 			geometries = new WebGLGeometries( _gl, attributes, _infoMemory );
-			objects = new WebGLObjects( _gl, geometries, _infoRender );
+			objects = new WebGLObjects( geometries, _infoRender );
 			programCache = new WebGLPrograms( _this, extensions, capabilities );
 			lights = new WebGLLights();
 			renderLists = new WebGLRenderLists();
 
-			background = new WebGLBackground( _this, state, objects, _premultipliedAlpha );
+			background = new WebGLBackground( _this, state, geometries, _premultipliedAlpha );
 
 			bufferRenderer = new WebGLBufferRenderer( _gl, extensions, _infoRender );
 			indexedBufferRenderer = new WebGLIndexedBufferRenderer( _gl, extensions, _infoRender );
 
-			flareRenderer = new WebGLFlareRenderer( _this, _gl, state, capabilities );
-			spriteRenderer = new WebGLSpriteRenderer( _this, _gl, state, capabilities );
+			flareRenderer = new WebGLFlareRenderer( _this, _gl, state, textures, capabilities );
+			spriteRenderer = new WebGLSpriteRenderer( _this, _gl, state, textures, capabilities );
 
 			_this.info.programs = programCache.programs;
 
@@ -20922,7 +20912,7 @@
 
 		// shadow map
 
-		var shadowMap = new WebGLShadowMap( _this, shadowsArray, objects, capabilities.maxTextureSize );
+		var shadowMap = new WebGLShadowMap( _this, objects, capabilities.maxTextureSize );
 
 		this.shadowMap = shadowMap;
 
@@ -21103,6 +21093,8 @@
 
 			renderLists.dispose();
 
+			vr.dispose();
+
 		};
 
 		// Events
@@ -21245,7 +21237,7 @@
 
 				state.enableAttribute( programAttributes.uv );
 
-				_gl.vertexAttribPointer( attributes.uv, 2, _gl.FLOAT, false, 0, 0 );
+				_gl.vertexAttribPointer( programAttributes.uv, 2, _gl.FLOAT, false, 0, 0 );
 
 			}
 
@@ -21268,9 +21260,11 @@
 
 		};
 
+		var influencesList = {};
+
 		function absNumericalSort( a, b ) {
 
-			return Math.abs( b[ 0 ] ) - Math.abs( a[ 0 ] );
+			return Math.abs( b[ 1 ] ) - Math.abs( a[ 1 ] );
 
 		}
 
@@ -21292,55 +21286,85 @@
 
 			// morph targets
 
-			var morphTargetInfluences = object.morphTargetInfluences;
+			var objectInfluences = object.morphTargetInfluences;
 
-			if ( morphTargetInfluences !== undefined ) {
+			if ( objectInfluences !== undefined ) {
 
-				// TODO Remove allocations
+				var length = objectInfluences.length;
 
-				var activeInfluences = [];
+				var influences = influencesList[ geometry.id ];
 
-				for ( var i = 0, l = morphTargetInfluences.length; i < l; i ++ ) {
+				if ( influences === undefined ) {
 
-					var influence = morphTargetInfluences[ i ];
-					activeInfluences.push( [ influence, i ] );
+					// initialise list
+
+					influences = [];
+
+					for ( var i = 0; i < length; i ++ ) {
+
+						influences[ i ] = [ i, 0 ];
+
+					}
+
+					influencesList[ geometry.id ] = influences;
 
 				}
 
-				activeInfluences.sort( absNumericalSort );
+				var morphTargets = material.morphTargets && geometry.morphAttributes.position;
+				var morphNormals = material.morphNormals && geometry.morphAttributes.normal;
 
-				if ( activeInfluences.length > 8 ) {
+				// Remove current morphAttributes
 
-					activeInfluences.length = 8;
+				for ( var i = 0; i < length; i ++ ) {
 
-				}
+					var influence = influences[ i ];
 
-				var morphAttributes = geometry.morphAttributes;
+					if ( influence[ 1 ] !== 0 ) {
 
-				for ( var i = 0, l = activeInfluences.length; i < l; i ++ ) {
-
-					var influence = activeInfluences[ i ];
-					morphInfluences[ i ] = influence[ 0 ];
-
-					if ( influence[ 0 ] !== 0 ) {
-
-						var index = influence[ 1 ];
-
-						if ( material.morphTargets === true && morphAttributes.position ) geometry.addAttribute( 'morphTarget' + i, morphAttributes.position[ index ] );
-						if ( material.morphNormals === true && morphAttributes.normal ) geometry.addAttribute( 'morphNormal' + i, morphAttributes.normal[ index ] );
-
-					} else {
-
-						if ( material.morphTargets === true ) geometry.removeAttribute( 'morphTarget' + i );
-						if ( material.morphNormals === true ) geometry.removeAttribute( 'morphNormal' + i );
+						if ( morphTargets ) geometry.removeAttribute( 'morphTarget' + i );
+						if ( morphNormals ) geometry.removeAttribute( 'morphNormal' + i );
 
 					}
 
 				}
 
-				for ( var i = activeInfluences.length, il = morphInfluences.length; i < il; i ++ ) {
+				// Collect influences
 
-					morphInfluences[ i ] = 0.0;
+				for ( var i = 0; i < length; i ++ ) {
+
+					var influence = influences[ i ];
+
+					influence[ 0 ] = i;
+					influence[ 1 ] = objectInfluences[ i ];
+
+				}
+
+				influences.sort( absNumericalSort );
+
+				// Add morphAttributes
+
+				for ( var i = 0; i < 8; i ++ ) {
+
+					var influence = influences[ i ];
+
+					if ( influence ) {
+
+						var index = influence[ 0 ];
+						var value = influence[ 1 ];
+
+						if ( value ) {
+
+							if ( morphTargets ) geometry.addAttribute( 'morphTarget' + i, morphTargets[ index ] );
+							if ( morphNormals ) geometry.addAttribute( 'morphNormal' + i, morphNormals[ index ] );
+
+							morphInfluences[ i ] = value;
+							continue;
+
+						}
+
+					}
+
+					morphInfluences[ i ] = 0;
 
 				}
 
@@ -21732,8 +21756,6 @@
 
 			projectObject( scene, camera, _this.sortObjects );
 
-			currentRenderList.finish();
-
 			if ( _this.sortObjects === true ) {
 
 				currentRenderList.sort();
@@ -21744,7 +21766,7 @@
 
 			if ( _clippingEnabled ) _clipping.beginShadows();
 
-			shadowMap.render( scene, camera );
+			shadowMap.render( shadowsArray, scene, camera );
 
 			lights.setup( lightsArray, shadowsArray, camera );
 
@@ -22515,7 +22537,11 @@
 
 			uniforms.opacity.value = material.opacity;
 
-			uniforms.diffuse.value = material.color;
+			if ( material.color ) {
+
+				uniforms.diffuse.value = material.color;
+
+			}
 
 			if ( material.emissive ) {
 
@@ -22523,9 +22549,38 @@
 
 			}
 
-			uniforms.map.value = material.map;
-			uniforms.specularMap.value = material.specularMap;
-			uniforms.alphaMap.value = material.alphaMap;
+			if ( material.map ) {
+
+				uniforms.map.value = material.map;
+
+			}
+
+			if ( material.alphaMap ) {
+
+				uniforms.alphaMap.value = material.alphaMap;
+
+			}
+
+			if ( material.specularMap ) {
+
+				uniforms.specularMap.value = material.specularMap;
+
+			}
+
+			if ( material.envMap ) {
+
+				uniforms.envMap.value = material.envMap;
+
+				// don't flip CubeTexture envMaps, flip everything else:
+				//  WebGLRenderTargetCube will be flipped for backwards compatibility
+				//  WebGLRenderTargetCube.texture will be flipped because it's a Texture and NOT a CubeTexture
+				// this check must be handled differently, or removed entirely, if WebGLRenderTargetCube uses a CubeTexture in the future
+				uniforms.flipEnvMap.value = ( ! ( material.envMap && material.envMap.isCubeTexture ) ) ? 1 : - 1;
+
+				uniforms.reflectivity.value = material.reflectivity;
+				uniforms.refractionRatio.value = material.refractionRatio;
+
+			}
 
 			if ( material.lightMap ) {
 
@@ -22604,17 +22659,6 @@
 				uniforms.offsetRepeat.value.set( offset.x, offset.y, repeat.x, repeat.y );
 
 			}
-
-			uniforms.envMap.value = material.envMap;
-
-			// don't flip CubeTexture envMaps, flip everything else:
-			//  WebGLRenderTargetCube will be flipped for backwards compatibility
-			//  WebGLRenderTargetCube.texture will be flipped because it's a Texture and NOT a CubeTexture
-			// this check must be handled differently, or removed entirely, if WebGLRenderTargetCube uses a CubeTexture in the future
-			uniforms.flipEnvMap.value = ( ! ( material.envMap && material.envMap.isCubeTexture ) ) ? 1 : - 1;
-
-			uniforms.reflectivity.value = material.reflectivity;
-			uniforms.refractionRatio.value = material.refractionRatio;
 
 		}
 
