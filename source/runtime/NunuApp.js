@@ -47,6 +47,7 @@ include("core/resources/Font.js");
 include("core/resources/Video.js");
 include("core/resources/Audio.js");
 include("core/resources/Image.js");
+include("core/resources/Model.js");
 include("core/resources/ResourceManager.js");
 
 include("core/texture/Texture.js");
@@ -101,6 +102,7 @@ include("core/utils/EventManager.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");
+
 
 /**
  * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.

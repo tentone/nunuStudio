@@ -64,7 +64,7 @@ function AssetExplorer(parent, closeable, container, index)
 		{	
 			if(files.length > 0)
 			{
-				Editor.loadGeometry(files[0]);
+				Editor.loadModel(files[0]);
 			}
 		}, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x, .js");
 	}, Editor.filePath + "icons/models/models.png");

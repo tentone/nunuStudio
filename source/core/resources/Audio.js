@@ -39,7 +39,7 @@ Audio.prototype = Object.create(Resource.prototype);
  *
  * @method fileIsAudio
  * @static
- * @param {String} file
+ * @param {File} file
  * @return {boolean} True if the file refers to a supported audio format.
  */
 Audio.fileIsAudio = function(file)

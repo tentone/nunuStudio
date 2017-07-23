@@ -41,7 +41,7 @@ Video.prototype = Object.create(Resource.prototype);
  *
  * @method fileIsVideo
  * @static
- * @param {String} file
+ * @param {File} file
  * @return {boolean} True if the file refers to a supported video format.
  */
 Video.fileIsVideo = function(file)

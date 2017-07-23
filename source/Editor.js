@@ -54,6 +54,7 @@ include("core/resources/Font.js");
 include("core/resources/Video.js");
 include("core/resources/Audio.js");
 include("core/resources/Image.js");
+include("core/resources/Model.js");
 include("core/resources/ResourceManager.js");
 
 include("core/texture/Texture.js");
@@ -1272,7 +1273,7 @@ Editor.loadFont = function(file, onLoad)
 };
 
 //Load geometry from file object
-Editor.loadGeometry = function(file, onLoad)
+Editor.loadModel = function(file, onLoad)
 {
 	var name = file.name;
 	var extension = FileSystem.getFileExtension(name);

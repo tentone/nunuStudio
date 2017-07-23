@@ -65,7 +65,7 @@ Image.prototype = Object.create(Resource.prototype);
  *
  * @method fileIsImage
  * @static
- * @param {String} file
+ * @param {File} file
  * @return {boolean} True if the file refers to a supported image format.
  */
 Image.fileIsImage = function(file)
