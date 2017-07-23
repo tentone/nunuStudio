@@ -21,7 +21,7 @@ function Model()
  * @method fileIsFont
  * @static
  * @param {File} file
- * @return {boolean} True if the fname refers to a supported font format.
+ * @return {boolean} True if the fname refers to a supported format.
  */
 Model.fileIsModel = function(file)
 {

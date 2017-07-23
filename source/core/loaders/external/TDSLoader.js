@@ -47,6 +47,9 @@ THREE.TDSLoader.prototype.parse = function(arraybuffer)
 		this.group.add(this.meshes[i]);
 	}
 
+	//TODO <REMOVE THIS>
+	this.group.scale.set(0.01, 0.01, 0.01);
+
 	return this.group;
 };
 
@@ -349,27 +352,46 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 			}
 
 			var matrix = new THREE.Matrix4();
-
+			
+			//X Line
 			matrix.elements[0] = values[0];
 			matrix.elements[1] = values[6];
 			matrix.elements[2] = values[3];
 			matrix.elements[3] = values[9];
 
+			//Y Line
 			matrix.elements[4] = values[2];
 			matrix.elements[5] = values[8];
 			matrix.elements[6] = values[5];
 			matrix.elements[7] = values[11];
 
+			//Z Line
 			matrix.elements[8] = values[1];
 			matrix.elements[9] = values[7];
 			matrix.elements[10] = values[4];
 			matrix.elements[11] = values[10];
 
+			//W Line
+			matrix.elements[12] = 0;
+			matrix.elements[13] = 0;
+			matrix.elements[14] = 0;
+			matrix.elements[15] = 1;
+
+			//threejs stores matrix column by column
 			matrix.transpose();
-			matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
 			
-			this.debugMessage(matrix);
-			this.debugMessage(mesh);
+			//Apply inverse tranformation to geometry
+			var inverse = new THREE.Matrix4();
+			inverse.getInverse(matrix, true);
+			geometry.applyMatrix(inverse);
+			
+			//Calculate position rotation and scale from matrix
+			matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
+
+			//Log information for debug
+			console.log("Matrix", matrix);
+			console.log("Inverse", inverse);
+			console.log("Mesh", mesh);
 		}
 		else
 		{
@@ -510,6 +532,14 @@ THREE.TDSLoader.prototype.readNamedObject = function(data)
 			var mesh = this.readMesh(data);
 			mesh.name = name;
 			this.meshes.push(mesh);
+		}
+		else if(next === N_CAMERA)
+		{
+			//TODO <READ CAMERA DATA>
+		}
+		else if(next === N_DIRECT_LIGHT)
+		{
+			//TODO <READ DIRECT LIGHT DATA>
 		}
 		else
 		{
