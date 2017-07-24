@@ -12,8 +12,10 @@
  */
 function Model()
 {
-	Resource.call(this, "model", "Model3D");
+	Resource.call(this, "model", "Model");
 }
+
+Model.prototype = Object.create(Resource.prototype);
 
 /**
  * Check if a file name refers to a 3D geometry file.
