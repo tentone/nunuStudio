@@ -67,6 +67,8 @@ Settings.loadDefault = function()
 	Settings.code.dragFiles = true;
 };
 
+Settings.loadDefault();
+
 //Store settings
 Settings.store = function()
 {
@@ -108,11 +110,19 @@ Settings.load = function()
 
 		for(var i in data)
 		{
-			Settings[i] = data[i];
+			if(Settings[i] === undefined)
+			{
+				Settings[i] = {};
+			}
+
+			for(var j in data[i])
+			{
+				Settings[i][j] = data[i][j];
+			}
 		}
 	}
 	catch(e)
 	{
-		Settings.loadDefault();
+		console.warn("nunuStudio: Failed to load configuration file");
 	}
 };
