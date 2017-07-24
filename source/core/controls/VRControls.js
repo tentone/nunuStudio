@@ -59,7 +59,7 @@ function VRControls()
 			}
 			else
 			{
-				console.warn("nunuStudio: No vr display is available.");
+				console.warn("nunuStudio: No VR display is available.");
 			}
 		});
 	}	
