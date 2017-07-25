@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio ParticleEmitter</title>  
+	<title>nunuStudio Text</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -160,29 +160,29 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>ParticleEmitter Class</h1>
+						<h1>Text Class</h1>
 						<div class="box meta">
 						
 								<div class="extends">
-									Extends Points
+									Extends <a href="../classes/Resource.html" class="crosslink">Resource</a>
 								</div>
 						
 						
-									Module: <a href="../modules/Particles.html">Particles</a>
+									Module: <a href="../modules/Resources.html">Resources</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Particle emitter is a wrapper for SPE particle systems</p>
-						<p>Documentation for SPE particle engine can be found here <a href="https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html">https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html</a></p>
+							<p>Text resource can be used to store text data or code.</p>
+						<p>Text data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.</p>
 						
 						</div>
 						
 							<div class="constructor">
 								<h2>Constructor</h2>
-								<div id="method_ParticleEmitter" class="method item">
-									<h3 class="name"><code>ParticleEmitter</code></h3>
+								<div id="method_Text" class="method item">
+									<h3 class="name"><code>Text</code></h3>
 								
 										<span class="paren">()</span>
 								
@@ -215,7 +215,6 @@
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
@@ -227,42 +226,12 @@
 						
 											<ul class="index-list methods extends">
 													<li class="index-item method">
-														<a href="#method_dispose">dispose</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_initialize">initialize</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_raycast">raycast</a>
-						
-													</li>
-													<li class="index-item method">
 														<a href="#method_toJSON">toJSON</a>
 						
 													</li>
-													<li class="index-item method">
-														<a href="#method_update">update</a>
-						
-													</li>
 											</ul>
 										</div>
 						
-										<div class="index-section properties">
-											<h3>Properties</h3>
-						
-											<ul class="index-list properties extends">
-													<li class="index-item property">
-														<a href="#property_emitter">emitter</a>
-						
-													</li>
-													<li class="index-item property">
-														<a href="#property_group">group</a>
-						
-													</li>
-											</ul>
-										</div>
 						
 						
 								</div>
@@ -270,90 +239,6 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_dispose" class="method item">
-												<h3 class="name"><code>dispose</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Dispose particle emitter.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_initialize" class="method item">
-												<h3 class="name"><code>initialize</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Initialize particle system.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_raycast" class="method item">
-												<h3 class="name"><code>raycast</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Particle emitter cannot be detected by raycaster.</p>
-											
-												</div>
-											
-											
-											
-											</div>
 											<div id="method_toJSON" class="method item">
 												<h3 class="name"><code>toJSON</code></h3>
 											
@@ -384,7 +269,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Serialize object to JSON.</p>
+													<p>Serialize text resource data to json.</p>
 											
 												</div>
 											
@@ -394,7 +279,7 @@
 														<ul class="params-list">
 															<li class="param">
 																	<code class="param-name">meta</code>
-																	<span class="type">Object</span>
+																	<span class="type">Meta</span>
 											
 											
 																<div class="param-description">
@@ -410,95 +295,14 @@
 											
 														<div class="returns-description">
 																	<span class="type">Object</span>:
-																<p>json</p>
+																<p>data</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_update" class="method item">
-												<h3 class="name"><code>update</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Update particle emitter state.</p>
-											
-												</div>
-											
-											
-											
-											</div>
 									</div>
 						
-									<div id="properties" class="api-class-tabpanel">
-										<h2 class="off-left">Properties</h2>
-						
-											<div id="property_emitter" class="property item">
-												<h3 class="name"><code>emitter</code></h3>
-												<span class="type">SPE.Emitter</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>SPE Emitter</p>
-											<p>Emitter has attributes that can be used to controll the particle system</p>
-											<p><a href="https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html">https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html</a></p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="property_group" class="property item">
-												<h3 class="name"><code>group</code></h3>
-												<span class="type">SPE.Group</span>
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>SPE Group</p>
-											<p><a href="https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html">https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html</a></p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
 						
 						
 							</div>

@@ -5793,9 +5793,9 @@
 
 	var worldpos_vertex = "#if defined( USE_ENVMAP ) || defined( PHONG ) || defined( PHYSICAL ) || defined( LAMBERT ) || defined( DISTANCE ) || defined ( USE_SHADOWMAP )\n\tvec4 worldPosition = modelMatrix * vec4( transformed, 1.0 );\n#endif\n";
 
-	var cube_frag = "uniform samplerCube tCube;\nuniform float tFlip;\nuniform float opacity;\nvarying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tgl_FragColor = textureCube( tCube, vec3( tFlip * vWorldPosition.x, vWorldPosition.yz ) );\n\tgl_FragColor.a *= opacity;\n}\n";
+	var cube_frag = "uniform samplerCube tCube;\nuniform float tFlip;\nuniform float opacity;\nvarying vec3 vWorldPosition;\nvoid main() {\n\tgl_FragColor = textureCube( tCube, vec3( tFlip * vWorldPosition.x, vWorldPosition.yz ) );\n\tgl_FragColor.a *= opacity;\n}\n";
 
-	var cube_vert = "varying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tvWorldPosition = transformDirection( position, modelMatrix );\n\t#include <begin_vertex>\n\t#include <project_vertex>\n}\n";
+	var cube_vert = "varying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tvWorldPosition = transformDirection( position, modelMatrix );\n\tgl_Position = projectionMatrix * vec4( normalMatrix * position, 1.0 );\n}\n";
 
 	var depth_frag = "#if DEPTH_PACKING == 3200\n\tuniform float opacity;\n#endif\n#include <common>\n#include <packing>\n#include <uv_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( 1.0 );\n\t#if DEPTH_PACKING == 3200\n\t\tdiffuseColor.a = opacity;\n\t#endif\n\t#include <map_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <logdepthbuf_fragment>\n\t#if DEPTH_PACKING == 3200\n\t\tgl_FragColor = vec4( vec3( gl_FragCoord.z ), opacity );\n\t#elif DEPTH_PACKING == 3201\n\t\tgl_FragColor = packDepthToRGBA( gl_FragCoord.z );\n\t#endif\n}\n";
 
@@ -16306,7 +16306,7 @@
 		var clearAlpha = 0;
 
 		var planeCamera, planeMesh;
-		var boxCamera, boxMesh;
+		var boxMesh;
 
 		function render( scene, camera, forceClear ) {
 
@@ -16331,9 +16331,7 @@
 
 			if ( background && background.isCubeTexture ) {
 
-				if ( boxCamera === undefined ) {
-
-					boxCamera = new PerspectiveCamera();
+				if ( boxMesh === undefined ) {
 
 					boxMesh = new Mesh(
 						new BoxBufferGeometry( 5, 5, 5 ),
@@ -16350,17 +16348,13 @@
 
 				}
 
-				boxCamera.projectionMatrix.copy( camera.projectionMatrix );
-
-				boxCamera.matrixWorld.extractRotation( camera.matrixWorld );
-				boxCamera.matrixWorldInverse.getInverse( boxCamera.matrixWorld );
-
 				boxMesh.material.uniforms[ "tCube" ].value = background;
-				boxMesh.modelViewMatrix.multiplyMatrices( boxCamera.matrixWorldInverse, boxMesh.matrixWorld );
+				boxMesh.modelViewMatrix.multiplyMatrices( camera.matrixWorldInverse, boxMesh.matrixWorld );
+				boxMesh.normalMatrix.getNormalMatrix( boxMesh.modelViewMatrix );
 
 				geometries.update( boxMesh.geometry );
 
-				renderer.renderBufferDirect( boxCamera, null, boxMesh.geometry, boxMesh.material, boxMesh, null );
+				renderer.renderBufferDirect( camera, null, boxMesh.geometry, boxMesh.material, boxMesh, null );
 
 			} else if ( background && background.isTexture ) {
 
@@ -16527,8 +16521,8 @@
 
 		function sort() {
 
-			opaque.sort( painterSortStable );
-			transparent.sort( reversePainterSortStable );
+			if ( opaque.length > 1 ) opaque.sort( painterSortStable );
+			if ( transparent.length > 1 ) transparent.sort( reversePainterSortStable );
 
 		}
 
@@ -16576,6 +16570,115 @@
 			get: get,
 			dispose: dispose
 		};
+
+	}
+
+	/**
+	 * @author mrdoob / http://mrdoob.com/
+	 */
+
+	function absNumericalSort( a, b ) {
+
+		return Math.abs( b[ 1 ] ) - Math.abs( a[ 1 ] );
+
+	}
+
+	function WebGLMorphtargets( gl ) {
+
+		var influencesList = {};
+		var morphInfluences = new Float32Array( 8 );
+
+		function update( object, geometry, material, program ) {
+
+			var objectInfluences = object.morphTargetInfluences;
+
+			var length = objectInfluences.length;
+
+			var influences = influencesList[ geometry.id ];
+
+			if ( influences === undefined ) {
+
+				// initialise list
+
+				influences = [];
+
+				for ( var i = 0; i < length; i ++ ) {
+
+					influences[ i ] = [ i, 0 ];
+
+				}
+
+				influencesList[ geometry.id ] = influences;
+
+			}
+
+			var morphTargets = material.morphTargets && geometry.morphAttributes.position;
+			var morphNormals = material.morphNormals && geometry.morphAttributes.normal;
+
+			// Remove current morphAttributes
+
+			for ( var i = 0; i < length; i ++ ) {
+
+				var influence = influences[ i ];
+
+				if ( influence[ 1 ] !== 0 ) {
+
+					if ( morphTargets ) geometry.removeAttribute( 'morphTarget' + i );
+					if ( morphNormals ) geometry.removeAttribute( 'morphNormal' + i );
+
+				}
+
+			}
+
+			// Collect influences
+
+			for ( var i = 0; i < length; i ++ ) {
+
+				var influence = influences[ i ];
+
+				influence[ 0 ] = i;
+				influence[ 1 ] = objectInfluences[ i ];
+
+			}
+
+			influences.sort( absNumericalSort );
+
+			// Add morphAttributes
+
+			for ( var i = 0; i < 8; i ++ ) {
+
+				var influence = influences[ i ];
+
+				if ( influence ) {
+
+					var index = influence[ 0 ];
+					var value = influence[ 1 ];
+
+					if ( value ) {
+
+						if ( morphTargets ) geometry.addAttribute( 'morphTarget' + i, morphTargets[ index ] );
+						if ( morphNormals ) geometry.addAttribute( 'morphNormal' + i, morphNormals[ index ] );
+
+						morphInfluences[ i ] = value;
+						continue;
+
+					}
+
+				}
+
+				morphInfluences[ i ] = 0;
+
+			}
+
+			program.getUniforms().setValue( gl, 'morphTargetInfluences', morphInfluences );
+
+		}
+
+		return {
+
+			update: update
+
+		}
 
 	}
 
@@ -20663,8 +20766,6 @@
 
 		var currentRenderList = null;
 
-		var morphInfluences = new Float32Array( 8 );
-
 		var spritesArray = [];
 		var flaresArray = [];
 
@@ -20848,7 +20949,7 @@
 		var properties, textures, attributes, geometries, objects, lights;
 		var programCache, renderLists;
 
-		var background, bufferRenderer, indexedBufferRenderer;
+		var background, morphtargets, bufferRenderer, indexedBufferRenderer;
 		var flareRenderer, spriteRenderer;
 
 		function initGLContext() {
@@ -20879,6 +20980,7 @@
 			attributes = new WebGLAttributes( _gl );
 			geometries = new WebGLGeometries( _gl, attributes, _infoMemory );
 			objects = new WebGLObjects( geometries, _infoRender );
+			morphtargets = new WebGLMorphtargets( _gl );
 			programCache = new WebGLPrograms( _this, extensions, capabilities );
 			lights = new WebGLLights();
 			renderLists = new WebGLRenderLists();
@@ -21260,14 +21362,6 @@
 
 		};
 
-		var influencesList = {};
-
-		function absNumericalSort( a, b ) {
-
-			return Math.abs( b[ 1 ] ) - Math.abs( a[ 1 ] );
-
-		}
-
 		this.renderBufferDirect = function ( camera, fog, geometry, material, object, group ) {
 
 			state.setMaterial( material );
@@ -21284,91 +21378,9 @@
 
 			}
 
-			// morph targets
+			if ( object.morphTargetInfluences ) {
 
-			var objectInfluences = object.morphTargetInfluences;
-
-			if ( objectInfluences !== undefined ) {
-
-				var length = objectInfluences.length;
-
-				var influences = influencesList[ geometry.id ];
-
-				if ( influences === undefined ) {
-
-					// initialise list
-
-					influences = [];
-
-					for ( var i = 0; i < length; i ++ ) {
-
-						influences[ i ] = [ i, 0 ];
-
-					}
-
-					influencesList[ geometry.id ] = influences;
-
-				}
-
-				var morphTargets = material.morphTargets && geometry.morphAttributes.position;
-				var morphNormals = material.morphNormals && geometry.morphAttributes.normal;
-
-				// Remove current morphAttributes
-
-				for ( var i = 0; i < length; i ++ ) {
-
-					var influence = influences[ i ];
-
-					if ( influence[ 1 ] !== 0 ) {
-
-						if ( morphTargets ) geometry.removeAttribute( 'morphTarget' + i );
-						if ( morphNormals ) geometry.removeAttribute( 'morphNormal' + i );
-
-					}
-
-				}
-
-				// Collect influences
-
-				for ( var i = 0; i < length; i ++ ) {
-
-					var influence = influences[ i ];
-
-					influence[ 0 ] = i;
-					influence[ 1 ] = objectInfluences[ i ];
-
-				}
-
-				influences.sort( absNumericalSort );
-
-				// Add morphAttributes
-
-				for ( var i = 0; i < 8; i ++ ) {
-
-					var influence = influences[ i ];
-
-					if ( influence ) {
-
-						var index = influence[ 0 ];
-						var value = influence[ 1 ];
-
-						if ( value ) {
-
-							if ( morphTargets ) geometry.addAttribute( 'morphTarget' + i, morphTargets[ index ] );
-							if ( morphNormals ) geometry.addAttribute( 'morphNormal' + i, morphNormals[ index ] );
-
-							morphInfluences[ i ] = value;
-							continue;
-
-						}
-
-					}
-
-					morphInfluences[ i ] = 0;
-
-				}
-
-				program.getUniforms().setValue( _gl, 'morphTargetInfluences', morphInfluences );
+				morphtargets.update( object, geometry, material, program );
 
 				updateBuffers = true;
 
@@ -32312,7 +32324,7 @@
 
 			} else {
 
-				// by default, we asssume a constructor compatible with the base
+				// by default, we assume a constructor compatible with the base
 				return new trackType(
 						json.name, json.times, json.values, json.interpolation );
 

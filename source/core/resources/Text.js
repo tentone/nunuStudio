@@ -4,6 +4,11 @@
  * Text resource can be used to store text data or code.
  *
  * Text data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.
+ *
+ * @class Text
+ * @constructor
+ * @extends {Resource}
+ * @module Resources
  */
 function Text()
 {
