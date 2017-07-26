@@ -5795,7 +5795,7 @@
 
 	var cube_frag = "uniform samplerCube tCube;\nuniform float tFlip;\nuniform float opacity;\nvarying vec3 vWorldPosition;\nvoid main() {\n\tgl_FragColor = textureCube( tCube, vec3( tFlip * vWorldPosition.x, vWorldPosition.yz ) );\n\tgl_FragColor.a *= opacity;\n}\n";
 
-	var cube_vert = "varying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tvWorldPosition = transformDirection( position, modelMatrix );\n\tgl_Position = projectionMatrix * vec4( normalMatrix * position, 1.0 );\n}\n";
+	var cube_vert = "varying vec3 vWorldPosition;\n#include <common>\nvoid main() {\n\tvWorldPosition = transformDirection( position, modelMatrix );\n\t#include <begin_vertex>\n\t#include <project_vertex>\n}\n";
 
 	var depth_frag = "#if DEPTH_PACKING == 3200\n\tuniform float opacity;\n#endif\n#include <common>\n#include <packing>\n#include <uv_pars_fragment>\n#include <map_pars_fragment>\n#include <alphamap_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\nvoid main() {\n\t#include <clipping_planes_fragment>\n\tvec4 diffuseColor = vec4( 1.0 );\n\t#if DEPTH_PACKING == 3200\n\t\tdiffuseColor.a = opacity;\n\t#endif\n\t#include <map_fragment>\n\t#include <alphamap_fragment>\n\t#include <alphatest_fragment>\n\t#include <logdepthbuf_fragment>\n\t#if DEPTH_PACKING == 3200\n\t\tgl_FragColor = vec4( vec3( gl_FragCoord.z ), opacity );\n\t#elif DEPTH_PACKING == 3201\n\t\tgl_FragColor = packDepthToRGBA( gl_FragCoord.z );\n\t#endif\n}\n";
 
@@ -16308,7 +16308,7 @@
 		var planeCamera, planeMesh;
 		var boxMesh;
 
-		function render( scene, camera, forceClear ) {
+		function render( renderList, scene, camera, forceClear ) {
 
 			var background = scene.background;
 
@@ -16333,6 +16333,8 @@
 
 				if ( boxMesh === undefined ) {
 
+					// TODO Adjust skybox to camera somehow
+
 					boxMesh = new Mesh(
 						new BoxBufferGeometry( 5, 5, 5 ),
 						new ShaderMaterial( {
@@ -16346,15 +16348,18 @@
 						} )
 					);
 
+					geometries.update( boxMesh.geometry );
+
 				}
 
-				boxMesh.material.uniforms[ "tCube" ].value = background;
-				boxMesh.modelViewMatrix.multiplyMatrices( camera.matrixWorldInverse, boxMesh.matrixWorld );
-				boxMesh.normalMatrix.getNormalMatrix( boxMesh.modelViewMatrix );
+				boxMesh.material.uniforms.tCube.value = background;
+				boxMesh.matrixWorld.copyPosition( camera.matrixWorld );
 
-				geometries.update( boxMesh.geometry );
+				renderList.push( boxMesh, boxMesh.geometry, boxMesh.material, 0, null );
 
-				renderer.renderBufferDirect( camera, null, boxMesh.geometry, boxMesh.material, boxMesh, null );
+				// TOFIX Ideally background should be rendered last
+
+				renderList.opaque.unshift( renderList.opaque.pop() ); // Hack to make sure background gets rendered first
 
 			} else if ( background && background.isTexture ) {
 
@@ -16367,11 +16372,13 @@
 						new MeshBasicMaterial( { depthTest: false, depthWrite: false, fog: false } )
 					);
 
+					geometries.update( planeMesh.geometry );
+
 				}
 
 				planeMesh.material.map = background;
 
-				geometries.update( planeMesh.geometry );
+				// TODO Push this to renderList
 
 				renderer.renderBufferDirect( planeCamera, null, planeMesh.geometry, planeMesh.material, planeMesh, null );
 
@@ -21802,7 +21809,7 @@
 
 			//
 
-			background.render( scene, camera, forceClear );
+			background.render( currentRenderList, scene, camera, forceClear );
 
 			// render scene
 
@@ -30379,6 +30386,8 @@
 
 	Object.assign( ImageLoader.prototype, {
 
+		crossOrigin: 'Anonymous',
+
 		load: function ( url, onLoad, onProgress, onError ) {
 
 			if ( url === undefined ) url = '';
@@ -30476,6 +30485,8 @@
 
 	Object.assign( CubeTextureLoader.prototype, {
 
+		crossOrigin: 'Anonymous',
+
 		load: function ( urls, onLoad, onProgress, onError ) {
 
 			var texture = new CubeTexture();
@@ -30543,6 +30554,8 @@
 	}
 
 	Object.assign( TextureLoader.prototype, {
+
+		crossOrigin: 'Anonymous',
 
 		load: function ( url, onLoad, onProgress, onError ) {
 
