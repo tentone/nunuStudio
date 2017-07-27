@@ -616,14 +616,14 @@ SceneEditor.prototype.update = function()
 					{
 						if(Settings.editor.invertNavigation)
 						{
-							this.cameraRotation.y += 0.002 * this.mouse.delta.y;
+							this.cameraRotation.y += Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
 						}
 						else
 						{
-							this.cameraRotation.y -= 0.002 * this.mouse.delta.y;
+							this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
 						}
 
-						this.cameraRotation.x -= 0.002 * this.mouse.delta.x;
+						this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
 						
 
 						//Limit Vertical Rotation to 90 degrees
@@ -643,10 +643,11 @@ SceneEditor.prototype.update = function()
 					if(this.mouse.buttonPressed(Mouse.RIGHT))
 					{
 						//Move speed
-						var speed = this.camera.position.distanceTo(SceneEditor.ZERO) / 1000;
-						if(speed < 0.02)
+						var speed = this.camera.position.distanceTo(SceneEditor.ZERO) * Settings.editor.mouseMoveSpeed;
+						
+						if(speed < 0.01)
 						{
-							speed = 0.02;
+							speed = 0.01;
 						}
 
 						//Move Camera Front and Back
@@ -665,24 +666,23 @@ SceneEditor.prototype.update = function()
 					//Move Camera on Y
 					if(this.mouse.buttonPressed(Mouse.MIDDLE))
 					{
-						this.camera.position.y += this.mouse.delta.y * 0.1;
+						this.camera.position.y += this.mouse.delta.y * Settings.editor.mouseMoveSpeed * 100;
 					}
 
 					//Move in camera direction using mouse scroll
 					if(this.mouse.wheel !== 0)
 					{
 						//Move speed
-						var speed = this.camera.position.distanceTo(SceneEditor.ZERO) / 2000;
-						speed *= this.mouse.wheel;
+						var speed = this.mouse.wheel * this.camera.position.distanceTo(SceneEditor.ZERO) * Settings.editor.mouseWheelSensitivity;
 
 						//Limit zoom speed
-						if(speed < 0 && speed > -0.03)
+						if(speed < 0 && speed > -0.02)
 						{
-							speed = -0.03;
+							speed = -0.02;
 						}
-						else if(speed > 0 && speed < 0.03)
+						else if(speed > 0 && speed < 0.02)
 						{
-							speed = 0.03;
+							speed = 0.02;
 						}
 
 						//Move camera
@@ -697,27 +697,27 @@ SceneEditor.prototype.update = function()
 						if(Editor.keyboard.keyPressed(Keyboard.W))
 						{
 							var direction = this.camera.getWorldDirection();
-							direction.multiplyScalar(0.5);
+							direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
 							this.camera.position.add(direction);
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.S))
 						{
 							var direction = this.camera.getWorldDirection();
-							direction.multiplyScalar(0.5);
+							direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
 							this.camera.position.sub(direction);
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.A))
 						{
 							var direction = new THREE.Vector3(Math.sin(this.cameraRotation.x - 1.57), 0, Math.cos(this.cameraRotation.x - 1.57));
 							direction.normalize();
-							direction.multiplyScalar(0.5);
+							direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
 							this.camera.position.sub(direction);
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.D))
 						{
 							var direction = new THREE.Vector3(Math.sin(this.cameraRotation.x + 1.57), 0, Math.cos(this.cameraRotation.x + 1.57));
 							direction.normalize();
-							direction.multiplyScalar(0.5);
+							direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
 							this.camera.position.sub(direction);
 						}
 					}
@@ -729,14 +729,14 @@ SceneEditor.prototype.update = function()
 					{
 						if(Settings.editor.invertNavigation)
 						{
-							this.cameraRotation.y += 0.002 * this.mouse.delta.y;
+							this.cameraRotation.y += Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
 						}
 						else
 						{
-							this.cameraRotation.y -= 0.002 * this.mouse.delta.y;
+							this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
 						}
 
-						this.cameraRotation.x -= 0.002 * this.mouse.delta.x;
+						this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
 
 						if(this.cameraRotation.y < -1.57)
 						{
@@ -751,7 +751,7 @@ SceneEditor.prototype.update = function()
 					//Zoom
 					if(this.mouse.wheel !== 0)
 					{
-						this.cameraDistance += this.camera.position.distanceTo(this.cameraLookAt) / 1500 * this.mouse.wheel;
+						this.cameraDistance += this.camera.position.distanceTo(this.cameraLookAt) * Settings.editor.mouseWheelSensitivity * this.mouse.wheel;
 						if(this.cameraDistance < 0)
 						{
 							this.cameraDistance = 0;
@@ -776,8 +776,8 @@ SceneEditor.prototype.update = function()
 							direction.y = 0;
 							direction.normalize();
 
-							this.cameraLookAt.x += direction.x * 0.25
-							this.cameraLookAt.z += direction.z * 0.25;
+							this.cameraLookAt.x += direction.x * Settings.editor.keyboardNavigationSpeed;
+							this.cameraLookAt.z += direction.z * Settings.editor.keyboardNavigationSpeed;
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.S))
 						{
@@ -785,8 +785,8 @@ SceneEditor.prototype.update = function()
 							direction.y = 0;
 							direction.normalize();
 
-							this.cameraLookAt.x -= direction.x * 0.25;
-							this.cameraLookAt.z -= direction.z * 0.25;
+							this.cameraLookAt.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
+							this.cameraLookAt.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.D))
 						{
@@ -795,8 +795,8 @@ SceneEditor.prototype.update = function()
 							direction.normalize();
 							direction.applyAxisAngle(SceneEditor.UP, 1.57);
 
-							this.cameraLookAt.x -= direction.x * 0.25;
-							this.cameraLookAt.z -= direction.z * 0.25;
+							this.cameraLookAt.x -= direction.x * Settings.editor.keyboardNavigationSpeed;
+							this.cameraLookAt.z -= direction.z * Settings.editor.keyboardNavigationSpeed;
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.A))
 						{
@@ -805,8 +805,8 @@ SceneEditor.prototype.update = function()
 							direction.normalize();
 							direction.applyAxisAngle(SceneEditor.UP, 1.57);
 
-							this.cameraLookAt.x += direction.x * 0.25;
-							this.cameraLookAt.z += direction.z * 0.25;
+							this.cameraLookAt.x += direction.x * Settings.editor.keyboardNavigationSpeed;
+							this.cameraLookAt.z += direction.z * Settings.editor.keyboardNavigationSpeed;
 						}
 					}
 
@@ -817,13 +817,15 @@ SceneEditor.prototype.update = function()
 						direction.y = 0;
 						direction.normalize();
 
-						this.cameraLookAt.x += direction.x * this.mouse.delta.y * 0.1;
-						this.cameraLookAt.z += direction.z * this.mouse.delta.y * 0.1;
+						var speed = Settings.editor.mouseMoveSpeed * 10;
+
+						this.cameraLookAt.x += direction.x * this.mouse.delta.y * speed;
+						this.cameraLookAt.z += direction.z * this.mouse.delta.y * speed;
 
 						direction.applyAxisAngle(SceneEditor.UP, 1.57);
 
-						this.cameraLookAt.x += direction.x * this.mouse.delta.x * 0.1;
-						this.cameraLookAt.z += direction.z * this.mouse.delta.x * 0.1;
+						this.cameraLookAt.x += direction.x * this.mouse.delta.x * speed;
+						this.cameraLookAt.z += direction.z * this.mouse.delta.x * speed;
 					}
 
 					//Update camera position and direction

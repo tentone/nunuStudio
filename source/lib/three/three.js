@@ -5837,7 +5837,7 @@
 
 	var points_vert = "uniform float size;\nuniform float scale;\n#include <common>\n#include <color_pars_vertex>\n#include <fog_pars_vertex>\n#include <shadowmap_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <clipping_planes_pars_vertex>\nvoid main() {\n\t#include <color_vertex>\n\t#include <begin_vertex>\n\t#include <project_vertex>\n\t#ifdef USE_SIZEATTENUATION\n\t\tgl_PointSize = size * ( scale / - mvPosition.z );\n\t#else\n\t\tgl_PointSize = size;\n\t#endif\n\t#include <logdepthbuf_vertex>\n\t#include <clipping_planes_vertex>\n\t#include <worldpos_vertex>\n\t#include <shadowmap_vertex>\n\t#include <fog_vertex>\n}\n";
 
-	var shadow_frag = "uniform float opacity;\n#include <common>\n#include <packing>\n#include <bsdfs>\n#include <lights_pars>\n#include <shadowmap_pars_fragment>\n#include <shadowmask_pars_fragment>\nvoid main() {\n\tgl_FragColor = vec4( 0.0, 0.0, 0.0, opacity * ( 1.0 - getShadowMask() ) );\n}\n";
+	var shadow_frag = "uniform vec3 color;\nuniform float opacity;\n#include <common>\n#include <packing>\n#include <bsdfs>\n#include <lights_pars>\n#include <shadowmap_pars_fragment>\n#include <shadowmask_pars_fragment>\nvoid main() {\n\tgl_FragColor = vec4( color, opacity * ( 1.0 - getShadowMask() ) );\n}\n";
 
 	var shadow_vert = "#include <shadowmap_pars_vertex>\nvoid main() {\n\t#include <begin_vertex>\n\t#include <project_vertex>\n\t#include <worldpos_vertex>\n\t#include <shadowmap_vertex>\n}\n";
 
@@ -6154,6 +6154,21 @@
 
 			vertexShader: ShaderChunk.distanceRGBA_vert,
 			fragmentShader: ShaderChunk.distanceRGBA_frag
+
+		},
+
+		shadow: {
+
+			uniforms: UniformsUtils.merge( [
+				UniformsLib.lights,
+				{
+					color: { value: new Color( 0x00000 ) },
+					opacity: { value: 1.0 }
+				},
+			] ),
+
+			vertexShader: ShaderChunk.shadow_vert,
+			fragmentShader: ShaderChunk.shadow_frag
 
 		}
 
@@ -16333,33 +16348,41 @@
 
 				if ( boxMesh === undefined ) {
 
-					// TODO Adjust skybox to camera somehow
-
 					boxMesh = new Mesh(
-						new BoxBufferGeometry( 5, 5, 5 ),
+						new BoxBufferGeometry( 1, 1, 1 ),
 						new ShaderMaterial( {
 							uniforms: ShaderLib.cube.uniforms,
 							vertexShader: ShaderLib.cube.vertexShader,
 							fragmentShader: ShaderLib.cube.fragmentShader,
 							side: BackSide,
-							depthTest: false,
+							depthTest: true,
 							depthWrite: false,
+							polygonOffset: true,
 							fog: false
 						} )
 					);
+
+					boxMesh.geometry.removeAttribute( 'normal' );
+					boxMesh.geometry.removeAttribute( 'uv' );
+
+					boxMesh.onBeforeRender = function ( renderer, scene, camera ) {
+
+						var scale = camera.far;
+
+						this.matrixWorld.makeScale( scale, scale, scale );
+						this.matrixWorld.copyPosition( camera.matrixWorld );
+
+						this.material.polygonOffsetUnits = scale * 10;
+
+					};
 
 					geometries.update( boxMesh.geometry );
 
 				}
 
 				boxMesh.material.uniforms.tCube.value = background;
-				boxMesh.matrixWorld.copyPosition( camera.matrixWorld );
 
 				renderList.push( boxMesh, boxMesh.geometry, boxMesh.material, 0, null );
-
-				// TOFIX Ideally background should be rendered last
-
-				renderList.opaque.unshift( renderList.opaque.pop() ); // Hack to make sure background gets rendered first
 
 			} else if ( background && background.isTexture ) {
 
@@ -18113,7 +18136,8 @@
 			MeshPhysicalMaterial: 'physical',
 			LineBasicMaterial: 'basic',
 			LineDashedMaterial: 'dashed',
-			PointsMaterial: 'points'
+			PointsMaterial: 'points',
+			ShadowMaterial: 'shadow'
 		};
 
 		var parameterNames = [
@@ -20437,6 +20461,12 @@
 
 			//
 
+			cameraL.near = camera.near;
+			cameraR.near = camera.near;
+
+			cameraL.far = camera.far;
+			cameraR.far = camera.far;
+
 			cameraVR.matrixWorld.copy( camera.matrixWorld );
 			cameraVR.matrixWorldInverse.copy( camera.matrixWorldInverse );
 
@@ -21854,6 +21884,8 @@
 			state.buffers.depth.setMask( true );
 			state.buffers.color.setMask( true );
 
+			state.setPolygonOffset( false );
+
 			if ( vr.enabled ) {
 
 				vr.submitFrame();
@@ -22467,64 +22499,79 @@
 
 				}
 
-				if ( material.isMeshBasicMaterial ||
-					material.isMeshLambertMaterial ||
-					material.isMeshPhongMaterial ||
-					material.isMeshStandardMaterial ||
-					material.isMeshNormalMaterial ||
-					material.isMeshDepthMaterial ||
-					material.isMeshDistanceMaterial ) {
+				if ( material.isMeshBasicMaterial ) {
 
 					refreshUniformsCommon( m_uniforms, material );
 
-				}
-
-				// refresh single material specific uniforms
-
-				if ( material.isLineBasicMaterial ) {
-
-					refreshUniformsLine( m_uniforms, material );
-
-				} else if ( material.isLineDashedMaterial ) {
-
-					refreshUniformsLine( m_uniforms, material );
-					refreshUniformsDash( m_uniforms, material );
-
-				} else if ( material.isPointsMaterial ) {
-
-					refreshUniformsPoints( m_uniforms, material );
-
 				} else if ( material.isMeshLambertMaterial ) {
 
+					refreshUniformsCommon( m_uniforms, material );
 					refreshUniformsLambert( m_uniforms, material );
-
-				} else if ( material.isMeshToonMaterial ) {
-
-					refreshUniformsToon( m_uniforms, material );
 
 				} else if ( material.isMeshPhongMaterial ) {
 
-					refreshUniformsPhong( m_uniforms, material );
+					refreshUniformsCommon( m_uniforms, material );
 
-				} else if ( material.isMeshPhysicalMaterial ) {
+					if ( material.isMeshToonMaterial ) {
 
-					refreshUniformsPhysical( m_uniforms, material );
+						refreshUniformsToon( m_uniforms, material );
+
+					} else {
+
+						refreshUniformsPhong( m_uniforms, material );
+
+					}
 
 				} else if ( material.isMeshStandardMaterial ) {
 
-					refreshUniformsStandard( m_uniforms, material );
+					refreshUniformsCommon( m_uniforms, material );
+
+					if ( material.isMeshPhysicalMaterial ) {
+
+						refreshUniformsPhysical( m_uniforms, material );
+
+					} else {
+
+						refreshUniformsStandard( m_uniforms, material );
+
+					}
+
+				} else if ( material.isMeshNormalMaterial ) {
+
+					refreshUniformsCommon( m_uniforms, material );
 
 				} else if ( material.isMeshDepthMaterial ) {
 
+					refreshUniformsCommon( m_uniforms, material );
 					refreshUniformsDepth( m_uniforms, material );
 
 				} else if ( material.isMeshDistanceMaterial ) {
 
+					refreshUniformsCommon( m_uniforms, material );
 					refreshUniformsDistance( m_uniforms, material );
 
 				} else if ( material.isMeshNormalMaterial ) {
 
 					refreshUniformsNormal( m_uniforms, material );
+
+				} else if ( material.isLineBasicMaterial ) {
+
+					refreshUniformsLine( m_uniforms, material );
+
+					if ( material.isLineDashedMaterial ) {
+
+						refreshUniformsDash( m_uniforms, material );
+
+					}
+
+				} else if ( material.isPointsMaterial ) {
+
+					refreshUniformsPoints( m_uniforms, material );
+
+				} else if ( material.isShadowMaterial ) {
+
+					m_uniforms.color.value = material.color;
+					m_uniforms.opacity.value = material.opacity;
 
 				}
 
@@ -29036,43 +29083,28 @@
 	 * @author mrdoob / http://mrdoob.com/
 	 *
 	 * parameters = {
+	 *  color: <THREE.Color>,
 	 *  opacity: <float>
 	 * }
 	 */
 
 	function ShadowMaterial( parameters ) {
 
-		ShaderMaterial.call( this, {
-			uniforms: UniformsUtils.merge( [
-				UniformsLib.lights,
-				{
-					opacity: { value: 1.0 }
-				}
-			] ),
-			vertexShader: ShaderChunk[ 'shadow_vert' ],
-			fragmentShader: ShaderChunk[ 'shadow_frag' ]
-		} );
+		Material.call( this );
+
+		this.type = 'ShadowMaterial';
+
+		this.color = new Color( 0x000000 );
+		this.opacity = 1.0;
 
 		this.lights = true;
 		this.transparent = true;
-
-		Object.defineProperties( this, {
-			opacity: {
-				enumerable: true,
-				get: function () {
-					return this.uniforms.opacity.value;
-				},
-				set: function ( value ) {
-					this.uniforms.opacity.value = value;
-				}
-			}
-		} );
 
 		this.setValues( parameters );
 
 	}
 
-	ShadowMaterial.prototype = Object.create( ShaderMaterial.prototype );
+	ShadowMaterial.prototype = Object.create( Material.prototype );
 	ShadowMaterial.prototype.constructor = ShadowMaterial;
 
 	ShadowMaterial.prototype.isShadowMaterial = true;
@@ -29735,36 +29767,26 @@
 
 	function LineDashedMaterial( parameters ) {
 
-		Material.call( this );
+		LineBasicMaterial.call( this );
 
 		this.type = 'LineDashedMaterial';
-
-		this.color = new Color( 0xffffff );
-
-		this.linewidth = 1;
 
 		this.scale = 1;
 		this.dashSize = 3;
 		this.gapSize = 1;
 
-		this.lights = false;
-
 		this.setValues( parameters );
 
 	}
 
-	LineDashedMaterial.prototype = Object.create( Material.prototype );
+	LineDashedMaterial.prototype = Object.create( LineBasicMaterial.prototype );
 	LineDashedMaterial.prototype.constructor = LineDashedMaterial;
 
 	LineDashedMaterial.prototype.isLineDashedMaterial = true;
 
 	LineDashedMaterial.prototype.copy = function ( source ) {
 
-		Material.prototype.copy.call( this, source );
-
-		this.color.copy( source.color );
-
-		this.linewidth = source.linewidth;
+		LineBasicMaterial.prototype.copy.call( this, source );
 
 		this.scale = source.scale;
 		this.dashSize = source.dashSize;
@@ -36494,7 +36516,7 @@
 		this.renderTarget = new WebGLRenderTargetCube( cubeResolution, cubeResolution, options );
 		this.renderTarget.texture.name = "CubeCamera";
 
-		this.updateCubeMap = function ( renderer, scene ) {
+		this.update = function ( renderer, scene ) {
 
 			if ( this.parent === null ) this.updateMatrixWorld();
 
@@ -36522,6 +36544,23 @@
 
 			renderTarget.activeCubeFace = 5;
 			renderer.render( scene, cameraNZ, renderTarget );
+
+			renderer.setRenderTarget( null );
+
+		};
+
+		this.clear = function ( renderer, color, depth, stencil ) {
+
+			var renderTarget = this.renderTarget;
+
+			for ( var i = 0; i < 6; i ++ ) {
+
+				renderTarget.activeCubeFace = i;
+				renderer.setRenderTarget( renderTarget );
+
+				renderer.clear( color, depth, stencil );
+
+			}
 
 			renderer.setRenderTarget( null );
 
@@ -40506,322 +40545,6 @@
 	 * @author alteredq / http://alteredqualia.com/
 	 */
 
-	function MorphBlendMesh( geometry, material ) {
-
-		Mesh.call( this, geometry, material );
-
-		this.animationsMap = {};
-		this.animationsList = [];
-
-		// prepare default animation
-		// (all frames played together in 1 second)
-
-		var numFrames = this.geometry.morphTargets.length;
-
-		var name = "__default";
-
-		var startFrame = 0;
-		var endFrame = numFrames - 1;
-
-		var fps = numFrames / 1;
-
-		this.createAnimation( name, startFrame, endFrame, fps );
-		this.setAnimationWeight( name, 1 );
-
-	}
-
-	MorphBlendMesh.prototype = Object.create( Mesh.prototype );
-	MorphBlendMesh.prototype.constructor = MorphBlendMesh;
-
-	MorphBlendMesh.prototype.createAnimation = function ( name, start, end, fps ) {
-
-		var animation = {
-
-			start: start,
-			end: end,
-
-			length: end - start + 1,
-
-			fps: fps,
-			duration: ( end - start ) / fps,
-
-			lastFrame: 0,
-			currentFrame: 0,
-
-			active: false,
-
-			time: 0,
-			direction: 1,
-			weight: 1,
-
-			directionBackwards: false,
-			mirroredLoop: false
-
-		};
-
-		this.animationsMap[ name ] = animation;
-		this.animationsList.push( animation );
-
-	};
-
-	MorphBlendMesh.prototype.autoCreateAnimations = function ( fps ) {
-
-		var pattern = /([a-z]+)_?(\d+)/i;
-
-		var firstAnimation, frameRanges = {};
-
-		var geometry = this.geometry;
-
-		for ( var i = 0, il = geometry.morphTargets.length; i < il; i ++ ) {
-
-			var morph = geometry.morphTargets[ i ];
-			var chunks = morph.name.match( pattern );
-
-			if ( chunks && chunks.length > 1 ) {
-
-				var name = chunks[ 1 ];
-
-				if ( ! frameRanges[ name ] ) frameRanges[ name ] = { start: Infinity, end: - Infinity };
-
-				var range = frameRanges[ name ];
-
-				if ( i < range.start ) range.start = i;
-				if ( i > range.end ) range.end = i;
-
-				if ( ! firstAnimation ) firstAnimation = name;
-
-			}
-
-		}
-
-		for ( var name in frameRanges ) {
-
-			var range = frameRanges[ name ];
-			this.createAnimation( name, range.start, range.end, fps );
-
-		}
-
-		this.firstAnimation = firstAnimation;
-
-	};
-
-	MorphBlendMesh.prototype.setAnimationDirectionForward = function ( name ) {
-
-		var animation = this.animationsMap[ name ];
-
-		if ( animation ) {
-
-			animation.direction = 1;
-			animation.directionBackwards = false;
-
-		}
-
-	};
-
-	MorphBlendMesh.prototype.setAnimationDirectionBackward = function ( name ) {
-
-		var animation = this.animationsMap[ name ];
-
-		if ( animation ) {
-
-			animation.direction = - 1;
-			animation.directionBackwards = true;
-
-		}
-
-	};
-
-	MorphBlendMesh.prototype.setAnimationFPS = function ( name, fps ) {
-
-		var animation = this.animationsMap[ name ];
-
-		if ( animation ) {
-
-			animation.fps = fps;
-			animation.duration = ( animation.end - animation.start ) / animation.fps;
-
-		}
-
-	};
-
-	MorphBlendMesh.prototype.setAnimationDuration = function ( name, duration ) {
-
-		var animation = this.animationsMap[ name ];
-
-		if ( animation ) {
-
-			animation.duration = duration;
-			animation.fps = ( animation.end - animation.start ) / animation.duration;
-
-		}
-
-	};
-
-	MorphBlendMesh.prototype.setAnimationWeight = function ( name, weight ) {
-
-		var animation = this.animationsMap[ name ];
-
-		if ( animation ) {
-
-			animation.weight = weight;
-
-		}
-
-	};
-
-	MorphBlendMesh.prototype.setAnimationTime = function ( name, time ) {
-
-		var animation = this.animationsMap[ name ];
-
-		if ( animation ) {
-
-			animation.time = time;
-
-		}
-
-	};
-
-	MorphBlendMesh.prototype.getAnimationTime = function ( name ) {
-
-		var time = 0;
-
-		var animation = this.animationsMap[ name ];
-
-		if ( animation ) {
-
-			time = animation.time;
-
-		}
-
-		return time;
-
-	};
-
-	MorphBlendMesh.prototype.getAnimationDuration = function ( name ) {
-
-		var duration = - 1;
-
-		var animation = this.animationsMap[ name ];
-
-		if ( animation ) {
-
-			duration = animation.duration;
-
-		}
-
-		return duration;
-
-	};
-
-	MorphBlendMesh.prototype.playAnimation = function ( name ) {
-
-		var animation = this.animationsMap[ name ];
-
-		if ( animation ) {
-
-			animation.time = 0;
-			animation.active = true;
-
-		} else {
-
-			console.warn( "THREE.MorphBlendMesh: animation[" + name + "] undefined in .playAnimation()" );
-
-		}
-
-	};
-
-	MorphBlendMesh.prototype.stopAnimation = function ( name ) {
-
-		var animation = this.animationsMap[ name ];
-
-		if ( animation ) {
-
-			animation.active = false;
-
-		}
-
-	};
-
-	MorphBlendMesh.prototype.update = function ( delta ) {
-
-		for ( var i = 0, il = this.animationsList.length; i < il; i ++ ) {
-
-			var animation = this.animationsList[ i ];
-
-			if ( ! animation.active ) continue;
-
-			var frameTime = animation.duration / animation.length;
-
-			animation.time += animation.direction * delta;
-
-			if ( animation.mirroredLoop ) {
-
-				if ( animation.time > animation.duration || animation.time < 0 ) {
-
-					animation.direction *= - 1;
-
-					if ( animation.time > animation.duration ) {
-
-						animation.time = animation.duration;
-						animation.directionBackwards = true;
-
-					}
-
-					if ( animation.time < 0 ) {
-
-						animation.time = 0;
-						animation.directionBackwards = false;
-
-					}
-
-				}
-
-			} else {
-
-				animation.time = animation.time % animation.duration;
-
-				if ( animation.time < 0 ) animation.time += animation.duration;
-
-			}
-
-			var keyframe = animation.start + _Math.clamp( Math.floor( animation.time / frameTime ), 0, animation.length - 1 );
-			var weight = animation.weight;
-
-			if ( keyframe !== animation.currentFrame ) {
-
-				this.morphTargetInfluences[ animation.lastFrame ] = 0;
-				this.morphTargetInfluences[ animation.currentFrame ] = 1 * weight;
-
-				this.morphTargetInfluences[ keyframe ] = 0;
-
-				animation.lastFrame = animation.currentFrame;
-				animation.currentFrame = keyframe;
-
-			}
-
-			var mix = ( animation.time % frameTime ) / frameTime;
-
-			if ( animation.directionBackwards ) mix = 1 - mix;
-
-			if ( animation.currentFrame !== animation.lastFrame ) {
-
-				this.morphTargetInfluences[ animation.currentFrame ] = mix * weight;
-				this.morphTargetInfluences[ animation.lastFrame ] = ( 1 - mix ) * weight;
-
-			} else {
-
-				this.morphTargetInfluences[ animation.currentFrame ] = weight;
-
-			}
-
-		}
-
-	};
-
-	/**
-	 * @author alteredq / http://alteredqualia.com/
-	 */
-
 	function ImmediateRenderObject( material ) {
 
 		Object3D.call( this );
@@ -43974,6 +43697,15 @@
 
 	//
 
+	CubeCamera.prototype.updateCubeMap = function ( renderer, scene ) {
+
+		console.warn( 'THREE.CubeCamera: .updateCubeMap() is now .update().' );
+		return this.update( renderer, scene );
+
+	};
+
+	//
+
 	var GeometryUtils = {
 
 		merge: function ( geometry1, geometry2, materialIndexOffset ) {
@@ -44211,7 +43943,6 @@
 	exports.Vector2 = Vector2;
 	exports.Quaternion = Quaternion;
 	exports.Color = Color;
-	exports.MorphBlendMesh = MorphBlendMesh;
 	exports.ImmediateRenderObject = ImmediateRenderObject;
 	exports.VertexNormalsHelper = VertexNormalsHelper;
 	exports.SpotLightHelper = SpotLightHelper;
