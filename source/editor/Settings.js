@@ -44,6 +44,11 @@ Settings.loadDefault = function()
 	Settings.editor.invertNavigation = false;
 	Settings.editor.keyboardNavigation = false;
 
+	Settings.editor.keyboardNavigationSpeed = 0.5;
+	Settings.editor.mouseLookSensitivity = 0.002;
+	Settings.editor.mouseMoveSpeed = 0.001;
+	Settings.editor.mouseWheelSensitivity = 0.0005;
+	
 	//Render
 	Settings.render = {};
 	Settings.render.followProject = true;
