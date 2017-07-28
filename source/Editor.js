@@ -243,10 +243,13 @@ include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
 include("editor/ui/tab/CameraEditor.js");
 include("editor/ui/tab/CubeTextureEditor.js");
+
 include("editor/ui/tab/settings/SettingsTab.js");
 include("editor/ui/tab/settings/CodeSettingsTab.js");
 include("editor/ui/tab/settings/GeneralSettingsTab.js");
 include("editor/ui/tab/settings/RenderSettingsTab.js");
+include("editor/ui/tab/settings/JSHintSettingsTab.js");
+
 include("editor/ui/tab/material/MaterialEditor.js");
 include("editor/ui/tab/material/PhongMaterialEditor.js");
 include("editor/ui/tab/material/LambertMaterialEditor.js");
@@ -256,6 +259,7 @@ include("editor/ui/tab/material/SpriteMaterialEditor.js");
 include("editor/ui/tab/material/PointMaterialEditor.js");
 include("editor/ui/tab/material/ShaderMaterialEditor.js");
 include("editor/ui/tab/material/PhysicalMaterialEditor.js");
+
 include("editor/ui/tab/texture/TextureEditor.js");
 include("editor/ui/tab/texture/VideoTextureEditor.js");
 include("editor/ui/tab/texture/CanvasTextureEditor.js");

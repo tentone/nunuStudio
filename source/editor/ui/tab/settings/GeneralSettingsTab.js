@@ -186,6 +186,45 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.invertNavigation);
 	this.form.nextRow();
 
+	//Mouse look sensitivity
+	this.form.addText("Mouse look");
+	this.mouseLookSensitivity = new Slider(this.form.element);
+	this.mouseLookSensitivity.size.set(120, 18);
+	this.mouseLookSensitivity.setRange(0.0001, 0.02);
+	this.mouseLookSensitivity.setStep(0.0001);
+	this.mouseLookSensitivity.setOnChange(function()
+	{
+		Settings.editor.mouseLookSensitivity = self.mouseLookSensitivity.getValue();
+	});
+	this.form.add(this.mouseLookSensitivity);
+	this.form.nextRow();
+
+	//Mouse move speed
+	this.form.addText("Mouse move");
+	this.mouseMoveSpeed = new Slider(this.form.element);
+	this.mouseMoveSpeed.size.set(120, 18);
+	this.mouseMoveSpeed.setRange(0.0001, 0.01);
+	this.mouseMoveSpeed.setStep(0.0001);
+	this.mouseMoveSpeed.setOnChange(function()
+	{
+		Settings.editor.mouseMoveSpeed = self.mouseMoveSpeed.getValue();
+	});
+	this.form.add(this.mouseMoveSpeed);
+	this.form.nextRow();
+
+	//Mouse wheel speed
+	this.form.addText("Mouse zoom");
+	this.mouseWheelSensitivity = new Slider(this.form.element);
+	this.mouseWheelSensitivity.size.set(120, 18);
+	this.mouseWheelSensitivity.setRange(0.0001, 0.01);
+	this.mouseWheelSensitivity.setStep(0.0001);
+	this.mouseWheelSensitivity.setOnChange(function()
+	{
+		Settings.editor.mouseWheelSensitivity = self.mouseWheelSensitivity.getValue();
+	});
+	this.form.add(this.mouseWheelSensitivity);
+	this.form.nextRow();
+
 	//Mouse lock on camera move
 	this.form.addText("Lock mouse");
 	this.lockMouse = new CheckBox(this.form.element);
@@ -206,6 +245,19 @@ function GeneralSettingsTab(parent, closeable, container, index)
 		Settings.editor.keyboardNavigation = self.keyboardNavigation.getValue();
 	});
 	this.form.add(this.keyboardNavigation);
+	this.form.nextRow();
+
+	//Keyboard movement speed
+	this.form.addText("Keyboard speed");
+	this.keyboardNavigationSpeed = new Slider(this.form.element);
+	this.keyboardNavigationSpeed.size.set(120, 18);
+	this.keyboardNavigationSpeed.setRange(0.1, 3);
+	this.keyboardNavigationSpeed.setStep(0.1);
+	this.keyboardNavigationSpeed.setOnChange(function()
+	{
+		Settings.editor.keyboardNavigationSpeed = self.keyboardNavigationSpeed.getValue();
+	});
+	this.form.add(this.keyboardNavigationSpeed);
 	this.form.nextRow();
 
 	//Blank Space
@@ -307,6 +359,10 @@ GeneralSettingsTab.prototype.activate = function()
 	this.navigation.setValue(Settings.editor.navigation);
 	this.invertNavigation.setValue(Settings.editor.invertNavigation);
 	this.keyboardNavigation.setValue(Settings.editor.keyboardNavigation);
+	this.keyboardNavigationSpeed.setValue(Settings.editor.keyboardNavigationSpeed);
+	this.mouseLookSensitivity.setValue(Settings.editor.mouseLookSensitivity);
+	this.mouseMoveSpeed.setValue(Settings.editor.mouseMoveSpeed);
+	this.mouseWheelSensitivity.setValue(Settings.editor.mouseWheelSensitivity);
 
 	//Camera preview
 	this.cameraPreviewEnabled.setValue(Settings.editor.cameraPreviewEnabled);
