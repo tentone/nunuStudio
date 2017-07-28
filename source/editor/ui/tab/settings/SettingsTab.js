@@ -19,6 +19,9 @@ function SettingsTab(parent, closeable, container, index)
 
 	//Code
 	this.code = this.tab.addTab(CodeSettingsTab, false);
+
+	//JS Hint
+	this.jshint = this.tab.addTab(JSHintSettingsTab, false);
 }
 
 SettingsTab.prototype = Object.create(TabElement.prototype);

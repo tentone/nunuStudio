@@ -48,7 +48,7 @@ Settings.loadDefault = function()
 	Settings.editor.mouseLookSensitivity = 0.002;
 	Settings.editor.mouseMoveSpeed = 0.001;
 	Settings.editor.mouseWheelSensitivity = 0.0005;
-	
+
 	//Render
 	Settings.render = {};
 	Settings.render.followProject = true;
