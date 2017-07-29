@@ -53,20 +53,31 @@
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
 			<h2 class="black">Communication</h2>
-			<p>In this guide we will learn how to comunicate with nunu applications embeded inside a webpage.</p>
-			<p>TODO</p>
+			<p>In this guide we will learn how to comunicate with nunu applications embeded inside a webpage using messages and how to use DOM elements to controll app content.</p>
+			<p>To explore more about communication check the NunuApp API documentation.</p>
 
 			<h3 class="black">Message communication</h3>
-			<p>TODO</p>
+			<p>To comunicate with the running application a message comunication model is used. The app or the page can send messages to each other that will be catched by callbacks used to process the information sent between them.</p>
+			<p>Its also possible to communicate between apps running on the same page, to achieve this we can pass the app objects from the page to the apps.</p>
 
-			<h3 class="black">Send data</h3>
-			<p>TODO</p>
+			<h3 class="black">Page to app</h3>
+			<p>To send a message from the webpage to the nunuStudio aplication running the use the sendData(data) method. Data can be anything, assuming that the nunuApp is on the same JS context as the sender its possible send even object references.</p>
+			<p>To receive these messages inside the app we need to create a onAppData</p>
+			<pre><code>function onAppData(data)
+{
+	//TODO PROCESS RECEIVED DATA
+}</code></pre>
 
-			<h3 class="black">Receive data</h3>
-			<p>TODO</p>
+			<h3 class="black">App to page</h3>
+			<p>Before sending data from the nunu app to the webpage we need to define a onMessageReceive callback to process received messages.</p>
+			<p>This callback can be defined using the code shown bellow.</p>
+			<pre><code>app.setOnDataReceived(function(data)
+{
+	//TODO PROCESS RECEIVED DATA
+});</code></pre>
 
-			<h3 class="black">Example</h3>
-			<p>TODO</p>
+			<!--<h3 class="black">Simple color chooser</h3>
+			<p>TODO</p>-->
 		</div>
 	</section>
 
