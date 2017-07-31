@@ -12,7 +12,7 @@
 THREE.TDSLoader = function(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
-	this.debug = false;
+	this.debug = true;
 
 	this.group = null;
 	this.position = 0;
@@ -182,33 +182,50 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 		}
 		else if(next === MAT_TEXMAP)
 		{
-			this.debugMessage("   Map (TODO ImageLoader)");
-			//var map = this.readMap(data);
+			this.debugMessage("   ColorMap");
+			this.resetPosition(data);
+			var map = this.readMap(data);
+			
 			//TODO <ADD CODE HERE>
 		}
 		else if(next === MAT_BUMPMAP)
 		{
-			this.debugMessage("   BumpMap (TODO ImageLoader)");
+			this.debugMessage("   BumpMap");
+			this.resetPosition(data);
+			var map = this.readMap(data);
+
 			//TODO <ADD CODE HERE>
 		}
 		else if(next == MAT_OPACMAP)
 		{
-			this.debugMessage("   OpacityMap (TODO ImageLoader)");
+			this.debugMessage("   OpacityMap");
+			this.resetPosition(data);
+			var map = this.readMap(data);
+
 			//TODO <ADD CODE HERE>
 		}
 		else if(next == MAT_SPECMAP)
 		{
-			this.debugMessage("   SpecularMap (TODO ImageLoader)");
+			this.debugMessage("   SpecularMap");
+			this.resetPosition(data);
+			var map = this.readMap(data);
+
 			//TODO <ADD CODE HERE>
 		}
 		else if(next == MAT_SHINMAP)
 		{
-			this.debugMessage("   ShininessrMap (TODO ImageLoader)");
+			this.debugMessage("   ShininessrMap");
+			this.resetPosition(data);
+			var map = this.readMap(data);
+
 			//TODO <ADD CODE HERE>
 		}
 		else if(next == MAT_REFLMAP)
 		{
-			this.debugMessage("   RelectMap (TODO ImageLoader)");
+			this.debugMessage("   RelectMap");
+			this.resetPosition(data);
+			var map = this.readMap(data);
+
 			//TODO <ADD CODE HERE>
 		}
 		else
@@ -387,11 +404,6 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 			
 			//Calculate position rotation and scale from matrix
 			matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
-
-			//Log information for debug
-			console.log("Matrix", matrix);
-			console.log("Inverse", inverse);
-			console.log("Mesh", mesh);
 		}
 		else
 		{
@@ -480,23 +492,70 @@ THREE.TDSLoader.prototype.readMap = function(data)
 {
 	var chunk = this.readChunk(data);
 	var next = this.nextChunk(data, chunk);
+	var texture = new THREE.Texture();
 
 	while(next !== 0)
 	{
 		if(next === MAT_MAPNAME)
 		{
 			var name = this.readString(data, 128);
-			this.debugMessage("      MapName: " + name);
+
+			this.debugMessage("      File: " + name);
+		}
+		else if(next === MAT_MAP_TILING)
+		{
+			var tiling = this.readWord(data);
+			
+			this.debugMessage("      Tiling: " + tiling);
+		}
+		else if(next === MAT_MAP_UOFFSET)
+		{
+			texture.offset.x = this.readFloat(data);
+
+			this.debugMessage("      OffsetX: " + texture.offset.x);
+		}
+		else if(next === MAT_MAP_VOFFSET)
+		{
+			texture.offset.y = this.readFloat(data);
+
+			this.debugMessage("      OffsetY: " + texture.offset.y);
+		}
+		else if(next === MAT_MAP_USCALE)
+		{
+			texture.repeat.x = this.readFloat(data);
+
+			this.debugMessage("      RepeatX: " + texture.repeat.x);
+		}
+		else if(next === MAT_MAP_VSCALE)
+		{
+			texture.repeat.y = this.readFloat(data);
+
+			this.debugMessage("      RepeatY: " + texture.repeat.y);
 		}
 		else
 		{
-			this.debugMessage("      Unknown named object chunk: " + next.toString(16));
+			this.debugMessage("      Unknown map chunk: " + next.toString(16));
 		}
+
+		/*MAT_MAP_TILING
+		MAT_MAP_TEXBLUR
+		MAT_MAP_USCALE
+		MAT_MAP_VSCALE
+		MAT_MAP_UOFFSET
+		MAT_MAP_VOFFSET
+		MAT_MAP_ANG
+		MAT_MAP_COL1
+		MAT_MAP_COL2
+		MAT_MAP_RCOL
+		MAT_MAP_GCOL
+		MAT_MAP_BCOL*/
 
 		next = this.nextChunk(data, chunk);
 	}
 
 	this.endChunk(chunk);
+
+	return texture;
 }
 
 THREE.TDSLoader.prototype.readMaterialGroup = function(data)
