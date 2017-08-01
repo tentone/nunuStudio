@@ -244,11 +244,67 @@
 						
 											<ul class="index-list methods">
 													<li class="index-item method">
+														<a href="#method_debugMessage">debugMessage</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_endChunk">endChunk</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_load">load</a>
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_nextChunk">nextChunk</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_parse">parse</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readByte">readByte</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readChunk">readChunk</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readColor">readColor</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readDWord">readDWord</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readFloat">readFloat</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readInt">readInt</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readShort">readShort</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readString">readString</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readWord">readWord</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_resetPosition">resetPosition</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_setPath">setPath</a>
 						
 													</li>
 											</ul>
@@ -261,6 +317,111 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
+											<div id="method_debugMessage" class="method item">
+												<h3 class="name"><code>debugMessage</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>message</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Print debug message to the console.</p>
+											<p>Is controlled by a flag to show or hide debug messages.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">message</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	<p>Debug message to print to the console.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_endChunk" class="method item">
+												<h3 class="name"><code>endChunk</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>chunk</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Set position to the end of the current chunk of data.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">chunk</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	<p>Data chunk.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
 											<div id="method_load" class="method item">
 												<h3 class="name"><code>load</code></h3>
 											
@@ -350,6 +511,72 @@
 											
 											
 											</div>
+											<div id="method_nextChunk" class="method item">
+												<h3 class="name"><code>nextChunk</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+															<li class="arg">
+																	<code>chunk</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Move to the next data chunk.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">chunk</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	<p>Data chunk.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
 											<div id="method_parse" class="method item">
 												<h3 class="name"><code>parse</code></h3>
 											
@@ -407,6 +634,711 @@
 														<div class="returns-description">
 																	<span class="type"><a href="../classes/Audio.html" class="crosslink">Audio</a></span>:
 																<p>Audio resource</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readByte" class="method item">
+												<h3 class="name"><code>readByte</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Number</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read byte value.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview to read data from.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readChunk" class="method item">
+												<h3 class="name"><code>readChunk</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Object</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read next chunk of data.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Object</span>:
+																<p>Chunk of data read.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readColor" class="method item">
+												<h3 class="name"><code>readColor</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Color</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read a color value.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Color</span>:
+																<p>Color value read..</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readDWord" class="method item">
+												<h3 class="name"><code>readDWord</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Number</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read 64 bit unsigned integer value.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview to read data from.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readFloat" class="method item">
+												<h3 class="name"><code>readFloat</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Number</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read 32 bit float value.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview to read data from.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readInt" class="method item">
+												<h3 class="name"><code>readInt</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Number</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read 32 bit signed integer value.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview to read data from.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readShort" class="method item">
+												<h3 class="name"><code>readShort</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Number</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read 16 bit signed integer value.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview to read data from.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readString" class="method item">
+												<h3 class="name"><code>readString</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+															<li class="arg">
+																	<code>maxLength</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">String</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read string value.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview to read data from.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">maxLength</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Max size of the string to be read.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">String</span>:
+																<p>Data read from the dataview.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readWord" class="method item">
+												<h3 class="name"><code>readWord</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Number</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read 32 bit unsigned integer value.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview to read data from.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_resetPosition" class="method item">
+												<h3 class="name"><code>resetPosition</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Reset dataview position.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_setPath" class="method item">
+												<h3 class="name"><code>setPath</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>path</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type"></span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+																<p>Provided by the <a href="../modules/Input.html">Input</a> module.</p>
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Set resource path used to determine the file path to attached resources.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">path</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	<p>Path to resources.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																<p>Self for chaining.</p>
 											
 														</div>
 													</div>
