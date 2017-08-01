@@ -1283,6 +1283,7 @@ Editor.loadModel = function(file, onLoad)
 {
 	var name = file.name;
 	var extension = FileSystem.getFileExtension(name);
+	var path = (file.path !== undefined) ? FileSystem.getFilePath(file.path) : "";
 
 	try
 	{
@@ -1367,6 +1368,7 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.TDSLoader();
+					loader.setPath(path);
 					var group = loader.parse(reader.result);
 					Editor.addToScene(group);
 				}

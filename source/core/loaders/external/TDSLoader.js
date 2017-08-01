@@ -20,7 +20,7 @@ THREE.TDSLoader = function(manager)
 	this.materials = [];
 	this.meshes = [];
 
-	this.path = path;
+	this.path = "";
 };
 
 THREE.TDSLoader.prototype.setPath = function(path)
@@ -55,9 +55,6 @@ THREE.TDSLoader.prototype.parse = function(arraybuffer)
 	{
 		this.group.add(this.meshes[i]);
 	}
-
-	//TODO <REMOVE THIS>
-	this.group.scale.set(0.01, 0.01, 0.01);
 
 	return this.group;
 };
@@ -193,33 +190,25 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 		{
 			this.debugMessage("   ColorMap");
 			this.resetPosition(data);
-			var map = this.readMap(data);
-			
-			//TODO <ADD CODE HERE>
+			material.map = this.readMap(data);
 		}
 		else if(next === MAT_BUMPMAP)
 		{
 			this.debugMessage("   BumpMap");
 			this.resetPosition(data);
-			var map = this.readMap(data);
-
-			//TODO <ADD CODE HERE>
+			material.bumpMap = this.readMap(data);
 		}
 		else if(next == MAT_OPACMAP)
 		{
 			this.debugMessage("   OpacityMap");
 			this.resetPosition(data);
-			var map = this.readMap(data);
-
-			//TODO <ADD CODE HERE>
+			material.alphaMap = this.readMap(data);
 		}
 		else if(next == MAT_SPECMAP)
 		{
 			this.debugMessage("   SpecularMap");
 			this.resetPosition(data);
-			var map = this.readMap(data);
-
-			//TODO <ADD CODE HERE>
+			material.specularMap = this.readMap(data);
 		}
 		else if(next == MAT_SHINMAP)
 		{
@@ -231,7 +220,7 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 		}
 		else if(next == MAT_REFLMAP)
 		{
-			this.debugMessage("   RelectMap");
+			this.debugMessage("   ReflectMap");
 			this.resetPosition(data);
 			var map = this.readMap(data);
 
@@ -369,7 +358,7 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 		}
 		else if(next === MESH_MATRIX)
 		{
-			this.debugMessage("   Translation Matrix");
+			this.debugMessage("   Translation Matrix (TODO)");
 
 			var values = [];
 			for(var i = 0; i < 12; i++)
@@ -501,15 +490,19 @@ THREE.TDSLoader.prototype.readMap = function(data)
 {
 	var chunk = this.readChunk(data);
 	var next = this.nextChunk(data, chunk);
-	var texture = new THREE.Texture();
+	var texture = null;
+
+	var loader = new TextureLoader();
+	loader.setPath(this.path);
 
 	while(next !== 0)
 	{
 		if(next === MAT_MAPNAME)
 		{
-			var name = this.readString(data, 256);
+			var name = this.readString(data, 128);
+			texture = loader.load(name);
 
-			this.debugMessage("      File: " + name);
+			this.debugMessage("      File: " + this.path + name);
 		}
 		else if(next === MAT_MAP_TILING)
 		{
