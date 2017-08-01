@@ -70,6 +70,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\loaders\\external\\TDSLoader.js": {
+            "name": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\loaders\\AudioLoader.js": {
             "name": "..\\..\\source\\core\\loaders\\AudioLoader.js",
             "modules": {
@@ -4606,6 +4613,279 @@
             "itemtype": "method",
             "name": "dispose",
             "class": "Mouse",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 570,
+            "description": "Read a color value.",
+            "itemtype": "method",
+            "name": "readColor",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview.",
+                    "type": "DataView"
+                }
+            ],
+            "return": {
+                "description": "Color value read..",
+                "type": "Color"
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 611,
+            "description": "Read next chunk of data.",
+            "itemtype": "method",
+            "name": "readChunk",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview.",
+                    "type": "DataView"
+                }
+            ],
+            "return": {
+                "description": "Chunk of data read.",
+                "type": "Object"
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 631,
+            "description": "Set position to the end of the current chunk of data.",
+            "itemtype": "method",
+            "name": "endChunk",
+            "params": [
+                {
+                    "name": "chunk",
+                    "description": "Data chunk.",
+                    "type": "Object"
+                }
+            ],
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 642,
+            "description": "Move to the next data chunk.",
+            "itemtype": "method",
+            "name": "nextChunk",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview.",
+                    "type": "DataView"
+                },
+                {
+                    "name": "chunk",
+                    "description": "Data chunk.",
+                    "type": "Object"
+                }
+            ],
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 671,
+            "description": "Reset dataview position.",
+            "itemtype": "method",
+            "name": "resetPosition",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview.",
+                    "type": "DataView"
+                }
+            ],
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 682,
+            "description": "Read byte value.",
+            "itemtype": "method",
+            "name": "readByte",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview to read data from.",
+                    "type": "DataView"
+                }
+            ],
+            "return": {
+                "description": "Data read from the dataview.",
+                "type": "Number"
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 696,
+            "description": "Read 32 bit float value.",
+            "itemtype": "method",
+            "name": "readFloat",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview to read data from.",
+                    "type": "DataView"
+                }
+            ],
+            "return": {
+                "description": "Data read from the dataview.",
+                "type": "Number"
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 717,
+            "description": "Read 32 bit signed integer value.",
+            "itemtype": "method",
+            "name": "readInt",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview to read data from.",
+                    "type": "DataView"
+                }
+            ],
+            "return": {
+                "description": "Data read from the dataview.",
+                "type": "Number"
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 731,
+            "description": "Read 16 bit signed integer value.",
+            "itemtype": "method",
+            "name": "readShort",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview to read data from.",
+                    "type": "DataView"
+                }
+            ],
+            "return": {
+                "description": "Data read from the dataview.",
+                "type": "Number"
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 745,
+            "description": "Read 64 bit unsigned integer value.",
+            "itemtype": "method",
+            "name": "readDWord",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview to read data from.",
+                    "type": "DataView"
+                }
+            ],
+            "return": {
+                "description": "Data read from the dataview.",
+                "type": "Number"
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 759,
+            "description": "Read 32 bit unsigned integer value.",
+            "itemtype": "method",
+            "name": "readWord",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview to read data from.",
+                    "type": "DataView"
+                }
+            ],
+            "return": {
+                "description": "Data read from the dataview.",
+                "type": "Number"
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 773,
+            "description": "Read string value.",
+            "itemtype": "method",
+            "name": "readString",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview to read data from.",
+                    "type": "DataView"
+                },
+                {
+                    "name": "maxLength",
+                    "description": "Max size of the string to be read.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Data read from the dataview.",
+                "type": "String"
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 800,
+            "description": "Set resource path used to determine the file path to attached resources.",
+            "itemtype": "method",
+            "name": "setPath",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "Path to resources.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Self for chaining."
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 817,
+            "description": "Print debug message to the console.\n\nIs controlled by a flag to show or hide debug messages.",
+            "itemtype": "method",
+            "name": "debugMessage",
+            "params": [
+                {
+                    "name": "message",
+                    "description": "Debug message to print to the console.",
+                    "type": "Object"
+                }
+            ],
+            "class": "AudioLoader",
             "module": "Input"
         },
         {
@@ -12554,5 +12834,10 @@
             "module": "Runtime"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " ..\\..\\source\\core\\loaders\\external\\TDSLoader.js:800"
+        }
+    ]
 }

@@ -23,13 +23,6 @@ THREE.TDSLoader = function(manager)
 	this.path = "";
 };
 
-THREE.TDSLoader.prototype.setPath = function(path)
-{
-	this.path = path;
-
-	return this;
-}
-
 THREE.TDSLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	var scope = this;
@@ -42,8 +35,10 @@ THREE.TDSLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}, onProgress, onError);
 };
 
-THREE.TDSLoader.prototype.parse = function(arraybuffer)
+THREE.TDSLoader.prototype.parse = function(arraybuffer, path)
 {
+	this.setPath(path);
+
 	this.group = new THREE.Group();
 	this.position = 0;
 	this.materials = [];
@@ -129,6 +124,41 @@ THREE.TDSLoader.prototype.readMeshData = function(data)
 
 		next = this.nextChunk(data, chunk);
 	}
+};
+
+THREE.TDSLoader.prototype.readNamedObject = function(data)
+{
+	var chunk = this.readChunk(data);
+	var name = this.readString(data, 64);
+	chunk.cur = this.position;
+
+	var next = this.nextChunk(data, chunk);
+	while(next !== 0)
+	{
+		if(next === N_TRI_OBJECT)
+		{
+			this.resetPosition(data);
+			var mesh = this.readMesh(data);
+			mesh.name = name;
+			this.meshes.push(mesh);
+		}
+		else if(next === N_CAMERA)
+		{
+			//TODO <READ CAMERA DATA>
+		}
+		else if(next === N_DIRECT_LIGHT)
+		{
+			//TODO <READ DIRECT LIGHT DATA>
+		}
+		else
+		{
+			this.debugMessage("Unknown named object chunk: " + next.toString(16));
+		}
+
+		next = this.nextChunk(data, chunk);
+	}
+
+	this.endChunk(chunk);
 };
 
 THREE.TDSLoader.prototype.readMaterialEntry = function(data)
@@ -239,40 +269,6 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 	this.materials[material.name] = material;
 };
 
-THREE.TDSLoader.prototype.readColor = function(data)
-{
-	var chunk = this.readChunk(data);
-	var color = new THREE.Color();
-
-	if(chunk.id === COLOR_24 || chunk.id === LIN_COLOR_24)
-	{
-		var r = this.readByte(data);
-		var g = this.readByte(data);
-		var b = this.readByte(data);
-
-		color.setRGB(r / 255, g / 255, b / 255);
-
-		this.debugMessage("      Color: " + color.r + ", " + color.g + ", " + color.b);
-	}
-	else if(chunk.id === COLOR_F || chunk.id === LIN_COLOR_F)
-	{
-		var r = this.readFloat(data);
-		var g = this.readFloat(data);
-		var b = this.readFloat(data);
-		
-		color.setRGB(r, g, b);
-
-		this.debugMessage("      Color: " + color.r + ", " + color.g + ", " + color.b);
-	}
-	else
-	{
-		this.debugMessage("      Unknown color chunk: " + c.toString(16));
-	}
-
-	this.endChunk(chunk);
-	return color;
-};
-
 THREE.TDSLoader.prototype.readMesh = function(data)
 {
 	var chunk = this.readChunk(data);
@@ -375,10 +371,10 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 			matrix.elements[3] = values[9];
 
 			//Y Line
-			matrix.elements[4] = -values[2];
-			matrix.elements[5] = -values[8];
-			matrix.elements[6] = -values[5];
-			matrix.elements[7] = -values[11];
+			matrix.elements[4] = values[2];
+			matrix.elements[5] = values[8];
+			matrix.elements[6] = values[5];
+			matrix.elements[7] = values[11];
 
 			//Z Line
 			matrix.elements[8] = values[1];
@@ -393,15 +389,15 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 			matrix.elements[15] = 1;
 
 			//threejs stores matrix column by column
-			//matrix.transpose();
+			matrix.transpose();
 			
 			//Apply inverse tranformation to geometry
-			//var inverse = new THREE.Matrix4();
-			//inverse.getInverse(matrix, true);
-			//geometry.applyMatrix(inverse);
+			var inverse = new THREE.Matrix4();
+			inverse.getInverse(matrix, true);
+			geometry.applyMatrix(inverse);
 			
 			//Calculate position rotation and scale from matrix
-			//matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
+			matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
 		}
 		else
 		{
@@ -571,41 +567,54 @@ THREE.TDSLoader.prototype.readMaterialGroup = function(data)
 	return {name: name, index: index};
 };
 
-THREE.TDSLoader.prototype.readNamedObject = function(data)
+/**
+ * Read a color value.
+ *
+ * @method readColor
+ * @param {DataView} data Dataview.
+ * @return {Color} Color value read..
+ */
+THREE.TDSLoader.prototype.readColor = function(data)
 {
 	var chunk = this.readChunk(data);
-	var name = this.readString(data, 64);
-	chunk.cur = this.position;
+	var color = new THREE.Color();
 
-	var next = this.nextChunk(data, chunk);
-	while(next !== 0)
+	if(chunk.id === COLOR_24 || chunk.id === LIN_COLOR_24)
 	{
-		if(next === N_TRI_OBJECT)
-		{
-			this.resetPosition(data);
-			var mesh = this.readMesh(data);
-			mesh.name = name;
-			this.meshes.push(mesh);
-		}
-		else if(next === N_CAMERA)
-		{
-			//TODO <READ CAMERA DATA>
-		}
-		else if(next === N_DIRECT_LIGHT)
-		{
-			//TODO <READ DIRECT LIGHT DATA>
-		}
-		else
-		{
-			this.debugMessage("Unknown named object chunk: " + next.toString(16));
-		}
+		var r = this.readByte(data);
+		var g = this.readByte(data);
+		var b = this.readByte(data);
 
-		next = this.nextChunk(data, chunk);
+		color.setRGB(r / 255, g / 255, b / 255);
+
+		this.debugMessage("      Color: " + color.r + ", " + color.g + ", " + color.b);
+	}
+	else if(chunk.id === COLOR_F || chunk.id === LIN_COLOR_F)
+	{
+		var r = this.readFloat(data);
+		var g = this.readFloat(data);
+		var b = this.readFloat(data);
+		
+		color.setRGB(r, g, b);
+
+		this.debugMessage("      Color: " + color.r + ", " + color.g + ", " + color.b);
+	}
+	else
+	{
+		this.debugMessage("      Unknown color chunk: " + c.toString(16));
 	}
 
 	this.endChunk(chunk);
+	return color;
 };
 
+/**
+ * Read next chunk of data.
+ *
+ * @method readChunk
+ * @param {DataView} data Dataview.
+ * @return {Object} Chunk of data read.
+ */
 THREE.TDSLoader.prototype.readChunk = function(data)
 {
 	var chunk = {};
@@ -619,11 +628,24 @@ THREE.TDSLoader.prototype.readChunk = function(data)
 	return chunk;
 };
 
+/**
+ * Set position to the end of the current chunk of data.
+ *
+ * @method endChunk
+ * @param {Object} chunk Data chunk.
+ */
 THREE.TDSLoader.prototype.endChunk = function(chunk)
 {
 	this.position = chunk.end;
 };
 
+/**
+ * Move to the next data chunk.
+ *
+ * @method nextChunk
+ * @param {DataView} data Dataview.
+ * @param {Object} chunk Data chunk.
+ */
 THREE.TDSLoader.prototype.nextChunk = function(data, chunk)
 {
 	if(chunk.cur >= chunk.end)
@@ -646,11 +668,24 @@ THREE.TDSLoader.prototype.nextChunk = function(data, chunk)
 	}
 };
 
-THREE.TDSLoader.prototype.resetPosition = function(data, chunk)
+/**
+ * Reset dataview position.
+ *
+ * @method resetPosition
+ * @param {DataView} data Dataview.
+ */
+THREE.TDSLoader.prototype.resetPosition = function(data)
 {
 	this.position -= 6;
 };
 
+/**
+ * Read byte value.
+ *
+ * @method readByte
+ * @param {DataView} data Dataview to read data from.
+ * @return {Number} Data read from the dataview.
+ */
 THREE.TDSLoader.prototype.readByte = function(data)
 {
 	var v = data.getUint8(this.position, true);
@@ -658,6 +693,13 @@ THREE.TDSLoader.prototype.readByte = function(data)
 	return v;
 };
 
+/**
+ * Read 32 bit float value.
+ *
+ * @method readFloat
+ * @param {DataView} data Dataview to read data from.
+ * @return {Number} Data read from the dataview.
+ */
 THREE.TDSLoader.prototype.readFloat = function(data)
 {
 	try
@@ -672,6 +714,13 @@ THREE.TDSLoader.prototype.readFloat = function(data)
 	}
 };
 
+/**
+ * Read 32 bit signed integer value.
+ *
+ * @method readInt
+ * @param {DataView} data Dataview to read data from.
+ * @return {Number} Data read from the dataview.
+ */
 THREE.TDSLoader.prototype.readInt = function(data)
 {
 	var v = data.getInt32(this.position, true);
@@ -679,6 +728,13 @@ THREE.TDSLoader.prototype.readInt = function(data)
 	return v;
 };
 
+/**
+ * Read 16 bit signed integer value.
+ *
+ * @method readShort
+ * @param {DataView} data Dataview to read data from.
+ * @return {Number} Data read from the dataview.
+ */
 THREE.TDSLoader.prototype.readShort = function(data)
 {
 	var v = data.getInt16(this.position, true);
@@ -686,6 +742,13 @@ THREE.TDSLoader.prototype.readShort = function(data)
 	return v;
 };
 
+/**
+ * Read 64 bit unsigned integer value.
+ *
+ * @method readDWord
+ * @param {DataView} data Dataview to read data from.
+ * @return {Number} Data read from the dataview.
+ */
 THREE.TDSLoader.prototype.readDWord = function(data)
 {
 	var v = data.getUint32(this.position, true);
@@ -693,6 +756,13 @@ THREE.TDSLoader.prototype.readDWord = function(data)
 	return v;
 };
 
+/**
+ * Read 32 bit unsigned integer value.
+ *
+ * @method readWord
+ * @param {DataView} data Dataview to read data from.
+ * @return {Number} Data read from the dataview.
+ */
 THREE.TDSLoader.prototype.readWord = function(data)
 {
 	var v = data.getUint16(this.position, true);
@@ -700,6 +770,14 @@ THREE.TDSLoader.prototype.readWord = function(data)
 	return v;
 };
 
+/**
+ * Read string value.
+ *
+ * @method readString
+ * @param {DataView} data Dataview to read data from.
+ * @param {Number} maxLength Max size of the string to be read.
+ * @return {String} Data read from the dataview.
+ */
 THREE.TDSLoader.prototype.readString = function(data, maxLength)
 {
 	var s = "";
@@ -719,6 +797,31 @@ THREE.TDSLoader.prototype.readString = function(data, maxLength)
 	return s;
 };
 
+/**
+ * Set resource path used to determine the file path to attached resources.
+ *
+ * @method setPath
+ * @param {String} path Path to resources.
+ * @returns Self for chaining.
+ */
+THREE.TDSLoader.prototype.setPath = function(path)
+{
+	if(path !== undefined)
+	{
+		this.path = path;
+	}
+
+	return this;
+}
+
+/**
+ * Print debug message to the console.
+ *
+ * Is controlled by a flag to show or hide debug messages.
+ *
+ * @method debugMessage
+ * @param {Object} message Debug message to print to the console.
+ */
 THREE.TDSLoader.prototype.debugMessage = function(message)
 {
 	if(this.debug)

@@ -1299,7 +1299,6 @@ Editor.loadModel = function(file, onLoad)
 				{
 					try
 					{
-						var path = FileSystem.getFilePath(file.path);
 						var mtl = FileSystem.getNameWithoutExtension(file.path) + ".mtl";
 
 						if(FileSystem.fileExists(mtl))
@@ -1368,8 +1367,7 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.TDSLoader();
-					loader.setPath(path);
-					var group = loader.parse(reader.result);
+					var group = loader.parse(reader.result, path);
 					Editor.addToScene(group);
 				}
 				catch(e)
@@ -1389,7 +1387,7 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.ColladaLoader();
-					var collada = loader.parse(reader.result);
+					var collada = loader.parse(reader.result, path);
 					var scene = collada.scene;
 					Editor.addToScene(scene);
 				}
@@ -1410,7 +1408,7 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.GLTF2Loader();
-					loader.parse(reader.result, function(gltf)
+					loader.parse(reader.result, path, function(gltf)
 					{
 						if(gltf.scene !== undefined)
 						{
@@ -1542,7 +1540,7 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.FBXLoader();
-					var object = loader.parse(reader.result);
+					var object = loader.parse(reader.result, path);
 
 					//TODO <OBJECT ANIMATIONS>
 					//object.animations
