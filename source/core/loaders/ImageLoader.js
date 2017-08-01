@@ -11,7 +11,36 @@
 function ImageLoader(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+
+	this.path = "";
+	this.crossOrigin = "";
 }
+
+/**
+ * Set cross origin path for the loader.
+ * 
+ * @method setCrossOrigin
+ * @param {String} url URL.
+ * @return {ImageLoader} Self for chaining.
+ */
+ImageLoader.prototype.setCrossOrigin = function(url)
+{
+	this.crossOrigin = url;
+	return this;
+};
+
+/**
+ * Set base path for texture loading.
+ * 
+ * @method setPath
+ * @param {String} path Path
+ * @return {ImageLoader} Self for chaining.
+ */
+ImageLoader.prototype.setPath = function(path)
+{
+	this.path = path;
+	return this;
+};
 
 /**
  * Load image resource from url.

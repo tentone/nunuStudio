@@ -22,6 +22,13 @@ function TextureLoader(manager)
 
 THREE.TextureLoader = TextureLoader;
 
+/**
+ * Set cross origin path for the loader.
+ * 
+ * @method setCrossOrigin
+ * @param {String} url URL.
+ * @return {TextureLoader} Self for chaining.
+ */
 TextureLoader.prototype.setCrossOrigin = function(url)
 {
 	this.crossOrigin = url;
