@@ -19,7 +19,17 @@ THREE.TDSLoader = function(manager)
 
 	this.materials = [];
 	this.meshes = [];
+
+	this.textureLoader = new THREE.TextureLoader();
 };
+
+
+THREE.TDSLoader.prototype.setPath = function(path)
+{
+	this.textureLoader.setPath(path);
+
+	return this;
+}
 
 THREE.TDSLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
@@ -386,7 +396,7 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 			matrix.elements[8] = values[1];
 			matrix.elements[9] = values[7];
 			matrix.elements[10] = values[4];
-			matrix.elements[11] = -values[10];
+			matrix.elements[11] = values[10];
 
 			//W Line
 			matrix.elements[12] = 0;
@@ -395,15 +405,15 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 			matrix.elements[15] = 1;
 
 			//threejs stores matrix column by column
-			matrix.transpose();
+			//matrix.transpose();
 			
 			//Apply inverse tranformation to geometry
-			var inverse = new THREE.Matrix4();
-			inverse.getInverse(matrix, true);
-			geometry.applyMatrix(inverse);
+			//var inverse = new THREE.Matrix4();
+			//inverse.getInverse(matrix, true);
+			//geometry.applyMatrix(inverse);
 			
 			//Calculate position rotation and scale from matrix
-			matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
+			//matrix.decompose(mesh.position, mesh.quaternion, mesh.scale);
 		}
 		else
 		{
@@ -498,7 +508,7 @@ THREE.TDSLoader.prototype.readMap = function(data)
 	{
 		if(next === MAT_MAPNAME)
 		{
-			var name = this.readString(data, 128);
+			var name = this.readString(data, 256);
 
 			this.debugMessage("      File: " + name);
 		}
@@ -507,6 +517,12 @@ THREE.TDSLoader.prototype.readMap = function(data)
 			var tiling = this.readWord(data);
 			
 			this.debugMessage("      Tiling: " + tiling);
+		}
+		else if(next === MAT_MAP_ANG)
+		{
+			var rotation = this.readFloat(data);
+			
+			this.debugMessage("      Rotation: " + rotation);
 		}
 		else if(next === MAT_MAP_UOFFSET)
 		{
@@ -536,19 +552,6 @@ THREE.TDSLoader.prototype.readMap = function(data)
 		{
 			this.debugMessage("      Unknown map chunk: " + next.toString(16));
 		}
-
-		/*MAT_MAP_TILING
-		MAT_MAP_TEXBLUR
-		MAT_MAP_USCALE
-		MAT_MAP_VSCALE
-		MAT_MAP_UOFFSET
-		MAT_MAP_VOFFSET
-		MAT_MAP_ANG
-		MAT_MAP_COL1
-		MAT_MAP_COL2
-		MAT_MAP_RCOL
-		MAT_MAP_GCOL
-		MAT_MAP_BCOL*/
 
 		next = this.nextChunk(data, chunk);
 	}
