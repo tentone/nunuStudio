@@ -20,13 +20,12 @@ THREE.TDSLoader = function(manager)
 	this.materials = [];
 	this.meshes = [];
 
-	this.textureLoader = new THREE.TextureLoader();
+	this.path = path;
 };
-
 
 THREE.TDSLoader.prototype.setPath = function(path)
 {
-	this.textureLoader.setPath(path);
+	this.path = path;
 
 	return this;
 }
