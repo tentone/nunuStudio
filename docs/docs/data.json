@@ -4617,7 +4617,59 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 570,
+            "line": 26,
+            "description": "Load 3ds file from url.",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL for the file.",
+                    "type": "[type]"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "onLoad callback, receives group Object3D as argument.",
+                    "type": "Function"
+                },
+                {
+                    "name": "onProgress",
+                    "description": "onProgress callback.",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "onError callback.",
+                    "type": "Function"
+                }
+            ],
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 46,
+            "description": "Parse arraybuffer data and load 3ds file.",
+            "params": [
+                {
+                    "name": "arraybuffer",
+                    "description": "Arraybuffer data to be loaded.",
+                    "type": "ArrayBuffer"
+                },
+                {
+                    "name": "path",
+                    "description": "Path for external resources.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Group loaded from 3ds file.",
+                "type": "Object3D"
+            },
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 585,
             "description": "Read a color value.",
             "itemtype": "method",
             "name": "readColor",
@@ -4637,7 +4689,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 611,
+            "line": 626,
             "description": "Read next chunk of data.",
             "itemtype": "method",
             "name": "readChunk",
@@ -4657,7 +4709,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 631,
+            "line": 646,
             "description": "Set position to the end of the current chunk of data.",
             "itemtype": "method",
             "name": "endChunk",
@@ -4673,7 +4725,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 642,
+            "line": 657,
             "description": "Move to the next data chunk.",
             "itemtype": "method",
             "name": "nextChunk",
@@ -4694,7 +4746,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 671,
+            "line": 686,
             "description": "Reset dataview position.",
             "itemtype": "method",
             "name": "resetPosition",
@@ -4710,7 +4762,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 682,
+            "line": 697,
             "description": "Read byte value.",
             "itemtype": "method",
             "name": "readByte",
@@ -4730,7 +4782,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 696,
+            "line": 711,
             "description": "Read 32 bit float value.",
             "itemtype": "method",
             "name": "readFloat",
@@ -4750,7 +4802,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 717,
+            "line": 732,
             "description": "Read 32 bit signed integer value.",
             "itemtype": "method",
             "name": "readInt",
@@ -4770,7 +4822,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 731,
+            "line": 746,
             "description": "Read 16 bit signed integer value.",
             "itemtype": "method",
             "name": "readShort",
@@ -4790,7 +4842,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 745,
+            "line": 760,
             "description": "Read 64 bit unsigned integer value.",
             "itemtype": "method",
             "name": "readDWord",
@@ -4810,7 +4862,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 759,
+            "line": 774,
             "description": "Read 32 bit unsigned integer value.",
             "itemtype": "method",
             "name": "readWord",
@@ -4830,7 +4882,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 773,
+            "line": 788,
             "description": "Read string value.",
             "itemtype": "method",
             "name": "readString",
@@ -4855,7 +4907,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 800,
+            "line": 815,
             "description": "Set resource path used to determine the file path to attached resources.",
             "itemtype": "method",
             "name": "setPath",
@@ -4874,7 +4926,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 817,
+            "line": 832,
             "description": "Print debug message to the console.\n\nIs controlled by a flag to show or hide debug messages.",
             "itemtype": "method",
             "name": "debugMessage",
@@ -12836,8 +12888,12 @@
     ],
     "warnings": [
         {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " ..\\..\\source\\core\\loaders\\external\\TDSLoader.js:800"
+            "message": "Missing item type\nLoad 3ds file from url.",
+            "line": " ..\\..\\source\\core\\loaders\\external\\TDSLoader.js:26"
+        },
+        {
+            "message": "Missing item type\nParse arraybuffer data and load 3ds file.",
+            "line": " ..\\..\\source\\core\\loaders\\external\\TDSLoader.js:46"
         }
     ]
 }
