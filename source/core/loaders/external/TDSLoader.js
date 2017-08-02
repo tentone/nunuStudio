@@ -1,7 +1,7 @@
 /*
  * Autodesk 3DS threee.js file loader, based on lib3ds.
  * 
- * Loads geometry with uv and materials basic properties.
+ * Loads geometry with uv and materials basic properties with texture support.
  * 
  * @author @tentone
  * @author @timknip
@@ -23,6 +23,14 @@ THREE.TDSLoader = function(manager)
 	this.path = "";
 };
 
+/**
+ * Load 3ds file from url.
+ * 
+ * @param {[type]} url URL for the file.
+ * @param {Function} onLoad onLoad callback, receives group Object3D as argument.
+ * @param {Function} onProgress onProgress callback.
+ * @param {Function} onError onError callback.
+ */
 THREE.TDSLoader.prototype.load = function(url, onLoad, onProgress, onError)
 {
 	var scope = this;
@@ -35,6 +43,13 @@ THREE.TDSLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}, onProgress, onError);
 };
 
+/**
+ * Parse arraybuffer data and load 3ds file.
+ * 
+ * @param {ArrayBuffer} arraybuffer Arraybuffer data to be loaded.
+ * @param {String} path Path for external resources.
+ * @return {Object3D} Group loaded from 3ds file.
+ */
 THREE.TDSLoader.prototype.parse = function(arraybuffer, path)
 {
 	this.setPath(path);
@@ -802,7 +817,7 @@ THREE.TDSLoader.prototype.readString = function(data, maxLength)
  *
  * @method setPath
  * @param {String} path Path to resources.
- * @returns Self for chaining.
+ * @return Self for chaining.
  */
 THREE.TDSLoader.prototype.setPath = function(path)
 {
