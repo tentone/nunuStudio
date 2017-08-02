@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio SpotLight</title>  
+	<title>nunuStudio ExternalLoader</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -162,319 +162,35 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>SpotLight Class</h1>
-						<div class="box meta">
-						
-								<div class="extends">
-									Extends <a href="../classes/SpotLight.html" class="crosslink">SpotLight</a>
-								</div>
+						<h1>ExternalLoader Module</h1>
+						<div class="box clearfix meta">
 						
 						
-									Module: <a href="../modules/Lights.html">Lights</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>A SpotLight emit light from a point in a specific direction in a cone volume.</p>
-						<p>SpotLight has a target that is always represented in words coordinates, and can be moved to change where the light is pointing at.</p>
-						<p>Based on THREE.SpotLight documentation for the object can be found at <a href="https://threejs.org/docs/index.html#Reference/Lights/SpotLight">https://threejs.org/docs/index.html#Reference/Lights/SpotLight</a></p>
+							<p>Autodesk 3DS threee.js file loader, based on lib3ds.</p>
+						<p>Loads geometry with uv and materials basic properties with texture support.</p>
 						
 						</div>
 						
-							<div class="constructor">
-								<h2>Constructor</h2>
-								<div id="method_SpotLight" class="method item">
-									<h3 class="name"><code>SpotLight</code></h3>
-								
-										<div class="args">
-											<span class="paren">(</span><ul class="args-list inline commas">
-												<li class="arg">
-														<code>color</code>
-												</li>
-												<li class="arg">
-														<code>intensity</code>
-												</li>
-												<li class="arg">
-														<code>distance</code>
-												</li>
-												<li class="arg">
-														<code>angle</code>
-												</li>
-												<li class="arg">
-														<code>exponent</code>
-												</li>
-												<li class="arg">
-														<code>decay</code>
-												</li>
-											</ul><span class="paren">)</span>
-										</div>
-								
-								
-								
-								
-								
-								
-								
-								
-									<div class="meta">
-												<p>
-										</p>
-								
-								
-								
-									</div>
-								
-									<div class="description">
-										
-									</div>
-								
-										<div class="params">
-											<h4>Parameters:</h4>
-								
-											<ul class="params-list">
-												<li class="param">
-														<code class="param-name">color</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														<p>Light color in hex RGB</p>
-								
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">intensity</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														<p>Light intensity</p>
-								
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">distance</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														<p>SpotLight maximum range</p>
-								
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">angle</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														 
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">exponent</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														 
-													</div>
-								
-												</li>
-												<li class="param">
-														<code class="param-name">decay</code>
-														<span class="type">Number</span>
-								
-								
-													<div class="param-description">
-														 
-													</div>
-								
-												</li>
-											</ul>
-										</div>
-								
-								
-								</div>
+						
+						<div class="yui3-g">
+							<div class="yui3-u-1-2">
+									<p>This namespace provides the following classes:</p>
+						
+									<ul class="module-classes">
+										<li class="module-class">
+											<a href="../classes/TDSLoader.html">
+												TDSLoader
+											</a>
+										</li>
+									</ul>
 							</div>
 						
-						<div id="classdocs" class="tabview">
-							<ul class="api-class-tabs">
-								<li class="api-class-tab index"><a href="#index">Index</a></li>
-						
-									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-							</ul>
-						
-							<div>
-								<div id="index" class="api-class-tabpanel index">
-									<h2 class="off-left">Item Index</h2>
-						
-										<div class="index-section methods">
-											<h3>Methods</h3>
-						
-											<ul class="index-list methods extends">
-													<li class="index-item method">
-														<a href="#method_setTarget">setTarget</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_toJSON">toJSON</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_updateShadowMap">updateShadowMap</a>
-						
-													</li>
-											</ul>
-										</div>
-						
-						
-						
-								</div>
-						
-									<div id="methods" class="api-class-tabpanel">
-										<h2 class="off-left">Methods</h2>
-						
-											<div id="method_setTarget" class="method item">
-												<h3 class="name"><code>setTarget</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>target</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>SpotLight looks to the target object coordinates.</p>
-											<p>The target object should always be at the scene root.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">target</code>
-																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
-											
-											
-																<div class="param-description">
-																	<p>Target object.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_toJSON" class="method item">
-												<h3 class="name"><code>toJSON</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>meta</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Serialize SpotLight data to JSON.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">meta</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	<p>Meta.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_updateShadowMap" class="method item">
-												<h3 class="name"><code>updateShadowMap</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Update light shadow map atributtes at runtime.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
-						
-						
-						
+							<div class="yui3-u-1-2">
 							</div>
 						</div>
 					</div>

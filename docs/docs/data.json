@@ -72,8 +72,12 @@
         },
         "..\\..\\source\\core\\loaders\\external\\TDSLoader.js": {
             "name": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "modules": {},
-            "classes": {},
+            "modules": {
+                "ExternalLoader": 1
+            },
+            "classes": {
+                "TDSLoader": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -783,6 +787,20 @@
             "line": 3,
             "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/."
         },
+        "ExternalLoader": {
+            "name": "ExternalLoader",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "TDSLoader": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 3,
+            "description": "Autodesk 3DS threee.js file loader, based on lib3ds.\n\nLoads geometry with uv and materials basic properties with texture support."
+        },
         "Loaders": {
             "name": "Loaders",
             "submodules": {},
@@ -1244,6 +1262,29 @@
             "line": 3,
             "description": "Mouse instance for input in sync with the running 3D application.\n\nThe mouse object provided by scripts is automatically updated by the runtime handler.",
             "is_constructor": 1
+        },
+        "TDSLoader": {
+            "name": "TDSLoader",
+            "shortname": "TDSLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ExternalLoader",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 3,
+            "description": "Autodesk 3DS threee.js file loader, based on lib3ds.\n\nLoads geometry with uv and materials basic properties with texture support.",
+            "author": "@timknip",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "manager",
+                    "description": "Loading manager.",
+                    "type": "LoadingManager"
+                }
+            ]
         },
         "AudioLoader": {
             "name": "AudioLoader",
@@ -4617,8 +4658,10 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 26,
+            "line": 29,
             "description": "Load 3ds file from url.",
+            "itemtype": "method",
+            "name": "load",
             "params": [
                 {
                     "name": "url",
@@ -4641,13 +4684,15 @@
                     "type": "Function"
                 }
             ],
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 46,
+            "line": 50,
             "description": "Parse arraybuffer data and load 3ds file.",
+            "itemtype": "method",
+            "name": "parse",
             "params": [
                 {
                     "name": "arraybuffer",
@@ -4664,12 +4709,153 @@
                 "description": "Group loaded from 3ds file.",
                 "type": "Object3D"
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 585,
+            "line": 77,
+            "description": "Decode file content to read 3ds data.",
+            "itemtype": "method",
+            "name": "readFile",
+            "params": [
+                {
+                    "name": "arraybuffer",
+                    "description": "Arraybuffer data to be loaded.",
+                    "type": "ArrayBuffer"
+                }
+            ],
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 116,
+            "description": "Read mesh data chunk.",
+            "itemtype": "method",
+            "name": "readMeshData",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview in use.",
+                    "type": "Dataview"
+                }
+            ],
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 161,
+            "description": "Read named object chunk.",
+            "itemtype": "method",
+            "name": "readNamedObject",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview in use.",
+                    "type": "Dataview"
+                }
+            ],
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 202,
+            "description": "Read material data chunk and add it to the material list.",
+            "itemtype": "method",
+            "name": "readMaterialEntry",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview in use.",
+                    "type": "Dataview"
+                }
+            ],
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 316,
+            "description": "Read mesh data chunk.",
+            "itemtype": "method",
+            "name": "readMesh",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview in use.",
+                    "type": "Dataview"
+                }
+            ],
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 480,
+            "description": "Read face array data chunk.",
+            "itemtype": "method",
+            "name": "readFaceArray",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview in use.",
+                    "type": "Dataview"
+                },
+                {
+                    "name": "mesh",
+                    "description": "Mesh to be filled with the data read.",
+                    "type": "Mesh"
+                }
+            ],
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 541,
+            "description": "Read texture map data chunk.",
+            "itemtype": "method",
+            "name": "readMap",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview in use.",
+                    "type": "Dataview"
+                }
+            ],
+            "return": {
+                "description": "Texture read from this data chunk.",
+                "type": "Texture"
+            },
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 615,
+            "description": "Read material group data chunk.",
+            "itemtype": "method",
+            "name": "readMaterialGroup",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dataview in use.",
+                    "type": "Dataview"
+                }
+            ],
+            "return": {
+                "description": "Object with name and index of the object.",
+                "type": "Object"
+            },
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
+            "line": 640,
             "description": "Read a color value.",
             "itemtype": "method",
             "name": "readColor",
@@ -4684,12 +4870,12 @@
                 "description": "Color value read..",
                 "type": "Color"
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 626,
+            "line": 681,
             "description": "Read next chunk of data.",
             "itemtype": "method",
             "name": "readChunk",
@@ -4704,12 +4890,12 @@
                 "description": "Chunk of data read.",
                 "type": "Object"
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 646,
+            "line": 701,
             "description": "Set position to the end of the current chunk of data.",
             "itemtype": "method",
             "name": "endChunk",
@@ -4720,12 +4906,12 @@
                     "type": "Object"
                 }
             ],
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 657,
+            "line": 712,
             "description": "Move to the next data chunk.",
             "itemtype": "method",
             "name": "nextChunk",
@@ -4741,12 +4927,12 @@
                     "type": "Object"
                 }
             ],
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 686,
+            "line": 741,
             "description": "Reset dataview position.",
             "itemtype": "method",
             "name": "resetPosition",
@@ -4757,12 +4943,12 @@
                     "type": "DataView"
                 }
             ],
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 697,
+            "line": 752,
             "description": "Read byte value.",
             "itemtype": "method",
             "name": "readByte",
@@ -4777,12 +4963,12 @@
                 "description": "Data read from the dataview.",
                 "type": "Number"
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 711,
+            "line": 766,
             "description": "Read 32 bit float value.",
             "itemtype": "method",
             "name": "readFloat",
@@ -4797,12 +4983,12 @@
                 "description": "Data read from the dataview.",
                 "type": "Number"
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 732,
+            "line": 787,
             "description": "Read 32 bit signed integer value.",
             "itemtype": "method",
             "name": "readInt",
@@ -4817,12 +5003,12 @@
                 "description": "Data read from the dataview.",
                 "type": "Number"
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 746,
+            "line": 801,
             "description": "Read 16 bit signed integer value.",
             "itemtype": "method",
             "name": "readShort",
@@ -4837,12 +5023,12 @@
                 "description": "Data read from the dataview.",
                 "type": "Number"
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 760,
+            "line": 815,
             "description": "Read 64 bit unsigned integer value.",
             "itemtype": "method",
             "name": "readDWord",
@@ -4857,12 +5043,12 @@
                 "description": "Data read from the dataview.",
                 "type": "Number"
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 774,
+            "line": 829,
             "description": "Read 32 bit unsigned integer value.",
             "itemtype": "method",
             "name": "readWord",
@@ -4877,12 +5063,12 @@
                 "description": "Data read from the dataview.",
                 "type": "Number"
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 788,
+            "line": 843,
             "description": "Read string value.",
             "itemtype": "method",
             "name": "readString",
@@ -4902,12 +5088,12 @@
                 "description": "Data read from the dataview.",
                 "type": "String"
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 815,
+            "line": 870,
             "description": "Set resource path used to determine the file path to attached resources.",
             "itemtype": "method",
             "name": "setPath",
@@ -4921,12 +5107,12 @@
             "return": {
                 "description": "Self for chaining."
             },
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 832,
+            "line": 887,
             "description": "Print debug message to the console.\n\nIs controlled by a flag to show or hide debug messages.",
             "itemtype": "method",
             "name": "debugMessage",
@@ -4937,8 +5123,8 @@
                     "type": "Object"
                 }
             ],
-            "class": "AudioLoader",
-            "module": "Input"
+            "class": "TDSLoader",
+            "module": "ExternalLoader"
         },
         {
             "file": "..\\..\\source\\core\\loaders\\AudioLoader.js",
@@ -12886,14 +13072,5 @@
             "module": "Runtime"
         }
     ],
-    "warnings": [
-        {
-            "message": "Missing item type\nLoad 3ds file from url.",
-            "line": " ..\\..\\source\\core\\loaders\\external\\TDSLoader.js:26"
-        },
-        {
-            "message": "Missing item type\nParse arraybuffer data and load 3ds file.",
-            "line": " ..\\..\\source\\core\\loaders\\external\\TDSLoader.js:46"
-        }
-    ]
+    "warnings": []
 }
