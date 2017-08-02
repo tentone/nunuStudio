@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio ObjectLoader</title>  
+	<title>nunuStudio TDSLoader</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -162,27 +162,26 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>ObjectLoader Class</h1>
+						<h1>TDSLoader Class</h1>
 						<div class="box meta">
 						
 						
 						
-									Module: <a href="../modules/Loaders.html">Loaders</a>
+									Module: <a href="../modules/ExternalLoader.html">ExternalLoader</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Objectloader can be used to load external objects from files.</p>
-						<p>Also loads all resources attached to the objects being loaded.</p>
-						<p>Can parse be used to load on runtime resources and objects from external isp project files.</p>
+							<p>Autodesk 3DS threee.js file loader, based on lib3ds.</p>
+						<p>Loads geometry with uv and materials basic properties with texture support.</p>
 						
 						</div>
 						
 							<div class="constructor">
 								<h2>Constructor</h2>
-								<div id="method_ObjectLoader" class="method item">
-									<h3 class="name"><code>ObjectLoader</code></h3>
+								<div id="method_TDSLoader" class="method item">
+									<h3 class="name"><code>TDSLoader</code></h3>
 								
 										<div class="args">
 											<span class="paren">(</span><ul class="args-list inline commas">
@@ -217,11 +216,12 @@
 											<ul class="params-list">
 												<li class="param">
 														<code class="param-name">manager</code>
-														<span class="type">Object</span>
+														<span class="type">LoadingManager</span>
 								
 								
 													<div class="param-description">
-														 
+														<p>Loading manager.</p>
+								
 													</div>
 								
 												</li>
@@ -248,7 +248,11 @@
 						
 											<ul class="index-list methods">
 													<li class="index-item method">
-														<a href="#method_bindSkeletons">bindSkeletons</a>
+														<a href="#method_debugMessage">debugMessage</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_endChunk">endChunk</a>
 						
 													</li>
 													<li class="index-item method">
@@ -256,55 +260,87 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_nextChunk">nextChunk</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_parse">parse</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseAnimations">parseAnimations</a>
+														<a href="#method_readByte">readByte</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseAudio">parseAudio</a>
+														<a href="#method_readChunk">readChunk</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseFonts">parseFonts</a>
+														<a href="#method_readColor">readColor</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseGeometries">parseGeometries</a>
+														<a href="#method_readDWord">readDWord</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseImages">parseImages</a>
+														<a href="#method_readFaceArray">readFaceArray</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseMaterials">parseMaterials</a>
+														<a href="#method_readFile">readFile</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseObjects">parseObjects</a>
+														<a href="#method_readFloat">readFloat</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseSkeletons">parseSkeletons</a>
+														<a href="#method_readInt">readInt</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseTextures">parseTextures</a>
+														<a href="#method_readMap">readMap</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_parseVideos">parseVideos</a>
+														<a href="#method_readMaterialEntry">readMaterialEntry</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_setCrossOrigin">setCrossOrigin</a>
+														<a href="#method_readMaterialGroup">readMaterialGroup</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_setTexturePath">setTexturePath</a>
+														<a href="#method_readMesh">readMesh</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readMeshData">readMeshData</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readNamedObject">readNamedObject</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readShort">readShort</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readString">readString</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_readWord">readWord</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_resetPosition">resetPosition</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_setPath">setPath</a>
 						
 													</li>
 											</ul>
@@ -317,16 +353,13 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_bindSkeletons" class="method item">
-												<h3 class="name"><code>bindSkeletons</code></h3>
+											<div id="method_debugMessage" class="method item">
+												<h3 class="name"><code>debugMessage</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>object</code>
-															</li>
-															<li class="arg">
-																	<code>skeletons</code>
+																	<code>message</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -347,7 +380,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Auxiliar method to bind skeletons to loaded objects.</p>
+													<p>Print debug message to the console.</p>
+											<p>Is controlled by a flag to show or hide debug messages.</p>
 											
 												</div>
 											
@@ -356,23 +390,63 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">object</code>
-																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
+																	<code class="param-name">message</code>
+																	<span class="type">Object</span>
 											
 											
 																<div class="param-description">
-																	<p>Object3D that contains objects</p>
+																	<p>Debug message to print to the console.</p>
 											
 																</div>
 											
 															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_endChunk" class="method item">
+												<h3 class="name"><code>endChunk</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>chunk</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Set position to the end of the current chunk of data.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">skeletons</code>
-																	<span class="type">Array</span>
+																	<code class="param-name">chunk</code>
+																	<span class="type">Object</span>
 											
 											
 																<div class="param-description">
-																	<p>Array of skeletons to be binded.</p>
+																	<p>Data chunk.</p>
 											
 																</div>
 											
@@ -418,7 +492,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Load object file from URL.</p>
+													<p>Load 3ds file from url.</p>
 											
 												</div>
 											
@@ -428,11 +502,12 @@
 														<ul class="params-list">
 															<li class="param">
 																	<code class="param-name">url</code>
-																	<span class="type">String</span>
+																	<span class="type">type</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>URL for the file.</p>
+											
 																</div>
 											
 															</li>
@@ -442,7 +517,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>onLoad callback, receives group Object3D as argument.</p>
+											
 																</div>
 											
 															</li>
@@ -452,7 +528,8 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>onProgress callback.</p>
+											
 																</div>
 											
 															</li>
@@ -462,7 +539,73 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>onError callback.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_nextChunk" class="method item">
+												<h3 class="name"><code>nextChunk</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+															<li class="arg">
+																	<code>chunk</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Move to the next data chunk.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">chunk</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	<p>Data chunk.</p>
+											
 																</div>
 											
 															</li>
@@ -477,10 +620,147 @@
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>json</code>
+																	<code>arraybuffer</code>
 															</li>
 															<li class="arg">
-																	<code>onLoad</code>
+																	<code>path</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Parse arraybuffer data and load 3ds file.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">arraybuffer</code>
+																	<span class="type">ArrayBuffer</span>
+											
+											
+																<div class="param-description">
+																	<p>Arraybuffer data to be loaded.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">path</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	<p>Path for external resources.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type"><a href="../classes/Object3D.html" class="crosslink">Object3D</a></span>:
+																<p>Group loaded from 3ds file.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readByte" class="method item">
+												<h3 class="name"><code>readByte</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type">Number</span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read byte value.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview to read data from.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_readChunk" class="method item">
+												<h3 class="name"><code>readChunk</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -504,8 +784,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse JSON object.</p>
-											<p>Data can be loaded from a file using the FileSystem methods and parsed to an Object using JSON.parse() method.</p>
+													<p>Read next chunk of data.</p>
 											
 												</div>
 											
@@ -514,23 +793,12 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
 											
 											
 																<div class="param-description">
-																	<p>JSON data to be loaded.</p>
-											
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">onLoad</code>
-																	<span class="type">Function</span>
-											
-											
-																<div class="param-description">
-																	<p>onLoad callback.</p>
+																	<p>Dataview.</p>
 											
 																</div>
 											
@@ -543,25 +811,25 @@
 											
 														<div class="returns-description">
 																	<span class="type">Object</span>:
-																<p>Program loaded from json data.</p>
+																<p>Chunk of data read.</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_parseAnimations" class="method item">
-												<h3 class="name"><code>parseAnimations</code></h3>
+											<div id="method_readColor" class="method item">
+												<h3 class="name"><code>readColor</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>json</code>
+																	<code>data</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
 													<span class="returns-inline">
-														<span class="type">Array</span>
+														<span class="type">Color</span>
 													</span>
 											
 											
@@ -579,7 +847,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse animations on json.</p>
+													<p>Read a color value.</p>
 											
 												</div>
 											
@@ -588,12 +856,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Dataview.</p>
+											
 																</div>
 											
 															</li>
@@ -604,26 +873,26 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">Array</span>:
-																<p>animations</p>
+																	<span class="type">Color</span>:
+																<p>Color value read..</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_parseAudio" class="method item">
-												<h3 class="name"><code>parseAudio</code></h3>
+											<div id="method_readDWord" class="method item">
+												<h3 class="name"><code>readDWord</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>json</code>
+																	<code>data</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
 													<span class="returns-inline">
-														<span class="type">Array</span>
+														<span class="type">Number</span>
 													</span>
 											
 											
@@ -641,7 +910,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse audio on json.</p>
+													<p>Read 64 bit unsigned integer value.</p>
 											
 												</div>
 											
@@ -650,12 +919,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Dataview to read data from.</p>
+											
 																</div>
 											
 															</li>
@@ -666,26 +936,142 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">Array</span>:
-																<p>audio</p>
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_parseFonts" class="method item">
-												<h3 class="name"><code>parseFonts</code></h3>
+											<div id="method_readFaceArray" class="method item">
+												<h3 class="name"><code>readFaceArray</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>json</code>
+																	<code>data</code>
+															</li>
+															<li class="arg">
+																	<code>mesh</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read face array data chunk.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">Dataview</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview in use.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">mesh</code>
+																	<span class="type"><a href="../classes/Mesh.html" class="crosslink">Mesh</a></span>
+											
+											
+																<div class="param-description">
+																	<p>Mesh to be filled with the data read.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_readFile" class="method item">
+												<h3 class="name"><code>readFile</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>arraybuffer</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Decode file content to read 3ds data.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">arraybuffer</code>
+																	<span class="type">ArrayBuffer</span>
+											
+											
+																<div class="param-description">
+																	<p>Arraybuffer data to be loaded.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_readFloat" class="method item">
+												<h3 class="name"><code>readFloat</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
 													<span class="returns-inline">
-														<span class="type">Array</span>
+														<span class="type">Number</span>
 													</span>
 											
 											
@@ -703,7 +1089,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse fonts on json.</p>
+													<p>Read 32 bit float value.</p>
 											
 												</div>
 											
@@ -712,12 +1098,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Dataview to read data from.</p>
+											
 																</div>
 											
 															</li>
@@ -728,26 +1115,26 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">Array</span>:
-																<p>fonts</p>
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_parseGeometries" class="method item">
-												<h3 class="name"><code>parseGeometries</code></h3>
+											<div id="method_readInt" class="method item">
+												<h3 class="name"><code>readInt</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>json</code>
+																	<code>data</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
 													<span class="returns-inline">
-														<span class="type">Array</span>
+														<span class="type">Number</span>
 													</span>
 											
 											
@@ -765,7 +1152,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse geometries on JSON.</p>
+													<p>Read 32 bit signed integer value.</p>
 											
 												</div>
 											
@@ -774,12 +1161,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Dataview to read data from.</p>
+											
 																</div>
 											
 															</li>
@@ -790,26 +1178,26 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">Array</span>:
-																<p>geometries</p>
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_parseImages" class="method item">
-												<h3 class="name"><code>parseImages</code></h3>
+											<div id="method_readMap" class="method item">
+												<h3 class="name"><code>readMap</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>json</code>
+																	<code>data</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
 													<span class="returns-inline">
-														<span class="type">Array</span>
+														<span class="type"><a href="../classes/Texture.html" class="crosslink">Texture</a></span>
 													</span>
 											
 											
@@ -827,7 +1215,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse images on json.</p>
+													<p>Read texture map data chunk.</p>
 											
 												</div>
 											
@@ -836,12 +1224,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">data</code>
+																	<span class="type">Dataview</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Dataview in use.</p>
+											
 																</div>
 											
 															</li>
@@ -852,26 +1241,77 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">Array</span>:
-																<p>images</p>
+																	<span class="type"><a href="../classes/Texture.html" class="crosslink">Texture</a></span>:
+																<p>Texture read from this data chunk.</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_parseMaterials" class="method item">
-												<h3 class="name"><code>parseMaterials</code></h3>
+											<div id="method_readMaterialEntry" class="method item">
+												<h3 class="name"><code>readMaterialEntry</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>json</code>
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read material data chunk and add it to the material list.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">Dataview</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview in use.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_readMaterialGroup" class="method item">
+												<h3 class="name"><code>readMaterialGroup</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
 													<span class="returns-inline">
-														<span class="type">Array</span>
+														<span class="type">Object</span>
 													</span>
 											
 											
@@ -889,7 +1329,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse materials on json.</p>
+													<p>Read material group data chunk.</p>
 											
 												</div>
 											
@@ -898,12 +1338,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">data</code>
+																	<span class="type">Dataview</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Dataview in use.</p>
+											
 																</div>
 											
 															</li>
@@ -914,41 +1355,179 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">Array</span>:
-																<p>materials</p>
+																	<span class="type">Object</span>:
+																<p>Object with name and index of the object.</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_parseObjects" class="method item">
-												<h3 class="name"><code>parseObjects</code></h3>
+											<div id="method_readMesh" class="method item">
+												<h3 class="name"><code>readMesh</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>json</code>
+																	<code>data</code>
 															</li>
-															<li class="arg">
-																	<code>geometries</code>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read mesh data chunk.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">Dataview</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview in use.</p>
+											
+																</div>
+											
 															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_readMeshData" class="method item">
+												<h3 class="name"><code>readMeshData</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>materials</code>
+																	<code>data</code>
 															</li>
-															<li class="arg">
-																	<code>textures</code>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read mesh data chunk.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">Dataview</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview in use.</p>
+											
+																</div>
+											
 															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_readNamedObject" class="method item">
+												<h3 class="name"><code>readNamedObject</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>audio</code>
+																	<code>data</code>
 															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Read named object chunk.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">Dataview</span>
+											
+											
+																<div class="param-description">
+																	<p>Dataview in use.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_readShort" class="method item">
+												<h3 class="name"><code>readShort</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>fonts</code>
+																	<code>data</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
 													<span class="returns-inline">
-														<span class="type">Array</span>
+														<span class="type">Number</span>
 													</span>
 											
 											
@@ -966,7 +1545,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse objects from json.</p>
+													<p>Read 16 bit signed integer value.</p>
 											
 												</div>
 											
@@ -975,62 +1554,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
 											
 											
 																<div class="param-description">
-																	 
-																</div>
+																	<p>Dataview to read data from.</p>
 											
-															</li>
-															<li class="param">
-																	<code class="param-name">geometries</code>
-																	<span class="type">Array</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">materials</code>
-																	<span class="type">Array</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">textures</code>
-																	<span class="type">Array</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">audio</code>
-																	<span class="type">Array</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">fonts</code>
-																	<span class="type">Array</span>
-											
-											
-																<div class="param-description">
-																	 
 																</div>
 											
 															</li>
@@ -1041,95 +1571,29 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">Array</span>:
-																<p>objects</p>
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_parseSkeletons" class="method item">
-												<h3 class="name"><code>parseSkeletons</code></h3>
+											<div id="method_readString" class="method item">
+												<h3 class="name"><code>readString</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>json</code>
+																	<code>data</code>
 															</li>
 															<li class="arg">
-																	<code>object</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Parse skeletons from json.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">object</code>
-																	<span class="type">Object</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_parseTextures" class="method item">
-												<h3 class="name"><code>parseTextures</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>json</code>
-															</li>
-															<li class="arg">
-																	<code>images</code>
-															</li>
-															<li class="arg">
-																	<code>videos</code>
+																	<code>maxLength</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
 													<span class="returns-inline">
-														<span class="type">Array</span>
+														<span class="type">String</span>
 													</span>
 											
 											
@@ -1147,7 +1611,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse textures on json.</p>
+													<p>Read string value.</p>
 											
 												</div>
 											
@@ -1156,32 +1620,24 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Dataview to read data from.</p>
+											
 																</div>
 											
 															</li>
 															<li class="param">
-																	<code class="param-name">images</code>
-																	<span class="type">Array</span>
+																	<code class="param-name">maxLength</code>
+																	<span class="type">Number</span>
 											
 											
 																<div class="param-description">
-																	 
-																</div>
+																	<p>Max size of the string to be read.</p>
 											
-															</li>
-															<li class="param">
-																	<code class="param-name">videos</code>
-																	<span class="type">Array</span>
-											
-											
-																<div class="param-description">
-																	 
 																</div>
 											
 															</li>
@@ -1192,26 +1648,26 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">Array</span>:
-																<p>textures</p>
+																	<span class="type">String</span>:
+																<p>Data read from the dataview.</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_parseVideos" class="method item">
-												<h3 class="name"><code>parseVideos</code></h3>
+											<div id="method_readWord" class="method item">
+												<h3 class="name"><code>readWord</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>json</code>
+																	<code>data</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
 											
 													<span class="returns-inline">
-														<span class="type">Array</span>
+														<span class="type">Number</span>
 													</span>
 											
 											
@@ -1229,7 +1685,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Parse videos on json.</p>
+													<p>Read 32 bit unsigned integer value.</p>
 											
 												</div>
 											
@@ -1238,12 +1694,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">json</code>
-																	<span class="type">Object</span>
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Dataview to read data from.</p>
+											
 																</div>
 											
 															</li>
@@ -1254,20 +1711,20 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">Array</span>:
-																<p>videos</p>
+																	<span class="type">Number</span>:
+																<p>Data read from the dataview.</p>
 											
 														</div>
 													</div>
 											
 											</div>
-											<div id="method_setCrossOrigin" class="method item">
-												<h3 class="name"><code>setCrossOrigin</code></h3>
+											<div id="method_resetPosition" class="method item">
+												<h3 class="name"><code>resetPosition</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>origin</code>
+																	<code>data</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -1288,7 +1745,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Set cross origin.</p>
+													<p>Reset dataview position.</p>
 											
 												</div>
 											
@@ -1297,12 +1754,13 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">origin</code>
-																	<span class="type">String</span>
+																	<code class="param-name">data</code>
+																	<span class="type">DataView</span>
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Dataview.</p>
+											
 																</div>
 											
 															</li>
@@ -1311,8 +1769,8 @@
 											
 											
 											</div>
-											<div id="method_setTexturePath" class="method item">
-												<h3 class="name"><code>setTexturePath</code></h3>
+											<div id="method_setPath" class="method item">
+												<h3 class="name"><code>setPath</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
@@ -1322,6 +1780,9 @@
 														</ul><span class="paren">)</span>
 													</div>
 											
+													<span class="returns-inline">
+														<span class="type"></span>
+													</span>
 											
 											
 											
@@ -1338,7 +1799,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Define base path for external texture loading.</p>
+													<p>Set resource path used to determine the file path to attached resources.</p>
 											
 												</div>
 											
@@ -1352,13 +1813,22 @@
 											
 											
 																<div class="param-description">
-																	 
+																	<p>Path to resources.</p>
+											
 																</div>
 											
 															</li>
 														</ul>
 													</div>
 											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																<p>Self for chaining.</p>
+											
+														</div>
+													</div>
 											
 											</div>
 									</div>

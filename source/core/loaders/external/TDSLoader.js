@@ -1,14 +1,17 @@
-/*
+"use strict";
+
+/**
  * Autodesk 3DS threee.js file loader, based on lib3ds.
  * 
  * Loads geometry with uv and materials basic properties with texture support.
  * 
  * @author @tentone
  * @author @timknip
+ * @class TDSLoader
+ * @constructor
+ * @module ExternalLoader
+ * @param {LoadingManager} manager Loading manager.
  */
-
-"use strict";
-
 THREE.TDSLoader = function(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
@@ -25,7 +28,8 @@ THREE.TDSLoader = function(manager)
 
 /**
  * Load 3ds file from url.
- * 
+ *
+ * @method load
  * @param {[type]} url URL for the file.
  * @param {Function} onLoad onLoad callback, receives group Object3D as argument.
  * @param {Function} onProgress onProgress callback.
@@ -45,7 +49,8 @@ THREE.TDSLoader.prototype.load = function(url, onLoad, onProgress, onError)
 
 /**
  * Parse arraybuffer data and load 3ds file.
- * 
+ *
+ * @method parse
  * @param {ArrayBuffer} arraybuffer Arraybuffer data to be loaded.
  * @param {String} path Path for external resources.
  * @return {Object3D} Group loaded from 3ds file.
@@ -69,6 +74,12 @@ THREE.TDSLoader.prototype.parse = function(arraybuffer, path)
 	return this.group;
 };
 
+/**
+ * Decode file content to read 3ds data.
+ *
+ * @method readFile
+ * @param {ArrayBuffer} arraybuffer Arraybuffer data to be loaded.
+ */
 THREE.TDSLoader.prototype.readFile = function(arraybuffer)
 {
 	var data = new DataView(arraybuffer);
@@ -102,6 +113,12 @@ THREE.TDSLoader.prototype.readFile = function(arraybuffer)
 	this.debugMessage("Parsed " + this.meshes.length + " meshes");
 };
 
+/**
+ * Read mesh data chunk.
+ *
+ * @method readMeshData
+ * @param {Dataview} data Dataview in use.
+ */
 THREE.TDSLoader.prototype.readMeshData = function(data)
 {
 	var chunk = this.readChunk(data);
@@ -141,6 +158,12 @@ THREE.TDSLoader.prototype.readMeshData = function(data)
 	}
 };
 
+/**
+ * Read named object chunk.
+ *
+ * @method readNamedObject
+ * @param {Dataview} data Dataview in use.
+ */
 THREE.TDSLoader.prototype.readNamedObject = function(data)
 {
 	var chunk = this.readChunk(data);
@@ -176,6 +199,12 @@ THREE.TDSLoader.prototype.readNamedObject = function(data)
 	this.endChunk(chunk);
 };
 
+/**
+ * Read material data chunk and add it to the material list.
+ *
+ * @method readMaterialEntry
+ * @param {Dataview} data Dataview in use.
+ */
 THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 {
 	var chunk = this.readChunk(data);
@@ -284,6 +313,12 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 	this.materials[material.name] = material;
 };
 
+/**
+ * Read mesh data chunk.
+ *
+ * @method readMesh
+ * @param {Dataview} data Dataview in use.
+ */
 THREE.TDSLoader.prototype.readMesh = function(data)
 {
 	var chunk = this.readChunk(data);
@@ -442,6 +477,13 @@ THREE.TDSLoader.prototype.readMesh = function(data)
 	return mesh;
 };
 
+/**
+ * Read face array data chunk.
+ *
+ * @method readFaceArray
+ * @param {Dataview} data Dataview in use.
+ * @param {Mesh} mesh Mesh to be filled with the data read.
+ */
 THREE.TDSLoader.prototype.readFaceArray = function(data, mesh)
 {
 	var chunk = this.readChunk(data);
@@ -496,7 +538,13 @@ THREE.TDSLoader.prototype.readFaceArray = function(data, mesh)
 	this.endChunk(chunk);
 };
 
-
+/**
+ * Read texture map data chunk.
+ *
+ * @method readMap
+ * @param {Dataview} data Dataview in use.
+ * @return {Texture} Texture read from this data chunk.
+ */
 THREE.TDSLoader.prototype.readMap = function(data)
 {
 	var chunk = this.readChunk(data);
@@ -564,6 +612,13 @@ THREE.TDSLoader.prototype.readMap = function(data)
 	return texture;
 }
 
+/**
+ * Read material group data chunk.
+ *
+ * @method readMaterialGroup
+ * @param {Dataview} data Dataview in use.
+ * @return {Object} Object with name and index of the object.
+ */
 THREE.TDSLoader.prototype.readMaterialGroup = function(data)
 {
 	var chunk = this.readChunk(data);

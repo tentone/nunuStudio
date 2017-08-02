@@ -61,6 +61,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "SpotLight",
         "Sprite",
         "SpriteSheetTexture",
+        "TDSLoader",
         "Text",
         "Text3D",
         "Texture",
@@ -82,6 +83,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Cameras",
         "Core",
         "Devices",
+        "ExternalLoader",
         "Files",
         "Geometry",
         "Input",
@@ -136,6 +138,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Devices",
             "name": "Devices",
             "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect V1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository."
+        },
+        {
+            "displayName": "ExternalLoader",
+            "name": "ExternalLoader",
+            "description": "Autodesk 3DS threee.js file loader, based on lib3ds.\n\nLoads geometry with uv and materials basic properties with texture support."
         },
         {
             "displayName": "Files",
