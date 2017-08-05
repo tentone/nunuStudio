@@ -1278,7 +1278,11 @@ SceneEditor.prototype.selectObjectHelper = function()
 		else if(object instanceof THREE.SkinnedMesh)
 		{
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
-			this.objectHelper.add(new THREE.SkeletonHelper(object));
+
+			if(object.bones > 0)
+			{
+				this.objectHelper.add(new SkeletonHelper(object));
+			}
 		}
 		//Mesh
 		else if(object instanceof THREE.Mesh)

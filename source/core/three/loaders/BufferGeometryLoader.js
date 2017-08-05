@@ -14,6 +14,7 @@ THREE.BufferGeometryLoader.prototype.parse = function(json)
 		Float32Array: Float32Array,
 		Float64Array: Float64Array
 	};
+	
 	var geometry = new THREE.BufferGeometry();
 	var index = json.data.index;
 

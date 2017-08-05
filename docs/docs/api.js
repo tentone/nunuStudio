@@ -222,7 +222,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "THREE",
             "name": "THREE",
-            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
+            "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don\"t have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
         },
         {
             "displayName": "Utils",
