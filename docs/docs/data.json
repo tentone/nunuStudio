@@ -543,28 +543,19 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\three\\Fog.js": {
-            "name": "..\\..\\source\\core\\three\\Fog.js",
+        "..\\..\\source\\core\\three\\materials\\Material.js": {
+            "name": "..\\..\\source\\core\\three\\materials\\Material.js",
             "modules": {
                 "THREE": 1
             },
-            "classes": {
-                "Fog": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\three\\Material.js": {
-            "name": "..\\..\\source\\core\\three\\Material.js",
-            "modules": {},
             "classes": {
                 "Material": 1
             },
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\three\\MultiMaterial.js": {
-            "name": "..\\..\\source\\core\\three\\MultiMaterial.js",
+        "..\\..\\source\\core\\three\\materials\\MultiMaterial.js": {
+            "name": "..\\..\\source\\core\\three\\materials\\MultiMaterial.js",
             "modules": {},
             "classes": {
                 "MultiMaterial": 1
@@ -572,11 +563,27 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\three\\Object3D.js": {
-            "name": "..\\..\\source\\core\\three\\Object3D.js",
+        "..\\..\\source\\core\\three\\objects\\Object3D.js": {
+            "name": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "modules": {},
             "classes": {
                 "Object3D": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\three\\objects\\SkinnedMesh.js": {
+            "name": "..\\..\\source\\core\\three\\objects\\SkinnedMesh.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\three\\Fog.js": {
+            "name": "..\\..\\source\\core\\three\\Fog.js",
+            "modules": {},
+            "classes": {
+                "Fog": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1063,17 +1070,17 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "Fog": 1,
                 "Material": 1,
                 "MultiMaterial": 1,
-                "Object3D": 1
+                "Object3D": 1,
+                "Fog": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\Fog.js",
             "line": 3,
-            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
+            "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don\"t have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
         },
         "Math": {
             "name": "Math",
@@ -2703,20 +2710,6 @@
                 }
             ]
         },
-        "Fog": {
-            "name": "Fog",
-            "shortname": "Fog",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "THREE",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\three\\Fog.js",
-            "line": 3,
-            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
-        },
         "Material": {
             "name": "Material",
             "shortname": "Material",
@@ -2727,7 +2720,7 @@
             "extension_for": [],
             "module": "THREE",
             "namespace": "",
-            "file": "..\\..\\source\\core\\three\\Material.js",
+            "file": "..\\..\\source\\core\\three\\materials\\Material.js",
             "line": 3,
             "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don\"t have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
         },
@@ -2741,7 +2734,7 @@
             "extension_for": [],
             "module": "THREE",
             "namespace": "",
-            "file": "..\\..\\source\\core\\three\\MultiMaterial.js",
+            "file": "..\\..\\source\\core\\three\\materials\\MultiMaterial.js",
             "line": 3,
             "description": "A Material to define multiple materials for the same geometry. The geometry decides which material is used for which faces by the faces materialindex. The material index corresponds with the index of the material in the .materials array.\n\nMultiMaterials have been deprectaed in threejs R85 but some of the loaders still use it.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/MultiMaterial."
         },
@@ -2755,10 +2748,24 @@
             "extension_for": [],
             "module": "THREE",
             "namespace": "",
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 3,
             "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js.",
             "is_constructor": 1
+        },
+        "Fog": {
+            "name": "Fog",
+            "shortname": "Fog",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "THREE",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\three\\Fog.js",
+            "line": 3,
+            "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
         },
         "Vector3": {
             "name": "Vector3",
@@ -2935,7 +2942,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 107,
+            "line": 108,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -7622,52 +7629,6 @@
             "module": "Meshes"
         },
         {
-            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 51,
-            "description": "Dispose mesh along with its material and geometry.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 72,
-            "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
-            "itemtype": "method",
-            "name": "bind",
-            "params": [
-                {
-                    "name": "skeleton",
-                    "description": "",
-                    "type": "Skeleton"
-                },
-                {
-                    "name": "bindMatrix",
-                    "description": "",
-                    "type": "Matrix4"
-                }
-            ],
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 82,
-            "description": "Serializa skinned mesh to json.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "Metadata",
-                    "type": "Object"
-                }
-            ],
-            "class": "SkinnedMesh",
-            "module": "Meshes"
-        },
-        {
             "file": "..\\..\\source\\core\\objects\\mesh\\Text3D.js",
             "line": 21,
             "description": "Material is used to define how the geometry surface is shaded",
@@ -10570,37 +10531,7 @@
             "module": "Textures"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Fog.js",
-            "line": 12,
-            "description": "No fog",
-            "itemtype": "attribute",
-            "name": "NONE",
-            "type": "{Number}",
-            "class": "Fog",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\Fog.js",
-            "line": 20,
-            "description": "Linear fog",
-            "itemtype": "attribute",
-            "name": "LINEAR",
-            "type": "{Number}",
-            "class": "Fog",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\Fog.js",
-            "line": 28,
-            "description": "Exponential fog",
-            "itemtype": "attribute",
-            "name": "EXPONENTIAL",
-            "type": "{Number}",
-            "class": "Fog",
-            "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\Material.js",
+            "file": "..\\..\\source\\core\\three\\materials\\Material.js",
             "line": 12,
             "description": "Dispose material.\n\nAlso disposes all the textures attached to the material.",
             "itemtype": "method",
@@ -10609,7 +10540,27 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\MultiMaterial.js",
+            "file": "..\\..\\source\\core\\three\\materials\\Material.js",
+            "line": 43,
+            "description": "Serialize material to JSON data.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Metadata.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "JSON data.",
+                "type": "Object"
+            },
+            "class": "Material",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\materials\\MultiMaterial.js",
             "line": 14,
             "description": "UUID unique identifier.",
             "itemtype": "property",
@@ -10619,7 +10570,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\MultiMaterial.js",
+            "file": "..\\..\\source\\core\\three\\materials\\MultiMaterial.js",
             "line": 20,
             "description": "Resource name. Not required to be unique.",
             "itemtype": "property",
@@ -10629,7 +10580,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\MultiMaterial.js",
+            "file": "..\\..\\source\\core\\three\\materials\\MultiMaterial.js",
             "line": 27,
             "description": "Dispose materials inside the container",
             "itemtype": "method",
@@ -10638,7 +10589,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 15,
             "description": "Array with object's children.",
             "itemtype": "property",
@@ -10648,7 +10599,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 20,
             "description": "When this is set, it checks every frame if the object is in the frustum of the camera before rendering the object. Otherwise the object gets renderered every frame even if it isn't visible.",
             "itemtype": "property",
@@ -10659,7 +10610,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 26,
             "description": "The layer membership of the object. The object is only visible if it has at least one layer in common with the Camera in use.",
             "itemtype": "property",
@@ -10669,7 +10620,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 31,
             "description": "The local transform matrix",
             "itemtype": "property",
@@ -10679,7 +10630,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 36,
             "description": "When this is set, it calculates the matrix of position, (rotation or quaternion) and scale every frame and also recalculates the matrixWorld property.",
             "itemtype": "property",
@@ -10690,7 +10641,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 42,
             "description": "The global transform of the object. If the Object3d has no parent, then it's identical to the local transform.",
             "itemtype": "property",
@@ -10700,7 +10651,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 47,
             "description": "Name of the object (doesn't need to be unique).",
             "itemtype": "property",
@@ -10710,7 +10661,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 52,
             "description": "The object's local position.",
             "itemtype": "property",
@@ -10720,7 +10671,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 57,
             "description": "Object's local rotation as a Quaternion.",
             "itemtype": "property",
@@ -10730,7 +10681,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 62,
             "description": "Object's local rotation (see Euler angles), in radians.",
             "itemtype": "property",
@@ -10740,7 +10691,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 67,
             "description": "The object's local scale.",
             "itemtype": "property",
@@ -10750,7 +10701,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 72,
             "description": "This is used by the lookAt method, for example, to determine the orientation of the result.",
             "itemtype": "property",
@@ -10760,7 +10711,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 77,
             "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
             "itemtype": "property",
@@ -10770,7 +10721,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 82,
             "description": "Object gets rendered if true.",
             "itemtype": "property",
@@ -10781,7 +10732,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 88,
             "description": "This value allows the default rendering order of scene graph objects to be overridden although opaque and transparent objects remain sorted independently.",
             "itemtype": "property",
@@ -10792,7 +10743,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 94,
             "description": "Whether the object gets rendered into shadow map.",
             "itemtype": "property",
@@ -10803,7 +10754,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 100,
             "description": "Whether the material receives shadows.",
             "itemtype": "property",
@@ -10814,7 +10765,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 106,
             "description": "Space reserved for user data, can be used for variables in runtime or can be used by scripts to store values on an object.",
             "itemtype": "property",
@@ -10824,7 +10775,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 113,
             "description": "Folded attribute is used only for editing, if true the object shows as folded in the object explorer.",
             "itemtype": "property",
@@ -10834,7 +10785,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 120,
             "description": "Hidden objects do not show in the editor.",
             "itemtype": "property",
@@ -10844,7 +10795,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 127,
             "description": "Initialize the object.",
             "itemtype": "method",
@@ -10853,7 +10804,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 140,
             "description": "Update the object state.",
             "itemtype": "method",
@@ -10862,7 +10813,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 153,
             "description": "Disposes the object (to avoid memory leaks).",
             "itemtype": "method",
@@ -10871,7 +10822,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 166,
             "description": "Add object as children of this object above the indicated children",
             "itemtype": "method",
@@ -10892,7 +10843,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 203,
             "description": "Add object as children of this object bellow the indicated children",
             "itemtype": "method",
@@ -10913,7 +10864,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 240,
             "description": "Remove all children from the object.",
             "itemtype": "method",
@@ -10922,7 +10873,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 253,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
@@ -10935,7 +10886,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 264,
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
@@ -10944,7 +10895,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 285,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
@@ -10974,7 +10925,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 428,
             "description": "Remove children from this object",
             "params": [
@@ -10990,7 +10941,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 434,
             "description": "Rotates the object to face a point in world space.",
             "params": [
@@ -11006,7 +10957,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 440,
             "description": "Converts the vector from local space to world space.",
             "params": [
@@ -11022,7 +10973,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 446,
             "description": "Updates the vector from world space to local space.",
             "params": [
@@ -11038,7 +10989,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 452,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
@@ -11054,7 +11005,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 458,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
@@ -11070,7 +11021,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 464,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
@@ -11086,7 +11037,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 470,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
@@ -11107,7 +11058,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 477,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
@@ -11123,7 +11074,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 483,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
@@ -11144,7 +11095,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 490,
             "params": [
                 {
@@ -11163,7 +11114,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 496,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
@@ -11179,7 +11130,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 502,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
@@ -11195,7 +11146,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 508,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
@@ -11211,7 +11162,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 514,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
@@ -11227,7 +11178,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 520,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
@@ -11248,7 +11199,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 527,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
@@ -11264,7 +11215,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 533,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
@@ -11280,7 +11231,7 @@
             "module": "THREE"
         },
         {
-            "file": "..\\..\\source\\core\\three\\Object3D.js",
+            "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 539,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
@@ -11293,6 +11244,82 @@
                 }
             ],
             "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\objects\\SkinnedMesh.js",
+            "line": 3,
+            "description": "Dispose mesh along with its material and geometry.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Fog",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\objects\\SkinnedMesh.js",
+            "line": 24,
+            "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
+            "itemtype": "method",
+            "name": "bind",
+            "params": [
+                {
+                    "name": "skeleton",
+                    "description": "",
+                    "type": "Skeleton"
+                },
+                {
+                    "name": "bindMatrix",
+                    "description": "",
+                    "type": "Matrix4"
+                }
+            ],
+            "class": "Fog",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\objects\\SkinnedMesh.js",
+            "line": 34,
+            "description": "Serializa skinned mesh to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Metadata",
+                    "type": "Object"
+                }
+            ],
+            "class": "Fog",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\Fog.js",
+            "line": 12,
+            "description": "No fog",
+            "itemtype": "attribute",
+            "name": "NONE",
+            "type": "{Number}",
+            "class": "Fog",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\Fog.js",
+            "line": 20,
+            "description": "Linear fog",
+            "itemtype": "attribute",
+            "name": "LINEAR",
+            "type": "{Number}",
+            "class": "Fog",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\Fog.js",
+            "line": 28,
+            "description": "Exponential fog",
+            "itemtype": "attribute",
+            "name": "EXPONENTIAL",
+            "type": "{Number}",
+            "class": "Fog",
             "module": "THREE"
         },
         {
@@ -12676,7 +12703,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 118,
+            "line": 119,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -12686,7 +12713,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 124,
+            "line": 125,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -12696,7 +12723,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 130,
+            "line": 131,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -12707,7 +12734,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 137,
+            "line": 138,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -12717,7 +12744,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 143,
+            "line": 144,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -12728,7 +12755,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 153,
+            "line": 154,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -12737,7 +12764,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 191,
+            "line": 192,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -12746,7 +12773,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 258,
+            "line": 259,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -12772,7 +12799,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 279,
+            "line": 280,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -12788,7 +12815,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 304,
+            "line": 305,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -12814,7 +12841,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 347,
+            "line": 348,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -12823,7 +12850,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 363,
+            "line": 364,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -12832,7 +12859,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 414,
+            "line": 415,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -12841,7 +12868,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 448,
+            "line": 449,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -12850,7 +12877,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 458,
+            "line": 459,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -12866,7 +12893,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 472,
+            "line": 473,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -12875,7 +12902,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 496,
+            "line": 497,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -12891,7 +12918,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 512,
+            "line": 513,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -12907,7 +12934,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 525,
+            "line": 526,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -12923,7 +12950,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 538,
+            "line": 539,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -12936,7 +12963,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 549,
+            "line": 550,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -12945,7 +12972,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 573,
+            "line": 574,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",

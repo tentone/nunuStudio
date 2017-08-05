@@ -21,10 +21,8 @@ function PhysicsObjectHelper(obj)
 	this.tmpQuat0 = new CANNON.Vec3();
 }
 
-//Super prototypes
 PhysicsObjectHelper.prototype = Object.create(THREE.Object3D.prototype);
 
-//Update attached particle
 PhysicsObjectHelper.prototype.update = function()
 {
 	var meshes = this.meshes;
