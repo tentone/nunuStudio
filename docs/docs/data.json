@@ -545,9 +545,7 @@
         },
         "..\\..\\source\\core\\three\\materials\\Material.js": {
             "name": "..\\..\\source\\core\\three\\materials\\Material.js",
-            "modules": {
-                "THREE": 1
-            },
+            "modules": {},
             "classes": {
                 "Material": 1
             },
@@ -563,9 +561,29 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\three\\math\\Vector3.js": {
+            "name": "..\\..\\source\\core\\three\\math\\Vector3.js",
+            "modules": {
+                "Math": 1
+            },
+            "classes": {
+                "Vector3": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\three\\objects\\Mesh.js": {
+            "name": "..\\..\\source\\core\\three\\objects\\Mesh.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\three\\objects\\Object3D.js": {
             "name": "..\\..\\source\\core\\three\\objects\\Object3D.js",
-            "modules": {},
+            "modules": {
+                "THREE": 1
+            },
             "classes": {
                 "Object3D": 1
             },
@@ -584,17 +602,6 @@
             "modules": {},
             "classes": {
                 "Fog": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\three\\Vector3.js": {
-            "name": "..\\..\\source\\core\\three\\Vector3.js",
-            "modules": {
-                "Math": 1
-            },
-            "classes": {
-                "Vector3": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1070,9 +1077,9 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "Object3D": 1,
                 "Material": 1,
                 "MultiMaterial": 1,
-                "Object3D": 1,
                 "Fog": 1
             },
             "fors": {},
@@ -1080,7 +1087,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\three\\Fog.js",
             "line": 3,
-            "description": "Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don\"t have to rewrite materials if you decide to use a different renderer.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/Material"
+            "description": "This is the base class for most objects in three.js and provides a set of properties and methods for manipulating objects in 3D space.\n\nThis page provides documentation for some of the main features of this class, the original documentation of this class can be found at https://threejs.org/docs/index.html#Reference/Core/Object3D.\n\nAll nunuStudio objects extend the Object3D class of some other higher level class from three.js."
         },
         "Math": {
             "name": "Math",
@@ -1092,8 +1099,8 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\three\\Vector3.js",
-            "line": 3,
+            "file": "..\\..\\source\\core\\three\\math\\Vector3.js",
+            "line": 1,
             "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3"
         },
         "BinaryUtils": {
@@ -2738,6 +2745,21 @@
             "line": 3,
             "description": "A Material to define multiple materials for the same geometry. The geometry decides which material is used for which faces by the faces materialindex. The material index corresponds with the index of the material in the .materials array.\n\nMultiMaterials have been deprectaed in threejs R85 but some of the loaders still use it.\n\nOriginal documentation available here https://threejs.org/docs/index.html#Reference/Materials/MultiMaterial."
         },
+        "Vector3": {
+            "name": "Vector3",
+            "shortname": "Vector3",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Math",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\three\\math\\Vector3.js",
+            "line": 1,
+            "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3",
+            "is_constructor": 1
+        },
         "Object3D": {
             "name": "Object3D",
             "shortname": "Object3D",
@@ -2766,21 +2788,6 @@
             "file": "..\\..\\source\\core\\three\\Fog.js",
             "line": 3,
             "description": "Fog class is used to store fog attributes attached to a Scene\n\nOriginal documentation for fog available here https://threejs.org/docs/index.html#Reference/Scenes/Fog and for exponential fog here https://threejs.org/docs/index.html#Reference/Scenes/FogExp2"
-        },
-        "Vector3": {
-            "name": "Vector3",
-            "shortname": "Vector3",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Math",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\three\\Vector3.js",
-            "line": 3,
-            "description": "Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:\n\n - A point in 3D space.\n - A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).\n - Any arbitrary ordered triplet of numbers.\n\nThere are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.\n\nOriginal documentation for Vector3 can be found here https://threejs.org/docs/index.html#Reference/Math/Vector3",
-            "is_constructor": 1
         },
         "ArraybufferUtils": {
             "name": "ArraybufferUtils",
@@ -2942,7 +2949,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 108,
+            "line": 110,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -7580,15 +7587,6 @@
             "module": "Meshes"
         },
         {
-            "file": "..\\..\\source\\core\\objects\\mesh\\Mesh.js",
-            "line": 47,
-            "description": "Dispose mesh along with its material and geometry.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "Mesh",
-            "module": "Meshes"
-        },
-        {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
             "line": 18,
             "description": "Geometry defined the object structure",
@@ -10589,6 +10587,77 @@
             "module": "THREE"
         },
         {
+            "file": "..\\..\\source\\core\\three\\math\\Vector3.js",
+            "line": 17,
+            "itemtype": "property",
+            "name": "x",
+            "type": "{Number}",
+            "default": "0",
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\math\\Vector3.js",
+            "line": 23,
+            "itemtype": "property",
+            "name": "y",
+            "type": "{Number}",
+            "default": "0",
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\math\\Vector3.js",
+            "line": 29,
+            "itemtype": "property",
+            "name": "z",
+            "type": "{Number}",
+            "default": "0",
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\math\\Vector3.js",
+            "line": 35,
+            "description": "Add v to this vector.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "v",
+                    "description": "",
+                    "type": "Vector3"
+                }
+            ],
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\math\\Vector3.js",
+            "line": 42,
+            "description": "Add the scalar value s to this vector's x, y and z values.",
+            "itemtype": "method",
+            "name": "addScalar",
+            "params": [
+                {
+                    "name": "scalar",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "Vector3",
+            "module": "Math"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\objects\\Mesh.js",
+            "line": 3,
+            "description": "Dispose mesh along with its material and geometry.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Object3D",
+            "module": "Math"
+        },
+        {
             "file": "..\\..\\source\\core\\three\\objects\\Object3D.js",
             "line": 15,
             "description": "Array with object's children.",
@@ -11321,68 +11390,6 @@
             "type": "{Number}",
             "class": "Fog",
             "module": "THREE"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\Vector3.js",
-            "line": 19,
-            "itemtype": "property",
-            "name": "x",
-            "type": "{Number}",
-            "default": "0",
-            "class": "Vector3",
-            "module": "Math"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\Vector3.js",
-            "line": 25,
-            "itemtype": "property",
-            "name": "y",
-            "type": "{Number}",
-            "default": "0",
-            "class": "Vector3",
-            "module": "Math"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\Vector3.js",
-            "line": 31,
-            "itemtype": "property",
-            "name": "z",
-            "type": "{Number}",
-            "default": "0",
-            "class": "Vector3",
-            "module": "Math"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\Vector3.js",
-            "line": 37,
-            "description": "Add v to this vector.",
-            "itemtype": "method",
-            "name": "add",
-            "params": [
-                {
-                    "name": "v",
-                    "description": "",
-                    "type": "Vector3"
-                }
-            ],
-            "class": "Vector3",
-            "module": "Math"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\Vector3.js",
-            "line": 44,
-            "description": "Add the scalar value s to this vector's x, y and z values.",
-            "itemtype": "method",
-            "name": "addScalar",
-            "params": [
-                {
-                    "name": "scalar",
-                    "description": "",
-                    "type": "Number"
-                }
-            ],
-            "class": "Vector3",
-            "module": "Math"
         },
         {
             "file": "..\\..\\source\\core\\utils\\binary\\ArraybufferUtils.js",
@@ -12703,7 +12710,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 119,
+            "line": 121,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -12713,7 +12720,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 125,
+            "line": 127,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -12723,7 +12730,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 131,
+            "line": 133,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -12734,7 +12741,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 138,
+            "line": 140,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -12744,7 +12751,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 144,
+            "line": 146,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -12755,7 +12762,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 154,
+            "line": 156,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -12764,7 +12771,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 192,
+            "line": 194,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -12773,7 +12780,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 259,
+            "line": 261,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -12799,7 +12806,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 280,
+            "line": 282,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -12815,7 +12822,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 305,
+            "line": 307,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -12841,7 +12848,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 348,
+            "line": 350,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -12850,7 +12857,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 364,
+            "line": 366,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -12859,7 +12866,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 415,
+            "line": 417,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -12868,7 +12875,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 449,
+            "line": 451,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -12877,7 +12884,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 459,
+            "line": 461,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -12893,7 +12900,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 473,
+            "line": 475,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -12902,7 +12909,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 497,
+            "line": 499,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -12918,7 +12925,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 513,
+            "line": 515,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -12934,7 +12941,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 526,
+            "line": 528,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -12950,7 +12957,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 539,
+            "line": 541,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -12963,7 +12970,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 550,
+            "line": 552,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -12972,7 +12979,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 574,
+            "line": 576,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",

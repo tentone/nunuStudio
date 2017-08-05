@@ -27,9 +27,11 @@ include("core/FileSystem.js");
 
 include("core/three/objects/Object3D.js");
 include("core/three/objects/SkinnedMesh.js");
+include("core/three/objects/Mesh.js");
 include("core/three/materials/Material.js");
 include("core/three/materials/MultiMaterial.js");
 include("core/three/loaders/BufferGeometryLoader.js");
+include("core/three/math/Vector3.js");
 include("core/three/BufferGeometry.js");
 include("core/three/Texture.js");
 include("core/three/LightShadow.js");
