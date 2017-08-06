@@ -356,6 +356,7 @@ MaterialEditor.prototype.updateMetadata = function()
 		if(this.material.name !== undefined)
 		{
 			this.setName(this.material.name);
+			this.name.setText(this.material.name);
 		}
 
 		//If not found close tab

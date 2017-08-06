@@ -957,7 +957,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "line": 3,
-            "description": "Particle emitter is a wrapper for SPE particle systems\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
+            "description": "Particle emitter is a wrapper for SPE particle system.\n\nSPE is a threejs based particle emitter engine.\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
         },
         "Physics": {
             "name": "Physics",
@@ -2046,7 +2046,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "line": 3,
-            "description": "Particle emitter is a wrapper for SPE particle systems\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html",
+            "description": "Particle emitter is a wrapper for SPE particle system.\n\nSPE is a threejs based particle emitter engine.\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html",
             "is_constructor": 1,
             "extends": "{Points}"
         },
@@ -7935,8 +7935,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 14,
-            "description": "SPE Group\n\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html",
+            "line": 16,
+            "description": "SPE Group instance.\n\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html",
             "itemtype": "property",
             "name": "group",
             "type": "{SPE.Group}",
@@ -7945,8 +7945,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 23,
-            "description": "SPE Emitter\n\nEmitter has attributes that can be used to controll the particle system\n\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html",
+            "line": 25,
+            "description": "SPE Emitter instance.\n\nEmitter has attributes that can be used to controll the particle system\n\nhttps://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html",
             "itemtype": "property",
             "name": "emitter",
             "type": "{SPE.Emitter}",
@@ -7955,7 +7955,27 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 118,
+            "line": 90,
+            "description": "Default particle emitter configuration.",
+            "itemtype": "attribute",
+            "name": "defaultEmitter",
+            "type": "{Object}",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 111,
+            "description": "Default particle emitter group configuration.",
+            "itemtype": "attribute",
+            "name": "defaultGroup",
+            "type": "{Object}",
+            "class": "ParticleEmitter",
+            "module": "Particles"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
+            "line": 132,
             "description": "Initialize particle system.",
             "itemtype": "method",
             "name": "initialize",
@@ -7964,7 +7984,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 133,
+            "line": 147,
             "description": "Update particle emitter state.",
             "itemtype": "method",
             "name": "update",
@@ -7973,8 +7993,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 148,
-            "description": "Dispose particle emitter.",
+            "line": 162,
+            "description": "Dispose particle emitter.\n\nShould be called when destroying particle emitter.",
             "itemtype": "method",
             "name": "dispose",
             "class": "ParticleEmitter",
@@ -7982,16 +8002,19 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 163,
-            "description": "Particle emitter cannot be detected by raycaster.",
+            "line": 179,
+            "description": "Particle emitter cannot be detected by raycaster.\n\nThe raycast method allways returns null.",
             "itemtype": "method",
             "name": "raycast",
+            "return": {
+                "description": "Null."
+            },
             "class": "ParticleEmitter",
             "module": "Particles"
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 173,
+            "line": 192,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",

@@ -187,7 +187,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Particles",
             "name": "Particles",
-            "description": "Particle emitter is a wrapper for SPE particle systems\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
+            "description": "Particle emitter is a wrapper for SPE particle system.\n\nSPE is a threejs based particle emitter engine.\n\nDocumentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html"
         },
         {
             "displayName": "Physics",
