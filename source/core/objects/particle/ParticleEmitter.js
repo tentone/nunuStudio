@@ -1,7 +1,9 @@
 "use strict";
 
 /**
- * Particle emitter is a wrapper for SPE particle systems
+ * Particle emitter is a wrapper for SPE particle system.
+ *
+ * SPE is a threejs based particle emitter engine.
  * 
  * Documentation for SPE particle engine can be found here https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html
  * 
@@ -12,7 +14,7 @@
  */
 
 /**
- * SPE Group
+ * SPE Group instance.
  * 
  * https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html
  * 
@@ -21,7 +23,7 @@
  */
 
 /**
- * SPE Emitter
+ * SPE Emitter instance.
  * 
  * Emitter has attributes that can be used to controll the particle system
  * 
@@ -85,6 +87,12 @@ function ParticleEmitter(group, emitter)
 
 ParticleEmitter.prototype = Object.create(THREE.Points.prototype);
 
+/**
+ * Default particle emitter configuration.
+ *
+ * @attribute defaultEmitter
+ * @type {Object}
+ */
 ParticleEmitter.defaultEmitter =
 {		
 	particleCount: 2000,
@@ -100,6 +108,12 @@ ParticleEmitter.defaultEmitter =
 	}
 };
 
+/**
+ * Default particle emitter group configuration.
+ *
+ * @attribute defaultGroup
+ * @type {Object}
+ */
 ParticleEmitter.defaultGroup = 
 {
 	texture:
@@ -147,6 +161,8 @@ ParticleEmitter.prototype.update = function()
 
 /**
  * Dispose particle emitter.
+ *
+ * Should be called when destroying particle emitter.
  * 
  * @method dispose
  */
@@ -162,8 +178,11 @@ ParticleEmitter.prototype.dispose = function()
 
 /**
  * Particle emitter cannot be detected by raycaster.
+ *
+ * The raycast method allways returns null.
  * 
  * @method raycast
+ * @return Null.
  */
 ParticleEmitter.prototype.raycast = function()
 {
