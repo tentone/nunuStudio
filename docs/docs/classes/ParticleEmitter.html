@@ -176,7 +176,8 @@
 						
 						
 						<div class="box intro">
-							<p>Particle emitter is a wrapper for SPE particle systems</p>
+							<p>Particle emitter is a wrapper for SPE particle system.</p>
+						<p>SPE is a threejs based particle emitter engine.</p>
 						<p>Documentation for SPE particle engine can be found here <a href="https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html">https://squarefeet.github.io/ShaderParticleEngine/docs/api/index.html</a></p>
 						
 						</div>
@@ -218,6 +219,7 @@
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
 									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
@@ -266,6 +268,18 @@
 											</ul>
 										</div>
 						
+										<div class="index-section attrs">
+											<h3>Attributes</h3>
+						
+											<ul class="index-list attrs extends">
+													<li class="index-item attr">
+														<a href="#attr_defaultEmitter">defaultEmitter</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_defaultGroup">defaultGroup</a>
+													</li>
+											</ul>
+										</div>
 						
 								</div>
 						
@@ -294,6 +308,7 @@
 											
 												<div class="description">
 													<p>Dispose particle emitter.</p>
+											<p>Should be called when destroying particle emitter.</p>
 											
 												</div>
 											
@@ -333,6 +348,9 @@
 											
 													<span class="paren">()</span>
 											
+													<span class="returns-inline">
+														<span class="type"></span>
+													</span>
 											
 											
 											
@@ -350,10 +368,19 @@
 											
 												<div class="description">
 													<p>Particle emitter cannot be detected by raycaster.</p>
+											<p>The raycast method allways returns null.</p>
 											
 												</div>
 											
 											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																<p>Null.</p>
+											
+														</div>
+													</div>
 											
 											</div>
 											<div id="method_toJSON" class="method item">
@@ -467,7 +494,7 @@
 												</div>
 											
 												<div class="description">
-													<p>SPE Emitter</p>
+													<p>SPE Emitter instance.</p>
 											<p>Emitter has attributes that can be used to controll the particle system</p>
 											<p><a href="https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html">https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Emitter.html</a></p>
 											
@@ -492,7 +519,7 @@
 												</div>
 											
 												<div class="description">
-													<p>SPE Group</p>
+													<p>SPE Group instance.</p>
 											<p><a href="https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html">https://squarefeet.github.io/ShaderParticleEngine/docs/api/SPE.Group.html</a></p>
 											
 												</div>
@@ -502,6 +529,64 @@
 											</div>
 									</div>
 						
+									<div id="attrs" class="api-class-tabpanel">
+										<h2 class="off-left">Attributes</h2>
+						
+											<div id="attr_defaultEmitter" class="attr item">
+												<a name="config_defaultEmitter"></a> 
+												<h3 class="name"><code>defaultEmitter</code></h3>
+												<span class="type">Object</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Default particle emitter configuration.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_defaultGroup" class="attr item">
+												<a name="config_defaultGroup"></a> 
+												<h3 class="name"><code>defaultGroup</code></h3>
+												<span class="type">Object</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Default particle emitter group configuration.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 							</div>
 						</div>

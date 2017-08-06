@@ -23,13 +23,14 @@ function CameraEditor(parent, closeable, container, index)
 	this.main.divB.style.cursor = "default";
 	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
 
-	//Form
-	this.form = new Form(this.main.divB);
-	this.form.position.set(10, 5);
-	this.form.spacing.set(5, 5);
-
 	//Self pointer
 	var self = this;
+
+	//Form
+	this.form = new Form(this.main.divB);
+	this.form.defaultTextWidth = 80;
+	this.form.position.set(10, 5);
+	this.form.spacing.set(5, 5);
 
 	//Camera
 	this.form.addText("Camera");
@@ -139,13 +140,14 @@ CameraEditor.prototype.updateInterface = function()
 	{
 		this.element.style.display = "block";
 
+		//Form
+		this.form.updateInterface();
+
 		//Main
-		this.main.visible = this.visible;
 		this.main.size.copy(this.size);
 		this.main.updateInterface();
 
 		//Canvas
-		this.canvas.visible = this.visible;
 		this.canvas.size.set(this.main.divA.offsetWidth, this.main.divA.offsetHeight);
 		this.canvas.updateInterface();
 
