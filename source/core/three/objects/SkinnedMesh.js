@@ -40,9 +40,7 @@ THREE.SkinnedMesh.prototype.dispose = function()
 THREE.SkinnedMesh.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
-
-	console.log(this);
-
+	
 	if(this.bindMode !== undefined)
 	{
 		data.object.bindMode = this.bindMode;

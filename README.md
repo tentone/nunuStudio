@@ -17,7 +17,7 @@
 - Visual application editor
 - three.js based
 	- Real time lighting and shadow map support
-	- three.js code can be used inside nunuStudio scripts
+	- three.js code can be used inside nunuStudio scripts without the need for THREE prefix
 - Wide range of file formats supported
 - TTF Font support
 - Drag and drop files directly to objects
@@ -114,11 +114,14 @@
 	- Division property for HTML elements
 	- Camera preview positioning
 	- Cubemaps from equirectangular projection
-	- Binary project files
+	- Binary project files (.nsp)
 - V0.9.1 Beta
 	- Internal debug console
-	- Desktop auto update mechanism (auto download build from github)
-	- Load 3D file drag and drop
+		- Preview materials and textures in console
+		- Visualize math structures
+	- Desktop auto update mechanism (auto download build from github master branch)
+	- Load 3D file drag and drop with texture support
+	- Skeleton serialization
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
