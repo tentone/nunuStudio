@@ -230,4 +230,3 @@ PositionalAudio.prototype.toJSON = function(meta)
 
 	return data;
 };
-
