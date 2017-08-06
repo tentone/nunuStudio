@@ -458,7 +458,8 @@ ParticleEditor.prototype.updateMetadata = function()
 		var particle = this.particle;
 
 		this.setName(particle.name);
-
+		this.name.setText(particle.name);
+		
 		//Check if particle exists in program
 		var found = false;
 		Editor.program.traverse(function(obj)

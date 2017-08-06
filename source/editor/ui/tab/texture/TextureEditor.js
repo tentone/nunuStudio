@@ -256,6 +256,7 @@ TextureEditor.prototype.updateMetadata = function()
 		if(this.texture.name !== undefined)
 		{
 			this.setName(this.texture.name);
+			this.name.setText(this.texture.name);
 		}
 
 		//If not found close tab

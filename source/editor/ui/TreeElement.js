@@ -233,14 +233,11 @@ function TreeElement(container)
 				//If mesh has a geometry attached
 				if(self.obj.geometry !== undefined)
 				{
-					if(self.obj.geometry instanceof THREE.Geometry || self.obj.geometry instanceof THREE.BufferGeometry)
+					//Generate normals for the attached geometry
+					context.addOption("Compute normals", function()
 					{
-						//Generate normals for the attached geometry
-						context.addOption("Compute normals", function()
-						{
-							self.obj.geometry.computeVertexNormals();
-						});
-					}
+						self.obj.geometry.computeVertexNormals();
+					});
 				}
 				
 				//Add physics object

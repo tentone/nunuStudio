@@ -22,9 +22,44 @@ function CameraEditor(parent, closeable, container, index)
 	this.main.divB.style.overflow = "auto";
 	this.main.divB.style.cursor = "default";
 	this.main.divB.style.backgroundColor = Editor.theme.panelColor;
+
+	//Form
+	this.form = new Form(this.main.divB);
+	this.form.position.set(10, 5);
+	this.form.spacing.set(5, 5);
+
+	//Self pointer
+	var self = this;
+
+	//Camera
+	this.form.addText("Camera");
+	this.form.nextRow();
+
+	//Name
+	this.form.addText("Name");
+	this.name = new TextBox(this.form.element);
+	this.name.size.set(200, 18);
+	this.name.setOnChange(function()
+	{
+		if(self.camera !== null)
+		{
+			self.camera.name = self.name.getText();
+			Editor.updateObjectViews();
+		}
+	});
+	this.form.add(this.name);
+	this.form.nextRow();
 }
 
 CameraEditor.prototype = Object.create(TabElement.prototype);
+
+//Activate
+CameraEditor.prototype.activate = function()
+{
+	TabElement.prototype.activate.call(this);
+	
+	this.name.setText(this.camera.name);
+};
 
 //Destroy
 CameraEditor.prototype.destroy = function()
@@ -39,6 +74,7 @@ CameraEditor.prototype.destroy = function()
 	}
 };
 
+//Update tab state
 CameraEditor.prototype.update = function()
 {
 	if(this.camera !== null)
@@ -56,14 +92,17 @@ CameraEditor.prototype.update = function()
 	}
 };
 
+//Update tab metadata
 CameraEditor.prototype.updateMetadata = function()
 {
 	if(this.camera !== null)
 	{
 		var camera = this.camera;
-
+		
 		this.setName(camera.name);
+		this.name.setText(camera.name);
 
+		//Search for the camera
 		var found = false;
 		Editor.program.traverse(function(obj)
 		{
@@ -73,6 +112,7 @@ CameraEditor.prototype.updateMetadata = function()
 			}
 		});
 
+		//If camera deleted remove tab
 		if(!found)
 		{
 			this.close();
