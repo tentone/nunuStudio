@@ -27,6 +27,7 @@ ParticleEmitterHelper.prototype.update = function()
 		this.particle.getWorldPosition(this.runtime.position);
 		this.particle.getWorldQuaternion(this.runtime.quaternion);
 		this.particle.getWorldScale(this.runtime.scale);
+		
 		this.runtime.update();
 	}
 }
