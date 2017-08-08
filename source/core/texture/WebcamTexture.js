@@ -75,11 +75,16 @@ WebcamTexture.prototype.connect = function()
 {
 	var constrains = (this.mode === WebcamTexture.USER) ? {facingMode: "user"} : {facingMode: {exact: "environment"}};
 	var self = this;
-
-	//Chorme
-	if(navigator.webkitGetUserMedia)
+	
+	if(navigator.webkitGetUserMedia !== undefined)
 	{
-		navigator.webkitGetUserMedia({video:true}, function(stream)
+		navigator.getUserMedia = navigator.webkitGetUserMedia;
+	}
+	
+	//Chorme
+	if(navigator.getUserMedia)
+	{
+		navigator.getUserMedia({video:true}, function(stream)
 		{
 			self.stream = stream;
 			self.image.src = URL.createObjectURL(stream);
