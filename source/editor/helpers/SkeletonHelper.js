@@ -30,7 +30,7 @@ function SkeletonHelper(object)
 	geometry.addAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
 	geometry.addAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
 
-	var material = new LineBasicMaterial({vertexColors: THREE.VertexColors, depthTest: false, depthWrite: false, transparent: false});
+	var material = new THREE.LineBasicMaterial({vertexColors: THREE.VertexColors, depthTest: false, depthWrite: false, transparent: false});
 
 	THREE.LineSegments.call(this, geometry, material);
 

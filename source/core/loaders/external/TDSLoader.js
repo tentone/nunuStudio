@@ -15,7 +15,7 @@
 THREE.TDSLoader = function(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
-	this.debug = true;
+	this.debug = false;
 
 	this.group = null;
 	this.position = 0;
@@ -549,9 +549,9 @@ THREE.TDSLoader.prototype.readMap = function(data)
 {
 	var chunk = this.readChunk(data);
 	var next = this.nextChunk(data, chunk);
-	var texture = null;
+	var texture = {};
 
-	var loader = new TextureLoader();
+	var loader = new THREE.TextureLoader();
 	loader.setPath(this.path);
 
 	while(next !== 0)
