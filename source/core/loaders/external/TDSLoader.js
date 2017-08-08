@@ -15,7 +15,7 @@
 THREE.TDSLoader = function(manager)
 {
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
-	this.debug = false;
+	this.debug = true;
 
 	this.group = null;
 	this.position = 0;
@@ -286,10 +286,10 @@ THREE.TDSLoader.prototype.readMaterialEntry = function(data)
 		}
 		else if(next == MAT_SHINMAP)
 		{
-			this.debugMessage("   ShininessrMap");
+			this.debugMessage("   ShininessMap");
 			this.resetPosition(data);
 			var map = this.readMap(data);
-
+			
 			//TODO <ADD CODE HERE>
 		}
 		else if(next == MAT_REFLMAP)

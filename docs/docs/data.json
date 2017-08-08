@@ -10519,7 +10519,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 107,
+            "line": 112,
             "description": "Disconnect from camera.",
             "itemtype": "method",
             "name": "disconnect",
@@ -10528,7 +10528,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 124,
+            "line": 129,
             "description": "Dispose webcam texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -10537,7 +10537,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\WebcamTexture.js",
-            "line": 142,
+            "line": 147,
             "description": "Serialize webcam texture to JSON.",
             "itemtype": "method",
             "name": "toJSON",
