@@ -96,6 +96,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.colorBottom = [new THREE.Color(0xebece6), new THREE.Color(0xffffff), new THREE.Color(0xfee7d7), new THREE.Color(0x0065a7)];
 	this.sunColor = 0xFFFFAA;
 	this.moonColor = 0x5555BB;
+	this.intensity = 0.3;
 
 	//Hemisphere light
 	this.hemisphere = new THREE.HemisphereLight(0, 0, 0.5);
@@ -106,7 +107,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	this.add(this.hemisphere);
 
 	//Sun light
-	this.sun = new DirectionalLight(this.sunColor, 0.3);
+	this.sun = new DirectionalLight(this.sunColor, this.intensity);
 	this.sun.castShadow = true;
 	this.sun.hidden = true;
 	this.add(this.sun);
@@ -138,12 +139,13 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 		topColor: {type: "c", value: new THREE.Color(0.0, 0.46, 1.0)},
 		bottomColor: {type: "c", value: new THREE.Color(1.0, 1.0, 1.0)},
 		offset:	{type: "f", value: 20},
-		exponent: {type: "f", value: 0.4}
+		exponent: {type: "f", value: 0.2}
 	};
+	
 	uniforms.topColor.value.copy(this.hemisphere.color);
 
 	//Sky
-	var geometry = new THREE.SphereBufferGeometry(1000, 16, 16);
+	var geometry = new THREE.SphereBufferGeometry(1500, 16, 16);
 	var material = new THREE.ShaderMaterial({vertexShader: vertex, fragmentShader: fragment, uniforms: uniforms, side: THREE.BackSide});
 	
 	this.sky = new THREE.Mesh(geometry, material);
@@ -215,7 +217,7 @@ Sky.prototype.update = function()
 };
 
 /**
- * Check if object is empty (has no childrens).
+ * Check if object is empty (don't have any childrens).
  * 
  * @method isEmpty
  * @return {boolean} True is object is empty
@@ -301,6 +303,7 @@ Sky.prototype.updateSky = function()
 	//Sun / moon color
 	if(time < 0.20)
 	{
+		this.sun.intensity = this.intensity;
 		this.sun.color.setHex(this.moonColor);
 	}
 	else if(time < 0.30)
@@ -311,18 +314,19 @@ Sky.prototype.updateSky = function()
 		if(t < 0.5)
 		{
 			var f = 2 - t*2;
-			this.sun.intensity = f * 0.3;
+			this.sun.intensity = f * this.intensity;
 			this.sun.color.setHex(this.moonColor);
 		}
 		else
 		{
 			t = t*2;
-			this.sun.intensity = t * 0.3;
+			this.sun.intensity = t * this.intensity;
 			this.sun.color.setHex(this.sunColor);
 		}
 	}
 	else if(time < 0.70)
 	{
+		this.sun.intensity = this.intensity;
 		this.sun.color.setHex(this.sunColor);
 	}
 	else if(time < 0.80)
@@ -332,18 +336,19 @@ Sky.prototype.updateSky = function()
 		if(t < 0.5)
 		{
 			var f = 2 - t*2;
-			this.sun.intensity = f * 0.3;
+			this.sun.intensity = f * this.intensity;
 			this.sun.color.setHex(this.sunColor);
 		}
 		else
 		{
 			t = t*2;
-			this.sun.intensity = t * 0.3;
+			this.sun.intensity = t * this.intensity;
 			this.sun.color.setHex(this.moonColor);
 		}
 	}
 	else
 	{
+		this.sun.intensity = this.intensity;
 		this.sun.color.setHex(this.moonColor);
 	}
 
@@ -386,7 +391,8 @@ Sky.prototype.toJSON = function(meta)
 
 	data.object.sunColor = this.sunColor;
 	data.object.moonColor = this.moonColor;
-	
+	data.object.intensity = this.intensity;
+
 	data.object.autoUpdate = this.autoUpdate;
 	data.object.sunDistance = this.sunDistance;
 	data.object.dayTime = this.dayTime;

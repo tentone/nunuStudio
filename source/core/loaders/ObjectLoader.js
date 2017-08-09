@@ -763,6 +763,11 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.moonColor = data.moonColor;
 			}
+			if(data.intensity !== undefined)
+			{
+				object.intensity = data.intensity;
+			}
+
 			break;
 
 		case "CubeCamera":
