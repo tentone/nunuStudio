@@ -53,6 +53,7 @@ function SkyPanel(parent, obj)
 	}
 	this.form.nextRow();
 
+	//Sun color
 	this.form.addText("Sun Color");
 	this.sunColor = new ColorChooser(this.form.element);
 	this.sunColor.size.set(80, 18);
@@ -67,6 +68,7 @@ function SkyPanel(parent, obj)
 	this.form.add(this.sunColor);
 	this.form.nextRow();
 
+	//Moon color
 	this.form.addText("Moon Color");
 	this.moonColor = new ColorChooser(this.form.element);
 	this.moonColor.size.set(80, 18);
@@ -79,6 +81,22 @@ function SkyPanel(parent, obj)
 		}
 	});
 	this.form.add(this.moonColor);
+	this.form.nextRow();
+
+	//Intensity
+	this.form.addText("Intensity");
+	this.intensity = new Slider(this.form.element);
+	this.intensity.size.set(160, 18);
+	this.intensity.setStep(0.01);
+	this.intensity.setRange(0, 1);
+	this.intensity.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.intensity = self.intensity.getValue();
+		}
+	});
+	this.form.add(this.intensity);
 	this.form.nextRow();
 
 	//Day time
@@ -346,8 +364,10 @@ SkyPanel.prototype.updatePanel = function()
 			this.colorBottom[i].setValue(this.obj.colorBottom[i].r, this.obj.colorBottom[i].g, this.obj.colorBottom[i].b);
 			this.colorTop[i].setValue(this.obj.colorTop[i].r, this.obj.colorTop[i].g, this.obj.colorTop[i].b);
 		}
+		
 		this.sunColor.setValueHex(this.obj.sunColor);
 		this.moonColor.setValueHex(this.obj.moonColor);
+		this.intensity.setValue(this.obj.intensity);
 
 		this.autoUpdate.setValue(this.obj.autoUpdate);
 		this.dayTime.setValue(this.obj.dayTime);
