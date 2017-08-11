@@ -25,17 +25,17 @@ include("lib/PSON.min.js");
 include("core/Global.js");
 include("core/FileSystem.js");
 
-include("core/three/objects/Object3D.js");
+include("core/three/core/Object3D.js");
+include("core/three/core/BufferGeometry");
 include("core/three/objects/SkinnedMesh.js");
 include("core/three/objects/Mesh.js");
 include("core/three/materials/Material.js");
 include("core/three/materials/MultiMaterial.js");
 include("core/three/loaders/BufferGeometryLoader.js");
 include("core/three/math/Vector3.js");
-include("core/three/BufferGeometry.js");
-include("core/three/Texture.js");
-include("core/three/LightShadow.js");
-include("core/three/Fog.js");
+include("core/three/textures/Texture.js");
+include("core/three/lights/LightShadow.js");
+include("core/three/scenes/Fog.js");
 
 include("core/input/Key.js");
 include("core/input/Keyboard.js");
