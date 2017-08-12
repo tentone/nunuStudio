@@ -1277,8 +1277,8 @@ SceneEditor.prototype.selectObjectHelper = function()
 		//Animated Mesh
 		else if(object instanceof THREE.SkinnedMesh)
 		{
-			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 			this.objectHelper.add(new SkeletonHelper(object));
+			this.objectHelper.add(new SkinnedWireframeHelper(object, 0xFFFF00));
 		}
 		//Mesh
 		else if(object instanceof THREE.Mesh)

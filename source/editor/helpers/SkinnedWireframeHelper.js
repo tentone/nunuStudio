@@ -1,16 +1,15 @@
 "use strict";
 
-function WireframeHelper(object, hex) 
+function SkinnedWireframeHelper(object, hex) 
 {
 	var material = new THREE.MeshBasicMaterial(
 	{
 		color: (hex !== undefined) ? hex : 0xFFFFFF,
 		wireframe: true,
-		transparent: false,
-		opacity: 1.0
+		skinning: false
 	});
-
-	THREE.Mesh.call(this, object.geometry, material);
+	
+	THREE.SkinnedMesh.call(this, object.geometry, material);
 
 	this.matrix = object.matrixWorld;
 	this.matrixAutoUpdate = false;
@@ -19,9 +18,9 @@ function WireframeHelper(object, hex)
 	this.update();
 }
 
-WireframeHelper.prototype = Object.create(THREE.Mesh.prototype);
+SkinnedWireframeHelper.prototype = Object.create(THREE.SkinnedMesh.prototype);
 
-WireframeHelper.prototype.update = function()
+SkinnedWireframeHelper.prototype.update = function()
 {
 	if(this.object !== null)
 	{
