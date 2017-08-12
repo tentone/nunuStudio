@@ -1392,7 +1392,14 @@ Editor.loadModel = function(file, onLoad)
 				{
 					var loader = new THREE.ColladaLoader();
 					var collada = loader.parse(reader.result, path);
+					
 					var scene = collada.scene;
+					
+					//var animations = collada.animations;
+					//console.log(collada);
+					//
+					//TODO <SUPPORT FOR ANIMATIONS>
+					
 					Editor.addToScene(scene);
 				}
 				catch(e)

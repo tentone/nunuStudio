@@ -254,6 +254,11 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.transparent = this.transparent;
 	}
 
+	if(this.dithering === true)
+	{
+		data.dithering = true;
+	}
+
 	//Alpha
 	if(this.alphaTest > 0)
 	{

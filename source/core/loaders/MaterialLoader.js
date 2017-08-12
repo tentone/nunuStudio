@@ -236,13 +236,28 @@ MaterialLoader.prototype.parse = function(json)
 		material.morphNormals = json.morphNormals;
 	}
 
+	if(json.dithering !== undefined)
+	{
+		material.dithering = json.dithering;
+	}
+
+	if(json.visible !== undefined)
+	{
+		material.visible = json.visible;
+	}
+
+	if(json.userData !== undefined)
+	{
+		material.userData = json.userData;
+	}
+
 	//Skinning
 	if(json.skinning !== undefined)
 	{
 		material.skinning = json.skinning;
 	}
 
-	//Size (PointsMaterial)
+	//Size (for PointsMaterial)
 	if(json.size !== undefined)
 	{
 		material.size = json.size;
