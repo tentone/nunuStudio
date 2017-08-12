@@ -39,8 +39,20 @@ THREE.SkinnedMesh.prototype.dispose = function()
  */
 THREE.SkinnedMesh.prototype.toJSON = function(meta)
 {
-	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
-	
+	var self = this;
+	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
+	{	
+		if(self.skeleton !== undefined)
+		{
+			if(meta.skeletons[self.skeleton.uuid] === undefined)
+			{
+				meta.skeletons[self.skeleton.uuid] = self.skeleton.toJSON(meta);
+			}
+
+			object.skeleton = self.skeleton.uuid;
+		}
+	});
+
 	if(this.bindMode !== undefined)
 	{
 		data.object.bindMode = this.bindMode;
@@ -49,16 +61,6 @@ THREE.SkinnedMesh.prototype.toJSON = function(meta)
 	if(this.bindMatrix !== undefined)
 	{
 		data.object.bindMatrix = this.bindMatrix.toArray();
-	}
-
-	if(this.skeleton !== undefined)
-	{
-		if(meta.skeletons[this.skeleton.uuid] === undefined)
-		{
-			meta.skeletons[this.skeleton.uuid] = this.skeleton.toJSON(meta);
-		}
-
-		data.object.skeleton = this.skeleton.uuid;
 	}
 
 	return data;

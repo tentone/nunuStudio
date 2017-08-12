@@ -5,7 +5,7 @@ function Action(object, type, target, parent, state)
 {
 	if(type === Action.CHANGED)
 	{
-		this.object = new ObjectLoader().parse(object.toJSON(undefined, undefined, false));
+		this.object = object;//new ObjectLoader().parse(object.toJSON(undefined, undefined, false));
 	}
 	else
 	{

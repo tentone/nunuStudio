@@ -311,6 +311,7 @@ include("editor/helpers/ParticleEmitterHelper.js");
 include("editor/helpers/ObjectIconHelper.js");
 include("editor/helpers/PhysicsObjectHelper.js");
 include("editor/helpers/WireframeHelper.js");
+include("editor/helpers/SkinnedWireframeHelper.js");
 include("editor/helpers/BoundingBoxHelper.js");
 include("editor/helpers/GridHelper.js");
 include("editor/helpers/RectAreaLightHelper.js");
