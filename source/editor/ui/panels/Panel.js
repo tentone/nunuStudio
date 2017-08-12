@@ -78,6 +78,13 @@ function Panel(parent, obj)
 		this.form.nextRow();
 	}
 	
+	if(Settings.general.showType)
+	{
+		this.form.addText("Type");
+		this.type = this.form.addText("");
+		this.form.nextRow();
+	}
+
 	//Position
 	this.form.addText("Position");
 	this.position = new CoordinatesBox(this.form.element);
@@ -211,6 +218,11 @@ Panel.prototype.updatePanel = function()
 		if(this.uuid !== undefined)
 		{
 			this.uuid.setText(this.obj.uuid);
+		}
+		
+		if(this.type !== undefined)
+		{
+			this.type.setText(this.obj.type);
 		}
 
 		this.position.setValue(this.obj.position);
