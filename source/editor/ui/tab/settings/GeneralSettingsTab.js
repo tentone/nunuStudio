@@ -61,6 +61,18 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.showUUID);
 	this.form.nextRow();
 
+	//Show type
+	this.form.addText("Show object type");
+	this.showType = new CheckBox(this.form.element);
+	this.showType.size.set(15, 15);
+	this.showType.setOnChange(function()
+	{
+		Settings.general.showType = self.showType.getValue();
+		Editor.selectObjectPanel();
+	});
+	this.form.add(this.showType);
+	this.form.nextRow();
+
 	//Blank Space
 	this.form.addText("");
 	this.form.nextRow();
@@ -345,7 +357,8 @@ GeneralSettingsTab.prototype.activate = function()
 	this.filePreviewSize.setValue(Settings.general.filePreviewSize);
 	this.showStats.setValue(Settings.general.showStats);
 	this.showUUID.setValue(Settings.general.showUUID);
-
+	this.showType.setValue(Settings.general.showType);
+	
 	//Editor
 	this.snap.setValue(Settings.editor.snap);
 	this.snapAngle.setValue(Settings.editor.snapAngle);

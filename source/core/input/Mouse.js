@@ -39,17 +39,17 @@ function Mouse()
 {
 	//Raw data
 	this._keys = [];
-	this._position = new Vector2(0, 0);
+	this._position = new THREE.Vector2(0, 0);
 	this._positionUpdated = false;
-	this._delta = new Vector2(0, 0);
+	this._delta = new THREE.Vector2(0, 0);
 	this._wheel = 0;
 	this._wheelUpdated = false;
 	this._doubleClicked = false;
 
 	//Position, delta, and scroll speed
 	this.keys = [];
-	this.position = new Vector2(0,0);
-	this.delta = new Vector2(0,0);
+	this.position = new THREE.Vector2(0,0);
+	this.delta = new THREE.Vector2(0,0);
 	this.wheel = 0;
 	this.doubleClicked = false;
 

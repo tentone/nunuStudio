@@ -25,6 +25,7 @@ Settings.loadDefault = function()
 	Settings.general.filePreviewSize = 70;
 	Settings.general.showStats = false;
 	Settings.general.showUUID = false;
+	Settings.general.showType = true;
 
 	//Editor
 	Settings.editor = {};

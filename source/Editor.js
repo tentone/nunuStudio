@@ -1393,11 +1393,11 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.ColladaLoader();
 					var collada = loader.parse(reader.result, path);
 					
+					console.log(collada);
+
 					var scene = collada.scene;
+					var animations = collada.animations;
 					
-					//var animations = collada.animations;
-					//console.log(collada);
-					//
 					//TODO <SUPPORT FOR ANIMATIONS>
 					
 					Editor.addToScene(scene);
@@ -1421,13 +1421,24 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.GLTF2Loader();
 					loader.parse(reader.result, path, function(gltf)
 					{
-						if(gltf.scene !== undefined)
+						console.log(gltf);
+
+						var scene = gltf.scene;
+						scene.type = "Group";
+
+						var animation = gltf.animations;
+
+						//TODO <SUPPORT FOR ANIMATIONS>
+
+						Editor.addToScene(scene);
+
+						/*if(gltf.scene !== undefined)
 						{
 							for(var i = 0; i < gltf.scene.children.length; i++)
 							{
 								Editor.addToScene(gltf.scene.children[i]);
 							}
-						}
+						}*/
 					});
 				}
 				catch(e)
