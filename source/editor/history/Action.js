@@ -3,14 +3,16 @@
 //Constructor from object before changes parent and change type
 function Action(object, type, target, parent, state)
 {
-	if(type === Action.CHANGED)
+	/*if(type === Action.CHANGED)
 	{
-		this.object = object;//new ObjectLoader().parse(object.toJSON(undefined, undefined, false));
+		this.object = new ObjectLoader().parse(object.toJSON(undefined, undefined, false));
 	}
 	else
 	{
 		this.object = object;
-	}
+	}*/
+
+	this.object = object;
 
 	this.type = type;
 	this.target = target;

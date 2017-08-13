@@ -19,6 +19,7 @@ History.prototype.push = function(action)
 {
 	this.actions.push(action);
 
+	action.timestamp = this.timestamp;
 	this.timestamp++;
 
 	if(this.actions.length > this.size)

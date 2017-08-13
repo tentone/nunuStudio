@@ -1269,15 +1269,10 @@ SceneEditor.prototype.selectObjectHelper = function()
 		{
 			this.objectHelper.add(new PhysicsObjectHelper(object));
 		}
-		//Script or Audio
-		else if(object instanceof Script || object instanceof THREE.Audio)
-		{
-			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
-		}
-		//Animated Mesh
+		//Skinned Mesh
 		else if(object instanceof THREE.SkinnedMesh)
 		{
-			this.objectHelper.add(new SkeletonHelper(object));
+			this.objectHelper.add(new SkeletonHelper(object.parent));
 			this.objectHelper.add(new SkinnedWireframeHelper(object, 0xFFFF00));
 		}
 		//Mesh
@@ -1289,6 +1284,11 @@ SceneEditor.prototype.selectObjectHelper = function()
 		else if(object instanceof Container)
 		{
 			this.objectHelper.add(new BoundingBoxHelper(object, 0xFFFF00));
+		}
+		//Else
+		else
+		{
+			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 	}
 };

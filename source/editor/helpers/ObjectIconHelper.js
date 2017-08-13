@@ -1,18 +1,26 @@
 "use strict";
 
-function ObjectIconHelper(obj, icon)
+function ObjectIconHelper(object, icon)
 {
-	THREE.Sprite.call(this, new THREE.SpriteMaterial({map: new Texture(new Image(icon)), color: 0xffffff}));
+	THREE.Sprite.call(this, new THREE.SpriteMaterial(
+	{
+		map: new Texture(new Image(icon)),
+		transparent: true,
+		opacity: 0.8,
+		depthTest: false,
+		depthWrite: false,
+		color: 0xffffff
+	}));
 
-	this.obj = obj;
+	this.object = object;
 }
 
 ObjectIconHelper.prototype = Object.create(THREE.Sprite.prototype);
 
 ObjectIconHelper.prototype.update = function()
 {
-	if(this.obj !== null)
+	if(this.object !== null)
 	{
-		this.obj.getWorldPosition(this.position);
+		this.object.getWorldPosition(this.position);
 	}
 };

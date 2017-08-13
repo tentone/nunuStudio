@@ -2,18 +2,17 @@
 
 function SkinnedWireframeHelper(object, hex) 
 {
-	var material = new THREE.MeshBasicMaterial(
+	THREE.SkinnedMesh.call(this, object.geometry, new THREE.MeshBasicMaterial(
 	{
 		color: (hex !== undefined) ? hex : 0xFFFFFF,
 		wireframe: true,
 		skinning: false
-	});
-	
-	THREE.SkinnedMesh.call(this, object.geometry, material);
+	}));
+
+	this.object = object;
 
 	this.matrix = object.matrixWorld;
 	this.matrixAutoUpdate = false;
-	this.object = object;
 
 	this.update();
 }

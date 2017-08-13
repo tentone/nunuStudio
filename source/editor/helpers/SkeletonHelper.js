@@ -3,9 +3,6 @@
 function SkeletonHelper(object) 
 {
 	var bones = SkeletonHelper.getBoneList(object);
-
-	console.log()
-
 	var geometry = new THREE.BufferGeometry();
 
 	var vertices = [];
@@ -30,9 +27,13 @@ function SkeletonHelper(object)
 	geometry.addAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
 	geometry.addAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
 
-	var material = new THREE.LineBasicMaterial({vertexColors: THREE.VertexColors, depthTest: false, depthWrite: false, transparent: false});
-
-	THREE.LineSegments.call(this, geometry, material);
+	THREE.LineSegments.call(this, geometry, new THREE.LineBasicMaterial(
+	{
+		vertexColors: THREE.VertexColors,
+		depthTest: false,
+		depthWrite: false,
+		transparent: false
+	}));
 
 	this.root = object;
 	this.bones = bones;
