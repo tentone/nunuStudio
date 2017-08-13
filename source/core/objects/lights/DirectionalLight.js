@@ -16,7 +16,7 @@
  */
 function DirectionalLight(hex, intensity)
 {
-	THREE.DirectionalLight.call(this, hex, intensity);
+	THREE._DirectionalLight.call(this, hex, intensity);
 
 	this.name = "directional";
 	
@@ -26,7 +26,10 @@ function DirectionalLight(hex, intensity)
 	this.shadow.camera.far = 10000;
 }
 
-DirectionalLight.prototype = Object.create(THREE.DirectionalLight.prototype);
+THREE._DirectionalLight = THREE.DirectionalLight;
+THREE.DirectionalLight = DirectionalLight;
+
+DirectionalLight.prototype = Object.create(THREE._DirectionalLight.prototype);
 
 /**
  * Update light shadow map atributtes at runtime

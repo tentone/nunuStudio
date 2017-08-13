@@ -1394,10 +1394,10 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.ColladaLoader();
 					var collada = loader.parse(reader.result, path);
 					
-					console.log(collada);
+					//console.log(collada);
 
 					var scene = collada.scene;
-					var animations = collada.animations;
+					//var animations = collada.animations;
 					
 					//TODO <SUPPORT FOR ANIMATIONS>
 					
@@ -1422,12 +1422,10 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.GLTF2Loader();
 					loader.parse(reader.result, path, function(gltf)
 					{
-						console.log(gltf);
+						//console.log(gltf);
 
 						var scene = gltf.scene;
-						scene.type = "Group";
-
-						var animation = gltf.animations;
+						//var animation = gltf.animations;
 
 						//TODO <SUPPORT FOR ANIMATIONS>
 

@@ -16,7 +16,7 @@
  */
 function PointLight(hex, intensity, distance, decay)
 {
-	THREE.PointLight.call(this, hex, intensity, distance, decay);
+	THREE._PointLight.call(this, hex, intensity, distance, decay);
 
 	this.name = "point";
 	
@@ -27,7 +27,10 @@ function PointLight(hex, intensity, distance, decay)
 	this.shadow.bias = 0.01;
 }
 
-PointLight.prototype = Object.create(THREE.PointLight.prototype);
+THREE._PointLight = THREE.PointLight;
+THREE.PointLight = PointLight;
+
+PointLight.prototype = Object.create(THREE._PointLight.prototype);
 
 /**
  * Update light shadow map atributtes at runtime

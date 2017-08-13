@@ -34,7 +34,7 @@
 */
 function Mesh(geometry, material)
 {
-	THREE.Mesh.call(this, geometry, material);
+	THREE._Mesh.call(this, geometry, material);
 
 	this.name = "model";
 
@@ -42,4 +42,7 @@ function Mesh(geometry, material)
 	this.castShadow = true;
 }
 
-Mesh.prototype = Object.create(THREE.Mesh.prototype);
+THREE._Mesh = THREE.Mesh;
+THREE.Mesh = Mesh;
+
+Mesh.prototype = Object.create(THREE._Mesh.prototype);

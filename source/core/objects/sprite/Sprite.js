@@ -19,13 +19,15 @@
 */
 function Sprite(material)
 {
-	THREE.Sprite.call(this, material);
+	THREE._Sprite.call(this, material);
 
 	this.name = "sprite";
-	this.type = "Sprite";
 }
 
-Sprite.prototype = Object.create(THREE.Sprite.prototype);
+THREE._Sprite = THREE.Sprite;
+THREE.Sprite = Sprite;
+
+Sprite.prototype = Object.create(THREE._Sprite.prototype);
 
 /**
  * Dispose the sprite material.

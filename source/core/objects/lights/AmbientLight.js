@@ -15,11 +15,14 @@
  */
 function AmbientLight(hex)
 {
-	THREE.AmbientLight.call(this, hex);
+	THREE._AmbientLight.call(this, hex);
 	
 	this.name = "ambient";
 
 	this.matrixAutoUpdate = false;
 }
 
-AmbientLight.prototype = Object.create(THREE.AmbientLight.prototype);
+THREE._AmbientLight = THREE.AmbientLight;
+THREE.AmbientLight = AmbientLight;
+
+AmbientLight.prototype = Object.create(THREE._AmbientLight.prototype);
