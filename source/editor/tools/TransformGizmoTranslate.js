@@ -25,7 +25,7 @@ function TransformGizmoTranslate()
 		X: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0xff0000 })), [0.5, 0, 0], [0, 0, - Math.PI / 2]],[new THREE.Line(lineXGeometry, new GizmoLineMaterial({ color: 0xff0000 }))]],
 		Y: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x00ff00 })), [0, 0.5, 0]],[new THREE.Line(lineYGeometry, new GizmoLineMaterial({ color: 0x00ff00 }))]],
 		Z: [[new THREE.Mesh(arrowGeometry, new GizmoMaterial({ color: 0x0000ff })), [0, 0, 0.5], [Math.PI / 2, 0, 0]],[new THREE.Line(lineZGeometry, new GizmoLineMaterial({ color: 0x0000ff }))]],
-		XYZ: [[new THREE.Mesh(new THREE.OctahedronGeometry(0.1, 0), new GizmoMaterial({ color: 0xffffff, opacity: 0.25 })), [0, 0, 0], [0, 0, 0]]],
+		XYZ: [[new THREE.Mesh(new THREE.OctahedronBufferGeometry(0.1, 0), new GizmoMaterial({ color: 0xffffff, opacity: 0.25 })), [0, 0, 0], [0, 0, 0]]],
 		XY: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.29, 0.29), new GizmoMaterial({ color: 0xffff00, opacity: 0.25 })), [0.15, 0.15, 0]]],
 		YZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.29, 0.29), new GizmoMaterial({ color: 0x00ffff, opacity: 0.25 })), [0, 0.15, 0.15], [0, Math.PI / 2, 0]]],
 		XZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.29, 0.29), new GizmoMaterial({ color: 0xff00ff, opacity: 0.25 })), [0.15, 0, 0.15], [- Math.PI / 2, 0, 0]]]
@@ -36,7 +36,7 @@ function TransformGizmoTranslate()
 		X: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0.6, 0, 0], [0, 0, - Math.PI / 2]]],
 		Y: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0.6, 0]]],
 		Z: [[new THREE.Mesh(new THREE.CylinderBufferGeometry(0.2, 0, 1, 4, 1, false), TransformGizmo.pickerMaterial), [0, 0, 0.6], [Math.PI / 2, 0, 0]]],
-		XYZ: [[new THREE.Mesh(new THREE.OctahedronGeometry(0.2, 0), TransformGizmo.pickerMaterial)]],
+		XYZ: [[new THREE.Mesh(new THREE.OctahedronBufferGeometry(0.2, 0), TransformGizmo.pickerMaterial)]],
 		XY: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), TransformGizmo.pickerMaterial), [0.2, 0.2, 0]]],
 		YZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), TransformGizmo.pickerMaterial), [0, 0.2, 0.2], [0, Math.PI / 2, 0]]],
 		XZ: [[new THREE.Mesh(new THREE.PlaneBufferGeometry(0.4, 0.4), TransformGizmo.pickerMaterial), [0.2, 0, 0.2], [- Math.PI / 2, 0, 0]]]

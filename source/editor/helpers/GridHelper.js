@@ -5,12 +5,13 @@ function GridHelper(size, spacing, color)
 	this.size = (size !== undefined) ? size : 100;
 	this.spacing = (spacing !== undefined) ? spacing : 1;
 
-	var material = new THREE.LineBasicMaterial({color: (color !== undefined) ? color : 0x888888});
-	material.depthWrite = false;
-	material.transparent = true;
-	material.opacity = 0.4;
-
-	THREE.LineSegments.call(this, new THREE.BufferGeometry(), material);
+	THREE.LineSegments.call(this, new THREE.BufferGeometry(), new THREE.LineBasicMaterial(
+	{
+		color: (color !== undefined) ? color : 0x888888,
+		depthWrite: false,
+		transparent: true,
+		opacity: 0.5
+	}));
 
 	this.update();
 };

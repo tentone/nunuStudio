@@ -71,8 +71,9 @@ function Skeleton(bones, boneInverses)
 	}
 }
 
-Skeleton.prototype = Object.create(THREE.Skeleton.prototype);
+Skeleton.prototype = Object.create(THREE._Skeleton.prototype);
 
+THREE._Skeleton = THREE.Skeleton;
 THREE.Skeleton = Skeleton;
 
 /**

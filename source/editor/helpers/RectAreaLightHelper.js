@@ -2,9 +2,7 @@
 
 function RectAreaLightHelper(light) 
 {
-	this.material = new THREE.MeshBasicMaterial({side: THREE.DoubleSide});
-
-	THREE.Mesh.call(this, new THREE.PlaneBufferGeometry(1, 1), this.material);
+	THREE.Mesh.call(this, new THREE.PlaneBufferGeometry(1, 1), new THREE.MeshBasicMaterial({side: THREE.DoubleSide}));
 
 	this.light = light;
 	this.update();

@@ -3,7 +3,6 @@
 function Action(type, target)
 {
 	this.timestamp = 0;
-
 	this.type = -1;
 	this.target = null;
 }

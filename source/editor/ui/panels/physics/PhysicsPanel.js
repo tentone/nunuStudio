@@ -40,20 +40,20 @@ function PhysicsPanel(parent, obj)
 
 	//Body Type
 	this.form.addText("Type");
-	this.type = new DropdownList(this.form.element);
-	this.type.size.set(100, 20);
-	this.type.addValue("Static", CANNON.Body.STATIC);
-	this.type.addValue("Dynamic", CANNON.Body.DYNAMIC);
-	this.type.addValue("Kinematic", CANNON.Body.KINEMATIC);
-	this.type.setOnChange(function()
+	this.bodyType = new DropdownList(this.form.element);
+	this.bodyType.size.set(100, 20);
+	this.bodyType.addValue("Static", CANNON.Body.STATIC);
+	this.bodyType.addValue("Dynamic", CANNON.Body.DYNAMIC);
+	this.bodyType.addValue("Kinematic", CANNON.Body.KINEMATIC);
+	this.bodyType.setOnChange(function()
 	{
 		if(self.obj !== null)
 		{
 			Editor.history.push(self.obj, Action.CHANGED);
-			self.obj.body.type = self.type.getValue();
+			self.obj.body.type = self.bodyType.getValue();
 		}
 	});
-	this.form.add(this.type);
+	this.form.add(this.bodyType);
 	this.form.nextRow();
 
 	//Body mass
@@ -198,7 +198,7 @@ PhysicsPanel.prototype.updatePanel = function()
 
 	if(this.obj !== null)
 	{
-		this.type.setValue(this.obj.body.type);
+		this.bodyType.setValue(this.obj.body.type);
 		this.mass.setValue(this.obj.body.mass);
 		this.linearDamping.setValue(this.obj.body.linearDamping);
 		this.angularDamping.setValue(this.obj.body.angularDamping);

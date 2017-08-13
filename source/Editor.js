@@ -1425,6 +1425,8 @@ Editor.loadModel = function(file, onLoad)
 						//console.log(gltf);
 
 						var scene = gltf.scene;
+						scene.type = "Group";
+						
 						//var animation = gltf.animations;
 
 						//TODO <SUPPORT FOR ANIMATIONS>
