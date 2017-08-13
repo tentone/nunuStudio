@@ -1,5 +1,6 @@
 {
 	"general": {
+		"autoUpdate": true,
 		"theme": "dark",
 		"filePreviewSize": 70,
 		"showStats": false,

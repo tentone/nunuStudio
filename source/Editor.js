@@ -35,8 +35,6 @@ include("core/FileSystem.js");
 
 include("core/three/core/Object3D.js");
 include("core/three/core/BufferGeometry");
-include("core/three/objects/SkinnedMesh.js");
-include("core/three/objects/Mesh.js");
 include("core/three/materials/Material.js");
 include("core/three/materials/MultiMaterial.js");
 include("core/three/loaders/BufferGeometryLoader.js");
@@ -367,7 +365,10 @@ Editor.initialize = function()
 		Editor.alert("WebGL is not supported or is disabled!\nnunuStudio cannot run!");
 		Editor.exit();
 	}
-		
+	
+	//Load settings
+	Settings.load();
+
 	//Register tern plugins
 	Editor.ternDefinitions = [];
 	Editor.ternDefinitions.push(JSON.parse(FileSystem.readFile(Editor.filePath + "tern/threejs.json")));
@@ -395,7 +396,10 @@ Editor.initialize = function()
 		});
 
 		//Try to update the editor
-		Editor.updateNunu();
+		if(Settings.general.autoUpdate)
+		{
+			Editor.updateNunu();
+		}
 	}
 	else
 	{
@@ -449,9 +453,6 @@ Editor.initialize = function()
 	//Input
 	Editor.keyboard = new Keyboard();
 	Editor.mouse = new Mouse();
-
-	//Load settings
-	Settings.load();
 
 	//Load theme
 	Editor.theme = Theme.get(Settings.general.theme);
@@ -1848,7 +1849,7 @@ Editor.updateNunu = function(silent)
 		var url = "https://raw.githubusercontent.com/tentone/nunuStudio/master/build/nunu.editor.min.js";
 
 		FileSystem.readFile(url, false, function(data)
-		{	
+		{
 			var token = "Nunu.TIMESTAMP";
 			var pos = data.search(token);
 			var timestamp = data.slice(pos + token.length + 2, pos + token.length + 14);
@@ -1871,7 +1872,7 @@ Editor.updateNunu = function(silent)
 	{
 		if(!silent)
 		{
-			Editor.alert("Failed to fetch update files!");
+			Editor.alert("Failed to download update files!");
 		}
 	}
 };
