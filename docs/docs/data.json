@@ -581,20 +581,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\three\\objects\\Mesh.js": {
-            "name": "..\\..\\source\\core\\three\\objects\\Mesh.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\three\\objects\\SkinnedMesh.js": {
-            "name": "..\\..\\source\\core\\three\\objects\\SkinnedMesh.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\three\\scenes\\Fog.js": {
             "name": "..\\..\\source\\core\\three\\scenes\\Fog.js",
             "modules": {
@@ -2949,7 +2935,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 110,
+            "line": 108,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -6009,7 +5995,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\animation\\Skeleton.js",
-            "line": 78,
+            "line": 79,
             "description": "Serialize skeleton to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7296,7 +7282,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\DirectionalLight.js",
-            "line": 31,
+            "line": 34,
             "description": "Update light shadow map atributtes at runtime",
             "itemtype": "method",
             "name": "updateShadowMap",
@@ -7305,7 +7291,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\PointLight.js",
-            "line": 32,
+            "line": 35,
             "description": "Update light shadow map atributtes at runtime",
             "itemtype": "method",
             "name": "updateShadowMap",
@@ -7314,7 +7300,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\RectAreaLight.js",
-            "line": 26,
+            "line": 29,
             "description": "Create JSON description",
             "itemtype": "method",
             "name": "toJSON",
@@ -7517,7 +7503,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\SpotLight.js",
-            "line": 37,
+            "line": 40,
             "description": "SpotLight looks to the target object coordinates.\n\nThe target object should always be at the scene root.",
             "itemtype": "method",
             "name": "setTarget",
@@ -7533,7 +7519,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\SpotLight.js",
-            "line": 50,
+            "line": 53,
             "description": "Update light shadow map atributtes at runtime.",
             "itemtype": "method",
             "name": "updateShadowMap",
@@ -7542,7 +7528,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\SpotLight.js",
-            "line": 62,
+            "line": 65,
             "description": "Serialize SpotLight data to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7587,6 +7573,15 @@
             "module": "Meshes"
         },
         {
+            "file": "..\\..\\source\\core\\objects\\mesh\\Mesh.js",
+            "line": 50,
+            "description": "Dispose mesh along with its material and geometry.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Mesh",
+            "module": "Meshes"
+        },
+        {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
             "line": 18,
             "description": "Geometry defined the object structure",
@@ -7623,6 +7618,52 @@
             "itemtype": "property",
             "name": "bones",
             "type": "{Array}",
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 54,
+            "description": "Dispose mesh along with its material and geometry.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 75,
+            "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
+            "itemtype": "method",
+            "name": "bind",
+            "params": [
+                {
+                    "name": "skeleton",
+                    "description": "",
+                    "type": "Skeleton"
+                },
+                {
+                    "name": "bindMatrix",
+                    "description": "",
+                    "type": "Matrix4"
+                }
+            ],
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 85,
+            "description": "Serialize skinned mesh to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Metadata",
+                    "type": "Object"
+                }
+            ],
             "class": "SkinnedMesh",
             "module": "Meshes"
         },
@@ -8381,7 +8422,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\sprite\\Sprite.js",
-            "line": 30,
+            "line": 32,
             "description": "Dispose the sprite material.",
             "itemtype": "method",
             "name": "dispose",
@@ -8896,7 +8937,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 73,
+            "line": 75,
             "description": "Initialize scene objects.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -8905,7 +8946,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 96,
+            "line": 98,
             "description": "Update scene objects and the physics world.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -8914,7 +8955,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 120,
+            "line": 122,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -8934,7 +8975,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 152,
+            "line": 154,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -8950,7 +8991,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 164,
+            "line": 166,
             "description": "Update active cameras order.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -8959,7 +9000,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 177,
+            "line": 179,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -8975,7 +9016,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 192,
+            "line": 194,
             "description": "Set scene fog mode.",
             "params": [
                 {
@@ -8991,7 +9032,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Scene.js",
-            "line": 216,
+            "line": 218,
             "description": "Serialize scene as JSON.\n\nAlso serializes physics world information.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11330,61 +11371,6 @@
             "module": "Math"
         },
         {
-            "file": "..\\..\\source\\core\\three\\objects\\Mesh.js",
-            "line": 3,
-            "description": "Dispose mesh along with its material and geometry.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "Fog",
-            "module": "Math"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\objects\\SkinnedMesh.js",
-            "line": 3,
-            "description": "Dispose mesh along with its material and geometry.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "Fog",
-            "module": "Math"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\objects\\SkinnedMesh.js",
-            "line": 24,
-            "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
-            "itemtype": "method",
-            "name": "bind",
-            "params": [
-                {
-                    "name": "skeleton",
-                    "description": "",
-                    "type": "Skeleton"
-                },
-                {
-                    "name": "bindMatrix",
-                    "description": "",
-                    "type": "Matrix4"
-                }
-            ],
-            "class": "Fog",
-            "module": "Math"
-        },
-        {
-            "file": "..\\..\\source\\core\\three\\objects\\SkinnedMesh.js",
-            "line": 34,
-            "description": "Serializa skinned mesh to json.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "Metadata",
-                    "type": "Object"
-                }
-            ],
-            "class": "Fog",
-            "module": "Math"
-        },
-        {
             "file": "..\\..\\source\\core\\three\\scenes\\Fog.js",
             "line": 12,
             "description": "No fog",
@@ -12733,7 +12719,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 121,
+            "line": 119,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -12743,7 +12729,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 127,
+            "line": 125,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -12753,7 +12739,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 133,
+            "line": 131,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -12764,7 +12750,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 140,
+            "line": 138,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -12774,7 +12760,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 146,
+            "line": 144,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -12785,7 +12771,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 156,
+            "line": 154,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -12794,7 +12780,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 194,
+            "line": 192,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -12803,7 +12789,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 261,
+            "line": 259,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -12829,7 +12815,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 282,
+            "line": 280,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -12845,7 +12831,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 307,
+            "line": 305,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -12871,7 +12857,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 350,
+            "line": 348,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -12880,7 +12866,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 366,
+            "line": 364,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -12889,7 +12875,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 417,
+            "line": 415,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -12898,7 +12884,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 451,
+            "line": 449,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -12907,7 +12893,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 461,
+            "line": 459,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -12923,7 +12909,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 475,
+            "line": 473,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -12932,7 +12918,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 499,
+            "line": 497,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -12948,7 +12934,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 515,
+            "line": 513,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -12964,7 +12950,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 528,
+            "line": 526,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -12980,7 +12966,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 541,
+            "line": 539,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -12993,7 +12979,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 552,
+            "line": 550,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -13002,7 +12988,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 576,
+            "line": 574,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",

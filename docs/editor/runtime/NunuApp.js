@@ -27,8 +27,6 @@ include("core/FileSystem.js");
 
 include("core/three/core/Object3D.js");
 include("core/three/core/BufferGeometry");
-include("core/three/objects/SkinnedMesh.js");
-include("core/three/objects/Mesh.js");
 include("core/three/materials/Material.js");
 include("core/three/materials/MultiMaterial.js");
 include("core/three/loaders/BufferGeometryLoader.js");

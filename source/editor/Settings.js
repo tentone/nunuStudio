@@ -16,11 +16,16 @@ Settings.TOP_RIGHT = 21;
 Settings.BOTTOM_LEFT = 22;
 Settings.BOTTOM_RIGHT = 23;
 
+//Autoupdate channel
+Settings.STABLE = 30;
+Settings.BETA = 31;
+
 //Load default settings
 Settings.loadDefault = function()
 {
 	//General
 	Settings.general = {};
+	Settings.general.autoUpdate = true;
 	Settings.general.theme = "dark";
 	Settings.general.filePreviewSize = 70;
 	Settings.general.showStats = false;

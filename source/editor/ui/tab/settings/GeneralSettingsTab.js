@@ -38,6 +38,22 @@ function GeneralSettingsTab(parent, closeable, container, index)
 		this.theme.addValue(theme, theme);
 	}
 
+	//Auto update
+	this.form.addText("Auto Update");
+	this.autoUpdate = new CheckBox(this.form.element);
+	this.autoUpdate.size.set(15, 15);
+	this.autoUpdate.setOnChange(function()
+	{
+		Settings.general.autoUpdate = self.autoUpdate.getValue();
+
+		if(Settings.general.autoUpdate)
+		{
+			Editor.updateNunu();
+		}
+	});
+	this.form.add(this.autoUpdate);
+	this.form.nextRow();
+
 	//Show stats
 	this.form.addText("Performance info");
 	this.showStats = new CheckBox(this.form.element);
@@ -354,6 +370,7 @@ GeneralSettingsTab.prototype.activate = function()
 {
 	//General
 	this.theme.setValue(Settings.general.theme);
+	this.autoUpdate.setValue(Settings.general.autoUpdate);
 	this.filePreviewSize.setValue(Settings.general.filePreviewSize);
 	this.showStats.setValue(Settings.general.showStats);
 	this.showUUID.setValue(Settings.general.showUUID);

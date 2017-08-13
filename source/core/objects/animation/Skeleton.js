@@ -71,10 +71,10 @@ function Skeleton(bones, boneInverses)
 	}
 }
 
-Skeleton.prototype = Object.create(THREE._Skeleton.prototype);
-
 THREE._Skeleton = THREE.Skeleton;
 THREE.Skeleton = Skeleton;
+
+Skeleton.prototype = Object.create(THREE._Skeleton.prototype);
 
 /**
  * Serialize skeleton to json.
