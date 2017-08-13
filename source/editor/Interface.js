@@ -346,6 +346,12 @@ Interface.initialize = function()
 		Editor.addToScene(new PositionalAudio(Editor.defaultAudio));
 	}, "Positional Audio");
 
+	//Lens flare
+	Interface.addEffects.addOption(Editor.filePath + "icons/misc/flare.png", function()
+	{
+		Editor.addToScene(new THREE.LensFlare(Editor.defaultTexture));
+	}, "Lens flare");
+
 	//Physics
 	Interface.addPhysics = new ButtonDrawer();
 	Interface.addPhysics.setImage(Editor.filePath + "icons/misc/physics.png");
