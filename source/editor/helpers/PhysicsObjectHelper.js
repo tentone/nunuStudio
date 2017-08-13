@@ -10,6 +10,7 @@ function PhysicsObjectHelper(obj)
 	this.meshes = [];
 
 	this.material = new THREE.MeshBasicMaterial({color: 0x00FF00, wireframe: true});
+	
 	this.sphere = new THREE.SphereBufferGeometry(1, 12, 12);
 	this.box = new THREE.BoxBufferGeometry(1, 1, 1);
 	this.plane = new THREE.PlaneBufferGeometry(100, 100, 20, 20);

@@ -16,12 +16,15 @@
  */
 function RectAreaLight(color, intensity, width, height)
 {
-	THREE.RectAreaLight.call(this, color, intensity, width, height);
+	THREE._RectAreaLight.call(this, color, intensity, width, height);
 
 	this.name = "rectarea";
 }
 
-RectAreaLight.prototype = Object.create(THREE.RectAreaLight.prototype);
+THREE._RectAreaLight = THREE.RectAreaLight;
+THREE.RectAreaLight = RectAreaLight;
+
+RectAreaLight.prototype = Object.create(THREE._RectAreaLight.prototype);
 
 /**
  * Create JSON description

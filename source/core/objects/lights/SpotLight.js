@@ -20,7 +20,7 @@
  */
 function SpotLight(hex, intensity, distance, angle, exponent, decay)
 {
-	THREE.SpotLight.call(this, hex, intensity, distance, angle, exponent, decay);
+	THREE._SpotLight.call(this, hex, intensity, distance, angle, exponent, decay);
 
 	this.name = "spotlight";
 	
@@ -32,7 +32,10 @@ function SpotLight(hex, intensity, distance, angle, exponent, decay)
 	this.shadow.mapSize.height = 512;
 }
 
-SpotLight.prototype = Object.create(THREE.SpotLight.prototype);
+THREE._SpotLight = THREE.SpotLight;
+THREE.SpotLight = SpotLight;
+
+SpotLight.prototype = Object.create(THREE._SpotLight.prototype);
 
 /**
  * SpotLight looks to the target object coordinates.

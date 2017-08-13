@@ -36,7 +36,7 @@
  */
 function Scene()
 {
-	THREE.Scene.call(this);
+	THREE._Scene.call(this);
 
 	this.name = "scene";
 	this.matrixAutoUpdate = false;
@@ -68,7 +68,9 @@ function Scene()
 	this.mouse = new THREE.Vector2(0, 0);
 }
 
-Scene.prototype = Object.create(THREE.Scene.prototype);
+THREE._Scene = THREE.Scene;
+
+Scene.prototype = Object.create(THREE._Scene.prototype);
 
 /**
  * Initialize scene objects.

@@ -38,12 +38,15 @@
  */
 function SkinnedMesh(geometry, material, useVertexTexture)
 {
-	THREE.SkinnedMesh.call(this, geometry, material, useVertexTexture);
+	THREE._SkinnedMesh.call(this, geometry, material, useVertexTexture);
 
-	this.name = "model";
+	this.name = "skinned mesh";
 
 	this.receiveShadow = true;
 	this.castShadow = true;
 }
 
-SkinnedMesh.prototype = Object.create(THREE.SkinnedMesh.prototype);
+THREE._SkinnedMesh = THREE.SkinnedMesh;
+THREE.SkinnedMesh = SkinnedMesh;
+
+SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);

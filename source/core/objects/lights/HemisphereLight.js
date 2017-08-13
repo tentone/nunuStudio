@@ -15,9 +15,12 @@
  */
 function HemisphereLight(skyColor, groundColor, intensity)
 {
-	THREE.HemisphereLight.call(this, skyColor, groundColor, intensity);
+	THREE._HemisphereLight.call(this, skyColor, groundColor, intensity);
 
 	this.name = "hemisphere";
 }
 
-HemisphereLight.prototype = Object.create(THREE.HemisphereLight.prototype);
+THREE._HemisphereLight = THREE.HemisphereLight;
+THREE.HemisphereLight = HemisphereLight;
+
+HemisphereLight.prototype = Object.create(THREE._HemisphereLight.prototype);
