@@ -349,7 +349,17 @@ Interface.initialize = function()
 	//Lens flare
 	Interface.addEffects.addOption(Editor.filePath + "icons/misc/flare.png", function()
 	{
-		Editor.addToScene(new THREE.LensFlare(Editor.defaultTexture));
+		var lensFlare = new THREE.LensFlare(Editor.defaultTexture, 700, 0.0, THREE.AdditiveBlending, new THREE.Color(0xFFFFFF));
+
+		lensFlare.add(Editor.defaultTexture, 512, 0.0, THREE.AdditiveBlending);
+		lensFlare.add(Editor.defaultTexture, 512, 0.0, THREE.AdditiveBlending);
+		lensFlare.add(Editor.defaultTexture, 512, 0.0, THREE.AdditiveBlending);
+
+		lensFlare.add(Editor.defaultTexture, 60, 0.6, THREE.AdditiveBlending);
+		lensFlare.add(Editor.defaultTexture, 70, 0.7, THREE.AdditiveBlending);
+		lensFlare.add(Editor.defaultTexture, 120, 0.9, THREE.AdditiveBlending);
+
+		Editor.addToScene(lensFlare);
 	}, "Lens flare");
 
 	//Physics

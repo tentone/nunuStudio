@@ -205,7 +205,7 @@ NunuApp.prototype.run = function()
 	}
 
 	//WebGL renderer
-	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, antialias: this.program.antialiasing});
+	this.renderer = new THREE.WebGLRenderer({canvas: this.canvas, alpha: true, antialias: this.program.antialiasing});
 	this.renderer.shadowMap.enabled = this.program.shadows;
 	this.renderer.shadowMap.type = this.program.shadowsType;
 	this.renderer.toneMapping = this.program.toneMapping;
