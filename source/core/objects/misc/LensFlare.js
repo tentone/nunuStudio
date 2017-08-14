@@ -176,7 +176,7 @@ LensFlare.prototype.toJSON = function(meta)
 		for(var i = 0; i < self.lensFlares.length; i++)
 		{
 			var flare = {};
-			var texture = self.lensFlares[i].toJSON(meta);
+			var texture = self.lensFlares[i].texture.toJSON(meta);
 
 			flare.texture = texture.uuid;
 			flare.size = self.lensFlares[i].size;
