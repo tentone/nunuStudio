@@ -36,6 +36,7 @@ THREE.LensFlare = LensFlare;
 /**
  * LensFlare flare constructor.
  *
+ * @class LensFlare.Flare
  * @param {Texture} texture Texture to be used for the new layer.
  * @param {Number} size Size in pixels (-1 = use texture.width)
  * @param {Number} distance Distance (0-1) from light source (0=at light source)
@@ -121,18 +122,6 @@ LensFlare.prototype.add = function(texture, size, distance, blending, color, opa
 	distance = Math.min(distance, Math.max(0, distance));
 
 	this.lensFlares.push(new LensFlare.Flare(texture, size, distance, blending, color, opacity));
-
-	/*this.lensFlares.push({
-		texture: texture,
-		size: size,
-		distance: distance,
-		x: 0, y: 0, z: 0, //Screen position (-1 => 1) z = 0 is in front z = 1 is back
-		scale: 1,
-		rotation: 0,
-		opacity: opacity,
-		color: color,
-		blending: blending
-	});*/
 };
 
 /**
@@ -182,17 +171,14 @@ LensFlare.prototype.toJSON = function(meta)
 			flare.size = self.lensFlares[i].size;
 			flare.distance = self.lensFlares[i].distance;
 			flare.opacity = self.lensFlares[i].opacity;
-			flare.color = self.lensFlares[i].color;
+			flare.color = self.lensFlares[i].color.getHex();
 			flare.blending = self.lensFlares[i].blending;
 
 			lensFlares.push(flare);
 		}
 	});
 
-	data.positionScreen = this.positionScreen.toArray();
-	data.lensFlares = lensFlares;
-
-	console.log(data);
+	data.object.lensFlares = lensFlares;
 
 	return data;
 };
