@@ -5,7 +5,7 @@
 		"filePreviewSize": 70,
 		"showStats": false,
 		"showUUID": false,
-		"showType": false
+		"showType": true
 	},
 	"editor": {
 		"angleFormat": 0,
