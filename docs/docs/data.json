@@ -331,6 +331,16 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\objects\\misc\\LensFlare.js": {
+            "name": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
+            "modules": {},
+            "classes": {
+                "LensFlare": 1,
+                "LensFlare.Flare": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js": {
             "name": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "modules": {
@@ -922,13 +932,15 @@
             "elements": {},
             "classes": {
                 "Container": 1,
-                "CubeCamera": 1
+                "CubeCamera": 1,
+                "LensFlare": 1,
+                "LensFlare.Flare": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\core\\objects\\misc\\CubeCamera.js",
-            "line": 3,
+            "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
+            "line": 36,
             "description": "Containers are used to group objects together."
         },
         "Particles": {
@@ -2019,6 +2031,68 @@
             "author": "alteredq",
             "is_constructor": 1,
             "extends": "{Object3D}"
+        },
+        "LensFlare": {
+            "name": "LensFlare",
+            "shortname": "LensFlare",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Misc",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
+            "line": 3,
+            "description": "LensFlare object can be used to simulate lens flare from lights, the LensFlare object stores an array of textures with distance and dimension information.\n\nWorks with perspective and orthographic cameras.",
+            "is_constructor": 1,
+            "author": "tentone"
+        },
+        "LensFlare.Flare": {
+            "name": "LensFlare.Flare",
+            "shortname": "LensFlare.Flare",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Misc",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
+            "line": 36,
+            "description": "LensFlare flare constructor.",
+            "params": [
+                {
+                    "name": "texture",
+                    "description": "Texture to be used for the new layer.",
+                    "type": "Texture"
+                },
+                {
+                    "name": "size",
+                    "description": "Size in pixels (-1 = use texture.width)",
+                    "type": "Number"
+                },
+                {
+                    "name": "distance",
+                    "description": "Distance (0-1) from light source (0=at light source)",
+                    "type": "Number"
+                },
+                {
+                    "name": "blending",
+                    "description": "Blending mode to be used.",
+                    "type": "Number"
+                },
+                {
+                    "name": "color",
+                    "description": "Texture color",
+                    "type": "Color"
+                },
+                {
+                    "name": "opacity",
+                    "description": "Texture opacity",
+                    "type": "Number"
+                }
+            ]
         },
         "ParticleEmitter": {
             "name": "ParticleEmitter",
@@ -7972,6 +8046,96 @@
                 "type": "Object"
             },
             "class": "CubeCamera",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
+            "line": 81,
+            "description": "Copy lensflare object data to this.",
+            "itemtype": "method",
+            "name": "copy",
+            "params": [
+                {
+                    "name": "source",
+                    "description": "Source object.",
+                    "type": "Object3D"
+                }
+            ],
+            "return": {
+                "description": "Self for chaining.",
+                "type": "LensFlare"
+            },
+            "class": "LensFlare.Flare",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
+            "line": 103,
+            "description": "Add texture to the lensFlare object.",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "texture",
+                    "description": "Texture to be used for the new layer.",
+                    "type": "Texture"
+                },
+                {
+                    "name": "size",
+                    "description": "Size in pixels (-1 = use texture.width)",
+                    "type": "Number"
+                },
+                {
+                    "name": "distance",
+                    "description": "Distance (0-1) from light source (0=at light source)",
+                    "type": "Number"
+                },
+                {
+                    "name": "blending",
+                    "description": "Blending mode to be used.",
+                    "type": "Number"
+                },
+                {
+                    "name": "color",
+                    "description": "Texture color",
+                    "type": "Color"
+                },
+                {
+                    "name": "opacity",
+                    "description": "Texture opacity",
+                    "type": "Number"
+                }
+            ],
+            "class": "LensFlare.Flare",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
+            "line": 127,
+            "description": "Update lens flares update positions on all flares based on the screen position\nSet myLensFlare.customUpdateCallback to alter the flares in your project specific way.",
+            "itemtype": "method",
+            "name": "updateLensFlares",
+            "class": "LensFlare.Flare",
+            "module": "Misc"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\misc\\LensFlare.js",
+            "line": 151,
+            "description": "Serialize lensflare data to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Metadata.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Serialized data.",
+                "type": "Object"
+            },
+            "class": "LensFlare.Flare",
             "module": "Misc"
         },
         {
