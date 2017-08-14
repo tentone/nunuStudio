@@ -99,6 +99,7 @@ include("core/objects/spine/SpineTexture.js");
 include("core/objects/particle/ParticleEmitter.js");
 include("core/objects/misc/Container.js");
 include("core/objects/misc/CubeCamera.js");
+include("core/objects/misc/LensFlare.js");
 include("core/objects/animation/Skeleton.js");
 include("core/objects/Program.js");
 include("core/objects/Scene.js");
@@ -871,6 +872,14 @@ Editor.createDefaultResouces = function()
 	
 	Editor.defaultSpriteMaterial = new THREE.SpriteMaterial({map: Editor.defaultTexture, color: 0xffffff});
 	Editor.defaultSpriteMaterial.name = "default";
+
+	Editor.defaultTextureLensFlare = [];
+	for(var i = 0; i < 4; i++)
+	{
+		var texture = new Texture(new Image(Editor.filePath + "lensflare/lensflare" + i + ".png"));
+		texture.name = "lensflare" + i;
+		Editor.defaultTextureLensFlare.push(texture);
+	}
 };
 
 //Select tool to manipulate objects
