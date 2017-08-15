@@ -624,6 +624,46 @@ Interface.initialize = function()
 		}
 	}, Editor.filePath + "icons/misc/scene.png");
 
+	//Export GLTF
+	exportMenu.addOption("GLTF", function()
+	{
+		if(Nunu.runningOnDesktop())
+		{
+			FileSystem.chooseFile(function(files)
+			{
+				if(files.length > 0)
+				{
+					var renderer = new THREE.WebGLRenderer();
+					var exporter = new THREE.GLTFExporter(renderer);
+					exporter.parse([Editor.program.scene], function(result)
+					{
+						var data = JSON.stringify(result, null, 2);
+						FileSystem.writeFile(files[0].path, data);
+
+						renderer.dispose();
+						renderer.forceContextLoss();
+					});
+				}
+			}, ".gltf", true);
+		}
+		else
+		{
+			FileSystem.chooseFileName(function(fname)
+			{
+				var renderer = new THREE.WebGLRenderer();
+				var exporter = new THREE.GLTFExporter(renderer);
+				exporter.parse([Editor.program.scene], function(result)
+				{
+					var data = JSON.stringify(result, null, 2);
+					FileSystem.writeFile(fname, data);
+
+					renderer.dispose();
+					renderer.forceContextLoss();
+				})
+			}, ".gltf");
+		}
+	}, Editor.filePath + "icons/misc/scene.png");
+
 	//Export STL
 	exportMenu.addOption("STL", function()
 	{
