@@ -176,6 +176,7 @@ include("lib/three/loaders/TGALoader.js");
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
 include("lib/three/exporters/STLBinaryExporter.js");
+include("lib/three/exporters/GLTFExporter.js");
 
 include("lib/jscookie.min.js");
 include("lib/jshint.min.js");
