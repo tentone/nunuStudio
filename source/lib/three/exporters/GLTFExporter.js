@@ -233,7 +233,7 @@ THREE.GLTFExporter.prototype = {
 
 			} else {
 
-				throw new Error( 'THREE.GLTF2Exporter: Unsupported bufferAttribute component type.' );
+				throw new Error( 'THREE.GLTFExporter: Unsupported bufferAttribute component type.' );
 
 			}
 
@@ -395,8 +395,10 @@ THREE.GLTFExporter.prototype = {
 			if ( material.map ) {
 
 				gltfMaterial.pbrMetallicRoughness.baseColorTexture = {
+
 					index: processTexture(material.map),
-					texCoord: 0
+					texCoord: 0 // @FIXME
+
 				};
 
 			}
@@ -420,8 +422,10 @@ THREE.GLTFExporter.prototype = {
 				if ( material.emissiveMap ) {
 
 					gltfMaterial.emissiveTexture = {
-						index: processTexture(material.emissiveMap),
-						texCoord: 0
+
+						index: processTexture(material.emissiveMap ),
+						texCoord: 0 // @FIXME
+
 					};
 
 				}
@@ -432,8 +436,10 @@ THREE.GLTFExporter.prototype = {
 			if ( material.normalMap ) {
 
 				gltfMaterial.normalTexture = {
-					index: processTexture(material.normalMap),
-					texCoord: 0
+
+					index: processTexture(material.normalMap ),
+					texCoord: 0 // @FIXME
+
 				};
 
 			}
@@ -442,8 +448,10 @@ THREE.GLTFExporter.prototype = {
 			if ( material.aoMap ) {
 
 				gltfMaterial.occlusionTexture = {
-					index: processTexture(material.aoMap),
-					texCoord: 0
+
+					index: processTexture(material.aoMap ),
+					texCoord: 0 // @FIXME
+
 				};
 
 			}
@@ -790,20 +798,55 @@ THREE.GLTFExporter.prototype = {
 
 		}
 
-		// Process the scene/s
-		if ( input instanceof Array ) {
+		/**
+		 * Creates a THREE.Scene to hold a list of objects and parse it
+		 * @param  {Array} objects List of objects to process
+		 */
+		function processObjects ( objects ) {
 
-			for ( i = 0; i < input.length; i++ ) {
+			var scene = new THREE.Scene();
+			scene.name = 'AuxScene';
 
-				processScene( input[ i ] );
+			for ( var i = 0; i < objects.length; i++ ) {
+
+				// We push directly to children instead of calling `add` to prevent
+				// modify the .parent and break its original scene and hierarchy
+				scene.children.push( objects[ i ] );
 
 			}
 
-		} else {
-
-			processScene( input );
+			processScene( scene );
 
 		}
+
+		function processInput( input ) {
+
+			input = input instanceof Array ? input : [ input ];
+
+			var objectsWithoutScene = [];
+			for ( i = 0; i < input.length; i++ ) {
+
+				if ( input[ i ] instanceof THREE.Scene ) {
+
+					processScene( input[ i ] );
+
+				} else {
+
+					objectsWithoutScene.push( input[ i ] );
+
+				}
+
+			}
+
+			if ( objectsWithoutScene.length > 0 ) {
+
+				processObjects( objectsWithoutScene );
+
+			}
+
+		}
+
+		processInput( input );
 
 		// Generate buffer
 		// Create a new blob with all the dataviews from the buffers

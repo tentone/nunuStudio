@@ -162,7 +162,7 @@ include("lib/three/loaders/3MFLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/ColladaLoader2.js");
 include("lib/three/loaders/FBXLoader.js");
-include("lib/three/loaders/GLTF2Loader.js");
+include("lib/three/loaders/GLTFLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/OBJLoader2.js");
@@ -1430,7 +1430,7 @@ Editor.loadModel = function(file, onLoad)
 			{
 				try
 				{
-					var loader = new THREE.GLTF2Loader();
+					var loader = new THREE.GLTFLoader();
 					loader.parse(reader.result, path, function(gltf)
 					{
 						//console.log(gltf);
