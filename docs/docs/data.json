@@ -940,7 +940,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 36,
+            "line": 38,
             "description": "Containers are used to group objects together."
         },
         "Particles": {
@@ -2059,7 +2059,7 @@
             "module": "Misc",
             "namespace": "",
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 36,
+            "line": 38,
             "description": "LensFlare flare constructor.",
             "params": [
                 {
@@ -8050,7 +8050,7 @@
         },
         {
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 81,
+            "line": 83,
             "description": "Copy lensflare object data to this.",
             "itemtype": "method",
             "name": "copy",
@@ -8070,7 +8070,7 @@
         },
         {
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 103,
+            "line": 105,
             "description": "Add texture to the lensFlare object.",
             "itemtype": "method",
             "name": "add",
@@ -8111,7 +8111,7 @@
         },
         {
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 127,
+            "line": 129,
             "description": "Update lens flares update positions on all flares based on the screen position\nSet myLensFlare.customUpdateCallback to alter the flares in your project specific way.",
             "itemtype": "method",
             "name": "updateLensFlares",
@@ -8120,7 +8120,7 @@
         },
         {
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 151,
+            "line": 153,
             "description": "Serialize lensflare data to json.",
             "itemtype": "method",
             "name": "toJSON",
