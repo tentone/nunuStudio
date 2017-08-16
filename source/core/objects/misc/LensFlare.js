@@ -16,6 +16,8 @@ function LensFlare(texture, size, distance, blending, color)
 	THREE.Object3D.call( this );
 
 	this.type = "LensFlare";
+	this.name = "lensflare";
+
 	this.lensFlares = [];
 
 	this.positionScreen = new Vector3();
@@ -23,7 +25,7 @@ function LensFlare(texture, size, distance, blending, color)
 
 	if(texture !== undefined)
 	{
-		this.add(texture, size, distance, blending, color);
+		this.addFlare(texture, size, distance, blending, color);
 	}
 }
 
@@ -111,7 +113,7 @@ LensFlare.prototype.copy = function (source)
  * @param {Color} color Texture color
  * @param {Number} opacity Texture opacity
  */
-LensFlare.prototype.add = function(texture, size, distance, blending, color, opacity)
+LensFlare.prototype.addFlare = function(texture, size, distance, blending, color, opacity)
 {
 	if(size === undefined) size = -1;
 	if(distance === undefined) distance = 0;

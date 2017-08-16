@@ -658,11 +658,9 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		case "LensFlare":
 			object = new LensFlare();
 			
-			console.log(data);
-
 			for(var i = 0; i < data.lensFlares.length; i++)
 			{
-				object.add(getTexture(data.lensFlares[i].texture), data.lensFlares[i].size, data.lensFlares[i].distance, data.lensFlares[i].blending, new THREE.Color(data.lensFlares[i].color), data.lensFlares[i].opacity)
+				object.addFlare(getTexture(data.lensFlares[i].texture), data.lensFlares[i].size, data.lensFlares[i].distance, data.lensFlares[i].blending, new THREE.Color(data.lensFlares[i].color), data.lensFlares[i].opacity)
 			}
 
 			break;
