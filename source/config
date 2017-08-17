@@ -1,0 +1,51 @@
+{
+	"general": {
+		"autoUpdate": true,
+		"theme": "dark",
+		"filePreviewSize": 70,
+		"showStats": false,
+		"showUUID": false,
+		"showType": true
+	},
+	"editor": {
+		"angleFormat": 0,
+		"snap": false,
+		"snapAngle": 0.1,
+		"gridSize": 500,
+		"gridSpacing": 5,
+		"gridEnabled": true,
+		"axisEnabled": true,
+		"cameraPreviewEnabled": true,
+		"cameraPreviewPercentage": 0.35,
+		"cameraPreviewPosition": 23,
+		"lockMouse": true,
+		"transformationSpace": "world",
+		"navigation": 10,
+		"invertNavigation": false,
+		"keyboardNavigation": false,
+		"keyboardNavigationSpeed": 0.5,
+		"mouseLookSensitivity": 0.002,
+		"mouseMoveSpeed": 0.001,
+		"mouseWheelSensitivity": 0.0005
+	},
+	"render": {
+		"followProject": true,
+		"toneMapping": 1,
+		"toneMappingExposure": 1,
+		"toneMappingWhitePoint": 1,
+		"antialiasing": true,
+		"shadows": true,
+		"shadowsType": 2
+	},
+	"code": {
+		"theme": "monokai",
+		"keymap": "sublime",
+		"fontSize": 14,
+		"lineNumbers": true,
+		"lineWrapping": false,
+		"autoCloseBrackets": true,
+		"highlightActiveLine": false,
+		"showMatchesOnScrollbar": true,
+		"dragFiles": true
+	}
+}
