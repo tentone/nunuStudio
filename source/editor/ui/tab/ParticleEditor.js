@@ -30,7 +30,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.renderer.shadowMap.enabled = false;
 	
 	//Particle preview
-	this.scene = new Scene();
+	this.scene = new THREE.Scene();
 	this.scene.add(new AmbientLight(0xffffff));
 	var grid = new THREE.GridHelper(50, 50, 0x888888);
 	grid.material.depthWrite = false;
