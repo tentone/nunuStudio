@@ -80,11 +80,7 @@ CameraEditor.prototype.update = function()
 {
 	if(this.camera !== null)
 	{
-		var scene = this.camera.parent;
-		while(!scene instanceof Scene)
-		{
-			scene = scene.parent;
-		}
+		var scene = ObjectUtils.getScene(this.camera);
 
 		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
 		this.camera.updateProjectionMatrix();

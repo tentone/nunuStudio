@@ -12370,7 +12370,7 @@
         {
             "file": "../../source/core/utils/ObjectUtils.js",
             "line": 217,
-            "description": "Get object scene.",
+            "description": "Get scene that contains this object.",
             "itemtype": "method",
             "name": "getScene",
             "params": [
@@ -12389,7 +12389,7 @@
         },
         {
             "file": "../../source/core/utils/ObjectUtils.js",
-            "line": 240,
+            "line": 241,
             "description": "Get object tree root.\n\nFor a object placed inside a running scene the root is always the program.",
             "itemtype": "method",
             "name": "getRoot",
@@ -12409,7 +12409,7 @@
         },
         {
             "file": "../../source/core/utils/ObjectUtils.js",
-            "line": 261,
+            "line": 262,
             "description": "Set object and all its children matrixAutoUpdate value",
             "itemtype": "method",
             "name": "setMatrixAutoUpdate",
@@ -12430,7 +12430,7 @@
         },
         {
             "file": "../../source/core/utils/ObjectUtils.js",
-            "line": 278,
+            "line": 279,
             "description": "Set object and all children to receive shadows",
             "itemtype": "method",
             "name": "setShadowReceiving",
@@ -12451,7 +12451,7 @@
         },
         {
             "file": "../../source/core/utils/ObjectUtils.js",
-            "line": 295,
+            "line": 296,
             "description": "Set object and all children to cast shadows",
             "itemtype": "method",
             "name": "setShadowCasting",
@@ -12472,7 +12472,7 @@
         },
         {
             "file": "../../source/core/utils/ObjectUtils.js",
-            "line": 312,
+            "line": 313,
             "description": "Check if object is child of another object",
             "itemtype": "method",
             "name": "isChildOf",

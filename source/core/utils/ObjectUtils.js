@@ -215,7 +215,7 @@ ObjectUtils.getTextures = function(obj, textures)
 };
 
 /**
- * Get object scene.
+ * Get scene that contains this object.
  *
  * @method getScene
  * @param {Object3D} obj
@@ -228,6 +228,7 @@ ObjectUtils.getScene = function(obj)
 	while(node.parent !== null)
 	{
 		node = node.parent;
+
 		if(node instanceof Scene)
 		{
 			return node;
