@@ -9,15 +9,11 @@ function ScriptEditor(parent, closeable, container, index)
 	{
 		value: "",
 		matchBrackets: true,
-		indentWithTabs: true,
-		indentUnit: 4,
-		tabSize: 4,
 		hintOptions:
 		{
 			hint: CodeMirror.hint.anyword,
 			completeSingle: false
 		},
-		lint: true,
 		gutters: ["CodeMirror-lint-markers"]
 	});
 
@@ -153,6 +149,7 @@ ScriptEditor.prototype.updateSettings = function()
 {
 	this.setFontSize(Settings.code.fontSize);
 
+	this.code.setOption("lint", {options: Settings.jslint});
 	this.code.setOption("theme", Settings.code.theme);
 	this.code.setOption("lineNumbers", Settings.code.lineNumbers);
 	this.code.setOption("lineWrapping", Settings.code.lineWrapping);
@@ -161,6 +158,9 @@ ScriptEditor.prototype.updateSettings = function()
 	this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
 	this.code.setOption("showMatchesOnScrollbar", Settings.code.showMatchesOnScrollbar);
 	this.code.setOption("dragDrop", Settings.code.dragFiles);
+	this.code.setOption("indentWithTabs", Settings.code.indentWithTabs);
+	this.code.setOption("tabSize", Settings.code.tabSize);
+	this.code.setOption("indentUnit", Settings.code.indentUnit);
 };
 
 //Set code editor font size
