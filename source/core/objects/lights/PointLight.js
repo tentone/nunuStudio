@@ -22,9 +22,9 @@ function PointLight(hex, intensity, distance, decay)
 	
 	this.castShadow = true;
 
-	this.shadow.camera.near = 0.05;
-	this.shadow.camera.far = 5000;
-	this.shadow.bias = 0.01;
+	this.shadow.camera.near = 0.1;
+	this.shadow.camera.far = 1000;
+	this.shadow.bias = 0.0;
 }
 
 THREE._PointLight = THREE.PointLight;
