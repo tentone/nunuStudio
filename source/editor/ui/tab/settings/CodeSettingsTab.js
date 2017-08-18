@@ -128,6 +128,44 @@ function CodeSettingsTab(parent, closeable, container, index)
 		Settings.code.dragFiles = self.dragFiles.getValue();
 	});
 	this.form.add(this.dragFiles);
+	this.form.nextRow();
+
+	//Indent with tabs
+	this.form.addText("Indent with tabs");
+	this.indentWithTabs = new CheckBox(this.form.element);
+	this.indentWithTabs.size.set(15, 15);
+	this.indentWithTabs.setOnChange(function()
+	{
+		Settings.code.indentWithTabs = self.indentWithTabs.getValue();
+	});
+	this.form.add(this.indentWithTabs);
+	this.form.nextRow();
+
+	//Tab size
+	this.form.addText("Tab size");
+	this.tabSize = new NumberBox(this.form.element);
+	this.tabSize.size.set(60, 18);
+	this.tabSize.setRange(1, 100);
+	this.tabSize.setStep(1);
+	this.tabSize.setOnChange(function()
+	{
+		Settings.code.tabSize = self.tabSize.getValue();
+	});
+	this.form.add(this.tabSize);
+	this.form.nextRow();
+
+	//Indent units
+	this.form.addText("Indent Unit");
+	this.indentUnit = new NumberBox(this.form.element);
+	this.indentUnit.size.set(60, 18);
+	this.indentUnit.setRange(1, 100);
+	this.indentUnit.setStep(1);
+	this.indentUnit.setOnChange(function()
+	{
+		Settings.code.indentUnit = self.indentUnit.getValue();
+	});
+	this.form.add(this.indentUnit);
+	this.form.nextRow();
 
 	//Update form
 	this.form.updateInterface();
@@ -147,6 +185,9 @@ CodeSettingsTab.prototype.activate = function()
 	this.codeHighlightActiveLine.setValue(Settings.code.highlightActiveLine);
 	this.showMatchesOnScrollbar.setValue(Settings.code.showMatchesOnScrollbar);
 	this.dragFiles.setValue(Settings.code.dragFiles);
+	this.indentWithTabs.setValue(Settings.code.indentWithTabs);
+	this.tabSize.setValue(Settings.code.tabSize);
+	this.indentUnit.setValue(Settings.code.indentUnit);
 }; 
 
 //Update division Size
