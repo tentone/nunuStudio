@@ -31,7 +31,7 @@ Model.fileIsModel = function(file)
 	{
 		file = file.name.toLocaleLowerCase();
 
-		return file.endsWith("obj") || file.endsWith("3ds") || file.endsWith("dae") || file.endsWith("gltf") || file.endsWith("glb") || file.endsWith("3mf") || file.endsWith("awd") || file.endsWith("ply") || file.endsWith("vtk") || file.endsWith("vtp") || file.endsWith("wrl") || file.endsWith("vrml") || file.endsWith("fbx") || file.endsWith("pcd") || file.endsWith("stl") || file.endsWith("json");
+		return file.endsWith("svg") || file.endsWith("obj") || file.endsWith("3ds") || file.endsWith("dae") || file.endsWith("gltf") || file.endsWith("glb") || file.endsWith("3mf") || file.endsWith("awd") || file.endsWith("ply") || file.endsWith("vtk") || file.endsWith("vtp") || file.endsWith("wrl") || file.endsWith("vrml") || file.endsWith("fbx") || file.endsWith("pcd") || file.endsWith("stl") || file.endsWith("json");
 	}
 
 	return false;

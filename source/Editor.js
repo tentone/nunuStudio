@@ -169,9 +169,10 @@ include("lib/three/loaders/OBJLoader2.js");
 include("lib/three/loaders/PCDLoader.js");
 include("lib/three/loaders/PLYLoader.js");
 include("lib/three/loaders/STLLoader.js");
+include("lib/three/loaders/SVGLoader.js");
+include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
-include("lib/three/loaders/TGALoader.js");
 
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
@@ -1373,6 +1374,16 @@ Editor.loadModel = function(file, onLoad)
 				console.error("nunuStudio: Error loading file", e);
 			}
 
+		}
+		//SVG
+		else if(extension === "svg")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				//TODO <ADD CODE HERE>
+			}
+			reader.readAsText(file);
 		}
 		//3DS
 		else if(extension === "3ds")
