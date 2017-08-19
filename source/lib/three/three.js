@@ -187,7 +187,7 @@
 
 	} );
 
-	var REVISION = '87dev';
+	var REVISION = '87';
 	var MOUSE = { LEFT: 0, MIDDLE: 1, RIGHT: 2 };
 	var CullFaceNone = 0;
 	var CullFaceBack = 1;
@@ -21886,6 +21886,7 @@
 
 			if ( isAnimating ) return;
 			( vr.getDevice() || window ).requestAnimationFrame( loop );
+			isAnimating = true;
 
 		}
 
@@ -22682,10 +22683,6 @@
 
 					}
 
-				} else if ( material.isMeshNormalMaterial ) {
-
-					refreshUniformsCommon( m_uniforms, material );
-
 				} else if ( material.isMeshDepthMaterial ) {
 
 					refreshUniformsCommon( m_uniforms, material );
@@ -22698,6 +22695,7 @@
 
 				} else if ( material.isMeshNormalMaterial ) {
 
+					refreshUniformsCommon( m_uniforms, material );
 					refreshUniformsNormal( m_uniforms, material );
 
 				} else if ( material.isLineBasicMaterial ) {
@@ -43344,7 +43342,7 @@
 			set: function ( value ) {
 
 				console.warn( 'THREE.' + this.type + ': .shading has been removed. Use the boolean .flatShading instead.' );
-				this.flatShading = ( value === THREE.FlatShading ) ? true : false;
+				this.flatShading = ( value === FlatShading );
 
 			}
 		}
