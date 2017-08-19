@@ -3,7 +3,7 @@
 		"autoUpdate": true,
 		"theme": "dark",
 		"filePreviewSize": 70,
-		"showStats": false,
+		"showStats": true,
 		"showUUID": false,
 		"showType": true
 	},
@@ -40,7 +40,7 @@
 	"code": {
 		"theme": "monokai",
 		"keymap": "sublime",
-		"fontSize": 14,
+		"fontSize": 12.410000000000002,
 		"lineNumbers": true,
 		"lineWrapping": false,
 		"autoCloseBrackets": true,
