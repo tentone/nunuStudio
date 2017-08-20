@@ -2,7 +2,7 @@
 
 function BasicMaterialEditor(parent, closeable, container, index)
 {
-	MaterialEditor.call(this, parent, closeable, container, index);
+	MeshMaterialEditor.call(this, parent, closeable, container, index);
 
 	var self = this;
 
@@ -92,11 +92,11 @@ function BasicMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-BasicMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
+BasicMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
 
-BasicMaterialEditor.prototype.attach = function(material, materialFile)
+BasicMaterialEditor.prototype.attach = function(material, asset)
 {
-	MaterialEditor.prototype.attach.call(this, material, materialFile);
+	MeshMaterialEditor.prototype.attach.call(this, material, asset);
 
 	this.skinning.setValue(material.skinning);
 	this.morphTargets.setValue(material.morphTargets);

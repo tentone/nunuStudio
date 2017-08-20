@@ -60,9 +60,9 @@ function PhysicalMaterialEditor(parent, closeable, container, index)
 
 PhysicalMaterialEditor.prototype = Object.create(StandardMaterialEditor.prototype);
 
-PhysicalMaterialEditor.prototype.attach = function(material, materialFile)
+PhysicalMaterialEditor.prototype.attach = function(material, asset)
 {
-	StandardMaterialEditor.prototype.attach.call(this, material, materialFile);
+	StandardMaterialEditor.prototype.attach.call(this, material, asset);
 
 	this.clearCoat.setValue(material.clearCoat);
 	this.clearCoatRoughness.setValue(material.clearCoatRoughness);

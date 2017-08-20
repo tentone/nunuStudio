@@ -1,6 +1,6 @@
 "use strict";
 
-function PointMaterialEditor(parent, closeable, container, index)
+function PointsMaterialEditor(parent, closeable, container, index)
 {
 	MaterialEditor.call(this, parent, closeable, container, index);
 
@@ -34,11 +34,11 @@ function PointMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-PointMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
+PointsMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-PointMaterialEditor.prototype.attach = function(material, materialFile)
+PointsMaterialEditor.prototype.attach = function(material, asset)
 {
-	MaterialEditor.prototype.attach.call(this, material, materialFile);
+	MaterialEditor.prototype.attach.call(this, material, asset);
 
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.map.setValue(material.map);

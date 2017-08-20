@@ -6,6 +6,11 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 
 	var self = this;
 
+	//Preview scene
+	this.sprite = new THREE.Sprite(null);
+	this.sprite.position.set(0, 0, -1.5);
+	this.scene.add(this.sprite);
+
 	//Color
 	this.form.addText("Color");
 	this.color = new ColorChooser(this.form.element);
@@ -53,9 +58,11 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 
 SpriteMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-SpriteMaterialEditor.prototype.attach = function(material, materialFile)
+SpriteMaterialEditor.prototype.attach = function(material, asset)
 {
-	MaterialEditor.prototype.attach.call(this, material, materialFile);
+	MaterialEditor.prototype.attach.call(this, material, asset);
+
+	this.sprite.material = material;
 
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.rotation.setValue(material.rotation);

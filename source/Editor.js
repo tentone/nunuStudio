@@ -255,14 +255,16 @@ include("editor/ui/tab/settings/RenderSettingsTab.js");
 include("editor/ui/tab/settings/JSHintSettingsTab.js");
 
 include("editor/ui/tab/material/MaterialEditor.js");
-include("editor/ui/tab/material/PhongMaterialEditor.js");
-include("editor/ui/tab/material/LambertMaterialEditor.js");
-include("editor/ui/tab/material/BasicMaterialEditor.js");
-include("editor/ui/tab/material/StandardMaterialEditor.js");
-include("editor/ui/tab/material/SpriteMaterialEditor.js");
-include("editor/ui/tab/material/PointMaterialEditor.js");
+include("editor/ui/tab/material/PointsMaterialEditor.js");
 include("editor/ui/tab/material/ShaderMaterialEditor.js");
-include("editor/ui/tab/material/PhysicalMaterialEditor.js");
+include("editor/ui/tab/material/SpriteMaterialEditor.js");
+include("editor/ui/tab/material/line/LineBasicMaterialEditor.js");
+include("editor/ui/tab/material/mesh/MeshMaterialEditor.js");
+include("editor/ui/tab/material/mesh/PhongMaterialEditor.js");
+include("editor/ui/tab/material/mesh/LambertMaterialEditor.js");
+include("editor/ui/tab/material/mesh/BasicMaterialEditor.js");
+include("editor/ui/tab/material/mesh/StandardMaterialEditor.js");
+include("editor/ui/tab/material/mesh/PhysicalMaterialEditor.js");
 
 include("editor/ui/tab/texture/TextureEditor.js");
 include("editor/ui/tab/texture/VideoTextureEditor.js");
@@ -1381,7 +1383,17 @@ Editor.loadModel = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				//TODO <ADD CODE HERE>
+				try
+				{
+					console.log(reader.result);
+
+					//TODO <ADD CODE HERE>
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
 			}
 			reader.readAsText(file);
 		}
