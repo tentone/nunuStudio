@@ -105,9 +105,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Test depth
-	this.form.addText("Depth");
+	this.form.addText("Depth Test");
 	this.depthTest = new CheckBox(this.form.element);
-	this.form.addText("Test", true);
 	this.depthTest.size.set(15, 15);
 	this.depthTest.setOnChange(function()
 	{
@@ -118,10 +117,11 @@ function MaterialEditor(parent, closeable, container, index)
 		}
 	});
 	this.form.add(this.depthTest);
-
+	this.form.nextRow();
+	
 	//Write depth
+	this.form.addText("Depth Write");
 	this.depthWrite = new CheckBox(this.form.element);
-	this.form.addText("Write", true);
 	this.depthWrite.size.set(15, 15);
 	this.depthWrite.setOnChange(function()
 	{
@@ -204,6 +204,13 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.blending);
 	this.form.nextRow();
 }
+
+MaterialEditor.geometries = [
+	["Sphere", new THREE.SphereBufferGeometry(1, 64, 64)],
+	["Torus", new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64)],
+	["Cube", new THREE.BoxBufferGeometry(1, 1, 1, 32, 32, 32)],
+	["Torus Knot", new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64)]
+];
 
 MaterialEditor.prototype = Object.create(TabElement.prototype);
 
