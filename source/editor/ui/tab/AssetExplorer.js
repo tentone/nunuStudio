@@ -263,6 +263,30 @@ function AssetExplorer(parent, closeable, container, index)
 		Editor.updateObjectViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
+	material.addOption("Points material", function()
+	{
+		var material = new THREE.PointsMaterial();
+		material.name = "points";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+
+	material.addOption("Line Basic material", function()
+	{
+		var material = new THREE.LineBasicMaterial();
+		material.name = "line";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+
+	material.addOption("Line Dashed material", function()
+	{
+		var material = new THREE.LineDashedMaterial();
+		material.name = "line";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+
 	material.addOption("Shader material", function()
 	{
 		var material = new THREE.ShaderMaterial();
@@ -288,7 +312,15 @@ function AssetExplorer(parent, closeable, container, index)
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
 	}, Editor.filePath + "icons/misc/material.png");
-	
+
+	others.addOption("Distance material", function()
+	{
+		var material = new THREE.MeshDistanceMaterial();
+		material.name = "distance";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+
 	//Files in explorer
 	this.filesSize = new THREE.Vector2(70, 70);
 	this.filesSpacing = 0;

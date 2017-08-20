@@ -52,26 +52,10 @@ function MaterialEditor(parent, closeable, container, index)
 	this.renderer.shadowMap.type = Settings.render.shadowsType;
 
 	//Camera
-	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x/this.canvas.size.y);
+	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x / this.canvas.size.y);
 
 	//Preview scene
 	this.scene = new THREE.Scene();
-	this.sky = new Sky();
-	this.scene.add(this.sky);
-	this.pointLight = new PointLight(0x777777);
-	this.scene.add(this.pointLight);
-	this.ambientLight = new AmbientLight(0x555555);
-	this.scene.add(this.ambientLight);
-
-	this.mesh = new THREE.Mesh(new THREE.SphereBufferGeometry(1, 64, 64), null);
-	this.mesh.position.set(0, 0, -2.5);
-	this.mesh.visible = false;
-	this.scene.add(this.mesh);
-	
-	this.sprite = new THREE.Sprite(null);
-	this.sprite.position.set(0, 0, -1.5);
-	this.sprite.visible = false;
-	this.scene.add(this.sprite);
 
 	//Preview configuration
 	this.previewForm = new Form(this.preview.divB);
@@ -79,65 +63,6 @@ function MaterialEditor(parent, closeable, container, index)
 	this.previewForm.spacing.set(5, 5);
 	this.previewForm.addText("Configuration");
 	this.previewForm.nextRow();
-
-	//Test model
-	this.previewForm.addText("Test Model");
-	this.testModel = new DropdownList(this.previewForm.element);
-	this.testModel.size.set(100, 18);
-	this.testModel.addValue("Sphere", 0);
-	this.testModel.addValue("Torus", 1);
-	this.testModel.addValue("Cube", 2);
-	this.testModel.addValue("Torus Knot", 3);
-	this.testModel.setOnChange(function()
-	{
-		var value = self.testModel.getSelectedIndex();
-
-		//Sphere
-		if(value === 0)
-		{
-			self.mesh.geometry = new THREE.SphereBufferGeometry(1, 64, 64);
-		}
-		//Torus
-		else if(value === 1)
-		{
-			self.mesh.geometry = new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64);
-		}
-		//Cube
-		else if(value === 2)
-		{
-			self.mesh.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 32, 32, 32);
-		}
-		//Torus Knot
-		else if(value === 3)
-		{
-			self.mesh.geometry = new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64);
-		}
-	});
-	this.previewForm.add(this.testModel);
-	this.previewForm.nextRow();
-
-	//Sky
-	this.previewForm.addText("Sky");
-	this.skyEnabled = new CheckBox(this.previewForm.element);
-	this.skyEnabled.size.set(15, 15);
-	this.skyEnabled.setValue(true);
-	this.skyEnabled.setOnChange(function()
-	{
-		self.sky.visible = self.skyEnabled.getValue();
-	});
-	this.previewForm.add(this.skyEnabled);
-	this.previewForm.nextRow();
-
-	//Point Light
-	this.previewForm.addText("Point Light");
-	this.lightEnabled = new CheckBox(this.previewForm.element);
-	this.lightEnabled.size.set(15, 15);
-	this.lightEnabled.setValue(true);
-	this.lightEnabled.setOnChange(function()
-	{
-		self.pointLight.visible = self.lightEnabled.getValue();
-	});
-	this.previewForm.add(this.lightEnabled);
 
 	//Form
 	this.form = new Form(this.main.divB);
@@ -285,20 +210,6 @@ MaterialEditor.prototype = Object.create(TabElement.prototype);
 //Attach material to material editor
 MaterialEditor.prototype.attach = function(material, asset)
 {
-	//Check is if sprite material and ajust preview
-	if(material instanceof THREE.SpriteMaterial)
-	{
-		this.sprite.material = material;
-		this.sprite.visible = true;
-		this.mesh.visible = false;
-	}
-	else
-	{
-		this.mesh.material = material;
-		this.mesh.visible = true;
-		this.sprite.visible = false;
-	}
-
 	//Material asset
 	if(asset !== undefined)
 	{
@@ -387,16 +298,9 @@ MaterialEditor.prototype.update = function()
 	//Move material view
 	if(Editor.mouse.insideCanvas())
 	{
-		//Rotate object
-		if(Editor.mouse.buttonPressed(Mouse.LEFT))
-		{
-			var delta = new THREE.Quaternion();
-			delta.setFromEuler(new THREE.Euler(Editor.mouse.delta.y * 0.005, Editor.mouse.delta.x * 0.005, 0, 'XYZ'));
-			this.mesh.quaternion.multiplyQuaternions(delta, this.mesh.quaternion);
-		}
-
 		//Zoom
 		this.camera.position.z += Editor.mouse.wheel * 0.003;
+		
 		if(this.camera.position.z > 5)
 		{
 			this.camera.position.z = 5;

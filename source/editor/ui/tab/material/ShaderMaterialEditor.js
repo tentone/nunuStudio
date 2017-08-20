@@ -309,19 +309,8 @@ ShaderMaterialEditor.prototype.destroy = function()
 
 ShaderMaterialEditor.prototype.attach = function(material, asset)
 {
-	//Check is if sprite material and ajust preview
-	if(material instanceof THREE.SpriteMaterial)
-	{
-		this.sprite.material = material;
-		this.sprite.visible = true;
-		this.mesh.visible = false;
-	}
-	else
-	{
-		this.mesh.material = material;
-		this.mesh.visible = true;
-		this.sprite.visible = false;
-	}
+	//Attach Material
+	this.mesh.material = material;
 
 	//Material asset
 	if(asset !== undefined)
