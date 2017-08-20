@@ -7,8 +7,8 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	var self = this;
 	
 	//Skinning
-	this.skinning = new CheckBox(this.form.element);
 	this.form.addText("Skinning");
+	this.skinning = new CheckBox(this.form.element);
 	this.skinning.size.set(15, 15);
 	this.skinning.updateInterface();
 	this.skinning.setOnChange(function()
@@ -22,8 +22,8 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Morph targets
-	this.morphTargets = new CheckBox(this.form.element);
 	this.form.addText("Morph targets");
+	this.morphTargets = new CheckBox(this.form.element);
 	this.morphTargets.size.set(15, 15);
 	this.morphTargets.setOnChange(function()
 	{
@@ -36,8 +36,8 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Wireframe
-	this.wireframe = new CheckBox(this.form.element);
 	this.form.addText("Wireframe");
+	this.wireframe = new CheckBox(this.form.element);
 	this.wireframe.size.set(15, 15);
 	this.wireframe.setOnChange(function()
 	{

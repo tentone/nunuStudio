@@ -62,18 +62,8 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	sun.shadow.camera.top = 5;
 	sun.shadow.camera.bottom = -5;
 	this.scene.add(this.sky);
-	this.scene.add(new PointLight(0x666666));
-	this.scene.add(new AmbientLight(0x555555));
-
-	this.mesh = new THREE.Mesh(new THREE.SphereBufferGeometry(1, 64, 64), null);
-	this.mesh.position.set(0, 0, -2.5);
-	this.mesh.visible = false;
-	this.scene.add(this.mesh);
-	
-	this.sprite = new THREE.Sprite(null);
-	this.sprite.position.set(0, 0, -1.5);
-	this.sprite.visible = false;
-	this.scene.add(this.sprite);
+	this.scene.add(new THREE.PointLight(0x666666));
+	this.scene.add(new THREE.AmbientLight(0x555555));
 
 	//Preview configuration
 	this.previewForm = new Form(this.preview.divB);
@@ -82,44 +72,29 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.addText("Configuration");
 	this.previewForm.nextRow();
 
+	//Mesh
+	this.mesh = new THREE.Mesh(MaterialEditor.geometries[0][1], null);
+	this.mesh.position.set(0, 0, -2.5);
+	this.scene.add(this.mesh);
+	
 	//Test model
-	this.previewForm.addText("Test Model");
+	this.previewForm.addText("Model");
 	this.testModel = new DropdownList(this.previewForm.element);
 	this.testModel.size.set(100, 18);
-	this.testModel.addValue("Sphere", 0);
-	this.testModel.addValue("Torus", 1);
-	this.testModel.addValue("Cube", 2);
-	this.testModel.addValue("Torus Knot", 3);
+	for(var i = 0; i < MaterialEditor.geometries.length; i++)
+	{
+		this.testModel.addValue(MaterialEditor.geometries[i][0], i);
+	}
 	this.testModel.setOnChange(function()
 	{
 		var value = self.testModel.getSelectedIndex();
-
-		//Sphere
-		if(value === 0)
-		{
-			self.mesh.geometry = new THREE.SphereBufferGeometry(1, 64, 64);
-		}
-		//Torus
-		else if(value === 1)
-		{
-			self.mesh.geometry = new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64);
-		}
-		//Cube
-		else if(value === 2)
-		{
-			self.mesh.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 32, 32, 32);
-		}
-		//Torus Knot
-		else if(value === 3)
-		{
-			self.mesh.geometry = new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64);
-		}
+		self.mesh.geometry = MaterialEditor.geometries[value][1];
 	});
 	this.previewForm.add(this.testModel);
 	this.previewForm.nextRow();
 
 	//Sky
-	this.previewForm.addText("Enable sky");
+	this.previewForm.addText("Sky");
 	this.skyEnabled = new CheckBox(this.previewForm.element);
 	this.skyEnabled.size.set(15, 15);
 	this.skyEnabled.setValue(true);
@@ -129,6 +104,17 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	});
 	this.previewForm.add(this.skyEnabled);
 
+	//Point Light
+	this.previewForm.addText("Point Light");
+	this.lightEnabled = new CheckBox(this.previewForm.element);
+	this.lightEnabled.size.set(15, 15);
+	this.lightEnabled.setValue(true);
+	this.lightEnabled.setOnChange(function()
+	{
+		self.pointLight.visible = self.lightEnabled.getValue();
+	});
+	this.previewForm.add(this.lightEnabled);
+	
 	//Tab container
 	this.tab = new TabGroup(this.main.divB);
 	this.tab.element.style.backgroundColor = Editor.theme.barColor;
@@ -179,9 +165,8 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Test depth
-	this.form.addText("Depth");
+	this.form.addText("Depth Test");
 	this.depthTest = new CheckBox(this.form.element);
-	this.form.addText("Test", true);
 	this.depthTest.size.set(15, 15);
 	this.depthTest.setOnChange(function()
 	{
@@ -192,10 +177,11 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 		}
 	});
 	this.form.add(this.depthTest);
-
+	this.form.nextRow();
+	
 	//Write depth
+	this.form.addText("Depth Write");
 	this.depthWrite = new CheckBox(this.form.element);
-	this.form.addText("Write", true);
 	this.depthWrite.size.set(15, 15);
 	this.depthWrite.setOnChange(function()
 	{
@@ -209,9 +195,9 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Transparent
-	this.transparent = new CheckBox(this.form.element);
 	this.form.addText("Transparent");
-	this.transparent.size.set(200, 15);
+	this.transparent = new CheckBox(this.form.element);
+	this.transparent.size.set(15, 15);
 	this.transparent.setOnChange(function()
 	{
 		if(self.material !== null)

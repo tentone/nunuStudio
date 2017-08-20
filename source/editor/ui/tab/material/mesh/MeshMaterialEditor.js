@@ -15,7 +15,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.scene.add(this.ambientLight);
 
 	//Mesh
-	this.mesh = new THREE.Mesh(new THREE.SphereBufferGeometry(1, 64, 64), null);
+	this.mesh = new THREE.Mesh(MaterialEditor.geometries[0][1], null);
 	this.mesh.position.set(0, 0, -2.5);
 	this.scene.add(this.mesh);
 	
@@ -23,34 +23,14 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.addText("Model");
 	this.testModel = new DropdownList(this.previewForm.element);
 	this.testModel.size.set(100, 18);
-	this.testModel.addValue("Sphere", 0);
-	this.testModel.addValue("Torus", 1);
-	this.testModel.addValue("Cube", 2);
-	this.testModel.addValue("Torus Knot", 3);
+	for(var i = 0; i < MaterialEditor.geometries.length; i++)
+	{
+		this.testModel.addValue(MaterialEditor.geometries[i][0], i);
+	}
 	this.testModel.setOnChange(function()
 	{
 		var value = self.testModel.getSelectedIndex();
-
-		//Sphere
-		if(value === 0)
-		{
-			self.mesh.geometry = new THREE.SphereBufferGeometry(1, 64, 64);
-		}
-		//Torus
-		else if(value === 1)
-		{
-			self.mesh.geometry = new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64);
-		}
-		//Cube
-		else if(value === 2)
-		{
-			self.mesh.geometry = new THREE.BoxBufferGeometry(1, 1, 1, 32, 32, 32);
-		}
-		//Torus Knot
-		else if(value === 3)
-		{
-			self.mesh.geometry = new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64);
-		}
+		self.mesh.geometry = MaterialEditor.geometries[value][1];
 	});
 	this.previewForm.add(this.testModel);
 	this.previewForm.nextRow();
