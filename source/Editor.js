@@ -260,11 +260,11 @@ include("editor/ui/tab/material/ShaderMaterialEditor.js");
 include("editor/ui/tab/material/SpriteMaterialEditor.js");
 include("editor/ui/tab/material/line/LineBasicMaterialEditor.js");
 include("editor/ui/tab/material/mesh/MeshMaterialEditor.js");
-include("editor/ui/tab/material/mesh/PhongMaterialEditor.js");
-include("editor/ui/tab/material/mesh/LambertMaterialEditor.js");
-include("editor/ui/tab/material/mesh/BasicMaterialEditor.js");
-include("editor/ui/tab/material/mesh/StandardMaterialEditor.js");
-include("editor/ui/tab/material/mesh/PhysicalMaterialEditor.js");
+include("editor/ui/tab/material/mesh/MeshPhongMaterialEditor.js");
+include("editor/ui/tab/material/mesh/MeshLambertMaterialEditor.js");
+include("editor/ui/tab/material/mesh/MeshBasicMaterialEditor.js");
+include("editor/ui/tab/material/mesh/MeshStandardMaterialEditor.js");
+include("editor/ui/tab/material/mesh/MeshPhysicalMaterialEditor.js");
 
 include("editor/ui/tab/texture/TextureEditor.js");
 include("editor/ui/tab/texture/VideoTextureEditor.js");

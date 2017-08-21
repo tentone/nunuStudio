@@ -1,6 +1,6 @@
 "use strict";
 
-function BasicMaterialEditor(parent, closeable, container, index)
+function MeshBasicMaterialEditor(parent, closeable, container, index)
 {
 	MeshMaterialEditor.call(this, parent, closeable, container, index);
 
@@ -92,9 +92,9 @@ function BasicMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-BasicMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
+MeshBasicMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
 
-BasicMaterialEditor.prototype.attach = function(material, asset)
+MeshBasicMaterialEditor.prototype.attach = function(material, asset)
 {
 	MeshMaterialEditor.prototype.attach.call(this, material, asset);
 

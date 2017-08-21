@@ -239,14 +239,6 @@ function AssetExplorer(parent, closeable, container, index)
 		Editor.updateObjectViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
-	material.addOption("Sprite material", function()
-	{
-		var material = new THREE.SpriteMaterial({color: 0xffffff});
-		material.name = "sprite";
-		Editor.program.addMaterial(material);
-		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/image.png");
-
 	material.addOption("Toon material", function()
 	{
 		var material = new THREE.MeshToonMaterial();
@@ -263,21 +255,29 @@ function AssetExplorer(parent, closeable, container, index)
 		Editor.updateObjectViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
+	material.addOption("Sprite material", function()
+	{
+		var material = new THREE.SpriteMaterial({color: 0xffffff});
+		material.name = "sprite";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/image.png");
+
 	material.addOption("Points material", function()
 	{
 		var material = new THREE.PointsMaterial();
 		material.name = "points";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/material.png");
+	}, Editor.filePath + "icons/models/points.png");
 
-	material.addOption("Line Basic material", function()
+	material.addOption("Line material", function()
 	{
 		var material = new THREE.LineBasicMaterial();
 		material.name = "line";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/material.png");
+	}, Editor.filePath + "icons/misc/nodes.png");
 
 	material.addOption("Line Dashed material", function()
 	{
@@ -285,7 +285,7 @@ function AssetExplorer(parent, closeable, container, index)
 		material.name = "line";
 		Editor.program.addMaterial(material);
 		Editor.updateObjectViews();
-	}, Editor.filePath + "icons/misc/material.png");
+	}, Editor.filePath + "icons/misc/nodes.png");
 
 	material.addOption("Shader material", function()
 	{

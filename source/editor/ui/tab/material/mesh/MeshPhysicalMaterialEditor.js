@@ -1,8 +1,8 @@
 "use strict";
 
-function PhysicalMaterialEditor(parent, closeable, container, index)
+function MeshPhysicalMaterialEditor(parent, closeable, container, index)
 {
-	StandardMaterialEditor.call(this, parent, closeable, container, index);
+	MeshStandardMaterialEditor.call(this, parent, closeable, container, index);
 
 	var self = this;
 
@@ -58,11 +58,11 @@ function PhysicalMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-PhysicalMaterialEditor.prototype = Object.create(StandardMaterialEditor.prototype);
+MeshPhysicalMaterialEditor.prototype = Object.create(MeshStandardMaterialEditor.prototype);
 
-PhysicalMaterialEditor.prototype.attach = function(material, asset)
+MeshPhysicalMaterialEditor.prototype.attach = function(material, asset)
 {
-	StandardMaterialEditor.prototype.attach.call(this, material, asset);
+	MeshStandardMaterialEditor.prototype.attach.call(this, material, asset);
 
 	this.clearCoat.setValue(material.clearCoat);
 	this.clearCoatRoughness.setValue(material.clearCoatRoughness);
