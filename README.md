@@ -1,6 +1,6 @@
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/logo.png)
 
-[![GitHub issues](https://img.shields.io/github/issues/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/issues)[![GitHub stars](https://img.shields.io/github/stars/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/stargazers)[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/tentone/nunuStudio/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/issues) [![GitHub stars](https://img.shields.io/github/stars/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/stargazers) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/tentone/nunuStudio/master/LICENSE)
 
  - nunuStudio is a 3D and 2D game engine that runs direcly on the browser using WebGL, WebAudio and WebVR.
  - Visual scene editor, code editor, visual tools to edit textures, materials, particle emitters, etc and a powerfull scripting API that allows the creation of complex applications.
