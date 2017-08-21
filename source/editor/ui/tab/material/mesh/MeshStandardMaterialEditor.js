@@ -1,6 +1,6 @@
 "use strict";
 
-function PhongMaterialEditor(parent, closeable, container, index)
+function MeshStandardMaterialEditor(parent, closeable, container, index)
 {
 	MeshMaterialEditor.call(this, parent, closeable, container, index);
 
@@ -25,7 +25,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.morphTargets = new CheckBox(this.form.element);
 	this.form.addText("Morph targets");
 	this.morphTargets.size.set(15, 15);
-	this.morphTargets.updateInterface();
 	this.morphTargets.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -40,7 +39,6 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.wireframe = new CheckBox(this.form.element);
 	this.form.addText("Wireframe");
 	this.wireframe.size.set(15, 15);
-	this.wireframe.updateInterface();
 	this.wireframe.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -68,7 +66,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.flatShading);
 	this.form.nextRow();
-	
+
 	//Color
 	this.form.addText("Color");
 	this.color = new ColorChooser(this.form.element);
@@ -84,42 +82,45 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.color);
 	this.form.nextRow();
 
-	//Specular color
-	this.form.addText("Specular");
-	this.specular = new ColorChooser(this.form.element);
-	this.specular.size.set(100, 18);
-	this.specular.setOnChange(function()
+	//Roughness
+	this.form.addText("Roughness");
+	this.roughness = new Slider(this.form.element);
+	this.roughness.size.set(160, 18);
+	this.roughness.setRange(0, 1);
+	this.roughness.setStep(0.01);
+	this.roughness.setOnChange(function()
 	{
 		if(self.material !== null)
 		{
-			self.material.specular.setHex(self.specular.getValueHex());
+			self.material.roughness = self.roughness.getValue();
 			self.material.needsUpdate = true;
 		}
 	});
-	this.form.add(this.specular);
+	this.form.add(this.roughness);
 	this.form.nextRow();
 
 	//Shininess
-	this.form.addText("Shininess");
-	this.shininess = new Slider(this.form.element);
-	this.shininess.size.set(160, 18);
-	this.shininess.setRange(0, 250);
-	this.shininess.setStep(0.1);
-	this.shininess.setOnChange(function()
+	this.form.addText("Metalness");
+	this.metalness = new Slider(this.form.element);
+	this.metalness.size.set(160, 18);
+	this.metalness.setRange(0, 1);
+	this.metalness.setStep(0.01);
+	this.metalness.setOnChange(function()
 	{
 		if(self.material !== null)
 		{
-			self.material.shininess = self.shininess.getValue();
+			self.material.metalness = self.metalness.getValue();
 			self.material.needsUpdate = true;
 		}
 	});
-	this.form.add(this.shininess);
+	this.form.add(this.metalness);
 	this.form.nextRow();
 
 	//Texture map
 	this.form.addText("Texture map");
 	this.form.nextRow();
 	this.map = new TextureBox(this.form.element);
+	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)
 	{
 		self.material.map = self.map.getValue();
@@ -128,10 +129,37 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.map);
 	this.form.nextRow();
 
+	//Roughness map
+	this.form.addText("Roughness map");
+	this.form.nextRow();
+	this.roughnessMap = new TextureBox(this.form.element);
+	this.roughnessMap.size.set(100, 100);
+	this.roughnessMap.setOnChange(function(file)
+	{
+		self.material.roughnessMap = self.roughnessMap.getValue();
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.roughnessMap);
+	this.form.nextRow();
+
+	//Metalness map
+	this.form.addText("Metalness map");
+	this.form.nextRow();
+	this.metalnessMap = new TextureBox(this.form.element);
+	this.metalnessMap.size.set(100, 100);
+	this.metalnessMap.setOnChange(function(file)
+	{
+		self.material.metalnessMap = self.metalnessMap.getValue();
+		self.material.needsUpdate = true;
+	});
+	this.form.add(this.metalnessMap);
+	this.form.nextRow();
+
 	//Bump map
 	this.form.addText("Bump map");
 	this.form.nextRow();
 	this.bumpMap = new TextureBox(this.form.element);
+	this.bumpMap.size.set(100, 100);
 	this.bumpMap.setOnChange(function(file)
 	{
 		self.material.bumpMap = self.bumpMap.getValue();
@@ -140,8 +168,8 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.bumpMap);
 	this.form.nextRow();
 
-	//Bump scale
-	this.form.addText("Scale");
+	//Bump map scale
+	this.form.addText("Bump Scale");
 	this.bumpScale = new Slider(this.form.element);
 	this.bumpScale.size.set(160, 18);
 	this.bumpScale.setRange(0, 1);
@@ -161,6 +189,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Normal map");
 	this.form.nextRow();
 	this.normalMap = new TextureBox(this.form.element);
+	this.normalMap.size.set(100, 100);
 	this.normalMap.setOnChange(function(file)
 	{
 		self.material.normalMap = self.normalMap.getValue();
@@ -170,7 +199,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Normal map scale
-	this.form.addText("Normal scale");
+	this.form.addText("Normal Scale");
 	this.normalScale = new CoordinatesBox(this.form.element);
 	this.normalScale.setMode(CoordinatesBox.VECTOR2);
 	this.normalScale.setValue(1, 1, 0);
@@ -186,9 +215,10 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Displacement map
-	this.form.addText("Displacement Map");
+	this.form.addText("Displacement map");
 	this.form.nextRow();
 	this.displacementMap = new TextureBox(this.form.element);
+	this.displacementMap.size.set(100, 100);
 	this.displacementMap.setOnChange(function(file)
 	{
 		self.material.displacementMap = self.displacementMap.getValue();
@@ -230,25 +260,11 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.displacementBias);
 	this.form.nextRow();
 
-	//Specular map
-	this.form.addText("Specular map");
-	this.form.nextRow();
-	this.specularMap = new TextureBox(this.form.element);
-	this.specularMap.setOnChange(function(file)
-	{
-		if(self.material !== null)
-		{
-			self.material.specularMap = self.specularMap.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.specularMap);
-	this.form.nextRow();
-
 	//Emissive map
 	this.form.addText("Emissive map");
 	this.form.nextRow();
 	this.emissiveMap = new TextureBox(this.form.element);
+	this.emissiveMap.size.set(100, 100);
 	this.emissiveMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -295,6 +311,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.addText("Alpha map");
 	this.form.nextRow();
 	this.alphaMap = new TextureBox(this.form.element);
+	this.alphaMap.size.set(100, 100);
 	this.alphaMap.setOnChange(function(file)
 	{
 		if(self.material !== null)
@@ -305,7 +322,7 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.alphaMap);
 	this.form.nextRow();
-
+	
 	//Environment map
 	this.form.addText("Environment map");
 	this.form.nextRow();
@@ -322,43 +339,24 @@ function PhongMaterialEditor(parent, closeable, container, index)
 	this.form.add(this.envMap);
 	this.form.nextRow();
 
-	//Combine environment map
-	this.form.addText("Mode");
-	this.combine = new DropdownList(this.form.element);
-	this.combine.position.set(100, 85);
-	this.combine.size.set(120, 18);
-	this.combine.addValue("Multiply", THREE.MultiplyOperation);
-	this.combine.addValue("Mix", THREE.MixOperation);
-	this.combine.addValue("Add", THREE.AddOperation);
-	this.combine.setOnChange(function()
+	//Reflectivity
+	this.form.addText("Intensity");
+	this.envMapIntensity = new NumberBox(this.form.element);
+	this.envMapIntensity.size.set(60, 18);
+	this.envMapIntensity.setStep(0.05);
+	this.envMapIntensity.setOnChange(function()
 	{
 		if(self.material !== null)
 		{
-			self.material.combine = self.combine.getValue();
+			self.material.envMapIntensity = self.envMapIntensity.getValue();
 			self.material.needsUpdate = true;
 		}
 	});
-	this.form.add(this.combine);
+	this.form.add(this.envMapIntensity);
 	this.form.nextRow();
 
 	//Reflectivity
-	this.form.addText("Reflectivity");
-	this.reflectivity = new NumberBox(this.form.element);
-	this.reflectivity.size.set(60, 18);
-	this.reflectivity.setStep(0.05);
-	this.reflectivity.setOnChange(function()
-	{
-		if(self.material !== null)
-		{
-			self.material.reflectivity = self.reflectivity.getValue();
-			self.material.needsUpdate = true;
-		}
-	});
-	this.form.add(this.reflectivity);
-	this.form.nextRow();
-
-	//Refraction
-	this.form.addText("Refraction Ratio");
+	this.form.addText("Refraction");
 	this.refractionRatio = new NumberBox(this.form.element);
 	this.refractionRatio.size.set(60, 18);
 	this.refractionRatio.setStep(0.05);
@@ -371,11 +369,44 @@ function PhongMaterialEditor(parent, closeable, container, index)
 		}
 	});
 	this.form.add(this.refractionRatio);
+	this.form.nextRow();
+	
+	//Ambient Occlusion map
+	this.form.addText("Ambient Occlusion");
+	this.form.nextRow();
+	this.aoMap = new TextureBox(this.form.element);
+	this.aoMap.size.set(100, 100);
+	this.aoMap.setOnChange(function(file)
+	{
+		if(self.material !== null)
+		{
+			self.material.aoMap = self.aoMap.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.aoMap);
+	this.form.nextRow();
+
+	//Ambient Occlusion
+	this.form.addText("Intensity");
+	this.aoMapIntensity = new NumberBox(this.form.element);
+	this.aoMapIntensity.size.set(60, 18);
+	this.aoMapIntensity.setStep(0.05);
+	this.aoMapIntensity.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.aoMapIntensity = self.aoMapIntensity.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.aoMapIntensity);
+	this.form.nextRow();
 }
 
-PhongMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
+MeshStandardMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
 
-PhongMaterialEditor.prototype.attach = function(material, asset)
+MeshStandardMaterialEditor.prototype.attach = function(material, asset)
 {
 	MeshMaterialEditor.prototype.attach.call(this, material, asset);
 
@@ -384,9 +415,11 @@ PhongMaterialEditor.prototype.attach = function(material, asset)
 	this.wireframe.setValue(material.wireframe);
 	this.flatShading.setValue(material.flatShading);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
-	this.specular.setValue(material.specular.r, material.specular.g, material.specular.b);
-	this.shininess.setValue(material.shininess);
+	this.roughness.setValue(material.roughness);
+	this.metalness.setValue(material.metalness);
 	this.map.setValue(material.map);
+	this.roughnessMap.setValue(material.roughnessMap);
+	this.metalnessMap.setValue(material.metalnessMap);
 	this.bumpMap.setValue(material.bumpMap);
 	this.bumpScale.setValue(material.bumpScale);
 	this.normalMap.setValue(material.normalMap);
@@ -394,13 +427,13 @@ PhongMaterialEditor.prototype.attach = function(material, asset)
 	this.displacementMap.setValue(material.displacementMap);
 	this.displacementScale.setValue(material.displacementScale);
 	this.displacementBias.setValue(material.displacementBias);
-	this.specularMap.setValue(material.specularMap);
 	this.emissive.setValue(material.emissive.r, material.emissive.g, material.emissive.b);
 	this.emissiveIntensity.setValue(material.emissiveIntensity);
 	this.emissiveMap.setValue(material.emissiveMap);
 	this.alphaMap.setValue(material.alphaMap);
 	this.envMap.setValue(material.envMap);
-	this.combine.setValue(material.combine);
-	this.reflectivity.setValue(material.reflectivity || 0);
-	this.refractionRatio.setValue(material.refractionRatio || 0);
+	this.envMapIntensity.setValue(material.envMapIntensity);
+	this.refractionRatio.setValue(material.refractionRatio);
+	this.aoMap.setValue(material.aoMap);
+	this.aoMapIntensity.setValue(material.aoMapIntensity);
 };

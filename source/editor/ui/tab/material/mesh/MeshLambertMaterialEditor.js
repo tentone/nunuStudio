@@ -1,6 +1,6 @@
 "use strict";
 
-function LambertMaterialEditor(parent, closeable, container, index)
+function MeshLambertMaterialEditor(parent, closeable, container, index)
 {
 	MeshMaterialEditor.call(this, parent, closeable, container, index);
 
@@ -125,9 +125,9 @@ function LambertMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-LambertMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
+MeshLambertMaterialEditor.prototype = Object.create(MeshMaterialEditor.prototype);
 
-LambertMaterialEditor.prototype.attach = function(material, asset)
+MeshLambertMaterialEditor.prototype.attach = function(material, asset)
 {
 	MeshMaterialEditor.prototype.attach.call(this, material, asset);
 

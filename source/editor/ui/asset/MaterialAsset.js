@@ -47,23 +47,23 @@ function MaterialAsset(parent)
 
 				if(self.material instanceof THREE.MeshPhongMaterial)
 				{
-					tab = Interface.tab.addTab(PhongMaterialEditor, true);
+					tab = Interface.tab.addTab(MeshPhongMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.MeshLambertMaterial)
 				{
-					tab = Interface.tab.addTab(LambertMaterialEditor, true);
+					tab = Interface.tab.addTab(MeshLambertMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.MeshBasicMaterial)
 				{
-					tab = Interface.tab.addTab(BasicMaterialEditor, true);
+					tab = Interface.tab.addTab(MeshBasicMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.MeshPhysicalMaterial)
 				{
-					tab = Interface.tab.addTab(PhysicalMaterialEditor, true);
+					tab = Interface.tab.addTab(MeshPhysicalMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.MeshStandardMaterial)
 				{
-					tab = Interface.tab.addTab(StandardMaterialEditor, true);
+					tab = Interface.tab.addTab(MeshStandardMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.SpriteMaterial)
 				{
@@ -75,7 +75,7 @@ function MaterialAsset(parent)
 				}
 				else if(self.material instanceof THREE.LineBasicMaterial)
 				{
-					tab = Interface.tab.addTab(LineBasicMaterialEditor, true);
+					tab = Interface.tab.addTab(LineMeshBasicMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.PointsMaterial)
 				{

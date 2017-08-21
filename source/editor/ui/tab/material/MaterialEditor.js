@@ -209,7 +209,8 @@ MaterialEditor.geometries = [
 	["Sphere", new THREE.SphereBufferGeometry(1, 64, 64)],
 	["Torus", new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64)],
 	["Cube", new THREE.BoxBufferGeometry(1, 1, 1, 32, 32, 32)],
-	["Torus Knot", new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64)]
+	["Torus Knot", new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64)],
+	["Cone", new THREE.ConeBufferGeometry(1, 2, 32)],
 ];
 
 MaterialEditor.prototype = Object.create(TabElement.prototype);

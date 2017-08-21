@@ -1,6 +1,6 @@
 "use strict";
 
-function LineBasicMaterialEditor(parent, closeable, container, index)
+function LineMeshBasicMaterialEditor(parent, closeable, container, index)
 {
 	MaterialEditor.call(this, parent, closeable, container, index);
 	
@@ -59,9 +59,9 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-LineBasicMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
+LineMeshBasicMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-LineBasicMaterialEditor.prototype.attach = function(material, asset)
+LineMeshBasicMaterialEditor.prototype.attach = function(material, asset)
 {
 	MaterialEditor.prototype.attach.call(this, material, asset);
 
@@ -71,7 +71,7 @@ LineBasicMaterialEditor.prototype.attach = function(material, asset)
 	this.linewidth.setValue(material.linewidth);
 };
 
-LineBasicMaterialEditor.prototype.update = function()
+LineMeshBasicMaterialEditor.prototype.update = function()
 {
 	MaterialEditor.prototype.update.call(this);
 

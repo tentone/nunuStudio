@@ -7,9 +7,23 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	var self = this;
 
 	//Preview scene
+	this.sky = new Sky();
+	this.scene.add(this.sky);
 	this.sprite = new THREE.Sprite(null);
 	this.sprite.position.set(0, 0, -1.5);
 	this.scene.add(this.sprite);
+
+	//Sky
+	this.previewForm.addText("Sky");
+	this.skyEnabled = new CheckBox(this.previewForm.element);
+	this.skyEnabled.size.set(15, 15);
+	this.skyEnabled.setValue(true);
+	this.skyEnabled.setOnChange(function()
+	{
+		self.sky.visible = self.skyEnabled.getValue();
+	});
+	this.previewForm.add(this.skyEnabled);
+	this.previewForm.nextRow();
 
 	//Color
 	this.form.addText("Color");
