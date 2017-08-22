@@ -183,7 +183,7 @@ MaterialLoader.prototype.parse = function(json)
 	//Rotation (SpriteMaterial)
 	if(json.rotation !== undefined)
 	{
-		material.undefined = json.rotation;
+		material.rotation = json.rotation;
 	}
 
 	//Opacity and transparency

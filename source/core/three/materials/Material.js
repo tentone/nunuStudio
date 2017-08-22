@@ -54,7 +54,8 @@ THREE.Material.prototype.toJSON = function(meta)
 		meta =
 		{
 			textures: {},
-			images: {}
+			images: {},
+			videos: {}
 		};
 	}
 
@@ -306,7 +307,7 @@ THREE.Material.prototype.toJSON = function(meta)
 	}
 
 	//Copied from Object3D.toJSON
-	function extractFromCache( cache)
+	function extractFromCache(cache)
 	{
 		var values = [];
 
@@ -324,15 +325,21 @@ THREE.Material.prototype.toJSON = function(meta)
 	{
 		var textures = extractFromCache(meta.textures);
 		var images = extractFromCache(meta.images);
+		var videos = extractFromCache(meta.videos);
 
 		if(textures.length > 0)
 		{
 			data.textures = textures;
 		}
-
+		
 		if(images.length > 0)
 		{
 			data.images = images;
+		}
+
+		if(videos.length > 0)
+		{
+			data.videos = videos;
 		}
 	}
 
