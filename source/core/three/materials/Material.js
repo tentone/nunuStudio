@@ -226,6 +226,12 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.sizeAttenuation = this.sizeAttenuation;
 	}
 
+	//Rotation (SpriteMaterial)
+	if(this.rotation !== undefined)
+	{
+		data.rotation = this.rotation;
+	}
+
 	//Shading, blending
 	if(this.blending !== THREE.NormalBlending)
 	{
