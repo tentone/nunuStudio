@@ -13,13 +13,14 @@ function TextureLoader(manager)
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 	
 	this.path = "";
-	this.crossOrigin = "";
+	this.crossOrigin = "Anonymous";
 
 	this.images = [];
 	this.videos = [];
 	this.fonts = [];
 }
 
+THREE._TextureLoader = THREE.TextureLoader;
 THREE.TextureLoader = TextureLoader;
 
 /**

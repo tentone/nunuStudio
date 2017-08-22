@@ -134,6 +134,29 @@ function MaterialEditor(parent, closeable, container, index)
 	this.form.add(this.depthWrite );
 	this.form.nextRow();
 
+	//Depth mode
+	this.form.addText("Depth Mode");
+	this.depthFunc = new DropdownList(this.form.element);
+	this.depthFunc.position.set(100, 85);
+	this.depthFunc.size.set(100, 18);
+	this.depthFunc.addValue("Never", THREE.NeverDepth);
+	this.depthFunc.addValue("Always", THREE.AlwaysDepth);
+	this.depthFunc.addValue("Less", THREE.LessDepth);
+	this.depthFunc.addValue("Less or equal", THREE.LessEqualDepth);
+	this.depthFunc.addValue("Greater or equal", THREE.GreaterEqualDepth);
+	this.depthFunc.addValue("Greater", THREE.GreaterDepth);
+	this.depthFunc.addValue("Not equal", THREE.NotEqualDepth);
+	this.depthFunc.setOnChange(function()
+	{
+		if(self.material !== null)
+		{
+			self.material.depthFunc = self.depthFunc.getValue();
+			self.material.needsUpdate = true;
+		}
+	});
+	this.form.add(this.depthFunc);
+	this.form.nextRow();
+
 	//Transparent
 	this.form.addText("Transparent");
 	this.transparent = new CheckBox(this.form.element);
@@ -233,6 +256,7 @@ MaterialEditor.prototype.attach = function(material, asset)
 	this.side.setValue(material.side);
 	this.depthTest.setValue(material.depthTest);
 	this.depthWrite.setValue(material.depthWrite);
+	this.depthFunc.setValue(material.depthFunc);
 	this.transparent.setValue(material.transparent);
 	this.opacity.setValue(material.opacity);
 	this.alphaTest.setValue(material.alphaTest);
