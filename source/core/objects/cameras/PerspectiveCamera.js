@@ -77,7 +77,7 @@
 */
 function PerspectiveCamera(fov, aspect, near, far)
 {
-	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
+	THREE._PerspectiveCamera.call(this, fov, aspect, near, far);
 
 	this.name = "camera";
 
@@ -87,10 +87,14 @@ function PerspectiveCamera(fov, aspect, near, far)
 	this.clearDepth = false;
 	this.order = 0;
 
+	//TODO <ADD SUPPORT FOR EFFECTS>
 	this.effects = [];
 }
 
-PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
+THREE._PerspectiveCamera = THREE.PerspectiveCamera;
+THREE.PerspectiveCamera = PerspectiveCamera;
+
+PerspectiveCamera.prototype = Object.create(THREE._PerspectiveCamera.prototype);
 
 /**
  * Destroy camera object and remove it from the scene.
@@ -139,7 +143,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
  */
 PerspectiveCamera.prototype.toJSON = function(meta)
 {
-	var data = THREE.PerspectiveCamera.prototype.toJSON.call(this, meta);
+	var data = THREE._PerspectiveCamera.prototype.toJSON.call(this, meta);
 
 	data.object.clearColor = this.clearColor;
 	data.object.clearDepth = this.clearDepth;

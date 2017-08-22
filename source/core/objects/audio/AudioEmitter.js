@@ -82,6 +82,9 @@ function AudioEmitter(audio)
 	this.hasPlaybackControl = true;
 }
 
+THREE._Audio = THREE.Audio;
+THREE.Audio = AudioEmitter;
+
 /**
  * Default WebAudio listener shared by audio emitters.
  *

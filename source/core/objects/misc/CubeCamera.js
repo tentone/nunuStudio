@@ -93,6 +93,9 @@ function CubeCamera(near, far, resolution, autoUpdate)
 	this.renderer = null;
 }
 
+THREE._CubeCamera = THREE.CubeCamera;
+THREE.CubeCamera = CubeCamera;
+
 CubeCamera.prototype = Object.create(THREE.Object3D.prototype);
 
 /**

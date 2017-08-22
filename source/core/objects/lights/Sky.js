@@ -147,7 +147,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 	//Sky
 	var geometry = new THREE.SphereBufferGeometry(1500, 16, 16);
 	var material = new THREE.ShaderMaterial({vertexShader: vertex, fragmentShader: fragment, uniforms: uniforms, side: THREE.BackSide});
-	
+
 	this.sky = new THREE.Mesh(geometry, material);
 	this.sky.hidden = true;
 	this.sky.matrixAutoUpdate = false;

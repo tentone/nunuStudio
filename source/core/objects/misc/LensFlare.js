@@ -31,7 +31,6 @@ function LensFlare(texture, size, distance, blending, color)
 
 LensFlare.prototype = Object.create(THREE.Object3D.prototype);
 
-//Overrides THREE.LensFlare
 THREE._LensFlare = THREE.LensFlare;
 THREE.LensFlare = LensFlare;
 

@@ -13,7 +13,7 @@ function ImageLoader(manager)
 	this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
 
 	this.path = "";
-	this.crossOrigin = "";
+	this.crossOrigin = "Anonymous";
 }
 
 /**
