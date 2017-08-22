@@ -180,6 +180,12 @@ MaterialLoader.prototype.parse = function(json)
 		material.flatShading = json.flatShading;
 	}
 
+	//Rotation (SpriteMaterial)
+	if(json.rotation !== undefined)
+	{
+		material.undefined = json.rotation;
+	}
+
 	//Opacity and transparency
 	if(json.opacity !== undefined)
 	{
