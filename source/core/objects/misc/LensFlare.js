@@ -1,11 +1,17 @@
 "use strict";
 
 /**
- * LensFlare object can be used to simulate lens flare from lights, the LensFlare object stores an array of textures with distance and dimension information.
+ * LensFlare object can be used to simulate lens flare from lights.
+ *
+ * Stores a list of Flares.
+ *
+ * For optimal result LensFlare object should be attached to a light source.
  *
  * Works with perspective and orthographic cameras.
  *
  * @class LensFlare
+ * @module Misc
+ * @extends {Object3D}
  * @constructor
  * @author mikael emtinger / http://gomo.se/
  * @author alteredq / http://alteredqualia.com/
@@ -35,7 +41,9 @@ THREE._LensFlare = THREE.LensFlare;
 THREE.LensFlare = LensFlare;
 
 /**
- * LensFlare flare constructor.
+ * LensFlare Flare constructor.
+ *
+ * A flare is composed by a texture, size, distance, blending mode, color and opacity level.
  *
  * @class LensFlare.Flare
  * @param {Texture} texture Texture to be used for the new layer.
@@ -62,11 +70,12 @@ LensFlare.Flare = function(texture, size, distance, blending, color, opacity)
 	this.rotation = 0;
 }
 
-LensFlare.Flare.prototype.toJSON = function(texture, size, distance, blending, color, opacity)
+LensFlare.Flare.prototype.toJSON = function(meta)
 {
 	var data = {};
+	var texture = this.texture.toJSON(meta);
 
-	data.texture = this.texture.uuid;
+	data.texture = texture.uuid;
 	data.size = this.size;
 	data.distance = this.distance;
 	data.opacity = this.opacity;

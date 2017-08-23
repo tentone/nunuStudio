@@ -940,7 +940,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 37,
+            "line": 43,
             "description": "Containers are used to group objects together."
         },
         "Particles": {
@@ -2044,7 +2044,8 @@
             "namespace": "",
             "file": "../../source/core/objects/misc/LensFlare.js",
             "line": 3,
-            "description": "LensFlare object can be used to simulate lens flare from lights, the LensFlare object stores an array of textures with distance and dimension information.\n\nWorks with perspective and orthographic cameras.",
+            "description": "LensFlare object can be used to simulate lens flare from lights.\n\nStores a list of Flares.\n\nFor optimal result LensFlare object should be attached to a light source.\n\nWorks with perspective and orthographic cameras.",
+            "extends": "{Object3D}",
             "is_constructor": 1,
             "author": "tentone"
         },
@@ -2059,8 +2060,8 @@
             "module": "Misc",
             "namespace": "",
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 37,
-            "description": "LensFlare flare constructor.",
+            "line": 43,
+            "description": "LensFlare Flare constructor.\n\nA flare is composed by a texture, size, distance, blending mode, color and opacity level.",
             "params": [
                 {
                     "name": "texture",
@@ -7619,7 +7620,7 @@
         {
             "file": "../../source/core/objects/mesh/Mesh.js",
             "line": 15,
-            "description": "Geometry defined the object structure.",
+            "description": "Geometry defines the object structure.",
             "itemtype": "property",
             "name": "geometry",
             "type": "{Geometry}",
@@ -8050,7 +8051,7 @@
         },
         {
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 82,
+            "line": 91,
             "description": "Copy lensflare object data to this.",
             "itemtype": "method",
             "name": "copy",
@@ -8070,7 +8071,7 @@
         },
         {
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 104,
+            "line": 113,
             "description": "Add texture to the lensFlare object.",
             "itemtype": "method",
             "name": "add",
@@ -8111,7 +8112,7 @@
         },
         {
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 128,
+            "line": 137,
             "description": "Update lens flares update positions on all flares based on the screen position\nSet myLensFlare.customUpdateCallback to alter the flares in your project specific way.",
             "itemtype": "method",
             "name": "updateLensFlares",
@@ -8120,7 +8121,7 @@
         },
         {
             "file": "../../source/core/objects/misc/LensFlare.js",
-            "line": 152,
+            "line": 161,
             "description": "Serialize lensflare data to json.",
             "itemtype": "method",
             "name": "toJSON",

@@ -13,7 +13,7 @@
  * @extends {Mesh}
  */
 /**
- * Geometry defined the object structure.
+ * Geometry defines the object structure.
  * 
  * @property geometry
  * @type {Geometry}
