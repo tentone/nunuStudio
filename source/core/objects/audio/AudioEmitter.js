@@ -53,7 +53,7 @@
  */
 function AudioEmitter(audio)
 {
-	Object3D.call(this);
+	THREE.Object3D.call(this);
 
 	this.name = "audio";
 	this.type = "Audio";
@@ -82,9 +82,6 @@ function AudioEmitter(audio)
 	this.hasPlaybackControl = true;
 }
 
-THREE._Audio = THREE.Audio;
-THREE.Audio = AudioEmitter;
-
 /**
  * Default WebAudio listener shared by audio emitters.
  *
@@ -93,7 +90,11 @@ THREE.Audio = AudioEmitter;
  */
 AudioEmitter.listener = new THREE.AudioListener();
 
-AudioEmitter.prototype = Object.create(THREE.Audio.prototype);
+THREE._Audio = THREE.Audio;
+THREE.Audio = AudioEmitter;
+
+AudioEmitter.prototype = Object.create(THREE._Audio.prototype);
+
 
 /**
  * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.

@@ -13,16 +13,7 @@ function initialize(fname, canvasId)
 	var onLoad = function()
 	{
 		//Fullscreen Button
-		var fs = document.createElement("div");
-		fs.style.backgroundColor = "#333333";
-		fs.style.color = "#FFFFFF";
-		fs.style.width = "20%";
-		fs.style.height = "30px";
-		fs.style.borderRadius = "5px";
-		fs.style.marginLeft = "40%";
-		fs.style.textAlign = "center";
-		fs.style.cursor = "pointer";
-		fs.innerHTML = "<b>Fullscreen</b>";
+		var fs = createButton("Fullscreen");
 		fs.onclick = function()
 		{
 			app.toggleFullscreen();
@@ -34,16 +25,7 @@ function initialize(fname, canvasId)
 		{
 			Nunu.getVRDisplays(function(display)
 			{
-				var vr = document.createElement("div");
-				vr.style.backgroundColor = "#333333";
-				vr.style.color = "#FFFFFF";
-				vr.style.width = "20%";
-				vr.style.height = "30px";
-				vr.style.borderRadius = "5px";
-				vr.style.marginLeft = "40%";
-				vr.style.textAlign = "center";
-				vr.style.cursor = "pointer";
-				vr.innerHTML = "<b>Enter VR</b>";
+				var vr = createButton("Enter VR");
 				vr.onclick = function()
 				{
 					app.toggleVR();
@@ -76,4 +58,38 @@ function resize()
 		}
 		nunuApps[i].app.resize();
 	}
+}
+
+function createButton(text)
+{
+	var button = document.createElement("div");
+	button.style.backgroundColor = "#333333";
+	button.style.color = "#FFFFFF";
+	button.style.height = "30px";
+	button.style.lineHeight = "30px";
+	button.style.borderRadius = "5px";
+	button.style.marginTop = "2px";
+	button.style.marginLeft = "40%";
+	button.style.width = "20%";
+	button.style.verticalAlign = "middle";
+	button.style.textAlign = "center";
+	button.style.cursor = "pointer";
+
+	var span = document.createElement("span");
+	button.appendChild(span);
+
+	var b = document.createElement("b");
+	b.innerHTML = text;
+	span.appendChild(b);
+
+	button.onmouseenter = function()
+	{
+		this.style.backgroundColor = "#666666";
+	};
+	button.onmouseleave = function()
+	{
+		this.style.backgroundColor = "#333333";
+	};
+	
+	return button;
 }
