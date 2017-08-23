@@ -4,6 +4,8 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 {
 	LineBasicMaterialEditor.call(this, parent, closeable, container, index);
 
+	var self = this;
+	
 	//Dash size
 	this.form.addText("Dash size");
 	this.dashSize = new NumberBox(this.form.element);
