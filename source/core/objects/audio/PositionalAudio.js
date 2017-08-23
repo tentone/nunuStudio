@@ -40,6 +40,9 @@ function PositionalAudio(audio)
 	this.tempB = new THREE.Vector3();
 }
 
+THREE._PositionalAudio = THREE.PositionalAudio;
+THREE.PositionalAudio = PositionalAudio;
+
 PositionalAudio.prototype = Object.create(AudioEmitter.prototype);
 
 /**

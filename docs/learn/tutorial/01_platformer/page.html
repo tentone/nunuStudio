@@ -17,12 +17,11 @@
 	<script src="../../../lib/jquery.min.js"></script>
 	<script src="../../../lib/bootstrap.min.js"></script>
 	<script src="../../../lib/highlight.min.js"></script>
-	<script>
-		hljs.initHighlightingOnLoad();
-	</script>
+	<script src="../../../editor/nunu.min.js"></script>
+	<script src="../../js/embed.js"></script>
 </head>
 
-<body>
+<body onload="initialize('platformer.nsp', 'platformer');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -53,24 +52,51 @@
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
 			<h2 class="black">Platformer</h2>
-			<p>In this guide we will learn how to create a simple platformer game inside nunuStudio. We will explore how to control physics elements, import external resources and use keyboard and gamepad input.</p>
-			<p>For this guide some previous programming experience is recommended since we will be working with some more advanced programming elements.</p>
+			<p>In this tutorial we will learn how to create a simple platformer game inside nunuStudio. We will explore how to control physics elements, import external resources and use keyboard and gamepad input.</p>
+			<p>For this guide some previous programming experience is recommended but i will try to explain as much as possible every code.</p>
 
 			<h3 class="black">Creating a level</h3>
-			<p>Lets start by creating a simple level using physics elements as a base for our platformer game.</p>
-			<p>TODO</p>
+			<p>Lets start by creating a simple level for our game. All interactive objects in our game should be created using the physics objects. Phyics objects are invisible, to make them visible in the game we need to attach a visual representation to them.</p>
+			<p>Start by adding a physics cube, when selected the physics cube will be shown in the editor in green, but when we press start it will becore invisible.</p>
+
+			<p>TODO PHYSICS CUBE IMAGE</p>
+
+			<p>After adding a representation to our cube we can see that it falls bellow the existing floor, to prevent this we need to add some additional physics elements to be used as walls for our game. The new physics elements need to be configured as static. Static physics element don't move around, they are only used as static walls.</p>
+
+			<p>TODO STATIC PHYSICS ELEMENTS IMAGE</p>
+
+			<p>Now lets create a new material to make it easier to distinguish our player and the walls we created. To apply the new material to our objects drag it from the asset explorer to the object.</p>
+
+			<p>TODO ADD NEW MATERIAL IMAGE</p>
+			
+			<!--<img src="script.png" style="width:60%; margin-left:20%"></img>-->
 
 			<h3 class="black">Player control</h3>
+			<pre><code>var element = document.createElement("div");
+//TODO ADD CODE HERE
+</code></pre>
 			<p>TODO</p>
 
-			<h3 class="black">Enemy</h2>
+			<h3 class="black">Obstacles</h2>
+			<p>TODO</p>
+
+			<h3 class="black">Enemies</h2>
 			<p>TODO</p>
 
 			<h3 class="black">Water</h3>
 			<p>TODO</p>
 
+			<h3 class="black">Menu</h3>
+			<p>TODO</p>
+
+			<h3 class="black">More levels</h3>
+			<p>TODO</p>
+
 			<h3 class="black">Final result</h3>
 			<p>TODO</p>
+			<div>
+				<canvas id="platformer" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
 		</div>
 	</section>
 
