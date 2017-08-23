@@ -186,6 +186,24 @@ MaterialLoader.prototype.parse = function(json)
 		material.rotation = json.rotation;
 	}
 
+	//Line (LineMaterial)
+	if(json.linewidth !== undefined)
+	{
+		material.linewidth = json.linewidth;
+	}
+	if(json.dashSize !== undefined)
+	{
+		material.dashSize = json.dashSize;
+	}
+	if(json.gapSize !== undefined)
+	{
+		material.gapSize = json.gapSize;
+	}
+	if(json.scale !== undefined)
+	{
+		material.scale = json.scale;
+	}
+
 	//Opacity and transparency
 	if(json.opacity !== undefined)
 	{

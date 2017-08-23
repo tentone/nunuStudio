@@ -233,6 +233,24 @@ THREE.Material.prototype.toJSON = function(meta)
 		data.rotation = this.rotation;
 	}
 
+	//Line (LineMaterial)
+	if(this.linewidth !== undefined)
+	{
+		data.linewidth = this.linewidth;
+	}
+	if(this.dashSize !== undefined)
+	{
+		data.dashSize = this.dashSize;
+	}
+	if(this.gapSize !== undefined)
+	{
+		data.gapSize = this.gapSize;
+	}
+	if(this.scale !== undefined)
+	{
+		data.scale = this.scale;
+	}
+
 	//Shading, blending
 	if(this.blending !== THREE.NormalBlending)
 	{
