@@ -8,16 +8,19 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 
 	//Preview scene
 	this.sky = new Sky();
+	this.sky.visible = false;
 	this.scene.add(this.sky);
+
+	this.camera.position.set(0, 0, 1.5);
+	
 	this.sprite = new THREE.Sprite(null);
-	this.sprite.position.set(0, 0, -1.5);
-	this.scene.add(this.sprite);
+	this.interactive.add(this.sprite);
 
 	//Sky
 	this.previewForm.addText("Sky");
 	this.skyEnabled = new CheckBox(this.previewForm.element);
 	this.skyEnabled.size.set(15, 15);
-	this.skyEnabled.setValue(true);
+	this.skyEnabled.setValue(this.sky.visible);
 	this.skyEnabled.setOnChange(function()
 	{
 		self.sky.visible = self.skyEnabled.getValue();

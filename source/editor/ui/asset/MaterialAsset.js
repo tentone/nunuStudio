@@ -73,9 +73,13 @@ function MaterialAsset(parent)
 				{
 					tab = Interface.tab.addTab(ShaderMaterialEditor, true);
 				}
+				else if(self.material instanceof THREE.LineDashedMaterial)
+				{
+					tab = Interface.tab.addTab(LineDashedMaterialEditor, true);
+				}
 				else if(self.material instanceof THREE.LineBasicMaterial)
 				{
-					tab = Interface.tab.addTab(LineMeshBasicMaterialEditor, true);
+					tab = Interface.tab.addTab(LineBasicMaterialEditor, true);
 				}
 				else if(self.material instanceof THREE.PointsMaterial)
 				{

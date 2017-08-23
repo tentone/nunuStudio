@@ -16,7 +16,7 @@ function MaterialRenderer()
 	this.scene = new THREE.Scene();
 
 	//Sphere
-	this.sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32));
+	this.sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16));
 	this.scene.add(this.sphere);
 
 	//Sprite

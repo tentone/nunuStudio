@@ -259,6 +259,7 @@ include("editor/ui/tab/material/PointsMaterialEditor.js");
 include("editor/ui/tab/material/ShaderMaterialEditor.js");
 include("editor/ui/tab/material/SpriteMaterialEditor.js");
 include("editor/ui/tab/material/line/LineBasicMaterialEditor.js");
+include("editor/ui/tab/material/line/LineDashedMaterialEditor.js");
 include("editor/ui/tab/material/mesh/MeshMaterialEditor.js");
 include("editor/ui/tab/material/mesh/MeshPhongMaterialEditor.js");
 include("editor/ui/tab/material/mesh/MeshLambertMaterialEditor.js");
