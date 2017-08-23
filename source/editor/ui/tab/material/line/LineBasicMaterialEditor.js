@@ -1,13 +1,12 @@
 "use strict";
 
-function LineMeshBasicMaterialEditor(parent, closeable, container, index)
+function LineBasicMaterialEditor(parent, closeable, container, index)
 {
 	MaterialEditor.call(this, parent, closeable, container, index);
 	
 	//Line
 	this.line = new THREE.LineLoop(MaterialEditor.geometries[0][1], null);
-	this.line.position.set(0, 0, -2.5);
-	this.scene.add(this.line);
+	this.interactive.add(this.line);
 	
 	//Test model
 	this.previewForm.addText("Model");
@@ -47,6 +46,7 @@ function LineMeshBasicMaterialEditor(parent, closeable, container, index)
 	this.linewidth = new NumberBox(this.form.element);
 	this.linewidth.size.set(60, 18);
 	this.linewidth.setStep(1);
+	this.linewidth.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.linewidth.setOnChange(function()
 	{
 		if(self.material !== null)
@@ -59,9 +59,9 @@ function LineMeshBasicMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 }
 
-LineMeshBasicMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
+LineBasicMaterialEditor.prototype = Object.create(MaterialEditor.prototype);
 
-LineMeshBasicMaterialEditor.prototype.attach = function(material, asset)
+LineBasicMaterialEditor.prototype.attach = function(material, asset)
 {
 	MaterialEditor.prototype.attach.call(this, material, asset);
 
@@ -71,18 +71,12 @@ LineMeshBasicMaterialEditor.prototype.attach = function(material, asset)
 	this.linewidth.setValue(material.linewidth);
 };
 
-LineMeshBasicMaterialEditor.prototype.update = function()
+LineBasicMaterialEditor.prototype.update = function()
 {
 	MaterialEditor.prototype.update.call(this);
 
-	if(Editor.mouse.insideCanvas())
+	if(Editor.mouse.insideCanvas() && Editor.mouse.buttonPressed(Mouse.LEFT))
 	{
-		//Rotate object
-		if(Editor.mouse.buttonPressed(Mouse.LEFT))
-		{
-			var delta = new THREE.Quaternion();
-			delta.setFromEuler(new THREE.Euler(Editor.mouse.delta.y * 0.005, Editor.mouse.delta.x * 0.005, 0, 'XYZ'));
-			this.line.quaternion.multiplyQuaternions(delta, this.line.quaternion);
-		}
+		//TODO <CHANGE LINE DRAW MODE>
 	}
 };

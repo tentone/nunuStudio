@@ -6,8 +6,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 
 	//Points
 	this.points = new THREE.Points(MaterialEditor.geometries[0][1], null);
-	this.points.position.set(0, 0, -2.5);
-	this.scene.add(this.points);
+	this.interactive.add(this.points);
 	
 	//Test model
 	this.previewForm.addText("Model");
@@ -98,20 +97,4 @@ PointsMaterialEditor.prototype.attach = function(material, asset)
 	this.sizeAttenuation.setValue(material.sizeAttenuation);
 	this.color.setValue(material.color.r, material.color.g, material.color.b);
 	this.map.setValue(material.map);
-};
-
-PointsMaterialEditor.prototype.update = function()
-{
-	MaterialEditor.prototype.update.call(this);
-
-	if(Editor.mouse.insideCanvas())
-	{
-		//Rotate object
-		if(Editor.mouse.buttonPressed(Mouse.LEFT))
-		{
-			var delta = new THREE.Quaternion();
-			delta.setFromEuler(new THREE.Euler(Editor.mouse.delta.y * 0.005, Editor.mouse.delta.x * 0.005, 0, 'XYZ'));
-			this.points.quaternion.multiplyQuaternions(delta, this.points.quaternion);
-		}
-	}
 };

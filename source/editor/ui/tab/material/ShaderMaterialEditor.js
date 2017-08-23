@@ -51,20 +51,30 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.renderer.shadowMap.type = Settings.render.shadowsType;
 
 	//Material camera
-	this.camera = new THREE.PerspectiveCamera(90, this.canvas.size.x/this.canvas.size.y);
-
-	//Material preview scene
+	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x/this.canvas.size.y);
+	this.camera.position.set(0, 0, 2.5);
+	
+	//Scene
 	this.scene = new THREE.Scene();
+	
+	//Interactive object
+	this.interactive = new THREE.Object3D();
+	this.scene.add(this.interactive);
+	
+	//Preview scene
 	this.sky = new Sky();
-	var sun = this.sky.sun;
-	sun.shadow.camera.left = -5;
-	sun.shadow.camera.right = 5;
-	sun.shadow.camera.top = 5;
-	sun.shadow.camera.bottom = -5;
+	this.sky.visible = false;
 	this.scene.add(this.sky);
-	this.scene.add(new THREE.PointLight(0x666666));
-	this.scene.add(new THREE.AmbientLight(0x555555));
 
+	this.pointLight = new THREE.PointLight(0x777777);
+	this.pointLight.position.set(-3, 0, 3);
+	this.pointLight.visible = false;
+	this.scene.add(this.pointLight);
+	
+	this.ambientLight = new THREE.AmbientLight(0x555555);
+	this.ambientLight.visible = false;
+	this.scene.add(this.ambientLight);
+	
 	//Preview configuration
 	this.previewForm = new Form(this.preview.divB);
 	this.previewForm.position.set(10, 5);
@@ -74,8 +84,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 
 	//Mesh
 	this.mesh = new THREE.Mesh(MaterialEditor.geometries[0][1], null);
-	this.mesh.position.set(0, 0, -2.5);
-	this.scene.add(this.mesh);
+	this.interactive.add(this.mesh);
 	
 	//Test model
 	this.previewForm.addText("Model");
@@ -97,24 +106,38 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.previewForm.addText("Sky");
 	this.skyEnabled = new CheckBox(this.previewForm.element);
 	this.skyEnabled.size.set(15, 15);
-	this.skyEnabled.setValue(true);
+	this.skyEnabled.setValue(this.sky.visible);
 	this.skyEnabled.setOnChange(function()
 	{
 		self.sky.visible = self.skyEnabled.getValue();
 	});
 	this.previewForm.add(this.skyEnabled);
+	this.previewForm.nextRow();
 
 	//Point Light
 	this.previewForm.addText("Point Light");
 	this.lightEnabled = new CheckBox(this.previewForm.element);
 	this.lightEnabled.size.set(15, 15);
-	this.lightEnabled.setValue(true);
+	this.lightEnabled.setValue(this.pointLight.visible);
 	this.lightEnabled.setOnChange(function()
 	{
 		self.pointLight.visible = self.lightEnabled.getValue();
 	});
 	this.previewForm.add(this.lightEnabled);
-	
+	this.previewForm.nextRow();
+
+	//Ambient Light
+	this.previewForm.addText("Ambient Light");
+	this.ambientLightEnabled = new CheckBox(this.previewForm.element);
+	this.ambientLightEnabled.size.set(15, 15);
+	this.ambientLightEnabled.setValue(this.ambientLight.visible);
+	this.ambientLightEnabled.setOnChange(function()
+	{
+		self.ambientLight.visible = self.ambientLightEnabled.getValue();
+	});
+	this.previewForm.add(this.ambientLightEnabled);
+	this.previewForm.nextRow();
+
 	//Tab container
 	this.tab = new TabGroup(this.main.divB);
 	this.tab.element.style.backgroundColor = Editor.theme.barColor;

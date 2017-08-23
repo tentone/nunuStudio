@@ -53,9 +53,14 @@ function MaterialEditor(parent, closeable, container, index)
 
 	//Camera
 	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x / this.canvas.size.y);
+	this.camera.position.set(0, 0, 2.5);
 
 	//Preview scene
 	this.scene = new THREE.Scene();
+
+	//Interactive object
+	this.interactive = new THREE.Object3D();
+	this.scene.add(this.interactive);
 
 	//Preview configuration
 	this.previewForm = new Form(this.preview.divB);
@@ -229,11 +234,13 @@ function MaterialEditor(parent, closeable, container, index)
 }
 
 MaterialEditor.geometries = [
-	["Sphere", new THREE.SphereBufferGeometry(1, 64, 64)],
+	["Sphere", new THREE.SphereBufferGeometry(1, 32, 32)],
 	["Torus", new THREE.TorusBufferGeometry(0.8, 0.4, 32, 64)],
-	["Cube", new THREE.BoxBufferGeometry(1, 1, 1, 32, 32, 32)],
+	["Cube", new THREE.BoxBufferGeometry(1, 1, 1, 1, 1, 1)],
 	["Torus Knot", new THREE.TorusKnotBufferGeometry(0.7, 0.3, 128, 64)],
 	["Cone", new THREE.ConeBufferGeometry(1, 2, 32)],
+	["Sphere HiPoly", new THREE.SphereBufferGeometry(1, 64, 64)],
+	["Cube HiPoly", new THREE.BoxBufferGeometry(1, 1, 1, 128, 128, 128)]
 ];
 
 MaterialEditor.prototype = Object.create(TabElement.prototype);
@@ -331,15 +338,14 @@ MaterialEditor.prototype.update = function()
 	if(Editor.mouse.insideCanvas())
 	{
 		//Zoom
-		this.camera.position.z += Editor.mouse.wheel * 0.003;
-		
-		if(this.camera.position.z > 5)
+		this.camera.position.z += this.camera.position.z * Editor.mouse.wheel * 0.001;
+
+		//Rotate object
+		if(Editor.mouse.buttonPressed(Mouse.LEFT))
 		{
-			this.camera.position.z = 5;
-		}
-		else if(this.camera.position.z < -1.5)
-		{
-			this.camera.position.z = -1.5;
+			var delta = new THREE.Quaternion();
+			delta.setFromEuler(new THREE.Euler(Editor.mouse.delta.y * 0.005, Editor.mouse.delta.x * 0.005, 0, 'XYZ'));
+			this.interactive.quaternion.multiplyQuaternions(delta, this.interactive.quaternion);
 		}
 	}
 };
