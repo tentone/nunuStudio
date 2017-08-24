@@ -164,9 +164,9 @@ THREE.Material.prototype.toJSON = function(meta)
 	{
 		data.emissive = this.emissive.getHex();
 	}
-	if(this.emissiveIntensity && this.emissiveIntensity.isColor)
+	if(this.emissiveIntensity !== 1.0)
 	{
-		data.emissiveIntensity = this.emissiveIntensity.getHex();
+		data.emissiveIntensity = this.emissiveIntensity;
 	}
 
 	//Emissive map

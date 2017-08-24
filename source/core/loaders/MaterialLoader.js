@@ -98,17 +98,6 @@ MaterialLoader.prototype.parse = function(json)
 		material.metalness = json.metalness;
 	}
 
-	//Emissive
-	if(json.emissive !== undefined)
-	{
-		if(material.emissive === undefined)
-		{
-			material.emissive = new THREE.Color();
-		}
-
-		material.emissive.setHex(json.emissive);
-	}
-
 	//Specular
 	if(json.specular !== undefined)
 	{
@@ -360,6 +349,15 @@ MaterialLoader.prototype.parse = function(json)
 	if(json.emissiveMap !== undefined)
 	{
 		material.emissiveMap = getTexture(json.emissiveMap);
+	}
+	if(json.emissive !== undefined)
+	{
+		if(material.emissive === undefined)
+		{
+			material.emissive = new THREE.Color();
+		}
+
+		material.emissive.setHex(json.emissive);
 	}
 	if(json.emissiveIntensity !== undefined)
 	{
