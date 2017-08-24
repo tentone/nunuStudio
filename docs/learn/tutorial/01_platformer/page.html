@@ -15,8 +15,8 @@
 	<style>
 		.img-normal
 		{
-			width:30%;
-			margin-left:35%;
+			width:40%;
+			margin-left:30%;
 			border-radius:10px;
 		}
 
@@ -35,7 +35,7 @@
 	<script src="../../js/embed.js"></script>
 </head>
 
-<body><!-- onload="initialize('platformer.nsp', 'platformer');">-->
+<body onload="initialize('platformer.nsp', 'platformer');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -109,50 +109,211 @@
 
 			<!--Player control-->
 			<h3 class="black">Player control</h3>
+			
 			<p>To move our player around we need to create a new script that will be used to controll the player using the keyboard keys. Scripts are objects, so they have a position, rotation, scale, etc, and can have objects attached as children.</p>
+			
 			<p>To open the code editor double click the script object on the object explorer or right click on top of it and select "Script editor", a new tab will be open with the code editor.</p>
 			
 			<img src="images/i.png" class="img-normal"></img>
 			
 			<p>In this tutorial we will use a single script object to controll all objects in the scene, but is possible to have multiple scripts.</p>
-			<p>Lets start by getting the player object in our script, to get the player object we can use its name, lets rename our physics cube (that will be used as our player) to player. After that we can use the code bellow to get the player object and store it in a variable. Since our player is a physics object we will also store its body attribute for convenience.</p>
+			
+			<p>Lets start by getting the player object in our script, to get the player object we can use its name, lets rename our physics cube (that will be used as our player) to player. After that we can use the code bellow to get the player object and store it in a variable.</p>
 
-			<pre><code>var player, body;
+			<pre><code>var player;
 
 function initialize()
 {
 	player = scene.getObjectByName("player");
-	body = player.body;
 }</code></pre>
 
 			<p>To get keyboard input we have the Keyboard object, that offers keyPressed, keyJustPressed and keyJustRelease methods that allow us to detect when the user has pressed and released a specific key in the keyboard. For this guide we will use the WASD keys.</p>
+			
 			<p>To move the player around we will manipulate its body, physics bodies have position, velocity, acceleration and force attributes. We change manipulate those to make the player move around, for better control of the player movement we will manipulate the velocity attribute.</p>
+			
 			<p>To code bellow detects when the user has pressed the A, W and D key and sets the player velocity accordingly. But after a bit of time we can the see that the player falls of our platform, that because our body is a cube and ends up rotating a bit on its corners changing its direction.</p>
 
-			<p>TODO CODE WITH PLAYER MOVEMENT</p>
+			<pre><code>function update()
+{
+	if(Keyboard.keyPressed(Keyboard.A))
+	{
+		player.body.velocity.x = -5;
+	}
+	if(Keyboard.keyPressed(Keyboard.D))
+	{
+		player.body.velocity.x = 5;
+	}
+	
+	if(Keyboard.keyJustPressed(Keyboard.W))
+	{
+		player.body.velocity.y = 10;
+	}
+}</code></pre>
 
 			<p>To avoid our player falling down our level we need to block its movement on the Z axis we can achieve this by forcing its position and/or velocity to 0 on that axis.</p>
 
-			<p>TODO CODE WITH MOVEMENT LOCK</p>
+			<pre><code>function update()
+{
+	...
+
+	player.body.position.z = 0;
+}</code></pre>
 
 			<p>Now there is still a problem left to solve, everytime the player keeps the W key pressed the player keeps going up. We can only let our player jump when he is touching the ground. To achieve this we need to check if our player is on the ground and create a new variable that will be set true when the player is touching the ground.</p>
+			
+			<p>To check if the player has touched the ground, we will create a new callback for the cannon.js world postStep event, this callback is called every time after the physics engine updates the object position, we can get a list of contact points and check if those contact points belong to our player if they do that means our player is colliding with something. Now we only need to check the orientation of the contact point, for that we will check the dot product of the contact point direction and the surface normal (we will assume a normal pointing up) is its the floor that should give us a result near 0, we will assume that any value bellow 0.1 is the floor and we will set a canJump flag to true if so.</p>
 
-			<p>TODO CODE WITH PLAYER TOUCH GROUND</p>
+			<pre><code>var player, world;
+
+function initialize()
+{
+	world = scene.world;
+	player = scene.getObjectByName("player");
+	player.canJump = false;
+	
+	var up = new Vector3(0, 1, 0);
+	var temp = new Vector3(0, 0, 0);
+	
+	world.addEventListener("postStep", function(e)
+	{
+		if(world.contacts.length > 0)
+		{
+			for(var i = 0; i < world.contacts.length; i++)
+			{
+				//Get contact points
+				var contact = world.contacts[i];
+				
+				//Check if any of the physics elements in the contact is our player
+				if(contact.bi.id === player.body.id || contact.bj.id === player.body.id)
+				{
+					//If our player is the first element negate direction and store in temp
+					if(contact.bi.id === player.body.id)
+					{
+						contact.ni.negate(temp);
+					}
+					//Else store direction in temp
+					else
+					{
+						contact.ni.copy(temp);
+					}
+					
+					//If dot product if near 0 player is touching the floor and can jump again
+					if(temp.dot(up) > 0.1)
+					{
+						player.canJump = true;
+					}
+				}
+			}
+		}
+	});
+}
+
+function update()
+{
+	...
+
+	
+	if(player.canJump && Keyboard.keyJustPressed(Keyboard.W))
+	{
+		player.body.velocity.y = 10;
+		player.canJump = false;
+	}
+	
+	...
+
+}</code></pre>
+
+			<p>Now we are able to control our character and have it moving properly around our level, but our camera is still static, to make it follow our character we can simply equal its position in the X and Y coordinates to the player position.</p>
+
+						<pre><code>var player, world, camera;
+
+function initialize()
+{
+	camera = scene.getObjectByName("camera");
+
+	...
+}
+
+function update()
+{
+	...
+
+	camera.position.x = player.body.position.x;
+	camera.position.y = player.body.position.y + 2;
+}</code></pre>
+
 
 			<h3 class="black">Enemies</h2>
-			<p>TODO</p>
+			<p>We got our player moving but we still cant die, and dont have any obstacles to avoid or enemies to kill. Dont worry we will take care of that now.</p>
+			
+			<p>Lets start by making our level a bit bigger, add more platforms some places where we can fall off, the fastest way to do this is by duplicating our already existing floor and after rotating, scaling and moving it around, be carefull we want to apply these changes to the physics object not to the visual representation.</p>
+			
+			<img src="images/j.png" class="img-normal"></img>
 
-			<h3 class="black">Water</h3>
-			<p>TODO</p>
+			<p>Now lets create some obstacles, first lets start with static obstacles and after we can make them move. I will add obstacles in red and change my player color to green, obstacles will also be static physics objects.</p>
 
-			<h3 class="black">Menu</h3>
-			<p>TODO</p>
+			<img src="images/k.png" class="img-normal"></img>
 
-			<h3 class="black">More levels</h3>
+			<p>After adding our enemies lets create a new group and add all enemies to that group, so that we can distinguish enemies from normal walls and other physics objects. In your object explorer you new group should look something like this.</p>
+
+			<img src="images/l.png" class="img-small"></img>
+
+			<p>Now lets get back to our script and add code to detect collision with enemies, lets start by adding an attribute "isEnemy" to all our enemies that we added to the group we just created. We also need to store our player spawn position so that when we die we get back to that position.</p>
+
+			<pre><code>function initialize()
+{
+	...
+
+	player.spawn = player.position.clone();
+	
+	var enemies = scene.getObjectByName("enemies");
+	for(var i = 0; i < enemies.children.length; i++)
+	{
+		enemies.children[i].body.isEnemy = true;
+	}
+
+	...
+}</code></pre>
+
+			<p>After this we need to add the enemy collision check to the callback we created ealier in our physics world, we just need to check is there is a isEnemy true value and if so reset our character position and speed.</p>
+
+
+			<pre><code>function initialize()
+{
+	...
+
+	world.addEventListener("postStep", function(e)
+	{
+		if(world.contacts.length > 0)
+		{
+			for(var i = 0; i < world.contacts.length; i++)
+			{
+				//Get contact points
+				var contact = world.contacts[i];
+				
+				//Check if any of the physics elements in the contact is our player
+				if(contact.bi.id === player.body.id || contact.bj.id === player.body.id)
+				{
+					//Check if is an enemy
+					if(contact.bi.isEnemy || contact.bj.isEnemy)
+					{
+						player.body.position.set(player.spawn.x, player.spawn.y, player.spawn.z);
+						player.body.velocity.set(0, 0, 0);
+					}
+
+	...
+}</code></pre>
+
+			<p>Before moving on to moving enemies lets add a new static enemy under the floor so that the player dies when it falls off the level, this enemy doesn't need a visual representation.</p>
+
+			<img src="images/m.png" class="img-normal"></img>
+
+			<h3 class="black">Polishing</h3>
 			<p>TODO</p>
 
 			<h3 class="black">Final result</h3>
-			<p>TODO</p>
+			<p>Heres the final result for our platformer tutorial.</p>
+			
 			<div>
 				<canvas id="platformer" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
