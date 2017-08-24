@@ -67,9 +67,8 @@
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
 			<h2 class="black">Platformer</h2>
 			<p>In this tutorial we will learn how to create a simple platformer game inside nunuStudio. We will explore how to control physics elements, import external resources and use keyboard and gamepad input.</p>
-			<p>This should take about 2 to 3 hours to complete, but its totally fine for new programmers to take longer, don't rush it take your time.</p>
-			<p>For this tutorial some previous programming experience is recommended but i will try to explain as much as possible every code.</p>
-			
+			<p>This should take about 2 to 3 hours to complete, but its totally fine for new programmers to take longer, don't rush it take your time and try to understand every step of the tutorial.</p>
+			<p>For this tutorial some previous programming experience is recommended but i will try to explain as much as possible every code needed.</p>
 
 			<!--Creating a level-->
 			<h3 class="black">Creating a level</h3>
@@ -110,15 +109,35 @@
 
 			<!--Player control-->
 			<h3 class="black">Player control</h3>
+			<p>To move our player around we need to create a new script that will be used to controll the player using the keyboard keys. Scripts are objects, so they have a position, rotation, scale, etc, and can have objects attached as children.</p>
+			<p>To open the code editor double click the script object on the object explorer or right click on top of it and select "Script editor", a new tab will be open with the code editor.</p>
+			
+			<img src="images/i.png" class="img-normal"></img>
+			
+			<p>In this tutorial we will use a single script object to controll all objects in the scene, but is possible to have multiple scripts.</p>
+			<p>Lets start by getting the player object in our script, to get the player object we can use its name, lets rename our physics cube (that will be used as our player) to player. After that we can use the code bellow to get the player object and store it in a variable. Since our player is a physics object we will also store its body attribute for convenience.</p>
 
-			<pre><code>var element = document.createElement("div");
-//TODO ADD CODE HERE
-</code></pre>
+			<pre><code>var player, body;
 
-			<p>TODO</p>
+function initialize()
+{
+	player = scene.getObjectByName("player");
+	body = player.body;
+}</code></pre>
 
-			<h3 class="black">Obstacles</h2>
-			<p>TODO</p>
+			<p>To get keyboard input we have the Keyboard object, that offers keyPressed, keyJustPressed and keyJustRelease methods that allow us to detect when the user has pressed and released a specific key in the keyboard. For this guide we will use the WASD keys.</p>
+			<p>To move the player around we will manipulate its body, physics bodies have position, velocity, acceleration and force attributes. We change manipulate those to make the player move around, for better control of the player movement we will manipulate the velocity attribute.</p>
+			<p>To code bellow detects when the user has pressed the A, W and D key and sets the player velocity accordingly. But after a bit of time we can the see that the player falls of our platform, that because our body is a cube and ends up rotating a bit on its corners changing its direction.</p>
+
+			<p>TODO CODE WITH PLAYER MOVEMENT</p>
+
+			<p>To avoid our player falling down our level we need to block its movement on the Z axis we can achieve this by forcing its position and/or velocity to 0 on that axis.</p>
+
+			<p>TODO CODE WITH MOVEMENT LOCK</p>
+
+			<p>Now there is still a problem left to solve, everytime the player keeps the W key pressed the player keeps going up. We can only let our player jump when he is touching the ground. To achieve this we need to check if our player is on the ground and create a new variable that will be set true when the player is touching the ground.</p>
+
+			<p>TODO CODE WITH PLAYER TOUCH GROUND</p>
 
 			<h3 class="black">Enemies</h2>
 			<p>TODO</p>
