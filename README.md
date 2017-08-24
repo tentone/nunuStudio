@@ -141,7 +141,7 @@
 		- Visualize math structures
 	- Desktop auto update mechanism (auto download build from github master branch)
 	- Load 3D file drag and drop with texture support
-	- Skeleton serialization 
+	- Skeleton serialization (@takahirox)
 	- ES6 lint support
 	- Support for line and points material
 	- Improvements in material editor
