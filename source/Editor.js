@@ -24,7 +24,6 @@ include("lib/stats.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.js");
 include("lib/opentype.min.js");
-include("lib/zlib.min.js");
 
 include("lib/bytebuffer.min.js");
 include("lib/long.min.js");
@@ -179,6 +178,7 @@ include("lib/three/exporters/STLExporter.js");
 include("lib/three/exporters/STLBinaryExporter.js");
 include("lib/three/exporters/GLTFExporter.js");
 
+include("lib/zlib.min.js");
 include("lib/jscookie.min.js");
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");

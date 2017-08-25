@@ -10,12 +10,12 @@ include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");
 
+include("lib/aruco.js");
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
 include("lib/stats.min.js");
 include("lib/SPE.min.js");
 include("lib/spine.js");
-include("lib/aruco.js");
 include("lib/opentype.min.js");
 
 include("lib/bytebuffer.min.js");
@@ -91,6 +91,7 @@ include("core/objects/spine/SpineTexture.js");
 include("core/objects/particle/ParticleEmitter.js");
 include("core/objects/misc/Container.js");
 include("core/objects/misc/CubeCamera.js");
+include("core/objects/misc/LensFlare.js");
 include("core/objects/animation/Skeleton.js");
 include("core/objects/Program.js");
 include("core/objects/Scene.js");
