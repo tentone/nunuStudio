@@ -36,11 +36,13 @@
 ![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/1.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/5.png)![alt tag](https://raw.githubusercontent.com/tentone/nunuStudio/master/docs/img/github/6.png)
 
 ### Installation
-- nunuStudio is intended to run with NWJS direcly on the desktop
-	- Linux and Windows are supported
+- nunuStudio is intended to run with NWJS direcly on the desktop Linux and Windows are supported
+	- Download last version from releases in the github page
+- To run the development version of nunuStudio
 	- Download the last release from the github repository and unzip it
+	- Download last NWJS version from their webpage unzip it to nwjs/win or nwjs/linux (depending on your OS)
 	- Run the start.sh or start.bat file (depending on your OS)
-- There is also a web version available on the project webpage
+- There a web version available on the project webpage
 	- The web version cannot export desktop projects
 
 ### Building

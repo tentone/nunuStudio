@@ -157,7 +157,7 @@ function Program(name)
 	this.canvas = null;
 	this.division = null;
 
-	//VR objects
+	//VR runtime objects
 	this.useVR = false;
 	this.display = null;
 	this.effect = null;

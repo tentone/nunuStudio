@@ -178,8 +178,10 @@
 						
 						
 						<div class="box intro">
-							<p>Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.</p>
-						<p>Scene original documentation available here <a href="https://threejs.org/docs/index.html#Reference/Scenes/Scene">https://threejs.org/docs/index.html#Reference/Scenes/Scene</a>.</p>
+							<p>Scenes allow you to set up what and where is to be rendered by the engine.</p>
+						<p>This is where you place objects, lights and cameras.</p>
+						<p>A program may contain multiple scenes, its possible to change between scene using scripts.</p>
+						<p>Scene three.js documentation available here <a href="https://threejs.org/docs/index.html#Reference/Scenes/Scene">https://threejs.org/docs/index.html#Reference/Scenes/Scene</a>.</p>
 						
 						</div>
 						
@@ -571,7 +573,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Serialize scene as JSON.</p>
+													<p>Serialize scene object as JSON.</p>
 											<p>Also serializes physics world information.</p>
 											
 												</div>
@@ -654,7 +656,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Update active cameras order.</p>
+													<p>Update active camera lister order.</p>
+											<p>This method should be called after changing order value for an active camera.</p>
 											
 												</div>
 											

@@ -1,9 +1,13 @@
 "use strict";
 
 /**
- * Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.
- * 
- * Scene original documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.
+ * Scenes allow you to set up what and where is to be rendered by the engine.
+ *
+ * This is where you place objects, lights and cameras.
+ *
+ * A program may contain multiple scenes, its possible to change between scene using scripts.
+ *  
+ * Scene three.js documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.
  * 
  * @class Scene
  * @module Core
@@ -41,7 +45,8 @@ function Scene()
 	this.name = "scene";
 	this.matrixAutoUpdate = false;
 
-	//Physics
+	this.usePhysics = true;
+
 	this.world = new CANNON.World();
 	this.world.defaultContactMaterial.contactEquationStiffness = 1e9;
 	this.world.defaultContactMaterial.contactEquationRelaxation = 4;
@@ -110,8 +115,11 @@ Scene.prototype.update = function()
 		this.raycaster.setFromCamera(this.mouse, this.cameras[0]);
 	}
 
-	var delta = this.clock.getDelta();
-	this.world.step((delta < 0.05) ? delta : 0.05);
+	if(this.usePhysics)
+	{
+		var delta = this.clock.getDelta();
+		this.world.step((delta < 0.05) ? delta : 0.05);
+	}
 
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -164,8 +172,10 @@ Scene.prototype.addCamera = function(camera)
 };
 
 /**
- * Update active cameras order.
- * 
+ * Update active camera lister order.
+ *
+ * This method should be called after changing order value for an active camera.
+ *  
  * @method updateCameraOrder
  */
 Scene.prototype.updateCameraOrder = function()
@@ -216,7 +226,7 @@ Scene.prototype.setFogMode = function(mode)
 };
 
 /**
- * Serialize scene as JSON.
+ * Serialize scene object as JSON.
  * 
  * Also serializes physics world information.
  * 
@@ -255,6 +265,8 @@ Scene.prototype.toJSON = function(meta)
 	{
 		data.object.fog = this.fog.toJSON();
 	}
+
+	data.object.usePhysics = this.usePhysics;
 
 	data.object.cameras = [];
 	for(var i = 0; i < this.cameras.length; i++)
