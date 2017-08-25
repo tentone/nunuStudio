@@ -28,7 +28,7 @@ Nunu.NAME = "nunuStudio";
  * @attribute VERSION
  * @type {String}
  */
-Nunu.VERSION = "V0.9.1 Beta";
+Nunu.VERSION = "V0.9.2 Beta";
 
 /**
  * Stores the nunu runtime dev timestamp.
