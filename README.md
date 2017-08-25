@@ -145,7 +145,9 @@
 	- ES6 lint support
 	- Support for line and points material
 	- Improvements in material editor
-
+- V0.9.2 Beta
+	- Support for multi selection
+	
 ### Tech
 nunuStudio is built on top of a number of open source projects
 - NWJS

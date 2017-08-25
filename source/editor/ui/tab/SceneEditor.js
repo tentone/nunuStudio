@@ -536,7 +536,7 @@ SceneEditor.prototype.update = function()
 			}
 
 			//If no object selected update tool
-			if(Editor.selectedObject !== null)
+			if(Editor.hasObjectSelected())
 			{
 				if(this.tool !== null)
 				{
@@ -544,7 +544,7 @@ SceneEditor.prototype.update = function()
 					
 					if(this.mouse.buttonJustPressed(Mouse.LEFT) && this.isEditingObject)
 					{
-						Editor.history.push(Editor.selectedObject, Action.CHANGED);
+						Editor.history.push(Editor.selectedObjects[0], Action.CHANGED);
 					}
 
 					if(this.isEditingObject)
@@ -560,11 +560,11 @@ SceneEditor.prototype.update = function()
 		}
 		
 		//Update object transformation matrix
-		if(Editor.selectedObject !== null)
+		if(Editor.hasObjectSelected())
 		{	
-			if(!Editor.selectedObject.matrixAutoUpdate)
+			if(!Editor.selectedObjects[0].matrixAutoUpdate)
 			{
-				Editor.selectedObject.updateMatrix();
+				Editor.selectedObjects[0].updateMatrix();
 			}
 		}
 
@@ -905,9 +905,9 @@ SceneEditor.prototype.render = function()
 			renderer.setScissor(x, y, width, height);
 
 			//Preview selected camera
-			if(Editor.selectedObject instanceof PerspectiveCamera || Editor.selectedObject instanceof OrthographicCamera)
+			if(Editor.selectedObjects[0] instanceof PerspectiveCamera || Editor.selectedObjects[0] instanceof OrthographicCamera)
 			{
-				var camera = Editor.selectedObject;
+				var camera = Editor.selectedObjects[0];
 				camera.aspect = width / height;
 				camera.updateProjectionMatrix();
 
@@ -1183,7 +1183,7 @@ SceneEditor.prototype.selectTool = function(tool)
 		this.tool.dispose();
 	}
 
-	if(Editor.selectedObject !== null && this.toolMode !== Editor.SELECT)
+	if(Editor.hasObjectSelected() && this.toolMode !== Editor.SELECT)
 	{
 		if(this.toolMode === Editor.MOVE)
 		{
@@ -1206,7 +1206,7 @@ SceneEditor.prototype.selectTool = function(tool)
 		this.tool.setTranslationSnap(Settings.editor.gridSpacing);
 		this.tool.setRotationSnap(Settings.editor.snapAngle);
 
-		this.tool.attach(Editor.selectedObject);
+		this.tool.attach(Editor.selectedObjects[0]);
 		this.toolContainer.add(this.tool);
 	}
 	else
@@ -1220,9 +1220,9 @@ SceneEditor.prototype.selectObjectHelper = function()
 {
 	this.objectHelper.removeAll();
 
-	if(Editor.selectedObject !== null)
+	for(var i = 0; i < Editor.selectedObjects.length; i++)
 	{
-		var object = Editor.selectedObject;
+		var object = Editor.selectedObjects[i];
 
 		//Camera
 		if(object instanceof THREE.Camera)
@@ -1258,11 +1258,17 @@ SceneEditor.prototype.selectObjectHelper = function()
 			{
 				this.objectHelper.add(new THREE.HemisphereLightHelper(object, 1));
 			}
+			//Ambient light
+			else
+			{
+				this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
+			}
 		}
 		//Particle
 		else if(object instanceof ParticleEmitter)
 		{
 			this.objectHelper.add(new ParticleEmitterHelper(object));
+			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 		//Physics
 		else if(object instanceof PhysicsObject)
