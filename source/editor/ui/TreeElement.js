@@ -400,9 +400,23 @@ function TreeElement(container)
 	};
 
 	//Click
-	this.element.onclick = function()
+	this.element.onclick = function(event)
 	{
-		Editor.selectObject(self.obj);
+		if(event.ctrlKey)
+		{
+			if(Editor.isObjectSelected(self.obj))
+			{
+				Editor.removeFromSelection(self.obj);
+			}
+			else
+			{
+				Editor.addToSelection(self.obj);
+			}
+		}
+		else
+		{
+			Editor.selectObject(self.obj);
+		}
 	};
 
 	//Double click

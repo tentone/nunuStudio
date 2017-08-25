@@ -603,10 +603,9 @@ Editor.addToSelection = function(object)
 {
 	if(object instanceof THREE.Object3D)
 	{
-		Editor.clearSelection();
-
 		Editor.selectedObjects.push(object);
 
+		Editor.selectObjectPanel();
 		Editor.selectObjectHelper();
 		Editor.selectTool();
 	}
@@ -617,12 +616,30 @@ Editor.addToSelection = function(object)
 	}
 };
 
-//Check if object is selected
-Editor.isObjectSelected = function(obj)
+//Remove object from selection
+Editor.removeFromSelection = function(object)
 {
 	for(var i = 0; i < Editor.selectedObjects.length; i++)
 	{
-		if(Editor.selectedObjects[i].uuid === obj.uuid)
+		if(Editor.selectedObjects[i].uuid === object.uuid)
+		{
+			Editor.selectedObjects.splice(i, 1);
+
+			Editor.selectObjectPanel();
+			Editor.selectObjectHelper();
+			Editor.selectTool();
+
+			return;
+		}
+	}
+};
+
+//Check if object is selected
+Editor.isObjectSelected = function(object)
+{
+	for(var i = 0; i < Editor.selectedObjects.length; i++)
+	{
+		if(Editor.selectedObjects[i].uuid === object.uuid)
 		{
 			return true;
 		}
@@ -965,7 +982,7 @@ Editor.selectObjectHelper = function(tool)
 //Update UI panel to match selected object
 Editor.selectObjectPanel = function()
 {
-	Interface.treeView.updateSelectedObject(Editor.selectedObjects[0]);
+	Interface.treeView.updateSelectedObject();
 
 	if(Interface.panel !== null)
 	{
