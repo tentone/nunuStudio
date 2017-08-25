@@ -62,14 +62,9 @@ TreeView.prototype.updateView = function()
 };
 
 //Update which object is currently selected
-TreeView.prototype.updateSelectedObject = function(obj)
+TreeView.prototype.updateSelectedObject = function()
 {
-	if(obj === undefined || obj === null)
-	{
-		return;
-	}
-
-	TreeView.updateSelectedObject(this, obj);
+	TreeView.updateSelectedObject(this);
 };
 
 //Add object to tree view
@@ -145,15 +140,14 @@ TreeView.prototype.updateInterface = function()
 };
 
 //Update treeview to highlight the selected object
-TreeView.updateSelectedObject = function(element, obj)
+TreeView.updateSelectedObject = function(element)
 {
 	var children = element.children;
-	var length = children.length;
 
-	for(var i = 0; i < length; i++)
+	for(var i = 0; i < children.length; i++)
 	{
 		//Check if is the selected object
-		if(children[i].obj.uuid === obj.uuid)
+		if(Editor.isObjectSelected(children[i].obj))
 		{
 			var element = children[i].element;
 			element.style.backgroundColor = Editor.theme.buttonOverColor;
@@ -164,7 +158,7 @@ TreeView.updateSelectedObject = function(element, obj)
 			element.style.backgroundColor = Editor.theme.buttonLightColor;
 		}
 
-		TreeView.updateSelectedObject(children[i], obj);
+		TreeView.updateSelectedObject(children[i]);
 	}
 };
 
@@ -172,9 +166,8 @@ TreeView.updateSelectedObject = function(element, obj)
 TreeView.getElementFromObject = function(element, obj)
 {
 	var children = element.children;
-	var length = children.length;
 
-	for(var i = 0; i < length; i++)
+	for(var i = 0; i < children.length; i++)
 	{
 		if(children[i].obj.uuid === obj.uuid)
 		{

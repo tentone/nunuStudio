@@ -1016,8 +1016,22 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 
 	var intersects = this.raycaster.intersectObjects(Editor.program.scene.children, true);
 	if(intersects.length > 0)
-	{
-		Editor.selectObject(intersects[0].object);
+	{	
+		if(this.keyboard.keyPressed(Keyboard.CTRL))
+		{	
+			if(Editor.isObjectSelected(intersects[0].object))
+			{
+				Editor.removeFromSelection(intersects[0].object);
+			}
+			else
+			{
+				Editor.addToSelection(intersects[0].object);
+			}
+		}
+		else
+		{
+			Editor.selectObject(intersects[0].object);
+		}
 	}
 };
 
