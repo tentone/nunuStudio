@@ -43,7 +43,7 @@ function TreeView(parent)
 TreeView.prototype.attachObject = function(obj)
 {	
 	this.obj = obj;
-}
+};
 
 TreeView.prototype.updateView = function()
 {
@@ -59,7 +59,7 @@ TreeView.prototype.updateView = function()
 	//Add element and update interface
 	TreeView.addSceneElement(this, this.obj);
 	this.updateChildPosition();
-}
+};
 
 //Update which object is currently selected
 TreeView.prototype.updateSelectedObject = function(obj)
@@ -70,7 +70,7 @@ TreeView.prototype.updateSelectedObject = function(obj)
 	}
 
 	TreeView.updateSelectedObject(this, obj);
-}
+};
 
 //Add object to tree view
 TreeView.prototype.addObject = function(obj)
@@ -82,7 +82,7 @@ TreeView.prototype.addObject = function(obj)
 	this.children.push(element);
 
 	return element;
-}
+};
 
 //Add entry to tree view
 TreeView.prototype.add = function(text, icon)
@@ -101,7 +101,7 @@ TreeView.prototype.add = function(text, icon)
 	this.children.push(element);
 
 	return element;
-}
+};
 
 //Remove element
 TreeView.prototype.destroy = function()
@@ -114,7 +114,7 @@ TreeView.prototype.destroy = function()
 
 	//Clear children list
 	this.children = [];
-}
+};
 
 //Update tree view children positions
 TreeView.prototype.updateChildPosition = function()
@@ -122,7 +122,7 @@ TreeView.prototype.updateChildPosition = function()
 	var size = TreeView.updateChildPosition(this, 20, 0, false);
 
 	this.size.y = size;
-}
+};
 
 //Update division Size
 TreeView.prototype.updateInterface = function()
@@ -142,7 +142,7 @@ TreeView.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-}
+};
 
 //Update treeview to highlight the selected object
 TreeView.updateSelectedObject = function(element, obj)
@@ -166,7 +166,7 @@ TreeView.updateSelectedObject = function(element, obj)
 
 		TreeView.updateSelectedObject(children[i], obj);
 	}
-}
+};
 
 //Get tree view element where the object is attached
 TreeView.getElementFromObject = function(element, obj)
@@ -189,7 +189,7 @@ TreeView.getElementFromObject = function(element, obj)
 	}
 
 	return null;
-}
+};
 
 //Add object element to tree (recursive)
 TreeView.addSceneElement = function(tree, scene)
@@ -203,7 +203,7 @@ TreeView.addSceneElement = function(tree, scene)
 			TreeView.addSceneElement(element, scene.children[i]);
 		}
 	}
-}
+};
 
 //Check if parent if folded (recursive)
 TreeView.checkParentFolded = function(element)
@@ -219,7 +219,7 @@ TreeView.checkParentFolded = function(element)
 	}
 
 	return TreeView.checkParentFolded(element.up);
-}
+};
 
 //Update childs position (recursive)
 TreeView.updateChildPosition = function(parent, position, level, folded)
@@ -251,4 +251,4 @@ TreeView.updateChildPosition = function(parent, position, level, folded)
 	}
 
 	return position;
-}
+};

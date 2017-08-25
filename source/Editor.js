@@ -467,7 +467,7 @@ Editor.initialize = function()
 	Editor.openFile = null;
 
 	//Selected object
-	Editor.selectedObject = null;
+	Editor.selectedObjects = [];
 
 	//Program
 	Editor.program = null;
@@ -578,14 +578,34 @@ Editor.resize = function()
 	}
 };
 
-//Select a object
+//Select a single object
 Editor.selectObject = function(object)
 {
 	if(object instanceof THREE.Object3D)
 	{
-		Editor.selectedObject = object;
+		Editor.clearSelection();
+
+		Editor.selectedObjects[0] = object;
 
 		Editor.selectObjectPanel();
+		Editor.selectObjectHelper();
+		Editor.selectTool();
+	}
+	else
+	{
+		Editor.clearSelection();
+		Editor.resetEditingFlags();
+	}
+};
+
+//Add object to selection
+Editor.addToSelection = function(object)
+{
+	if(object instanceof THREE.Object3D)
+	{
+		Editor.clearSelection();
+
+		Editor.selectedObjects.push(object);
 
 		Editor.selectObjectHelper();
 		Editor.selectTool();
@@ -600,18 +620,27 @@ Editor.selectObject = function(object)
 //Check if object is selected
 Editor.isObjectSelected = function(obj)
 {
-	if(Editor.selectedObject !== null)
+	for(var i = 0; i < Editor.selectedObjects.length; i++)
 	{
-		return Editor.selectedObject.uuid === obj.uuid;
+		if(Editor.selectedObjects[i].uuid === obj.uuid)
+		{
+			return true;
+		}
 	}
 
 	return false;
 };
 
-//Clear object selectio
+//Check if there is some object selected
+Editor.hasObjectSelected = function()
+{
+	return Editor.selectedObjects.length > 0;
+};
+
+//Clear object selection
 Editor.clearSelection = function()
 {
-	Editor.selectedObject = null;
+	Editor.selectedObjects = [];
 };
 
 //Add object to actual scene
@@ -626,12 +655,19 @@ Editor.addToScene = function(obj)
 	}
 };
 
-//Rename object
+//Rename object, if none passed as argument selected object is used
 Editor.renameObject = function(obj)
 {
 	if(obj === undefined)
 	{
-		obj = Editor.selectedObject;
+		if(Editor.hasObjectSelected())
+		{
+			obj = Editor.selectedObjects[0];
+		}
+		else
+		{
+			return;
+		}
 	}
 
 	var name = prompt("Rename object", obj.name);
@@ -651,9 +687,22 @@ Editor.deleteObject = function(obj)
 	{ 
 		if(obj === undefined)
 		{
-			obj = Editor.selectedObject;
+			if(Editor.hasObjectSelected())
+			{
+				obj = Editor.selectedObjects[0];
+			}
+			else
+			{
+				return;
+			}
 		}
-		
+
+		//Avoid delecting program
+		if(obj instanceof Program)
+		{
+			return;
+		}
+
 		if(obj instanceof THREE.Object3D)
 		{
 			if(Editor.isObjectSelected(obj))
@@ -681,11 +730,11 @@ Editor.copyObject = function(obj)
 		}
 	}
 	//If no object passed copy selected object
-	else if(Editor.selectedObject !== null && !(Editor.selectedObject instanceof Program || Editor.selectedObject instanceof Scene))
+	else if(Editor.hasObjectSelected() && !(Editor.selectedObjects[0] instanceof Program || Editor.selectedObjects[0] instanceof Scene))
 	{
 		if(Editor.clipboard !== undefined)
 		{
-			Editor.clipboard.set(JSON.stringify(Editor.selectedObject.toJSON()), "text");
+			Editor.clipboard.set(JSON.stringify(Editor.selectedObjects[0].toJSON()), "text");
 		}
 	}
 };
@@ -695,14 +744,20 @@ Editor.cutObject = function(obj)
 {
 	if(obj === undefined)
 	{
-		if(Editor.selectedObject !== null && !(Editor.selectedObject instanceof Program || Editor.selectedObject instanceof Scene))
+		if(Editor.hasObjectSelected())
 		{
-			obj = Editor.selectedObject;
+			obj = Editor.selectedObjects[0];
 		}
 		else
 		{
 			return;
 		}
+	}
+
+	//Avoid cutting program or scene objects
+	if(obj instanceof Program || obj instanceof Scene)
+	{
+		return;
 	}
 
 	if(Editor.clipboard !== undefined)
@@ -771,7 +826,7 @@ Editor.undo = function()
 	
 		if(action.type === Action.CHANGED)
 		{
-			if(action.object.uuid === Editor.selectedObject.uuid)
+			if(action.object.uuid === Editor.selectedObjects[0].uuid)
 			{
 				Editor.selectObject(action.object);
 			}
@@ -910,96 +965,96 @@ Editor.selectObjectHelper = function(tool)
 //Update UI panel to match selected object
 Editor.selectObjectPanel = function()
 {
-	Interface.treeView.updateSelectedObject(Editor.selectedObject);
+	Interface.treeView.updateSelectedObject(Editor.selectedObjects[0]);
 
 	if(Interface.panel !== null)
 	{
 		Interface.panel.destroy();
 	}
 
-	if(Editor.selectedObject !== null)
+	if(Editor.hasObjectSelected())
 	{
-		if(Editor.selectedObject instanceof THREE.Mesh)
+		if(Editor.selectedObjects[0] instanceof THREE.Mesh)
 		{
-			if(Editor.selectedObject instanceof Text3D)
+			if(Editor.selectedObjects[0] instanceof Text3D)
 			{
-				Interface.panel = new Text3DPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+				Interface.panel = new Text3DPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 			}
 			else
 			{
-				Interface.panel = new MeshPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+				Interface.panel = new MeshPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 			}
 		}
-		else if(Editor.selectedObject instanceof THREE.Light)
+		else if(Editor.selectedObjects[0] instanceof THREE.Light)
 		{
-			if(Editor.selectedObject instanceof THREE.PointLight)
+			if(Editor.selectedObjects[0] instanceof THREE.PointLight)
 			{
-				Interface.panel = new PointLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+				Interface.panel = new PointLightPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 			}
-			else if(Editor.selectedObject instanceof THREE.RectAreaLight)
+			else if(Editor.selectedObjects[0] instanceof THREE.RectAreaLight)
 			{
-				Interface.panel = new RectAreaLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+				Interface.panel = new RectAreaLightPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 			}
-			else if(Editor.selectedObject instanceof THREE.SpotLight)
+			else if(Editor.selectedObjects[0] instanceof THREE.SpotLight)
 			{
-				Interface.panel = new SpotLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+				Interface.panel = new SpotLightPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 			}
-			else if(Editor.selectedObject instanceof THREE.DirectionalLight)
+			else if(Editor.selectedObjects[0] instanceof THREE.DirectionalLight)
 			{
-				Interface.panel = new DirectionalLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+				Interface.panel = new DirectionalLightPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 			}
-			else if(Editor.selectedObject instanceof THREE.HemisphereLight)
+			else if(Editor.selectedObjects[0] instanceof THREE.HemisphereLight)
 			{
-				Interface.panel = new HemisphereLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+				Interface.panel = new HemisphereLightPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 			}
 			else
 			{
-				Interface.panel = new AmbientLightPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+				Interface.panel = new AmbientLightPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 			}
 		}
-		else if(Editor.selectedObject instanceof Sky)
+		else if(Editor.selectedObjects[0] instanceof Sky)
 		{
-			Interface.panel = new SkyPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new SkyPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
-		else if(Editor.selectedObject instanceof LeapMotion)
+		else if(Editor.selectedObjects[0] instanceof LeapMotion)
 		{
-			Interface.panel = new LeapPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new LeapPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
-		else if(Editor.selectedObject instanceof KinectDevice)
+		else if(Editor.selectedObjects[0] instanceof KinectDevice)
 		{
-			Interface.panel = new KinectPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new KinectPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
-		else if(Editor.selectedObject instanceof PerspectiveCamera)
+		else if(Editor.selectedObjects[0] instanceof PerspectiveCamera)
 		{
-			Interface.panel = new PerspectiveCameraPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new PerspectiveCameraPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
-		else if(Editor.selectedObject instanceof OrthographicCamera)
+		else if(Editor.selectedObjects[0] instanceof OrthographicCamera)
 		{
-			Interface.panel = new OrthographicCameraPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new OrthographicCameraPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
-		else if(Editor.selectedObject instanceof THREE.Audio)
+		else if(Editor.selectedObjects[0] instanceof THREE.Audio)
 		{
-			Interface.panel = new AudioPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new AudioPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
-		else if(Editor.selectedObject instanceof CubeCamera)
+		else if(Editor.selectedObjects[0] instanceof CubeCamera)
 		{
-			Interface.panel = new CubeCameraPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new CubeCameraPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
-		else if(Editor.selectedObject instanceof Scene)
+		else if(Editor.selectedObjects[0] instanceof Scene)
 		{
-			Interface.panel = new ScenePanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new ScenePanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
-		else if(Editor.selectedObject instanceof Program)
+		else if(Editor.selectedObjects[0] instanceof Program)
 		{
-			Interface.panel = new ProgramPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new ProgramPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
-		else if(Editor.selectedObject instanceof PhysicsObject)
+		else if(Editor.selectedObjects[0] instanceof PhysicsObject)
 		{
-			Interface.panel = new PhysicsPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new PhysicsPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
 		else
 		{
-			Interface.panel = new ObjectPanel(Interface.explorerResizable.divB, Editor.selectedObject);
+			Interface.panel = new ObjectPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
 
 		Interface.panel.updatePanel();
