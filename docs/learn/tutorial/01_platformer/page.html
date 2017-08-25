@@ -114,6 +114,12 @@
 
 			<img src="images/h.png" class="img-normal"></img>
 
+			<p>If you are having some trouble completing this part of the tutorial you can download the project fileou can download the <a class="underline" href="steps/a.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/steps/a.nsp">Web Editor</a>.</p>
+			
+			<!--<div> 
+				<canvas id="step_c" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>-->
+
 			<!--Player control-->
 			<h3 class="black">Player control</h3>
 			
@@ -249,6 +255,11 @@ function update()
 	camera.position.y = player.body.position.y + 2;
 }</code></pre>
 
+			<p>If you are having some trouble completing this part of the tutorial you can download the project fileou can download the <a class="underline" href="steps/b.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/steps/b.nsp">Web Editor</a>.</p>
+			
+			<!--<div> 
+				<canvas id="step_c" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>-->
 
 			<h3 class="black">Enemies</h2>
 			<p>We got our player moving but we still cant die, and dont have any obstacles to avoid or enemies to kill. Dont worry we will take care of that now.</p>
@@ -369,6 +380,12 @@ function update()
 			
 			<p>You should have now a moving enemy in your game, duplicate the created script and attach it to other object to make them move as well, try to create a moving platform like the ones in super mario games.</p>
 
+			<p>If you are having some trouble completing this part of the tutorial you can download the project fileou can download the <a class="underline" href="steps/c.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/steps/c.nsp">Web Editor</a>.</p>
+			
+			<!--<div> 
+				<canvas id="step_c" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>-->
+
 			<h3 class="black">Gamepad input</h3>
 			<p>To add support for gamepad input we can create a Gamepad object in our script, the gamepad object allows us to get input from an USB gamepad, different gamepads might have different button mapping you can use <a class="underline" href="http://html5gamepad.com/">this website</a> to check you gamepad button mapping. To check the name of other buttons in the Gamepad check the <a class="underline" href="../../../docs/classes/Gamepad.html">Gamepad API documentation</a>.</p>
 
@@ -391,13 +408,49 @@ function update()
 }</code></pre>
 			
 			<h3 class="black">Put the pieces together</h3>
-			<p>Now we already have all basic blocks to make a complete platformer level lets take them and build complete level with actuall game assets. To make it easier to overview our level we can use the 2D editor mode (can be toggled in the top right corner of the scene explorer).</p>
+			<p>Now we already have all basic blocks to make a complete platformer level lets take them and build complete level with actual game assets and tweak gameplay a little bit. To make it easier to overview our level we can use the 2D editor mode (can be toggled in the top right corner of the scene explorer).</p>
 
-			<img src="images/n.png" class="img-normal"></img>
+			<img src="images/n.png" class="img-big"></img>
 
-			<p>Were almost done now its the time to add textures and decoration to our level, this is a good time to experiment to use some of the decoration objects like Particles, LensFlare, etc. I haven't done much regarding decoration simply added a couple of materials and colored everything up.</p>
+			<p>Were almost done now its the time to add textures and decoration to our level, this is a good time to experiment to use some of the decoration objects like Particles, LensFlare, etc. I haven't done much regarding decoration simply added a couple of materials and colored everything up, added a LensFlare effect and some particles floating around the level.</p>
 
 			<img src="images/p.png" class="img-normal"></img>
+
+			<p>Since the player movement was also a little slow i tweaked it a bit by adding the option to run using the keyboard shift key and tweaking the movement to have an acceleration curve instead of instant move.</p>
+			<p>At the beginning of this tutorial i was planning to change the cube for a ball or lock its rotation but since i find it kinda of funny to see the cube tumbling around so i will leave it like this.</p>
+
+			<pre><code>function update()
+{
+
+	...
+	
+	var velocity = 6;
+	var acceleration = 0.6;
+	
+	if(Keyboard.keyPressed(Keyboard.SHIFT))
+	{
+		velocity = 8;
+		acceleration = 1;
+	}
+	
+	if(Keyboard.keyPressed(Keyboard.A) || gamepad.buttonPressed(Gamepad.LEFT))
+	{
+		if(player.body.velocity.x > -velocity)
+		{
+			player.body.velocity.x -= acceleration;
+		}
+	}
+	if(Keyboard.keyPressed(Keyboard.D) || gamepad.buttonPressed(Gamepad.RIGHT))
+	{
+		if(player.body.velocity.x < velocity)
+		{
+			player.body.velocity.x += acceleration;
+		}
+	}
+
+	...
+
+}</code></pre>
 
 			<h3 class="black">Final result</h3>
 			<p>If you were able to make it this far congratulations, you have created an awseome platformer game. This should cover all the basic aspects for platformer games. If you have any doubt about any of the steps in the tutorial, feel free to ask me about it.</p>
