@@ -786,6 +786,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			
 		case "Scene":
 			object = new Scene();
+
 			if(data.background !== undefined)
 			{
 				if(Number.isInteger(data.background))
@@ -797,6 +798,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 					object.background = getTexture(data.background);
 				}
 			}
+
 			if(data.fog !== undefined)
 			{
 				if(data.fog.type === "Fog")
@@ -808,13 +810,25 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 					object.fog = new THREE.FogExp2(data.fog.color, data.fog.density);
 				}
 			}
+
 			if(data.cameras !== undefined)
 			{
 				object.cameras = data.cameras;
 			}
+
+			if(data.usePhysics !== undefined)
+			{
+				object.usePhysics = data.usePhysics;
+			}
+
 			if(data.world !== undefined)
 			{
 				object.world.gravity.set(data.world.gravity.x, data.world.gravity.y, data.world.gravity.z);
+				object.world.quatNormalizeSkip = data.world.quatNormalizeSkip;
+				object.world.quatNormalizeFast = data.world.quatNormalizeFast;
+				
+				object.world.solver.tolerance = data.world.solver.tolerance;
+				object.world.solver.iterations = data.world.solver.iterations;
 			}
 			break;
 

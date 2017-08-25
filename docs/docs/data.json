@@ -2267,7 +2267,7 @@
             "namespace": "",
             "file": "../../source/core/objects/Scene.js",
             "line": 3,
-            "description": "Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.\n\nScene original documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.",
+            "description": "Scenes allow you to set up what and where is to be rendered by the engine.\n\nThis is where you place objects, lights and cameras.\n\nA program may contain multiple scenes, its possible to change between scene using scripts.\n \nScene three.js documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.",
             "is_constructor": 1,
             "extends": "{Scene}"
         },
@@ -9052,7 +9052,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 14,
+            "line": 18,
             "description": "Cannon.js world used for physics simulation.\nThe world is configured by default with a NaiveBroadphase and a SplitSolver.\nDocumentation for cannon.js physics World object can be found here http://schteppe.github.io/cannon.js/docs/classes/World.html.",
             "itemtype": "property",
             "name": "world",
@@ -9062,7 +9062,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 20,
+            "line": 24,
             "description": "Raycaster used for mouse interaction with 3D objects.\nThis raycaster is automatically updated using the first camera being drawn.",
             "itemtype": "property",
             "name": "raycaster",
@@ -9072,7 +9072,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 25,
+            "line": 29,
             "description": "Normalized mouse coordinates used by the scene internal raycaster.",
             "itemtype": "property",
             "name": "mouse",
@@ -9082,7 +9082,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 29,
+            "line": 33,
             "description": "Program that contains this scene.",
             "itemtype": "property",
             "name": "program",
@@ -9092,7 +9092,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 33,
+            "line": 37,
             "description": "Canvas used to draw this scene.",
             "itemtype": "property",
             "name": "canvas",
@@ -9102,7 +9102,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 75,
+            "line": 80,
             "description": "Initialize scene objects.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -9111,7 +9111,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 98,
+            "line": 103,
             "description": "Update scene objects and the physics world.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -9120,7 +9120,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 122,
+            "line": 130,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -9140,7 +9140,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 154,
+            "line": 162,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -9156,8 +9156,8 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 166,
-            "description": "Update active cameras order.",
+            "line": 174,
+            "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
             "class": "Scene",
@@ -9165,7 +9165,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 179,
+            "line": 189,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -9181,7 +9181,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 194,
+            "line": 204,
             "description": "Set scene fog mode.",
             "params": [
                 {
@@ -9197,8 +9197,8 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 218,
-            "description": "Serialize scene as JSON.\n\nAlso serializes physics world information.",
+            "line": 228,
+            "description": "Serialize scene object as JSON.\n\nAlso serializes physics world information.",
             "itemtype": "method",
             "name": "toJSON",
             "params": [

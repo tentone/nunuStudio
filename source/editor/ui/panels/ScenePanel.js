@@ -171,6 +171,21 @@ function ScenePanel(parent, obj)
 	this.form.addText("Physics");
 	this.form.nextRow();
 
+	//Use physics
+	this.form.addText("Use physics");
+	this.usePhysics = new CheckBox(this.form.element);
+	this.usePhysics.size.set(15, 15);
+	this.usePhysics.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			Editor.history.push(self.obj, Action.CHANGED);
+			self.obj.usePhysics = self.usePhysics.getValue();
+		}
+	});
+	this.form.add(this.usePhysics);
+	this.form.nextRow();
+
 	//Gravity
 	this.form.addText("Gravity");
 	this.gravity = new CoordinatesBox(this.form.element);
@@ -259,6 +274,7 @@ ScenePanel.prototype.updatePanel = function()
 			}
 		}
 
+		this.usePhysics.setValue(this.obj.usePhysics);
 		this.gravity.setValue(this.obj.world.gravity.x, this.obj.world.gravity.y, this.obj.world.gravity.z);
 		this.tolerance.setValue(this.obj.world.solver.tolerance);
 		this.iterations.setValue(this.obj.world.solver.iterations);
