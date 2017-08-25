@@ -25,7 +25,7 @@ Settings.loadDefault = function()
 {
 	//General
 	Settings.general = {		
-		autoUpdate : true,
+		autoUpdate : false,
 		theme : "dark",
 		filePreviewSize : 70,
 		showStats : false,
@@ -92,19 +92,19 @@ Settings.loadDefault = function()
 		bitwise : false, // true: Prohibit bitwise operators (&, |, ^, etc.)
 		curly : false, // true: Require {} for every new block or scope
 		eqeqeq : false, // true: Require triple equals (===) for comparison
-		forin : true, // true: Require filtering for..in loops with obj.hasOwnProperty()
+		forin : false, // true: Require filtering for..in loops with obj.hasOwnProperty()
 		freeze : true, // true: prohibits overwriting prototypes of native objects such as Array, Date etc.
 		latedef : false, // true: Require variables/functions to be defined before being used
 		noarg : true, // true: Prohibit use of `arguments.caller` and `arguments.callee`
 		nonbsp : true, // true: Prohibit non-breaking whitespace characters.
 		nonew : false, // true: Prohibit use of constructors for side-effects (without assignment)
 		plusplus : false, // true: Prohibit use of `++` and `--`
-		undef : true, // true: Require all non-global variables to be declared (prevents global leaks)
+		undef : false, // true: Require all non-global variables to be declared (prevents global leaks)
 		unused : true, // Unused variables:
 							// true : all variables, last function parameter
 							// "vars" : all variables only
 							// "strict" : all variables, all function parameters
-		strict : true, // true: Requires all functions run in ES5 Strict Mode
+		strict : false, // true: Requires all functions run in ES5 Strict Mode
 		maxparams : false, // {int} Max number of formal params allowed per function
 		maxdepth : false, // {int} Max depth of nested blocks (within functions)
 		maxstatements : false, // {int} Max number statements per function
@@ -112,28 +112,28 @@ Settings.loadDefault = function()
 		varstmt : false, // true: Disallow any var statements. Only `let` and `const` are allowed.
 
 		//Relaxing
-		asi : false, // true: Tolerate Automatic Semicolon Insertion (no semicolons)
-		boss : false, // true: Tolerate assignments where comparisons would be expected
-		debug : false, // true: Allow debugger statements e.g. browser breakpoints.
+		asi : true, // true: Tolerate Automatic Semicolon Insertion (no semicolons)
+		boss : true, // true: Tolerate assignments where comparisons would be expected
+		debug : true, // true: Allow debugger statements e.g. browser breakpoints.
 		eqnull : true, // true: Tolerate use of `== null`
 		esversion : 6, // {int} Specify the ECMAScript version to which the code must adhere.
-		moz : false, // true: Allow Mozilla specific syntax (extends and overrides esnext features)
+		moz : true, // true: Allow Mozilla specific syntax (extends and overrides esnext features)
 								 // (ex: `for each`, multiple try/catch, function expression…)
 		evil : true, // true: Tolerate use of `eval` and `new Function()`
-		expr : false, // true: Tolerate `ExpressionStatement` as Programs
-		funcscope : false, // true: Tolerate defining variables inside control statements
-		iterator : false, // true: Tolerate using the `__iterator__` property
-		lastsemic : false, // true: Tolerate omitting a semicolon for the last statement of a 1-line block
+		expr : true, // true: Tolerate `ExpressionStatement` as Programs
+		funcscope : true, // true: Tolerate defining variables inside control statements
+		iterator : true, // true: Tolerate using the `__iterator__` property
+		lastsemic : true, // true: Tolerate omitting a semicolon for the last statement of a 1-line block
 		laxbreak : false, // true: Tolerate possibly unsafe line breakings
-		loopfunc : false, // true: Tolerate functions being defined in loops
+		loopfunc : true, // true: Tolerate functions being defined in loops
 		noyield : false, // true: Tolerate generator functions with no yield statement in them.
-		notypeof : false, // true: Tolerate invalid typeof operator values
-		proto : false, // true: Tolerate using the `__proto__` property
+		notypeof : true, // true: Tolerate invalid typeof operator values
+		proto : true, // true: Tolerate using the `__proto__` property
 		scripturl : false, // true: Tolerate script-targeted URLs
-		shadow : false, // true: Allows re-define variables later in code e.g. `var x=1; x=2;`
+		shadow : true, // true: Allows re-define variables later in code e.g. `var x=1; x=2;`
 		sub : true, // true: Tolerate using `[]` notation when it can still be expressed in dot notation
 		supernew : true, // true: Tolerate `new function () { ... };` and `new Object;`
-		validthis : false, // true: Tolerate using this in a non-constructor function
+		validthis : true, // true: Tolerate using this in a non-constructor function
 
 		//Environment
 		browser : true, // Web Browser (window, document, etc)

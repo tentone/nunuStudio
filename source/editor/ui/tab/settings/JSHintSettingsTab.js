@@ -53,7 +53,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//For...in
-	this.form.addText("for...in");
+	this.form.addText("Filtering for...in");
 	this.forin = new CheckBox(this.form.element);
 	this.forin.size.set(15, 15);
 	this.forin.setOnChange(function()
@@ -140,6 +140,86 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.form.add(this.undef);
 	this.form.nextRow();
 
+	//Blank Space
+	this.form.addText("");
+	this.form.nextRow();
+
+	//Relaxing options
+	this.form.addText("Relaxing Options");
+	this.form.nextRow();
+
+	this.form.addText("Allow no semicolons");
+	this.asi = new CheckBox(this.form.element);
+	this.asi.size.set(15, 15);
+	this.asi.setOnChange(function()
+	{
+		Settings.jslint.asi = self.asi.getValue();
+	});
+	this.form.add(this.asi);
+	this.form.nextRow();
+
+	this.form.addText("Allow assign on comp.");
+	this.boss = new CheckBox(this.form.element);
+	this.boss.size.set(15, 15);
+	this.boss.setOnChange(function()
+	{
+		Settings.jslint.boss = self.boss.getValue();
+	});
+	this.form.add(this.boss);
+	this.form.nextRow();
+
+	this.form.addText("Allow debug stat.");
+	this.debug = new CheckBox(this.form.element);
+	this.debug.size.set(15, 15);
+	this.debug.setOnChange(function()
+	{
+		Settings.jslint.debug = self.debug.getValue();
+	});
+	this.form.add(this.debug);
+	this.form.nextRow();
+
+	this.form.addText("Allow == null");
+	this.eqnull = new CheckBox(this.form.element);
+	this.eqnull.size.set(15, 15);
+	this.eqnull.setOnChange(function()
+	{
+		Settings.jslint.eqnull = self.eqnull.getValue();
+	});
+	this.form.add(this.eqnull);
+	this.form.nextRow();
+
+	this.form.addText("ECMAScript Version");
+	this.esversion = new DropdownList(this.form.element);
+	this.esversion.size.set(50, 20);
+	this.esversion.addValue(5, 5);
+	this.esversion.addValue(6, 6);
+	this.esversion.setOnChange(function()
+	{
+		Settings.jslint.esversion = self.esversion.getValue();
+	});
+	this.form.add(this.esversion);
+	this.form.nextRow();
+
+	this.form.addText("Allow moz");
+	this.moz = new CheckBox(this.form.element);
+	this.moz.size.set(15, 15);
+	this.moz.setOnChange(function()
+	{
+		Settings.jslint.moz = self.moz.getValue();
+	});
+	this.form.add(this.moz);
+	this.form.nextRow();
+
+	this.form.addText("Allow eval");
+	this.evil = new CheckBox(this.form.element);
+	this.evil.size.set(15, 15);
+	this.evil.setOnChange(function()
+	{
+		Settings.jslint.evil = self.evil.getValue();
+	});
+	this.form.add(this.evil);
+	this.form.nextRow();
+
 	//Update form
 	this.form.updateInterface();
 }
@@ -160,6 +240,14 @@ JSHintSettingsTab.prototype.activate = function()
 	this.nonew.setValue(Settings.jslint.nonew);
 	this.plusplus.setValue(Settings.jslint.plusplus);
 	this.undef.setValue(Settings.jslint.undef);
+
+	this.asi.setValue(Settings.jslint.asi);
+	this.boss.setValue(Settings.jslint.boss);
+	this.debug.setValue(Settings.jslint.debug);
+	this.eqnull.setValue(Settings.jslint.eqnull);
+	this.esversion.setValue(Settings.jslint.esversion);
+	this.moz.setValue(Settings.jslint.moz);
+	this.evil.setValue(Settings.jslint.evil);
 };
 
 //Update division Size
