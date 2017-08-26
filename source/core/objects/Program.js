@@ -297,28 +297,6 @@ Program.prototype.render = function(renderer)
 	//Render normally
 	else
 	{
-
-		/*
-		var renderPass = new THREE.RenderPass( scene, camera );
-
-		var bokehPass = new THREE.BokehPass( scene, camera, {
-			focus: 		1.0,
-			aperture:	0.025,
-			maxblur:	1.0,
-
-			width: width,
-			height: height
-		} );
-
-		bokehPass.renderToScreen = true;
-
-		var composer = new THREE.EffectComposer( renderer );
-
-		composer.addPass( renderPass );
-		composer.addPass( bokehPass );
-		*/
-
-
 		this.scene.render(renderer);
 	}
 };

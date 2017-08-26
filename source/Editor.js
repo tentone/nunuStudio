@@ -15,12 +15,16 @@ include("lib/three/effects/VREffect.js");
 
 include("lib/three/shaders/CopyShader.js");
 include("lib/three/shaders/BokehShader.js");
+include("lib/three/shaders/SAOShader.js");
+include("lib/three/shaders/DepthLimitedBlurShader.js");
+include("lib/three/shaders/UnpackDepthRGBAShader.js");
 
 include("lib/three/postprocessing/EffectComposer.js");
 include("lib/three/postprocessing/RenderPass.js");
 include("lib/three/postprocessing/ShaderPass.js");
 include("lib/three/postprocessing/MaskPass.js");
 include("lib/three/postprocessing/BokehPass.js");
+include("lib/three/postprocessing/SAOPass.js");
 
 include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
