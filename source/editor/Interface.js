@@ -757,7 +757,7 @@ Interface.initialize = function()
 		Editor.deleteObject();
 	}, Editor.filePath + "icons/misc/delete.png");
 
-	var csg = Interface.editor.addMenu("CSG", Editor.filePath + "icons/misc/publish.png");
+	var csg = Interface.editor.addMenu("CSG", Editor.filePath + "icons/models/figures.png");
 
 	var createBSP = function(object)
 	{
@@ -789,7 +789,7 @@ Interface.initialize = function()
 		{
 			if(Editor.selectedObjects[i].geometry === undefined)
 			{
-				Editor.alert("Operation needs two geomtries");
+				Editor.alert("Operation needs two objects with geometries");
 				return;
 			}
 		}
@@ -801,7 +801,7 @@ Interface.initialize = function()
 		mesh.material = Editor.defaultMaterial;
 
 		Editor.addToScene(mesh);
-	});
+	}, Editor.filePath + "icons/misc/intersect.png");
 
 	csg.addOption("Subtract", function()
 	{
@@ -815,7 +815,7 @@ Interface.initialize = function()
 		{
 			if(Editor.selectedObjects[i].geometry === undefined)
 			{
-				Editor.alert("Operation needs two geomtries");
+				Editor.alert("Operation needs two objects with geometries");
 				return;
 			}
 		}
@@ -827,7 +827,7 @@ Interface.initialize = function()
 		mesh.material = Editor.defaultMaterial;
 
 		Editor.addToScene(mesh);
-	});
+	}, Editor.filePath + "icons/misc/subtract.png");
 
 	csg.addOption("Union", function()
 	{
@@ -841,7 +841,7 @@ Interface.initialize = function()
 		{
 			if(Editor.selectedObjects[i].geometry === undefined)
 			{
-				Editor.alert("Operation needs two geomtries");
+				Editor.alert("Operation needs two objects with geometries");
 				return;
 			}
 		}
@@ -853,7 +853,7 @@ Interface.initialize = function()
 		mesh.material = Editor.defaultMaterial;
 
 		Editor.addToScene(mesh);
-	});
+	}, Editor.filePath + "icons/misc/union.png");
 
 	//Project
 	Interface.project = new DropdownMenu();
