@@ -258,6 +258,115 @@ Program.prototype.setRenderer = function(renderer, configure)
 	
 	if(configure)
 	{	
+		this.updateRenderer();
+	}
+};
+
+/**
+ * Update program state, this updated all current scene children elements.
+ * 
+ * @method update
+ */
+Program.prototype.update = function()
+{
+	this.scene.update();
+};
+
+/**
+ * Render current scene to canvas.
+ *
+ * When rendering in VR mode all effects and camera parameters are ignored.
+ * 
+ * Renderer should be initialized and passed as argument.
+ * 
+ * @method render
+ * @param {Renderer} renderer
+ */
+Program.prototype.render = function(renderer)
+{
+	//Render as a VR application (ignores all camera parameters and effects)
+	if(this.useVR)
+	{
+		for(var i = 0; i < this.scene.cameras.length; i++)
+		{
+			var camera = this.scene.cameras[i];
+			this.controls.update(camera);
+			this.effect.render(this.scene, camera);
+		}
+	}
+	//Render normally
+	else
+	{
+
+		/*
+		var renderPass = new THREE.RenderPass( scene, camera );
+
+		var bokehPass = new THREE.BokehPass( scene, camera, {
+			focus: 		1.0,
+			aperture:	0.025,
+			maxblur:	1.0,
+
+			width: width,
+			height: height
+		} );
+
+		bokehPass.renderToScreen = true;
+
+		var composer = new THREE.EffectComposer( renderer );
+
+		composer.addPass( renderPass );
+		composer.addPass( bokehPass );
+		*/
+
+
+		this.scene.render(renderer);
+	}
+};
+
+/**
+ * Resize program elements.
+ * 
+ * Called by the runtime every time the window is resized.
+ * 
+ * @method resize
+ * @param {Number} x Width
+ * @param {Number} y Height
+ */
+Program.prototype.resize = function(x, y)
+{
+	if(this.effect !== null)
+	{
+		this.effect.setSize(x, y);
+	}
+
+	//Resize cameras
+	for(var i = 0; i < this.scene.cameras.length; i++)
+	{
+		this.scene.cameras[i].aspect = x / y;
+		this.scene.cameras[i].updateProjectionMatrix();
+	}
+
+	//Resize scripts
+	this.traverse(function(child)
+	{
+		if(child instanceof Script)
+		{
+			child.resize();
+		}
+	});
+};
+
+/**
+ * This method updated the webgl renderer configuration.
+ *
+ * Should be called after changing any rendering related parameter.
+ *
+ * @method updateRenderer
+ */
+Program.prototype.updateRenderer = function()
+{
+	if(this.renderer !== null)
+	{
 		this.renderer.shadowMap.enabled = this.shadows;
 		this.renderer.shadowMap.type = this.shadowsType;
 		this.renderer.toneMapping = this.toneMapping;
@@ -306,100 +415,6 @@ Program.prototype.exitVR = function()
 		this.display.exitPresent();
 		this.useVR = false;
 	}
-};
-
-/**
- * Update program state, this updated all current scene children elements.
- * 
- * @method update
- */
-Program.prototype.update = function()
-{
-	this.scene.update();
-};
-
-/**
- * Render program to canvas.
- * 
- * Renderer passed as argument.
- * 
- * @method render
- * @param {Renderer} renderer
- */
-Program.prototype.render = function(renderer)
-{
-	//Render as a VR application (ignores camera parameters)
-	if(this.useVR)
-	{
-		for(var i = 0; i < this.scene.cameras.length; i++)
-		{
-			var camera = this.scene.cameras[i];
-			this.controls.update(camera);
-			this.effect.render(this.scene, camera);
-		}
-	}
-	//Render normally
-	else
-	{
-		var x = renderer.domElement.width;
-		var y = renderer.domElement.height;
-
-		renderer.setScissorTest(true);
-
-		for(var i = 0; i < this.scene.cameras.length; i++)
-		{
-			var camera = this.scene.cameras[i];
-
-			if(camera.clearColor)
-			{
-				renderer.clearColor();
-			}
-			if(camera.clearDepth)
-			{
-				renderer.clearDepth();
-			}
-
-			renderer.setViewport(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
-			renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
-
-			renderer.render(this.scene, camera);
-		}
-
-		renderer.setScissorTest(false);
-	}
-};
-
-/**
- * Resize program elements.
- * 
- * Called by the runtime every time the window is resized.
- * 
- * @method resize
- * @param {Number} x Width
- * @param {Number} y Height
- */
-Program.prototype.resize = function(x, y)
-{
-	if(this.effect !== null)
-	{
-		this.effect.setSize(x, y);
-	}
-
-	//Resize cameras
-	for(var i = 0; i < this.scene.cameras.length; i++)
-	{
-		this.scene.cameras[i].aspect = x / y;
-		this.scene.cameras[i].updateProjectionMatrix();
-	}
-
-	//Resize scripts
-	this.traverse(function(child)
-	{
-		if(child instanceof Script)
-		{
-			child.resize();
-		}
-	});
 };
 
 /**
