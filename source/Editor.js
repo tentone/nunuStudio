@@ -699,41 +699,49 @@ Editor.renameObject = function(obj)
 //Delete selected Object
 Editor.deleteObject = function(obj)
 {
-	var del = confirm("Delete object?");
+	var del = Editor.confirm("Delete object?");
 
 	if(del)
 	{ 
 		if(obj === undefined)
 		{
+
 			if(Editor.hasObjectSelected())
 			{
-				obj = Editor.selectedObjects[0];
+				var selected = Editor.selectedObjects;
+				Editor.resetEditingFlags();
 			}
 			else
 			{
 				return;
 			}
 		}
-
-		//Avoid delecting program
-		if(obj instanceof Program)
+		else
 		{
-			return;
+			var selected = [obj];
 		}
 
-		if(obj instanceof THREE.Object3D)
+		//Delect selection
+		for(var i = 0; i < selected.length; i++)
 		{
-			if(Editor.isObjectSelected(obj))
+			//Avoid deleting program
+			if(selected[i] instanceof Program)
 			{
-				Editor.resetEditingFlags();
+				continue;
 			}
+			else if(selected[i] instanceof THREE.Object3D)
+			{
+				if(Editor.isObjectSelected(selected[i]))
+				{
+					Editor.removeFromSelection(selected[i]);
+				}
 
-			Editor.history.push(obj, Action.REMOVED);
-			
-			obj.destroy();
-
-			Editor.updateObjectViews();
+				Editor.history.push(selected[i], Action.REMOVED);
+				selected[i].destroy();
+			}
 		}
+
+		Editor.updateObjectViews();
 	}
 };
 
@@ -1151,8 +1159,8 @@ Editor.saveProgram = function(fname, binary, keepDirectory, suppressMessage)
 		else
 		{
 			fname = fname.replace(".nsp", ".isp");
+
 			var json = JSON.stringify(Editor.program.toJSON());
-			//var json = JSON.stringify(Editor.program.toJSON(), null, "\t").replace(/[\n\t]+([\d\.e\-\[\]]+)/g, "$1");
 			FileSystem.writeFile(fname, json);
 		}
 
