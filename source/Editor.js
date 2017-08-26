@@ -1468,7 +1468,6 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					console.log(reader.result);
-
 					//TODO <ADD CODE HERE>
 				}
 				catch(e)
@@ -1510,11 +1509,9 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.ColladaLoader();
 					var collada = loader.parse(reader.result, path);
 					
-					//console.log(collada);
-
 					var scene = collada.scene;
+
 					//var animations = collada.animations;
-					
 					//TODO <SUPPORT FOR ANIMATIONS>
 					
 					Editor.addToScene(scene);
@@ -1538,24 +1535,13 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.GLTFLoader();
 					loader.parse(reader.result, path, function(gltf)
 					{
-						//console.log(gltf);
-
 						var scene = gltf.scene;
 						scene.type = "Group";
 						
 						//var animation = gltf.animations;
-
 						//TODO <SUPPORT FOR ANIMATIONS>
 
 						Editor.addToScene(scene);
-
-						/*if(gltf.scene !== undefined)
-						{
-							for(var i = 0; i < gltf.scene.children.length; i++)
-							{
-								Editor.addToScene(gltf.scene.children[i]);
-							}
-						}*/
 					});
 				}
 				catch(e)
