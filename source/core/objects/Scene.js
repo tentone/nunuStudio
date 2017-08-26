@@ -64,6 +64,7 @@ function Scene()
 	//Runtime objects
 	this.clock = new THREE.Clock();
 	this.raycaster = new THREE.Raycaster();
+	this.delta = 0.0;
 
 	//Renderer canvas
 	this.program = null;
@@ -98,6 +99,65 @@ Scene.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
+
+	//---------------------------------------------------------------------------
+	//  TODO <REMOVE THIS TEST CODE>
+	//---------------------------------------------------------------------------
+
+	var renderPass = new THREE.RenderPass(this, this.cameras[0]);
+	renderPass.renderToScreen = false;
+
+	//---------------------------------------------------------------------------
+	//Depth-of-field w/ bokeh
+	//---------------------------------------------------------------------------
+	var bokehPass = new THREE.BokehPass(this, this.cameras[0],
+	{
+		focus: 1.0,
+		aperture: 0.025,
+		maxblur: 1.0
+	});
+	bokehPass.setSize(this.canvas.width, this.canvas.height);
+	bokehPass.renderToScreen = true;
+	
+	//---------------------------------------------------------------------------
+	//Scalable Ambient Occlusion
+	//---------------------------------------------------------------------------
+	var saoPass = new THREE.SAOPass(this, this.cameras[0], false, true);
+	saoPass.params =
+	{
+		output: THREE.SAOPass.OUTPUT.Default, //Beauty | SAO | Depth | Normal
+		saoBias: 0.1,
+		saoIntensity: 0.1,
+		saoScale: 20,
+		saoKernelRadius: 10,
+		saoMinResolution: 0,
+		saoBlur: true,
+		saoBlurRadius: 12,
+		saoBlurStdDev: 4,
+		saoBlurDepthCutoff: 0.01
+	};
+	saoPass.setSize(this.canvas.width, this.canvas.height);
+	saoPass.renderToScreen = true;
+
+	//---------------------------------------------------------------------------
+	//Unreal bloom
+	//---------------------------------------------------------------------------
+	//TODO <ADD CODE HERE>
+
+	//---------------------------------------------------------------------------
+	//Screen space ambient occlusion
+	//---------------------------------------------------------------------------
+	//TODO <ADD CODE HERE>
+
+	//---------------------------------------------------------------------------
+	//Composer
+	//---------------------------------------------------------------------------
+	this.composer = new THREE.EffectComposer(this.program.renderer);
+	this.composer.addPass(renderPass);
+	//this.composer.addPass(bokehPass);
+	this.composer.addPass(saoPass);
+	this.composer.setSize(this.canvas.width, this.canvas.height);
+	//---------------------------------------------------------------------------
 };
 
 /**
@@ -115,10 +175,11 @@ Scene.prototype.update = function()
 		this.raycaster.setFromCamera(this.mouse, this.cameras[0]);
 	}
 
+	this.delta = this.clock.getDelta();
+	
 	if(this.usePhysics)
 	{
-		var delta = this.clock.getDelta();
-		this.world.step((delta < 0.05) ? delta : 0.05);
+		this.world.step((this.delta < 0.05) ? this.delta : 0.05);
 	}
 
 	for(var i = 0; i < this.children.length; i++)
@@ -157,6 +218,8 @@ Scene.prototype.render = function(renderer)
 		renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
 
 		renderer.render(this, camera);
+
+		//this.composer.render(this.delta);
 	}
 
 	renderer.setScissorTest(false);
