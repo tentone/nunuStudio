@@ -184,6 +184,7 @@ include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
 include("lib/jszip.min.js");
 include("lib/quickhull.js");
+include("lib/ThreeCSG.js");
 
 include("editor/style.css");
 
