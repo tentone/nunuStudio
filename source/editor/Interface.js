@@ -757,6 +757,104 @@ Interface.initialize = function()
 		Editor.deleteObject();
 	}, Editor.filePath + "icons/misc/delete.png");
 
+	var csg = Interface.editor.addMenu("CSG", Editor.filePath + "icons/misc/publish.png");
+
+	var createBSP = function(object)
+	{
+		var geometry = object.geometry;
+
+		if(geometry instanceof THREE.BufferGeometry)
+		{
+			geometry = new THREE.Geometry().fromBufferGeometry(geometry);
+		}
+		else
+		{
+			geometry = geometry.clone();
+		}
+		
+		geometry.applyMatrix(object.matrixWorld);
+
+		return new ThreeBSP(geometry);
+	};
+
+	csg.addOption("Intersect", function()
+	{
+		if(Editor.selectedObjects.length < 2)
+		{
+			Editor.alert("Operation needs two objects");
+			return;
+		}
+
+		for(var i = 0; i < 2; i++)
+		{
+			if(Editor.selectedObjects[i].geometry === undefined)
+			{
+				Editor.alert("Operation needs two geomtries");
+				return;
+			}
+		}
+
+		var a = createBSP(Editor.selectedObjects[0]);
+		var b = createBSP(Editor.selectedObjects[1]);
+		
+		var mesh = a.intersect(b).toMesh();
+		mesh.material = Editor.defaultMaterial;
+
+		Editor.addToScene(mesh);
+	});
+
+	csg.addOption("Subtract", function()
+	{
+		if(Editor.selectedObjects.length < 2)
+		{
+			Editor.alert("Operation needs two objects");
+			return;
+		}
+
+		for(var i = 0; i < 2; i++)
+		{
+			if(Editor.selectedObjects[i].geometry === undefined)
+			{
+				Editor.alert("Operation needs two geomtries");
+				return;
+			}
+		}
+		
+		var a = createBSP(Editor.selectedObjects[0]);
+		var b = createBSP(Editor.selectedObjects[1]);
+
+		var mesh = a.subtract(b).toMesh();
+		mesh.material = Editor.defaultMaterial;
+
+		Editor.addToScene(mesh);
+	});
+
+	csg.addOption("Union", function()
+	{
+		if(Editor.selectedObjects.length < 2)
+		{
+			Editor.alert("Operation needs two objects");
+			return;
+		}
+
+		for(var i = 0; i < 2; i++)
+		{
+			if(Editor.selectedObjects[i].geometry === undefined)
+			{
+				Editor.alert("Operation needs two geomtries");
+				return;
+			}
+		}
+		
+		var a = createBSP(Editor.selectedObjects[0]);
+		var b = createBSP(Editor.selectedObjects[1]);
+
+		var mesh = a.union(b).toMesh();
+		mesh.material = Editor.defaultMaterial;
+
+		Editor.addToScene(mesh);
+	});
+
 	//Project
 	Interface.project = new DropdownMenu();
 	Interface.project.setText("Project");

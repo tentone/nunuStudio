@@ -149,6 +149,10 @@
 	- Improvements in material editor
 - V0.9.2 Beta
 	- Support for multi selection
+	- Geometry binary operations (CSG)
+		- Subtract
+		- Intersect
+		- Union
 	
 ### Tech
 nunuStudio is built on top of a number of open source projects
