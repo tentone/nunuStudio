@@ -128,6 +128,41 @@ Scene.prototype.update = function()
 };
 
 /**
+ * Render scene using all active cameras.
+ * 
+ * @method render
+ * @param {Renderer} renderer
+ */
+Scene.prototype.render = function(renderer)
+{
+	var x = renderer.domElement.width;
+	var y = renderer.domElement.height;
+
+	renderer.setScissorTest(true);
+
+	for(var i = 0; i < this.cameras.length; i++)
+	{
+		var camera = this.cameras[i];
+
+		if(camera.clearColor)
+		{
+			renderer.clearColor();
+		}
+		if(camera.clearDepth)
+		{
+			renderer.clearDepth();
+		}
+
+		renderer.setViewport(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
+		renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
+
+		renderer.render(this, camera);
+	}
+
+	renderer.setScissorTest(false);
+};
+
+/**
  * Get camera from scene using cameras uuid.
  * 
  * @method getCamera

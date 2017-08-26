@@ -325,6 +325,10 @@
 														<a href="#method_update">update</a>
 						
 													</li>
+													<li class="index-item method">
+														<a href="#method_updateRenderer">updateRenderer</a>
+						
+													</li>
 											</ul>
 										</div>
 						
@@ -796,8 +800,9 @@
 												</div>
 											
 												<div class="description">
-													<p>Render program to canvas.</p>
-											<p>Renderer passed as argument.</p>
+													<p>Render current scene to canvas.</p>
+											<p>When rendering in VR mode all effects and camera parameters are ignored.</p>
+											<p>Renderer should be initialized and passed as argument.</p>
 											
 												</div>
 											
@@ -1265,6 +1270,35 @@
 											
 												<div class="description">
 													<p>Update program state, this updated all current scene children elements.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="method_updateRenderer" class="method item">
+												<h3 class="name"><code>updateRenderer</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>This method updated the webgl renderer configuration.</p>
+											<p>Should be called after changing any rendering related parameter.</p>
 											
 												</div>
 											

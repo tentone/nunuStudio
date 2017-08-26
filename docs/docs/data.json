@@ -8829,25 +8829,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 269,
-            "description": "Enter virtual reality mode.\n\nTo enter virtual reality mode a WebVR enabled browser is required.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
-            "itemtype": "method",
-            "name": "displayVR",
-            "class": "Program",
-            "module": "Core"
-        },
-        {
-            "file": "../../source/core/objects/Program.js",
-            "line": 297,
-            "description": "Exit virtual relity mode.",
-            "itemtype": "method",
-            "name": "exitVR",
-            "class": "Program",
-            "module": "Core"
-        },
-        {
-            "file": "../../source/core/objects/Program.js",
-            "line": 311,
+            "line": 265,
             "description": "Update program state, this updated all current scene children elements.",
             "itemtype": "method",
             "name": "update",
@@ -8856,8 +8838,8 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 321,
-            "description": "Render program to canvas.\n\nRenderer passed as argument.",
+            "line": 275,
+            "description": "Render current scene to canvas.\n\nWhen rendering in VR mode all effects and camera parameters are ignored.\n\nRenderer should be initialized and passed as argument.",
             "itemtype": "method",
             "name": "render",
             "params": [
@@ -8872,7 +8854,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 372,
+            "line": 326,
             "description": "Resize program elements.\n\nCalled by the runtime every time the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -8893,7 +8875,34 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 405,
+            "line": 359,
+            "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
+            "itemtype": "method",
+            "name": "updateRenderer",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "../../source/core/objects/Program.js",
+            "line": 378,
+            "description": "Enter virtual reality mode.\n\nTo enter virtual reality mode a WebVR enabled browser is required.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
+            "itemtype": "method",
+            "name": "displayVR",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "../../source/core/objects/Program.js",
+            "line": 406,
+            "description": "Exit virtual relity mode.",
+            "itemtype": "method",
+            "name": "exitVR",
+            "class": "Program",
+            "module": "Core"
+        },
+        {
+            "file": "../../source/core/objects/Program.js",
+            "line": 420,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -8909,7 +8918,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 435,
+            "line": 450,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -8925,7 +8934,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 457,
+            "line": 472,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -8941,7 +8950,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 480,
+            "line": 495,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -8954,7 +8963,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 493,
+            "line": 508,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -8970,7 +8979,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 506,
+            "line": 521,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -8986,7 +8995,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 551,
+            "line": 566,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -8995,7 +9004,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 593,
+            "line": 608,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -9011,7 +9020,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 630,
+            "line": 645,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -9027,7 +9036,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 662,
+            "line": 677,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9121,6 +9130,22 @@
         {
             "file": "../../source/core/objects/Scene.js",
             "line": 130,
+            "description": "Render scene using all active cameras.",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "",
+                    "type": "Renderer"
+                }
+            ],
+            "class": "Scene",
+            "module": "Core"
+        },
+        {
+            "file": "../../source/core/objects/Scene.js",
+            "line": 165,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -9140,7 +9165,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 162,
+            "line": 197,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -9156,7 +9181,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 174,
+            "line": 209,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -9165,7 +9190,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 189,
+            "line": 224,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -9181,7 +9206,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 204,
+            "line": 239,
             "description": "Set scene fog mode.",
             "params": [
                 {
@@ -9197,7 +9222,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 228,
+            "line": 263,
             "description": "Serialize scene object as JSON.\n\nAlso serializes physics world information.",
             "itemtype": "method",
             "name": "toJSON",
