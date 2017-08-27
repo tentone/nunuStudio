@@ -154,9 +154,14 @@ Scene.prototype.initialize = function()
 	//---------------------------------------------------------------------------
 	//Screen space ambient occlusion
 	//---------------------------------------------------------------------------
-	var ssaoPass = new SSAOPass(this, this.cameras[0], this.canvas.width, this.canvas.height);
-	ssaoPass.renderToScreen = false;
-
+	var ssaoPass = new THREE.SSAOPass(this, this.cameras[0], this.canvas.width, this.canvas.height);
+	ssaoPass.radius = 0.2;
+	ssaoPass.onlyAO = true;
+	ssaoPass.aoClamp = 0.25;
+	ssaoPass.lumInfluence = 0.7;
+	ssaoPass.renderToScreen = true;
+	console.log(ssaoPass);
+	
 	//---------------------------------------------------------------------------
 	//Copy shader
 	//---------------------------------------------------------------------------
