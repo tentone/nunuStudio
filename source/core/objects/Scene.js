@@ -114,17 +114,17 @@ Scene.prototype.initialize = function()
 	fxaaPass.uniforms['resolution'].value.set(1 / this.canvas.width, 1 / this.canvas.height);
 
 	//---------------------------------------------------------------------------
-	//Depth-of-field w/ bokeh
+	//Bokeh Depth of field
 	//---------------------------------------------------------------------------
 	var bokehPass = new THREE.BokehPass(this, this.cameras[0],
 	{
-		focus: 1.0,
-		aperture: 0.025,
-		maxblur: 1.0
+		focus: 1,
+		aperture: 0.00002,
+		maxblur: 0.01
 	});
 	bokehPass.setSize(this.canvas.width, this.canvas.height);
 	bokehPass.renderToScreen = true;
-	
+
 	//---------------------------------------------------------------------------
 	//Scalable Ambient Occlusion
 	//---------------------------------------------------------------------------
@@ -143,27 +143,25 @@ Scene.prototype.initialize = function()
 		saoBlurDepthCutoff: 0.01
 	};
 	saoPass.setSize(this.canvas.width, this.canvas.height);
-	saoPass.renderToScreen = true;
+	saoPass.renderToScreen = false;
 
 	//---------------------------------------------------------------------------
 	//Unreal bloom
 	//---------------------------------------------------------------------------
-	var bloomPass = new THREE.UnrealBloomPass(undefined, 1.2, 0.3, 0.85);
+	var bloomPass = new THREE.UnrealBloomPass(undefined, 1.2, 0.4, 0.7);
 	bloomPass.setSize(this.canvas.width, this.canvas.height);
-	console.log(bloomPass);
 
-	
 	//---------------------------------------------------------------------------
 	//Screen space ambient occlusion
 	//---------------------------------------------------------------------------
 	var ssaoPass = new SSAOPass(this, this.cameras[0], this.canvas.width, this.canvas.height);
-	ssaoPass.renderToScreen = true;
+	ssaoPass.renderToScreen = false;
 
 	//---------------------------------------------------------------------------
 	//Copy shader
 	//---------------------------------------------------------------------------
 	var copyPass = new THREE.ShaderPass(THREE.CopyShader);
-	copyPass.renderToScreen = true;
+	copyPass.renderToScreen = false;
 
 	//---------------------------------------------------------------------------
 	//Composer
@@ -171,9 +169,9 @@ Scene.prototype.initialize = function()
 	this.composer = new THREE.EffectComposer(this.program.renderer);
 	this.composer.addPass(renderPass);
 	//this.composer.addPass(fxaaPass);
-	//this.composer.addPass(bokehPass);
 	//this.composer.addPass(saoPass);
 	//this.composer.addPass(bloomPass);
+	//this.composer.addPass(bokehPass);
 	//this.composer.addPass(ssaoPass);
 	//this.composer.addPass(copyPass);
 	this.composer.setSize(this.canvas.width, this.canvas.height);
