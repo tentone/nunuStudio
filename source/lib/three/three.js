@@ -22949,7 +22949,7 @@
 				    var offset = uvScaleMap.offset;
 				    var repeat = uvScaleMap.repeat;
 				    var rotation = uvScaleMap.rotation;
-				    uvScaleMap.matrix.setUvTransform( offset.x, offset.y, repeat.x, repeat.y, rotation, 0.5, 0.5 );
+				    uvScaleMap.matrix.setUvTransform( offset.x, offset.y, repeat.x, repeat.y, rotation, 0.0, 0.0 );
 
 				}
 
@@ -22990,7 +22990,7 @@
 				    var offset = material.map.offset;
 				    var repeat = material.map.repeat;
 				    var rotation = material.map.rotation;
-				    material.map.matrix.setUvTransform( offset.x, offset.y, repeat.x, repeat.y, rotation, 0.5, 0.5 );
+				    material.map.matrix.setUvTransform( offset.x, offset.y, repeat.x, repeat.y, rotation, 0.0, 0.0 );
 
 				}
 
