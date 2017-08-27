@@ -101,11 +101,17 @@ Scene.prototype.initialize = function()
 	}
 
 	//---------------------------------------------------------------------------
-	//  TODO <REMOVE THIS TEST CODE>
+	//TODO <REMOVE THIS TEST CODE>
 	//---------------------------------------------------------------------------
 
 	var renderPass = new THREE.RenderPass(this, this.cameras[0]);
 	renderPass.renderToScreen = false;
+
+	//---------------------------------------------------------------------------
+	//FXAA
+	//---------------------------------------------------------------------------
+	var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
+	fxaaPass.uniforms['resolution'].value.set(1 / this.canvas.width, 1 / this.canvas.height);
 
 	//---------------------------------------------------------------------------
 	//Depth-of-field w/ bokeh
@@ -142,20 +148,34 @@ Scene.prototype.initialize = function()
 	//---------------------------------------------------------------------------
 	//Unreal bloom
 	//---------------------------------------------------------------------------
-	//TODO <ADD CODE HERE>
+	var bloomPass = new THREE.UnrealBloomPass(undefined, 1.2, 0.3, 0.85);
+	bloomPass.setSize(this.canvas.width, this.canvas.height);
+	console.log(bloomPass);
 
+	
 	//---------------------------------------------------------------------------
 	//Screen space ambient occlusion
 	//---------------------------------------------------------------------------
-	//TODO <ADD CODE HERE>
+	var ssaoPass = new SSAOPass(this, this.cameras[0], this.canvas.width, this.canvas.height);
+	ssaoPass.renderToScreen = true;
+
+	//---------------------------------------------------------------------------
+	//Copy shader
+	//---------------------------------------------------------------------------
+	var copyPass = new THREE.ShaderPass(THREE.CopyShader);
+	copyPass.renderToScreen = true;
 
 	//---------------------------------------------------------------------------
 	//Composer
 	//---------------------------------------------------------------------------
 	this.composer = new THREE.EffectComposer(this.program.renderer);
 	this.composer.addPass(renderPass);
+	//this.composer.addPass(fxaaPass);
 	//this.composer.addPass(bokehPass);
-	this.composer.addPass(saoPass);
+	//this.composer.addPass(saoPass);
+	//this.composer.addPass(bloomPass);
+	//this.composer.addPass(ssaoPass);
+	//this.composer.addPass(copyPass);
 	this.composer.setSize(this.canvas.width, this.canvas.height);
 	//---------------------------------------------------------------------------
 };
