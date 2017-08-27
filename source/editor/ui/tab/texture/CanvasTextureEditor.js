@@ -5,7 +5,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 	TextureEditor.call(this, parent, closeable, container, index);
 
 	var self = this;
-	
+
 	//Width
 	this.form.addText("Width");
 	this.width = new DropdownList(this.form.element);
