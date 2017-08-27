@@ -3010,7 +3010,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "../../source/runtime/NunuApp.js",
-            "line": 109,
+            "line": 128,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -8854,7 +8854,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 326,
+            "line": 304,
             "description": "Resize program elements.\n\nCalled by the runtime every time the window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -8875,7 +8875,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 359,
+            "line": 337,
             "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
             "itemtype": "method",
             "name": "updateRenderer",
@@ -8884,7 +8884,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 378,
+            "line": 356,
             "description": "Enter virtual reality mode.\n\nTo enter virtual reality mode a WebVR enabled browser is required.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
             "itemtype": "method",
             "name": "displayVR",
@@ -8893,7 +8893,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 406,
+            "line": 384,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -8902,7 +8902,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 420,
+            "line": 398,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -8918,7 +8918,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 450,
+            "line": 428,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -8934,7 +8934,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 472,
+            "line": 450,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -8950,7 +8950,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 495,
+            "line": 473,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -8963,7 +8963,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 508,
+            "line": 486,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -8979,7 +8979,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 521,
+            "line": 499,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -8995,7 +8995,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 566,
+            "line": 544,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -9004,7 +9004,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 608,
+            "line": 586,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -9020,7 +9020,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 645,
+            "line": 623,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -9036,7 +9036,7 @@
         },
         {
             "file": "../../source/core/objects/Program.js",
-            "line": 677,
+            "line": 655,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9111,7 +9111,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 80,
+            "line": 81,
             "description": "Initialize scene objects.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -9120,7 +9120,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 103,
+            "line": 183,
             "description": "Update scene objects and the physics world.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -9129,7 +9129,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 130,
+            "line": 211,
             "description": "Render scene using all active cameras.",
             "itemtype": "method",
             "name": "render",
@@ -9145,7 +9145,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 165,
+            "line": 248,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -9165,7 +9165,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 197,
+            "line": 280,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -9181,7 +9181,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 209,
+            "line": 292,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -9190,7 +9190,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 224,
+            "line": 307,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -9206,7 +9206,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 239,
+            "line": 322,
             "description": "Set scene fog mode.",
             "params": [
                 {
@@ -9222,7 +9222,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 263,
+            "line": 346,
             "description": "Serialize scene object as JSON.\n\nAlso serializes physics world information.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12909,7 +12909,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 120,
+            "line": 139,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -12919,7 +12919,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 126,
+            "line": 145,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -12929,7 +12929,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 132,
+            "line": 151,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -12940,7 +12940,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 139,
+            "line": 158,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -12950,7 +12950,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 145,
+            "line": 164,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -12961,7 +12961,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 155,
+            "line": 174,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -12970,7 +12970,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 193,
+            "line": 212,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -12979,7 +12979,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 260,
+            "line": 279,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -13005,7 +13005,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 281,
+            "line": 300,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -13021,7 +13021,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 306,
+            "line": 325,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -13047,7 +13047,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 349,
+            "line": 368,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -13056,7 +13056,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 365,
+            "line": 384,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -13065,7 +13065,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 416,
+            "line": 435,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -13074,7 +13074,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 450,
+            "line": 469,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -13083,7 +13083,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 460,
+            "line": 479,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -13099,7 +13099,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 474,
+            "line": 493,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -13108,7 +13108,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 498,
+            "line": 517,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -13124,7 +13124,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 514,
+            "line": 533,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -13140,7 +13140,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 527,
+            "line": 546,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -13156,7 +13156,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 540,
+            "line": 559,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -13169,7 +13169,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 551,
+            "line": 570,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -13178,7 +13178,7 @@
         },
         {
             "file": "../../source/runtime/NunuApp.js",
-            "line": 575,
+            "line": 594,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",

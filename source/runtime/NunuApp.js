@@ -2,9 +2,27 @@
 
 include("Nunu.js");
 
-include("lib/three/three.min.js");
+include("lib/three/three.js");
 
 include("lib/three/effects/VREffect.js");
+
+include("lib/three/shaders/CopyShader.js");
+include("lib/three/shaders/BokehShader.js");
+include("lib/three/shaders/SAOShader.js");
+include("lib/three/shaders/DepthLimitedBlurShader.js");
+include("lib/three/shaders/UnpackDepthRGBAShader.js");
+include("lib/three/shaders/ConvolutionShader.js");
+include("lib/three/shaders/LuminosityHighPassShader.js");
+include("lib/three/shaders/FXAAShader.js");
+include("lib/three/shaders/SSAOShader.js");
+
+include("lib/three/postprocessing/EffectComposer.js");
+include("lib/three/postprocessing/RenderPass.js");
+include("lib/three/postprocessing/ShaderPass.js");
+include("lib/three/postprocessing/MaskPass.js");
+include("lib/three/postprocessing/BokehPass.js");
+include("lib/three/postprocessing/SAOPass.js");
+include("lib/three/postprocessing/UnrealBloomPass.js");
 
 include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
@@ -42,6 +60,8 @@ include("core/input/Gamepad.js");
 include("core/input/Gyroscope.js");
 
 include("core/controls/VRControls.js");
+
+include("core/postprocessing/SSAOPass.js");
 
 include("core/resources/Resource.js");
 include("core/resources/Font.js");
@@ -104,7 +124,6 @@ include("core/utils/EventManager.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");
-
 
 /**
  * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.

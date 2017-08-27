@@ -194,7 +194,7 @@ Interface.initialize = function()
 	//Plane
 	Interface.addModel.addOption(Editor.filePath + "icons/models/plane.png", function()
 	{
-		var geometry = new THREE.PlaneBufferGeometry(1,1);
+		var geometry = new THREE.PlaneBufferGeometry(1, 1);
 		var model = new Mesh(geometry, Editor.defaultMaterial);
 		model.receiveShadow = true;
 		model.castShadow = true;

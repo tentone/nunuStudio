@@ -49,6 +49,13 @@ function TextureEditor(parent, closeable, container, index)
 	this.sprite = new THREE.Sprite(new THREE.SpriteMaterial());
 	this.sprite.position.set(0, 0, -1);
 	this.scene.add(this.sprite);
+	
+	//Plane geometry
+	//var material = new THREE.MeshBasicMaterial();
+	//material.transparent = true;
+	//this.sprite = new THREE.Mesh(new THREE.PlaneBufferGeometry(1, 1), material);
+	//this.sprite.position.set(0, 0, -1);
+	//this.scene.add(this.sprite);
 
 	//Form
 	this.form = new Form(this.division.divB);
@@ -146,6 +153,22 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.offset);
 	this.form.nextRow();
 
+	//Rotation
+	this.form.addText("Rotation");
+	this.rotation = new NumberBox(this.form.element);
+	this.rotation.size.set(60, 18);
+	this.rotation.setStep(0.1);
+	this.rotation.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			self.texture.rotation = self.rotation.getValue();
+			self.updatePreview();
+		}
+	});
+	this.form.add(this.rotation);
+	this.form.nextRow();
+
 	//Minification filter
 	this.form.addText("Min. filter");
 	this.minFilter = new DropdownList(this.form.element);
@@ -184,6 +207,21 @@ function TextureEditor(parent, closeable, container, index)
 	this.form.add(this.magFilter);
 	this.form.nextRow();
 
+	//Premultiply Alpha
+	this.form.addText("Premul. Alpha");
+	this.premultiplyAlpha = new CheckBox(this.form.element);
+	this.premultiplyAlpha.size.set(15, 15);
+	this.premultiplyAlpha.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			self.texture.premultiplyAlpha = self.premultiplyAlpha.getValue();
+			self.updatePreview();
+		}
+	});
+	this.form.add(this.premultiplyAlpha);
+	this.form.nextRow();
+
 	//Flip Y
 	this.form.addText("Flip Y");
 	this.flipY = new CheckBox(this.form.element);
@@ -215,8 +253,10 @@ TextureEditor.prototype.activate = function()
 	this.wrapS.setValue(texture.wrapS);
 	this.repeat.setValue(texture.repeat);
 	this.offset.setValue(texture.offset);
+	this.rotation.setValue(texture.rotation);
 	this.magFilter.setValue(texture.magFilter);
 	this.minFilter.setValue(texture.minFilter);
+	this.premultiplyAlpha.setValue(texture.premultiplyAlpha);
 	this.flipY.setValue(texture.flipY);
 };
 
@@ -237,8 +277,7 @@ TextureEditor.prototype.destroy = function()
 TextureEditor.prototype.updatePreview = function()
 {
 	this.sprite.material.map.needsUpdate = true;
-
-	//TODO <ADD CHANGE TO HISTORY>
+	this.sprite.material.needsUpdate = true;
 }
 
 //Check if texture is attached to tab
