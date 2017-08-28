@@ -6698,7 +6698,7 @@
         },
         {
             "file": "../../source/core/objects/cameras/OrthographicCamera.js",
-            "line": 103,
+            "line": 94,
             "description": "Used to set camera to resize horizontally",
             "itemtype": "attribute",
             "name": "RESIZE_HORIZONTAL",
@@ -6708,7 +6708,7 @@
         },
         {
             "file": "../../source/core/objects/cameras/OrthographicCamera.js",
-            "line": 110,
+            "line": 101,
             "description": "Used to set camera to resize vertically.",
             "itemtype": "attribute",
             "name": "RESIZE_VERTICAL",
@@ -6718,7 +6718,7 @@
         },
         {
             "file": "../../source/core/objects/cameras/OrthographicCamera.js",
-            "line": 118,
+            "line": 109,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -6727,7 +6727,7 @@
         },
         {
             "file": "../../source/core/objects/cameras/OrthographicCamera.js",
-            "line": 134,
+            "line": 125,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -6736,7 +6736,7 @@
         },
         {
             "file": "../../source/core/objects/cameras/OrthographicCamera.js",
-            "line": 162,
+            "line": 153,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -6842,7 +6842,25 @@
         },
         {
             "file": "../../source/core/objects/cameras/PerspectiveCamera.js",
-            "line": 99,
+            "line": 87,
+            "description": "Initialize camera.",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "../../source/core/objects/cameras/PerspectiveCamera.js",
+            "line": 103,
+            "description": "Update effect composed from configuration.",
+            "itemtype": "method",
+            "name": "updateEffectComposer",
+            "class": "PerspectiveCamera",
+            "module": "Cameras"
+        },
+        {
+            "file": "../../source/core/objects/cameras/PerspectiveCamera.js",
+            "line": 180,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -6851,7 +6869,7 @@
         },
         {
             "file": "../../source/core/objects/cameras/PerspectiveCamera.js",
-            "line": 115,
+            "line": 196,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -6860,7 +6878,7 @@
         },
         {
             "file": "../../source/core/objects/cameras/PerspectiveCamera.js",
-            "line": 137,
+            "line": 218,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9111,7 +9129,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 81,
+            "line": 83,
             "description": "Initialize scene objects.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -9120,7 +9138,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 183,
+            "line": 106,
             "description": "Update scene objects and the physics world.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -9129,7 +9147,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 211,
+            "line": 134,
             "description": "Render scene using all active cameras.",
             "itemtype": "method",
             "name": "render",
@@ -9145,7 +9163,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 248,
+            "line": 170,
             "description": "Get camera from scene using cameras uuid.",
             "itemtype": "method",
             "name": "getCamera",
@@ -9165,7 +9183,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 280,
+            "line": 202,
             "description": "Add camera to active cameras list.",
             "itemtype": "method",
             "name": "addCamera",
@@ -9181,7 +9199,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 292,
+            "line": 214,
             "description": "Update active camera lister order.\n\nThis method should be called after changing order value for an active camera.",
             "itemtype": "method",
             "name": "updateCameraOrder",
@@ -9190,7 +9208,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 307,
+            "line": 229,
             "description": "Remove camera from active camera list.",
             "params": [
                 {
@@ -9206,7 +9224,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 322,
+            "line": 244,
             "description": "Set scene fog mode.",
             "params": [
                 {
@@ -9222,7 +9240,7 @@
         },
         {
             "file": "../../source/core/objects/Scene.js",
-            "line": 346,
+            "line": 268,
             "description": "Serialize scene object as JSON.\n\nAlso serializes physics world information.",
             "itemtype": "method",
             "name": "toJSON",

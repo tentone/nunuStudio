@@ -85,7 +85,7 @@ CameraEditor.prototype.update = function()
 		this.camera.aspect = this.canvas.size.x / this.canvas.size.y;
 		this.camera.updateProjectionMatrix();
 
-		this.renderer.render(scene, this.camera);
+		this.camera.render(this.renderer, scene);
 	}
 };
 
