@@ -77,22 +77,106 @@
 */
 function PerspectiveCamera(fov, aspect, near, far)
 {
-	THREE._PerspectiveCamera.call(this, fov, aspect, near, far);
+	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
 
 	this.name = "camera";
-
-	this.offset = new THREE.Vector2(0.0, 0.0);
-	this.viewport = new THREE.Vector2(1.0, 1.0);
-	this.clearColor = false;
-	this.clearDepth = false;
-	this.order = 0;
 }
 
-THREE._PerspectiveCamera = THREE.PerspectiveCamera;
-THREE.PerspectiveCamera = PerspectiveCamera;
+PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
-PerspectiveCamera.prototype = Object.create(THREE._PerspectiveCamera.prototype);
+/**
+ * Initialize camera.
+ * 
+ * @method initialize
+ */
+PerspectiveCamera.prototype.initialize = function()
+{
+	//Initialize children
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].initialize();
+	}
 
+	//this.updateEffectComposer();
+};
+
+/**
+ * Update effect composed from configuration.
+ * 
+ * @method updateEffectComposer
+ */
+PerspectiveCamera.prototype.updateEffectComposer = function(renderer, scene, width, height)
+{
+	//Render pass
+	var renderPass = new THREE.RenderPass(scene, this);
+	renderPass.renderToScreen = false;
+
+	//FXAA
+	var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
+	fxaaPass.uniforms['resolution'].value.set(1 / width, 1 / height);
+	renderPass.renderToScreen = false;
+	
+
+	//Bokeh Depth of field
+	var bokehPass = new THREE.BokehPass(scene, this,
+	{
+		focus: 1,
+		aperture: 0.00002,
+		maxblur: 0.01
+	});
+	bokehPass.setSize(width, height);
+	bokehPass.renderToScreen = false;
+
+
+	//Scalable Ambient Occlusion
+	var saoPass = new THREE.SAOPass(scene, this, false, true);
+	saoPass.params =
+	{
+		output: THREE.SAOPass.OUTPUT.Default, //Beauty | SAO | Depth | Normal
+		saoBias: 0.1,
+		saoIntensity: 0.1,
+		saoScale: 20,
+		saoKernelRadius: 10,
+		saoMinResolution: 0,
+		saoBlur: true,
+		saoBlurRadius: 12,
+		saoBlurStdDev: 4,
+		saoBlurDepthCutoff: 0.01
+	};
+	saoPass.setSize(width, height);
+	saoPass.renderToScreen = false;
+
+
+	//Unreal bloom
+	var bloomPass = new THREE.UnrealBloomPass(undefined, 1.4, 0.4, 0.7);
+	bloomPass.setSize(width, height);
+
+
+	//Screen space ambient occlusion
+	var ssaoPass = new THREE.SSAOPass(scene, this, width, height);
+	ssaoPass.radius = 0.2;
+	ssaoPass.onlyAO = true;
+	ssaoPass.aoClamp = 0.25;
+	ssaoPass.lumInfluence = 0.7;
+	ssaoPass.renderToScreen = true;
+
+
+	//Copy shader
+	var copyPass = new THREE.ShaderPass(THREE.CopyShader);
+	copyPass.renderToScreen = true;
+
+
+	//Composer
+	this.composer = new THREE.EffectComposer(renderer);
+	this.composer.addPass(renderPass);
+	//this.composer.addPass(fxaaPass);
+	//this.composer.addPass(saoPass);
+	//this.composer.addPass(bloomPass);
+	//this.composer.addPass(bokehPass);
+	//this.composer.addPass(ssaoPass);
+	this.composer.addPass(copyPass);
+	this.composer.setSize(width, height);
+};
 /**
  * Destroy camera object and remove it from the scene.
  * 
@@ -140,7 +224,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
  */
 PerspectiveCamera.prototype.toJSON = function(meta)
 {
-	var data = THREE._PerspectiveCamera.prototype.toJSON.call(this, meta);
+	var data = THREE.PerspectiveCamera.prototype.toJSON.call(this, meta);
 
 	data.object.clearColor = this.clearColor;
 	data.object.clearDepth = this.clearDepth;

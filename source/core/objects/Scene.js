@@ -58,6 +58,8 @@ function Scene()
 	this.world.solver.tolerance = 0.05;
 	this.world.solver.iterations = 7;
 
+	this.background = new THREE.Color(0x000000);
+
 	//Cameras in use
 	this.cameras = [];
 
@@ -99,87 +101,6 @@ Scene.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
-
-	//---------------------------------------------------------------------------
-	//TODO <REMOVE THIS TEST CODE>
-	//---------------------------------------------------------------------------
-
-	var renderPass = new THREE.RenderPass(this, this.cameras[0]);
-	renderPass.renderToScreen = false;
-
-	//---------------------------------------------------------------------------
-	//FXAA
-	//---------------------------------------------------------------------------
-	var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
-	fxaaPass.uniforms['resolution'].value.set(1 / this.canvas.width, 1 / this.canvas.height);
-
-	//---------------------------------------------------------------------------
-	//Bokeh Depth of field
-	//---------------------------------------------------------------------------
-	var bokehPass = new THREE.BokehPass(this, this.cameras[0],
-	{
-		focus: 1,
-		aperture: 0.00002,
-		maxblur: 0.01
-	});
-	bokehPass.setSize(this.canvas.width, this.canvas.height);
-	bokehPass.renderToScreen = false;
-
-	//---------------------------------------------------------------------------
-	//Scalable Ambient Occlusion
-	//---------------------------------------------------------------------------
-	var saoPass = new THREE.SAOPass(this, this.cameras[0], false, true);
-	saoPass.params =
-	{
-		output: THREE.SAOPass.OUTPUT.Default, //Beauty | SAO | Depth | Normal
-		saoBias: 0.1,
-		saoIntensity: 0.1,
-		saoScale: 20,
-		saoKernelRadius: 10,
-		saoMinResolution: 0,
-		saoBlur: true,
-		saoBlurRadius: 12,
-		saoBlurStdDev: 4,
-		saoBlurDepthCutoff: 0.01
-	};
-	saoPass.setSize(this.canvas.width, this.canvas.height);
-	saoPass.renderToScreen = false;
-
-	//---------------------------------------------------------------------------
-	//Unreal bloom
-	//---------------------------------------------------------------------------
-	var bloomPass = new THREE.UnrealBloomPass(undefined, 1.4, 0.4, 0.7);
-	bloomPass.setSize(this.canvas.width, this.canvas.height);
-
-	//---------------------------------------------------------------------------
-	//Screen space ambient occlusion
-	//---------------------------------------------------------------------------
-	var ssaoPass = new THREE.SSAOPass(this, this.cameras[0], this.canvas.width, this.canvas.height);
-	ssaoPass.radius = 0.2;
-	ssaoPass.onlyAO = true;
-	ssaoPass.aoClamp = 0.25;
-	ssaoPass.lumInfluence = 0.7;
-	ssaoPass.renderToScreen = true;
-	
-	//---------------------------------------------------------------------------
-	//Copy shader
-	//---------------------------------------------------------------------------
-	var copyPass = new THREE.ShaderPass(THREE.CopyShader);
-	copyPass.renderToScreen = true;
-
-	//---------------------------------------------------------------------------
-	//Composer
-	//---------------------------------------------------------------------------
-	this.composer = new THREE.EffectComposer(this.program.renderer);
-	this.composer.addPass(renderPass);
-	//this.composer.addPass(fxaaPass);
-	//this.composer.addPass(saoPass);
-	//this.composer.addPass(bloomPass);
-	//this.composer.addPass(bokehPass);
-	//this.composer.addPass(ssaoPass);
-	this.composer.addPass(copyPass);
-	this.composer.setSize(this.canvas.width, this.canvas.height);
-	//---------------------------------------------------------------------------
 };
 
 /**
@@ -224,24 +145,23 @@ Scene.prototype.render = function(renderer)
 	renderer.setScissorTest(true);
 
 	for(var i = 0; i < this.cameras.length; i++)
-	{
+	{	
 		var camera = this.cameras[i];
+
+		renderer.setViewport(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
+		renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
 
 		if(camera.clearColor)
 		{
 			renderer.clearColor();
 		}
+
 		if(camera.clearDepth)
 		{
 			renderer.clearDepth();
 		}
 
-		renderer.setViewport(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
-		renderer.setScissor(x * camera.offset.x, y * camera.offset.y, x * camera.viewport.x, y * camera.viewport.y);
-
-		renderer.render(this, camera);
-
-		//this.composer.render(this.delta);
+		camera.render(renderer, this);
 	}
 
 	renderer.setScissorTest(false);

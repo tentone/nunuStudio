@@ -895,7 +895,8 @@ SceneEditor.prototype.render = function()
 		{
 			var width = Settings.editor.cameraPreviewPercentage * this.canvas.width;
 			var height = Settings.editor.cameraPreviewPercentage * this.canvas.height;
-
+			var scene = Editor.program.scene;
+			
 			var position = Settings.editor.cameraPreviewPosition;
 			var x = (position === Settings.BOTTOM_RIGHT || position === Settings.TOP_RIGHT) ? this.canvas.width - width - 10 : 10;
 			var y = (position === Settings.BOTTOM_RIGHT || position === Settings.BOTTOM_LEFT) ? this.canvas.height - height - 10 : 10;
@@ -914,14 +915,14 @@ SceneEditor.prototype.render = function()
 				renderer.clear();
 				renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 				renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
-				renderer.render(Editor.program.scene, camera);
+				
+				camera.render(renderer, scene);
 			}
 			//Preview all cameras in use
 			else if(Editor.program.scene.cameras.length > 0)
 			{
 				renderer.clear();
 
-				var scene = Editor.program.scene;
 				for(var i = 0; i < scene.cameras.length; i++)
 				{
 					var camera = scene.cameras[i];
@@ -939,6 +940,8 @@ SceneEditor.prototype.render = function()
 
 					renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 					renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
+					
+					camera.render(renderer, scene);
 					renderer.render(scene, camera);
 				}
 			}

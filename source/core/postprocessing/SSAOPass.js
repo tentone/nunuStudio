@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/*
  * Screen-space ambient occlusion pass.
  *
  * Has the following parameters
@@ -87,7 +87,7 @@ THREE.SSAOPass = function ( scene, camera, width, height ) {
 
 THREE.SSAOPass.prototype = Object.create( THREE.ShaderPass.prototype );
 
-/**
+/*
  * Render using this pass.
  * 
  * @method render
@@ -112,7 +112,7 @@ THREE.SSAOPass.prototype.render = function( renderer, writeBuffer, readBuffer, d
 
 };
 
-/**
+/*
  * Change scene to be renderer by this render pass.
  *
  * @method setScene
@@ -124,7 +124,7 @@ THREE.SSAOPass.prototype.setScene = function(scene) {
 
 };
 
-/**
+/*
  * Set camera used by this render pass.
  *
  * @method setCamera
@@ -139,7 +139,7 @@ THREE.SSAOPass.prototype.setCamera = function( camera ) {
 
 };
 
-/**
+/*
  * Set resolution of this render pass.
  * 
  * @method setSize
