@@ -92,9 +92,6 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.clearDepth = false;
 	this.order = 0;
 
-	//TODO <ADD SUPPORT FOR EFFECTS>
-	this.effects = [];
-
 	this.updateProjectionMatrix();
 }
 
