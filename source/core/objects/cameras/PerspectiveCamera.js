@@ -86,9 +86,6 @@ function PerspectiveCamera(fov, aspect, near, far)
 	this.clearColor = false;
 	this.clearDepth = false;
 	this.order = 0;
-
-	//TODO <ADD SUPPORT FOR EFFECTS>
-	this.effects = [];
 }
 
 THREE._PerspectiveCamera = THREE.PerspectiveCamera;

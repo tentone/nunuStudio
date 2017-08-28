@@ -51,12 +51,12 @@ function MaterialEditor(parent, closeable, container, index)
 	this.renderer.shadowMap.enabled = Settings.render.shadows;
 	this.renderer.shadowMap.type = Settings.render.shadowsType;
 
+	//Preview scene
+	this.scene = new THREE.Scene();
+	
 	//Camera
 	this.camera = new THREE.PerspectiveCamera(80, this.canvas.size.x / this.canvas.size.y);
 	this.camera.position.set(0, 0, 2.5);
-
-	//Preview scene
-	this.scene = new THREE.Scene();
 
 	//Interactive object
 	this.interactive = new THREE.Object3D();
@@ -66,6 +66,8 @@ function MaterialEditor(parent, closeable, container, index)
 	this.previewForm = new Form(this.preview.divB);
 	this.previewForm.position.set(10, 5);
 	this.previewForm.spacing.set(5, 5);
+
+	//Configuration text
 	this.previewForm.addText("Configuration");
 	this.previewForm.nextRow();
 
@@ -327,8 +329,20 @@ MaterialEditor.prototype.update = function()
 		if(this.material.needsUpdate)
 		{
 			Editor.updateAssetExplorer();
+			
+			if(this.material.envMap != null)
+			{
+				this.scene.background = this.material.envMap;
+			}
+			else
+			{
+				this.scene.background = null;
+			}
+
 			this.material.needsUpdate = true;
 		}
+
+
 
 		//Render scene
 		this.renderer.render(this.scene, this.camera);
@@ -345,6 +359,7 @@ MaterialEditor.prototype.update = function()
 		{
 			var delta = new THREE.Quaternion();
 			delta.setFromEuler(new THREE.Euler(Editor.mouse.delta.y * 0.005, Editor.mouse.delta.x * 0.005, 0, 'XYZ'));
+			
 			this.interactive.quaternion.multiplyQuaternions(delta, this.interactive.quaternion);
 		}
 	}
