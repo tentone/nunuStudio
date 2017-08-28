@@ -1295,6 +1295,12 @@ SceneEditor.prototype.selectObjectHelper = function()
 			this.objectHelper.add(new SkeletonHelper(object.parent));
 			this.objectHelper.add(new SkinnedWireframeHelper(object, 0xFFFF00));
 		}
+		//Bone
+		else if(object instanceof THREE.Bone)
+		{
+			this.objectHelper.add(new SkeletonHelper(object.parent));
+			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
+		}
 		//Mesh
 		else if(object instanceof THREE.Mesh)
 		{

@@ -1431,7 +1431,7 @@ Editor.loadModel = function(file, onLoad)
 					}
 					catch(f)
 					{
-						console.error("nunuStudio: Error loading mtl file", e);
+						console.error("nunuStudio: Error loading mtl file", f);
 					}
 				}
 

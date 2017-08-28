@@ -123,7 +123,7 @@ Scene.prototype.initialize = function()
 		maxblur: 0.01
 	});
 	bokehPass.setSize(this.canvas.width, this.canvas.height);
-	bokehPass.renderToScreen = true;
+	bokehPass.renderToScreen = false;
 
 	//---------------------------------------------------------------------------
 	//Scalable Ambient Occlusion
@@ -148,7 +148,7 @@ Scene.prototype.initialize = function()
 	//---------------------------------------------------------------------------
 	//Unreal bloom
 	//---------------------------------------------------------------------------
-	var bloomPass = new THREE.UnrealBloomPass(undefined, 1.2, 0.4, 0.7);
+	var bloomPass = new THREE.UnrealBloomPass(undefined, 1.4, 0.4, 0.7);
 	bloomPass.setSize(this.canvas.width, this.canvas.height);
 
 	//---------------------------------------------------------------------------
@@ -160,13 +160,12 @@ Scene.prototype.initialize = function()
 	ssaoPass.aoClamp = 0.25;
 	ssaoPass.lumInfluence = 0.7;
 	ssaoPass.renderToScreen = true;
-	console.log(ssaoPass);
 	
 	//---------------------------------------------------------------------------
 	//Copy shader
 	//---------------------------------------------------------------------------
 	var copyPass = new THREE.ShaderPass(THREE.CopyShader);
-	copyPass.renderToScreen = false;
+	copyPass.renderToScreen = true;
 
 	//---------------------------------------------------------------------------
 	//Composer
@@ -178,7 +177,7 @@ Scene.prototype.initialize = function()
 	//this.composer.addPass(bloomPass);
 	//this.composer.addPass(bokehPass);
 	//this.composer.addPass(ssaoPass);
-	//this.composer.addPass(copyPass);
+	this.composer.addPass(copyPass);
 	this.composer.setSize(this.canvas.width, this.canvas.height);
 	//---------------------------------------------------------------------------
 };
