@@ -84,7 +84,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
-PerspectiveCamera.prototype.renderPassTest = function(renderer, scene)
+PerspectiveCamera.prototype.render = function(renderer, scene)
 {
 	var width = renderer.domElement.width;
 	var height = renderer.domElement.height;
@@ -150,7 +150,7 @@ PerspectiveCamera.prototype.renderPassTest = function(renderer, scene)
 	//copyPass.renderToScreen = true;
 
 	//Composer
-	var composer = new THREE.EffectComposer(renderer);
+	var composer = new EffectComposer(renderer);
 	composer.addPass(renderPass);
 	composer.addPass(bloomPass);
 	composer.setSize(width, height);
