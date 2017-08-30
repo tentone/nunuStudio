@@ -4,7 +4,7 @@
 
  - nunuStudio is a 3D and 2D game engine for the web. It uses WebGL and WebVR to allow fast 3D graphic and virtual reality on the web without the need for plugins.
  - Visual scene editor, code editor, visual tools to edit textures, materials, particle emitters, etc and a powerfull scripting API that allows the creation of complex applications.
- - Lightweight engine powered by three.js that can run easly on desktop and mobile platforms.
+ - Lightweight engine powered by three.js that can run easily on desktop and mobile platforms.
 
 ### Web Editor
  - There is a fully featured web version of the editor available at https://nunustudio.org/editor/editor

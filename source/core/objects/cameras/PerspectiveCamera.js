@@ -84,7 +84,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
-PerspectiveCamera.prototype.render = function(renderer, scene)
+PerspectiveCamera.prototype.renderPost = function(renderer, scene)
 {
 	var width = renderer.domElement.width;
 	var height = renderer.domElement.height;
@@ -93,14 +93,13 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 	var renderPass = new THREE.RenderPass(scene, this);
 	renderPass.renderToScreen = false;
 
-
 	//FXAA
 	//var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
 	//fxaaPass.uniforms['resolution'].value.set(1 / width, 1 / height);
 	//fxaaPass.renderToScreen = false;
 
-
 	//Bokeh Depth of field
+	/*
 	var bokehPass = new THREE.BokehPass(scene, this,
 	{
 		focus: 1,
@@ -109,7 +108,7 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 	});
 	bokehPass.setSize(width, height);
 	bokehPass.renderToScreen = true;
-
+	*/
 
 	//Scalable Ambient Occlusion
 	/*
@@ -131,11 +130,10 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 	saoPass.renderToScreen = false;
 	*/
 
-
 	//Unreal bloom
-	//var bloomPass = new THREE.UnrealBloomPass(undefined, 1.4, 0.4, 0.7);
-	//bloomPass.setSize(width, height);
-
+	var bloomPass = new THREE.UnrealBloomPass(undefined, 1.4, 0.4, 0.7);
+	bloomPass.setSize(width, height);
+	bloomPass.renderToScreen = true;
 
 	//Screen space ambient occlusion
 	/*
@@ -147,19 +145,18 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 	ssaoPass.renderToScreen = true;
 	*/
 
-
 	//Copy shader
 	//var copyPass = new THREE.ShaderPass(THREE.CopyShader);
 	//copyPass.renderToScreen = true;
 
-
 	//Composer
 	var composer = new THREE.EffectComposer(renderer);
 	composer.addPass(renderPass);
-	composer.addPass(bokehPass);
+	composer.addPass(bloomPass);
 	composer.setSize(width, height);
 	composer.render(0.016);
 };
+
 /**
  * Destroy camera object and remove it from the scene.
  * 

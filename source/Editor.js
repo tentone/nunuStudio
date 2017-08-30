@@ -30,6 +30,7 @@ include("lib/three/postprocessing/MaskPass.js");
 include("lib/three/postprocessing/BokehPass.js");
 include("lib/three/postprocessing/SAOPass.js");
 include("lib/three/postprocessing/UnrealBloomPass.js");
+include("lib/three/postprocessing/SSAOPass.js");
 
 include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
@@ -68,8 +69,6 @@ include("core/input/Gamepad.js");
 include("core/input/Gyroscope.js");
 
 include("core/controls/VRControls.js");
-
-include("core/postprocessing/SSAOPass.js");
 
 include("core/resources/Resource.js");
 include("core/resources/Font.js");
