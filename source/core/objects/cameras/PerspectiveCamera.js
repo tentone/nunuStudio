@@ -84,7 +84,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
-PerspectiveCamera.prototype.renderPost = function(renderer, scene)
+PerspectiveCamera.prototype.renderPassTest = function(renderer, scene)
 {
 	var width = renderer.domElement.width;
 	var height = renderer.domElement.height;

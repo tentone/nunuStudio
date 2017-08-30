@@ -23,6 +23,7 @@ include("lib/three/postprocessing/MaskPass.js");
 include("lib/three/postprocessing/BokehPass.js");
 include("lib/three/postprocessing/SAOPass.js");
 include("lib/three/postprocessing/UnrealBloomPass.js");
+include("lib/three/postprocessing/SSAOPass.js");
 
 include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
@@ -61,8 +62,6 @@ include("core/input/Gamepad.js");
 include("core/input/Gyroscope.js");
 
 include("core/controls/VRControls.js");
-
-include("core/postprocessing/SSAOPass.js");
 
 include("core/resources/Resource.js");
 include("core/resources/Font.js");
@@ -125,6 +124,7 @@ include("core/utils/EventManager.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");
+
 /**
  * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.
  *

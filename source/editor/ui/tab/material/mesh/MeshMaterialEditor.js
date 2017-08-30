@@ -11,7 +11,7 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.scene.add(this.sky);
 
 	this.pointLight = new THREE.PointLight(0x666666);
-	this.pointLight.position.set(-2, 0, 2);
+	this.pointLight.position.set(-1, 0, 3);
 	this.scene.add(this.pointLight);
 	
 	this.ambientLight = new THREE.AmbientLight(0x555555);
@@ -52,6 +52,9 @@ function MeshMaterialEditor(parent, closeable, container, index)
 
 	//Point Light
 	this.previewForm.addText("Point Light");
+	this.previewForm.nextRow();
+
+	this.previewForm.addText("Enabled");
 	this.lightEnabled = new CheckBox(this.previewForm.element);
 	this.lightEnabled.size.set(15, 15);
 	this.lightEnabled.setValue(this.pointLight.visible);
@@ -62,8 +65,21 @@ function MeshMaterialEditor(parent, closeable, container, index)
 	this.previewForm.add(this.lightEnabled);
 	this.previewForm.nextRow();
 
+	this.previewForm.addText("Color");
+	this.pointLightColor = new ColorChooser(this.previewForm.element);
+	this.pointLightColor.size.set(80, 18);
+	this.pointLightColor.setOnChange(function()
+	{
+		self.pointLight.color.setHex(self.pointLightColor.getValueHex());
+	});
+	this.previewForm.add(this.pointLightColor);
+	this.previewForm.nextRow();
+
 	//Ambient Light
 	this.previewForm.addText("Ambient Light");
+	this.previewForm.nextRow();
+
+	this.previewForm.addText("Enabled");
 	this.ambientLightEnabled = new CheckBox(this.previewForm.element);
 	this.ambientLightEnabled.size.set(15, 15);
 	this.ambientLightEnabled.setValue(this.ambientLight.visible);
@@ -72,6 +88,16 @@ function MeshMaterialEditor(parent, closeable, container, index)
 		self.ambientLight.visible = self.ambientLightEnabled.getValue();
 	});
 	this.previewForm.add(this.ambientLightEnabled);
+	this.previewForm.nextRow();
+
+	this.previewForm.addText("Color");
+	this.ambientLightColor = new ColorChooser(this.previewForm.element);
+	this.ambientLightColor.size.set(80, 18);
+	this.ambientLightColor.setOnChange(function()
+	{
+		self.ambientLight.color.setHex(self.ambientLightColor.getValueHex());
+	});
+	this.previewForm.add(this.ambientLightColor);
 	this.previewForm.nextRow();
 }
 
