@@ -196,6 +196,13 @@ THREE.UnrealBloomPass.prototype = Object.assign( Object.create( THREE.Pass.proto
 		this.highPassUniforms[ "tDiffuse" ].value = readBuffer.texture;
 		this.highPassUniforms[ "luminosityThreshold" ].value = this.threshold;
 		this.quad.material = this.materialHighPassFilter;
+
+		if( this.renderToScreen ) {
+
+			renderer.render( this.scene, this.camera, undefined, true );
+
+		}
+
 		renderer.render( this.scene, this.camera, this.renderTargetBright, true );
 
 		// 2. Blur All the mips progressively
@@ -228,6 +235,7 @@ THREE.UnrealBloomPass.prototype = Object.assign( Object.create( THREE.Pass.proto
 		this.compositeMaterial.uniforms[ "bloomStrength" ].value = this.strength;
 		this.compositeMaterial.uniforms[ "bloomRadius" ].value = this.radius;
 		this.compositeMaterial.uniforms[ "bloomTintColors" ].value = this.bloomTintColors;
+
 		renderer.render( this.scene, this.camera, this.renderTargetsHorizontal[ 0 ], true );
 
 		// Blend it additively over the input texture
@@ -237,7 +245,16 @@ THREE.UnrealBloomPass.prototype = Object.assign( Object.create( THREE.Pass.proto
 
 		if ( maskActive ) renderer.context.enable( renderer.context.STENCIL_TEST );
 
-		renderer.render( this.scene, this.camera, readBuffer, false );
+
+		if( this.renderToScreen ) {
+
+			renderer.render( this.scene, this.camera, undefined, false );
+
+		} else {
+
+			renderer.render( this.scene, this.camera, readBuffer, false );
+
+		}
 
 		renderer.setClearColor( this.oldClearColor, this.oldClearAlpha );
 		renderer.autoClear = oldAutoClear;
