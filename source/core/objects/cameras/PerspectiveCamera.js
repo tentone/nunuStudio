@@ -80,11 +80,17 @@ function PerspectiveCamera(fov, aspect, near, far)
 	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
 
 	this.name = "camera";
+
+	this.offset = new THREE.Vector2(0.0, 0.0);
+	this.viewport = new THREE.Vector2(1.0, 1.0);
+	this.clearColor = false;
+	this.clearDepth = false;
+	this.order = 0;
 }
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
-PerspectiveCamera.prototype.render = function(renderer, scene)
+PerspectiveCamera.prototype.renderTest = function(renderer, scene)
 {
 	var width = renderer.domElement.width;
 	var height = renderer.domElement.height;
@@ -94,9 +100,9 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 	renderPass.renderToScreen = false;
 
 	//FXAA
-	var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
+	/*var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
 	fxaaPass.uniforms["resolution"].value.set(1 / width, 1 / height);
-	fxaaPass.renderToScreen = false;
+	fxaaPass.renderToScreen = false;*/
 
 	//Bokeh Depth of field
 	/*
@@ -146,8 +152,7 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 	//copyPass.renderToScreen = true;
 
 	//Composer
-	this.composer = new EffectComposer(renderer);
-	this.composer.addPass(fxaaPass);
+	this.composer = new EffectComposer();
 	this.composer.addPass(renderPass);
 	this.composer.addPass(ssaoPass);
 	this.composer.setSize(width, height);

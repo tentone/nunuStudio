@@ -12,6 +12,7 @@
  *    - Called on every frame if mouse is on top of one of the script children
  *  - onResize
  *    - Called every time the window is resized
+ *    - Received width and height as parameters
  *  - onAppData
  *    - Called when receiving data sent by the host website
  * 
@@ -171,15 +172,20 @@ Script.prototype.dispose = function()
 /**
  * Call resize method if available.
  *
- * Called automatically by the runtime.
+ * The resize method receives width and height as arguments.
  * 
  * @method resize
  */
-Script.prototype.resize = function()
+Script.prototype.resize = function(x, y)
 {
 	if(this.script.onResize !== undefined)
 	{
-		this.script.onResize.call(this);
+		this.script.onResize.call(this, x, y);
+	}
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].resize(x, y);
 	}
 };
 
