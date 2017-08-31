@@ -13,6 +13,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "CubeCamera",
         "CubeTexture",
         "DirectionalLight",
+        "EffectComposer",
         "EventManager",
         "FileSystem",
         "Fog",
@@ -44,6 +45,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ObjectUtils",
         "OrthographicCamera",
         "ParticleEmitter",
+        "Pass",
         "PerspectiveCamera",
         "PhysicsObject",
         "PointLight",
@@ -96,6 +98,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Misc",
         "Particles",
         "Physics",
+        "Postprocessing",
         "Resources",
         "Runtime",
         "Script",
@@ -197,6 +200,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "Mesh2shape is used to convert ThreeJS objects to CannonJS shapes.\n\nIt is based on the original Mesh2Shape converted by @donmccurdy."
         },
         {
+            "displayName": "Postprocessing",
+            "name": "Postprocessing",
+            "description": "The effect composer is used to organize multiple post-processing passes.\n\nIt is used by camera objects to organize the rendering pipeline."
+        },
+        {
             "displayName": "Resources",
             "name": "Resources",
             "description": "Audio class is used to store audio data as a arraybuffer to be later used by objects with the WebAudio API."
@@ -209,7 +217,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Script",
             "name": "Script",
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n   - Received width and height as parameters\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
         },
         {
             "displayName": "Sprite",

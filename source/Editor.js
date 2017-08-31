@@ -68,6 +68,7 @@ include("core/input/Mouse.js");
 include("core/input/Gamepad.js");
 include("core/input/Gyroscope.js");
 
+include("core/postprocessing/Pass.js");
 include("core/postprocessing/EffectComposer.js");
 
 include("core/controls/VRControls.js");

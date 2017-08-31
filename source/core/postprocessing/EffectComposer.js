@@ -1,31 +1,16 @@
 "use strict";
 
-function EffectComposer(renderer, renderTarget)
+/**
+ * The effect composer is used to organize multiple post-processing passes.
+ *
+ * It is used by camera objects to organize the rendering pipeline.
+ * 
+ * @class EffectComposer
+ * @module Postprocessing
+ * @constructor
+ */
+function EffectComposer()
 {
-	this.renderer = renderer;
-
-	if(renderTarget === undefined)
-	{
-		var parameters = {
-			minFilter: THREE.LinearFilter,
-			magFilter: THREE.LinearFilter,
-			format: THREE.RGBAFormat,
-			stencilBuffer: false
-		};
-
-		var size = renderer.getSize();
-		renderTarget = new THREE.WebGLRenderTarget(size.width, size.height, parameters);
-	}
-
-	this.renderTarget1 = renderTarget;
-	this.renderTarget2 = renderTarget.clone();
-
-	this.writeBuffer = this.renderTarget1;
-	this.readBuffer = this.renderTarget2;
-
-	this.passes = [];
-
-	//Chck dependencies
 	if(THREE.CopyShader === undefined)
 	{
 		console.error("EffectComposer relies on THREE.CopyShader");
@@ -35,9 +20,30 @@ function EffectComposer(renderer, renderTarget)
 		console.error("EffectComposer relies on THREE.ShaderPass");
 	}
 
+	this.width = 1;
+	this.height = 1;
+
+	this.renderTarget1 = new THREE.WebGLRenderTarget(this.width, this.height,
+	{
+		minFilter: THREE.LinearFilter,
+		magFilter: THREE.LinearFilter,
+		format: THREE.RGBAFormat,
+		stencilBuffer: false
+	});
+	this.renderTarget2 = this.renderTarget1.clone();
+
+	this.writeBuffer = this.renderTarget1;
+	this.readBuffer = this.renderTarget2;
+
+	this.passes = [];
 	this.copyPass = new THREE.ShaderPass(THREE.CopyShader);
 }
 
+/**
+ * Swap rendering buffers.
+ *
+ * @method swapBuffers
+ */
 EffectComposer.prototype.swapBuffers = function()
 {
 	var tmp = this.readBuffer;
@@ -45,44 +51,77 @@ EffectComposer.prototype.swapBuffers = function()
 	this.writeBuffer = tmp;
 };
 
+/**
+ * Add new pass to the composer.
+ * 
+ * @method addPass
+ * @param {Pass} pass Rendering pass to be added.
+ */
 EffectComposer.prototype.addPass = function(pass)
 {
 	this.passes.push(pass);
-
-	//var size = this.renderer.getSize();
-	//pass.setSize(size.width, size.height);
 };
 
+/**
+ * Remove pass from this composer, if pass is not found nothing happens.
+ *
+ * @method removePass
+ * @param {Pass} pass Pass to be removed from the composer.
+ */
+EffectComposer.prototype.removePass = function(pass)
+{
+	var index = this.passes.indexOf(pass);
+
+	if(index !== -1)
+	{
+		this.passes.splice(index, 1);
+	}
+};
+
+/**
+ * Insert new pass into the composer in a specific position.
+ *
+ * @method insertPass
+ * @param {Pass} pass Rendering pass to be added.
+ * @param {Number} index Index to be inserted on.
+ */
 EffectComposer.prototype.insertPass = function(pass, index)
 {
 	this.passes.splice(index, 0, pass);
 };
 
+/**
+ * Render a scene using this effect composer and a renderer.
+ *
+ * @method render
+ * @param {WebGLRenderer} renderer Render to be used to render the scene.
+ * @param {Scene} scene Scene to render.
+ * @param {[type]} delta Delta time. 
+ */
 EffectComposer.prototype.render = function(renderer, scene, delta)
 {
 	var maskActive = false;
-	var pass;
 	var length = this.passes.length;
 
 	for(var i = 0; i < length; i++)
 	{
-		pass = this.passes[i];
+		var pass = this.passes[i];
 
 		if(pass.enabled === false)
 		{
 			continue;
 		}
 
-		pass.render(this.renderer, this.writeBuffer, this.readBuffer, delta, maskActive);
+		pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive);
 
 		if(pass.needsSwap)
 		{
 			if(maskActive)
 			{
-				var context = this.renderer.context;
+				var context = renderer.context;
 				context.stencilFunc(context.NOTEQUAL, 1, 0xffffffff);
 
-				this.copyPass.render(this.renderer, this.writeBuffer, this.readBuffer, delta);
+				this.copyPass.render(renderer, this.writeBuffer, this.readBuffer, delta);
 				context.stencilFunc(context.EQUAL, 1, 0xffffffff);
 			}
 
@@ -103,27 +142,20 @@ EffectComposer.prototype.render = function(renderer, scene, delta)
 	}
 };
 
-EffectComposer.prototype.reset = function(renderTarget)
-{
-	if(renderTarget === undefined)
-	{
-		var size = this.renderer.getSize();
-
-		renderTarget = this.renderTarget1.clone();
-		renderTarget.setSize(size.width, size.height);
-	}
-
-	this.renderTarget1.dispose();
-	this.renderTarget2.dispose();
-	this.renderTarget1 = renderTarget;
-	this.renderTarget2 = renderTarget.clone();
-
-	this.writeBuffer = this.renderTarget1;
-	this.readBuffer = this.renderTarget2;
-};
-
+/**
+ * Set rendering size for the composer.
+ *
+ * Also updates the size for all passes attached to the composer.
+ *
+ * @method setSize
+ * @param {Number} width Width.
+ * @param {Number} height Height.
+ */
 EffectComposer.prototype.setSize = function(width, height)
 {
+	this.width = width;
+	this.height = height;
+
 	this.renderTarget1.setSize(width, height);
 	this.renderTarget2.setSize(width, height);
 
@@ -131,4 +163,44 @@ EffectComposer.prototype.setSize = function(width, height)
 	{
 		this.passes[i].setSize(width, height);
 	}
+};
+
+/**
+ * Reset this effect composer.
+ *
+ * @method reset
+ */
+EffectComposer.prototype.reset = function()
+{
+	var renderTarget = this.renderTarget1.clone();
+
+	this.dispose();
+
+	this.renderTarget1 == new THREE.WebGLRenderTarget(this.width, this.height,
+	{
+		minFilter: THREE.LinearFilter,
+		magFilter: THREE.LinearFilter,
+		format: THREE.RGBAFormat,
+		stencilBuffer: false
+	});
+	this.renderTarget2 = this.renderTarget1.clone();
+
+	this.writeBuffer = this.renderTarget1;
+	this.readBuffer = this.renderTarget2;
+};
+
+/**
+ * Dispose this effect composer.
+ * 
+ * @method dispose
+ */
+EffectComposer.prototype.dispose = function()
+{
+	this.renderTarget1.dispose();
+	this.renderTarget2.dispose();
+
+	this.renderTarget1 = null;
+	this.renderTarget2 = null;
+	this.writeBuffer = null;
+	this.readBuffer = null;
 };

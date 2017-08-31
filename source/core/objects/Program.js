@@ -302,16 +302,15 @@ Program.prototype.render = function(renderer)
 };
 
 /**
- * Resize program elements.
- * 
- * Called by the runtime every time the window is resized.
+ * Resize the current scene elements.
  * 
  * @method resize
- * @param {Number} x Width
- * @param {Number} y Height
+ * @param {Number} x Width-
+ * @param {Number} y Height-
  */
 Program.prototype.resize = function(x, y)
 {
+	//Resize vr effect
 	if(this.effect !== null)
 	{
 		this.effect.setSize(x, y);
@@ -324,14 +323,11 @@ Program.prototype.resize = function(x, y)
 		this.scene.cameras[i].updateProjectionMatrix();
 	}
 
-	//Resize scripts
-	this.traverse(function(child)
+	var scene = this.scene;
+	for(var i = 0; i < scene.children.length; i++)
 	{
-		if(child instanceof Script)
-		{
-			child.resize();
-		}
-	});
+		scene.children[i].resize(x, y);
+	}
 };
 
 /**

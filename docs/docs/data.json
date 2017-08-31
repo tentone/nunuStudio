@@ -423,6 +423,26 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\postprocessing\\EffectComposer.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "modules": {
+                "Postprocessing": 1
+            },
+            "classes": {
+                "EffectComposer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\Pass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "modules": {},
+            "classes": {
+                "Pass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\resources\\Audio.js": {
             "name": "..\\..\\source\\core\\resources\\Audio.js",
             "modules": {
@@ -984,7 +1004,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n   - Received width and height as parameters\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
         },
         "Animations": {
             "name": "Animations",
@@ -1048,6 +1068,21 @@
             "file": "..\\..\\source\\core\\objects\\Scene.js",
             "line": 3,
             "description": "Program class contains all the data of a nunuStudio program.\n\nProgram is also used to store and manage all available resources."
+        },
+        "Postprocessing": {
+            "name": "Postprocessing",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "EffectComposer": 1,
+                "Pass": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "line": 3,
+            "description": "The effect composer is used to organize multiple post-processing passes.\n\nIt is used by camera objects to organize the rendering pipeline."
         },
         "Resources": {
             "name": "Resources",
@@ -2139,7 +2174,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse",
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n   - Received width and height as parameters\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse",
             "extends": "{Object}",
             "params": [
                 {
@@ -2270,6 +2305,36 @@
             "description": "Scenes allow you to set up what and where is to be rendered by the engine.\n\nThis is where you place objects, lights and cameras.\n\nA program may contain multiple scenes, its possible to change between scene using scripts.\n \nScene three.js documentation available here https://threejs.org/docs/index.html#Reference/Scenes/Scene.",
             "is_constructor": 1,
             "extends": "{Scene}"
+        },
+        "EffectComposer": {
+            "name": "EffectComposer",
+            "shortname": "EffectComposer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 3,
+            "description": "The effect composer is used to organize multiple post-processing passes.\n\nIt is used by camera objects to organize the rendering pipeline.",
+            "is_constructor": 1
+        },
+        "Pass": {
+            "name": "Pass",
+            "shortname": "Pass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "line": 3,
+            "description": "Render pass, a render pass is used to render something in a rendering pipeline.\n\nCan be used to render a scene or apply post processing.",
+            "is_constructor": 1
         },
         "Audio": {
             "name": "Audio",
@@ -3010,7 +3075,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 128,
+            "line": 130,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -6698,7 +6763,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 94,
+            "line": 100,
             "description": "Used to set camera to resize horizontally",
             "itemtype": "attribute",
             "name": "RESIZE_HORIZONTAL",
@@ -6708,7 +6773,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 101,
+            "line": 107,
             "description": "Used to set camera to resize vertically.",
             "itemtype": "attribute",
             "name": "RESIZE_VERTICAL",
@@ -6718,7 +6783,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 109,
+            "line": 115,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -6727,7 +6792,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 125,
+            "line": 131,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -6736,7 +6801,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\OrthographicCamera.js",
-            "line": 153,
+            "line": 159,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -6842,7 +6907,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 160,
+            "line": 162,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -6851,7 +6916,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 176,
+            "line": 178,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -6860,7 +6925,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 198,
+            "line": 200,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8314,7 +8379,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 32,
+            "line": 33,
             "description": "Javascript code attached to the script",
             "itemtype": "property",
             "name": "code",
@@ -8324,7 +8389,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 37,
+            "line": 38,
             "description": "Compiled function used during runtime",
             "itemtype": "attribute",
             "name": "script",
@@ -8334,7 +8399,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 42,
+            "line": 43,
             "description": "Pointer to the parent program\nUsed access program resources easier",
             "itemtype": "property",
             "name": "program",
@@ -8344,7 +8409,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 48,
+            "line": 49,
             "description": "Pointer to the parent scene",
             "itemtype": "property",
             "name": "scene",
@@ -8354,7 +8419,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 69,
+            "line": 70,
             "description": "Default script code used when creating a new Script.",
             "itemtype": "attribute",
             "name": "DEFAULT",
@@ -8364,7 +8429,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 76,
+            "line": 77,
             "description": "List of methods that a script can implement.",
             "itemtype": "attribute",
             "name": "METHODS",
@@ -8374,7 +8439,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 83,
+            "line": 84,
             "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
             "itemtype": "method",
             "name": "initialize",
@@ -8383,7 +8448,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 122,
+            "line": 123,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -8392,7 +8457,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 151,
+            "line": 152,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -8401,8 +8466,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 171,
-            "description": "Call resize method if available.\n\nCalled automatically by the runtime.",
+            "line": 172,
+            "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
             "class": "Script",
@@ -8410,7 +8475,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 186,
+            "line": 192,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -8426,7 +8491,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 202,
+            "line": 208,
             "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "setCode",
@@ -8442,7 +8507,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 252,
+            "line": 258,
             "description": "Create JSON for script.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8855,18 +8920,18 @@
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
             "line": 304,
-            "description": "Resize program elements.\n\nCalled by the runtime every time the window is resized.",
+            "description": "Resize the current scene elements.",
             "itemtype": "method",
             "name": "resize",
             "params": [
                 {
                     "name": "x",
-                    "description": "Width",
+                    "description": "Width-",
                     "type": "Number"
                 },
                 {
                     "name": "y",
-                    "description": "Height",
+                    "description": "Height-",
                     "type": "Number"
                 }
             ],
@@ -8875,7 +8940,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 337,
+            "line": 333,
             "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
             "itemtype": "method",
             "name": "updateRenderer",
@@ -8884,7 +8949,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 356,
+            "line": 352,
             "description": "Enter virtual reality mode.\n\nTo enter virtual reality mode a WebVR enabled browser is required.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
             "itemtype": "method",
             "name": "displayVR",
@@ -8893,7 +8958,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 384,
+            "line": 380,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -8902,7 +8967,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 398,
+            "line": 394,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -8918,7 +8983,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 428,
+            "line": 424,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -8934,7 +8999,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 450,
+            "line": 446,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -8950,7 +9015,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 473,
+            "line": 469,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -8963,7 +9028,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 486,
+            "line": 482,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -8979,7 +9044,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 499,
+            "line": 495,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -8995,7 +9060,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 544,
+            "line": 540,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -9004,7 +9069,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 586,
+            "line": 582,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -9020,7 +9085,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 623,
+            "line": 619,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -9036,7 +9101,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 655,
+            "line": 651,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9239,6 +9304,235 @@
             },
             "class": "Scene",
             "module": "Core"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 42,
+            "description": "Swap rendering buffers.",
+            "itemtype": "method",
+            "name": "swapBuffers",
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 54,
+            "description": "Add new pass to the composer.",
+            "itemtype": "method",
+            "name": "addPass",
+            "params": [
+                {
+                    "name": "pass",
+                    "description": "Rendering pass to be added.",
+                    "type": "Pass"
+                }
+            ],
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 65,
+            "description": "Remove pass from this composer, if pass is not found nothing happens.",
+            "itemtype": "method",
+            "name": "removePass",
+            "params": [
+                {
+                    "name": "pass",
+                    "description": "Pass to be removed from the composer.",
+                    "type": "Pass"
+                }
+            ],
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 81,
+            "description": "Insert new pass into the composer in a specific position.",
+            "itemtype": "method",
+            "name": "insertPass",
+            "params": [
+                {
+                    "name": "pass",
+                    "description": "Rendering pass to be added.",
+                    "type": "Pass"
+                },
+                {
+                    "name": "index",
+                    "description": "Index to be inserted on.",
+                    "type": "Number"
+                }
+            ],
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 93,
+            "description": "Render a scene using this effect composer and a renderer.",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "Render to be used to render the scene.",
+                    "type": "WebGLRenderer"
+                },
+                {
+                    "name": "scene",
+                    "description": "Scene to render.",
+                    "type": "Scene"
+                },
+                {
+                    "name": "delta",
+                    "description": "Delta time.",
+                    "type": "[type]"
+                }
+            ],
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 145,
+            "description": "Set rendering size for the composer.\n\nAlso updates the size for all passes attached to the composer.",
+            "itemtype": "method",
+            "name": "setSize",
+            "params": [
+                {
+                    "name": "width",
+                    "description": "Width.",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "Height.",
+                    "type": "Number"
+                }
+            ],
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 168,
+            "description": "Reset this effect composer.",
+            "itemtype": "method",
+            "name": "reset",
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 192,
+            "description": "Dispose this effect composer.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "line": 13,
+            "description": "If set to true, the pass is processed by the composer.",
+            "itemtype": "property",
+            "name": "enabled",
+            "type": "{Boolean}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "line": 19,
+            "description": "If set to true, the pass indicates to swap read and write buffer after rendering.",
+            "itemtype": "property",
+            "name": "needsSwap",
+            "type": "{Boolean}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "line": 25,
+            "description": "If set to true, the pass clears its buffer before rendering.",
+            "itemtype": "property",
+            "name": "clear",
+            "type": "{Boolean}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "line": 31,
+            "description": "If set to true, the result of the pass is rendered to screen.",
+            "itemtype": "property",
+            "name": "enabled",
+            "type": "{Boolean}",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "line": 45,
+            "description": "Set resolution of this render pass.",
+            "itemtype": "method",
+            "name": "setSize",
+            "params": [
+                {
+                    "name": "width",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "line": 54,
+            "description": "Render the scene using this render pass.",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "",
+                    "type": "WebGLRenderer"
+                },
+                {
+                    "name": "writeBuffer",
+                    "description": "Buffer to write output.",
+                    "type": "WebGLRenderTarget"
+                },
+                {
+                    "name": "readBuffer",
+                    "description": "Input buffer.",
+                    "type": "WebGLRenderTarget"
+                },
+                {
+                    "name": "delta",
+                    "description": "Delta time in milliseconds.",
+                    "type": "Number"
+                },
+                {
+                    "name": "maskActive",
+                    "description": "Not used in this pass.",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "scene",
+                    "description": "Scene to render.",
+                    "type": "Scene"
+                }
+            ],
+            "class": "Pass",
+            "module": "Postprocessing"
         },
         {
             "file": "..\\..\\source\\core\\resources\\Audio.js",
@@ -11000,7 +11294,7 @@
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
             "line": 140,
-            "description": "Update the object state.",
+            "description": "Update the object state, called every time before rendering into the screen.",
             "itemtype": "method",
             "name": "update",
             "class": "Object3D",
@@ -11009,6 +11303,27 @@
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
             "line": 153,
+            "description": "Resize this object, called everytime the window is resized.",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "Width.",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "Height.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Object3D",
+            "module": "THREE"
+        },
+        {
+            "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
+            "line": 168,
             "description": "Disposes the object (to avoid memory leaks).",
             "itemtype": "method",
             "name": "dispose",
@@ -11017,7 +11332,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 166,
+            "line": 181,
             "description": "Add object as children of this object above the indicated children",
             "itemtype": "method",
             "name": "addAbove",
@@ -11038,7 +11353,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 203,
+            "line": 218,
             "description": "Add object as children of this object bellow the indicated children",
             "itemtype": "method",
             "name": "addBellow",
@@ -11059,7 +11374,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 240,
+            "line": 255,
             "description": "Remove all children from the object.",
             "itemtype": "method",
             "name": "removeAll",
@@ -11068,7 +11383,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 253,
+            "line": 268,
             "description": "Check if object is empty (has no childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -11081,7 +11396,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 264,
+            "line": 279,
             "description": "Destroy object, dispose and remove from its parent.",
             "itemtype": "method",
             "name": "destroy",
@@ -11090,7 +11405,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 285,
+            "line": 301,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11120,7 +11435,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 428,
+            "line": 444,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -11136,7 +11451,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 434,
+            "line": 450,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -11152,7 +11467,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 440,
+            "line": 456,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -11168,7 +11483,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 446,
+            "line": 462,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -11184,7 +11499,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 452,
+            "line": 468,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -11200,7 +11515,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 458,
+            "line": 474,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -11216,7 +11531,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 464,
+            "line": 480,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -11232,7 +11547,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 470,
+            "line": 486,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -11253,7 +11568,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 477,
+            "line": 493,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -11269,7 +11584,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 483,
+            "line": 499,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -11290,7 +11605,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 490,
+            "line": 506,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -11309,7 +11624,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 496,
+            "line": 512,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -11325,7 +11640,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 502,
+            "line": 518,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldRotation",
@@ -11341,7 +11656,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 508,
+            "line": 524,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -11357,7 +11672,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 514,
+            "line": 530,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -11373,7 +11688,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 520,
+            "line": 536,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -11394,7 +11709,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 527,
+            "line": 543,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -11410,7 +11725,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 533,
+            "line": 549,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -11426,7 +11741,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 539,
+            "line": 555,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
@@ -12909,7 +13224,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 139,
+            "line": 141,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -12919,7 +13234,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 145,
+            "line": 147,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -12929,7 +13244,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 151,
+            "line": 153,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -12940,7 +13255,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 158,
+            "line": 160,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -12950,7 +13265,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 164,
+            "line": 166,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -12961,7 +13276,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 174,
+            "line": 176,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -12970,7 +13285,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 212,
+            "line": 214,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -12979,7 +13294,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 279,
+            "line": 281,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -13005,7 +13320,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 300,
+            "line": 302,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -13021,7 +13336,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 325,
+            "line": 327,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -13047,7 +13362,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 368,
+            "line": 370,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -13056,7 +13371,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 384,
+            "line": 386,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -13065,7 +13380,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 435,
+            "line": 437,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -13074,7 +13389,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 469,
+            "line": 471,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -13083,7 +13398,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 479,
+            "line": 481,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -13099,7 +13414,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 493,
+            "line": 495,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -13108,7 +13423,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 517,
+            "line": 519,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -13124,7 +13439,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 533,
+            "line": 535,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -13140,7 +13455,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 546,
+            "line": 548,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -13156,7 +13471,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 559,
+            "line": 561,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -13169,7 +13484,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 570,
+            "line": 572,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -13178,7 +13493,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 594,
+            "line": 596,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",

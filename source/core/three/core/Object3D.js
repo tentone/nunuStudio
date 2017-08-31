@@ -138,7 +138,7 @@ THREE.Object3D.prototype.initialize = function()
 };
 
 /**
- * Update the object state.
+ * Update the object state, called every time before rendering into the screen.
  * 
  * @method update
  */
@@ -147,6 +147,21 @@ THREE.Object3D.prototype.update = function()
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].update();
+	}
+};
+
+/**
+ * Resize this object, called everytime the window is resized.
+ * 
+ * @method update
+ * @param {Number} x Width.
+ * @param {Number} y Height.
+ */
+THREE.Object3D.prototype.resize = function(x, y)
+{
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].resize(x, y);
 	}
 };
 
@@ -263,6 +278,7 @@ THREE.Object3D.prototype.isEmpty = function()
 
 /**
  * Destroy object, dispose and remove from its parent.
+ * 
  * @method destroy
  */
 THREE.Object3D.prototype.destroy = function()
