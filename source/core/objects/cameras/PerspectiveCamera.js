@@ -94,9 +94,9 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 	renderPass.renderToScreen = false;
 
 	//FXAA
-	//var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
-	//fxaaPass.uniforms['resolution'].value.set(1 / width, 1 / height);
-	//fxaaPass.renderToScreen = false;
+	var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
+	fxaaPass.uniforms["resolution"].value.set(1 / width, 1 / height);
+	fxaaPass.renderToScreen = false;
 
 	//Bokeh Depth of field
 	/*
@@ -106,7 +106,6 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 		aperture: 0.02,
 		maxblur: 0.01
 	});
-	bokehPass.setSize(width, height);
 	bokehPass.renderToScreen = true;
 	*/
 
@@ -131,30 +130,28 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 	*/
 
 	//Unreal bloom
-	var bloomPass = new THREE.UnrealBloomPass(undefined, 1.4, 0.4, 0.7);
-	bloomPass.setSize(width, height);
-	bloomPass.renderToScreen = true;
+	//var bloomPass = new THREE.UnrealBloomPass(undefined, 1.4, 0.4, 0.7);
+	//bloomPass.renderToScreen = true;
 
 	//Screen space ambient occlusion
-	/*
 	var ssaoPass = new THREE.SSAOPass(scene, this, width, height);
 	ssaoPass.radius = 0.2;
 	ssaoPass.onlyAO = true;
 	ssaoPass.aoClamp = 0.25;
 	ssaoPass.lumInfluence = 0.7;
 	ssaoPass.renderToScreen = true;
-	*/
 
 	//Copy shader
 	//var copyPass = new THREE.ShaderPass(THREE.CopyShader);
 	//copyPass.renderToScreen = true;
 
 	//Composer
-	var composer = new EffectComposer(renderer);
-	composer.addPass(renderPass);
-	composer.addPass(bloomPass);
-	composer.setSize(width, height);
-	composer.render(0.016);
+	this.composer = new EffectComposer(renderer);
+	this.composer.addPass(fxaaPass);
+	this.composer.addPass(renderPass);
+	this.composer.addPass(ssaoPass);
+	this.composer.setSize(width, height);
+	this.composer.render(renderer, scene, 0.016);
 };
 
 /**

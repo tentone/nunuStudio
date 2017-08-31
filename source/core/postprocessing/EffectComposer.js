@@ -58,7 +58,7 @@ EffectComposer.prototype.insertPass = function(pass, index)
 	this.passes.splice(index, 0, pass);
 };
 
-EffectComposer.prototype.render = function(delta)
+EffectComposer.prototype.render = function(renderer, scene, delta)
 {
 	var maskActive = false;
 	var pass;
