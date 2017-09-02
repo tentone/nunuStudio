@@ -70,6 +70,7 @@ include("core/input/Gyroscope.js");
 
 include("core/postprocessing/Pass.js");
 include("core/postprocessing/EffectComposer.js");
+include("core/postprocessing/pass/UnrealBloomPass.js");
 
 include("core/controls/VRControls.js");
 

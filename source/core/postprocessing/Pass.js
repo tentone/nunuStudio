@@ -1,9 +1,9 @@
 "use strict";
 
 /**
- * Render pass, a render pass is used to render something in a rendering pipeline.
+ * A render Pass is used to render something in the graphics pipeline.
  *
- * Can be used to render a scene or apply post processing.
+ * Can be used to render a scene, apply post processing effects, merge buffers,  etc.
  *
  * @class Pass
  * @module Postprocessing
