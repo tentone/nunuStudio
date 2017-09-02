@@ -86,18 +86,29 @@ function PerspectiveCamera(fov, aspect, near, far)
 	this.clearColor = false;
 	this.clearDepth = false;
 	this.order = 0;
+
+	//Render pass
+	var renderPass = new RenderPass();
+
+	//Unreal bloom
+	var bloomPass = new UnrealBloomPass(undefined, 1.4, 0.5, 0.6);
+	bloomPass.renderToScreen = true;
+
+	this.composer = new EffectComposer();
+	this.composer.addPass(renderPass);
+	this.composer.addPass(bloomPass);
 }
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
-PerspectiveCamera.prototype.renderTest = function(renderer, scene)
+PerspectiveCamera.prototype.render = function(renderer, scene)
 {
 	var width = renderer.domElement.width;
 	var height = renderer.domElement.height;
 
 	//Render pass
-	var renderPass = new THREE.RenderPass(scene, this);
-	renderPass.renderToScreen = false;
+	//var renderPass = new THREE.RenderPass(scene, this);
+	//renderPass.renderToScreen = false;
 
 	//FXAA
 	/*var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
@@ -136,27 +147,32 @@ PerspectiveCamera.prototype.renderTest = function(renderer, scene)
 	*/
 
 	//Unreal bloom
-	//var bloomPass = new THREE.UnrealBloomPass(undefined, 1.4, 0.4, 0.7);
+	//var bloomPass = new UnrealBloomPass(undefined, 1.4, 0.4, 0.7);
 	//bloomPass.renderToScreen = true;
 
 	//Screen space ambient occlusion
-	var ssaoPass = new THREE.SSAOPass(scene, this, width, height);
+	/*var ssaoPass = new THREE.SSAOPass(scene, this, width, height);
 	ssaoPass.radius = 0.2;
 	ssaoPass.onlyAO = true;
 	ssaoPass.aoClamp = 0.25;
 	ssaoPass.lumInfluence = 0.7;
-	ssaoPass.renderToScreen = true;
+	ssaoPass.renderToScreen = true;*/
 
 	//Copy shader
 	//var copyPass = new THREE.ShaderPass(THREE.CopyShader);
 	//copyPass.renderToScreen = true;
 
 	//Composer
-	this.composer = new EffectComposer();
-	this.composer.addPass(renderPass);
-	this.composer.addPass(ssaoPass);
+	//this.composer = new EffectComposer();
+	//this.composer.addPass(renderPass);
+	//this.composer.addPass(bloomPass);
 	this.composer.setSize(width, height);
-	this.composer.render(renderer, scene, 0.016);
+	this.composer.render(renderer, scene, this, 0.016);
+};
+
+PerspectiveCamera.prototype.resize = function(x, y)
+{
+	this.composer.setSize(x, y);
 };
 
 /**
