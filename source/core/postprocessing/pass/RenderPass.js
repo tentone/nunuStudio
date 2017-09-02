@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Render pass is used to render the scene the same way as if were using the renderer directly.
+ * 
+ * @class RenderPass
+ * @extends {Pass}
+ * @module Postprocessing
+ */
 function RenderPass()
 {
 	Pass.call(this);

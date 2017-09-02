@@ -153,7 +153,7 @@ THREE.Object3D.prototype.update = function()
 /**
  * Resize this object, called everytime the window is resized.
  * 
- * @method update
+ * @method resize
  * @param {Number} x Width.
  * @param {Number} y Height.
  */

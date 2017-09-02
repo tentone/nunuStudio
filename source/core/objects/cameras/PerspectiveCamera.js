@@ -91,7 +91,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	var renderPass = new RenderPass();
 
 	//Unreal bloom
-	var bloomPass = new UnrealBloomPass(undefined, 1.4, 0.5, 0.6);
+	var bloomPass = new UnrealBloomPass(1.4, 0.5, 0.6);
 	bloomPass.renderToScreen = true;
 
 	this.composer = new EffectComposer();
@@ -162,17 +162,17 @@ PerspectiveCamera.prototype.render = function(renderer, scene)
 	//var copyPass = new THREE.ShaderPass(THREE.CopyShader);
 	//copyPass.renderToScreen = true;
 
-	//Composer
-	//this.composer = new EffectComposer();
-	//this.composer.addPass(renderPass);
-	//this.composer.addPass(bloomPass);
-	this.composer.setSize(width, height);
 	this.composer.render(renderer, scene, this, 0.016);
 };
 
 PerspectiveCamera.prototype.resize = function(x, y)
 {
 	this.composer.setSize(x, y);
+	
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].resize(x, y);
+	}
 };
 
 /**

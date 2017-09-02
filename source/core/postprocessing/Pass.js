@@ -38,6 +38,7 @@ function Pass()
 {
 	this.enabled = true;
 	this.needsSwap = true;
+	
 	this.clear = false;
 	this.renderToScreen = false;
 }
@@ -63,3 +64,19 @@ Pass.prototype.setSize = function(width, height){};
  * @param {Scene} scene Scene to render.
  */
 Pass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera){};
+
+/**
+ * Serialize pass to json.
+ *
+ * @method toJSON
+ * @param {Object} meta Metadata.
+ */
+Pass.prototype.toJSON = function(meta){};
+
+
+/**
+ * Dispose this render pass.
+ *
+ * @method dipose
+ */
+Pass.prototype.dispose = function(){};
