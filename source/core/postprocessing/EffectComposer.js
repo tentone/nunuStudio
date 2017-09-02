@@ -98,7 +98,7 @@ EffectComposer.prototype.insertPass = function(pass, index)
  * @param {Scene} scene Scene to render.
  * @param {[type]} delta Delta time. 
  */
-EffectComposer.prototype.render = function(renderer, scene, delta)
+EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 {
 	var maskActive = false;
 	var length = this.passes.length;
@@ -112,7 +112,7 @@ EffectComposer.prototype.render = function(renderer, scene, delta)
 			continue;
 		}
 
-		pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive);
+		pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive, scene, camera);
 
 		if(pass.needsSwap)
 		{

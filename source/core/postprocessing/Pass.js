@@ -62,4 +62,4 @@ Pass.prototype.setSize = function(width, height){};
  * @param {Boolean} maskActive Not used in this pass.
  * @param {Scene} scene Scene to render.
  */
-Pass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene){};
+Pass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera){};
