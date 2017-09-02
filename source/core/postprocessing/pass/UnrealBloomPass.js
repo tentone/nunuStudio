@@ -1,6 +1,6 @@
 "use strict";
 
-function UnrealBloomPass(resolution, strength, radius, threshold)
+function UnrealBloomPass(strength, radius, threshold)
 {
 	if(THREE.LuminosityHighPassShader === undefined)
 	{
@@ -16,6 +16,7 @@ function UnrealBloomPass(resolution, strength, radius, threshold)
 	this.strength = (strength !== undefined) ? strength : 1;
 	this.radius = radius;
 	this.threshold = threshold;
+	
 	this.resolution = (resolution !== undefined) ? new THREE.Vector2(resolution.x, resolution.y) : new THREE.Vector2(256, 256);
 
 	//Render targets

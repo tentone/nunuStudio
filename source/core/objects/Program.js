@@ -316,18 +316,16 @@ Program.prototype.resize = function(x, y)
 		this.effect.setSize(x, y);
 	}
 
-	//Resize cameras
+	//Resize active cameras
 	for(var i = 0; i < this.scene.cameras.length; i++)
 	{
 		this.scene.cameras[i].aspect = x / y;
 		this.scene.cameras[i].updateProjectionMatrix();
+		this.scene.cameras[i].resize(x, y);
 	}
 
-	var scene = this.scene;
-	for(var i = 0; i < scene.children.length; i++)
-	{
-		scene.children[i].resize(x, y);
-	}
+	//Resize scene
+	this.scene.resize(x, y);
 };
 
 /**
