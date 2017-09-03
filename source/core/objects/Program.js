@@ -305,8 +305,8 @@ Program.prototype.render = function(renderer)
  * Resize the current scene elements.
  * 
  * @method resize
- * @param {Number} x Width-
- * @param {Number} y Height-
+ * @param {Number} x Width.
+ * @param {Number} y Height.
  */
 Program.prototype.resize = function(x, y)
 {
@@ -321,7 +321,12 @@ Program.prototype.resize = function(x, y)
 	{
 		this.scene.cameras[i].aspect = x / y;
 		this.scene.cameras[i].updateProjectionMatrix();
-		this.scene.cameras[i].resize(x, y);
+	}
+
+	//Resize the default camera
+	if(this.defaultCamera !== null)
+	{
+		this.defaultCamera.resize(x, y);
 	}
 
 	//Resize scene

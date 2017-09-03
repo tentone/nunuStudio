@@ -3,9 +3,10 @@
 		"autoUpdate": false,
 		"theme": "dark",
 		"filePreviewSize": 70,
-		"showStats": true,
+		"showStats": false,
 		"showUUID": false,
-		"showType": true
+		"showType": true,
+		"immediateMode": false
 	},
 	"editor": {
 		"angleFormat": 0,
@@ -26,7 +27,8 @@
 		"keyboardNavigationSpeed": 0.5,
 		"mouseLookSensitivity": 0.002,
 		"mouseMoveSpeed": 0.001,
-		"mouseWheelSensitivity": 0.0005
+		"mouseWheelSensitivity": 0.0005,
+		"immediateMode": false
 	},
 	"render": {
 		"followProject": true,
