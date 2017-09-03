@@ -15,10 +15,6 @@ function EffectComposer()
 	{
 		console.error("EffectComposer relies on THREE.CopyShader");
 	}
-	if(THREE.ShaderPass === undefined)
-	{
-		console.error("EffectComposer relies on THREE.ShaderPass");
-	}
 
 	this.uuid = THREE.Math.generateUUID();
 	this.passes = [];
@@ -38,7 +34,7 @@ function EffectComposer()
 	this.writeBuffer = this.renderTarget1;
 	this.readBuffer = this.renderTarget2;
 
-	this.copyPass = new THREE.ShaderPass(THREE.CopyShader);
+	this.copyPass = new ShaderPass(THREE.CopyShader);
 }
 
 /**
@@ -239,7 +235,16 @@ EffectComposer.fromJSON = function(json)
 {
 	var composer = new EffectComposer();
 
-	//TODO <ADD CODE HERE>
+	composer.uuid = json.uuid;
+
+	for(var i = 0; i < json.passes.length; i++)
+	{
+		var pass = null;
+
+		//TODO <ADD CODE HERE>
+		
+		composer.addPass(pass);
+	}
 	
 	return composer;
 };
