@@ -38,6 +38,7 @@
 								<li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
 								<li><a href="../classes/AudioLoader.html">AudioLoader</a></li>
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
+								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
 								<li><a href="../classes/Container.html">Container</a></li>
@@ -83,11 +84,13 @@
 								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
 								<li><a href="../classes/Program.html">Program</a></li>
 								<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
 								<li><a href="../classes/RoundedBoxBufferGeometry.html">RoundedBoxBufferGeometry</a></li>
 								<li><a href="../classes/Scene.html">Scene</a></li>
 								<li><a href="../classes/Script.html">Script</a></li>
+								<li><a href="../classes/ShaderPass.html">ShaderPass</a></li>
 								<li><a href="../classes/Skeleton.html">Skeleton</a></li>
 								<li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
 								<li><a href="../classes/Sky.html">Sky</a></li>
@@ -96,6 +99,7 @@
 								<li><a href="../classes/SpotLight.html">SpotLight</a></li>
 								<li><a href="../classes/Sprite.html">Sprite</a></li>
 								<li><a href="../classes/SpriteSheetTexture.html">SpriteSheetTexture</a></li>
+								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
 								<li><a href="../classes/TDSLoader.html">TDSLoader</a></li>
 								<li><a href="../classes/Text.html">Text</a></li>
 								<li><a href="../classes/Text3D.html">Text3D</a></li>
@@ -103,6 +107,7 @@
 								<li><a href="../classes/TextureLoader.html">TextureLoader</a></li>
 								<li><a href="../classes/Tree.html">Tree</a></li>
 								<li><a href="../classes/TreeUtils.html">TreeUtils</a></li>
+								<li><a href="../classes/UnrealBloomPass.html">UnrealBloomPass</a></li>
 								<li><a href="../classes/Vector3.html">Vector3</a></li>
 								<li><a href="../classes/Video.html">Video</a></li>
 								<li><a href="../classes/VideoLoader.html">VideoLoader</a></li>
@@ -316,6 +321,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_resize">resize</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_rotateOnAxis">rotateOnAxis</a>
 						
 													</li>
@@ -333,10 +342,6 @@
 													</li>
 													<li class="index-item method">
 														<a href="#method_toJSON">toJSON</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_update">update</a>
 						
 													</li>
 													<li class="index-item method">
@@ -1471,6 +1476,71 @@
 											
 											
 											</div>
+											<div id="method_resize" class="method item">
+												<h3 class="name"><code>resize</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>x</code>
+															</li>
+															<li class="arg">
+																	<code>y</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Resize this object, called everytime the window is resized.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">x</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Width.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">y</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Height.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
 											<div id="method_rotateOnAxis" class="method item">
 												<h3 class="name"><code>rotateOnAxis</code></h3>
 											
@@ -1775,71 +1845,6 @@
 											
 														</div>
 													</div>
-											
-											</div>
-											<div id="method_update" class="method item">
-												<h3 class="name"><code>update</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>x</code>
-															</li>
-															<li class="arg">
-																	<code>y</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Resize this object, called everytime the window is resized.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">x</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Width.</p>
-											
-																</div>
-											
-															</li>
-															<li class="param">
-																	<code class="param-name">y</code>
-																	<span class="type">Number</span>
-											
-											
-																<div class="param-description">
-																	<p>Height.</p>
-											
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
 											
 											</div>
 											<div id="method_update" class="method item">

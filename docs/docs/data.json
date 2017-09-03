@@ -423,11 +423,56 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\postprocessing\\EffectComposer.js": {
-            "name": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+        "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js",
             "modules": {
                 "Postprocessing": 1
             },
+            "classes": {
+                "BokehPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\pass\\RenderPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\RenderPass.js",
+            "modules": {},
+            "classes": {
+                "RenderPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
+            "modules": {},
+            "classes": {
+                "SSAOPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\pass\\ShaderPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\ShaderPass.js",
+            "modules": {},
+            "classes": {
+                "ShaderPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
+            "modules": {},
+            "classes": {
+                "UnrealBloomPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\EffectComposer.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "modules": {},
             "classes": {
                 "EffectComposer": 1
             },
@@ -1074,6 +1119,11 @@
             "submodules": {},
             "elements": {},
             "classes": {
+                "BokehPass": 1,
+                "RenderPass": 1,
+                "SSAOPass": 1,
+                "ShaderPass": 1,
+                "UnrealBloomPass": 1,
                 "EffectComposer": 1,
                 "Pass": 1
             },
@@ -1082,7 +1132,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
             "line": 3,
-            "description": "The effect composer is used to organize multiple post-processing passes.\n\nIt is used by camera objects to organize the rendering pipeline."
+            "description": "Depth-of-field post-process with bokeh shader.\n\nHas the following parameters:\n - focus\n \t- Focus distance.\n - aperture\n \t- Camera aperture.\n - maxblur\n \t- Maximum level of blur."
         },
         "Resources": {
             "name": "Resources",
@@ -2306,6 +2356,118 @@
             "is_constructor": 1,
             "extends": "{Scene}"
         },
+        "BokehPass": {
+            "name": "BokehPass",
+            "shortname": "BokehPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js",
+            "line": 1,
+            "description": "Depth-of-field post-process with bokeh shader.\n\nHas the following parameters:\n - focus\n \t- Focus distance.\n - aperture\n \t- Camera aperture.\n - maxblur\n \t- Maximum level of blur.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "focus",
+                    "description": "Focus distance.",
+                    "type": "Number"
+                },
+                {
+                    "name": "aperture",
+                    "description": "Camera aperture.",
+                    "type": "Number"
+                },
+                {
+                    "name": "maxblur",
+                    "description": "Maximum level of blur.",
+                    "type": "Number"
+                }
+            ]
+        },
+        "RenderPass": {
+            "name": "RenderPass",
+            "shortname": "RenderPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\RenderPass.js",
+            "line": 3,
+            "description": "Render pass is used to render the scene the same way as if were using the renderer directly.",
+            "extends": "{Pass}"
+        },
+        "SSAOPass": {
+            "name": "SSAOPass",
+            "shortname": "SSAOPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
+            "line": 3,
+            "description": "Screen-space ambient occlusion pass.\n\nHas the following parameters\n - radius\n \t- Ambient occlusion shadow radius (numeric value).\n - onlyAO\n \t- Display only ambient occlusion result (boolean value).\n - aoClamp\n \t- Ambient occlusion clamp (numeric value).\n - lumInfluence\n \t- Pixel luminosity influence in AO calculation (numeric value).",
+            "author": "tentone",
+            "is_constructor": 1
+        },
+        "ShaderPass": {
+            "name": "ShaderPass",
+            "shortname": "ShaderPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\ShaderPass.js",
+            "line": 3,
+            "description": "Shader pass is used to apply a post processing effect over an already rendered scene.",
+            "author": "alteredq / http://alteredqualia.com/",
+            "is_constructor": 1
+        },
+        "UnrealBloomPass": {
+            "name": "UnrealBloomPass",
+            "shortname": "UnrealBloomPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
+            "line": 3,
+            "description": "Unreal engine like bloom effect pass.\nhttps://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/\n\nHas the following parameters\n - strength\n \t- Bloom effect strength.\n - radius\n \t- Bloom effect radius.\n - threshold\n \t- White point threshold.\n - smooth\n \t- Smooth factor\n - bloomFactors\n \t- Bloom power factor for each of the 5 passes.\n - bloomTintColors\n \t- Bloom tint color for each of the 5 passes.",
+            "author": "spidersharma / http://eduperiment.com/",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "strength",
+                    "description": "Bloom effect strength.",
+                    "type": "Number"
+                },
+                {
+                    "name": "radius",
+                    "description": "Bloom effect radius.",
+                    "type": "Number"
+                },
+                {
+                    "name": "threshold",
+                    "description": "White point threshold.",
+                    "type": "Number"
+                }
+            ]
+        },
         "EffectComposer": {
             "name": "EffectComposer",
             "shortname": "EffectComposer",
@@ -2333,7 +2495,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
             "line": 3,
-            "description": "Render pass, a render pass is used to render something in a rendering pipeline.\n\nCan be used to render a scene or apply post processing.",
+            "description": "A render Pass is used to render something in the graphics pipeline.\n\nCan be used to render a scene, apply post processing effects, merge buffers,  etc.",
             "is_constructor": 1
         },
         "Audio": {
@@ -3075,7 +3237,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 130,
+            "line": 134,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -6907,7 +7069,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 162,
+            "line": 133,
             "description": "Destroy camera object and remove it from the scene.",
             "itemtype": "method",
             "name": "destroy",
@@ -6916,7 +7078,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 178,
+            "line": 149,
             "description": "Update camera projection matrix.\n\nShould be called after chaging projection parameters.",
             "itemtype": "method",
             "name": "updateProjectionMatrix",
@@ -6925,7 +7087,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
-            "line": 200,
+            "line": 171,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8926,12 +9088,12 @@
             "params": [
                 {
                     "name": "x",
-                    "description": "Width-",
+                    "description": "Width.",
                     "type": "Number"
                 },
                 {
                     "name": "y",
-                    "description": "Height-",
+                    "description": "Height.",
                     "type": "Number"
                 }
             ],
@@ -8940,7 +9102,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 333,
+            "line": 336,
             "description": "This method updated the webgl renderer configuration.\n\nShould be called after changing any rendering related parameter.",
             "itemtype": "method",
             "name": "updateRenderer",
@@ -8949,7 +9111,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 352,
+            "line": 355,
             "description": "Enter virtual reality mode.\n\nTo enter virtual reality mode a WebVR enabled browser is required.\n\nWhen displaying VR content the display.requestAnimationFrame should be used to call the render method.",
             "itemtype": "method",
             "name": "displayVR",
@@ -8958,7 +9120,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 380,
+            "line": 383,
             "description": "Exit virtual relity mode.",
             "itemtype": "method",
             "name": "exitVR",
@@ -8967,7 +9129,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 394,
+            "line": 397,
             "description": "Change scene during runtime, this method can receive booth a scene name or a scene object.\n\nThis method should be used inside of script objects during runtime.",
             "itemtype": "method",
             "name": "setScene",
@@ -8983,7 +9145,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 424,
+            "line": 427,
             "description": "Remove Scene from program.",
             "itemtype": "method",
             "name": "remove",
@@ -8999,7 +9161,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 446,
+            "line": 449,
             "description": "Add new scene to this program.\n\nOn the program class only scenes can be added as children.",
             "itemtype": "method",
             "name": "add",
@@ -9015,7 +9177,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 469,
+            "line": 472,
             "description": "Clone program, keeping uuids and every identification attribute.\n\nClone method uses the ObjectLoad to serialize and create a new program instance with the same data.",
             "itemtype": "method",
             "name": "clone",
@@ -9028,7 +9190,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 482,
+            "line": 485,
             "description": "Set a scene as initial scene using its uuid.\n\nThis method is used by the editor.",
             "itemtype": "method",
             "name": "setInitialScene",
@@ -9044,7 +9206,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 495,
+            "line": 498,
             "description": "Create a scene using a default template.\n\nThis is the scene used when creating a new program or scene inside the editor.",
             "itemtype": "method",
             "name": "addDefaultScene",
@@ -9060,7 +9222,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 540,
+            "line": 543,
             "description": "Dispose program data to avoid memory leaks.\n\nCalled when exiting the program.",
             "itemtype": "method",
             "name": "dispose",
@@ -9069,7 +9231,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 582,
+            "line": 585,
             "description": "Receive external data and pass it to all script instances.",
             "params": [
                 {
@@ -9085,7 +9247,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 619,
+            "line": 622,
             "description": "Send data to external app instance.",
             "params": [
                 {
@@ -9101,7 +9263,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\Program.js",
-            "line": 651,
+            "line": 654,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9306,8 +9468,65 @@
             "module": "Core"
         },
         {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
+            "line": 83,
+            "description": "Render using this pass.",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "renderer",
+                    "description": "",
+                    "type": "WebGLRenderer"
+                },
+                {
+                    "name": "writeBuffer",
+                    "description": "Buffer to write output.",
+                    "type": "WebGLRenderTarget"
+                },
+                {
+                    "name": "readBuffer",
+                    "description": "Input buffer.",
+                    "type": "WebGLRenderTarget"
+                },
+                {
+                    "name": "delta",
+                    "description": "Delta time in milliseconds.",
+                    "type": "Number"
+                },
+                {
+                    "name": "maskActive",
+                    "description": "Not used in this pass.",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "SSAOPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
+            "line": 108,
+            "description": "Set resolution of this render pass.",
+            "itemtype": "method",
+            "name": "setSize",
+            "params": [
+                {
+                    "name": "width",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "SSAOPass",
+            "module": "Postprocessing"
+        },
+        {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 42,
+            "line": 44,
             "description": "Swap rendering buffers.",
             "itemtype": "method",
             "name": "swapBuffers",
@@ -9316,7 +9535,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 54,
+            "line": 56,
             "description": "Add new pass to the composer.",
             "itemtype": "method",
             "name": "addPass",
@@ -9332,7 +9551,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 65,
+            "line": 67,
             "description": "Remove pass from this composer, if pass is not found nothing happens.",
             "itemtype": "method",
             "name": "removePass",
@@ -9348,7 +9567,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 81,
+            "line": 83,
             "description": "Insert new pass into the composer in a specific position.",
             "itemtype": "method",
             "name": "insertPass",
@@ -9369,7 +9588,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 93,
+            "line": 95,
             "description": "Render a scene using this effect composer and a renderer.",
             "itemtype": "method",
             "name": "render",
@@ -9395,7 +9614,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 145,
+            "line": 147,
             "description": "Set rendering size for the composer.\n\nAlso updates the size for all passes attached to the composer.",
             "itemtype": "method",
             "name": "setSize",
@@ -9416,7 +9635,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 168,
+            "line": 170,
             "description": "Reset this effect composer.",
             "itemtype": "method",
             "name": "reset",
@@ -9425,10 +9644,40 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
-            "line": 192,
+            "line": 194,
             "description": "Dispose this effect composer.",
             "itemtype": "method",
             "name": "dispose",
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 210,
+            "description": "Serialize this effect composer to JSON.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "class": "EffectComposer",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\EffectComposer.js",
+            "line": 230,
+            "description": "Create a new effect composer loaded from json data.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "fromJSON",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "JSON data to load.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Composer loaded from data.",
+                "type": "EffectComposer"
+            },
             "class": "EffectComposer",
             "module": "Postprocessing"
         },
@@ -9474,7 +9723,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
-            "line": 45,
+            "line": 48,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -9495,7 +9744,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
-            "line": 54,
+            "line": 57,
             "description": "Render the scene using this render pass.",
             "itemtype": "method",
             "name": "render",
@@ -9529,6 +9778,31 @@
                     "name": "scene",
                     "description": "Scene to render.",
                     "type": "Scene"
+                }
+            ],
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "line": 70,
+            "description": "Dispose this render pass.",
+            "itemtype": "method",
+            "name": "dipose",
+            "class": "Pass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\Pass.js",
+            "line": 77,
+            "description": "Serialize pass to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Metadata object.",
+                    "type": "Object"
                 }
             ],
             "class": "Pass",
@@ -11305,7 +11579,7 @@
             "line": 153,
             "description": "Resize this object, called everytime the window is resized.",
             "itemtype": "method",
-            "name": "update",
+            "name": "resize",
             "params": [
                 {
                     "name": "x",
@@ -13224,7 +13498,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 141,
+            "line": 145,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -13234,7 +13508,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 147,
+            "line": 151,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -13244,7 +13518,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 153,
+            "line": 157,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -13255,7 +13529,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 160,
+            "line": 164,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -13265,7 +13539,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 166,
+            "line": 170,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -13276,7 +13550,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 176,
+            "line": 180,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -13285,7 +13559,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 214,
+            "line": 218,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -13294,7 +13568,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 281,
+            "line": 285,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -13320,7 +13594,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 302,
+            "line": 306,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -13336,7 +13610,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 327,
+            "line": 331,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -13362,7 +13636,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 370,
+            "line": 374,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -13371,7 +13645,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 386,
+            "line": 390,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -13380,7 +13654,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 437,
+            "line": 441,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -13389,7 +13663,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 471,
+            "line": 475,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -13398,7 +13672,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 481,
+            "line": 485,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -13414,7 +13688,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 495,
+            "line": 499,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -13423,7 +13697,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 519,
+            "line": 523,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -13439,7 +13713,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 535,
+            "line": 539,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -13455,7 +13729,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 548,
+            "line": 552,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -13471,7 +13745,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 561,
+            "line": 565,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -13484,7 +13758,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 572,
+            "line": 576,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -13493,7 +13767,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 596,
+            "line": 600,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",

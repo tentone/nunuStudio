@@ -226,3 +226,20 @@ EffectComposer.prototype.toJSON = function()
 
 	return data;
 };
+
+/**
+ * Create a new effect composer loaded from json data.
+ * 
+ * @static
+ * @method fromJSON
+ * @param {Object} json JSON data to load.
+ * @return {EffectComposer} Composer loaded from data.
+ */
+EffectComposer.fromJSON = function(json)
+{
+	var composer = new EffectComposer();
+
+	//TODO <ADD CODE HERE>
+	
+	return composer;
+};
