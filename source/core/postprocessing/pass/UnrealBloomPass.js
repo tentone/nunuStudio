@@ -6,17 +6,17 @@
  *
  * Has the following parameters
  *  - strength
- *  	- Bloom effect strength.
+ *  	- Scales the color of the whole bloom effect.
  *  - radius
  *  	- Bloom effect radius.
  *  - threshold
- *  	- White point threshold.
+ *  	- Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom. To have all scene colors contributing to the bloom, a volume of -1 needs to be used.
  *  - smooth
  *  	- Smooth factor
  *  - bloomFactors
- *  	- Bloom power factor for each of the 5 passes.
+ *  	- The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).
  *  - bloomTintColors
- *  	- Bloom tint color for each of the 5 passes.
+ *  	- Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.
  * 
  * @author spidersharma / http://eduperiment.com/
  * @class UnrealBloomPass

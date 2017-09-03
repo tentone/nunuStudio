@@ -189,7 +189,7 @@
 						<ul>
 						<li>strength
 						<ul>
-						<li>Bloom effect strength.</li>
+						<li>Scales the color of the whole bloom effect.</li>
 						</ul>
 						</li>
 						<li>radius
@@ -199,7 +199,7 @@
 						</li>
 						<li>threshold
 						<ul>
-						<li>White point threshold.</li>
+						<li>Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom. To have all scene colors contributing to the bloom, a volume of -1 needs to be used.</li>
 						</ul>
 						</li>
 						<li>smooth
@@ -209,12 +209,12 @@
 						</li>
 						<li>bloomFactors
 						<ul>
-						<li>Bloom power factor for each of the 5 passes.</li>
+						<li>The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).</li>
 						</ul>
 						</li>
 						<li>bloomTintColors
 						<ul>
-						<li>Bloom tint color for each of the 5 passes.</li>
+						<li>Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.</li>
 						</ul>
 						</li>
 						</ul>
