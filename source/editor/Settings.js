@@ -30,7 +30,8 @@ Settings.loadDefault = function()
 		filePreviewSize : 70,
 		showStats : false,
 		showUUID : false,
-		showType : true
+		showType : true,
+		immediateMode : false
 	};
 
 	//Editor

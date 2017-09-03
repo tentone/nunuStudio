@@ -16,8 +16,8 @@ function UnrealBloomPass(strength, radius, threshold)
 	this.strength = (strength !== undefined) ? strength : 1;
 	this.radius = radius;
 	this.threshold = threshold;
-	
-	this.resolution = (resolution !== undefined) ? new THREE.Vector2(resolution.x, resolution.y) : new THREE.Vector2(256, 256);
+
+	this.resolution = new THREE.Vector2(2, 2);
 
 	//Render targets
 	var pars =
@@ -121,7 +121,7 @@ function UnrealBloomPass(strength, radius, threshold)
 	this.scene = new THREE.Scene();
 	this.basic = new THREE.MeshBasicMaterial();
 	this.quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), null);
-	this.quad.frustumCulled = false; // Avoid getting clipped
+	this.quad.frustumCulled = false;
 	this.scene.add(this.quad);
 }
 

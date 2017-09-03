@@ -911,6 +911,7 @@ SceneEditor.prototype.render = function()
 				var camera = Editor.selectedObjects[0];
 				camera.aspect = width / height;
 				camera.updateProjectionMatrix();
+				camera.resize(width, height);
 
 				renderer.clear();
 				renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
@@ -928,7 +929,8 @@ SceneEditor.prototype.render = function()
 					var camera = scene.cameras[i];
 					camera.aspect = width / height;
 					camera.updateProjectionMatrix();
-					
+					camera.resize(width, height);
+
 					if(camera.clearColor)
 					{
 						renderer.clearColor();
@@ -942,7 +944,6 @@ SceneEditor.prototype.render = function()
 					renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 					
 					camera.render(renderer, scene);
-					renderer.render(scene, camera);
 				}
 			}
 
@@ -1117,9 +1118,17 @@ SceneEditor.prototype.setState = function(state)
 	{
 		try
 		{
-			//Copy program
-			this.programRunning = Editor.program.clone();
-
+			//Run the program directly all changed made with code are kept
+			if(Settings.general.immediateMode)
+			{
+				this.programRunning = Editor.program;
+			}
+			//Run a copy of the program
+			else
+			{
+				this.programRunning = Editor.program.clone();
+			}
+			
 			//Use editor camera as default camera for program
 			this.programRunning.defaultCamera = this.camera;
 			this.programRunning.setRenderer(this.renderer);

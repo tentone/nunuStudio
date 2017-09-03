@@ -77,7 +77,7 @@
 */
 function PerspectiveCamera(fov, aspect, near, far)
 {
-	THREE.PerspectiveCamera.call(this, fov, aspect, near, far);
+	THREE._PerspectiveCamera.call(this, fov, aspect, near, far);
 
 	this.name = "camera";
 
@@ -91,7 +91,7 @@ function PerspectiveCamera(fov, aspect, near, far)
 	var renderPass = new RenderPass();
 
 	//Unreal bloom
-	var bloomPass = new UnrealBloomPass(1.4, 0.5, 0.6);
+	var bloomPass = new UnrealBloomPass(0.8, 0.3, 0.8);
 	bloomPass.renderToScreen = true;
 
 	this.composer = new EffectComposer();
@@ -99,7 +99,10 @@ function PerspectiveCamera(fov, aspect, near, far)
 	this.composer.addPass(bloomPass);
 }
 
-PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
+THREE._PerspectiveCamera = THREE.PerspectiveCamera;
+THREE.PerspectiveCamera = PerspectiveCamera;
+
+PerspectiveCamera.prototype = Object.create(THREE._PerspectiveCamera.prototype);
 
 PerspectiveCamera.prototype.render = function(renderer, scene)
 {
@@ -222,7 +225,7 @@ PerspectiveCamera.prototype.updateProjectionMatrix = function()
  */
 PerspectiveCamera.prototype.toJSON = function(meta)
 {
-	var data = THREE.PerspectiveCamera.prototype.toJSON.call(this, meta);
+	var data = THREE._PerspectiveCamera.prototype.toJSON.call(this, meta);
 
 	data.object.clearColor = this.clearColor;
 	data.object.clearDepth = this.clearDepth;

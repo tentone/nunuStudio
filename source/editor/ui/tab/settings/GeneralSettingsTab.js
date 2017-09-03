@@ -92,12 +92,23 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.showType);
 	this.form.nextRow();
 
+	//Immediate mode
+	this.form.addText("Use immediate mode");
+	this.immediateMode = new CheckBox(this.form.element);
+	this.immediateMode.size.set(15, 15);
+	this.immediateMode.setOnChange(function()
+	{
+		Settings.general.immediateMode = self.immediateMode.getValue();
+	});
+	this.form.add(this.immediateMode);
+	this.form.nextRow();
+
 	//Blank Space
 	this.form.addText("");
 	this.form.nextRow();
 
 	//Scene editor
-	this.form.addText("Scene editor");
+	this.form.addText("Editor");
 	this.form.nextRow();
 
 	//Enable Grid
@@ -381,6 +392,7 @@ GeneralSettingsTab.prototype.activate = function()
 	this.showStats.setValue(Settings.general.showStats);
 	this.showUUID.setValue(Settings.general.showUUID);
 	this.showType.setValue(Settings.general.showType);
+	this.immediateMode.setValue(Settings.general.immediateMode);
 	
 	//Editor
 	this.snap.setValue(Settings.editor.snap);
