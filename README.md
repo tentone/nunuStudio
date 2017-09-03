@@ -153,7 +153,10 @@
 		- Subtract
 		- Intersect
 		- Union
-	
+	- Immediate mode
+	- Post-processing
+	- Resize is now a part of Object3D
+
 ### Tech
 nunuStudio is built on top of a number of open source projects
 - NWJS

@@ -27,8 +27,7 @@
 		"keyboardNavigationSpeed": 0.5,
 		"mouseLookSensitivity": 0.002,
 		"mouseMoveSpeed": 0.001,
-		"mouseWheelSensitivity": 0.0005,
-		"immediateMode": false
+		"mouseWheelSensitivity": 0.0005
 	},
 	"render": {
 		"followProject": true,

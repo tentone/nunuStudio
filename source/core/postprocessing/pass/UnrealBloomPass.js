@@ -13,6 +13,8 @@ function UnrealBloomPass(strength, radius, threshold)
 
 	Pass.call(this);
 	
+	this.type = "UnrealBloom";
+
 	this.strength = (strength !== undefined) ? strength : 1;
 	this.radius = radius;
 	this.threshold = threshold;
@@ -35,20 +37,18 @@ function UnrealBloomPass(strength, radius, threshold)
 	var resy = Math.round(this.resolution.y / 2);
 	
 	this.renderTargetBright = new THREE.WebGLRenderTarget(resx, resy, pars);
-	this.renderTargetBright.texture.name = "UnrealBloomPass.bright";
 	this.renderTargetBright.texture.generateMipmaps = false;
 
 	for(var i = 0; i < this.nMips; i++)
 	{
 		var renderTarget = new THREE.WebGLRenderTarget(resx, resy, pars);
-		renderTarget.texture.name = "UnrealBloomPass.h" + i;
 		renderTarget.texture.generateMipmaps = false;
 		this.renderTargetsHorizontal.push(renderTarget);
 
 		var renderTarget = new THREE.WebGLRenderTarget(resx, resy, pars);
-		renderTarget.texture.name = "UnrealBloomPass.v" + i;
 		renderTarget.texture.generateMipmaps = false;
 		this.renderTargetsVertical.push(renderTarget);
+
 		resx = Math.round(resx / 2);
 		resy = Math.round(resy / 2);
 	}
@@ -164,13 +164,17 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 {
 	this.oldClearColor.copy(renderer.getClearColor());
 	this.oldClearAlpha = renderer.getClearAlpha();
-
 	var oldAutoClear = renderer.autoClear;
+
 	renderer.autoClear = false;
 	renderer.setClearColor(new THREE.Color(0, 0, 0), 0);
-	if(maskActive) renderer.context.disable(renderer.context.STENCIL_TEST);
+	
+	if(maskActive)
+	{
+		renderer.context.disable(renderer.context.STENCIL_TEST);
+	}
 
-	// Render input to screen
+	//Render input to screen
 	if(this.renderToScreen)
 	{
 		this.quad.material = this.basic;
@@ -198,17 +202,22 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 		inputRenderTarget = this.renderTargetsVertical[i];
 	}
 
-	// Composite All the mips
+	//Composite All the mips
 	this.quad.material = this.compositeMaterial;
 	this.compositeMaterial.uniforms["bloomStrength"].value = this.strength;
 	this.compositeMaterial.uniforms["bloomRadius"].value = this.radius;
 	this.compositeMaterial.uniforms["bloomTintColors"].value = this.bloomTintColors;
 	renderer.render(this.scene, this.camera, this.renderTargetsHorizontal[0], true);
 
-	// Blend it additively over the input texture
+	//Blend it additively over the input texture
 	this.quad.material = this.materialCopy;
 	this.copyUniforms["tDiffuse"].value = this.renderTargetsHorizontal[0].texture;
-	if(maskActive) renderer.context.enable(renderer.context.STENCIL_TEST);
+	
+	if(maskActive)
+	{
+		renderer.context.enable(renderer.context.STENCIL_TEST);
+	}
+
 	if(this.renderToScreen)
 	{
 		renderer.render(this.scene, this.camera, undefined, false);

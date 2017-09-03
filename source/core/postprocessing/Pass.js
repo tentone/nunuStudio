@@ -36,9 +36,11 @@
  */
 function Pass()
 {
+	this.uuid = THREE.Math.generateUUID();
+	this.type = "Pass";
+
 	this.enabled = true;
 	this.needsSwap = true;
-	
 	this.clear = false;
 	this.renderToScreen = false;
 }
@@ -66,17 +68,29 @@ Pass.prototype.setSize = function(width, height){};
 Pass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera){};
 
 /**
- * Serialize pass to json.
- *
- * @method toJSON
- * @param {Object} meta Metadata.
- */
-Pass.prototype.toJSON = function(meta){};
-
-
-/**
  * Dispose this render pass.
  *
  * @method dipose
  */
 Pass.prototype.dispose = function(){};
+
+/**
+ * Serialize pass to json.
+ *
+ * @method toJSON
+ * @param {Object} meta Metadata object.
+ */
+Pass.prototype.toJSON = function(meta)
+{
+	var data = {};
+
+	data.uuid = this.uuid;
+	data.type = this.type;
+
+	data.enabled = this.enabled;
+	data.needsSwap = this.needsSwap;
+	data.renderToScreen = this.renderToScreen;
+	data.clear = this.clear;
+
+	return data;
+};
