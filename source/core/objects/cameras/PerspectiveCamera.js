@@ -90,13 +90,27 @@ function PerspectiveCamera(fov, aspect, near, far)
 	//Render pass
 	var renderPass = new RenderPass();
 
+	//FXAA
+	var fxaaPass = new FXAAPass();
+	fxaaPass.renderToScreen = true;
+
 	//Unreal bloom
 	var bloomPass = new UnrealBloomPass(0.8, 0.3, 0.8);
-	bloomPass.renderToScreen = true;
+	bloomPass.renderToScreen = false;
+
+ 	//SSAO
+ 	var ssaoPass = new SSAOPass();
+ 	ssaoPass.onlyAO = false;
+ 	ssaoPass.renderToScreen = false;
+
+ 	//Bokeh
+ 	var bokehPass = new BokehPass();
+ 	bokehPass.renderToScreen = false;
 
 	this.composer = new EffectComposer();
 	this.composer.addPass(renderPass);
-	this.composer.addPass(bloomPass);
+	this.composer.addPass(ssaoPass);
+	this.composer.addPass(fxaaPass);
 }
 
 THREE._PerspectiveCamera = THREE.PerspectiveCamera;
@@ -106,65 +120,6 @@ PerspectiveCamera.prototype = Object.create(THREE._PerspectiveCamera.prototype);
 
 PerspectiveCamera.prototype.render = function(renderer, scene)
 {
-	var width = renderer.domElement.width;
-	var height = renderer.domElement.height;
-
-	//Render pass
-	//var renderPass = new THREE.RenderPass(scene, this);
-	//renderPass.renderToScreen = false;
-
-	//FXAA
-	/*var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
-	fxaaPass.uniforms["resolution"].value.set(1 / width, 1 / height);
-	fxaaPass.renderToScreen = false;*/
-
-	//Bokeh Depth of field
-	/*
-	var bokehPass = new THREE.BokehPass(scene, this,
-	{
-		focus: 1,
-		aperture: 0.02,
-		maxblur: 0.01
-	});
-	bokehPass.renderToScreen = true;
-	*/
-
-	//Scalable Ambient Occlusion
-	/*
-	var saoPass = new THREE.SAOPass(scene, this, false, true);
-	saoPass.params =
-	{
-		output: THREE.SAOPass.OUTPUT.Default, //Beauty | SAO | Depth | Normal
-		saoBias: 0.1,
-		saoIntensity: 0.1,
-		saoScale: 20,
-		saoKernelRadius: 10,
-		saoMinResolution: 0,
-		saoBlur: true,
-		saoBlurRadius: 12,
-		saoBlurStdDev: 4,
-		saoBlurDepthCutoff: 0.01
-	};
-	saoPass.setSize(width, height);
-	saoPass.renderToScreen = false;
-	*/
-
-	//Unreal bloom
-	//var bloomPass = new UnrealBloomPass(undefined, 1.4, 0.4, 0.7);
-	//bloomPass.renderToScreen = true;
-
-	//Screen space ambient occlusion
-	/*var ssaoPass = new THREE.SSAOPass(scene, this, width, height);
-	ssaoPass.radius = 0.2;
-	ssaoPass.onlyAO = true;
-	ssaoPass.aoClamp = 0.25;
-	ssaoPass.lumInfluence = 0.7;
-	ssaoPass.renderToScreen = true;*/
-
-	//Copy shader
-	//var copyPass = new THREE.ShaderPass(THREE.CopyShader);
-	//copyPass.renderToScreen = true;
-
 	this.composer.render(renderer, scene, this, 0.016);
 };
 

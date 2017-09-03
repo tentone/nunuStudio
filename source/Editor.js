@@ -27,10 +27,7 @@ include("lib/three/postprocessing/EffectComposer.js");
 include("lib/three/postprocessing/RenderPass.js");
 include("lib/three/postprocessing/ShaderPass.js");
 include("lib/three/postprocessing/MaskPass.js");
-include("lib/three/postprocessing/BokehPass.js");
 include("lib/three/postprocessing/SAOPass.js");
-include("lib/three/postprocessing/UnrealBloomPass.js");
-include("lib/three/postprocessing/SSAOPass.js");
 
 include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
@@ -73,6 +70,9 @@ include("core/postprocessing/EffectComposer.js");
 include("core/postprocessing/pass/RenderPass.js");
 include("core/postprocessing/pass/ShaderPass.js");
 include("core/postprocessing/pass/UnrealBloomPass.js");
+include("core/postprocessing/pass/FXAAPass.js");
+include("core/postprocessing/pass/SSAOPass.js");
+include("core/postprocessing/pass/BokehPass.js");
 
 include("core/controls/VRControls.js");
 
