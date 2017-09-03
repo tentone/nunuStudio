@@ -16,6 +16,8 @@
  * @author alteredq / http://alteredqualia.com/
  * @author tentone
  * @class SSAOPass
+ * @module Postprocessing
+ * @constructor
  */
 function SSAOPass()
 {
