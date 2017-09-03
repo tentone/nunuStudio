@@ -1,9 +1,20 @@
 /**
  * Depth-of-field post-process with bokeh shader.
- *
+ * 
+ * Has the following parameters:
+ *  - focus
+ *  	- Focus distance.
+ *  - aperture
+ *  	- Camera aperture.
+ *  - maxblur
+ *  	- Maximum level of blur.
+ * 
  * @class BokehPass
  * @module Postprocessing
  * @constructor
+ * @param {Number} focus Focus distance.
+ * @param {Number} aperture Camera aperture.
+ * @param {Number} maxblur Maximum level of blur.
  */
 function BokehPass(focus, aperture, maxblur)
 {
@@ -57,6 +68,29 @@ function BokehPass(focus, aperture, maxblur)
 	this.oldClearColor = new THREE.Color();
 	this.oldClearAlpha = 1;
 	this.oldAutoClear = false;
+
+	//Setters and getters for uniforms
+	var self = this;
+	Object.defineProperties(this,
+	{
+		aperture:
+		{
+			get: function() {return this.uniforms["aperture"].value;},
+			set: function(value) {this.uniforms["aperture"].value = value;}
+		},
+
+		focus:
+		{
+			get: function() {return this.uniforms["focus"].value;},
+			set: function(value) {this.uniforms["focus"].value = value;}
+		},
+
+		maxblur:
+		{
+			get: function() {return this.uniforms["maxblur"].value;},
+			set: function(value) {this.uniforms["maxblur"].value = value;}
+		},
+	});
 };
 
 BokehPass.prototype = Object.create(Pass.prototype)

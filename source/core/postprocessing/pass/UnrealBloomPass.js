@@ -40,11 +40,10 @@ function UnrealBloomPass(strength, radius, threshold)
 	Pass.call(this);
 	
 	this.type = "UnrealBloom";
-
 	this.enabled = true;
 	this.needsSwap = false;
 	this.renderToScreen = false;
-	
+
 	//Render targets
 	var parameters =
 	{
@@ -53,9 +52,6 @@ function UnrealBloomPass(strength, radius, threshold)
 		format: THREE.RGBAFormat
 	};
 	
-	var resx = Math.round(4);
-	var resy = Math.round(4);
-
 	//Render targets for passes
 	this.renderTargetsHorizontal = [];
 	this.renderTargetsVertical = [];
@@ -63,20 +59,17 @@ function UnrealBloomPass(strength, radius, threshold)
 
 	for(var i = 0; i < this.nMips; i++)
 	{
-		var renderTarget = new THREE.WebGLRenderTarget(resx, resy, parameters);
+		var renderTarget = new THREE.WebGLRenderTarget(0, 0, parameters);
 		renderTarget.texture.generateMipmaps = false;
 		this.renderTargetsHorizontal.push(renderTarget);
 
-		var renderTarget = new THREE.WebGLRenderTarget(resx, resy, parameters);
+		var renderTarget = new THREE.WebGLRenderTarget(0, 0, parameters);
 		renderTarget.texture.generateMipmaps = false;
 		this.renderTargetsVertical.push(renderTarget);
-
-		resx = Math.round(resx / 2);
-		resy = Math.round(resy / 2);
 	}
 
 	//Render target for final pass
-	this.renderTargetBright = new THREE.WebGLRenderTarget(resx, resy, parameters);
+	this.renderTargetBright = new THREE.WebGLRenderTarget(0, 0, parameters);
 	this.renderTargetBright.texture.generateMipmaps = false;
 
 	//Luminosity high pass material
@@ -89,8 +82,7 @@ function UnrealBloomPass(strength, radius, threshold)
 		uniforms: this.highPassUniforms,
 		vertexShader: highPassShader.vertexShader,
 		fragmentShader: highPassShader.fragmentShader,
-		defines:
-		{}
+		defines: {}
 	});
 
 	//Gaussian Blur material
@@ -99,9 +91,7 @@ function UnrealBloomPass(strength, radius, threshold)
 	for(var i = 0; i < this.nMips; i++)
 	{
 		this.separableBlurMaterials.push(UnrealBloomPass.getSeperableBlurMaterial(kernelSizeArray[i]));
-		this.separableBlurMaterials[i].uniforms["texSize"].value = new THREE.Vector2(resx, resy);
-		resx = Math.round(resx / 2);
-		resy = Math.round(resy / 2);
+		this.separableBlurMaterials[i].uniforms["texSize"].value = new THREE.Vector2(0, 0);
 	}
 
 	//Composite material

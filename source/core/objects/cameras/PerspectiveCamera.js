@@ -97,7 +97,8 @@ function PerspectiveCamera(fov, aspect, near, far)
 	//Unreal bloom
 	var bloomPass = new UnrealBloomPass(0.8, 0.3, 0.8);
 	bloomPass.renderToScreen = true;
-
+	console.log(bloomPass);
+	
  	//SSAO
  	var ssaoPass = new SSAOPass();
  	ssaoPass.onlyAO = false;
