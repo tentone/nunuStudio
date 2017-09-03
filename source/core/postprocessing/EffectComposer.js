@@ -20,6 +20,9 @@ function EffectComposer()
 		console.error("EffectComposer relies on THREE.ShaderPass");
 	}
 
+	this.uuid = THREE.Math.generateUUID();
+	this.passes = [];
+
 	this.width = 1;
 	this.height = 1;
 
@@ -35,7 +38,6 @@ function EffectComposer()
 	this.writeBuffer = this.renderTarget1;
 	this.readBuffer = this.renderTarget2;
 
-	this.passes = [];
 	this.copyPass = new THREE.ShaderPass(THREE.CopyShader);
 }
 
@@ -203,4 +205,24 @@ EffectComposer.prototype.dispose = function()
 	this.renderTarget2 = null;
 	this.writeBuffer = null;
 	this.readBuffer = null;
+};
+
+/**
+ * Serialize this effect composer to JSON.
+ *
+ * @method toJSON
+ */
+EffectComposer.prototype.toJSON = function()
+{
+	var data = {};
+
+	data.uuid = this.uuid;
+	data.passes = [];
+	
+	for(var i = 0; i < this.passes.length; i++)
+	{
+		data.passes.push(this.passes[i].toJSON());
+	}
+
+	return data;
 };
