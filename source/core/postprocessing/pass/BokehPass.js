@@ -14,10 +14,6 @@ function BokehPass(focus, aperture, maxblur)
 
 	Pass.call(this);
 
-	var focus = (focus !== undefined) ? focus : 1.0;
-	var aperture = (aperture !== undefined) ? aperture : 1.0;
-	var maxblur = (maxblur !== undefined) ? maxblur : 0.2;
-
 	this.type = "Bokeh";
 	this.needsSwap = false;
 
@@ -38,9 +34,9 @@ function BokehPass(focus, aperture, maxblur)
 	//Bokeh material
 	this.uniforms = THREE.UniformsUtils.clone(THREE.BokehShader.uniforms);
 	this.uniforms["tDepth"].value = this.renderTargetDepth.texture;
-	this.uniforms["focus"].value = focus;
-	this.uniforms["aperture"].value = aperture;
-	this.uniforms["maxblur"].value = maxblur;
+	this.uniforms["focus"].value = (focus !== undefined) ? focus : 1.0;
+	this.uniforms["aperture"].value = (aperture !== undefined) ? aperture : 1.0;
+	this.uniforms["maxblur"].value = (maxblur !== undefined) ? maxblur : 0.2;
 
 	this.materialBokeh = new THREE.ShaderMaterial({
 		defines: THREE.BokehShader.defines,
