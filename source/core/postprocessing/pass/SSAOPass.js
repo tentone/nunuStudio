@@ -36,11 +36,11 @@ function SSAOPass()
 	this.depthMaterial.blending = THREE.NoBlending;
 
 	//Depth render target
-	this.depthRenderTarget = new THREE.WebGLRenderTarget(undefined, undefined, {minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter});
+	this.depthRenderTarget = new THREE.WebGLRenderTarget(2, 2, {minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter});
 
 	//Shader uniforms
 	this.uniforms["tDepth"].value = this.depthRenderTarget.texture;
-	this.uniforms["size"].value.set(1, 1);
+	this.uniforms["size"].value.set(2, 2);
 	this.uniforms["radius"].value = 4;
 	this.uniforms["onlyAO"].value = false;
 	this.uniforms["aoClamp"].value = 0.25;
