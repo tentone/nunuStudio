@@ -38,6 +38,7 @@
 								<li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
 								<li><a href="../classes/AudioLoader.html">AudioLoader</a></li>
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
+								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
 								<li><a href="../classes/Container.html">Container</a></li>
@@ -83,11 +84,13 @@
 								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
 								<li><a href="../classes/Program.html">Program</a></li>
 								<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
 								<li><a href="../classes/RoundedBoxBufferGeometry.html">RoundedBoxBufferGeometry</a></li>
 								<li><a href="../classes/Scene.html">Scene</a></li>
 								<li><a href="../classes/Script.html">Script</a></li>
+								<li><a href="../classes/ShaderPass.html">ShaderPass</a></li>
 								<li><a href="../classes/Skeleton.html">Skeleton</a></li>
 								<li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
 								<li><a href="../classes/Sky.html">Sky</a></li>
@@ -96,6 +99,7 @@
 								<li><a href="../classes/SpotLight.html">SpotLight</a></li>
 								<li><a href="../classes/Sprite.html">Sprite</a></li>
 								<li><a href="../classes/SpriteSheetTexture.html">SpriteSheetTexture</a></li>
+								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
 								<li><a href="../classes/TDSLoader.html">TDSLoader</a></li>
 								<li><a href="../classes/Text.html">Text</a></li>
 								<li><a href="../classes/Text3D.html">Text3D</a></li>
@@ -103,6 +107,7 @@
 								<li><a href="../classes/TextureLoader.html">TextureLoader</a></li>
 								<li><a href="../classes/Tree.html">Tree</a></li>
 								<li><a href="../classes/TreeUtils.html">TreeUtils</a></li>
+								<li><a href="../classes/UnrealBloomPass.html">UnrealBloomPass</a></li>
 								<li><a href="../classes/Vector3.html">Vector3</a></li>
 								<li><a href="../classes/Video.html">Video</a></li>
 								<li><a href="../classes/VideoLoader.html">VideoLoader</a></li>
@@ -178,8 +183,8 @@
 						
 						
 						<div class="box intro">
-							<p>Render pass, a render pass is used to render something in a rendering pipeline.</p>
-						<p>Can be used to render a scene or apply post processing.</p>
+							<p>A render Pass is used to render something in the graphics pipeline.</p>
+						<p>Can be used to render a scene, apply post processing effects, merge buffers,  etc.</p>
 						
 						</div>
 						
@@ -231,11 +236,19 @@
 						
 											<ul class="index-list methods">
 													<li class="index-item method">
+														<a href="#method_dipose">dipose</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_render">render</a>
 						
 													</li>
 													<li class="index-item method">
 														<a href="#method_setSize">setSize</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_toJSON">toJSON</a>
 						
 													</li>
 											</ul>
@@ -270,6 +283,34 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
+											<div id="method_dipose" class="method item">
+												<h3 class="name"><code>dipose</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Dispose this render pass.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="method_render" class="method item">
 												<h3 class="name"><code>render</code></h3>
 											
@@ -445,6 +486,57 @@
 											
 																<div class="param-description">
 																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_toJSON" class="method item">
+												<h3 class="name"><code>toJSON</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>meta</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Serialize pass to json.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">meta</code>
+																	<span class="type">Object</span>
+											
+											
+																<div class="param-description">
+																	<p>Metadata object.</p>
+											
 																</div>
 											
 															</li>

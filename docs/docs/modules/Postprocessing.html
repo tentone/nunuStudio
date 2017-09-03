@@ -38,6 +38,7 @@
 								<li><a href="../classes/AudioEmitter.html">AudioEmitter</a></li>
 								<li><a href="../classes/AudioLoader.html">AudioLoader</a></li>
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
+								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
 								<li><a href="../classes/Container.html">Container</a></li>
@@ -83,11 +84,13 @@
 								<li><a href="../classes/PositionalAudio.html">PositionalAudio</a></li>
 								<li><a href="../classes/Program.html">Program</a></li>
 								<li><a href="../classes/RectAreaLight.html">RectAreaLight</a></li>
+								<li><a href="../classes/RenderPass.html">RenderPass</a></li>
 								<li><a href="../classes/Resource.html">Resource</a></li>
 								<li><a href="../classes/ResourceManager.html">ResourceManager</a></li>
 								<li><a href="../classes/RoundedBoxBufferGeometry.html">RoundedBoxBufferGeometry</a></li>
 								<li><a href="../classes/Scene.html">Scene</a></li>
 								<li><a href="../classes/Script.html">Script</a></li>
+								<li><a href="../classes/ShaderPass.html">ShaderPass</a></li>
 								<li><a href="../classes/Skeleton.html">Skeleton</a></li>
 								<li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
 								<li><a href="../classes/Sky.html">Sky</a></li>
@@ -96,6 +99,7 @@
 								<li><a href="../classes/SpotLight.html">SpotLight</a></li>
 								<li><a href="../classes/Sprite.html">Sprite</a></li>
 								<li><a href="../classes/SpriteSheetTexture.html">SpriteSheetTexture</a></li>
+								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
 								<li><a href="../classes/TDSLoader.html">TDSLoader</a></li>
 								<li><a href="../classes/Text.html">Text</a></li>
 								<li><a href="../classes/Text3D.html">Text3D</a></li>
@@ -103,6 +107,7 @@
 								<li><a href="../classes/TextureLoader.html">TextureLoader</a></li>
 								<li><a href="../classes/Tree.html">Tree</a></li>
 								<li><a href="../classes/TreeUtils.html">TreeUtils</a></li>
+								<li><a href="../classes/UnrealBloomPass.html">UnrealBloomPass</a></li>
 								<li><a href="../classes/Vector3.html">Vector3</a></li>
 								<li><a href="../classes/Video.html">Video</a></li>
 								<li><a href="../classes/VideoLoader.html">VideoLoader</a></li>
@@ -176,8 +181,25 @@
 						
 						
 						<div class="box intro">
-							<p>The effect composer is used to organize multiple post-processing passes.</p>
-						<p>It is used by camera objects to organize the rendering pipeline.</p>
+							<p>Depth-of-field post-process with bokeh shader.</p>
+						<p>Has the following parameters:</p>
+						<ul>
+						<li>focus
+						<ul>
+						<li>Focus distance.</li>
+						</ul>
+						</li>
+						<li>aperture
+						<ul>
+						<li>Camera aperture.</li>
+						</ul>
+						</li>
+						<li>maxblur
+						<ul>
+						<li>Maximum level of blur.</li>
+						</ul>
+						</li>
+						</ul>
 						
 						</div>
 						
@@ -188,6 +210,11 @@
 						
 									<ul class="module-classes">
 										<li class="module-class">
+											<a href="../classes/BokehPass.html">
+												BokehPass
+											</a>
+										</li>
+										<li class="module-class">
 											<a href="../classes/EffectComposer.html">
 												EffectComposer
 											</a>
@@ -195,6 +222,26 @@
 										<li class="module-class">
 											<a href="../classes/Pass.html">
 												Pass
+											</a>
+										</li>
+										<li class="module-class">
+											<a href="../classes/RenderPass.html">
+												RenderPass
+											</a>
+										</li>
+										<li class="module-class">
+											<a href="../classes/ShaderPass.html">
+												ShaderPass
+											</a>
+										</li>
+										<li class="module-class">
+											<a href="../classes/SSAOPass.html">
+												SSAOPass
+											</a>
+										</li>
+										<li class="module-class">
+											<a href="../classes/UnrealBloomPass.html">
+												UnrealBloomPass
 											</a>
 										</li>
 									</ul>

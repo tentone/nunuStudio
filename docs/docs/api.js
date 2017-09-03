@@ -7,6 +7,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "AudioEmitter",
         "AudioLoader",
         "Base64Utils",
+        "BokehPass",
         "BufferUtils",
         "CanvasTexture",
         "Container",
@@ -52,11 +53,14 @@ YUI.add("yuidoc-meta", function(Y) {
         "PositionalAudio",
         "Program",
         "RectAreaLight",
+        "RenderPass",
         "Resource",
         "ResourceManager",
         "RoundedBoxBufferGeometry",
+        "SSAOPass",
         "Scene",
         "Script",
+        "ShaderPass",
         "Skeleton",
         "SkinnedMesh",
         "Sky",
@@ -72,6 +76,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "TextureLoader",
         "Tree",
         "TreeUtils",
+        "UnrealBloomPass",
         "VRControls",
         "Vector3",
         "Video",
@@ -202,7 +207,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Postprocessing",
             "name": "Postprocessing",
-            "description": "The effect composer is used to organize multiple post-processing passes.\n\nIt is used by camera objects to organize the rendering pipeline."
+            "description": "Depth-of-field post-process with bokeh shader.\n\nHas the following parameters:\n - focus\n \t- Focus distance.\n - aperture\n \t- Camera aperture.\n - maxblur\n \t- Maximum level of blur."
         },
         {
             "displayName": "Resources",
