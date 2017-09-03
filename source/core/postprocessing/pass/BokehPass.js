@@ -42,7 +42,6 @@ function BokehPass(focus, aperture, maxblur)
 	this.uniforms["aperture"].value = aperture;
 	this.uniforms["maxblur"].value = maxblur;
 
-
 	this.materialBokeh = new THREE.ShaderMaterial({
 		defines: THREE.BokehShader.defines,
 		uniforms: this.uniforms,

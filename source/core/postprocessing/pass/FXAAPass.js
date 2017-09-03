@@ -9,7 +9,7 @@ function FXAAPass()
 
 FXAAPass.prototype = Object.create(ShaderPass.prototype);
 
-FXAAPass.prototype.setSize = function(x, y)
+FXAAPass.prototype.setSize = function(width, height)
 {
-	this.uniforms["resolution"].value.set(1 / x, 1 / y);
+	this.uniforms["resolution"].value.set(1 / width, 1 / height);
 };
