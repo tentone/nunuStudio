@@ -29,7 +29,7 @@ function BokehPass(focus, aperture, maxblur)
 	this.needsSwap = false;
 
 	//Render targets
-	this.renderTargetColor = new THREE.WebGLRenderTarget(1, 1,
+	this.renderTargetColor = new THREE.WebGLRenderTarget(0, 0,
 	{
 		minFilter: THREE.LinearFilter,
 		magFilter: THREE.LinearFilter,
@@ -137,4 +137,21 @@ BokehPass.prototype.setSize = function(width, height)
 {
 	this.renderTargetColor.setSize(width, height);
 	this.renderTargetDepth.setSize(width, height);
+};
+
+/**
+ * Serialize pass to json.
+ *
+ * @method toJSON
+ * @param {Object} meta Metadata object.
+ */
+BokehPass.prototype.toJSON = function(meta)
+{
+	var data = Pass.prototype.toJSON.call(this, meta);
+
+	data.aperture = this.aperture;
+	data.focus = this.focus;
+	data.maxblur = this.maxblur;
+	
+	return data;
 };

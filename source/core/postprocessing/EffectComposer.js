@@ -234,15 +234,63 @@ EffectComposer.prototype.toJSON = function()
 EffectComposer.fromJSON = function(json)
 {
 	var composer = new EffectComposer();
-
 	composer.uuid = json.uuid;
 
 	for(var i = 0; i < json.passes.length; i++)
-	{
+	{	
+		var data = json.passes[i];
 		var pass = null;
 
-		//TODO <ADD CODE HERE>
-		
+		if(data.type === "Render")
+		{
+			pass = new RenderPass();
+		}
+		else if(data.type === "UnrealBloom")
+		{
+			pass = new UnrealBloomPass();
+
+			pass.strength = data.strength;
+			pass.radius = data.radius;
+			pass.threshold = data.threshold;
+			pass.bloomFactors = data.bloomFactors;
+
+			for(var i = 0; i < pass.bloomTintColors.length; i++)
+			{
+				pass.bloomTintColors[i].fromArray(data.bloomTintColors[i]);
+			}
+		}
+		else if(data.type === "SSAO")
+		{
+			pass = new SSAOPass();
+
+			pass.onlyAO = data.onlyAO;
+			pass.radius = data.radius;
+			pass.aoClamp = data.aoClamp;
+			pass.lumInfluence = data.lumInfluence;
+		}
+		else if(data.type === "Bokeh")
+		{
+			pass = new BokehPass();
+
+			pass.aperture = data.aperture;
+			pass.focus = data.focus;
+			pass.maxblur = data.maxblur;
+		}
+		else if(data.type === "FXAA")
+		{
+			pass = new FXAAPass();
+		}
+		else
+		{
+			pass = new RenderPass();
+		}
+
+		pass.uuid = data.uuid;
+		pass.enabled = data.enabled;
+		pass.needsSwap = data.needsSwap;
+		pass.renderToScreen = data.renderToScreen;
+		pass.clear = data.clear;
+
 		composer.addPass(pass);
 	}
 	

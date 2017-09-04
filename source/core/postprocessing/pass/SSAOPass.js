@@ -117,3 +117,21 @@ SSAOPass.prototype.setSize = function(width, height)
 	this.uniforms["size"].value.set(width, height);
 	this.depthRenderTarget.setSize(width, height);
 };
+
+/**
+ * Serialize pass to json.
+ *
+ * @method toJSON
+ * @param {Object} meta Metadata object.
+ */
+SSAOPass.prototype.toJSON = function(meta)
+{
+	var data = Pass.prototype.toJSON.call(this, meta);
+	
+	data.onlyAO = this.onlyAO;
+	data.radius = this.radius;
+	data.aoClamp = this.aoClamp;
+	data.lumInfluence = this.lumInfluence;
+
+	return data;
+};

@@ -834,6 +834,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 
 		case "PerspectiveCamera":
 			object = new PerspectiveCamera(data.fov, data.aspect, data.near, data.far);
+			
 			if(data.focus !== undefined) 
 			{
 				object.focus = data.focus;
@@ -874,6 +875,11 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				object.order = data.order;
 			}
+
+			if(data.composer !== undefined)
+			{
+				object.composer = EffectComposer.fromJSON(data.composer);
+			}
 			break;
 
 		case "OrthographicCamera":
@@ -897,6 +903,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			if(data.order !== undefined)
 			{
 				object.order = data.order;
+			}
+			if(data.composer !== undefined)
+			{
+				object.composer = EffectComposer.fromJSON(data.composer);
 			}
 			break;
 

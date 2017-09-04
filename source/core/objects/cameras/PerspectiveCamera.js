@@ -91,26 +91,8 @@ function PerspectiveCamera(fov, aspect, near, far)
 	var renderPass = new RenderPass();
 	renderPass.renderToScreen = true;
 
-	//FXAA
-	//var fxaaPass = new FXAAPass();
-	//fxaaPass.renderToScreen = true;
-
-	//Unreal bloom
-	//var bloomPass = new UnrealBloomPass(0.8, 0.3, 0.8);
-	//bloomPass.renderToScreen = true;
-
- 	//SSAO
- 	//var ssaoPass = new SSAOPass();
- 	//ssaoPass.onlyAO = false;
- 	//ssaoPass.renderToScreen = false;
-
- 	//Bokeh
- 	//var bokehPass = new BokehPass();
- 	//bokehPass.renderToScreen = false;
-
 	this.composer = new EffectComposer();
 	this.composer.addPass(renderPass);
-	//this.composer.addPass(bloomPass);
 }
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
@@ -199,5 +181,7 @@ PerspectiveCamera.prototype.toJSON = function(meta)
 	data.object.offset = this.offset.toArray();
 	data.object.order = this.order;
 	
+	data.object.composer = this.composer.toJSON();
+
 	return data;
 };

@@ -283,6 +283,29 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 	renderer.autoClear = this.oldAutoClear;
 };
 
+/**
+ * Serialize this effect composer to JSON.
+ *
+ * @method toJSON
+ */
+UnrealBloomPass.prototype.toJSON = function(meta)
+{
+	var data = Pass.prototype.toJSON.call(this, meta);
+	
+	data.strength = this.strength;
+	data.radius = this.radius;
+	data.threshold = this.threshold;
+	data.bloomFactors = this.bloomFactors;
+
+	data.bloomTintColors = [];
+	for(var i = 0; i < this.bloomTintColors.length; i++)
+	{
+		data.bloomTintColors.push(this.bloomTintColors[i].toArray());
+	}
+
+	return data;
+};
+
 UnrealBloomPass.getSeperableBlurMaterial = function(kernelRadius)
 {
 	return new THREE.ShaderMaterial(
