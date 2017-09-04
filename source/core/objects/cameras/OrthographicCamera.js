@@ -211,6 +211,8 @@ OrthographicCamera.prototype.toJSON = function(meta)
 	data.object.viewport = this.viewport.toArray();
 	data.object.offset = this.offset.toArray();
 	data.object.order = this.order;
+	
+	data.object.composer = this.composer.toJSON();
 
 	return data;
 };

@@ -50,6 +50,23 @@ function CameraEditor(parent, closeable, container, index)
 	});
 	this.form.add(this.name);
 	this.form.nextRow();
+
+	//FXAA
+	//var fxaaPass = new FXAAPass();
+	//fxaaPass.renderToScreen = true;
+
+	//Unreal bloom
+	//var bloomPass = new UnrealBloomPass(0.8, 0.3, 0.8);
+	//bloomPass.renderToScreen = true;
+
+ 	//SSAO
+ 	//var ssaoPass = new SSAOPass();
+ 	//ssaoPass.onlyAO = false;
+ 	//ssaoPass.renderToScreen = false;
+
+ 	//Bokeh
+ 	//var bokehPass = new BokehPass();
+ 	//bokehPass.renderToScreen = false;
 }
 
 CameraEditor.prototype = Object.create(TabElement.prototype);
