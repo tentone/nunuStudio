@@ -115,11 +115,25 @@ function PerspectiveCamera(fov, aspect, near, far)
 
 PerspectiveCamera.prototype = Object.create(THREE.PerspectiveCamera.prototype);
 
+/**
+ * Render a scene using this camera and the internal EffectComposer.
+ *
+ * @method render
+ * @param {WebGLRenderer} renderer WebGL renderer to use.
+ * @param {Scene} scene Scene to be rendered.
+ */
 PerspectiveCamera.prototype.render = function(renderer, scene)
 {
 	this.composer.render(renderer, scene, this, 0.016);
 };
 
+/**
+ * Resize this camera, should be called every time after resizing the screen.
+ *
+ * @method resize
+ * @param {Number} x Width.
+ * @param {Number} y Height.
+ */
 PerspectiveCamera.prototype.resize = function(x, y)
 {
 	this.composer.setSize(x, y);

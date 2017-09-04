@@ -93,6 +93,12 @@ function OrthographicCamera(size, aspect, mode, near, far)
 	this.order = 0;
 
 	this.updateProjectionMatrix();
+
+	var renderPass = new RenderPass();
+	renderPass.renderToScreen = true;
+	
+	this.composer = new EffectComposer();
+	this.composer.addPass(renderPass);
 }
 
 OrthographicCamera.prototype = Object.create(THREE.OrthographicCamera.prototype);
@@ -111,6 +117,35 @@ OrthographicCamera.RESIZE_HORIZONTAL = 0;
  * @type {Number}
  */
 OrthographicCamera.RESIZE_VERTICAL = 1;
+
+/**
+ * Render a scene using this camera and the internal EffectComposer.
+ *
+ * @method render
+ * @param {WebGLRenderer} renderer WebGL renderer to use.
+ * @param {Scene} scene Scene to be rendered.
+ */
+OrthographicCamera.prototype.render = function(renderer, scene)
+{
+	this.composer.render(renderer, scene, this, 0.016);
+};
+
+/**
+ * Resize this camera, should be called every time after resizing the screen.
+ *
+ * @method resize
+ * @param {Number} x Width.
+ * @param {Number} y Height.
+ */
+OrthographicCamera.prototype.resize = function(x, y)
+{
+	this.composer.setSize(x, y);
+	
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].resize(x, y);
+	}
+};
 
 /**
  * Destroy camera object and remove it from the scene.
