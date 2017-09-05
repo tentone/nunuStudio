@@ -28,7 +28,6 @@ function SSAOPass()
 
 	ShaderPass.call(this, THREE.SSAOShader);
 
-
 	this.type = "SSAO";
 	this.renderToScreen = false;
 

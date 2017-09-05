@@ -22,6 +22,8 @@ include("lib/three/shaders/ConvolutionShader.js");
 include("lib/three/shaders/LuminosityHighPassShader.js");
 include("lib/three/shaders/FXAAShader.js");
 include("lib/three/shaders/SSAOShader.js");
+include("lib/three/shaders/FilmShader.js");
+include("lib/three/shaders/DotScreenShader.js");
 
 include("lib/three/postprocessing/EffectComposer.js");
 include("lib/three/postprocessing/RenderPass.js");
@@ -75,6 +77,8 @@ include("core/postprocessing/pass/FXAAPass.js");
 include("core/postprocessing/pass/SSAOPass.js");
 include("core/postprocessing/pass/BokehPass.js");
 include("core/postprocessing/pass/CopyPass.js");
+include("core/postprocessing/pass/FilmPass.js");
+include("core/postprocessing/pass/DotScreenPass.js");
 
 include("core/controls/VRControls.js");
 

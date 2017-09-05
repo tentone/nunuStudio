@@ -278,6 +278,23 @@ EffectComposer.fromJSON = function(json)
 		{
 			pass = new CopyPass();
 		}
+		else if(data.type === "Film")
+		{
+			pass = new FilmPass();
+
+			pass.grayscale = data.grayscale;
+			pass.noiseIntensity = data.noiseIntensity;
+			pass.scanlinesIntensity = data.scanlinesIntensity;
+			pass.scanlinesCount = data.scanlinesCount;
+		}
+		else if(data.type === "DotScreen")
+		{
+			pass = new DotScreenPass();
+
+			pass.center.fromArray(data.center);
+			pass.angle = data.angle;
+			pass.scale = data.scale;
+		}
 		else
 		{
 			pass = new RenderPass();

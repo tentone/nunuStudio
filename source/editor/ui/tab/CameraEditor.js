@@ -122,6 +122,32 @@ function CameraEditor(parent, closeable, container, index)
 	
 	var button = new Button(this.form.element);
 	button.size.set(200, 18);
+	button.setText("Film");
+	button.setCallback(function()
+	{
+		var pass = new FilmPass(0.35, 0.5, 512, false);
+		pass.renderToScreen = true;
+
+		addRenderPass(pass);
+	});
+	this.form.add(button);
+	this.form.nextRow();
+
+	var button = new Button(this.form.element);
+	button.size.set(200, 18);
+	button.setText("Dot Screen");
+	button.setCallback(function()
+	{
+		var pass = new DotScreenPass(new THREE.Vector2(0, 0), 0.5, 0.8);
+		pass.renderToScreen = true;
+
+		addRenderPass(pass);
+	});
+	this.form.add(button);
+	this.form.nextRow();
+
+	var button = new Button(this.form.element);
+	button.size.set(200, 18);
 	button.setText("Copy");
 	button.setCallback(function()
 	{
