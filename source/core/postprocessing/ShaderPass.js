@@ -23,7 +23,6 @@ function ShaderPass(shader, textureID)
 	else if(shader)
 	{
 		this.uniforms = THREE.UniformsUtils.clone(shader.uniforms);
-
 		this.material = new THREE.ShaderMaterial(
 		{
 			defines: shader.defines || {},
@@ -54,7 +53,7 @@ ShaderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta,
 
 	if(this.renderToScreen)
 	{
-		renderer.render(this.scene, this.camera);
+		renderer.render(this.scene, this.camera, undefined , this.clear);
 	}
 	else
 	{

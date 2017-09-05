@@ -17,7 +17,7 @@
 		"gridEnabled": true,
 		"axisEnabled": true,
 		"cameraPreviewEnabled": true,
-		"cameraPreviewPercentage": 0.35,
+		"cameraPreviewPercentage": "0.35",
 		"cameraPreviewPosition": 23,
 		"lockMouse": true,
 		"transformationSpace": "world",
