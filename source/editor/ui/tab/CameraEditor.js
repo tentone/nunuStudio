@@ -51,22 +51,87 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	//FXAA
-	//var fxaaPass = new FXAAPass();
-	//fxaaPass.renderToScreen = true;
+	this.form.addText("Post Processing (Test)");
+	this.form.nextRow();
 
-	//Unreal bloom
-	//var bloomPass = new UnrealBloomPass(0.8, 0.3, 0.8);
-	//bloomPass.renderToScreen = true;
+	var addRenderPass = function(pass)
+	{
+		console.log(pass);
+		var composer = self.camera.composer;
 
- 	//SSAO
- 	//var ssaoPass = new SSAOPass();
- 	//ssaoPass.onlyAO = false;
- 	//ssaoPass.renderToScreen = false;
+		for(var i = 0; i < composer.passes.length; i++)
+		{
+			composer.passes[i].renderToScreen = false;
+		}
+		
+		self.camera.composer.addPass(pass);
+	};
 
- 	//Bokeh
- 	//var bokehPass = new BokehPass();
- 	//bokehPass.renderToScreen = false;
+	var button = new Button(this.form.element);
+	button.size.set(200, 18);
+	button.setText("FXAA");
+	button.setCallback(function()
+	{
+		var fxaaPass = new FXAAPass();
+		fxaaPass.renderToScreen = true;
+
+		addRenderPass(fxaaPass);
+	});
+	this.form.add(button);
+	this.form.nextRow();
+
+	var button = new Button(this.form.element);
+	button.size.set(200, 18);
+	button.setText("Unreal Bloom");
+	button.setCallback(function()
+	{
+		var bloomPass = new UnrealBloomPass(0.8, 0.3, 0.8);
+		bloomPass.renderToScreen = true;
+
+		addRenderPass(bloomPass);
+	});
+	this.form.add(button);
+	this.form.nextRow();
+
+	var button = new Button(this.form.element);
+	button.size.set(200, 18);
+	button.setText("SSAO");
+	button.setCallback(function()
+	{
+		var ssaoPass = new SSAOPass();
+		ssaoPass.onlyAO = false;
+		ssaoPass.renderToScreen = true;
+
+		addRenderPass(ssaoPass);
+	});
+	this.form.add(button);
+	this.form.nextRow();
+
+	var button = new Button(this.form.element);
+	button.size.set(200, 18);
+	button.setText("Bokeh");
+	button.setCallback(function()
+	{
+		var bokehPass = new BokehPass();
+		bokehPass.renderToScreen = true;
+
+		addRenderPass(bokehPass);
+	});
+	this.form.add(button);
+	this.form.nextRow();
+	
+	var button = new Button(this.form.element);
+	button.size.set(200, 18);
+	button.setText("Copy");
+	button.setCallback(function()
+	{
+		var copy = new CopyPass();
+		copy.renderToScreen = true;
+
+		addRenderPass(copy);
+	});
+	this.form.add(button);
+	this.form.nextRow();
 }
 
 CameraEditor.prototype = Object.create(TabElement.prototype);

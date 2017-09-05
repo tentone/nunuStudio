@@ -214,10 +214,12 @@ UnrealBloomPass.prototype.setSize = function(width, height)
 
 UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskActive, scene, camera)
 {
+	//Backup renderer settings
 	this.oldClearColor.copy(renderer.getClearColor());
 	this.oldClearAlpha = renderer.getClearAlpha();
 	this.oldAutoClear = renderer.autoClear;
 
+	//Configure renderer
 	renderer.autoClear = false;
 	renderer.setClearColor(new THREE.Color(0, 0, 0), 0);
 	
@@ -234,12 +236,12 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 		renderer.render(this.scene, this.camera, undefined, true);
 	}
 
-	//1. Extract Bright Areas
+	//Extract Bright Areas
 	this.highPassUniforms["tDiffuse"].value = readBuffer.texture;
 	this.quad.material = this.materialHighPassFilter;
 	renderer.render(this.scene, this.camera, this.renderTargetBright, true);
 
-	//2. Blur All the mips progressively
+	//Blur All the mips progressively
 	var inputRenderTarget = this.renderTargetBright;
 	for(var i = 0; i < this.nMips; i++)
 	{
@@ -269,6 +271,7 @@ UnrealBloomPass.prototype.render = function(renderer, writeBuffer, readBuffer, d
 		renderer.context.enable(renderer.context.STENCIL_TEST);
 	}
 
+	//Restore renderer settings
 	if(this.renderToScreen)
 	{
 		renderer.render(this.scene, this.camera, undefined, false);
