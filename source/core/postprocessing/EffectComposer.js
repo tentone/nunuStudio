@@ -268,11 +268,7 @@ EffectComposer.fromJSON = function(json)
 		}
 		else if(data.type === "Bokeh")
 		{
-			pass = new BokehPass();
-
-			pass.aperture = data.aperture;
-			pass.focus = data.focus;
-			pass.maxblur = data.maxblur;
+			pass = new BokehPass(data.focus, data.aperture, data.maxblur);
 		}
 		else if(data.type === "FXAA")
 		{

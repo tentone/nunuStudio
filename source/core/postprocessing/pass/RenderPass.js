@@ -12,7 +12,9 @@ function RenderPass()
 	Pass.call(this);
 
 	this.type = "Render";
+	
 	this.needsSwap = false;
+	this.clear = true;
 }
 
 RenderPass.prototype = Object.create(Pass.prototype);
@@ -21,10 +23,12 @@ RenderPass.prototype.render = function(renderer, writeBuffer, readBuffer, delta,
 {
 	if(this.renderToScreen)
 	{
-		renderer.render(scene, camera);
+		renderer.render(scene, camera, null, this.clear);
 	}
 	else
 	{
-		renderer.render(scene, camera, readBuffer);
+		renderer.render(scene, camera, readBuffer, this.clear);
 	}
 };
+
+
