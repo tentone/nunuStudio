@@ -105,36 +105,34 @@ EffectComposer.prototype.render = function(renderer, scene, camera, delta)
 	{
 		var pass = this.passes[i];
 
-		if(pass.enabled === false)
+		if(pass.enabled === true)
 		{
-			continue;
-		}
+			pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive, scene, camera);
 
-		pass.render(renderer, this.writeBuffer, this.readBuffer, delta, maskActive, scene, camera);
-
-		if(pass.needsSwap)
-		{
-			if(maskActive)
+			if(pass.needsSwap)
 			{
-				var context = renderer.context;
-				context.stencilFunc(context.NOTEQUAL, 1, 0xffffffff);
+				if(maskActive)
+				{
+					renderer.context.stencilFunc(renderer.context.NOTEQUAL, 1, 0xffffffff);
 
-				this.copyPass.render(renderer, this.writeBuffer, this.readBuffer, delta);
-				context.stencilFunc(context.EQUAL, 1, 0xffffffff);
+					this.copyPass.render(renderer, this.writeBuffer, this.readBuffer, delta);
+
+					renderer.context.stencilFunc(renderer.context.EQUAL, 1, 0xffffffff);
+				}
+
+				this.swapBuffers();
 			}
 
-			this.swapBuffers();
-		}
-
-		if(THREE.MaskPass !== undefined)
-		{
-			if(pass instanceof THREE.MaskPass)
+			if(THREE.MaskPass !== undefined)
 			{
-				maskActive = true;
-			}
-			else if(pass instanceof THREE.ClearMaskPass)
-			{
-				maskActive = false;
+				if(pass instanceof THREE.MaskPass)
+				{
+					maskActive = true;
+				}
+				else if(pass instanceof THREE.ClearMaskPass)
+				{
+					maskActive = false;
+				}
 			}
 		}
 	}
@@ -279,6 +277,10 @@ EffectComposer.fromJSON = function(json)
 		else if(data.type === "FXAA")
 		{
 			pass = new FXAAPass();
+		}
+		else if(data.type === "Copy")
+		{
+			pass = new CopyPass();
 		}
 		else
 		{

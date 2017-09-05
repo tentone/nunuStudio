@@ -59,9 +59,9 @@ include("core/input/Gamepad.js");
 include("core/input/Gyroscope.js");
 
 include("core/postprocessing/Pass.js");
+include("core/postprocessing/ShaderPass.js");
 include("core/postprocessing/EffectComposer.js");
 include("core/postprocessing/pass/RenderPass.js");
-include("core/postprocessing/pass/ShaderPass.js");
 include("core/postprocessing/pass/UnrealBloomPass.js");
 include("core/postprocessing/pass/FXAAPass.js");
 include("core/postprocessing/pass/SSAOPass.js");
