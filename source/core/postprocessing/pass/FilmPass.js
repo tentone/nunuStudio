@@ -3,16 +3,34 @@
 /**
  * Film pass is used to simulate a film/TV like effect.
  *
- * Has the following parameters
- *  - grayscale
- *  - noiseIntensity
- *  - scanlinesIntensity
- *  - scanlinesCount
- *
  * @class FilmPass
  * @constructor
  * @module Postprocessing
  * @author alteredq / http://alteredqualia.com/
+ */
+/**
+ * If set true a grascale effect will be applied.
+ *
+ * @property grayscale
+ * @type {Boolean}
+ */
+/**
+ * Ammout of noise to be applied to the image.
+ *
+ * @property noiseIntensity
+ * @type {Number}
+ */
+/**
+ * Scanline intensity.
+ *
+ * @property scanlinesIntensity
+ * @type {Number}
+ */
+/**
+ * Number of scanline to be displayed.
+ *
+ * @property scanlinesCount
+ * @type {Number}
  */
 function FilmPass(noiseIntensity, scanlinesIntensity, scanlinesCount, grayscale)
 {

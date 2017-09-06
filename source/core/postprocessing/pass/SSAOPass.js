@@ -1,23 +1,40 @@
 "use strict";
 
 /**
- * Screen-space ambient occlusion pass.
+ * Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.
  *
- * Has the following parameters
- *  - radius
- *  	- Ambient occlusion shadow radius (numeric value).
- *  - onlyAO
- *  	- Display only ambient occlusion result (boolean value).
- *  - aoClamp
- *  	- Ambient occlusion clamp (numeric value).
- *  - lumInfluence
- *  	- Pixel luminosity influence in AO calculation (numeric value).
+ * More information about SSAO here
+ *  - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf
  *
  * @author alteredq / http://alteredqualia.com/
  * @author tentone
  * @class SSAOPass
  * @module Postprocessing
  * @constructor
+ */
+/**
+ * Ambient occlusion shadow radius.
+ *
+ * @property radius
+ * @type {Number}
+ */
+/**
+ * Display only ambient occlusion result.
+ *
+ * @property onlyAO
+ * @type {Boolean}
+ */
+/**
+ * Ambient occlusion clamp.
+ *
+ * @property aoClamp
+ * @type {Number}
+ */
+/**
+ * Pixel luminosity influence in AO calculation.
+ *
+ * @property lumInfluence
+ * @type {Number}
  */
 function SSAOPass()
 {

@@ -3,20 +3,30 @@
 /**
  * Depth-of-field post-process with bokeh shader.
  * 
- * Has the following parameters:
- *  - focus
- *  	- Focus distance.
- *  - aperture
- *  	- Camera aperture.
- *  - maxblur
- *  	- Maximum level of blur.
- * 
  * @class BokehPass
  * @module Postprocessing
  * @constructor
  * @param {Number} focus Focus distance.
  * @param {Number} aperture Camera aperture.
  * @param {Number} maxblur Maximum level of blur.
+ */
+/**
+ * Focus point distance.
+ *
+ * @property focus
+ * @type {Number}
+ */
+/**
+ * Camera aperture.
+ *
+ * @property aperture
+ * @type {Number}
+ */
+/**
+ * Maximum level of blur that can be applied to more distant objects.
+ *
+ * @property enabled
+ * @type {maxblur}
  */
 function BokehPass(focus, aperture, maxblur)
 {
