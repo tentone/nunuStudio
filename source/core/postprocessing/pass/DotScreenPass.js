@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * DotScreen pass generates a poster like effect on top of the scene.
  *

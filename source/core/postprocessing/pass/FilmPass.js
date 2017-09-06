@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Film pass is used to simulate a film/TV like effect.
  *

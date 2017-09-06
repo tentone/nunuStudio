@@ -295,6 +295,10 @@ EffectComposer.fromJSON = function(json)
 			pass.angle = data.angle;
 			pass.scale = data.scale;
 		}
+		else if(data.type === "Sobel")
+		{
+			pass = new SobelPass();
+		}
 		else
 		{
 			pass = new RenderPass();

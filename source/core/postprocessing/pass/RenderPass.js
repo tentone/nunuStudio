@@ -12,7 +12,6 @@ function RenderPass()
 	Pass.call(this);
 
 	this.type = "Render";
-	
 	this.needsSwap = false;
 	this.clear = true;
 }

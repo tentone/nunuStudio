@@ -148,6 +148,19 @@ function CameraEditor(parent, closeable, container, index)
 
 	var button = new Button(this.form.element);
 	button.size.set(200, 18);
+	button.setText("Sobel");
+	button.setCallback(function()
+	{
+		var pass = new SobelPass();
+		pass.renderToScreen = true;
+
+		addRenderPass(pass);
+	});
+	this.form.add(button);
+	this.form.nextRow();
+
+	var button = new Button(this.form.element);
+	button.size.set(200, 18);
 	button.setText("Copy");
 	button.setCallback(function()
 	{
