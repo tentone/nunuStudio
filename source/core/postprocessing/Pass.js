@@ -70,7 +70,7 @@ Pass.prototype.render = function(renderer, writeBuffer, readBuffer, delta, maskA
 /**
  * Dispose this render pass.
  *
- * @method dipose
+ * @method dispose
  */
 Pass.prototype.dispose = function(){};
 

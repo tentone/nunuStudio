@@ -11,7 +11,9 @@
  */
 
 /**
- * Resource name. Not required to be unique.
+ * Resource name.
+ * 
+ * Not required to be unique.
  * 
  * @property name
  * @type {String}
@@ -23,15 +25,15 @@
  * @type {String}
  */
 /**
- * Resrouce type. Used to identify the type of the resource, usefull for serialization.
+ * Resource type. Used to identify the type of the resource, usefull for serialization.
  * 
  * @property type
  * @type {String}
  */
 /**
- * Data format (Base64, ArrayBuffer, ...).
+ * Data format (Base64, ArrayBuffer, Blob, URL, etc).
  * 
- * Indicates in witch format the data is being stored.
+ * Indicates the format used to store the data.
  * 
  * @property format
  * @type {Object}
