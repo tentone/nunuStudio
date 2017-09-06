@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Depth-of-field post-process with bokeh shader.
  * 
