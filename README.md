@@ -154,7 +154,8 @@
 		- Intersect
 		- Union
 	- Immediate mode
-	- Post-processing
+	- Postprocessing
+		-Postprocessing editor
 	- Resize is now a part of Object3D
 
 ### Tech
