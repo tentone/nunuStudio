@@ -434,11 +434,29 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\postprocessing\\pass\\CopyPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\CopyPass.js",
+            "modules": {},
+            "classes": {
+                "CopyPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\postprocessing\\pass\\DotScreenPass.js": {
             "name": "..\\..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
             "modules": {},
             "classes": {
                 "DotScreenPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\pass\\FXAAPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\FXAAPass.js",
+            "modules": {},
+            "classes": {
+                "FXAAPass": 1
             },
             "fors": {},
             "namespaces": {}
@@ -466,6 +484,15 @@
             "modules": {},
             "classes": {
                 "SSAOPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\pass\\SobelPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\SobelPass.js",
+            "modules": {},
+            "classes": {
+                "SobelPass": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1138,10 +1165,13 @@
             "elements": {},
             "classes": {
                 "BokehPass": 1,
+                "CopyPass": 1,
                 "DotScreenPass": 1,
+                "FXAAPass": 1,
                 "FilmPass": 1,
                 "RenderPass": 1,
                 "SSAOPass": 1,
+                "SobelPass": 1,
                 "UnrealBloomPass": 1,
                 "EffectComposer": 1,
                 "Pass": 1,
@@ -1152,7 +1182,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\postprocessing\\ShaderPass.js",
             "line": 3,
-            "description": "Depth-of-field post-process with bokeh shader.\n\nHas the following parameters:\n - focus\n \t- Focus distance.\n - aperture\n \t- Camera aperture.\n - maxblur\n \t- Maximum level of blur."
+            "description": "Depth-of-field post-process with bokeh shader."
         },
         "Resources": {
             "name": "Resources",
@@ -2387,8 +2417,8 @@
             "module": "Postprocessing",
             "namespace": "",
             "file": "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 1,
-            "description": "Depth-of-field post-process with bokeh shader.\n\nHas the following parameters:\n - focus\n \t- Focus distance.\n - aperture\n \t- Camera aperture.\n - maxblur\n \t- Maximum level of blur.",
+            "line": 3,
+            "description": "Depth-of-field post-process with bokeh shader.",
             "is_constructor": 1,
             "params": [
                 {
@@ -2408,6 +2438,21 @@
                 }
             ]
         },
+        "CopyPass": {
+            "name": "CopyPass",
+            "shortname": "CopyPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\CopyPass.js",
+            "line": 3,
+            "description": "Copy pass can be used to copy the actual content on the composer to the screen.",
+            "is_constructor": 1
+        },
         "DotScreenPass": {
             "name": "DotScreenPass",
             "shortname": "DotScreenPass",
@@ -2419,10 +2464,42 @@
             "module": "Postprocessing",
             "namespace": "",
             "file": "..\\..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
-            "line": 1,
-            "description": "DotScreen pass generates a poster like effect on top of the scene.\n\nHas the following parameters\n - center\n - angle\n - scale",
+            "line": 3,
+            "description": "DotScreen pass generates a poster like effect on top of the scene.",
             "is_constructor": 1,
-            "author": "alteredq / http://alteredqualia.com/"
+            "author": "alteredq / http://alteredqualia.com/",
+            "params": [
+                {
+                    "name": "center",
+                    "description": "Dot rotation center.",
+                    "type": "Number"
+                },
+                {
+                    "name": "angle",
+                    "description": "Dot rotation angle.",
+                    "type": "Number"
+                },
+                {
+                    "name": "scale",
+                    "description": "Dot scale.",
+                    "type": "Number"
+                }
+            ]
+        },
+        "FXAAPass": {
+            "name": "FXAAPass",
+            "shortname": "FXAAPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\FXAAPass.js",
+            "line": 3,
+            "description": "Fast approximate anti-aliasing (FXAA) is an anti-aliasing algorithm to smooth jagged edges on post procesing effects.\n\nMore information about FXAA available here:\n - https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf",
+            "is_constructor": 1
         },
         "FilmPass": {
             "name": "FilmPass",
@@ -2435,8 +2512,8 @@
             "module": "Postprocessing",
             "namespace": "",
             "file": "..\\..\\source\\core\\postprocessing\\pass\\FilmPass.js",
-            "line": 1,
-            "description": "Film pass is used to simulate a film/TV like effect.\n\nHas the following parameters\n - grayscale\n - noiseIntensity\n - scanlinesIntensity\n - scanlinesCount",
+            "line": 3,
+            "description": "Film pass is used to simulate a film/TV like effect.",
             "is_constructor": 1,
             "author": "alteredq / http://alteredqualia.com/"
         },
@@ -2467,8 +2544,23 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
             "line": 3,
-            "description": "Screen-space ambient occlusion pass.\n\nHas the following parameters\n - radius\n \t- Ambient occlusion shadow radius (numeric value).\n - onlyAO\n \t- Display only ambient occlusion result (boolean value).\n - aoClamp\n \t- Ambient occlusion clamp (numeric value).\n - lumInfluence\n \t- Pixel luminosity influence in AO calculation (numeric value).",
+            "description": "Screen space ambient occlusion (SSAO) pass is used to simulate ambient occlusion shadowing effect.\n\nMore information about SSAO here\n - http://developer.download.nvidia.com/SDK/10.5/direct3d/Source/ScreenSpaceAO/doc/ScreenSpaceAO.pdf",
             "author": "tentone",
+            "is_constructor": 1
+        },
+        "SobelPass": {
+            "name": "SobelPass",
+            "shortname": "SobelPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\SobelPass.js",
+            "line": 3,
+            "description": "Sobel pass is used to create a edge highlight effect with a sobel operator.",
             "is_constructor": 1
         },
         "UnrealBloomPass": {
@@ -2483,7 +2575,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
             "line": 3,
-            "description": "Unreal engine like bloom effect pass.\nhttps://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/\n\nHas the following parameters\n - strength\n \t- Scales the color of the whole bloom effect.\n - radius\n \t- Bloom effect radius.\n - threshold\n \t- Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom. To have all scene colors contributing to the bloom, a volume of -1 needs to be used.\n - smooth\n \t- Smooth factor\n - bloomFactors\n \t- The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).\n - bloomTintColors\n \t- Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.",
+            "description": "Unreal engine like bloom effect pass.\n\nMore information available here\n - https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/",
             "author": "spidersharma / http://eduperiment.com/",
             "is_constructor": 1,
             "params": [
@@ -3289,7 +3381,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 140,
+            "line": 144,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -9605,7 +9697,37 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js",
-            "line": 142,
+            "line": 13,
+            "description": "Focus point distance.",
+            "itemtype": "property",
+            "name": "focus",
+            "type": "{Number}",
+            "class": "BokehPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js",
+            "line": 19,
+            "description": "Camera aperture.",
+            "itemtype": "property",
+            "name": "aperture",
+            "type": "{Number}",
+            "class": "BokehPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js",
+            "line": 25,
+            "description": "Maximum level of blur that can be applied to more distant objects.",
+            "itemtype": "property",
+            "name": "enabled",
+            "type": "{maxblur}",
+            "class": "BokehPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js",
+            "line": 154,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9620,8 +9742,118 @@
             "module": "Postprocessing"
         },
         {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
+            "line": 14,
+            "description": "Center of rotation of the dot grid in normalized coordinates.",
+            "itemtype": "property",
+            "name": "center",
+            "type": "{Vector2}",
+            "class": "DotScreenPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
+            "line": 20,
+            "description": "Rotation of the dot grid.",
+            "itemtype": "property",
+            "name": "angle",
+            "type": "{Number}",
+            "class": "DotScreenPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\DotScreenPass.js",
+            "line": 26,
+            "description": "Scale of the dots used in the effect.",
+            "itemtype": "property",
+            "name": "scale",
+            "type": "{Number}",
+            "class": "DotScreenPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\FilmPass.js",
+            "line": 11,
+            "description": "If set true a grascale effect will be applied.",
+            "itemtype": "property",
+            "name": "grayscale",
+            "type": "{Boolean}",
+            "class": "FilmPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\FilmPass.js",
+            "line": 17,
+            "description": "Ammout of noise to be applied to the image.",
+            "itemtype": "property",
+            "name": "noiseIntensity",
+            "type": "{Number}",
+            "class": "FilmPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\FilmPass.js",
+            "line": 23,
+            "description": "Scanline intensity.",
+            "itemtype": "property",
+            "name": "scanlinesIntensity",
+            "type": "{Number}",
+            "class": "FilmPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\FilmPass.js",
+            "line": 29,
+            "description": "Number of scanline to be displayed.",
+            "itemtype": "property",
+            "name": "scanlinesCount",
+            "type": "{Number}",
+            "class": "FilmPass",
+            "module": "Postprocessing"
+        },
+        {
             "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 82,
+            "line": 15,
+            "description": "Ambient occlusion shadow radius.",
+            "itemtype": "property",
+            "name": "radius",
+            "type": "{Number}",
+            "class": "SSAOPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
+            "line": 21,
+            "description": "Display only ambient occlusion result.",
+            "itemtype": "property",
+            "name": "onlyAO",
+            "type": "{Boolean}",
+            "class": "SSAOPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
+            "line": 27,
+            "description": "Ambient occlusion clamp.",
+            "itemtype": "property",
+            "name": "aoClamp",
+            "type": "{Number}",
+            "class": "SSAOPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
+            "line": 33,
+            "description": "Pixel luminosity influence in AO calculation.",
+            "itemtype": "property",
+            "name": "lumInfluence",
+            "type": "{Number}",
+            "class": "SSAOPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
+            "line": 99,
             "description": "Render using this pass.",
             "itemtype": "method",
             "name": "render",
@@ -9657,7 +9889,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 107,
+            "line": 124,
             "description": "Set resolution of this render pass.",
             "itemtype": "method",
             "name": "setSize",
@@ -9678,7 +9910,7 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\pass\\SSAOPass.js",
-            "line": 120,
+            "line": 137,
             "description": "Serialize pass to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -9694,7 +9926,67 @@
         },
         {
             "file": "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
-            "line": 289,
+            "line": 17,
+            "description": "Scales the color of the whole bloom effect.",
+            "itemtype": "property",
+            "name": "strength",
+            "type": "{Number}",
+            "class": "UnrealBloomPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
+            "line": 23,
+            "description": "Bloom effect radius.",
+            "itemtype": "property",
+            "name": "radius",
+            "type": "{Number}",
+            "class": "UnrealBloomPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
+            "line": 29,
+            "description": "Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.\n\nTo have all scene colors contributing to the bloom, a volume of -1 needs to be used.",
+            "itemtype": "property",
+            "name": "threshold",
+            "type": "{Number}",
+            "class": "UnrealBloomPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
+            "line": 37,
+            "description": "Smooth factor.",
+            "itemtype": "property",
+            "name": "smooth",
+            "type": "{Number}",
+            "class": "UnrealBloomPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
+            "line": 43,
+            "description": "The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).",
+            "itemtype": "property",
+            "name": "bloomFactors",
+            "type": "{Array}",
+            "class": "UnrealBloomPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
+            "line": 49,
+            "description": "Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.",
+            "itemtype": "property",
+            "name": "bloomTintColors",
+            "type": "{Array}",
+            "class": "UnrealBloomPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\UnrealBloomPass.js",
+            "line": 315,
             "description": "Serialize this effect composer to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -13675,7 +13967,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 151,
+            "line": 155,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -13685,7 +13977,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 157,
+            "line": 161,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -13695,7 +13987,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 163,
+            "line": 167,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -13706,7 +13998,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 170,
+            "line": 174,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -13716,7 +14008,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 176,
+            "line": 180,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -13727,7 +14019,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 186,
+            "line": 190,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -13736,7 +14028,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 224,
+            "line": 228,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -13745,7 +14037,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 291,
+            "line": 295,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -13771,7 +14063,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 312,
+            "line": 316,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -13787,7 +14079,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 337,
+            "line": 341,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -13813,7 +14105,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 380,
+            "line": 384,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -13822,7 +14114,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 396,
+            "line": 400,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -13831,7 +14123,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 447,
+            "line": 451,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -13840,7 +14132,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 481,
+            "line": 485,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -13849,7 +14141,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 491,
+            "line": 495,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -13865,7 +14157,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 505,
+            "line": 509,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -13874,7 +14166,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 529,
+            "line": 533,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -13890,7 +14182,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 545,
+            "line": 549,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -13906,7 +14198,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 558,
+            "line": 562,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -13922,7 +14214,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 571,
+            "line": 575,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -13935,7 +14227,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 582,
+            "line": 586,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -13944,7 +14236,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 606,
+            "line": 610,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",

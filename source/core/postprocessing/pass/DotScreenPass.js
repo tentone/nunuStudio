@@ -2,16 +2,32 @@
 
 /**
  * DotScreen pass generates a poster like effect on top of the scene.
- *
- * Has the following parameters
- *  - center
- *  - angle
- *  - scale
  *  
  * @class DotScreenPass
  * @constructor
  * @module Postprocessing
  * @author alteredq / http://alteredqualia.com/
+ * @param {Number} center Dot rotation center.
+ * @param {Number} angle Dot rotation angle.
+ * @param {Number} scale Dot scale.
+ */
+/**
+ * Center of rotation of the dot grid in normalized coordinates.
+ *
+ * @property center
+ * @type {Vector2}
+ */
+/**
+ * Rotation of the dot grid.
+ *
+ * @property angle
+ * @type {Number}
+ */
+/**
+ * Scale of the dots used in the effect.
+ *
+ * @property scale
+ * @type {Number}
  */
 function DotScreenPass(center, angle, scale)
 {

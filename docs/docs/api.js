@@ -11,12 +11,14 @@ YUI.add("yuidoc-meta", function(Y) {
         "BufferUtils",
         "CanvasTexture",
         "Container",
+        "CopyPass",
         "CubeCamera",
         "CubeTexture",
         "DirectionalLight",
         "DotScreenPass",
         "EffectComposer",
         "EventManager",
+        "FXAAPass",
         "FileSystem",
         "FilmPass",
         "Fog",
@@ -66,6 +68,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Skeleton",
         "SkinnedMesh",
         "Sky",
+        "SobelPass",
         "SpineAnimation",
         "SpineTexture",
         "SpotLight",
@@ -209,7 +212,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Postprocessing",
             "name": "Postprocessing",
-            "description": "Depth-of-field post-process with bokeh shader.\n\nHas the following parameters:\n - focus\n \t- Focus distance.\n - aperture\n \t- Camera aperture.\n - maxblur\n \t- Maximum level of blur."
+            "description": "Depth-of-field post-process with bokeh shader."
         },
         {
             "displayName": "Resources",

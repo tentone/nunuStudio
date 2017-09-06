@@ -42,6 +42,7 @@
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
 								<li><a href="../classes/Container.html">Container</a></li>
+								<li><a href="../classes/CopyPass.html">CopyPass</a></li>
 								<li><a href="../classes/CubeCamera.html">CubeCamera</a></li>
 								<li><a href="../classes/CubeTexture.html">CubeTexture</a></li>
 								<li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
@@ -53,6 +54,7 @@
 								<li><a href="../classes/Fog.html">Fog</a></li>
 								<li><a href="../classes/Font.html">Font</a></li>
 								<li><a href="../classes/FontLoader.html">FontLoader</a></li>
+								<li><a href="../classes/FXAAPass.html">FXAAPass</a></li>
 								<li><a href="../classes/Gamepad.html">Gamepad</a></li>
 								<li><a href="../classes/Gyroscope.html">Gyroscope</a></li>
 								<li><a href="../classes/HemisphereLight.html">HemisphereLight</a></li>
@@ -96,6 +98,7 @@
 								<li><a href="../classes/Skeleton.html">Skeleton</a></li>
 								<li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
 								<li><a href="../classes/Sky.html">Sky</a></li>
+								<li><a href="../classes/SobelPass.html">SobelPass</a></li>
 								<li><a href="../classes/SpineAnimation.html">SpineAnimation</a></li>
 								<li><a href="../classes/SpineTexture.html">SpineTexture</a></li>
 								<li><a href="../classes/SpotLight.html">SpotLight</a></li>
@@ -186,12 +189,6 @@
 						
 						<div class="box intro">
 							<p>DotScreen pass generates a poster like effect on top of the scene.</p>
-						<p>Has the following parameters</p>
-						<ul>
-						<li>center</li>
-						<li>angle</li>
-						<li>scale</li>
-						</ul>
 						
 						</div>
 						
@@ -200,7 +197,19 @@
 								<div id="method_DotScreenPass" class="method item">
 									<h3 class="name"><code>DotScreenPass</code></h3>
 								
-										<span class="paren">()</span>
+										<div class="args">
+											<span class="paren">(</span><ul class="args-list inline commas">
+												<li class="arg">
+														<code>center</code>
+												</li>
+												<li class="arg">
+														<code>angle</code>
+												</li>
+												<li class="arg">
+														<code>scale</code>
+												</li>
+											</ul><span class="paren">)</span>
+										</div>
 								
 								
 								
@@ -221,6 +230,45 @@
 										
 									</div>
 								
+										<div class="params">
+											<h4>Parameters:</h4>
+								
+											<ul class="params-list">
+												<li class="param">
+														<code class="param-name">center</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														<p>Dot rotation center.</p>
+								
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">angle</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														<p>Dot rotation angle.</p>
+								
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">scale</code>
+														<span class="type">Number</span>
+								
+								
+													<div class="param-description">
+														<p>Dot scale.</p>
+								
+													</div>
+								
+												</li>
+											</ul>
+										</div>
 								
 								
 								</div>
@@ -230,6 +278,7 @@
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
+									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
@@ -237,11 +286,102 @@
 									<h2 class="off-left">Item Index</h2>
 						
 						
+										<div class="index-section properties">
+											<h3>Properties</h3>
+						
+											<ul class="index-list properties">
+													<li class="index-item property">
+														<a href="#property_angle">angle</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_center">center</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_scale">scale</a>
+						
+													</li>
+											</ul>
+										</div>
 						
 						
 								</div>
 						
 						
+									<div id="properties" class="api-class-tabpanel">
+										<h2 class="off-left">Properties</h2>
+						
+											<div id="property_angle" class="property item">
+												<h3 class="name"><code>angle</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Rotation of the dot grid.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_center" class="property item">
+												<h3 class="name"><code>center</code></h3>
+												<span class="type">Vector2</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Center of rotation of the dot grid in normalized coordinates.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_scale" class="property item">
+												<h3 class="name"><code>scale</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Scale of the dots used in the effect.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 						
 							</div>

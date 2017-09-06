@@ -2,22 +2,10 @@
 
 /**
  * Unreal engine like bloom effect pass.
- * https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/
  *
- * Has the following parameters
- *  - strength
- *  	- Scales the color of the whole bloom effect.
- *  - radius
- *  	- Bloom effect radius.
- *  - threshold
- *  	- Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom. To have all scene colors contributing to the bloom, a volume of -1 needs to be used.
- *  - smooth
- *  	- Smooth factor
- *  - bloomFactors
- *  	- The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).
- *  - bloomTintColors
- *  	- Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.
- * 
+ * More information available here
+ *  - https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/
+ *
  * @author spidersharma / http://eduperiment.com/
  * @class UnrealBloomPass
  * @module Postprocessing
@@ -25,6 +13,44 @@
  * @param {Number} strength  Bloom effect strength.
  * @param {Number} radius Bloom effect radius.
  * @param {Number} threshold White point threshold.
+ */
+/**
+ * Scales the color of the whole bloom effect.
+ *
+ * @property strength
+ * @type {Number}
+ */
+/**
+ * Bloom effect radius.
+ *
+ * @property radius
+ * @type {Number}
+ */
+/**
+ * Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.
+ * 
+ * To have all scene colors contributing to the bloom, a volume of -1 needs to be used.
+ *
+ * @property threshold
+ * @type {Number}
+ */
+/**
+ * Smooth factor.
+ *
+ * @property smooth
+ * @type {Number}
+ */
+/**
+ * The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).
+ *
+ * @property bloomFactors
+ * @type {Array}
+ */
+/**
+ * Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.
+ *
+ * @property bloomTintColors
+ * @type {Array}
  */
 function UnrealBloomPass(strength, radius, threshold)
 {

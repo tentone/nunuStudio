@@ -42,6 +42,7 @@
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
 								<li><a href="../classes/Container.html">Container</a></li>
+								<li><a href="../classes/CopyPass.html">CopyPass</a></li>
 								<li><a href="../classes/CubeCamera.html">CubeCamera</a></li>
 								<li><a href="../classes/CubeTexture.html">CubeTexture</a></li>
 								<li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
@@ -53,6 +54,7 @@
 								<li><a href="../classes/Fog.html">Fog</a></li>
 								<li><a href="../classes/Font.html">Font</a></li>
 								<li><a href="../classes/FontLoader.html">FontLoader</a></li>
+								<li><a href="../classes/FXAAPass.html">FXAAPass</a></li>
 								<li><a href="../classes/Gamepad.html">Gamepad</a></li>
 								<li><a href="../classes/Gyroscope.html">Gyroscope</a></li>
 								<li><a href="../classes/HemisphereLight.html">HemisphereLight</a></li>
@@ -96,6 +98,7 @@
 								<li><a href="../classes/Skeleton.html">Skeleton</a></li>
 								<li><a href="../classes/SkinnedMesh.html">SkinnedMesh</a></li>
 								<li><a href="../classes/Sky.html">Sky</a></li>
+								<li><a href="../classes/SobelPass.html">SobelPass</a></li>
 								<li><a href="../classes/SpineAnimation.html">SpineAnimation</a></li>
 								<li><a href="../classes/SpineTexture.html">SpineTexture</a></li>
 								<li><a href="../classes/SpotLight.html">SpotLight</a></li>
@@ -185,40 +188,10 @@
 						
 						
 						<div class="box intro">
-							<p>Unreal engine like bloom effect pass.
-						<a href="https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/">https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/</a></p>
-						<p>Has the following parameters</p>
+							<p>Unreal engine like bloom effect pass.</p>
+						<p>More information available here</p>
 						<ul>
-						<li>strength
-						<ul>
-						<li>Scales the color of the whole bloom effect.</li>
-						</ul>
-						</li>
-						<li>radius
-						<ul>
-						<li>Bloom effect radius.</li>
-						</ul>
-						</li>
-						<li>threshold
-						<ul>
-						<li>Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom. To have all scene colors contributing to the bloom, a volume of -1 needs to be used.</li>
-						</ul>
-						</li>
-						<li>smooth
-						<ul>
-						<li>Smooth factor</li>
-						</ul>
-						</li>
-						<li>bloomFactors
-						<ul>
-						<li>The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).</li>
-						</ul>
-						</li>
-						<li>bloomTintColors
-						<ul>
-						<li>Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.</li>
-						</ul>
-						</li>
+						<li><a href="https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/">https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/Bloom/</a></li>
 						</ul>
 						
 						</div>
@@ -310,6 +283,7 @@
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
 							</ul>
 						
 							<div>
@@ -327,6 +301,36 @@
 											</ul>
 										</div>
 						
+										<div class="index-section properties">
+											<h3>Properties</h3>
+						
+											<ul class="index-list properties">
+													<li class="index-item property">
+														<a href="#property_bloomFactors">bloomFactors</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_bloomTintColors">bloomTintColors</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_radius">radius</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_smooth">smooth</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_strength">strength</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_threshold">threshold</a>
+						
+													</li>
+											</ul>
+										</div>
 						
 						
 								</div>
@@ -364,6 +368,149 @@
 											</div>
 									</div>
 						
+									<div id="properties" class="api-class-tabpanel">
+										<h2 class="off-left">Properties</h2>
+						
+											<div id="property_bloomFactors" class="property item">
+												<h3 class="name"><code>bloomFactors</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>The size in percent of the screen width. Is clamped by some number. If you need a larger number, use the next lower resolution blur instead (higher number).</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_bloomTintColors" class="property item">
+												<h3 class="name"><code>bloomTintColors</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Modifies the brightness and color of each bloom. Using a black color will not make this pass faster but that can be done.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_radius" class="property item">
+												<h3 class="name"><code>radius</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Bloom effect radius.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_smooth" class="property item">
+												<h3 class="name"><code>smooth</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Smooth factor.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_strength" class="property item">
+												<h3 class="name"><code>strength</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Scales the color of the whole bloom effect.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_threshold" class="property item">
+												<h3 class="name"><code>threshold</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Defines how many luminance units a color needs to have to affect bloom. In addition to the threshold, there is a linear part (one unit wide) where the color only partly affects the bloom.</p>
+											<p>To have all scene colors contributing to the bloom, a volume of -1 needs to be used.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+									</div>
 						
 						
 							</div>
