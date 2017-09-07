@@ -157,6 +157,7 @@
 	- Postprocessing
 		-Postprocessing editor
 	- Resize is now a part of Object3D
+	- Timeliner integration (@zz85)
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
@@ -164,12 +165,12 @@ nunuStudio is built on top of a number of open source projects
 	- nwjs.io
 - three.js
 	- github.com/mrdoob/three.js
+- Cannon.JS
+	- schteppe.github.io/cannon.js
 - opentype
 	- opentype.js.org
 - SPE
 	- github.com/squarefeet/ShaderParticleEngine
-- Cannon.JS
-	- schteppe.github.io/cannon.js
 - JSColor
 	- jscolor.com
 - CodeMirror
@@ -180,6 +181,8 @@ nunuStudio is built on top of a number of open source projects
 	- jshint.com
 - YUIDocs
 	- yui.github.io/yuidoc
+- Timeliner
+	- github.com/zz85/timeliner
 
 ### Runtime
 - nunuStudio apps are meant to be used inside web pages
