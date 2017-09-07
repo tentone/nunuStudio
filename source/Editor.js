@@ -220,6 +220,7 @@ include("lib/jscolor.min.js");
 include("lib/jszip.min.js");
 include("lib/quickhull.js");
 include("lib/ThreeCSG.js");
+include("lib/timeliner.js");
 
 include("editor/style.css");
 
@@ -284,6 +285,7 @@ include("editor/ui/tab/AboutTab.js");
 include("editor/ui/tab/CubeTextureEditor.js");
 
 include("editor/ui/tab/camera/CameraEditor.js");
+include("editor/ui/tab/camera/postprocessing/PassNode.js");
 
 include("editor/ui/tab/settings/SettingsTab.js");
 include("editor/ui/tab/settings/CodeSettingsTab.js");

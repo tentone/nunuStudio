@@ -138,7 +138,7 @@ function MaterialEditor(parent, closeable, container, index)
 			self.material.needsUpdate = true;
 		}
 	});
-	this.form.add(this.depthWrite );
+	this.form.add(this.depthWrite);
 	this.form.nextRow();
 
 	//Depth mode
