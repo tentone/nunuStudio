@@ -42,6 +42,11 @@ console.assert = function()
 
 console.clear = function()
 {
+	if(Interface.console !== undefined)
+	{
+		Interface.console.clear(arguments);
+	}
+
 	_console.clear.apply(null, arguments);
 };
 

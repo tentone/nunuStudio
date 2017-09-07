@@ -6,13 +6,34 @@ function ConsoleTab(parent, closeable, container, index)
 
 	this.history = [];
 
+	//Top bar
+	this.bar = document.createElement("div");
+	this.bar.style.top = "0px";
+	this.bar.style.left = "0px";
+	this.bar.style.width = "100%";
+	this.bar.style.height = "20px";
+	this.bar.style.backgroundColor = Editor.theme.barColor;
+	this.element.appendChild(this.bar);
+
+	var menu = new Button(this.bar);
+	menu.setText("Clear");
+	menu.size.set(100, 20);
+	menu.position.set(0, 0);
+	menu.setCallback(function()
+	{
+		console.clear();
+	});
+	menu.updateInterface();
+
+	//Console messages division
 	this.console = document.createElement("div");
 	this.console.style.overflow = "auto";
-	this.console.style.top = "0px";
+	this.console.style.top = "20px";
 	this.console.style.left = "0px";
 	this.console.style.width = "100%";
 	this.element.appendChild(this.console);
 
+	//Command input division
 	this.code = document.createElement("input");
 	this.code.type = "text";
 	this.code.style.position = "absolute";
@@ -41,10 +62,13 @@ function ConsoleTab(parent, closeable, container, index)
 		{
 			try
 			{
-				console.log(eval.call(window, this.value));
+				var result = eval.call(window, this.value);
+				console.log(" >> " + this.value);
+				console.log(result);
 			}
 			catch(e)
 			{
+				console.error(" >> " + this.value);
 				console.error(e);
 			}
 
@@ -179,7 +203,7 @@ ConsoleTab.createMessage = function(object)
 
 		log.appendChild(table);
 	}
-	else if(object instanceof THREE.Vector4)
+	else if(object instanceof THREE.Vector4 || object instanceof THREE.Quaternion)
 	{
 		var table = document.createElement("table");
 		table.style.display = "inline-block";
@@ -188,13 +212,13 @@ ConsoleTab.createMessage = function(object)
 		coord.insertCell(0).innerHTML = "X";
 		coord.insertCell(1).innerHTML = "Y";
 		coord.insertCell(2).innerHTML = "Z";
-		coord.insertCell(2).innerHTML = "W";
+		coord.insertCell(3).innerHTML = "W";
 
 		var value = table.insertRow(1);
 		value.insertCell(0).innerHTML = object.x;
 		value.insertCell(1).innerHTML = object.y;
 		value.insertCell(2).innerHTML = object.z;
-		value.insertCell(2).innerHTML = object.w;
+		value.insertCell(3).innerHTML = object.w;
 
 		log.appendChild(table);
 	}
@@ -233,10 +257,6 @@ ConsoleTab.createMessage = function(object)
 	{
 		log.innerHTML = "null";
 	}
-	/*else if(object instanceof Object)
-	{
-		log.innerHTML = object;
-	}*/
 	else
 	{
 		log.innerHTML = object;
@@ -296,6 +316,19 @@ ConsoleTab.prototype.error = function(args)
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
 };
 
+//Clear commands
+ConsoleTab.prototype.clear = function(args)
+{
+	this.history = [];
+
+	while(this.console.hasChildNodes())
+	{
+    	this.console.removeChild(this.console.lastChild);
+	}
+
+	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
+};
+
 //Update interface
 ConsoleTab.prototype.updateInterface = function()
 {
@@ -308,7 +341,7 @@ ConsoleTab.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
 
-		this.console.style.height = (this.size.y - 25) + "px";
+		this.console.style.height = (this.size.y - 45) + "px";
 	}
 	else
 	{

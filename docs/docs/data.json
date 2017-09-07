@@ -10257,7 +10257,7 @@
             "line": 70,
             "description": "Dispose this render pass.",
             "itemtype": "method",
-            "name": "dipose",
+            "name": "dispose",
             "class": "Pass",
             "module": "Postprocessing"
         },
@@ -10541,7 +10541,7 @@
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
             "line": 13,
-            "description": "Resource name. Not required to be unique.",
+            "description": "Resource name.\n\nNot required to be unique.",
             "itemtype": "property",
             "name": "name",
             "type": "{String}",
@@ -10550,7 +10550,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
-            "line": 19,
+            "line": 21,
             "description": "UUID unique identifier.",
             "itemtype": "property",
             "name": "uuid",
@@ -10560,8 +10560,8 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
-            "line": 25,
-            "description": "Resrouce type. Used to identify the type of the resource, usefull for serialization.",
+            "line": 27,
+            "description": "Resource type. Used to identify the type of the resource, usefull for serialization.",
             "itemtype": "property",
             "name": "type",
             "type": "{String}",
@@ -10570,8 +10570,8 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
-            "line": 31,
-            "description": "Data format (Base64, ArrayBuffer, ...).\n\nIndicates in witch format the data is being stored.",
+            "line": 33,
+            "description": "Data format (Base64, ArrayBuffer, Blob, URL, etc).\n\nIndicates the format used to store the data.",
             "itemtype": "property",
             "name": "format",
             "type": "{Object}",
@@ -10580,7 +10580,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
-            "line": 39,
+            "line": 41,
             "description": "Data encoding (MP3, JPEG, MP4, ...).\n\nIndicates how the data is encoded.",
             "itemtype": "property",
             "name": "encoding",
@@ -10590,7 +10590,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
-            "line": 47,
+            "line": 49,
             "description": "Resource data.",
             "itemtype": "property",
             "name": "data",
@@ -10600,7 +10600,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
-            "line": 64,
+            "line": 66,
             "description": "Serialize resource to json.\n\nOnly serializes name, uuid and type.",
             "itemtype": "method",
             "name": "toJSON",
