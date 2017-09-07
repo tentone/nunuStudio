@@ -68,7 +68,7 @@ function CameraEditor(parent, closeable, container, index)
 	};
 
 	var button = new Button(this.form.element);
-	button.size.set(200, 18);
+	button.size.set(120, 18);
 	button.setText("FXAA");
 	button.setCallback(function()
 	{
@@ -81,7 +81,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	var button = new Button(this.form.element);
-	button.size.set(200, 18);
+	button.size.set(120, 18);
 	button.setText("Unreal Bloom");
 	button.setCallback(function()
 	{
@@ -94,7 +94,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	var button = new Button(this.form.element);
-	button.size.set(200, 18);
+	button.size.set(120, 18);
 	button.setText("SSAO");
 	button.setCallback(function()
 	{
@@ -108,7 +108,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	var button = new Button(this.form.element);
-	button.size.set(200, 18);
+	button.size.set(120, 18);
 	button.setText("Bokeh");
 	button.setCallback(function()
 	{
@@ -121,7 +121,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.nextRow();
 	
 	var button = new Button(this.form.element);
-	button.size.set(200, 18);
+	button.size.set(120, 18);
 	button.setText("Film");
 	button.setCallback(function()
 	{
@@ -134,7 +134,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	var button = new Button(this.form.element);
-	button.size.set(200, 18);
+	button.size.set(120, 18);
 	button.setText("Dot Screen");
 	button.setCallback(function()
 	{
@@ -147,7 +147,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	var button = new Button(this.form.element);
-	button.size.set(200, 18);
+	button.size.set(120, 18);
 	button.setText("Sobel");
 	button.setCallback(function()
 	{
@@ -160,7 +160,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	var button = new Button(this.form.element);
-	button.size.set(200, 18);
+	button.size.set(120, 18);
 	button.setText("Copy");
 	button.setCallback(function()
 	{

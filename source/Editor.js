@@ -281,8 +281,9 @@ include("editor/ui/tab/ScriptEditor.js");
 include("editor/ui/tab/SceneEditor.js");
 include("editor/ui/tab/ParticleEditor.js");
 include("editor/ui/tab/AboutTab.js");
-include("editor/ui/tab/CameraEditor.js");
 include("editor/ui/tab/CubeTextureEditor.js");
+
+include("editor/ui/tab/camera/CameraEditor.js");
 
 include("editor/ui/tab/settings/SettingsTab.js");
 include("editor/ui/tab/settings/CodeSettingsTab.js");
