@@ -499,6 +499,11 @@ TreeElement.prototype.setObject = function(obj)
 	this.setIcon(ObjectIcons.get(obj.type));
 	this.setLabel(obj.name);
 	
+	if(Editor.isObjectSelected(obj))
+	{
+		this.element.style.backgroundColor = Editor.theme.buttonOverColor;
+	}
+
 	if(obj.folded)
 	{
 		this.arrow.src = Editor.filePath + "icons/misc/arrow_right.png";
