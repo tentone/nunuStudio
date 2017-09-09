@@ -2,7 +2,7 @@
 
 function AnimationTab(parent, closeable, container, index)
 {
-	TabElement.call(this, parent, closeable, container, index, "Console", Editor.filePath + "icons/misc/console.png");
+	TabElement.call(this, parent, closeable, container, index, "Animation", Editor.filePath + "icons/misc/animation.png");
 
 	//TODO <ADD CODE HERE>
 }
