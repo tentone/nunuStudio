@@ -453,78 +453,53 @@ function update()
 }</code></pre>
 
 
-
-
-
-
-			<h3 class="black">Optional Tweaks</h3>
-			<p>If you wish to make the controls feel more like those in a classic platformer you can add these little tweaks:</p>
-			<p>First, we change the player's physicsobject to a sphere instead of a cube. This way our player will roll easily and won't get stuck to the walls. </p>
-			<img src="images/t.png" class="img-big"></img>
-			<p>As you can see in red we have also changed the angular damping value, this makes it so our ball won't roll very far after you released the button. You can tweak this value to find the one that suits you the most,</p>
-            <p> I found that <code>0.999</code> works pretty good.</p>
-
-            <p> As you can see there is also a blue cube named 'playermesh', this mesh will represent our player. This can be a custom model if you wish, but make sure to change the sphere scale to fit your model.</p> 			
-			<p>I chose to make the scale of the sphere <code> 0.5, 0.5 , 0.5</code> this way it fits a 1x1x1 cube.</p>
-			<p>We're almost done now, all we have to do is to teleport our playermesh to the physicsobject every frame, we can do this by adding a little bit of code to our update function.</p>
-			
-			<pre><code>function update()
-{
-	gamepad.update();
-	
-	var velocity = 6;
-	var acceleration = 0.6;
-	
-	if(Keyboard.keyPressed(Keyboard.SHIFT))
-	{
-		velocity = 8;
-		acceleration = 1;
-	}
-	
-	if(Keyboard.keyPressed(Keyboard.A) || gamepad.buttonPressed(Gamepad.LEFT))
-	{
-		if(player.body.velocity.x > -velocity)
-		{
-			player.body.velocity.x -= acceleration;
-		}
-	}
-	if(Keyboard.keyPressed(Keyboard.D) || gamepad.buttonPressed(Gamepad.RIGHT))
-	{
-		if(player.body.velocity.x < velocity)
-		{
-			player.body.velocity.x += acceleration;
-		}
-	}
-	
-	if(player.canJump && Keyboard.keyJustPressed(Keyboard.W) || gamepad.buttonJustPressed(Gamepad.A))
-	{
-		player.body.velocity.y = 10;
-		player.canJump = false;
-	}
-	
-	player.body.position.z = 0;
-	
-	
-	///////////////////////////// Here we teleport our playermesh to our physicsobject, which is still the player here.////////////////////////////
-	playermesh.position.x = player.body.position.x; 
-	playermesh.position.y = player.body.position.y; 
-	playermesh.position.z = player.body.position.z; 
-	
-	
-	camera.position.x = player.body.position.x;
-	camera.position.y = player.body.position.y + 2;
-}</code></pre>
-
-            <p>There we go, if you followed the steps you should now have smoother controls on your player. You can ofcourse experiment with it as much as you want.</p>
-
-			 
-			<h3 class="black">Final result</h3>
+			<h3 class="black">Result</h3>
 			<p>If you were able to make it this far congratulations, you have created an awseome platformer game. This should cover all the basic aspects for platformer games. If you have any doubt about any of the steps in the tutorial, feel free to ask me about it.</p>
 			<p>You can try the final result of this tutorial bellow (wasd keys to move), you can also download the <a class="underline" href="platformer.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/platformer.nsp">Web Editor</a>.</p>
 			
 			<div>
 				<canvas id="platformer" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
+
+			<h3 class="black">Tweaking player controls</h3>
+
+			<p>If you wish to make the controls feel more like those in a classic platformer without the cube tumbling around the level you can add these little tweaks</p>
+			
+			<p>First, we need to change the player physics object to a sphere instead of a cube. This way our player will roll easily and won't get stuck to the walls. I chose to make the scale of the sphere <code>(0.5, 0.5 , 0.5)</code> this way it fits our <code>(1.0, 1.0, 1.0)</code> cube.</p>
+
+			<img src="images/t.png" class="img-normal"></img>
+			
+			<p>As you can see in red we have also changed the angular damping value, this makes it so our ball won't roll very far after you released the button. You can tweak this value to find the one that suits you the most. I found that <code>0.999</code> works pretty good.</p>
+
+            <p>As you can see there is also a blue cube named 'playermesh', this mesh will represent our player. This can be a custom model if you wish, but make sure to change the sphere scale to fit your model.</p>
+			
+			<p>We're almost done now, all we have to do is to teleport our player mesh to the physics object every frame, we can do this by copying the physics position to our player mesh in our update function.</p>
+			
+			<pre><code>var playermesh;
+
+function initialize()
+{
+...
+
+playermesh = scene.getObjectByName("playermesh");
+
+...
+};
+
+function update()
+{
+	...
+	
+	//Copy the position of our physics object to our player mesh
+	playermesh.position.copy(player.body.position);
+	
+	...
+}</code></pre>
+
+            <p>If you followed all the steps you should now have smoother controls on your player. You can of course experiment with it as much as you want.</p>
+
+            <p>If you are having some trouble completing this part of the tutorial you can download the project fileou can download the <a class="underline" href="steps/e.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?nsp=https://nunustudio.org/learn/tutorial/01_platformer/steps/e.nsp">Web Editor</a>.</p>
+			
 		</div>
 	</section>
 
