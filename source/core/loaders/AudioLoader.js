@@ -46,7 +46,7 @@ AudioLoader.prototype.parse = function(json)
 	audio.uuid = json.uuid;
 	audio.encoding = json.encoding;
 
-	if(audio.format === "base64")
+	if(json.format === "base64")
 	{
 		audio.format = "arraybuffer";
 		audio.data = ArraybufferUtils.fromBase64(json.data);
