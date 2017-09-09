@@ -31,7 +31,7 @@
  * @type {String}
  */
 /**
- * Data format (Base64, ArrayBuffer, Blob, URL, etc).
+ * Data format (base64, arraybuffer, blob, url, ...).
  * 
  * Indicates the format used to store the data.
  * 
@@ -39,7 +39,7 @@
  * @type {Object}
  */
 /**
- * Data encoding (MP3, JPEG, MP4, ...).
+ * Data encoding (mp3, jpg, mp4, ...).
  * 
  * Indicates how the data is encoded.
  * 

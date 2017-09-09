@@ -14,8 +14,8 @@ function Text()
 {
 	Resource.call(this, "text", "Text");
 
-	this.encoding = "text";
 	this.format = "string";
+	this.encoding = "txt";
 	this.data = "";
 }
 

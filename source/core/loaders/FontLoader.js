@@ -53,7 +53,13 @@ FontLoader.prototype.parse = function(json)
 			font.reversed = json.reversed;
 		}
 		
-		if(json.format === "base64")
+		if(json.format === "arraybuffer")
+		{
+			font.format = "arraybuffer";
+			font.data = json.data;
+			font.loadTTF();
+		}
+		else if(json.format === "base64")
 		{
 			font.format = "arraybuffer";
 			font.data = ArraybufferUtils.fromBase64(json.data);

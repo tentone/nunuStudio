@@ -26,7 +26,7 @@ function Video(url)
 		}
 		//URL
 		else
-		{		
+		{
 			this.encoding = url.split(".").pop().toLowerCase();
 			this.data = "data:video/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
 			this.format = "base64";
