@@ -45,8 +45,17 @@ AudioLoader.prototype.parse = function(json)
 	audio.name = json.name;
 	audio.uuid = json.uuid;
 	audio.encoding = json.encoding;
-	audio.format = "arraybuffer";
-	audio.data = ArraybufferUtils.fromBase64(json.data);
+
+	if(audio.format === "base64")
+	{
+		audio.format = "arraybuffer";
+		audio.data = ArraybufferUtils.fromBase64(json.data);
+	}
+	else
+	{
+		audio.format = json.format;
+		audio.data = json.data;
+	}
 
 	return audio;
 };

@@ -26,7 +26,7 @@ function Audio(url)
 		else
 		{
 			this.data = FileSystem.readFileArrayBuffer(url);
-			this.encoding = url.split(".").pop().toLowerCase();
+			this.encoding = FileSystem.getFileExtension(url);
 			this.format = "arraybuffer";
 		}
 	}
@@ -74,8 +74,8 @@ Audio.prototype.toJSON = function(meta)
 	}
 
 	data.encoding = this.encoding;
-	data.data = Base64Utils.fromArraybuffer(this.data);
-	data.format = "base64";
+	data.data = this.data;
+	data.format = this.format;
 
 	meta.audio[this.uuid] = data;
 

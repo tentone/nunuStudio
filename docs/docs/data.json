@@ -10571,7 +10571,7 @@
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
             "line": 33,
-            "description": "Data format (Base64, ArrayBuffer, Blob, URL, etc).\n\nIndicates the format used to store the data.",
+            "description": "Data format (base64, arraybuffer, blob, url, ...).\n\nIndicates the format used to store the data.",
             "itemtype": "property",
             "name": "format",
             "type": "{Object}",
@@ -10581,7 +10581,7 @@
         {
             "file": "..\\..\\source\\core\\resources\\Resource.js",
             "line": 41,
-            "description": "Data encoding (MP3, JPEG, MP4, ...).\n\nIndicates how the data is encoded.",
+            "description": "Data encoding (mp3, jpg, mp4, ...).\n\nIndicates how the data is encoded.",
             "itemtype": "property",
             "name": "encoding",
             "type": "{String, ArrayBuffer, ...}",

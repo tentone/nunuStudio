@@ -34,7 +34,7 @@ function Image(url)
 		//URL
 		else
 		{
-			this.encoding = url.split(".").pop().toLowerCase();
+			this.encoding = FileSystem.getFileExtension(url);
 
 			if(this.encoding === "gif")
 			{
@@ -172,14 +172,14 @@ Image.prototype.encodeData = function()
 	//Encode data
 	if(transparent)
 	{
-		this.format = "base64";
 		this.encoding = "png";
+		this.format = "base64";
 		this.data = canvas.toDataURL("image/png");
 	}
 	else
 	{
-		this.format = "base64";
 		this.encoding = "jpeg";
+		this.format = "base64";
 		this.data = canvas.toDataURL("image/jpeg", 1.0);
 	}
 };
@@ -210,7 +210,7 @@ Image.prototype.toJSON = function(meta)
 	data.encoding = this.encoding;
 	data.format = this.format;
 	data.data = this.data;
-
+	
 	meta.images[this.uuid] = data;
 
 	return data;

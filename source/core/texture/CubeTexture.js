@@ -392,10 +392,19 @@ CubeTexture.prototype.toJSON = function(meta)
 	data.mode = this.mode;
 
 	data.images = [];
-	for(var i = 0; i < this.images.length; i++)
-	{	
-		var image = this.images[i].toJSON(meta);
+
+	if(this.mode === CubeTexture.EQUIRECTANGULAR || this.mode === CubeTexture.CROSS)
+	{
+		var image = this.images[0].toJSON(meta);
 		data.images.push(image.uuid);
+	}
+	else
+	{
+		for(var i = 0; i < this.images.length; i++)
+		{	
+			var image = this.images[i].toJSON(meta);
+			data.images.push(image.uuid);
+		}
 	}
 
 	return data;
