@@ -442,13 +442,27 @@ Interface.initialize = function()
 
 	//Menu Top Bar
 	Interface.topBar = new Bar();
-	Interface.topBar.size.y = 25 ;
+	Interface.topBar.size.y = 25;
 
 	//Editor Logo
-	Interface.image = new ImageBox();
-	Interface.image.setImage(Editor.filePath + "logo.png");
-	Interface.image.size.set(108, 18);
-	Interface.image.updateInterface();
+	var logo = document.createElement("div");
+	logo.style.position = "absolute";
+	logo.style.pointerEvents = "none";
+	logo.style.width = "108px";
+	logo.style.height = "18px";
+	logo.style.top = "3px";
+	logo.style.right = "3px";
+	Interface.topBar.element.appendChild(logo);
+
+	var logoImage = document.createElement("img");
+	logoImage.src = Editor.filePath + "logo.png";
+	logoImage.style.pointerEvents = "none";
+	logoImage.style.position = "absolute";
+	logoImage.style.top = "0px";
+	logoImage.style.left = "0px";
+	logoImage.style.width = "108px";
+	logoImage.style.height = "18px";
+	logo.appendChild(logoImage);
 
 	//File
 	Interface.file = new DropdownMenu();
@@ -936,10 +950,6 @@ Interface.updateInterface = function()
 	//Menu Top Bar
 	Interface.topBar.size.x = size.x;
 	Interface.topBar.updateInterface();
-
-	//Logo
-	Interface.image.position.set(size.x - Interface.image.size.x, 3);
-	Interface.image.updateInterface();
 
 	//Tool Bar
 	Interface.toolBar.position.set(0, Interface.topBar.size.y);
