@@ -10468,7 +10468,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 111,
+            "line": 110,
             "description": "Load .tga file from ArrayBuffer data.\n\nAfter loading data is converted to JPEG format and stored in base64 encoding.",
             "itemtype": "method",
             "name": "loadTGAData",
@@ -10477,7 +10477,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 126,
+            "line": 125,
             "description": "Check if this image has alpha channel.\n\nThis checks the file encoding if the file a GIF or a PNG is assumed that the file has alpha channel.",
             "itemtype": "method",
             "name": "hasTransparency",
@@ -10490,7 +10490,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 139,
+            "line": 138,
             "description": "Compresses image data to JPEG or PNG and stores in base64 encoding.\n\nIf the image has transparency it is stored as PNG otherwise the image is stored in JPEG with 1.0 quality.\n\nCan be used to compress data and save space.",
             "itemtype": "method",
             "name": "encodeData",
@@ -10499,7 +10499,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 187,
+            "line": 186,
             "description": "Serialize Image resource to json.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11562,7 +11562,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 111,
+            "line": 116,
             "description": "Dispose texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -11571,7 +11571,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 123,
+            "line": 128,
             "description": "Create JSON description for texture, serializes image used in the texture\nTHREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
             "params": [
                 {

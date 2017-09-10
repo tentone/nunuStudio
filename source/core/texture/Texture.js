@@ -93,6 +93,11 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	//Check if image is animated
 	if(this.img.encoding === "gif")
 	{
+		this.generateMipmaps = false;
+		
+		this.magFilter = THREE.LinearFilter;
+		this.minFilter = THREE.LinearFilter;
+
 		function update()
 		{
 			if(!self.disposed)
@@ -101,7 +106,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 				requestAnimationFrame(update);
 			}
 		}
-		
+
 		update();
 	}
 }
