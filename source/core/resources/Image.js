@@ -41,12 +41,19 @@ function Image(url)
 				this.data = "data:image/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
 				this.format = "base64";
 			}
-			else if(this.encoding === "tga")
+			if(this.encoding === "tga")
 			{
 				this.loadTGAData(FileSystem.readFileArrayBuffer(url));
 			}
 			else
 			{
+				/*var arraybuffer = FileSystem.readFileArrayBuffer(url);
+				var view = new Uint8Array(arraybuffer);
+				var blob = new Blob([view], {type: "image/" + this.encoding});
+
+				this.data = URL.createObjectURL(blob);
+				this.format = "blob";*/
+
 				this.format = "url";
 				this.data = url;
 			}
