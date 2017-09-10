@@ -79,5 +79,8 @@ ImageLoader.prototype.parse = function(json)
 	image.format = json.format;
 	image.data = json.data;
 	
+	console.log("JSON", json);
+	console.log("Image", image);
+
 	return image;
 };

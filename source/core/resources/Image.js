@@ -94,9 +94,6 @@ Image.fileIsImage = function(file)
  */
 Image.prototype.createSolidColor = function(color)
 {
-	this.format = "base64";
-	this.encoding = "png";
-
 	var canvas = document.createElement("canvas");
 	canvas.width = 1;
 	canvas.height = 1;
@@ -106,6 +103,8 @@ Image.prototype.createSolidColor = function(color)
 	context.fillRect(0, 0, 1, 1);
 
 	this.data = canvas.toDataURL("image/png");
+	this.format = "base64";
+	this.encoding = "png";
 };
 
 /**
@@ -212,6 +211,8 @@ Image.prototype.toJSON = function(meta)
 	data.data = this.data;
 	
 	meta.images[this.uuid] = data;
+
+	console.log("Data", data);
 
 	return data;
 };
