@@ -13,7 +13,7 @@
  * @module Resources
  * @param {String} data Can be URL to image, ArrayBuffer for TGA data or base64 encoded data.
  */
-function Image(url)
+function Image(url, encoding)
 {
 	Resource.call(this, "image", "Image");
 	
