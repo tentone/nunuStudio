@@ -11,18 +11,28 @@
  * @constructor
  * @extends {Resource}
  * @module Resources
- * @param {String} data Can be URL to image, ArrayBuffer for TGA data or base64 encoded data.
+ * @param {ArrayBuffer, Base64, String} data Can be URL to image, ArrayBuffer data or base64 encoded data.
+ * @param {String} encoding Image encoding, required for ArrayBuffer data.
  */
-function Image(data)
+function Image(data, encoding)
 {
 	Resource.call(this, "image", "Image");
 	
+	console.log("ImageData", data, encoding);
+
 	if(data !== undefined)
 	{
 		//Arraybuffer data
 		if(data instanceof window.ArrayBuffer)
 		{
-			this.loadTGAData(data);
+			if(encoding === "tga")
+			{
+				this.loadTGAData(data);
+			}
+			else
+			{
+				this.loadArrayBufferData(data, encoding);
+			}
 		}
 		//Base64 data
 		else if(data.startsWith("data:image"))
@@ -40,22 +50,12 @@ function Image(data)
 			{
 				this.loadTGAData(FileSystem.readFileArrayBuffer(data));
 			}
-			else if(this.encoding === "gif")
-			{
-				this.data = "data:image/" + this.encoding + ";base64," + FileSystem.readFileBase64(data);
-				this.format = "base64";
-			}
 			else
 			{
-				/*this.arraybuffer = FileSystem.readFileArrayBuffer(data);
-				var view = new Uint8Array(this.arraybuffer);
-				var blob = new Blob([view], {type: "image/" + this.encoding});
+				this.loadArrayBufferData(FileSystem.readFileArrayBuffer(data), this.encoding);
 
-				this.data = URL.createObjectURL(blob);
-				this.format = "blob";*/
-
-				this.format = "url";
-				this.data = data;
+				//this.format = "url";
+				//this.data = data;
 			}
 		}
 	}
@@ -115,11 +115,32 @@ Image.prototype.createSolidColor = function(color)
 };
 
 /**
+ * Load arraybuffer data to this image.
+ *
+ * Creates a blob with data to be stored on data atribute and used by external objects.
+ *
+ * @method loadArrayBufferData
+ * @param {ArrayBuffer} data Data to be loaded.
+ * @param {String} encoding Image enconding (jpeg, png, etc).
+ */
+Image.prototype.loadArrayBufferData = function(data, encoding)
+{
+	var view = new Uint8Array(data);
+	var blob = new Blob([view], {type: "image/" + encoding});
+
+	this.data = URL.createObjectURL(blob);
+	this.arraybuffer = data;
+	this.encoding = encoding;
+	this.format = "arraybuffer";
+};
+
+/**
  * Load .tga file from ArrayBuffer data.
  *
  * After loading data is converted to JPEG format and stored in base64 encoding.
  * 
  * @method loadTGAData
+ * @param {ArrayBuffer} data Data to be loaded.
  */
 Image.prototype.loadTGAData = function(data)
 {
@@ -163,7 +184,7 @@ Image.prototype.encodeData = function()
 	var context = canvas.getContext("2d");
 	context.drawImage(image, 0, 0, image.width, image.height);
 
-	//Check if the image has some tranparency
+	//Check if the image has some transparency
 	var transparent = false;
 	var data = context.getImageData(0, 0, image.width, image.height).data;
 	for(var i = 3; i < data.length; i += 4)
@@ -215,7 +236,15 @@ Image.prototype.toJSON = function(meta)
 
 	data.encoding = this.encoding;
 	data.format = this.format;
-	data.data = this.data;
+
+	if(this.format === "arraybuffer")
+	{
+		data.data = this.arraybuffer;
+	}
+	else
+	{
+		data.data = this.data;
+	}
 	
 	meta.images[this.uuid] = data;
 

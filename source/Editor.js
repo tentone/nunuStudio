@@ -1308,7 +1308,7 @@ Editor.loadTexture = function(file, onLoad)
 
 	reader.onload = function()
 	{
-		var texture = new Texture(new Image(reader.result));
+		var texture = new Texture(new Image(reader.result, extension));
 		texture.name = name;
 
 		Editor.program.addTexture(texture);
@@ -1320,14 +1320,17 @@ Editor.loadTexture = function(file, onLoad)
 		}
 	};
 
-	if(extension === "tga")
+
+	reader.readAsArrayBuffer(file);
+
+	/*if(extension === "tga")
 	{
 		reader.readAsArrayBuffer(file);
 	}
 	else
 	{
 		reader.readAsDataURL(file);
-	}
+	}*/
 };
 
 //Load video texture from file object
@@ -1350,7 +1353,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 		}
 	};
 
-	reader.readAsDataURL(file);
+	reader.readAsArrayBuffer(file);
 };
 
 //Load audio from file object
