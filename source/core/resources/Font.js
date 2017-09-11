@@ -39,9 +39,12 @@ function Font(url)
 		//Arraybuffer
 		if(url instanceof window.ArrayBuffer)
 		{
+			console.log("Font arraybuffer");
+			console.log(url);
+
 			this.data = url;
-			this.loadTTF();
 			this.format = "arraybuffer";
+			this.loadTTF();
 		}
 		//Opentype JSON
 		else if(typeof url === "object")

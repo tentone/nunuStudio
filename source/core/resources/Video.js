@@ -9,17 +9,27 @@
  * @constructor
  * @extends {Resource}
  * @module Resources
- * @param {String} url URL to video file
+ * @param {String} url URL to video file.
+ * @param {String} encoding Image encoding, required for ArrayBuffer data.
  */
-function Video(url)
+function Video(url, encoding)
 {
 	Resource.call(this, "video", "Video");
 
 	if(url !== undefined)
 	{	
-		//Base64 data
-		if(url.startsWith("data:video"))
+		//Arraybuffer data
+		if(url instanceof window.ArrayBuffer)
 		{
+			console.log("Video load ArrayBuffer");
+
+			this.loadArrayBufferData(url, encoding);
+		}
+		//Base64 data
+		else if(url.startsWith("data:video"))
+		{
+			console.log("Video load Base64");
+
 			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
 			this.data = url;
@@ -27,9 +37,13 @@ function Video(url)
 		//URL
 		else
 		{
-			this.encoding = url.split(".").pop().toLowerCase();
+			console.log("Video load URL");
+
+			this.loadArrayBufferData(FileSystem.readFileArrayBuffer(url), encoding);
+
+			/*this.encoding = url.split(".").pop().toLowerCase();
 			this.data = "data:video/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
-			this.format = "base64";
+			this.format = "base64";*/
 		}
 	}
 }
@@ -58,6 +72,26 @@ Video.fileIsVideo = function(file)
 };
 
 /**
+ * Load arraybuffer data to this image.
+ *
+ * Creates a blob with data to be stored on data atribute and used by external objects.
+ *
+ * @method loadArrayBufferData
+ * @param {ArrayBuffer} data Data to be loaded.
+ * @param {String} encoding Video enconding (mp4, webm, etc).
+ */
+Video.prototype.loadArrayBufferData = function(data, encoding)
+{
+	var view = new Uint8Array(data);
+	var blob = new Blob([view], {type: "video/" + encoding});
+
+	this.data = URL.createObjectURL(blob);
+	this.arraybuffer = data;
+	this.encoding = encoding;
+	this.format = "arraybuffer";
+};
+
+/**
  * Serialize resource to json.
  * 
  * Video data is stored in Base64.
@@ -77,7 +111,15 @@ Video.prototype.toJSON = function(meta)
 
 	data.encoding = this.encoding;
 	data.format = this.format;
-	data.data = this.data;
+	
+	if(this.format === "arraybuffer")
+	{
+		data.data = this.arraybuffer;
+	}
+	else
+	{
+		data.data = this.data;
+	}
 
 	meta.videos[this.uuid] = data;
 
