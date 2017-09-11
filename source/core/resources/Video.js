@@ -18,18 +18,9 @@ function Video(url, encoding)
 
 	if(url !== undefined)
 	{	
-		//Arraybuffer data
-		if(url instanceof window.ArrayBuffer)
-		{
-			console.log("Video load ArrayBuffer");
-
-			this.loadArrayBufferData(url, encoding);
-		}
 		//Base64 data
-		else if(url.startsWith("data:video"))
+		if(url.startsWith("data:video"))
 		{
-			console.log("Video load Base64");
-
 			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
 			this.data = url;
@@ -37,13 +28,9 @@ function Video(url, encoding)
 		//URL
 		else
 		{
-			console.log("Video load URL");
-
-			this.loadArrayBufferData(FileSystem.readFileArrayBuffer(url), encoding);
-
-			/*this.encoding = url.split(".").pop().toLowerCase();
+			this.encoding = url.split(".").pop().toLowerCase();
 			this.data = "data:video/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
-			this.format = "base64";*/
+			this.format = "base64";
 		}
 	}
 }
@@ -111,15 +98,7 @@ Video.prototype.toJSON = function(meta)
 
 	data.encoding = this.encoding;
 	data.format = this.format;
-	
-	if(this.format === "arraybuffer")
-	{
-		data.data = this.arraybuffer;
-	}
-	else
-	{
-		data.data = this.data;
-	}
+	data.data = this.data;
 
 	meta.videos[this.uuid] = data;
 

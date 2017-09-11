@@ -55,7 +55,7 @@ FontLoader.prototype.parse = function(json)
 		
 		if(json.format === "arraybuffer")
 		{
-			font.format = "arraybuffer";
+			font.format = json.format;
 			font.data = json.data;
 			font.loadTTF();
 		}

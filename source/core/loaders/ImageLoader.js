@@ -75,13 +75,8 @@ ImageLoader.prototype.parse = function(json)
 	
 	image.name = json.name;
 	image.uuid = json.uuid;
-
-	//image.encoding = json.encoding;
-	//image.format = json.format;
-	//image.data = json.data;		
-
-	console.log("JSON", json);
-	console.log("Image", image);
+	image.encoding = json.encoding;
+	image.format = json.format;
 
 	return image;
 };

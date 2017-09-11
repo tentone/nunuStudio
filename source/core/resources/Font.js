@@ -39,9 +39,6 @@ function Font(url)
 		//Arraybuffer
 		if(url instanceof window.ArrayBuffer)
 		{
-			console.log("Font arraybuffer");
-			console.log(url);
-
 			this.data = url;
 			this.format = "arraybuffer";
 			this.loadTTF();
@@ -57,7 +54,7 @@ function Font(url)
 		//URL
 		else
 		{
-			this.encoding = url.split(".").pop().toLowerCase();
+			this.encoding = FileSystem.getFileExtension(url);
 			this.name = FileSystem.getFileName(url);
 
 			if(this.encoding === "json")
@@ -124,6 +121,51 @@ Font.prototype.loadTTF = function()
 	var loader = new TTFLoader();
 	loader.reversed = this.reversed;
 	this.font = loader.parse(this.data);
+};
+
+/**
+ * Serialize font resource to json.
+ *
+ * Font data is stored as Base64 is present in a binary format, or JSON otherwise.
+ *
+ * @method toJSON
+ * @param {Object} meta
+ * @return {Object} json
+ */
+Font.prototype.toJSON = function(meta)
+{
+	var data = Resource.prototype.toJSON.call(this, meta);
+
+	if(meta.fonts[this.uuid] !== undefined)
+	{
+		return meta.fonts[this.uuid];
+	}
+
+	data.encoding = this.encoding;
+	data.reversed = this.reversed;
+	
+	if(this.format === "arraybuffer")
+	{
+	    data.data = Base64Utils.fromArraybuffer(this.data); 
+    	data.format = "base64"; 
+
+		//data.data = this.data;
+		//data.format = this.format;
+	}
+	/*else if(this.format === "base64")
+	{
+		data.data = ArraybufferUtils.fromBase64(this.data);
+		data.format = "arraybuffer";
+	}*/
+	else
+	{
+		data.data = this.data;
+		data.format = this.format;
+	}
+
+	meta.fonts[this.uuid] = data;
+	
+	return data;
 };
 
 /**
@@ -282,46 +324,4 @@ Font.prototype.generateShapes = function(text, size, divisions)
 
 		return {width: glyph.ha * scale, path: path};
 	}
-};
-
-/**
- * Serialize font resource to json.
- *
- * Font data is stored as Base64 is present in a binary format, or JSON otherwise.
- *
- * @method toJSON
- * @param {Object} meta
- * @return {Object} json
- */
-Font.prototype.toJSON = function(meta)
-{
-	var data = Resource.prototype.toJSON.call(this, meta);
-
-	if(meta.fonts[this.uuid] !== undefined)
-	{
-		return meta.fonts[this.uuid];
-	}
-
-	data.encoding = this.encoding;
-	data.reversed = this.reversed;
-	
-	if(this.format === "arraybuffer")
-	{
-		data.data = this.data;
-		data.format = this.format;
-	}
-	else if(this.format === "base64")
-	{
-		data.data = ArraybufferUtils.fromBase64(this.data);
-		data.format = "arraybuffer";
-	}
-	else if(this.format === "json")
-	{
-		data.data = this.data;
-		data.format = this.format;
-	}
-
-	meta.fonts[this.uuid] = data;
-	
-	return data;
 };
