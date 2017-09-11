@@ -13,49 +13,49 @@
  * @module Resources
  * @param {String} data Can be URL to image, ArrayBuffer for TGA data or base64 encoded data.
  */
-function Image(url, encoding)
+function Image(data)
 {
 	Resource.call(this, "image", "Image");
 	
-	if(url !== undefined)
+	if(data !== undefined)
 	{
 		//Arraybuffer data
-		if(url instanceof window.ArrayBuffer)
+		if(data instanceof window.ArrayBuffer)
 		{
-			this.loadTGAData(url);
+			this.loadTGAData(data);
 		}
 		//Base64 data
-		else if(url.startsWith("data:image"))
+		else if(data.startsWith("data:image"))
 		{
-			this.encoding = Base64Utils.getFileFormat(url);
+			this.encoding = Base64Utils.getFileFormat(data);
 			this.format = "base64";
-			this.data = url;
+			this.data = data;
 		}
 		//URL
 		else
 		{
-			this.encoding = FileSystem.getFileExtension(url);
+			this.encoding = FileSystem.getFileExtension(data);
 
-			if(this.encoding === "gif")
-			{
-				this.data = "data:image/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
-				this.format = "base64";
-			}
 			if(this.encoding === "tga")
 			{
-				this.loadTGAData(FileSystem.readFileArrayBuffer(url));
+				this.loadTGAData(FileSystem.readFileArrayBuffer(data));
+			}
+			else if(this.encoding === "gif")
+			{
+				this.data = "data:image/" + this.encoding + ";base64," + FileSystem.readFileBase64(data);
+				this.format = "base64";
 			}
 			else
 			{
-				/*var arraybuffer = FileSystem.readFileArrayBuffer(url);
-				var view = new Uint8Array(arraybuffer);
+				/*this.arraybuffer = FileSystem.readFileArrayBuffer(data);
+				var view = new Uint8Array(this.arraybuffer);
 				var blob = new Blob([view], {type: "image/" + this.encoding});
 
 				this.data = URL.createObjectURL(blob);
 				this.format = "blob";*/
 
 				this.format = "url";
-				this.data = url;
+				this.data = data;
 			}
 		}
 	}
