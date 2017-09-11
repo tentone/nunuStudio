@@ -14,48 +14,42 @@
  * @param {ArrayBuffer, Base64, String} data Can be URL to image, ArrayBuffer data or base64 encoded data.
  * @param {String} encoding Image encoding, required for ArrayBuffer data.
  */
-function Image(data, encoding)
+function Image(url, encoding)
 {
 	Resource.call(this, "image", "Image");
-	
-	console.log("ImageData", data, encoding);
 
-	if(data !== undefined)
+	if(url !== undefined)
 	{
 		//Arraybuffer data
-		if(data instanceof window.ArrayBuffer)
+		if(url instanceof window.ArrayBuffer)
 		{
-			if(encoding === "tga")
-			{
-				this.loadTGAData(data);
-			}
-			else
-			{
-				this.loadArrayBufferData(data, encoding);
-			}
+			this.loadTGAData(url);
 		}
 		//Base64 data
-		else if(data.startsWith("data:image"))
+		else if(url.startsWith("data:image"))
 		{
-			this.encoding = Base64Utils.getFileFormat(data);
+			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
-			this.data = data;
+			this.data = url;
 		}
 		//URL
 		else
 		{
-			this.encoding = FileSystem.getFileExtension(data);
+			this.encoding = FileSystem.getFileExtension(url);
 
 			if(this.encoding === "tga")
 			{
-				this.loadTGAData(FileSystem.readFileArrayBuffer(data));
+				this.loadTGAData(FileSystem.readFileArrayBuffer(url));
+			}
+			else if(this.encoding === "gif")
+			{
+				this.data = "data:image/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
+				this.format = "base64";
 			}
 			else
 			{
-				this.loadArrayBufferData(FileSystem.readFileArrayBuffer(data), this.encoding);
-
-				//this.format = "url";
-				//this.data = data;
+				this.format = "url";
+				this.data = url;
 			}
 		}
 	}
@@ -236,19 +230,18 @@ Image.prototype.toJSON = function(meta)
 
 	data.encoding = this.encoding;
 	data.format = this.format;
+	data.data = this.data;
 
-	if(this.format === "arraybuffer")
+	/*if(this.format === "arraybuffer")
 	{
 		data.data = this.arraybuffer;
 	}
 	else
 	{
 		data.data = this.data;
-	}
+	}*/
 	
 	meta.images[this.uuid] = data;
-
-	console.log("Data", data);
 
 	return data;
 };

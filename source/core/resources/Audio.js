@@ -7,9 +7,10 @@
  * @extends {Resource}
  * @constructor
  * @module Resources
- * @param {String} url URL to Audio file
+ * @param {ArrayBuffer, String} url URL to Audio file or ArrayBuffer data.
+ * @param {String} encoding Audio encoding (mp3, wav, etc).
  */
-function Audio(url)
+function Audio(url, encoding)
 {
 	Resource.call(this, "audio", "Audio");
 
@@ -19,7 +20,7 @@ function Audio(url)
 		if(url instanceof window.ArrayBuffer)
 		{
 			this.data = url;
-			this.encoding = "";
+			this.encoding = (encoding !== undefined) ? encoding : "";
 			this.format = "arraybuffer";
 		}
 		//URL
@@ -74,9 +75,12 @@ Audio.prototype.toJSON = function(meta)
 	}
 
 	data.encoding = this.encoding;
-	data.data = this.data;
-	data.format = this.format;
+	data.data = Base64Utils.fromArraybuffer(this.data);
+	data.format = "base64";
 
+	//data.data = this.data;
+	//data.format = this.format;
+ 
 	meta.audio[this.uuid] = data;
 
 	return data;

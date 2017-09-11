@@ -42,13 +42,12 @@ VideoLoader.prototype.load = function(url, onLoad, onProgress, onError)
  */
 VideoLoader.prototype.parse = function(json)
 {
-	var video = new Video();
+	var video = new Video(video.data, video.encoding);
 	
 	video.name = json.name;
 	video.uuid = json.uuid;
 	video.format = json.format;
 	video.encoding = json.encoding;
-	video.data = json.data;
-	
+
 	return video;
 };

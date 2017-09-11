@@ -207,6 +207,9 @@
 												<li class="arg">
 														<code>data</code>
 												</li>
+												<li class="arg">
+														<code>encoding</code>
+												</li>
 											</ul><span class="paren">)</span>
 										</div>
 								
@@ -235,11 +238,22 @@
 											<ul class="params-list">
 												<li class="param">
 														<code class="param-name">data</code>
+														<span class="type">ArrayBuffer, Base64, String</span>
+								
+								
+													<div class="param-description">
+														<p>Can be URL to image, ArrayBuffer data or base64 encoded data.</p>
+								
+													</div>
+								
+												</li>
+												<li class="param">
+														<code class="param-name">encoding</code>
 														<span class="type">String</span>
 								
 								
 													<div class="param-description">
-														<p>Can be URL to image, ArrayBuffer for TGA data or base64 encoded data.</p>
+														<p>Image encoding, required for ArrayBuffer data.</p>
 								
 													</div>
 								
@@ -281,6 +295,10 @@
 													</li>
 													<li class="index-item method">
 														<a href="#method_hasTransparency">hasTransparency</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_loadArrayBufferData">loadArrayBufferData</a>
 						
 													</li>
 													<li class="index-item method">
@@ -487,10 +505,82 @@
 													</div>
 											
 											</div>
+											<div id="method_loadArrayBufferData" class="method item">
+												<h3 class="name"><code>loadArrayBufferData</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+															<li class="arg">
+																	<code>encoding</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Load arraybuffer data to this image.</p>
+											<p>Creates a blob with data to be stored on data atribute and used by external objects.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">ArrayBuffer</span>
+											
+											
+																<div class="param-description">
+																	<p>Data to be loaded.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">encoding</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	<p>Image enconding (jpeg, png, etc).</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
 											<div id="method_loadTGAData" class="method item">
 												<h3 class="name"><code>loadTGAData</code></h3>
 											
-													<span class="paren">()</span>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>data</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
 											
 											
 											
@@ -513,6 +603,23 @@
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">data</code>
+																	<span class="type">ArrayBuffer</span>
+											
+											
+																<div class="param-description">
+																	<p>Data to be loaded.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 											
 											</div>
