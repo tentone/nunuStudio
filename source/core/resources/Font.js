@@ -146,17 +146,14 @@ Font.prototype.toJSON = function(meta)
 	
 	if(this.format === "arraybuffer")
 	{
-	    data.data = Base64Utils.fromArraybuffer(this.data); 
-    	data.format = "base64"; 
-
-		//data.data = this.data;
-		//data.format = this.format;
+		data.data = this.data;
+		data.format = this.format;
 	}
-	/*else if(this.format === "base64")
+	else if(this.format === "base64")
 	{
 		data.data = ArraybufferUtils.fromBase64(this.data);
 		data.format = "arraybuffer";
-	}*/
+	}
 	else
 	{
 		data.data = this.data;

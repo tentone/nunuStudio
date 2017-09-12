@@ -20,13 +20,13 @@ function Image(url, encoding)
 
 	if(url !== undefined)
 	{
-		//Arraybuffer data
+		//ArrayBuffer
 		if(url instanceof window.ArrayBuffer)
 		{
 			this.loadTGAData(url);
 		}
-		//Base64 data
-		else if(url.startsWith("data:image"))
+		//Base64
+		else if(Base64Utils.isBase64(url))
 		{
 			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";

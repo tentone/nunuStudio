@@ -56,7 +56,7 @@ FontLoader.prototype.parse = function(json)
 		if(json.format === "arraybuffer")
 		{
 			font.format = json.format;
-			font.data = json.data;
+			font.data = (json.data.toArrayBuffer !== undefined) ? json.data.toArrayBuffer() : json.data;
 			font.loadTTF();
 		}
 		else if(json.format === "base64")

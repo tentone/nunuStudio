@@ -18,6 +18,40 @@ function Base64Utils(){}
 Base64Utils.encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 /**
+ * Check if some data is encoded as base64.
+ *
+ * This is a fast test that picks some random position in the string to check if they are valid base64 characters.
+ *
+ * @method isBase64
+ * @param {Object} data Data to be tested.
+ * @return {Boolean} True if data is base64 encoded, false otherwise.
+ */
+Base64Utils.isBase64 = function(data)
+{
+	if(typeof data !== "string")
+	{
+		return false;
+	}
+
+	//Check if it has a base64 header
+	if(data.startsWith("data:"))
+	{
+		return true;
+	}
+
+	//Check 8 positions at random (assuming that it does not have header)
+	for(var i = 0; i < 8; i++)
+	{
+		if(!Base64Utils.encoding.includes(data.charAt(Math.floor(data.length * Math.random()))))
+		{
+			return false;
+		}
+	}
+
+	return true;
+};
+
+/**
  * Remove base64 header from data.
  * 
  * Usefull for removing the heander from image, audio, video, etc.

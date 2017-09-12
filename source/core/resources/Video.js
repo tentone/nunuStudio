@@ -19,7 +19,7 @@ function Video(url, encoding)
 	if(url !== undefined)
 	{	
 		//Base64 data
-		if(url.startsWith("data:video"))
+		if(Base64Utils.isBase64(url))
 		{
 			this.encoding = Base64Utils.getFileFormat(url);
 			this.format = "base64";
