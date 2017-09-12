@@ -57,5 +57,8 @@ AudioLoader.prototype.parse = function(json)
 		audio.data = json.data;
 	}
 
+	console.log("AudioLoader parser JSON input", json);
+	console.log("AudioLoader parser Result output", audio);
+
 	return audio;
 };
