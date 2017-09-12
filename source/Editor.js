@@ -1321,16 +1321,14 @@ Editor.loadTexture = function(file, onLoad)
 	};
 
 
-	reader.readAsArrayBuffer(file);
-
-	/*if(extension === "tga")
+	if(extension === "tga")
 	{
 		reader.readAsArrayBuffer(file);
 	}
 	else
 	{
 		reader.readAsDataURL(file);
-	}*/
+	}
 };
 
 //Load video texture from file object
@@ -1353,7 +1351,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 		}
 	};
 
-	reader.readAsArrayBuffer(file);
+	reader.readAsDataURL(file);
 };
 
 //Load audio from file object
