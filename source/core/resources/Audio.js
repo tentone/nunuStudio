@@ -13,14 +13,21 @@
 function Audio(url, encoding)
 {
 	Resource.call(this, "audio", "Audio");
-
+	
 	if(url !== undefined)
 	{
-		//Arraybuffer data
+		//Arraybuffer
 		if(url instanceof window.ArrayBuffer)
 		{
 			this.data = url;
 			this.encoding = (encoding !== undefined) ? encoding : "";
+			this.format = "arraybuffer";
+		}
+		//Base64
+		else if(Base64Utils.isBase64(url))
+		{
+			this.encoding = (encoding !== undefined) ? encoding : "";
+			this.data = ArraybufferUtils.fromBase64(url);
 			this.format = "arraybuffer";
 		}
 		//URL
@@ -77,13 +84,8 @@ Audio.prototype.toJSON = function(meta)
 	data.encoding = this.encoding;
 	data.data = this.data;
 	data.format = this.format;
-	
-	//data.data = Base64Utils.fromArraybuffer(this.data);
-	//data.format = "base64";
 
 	meta.audio[this.uuid] = data;
-
-	console.log("Audio toJSON result", data);
 
 	return data;
 };

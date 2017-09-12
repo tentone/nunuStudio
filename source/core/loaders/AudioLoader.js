@@ -51,14 +51,16 @@ AudioLoader.prototype.parse = function(json)
 		audio.format = "arraybuffer";
 		audio.data = ArraybufferUtils.fromBase64(json.data);
 	}
+	else if(json.format === "arraybuffer")
+	{
+		audio.format = json.format;
+		audio.data = (json.data.toArrayBuffer !== undefined) ? json.data.toArrayBuffer() : json.data;
+	}
 	else
 	{
 		audio.format = json.format;
 		audio.data = json.data;
 	}
-
-	console.log("AudioLoader parser JSON input", json);
-	console.log("AudioLoader parser Result output", audio);
 
 	return audio;
 };
