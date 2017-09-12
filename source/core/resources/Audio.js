@@ -75,13 +75,15 @@ Audio.prototype.toJSON = function(meta)
 	}
 
 	data.encoding = this.encoding;
-	data.data = Base64Utils.fromArraybuffer(this.data);
-	data.format = "base64";
+	data.data = this.data;
+	data.format = this.format;
+	
+	//data.data = Base64Utils.fromArraybuffer(this.data);
+	//data.format = "base64";
 
-	//data.data = this.data;
-	//data.format = this.format;
- 
 	meta.audio[this.uuid] = data;
+
+	console.log("Audio toJSON result", data);
 
 	return data;
 };

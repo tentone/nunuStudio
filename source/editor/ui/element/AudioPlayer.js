@@ -99,22 +99,25 @@ function AudioPlayer(parent)
 
 	this.track.onmousemove = function(event)
 	{
-		var progress = event.layerX / this.offsetWidth;
-		self.time = progress * self.buffer.duration;
-
-		if(self.playing)
+		if(self.dragging && self.buffer !== null)
 		{
-			self.play(self.time);
-		}
+			var progress = event.layerX / this.offsetWidth;
+			self.time = progress * self.buffer.duration;
 
-		progress *= 100;
-		self.progress.style.width = progress + "%";
-		self.scrubber.style.left = progress + "%";
+			if(self.playing)
+			{
+				self.play(self.time);
+			}
+
+			progress *= 100;
+			self.progress.style.width = progress + "%";
+			self.scrubber.style.left = progress + "%";
+		}
 	};
 
 	this.onMouseMove = function(event)
 	{
-		if(self.dragging)
+		if(self.dragging && self.buffer !== null)
 		{
 			self.seekProgress = (event.pageX - self.seekStart) / (self.size.x - self.size.y * 1.1);
 			self.seekProgress += self.seekTime / self.buffer.duration;
