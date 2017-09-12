@@ -100,14 +100,20 @@ Video.prototype.toJSON = function(meta)
 	}
 
 	data.encoding = this.encoding;
-	data.format = this.format;
 
 	if(this.format === "arraybuffer")
 	{
+		data.format = this.format;
 		data.data = this.arraybuffer;
+	}
+	else if(this.format === "base64")
+	{
+		data.format = "arraybuffer";
+		data.data = ArraybufferUtils.fromBase64(Base64Utils.removeHeader(this.data));
 	}
 	else
 	{
+		data.format = this.format;
 		data.data = this.data;
 	}
 
