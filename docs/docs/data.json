@@ -10446,7 +10446,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 64,
+            "line": 66,
             "description": "Check if a file name refers to a supported binary image file.",
             "itemtype": "method",
             "name": "fileIsImage",
@@ -10467,7 +10467,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 88,
+            "line": 90,
             "description": "Create a new image with 1x1 resolution with solid color.\n\nCan be called externally on data load error to load dummy data.",
             "itemtype": "method",
             "name": "createSolidColor",
@@ -10483,7 +10483,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 111,
+            "line": 113,
             "description": "Load arraybuffer data to this image.\n\nCreates a blob with data to be stored on data atribute and used by external objects.",
             "itemtype": "method",
             "name": "loadArrayBufferData",
@@ -10504,7 +10504,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 131,
+            "line": 133,
             "description": "Load .tga file from ArrayBuffer data.\n\nAfter loading data is converted to JPEG format and stored in base64 encoding.",
             "itemtype": "method",
             "name": "loadTGAData",
@@ -10520,7 +10520,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 147,
+            "line": 149,
             "description": "Check if this image has alpha channel.\n\nThis checks the file encoding if the file a GIF or a PNG is assumed that the file has alpha channel.",
             "itemtype": "method",
             "name": "hasTransparency",
@@ -10533,7 +10533,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 160,
+            "line": 162,
             "description": "Compresses image data to JPEG or PNG and stores in base64 encoding.\n\nIf the image has transparency it is stored as PNG otherwise the image is stored in JPEG with 1.0 quality.\n\nCan be used to compress data and save space.",
             "itemtype": "method",
             "name": "encodeData",
@@ -10542,7 +10542,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 208,
+            "line": 210,
             "description": "Serialize Image resource to json.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11030,7 +11030,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Video.js",
-            "line": 40,
+            "line": 43,
             "description": "Check if a file name refers to a supported video file.",
             "itemtype": "method",
             "name": "fileIsVideo",
@@ -11051,7 +11051,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Video.js",
-            "line": 61,
+            "line": 64,
             "description": "Load arraybuffer data to this image.\n\nCreates a blob with data to be stored on data atribute and used by external objects.",
             "itemtype": "method",
             "name": "loadArrayBufferData",
@@ -11072,7 +11072,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Video.js",
-            "line": 81,
+            "line": 84,
             "description": "Serialize resource to json.\n\nVideo data is stored in Base64.",
             "itemtype": "method",
             "name": "toJSON",

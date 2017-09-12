@@ -23,7 +23,14 @@ function Image(url, encoding)
 		//ArrayBuffer
 		if(url instanceof window.ArrayBuffer)
 		{
-			this.loadTGAData(url);
+			if(encoding === "tga")
+			{
+				this.loadTGAData(url);
+			}
+			else
+			{
+				this.loadArrayBufferData(url, encoding);
+			}
 		}
 		//Base64
 		else if(Base64Utils.isBase64(url))
@@ -35,21 +42,16 @@ function Image(url, encoding)
 		//URL
 		else
 		{
-			this.encoding = FileSystem.getFileExtension(url);
+			var encoding = FileSystem.getFileExtension(url);
+			var data = FileSystem.readFileArrayBuffer(url);
 
-			if(this.encoding === "tga")
+			if(encoding === "tga")
 			{
-				this.loadTGAData(FileSystem.readFileArrayBuffer(url));
-			}
-			else if(this.encoding === "gif")
-			{
-				this.data = "data:image/" + this.encoding + ";base64," + FileSystem.readFileBase64(url);
-				this.format = "base64";
+				this.loadTGAData(data);
 			}
 			else
 			{
-				this.format = "url";
-				this.data = url;
+				this.loadArrayBufferData(data, encoding);
 			}
 		}
 	}
@@ -230,16 +232,15 @@ Image.prototype.toJSON = function(meta)
 
 	data.encoding = this.encoding;
 	data.format = this.format;
-	data.data = this.data;
 
-	/*if(this.format === "arraybuffer")
+	if(this.format === "arraybuffer")
 	{
 		data.data = this.arraybuffer;
 	}
 	else
 	{
 		data.data = this.data;
-	}*/
+	}
 	
 	meta.images[this.uuid] = data;
 
