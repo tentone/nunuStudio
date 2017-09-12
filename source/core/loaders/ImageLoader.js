@@ -71,12 +71,10 @@ ImageLoader.prototype.loadJSON = function(url, onLoad, onProgress, onError)
  */
 ImageLoader.prototype.parse = function(json)
 {
-	var image = new Image(json.data, json.encoding);
+	var image = new Image((json.data.toArrayBuffer !== undefined) ? json.data.toArrayBuffer() : json.data, json.encoding);
 	
 	image.name = json.name;
 	image.uuid = json.uuid;
-	image.encoding = json.encoding;
-	image.format = json.format;
 
 	return image;
 };

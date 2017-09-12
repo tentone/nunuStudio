@@ -1303,7 +1303,7 @@ Editor.loadProgram = function(file, binary)
 Editor.loadTexture = function(file, onLoad)
 {
 	var name = FileSystem.getFileName(file.name);
-	var extension = file.name.split(".").pop().toLowerCase();
+	var extension = FileSystem.getFileExtension(file.name);
 	var reader = new FileReader();
 
 	reader.onload = function()
@@ -1320,26 +1320,19 @@ Editor.loadTexture = function(file, onLoad)
 		}
 	};
 
-
-	if(extension === "tga")
-	{
-		reader.readAsArrayBuffer(file);
-	}
-	else
-	{
-		reader.readAsDataURL(file);
-	}
+	reader.readAsArrayBuffer(file);
 };
 
 //Load video texture from file object
 Editor.loadVideoTexture = function(file, onLoad)
 {
 	var name = FileSystem.getFileName(file.name);
+	var extension = FileSystem.getFileExtension(file.name);
 
 	var reader = new FileReader();
 	reader.onload = function()
 	{
-		var texture = new VideoTexture(new Video(reader.result));
+		var texture = new VideoTexture(new Video(reader.result, extension));
 		texture.name = name;
 
 		Editor.program.addTexture(texture);
@@ -1351,7 +1344,7 @@ Editor.loadVideoTexture = function(file, onLoad)
 		}
 	};
 
-	reader.readAsDataURL(file);
+	reader.readAsArrayBuffer(file);
 };
 
 //Load audio from file object
@@ -1381,7 +1374,7 @@ Editor.loadAudio = function(file, onLoad)
 Editor.loadFont = function(file, onLoad)
 {
 	var name = FileSystem.getFileName(file.name);
-	var extension = file.name.split(".").pop().toLowerCase();
+	var extension = FileSystem.getFileExtension(file.name);
 	var reader = new FileReader();
 	
 	reader.onload = function()

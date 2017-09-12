@@ -155,9 +155,10 @@
 		- Union
 	- Immediate mode
 	- Postprocessing
-		-Postprocessing editor
+		- Postprocessing editor
 	- Resize is now a part of Object3D
-	- Timeliner integration (@zz85)
+	- Improvements to nsp files
+		- Moved from base64 to raw binary data.
 
 ### Tech
 nunuStudio is built on top of a number of open source projects

@@ -62,9 +62,9 @@ function AssetExplorer(parent, closeable, container, index)
 	{
 		FileSystem.chooseFile(function(files)
 		{	
-			if(files.length > 0)
+			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadModel(files[0]);
+				Editor.loadModel(files[i]);
 			}
 		}, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x, .js");
 	}, Editor.filePath + "icons/models/models.png");
@@ -77,9 +77,9 @@ function AssetExplorer(parent, closeable, container, index)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			if(files.length > 0)
+			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadTexture(files[0]);
+				Editor.loadTexture(files[i]);
 			}
 		}, "image/*");
 	}, Editor.filePath + "icons/misc/image.png");
@@ -89,23 +89,24 @@ function AssetExplorer(parent, closeable, container, index)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			if(files.length > 0)
+			for(var i = 0; i < files.length; i++)
 			{
-				var file = files[0];
+				var file = files[i];
 				var name = FileSystem.getFileName(file.name);
-				var extension = file.name.split(".").pop().toLowerCase();
+				var extension = FileSystem.getFileExtension(file.name);
+
 				var reader = new FileReader();
 
 				reader.onload = function()
 				{
-					var texture = new SpriteSheetTexture(new Image(reader.result), 1, 1 ,1);
+					var texture = new SpriteSheetTexture(new Image(reader.result, extension), 1, 1 ,1);
 					texture.name = name;
 
 					Editor.program.addTexture(texture);
 					Editor.updateObjectViews();
 				};
 
-				reader.readAsDataURL(file);
+				reader.readAsArrayBuffer(file);
 			}
 		}, "image/*");
 	}, Editor.filePath + "icons/misc/grid.png");
@@ -135,9 +136,9 @@ function AssetExplorer(parent, closeable, container, index)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			if(files.length > 0)
+			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadVideoTexture(files[0]);
+				Editor.loadVideoTexture(files[i]);
 			}
 		}, "video/*");
 	}, Editor.filePath + "icons/misc/video.png");
@@ -157,9 +158,9 @@ function AssetExplorer(parent, closeable, container, index)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			if(files.length > 0)
+			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadFont(files[0]);
+				Editor.loadFont(files[i]);
 			}
 		}, ".json, .ttf, .otf");
 	}, Editor.filePath + "icons/misc/font.png");
@@ -171,9 +172,9 @@ function AssetExplorer(parent, closeable, container, index)
 		{
 			FileSystem.chooseFile(function(files)
 			{
-				if(files.length > 0)
+				for(var i = 0; i < files.length; i++)
 				{
-					var file = files[0].path;
+					var file = files[i].path;
 
 					var json = FileSystem.readFile(file);
 					var atlas = FileSystem.readFile(file.replace("json", "atlas"));
@@ -185,7 +186,7 @@ function AssetExplorer(parent, closeable, container, index)
 					Editor.addToScene(animation);
 					Editor.updateObjectViews();
 				}
-			}, ".json");
+			}, ".json, .spine");
 		}, Editor.filePath + "icons/misc/spine.png");
 	}
 
@@ -194,9 +195,9 @@ function AssetExplorer(parent, closeable, container, index)
 	{
 		FileSystem.chooseFile(function(files)
 		{
-			if(files.length > 0)
+			for(var i = 0; i < files.length; i++)
 			{
-				Editor.loadAudio(files[0]);
+				Editor.loadAudio(files[i]);
 			}
 		}, "audio/*");
 	}, Editor.filePath + "icons/misc/audio.png");
