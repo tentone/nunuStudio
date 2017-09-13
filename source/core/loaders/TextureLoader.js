@@ -242,8 +242,19 @@ TextureLoader.prototype.parse = function(json, onLoad)
 	texture.name = json.name;
 	texture.mapping = json.mapping;
 
-	texture.offset = new THREE.Vector2(json.offset[0], json.offset[1]);
-	texture.repeat = new THREE.Vector2(json.repeat[0], json.repeat[1]);
+	texture.offset.set(json.offset[0], json.offset[1]);
+	texture.repeat.set(json.repeat[0], json.repeat[1]);
+
+	if(json.center !== undefined)
+	{
+		texture.center.set(json.center[0], json.center[1]);
+	}
+
+	if(json.rotation !== undefined)
+	{
+		texture.rotation = json.rotation;
+	}
+	
 	texture.wrapS = json.wrap[0];
 	texture.wrapT = json.wrap[1];
 
