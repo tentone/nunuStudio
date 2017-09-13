@@ -11626,7 +11626,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 116,
+            "line": 115,
             "description": "Dispose texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -11635,7 +11635,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 128,
+            "line": 127,
             "description": "Create JSON description for texture, serializes image used in the texture\nTHREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
             "params": [
                 {
