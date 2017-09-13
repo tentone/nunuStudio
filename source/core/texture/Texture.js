@@ -78,7 +78,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 
 	//Image source
 	this.image.src = this.img.data;
-	
+
 	this.image.onload = function()
 	{
 		self.needsUpdate = true;
@@ -94,7 +94,6 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 	if(this.img.encoding === "gif")
 	{
 		this.generateMipmaps = false;
-		
 		this.magFilter = THREE.LinearFilter;
 		this.minFilter = THREE.LinearFilter;
 
@@ -106,7 +105,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 				requestAnimationFrame(update);
 			}
 		}
-
+		
 		update();
 	}
 }

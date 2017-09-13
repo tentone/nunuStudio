@@ -42,16 +42,16 @@ function Image(url, encoding)
 		//URL
 		else
 		{
-			var encoding = FileSystem.getFileExtension(url);
-			var data = FileSystem.readFileArrayBuffer(url);
-
-			if(encoding === "tga")
+			this.encoding = FileSystem.getFileExtension(url);
+			
+			if(this.encoding === "tga")
 			{
-				this.loadTGAData(data);
+				this.loadTGAData(FileSystem.readFileArrayBuffer(url));
 			}
 			else
 			{
-				this.loadArrayBufferData(data, encoding);
+				this.format = "url";
+				this.data = url;
 			}
 		}
 	}
@@ -227,7 +227,7 @@ Image.prototype.toJSON = function(meta)
 
 	if(this.format === "url")
 	{
-		this.encodeData();
+		this.loadArrayBufferData(FileSystem.readFileArrayBuffer(this.data), this.encoding);
 	}
 
 	data.encoding = this.encoding;

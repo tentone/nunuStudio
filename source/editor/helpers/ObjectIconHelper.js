@@ -2,9 +2,17 @@
 
 function ObjectIconHelper(object, icon)
 {
+	var element = document.createElement("img");
+	var texture = new THREE.Texture(element);
+	element.onload = function()
+	{
+		texture.needsUpdate = true;
+	};
+	element.src = icon;
+
 	THREE.Sprite.call(this, new THREE.SpriteMaterial(
 	{
-		map: new Texture(new Image(icon)),
+		map: texture,
 		transparent: true,
 		opacity: 0.8,
 		depthTest: false,
