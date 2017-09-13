@@ -26,6 +26,9 @@ THREE.Texture.prototype.toJSON = function(meta)
 
 		repeat: [this.repeat.x, this.repeat.y],
 		offset: [this.offset.x, this.offset.y],
+		center: [this.center.x, this.center.y],
+		rotation: this.rotation,
+
 		wrap: [this.wrapS, this.wrapT],
 
 		minFilter: this.minFilter,
@@ -37,5 +40,7 @@ THREE.Texture.prototype.toJSON = function(meta)
 
 	meta.textures[this.uuid] = data;
 	
+console.log("serialize");
+
 	return data;
 };

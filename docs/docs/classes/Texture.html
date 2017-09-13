@@ -398,7 +398,15 @@
 						
 											<ul class="index-list properties extends">
 													<li class="index-item property">
+														<a href="#property_center">center</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_disposed">disposed</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_flipY">flipY</a>
 						
 													</li>
 													<li class="index-item property">
@@ -410,7 +418,35 @@
 						
 													</li>
 													<li class="index-item property">
+														<a href="#property_mipmaps">mipmaps</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_name">name</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_name">name</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_offset">offset</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_premultiplyAlpha">premultiplyAlpha</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_repeat">repeat</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_rotation">rotation</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_uuid">uuid</a>
 						
 													</li>
 											</ul>
@@ -506,6 +542,29 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
+											<div id="property_center" class="property item">
+												<h3 class="name"><code>center</code></h3>
+												<span class="type">Vector2</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Indicates where the center of rotation is. To rotate around the center point set this value to (0.5, 0.5).</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_disposed" class="property item">
 												<h3 class="name"><code>disposed</code></h3>
 												<span class="type">Boolean</span>
@@ -528,6 +587,29 @@
 												</div>
 											
 													<p><strong>Default:</strong> false</p>
+											
+											
+											</div>
+											<div id="property_flipY" class="property item">
+												<h3 class="name"><code>flipY</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Flips the image's Y axis to match the WebGL texture coordinate space.</p>
+											
+												</div>
+											
 											
 											
 											</div>
@@ -577,6 +659,29 @@
 											
 											
 											</div>
+											<div id="property_mipmaps" class="property item">
+												<h3 class="name"><code>mipmaps</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Array of user-specified mipmaps (optional).</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_name" class="property item">
 												<h3 class="name"><code>name</code></h3>
 												<span class="type">String</span>
@@ -598,6 +703,145 @@
 												</div>
 											
 													<p><strong>Default:</strong> &quot;texture&quot;</p>
+											
+											
+											</div>
+											<div id="property_name" class="property item">
+												<h3 class="name"><code>name</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Name of the texture (doesn't need to be unique).</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_offset" class="property item">
+												<h3 class="name"><code>offset</code></h3>
+												<span class="type">Vector2</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>How much a single repetition of the texture is offset from the beginning, in each direction U and V.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_premultiplyAlpha" class="property item">
+												<h3 class="name"><code>premultiplyAlpha</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_repeat" class="property item">
+												<h3 class="name"><code>repeat</code></h3>
+												<span class="type">Vector2</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set greater than 1 in either direction, the corresponding Wrap parameter should also be set to .</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="property_rotation" class="property item">
+												<h3 class="name"><code>rotation</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>How much the texture is rotated around the center point, in radians. Postive values are counter-clockwise.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> 0</p>
+											
+											
+											</div>
+											<div id="property_uuid" class="property item">
+												<h3 class="name"><code>uuid</code></h3>
+												<span class="type">String</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.</p>
+											
+												</div>
+											
 											
 											
 											</div>

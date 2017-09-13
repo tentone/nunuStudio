@@ -11584,7 +11584,68 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 24,
+            "line": 23,
+            "description": "Name of the texture (doesn't need to be unique).",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 28,
+            "description": "UUID of this object instance. This gets automatically assigned, so this shouldn't be edited.",
+            "itemtype": "property",
+            "name": "uuid",
+            "type": "{String}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 33,
+            "description": "How much a single repetition of the texture is offset from the beginning, in each direction U and V.",
+            "itemtype": "property",
+            "name": "offset",
+            "type": "{Vector2}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 39,
+            "description": "How many times the texture is repeated across the surface, in each direction U and V.  If repeat is set greater than 1 in either direction, the corresponding Wrap parameter should also be set to .",
+            "itemtype": "property",
+            "name": "repeat",
+            "type": "{Vector2}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 45,
+            "description": "Indicates where the center of rotation is. To rotate around the center point set this value to (0.5, 0.5).",
+            "itemtype": "property",
+            "name": "center",
+            "type": "{Vector2}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 51,
+            "description": "How much the texture is rotated around the center point, in radians. Postive values are counter-clockwise.",
+            "itemtype": "property",
+            "name": "rotation",
+            "type": "{Number}",
+            "default": "0",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 58,
             "description": "Image attached to the texture",
             "itemtype": "property",
             "name": "img",
@@ -11594,7 +11655,27 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 30,
+            "line": 64,
+            "description": "False by default, which is the norm for PNG images. Set to true if the RGB values have been stored premultiplied by alpha.",
+            "itemtype": "property",
+            "name": "premultiplyAlpha",
+            "type": "{Boolean}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 70,
+            "description": "Flips the image's Y axis to match the WebGL texture coordinate space.",
+            "itemtype": "property",
+            "name": "flipY",
+            "type": "{Boolean}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 76,
             "description": "DOM element attached to the texture",
             "itemtype": "property",
             "name": "image",
@@ -11604,7 +11685,17 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 36,
+            "line": 82,
+            "description": "Array of user-specified mipmaps (optional).",
+            "itemtype": "property",
+            "name": "mipmaps",
+            "type": "{Array}",
+            "class": "Texture",
+            "module": "Textures"
+        },
+        {
+            "file": "..\\..\\source\\core\\texture\\Texture.js",
+            "line": 88,
             "description": "Name of the texture",
             "itemtype": "property",
             "name": "name",
@@ -11615,7 +11706,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 43,
+            "line": 95,
             "description": "Flag used to know is the texture has been disposed.\n\nIs used to control animation when using a gif as a texture.",
             "itemtype": "property",
             "name": "disposed",
@@ -11626,7 +11717,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 115,
+            "line": 166,
             "description": "Dispose texture.",
             "itemtype": "method",
             "name": "dispose",
@@ -11635,7 +11726,7 @@
         },
         {
             "file": "..\\..\\source\\core\\texture\\Texture.js",
-            "line": 127,
+            "line": 178,
             "description": "Create JSON description for texture, serializes image used in the texture\nTHREE.Texture serialization is different inside nunuStudio, the THREE.Texture class does not serialize any image data.",
             "params": [
                 {
