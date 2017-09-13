@@ -40,22 +40,17 @@ function TextureEditor(parent, closeable, container, index)
 	alpha.minFilter = THREE.Nearest;
 	alpha.repeat.set(5, 5);
 
-	this.background = new THREE.Sprite(new THREE.SpriteMaterial({map: alpha}));
+	var geometry = new THREE.PlaneBufferGeometry(1, 1);
+
+	this.background = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({map: alpha}));
 	this.background.position.set(0, 0, -2);
 	this.background.scale.set(2.5, 2.5, 0);
 	this.scene.add(this.background);
-
-	//Sprite
-	this.sprite = new THREE.Sprite(new THREE.SpriteMaterial());
-	this.sprite.position.set(0, 0, -1);
-	this.scene.add(this.sprite);
 	
 	//Plane geometry
-	//var material = new THREE.MeshBasicMaterial();
-	//material.transparent = true;
-	//this.sprite = new THREE.Mesh(new THREE.PlaneBufferGeometry(1, 1), material);
-	//this.sprite.position.set(0, 0, -1);
-	//this.scene.add(this.sprite);
+	this.sprite = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({transparent: true}));
+	this.sprite.position.set(0, 0, -1);
+	this.scene.add(this.sprite);
 
 	//Form
 	this.form = new Form(this.division.divB);
@@ -151,6 +146,24 @@ function TextureEditor(parent, closeable, container, index)
 		}
 	});
 	this.form.add(this.offset);
+	this.form.nextRow();
+
+	//Center
+	this.form.addText("Center");
+	this.center = new CoordinatesBox(this.form.element);
+	this.center.setMode(CoordinatesBox.VECTOR2);
+	this.center.size.set(120, 18);
+	this.center.setStep(0.01);
+	this.center.setOnChange(function()
+	{
+		if(self.texture !== null)
+		{
+			var value = self.center.getValue();
+			self.texture.center.set(value.x, value.y);
+			self.updatePreview();
+		}
+	});
+	this.form.add(this.center);
 	this.form.nextRow();
 
 	//Rotation
@@ -253,6 +266,7 @@ TextureEditor.prototype.activate = function()
 	this.wrapS.setValue(texture.wrapS);
 	this.repeat.setValue(texture.repeat);
 	this.offset.setValue(texture.offset);
+	this.center.setValue(texture.center);
 	this.rotation.setValue(texture.rotation);
 	this.magFilter.setValue(texture.magFilter);
 	this.minFilter.setValue(texture.minFilter);
