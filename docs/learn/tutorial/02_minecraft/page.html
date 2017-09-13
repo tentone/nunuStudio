@@ -81,7 +81,38 @@
 
 			<p>Lets start by creating a simple minecraft like world using trignometric functions.</p>
 
+			<pre><code>function initialize()
+{
+	var geometry = new BoxBufferGeometry(1, 1, 1);
+	var material = program.getMaterialByName("phong");
+	
+	for(var x = 0; x < 200; x++)
+	{
+		for(var z = 0; z < 200; z++)
+		{
+			var cube = new Mesh(geometry, material);
+			cube.position.set(x, Math.floor(Math.cos(x / 25) * 5 + Math.cos(z / 20 * Math.sin(x / 100) * 2) * 3), z);
+			scene.add(cube);
+		}
+	}
+}</code></pre>
+
 			<img src="images/a.png" class="img-normal"></img>
+
+			<h3 class="black">Adding physics</h3>
+			<p>TODO</p>
+
+			<h3 class="black">Mouse input</h3>
+			<p>TODO</p>
+
+			<h3 class="black">Creating block</h3>
+			<p>TODO</p>
+
+			<h3 class="black">Water</h3>
+			<p>TODO</p>
+
+			<h3 class="black">Final result</h3>
+			<p>TODO</p>
 		</div>
 	</section>
 
