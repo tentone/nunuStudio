@@ -187,6 +187,7 @@ ScriptEditor.prototype.updateMetadata = function()
 		if(this.script.parent === null)
 		{
 			this.close();
+			return;
 		}
 
 		//Check if object exists in parent
