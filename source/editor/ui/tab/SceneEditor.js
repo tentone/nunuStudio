@@ -355,18 +355,24 @@ SceneEditor.prototype.updateMetadata = function()
 	{
 		this.setName(this.scene.name);
 
-		//Check if scene exists in program
-		var scenes = Editor.program.children;
-		for(var i = 0; i < scenes.length; i++)
+		//Check if object has a parent
+		if(this.scene.parent === null)
 		{
-			if(this.scene.uuid === scenes[i].uuid)
+			this.close();
+		}
+
+		//Check if object exists in parent
+		var children = this.scene.parent.children;
+		for(var i = 0; i < children.length; i++)
+		{
+			if(this.scene.uuid === children[i].uuid)
 			{
 				return;
 			}
 		}
 
 		//If not found close tab
-		if(i >= scenes.length)
+		if(i >= children.length)
 		{
 			this.close();
 		}
@@ -395,7 +401,7 @@ SceneEditor.prototype.activate = function()
 {
 	TabElement.prototype.activate.call(this);
 
-	if(this.scene !== null)
+	if(this.scene instanceof Scene)
 	{
 		Editor.program.scene = this.scene;
 	}
@@ -883,7 +889,7 @@ SceneEditor.prototype.render = function()
 
 		//Render scene
 		renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
-		renderer.render(Editor.program.scene, this.camera);
+		renderer.render(this.scene, this.camera);
 
 		//Render tools
 		renderer.render(this.helperScene, this.camera);
@@ -895,7 +901,7 @@ SceneEditor.prototype.render = function()
 		{
 			var width = Settings.editor.cameraPreviewPercentage * this.canvas.width;
 			var height = Settings.editor.cameraPreviewPercentage * this.canvas.height;
-			var scene = Editor.program.scene;
+			var scene = this.scene;
 			
 			var position = Settings.editor.cameraPreviewPosition;
 			var x = (position === Settings.BOTTOM_RIGHT || position === Settings.TOP_RIGHT) ? this.canvas.width - width - 10 : 10;
@@ -920,7 +926,7 @@ SceneEditor.prototype.render = function()
 				camera.render(renderer, scene);
 			}
 			//Preview all cameras in use
-			else if(Editor.program.scene.cameras.length > 0)
+			else if(this.scene.cameras !== undefined && this.scene.cameras.length > 0)
 			{
 				renderer.clear();
 
@@ -1018,7 +1024,7 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 {
 	this.updateRaycasterFromMouse();
 
-	var intersects = this.raycaster.intersectObjects(Editor.program.scene.children, true);
+	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
 	if(intersects.length > 0)
 	{	
 		if(this.keyboard.keyPressed(Keyboard.CTRL))

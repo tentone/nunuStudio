@@ -191,17 +191,9 @@ function TreeElement(container)
 			context.position.set(event.clientX - 5, event.clientY - 5);
 			
 			//Open editor
-			if(self.obj instanceof Script)
-			{
-				context.addOption("Script editor", openScriptTab);
-			}
-			else if(self.obj instanceof Scene)
+			if(self.obj instanceof Scene)
 			{
 				context.addOption("Scene editor", openSceneTab);
-			}
-			else if(self.obj instanceof ParticleEmitter)
-			{
-				context.addOption("Particle editor", openParticleTab);
 			}
 			else if(self.obj instanceof Program)
 			{
@@ -211,7 +203,20 @@ function TreeElement(container)
 					Editor.updateObjectViews();
 				});			
 			}
-			
+			else if(self.obj instanceof THREE.Object3D)
+			{
+				context.addOption("Object editor", openSceneTab);
+
+				if(self.obj instanceof Script)
+				{
+					context.addOption("Script editor", openScriptTab);
+				}
+				else if(self.obj instanceof ParticleEmitter)
+				{
+					context.addOption("Particle editor", openParticleTab);
+				}
+			}
+
 			//Rename
 			context.addOption("Rename", function()
 			{
@@ -467,11 +472,15 @@ function TreeElement(container)
 	var openSceneTab = function()
 	{
 		var tab = Interface.tab.getTab(SceneEditor, self.obj);
+
+		console.log(tab);
+
 		if(tab === null)
 		{
 			tab = Interface.tab.addTab(SceneEditor, true);
 			tab.attach(self.obj);
 		}
+
 		tab.select();
 	};
 

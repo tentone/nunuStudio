@@ -180,23 +180,27 @@ ScriptEditor.prototype.updateMetadata = function()
 {
 	if(this.script !== null)
 	{
-		var script = this.script;
-
 		//Set name
-		this.setName(script.name);
+		this.setName(this.script.name);
 
-		//Check if script exists in program
-		var found = false;
-		Editor.program.traverse(function(obj)
+		//Check if object has a parent
+		if(this.script.parent === null)
 		{
-			if(obj.uuid === script.uuid)
+			this.close();
+		}
+
+		//Check if object exists in parent
+		var children = this.script.parent.children;
+		for(var i = 0; i < children.length; i++)
+		{
+			if(this.script.uuid === children[i].uuid)
 			{
-				found = true;
+				return;
 			}
-		});
+		}
 
 		//If not found close tab
-		if(!found)
+		if(i >= children.length)
 		{
 			this.close();
 		}

@@ -455,23 +455,27 @@ ParticleEditor.prototype.updateMetadata = function()
 {
 	if(this.particle !== null)
 	{
-		var particle = this.particle;
-
-		this.setName(particle.name);
-		this.name.setText(particle.name);
+		this.setName(this.particle.name);
+		this.name.setText(this.particle.name);
 		
-		//Check if particle exists in program
-		var found = false;
-		Editor.program.traverse(function(obj)
+		//Check if object has a parent
+		if(this.particle.parent === null)
 		{
-			if(obj.uuid === particle.uuid)
+			this.close();
+		}
+
+		//Check if object exists in parent
+		var children = this.particle.parent.children;
+		for(var i = 0; i < children.length; i++)
+		{
+			if(this.particle.uuid === children[i].uuid)
 			{
-				found = true;
+				return;
 			}
-		});
+		}
 
 		//If not found close tab
-		if(!found)
+		if(i >= children.length)
 		{
 			this.close();
 		}
