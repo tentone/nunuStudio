@@ -294,7 +294,9 @@ THREE.Object3D.prototype.destroy = function()
 		{
 			this.dispose();
 		}
+		
 		this.parent.remove(this);
+		this.parent = null;
 	}
 };
 

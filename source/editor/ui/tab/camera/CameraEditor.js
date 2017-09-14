@@ -214,23 +214,27 @@ CameraEditor.prototype.updateMetadata = function()
 {
 	if(this.camera !== null)
 	{
-		var camera = this.camera;
-		
-		this.setName(camera.name);
-		this.name.setText(camera.name);
+		this.setName(this.camera.name);
+		this.name.setText(this.camera.name);
 
-		//Search for the camera
-		var found = false;
-		Editor.program.traverse(function(obj)
+		//Check if object has a parent
+		if(this.camera.parent === null)
 		{
-			if(obj.uuid === camera.uuid)
-			{
-				found = true;
-			}
-		});
+			this.close();
+		}
 
-		//If camera deleted remove tab
-		if(!found)
+		//Check if object exists in parent
+		var children = this.camera.parent.children;
+		for(var i = 0; i < children.length; i++)
+		{
+			if(this.camera.uuid === children[i].uuid)
+			{
+				return;
+			}
+		}
+
+		//If not found close tab
+		if(i >= children.length)
 		{
 			this.close();
 		}

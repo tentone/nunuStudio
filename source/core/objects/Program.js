@@ -458,14 +458,19 @@ Program.prototype.add = function(scene)
 {
 	if(scene instanceof Scene)
 	{
-		this.children.push(scene);
 		scene.parent = this;
+
+		this.children.push(scene);
 
 		//If first scene set as actual scene
 		if(this.children.length === 1)
 		{
 			this.scene = this.children[0];
 		}
+	}
+	else
+	{
+		console.warn("nunuStudio: Trying to add Object3D to program, only Scene objects allowed.");
 	}
 };
 
@@ -520,19 +525,13 @@ Program.prototype.addDefaultScene = function(material)
 	scene.add(sky);
 
 	//Box
-	var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-	var model = new Mesh(geometry, material);
-	model.receiveShadow = true;
-	model.castShadow = true;
+	var model = new Mesh(new THREE.BoxBufferGeometry(1, 1, 1), material);
 	model.name = "box";
 	scene.add(model);
 
 	//Floor
-	model = new Mesh(geometry, material);
-	model.scale.set(20, 1, 20);
+	model = new Mesh(new THREE.BoxBufferGeometry(20, 1, 20), material);
  	model.position.set(0, -1.0, 0);
-	model.receiveShadow = true;
-	model.castShadow = true;
 	model.name = "ground";
 	scene.add(model);
 
