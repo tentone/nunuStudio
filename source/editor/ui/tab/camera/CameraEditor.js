@@ -221,6 +221,7 @@ CameraEditor.prototype.updateMetadata = function()
 		if(this.camera.parent === null)
 		{
 			this.close();
+			return;
 		}
 
 		//Check if object exists in parent

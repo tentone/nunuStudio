@@ -462,6 +462,7 @@ ParticleEditor.prototype.updateMetadata = function()
 		if(this.particle.parent === null)
 		{
 			this.close();
+			return;
 		}
 
 		//Check if object exists in parent

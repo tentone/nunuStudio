@@ -359,6 +359,7 @@ SceneEditor.prototype.updateMetadata = function()
 		if(this.scene.parent === null)
 		{
 			this.close();
+			return;
 		}
 
 		//Check if object exists in parent
