@@ -93,6 +93,7 @@ ResourceManager.prototype.getImageByName = function(name)
 		}
 	}
 
+	console.warn("nunuStudio: Resource " + name + " not found");
 	return null;
 };
 
@@ -113,6 +114,7 @@ ResourceManager.prototype.getVideoByName = function(name)
 		}
 	}
 
+	console.warn("nunuStudio: Resource " + name + " not found");
 	return null;
 };
 
@@ -133,6 +135,7 @@ ResourceManager.prototype.getMaterialByName = function(name)
 		}
 	}
 
+	console.warn("nunuStudio: Resource " + name + " not found");
 	return null;
 };
 
@@ -208,6 +211,7 @@ ResourceManager.prototype.getTextureByName = function(name)
 		}
 	}
 
+	console.warn("nunuStudio: Resource " + name + " not found");
 	return null;
 };
 
@@ -326,6 +330,7 @@ ResourceManager.prototype.getFontByName = function(name)
 		}
 	}
 
+	console.warn("nunuStudio: Resource " + name + " not found");
 	return null;
 };
 
@@ -388,6 +393,7 @@ ResourceManager.prototype.getAudioByName = function(name)
 		}
 	}
 
+	console.warn("nunuStudio: Resource " + name + " not found");
 	return null;
 };
 
