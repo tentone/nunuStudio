@@ -243,6 +243,15 @@ function TreeElement(container)
 					{
 						self.obj.geometry.computeVertexNormals();
 					});
+
+					//Apply transformation to geometry
+					context.addOption("Apply transformation", function()
+					{
+						self.obj.geometry.applyMatrix(self.obj.matrixWorld);
+						self.obj.position.set(0, 0, 0);
+						self.obj.scale.set(1, 1, 1);
+						self.obj.rotation.set(0, 0, 0);
+					});
 				}
 				
 				//Add physics object
