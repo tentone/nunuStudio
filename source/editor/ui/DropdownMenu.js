@@ -211,65 +211,68 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 //Update interface
 DropdownMenu.prototype.updateInterface = function()
 {
-	if(this.visible && this.expanded)
-	{
-		//Options
-		for(var i = 0; i < this.options.length; i++)
-		{
-			this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
-			this.options[i].position.set(0, (this.optionsSize.y * i));
-			this.options[i].updateInterface();
-		}
-
-		//Panel position
-		if(this.optionsLocation === DropdownMenu.DOWN)
-		{
-			this.panel.style.top = (this.position.y + this.size.y) + "px";
-			this.panel.style.left = this.position.x + "px";
-		}
-		else if(this.optionsLocation === DropdownMenu.UP)
-		{
-			this.panel.style.top = (this.position.y - this.size.y) + "px";
-			this.panel.style.left = this.position.x + "px";
-		}
-		else if(this.optionsLocation === DropdownMenu.LEFT)
-		{
-			this.panel.style.top = this.position.y + "px";
-			this.panel.style.left = (this.position.x + this.size.x) + "px";
-		}
-		else if(this.optionsLocation === DropdownMenu.RIGHT)
-		{
-			this.panel.style.top = this.position.y + "px";
-			this.panel.style.left = (this.position.x - this.size.x) + "px";
-		}
-
-		this.panel.style.width = this.size.x + "px";
-		this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
-		this.panel.style.display = "block";
-	}
-	else
-	{
-		this.panel.style.display = "none";
-	}
-
 	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+
+		//Dropdown
+		if(this.expanded)
+		{
+			//Options
+			for(var i = 0; i < this.options.length; i++)
+			{
+				this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
+				this.options[i].position.set(0, (this.optionsSize.y * i));
+				this.options[i].updateInterface();
+			}
+
+			//Panel position
+			if(this.optionsLocation === DropdownMenu.DOWN)
+			{
+				this.panel.style.top = (this.position.y + this.size.y) + "px";
+				this.panel.style.left = this.position.x + "px";
+			}
+			else if(this.optionsLocation === DropdownMenu.UP)
+			{
+				this.panel.style.top = (this.position.y - this.size.y) + "px";
+				this.panel.style.left = this.position.x + "px";
+			}
+			else if(this.optionsLocation === DropdownMenu.LEFT)
+			{
+				this.panel.style.top = this.position.y + "px";
+				this.panel.style.left = (this.position.x + this.size.x) + "px";
+			}
+			else if(this.optionsLocation === DropdownMenu.RIGHT)
+			{
+				this.panel.style.top = this.position.y + "px";
+				this.panel.style.left = (this.position.x - this.size.x) + "px";
+			}
+
+			this.panel.style.width = this.size.x + "px";
+			this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
+			this.panel.style.display = "block";
+		}
+		else
+		{
+			this.panel.style.display = "none";
+		}
+
+		//Text
+		this.text.size.set(this.size.x, this.size.y);
+		this.text.visible = this.visible;
+		this.text.updateInterface();
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 	}
 
-	//Text
-	this.text.size.set(this.size.x, this.size.y);
-	this.text.visible = this.visible;
-	this.text.updateInterface();
 
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };
