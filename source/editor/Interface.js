@@ -857,7 +857,7 @@ Interface.initialize = function()
 		{
 			if(Editor.selectedObjects[i].geometry === undefined)
 			{
-				Editor.alert("Operation needs two objects with geometries");
+				Editor.alert("Operation needs two objects with geometries.");
 				return;
 			}
 		}
@@ -870,6 +870,36 @@ Interface.initialize = function()
 
 		Editor.addToScene(mesh);
 	}, Editor.filePath + "icons/misc/union.png");
+
+	//Compute mesh normals
+	Interface.editor.addOption("Compute normals", function()
+	{
+		if(Editor.selectedObjects.length < 1)
+		{
+			Editor.alert("Operation needs a mesh object.");
+			return;
+		}
+
+		Editor.selectedObjects[0].geometry.computeVertexNormals();
+
+	}, Editor.filePath + "icons/misc/probe.png");
+
+	//Apply tranformation
+	Interface.editor.addOption("Apply transformation", function()
+	{
+		if(Editor.selectedObjects.length < 1)
+		{
+			Editor.alert("Operation needs a mesh object.");
+			return;
+		}
+
+		var obj = Editor.selectedObjects[0];
+		obj.geometry.applyMatrix(obj.matrixWorld);
+		obj.position.set(0, 0, 0);
+		obj.scale.set(1, 1, 1);
+		obj.rotation.set(0, 0, 0);
+
+	}, Editor.filePath + "icons/tools/move.png");
 
 	//Project
 	Interface.project = new DropdownMenu();
