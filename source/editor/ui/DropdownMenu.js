@@ -66,7 +66,7 @@ function DropdownMenu(parent)
 	var self = this;
 
 	//Mouse over
-	this.element.onmouseover = function()
+	this.element.onmouseenter = function()
 	{
 		self.setExpanded(true);
 		self.element.style.cursor = "pointer";
@@ -82,7 +82,7 @@ function DropdownMenu(parent)
 	};
 	
 	//Mouve over
-	this.panel.onmouseover = function()
+	this.panel.onmouseenter = function()
 	{
 		self.setExpanded(true);
 	};
@@ -207,11 +207,10 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 		this.expanded = expanded;
 	}
 
-	//Dropdown
 	if(this.expanded)
 	{
 		this.panel.style.display = "block";
-		//Panel position
+
 		if(this.optionsLocation === DropdownMenu.DOWN)
 		{
 			this.panel.style.top = (this.position.y + this.size.y) + "px";

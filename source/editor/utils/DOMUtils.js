@@ -2,8 +2,8 @@
 
 function DOMUtils(){}
 
-//Check if a DOM element in visible in the viewport
-DOMUtils.inViewport = function(element)
+//Check if a DOM element in completely visible in the viewport
+DOMUtils.isVisible = function(element)
 {
 	var top = element.offsetTop;
 	var left = element.offsetLeft;
