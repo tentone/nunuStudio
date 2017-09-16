@@ -4,6 +4,9 @@ function AssetExplorer(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Assets", Editor.filePath + "icons/misc/new.png");
 
+	this.element.ondragover = undefined;
+	this.element.style.overflow = "visible";
+
 	//Assets
 	this.assets = document.createElement("div");
 	this.assets.style.position = "absolute";
@@ -44,15 +47,17 @@ function AssetExplorer(parent, closeable, container, index)
 		}
 	};
 
-	this.element.ondragover = undefined;
-
 	//Bar
-	this.bar = new Bar(this.element);
-	this.bar.element.style.width = "100%";
-	this.bar.element.style.height = "20px";
+	this.bar = document.createElement("div");
+	this.bar.style.backgroundColor = Editor.theme.barColor;
+	this.bar.style.overflow = "visible";
+	this.bar.style.position = "absolute";
+	this.bar.style.width = "100%";
+	this.bar.style.height = "20px";
+	this.element.appendChild(this.bar);
 
 	//Import Files
-	var menu = new DropdownMenu(this.bar.element);
+	var menu = new DropdownMenu(this.bar);
 	menu.setText("Import");
 	menu.size.set(100, 20);
 	menu.position.set(0,0);
@@ -202,8 +207,10 @@ function AssetExplorer(parent, closeable, container, index)
 		}, "audio/*");
 	}, Editor.filePath + "icons/misc/audio.png");
 	
+	menu.updateInterface();
+
 	//Create material
-	var material = new DropdownMenu(this.bar.element);
+	var material = new DropdownMenu(this.bar);
 	material.setText("Material");
 	material.size.set(100, 20);
 	material.position.set(100,0);
@@ -322,6 +329,8 @@ function AssetExplorer(parent, closeable, container, index)
 		Editor.updateObjectViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
+	material.updateInterface();
+
 	//Files in explorer
 	this.filesSize = new THREE.Vector2(70, 70);
 	this.filesSpacing = 0;
@@ -361,7 +370,8 @@ AssetExplorer.prototype.updateInterface = function()
 		this.element.style.display = "block";
 
 		//Asset position
-		var filesRow = Math.floor(this.files.length / ((this.files.length * (this.filesSize.x + this.filesSpacing)) / this.size.x));
+		var filesRow = Math.floor(this.files.length / (this.files.length * (this.filesSize.x + this.filesSpacing) / this.size.x));
+		
 		for(var i = 0; i < this.files.length; i++)
 		{
 			var row = Math.floor(i / filesRow);

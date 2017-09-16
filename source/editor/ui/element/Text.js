@@ -26,7 +26,6 @@ function Text(parent)
 	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
-	//Add element to document
 	this.parent.appendChild(this.element);
 }
 
@@ -58,17 +57,14 @@ Text.prototype.setAlignment = function(align)
 {
 	if(align === Text.CENTER)
 	{
-		this.element.style.textAlign = "center";
 		this.element.style.justifyContent = "center";
 	}
 	else if(align === Text.LEFT)
 	{
-		this.element.style.textAlign = "left";
 		this.element.style.justifyContent = "left";
 	}
 	else if(align === Text.RIGHT)
 	{
-		this.element.style.textAlign = "right";
 		this.element.style.justifyContent = "right";
 	}
 };

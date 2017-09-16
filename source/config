@@ -3,7 +3,7 @@
 		"autoUpdate": false,
 		"theme": "dark",
 		"filePreviewSize": 70,
-		"showStats": true,
+		"showStats": false,
 		"showUUID": false,
 		"showType": true,
 		"immediateMode": false

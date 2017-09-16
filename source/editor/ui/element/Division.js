@@ -8,7 +8,7 @@ function Division(parent)
 	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
-	this.element.style.overflow = "auto";
+	this.element.style.overflow = "visible";
 	this.element.style.pointerEvents = "none";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
