@@ -66,15 +66,16 @@ Interface.initialize = function()
 	//Tools text
 	Interface.toolText = new Text(Interface.toolBar.element);
 	Interface.toolText.setText("Tools");
-	Interface.toolText.position.set(Interface.toolBar.size.x / 2, 40);
+	Interface.toolText.size.set(40, 20);
+	Interface.toolText.position.set(0, 20);
 	Interface.toolText.updateInterface();
 
 	//Select
-	Interface.toolSelect = new ButtonImageToggle();
+	Interface.toolSelect = new ButtonImageToggle(Interface.toolBar.element);
 	Interface.toolSelect.selected = true;
 	Interface.toolSelect.setImage(Editor.filePath + "icons/tools/select.png");
 	Interface.toolSelect.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.toolSelect.position.set(0, 80);
+	Interface.toolSelect.position.set(0, 40);
 	Interface.toolSelect.setAltText("Select (CTRL+1)");
 	Interface.toolSelect.updateInterface();
 	Interface.toolSelect.setCallback(function()
@@ -83,10 +84,10 @@ Interface.initialize = function()
 	});
 
 	//Move
-	Interface.toolMove = new ButtonImageToggle();
+	Interface.toolMove = new ButtonImageToggle(Interface.toolBar.element);
 	Interface.toolMove.setImage(Editor.filePath + "icons/tools/move.png");
 	Interface.toolMove.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.toolMove.position.set(0, 120);
+	Interface.toolMove.position.set(0, 80);
 	Interface.toolMove.setAltText("Move (CTRL+2)");
 	Interface.toolMove.updateInterface();
 	Interface.toolMove.setCallback(function()
@@ -95,10 +96,10 @@ Interface.initialize = function()
 	});
 
 	//Resize
-	Interface.toolScale = new ButtonImageToggle();
+	Interface.toolScale = new ButtonImageToggle(Interface.toolBar.element);
 	Interface.toolScale.setImage(Editor.filePath + "icons/tools/resize.png");
 	Interface.toolScale.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.toolScale.position.set(0, 160);
+	Interface.toolScale.position.set(0, 120);
 	Interface.toolScale.setAltText("Scale (CTRL+3)");
 	Interface.toolScale.updateInterface();
 	Interface.toolScale.setCallback(function()
@@ -107,10 +108,10 @@ Interface.initialize = function()
 	});
 
 	//Rotate
-	Interface.toolRotate = new ButtonImageToggle();
+	Interface.toolRotate = new ButtonImageToggle(Interface.toolBar.element);
 	Interface.toolRotate.setImage(Editor.filePath + "icons/tools/rotate.png");
 	Interface.toolRotate.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.toolRotate.position.set(0, 200);
+	Interface.toolRotate.position.set(0, 160);
 	Interface.toolRotate.setAltText("Rotate (CTRL+4)");
 	Interface.toolRotate.updateInterface();
 	Interface.toolRotate.setCallback(function()
@@ -121,15 +122,16 @@ Interface.initialize = function()
 	//Add Text
 	Interface.addText = new Text(Interface.toolBar.element);
 	Interface.addText.setText("Add");
-	Interface.addText.position.set(Interface.toolBar.size.x / 2, 240);
+	Interface.addText.size.set(40, 20);
+	Interface.addText.position.set(0, 210);
 	Interface.addText.updateInterface();
 
 	//Add Models
-	Interface.addModel = new ButtonDrawer();
+	Interface.addModel = new ButtonDrawer(Interface.toolBar.element);
 	Interface.addModel.setImage(Editor.filePath + "icons/models/models.png");
 	Interface.addModel.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.addModel.position.set(0, 280);
-	Interface.addModel.optionsSize.set(40, 40);
+	Interface.addModel.position.set(0, 230);
+	Interface.addModel.optionsSize.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addModel.updateInterface();
 
 	//Cube
@@ -216,11 +218,11 @@ Interface.initialize = function()
 	}, "Cicle");
 
 	//Add lights
-	Interface.addLight = new ButtonDrawer();
+	Interface.addLight = new ButtonDrawer(Interface.toolBar.element);
 	Interface.addLight.setImage(Editor.filePath + "icons/lights/point.png");
 	Interface.addLight.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.addLight.position.set(0, 320);
-	Interface.addLight.optionsSize.set(40, 40);
+	Interface.addLight.position.set(0, 270);
+	Interface.addLight.optionsSize.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addLight.updateInterface();
 
 	//Point Light
@@ -266,12 +268,12 @@ Interface.initialize = function()
 	}, "Sky");
 
 	//Add camera
-	Interface.addCamera = new ButtonDrawer();
+	Interface.addCamera = new ButtonDrawer(Interface.toolBar.element);
 	Interface.addCamera.setImage(Editor.filePath + "icons/camera/camera.png");
 	Interface.addCamera.optionsPerLine = 2;
 	Interface.addCamera.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.addCamera.position.set(0, 360);
-	Interface.addCamera.optionsSize.set(40, 40);
+	Interface.addCamera.position.set(0, 310);
+	Interface.addCamera.optionsSize.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addCamera.updateInterface();
 
 	//Perspective camera
@@ -287,12 +289,12 @@ Interface.initialize = function()
 	}, "Othographic Camera");
 
 	//Add script
-	Interface.addScript = new ButtonDrawer();
+	Interface.addScript = new ButtonDrawer(Interface.toolBar.element);
 	Interface.addScript.setImage(Editor.filePath + "icons/script/script.png");
 	Interface.addScript.optionsPerLine = 1;
 	Interface.addScript.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.addScript.position.set(0, 400);
-	Interface.addScript.optionsSize.set(40, 40);
+	Interface.addScript.position.set(0, 350);
+	Interface.addScript.optionsSize.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addScript.updateInterface();
 
 	//Javascript script
@@ -302,12 +304,12 @@ Interface.initialize = function()
 	}, "JS Script");
 
 	//Sprites and effects
-	Interface.addEffects = new ButtonDrawer();
+	Interface.addEffects = new ButtonDrawer(Interface.toolBar.element);
 	Interface.addEffects.setImage(Editor.filePath + "icons/misc/particles.png");
 	Interface.addEffects.optionsPerLine = 3;
 	Interface.addEffects.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.addEffects.position.set(0, 440);
-	Interface.addEffects.optionsSize.set(40, 40);
+	Interface.addEffects.position.set(0, 390);
+	Interface.addEffects.optionsSize.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addEffects.updateInterface();
 
 	//Sprite
@@ -366,12 +368,12 @@ Interface.initialize = function()
 	}, "Lens flare");
 
 	//Physics
-	Interface.addPhysics = new ButtonDrawer();
+	Interface.addPhysics = new ButtonDrawer(Interface.toolBar.element);
 	Interface.addPhysics.setImage(Editor.filePath + "icons/misc/physics.png");
 	Interface.addPhysics.optionsPerLine = 3;
 	Interface.addPhysics.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.addPhysics.position.set(0, 480);
-	Interface.addPhysics.optionsSize.set(40, 40);
+	Interface.addPhysics.position.set(0, 430);
+	Interface.addPhysics.optionsSize.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addPhysics.updateInterface();
 
 	//Physics box
@@ -422,12 +424,12 @@ Interface.initialize = function()
 	}, "Particle");
 
 	//Add device
-	Interface.addDevice = new ButtonDrawer();
+	Interface.addDevice = new ButtonDrawer(Interface.toolBar.element);
 	Interface.addDevice.setImage(Editor.filePath + "icons/hw/hw.png");
 	Interface.addDevice.optionsPerLine = 2;
 	Interface.addDevice.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
-	Interface.addDevice.position.set(0, 520);
-	Interface.addDevice.optionsSize.set(40, 40);
+	Interface.addDevice.position.set(0, 470);
+	Interface.addDevice.optionsSize.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	Interface.addDevice.updateInterface();
 
 	//Leap Hand
@@ -467,7 +469,7 @@ Interface.initialize = function()
 	logo.appendChild(logoImage);
 
 	//File
-	Interface.file = new DropdownMenu();
+	Interface.file = new DropdownMenu(Interface.topBar.element);
 	Interface.file.setText("File");
 	Interface.file.size.set(120, Interface.topBar.size.y);
 	Interface.file.position.set(0,0);
@@ -745,7 +747,7 @@ Interface.initialize = function()
 	Interface.file.updateInterface();
 
 	//Editor
-	Interface.editor = new DropdownMenu();
+	Interface.editor = new DropdownMenu(Interface.topBar.element);
 	Interface.editor.setText("Edit");
 	Interface.editor.size.set(100, Interface.topBar.size.y);
 	Interface.editor.position.set(120,0);
@@ -906,7 +908,7 @@ Interface.initialize = function()
 	Interface.editor.updateInterface();
 
 	//Project
-	Interface.project = new DropdownMenu();
+	Interface.project = new DropdownMenu(Interface.topBar.element);
 	Interface.project.setText("Project");
 	Interface.project.size.set(100, Interface.topBar.size.y);
 	Interface.project.position.set(220,0);
