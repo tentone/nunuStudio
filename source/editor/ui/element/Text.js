@@ -9,6 +9,7 @@ function Text(parent)
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.display = "flex";
+	this.element.style.textAlign = "center";
 	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
 	this.element.style.pointerEvents = "none";
