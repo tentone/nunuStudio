@@ -48,7 +48,6 @@ function TreeElement(container)
 		this.style.opacity = 0.5;
 	};
 
-	//Fold
 	this.arrow.onclick = function()
 	{
 		self.folded = !self.folded;

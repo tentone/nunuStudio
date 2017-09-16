@@ -8,7 +8,7 @@ function TabGroup(parent)
 	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
-	this.element.style.overflow = "hidden";
+	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	this.element.ondrop = function(event)
@@ -30,6 +30,7 @@ function TabGroup(parent)
 	//Tab
 	this.tab = document.createElement("div");
 	this.tab.style.position = "absolute";
+	this.tab.style.overflow = "visible";
 	this.element.appendChild(this.tab);
 
 	//Empty message

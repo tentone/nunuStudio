@@ -361,6 +361,7 @@ include("editor/helpers/SkeletonHelper.js");
 
 include("editor/utils/ObjectIcons.js");
 include("editor/utils/CodemirrorThemes.js");
+include("editor/utils/DOMUtils.js");
 
 include("editor/history/History.js");
 include("editor/history/Action.js");

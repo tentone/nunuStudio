@@ -8,8 +8,6 @@ function DropdownMenu(parent)
 	//Element
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
-	this.element.style.justifyContent = "center";
-	this.element.style.alignItems = "center";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	
 	this.element.ondrop = function(event)
@@ -28,13 +26,14 @@ function DropdownMenu(parent)
 	//Panel
 	this.panel = document.createElement("div");
 	this.panel.style.position = "absolute";
+	this.panel.style.display = "none";
 	this.panel.style.cursor = "default";
 	this.panel.style.zIndex = "200";
 
 	//Icon
 	this.icon = document.createElement("img");
-	this.icon.style.position = "absolute";
 	this.icon.style.display = "none";
+	this.icon.style.position = "absolute";
 	this.icon.style.left = "5px";
 	this.icon.style.top = "3px";
 	this.icon.style.width = "12px";
@@ -43,8 +42,8 @@ function DropdownMenu(parent)
 
 	//Arrow
 	this.arrow = document.createElement("img");
-	this.arrow.style.position = "absolute";
 	this.arrow.style.display = "none";
+	this.arrow.style.position = "absolute";
 	this.arrow.style.right = "5px";
 	this.arrow.style.top = "3px";
 	this.arrow.style.width = "12px";
@@ -69,8 +68,7 @@ function DropdownMenu(parent)
 	//Mouse over
 	this.element.onmouseover = function()
 	{
-		self.expanded = true;
-		self.updateInterface();
+		self.setExpanded(true);
 		self.element.style.cursor = "pointer";
 		self.element.style.backgroundColor = Editor.theme.buttonOverColor;
 	};
@@ -78,8 +76,7 @@ function DropdownMenu(parent)
 	//Mouse leave
 	this.element.onmouseleave = function()
 	{
-		self.expanded = false;
-		self.updateInterface();
+		self.setExpanded(false);
 		self.element.style.cursor = "default";
 		self.element.style.backgroundColor = Editor.theme.buttonColor;
 	};
@@ -87,15 +84,13 @@ function DropdownMenu(parent)
 	//Mouve over
 	this.panel.onmouseover = function()
 	{
-		self.expanded = true;
-		self.updateInterface();
+		self.setExpanded(true);
 	};
 
 	//Mouse leave
 	this.panel.onmouseleave = function()
 	{
-		self.expanded = false;
-		self.updateInterface();
+		self.setExpanded(false);
 	};
 
 	//Add element to document
@@ -155,7 +150,6 @@ DropdownMenu.prototype.removeOption = function(index)
 	{
 		this.options[index].destroy();
 		this.options.splice(index, 1);
-		this.updateInterface();
 	}
 };
 
@@ -164,7 +158,7 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
 {
 	var button = new Button(this.panel);
 	button.element.style.zIndex = "200";
-	button.setText(name);
+	button.text.setText(name);
 	button.text.setAlignment(Text.LEFT);
 	button.text.position.set(25, 0);
 
@@ -172,8 +166,7 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
 	button.setCallback(function()
 	{
 		callback();
-		self.expanded = false;
-		self.updateInterface();
+		self.setExpanded(false);
 	});
 
 	if(icon !== undefined)
@@ -182,7 +175,6 @@ DropdownMenu.prototype.addOption = function(name, callback, icon)
 	}
 
 	this.options.push(button);
-	this.updateInterface();
 
 	return button;
 };
@@ -203,9 +195,48 @@ DropdownMenu.prototype.addMenu = function(name, icon)
 	}
 
 	this.options.push(menu);
-	this.updateInterface();
 
 	return menu;
+};
+
+//Update expanded state
+DropdownMenu.prototype.setExpanded = function(expanded)
+{
+	if(expanded !== undefined)
+	{
+		this.expanded = expanded;
+	}
+
+	//Dropdown
+	if(this.expanded)
+	{
+		this.panel.style.display = "block";
+		//Panel position
+		if(this.optionsLocation === DropdownMenu.DOWN)
+		{
+			this.panel.style.top = (this.position.y + this.size.y) + "px";
+			this.panel.style.left = this.position.x + "px";
+		}
+		else if(this.optionsLocation === DropdownMenu.UP)
+		{
+			this.panel.style.bottom = (this.position.y + this.size.y) + "px";
+			this.panel.style.left = this.position.x + "px";
+		}
+		else if(this.optionsLocation === DropdownMenu.LEFT)
+		{
+			this.panel.style.top = this.position.y + "px";
+			this.panel.style.left = (this.position.x + this.size.x) + "px";
+		}
+		else if(this.optionsLocation === DropdownMenu.RIGHT)
+		{
+			this.panel.style.top = this.position.y + "px";
+			this.panel.style.left = (this.position.x - this.size.x) + "px";
+		}
+	}
+	else
+	{
+		this.panel.style.display = "none";
+	}
 };
 
 //Update interface
@@ -216,47 +247,17 @@ DropdownMenu.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "visible";
 
-		//Dropdown
-		if(this.expanded)
+		//Options
+		for(var i = 0; i < this.options.length; i++)
 		{
-			//Options
-			for(var i = 0; i < this.options.length; i++)
-			{
-				this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
-				this.options[i].position.set(0, (this.optionsSize.y * i));
-				this.options[i].updateInterface();
-			}
-
-			//Panel position
-			if(this.optionsLocation === DropdownMenu.DOWN)
-			{
-				this.panel.style.top = (this.position.y + this.size.y) + "px";
-				this.panel.style.left = this.position.x + "px";
-			}
-			else if(this.optionsLocation === DropdownMenu.UP)
-			{
-				this.panel.style.top = (this.position.y - this.size.y) + "px";
-				this.panel.style.left = this.position.x + "px";
-			}
-			else if(this.optionsLocation === DropdownMenu.LEFT)
-			{
-				this.panel.style.top = this.position.y + "px";
-				this.panel.style.left = (this.position.x + this.size.x) + "px";
-			}
-			else if(this.optionsLocation === DropdownMenu.RIGHT)
-			{
-				this.panel.style.top = this.position.y + "px";
-				this.panel.style.left = (this.position.x - this.size.x) + "px";
-			}
-
-			this.panel.style.width = this.size.x + "px";
-			this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
-			this.panel.style.display = "block";
+			this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
+			this.options[i].position.set(0, (this.optionsSize.y * i));
+			this.options[i].updateInterface();
 		}
-		else
-		{
-			this.panel.style.display = "none";
-		}
+
+		//Panel
+		this.panel.style.width = this.size.x + "px";
+		this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
 
 		//Text
 		this.text.size.set(this.size.x, this.size.y);
@@ -273,6 +274,4 @@ DropdownMenu.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-
 };

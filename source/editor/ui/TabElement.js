@@ -9,7 +9,7 @@ function TabElement(parent, closeable, container, index, title, icon)
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
-	this.element.style.overflow = "hidden";
+	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	this.element.ondrop = function(event)
@@ -115,12 +115,12 @@ TabElement.prototype.isSelected = function()
 //Destroy
 TabElement.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
 		this.parent.removeChild(this.element);
-		this.button.destroy();
 	}
-	catch(e){}
+	
+	this.button.destroy();
 };
 
 //Set button icon

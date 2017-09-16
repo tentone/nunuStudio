@@ -7,6 +7,7 @@ function Bar(parent)
 
 	//Element
 	this.element = document.createElement("div");
+	this.element.style.overflow = "visible";
 	this.element.style.position = "absolute";
 	this.element.style.backgroundColor = Editor.theme.barColor;
 
@@ -46,7 +47,6 @@ Bar.prototype.updateInterface = function()
 	{
 		this.element.style.display = "block";
 
-		//Element
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";

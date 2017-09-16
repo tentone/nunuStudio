@@ -742,6 +742,8 @@ Interface.initialize = function()
 		}, Editor.filePath + "icons/misc/exit.png");
 	}
 
+	Interface.file.updateInterface();
+
 	//Editor
 	Interface.editor = new DropdownMenu();
 	Interface.editor.setText("Edit");
@@ -901,6 +903,8 @@ Interface.initialize = function()
 
 	}, Editor.filePath + "icons/tools/move.png");
 
+	Interface.editor.updateInterface();
+
 	//Project
 	Interface.project = new DropdownMenu();
 	Interface.project.setText("Project");
@@ -932,6 +936,8 @@ Interface.initialize = function()
 			}
 		}, ".js");
 	}, Editor.filePath + "icons/script/script.png");
+
+	Interface.project.updateInterface();
 
 	//About
 	Interface.about = new Button();

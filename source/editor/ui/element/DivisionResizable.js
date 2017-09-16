@@ -9,7 +9,7 @@ function DivisionResizable(parent)
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
-	this.element.style.overflow = "hidden";
+	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
 	this.element.ondrop = function(event)
