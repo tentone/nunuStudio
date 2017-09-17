@@ -39,10 +39,10 @@ Base64Utils.isBase64 = function(data)
 		return true;
 	}
 
-	//Check 8 positions at random (assuming that it does not have header)
-	for(var i = 0; i < 8; i++)
+	//Check string data
+	for(var i = 0; i < data.length; i++)
 	{
-		if(!Base64Utils.encoding.includes(data.charAt(Math.floor(data.length * Math.random()))))
+		if(!Base64Utils.encoding.includes(data.charAt(i)))
 		{
 			return false;
 		}
