@@ -40,7 +40,5 @@ THREE.Texture.prototype.toJSON = function(meta)
 
 	meta.textures[this.uuid] = data;
 	
-console.log("serialize");
-
 	return data;
 };
