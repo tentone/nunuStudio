@@ -171,6 +171,11 @@ function CameraEditor(parent, closeable, container, index)
 	});
 	this.form.add(button);
 	this.form.nextRow();
+
+	this.node = new PassNode(this.form.element);
+	this.node.size.set(200, 200);
+	this.form.add(this.node);
+	this.form.nextRow();
 }
 
 CameraEditor.prototype = Object.create(TabElement.prototype);

@@ -24,15 +24,7 @@ function Button(parent)
 		event.preventDefault();
 	};
 
-	//Icon
-	this.icon = document.createElement("img");
-	this.icon.style.position = "absolute";
-	this.icon.style.display = "none";
-	this.icon.style.left = "5px";
-	this.icon.style.top = "3px";
-	this.icon.style.width = "12px";
-	this.icon.style.height = "12px";
-	this.element.appendChild(this.icon);
+	this.icon = null;
 
 	//Text
 	this.text = new Text(this.element);
@@ -66,7 +58,18 @@ Button.prototype.setText = function(text)
 //Set button icon
 Button.prototype.setIcon = function(icon)
 {
-	this.icon.style.display = "block";
+	if(this.icon === null)
+	{
+		this.icon = document.createElement("img");
+		this.icon.style.position = "absolute";
+		this.icon.style.display = "block";
+		this.icon.style.left = "5px";
+		this.icon.style.top = "3px";
+		this.icon.style.width = "12px";
+		this.icon.style.height = "12px";
+		this.element.appendChild(this.icon);
+	}
+	
 	this.icon.src = icon;
 };
 
