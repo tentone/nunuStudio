@@ -21,6 +21,48 @@ function PassNode(parent)
 	
 	//Add element to document
 	this.parent.appendChild(this.element);
+
+	//Form
+	this.form = new Form(this.element);
+	this.form.defaultTextWidth = 80;
+	this.form.position.set(10, 5);
+	this.form.spacing.set(5, 5);
+
+	//Render pass
+	this.form.addText("Render pass");
+	this.form.nextRow();
+
+	//Checkbox
+	this.form.addText("Enabled");
+	this.enabled = new CheckBox(this.form.element);
+	this.enabled.size.set(15, 15);
+	this.enabled.setOnChange(function()
+	{
+		//TODO <ADD CODE HERE>
+	});
+	this.form.add(this.enabled);
+	this.form.nextRow();
+
+	//Up
+	this.up = new Button(this.form.element);
+	this.up.size.set(50, 18);
+	this.up.setText("Up");
+	this.form.add(this.up);
+
+	//Down
+	this.up = new Button(this.form.element);
+	this.up.size.set(50, 18);
+	this.up.setText("Down");
+	this.form.add(this.up);
+
+	//Delete
+	this.up = new Button(this.form.element);
+	this.up.size.set(70, 18);
+	this.up.setText("Delete");
+	this.form.add(this.up);
+	this.form.nextRow();
+
+	this.form.updateInterface();
 }
 
 //Remove element
