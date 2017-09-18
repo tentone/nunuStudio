@@ -9,8 +9,10 @@ function PassNode(parent)
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
-	this.element.style.pointerEvents = "none";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
+	this.element.style.backgroundColor = "#333366";
+	this.element.style.borderStyle = "none";
+	this.element.style.boxSizing = "border-box";
+	this.element.style.borderRadius = "4px";
 
 	//Attributes
 	this.size = new THREE.Vector2(0,0);
@@ -19,8 +21,6 @@ function PassNode(parent)
 	
 	//Add element to document
 	this.parent.appendChild(this.element);
-
-	var self = this;
 }
 
 //Remove element

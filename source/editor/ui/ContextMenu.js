@@ -44,11 +44,6 @@ ContextMenu.prototype.destroy = function()
 	{
 		this.parent.removeChild(this.element);
 	}
-
-	for(var k = 0; k < this.options.length; k++)
-	{
-		this.options[k].destroy();
-	}
 };
 
 //Remove option from context menu
@@ -98,28 +93,28 @@ ContextMenu.prototype.addMenu = function(name)
 //Update interface
 ContextMenu.prototype.updateInterface = function()
 {
-	//Options
-	for(var i = 0; i < this.options.length; i++)
-	{
-		this.options[i].size.set(this.size.x, this.size.y);
-		this.options[i].position.set(0, (this.size.y*i));
-		this.options[i].visible = this.visible;
-		this.options[i].updateInterface();
-	}
-
 	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+
+		//Options
+		for(var i = 0; i < this.options.length; i++)
+		{
+			this.options[i].size.set(this.size.x, this.size.y);
+			this.options[i].position.set(0, (this.size.y*i));
+			this.options[i].visible = this.visible;
+			this.options[i].updateInterface();
+		}
+	
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = (this.size.y * this.options.length)+ "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = (this.size.y * this.options.length)+ "px";
 };

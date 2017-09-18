@@ -186,7 +186,7 @@ function TreeElement(container)
 
 			//Context menu
 			var context = new ContextMenu();
-			context.size.set(140, 20);
+			context.size.set(150, 20);
 			context.position.set(event.clientX - 5, event.clientY - 5);
 			
 			//Open editor

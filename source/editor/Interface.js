@@ -942,7 +942,7 @@ Interface.initialize = function()
 	Interface.project.updateInterface();
 
 	//About
-	Interface.about = new Button();
+	Interface.about = new Button(Interface.topBar.element);
 	Interface.about.setText("About");
 	Interface.about.size.set(100, Interface.topBar.size.y);
 	Interface.about.position.set(320, 0);
@@ -959,7 +959,7 @@ Interface.initialize = function()
 	});
 
 	//Run
-	Interface.run = new Button();
+	Interface.run = new Button(Interface.topBar.element);
 	Interface.run.setText("Run");
 	Interface.run.size.set(100, Interface.topBar.size.y);
 	Interface.run.position.set(420, 0);
