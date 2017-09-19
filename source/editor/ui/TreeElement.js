@@ -22,6 +22,7 @@ function TreeElement(container)
 	this.element.draggable = true;
 	this.element.style.position = "absolute";
 	this.element.style.width = "100%";
+	this.element.style.left = "0px";
 	this.element.style.height = "20px";
 	this.element.style.cursor = "pointer";
 	this.element.style.boxSizing = "border-box";
@@ -66,7 +67,7 @@ function TreeElement(container)
 	this.element.appendChild(this.icon);
 
 	//Text
-	this.label = document.createElement("div");
+	this.label = document.createElement("span");
 	this.label.style.overflow = "hidden";
 	this.label.style.position = "absolute";
 	this.label.style.pointerEvents = "none";
@@ -648,15 +649,9 @@ TreeElement.prototype.updateInterface = function()
 			this.arrow.style.left = (5 + offset) + "px";
 		}
 
-		//Icon
 		this.icon.style.left = (25 + offset) + "px";
-
-		//Text
 		this.label.style.left = (45 + offset) + "px";
-
-		//Base
 		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
 
 		//Update childs
 		for(var i = 0; i < this.children.length; i++)
