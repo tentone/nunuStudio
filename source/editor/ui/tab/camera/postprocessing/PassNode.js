@@ -9,7 +9,7 @@ function PassNode(parent)
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
-	this.element.style.backgroundColor = "#333366";
+	this.element.style.backgroundColor = "#222222";
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.borderRadius = "4px";

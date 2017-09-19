@@ -132,28 +132,28 @@ ImageChooser.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+	
+		//Keep aspect ratio
+		if(this.keepAspectRatio)
+		{
+			if(this.size.x < this.size.y)
+			{
+				this.size.y = this.size.x * this.img.naturalHeight / this.img.naturalWidth;
+			}
+			else
+			{
+				this.size.x = this.size.y * this.img.naturalWidth / this.img.naturalHeight;
+			}
+		}
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	//Keep aspect ratio
-	if(this.keepAspectRatio)
-	{
-		if(this.size.x < this.size.y)
-		{
-			this.size.y = this.size.x * this.img.naturalHeight / this.img.naturalWidth;
-		}
-		else
-		{
-			this.size.x = this.size.y * this.img.naturalWidth / this.img.naturalHeight;
-		}
-	}
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }

@@ -107,21 +107,20 @@ Slider.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
 		this.text.style.visibility = "visible";
+		this.text.style.top = this.position.y + "px";
+		this.text.style.left = (this.position.x + this.size.x + 13) + "px";
+		this.text.style.height = this.size.y + "px";
+
+		this.element.style.visibility = "visible";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 		this.text.style.visibility = "hiden";
 	}
-
-	this.text.style.top = this.position.y + "px";
-	this.text.style.left = (this.position.x + this.size.x + 13) + "px";
-	this.text.style.height = this.size.y + "px";
-
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 }

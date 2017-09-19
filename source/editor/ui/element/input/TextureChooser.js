@@ -223,19 +223,19 @@ TextureChooser.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+	
+		//Preview
+		this.preview.style.width = this.size.x + "px";
+		this.preview.style.height = this.size.y + "px";
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	//Preview
-	this.preview.style.width = this.size.x + "px";
-	this.preview.style.height = this.size.y + "px";
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };

@@ -15,8 +15,6 @@ function CoordinatesBox(parent)
 	this.xText.style.width = "15px";
 	this.xText.style.textAlign = "center";
 	this.xText.style.verticalAlign = "middle";
-	//this.xText.style.backgroundColor = "#AA0000";
-	//this.xText.style.borderRadius = "4px";
 	this.xText.innerHTML = "X";
 	this.element.appendChild(this.xText);
 
@@ -39,8 +37,6 @@ function CoordinatesBox(parent)
 	this.yText.style.width = "15px";
 	this.yText.style.textAlign = "center";
 	this.yText.style.verticalAlign = "middle";
-	//this.yText.style.backgroundColor = "#00AA00";
-	//this.yText.style.borderRadius = "4px";
 	this.yText.innerHTML = "Y";
 	this.element.appendChild(this.yText);
 
@@ -62,8 +58,6 @@ function CoordinatesBox(parent)
 	this.zText.style.width = "15px";
 	this.zText.style.textAlign = "center";
 	this.zText.style.verticalAlign = "middle";
-	//this.zText.style.backgroundColor = "#0000AA";
-	//this.zText.style.borderRadius = "4px";
 	this.zText.innerHTML = "Z";
 	this.element.appendChild(this.zText);
 

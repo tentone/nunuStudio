@@ -145,26 +145,25 @@ CodeEditor.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
+		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
+	
+		this.code.setOption("theme", Settings.code.theme);
+		this.code.setOption("lineNumbers", Settings.code.lineNumbers);
+		this.code.setOption("lineWrapping", Settings.code.lineWrapping);
+		this.code.setOption("keyMap", Settings.code.keymap);
+		this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
+		this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
+		this.code.setOption("showMatchesOnScrollbar", Settings.code.showMatchesOnScrollbar); 
+		this.code.display.wrapper.style.fontSize = Settings.code.fontSize + "px";
+		this.code.setSize(this.size.x, this.size.y);
+		this.code.refresh();
 	}
 	else
 	{
-		this.element.style.visibility = "hidden";
+		this.element.style.display = "none";
 	}
-
-	this.code.setOption("theme", Settings.code.theme);
-	this.code.setOption("lineNumbers", Settings.code.lineNumbers);
-	this.code.setOption("lineWrapping", Settings.code.lineWrapping);
-	this.code.setOption("keyMap", Settings.code.keymap);
-	this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
-	this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
-	this.code.setOption("showMatchesOnScrollbar", Settings.code.showMatchesOnScrollbar); 
-	this.code.display.wrapper.style.fontSize = Settings.code.fontSize + "px";
-	this.code.setSize(this.size.x, this.size.y);
-	this.code.refresh();
-
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };
