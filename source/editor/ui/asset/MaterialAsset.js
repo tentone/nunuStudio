@@ -87,7 +87,7 @@ function MaterialAsset(parent)
 				}
 				else
 				{
-					tab = Interface.tab.addTab(MaterialEditor, true);
+					tab = Interface.tab.addTab(MeshMaterialEditor, true);
 				}
 
 				tab.attach(self.material, self);
