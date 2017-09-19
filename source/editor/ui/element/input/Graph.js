@@ -343,40 +343,40 @@ Graph.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+	
+		//Grid
+		this.grid.width = this.size.x;
+		this.grid.height = this.size.y;
+		this.grid.style.width = this.size.x + "px";
+		this.grid.style.height = this.size.y + "px";
+		this.updateGrid();
+
+		//Graph
+		for(var i = 0; i < this.graph.length; i++)
+		{
+			var graph = this.graph[i];
+			graph.canvas.width = this.size.x;
+			graph.canvas.height = this.size.y;
+			graph.canvas.style.width = this.size.x + "px";
+			graph.canvas.style.height = this.size.y + "px";
+			this.updateGraph(graph);
+		}
+
+		//Scale
+		var step = (this.size.y - 14) / (this.scale.length - 1);
+		for(var i = 0; i < this.scale.length; i++)
+		{
+			this.scale[i].style.top = (i * step) + "px";
+		}
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	//Grid
-	this.grid.width = this.size.x;
-	this.grid.height = this.size.y;
-	this.grid.style.width = this.size.x + "px";
-	this.grid.style.height = this.size.y + "px";
-	this.updateGrid();
-
-	//Graph
-	for(var i = 0; i < this.graph.length; i++)
-	{
-		var graph = this.graph[i];
-		graph.canvas.width = this.size.x;
-		graph.canvas.height = this.size.y;
-		graph.canvas.style.width = this.size.x + "px";
-		graph.canvas.style.height = this.size.y + "px";
-		this.updateGraph(graph);
-	}
-
-	//Scale
-	var step = (this.size.y - 14) / (this.scale.length - 1);
-	for(var i = 0; i < this.scale.length; i++)
-	{
-		this.scale[i].style.top = (i * step) + "px";
-	}
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };

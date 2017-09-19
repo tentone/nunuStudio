@@ -167,29 +167,29 @@ CubeTextureBox.prototype.updatePreview = function()
 //Update Interface
 CubeTextureBox.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+	
+		//Preview
+		this.preview.style.width = this.size.y + "px";
+		this.preview.style.height = this.size.y + "px";
+
+		//Form
+		this.form.position.set(this.size.y + 5, 0);
+		this.form.size.set(this.size.x - this.form.position.x, this.size.y)
+		this.form.visible = this.visible;
+		this.form.updateInterface();
+
+		//Element
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 	}
 
-	//Preview
-	this.preview.style.width = this.size.y + "px";
-	this.preview.style.height = this.size.y + "px";
-
-	//Form
-	this.form.position.set(this.size.y + 5, 0);
-	this.form.size.set(this.size.x - this.form.position.x, this.size.y)
-	this.form.visible = this.visible;
-	this.form.updateInterface();
-
-	//Element
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };
