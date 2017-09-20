@@ -71,6 +71,7 @@ function TreeElement(container)
 	this.label.style.overflow = "hidden";
 	this.label.style.position = "absolute";
 	this.label.style.pointerEvents = "none";
+	this.label.style.whiteSpace = "nowrap";
 	this.label.style.top = "4px";
 	this.element.appendChild(this.label);
 
