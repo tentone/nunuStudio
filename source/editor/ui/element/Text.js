@@ -9,15 +9,15 @@ function Text(parent)
 	this.element = document.createElement("div");
 	this.element.style.position = "absolute";
 	this.element.style.display = "flex";
-	this.element.style.textAlign = "center";
-	this.element.style.justifyContent = "center";
 	this.element.style.alignItems = "center";
 	this.element.style.pointerEvents = "none";
 	this.element.style.color = Editor.theme.textColor;
+	
+	this.setAlignment(Text.CENTER);
 
 	//Span
 	this.span = document.createElement("span");
-	this.span.style.whiteSpace = "nowrap";
+	this.span.style.whiteSpace = "pre"; //"nowrap";
 	this.span.innerHTML = "text";
 	this.element.appendChild(this.span);
 
@@ -34,6 +34,10 @@ function Text(parent)
 Text.CENTER = 0;
 Text.LEFT = 1;
 Text.RIGHT = 2;
+
+//Overflow
+Text.CLIP = 10;
+Text.ELLIPSIS = 11;
 
 //Set Text
 Text.prototype.setText = function(text)
@@ -53,20 +57,36 @@ Text.prototype.setTextColor = function(color)
 	this.element.style.color = color;
 };
 
+//Set overflow handling
+Text.prototype.setOverflow = function(overflow)
+{
+	if(overflow === Text.ELLIPSIS)
+	{
+		this.span.style.textOverflow = "ellipsis";
+	}
+	else
+	{
+		this.span.style.textOverflow = "clip";
+	}
+};
+
 //Set text alignment
 Text.prototype.setAlignment = function(align)
 {
 	if(align === Text.CENTER)
 	{
 		this.element.style.justifyContent = "center";
+		this.element.style.textAlign = "center";
 	}
 	else if(align === Text.LEFT)
 	{
-		this.element.style.justifyContent = "left";
+		this.element.style.justifyContent = "flex-start";
+		this.element.style.textAlign = "left";
 	}
 	else if(align === Text.RIGHT)
 	{
-		this.element.style.justifyContent = "right";
+		this.element.style.justifyContent = "flex-end";
+		this.element.style.textAlign = "right";
 	}
 };
 
