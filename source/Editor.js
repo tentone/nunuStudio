@@ -194,7 +194,7 @@ include("lib/tern/plugin/doc_comment.js");
 
 include("lib/three/loaders/3MFLoader.js");
 include("lib/three/loaders/AWDLoader.js");
-include("lib/three/loaders/ColladaLoader2.js");
+include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
 include("lib/three/loaders/MTLLoader.js");
