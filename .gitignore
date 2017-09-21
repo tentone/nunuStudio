@@ -1,3 +1,4 @@
+source/config
 *.db
 *.log
 node_modules
