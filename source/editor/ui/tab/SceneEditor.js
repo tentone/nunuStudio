@@ -933,16 +933,24 @@ SceneEditor.prototype.render = function()
 			{
 				var cameras = Editor.selectedObjects[0].cameras;
 
-				for(var i = 0; i < cameras.length; i++)
+				function renderCamera(index, x, y, w, h)
 				{
-					var size = width/4;
-
-					renderer.setViewport(x + size * i, y + size, size, size);
-					renderer.setScissor(x + size * i, y + size, size, size);
-
-					cameras[i].updateMatrixWorld();
-					cameras[i].render(renderer, scene);
+					renderer.setViewport(x, y, w, h);
+					renderer.setScissor(x, y, w, h);
+					cameras[index].updateMatrixWorld();
+					cameras[index].render(renderer, scene);
 				}
+
+				var size = height/3;
+				
+				x += width - size * 4;
+				
+				renderCamera(CubeTexture.LEFT, x, y + size, size, size);
+				renderCamera(CubeTexture.FRONT, x + size, y + size, size, size);
+				renderCamera(CubeTexture.RIGHT, x + size * 2, y + size, size, size);
+				renderCamera(CubeTexture.BACK, x + size * 3, y + size, size, size);
+				renderCamera(CubeTexture.TOP, x + size, y + size * 2, size, size);
+				renderCamera(CubeTexture.BOTTOM, x + size, y, size, size);
 			}
 			//Preview all cameras in use
 			else if(this.scene.cameras !== undefined && this.scene.cameras.length > 0)
