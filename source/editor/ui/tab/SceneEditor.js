@@ -935,7 +935,7 @@ SceneEditor.prototype.render = function()
 
 				for(var i = 0; i < cameras.length; i++)
 				{
-					var size = width/6;
+					var size = width/4;
 
 					renderer.setViewport(x + size * i, y + size, size, size);
 					renderer.setScissor(x + size * i, y + size, size, size);
