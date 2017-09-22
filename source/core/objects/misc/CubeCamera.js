@@ -23,7 +23,7 @@
  * @type {Number}
  */
 /**
- * Resolution of each face. Should be a 2pot.
+ * Resolution of each face. Should be a power of 2 (32, 64, 128, ...).
  * @property resolution
  * @type {Number}
  */
