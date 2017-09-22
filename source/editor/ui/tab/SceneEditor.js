@@ -921,10 +921,28 @@ SceneEditor.prototype.render = function()
 				camera.resize(width, height);
 
 				renderer.clear();
+
+
 				renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 				renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 				
 				camera.render(renderer, scene);
+			}
+			//Cube camera
+			else if(Editor.selectedObjects[0] instanceof CubeCamera)
+			{
+				var cameras = Editor.selectedObjects[0].cameras;
+
+				for(var i = 0; i < cameras.length; i++)
+				{
+					var size = width/6;
+
+					renderer.setViewport(x + size * i, y + size, size, size);
+					renderer.setScissor(x + size * i, y + size, size, size);
+
+					cameras[i].updateMatrixWorld();
+					cameras[i].render(renderer, scene);
+				}
 			}
 			//Preview all cameras in use
 			else if(this.scene.cameras !== undefined && this.scene.cameras.length > 0)
