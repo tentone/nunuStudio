@@ -215,24 +215,66 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 		{
 			this.panel.style.top = (this.position.y + this.size.y) + "px";
 			this.panel.style.left = this.position.x + "px";
+
+			var out = DOMUtils.checkBorder(this.panel);
+			if(out.y !== 0)
+			{
+				this.panel.style.top = "";
+				this.panel.style.bottom = (this.position.y + this.size.y) + "px";
+			}
+			if(out.x !== 0)
+			{
+				this.panel.style.left = (this.position.x - out.x) + "px"; 
+			}
 		}
 		else if(this.optionsLocation === DropdownMenu.UP)
 		{
 			this.panel.style.bottom = (this.position.y + this.size.y) + "px";
 			this.panel.style.left = this.position.x + "px";
+
+			var out = DOMUtils.checkBorder(this.panel);
+			if(out.y !== 0)
+			{
+				this.panel.style.bottom = "";
+				this.panel.style.top = (this.position.y + this.size.y) + "px";
+			}
+			if(out.x !== 0)
+			{
+				this.panel.style.left = (this.position.x - out.x) + "px"; 
+			}
 		}
 		else if(this.optionsLocation === DropdownMenu.LEFT)
 		{
 			this.panel.style.top = this.position.y + "px";
 			this.panel.style.left = (this.position.x + this.size.x) + "px";
+
+			var out = DOMUtils.checkBorder(this.panel);
+			if(out.x !== 0)
+			{
+				this.panel.style.left = (this.position.x - this.size.x) + "px"; 
+			}
+			if(out.y !== 0)
+			{
+				this.panel.style.top = (this.position.y - out.y) + "px";
+			}
 		}
 		else if(this.optionsLocation === DropdownMenu.RIGHT)
 		{
 			this.panel.style.top = this.position.y + "px";
 			this.panel.style.left = (this.position.x - this.size.x) + "px";
+
+			var out = DOMUtils.checkBorder(this.panel);
+			if(out.x !== 0)
+			{
+				this.panel.style.left = (this.position.x + this.size.x) + "px";
+			}
+			if(out.y !== 0)
+			{
+				this.panel.style.top = (this.position.y - out.y) + "px";
+			}
 		}
 
-		console.log(DOMUtils.checkBorder(this.panel));
+		console.log(out);
 	}
 	else
 	{
