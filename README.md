@@ -159,6 +159,8 @@
 	- Resize is now a part of Object3D
 	- Improvements to nsp files
 		- Moved from base64 to raw binary data.
+	- Cube camera preview
+	- Fixed dropdown menus getting out of screen
 
 ### Tech
 nunuStudio is built on top of a number of open source projects

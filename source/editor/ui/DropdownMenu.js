@@ -273,8 +273,6 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 				this.panel.style.top = (this.position.y - out.y) + "px";
 			}
 		}
-
-		console.log(out);
 	}
 	else
 	{

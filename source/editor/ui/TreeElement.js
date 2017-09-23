@@ -189,7 +189,7 @@ function TreeElement(container)
 			//Context menu
 			var context = new ContextMenu();
 			context.size.set(150, 20);
-			context.position.set(event.clientX - 5, event.clientY - 5);
+			context.position.set(event.clientX, event.clientY);
 			
 			//Open editor
 			if(self.obj instanceof Scene)
