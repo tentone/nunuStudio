@@ -13,6 +13,7 @@ function ContextMenu(parent)
 	//Attributes
 	this.size = new THREE.Vector2(130, 20);
 	this.position = new THREE.Vector2(0, 0);
+	this.offset = new THREE.Vector2(20, 10);
 	this.visible = true;
 
 	//Options
@@ -93,7 +94,6 @@ ContextMenu.prototype.addMenu = function(name)
 //Update interface
 ContextMenu.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
@@ -108,10 +108,21 @@ ContextMenu.prototype.updateInterface = function()
 		}
 	
 		//Element
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
+		this.element.style.top = (this.position.y - this.offset.y) + "px";
+		this.element.style.left = (this.position.x - this.offset.x) + "px";
 		this.element.style.width = this.size.x + "px";
-		this.element.style.height = (this.size.y * this.options.length)+ "px";
+		this.element.style.height = (this.size.y * this.options.length) + "px";
+
+		//Check if its inside window
+		var out = DOMUtils.checkBorder(this.element);
+		if(out.x !== 0)
+		{
+			this.element.style.left = (this.position.x + this.offset.x - this.size.x) + "px"; 
+		}
+		if(out.y !== 0)
+		{
+			this.element.style.top = (this.position.y - this.offset.y - out.y) + "px";
+		}
 	}
 	else
 	{

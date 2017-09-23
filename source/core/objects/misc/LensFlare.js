@@ -123,11 +123,11 @@ LensFlare.prototype.copy = function (source)
  */
 LensFlare.prototype.addFlare = function(texture, size, distance, blending, color, opacity)
 {
-	if(size === undefined) size = -1;
-	if(distance === undefined) distance = 0;
-	if(opacity === undefined) opacity = 1;
-	if(color === undefined) color = new Color(0xffffff);
-	if(blending === undefined) blending = NormalBlending;
+	if(size === undefined){size = -1;}
+	if(distance === undefined){distance = 0;}
+	if(opacity === undefined){opacity = 1;}
+	if(color === undefined){color = new Color(0xffffff)}
+	if(blending === undefined){blending = NormalBlending;}
 
 	distance = Math.min(distance, Math.max(0, distance));
 

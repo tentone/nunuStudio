@@ -1,7 +1,7 @@
 "use strict";
 
 //Based on code from cannonjs debug shape renderer made by schteppe
-function PhysicsObjectHelper(obj)
+function PhysicsObjectHelper(obj, color)
 {
 	THREE.Object3D.call(this);
 
@@ -11,7 +11,7 @@ function PhysicsObjectHelper(obj)
 
 	this.material = new THREE.MeshBasicMaterial(
 	{
-		color: 0x00FF00,
+		color: (color !== undefined) ? color : 0x00FF00,
 		wireframe: false,
 		transparent: true,
 		opacity: 0.5

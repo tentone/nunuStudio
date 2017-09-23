@@ -21,7 +21,7 @@ function AudioAsset(parent)
 	{
 		var context = new ContextMenu();
 		context.size.set(130, 20);
-		context.position.set(event.clientX - 5, event.clientY - 5);
+		context.position.set(event.clientX, event.clientY);
 		
 		context.addOption("Create Emitter", function()
 		{
