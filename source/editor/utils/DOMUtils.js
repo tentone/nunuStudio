@@ -20,7 +20,7 @@ DOMUtils.isVisible = function(element)
 	return top >= window.pageYOffset && left >= window.pageXOffset && (top + height) <= (window.pageYOffset + window.innerHeight) && (left + width) <= (window.pageXOffset + window.innerWidth);
 };
 
-//Check if a DOM element is out of the window and how far it is
+//Check if a DOM element is out of the window and how far it is, returns object with x and y values, if the value is 0 the element is inside the window on that axis.
 DOMUtils.checkBorder = function(element)
 {
 	var top = element.offsetTop;
@@ -37,30 +37,26 @@ DOMUtils.checkBorder = function(element)
 
 	var result = {x: 0, y: 0};
 
-	//Bellow the window
-	if(top > (window.pageYOffset + window.innerHeight) || (top + height) > (window.pageYOffset + window.innerHeight))
+	//Over the top of the window
+	if(top < window.pageYOffset)
 	{
-		console.log("Out bottom");
-		//TODO <ADD CODE HERE>
+		result.y = top - window.pageYOffset;
 	}
-	//Over the window
-	else if(top < window.pageYOffset || (top + height) < window.pageYOffset)
+	//Bellow the window
+	else if((top + height) > (window.pageYOffset + window.innerHeight))
 	{
-		console.log("Out top");
-		//TODO <ADD CODE HERE>
+		result.y = (top + height) - (window.pageYOffset + window.innerHeight);
 	}
 
 	//Left to the window
-	if(left < window.pageXOffset || (left + width) < window.pageXOffset)
+	if(left < window.pageXOffset)
 	{
-		console.log("Out left");
-		//TODO <ADD CODE HERE>
+		result.x = left - window.pageXOffset;
 	}
 	//Right to the window
-	else if(left > (window.pageXOffset + window.innerWidth) || (left + width) > (window.pageXOffset + window.innerWidth))
+	else if((left + width) > (window.pageXOffset + window.innerWidth))
 	{
-		console.log("Out right");
-		//TODO <ADD CODE HERE>
+		result.x = (left + width) - (window.pageXOffset + window.innerWidth);
 	}
 
 	return result;
