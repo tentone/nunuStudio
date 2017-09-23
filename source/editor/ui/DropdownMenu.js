@@ -28,7 +28,7 @@ function DropdownMenu(parent)
 	this.panel.style.position = "absolute";
 	this.panel.style.display = "none";
 	this.panel.style.cursor = "default";
-	this.panel.style.zIndex = "200";
+	this.panel.style.zIndex = "300";
 
 	//Icon
 	this.icon = document.createElement("img");
@@ -231,11 +231,29 @@ DropdownMenu.prototype.setExpanded = function(expanded)
 			this.panel.style.top = this.position.y + "px";
 			this.panel.style.left = (this.position.x - this.size.x) + "px";
 		}
+
+		console.log(DOMUtils.checkBorder(this.panel));
 	}
 	else
 	{
 		this.panel.style.display = "none";
 	}
+};
+
+//Update options
+DropdownMenu.prototype.updateOptions = function()
+{
+	//Options
+	for(var i = 0; i < this.options.length; i++)
+	{
+		this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
+		this.options[i].position.set(0, this.optionsSize.y * i);
+		this.options[i].updateInterface();
+	}
+
+	//Panel
+	this.panel.style.width = this.size.x + "px";
+	this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
 };
 
 //Update interface
@@ -246,17 +264,7 @@ DropdownMenu.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "visible";
 
-		//Options
-		for(var i = 0; i < this.options.length; i++)
-		{
-			this.options[i].size.set(this.optionsSize.x, this.optionsSize.y);
-			this.options[i].position.set(0, (this.optionsSize.y * i));
-			this.options[i].updateInterface();
-		}
-
-		//Panel
-		this.panel.style.width = this.size.x + "px";
-		this.panel.style.height = (this.optionsSize.y * this.options.length) + "px";
+		this.updateOptions();
 
 		//Text
 		this.text.size.set(this.size.x, this.size.y);

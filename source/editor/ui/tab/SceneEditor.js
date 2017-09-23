@@ -569,9 +569,12 @@ SceneEditor.prototype.update = function()
 		//Update object transformation matrix
 		if(Editor.hasObjectSelected())
 		{	
-			if(!Editor.selectedObjects[0].matrixAutoUpdate)
+			for(var i = 0; i < Editor.selectedObjects.length; i++)
 			{
-				Editor.selectedObjects[0].updateMatrix();
+				if(!Editor.selectedObjects[i].matrixAutoUpdate)
+				{
+					Editor.selectedObjects[i].updateMatrix();
+				}
 			}
 		}
 
