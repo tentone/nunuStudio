@@ -209,6 +209,14 @@ ObjectUtils.getTextures = function(obj, textures)
 		{
 			add(child.texture);
 		}
+
+		if(child instanceof LensFlare)
+		{
+			for(var i = 0; i < child.lensFlares.length; i++)
+			{
+				add(child.lensFlares[i].texture);
+			}
+		}
 	});
 
 	return textures;
