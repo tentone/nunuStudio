@@ -11,8 +11,8 @@ function ContextMenu(parent)
 	this.element.style.zIndex = "300";
 
 	//Attributes
-	this.size = new THREE.Vector2(130,20);
-	this.position = new THREE.Vector2(0,0);
+	this.size = new THREE.Vector2(130, 20);
+	this.position = new THREE.Vector2(0, 0);
 	this.visible = true;
 
 	//Options
