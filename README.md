@@ -161,6 +161,8 @@
 		- Moved from base64 to raw binary data.
 	- Cube camera preview
 	- Fixed dropdown menus getting out of screen
+- V0.9.3 Beta
+	- Shadow material
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
