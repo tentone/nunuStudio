@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../lib/highlight.min.css">
 	<link rel="stylesheet" href="../../../style.css">
+	<link rel="stylesheet" href="../../js/tutorial.css">
 
 	<!--Javascript-->
 	<script src="../../../lib/jquery.min.js"></script>
@@ -55,7 +56,7 @@
 			<p>Materials describe the appearance of objects. Materials define how the object superficie is renderer and can have attached to them textures, colors, videos, etc.</p>
 
 			<h3 class="black">Material types</h3>
-			<p>There are various types of materials available inside nunuStudio. More information about material types can be found <a href="https://threejs.org/docs/index.html#Reference/Materials/Material">here</a>. Here is a list of some of the most important material types:</p>
+			<p>There are various types of materials available inside nunuStudio and there is even the possibility of creating customized materials using GLSL shaders, more information about material types can be found <a href="https://threejs.org/docs/index.html#Reference/Materials/Material">here</a>. Here is a list of some of the most used material types:</p>
 			<ul>
 				<li><p>Standard material - A standard physically based material. Physically based rendering (PBR) has recently become the standard in many 3D applications, such as Unity, Unreal and 3D Studio Max. More infomation abou PBR <a href="https://www.marmoset.co/posts/basic-theory-of-physically-based-rendering/">here</a>.</p></li>
 				<li><p>Phong material - A material for shiny surfaces with specular highlight.</p></li>
@@ -69,12 +70,12 @@
 				<canvas id="canvas" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
 			<h3 class="black">Creating materials</h3>
-			<p>Materials can be crated by clicking on the Material option in the resource explorer, and selecting the type of material desired.</p>
-			<img src="selector.png" style="width:30%; margin-left:35%"></img>
+			<p>Materials can be crated by clicking on the Material menu in the resource explorer, and selecting the type of material desired, materials are also created when a image or video file is dragged to a mesh object or to the resource explorer.</p>
+			<img src="selector.png" class="img-normal"></img>
 			<p>After creating a material its possible edit its attributes double clicking on top of it on the resource explorer, this will open a new material editor tab.</p>
 			<p>Inside the material editor its possible to change every material parameter, add textures, change colors, etc.</p>
 			<p>On the left side of the material editor there is a real time preview of the material applied to an object that can be moved using the mouse left button, its also possible to change the preview settings on the bottom section of the left side.</p>
-			<img src="editor.jpg" style="width:60%; margin-left:20%"></img>
+			<img src="editor.jpg" class="img-big"></img>
 
 			<h3 class="black">Textures</h3>
 			<p>Materials can have textures attached to them, textures can be used to define the color of the material surface, but can also be used to define other attributes of the material, like the roughness, metalness, normal vectors, etc.</p>
@@ -98,10 +99,10 @@
 			<div>
 				<canvas id="rock" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
+			
 			<h3 class="black">Applying materials</h3>
-			<p>To apply a material to an object select the scene editor and drag the material from the resource explorer to the desired object.</p>
-			<p>Another way to create materials is by dragging an external image or video file direcly to a object in the scene explorer, this will create a Standard or Sprite material (depending on the object) automatically using the provided file as a texture.</p>
-			<img src="apply.jpg" style="width:60%; margin-left:20%"></img>
+			<p>To apply a material to an object select the scene editor and drag the material from the resource explorer to the desired object. Another way to create materials is by dragging an external image or video file direcly to a object in the scene explorer, this will create a Standard or Sprite material (depending on the object) automatically using the provided file as a texture.</p>
+			<img src="apply.jpg" class="img-big"></img>
 		</div>
 	</section>
 

@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="../../../lib/bootstrap.min.css">
 	<link rel="stylesheet" href="../../../lib/highlight.min.css">
 	<link rel="stylesheet" href="../../../style.css">
+	<link rel="stylesheet" href="../../js/tutorial.css">
 
 	<!--Javascript-->
 	<script src="../../../lib/jquery.min.js"></script>
@@ -54,7 +55,7 @@
 			<h2 class="black">Cameras</h2>
 			<p>Cameras define how the scene is viewed in the screen, as every other object they have a position and rotation, and can control where to draw content on the screen and can have post-processing effects attached.</p>
 			<p>A scene can use multiple cameras at the same time, camera have a draw order preference attached to them, used to decide which one to render from first. Cameras can be added from the object add bar.</p>
-			<img src="camera.jpg" style="width:60%; margin-left:20%"></img>
+			<img src="camera.jpg" class="img-big"></img>
 
 			<h3 class="black">Perspective Camera</h3>
 			<p>A perspective camera is used to draw objects with a perspective projection. A perspective projection is a 3D where depth can be easily perceived by the used.</p>
@@ -90,7 +91,8 @@
 			</div>
 			<h3 class="black">Cube Camera</h3>
 			<p>Cube cameras are composed of 6 internal perspective cameras aligned to capture an entire 360 projection of the scene.</p>
-			<p>These type of cameras can be added from the object bar, and can be programmatically attached to the scene (as background) or to materials (as environment map) and are used essencially to create reflection/refraction effects.</p>
+			<p>These type of cameras can be added from the object bar, and can be programmatically attached to the scene (as background) or to materials (as environment map) and are used to create reflection and refraction effects.</p>
+			<img src="cubecamera.png" class="img-big"></img>
 		</div>
 	</section>
 
