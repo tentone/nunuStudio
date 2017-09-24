@@ -329,6 +329,14 @@ function AssetExplorer(parent, closeable, container, index)
 		Editor.updateObjectViews();
 	}, Editor.filePath + "icons/misc/material.png");
 
+	others.addOption("Shadow material", function()
+	{
+		var material = new THREE.ShadowMaterial();
+		material.name = "shadow";
+		Editor.program.addMaterial(material);
+		Editor.updateObjectViews();
+	}, Editor.filePath + "icons/misc/material.png");
+
 	material.updateInterface();
 
 	//Files in explorer

@@ -457,23 +457,15 @@
 
 		},
 
-		nearestPowerOfTwo: function ( value ) {
+		ceilPowerOfTwo: function ( value ) {
 
-			return Math.pow( 2, Math.round( Math.log( value ) / Math.LN2 ) );
+			return Math.pow( 2, Math.ceil( Math.log( value ) / Math.LN2 ) );
 
 		},
 
-		nextPowerOfTwo: function ( value ) {
+		floorPowerOfTwo: function ( value ) {
 
-			value --;
-			value |= value >> 1;
-			value |= value >> 2;
-			value |= value >> 4;
-			value |= value >> 8;
-			value |= value >> 16;
-			value ++;
-
-			return value;
+			return Math.pow( 2, Math.floor( Math.log( value ) / Math.LN2 ) );
 
 		}
 
@@ -3715,6 +3707,7 @@
 
 			this.offset.copy( source.offset );
 			this.repeat.copy( source.repeat );
+			this.center.copy( source.center );
 			this.rotation = source.rotation;
 
 			this.matrixAutoUpdate = source.matrixAutoUpdate;
@@ -3792,6 +3785,7 @@
 
 				repeat: [ this.repeat.x, this.repeat.y ],
 				offset: [ this.offset.x, this.offset.y ],
+				center: [ this.center.x, this.center.y ],
 				rotation: this.rotation,
 
 				wrap: [ this.wrapS, this.wrapT ],
@@ -12986,9 +12980,9 @@
 
 	//
 
-	function Int8BufferAttribute( array, itemSize ) {
+	function Int8BufferAttribute( array, itemSize, normalized ) {
 
-		BufferAttribute.call( this, new Int8Array( array ), itemSize );
+		BufferAttribute.call( this, new Int8Array( array ), itemSize, normalized );
 
 	}
 
@@ -12996,9 +12990,9 @@
 	Int8BufferAttribute.prototype.constructor = Int8BufferAttribute;
 
 
-	function Uint8BufferAttribute( array, itemSize ) {
+	function Uint8BufferAttribute( array, itemSize, normalized ) {
 
-		BufferAttribute.call( this, new Uint8Array( array ), itemSize );
+		BufferAttribute.call( this, new Uint8Array( array ), itemSize, normalized );
 
 	}
 
@@ -13006,9 +13000,9 @@
 	Uint8BufferAttribute.prototype.constructor = Uint8BufferAttribute;
 
 
-	function Uint8ClampedBufferAttribute( array, itemSize ) {
+	function Uint8ClampedBufferAttribute( array, itemSize, normalized ) {
 
-		BufferAttribute.call( this, new Uint8ClampedArray( array ), itemSize );
+		BufferAttribute.call( this, new Uint8ClampedArray( array ), itemSize, normalized );
 
 	}
 
@@ -13016,9 +13010,9 @@
 	Uint8ClampedBufferAttribute.prototype.constructor = Uint8ClampedBufferAttribute;
 
 
-	function Int16BufferAttribute( array, itemSize ) {
+	function Int16BufferAttribute( array, itemSize, normalized ) {
 
-		BufferAttribute.call( this, new Int16Array( array ), itemSize );
+		BufferAttribute.call( this, new Int16Array( array ), itemSize, normalized );
 
 	}
 
@@ -13026,9 +13020,9 @@
 	Int16BufferAttribute.prototype.constructor = Int16BufferAttribute;
 
 
-	function Uint16BufferAttribute( array, itemSize ) {
+	function Uint16BufferAttribute( array, itemSize, normalized ) {
 
-		BufferAttribute.call( this, new Uint16Array( array ), itemSize );
+		BufferAttribute.call( this, new Uint16Array( array ), itemSize, normalized );
 
 	}
 
@@ -13036,9 +13030,9 @@
 	Uint16BufferAttribute.prototype.constructor = Uint16BufferAttribute;
 
 
-	function Int32BufferAttribute( array, itemSize ) {
+	function Int32BufferAttribute( array, itemSize, normalized ) {
 
-		BufferAttribute.call( this, new Int32Array( array ), itemSize );
+		BufferAttribute.call( this, new Int32Array( array ), itemSize, normalized );
 
 	}
 
@@ -13046,9 +13040,9 @@
 	Int32BufferAttribute.prototype.constructor = Int32BufferAttribute;
 
 
-	function Uint32BufferAttribute( array, itemSize ) {
+	function Uint32BufferAttribute( array, itemSize, normalized ) {
 
-		BufferAttribute.call( this, new Uint32Array( array ), itemSize );
+		BufferAttribute.call( this, new Uint32Array( array ), itemSize, normalized );
 
 	}
 
@@ -13056,9 +13050,9 @@
 	Uint32BufferAttribute.prototype.constructor = Uint32BufferAttribute;
 
 
-	function Float32BufferAttribute( array, itemSize ) {
+	function Float32BufferAttribute( array, itemSize, normalized ) {
 
-		BufferAttribute.call( this, new Float32Array( array ), itemSize );
+		BufferAttribute.call( this, new Float32Array( array ), itemSize, normalized );
 
 	}
 
@@ -13066,9 +13060,9 @@
 	Float32BufferAttribute.prototype.constructor = Float32BufferAttribute;
 
 
-	function Float64BufferAttribute( array, itemSize ) {
+	function Float64BufferAttribute( array, itemSize, normalized ) {
 
-		BufferAttribute.call( this, new Float64Array( array ), itemSize );
+		BufferAttribute.call( this, new Float64Array( array ), itemSize, normalized );
 
 	}
 
@@ -15936,6 +15930,18 @@
 
 			this.drawMode = source.drawMode;
 
+			if ( source.morphTargetInfluences !== undefined ) {
+
+				this.morphTargetInfluences = source.morphTargetInfluences.slice();
+
+			}
+
+			if ( source.morphTargetDictionary !== undefined ) {
+
+				this.morphTargetDictionary = Object.assign( {}, source.morphTargetDictionary );
+
+			}
+
 			return this;
 
 		},
@@ -16154,7 +16160,7 @@
 
 						}
 
-					} else {
+					} else if ( position !== undefined ) {
 
 						// non-indexed buffer geometry
 
@@ -17697,20 +17703,28 @@
 
 			prefixVertex = [
 
-				customDefines,
-
-				'\n'
+				customDefines
 
 			].filter( filterEmptyLine ).join( '\n' );
+
+			if ( prefixVertex.length > 0 ) {
+
+				prefixVertex += '\n';
+
+			}
 
 			prefixFragment = [
 
 				customExtensions,
-				customDefines,
-
-				'\n'
+				customDefines
 
 			].filter( filterEmptyLine ).join( '\n' );
+
+			if ( prefixFragment.length > 0 ) {
+
+				prefixFragment += '\n';
+
+			}
 
 		} else {
 
@@ -18419,11 +18433,11 @@
 
 		function makePowerOfTwo( image ) {
 
-			if ( image instanceof HTMLImageElement || image instanceof HTMLCanvasElement ) {
+			if ( image instanceof HTMLImageElement || image instanceof HTMLCanvasElement || image instanceof ImageBitmap ) {
 
 				var canvas = document.createElementNS( 'http://www.w3.org/1999/xhtml', 'canvas' );
-				canvas.width = _Math.nearestPowerOfTwo( image.width );
-				canvas.height = _Math.nearestPowerOfTwo( image.height );
+				canvas.width = _Math.floorPowerOfTwo( image.width );
+				canvas.height = _Math.floorPowerOfTwo( image.height );
 
 				var context = canvas.getContext( '2d' );
 				context.drawImage( image, 0, 0, canvas.width, canvas.height );
@@ -22780,7 +22794,7 @@
 
 
 							var size = Math.sqrt( bones.length * 4 ); // 4 pixels needed for 1 matrix
-							size = _Math.nextPowerOfTwo( Math.ceil( size ) );
+							size = _Math.ceilPowerOfTwo( size );
 							size = Math.max( size, 4 );
 
 							var boneMatrices = new Float32Array( size * size * 4 ); // 4 floats per RGBA pixel
@@ -34608,6 +34622,7 @@
 
 					if ( data.offset !== undefined ) texture.offset.fromArray( data.offset );
 					if ( data.repeat !== undefined ) texture.repeat.fromArray( data.repeat );
+					if ( data.center !== undefined ) texture.center.fromArray( data.center );
 					if ( data.rotation !== undefined ) texture.rotation = data.rotation;
 
 					if ( data.wrap !== undefined ) {
@@ -42932,12 +42947,30 @@
 
 	};
 
-	_Math.random16 = function () {
+	Object.assign( _Math, {
 
-		console.warn( 'THREE.Math.random16() has been deprecated. Use Math.random() instead.' );
-		return Math.random();
+		random16: function () {
 
-	};
+			console.warn( 'THREE.Math: .random16() has been deprecated. Use Math.random() instead.' );
+			return Math.random();
+
+		},
+
+		nearestPowerOfTwo: function ( value ) {
+
+			console.warn( 'THREE.Math: .nearestPowerOfTwo() has been renamed to .floorPowerOfTwo().' );
+			return _Math.floorPowerOfTwo( value );
+
+		},
+
+		nextPowerOfTwo: function ( value ) {
+
+			console.warn( 'THREE.Math: .nextPowerOfTwo() has been renamed to .ceilPowerOfTwo().' );
+			return _Math.ceilPowerOfTwo( value );
+
+		}
+
+	} );
 
 	Object.assign( Matrix3.prototype, {
 
