@@ -1,0 +1,20 @@
+.img-big
+{
+	width:60%;
+	margin-left:20%;
+	border-radius:10px;
+}
+
+.img-normal
+{
+	width:40%;
+	margin-left:30%;
+	border-radius:10px;
+}
+
+.img-small
+{
+	width:20%;
+	margin-left:40%;
+	border-radius:10px;
+}
