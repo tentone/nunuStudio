@@ -101,7 +101,7 @@ Settings.loadDefault = function()
 		nonew : false, // true: Prohibit use of constructors for side-effects (without assignment)
 		plusplus : false, // true: Prohibit use of `++` and `--`
 		undef : false, // true: Require all non-global variables to be declared (prevents global leaks)
-		unused : true, // Unused variables:
+		unused : false, // Unused variables:
 							// true : all variables, last function parameter
 							// "vars" : all variables only
 							// "strict" : all variables, all function parameters
