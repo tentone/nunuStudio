@@ -19,6 +19,8 @@ function OrbitControls()
 
 	this.distance = 3;
 	this.sensitivity = 0.001;
+	this.limitUp = 1.57;
+	this.limitDown = -1.57;
 
 	this.center = new THREE.Vector3(0, 0, 0);
 	this.vector = new THREE.Vector2(0, 0);
@@ -60,13 +62,13 @@ OrbitControls.prototype.update = function()
 		this.vector.y -= this.sensitivity * this.mouse.delta.y;
 		this.vector.x -= this.sensitivity * this.mouse.delta.x;
 
-		if(this.vector.y < -1.57)
+		if(this.vector.y < this.limitDown)
 		{
-			this.vector.y = -1.57;
+			this.vector.y = this.limitDown;
 		}
-		else if(this.vector.y > 1.57)
+		else if(this.vector.y > this.limitUp)
 		{
-			this.vector.y = 1.57;
+			this.vector.y = this.limitUp;
 		}
 	}
 
@@ -78,7 +80,7 @@ OrbitControls.prototype.update = function()
 			this.distance = 0;
 		}
 	}
-
+	
 	if(this.mouse.buttonPressed(Mouse.MIDDLE))
 	{
 		this.distance += this.mouse.delta.y * this.sensitivity;
@@ -88,47 +90,7 @@ OrbitControls.prototype.update = function()
 		}
 	}
 
-	//WASD movement
-	/*if(this.keyboard.keyPressed(Keyboard.W))
-	{
-		var direction = this.getWorldDirection();
-		direction.y = 0;
-		direction.normalize();
-
-		this.center.x += direction.x;
-		this.center.z += direction.z;
-	}
-	if(this.keyboard.keyPressed(Keyboard.S))
-	{
-		var direction = this.getWorldDirection();
-		direction.y = 0;
-		direction.normalize();
-
-		this.center.x -= direction.x;
-		this.center.z -= direction.z;
-	}
-	if(this.keyboard.keyPressed(Keyboard.D))
-	{
-		var direction = this.getWorldDirection();
-		direction.y = 0;
-		direction.normalize();
-		direction.applyAxisAngle(OrbitControls.UP, 1.57);
-
-		this.center.x -= direction.x;
-		this.center.z -= direction.z;
-	}
-	if(this.keyboard.keyPressed(Keyboard.A))
-	{
-		var direction = this.getWorldDirection();
-		direction.y = 0;
-		direction.normalize();
-		direction.applyAxisAngle(OrbitControls.UP, 1.57);
-
-		this.center.x += direction.x;
-		this.center.z += direction.z;
-	}*/
-
-	/*if(this.mouse.buttonPressed(Mouse.RIGHT))
+	if(this.mouse.buttonPressed(Mouse.RIGHT))
 	{
 		var direction = this.getWorldDirection();
 		direction.y = 0;
@@ -141,16 +103,15 @@ OrbitControls.prototype.update = function()
 
 		this.center.x += direction.x * this.mouse.delta.x * this.sensitivity;
 		this.center.z += direction.z * this.mouse.delta.x * this.sensitivity;
-	}*/
+	}
 
 	var cos = this.distance * Math.cos(this.vector.y);
-	this.position.set(0, 0, 0);
-	
-	var temp = new THREE.Vector3(Math.cos(this.vector.x) * cos, this.distance * Math.sin(this.vector.y), Math.sin(this.vector.x) * cos);
-	temp.add(this.center);
+	this.position.set(Math.cos(this.vector.x) * cos, this.distance * Math.sin(this.vector.y), Math.sin(this.vector.x) * cos);
+	this.position.add(this.center);
 
-	this.lookAt(temp);
-	this.position.copy(temp);
+	var matrix = new THREE.Matrix4();
+	matrix.lookAt(this.position, OrbitControls.ZERO, OrbitControls.UP);
+	this.quaternion.setFromRotationMatrix(matrix);
 
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -164,6 +125,8 @@ OrbitControls.prototype.toJSON = function(meta)
 
 	data.object.distance = this.distance;
 	data.object.sensitivity = this.sensitivity;
+	data.object.limitUp = this.limitUp;
+	data.object.limitDown = this.limitDown;
 
 	return data;
 };
