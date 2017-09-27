@@ -135,6 +135,7 @@ include("core/objects/misc/Container.js");
 include("core/objects/misc/CubeCamera.js");
 include("core/objects/misc/LensFlare.js");
 include("core/objects/animation/Skeleton.js");
+include("core/objects/controls/OrbitControls.js");
 include("core/objects/Program.js");
 include("core/objects/Scene.js");
 

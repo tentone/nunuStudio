@@ -50,6 +50,7 @@ ObjectIcons.icons["CubeCamera"] = ObjectIcons.path + "misc/probe.png";
 ObjectIcons.icons["Bone"] = ObjectIcons.path + "misc/bone.png";
 ObjectIcons.icons["Group"] = ObjectIcons.path + "misc/container.png";
 ObjectIcons.icons["LensFlare"] = ObjectIcons.path + "misc/flare.png";
+ObjectIcons.icons["OrbitControls"] = ObjectIcons.path + "misc/orbit.png";
 
 //Get icon path from object type
 ObjectIcons.get = function(type)

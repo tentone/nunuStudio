@@ -839,9 +839,8 @@ SceneEditor.prototype.update = function()
 					}
 
 					//Update camera position and direction
-					var cosAngleY = Math.cos(this.cameraRotation.y);
-					var position = new THREE.Vector3(this.cameraDistance * Math.cos(this.cameraRotation.x)*cosAngleY, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x)*cosAngleY);
-					this.camera.position.copy(position);
+					var cos = Math.cos(this.cameraRotation.y);
+					this.camera.position.set(this.cameraDistance * Math.cos(this.cameraRotation.x) * cos, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x) * cos);
 					this.camera.position.add(this.cameraLookAt);
 					this.camera.lookAt(this.cameraLookAt);
 				}
