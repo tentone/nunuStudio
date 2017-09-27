@@ -26,6 +26,9 @@ function OrbitControls()
 	this.keyboard = null;
 }
 
+OrbitControls.UP = new THREE.Vector3(0, 1, 0);
+OrbitControls.ZERO = new THREE.Vector3(0, 0, 0);
+
 OrbitControls.prototype = Object.create(THREE.Object3D.prototype);
 
 OrbitControls.prototype.initialize = function()
@@ -67,10 +70,9 @@ OrbitControls.prototype.update = function()
 		}
 	}
 
-	//Zoom
 	if(this.mouse.wheel !== 0)
 	{
-		this.distance += this.sensitivity * this.mouse.wheel;
+		this.distance += this.mouse.wheel * this.sensitivity;
 		if(this.distance < 0)
 		{
 			this.distance = 0;
@@ -110,7 +112,7 @@ OrbitControls.prototype.update = function()
 		var direction = this.getWorldDirection();
 		direction.y = 0;
 		direction.normalize();
-		direction.applyAxisAngle(SceneEditor.UP, 1.57);
+		direction.applyAxisAngle(OrbitControls.UP, 1.57);
 
 		this.center.x -= direction.x;
 		this.center.z -= direction.z;
@@ -120,34 +122,35 @@ OrbitControls.prototype.update = function()
 		var direction = this.getWorldDirection();
 		direction.y = 0;
 		direction.normalize();
-		direction.applyAxisAngle(SceneEditor.UP, 1.57);
+		direction.applyAxisAngle(OrbitControls.UP, 1.57);
 
 		this.center.x += direction.x;
 		this.center.z += direction.z;
-	}
+	}*/
 
-	if(this.mouse.buttonPressed(Mouse.RIGHT))
+	/*if(this.mouse.buttonPressed(Mouse.RIGHT))
 	{
 		var direction = this.getWorldDirection();
 		direction.y = 0;
 		direction.normalize();
 
-		var speed = 0.01;
+		this.center.x += direction.x * this.mouse.delta.y * this.sensitivity;
+		this.center.z += direction.z * this.mouse.delta.y * this.sensitivity;
 
-		this.center.x += direction.x * this.mouse.delta.y * speed;
-		this.center.z += direction.z * this.mouse.delta.y * speed;
+		direction.applyAxisAngle(OrbitControls.UP, 1.57);
 
-		direction.applyAxisAngle(SceneEditor.UP, 1.57);
-
-		this.center.x += direction.x * this.mouse.delta.x * speed;
-		this.center.z += direction.z * this.mouse.delta.x * speed;
+		this.center.x += direction.x * this.mouse.delta.x * this.sensitivity;
+		this.center.z += direction.z * this.mouse.delta.x * this.sensitivity;
 	}*/
 
-	//Update camera position and direction
 	var cos = this.distance * Math.cos(this.vector.y);
-	this.position.set(Math.cos(this.vector.x) * cos, this.distance * Math.sin(this.vector.y), Math.sin(this.vector.x) * cos);
-	this.position.add(this.center);
-	this.lookAt(this.center);
+	this.position.set(0, 0, 0);
+	
+	var temp = new THREE.Vector3(Math.cos(this.vector.x) * cos, this.distance * Math.sin(this.vector.y), Math.sin(this.vector.x) * cos);
+	temp.add(this.center);
+
+	this.lookAt(temp);
+	this.position.copy(temp);
 
 	for(var i = 0; i < this.children.length; i++)
 	{
