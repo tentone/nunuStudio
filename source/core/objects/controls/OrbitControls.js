@@ -80,7 +80,7 @@ OrbitControls.prototype.update = function()
 			this.distance = 0;
 		}
 	}
-	
+
 	if(this.mouse.buttonPressed(Mouse.MIDDLE))
 	{
 		this.distance += this.mouse.delta.y * this.sensitivity;
@@ -96,13 +96,15 @@ OrbitControls.prototype.update = function()
 		direction.y = 0;
 		direction.normalize();
 
-		this.center.x += direction.x * this.mouse.delta.y * this.sensitivity;
-		this.center.z += direction.z * this.mouse.delta.y * this.sensitivity;
+		var y = this.mouse.delta.y * this.sensitivity * 10;
+		this.center.x += direction.x * y;
+		this.center.z += direction.z * y;
 
 		direction.applyAxisAngle(OrbitControls.UP, 1.57);
 
-		this.center.x += direction.x * this.mouse.delta.x * this.sensitivity;
-		this.center.z += direction.z * this.mouse.delta.x * this.sensitivity;
+		var x = this.mouse.delta.x * this.sensitivity * 10;
+		this.center.x += direction.x * x;
+		this.center.z += direction.z * x;
 	}
 
 	var cos = this.distance * Math.cos(this.vector.y);
