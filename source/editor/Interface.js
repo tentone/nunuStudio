@@ -350,6 +350,12 @@ Interface.initialize = function()
 		Editor.addToScene(new PositionalAudio(Editor.defaultAudio));
 	}, "Positional Audio");
 
+	Interface.addEffects.addOption(Editor.filePath + "icons/misc/orbit.png", function()
+	{
+		Editor.addToScene(new OrbitControls());
+	}, "Orbit Controls");
+
+
 	//Lens flare
 	Interface.addEffects.addOption(Editor.filePath + "icons/misc/flare.png", function()
 	{
