@@ -783,6 +783,10 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		case "CubeCamera":
 			object = new CubeCamera(data.near, data.far, data.resolution, data.autoUpdate);
 			break;
+			
+		case "FirstPersonControls":
+			object = new FirstPersonControls();
+			break;
 
 		case "OrbitControls":
 			object = new OrbitControls();
