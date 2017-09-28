@@ -355,6 +355,10 @@ Interface.initialize = function()
 		Editor.addToScene(new OrbitControls());
 	}, "Orbit Controls");
 
+	Interface.addEffects.addOption(Editor.filePath + "icons/misc/orbit.png", function()
+	{
+		Editor.addToScene(new FirstPersonControls());
+	}, "First Person Controls");
 
 	//Lens flare
 	Interface.addEffects.addOption(Editor.filePath + "icons/misc/flare.png", function()

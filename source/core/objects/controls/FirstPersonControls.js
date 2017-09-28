@@ -19,6 +19,10 @@ function FirstPersonControls()
 	this.name = "orbit";
 	this.type = "FirstPersonControls";
 
+	this.moveSpeed = 0.05;
+	this.sensitivity = 0.005;
+
+	this.vector = new THREE.Vector2(0, 0);
 	this.mouse = null;
 	this.keyboard = null;
 }
@@ -39,8 +43,6 @@ FirstPersonControls.prototype.initialize = function()
 		}
 	}
 
-	this.center.copy(this.position);
-
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
@@ -49,7 +51,54 @@ FirstPersonControls.prototype.initialize = function()
 
 FirstPersonControls.prototype.update = function()
 {
-	//TODO <ADD CODE HERE>
+	if(this.mouse.buttonPressed(Mouse.LEFT))
+	{
+		this.vector.y -= this.sensitivity * this.mouse.delta.y;
+		this.vector.x -= this.sensitivity * this.mouse.delta.x;
+
+		if(this.vector.y < -1.57)
+		{
+			this.vector.y = -1.57;
+		}
+		else if(this.vector.y > 1.57)
+		{
+			this.vector.y = 1.57;
+		}
+	}
+
+	var cos = Math.cos(this.vector.y);
+	var direction = new THREE.Vector3(Math.sin(this.vector.x) * cos, Math.sin(this.vector.y), Math.cos(this.vector.x) * cos);
+	direction.add(this.position);
+	this.lookAt(direction);
+
+	if(this.keyboard.keyPressed(Keyboard.W))
+	{
+		var direction = this.getWorldDirection();
+		direction.normalize();
+		direction.multiplyScalar(this.moveSpeed);
+		this.position.add(direction);
+	}
+	if(this.keyboard.keyPressed(Keyboard.S))
+	{
+		var direction = this.getWorldDirection();
+		direction.normalize();
+		direction.multiplyScalar(this.moveSpeed);
+		this.position.sub(direction);
+	}
+	if(this.keyboard.keyPressed(Keyboard.A))
+	{
+		var direction = new THREE.Vector3(Math.sin(this.vector.x - 1.57), 0, Math.cos(this.vector.x - 1.57));
+		direction.normalize();
+		direction.multiplyScalar(this.moveSpeed);
+		this.position.sub(direction);
+	}
+	if(this.keyboard.keyPressed(Keyboard.D))
+	{
+		var direction = new THREE.Vector3(Math.sin(this.vector.x + 1.57), 0, Math.cos(this.vector.x + 1.57));
+		direction.normalize();
+		direction.multiplyScalar(this.moveSpeed);
+		this.position.sub(direction);
+	}
 	
 	for(var i = 0; i < this.children.length; i++)
 	{
