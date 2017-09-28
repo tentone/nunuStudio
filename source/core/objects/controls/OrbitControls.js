@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Orbit controls is a container that can be controlled using the mouse.
+ * Orbit controls object can be controlled using the mouse.
  * 
  * It can be rotated using the mouse left button, moved with the mouse right button or mouse wheel. 
  * 
@@ -9,6 +9,34 @@
  * @constructor
  * @extends {Object3D}
  * @module Controls
+ */
+/**
+ * Initial distance of the object relative to the center.
+ * 
+ * @property distance
+ * @default 3
+ * @type {Number}
+ */
+/**
+ * Mouse sensitivity.
+ * 
+ * @property sensitivity
+ * @default 0.001
+ * @type {Number}
+ */
+/**
+ * Top limit angle.
+ * 
+ * @property limitUp
+ * @default 1.57
+ * @type {Number}
+ */
+/**
+ * Bottom limit angle.
+ * 
+ * @property limitDown
+ * @default -1.57
+ * @type {Number}
  */
 function OrbitControls()
 {
