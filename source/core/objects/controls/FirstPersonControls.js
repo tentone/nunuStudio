@@ -16,17 +16,20 @@ function FirstPersonControls()
 {
 	THREE.Object3D.call(this);
 
-	this.name = "orbit";
+	this.name = "controls";
 	this.type = "FirstPersonControls";
 
 	this.moveSpeed = 0.05;
 	this.sensitivity = 0.005;
-	this.needsMousePress = true;
+	this.needsButtonPressed = true;
+	this.moveOnPlane = true;
 
 	this.vector = new THREE.Vector2(0, 0);
 	this.mouse = null;
 	this.keyboard = null;
 }
+
+FirstPersonControls.UP = new THREE.Vector3(0, 1, 0);
 
 FirstPersonControls.prototype = Object.create(THREE.Object3D.prototype);
 
@@ -52,7 +55,7 @@ FirstPersonControls.prototype.initialize = function()
 
 FirstPersonControls.prototype.update = function()
 {
-	if(!this.needsMousePress || this.mouse.buttonPressed(Mouse.LEFT))
+	if(!this.needsButtonPressed || this.mouse.buttonPressed(Mouse.LEFT))
 	{
 		this.vector.y -= this.sensitivity * this.mouse.delta.y;
 		this.vector.x -= this.sensitivity * this.mouse.delta.x;
@@ -70,21 +73,32 @@ FirstPersonControls.prototype.update = function()
 	var cos = Math.cos(this.vector.y);
 	var direction = new THREE.Vector3(Math.sin(this.vector.x) * cos, Math.sin(this.vector.y), Math.cos(this.vector.x) * cos);
 	direction.add(this.position);
-	this.lookAt(direction);
+
+	var matrix = new THREE.Matrix4();
+	matrix.lookAt(this.position, direction, FirstPersonControls.UP);
+	this.quaternion.setFromRotationMatrix(matrix);
 
 	if(this.keyboard.keyPressed(Keyboard.W))
 	{
 		var direction = this.getWorldDirection();
+		if(this.moveOnPlane)
+		{
+			direction.y = 0;
+		}
 		direction.normalize();
 		direction.multiplyScalar(this.moveSpeed);
-		this.position.add(direction);
+		this.position.sub(direction);
 	}
 	if(this.keyboard.keyPressed(Keyboard.S))
 	{
 		var direction = this.getWorldDirection();
+		if(this.moveOnPlane)
+		{
+			direction.y = 0;
+		}
 		direction.normalize();
 		direction.multiplyScalar(this.moveSpeed);
-		this.position.sub(direction);
+		this.position.add(direction);
 	}
 	if(this.keyboard.keyPressed(Keyboard.A))
 	{
@@ -113,7 +127,8 @@ FirstPersonControls.prototype.toJSON = function(meta)
 
 	data.object.moveSpeed = this.moveSpeed;
 	data.object.sensitivity = this.sensitivity;
-	data.object.needsMousePress = this.needsMousePress;
+	data.object.needsButtonPressed = this.needsButtonPressed;
+	data.object.moveOnPlane = this.moveOnPlane;
 
 	return data;
 };

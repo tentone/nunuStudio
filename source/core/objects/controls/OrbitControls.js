@@ -49,6 +49,7 @@ function OrbitControls()
 	this.sensitivity = 0.001;
 	this.limitUp = 1.57;
 	this.limitDown = -1.57;
+	this.needsButtonPressed = true;
 
 	this.center = new THREE.Vector3(0, 0, 0);
 	this.vector = new THREE.Vector2(0, 0);
@@ -85,7 +86,7 @@ OrbitControls.prototype.initialize = function()
 
 OrbitControls.prototype.update = function()
 {
-	if(this.mouse.buttonPressed(Mouse.LEFT))
+	if(!this.needsButtonPressed || this.mouse.buttonPressed(Mouse.LEFT))
 	{
 		this.vector.y -= this.sensitivity * this.mouse.delta.y;
 		this.vector.x -= this.sensitivity * this.mouse.delta.x;
@@ -157,6 +158,7 @@ OrbitControls.prototype.toJSON = function(meta)
 	data.object.sensitivity = this.sensitivity;
 	data.object.limitUp = this.limitUp;
 	data.object.limitDown = this.limitDown;
-
+	data.object.needsButtonPressed = this.needsButtonPressed;
+	
 	return data;
 };

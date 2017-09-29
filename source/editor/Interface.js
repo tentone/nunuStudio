@@ -303,7 +303,7 @@ Interface.initialize = function()
 		Editor.addToScene(new Script());
 	}, "JS Script");
 
-	//Sprites and effects
+	//Effects
 	Interface.addEffects = new ButtonDrawer(Interface.toolBar.element);
 	Interface.addEffects.setImage(Editor.filePath + "icons/misc/particles.png");
 	Interface.addEffects.optionsPerLine = 3;
@@ -355,7 +355,7 @@ Interface.initialize = function()
 		Editor.addToScene(new OrbitControls());
 	}, "Orbit Controls");
 
-	Interface.addEffects.addOption(Editor.filePath + "icons/misc/orbit.png", function()
+	Interface.addEffects.addOption(Editor.filePath + "icons/misc/crosshair.png", function()
 	{
 		Editor.addToScene(new FirstPersonControls());
 	}, "First Person Controls");
