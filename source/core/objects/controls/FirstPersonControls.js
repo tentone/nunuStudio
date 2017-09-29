@@ -21,6 +21,7 @@ function FirstPersonControls()
 
 	this.moveSpeed = 0.05;
 	this.sensitivity = 0.005;
+	this.needsMousePress = true;
 
 	this.vector = new THREE.Vector2(0, 0);
 	this.mouse = null;
@@ -51,7 +52,7 @@ FirstPersonControls.prototype.initialize = function()
 
 FirstPersonControls.prototype.update = function()
 {
-	if(this.mouse.buttonPressed(Mouse.LEFT))
+	if(!this.needsMousePress || this.mouse.buttonPressed(Mouse.LEFT))
 	{
 		this.vector.y -= this.sensitivity * this.mouse.delta.y;
 		this.vector.x -= this.sensitivity * this.mouse.delta.x;
@@ -109,6 +110,10 @@ FirstPersonControls.prototype.update = function()
 FirstPersonControls.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
+
+	data.object.moveSpeed = this.moveSpeed;
+	data.object.sensitivity = this.sensitivity;
+	data.object.needsMousePress = this.needsMousePress;
 
 	return data;
 };

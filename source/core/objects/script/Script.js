@@ -8,12 +8,13 @@
  *    - Called on every frame after rendering
  *  - dispose
  *    - Called when disposing the program
- *  - onMouseOver
+ *  - onMouseOver(intersections)
  *    - Called on every frame if mouse is on top of one of the script children
- *  - onResize
+ *    - Receives an intersections array as argument.
+ *  - onResize(x, y)
  *    - Called every time the window is resized
- *    - Received width and height as parameters
- *  - onAppData
+ *    - Receives width and height as parameters
+ *  - onAppData(data)
  *    - Called when receiving data sent by the host website
  * 
  * Code written inside scripts have access to the following attributes:
@@ -131,10 +132,10 @@ Script.prototype.update = function()
 {
 	if(this.script.onMouseOver !== undefined)
 	{
-		var obj = this.scene.raycaster.intersectObjects(this.children, true);
-		if(obj.length > 0)
+		var intersections = this.scene.raycaster.intersectObjects(this.children, true);
+		if(intersections.length > 0)
 		{
-			this.script.onMouseOver.call(this, obj);
+			this.script.onMouseOver.call(this, intersections);
 		}
 	}
 
