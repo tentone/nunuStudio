@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Vector3</title>  
+	<title>nunuStudio FirstPersonControls</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -179,32 +179,30 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Vector3 Class</h1>
+						<h1>FirstPersonControls Class</h1>
 						<div class="box meta">
 						
+								<div class="extends">
+									Extends <a href="../classes/Object3D.html" class="crosslink">Object3D</a>
+								</div>
 						
 						
-									Module: <a href="../modules/Math.html">Math</a>
+									Module: <a href="../modules/Controls.html">Controls</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Class representing a 3D vector. A 3D vector is an ordered triplet of numbers (labeled x, y, and z), which can be used to represent a number of things, such as:</p>
-						<ul>
-						<li>A point in 3D space.</li>
-						<li>A direction and length in 3D space. In three.js the length will always be the Euclidean distance (straight-line distance) from (0, 0, 0) to (x, y, z) and the direction is also measured from (0, 0, 0) towards (x, y, z).</li>
-						<li>Any arbitrary ordered triplet of numbers.</li>
-						</ul>
-						<p>There are other things a 3D vector can be used to represent, such as momentum vectors and so on, however these are the most common uses in three.js.</p>
-						<p>Original documentation for Vector3 can be found here <a href="https://threejs.org/docs/index.html#Reference/Math/Vector3">https://threejs.org/docs/index.html#Reference/Math/Vector3</a></p>
+							<p>First person controls can be controlled using the mouse and keyboard.</p>
+						<p>Provides a navigations system familiar to the one found on FPS games.</p>
+						<p>The mouse left button can be used to look around, and the keyboard arrows for movement.</p>
 						
 						</div>
 						
 							<div class="constructor">
 								<h2>Constructor</h2>
-								<div id="method_Vector3" class="method item">
-									<h3 class="name"><code>Vector3</code></h3>
+								<div id="method_FirstPersonControls" class="method item">
+									<h3 class="name"><code>FirstPersonControls</code></h3>
 								
 										<span class="paren">()</span>
 								
@@ -247,13 +245,9 @@
 										<div class="index-section methods">
 											<h3>Methods</h3>
 						
-											<ul class="index-list methods">
+											<ul class="index-list methods extends">
 													<li class="index-item method">
-														<a href="#method_add">add</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_addScalar">addScalar</a>
+														<a href="#method_getDirection">getDirection</a>
 						
 													</li>
 											</ul>
@@ -262,17 +256,29 @@
 										<div class="index-section properties">
 											<h3>Properties</h3>
 						
-											<ul class="index-list properties">
+											<ul class="index-list properties extends">
 													<li class="index-item property">
-														<a href="#property_x">x</a>
+														<a href="#property_moveKeys">moveKeys</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_y">y</a>
+														<a href="#property_movementEnabled">movementEnabled</a>
 						
 													</li>
 													<li class="index-item property">
-														<a href="#property_z">z</a>
+														<a href="#property_moveOnPlane">moveOnPlane</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_moveSpeed">moveSpeed</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_needsButtonPressed">needsButtonPressed</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_sensitivity">sensitivity</a>
 						
 													</li>
 											</ul>
@@ -284,67 +290,14 @@
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_add" class="method item">
-												<h3 class="name"><code>add</code></h3>
+											<div id="method_getDirection" class="method item">
+												<h3 class="name"><code>getDirection</code></h3>
 											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>v</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
+													<span class="paren">()</span>
 											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Add v to this vector.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">v</code>
-																	<span class="type"><a href="../classes/Vector3.html" class="crosslink">Vector3</a></span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
-											
-											
-											</div>
-											<div id="method_addScalar" class="method item">
-												<h3 class="name"><code>addScalar</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>scalar</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
+													<span class="returns-inline">
+														<span class="type"><a href="../classes/Vector3.html" class="crosslink">Vector3</a></span>
+													</span>
 											
 											
 											
@@ -361,27 +314,21 @@
 												</div>
 											
 												<div class="description">
-													<p>Add the scalar value s to this vector's x, y and z values.</p>
+													<p>Used to get camera direction for this controller.</p>
+											<p>Controller direction can be used to simplify controlling physics objects, create objects in the camera direction, etc.</p>
 											
 												</div>
 											
-													<div class="params">
-														<h4>Parameters:</h4>
 											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">scalar</code>
-																	<span class="type">Number</span>
+													<div class="returns">
+														<h4>Returns:</h4>
 											
+														<div class="returns-description">
+																	<span class="type"><a href="../classes/Vector3.html" class="crosslink">Vector3</a></span>:
+																<p>Normalized camera direction.</p>
 											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
+														</div>
 													</div>
-											
 											
 											</div>
 									</div>
@@ -389,9 +336,9 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
-											<div id="property_x" class="property item">
-												<h3 class="name"><code>x</code></h3>
-												<span class="type">Number</span>
+											<div id="property_moveKeys" class="property item">
+												<h3 class="name"><code>moveKeys</code></h3>
+												<span class="type">Array</span>
 											
 											
 											
@@ -405,16 +352,22 @@
 												</div>
 											
 												<div class="description">
-													
+													<p>Array with keys to be used to move the object.</p>
+											<ul>
+											<li>Forward</li>
+											<li>Backward</li>
+											<li>Left</li>
+											<li>Right</li>
+											</ul>
+											
 												</div>
 											
-													<p><strong>Default:</strong> 0</p>
 											
 											
 											</div>
-											<div id="property_y" class="property item">
-												<h3 class="name"><code>y</code></h3>
-												<span class="type">Number</span>
+											<div id="property_movementEnabled" class="property item">
+												<h3 class="name"><code>movementEnabled</code></h3>
+												<span class="type">Boolean</span>
 											
 											
 											
@@ -428,15 +381,40 @@
 												</div>
 											
 												<div class="description">
-													
+													<p>Indicates if its possible to move the object using the Keyboard keys.</p>
+											
 												</div>
 											
-													<p><strong>Default:</strong> 0</p>
+													<p><strong>Default:</strong> true</p>
 											
 											
 											</div>
-											<div id="property_z" class="property item">
-												<h3 class="name"><code>z</code></h3>
+											<div id="property_moveOnPlane" class="property item">
+												<h3 class="name"><code>moveOnPlane</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>If set to true the object will only move on X and Z axis.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> false</p>
+											
+											
+											</div>
+											<div id="property_moveSpeed" class="property item">
+												<h3 class="name"><code>moveSpeed</code></h3>
 												<span class="type">Number</span>
 											
 											
@@ -451,10 +429,59 @@
 												</div>
 											
 												<div class="description">
-													
+													<p>Movement speed, relative to the world.</p>
+											
 												</div>
 											
-													<p><strong>Default:</strong> 0</p>
+													<p><strong>Default:</strong> moveSpeed</p>
+											
+											
+											</div>
+											<div id="property_needsButtonPressed" class="property item">
+												<h3 class="name"><code>needsButtonPressed</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Flag to indicate if the button left button needs to be pressed to rotate the object.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> true</p>
+											
+											
+											</div>
+											<div id="property_sensitivity" class="property item">
+												<h3 class="name"><code>sensitivity</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Mouse sensitivity.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> 0.001</p>
 											
 											
 											</div>

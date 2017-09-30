@@ -350,16 +350,6 @@ Interface.initialize = function()
 		Editor.addToScene(new PositionalAudio(Editor.defaultAudio));
 	}, "Positional Audio");
 
-	addEffects.addOption(Editor.filePath + "icons/misc/orbit.png", function()
-	{
-		Editor.addToScene(new OrbitControls());
-	}, "Orbit Controls");
-
-	addEffects.addOption(Editor.filePath + "icons/misc/crosshair.png", function()
-	{
-		Editor.addToScene(new FirstPersonControls());
-	}, "First Person Controls");
-
 	//Lens flare
 	addEffects.addOption(Editor.filePath + "icons/misc/flare.png", function()
 	{
@@ -436,11 +426,23 @@ Interface.initialize = function()
 	//Add device
 	var addControls = new ButtonDrawer(Interface.toolBar.element);
 	addControls.setImage(Editor.filePath + "icons/hw/hw.png");
-	addControls.optionsPerLine = 2;
+	addControls.optionsPerLine = 3;
 	addControls.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	addControls.position.set(0, 470);
 	addControls.optionsSize.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	addControls.updateInterface();
+
+	//Orbit controls
+	addControls.addOption(Editor.filePath + "icons/misc/orbit.png", function()
+	{
+		Editor.addToScene(new OrbitControls());
+	}, "Orbit Controls");
+
+	//FPS controls
+	addControls.addOption(Editor.filePath + "icons/misc/crosshair.png", function()
+	{
+		Editor.addToScene(new FirstPersonControls());
+	}, "First Person Controls");
 
 	//Leap Hand
 	addControls.addOption(Editor.filePath + "icons/hw/leap.png", function()
