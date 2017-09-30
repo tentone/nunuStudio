@@ -425,7 +425,7 @@ Interface.initialize = function()
 
 	//Add device
 	var addControls = new ButtonDrawer(Interface.toolBar.element);
-	addControls.setImage(Editor.filePath + "icons/hw/hw.png");
+	addControls.setImage(Editor.filePath + "icons/misc/controller.png");
 	addControls.optionsPerLine = 3;
 	addControls.size.set(Interface.toolBar.size.x, Interface.toolBar.size.x);
 	addControls.position.set(0, 470);

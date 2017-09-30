@@ -331,6 +331,8 @@ include("editor/ui/panels/lights/SpotLightPanel.js");
 include("editor/ui/panels/misc/CubeCameraPanel.js");
 include("editor/ui/panels/mesh/MeshPanel.js");
 include("editor/ui/panels/mesh/Text3DPanel.js");
+include("editor/ui/panels/controls/OrbitControlsPanel.js");
+include("editor/ui/panels/controls/FirstPersonControlsPanel.js");
 
 include("editor/ui/panels/mesh/geometry/GeometryForm.js");
 include("editor/ui/panels/mesh/geometry/BoxGeometryForm.js");
@@ -1116,6 +1118,14 @@ Editor.selectObjectPanel = function()
 		else if(Editor.selectedObjects[0] instanceof PhysicsObject)
 		{
 			Interface.panel = new PhysicsPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
+		}
+		else if(Editor.selectedObjects[0] instanceof OrbitControls)
+		{
+			Interface.panel = new OrbitControlsPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
+		}
+		else if(Editor.selectedObjects[0] instanceof FirstPersonControls)
+		{
+			Interface.panel = new FirstPersonControlsPanel(Interface.explorerResizable.divB, Editor.selectedObjects[0]);
 		}
 		else
 		{
