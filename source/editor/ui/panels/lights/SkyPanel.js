@@ -104,8 +104,8 @@ function SkyPanel(parent, obj)
 	this.form.nextRow();
 
 	//Auto update
-	this.autoUpdate = new CheckBox(this.form.element);
 	this.form.addText("Auto update");
+	this.autoUpdate = new CheckBox(this.form.element);
 	this.autoUpdate.size.set(15, 15);
 	this.autoUpdate.setOnChange(function()
 	{
