@@ -20,6 +20,8 @@ include("lib/three/shaders/DotScreenShader.js");
 include("lib/three/shaders/LuminosityShader.js");
 include("lib/three/shaders/SobelOperatorShader.js");
 
+include("lib/three/loaders/TTFLoader.js");
+
 include("lib/three/postprocessing/EffectComposer.js");
 include("lib/three/postprocessing/RenderPass.js");
 include("lib/three/postprocessing/ShaderPass.js");
@@ -100,7 +102,6 @@ include("core/loaders/AudioLoader.js");
 include("core/loaders/MaterialLoader.js");
 include("core/loaders/TextureLoader.js");
 include("core/loaders/ObjectLoader.js");
-include("core/loaders/external/TTFLoader.js");
 
 include("core/objects/device/LeapMotion.js");
 include("core/objects/device/KinectDevice.js");
@@ -128,6 +129,8 @@ include("core/objects/misc/Container.js");
 include("core/objects/misc/CubeCamera.js");
 include("core/objects/misc/LensFlare.js");
 include("core/objects/animation/Skeleton.js");
+include("core/objects/controls/OrbitControls.js");
+include("core/objects/controls/FirstPersonControls.js");
 include("core/objects/Program.js");
 include("core/objects/Scene.js");
 

@@ -118,7 +118,7 @@ Font.prototype.reverseGlyphs = function()
  */
 Font.prototype.loadTTF = function()
 {
-	var loader = new TTFLoader();
+	var loader = new THREE.TTFLoader();
 	loader.reversed = this.reversed;
 	this.font = loader.parse(this.data);
 };

@@ -52,19 +52,8 @@ PositionalAudio.prototype = Object.create(AudioEmitter.prototype);
  */
 PositionalAudio.prototype.initialize = function()
 {
-	var self = this;
-
-	if(this.audio !== null)
-	{
-		THREE.AudioContext.getContext().decodeAudioData(this.audio.data, function(buffer)
-		{
-			self.setBuffer(buffer);
-		});
-	}
-
-	this.setVolume(this.volume);
-	this.setPlaybackRate(this.playbackRate);
-
+	AudioEmitter.prototype.initialize.call(this);
+	
 	var node = this;
 	while(node.parent !== null)
 	{
@@ -73,11 +62,6 @@ PositionalAudio.prototype.initialize = function()
 		{
 			this.cameras = node.cameras;
 		}
-	}
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
 	}
 };
 

@@ -38,6 +38,20 @@
  * @default -1.57
  * @type {Number}
  */
+/**
+ * Indicates if the button left button needs to be pressed to rotate the object.
+ * 
+ * @property needsButtonPressed
+ * @default true
+ * @type {Boolean}
+ */
+/**
+ * Indicates if its possible to move the object around.
+ * 
+ * @property movementEnabled
+ * @default true
+ * @type {Boolean}
+ */
 function OrbitControls()
 {
 	THREE.Object3D.call(this);
@@ -45,11 +59,12 @@ function OrbitControls()
 	this.name = "orbit";
 	this.type = "OrbitControls";
 
-	this.distance = 3;
-	this.sensitivity = 0.001;
+	this.distance = 4;
+	this.sensitivity = 0.002;
 	this.limitUp = 1.57;
 	this.limitDown = -1.57;
 	this.needsButtonPressed = true;
+	this.movementEnabled = true;
 
 	this.center = new THREE.Vector3(0, 0, 0);
 	this.vector = new THREE.Vector2(0, 0);
@@ -119,21 +134,21 @@ OrbitControls.prototype.update = function()
 		}
 	}
 
-	if(this.mouse.buttonPressed(Mouse.RIGHT))
+	if(this.movementEnabled && this.mouse.buttonPressed(Mouse.RIGHT))
 	{
 		var direction = this.getWorldDirection();
 		direction.y = 0;
 		direction.normalize();
 
 		var y = this.mouse.delta.y * this.sensitivity * 10;
-		this.center.x += direction.x * y;
-		this.center.z += direction.z * y;
+		this.center.x -= direction.x * y;
+		this.center.z -= direction.z * y;
 
 		direction.applyAxisAngle(OrbitControls.UP, 1.57);
 
 		var x = this.mouse.delta.x * this.sensitivity * 10;
-		this.center.x += direction.x * x;
-		this.center.z += direction.z * x;
+		this.center.x -= direction.x * x;
+		this.center.z -= direction.z * x;
 	}
 
 	var cos = this.distance * Math.cos(this.vector.y);
@@ -141,7 +156,7 @@ OrbitControls.prototype.update = function()
 	this.position.add(this.center);
 
 	var matrix = new THREE.Matrix4();
-	matrix.lookAt(this.position, OrbitControls.ZERO, OrbitControls.UP);
+	matrix.lookAt(this.position, this.center, OrbitControls.UP);
 	this.quaternion.setFromRotationMatrix(matrix);
 
 	for(var i = 0; i < this.children.length; i++)
