@@ -12,6 +12,51 @@
  * @extends {Object3D}
  * @module Controls
  */
+/**
+ * Mouse sensitivity.
+ * 
+ * @property sensitivity
+ * @default 0.001
+ * @type {Number}
+ */
+/**
+ * Flag to indicate if the button left button needs to be pressed to rotate the object.
+ * 
+ * @property needsButtonPressed
+ * @default true
+ * @type {Boolean}
+ */
+/**
+ * Indicates if its possible to move the object using the Keyboard keys.
+ * 
+ * @property movementEnabled
+ * @default true
+ * @type {Boolean}
+ */
+/**
+ * Movement speed, relative to the world.
+ * 
+ * @property moveSpeed
+ * @default moveSpeed
+ * @type {Number}
+ */
+/**
+ * If set to true the object will only move on X and Z axis.
+ * 
+ * @property moveOnPlane
+ * @default false
+ * @type {Boolean}
+ */
+/**
+ * Array with keys to be used to move the object.
+ *  - Forward
+ *  - Backward
+ *  - Left
+ *  - Right
+ * 
+ * @property moveKeys
+ * @type {Array}
+ */
 function FirstPersonControls()
 {
 	THREE.Object3D.call(this);
@@ -19,10 +64,13 @@ function FirstPersonControls()
 	this.name = "controls";
 	this.type = "FirstPersonControls";
 
-	this.moveSpeed = 0.05;
 	this.sensitivity = 0.005;
 	this.needsButtonPressed = true;
-	this.moveOnPlane = true;
+
+	this.movementEnabled = true;
+	this.moveSpeed = 0.05;
+	this.moveOnPlane = false;
+	this.moveKeys = [Keyboard.W, Keyboard.S, Keyboard.A, Keyboard.D];
 
 	this.vector = new THREE.Vector2(0, 0);
 	this.mouse = null;
@@ -78,7 +126,7 @@ FirstPersonControls.prototype.update = function()
 	matrix.lookAt(this.position, direction, FirstPersonControls.UP);
 	this.quaternion.setFromRotationMatrix(matrix);
 
-	if(this.keyboard.keyPressed(Keyboard.W))
+	if(this.keyboard.keyPressed(this.moveKeys[0]))
 	{
 		var direction = this.getWorldDirection();
 		if(this.moveOnPlane)
@@ -89,7 +137,7 @@ FirstPersonControls.prototype.update = function()
 		direction.multiplyScalar(this.moveSpeed);
 		this.position.sub(direction);
 	}
-	if(this.keyboard.keyPressed(Keyboard.S))
+	if(this.keyboard.keyPressed(this.moveKeys[1]))
 	{
 		var direction = this.getWorldDirection();
 		if(this.moveOnPlane)
@@ -100,14 +148,14 @@ FirstPersonControls.prototype.update = function()
 		direction.multiplyScalar(this.moveSpeed);
 		this.position.add(direction);
 	}
-	if(this.keyboard.keyPressed(Keyboard.A))
+	if(this.keyboard.keyPressed(this.moveKeys[2]))
 	{
 		var direction = new THREE.Vector3(Math.sin(this.vector.x - 1.57), 0, Math.cos(this.vector.x - 1.57));
 		direction.normalize();
 		direction.multiplyScalar(this.moveSpeed);
 		this.position.sub(direction);
 	}
-	if(this.keyboard.keyPressed(Keyboard.D))
+	if(this.keyboard.keyPressed(this.moveKeys[3]))
 	{
 		var direction = new THREE.Vector3(Math.sin(this.vector.x + 1.57), 0, Math.cos(this.vector.x + 1.57));
 		direction.normalize();
@@ -121,6 +169,21 @@ FirstPersonControls.prototype.update = function()
 	}
 };
 
+/**
+ * Used to get camera direction for this controller.
+ *
+ * Controller direction can be used to simplify controlling physics objects, create objects in the camera direction, etc.
+ *
+ * @method getDirection
+ * @return {Vector3} Normalized camera direction. 
+ */
+FirstPersonControls.prototype.getDirection = function()
+{
+	var direction = this.getWorldDirection();
+	direction.normalize();
+	return direction;
+};
+
 FirstPersonControls.prototype.toJSON = function(meta)
 {
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
@@ -128,7 +191,9 @@ FirstPersonControls.prototype.toJSON = function(meta)
 	data.object.moveSpeed = this.moveSpeed;
 	data.object.sensitivity = this.sensitivity;
 	data.object.needsButtonPressed = this.needsButtonPressed;
+	data.object.movementEnabled = this.movementEnabled;
 	data.object.moveOnPlane = this.moveOnPlane;
-
+	data.object.moveKeys = this.moveKeys;
+	
 	return data;
 };

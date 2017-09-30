@@ -58,14 +58,12 @@ function AudioEmitter(audio)
 	this.name = "audio";
 	this.type = "Audio";
 
-	var listener = AudioEmitter.listener
-
-	this.context = listener.context;
-
+	this.listener = AudioEmitter.listener;
+	this.context = this.listener.context;
 	this.matrixAutoUpdate = false;
 
 	this.gain = this.context.createGain();
-	this.gain.connect(listener.getInput());
+	this.gain.connect(this.listener.getInput());
 
 	this.buffer = null;
 	this.filters = [];
@@ -80,6 +78,8 @@ function AudioEmitter(audio)
 
 	this.isPlaying = false;
 	this.hasPlaybackControl = true;
+
+	console.log(this);
 }
 
 /**
@@ -107,10 +107,18 @@ AudioEmitter.prototype.initialize = function()
 
 	if(this.audio !== null)
 	{
-		THREE.AudioContext.getContext().decodeAudioData(this.audio.data, function(buffer)
+		try
 		{
-			self.setBuffer(buffer);
-		});
+			this.context.decodeAudioData(this.audio.data, function(buffer)
+			{
+				self.setBuffer(buffer);
+			},
+			function(error)
+			{
+				console.error("nunuStudio: Cannot decode audio buffer (" + error + ")");
+			});
+		}
+		catch(e){}
 	}
 
 	this.setVolume(this.volume);
@@ -151,7 +159,7 @@ AudioEmitter.prototype.play = function()
 	this.isPlaying = true;
 	this.source = source;
 
-	return this.connect();
+	return this.source.connect();
 
 };
 
@@ -298,9 +306,9 @@ AudioEmitter.prototype.setFilters = function(value)
 
 	if(this.isPlaying)
 	{
-		this.disconnect();
+		this.source.disconnect();
 		this.filters = value;
-		this.connect();
+		this.source.connect();
 	}
 	else
 	{
@@ -344,8 +352,9 @@ AudioEmitter.prototype.setNodeSource = function(node)
 {
 	this.hasPlaybackControl = false;
 	this.sourceType = "audioNode";
+	
 	this.source = node;
-	this.connect();
+	this.source.connect();
 
 	return this;
 };
@@ -371,7 +380,7 @@ AudioEmitter.prototype.dispose = function()
 	if(this.isPlaying)
 	{
 		this.stop();
-		this.disconnect();
+		this.source.disconnect();
 	}
 
 	for(var i = 0; i < this.children.length; i++)

@@ -319,6 +319,7 @@ AudioPlayer.prototype.destroy = function()
 		window.removeEventListener("mouseup", this.onMouseUp);
 
 		//Stop audio playback
+		this.disconnect();
 		this.stop();
 
 		//Remove element

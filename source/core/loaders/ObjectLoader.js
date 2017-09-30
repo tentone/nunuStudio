@@ -786,10 +786,21 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			
 		case "FirstPersonControls":
 			object = new FirstPersonControls();
+			object.moveSpeed = data.moveSpeed;
+			object.sensitivity = data.sensitivity;
+			object.needsButtonPressed = data.needsButtonPressed;
+			object.movementEnabled = data.movementEnabled;
+			object.moveOnPlane = data.moveOnPlane;
+			object.moveKeys = data.moveKeys;
 			break;
 
 		case "OrbitControls":
 			object = new OrbitControls();
+			object.distance = data.distance;
+			object.sensitivity = data.sensitivity;
+			object.limitUp = data.limitUp;
+			object.limitDown = data.limitDown;
+			object.needsButtonPressed = data.needsButtonPressed;
 			break;
 			
 		case "Scene":

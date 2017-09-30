@@ -107,7 +107,6 @@ include("core/loaders/AudioLoader.js");
 include("core/loaders/MaterialLoader.js");
 include("core/loaders/TextureLoader.js");
 include("core/loaders/ObjectLoader.js");
-include("core/loaders/external/TTFLoader.js");
 
 include("core/objects/device/LeapMotion.js");
 include("core/objects/device/KinectDevice.js");
@@ -150,8 +149,6 @@ include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");
 
 //Editor
-include("core/loaders/external/TDSLoader.js");
-
 include("lib/codemirror/codemirror.js");
 include("lib/codemirror/codemirror.css");
 include("lib/codemirror/keymap/sublime.js");
@@ -209,6 +206,8 @@ include("lib/three/loaders/SVGLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
+include("lib/three/loaders/TDSLoader.js");
+include("lib/three/loaders/TTFLoader.js");
 
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
