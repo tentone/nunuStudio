@@ -9,6 +9,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Base64Utils",
         "BokehPass",
         "BufferUtils",
+        "ByteArrayUtils",
         "CanvasTexture",
         "Container",
         "CopyPass",
@@ -21,6 +22,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "FXAAPass",
         "FileSystem",
         "FilmPass",
+        "FirstPersonControls",
         "Fog",
         "Font",
         "FontLoader",
@@ -48,6 +50,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Object3D",
         "ObjectLoader",
         "ObjectUtils",
+        "OrbitControls",
         "OrthographicCamera",
         "ParticleEmitter",
         "Pass",
@@ -74,7 +77,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "SpotLight",
         "Sprite",
         "SpriteSheetTexture",
-        "TDSLoader",
         "Text",
         "Text3D",
         "Texture",
@@ -95,9 +97,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "Audio",
         "BinaryUtils",
         "Cameras",
+        "Controls",
         "Core",
         "Devices",
-        "ExternalLoader",
         "Files",
         "Geometry",
         "Input",
@@ -145,6 +147,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera."
         },
         {
+            "displayName": "Controls",
+            "name": "Controls",
+            "description": "First person controls can be controlled using the mouse and keyboard.\n\nProvides a navigations system familiar to the one found on FPS games.\n\nThe mouse left button can be used to look around, and the keyboard arrows for movement."
+        },
+        {
             "displayName": "Core",
             "name": "Core",
             "description": "Program class contains all the data of a nunuStudio program.\n\nProgram is also used to store and manage all available resources."
@@ -153,11 +160,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Devices",
             "name": "Devices",
             "description": "Kinect device object.\n\nThis object is used to connect nunuStudio to a Microsoft Kinect V1, it only works in Microsoft Windows.\n\nThe operation of the kinect object depends on a server program used to connect to kinect that sends the data to nunuStudio via WebSocket.\n\nThe server software is available inside the tools folder in the nunuStudio repository, and communicates using the port 8181 in the localhost."
-        },
-        {
-            "displayName": "ExternalLoader",
-            "name": "ExternalLoader",
-            "description": "Autodesk 3DS threee.js file loader, based on lib3ds.\n\nLoads geometry with uv and materials basic properties with texture support."
         },
         {
             "displayName": "Files",
@@ -227,7 +229,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Script",
             "name": "Script",
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n   - Received width and height as parameters\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
         },
         {
             "displayName": "Sprite",

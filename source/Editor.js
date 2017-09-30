@@ -1520,7 +1520,8 @@ Editor.loadModel = function(file, onLoad)
 				try
 				{
 					var loader = new THREE.TDSLoader();
-					var group = loader.parse(reader.result, path);
+					loader.setPath(path);
+					var group = loader.parse(reader.result);
 					Editor.addToScene(group);
 				}
 				catch(e)

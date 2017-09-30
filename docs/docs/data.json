@@ -70,17 +70,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\loaders\\external\\TDSLoader.js": {
-            "name": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "modules": {
-                "ExternalLoader": 1
-            },
-            "classes": {
-                "TDSLoader": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\loaders\\AudioLoader.js": {
             "name": "..\\..\\source\\core\\loaders\\AudioLoader.js",
             "modules": {
@@ -193,6 +182,26 @@
             "modules": {},
             "classes": {
                 "PerspectiveCamera": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js": {
+            "name": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
+            "modules": {
+                "Controls": 1
+            },
+            "classes": {
+                "FirstPersonControls": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\objects\\controls\\OrbitControls.js": {
+            "name": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "modules": {},
+            "classes": {
+                "OrbitControls": 1
             },
             "fors": {},
             "namespaces": {}
@@ -741,6 +750,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\utils\\binary\\ByteArrayUtils.js": {
+            "name": "..\\..\\source\\core\\utils\\binary\\ByteArrayUtils.js",
+            "modules": {},
+            "classes": {
+                "ByteArrayUtils": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\utils\\struct\\Tree.js": {
             "name": "..\\..\\source\\core\\utils\\struct\\Tree.js",
             "modules": {},
@@ -907,20 +925,6 @@
             "line": 3,
             "description": "Gamepad provides basic support for gamepads.\n\nSome gamepads require a button press to being detected.\n\nGamepad implementation across browsers is still fragmented, every browser implements it a bit differently, so test it on every target before deploying an application using it.\n\nFor more information about the Gamepad API state take look at the W3C Gamepad API page https://www.w3.org/TR/gamepad/."
         },
-        "ExternalLoader": {
-            "name": "ExternalLoader",
-            "submodules": {},
-            "elements": {},
-            "classes": {
-                "TDSLoader": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 3,
-            "description": "Autodesk 3DS threee.js file loader, based on lib3ds.\n\nLoads geometry with uv and materials basic properties with texture support."
-        },
         "Loaders": {
             "name": "Loaders",
             "submodules": {},
@@ -984,6 +988,21 @@
             "file": "..\\..\\source\\core\\objects\\cameras\\PerspectiveCamera.js",
             "line": 3,
             "description": "Orthographic Camera is used for 2D like image projection.\n\nBased on THREE.OrthographicCamera, original documentation available at https://threejs.org/docs/index.html#Reference/Cameras/OrthographicCamera."
+        },
+        "Controls": {
+            "name": "Controls",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "FirstPersonControls": 1,
+                "OrbitControls": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 3,
+            "description": "First person controls can be controlled using the mouse and keyboard.\n\nProvides a navigations system familiar to the one found on FPS games.\n\nThe mouse left button can be used to look around, and the keyboard arrows for movement."
         },
         "Devices": {
             "name": "Devices",
@@ -1094,7 +1113,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n   - Received width and height as parameters\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
         },
         "Animations": {
             "name": "Animations",
@@ -1244,6 +1263,7 @@
                 "ArraybufferUtils": 1,
                 "Base64Utils": 1,
                 "BufferUtils": 1,
+                "ByteArrayUtils": 1,
                 "Tree": 1,
                 "TreeUtils": 1
             },
@@ -1409,29 +1429,6 @@
             "line": 3,
             "description": "Mouse instance for input in sync with the running 3D application.\n\nThe mouse object provided by scripts is automatically updated by the runtime handler.",
             "is_constructor": 1
-        },
-        "TDSLoader": {
-            "name": "TDSLoader",
-            "shortname": "TDSLoader",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "ExternalLoader",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 3,
-            "description": "Autodesk 3DS threee.js file loader, based on lib3ds.\n\nLoads geometry with uv and materials basic properties with texture support.",
-            "author": "@timknip",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "manager",
-                    "description": "Loading manager.",
-                    "type": "LoadingManager"
-                }
-            ]
         },
         "AudioLoader": {
             "name": "AudioLoader",
@@ -1741,6 +1738,38 @@
                     "type": "Number"
                 }
             ]
+        },
+        "FirstPersonControls": {
+            "name": "FirstPersonControls",
+            "shortname": "FirstPersonControls",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Controls",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
+            "line": 3,
+            "description": "First person controls can be controlled using the mouse and keyboard.\n\nProvides a navigations system familiar to the one found on FPS games.\n\nThe mouse left button can be used to look around, and the keyboard arrows for movement.",
+            "is_constructor": 1,
+            "extends": "{Object3D}"
+        },
+        "OrbitControls": {
+            "name": "OrbitControls",
+            "shortname": "OrbitControls",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Controls",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 3,
+            "description": "Orbit controls object can be controlled using the mouse.\n\nIt can be rotated using the mouse left button, moved with the mouse right button or mouse wheel.",
+            "is_constructor": 1,
+            "extends": "{Object3D}"
         },
         "KinectDevice": {
             "name": "KinectDevice",
@@ -2274,7 +2303,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver\n   - Called on every frame if mouse is on top of one of the script children\n - onResize\n   - Called every time the window is resized\n   - Received width and height as parameters\n - onAppData\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse",
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse",
             "extends": "{Object}",
             "params": [
                 {
@@ -3281,6 +3310,21 @@
             "description": "BufferUtils contains methods to convert from and to Node.js Buffer binary format",
             "static": 1
         },
+        "ByteArrayUtils": {
+            "name": "ByteArrayUtils",
+            "shortname": "ByteArrayUtils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "BinaryUtils",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\utils\\binary\\ByteArrayUtils.js",
+            "line": 3,
+            "description": "ByteArrayUtils contains methods to convert from and to ByteArray binary format\n\nA byte array is a numeric array that stores a 8 bit (0 to 255) value for each position.",
+            "static": 1
+        },
         "Tree": {
             "name": "Tree",
             "shortname": "Tree",
@@ -3396,7 +3440,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 144,
+            "line": 147,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -5118,476 +5162,6 @@
             "module": "Input"
         },
         {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 29,
-            "description": "Load 3ds file from url.",
-            "itemtype": "method",
-            "name": "load",
-            "params": [
-                {
-                    "name": "url",
-                    "description": "URL for the file.",
-                    "type": "[type]"
-                },
-                {
-                    "name": "onLoad",
-                    "description": "onLoad callback, receives group Object3D as argument.",
-                    "type": "Function"
-                },
-                {
-                    "name": "onProgress",
-                    "description": "onProgress callback.",
-                    "type": "Function"
-                },
-                {
-                    "name": "onError",
-                    "description": "onError callback.",
-                    "type": "Function"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 50,
-            "description": "Parse arraybuffer data and load 3ds file.",
-            "itemtype": "method",
-            "name": "parse",
-            "params": [
-                {
-                    "name": "arraybuffer",
-                    "description": "Arraybuffer data to be loaded.",
-                    "type": "ArrayBuffer"
-                },
-                {
-                    "name": "path",
-                    "description": "Path for external resources.",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "Group loaded from 3ds file.",
-                "type": "Object3D"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 77,
-            "description": "Decode file content to read 3ds data.",
-            "itemtype": "method",
-            "name": "readFile",
-            "params": [
-                {
-                    "name": "arraybuffer",
-                    "description": "Arraybuffer data to be loaded.",
-                    "type": "ArrayBuffer"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 116,
-            "description": "Read mesh data chunk.",
-            "itemtype": "method",
-            "name": "readMeshData",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview in use.",
-                    "type": "Dataview"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 161,
-            "description": "Read named object chunk.",
-            "itemtype": "method",
-            "name": "readNamedObject",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview in use.",
-                    "type": "Dataview"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 202,
-            "description": "Read material data chunk and add it to the material list.",
-            "itemtype": "method",
-            "name": "readMaterialEntry",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview in use.",
-                    "type": "Dataview"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 316,
-            "description": "Read mesh data chunk.",
-            "itemtype": "method",
-            "name": "readMesh",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview in use.",
-                    "type": "Dataview"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 480,
-            "description": "Read face array data chunk.",
-            "itemtype": "method",
-            "name": "readFaceArray",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview in use.",
-                    "type": "Dataview"
-                },
-                {
-                    "name": "mesh",
-                    "description": "Mesh to be filled with the data read.",
-                    "type": "Mesh"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 541,
-            "description": "Read texture map data chunk.",
-            "itemtype": "method",
-            "name": "readMap",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview in use.",
-                    "type": "Dataview"
-                }
-            ],
-            "return": {
-                "description": "Texture read from this data chunk.",
-                "type": "Texture"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 615,
-            "description": "Read material group data chunk.",
-            "itemtype": "method",
-            "name": "readMaterialGroup",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview in use.",
-                    "type": "Dataview"
-                }
-            ],
-            "return": {
-                "description": "Object with name and index of the object.",
-                "type": "Object"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 640,
-            "description": "Read a color value.",
-            "itemtype": "method",
-            "name": "readColor",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview.",
-                    "type": "DataView"
-                }
-            ],
-            "return": {
-                "description": "Color value read..",
-                "type": "Color"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 681,
-            "description": "Read next chunk of data.",
-            "itemtype": "method",
-            "name": "readChunk",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview.",
-                    "type": "DataView"
-                }
-            ],
-            "return": {
-                "description": "Chunk of data read.",
-                "type": "Object"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 701,
-            "description": "Set position to the end of the current chunk of data.",
-            "itemtype": "method",
-            "name": "endChunk",
-            "params": [
-                {
-                    "name": "chunk",
-                    "description": "Data chunk.",
-                    "type": "Object"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 712,
-            "description": "Move to the next data chunk.",
-            "itemtype": "method",
-            "name": "nextChunk",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview.",
-                    "type": "DataView"
-                },
-                {
-                    "name": "chunk",
-                    "description": "Data chunk.",
-                    "type": "Object"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 741,
-            "description": "Reset dataview position.",
-            "itemtype": "method",
-            "name": "resetPosition",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview.",
-                    "type": "DataView"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 752,
-            "description": "Read byte value.",
-            "itemtype": "method",
-            "name": "readByte",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview to read data from.",
-                    "type": "DataView"
-                }
-            ],
-            "return": {
-                "description": "Data read from the dataview.",
-                "type": "Number"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 766,
-            "description": "Read 32 bit float value.",
-            "itemtype": "method",
-            "name": "readFloat",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview to read data from.",
-                    "type": "DataView"
-                }
-            ],
-            "return": {
-                "description": "Data read from the dataview.",
-                "type": "Number"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 787,
-            "description": "Read 32 bit signed integer value.",
-            "itemtype": "method",
-            "name": "readInt",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview to read data from.",
-                    "type": "DataView"
-                }
-            ],
-            "return": {
-                "description": "Data read from the dataview.",
-                "type": "Number"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 801,
-            "description": "Read 16 bit signed integer value.",
-            "itemtype": "method",
-            "name": "readShort",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview to read data from.",
-                    "type": "DataView"
-                }
-            ],
-            "return": {
-                "description": "Data read from the dataview.",
-                "type": "Number"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 815,
-            "description": "Read 64 bit unsigned integer value.",
-            "itemtype": "method",
-            "name": "readDWord",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview to read data from.",
-                    "type": "DataView"
-                }
-            ],
-            "return": {
-                "description": "Data read from the dataview.",
-                "type": "Number"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 829,
-            "description": "Read 32 bit unsigned integer value.",
-            "itemtype": "method",
-            "name": "readWord",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview to read data from.",
-                    "type": "DataView"
-                }
-            ],
-            "return": {
-                "description": "Data read from the dataview.",
-                "type": "Number"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 843,
-            "description": "Read string value.",
-            "itemtype": "method",
-            "name": "readString",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "Dataview to read data from.",
-                    "type": "DataView"
-                },
-                {
-                    "name": "maxLength",
-                    "description": "Max size of the string to be read.",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "Data read from the dataview.",
-                "type": "String"
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 870,
-            "description": "Set resource path used to determine the file path to attached resources.",
-            "itemtype": "method",
-            "name": "setPath",
-            "params": [
-                {
-                    "name": "path",
-                    "description": "Path to resources.",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "Self for chaining."
-            },
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
-            "file": "..\\..\\source\\core\\loaders\\external\\TDSLoader.js",
-            "line": 887,
-            "description": "Print debug message to the console.\n\nIs controlled by a flag to show or hide debug messages.",
-            "itemtype": "method",
-            "name": "debugMessage",
-            "params": [
-                {
-                    "name": "message",
-                    "description": "Debug message to print to the console.",
-                    "type": "Object"
-                }
-            ],
-            "class": "TDSLoader",
-            "module": "ExternalLoader"
-        },
-        {
             "file": "..\\..\\source\\core\\loaders\\AudioLoader.js",
             "line": 16,
             "description": "Load audio file from URL.",
@@ -6561,7 +6135,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 125,
+            "line": 133,
             "description": "Play audio.",
             "itemtype": "method",
             "name": "play",
@@ -6574,7 +6148,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 158,
+            "line": 166,
             "description": "Pauses audio playback.",
             "itemtype": "method",
             "name": "pause",
@@ -6587,7 +6161,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 173,
+            "line": 181,
             "description": "Stops audio playback and resets time to 0.",
             "itemtype": "method",
             "name": "pause",
@@ -6600,7 +6174,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 188,
+            "line": 196,
             "description": "Get audio emitter volume.",
             "params": [
                 {
@@ -6616,7 +6190,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 199,
+            "line": 207,
             "description": "Set audio emitter volume.",
             "itemtype": "method",
             "name": "setVolume",
@@ -6636,7 +6210,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 214,
+            "line": 222,
             "description": "Set loop mode. If loop set to True the audio repeats after ending.",
             "itemtype": "method",
             "name": "setLoop",
@@ -6656,7 +6230,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 233,
+            "line": 241,
             "description": "Get loop mode.",
             "itemtype": "method",
             "name": "getLoop",
@@ -6669,7 +6243,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 244,
+            "line": 252,
             "description": "Set playback speed.",
             "itemtype": "method",
             "name": "setPlaybackRate",
@@ -6689,7 +6263,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 263,
+            "line": 271,
             "description": "Get the playback speed.",
             "itemtype": "method",
             "name": "getPlaybackRate",
@@ -6702,7 +6276,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 274,
+            "line": 282,
             "description": "Get Array with all the filters applied to this audio emitter.",
             "itemtype": "method",
             "name": "getFilters",
@@ -6715,7 +6289,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 285,
+            "line": 293,
             "description": "Set the entire filters array.",
             "itemtype": "method",
             "name": "setFilters",
@@ -6735,7 +6309,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 313,
+            "line": 321,
             "description": "Get a filter to the filters array.",
             "itemtype": "method",
             "name": "getFilter",
@@ -6754,7 +6328,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 325,
+            "line": 333,
             "description": "Set a filter to the filters array.",
             "itemtype": "method",
             "name": "setFilter",
@@ -6770,7 +6344,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 336,
+            "line": 344,
             "description": "Change the source audio node.",
             "itemtype": "method",
             "name": "setNodeSource",
@@ -6790,7 +6364,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 353,
+            "line": 362,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -6803,7 +6377,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 364,
+            "line": 373,
             "description": "Dispose audio object, stops the playback and disconnects audio node.",
             "itemtype": "method",
             "name": "dispose",
@@ -6812,7 +6386,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\AudioEmitter.js",
-            "line": 383,
+            "line": 392,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -6841,7 +6415,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 84,
+            "line": 68,
             "description": "Update positional audio panner relative to the camera.",
             "itemtype": "method",
             "name": "update",
@@ -6850,7 +6424,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 110,
+            "line": 94,
             "description": "Get output audio node.",
             "itemtype": "method",
             "name": "getOutput",
@@ -6863,7 +6437,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 121,
+            "line": 105,
             "description": "Get reference distance.",
             "itemtype": "method",
             "name": "getRefDistance",
@@ -6876,7 +6450,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 132,
+            "line": 116,
             "description": "Set reference distance.",
             "itemtype": "method",
             "name": "setRefDistance",
@@ -6892,7 +6466,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 143,
+            "line": 127,
             "description": "Get rolloff factor.",
             "itemtype": "method",
             "name": "getRolloffFactor",
@@ -6905,7 +6479,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 154,
+            "line": 138,
             "description": "Set rolloff factor.",
             "itemtype": "method",
             "name": "setRolloffFactor",
@@ -6921,7 +6495,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 166,
+            "line": 150,
             "description": "Get distance model in use by this audio emitter.",
             "itemtype": "method",
             "name": "getDistanceModel",
@@ -6934,7 +6508,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 177,
+            "line": 161,
             "description": "Set distance model to be used.\n\nDistance model defined how the emitter controls its volume from its position in the world, relative to the camera.\n\nBy default the mode used is \"inverse\", can be also set to:\n - \"linear\": A linear distance model calculating the gain induced by the distance according to\n   - 1 - rolloffFactor * (distance - refDistance) / (maxDistance - refDistance)\n - \"inverse\": An inverse distance model calculating the gain induced by the distance according to:\n   - refDistance / (refDistance + rolloffFactor * (distance - refDistance))\n - \"exponential\": An exponential distance model calculating the gain induced by the distance according to:\n   - pow(distance / refDistance, -rolloffFactor).",
             "itemtype": "method",
             "name": "setDistanceModel",
@@ -6950,7 +6524,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 198,
+            "line": 182,
             "description": "Get maximum distance for this audio emitter.",
             "itemtype": "method",
             "name": "getMaxDistance",
@@ -6962,7 +6536,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 209,
+            "line": 193,
             "description": "Set maximum distance for this audio emitter.",
             "itemtype": "method",
             "name": "setMaxDistance",
@@ -6978,7 +6552,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\audio\\PositionalAudio.js",
-            "line": 220,
+            "line": 204,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -7347,6 +6921,150 @@
             },
             "class": "PerspectiveCamera",
             "module": "Cameras"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
+            "line": 15,
+            "description": "Mouse sensitivity.",
+            "itemtype": "property",
+            "name": "sensitivity",
+            "default": "0.001",
+            "type": "{Number}",
+            "class": "FirstPersonControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
+            "line": 22,
+            "description": "Flag to indicate if the button left button needs to be pressed to rotate the object.",
+            "itemtype": "property",
+            "name": "needsButtonPressed",
+            "default": "true",
+            "type": "{Boolean}",
+            "class": "FirstPersonControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
+            "line": 29,
+            "description": "Indicates if its possible to move the object using the Keyboard keys.",
+            "itemtype": "property",
+            "name": "movementEnabled",
+            "default": "true",
+            "type": "{Boolean}",
+            "class": "FirstPersonControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
+            "line": 36,
+            "description": "Movement speed, relative to the world.",
+            "itemtype": "property",
+            "name": "moveSpeed",
+            "default": "moveSpeed",
+            "type": "{Number}",
+            "class": "FirstPersonControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
+            "line": 43,
+            "description": "If set to true the object will only move on X and Z axis.",
+            "itemtype": "property",
+            "name": "moveOnPlane",
+            "default": "false",
+            "type": "{Boolean}",
+            "class": "FirstPersonControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
+            "line": 50,
+            "description": "Array with keys to be used to move the object.\n - Forward\n - Backward\n - Left\n - Right",
+            "itemtype": "property",
+            "name": "moveKeys",
+            "type": "{Array}",
+            "class": "FirstPersonControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\FirstPersonControls.js",
+            "line": 172,
+            "description": "Used to get camera direction for this controller.\n\nController direction can be used to simplify controlling physics objects, create objects in the camera direction, etc.",
+            "itemtype": "method",
+            "name": "getDirection",
+            "return": {
+                "description": "Normalized camera direction.",
+                "type": "Vector3"
+            },
+            "class": "FirstPersonControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 13,
+            "description": "Initial distance of the object relative to the center.",
+            "itemtype": "property",
+            "name": "distance",
+            "default": "3",
+            "type": "{Number}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 20,
+            "description": "Mouse sensitivity.",
+            "itemtype": "property",
+            "name": "sensitivity",
+            "default": "0.001",
+            "type": "{Number}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 27,
+            "description": "Top limit angle.",
+            "itemtype": "property",
+            "name": "limitUp",
+            "default": "1.57",
+            "type": "{Number}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 34,
+            "description": "Bottom limit angle.",
+            "itemtype": "property",
+            "name": "limitDown",
+            "default": "-1.57",
+            "type": "{Number}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 41,
+            "description": "Indicates if the button left button needs to be pressed to rotate the object.",
+            "itemtype": "property",
+            "name": "needsButtonPressed",
+            "default": "true",
+            "type": "{Boolean}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 48,
+            "description": "Indicates if its possible to move the object around.",
+            "itemtype": "property",
+            "name": "movementEnabled",
+            "default": "true",
+            "type": "{Boolean}",
+            "class": "OrbitControls",
+            "module": "Controls"
         },
         {
             "file": "..\\..\\source\\core\\objects\\device\\KinectDevice.js",
@@ -8784,7 +8502,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 33,
+            "line": 34,
             "description": "Javascript code attached to the script",
             "itemtype": "property",
             "name": "code",
@@ -8794,7 +8512,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 38,
+            "line": 39,
             "description": "Compiled function used during runtime",
             "itemtype": "attribute",
             "name": "script",
@@ -8804,7 +8522,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 43,
+            "line": 44,
             "description": "Pointer to the parent program\nUsed access program resources easier",
             "itemtype": "property",
             "name": "program",
@@ -8814,7 +8532,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 49,
+            "line": 50,
             "description": "Pointer to the parent scene",
             "itemtype": "property",
             "name": "scene",
@@ -8824,7 +8542,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 70,
+            "line": 71,
             "description": "Default script code used when creating a new Script.",
             "itemtype": "attribute",
             "name": "DEFAULT",
@@ -8834,7 +8552,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 77,
+            "line": 78,
             "description": "List of methods that a script can implement.",
             "itemtype": "attribute",
             "name": "METHODS",
@@ -8844,7 +8562,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 84,
+            "line": 85,
             "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
             "itemtype": "method",
             "name": "initialize",
@@ -8853,7 +8571,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 123,
+            "line": 124,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -8862,7 +8580,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 152,
+            "line": 153,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -8871,7 +8589,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 172,
+            "line": 173,
             "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
@@ -8880,7 +8598,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 192,
+            "line": 193,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -8896,7 +8614,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 208,
+            "line": 209,
             "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "setCode",
@@ -8912,7 +8630,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 258,
+            "line": 259,
             "description": "Create JSON for script.",
             "itemtype": "method",
             "name": "toJSON",
@@ -12994,6 +12712,26 @@
             "module": "BinaryUtils"
         },
         {
+            "file": "..\\..\\source\\core\\utils\\binary\\ByteArrayUtils.js",
+            "line": 14,
+            "description": "Create byte array from base64 string data.",
+            "itemtype": "method",
+            "name": "fromBase64",
+            "params": [
+                {
+                    "name": "base64",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "data",
+                "type": "Array"
+            },
+            "class": "ByteArrayUtils",
+            "module": "BinaryUtils"
+        },
+        {
             "file": "..\\..\\source\\core\\utils\\struct\\Tree.js",
             "line": 21,
             "description": "Add new element to tree.",
@@ -14142,7 +13880,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 155,
+            "line": 158,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -14152,7 +13890,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 161,
+            "line": 164,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -14162,7 +13900,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 167,
+            "line": 170,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -14173,7 +13911,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 174,
+            "line": 177,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -14183,7 +13921,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 180,
+            "line": 183,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -14194,7 +13932,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 190,
+            "line": 193,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -14203,7 +13941,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 228,
+            "line": 231,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -14212,7 +13950,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 295,
+            "line": 298,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -14238,7 +13976,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 316,
+            "line": 319,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -14254,7 +13992,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 341,
+            "line": 344,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -14280,7 +14018,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 384,
+            "line": 387,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -14289,7 +14027,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 400,
+            "line": 403,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -14298,7 +14036,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 451,
+            "line": 454,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -14307,7 +14045,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 485,
+            "line": 488,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -14316,7 +14054,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 495,
+            "line": 498,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -14332,7 +14070,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 509,
+            "line": 512,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -14341,7 +14079,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 533,
+            "line": 536,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -14357,7 +14095,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 549,
+            "line": 552,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -14373,7 +14111,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 562,
+            "line": 565,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -14389,7 +14127,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 575,
+            "line": 578,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -14402,7 +14140,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 586,
+            "line": 589,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -14411,7 +14149,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 610,
+            "line": 613,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",

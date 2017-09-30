@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio ExternalLoader</title>  
+	<title>nunuStudio OrbitControls</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -40,6 +40,7 @@
 								<li><a href="../classes/Base64Utils.html">Base64Utils</a></li>
 								<li><a href="../classes/BokehPass.html">BokehPass</a></li>
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
+								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
 								<li><a href="../classes/Container.html">Container</a></li>
 								<li><a href="../classes/CopyPass.html">CopyPass</a></li>
@@ -51,6 +52,7 @@
 								<li><a href="../classes/EventManager.html">EventManager</a></li>
 								<li><a href="../classes/FileSystem.html">FileSystem</a></li>
 								<li><a href="../classes/FilmPass.html">FilmPass</a></li>
+								<li><a href="../classes/FirstPersonControls.html">FirstPersonControls</a></li>
 								<li><a href="../classes/Fog.html">Fog</a></li>
 								<li><a href="../classes/Font.html">Font</a></li>
 								<li><a href="../classes/FontLoader.html">FontLoader</a></li>
@@ -79,6 +81,7 @@
 								<li><a href="../classes/Object3D.html">Object3D</a></li>
 								<li><a href="../classes/ObjectLoader.html">ObjectLoader</a></li>
 								<li><a href="../classes/ObjectUtils.html">ObjectUtils</a></li>
+								<li><a href="../classes/OrbitControls.html">OrbitControls</a></li>
 								<li><a href="../classes/OrthographicCamera.html">OrthographicCamera</a></li>
 								<li><a href="../classes/ParticleEmitter.html">ParticleEmitter</a></li>
 								<li><a href="../classes/Pass.html">Pass</a></li>
@@ -105,7 +108,6 @@
 								<li><a href="../classes/Sprite.html">Sprite</a></li>
 								<li><a href="../classes/SpriteSheetTexture.html">SpriteSheetTexture</a></li>
 								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
-								<li><a href="../classes/TDSLoader.html">TDSLoader</a></li>
 								<li><a href="../classes/Text.html">Text</a></li>
 								<li><a href="../classes/Text3D.html">Text3D</a></li>
 								<li><a href="../classes/Texture.html">Texture</a></li>
@@ -127,9 +129,9 @@
 								<li><a href="../modules/Audio.html">Audio</a></li>
 								<li><a href="../modules/BinaryUtils.html">BinaryUtils</a></li>
 								<li><a href="../modules/Cameras.html">Cameras</a></li>
+								<li><a href="../modules/Controls.html">Controls</a></li>
 								<li><a href="../modules/Core.html">Core</a></li>
 								<li><a href="../modules/Devices.html">Devices</a></li>
-								<li><a href="../modules/ExternalLoader.html">ExternalLoader</a></li>
 								<li><a href="../modules/Files.html">Files</a></li>
 								<li><a href="../modules/Geometry.html">Geometry</a></li>
 								<li><a href="../modules/Input.html">Input</a></li>
@@ -177,35 +179,253 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>ExternalLoader Module</h1>
-						<div class="box clearfix meta">
+						<h1>OrbitControls Class</h1>
+						<div class="box meta">
+						
+								<div class="extends">
+									Extends <a href="../classes/Object3D.html" class="crosslink">Object3D</a>
+								</div>
 						
 						
+									Module: <a href="../modules/Controls.html">Controls</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>Autodesk 3DS threee.js file loader, based on lib3ds.</p>
-						<p>Loads geometry with uv and materials basic properties with texture support.</p>
+							<p>Orbit controls object can be controlled using the mouse.</p>
+						<p>It can be rotated using the mouse left button, moved with the mouse right button or mouse wheel.</p>
 						
 						</div>
 						
-						
-						<div class="yui3-g">
-							<div class="yui3-u-1-2">
-									<p>This namespace provides the following classes:</p>
-						
-									<ul class="module-classes">
-										<li class="module-class">
-											<a href="../classes/TDSLoader.html">
-												TDSLoader
-											</a>
-										</li>
-									</ul>
+							<div class="constructor">
+								<h2>Constructor</h2>
+								<div id="method_OrbitControls" class="method item">
+									<h3 class="name"><code>OrbitControls</code></h3>
+								
+										<span class="paren">()</span>
+								
+								
+								
+								
+								
+								
+								
+								
+									<div class="meta">
+												<p>
+										</p>
+								
+								
+								
+									</div>
+								
+									<div class="description">
+										
+									</div>
+								
+								
+								
+								</div>
 							</div>
 						
-							<div class="yui3-u-1-2">
+						<div id="classdocs" class="tabview">
+							<ul class="api-class-tabs">
+								<li class="api-class-tab index"><a href="#index">Index</a></li>
+						
+									<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+							</ul>
+						
+							<div>
+								<div id="index" class="api-class-tabpanel index">
+									<h2 class="off-left">Item Index</h2>
+						
+						
+										<div class="index-section properties">
+											<h3>Properties</h3>
+						
+											<ul class="index-list properties extends">
+													<li class="index-item property">
+														<a href="#property_distance">distance</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_limitDown">limitDown</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_limitUp">limitUp</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_movementEnabled">movementEnabled</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_needsButtonPressed">needsButtonPressed</a>
+						
+													</li>
+													<li class="index-item property">
+														<a href="#property_sensitivity">sensitivity</a>
+						
+													</li>
+											</ul>
+										</div>
+						
+						
+								</div>
+						
+						
+									<div id="properties" class="api-class-tabpanel">
+										<h2 class="off-left">Properties</h2>
+						
+											<div id="property_distance" class="property item">
+												<h3 class="name"><code>distance</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Initial distance of the object relative to the center.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> 3</p>
+											
+											
+											</div>
+											<div id="property_limitDown" class="property item">
+												<h3 class="name"><code>limitDown</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Bottom limit angle.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> -1.57</p>
+											
+											
+											</div>
+											<div id="property_limitUp" class="property item">
+												<h3 class="name"><code>limitUp</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Top limit angle.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> 1.57</p>
+											
+											
+											</div>
+											<div id="property_movementEnabled" class="property item">
+												<h3 class="name"><code>movementEnabled</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Indicates if its possible to move the object around.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> true</p>
+											
+											
+											</div>
+											<div id="property_needsButtonPressed" class="property item">
+												<h3 class="name"><code>needsButtonPressed</code></h3>
+												<span class="type">Boolean</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Indicates if the button left button needs to be pressed to rotate the object.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> true</p>
+											
+											
+											</div>
+											<div id="property_sensitivity" class="property item">
+												<h3 class="name"><code>sensitivity</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Mouse sensitivity.</p>
+											
+												</div>
+											
+													<p><strong>Default:</strong> 0.001</p>
+											
+											
+											</div>
+									</div>
+						
+						
 							</div>
 						</div>
 					</div>
