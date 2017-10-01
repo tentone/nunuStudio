@@ -211,6 +211,7 @@ include("lib/three/loaders/SVGLoader.js");
 include("lib/three/loaders/TDSLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/TTFLoader.js");
+include("lib/three/loaders/UTF8Loader.js");
 include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/XLoader.js");
