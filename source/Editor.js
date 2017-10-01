@@ -193,9 +193,10 @@ include("lib/tern/plugin/doc_comment.js");
 
 include("lib/three/loaders/3MFLoader.js");
 include("lib/three/loaders/AMFLoader.js");
-include("lib/three/loaders/AssimpLoader.js");
 include("lib/three/loaders/AssimpJSONLoader.js");
+include("lib/three/loaders/AssimpLoader.js");
 include("lib/three/loaders/AWDLoader.js");
+include("lib/three/loaders/BabylonLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
@@ -206,11 +207,11 @@ include("lib/three/loaders/PCDLoader.js");
 include("lib/three/loaders/PLYLoader.js");
 include("lib/three/loaders/STLLoader.js");
 include("lib/three/loaders/SVGLoader.js");
+include("lib/three/loaders/TDSLoader.js");
 include("lib/three/loaders/TGALoader.js");
+include("lib/three/loaders/TTFLoader.js");
 include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
-include("lib/three/loaders/TDSLoader.js");
-include("lib/three/loaders/TTFLoader.js");
 
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
@@ -1602,6 +1603,35 @@ Editor.loadModel = function(file, onLoad)
 					var json = JSON.parse(reader.result);
 					var assimp = loader.parse(json, path);
 					Editor.addToScene(assimp);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsText(file);
+		}
+		//Babylon
+		else if(extension === "babylon")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					var loader = new THREE.BabylonLoader();
+					var json = JSON.parse(reader.result);
+					var babylon = loader.parse(json, path);
+					babylon.type = "Group";
+					babylon.traverse(function(object)
+					{
+						if(object instanceof THREE.Mesh)
+						{
+							object.material = new THREE.MeshPhongMaterial();
+						}
+					} );
+					Editor.addToScene(babylon);
 				}
 				catch(e)
 				{
