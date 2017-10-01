@@ -23,7 +23,7 @@ Model.prototype = Object.create(Resource.prototype);
  * @property {Array} extensions List of extensions.
  * @type {Array}
  */
-Model.extensions = ["assimp", "assimp.json", "amf", "svg", "obj", "3ds", "dae", "gltf", "glb", "3mf", "awd", "ply", "vtk", "vtp", "wrl", "vrml", "fbx", "pcd", "stl", "json"];
+Model.extensions = ["assimp", "assimp.json", "amf", "babylon", "svg", "obj", "3ds", "dae", "gltf", "glb", "3mf", "awd", "ply", "vtk", "vtp", "wrl", "vrml", "fbx", "pcd", "stl", "json"];
 
 /**
  * Check if a file name refers to a 3D geometry file.
