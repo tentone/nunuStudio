@@ -205,11 +205,13 @@ include("lib/three/loaders/OBJLoader.js");
 include("lib/three/loaders/OBJLoader2.js");
 include("lib/three/loaders/PCDLoader.js");
 include("lib/three/loaders/PLYLoader.js");
+include("lib/three/loaders/PRWMLoader.js");
 include("lib/three/loaders/STLLoader.js");
 include("lib/three/loaders/SVGLoader.js");
 include("lib/three/loaders/TDSLoader.js");
 include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/TTFLoader.js");
+include("lib/three/loaders/UTF8Loader.js");
 include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
 
@@ -1745,7 +1747,12 @@ Editor.loadModel = function(file, onLoad)
 				{
 					var loader = new THREE.PLYLoader();
 					var geometry = loader.parse(reader.result);
-					Editor.addToScene(new Mesh(geometry));
+					var modelName = FileSystem.getNameWithoutExtension(name);
+					var material = new MeshPhongMaterial();
+					material.name = modelName;
+					var mesh = new Mesh(geometry, material);
+					mesh.name = modelName;
+					Editor.addToScene(mesh);
 				}
 				catch(e)
 				{
@@ -1765,7 +1772,12 @@ Editor.loadModel = function(file, onLoad)
 				{
 					var loader = new THREE.VTKLoader();
 					var geometry = loader.parse(reader.result);
-					Editor.addToScene(new Mesh(geometry));
+					var modelName = FileSystem.getNameWithoutExtension(name);
+					var material = new MeshPhongMaterial();
+					material.name = modelName;
+					var mesh = new Mesh(geometry, material);
+					mesh.name = modelName;
+					Editor.addToScene(mesh);
 				}
 				catch(e)
 				{
@@ -1775,6 +1787,32 @@ Editor.loadModel = function(file, onLoad)
 			};
 			reader.readAsArrayBuffer(file);
 		}
+		//PRWM
+		else if(extension === "prwm")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					var loader = new THREE.PRWMLoader();
+					var geometry = loader.parse(reader.result);
+					var modelName = FileSystem.getNameWithoutExtension(name);
+					var material = new MeshPhongMaterial();
+					material.name = modelName;
+					var mesh = new Mesh(geometry, material);
+					mesh.name = modelName;
+					Editor.addToScene(mesh);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsArrayBuffer(file);
+		}
+		
 		//VRML
 		else if(extension === "wrl" || extension === "vrml")
 		{
@@ -1823,7 +1861,7 @@ Editor.loadModel = function(file, onLoad)
 			};
 			reader.readAsArrayBuffer(file);
 		}
-		//PCD Point Cloud Data
+		//PCD
 		else if(extension === "pcd")
 		{
 			var reader = new FileReader();
