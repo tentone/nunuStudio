@@ -192,6 +192,9 @@ include("lib/tern/infer.js");
 include("lib/tern/plugin/doc_comment.js");
 
 include("lib/three/loaders/3MFLoader.js");
+include("lib/three/loaders/AMFLoader.js");
+include("lib/three/loaders/AssimpLoader.js");
+include("lib/three/loaders/AssimpJSONLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/FBXLoader.js");
@@ -1502,6 +1505,112 @@ Editor.loadModel = function(file, onLoad)
 			}
 
 		}
+		//3MF
+		else if(extension === "3mf")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					var loader = new THREE.ThreeMFLoader();
+					var obj = loader.parse(reader.result);
+					Editor.addToScene(obj);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsArrayBuffer(file);
+		}
+		//AWD
+		else if(extension === "awd")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					var loader = new THREE.AWDLoader();
+					loader._baseDir = path;
+					var awd = loader.parse(reader.result);
+					Editor.addToScene(awd);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsArrayBuffer(file);
+		}
+		//AMF
+		else if(extension === "amf")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					var loader = new THREE.AMFLoader();
+					var amf = loader.parse(reader.result);
+					Editor.addToScene(amf);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsArrayBuffer(file);
+		}
+		//Assimp
+		else if(extension === "assimp")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					var loader = new THREE.AssimpLoader();
+					var assimp = loader.parse(reader.result, path);
+
+					var animation = assimp.animation;
+					//TODO <ANIMATION SUPPORT>
+
+					Editor.addToScene(assimp.object);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsArrayBuffer(file);
+		}
+		//Assimp JSON
+		else if(name.endsWith(".assimp.json"))
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					var loader = new THREE.AssimpJSONLoader();
+					var json = JSON.parse(reader.result);
+					var assimp = loader.parse(json, path);
+					Editor.addToScene(assimp);
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsText(file);
+		}
 		//SVG
 		else if(extension === "svg")
 		{
@@ -1587,46 +1696,6 @@ Editor.loadModel = function(file, onLoad)
 
 						Editor.addToScene(scene);
 					});
-				}
-				catch(e)
-				{
-					Editor.alert("Error loading file");
-					console.error("nunuStudio: Error loading file", e);
-				}
-			};
-			reader.readAsArrayBuffer(file);
-		}
-		//3MF
-		else if(extension === "3mf")
-		{
-			var reader = new FileReader();
-			reader.onload = function()
-			{
-				try
-				{
-					var loader = new THREE.ThreeMFLoader();
-					var obj = loader.parse(reader.result);
-					Editor.addToScene(obj);
-				}
-				catch(e)
-				{
-					Editor.alert("Error loading file");
-					console.error("nunuStudio: Error loading file", e);
-				}
-			};
-			reader.readAsArrayBuffer(file);
-		}
-		//AWD
-		else if(extension === "awd")
-		{
-			var reader = new FileReader();
-			reader.onload = function()
-			{
-				try
-				{
-					var loader = new THREE.AWDLoader();
-					var awd = loader.parse(reader.result);
-					Editor.addToScene(awd);
 				}
 				catch(e)
 				{

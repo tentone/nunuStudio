@@ -18,6 +18,14 @@ function Model()
 Model.prototype = Object.create(Resource.prototype);
 
 /**
+ * List of file types support for 3D models.
+ *
+ * @property {Array} extensions List of extensions.
+ * @type {Array}
+ */
+Model.extensions = ["assimp", "assimp.json", "amf", "svg", "obj", "3ds", "dae", "gltf", "glb", "3mf", "awd", "ply", "vtk", "vtp", "wrl", "vrml", "fbx", "pcd", "stl", "json"];
+
+/**
  * Check if a file name refers to a 3D geometry file.
  *
  * @method fileIsFont
@@ -31,7 +39,13 @@ Model.fileIsModel = function(file)
 	{
 		file = file.name.toLocaleLowerCase();
 
-		return file.endsWith("svg") || file.endsWith("obj") || file.endsWith("3ds") || file.endsWith("dae") || file.endsWith("gltf") || file.endsWith("glb") || file.endsWith("3mf") || file.endsWith("awd") || file.endsWith("ply") || file.endsWith("vtk") || file.endsWith("vtp") || file.endsWith("wrl") || file.endsWith("vrml") || file.endsWith("fbx") || file.endsWith("pcd") || file.endsWith("stl") || file.endsWith("json");
+		for(var i = 0; i < Model.extensions.length; i++)
+		{
+			if(file.endsWith(Model.extensions[i]))
+			{
+				return true;
+			}
+		}
 	}
 
 	return false;
