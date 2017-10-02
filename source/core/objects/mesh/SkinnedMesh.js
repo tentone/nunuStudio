@@ -52,6 +52,19 @@ THREE.SkinnedMesh = SkinnedMesh;
 SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
 
 /**
+ * Update skinned mesh.
+ *
+ * @method update
+ */
+SkinnedMesh.prototype.update = function()
+{
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].update();
+	}
+};
+
+/**
  * Dispose mesh along with its material and geometry.
  * 
  * @method dispose
