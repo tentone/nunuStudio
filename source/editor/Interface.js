@@ -623,6 +623,52 @@ Interface.initialize = function()
 		}, Editor.filePath + "icons/platform/web.png");
 	}
 
+	//Import
+	Interface.file.addOption("Import", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			if(files.length > 0)
+			{
+				var file = files[0];
+				var binary = file.name.endsWith(".nsp");
+
+				var loader = new ObjectLoader();
+				var reader = new FileReader();
+				reader.onload = function()
+				{
+					if(binary)
+					{
+						var pson = new dcodeIO.PSON.StaticPair();
+						var data = pson.decode(reader.result);
+						var program = loader.parse(data);
+					}
+					else
+					{
+						var program = loader.parse(JSON.parse(reader.result));
+					}
+
+					for(var i = 0; i < program.children.length; i++)
+					{
+						Editor.program.add(program.children[i]);
+					}
+
+					Editor.updateObjectViews();
+				};
+
+				if(binary)
+				{
+					reader.readAsArrayBuffer(file);
+				}
+				else
+				{
+					reader.readAsText(file);
+				}
+			}
+		}, ".isp, .nsp");
+
+	}, Editor.filePath + "icons/misc/import.png");
+
 	//Export menu
 	var exportMenu = Interface.file.addMenu("Export", Editor.filePath + "icons/misc/export.png");
 
