@@ -1849,13 +1849,11 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.FBXLoader();
 					var object = loader.parse(reader.result, path);
 				
-					object.mixer = new THREE.AnimationMixer(object);
+					//object.mixer = new THREE.AnimationMixer(object);
 
-					var action = object.mixer.clipAction(object.animations[0]);
-					action.play();
-
-					console.log(object);
-
+					//var action = object.mixer.clipAction(object.animations[0]);
+					//action.play();
+					
 					Editor.addToScene(object);
 				}
 				catch(e)

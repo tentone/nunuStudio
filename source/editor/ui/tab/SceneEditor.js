@@ -120,7 +120,7 @@ function SceneEditor(parent, closeable, container, index)
 					{
 						Editor.loadTexture(file, function(texture)
 						{
-							if(object instanceof THREE.Mesh)
+							if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 							{
 								var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
 								material.name = texture.name;
@@ -140,7 +140,7 @@ function SceneEditor(parent, closeable, container, index)
 					{
 						Editor.loadVideoTexture(file, function(texture)
 						{
-							if(object instanceof THREE.Mesh)
+							if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 							{
 								var material = new THREE.MeshStandardMaterial({map:texture, color:0xffffff, roughness: 0.6, metalness: 0.2});
 								material.name = texture.name;
@@ -192,7 +192,7 @@ function SceneEditor(parent, closeable, container, index)
 					}
 					else if(draggedObject instanceof THREE.Material)
 					{
-						if(object instanceof THREE.Mesh)
+						if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 						{
 							object.material = draggedObject;
 							Editor.updateObjectViews();
@@ -208,7 +208,7 @@ function SceneEditor(parent, closeable, container, index)
 					}
 					else if(draggedObject instanceof THREE.Texture)
 					{
-						if(object instanceof THREE.Mesh)
+						if(object instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 						{
 							object.material = new THREE.MeshStandardMaterial({map:draggedObject, color:0xffffff, roughness: 0.6, metalness: 0.2});
 							object.material.name = draggedObject.name;

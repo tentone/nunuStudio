@@ -234,7 +234,7 @@ function TreeElement(container)
 			}
 
 			//Mesh specific stuff
-			if(self.obj instanceof THREE.Mesh)
+			if(self.obj instanceof THREE.Mesh || object instanceof THREE.SkinnedMesh)
 			{
 				//If mesh has a geometry attached
 				if(self.obj.geometry !== undefined)
