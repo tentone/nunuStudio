@@ -76,7 +76,11 @@ SkinnedMesh.prototype.dispose = function()
 	{
 		this.material.dispose();
 	}
-	this.geometry.dispose();
+
+	if(this.geometry !== null)
+	{
+		this.geometry.dispose();
+	}
 
 	//Children
 	for(var i = 0; i < this.children.length; i++)
