@@ -1,5 +1,15 @@
 "use strict";
 
+/*
+ * Include build and optimization script.
+ * 
+ * Requires java to be installed in order to optimize using Google closure.
+ * 
+ * yuidocjs used for documentation generation.
+ *
+ * @class build
+ * @author tentone
+ */
 var sourcePath = "../../source/";
 var buildPath = "../";
 
@@ -61,7 +71,7 @@ copyFile(buildPath + "nunu.editor.css", editorWebPath + "nunu.editor.css");
 console.log("----------------------------------------------------------------------");
 console.log("                      Generating documentation");
 console.log("----------------------------------------------------------------------");
-//console.log(" Installing YiuDocJS from NPM");
+//console.log(" Installing YuiDocJS from NPM");
 //require("child_process").execSync("npm -g install yuidocjs", function(error, stdout, stderr){});
 console.log(" Removing old files");
 deleteFolder("../../docs/docs");
