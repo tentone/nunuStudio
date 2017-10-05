@@ -60,7 +60,7 @@ function OrbitControls()
 	this.type = "OrbitControls";
 
 	this.distance = 4;
-	this.sensitivity = 0.002;
+	this.sensitivity = 0.001;
 	this.limitUp = 1.57;
 	this.limitDown = -1.57;
 	this.needsButtonPressed = true;
@@ -118,7 +118,7 @@ OrbitControls.prototype.update = function()
 
 	if(this.mouse.wheel !== 0)
 	{
-		this.distance += this.mouse.wheel * this.sensitivity;
+		this.distance += this.mouse.wheel * this.sensitivity * this.position.distanceTo(this.center);
 		if(this.distance < 0)
 		{
 			this.distance = 0;
@@ -140,13 +140,13 @@ OrbitControls.prototype.update = function()
 		direction.y = 0;
 		direction.normalize();
 
-		var y = this.mouse.delta.y * this.sensitivity * 10;
+		var y = this.mouse.delta.y * this.sensitivity * this.distance;
 		this.center.x -= direction.x * y;
 		this.center.z -= direction.z * y;
 
 		direction.applyAxisAngle(OrbitControls.UP, 1.57);
 
-		var x = this.mouse.delta.x * this.sensitivity * 10;
+		var x = this.mouse.delta.x * this.sensitivity * this.distance;
 		this.center.x -= direction.x * x;
 		this.center.z -= direction.z * x;
 	}
