@@ -1698,28 +1698,30 @@ Editor.loadModel = function(file, onLoad)
 					var scene = collada.scene;
 					var animations = collada.animations;
 
-					console.log(scene);
+					/*if(animations.length > 0)
+					{	
+						console.log("Found animations(" + animations.length + ")");
+						
+						var mixer = new THREE.AnimationMixer(scene);
+						var action = mixer.clipAction(animations[0]);
+						action.play();
+						
+						var clock = new THREE.Clock();
+						clock.start();
 
-					var mixer = new THREE.AnimationMixer(scene);
-					var action = mixer.clipAction(animations[0]);
-					action.play();
-					
-					var clock = new THREE.Clock();
-					clock.start();
-
-					scene.traverse(function(child)
-					{
-						if(child instanceof THREE.SkinnedMesh)
+						scene.traverse(function(child)
 						{
-							console.log("found skinned mesh");
-							child.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
+							if(child instanceof THREE.SkinnedMesh)
 							{
-								var delta = clock.getDelta();
-								console.log("Update animation(" + delta + ")");
-								mixer.update(delta);
-							};
-						}
-					});
+								console.log("Found skinned mesh");
+								child.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
+								{
+									var delta = clock.getDelta();
+									mixer.update(delta);
+								};
+							}
+						});
+					}*/
 					
 					Editor.addToScene(scene);
 				}
@@ -1746,27 +1748,36 @@ Editor.loadModel = function(file, onLoad)
 						scene.type = "Group";
 						var animations = gltf.animations;
 						
-						var mixer = new THREE.AnimationMixer(scene);
-						var action = mixer.clipAction(animations[0]);
-						action.play();
-						
-						var clock = new THREE.Clock();
-						clock.start();
 
-						scene.traverse(function(child)
-						{
-							if(child instanceof THREE.SkinnedMesh)
+						/*if(animations.length > 0)
+						{	
+							for(var i = 0; i < animations.length; i++)
 							{
-								console.log("found skinned mesh");
-								child.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
-								{
-									var delta = clock.getDelta();
-									console.log("Update animation(" + delta + ")");
-									mixer.update(delta);
-								};
+								console.log(animations[i]);
 							}
-						});
-					
+							console.log("Found animations(" + animations.length + ")");
+
+							var mixer = new THREE.AnimationMixer(scene);
+							var action = mixer.clipAction(animations[2]);
+							action.play();
+							
+							var clock = new THREE.Clock();
+							clock.start();
+
+							scene.traverse(function(child)
+							{
+								if(child instanceof THREE.SkinnedMesh)
+								{
+									console.log("Found skinned mesh");
+									child.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
+									{
+										var delta = clock.getDelta();
+										mixer.update(delta);
+									};
+								}
+							});
+						}*/
+
 						Editor.addToScene(scene);
 					});
 				}
@@ -1889,27 +1900,30 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.FBXLoader();
 					var object = loader.parse(reader.result, path);
 
-					var mixer = new THREE.AnimationMixer(object);
-					var action = mixer.clipAction(object.animations[0]);
-					action.play();
-					
-					var clock = new THREE.Clock();
-					clock.start();
+					/*if(object.animations.length > 0)
+					{					
+						var mixer = new THREE.AnimationMixer(object);
+						var action = mixer.clipAction(object.animations[0]);
+						action.play();
+						
+						var clock = new THREE.Clock();
+						clock.start();
 
-					object.traverse(function(child)
-					{
-						if(child instanceof THREE.SkinnedMesh)
+						object.traverse(function(child)
 						{
-							console.log("found skinned mesh");
-							child.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
+							if(child instanceof THREE.SkinnedMesh)
 							{
-								var delta = clock.getDelta();
-								console.log("Update animation(" + delta + ")");
-								mixer.update(delta);
-							};
-						}
-					});
-
+								console.log("found skinned mesh");
+								child.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
+								{
+									var delta = clock.getDelta();
+									console.log("Update animation(" + delta + ")");
+									mixer.update(delta);
+								};
+							}
+						});
+					}*/
+				
 					Editor.addToScene(object);
 				}
 				catch(e)
