@@ -44,6 +44,9 @@ function SkinnedMesh(geometry, material, useVertexTexture)
 
 	this.receiveShadow = true;
 	this.castShadow = true;
+
+	this.animations = [];
+	this.mixer = null;
 }
 
 THREE._SkinnedMesh = THREE.SkinnedMesh;
@@ -52,15 +55,28 @@ THREE.SkinnedMesh = SkinnedMesh;
 SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
 
 /**
- * Update skinned mesh.
+ * Play animation attached to this skinned mesh.
  *
- * @method update
+ * Animations rely on other bone objects, if some of these are missing the animation will have problems playing.
+ *
+ * @method setAnimtion
+ * @param {Animation} animation Animation to play.
  */
-SkinnedMesh.prototype.update = function()
+SkinnedMesh.prototype.playAnimation = function(animation)
 {
-	for(var i = 0; i < this.children.length; i++)
+	//TODO <ADD CODE HERE>
+};
+
+/**
+ * Update skinned mesh animation if there is some attached.
+ *
+ * @method onBeforeRender
+ */
+SkinnedMesh.prototype.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
+{
+	if(this.mixer !== null)
 	{
-		this.children[i].update();
+		this.mixer.update(0.0166);
 	}
 };
 
@@ -80,6 +96,11 @@ SkinnedMesh.prototype.dispose = function()
 	if(this.geometry !== null)
 	{
 		this.geometry.dispose();
+	}
+
+	if(this.mixer !== null)
+	{
+		this.mixer.stopAllAction();
 	}
 
 	//Children
@@ -130,6 +151,8 @@ SkinnedMesh.prototype.toJSON = function(meta)
 	{
 		data.object.bindMatrix = this.bindMatrix.toArray();
 	}
+
+	//TODO <SERIALIZE ANIMATIONS>
 
 	return data;
 };
