@@ -8374,7 +8374,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 90,
+            "line": 68,
             "description": "Default particle emitter configuration.",
             "itemtype": "attribute",
             "name": "defaultEmitter",
@@ -8384,7 +8384,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 111,
+            "line": 89,
             "description": "Default particle emitter group configuration.",
             "itemtype": "attribute",
             "name": "defaultGroup",
@@ -8394,7 +8394,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 132,
+            "line": 110,
             "description": "Initialize particle system.",
             "itemtype": "method",
             "name": "initialize",
@@ -8403,7 +8403,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 147,
+            "line": 125,
             "description": "Update particle emitter state.",
             "itemtype": "method",
             "name": "update",
@@ -8412,7 +8412,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 162,
+            "line": 140,
             "description": "Dispose particle emitter.\n\nShould be called when destroying particle emitter.",
             "itemtype": "method",
             "name": "dispose",
@@ -8421,7 +8421,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 179,
+            "line": 157,
             "description": "Particle emitter cannot be detected by raycaster.\n\nThe raycast method allways returns null.",
             "itemtype": "method",
             "name": "raycast",
@@ -8433,7 +8433,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 192,
+            "line": 170,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
