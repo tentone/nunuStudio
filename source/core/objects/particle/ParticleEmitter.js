@@ -32,27 +32,18 @@
  * @property emitter
  * @type {SPE.Emitter}
  */
-
 function ParticleEmitter(group, emitter)
 {
-	//Group
-	if(group !== undefined)
-	{
-		this.group = new SPE.Group(group);
-	}
-	else
-	{
-		this.group = new SPE.Group(ParticleEmitter.defaultGroup);
-	}
+	this.group = new SPE.Group(group !== undefined ? group : ParticleEmitter.defaultGroup);
+	this.emitter = new SPE.Emitter(emitter !== undefined ? emitter : ParticleEmitter.defaultEmitter);
+	this.group.addEmitter(this.emitter);
 
-	//Super constructor
 	THREE.Points.call(this, this.group.geometry, this.group.material);
 
 	this.type = "ParticleEmiter";
 	this.name = "particle";
 	this.frustumCulled = false;
 
-	//Group
 	var group = this.group;
 	Object.defineProperties(this,
 	{
@@ -69,19 +60,6 @@ function ParticleEmitter(group, emitter)
 		}
 	});
 
-	//Emitter
-	if(emitter !== undefined)
-	{
-		this.emitter = new SPE.Emitter(emitter);
-		this.group.addEmitter(this.emitter);
-	}
-	else
-	{
-		this.emitter = new SPE.Emitter(ParticleEmitter.defaultEmitter);
-		this.group.addEmitter(this.emitter);
-	}
-
-	//Clock
 	this.clock = new THREE.Clock();
 }
 
@@ -184,10 +162,10 @@ ParticleEmitter.prototype.dispose = function()
  * @method raycast
  * @return Null.
  */
-ParticleEmitter.prototype.raycast = function()
+/*ParticleEmitter.prototype.raycast = function()
 {
 	return null;
-};
+};*/
 
 /**
  * Serialize object to JSON.
