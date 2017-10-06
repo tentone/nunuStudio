@@ -4390,7 +4390,7 @@
 					return reader.getArrayBuffer( length );
 
 				default:
-					throw new Error( 'THREE.FBXLoader: Unknown property type ' + type );
+					console.warn( 'THREE.FBXLoader: Unknown property type ' + type );
 
 			}
 

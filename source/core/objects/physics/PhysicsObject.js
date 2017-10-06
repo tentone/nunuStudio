@@ -16,7 +16,7 @@
  */
 
 /**
- * Physics body contains the following attributes, provived by cannon.js
+ * Physics body contains the following attributes.
  *  - position Vec3
  *  - velocity Vec3
  *  - torque Vec3
@@ -34,12 +34,14 @@
  *  - collisionFilterMask Number
  *  - fixedRotation Boolean
  *  - shape Array
+ *  
  * @attribute body
  * @type {CANNON.Body}
  */
 
 /**
- * Physics world
+ * Physics world.
+ * 
  * @attribute world
  * @type {CANNON.World}
  */
