@@ -57,14 +57,17 @@ SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
 /**
  * Play animation attached to this skinned mesh.
  *
- * Animations rely on other bone objects, if some of these are missing the animation will have problems playing.
+ * Animations rely on other objects, if some of these are missing the animation will have problems playing.
  *
  * @method setAnimtion
- * @param {Animation} animation Animation to play.
+ * @param {Number} animation Index of the animation to play.
  */
-SkinnedMesh.prototype.playAnimation = function(animation)
+SkinnedMesh.prototype.playAnimation = function(index)
 {
-	//TODO <ADD CODE HERE>
+	console.log(this);
+	
+	var action = this.mixer.clipAction(this.animations[index]);
+	action.play();
 };
 
 /**
@@ -76,6 +79,7 @@ SkinnedMesh.prototype.onBeforeRender = function(renderer, scene, camera, geometr
 {
 	if(this.mixer !== null)
 	{
+		console.log("animation");
 		this.mixer.update(0.0166);
 	}
 };

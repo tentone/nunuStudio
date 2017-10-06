@@ -1900,29 +1900,18 @@ Editor.loadModel = function(file, onLoad)
 					var loader = new THREE.FBXLoader();
 					var object = loader.parse(reader.result, path);
 
-					/*if(object.animations.length > 0)
+					if(object.animations.length > 0)
 					{					
-						var mixer = new THREE.AnimationMixer(object);
-						var action = mixer.clipAction(object.animations[0]);
-						action.play();
-						
-						var clock = new THREE.Clock();
-						clock.start();
-
 						object.traverse(function(child)
 						{
 							if(child instanceof THREE.SkinnedMesh)
 							{
-								console.log("found skinned mesh");
-								child.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
-								{
-									var delta = clock.getDelta();
-									console.log("Update animation(" + delta + ")");
-									mixer.update(delta);
-								};
+								child.mixer = new THREE.AnimationMixer(child);
+								child.animations = object.animations;
+								child.playAnimation(0);
 							}
 						});
-					}*/
+					}
 				
 					Editor.addToScene(object);
 				}
