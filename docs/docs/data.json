@@ -70,6 +70,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\loaders\\AnimationLoader.js": {
+            "name": "..\\..\\source\\core\\loaders\\AnimationLoader.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\loaders\\AudioLoader.js": {
             "name": "..\\..\\source\\core\\loaders\\AudioLoader.js",
             "modules": {
@@ -5162,6 +5169,13 @@
             "module": "Input"
         },
         {
+            "file": "..\\..\\source\\core\\loaders\\AnimationLoader.js",
+            "line": 3,
+            "author": "bhouston / http://clara.io/",
+            "class": "AudioLoader",
+            "module": "Input"
+        },
+        {
             "file": "..\\..\\source\\core\\loaders\\AudioLoader.js",
             "line": 16,
             "description": "Load audio file from URL.",
@@ -7886,7 +7900,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 61,
+            "line": 58,
             "description": "Play animation attached to this skinned mesh.\n\nAnimations rely on other objects, if some of these are missing the animation will have problems playing.",
             "itemtype": "method",
             "name": "setAnimtion",
@@ -7902,7 +7916,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 83,
+            "line": 82,
             "description": "Update skinned mesh animation if there is some attached.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -7911,7 +7925,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 96,
+            "line": 95,
             "description": "Dispose mesh along with its material and geometry.",
             "itemtype": "method",
             "name": "dispose",
@@ -7920,7 +7934,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 126,
+            "line": 125,
             "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
@@ -7941,7 +7955,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 136,
+            "line": 135,
             "description": "Serialize skinned mesh to json.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8454,7 +8468,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
             "line": 18,
-            "description": "Physics body contains the following attributes, provived by cannon.js\n - position Vec3\n - velocity Vec3\n - torque Vec3\n - angularVelocity Vec3\n - quaternion Quaternion\n - mass Number\n - material Material\n - type Number\n - linearDamping Number\n - angularDamping Number\n - allowSleep Boolean\n - sleepSpeedLimit Number\n - sleepTimeLimit Number\n - collisionFilterGroup Number\n - collisionFilterMask Number\n - fixedRotation Boolean\n - shape Array",
+            "description": "Physics body contains the following attributes.\n - position Vec3\n - velocity Vec3\n - torque Vec3\n - angularVelocity Vec3\n - quaternion Quaternion\n - mass Number\n - material Material\n - type Number\n - linearDamping Number\n - angularDamping Number\n - allowSleep Boolean\n - sleepSpeedLimit Number\n - sleepTimeLimit Number\n - collisionFilterGroup Number\n - collisionFilterMask Number\n - fixedRotation Boolean\n - shape Array",
             "itemtype": "attribute",
             "name": "body",
             "type": "{CANNON.Body}",
@@ -8463,8 +8477,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 41,
-            "description": "Physics world",
+            "line": 42,
+            "description": "Physics world.",
             "itemtype": "attribute",
             "name": "world",
             "type": "{CANNON.World}",
@@ -8473,7 +8487,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 62,
+            "line": 64,
             "description": "Intialize physics object and add it to the scene physics world.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -8482,7 +8496,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 99,
+            "line": 101,
             "description": "Update object position and rotation based on cannon.js body.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -8491,7 +8505,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 121,
+            "line": 123,
             "description": "Add shape to physics object body.",
             "params": [
                 {
@@ -8507,7 +8521,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\physics\\PhysicsObject.js",
-            "line": 135,
+            "line": 137,
             "description": "Create JSON for object.\nNeed to backup material and geometry and set to undefined to avoid it being stored.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14311,5 +14325,10 @@
             "module": "Runtime"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\core\\loaders\\AnimationLoader.js:3"
+        }
+    ]
 }

@@ -996,6 +996,15 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 				geometry.bones = tmpBones;
 			}
 
+			if(data.animations !== undefined)
+			{
+				for(var i = 0; i < data.animations.length; i++)
+				{
+					var clip = THREE.AnimationClip.parse(data.animations[i]);
+					object.animations.push(clip);
+				}
+			}
+
 			break;
 
 		case "Mesh":

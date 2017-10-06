@@ -45,9 +45,6 @@ function SkinnedMesh(geometry, material, useVertexTexture)
 	this.receiveShadow = true;
 	this.castShadow = true;
 
-	this.animation = -1;
-	this.autoplay = false;
-
 	this.animations = [];
 	this.action = null;
 	this.mixer = new THREE.AnimationMixer(this);
@@ -76,7 +73,7 @@ SkinnedMesh.prototype.playAnimation = function(index)
 	}
 	catch(e)
 	{
-		console.warn("nunuStudio: Error playing animation");
+		console.warn("nunuStudio: Error playing animation (" + e + ")");
 	}
 };
 
@@ -142,6 +139,7 @@ SkinnedMesh.prototype.dispose = function()
 SkinnedMesh.prototype.toJSON = function(meta)
 {
 	var self = this;
+
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta, function(meta, object)
 	{	
 		if(self.skeleton !== undefined)
@@ -155,17 +153,22 @@ SkinnedMesh.prototype.toJSON = function(meta)
 		}
 	});
 
+	//Bind mode and matrix
 	if(this.bindMode !== undefined)
 	{
 		data.object.bindMode = this.bindMode;
 	}
-
 	if(this.bindMatrix !== undefined)
 	{
 		data.object.bindMatrix = this.bindMatrix.toArray();
 	}
 
-	//TODO <SERIALIZE ANIMATIONS>
+	//Animations
+	data.object.animations = [];
+	for(var i = 0; i < this.animations.length; i++)
+	{
+		data.object.animations.push(THREE.AnimationClip.toJSON(this.animations[i]));
+	}
 
 	return data;
 };
