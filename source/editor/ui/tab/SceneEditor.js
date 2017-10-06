@@ -51,7 +51,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.helperScene.add(this.gridHelper);
 
 	//Axis
-	this.axisHelper = new THREE.AxisHelper(Settings.editor.gridSize);
+	this.axisHelper = new THREE.AxesHelper(Settings.editor.gridSize);
 	this.axisHelper.material.depthWrite = false;
 	this.axisHelper.material.transparent = true;
 	this.axisHelper.material.opacity = 1;
@@ -615,6 +615,10 @@ SceneEditor.prototype.update = function()
 					this.camera.size += this.mouse.wheel * this.camera.size / 1000;
 					this.camera.updateProjectionMatrix();
 				}
+
+				//Update grid helper position
+				this.gridHelper.position.x = this.camera.position.x - (this.camera.position.x % Settings.editor.gridSpacing);
+				this.gridHelper.position.y = this.camera.position.y - (this.camera.position.y % Settings.editor.gridSpacing);
 			}
 			//Perspective camera
 			else
@@ -844,6 +848,10 @@ SceneEditor.prototype.update = function()
 					this.camera.position.add(this.cameraLookAt);
 					this.camera.lookAt(this.cameraLookAt);
 				}
+
+				//Update grid helper position
+				this.gridHelper.position.x = this.camera.position.x - (this.camera.position.x % Settings.editor.gridSpacing);
+				this.gridHelper.position.z = this.camera.position.z - (this.camera.position.z % Settings.editor.gridSpacing);
 			}
 		}
 	}
@@ -1095,7 +1103,8 @@ SceneEditor.prototype.setCameraMode = function(mode)
 		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL);
 		this.camera.position.set(0, 0, 20);
 		
-		this.gridHelper.rotation.x = Math.PI / 2;
+		this.gridHelper.rotation.set(Math.PI / 2, 0, 0);
+		this.gridHelper.position.set(0, 0, 0);
 	}
 	else if(mode === SceneEditor.CAMERA_PERSPECTIVE)
 	{
@@ -1107,7 +1116,8 @@ SceneEditor.prototype.setCameraMode = function(mode)
 		this.cameraDistance = 10;
 		this.setCameraRotation(this.cameraRotation, this.camera);
 
-		this.gridHelper.rotation.x = 0;
+		this.gridHelper.rotation.set(0, 0, 0);
+		this.gridHelper.position.set(0, 0, 0);
 	}
 
 	this.cameraMode = mode;

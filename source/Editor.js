@@ -1580,10 +1580,6 @@ Editor.loadModel = function(file, onLoad)
 				{
 					var loader = new THREE.AssimpLoader();
 					var assimp = loader.parse(reader.result, path);
-
-					var animation = assimp.animation;
-					//TODO <ANIMATION SUPPORT>
-
 					Editor.addToScene(assimp.object);
 				}
 				catch(e)
@@ -1698,30 +1694,16 @@ Editor.loadModel = function(file, onLoad)
 					var scene = collada.scene;
 					var animations = collada.animations;
 
-					/*if(animations.length > 0)
-					{	
-						console.log("Found animations(" + animations.length + ")");
-						
-						var mixer = new THREE.AnimationMixer(scene);
-						var action = mixer.clipAction(animations[0]);
-						action.play();
-						
-						var clock = new THREE.Clock();
-						clock.start();
-
+					if(animations.length > 0)
+					{
 						scene.traverse(function(child)
 						{
 							if(child instanceof THREE.SkinnedMesh)
 							{
-								console.log("Found skinned mesh");
-								child.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
-								{
-									var delta = clock.getDelta();
-									mixer.update(delta);
-								};
+								child.animations = animations;
 							}
 						});
-					}*/
+					}
 					
 					Editor.addToScene(scene);
 				}
@@ -1748,35 +1730,16 @@ Editor.loadModel = function(file, onLoad)
 						scene.type = "Group";
 						var animations = gltf.animations;
 						
-
-						/*if(animations.length > 0)
-						{	
-							for(var i = 0; i < animations.length; i++)
-							{
-								console.log(animations[i]);
-							}
-							console.log("Found animations(" + animations.length + ")");
-
-							var mixer = new THREE.AnimationMixer(scene);
-							var action = mixer.clipAction(animations[2]);
-							action.play();
-							
-							var clock = new THREE.Clock();
-							clock.start();
-
+						if(animations.length > 0)
+						{
 							scene.traverse(function(child)
 							{
 								if(child instanceof THREE.SkinnedMesh)
 								{
-									console.log("Found skinned mesh");
-									child.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
-									{
-										var delta = clock.getDelta();
-										mixer.update(delta);
-									};
+									child.animations = animations;
 								}
 							});
-						}*/
+						}
 
 						Editor.addToScene(scene);
 					});
@@ -1906,9 +1869,7 @@ Editor.loadModel = function(file, onLoad)
 						{
 							if(child instanceof THREE.SkinnedMesh)
 							{
-								child.mixer = new THREE.AnimationMixer(child);
 								child.animations = object.animations;
-								child.playAnimation(0);
 							}
 						});
 					}

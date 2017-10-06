@@ -7886,15 +7886,15 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 57,
-            "description": "Play animation attached to this skinned mesh.\n\nAnimations rely on other bone objects, if some of these are missing the animation will have problems playing.",
+            "line": 61,
+            "description": "Play animation attached to this skinned mesh.\n\nAnimations rely on other objects, if some of these are missing the animation will have problems playing.",
             "itemtype": "method",
             "name": "setAnimtion",
             "params": [
                 {
                     "name": "animation",
-                    "description": "Animation to play.",
-                    "type": "Animation"
+                    "description": "Index of the animation to play.",
+                    "type": "Number"
                 }
             ],
             "class": "SkinnedMesh",
@@ -7902,7 +7902,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 70,
+            "line": 83,
             "description": "Update skinned mesh animation if there is some attached.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -7911,7 +7911,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 83,
+            "line": 96,
             "description": "Dispose mesh along with its material and geometry.",
             "itemtype": "method",
             "name": "dispose",
@@ -7920,7 +7920,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 113,
+            "line": 126,
             "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
@@ -7941,7 +7941,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 123,
+            "line": 136,
             "description": "Serialize skinned mesh to json.",
             "itemtype": "method",
             "name": "toJSON",

@@ -42,6 +42,7 @@ Settings.loadDefault = function()
 		gridSize : 500,
 		gridSpacing : 5,
 		gridEnabled : true,
+		gridFixed : false,
 		axisEnabled : true,
 		cameraPreviewEnabled : true,
 		cameraPreviewPercentage : 0.35,

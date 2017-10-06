@@ -45,8 +45,12 @@ function SkinnedMesh(geometry, material, useVertexTexture)
 	this.receiveShadow = true;
 	this.castShadow = true;
 
+	this.animation = -1;
+	this.autoplay = false;
+
 	this.animations = [];
-	this.mixer = null;
+	this.action = null;
+	this.mixer = new THREE.AnimationMixer(this);
 }
 
 THREE._SkinnedMesh = THREE.SkinnedMesh;
@@ -64,10 +68,16 @@ SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
  */
 SkinnedMesh.prototype.playAnimation = function(index)
 {
-	console.log(this);
-	
-	var action = this.mixer.clipAction(this.animations[index]);
-	action.play();
+	try
+	{
+		var action = this.mixer.clipAction(this.animations[index]);
+		action.setLoop(THREE.LoopRepeat);
+		action.play();
+	}
+	catch(e)
+	{
+		console.warn("nunuStudio: Error playing animation");
+	}
 };
 
 /**
@@ -79,7 +89,6 @@ SkinnedMesh.prototype.onBeforeRender = function(renderer, scene, camera, geometr
 {
 	if(this.mixer !== null)
 	{
-		console.log("animation");
 		this.mixer.update(0.0166);
 	}
 };

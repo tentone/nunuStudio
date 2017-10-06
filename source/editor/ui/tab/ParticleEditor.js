@@ -35,7 +35,7 @@ function ParticleEditor(parent, closeable, container, index)
 	var grid = new THREE.GridHelper(50, 50, 0x888888);
 	grid.material.depthWrite = false;
 	this.scene.add(grid);
-	var axis = new THREE.AxisHelper(50);
+	var axis = new THREE.AxesHelper(50);
 	axis.material.depthWrite = false;
 	this.scene.add(axis);
 
