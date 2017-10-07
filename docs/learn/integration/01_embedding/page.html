@@ -53,18 +53,31 @@
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
 			<h2 class="black">Embedding</h2>
-			<p>In this guide we will learn how to embedd a application created inside nunuStudio in a completly normal webpage without using any external plugins.</p>
-			<p>nunuStudio apps are meant to be used inside web pages, nunuStudio can export full page web apps with a fullscreen and vr buttons by default.</p>
+			<p>In this guide we will learn how to embedd a application created inside nunuStudio in a webpage. nunuStudio applications are meant to be used inside web pages, nunuStudio editor can export web pages with the application already embedded in it and with fullscreen and vr buttons by default.</p>
+			<p>There are two options for embedding applications in your webpage, the first one can be used to fast embed application with a single line of code, the second one can be used for a more flexible approach, with page communication support or more advanced controls.</p>
 
-			<h3 class="black">Preparing the page</h3>
-			<p>First we need to import the nunu.min.js file to the webpage, this javascript file includes all the code required to run a nunuStudio aplication.</p>
-			<p>After including the runtime file a canvas to display the application is needed, add a canvas to your html code.</p>
+			<h3 class="black">The fast way</h3>
+			<p>This is the fastest way to get a nunuStudio app running on your webpage, simple include the the nunu.min.js file in your webpage, and create a canvas with an id. Add the <code>NunuApp.loadApp('pong.nsp', 'canvas')</code> line to your body element onload and you are done, "pong.nsp" is the name of our project file and "canvas" is the id of our canvas element.</p>
+
+			<pre><code class="xml hljs">&lt;html&gt;
+	&lt;head&gt;
+		&lt;script src="nunu.min.js"&gt;&lt;/script&gt;
+	&lt;/head&gt;
+	&lt;body onload="NunuApp.loadApp('pong.nsp', 'canvas')"&gt;
+		&lt;canvas width="800" height="480" id="canvas"&gt;&lt;/canvas&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+			<p>If everything worked as expected you should be able to see a window with the pong application running. You can also import external aplication, they dont need to be stored locally. As an example if you change to <code>NunuApp.loadApp('http://nunustudio.org/examples/files/nunu.nsp', 'canvas')</code> the nunu homepage demo will be loaded instead.</p>
+
+			<h3 class="black">Using javascript</h3>
+			<p></p>
+			<p>First we need to import the nunu.min.js file to the webpage, this javascript file includes all the code required to run a nunuStudio aplication. After including the runtime file a canvas to display the application is needed, add a canvas to your html code.</p>
 			<pre><code class="xml hljs">&lt;!--Import nunuStudio runtime--&gt;
 &lt;script type="text/javascript" src="nunu.min.js"&gt;&lt;/script&gt;
 
 &lt;!--Canvas used to draw content--&gt;
 &lt;canvas id="canvas"&gt;&lt;/canvas&gt;</code></pre>
-
 
 			<h3 class="black">NunuApp object</h3>
 			<p>Now lets create a new javascript script with the code bellow, this code creates a new NunuApp instance that will use the provided canvas to render the application.</p>
