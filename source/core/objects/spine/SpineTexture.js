@@ -1,7 +1,8 @@
 "use strict";
 
 /**
- * Spine animation textures
+ * Spine animation textures adapted to work with nunuStudio textures.
+ * 
  * Based on SpineTexture from original spine runtime for three.js
  * 
  * @class SpineTexture
@@ -14,7 +15,7 @@ function SpineTexture(texture)
 	spine.Texture.call(this, texture.image);
 	
 	this.texture = texture;
-	this.texture.flipY = false;
+	this.texture.flipY = false;	
 };
 
 SpineTexture.prototype = Object.create(spine.Texture.prototype);
