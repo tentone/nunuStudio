@@ -7,17 +7,6 @@ function Action(type, target)
 	this.target = null;
 }
 
-Action.prototype.apply = function()
-{
-	//TODO <ADD CODE HERE>
-};
-
-Action.prototype.redo = function()
-{
-	//TODO <ADD CODE HERE>
-};
-
-Action.prototype.undo = function()
-{
-	//TODO <ADD CODE HERE>
-};
+Action.prototype.apply = function(){};
+Action.prototype.redo = function(){};
+Action.prototype.undo = function(){};
