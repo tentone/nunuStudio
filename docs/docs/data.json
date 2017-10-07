@@ -70,13 +70,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\loaders\\AnimationLoader.js": {
-            "name": "..\\..\\source\\core\\loaders\\AnimationLoader.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\loaders\\AudioLoader.js": {
             "name": "..\\..\\source\\core\\loaders\\AudioLoader.js",
             "modules": {
@@ -5169,13 +5162,6 @@
             "module": "Input"
         },
         {
-            "file": "..\\..\\source\\core\\loaders\\AnimationLoader.js",
-            "line": 3,
-            "author": "bhouston / http://clara.io/",
-            "class": "AudioLoader",
-            "module": "Input"
-        },
-        {
             "file": "..\\..\\source\\core\\loaders\\AudioLoader.js",
             "line": 16,
             "description": "Load audio file from URL.",
@@ -7900,7 +7886,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 58,
+            "line": 59,
             "description": "Play animation attached to this skinned mesh.\n\nAnimations rely on other objects, if some of these are missing the animation will have problems playing.",
             "itemtype": "method",
             "name": "setAnimtion",
@@ -13991,6 +13977,28 @@
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
             "line": 231,
+            "description": "Load a nunustudio application and attach it to the canvas indicated.\n\nThis method automatically creates resize events, this single line should be enough to make a nunuStudio app run in a webpage.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "loadApp",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "URL for the nsp or isp nunuStudio file.",
+                    "type": "URL"
+                },
+                {
+                    "name": "canvas",
+                    "description": "Canvas object or canvas id.",
+                    "type": "String"
+                }
+            ],
+            "class": "NunuApp",
+            "module": "Runtime"
+        },
+        {
+            "file": "..\\..\\source\\runtime\\NunuApp.js",
+            "line": 267,
             "description": "Start running nunu program.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -13999,7 +14007,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 298,
+            "line": 334,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -14025,7 +14033,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 319,
+            "line": 355,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -14041,7 +14049,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 344,
+            "line": 380,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -14067,7 +14075,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 387,
+            "line": 423,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -14076,7 +14084,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 403,
+            "line": 439,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -14085,7 +14093,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 454,
+            "line": 490,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -14094,7 +14102,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 488,
+            "line": 524,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -14103,7 +14111,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 498,
+            "line": 534,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -14119,7 +14127,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 512,
+            "line": 548,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -14128,7 +14136,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 536,
+            "line": 572,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -14144,7 +14152,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 552,
+            "line": 588,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -14160,7 +14168,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 565,
+            "line": 601,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -14176,7 +14184,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 578,
+            "line": 614,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -14189,7 +14197,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 589,
+            "line": 625,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -14198,7 +14206,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 613,
+            "line": 649,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",
@@ -14325,10 +14333,5 @@
             "module": "Runtime"
         }
     ],
-    "warnings": [
-        {
-            "message": "Missing item type",
-            "line": " ..\\..\\source\\core\\loaders\\AnimationLoader.js:3"
-        }
-    ]
+    "warnings": []
 }

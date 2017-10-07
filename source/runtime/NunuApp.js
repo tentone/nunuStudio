@@ -229,6 +229,42 @@ function NunuApp(canvas)
 }
 
 /**
+ * Load a nunustudio application and attach it to the canvas indicated.
+ *
+ * This method automatically creates resize events, this single line should be enough to make a nunuStudio app run in a webpage.
+ *
+ * @static
+ * @method loadApp
+ * @param {URL} url URL for the nsp or isp nunuStudio file.
+ * @param {String} canvas Canvas object or canvas id.
+ */
+NunuApp.loadApp = function(url, canvas)
+{	
+	if(typeof canvas === "string")
+	{
+		canvas = document.getElementById(canvas);
+	}
+
+	var app = new NunuApp(canvas);
+	app.loadRunProgram(url);
+
+	window.addEventListener("resize", function()
+	{
+		if(Nunu.isFullscreen())
+		{
+			app.canvas.width = window.innerWidth;
+			app.canvas.height = window.innerHeight;
+		}
+		else
+		{
+			app.canvas.width = nunuApps[i].canvas.parentElement.offsetWidth * 0.8;
+			app.canvas.height = nunuApps[i].canvas.parentElement.offsetWidth * 0.4;
+		}
+		app.resize();
+	});
+};
+
+/**
  * Start running nunu program.
  * 
  * A nunu program must be loaded before calling this method.
