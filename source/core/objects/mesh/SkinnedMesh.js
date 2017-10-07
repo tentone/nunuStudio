@@ -46,8 +46,9 @@ function SkinnedMesh(geometry, material, useVertexTexture)
 	this.castShadow = true;
 
 	this.animations = [];
-	this.action = null;
+	this.actions = [];
 	this.mixer = new THREE.AnimationMixer(this);
+	this.clock = new THREE.Clock();
 }
 
 THREE._SkinnedMesh = THREE.SkinnedMesh;
@@ -70,6 +71,7 @@ SkinnedMesh.prototype.playAnimation = function(index)
 		var action = this.mixer.clipAction(this.animations[index]);
 		action.setLoop(THREE.LoopRepeat);
 		action.play();
+		this.actions.push(action);
 	}
 	catch(e)
 	{
@@ -86,7 +88,7 @@ SkinnedMesh.prototype.onBeforeRender = function(renderer, scene, camera, geometr
 {
 	if(this.mixer !== null)
 	{
-		this.mixer.update(0.0166);
+		this.mixer.update(this.clock.getDelta());
 	}
 };
 

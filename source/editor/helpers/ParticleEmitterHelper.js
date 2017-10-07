@@ -13,8 +13,8 @@ function ParticleEmitterHelper(particle)
 		json.object.children = [];
 
 		this.runtime = new ObjectLoader().parse(json);
-		this.runtime.initialize();
 		this.add(this.runtime);
+		this.runtime.initialize();
 	}
 }
 
