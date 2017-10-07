@@ -179,17 +179,24 @@ function AssetExplorer(parent, closeable, container, index)
 			{
 				for(var i = 0; i < files.length; i++)
 				{
-					var file = files[i].path;
+					try
+					{
+						var file = files[i].path;
+						
+						var json = FileSystem.readFile(file);
+						var atlas = FileSystem.readFile(file.replace("json", "atlas"));
+						var path = FileSystem.getFilePath(file);
+						
+						var animation = new SpineAnimation(json, atlas, path);
+						animation.name = FileSystem.getFileName(file);
 
-					var json = FileSystem.readFile(file);
-					var atlas = FileSystem.readFile(file.replace("json", "atlas"));
-					var path = FileSystem.getFilePath(file);
-					
-					var animation = new SpineAnimation(json, atlas, path);
-					animation.name = FileSystem.getFileName(file);
-
-					Editor.addToScene(animation);
-					Editor.updateObjectViews();
+						Editor.addToScene(animation);
+						Editor.updateObjectViews();
+					}
+					catch(e)
+					{
+						Editor.alert("Failed to load Spine animation, make sure that .json and .atlas have the same name.");
+					}
 				}
 			}, ".json, .spine");
 		}, Editor.filePath + "icons/misc/spine.png");

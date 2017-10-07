@@ -9,7 +9,7 @@
  * 
  * @class SpineAnimation
  * @constructor
- * @extends {Mesh}
+ * @extends {spine.threejs.SkeletonMesh}
  * @param {Object} json
  * @param {String} atlas
  * @param {String} path
@@ -44,6 +44,8 @@ function SpineAnimation(json, atlas, path, textures)
 				{
 					var texture = new SpineTexture(textures[i].texture);
 					var image = texture.texture.image;
+
+					//TODO <READ IMAGE SIZE>
 					image.width = 1024;
 					image.height = 1024;
 
@@ -60,11 +62,12 @@ function SpineAnimation(json, atlas, path, textures)
 		{
 			var texture = new SpineTexture(new Texture(new Image(path + "/" + file)));
 			var image = texture.texture.image;
+
+			//TODO <READ IMAGE SIZE>
 			image.width = 1024;
 			image.height = 1024;
 			
 			textures.push({name: file, texture: texture.texture});
-
 			return texture;
 		});
 	}
@@ -72,23 +75,9 @@ function SpineAnimation(json, atlas, path, textures)
 	var loader = new spine.AtlasAttachmentLoader(textureAtlas);
 	var skeleton = new spine.SkeletonJson(loader).readSkeletonData(json);
 
-	THREE.Mesh.call(this);
+	spine.threejs.SkeletonMesh.call(this, skeleton);
 
-	this.zOffset = 0.1;
-	
-	this.skeleton = new spine.Skeleton(skeleton);
-
-	var animation = new spine.AnimationStateData(skeleton);
-	this.state = new spine.AnimationState(animation);
-
-	this.batcher = new spine.threejs.MeshBatcher(this);
-
-	var material = new THREE.MeshBasicMaterial();
-	material.side = THREE.DoubleSide;
-	material.transparent = true;
-	material.name = "spine";
-	material.alphaTest = 0.5;
-	this.material = material;
+	this.material.name = "spine";
 
 	this.json = json;
 	this.atlas = atlas;
@@ -99,21 +88,17 @@ function SpineAnimation(json, atlas, path, textures)
 
 	this.scale.set(0.01, 0.01, 0.01);
 
-	this.frustumCulled = false;
+	//this.frustumCulled = false;
 	this.receiveShadow = true;
 	this.castShadow = true;
 
 	this.clock = new THREE.Clock();
 }
 
-SpineAnimation.prototype = Object.create(THREE.Mesh.prototype);
-
-SpineAnimation.QUAD_TRIANGLES = [0, 1, 2, 2, 3, 0];
+SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
 
 /**
- * Update animation state.
- * 
- * Automatically called by the runtime.
+ * Update mesh geometry from animation state.
  * 
  * @method update
  */
@@ -166,66 +151,11 @@ SpineAnimation.prototype.setAnimation = function(track, name)
  * Get skins available for this animation.
  *
  * @method getSkins
- * @return {[type]} [description]
+ * @return {Array} List of skins available for this animation.
  */
 SpineAnimation.prototype.getSkins = function()
 {
 	return this.state.data.skeletonData.skins;
-};
-
-/**
- * Update mesh geometry from animation state.
- * 
- * @method updateGeometry
- */
-SpineAnimation.prototype.updateGeometry = function()
-{
-	var vertices = null, triangles = null;
-	var drawOrder = this.skeleton.drawOrder;
-	var z = 0;
-
-	var batcher = this.batcher;
-	batcher.begin();
-
-	for(var i = 0, n = drawOrder.length; i < n; i++)
-	{
-		var slot = drawOrder[i];
-		var attachment = slot.getAttachment();
-		var texture = null;
-
-		if(attachment instanceof spine.RegionAttachment)
-		{
-			var region = attachment;
-			vertices = region.updateWorldVertices(slot, false);
-			triangles = SpineAnimation.QUAD_TRIANGLES;
-			texture = region.region.renderObject.texture;
-		}
-		else if(attachment instanceof spine.MeshAttachment)
-		{
-			var mesh = attachment;
-			vertices = mesh.updateWorldVertices(slot, false);
-			triangles = mesh.triangles;
-			texture = mesh.region.renderObject.texture;
-		}
-		else
-		{
-			continue;
-		}
-
-		if(texture !== null)
-		{
-			if(!this.material.map)
-			{
-				var material = this.material;
-				material.map = texture.texture;
-				material.needsUpdate = true;
-			}
-			batcher.batch(vertices, triangles, z);
-			z += this.zOffset;
-		}
-	}
-	
-	batcher.end();
 };
 
 /**
