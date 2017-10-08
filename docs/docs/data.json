@@ -1127,7 +1127,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 3,
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official threejs runtime.\n\nMore information abou spine available here www.esotericsoftware.com."
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official threejs runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information abou spine available here www.esotericsoftware.com."
         },
         "Textures": {
             "name": "Textures",
@@ -2325,9 +2325,9 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 3,
-            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official threejs runtime.\n\nMore information abou spine available here www.esotericsoftware.com.",
+            "description": "Spine animation object, to used with animation produced inside Esoteric spine.\n\nBased on the official threejs runtime code available at https://github.com/EsotericSoftware/spine-runtimes.\n\nMore information abou spine available here www.esotericsoftware.com.",
             "is_constructor": 1,
-            "extends": "{Mesh}",
+            "extends": "{spine.threejs.SkeletonMesh}",
             "params": [
                 {
                     "name": "json",
@@ -2363,7 +2363,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\spine\\SpineTexture.js",
             "line": 3,
-            "description": "Spine animation textures\nBased on SpineTexture from original spine runtime for three.js",
+            "description": "Spine animation textures adapted to work with nunuStudio textures.\n\nBased on SpineTexture from original spine runtime for three.js",
             "is_constructor": 1,
             "params": [
                 {
@@ -8705,16 +8705,16 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 113,
-            "description": "Update animation state.\n\nAutomatically called by the runtime.",
+            "line": 94,
+            "description": "Update mesh geometry from animation state before rendering.",
             "itemtype": "method",
-            "name": "update",
+            "name": "onBeforeRender",
             "class": "SpineAnimation",
             "module": "Animations"
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 135,
+            "line": 109,
             "description": "Get all available animations.",
             "itemtype": "method",
             "name": "getAnimations",
@@ -8727,7 +8727,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 146,
+            "line": 120,
             "description": "Set animation from track number and name.",
             "itemtype": "method",
             "name": "setAnimation",
@@ -8748,29 +8748,20 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 165,
+            "line": 139,
             "description": "Get skins available for this animation.",
             "itemtype": "method",
             "name": "getSkins",
             "return": {
-                "description": "[description]",
-                "type": "[type]"
+                "description": "List of skins available for this animation.",
+                "type": "Array"
             },
             "class": "SpineAnimation",
             "module": "Animations"
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 176,
-            "description": "Update mesh geometry from animation state.",
-            "itemtype": "method",
-            "name": "updateGeometry",
-            "class": "SpineAnimation",
-            "module": "Animations"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 231,
+            "line": 150,
             "description": "Serialize spine animation as JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8787,6 +8778,28 @@
             },
             "class": "SpineAnimation",
             "module": "Animations"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\spine\\SpineTexture.js",
+            "line": 23,
+            "description": "Load spine textures from atlas data.\n\nCan be used to load data async and get size of the textures read.",
+            "itemtype": "method",
+            "name": "load",
+            "static": 1,
+            "params": [
+                {
+                    "name": "atlas",
+                    "description": "Atlas file data.",
+                    "type": "String"
+                },
+                {
+                    "name": "onLoad",
+                    "description": "Called after data is loaded and image size is known, receives textures array as parameter",
+                    "type": "Function"
+                }
+            ],
+            "class": "SpineTexture",
+            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\objects\\sprite\\Sprite.js",

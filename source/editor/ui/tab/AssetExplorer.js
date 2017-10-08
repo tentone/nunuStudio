@@ -195,7 +195,7 @@ function AssetExplorer(parent, closeable, container, index)
 					}
 					catch(e)
 					{
-						Editor.alert("Failed to load Spine animation, make sure that .json and .atlas have the same name.");
+						Editor.alert("Failed to load Spine animation, make sure that .json and .atlas have the same name (" + e + ")");
 					}
 				}
 			}, ".json, .spine");
