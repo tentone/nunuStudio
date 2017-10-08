@@ -27,30 +27,12 @@ SpineTexture.prototype = Object.create(spine.Texture.prototype);
  * 
  * @method load
  * @static
- * @param {String} atlasData Atlas file data.
+ * @param {String} atlas Atlas file data.
  * @param {Function} onLoad Called after data is loaded and image size is known, receives textures array as parameter
  */
-SpineTexture.loadTextures = function(atlasData, onLoad)
+SpineTexture.loadTextureAtlas = function(atlas, path, onLoad)
 {
-	textures = [];
-	
-	var textureAtlas = new spine.TextureAtlas(atlas, function(file)
-	{
-		var texture = new SpineTexture(new Texture(new Image(path + "/" + file)));
-		var image = texture.texture.image;
-
-		//TODO <READ IMAGE SIZE>
-		//TODO <FINISH THIS CODE>
-
-		image.onload = function()
-		{
-			image.width = image.naturalWidth;
-			image.height = image.naturalHeight;
-		};
-
-		textures.push({name: file, texture: texture.texture});
-		return texture;
-	});
+	//TODO <ADD CODE HERE CHECK SpineAnimation>
 };
 
 SpineTexture.prototype.setFilters = function (minFilter, magFilter)

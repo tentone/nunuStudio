@@ -46,16 +46,6 @@ function SpineAnimation(json, atlas, path, textures)
 					var image = texture.texture.image;
 					image.width = 1024;
 					image.height = 1024;
-
-					console.log(image);
-
-					//TODO <READ IMAGE SIZE>
-					image.onload = function()
-					{
-						image.width = image.naturalWidth;
-						image.height = image.naturalHeight;
-					};
-
 					return texture;
 				}
 			}
@@ -71,16 +61,6 @@ function SpineAnimation(json, atlas, path, textures)
 			var image = texture.texture.image;
 			image.width = 1024;
 			image.height = 1024;
-
-			console.log(image);
-
-			//TODO <READ IMAGE SIZE>
-			image.onload = function()
-			{
-				image.width = image.naturalWidth;
-				image.height = image.naturalHeight;
-			};
-
 			textures.push({name: file, texture: texture.texture});
 			return texture;
 		});
@@ -102,7 +82,7 @@ function SpineAnimation(json, atlas, path, textures)
 
 	this.scale.set(0.01, 0.01, 0.01);
 
-	//this.frustumCulled = false;
+	this.frustumCulled = false;
 	this.receiveShadow = true;
 	this.castShadow = true;
 
@@ -112,11 +92,11 @@ function SpineAnimation(json, atlas, path, textures)
 SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
 
 /**
- * Update mesh geometry from animation state.
+ * Update mesh geometry from animation state before rendering.
  * 
- * @method update
+ * @method onBeforeRender
  */
-SpineAnimation.prototype.update = function()
+SpineAnimation.prototype.onBeforeRender = function()
 {
 	var state = this.state;
 	var skeleton = this.skeleton;
@@ -124,11 +104,6 @@ SpineAnimation.prototype.update = function()
 	state.apply(skeleton);
 	skeleton.updateWorldTransform();
 	this.updateGeometry();
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
-	}
 };
 
 /**

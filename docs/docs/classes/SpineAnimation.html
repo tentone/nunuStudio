@@ -183,7 +183,7 @@
 						<div class="box meta">
 						
 								<div class="extends">
-									Extends <a href="../classes/Mesh.html" class="crosslink">Mesh</a>
+									Extends spine.threejs.SkeletonMesh
 								</div>
 						
 						
@@ -194,7 +194,7 @@
 						
 						<div class="box intro">
 							<p>Spine animation object, to used with animation produced inside Esoteric spine.</p>
-						<p>Based on the official threejs runtime.</p>
+						<p>Based on the official threejs runtime code available at <a href="https://github.com/EsotericSoftware/spine-runtimes">https://github.com/EsotericSoftware/spine-runtimes</a>.</p>
 						<p>More information abou spine available here <a href="http://www.esotericsoftware.com">www.esotericsoftware.com</a>.</p>
 						
 						</div>
@@ -316,19 +316,15 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_onBeforeRender">onBeforeRender</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_setAnimation">setAnimation</a>
 						
 													</li>
 													<li class="index-item method">
 														<a href="#method_toJSON">toJSON</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_update">update</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_updateGeometry">updateGeometry</a>
 						
 													</li>
 											</ul>
@@ -405,7 +401,7 @@
 													<span class="paren">()</span>
 											
 													<span class="returns-inline">
-														<span class="type">type</span>
+														<span class="type">Array</span>
 													</span>
 											
 											
@@ -432,11 +428,39 @@
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">type</span>:
-																<p>[description]</p>
+																	<span class="type">Array</span>:
+																<p>List of skins available for this animation.</p>
 											
 														</div>
 													</div>
+											
+											</div>
+											<div id="method_onBeforeRender" class="method item">
+												<h3 class="name"><code>onBeforeRender</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Update mesh geometry from animation state before rendering.</p>
+											
+												</div>
+											
+											
 											
 											</div>
 											<div id="method_setAnimation" class="method item">
@@ -564,63 +588,6 @@
 											
 														</div>
 													</div>
-											
-											</div>
-											<div id="method_update" class="method item">
-												<h3 class="name"><code>update</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Update animation state.</p>
-											<p>Automatically called by the runtime.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="method_updateGeometry" class="method item">
-												<h3 class="name"><code>updateGeometry</code></h3>
-											
-													<span class="paren">()</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Update mesh geometry from animation state.</p>
-											
-												</div>
-											
-											
 											
 											</div>
 									</div>
