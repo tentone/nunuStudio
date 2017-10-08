@@ -20,21 +20,6 @@ function SpineTexture(texture)
 
 SpineTexture.prototype = Object.create(spine.Texture.prototype);
 
-/**
- * Load spine textures from atlas data.
- *
- * Can be used to load data async and get size of the textures read.
- * 
- * @method load
- * @static
- * @param {String} atlas Atlas file data.
- * @param {Function} onLoad Called after data is loaded and image size is known, receives textures array as parameter
- */
-SpineTexture.loadTextureAtlas = function(atlas, path, onLoad)
-{
-	//TODO <ADD CODE HERE CHECK SpineAnimation>
-};
-
 SpineTexture.prototype.setFilters = function (minFilter, magFilter)
 {
 	this.texture.minFilter = SpineTexture.getTextureFilter(minFilter);

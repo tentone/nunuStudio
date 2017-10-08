@@ -221,6 +221,7 @@ include("lib/three/exporters/STLExporter.js");
 include("lib/three/exporters/STLBinaryExporter.js");
 include("lib/three/exporters/GLTFExporter.js");
 
+include("lib/jsblend.js");
 include("lib/zlib.min.js");
 include("lib/jscookie.min.js");
 include("lib/jshint.min.js");
@@ -1658,6 +1659,30 @@ Editor.loadModel = function(file, onLoad)
 				}
 			}
 			reader.readAsText(file);
+		}
+		//Blender
+		else if(extension === "blend")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				try
+				{
+					JSBLEND(reader.result).then(function(blend)
+					{
+						var container = new Container();
+						container.name = FileSystem.getNameWithoutExtension(name);
+						blend.three.loadScene(container);
+						Editor.addToScene(container);
+					});
+				}
+				catch(e)
+				{
+					Editor.alert("Error loading file");
+					console.error("nunuStudio: Error loading file", e);
+				}
+			};
+			reader.readAsArrayBuffer(file);
 		}
 		//3DS
 		else if(extension === "3ds")

@@ -8705,7 +8705,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 94,
+            "line": 95,
             "description": "Update mesh geometry from animation state before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -8714,7 +8714,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 109,
+            "line": 110,
             "description": "Get all available animations.",
             "itemtype": "method",
             "name": "getAnimations",
@@ -8727,7 +8727,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 120,
+            "line": 121,
             "description": "Set animation from track number and name.",
             "itemtype": "method",
             "name": "setAnimation",
@@ -8748,7 +8748,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 139,
+            "line": 140,
             "description": "Get skins available for this animation.",
             "itemtype": "method",
             "name": "getSkins",
@@ -8761,7 +8761,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 150,
+            "line": 151,
             "description": "Serialize spine animation as JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8778,28 +8778,6 @@
             },
             "class": "SpineAnimation",
             "module": "Animations"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\spine\\SpineTexture.js",
-            "line": 23,
-            "description": "Load spine textures from atlas data.\n\nCan be used to load data async and get size of the textures read.",
-            "itemtype": "method",
-            "name": "load",
-            "static": 1,
-            "params": [
-                {
-                    "name": "atlas",
-                    "description": "Atlas file data.",
-                    "type": "String"
-                },
-                {
-                    "name": "onLoad",
-                    "description": "Called after data is loaded and image size is known, receives textures array as parameter",
-                    "type": "Function"
-                }
-            ],
-            "class": "SpineTexture",
-            "module": "Textures"
         },
         {
             "file": "..\\..\\source\\core\\objects\\sprite\\Sprite.js",
