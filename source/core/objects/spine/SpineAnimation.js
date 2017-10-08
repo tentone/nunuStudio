@@ -61,6 +61,7 @@ function SpineAnimation(json, atlas, path, textures)
 			var image = texture.texture.image;
 			image.width = 1024;
 			image.height = 1024;
+
 			textures.push({name: file, texture: texture.texture});
 			return texture;
 		});
