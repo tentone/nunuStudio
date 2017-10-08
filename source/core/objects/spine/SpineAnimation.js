@@ -44,10 +44,17 @@ function SpineAnimation(json, atlas, path, textures)
 				{
 					var texture = new SpineTexture(textures[i].texture);
 					var image = texture.texture.image;
-
-					//TODO <READ IMAGE SIZE>
 					image.width = 1024;
 					image.height = 1024;
+
+					console.log(image);
+
+					//TODO <READ IMAGE SIZE>
+					image.onload = function()
+					{
+						image.width = image.naturalWidth;
+						image.height = image.naturalHeight;
+					};
 
 					return texture;
 				}
@@ -62,11 +69,18 @@ function SpineAnimation(json, atlas, path, textures)
 		{
 			var texture = new SpineTexture(new Texture(new Image(path + "/" + file)));
 			var image = texture.texture.image;
-
-			//TODO <READ IMAGE SIZE>
 			image.width = 1024;
 			image.height = 1024;
-			
+
+			console.log(image);
+
+			//TODO <READ IMAGE SIZE>
+			image.onload = function()
+			{
+				image.width = image.naturalWidth;
+				image.height = image.naturalHeight;
+			};
+
 			textures.push({name: file, texture: texture.texture});
 			return texture;
 		});
