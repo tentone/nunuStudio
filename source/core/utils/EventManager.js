@@ -9,6 +9,15 @@
  * @constructor
  * @module Utils
  */
+
+/**
+ * Stores all events in the manager, their target and callback.
+ * 
+ * Format [target, event, callback, active]
+ * 
+ * @attribute events
+ * @type {Array}
+ */
 function EventManager()
 {
 	this.events = [];
@@ -24,7 +33,7 @@ function EventManager()
  */
 EventManager.prototype.add = function(target, event, callback)
 {
-	this.events.push([target, event, callback]);
+	this.events.push([target, event, callback, false]);
 };
 
 /**
@@ -49,6 +58,7 @@ EventManager.prototype.create = function()
 	{
 		var event = this.events[i];
 		event[0].addEventListener(event[1], event[2]);
+		event[3] = true;
 	}
 };
 
@@ -63,5 +73,6 @@ EventManager.prototype.destroy = function()
 	{
 		var event = this.events[i];
 		event[0].removeEventListener(event[1], event[2]);
+		event[3] = false;
 	}
 };
