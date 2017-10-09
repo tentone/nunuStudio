@@ -23,6 +23,36 @@ function OrbitControlsPanel(parent, obj)
 	this.form.add(this.distance);
 	this.form.nextRow();
 
+	this.form.addText("Max Distance");
+	this.maxDistance = new NumberBox(this.form.element);
+	this.maxDistance.size.set(60, 18);
+	this.maxDistance.setStep(0.1);
+	this.maxDistance.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.maxDistance.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.maxDistance = self.maxDistance.getValue();
+		}
+	});
+	this.form.add(this.maxDistance);
+	this.form.nextRow();
+
+	this.form.addText("Max Distance");
+	this.minDistance = new NumberBox(this.form.element);
+	this.minDistance.size.set(60, 18);
+	this.minDistance.setStep(0.1);
+	this.minDistance.setRange(0, Number.MAX_SAFE_INTEGER);
+	this.minDistance.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.minDistance = self.minDistance.getValue();
+		}
+	});
+	this.form.add(this.minDistance);
+	this.form.nextRow();
+
 	//Needs button pressed
 	this.form.addText("Require button");
 	this.needsButtonPressed = new CheckBox(this.form.element);
@@ -55,8 +85,8 @@ function OrbitControlsPanel(parent, obj)
 	this.form.addText("Sensitivity");
 	this.sensitivity = new Slider(this.form.element);
 	this.sensitivity.size.set(140, 18);
-	this.sensitivity.setStep(0.01);
-	this.sensitivity.setRange(0, 0.3);
+	this.sensitivity.setStep(0.001);
+	this.sensitivity.setRange(0, 0.1);
 	this.sensitivity.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -112,6 +142,8 @@ OrbitControlsPanel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{
 		this.distance.setValue(this.obj.distance);
+		this.maxDistance.setValue(this.obj.maxDistance);
+		this.minDistance.setValue(this.obj.minDistance);
 		this.needsButtonPressed.setValue(this.obj.needsButtonPressed);
 		this.movementEnabled.setValue(this.obj.movementEnabled);
 		this.sensitivity.setValue(this.obj.sensitivity);

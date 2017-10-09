@@ -163,6 +163,9 @@
 	- Fixed dropdown menus getting out of screen
 - V0.9.3 Beta
 	- Shadow material
+	- Support for .blend files (@Galactrax)
+	- Fixed support for spine animations
+	- Editor infinite grid
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
