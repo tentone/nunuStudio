@@ -1662,7 +1662,7 @@ Editor.loadModel = function(file, onLoad)
 		}
 		//Blender
 		else if(extension === "blend")
-		{
+		{	
 			var reader = new FileReader();
 			reader.onload = function()
 			{

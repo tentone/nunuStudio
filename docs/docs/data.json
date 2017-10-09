@@ -12900,7 +12900,17 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\EventManager.js",
-            "line": 17,
+            "line": 13,
+            "description": "Stores all events in the manager, their target and callback.\n\nFormat [target, event, callback, active]",
+            "itemtype": "attribute",
+            "name": "events",
+            "type": "{Array}",
+            "class": "EventManager",
+            "module": "Utils"
+        },
+        {
+            "file": "..\\..\\source\\core\\utils\\EventManager.js",
+            "line": 26,
             "description": "Add new event to the manager.",
             "itemtype": "method",
             "name": "add",
@@ -12926,7 +12936,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\EventManager.js",
-            "line": 30,
+            "line": 39,
             "description": "Remove all events from the manager.",
             "itemtype": "method",
             "name": "removeAll",
@@ -12935,7 +12945,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\EventManager.js",
-            "line": 41,
+            "line": 50,
             "description": "Creates all events in this manager.",
             "itemtype": "method",
             "name": "create",
@@ -12944,7 +12954,7 @@
         },
         {
             "file": "..\\..\\source\\core\\utils\\EventManager.js",
-            "line": 55,
+            "line": 65,
             "description": "Removes all events in this manager.",
             "itemtype": "method",
             "name": "destroy",
