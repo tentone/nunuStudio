@@ -60,6 +60,8 @@ function OrbitControls()
 	this.type = "OrbitControls";
 
 	this.distance = 4;
+	this.maxDistance = 20;
+	this.minDistance = 2;
 	this.sensitivity = 0.001;
 	this.limitUp = 1.57;
 	this.limitDown = -1.57;
@@ -119,18 +121,28 @@ OrbitControls.prototype.update = function()
 	if(this.mouse.wheel !== 0)
 	{
 		this.distance += this.mouse.wheel * this.sensitivity * this.position.distanceTo(this.center);
-		if(this.distance < 0)
+		
+		if(this.distance < this.minDistance)
 		{
-			this.distance = 0;
+			this.distance = this.minDistance;
+		}
+		else if(this.distance > this.maxDistance)
+		{
+			this.distance = this.maxDistance;
 		}
 	}
 
 	if(this.mouse.buttonPressed(Mouse.MIDDLE))
 	{
 		this.distance += this.mouse.delta.y * this.sensitivity;
-		if(this.distance < 0)
+
+		if(this.distance < this.minDistance)
 		{
-			this.distance = 0;
+			this.distance = this.minDistance;
+		}
+		else if(this.distance > this.maxDistance)
+		{
+			this.distance = this.maxDistance;
 		}
 	}
 
@@ -170,10 +182,12 @@ OrbitControls.prototype.toJSON = function(meta)
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.distance = this.distance;
+	data.object.maxDistance = this.maxDistance;
+	data.object.minDistance = this.minDistance;
 	data.object.sensitivity = this.sensitivity;
 	data.object.limitUp = this.limitUp;
 	data.object.limitDown = this.limitDown;
 	data.object.needsButtonPressed = this.needsButtonPressed;
-	
+
 	return data;
 };

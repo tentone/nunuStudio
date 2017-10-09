@@ -1363,12 +1363,17 @@ SceneEditor.prototype.selectObjectHelper = function()
 		{
 			this.objectHelper.add(new WireframeHelper(object, 0xFFFF00));
 		}
-		//Object 3D
+		//Container
 		else if(object instanceof Container)
 		{
 			this.objectHelper.add(new BoundingBoxHelper(object, 0xFFFF00));
 		}
-		//Else
+		else if(object instanceof SpineAnimation)
+		{
+			this.objectHelper.add(new WireframeHelper(object, 0xFFFFFF));
+			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
+		}
+		//Object 3D
 		else
 		{
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));

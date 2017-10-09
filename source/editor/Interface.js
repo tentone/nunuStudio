@@ -29,7 +29,7 @@ Interface.initialize = function()
 
 	Interface.console = Interface.bottomTab.addTab(ConsoleTab, false);
 
-	//Interface.animation = Interface.bottomTab.addTab(AnimationTab, false);
+	Interface.animation = Interface.bottomTab.addTab(AnimationTab, false);
 
 	//Explorer
 	Interface.explorer = new DivisionResizable();

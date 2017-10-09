@@ -797,6 +797,8 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		case "OrbitControls":
 			object = new OrbitControls();
 			object.distance = data.distance;
+			object.maxDistance = data.maxDistance;
+			object.minDistance = data.minDistance;
 			object.sensitivity = data.sensitivity;
 			object.limitUp = data.limitUp;
 			object.limitDown = data.limitDown;
