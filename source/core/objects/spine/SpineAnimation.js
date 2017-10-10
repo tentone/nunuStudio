@@ -72,25 +72,33 @@ function SpineAnimation(json, atlas, path, textures)
 
 	spine.threejs.SkeletonMesh.call(this, skeleton);
 
-	this.material.name = "spine";
+	//Attributes
+	this.name = "spine";
+	this.type = "SpineAnimation";
+	this.frustumCulled = false;
+	this.receiveShadow = true;
+	this.castShadow = true;
+	this.scale.set(0.01, 0.01, 0.01);
 
+	//Animation
 	this.json = json;
 	this.atlas = atlas;
 	this.textures = textures;
 
-	this.name = "spine";
-	this.type = "SpineAnimation";
+	//Default animation and skin
+	this.skin = null;
+	this.animation = null;
 
-	this.scale.set(0.01, 0.01, 0.01);
-
-	this.frustumCulled = false;
-	this.receiveShadow = true;
-	this.castShadow = true;
-
+	//Runtime control
 	this.clock = new THREE.Clock();
 }
 
 SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
+
+SpineAnimation.prototype.initialize = function()
+{
+	THREE.Object3D.prototype.initialize.call(this);
+};
 
 /**
  * Update mesh geometry from animation state before rendering.
@@ -99,11 +107,9 @@ SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
  */
 SpineAnimation.prototype.onBeforeRender = function()
 {
-	var state = this.state;
-	var skeleton = this.skeleton;
-	state.update(this.clock.getDelta());
-	state.apply(skeleton);
-	skeleton.updateWorldTransform();
+	this.state.update(this.clock.getDelta());
+	this.state.apply(this.skeleton);
+	this.skeleton.updateWorldTransform();
 	this.updateGeometry();
 };
 
@@ -125,15 +131,17 @@ SpineAnimation.prototype.getAnimations = function()
  * @param {Number} track Track number
  * @param {String} name Animation name
  */
-SpineAnimation.prototype.setAnimation = function(track, name)
+SpineAnimation.prototype.setAnimation = function(track, name, loop)
 {
 	try
 	{
-		this.state.setAnimation(track, name, true);
+		this.state.setAnimation(track, name, loop !== undefined ? loop : true);
+		this.animation = [track, name, loop];
 	}
 	catch(e)
 	{
-		console.warn("nunuStudio: Error trying to set spine animation " + name + " on track " + track);
+		this.animation = null;
+		console.warn("nunuStudio: Error setting spine animation " + name + " on track " + track);
 	}
 };
 
@@ -146,6 +154,26 @@ SpineAnimation.prototype.setAnimation = function(track, name)
 SpineAnimation.prototype.getSkins = function()
 {
 	return this.state.data.skeletonData.skins;
+};
+
+/**
+ * Set skin to be used by this animation
+ *
+ * @method setSkin
+ * @param {String} name Skin name.
+ */
+SpineAnimation.prototype.setSkin = function(name)
+{
+	try
+	{
+		this.skeleton.setSkinByName(name);
+		this.skin = name;
+	}
+	catch(e)
+	{
+		this.skin = null;
+		console.warn("nunuStudio: Error setting spine skin " + name);
+	}
 };
 
 /**
@@ -179,6 +207,16 @@ SpineAnimation.prototype.toJSON = function(meta)
 	data.object.json = this.json;
 	data.object.atlas = this.atlas;
 	data.object.textures = textures;
+
+	//Default animation and skin
+	if(this.animation !== null)
+	{
+		data.object.animation = this.animation;	
+	}
+	if(this.skin !== null)
+	{
+		data.object.skin = this.skin;	
+	}
 
 	//Restore geometry and material
 	this.geometry = geometry;
