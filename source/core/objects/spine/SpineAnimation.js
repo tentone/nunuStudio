@@ -88,6 +88,8 @@ function SpineAnimation(json, atlas, path, textures)
 	//Default animation and skin
 	this.skin = null;
 	this.animation = null;
+	this.track = 0;
+	this.loop = true;
 
 	//Runtime control
 	this.clock = new THREE.Clock();
@@ -95,9 +97,39 @@ function SpineAnimation(json, atlas, path, textures)
 
 SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
 
+/**
+ * Initialize the object.
+ * 
+ * @method initialize
+ */
 SpineAnimation.prototype.initialize = function()
 {
-	THREE.Object3D.prototype.initialize.call(this);
+	if(this.animation !== null)
+	{
+		this.setAnimation(this.track, this.animation, this.loop);
+	}
+	if(this.skin !== null)
+	{
+		this.setSkin(this.skin);	
+	}
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].initialize();
+	}
+};
+
+/**
+ * Update the object state, called every time before rendering into the screen.
+ * 
+ * @method update
+ */
+SpineAnimation.prototype.update = function()
+{
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].update();
+	}
 };
 
 /**
@@ -128,15 +160,19 @@ SpineAnimation.prototype.getAnimations = function()
  * Set animation from track number and name.
  * 
  * @method setAnimation
- * @param {Number} track Track number
- * @param {String} name Animation name
+ * @param {Number} track Track number.
+ * @param {String} animation Animation name.
+ * @param {Boolean} loop If true the animation plays in loop.
  */
-SpineAnimation.prototype.setAnimation = function(track, name, loop)
+SpineAnimation.prototype.setAnimation = function(track, animation, loop)
 {
 	try
 	{
-		this.state.setAnimation(track, name, loop !== undefined ? loop : true);
-		this.animation = [track, name, loop];
+		if(track !== undefined){this.track = track;}
+		if(animation !== undefined){this.animation = animation;}
+		if(loop !== undefined){this.loop = loop;}
+
+		this.state.setAnimation(this.track, this.animation, this.loop);
 	}
 	catch(e)
 	{
@@ -211,7 +247,9 @@ SpineAnimation.prototype.toJSON = function(meta)
 	//Default animation and skin
 	if(this.animation !== null)
 	{
-		data.object.animation = this.animation;	
+		data.object.animation = this.animation;
+		data.object.track = this.track;
+		data.object.loop = this.loop;
 	}
 	if(this.skin !== null)
 	{

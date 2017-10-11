@@ -118,110 +118,14 @@ ObjectLoader.prototype.setCrossOrigin = function(origin)
  */
 ObjectLoader.prototype.parseGeometries = function(json)
 {
+	var loader = new GeometryLoader();
 	var geometries = [];
 
 	if(json !== undefined)
 	{
-		var geometryLoader = new THREE.JSONLoader();
-		var bufferGeometryLoader = new THREE.BufferGeometryLoader();
-
 		for(var i = 0; i < json.length; i++)
 		{
-			var geometry;
-			var data = json[i];
-
-			switch(data.type)
-			{
-				case "PlaneGeometry":
-				case "PlaneBufferGeometry":
-					geometry = new THREE[data.type](data.width, data.height, data.widthSegments, data.heightSegments);
-					break;
-
-				case "BoxGeometry":
-				case "BoxBufferGeometry":
-				case "CubeGeometry":
-					geometry = new THREE[data.type](data.width, data.height, data.depth, data.widthSegments, data.heightSegments, data.depthSegments);
-					break;
-
-				case "CircleGeometry":
-				case "CircleBufferGeometry":
-					geometry = new THREE[data.type](data.radius, data.segments, data.thetaStart, data.thetaLength);
-					break;
-
-				case "CylinderGeometry":
-				case "CylinderBufferGeometry":
-					geometry = new THREE[data.type](data.radiusTop, data.radiusBottom, data.height, data.radialSegments, data.heightSegments, data.openEnded, data.thetaStart, data.thetaLength);
-					break;
-
-				case "ConeGeometry":
-				case "ConeBufferGeometry":
-					geometry = new THREE[data.type](data.radius, data.height, data.radialSegments, data.heightSegments, data.openEnded, data.thetaStart, data.thetaLength);
-					break;
-
-				case "SphereGeometry":
-				case "SphereBufferGeometry":
-					geometry = new THREE[data.type](data.radius, data.widthSegments, data.heightSegments, data.phiStart, data.phiLength, data.thetaStart, data.thetaLength);
-					break;
-
-				case "DodecahedronGeometry":
-				case "IcosahedronGeometry":
-				case "OctahedronGeometry":
-				case "TetrahedronGeometry":
-				case "DodecahedronBufferGeometry":
-				case "IcosahedronBufferGeometry":
-				case "OctahedronBufferGeometry":
-				case "TetrahedronBufferGeometry":
-					geometry = new THREE[data.type](data.radius, data.detail);
-					break;
-				case "PolyhedronGeometry":
-				case "PolyhedronBufferGeometry":
-					geometry = new THREE[data.type](data.radius, data.indices, data.radius, data.detail);
-					break;
-				case "RingGeometry":
-				case "RingBufferGeometry":
-					geometry = new THREE[data.type](data.innerRadius, data.outerRadius, data.thetaSegments, data.phiSegments, data.thetaStart, data.thetaLength);
-					break;
-
-				case "TorusGeometry":
-				case "TorusBufferGeometry":
-					geometry = new THREE[data.type](data.radius, data.tube, data.radialSegments, data.tubularSegments, data.arc);
-					break;
-
-				case "TorusKnotGeometry":
-				case "TorusKnotBufferGeometry":
-					geometry = new THREE[data.type](data.radius, data.tube, data.tubularSegments, data.radialSegments, data.p, data.q);
-					break;
-
-				case "LatheGeometry":
-				case "LatheBufferGeometry":
-					geometry = new THREE[data.type](data.points, data.segments, data.phiStart, data.phiLength);
-					break;
-
-				case "BufferGeometry":
-					geometry = bufferGeometryLoader.parse(data);
-					break;
-
-				case "Geometry":
-					geometry = geometryLoader.parse(data.data, this.texturePath).geometry;
-					break;
-
-				default:
-					console.warn("ObjectLoader: Unsupported geometry type " + data.type);
-					continue;
-			}
-
-			geometry.uuid = data.uuid;
-
-			if(data.name !== undefined)
-			{
-				geometry.name = data.name;
-			}
-			else
-			{
-				geometry.name = "geometry";
-			}
-
-			geometries[data.uuid] = geometry;
+			geometries[json[i].uuid] = loader.parse(json[i]);
 		}
 	}
 
@@ -245,8 +149,7 @@ ObjectLoader.prototype.parseMaterials = function(json, textures)
 	{
 		for(var i in json)
 		{
-			var material = loader.parse(json[i]);
-			materials[material.uuid] = material;
+			materials[json[i].uuid] = loader.parse(json[i]);
 		}
 	}
 
@@ -266,8 +169,7 @@ ObjectLoader.prototype.parseAnimations = function(json)
 
 	for(var i = 0; i < json.length; i++)
 	{
-		var clip = THREE.AnimationClip.parse(json[i]);
-		animations.push(clip);
+		animations.push(THREE.AnimationClip.parse(json[i]));
 	}
 
 	return animations;
@@ -559,6 +461,8 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			if(data.animation !== undefined)
 			{
 				object.animation = data.animation;
+				object.track = data.track;
+				object.loop = data.loop;
 			}
 			if(data.skin !== undefined)
 			{
@@ -1172,9 +1076,6 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		object.textures = textures;
 		object.fonts = fonts;
 		object.audio = audio;
-		object.images = images;
-		object.videos = videos;
-		object.geometries = geometries;
 	}
 	//Get scene default cameras
 	else if(data.type === "Scene")
