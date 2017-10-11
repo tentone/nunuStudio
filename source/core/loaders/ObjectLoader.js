@@ -167,9 +167,16 @@ ObjectLoader.prototype.parseGeometries = function(json)
 				case "IcosahedronGeometry":
 				case "OctahedronGeometry":
 				case "TetrahedronGeometry":
+				case "DodecahedronBufferGeometry":
+				case "IcosahedronBufferGeometry":
+				case "OctahedronBufferGeometry":
+				case "TetrahedronBufferGeometry":
 					geometry = new THREE[data.type](data.radius, data.detail);
 					break;
-
+				case "PolyhedronGeometry":
+				case "PolyhedronBufferGeometry":
+					geometry = new THREE[data.type](data.radius, data.indices, data.radius, data.detail);
+					break;
 				case "RingGeometry":
 				case "RingBufferGeometry":
 					geometry = new THREE[data.type](data.innerRadius, data.outerRadius, data.thetaSegments, data.phiSegments, data.thetaStart, data.thetaLength);
@@ -369,18 +376,16 @@ ObjectLoader.prototype.parseFonts = function(json)
  */
 ObjectLoader.prototype.parseTextures = function(json, images, videos)
 {
+	var textures = [];
 	var loader = new TextureLoader();
 	loader.setImages(images);
 	loader.setVideos(videos);
-
-	var textures = [];
 
 	if(json !== undefined)
 	{
 		for(var i in json)
 		{
-			var texture = loader.parse(json[i]);
-			textures[texture.uuid] = texture;
+			textures[json[i].uuid] = loader.parse(json[i]);
 		}
 	}
 	
@@ -1167,9 +1172,9 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 		object.textures = textures;
 		object.fonts = fonts;
 		object.audio = audio;
-		//object.images = images;
-		//object.videos = videos;
-		//object.geometries = geometries;
+		object.images = images;
+		object.videos = videos;
+		object.geometries = geometries;
 	}
 	//Get scene default cameras
 	else if(data.type === "Scene")
