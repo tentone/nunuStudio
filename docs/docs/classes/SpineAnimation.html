@@ -58,6 +58,7 @@
 								<li><a href="../classes/FontLoader.html">FontLoader</a></li>
 								<li><a href="../classes/FXAAPass.html">FXAAPass</a></li>
 								<li><a href="../classes/Gamepad.html">Gamepad</a></li>
+								<li><a href="../classes/GeometryLoader.html">GeometryLoader</a></li>
 								<li><a href="../classes/Gyroscope.html">Gyroscope</a></li>
 								<li><a href="../classes/HemisphereLight.html">HemisphereLight</a></li>
 								<li><a href="../classes/Image.html">Image</a></li>
@@ -316,6 +317,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_initialize">initialize</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_onBeforeRender">onBeforeRender</a>
 						
 													</li>
@@ -329,6 +334,10 @@
 													</li>
 													<li class="index-item method">
 														<a href="#method_toJSON">toJSON</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_update">update</a>
 						
 													</li>
 											</ul>
@@ -439,6 +448,34 @@
 													</div>
 											
 											</div>
+											<div id="method_initialize" class="method item">
+												<h3 class="name"><code>initialize</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Initialize the object.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="method_onBeforeRender" class="method item">
 												<h3 class="name"><code>onBeforeRender</code></h3>
 											
@@ -476,7 +513,10 @@
 																	<code>track</code>
 															</li>
 															<li class="arg">
-																	<code>name</code>
+																	<code>animation</code>
+															</li>
+															<li class="arg">
+																	<code>loop</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -511,18 +551,29 @@
 											
 											
 																<div class="param-description">
-																	<p>Track number</p>
+																	<p>Track number.</p>
 											
 																</div>
 											
 															</li>
 															<li class="param">
-																	<code class="param-name">name</code>
+																	<code class="param-name">animation</code>
 																	<span class="type">String</span>
 											
 											
 																<div class="param-description">
-																	<p>Animation name</p>
+																	<p>Animation name.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">loop</code>
+																	<span class="type">Boolean</span>
+											
+											
+																<div class="param-description">
+																	<p>If true the animation plays in loop.</p>
 											
 																</div>
 											
@@ -643,6 +694,34 @@
 											
 														</div>
 													</div>
+											
+											</div>
+											<div id="method_update" class="method item">
+												<h3 class="name"><code>update</code></h3>
+											
+													<span class="paren">()</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Update the object state, called every time before rendering into the screen.</p>
+											
+												</div>
+											
+											
 											
 											</div>
 									</div>
