@@ -8788,7 +8788,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 100,
+            "line": 101,
             "description": "Initialize the object.",
             "itemtype": "method",
             "name": "initialize",
@@ -8797,7 +8797,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 122,
+            "line": 123,
             "description": "Update the object state, called every time before rendering into the screen.",
             "itemtype": "method",
             "name": "update",
@@ -8806,7 +8806,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 135,
+            "line": 136,
             "description": "Update mesh geometry from animation state before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -8815,7 +8815,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 148,
+            "line": 149,
             "description": "Get all available animations.",
             "itemtype": "method",
             "name": "getAnimations",
@@ -8828,7 +8828,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 159,
+            "line": 160,
             "description": "Set animation from track number and name.",
             "itemtype": "method",
             "name": "setAnimation",
@@ -8854,7 +8854,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 184,
+            "line": 185,
             "description": "Get skins available for this animation.",
             "itemtype": "method",
             "name": "getSkins",
@@ -8867,7 +8867,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 195,
+            "line": 196,
             "description": "Set skin to be used by this animation",
             "itemtype": "method",
             "name": "setSkin",
@@ -8883,7 +8883,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 215,
+            "line": 216,
             "description": "Serialize spine animation as JSON.",
             "itemtype": "method",
             "name": "toJSON",
