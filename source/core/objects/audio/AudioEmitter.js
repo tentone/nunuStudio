@@ -78,8 +78,6 @@ function AudioEmitter(audio)
 
 	this.isPlaying = false;
 	this.hasPlaybackControl = true;
-
-	console.log(this);
 }
 
 /**
@@ -94,7 +92,6 @@ THREE._Audio = THREE.Audio;
 THREE.Audio = AudioEmitter;
 
 AudioEmitter.prototype = Object.create(THREE._Audio.prototype);
-
 
 /**
  * Initialize audio object, loads audio data decodes it and starts playback if autoplay is set to True.
@@ -159,8 +156,7 @@ AudioEmitter.prototype.play = function()
 	this.isPlaying = true;
 	this.source = source;
 
-	return this.source.connect();
-
+	return this.connect();
 };
 
 /**
@@ -306,9 +302,9 @@ AudioEmitter.prototype.setFilters = function(value)
 
 	if(this.isPlaying)
 	{
-		this.source.disconnect();
+		this.disconnect();
 		this.filters = value;
-		this.source.connect();
+		this.connect();
 	}
 	else
 	{
@@ -354,7 +350,7 @@ AudioEmitter.prototype.setNodeSource = function(node)
 	this.sourceType = "audioNode";
 	
 	this.source = node;
-	this.source.connect();
+	this.connect();
 
 	return this;
 };
@@ -380,7 +376,7 @@ AudioEmitter.prototype.dispose = function()
 	if(this.isPlaying)
 	{
 		this.stop();
-		this.source.disconnect();
+		this.disconnect();
 	}
 
 	for(var i = 0; i < this.children.length; i++)
