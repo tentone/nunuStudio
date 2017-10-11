@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
 	<link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
 	<script src="../assets/js/yui-min.js"></script>
-	<title>nunuStudio Nunu</title>  
+	<title>nunuStudio GeometryLoader</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -180,31 +180,79 @@
 			</div>-->			<div class="apidocs">
 				<div id="docs-main">
 					<div class="content">
-						<h1>Nunu Class</h1>
+						<h1>GeometryLoader Class</h1>
 						<div class="box meta">
 						
 						
 						
-									Module: <a href="../modules/Runtime.html">Runtime</a>
+									Module: <a href="../modules/Loaders.html">Loaders</a>
 						
 						</div>
 						
 						
 						<div class="box intro">
-							<p>nunuStudio
-						MIT license (<a href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a>)</p>
-						<p>Class used to store nunuStudio development version and timestamp.</p>
-						<p>Contains methods to check browser feature support.</p>
+							<p>Geometry loader can be used to load geometry files.</p>
 						
 						</div>
 						
+							<div class="constructor">
+								<h2>Constructor</h2>
+								<div id="method_GeometryLoader" class="method item">
+									<h3 class="name"><code>GeometryLoader</code></h3>
+								
+										<div class="args">
+											<span class="paren">(</span><ul class="args-list inline commas">
+												<li class="arg">
+														<code>manager</code>
+												</li>
+											</ul><span class="paren">)</span>
+										</div>
+								
+								
+								
+								
+								
+								
+								
+								
+									<div class="meta">
+												<p>
+										</p>
+								
+								
+								
+									</div>
+								
+									<div class="description">
+										
+									</div>
+								
+										<div class="params">
+											<h4>Parameters:</h4>
+								
+											<ul class="params-list">
+												<li class="param">
+														<code class="param-name">manager</code>
+														<span class="type">Object</span>
+								
+								
+													<div class="param-description">
+														 
+													</div>
+								
+												</li>
+											</ul>
+										</div>
+								
+								
+								</div>
+							</div>
 						
 						<div id="classdocs" class="tabview">
 							<ul class="api-class-tabs">
 								<li class="api-class-tab index"><a href="#index">Index</a></li>
 						
 									<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-									<li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
 							</ul>
 						
 							<div>
@@ -216,61 +264,39 @@
 						
 											<ul class="index-list methods">
 													<li class="index-item method">
-														<a href="#method_getVRDisplays">getVRDisplays</a>
+														<a href="#method_load">load</a>
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_isFullscreen">isFullscreen</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_runningOnDesktop">runningOnDesktop</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_webAudioAvailable">webAudioAvailable</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_webglAvailable">webglAvailable</a>
-						
-													</li>
-													<li class="index-item method">
-														<a href="#method_webvrAvailable">webvrAvailable</a>
+														<a href="#method_parse">parse</a>
 						
 													</li>
 											</ul>
 										</div>
 						
 						
-										<div class="index-section attrs">
-											<h3>Attributes</h3>
-						
-											<ul class="index-list attrs">
-													<li class="index-item attr">
-														<a href="#attr_NAME">NAME</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_TIMESTAMP">TIMESTAMP</a>
-													</li>
-													<li class="index-item attr">
-														<a href="#attr_VERSION">VERSION</a>
-													</li>
-											</ul>
-										</div>
 						
 								</div>
 						
 									<div id="methods" class="api-class-tabpanel">
 										<h2 class="off-left">Methods</h2>
 						
-											<div id="method_getVRDisplays" class="method item">
-												<h3 class="name"><code>getVRDisplays</code></h3>
+											<div id="method_load" class="method item">
+												<h3 class="name"><code>load</code></h3>
 											
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>getDisplay</code>
+																	<code>url</code>
+															</li>
+															<li class="arg">
+																	<code>onLoad</code>
+															</li>
+															<li class="arg">
+																	<code>onProgress</code>
+															</li>
+															<li class="arg">
+																	<code>onError</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -291,7 +317,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Used to get the first VR display available, the display is returned as argument of the getDisplay function.</p>
+													<p>Load geometry json file from URL.</p>
 											
 												</div>
 											
@@ -300,13 +326,42 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">getDisplay</code>
+																	<code class="param-name">url</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">onLoad</code>
 																	<span class="type">Function</span>
 											
 											
 																<div class="param-description">
-																	<p>Function used to get the display, receives the display as argument.</p>
+																	 
+																</div>
 											
+															</li>
+															<li class="param">
+																	<code class="param-name">onProgress</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">onError</code>
+																	<span class="type">Function</span>
+											
+											
+																<div class="param-description">
+																	 
 																</div>
 											
 															</li>
@@ -315,54 +370,19 @@
 											
 											
 											</div>
-											<div id="method_isFullscreen" class="method item">
-												<h3 class="name"><code>isFullscreen</code></h3>
+											<div id="method_parse" class="method item">
+												<h3 class="name"><code>parse</code></h3>
 											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if there is some element on fullscreen mode.</p>
-											<p>Returns true even the fullscreen element is not related with the app.</p>
-											
-												</div>
-											
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if there is some element in fullscreen mode.</p>
-											
-														</div>
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>json</code>
+															</li>
+														</ul><span class="paren">)</span>
 													</div>
 											
-											</div>
-											<div id="method_runningOnDesktop" class="method item">
-												<h3 class="name"><code>runningOnDesktop</code></h3>
-											
-													<span class="paren">()</span>
-											
 													<span class="returns-inline">
-														<span class="type">Boolean</span>
+														<span class="type">Geometry</span>
 													</span>
 											
 											
@@ -380,137 +400,33 @@
 												</div>
 											
 												<div class="description">
-													<p>Check if nunu is running inside NWJS.</p>
+													<p>Parse geometry json.</p>
 											
 												</div>
 											
+													<div class="params">
+														<h4>Parameters:</h4>
 											
-													<div class="returns">
-														<h4>Returns:</h4>
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">json</code>
+																	<span class="type">Object</span>
 											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if running inside NWJS</p>
 											
-														</div>
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
 													</div>
 											
-											</div>
-											<div id="method_webAudioAvailable" class="method item">
-												<h3 class="name"><code>webAudioAvailable</code></h3>
-											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if host supports WebAudio.</p>
-											
-												</div>
-											
-											
 													<div class="returns">
 														<h4>Returns:</h4>
 											
 														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if WebAudio is available.</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_webglAvailable" class="method item">
-												<h3 class="name"><code>webglAvailable</code></h3>
-											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if host supports WebGL, only checks for WebGL 1.0 support.</p>
-											
-												</div>
-											
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True if WebGL is available.</p>
-											
-														</div>
-													</div>
-											
-											</div>
-											<div id="method_webvrAvailable" class="method item">
-												<h3 class="name"><code>webvrAvailable</code></h3>
-											
-													<span class="paren">()</span>
-											
-													<span class="returns-inline">
-														<span class="type">Boolean</span>
-													</span>
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Check if host supports WebVR and if there is a VR display available.</p>
-											
-												</div>
-											
-											
-													<div class="returns">
-														<h4>Returns:</h4>
-											
-														<div class="returns-description">
-																	<span class="type">Boolean</span>:
-																<p>True is WebVR is available.</p>
+																	<span class="type">Geometry</span>:
+																<p>Geometry loaded from json.</p>
 											
 														</div>
 													</div>
@@ -519,92 +435,6 @@
 									</div>
 						
 						
-									<div id="attrs" class="api-class-tabpanel">
-										<h2 class="off-left">Attributes</h2>
-						
-											<div id="attr_NAME" class="attr item">
-												<a name="config_NAME"></a> 
-												<h3 class="name"><code>NAME</code></h3>
-												<span class="type">String</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>nunuStudio</p>
-											
-												</div>
-											
-													<p><strong>Default:</strong> &quot;nunuStudio&quot;</p>
-											
-											
-											</div>
-											<div id="attr_TIMESTAMP" class="attr item">
-												<a name="config_TIMESTAMP"></a> 
-												<h3 class="name"><code>TIMESTAMP</code></h3>
-												<span class="type">String</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Stores the nunu runtime dev timestamp.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-											<div id="attr_VERSION" class="attr item">
-												<a name="config_VERSION"></a> 
-												<h3 class="name"><code>VERSION</code></h3>
-												<span class="type">String</span>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Stores the nunu runtime version.</p>
-											
-												</div>
-											
-											
-											
-											</div>
-									</div>
 						
 							</div>
 						</div>
