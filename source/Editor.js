@@ -379,6 +379,25 @@ include("editor/utils/DOMUtils.js");
 include("editor/history/History.js");
 include("editor/history/Action.js");
 
+/*include("editor/timeline/save_format.js");
+include("editor/timeline/settings.js");
+include("editor/timeline/theme.js");
+include("editor/timeline/timeliner.js");
+include("editor/timeline/ui_canvas.js");
+include("editor/timeline/ui_icon_button.js");
+include("editor/timeline/ui_number.js");
+include("editor/timeline/ui_scrollbar.js");
+include("editor/timeline/util_datastore.js");
+include("editor/timeline/util_dispatcher.js");
+include("editor/timeline/util_handle_drag.js");
+include("editor/timeline/util_tween.js");
+include("editor/timeline/util_undo.js");
+include("editor/timeline/utils.js");
+include("editor/timeline/view_layer.js");
+include("editor/timeline/view_layer_cabinet.js");
+include("editor/timeline/view_panel.js");
+include("editor/timeline/view_time_scroller.js");*/
+
 include("editor/Console.js");
 include("editor/Clipboard.js");
 include("editor/DragBuffer.js");
