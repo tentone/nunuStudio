@@ -166,6 +166,7 @@
 	- Support for .blend files (@Galactrax)
 	- Fixed support for spine animations
 	- Editor infinite grid
+	- Animation editor
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
