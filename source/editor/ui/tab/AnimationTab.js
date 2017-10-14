@@ -4,7 +4,7 @@ function AnimationTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Animation", Editor.filePath + "icons/misc/animation.png");
 
-	//TODO <ADD CODE HERE>
+	this.timeliner = new Timeliner();
 }
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
@@ -20,7 +20,6 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
-
 	}
 	else
 	{
