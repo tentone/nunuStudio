@@ -397,6 +397,7 @@ include("editor/timeline/view_layer.js");
 include("editor/timeline/view_layer_cabinet.js");
 include("editor/timeline/view_panel.js");
 include("editor/timeline/view_time_scroller.js");*/
+include("editor/timeliner.js");
 
 include("editor/Console.js");
 include("editor/Clipboard.js");
