@@ -43,9 +43,27 @@ function SpineAnimation(json, atlas, path, textures)
 				if(textures[i].name === file)
 				{
 					var texture = new SpineTexture(textures[i].texture);
-					var image = texture.texture.image;
-					image.width = (image.naturalWidth !== 0) ? image.naturalWidth : 1024;
-					image.height = (image.naturalHeight !== 0) ? image.naturalHeight : 1024;
+					var element = texture.texture.image;
+					var image = texture.texture.img;
+
+					if(image.width > 0 && image.height > 0)
+					{
+						element.width = image.width;
+						element.height = image.height;
+					}
+					else if(element.naturalWidth !== 0 && element.naturalHeight !== 0)
+					{
+						element.width = element.naturalWidth;
+						element.height = element.naturalHeight;
+						image.width = element.width;
+						image.height = element.height;
+					}
+					else
+					{
+						element.width = 1024;
+						element.height = 1024;
+					}
+					
 					return texture;
 				}
 			}
@@ -58,10 +76,26 @@ function SpineAnimation(json, atlas, path, textures)
 		var textureAtlas = new spine.TextureAtlas(atlas, function(file)
 		{
 			var texture = new SpineTexture(new Texture(new Image(path + "/" + file)));
-			var image = texture.texture.image;
+			var element = texture.texture.image;
+			var image = texture.texture.img;
 
-			image.width = (image.naturalWidth !== 0) ? image.naturalWidth : 1024;
-			image.height = (image.naturalHeight !== 0) ? image.naturalHeight : 1024;
+			if(image.width > 0 && image.height > 0)
+			{
+				element.width = image.width;
+				element.height = image.height;
+			}
+			else if(element.naturalWidth !== 0 && element.naturalHeight !== 0)
+			{
+				element.width = element.naturalWidth;
+				element.height = element.naturalHeight;
+				image.width = element.width;
+				image.height = element.height;
+			}
+			else
+			{
+				element.width = 1024;
+				element.height = 1024;
+			}
 
 			textures.push({name: file, texture: texture.texture});
 			return texture;
