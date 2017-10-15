@@ -21,6 +21,20 @@ function SpinePanel(parent, obj)
 	this.form.add(this.animation);
 	this.form.nextRow();
 
+	//Skin
+	this.form.addText("Skin");
+	this.skin = new DropdownList(this.form.element);
+	this.skin.size.set(100, 18);
+	this.skin.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			self.obj.setSkin(self.skin.getValue());
+		}
+	});
+	this.form.add(this.skin);
+	this.form.nextRow();
+
 	//Cast shadow
 	this.castShadow = new CheckBox(this.form.element);
 	this.form.addText("Cast Shadow");
@@ -70,7 +84,16 @@ SpinePanel.prototype.updatePanel = function()
 		{
 			this.animation.addValue(animations[i].name, animations[i].name);
 		}
-		
+
+		var skins = this.obj.getSkins();
+		this.skin.addValue("none", null);
+		for(var i = 0; i < skins.length; i++)
+		{
+			this.skin.addValue(skins[i].name, skins[i].name);
+		}
+
+		this.animation.setValue(this.obj.animation);
+		this.skin.setValue(this.obj.skin);
 		this.castShadow.setValue(this.obj.castShadow);
 		this.receiveShadow.setValue(this.obj.receiveShadow);
 	}
