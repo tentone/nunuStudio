@@ -6,6 +6,9 @@ function ConsoleTab(parent, closeable, container, index)
 
 	this.history = [];
 
+	//Filters
+	this.filterThreeJS = false;
+
 	//Top bar
 	this.bar = document.createElement("div");
 	this.bar.style.top = "0px";
@@ -279,6 +282,11 @@ ConsoleTab.createBar = function()
 //Normal log messsage
 ConsoleTab.prototype.log = function(args)
 {
+	if(this.filter(args))
+	{
+		return;
+	}
+
 	for(var i = 0; i < args.length; i++)
 	{
 		this.console.appendChild(ConsoleTab.createMessage(args[i]));
@@ -291,6 +299,11 @@ ConsoleTab.prototype.log = function(args)
 //Warning message
 ConsoleTab.prototype.warn = function(args)
 {
+	if(this.filter(args))
+	{
+		return;
+	}
+
 	for(var i = 0; i < args.length; i++)
 	{
 		var log = ConsoleTab.createMessage(args[i]);
@@ -305,6 +318,11 @@ ConsoleTab.prototype.warn = function(args)
 //Error message
 ConsoleTab.prototype.error = function(args)
 {
+	if(this.filter(args))
+	{
+		return;
+	}
+
 	for(var i = 0; i < args.length; i++)
 	{
 		var log = ConsoleTab.createMessage(args[i]);
@@ -327,6 +345,20 @@ ConsoleTab.prototype.clear = function(args)
 	}
 
 	this.console.scrollTop = Number.MAX_SAFE_INTEGER;
+};
+
+//Apply filters to messages
+ConsoleTab.prototype.filter = function(args)
+{
+	if(this.filterThreeJS)
+	{
+		if(args.length > 0 && (args[0] + "").startsWith("THREE"))
+		{
+			return true;
+		}
+	}
+
+	return false;
 };
 
 //Update interface

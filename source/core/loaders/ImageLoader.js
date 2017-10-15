@@ -76,5 +76,11 @@ ImageLoader.prototype.parse = function(json)
 	image.name = json.name;
 	image.uuid = json.uuid;
 
+	if(json.width !== undefined)
+	{
+		image.width = json.width;
+		image.height = json.height;
+	}
+
 	return image;
 };

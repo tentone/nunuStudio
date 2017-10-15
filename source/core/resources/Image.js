@@ -3,9 +3,9 @@
 /**
  * Image class is used to store image data that is used to create Textures.
  * 
- * Images can be stored in mutiple formats but on serialization images are converted to JPEG if they are opaque or to PNG if they are transparent.
- * 
- * GIF images are never converted to prevert animation capabilities.
+ * Images can be stored in mutiple formats.
+ *
+ * Some formats (tga, tiff, etc) are converted to png or jpeg in order to work with the rest of the code.
  * 
  * @class Image
  * @constructor
@@ -17,6 +17,9 @@
 function Image(url, encoding)
 {
 	Resource.call(this, "image", "Image");
+
+	this.width = -1;
+	this.height = -1;
 
 	if(url !== undefined)
 	{
@@ -140,6 +143,12 @@ Image.prototype.loadArrayBufferData = function(data, encoding)
  */
 Image.prototype.loadTGAData = function(data)
 {
+	if(THREE.TGALoader === undefined)
+	{
+		console.warn("nunuStudio: TGALoader required to load TGA file data.");
+		return;
+	}
+
 	var canvas = new THREE.TGALoader().parse(data);
 	this.encoding = "jpeg";
 	this.format = "base64";
@@ -230,6 +239,8 @@ Image.prototype.toJSON = function(meta)
 		this.loadArrayBufferData(FileSystem.readFileArrayBuffer(this.data), this.encoding);
 	}
 
+	data.width = this.width;
+	data.height = this.height;
 	data.encoding = this.encoding;
 
 	if(this.format === "arraybuffer")
