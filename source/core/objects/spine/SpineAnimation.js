@@ -34,73 +34,55 @@
  */
 function SpineAnimation(json, atlas, path, textures)
 {
-	if(textures !== undefined)
-	{
-		var textureAtlas = new spine.TextureAtlas(atlas, function(file)
-		{
-			for(var i = 0; i < textures.length; i++)
-			{
-				if(textures[i].name === file)
-				{
-					var texture = new SpineTexture(textures[i].texture);
-					var element = texture.texture.image;
-					var image = texture.texture.img;
-
-					if(image.width > 0 && image.height > 0)
-					{
-						element.width = image.width;
-						element.height = image.height;
-					}
-					else if(element.naturalWidth !== 0 && element.naturalHeight !== 0)
-					{
-						element.width = element.naturalWidth;
-						element.height = element.naturalHeight;
-						image.width = element.width;
-						image.height = element.height;
-					}
-					else
-					{
-						element.width = 1024;
-						element.height = 1024;
-					}
-					
-					return texture;
-				}
-			}
-		});
-	}
-	else
+	if(textures === undefined)
 	{
 		textures = [];
-		
-		var textureAtlas = new spine.TextureAtlas(atlas, function(file)
+	}
+	
+	var textureAtlas = new spine.TextureAtlas(atlas, function(file)
+	{
+		for(var i = 0; i < textures.length; i++)
+		{
+			if(textures[i].name === file)
+			{
+				var texture = new SpineTexture(textures[i].texture);
+				break;
+			}
+		}
+
+		if(i === textures.length)
 		{
 			var texture = new SpineTexture(new Texture(new Image(path + "/" + file)));
-			var element = texture.texture.image;
-			var image = texture.texture.img;
-
-			if(image.width > 0 && image.height > 0)
-			{
-				element.width = image.width;
-				element.height = image.height;
-			}
-			else if(element.naturalWidth !== 0 && element.naturalHeight !== 0)
-			{
-				element.width = element.naturalWidth;
-				element.height = element.naturalHeight;
-				image.width = element.width;
-				image.height = element.height;
-			}
-			else
-			{
-				element.width = 1024;
-				element.height = 1024;
-			}
-
 			textures.push({name: file, texture: texture.texture});
-			return texture;
-		});
-	}
+		}
+
+		var element = texture.texture.image;
+		var image = texture.texture.img;
+
+		if(image.width > 0 && image.height > 0)
+		{
+			element.width = image.width;
+			element.height = image.height;
+		}
+		else if(element.naturalWidth !== 0 && element.naturalHeight !== 0)
+		{
+			element.width = element.naturalWidth;
+			element.height = element.naturalHeight;
+			image.width = element.width;
+			image.height = element.height;
+		}
+		else
+		{
+			var beginning = atlas.search("size: ");
+			var end = atlas.search("\nformat");
+			var size = atlas.substring(beginning + 6, end);
+			size = size.split(",");
+			element.width = parseInt(size[0]);
+			element.height = parseInt(size[1]);
+		}
+		
+		return texture;
+	});
 
 	var loader = new spine.AtlasAttachmentLoader(textureAtlas);
 	var skeleton = new spine.SkeletonJson(loader).readSkeletonData(json);
