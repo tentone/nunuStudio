@@ -46,6 +46,17 @@ DropdownList.prototype.addValue = function(text, value)
 	this.element.appendChild(option);
 }
 
+//Remove all element from dropdown
+DropdownList.prototype.clearValues = function()
+{
+	this.values = [];
+	for(var i = 0; i < this.element.children.length; i++)
+	{
+		this.element.removeChild(this.element.children[i]);
+	}
+};
+
+
 //Get DropdownList value
 DropdownList.prototype.getValue = function()
 {
