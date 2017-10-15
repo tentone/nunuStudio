@@ -837,6 +837,69 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\editor\\timeliner\\ui\\ui_number.js": {
+            "name": "..\\..\\source\\editor\\timeliner\\ui\\ui_number.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\editor\\timeliner\\util\\util_dispatcher.js": {
+            "name": "..\\..\\source\\editor\\timeliner\\util\\util_dispatcher.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\editor\\timeliner\\util\\util_tween.js": {
+            "name": "..\\..\\source\\editor\\timeliner\\util\\util_tween.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\editor\\timeliner\\util\\util_undo.js": {
+            "name": "..\\..\\source\\editor\\timeliner\\util\\util_undo.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\editor\\timeliner\\view\\view_panel.js": {
+            "name": "..\\..\\source\\editor\\timeliner\\view\\view_panel.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\editor\\timeliner\\view\\view_time_scroller.js": {
+            "name": "..\\..\\source\\editor\\timeliner\\view\\view_time_scroller.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\editor\\timeliner\\timeliner.js": {
+            "name": "..\\..\\source\\editor\\timeliner\\timeliner.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\editor\\timeliner\\utils.js": {
+            "name": "..\\..\\source\\editor\\timeliner\\utils.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\editor\\timeliner.js": {
+            "name": "..\\..\\source\\editor\\timeliner.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\runtime\\NunuApp.js": {
             "name": "..\\..\\source\\runtime\\NunuApp.js",
             "modules": {
@@ -2766,7 +2829,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\resources\\Image.js",
             "line": 3,
-            "description": "Image class is used to store image data that is used to create Textures.\n\nImages can be stored in mutiple formats but on serialization images are converted to JPEG if they are opaque or to PNG if they are transparent.\n\nGIF images are never converted to prevert animation capabilities.",
+            "description": "Image class is used to store image data that is used to create Textures.\n\nImages can be stored in mutiple formats.\n\nSome formats (tga, tiff, etc) are converted to png or jpeg in order to work with the rest of the code.",
             "is_constructor": 1,
             "extends": "{Resource}",
             "params": [
@@ -8788,7 +8851,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 101,
+            "line": 119,
             "description": "Initialize the object.",
             "itemtype": "method",
             "name": "initialize",
@@ -8797,7 +8860,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 123,
+            "line": 134,
             "description": "Update the object state, called every time before rendering into the screen.",
             "itemtype": "method",
             "name": "update",
@@ -8806,7 +8869,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 136,
+            "line": 147,
             "description": "Update mesh geometry from animation state before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -8815,7 +8878,16 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 149,
+            "line": 160,
+            "description": "Play animation.",
+            "itemtype": "method",
+            "name": "play",
+            "class": "SpineAnimation",
+            "module": "Animations"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
+            "line": 179,
             "description": "Get all available animations.",
             "itemtype": "method",
             "name": "getAnimations",
@@ -8828,7 +8900,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 160,
+            "line": 190,
             "description": "Set animation from track number and name.",
             "itemtype": "method",
             "name": "setAnimation",
@@ -8854,7 +8926,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 185,
+            "line": 216,
             "description": "Get skins available for this animation.",
             "itemtype": "method",
             "name": "getSkins",
@@ -8867,7 +8939,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 196,
+            "line": 227,
             "description": "Set skin to be used by this animation",
             "itemtype": "method",
             "name": "setSkin",
@@ -8883,7 +8955,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 216,
+            "line": 247,
             "description": "Serialize spine animation as JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10302,7 +10374,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 66,
+            "line": 69,
             "description": "Check if a file name refers to a supported binary image file.",
             "itemtype": "method",
             "name": "fileIsImage",
@@ -10323,7 +10395,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 90,
+            "line": 93,
             "description": "Create a new image with 1x1 resolution with solid color.\n\nCan be called externally on data load error to load dummy data.",
             "itemtype": "method",
             "name": "createSolidColor",
@@ -10339,7 +10411,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 113,
+            "line": 116,
             "description": "Load arraybuffer data to this image.\n\nCreates a blob with data to be stored on data atribute and used by external objects.",
             "itemtype": "method",
             "name": "loadArrayBufferData",
@@ -10360,7 +10432,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 133,
+            "line": 136,
             "description": "Load .tga file from ArrayBuffer data.\n\nAfter loading data is converted to JPEG format and stored in base64 encoding.",
             "itemtype": "method",
             "name": "loadTGAData",
@@ -10376,7 +10448,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 149,
+            "line": 158,
             "description": "Check if this image has alpha channel.\n\nThis checks the file encoding if the file a GIF or a PNG is assumed that the file has alpha channel.",
             "itemtype": "method",
             "name": "hasTransparency",
@@ -10389,7 +10461,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 162,
+            "line": 171,
             "description": "Compresses image data to JPEG or PNG and stores in base64 encoding.\n\nIf the image has transparency it is stored as PNG otherwise the image is stored in JPEG with 1.0 quality.\n\nCan be used to compress data and save space.",
             "itemtype": "method",
             "name": "encodeData",
@@ -10398,7 +10470,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\Image.js",
-            "line": 210,
+            "line": 219,
             "description": "Serialize Image resource to json.\n\nIf image is stored as URL it is converter to PNG or JPEG.",
             "itemtype": "method",
             "name": "toJSON",
@@ -14037,6 +14109,198 @@
             "module": "Files"
         },
         {
+            "file": "..\\..\\source\\editor\\timeliner\\ui\\ui_number.js",
+            "line": 8,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\ui\\ui_number.js",
+            "line": 10,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\util\\util_dispatcher.js",
+            "line": 1,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\util\\util_dispatcher.js",
+            "line": 3,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\util\\util_tween.js",
+            "line": 1,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\util\\util_tween.js",
+            "line": 3,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\util\\util_undo.js",
+            "line": 1,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\util\\util_undo.js",
+            "line": 3,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\view\\view_panel.js",
+            "line": 56,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\view\\view_panel.js",
+            "line": 58,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\view\\view_panel.js",
+            "line": 371,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\view\\view_time_scroller.js",
+            "line": 120,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\view\\view_time_scroller.js",
+            "line": 162,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\timeliner.js",
+            "line": 543,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\utils.js",
+            "line": 17,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner\\utils.js",
+            "line": 19,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 705,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 1646,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 1648,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 2023,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 2025,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 2168,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 2170,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 2193,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 2195,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 2287,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 2289,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 3255,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 3257,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 3570,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 3921,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\editor\\timeliner.js",
+            "line": 3963,
+            "class": "NunuApp",
+            "module": "Files"
+        },
+        {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
             "line": 159,
             "description": "Nunu Program",
@@ -14456,5 +14720,134 @@
             "module": "Runtime"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\ui\\ui_number.js:8"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\ui\\ui_number.js:10"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\util\\util_dispatcher.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\util\\util_dispatcher.js:3"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\util\\util_tween.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\util\\util_tween.js:3"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\util\\util_undo.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\util\\util_undo.js:3"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\view\\view_panel.js:56"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\view\\view_panel.js:58"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\view\\view_panel.js:371"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\view\\view_time_scroller.js:120"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\view\\view_time_scroller.js:162"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\timeliner.js:543"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\utils.js:17"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner\\utils.js:19"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:705"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:1646"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:1648"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:2023"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:2025"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:2168"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:2170"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:2193"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:2195"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:2287"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:2289"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:3255"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:3257"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:3570"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:3921"
+        },
+        {
+            "message": "Missing item type",
+            "line": " ..\\..\\source\\editor\\timeliner.js:3963"
+        }
+    ]
 }

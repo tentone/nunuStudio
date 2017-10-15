@@ -79,6 +79,7 @@ SpinePanel.prototype.updatePanel = function()
 	if(this.obj !== null)
 	{	
 		var animations = this.obj.getAnimations();
+		this.animation.clearValues();
 		this.animation.addValue("none", null);
 		for(var i = 0; i < animations.length; i++)
 		{
@@ -86,6 +87,7 @@ SpinePanel.prototype.updatePanel = function()
 		}
 
 		var skins = this.obj.getSkins();
+		this.skin.clearValues();
 		this.skin.addValue("none", null);
 		for(var i = 0; i < skins.length; i++)
 		{

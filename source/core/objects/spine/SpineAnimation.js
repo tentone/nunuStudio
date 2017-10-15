@@ -103,13 +103,15 @@ function SpineAnimation(json, atlas, path, textures)
 	this.textures = textures;
 
 	//Default animation and skin
-	this.skin = null;
-	this.animation = null;
+	this.skin = (this.getSkins().length > 0) ? this.getSkins()[0].name: null;
+	this.animation = (this.getAnimations().length > 0) ? this.getAnimations()[0].name: null;
 	this.track = 0;
 	this.loop = true;
 
-	//Runtime control
+	//Clock
 	this.clock = new THREE.Clock();
+	
+	this.play();
 }
 
 SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
@@ -121,14 +123,7 @@ SpineAnimation.prototype = Object.create(spine.threejs.SkeletonMesh.prototype);
  */
 SpineAnimation.prototype.initialize = function()
 {
-	if(this.animation !== null)
-	{
-		this.setAnimation(this.track, this.animation, this.loop);
-	}
-	if(this.skin !== null)
-	{
-		this.setSkin(this.skin);	
-	}
+	this.play();
 
 	for(var i = 0; i < this.children.length; i++)
 	{
@@ -163,6 +158,25 @@ SpineAnimation.prototype.onBeforeRender = function()
 };
 
 /**
+ * Play animation.
+ * 
+ * @method play
+ */
+SpineAnimation.prototype.play = function()
+{
+	if(this.animation !== null)
+	{
+		this.setAnimation(this.track, this.animation, this.loop);
+	}
+
+	if(this.skin !== null)
+	{
+		this.setSkin(this.skin);
+	}
+};
+
+
+/**
  * Get all available animations.
  * 
  * @method getAnimations
@@ -194,6 +208,7 @@ SpineAnimation.prototype.setAnimation = function(track, animation, loop)
 	catch(e)
 	{
 		this.animation = null;
+
 		console.warn("nunuStudio: Error setting spine animation " + name + " on track " + track);
 	}
 };
