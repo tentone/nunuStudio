@@ -78,17 +78,16 @@ SpinePanel.prototype.updatePanel = function()
 	
 	if(this.obj !== null)
 	{	
-		var animations = this.obj.getAnimations();
 		this.animation.clearValues();
-		this.animation.addValue("none", null);
+		this.skin.clearValues();
+		
+		var animations = this.obj.getAnimations();
 		for(var i = 0; i < animations.length; i++)
 		{
 			this.animation.addValue(animations[i].name, animations[i].name);
 		}
 
 		var skins = this.obj.getSkins();
-		this.skin.clearValues();
-		this.skin.addValue("none", null);
 		for(var i = 0; i < skins.length; i++)
 		{
 			this.skin.addValue(skins[i].name, skins[i].name);

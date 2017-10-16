@@ -22,7 +22,7 @@
 	<script src="../../js/embed.js"></script>
 </head>
 
-<body onload="initialize('spritesheet.nsp', 'spritesheet');">
+<body onload="initialize('spritesheet.nsp', 'spritesheet'); initialize('spine.nsp', 'spine');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -71,9 +71,8 @@
 			<img src="spritesheet.png" class="img-small"></img>
 			
 			<p>We have to manually configure in the spritesheet editor its size, number of frames to be used, where to start and end the animation, and how fast do we want to play it.</p>
-			<p>The example bellow uses three different spritesheet animations, one of them is controlled using a script object to display different parts of the animation depending on the player movement, this example also shows really well how lights can be used for 2D scenes.</p>
-
-			<p>To try this example in the editor you can download the <a class="underline" href="spritesheet.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/basics/12_animation/spritesheet.nsp">Web Editor</a>.</p>
+			<p>The example bellow uses three different spritesheet animations, one of them is controlled using a script object to display different parts of the animation depending on the player movement, this example also shows really well how lights can be used for 2D scenes. To try this example in the editor you can download the <a class="underline" href="spritesheet.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/basics/12_animation/spritesheet.nsp">Web Editor</a>.</p>
+			
 			<div>
 				<canvas id="spritesheet" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
@@ -86,9 +85,42 @@
 			
 			<img src="skin.jpg" class="img-normal"></img>
 
-			<p>Spine animations also have support for inverse kinematics, its possible to use the mouse and keyboard import to change what would be the normal animation flow in order to adapt it to the current events.</p>
+			<p>The code bellow demonstrates how to change the animations programatically using the setAnimation(track, name, loop) function available in the SpineAnimation object. You can check the animations available for your animation in the object panel in the animation dropdown menu. There is also a setSkin(name) function that can be used to change the skin in use during runtime.</p>
 
+			<pre><code>var spineboy;
 
+function initialize()
+{
+	spineboy = scene.getObjectByName("spineboy");
+}
+
+function update()
+{
+	...
+	
+	if(Keyboard.keyJustPressed(Keyboard.RIGHT) || ...)
+	{
+		spineboy.setAnimation(0, "run", true);
+	}
+	if(Keyboard.keyJustReleased(Keyboard.RIGHT) || ...)
+	{
+		spineboy.setAnimation(0, "idle", true);
+	}
+}
+</code></pre>
+			
+			<p>The example bellow uses the spineboy animation available free on the spine runtime repository, and demonstrates how to use spine animations in a platformer style game.</p>
+
+			<div>
+				<canvas id="spine" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
+
+			<p>Spine animations also have support for inverse kinematics, its also possible to use the mouse and keyboard import to change what would be the normal animation flow in order to adapt it to the current events.</p>
+
+			<!-- Code -->
+			<h3 class="black">Code</h3>
+			<p>Another way to animated objects is coding, scripted animations sometimes allow for a more dynamic interactiong, and can sometimes be even easier to do than using visual tools. We can easily animate the properties of objects, textures, materials, etc.</p>
+			<p>Lets start by creating a simple 2D water animation as an example.
 		</div>
 	</section>
 

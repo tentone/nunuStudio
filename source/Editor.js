@@ -340,6 +340,7 @@ include("editor/ui/panels/lights/SpotLightPanel.js");
 include("editor/ui/panels/misc/CubeCameraPanel.js");
 include("editor/ui/panels/spine/SpinePanel.js");
 include("editor/ui/panels/mesh/MeshPanel.js");
+include("editor/ui/panels/mesh/SkinnedMeshPanel.js");
 include("editor/ui/panels/mesh/Text3DPanel.js");
 include("editor/ui/panels/controls/OrbitControlsPanel.js");
 include("editor/ui/panels/controls/FirstPersonControlsPanel.js");
@@ -1083,6 +1084,10 @@ Editor.selectObjectPanel = function()
 			{
 				Interface.panel = new Text3DPanel(Interface.explorerResizable.divB, object);
 			}
+			if(object instanceof THREE.SkinnedMesh)
+			{
+				Interface.panel = new SkinnedMeshPanel(Interface.explorerResizable.divB, object);
+			}
 			else
 			{
 				Interface.panel = new MeshPanel(Interface.explorerResizable.divB, object);
@@ -1135,13 +1140,13 @@ Editor.selectObjectPanel = function()
 		{
 			Interface.panel = new OrthographicCameraPanel(Interface.explorerResizable.divB, object);
 		}
-		else if(object instanceof THREE.Audio)
-		{
-			Interface.panel = new AudioPanel(Interface.explorerResizable.divB, object);
-		}
 		else if(object instanceof CubeCamera)
 		{
 			Interface.panel = new CubeCameraPanel(Interface.explorerResizable.divB, object);
+		}
+		else if(object instanceof THREE.Audio)
+		{
+			Interface.panel = new AudioPanel(Interface.explorerResizable.divB, object);
 		}
 		else if(object instanceof Scene)
 		{
