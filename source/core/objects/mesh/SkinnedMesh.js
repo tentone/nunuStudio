@@ -16,24 +16,37 @@
  */
 
 /**
- * Geometry defined the object structure
+ * Geometry defined the object structure.
+ *
  * @property geometry
  * @type {Geometry}
-*/
+ */
 /**
- * Material is used to define how the geometry surface is shaded
+ * Material is used to define how the geometry surface is shaded.
+ *
  * @property material
  * @type {Material}
 */
 /**
  * Determines how the mesh triangles are constructed from the vertices.
- * Only works when the geometry is a BufferGeometry
+ *
+ * Only works when the geometry is a BufferGeometry.
+ *
  * @property drawMode
  * @default TrianglesDrawMode
-*/
+ */
 /**
- * Array with the bones attached to this mesh
+ * Array with the bones attached to this mesh.
+ *
  * @property bones
+ * @type {Array}
+ */
+/**
+ * Array with the animations available in this mesh.
+ *
+ * The AnimationClip object has name, tracks, duration and uuid.
+ *
+ * @property animations
  * @type {Array}
  */
 function SkinnedMesh(geometry, material, useVertexTexture)
@@ -62,14 +75,15 @@ SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
  * Animations rely on other objects, if some of these are missing the animation will have problems playing.
  *
  * @method setAnimtion
- * @param {Number} animation Index of the animation to play.
+ * @param {Number} index Index of the animation to play.
+ * @param {Number} loop Loop mode to use (LoopOnce, LoopRepeat, LoopPingPong)
  */
-SkinnedMesh.prototype.playAnimation = function(index)
+SkinnedMesh.prototype.playAnimation = function(index, loop)
 {
 	try
 	{
 		var action = this.mixer.clipAction(this.animations[index]);
-		action.setLoop(THREE.LoopRepeat);
+		action.setLoop(loop !== undefined ? loop : THREE.LoopRepeat);
 		action.play();
 		this.actions.push(action);
 	}
