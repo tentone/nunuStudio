@@ -22,7 +22,7 @@
 	<script src="../../js/embed.js"></script>
 </head>
 
-<body onload="initialize('spritesheet.nsp', 'spritesheet'); initialize('spine.nsp', 'spine'); initialize('code.nsp', 'code');">
+<body onload="initialize('skinning.nsp', 'skinning'); initialize('spritesheet.nsp', 'spritesheet'); initialize('spine.nsp', 'spine'); initialize('code.nsp', 'code');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -59,8 +59,22 @@
 			<h3 class="black">Skinning</h3>
 			<p>Skeletal animation is a technique in computer animation in which a character is represented in two parts, a surface representation used to draw the character (called skin or mesh) and a hierarchical set of interconnected bones (called the skeleton or rig) used to animate (pose and keyframe) the mesh.</p>
 			<p>While this technique is often used to animate humans or more generally for organic modeling, it only serves to make the animation process more intuitive and the same technique can be used to control the deformation of any object, a door, a spoon, a building, or a galaxy. When the animated object is more general than, for example, a humanoid character the set of bones may not be hierarchical or interconnected, but it just represents a higher level description of the motion of the part of mesh or skin it is influencing.</p>
+			<p>When importing a 3D model that contains a SkinnedMesh with bones attached will be created automatically, using a script its possible to check the animations available for that 3D model, the code bellow shows how to display available animation and how to play the first one in the list.</p>
 
-			<img src="thumb.png" class="img-normal"></img>
+			<pre><code>var trooper = scene.getObjectByName("Stormtrooper");
+
+for(var i = 0; i < trooper.animations.length; i++)
+{
+	console.log(trooper.animations[i].name);
+}
+
+trooper.playAnimation(0);</code></pre>
+
+			<p>The example bellow demonstrates the code above working, to try this example in the editor you can download the <a class="underline" href="skinning.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/basics/12_animation/skinning.nsp">Web Editor</a>.</p>
+
+			<div>
+				<canvas id="skinning" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
 
 			<!-- Spritesheet -->
 			<h3 class="black">Spritesheet</h3>

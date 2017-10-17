@@ -312,6 +312,10 @@
 						
 											<ul class="index-list properties extends">
 													<li class="index-item property">
+														<a href="#property_animations">animations</a>
+						
+													</li>
+													<li class="index-item property">
 														<a href="#property_bones">bones</a>
 						
 													</li>
@@ -462,7 +466,10 @@
 													<div class="args">
 														<span class="paren">(</span><ul class="args-list inline commas">
 															<li class="arg">
-																	<code>animation</code>
+																	<code>index</code>
+															</li>
+															<li class="arg">
+																	<code>loop</code>
 															</li>
 														</ul><span class="paren">)</span>
 													</div>
@@ -493,12 +500,23 @@
 											
 														<ul class="params-list">
 															<li class="param">
-																	<code class="param-name">animation</code>
+																	<code class="param-name">index</code>
 																	<span class="type">Number</span>
 											
 											
 																<div class="param-description">
 																	<p>Index of the animation to play.</p>
+											
+																</div>
+											
+															</li>
+															<li class="param">
+																	<code class="param-name">loop</code>
+																	<span class="type">Number</span>
+											
+											
+																<div class="param-description">
+																	<p>Loop mode to use (LoopOnce, LoopRepeat, LoopPingPong)</p>
 											
 																</div>
 											
@@ -564,6 +582,30 @@
 									<div id="properties" class="api-class-tabpanel">
 										<h2 class="off-left">Properties</h2>
 						
+											<div id="property_animations" class="property item">
+												<h3 class="name"><code>animations</code></h3>
+												<span class="type">Array</span>
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Array with the animations available in this mesh.</p>
+											<p>The AnimationClip object has name, tracks, duration and uuid.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="property_bones" class="property item">
 												<h3 class="name"><code>bones</code></h3>
 												<span class="type">Array</span>
@@ -580,7 +622,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Array with the bones attached to this mesh</p>
+													<p>Array with the bones attached to this mesh.</p>
 											
 												</div>
 											
@@ -603,8 +645,8 @@
 												</div>
 											
 												<div class="description">
-													<p>Determines how the mesh triangles are constructed from the vertices.
-											Only works when the geometry is a BufferGeometry</p>
+													<p>Determines how the mesh triangles are constructed from the vertices.</p>
+											<p>Only works when the geometry is a BufferGeometry.</p>
 											
 												</div>
 											
@@ -628,7 +670,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Geometry defined the object structure</p>
+													<p>Geometry defined the object structure.</p>
 											
 												</div>
 											
@@ -651,7 +693,7 @@
 												</div>
 											
 												<div class="description">
-													<p>Material is used to define how the geometry surface is shaded</p>
+													<p>Material is used to define how the geometry surface is shaded.</p>
 											
 												</div>
 											

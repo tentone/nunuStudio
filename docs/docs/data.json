@@ -7993,7 +7993,7 @@
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
             "line": 18,
-            "description": "Geometry defined the object structure",
+            "description": "Geometry defined the object structure.",
             "itemtype": "property",
             "name": "geometry",
             "type": "{Geometry}",
@@ -8002,8 +8002,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 23,
-            "description": "Material is used to define how the geometry surface is shaded",
+            "line": 24,
+            "description": "Material is used to define how the geometry surface is shaded.",
             "itemtype": "property",
             "name": "material",
             "type": "{Material}",
@@ -8012,8 +8012,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 28,
-            "description": "Determines how the mesh triangles are constructed from the vertices.\nOnly works when the geometry is a BufferGeometry",
+            "line": 30,
+            "description": "Determines how the mesh triangles are constructed from the vertices.\n\nOnly works when the geometry is a BufferGeometry.",
             "itemtype": "property",
             "name": "drawMode",
             "default": "TrianglesDrawMode",
@@ -8022,8 +8022,8 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 34,
-            "description": "Array with the bones attached to this mesh",
+            "line": 38,
+            "description": "Array with the bones attached to this mesh.",
             "itemtype": "property",
             "name": "bones",
             "type": "{Array}",
@@ -8032,14 +8032,29 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 59,
+            "line": 44,
+            "description": "Array with the animations available in this mesh.\n\nThe AnimationClip object has name, tracks, duration and uuid.",
+            "itemtype": "property",
+            "name": "animations",
+            "type": "{Array}",
+            "class": "SkinnedMesh",
+            "module": "Meshes"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
+            "line": 72,
             "description": "Play animation attached to this skinned mesh.\n\nAnimations rely on other objects, if some of these are missing the animation will have problems playing.",
             "itemtype": "method",
             "name": "setAnimtion",
             "params": [
                 {
-                    "name": "animation",
+                    "name": "index",
                     "description": "Index of the animation to play.",
+                    "type": "Number"
+                },
+                {
+                    "name": "loop",
+                    "description": "Loop mode to use (LoopOnce, LoopRepeat, LoopPingPong)",
                     "type": "Number"
                 }
             ],
@@ -8048,7 +8063,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 82,
+            "line": 96,
             "description": "Update skinned mesh animation if there is some attached.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -8057,7 +8072,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 95,
+            "line": 109,
             "description": "Dispose mesh along with its material and geometry.",
             "itemtype": "method",
             "name": "dispose",
@@ -8066,7 +8081,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 125,
+            "line": 139,
             "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
@@ -8087,7 +8102,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 135,
+            "line": 149,
             "description": "Serialize skinned mesh to json.",
             "itemtype": "method",
             "name": "toJSON",
