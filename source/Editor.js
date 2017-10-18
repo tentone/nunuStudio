@@ -217,6 +217,10 @@ include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/XLoader.js");
 
+include("lib/three/modifiers/SimplifyModifier.js");
+include("lib/three/modifiers/SubdivisionModifier.js");
+include("lib/three/modifiers/BufferSubdivisionModifier.js");
+
 include("lib/three/exporters/OBJExporter.js");
 include("lib/three/exporters/STLExporter.js");
 include("lib/three/exporters/STLBinaryExporter.js");

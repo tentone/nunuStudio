@@ -933,6 +933,61 @@ Interface.initialize = function()
 		Editor.addToScene(mesh);
 	}, Editor.filePath + "icons/misc/union.png");
 
+	var modifiers = Interface.editor.addMenu("Modifiers", Editor.filePath + "icons/models/figures.png");
+
+	modifiers.addOption("Simplify", function()
+	{
+		if(Editor.selectedObjects.length < 1 || Editor.selectedObjects[0].geometry === undefined)
+		{
+			Editor.alert("Operation needs a object with geometry");
+			return;
+		}
+
+		var simplifier = new THREE.SimplifyModifier();
+
+		var level = parseFloat(prompt("Simplification level in %")) / 100;
+
+		if(isNaN(level) || level > 100 || level < 0)
+		{
+			Editor.alert("Level has to be a numeric value");
+			return;
+		}
+
+		var original = Editor.selectedObjects[0].geometry;
+
+		if(original instanceof THREE.BufferGeometry)
+		{
+			var vertices = original.getAttribute("position").array.length / 3;
+		}
+		else
+		{
+			var vertices = original.vertices.length;
+		}
+
+
+		var geometry = simplifier.modify(original, Math.ceil(vertices * level));
+		var mesh = new Mesh(geometry, Editor.defaultMaterial);
+		Editor.addToScene(mesh);
+
+
+		alert("Reduced from " + vertices + " to " + Math.ceil(vertices * level) + " vertex.");
+
+	}, Editor.filePath + "icons/models/figures.png");
+
+	modifiers.addOption("Subdivide", function()
+	{
+		if(Editor.selectedObjects.length < 1 || Editor.selectedObjects[0].geometry === undefined)
+		{
+			Editor.alert("Operation needs a object with geometry");
+			return;
+		}
+
+		var modifier = new THREE.BufferSubdivisionModifier();
+		var geometry = modifier.modify(Editor.selectedObjects[0].geometry);
+		var mesh = new Mesh(geometry, Editor.defaultMaterial);
+		Editor.addToScene(mesh);
+	}, Editor.filePath + "icons/models/figures.png");
+
 	//Compute mesh normals
 	Interface.editor.addOption("Compute normals", function()
 	{
