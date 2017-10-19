@@ -59,7 +59,6 @@ include("core/three/materials/Material.js");
 include("core/three/materials/MultiMaterial.js");
 include("core/three/loaders/BufferGeometryLoader.js");
 include("core/three/math/Vector3.js");
-include("core/three/math/Math.js");
 include("core/three/textures/Texture.js");
 include("core/three/lights/LightShadow.js");
 include("core/three/scenes/Fog.js");
