@@ -1082,15 +1082,15 @@ Editor.selectObjectPanel = function()
 		{
 			Interface.panel = new SpinePanel(Interface.explorerResizable.divB, object);
 		}
+		else if(object instanceof THREE.SkinnedMesh)
+		{
+			Interface.panel = new SkinnedMeshPanel(Interface.explorerResizable.divB, object);
+		}
 		else if(object instanceof THREE.Mesh)
 		{
 			if(object instanceof Text3D)
 			{
 				Interface.panel = new Text3DPanel(Interface.explorerResizable.divB, object);
-			}
-			if(object instanceof THREE.SkinnedMesh)
-			{
-				Interface.panel = new SkinnedMeshPanel(Interface.explorerResizable.divB, object);
 			}
 			else
 			{

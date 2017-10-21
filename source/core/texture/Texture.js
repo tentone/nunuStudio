@@ -137,6 +137,7 @@ function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, typ
 
 	this.image.onerror = function()
 	{
+		console.log("nunuStudio: Failed to load image " + self.img.uuid + " data.");
 		self.img.createSolidColor();
 		self.image.src = self.img.data;
 	};
