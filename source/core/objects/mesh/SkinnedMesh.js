@@ -73,6 +73,24 @@ THREE.SkinnedMesh = SkinnedMesh;
 SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
 
 /**
+ * Initialize the skinned mesh object, play initial animation.
+ * 
+ * @method initialize
+ */
+SkinnedMesh.prototype.initialize = function()
+{
+	if(this.initialAnimation > 0)
+	{
+		this.playAnimation(this.initialAnimation);
+	}
+
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].initialize();
+	}
+};
+
+/**
  * Play animation attached to this skinned mesh.
  *
  * Animations rely on other objects, if some of these are missing the animation will have problems playing.
@@ -93,6 +111,19 @@ SkinnedMesh.prototype.playAnimation = function(index, loop)
 	catch(e)
 	{
 		console.warn("nunuStudio: Error playing animation (" + e + ")");
+	}
+};
+
+/**
+ * Stop all animations playback.
+ * 
+ * @method stopAnimation
+ */
+SkinnedMesh.prototype.stopAnimation = function()
+{
+	if(this.mixer !== null)
+	{
+		this.mixer.stopAllAction();
 	}
 };
 
