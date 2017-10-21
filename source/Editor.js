@@ -226,6 +226,7 @@ include("lib/three/exporters/STLExporter.js");
 include("lib/three/exporters/STLBinaryExporter.js");
 include("lib/three/exporters/GLTFExporter.js");
 
+include("lib/timeliner.js");
 include("lib/jsblend.js");
 include("lib/zlib.min.js");
 include("lib/jscookie.min.js");
@@ -402,7 +403,6 @@ include("editor/history/Action.js");
 //inclde("editor/timeline/view_layer_cabinet.js");
 //inclde("editor/timeline/view_panel.js");
 //inclde("editor/timeline/view_time_scroller.js");
-include("editor/timeliner.js");
 
 include("editor/Console.js");
 include("editor/Clipboard.js");
@@ -1667,7 +1667,7 @@ Editor.loadModel = function(file, onLoad)
 						{
 							object.material = new THREE.MeshPhongMaterial();
 						}
-					} );
+					});
 					Editor.addToScene(babylon);
 				}
 				catch(e)
@@ -1790,6 +1790,8 @@ Editor.loadModel = function(file, onLoad)
 					{
 						var scene = gltf.scene;
 						scene.type = "Group";
+						scene.name = FileSystem.getNameWithoutExtension(name);
+
 						var animations = gltf.animations;
 						
 						if(animations.length > 0)
@@ -1949,6 +1951,55 @@ Editor.loadModel = function(file, onLoad)
 		//X
 		else if(extension === "x")
 		{
+			//Auxiliar method to split single x animation int multiple animations
+			function splitAnimation(baseAnime, name, beginTime, endTime)
+			{
+				var animation = {};
+				animation.fps = baseAnime.fps;
+				animation.name = name;
+				animation.length = endTime - beginTime;
+				animation.hierarchy = [];
+
+				for(var i = 0; i < baseAnime.hierarchy.length; i++)
+				{
+					var firstKey = -1;
+					var lastKey = -1;
+
+					var frame = {};
+					frame.name = baseAnime.hierarchy[i].name;
+					frame.parent = baseAnime.hierarchy[i].parent;
+					frame.keys = [];
+
+					for(var m = 1; m < baseAnime.hierarchy[i].keys.length; m++)
+					{
+						if(baseAnime.hierarchy[i].keys[m].time > beginTime)
+						{
+							if(firstKey === -1)
+							{
+								firstKey = m - 1;
+								frame.keys.push(baseAnime.hierarchy[i].keys[m - 1]);
+							}
+
+							frame.keys.push(baseAnime.hierarchy[i].keys[m]);
+						}
+
+						if(endTime <= baseAnime.hierarchy[i].keys[m].time || m >= baseAnime.hierarchy[i].keys.length - 1)
+						{
+							break;
+						}
+					}
+
+					for(var m = 0; m < frame.keys.length; m++)
+					{
+						frame.keys[m].time -= beginTime;
+					}
+
+					animation.hierarchy.push(frame);
+				}
+
+				return animation;
+			}
+
 			var reader = new FileReader();
 			reader.onload = function()
 			{
@@ -1958,11 +2009,31 @@ Editor.loadModel = function(file, onLoad)
 					loader.baseDir = path;
 					loader.parse(reader.result, function(object)
 					{
+						console.log(object);
+
+						var container = new Container();
+						container.name = FileSystem.getNameWithoutExtension(name);
 						for(var i = 0; i < object.FrameInfo.length; i ++)
 						{
-							//TODO <OBJECT ANIMATIONS>
-							Editor.addToScene(object.FrameInfo[i]);
+							var model = object.FrameInfo[i];
+
+							if(model instanceof THREE.SkinnedMesh)
+							{
+								if(object.XAnimationObj !== undefined && object.XAnimationObj.length > 0)
+								{
+									var animations = object.XAnimationObj;
+									for(var j = 0; j < animations.length; j++)
+									{
+										model.animationSpeed = 1000;
+										model.animations.push(THREE.AnimationClip.parseAnimation(splitAnimation(animations[j], animations[j].name, 50 * animations[j].fps, 80 * animations[j].fps), model.skeleton.bones));
+									}
+								}
+							}
+
+							container.add(model);
 						}
+
+						Editor.addToScene(container);
 					});
 				}
 				catch(e)

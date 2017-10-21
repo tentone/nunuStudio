@@ -889,7 +889,6 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			{
 				tmpBones = geometry.bones;
 				geometry.bones = undefined;
-
 			}
 
 			object = new SkinnedMesh(geometry, material);
@@ -924,6 +923,16 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 					var clip = THREE.AnimationClip.parse(data.animations[i]);
 					object.animations.push(clip);
 				}
+			}
+
+			if(data.animationSpeed !== undefined)
+			{
+				object.animationSpeed = data.animationSpeed;
+			}
+
+			if(data.initialAnimation !== undefined)
+			{
+				object.initialAnimation = data.initialAnimation;
 			}
 
 			break;
