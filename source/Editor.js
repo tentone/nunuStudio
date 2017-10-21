@@ -1951,13 +1951,11 @@ Editor.loadModel = function(file, onLoad)
 		//X
 		else if(extension === "x")
 		{
-			//Auxiliar method to split single x animation int multiple animations
-			function splitAnimation(baseAnime, name, beginTime, endTime)
+			function convertAnimation(baseAnime, name)
 			{
 				var animation = {};
 				animation.fps = baseAnime.fps;
 				animation.name = name;
-				animation.length = endTime - beginTime;
 				animation.hierarchy = [];
 
 				for(var i = 0; i < baseAnime.hierarchy.length; i++)
@@ -1972,7 +1970,7 @@ Editor.loadModel = function(file, onLoad)
 
 					for(var m = 1; m < baseAnime.hierarchy[i].keys.length; m++)
 					{
-						if(baseAnime.hierarchy[i].keys[m].time > beginTime)
+						if(baseAnime.hierarchy[i].keys[m].time > 0)
 						{
 							if(firstKey === -1)
 							{
@@ -1983,15 +1981,13 @@ Editor.loadModel = function(file, onLoad)
 							frame.keys.push(baseAnime.hierarchy[i].keys[m]);
 						}
 
-						if(endTime <= baseAnime.hierarchy[i].keys[m].time || m >= baseAnime.hierarchy[i].keys.length - 1)
+						animation.length = baseAnime.hierarchy[i].keys[m].time;
+
+						if(m >= baseAnime.hierarchy[i].keys.length - 1)
 						{
 							break;
 						}
-					}
 
-					for(var m = 0; m < frame.keys.length; m++)
-					{
-						frame.keys[m].time -= beginTime;
 					}
 
 					animation.hierarchy.push(frame);
@@ -2009,10 +2005,6 @@ Editor.loadModel = function(file, onLoad)
 					loader.baseDir = path;
 					loader.parse(reader.result, function(object)
 					{
-						console.log(object);
-
-						var container = new Container();
-						container.name = FileSystem.getNameWithoutExtension(name);
 						for(var i = 0; i < object.FrameInfo.length; i ++)
 						{
 							var model = object.FrameInfo[i];
@@ -2025,15 +2017,13 @@ Editor.loadModel = function(file, onLoad)
 									for(var j = 0; j < animations.length; j++)
 									{
 										model.animationSpeed = 1000;
-										model.animations.push(THREE.AnimationClip.parseAnimation(splitAnimation(animations[j], animations[j].name, 50 * animations[j].fps, 80 * animations[j].fps), model.skeleton.bones));
+										model.animations.push(THREE.AnimationClip.parseAnimation(convertAnimation(animations[j], animations[j].name), model.skeleton.bones));
 									}
 								}
 							}
 
-							container.add(model);
+							Editor.addToScene(model);
 						}
-
-						Editor.addToScene(container);
 					});
 				}
 				catch(e)
