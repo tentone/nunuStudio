@@ -79,7 +79,7 @@ SkinnedMesh.prototype = Object.create(THREE._SkinnedMesh.prototype);
  */
 SkinnedMesh.prototype.initialize = function()
 {
-	if(this.initialAnimation > 0)
+	if(this.initialAnimation >= 0)
 	{
 		this.playAnimation(this.initialAnimation);
 	}

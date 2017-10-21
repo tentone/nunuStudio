@@ -883,8 +883,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			var material = getMaterial(data.material);
 			var tmpBones;
 
-			//If data has skeleton, assumes bones are already in scene graph.
-			//Then temporarily undefines geometry.bones not to create bones in SkinnedMesh constructor.
+			//If data has skeleton, assumes bones are already in scene graph. Then temporarily undefines geometry.bones not to create bones in SkinnedMesh constructor.
 			if(data.skeleton !== undefined && geometry.bones !== undefined)
 			{
 				tmpBones = geometry.bones;

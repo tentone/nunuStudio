@@ -342,10 +342,11 @@ MaterialEditor.prototype.update = function()
 			this.material.needsUpdate = true;
 		}
 
-
-
 		//Render scene
-		this.renderer.render(this.scene, this.camera);
+		if(this.renderer !== null)
+		{
+			this.renderer.render(this.scene, this.camera);
+		}
 	}
 
 	//Move material view
