@@ -1516,7 +1516,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 							break;
 					}
 
-					var img = new Image();
+					var img = document.createElement("img");
 
 					img.src = dataURI;
 
