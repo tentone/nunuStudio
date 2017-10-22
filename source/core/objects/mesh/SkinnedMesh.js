@@ -124,6 +124,7 @@ SkinnedMesh.prototype.stopAnimation = function()
 	if(this.mixer !== null)
 	{
 		this.mixer.stopAllAction();
+		this.actions = [];
 	}
 };
 
@@ -158,10 +159,7 @@ SkinnedMesh.prototype.dispose = function()
 		this.geometry.dispose();
 	}
 
-	if(this.mixer !== null)
-	{
-		this.mixer.stopAllAction();
-	}
+	this.stopAnimation();
 
 	//Children
 	for(var i = 0; i < this.children.length; i++)
