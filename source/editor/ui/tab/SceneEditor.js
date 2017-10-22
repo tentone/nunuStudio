@@ -45,6 +45,9 @@ function SceneEditor(parent, closeable, container, index)
 	this.helperScene = new THREE.Scene();
 	this.toolScene = new THREE.Scene();
 
+	//Camera orientation scene
+	this.cameraOrientation = new CameraOrientation();
+
 	//Grid
 	this.gridHelper = new GridHelper(Settings.editor.gridSize, Settings.editor.gridSpacing, 0x888888);
 	this.gridHelper.visible = Settings.editor.gridEnabled;
@@ -932,7 +935,6 @@ SceneEditor.prototype.render = function()
 
 				renderer.clear();
 
-
 				renderer.setViewport(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 				renderer.setScissor(x + width * camera.offset.x, y + height * camera.offset.y, width * camera.viewport.x, height * camera.viewport.y);
 				
@@ -989,10 +991,18 @@ SceneEditor.prototype.render = function()
 					camera.render(renderer, scene);
 				}
 			}
-
-			renderer.setScissorTest(false);
-			renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
 		}
+
+		//Draw camera cube
+		renderer.setScissorTest(true);
+		renderer.setViewport(this.canvas.width - 100, 0, 100, 100);
+		renderer.setScissor(this.canvas.width - 100, 0, 100, 100);
+		this.cameraOrientation.scene.rotation.copy(this.camera.rotation);
+		renderer.render(this.cameraOrientation.scene, this.cameraOrientation.camera);
+		
+		//Clear scissor configuration
+		renderer.setScissorTest(false);
+		renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
 	}
 	else if(this.state === SceneEditor.TESTING)
 	{

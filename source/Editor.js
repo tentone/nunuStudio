@@ -404,6 +404,7 @@ include("editor/history/Action.js");
 //inclde("editor/timeline/view_panel.js");
 //inclde("editor/timeline/view_time_scroller.js");
 
+include("editor/CameraOrientation.js");
 include("editor/Console.js");
 include("editor/Clipboard.js");
 include("editor/DragBuffer.js");
