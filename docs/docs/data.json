@@ -8018,7 +8018,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 130,
+            "line": 131,
             "description": "Update skinned mesh animation if there is some attached.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -8027,7 +8027,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 143,
+            "line": 144,
             "description": "Dispose mesh along with its material and geometry.",
             "itemtype": "method",
             "name": "dispose",
@@ -8036,7 +8036,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 173,
+            "line": 171,
             "description": "Bind a skeleton to this SkinnedMesh. The bindMatrix gets saved to .bindMatrix property and the .bindMatrixInverse gets calculated.\n\nThis is called automatically in the constructor, and the skeleton is created from the bones of the Geometry passed in the constructor.",
             "itemtype": "method",
             "name": "bind",
@@ -8057,7 +8057,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\mesh\\SkinnedMesh.js",
-            "line": 183,
+            "line": 181,
             "description": "Serialize skinned mesh to json.",
             "itemtype": "method",
             "name": "toJSON",

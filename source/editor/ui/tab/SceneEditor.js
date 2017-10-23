@@ -998,7 +998,10 @@ SceneEditor.prototype.render = function()
 		renderer.setViewport(this.canvas.width - 100, 0, 100, 100);
 		renderer.setScissor(this.canvas.width - 100, 0, 100, 100);
 		
-		this.cameraOrientation.scene.rotation.copy(this.camera.rotation);
+		//Calculate direction vector
+		var cosAngleY = Math.cos(-this.cameraRotation.y);
+		var direction = new THREE.Vector3(Math.sin(-this.cameraRotation.x)*cosAngleY, Math.sin(-this.cameraRotation.y), Math.cos(-this.cameraRotation.x)*cosAngleY);
+		this.cameraOrientation.scene.lookAt(direction);
 		this.cameraOrientation.render(renderer);
 		
 		//Clear scissor configuration
