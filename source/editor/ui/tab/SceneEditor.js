@@ -997,8 +997,9 @@ SceneEditor.prototype.render = function()
 		renderer.setScissorTest(true);
 		renderer.setViewport(this.canvas.width - 100, 0, 100, 100);
 		renderer.setScissor(this.canvas.width - 100, 0, 100, 100);
+		
 		this.cameraOrientation.scene.rotation.copy(this.camera.rotation);
-		renderer.render(this.cameraOrientation.scene, this.cameraOrientation.camera);
+		this.cameraOrientation.render(renderer);
 		
 		//Clear scissor configuration
 		renderer.setScissorTest(false);
