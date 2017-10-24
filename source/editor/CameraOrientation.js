@@ -3,13 +3,9 @@
 function CameraOrientation()
 {	
 	this.raycaster = new THREE.Raycaster();
-
 	this.scene = new THREE.Scene();
 
 	var plane = new THREE.PlaneBufferGeometry(1, 1);
-
-	var green = new THREE.MeshBasicMaterial({color: 0x337733});
-	var blue = new THREE.MeshBasicMaterial({color: 0x333377});
 
 	this.xPos = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({map: new Texture(Editor.filePath + "camera/xPos.png")}));
 	this.xPos.position.set(0.5, 0, 0);

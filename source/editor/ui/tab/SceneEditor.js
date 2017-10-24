@@ -33,6 +33,10 @@ function SceneEditor(parent, closeable, container, index)
 	this.mouse = new Mouse();
 	this.mouse.setCanvas(this.canvas);
 
+	//Temporary variables
+	this.tempVector2 = new THREE.Vector2();
+	this.tempVector3 = new THREE.Vector3();
+
 	//Performance meter
 	this.stats = new Stats();
 	this.stats.dom.style.position = "absolute";
@@ -725,17 +729,17 @@ SceneEditor.prototype.update = function()
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.A))
 						{
-							var direction = new THREE.Vector3(Math.sin(this.cameraRotation.x - 1.57), 0, Math.cos(this.cameraRotation.x - 1.57));
-							direction.normalize();
-							direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
-							this.camera.position.sub(direction);
+							this.tempVector3.set(Math.sin(this.cameraRotation.x - 1.57), 0, Math.cos(this.cameraRotation.x - 1.57));
+							this.tempVector3.normalize();
+							this.tempVector3.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
+							this.camera.position.sub(this.tempVector3);
 						}
 						if(Editor.keyboard.keyPressed(Keyboard.D))
 						{
-							var direction = new THREE.Vector3(Math.sin(this.cameraRotation.x + 1.57), 0, Math.cos(this.cameraRotation.x + 1.57));
-							direction.normalize();
-							direction.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
-							this.camera.position.sub(direction);
+							this.tempVector3.set(Math.sin(this.cameraRotation.x + 1.57), 0, Math.cos(this.cameraRotation.x + 1.57));
+							this.tempVector3.normalize();
+							this.tempVector3.multiplyScalar(Settings.editor.keyboardNavigationSpeed);
+							this.camera.position.sub(this.tempVector3);
 						}
 					}
 				}
@@ -994,16 +998,20 @@ SceneEditor.prototype.render = function()
 		}
 
 		//Draw camera cube
-		renderer.setScissorTest(true);
-		renderer.setViewport(this.canvas.width - 100, 0, 100, 100);
-		renderer.setScissor(this.canvas.width - 100, 0, 100, 100);
-		
-		//Calculate direction vector
-		var cosAngleY = Math.cos(-this.cameraRotation.y);
-		var direction = new THREE.Vector3(Math.sin(-this.cameraRotation.x)*cosAngleY, Math.sin(-this.cameraRotation.y), Math.cos(-this.cameraRotation.x)*cosAngleY);
-		this.cameraOrientation.scene.lookAt(direction);
-		this.cameraOrientation.render(renderer);
-		
+		if(Settings.editor.cameraRotationCube)
+		{
+			var size = Settings.editor.cameraRotationCubeSize;
+			renderer.setScissorTest(true);
+			renderer.setViewport(this.canvas.width - size, 0, size, size);
+			renderer.setScissor(this.canvas.width - size, 0, size, size);
+			
+			//Calculate direction vector
+			var cos = Math.cos(-this.cameraRotation.y);
+			this.cameraOrientation.camera.position.set(2 * Math.cos(this.cameraRotation.x) * cos, 2 * Math.sin(-this.cameraRotation.y), 2 * Math.sin(this.cameraRotation.x) * cos);
+			this.cameraOrientation.camera.lookAt(SceneEditor.ZERO);
+			this.cameraOrientation.render(renderer);
+		}
+
 		//Clear scissor configuration
 		renderer.setScissorTest(false);
 		renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
@@ -1066,8 +1074,8 @@ SceneEditor.prototype.initializeRenderer = function()
 //Update raycaster position from editor mouse position
 SceneEditor.prototype.updateRaycasterFromMouse = function()
 {
-	var mouse = new THREE.Vector2((this.mouse.position.x / this.canvas.width) * 2 - 1, -(this.mouse.position.y / this.canvas.height) * 2 + 1);
-	this.raycaster.setFromCamera(mouse, this.camera);
+	this.tempVector2.set((this.mouse.position.x / this.canvas.width) * 2 - 1, -(this.mouse.position.y / this.canvas.height) * 2 + 1);
+	this.raycaster.setFromCamera(this.tempVector2, this.camera);
 };
 
 //Select objects with mouse
@@ -1099,7 +1107,8 @@ SceneEditor.prototype.selectObjectWithMouse = function()
 //Update editor raycaster with new x and y positions (normalized -1 to 1)
 SceneEditor.prototype.updateRaycaster = function(x, y)
 {
-	this.raycaster.setFromCamera(new THREE.Vector2(x, y), this.camera);
+	this.tempVector2.set(x, y);
+	this.raycaster.setFromCamera(this.tempVector2, this.camera);
 };
 
 //Set camera mode (ortho or perspective)
@@ -1141,13 +1150,13 @@ SceneEditor.prototype.setCameraMode = function(mode)
 //Set camera rotation
 SceneEditor.prototype.setCameraRotation = function(cameraRotation, camera)
 {
-	//Calculate direction vector
+	//Direction vector
 	var cosAngleY = Math.cos(cameraRotation.y);
-	var direction = new THREE.Vector3(Math.sin(cameraRotation.x)*cosAngleY, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cosAngleY);
+	this.tempVector3.set(Math.sin(cameraRotation.x)*cosAngleY, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cosAngleY);
 
-	//Add position offset and set camera direction
-	direction.add(camera.position);
-	camera.lookAt(direction);
+	//Add position offset
+	this.tempVector3.add(camera.position);
+	camera.lookAt(this.tempVector3);
 };
 
 //Set scene editor state

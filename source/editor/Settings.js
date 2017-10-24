@@ -55,7 +55,9 @@ Settings.loadDefault = function()
 		keyboardNavigationSpeed : 0.5,
 		mouseLookSensitivity : 0.002,
 		mouseMoveSpeed : 0.001,
-		mouseWheelSensitivity : 0.0005
+		mouseWheelSensitivity : 0.0005,
+		cameraRotationCube : true,
+		cameraRotationCubeSize: 100
 	};
 
 	//Render
