@@ -3,7 +3,12 @@
 function CameraOrientation()
 {	
 	this.raycaster = new THREE.Raycaster();
+	
+	this.camera = new THREE.PerspectiveCamera(60, 1, 0.1, 10);
+	this.camera.position.z = 2;
+
 	this.scene = new THREE.Scene();
+	this.scene.matrixAutoUpdate = false;
 
 	var plane = new THREE.PlaneBufferGeometry(1, 1);
 
@@ -47,15 +52,19 @@ function CameraOrientation()
 	this.zNeg.matrixAutoUpdate = false;
 	this.zNeg.updateMatrix();
 	this.scene.add(this.zNeg);
-
-	this.camera = new THREE.PerspectiveCamera(60, 1, 0.1, 10);
-	this.camera.position.z = 2;
 }
 
 CameraOrientation.prototype.raycast = function(mouse)
 {
 	var objects = this.raycaster.setFromCamera(mouse, this.camera);
 };
+
+CameraOrientation.prototype.updateRotation = function(camera)
+{
+	this.scene.quaternion.copy(camera.quaternion);
+	this.scene.updateMatrix();
+	this.scene.matrix.getInverse(this.scene.matrix, false);
+}
 
 CameraOrientation.prototype.render = function(renderer)
 {

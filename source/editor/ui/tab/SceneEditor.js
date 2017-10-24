@@ -50,7 +50,7 @@ function SceneEditor(parent, closeable, container, index)
 	this.toolScene = new THREE.Scene();
 
 	//Camera orientation scene
-	this.cameraOrientation = new CameraOrientation();
+	this.orientation = new CameraOrientation();
 
 	//Grid
 	this.gridHelper = new GridHelper(Settings.editor.gridSize, Settings.editor.gridSpacing, 0x888888);
@@ -1001,15 +1001,37 @@ SceneEditor.prototype.render = function()
 		if(Settings.editor.cameraRotationCube)
 		{
 			var size = Settings.editor.cameraRotationCubeSize;
+			var x = this.canvas.width - size;
+
 			renderer.setScissorTest(true);
-			renderer.setViewport(this.canvas.width - size, 0, size, size);
-			renderer.setScissor(this.canvas.width - size, 0, size, size);
-			
-			//Calculate direction vector
-			var cos = Math.cos(-this.cameraRotation.y);
-			this.cameraOrientation.camera.position.set(2 * Math.cos(this.cameraRotation.x) * cos, 2 * Math.sin(-this.cameraRotation.y), 2 * Math.sin(this.cameraRotation.x) * cos);
-			this.cameraOrientation.camera.lookAt(SceneEditor.ZERO);
-			this.cameraOrientation.render(renderer);
+			renderer.setViewport(x, 0, size, size);
+			renderer.setScissor(x, 0, size, size);
+
+			if(this.mouse.position.x > x && this.mouse.position.y > 0 && this.mouse.position.x < this.canvas.width && this.mouse.position.y < size)
+			{
+				this.tempVector2.set((this.mouse.position.x - x) / size * 2 - 1, -(this.mouse.position.y / size * 2 - 1));
+				this.raycaster.setFromCamera(this.tempVector2, this.orientation.camera);
+
+				var intersects = this.raycaster.intersectObjects(this.orientation.scene.children, true);
+				if(intersects.length > 0)
+				{
+					var object = intersects[0].object;
+					
+					if(this.mouse.buttonJustPressed(Mouse.LEFT))
+					{
+						//this.cameraRotation.set(0, 0);
+						//object.material.color.set(0xFFFF00);
+					}
+				}
+
+				if(this.mouse.buttonPressed(Mouse.LEFT))
+				{
+
+				}
+			}
+
+			this.orientation.updateRotation(this.camera);
+			this.orientation.render(renderer);
 		}
 
 		//Clear scissor configuration
