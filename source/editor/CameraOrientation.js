@@ -83,12 +83,10 @@ CameraOrientation.prototype.raycast = function(mouse)
 
 	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
 	
-	/*
-	if(intersects.length > 0)
+	/*if(intersects.length > 0)
 	{
 		intersects[0].object.material.color.set(0xFFFF00);
-	}
-	*/
+	}*/
 
 	return intersects;
 };
