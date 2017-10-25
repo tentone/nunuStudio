@@ -74,18 +74,21 @@ CameraOrientation.Z_NEG = 5;
 //Raycast cube from mouse normalized coordinates
 CameraOrientation.prototype.raycast = function(mouse)
 {
-	for(var i = 0; i < this.scene.children.length; i++)
+	/*for(var i = 0; i < this.scene.children.length; i++)
 	{
 		this.scene.children[i].material.color.set(0xFFFFFF);
-	}
+	}*/
 
 	this.raycaster.setFromCamera(mouse, this.camera);
 
 	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
+	
+	/*
 	if(intersects.length > 0)
 	{
 		intersects[0].object.material.color.set(0xFFFF00);
 	}
+	*/
 
 	return intersects;
 };
