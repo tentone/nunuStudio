@@ -352,7 +352,6 @@ SceneEditor.CAMERA_PERSPECTIVE = 21;
 //Constants
 SceneEditor.UP = new THREE.Vector3(0, 1, 0);
 SceneEditor.ZERO = new THREE.Vector3(0, 0, 0);
-
 SceneEditor.prototype = Object.create(TabElement.prototype);
 
 //Update container object data
@@ -849,11 +848,7 @@ SceneEditor.prototype.update = function()
 						this.cameraLookAt.z += direction.z * this.mouse.delta.x * speed;
 					}
 
-					//Update camera position and direction
-					var cos = Math.cos(this.cameraRotation.y);
-					this.camera.position.set(this.cameraDistance * Math.cos(this.cameraRotation.x) * cos, this.cameraDistance * Math.sin(this.cameraRotation.y), this.cameraDistance * Math.sin(this.cameraRotation.x) * cos);
-					this.camera.position.add(this.cameraLookAt);
-					this.camera.lookAt(this.cameraLookAt);
+					this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
 				}
 
 				//Update grid helper position
@@ -1025,25 +1020,21 @@ SceneEditor.prototype.render = function()
 				{
 					if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
 					{
-						if(!this.isEditingObject)
+						this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
+						this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
+
+						//Limit Vertical Rotation to 90 degrees
+						if(this.cameraRotation.y < -1.57)
 						{
-							this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
-							this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
-
-							//Limit Vertical Rotation to 90 degrees
-							if(this.cameraRotation.y < -1.57)
-							{
-								this.cameraRotation.y = -1.57;
-							}
-							else if(this.cameraRotation.y > 1.57)
-							{
-								this.cameraRotation.y = 1.57;
-							}
-
-							this.setCameraRotation(this.cameraRotation, this.camera);
+							this.cameraRotation.y = -1.57;
 						}
-					}
+						else if(this.cameraRotation.y > 1.57)
+						{
+							this.cameraRotation.y = 1.57;
+						}
 
+						this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
+					}
 				}
 			}
 
@@ -1162,11 +1153,13 @@ SceneEditor.prototype.setCameraMode = function(mode)
 
 	if(mode === SceneEditor.CAMERA_ORTHOGRAPHIC)
 	{
-		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL, 0.001);
-		this.camera.position.set(0, 0, 100);
+		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL, 0.001, 100000);
 		
-		this.cameraRotation.set(Math.PI, 0);
-		this.setCameraRotation(this.cameraRotation, this.camera);
+		this.cameraRotation.set(Math.PI / 2, 0);
+		this.cameraLookAt.set(0, 0, 0);
+		this.cameraDistance = 100;
+
+		this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
 
 		this.gridHelper.rotation.set(Math.PI / 2, 0, 0);
 		this.gridHelper.position.set(0, 0, 0);
@@ -1189,16 +1182,22 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	this.selectTool(this.toolMode);
 };
 
-//Set camera rotation
+//Set camera rotation (camera movement as an fps camera)
 SceneEditor.prototype.setCameraRotation = function(cameraRotation, camera)
 {
-	//Direction vector
-	var cosAngleY = Math.cos(cameraRotation.y);
-	this.tempVector3.set(Math.sin(cameraRotation.x)*cosAngleY, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cosAngleY);
- 
-	//Add position offset
+	var cos = Math.cos(cameraRotation.y);
+	this.tempVector3.set(Math.sin(cameraRotation.x)*cos, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cos);
 	this.tempVector3.add(camera.position);
 	camera.lookAt(this.tempVector3);
+};
+
+//Set camera rotation and position in orbit mode
+SceneEditor.prototype.setCameraRotationOrbit = function(cameraRotation, cameraLookAt, cameraDistance, camera)
+{
+	var cos = Math.cos(cameraRotation.y);
+	camera.position.set(cameraDistance * Math.cos(cameraRotation.x) * cos, cameraDistance * Math.sin(cameraRotation.y), cameraDistance * Math.sin(cameraRotation.x) * cos);
+	camera.position.add(cameraLookAt);
+	camera.lookAt(cameraLookAt);
 };
 
 //Set scene editor state
