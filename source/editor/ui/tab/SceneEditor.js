@@ -1017,12 +1017,32 @@ SceneEditor.prototype.render = function()
 					if(intersects.length > 0)
 					{
 						var object = intersects[0].object;
-					
+						
 					}
 				}
 
 				if(this.mouse.buttonPressed(Mouse.LEFT))
 				{
+					if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
+					{
+						if(!this.isEditingObject)
+						{
+							this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
+							this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
+
+							//Limit Vertical Rotation to 90 degrees
+							if(this.cameraRotation.y < -1.57)
+							{
+								this.cameraRotation.y = -1.57;
+							}
+							else if(this.cameraRotation.y > 1.57)
+							{
+								this.cameraRotation.y = 1.57;
+							}
+
+							this.setCameraRotation(this.cameraRotation, this.camera);
+						}
+					}
 
 				}
 			}
@@ -1142,9 +1162,12 @@ SceneEditor.prototype.setCameraMode = function(mode)
 
 	if(mode === SceneEditor.CAMERA_ORTHOGRAPHIC)
 	{
-		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL);
-		this.camera.position.set(0, 0, 20);
+		this.camera = new OrthographicCamera(10, aspect, OrthographicCamera.RESIZE_HORIZONTAL, 0.001);
+		this.camera.position.set(0, 0, 100);
 		
+		this.cameraRotation.set(Math.PI, 0);
+		this.setCameraRotation(this.cameraRotation, this.camera);
+
 		this.gridHelper.rotation.set(Math.PI / 2, 0, 0);
 		this.gridHelper.position.set(0, 0, 0);
 	}
@@ -1153,7 +1176,7 @@ SceneEditor.prototype.setCameraMode = function(mode)
 		this.camera = new PerspectiveCamera(60, aspect);
 		this.camera.position.set(0, 3, 5);
 
-		this.cameraRotation.set(3.14, 0);
+		this.cameraRotation.set(Math.PI, 0);
 		this.cameraLookAt.set(0, 0, 0);
 		this.cameraDistance = 10;
 		this.setCameraRotation(this.cameraRotation, this.camera);
