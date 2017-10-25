@@ -1010,17 +1010,14 @@ SceneEditor.prototype.render = function()
 			if(this.mouse.position.x > x && this.mouse.position.y > 0 && this.mouse.position.x < this.canvas.width && this.mouse.position.y < size)
 			{
 				this.tempVector2.set((this.mouse.position.x - x) / size * 2 - 1, -(this.mouse.position.y / size * 2 - 1));
-				this.raycaster.setFromCamera(this.tempVector2, this.orientation.camera);
-
-				var intersects = this.raycaster.intersectObjects(this.orientation.scene.children, true);
-				if(intersects.length > 0)
+				var intersects = this.orientation.raycast(this.tempVector2);
+				
+				if(this.mouse.buttonJustPressed(Mouse.LEFT))
 				{
-					var object = intersects[0].object;
-					
-					if(this.mouse.buttonJustPressed(Mouse.LEFT))
+					if(intersects.length > 0)
 					{
-						//this.cameraRotation.set(0, 0);
-						//object.material.color.set(0xFFFF00);
+						var object = intersects[0].object;
+					
 					}
 				}
 
@@ -1175,7 +1172,7 @@ SceneEditor.prototype.setCameraRotation = function(cameraRotation, camera)
 	//Direction vector
 	var cosAngleY = Math.cos(cameraRotation.y);
 	this.tempVector3.set(Math.sin(cameraRotation.x)*cosAngleY, Math.sin(cameraRotation.y), Math.cos(cameraRotation.x)*cosAngleY);
-
+ 
 	//Add position offset
 	this.tempVector3.add(camera.position);
 	camera.lookAt(this.tempVector3);
@@ -1264,11 +1261,11 @@ SceneEditor.prototype.setState = function(state)
 				this.mouse.setLock(true);
 			}
 
-			//Set renderer size
+			//Renderer size
 			this.renderer.setViewport(0, 0, this.canvas.width, this.canvas.height);
 			this.renderer.setScissor(0, 0, this.canvas.width, this.canvas.height);
 
-			//Set run button text
+			//Run button text
 			Interface.run.setText("Stop");
 			Interface.run.visible = true;
 			Interface.run.updateInterface();
