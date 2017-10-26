@@ -1013,6 +1013,39 @@ SceneEditor.prototype.render = function()
 					{
 						var object = intersects[0].object;
 						
+						if(object.code === CameraOrientation.Z_POS)
+						{
+							this.cameraRotation.set(Math.PI, 0);
+						}
+						else if(object.code === CameraOrientation.Z_NEG)
+						{
+							this.cameraRotation.set(0, 0);
+						}
+						else if(object.code === CameraOrientation.X_POS)
+						{
+							this.cameraRotation.set(-Math.PI / 2, 0);
+						}
+						else if(object.code === CameraOrientation.X_NEG)
+						{
+							this.cameraRotation.set(Math.PI / 2, 0);
+						}
+						else if(object.code === CameraOrientation.Y_POS)
+						{
+							this.cameraRotation.set(Math.PI, +1.57);
+						}
+						else if(object.code === CameraOrientation.Y_NEG)
+						{
+							this.cameraRotation.set(Math.PI, 1.57);
+						}
+
+						if(Settings.editor.navigation === Settings.FREE)
+						{
+							this.setCameraRotation(this.cameraRotation, this.camera);
+						}
+						else
+						{
+							this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
+						}
 					}
 				}
 
