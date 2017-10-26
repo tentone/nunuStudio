@@ -1007,44 +1007,69 @@ SceneEditor.prototype.render = function()
 				this.tempVector2.set((this.mouse.position.x - x) / size * 2 - 1, -(this.mouse.position.y / size * 2 - 1));
 				var intersects = this.orientation.raycast(this.tempVector2);
 				
-				if(this.mouse.buttonJustPressed(Mouse.LEFT))
+				if(this.mouse.buttonDoubleClicked())
 				{
 					if(intersects.length > 0)
 					{
 						var object = intersects[0].object;
-						
-						if(object.code === CameraOrientation.Z_POS)
-						{
-							this.cameraRotation.set(Math.PI, 0);
-						}
-						else if(object.code === CameraOrientation.Z_NEG)
-						{
-							this.cameraRotation.set(0, 0);
-						}
-						else if(object.code === CameraOrientation.X_POS)
-						{
-							this.cameraRotation.set(-Math.PI / 2, 0);
-						}
-						else if(object.code === CameraOrientation.X_NEG)
-						{
-							this.cameraRotation.set(Math.PI / 2, 0);
-						}
-						else if(object.code === CameraOrientation.Y_POS)
-						{
-							this.cameraRotation.set(Math.PI, +1.57);
-						}
-						else if(object.code === CameraOrientation.Y_NEG)
-						{
-							this.cameraRotation.set(Math.PI, 1.57);
-						}
 
-						if(Settings.editor.navigation === Settings.FREE)
+						if(Settings.editor.navigation === Settings.ORBIT || this.camera instanceof OrthographicCamera)
 						{
-							this.setCameraRotation(this.cameraRotation, this.camera);
+							if(object.code === CameraOrientation.Z_POS)
+							{
+								this.cameraRotation.set(Math.PI / 2, 0);
+							}
+							else if(object.code === CameraOrientation.Z_NEG)
+							{
+								this.cameraRotation.set(-Math.PI / 2, 0);
+							}
+							else if(object.code === CameraOrientation.X_POS)
+							{
+								this.cameraRotation.set(0, 0);
+							}
+							else if(object.code === CameraOrientation.X_NEG)
+							{
+								this.cameraRotation.set(Math.PI, 0);
+							}
+							else if(object.code === CameraOrientation.Y_POS)
+							{
+								this.cameraRotation.set(Math.PI, 1.57);
+							}
+							else if(object.code === CameraOrientation.Y_NEG)
+							{
+								this.cameraRotation.set(Math.PI, -1.57);
+							}
+
+							this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
 						}
 						else
 						{
-							this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
+							if(object.code === CameraOrientation.Z_POS)
+							{
+								this.cameraRotation.set(Math.PI, 0);
+							}
+							else if(object.code === CameraOrientation.Z_NEG)
+							{
+								this.cameraRotation.set(0, 0);
+							}
+							else if(object.code === CameraOrientation.X_POS)
+							{
+								this.cameraRotation.set(-Math.PI / 2, 0);
+							}
+							else if(object.code === CameraOrientation.X_NEG)
+							{
+								this.cameraRotation.set(Math.PI / 2, 0);
+							}
+							else if(object.code === CameraOrientation.Y_POS)
+							{
+								this.cameraRotation.set(Math.PI, -1.57);
+							}
+							else if(object.code === CameraOrientation.Y_NEG)
+							{
+								this.cameraRotation.set(Math.PI, 1.57);
+							}
+
+							this.setCameraRotation(this.cameraRotation, this.camera);
 						}
 					}
 				}
