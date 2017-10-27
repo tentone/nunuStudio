@@ -208,6 +208,38 @@ function TabButton(parent, tab)
 	this.parent.appendChild(this.element);
 }
 
+//Set alt text
+TabButton.prototype.setAltText = function(altText)
+{
+	var text = new Text();
+	text.element.style.backgroundColor = Editor.theme.barColor;
+	text.element.style.zIndex = "1000";
+	text.element.style.border = "3px solid";
+	text.element.style.borderRadius = "5px";
+	text.element.style.borderColor = Editor.theme.barColor;
+	text.setText(altText);
+	text.visible = false;
+	text.fitContent = true;
+	text.updateInterface();
+
+	//Mouse mouse move event
+	this.element.onmousemove = function(event)
+	{
+		text.size.set(0, 20);
+		text.position.set(event.clientX - text.size.x/2, event.clientY - 30);
+		text.visible = true;
+		text.updateInterface();
+	};
+
+	//Mouse out event (to avoid overlap with mouse leave event)
+	this.element.onmouseout = function()
+	{
+		text.visible = false;
+		text.updateInterface();
+	}
+};
+
+
 //Set button icon
 TabButton.prototype.setIcon = function(icon)
 {

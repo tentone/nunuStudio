@@ -1488,7 +1488,7 @@ SceneEditor.prototype.selectObjectHelper = function()
 		//Container
 		else if(object instanceof Container)
 		{
-			this.objectHelper.add(new BoundingBoxHelper(object, 0xFFFF00));
+			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 		else if(object instanceof SpineAnimation)
 		{
