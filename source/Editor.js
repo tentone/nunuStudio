@@ -1507,28 +1507,30 @@ Editor.loadModel = function(file, onLoad)
 				var reader = new FileReader();
 				reader.onload = function()
 				{
-					//Try loading with OBJLoader1
+					//Try loading with OBJLoader2
 					try
 					{
-						var loader = new THREE.OBJLoader();
+						var loader = new THREE.OBJLoader2();
 						if(materials !== null)
 						{
 							loader.setMaterials(materials);
 						}
-						var obj = loader.parse(reader.result);
+						var obj = loader.parseText(reader.result);
 						Editor.addToScene(obj);
 					}
 					catch(e)
 					{
-						//Try loading with OBJLoader2
+						console.warn("nunuStudio: Failed to load with ObjLoader2 trying with ObjLoader", e);
+
+						//Try loading with OBJLoader1
 						try
 						{
-							var loader = new THREE.OBJLoader2();
+							var loader = new THREE.OBJLoader();
 							if(materials !== null)
 							{
 								loader.setMaterials(materials);
 							}
-							var obj = loader.parseText(reader.result);
+							var obj = loader.parse(reader.result);
 							Editor.addToScene(obj);
 						}
 						catch(f)
