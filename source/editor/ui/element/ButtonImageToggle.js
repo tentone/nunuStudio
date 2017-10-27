@@ -113,6 +113,9 @@ ButtonImageToggle.prototype.setAltText = function(altText)
 	var text = new Text();
 	text.element.style.backgroundColor = Editor.theme.barColor;
 	text.element.style.zIndex = "1000";
+	text.element.style.border = "3px solid";
+	text.element.style.borderRadius = "5px";
+	text.element.style.borderColor = Editor.theme.barColor;
 	text.setText(altText);
 	text.visible = false;
 	text.fitContent = true;

@@ -26,11 +26,14 @@ Interface.initialize = function()
 	//Asset explorer
 	Interface.assetExplorer = Interface.bottomTab.addTab(AssetExplorer, false);
 	Interface.assetExplorer.filesSize.set(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
+	Interface.assetExplorer.button.setAltText("Asset explorer");
 
 	Interface.console = Interface.bottomTab.addTab(ConsoleTab, false);
+	Interface.console.button.setAltText("Console");
 
-	Interface.animation = Interface.bottomTab.addTab(AnimationTab, false);
-
+	//Interface.animation = Interface.bottomTab.addTab(AnimationTab, false);
+	//Interface.animation.button.setAltText("Animation");
+	
 	//Explorer
 	Interface.explorer = new DivisionResizable();
 	Interface.explorer.size.x = 300;
