@@ -159,6 +159,30 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.axisEnabled);
 	this.form.nextRow();
 
+	//Enable orientation cube
+	this.form.addText("Orientation cube");
+	this.cameraRotationCube = new CheckBox(this.form.element);
+	this.cameraRotationCube.size.set(15, 15);
+	this.cameraRotationCube.setOnChange(function()
+	{
+		Settings.editor.cameraRotationCube = self.cameraRotationCube.getValue();
+	});
+	this.form.add(this.cameraRotationCube);
+	this.form.nextRow();
+
+	//Orientation cube size
+	this.form.addText("Orientation cube size");
+	this.cameraRotationCubeSize = new NumberBox(this.form.element);
+	this.cameraRotationCubeSize.size.set(60, 18);
+	this.cameraRotationCubeSize.setRange(1.0, Number.MAX_SAFE_INTEGER);
+	this.cameraRotationCubeSize.setStep(1.0);
+	this.cameraRotationCubeSize.setOnChange(function()
+	{
+		Settings.editor.cameraRotationCubeSize = self.cameraRotationCubeSize.getValue();
+	});
+	this.form.add(this.cameraRotationCubeSize);
+	this.form.nextRow();
+
 	//Snap to grid
 	this.form.addText("Snap to grid");
 	this.snap = new CheckBox(this.form.element);
@@ -401,6 +425,8 @@ GeneralSettingsTab.prototype.activate = function()
 	this.gridSize.setValue(Settings.editor.gridSize);
 	this.gridSpacing.setValue(Settings.editor.gridSpacing);
 	this.axisEnabled.setValue(Settings.editor.axisEnabled);
+	this.cameraRotationCube.setValue(Settings.editor.cameraRotationCube);
+	this.cameraRotationCubeSize.setValue(Settings.editor.cameraRotationCubeSize);
 
 	//Navigation
 	this.lockMouse.setValue(Settings.editor.lockMouse);
