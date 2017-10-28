@@ -289,7 +289,7 @@ Interface.initialize = function()
 	addCamera.addOption(Editor.filePath + "icons/camera/orthographic.png", function()
 	{
 		Editor.addToScene(new OrthographicCamera(3, 2, OrthographicCamera.RESIZE_HORIZONTAL));
-	}, "Othographic Camera");
+	}, "Orthographic Camera");
 
 	//Add script
 	var addScript = new ButtonDrawer(Interface.toolBar.element);
