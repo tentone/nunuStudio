@@ -410,7 +410,7 @@ Interface.initialize = function()
 	addPhysics.addOption(Editor.filePath + "icons/models/plane.png", function()
 	{
 		var obj = new PhysicsObject();
-		obj.rotation.x = -1.57;
+		obj.rotation.x = -Math.PI / 2;
 		obj.body.addShape(new CANNON.Plane());
 		obj.body.type = CANNON.Body.KINEMATIC;
 		obj.name = "ground";

@@ -25,7 +25,7 @@ function PhysicsObjectHelper(obj, color)
 
 PhysicsObjectHelper.sphere = new THREE.SphereBufferGeometry(1, 24, 24);
 PhysicsObjectHelper.box = new THREE.BoxBufferGeometry(1, 1, 1);
-PhysicsObjectHelper.plane = new THREE.PlaneBufferGeometry(100, 100, 1, 1);
+PhysicsObjectHelper.plane = new THREE.PlaneBufferGeometry(100, 100);
 PhysicsObjectHelper.cylinder = new THREE.CylinderBufferGeometry(1, 1, 10, 32);
 
 PhysicsObjectHelper.prototype = Object.create(THREE.Object3D.prototype);
@@ -127,6 +127,7 @@ PhysicsObjectHelper.prototype.createMesh = function(shape)
 
 		case CANNON.Shape.types.PLANE:
 			mesh = new THREE.Mesh(PhysicsObjectHelper.plane, material);
+			mesh.scale.set(1000, 1000, 1);
 			break;
 
 		case CANNON.Shape.types.CONVEXPOLYHEDRON:
