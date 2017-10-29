@@ -133,23 +133,3 @@ RenderSettingsTab.prototype.activate = function()
 	this.toneMappingExposure.setValue(Settings.render.toneMappingExposure);
 	this.toneMappingWhitePoint.setValue(Settings.render.toneMappingWhitePoint);
 };
-
-//Update division Size
-RenderSettingsTab.prototype.updateInterface = function()
-{
-	//Visibility
-	if(this.visible)
-	{
-		this.element.style.display = "block";
-
-		//Element
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
-};
