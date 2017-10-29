@@ -2,14 +2,11 @@
 
 function AudioPlayer(parent)
 {
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
 	//WebAudio context
 	this.context = THREE.AudioContext.getContext();
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.overflow = "visible";
 
 	//Timer
@@ -194,17 +191,10 @@ function AudioPlayer(parent)
 			requestAnimationFrame(draw);
 		}
 	}
-	
 	draw();
-
-	//Attributes
-	this.visible = true;
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	
-	//Attach element
-	this.parent.appendChild(this.element);
 }
+
+AudioPlayer.prototype = Object.create(Element.prototype);
 
 //Decode audio
 AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
@@ -323,7 +313,10 @@ AudioPlayer.prototype.destroy = function()
 		this.stop();
 
 		//Remove element
-		this.parent.removeChild(this.element);
+		if(this.parent.contains(this.element))
+		{
+			this.parent.removeChild(this.element);
+		}
 		this.parent = null;
 	}
 	catch(e){}

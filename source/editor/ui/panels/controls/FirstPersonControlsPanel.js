@@ -25,8 +25,8 @@ function FirstPersonControlsPanel(parent, obj)
 	this.form.addText("Sensitivity");
 	this.sensitivity = new Slider(this.form.element);
 	this.sensitivity.size.set(140, 18);
-	this.sensitivity.setStep(0.001);
-	this.sensitivity.setRange(0, 0.1);
+	this.sensitivity.setStep(0.0001);
+	this.sensitivity.setRange(0, 0.05);
 	this.sensitivity.setOnChange(function()
 	{
 		if(self.obj !== null)
@@ -56,7 +56,7 @@ function FirstPersonControlsPanel(parent, obj)
 	this.moveSpeed = new Slider(this.form.element);
 	this.moveSpeed.size.set(140, 18);
 	this.moveSpeed.setStep(0.01);
-	this.moveSpeed.setRange(0, 2);
+	this.moveSpeed.setRange(0, 0.5);
 	this.moveSpeed.setOnChange(function()
 	{
 		if(self.obj !== null)

@@ -85,8 +85,8 @@ function OrbitControlsPanel(parent, obj)
 	this.form.addText("Sensitivity");
 	this.sensitivity = new Slider(this.form.element);
 	this.sensitivity.size.set(140, 18);
-	this.sensitivity.setStep(0.001);
-	this.sensitivity.setRange(0, 0.1);
+	this.sensitivity.setStep(0.0001);
+	this.sensitivity.setRange(0, 0.05);
 	this.sensitivity.setOnChange(function()
 	{
 		if(self.obj !== null)

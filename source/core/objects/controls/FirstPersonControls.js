@@ -95,6 +95,8 @@ FirstPersonControls.prototype.initialize = function()
 		}
 	}
 
+	this.updateControls();
+	
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
@@ -116,8 +118,65 @@ FirstPersonControls.prototype.update = function()
 		{
 			this.vector.y = 1.57;
 		}
+
+		this.updateControls();
 	}
 
+	if(this.movementEnabled)
+	{
+		if(this.keyboard.keyPressed(this.moveKeys[0]))
+		{
+			var direction = this.getWorldDirection();
+			if(this.moveOnPlane)
+			{
+				direction.y = 0;
+			}
+			direction.normalize();
+			direction.multiplyScalar(this.moveSpeed);
+			this.position.sub(direction);
+		}
+		if(this.keyboard.keyPressed(this.moveKeys[1]))
+		{
+			var direction = this.getWorldDirection();
+			if(this.moveOnPlane)
+			{
+				direction.y = 0;
+			}
+			direction.normalize();
+			direction.multiplyScalar(this.moveSpeed);
+			this.position.add(direction);
+		}
+		if(this.keyboard.keyPressed(this.moveKeys[2]))
+		{
+			var direction = new THREE.Vector3(Math.sin(this.vector.x - 1.57), 0, Math.cos(this.vector.x - 1.57));
+			direction.normalize();
+			direction.multiplyScalar(this.moveSpeed);
+			this.position.sub(direction);
+		}
+		if(this.keyboard.keyPressed(this.moveKeys[3]))
+		{
+			var direction = new THREE.Vector3(Math.sin(this.vector.x + 1.57), 0, Math.cos(this.vector.x + 1.57));
+			direction.normalize();
+			direction.multiplyScalar(this.moveSpeed);
+			this.position.sub(direction);
+		}
+	}
+	
+	for(var i = 0; i < this.children.length; i++)
+	{
+		this.children[i].update();
+	}
+};
+
+/**
+ * Update controls position and rotation.
+ *
+ * Should be called if some of its properties are changed manually.
+ *
+ * @method updateControls
+ */
+FirstPersonControls.prototype.updateControls = function()
+{
 	var cos = Math.cos(this.vector.y);
 	var direction = new THREE.Vector3(Math.sin(this.vector.x) * cos, Math.sin(this.vector.y), Math.cos(this.vector.x) * cos);
 	direction.add(this.position);
@@ -125,48 +184,6 @@ FirstPersonControls.prototype.update = function()
 	var matrix = new THREE.Matrix4();
 	matrix.lookAt(this.position, direction, FirstPersonControls.UP);
 	this.quaternion.setFromRotationMatrix(matrix);
-
-	if(this.keyboard.keyPressed(this.moveKeys[0]))
-	{
-		var direction = this.getWorldDirection();
-		if(this.moveOnPlane)
-		{
-			direction.y = 0;
-		}
-		direction.normalize();
-		direction.multiplyScalar(this.moveSpeed);
-		this.position.sub(direction);
-	}
-	if(this.keyboard.keyPressed(this.moveKeys[1]))
-	{
-		var direction = this.getWorldDirection();
-		if(this.moveOnPlane)
-		{
-			direction.y = 0;
-		}
-		direction.normalize();
-		direction.multiplyScalar(this.moveSpeed);
-		this.position.add(direction);
-	}
-	if(this.keyboard.keyPressed(this.moveKeys[2]))
-	{
-		var direction = new THREE.Vector3(Math.sin(this.vector.x - 1.57), 0, Math.cos(this.vector.x - 1.57));
-		direction.normalize();
-		direction.multiplyScalar(this.moveSpeed);
-		this.position.sub(direction);
-	}
-	if(this.keyboard.keyPressed(this.moveKeys[3]))
-	{
-		var direction = new THREE.Vector3(Math.sin(this.vector.x + 1.57), 0, Math.cos(this.vector.x + 1.57));
-		direction.normalize();
-		direction.multiplyScalar(this.moveSpeed);
-		this.position.sub(direction);
-	}
-	
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
-	}
 };
 
 /**

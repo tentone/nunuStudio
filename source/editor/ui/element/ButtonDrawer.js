@@ -2,27 +2,13 @@
 
 function ButtonDrawer(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.zIndex = "200";
 	this.element.style.cursor = "pointer";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	
-	//Prevent drop event
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent dragged over event
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
+	this.preventDragEvents();
 
 	//Panel
 	this.panel = document.createElement("div");
@@ -43,11 +29,6 @@ function ButtonDrawer(parent)
 
 	//Image scale
 	this.imageScale = new THREE.Vector2(0.7, 0.7);
-
-	//Attributes
-	this.size = new THREE.Vector2(0, 0);
-	this.position = new THREE.Vector2(0, 0);
-	this.visible = true;
 
 	//Attributes
 	this.panelSize = new THREE.Vector2(0, 0);
@@ -96,9 +77,10 @@ function ButtonDrawer(parent)
 	this.updatePanelSize();
 
 	//Add elements to document
-	this.parent.appendChild(this.element);
 	this.parent.appendChild(this.panel);
 }
+
+ButtonDrawer.prototype = Object.create(Element.prototype);
 
 //Remove element
 ButtonDrawer.prototype.destroy = function()

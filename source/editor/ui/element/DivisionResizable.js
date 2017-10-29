@@ -2,25 +2,13 @@
 
 function DivisionResizable(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
+	this.preventDragEvents();
 
 	//Create division resize tab
 	this.resizeTab = document.createElement("div");
@@ -28,11 +16,6 @@ function DivisionResizable(parent)
 	this.resizeTab.style.position = "absolute";
 	this.resizeTab.style.cursor = "e-resize";
 	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
-
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
 
 	//Resize control
 	this.resizeSizeMax = Number.MAX_VALUE;
@@ -116,7 +99,6 @@ function DivisionResizable(parent)
 		Interface.updateInterface();
 	};
 
-	this.parent.appendChild(this.element);
 	this.parent.appendChild(this.resizeTab);
 }
 
@@ -125,6 +107,8 @@ DivisionResizable.LEFT = 0;
 DivisionResizable.RIGHT = 1;
 DivisionResizable.TOP = 2;
 DivisionResizable.BOTTOM = 3;
+
+DivisionResizable.prototype = Object.create(Element.prototype);
 
 //Set container
 DivisionResizable.prototype.setOnResize = function(callback)
@@ -135,12 +119,15 @@ DivisionResizable.prototype.setOnResize = function(callback)
 //Remove element
 DivisionResizable.prototype.destroy = function()
 {
-	try
+	if(this.parent.contains(this.element))
 	{
-		this.parent.removeChild(this.resizeTab);
 		this.parent.removeChild(this.element);
 	}
-	catch(e){}
+
+	if(this.parent.contains(this.resizeTab))
+	{
+		this.parent.removeChild(this.resizeTab);
+	}
 };
 
 //Update DivisionResizable Size
