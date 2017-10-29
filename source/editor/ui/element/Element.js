@@ -46,6 +46,8 @@ Element.prototype.setAltText = function(altText)
 	text.fitContent = true;
 	text.updateInterface();
 
+	this.element.style.pointerEvents = "auto";
+
 	//Mouse mouse move event
 	this.element.onmousemove = function(event)
 	{
