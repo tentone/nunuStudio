@@ -610,9 +610,16 @@ SceneEditor.prototype.update = function()
 				if(this.mouse.buttonPressed(Mouse.RIGHT))
 				{
 					var ratio = this.camera.size / this.canvas.width * 2;
+					var x = this.mouse.delta.x * ratio;
 
 					this.camera.position.x -= this.mouse.delta.x * ratio;
 					this.camera.position.y += this.mouse.delta.y * ratio;
+				}
+
+				//Rotate camera
+				if(this.mouse.buttonPressed(Mouse.MIDDLE))
+				{
+					this.updateOrthographicCameraRotation();
 				}
 
 				//Camera zoom
@@ -1078,20 +1085,7 @@ SceneEditor.prototype.render = function()
 				{
 					if(this.cameraMode === SceneEditor.CAMERA_ORTHOGRAPHIC)
 					{
-						this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
-						this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
-
-						//Limit Vertical Rotation to 90 degrees
-						if(this.cameraRotation.y < -1.57)
-						{
-							this.cameraRotation.y = -1.57;
-						}
-						else if(this.cameraRotation.y > 1.57)
-						{
-							this.cameraRotation.y = 1.57;
-						}
-
-						this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
+						this.updateOrthographicCameraRotation();
 					}
 				}
 			}
@@ -1239,6 +1233,25 @@ SceneEditor.prototype.setCameraMode = function(mode)
 	this.cameraMode = mode;
 	this.selectTool(this.toolMode);
 };
+
+//Update orthographic camera rotation
+SceneEditor.prototype.updateOrthographicCameraRotation = function()
+{
+	this.cameraRotation.y -= Settings.editor.mouseLookSensitivity * this.mouse.delta.y;
+	this.cameraRotation.x -= Settings.editor.mouseLookSensitivity * this.mouse.delta.x;
+
+	//Limit Vertical Rotation to 90 degrees
+	if(this.cameraRotation.y < -1.57)
+	{
+		this.cameraRotation.y = -1.57;
+	}
+	else if(this.cameraRotation.y > 1.57)
+	{
+		this.cameraRotation.y = 1.57;
+	}
+
+	this.setCameraRotationOrbit(this.cameraRotation, this.cameraLookAt, this.cameraDistance, this.camera);
+}
 
 //Set camera rotation (camera movement as an fps camera)
 SceneEditor.prototype.setCameraRotation = function(cameraRotation, camera)

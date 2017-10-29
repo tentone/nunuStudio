@@ -13,6 +13,9 @@ function CameraOrientation()
 	this.scene = new THREE.Scene();
 	this.scene.matrixAutoUpdate = false;
 
+	//Selected face
+	this.selected = null;
+
 	var plane = new THREE.PlaneBufferGeometry(1, 1);
 
 	//Cube faces
@@ -74,20 +77,16 @@ CameraOrientation.Z_NEG = 5;
 //Raycast cube from mouse normalized coordinates
 CameraOrientation.prototype.raycast = function(mouse)
 {
-	for(var i = 0; i < this.scene.children.length; i++)
-	{
-		this.scene.children[i].material.color.set(0xFFFFFF);
-	}
-
 	this.raycaster.setFromCamera(mouse, this.camera);
 
 	var intersects = this.raycaster.intersectObjects(this.scene.children, true);
 	
 	if(intersects.length > 0)
 	{
-		intersects[0].object.material.color.set(0xFFFF00);
+		this.selected = intersects[0].object;
+		this.selected.material.color.set(0xFFFF00);
 	}
-
+	
 	return intersects;
 };
 
@@ -102,4 +101,10 @@ CameraOrientation.prototype.updateRotation = function(camera)
 CameraOrientation.prototype.render = function(renderer)
 {
 	renderer.render(this.scene, this.camera);
+
+	if(this.selected !== null)
+	{
+		this.selected.material.color.set(0xFFFFFF);
+		this.selected = null;
+	}
 };
