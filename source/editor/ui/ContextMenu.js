@@ -2,24 +2,13 @@
 
 function ContextMenu(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.zIndex = "300";
 
-	//Attributes
-	this.size = new THREE.Vector2(130, 20);
-	this.position = new THREE.Vector2(0, 0);
 	this.offset = new THREE.Vector2(20, 10);
-	this.visible = true;
-
-	//Options
 	this.options = [];
 
-	//Self pointer
 	var self = this;
 
 	//Mouse leave
@@ -27,24 +16,14 @@ function ContextMenu(parent)
 	{
 		self.destroy();
 	};
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+ContextMenu.prototype = Object.create(Element.prototype);
 
 //Set Text
 ContextMenu.prototype.setText = function(text)
 {
 	this.text.setText(text);
-};
-
-//Remove element
-ContextMenu.prototype.destroy = function()
-{	
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
 };
 
 //Remove option from context menu

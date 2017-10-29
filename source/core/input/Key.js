@@ -52,6 +52,9 @@ Key.UP = 1;
  */
 Key.RESET = 0;
 
+
+Key.prototype.constructor = Key;
+
 /**
  * Update Key status based on new key state.
  * 

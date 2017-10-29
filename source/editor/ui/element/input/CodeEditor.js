@@ -2,12 +2,8 @@
 
 function CodeEditor(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Create element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
@@ -97,15 +93,9 @@ function CodeEditor(parent)
 		
 		context.updateInterface();
 	};
-
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-	
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+CodeEditor.prototype = Object.create(Element.prototype);
 
 //Set language mode (javascript, glsl, etc)
 CodeEditor.prototype.setMode = function(mode)
@@ -129,15 +119,6 @@ CodeEditor.prototype.setValue = function(text)
 CodeEditor.prototype.getValue = function()
 {
 	return this.code.getValue();
-};
-
-//Remove element
-CodeEditor.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
 };
 
 //Update Interface

@@ -58,6 +58,7 @@ function Keyboard()
 }
 
 Keyboard.prototype = Keyboard;
+Keyboard.prototype.constructor = Keyboard;
 
 /**
  * Update key flags synchronously.

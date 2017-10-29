@@ -2,12 +2,8 @@
 
 function Asset(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
+	Element.call(this, parent);
+
 	this.element.style.cursor = "pointer";
 
 	//Icon
@@ -38,11 +34,6 @@ function Asset(parent)
 	this.text.style.bottom = "0px";
 	this.element.appendChild(this.text);
 
-	//Attributes
-	this.size = new THREE.Vector2(0, 0);
-	this.position = new THREE.Vector2(0, 0);
-	this.visible = true;
-
 	//Icon scale
 	this.scale = new THREE.Vector2(0.65, 0.65);
 
@@ -57,10 +48,9 @@ function Asset(parent)
 	{
 		this.style.backgroundColor = "";
 	};
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+Asset.prototype = Object.create(Element.prototype);
 
 //Set parent
 Asset.prototype.setParent = function(parent)
@@ -84,29 +74,19 @@ Asset.prototype.setText = function(text)
 	this.text.innerHTML = text;
 };
 
-//Remove element
-Asset.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
-};
-
 //Update Interface
 Asset.prototype.updateInterface = function()
 {
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-	this.element.style.top = this.position.y + "px";
-	this.element.style.left = this.position.x + "px";
-	this.element.style.width = this.size.x + "px";
-	this.element.style.height = this.size.y + "px";
 };

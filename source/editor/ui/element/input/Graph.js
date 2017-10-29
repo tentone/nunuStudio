@@ -2,12 +2,8 @@
 
 function Graph(parent, name, color)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
 
 	//Grid
@@ -44,15 +40,9 @@ function Graph(parent, name, color)
 	//Graph range
 	this.min = 0.0;
 	this.max = 1.0;
-
-	//Attributes
-	this.size = new THREE.Vector2(0, 0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-	
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+Graph.prototype = Object.create(Element.prototype);
 
 //Add graph
 Graph.prototype.addGraph = function(name, color)
@@ -282,15 +272,6 @@ Graph.prototype.updateGrid = function()
 		context.moveTo(0, i);
 		context.lineTo(this.size.x, i);
 		context.stroke();
-	}
-};
-
-//Remove element
-Graph.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
 	}
 };
 

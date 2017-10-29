@@ -2,12 +2,8 @@
 
 function Panel(parent, obj)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
 	this.element.style.cursor = "default";
 	this.element.style.top = "0px";
@@ -16,22 +12,7 @@ function Panel(parent, obj)
 	this.element.style.height = "100%";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
-	//Prevent Drop event
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Prevent deafault when object dragged over
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
-
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
+	this.preventDragEvents();
 
 	//Self pointer
 	var self = this;
@@ -168,10 +149,9 @@ function Panel(parent, obj)
 
 	//Attach object
 	this.attach(obj);
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+Panel.prototype = Object.create(Element.prototype);
 
 //Attach object to panel
 Panel.prototype.attach = function(obj)
@@ -183,15 +163,6 @@ Panel.prototype.attach = function(obj)
 	else
 	{
 		this.obj = null;
-	}
-};
-
-//Remove element
-Panel.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
 	}
 };
 

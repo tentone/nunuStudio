@@ -2,24 +2,12 @@
 
 function TabGroup(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
+	this.preventDragEvents();
 	
 	//Buttons
 	this.buttons = document.createElement("div");
@@ -46,19 +34,11 @@ function TabGroup(parent)
 	this.empty.innerHTML = "Open new tab to edit content or create new project";
 	this.tab.appendChild(this.empty);
 
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-
 	//Options
 	this.mode = TabGroup.TOP;
 	this.buttonSize = new THREE.Vector2(150, 25);
 	this.selected = null;
 	this.options = [];
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
 
 //Tab buttons position
@@ -66,6 +46,8 @@ TabGroup.TOP = 0;
 TabGroup.BOTTOM = 1;
 TabGroup.LEFT = 2;
 TabGroup.RIGHT = 3;
+
+TabGroup.prototype = Object.create(Element.prototype);
 
 //Update all tabs object data
 TabGroup.prototype.updateMetadata = function()

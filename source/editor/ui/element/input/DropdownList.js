@@ -2,12 +2,8 @@
 
 function DropdownList(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent, "select");
 
-	//Element
-	this.element = document.createElement("select");
-	this.element.style.position = "absolute";
 	this.element.style.backgroundColor = Editor.theme.boxColor;
 	this.element.style.color = Editor.theme.textColor;
 	this.element.style.borderStyle = "none";
@@ -17,13 +13,9 @@ function DropdownList(parent)
 	
 	//Attributes
 	this.values = [];
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+DropdownList.prototype = Object.create(Element.prototype);
 
 //Set if element if disabled
 DropdownList.prototype.setDisabled = function(value)
@@ -97,15 +89,6 @@ DropdownList.prototype.getSelectedIndex = function()
 DropdownList.prototype.setSelectedIndex = function(index)
 {
 	this.element.selectedIndex = index;
-}
-
-//Remove element
-DropdownList.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
 }
 
 //Update Interface

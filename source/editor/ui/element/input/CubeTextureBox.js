@@ -2,12 +2,7 @@
 
 function CubeTextureBox(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-
-	//Base element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
+	Element.call(this, parent);
 
 	//Texture preview division
 	this.preview = document.createElement("div");
@@ -78,17 +73,11 @@ function CubeTextureBox(parent)
 	//onChange function
 	this.onChange = null;
 
-	//Attributes
-	this.size = new THREE.Vector2(300, 100);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-
 	//Texture
 	this.texture = null;
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+CubeTextureBox.prototype = Object.create(Element.prototype);
 
 //Set onChange onChange function
 CubeTextureBox.prototype.setOnChange = function(onChange)
@@ -96,15 +85,6 @@ CubeTextureBox.prototype.setOnChange = function(onChange)
 	this.onChange = onChange;
 	this.useTexture.setOnChange(onChange);
 	this.mapping.setOnChange(onChange);
-};
-
-//Remove element
-CubeTextureBox.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
 };
 
 //Set texture value
