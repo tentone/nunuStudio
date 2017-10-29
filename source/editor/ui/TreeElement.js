@@ -2,25 +2,11 @@
 
 function TreeElement(container)
 {
-	//Container
-	if(container !== undefined)
-	{
-		this.container = container;
-		this.parent = container.element;
-	}
-	else
-	{
-		this.container = null;
-		this.parent = null;
-	}
-	
-	//Self pointer
-	var self = this;
+	this.container = container;
 
-	//Element
-	this.element = document.createElement("div");
+	Element.call(this, container.element);
+
 	this.element.draggable = true;
-	this.element.style.position = "absolute";
 	this.element.style.width = "100%";
 	this.element.style.left = "0px";
 	this.element.style.height = "20px";
@@ -38,6 +24,8 @@ function TreeElement(container)
 	this.arrow.style.left = "5px";
 	this.arrow.style.top = "3px";
 	this.element.appendChild(this.arrow);
+
+	var self = this;
 
 	this.arrow.onmouseenter = function()
 	{
@@ -74,11 +62,6 @@ function TreeElement(container)
 	this.label.style.whiteSpace = "nowrap";
 	this.label.style.top = "4px";
 	this.element.appendChild(this.label);
-
-	//Attributes
-	this.size = new THREE.Vector2(0, 0);
-	this.position = new THREE.Vector2(0, 0);
-	this.visible = true;
 
 	//Content
 	this.folded = false;
@@ -504,10 +487,9 @@ function TreeElement(container)
 		}
 		tab.select();
 	};
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+TreeElement.prototype = Object.create(Element.prototype);
 
 //Set object attached to element
 TreeElement.prototype.setObject = function(obj)
@@ -632,7 +614,6 @@ TreeElement.prototype.setVisibility = function(visible)
 //Update interface
 TreeElement.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.display = "block";

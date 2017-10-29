@@ -2,23 +2,11 @@
 
 function DropdownMenu(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.backgroundColor = Editor.theme.buttonColor;
 	
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
+	this.preventDragEvents();
 
 	//Text
 	this.text = new Text(this.element);
@@ -50,11 +38,6 @@ function DropdownMenu(parent)
 	this.arrow.style.height = "12px";
 	this.arrow.src = Editor.filePath + "icons/misc/arrow_right.png";
 	this.element.appendChild(this.arrow);
-
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
 
 	//Options
 	this.optionsLocation = DropdownMenu.DOWN;
@@ -94,7 +77,6 @@ function DropdownMenu(parent)
 	};
 
 	//Add element to document
-	this.parent.appendChild(this.element);
 	this.parent.appendChild(this.panel);
 }
 
@@ -103,6 +85,8 @@ DropdownMenu.DOWN = 0;
 DropdownMenu.UP = 1;
 DropdownMenu.LEFT = 2;
 DropdownMenu.RIGHT = 3;
+
+DropdownMenu.prototype = Object.create(Element.prototype);
 
 //Set location to where options should open
 DropdownMenu.prototype.setLocation = function(location)
@@ -299,7 +283,6 @@ DropdownMenu.prototype.updateOptions = function()
 //Update interface
 DropdownMenu.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";

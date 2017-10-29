@@ -4164,7 +4164,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Key.js",
-            "line": 55,
+            "line": 58,
             "description": "Update Key status based on new key state.",
             "itemtype": "method",
             "name": "update",
@@ -4173,7 +4173,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Key.js",
-            "line": 88,
+            "line": 91,
             "description": "Set this key attributes manually.",
             "itemtype": "method",
             "name": "set",
@@ -4182,7 +4182,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Key.js",
-            "line": 100,
+            "line": 103,
             "description": "Reset key to default values.",
             "itemtype": "method",
             "name": "reset",
@@ -4201,7 +4201,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 62,
+            "line": 63,
             "description": "Update key flags synchronously.",
             "itemtype": "method",
             "name": "update",
@@ -4210,7 +4210,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 87,
+            "line": 88,
             "description": "Reset keyboard status to default.\n\nDoes not clean the action list.",
             "itemtype": "method",
             "name": "reset",
@@ -4219,7 +4219,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 103,
+            "line": 104,
             "description": "Check if a key is pressed.",
             "itemtype": "method",
             "name": "keyPressed",
@@ -4232,7 +4232,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 114,
+            "line": 115,
             "description": "Check is a key as just pressed.",
             "itemtype": "method",
             "name": "keyJustPressed",
@@ -4245,7 +4245,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 125,
+            "line": 126,
             "description": "Check if a key was just released.",
             "itemtype": "method",
             "name": "keyJustReleased",
@@ -4258,7 +4258,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 136,
+            "line": 137,
             "description": "Dispose keyboard events.",
             "itemtype": "method",
             "name": "dispose",
@@ -4267,7 +4267,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 146,
+            "line": 147,
             "description": "TAB key",
             "itemtype": "attribute",
             "name": "TAB",
@@ -4277,7 +4277,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 153,
+            "line": 154,
             "description": "ENTER key",
             "itemtype": "attribute",
             "name": "ENTER",
@@ -4287,7 +4287,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 160,
+            "line": 161,
             "description": "SHIFT key",
             "itemtype": "attribute",
             "name": "SHIFT",
@@ -4297,7 +4297,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 167,
+            "line": 168,
             "description": "CTRL key",
             "itemtype": "attribute",
             "name": "CTRL",
@@ -4307,7 +4307,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 174,
+            "line": 175,
             "description": "ALT key",
             "itemtype": "attribute",
             "name": "ALT",
@@ -4317,7 +4317,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 181,
+            "line": 182,
             "description": "CAPS_LOCK key",
             "itemtype": "attribute",
             "name": "CAPS_LOCK",
@@ -4327,7 +4327,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 188,
+            "line": 189,
             "description": "ESC key",
             "itemtype": "attribute",
             "name": "ESC",
@@ -4337,7 +4337,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 195,
+            "line": 196,
             "description": "SPACEBAR key",
             "itemtype": "attribute",
             "name": "SPACEBAR",
@@ -4347,7 +4347,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 202,
+            "line": 203,
             "description": "PAGE_UP key",
             "itemtype": "attribute",
             "name": "PAGE_UP",
@@ -4357,7 +4357,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 209,
+            "line": 210,
             "description": "PAGE_DOWN key",
             "itemtype": "attribute",
             "name": "PAGE_DOWN",
@@ -4367,7 +4367,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 216,
+            "line": 217,
             "description": "END key",
             "itemtype": "attribute",
             "name": "END",
@@ -4377,7 +4377,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 223,
+            "line": 224,
             "description": "HOME key",
             "itemtype": "attribute",
             "name": "HOME",
@@ -4387,7 +4387,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 230,
+            "line": 231,
             "description": "INSERT key",
             "itemtype": "attribute",
             "name": "INSERT",
@@ -4397,7 +4397,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 237,
+            "line": 238,
             "description": "DEL key",
             "itemtype": "attribute",
             "name": "DEL",
@@ -4407,7 +4407,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 244,
+            "line": 245,
             "description": "LEFT key",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -4417,7 +4417,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 251,
+            "line": 252,
             "description": "RIGHT key",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -4427,7 +4427,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 258,
+            "line": 259,
             "description": "UP key",
             "itemtype": "attribute",
             "name": "UP",
@@ -4437,7 +4437,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 265,
+            "line": 266,
             "description": "DOWN key",
             "itemtype": "attribute",
             "name": "DOWN",
@@ -4447,7 +4447,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 272,
+            "line": 273,
             "description": "NUM0 key",
             "itemtype": "attribute",
             "name": "NUM0",
@@ -4457,7 +4457,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 279,
+            "line": 280,
             "description": "NUM1 key",
             "itemtype": "attribute",
             "name": "NUM1",
@@ -4467,7 +4467,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 286,
+            "line": 287,
             "description": "NUM2 key",
             "itemtype": "attribute",
             "name": "NUM2",
@@ -4477,7 +4477,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 293,
+            "line": 294,
             "description": "NUM3 key",
             "itemtype": "attribute",
             "name": "NUM3",
@@ -4487,7 +4487,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 300,
+            "line": 301,
             "description": "NUM4 key",
             "itemtype": "attribute",
             "name": "NUM4",
@@ -4497,7 +4497,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 307,
+            "line": 308,
             "description": "NUM5 key",
             "itemtype": "attribute",
             "name": "NUM5",
@@ -4507,7 +4507,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 314,
+            "line": 315,
             "description": "NUM6 key",
             "itemtype": "attribute",
             "name": "NUM6",
@@ -4517,7 +4517,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 321,
+            "line": 322,
             "description": "NUM7 key",
             "itemtype": "attribute",
             "name": "NUM7",
@@ -4527,7 +4527,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 328,
+            "line": 329,
             "description": "NUM8 key",
             "itemtype": "attribute",
             "name": "NUM8",
@@ -4537,7 +4537,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 335,
+            "line": 336,
             "description": "NUM9 key",
             "itemtype": "attribute",
             "name": "NUM9",
@@ -4547,7 +4547,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 342,
+            "line": 343,
             "description": "A key",
             "itemtype": "attribute",
             "name": "A",
@@ -4557,7 +4557,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 349,
+            "line": 350,
             "description": "B key",
             "itemtype": "attribute",
             "name": "B",
@@ -4567,7 +4567,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 356,
+            "line": 357,
             "description": "C key",
             "itemtype": "attribute",
             "name": "C",
@@ -4577,7 +4577,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 363,
+            "line": 364,
             "description": "D key",
             "itemtype": "attribute",
             "name": "D",
@@ -4587,7 +4587,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 370,
+            "line": 371,
             "description": "E key",
             "itemtype": "attribute",
             "name": "E",
@@ -4597,7 +4597,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 377,
+            "line": 378,
             "description": "F key",
             "itemtype": "attribute",
             "name": "F",
@@ -4607,7 +4607,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 384,
+            "line": 385,
             "description": "G key",
             "itemtype": "attribute",
             "name": "G",
@@ -4617,7 +4617,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 391,
+            "line": 392,
             "description": "H key",
             "itemtype": "attribute",
             "name": "H",
@@ -4627,7 +4627,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 398,
+            "line": 399,
             "description": "I key",
             "itemtype": "attribute",
             "name": "I",
@@ -4637,7 +4637,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 405,
+            "line": 406,
             "description": "J key",
             "itemtype": "attribute",
             "name": "J",
@@ -4647,7 +4647,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 412,
+            "line": 413,
             "description": "K key",
             "itemtype": "attribute",
             "name": "K",
@@ -4657,7 +4657,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 419,
+            "line": 420,
             "description": "L key",
             "itemtype": "attribute",
             "name": "L",
@@ -4667,7 +4667,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 426,
+            "line": 427,
             "description": "M key",
             "itemtype": "attribute",
             "name": "M",
@@ -4677,7 +4677,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 433,
+            "line": 434,
             "description": "N key",
             "itemtype": "attribute",
             "name": "N",
@@ -4687,7 +4687,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 440,
+            "line": 441,
             "description": "O key",
             "itemtype": "attribute",
             "name": "O",
@@ -4697,7 +4697,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 447,
+            "line": 448,
             "description": "P key",
             "itemtype": "attribute",
             "name": "P",
@@ -4707,7 +4707,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 454,
+            "line": 455,
             "description": "Q key",
             "itemtype": "attribute",
             "name": "Q",
@@ -4717,7 +4717,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 461,
+            "line": 462,
             "description": "R key",
             "itemtype": "attribute",
             "name": "R",
@@ -4727,7 +4727,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 468,
+            "line": 469,
             "description": "S key",
             "itemtype": "attribute",
             "name": "S",
@@ -4737,7 +4737,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 475,
+            "line": 476,
             "description": "T key",
             "itemtype": "attribute",
             "name": "T",
@@ -4747,7 +4747,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 482,
+            "line": 483,
             "description": "U key",
             "itemtype": "attribute",
             "name": "U",
@@ -4757,7 +4757,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 489,
+            "line": 490,
             "description": "V key",
             "itemtype": "attribute",
             "name": "V",
@@ -4767,7 +4767,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 496,
+            "line": 497,
             "description": "W key",
             "itemtype": "attribute",
             "name": "W",
@@ -4777,7 +4777,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 503,
+            "line": 504,
             "description": "X key",
             "itemtype": "attribute",
             "name": "X",
@@ -4787,7 +4787,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 510,
+            "line": 511,
             "description": "Y key",
             "itemtype": "attribute",
             "name": "Y",
@@ -4797,7 +4797,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 517,
+            "line": 518,
             "description": "Z key",
             "itemtype": "attribute",
             "name": "Z",
@@ -4807,7 +4807,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 525,
+            "line": 526,
             "description": "F1 key",
             "itemtype": "attribute",
             "name": "F1",
@@ -4817,7 +4817,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 532,
+            "line": 533,
             "description": "F2 key",
             "itemtype": "attribute",
             "name": "F2",
@@ -4827,7 +4827,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 539,
+            "line": 540,
             "description": "F3 key",
             "itemtype": "attribute",
             "name": "F3",
@@ -4837,7 +4837,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 546,
+            "line": 547,
             "description": "F4 key",
             "itemtype": "attribute",
             "name": "F4",
@@ -4847,7 +4847,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 553,
+            "line": 554,
             "description": "F5 key",
             "itemtype": "attribute",
             "name": "F5",
@@ -4857,7 +4857,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 560,
+            "line": 561,
             "description": "F6 key",
             "itemtype": "attribute",
             "name": "F6",
@@ -4867,7 +4867,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 567,
+            "line": 568,
             "description": "F7 key",
             "itemtype": "attribute",
             "name": "F7",
@@ -4877,7 +4877,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 574,
+            "line": 575,
             "description": "F8 key",
             "itemtype": "attribute",
             "name": "F8",
@@ -4887,7 +4887,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 581,
+            "line": 582,
             "description": "F9 key",
             "itemtype": "attribute",
             "name": "F9",
@@ -4897,7 +4897,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 588,
+            "line": 589,
             "description": "F10 key",
             "itemtype": "attribute",
             "name": "F10",
@@ -4907,7 +4907,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 595,
+            "line": 596,
             "description": "F11 key",
             "itemtype": "attribute",
             "name": "F11",
@@ -4917,7 +4917,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Keyboard.js",
-            "line": 602,
+            "line": 603,
             "description": "F12 key",
             "itemtype": "attribute",
             "name": "F12",
@@ -4977,7 +4977,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 178,
+            "line": 179,
             "description": "LEFT mouse button",
             "itemtype": "attribute",
             "name": "LEFT",
@@ -4987,7 +4987,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 184,
+            "line": 185,
             "description": "MIDDLE mouse button",
             "itemtype": "attribute",
             "name": "MIDDLE",
@@ -4997,7 +4997,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 190,
+            "line": 191,
             "description": "RIGHT mouse button",
             "itemtype": "attribute",
             "name": "RIGHT",
@@ -5007,7 +5007,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 197,
+            "line": 198,
             "description": "Canvas to be used for coordinates calculation relative to that canvas.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -5023,7 +5023,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 220,
+            "line": 221,
             "description": "Check if mouse is inside attached canvas (updated async).",
             "itemtype": "method",
             "name": "insideCanvas",
@@ -5036,7 +5036,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 236,
+            "line": 237,
             "description": "Set mouse lock state.",
             "itemtype": "method",
             "name": "setLock",
@@ -5052,7 +5052,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 279,
+            "line": 280,
             "description": "Check if mouse button is currently pressed.",
             "itemtype": "method",
             "name": "buttonPressed",
@@ -5072,7 +5072,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 291,
+            "line": 292,
             "description": "Check if Mouse button was double clicked.",
             "itemtype": "method",
             "name": "buttonDoubleClicked",
@@ -5085,7 +5085,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 302,
+            "line": 303,
             "description": "Check if a mouse button was just pressed.",
             "itemtype": "method",
             "name": "buttonJustPressed",
@@ -5105,7 +5105,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 314,
+            "line": 315,
             "description": "Check if a mouse button was just released.",
             "itemtype": "method",
             "name": "buttonJustReleased",
@@ -5125,7 +5125,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 326,
+            "line": 327,
             "description": "Update mouse position.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updatePosition",
@@ -5156,7 +5156,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 352,
+            "line": 353,
             "description": "Update a mouse button.\n\nAutomatically called by the runtime.",
             "itemtype": "method",
             "name": "updateKey",
@@ -5177,7 +5177,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 369,
+            "line": 370,
             "description": "Update mouse buttons state, position, wheel and delta synchronously.",
             "itemtype": "method",
             "name": "update",
@@ -5186,7 +5186,7 @@
         },
         {
             "file": "..\\..\\source\\core\\input\\Mouse.js",
-            "line": 431,
+            "line": 432,
             "description": "Dispose mouse events.",
             "itemtype": "method",
             "name": "dispose",

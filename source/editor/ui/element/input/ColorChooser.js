@@ -2,13 +2,9 @@
 
 function ColorChooser(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent, "input");
 
-	//Create element
-	this.element = document.createElement("input");
 	this.element.type = "text";
-	this.element.style.position = "absolute";
 	this.element.style.backgroundColor = Editor.theme.boxColor;
 	this.element.style.color = Editor.theme.textColor;
 	this.element.style.borderStyle = "none";
@@ -26,9 +22,6 @@ function ColorChooser(parent)
 	this.color.zIndex = 2000;
 
 	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
 	this.onChange = null;
 
 	//Click event
@@ -40,10 +33,9 @@ function ColorChooser(parent)
 			self.onChange();
 		}
 	};
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+ColorChooser.prototype = Object.create(Element.prototype);
 
 //Set onchange onChange
 ColorChooser.prototype.setOnChange = function(onChange)
@@ -74,15 +66,6 @@ ColorChooser.prototype.getValue = function()
 ColorChooser.prototype.getValueHex = function()
 {
 	return (this.color.rgb[0] << 16 ^ this.color.rgb[1] << 8 ^ this.color.rgb[2] << 0);
-};
-
-//Remove element
-ColorChooser.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
 };
 
 //Update Interface

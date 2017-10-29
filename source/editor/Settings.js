@@ -24,7 +24,8 @@ Settings.BETA = 31;
 Settings.loadDefault = function()
 {
 	//General
-	Settings.general = {		
+	Settings.general =
+	{		
 		autoUpdate : false,
 		theme : "dark",
 		filePreviewSize : 70,
@@ -35,7 +36,8 @@ Settings.loadDefault = function()
 	};
 
 	//Editor
-	Settings.editor = {
+	Settings.editor =
+	{
 		angleFormat : Settings.RADIANS,
 		snap : false,
 		snapAngle : 0.1,
@@ -61,7 +63,8 @@ Settings.loadDefault = function()
 	};
 
 	//Render
-	Settings.render = {
+	Settings.render =
+	{
 		followProject : true,
 		toneMapping : THREE.LinearToneMapping,
 		toneMappingExposure : 1.0,
@@ -72,7 +75,8 @@ Settings.loadDefault = function()
 	};
 
 	//Code
-	Settings.code = {
+	Settings.code =
+	{
 		theme : "monokai",
 		keymap : "sublime",
 		fontSize : 14,
@@ -88,7 +92,8 @@ Settings.loadDefault = function()
 	};
 
 	//JSLint
-	Settings.jslint = {
+	Settings.jslint =
+	{
 		//Error
 		maxerr : 50, // {int} Maximum error before stopping
 
@@ -105,9 +110,9 @@ Settings.loadDefault = function()
 		plusplus : false, // true: Prohibit use of `++` and `--`
 		undef : false, // true: Require all non-global variables to be declared (prevents global leaks)
 		unused : false, // Unused variables:
-							// true : all variables, last function parameter
-							// "vars" : all variables only
-							// "strict" : all variables, all function parameters
+						// true : all variables, last function parameter
+						// "vars" : all variables only
+						// "strict" : all variables, all function parameters
 		strict : false, // true: Requires all functions run in ES5 Strict Mode
 		maxparams : false, // {int} Max number of formal params allowed per function
 		maxdepth : false, // {int} Max depth of nested blocks (within functions)
@@ -122,7 +127,6 @@ Settings.loadDefault = function()
 		eqnull : true, // true: Tolerate use of `== null`
 		esversion : 6, // {int} Specify the ECMAScript version to which the code must adhere.
 		moz : true, // true: Allow Mozilla specific syntax (extends and overrides esnext features)
-								 // (ex: `for each`, multiple try/catch, function expression…)
 		evil : true, // true: Tolerate use of `eval` and `new Function()`
 		expr : true, // true: Tolerate `ExpressionStatement` as Programs
 		funcscope : true, // true: Tolerate defining variables inside control statements

@@ -174,6 +174,7 @@ function Mouse()
 }
 
 Mouse.prototype = Mouse;
+Mouse.prototype.constructor = Mouse;
 
 /**
  * LEFT mouse button

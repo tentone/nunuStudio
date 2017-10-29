@@ -2,12 +2,8 @@
 
 function TreeView(parent)
 {	
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
 	this.element.style.cursor = "default";
 	this.element.style.top = "0px";
@@ -22,11 +18,6 @@ function TreeView(parent)
 	this.label.setText("Project Explorer");
 	this.label.setAlignment(Text.LEFT);
 	this.label.updateInterface();
-
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
 	
 	//Object
 	this.obj = null;
@@ -34,10 +25,9 @@ function TreeView(parent)
 	//Childs
 	this.up = null;
 	this.children = [];
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+TreeView.prototype = Object.create(Element.prototype);
 
 //Set data from object
 TreeView.prototype.attachObject = function(obj)

@@ -2,12 +2,7 @@
 
 function CoordinatesBox(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
+	Element.call(this, parent);
 
 	//X Text
 	this.xText = document.createElement("div");
@@ -96,18 +91,15 @@ function CoordinatesBox(parent)
 	this.mode = CoordinatesBox.VECTOR3;
 
 	//Attributes
-	this.size = new THREE.Vector2(180, 18);
-	this.position = new THREE.Vector2(0, 0);
-	this.visible = true;
-	
-	//Add element to document
-	this.parent.appendChild(this.element);
+	this.size.set(180, 18);
 }
 
 //Positionbox mode
 CoordinatesBox.VECTOR2 = 2;
 CoordinatesBox.VECTOR3 = 3;
 CoordinatesBox.QUATERNION = 4;
+
+CoordinatesBox.prototype = Object.create(Element.prototype);
 
 //Set position box mode
 CoordinatesBox.prototype.setMode = function(mode)
@@ -198,15 +190,6 @@ CoordinatesBox.prototype.setOnChange = function(onChange)
 	this.y.onchange = onChange;
 	this.z.onchange = onChange;
 	this.w.onchange = onChange;
-};
-
-//Remove element
-CoordinatesBox.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
 };
 
 //Update Interface

@@ -2,12 +2,8 @@
 
 function Message(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.pointerEvents = "none";
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
@@ -20,15 +16,9 @@ function Message(parent)
 	this.element.style.alignText = "center";
 	this.element.style.display = "none";
 	this.element.innerText = "message";
-
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = false;
-	
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+Message.prototype = Object.create(Element.prototype);
 
 //Show message
 Message.prototype.show = function(message)
@@ -44,15 +34,6 @@ Message.prototype.hide = function(message)
 	this.visible = false;
 	this.element.style.display = "none";
 }
-
-//Remove element
-Message.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
-};
 
 //Update division Size
 Message.prototype.updateInterface = function()

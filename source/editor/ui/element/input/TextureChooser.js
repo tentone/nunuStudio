@@ -2,12 +2,7 @@
 
 function TextureChooser(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
+	Element.call(this, parent);
 
 	//Preview
 	this.preview = document.createElement("div");
@@ -97,31 +92,16 @@ function TextureChooser(parent)
 	this.onChange = null;
 	this.acceptAll = false;
 
-	//Attributes
-	this.size = new THREE.Vector2(100, 100);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-
 	//Texture
 	this.texture = null;
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+TextureChooser.prototype = Object.create(Element.prototype);
 
 //Set onChange onChange function
 TextureChooser.prototype.setOnChange = function(onChange)
 {
 	this.onChange = onChange;
-};
-
-//Remove element
-TextureChooser.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
 };
 
 //Set texture value

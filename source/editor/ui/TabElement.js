@@ -2,30 +2,13 @@
 
 function TabElement(parent, closeable, container, index, title, icon)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.cursor = "default";
 	this.element.style.overflow = "visible";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
-	this.element.ondrop = function(event)
-	{
-		event.preventDefault();
-	};
-
-	this.element.ondragover = function(event)
-	{
-		event.preventDefault();
-	};
-	
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
+	this.preventDragEvents();
 
 	//Meta
 	this.closeable = closeable;
@@ -40,10 +23,9 @@ function TabElement(parent, closeable, container, index, title, icon)
 	this.updating = false;
 	this.index = index;
 	this.container = container;
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+TabElement.prototype = Object.create(Element.prototype);
 
 //Update tab metadata
 TabElement.prototype.updateMetadata = function(){};

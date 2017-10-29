@@ -2,12 +2,8 @@
 
 function Text(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.display = "flex";
 	this.element.style.alignItems = "center";
 	this.element.style.pointerEvents = "none";
@@ -17,17 +13,12 @@ function Text(parent)
 
 	//Span
 	this.span = document.createElement("span");
-	this.span.style.whiteSpace = "pre"; //"nowrap";
+	this.span.style.whiteSpace = "pre";
 	this.span.innerHTML = "text";
 	this.element.appendChild(this.span);
 
 	//Attributes
 	this.fitContent = false;
-	this.size = new THREE.Vector2(0, 0);
-	this.position = new THREE.Vector2(0, 0);
-	this.visible = true;
-
-	this.parent.appendChild(this.element);
 }
 
 //Alignment
@@ -38,6 +29,8 @@ Text.RIGHT = 2;
 //Overflow
 Text.CLIP = 10;
 Text.ELLIPSIS = 11;
+
+Text.prototype = Object.create(Element.prototype);
 
 //Set Text
 Text.prototype.setText = function(text)
@@ -90,15 +83,6 @@ Text.prototype.setAlignment = function(align)
 	}
 };
 
-//Remove element
-Text.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
-};
-
 //Update Interface
 Text.prototype.updateInterface = function()
 {
@@ -124,6 +108,4 @@ Text.prototype.updateInterface = function()
 	{
 		this.element.style.visibility = "hidden";
 	}
-
-
 };

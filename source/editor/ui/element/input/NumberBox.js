@@ -2,29 +2,19 @@
 
 function NumberBox(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent, "input");
 
-	//Element
-	this.element = document.createElement("input");
 	this.element.type = "number";
 	this.element.step = "0.1";
-	this.element.style.position = "absolute";
 	this.element.style.backgroundColor = Editor.theme.boxColor;
 	this.element.style.color = Editor.theme.textColor;
 	this.element.style.borderStyle = "none";
 	this.element.style.boxSizing = "border-box";
 	this.element.style.textIndent = "4px";
 	this.element.style.borderRadius = "4px";
-
-	//Attributes
-	this.size = new THREE.Vector2(0, 0);
-	this.position = new THREE.Vector2(0, 0);
-	this.visible = true;
-	
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+NumberBox.prototype = Object.create(Element.prototype);
 
 //Set if element if disabled
 NumberBox.prototype.setDisabled = function(value)
@@ -61,15 +51,6 @@ NumberBox.prototype.setValue = function(value)
 NumberBox.prototype.getValue = function()
 {
 	return parseFloat(this.element.value);
-}
-
-//Remove element
-NumberBox.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
 }
 
 //Update Interface

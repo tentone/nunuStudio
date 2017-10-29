@@ -20,7 +20,7 @@ function JSHintSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Bitwise
-	this.form.addText("Warn Bitwise");
+	this.form.addText("Warn Bitwise").setAltText("Prohibit bitwise operators (&, |, ^, etc.)");
 	this.bitwise = new CheckBox(this.form.element);
 	this.bitwise.size.set(15, 15);
 	this.bitwise.setOnChange(function()

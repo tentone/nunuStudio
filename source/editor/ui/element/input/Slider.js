@@ -2,15 +2,12 @@
 
 function Slider(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent, "input");
 
 	//Self pointer
 	var self = this;
 
 	//Slider
-	this.element = document.createElement("input");
-	this.element.style.position = "absolute";
 	this.element.style.boxSizing = "border-box";
 	//this.element.style.appearance = "none";
 	//this.element.style.MozAppearance = "none";
@@ -40,15 +37,9 @@ function Slider(parent)
 
 	//onChange
 	this.onchange = null;
-
-	//Attributes
-	this.size = new THREE.Vector2(0, 0);
-	this.position = new THREE.Vector2(0, 0);
-	this.visible = true;
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+Slider.prototype = Object.create(Element.prototype);
 
 //Set if element if disabled
 Slider.prototype.setDisabled = function(value)

@@ -29,17 +29,14 @@ SettingsTab.prototype = Object.create(TabElement.prototype);
 //Update division Size
 SettingsTab.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
-		this.element.style.display = "block";
-
-		//Tab
 		this.tab.visible = this.visible;
 		this.tab.size.copy(this.size);
 		this.tab.updateInterface();
 
-		//Element
+
+		this.element.style.display = "block";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
