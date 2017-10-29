@@ -2,18 +2,9 @@
 
 function Form(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
 	this.element.style.overflow = "visible";
-	this.element.style.position = "absolute";
-	
-	//Attributes
-	this.size = new THREE.Vector2(0, 0);
-	this.position = new THREE.Vector2(0, 0);
-	this.visible = true;
 	
 	//Child elements
 	this.spacing = new THREE.Vector2(5, 5);
@@ -22,10 +13,9 @@ function Form(parent)
 
 	//Defaults
 	this.defaultTextWidth = 80;
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
+
+Form.prototype = Object.create(Element.prototype);
 
 //Add a element to form (in actual row)
 Form.prototype.add = function(elem)
@@ -82,15 +72,6 @@ Form.prototype.removeLastRow = function()
 		{
 			row[i].destroy();
 		}
-	}
-};
-
-//Remove element
-Form.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
 	}
 };
 

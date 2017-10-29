@@ -2,12 +2,8 @@
 
 function ButtonImage(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
-	
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
+	Element.call(this, parent);
+
 	this.element.style.cursor = "pointer";
 
 	//Image
@@ -19,12 +15,7 @@ function ButtonImage(parent)
 	this.icon.style.width = "70%";
 	this.icon.style.height = "70%";
 	this.element.appendChild(this.icon);
-
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-
+	
 	//Image scale
 	this.imageScale = new THREE.Vector2(0.7, 0.7);
 
@@ -39,19 +30,9 @@ function ButtonImage(parent)
 	{
 		this.style.backgroundColor = "";
 	};
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
 
-//Remove element
-ButtonImage.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
-};
+ButtonImage.prototype = Object.create(Element.prototype);
 
 //Set button callback function
 ButtonImage.prototype.setCallback = function(callback)
@@ -76,46 +57,12 @@ ButtonImage.prototype.setImageScale = function(x, y)
 	this.icon.style.height = y;
 };
 
-//Set alt text
-ButtonImage.prototype.setAltText = function(altText)
-{
-	var text = new Text();
-	text.element.style.backgroundColor = Editor.theme.barColor;
-	text.element.style.zIndex = "1000";
-	text.element.style.border = "3px solid";
-	text.element.style.borderRadius = "5px";
-	text.element.style.borderColor = Editor.theme.barColor;
-	text.setText(altText);
-	text.visible = false;
-	text.fitContent = true;
-	text.updateInterface();
-
-	//Mouse mouse move event
-	this.element.onmousemove = function(event)
-	{
-		text.size.set(0, 20);
-		text.position.set(event.clientX - text.size.x/2, event.clientY - 30);
-		text.visible = true;
-		text.updateInterface();
-	};
-
-	//Mouse out event (to avoid overlap with mouse leave event)
-	this.element.onmouseout = function()
-	{
-		text.visible = false;
-		text.updateInterface();
-	}
-};
-
 //Update Interface
 ButtonImage.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
-
-		//Element
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";

@@ -2,12 +2,8 @@
 
 function DualDivisionResizable(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Element.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.overflow = "hidden";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
 
@@ -34,11 +30,6 @@ function DualDivisionResizable(parent)
 	this.resizeTab.style.cursor = "e-resize";
 	this.resizeTab.style.backgroundColor = Editor.theme.resizeTabColor;
 	this.element.appendChild(this.resizeTab);
-	
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
 
 	//Resize Tab
 	this.tabPosition = 0.5;
@@ -99,14 +90,13 @@ function DualDivisionResizable(parent)
 	{
 		Interface.updateInterface();
 	};
-
-	//Add element to document
-	this.parent.appendChild(this.element);
 }
 
 //Resizable side
 DualDivisionResizable.HORIZONTAL = 0;
 DualDivisionResizable.VERTICAL = 1;
+
+DualDivisionResizable.prototype = Object.create(Element.prototype);
 
 //Set container
 DualDivisionResizable.prototype.setOnResize = function(callback)
