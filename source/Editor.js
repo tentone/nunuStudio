@@ -746,8 +746,6 @@ Editor.addToScene = function(obj)
 	if(Editor.program.scene !== null)
 	{
 		Editor.program.scene.add(obj);
-
-		Editor.history.push(obj, Action.ADDED);
 		Editor.updateObjectViews();
 	}
 };
@@ -814,8 +812,6 @@ Editor.deleteObject = function(obj)
 				{
 					Editor.removeFromSelection(selected[i]);
 				}
-
-				Editor.history.push(selected[i], Action.REMOVED);
 				selected[i].destroy();
 			}
 		}
@@ -870,7 +866,6 @@ Editor.cutObject = function(obj)
 		Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
 	}
 	
-	Editor.history.push(obj, Action.REMOVED);
 	obj.destroy();
 
 	Editor.updateObjectViews();
@@ -904,8 +899,6 @@ Editor.pasteObject = function(target)
 		{
 			Editor.program.scene.add(obj);
 		}
-
-		Editor.history.push(obj, Action.ADDED);
 		
 		Editor.updateObjectViews();
 	}
@@ -918,13 +911,15 @@ Editor.pasteObject = function(target)
 //Redo action
 Editor.redo = function()
 {
-	//TODO <ADD CODE HERE>
+	//TODO <HISTORY REDO>
 };
 
 //Undo action
 Editor.undo = function()
 {
-	var action = Editor.history.undo();
+	//TODO <HISTORY UNDO>
+	
+	/*var action = Editor.history.undo();
 	if(action != null)
 	{
 		Editor.updateObjectViews();
@@ -940,7 +935,7 @@ Editor.undo = function()
 	else
 	{
 		Editor.alert("Not possible to undo any further");
-	}
+	}*/
 };
 
 //Update all object views

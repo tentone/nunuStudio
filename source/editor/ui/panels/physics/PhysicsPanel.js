@@ -12,7 +12,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			
 			var scale = self.scale.getValue();
 			self.obj.scale.set(scale.x, scale.y, scale.z);
@@ -49,7 +49,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.body.type = self.bodyType.getValue();
 		}
 	});
@@ -65,7 +65,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.body.mass = self.mass.getValue();
 		}
 	});
@@ -82,7 +82,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.body.linearDamping = self.linearDamping.getValue();
 		}
 	});
@@ -99,7 +99,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.body.angularDamping = self.angularDamping.getValue();
 		}
 	});
@@ -114,7 +114,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.body.allowSleep = self.allowSleep.getValue();
 		}
 	});
@@ -130,7 +130,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.body.sleepSpeedLimit = self.sleepSpeedLimit.getValue();
 		}
 	});
@@ -146,7 +146,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.body.sleepTimeLimit = self.sleepTimeLimit.getValue();
 		}
 	});
@@ -161,7 +161,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.body.fixedRotation = self.fixedRotation.getValue();
 		}
 	});
@@ -177,7 +177,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.body.collisionFilterGroup = self.collisionFilterGroup.getValue();
 		}
 	});

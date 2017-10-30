@@ -557,7 +557,8 @@ SceneEditor.prototype.update = function()
 					
 					if(this.mouse.buttonJustPressed(Mouse.LEFT) && this.isEditingObject)
 					{
-						Editor.history.push(Editor.selectedObjects[0], Action.CHANGED);
+						//TODO <ADD HISTORY CHANGE>
+						//Editor.history.push(Editor.selectedObjects[0], Action.CHANGED);
 					}
 
 					if(this.isEditingObject)
