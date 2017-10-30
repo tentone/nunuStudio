@@ -1,17 +1,10 @@
 "use strict";
 
-//Stores program changes history
+//Stores changes to an object
 function History(program)
 {
-	//Program
-	this.program = program;
-
-	//Actions list
 	this.actions = [];
-	this.size = 10;
-
-	//Timestamp
-	this.timestamp = 0;
+	this.limit = 10;
 }
 
 //Add change to program history
@@ -19,8 +12,6 @@ History.prototype.push = function(action)
 {
 	this.actions.push(action);
 
-	action.timestamp = this.timestamp;
-	this.timestamp++;
 
 	if(this.actions.length > this.size)
 	{
