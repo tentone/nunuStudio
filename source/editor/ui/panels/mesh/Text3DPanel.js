@@ -15,7 +15,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.castShadow = self.castShadow.getValue();
 		}
 	});
@@ -30,7 +30,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.receiveShadow = self.receiveShadow.getValue();
 		}
 	});
@@ -45,7 +45,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.setText(self.text.getText());
 		}
 	});
@@ -62,7 +62,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.size = self.size.getValue();
 			self.obj.setText();
 		}
@@ -80,7 +80,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.height = self.height.getValue();
 			self.obj.setText();
 		}
@@ -98,7 +98,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.curveSegments = self.curveSegments.getValue();
 			self.obj.setText();
 		}
@@ -114,7 +114,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.bevel = self.bevel.getValue();
 			self.obj.setText();
 		}
@@ -132,7 +132,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.bevelThickness = self.bevelThickness.getValue();
 			self.obj.setText();
 		}
@@ -150,7 +150,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.bevelSize = self.bevelSize.getValue();
 			self.obj.setText();
 		}

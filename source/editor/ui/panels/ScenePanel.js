@@ -179,7 +179,7 @@ function ScenePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.usePhysics = self.usePhysics.getValue();
 		}
 	});

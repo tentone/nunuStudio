@@ -43,7 +43,7 @@ function SpinePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.castShadow = self.castShadow.getValue();
 		}
 	});
@@ -58,7 +58,7 @@ function SpinePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			Editor.history.push(self.obj, Action.CHANGED);
+updateControls
 			self.obj.receiveShadow = self.receiveShadow.getValue();
 		}
 	});

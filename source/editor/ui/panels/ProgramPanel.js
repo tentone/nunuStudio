@@ -19,10 +19,7 @@ function ProgramPanel(parent, obj)
 	this.author.updateInterface();
 	this.author.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.author = self.author.getText();
-		}
+		self.obj.author = self.author.getText();
 	});
 	this.form.add(this.author);
 	this.form.nextRow();
@@ -33,10 +30,7 @@ function ProgramPanel(parent, obj)
 	this.version.size.set(100, 18);
 	this.version.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.version = self.version.getText();
-		}
+		self.obj.version = self.version.getText();
 	});
 	this.form.add(this.version);
 	this.form.nextRow();
@@ -47,10 +41,7 @@ function ProgramPanel(parent, obj)
 	this.lockPointer.size.set(15, 15);
 	this.lockPointer.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.lockPointer = self.lockPointer.getValue();
-		}
+		self.obj.lockPointer = self.lockPointer.getValue();
 	});
 	this.form.add(this.lockPointer);
 	this.form.nextRow();
@@ -61,10 +52,7 @@ function ProgramPanel(parent, obj)
 	this.handlePixelRatio.size.set(15, 15);
 	this.handlePixelRatio.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.handlePixelRatio = self.handlePixelRatio.getValue();
-		}
+		self.obj.handlePixelRatio = self.handlePixelRatio.getValue();
 	});
 	this.form.add(this.handlePixelRatio);
 	this.form.nextRow()
@@ -79,10 +67,7 @@ function ProgramPanel(parent, obj)
 	this.vr.size.set(15, 15);
 	this.vr.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.vr = self.vr.getValue();
-		}
+		self.obj.vr = self.vr.getValue();
 	});
 	this.form.add(this.vr);
 	this.form.nextRow();
@@ -95,10 +80,7 @@ function ProgramPanel(parent, obj)
 	this.vrScale.setStep(0.05);
 	this.vrScale.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.vrScale = self.vrScale.getValue();
-		}
+		self.obj.vrScale = self.vrScale.getValue();
 	});
 	this.form.add(this.vrScale);
 	this.form.nextRow();
@@ -113,10 +95,7 @@ function ProgramPanel(parent, obj)
 	this.antialiasing.size.set(15, 15);
 	this.antialiasing.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.antialiasing = self.antialiasing.getValue();
-		}
+		self.obj.antialiasing = self.antialiasing.getValue();
 	});
 	this.form.add(this.antialiasing);
 	this.form.nextRow();
@@ -127,10 +106,7 @@ function ProgramPanel(parent, obj)
 	this.shadows.size.set(15, 15);
 	this.shadows.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.shadows = self.shadows.getValue();
-		}
+		self.obj.shadows = self.shadows.getValue();
 	});
 	this.form.add(this.shadows);
 	this.form.nextRow();
@@ -144,7 +120,6 @@ function ProgramPanel(parent, obj)
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
-		Editor.history.push(self.obj, Action.CHANGED);
 		self.obj.shadowsType = self.shadowsType.getValue();
 	});
 	this.form.add(this.shadowsType);
@@ -161,7 +136,6 @@ function ProgramPanel(parent, obj)
 	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
 	this.toneMapping.setOnChange(function()
 	{
-		Editor.history.push(self.obj, Action.CHANGED);
 		self.obj.toneMapping = self.toneMapping.getValue();
 	});
 	this.form.add(this.toneMapping);
@@ -175,7 +149,6 @@ function ProgramPanel(parent, obj)
 	this.toneMappingExposure.setStep(0.1);
 	this.toneMappingExposure.setOnChange(function()
 	{
-		Editor.history.push(self.obj, Action.CHANGED);
 		self.obj.toneMappingExposure = self.toneMappingExposure.getValue();
 	});
 	this.form.add(this.toneMappingExposure);
@@ -189,7 +162,6 @@ function ProgramPanel(parent, obj)
 	this.toneMappingWhitePoint.setStep(0.1);
 	this.toneMappingWhitePoint.setOnChange(function()
 	{
-		Editor.history.push(self.obj, Action.CHANGED);
 		self.obj.toneMappingWhitePoint = self.toneMappingWhitePoint.getValue();
 	});
 	this.form.add(this.toneMappingWhitePoint);
