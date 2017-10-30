@@ -2,10 +2,10 @@
 
 function Action(type, target)
 {
-	this.timestamp = 0;
-	this.type = -1;
-	this.target = null;
+	this.id = Action.ID++;
 }
+
+Action.ID = 0;
 
 Action.prototype.apply = function(){};
 Action.prototype.redo = function(){};
