@@ -385,7 +385,7 @@ include("editor/utils/CodemirrorThemes.js");
 include("editor/utils/DOMUtils.js");
 
 include("editor/history/History.js");
-include("editor/history/Action.js");
+include("editor/history/action/Action.js");
 
 //inclde("editor/timeline/save_format.js");
 //inclde("editor/timeline/settings.js");
