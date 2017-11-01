@@ -301,8 +301,16 @@ function TransformControls(camera, canvas, mouse)
 			{
 				point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
 
-				self.object.position.copy(oldPosition);
-				self.object.position.add(point);
+				var object = self.object.position;
+				Editor.history.add(new ActionBundle(
+				[
+					new ChangeAction(object, "x", oldPosition.x + point.x),
+					new ChangeAction(object, "y", oldPosition.y + point.y),
+					new ChangeAction(object, "z", oldPosition.z + point.z)
+				]));
+
+				//self.object.position.copy(oldPosition);
+				//self.object.position.add(point);
 			}
 			else if(self.space === "local")
 			{
@@ -315,9 +323,17 @@ function TransformControls(camera, canvas, mouse)
 				{
 					point.applyMatrix4(oldRotationMatrix);
 				}
-				
-				self.object.position.copy(oldPosition);
-				self.object.position.add(point);
+
+				var object = self.object.position;
+				Editor.history.add(new ActionBundle(
+				[
+					new ChangeAction(object, "x", oldPosition.x + point.x),
+					new ChangeAction(object, "y", oldPosition.y + point.y),
+					new ChangeAction(object, "z", oldPosition.z + point.z)
+				]));
+
+				//self.object.position.copy(oldPosition);
+				//self.object.position.add(point);
 			}
 
 			if(self.snap)
@@ -329,15 +345,18 @@ function TransformControls(camera, canvas, mouse)
 
 				if(self.axis.search("X") !== -1)
 				{
-					self.object.position.x = Math.round(self.object.position.x / self.translationSnap) * self.translationSnap;
+					Editor.history.add(new ChangeAction(self.object.position, "x", Math.round(self.object.position.x / self.translationSnap) * self.translationSnap));
+					//self.object.position.x = Math.round(self.object.position.x / self.translationSnap) * self.translationSnap;
 				}
 				if(self.axis.search("Y") !== -1)
 				{
-					self.object.position.y = Math.round(self.object.position.y / self.translationSnap) * self.translationSnap;
+					Editor.history.add(new ChangeAction(self.object.position, "y", Math.round(self.object.position.y / self.translationSnap) * self.translationSnap));
+					//self.object.position.y = Math.round(self.object.position.y / self.translationSnap) * self.translationSnap;
 				}
 				if(self.axis.search("Z") !== -1)
 				{
-					self.object.position.z = Math.round(self.object.position.z / self.translationSnap) * self.translationSnap;
+					Editor.history.add(new ChangeAction(self.object.position, "z", Math.round(self.object.position.z / self.translationSnap) * self.translationSnap));
+					//self.object.position.z = Math.round(self.object.position.z / self.translationSnap) * self.translationSnap;
 				}
 
 				if(self.space === "local" )
@@ -355,9 +374,17 @@ function TransformControls(camera, canvas, mouse)
 			{
 				scale = 1 + ((point.y) / Math.max(oldScale.x, oldScale.y, oldScale.z));
 
-				self.object.scale.x = oldScale.x * scale;
-				self.object.scale.y = oldScale.y * scale;
-				self.object.scale.z = oldScale.z * scale;
+				//self.object.scale.x = oldScale.x * scale;
+				//self.object.scale.y = oldScale.y * scale;
+				//self.object.scale.z = oldScale.z * scale;
+
+				var object = self.object.scale;
+				Editor.history.add(new ActionBundle(
+				[
+					new ChangeAction(object, "x", oldScale.x * scale),
+					new ChangeAction(object, "y", oldScale.y * scale),
+					new ChangeAction(object, "z", oldScale.z * scale)
+				]));
 			}
 			else
 			{
