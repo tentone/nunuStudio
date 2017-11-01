@@ -86,19 +86,15 @@ Text.prototype.setAlignment = function(align)
 //Update Interface
 Text.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
-		this.element.style.visibility = "visible";
-
-		//Fit text
 		if(this.fitContent)
 		{
 			this.size.x = this.span.clientWidth;
 			this.size.y = this.span.clientHeight;
 		}
 
-		//Element
+		this.element.style.visibility = "visible";
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";

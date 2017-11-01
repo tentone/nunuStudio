@@ -37,7 +37,7 @@ Element.prototype.setAltText = function(altText)
 {
 	var text = new Text();
 	text.element.style.backgroundColor = Editor.theme.barColor;
-	text.element.style.zIndex = "1000";
+	text.element.style.zIndex = "10000";
 	text.element.style.border = "3px solid";
 	text.element.style.borderRadius = "5px";
 	text.element.style.borderColor = Editor.theme.barColor;
@@ -45,6 +45,13 @@ Element.prototype.setAltText = function(altText)
 	text.visible = false;
 	text.fitContent = true;
 	text.updateInterface();
+
+	var destroy = this.destroy;
+	this.destroy = function()
+	{
+		destroy();
+		text.destroy();
+	};
 
 	this.element.style.pointerEvents = "auto";
 

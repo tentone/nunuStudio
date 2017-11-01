@@ -2,10 +2,8 @@
 
 function Action(type, target)
 {
-	this.id = Action.ID++;
+	this.id = 0;
 }
-
-Action.ID = 0;
 
 Action.prototype.apply = function(){};
 Action.prototype.revert = function(){};
