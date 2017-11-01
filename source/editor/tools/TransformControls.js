@@ -74,6 +74,7 @@ function TransformControls(camera, canvas, mouse)
 
 	var oldPosition = new THREE.Vector3();
 	var oldScale = new THREE.Vector3();
+	var oldQuaternion = new THREE.Quaternion();
 	var oldRotationMatrix = new THREE.Matrix4();
 
 	this.attach = function(object)
@@ -249,6 +250,7 @@ function TransformControls(camera, canvas, mouse)
 			{
 				oldPosition.copy(self.object.position);
 				oldScale.copy(self.object.scale);
+				oldQuaternion.copy(self.object.quaternion);
 
 				oldRotationMatrix.extractRotation(self.object.matrix);
 				worldRotationMatrix.extractRotation(self.object.matrixWorld);
@@ -301,16 +303,8 @@ function TransformControls(camera, canvas, mouse)
 			{
 				point.applyMatrix4(tempMatrix.getInverse(parentRotationMatrix));
 
-				var object = self.object.position;
-				Editor.history.add(new ActionBundle(
-				[
-					new ChangeAction(object, "x", oldPosition.x + point.x),
-					new ChangeAction(object, "y", oldPosition.y + point.y),
-					new ChangeAction(object, "z", oldPosition.z + point.z)
-				]));
-
-				//self.object.position.copy(oldPosition);
-				//self.object.position.add(point);
+				self.object.position.copy(oldPosition);
+				self.object.position.add(point);
 			}
 			else if(self.space === "local")
 			{
@@ -324,16 +318,8 @@ function TransformControls(camera, canvas, mouse)
 					point.applyMatrix4(oldRotationMatrix);
 				}
 
-				var object = self.object.position;
-				Editor.history.add(new ActionBundle(
-				[
-					new ChangeAction(object, "x", oldPosition.x + point.x),
-					new ChangeAction(object, "y", oldPosition.y + point.y),
-					new ChangeAction(object, "z", oldPosition.z + point.z)
-				]));
-
-				//self.object.position.copy(oldPosition);
-				//self.object.position.add(point);
+				self.object.position.copy(oldPosition);
+				self.object.position.add(point);
 			}
 
 			if(self.snap)
@@ -345,18 +331,15 @@ function TransformControls(camera, canvas, mouse)
 
 				if(self.axis.search("X") !== -1)
 				{
-					Editor.history.add(new ChangeAction(self.object.position, "x", Math.round(self.object.position.x / self.translationSnap) * self.translationSnap));
-					//self.object.position.x = Math.round(self.object.position.x / self.translationSnap) * self.translationSnap;
+					self.object.position.x = Math.round(self.object.position.x / self.translationSnap) * self.translationSnap;
 				}
 				if(self.axis.search("Y") !== -1)
 				{
-					Editor.history.add(new ChangeAction(self.object.position, "y", Math.round(self.object.position.y / self.translationSnap) * self.translationSnap));
-					//self.object.position.y = Math.round(self.object.position.y / self.translationSnap) * self.translationSnap;
+					self.object.position.y = Math.round(self.object.position.y / self.translationSnap) * self.translationSnap;
 				}
 				if(self.axis.search("Z") !== -1)
 				{
-					Editor.history.add(new ChangeAction(self.object.position, "z", Math.round(self.object.position.z / self.translationSnap) * self.translationSnap));
-					//self.object.position.z = Math.round(self.object.position.z / self.translationSnap) * self.translationSnap;
+					self.object.position.z = Math.round(self.object.position.z / self.translationSnap) * self.translationSnap;
 				}
 
 				if(self.space === "local" )
@@ -374,17 +357,8 @@ function TransformControls(camera, canvas, mouse)
 			{
 				scale = 1 + ((point.y) / Math.max(oldScale.x, oldScale.y, oldScale.z));
 
-				//self.object.scale.x = oldScale.x * scale;
-				//self.object.scale.y = oldScale.y * scale;
-				//self.object.scale.z = oldScale.z * scale;
-
-				var object = self.object.scale;
-				Editor.history.add(new ActionBundle(
-				[
-					new ChangeAction(object, "x", oldScale.x * scale),
-					new ChangeAction(object, "y", oldScale.y * scale),
-					new ChangeAction(object, "z", oldScale.z * scale)
-				]));
+				self.object.scale.copy(oldScale);
+				self.object.scale.multiplyScalar(scale);
 			}
 			else
 			{
@@ -549,6 +523,38 @@ function TransformControls(camera, canvas, mouse)
 
 	function onPointerUp()
 	{
+		if(mode === "translate")
+		{
+			var object = self.object.position;
+			Editor.history.add(new ActionBundle(
+			[
+				new ChangeAction(object, "x", object.x, oldPosition.x),
+				new ChangeAction(object, "y", object.y, oldPosition.y),
+				new ChangeAction(object, "z", object.z, oldPosition.z)
+			]));
+		}
+		else if(mode === "scale")
+		{
+			var object = self.object.scale;
+			Editor.history.add(new ActionBundle(
+			[
+				new ChangeAction(object, "x", object.x, oldScale.x),
+				new ChangeAction(object, "y", object.y, oldScale.y),
+				new ChangeAction(object, "z", object.z, oldScale.z)
+			]));
+		}
+		else if(mode === "rotate")
+		{
+			var object = self.object.quaternion;
+			Editor.history.add(new ActionBundle(
+			[
+				new ChangeAction(object, "x", object.x, oldQuaternion.x),
+				new ChangeAction(object, "y", object.y, oldQuaternion.y),
+				new ChangeAction(object, "z", object.z, oldQuaternion.z),
+				new ChangeAction(object, "w", object.w, oldQuaternion.w)
+			]));
+		}
+
 		editing = false;
 		dragging = false;
 		onPointerHover();
