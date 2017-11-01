@@ -1,14 +1,14 @@
 "use strict";
 
 //Stores change on one object attribute
-function ChangeAction(object, attribute, newValue)
+function ChangeAction(object, attribute, newValue, oldValue)
 {
 	Action.call(this);
 
 	this.object = object;
 	this.attribute = attribute;
 	this.newValue = newValue;
-	this.oldValue = object[attribute];
+	this.oldValue = (oldValue !== undefined) ? oldValue : object[attribute];
 }
 
 ChangeAction.prototype.apply = function()
