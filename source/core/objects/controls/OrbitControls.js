@@ -21,7 +21,12 @@
  * Mouse sensitivity.
  * 
  * @property sensitivity
- * @default 0.001
+ * @type {Number}
+ */
+/**
+ * Mouse scroll sensitivity.
+ * 
+ * @property zoomSensitivity
  * @type {Number}
  */
 /**
@@ -49,6 +54,13 @@
  * Indicates if its possible to move the object around.
  * 
  * @property movementEnabled
+ * @default true
+ * @type {Boolean}
+ */
+/**
+ * Indicates if its possible to zoom in and out to the center point.
+ * 
+ * @property zoomEnabled
  * @default true
  * @type {Boolean}
  */
@@ -113,16 +125,6 @@ OrbitControls.prototype.update = function()
 	{
 		this.vector.y -= this.sensitivity * this.mouse.delta.y;
 		this.vector.x -= this.sensitivity * this.mouse.delta.x;
-
-		if(this.vector.y < this.limitDown)
-		{
-			this.vector.y = this.limitDown;
-		}
-		else if(this.vector.y > this.limitUp)
-		{
-			this.vector.y = this.limitUp;
-		}
-
 		needsUpdate = true;
 	}
 
@@ -131,32 +133,12 @@ OrbitControls.prototype.update = function()
 		if(this.mouse.wheel !== 0)
 		{
 			this.distance += this.mouse.wheel * this.zoomSensitivity * this.position.distanceTo(this.center);
-			
-			if(this.distance < this.minDistance)
-			{
-				this.distance = this.minDistance;
-			}
-			else if(this.distance > this.maxDistance)
-			{
-				this.distance = this.maxDistance;
-			}
-
 			needsUpdate = true;
 		}
 
 		if(this.mouse.buttonPressed(Mouse.MIDDLE))
 		{
 			this.distance += this.mouse.delta.y * this.zoomSensitivity;
-
-			if(this.distance < this.minDistance)
-			{
-				this.distance = this.minDistance;
-			}
-			else if(this.distance > this.maxDistance)
-			{
-				this.distance = this.maxDistance;
-			}
-
 			needsUpdate = true;
 		}
 	}
@@ -200,6 +182,24 @@ OrbitControls.prototype.update = function()
  */
 OrbitControls.prototype.updateControls = function()
 {
+	if(this.vector.y < this.limitDown)
+	{
+		this.vector.y = this.limitDown;
+	}
+	else if(this.vector.y > this.limitUp)
+	{
+		this.vector.y = this.limitUp;
+	}
+
+	if(this.distance < this.minDistance)
+	{
+		this.distance = this.minDistance;
+	}
+	else if(this.distance > this.maxDistance)
+	{
+		this.distance = this.maxDistance;
+	}
+
 	var cos = this.distance * Math.cos(this.vector.y);
 	this.position.set(Math.cos(this.vector.x) * cos, this.distance * Math.sin(this.vector.y), Math.sin(this.vector.x) * cos);
 	this.position.add(this.center);

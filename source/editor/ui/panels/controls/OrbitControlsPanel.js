@@ -129,6 +129,36 @@ function OrbitControlsPanel(parent, obj)
 	this.form.add(this.limitDown);
 	this.form.nextRow();
 
+	//Zoom
+	this.form.addText("Zoom");
+	this.zoomEnabled = new CheckBox(this.form.element);
+	this.zoomEnabled.size.set(15, 15);
+	this.zoomEnabled.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			Editor.history.add(new ChangeAction(self.obj, "zoomEnabled", self.zoomEnabled.getValue()));
+		}
+	});
+	this.form.add(this.zoomEnabled);
+	this.form.nextRow();
+
+	//Zoom sensitivity
+	this.form.addText("Zoom speed");
+	this.zoomSensitivity = new Slider(this.form.element);
+	this.zoomSensitivity.size.set(140, 18);
+	this.zoomSensitivity.setStep(0.0001);
+	this.zoomSensitivity.setRange(0, 0.05);
+	this.zoomSensitivity.setOnChange(function()
+	{
+		if(self.obj !== null)
+		{
+			Editor.history.add(new ChangeAction(self.obj, "zoomSensitivity", self.zoomSensitivity.getValue()));
+		}
+	});
+	this.form.add(this.zoomSensitivity);
+	this.form.nextRow();
+
 	//Update form
 	this.form.updateInterface();
 }
@@ -149,5 +179,7 @@ OrbitControlsPanel.prototype.updatePanel = function()
 		this.sensitivity.setValue(this.obj.sensitivity);
 		this.limitUp.setValue(this.obj.limitUp);
 		this.limitDown.setValue(this.obj.limitDown);
+		this.zoomEnabled.setValue(this.obj.zoomEnabled);
+		this.zoomSensitivity.setValue(this.obj.zoomSensitivity);
 	}
 };
