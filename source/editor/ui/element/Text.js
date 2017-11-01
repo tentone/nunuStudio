@@ -9,13 +9,13 @@ function Text(parent)
 	this.element.style.pointerEvents = "none";
 	this.element.style.color = Editor.theme.textColor;
 	
-	this.setAlignment(Text.CENTER);
-
 	//Span
 	this.span = document.createElement("span");
 	this.span.style.whiteSpace = "pre";
 	this.span.innerHTML = "text";
 	this.element.appendChild(this.span);
+
+	this.setAlignment(Text.CENTER);
 
 	//Attributes
 	this.fitContent = false;
