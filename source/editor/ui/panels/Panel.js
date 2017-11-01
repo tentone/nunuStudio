@@ -41,11 +41,8 @@ function Panel(parent, obj)
 	this.name.size.set(190, 18);
 	this.name.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.name = self.name.getText();
-			Editor.updateObjectViews();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "name", self.name.getText()));
+		Editor.updateObjectViews();
 	});
 	this.form.add(this.name);
 	this.form.nextRow();
@@ -75,7 +72,14 @@ function Panel(parent, obj)
 		if(self.obj !== null)
 		{
 			var position = self.position.getValue();
-			self.obj.position.set(position.x, position.y, position.z);
+			var object = self.obj.position;
+
+			Editor.history.add(new ActionBundle(
+			[
+				new ChangeAction(object, "x", position.x),
+				new ChangeAction(object, "y", position.y),
+				new ChangeAction(object, "z", position.z)
+			]));
 		}
 	});
 	this.form.add(this.position);
@@ -91,7 +95,14 @@ function Panel(parent, obj)
 		if(self.obj !== null)
 		{
 			var scale = self.scale.getValue();
-			self.obj.scale.set(scale.x, scale.y, scale.z);
+			var object = self.obj.scale;
+
+			Editor.history.add(new ActionBundle(
+			[
+				new ChangeAction(object, "x", scale.x),
+				new ChangeAction(object, "y", scale.y),
+				new ChangeAction(object, "z", scale.z)
+			]));
 		}
 	});
 	this.form.add(this.scale);
@@ -107,7 +118,14 @@ function Panel(parent, obj)
 		if(self.obj !== null)
 		{
 			var rotation = self.rotation.getValue();
-			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
+			var object = self.obj.rotation;
+
+			Editor.history.add(new ActionBundle(
+			[
+				new ChangeAction(object, "x", rotation.x),
+				new ChangeAction(object, "y", rotation.y),
+				new ChangeAction(object, "z", rotation.z)
+			]));
 		}
 	});
 	this.form.add(this.rotation);
@@ -119,10 +137,7 @@ function Panel(parent, obj)
 	this.visible.size.set(15, 15);
 	this.visible.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.visible = self.visible.getValue();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "visible", self.visible.getValue()));
 	});
 	this.form.add(this.visible);
 	this.form.nextRow();
@@ -133,10 +148,7 @@ function Panel(parent, obj)
 	this.static.size.set(15, 15);
 	this.static.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.matrixAutoUpdate = !(self.static.getValue());
-		}
+		Editor.history.add(new ChangeAction(self.obj, "matrixAutoUpdate", !self.static.getValue()));
 	});
 	this.form.add(this.static);
 	this.form.nextRow();

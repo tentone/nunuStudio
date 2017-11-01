@@ -16,13 +16,14 @@ function ScenePanel(parent, obj)
 		if(self.obj !== null)
 		{
 			var program = self.obj.parent;
+			
 			if(self.default.getValue())
 			{
-				program.defaultScene = self.obj.uuid;
+				Editor.history.add(new ChangeAction(program, "defaultScene",  self.obj.uuid));
 			}
 			else
 			{
-				program.defaultScene = null;
+				Editor.history.add(new ChangeAction(program, "defaultScene",  null));
 			}
 		}
 	});
@@ -38,7 +39,7 @@ function ScenePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{	
-			self.obj.background = new THREE.Color(self.background.getValueHex());
+			Editor.history.add(new ChangeAction(self.obj, "background", new THREE.Color(self.background.getValueHex())));
 		}
 	});
 	this.form.add(this.background);
@@ -52,7 +53,7 @@ function ScenePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{	
-			self.obj.background = self.backgroundTexture.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "background", self.backgroundTexture.getValue()));
 		}
 	});
 	this.form.add(this.backgroundTexture);
@@ -104,7 +105,7 @@ function ScenePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fog.near = self.fogNear.getValue();
+			Editor.history.add(new ChangeAction(self.obj.fog, "near", self.fogNear.getValue()));
 		}
 	});
 	this.fogLinearForm.add(this.fogNear);
@@ -118,7 +119,7 @@ function ScenePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fog.far = self.fogFar.getValue();
+			Editor.history.add(new ChangeAction(self.obj.fog, "far", self.fogFar.getValue()));
 		}
 	});
 	this.fogLinearForm.add(this.fogFar);
@@ -157,7 +158,7 @@ function ScenePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fog.density = self.fogDensity.getValue();
+			Editor.history.add(new ChangeAction(self.obj.fog, "density", self.fogDensity.getValue()));
 		}
 	});
 	this.fogExponentialForm.add(this.fogDensity);
@@ -179,7 +180,7 @@ function ScenePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.usePhysics = self.usePhysics.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "usePhysics", self.usePhysics.getValue()));
 		}
 	});
 	this.form.add(this.usePhysics);

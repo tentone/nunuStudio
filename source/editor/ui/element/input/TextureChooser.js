@@ -88,6 +88,8 @@ function TextureChooser(parent)
 		}
 	};
 
+	this.size.set(100, 100);
+
 	//onChange function
 	this.onChange = null;
 	this.acceptAll = false;

@@ -13,10 +13,7 @@ function ObjectPanel(parent, obj)
 	this.castShadow.size.set(15, 15);
 	this.castShadow.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.castShadow = self.castShadow.getValue();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
 	});
 	this.form.add(this.castShadow);
 	this.form.nextRow();
@@ -27,10 +24,7 @@ function ObjectPanel(parent, obj)
 	this.receiveShadow.size.set(15, 15);
 	this.receiveShadow.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.receiveShadow = self.receiveShadow.getValue();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "receiveShadow", self.receiveShadow.getValue()));
 	});
 	this.form.add(this.receiveShadow);
 	this.form.nextRow();
