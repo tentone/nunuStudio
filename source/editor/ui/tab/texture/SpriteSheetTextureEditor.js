@@ -39,7 +39,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.totalFrames = self.totalFrames.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "totalFrames", self.totalFrames.getValue()));
 			self.beginFrame.setValue(self.texture.beginFrame);
 			self.endFrame.setValue(self.texture.endFrame);
 		}
@@ -57,7 +57,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.beginFrame = self.beginFrame.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "beginFrame", self.beginFrame.getValue()));
 		}
 	});
 	this.form.add(this.beginFrame);
@@ -73,7 +73,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.endFrame = self.endFrame.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "endFrame", self.endFrame.getValue()));
 		}
 	});
 	this.form.add(this.endFrame);
@@ -89,7 +89,7 @@ function SpriteSheetTextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.animationSpeed = self.animationSpeed.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "animationSpeed", self.animationSpeed.getValue()));
 		}
 	});
 	this.form.add(this.animationSpeed);

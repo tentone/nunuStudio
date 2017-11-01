@@ -46,7 +46,7 @@ function VideoTextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.autoplay = self.autoplay.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "autoplay", self.autoplay.getValue()));
 		}
 	});
 	this.form.add(this.autoplay);

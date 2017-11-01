@@ -68,7 +68,7 @@ function TextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.name = self.name.getText();
+			Editor.history.add(new ChangeAction(self.texture, "name", self.name.getText()));
 			self.updatePreview();
 			Editor.updateObjectViews();
 		}
@@ -87,7 +87,7 @@ function TextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.wrapS = self.wrapS.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "wrapS", self.wrapS.getValue()));
 			self.updatePreview();
 		}
 	});
@@ -105,7 +105,7 @@ function TextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.wrapT = self.wrapT.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "wrapT", self.wrapT.getValue()));
 			self.updatePreview();
 		}
 	});
@@ -175,7 +175,7 @@ function TextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.rotation = self.rotation.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "rotation", self.rotation.getValue()));
 			self.updatePreview();
 		}
 	});
@@ -196,7 +196,7 @@ function TextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.minFilter = self.minFilter.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "minFilter", self.minFilter.getValue()));
 			self.updatePreview();
 		}
 	});
@@ -213,7 +213,7 @@ function TextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.magFilter = self.magFilter.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "magFilter", self.magFilter.getValue()));
 			self.updatePreview();
 		}
 	});
@@ -228,7 +228,7 @@ function TextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.premultiplyAlpha = self.premultiplyAlpha.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "premultiplyAlpha", self.premultiplyAlpha.getValue()));
 			self.updatePreview();
 		}
 	});
@@ -243,7 +243,7 @@ function TextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.flipY = self.flipY.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "flipY", self.flipY.getValue()));
 			self.updatePreview();
 		}
 	});
