@@ -24,7 +24,7 @@ function AudioPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.volume = self.volume.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "volume", self.volume.getValue()));
 		}
 	});
 	this.form.add(this.volume);
@@ -40,7 +40,7 @@ function AudioPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.playbackRate = self.playbackRate.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "playbackRate", self.playbackRate.getValue()));
 		}
 	});
 	this.form.add(this.playbackRate);
@@ -54,7 +54,7 @@ function AudioPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.autoplay = self.autoplay.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "autoplay", self.autoplay.getValue()));
 		}
 	});
 	this.form.add(this.autoplay);
@@ -68,7 +68,7 @@ function AudioPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.loop = self.loop.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "loop", self.loop.getValue()));
 		}
 	});
 	this.form.add(this.loop);

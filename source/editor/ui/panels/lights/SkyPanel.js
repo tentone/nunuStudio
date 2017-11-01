@@ -61,7 +61,7 @@ function SkyPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.sunColor = self.sunColor.getValueHex();
+			Editor.history.add(new ChangeAction(self.obj, "sunColor", self.sunColor.getValueHex()));
 			self.obj.updateSky();
 		}
 	});
@@ -76,7 +76,7 @@ function SkyPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.moonColor = self.moonColor.getValueHex();
+			Editor.history.add(new ChangeAction(self.obj, "moonColor", self.moonColor.getValueHex()));
 			self.obj.updateSky();
 		}
 	});
@@ -93,7 +93,7 @@ function SkyPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.intensity = self.intensity.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "intensity", self.intensity.getValue()));
 		}
 	});
 	this.form.add(this.intensity);
@@ -111,7 +111,7 @@ function SkyPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.autoUpdate = self.autoUpdate.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "autoUpdate", self.autoUpdate.getValue()));
 		}
 	});
 	this.form.add(this.autoUpdate);
@@ -133,12 +133,12 @@ function SkyPanel(parent, obj)
 				dayTime = 0;
 				self.dayTime.setValue(dayTime);
 			}
-			self.obj.dayTime = dayTime;
+			Editor.history.add(new ChangeAction(self.obj, "dayTime", dayTime));
 
 			//Check actual time
 			if(self.obj.time > dayTime)
 			{
-				self.obj.time = dayTime;
+				Editor.history.add(new ChangeAction(self.obj, "time", dayTime));
 				self.time.setValue(dayTime);
 			}
 
@@ -172,7 +172,7 @@ function SkyPanel(parent, obj)
 				self.time.setValue(time);
 			}
 
-			self.obj.time = time;
+			Editor.history.add(new ChangeAction(self.obj, "time", time));
 			self.obj.updateSky();
 		}
 	});
@@ -189,7 +189,7 @@ function SkyPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.sunDistance = self.sunDistance.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "sunDistance", self.sunDistance.getValue()));
 			self.obj.updateSky();
 		}
 	});

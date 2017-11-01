@@ -15,7 +15,7 @@ function SkinnedMeshPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.initialAnimation = self.animation.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "initialAnimation", self.animation.getValue()));
 		}
 	});
 	this.form.add(this.animation);
@@ -31,7 +31,7 @@ function SkinnedMeshPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.animationSpeed = self.animationSpeed.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "animationSpeed", self.animationSpeed.getValue()));
 		}
 	});
 	this.form.add(this.animationSpeed);
@@ -45,7 +45,7 @@ function SkinnedMeshPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.castShadow = self.castShadow.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
 		}
 	});
 	this.form.add(this.castShadow);
@@ -59,7 +59,7 @@ function SkinnedMeshPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.receiveShadow = self.receiveShadow.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "receiveShadow", self.receiveShadow.getValue()));
 		}
 	});
 	this.form.add(this.receiveShadow);

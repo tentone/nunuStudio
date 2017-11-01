@@ -34,7 +34,7 @@ function SpotLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.penumbra = self.penumbra.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "penumbra", self.penumbra.getValue()));
 			self.penumbraText.setText(self.obj.penumbra);
 		}
 	});
@@ -51,7 +51,7 @@ function SpotLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.angle = self.angle.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "angle", self.angle.getValue()));
 			self.angleText.setText(self.obj.angle);
 		}
 	});
@@ -72,7 +72,7 @@ function SpotLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.castShadow = self.castShadow.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
 		}
 	});
 	this.form.add(this.castShadow);

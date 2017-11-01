@@ -32,7 +32,7 @@ function RectAreaLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.intensity = self.intensity.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "intensity", self.intensity.getValue()));
 		}
 	});
 	this.form.add(this.intensity);
@@ -47,7 +47,7 @@ function RectAreaLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.width = self.width.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "width", self.width.getValue()));
 		}
 	});
 	this.form.add(this.width);
@@ -62,7 +62,7 @@ function RectAreaLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.height = self.height.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "height", self.height.getValue()));
 		}
 	});
 	this.form.add(this.height);
