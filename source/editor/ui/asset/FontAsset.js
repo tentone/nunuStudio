@@ -27,7 +27,7 @@ function FontAsset(parent)
 		{
 			if(self.font !== null)
 			{
-				self.font.name = prompt("Rename font", self.font.name);
+				Editor.history.add(new ChangeAction(self.font, "name", prompt("Rename font", self.font.name)));
 				Editor.updateObjectViews();
 			}
 		});

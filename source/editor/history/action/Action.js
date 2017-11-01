@@ -1,6 +1,6 @@
 "use strict";
 
-function Action(type, target)
+function Action()
 {
 	this.id = 0;
 }
