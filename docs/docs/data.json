@@ -7109,14 +7109,23 @@
             "description": "Mouse sensitivity.",
             "itemtype": "property",
             "name": "sensitivity",
-            "default": "0.001",
             "type": "{Number}",
             "class": "OrbitControls",
             "module": "Controls"
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 27,
+            "line": 26,
+            "description": "Mouse scroll sensitivity.",
+            "itemtype": "property",
+            "name": "zoomSensitivity",
+            "type": "{Number}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 32,
             "description": "Top limit angle.",
             "itemtype": "property",
             "name": "limitUp",
@@ -7127,7 +7136,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 34,
+            "line": 39,
             "description": "Bottom limit angle.",
             "itemtype": "property",
             "name": "limitDown",
@@ -7138,7 +7147,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 41,
+            "line": 46,
             "description": "Indicates if the button left button needs to be pressed to rotate the object.",
             "itemtype": "property",
             "name": "needsButtonPressed",
@@ -7149,7 +7158,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 48,
+            "line": 53,
             "description": "Indicates if its possible to move the object around.",
             "itemtype": "property",
             "name": "movementEnabled",
@@ -7160,7 +7169,18 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
-            "line": 194,
+            "line": 60,
+            "description": "Indicates if its possible to zoom in and out to the center point.",
+            "itemtype": "property",
+            "name": "zoomEnabled",
+            "default": "true",
+            "type": "{Boolean}",
+            "class": "OrbitControls",
+            "module": "Controls"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\controls\\OrbitControls.js",
+            "line": 176,
             "description": "Update controls position and rotation.\n\nShould be called if some of its properties are changed manually.",
             "itemtype": "method",
             "name": "updateControls",

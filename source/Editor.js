@@ -388,6 +388,8 @@ include("editor/history/History.js");
 include("editor/history/action/Action.js");
 include("editor/history/action/ChangeAction.js");
 include("editor/history/action/ActionBundle.js");
+include("editor/history/action/object/ObjectAddedAction.js");
+include("editor/history/action/object/ObjectRemovedAction.js");
 
 //inclde("editor/timeline/save_format.js");
 //inclde("editor/timeline/settings.js");
@@ -747,7 +749,7 @@ Editor.addToScene = function(obj)
 {
 	if(Editor.program.scene !== null)
 	{
-		Editor.program.scene.add(obj);
+		Editor.history.add(new ObjectAddedAction(obj, Editor.program.scene));
 		Editor.updateObjectViews();
 	}
 };
@@ -770,7 +772,7 @@ Editor.renameObject = function(obj)
 	var name = prompt("Rename object", obj.name);
 	if(name !== null && name !== "")
 	{
-		obj.name = name;
+		Editor.history.add(new ChangeAction(obj, "name", name));
 		Editor.updateObjectViews();
 	}
 };
@@ -814,7 +816,8 @@ Editor.deleteObject = function(obj)
 				{
 					Editor.removeFromSelection(selected[i]);
 				}
-				selected[i].destroy();
+
+				Editor.history.add(new ObjectRemovedAction(selected[i]));
 			}
 		}
 
@@ -868,7 +871,7 @@ Editor.cutObject = function(obj)
 		Editor.clipboard.set(JSON.stringify(obj.toJSON()), "text");
 	}
 	
-	obj.destroy();
+	Editor.history.add(new ObjectRemovedAction(obj));
 
 	Editor.updateObjectViews();
 	if(Editor.isObjectSelected(obj))
@@ -895,11 +898,11 @@ Editor.pasteObject = function(target)
 		//Add object to target
 		if(target !== undefined)
 		{
-			target.add(obj);
+			Editor.history.add(new ObjectAddedAction(obj, target));
 		}
 		else
 		{
-			Editor.program.scene.add(obj);
+			Editor.history.add(new ObjectAddedAction(obj, Editor.program.scene));
 		}
 		
 		Editor.updateObjectViews();

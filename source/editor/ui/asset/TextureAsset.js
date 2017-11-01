@@ -53,7 +53,7 @@ function TextureAsset(parent)
 		{
 			if(self.texture !== null)
 			{
-				self.texture.name = prompt("Rename texture", self.texture.name);
+				Editor.history.add(new ChangeAction(self.texture, "name", prompt("Rename texture", self.texture.name)));
 				Editor.updateObjectViews();
 			}
 		});
