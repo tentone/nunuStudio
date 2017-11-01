@@ -15,7 +15,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.skinning = self.skinning.getValue();
+			Editor.history.add(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
 		}
 	});
 	this.form.add(this.skinning);
@@ -29,7 +29,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.morphTargets = self.morphTargets.getValue();
+			Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
 		}
 	});
 	this.form.add(this.morphTargets);
@@ -43,7 +43,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.wireframe = self.wireframe.getValue();
+			Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
 		}
 	});
 	this.form.add(this.wireframe);
@@ -70,7 +70,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	this.map = new TextureBox(this.form.element);
 	this.map.setOnChange(function(file)
 	{
-		self.material.map = self.map.getValue();
+		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);
@@ -84,7 +84,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.alphaMap = self.alphaMap.getValue();
+			Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});

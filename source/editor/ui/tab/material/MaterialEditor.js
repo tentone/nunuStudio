@@ -85,7 +85,7 @@ function MaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.name = self.name.getText();
+			Editor.history.add(new ChangeAction(self.material, "name", self.name.getText()));
 			Editor.updateObjectViews();
 		}
 	});
@@ -104,7 +104,7 @@ function MaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.side = self.side.getValue();
+			Editor.history.add(new ChangeAction(self.material, "side", self.side.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -119,7 +119,7 @@ function MaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.depthTest = self.depthTest.getValue();
+			Editor.history.add(new ChangeAction(self.material, "depthTest", self.depthTest.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -134,7 +134,7 @@ function MaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.depthWrite  = self.depthWrite .getValue();
+			Editor.history.add(new ChangeAction(self.material, "depthWrite", self.depthWrite.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -157,7 +157,7 @@ function MaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.depthFunc = self.depthFunc.getValue();
+			Editor.history.add(new ChangeAction(self.material, "depthFunc", self.depthFunc.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -172,7 +172,7 @@ function MaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.transparent = self.transparent.getValue();
+			Editor.history.add(new ChangeAction(self.material, "transparent", self.transparent.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -189,7 +189,7 @@ function MaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.opacity = self.opacity.getValue();
+			Editor.history.add(new ChangeAction(self.material, "opacity", self.opacity.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -206,7 +206,7 @@ function MaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.alphaTest = self.alphaTest.getValue();
+			Editor.history.add(new ChangeAction(self.material, "alphaTest", self.alphaTest.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -227,7 +227,7 @@ function MaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.blending = self.blending.getValue();
+			Editor.history.add(new ChangeAction(self.material, "blending", self.blending.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});

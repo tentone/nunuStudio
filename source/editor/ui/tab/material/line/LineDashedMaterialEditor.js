@@ -16,7 +16,7 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.dashSize = self.dashSize.getValue();
+			Editor.history.add(new ChangeAction(self.material, "dashSize", self.dashSize.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -33,7 +33,7 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.gapSize = self.gapSize.getValue();
+			Editor.history.add(new ChangeAction(self.material, "gapSize", self.gapSize.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -50,7 +50,7 @@ function LineDashedMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.scale = self.dashScale.getValue();
+			Editor.history.add(new ChangeAction(self.material, "scale", self.dashScale.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
