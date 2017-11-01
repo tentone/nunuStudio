@@ -15,7 +15,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.skinning = self.skinning.getValue();
+			Editor.history.add(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
 		}
 	});
 	this.form.add(this.skinning);
@@ -29,7 +29,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.morphTargets = self.morphTargets.getValue();
+			Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
 		}
 	});
 	this.form.add(this.morphTargets);
@@ -43,7 +43,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.wireframe = self.wireframe.getValue();
+			Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
 		}
 	});
 	this.form.add(this.wireframe);
@@ -60,7 +60,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.flatShading = self.flatShading.getValue();
+			Editor.history.add(new ChangeAction(self.material, "flatShading", self.flatShading.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -88,7 +88,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	this.map = new TextureBox(this.form.element);
 	this.map.setOnChange(function(file)
 	{
-		self.material.map = self.map.getValue();
+		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);
@@ -102,7 +102,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.specularMap = self.specularMap.getValue();
+			Editor.history.add(new ChangeAction(self.material, "specularMap", self.specularMap.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -117,7 +117,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.alphaMap = self.alphaMap.getValue();
+			Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -132,7 +132,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.emissiveMap = self.emissiveMap.getValue();
+			Editor.history.add(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -163,7 +163,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.emissiveIntensity = self.emissiveIntensity.getValue();
+			Editor.history.add(new ChangeAction(self.material, "emissiveIntensity", self.emissiveIntensity.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -179,7 +179,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.envMap = self.envMap.getValue();
+			Editor.history.add(new ChangeAction(self.material, "envMap", self.envMap.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -198,7 +198,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.combine = self.combine.getValue();
+			Editor.history.add(new ChangeAction(self.material, "combine", self.combine.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -214,7 +214,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.reflectivity = self.reflectivity.getValue();
+			Editor.history.add(new ChangeAction(self.material, "reflectivity", self.reflectivity.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -230,7 +230,7 @@ function MeshLambertMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.refractionRatio = self.refractionRatio.getValue();
+			Editor.history.add(new ChangeAction(self.material, "refractionRatio", self.refractionRatio.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});

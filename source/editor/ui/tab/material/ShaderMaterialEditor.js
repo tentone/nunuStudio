@@ -161,7 +161,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.name = self.name.getText();
+			Editor.history.add(new ChangeAction(self.material, "name", self.name.getText()));
 			Editor.updateObjectViews();
 		}
 	});
@@ -180,7 +180,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.side = self.side.getValue();
+			Editor.history.add(new ChangeAction(self.material, "side", self.side.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -195,7 +195,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.depthTest = self.depthTest.getValue();
+			Editor.history.add(new ChangeAction(self.material, "depthTest", self.depthTest.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -225,7 +225,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.transparent = self.transparent.getValue();
+			Editor.history.add(new ChangeAction(self.material, "transparent", self.transparent.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -246,7 +246,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.blending = self.blending.getValue();
+			Editor.history.add(new ChangeAction(self.material, "blending", self.blending.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -261,7 +261,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.wireframe = self.wireframe.getValue();
+			Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
 		}
 	});
 	this.form.add(this.wireframe);
@@ -279,7 +279,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.fragmentShader = self.fragmentShader.getValue();
+			Editor.history.add(new ChangeAction(self.material, "fragmentShader", self.fragmentShader.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -296,7 +296,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.vertexShader = self.vertexShader.getValue();
+			Editor.history.add(new ChangeAction(self.material, "vertexShader", self.vertexShader.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});

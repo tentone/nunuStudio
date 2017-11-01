@@ -50,7 +50,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.size = self.pointSize.getValue();
+			Editor.history.add(new ChangeAction(self.material, "size", self.pointSize.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -65,7 +65,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.sizeAttenuation = self.sizeAttenuation.getValue();
+			Editor.history.add(new ChangeAction(self.material, "sizeAttenuation", self.sizeAttenuation.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -78,7 +78,7 @@ function PointsMaterialEditor(parent, closeable, container, index)
 	this.map = new TextureBox(this.form.element);
 	this.map.setOnChange(function(file)
 	{
-		self.material.map = self.map.getValue();
+		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);

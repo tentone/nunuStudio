@@ -51,7 +51,7 @@ function LineBasicMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.linewidth = self.linewidth.getValue();
+			Editor.history.add(new ChangeAction(self.material, "linewidth", self.linewidth.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});

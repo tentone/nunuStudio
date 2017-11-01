@@ -15,7 +15,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.skinning = self.skinning.getValue();
+			Editor.history.add(new ChangeAction(self.material, "skinning", self.skinning.getValue()));
 		}
 	});
 	this.form.add(this.skinning);
@@ -29,7 +29,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.morphTargets = self.morphTargets.getValue();
+			Editor.history.add(new ChangeAction(self.material, "morphTargets", self.morphTargets.getValue()));
 		}
 	});
 	this.form.add(this.morphTargets);
@@ -43,7 +43,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.wireframe = self.wireframe.getValue();
+			Editor.history.add(new ChangeAction(self.material, "wireframe", self.wireframe.getValue()));
 		}
 	});
 	this.form.add(this.wireframe);
@@ -60,7 +60,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.flatShading = self.flatShading.getValue();
+			Editor.history.add(new ChangeAction(self.material, "flatShading", self.flatShading.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -92,7 +92,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.roughness = self.roughness.getValue();
+			Editor.history.add(new ChangeAction(self.material, "roughness", self.roughness.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -109,7 +109,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.metalness = self.metalness.getValue();
+			Editor.history.add(new ChangeAction(self.material, "metalness", self.metalness.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -123,7 +123,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)
 	{
-		self.material.map = self.map.getValue();
+		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);
@@ -136,7 +136,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.roughnessMap.size.set(100, 100);
 	this.roughnessMap.setOnChange(function(file)
 	{
-		self.material.roughnessMap = self.roughnessMap.getValue();
+		Editor.history.add(new ChangeAction(self.material, "roughnessMap", self.roughnessMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.roughnessMap);
@@ -149,7 +149,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.metalnessMap.size.set(100, 100);
 	this.metalnessMap.setOnChange(function(file)
 	{
-		self.material.metalnessMap = self.metalnessMap.getValue();
+		Editor.history.add(new ChangeAction(self.material, "metalnessMap", self.metalnessMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.metalnessMap);
@@ -162,7 +162,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.bumpMap.size.set(100, 100);
 	this.bumpMap.setOnChange(function(file)
 	{
-		self.material.bumpMap = self.bumpMap.getValue();
+		Editor.history.add(new ChangeAction(self.material, "bumpMap", self.bumpMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.bumpMap);
@@ -178,7 +178,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.bumpScale = self.bumpScale.getValue();
+			Editor.history.add(new ChangeAction(self.material, "bumpScale", self.bumpScale.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -192,7 +192,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.normalMap.size.set(100, 100);
 	this.normalMap.setOnChange(function(file)
 	{
-		self.material.normalMap = self.normalMap.getValue();
+		Editor.history.add(new ChangeAction(self.material, "normalMap", self.normalMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.normalMap);
@@ -221,7 +221,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	this.displacementMap.size.set(100, 100);
 	this.displacementMap.setOnChange(function(file)
 	{
-		self.material.displacementMap = self.displacementMap.getValue();
+		Editor.history.add(new ChangeAction(self.material, "displacementMap", self.displacementMap.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.children.push(this.displacementMap);
@@ -237,7 +237,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.displacementScale = self.displacementScale.getValue();
+			Editor.history.add(new ChangeAction(self.material, "displacementScale", self.displacementScale.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -253,7 +253,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.displacementBias = self.displacementBias.getValue();
+			Editor.history.add(new ChangeAction(self.material, "displacementBias", self.displacementBias.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -269,7 +269,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.emissiveMap = self.emissiveMap.getValue();
+			Editor.history.add(new ChangeAction(self.material, "emissiveMap", self.emissiveMap.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -300,7 +300,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.emissiveIntensity = self.emissiveIntensity.getValue();
+			Editor.history.add(new ChangeAction(self.material, "emissiveIntensity", self.emissiveIntensity.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -316,7 +316,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.alphaMap = self.alphaMap.getValue();
+			Editor.history.add(new ChangeAction(self.material, "alphaMap", self.alphaMap.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -332,7 +332,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.envMap = self.envMap.getValue();
+			Editor.history.add(new ChangeAction(self.material, "envMap", self.envMap.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -348,7 +348,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.envMapIntensity = self.envMapIntensity.getValue();
+			Editor.history.add(new ChangeAction(self.material, "envMapIntensity", self.envMapIntensity.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -364,7 +364,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.refractionRatio = self.refractionRatio.getValue();
+			Editor.history.add(new ChangeAction(self.material, "refractionRatio", self.refractionRatio.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -380,7 +380,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.aoMap = self.aoMap.getValue();
+			Editor.history.add(new ChangeAction(self.material, "aoMap", self.aoMap.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -396,7 +396,7 @@ function MeshStandardMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.aoMapIntensity = self.aoMapIntensity.getValue();
+			Editor.history.add(new ChangeAction(self.material, "aoMapIntensity", self.aoMapIntensity.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});

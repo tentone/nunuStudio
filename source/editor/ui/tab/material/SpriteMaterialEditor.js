@@ -52,7 +52,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.rotation = self.rotation.getValue();
+			Editor.history.add(new ChangeAction(self.material, "rotation", self.rotation.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -66,7 +66,7 @@ function SpriteMaterialEditor(parent, closeable, container, index)
 	this.map.size.set(100, 100);
 	this.map.setOnChange(function(file)
 	{
-		self.material.map = self.map.getValue();
+		Editor.history.add(new ChangeAction(self.material, "map", self.map.getValue()));
 		self.material.needsUpdate = true;
 	});
 	this.form.add(this.map);
