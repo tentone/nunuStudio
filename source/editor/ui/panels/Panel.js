@@ -44,7 +44,6 @@ function Panel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.name = self.name.getText();
-updateControls
 			Editor.updateObjectViews();
 		}
 	});
@@ -77,7 +76,6 @@ updateControls
 		{
 			var position = self.position.getValue();
 			self.obj.position.set(position.x, position.y, position.z);
-updateControls
 		}
 	});
 	this.form.add(this.position);
@@ -94,7 +92,6 @@ updateControls
 		{
 			var scale = self.scale.getValue();
 			self.obj.scale.set(scale.x, scale.y, scale.z);
-updateControls
 		}
 	});
 	this.form.add(this.scale);
@@ -111,7 +108,6 @@ updateControls
 		{
 			var rotation = self.rotation.getValue();
 			self.obj.rotation.set(rotation.x, rotation.y, rotation.z);
-updateControls
 		}
 	});
 	this.form.add(this.rotation);
@@ -125,7 +121,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.visible = self.visible.getValue();
 		}
 	});
@@ -140,7 +135,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.matrixAutoUpdate = !(self.static.getValue());
 		}
 	});

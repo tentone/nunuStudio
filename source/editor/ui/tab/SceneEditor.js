@@ -528,6 +528,10 @@ SceneEditor.prototype.update = function()
 			{
 				Editor.undo();
 			}
+			else if(this.keyboard.keyJustPressed(Keyboard.Y))
+			{
+				Editor.redo();
+			}
 		}
 
 		//Select objects

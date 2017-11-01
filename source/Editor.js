@@ -386,6 +386,7 @@ include("editor/utils/DOMUtils.js");
 
 include("editor/history/History.js");
 include("editor/history/action/Action.js");
+include("editor/history/action/ChangeAction.js");
 
 //inclde("editor/timeline/save_format.js");
 //inclde("editor/timeline/settings.js");
@@ -911,31 +912,20 @@ Editor.pasteObject = function(target)
 //Redo action
 Editor.redo = function()
 {
-	//TODO <HISTORY REDO>
+	if(!Editor.history.redo())
+	{
+		Editor.alert("Nothing to redo!");
+	}
+	;
 };
 
 //Undo action
 Editor.undo = function()
 {
-	//TODO <HISTORY UNDO>
-	
-	/*var action = Editor.history.undo();
-	if(action != null)
-	{
-		Editor.updateObjectViews();
-	
-		if(action.type === Action.CHANGED)
-		{
-			if(action.object.uuid === Editor.selectedObjects[0].uuid)
-			{
-				Editor.selectObject(action.object);
-			}
-		}
-	}
-	else
+	if(!Editor.history.undo())
 	{
 		Editor.alert("Not possible to undo any further");
-	}*/
+	}
 };
 
 //Update all object views

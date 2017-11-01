@@ -15,7 +15,6 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.castShadow = self.castShadow.getValue();
 		}
 	});
@@ -30,7 +29,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.receiveShadow = self.receiveShadow.getValue();
 		}
 	});
@@ -45,7 +43,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.setText(self.text.getText());
 		}
 	});
@@ -62,7 +59,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.size = self.size.getValue();
 			self.obj.setText();
 		}
@@ -80,7 +76,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.height = self.height.getValue();
 			self.obj.setText();
 		}
@@ -98,7 +93,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.curveSegments = self.curveSegments.getValue();
 			self.obj.setText();
 		}
@@ -114,7 +108,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.bevel = self.bevel.getValue();
 			self.obj.setText();
 		}
@@ -132,7 +125,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.bevelThickness = self.bevelThickness.getValue();
 			self.obj.setText();
 		}
@@ -150,7 +142,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.bevelSize = self.bevelSize.getValue();
 			self.obj.setText();
 		}

@@ -15,7 +15,6 @@ function ObjectPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.castShadow = self.castShadow.getValue();
 		}
 	});
@@ -30,7 +29,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.receiveShadow = self.receiveShadow.getValue();
 		}
 	});

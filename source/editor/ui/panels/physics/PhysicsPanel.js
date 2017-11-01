@@ -12,7 +12,6 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			
 			var scale = self.scale.getValue();
 			self.obj.scale.set(scale.x, scale.y, scale.z);
@@ -49,7 +48,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.body.type = self.bodyType.getValue();
 		}
 	});
@@ -65,7 +63,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.body.mass = self.mass.getValue();
 		}
 	});
@@ -82,7 +79,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.body.linearDamping = self.linearDamping.getValue();
 		}
 	});
@@ -99,7 +95,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.body.angularDamping = self.angularDamping.getValue();
 		}
 	});
@@ -114,7 +109,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.body.allowSleep = self.allowSleep.getValue();
 		}
 	});
@@ -130,7 +124,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.body.sleepSpeedLimit = self.sleepSpeedLimit.getValue();
 		}
 	});
@@ -146,7 +139,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.body.sleepTimeLimit = self.sleepTimeLimit.getValue();
 		}
 	});
@@ -161,7 +153,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.body.fixedRotation = self.fixedRotation.getValue();
 		}
 	});
@@ -177,7 +168,6 @@ updateControls
 	{
 		if(self.obj !== null)
 		{
-updateControls
 			self.obj.body.collisionFilterGroup = self.collisionFilterGroup.getValue();
 		}
 	});

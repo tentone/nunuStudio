@@ -818,6 +818,11 @@ Interface.initialize = function()
 		Editor.undo();
 	}, Editor.filePath + "icons/misc/undo.png");
 
+	Interface.editor.addOption("Redo", function()
+	{
+		Editor.redo();
+	}, Editor.filePath + "icons/misc/redo.png");
+
 	Interface.editor.addOption("Copy", function()
 	{
 		Editor.copyObject();
