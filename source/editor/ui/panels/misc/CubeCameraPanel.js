@@ -17,7 +17,7 @@ function CubeCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.autoUpdate = self.autoUpdate.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "autoUpdate", self.autoUpdate.getValue()));
 		}
 	});
 	this.form.add(this.autoUpdate);
@@ -31,7 +31,7 @@ function CubeCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.resolution = self.resolution.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "resolution", self.resolution.getValue()));
 			self.obj.updateShadowMap();
 		}
 	});

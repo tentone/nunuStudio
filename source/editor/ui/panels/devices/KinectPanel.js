@@ -15,7 +15,7 @@ function KinectPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.debugModel = self.debugModel.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "debugModel", self.debugModel.getValue()));
 		}
 	});
 	this.form.add(this.debugModel);

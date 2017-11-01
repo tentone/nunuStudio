@@ -43,7 +43,7 @@ function SpinePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.castShadow = self.castShadow.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
 		}
 	});
 	this.form.add(this.castShadow);
@@ -57,7 +57,7 @@ function SpinePanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.receiveShadow = self.receiveShadow.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "receiveShadow", self.receiveShadow.getValue()));
 		}
 	});
 	this.form.add(this.receiveShadow);

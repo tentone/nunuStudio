@@ -20,7 +20,7 @@ function PerspectiveCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.fov = self.fov.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "fov", self.fov.getValue()));
 			self.obj.updateProjectionMatrix();
 		}
 	});
@@ -62,7 +62,7 @@ function PerspectiveCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.near = self.near.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "near", self.near.getValue()));
 		}
 	});
 	this.form.add(this.near);
@@ -77,7 +77,7 @@ function PerspectiveCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.far = self.far.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "far", self.far.getValue()));
 		}
 	});
 	this.form.add(this.far);
@@ -129,7 +129,7 @@ function PerspectiveCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.order = self.order.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "order", self.order.getValue()));
 			self.scene.updateCameraOrder();
 		}
 	});
@@ -144,7 +144,7 @@ function PerspectiveCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.clearColor = self.clearColor.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "clearColor", self.clearColor.getValue()));
 		}
 	});
 	this.form.add(this.clearColor);
@@ -158,7 +158,7 @@ function PerspectiveCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.clearDepth = self.clearDepth.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "clearDepth", self.clearDepth.getValue()));
 		}
 	});
 	this.form.add(this.clearDepth);

@@ -36,7 +36,7 @@ function DirectionalLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.castShadow = self.castShadow.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
 		}
 	});
 	this.form.add(this.castShadow);

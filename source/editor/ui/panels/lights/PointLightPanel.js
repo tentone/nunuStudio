@@ -32,7 +32,7 @@ function PointLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.distance = self.distance.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "distance", self.distance.getValue()));
 		}
 	});
 	this.form.add(this.distance);
@@ -48,7 +48,7 @@ function PointLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.intensity = self.intensity.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "intensity", self.intensity.getValue()));
 		}
 	});
 	this.form.add(this.intensity);
@@ -68,7 +68,7 @@ function PointLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.castShadow = self.castShadow.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
 		}
 	});
 	this.form.add(this.castShadow);

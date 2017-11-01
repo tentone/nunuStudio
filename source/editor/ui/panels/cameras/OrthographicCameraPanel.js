@@ -19,7 +19,7 @@ function OrthographicCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.size = self.size.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "size", self.size.getValue()));
 			self.obj.updateProjectionMatrix();
 		}
 	});
@@ -36,7 +36,7 @@ function OrthographicCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.mode = self.mode.getSelectedIndex();
+			Editor.history.add(new ChangeAction(self.obj, "mode", self.mode.getSelectedIndex()));
 		}
 	});
 	this.form.add(this.mode);
@@ -77,7 +77,7 @@ function OrthographicCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.near = self.near.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "near", self.near.getValue()));
 		}
 	});
 	this.form.add(this.near);
@@ -92,7 +92,7 @@ function OrthographicCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.far = self.far.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "far", self.far.getValue()));
 		}
 	});
 	this.form.add(this.far);
@@ -144,7 +144,7 @@ function OrthographicCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.order = self.order.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "order", self.order.getValue()));
 			self.scene.updateCameraOrder();
 		}
 	});
@@ -159,7 +159,7 @@ function OrthographicCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.clearColor = self.clearColor.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "clearColor", self.clearColor.getValue()));
 		}
 	});
 	this.form.add(this.clearColor);
@@ -173,7 +173,7 @@ function OrthographicCameraPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.clearDepth = self.clearDepth.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "clearDepth", self.clearDepth.getValue()));
 		}
 	});
 	this.form.add(this.clearDepth);

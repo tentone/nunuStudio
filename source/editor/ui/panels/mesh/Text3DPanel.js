@@ -15,7 +15,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.castShadow = self.castShadow.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
 		}
 	});
 	this.form.add(this.castShadow);
@@ -29,7 +29,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.receiveShadow = self.receiveShadow.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "receiveShadow", self.receiveShadow.getValue()));
 		}
 	});
 	this.form.add(this.receiveShadow);
@@ -59,7 +59,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.size = self.size.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "size", self.size.getValue()));
 			self.obj.setText();
 		}
 	});
@@ -76,7 +76,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.height = self.height.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "height", self.height.getValue()));
 			self.obj.setText();
 		}
 	});
@@ -93,7 +93,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.curveSegments = self.curveSegments.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "curveSegments", self.curveSegments.getValue()));
 			self.obj.setText();
 		}
 	});
@@ -108,7 +108,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.bevel = self.bevel.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "bevel", self.bevel.getValue()));
 			self.obj.setText();
 		}
 	});
@@ -125,7 +125,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.bevelThickness = self.bevelThickness.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "bevelThickness", self.bevelThickness.getValue()));
 			self.obj.setText();
 		}
 	});
@@ -142,7 +142,7 @@ function Text3DPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.bevelSize = self.bevelSize.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "bevelSize", self.bevelSize.getValue()));
 			self.obj.setText();
 		}
 	});

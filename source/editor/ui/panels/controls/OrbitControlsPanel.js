@@ -17,7 +17,7 @@ function OrbitControlsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.distance = self.distance.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "distance", self.distance.getValue()));
 		}
 	});
 	this.form.add(this.distance);
@@ -32,7 +32,7 @@ function OrbitControlsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.maxDistance = self.maxDistance.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "maxDistance", self.maxDistance.getValue()));
 		}
 	});
 	this.form.add(this.maxDistance);
@@ -47,7 +47,7 @@ function OrbitControlsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.minDistance = self.minDistance.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "minDistance", self.minDistance.getValue()));
 		}
 	});
 	this.form.add(this.minDistance);
@@ -61,7 +61,7 @@ function OrbitControlsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.needsButtonPressed = self.needsButtonPressed.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "needsButtonPressed", self.needsButtonPressed.getValue()));
 		}
 	});
 	this.form.add(this.needsButtonPressed);
@@ -75,7 +75,7 @@ function OrbitControlsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.movementEnabled = self.movementEnabled.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "movementEnabled", self.movementEnabled.getValue()));
 		}
 	});
 	this.form.add(this.movementEnabled);
@@ -91,7 +91,7 @@ function OrbitControlsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.sensitivity = self.sensitivity.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "sensitivity", self.sensitivity.getValue()));
 		}
 	});
 	this.form.add(this.sensitivity);
@@ -107,7 +107,7 @@ function OrbitControlsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.limitUp = self.limitUp.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "limitUp", self.limitUp.getValue()));
 		}
 	});
 	this.form.add(this.limitUp);
@@ -123,7 +123,7 @@ function OrbitControlsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.limitDown = self.limitDown.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "limitDown", self.limitDown.getValue()));
 		}
 	});
 	this.form.add(this.limitDown);

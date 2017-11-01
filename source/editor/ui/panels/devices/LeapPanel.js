@@ -17,7 +17,7 @@ function LeapPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.mode = self.mode.getSelectedIndex();
+			Editor.history.add(new ChangeAction(self.obj, "mode", self.mode.getSelectedIndex()));
 		}
 	});
 	this.form.add(this.mode);
@@ -31,7 +31,7 @@ function LeapPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.debugModel = self.debugModel.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "debugModel", self.debugModel.getValue()));
 		}
 	});
 	this.form.add(this.debugModel);
@@ -45,7 +45,7 @@ function LeapPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.gesturesEnabled = self.gesturesEnabled.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "gesturesEnabled", self.gesturesEnabled.getValue()));
 		}
 	});
 	this.form.add(this.gesturesEnabled);
@@ -59,7 +59,7 @@ function LeapPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.posesEnabled = self.posesEnabled.getValue();
+			Editor.history.add(new ChangeAction(self.obj, "posesEnabled", self.posesEnabled.getValue()));
 		}
 	});
 	this.form.add(this.posesEnabled);
