@@ -4,38 +4,38 @@
 function History(program)
 {
 	this.actions = [];
+
+	this.position = 0;
 	this.limit = 10;
 }
 
 //Add change to program history
-History.prototype.push = function(action)
-{
+History.prototype.add = function(action)
+{	
 	this.actions.push(action);
+	action.apply();
 
-
-	if(this.actions.length > this.size)
+	if(this.actions.length > this.limit)
 	{
 		this.actions.pop();
 	}
 };
 
-//Get last change from history
-History.prototype.pop = function()
-{
-	return this.actions.pop();
-};
-
-//Revert last action (returns action applied on success)
+//Revert last action
 History.prototype.undo = function()
 {
-	var action = this.actions.pop();
+	if(this.actions.length > 0)
+	{
+		var action = this.actions.pop();
+		action.undo();
+		return true;
+	}
 
-	return action.undo();
+	return false;
 };
 
-//Redo last reverted action (returns type of action applied)
+//Redo last reverted action
 History.prototype.redo = function()
 {
-	//TODO <ADD CODE HERE>
-	return null;
+	return false;
 };

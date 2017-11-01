@@ -8,5 +8,4 @@ function Action(type, target)
 Action.ID = 0;
 
 Action.prototype.apply = function(){};
-Action.prototype.redo = function(){};
-Action.prototype.undo = function(){};
+Action.prototype.revert = function(){};

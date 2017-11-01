@@ -41,7 +41,6 @@ function AudioPanel(parent, obj)
 		if(self.obj !== null)
 		{
 			self.obj.playbackRate = self.playbackRate.getValue();
-updateControls
 		}
 	});
 	this.form.add(this.playbackRate);
@@ -56,7 +55,6 @@ updateControls
 		if(self.obj !== null)
 		{
 			self.obj.autoplay = self.autoplay.getValue();
-updateControls
 		}
 	});
 	this.form.add(this.autoplay);
@@ -71,7 +69,6 @@ updateControls
 		if(self.obj !== null)
 		{
 			self.obj.loop = self.loop.getValue();
-updateControls
 		}
 	});
 	this.form.add(this.loop);
