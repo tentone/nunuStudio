@@ -278,7 +278,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.wiggleValue.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.wiggleValue.setOnChange(function()
 	{
-		self.particle.emitter.wiggle.value = self.wiggleValue.getValue();
+		Editor.history.add(new ChangeAction(self.particle.emitter.wiggle, "value", self.wiggleValue.getValue()));
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.wiggleValue);
@@ -288,7 +288,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.wiggleSpread.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.wiggleSpread.setOnChange(function()
 	{
-		self.particle.emitter.wiggle.spread = self.wiggleSpread.getValue();
+		Editor.history.add(new ChangeAction(self.particle.emitter.wiggle, "spread", self.wiggleSpread.getValue()));
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.wiggleSpread);
@@ -301,13 +301,13 @@ function ParticleEditor(parent, closeable, container, index)
 	this.opacity.size.set(200, 120)
 	this.opacity.setOnChange(function(value)
 	{
-		self.particle.emitter.opacity.value = value;
+		Editor.history.add(new ChangeAction(self.particle.emitter.opacity, "value", value));
 		self.particleRuntime.emitter.opacity.value = value;
 	});
 	this.opacity.addGraph("spread", "#AAAAAA");
 	this.opacity.setOnChange(function(value)
 	{
-		self.particle.emitter.opacity.spread = value;
+		Editor.history.add(new ChangeAction(self.particle.emitter.opacity, "spread", value));
 		self.particleRuntime.emitter.opacity.spread = value;
 	}, "spread");
 	this.form.add(this.opacity);
@@ -320,13 +320,13 @@ function ParticleEditor(parent, closeable, container, index)
 	this.scale.size.set(200, 120)
 	this.scale.setOnChange(function(value)
 	{
-		self.particle.emitter.size.value = value;
+		Editor.history.add(new ChangeAction(self.particle.emitter.size, "value", value));
 		self.particleRuntime.emitter.size.value = value;
 	});
 	this.scale.addGraph("spread", "#AAAAAA");
 	this.scale.setOnChange(function(value)
 	{
-		self.particle.emitter.size.spread = value;
+		Editor.history.add(new ChangeAction(self.particle.emitter.size, "spread", value));
 		self.particleRuntime.emitter.size.spread = value;
 	}, "spread");
 	this.form.add(this.scale);
@@ -360,13 +360,13 @@ function ParticleEditor(parent, closeable, container, index)
 	this.angle.size.set(200, 120)
 	this.angle.setOnChange(function(value)
 	{
-		self.particle.emitter.angle.value = value;
+		Editor.history.add(new ChangeAction(self.particle.emitter.angle, "value", value));
 		self.particleRuntime.emitter.angle.value = value;
 	});
 	this.angle.addGraph("spread", "#AAAAAA");
 	this.angle.setOnChange(function(value)
 	{
-		self.particle.emitter.angle.spread = value;
+		Editor.history.add(new ChangeAction(self.particle.emitter.angle, "spread", value));
 		self.particleRuntime.emitter.angle.spread = value;
 	}, "spread");
 	this.form.add(this.angle);
