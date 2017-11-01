@@ -19,7 +19,7 @@ function ProgramPanel(parent, obj)
 	this.author.updateInterface();
 	this.author.setOnChange(function()
 	{
-		self.obj.author = self.author.getText();
+		Editor.history.add(new ChangeAction(self.obj, "author", self.author.getText()));
 	});
 	this.form.add(this.author);
 	this.form.nextRow();
@@ -30,7 +30,7 @@ function ProgramPanel(parent, obj)
 	this.version.size.set(100, 18);
 	this.version.setOnChange(function()
 	{
-		self.obj.version = self.version.getText();
+		Editor.history.add(new ChangeAction(self.obj, "version", self.version.getText()));
 	});
 	this.form.add(this.version);
 	this.form.nextRow();
@@ -41,7 +41,7 @@ function ProgramPanel(parent, obj)
 	this.lockPointer.size.set(15, 15);
 	this.lockPointer.setOnChange(function()
 	{
-		self.obj.lockPointer = self.lockPointer.getValue();
+		Editor.history.add(new ChangeAction(self.obj, "lockPointer", self.lockPointer.getValue()));
 	});
 	this.form.add(this.lockPointer);
 	this.form.nextRow();
@@ -52,7 +52,7 @@ function ProgramPanel(parent, obj)
 	this.handlePixelRatio.size.set(15, 15);
 	this.handlePixelRatio.setOnChange(function()
 	{
-		self.obj.handlePixelRatio = self.handlePixelRatio.getValue();
+		Editor.history.add(new ChangeAction(self.obj, "handlePixelRatio", self.handlePixelRatio.getValue()));
 	});
 	this.form.add(this.handlePixelRatio);
 	this.form.nextRow()
@@ -67,7 +67,7 @@ function ProgramPanel(parent, obj)
 	this.vr.size.set(15, 15);
 	this.vr.setOnChange(function()
 	{
-		self.obj.vr = self.vr.getValue();
+		Editor.history.add(new ChangeAction(self.obj, "vr", self.vr.getValue()));
 	});
 	this.form.add(this.vr);
 	this.form.nextRow();
@@ -80,7 +80,7 @@ function ProgramPanel(parent, obj)
 	this.vrScale.setStep(0.05);
 	this.vrScale.setOnChange(function()
 	{
-		self.obj.vrScale = self.vrScale.getValue();
+		Editor.history.add(new ChangeAction(self.obj, "vrScale", self.vrScale.getValue()));
 	});
 	this.form.add(this.vrScale);
 	this.form.nextRow();
@@ -95,7 +95,7 @@ function ProgramPanel(parent, obj)
 	this.antialiasing.size.set(15, 15);
 	this.antialiasing.setOnChange(function()
 	{
-		self.obj.antialiasing = self.antialiasing.getValue();
+		Editor.history.add(new ChangeAction(self.obj, "antialiasing", self.antialiasing.getValue()));
 	});
 	this.form.add(this.antialiasing);
 	this.form.nextRow();
@@ -106,7 +106,7 @@ function ProgramPanel(parent, obj)
 	this.shadows.size.set(15, 15);
 	this.shadows.setOnChange(function()
 	{
-		self.obj.shadows = self.shadows.getValue();
+		Editor.history.add(new ChangeAction(self.obj, "shadows", self.shadows.getValue()));
 	});
 	this.form.add(this.shadows);
 	this.form.nextRow();
@@ -120,7 +120,7 @@ function ProgramPanel(parent, obj)
 	this.shadowsType.addValue("PCF Soft", THREE.PCFSoftShadowMap);
 	this.shadowsType.setOnChange(function()
 	{
-		self.obj.shadowsType = self.shadowsType.getValue();
+		Editor.history.add(new ChangeAction(self.obj, "shadowsType", self.shadowsType.getValue()));
 	});
 	this.form.add(this.shadowsType);
 	this.form.nextRow();
@@ -136,7 +136,7 @@ function ProgramPanel(parent, obj)
 	this.toneMapping.addValue("Cineon", THREE.CineonToneMapping);
 	this.toneMapping.setOnChange(function()
 	{
-		self.obj.toneMapping = self.toneMapping.getValue();
+		Editor.history.add(new ChangeAction(self.obj, "toneMapping", self.toneMapping.getValue()));
 	});
 	this.form.add(this.toneMapping);
 	this.form.nextRow();
@@ -149,7 +149,7 @@ function ProgramPanel(parent, obj)
 	this.toneMappingExposure.setStep(0.1);
 	this.toneMappingExposure.setOnChange(function()
 	{
-		self.obj.toneMappingExposure = self.toneMappingExposure.getValue();
+		Editor.history.add(new ChangeAction(self.obj, "toneMappingExposure", self.toneMappingExposure.getValue()));
 	});
 	this.form.add(this.toneMappingExposure);
 	this.form.nextRow();
@@ -162,7 +162,7 @@ function ProgramPanel(parent, obj)
 	this.toneMappingWhitePoint.setStep(0.1);
 	this.toneMappingWhitePoint.setOnChange(function()
 	{
-		self.obj.toneMappingWhitePoint = self.toneMappingWhitePoint.getValue();
+		Editor.history.add(new ChangeAction(self.obj, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()));
 	});
 	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();

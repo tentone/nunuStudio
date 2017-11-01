@@ -27,7 +27,7 @@ History.prototype.undo = function()
 	if(this.actions.length > 0)
 	{
 		var action = this.actions.pop();
-		action.undo();
+		action.revert();
 		return true;
 	}
 

@@ -1,5 +1,6 @@
 "use strict";
 
+//Stores change on one object attribute
 function ChangeAction(object, attribute, newValue)
 {
 	Action.call(this);
@@ -12,10 +13,10 @@ function ChangeAction(object, attribute, newValue)
 
 ChangeAction.prototype.apply = function()
 {
-	this.object[attribute] = this.newValue;
+	this.object[this.attribute] = this.newValue;
 };
 
 ChangeAction.prototype.revert = function()
 {
-	this.object[attribute] = this.oldValue;
+	this.object[this.attribute] = this.oldValue;
 };

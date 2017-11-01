@@ -387,6 +387,7 @@ include("editor/utils/DOMUtils.js");
 include("editor/history/History.js");
 include("editor/history/action/Action.js");
 include("editor/history/action/ChangeAction.js");
+include("editor/history/action/ActionBundle.js");
 
 //inclde("editor/timeline/save_format.js");
 //inclde("editor/timeline/settings.js");
@@ -912,17 +913,24 @@ Editor.pasteObject = function(target)
 //Redo action
 Editor.redo = function()
 {
-	if(!Editor.history.redo())
+	if(Editor.history.redo())
+	{
+		Editor.updateObjectViews();
+	}
+	else
 	{
 		Editor.alert("Nothing to redo!");
 	}
-	;
 };
 
 //Undo action
 Editor.undo = function()
 {
-	if(!Editor.history.undo())
+	if(Editor.history.undo())
+	{
+		Editor.updateObjectViews();
+	}
+	else
 	{
 		Editor.alert("Not possible to undo any further");
 	}
