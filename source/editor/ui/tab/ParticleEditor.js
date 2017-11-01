@@ -63,7 +63,7 @@ function ParticleEditor(parent, closeable, container, index)
 	{
 		if(self.particle !== null)
 		{
-			self.particle.name = self.name.getText();
+			Editor.history.add(new ChangeAction(self.particle, "name", self.name.getText()));
 			Editor.updateObjectViews();
 		}
 	});
@@ -76,7 +76,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.texture.size.set(100, 100);
 	this.texture.setOnChange(function(file)
 	{
-		self.particle.group.texture = self.texture.getValue();
+		Editor.history.add(new ChangeAction(self.particle.group, "texture", self.texture.getValue()));
 		setTimeout(function()
 		{
 			self.updateRuntimeParticle();
@@ -92,7 +92,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.maxParticleCount.size.set(100, 18);
 	this.maxParticleCount.setOnChange(function()
 	{
-		self.particle.group.maxParticleCount = self.maxParticleCount.getValue();
+		Editor.history.add(new ChangeAction(self.particle.group, "maxParticleCount", self.maxParticleCount.getValue()));
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.maxParticleCount);
@@ -109,7 +109,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.blending.addValue("Multiply", THREE.MultiplyBlending);
 	this.blending.setOnChange(function()
 	{
-		self.particle.group.blending = self.blending.getValue();
+		Editor.history.add(new ChangeAction(self.particle.group, "blending", self.blending.getValue()));
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.blending);
@@ -123,7 +123,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.direction.addValue("Backward", -1);
 	this.direction.setOnChange(function()
 	{
-		self.particle.emitter.direction = self.direction.getValue();
+		Editor.history.add(new ChangeAction(self.particle.emitter, "direction", self.direction.getValue()));
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.direction);
@@ -136,7 +136,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.particleCount.setStep(1);
 	this.particleCount.setOnChange(function()
 	{
-		self.particle.emitter.particleCount = self.particleCount.getValue();
+		Editor.history.add(new ChangeAction(self.particle.emitter, "particleCount", self.particleCount.getValue()));
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.particleCount);
@@ -154,7 +154,8 @@ function ParticleEditor(parent, closeable, container, index)
 		{
 			duration = null;
 		}
-		self.particle.emitter.duration = duration;
+
+		Editor.history.add(new ChangeAction(self.particle.emitter, "duration", duration));
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.duration);
@@ -169,7 +170,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.type.addValue("Disc", SPE.distributions.DISC);
 	this.type.setOnChange(function()
 	{
-		self.particle.emitter.type = self.type.getValue();
+		Editor.history.add(new ChangeAction(self.particle.emitter, "type", self.type.getValue()));
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.type);
@@ -182,7 +183,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.maxAgeValue.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAgeValue.setOnChange(function()
 	{
-		self.particle.emitter.maxAge.value = self.maxAgeValue.getValue();
+		Editor.history.add(new ChangeAction(self.particle.emitter.maxAge, "value", self.maxAgeValue.getValue()));
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.maxAgeValue);
@@ -192,7 +193,7 @@ function ParticleEditor(parent, closeable, container, index)
 	this.maxAgeSpread.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.maxAgeSpread.setOnChange(function()
 	{
-		self.particle.emitter.maxAge.spread = self.maxAgeSpread.getValue();
+		Editor.history.add(new ChangeAction(self.particle.emitter.maxAge, "spread", self.maxAgeSpread.getValue()));
 		self.updateRuntimeParticle();
 	});
 	this.form.add(this.maxAgeSpread);

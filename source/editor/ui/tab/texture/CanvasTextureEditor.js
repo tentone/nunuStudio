@@ -14,7 +14,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.width = self.width.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "width", self.width.getValue()));
 			self.texture.updateSize();
 			self.updatePreview();
 		}
@@ -30,7 +30,7 @@ function CanvasTextureEditor(parent, closeable, container, index)
 	{
 		if(self.texture !== null)
 		{
-			self.texture.height = self.height.getValue();
+			Editor.history.add(new ChangeAction(self.texture, "height", self.height.getValue()));
 			self.texture.updateSize();
 			self.updatePreview();
 		}
