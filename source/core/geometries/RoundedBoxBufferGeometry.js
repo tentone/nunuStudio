@@ -24,11 +24,11 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 	this.type = "RoundedBoxBufferGeometry";
 
 	//Validate params
-	radiusSegments = !isNaN(radiusSegments) ? Math.max(1, Math.floor(radiusSegments)) : 1;
-	width = !isNaN(width) ? width : 1;
-	height = !isNaN(height) ? height : 1;
-	depth = !isNaN(depth) ? depth : 1;
-	radius = !isNaN(radius) ? radius : .15;
+	radiusSegments = radiusSegments !== undefined ? Math.max(1, Math.floor(radiusSegments)) : 1;
+	width = width !== undefined width : 1;
+	height = height !== undefined ? height : 1;
+	depth = depth !== undefined ? depth : 1;
+	radius = radius !== undefined ? radius : .15;
 	radius = Math.min(radius, Math.min(width, Math.min(height, Math.min(depth))) / 2);
 
 	var edgeHalfWidth = width / 2 - radius;
@@ -130,12 +130,10 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 		{
 			for(var j = 0; j < cornerVerts[0].length; j++)
 			{
-				var vert = cornerVerts[0][j].clone()
-					.multiply(cornerLayout[i]);
+				var vert = cornerVerts[0][j].clone().multiply(cornerLayout[i]);
 				cornerVerts[i].push(vert);
 				vertexPool.push(vert);
-				var norm = cornerNormals[0][j].clone()
-					.multiply(cornerLayout[i]);
+				var norm = cornerNormals[0][j].clone().multiply(cornerLayout[i]);
 				cornerNormals[i].push(norm);
 				normalPool.push(norm);
 			}
