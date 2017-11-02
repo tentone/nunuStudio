@@ -61,32 +61,41 @@
 
 			<img src="material.jpg" class="img-normal"></img>
 
-			<p>To create a water effect we can use a water surface normal map, we can find some of these around the web, here is the one that i have used for this tutorial.</p>
-			<p>We can use our normal map as booth normal map and displacement map, by attaching our normal map as displacement map the red channel wil be used to create displacement in the surface of our geometry creaing a wavy effect.</p>
+			<p>To create a water effect we can use a water surface normal map, we can find some of these around the web, here is the one that i have used for this tutorial. We can use our normal map as booth normal map and displacement map, by attaching our normal map as displacement map the only one color channel will be used to create displacement in the surface of our geometry creating a wavy effect that should make our water look even better.</p>
 			
 			<img src="normal.jpeg" class="img-small"></img>
 
 			<p>The texture we added above is static, the following code can be used to animate the texture, it moves our water normal map in the x and y axis. For it to work properly we have to set our texture repetition to "Repeat" mode, otherwise this will not work. To enable vertex animation we could set the needsUpdate attribute of our material and texture to true.</p> 
 			
-			<pre><code>var normal = program.getTextureByName("normal");
+			<pre><code>var normal;
+
+function initialize()
+{
+	normal = program.getTextureByName("normal");
+}
 
 function update()
 {
 	normal.offset.x += 0.002;
 	normal.offset.y += 0.002;
-}</code></pre>
+}
+</code></pre>
 			
 			<p>Now we have a water like surface but it still does not reflect the environment around it, to add this we can create a cubecamera object. After adding the object to the scene we have to check auto update on, so that we don't have to manually update the cubecamera.</p>
 
-			<pre><code>var water = program.getMaterialByName("water");
-var cube = scene.getObjectByName("cubecamera");
-water.envMap = cube.cube;</code></pre>
+			<pre><code>var water, cube;
 
-			<p>Our water its pretty much ready right now, lets just add a </p>
+function initialize()
+{
+	...
 
-			<img src="cubemap.jpg" class="img-small"></img>
+	water = program.getMaterialByName("water");
+	cube = scene.getObjectByName("cubecamera");
+	water.envMap = cube.cube;
+}</code></pre>
 
-			<p>To try this example in the editor you can download the <a class="underline" href="code.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/basics/12_animation/code.nsp">Web Editor</a>.</p>
+			<p>Our water its much ready right now, i have added a cubemap to make our scene look more complete and a OrbitControl object for camera movement. To try this example in the editor you can download the <a class="underline" href="water.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/basics/13_water/water.nsp">Web Editor</a>.</p>
+			
 			<div>
 				<canvas id="water" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
