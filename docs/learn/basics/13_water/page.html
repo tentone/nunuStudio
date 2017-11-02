@@ -56,14 +56,17 @@
 			<p>In this tutorial we will experiment a bit more with materials and learn how to create a simple 3D water effect using textures and a cubecamera object (to create reflections)</p>
 			<p>Lets start by creating a basic scene with some objects and a plane that we will use to create our water, we have to configure our plane geometry to have multiple subdivision, we will need it later to create a wave effect with the material.</p>
 
+			
+			<p>After we have our scene lets create a new material, we can use a standard, physical or phong material for this tutorial. Lets name this material water, this material will be used for our water surface. You can add some color and transparency if you want to.</p>
 
-			<p>After we have our scene lets create a new material, we can use a standard, physical or phong material for this tutorial.</p>
 			<img src="material.jpg" class="img-normal"></img>
 
 			<p>To create a water effect we can use a water surface normal map, we can find some of these around the web, here is the one that i have used for this tutorial.</p>
+			<p>We can use our normal map as booth normal map and displacement map, by attaching our normal map as displacement map the red channel wil be used to create displacement in the surface of our geometry creaing a wavy effect.</p>
+			
 			<img src="normal.jpeg" class="img-small"></img>
 
-			<p>The texture we added above is static, the following code can be used to animate the texture, it moves our water normal map in the x and y axis. For it to work properly we have to set our texture repetition to "Repeat" mode, otherwise this will not work.</p>
+			<p>The texture we added above is static, the following code can be used to animate the texture, it moves our water normal map in the x and y axis. For it to work properly we have to set our texture repetition to "Repeat" mode, otherwise this will not work. To enable vertex animation we could set the needsUpdate attribute of our material and texture to true.</p> 
 			
 			<pre><code>var normal = program.getTextureByName("normal");
 
@@ -79,7 +82,7 @@ function update()
 var cube = scene.getObjectByName("cubecamera");
 water.envMap = cube.cube;</code></pre>
 
-			<p>TODO</p>
+			<p>Our water its pretty much ready right now, lets just add a </p>
 
 			<img src="cubemap.jpg" class="img-small"></img>
 
