@@ -165,7 +165,7 @@ include("core/utils/Mesh2shape.js");
 /**
  * Graphics renderer in use by this NunuApp instance
  * @property renderer
- * @type {THREE.Renderer}
+ * @type {Renderer}
  */
 
 /**
@@ -267,6 +267,8 @@ NunuApp.loadApp = function(url, canvas)
 
 /**
  * Start running nunu program.
+ *
+ * Creates renderer, mouse and keyboard objects, and starts running the loaded application.
  * 
  * A nunu program must be loaded before calling this method.
  * 

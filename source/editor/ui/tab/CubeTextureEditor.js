@@ -410,13 +410,19 @@ CubeTextureEditor.prototype.attach = function(texture)
 	this.mode.setValue(texture.mode);
 	this.flipY.setValue(texture.flipY);
 
-	this.image.setValue(texture.images[0].data);
-	this.top.setValue(texture.images[CubeTexture.TOP].data);
-	this.bottom.setValue(texture.images[CubeTexture.BOTTOM].data);
-	this.left.setValue(texture.images[CubeTexture.LEFT].data);
-	this.right.setValue(texture.images[CubeTexture.RIGHT].data);
-	this.front.setValue(texture.images[CubeTexture.FRONT].data);
-	this.back.setValue(texture.images[CubeTexture.BACK].data);
+	if(texture.mode === CubeTexture.CROSS || texture.mode === CubeTexture.EQUIRECTANGULAR)
+	{
+		this.image.setValue(texture.images[0].data);
+	}
+	else
+	{
+		this.top.setValue(texture.images[CubeTexture.TOP].data);
+		this.bottom.setValue(texture.images[CubeTexture.BOTTOM].data);
+		this.left.setValue(texture.images[CubeTexture.LEFT].data);
+		this.right.setValue(texture.images[CubeTexture.RIGHT].data);
+		this.front.setValue(texture.images[CubeTexture.FRONT].data);
+		this.back.setValue(texture.images[CubeTexture.BACK].data);
+	}
 
 	this.updateMode();
 };
