@@ -167,6 +167,8 @@
 	- Fixed support for spine animations
 	- Editor infinite grid
 	- Animation timeline editor (@zz85)
+	mproved history system in the editor
+	
 
 ### Tech
 nunuStudio is built on top of a number of open source projects
