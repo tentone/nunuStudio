@@ -167,7 +167,8 @@
 	- Fixed support for spine animations
 	- Editor infinite grid
 	- Animation timeline editor (@zz85)
-	mproved history system in the editor
+	- Improved history system in the editor
+	- Support for mesh modifiers
 	
 
 ### Tech
