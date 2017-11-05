@@ -67,7 +67,7 @@ Key.prototype.update = function(action)
 
 	if(action === Key.DOWN)
 	{
-		if(this.pressed ===  false)
+		if(this.pressed === false)
 		{
 			this.justPressed = true;
 		}
