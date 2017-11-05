@@ -1025,7 +1025,6 @@ Interface.initialize = function()
 		var mesh = new Mesh(geometry, Editor.defaultMaterial);
 		Editor.addToScene(mesh);
 
-
 		alert("Reduced from " + vertices + " to " + Math.ceil(vertices * level) + " vertex.");
 
 	}, Editor.filePath + "icons/models/figures.png");
@@ -1073,6 +1072,44 @@ Interface.initialize = function()
 		obj.rotation.set(0, 0, 0);
 
 	}, Editor.filePath + "icons/tools/move.png");
+
+	//Merge geometries
+	Interface.editor.addOption("Merge geometries", function()
+	{
+		if(Editor.selectedObjects.length < 2)
+		{
+			Editor.alert("Operation needs 2 mesh object.");
+			return;
+		}
+
+		var geometry = new THREE.Geometry();
+		var warning = false;
+
+		for(var i = 0; i < Editor.selectedObjects.length; i++)
+		{	
+			var obj = Editor.selectedObjects[i];
+			if(obj.geometry !== undefined)
+			{
+				//Convert to geometry and merge
+				if(obj.geometry instanceof BufferGeometry)
+				{
+					var converted = new THREE.Geometry();
+					converted.fromBufferGeometry(obj.geometry);
+					geometry.merge(converted, obj.matrixWorld)
+				}
+				//Merge geometry
+				else
+				{
+					geometry.merge(obj.geometry, obj.matrixWorld)
+				}
+			}
+		}
+
+		var mesh = new Mesh(geometry, Editor.defaultMaterial);
+		mesh.name = "merged";
+		Editor.addToScene(mesh);
+
+	}, Editor.filePath + "icons/misc/union.png");
 
 	Interface.editor.updateInterface();
 
