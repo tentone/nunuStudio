@@ -38,7 +38,7 @@ function OrbitControlsPanel(parent, obj)
 	this.form.add(this.maxDistance);
 	this.form.nextRow();
 
-	this.form.addText("Max Distance");
+	this.form.addText("Min Distance");
 	this.minDistance = new NumberBox(this.form.element);
 	this.minDistance.size.set(60, 18);
 	this.minDistance.setStep(0.1);
