@@ -227,9 +227,12 @@ include("lib/three/exporters/STLExporter.js");
 include("lib/three/exporters/STLBinaryExporter.js");
 include("lib/three/exporters/GLTFExporter.js");
 
+include("lib/zlib/zlib.min.js");
+include("lib/zlib/gzip.min.js");
+include("lib/zlib/gunzip.min.js");
+
 include("lib/timeliner.js");
 include("lib/jsblend.js");
-include("lib/zlib.min.js");
 include("lib/jscookie.min.js");
 include("lib/jshint.min.js");
 include("lib/jscolor.min.js");
