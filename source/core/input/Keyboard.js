@@ -17,13 +17,13 @@
  */
 function Keyboard()
 {
-	this.keys = [];
+	this.keys = new Array(256);
 	this.actions = [];
 
 	//Initialize Keys
 	for(var i = 0; i < 256; i++)
 	{
-		this.keys.push(new Key());
+		this.keys[i] = new Key();
 	}
 
 	//Events

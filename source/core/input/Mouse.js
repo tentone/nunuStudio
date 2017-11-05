@@ -38,7 +38,7 @@
 function Mouse()
 {
 	//Raw data
-	this._keys = [];
+	this._keys = new Array(3);
 	this._position = new THREE.Vector2(0, 0);
 	this._positionUpdated = false;
 	this._delta = new THREE.Vector2(0, 0);
@@ -47,7 +47,7 @@ function Mouse()
 	this._doubleClicked = false;
 
 	//Position, delta, and scroll speed
-	this.keys = [];
+	this.keys = new Array(3);
 	this.position = new THREE.Vector2(0,0);
 	this.delta = new THREE.Vector2(0,0);
 	this.wheel = 0;
@@ -62,8 +62,8 @@ function Mouse()
 	//Initialize key instances
 	for(var i = 0; i < 3; i++)
 	{
-		this._keys.push(new Key());
-		this.keys.push(new Key());
+		this._keys[i] = new Key();
+		this.keys[i] = new Key();
 	}
 
 	//Self pointer
@@ -136,33 +136,30 @@ function Mouse()
 			lastTouch.set(touch.clientX, touch.clientY);
 		});
 	}
-	//Mouse input events
-	else
+
+	//Move
+	this.events.add(window, "mousemove", function(event)
 	{
-		//Move
-		this.events.add(window, "mousemove", function(event)
-		{
-			self.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
-		});
+		self.updatePosition(event.clientX, event.clientY, event.movementX, event.movementY);
+	});
 
-		//Button pressed
-		this.events.add(window, "mousedown", function(event)
-		{
-			self.updateKey(event.which - 1, Key.DOWN);
-		});
+	//Button pressed
+	this.events.add(window, "mousedown", function(event)
+	{
+		self.updateKey(event.which - 1, Key.DOWN);
+	});
 
-		//Button released
-		this.events.add(window, "mouseup", function(event)
-		{
-			self.updateKey(event.which - 1, Key.UP);
-		});
+	//Button released
+	this.events.add(window, "mouseup", function(event)
+	{
+		self.updateKey(event.which - 1, Key.UP);
+	});
 
-		//Drag start
-		this.events.add(window, "dragstart", function(event)
-		{
-			self.updateKey(event.which - 1, Key.UP);
-		});
-	}
+	//Drag start
+	this.events.add(window, "dragstart", function(event)
+	{
+		self.updateKey(event.which - 1, Key.UP);
+	});
 
 	//Mouse double click
 	this.events.add(window, "dblclick", function(event)
@@ -413,13 +410,10 @@ Mouse.update = function()
 	//Update mouse Position if needed
 	if(this._positionUpdated)
 	{
-		this.delta.x = this._delta.x;
-		this.delta.y = this._delta.y;
+		this.delta.copy(this._delta);
+		this.position.copy(this._position);
+
 		this._delta.set(0,0);
-
-		this.position.x = this._position.x;
-		this.position.y = this._position.y;
-
 		this._positionUpdated = false;
 	}
 	else
