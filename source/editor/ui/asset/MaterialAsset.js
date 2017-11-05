@@ -114,6 +114,20 @@ function MaterialAsset(parent)
 			}
 		});
 		
+		context.addOption("Select objects", function()
+		{	
+			Editor.clearSelection();
+			Editor.program.traverse(function(child)
+			{
+				if(child.material === self.material)
+				{
+					Editor.addToSelection(child);
+				}
+			});
+
+			Editor.updateObjectViews();
+		})
+
 		context.addOption("Delete", function()
 		{
 			if(self.material !== null && confirm("Delete material?"))

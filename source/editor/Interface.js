@@ -1083,7 +1083,6 @@ Interface.initialize = function()
 		}
 
 		var geometry = new THREE.Geometry();
-		var warning = false;
 
 		for(var i = 0; i < Editor.selectedObjects.length; i++)
 		{	
@@ -1091,7 +1090,7 @@ Interface.initialize = function()
 			if(obj.geometry !== undefined)
 			{
 				//Convert to geometry and merge
-				if(obj.geometry instanceof BufferGeometry)
+				if(obj.geometry instanceof THREE.BufferGeometry)
 				{
 					var converted = new THREE.Geometry();
 					converted.fromBufferGeometry(obj.geometry);
