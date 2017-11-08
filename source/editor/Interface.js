@@ -515,6 +515,7 @@ Interface.initialize = function()
 	}, Editor.filePath + "icons/misc/save.png");
 
 	//Save project
+	/*
 	Interface.file.addOption("Save Compressed", function()
 	{
 		if(Nunu.runningOnDesktop())
@@ -560,7 +561,7 @@ Interface.initialize = function()
 		}
 
 	}, Editor.filePath + "icons/misc/save.png");
-
+	*/
 
 	//Load Project
 	Interface.file.addOption("Load", function()
