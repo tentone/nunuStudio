@@ -433,7 +433,7 @@ ResourceManager.prototype.removeAudio = function(audio, defaultAudio)
 		{
 			if(child.audio !== undefined && child.audio.uuid === audio.uuid)
 			{
-				child.setFont(defaultAudio);
+				child.setAudio(defaultAudio);
 			}
 		});
 	}

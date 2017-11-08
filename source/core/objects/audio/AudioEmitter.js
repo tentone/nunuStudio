@@ -190,6 +190,41 @@ AudioEmitter.prototype.stop = function()
 };
 
 /**
+ * Change audio resource.
+ * 
+ * If changed after initialization the audio buffer will be disconnected and reintialized.
+ *
+ * @method setAudio
+ * @param {Audio} audio Audio resource.
+ */
+AudioEmitter.prototype.setAudio = function(audio)
+{
+	this.audio = audio;
+
+	if(this.buffer !== null)
+	{
+		if(this.isPlaying)
+		{
+			this.stop();
+		}
+		this.disconnect();
+
+		try
+		{
+			this.context.decodeAudioData(this.audio.data, function(buffer)
+			{
+				self.setBuffer(buffer);
+			},
+			function(error)
+			{
+				console.error("nunuStudio: Cannot decode audio buffer (" + error + ")");
+			});
+		}
+		catch(e){}
+	}
+};
+
+/**
  * Get audio emitter volume.
  * 
  * @param {Number} volume
