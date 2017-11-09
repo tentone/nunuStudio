@@ -8,6 +8,15 @@ function ObjectRemovedAction(object, parent)
 
 ObjectRemovedAction.prototype.apply = function()
 {
+	if(this.object instanceof THREE.Camera)
+	{
+		var scene = ObjectUtils.getScene(this.object);
+		if(scene !== null)
+		{
+			scene.removeCamera(this.object);
+		}
+	}
+	
 	this.parent.remove(this.object);
 };
 
