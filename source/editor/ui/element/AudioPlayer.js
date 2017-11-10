@@ -112,7 +112,9 @@ function AudioPlayer(parent)
 		}
 	};
 
-	this.onMouseMove = function(event)
+	//Event manager
+	this.manager = new EventManager();
+	this.manager.add(window, "mousemove", function(event)
 	{
 		if(self.dragging && self.buffer !== null)
 		{
@@ -131,9 +133,9 @@ function AudioPlayer(parent)
 			self.progress.style.width = (self.seekProgress * 100) + "%";
 			self.scrubber.style.left = self.progress.style.width;
 		}
-	};
+	});
 
-	this.onMouseUp = function(event)
+	this.manager.add(window, "mouseup", function(event)
 	{
 		if(self.dragging)
 		{
@@ -145,11 +147,9 @@ function AudioPlayer(parent)
 				self.play(self.time);
 			}
 		}
-	};
+	});
 	
-	//Window events
-	window.addEventListener("mousemove", this.onMouseMove);
-	window.addEventListener("mouseup", this.onMouseUp);
+	this.manager.create();
 
 	//Update elements
 	function draw()
@@ -199,9 +199,11 @@ AudioPlayer.prototype = Object.create(Element.prototype);
 //Decode audio
 AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
 {
+	var self = this;
+
 	this.context.decodeAudioData(buffer.slice(0), function(buffer)
 	{
-		this.buffer = buffer;
+		self.buffer = buffer;
 
 		if(onLoad !== undefined)
 		{
@@ -305,8 +307,7 @@ AudioPlayer.prototype.destroy = function()
 	try
 	{
 		//Remove event listeners
-		window.removeEventListener("mousemove", this.onMouseMove);
-		window.removeEventListener("mouseup", this.onMouseUp);
+		this.manager.destroy();
 
 		//Stop audio playback
 		this.disconnect();
@@ -346,10 +347,10 @@ AudioPlayer.prototype.updateInterface = function()
 	this.button.style.height = this.element.style.height;
 
 	//Track
-	this.track.style.top = (this.size.y * 0.40) + "px";
+	this.track.style.top = (this.size.y * 0.4) + "px";
 	this.track.style.left = (this.size.y * 1.05) + "px";
 	this.track.style.width = (this.size.x - this.size.y * 1.5 - 35) + "px";
-	this.track.style.height = (this.size.y * 0.2) + "px";
+	this.track.style.height = (this.size.y * 0.3) + "px";
 
 	//Scrubber
 	this.scrubber.style.height = (this.size.y * 0.8) + "px";

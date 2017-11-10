@@ -37,11 +37,11 @@ EventManager.prototype.add = function(target, event, callback)
 };
 
 /**
- * Remove all events from the manager.
+ * Destroys this manager and remove all events.
  *
- * @method removeAll
+ * @method clear
  */
-EventManager.prototype.removeAll = function()
+EventManager.prototype.clear = function()
 {
 	this.destroy();
 	this.events = [];
