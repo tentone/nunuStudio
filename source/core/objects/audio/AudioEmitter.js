@@ -106,7 +106,7 @@ AudioEmitter.prototype.initialize = function()
 	{
 		try
 		{
-			this.context.decodeAudioData(this.audio.data, function(buffer)
+			this.context.decodeAudioData(this.audio.data.slice(0), function(buffer)
 			{
 				self.setBuffer(buffer);
 			},
@@ -211,7 +211,7 @@ AudioEmitter.prototype.setAudio = function(audio)
 
 		try
 		{
-			this.context.decodeAudioData(this.audio.data, function(buffer)
+			this.context.decodeAudioData(this.audio.data.slice(0), function(buffer)
 			{
 				self.setBuffer(buffer);
 			},

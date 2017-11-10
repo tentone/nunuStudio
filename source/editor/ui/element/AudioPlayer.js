@@ -199,7 +199,7 @@ AudioPlayer.prototype = Object.create(Element.prototype);
 //Decode audio
 AudioPlayer.prototype.setAudioBuffer = function(buffer, onLoad)
 {
-	this.context.decodeAudioData(buffer, function(buffer)
+	this.context.decodeAudioData(buffer.slice(0), function(buffer)
 	{
 		this.buffer = buffer;
 
