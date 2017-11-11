@@ -76,13 +76,15 @@ PositionalAudio.prototype.update = function()
 	{
 		this.tempA.setFromMatrixPosition(this.matrixWorld);
 		this.tempB.setFromMatrixPosition(this.cameras[0].matrixWorld);
-		
 		this.tempA.sub(this.tempB);
-		this.panner.setPosition(this.tempA.x, this.tempA.y, this.tempA.z);
+
+		this.panner.setPosition(this.tempA.x, this.tempA.z, this.tempA.y);
+		this.panner.setOrientation(0, 0, 0);
 	}
 	else
 	{
 		this.panner.setPosition(0, 0, 0);
+		this.panner.setOrientation(0, 0, 0);
 	}
 
 	for(var i = 0; i < this.children.length; i++)
