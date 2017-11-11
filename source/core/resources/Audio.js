@@ -38,9 +38,6 @@ function Audio(url, encoding)
 			this.format = "arraybuffer";
 		}
 	}
-
-	//Audio buffer
-	this.audioBuffer = null;
 }
 
 Audio.prototype = Object.create(Resource.prototype);
@@ -77,24 +74,10 @@ Audio.fileIsAudio = function(file)
  */
 Audio.prototype.getAudioBuffer = function(context, callback)
 {
-	if(this.audioBuffer === null)
+	context.decodeAudioData(this.data.slice(0), callback, function(error)
 	{
-		var self = this;
-
-		context.decodeAudioData(this.data, function(buffer)
-		{
-			self.audioBuffer = buffer;
-			callback(buffer);
-		},
-		function(error)
-		{
-			console.error("nunuStudio: Cannot decode audio buffer (" + error + ")");
-		});
-	}
-	else
-	{
-		callback(this.audioBuffer);
-	}
+		console.error("nunuStudio: Cannot decode audio buffer (" + error + ")");
+	});
 };
 
 
