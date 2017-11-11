@@ -38,6 +38,9 @@ function Audio(url, encoding)
 			this.format = "arraybuffer";
 		}
 	}
+
+	//Audio buffer
+	this.audioBuffer = null;
 }
 
 Audio.prototype = Object.create(Resource.prototype);
@@ -62,6 +65,38 @@ Audio.fileIsAudio = function(file)
 
 	return false;
 };
+
+/**
+ * Get an WebAudio buffer to play the audio stored in this resources.
+ *
+ * This method is asyncronous and the value is returned using a callback function.
+ * 
+ * @method getAudioBuffer
+ * @param {AudioContext} context WebAudio context used to decode the audio data.
+ * @param {Function} callback Callback funtion that receives an audio buffer as argument.
+ */
+Audio.prototype.getAudioBuffer = function(context, callback)
+{
+	if(this.audioBuffer === null)
+	{
+		var self = this;
+
+		context.decodeAudioData(this.data, function(buffer)
+		{
+			self.audioBuffer = buffer;
+			callback(buffer);
+		},
+		function(error)
+		{
+			console.error("nunuStudio: Cannot decode audio buffer (" + error + ")");
+		});
+	}
+	else
+	{
+		callback(this.audioBuffer);
+	}
+};
+
 
 /**
  * Serialize audio data as json.
