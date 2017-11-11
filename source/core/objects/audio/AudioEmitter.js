@@ -42,6 +42,14 @@
  * @type {boolean}
 */
 /**
+ * AudioListener used by this emmiter.
+ *
+ * Every AudioEmitter has a different WebAudio AudioListener.
+ * 
+ * @property listener
+ * @type {AudioListener}
+*/
+/**
  * Audio source type, can have the following values:
  *  - empty
  *  - buffer
@@ -58,7 +66,7 @@ function AudioEmitter(audio)
 	this.name = "audio";
 	this.type = "Audio";
 
-	this.listener = AudioEmitter.listener;
+	this.listener = new THREE.AudioListener();
 	this.context = this.listener.context;
 	this.matrixAutoUpdate = false;
 
@@ -76,17 +84,10 @@ function AudioEmitter(audio)
 	this.startTime = 0;
 	this.loop = true;
 
+	this.disposed = false;
 	this.isPlaying = false;
 	this.hasPlaybackControl = true;
 }
-
-/**
- * Default WebAudio listener shared by audio emitters.
- *
- * @attribute listener
- * @type {WebAudioListener}
- */
-AudioEmitter.listener = new THREE.AudioListener();
 
 THREE._Audio = THREE.Audio;
 THREE.Audio = AudioEmitter;
@@ -125,6 +126,26 @@ AudioEmitter.prototype.initialize = function()
 	{
 		this.children[i].initialize();
 	}
+};
+
+/**
+ * Set audio buffer to be used by this emitter.
+ *
+ * @method setBuffer
+ * @param {AudioBuffer} audioBuffer Audio buffer to be used.
+ * @return {AudioEmitter} Self pointer for chaining.
+ */
+AudioEmitter.prototype.setBuffer = function(audioBuffer)
+{
+	this.buffer = audioBuffer;
+	this.sourceType = "buffer";
+
+	if(this.autoplay && !this.disposed)
+	{
+		this.play();
+	}
+	
+	return this;
 };
 
 /**
@@ -413,6 +434,8 @@ AudioEmitter.prototype.dispose = function()
 		this.stop();
 		this.disconnect();
 	}
+
+	this.disposed = true;
 
 	for(var i = 0; i < this.children.length; i++)
 	{
