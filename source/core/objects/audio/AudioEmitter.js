@@ -101,22 +101,14 @@ AudioEmitter.prototype = Object.create(THREE._Audio.prototype);
  */
 AudioEmitter.prototype.initialize = function()
 {
-	var self = this;
-
 	if(this.audio !== null)
 	{
-		try
+		var self = this;
+
+		this.audio.getAudioBuffer(this.context, function(buffer)
 		{
-			this.context.decodeAudioData(this.audio.data.slice(0), function(buffer)
-			{
-				self.setBuffer(buffer);
-			},
-			function(error)
-			{
-				console.error("nunuStudio: Cannot decode audio buffer (" + error + ")");
-			});
-		}
-		catch(e){}
+			self.setBuffer(buffer);
+		});
 	}
 
 	this.setVolume(this.volume);
@@ -229,20 +221,14 @@ AudioEmitter.prototype.setAudio = function(audio)
 			this.stop();
 		}
 		this.disconnect();
-
-		try
-		{
-			this.context.decodeAudioData(this.audio.data.slice(0), function(buffer)
-			{
-				self.setBuffer(buffer);
-			},
-			function(error)
-			{
-				console.error("nunuStudio: Cannot decode audio buffer (" + error + ")");
-			});
-		}
-		catch(e){}
 	}
+
+	var self = this;
+
+	this.audio.getAudioBuffer(this.context, function(buffer)
+	{
+		self.setBuffer(buffer);
+	});
 };
 
 /**
