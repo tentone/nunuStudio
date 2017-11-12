@@ -461,6 +461,8 @@ SceneEditor.prototype.destroy = function()
 
 	this.mouse.dispose();
 	this.keyboard.dispose();
+	
+	this.disposeRunningProgram();
 
 	if(this.renderer !== null)
 	{
