@@ -112,6 +112,16 @@ function AudioPlayer(parent)
 		}
 	};
 
+	this.track.onclick = function(event)
+	{
+		if(self.dragging && self.buffer !== null)
+		{
+			var progress = event.layerX / this.offsetWidth;
+
+			console.log(progress);
+		}
+	};
+
 	//Event manager
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
@@ -172,17 +182,20 @@ function AudioPlayer(parent)
 			
 			self.timer.innerHTML = minutes + ":" + seconds;
 
-			if(self.time >= self.buffer.duration)
+			if(self.buffer !== null)
 			{
-				self.stop();
-			}
+				if(self.time >= self.buffer.duration)
+				{
+					self.stop();
+				}
 
-			var progress = (self.time / self.buffer.duration) * 100;
+				var progress = (self.time / self.buffer.duration) * 100;
 
-			if(!self.dragging)
-			{
-				self.progress.style.width = progress + "%";
-				self.scrubber.style.left = progress + "%";
+				if(!self.dragging)
+				{
+					self.progress.style.width = progress + "%";
+					self.scrubber.style.left = progress + "%";
+				}
 			}
 		}
 

@@ -36,8 +36,9 @@ function PositionalAudio(audio)
 
 	//Runtime variables
 	this.cameras = null;
-	this.tempA = new THREE.Vector3();
-	this.tempB = new THREE.Vector3();
+	this.tempPosition = new THREE.Vector3();
+	this.tempPositionCamera = new THREE.Vector3();
+	this.tempQuaternionCamera = new THREE.Quaternion();
 }
 
 THREE._PositionalAudio = THREE.PositionalAudio;
@@ -74,12 +75,17 @@ PositionalAudio.prototype.update = function()
 {
 	if(this.cameras.length > 0)
 	{
-		this.tempA.setFromMatrixPosition(this.matrixWorld);
-		this.tempB.setFromMatrixPosition(this.cameras[0].matrixWorld);
-		this.tempA.sub(this.tempB);
+		var camera = this.cameras[0];
 
-		this.panner.setPosition(this.tempA.x, this.tempA.z, this.tempA.y);
-		this.panner.setOrientation(0, 0, 0);
+		this.getWorldPosition(this.tempPosition);
+		camera.getWorldPosition(this.tempPositionCamera);
+		camera.getWorldQuaternion(this.tempQuaternionCamera);
+
+		this.tempPosition.sub(this.tempPositionCamera);
+		this.tempPosition.z = -this.tempPosition.z;
+		
+		this.tempPosition.applyQuaternion(this.tempQuaternionCamera);
+		this.panner.setPosition(this.tempPosition.x, this.tempPosition.z, this.tempPosition.y);
 	}
 	else
 	{
