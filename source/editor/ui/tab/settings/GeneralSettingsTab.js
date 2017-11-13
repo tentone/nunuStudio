@@ -41,7 +41,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	//Auto update
 	if(Nunu.runningOnDesktop())
 	{
-		this.form.addText("Auto Update");
+		this.form.addText("Auto Update").setAltText("If checked the editor will auto-update to the latest version.");
 		this.autoUpdate = new CheckBox(this.form.element);
 		this.autoUpdate.size.set(15, 15);
 		this.autoUpdate.setOnChange(function()
@@ -58,7 +58,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	}
 
 	//Show stats
-	this.form.addText("Performance info");
+	this.form.addText("Performance info").setAltText("Show performance information in the scene editor.");
 	this.showStats = new CheckBox(this.form.element);
 	this.showStats.size.set(15, 15);
 	this.showStats.setOnChange(function()
@@ -69,7 +69,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Show UUID
-	this.form.addText("Show object UUID");
+	this.form.addText("Show object UUID").setAltText("Show object UUID in the object panel.");
 	this.showUUID = new CheckBox(this.form.element);
 	this.showUUID.size.set(15, 15);
 	this.showUUID.setOnChange(function()
@@ -93,7 +93,7 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Immediate mode
-	this.form.addText("Use immediate mode");
+	this.form.addText("Use immediate mode").setAltText("If checked objects changed during runtime test will keep their state when the testing mode stops.");
 	this.immediateMode = new CheckBox(this.form.element);
 	this.immediateMode.size.set(15, 15);
 	this.immediateMode.setOnChange(function()

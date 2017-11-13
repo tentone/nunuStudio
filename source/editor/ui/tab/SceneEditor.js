@@ -434,8 +434,6 @@ SceneEditor.prototype.deactivate = function()
 //Update settings
 SceneEditor.prototype.updateSettings = function()
 {
-	//TODO <RENDERER SETTINGS>
-
 	//Grid
 	this.gridHelper.visible = Settings.editor.gridEnabled;
 	this.gridHelper.setSize(Settings.editor.gridSize);
@@ -560,12 +558,6 @@ SceneEditor.prototype.update = function()
 				if(this.tool !== null)
 				{
 					this.isEditingObject = this.tool.update();
-					
-					if(this.mouse.buttonJustPressed(Mouse.LEFT) && this.isEditingObject)
-					{
-						//TODO <ADD HISTORY CHANGE>
-						//Editor.history.push(Editor.selectedObjects[0], Action.CHANGED);
-					}
 
 					if(this.isEditingObject)
 					{
@@ -1120,6 +1112,37 @@ SceneEditor.prototype.render = function()
 	}
 };
 
+//Create new fresh webgl context, delete old canvas and create a new one
+SceneEditor.prototype.reloadContext = function()
+{
+	if(this.element.contains(this.canvas))
+	{
+		this.element.removeChild(this.canvas);
+	}
+
+	this.canvas = document.createElement("canvas");
+	this.canvas.style.position = "absolute";
+	this.element.appendChild(this.canvas);
+	this.mouse.setCanvas(this.canvas);
+	
+	if(this.visible)
+	{
+		this.canvas.width = this.size.x;
+		this.canvas.height = this.size.y;
+		this.canvas.style.width = this.size.x + "px";
+		this.canvas.style.height = this.size.y + "px";
+	}
+
+	if(this.renderer !== null)
+	{
+		this.renderer.dispose();
+		this.renderer.forceContextLoss();
+		this.renderer = null;
+
+		this.initializeRenderer();
+	}
+};
+
 //Initialize renderer
 SceneEditor.prototype.initializeRenderer = function()
 {
@@ -1158,7 +1181,7 @@ SceneEditor.prototype.initializeRenderer = function()
 	this.renderer.toneMappingExposure = toneMappingExposure;
 	this.renderer.toneMappingWhitePoint = toneMappingWhitePoint;
 	this.renderer.autoClear = false;
-}
+};
 
 //Update raycaster position from editor mouse position
 SceneEditor.prototype.updateRaycasterFromMouse = function()
