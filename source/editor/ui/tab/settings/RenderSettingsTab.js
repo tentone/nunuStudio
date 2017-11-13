@@ -20,7 +20,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Use project settings
-	this.form.addText("Follow project");
+	this.form.addText("Follow project").setAltText("If checked the project rendering settings will be used, its better to preview the final result.");
 	this.followProject = new CheckBox(this.form.element);
 	this.followProject.size.set(15, 15);
 	this.followProject.setOnChange(function()
@@ -39,7 +39,7 @@ function RenderSettingsTab(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Antialiasing
-	this.form.addText("Antialiasing");
+	this.form.addText("Antialiasing").setAltText("Antialiasing can be used to smooth jaged edges.");
 	this.antialiasing = new CheckBox(this.form.element);
 	this.antialiasing.size.set(15, 15);
 	this.antialiasing.setOnChange(function()

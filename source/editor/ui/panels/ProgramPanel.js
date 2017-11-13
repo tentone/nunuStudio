@@ -96,6 +96,7 @@ function ProgramPanel(parent, obj)
 	this.antialiasing.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "antialiasing", self.antialiasing.getValue()));
+		self.reloadContext();
 	});
 	this.form.add(this.antialiasing);
 	this.form.nextRow();
@@ -107,6 +108,7 @@ function ProgramPanel(parent, obj)
 	this.shadows.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "shadows", self.shadows.getValue()));
+		self.updateRenderer();
 	});
 	this.form.add(this.shadows);
 	this.form.nextRow();
@@ -121,6 +123,7 @@ function ProgramPanel(parent, obj)
 	this.shadowsType.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "shadowsType", self.shadowsType.getValue()));
+		self.updateRenderer();
 	});
 	this.form.add(this.shadowsType);
 	this.form.nextRow();
@@ -137,6 +140,7 @@ function ProgramPanel(parent, obj)
 	this.toneMapping.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "toneMapping", self.toneMapping.getValue()));
+		self.updateRenderer();
 	});
 	this.form.add(this.toneMapping);
 	this.form.nextRow();
@@ -150,6 +154,7 @@ function ProgramPanel(parent, obj)
 	this.toneMappingExposure.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "toneMappingExposure", self.toneMappingExposure.getValue()));
+		self.updateRenderer();
 	});
 	this.form.add(this.toneMappingExposure);
 	this.form.nextRow();
@@ -163,6 +168,7 @@ function ProgramPanel(parent, obj)
 	this.toneMappingWhitePoint.setOnChange(function()
 	{
 		Editor.history.add(new ChangeAction(self.obj, "toneMappingWhitePoint", self.toneMappingWhitePoint.getValue()));
+		self.updateRenderer();
 	});
 	this.form.add(this.toneMappingWhitePoint);
 	this.form.nextRow();
@@ -172,6 +178,24 @@ function ProgramPanel(parent, obj)
 }
 
 ProgramPanel.prototype = Object.create(Panel.prototype);
+
+ProgramPanel.prototype.updateRenderer = function()
+{
+	var tab = Interface.tab.getActual();
+	if(tab instanceof SceneEditor)
+	{
+		tab.initializeRenderer();
+	}
+};
+
+ProgramPanel.prototype.reloadContext = function()
+{
+	var tab = Interface.tab.getActual();
+	if(tab instanceof SceneEditor)
+	{
+		tab.reloadContext();
+	}
+};
 
 //Update panel content from attached object
 ProgramPanel.prototype.updatePanel = function()
