@@ -393,6 +393,7 @@ include("editor/history/action/ChangeAction.js");
 include("editor/history/action/ActionBundle.js");
 include("editor/history/action/object/ObjectAddedAction.js");
 include("editor/history/action/object/ObjectRemovedAction.js");
+include("editor/history/action/object/ObjectMovedAction.js");
 
 //inclde("editor/timeline/save_format.js");
 //inclde("editor/timeline/settings.js");
