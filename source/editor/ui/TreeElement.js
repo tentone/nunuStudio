@@ -329,7 +329,8 @@ function TreeElement(container)
 					{
 						child.uuid = THREE.Math.generateUUID();
 					});
-					self.obj.parent.add(obj);
+
+					Editor.history.add(new ObjectAddedAction(obj, self.obj.parent));
 					Editor.updateTreeView();
 				});
 
@@ -343,6 +344,7 @@ function TreeElement(container)
 				context.addOption("Cut", function()
 				{
 					Editor.cutObject(self.obj);
+					Editor.history.add(new ObjectRemovedAction(self.obj));
 				});
 			}
 			
@@ -376,6 +378,7 @@ function TreeElement(container)
 			{
 				if(!(self.obj.parent instanceof Program))
 				{
+					//TODO <ADD HISTORY OBJECT ABOVE>
 					self.obj.parent.addAbove(obj, self.obj);
 				}
 			}
@@ -384,13 +387,14 @@ function TreeElement(container)
 			{
 				if(!(self.obj.parent instanceof Program))
 				{
+					//TODO <ADD HISTORY OBJECT BELLOW>
 					self.obj.parent.addBellow(obj, self.obj);
 				}
 			}
 			//Inside
 			else
-			{
-				self.obj.add(obj);
+			{	
+				Editor.history.add(new ObjectAddedAction(obj, self.obj));
 			}
 
 			self.updateSceneData();
