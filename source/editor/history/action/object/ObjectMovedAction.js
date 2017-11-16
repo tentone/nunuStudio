@@ -1,14 +1,14 @@
 "use strict";
 
-function ObjectMovedAction(object, parent, index)
+function ObjectMovedAction(object, newParent, newIndex)
 {
 	this.object = object;
 
 	this.oldParent = object.parent;
 	this.oldIndex = -1;
 
-	this.newParent = parent;
-	this.newIndex = -1;
+	this.newParent = newParent;
+	this.newIndex = newIndex;
 }
 
 ObjectMovedAction.prototype.apply = function()
