@@ -2,94 +2,60 @@
 
 function PassNode(parent)
 {
-	//Parent
-	this.parent = (parent !== undefined) ? parent : document.body;
+	Form.call(this, parent);
 
-	//Element
-	this.element = document.createElement("div");
-	this.element.style.position = "absolute";
 	this.element.style.overflow = "auto";
-	this.element.style.backgroundColor = "#222222";
-	this.element.style.borderStyle = "none";
-	this.element.style.boxSizing = "border-box";
-	this.element.style.borderRadius = "4px";
+	this.defaultTextWidth = 60;
+	this.position.set(10, 5);
+	this.spacing.set(5, 5);
 
-	//Attributes
-	this.size = new THREE.Vector2(0,0);
-	this.position = new THREE.Vector2(0,0);
-	this.visible = true;
-	
-	//Add element to document
-	this.parent.appendChild(this.element);
-
-	//Form
-	this.form = new Form(this.element);
-	this.form.defaultTextWidth = 80;
-	this.form.position.set(10, 5);
-	this.form.spacing.set(5, 5);
+	//Pass
+	this.pass = null;
 
 	//Render pass
-	this.form.addText("Render pass");
-	this.form.nextRow();
+	this.addText("Render pass");
+	this.nextRow();
+
+	var self = this;
 
 	//Checkbox
-	this.form.addText("Enabled");
-	this.enabled = new CheckBox(this.form.element);
+	this.addText("Enabled");
+	this.enabled = new CheckBox(this.element);
 	this.enabled.size.set(15, 15);
 	this.enabled.setOnChange(function()
 	{
-		//TODO <ADD CODE HERE>
+		self.pass.enabled = self.enabled.getValue();
 	});
-	this.form.add(this.enabled);
-	this.form.nextRow();
+	this.add(this.enabled);
+	this.nextRow();
 
 	//Up
-	this.up = new Button(this.form.element);
+	this.up = new Button(this.element);
 	this.up.size.set(50, 18);
 	this.up.setText("Up");
-	this.form.add(this.up);
+	this.add(this.up);
 
 	//Down
-	this.up = new Button(this.form.element);
+	this.up = new Button(this.element);
 	this.up.size.set(50, 18);
 	this.up.setText("Down");
-	this.form.add(this.up);
+	this.add(this.up);
 
 	//Delete
-	this.up = new Button(this.form.element);
+	this.up = new Button(this.element);
 	this.up.size.set(70, 18);
 	this.up.setText("Delete");
-	this.form.add(this.up);
-	this.form.nextRow();
+	this.add(this.up);
+	this.nextRow();
 
-	this.form.updateInterface();
+	this.updateInterface();
 }
 
-//Remove element
-PassNode.prototype.destroy = function()
-{
-	if(this.parent.contains(this.element))
-	{
-		this.parent.removeChild(this.element);
-	}
-};
+PassNode.prototype = Object.create(Form.prototype);
 
-//Update division Size
-PassNode.prototype.updateInterface = function()
+PassNode.prototype.setPass = function(pass)
 {
-	//Visibility
-	if(this.visible)
-	{
-		this.element.style.display = "block";
-		
-		//Element
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
-	}
-	else
-	{
-		this.element.style.display = "none";
-	}
+	this.pass = pass;
+
+	this.enabled.setValue(pass.enabled);
 };

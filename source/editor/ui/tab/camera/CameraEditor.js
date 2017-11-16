@@ -51,7 +51,7 @@ function CameraEditor(parent, closeable, container, index)
 	this.form.add(this.name);
 	this.form.nextRow();
 
-	this.form.addText("Post Processing");
+	this.form.addText("Add Post Processing");
 	this.form.nextRow();
 
 	var addRenderPass = function(pass)
@@ -69,13 +69,26 @@ function CameraEditor(parent, closeable, container, index)
 
 	var button = new Button(this.form.element);
 	button.size.set(120, 18);
+	button.setText("Render");
+	button.setCallback(function()
+	{
+		var pass = new RenderPass();
+		pass.renderToScreen = true;
+
+		addRenderPass(pass);
+	});
+	this.form.add(button);
+	this.form.nextRow();
+
+	var button = new Button(this.form.element);
+	button.size.set(120, 18);
 	button.setText("FXAA");
 	button.setCallback(function()
 	{
-		var fxaaPass = new FXAAPass();
-		fxaaPass.renderToScreen = true;
+		var pass = new FXAAPass();
+		pass.renderToScreen = true;
 
-		addRenderPass(fxaaPass);
+		addRenderPass(pass);
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -85,10 +98,10 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("Unreal Bloom");
 	button.setCallback(function()
 	{
-		var bloomPass = new UnrealBloomPass(0.8, 0.3, 0.8);
-		bloomPass.renderToScreen = true;
+		var pass = new UnrealBloomPass(0.8, 0.3, 0.8);
+		pass.renderToScreen = true;
 
-		addRenderPass(bloomPass);
+		addRenderPass(pass);
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -98,11 +111,11 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("SSAO");
 	button.setCallback(function()
 	{
-		var ssaoPass = new SSAOPass();
-		ssaoPass.onlyAO = false;
-		ssaoPass.renderToScreen = true;
+		var pass = new SSAOPass();
+		pass.onlyAO = false;
+		pass.renderToScreen = true;
 
-		addRenderPass(ssaoPass);
+		addRenderPass(pass);
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -112,10 +125,10 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("Bokeh");
 	button.setCallback(function()
 	{
-		var bokehPass = new BokehPass();
-		bokehPass.renderToScreen = true;
+		var pass = new BokehPass();
+		pass.renderToScreen = true;
 
-		addRenderPass(bokehPass);
+		addRenderPass(pass);
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -164,21 +177,22 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("Copy");
 	button.setCallback(function()
 	{
-		var copy = new CopyPass();
-		copy.renderToScreen = true;
+		var pass = new CopyPass();
+		pass.renderToScreen = true;
 
-		addRenderPass(copy);
+		addRenderPass(pass);
 	});
 	this.form.add(button);
 	this.form.nextRow();
 
-	//this.node = new PassNode(this.form.element);
-	//this.node.size.set(200, 200);
-	//this.form.add(this.node);
-	//this.form.nextRow();
+	this.postNodes = new Form(this.form.element);
+	this.form.add(this.postNodes);
+	this.form.nextRow();
 }
 
 CameraEditor.prototype = Object.create(TabElement.prototype);
+
+
 
 //Activate
 CameraEditor.prototype.activate = function()
@@ -186,6 +200,27 @@ CameraEditor.prototype.activate = function()
 	TabElement.prototype.activate.call(this);
 	
 	this.name.setText(this.camera.name);
+
+	//Post processing nodes
+	var passes = this.camera.composer.passes;
+	for(var i = 0; i < passes.length; i++)
+	{
+		var node = null;
+
+		if(passes[i] instanceof UnrealBloomPass)
+		{
+			node = new UnrealBloomPassNode(this.postNodes.element);
+		}
+		else
+		{
+			node = new PassNode(this.postNodes.element);
+		}
+		
+		node.setPass(passes[i]);
+		this.postNodes.add(node);
+		this.postNodes.nextRow();
+	}
+	this.postNodes.updateInterface();
 };
 
 //Destroy

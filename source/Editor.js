@@ -305,6 +305,7 @@ include("editor/ui/tab/AnimationTab.js");
 
 include("editor/ui/tab/camera/CameraEditor.js");
 include("editor/ui/tab/camera/postprocessing/PassNode.js");
+include("editor/ui/tab/camera/postprocessing/UnrealBloomPassNode.js");
 
 include("editor/ui/tab/settings/SettingsTab.js");
 include("editor/ui/tab/settings/CodeSettingsTab.js");
