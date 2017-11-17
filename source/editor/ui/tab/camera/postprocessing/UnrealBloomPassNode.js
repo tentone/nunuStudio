@@ -2,32 +2,9 @@
 
 function UnrealBloomPassNode(parent)
 {
-	Form.call(this, parent);
-
-	this.element.style.overflow = "auto";
-	this.defaultTextWidth = 60;
-	this.position.set(10, 5);
-	this.spacing.set(5, 5);
-
-	//Pass
-	this.pass = null;
-
-	//Render pass
-	this.addText("Unreal Bloom pass");
-	this.nextRow();
+	PassNode.call(this, parent, "Unreal Bloom");
 
 	var self = this;
-
-	//Checkbox
-	this.addText("Enabled");
-	this.enabled = new CheckBox(this.element);
-	this.enabled.size.set(15, 15);
-	this.enabled.setOnChange(function()
-	{
-		self.pass.enabled = self.enabled.getValue();
-	});
-	this.add(this.enabled);
-	this.nextRow();
 
 	this.addText("Strength");
 	this.strength = new NumberBox(this.element);
@@ -69,35 +46,15 @@ function UnrealBloomPassNode(parent)
 	this.add(this.smooth);
 	this.nextRow();
 
-	//Up
-	this.up = new Button(this.element);
-	this.up.size.set(50, 18);
-	this.up.setText("Up");
-	this.add(this.up);
-
-	//Down
-	this.up = new Button(this.element);
-	this.up.size.set(50, 18);
-	this.up.setText("Down");
-	this.add(this.up);
-
-	//Delete
-	this.up = new Button(this.element);
-	this.up.size.set(70, 18);
-	this.up.setText("Delete");
-	this.add(this.up);
-	this.nextRow();
-
-	this.updateInterface();
+	this.addButtons();
 }
 
-UnrealBloomPassNode.prototype = Object.create(Form.prototype);
+UnrealBloomPassNode.prototype = Object.create(PassNode.prototype);
 
 UnrealBloomPassNode.prototype.setPass = function(pass)
 {
-	this.pass = pass;
+	PassNode.prototype.setPass.call(this, pass);
 
-	this.enabled.setValue(pass.enabled);
 	this.strength.setValue(pass.strength);
 	this.radius.setValue(pass.radius);
 	this.threshold.setValue(pass.threshold);
