@@ -192,8 +192,6 @@ function CameraEditor(parent, closeable, container, index)
 
 CameraEditor.prototype = Object.create(TabElement.prototype);
 
-
-
 //Activate
 CameraEditor.prototype.activate = function()
 {
@@ -207,16 +205,21 @@ CameraEditor.prototype.activate = function()
 	{
 		var node = null;
 
-		if(passes[i] instanceof UnrealBloomPass)
+		if(passes[i].type === "UnrealBloom")
 		{
 			node = new UnrealBloomPassNode(this.postNodes.element);
+		}
+		else if(passes[i].type === "Bokeh")
+		{
+			node = new BokehPassNode(this.postNodes.element);
 		}
 		else
 		{
 			node = new RenderPassNode(this.postNodes.element);
 		}
-		
+
 		node.setPass(passes[i]);
+		node.setComposer(this.camera.composer);
 		this.postNodes.add(node);
 		this.postNodes.nextRow();
 	}

@@ -11,6 +11,7 @@ function PassNode(parent, name)
 
 	//Pass
 	this.pass = null;
+	this.composer = null;
 
 	//Render pass
 	this.addText(name);
@@ -73,4 +74,9 @@ PassNode.prototype.setPass = function(pass)
 
 	this.enabled.setValue(pass.enabled);
 	this.renderToScreen.setValue(pass.renderToScreen);
+};
+
+PassNode.prototype.setComposer = function(composer)
+{
+	this.composer = composer;
 };
