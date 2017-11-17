@@ -1,6 +1,6 @@
 "use strict";
 
-function PassNode(parent)
+function PassNode(parent, name)
 {
 	Form.call(this, parent);
 
@@ -13,12 +13,12 @@ function PassNode(parent)
 	this.pass = null;
 
 	//Render pass
-	this.addText("Render pass");
+	this.addText(name);
 	this.nextRow();
 
 	var self = this;
 
-	//Checkbox
+	//Enabled
 	this.addText("Enabled");
 	this.enabled = new CheckBox(this.element);
 	this.enabled.size.set(15, 15);
@@ -29,6 +29,22 @@ function PassNode(parent)
 	this.add(this.enabled);
 	this.nextRow();
 
+	//Render to screen
+	this.addText("Output");
+	this.renderToScreen = new CheckBox(this.element);
+	this.renderToScreen.size.set(15, 15);
+	this.renderToScreen.setOnChange(function()
+	{
+		self.pass.renderToScreen = self.renderToScreen.getValue();
+	});
+	this.add(this.renderToScreen);
+	this.nextRow();
+}
+
+PassNode.prototype = Object.create(Form.prototype);
+
+PassNode.prototype.addButtons = function()
+{
 	//Up
 	this.up = new Button(this.element);
 	this.up.size.set(50, 18);
@@ -49,13 +65,12 @@ function PassNode(parent)
 	this.nextRow();
 
 	this.updateInterface();
-}
-
-PassNode.prototype = Object.create(Form.prototype);
+};
 
 PassNode.prototype.setPass = function(pass)
 {
 	this.pass = pass;
 
 	this.enabled.setValue(pass.enabled);
+	this.renderToScreen.setValue(pass.renderToScreen);
 };
