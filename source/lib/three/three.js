@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.THREE = global.THREE || {})));
+	(factory((global.THREE = {})));
 }(this, (function (exports) { 'use strict';
 
 	// Polyfills
@@ -64,8 +64,6 @@
 		( function () {
 
 			Object.assign = function ( target ) {
-
-				'use strict';
 
 				if ( target === undefined || target === null ) {
 
@@ -20589,6 +20587,8 @@
 		var device = null;
 		var frameData = null;
 
+		var poseTarget = null;
+
 		if ( typeof window !== 'undefined' && 'VRFrameData' in window ) {
 
 			frameData = new window.VRFrameData();
@@ -20660,6 +20660,12 @@
 
 		};
 
+		this.setPoseTarget = function ( object ) {
+
+			if ( object !== undefined ) poseTarget = object;
+
+		};
+
 		this.getCamera = function ( camera ) {
 
 			if ( device === null ) return camera;
@@ -20672,24 +20678,35 @@
 			//
 
 			var pose = frameData.pose;
+			var poseObject;
 
-			if ( pose.position !== null ) {
+			if ( poseTarget !== null ) {
 
-				camera.position.fromArray( pose.position );
+				poseObject = poseTarget;
 
 			} else {
 
-				camera.position.set( 0, 0, 0 );
+				poseObject = camera;
+
+			}
+
+			if ( pose.position !== null ) {
+
+				poseObject.position.fromArray( pose.position );
+
+			} else {
+
+				poseObject.position.set( 0, 0, 0 );
 
 			}
 
 			if ( pose.orientation !== null ) {
 
-				camera.quaternion.fromArray( pose.orientation );
+				poseObject.quaternion.fromArray( pose.orientation );
 
 			}
 
-			camera.updateMatrixWorld();
+			poseObject.updateMatrixWorld();
 
 			var stageParameters = device.stageParameters;
 
@@ -22153,7 +22170,7 @@
 			if ( isAnimating ) return;
 
 			var device = vr.getDevice();
-			
+
 			if ( device && device.isPresenting ) {
 
 				device.requestAnimationFrame( loop );
@@ -22173,7 +22190,7 @@
 			if ( onAnimationFrame !== null ) onAnimationFrame( time );
 
 			var device = vr.getDevice();
-			
+
 			if ( device && device.isPresenting ) {
 
 				device.requestAnimationFrame( loop );
@@ -30996,12 +31013,15 @@
 
 		load: function ( url, onLoad, onProgress, onError ) {
 
+			var texture = new Texture();
+
 			var loader = new ImageLoader( this.manager );
 			loader.setCrossOrigin( this.crossOrigin );
 			loader.setPath( this.path );
 
-			var texture = new Texture();
-			texture.image = loader.load( url, function () {
+			loader.load( url, function ( image ) {
+
+				texture.image = image;
 
 				// JPEGs can't have an alpha channel, so memory can be saved by storing them as RGB.
 				var isJPEG = url.search( /\.(jpg|jpeg)$/ ) > 0 || url.search( /^data\:image\/jpeg/ ) === 0;
@@ -35927,7 +35947,7 @@
 		this.xRadius = xRadius || 1;
 		this.yRadius = yRadius || 1;
 
-		this.aStartAngle = aStartAngle || 0;
+		this.aStartAngle = aStartAngle || 0;
 		this.aEndAngle = aEndAngle || 2 * Math.PI;
 
 		this.aClockwise = aClockwise || false;
@@ -36780,13 +36800,7 @@
 									cpx0 = laste.x;
 									cpy0 = laste.y;
 
-									for ( var i2 = 1; i2 <= divisions; i2 ++ ) {
-
-										var t = i2 / divisions;
-										QuadraticBezier( t, cpx0, cpx1, cpx );
-										QuadraticBezier( t, cpy0, cpy1, cpy );
-
-									}
+									
 
 								}
 
@@ -36810,13 +36824,7 @@
 									cpx0 = laste.x;
 									cpy0 = laste.y;
 
-									for ( var i2 = 1; i2 <= divisions; i2 ++ ) {
-
-										var t = i2 / divisions;
-										CubicBezier( t, cpx0, cpx1, cpx2, cpx );
-										CubicBezier( t, cpy0, cpy1, cpy2, cpy );
-
-									}
+									
 
 								}
 
