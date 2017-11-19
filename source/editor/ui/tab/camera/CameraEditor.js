@@ -215,7 +215,7 @@ CameraEditor.prototype.activate = function()
 		}
 		else
 		{
-			node = new RenderPassNode(this.postNodes.element);
+			node = new PassNode(this.postNodes.element, passes[i].type);
 		}
 
 		node.setPass(passes[i]);

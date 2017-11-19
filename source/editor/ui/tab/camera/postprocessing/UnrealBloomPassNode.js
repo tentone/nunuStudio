@@ -45,8 +45,6 @@ function UnrealBloomPassNode(parent)
 	});
 	this.add(this.smooth);
 	this.nextRow();
-
-	this.addButtons();
 }
 
 UnrealBloomPassNode.prototype = Object.create(PassNode.prototype);
