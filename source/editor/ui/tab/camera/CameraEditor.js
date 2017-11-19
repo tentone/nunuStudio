@@ -65,6 +65,7 @@ function CameraEditor(parent, closeable, container, index)
 		}
 		
 		self.camera.composer.addPass(pass);
+		self.updatePostNodes();
 	};
 
 	var button = new Button(this.form.element);
@@ -198,6 +199,13 @@ CameraEditor.prototype.activate = function()
 	TabElement.prototype.activate.call(this);
 	
 	this.name.setText(this.camera.name);
+	this.updatePostNodes();
+};
+
+//Update post processing nodes
+CameraEditor.prototype.updatePostNodes = function()
+{
+	this.postNodes.removeAll();
 
 	//Post processing nodes
 	var passes = this.camera.composer.passes;
@@ -213,6 +221,14 @@ CameraEditor.prototype.activate = function()
 		{
 			node = new BokehPassNode(this.postNodes.element);
 		}
+		else if(passes[i].type === "SSAO")
+		{
+			node = new SSAOPassNode(this.postNodes.element);
+		}
+		else if(passes[i].type === "DotScreen")
+		{
+			node = new DotScreenPassNode(this.postNodes.element);
+		}
 		else
 		{
 			node = new PassNode(this.postNodes.element, passes[i].type);
@@ -223,6 +239,7 @@ CameraEditor.prototype.activate = function()
 		this.postNodes.add(node);
 		this.postNodes.nextRow();
 	}
+	
 	this.postNodes.updateInterface();
 };
 

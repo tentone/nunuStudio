@@ -75,6 +75,20 @@ Form.prototype.removeLastRow = function()
 	}
 };
 
+//Clear all elements from form
+Form.prototype.removeAll = function()
+{
+	for(var i = 0; i < this.rows.length; i++)
+	{
+		for(var j = 0; j < this.rows[i].length; j++)
+		{
+			this.rows[i][j].destroy();
+		}
+	}
+
+	this.rows = [];
+};
+
 //Update interface
 Form.prototype.updateInterface = function()
 {
