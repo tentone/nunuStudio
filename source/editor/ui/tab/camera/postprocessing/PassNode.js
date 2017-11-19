@@ -4,7 +4,8 @@ function PassNode(parent, name)
 {
 	Form.call(this, parent);
 
-	this.element.style.overflow = "auto";
+	this.element.style.overflow = "hidden";
+	
 	this.defaultTextWidth = 60;
 	this.position.set(10, 5);
 	this.spacing.set(5, 5);
