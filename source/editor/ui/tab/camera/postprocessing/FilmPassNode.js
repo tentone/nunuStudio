@@ -6,7 +6,7 @@ function FilmPassNode(parent)
 
 	var self = this;
 
-	this.addText("Only AO");
+	this.addText("Grayscale");
 	this.grayscale = new CheckBox(this.element);
 	this.grayscale.size.set(15, 15);
 	this.grayscale.setOnChange(function()

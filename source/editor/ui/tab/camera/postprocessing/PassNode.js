@@ -49,7 +49,7 @@ function PassNode(parent, name)
 	this.up.setText("Up");
 	this.up.setCallback(function()
 	{
-		self.composer.moveUp(self.pass);
+		self.composer.moveBack(self.pass);
 		self.editor.updatePostNodes();
 	});
 
@@ -59,7 +59,7 @@ function PassNode(parent, name)
 	this.down.setText("Down");
 	this.down.setCallback(function()
 	{
-		self.composer.moveDown(self.pass);
+		self.composer.moveForward(self.pass);
 		self.editor.updatePostNodes();
 	});
 

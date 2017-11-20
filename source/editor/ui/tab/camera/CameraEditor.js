@@ -180,7 +180,6 @@ CameraEditor.prototype.updatePostNodes = function()
 {
 	this.postNodes.removeAll();
 
-	//Post processing nodes
 	var passes = this.camera.composer.passes;
 	for(var i = 0; i < passes.length; i++)
 	{
