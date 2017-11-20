@@ -61,29 +61,57 @@ EffectComposer.prototype.addPass = function(pass)
 };
 
 /**
- * Move pass up in the list of render passes.
+ * Move pass back in the list of render passes.
  *
- * @method moveUp
+ * Moving back means that the pass is rendered earlier in the pipeline.
+ * 
+ * @method moveBack
  * @param {Pass} pass Pass to be moved.
+ * @return {Boolean} Returns true on success, false otherwise.
  */
-EffectComposer.prototype.moveUp = function(pass)
+EffectComposer.prototype.moveBack = function(pass)
 {
 	var index = this.passes.indexOf(pass);
 
-	//TODO <ADD CODE HERE>
+	if(index > 0)
+	{
+		for(var k = index; k !== index - 1 ; k -= 1)
+		{
+			this.passes[k] = this.passes[k - 1];
+		}
+		this.passes[index - 1] = pass;
+
+		return true;
+	}
+
+	return false;
 };
 
 /**
- * Move pass down in the list of render passes.
+ * Move pass forward in the list of render passes.
  *
- * @method moveDown
+ * Moving forward in the list means being renderer later down the pipeline.
+ * 
+ * @method moveForward
  * @param {Pass} pass Pass to be moved.
+ * @return {Boolean} Returns true on success, false otherwise.
  */
-EffectComposer.prototype.moveDown = function(pass)
+EffectComposer.prototype.moveForward = function(pass)
 {
 	var index = this.passes.indexOf(pass);
 
-	//TODO <ADD CODE HERE>
+	if(index !== -1 && index < this.passes.length - 1)
+	{
+		for(var k = index; k !== index + 1 ; k += 1)
+		{
+			this.passes[k] = this.passes[k + 1];
+		}
+		this.passes[index + 1] = pass;
+
+		return true;
+	}
+
+	return false;
 };
 
 /**

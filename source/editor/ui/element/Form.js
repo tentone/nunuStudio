@@ -87,6 +87,7 @@ Form.prototype.removeAll = function()
 	}
 
 	this.rows = [];
+	this.rows.push([]);
 };
 
 //Update interface
