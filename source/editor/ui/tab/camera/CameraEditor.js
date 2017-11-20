@@ -56,9 +56,8 @@ function CameraEditor(parent, closeable, container, index)
 
 	var addRenderPass = function(pass)
 	{
-		console.log(pass);
 		var composer = self.camera.composer;
-
+		pass.renderToScreen = true;
 		for(var i = 0; i < composer.passes.length; i++)
 		{
 			composer.passes[i].renderToScreen = false;
@@ -73,10 +72,7 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("Render");
 	button.setCallback(function()
 	{
-		var pass = new RenderPass();
-		pass.renderToScreen = true;
-
-		addRenderPass(pass);
+		addRenderPass(new RenderPass());
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -86,10 +82,7 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("FXAA");
 	button.setCallback(function()
 	{
-		var pass = new FXAAPass();
-		pass.renderToScreen = true;
-
-		addRenderPass(pass);
+		addRenderPass(new FXAAPass());
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -99,10 +92,7 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("Unreal Bloom");
 	button.setCallback(function()
 	{
-		var pass = new UnrealBloomPass(0.8, 0.3, 0.8);
-		pass.renderToScreen = true;
-
-		addRenderPass(pass);
+		addRenderPass(new UnrealBloomPass(0.8, 0.3, 0.8));
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -114,8 +104,6 @@ function CameraEditor(parent, closeable, container, index)
 	{
 		var pass = new SSAOPass();
 		pass.onlyAO = false;
-		pass.renderToScreen = true;
-
 		addRenderPass(pass);
 	});
 	this.form.add(button);
@@ -126,10 +114,7 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("Bokeh");
 	button.setCallback(function()
 	{
-		var pass = new BokehPass();
-		pass.renderToScreen = true;
-
-		addRenderPass(pass);
+		addRenderPass(new BokehPass());
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -139,10 +124,7 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("Film");
 	button.setCallback(function()
 	{
-		var pass = new FilmPass(0.35, 0.5, 512, false);
-		pass.renderToScreen = true;
-
-		addRenderPass(pass);
+		addRenderPass(new FilmPass(0.35, 0.5, 512, false));
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -152,10 +134,7 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("Dot Screen");
 	button.setCallback(function()
 	{
-		var pass = new DotScreenPass(new THREE.Vector2(0, 0), 0.5, 0.8);
-		pass.renderToScreen = true;
-
-		addRenderPass(pass);
+		addRenderPass(new DotScreenPass(new THREE.Vector2(0, 0), 0.5, 0.8));
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -165,10 +144,7 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("Sobel");
 	button.setCallback(function()
 	{
-		var pass = new SobelPass();
-		pass.renderToScreen = true;
-
-		addRenderPass(pass);
+		addRenderPass(new SobelPass());
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -178,10 +154,7 @@ function CameraEditor(parent, closeable, container, index)
 	button.setText("Copy");
 	button.setCallback(function()
 	{
-		var pass = new CopyPass();
-		pass.renderToScreen = true;
-
-		addRenderPass(pass);
+		addRenderPass(new CopyPass());
 	});
 	this.form.add(button);
 	this.form.nextRow();
@@ -211,31 +184,11 @@ CameraEditor.prototype.updatePostNodes = function()
 	var passes = this.camera.composer.passes;
 	for(var i = 0; i < passes.length; i++)
 	{
-		var node = null;
-
-		if(passes[i].type === "UnrealBloom")
-		{
-			node = new UnrealBloomPassNode(this.postNodes.element);
-		}
-		else if(passes[i].type === "Bokeh")
-		{
-			node = new BokehPassNode(this.postNodes.element);
-		}
-		else if(passes[i].type === "SSAO")
-		{
-			node = new SSAOPassNode(this.postNodes.element);
-		}
-		else if(passes[i].type === "DotScreen")
-		{
-			node = new DotScreenPassNode(this.postNodes.element);
-		}
-		else
-		{
-			node = new PassNode(this.postNodes.element, passes[i].type);
-		}
-
+		var node = PassNode.createPass(this.postNodes.element, passes[i].type);
 		node.setPass(passes[i]);
 		node.setComposer(this.camera.composer);
+		node.setEditor(this);
+
 		this.postNodes.add(node);
 		this.postNodes.nextRow();
 	}

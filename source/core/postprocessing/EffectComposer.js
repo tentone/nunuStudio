@@ -61,6 +61,32 @@ EffectComposer.prototype.addPass = function(pass)
 };
 
 /**
+ * Move pass up in the list of render passes.
+ *
+ * @method moveUp
+ * @param {Pass} pass Pass to be moved.
+ */
+EffectComposer.prototype.moveUp = function(pass)
+{
+	var index = this.passes.indexOf(pass);
+
+	//TODO <ADD CODE HERE>
+};
+
+/**
+ * Move pass down in the list of render passes.
+ *
+ * @method moveDown
+ * @param {Pass} pass Pass to be moved.
+ */
+EffectComposer.prototype.moveDown = function(pass)
+{
+	var index = this.passes.indexOf(pass);
+
+	//TODO <ADD CODE HERE>
+};
+
+/**
  * Remove pass from this composer, if pass is not found nothing happens.
  *
  * @method removePass

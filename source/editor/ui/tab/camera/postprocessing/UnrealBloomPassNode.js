@@ -49,6 +49,8 @@ function UnrealBloomPassNode(parent)
 
 UnrealBloomPassNode.prototype = Object.create(PassNode.prototype);
 
+PassNode.registerPass("UnrealBloom", UnrealBloomPassNode);
+
 UnrealBloomPassNode.prototype.setPass = function(pass)
 {
 	PassNode.prototype.setPass.call(this, pass);
