@@ -38,10 +38,11 @@ function DotScreenPassNode(parent)
 	});
 	this.add(this.center);
 	this.nextRow();
-
 }
 
 DotScreenPassNode.prototype = Object.create(PassNode.prototype);
+
+PassNode.registerPass("DotScreen", DotScreenPassNode);
 
 DotScreenPassNode.prototype.setPass = function(pass)
 {

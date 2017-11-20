@@ -4,7 +4,7 @@ function PassNode(parent, name)
 {
 	Form.call(this, parent);
 
-	this.element.style.overflow = "hidden";
+	this.element.style.overflow = "hidden"; 
 	
 	this.defaultTextWidth = 60;
 	this.position.set(10, 5);
@@ -13,6 +13,7 @@ function PassNode(parent, name)
 	//Pass
 	this.pass = null;
 	this.composer = null;
+	this.editor = null;
 
 	//Render pass
 	this.addText(name !== undefined ? name : "Pass Node");
@@ -48,7 +49,8 @@ function PassNode(parent, name)
 	this.up.setText("Up");
 	this.up.setCallback(function()
 	{
-		//TODO <UP>
+		self.composer.moveUp(self.pass);
+		self.editor.updatePostNodes();
 	});
 
 	//Down
@@ -57,21 +59,39 @@ function PassNode(parent, name)
 	this.down.setText("Down");
 	this.down.setCallback(function()
 	{
-		//TODO <UP>
+		self.composer.moveDown(self.pass);
+		self.editor.updatePostNodes();
 	});
 
 	//Delete
 	this.delete = new Button(this.element);
 	this.delete.size.set(70, 18);
 	this.delete.setText("Delete");
-	this.down.setCallback(function()
+	this.delete.setCallback(function()
 	{
-		//TODO <DELETE>
-		//self.composer
+		self.composer.removePass(self.pass);
+		self.editor.updatePostNodes();
 	});
 }
 
 PassNode.prototype = Object.create(Form.prototype);
+
+PassNode.passes = {};
+
+PassNode.createPass = function(element, type)
+{
+	if(PassNode.passes[type] !== undefined)
+	{
+		return new PassNode.passes[type](element);
+	}
+
+	return new PassNode(element, type);
+};
+
+PassNode.registerPass = function(type, Constructor)
+{
+	PassNode.passes[type] = Constructor;
+};
 
 PassNode.prototype.setPass = function(pass)
 {
@@ -83,9 +103,14 @@ PassNode.prototype.setPass = function(pass)
 
 PassNode.prototype.setComposer = function(composer)
 {
+	this.composer = composer;
+};
+
+PassNode.prototype.setEditor = function(editor)
+{
+	this.editor = editor;
+
 	this.add(this.up);
 	this.add(this.down);
 	this.add(this.delete);
-
-	this.composer = composer;
 };

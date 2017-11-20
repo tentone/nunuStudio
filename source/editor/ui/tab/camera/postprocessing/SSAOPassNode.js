@@ -49,6 +49,8 @@ function SSAOPassNode(parent)
 
 SSAOPassNode.prototype = Object.create(PassNode.prototype);
 
+PassNode.registerPass("SSAO", SSAOPassNode);
+
 SSAOPassNode.prototype.setPass = function(pass)
 {
 	PassNode.prototype.setPass.call(this, pass);

@@ -39,6 +39,8 @@ function BokehPassNode(parent)
 
 BokehPassNode.prototype = Object.create(PassNode.prototype);
 
+PassNode.registerPass("Bokeh", BokehPassNode);
+
 BokehPassNode.prototype.setPass = function(pass)
 {
 	PassNode.prototype.setPass.call(this, pass);
