@@ -89,6 +89,16 @@ function CameraEditor(parent, closeable, container, index)
 
 	var button = new Button(this.form.element);
 	button.size.set(120, 18);
+	button.setText("Colorify");
+	button.setCallback(function()
+	{
+		addRenderPass(new ColorifyPass());
+	});
+	this.form.add(button);
+	this.form.nextRow();
+
+	var button = new Button(this.form.element);
+	button.size.set(120, 18);
 	button.setText("Unreal Bloom");
 	button.setCallback(function()
 	{

@@ -441,13 +441,29 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js": {
-            "name": "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js",
+        "..\\..\\source\\core\\postprocessing\\pass\\AdaptiveToneMappingPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\AdaptiveToneMappingPass.js",
             "modules": {
                 "Postprocessing": 1
             },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\BokehPass.js",
+            "modules": {},
             "classes": {
                 "BokehPass": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\postprocessing\\pass\\ColorifyPass.js": {
+            "name": "..\\..\\source\\core\\postprocessing\\pass\\ColorifyPass.js",
+            "modules": {},
+            "classes": {
+                "ColorifyPass": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1194,6 +1210,7 @@
             "elements": {},
             "classes": {
                 "BokehPass": 1,
+                "ColorifyPass": 1,
                 "CopyPass": 1,
                 "DotScreenPass": 1,
                 "FXAAPass": 1,
@@ -1211,7 +1228,9 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\postprocessing\\ShaderPass.js",
             "line": 3,
-            "description": "Depth-of-field post-process with bokeh shader."
+            "description": "Generate a texture that represents the luminosity of the current scene, adapted over time\nto simulate the optic nerve responding to the amount of light it is receiving.\nBased on a GDC2007 presentation by Wolfgang Engel titled \"Post-Processing Pipeline\"\n\nFull-screen tone-mapping shader based on http://www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf\n\nclass AdaptiveToneMappingPass",
+            "is_constructor": 1,
+            "author": "miibond"
         },
         "Resources": {
             "name": "Resources",
@@ -2498,6 +2517,21 @@
                     "type": "Number"
                 }
             ]
+        },
+        "ColorifyPass": {
+            "name": "ColorifyPass",
+            "shortname": "ColorifyPass",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Postprocessing",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\ColorifyPass.js",
+            "line": 3,
+            "description": "Colorify pass can be used to colorify the scene.",
+            "is_constructor": 1
         },
         "CopyPass": {
             "name": "CopyPass",
@@ -9726,6 +9760,22 @@
                 }
             ],
             "class": "BokehPass",
+            "module": "Postprocessing"
+        },
+        {
+            "file": "..\\..\\source\\core\\postprocessing\\pass\\ColorifyPass.js",
+            "line": 29,
+            "description": "Serialize pass to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "Metadata object.",
+                    "type": "Object"
+                }
+            ],
+            "class": "ColorifyPass",
             "module": "Postprocessing"
         },
         {

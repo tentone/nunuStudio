@@ -349,6 +349,11 @@ EffectComposer.fromJSON = function(json)
 			pass.angle = data.angle;
 			pass.scale = data.scale;
 		}
+		else if(data.type === "Colorify")
+		{
+			pass = new ColorifyPass();
+			pass.color.setHex(data.color);
+		}
 		else if(data.type === "Sobel")
 		{
 			pass = new SobelPass();
