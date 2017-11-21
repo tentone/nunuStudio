@@ -42,6 +42,7 @@
 								<li><a href="../classes/BufferUtils.html">BufferUtils</a></li>
 								<li><a href="../classes/ByteArrayUtils.html">ByteArrayUtils</a></li>
 								<li><a href="../classes/CanvasTexture.html">CanvasTexture</a></li>
+								<li><a href="../classes/ColorifyPass.html">ColorifyPass</a></li>
 								<li><a href="../classes/Container.html">Container</a></li>
 								<li><a href="../classes/CopyPass.html">CopyPass</a></li>
 								<li><a href="../classes/CubeCamera.html">CubeCamera</a></li>
@@ -189,7 +190,11 @@
 						
 						
 						<div class="box intro">
-							<p>Depth-of-field post-process with bokeh shader.</p>
+							<p>Generate a texture that represents the luminosity of the current scene, adapted over time
+						to simulate the optic nerve responding to the amount of light it is receiving.
+						Based on a GDC2007 presentation by Wolfgang Engel titled &quot;Post-Processing Pipeline&quot;</p>
+						<p>Full-screen tone-mapping shader based on <a href="http://www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf">http://www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf</a></p>
+						<p>class AdaptiveToneMappingPass</p>
 						
 						</div>
 						
@@ -202,6 +207,11 @@
 										<li class="module-class">
 											<a href="../classes/BokehPass.html">
 												BokehPass
+											</a>
+										</li>
+										<li class="module-class">
+											<a href="../classes/ColorifyPass.html">
+												ColorifyPass
 											</a>
 										</li>
 										<li class="module-class">

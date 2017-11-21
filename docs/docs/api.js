@@ -11,6 +11,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "BufferUtils",
         "ByteArrayUtils",
         "CanvasTexture",
+        "ColorifyPass",
         "Container",
         "CopyPass",
         "CubeCamera",
@@ -215,7 +216,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Postprocessing",
             "name": "Postprocessing",
-            "description": "Depth-of-field post-process with bokeh shader."
+            "description": "Generate a texture that represents the luminosity of the current scene, adapted over time\nto simulate the optic nerve responding to the amount of light it is receiving.\nBased on a GDC2007 presentation by Wolfgang Engel titled \"Post-Processing Pipeline\"\n\nFull-screen tone-mapping shader based on http://www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf\n\nclass AdaptiveToneMappingPass"
         },
         {
             "displayName": "Resources",
