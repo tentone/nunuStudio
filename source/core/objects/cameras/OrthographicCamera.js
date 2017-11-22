@@ -139,7 +139,7 @@ OrthographicCamera.prototype.render = function(renderer, scene)
  */
 OrthographicCamera.prototype.resize = function(x, y)
 {
-	this.composer.setSize(x, y);
+	this.composer.setSize(x * this.viewport.x, y * this.viewport.y);
 	
 	for(var i = 0; i < this.children.length; i++)
 	{
