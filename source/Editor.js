@@ -248,6 +248,8 @@ include("editor/style.css");
 include("editor/theme/Theme.js");
 include("editor/theme/ThemeDark.js");
 
+include("editor/loader/GCodeLoader.js");
+
 include("editor/ui/element/Element.js");
 include("editor/ui/element/Message.js");
 include("editor/ui/element/Bar.js");
@@ -1488,8 +1490,20 @@ Editor.loadModel = function(file, onLoad)
 
 	try
 	{
+		//GCode
+		if(extension === "gcode")
+		{
+			var reader = new FileReader();
+			reader.onload = function()
+			{
+				var loader = new GCodeLoader();
+				Editor.addToScene(loader.parse(reader.result));
+			};
+
+			reader.readAsText(file);
+		}
 		//Wavefront OBJ
-		if(extension === "obj")
+		else if(extension === "obj")
 		{
 			try
 			{
