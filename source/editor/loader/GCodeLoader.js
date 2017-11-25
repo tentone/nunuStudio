@@ -27,47 +27,48 @@ GCodeLoader.prototype.load = function(url, onLoad, onProgress, onError)
 
 GCodeLoader.prototype.parse = function(data)
 {
-	var lastLine = {x:0, y:0, z:0, e:0, f:0, extruding:false};
+	var currentState = {x:0, y:0, z:0, e:0, f:0, extruding:false};
+	var currentLayer = undefined;
+	var relative = false;
+
+	var box = new THREE.Box3();
 	var layers = [];
-	var layer = undefined;
-	var bbbox = { min: { x:100000,y:100000,z:100000 }, max: { x:-100000,y:-100000,z:-100000 } };
 	
 	var pathMaterial = new THREE.LineBasicMaterial({color: 0xFFFF00});
 	pathMaterial.name = "path";
+
 	var extrudingMaterial = new THREE.LineBasicMaterial({color: 0xFFFFFF});
 	extrudingMaterial.name = "extruded";
 
 	function newLayer(line)
 	{
-		layer = { type: {}, layer: layers.length, z: line.z, };
-		layers.push(layer);
+		currentLayer = {lines: [], currentLayer: layers.length, z: line.z};
+		layers.push(currentLayer);
 	}
 
 	function getLineGroup(line)
 	{
-		if(layer === undefined)
+		if(currentLayer === undefined)
 		{
 			newLayer(line);
 		}
-		var speed = Math.round(line.e / 1000);
-		var grouptype = (line.extruding ? 10000 : 0) + speed;
 
-		var color = new THREE.Color(line.extruding ? 0xffffff : 0x0000ff);
+		var grouptype = line.extruding ? 1 : 0;
 
-		if(layer.type[grouptype] === undefined)
+		if(currentLayer.lines[grouptype] === undefined)
 		{
-			layer.type[grouptype] =
+			currentLayer.lines[grouptype] =
 			{
 				type: grouptype,
 				feed: line.e,
 				extruding: line.extruding,
-				segmentCount: 0,
-				material: line.extruding ? extrudingMaterial : pathMaterial,
 				geometry: new THREE.Geometry(),
+				material: line.extruding ? extrudingMaterial : pathMaterial,
+				segmentCount: 0
 			};
 		}
 
-		return layer.type[grouptype];
+		return currentLayer.lines[grouptype];
 	}
 
 	function addSegment(p1, p2)
@@ -78,18 +79,13 @@ GCodeLoader.prototype.parse = function(data)
 		group.segmentCount++;
 		geometry.vertices.push(new THREE.Vector3(p1.x, p1.y, p1.z));
 		geometry.vertices.push(new THREE.Vector3(p2.x, p2.y, p2.z));
+
 		if(p2.extruding)
 		{
-			bbbox.min.x = Math.min(bbbox.min.x, p2.x);
-			bbbox.min.y = Math.min(bbbox.min.y, p2.y);
-			bbbox.min.z = Math.min(bbbox.min.z, p2.z);
-			bbbox.max.x = Math.max(bbbox.max.x, p2.x);
-			bbbox.max.y = Math.max(bbbox.max.y, p2.y);
-			bbbox.max.z = Math.max(bbbox.max.z, p2.z);
+			box.min.set(Math.min(box.min.x, p2.x), Math.min(box.min.y, p2.y), Math.min(box.min.z, p2.z));
+			box.max.set(Math.max(box.max.x, p2.x), Math.max(box.max.y, p2.y), Math.max(box.max.z, p2.z));
 		}
 	}
-	
-	var relative = false;
 
 	function delta(v1, v2)
 	{
@@ -101,7 +97,7 @@ GCodeLoader.prototype.parse = function(data)
 		return relative ? v1 + v2 : v2;
 	}
 
-	var lines = data.replace(/;.+/g,'').trim().split("\n");
+	var lines = data.replace(/;.+/g,'').split("\n");
 
 	for(var i = 0; i < lines.length; i++)
 	{
@@ -121,114 +117,83 @@ GCodeLoader.prototype.parse = function(data)
 		}); 
 
 		//Process commands
+		//G0/G1 – Linear Movement
+		//Go in a straight line from the current (X, Y) point to the point (90.6, 13.8), extruding material as the move happens from the current extruded length to a length of 22.4 mm.
 		if(cmd === "G0" || cmd === "G1")
 		{
-			//Example: G1 Z1.0 F3000
-			//         G1 X99.9948 Y80.0611 Z15.0 F1500.0 E981.64869
-			//         G1 E104.25841 F1800.0
-			//Go in a straight line from the current (X, Y) point to the point (90.6, 13.8), extruding material as the move happens from the current extruded length to a length of 22.4 mm.
-			var newLine =
+			var line =
 			{
-				x: args.x !== undefined ? absolute(lastLine.x, args.x) : lastLine.x,
-				y: args.y !== undefined ? absolute(lastLine.y, args.y) : lastLine.y,
-				z: args.z !== undefined ? absolute(lastLine.z, args.z) : lastLine.z,
-				e: args.e !== undefined ? absolute(lastLine.e, args.e) : lastLine.e,
-				f: args.f !== undefined ? absolute(lastLine.f, args.f) : lastLine.f,
+				x: args.x !== undefined ? absolute(currentState.x, args.x) : currentState.x,
+				y: args.y !== undefined ? absolute(currentState.y, args.y) : currentState.y,
+				z: args.z !== undefined ? absolute(currentState.z, args.z) : currentState.z,
+				e: args.e !== undefined ? absolute(currentState.e, args.e) : currentState.e,
+				f: args.f !== undefined ? absolute(currentState.f, args.f) : currentState.f,
 			};
 
 			//Layer change detection is or made by watching Z, it"s made by watching when we extrude at a new Z position
-			if(delta(lastLine.e, newLine.e) > 0)
+			if(delta(currentState.e, line.e) > 0)
 			{
-				newLine.extruding = delta(lastLine.e, newLine.e) > 0;
-				if(layer == undefined || newLine.z != layer.z)
+				line.extruding = delta(currentState.e, line.e) > 0;
+				if(currentLayer == undefined || line.z != currentLayer.z)
 				{
-					newLayer(newLine);
+					newLayer(line);
 				}
 			}
 
-			addSegment(lastLine, newLine);
-			lastLine = newLine;
+			addSegment(currentState, line);
+			currentState = line;
 		}
+		//G2/G3 - Arc Movement
+		else if(cmd === "G2" || cmd === "G3")
+		{
+			console.warn("GCodeLoader: Arc command not supported");
+		}
+		//G90: Set to Absolute Positioning
+		//All coordinates from now on are absolute relative to the origin of the machine.
 		else if(cmd === "G90")
 		{
-			//G90: Set to Absolute Positioning
-			//All coordinates from now on are absolute relative to the origin of the machine. (This is the RepRap default.)
 			relative = false;
 		}
+		//G91: Set to Relative Positioning
+		//All coordinates from now on are relative to the last position.
 		else if(cmd === "G91")
 		{
-			//G91: Set to Relative Positioning
-			//All coordinates from now on are relative to the last position.
 			relative = true;
 		}
+		//G92: Set Position
+		//Allows programming of absolute zero point, by reseting the current position to the values specified.
+		//No physical motion will occur.
 		else if(cmd === "G92")
 		{
-			//G92: Set Position
-			//Example: G92 E0
-			//Allows programming of absolute zero point, by reseting the
-			//current position to the values specified. This would set the
-			//machine"s X coordinate to 10, and the extrude coordinate to 90.
-			//No physical motion will occur.
-
-			//TODO: Only support E0
-			var newLine = lastLine;
-			newLine.x= args.x !== undefined ? args.x : newLine.x;
-			newLine.y= args.y !== undefined ? args.y : newLine.y;
-			newLine.z= args.z !== undefined ? args.z : newLine.z;
-			newLine.e= args.e !== undefined ? args.e : newLine.e;
-			lastLine = newLine;
+			var line = currentState;
+			line.x = args.x !== undefined ? args.x : line.x;
+			line.y = args.y !== undefined ? args.y : line.y;
+			line.z = args.z !== undefined ? args.z : line.z;
+			line.e = args.e !== undefined ? args.e : line.e;
+			currentState = line;
 		}
 		else
 		{
-			console.warn("GCodeLoader: Unknown command:" + cmd);
+			console.warn("GCodeLoader: Command not supported:" + cmd);
 		}
 	}
 
-	/*
-	G21: function(args)
-	{
-		//G21: Set Units to Millimeters
-		//Example: G21
-		//Units from now on are in millimeters. (This is the RepRap default.)
-
-		//No-op: So long as G20 is not supported.
-	},
-	M82: function(args)
-	{
-		//M82: Set E codes absolute (default)
-		//Descriped in Sprintrun source code.
-
-		//No-op, so long as M83 is not supported.
-	},
-
-	M84: function(args)
-	{
-		//M84: Stop idle hold
-		//Example: M84
-		//Stop the idle hold on all axis and extruder. In some cases the
-		//idle hold causes annoying noises, which can be stopped by
-		//disabling the hold. Be aware that by disabling idle hold during
-		//printing, you will get quality issues. This is recommended only
-		//in between or after printjobs.
-
-		//No-op
-	}*/
-
-	console.log("Layer Count ", layers.length);
-	console.log("bbox ", bbbox);
-
 	var object = new THREE.Object3D();
+	object.name = "gcode";
 
 	for(var i = 0; i < layers.length; i++)
 	{
 		var layer = layers[i];
 
-		for(var tid in layer.type)
+		for(var j = 0; j < layer.lines.length; j++)
 		{
-			var type = layer.type[tid];
-			var line = new THREE.LineSegments(type.geometry, type.material);
-			line.name = "layer" + i;
-			object.add(line);
+			var line = layer.lines[j];
+			if(line !== undefined)
+			{
+				var segments = new THREE.LineSegments(line.geometry, line.material);
+				segments.name = "layer" + i;
+				object.add(segments);
+			}
 		}
 	}
 	
