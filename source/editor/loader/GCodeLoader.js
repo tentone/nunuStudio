@@ -25,7 +25,7 @@ GCodeLoader.prototype.load = function(url, onLoad, onProgress, onError)
 	}, onProgress, onError);
 };
 
-GCodeLoader.prototype.parse = function(gcode)
+GCodeLoader.prototype.parse = function(data)
 {
 	var lastLine = {x:0, y:0, z:0, e:0, f:0, extruding:false};
 	var layers = [];
@@ -101,43 +101,32 @@ GCodeLoader.prototype.parse = function(gcode)
 		return relative ? v1 + v2 : v2;
 	}
 
-	var parser = new GCodeDecoder(
+	var lines = data.replace(/;.+/g,'').trim().split("\n");
+
+	for(var i = 0; i < lines.length; i++)
 	{
-		G0: function(args, f, x, y)
-		{
-			var newLine =
-			{
-				x: args.x !== undefined ? absolute(lastLine.x, args.x) : lastLine.x,
-				y: args.y !== undefined ? absolute(lastLine.y, args.y) : lastLine.y,
-				z: args.z !== undefined ? absolute(lastLine.z, args.z) : lastLine.z,
-				e: args.e !== undefined ? absolute(lastLine.e, args.e) : lastLine.e,
-				f: args.f !== undefined ? absolute(lastLine.f, args.f) : lastLine.f,
-			};
+		var tokens = lines[i].split(" ");
+		var cmd = tokens[0].toUpperCase();
 
-			//Layer change detection is or made by watching Z, it"s made by watching when we extrude at a new Z position
-			if(delta(lastLine.e, newLine.e) > 0)
+		//Argumments
+		var args = {};
+		tokens.splice(1).forEach(function(token) 
+		{ 
+			if(token[0] !== undefined)
 			{
-				newLine.extruding = delta(lastLine.e, newLine.e) > 0;
-				if(layer == undefined || newLine.z != layer.z)
-				{
-					newLayer(newLine);
-				}
+				var key = token[0].toLowerCase(); 
+				var value = parseFloat(token.substring(1)); 
+				args[key] = value; 
 			}
+		}); 
 
-			addSegment(lastLine, newLine);
-			lastLine = newLine;
-		},
-
-		G1: function(args, line)
+		//Process commands
+		if(cmd === "G0" || cmd === "G1")
 		{
 			//Example: G1 Z1.0 F3000
 			//         G1 X99.9948 Y80.0611 Z15.0 F1500.0 E981.64869
 			//         G1 E104.25841 F1800.0
-			//Go in a straight line from the current (X, Y) point
-			//to the point (90.6, 13.8), extruding material as the move
-			//happens from the current extruded length to a length of
-			//22.4 mm.
-
+			//Go in a straight line from the current (X, Y) point to the point (90.6, 13.8), extruding material as the move happens from the current extruded length to a length of 22.4 mm.
 			var newLine =
 			{
 				x: args.x !== undefined ? absolute(lastLine.x, args.x) : lastLine.x,
@@ -159,34 +148,20 @@ GCodeLoader.prototype.parse = function(gcode)
 
 			addSegment(lastLine, newLine);
 			lastLine = newLine;
-		},
-
-		G21: function(args)
-		{
-			//G21: Set Units to Millimeters
-			//Example: G21
-			//Units from now on are in millimeters. (This is the RepRap default.)
-
-			//No-op: So long as G20 is not supported.
-		},
-
-		G90: function(args)
+		}
+		else if(cmd === "G90")
 		{
 			//G90: Set to Absolute Positioning
 			//All coordinates from now on are absolute relative to the origin of the machine. (This is the RepRap default.)
 			relative = false;
-		},
-
-		G91: function(args)
+		}
+		else if(cmd === "G91")
 		{
 			//G91: Set to Relative Positioning
 			//All coordinates from now on are relative to the last position.
-
-			//TODO
 			relative = true;
-		},
-
-		G92: function(args)
+		}
+		else if(cmd === "G92")
 		{
 			//G92: Set Position
 			//Example: G92 E0
@@ -202,36 +177,42 @@ GCodeLoader.prototype.parse = function(gcode)
 			newLine.z= args.z !== undefined ? args.z : newLine.z;
 			newLine.e= args.e !== undefined ? args.e : newLine.e;
 			lastLine = newLine;
-		},
-
-		M82: function(args)
+		}
+		else
 		{
-			//M82: Set E codes absolute (default)
-			//Descriped in Sprintrun source code.
+			console.warn("GCodeLoader: Unknown command:" + cmd);
+		}
+	}
 
-			//No-op, so long as M83 is not supported.
-		},
+	/*
+	G21: function(args)
+	{
+		//G21: Set Units to Millimeters
+		//Example: G21
+		//Units from now on are in millimeters. (This is the RepRap default.)
 
-		M84: function(args)
-		{
-			//M84: Stop idle hold
-			//Example: M84
-			//Stop the idle hold on all axis and extruder. In some cases the
-			//idle hold causes annoying noises, which can be stopped by
-			//disabling the hold. Be aware that by disabling idle hold during
-			//printing, you will get quality issues. This is recommended only
-			//in between or after printjobs.
+		//No-op: So long as G20 is not supported.
+	},
+	M82: function(args)
+	{
+		//M82: Set E codes absolute (default)
+		//Descriped in Sprintrun source code.
 
-			//No-op
-		},
+		//No-op, so long as M83 is not supported.
+	},
 
-		default: function(args, info)
-		{
-			console.warn("Unknown command:", args.cmd, args, info);
-		},
-	});
+	M84: function(args)
+	{
+		//M84: Stop idle hold
+		//Example: M84
+		//Stop the idle hold on all axis and extruder. In some cases the
+		//idle hold causes annoying noises, which can be stopped by
+		//disabling the hold. Be aware that by disabling idle hold during
+		//printing, you will get quality issues. This is recommended only
+		//in between or after printjobs.
 
-	parser.decode(gcode);
+		//No-op
+	}*/
 
 	console.log("Layer Count ", layers.length);
 	console.log("bbox ", bbbox);
@@ -252,59 +233,4 @@ GCodeLoader.prototype.parse = function(gcode)
 	}
 	
 	return object;
-};
-
-/**
- * Parses a string of gcode instructions, and invokes handlers for each type of command.
- *
- * GCode references
- *  - http://reprap.org/wiki/G-code
- *  - http://en.wikipedia.org/wiki/G-code
- *
- * @class GCodeDecoder
- */
-function GCodeDecoder(handlers)
-{
-	this.handlers = handlers || {};
-}
-
-GCodeDecoder.prototype.decodeLine = function(text, info)
-{
-	var text = text.replace(/;.+/g,'').trim();
-
-	if(text)
-	{
-		var tokens = text.split(" ");
-		if(tokens)
-		{
-			var cmd = tokens[0];
-			var args = {"cmd": cmd};
-
-			tokens.splice(1).forEach(function(token)
-			{
-				var key = token[0].toLowerCase();
-				var value = parseFloat(token.substring(1));
-				args[key] = value;
-			});
-
-			var handler = this.handlers[tokens[0]] || this.handlers["default"];
-			if(handler)
-			{
-				return handler(args, info);
-			}
-		}
-	}
-};
-
-GCodeDecoder.prototype.decode = function(gcode)
-{
-	var lines = gcode.split("\n");
-
-	for(var i = 0; i < lines.length; i++)
-	{
-		if(this.decodeLine(lines[i], i) === false)
-		{
-			break;
-		}
-	}
 };
