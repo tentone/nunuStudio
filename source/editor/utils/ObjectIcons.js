@@ -33,6 +33,7 @@ ObjectIcons.icons["Sprite"] = ObjectIcons.path + "misc/image.png";
 ObjectIcons.icons["Text3D"] = ObjectIcons.path + "models/text.png";
 ObjectIcons.icons["Points"] = ObjectIcons.path + "models/points.png";
 ObjectIcons.icons["Line"] = ObjectIcons.path + "misc/nodes.png";
+ObjectIcons.icons["LineSegments"] = ObjectIcons.path + "misc/nodes.png";
 
 //Program
 ObjectIcons.icons["Program"] = ObjectIcons.path + "script/script.png";
