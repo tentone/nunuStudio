@@ -119,7 +119,6 @@ GCodeLoader.prototype.parse = function(data)
 
 		//Process commands
 		//G0/G1 – Linear Movement
-		//Go in a straight line from the current (X, Y) point to the point (90.6, 13.8), extruding material as the move happens from the current extruded length to a length of 22.4 mm.
 		if(cmd === "G0" || cmd === "G1")
 		{
 			var line =
@@ -150,20 +149,16 @@ GCodeLoader.prototype.parse = function(data)
 			console.warn("GCodeLoader: Arc command not supported");
 		}
 		//G90: Set to Absolute Positioning
-		//All coordinates from now on are absolute relative to the origin of the machine.
 		else if(cmd === "G90")
 		{
 			relative = false;
 		}
 		//G91: Set to Relative Positioning
-		//All coordinates from now on are relative to the last position.
 		else if(cmd === "G91")
 		{
 			relative = true;
 		}
 		//G92: Set Position
-		//Allows programming of absolute zero point, by reseting the current position to the values specified.
-		//No physical motion will occur.
 		else if(cmd === "G92")
 		{
 			var line = currentState;

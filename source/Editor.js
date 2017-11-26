@@ -94,7 +94,6 @@ include("core/resources/Video.js");
 include("core/resources/Audio.js");
 include("core/resources/Image.js");
 include("core/resources/Model.js");
-include("core/resources/File.js");
 include("core/resources/ResourceManager.js");
 
 include("core/texture/Texture.js");
