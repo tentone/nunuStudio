@@ -578,6 +578,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\resources\\File.js": {
+            "name": "..\\..\\source\\core\\resources\\File.js",
+            "modules": {},
+            "classes": {
+                "File": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\resources\\Font.js": {
             "name": "..\\..\\source\\core\\resources\\Font.js",
             "modules": {},
@@ -619,15 +628,6 @@
             "modules": {},
             "classes": {
                 "ResourceManager": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\resources\\Text.js": {
-            "name": "..\\..\\source\\core\\resources\\Text.js",
-            "modules": {},
-            "classes": {
-                "Text": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1247,12 +1247,12 @@
             "elements": {},
             "classes": {
                 "Audio": 1,
+                "File": 1,
                 "Font": 1,
                 "Image": 1,
                 "Model": 1,
                 "Resource": 1,
                 "ResourceManager": 1,
-                "Text": 1,
                 "Video": 1
             },
             "fors": {},
@@ -2775,6 +2775,22 @@
                 }
             ]
         },
+        "File": {
+            "name": "File",
+            "shortname": "File",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\resources\\File.js",
+            "line": 3,
+            "description": "File resource can be used to store data or code.\n\nFile data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.",
+            "is_constructor": 1,
+            "extends": "{Resource}"
+        },
         "Font": {
             "name": "Font",
             "shortname": "Font",
@@ -2871,22 +2887,6 @@
             "line": 3,
             "description": "Resource manager is used to manage available resources used by objects\n\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\n\nThe manager is used to manage the following types of resources:\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries",
             "is_constructor": 1
-        },
-        "Text": {
-            "name": "Text",
-            "shortname": "Text",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Resources",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\resources\\Text.js",
-            "line": 3,
-            "description": "Text resource can be used to store text data or code.\n\nText data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.",
-            "is_constructor": 1,
-            "extends": "{Resource}"
         },
         "Video": {
             "name": "Video",
@@ -10448,6 +10448,26 @@
             "module": "Resources"
         },
         {
+            "file": "..\\..\\source\\core\\resources\\File.js",
+            "line": 24,
+            "description": "Serialize File resource data to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Meta"
+                }
+            ],
+            "return": {
+                "description": "data",
+                "type": "Object"
+            },
+            "class": "File",
+            "module": "Resources"
+        },
+        {
             "file": "..\\..\\source\\core\\resources\\Font.js",
             "line": 15,
             "description": "Font data, can be an ArrayBuffer or JSON.",
@@ -11130,26 +11150,6 @@
             "itemtype": "method",
             "name": "removeAudio",
             "class": "ResourceManager",
-            "module": "Resources"
-        },
-        {
-            "file": "..\\..\\source\\core\\resources\\Text.js",
-            "line": 24,
-            "description": "Serialize text resource data to json.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Meta"
-                }
-            ],
-            "return": {
-                "description": "data",
-                "type": "Object"
-            },
-            "class": "Text",
             "module": "Resources"
         },
         {
