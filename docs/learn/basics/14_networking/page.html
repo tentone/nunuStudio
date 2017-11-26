@@ -52,13 +52,20 @@
 	<section class="pad-sm">
 		<div class="container">
 			<a href="../../../learn.html"><h3 class="black"><u>Back</u></h3></a>
-			<h2 class="black">Networking</h2>
-			<p>In this tutorial we will experimet with networking and we will create a networked multiplayer version of the pong game.</p>
+			<h2 class="black">WebSockets</h2>
+			<p>In this tutorial we will experimet with networking using WebSockets and we will create a simple networked multiplayer game. For this tutorial node.js will be used to develop the server aplication. I have decided to use node.js simply because it uses the same language (javascript) used inside nunuStudio, but you can choose another framework/language to implement the server.</p>
+			<p>Lets start by covering the basics about WebSockets, what they are and how can we use them to create a web based multiplayer game, websockets are an technology that makes it possible to open an interactive communication session between the user's browser and a server, using them its possible to send messages to a server and receive event-driven responses without having to poll the server for a reply.</p>
+			<p>A single websocket server can be used to interconnect multiple clients, the server works as an intermediary in data exchange, lets take a message chat as an example, each clients connects to the server and tells the server who he is, when sending a message the client tells the server for who the message is destinated and the server redirects that message to its destination, that is also is a client connected to the server.</p>
 
+			<img src="chat.png" class="img-normal"></img>
+
+			<p>As in the example above our game will work similarly, each player will connect to the server and indetify with the server, to indentify clients we will use and random UUID.</p>
 			<pre><code>function initialize()
 {
 	...
 }</code></pre>
+
+			
 		</div>
 	</section>
 
