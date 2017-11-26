@@ -71,6 +71,7 @@ GCodeLoader.prototype.parse = function(data)
 		return currentLayer.lines[grouptype];
 	}
 
+	//Create lie segment between p1 and p2
 	function addSegment(p1, p2)
 	{
 		var group = getLineGroup(p2);

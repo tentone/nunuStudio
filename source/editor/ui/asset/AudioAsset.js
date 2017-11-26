@@ -14,6 +14,7 @@ function AudioAsset(parent)
 	this.image = document.createElement("img");
 	this.image.style.position = "absolute";
 	this.image.style.top = "5px";
+	this.image.src = Editor.filePath + "icons/misc/audio.png";
 	this.element.appendChild(this.image);
 
 	//Context menu event
@@ -136,8 +137,6 @@ AudioAsset.prototype.updateMetadata = function()
 {
 	if(this.audio !== null)
 	{
-		this.image.src = Editor.filePath + "icons/misc/audio.png";
-
 		this.setText(this.audio.name);
 	}
 };
