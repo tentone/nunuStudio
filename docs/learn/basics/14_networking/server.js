@@ -1,29 +1,45 @@
-var WebSocketServer = require('websocket').server;
-var http = require('http');
+var WebSocketServer = require("websocket").server;
+var http = require("http");
+var port = 1111;
+var server = http.createServer();
+server.listen(port);
 
-var server = http.createServer(function(request, response){});
-server.listen(1337, function() { });
+console.log("Server running at port " + port);
 
-//Create the server
-wsServer = new WebSocketServer({httpServer: server});
+var players = [];
 
-//WebSocket server
-wsServer.on('request', function(request)
+var wsServer = new WebSocketServer({httpServer: server});
+
+wsServer.on("request", function(request)
 {
 	var connection = request.accept(null, request.origin);
 
-	// This is the most important callback for us, we'll handle
-	// all messages from users here.
-	connection.on('message', function(message)
+	connection.on("message", function(message)
 	{
-		if (message.type === 'utf8')
+		var data = JSON.parse(message.utf8Data);
+	
+		if(data.type === "connected")
 		{
-			// process WebSocket message
-		}
-	});
+			players[data.uuid] = 
+			{
+				color: data.color,
+				position:{x:0, y:0, z:0}
+			};
 
-	connection.on('close', function(connection)
-	{
-		// close user connection
+			console.log("Player " + data.uuid + " connected");
+		}
+		else if(data.type === "position")
+		{
+			var position = players[data.uuid].position;
+			position.x = data.position.x;
+			position.y = data.position.y;
+			position.z = data.position.z;
+
+			console.log("Player " + data.uuid + " position updated", data.position);
+		}
+		else
+		{
+			console.log("Unknown message received", data);
+		}
 	});
 });

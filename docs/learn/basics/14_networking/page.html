@@ -59,12 +59,77 @@
 
 			<img src="chat.png" class="img-normal"></img>
 
-			<p>As in the example above our game will work similarly, each player will connect to the server and indetify with the server, to indentify clients we will use and random UUID.</p>
-			<pre><code>function initialize()
-{
-	...
-}</code></pre>
+			<p>Lets start by installing the required nodejs dependencies for this tutorial, we will only need the websocket dependency use the command bellow to install it using your computer terminal/command.</p>
 
+			<code><pre>npm -g install websocket</pre></code>
+
+			<p>Lets start by setting up our server code, we will start by importing the required node modules, after that a http server instance is created and configured with the correct port (we can use any port we want to), after that we create a WebSocketServer that will allow us to send and receive messages to the clients connected to the server. During the tutorial for convenience we will only use JSON messages but we can send any type of data.</p>
+			<p>The code will be used as a base for our serve it takes care of all the steps necessary, from now on we will only focus on messages exchange. For the tutorial we will be using the port 1111 and localhost for communication make sure that you change this to the correct IP if youre using an external server.</p>
+
+			<pre><code>var WebSocketServer = require("websocket").server;
+var http = require("http");
+
+var port = 1111;
+
+var server = http.createServer();
+server.listen(port);
+
+console.log("Server running at port " + port);
+
+var wsServer = new WebSocketServer({httpServer: server});
+wsServer.on("request", function(request)
+{
+	var connection = request.accept(null, request.origin);
+
+	connection.on("message", function(message)
+	{
+		//TODO
+	});
+	
+	connection.on("close", function(connection)
+	{
+		console.log("User disconnected");
+	});
+});</code></pre>
+			
+			<p>The code bellow is the client part that we will write inside nunuStudio, as we can see the code to connect to a WebSocket is really simple and actually similar to the one used to create the server itself, when starting the client part in nunuStudio you should be able to see a "Connected to server" message in the console.</p>
+
+			<pre><code>var connection;
+
+function initialize()
+{	
+	connection = new WebSocket("ws://127.0.0.1:1337");
+	
+	connection.onopen = function()
+	{
+		console.log("Connected to server");
+	};
+}</code></pre>
+	
+			<p>Now lets send a simple message to the server and create a response to the message we sent, we will include in every message sent a type value to allow the server to diferentiate message and a uuid to allow the server to distinguish clients (this is not the most secure approach but should be enough for now). To send a message we will use the WebSocket send method, all of our message will be JSON encoded so we have to call JSON.stringify on our client to transform our objects to text format and JSON.parse to recreate the object on the server.</p>
+			<p>The code bellow is the the client side.</p>
+			<pre><code>uuid = THREE.Math.generateUUID();
+...
+connection.onopen = function()
+{
+	console.log("Connected to server");
+	connection.send(JSON.stringify(
+	{
+		type:"connected",
+		uuid:uuid
+	}));
+};</code></pre>
+			<p>The code bellow is the server side.</p>
+			<pre><code>connection.on("message", function(message)
+{
+	console.log("Message received");
+	var data = JSON.parse(message.utf8Data);
+});</code></pre>
+
+			<p>If everything is working as expected we should now be able to exchange messages between the client and our server, we can use the serialization method provided by nunuStudio to send and update states of objects in our scene between multiple clients.</p>
+			<p>Now lets create a simple level for our game, our game will be a 2D top shooter, each player will be a cube and will have health, players can shoot other players and can only fire again when the last bullet disapears. We need to syncronize between clients the player position, health, and bullet positions. The server will decide when the player has been hit.</p>
+
+			<img src="level.jpg" class="img-normal"></img>
 			
 		</div>
 	</section>
