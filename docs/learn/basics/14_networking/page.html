@@ -127,9 +127,12 @@ connection.onopen = function()
 });</code></pre>
 
 			<p>If everything is working as expected we should now be able to exchange messages between the client and our server, we can use the serialization method provided by nunuStudio to send and update states of objects in our scene between multiple clients.</p>
-			<p>Now lets create a simple level for our game, our game will be a 2D top shooter, each player will be a cube and will have health, players can shoot other players and can only fire again when the last bullet disapears. We need to syncronize between clients the player position, health, and bullet positions. The server will decide when the player has been hit.</p>
+			<p>Now lets create a simple level for our game, our game will be a 2D top shooter, each player will be a cube and will have health, players can shoot other players and can only fire again when the last bullet disapears. The server will decide when the player has been hit. We need to syncronize between clients the player position, health, and bullet positions (each player only has a bullet.</p>
 
 			<img src="level.jpg" class="img-normal"></img>
+			
+			<p>The code bellow implements the base data structures required in the server, the server will store Players in a list and redistribute the player status to all other players in the server.</p>
+
 			
 		</div>
 	</section>
