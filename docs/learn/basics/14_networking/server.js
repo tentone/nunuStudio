@@ -94,6 +94,7 @@ wsServer.on("request", function(request)
 		else if(data.type === "disconnect")
 		{
 			removePlayer(data.uuid);
+			console.log("Player " + data.uuid + " disconnected");
 		}
 		else
 		{
