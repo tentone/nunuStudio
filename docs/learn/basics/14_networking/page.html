@@ -131,8 +131,29 @@ connection.onopen = function()
 
 			<img src="level.jpg" class="img-normal"></img>
 			
-			<p>The code bellow implements the base data structures required in the server, the server will store Players in a list and redistribute the player status to all other players in the server.</p>
+			<p>The code bellow implements the base data structures required in the server, the server will store Players in a list and redistribute the player status to all other players in the server. To simplify this process we could also have imported nunu.min.js lib into our server.</p>
 
+			<code><pre>function Vector3(x, y, z)
+{
+	this.x = x;
+	this.y = y;
+	this.z = z;
+}
+
+function Player(uuid, color)
+{
+	this.uuid = uuid;
+	this.color = color;
+	this.bullet = new Bullet(uuid);
+	this.position = new Vector3(0, 0, 0);
+}
+
+function Bullet(uuid)
+{
+	this.uuid = uuid;
+	this.active = false;
+	this.position = new Vector3(0, 0, 0);
+}</pre></code>
 			
 		</div>
 	</section>
