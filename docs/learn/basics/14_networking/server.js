@@ -35,8 +35,32 @@ function Bullet(uuid)
 	this.position = new Vector3(0, 0, 0);
 }
 
-var players = [];
+function getPlayer(uuid)
+{
+	for(var i = 0; i < players.length; i++)
+	{
+		if(players[i].uuid === uuid)
+		{
+			return players[i];
+		}
+	}
 
+	return null;
+}
+
+function removePlayer(uuid)
+{
+	for(var i = 0; i < players.length; i++)
+	{
+		if(players[i].uuid === uuid)
+		{
+			players.splice(i, 1);
+			break;
+		}
+	}
+}
+
+var players = [];
 var wsServer = new WebSocketServer({httpServer: server});
 
 wsServer.on("request", function(request)
@@ -49,15 +73,27 @@ wsServer.on("request", function(request)
 	
 		if(data.type === "connected")
 		{
-			players[data.uuid] = new Player(data.uuid, data.color);
+			players.push(new Player(data.uuid, data.color));
 
 			console.log("Player " + data.uuid + " connected");
 		}
 		else if(data.type === "position")
 		{
-			players[data.uuid].position.set(data.position.x, data.position.y, data.position.z);
+			getPlayer(data.uuid).position.set(data.position.x, data.position.y, data.position.z);
 
 			console.log("Player " + data.uuid + " position updated", data.position);
+		}
+		else if(data.type === "tick")
+		{
+			connection.sendUTF(JSON.stringify(
+			{
+				type: "players",
+				players: players
+			}));
+		}
+		else if(data.type === "disconnect")
+		{
+			removePlayer(data.uuid);
 		}
 		else
 		{
