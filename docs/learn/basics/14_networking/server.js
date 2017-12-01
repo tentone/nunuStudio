@@ -6,33 +6,19 @@ server.listen(port);
 
 console.log("Server running at port " + port);
 
-function Vector3(x, y, z)
-{
-	this.x = x;
-	this.y = y;
-	this.z = z;
-}
-
-Vector3.prototype.set = function(x, y, z)
-{
-	this.x = x;
-	this.y = y;
-	this.z = z;
-};
-
 function Player(uuid, color)
 {
 	this.uuid = uuid;
 	this.color = color;
-	this.bullet = new Bullet(uuid);
-	this.position = new Vector3(0, 0, 0);
+	this.position = null;
+	this.rotation = null;
 }
 
 function Bullet(uuid)
 {
 	this.uuid = uuid;
-	this.active = false;
-	this.position = new Vector3(0, 0, 0);
+	this.position = null;
+	this.velocity = null;
 }
 
 function getPlayer(uuid)
@@ -77,14 +63,14 @@ wsServer.on("request", function(request)
 
 			console.log("Player " + data.uuid + " connected");
 		}
-		else if(data.type === "position")
+		else if(data.type === "update")
 		{
-			getPlayer(data.uuid).position.set(data.position.x, data.position.y, data.position.z);
+			var player = getPlayer(data.uuid);
+			player.position = data.position;
+			player.rotation = data.rotation;
 
-			console.log("Player " + data.uuid + " position updated", data.position);
-		}
-		else if(data.type === "tick")
-		{
+			console.log("Player " + data.uuid + " updated", data);
+
 			connection.sendUTF(JSON.stringify(
 			{
 				type: "players",
