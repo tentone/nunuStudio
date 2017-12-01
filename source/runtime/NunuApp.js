@@ -321,6 +321,7 @@ NunuApp.prototype.run = function()
 	{
 		var canvas = this.canvas;
 		canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
+
 		this.events.add(canvas, "click", function()
 		{
 			if(canvas.requestPointerLock)
@@ -329,6 +330,12 @@ NunuApp.prototype.run = function()
 			}
 		});
 	}
+
+	var self = this;
+	this.events.add(window, "beforeunload", function()
+	{
+		self.exit();
+	});
 
 	this.events.create();
 	this.resume();
