@@ -1,8 +1,9 @@
 var WebSocketServer = require("websocket").server;
 var http = require("http");
 var port = 1111;
-var server = http.createServer();
-server.listen(port);
+
+var httpServer = http.createServer();
+httpServer.listen(port);
 
 console.log("Server running at port " + port);
 
@@ -47,9 +48,10 @@ function removePlayer(uuid)
 }
 
 var players = [];
-var wsServer = new WebSocketServer({httpServer: server});
 
-wsServer.on("request", function(request)
+var server = new WebSocketServer({httpServer: httpServer});
+
+server.on("request", function(request)
 {
 	var connection = request.accept(null, request.origin);
 
@@ -63,13 +65,15 @@ wsServer.on("request", function(request)
 
 			console.log("Player " + data.uuid + " connected");
 		}
+		else if(data.type === "bullet")
+		{
+
+		}
 		else if(data.type === "update")
 		{
 			var player = getPlayer(data.uuid);
 			player.position = data.position;
 			player.rotation = data.rotation;
-
-			console.log("Player " + data.uuid + " updated", data);
 
 			connection.sendUTF(JSON.stringify(
 			{
