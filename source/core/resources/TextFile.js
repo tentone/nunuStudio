@@ -1,25 +1,25 @@
 "use strict";
 
 /**
- * File resource can be used to store data or code.
+ * Text file resource can be used to store data or code.
  *
- * File data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.
+ * Text file data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.
  *
- * @class File
+ * @class TextFile
  * @constructor
  * @extends {Resource}
  * @module Resources
  */
-function File()
+function TextFile()
 {
-	Resource.call(this, "File", "File");
+	Resource.call(this, "text", "TextFile");
 
 	this.format = "string";
 	this.encoding = "txt";
 	this.data = "";
 }
 
-File.prototype = Object.create(Resource.prototype);
+TextFile.prototype = Object.create(Resource.prototype);
 
 /**
  * Serialize File resource data to json.
@@ -28,7 +28,7 @@ File.prototype = Object.create(Resource.prototype);
  * @param {meta} meta
  * @return {Object} data
  */
-File.prototype.toJSON = function(meta)
+TextFile.prototype.toJSON = function(meta)
 {
 	var data = Resource.prototype.toJSON.call(this, meta);
 

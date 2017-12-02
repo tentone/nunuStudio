@@ -578,15 +578,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\resources\\File.js": {
-            "name": "..\\..\\source\\core\\resources\\File.js",
-            "modules": {},
-            "classes": {
-                "File": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\resources\\Font.js": {
             "name": "..\\..\\source\\core\\resources\\Font.js",
             "modules": {},
@@ -628,6 +619,15 @@
             "modules": {},
             "classes": {
                 "ResourceManager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\resources\\TextFile.js": {
+            "name": "..\\..\\source\\core\\resources\\TextFile.js",
+            "modules": {},
+            "classes": {
+                "TextFile": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1247,12 +1247,12 @@
             "elements": {},
             "classes": {
                 "Audio": 1,
-                "File": 1,
                 "Font": 1,
                 "Image": 1,
                 "Model": 1,
                 "Resource": 1,
                 "ResourceManager": 1,
+                "TextFile": 1,
                 "Video": 1
             },
             "fors": {},
@@ -2775,22 +2775,6 @@
                 }
             ]
         },
-        "File": {
-            "name": "File",
-            "shortname": "File",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Resources",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\resources\\File.js",
-            "line": 3,
-            "description": "File resource can be used to store data or code.\n\nFile data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.",
-            "is_constructor": 1,
-            "extends": "{Resource}"
-        },
         "Font": {
             "name": "Font",
             "shortname": "Font",
@@ -2887,6 +2871,22 @@
             "line": 3,
             "description": "Resource manager is used to manage available resources used by objects\n\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\n\nThe manager is used to manage the following types of resources:\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries",
             "is_constructor": 1
+        },
+        "TextFile": {
+            "name": "TextFile",
+            "shortname": "TextFile",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\resources\\TextFile.js",
+            "line": 3,
+            "description": "Text file resource can be used to store data or code.\n\nText file data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.",
+            "is_constructor": 1,
+            "extends": "{Resource}"
         },
         "Video": {
             "name": "Video",
@@ -3537,7 +3537,7 @@
             "module": "Runtime",
             "namespace": "",
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 148,
+            "line": 151,
             "description": "NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.\n\n.isp files can be loaded directly into webpages.",
             "is_constructor": 1,
             "params": [
@@ -10448,26 +10448,6 @@
             "module": "Resources"
         },
         {
-            "file": "..\\..\\source\\core\\resources\\File.js",
-            "line": 24,
-            "description": "Serialize File resource data to json.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Meta"
-                }
-            ],
-            "return": {
-                "description": "data",
-                "type": "Object"
-            },
-            "class": "File",
-            "module": "Resources"
-        },
-        {
             "file": "..\\..\\source\\core\\resources\\Font.js",
             "line": 15,
             "description": "Font data, can be an ArrayBuffer or JSON.",
@@ -11150,6 +11130,26 @@
             "itemtype": "method",
             "name": "removeAudio",
             "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\TextFile.js",
+            "line": 24,
+            "description": "Serialize File resource data to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Meta"
+                }
+            ],
+            "return": {
+                "description": "data",
+                "type": "Object"
+            },
+            "class": "TextFile",
             "module": "Resources"
         },
         {
@@ -14296,7 +14296,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 159,
+            "line": 162,
             "description": "Nunu Program",
             "itemtype": "property",
             "name": "program",
@@ -14306,7 +14306,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 165,
+            "line": 168,
             "description": "Graphics renderer in use by this NunuApp instance",
             "itemtype": "property",
             "name": "renderer",
@@ -14316,7 +14316,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 171,
+            "line": 174,
             "description": "VR flag, to set VR mode the toggleVR method should be used",
             "itemtype": "property",
             "name": "vr",
@@ -14327,7 +14327,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 178,
+            "line": 181,
             "description": "Canvas used to render graphics.",
             "itemtype": "property",
             "name": "canvas",
@@ -14337,7 +14337,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 184,
+            "line": 187,
             "description": "Flag used to controll if the canvas element is resized automatically by the nunu app instance.\n\nIf true the canvas is resized whenether the resize method is called.",
             "itemtype": "property",
             "name": "canvasFitWindow",
@@ -14348,7 +14348,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 194,
+            "line": 197,
             "description": "Lock and hide mouse pointer to the canvas.",
             "itemtype": "method",
             "name": "lockMouse",
@@ -14357,7 +14357,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 232,
+            "line": 235,
             "description": "Load a nunustudio application and attach it to the canvas indicated.\n\nThis method automatically creates resize events, this single line should be enough to make a nunuStudio app run in a webpage.",
             "static": 1,
             "itemtype": "method",
@@ -14379,7 +14379,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 268,
+            "line": 271,
             "description": "Start running nunu program.\n\nCreates renderer, mouse and keyboard objects, and starts running the loaded application.\n\nA nunu program must be loaded before calling this method.",
             "itemtype": "method",
             "name": "run",
@@ -14388,7 +14388,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 344,
+            "line": 347,
             "description": "Load program asynchronously and run it after its loaded.",
             "itemtype": "method",
             "name": "loadRunProgram",
@@ -14414,7 +14414,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 365,
+            "line": 368,
             "description": "Load program from file.",
             "itemtype": "method",
             "name": "loadProgram",
@@ -14430,7 +14430,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 390,
+            "line": 393,
             "description": "Load program from file, asynchronously.",
             "itemtype": "method",
             "name": "loadProgramAsync",
@@ -14456,7 +14456,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 433,
+            "line": 436,
             "description": "Update nunu program state.\n\nAutomatically called by the runtime handler.",
             "itemtype": "method",
             "name": "update",
@@ -14465,7 +14465,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 449,
+            "line": 452,
             "description": "Exit from app.\n\nThis method kills the app and disposes all internal elements to avoid memory leaks.\n\nIs should be called before exiting the webpage or before switching nunu programs.\n\nWhen loading new nunu programs the same NunuApp instance can be used.",
             "itemtype": "method",
             "name": "exit",
@@ -14474,7 +14474,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 500,
+            "line": 503,
             "description": "Start or resume the paused application.\n\nStarts a new update cycle and sets the running flag.",
             "itemtype": "method",
             "name": "resume",
@@ -14483,7 +14483,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 534,
+            "line": 537,
             "description": "Pause the running application.",
             "itemtype": "method",
             "name": "pause",
@@ -14492,7 +14492,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 544,
+            "line": 547,
             "description": "Set the canvas to be used for rendering.\n\nShould be set before starting the program.",
             "itemtype": "method",
             "name": "setCanvas",
@@ -14508,7 +14508,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 558,
+            "line": 561,
             "description": "Resize the window.\n\nShould be called whenether the host window is resized.",
             "itemtype": "method",
             "name": "resize",
@@ -14517,7 +14517,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 582,
+            "line": 585,
             "description": "Send data to running nunu application.\n\nThe data sent using this method is received by scripts that implement the onAppData method.",
             "params": [
                 {
@@ -14533,7 +14533,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 598,
+            "line": 601,
             "description": "Set on data receive callback.\n\nCallback receives data as an argument.",
             "itemtype": "method",
             "name": "setOnDataReceived",
@@ -14549,7 +14549,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 611,
+            "line": 614,
             "description": "Set on exit callback.\n\nCallback is executed when exiting the nunu app.",
             "itemtype": "method",
             "name": "setOnExit",
@@ -14565,7 +14565,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 624,
+            "line": 627,
             "description": "Check if virtual reality mode is available.",
             "itemtype": "method",
             "name": "vrAvailable",
@@ -14578,7 +14578,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 635,
+            "line": 638,
             "description": "Toggle VR mode, only works if VR mode is available.",
             "itemtype": "method",
             "name": "toggleVR",
@@ -14587,7 +14587,7 @@
         },
         {
             "file": "..\\..\\source\\runtime\\NunuApp.js",
-            "line": 659,
+            "line": 662,
             "description": "Set a element to fullscreen mode, if none is passed the rendering canvas is used.",
             "itemtype": "method",
             "name": "toggleFullscreen",

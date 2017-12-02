@@ -19,8 +19,8 @@ include("lib/three/shaders/FilmShader.js");
 include("lib/three/shaders/DotScreenShader.js");
 include("lib/three/shaders/LuminosityShader.js");
 include("lib/three/shaders/SobelOperatorShader.js");
-
-include("lib/three/loaders/TTFLoader.js");
+include("lib/three/shaders/ColorifyShader.js");
+include("lib/three/shaders/ToneMapShader.js");
 
 include("lib/three/postprocessing/EffectComposer.js");
 include("lib/three/postprocessing/RenderPass.js");
@@ -31,6 +31,8 @@ include("lib/three/postprocessing/SAOPass.js");
 include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");
+
+include("lib/three/loaders/TTFLoader.js");
 
 include("lib/aruco.js");
 include("lib/cannon.min.js");
@@ -77,6 +79,7 @@ include("core/postprocessing/pass/CopyPass.js");
 include("core/postprocessing/pass/FilmPass.js");
 include("core/postprocessing/pass/DotScreenPass.js");
 include("core/postprocessing/pass/SobelPass.js");
+include("core/postprocessing/pass/ColorifyPass.js");
 
 include("core/controls/VRControls.js");
 
@@ -86,6 +89,7 @@ include("core/resources/Video.js");
 include("core/resources/Audio.js");
 include("core/resources/Image.js");
 include("core/resources/Model.js");
+include("core/resources/TextFile.js");
 include("core/resources/ResourceManager.js");
 
 include("core/texture/Texture.js");
@@ -143,7 +147,6 @@ include("core/utils/EventManager.js");
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");
-
 
 /**
  * NunuApp is the main class of the runtime system, is used to embed nunu application into a webpage.
