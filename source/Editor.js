@@ -236,7 +236,6 @@ include("lib/zlib/zlib.min.js");
 include("lib/zlib/gzip.min.js");
 include("lib/zlib/gunzip.min.js");
 
-include("lib/timeliner.js");
 include("lib/jsblend.js");
 include("lib/jscookie.min.js");
 include("lib/jshint.min.js");
@@ -300,6 +299,7 @@ include("editor/ui/asset/MaterialAsset.js");
 include("editor/ui/asset/TextureAsset.js");
 include("editor/ui/asset/FontAsset.js");
 include("editor/ui/asset/AudioAsset.js");
+include("editor/ui/asset/TextFileAsset.js");
 
 include("editor/ui/tab/ConsoleTab.js");
 include("editor/ui/tab/AssetExplorer.js");
@@ -407,25 +407,6 @@ include("editor/history/action/ActionBundle.js");
 include("editor/history/action/object/ObjectAddedAction.js");
 include("editor/history/action/object/ObjectRemovedAction.js");
 include("editor/history/action/object/ObjectMovedAction.js");
-
-//inclde("editor/timeline/save_format.js");
-//inclde("editor/timeline/settings.js");
-//inclde("editor/timeline/theme.js");
-//inclde("editor/timeline/timeliner.js");
-//inclde("editor/timeline/ui_canvas.js");
-//inclde("editor/timeline/ui_icon_button.js");
-//inclde("editor/timeline/ui_number.js");
-//inclde("editor/timeline/ui_scrollbar.js");
-//inclde("editor/timeline/util_datastore.js");
-//inclde("editor/timeline/util_dispatcher.js");
-//inclde("editor/timeline/util_handle_drag.js");
-//inclde("editor/timeline/util_tween.js");
-//inclde("editor/timeline/util_undo.js");
-//inclde("editor/timeline/utils.js");
-//inclde("editor/timeline/view_layer.js");
-//inclde("editor/timeline/view_layer_cabinet.js");
-//inclde("editor/timeline/view_panel.js");
-//inclde("editor/timeline/view_time_scroller.js");
 
 include("editor/CameraOrientation.js");
 include("editor/Console.js");
