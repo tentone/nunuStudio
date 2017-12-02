@@ -1,6 +1,6 @@
 "use strict";
 
-function FileAsset(parent)
+function TextFileAsset(parent)
 {
 	Asset.call(this, parent);
 
@@ -46,10 +46,10 @@ function FileAsset(parent)
 	};
 }
 
-FileAsset.prototype = Object.create(Asset.prototype);
+TextFileAsset.prototype = Object.create(Asset.prototype);
 
 //Set object to file
-FileAsset.prototype.setFile = function(file)
+TextFileAsset.prototype.setFile = function(file)
 {
 	if(file instanceof File)
 	{
@@ -59,7 +59,7 @@ FileAsset.prototype.setFile = function(file)
 };
 
 //Update material preview
-FileAsset.prototype.updateMetadata = function()
+TextFileAsset.prototype.updateMetadata = function()
 {
 	if(this.file !== null)
 	{
@@ -68,11 +68,10 @@ FileAsset.prototype.updateMetadata = function()
 };
 
 //Update interface
-FileAsset.prototype.updateInterface = function()
+TextFileAsset.prototype.updateInterface = function()
 {
 	Asset.prototype.updateInterface.call(this);
 
-	//Update image
 	this.image.width = this.size.x * this.scale.x;
 	this.image.height = this.size.y * this.scale.y;
 	this.image.style.left = ((this.size.x - (this.size.x * this.scale.x))/2) + "px";

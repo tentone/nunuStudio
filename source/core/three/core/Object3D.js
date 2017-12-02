@@ -325,7 +325,8 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 			geometries: {},
 			materials: {},
 			textures: {},
-			skeletons: {}
+			skeletons: {},
+			resources: {}
 		};
 
 		output.metadata =
