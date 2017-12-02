@@ -39,6 +39,8 @@ include("lib/three/curves/NURBSCurve.js");
 include("lib/three/curves/NURBSSurface.js");
 include("lib/three/curves/NURBSUtils.js");
 
+include("lib/three/loaders/TTFLoader.js");
+
 include("lib/aruco.js");
 include("lib/cannon.min.js");
 include("lib/leap.min.js");
@@ -94,6 +96,7 @@ include("core/resources/Video.js");
 include("core/resources/Audio.js");
 include("core/resources/Image.js");
 include("core/resources/Model.js");
+include("core/resources/TextFile.js");
 include("core/resources/ResourceManager.js");
 
 include("core/texture/Texture.js");
@@ -215,7 +218,6 @@ include("lib/three/loaders/STLLoader.js");
 include("lib/three/loaders/SVGLoader.js");
 include("lib/three/loaders/TDSLoader.js");
 include("lib/three/loaders/TGALoader.js");
-include("lib/three/loaders/TTFLoader.js");
 include("lib/three/loaders/UTF8Loader.js");
 include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
