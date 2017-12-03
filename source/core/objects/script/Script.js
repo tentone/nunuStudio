@@ -202,7 +202,7 @@ Script.prototype.appData = function(data)
 {
 	if(this.script.onAppData !== undefined)
 	{
-		this.script.onAppData.call(this);
+		this.script.onAppData.call(this, data);
 	}
 };
 
