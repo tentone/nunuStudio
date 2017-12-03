@@ -23,14 +23,16 @@ Interface.initialize = function()
 	Interface.bottomTab.buttonSize = new THREE.Vector2(25, 25);
 	Interface.bottomTab.element.style.backgroundColor = Editor.theme.barColor;
 
-	//Asset explorer
+	//Asset
 	Interface.assetExplorer = Interface.bottomTab.addTab(AssetExplorer, false);
 	Interface.assetExplorer.filesSize.set(Settings.general.filePreviewSize, Settings.general.filePreviewSize);
 	Interface.assetExplorer.button.setAltText("Asset explorer");
 
+	//Console
 	Interface.console = Interface.bottomTab.addTab(ConsoleTab, false);
 	Interface.console.button.setAltText("Console");
 
+	//Animations
 	//Interface.animation = Interface.bottomTab.addTab(AnimationTab, false);
 	//Interface.animation.button.setAltText("Animation");
 	
@@ -515,8 +517,7 @@ Interface.initialize = function()
 	}, Editor.filePath + "icons/misc/save.png");
 
 	//Save project
-	/*
-	Interface.file.addOption("Save Compressed", function()
+	/*Interface.file.addOption("Save Compressed", function()
 	{
 		if(Nunu.runningOnDesktop())
 		{
@@ -560,8 +561,7 @@ Interface.initialize = function()
 			}, ".nsc", true);
 		}
 
-	}, Editor.filePath + "icons/misc/save.png");
-	*/
+	}, Editor.filePath + "icons/misc/save.png");*/
 
 	//Load Project
 	Interface.file.addOption("Load", function()
