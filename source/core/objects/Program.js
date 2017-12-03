@@ -596,25 +596,15 @@ Program.prototype.receiveDataApp = function(data)
 	{
 		if(child instanceof Script)
 		{
-			if(child.script !== null && child.script.onAppData !== undefined)
-			{
-				child.appData(data);
-				found = true;
-			}
+			child.appData(data);
+			found = true;
 		}
 	});
 
 	//Show warning message
 	if(!found)
 	{
-		if(typeof data === "object")
-		{
-			console.warn("nunuStudio: No script with onAppData found", JSON.stringify(data));
-		}
-		else
-		{
-			console.warn("nunuStudio: No script with onAppData found", data);
-		}
+		console.warn("nunuStudio: No script with onAppData found", data);
 	}
 };
 
@@ -634,19 +624,12 @@ Program.prototype.sendDataApp = function(data)
 		}
 		else
 		{
-			console.warn("nunuStudio: App data communication", data);
+			console.warn("nunuStudio: Send app data communication", data);
 		}
 	}
 	else
 	{
-		if(typeof data === "object")
-		{
-			console.warn("nunuStudio: No app available", JSON.stringify(data));
-		}
-		else
-		{
-			console.warn("nunuStudio: No app available", data);
-		}
+		console.warn("nunuStudio: Data sent to app", data);
 	}
 };
 
