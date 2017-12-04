@@ -92,13 +92,13 @@ Video.prototype.loadArrayBufferData = function(data, encoding)
  */
 Video.prototype.toJSON = function(meta)
 {
-	var data = Resource.prototype.toJSON.call(this, meta);
-	
 	if(meta.videos[this.uuid] !== undefined)
 	{
 		return meta.videos[this.uuid];
 	}
-
+	
+	var data = Resource.prototype.toJSON.call(this, meta);
+	
 	data.encoding = this.encoding;
 
 	if(this.format === "arraybuffer")

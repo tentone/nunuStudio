@@ -96,7 +96,7 @@ include("core/resources/Video.js");
 include("core/resources/Audio.js");
 include("core/resources/Image.js");
 include("core/resources/Model.js");
-include("core/resources/TextFile.js");
+include("core/resources/DataFile.js");
 include("core/resources/ResourceManager.js");
 
 include("core/texture/Texture.js");
@@ -300,7 +300,7 @@ include("editor/ui/asset/MaterialAsset.js");
 include("editor/ui/asset/TextureAsset.js");
 include("editor/ui/asset/FontAsset.js");
 include("editor/ui/asset/AudioAsset.js");
-include("editor/ui/asset/TextFileAsset.js");
+include("editor/ui/asset/FileAsset.js");
 
 include("editor/ui/tab/ConsoleTab.js");
 include("editor/ui/tab/AssetExplorer.js");
@@ -999,6 +999,15 @@ Editor.updateAssetExplorer = function()
 	{
 		var file = new AudioAsset(Interface.assetExplorer.assets);
 		file.setAudio(audio[i]);
+		Interface.assetExplorer.add(file);
+	}
+
+	//Resources
+	var resources = Editor.program.resources;
+	for(var i in resources)
+	{
+		var file = new FileAsset(Interface.assetExplorer.assets);
+		file.setFile(resources[i]);
 		Interface.assetExplorer.add(file);
 	}
 

@@ -72,9 +72,31 @@ function ResourceManager()
 	this.materials = [];
 	this.textures = [];
 	this.geometries = [];
+	this.resources = [];
 }
 
 ResourceManager.prototype = Object.create(THREE.Object3D.prototype);
+
+/**
+ * Get resource by name.
+ * 
+ * @method getResourceByName
+ * @param {String} name Resource name
+ * @return {Resource} Resource if found else null
+ */
+ResourceManager.prototype.getResourceByName = function(name)
+{
+	for(var i in this.resources)
+	{
+		if(this.resources[i].name === name)
+		{
+			return this.resources[i];
+		}
+	}
+
+	console.warn("nunuStudio: Resource " + name + " not found");
+	return null;
+};
 
 /**
  * Get image by name.
@@ -347,6 +369,31 @@ ResourceManager.prototype.addFont = function(font)
  		this.fonts[font.uuid] = font;
  	}
 }
+
+/**
+ * Add resource to resources manager.
+ * 
+ * @method addResource
+ * @param {Resource} Resource to add.
+ */
+ResourceManager.prototype.addResource = function(resource)
+{
+	if(resource instanceof Resource)
+	{
+ 		this.resources[resource.uuid] = resource;
+ 	}
+}
+
+/**
+ * Remove resource from font list.
+ * 
+ * @method removeResource
+ * @param {Resource} resource
+ */
+ResourceManager.prototype.removeResource = function(resource)
+{
+	delete this.resources[resource.uuid];
+};
 
 /**
  * Remove font from font list.

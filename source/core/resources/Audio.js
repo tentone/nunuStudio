@@ -92,13 +92,13 @@ Audio.prototype.getAudioBuffer = function(context, callback)
  */
 Audio.prototype.toJSON = function(meta)
 {
-	var data = Resource.prototype.toJSON.call(this, meta);
-
 	if(meta.audio[this.uuid] !== undefined)
 	{
 		return meta.audio[this.uuid];
 	}
 
+	var data = Resource.prototype.toJSON.call(this, meta);
+	
 	data.encoding = this.encoding;
 	data.data = this.data;
 	data.format = this.format;

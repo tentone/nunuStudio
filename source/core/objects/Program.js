@@ -692,6 +692,17 @@ Program.prototype.toJSON = function(meta, exportResources)
 					meta.audio[aud.uuid] = aud.toJSON(meta);
 				}
 			}
+
+			//Resources
+			var resources = self.resources;
+			for(var i in resources)
+			{
+				var resource = resources[i];
+				if(meta.resources[resource.uuid] === undefined)
+				{
+					meta.resources[resource.uuid] = resource.toJSON(meta);
+				}
+			}
 		}
 	});
 

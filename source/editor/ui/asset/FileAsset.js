@@ -1,6 +1,6 @@
 "use strict";
 
-function TextFileAsset(parent)
+function FileAsset(parent)
 {
 	Asset.call(this, parent);
 
@@ -37,7 +37,7 @@ function TextFileAsset(parent)
 		{
 			if(self.file !== null && confirm("Delete file?"))
 			{
-				Editor.program.removeFile(self.file, Editor.defaultFile);
+				Editor.program.removeResource(self.file);
 				Editor.updateObjectViews();
 			}
 		});
@@ -46,29 +46,23 @@ function TextFileAsset(parent)
 	};
 }
 
-TextFileAsset.prototype = Object.create(Asset.prototype);
+FileAsset.prototype = Object.create(Asset.prototype);
 
 //Set object to file
-TextFileAsset.prototype.setFile = function(file)
+FileAsset.prototype.setFile = function(file)
 {
-	if(file instanceof File)
-	{
-		this.file = file;
-		this.updateMetadata();
-	}
+	this.file = file;
+	this.updateMetadata();
 };
 
 //Update material preview
-TextFileAsset.prototype.updateMetadata = function()
+FileAsset.prototype.updateMetadata = function()
 {
-	if(this.file !== null)
-	{
-		this.setText(this.file.name);
-	}
+	this.setText(this.file.name);
 };
 
 //Update interface
-TextFileAsset.prototype.updateInterface = function()
+FileAsset.prototype.updateInterface = function()
 {
 	Asset.prototype.updateInterface.call(this);
 
