@@ -412,6 +412,7 @@ THREE.Object3D.prototype.toJSON = function(meta, resourceAccess, recursive)
 		output.audio = extractFromCache(meta.audio);
 		output.fonts = extractFromCache(meta.fonts);
 		output.skeletons = extractFromCache(meta.skeletons);
+		output.resources = extractFromCache(meta.resources);
 	}
 
 	output.object = object;

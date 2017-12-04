@@ -227,12 +227,12 @@ Image.prototype.encodeData = function()
  */
 Image.prototype.toJSON = function(meta)
 {
-	var data = Resource.prototype.toJSON.call(this, meta);
-
 	if(meta.images[this.uuid] !== undefined)
 	{
 		return meta.images[this.uuid];
 	}
+
+	var data = Resource.prototype.toJSON.call(this, meta);
 
 	if(this.format === "url")
 	{

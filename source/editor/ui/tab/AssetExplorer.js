@@ -170,6 +170,30 @@ function AssetExplorer(parent, closeable, container, index)
 		}, ".json, .ttf, .otf");
 	}, Editor.filePath + "icons/misc/font.png");
 
+	//Load audio file
+	menu.addOption("Javascript", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			for(var i = 0; i < files.length; i++)
+			{
+				var name = FileSystem.getFileName(files[i].name);
+				var reader = new FileReader();
+
+				reader.onload = function()
+				{
+					var resource = new DataFile(reader.result, "js");
+					resource.name = name;
+
+					Editor.program.addResource(resource);
+					Editor.updateObjectViews();
+				};
+
+				reader.readAsText(files[i]);
+			}
+		}, ".js");
+	}, Editor.filePath + "icons/misc/js.png");
+
 	//Spine Animation
 	if(Nunu.runningOnDesktop())
 	{

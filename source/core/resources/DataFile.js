@@ -5,21 +5,21 @@
  *
  * Text file data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.
  *
- * @class TextFile
+ * @class DataFile
  * @constructor
  * @extends {Resource}
  * @module Resources
  */
-function TextFile()
+function DataFile(data, encoding)
 {
-	Resource.call(this, "text", "TextFile");
+	Resource.call(this, "text", "DataFile");
 
 	this.format = "string";
-	this.encoding = "txt";
-	this.data = "";
+	this.encoding = (encoding !== undefined) ? encoding : "txt";
+	this.data = (data !== undefined) ? data : "";
 }
 
-TextFile.prototype = Object.create(Resource.prototype);
+DataFile.prototype = Object.create(Resource.prototype);
 
 /**
  * Serialize File resource data to json.
@@ -28,13 +28,20 @@ TextFile.prototype = Object.create(Resource.prototype);
  * @param {meta} meta
  * @return {Object} data
  */
-TextFile.prototype.toJSON = function(meta)
+DataFile.prototype.toJSON = function(meta)
 {
-	var data = Resource.prototype.toJSON.call(this, meta);
+	if(meta.resources[this.uuid] !== undefined)
+	{
+		return meta.resources[this.uuid];
+	}
 
+	var data = Resource.prototype.toJSON.call(this, meta);
+	
 	data.encoding = this.encoding;
 	data.data = this.data;
 	data.format = this.format;
+
+	meta.resources[this.uuid] = data;
 
 	return data;
 };

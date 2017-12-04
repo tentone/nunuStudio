@@ -134,13 +134,13 @@ Font.prototype.loadTTF = function()
  */
 Font.prototype.toJSON = function(meta)
 {
-	var data = Resource.prototype.toJSON.call(this, meta);
-
 	if(meta.fonts[this.uuid] !== undefined)
 	{
 		return meta.fonts[this.uuid];
 	}
 
+	var data = Resource.prototype.toJSON.call(this, meta);
+	
 	data.encoding = this.encoding;
 	data.reversed = this.reversed;
 	
