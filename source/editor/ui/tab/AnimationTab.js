@@ -4,8 +4,7 @@ function AnimationTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Animation", Editor.filePath + "icons/misc/animation.png");
 
-	//this.timeliner = new Timeliner();
-	//console.log(this.timeliner);
+	//TODO <ADD CODE HERE>
 }
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
