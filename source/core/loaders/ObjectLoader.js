@@ -56,6 +56,7 @@ ObjectLoader.prototype.load = function(url, onLoad, onProgress, onError)
  */
 ObjectLoader.prototype.parse = function(json, onLoad)
 {
+	var resources = this.parseResources(json.resources);
 	var geometries = this.parseGeometries(json.geometries);
 	var images = this.parseImages(json.images);
 	var videos = this.parseVideos(json.videos);
@@ -63,7 +64,7 @@ ObjectLoader.prototype.parse = function(json, onLoad)
 	var fonts = this.parseFonts(json.fonts);
 	var textures = this.parseTextures(json.textures, images, videos);
 	var materials = this.parseMaterials(json.materials, textures);
-	var object = this.parseObject(json.object, geometries, materials, textures, audio, fonts);
+	var object = this.parseObject(json.object, geometries, materials, textures, audio, fonts, resources);
 
 	if(json.skeletons)
 	{
@@ -110,22 +111,49 @@ ObjectLoader.prototype.setCrossOrigin = function(origin)
 };
 
 /**
+ * Parse resources on JSON.
+ *
+ * @method parseResources
+ * @param {Object} json
+ * @return {Array} resources
+ */
+ObjectLoader.prototype.parseResources = function(json)
+{
+	var resources = [];
+
+	if(json !== undefined)
+	{
+		for(var i in json)
+		{
+			var resource = new DataFile(json[i].data, json[i].encoding);
+			resource.uuid = json[i].uuid;
+			resource.format = json[i].format;
+
+			resources[resource.uuid] = resource;
+		}
+	}
+
+	return resources;
+};
+
+
+/**
  * Parse geometries on JSON.
  *
  * @method parseGeometries
  * @param {Object} json
  * @return {Array} geometries
  */
-ObjectLoader.prototype.parseGeometries = function(json)
+ObjectLoader.prototype.parseGeometries = function(array)
 {
 	var loader = new GeometryLoader();
 	var geometries = [];
 
-	if(json !== undefined)
+	if(array !== undefined)
 	{
-		for(var i = 0; i < json.length; i++)
+		for(var i = 0; i < array.length; i++)
 		{
-			geometries[json[i].uuid] = loader.parse(json[i]);
+			geometries[array[i].uuid] = loader.parse(array[i]);
 		}
 	}
 
@@ -163,13 +191,13 @@ ObjectLoader.prototype.parseMaterials = function(json, textures)
  * @param {Object} json
  * @return {Array} animations
  */
-ObjectLoader.prototype.parseAnimations = function(json)
+ObjectLoader.prototype.parseAnimations = function(array)
 {
 	var animations = [];
 
-	for(var i = 0; i < json.length; i++)
+	for(var i = 0; i < array.length; i++)
 	{
-		animations.push(THREE.AnimationClip.parse(json[i]));
+		animations.push(THREE.AnimationClip.parse(array[i]));
 	}
 
 	return animations;
@@ -386,7 +414,7 @@ ObjectLoader.prototype.bindSkeletons = function(object, skeletons)
  * @param {Array} fonts
  * @return {Array} objects
  */
-ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts)
+ObjectLoader.prototype.parseObject = function(data, geometries, materials, textures, audio, fonts, resources)
 {
 	var matrix = new THREE.Matrix4();
 	var object;
@@ -1084,6 +1112,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 	{
 		object.materials = materials;
 		object.textures = textures;
+		object.resources = resources;
 		object.fonts = fonts;
 		object.audio = audio;
 	}
