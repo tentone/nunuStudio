@@ -578,6 +578,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "..\\..\\source\\core\\resources\\DataFile.js": {
+            "name": "..\\..\\source\\core\\resources\\DataFile.js",
+            "modules": {},
+            "classes": {
+                "DataFile": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "..\\..\\source\\core\\resources\\Font.js": {
             "name": "..\\..\\source\\core\\resources\\Font.js",
             "modules": {},
@@ -619,15 +628,6 @@
             "modules": {},
             "classes": {
                 "ResourceManager": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\..\\source\\core\\resources\\TextFile.js": {
-            "name": "..\\..\\source\\core\\resources\\TextFile.js",
-            "modules": {},
-            "classes": {
-                "TextFile": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1247,12 +1247,12 @@
             "elements": {},
             "classes": {
                 "Audio": 1,
+                "DataFile": 1,
                 "Font": 1,
                 "Image": 1,
                 "Model": 1,
                 "Resource": 1,
                 "ResourceManager": 1,
-                "TextFile": 1,
                 "Video": 1
             },
             "fors": {},
@@ -2775,6 +2775,22 @@
                 }
             ]
         },
+        "DataFile": {
+            "name": "DataFile",
+            "shortname": "DataFile",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\resources\\DataFile.js",
+            "line": 3,
+            "description": "Text file resource can be used to store data or code.\n\nText file data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.",
+            "is_constructor": 1,
+            "extends": "{Resource}"
+        },
         "Font": {
             "name": "Font",
             "shortname": "Font",
@@ -2871,22 +2887,6 @@
             "line": 3,
             "description": "Resource manager is used to manage available resources used by objects\n\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\n\nThe manager is used to manage the following types of resources:\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries",
             "is_constructor": 1
-        },
-        "TextFile": {
-            "name": "TextFile",
-            "shortname": "TextFile",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Resources",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\resources\\TextFile.js",
-            "line": 3,
-            "description": "Text file resource can be used to store data or code.\n\nText file data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.",
-            "is_constructor": 1,
-            "extends": "{Resource}"
         },
         "Video": {
             "name": "Video",
@@ -5627,7 +5627,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 90,
+            "line": 91,
             "description": "Define base path for external texture loading.",
             "itemtype": "method",
             "name": "setTexturePath",
@@ -5643,7 +5643,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 101,
+            "line": 102,
             "description": "Set cross origin.",
             "itemtype": "method",
             "name": "setCrossOrigin",
@@ -5659,7 +5659,27 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 112,
+            "line": 113,
+            "description": "Parse resources on JSON.",
+            "itemtype": "method",
+            "name": "parseResources",
+            "params": [
+                {
+                    "name": "json",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "resources",
+                "type": "Array"
+            },
+            "class": "ObjectLoader",
+            "module": "Loaders"
+        },
+        {
+            "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
+            "line": 140,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseGeometries",
@@ -5679,7 +5699,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 135,
+            "line": 163,
             "description": "Parse materials on json.",
             "itemtype": "method",
             "name": "parseMaterials",
@@ -5699,7 +5719,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 159,
+            "line": 187,
             "description": "Parse animations on json.",
             "itemtype": "method",
             "name": "parseAnimations",
@@ -5719,7 +5739,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 178,
+            "line": 206,
             "description": "Parse images on json.",
             "itemtype": "method",
             "name": "parseImages",
@@ -5739,7 +5759,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 201,
+            "line": 229,
             "description": "Parse videos on json.",
             "itemtype": "method",
             "name": "parseVideos",
@@ -5759,7 +5779,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 224,
+            "line": 252,
             "description": "Parse audio on json.",
             "itemtype": "method",
             "name": "parseAudio",
@@ -5779,7 +5799,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 247,
+            "line": 275,
             "description": "Parse fonts on json.",
             "itemtype": "method",
             "name": "parseFonts",
@@ -5799,7 +5819,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 270,
+            "line": 298,
             "description": "Parse textures on json.",
             "itemtype": "method",
             "name": "parseTextures",
@@ -5829,7 +5849,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 297,
+            "line": 325,
             "description": "Parse skeletons from json.",
             "itemtype": "method",
             "name": "parseSkeletons",
@@ -5850,7 +5870,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 344,
+            "line": 372,
             "description": "Auxiliar method to bind skeletons to loaded objects.",
             "itemtype": "method",
             "name": "bindSkeletons",
@@ -5871,7 +5891,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 377,
+            "line": 405,
             "description": "Parse objects from json.",
             "itemtype": "method",
             "name": "parseObjects",
@@ -10448,6 +10468,26 @@
             "module": "Resources"
         },
         {
+            "file": "..\\..\\source\\core\\resources\\DataFile.js",
+            "line": 24,
+            "description": "Serialize File resource data to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Meta"
+                }
+            ],
+            "return": {
+                "description": "data",
+                "type": "Object"
+            },
+            "class": "DataFile",
+            "module": "Resources"
+        },
+        {
             "file": "..\\..\\source\\core\\resources\\Font.js",
             "line": 15,
             "description": "Font data, can be an ArrayBuffer or JSON.",
@@ -10857,7 +10897,27 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 79,
+            "line": 80,
+            "description": "Get resource by name.",
+            "itemtype": "method",
+            "name": "getResourceByName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Resource name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Resource if found else null",
+                "type": "Resource"
+            },
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
+            "line": 101,
             "description": "Get image by name.",
             "itemtype": "method",
             "name": "getImageByName",
@@ -10877,7 +10937,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 100,
+            "line": 122,
             "description": "Get video by name.",
             "itemtype": "method",
             "name": "getVideoByName",
@@ -10897,7 +10957,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 121,
+            "line": 143,
             "description": "Get material by its name.",
             "itemtype": "method",
             "name": "getMaterialByName",
@@ -10917,7 +10977,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 142,
+            "line": 164,
             "description": "Add material to materials list.",
             "itemtype": "method",
             "name": "addMaterial",
@@ -10933,7 +10993,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 156,
+            "line": 178,
             "description": "Remove material from materials list, also receives default material used to replace.",
             "itemtype": "method",
             "name": "removeMaterial",
@@ -10959,7 +11019,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 197,
+            "line": 219,
             "description": "Get texture by name.",
             "itemtype": "method",
             "name": "getTextureByName",
@@ -10979,7 +11039,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 218,
+            "line": 240,
             "description": "Add texture to texture list.",
             "itemtype": "method",
             "name": "addTexture",
@@ -10995,7 +11055,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 229,
+            "line": 251,
             "description": "Remove texture from textures list (also receives default used to replace).",
             "itemtype": "method",
             "name": "removeTexture",
@@ -11020,7 +11080,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 316,
+            "line": 338,
             "description": "Get font by name.",
             "itemtype": "method",
             "name": "getFontByName",
@@ -11040,7 +11100,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 337,
+            "line": 359,
             "description": "Add font to fonts list.",
             "itemtype": "method",
             "name": "addFont",
@@ -11056,7 +11116,39 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 351,
+            "line": 373,
+            "description": "Add resource to resources manager.",
+            "itemtype": "method",
+            "name": "addResource",
+            "params": [
+                {
+                    "name": "Resource",
+                    "description": "to add.",
+                    "type": "Resource"
+                }
+            ],
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
+            "line": 387,
+            "description": "Remove resource from font list.",
+            "itemtype": "method",
+            "name": "removeResource",
+            "params": [
+                {
+                    "name": "resource",
+                    "description": "",
+                    "type": "Resource"
+                }
+            ],
+            "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
+            "line": 398,
             "description": "Remove font from font list.",
             "itemtype": "method",
             "name": "removeFont",
@@ -11077,7 +11169,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 379,
+            "line": 426,
             "description": "Get audio by name.",
             "itemtype": "method",
             "name": "getAudioByName",
@@ -11097,7 +11189,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 400,
+            "line": 447,
             "description": "Add audio to audio list.",
             "params": [
                 {
@@ -11113,7 +11205,7 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\ResourceManager.js",
-            "line": 414,
+            "line": 461,
             "description": "Remove audio.",
             "params": [
                 {
@@ -11130,26 +11222,6 @@
             "itemtype": "method",
             "name": "removeAudio",
             "class": "ResourceManager",
-            "module": "Resources"
-        },
-        {
-            "file": "..\\..\\source\\core\\resources\\TextFile.js",
-            "line": 24,
-            "description": "Serialize File resource data to json.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Meta"
-                }
-            ],
-            "return": {
-                "description": "data",
-                "type": "Object"
-            },
-            "class": "TextFile",
             "module": "Resources"
         },
         {
@@ -12457,7 +12529,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 447,
+            "line": 448,
             "description": "Remove children from this object",
             "params": [
                 {
@@ -12473,7 +12545,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 453,
+            "line": 454,
             "description": "Rotates the object to face a point in world space.",
             "params": [
                 {
@@ -12489,7 +12561,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 459,
+            "line": 460,
             "description": "Converts the vector from local space to world space.",
             "params": [
                 {
@@ -12505,7 +12577,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 465,
+            "line": 466,
             "description": "Updates the vector from world space to local space.",
             "params": [
                 {
@@ -12521,7 +12593,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 471,
+            "line": 472,
             "description": "Adds object as child of this object. An arbitrary number of objects may be added.",
             "itemtype": "method",
             "name": "add",
@@ -12537,7 +12609,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 477,
+            "line": 478,
             "description": "This updates the position, rotation and scale with the matrix.",
             "itemtype": "method",
             "name": "applyMatrix",
@@ -12553,7 +12625,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 483,
+            "line": 484,
             "description": "Returns a clone of this object and optionaly all descendants.",
             "itemtype": "method",
             "name": "clone",
@@ -12569,7 +12641,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 489,
+            "line": 490,
             "description": "Copy the given object into this object.",
             "itemtype": "method",
             "name": "copy",
@@ -12590,7 +12662,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 496,
+            "line": 497,
             "description": "Searches through the object's children and returns the first with a matching name.",
             "params": [
                 {
@@ -12606,7 +12678,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 502,
+            "line": 503,
             "description": "Searches through the object's children and returns the first with a property that matches the aclue given.",
             "params": [
                 {
@@ -12627,7 +12699,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 509,
+            "line": 510,
             "params": [
                 {
                     "name": "optionalTarget",
@@ -12646,7 +12718,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 515,
+            "line": 516,
             "description": "Returns a quaternion representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldQuaternion",
@@ -12662,7 +12734,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 521,
+            "line": 522,
             "description": "Returns the euler angles representing the rotation of the object in world space.",
             "itemtype": "method",
             "name": "getWorldRotation",
@@ -12678,7 +12750,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 527,
+            "line": 528,
             "description": "Returns a vector of the scaling factors applied to the object for each axis in world space.",
             "itemtype": "method",
             "name": "getWorldScale",
@@ -12694,7 +12766,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 533,
+            "line": 534,
             "description": "Returns a vector representing the direction of object's positive z-axis in world space.",
             "itemtype": "method",
             "name": "getWorldDirection",
@@ -12710,7 +12782,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 539,
+            "line": 540,
             "description": "Rotate an object along an axis in object space. The axis is assumed to be normalized..",
             "itemtype": "method",
             "name": "rotateOnAxis",
@@ -12731,7 +12803,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 546,
+            "line": 547,
             "description": "Rotates the object around x axis in local space.",
             "itemtype": "method",
             "name": "rotateX",
@@ -12747,7 +12819,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 552,
+            "line": 553,
             "description": "Rotates the object around y axis in local space.",
             "itemtype": "method",
             "name": "rotateY",
@@ -12763,7 +12835,7 @@
         },
         {
             "file": "..\\..\\source\\core\\three\\core\\Object3D.js",
-            "line": 558,
+            "line": 559,
             "description": "Rotates the object around z axis in local space.",
             "itemtype": "method",
             "name": "rotateZ",
