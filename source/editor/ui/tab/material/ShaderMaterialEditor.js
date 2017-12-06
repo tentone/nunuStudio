@@ -210,7 +210,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.depthWrite  = self.depthWrite .getValue();
+			Editor.history.add(new ChangeAction(self.material, "depthWrite", self.depthWrite.getValue()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -279,7 +279,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			Editor.history.add(new ChangeAction(self.material, "fragmentShader", self.fragmentShader.getValue()));
+			Editor.history.add(new ChangeAction(self.material, "fragmentShader", self.fragmentShader.getText()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -296,7 +296,7 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			Editor.history.add(new ChangeAction(self.material, "vertexShader", self.vertexShader.getValue()));
+			Editor.history.add(new ChangeAction(self.material, "vertexShader", self.vertexShader.getText()));
 			self.material.needsUpdate = true;
 		}
 	});
@@ -339,8 +339,8 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 	this.transparent.setValue(material.transparent);
 	this.blending.setValue(material.blending);	
 	this.wireframe.setValue(material.wireframe);
-	this.fragmentShader.setValue(material.fragmentShader);
-	this.vertexShader.setValue(material.vertexShader);
+	this.fragmentShader.setText(material.fragmentShader);
+	this.vertexShader.setText(material.vertexShader);
 };
 
 ShaderMaterialEditor.prototype.updateInterface = function()
@@ -384,10 +384,12 @@ ShaderMaterialEditor.prototype.updateInterface = function()
 
 		//Fragment editor
 		this.fragmentShader.size.copy(this.tab.size);
+		this.fragmentShader.updateSettings();
 		this.fragmentShader.updateInterface();
 
 		//Vertex editor
 		this.vertexShader.size.copy(this.tab.size);
+		this.vertexShader.updateSettings();
 		this.vertexShader.updateInterface();
 
 		//Element

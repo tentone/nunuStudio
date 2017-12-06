@@ -1,53 +1,26 @@
 "use strict";
 
-function CodeEditor(parent)
+function CodeEditor(parent, closeable, container, index)
 {
-	Element.call(this, parent);
-
-	this.element.style.overflow = "hidden";
-	this.element.style.backgroundColor = Editor.theme.panelColor;
+	TabElement.call(this, parent, closeable, container, index, "Code", Editor.filePath + "icons/misc/code.png");
 
 	//Codemirror editor
 	this.code = new CodeMirror(this.element,
 	{
 		value: "",
-		lineNumbers: Settings.code.lineNumbers,
-		lineWrapping: Settings.code.lineWrapping,
-		keyMap: Settings.code.keymap,
-		autoCloseBrackets: Settings.code.autoCloseBrackets,
-		styleActiveLine: Settings.code.highlightActiveLine,
-		showMatchesOnScrollbar: Settings.code.showMatchesOnScrollbar,
 		matchBrackets: true,
-		dragDrop: true,
-		indentWithTabs: true,
-		indentUnit: 4,
-		tabSize: 4,
 		hintOptions:
 		{
-			hint: CodeMirror.hint.anyword
-		}
+			hint: CodeMirror.hint.anyword,
+			completeSingle: false
+		},
+		gutters: ["CodeMirror-lint-markers"]
 	});
-	this.code.setOption("theme", Settings.code.theme);
-	this.code.setOption("mode", "javascript");
 
-	//Self pointer
 	var self = this;
 
-	//Key pressed event
-	this.code.on("keydown", function(code, event)
-	{
-		var key = event.keyCode;
-		if(!Editor.keyboard.keyPressed(Keyboard.CTRL) && key >= Keyboard.A && key <= Keyboard.Z)
-		{
-			if(!code.state.completionActive)
-			{
-				CodeMirror.commands.autocomplete(code, null, {completeSingle: false});
-			}
-		}
-	});
-
 	//Context menu event
-	this.element.oncontextmenu = function()
+	this.element.oncontextmenu = function(event)
 	{
 		var context = new ContextMenu();
 		context.size.set(130, 20);
@@ -58,6 +31,7 @@ function CodeEditor(parent)
 		{
 			self.server.rename(self.code);
 		});
+
 		refactor.addOption("Select", function()
 		{
 			self.server.selectName(self.code);
@@ -109,7 +83,58 @@ function CodeEditor(parent)
 	};
 }
 
-CodeEditor.prototype = Object.create(Element.prototype);
+CodeEditor.prototype = Object.create(TabElement.prototype);
+
+//Update script editor settings
+CodeEditor.prototype.updateSettings = function()
+{
+	this.setFontSize(Settings.code.fontSize);
+
+	this.code.setOption("lint", {options: Settings.jslint});
+	this.code.setOption("theme", Settings.code.theme);
+	this.code.setOption("lineNumbers", Settings.code.lineNumbers);
+	this.code.setOption("lineWrapping", Settings.code.lineWrapping);
+	this.code.setOption("keyMap", Settings.code.keymap);
+	this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
+	this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
+	this.code.setOption("showMatchesOnScrollbar", Settings.code.showMatchesOnScrollbar);
+	this.code.setOption("dragDrop", Settings.code.dragFiles);
+	this.code.setOption("indentWithTabs", Settings.code.indentWithTabs);
+	this.code.setOption("tabSize", Settings.code.tabSize);
+	this.code.setOption("indentUnit", Settings.code.indentUnit);
+};
+
+//Set code editor font size
+CodeEditor.prototype.setFontSize = function(size)
+{
+	if(size < 5)
+	{
+		size = 5;
+	}
+
+	Settings.code.fontSize = size;
+	this.code.display.wrapper.style.fontSize = size + "px";
+};
+
+//Activate code editor
+CodeEditor.prototype.activate = function()
+{
+	TabElement.prototype.activate.call(this);
+
+	this.updateSettings();
+};
+
+//Return editor text
+CodeEditor.prototype.getText = function()
+{
+	return this.code.getValue();
+};
+
+//Set editor text
+CodeEditor.prototype.setText = function(text)
+{
+	this.code.setValue(text);
+};
 
 //Set language mode (javascript, glsl, etc)
 CodeEditor.prototype.setMode = function(mode)
@@ -123,19 +148,16 @@ CodeEditor.prototype.setOnChange = function(callback)
 	this.code.on("change", callback);
 };
 
-//Set text
-CodeEditor.prototype.setValue = function(text)
+//Update loop
+CodeEditor.prototype.update = function()
 {
-	this.code.setValue(text);
+	if(Editor.keyboard.keyPressed(Keyboard.CTRL) && Editor.mouse.wheel !== 0)
+	{
+		this.setFontSize(Settings.code.fontSize - Editor.mouse.wheel/100);
+	}
 };
 
-//Get text
-CodeEditor.prototype.getValue = function()
-{
-	return this.code.getValue();
-};
-
-//Update Interface
+//Update division Size
 CodeEditor.prototype.updateInterface = function()
 {
 	if(this.visible)
@@ -145,17 +167,8 @@ CodeEditor.prototype.updateInterface = function()
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
-	
-		this.code.setOption("theme", Settings.code.theme);
-		this.code.setOption("lineNumbers", Settings.code.lineNumbers);
-		this.code.setOption("lineWrapping", Settings.code.lineWrapping);
-		this.code.setOption("keyMap", Settings.code.keymap);
-		this.code.setOption("autoCloseBrackets", Settings.code.autoCloseBrackets);
-		this.code.setOption("styleActiveLine", Settings.code.highlightActiveLine);
-		this.code.setOption("showMatchesOnScrollbar", Settings.code.showMatchesOnScrollbar); 
-		this.code.display.wrapper.style.fontSize = Settings.code.fontSize + "px";
-		this.code.setSize(this.size.x, this.size.y);
-		this.code.refresh();
+
+		this.code.setSize(this.size.x, this.size.y);		
 	}
 	else
 	{
