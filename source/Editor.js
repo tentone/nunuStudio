@@ -265,7 +265,6 @@ include("editor/ui/element/DualDivisionResizable.js");
 include("editor/ui/element/ButtonImageToggle.js");
 include("editor/ui/element/Form.js");
 include("editor/ui/element/AudioPlayer.js");
-include("editor/ui/element/CodeEditor.js");
 
 include("editor/ui/element/input/Graph.js");
 include("editor/ui/element/input/CheckBox.js");
@@ -303,6 +302,7 @@ include("editor/ui/asset/FileAsset.js");
 
 include("editor/ui/tab/ConsoleTab.js");
 include("editor/ui/tab/AssetExplorer.js");
+include("editor/ui/tab/CodeEditor.js");
 include("editor/ui/tab/ScriptEditor.js");
 include("editor/ui/tab/SceneEditor.js");
 include("editor/ui/tab/ParticleEditor.js");
