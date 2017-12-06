@@ -47,7 +47,7 @@ function ScriptEditor(parent, closeable, container, index)
 			return;
 		}
 
-		self.updateScript();
+		self.updateCode();
 	});
 
 	//Cursor activity event
@@ -178,33 +178,30 @@ ScriptEditor.prototype.setFontSize = function(size)
 //Update object data
 ScriptEditor.prototype.updateMetadata = function()
 {
-	if(this.script !== null)
-	{
-		//Set name
-		this.setName(this.script.name);
+	//Name
+	this.setName(this.script.name);
 
-		//Check if object has a parent
-		if(this.script.parent === null)
+	//Check if object has a parent
+	if(this.script.parent === null)
+	{
+		this.close();
+		return;
+	}
+
+	//Check if object exists in parent
+	var children = this.script.parent.children;
+	for(var i = 0; i < children.length; i++)
+	{
+		if(this.script.uuid === children[i].uuid)
 		{
-			this.close();
 			return;
 		}
+	}
 
-		//Check if object exists in parent
-		var children = this.script.parent.children;
-		for(var i = 0; i < children.length; i++)
-		{
-			if(this.script.uuid === children[i].uuid)
-			{
-				return;
-			}
-		}
-
-		//If not found close tab
-		if(i >= children.length)
-		{
-			this.close();
-		}
+	//If not found close tab
+	if(i >= children.length)
+	{
+		this.close();
 	}
 };
 
@@ -214,7 +211,7 @@ ScriptEditor.prototype.activate = function()
 	TabElement.prototype.activate.call(this);
 
 	this.updateSettings();
-	this.updateScript();
+	this.updateCode();
 };
 
 //Return editor text
@@ -244,7 +241,7 @@ ScriptEditor.prototype.attach = function(script)
 };
 
 //Update attached script
-ScriptEditor.prototype.updateScript = function()
+ScriptEditor.prototype.updateCode = function()
 {
 	if(this.script !== null)
 	{
@@ -261,12 +258,9 @@ ScriptEditor.prototype.setMode = function(mode)
 //Update ScriptEditor
 ScriptEditor.prototype.update = function()
 {
-	if(Editor.keyboard.keyPressed(Keyboard.CTRL))
+	if(Editor.keyboard.keyPressed(Keyboard.CTRL) && Editor.mouse.wheel !== 0)
 	{
-		if(Editor.mouse.wheel !== 0)
-		{
-			this.setFontSize(Settings.code.fontSize - Editor.mouse.wheel/100);
-		}
+		this.setFontSize(Settings.code.fontSize - Editor.mouse.wheel/100);
 	}
 };
 

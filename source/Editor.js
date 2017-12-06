@@ -243,7 +243,6 @@ include("lib/jscolor.min.js");
 include("lib/jszip.min.js");
 include("lib/quickhull.js");
 include("lib/ThreeCSG.js");
-//include("lib/timeliner.js");
 
 include("editor/style.css");
 
@@ -266,9 +265,9 @@ include("editor/ui/element/DualDivisionResizable.js");
 include("editor/ui/element/ButtonImageToggle.js");
 include("editor/ui/element/Form.js");
 include("editor/ui/element/AudioPlayer.js");
+include("editor/ui/element/CodeEditor.js");
 
 include("editor/ui/element/input/Graph.js");
-include("editor/ui/element/input/CodeEditor.js");
 include("editor/ui/element/input/CheckBox.js");
 include("editor/ui/element/input/TextBox.js");
 include("editor/ui/element/input/TextArea.js");

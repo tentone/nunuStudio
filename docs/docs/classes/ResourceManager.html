@@ -47,6 +47,7 @@
 								<li><a href="../classes/CopyPass.html">CopyPass</a></li>
 								<li><a href="../classes/CubeCamera.html">CubeCamera</a></li>
 								<li><a href="../classes/CubeTexture.html">CubeTexture</a></li>
+								<li><a href="../classes/DataFile.html">DataFile</a></li>
 								<li><a href="../classes/DirectionalLight.html">DirectionalLight</a></li>
 								<li><a href="../classes/DotScreenPass.html">DotScreenPass</a></li>
 								<li><a href="../classes/EffectComposer.html">EffectComposer</a></li>
@@ -112,7 +113,6 @@
 								<li><a href="../classes/SpriteSheetTexture.html">SpriteSheetTexture</a></li>
 								<li><a href="../classes/SSAOPass.html">SSAOPass</a></li>
 								<li><a href="../classes/Text3D.html">Text3D</a></li>
-								<li><a href="../classes/TextFile.html">TextFile</a></li>
 								<li><a href="../classes/Texture.html">Texture</a></li>
 								<li><a href="../classes/TextureLoader.html">TextureLoader</a></li>
 								<li><a href="../classes/Tree.html">Tree</a></li>
@@ -268,6 +268,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_addResource">addResource</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_addTexture">addTexture</a>
 						
 													</li>
@@ -288,6 +292,10 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_getResourceByName">getResourceByName</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_getTextureByName">getTextureByName</a>
 						
 													</li>
@@ -305,6 +313,10 @@
 													</li>
 													<li class="index-item method">
 														<a href="#method_removeMaterial">removeMaterial</a>
+						
+													</li>
+													<li class="index-item method">
+														<a href="#method_removeResource">removeResource</a>
 						
 													</li>
 													<li class="index-item method">
@@ -497,6 +509,57 @@
 											
 																<div class="param-description">
 																	<p>Material to be added</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_addResource" class="method item">
+												<h3 class="name"><code>addResource</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>Resource</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Add resource to resources manager.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">Resource</code>
+																	<span class="type"><a href="../classes/Resource.html" class="crosslink">Resource</a></span>
+											
+											
+																<div class="param-description">
+																	<p>to add.</p>
 											
 																</div>
 											
@@ -801,6 +864,69 @@
 														<div class="returns-description">
 																	<span class="type"><a href="../classes/Material.html" class="crosslink">Material</a></span>:
 																<p>Material if found else null</p>
+											
+														</div>
+													</div>
+											
+											</div>
+											<div id="method_getResourceByName" class="method item">
+												<h3 class="name"><code>getResourceByName</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>name</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+													<span class="returns-inline">
+														<span class="type"><a href="../classes/Resource.html" class="crosslink">Resource</a></span>
+													</span>
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get resource by name.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">name</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	<p>Resource name</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+													<div class="returns">
+														<h4>Returns:</h4>
+											
+														<div class="returns-description">
+																	<span class="type"><a href="../classes/Resource.html" class="crosslink">Resource</a></span>:
+																<p>Resource if found else null</p>
 											
 														</div>
 													</div>
@@ -1129,6 +1255,56 @@
 																<div class="param-description">
 																	<p>Defaul sprite material.</p>
 											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
+											<div id="method_removeResource" class="method item">
+												<h3 class="name"><code>removeResource</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>resource</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Remove resource from font list.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">resource</code>
+																	<span class="type"><a href="../classes/Resource.html" class="crosslink">Resource</a></span>
+											
+											
+																<div class="param-description">
+																	 
 																</div>
 											
 															</li>

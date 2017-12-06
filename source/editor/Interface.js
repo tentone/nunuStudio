@@ -33,8 +33,8 @@ Interface.initialize = function()
 	Interface.console.button.setAltText("Console");
 
 	//Animations
-	Interface.animation = Interface.bottomTab.addTab(AnimationTab, false);
-	Interface.animation.button.setAltText("Animation");
+	//Interface.animation = Interface.bottomTab.addTab(AnimationTab, false);
+	//Interface.animation.button.setAltText("Animation");
 	
 	//Explorer
 	Interface.explorer = new DivisionResizable();
