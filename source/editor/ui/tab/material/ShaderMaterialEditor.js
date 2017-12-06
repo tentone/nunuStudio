@@ -254,8 +254,8 @@ function ShaderMaterialEditor(parent, closeable, container, index)
 	this.form.nextRow();
 
 	//Wireframe
-	this.wireframe = new CheckBox(this.form.element);
 	this.form.addText("Wireframe");
+	this.wireframe = new CheckBox(this.form.element);
 	this.wireframe.size.set(15, 15);
 	this.wireframe.setOnChange(function()
 	{
