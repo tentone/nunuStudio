@@ -68,18 +68,6 @@ function ScriptEditor(parent, closeable, container, index)
 
 ScriptEditor.prototype = Object.create(CodeEditor.prototype);
 
-//Set code editor font size
-ScriptEditor.prototype.setFontSize = function(size)
-{
-	if(size < 5)
-	{
-		size = 5;
-	}
-
-	Settings.code.fontSize = size;
-	this.code.display.wrapper.style.fontSize = size + "px";
-};
-
 //Update object data
 ScriptEditor.prototype.updateMetadata = function()
 {
