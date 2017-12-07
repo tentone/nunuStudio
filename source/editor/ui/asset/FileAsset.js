@@ -12,7 +12,6 @@ function FileAsset(parent)
 
 	//Image
 	this.image = document.createElement("img");
-	this.image.src = Editor.filePath + "icons/misc/file.png";
 	this.image.style.position = "absolute";
 	this.image.style.top = "5px";
 	this.element.appendChild(this.image);
@@ -44,6 +43,20 @@ function FileAsset(parent)
 
 		context.updateInterface();
 	};
+
+
+	//Open text editor
+	this.element.ondblclick = function()
+	{
+		var tab = Interface.tab.getTab(TextEditor, self.file);
+
+		if(tab === null)
+		{
+			tab = Interface.tab.addTab(TextEditor, true);
+			tab.attach(self.file, self);
+			tab.select();
+		}
+	}
 }
 
 FileAsset.prototype = Object.create(Asset.prototype);
@@ -59,6 +72,15 @@ FileAsset.prototype.setFile = function(file)
 FileAsset.prototype.updateMetadata = function()
 {
 	this.setText(this.file.name);
+
+	if(this.file.encoding === "js" || this.file.encoding === "glsl")
+	{
+		this.image.src = Editor.filePath + "icons/script/script.png";
+	}
+	else
+	{
+		this.image.src = Editor.filePath + "icons/misc/file.png";
+	}
 };
 
 //Update interface
