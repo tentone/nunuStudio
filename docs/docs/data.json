@@ -578,15 +578,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\core\\resources\\DataFile.js": {
-            "name": "..\\..\\source\\core\\resources\\DataFile.js",
-            "modules": {},
-            "classes": {
-                "DataFile": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\core\\resources\\Font.js": {
             "name": "..\\..\\source\\core\\resources\\Font.js",
             "modules": {},
@@ -628,6 +619,15 @@
             "modules": {},
             "classes": {
                 "ResourceManager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "..\\..\\source\\core\\resources\\TextFile.js": {
+            "name": "..\\..\\source\\core\\resources\\TextFile.js",
+            "modules": {},
+            "classes": {
+                "TextFile": 1
             },
             "fors": {},
             "namespaces": {}
@@ -1148,7 +1148,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse"
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse\n\nThere is also access to the following functions\n - include\n   - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations"
         },
         "Animations": {
             "name": "Animations",
@@ -1247,12 +1247,12 @@
             "elements": {},
             "classes": {
                 "Audio": 1,
-                "DataFile": 1,
                 "Font": 1,
                 "Image": 1,
                 "Model": 1,
                 "Resource": 1,
                 "ResourceManager": 1,
+                "TextFile": 1,
                 "Video": 1
             },
             "fors": {},
@@ -2364,7 +2364,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse",
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse\n\nThere is also access to the following functions\n - include\n   - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations",
             "extends": "{Object}",
             "params": [
                 {
@@ -2775,22 +2775,6 @@
                 }
             ]
         },
-        "DataFile": {
-            "name": "DataFile",
-            "shortname": "DataFile",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Resources",
-            "namespace": "",
-            "file": "..\\..\\source\\core\\resources\\DataFile.js",
-            "line": 3,
-            "description": "Text file resource can be used to store data or code.\n\nText file data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.",
-            "is_constructor": 1,
-            "extends": "{Resource}"
-        },
         "Font": {
             "name": "Font",
             "shortname": "Font",
@@ -2887,6 +2871,22 @@
             "line": 3,
             "description": "Resource manager is used to manage available resources used by objects\n\nThe resource manager is used to extend the Program object and is not designed to be used as a standalone\n\nThe manager is used to manage the following types of resources:\n - Images\n - Videos\n - Audio\n - Fonts\n - Textures\n - Materials\n - Geometries",
             "is_constructor": 1
+        },
+        "TextFile": {
+            "name": "TextFile",
+            "shortname": "TextFile",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Resources",
+            "namespace": "",
+            "file": "..\\..\\source\\core\\resources\\TextFile.js",
+            "line": 3,
+            "description": "Text file resource can be used to store data or code.\n\nText file data can be used to store information to be consumend by the application or runtime code that can be imported by scripts.",
+            "is_constructor": 1,
+            "extends": "{Resource}"
         },
         "Video": {
             "name": "Video",
@@ -5679,7 +5679,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 140,
+            "line": 141,
             "description": "Parse geometries on JSON.",
             "itemtype": "method",
             "name": "parseGeometries",
@@ -5699,7 +5699,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 163,
+            "line": 164,
             "description": "Parse materials on json.",
             "itemtype": "method",
             "name": "parseMaterials",
@@ -5719,7 +5719,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 187,
+            "line": 188,
             "description": "Parse animations on json.",
             "itemtype": "method",
             "name": "parseAnimations",
@@ -5739,7 +5739,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 206,
+            "line": 207,
             "description": "Parse images on json.",
             "itemtype": "method",
             "name": "parseImages",
@@ -5759,7 +5759,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 229,
+            "line": 230,
             "description": "Parse videos on json.",
             "itemtype": "method",
             "name": "parseVideos",
@@ -5779,7 +5779,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 252,
+            "line": 253,
             "description": "Parse audio on json.",
             "itemtype": "method",
             "name": "parseAudio",
@@ -5799,7 +5799,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 275,
+            "line": 276,
             "description": "Parse fonts on json.",
             "itemtype": "method",
             "name": "parseFonts",
@@ -5819,7 +5819,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 298,
+            "line": 299,
             "description": "Parse textures on json.",
             "itemtype": "method",
             "name": "parseTextures",
@@ -5849,7 +5849,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 325,
+            "line": 326,
             "description": "Parse skeletons from json.",
             "itemtype": "method",
             "name": "parseSkeletons",
@@ -5870,7 +5870,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 372,
+            "line": 373,
             "description": "Auxiliar method to bind skeletons to loaded objects.",
             "itemtype": "method",
             "name": "bindSkeletons",
@@ -5891,7 +5891,7 @@
         },
         {
             "file": "..\\..\\source\\core\\loaders\\ObjectLoader.js",
-            "line": 405,
+            "line": 406,
             "description": "Parse objects from json.",
             "itemtype": "method",
             "name": "parseObjects",
@@ -8670,24 +8670,15 @@
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
             "line": 110,
-            "description": "Initialize particle system.",
+            "description": "Particle emitter state is automatically updated before rendering.",
             "itemtype": "method",
-            "name": "initialize",
+            "name": "onBeforeRender",
             "class": "ParticleEmitter",
             "module": "Particles"
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 125,
-            "description": "Update particle emitter state.",
-            "itemtype": "method",
-            "name": "update",
-            "class": "ParticleEmitter",
-            "module": "Particles"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 140,
+            "line": 120,
             "description": "Dispose particle emitter.\n\nShould be called when destroying particle emitter.",
             "itemtype": "method",
             "name": "dispose",
@@ -8696,7 +8687,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 157,
+            "line": 137,
             "description": "Particle emitter cannot be detected by raycaster.\n\nThe raycast method allways returns null.",
             "itemtype": "method",
             "name": "raycast",
@@ -8708,7 +8699,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\particle\\ParticleEmitter.js",
-            "line": 170,
+            "line": 150,
             "description": "Serialize object to JSON.",
             "itemtype": "method",
             "name": "toJSON",
@@ -8802,7 +8793,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 34,
+            "line": 38,
             "description": "Javascript code attached to the script",
             "itemtype": "property",
             "name": "code",
@@ -8812,7 +8803,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 39,
+            "line": 43,
             "description": "Compiled function used during runtime",
             "itemtype": "attribute",
             "name": "script",
@@ -8822,7 +8813,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 44,
+            "line": 48,
             "description": "Pointer to the parent program\nUsed access program resources easier",
             "itemtype": "property",
             "name": "program",
@@ -8832,7 +8823,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 50,
+            "line": 54,
             "description": "Pointer to the parent scene",
             "itemtype": "property",
             "name": "scene",
@@ -8842,7 +8833,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 71,
+            "line": 75,
             "description": "Default script code used when creating a new Script.",
             "itemtype": "attribute",
             "name": "DEFAULT",
@@ -8852,7 +8843,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 78,
+            "line": 82,
             "description": "List of methods that a script can implement.",
             "itemtype": "attribute",
             "name": "METHODS",
@@ -8862,7 +8853,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 85,
+            "line": 89,
             "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
             "itemtype": "method",
             "name": "initialize",
@@ -8871,7 +8862,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 124,
+            "line": 128,
             "description": "Update script state.\n\nCalls the script update method if it exists.",
             "itemtype": "method",
             "name": "update",
@@ -8880,7 +8871,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 153,
+            "line": 157,
             "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
             "itemtype": "method",
             "name": "dispose",
@@ -8889,7 +8880,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 173,
+            "line": 177,
             "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
             "itemtype": "method",
             "name": "resize",
@@ -8898,7 +8889,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 193,
+            "line": 197,
             "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
             "itemtype": "method",
             "name": "appData",
@@ -8914,7 +8905,23 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 209,
+            "line": 213,
+            "description": "Auxiliar function to include javascript source file from resource into the script.\n\nThe imported source is evaluated and loaded in the context of the script.\n\nGlobal declarations need to be cleaned using the dipose method.",
+            "itemtype": "method",
+            "name": "include",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Javascript resource name.",
+                    "type": "String"
+                }
+            ],
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 224,
             "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
             "name": "setCode",
@@ -8930,7 +8937,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 259,
+            "line": 288,
             "description": "Create JSON for script.",
             "itemtype": "method",
             "name": "toJSON",
@@ -10468,26 +10475,6 @@
             "module": "Resources"
         },
         {
-            "file": "..\\..\\source\\core\\resources\\DataFile.js",
-            "line": 24,
-            "description": "Serialize File resource data to json.",
-            "itemtype": "method",
-            "name": "toJSON",
-            "params": [
-                {
-                    "name": "meta",
-                    "description": "",
-                    "type": "Meta"
-                }
-            ],
-            "return": {
-                "description": "data",
-                "type": "Object"
-            },
-            "class": "DataFile",
-            "module": "Resources"
-        },
-        {
             "file": "..\\..\\source\\core\\resources\\Font.js",
             "line": 15,
             "description": "Font data, can be an ArrayBuffer or JSON.",
@@ -11222,6 +11209,26 @@
             "itemtype": "method",
             "name": "removeAudio",
             "class": "ResourceManager",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\TextFile.js",
+            "line": 24,
+            "description": "Serialize File resource data to json.",
+            "itemtype": "method",
+            "name": "toJSON",
+            "params": [
+                {
+                    "name": "meta",
+                    "description": "",
+                    "type": "Meta"
+                }
+            ],
+            "return": {
+                "description": "data",
+                "type": "Object"
+            },
+            "class": "TextFile",
             "module": "Resources"
         },
         {
@@ -14309,6 +14316,26 @@
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
             "line": 570,
+            "description": "Get file name with extension from file path string.\n\nIf input is a/b/c/abc.d output is abc.d.",
+            "itemtype": "method",
+            "name": "getFileNameWithExtension",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "File path",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "File name without path with extension",
+                "type": "String"
+            },
+            "class": "FileSystem",
+            "module": "Files"
+        },
+        {
+            "file": "..\\..\\source\\core\\FileSystem.js",
+            "line": 592,
             "description": "Get file name without extension.\n\nIf input is a/b/c/abc.d output is a/b/c/abc.",
             "itemtype": "method",
             "name": "getNameWithoutExtension",
@@ -14328,7 +14355,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 589,
+            "line": 611,
             "description": "Get file directoty.\n\nIf input is a/b/c/abc.d output is a/b/c/",
             "itemtype": "method",
             "name": "getFilePath",
@@ -14348,7 +14375,7 @@
         },
         {
             "file": "..\\..\\source\\core\\FileSystem.js",
-            "line": 611,
+            "line": 633,
             "description": "Get file extension from file path string (always in lowercase).\n\nIf input is a/b/c/abc.d output is d.",
             "itemtype": "method",
             "name": "getFileExtension",
