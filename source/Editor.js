@@ -96,7 +96,7 @@ include("core/resources/Video.js");
 include("core/resources/Audio.js");
 include("core/resources/Image.js");
 include("core/resources/Model.js");
-include("core/resources/DataFile.js");
+include("core/resources/TextFile.js");
 include("core/resources/ResourceManager.js");
 
 include("core/texture/Texture.js");
@@ -1482,7 +1482,7 @@ Editor.loadText = function(file)
 
 	reader.onload = function()
 	{
-		var resource = new DataFile(reader.result, FileSystem.getFileExtension(name));
+		var resource = new TextFile(reader.result, FileSystem.getFileExtension(name));
 		resource.name = name;
 
 		Editor.program.addResource(resource);
