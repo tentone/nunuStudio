@@ -54,8 +54,9 @@ function FileAsset(parent)
 		{
 			tab = Interface.tab.addTab(TextEditor, true);
 			tab.attach(self.file, self);
-			tab.select();
 		}
+		
+		tab.select();
 	}
 }
 

@@ -1474,6 +1474,24 @@ Editor.loadFont = function(file, onLoad)
 	}
 };
 
+//Load text file
+Editor.loadText = function(file)
+{
+	var reader = new FileReader();
+	var name = FileSystem.getFileNameWithExtension(file.name);
+
+	reader.onload = function()
+	{
+		var resource = new DataFile(reader.result, FileSystem.getFileExtension(name));
+		resource.name = name;
+
+		Editor.program.addResource(resource);
+		Editor.updateObjectViews();
+	};
+
+	reader.readAsText(file);
+};
+
 //Load geometry from file object
 Editor.loadModel = function(file, onLoad)
 {
