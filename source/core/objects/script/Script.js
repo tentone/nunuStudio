@@ -24,6 +24,10 @@
  *    - Same as this reference but global in the script scope
  *  - Keyboard
  *  - Mouse
+ *
+ * There is also access to the following functions
+ *  - include
+ *    - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations
  * 
  * @class Script
  * @extends {Object}
@@ -207,6 +211,17 @@ Script.prototype.appData = function(data)
 };
 
 /**
+ * Auxiliar function to include javascript source file from resource into the script.
+ *
+ * The imported source is evaluated and loaded in the context of the script.
+ *
+ * Global declarations need to be cleaned using the dipose method.
+ *
+ * @method include
+ * @param {String} name Javascript resource name.
+ */
+
+/**
  * Set script code.
  * 
  * Can be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.
@@ -231,14 +246,28 @@ Script.prototype.setCode = function(code)
 			code += "\nif(this." + method + " == undefined && typeof " + method + " !== 'undefined'){this." + method + " = " + method + ";}";
 		}
 
+		var self = this;
+		function include(name)
+		{
+			var text = self.program.getResourceByName(name);
+			if(text !== null)
+			{
+				new Function(text.data).call(self.script);
+			}
+			else
+			{
+				console.warn("nunuStudio: javascript file " + name + " not found in resources");
+			}
+		}
+		
 		//Compile code
-		var Constructor = new Function("Keyboard, Mouse, self, program, scene", code);
+		var Constructor = new Function("Keyboard, Mouse, self, program, scene, include", code);
 
 		try
 		{
 			if(this.program !== null)
 			{
-				this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene);
+				this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene, include);
 			}
 		}
 		catch(e)
