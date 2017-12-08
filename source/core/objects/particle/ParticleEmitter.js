@@ -108,33 +108,13 @@ ParticleEmitter.defaultGroup =
 };
 
 /**
- * Initialize particle system.
+ * Particle emitter state is automatically updated before rendering.
  * 
- * @method initialize
+ * @method onBeforeRender
  */
-ParticleEmitter.prototype.initialize = function()
-{
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].initialize();
-	}
-
-	this.clock.start();
-};
-
-/**
- * Update particle emitter state.
- * 
- * @method update
- */
-ParticleEmitter.prototype.update = function()
+ParticleEmitter.prototype.onBeforeRender = function()
 {
 	this.group.tick(this.clock.getDelta());
-
-	for(var i = 0; i < this.children.length; i++)
-	{
-		this.children[i].update();
-	}
 };
 
 /**

@@ -568,6 +568,28 @@ FileSystem.getFileName = function(file)
 };
 
 /**
+ * Get file name with extension from file path string.
+ * 
+ * If input is a/b/c/abc.d output is abc.d.
+ * 
+ * @method getFileNameWithExtension
+ * @param {String} file File path
+ * @return {String} File name without path with extension
+ */
+FileSystem.getFileNameWithExtension = function(file)
+{
+	if(file !== undefined)
+	{
+		var a = file.lastIndexOf("\\");
+		var b = file.lastIndexOf("/");
+
+		return file.substring((a > b) ? (a + 1) : (b + 1), file.length);
+	}
+	
+	return "";
+};
+
+/**
  * Get file name without extension.
  * 
  * If input is a/b/c/abc.d output is a/b/c/abc.

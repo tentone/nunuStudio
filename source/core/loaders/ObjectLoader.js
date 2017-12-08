@@ -126,8 +126,9 @@ ObjectLoader.prototype.parseResources = function(json)
 		for(var i in json)
 		{
 			var resource = new DataFile(json[i].data, json[i].encoding);
-			resource.uuid = json[i].uuid;
 			resource.format = json[i].format;
+			resource.name = json[i].name;
+			resource.uuid = json[i].uuid;
 
 			resources[resource.uuid] = resource;
 		}
