@@ -882,7 +882,7 @@ ObjectLoader.prototype.parseObject = function(data, geometries, materials, textu
 			break;
 
 		case "Script":
-			object = new Script(data.code);
+			object = new Script(data.code, data.mode);
 			break;
 
 		case "RectAreaLight":

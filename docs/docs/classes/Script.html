@@ -278,8 +278,17 @@
 						
 													</li>
 													<li class="index-item method">
+														<a href="#method_compileCode">compileCode</a>
+						
+													</li>
+													<li class="index-item method">
 														<a href="#method_dispose">dispose</a>
 						
+													</li>
+													<li class="index-item method">
+														<a href="#method_getIncludes">getIncludes</a>
+						
+															<span class="flag static">static</span>
 													</li>
 													<li class="index-item method">
 														<a href="#method_include">include</a>
@@ -290,11 +299,12 @@
 						
 													</li>
 													<li class="index-item method">
-														<a href="#method_resize">resize</a>
+														<a href="#method_removeIncludes">removeIncludes</a>
 						
+															<span class="flag static">static</span>
 													</li>
 													<li class="index-item method">
-														<a href="#method_setCode">setCode</a>
+														<a href="#method_resize">resize</a>
 						
 													</li>
 													<li class="index-item method">
@@ -332,7 +342,13 @@
 						
 											<ul class="index-list attrs extends">
 													<li class="index-item attr">
+														<a href="#attr_APPEND">APPEND</a>
+													</li>
+													<li class="index-item attr">
 														<a href="#attr_DEFAULT">DEFAULT</a>
+													</li>
+													<li class="index-item attr">
+														<a href="#attr_EVALUATE">EVALUATE</a>
 													</li>
 													<li class="index-item attr">
 														<a href="#attr_METHODS">METHODS</a>
@@ -399,6 +415,57 @@
 											
 											
 											</div>
+											<div id="method_compileCode" class="method item">
+												<h3 class="name"><code>compileCode</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>code</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Set script code.</p>
+											<p>Can be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">code</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	 
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
 											<div id="method_dispose" class="method item">
 												<h3 class="name"><code>dispose</code></h3>
 											
@@ -425,6 +492,59 @@
 											
 												</div>
 											
+											
+											
+											</div>
+											<div id="method_getIncludes" class="method item">
+												<h3 class="name"><code>getIncludes</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>code</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Get includes from the code.</p>
+											<p>Used to extract includes from code when loading libraries in APPEND mode.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">code</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	<p>Script code.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
 											
 											
 											</div>
@@ -511,6 +631,59 @@
 											
 											
 											</div>
+											<div id="method_removeIncludes" class="method item">
+												<h3 class="name"><code>removeIncludes</code></h3>
+											
+													<div class="args">
+														<span class="paren">(</span><ul class="args-list inline commas">
+															<li class="arg">
+																	<code>code</code>
+															</li>
+														</ul><span class="paren">)</span>
+													</div>
+											
+											
+											
+											
+											
+													<span class="flag static">static</span>
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Remove includes from code.</p>
+											<p>Used to remove include statements when initializing code in APPEND mode.</p>
+											
+												</div>
+											
+													<div class="params">
+														<h4>Parameters:</h4>
+											
+														<ul class="params-list">
+															<li class="param">
+																	<code class="param-name">code</code>
+																	<span class="type">String</span>
+											
+											
+																<div class="param-description">
+																	<p>Script code.</p>
+											
+																</div>
+											
+															</li>
+														</ul>
+													</div>
+											
+											
+											</div>
 											<div id="method_resize" class="method item">
 												<h3 class="name"><code>resize</code></h3>
 											
@@ -537,57 +710,6 @@
 											
 												</div>
 											
-											
-											
-											</div>
-											<div id="method_setCode" class="method item">
-												<h3 class="name"><code>setCode</code></h3>
-											
-													<div class="args">
-														<span class="paren">(</span><ul class="args-list inline commas">
-															<li class="arg">
-																	<code>code</code>
-															</li>
-														</ul><span class="paren">)</span>
-													</div>
-											
-											
-											
-											
-											
-											
-											
-											
-												<div class="meta">
-															<p>
-													</p>
-											
-											
-											
-												</div>
-											
-												<div class="description">
-													<p>Set script code.</p>
-											<p>Can be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.</p>
-											
-												</div>
-											
-													<div class="params">
-														<h4>Parameters:</h4>
-											
-														<ul class="params-list">
-															<li class="param">
-																	<code class="param-name">code</code>
-																	<span class="type">String</span>
-											
-											
-																<div class="param-description">
-																	 
-																</div>
-											
-															</li>
-														</ul>
-													</div>
 											
 											
 											</div>
@@ -762,6 +884,34 @@
 									<div id="attrs" class="api-class-tabpanel">
 										<h2 class="off-left">Attributes</h2>
 						
+											<div id="attr_APPEND" class="attr item">
+												<a name="config_APPEND"></a> 
+												<h3 class="name"><code>APPEND</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Append libraries on initialization.</p>
+											<p>Libraries are appended to the script code on initialization.</p>
+											
+												</div>
+											
+											
+											
+											</div>
 											<div id="attr_DEFAULT" class="attr item">
 												<a name="config_DEFAULT"></a> 
 												<h3 class="name"><code>DEFAULT</code></h3>
@@ -783,6 +933,34 @@
 											
 												<div class="description">
 													<p>Default script code used when creating a new Script.</p>
+											
+												</div>
+											
+											
+											
+											</div>
+											<div id="attr_EVALUATE" class="attr item">
+												<a name="config_EVALUATE"></a> 
+												<h3 class="name"><code>EVALUATE</code></h3>
+												<span class="type">Number</span>
+											
+											
+											
+											
+											
+											
+											
+											
+												<div class="meta">
+															<p>
+													</p>
+											
+											
+												</div>
+											
+												<div class="description">
+													<p>Evaluate libs during runtime.</p>
+											<p>This allows to load new libs during runtime, but its not possible to access private statements.</p>
 											
 												</div>
 											

@@ -30,10 +30,7 @@ function PointLightPanel(parent, obj)
 	this.distance.setRange(0, Number.MAX_SAFE_INTEGER);
 	this.distance.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "distance", self.distance.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "distance", self.distance.getValue()));
 	});
 	this.form.add(this.distance);
 	this.form.nextRow();
@@ -46,10 +43,7 @@ function PointLightPanel(parent, obj)
 	this.intensity.setRange(0, 10);
 	this.intensity.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "intensity", self.intensity.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "intensity", self.intensity.getValue()));
 	});
 	this.form.add(this.intensity);
 	this.form.nextRow();
@@ -66,10 +60,7 @@ function PointLightPanel(parent, obj)
 	this.castShadow.updateInterface();
 	this.castShadow.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
-		}
+		Editor.history.add(new ChangeAction(self.obj, "castShadow", self.castShadow.getValue()));
 	});
 	this.form.add(this.castShadow);
 	this.form.nextRow();

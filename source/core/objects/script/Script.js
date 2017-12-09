@@ -56,16 +56,17 @@
  * @property scene
  * @type {Scene}
  */
-function Script(code)
+function Script(code, mode)
 {
 	THREE.Object3D.call(this);
 	
 	this.type = "Script";
 	this.name = "script";
 
-	this.script = null;
-	this.code = (code !== undefined) ? code : Script.DEFAULT 
+	this.code = (code !== undefined) ? code : Script.DEFAULT;
+	this.mode = (mode !== undefined) ? mode : Script.EVALUATE;
 
+	this.script = null;
 	this.program = null;
 	this.scene = null;
 }
@@ -85,6 +86,77 @@ Script.DEFAULT = "function initialize()\n{\n	//TODO <INITIALIZATION CODE>\n}\n\n
  * @type {Array}
  */
 Script.METHODS = ["initialize", "update", "dispose", "onMouseOver", "onResize", "onAppData"];
+
+/**
+ * Append libraries on initialization.
+ *
+ * Libraries are appended to the script code on initialization.
+ *
+ * @attribute APPEND
+ * @type {Number}
+ */
+Script.APPEND = 100;
+
+/**
+ * Evaluate libs during runtime.
+ *
+ * This allows to load new libs during runtime, but its not possible to access private statements.
+ *
+ * @attribute EVALUATE
+ * @type {Number}
+ */
+Script.EVALUATE = 101;
+
+/**
+ * Auxiliar function to include javascript source file from resource into the script.
+ *
+ * The imported source is evaluated and loaded in the context of the script.
+ *
+ * Global declarations need to be cleaned using the dipose method.
+ *
+ * @method include
+ * @param {String} name Javascript resource name.
+ */
+
+/**
+ * Get includes from the code.
+ *
+ * Used to extract includes from code when loading libraries in APPEND mode.
+ *
+ * @static
+ * @method getIncludes
+ * @param {String} code Script code.
+ */
+Script.getIncludes = function(code)
+{
+	var results = [];
+
+	var index = code.search(/include\(".+?"\);/gi);
+	if(index !== -1)
+	{
+		var sub = code.substring(index);
+		var end = sub.indexOf("\");");
+		var include = sub.substring(9, end);
+
+		results.push(include);
+	}
+
+	return results;
+}
+
+/**
+ * Remove includes from code.
+ *
+ * Used to remove include statements when initializing code in APPEND mode.
+ *
+ * @static
+ * @method removeIncludes
+ * @param {String} code Script code.
+ */
+Script.removeIncludes = function(code)
+{
+	return code.replace(/include\(".+?"\);/gi, "");
+}
 
 /**
  * Initialize script
@@ -110,7 +182,7 @@ Script.prototype.initialize = function()
 	}
 
 	//Compile script
-	this.setCode(this.code);	
+	this.compileCode(this.code);	
 
 	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
@@ -211,63 +283,71 @@ Script.prototype.appData = function(data)
 };
 
 /**
- * Auxiliar function to include javascript source file from resource into the script.
- *
- * The imported source is evaluated and loaded in the context of the script.
- *
- * Global declarations need to be cleaned using the dipose method.
- *
- * @method include
- * @param {String} name Javascript resource name.
- */
-Script.INCLUDE = "function include(name)\
-{\
-	var text = program.getResourceByName(name);\
-	if(text !== null)\
-	{\
-		new Function(text.data).call(this);\
-	}\
-	else\
-	{\
-		console.warn(\"nunuStudio: javascript file \" + name + \" not found in resources\");\
-	}\
-}";
-
-/**
  * Set script code.
  * 
  * Can be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.
  * 
- * @method setCode
+ * @method compileCode
  * @param {String} code
  */
-Script.prototype.setCode = function(code)
+Script.prototype.compileCode = function(code)
 {
 	if(code !== undefined)
 	{
 		this.code = code;
 	}
 
-	//Compile code and create object
 	try
 	{
+		//Public method declaration
 		var code = this.code;
 		for(var i = 0; i < Script.METHODS.length; i++)
 		{
-			method = Script.METHODS[i];
+			var method = Script.METHODS[i];
 			code += "\nif(this." + method + " == undefined && typeof " + method + " !== 'undefined'){this." + method + " = " + method + ";}";
-			code += Script.INCLUDE;
 		}
 
-		//Compile code
-		var Constructor = new Function("Keyboard, Mouse, self, program, scene", code);
+		//Append libraries to code
+		if(this.mode === Script.APPEND)
+		{
+			var libs = Script.getIncludes(code);	
+			code = Script.removeIncludes(code);
 
+			for(var i = 0; i < libs.length; i++)
+			{
+				code = this.program.getResourceByName(libs[i]).data + "\n" + code;
+			}
+
+			function include(name)
+			{
+				console.warn("nunuStudio: Script running in append mode " + name);
+			}
+		}
+		//Declare include method
+		else if(this.mode === Script.EVALUATE)
+		{
+			var self = this;
+			function include(name)
+			{
+				var text = self.program.getResourceByName(name);
+				if(text !== null)
+				{
+					new Function(text.data).call(self.script);
+				}
+				else
+				{
+					console.warn("nunuStudio: Javascript file " + name + " not found in resources");
+				}
+			}
+		}
+
+		//Evaluate code and create constructor
+		var Constructor = new Function("Keyboard, Mouse, self, program, scene, include", code);
+
+		//Create script object
 		try
 		{
-			if(this.program !== null)
-			{
-				this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene);
-			}
+			this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene, include);
 		}
 		catch(e)
 		{
@@ -296,6 +376,7 @@ Script.prototype.toJSON = function(meta)
 	var data = THREE.Object3D.prototype.toJSON.call(this, meta);
 
 	data.object.code = this.code;
+	data.object.mode = this.mode;
 
 	return data;
 };
