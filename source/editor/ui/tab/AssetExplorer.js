@@ -44,12 +44,6 @@ function AssetExplorer(parent, closeable, container, index)
 			{
 				Editor.loadFont(file);
 			}
-			//Text
-			else if(TextFile.fileIsText(file))
-			{
-				Editor.loadText(file);
-			}
-
 		}
 	};
 
@@ -62,11 +56,11 @@ function AssetExplorer(parent, closeable, container, index)
 	this.bar.style.height = "20px";
 	this.element.appendChild(this.bar);
 
-	//Import Files
+	//Add
 	var menu = new DropdownMenu(this.bar);
 	menu.setText("Import");
 	menu.size.set(100, 20);
-	menu.position.set(0,0);
+	menu.position.set(0, 0);
 
 	//3D Models Loader
 	menu.addOption("3D Models", function()
@@ -80,8 +74,81 @@ function AssetExplorer(parent, closeable, container, index)
 		}, ".obj, .dae, .gltf, .glb, .awd, .ply, .vtk, .vtp, .wrl, .vrml, .fbx, .pcd, .json, .3ds, .stl, .x, .js");
 	}, Editor.filePath + "icons/models/models.png");
 
-	//Textures menu
-	var texture = menu.addMenu("Texture", Editor.filePath + "icons/misc/image.png");
+	//Load Font
+	menu.addOption("Font", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			for(var i = 0; i < files.length; i++)
+			{
+				Editor.loadFont(files[i]);
+			}
+		}, ".json, .ttf, .otf");
+	}, Editor.filePath + "icons/misc/font.png");
+
+	//Load text
+	menu.addOption("Text", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			for(var i = 0; i < files.length; i++)
+			{
+				Editor.loadText(files[i]);
+			}
+		}, ".js, .txt, .glsl, .json, .xml, .yaml, .csv, .css, .html");
+	}, Editor.filePath + "icons/misc/file.png");
+
+	//Audio file
+	menu.addOption("Audio", function()
+	{
+		FileSystem.chooseFile(function(files)
+		{
+			for(var i = 0; i < files.length; i++)
+			{
+				Editor.loadAudio(files[i]);
+			}
+		}, "audio/*");
+	}, Editor.filePath + "icons/misc/audio.png");
+	
+	//Spine Animation
+	if(Nunu.runningOnDesktop())
+	{
+		menu.addOption("Spine Animation", function()
+		{
+			FileSystem.chooseFile(function(files)
+			{
+				for(var i = 0; i < files.length; i++)
+				{
+					try
+					{
+						var file = files[i].path;
+						
+						var json = FileSystem.readFile(file);
+						var atlas = FileSystem.readFile(file.replace("json", "atlas"));
+						var path = FileSystem.getFilePath(file);
+						
+						var animation = new SpineAnimation(json, atlas, path);
+						animation.name = FileSystem.getFileName(file);
+
+						Editor.addToScene(animation);
+						Editor.updateObjectViews();
+					}
+					catch(e)
+					{
+						Editor.alert("Failed to load Spine animation, make sure that .json and .atlas have the same name (" + e + ")");
+					}
+				}
+			}, ".json, .spine");
+		}, Editor.filePath + "icons/misc/spine.png");
+	}
+
+	menu.updateInterface();
+
+	//Textures
+	var texture = new DropdownMenu(this.bar);
+	texture.setText("Texture");
+	texture.size.set(100, 20);
+	texture.position.set(100, 0);
 
 	//Image texture
 	texture.addOption("Texture", function()
@@ -164,81 +231,13 @@ function AssetExplorer(parent, closeable, container, index)
 		Editor.updateObjectViews();
 	}, Editor.filePath + "icons/hw/webcam.png");
 
-	//Load Font
-	menu.addOption("Font", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			for(var i = 0; i < files.length; i++)
-			{
-				Editor.loadFont(files[i]);
-			}
-		}, ".json, .ttf, .otf");
-	}, Editor.filePath + "icons/misc/font.png");
-
-	//Load text
-	menu.addOption("Text", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			for(var i = 0; i < files.length; i++)
-			{
-				Editor.loadText(files[i]);
-			}
-		}, ".js, .txt, .glsl, .json, .xml, .yaml, .csv, .css, .html");
-	}, Editor.filePath + "icons/misc/file.png");
-
-	//Spine Animation
-	if(Nunu.runningOnDesktop())
-	{
-		menu.addOption("Spine Animation", function()
-		{
-			FileSystem.chooseFile(function(files)
-			{
-				for(var i = 0; i < files.length; i++)
-				{
-					try
-					{
-						var file = files[i].path;
-						
-						var json = FileSystem.readFile(file);
-						var atlas = FileSystem.readFile(file.replace("json", "atlas"));
-						var path = FileSystem.getFilePath(file);
-						
-						var animation = new SpineAnimation(json, atlas, path);
-						animation.name = FileSystem.getFileName(file);
-
-						Editor.addToScene(animation);
-						Editor.updateObjectViews();
-					}
-					catch(e)
-					{
-						Editor.alert("Failed to load Spine animation, make sure that .json and .atlas have the same name (" + e + ")");
-					}
-				}
-			}, ".json, .spine");
-		}, Editor.filePath + "icons/misc/spine.png");
-	}
-
-	//Load audio file
-	menu.addOption("Audio", function()
-	{
-		FileSystem.chooseFile(function(files)
-		{
-			for(var i = 0; i < files.length; i++)
-			{
-				Editor.loadAudio(files[i]);
-			}
-		}, "audio/*");
-	}, Editor.filePath + "icons/misc/audio.png");
-	
-	menu.updateInterface();
+	texture.updateInterface();
 
 	//Create material
 	var material = new DropdownMenu(this.bar);
 	material.setText("Material");
 	material.size.set(100, 20);
-	material.position.set(100,0);
+	material.position.set(200, 0);
 	
 	material.addOption("Standard material", function()
 	{

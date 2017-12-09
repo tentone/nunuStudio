@@ -520,11 +520,11 @@ Editor.initialize = function()
 	//Open ISP file if dragged to the window
 	document.body.ondrop = function(event)
 	{
-		if(event.dataTransfer.files.length > 0)
+		for(var i = 0; i < event.dataTransfer.files.length; i++)
 		{
-			var file = event.dataTransfer.files[0];
+			var file = event.dataTransfer.files[i];
 
-			//Open project
+			//Project file
 			if(file.name.endsWith(".isp") || file.name.endsWith(".nsp"))
 			{
 				if(confirm("All unsaved changes to the project will be lost! Load file?"))
@@ -533,6 +533,12 @@ Editor.initialize = function()
 					Editor.resetEditingFlags();
 					Editor.updateObjectViews();
 				}
+				break;
+			}
+			//Text file
+			else if(TextFile.fileIsText(file))
+			{
+				Editor.loadText(file);
 			}
 		}
 	}
