@@ -8991,7 +8991,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 367,
+            "line": 366,
             "description": "Create JSON for script.",
             "itemtype": "method",
             "name": "toJSON",
