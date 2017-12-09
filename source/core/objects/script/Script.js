@@ -64,7 +64,7 @@ function Script(code, mode)
 	this.name = "script";
 
 	this.code = (code !== undefined) ? code : Script.DEFAULT;
-	this.mode = (mode !== undefined) ? mode : Script.EVALUATE;
+	this.mode = (mode !== undefined) ? mode : Script.APPEND;
 
 	this.script = null;
 	this.program = null;
@@ -318,36 +318,35 @@ Script.prototype.compileCode = function(code)
 				code = this.program.getResourceByName(libs[i]).data + "\n" + code;
 			}
 
-			function include(name)
-			{
-				console.warn("nunuStudio: Script running in append mode " + name);
-			}
+			code += "\nfunction include(name)\
+			{\
+				console.warn(\"nunuStudio: Script running in append mode \" + name);\
+			}";
 		}
 		//Declare include method
 		else if(this.mode === Script.EVALUATE)
 		{
-			var self = this;
-			function include(name)
-			{
-				var text = self.program.getResourceByName(name);
-				if(text !== null)
-				{
-					new Function(text.data).call(self.script);
-				}
-				else
-				{
-					console.warn("nunuStudio: Javascript file " + name + " not found in resources");
-				}
-			}
+			code += "\nfunction include(name)\
+			{\
+				var text = program.getResourceByName(name);\
+				if(text !== null)\
+				{\
+					new Function(text.data).call(this);\
+				}\
+				else\
+				{\
+					console.warn(\"nunuStudio: Javascript file \" + name + \" not found in resources\");\
+				}\
+			}";
 		}
 
 		//Evaluate code and create constructor
-		var Constructor = new Function("Keyboard, Mouse, self, program, scene, include", code);
+		var Constructor = new Function("Keyboard, Mouse, self, program, scene", code);
 
 		//Create script object
 		try
 		{
-			this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene, include);
+			this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene);
 		}
 		catch(e)
 		{
