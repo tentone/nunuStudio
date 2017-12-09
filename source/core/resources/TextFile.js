@@ -21,6 +21,31 @@ function TextFile(data, encoding)
 
 TextFile.prototype = Object.create(Resource.prototype);
 
+TextFile.extensions = [".js", ".txt", ".glsl", ".json", ".xml", ".yaml", ".csv", ".css", ".html"];
+
+/**
+ * Check if a file name refers to a text file.
+ *
+ * @method fileIsText
+ * @static
+ * @param {File} file
+ * @return {boolean} True if the file is text.
+ */
+TextFile.fileIsText = function(file)
+{
+	file = file.name.toLocaleLowerCase();
+
+	for(var i = 0; i < TextFile.extensions.length; i++)
+	{
+		if(file.endsWith(TextFile.extensions[i]))
+		{
+			return true;
+		}
+	}
+
+	return false;
+};
+
 /**
  * Serialize File resource data to json.
  *

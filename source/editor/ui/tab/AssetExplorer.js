@@ -44,6 +44,12 @@ function AssetExplorer(parent, closeable, container, index)
 			{
 				Editor.loadFont(file);
 			}
+			//Text
+			else if(TextFile.fileIsText(file))
+			{
+				Editor.loadText(file);
+			}
+
 		}
 	};
 
