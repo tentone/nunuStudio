@@ -347,6 +347,7 @@ include("editor/ui/tab/texture/SpriteSheetTextureEditor.js");
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");
 include("editor/ui/panels/ScenePanel.js");
+include("editor/ui/panels/ScriptPanel.js");
 include("editor/ui/panels/ProgramPanel.js");
 include("editor/ui/panels/audio/AudioPanel.js");
 include("editor/ui/panels/physics/PhysicsPanel.js");
@@ -1162,6 +1163,10 @@ Editor.selectObjectPanel = function()
 		else if(object instanceof Scene)
 		{
 			Interface.panel = new ScenePanel(Interface.explorerResizable.divB, object);
+		}
+		else if(object instanceof Script)
+		{
+			Interface.panel = new ScriptPanel(Interface.explorerResizable.divB, object);
 		}
 		else if(object instanceof Program)
 		{

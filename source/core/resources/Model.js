@@ -50,4 +50,3 @@ Model.fileIsModel = function(file)
 
 	return false;
 };
-

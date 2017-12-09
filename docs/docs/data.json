@@ -8833,7 +8833,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 75,
+            "line": 76,
             "description": "Default script code used when creating a new Script.",
             "itemtype": "attribute",
             "name": "DEFAULT",
@@ -8843,7 +8843,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 82,
+            "line": 83,
             "description": "List of methods that a script can implement.",
             "itemtype": "attribute",
             "name": "METHODS",
@@ -8853,59 +8853,27 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 89,
-            "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
-            "itemtype": "method",
-            "name": "initialize",
+            "line": 90,
+            "description": "Append libraries on initialization.\n\nLibraries are appended to the script code on initialization.",
+            "itemtype": "attribute",
+            "name": "APPEND",
+            "type": "{Number}",
             "class": "Script",
             "module": "Script"
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 128,
-            "description": "Update script state.\n\nCalls the script update method if it exists.",
-            "itemtype": "method",
-            "name": "update",
+            "line": 100,
+            "description": "Evaluate libs during runtime.\n\nThis allows to load new libs during runtime, but its not possible to access private statements.",
+            "itemtype": "attribute",
+            "name": "EVALUATE",
+            "type": "{Number}",
             "class": "Script",
             "module": "Script"
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 157,
-            "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "Script",
-            "module": "Script"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 177,
-            "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
-            "itemtype": "method",
-            "name": "resize",
-            "class": "Script",
-            "module": "Script"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 197,
-            "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
-            "itemtype": "method",
-            "name": "appData",
-            "params": [
-                {
-                    "name": "data",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "class": "Script",
-            "module": "Script"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 213,
+            "line": 110,
             "description": "Auxiliar function to include javascript source file from resource into the script.\n\nThe imported source is evaluated and loaded in the context of the script.\n\nGlobal declarations need to be cleaned using the dipose method.",
             "itemtype": "method",
             "name": "include",
@@ -8921,10 +8889,96 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 224,
+            "line": 121,
+            "description": "Get includes from the code.\n\nUsed to extract includes from code when loading libraries in APPEND mode.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "getIncludes",
+            "params": [
+                {
+                    "name": "code",
+                    "description": "Script code.",
+                    "type": "String"
+                }
+            ],
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 147,
+            "description": "Remove includes from code.\n\nUsed to remove include statements when initializing code in APPEND mode.",
+            "static": 1,
+            "itemtype": "method",
+            "name": "removeIncludes",
+            "params": [
+                {
+                    "name": "code",
+                    "description": "Script code.",
+                    "type": "String"
+                }
+            ],
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 161,
+            "description": "Initialize script\nAutomatically called by the runtime\nCalls the script initialize method if it exists",
+            "itemtype": "method",
+            "name": "initialize",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 200,
+            "description": "Update script state.\n\nCalls the script update method if it exists.",
+            "itemtype": "method",
+            "name": "update",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 229,
+            "description": "Disposes the script, can be used to clear resources when the program exits.\n\nCalls the script dispose method if it exists.",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 249,
+            "description": "Call resize method if available.\n\nThe resize method receives width and height as arguments.",
+            "itemtype": "method",
+            "name": "resize",
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 269,
+            "description": "Call onAppData if available.\n\nCalled automatically every time external data is passed to the runtime.",
+            "itemtype": "method",
+            "name": "appData",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Script",
+            "module": "Script"
+        },
+        {
+            "file": "..\\..\\source\\core\\objects\\script\\Script.js",
+            "line": 285,
             "description": "Set script code.\n\nCan be used to dinamically change the script code. However it is not recommended can lead to undefined behavior.",
             "itemtype": "method",
-            "name": "setCode",
+            "name": "compileCode",
             "params": [
                 {
                     "name": "code",
@@ -8937,7 +8991,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
-            "line": 288,
+            "line": 367,
             "description": "Create JSON for script.",
             "itemtype": "method",
             "name": "toJSON",
@@ -11213,7 +11267,28 @@
         },
         {
             "file": "..\\..\\source\\core\\resources\\TextFile.js",
-            "line": 24,
+            "line": 26,
+            "description": "Check if a file name refers to a text file.",
+            "itemtype": "method",
+            "name": "fileIsText",
+            "static": 1,
+            "params": [
+                {
+                    "name": "file",
+                    "description": "",
+                    "type": "File"
+                }
+            ],
+            "return": {
+                "description": "True if the file is text.",
+                "type": "Boolean"
+            },
+            "class": "TextFile",
+            "module": "Resources"
+        },
+        {
+            "file": "..\\..\\source\\core\\resources\\TextFile.js",
+            "line": 49,
             "description": "Serialize File resource data to json.",
             "itemtype": "method",
             "name": "toJSON",

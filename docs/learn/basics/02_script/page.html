@@ -22,7 +22,7 @@
 	<script src="../../js/embed.js"></script>
 </head>
 
-<body onload="initialize('rotate.nsp', 'rotate'); initialize('input.nsp', 'input');">
+<body onload="initialize('rotate.nsp', 'rotate'); initialize('input.nsp', 'input'); initialize('include.nsp', 'include');">
 	<!--Navigation bar-->
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -110,6 +110,7 @@
 	}
 }</code></pre>
 			<p>If everything works as expected you should be able to move the cube around using the keyboard arrow keys and rotate it using the mouse as shown bellow. To try this example in the editor you can download the <a class="underline" href="input.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/basics/02_script/input.nsp">Web Editor</a>.</p>
+
 			<div>
 				<canvas id="input" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
 			</div>
@@ -143,7 +144,7 @@ function update()
 	object.rotation.y += 0.01;
 }</code></pre>
 			
-			<h3>DOM Elements</h3>
+			<h3 class="black">DOM Elements</h3>
 			<p>Its possible to attach dom elements to the program created. To do this we can use the division property of the program that gives us access to a DOM division element (parent of the canvas element used to draw content) where we can add HTML elements.</p>
 			<p>The example below demonstrates how to create a new red division with size 50 x 50 add it to the program and remove it when the program is being closed.</p>
 			<pre><code>var element = document.createElement("div");
@@ -162,6 +163,46 @@ function dispose()
 {
 	program.division.removeChild(element);
 }</code></pre>
+
+			<h3 class="black">Libraries</h3>
+			<p>To add external libraries to your script first you need to import the js file into the project, you can just simply drag the JS source file into the asset explorer or go to Import/Text and select the js file.</p>
+			
+			<img src="include.jpg" class="img-normal"></img>
+			
+			<p>After importing the file into the project you can now include it in your script using the include(name) method preferabily at the top of your code. There are multiple include modes available by default the script objects use Evaluate mode the library is evaluated and executed in your script context, the Append mode appends the code of your library on top of your script code, this makes compiling a bit slower but local defined code becomes available to your script. Script mode can be selected in the Script object panel.</p>
+
+			<pre><code>include("moment.min.js"); //https://momentjs.com/
+
+var date, hour;
+
+function initialize()
+{
+	date = program.getObjectByName("date");
+	date.setText(moment().format("MMM Do YY"));
+	
+	hour = program.getObjectByName("hour");
+}
+
+function update()
+{
+	var text = moment().format('LTS');
+	if(text !== hour.text)
+	{	
+		hour.setText(text);
+	}
+}
+
+function dispose()
+{
+	delete moment;
+}
+</code></pre>
+
+			<p>The code above demonstrates how to use momentjs to display date and time on a text object. The library is available for free at https://momentjs.com/. To try this example in the editor you can download the <a class="underline" href="include.nsp">project file</a> or open it on the <a class="underline" href="https://www.nunustudio.org/editor/editor?isp=https://nunustudio.org/learn/basics/02_script/include.nsp">Web Editor</a>.</p>
+
+			<div>
+				<canvas id="include" style="margin-left:auto; margin-right:auto; display: block;"></canvas>
+			</div>
 		</div>
 	</section>
 
