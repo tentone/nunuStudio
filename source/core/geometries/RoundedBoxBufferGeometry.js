@@ -25,7 +25,7 @@ function RoundedBoxBufferGeometry(width, height, depth, radius, radiusSegments)
 
 	//Validate params
 	radiusSegments = radiusSegments !== undefined ? Math.max(1, Math.floor(radiusSegments)) : 1;
-	width = width !== undefined width : 1;
+	width = width !== undefined ? width : 1;
 	height = height !== undefined ? height : 1;
 	depth = depth !== undefined ? depth : 1;
 	radius = radius !== undefined ? radius : .15;
