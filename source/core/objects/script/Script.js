@@ -220,6 +220,18 @@ Script.prototype.appData = function(data)
  * @method include
  * @param {String} name Javascript resource name.
  */
+Script.INCLUDE = "function include(name)\
+{\
+	var text = program.getResourceByName(name);\
+	if(text !== null)\
+	{\
+		new Function(text.data).call(this);\
+	}\
+	else\
+	{\
+		console.warn(\"nunuStudio: javascript file \" + name + \" not found in resources\");\
+	}\
+}";
 
 /**
  * Set script code.
@@ -244,30 +256,17 @@ Script.prototype.setCode = function(code)
 		{
 			method = Script.METHODS[i];
 			code += "\nif(this." + method + " == undefined && typeof " + method + " !== 'undefined'){this." + method + " = " + method + ";}";
+			code += Script.INCLUDE;
 		}
 
-		var self = this;
-		function include(name)
-		{
-			var text = self.program.getResourceByName(name);
-			if(text !== null)
-			{
-				new Function(text.data).call(self.script);
-			}
-			else
-			{
-				console.warn("nunuStudio: javascript file " + name + " not found in resources");
-			}
-		}
-		
 		//Compile code
-		var Constructor = new Function("Keyboard, Mouse, self, program, scene, include", code);
+		var Constructor = new Function("Keyboard, Mouse, self, program, scene", code);
 
 		try
 		{
 			if(this.program !== null)
 			{
-				this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene, include);
+				this.script = new Constructor(this.program.keyboard, this.program.mouse, this, this.program, this.scene);
 			}
 		}
 		catch(e)
