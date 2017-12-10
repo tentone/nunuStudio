@@ -345,10 +345,13 @@ ShaderMaterialEditor.prototype.attach = function(material, asset)
 
 ShaderMaterialEditor.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 
 		//Main
 		this.main.visible = this.visible;
@@ -391,12 +394,6 @@ ShaderMaterialEditor.prototype.updateInterface = function()
 		this.vertexShader.size.copy(this.tab.size);
 		this.vertexShader.updateSettings();
 		this.vertexShader.updateInterface();
-
-		//Element
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{
