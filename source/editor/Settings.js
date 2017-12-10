@@ -32,7 +32,8 @@ Settings.loadDefault = function()
 		showStats : false,
 		showUUID : false,
 		showType : true,
-		immediateMode : false
+		immediateMode : false,
+		historySize : 10
 	};
 
 	//Editor

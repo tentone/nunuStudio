@@ -103,6 +103,20 @@ function GeneralSettingsTab(parent, closeable, container, index)
 	this.form.add(this.immediateMode);
 	this.form.nextRow();
 
+	//History size
+	this.form.addText("History size").setAltText("How many changes are stored in the history.");
+	this.historySize = new NumberBox(this.form.element);
+	this.historySize.size.set(60, 18);
+	this.historySize.setRange(1.0, Number.MAX_SAFE_INTEGER);
+	this.historySize.setStep(1.0);
+	this.historySize.setOnChange(function()
+	{
+		Settings.general.historySize = self.historySize.getValue();
+		Editor.history.limit = Settings.general.historySize;
+	});
+	this.form.add(this.historySize);
+	this.form.nextRow();
+
 	//Blank Space
 	this.form.addText("");
 	this.form.nextRow();
@@ -417,6 +431,7 @@ GeneralSettingsTab.prototype.activate = function()
 	this.showUUID.setValue(Settings.general.showUUID);
 	this.showType.setValue(Settings.general.showType);
 	this.immediateMode.setValue(Settings.general.immediateMode);
+	this.historySize.setValue(Settings.general.historySize);
 	
 	//Editor
 	this.snap.setValue(Settings.editor.snap);
