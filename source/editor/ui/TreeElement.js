@@ -376,25 +376,19 @@ function TreeElement(container)
 			//Above
 			if(event.layerY < 5)
 			{
-				if(!(self.obj.parent instanceof Program))
-				{
-					//TODO <ADD HISTORY OBJECT ABOVE>
-					self.obj.parent.addAbove(obj, self.obj);
-				}
+				var index = self.obj.parent.children.indexOf(self.obj);
+				Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
 			}
 			//Bellow
 			else if(event.layerY > 15)
 			{
-				if(!(self.obj.parent instanceof Program))
-				{
-					//TODO <ADD HISTORY OBJECT BELLOW>
-					self.obj.parent.addBellow(obj, self.obj);
-				}
+				var index = self.obj.parent.children.indexOf(self.obj) + 1;
+				Editor.history.add(new ObjectMovedAction(obj, self.obj.parent, index));
 			}
 			//Inside
 			else
 			{	
-				Editor.history.add(new ObjectAddedAction(obj, self.obj));
+				Editor.history.add(new ObjectMovedAction(obj, self.obj));
 			}
 
 			self.updateSceneData();
