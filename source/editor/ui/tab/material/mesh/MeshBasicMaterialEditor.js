@@ -57,7 +57,7 @@ function MeshBasicMaterialEditor(parent, closeable, container, index)
 	{
 		if(self.material !== null)
 		{
-			self.material.color.setHex(self.color.getValueHex());
+			Editor.history.add(new ChangeAction(self.material, "color", new THREE.Color(self.color.getValueHex())));
 			self.material.needsUpdate = true;
 		}
 	});

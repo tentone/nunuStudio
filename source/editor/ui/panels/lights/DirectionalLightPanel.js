@@ -15,8 +15,7 @@ function DirectionalLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			var color = self.color.getValue();
-			self.obj.color.setRGB(color.r, color.g, color.b);
+			Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
 		}
 	});
 	this.form.add(this.color);
@@ -50,7 +49,7 @@ function DirectionalLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.shadow.mapSize.width = self.shadowWidth.getValue();
+			Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "width", self.shadowWidth.getValue()));
 			self.obj.updateShadowMap();
 		}
 	});
@@ -62,7 +61,7 @@ function DirectionalLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.shadow.mapSize.height = self.shadowHeight.getValue();
+			Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "height", self.shadowHeight.getValue()));
 			self.obj.updateShadowMap();
 		}
 	});
@@ -84,7 +83,7 @@ function DirectionalLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.shadow.camera.near = self.shadowNear.getValue();
+			Editor.history.add(new ChangeAction(self.obj.shadow.camera, "near", self.shadowNear.getValue()));
 			self.obj.updateShadowMap();
 		}
 	});
@@ -100,7 +99,7 @@ function DirectionalLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.shadow.camera.far = self.shadowFar.getValue();
+			Editor.history.add(new ChangeAction(self.obj.shadow.camera, "far", self.shadowFar.getValue()));
 			self.obj.updateShadowMap();
 		}
 	});
@@ -116,7 +115,7 @@ function DirectionalLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.shadow.camera.left = self.shadowLeft.getValue();
+			Editor.history.add(new ChangeAction(self.obj.shadow.camera, "left", self.shadowLeft.getValue()));
 			self.obj.updateShadowMap();
 		}
 	});
@@ -130,11 +129,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowRight.setStep(0.1);
 	this.shadowRight.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.shadow.camera.right = self.shadowRight.getValue();
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "right", self.shadowRight.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowRight);
 	this.form.nextRow();
@@ -146,11 +142,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowTop.setStep(0.1);
 	this.shadowTop.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.shadow.camera.top = self.shadowTop.getValue();
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "top", self.shadowTop.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowTop);
 	this.form.nextRow();
@@ -162,11 +155,8 @@ function DirectionalLightPanel(parent, obj)
 	this.shadowBottom.setStep(0.1);
 	this.shadowBottom.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			self.obj.shadow.camera.bottom = self.shadowBottom.getValue();
-			self.obj.updateShadowMap();
-		}
+		Editor.history.add(new ChangeAction(self.obj.shadow.camera, "bottom", self.shadowBottom.getValue()));
+		self.obj.updateShadowMap();
 	});
 	this.form.add(this.shadowBottom);
 	this.form.nextRow();

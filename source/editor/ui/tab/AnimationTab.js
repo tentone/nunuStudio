@@ -4,7 +4,6 @@ function AnimationTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Animation", Editor.filePath + "icons/misc/animation.png");
 
-	//TODO <ADD CODE HERE>
 }
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
@@ -15,7 +14,6 @@ AnimationTab.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.display = "block";
-
 		this.element.style.top = this.position.y + "px";
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
