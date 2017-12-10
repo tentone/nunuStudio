@@ -1,13 +1,13 @@
 "use strict";
 
 //Stores changes to an object
-function History(program)
+function History(limit)
 {
 	this.actions = [];
 	this.counter = 0;
 
 	this.position = -1;
-	this.limit = 10;
+	this.limit = limit !== undefined ? limit : 10;
 }
 
 //Add change to program history

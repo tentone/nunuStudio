@@ -1235,7 +1235,7 @@ Editor.createNewProgram = function()
 	Editor.program.addDefaultScene(Editor.defaultMaterial);
 
 	//History
-	Editor.history = new History();
+	Editor.history = new History(Settings.general.historySize);
 
 	//Reset editor
 	Editor.setOpenFile(null);
@@ -1320,7 +1320,7 @@ Editor.loadProgram = function(file, binary)
 			}
 
 			//Reset history
-			Editor.history = new History();
+			Editor.history = new History(Settings.general.historySize);
 
 			//Remove old tabs
 			Interface.tab.clear();
