@@ -400,6 +400,10 @@ AssetExplorer.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 
 		//Asset position
 		var filesRow = Math.floor(this.files.length / (this.files.length * (this.filesSize.x + this.filesSpacing) / this.size.x));
@@ -416,12 +420,6 @@ AssetExplorer.prototype.updateInterface = function()
 
 		//Asset
 		this.assets.style.height = (this.size.y - 20) + "px";
-
-		//Element
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{

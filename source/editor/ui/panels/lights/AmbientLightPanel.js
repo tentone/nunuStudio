@@ -15,8 +15,7 @@ function AmbientLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			var color = self.color.getValue();
-			self.obj.color.setRGB(color.r, color.g, color.b);
+			Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
 		}
 	});
 	this.form.add(this.color);

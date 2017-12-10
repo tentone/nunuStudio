@@ -21,12 +21,8 @@ function SkyPanel(parent, obj)
 		this.colorTop[i].size.set(42, 18);
 		this.colorTop[i].setOnChange(function()
 		{
-			if(self.obj !== null)
-			{
-				var color = self.colorTop[this.index].getValue();
-				self.obj.colorTop[this.index].setRGB(color.r, color.g, color.b);
-				self.obj.updateSky();
-			}
+			Editor.history.add(new ChangeAction(self.obj.colorTop, this.index, new THREE.Color(self.colorTop[this.index].getValueHex())));
+			self.obj.updateSky();
 		});
 		this.form.add(this.colorTop[i]);
 	}
@@ -42,12 +38,8 @@ function SkyPanel(parent, obj)
 		this.colorBottom[i].size.set(42, 18);
 		this.colorBottom[i].setOnChange(function()
 		{
-			if(self.obj !== null)
-			{
-				var color = self.colorBottom[this.index].getValue();
-				self.obj.colorBottom[this.index].setRGB(color.r, color.g, color.b);
-				self.obj.updateSky();
-			}
+			Editor.history.add(new ChangeAction(self.obj.colorBottom, this.index, new THREE.Color(self.colorBottom[this.index].getValueHex())));
+			self.obj.updateSky();
 		});
 		this.form.add(this.colorBottom[i]);
 	}
@@ -59,11 +51,8 @@ function SkyPanel(parent, obj)
 	this.sunColor.size.set(80, 18);
 	this.sunColor.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "sunColor", self.sunColor.getValueHex()));
-			self.obj.updateSky();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "sunColor", self.sunColor.getValueHex()));
+		self.obj.updateSky();
 	});
 	this.form.add(this.sunColor);
 	this.form.nextRow();
@@ -74,11 +63,8 @@ function SkyPanel(parent, obj)
 	this.moonColor.size.set(80, 18);
 	this.moonColor.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			Editor.history.add(new ChangeAction(self.obj, "moonColor", self.moonColor.getValueHex()));
-			self.obj.updateSky();
-		}
+		Editor.history.add(new ChangeAction(self.obj, "moonColor", self.moonColor.getValueHex()));
+		self.obj.updateSky();
 	});
 	this.form.add(this.moonColor);
 	this.form.nextRow();
@@ -210,7 +196,7 @@ function SkyPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.sun.castShadow = self.castShadow.getValue();
+			Editor.history.add(new ChangeAction(self.obj.sun, "castShadow", self.castShadow.getValue()));
 		}
 	});
 	this.form.add(this.castShadow);

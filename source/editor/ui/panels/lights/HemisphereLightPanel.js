@@ -15,8 +15,7 @@ function HemisphereLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			var color = self.color.getValue();
-			self.obj.color.setRGB(color.r, color.g, color.b);
+			Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
 		}
 	});
 	this.form.add(this.color);
@@ -30,6 +29,7 @@ function HemisphereLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
+			Editor.history.add(new ChangeAction(self.obj, "groundColor", new THREE.Color(self.groundColor.getValueHex())));
 			var color = self.groundColor.getValue();
 			self.obj.groundColor.setRGB(color.r, color.g, color.b);
 		}

@@ -13,11 +13,7 @@ function SpotLightPanel(parent, obj)
 	this.color.size.set(80, 18);
 	this.color.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			var color = self.color.getValue();
-			self.obj.color.setRGB(color.r, color.g, color.b);
-		}
+		Editor.history.add(new ChangeAction(self.obj, "color", new THREE.Color(self.color.getValueHex())));
 	});
 	this.form.add(this.color);
 	this.form.nextRow();
@@ -86,7 +82,7 @@ function SpotLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.shadow.mapSize.width = self.shadowWidth.getValue();
+			Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "width", self.shadowWidth.getValue()));
 			self.obj.updateShadowMap();
 		}
 	});
@@ -98,7 +94,7 @@ function SpotLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.shadow.mapSize.height = self.shadowHeight.getValue();
+			Editor.history.add(new ChangeAction(self.obj.shadow.mapSize, "height", self.shadowHeight.getValue()));
 			self.obj.updateShadowMap();
 		}
 	});
@@ -120,7 +116,7 @@ function SpotLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.shadow.camera.near = self.shadowNear.getValue();
+			Editor.history.add(new ChangeAction(self.obj.shadow.camera, "near", self.shadowNear.getValue()));
 			self.obj.updateShadowMap();
 		}
 	});
@@ -136,7 +132,7 @@ function SpotLightPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.shadow.camera.far = self.shadowFar.getValue();
+			Editor.history.add(new ChangeAction(self.obj.shadow.camera, "far", self.shadowFar.getValue()));
 			self.obj.updateShadowMap();
 		}
 	});

@@ -446,6 +446,10 @@ CubeTextureEditor.prototype.updateInterface = function()
 	if(this.visible)
 	{
 		this.element.style.display = "block";
+		this.element.style.top = this.position.y + "px";
+		this.element.style.left = this.position.x + "px";
+		this.element.style.width = this.size.x + "px";
+		this.element.style.height = this.size.y + "px";
 	
 		//Dual division
 		this.division.visible = this.visible;
@@ -465,12 +469,6 @@ CubeTextureEditor.prototype.updateInterface = function()
 		//Update form
 		this.form.visible = this.visible;
 		this.form.updateInterface();
-
-		//Element
-		this.element.style.top = this.position.y + "px";
-		this.element.style.left = this.position.x + "px";
-		this.element.style.width = this.size.x + "px";
-		this.element.style.height = this.size.y + "px";
 	}
 	else
 	{

@@ -48,7 +48,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.body.type = self.bodyType.getValue();
+			Editor.history.add(new ChangeAction(self.obj.body, "type", self.bodyType.getValue()));
 		}
 	});
 	this.form.add(this.bodyType);
@@ -63,7 +63,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.body.mass = self.mass.getValue();
+			Editor.history.add(new ChangeAction(self.obj.body, "mass", self.mass.getValue()));
 		}
 	});
 	this.form.add(this.mass);
@@ -79,7 +79,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.body.linearDamping = self.linearDamping.getValue();
+			Editor.history.add(new ChangeAction(self.obj.body, "linearDamping", self.linearDamping.getValue()));
 		}
 	});
 	this.form.add(this.linearDamping);
@@ -95,7 +95,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.body.angularDamping = self.angularDamping.getValue();
+			Editor.history.add(new ChangeAction(self.obj.body, "angularDamping", self.angularDamping.getValue()));
 		}
 	});
 	this.form.add(this.angularDamping);
@@ -109,7 +109,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.body.allowSleep = self.allowSleep.getValue();
+			Editor.history.add(new ChangeAction(self.obj.body, "allowSleep", self.allowSleep.getValue()));
 		}
 	});
 	this.form.add(this.allowSleep);
@@ -124,7 +124,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.body.sleepSpeedLimit = self.sleepSpeedLimit.getValue();
+			Editor.history.add(new ChangeAction(self.obj.body, "sleepSpeedLimit", self.sleepSpeedLimit.getValue()));
 		}
 	});
 	this.form.add(this.sleepSpeedLimit);
@@ -139,7 +139,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.body.sleepTimeLimit = self.sleepTimeLimit.getValue();
+			Editor.history.add(new ChangeAction(self.obj.body, "sleepTimeLimit", self.sleepTimeLimit.getValue()));
 		}
 	});
 	this.form.add(this.sleepTimeLimit);
@@ -153,7 +153,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.body.fixedRotation = self.fixedRotation.getValue();
+			Editor.history.add(new ChangeAction(self.obj.body, "fixedRotation", self.fixedRotation.getValue()));
 		}
 	});
 	this.form.add(this.fixedRotation);
@@ -168,7 +168,7 @@ function PhysicsPanel(parent, obj)
 	{
 		if(self.obj !== null)
 		{
-			self.obj.body.collisionFilterGroup = self.collisionFilterGroup.getValue();
+			Editor.history.add(new ChangeAction(self.obj.body, "collisionFilterGroup", self.collisionFilterGroup.getValue()));
 		}
 	});
 	this.form.add(this.collisionFilterGroup);
