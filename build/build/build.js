@@ -30,6 +30,7 @@ console.log("                                Editor");
 console.log("----------------------------------------------------------------------");
 console.log(" Joining files");
 var out = join(sourcePath, sourcePath + editorMain);
+out.js = addTimestamp("DEVELOPMENT_VERSION", out.js);
 writeFile(buildPath + "nunu.editor.js.temp", out.js);
 var css = compressCSS(out.css);
 writeFile(buildPath + "nunu.editor.css", css);
@@ -45,6 +46,7 @@ console.log("-------------------------------------------------------------------
 console.log("                              Runtime");
 console.log("----------------------------------------------------------------------");
 var out = join(sourcePath, sourcePath + runtimeMain);
+out.js = addTimestamp("DEVELOPMENT_VERSION", out.js);
 writeFile(buildPath + "nunu.js.temp", out.js);
 console.log(" Optimizing with closure");
 closure("SIMPLE", "PRETTY_PRINT", "ECMASCRIPT5", "ECMASCRIPT5", buildPath + "nunu.js.temp", buildPath + "nunu.js");
@@ -106,6 +108,19 @@ function closure(level, formatting, languageIn, languageOut, fileIn, fileOut)
 			console.log("Error compiling with google closure, check if java is installed and try again.");
 		}
 	});
+}
+
+function formatNumber(number)
+{
+	return ("0" + number).slice(-2);
+}
+
+function addTimestamp(keyword, code)
+{
+	var date = new Date();
+	var timestamp = (1900 + date.getYear()) + formatNumber(date.getMonth()) + formatNumber(date.getDay()) + formatNumber(date.getHours()) + formatNumber(date.getMinutes());
+
+	return code.replace(keyword, timestamp);
 }
 
 function compressCSS(code)
