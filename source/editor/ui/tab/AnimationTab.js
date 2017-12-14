@@ -13,6 +13,12 @@ function AnimationTab(parent, closeable, container, index)
 	this.bar.style.height = "20px";
 	this.element.appendChild(this.bar);
 
+	//Dual division
+	this.dual = new DualDivisionResizable(this.element);
+	this.dual.tabPosition = 0.15;
+	this.dual.tabPositionMax = 0.4;
+	this.dual.tabPositionMin = 0.02;
+
 	/*var mixer, clock;
 
 	function initialize()
@@ -49,6 +55,10 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.left = this.position.x + "px";
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
+
+		this.dual.size.set(this.size.x, this.size.y - 20);
+		this.dual.position.set(0, 20);
+		this.dual.updateInterface();
 	}
 	else
 	{
