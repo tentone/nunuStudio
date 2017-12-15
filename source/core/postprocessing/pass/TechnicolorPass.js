@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Colorify pass can be used to colorify the scene.
+ * Simulate technicolor television colors.
  * 
  * @class TechnicolorPass
  * @module Postprocessing

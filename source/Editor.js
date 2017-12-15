@@ -29,6 +29,7 @@ include("lib/three/shaders/SobelOperatorShader.js");
 include("lib/three/shaders/ColorifyShader.js");
 include("lib/three/shaders/ToneMapShader.js");
 include("lib/three/shaders/TechnicolorShader.js");
+include("lib/three/shaders/HueSaturationShader.js");
 
 include("lib/three/postprocessing/EffectComposer.js");
 include("lib/three/postprocessing/RenderPass.js");
@@ -89,6 +90,7 @@ include("core/postprocessing/pass/DotScreenPass.js");
 include("core/postprocessing/pass/SobelPass.js");
 include("core/postprocessing/pass/ColorifyPass.js");
 include("core/postprocessing/pass/TechnicolorPass.js");
+include("core/postprocessing/pass/HueSaturationPass.js");
 
 include("core/controls/VRControls.js");
 
@@ -321,6 +323,7 @@ include("editor/ui/tab/camera/postprocessing/SSAOPassNode.js");
 include("editor/ui/tab/camera/postprocessing/DotScreenPassNode.js");
 include("editor/ui/tab/camera/postprocessing/FilmPassNode.js");
 include("editor/ui/tab/camera/postprocessing/ColorifyPassNode.js");
+include("editor/ui/tab/camera/postprocessing/HueSaturationPassNode.js");
 
 include("editor/ui/tab/settings/SettingsTab.js");
 include("editor/ui/tab/settings/CodeSettingsTab.js");
