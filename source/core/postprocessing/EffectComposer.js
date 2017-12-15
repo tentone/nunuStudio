@@ -358,6 +358,10 @@ EffectComposer.fromJSON = function(json)
 		{
 			pass = new SobelPass();
 		}
+		else if(data.type === "Technicolor")
+		{
+			pass = new TechnicolorPass();
+		}
 		else
 		{
 			pass = new RenderPass();
