@@ -362,6 +362,12 @@ EffectComposer.fromJSON = function(json)
 		{
 			pass = new TechnicolorPass();
 		}
+		else if(data.type === "HueSaturation")
+		{
+			pass = new HueSaturationPass();
+			pass.hue = data.hue;
+			pass.saturation = data.saturation;
+		}
 		else
 		{
 			pass = new RenderPass();

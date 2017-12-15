@@ -109,6 +109,16 @@ function CameraEditor(parent, closeable, container, index)
 
 	var button = new Button(this.form.element);
 	button.size.set(120, 18);
+	button.setText("Hue & Saturation");
+	button.setCallback(function()
+	{
+		addRenderPass(new HueSaturationPass());
+	});
+	this.form.add(button);
+	this.form.nextRow();
+
+	var button = new Button(this.form.element);
+	button.size.set(120, 18);
 	button.setText("SSAO");
 	button.setCallback(function()
 	{
