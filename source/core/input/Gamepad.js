@@ -127,7 +127,7 @@ Gamepad.prototype.setProductVendor = function(gamepad)
  * 
  * @method update
  */
-Gamepad.prototype.update = function()
+Gamepad.prototype.update = function(delta)
 {
 	this.gamepad = navigator.getGamepads()[this.index];
 

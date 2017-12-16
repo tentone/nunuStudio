@@ -194,7 +194,7 @@ Sky.prototype.initialize = function()
  * 
  * @method update
  */
-Sky.prototype.update = function()
+Sky.prototype.update = function(delta)
 {
 	//Update time
 	if(this.autoUpdate)
@@ -212,7 +212,7 @@ Sky.prototype.update = function()
 	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		this.children[i].update(delta);
 	}
 };
 

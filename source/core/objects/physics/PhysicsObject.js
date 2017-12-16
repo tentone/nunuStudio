@@ -105,7 +105,7 @@ PhysicsObject.prototype.initialize = function()
  * 
  * @method update
  */
-PhysicsObject.prototype.update = function()
+PhysicsObject.prototype.update = function(delta)
 {
 	this.position.copy(this.body.position);
 	if(!this.body.fixedRotation)
@@ -116,7 +116,7 @@ PhysicsObject.prototype.update = function()
 	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		this.children[i].update(delta);
 	}
 };
 

@@ -117,7 +117,7 @@ OrbitControls.prototype.initialize = function()
 	}
 };
 
-OrbitControls.prototype.update = function()
+OrbitControls.prototype.update = function(delta)
 {
 	var needsUpdate = false;
 
@@ -169,7 +169,7 @@ OrbitControls.prototype.update = function()
 
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		this.children[i].update(delta);
 	}
 };
 

@@ -149,7 +149,7 @@ KinectDevice.prototype = Object.create(THREE.Object3D.prototype);
  * 
  * @method update
  */
-KinectDevice.prototype.update = function()
+KinectDevice.prototype.update = function(delta)
 {
 	//Check if there is data to process
 	if(this.data !== null)
@@ -203,7 +203,7 @@ KinectDevice.prototype.update = function()
 	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		this.children[i].update(delta);
 	}
 };
 

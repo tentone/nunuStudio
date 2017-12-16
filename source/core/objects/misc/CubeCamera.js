@@ -135,7 +135,7 @@ CubeCamera.prototype.initialize = function()
  * 
  * @method update
  */
-CubeCamera.prototype.update = function()
+CubeCamera.prototype.update = function(delta)
 {
 	if(this.autoUpdate)
 	{
@@ -144,7 +144,7 @@ CubeCamera.prototype.update = function()
 
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		this.children[i].update(delta);
 	}
 };
 

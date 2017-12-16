@@ -71,7 +71,7 @@ PositionalAudio.prototype.initialize = function()
  * 
  * @method update
  */
-PositionalAudio.prototype.update = function()
+PositionalAudio.prototype.update = function(delta)
 {
 	if(this.cameras.length > 0)
 	{
@@ -95,7 +95,7 @@ PositionalAudio.prototype.update = function()
 
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		this.children[i].update(delta);
 	}
 };
 

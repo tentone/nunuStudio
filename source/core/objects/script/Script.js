@@ -204,7 +204,7 @@ Script.prototype.initialize = function()
  * 
  * @method update
  */
-Script.prototype.update = function()
+Script.prototype.update = function(delta)
 {
 	if(this.script.onMouseOver !== undefined)
 	{
@@ -222,7 +222,7 @@ Script.prototype.update = function()
 
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		this.children[i].update(delta);
 	}
 };
 

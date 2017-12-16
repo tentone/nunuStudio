@@ -216,7 +216,7 @@ LeapMotion.prototype.initialize = function()
  * 
  * @method update
  */
-LeapMotion.prototype.update = function()
+LeapMotion.prototype.update = function(delta)
 {
 	if(this.data !== null)
 	{
@@ -237,7 +237,7 @@ LeapMotion.prototype.update = function()
 	//Update children
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		this.children[i].update(delta);
 	}
 };
 

@@ -64,9 +64,9 @@ function Scene()
 	this.cameras = [];
 
 	//Runtime objects
-	this.clock = new THREE.Clock();
 	this.raycaster = new THREE.Raycaster();
-	this.delta = 0.0;
+	this.clock = new THREE.Clock();
+	this.delta = 0;
 
 	//Renderer canvas
 	this.program = null;
@@ -93,14 +93,14 @@ Scene.prototype.initialize = function()
 	this.program = this.parent;
 	this.canvas = this.parent.canvas;
 
-	//Start clock
-	this.clock.start();
-
 	//Initialize children
 	for(var i = 0; i < this.children.length; i++)
 	{
 		this.children[i].initialize();
 	}
+
+	//Start clock
+	this.clock.start();
 };
 
 /**
@@ -127,7 +127,7 @@ Scene.prototype.update = function()
 
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		this.children[i].update(delta);
 	}
 };
 

@@ -1,10 +1,13 @@
 "use strict";
 
 /**
- * GCodeLoader is used to load .gcode files usually used for 3D printing or CNC applications.
+ * GCodeLoader is used to load gcode files usually used for 3D printing or CNC applications.
+ *
+ * Gcode files are composed by commands used by machines to create objects.
  *
  * @class GCodeLoader
  * @param {Manager} manager Loading manager.
+ * @author tentone
  */
 function GCodeLoader(manager)
 {
@@ -143,7 +146,7 @@ GCodeLoader.prototype.parse = function(data)
 			addSegment(currentState, line);
 			currentState = line;
 		}
-		//G2/G3 - Arc Movement
+		//G2/G3 - Arc Movement (G2 clock wise and G3 counter clock wise)
 		else if(cmd === "G2" || cmd === "G3")
 		{
 			console.warn("GCodeLoader: Arc command not supported");

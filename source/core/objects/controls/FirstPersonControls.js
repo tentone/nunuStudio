@@ -103,7 +103,7 @@ FirstPersonControls.prototype.initialize = function()
 	}
 };
 
-FirstPersonControls.prototype.update = function()
+FirstPersonControls.prototype.update = function(delta)
 {
 	if(!this.needsButtonPressed || this.mouse.buttonPressed(Mouse.LEFT))
 	{
@@ -164,7 +164,7 @@ FirstPersonControls.prototype.update = function()
 	
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update();
+		this.children[i].update(delta);
 	}
 };
 
