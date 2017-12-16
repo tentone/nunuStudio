@@ -127,7 +127,7 @@ Scene.prototype.update = function()
 
 	for(var i = 0; i < this.children.length; i++)
 	{
-		this.children[i].update(delta);
+		this.children[i].update(this.delta);
 	}
 };
 
