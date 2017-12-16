@@ -4,7 +4,7 @@
  * It can access and change every object in the program and supports some events
  *  - initialize
  *    - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.
- *  - update
+ *  - update(delta)
  *    - Called on every frame after rendering
  *  - dispose
  *    - Called when disposing the program
@@ -217,7 +217,7 @@ Script.prototype.update = function(delta)
 
 	if(this.script.update !== undefined)
 	{
-		this.script.update.call(this);
+		this.script.update.call(this, delta);
 	}
 
 	for(var i = 0; i < this.children.length; i++)
