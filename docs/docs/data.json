@@ -3579,14 +3579,15 @@
             "namespace": "",
             "file": "..\\..\\source\\editor\\loader\\GCodeLoader.js",
             "line": 3,
-            "description": "GCodeLoader is used to load .gcode files usually used for 3D printing or CNC applications.",
+            "description": "GCodeLoader is used to load gcode files usually used for 3D printing or CNC applications.\n\nGcode files are composed by commands used by machines to create objects.",
             "params": [
                 {
                     "name": "manager",
                     "description": "Loading manager.",
                     "type": "Manager"
                 }
-            ]
+            ],
+            "author": "tentone"
         },
         "NunuApp": {
             "name": "NunuApp",
@@ -9113,15 +9114,6 @@
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
             "line": 134,
-            "description": "Update the object state, called every time before rendering into the screen.",
-            "itemtype": "method",
-            "name": "update",
-            "class": "SpineAnimation",
-            "module": "Animations"
-        },
-        {
-            "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 147,
             "description": "Update mesh geometry from animation state before rendering.",
             "itemtype": "method",
             "name": "onBeforeRender",
@@ -9130,7 +9122,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 160,
+            "line": 147,
             "description": "Play animation.",
             "itemtype": "method",
             "name": "play",
@@ -9139,7 +9131,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 179,
+            "line": 166,
             "description": "Get all available animations.",
             "itemtype": "method",
             "name": "getAnimations",
@@ -9152,7 +9144,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 190,
+            "line": 177,
             "description": "Set animation from track number and name.",
             "itemtype": "method",
             "name": "setAnimation",
@@ -9178,7 +9170,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 216,
+            "line": 203,
             "description": "Get skins available for this animation.",
             "itemtype": "method",
             "name": "getSkins",
@@ -9191,7 +9183,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 227,
+            "line": 214,
             "description": "Set skin to be used by this animation",
             "itemtype": "method",
             "name": "setSkin",
@@ -9207,7 +9199,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\spine\\SpineAnimation.js",
-            "line": 247,
+            "line": 234,
             "description": "Serialize spine animation as JSON.",
             "itemtype": "method",
             "name": "toJSON",
