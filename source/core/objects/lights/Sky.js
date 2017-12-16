@@ -87,10 +87,7 @@ function Sky(autoUpdate, dayTime, sunDistance, time)
 
 	this.name = "sky";
 	this.type = "Sky";
-
-	//Clock
-	this.clock = new THREE.Clock();
-
+	
 	//Colors (morning, noon, afternoon, night)
 	this.colorTop = [new THREE.Color(0x77b3fb), new THREE.Color(0x0076ff), new THREE.Color(0x035bb6), new THREE.Color(0x002439)];
 	this.colorBottom = [new THREE.Color(0xebece6), new THREE.Color(0xffffff), new THREE.Color(0xfee7d7), new THREE.Color(0x0065a7)];
@@ -199,7 +196,7 @@ Sky.prototype.update = function(delta)
 	//Update time
 	if(this.autoUpdate)
 	{
-		this.time += this.clock.getDelta();
+		this.time += delta;
 
 		if(this.time > this.dayTime)
 		{
