@@ -1166,7 +1166,7 @@
             "tag": "module",
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse\n\nThere is also access to the following functions\n - include\n   - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations"
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update(delta)\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse\n\nThere is also access to the following functions\n - include\n   - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations"
         },
         "Animations": {
             "name": "Animations",
@@ -2384,7 +2384,7 @@
             "namespace": "",
             "file": "..\\..\\source\\core\\objects\\script\\Script.js",
             "line": 1,
-            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse\n\nThere is also access to the following functions\n - include\n   - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations",
+            "description": "Script objects are used to control other objects present in the scene.\n\nIt can access and change every object in the program and supports some events\n - initialize\n   - Called on app initialization, its called after all children elements are initialized, its safe to apply operations on other objects inside this method.\n - update(delta)\n   - Called on every frame after rendering\n - dispose\n   - Called when disposing the program\n - onMouseOver(intersections)\n   - Called on every frame if mouse is on top of one of the script children\n   - Receives an intersections array as argument.\n - onResize(x, y)\n   - Called every time the window is resized\n   - Receives width and height as parameters\n - onAppData(data)\n   - Called when receiving data sent by the host website\n\nCode written inside scripts have access to the following attributes:\n - scene\n - program\n - self\n   - Same as this reference but global in the script scope\n - Keyboard\n - Mouse\n\nThere is also access to the following functions\n - include\n   - Include a javascript file from resources, when including files the user needs to be carefull and clear manually global declarations",
             "extends": "{Object}",
             "params": [
                 {
@@ -8011,7 +8011,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 173,
+            "line": 170,
             "description": "Initialize sky object.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "initialize",
@@ -8020,7 +8020,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 190,
+            "line": 187,
             "description": "Update sky state.\n\nCalled automatically by the runtime.",
             "itemtype": "method",
             "name": "update",
@@ -8029,7 +8029,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 219,
+            "line": 216,
             "description": "Check if object is empty (don't have any childrens).",
             "itemtype": "method",
             "name": "isEmpty",
@@ -8042,7 +8042,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 230,
+            "line": 227,
             "description": "Update sky color and sun position.\n\nIf autoUpdate set to true is automatically called by the update method.",
             "itemtype": "method",
             "name": "updateSky",
@@ -8051,7 +8051,7 @@
         },
         {
             "file": "..\\..\\source\\core\\objects\\lights\\Sky.js",
-            "line": 369,
+            "line": 366,
             "description": "Create JSON for object.",
             "params": [
                 {
