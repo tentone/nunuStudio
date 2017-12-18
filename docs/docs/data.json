@@ -871,15 +871,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "..\\..\\source\\editor\\loader\\GCodeLoader.js": {
-            "name": "..\\..\\source\\editor\\loader\\GCodeLoader.js",
-            "modules": {},
-            "classes": {
-                "GCodeLoader": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "..\\..\\source\\runtime\\NunuApp.js": {
             "name": "..\\..\\source\\runtime\\NunuApp.js",
             "modules": {
@@ -1355,13 +1346,12 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "FileSystem": 1,
-                "GCodeLoader": 1
+                "FileSystem": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "..\\..\\source\\editor\\loader\\GCodeLoader.js",
+            "file": "..\\..\\source\\core\\FileSystem.js",
             "line": 3,
             "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere.",
             "static": 1
@@ -3566,28 +3556,6 @@
             "file": "..\\..\\source\\core\\FileSystem.js",
             "line": 3,
             "description": "FileSystem is used to read and write files using nunuStudio.\n\nSome operations are platform specific and might not work everywhere."
-        },
-        "GCodeLoader": {
-            "name": "GCodeLoader",
-            "shortname": "GCodeLoader",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Files",
-            "namespace": "",
-            "file": "..\\..\\source\\editor\\loader\\GCodeLoader.js",
-            "line": 3,
-            "description": "GCodeLoader is used to load gcode files usually used for 3D printing or CNC applications.\n\nGcode files are composed by commands used by machines to create objects.",
-            "params": [
-                {
-                    "name": "manager",
-                    "description": "Loading manager.",
-                    "type": "Manager"
-                }
-            ],
-            "author": "tentone"
         },
         "NunuApp": {
             "name": "NunuApp",
