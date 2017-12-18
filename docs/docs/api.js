@@ -27,7 +27,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "Fog",
         "Font",
         "FontLoader",
-        "GCodeLoader",
         "Gamepad",
         "GeometryLoader",
         "Gyroscope",
