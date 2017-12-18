@@ -211,6 +211,7 @@ include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/BabylonLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
 include("lib/three/loaders/FBXLoader.js");
+include("lib/three/loaders/GCodeLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
 include("lib/three/loaders/MTLLoader.js");
 include("lib/three/loaders/OBJLoader.js");
@@ -252,8 +253,6 @@ include("editor/style.css");
 
 include("editor/theme/Theme.js");
 include("editor/theme/ThemeDark.js");
-
-include("editor/loader/GCodeLoader.js");
 
 include("editor/ui/element/Element.js");
 include("editor/ui/element/Message.js");
@@ -1523,7 +1522,7 @@ Editor.loadModel = function(file, onLoad)
 			var reader = new FileReader();
 			reader.onload = function()
 			{
-				var loader = new GCodeLoader();
+				var loader = new THREE.GCodeLoader();
 				Editor.addToScene(loader.parse(reader.result));
 			};
 
