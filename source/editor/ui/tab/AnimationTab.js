@@ -5,19 +5,36 @@ function AnimationTab(parent, closeable, container, index)
 	TabElement.call(this, parent, closeable, container, index, "Animation", Editor.filePath + "icons/misc/animation.png");
 
 	//Bar
-	this.bar = document.createElement("div");
+	/*this.bar = document.createElement("div");
 	this.bar.style.backgroundColor = Editor.theme.barColor;
 	this.bar.style.overflow = "visible";
 	this.bar.style.position = "absolute";
 	this.bar.style.width = "100%";
 	this.bar.style.height = "20px";
-	this.element.appendChild(this.bar);
+	this.element.appendChild(this.bar);*/
 
 	//Dual division
-	this.dual = new DualDivisionResizable(this.element);
+	/*this.dual = new DualDivisionResizable(this.element);
 	this.dual.tabPosition = 0.15;
 	this.dual.tabPositionMax = 0.4;
-	this.dual.tabPositionMin = 0.02;
+	this.dual.tabPositionMin = 0.02;*/
+
+	this.button = new Button(this.element);
+	this.button.position.set(0, 0);
+	this.button.size.set(100, 20);
+	this.button.updateInterface();
+	this.button.setCallback(function()
+	{
+		if(Editor.selectedObjects.length > 0)
+		{
+			var object = Editor.selectedObjects[0];
+
+			if(object.animations !== undefined)
+			{
+				alert("Animated");
+			}
+		}
+	});
 
 	/*var mixer, clock;
 
@@ -56,9 +73,9 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
 
-		this.dual.size.set(this.size.x, this.size.y - 20);
+		/*this.dual.size.set(this.size.x, this.size.y - 20);
 		this.dual.position.set(0, 20);
-		this.dual.updateInterface();
+		this.dual.updateInterface();*/
 	}
 	else
 	{
