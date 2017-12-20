@@ -69,41 +69,43 @@ function Panel(parent, obj)
 	this.position.setStep(0.01);
 	this.position.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			var position = self.position.getValue();
-			var object = self.obj.position;
+		var position = self.position.getValue();
+		var object = self.obj.position;
 
-			Editor.history.add(new ActionBundle(
-			[
-				new ChangeAction(object, "x", position.x),
-				new ChangeAction(object, "y", position.y),
-				new ChangeAction(object, "z", position.z)
-			]));
-		}
+		Editor.history.add(new ActionBundle(
+		[
+			new ChangeAction(object, "x", position.x),
+			new ChangeAction(object, "y", position.y),
+			new ChangeAction(object, "z", position.z)
+		]));
 	});
 	this.form.add(this.position);
 	this.form.nextRow();
 
+	var text = this.form.addText("Scale");
+	text.size.x -= 20;
+
+	//Scale lock
+	this.scaleRatioLock = new CheckBox(this.form.element);
+	this.scaleRatioLock.setAltText("Lock scale ratio");
+	this.scaleRatioLock.size.set(15, 15);
+	this.form.add(this.scaleRatioLock);
+	
 	//Scale
-	this.form.addText("Scale");
 	this.scale = new CoordinatesBox(this.form.element);
 	this.scale.size.set(190, 18);
 	this.scale.setStep(0.01);
 	this.scale.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			var scale = self.scale.getValue();
-			var object = self.obj.scale;
+		var scale = self.scale.getValue();
+		var object = self.obj.scale;
 
-			Editor.history.add(new ActionBundle(
-			[
-				new ChangeAction(object, "x", scale.x),
-				new ChangeAction(object, "y", scale.y),
-				new ChangeAction(object, "z", scale.z)
-			]));
-		}
+		Editor.history.add(new ActionBundle(
+		[
+			new ChangeAction(object, "x", scale.x),
+			new ChangeAction(object, "y", scale.y),
+			new ChangeAction(object, "z", scale.z)
+		]));
 	});
 	this.form.add(this.scale);
 	this.form.nextRow();
@@ -115,25 +117,22 @@ function Panel(parent, obj)
 	this.rotation.setStep(0.01);
 	this.rotation.setOnChange(function()
 	{
-		if(self.obj !== null)
-		{
-			var rotation = self.rotation.getValue();
-			var object = self.obj.rotation;
+		var rotation = self.rotation.getValue();
+		var object = self.obj.rotation;
 
-			Editor.history.add(new ActionBundle(
-			[
-				new ChangeAction(object, "x", rotation.x),
-				new ChangeAction(object, "y", rotation.y),
-				new ChangeAction(object, "z", rotation.z)
-			]));
-		}
+		Editor.history.add(new ActionBundle(
+		[
+			new ChangeAction(object, "x", rotation.x),
+			new ChangeAction(object, "y", rotation.y),
+			new ChangeAction(object, "z", rotation.z)
+		]));
 	});
 	this.form.add(this.rotation);
 	this.form.nextRow();
 
 	//Visible
-	this.visible = new CheckBox(this.form.element);
 	this.form.addText("Visible");
+	this.visible = new CheckBox(this.form.element);
 	this.visible.size.set(15, 15);
 	this.visible.setOnChange(function()
 	{
@@ -143,8 +142,8 @@ function Panel(parent, obj)
 	this.form.nextRow();
 
 	//Static
-	this.static = new CheckBox(this.form.element);
 	this.form.addText("Static Object");
+	this.static = new CheckBox(this.form.element);
 	this.static.size.set(15, 15);
 	this.static.setOnChange(function()
 	{
