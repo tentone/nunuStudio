@@ -99,6 +99,30 @@ function Panel(parent, obj)
 	{
 		var scale = self.scale.getValue();
 		var object = self.obj.scale;
+		
+		if(self.scaleRatioLock.getValue())
+		{
+			if(scale.x !== object.x)
+			{
+				var ratio = scale.x / object.x;
+				scale.y *= ratio;
+				scale.z *= ratio;
+			}
+			else if(scale.y !== object.y)
+			{
+				var ratio = scale.y / object.y;
+				scale.x *= ratio;
+				scale.z *= ratio;
+			}
+			else if(scale.z !== object.z)
+			{
+				var ratio = scale.z / object.z;
+				scale.x *= ratio;
+				scale.y *= ratio;
+			}
+
+			self.scale.setValue(scale.x, scale.y, scale.z);
+		}
 
 		Editor.history.add(new ActionBundle(
 		[
