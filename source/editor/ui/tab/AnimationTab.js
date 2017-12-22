@@ -4,6 +4,8 @@ function AnimationTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Animation", Editor.filePath + "icons/misc/animation.png");
 
+	var self = this;
+
 	//Bar
 	this.bar = document.createElement("div");
 	this.bar.style.backgroundColor = Editor.theme.barColor;
@@ -13,7 +15,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.bar.style.height = "20px";
 	this.element.appendChild(this.bar);
 
-	//Check animation
+	//Create animation
 	this.button = new Button(this.bar);
 	this.button.position.set(0, 0);
 	this.button.size.set(100, 20);
@@ -36,6 +38,17 @@ function AnimationTab(parent, closeable, container, index)
 				object.animations = [];
 			}
 		}
+	});
+
+	//Update
+	this.update = new Button(this.bar);
+	this.update.position.set(100, 0);
+	this.update.size.set(100, 20);
+	this.update.setText("Update")
+	this.update.updateInterface();
+	this.update.setCallback(function()
+	{
+		//TODO <ADD CODE HERE>
 	});
 
 	//Dual division
