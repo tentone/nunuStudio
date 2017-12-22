@@ -5,23 +5,19 @@ function AnimationTab(parent, closeable, container, index)
 	TabElement.call(this, parent, closeable, container, index, "Animation", Editor.filePath + "icons/misc/animation.png");
 
 	//Bar
-	/*this.bar = document.createElement("div");
+	this.bar = document.createElement("div");
 	this.bar.style.backgroundColor = Editor.theme.barColor;
 	this.bar.style.overflow = "visible";
 	this.bar.style.position = "absolute";
 	this.bar.style.width = "100%";
 	this.bar.style.height = "20px";
-	this.element.appendChild(this.bar);*/
+	this.element.appendChild(this.bar);
 
-	//Dual division
-	/*this.dual = new DualDivisionResizable(this.element);
-	this.dual.tabPosition = 0.15;
-	this.dual.tabPositionMax = 0.4;
-	this.dual.tabPositionMin = 0.02;*/
-
-	this.button = new Button(this.element);
+	//Check animation
+	this.button = new Button(this.bar);
 	this.button.position.set(0, 0);
 	this.button.size.set(100, 20);
+	this.button.setText("Create animation")
 	this.button.updateInterface();
 	this.button.setCallback(function()
 	{
@@ -31,10 +27,22 @@ function AnimationTab(parent, closeable, container, index)
 
 			if(object.animations !== undefined)
 			{
-				alert("Animated");
+				console.log(object.animations);
+				alert("This object is already animated");
+			}
+			else
+			{
+				alert("Added animation array");
+				object.animations = [];
 			}
 		}
 	});
+
+	//Dual division
+	/*this.dual = new DualDivisionResizable(this.element);
+	this.dual.tabPosition = 0.15;
+	this.dual.tabPositionMax = 0.4;
+	this.dual.tabPositionMin = 0.02;*/
 
 	/*var mixer, clock;
 
