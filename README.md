@@ -2,9 +2,9 @@
 
 [![GitHub issues](https://img.shields.io/github/issues/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/issues) [![GitHub stars](https://img.shields.io/github/stars/tentone/nunuStudio.svg)](https://github.com/tentone/nunuStudio/stargazers)
 
- - nunuStudio is a 3D and 2D game engine for the web. It uses WebGL and WebVR to allow fast 3D graphics and virtual reality on the web without the need for plugins.
+ - nunustudio is an open source 3D VR game engine for the web it allows designers and web developers to easily develop 3D experiences that can run directly in a web page or be exported as Desktop applications.
+ - nunuStudio has a fully featured visual editor, supports a wide range of file formats, the tools are open source and completely free to use for both personal and commercial usage, it is powered by open web APIs like WebGL, WebVR and WebAudio.
  - Visual scene editor, code editor, visual tools to edit textures, materials, particle emitters, etc and a powerful scripting API that allows the creation of complex applications.
- - Lightweight engine powered by three.js that can run easily on desktop and mobile platforms.
 
 ### Web Editor
  - There is a fully featured web version of the editor available at https://nunustudio.org/editor/editor
@@ -18,7 +18,7 @@
 
 ### Features
 - Visual application editor
-- three.js based
+- Built on three.js
 	- Real time lighting and shadow map support
 	- three.js code can be used inside nunuStudio scripts without the need for THREE prefix
 - Wide range of file formats supported
@@ -166,7 +166,6 @@
 	- Support for .blend files (@Galactrax)
 	- Fixed support for spine animations
 	- Editor infinite grid
-	- Animation timeline editor (@zz85)
 	- Improved history system in the editor
 	- Support for mesh modifiers
 	
