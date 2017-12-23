@@ -12,6 +12,7 @@ function AnimationTab(parent, closeable, container, index)
  	this.scale = 20.0;
  	
  	//Playback
+ 	this.mixer = null;
  	this.time = 0.0;
  	this.playing = false;
 
@@ -32,13 +33,13 @@ function AnimationTab(parent, closeable, container, index)
 	this.timeline.style.width = "100%";
 	this.element.appendChild(this.timeline);
 
-	//Create animation
-	this.button = new Button(this.bar);
-	this.button.position.set(0, 0);
-	this.button.size.set(100, 20);
-	this.button.setText("Create animation")
-	this.button.updateInterface();
-	this.button.setCallback(function()
+	//Animation
+	this.animationButton = new Button(this.bar);
+	this.animationButton.position.set(0, 0);
+	this.animationButton.size.set(100, 20);
+	this.animationButton.setText("Read Animations")
+	this.animationButton.updateInterface();
+	this.animationButton.setCallback(function()
 	{
 		if(Editor.selectedObjects.length > 0)
 		{
@@ -59,9 +60,31 @@ function AnimationTab(parent, closeable, container, index)
 		}
 	});
 
+	this.clipButton = new Button(this.bar);
+	this.clipButton.position.set(100, 0);
+	this.clipButton.size.set(100, 20);
+	this.clipButton.setText("Create Clip")
+	this.clipButton.updateInterface();
+	this.clipButton.setCallback(function()
+	{
+		if(Editor.selectedObjects.length > 0)
+		{
+			var object = Editor.selectedObjects[0];
+
+			if(object.animations !== undefined)
+			{	
+				var clip = new THREE.AnimationClip("Animation", 3, []);
+				clip.tracks.push(new VectorKeyframeTrack(".position", [0, 1, 2], [0,0,0, 0,10,0, 0,0,0]));
+				object.animations.push(clip);
+
+				alert("Added clip");
+			}
+		}
+	});
+
 	//Update
 	this.updateButton = new Button(this.bar);
-	this.updateButton.position.set(100, 0);
+	this.updateButton.position.set(200, 0);
 	this.updateButton.size.set(100, 20);
 	this.updateButton.setText("Update")
 	this.updateButton.updateInterface();
@@ -69,7 +92,7 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		if(self.obj !== null)
 		{
-			//self.clearTimeline();
+			self.clearTimeline();
 
 			var animations = self.obj.animations;
 
@@ -83,6 +106,26 @@ function AnimationTab(parent, closeable, container, index)
 
 			}
 		}
+	});
+
+	this.play = new Button(this.bar);
+	this.play.position.set(300, 0);
+	this.play.size.set(100, 20);
+	this.play.setText("Play")
+	this.play.updateInterface();
+	this.play.setCallback(function()
+	{
+
+	});
+
+	this.stop = new Button(this.bar);
+	this.stop.position.set(400, 0);
+	this.stop.size.set(100, 20);
+	this.stop.setText("Stop")
+	this.stop.updateInterface();
+	this.stop.setCallback(function()
+	{
+		
 	});
 
 	/*var mixer, clock;
