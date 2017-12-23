@@ -6,15 +6,11 @@ function AnimationTab(parent, closeable, container, index)
 
 	var self = this;
 
- 	this.obj = null;
- 	
- 	//Scale in pixels per second
- 	this.scale = 20.0;
- 	
- 	//Playback
- 	this.mixer = null;
- 	this.time = 0.0;
- 	this.playing = false;
+	this.obj = null;
+	this.mixer = null;
+
+	this.zoom = 50.0; //Pixels/sec
+	this.timelineHeight = 20;
 
 	//Bar
 	this.bar = document.createElement("div");
@@ -72,25 +68,32 @@ function AnimationTab(parent, closeable, container, index)
 			var object = Editor.selectedObjects[0];
 
 			if(object.animations !== undefined)
-			{	
-				//VectorKeyframeTrack -> Vector3
+			{
+				//VectorKeyframeTrack
 				//BooleanKeyframeTrack
 				//ColorKeyframeTrack
 				//NumberKeyframeTrack
 				//QuaternionKeyframeTrack
 				//StringKeyframeTrack
 
-				var clip = new THREE.AnimationClip("Animation", 3, []);
+				var clip = new THREE.AnimationClip("Animation", 5, []);
 
-				var position = new VectorKeyframeTrack(".position", [0, 1, 2, 3], [0,0,0, 0,2,0, 2,1,2, 0,0,0]);
+				var position = new VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
 				position.setInterpolation(THREE.InterpolateSmooth); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
 				clip.tracks.push(position);
 
-				clip.tracks.push(new VectorKeyframeTrack(".rotation", [0, 1, 2], [0,0,0, 0,1.57,0, 0,0,0]));
+				var scale = new VectorKeyframeTrack(".scale", [0, 1, 2, 3], [1,1,1, 2,2,2, 0.5,0.5,0.5, 1,1,1]);
+				scale.setInterpolation(THREE.InterpolateLinear); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
+				clip.tracks.push(scale);
+
 				object.animations.push(clip);
 
 				alert("Added clip");
 			}
+		}
+		else
+		{
+			alert("Object not found!");
 		}
 	});
 
@@ -102,29 +105,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.updateButton.updateInterface();
 	this.updateButton.setCallback(function()
 	{
-		if(self.obj !== null)
-		{
-			self.clearTimeline();
-
-			var animations = self.obj.animations;
-
-			for(var i = 0; i < animations.length; i++)
-			{
-				var container = document.createElement("div");
-				container.style.backgroundColor = "#FF0000";
-				self.timeline.appendChild(container);
-
-				var tracks = animations[i].tracks;
-				for(var j = 0; j < tracks.length; j++)
-				{
-					var key = document.createElement("div");
-					key.style.backgroundColor = MathUtils.randomColor();
-					key.style.height = "100%";
-					key.style.width = (self.scale * animations[i].duration) + "px";
-					container.appendChild(key);
-				}
-			}
-		}
+		update();
 	});
 
 	this.play = new Button(this.bar);
@@ -134,26 +115,36 @@ function AnimationTab(parent, closeable, container, index)
 	this.play.updateInterface();
 	this.play.setCallback(function()
 	{
-		self.mixer = new AnimationMixer(self.obj);
-
-		var action = self.mixer.clipAction(self.obj.animations[0]);
-		action.setLoop(THREE.LoopPingPong); //LoopOnce || LoopRepeat || LoopPingPong
-		action.play(); 
-
-		var clock = new THREE.Clock();
-		clock.start();
-
-		var loop = function()
+		if(Editor.selectedObjects.length > 0)
 		{
-			if(self.playing)
-			{
-				self.mixer.update(clock.getDelta());
-				requestAnimationFrame(loop);
-			}
-		};
+			var object = Editor.selectedObjects[0];
+			console.log(object);
+			self.mixer = new THREE.AnimationMixer(object);
 
-		self.playing = true;
-		loop();
+			for(var i = 0; i < object.animations.length; i++)
+			{
+				var action = self.mixer.clipAction(object.animations[i]);
+				action.setLoop(THREE.LoopRepeat); //LoopOnce || LoopRepeat || LoopPingPong
+				action.play(); 
+			}
+
+			var clock = new THREE.Clock();
+			clock.start();
+
+			var loop = function()
+			{
+				if(self.mixer !== null)
+				{
+					self.mixer.update(clock.getDelta());
+					requestAnimationFrame(loop);
+				}
+			};
+			loop();
+		}
+		else
+		{
+			alert("Object not found!");
+		}
 	});
 
 	this.stop = new Button(this.bar);
@@ -163,35 +154,65 @@ function AnimationTab(parent, closeable, container, index)
 	this.stop.updateInterface();
 	this.stop.setCallback(function()
 	{
-		self.mixer.time = 0;
-		self.mixer.update(0);
 		self.mixer.stopAllAction();
-
-		self.playing = false;
+		self.mixer = null;
 	});
 
-	/*var mixer, clock;
-
-	function initialize()
+	this.zoomSlider = new Slider(this.bar);
+	this.zoomSlider.size.set(100, 20);
+	this.zoomSlider.position.set(500, 0);
+	this.zoomSlider.setStep(10);
+	this.zoomSlider.setRange(50, 1000);
+	this.zoomSlider.updateInterface();
+	this.zoomSlider.setOnChange(function()
 	{
-		var box = scene.getObjectByName("box");
-		
-		var position = new VectorKeyframeTrack(".position", [0, 1, 2], [0,0,0, 0,10,0, 0,0,0]);
-		var color = new ColorKeyframeTrack(".material.color", [0, 1, 3], [1,0,0, 0,1,0, 0,0,1]);
-		
-		var clip = new AnimationClip("Animation", 3, [position, color]);
-		
-		mixer = new AnimationMixer(box);
-		mixer.clipAction(clip).play();
-		
-		clock = new Clock();
-		clock.start();
-	}
+		self.zoom = self.zoomSlider.getValue();
+		update();
+	});
 
 	function update()
 	{
-		mixer.update(clock.getDelta());
-	}*/
+		if(Editor.selectedObjects.length > 0 && Editor.selectedObjects[0].animations !== undefined)
+		{
+			self.clearTimeline();
+
+			var object = Editor.selectedObjects[0];
+			var animations = object.animations;
+
+			for(var i = 0; i < animations.length; i++)
+			{
+				var tracks = animations[i].tracks;
+
+				var animation = document.createElement("div");
+				animation.style.width = (self.zoom * animations[i].duration) + "px";
+				animation.style.height = (self.timelineHeight * tracks.length) + "px";
+				self.timeline.appendChild(animation);
+
+				for(var j = 0; j < tracks.length; j++)
+				{
+					var times = tracks[j].times;
+
+					var track = document.createElement("div");
+					track.style.height = self.timelineHeight + "px";
+					track.style.width = (self.zoom * (times[times.length - 1] - times[0])) + "px";
+					animation.appendChild(track);
+
+					for(var k = 0; k < times.length - 1; k++)
+					{
+						var key = document.createElement("div");
+						key.style.position = "absolute";
+						key.style.backgroundColor = MathUtils.randomColor();
+						key.style.height = self.timelineHeight + "px";
+						key.style.left = (self.zoom * times[k]) + "px";
+						key.style.width = (self.zoom * (times[k + 1] - times[k])) + "px";
+						track.appendChild(key);
+					}
+				}
+			}
+
+			self.updateInterface();
+		}
+	};
 }
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
