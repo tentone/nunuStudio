@@ -283,24 +283,12 @@ include("editor/ui/element/input/TextureBox.js");
 include("editor/ui/element/input/CubeTextureBox.js");
 
 include("editor/ui/DropdownMenu.js");
-include("editor/ui/TreeView.js");
-include("editor/ui/TreeElement.js");
 include("editor/ui/ContextMenu.js");
 include("editor/ui/TabGroup.js");
 include("editor/ui/TabElement.js");
 include("editor/ui/TabButton.js");
-
-include("editor/ui/preview/TexturePreview.js");
-include("editor/ui/preview/MaterialPreview.js");
-include("editor/ui/preview/renderer/FontRenderer.js");
-include("editor/ui/preview/renderer/MaterialRenderer.js");
-
-include("editor/ui/asset/Asset.js");
-include("editor/ui/asset/MaterialAsset.js");
-include("editor/ui/asset/TextureAsset.js");
-include("editor/ui/asset/FontAsset.js");
-include("editor/ui/asset/AudioAsset.js");
-include("editor/ui/asset/FileAsset.js");
+include("editor/ui/TreeView.js");
+include("editor/ui/TreeElement.js");
 
 include("editor/ui/tab/ConsoleTab.js");
 include("editor/ui/tab/AssetExplorer.js");
@@ -346,6 +334,18 @@ include("editor/ui/tab/texture/TextureEditor.js");
 include("editor/ui/tab/texture/VideoTextureEditor.js");
 include("editor/ui/tab/texture/CanvasTextureEditor.js");
 include("editor/ui/tab/texture/SpriteSheetTextureEditor.js");
+
+include("editor/ui/preview/TexturePreview.js");
+include("editor/ui/preview/MaterialPreview.js");
+include("editor/ui/preview/renderer/FontRenderer.js");
+include("editor/ui/preview/renderer/MaterialRenderer.js");
+
+include("editor/ui/asset/Asset.js");
+include("editor/ui/asset/MaterialAsset.js");
+include("editor/ui/asset/TextureAsset.js");
+include("editor/ui/asset/FontAsset.js");
+include("editor/ui/asset/AudioAsset.js");
+include("editor/ui/asset/FileAsset.js");
 
 include("editor/ui/panels/Panel.js");
 include("editor/ui/panels/ObjectPanel.js");

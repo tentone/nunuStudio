@@ -4,26 +4,42 @@ function AnimationTab(parent, closeable, container, index)
 {
 	TabElement.call(this, parent, closeable, container, index, "Animation", Editor.filePath + "icons/misc/animation.png");
 
+	var self = this;
+
+ 	this.obj = null;
+ 	
+ 	//Scale in pixels per second
+ 	this.scale = 20.0;
+ 	
+ 	//Playback
+ 	this.mixer = null;
+ 	this.time = 0.0;
+ 	this.playing = false;
+
 	//Bar
-	/*this.bar = document.createElement("div");
+	this.bar = document.createElement("div");
 	this.bar.style.backgroundColor = Editor.theme.barColor;
 	this.bar.style.overflow = "visible";
 	this.bar.style.position = "absolute";
 	this.bar.style.width = "100%";
 	this.bar.style.height = "20px";
-	this.element.appendChild(this.bar);*/
+	this.element.appendChild(this.bar);
 
-	//Dual division
-	/*this.dual = new DualDivisionResizable(this.element);
-	this.dual.tabPosition = 0.15;
-	this.dual.tabPositionMax = 0.4;
-	this.dual.tabPositionMin = 0.02;*/
+	//Timeline zone
+	this.timeline = document.createElement("div");
+	this.timeline.style.overflow = "auto";
+	this.timeline.style.position = "absolute";
+	this.timeline.style.top = "20px";
+	this.timeline.style.width = "100%";
+	this.element.appendChild(this.timeline);
 
-	this.button = new Button(this.element);
-	this.button.position.set(0, 0);
-	this.button.size.set(100, 20);
-	this.button.updateInterface();
-	this.button.setCallback(function()
+	//Animation
+	this.animationButton = new Button(this.bar);
+	this.animationButton.position.set(0, 0);
+	this.animationButton.size.set(100, 20);
+	this.animationButton.setText("Read Animations")
+	this.animationButton.updateInterface();
+	this.animationButton.setCallback(function()
 	{
 		if(Editor.selectedObjects.length > 0)
 		{
@@ -31,9 +47,85 @@ function AnimationTab(parent, closeable, container, index)
 
 			if(object.animations !== undefined)
 			{
-				alert("Animated");
+				console.log(object.animations);
+				alert("This object is already animated");
+			}
+			else
+			{
+				alert("Added animation array");
+				object.animations = [];
+			}
+
+			self.obj = object;
+		}
+	});
+
+	this.clipButton = new Button(this.bar);
+	this.clipButton.position.set(100, 0);
+	this.clipButton.size.set(100, 20);
+	this.clipButton.setText("Create Clip")
+	this.clipButton.updateInterface();
+	this.clipButton.setCallback(function()
+	{
+		if(Editor.selectedObjects.length > 0)
+		{
+			var object = Editor.selectedObjects[0];
+
+			if(object.animations !== undefined)
+			{	
+				var clip = new THREE.AnimationClip("Animation", 3, []);
+				clip.tracks.push(new VectorKeyframeTrack(".position", [0, 1, 2], [0,0,0, 0,10,0, 0,0,0]));
+				object.animations.push(clip);
+
+				alert("Added clip");
 			}
 		}
+	});
+
+	//Update
+	this.updateButton = new Button(this.bar);
+	this.updateButton.position.set(200, 0);
+	this.updateButton.size.set(100, 20);
+	this.updateButton.setText("Update")
+	this.updateButton.updateInterface();
+	this.updateButton.setCallback(function()
+	{
+		if(self.obj !== null)
+		{
+			self.clearTimeline();
+
+			var animations = self.obj.animations;
+
+			for(var i = 0; i < animations.length; i++)
+			{
+				var container = document.createElement("div");
+				container.style.backgroundColor = "#FF0000";
+				container.style.height = "20px";
+				container.style.width = "100px";
+				self.timeline.appendChild(container);
+
+			}
+		}
+	});
+
+	this.play = new Button(this.bar);
+	this.play.position.set(300, 0);
+	this.play.size.set(100, 20);
+	this.play.setText("Play")
+	this.play.updateInterface();
+	this.play.setCallback(function()
+	{
+
+	});
+
+	this.stop = new Button(this.bar);
+	this.stop.position.set(400, 0);
+	this.stop.size.set(100, 20);
+	this.stop.setText("Stop")
+	this.stop.updateInterface();
+	this.stop.setCallback(function()
+	{
+		
 	});
 
 	/*var mixer, clock;
@@ -62,6 +154,19 @@ function AnimationTab(parent, closeable, container, index)
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
 
+//Clean timeline
+AnimationTab.prototype.clearTimeline = function()
+{
+	this.element.removeChild(this.timeline);
+
+	this.timeline = document.createElement("div");
+	this.timeline.style.overflow = "auto";
+	this.timeline.style.position = "absolute";
+	this.timeline.style.top = "20px";
+	this.timeline.style.width = "100%";
+	this.element.appendChild(this.timeline);
+};
+
 //Update interface
 AnimationTab.prototype.updateInterface = function()
 {
@@ -73,9 +178,7 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
 
-		/*this.dual.size.set(this.size.x, this.size.y - 20);
-		this.dual.position.set(0, 20);
-		this.dual.updateInterface();*/
+		this.timeline.style.height = (this.size.y - 20) + "px";
 	}
 	else
 	{
