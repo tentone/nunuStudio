@@ -33,7 +33,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.animationButton = new Button(this.bar);
 	this.animationButton.position.set(0, 0);
 	this.animationButton.size.set(100, 20);
-	this.animationButton.setText("Read Animations")
+	this.animationButton.setText("Create Animation")
 	this.animationButton.updateInterface();
 	this.animationButton.setCallback(function()
 	{
