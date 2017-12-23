@@ -6,6 +6,15 @@ function AnimationTab(parent, closeable, container, index)
 
 	var self = this;
 
+ 	this.obj = null;
+ 	
+ 	//Scale in pixels per second
+ 	this.scale = 20.0;
+ 	
+ 	//Playback
+ 	this.time = 0.0;
+ 	this.playing = false;
+
 	//Bar
 	this.bar = document.createElement("div");
 	this.bar.style.backgroundColor = Editor.theme.barColor;
@@ -14,6 +23,14 @@ function AnimationTab(parent, closeable, container, index)
 	this.bar.style.width = "100%";
 	this.bar.style.height = "20px";
 	this.element.appendChild(this.bar);
+
+	//Timeline zone
+	this.timeline = document.createElement("div");
+	this.timeline.style.overflow = "auto";
+	this.timeline.style.position = "absolute";
+	this.timeline.style.top = "20px";
+	this.timeline.style.width = "100%";
+	this.element.appendChild(this.timeline);
 
 	//Create animation
 	this.button = new Button(this.bar);
@@ -37,25 +54,36 @@ function AnimationTab(parent, closeable, container, index)
 				alert("Added animation array");
 				object.animations = [];
 			}
+
+			self.obj = object;
 		}
 	});
 
 	//Update
-	this.update = new Button(this.bar);
-	this.update.position.set(100, 0);
-	this.update.size.set(100, 20);
-	this.update.setText("Update")
-	this.update.updateInterface();
-	this.update.setCallback(function()
+	this.updateButton = new Button(this.bar);
+	this.updateButton.position.set(100, 0);
+	this.updateButton.size.set(100, 20);
+	this.updateButton.setText("Update")
+	this.updateButton.updateInterface();
+	this.updateButton.setCallback(function()
 	{
-		//TODO <ADD CODE HERE>
-	});
+		if(self.obj !== null)
+		{
+			//self.clearTimeline();
 
-	//Dual division
-	/*this.dual = new DualDivisionResizable(this.element);
-	this.dual.tabPosition = 0.15;
-	this.dual.tabPositionMax = 0.4;
-	this.dual.tabPositionMin = 0.02;*/
+			var animations = self.obj.animations;
+
+			for(var i = 0; i < animations.length; i++)
+			{
+				var container = document.createElement("div");
+				container.style.backgroundColor = "#FF0000";
+				container.style.height = "20px";
+				container.style.width = "100px";
+				self.timeline.appendChild(container);
+
+			}
+		}
+	});
 
 	/*var mixer, clock;
 
@@ -83,6 +111,19 @@ function AnimationTab(parent, closeable, container, index)
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
 
+//Clean timeline
+AnimationTab.prototype.clearTimeline = function()
+{
+	this.element.removeChild(this.timeline);
+
+	this.timeline = document.createElement("div");
+	this.timeline.style.overflow = "auto";
+	this.timeline.style.position = "absolute";
+	this.timeline.style.top = "20px";
+	this.timeline.style.width = "100%";
+	this.element.appendChild(this.timeline);
+};
+
 //Update interface
 AnimationTab.prototype.updateInterface = function()
 {
@@ -94,9 +135,7 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
 
-		/*this.dual.size.set(this.size.x, this.size.y - 20);
-		this.dual.position.set(0, 20);
-		this.dual.updateInterface();*/
+		this.timeline.style.height = (this.size.y - 20) + "px";
 	}
 	else
 	{
