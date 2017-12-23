@@ -1,38 +1,31 @@
 "use strict";
 
-function TreeView(parent)
+function TreeView(parent, closeable, container, index)
 {	
-	Element.call(this, parent);
+	TabElement.call(this, parent, closeable, container, index, "Project Explorer", Editor.filePath + "icons/misc/about.png");
 
 	this.element.style.overflow = "auto";
 	this.element.style.cursor = "default";
 	this.element.style.top = "0px";
 	this.element.style.left = "0px";
 	this.element.style.width = "100%";
-	this.element.style.height = "100%";	
+	this.element.style.height = "100%";
 	this.element.style.backgroundColor = Editor.theme.panelColor;
-
-	//Label
-	this.label = new Text(this.element);
-	this.label.position.set(5, 10);
-	this.label.setText("Project Explorer");
-	this.label.setAlignment(Text.LEFT);
-	this.label.updateInterface();
 	
 	//Object
-	this.obj = null;
+	this.program = null;
 
 	//Childs
 	this.up = null;
 	this.children = [];
 }
 
-TreeView.prototype = Object.create(Element.prototype);
+TreeView.prototype = Object.create(TabElement.prototype);
 
 //Set data from object
-TreeView.prototype.attachObject = function(obj)
+TreeView.prototype.attachObject = function(program)
 {	
-	this.obj = obj;
+	this.program = program;
 };
 
 TreeView.prototype.updateView = function()
@@ -47,7 +40,7 @@ TreeView.prototype.updateView = function()
 	this.children = [];
 
 	//Add element and update interface
-	TreeView.addSceneElement(this, this.obj);
+	TreeView.addSceneElement(this, this.program);
 	this.updateChildPosition();
 };
 
@@ -104,7 +97,7 @@ TreeView.prototype.destroy = function()
 //Update tree view children positions
 TreeView.prototype.updateChildPosition = function()
 {
-	var size = TreeView.updateChildPosition(this, 20, 0, false);
+	var size = TreeView.updateChildPosition(this, 0, 0, false);
 
 	this.size.y = size;
 };
@@ -112,12 +105,11 @@ TreeView.prototype.updateChildPosition = function()
 //Update division Size
 TreeView.prototype.updateInterface = function()
 {
-	//Visibility
 	if(this.visible)
 	{
 		this.element.style.visibility = "visible";
 
-		//Update childs
+		//Update children
 		for(var i = 0; i < this.children.length; i++)
 		{
 			this.children[i].updateInterface();
