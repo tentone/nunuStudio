@@ -73,8 +73,20 @@ function AnimationTab(parent, closeable, container, index)
 
 			if(object.animations !== undefined)
 			{	
+				//VectorKeyframeTrack -> Vector3
+				//BooleanKeyframeTrack
+				//ColorKeyframeTrack
+				//NumberKeyframeTrack
+				//QuaternionKeyframeTrack
+				//StringKeyframeTrack
+
 				var clip = new THREE.AnimationClip("Animation", 3, []);
-				clip.tracks.push(new VectorKeyframeTrack(".position", [0, 1, 2], [0,0,0, 0,10,0, 0,0,0]));
+
+				var position = new VectorKeyframeTrack(".position", [0, 1, 2, 3], [0,0,0, 0,2,0, 2,1,2, 0,0,0]);
+				position.setInterpolation(THREE.InterpolateSmooth); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
+				clip.tracks.push(position);
+
+				clip.tracks.push(new VectorKeyframeTrack(".rotation", [0, 1, 2], [0,0,0, 0,1.57,0, 0,0,0]));
 				object.animations.push(clip);
 
 				alert("Added clip");
@@ -100,10 +112,17 @@ function AnimationTab(parent, closeable, container, index)
 			{
 				var container = document.createElement("div");
 				container.style.backgroundColor = "#FF0000";
-				container.style.height = "20px";
-				container.style.width = "100px";
 				self.timeline.appendChild(container);
 
+				var tracks = animations[i].tracks;
+				for(var j = 0; j < tracks.length; j++)
+				{
+					var key = document.createElement("div");
+					key.style.backgroundColor = MathUtils.randomColor();
+					key.style.height = "100%";
+					key.style.width = (self.scale * animations[i].duration) + "px";
+					container.appendChild(key);
+				}
 			}
 		}
 	});
@@ -115,7 +134,26 @@ function AnimationTab(parent, closeable, container, index)
 	this.play.updateInterface();
 	this.play.setCallback(function()
 	{
+		self.mixer = new AnimationMixer(self.obj);
 
+		var action = self.mixer.clipAction(self.obj.animations[0]);
+		action.setLoop(THREE.LoopPingPong); //LoopOnce || LoopRepeat || LoopPingPong
+		action.play(); 
+
+		var clock = new THREE.Clock();
+		clock.start();
+
+		var loop = function()
+		{
+			if(self.playing)
+			{
+				self.mixer.update(clock.getDelta());
+				requestAnimationFrame(loop);
+			}
+		};
+
+		self.playing = true;
+		loop();
 	});
 
 	this.stop = new Button(this.bar);
@@ -125,7 +163,11 @@ function AnimationTab(parent, closeable, container, index)
 	this.stop.updateInterface();
 	this.stop.setCallback(function()
 	{
-		
+		self.mixer.time = 0;
+		self.mixer.update(0);
+		self.mixer.stopAllAction();
+
+		self.playing = false;
 	});
 
 	/*var mixer, clock;
