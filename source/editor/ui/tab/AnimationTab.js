@@ -21,13 +21,8 @@ function AnimationTab(parent, closeable, container, index)
 	this.bar.style.height = "20px";
 	this.element.appendChild(this.bar);
 
-	//Timeline zone
-	this.timeline = document.createElement("div");
-	this.timeline.style.overflow = "auto";
-	this.timeline.style.position = "absolute";
-	this.timeline.style.top = "20px";
-	this.timeline.style.width = "100%";
-	this.element.appendChild(this.timeline);
+	//Timeline
+	this.createTimeline();
 
 	//Animation
 	this.animationButton = new Button(this.bar);
@@ -175,7 +170,7 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		if(Editor.selectedObjects.length > 0 && Editor.selectedObjects[0].animations !== undefined)
 		{
-			self.clearTimeline();
+			self.createTimeline();
 
 			var object = Editor.selectedObjects[0];
 			var animations = object.animations;
@@ -187,7 +182,7 @@ function AnimationTab(parent, closeable, container, index)
 				var animation = document.createElement("div");
 				animation.style.width = (self.zoom * animations[i].duration) + "px";
 				animation.style.height = (self.timelineHeight * tracks.length) + "px";
-				self.timeline.appendChild(animation);
+				self.animation.appendChild(animation);
 
 				for(var j = 0; j < tracks.length; j++)
 				{
@@ -218,30 +213,49 @@ function AnimationTab(parent, closeable, container, index)
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
 
-//Clean timeline
-AnimationTab.prototype.clearTimeline = function()
+AnimationTab.prototype.update = function()
+{	
+	if(this.mixer !== null)
+	{
+		this.seek.style.left = (this.mixer._actions[0].time * this.zoom) + "px";
+	}
+};
+
+//Create timeline
+AnimationTab.prototype.createTimeline = function()
 {
-	this.element.removeChild(this.timeline);
+	if(this.timeline !== undefined)
+	{
+		this.timeline.removeChild(this.animation);
+	}
+	else
+	{
+		this.timeline = document.createElement("div");
+		this.timeline.style.overflow = "visible";
+		this.timeline.style.position = "absolute";
+		this.timeline.style.top = "20px";
+		this.timeline.style.width = "100%";
+		this.element.appendChild(this.timeline);
+	
+		this.seek = document.createElement("div");
+		this.seek.style.backgroundColor = "#FFFFFF";
+		this.seek.style.zIndex = "100";
+		this.seek.style.width = "3px";
+		this.seek.style.height = "100%";
+		this.seek.style.overflow = "hidden";
+		this.seek.style.top = "0px";
+		this.seek.style.left = "0px";
+		this.seek.style.position = "absolute";
+		this.seek.style.cursor = "e-resize";
+		this.timeline.appendChild(this.seek);
+	}
 
-	this.timeline = document.createElement("div");
-	this.timeline.style.overflow = "auto";
-	this.timeline.style.position = "absolute";
-	this.timeline.style.top = "20px";
-	this.timeline.style.width = "100%";
-	this.element.appendChild(this.timeline);
-
-	this.seek = document.createElement("div");
-	this.seek.style.backgroundColor = "#FFFFFF";
-	this.seek.style.zIndex = "100";
-	this.seek.style.width = "3px";
-	this.seek.style.height = "100%";
-	this.seek.style.overflow = "hidden";
-	this.seek.style.top = "0px";
-	this.seek.style.left = "40px";
-	this.seek.style.position = "absolute";
-	this.seek.style.cursor = "e-resize";
-
-	this.timeline.appendChild(this.seek);
+	this.animation = document.createElement("div");
+	this.animation.style.overflow = "auto";
+	this.animation.style.position = "absolute";
+	this.animation.style.height = "100%";
+	this.animation.style.width = "100%";
+	this.timeline.appendChild(this.animation);
 };
 
 //Update interface
