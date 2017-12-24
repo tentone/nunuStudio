@@ -114,7 +114,6 @@ function AnimationTab(parent, closeable, container, index)
 		if(Editor.selectedObjects.length > 0)
 		{
 			var object = Editor.selectedObjects[0];
-			console.log(object);
 			self.mixer = new THREE.AnimationMixer(object);
 
 			for(var i = 0; i < object.animations.length; i++)
