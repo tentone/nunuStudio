@@ -1503,7 +1503,7 @@ SceneEditor.prototype.selectObjectHelper = function()
 		//Particle
 		else if(object instanceof ParticleEmitter)
 		{
-			this.objectHelper.add(new ParticleEmitterHelper(object));
+			//this.objectHelper.add(new ParticleEmitterHelper(object));
 			this.objectHelper.add(new ObjectIconHelper(object, ObjectIcons.get(object.type)));
 		}
 		//Physics

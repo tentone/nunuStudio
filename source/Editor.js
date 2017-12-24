@@ -153,7 +153,10 @@ include("core/utils/binary/Base64Utils.js");
 include("core/utils/binary/ArraybufferUtils.js");
 include("core/utils/binary/BufferUtils.js");
 
+include("core/utils/Timer.js");
+include("core/utils/AnimationTimer.js");
 include("core/utils/EventManager.js");
+
 include("core/utils/MathUtils.js");
 include("core/utils/ObjectUtils.js");
 include("core/utils/Mesh2shape.js");
