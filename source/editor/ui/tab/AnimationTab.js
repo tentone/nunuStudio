@@ -56,6 +56,7 @@ function AnimationTab(parent, closeable, container, index)
 		}
 	});
 
+	//Create clip
 	this.clipButton = new Button(this.bar);
 	this.clipButton.position.set(100, 0);
 	this.clipButton.size.set(100, 20);
@@ -228,6 +229,19 @@ AnimationTab.prototype.clearTimeline = function()
 	this.timeline.style.top = "20px";
 	this.timeline.style.width = "100%";
 	this.element.appendChild(this.timeline);
+
+	this.seek = document.createElement("div");
+	this.seek.style.backgroundColor = "#FFFFFF";
+	this.seek.style.zIndex = "100";
+	this.seek.style.width = "3px";
+	this.seek.style.height = "100%";
+	this.seek.style.overflow = "hidden";
+	this.seek.style.top = "0px";
+	this.seek.style.left = "40px";
+	this.seek.style.position = "absolute";
+	this.seek.style.cursor = "e-resize";
+
+	this.timeline.appendChild(this.seek);
 };
 
 //Update interface
