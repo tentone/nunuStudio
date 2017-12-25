@@ -22,7 +22,24 @@ function AnimationTab(parent, closeable, container, index)
 	this.element.appendChild(this.bar);
 
 	//Timeline
-	this.createTimeline();
+	this.timeline = document.createElement("div");
+	this.timeline.style.overflow = "visible";
+	this.timeline.style.position = "absolute";
+	this.timeline.style.top = "20px";
+	this.timeline.style.width = "100%";
+	this.element.appendChild(this.timeline);
+
+	this.seek = document.createElement("div");
+	this.seek.style.backgroundColor = "#FFFFFF";
+	this.seek.style.zIndex = "100";
+	this.seek.style.width = "3px";
+	this.seek.style.height = "100%";
+	this.seek.style.overflow = "hidden";
+	this.seek.style.top = "0px";
+	this.seek.style.left = "0px";
+	this.seek.style.position = "absolute";
+	this.seek.style.cursor = "e-resize";
+	this.timeline.appendChild(this.seek);
 
 	//Animation
 	this.animationButton = new Button(this.bar);
@@ -35,67 +52,45 @@ function AnimationTab(parent, closeable, container, index)
 		if(Editor.selectedObjects.length > 0)
 		{
 			var object = Editor.selectedObjects[0];
+			self.obj = object;
 
 			if(object.animations !== undefined)
 			{
 				console.log(object.animations);
 				alert("This object is already animated");
+				return;
 			}
 			else
 			{
-				alert("Added animation array");
 				object.animations = [];
 			}
 
-			self.obj = object;
+			//VectorKeyframeTrack
+			//BooleanKeyframeTrack
+			//ColorKeyframeTrack
+			//NumberKeyframeTrack
+			//QuaternionKeyframeTrack
+			//StringKeyframeTrack
+
+			var clip = new THREE.AnimationClip("Animation", 5, []);
+
+			var position = new VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
+			position.setInterpolation(THREE.InterpolateSmooth); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
+			clip.tracks.push(position);
+
+			var scale = new VectorKeyframeTrack(".scale", [0, 1, 2, 3], [1,1,1, 2,2,2, 0.5,0.5,0.5, 1,1,1]);
+			scale.setInterpolation(THREE.InterpolateLinear); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
+			clip.tracks.push(scale);
+
+			object.animations.push(clip);
 		}
-	});
 
-	//Create clip
-	this.clipButton = new Button(this.bar);
-	this.clipButton.position.set(100, 0);
-	this.clipButton.size.set(100, 20);
-	this.clipButton.setText("Create Clip")
-	this.clipButton.updateInterface();
-	this.clipButton.setCallback(function()
-	{
-		if(Editor.selectedObjects.length > 0)
-		{
-			var object = Editor.selectedObjects[0];
-
-			if(object.animations !== undefined)
-			{
-				//VectorKeyframeTrack
-				//BooleanKeyframeTrack
-				//ColorKeyframeTrack
-				//NumberKeyframeTrack
-				//QuaternionKeyframeTrack
-				//StringKeyframeTrack
-
-				var clip = new THREE.AnimationClip("Animation", 5, []);
-
-				var position = new VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
-				position.setInterpolation(THREE.InterpolateSmooth); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
-				clip.tracks.push(position);
-
-				var scale = new VectorKeyframeTrack(".scale", [0, 1, 2, 3], [1,1,1, 2,2,2, 0.5,0.5,0.5, 1,1,1]);
-				scale.setInterpolation(THREE.InterpolateLinear); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
-				clip.tracks.push(scale);
-
-				object.animations.push(clip);
-
-				alert("Added clip");
-			}
-		}
-		else
-		{
-			alert("Object not found!");
-		}
+		update();
 	});
 
 	//Update
 	this.updateButton = new Button(this.bar);
-	this.updateButton.position.set(200, 0);
+	this.updateButton.position.set(100, 0);
 	this.updateButton.size.set(100, 20);
 	this.updateButton.setText("Update")
 	this.updateButton.updateInterface();
@@ -105,7 +100,7 @@ function AnimationTab(parent, closeable, container, index)
 	});
 
 	this.play = new Button(this.bar);
-	this.play.position.set(300, 0);
+	this.play.position.set(200, 0);
 	this.play.size.set(100, 20);
 	this.play.setText("Play")
 	this.play.updateInterface();
@@ -143,7 +138,7 @@ function AnimationTab(parent, closeable, container, index)
 	});
 
 	this.stop = new Button(this.bar);
-	this.stop.position.set(400, 0);
+	this.stop.position.set(300, 0);
 	this.stop.size.set(100, 20);
 	this.stop.setText("Stop")
 	this.stop.updateInterface();
@@ -169,7 +164,7 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		if(Editor.selectedObjects.length > 0 && Editor.selectedObjects[0].animations !== undefined)
 		{
-			self.createTimeline();
+			self.clearTimeline();
 
 			var object = Editor.selectedObjects[0];
 			var animations = object.animations;
@@ -205,6 +200,25 @@ function AnimationTab(parent, closeable, container, index)
 				}
 			}
 
+			//Update timescale
+			self.timescale.width = self.zoom * animations[0].duration;
+			self.timescale.height = self.size.y - 20;
+			self.timescale.style.width = self.timescale.width + "px";
+			self.timescale.style.height = self.timescale.height + "px";
+
+			var context = self.timescale.getContext("2d");
+			context.fillStyle = "#444444";
+
+			for(var i = self.zoom; i < self.timescale.width; i += self.zoom)
+			{
+				context.fillRect(i - 1, 0, 3, self.timescale.height);
+			}
+
+			for(var i = 0; i < self.timescale.width; i += self.zoom / 5)
+			{
+				context.fillRect(i, 0, 1, self.timescale.height);
+			}
+
 			self.updateInterface();
 		}
 	};
@@ -221,32 +235,11 @@ AnimationTab.prototype.update = function()
 };
 
 //Create timeline
-AnimationTab.prototype.createTimeline = function()
+AnimationTab.prototype.clearTimeline = function()
 {
-	if(this.timeline !== undefined)
+	if(this.animation !== undefined)
 	{
 		this.timeline.removeChild(this.animation);
-	}
-	else
-	{
-		this.timeline = document.createElement("div");
-		this.timeline.style.overflow = "visible";
-		this.timeline.style.position = "absolute";
-		this.timeline.style.top = "20px";
-		this.timeline.style.width = "100%";
-		this.element.appendChild(this.timeline);
-	
-		this.seek = document.createElement("div");
-		this.seek.style.backgroundColor = "#FFFFFF";
-		this.seek.style.zIndex = "100";
-		this.seek.style.width = "3px";
-		this.seek.style.height = "100%";
-		this.seek.style.overflow = "hidden";
-		this.seek.style.top = "0px";
-		this.seek.style.left = "0px";
-		this.seek.style.position = "absolute";
-		this.seek.style.cursor = "e-resize";
-		this.timeline.appendChild(this.seek);
 	}
 
 	this.animation = document.createElement("div");
@@ -255,6 +248,10 @@ AnimationTab.prototype.createTimeline = function()
 	this.animation.style.height = "100%";
 	this.animation.style.width = "100%";
 	this.timeline.appendChild(this.animation);
+
+	this.timescale = document.createElement("canvas");
+	this.timescale.style.position = "absolute";
+	this.animation.appendChild(this.timescale);
 };
 
 //Update interface
