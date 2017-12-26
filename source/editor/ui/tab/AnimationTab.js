@@ -41,6 +41,11 @@ function AnimationTab(parent, closeable, container, index)
 	this.seek.style.cursor = "e-resize";
 	this.timeline.appendChild(this.seek);
 
+	this.seek.onmousedown = function()
+	{
+		console.log("Mouse move!");
+	};
+
 	//Animation
 	this.animationButton = new Button(this.bar);
 	this.animationButton.position.set(0, 0);
@@ -144,7 +149,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.stop = new Button(this.bar);
 	this.stop.position.set(300, 0);
 	this.stop.size.set(100, 20);
-	this.stop.setText("Stop")
+	this.stop.setText("Stop");
 	this.stop.updateInterface();
 	this.stop.setCallback(function()
 	{
@@ -155,8 +160,22 @@ function AnimationTab(parent, closeable, container, index)
 		}
 	});
 
+	this.pause = new Button(this.bar);
+	this.pause.position.set(400, 0);
+	this.pause.size.set(100, 20);
+	this.pause.setText("Pause");
+	this.pause.updateInterface();
+	this.pause.setCallback(function()
+	{
+		if(self.mixer !== null)
+		{
+			self.mixer.stopAllAction();
+			self.mixer = null;
+		}
+	});
+
 	this.zoomSlider = new Slider(this.bar);
-	this.zoomSlider.size.set(100, 20);
+	this.zoomSlider.size.set(100, 15);
 	this.zoomSlider.position.set(500, 0);
 	this.zoomSlider.setStep(10);
 	this.zoomSlider.setRange(50, 1000);
@@ -166,6 +185,7 @@ function AnimationTab(parent, closeable, container, index)
 		self.zoom = self.zoomSlider.getValue();
 		update();
 	});
+	this.zoomSlider.setValue(this.zoom);
 
 	function update()
 	{
@@ -185,7 +205,7 @@ function AnimationTab(parent, closeable, container, index)
 			self.animation.style.display = "table-cell";
 			self.timeline.appendChild(self.animation);
 
-			var info = document.createElement("div");
+			/*var info = document.createElement("div");
 			info.style.position = "absolute";
 			info.style.width = "50px";
 			info.style.height = "100%";
@@ -207,9 +227,8 @@ function AnimationTab(parent, closeable, container, index)
 			tracks.style.width = "300px";
 			tracks.style.height = "100%";
 			tracks.style.backgroundColor = "#0000FF";
-			self.animation.appendChild(tracks);
+			self.animation.appendChild(tracks);*/
 
-			/*
 			var object = Editor.selectedObjects[0];
 			var animations = object.animations;			
 			var trackCount = 0, duration = 0;
@@ -220,13 +239,16 @@ function AnimationTab(parent, closeable, container, index)
 
 				var animation = document.createElement("div");
 				animation.style.height = (self.timelineHeight * (tracks.length + 1)) + "px";
-				animation.style.width = (self.zoom * animations[i].duration + 50) + "px";
+				animation.style.width = "100%";
+				animation.style.zIndex = 10;
 				self.animation.appendChild(animation);
 
-				var animationName = document.createElement("div");
-				animationName.style.height = self.timelineHeight + "px";
-				animationName.innerHTML = animations[i].name;
-				animation.appendChild(animationName);
+				var name = document.createElement("div");
+				name.style.height = self.timelineHeight + "px";
+				name.style.width = "100%";
+				name.style.backgroundColor = "#222222";
+				name.innerHTML = animations[i].name;
+				animation.appendChild(name);
 
 				for(var j = 0; j < tracks.length; j++)
 				{
@@ -305,8 +327,6 @@ function AnimationTab(parent, closeable, container, index)
 			}
 
 			self.updateInterface();
-
-			*/
 		}
 	};
 }
