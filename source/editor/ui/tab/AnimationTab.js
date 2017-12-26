@@ -6,11 +6,10 @@ function AnimationTab(parent, closeable, container, index)
 
 	var self = this;
 
-	this.obj = null;
 	this.mixer = null;
 
-	this.zoom = 50.0; //Pixels/sec
-	this.timelineHeight = 20;
+	this.zoom = 120.0; //Pixels/sec
+	this.timelineHeight = 30; //Pixels
 
 	//Bar
 	this.bar = document.createElement("div");
@@ -52,7 +51,6 @@ function AnimationTab(parent, closeable, container, index)
 		if(Editor.selectedObjects.length > 0)
 		{
 			var object = Editor.selectedObjects[0];
-			self.obj = object;
 
 			if(object.animations !== undefined)
 			{
@@ -106,7 +104,13 @@ function AnimationTab(parent, closeable, container, index)
 	this.play.updateInterface();
 	this.play.setCallback(function()
 	{
-		if(Editor.selectedObjects.length > 0)
+		if(self.mixer === null)
+		{
+			alert("Already playing!");
+			return;
+		}
+
+		if(Editor.selectedObjects.length > 0 && Editor.selectedObjects[0].animations !== undefined)
 		{
 			var object = Editor.selectedObjects[0];
 			self.mixer = new THREE.AnimationMixer(object);
@@ -144,8 +148,11 @@ function AnimationTab(parent, closeable, container, index)
 	this.stop.updateInterface();
 	this.stop.setCallback(function()
 	{
-		self.mixer.stopAllAction();
-		self.mixer = null;
+		if(self.mixer !== null)
+		{
+			self.mixer.stopAllAction();
+			self.mixer = null;
+		}
 	});
 
 	this.zoomSlider = new Slider(this.bar);
@@ -200,8 +207,17 @@ function AnimationTab(parent, closeable, container, index)
 				}
 			}
 
+			var duration = 0;
+			for(var i = 0; i < animations.length; i++)
+			{
+				if(animations[i].duration > duration)
+				{
+					duration = animations[i].duration;
+				}
+			}
+
 			//Update timescale
-			self.timescale.width = self.zoom * animations[0].duration;
+			self.timescale.width = self.zoom * duration;
 			self.timescale.height = self.size.y - 20;
 			self.timescale.style.width = self.timescale.width + "px";
 			self.timescale.style.height = self.timescale.height + "px";
@@ -209,14 +225,26 @@ function AnimationTab(parent, closeable, container, index)
 			var context = self.timescale.getContext("2d");
 			context.fillStyle = "#444444";
 
-			for(var i = self.zoom; i < self.timescale.width; i += self.zoom)
+			var height = self.timescale.height;
+			var width = self.timescale.width;
+
+			//Horizontal lines
+			for(var i = 0; i <= height; i += self.timelineHeight)
 			{
-				context.fillRect(i - 1, 0, 3, self.timescale.height);
+				context.fillRect(0, i, width, 1);
 			}
 
-			for(var i = 0; i < self.timescale.width; i += self.zoom / 5)
+			//Vertical lines
+			for(var i = 0; i <= width; i += self.zoom)
 			{
-				context.fillRect(i, 0, 1, self.timescale.height);
+				context.fillRect(i - 1, 0, 3, height);
+			}
+
+			var step = self.zoom / 5;
+
+			for(var i = 0; i < width; i += step)
+			{
+				context.fillRect(i, 0, 1, height);
 			}
 
 			self.updateInterface();
@@ -230,7 +258,7 @@ AnimationTab.prototype.update = function()
 {	
 	if(this.mixer !== null)
 	{
-		this.seek.style.left = (this.mixer._actions[0].time * this.zoom) + "px";
+		this.seek.style.left = (this.mixer.time * this.zoom) + "px"; //mixer._actions[0].time
 	}
 };
 
