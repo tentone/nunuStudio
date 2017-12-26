@@ -54,7 +54,6 @@ function AnimationTab(parent, closeable, container, index)
 
 			if(object.animations !== undefined)
 			{
-				console.log(object.animations);
 				alert("This object is already animated");
 				return;
 			}
@@ -104,7 +103,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.play.updateInterface();
 	this.play.setCallback(function()
 	{
-		if(self.mixer === null)
+		if(self.mixer !== null)
 		{
 			alert("Already playing!");
 			return;
@@ -175,6 +174,7 @@ function AnimationTab(parent, closeable, container, index)
 
 			var object = Editor.selectedObjects[0];
 			var animations = object.animations;
+			var trackCount = 0;
 
 			for(var i = 0; i < animations.length; i++)
 			{
@@ -189,21 +189,37 @@ function AnimationTab(parent, closeable, container, index)
 				{
 					var times = tracks[j].times;
 
+					/*var info = document.createElement("div");
+					info.style.height = self.timelineHeight + "px";
+					info.style.width = "50px";
+					animation.appendChild(info);
+
+					var name = new Text(info);
+					name.setText(tracks[j].name);
+					name.setAlignment(Text.LEFT);
+					name.element.style.height = "100%";
+					name.element.style.width = "100%";*/
+
 					var track = document.createElement("div");
 					track.style.height = self.timelineHeight + "px";
 					track.style.width = (self.zoom * (times[times.length - 1] - times[0])) + "px";
 					animation.appendChild(track);
 
+					var color = MathUtils.randomColor();
+
 					for(var k = 0; k < times.length - 1; k++)
 					{
 						var key = document.createElement("div");
 						key.style.position = "absolute";
-						key.style.backgroundColor = MathUtils.randomColor();
+						key.style.cursor = "pointer";
+						key.style.backgroundColor = color;
 						key.style.height = self.timelineHeight + "px";
-						key.style.left = (self.zoom * times[k]) + "px";
-						key.style.width = (self.zoom * (times[k + 1] - times[k])) + "px";
+						key.style.left = (self.zoom * times[k] - 2) + "px";
+						key.style.width = "4px";
 						track.appendChild(key);
 					}
+
+					trackCount++;
 				}
 			}
 
@@ -218,15 +234,15 @@ function AnimationTab(parent, closeable, container, index)
 
 			//Update timescale
 			self.timescale.width = self.zoom * duration;
-			self.timescale.height = self.size.y - 20;
+			self.timescale.height = self.timelineHeight * trackCount;
 			self.timescale.style.width = self.timescale.width + "px";
 			self.timescale.style.height = self.timescale.height + "px";
 
-			var context = self.timescale.getContext("2d");
-			context.fillStyle = "#444444";
-
 			var height = self.timescale.height;
 			var width = self.timescale.width;
+
+			var context = self.timescale.getContext("2d");
+			context.fillStyle = "#444444";
 
 			//Horizontal lines
 			for(var i = 0; i <= height; i += self.timelineHeight)
@@ -258,7 +274,14 @@ AnimationTab.prototype.update = function()
 {	
 	if(this.mixer !== null)
 	{
-		this.seek.style.left = (this.mixer.time * this.zoom) + "px"; //mixer._actions[0].time
+		if(this.mixer._actions.length > 0)
+		{
+			this.seek.style.left = (this.mixer._actions[0].time * this.zoom) + "px";
+		}
+		else
+		{
+			this.seek.style.left = (this.mixer.time * this.zoom) + "px";
+		}
 	}
 };
 
