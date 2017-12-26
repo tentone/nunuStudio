@@ -22,12 +22,13 @@ function AnimationTab(parent, closeable, container, index)
 
 	//Timeline
 	this.timeline = document.createElement("div");
-	this.timeline.style.overflow = "visible";
+	this.timeline.style.overflow = "auto";
 	this.timeline.style.position = "absolute";
 	this.timeline.style.top = "20px";
 	this.timeline.style.width = "100%";
 	this.element.appendChild(this.timeline);
 
+	//Seekbar
 	this.seek = document.createElement("div");
 	this.seek.style.backgroundColor = "#FFFFFF";
 	this.seek.style.zIndex = "100";
@@ -169,36 +170,67 @@ function AnimationTab(parent, closeable, container, index)
 	function update()
 	{
 		if(Editor.selectedObjects.length > 0 && Editor.selectedObjects[0].animations !== undefined)
-		{
-			self.clearTimeline();
+		{	
+			//Clean animation division
+			if(self.animation !== undefined)
+			{
+				self.timeline.removeChild(self.animation);
+			}
 
+			self.animation = document.createElement("div");
+			self.animation.style.overflow = "visible";
+			self.animation.style.position = "absolute";
+			self.animation.style.width = "100%";
+			self.animation.style.height = "100%";
+			self.animation.style.display = "table-cell";
+			self.timeline.appendChild(self.animation);
+
+			var info = document.createElement("div");
+			info.style.position = "absolute";
+			info.style.width = "50px";
+			info.style.height = "100%";
+			info.style.backgroundColor = "#FF0000";
+			self.animation.appendChild(info);
+
+			var tab = document.createElement("div");
+			tab.style.position = "absolute";
+ 			tab.style.left = "50px";
+ 			tab.style.width = "3px";
+			tab.style.height = "100%";
+			tab.style.backgroundColor = "#00FF00";
+			tab.style.cursor = "e-resize";
+			self.animation.appendChild(tab);
+
+			var tracks = document.createElement("div");
+			tracks.style.position = "absolute";
+			tracks.style.left = "53px";
+			tracks.style.width = "300px";
+			tracks.style.height = "100%";
+			tracks.style.backgroundColor = "#0000FF";
+			self.animation.appendChild(tracks);
+
+			/*
 			var object = Editor.selectedObjects[0];
-			var animations = object.animations;
-			var trackCount = 0;
+			var animations = object.animations;			
+			var trackCount = 0, duration = 0;
 
 			for(var i = 0; i < animations.length; i++)
 			{
 				var tracks = animations[i].tracks;
 
 				var animation = document.createElement("div");
-				animation.style.width = (self.zoom * animations[i].duration) + "px";
-				animation.style.height = (self.timelineHeight * tracks.length) + "px";
+				animation.style.height = (self.timelineHeight * (tracks.length + 1)) + "px";
+				animation.style.width = (self.zoom * animations[i].duration + 50) + "px";
 				self.animation.appendChild(animation);
+
+				var animationName = document.createElement("div");
+				animationName.style.height = self.timelineHeight + "px";
+				animationName.innerHTML = animations[i].name;
+				animation.appendChild(animationName);
 
 				for(var j = 0; j < tracks.length; j++)
 				{
 					var times = tracks[j].times;
-
-					/*var info = document.createElement("div");
-					info.style.height = self.timelineHeight + "px";
-					info.style.width = "50px";
-					animation.appendChild(info);
-
-					var name = new Text(info);
-					name.setText(tracks[j].name);
-					name.setAlignment(Text.LEFT);
-					name.element.style.height = "100%";
-					name.element.style.width = "100%";*/
 
 					var track = document.createElement("div");
 					track.style.height = self.timelineHeight + "px";
@@ -213,35 +245,46 @@ function AnimationTab(parent, closeable, container, index)
 						key.style.position = "absolute";
 						key.style.cursor = "pointer";
 						key.style.backgroundColor = color;
+						key.style.width = "3px";
 						key.style.height = self.timelineHeight + "px";
-						key.style.left = (self.zoom * times[k] - 2) + "px";
-						key.style.width = "4px";
+						key.style.left = (self.zoom * times[k] - 1) + "px";
 						track.appendChild(key);
 					}
 
 					trackCount++;
 				}
-			}
 
-			var duration = 0;
-			for(var i = 0; i < animations.length; i++)
-			{
 				if(animations[i].duration > duration)
 				{
 					duration = animations[i].duration;
 				}
 			}
 
+			var timescale = document.createElement("canvas");
+			timescale.style.position = "absolute";
+			timescale.style.top = "0px";
+			timescale.style.left = "0px";
+			self.animation.insertAdjacentElement("afterbegin", timescale);
+
 			//Update timescale
-			self.timescale.width = self.zoom * duration;
-			self.timescale.height = self.timelineHeight * trackCount;
-			self.timescale.style.width = self.timescale.width + "px";
-			self.timescale.style.height = self.timescale.height + "px";
+			var width = self.zoom * duration;
+			if(width < self.size.x)
+			{
+				width = self.size.x;
+			}
 
-			var height = self.timescale.height;
-			var width = self.timescale.width;
+			var height = self.timelineHeight * trackCount;
+			if(height < self.size.y)
+			{
+				height = self.size.y;
+			}
 
-			var context = self.timescale.getContext("2d");
+			timescale.width = width;
+			timescale.height = height;
+			timescale.style.width = width + "px";
+			timescale.style.height = height + "px";
+
+			var context = timescale.getContext("2d");
 			context.fillStyle = "#444444";
 
 			//Horizontal lines
@@ -256,14 +299,14 @@ function AnimationTab(parent, closeable, container, index)
 				context.fillRect(i - 1, 0, 3, height);
 			}
 
-			var step = self.zoom / 5;
-
-			for(var i = 0; i < width; i += step)
+			for(var i = 0, step = self.zoom / 5; i <= width; i += step)
 			{
 				context.fillRect(i, 0, 1, height);
 			}
 
 			self.updateInterface();
+
+			*/
 		}
 	};
 }
@@ -283,26 +326,6 @@ AnimationTab.prototype.update = function()
 			this.seek.style.left = (this.mixer.time * this.zoom) + "px";
 		}
 	}
-};
-
-//Create timeline
-AnimationTab.prototype.clearTimeline = function()
-{
-	if(this.animation !== undefined)
-	{
-		this.timeline.removeChild(this.animation);
-	}
-
-	this.animation = document.createElement("div");
-	this.animation.style.overflow = "auto";
-	this.animation.style.position = "absolute";
-	this.animation.style.height = "100%";
-	this.animation.style.width = "100%";
-	this.timeline.appendChild(this.animation);
-
-	this.timescale = document.createElement("canvas");
-	this.timescale.style.position = "absolute";
-	this.animation.appendChild(this.timescale);
 };
 
 //Update interface
