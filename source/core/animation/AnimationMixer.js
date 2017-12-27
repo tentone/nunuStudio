@@ -1,6 +1,15 @@
 "use strict";
 
-THREE.AnimationMixer.prototype.setTime = function(time)
+function AnimationMixer(root)
+{
+	THREE.AnimationMixer.call(this, root);
+
+	this.playing = true;
+}
+
+AnimationMixer.prototype = Object.create(THREE.AnimationMixer.prototype);
+
+AnimationMixer.prototype.setTime = function(time)
 {
 	this.time = time;
 
@@ -9,11 +18,41 @@ THREE.AnimationMixer.prototype.setTime = function(time)
 		this._actions[i].time = time;
 	}
 
-	this.update(0);
+	THREE.AnimationMixer.prototype.update.call(this, 0);
 };
 
-THREE.AnimationMixer.prototype.pause = function()
+AnimationMixer.prototype.play = function()
 {
+	this.playing = true;
+};
+
+AnimationMixer.prototype.stop = function()
+{
+	this.setTime(0);
+
+	if(this.playing)
+	{
+		this.playing = false;
+	}
+};
+
+AnimationMixer.prototype.pause = function()
+{
+	this.playing = false;
+};
+
+AnimationMixer.prototype.dispose = function()
+{
+	this.stopAllAction();
 	//TODO <ADD CODE HERE>
+};
+
+AnimationMixer.prototype.update = function(delta)
+{
+	if(this.playing)
+	{
+		THREE.AnimationMixer.prototype.update.call(this, delta);	
+	}
+
 };
 
