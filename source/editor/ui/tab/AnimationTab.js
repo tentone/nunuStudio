@@ -32,7 +32,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.seek = document.createElement("div");
 	this.seek.style.backgroundColor = "#FFFFFF";
 	this.seek.style.zIndex = "100";
-	this.seek.style.width = "50px";
+	this.seek.style.width = "3px";
 	this.seek.style.height = "100%";
 	this.seek.style.overflow = "hidden";
 	this.seek.style.top = "0px";
@@ -63,12 +63,10 @@ function AnimationTab(parent, closeable, container, index)
 			self.mixer.setTime(self.seekInitialTime + (event.clientX - self.mouse.x) / self.zoom);
 		}
 	});
-
 	this.manager.add(window, "mouseup", function(event)
 	{
 		self.seeking = false;
 	});
-	
 	this.manager.create();
 
 	//Animation
