@@ -136,14 +136,14 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		if(self.mixer !== null)
 		{
-			alert("Already playing!");
+			self.mixer.play();
 			return;
 		}
 
 		if(Editor.selectedObjects.length > 0 && Editor.selectedObjects[0].animations !== undefined)
 		{
 			var object = Editor.selectedObjects[0];
-			self.mixer = new THREE.AnimationMixer(object);
+			self.mixer = new AnimationMixer(object);
 
 			for(var i = 0; i < object.animations.length; i++)
 			{
@@ -185,9 +185,9 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		if(self.mixer !== null)
 		{
-			self.mixer.setTime(0);
-			self.mixer.stopAllAction();
-			self.mixer = null;
+			self.mixer.stop();
+			//self.mixer.stopAllAction();
+			//self.mixer = null;
 		}
 	});
 
@@ -198,7 +198,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.pause.updateInterface();
 	this.pause.setCallback(function()
 	{
-		//console.log(self.mixer);
+		self.mixer.pause();
 	});
 
 	this.zoomSlider = new Slider(this.bar);
