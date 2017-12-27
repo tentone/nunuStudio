@@ -32,7 +32,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.seek = document.createElement("div");
 	this.seek.style.backgroundColor = "#FFFFFF";
 	this.seek.style.zIndex = "100";
-	this.seek.style.width = "5px";
+	this.seek.style.width = "50px";
 	this.seek.style.height = "100%";
 	this.seek.style.overflow = "hidden";
 	this.seek.style.top = "0px";
@@ -50,20 +50,17 @@ function AnimationTab(parent, closeable, container, index)
 		if(self.mixer !== null)
 		{
 			self.seeking = true;
-			self.seekInitialTime = self.mixer.time;
-			self.mouse.set(event.pageX, event.pageY);
+			self.seekInitialTime = self.mixer._actions[0].time;
+			self.mouse.set(event.clientX, event.clientY);
 		}
 	};
 
 	this.manager = new EventManager();
 	this.manager.add(window, "mousemove", function(event)
-	{	
-		var time = self.seekInitialTime + (event.pageX - self.mouse.x) / self.zoom;
-		console.log("Change time to " + time);
-
+	{
 		if(self.seeking)
 		{
-			self.mixer.setTime(self.seekInitialTime + (event.pageX - self.mouse.x) / self.zoom);
+			self.mixer.setTime(self.seekInitialTime + (event.clientX - self.mouse.x) / self.zoom);
 		}
 	});
 
@@ -152,7 +149,9 @@ function AnimationTab(parent, closeable, container, index)
 			{
 				var action = self.mixer.clipAction(object.animations[i]);
 				action.setLoop(THREE.LoopRepeat); //LoopOnce || LoopRepeat || LoopPingPong
-				action.play(); 
+				action.play();
+
+				console.log(action);
 			}
 
 			var clock = new THREE.Clock();
@@ -367,11 +366,11 @@ AnimationTab.prototype.update = function()
 	{
 		if(this.mixer._actions.length === 1)
 		{
-			this.seek.style.left = (this.mixer._actions[0].time * this.zoom - 2) + "px";
+			this.seek.style.left = (this.mixer._actions[0].time * this.zoom - 1) + "px";
 		}
 		else
 		{
-			this.seek.style.left = (this.mixer.time * this.zoom - 2) + "px";
+			this.seek.style.left = (this.mixer.time * this.zoom - 1) + "px";
 		}
 	}
 };
