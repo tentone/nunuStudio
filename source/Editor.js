@@ -57,6 +57,7 @@ include("lib/PSON.min.js");
 include("core/Global.js");
 include("core/FileSystem.js");
 
+include("core/three/animation/AnimationMixer.js");
 include("core/three/core/Object3D.js");
 include("core/three/core/BufferGeometry.js");
 include("core/three/cameras/Camera.js");

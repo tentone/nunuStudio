@@ -32,7 +32,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.seek = document.createElement("div");
 	this.seek.style.backgroundColor = "#FFFFFF";
 	this.seek.style.zIndex = "100";
-	this.seek.style.width = "3px";
+	this.seek.style.width = "5px";
 	this.seek.style.height = "100%";
 	this.seek.style.overflow = "hidden";
 	this.seek.style.top = "0px";
@@ -41,10 +41,38 @@ function AnimationTab(parent, closeable, container, index)
 	this.seek.style.cursor = "e-resize";
 	this.timeline.appendChild(this.seek);
 
-	this.seek.onmousedown = function()
+	this.seeking = false;
+	this.seekInitialTime = 0;
+	this.mouse = new THREE.Vector2();
+
+	this.seek.onmousedown = function(event)
 	{
-		console.log("Mouse move!");
+		if(self.mixer !== null)
+		{
+			self.seeking = true;
+			self.seekInitialTime = self.mixer.time;
+			self.mouse.set(event.pageX, event.pageY);
+		}
 	};
+
+	this.manager = new EventManager();
+	this.manager.add(window, "mousemove", function(event)
+	{	
+		var time = self.seekInitialTime + (event.pageX - self.mouse.x) / self.zoom;
+		console.log("Change time to " + time);
+
+		if(self.seeking)
+		{
+			self.mixer.setTime(self.seekInitialTime + (event.pageX - self.mouse.x) / self.zoom);
+		}
+	});
+
+	this.manager.add(window, "mouseup", function(event)
+	{
+		self.seeking = false;
+	});
+	
+	this.manager.create();
 
 	//Animation
 	this.animationButton = new Button(this.bar);
@@ -134,7 +162,10 @@ function AnimationTab(parent, closeable, container, index)
 			{
 				if(self.mixer !== null)
 				{
-					self.mixer.update(clock.getDelta());
+					if(!self.seeking)
+					{
+						self.mixer.update(clock.getDelta());
+					}
 					requestAnimationFrame(loop);
 				}
 			};
@@ -155,6 +186,7 @@ function AnimationTab(parent, closeable, container, index)
 	{
 		if(self.mixer !== null)
 		{
+			self.mixer.setTime(0);
 			self.mixer.stopAllAction();
 			self.mixer = null;
 		}
@@ -167,11 +199,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.pause.updateInterface();
 	this.pause.setCallback(function()
 	{
-		if(self.mixer !== null)
-		{
-			self.mixer.stopAllAction();
-			self.mixer = null;
-		}
+		//console.log(self.mixer);
 	});
 
 	this.zoomSlider = new Slider(this.bar);
@@ -337,18 +365,24 @@ AnimationTab.prototype.update = function()
 {	
 	if(this.mixer !== null)
 	{
-		if(this.mixer._actions.length > 0)
+		if(this.mixer._actions.length === 1)
 		{
-			this.seek.style.left = (this.mixer._actions[0].time * this.zoom) + "px";
+			this.seek.style.left = (this.mixer._actions[0].time * this.zoom - 2) + "px";
 		}
 		else
 		{
-			this.seek.style.left = (this.mixer.time * this.zoom) + "px";
+			this.seek.style.left = (this.mixer.time * this.zoom - 2) + "px";
 		}
 	}
 };
 
-//Update interface
+AnimationTab.prototype.destroy = function()
+{
+	TabElement.prototype.destroy.call(this);
+
+	this.manager.destroy();
+};
+
 AnimationTab.prototype.updateInterface = function()
 {
 	if(this.visible)
