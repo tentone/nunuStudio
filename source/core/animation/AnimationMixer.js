@@ -8,9 +8,12 @@ THREE.AnimationMixer.prototype.setTime = function(time)
 	{
 		this._actions[i].time = time;
 	}
+
+	this.update(0);
 };
 
 THREE.AnimationMixer.prototype.pause = function()
 {
 	//TODO <ADD CODE HERE>
 };
+
