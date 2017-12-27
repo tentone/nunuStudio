@@ -1,10 +1,24 @@
 "use strict";
 
+/**
+ * The AnimationMixer is a player for animations on a particular object in the scene.
+ * 
+ * When multiple objects in the scene are animated independently, one AnimationMixer may be used for each object.
+ *
+ * @class AnimationMixer
+ * @constructor
+ * @module Animation
+ * @extends {AnimationMixer}
+ * @param {Object3D} root Animation root object
+ */
 function AnimationMixer(root)
 {
 	THREE.AnimationMixer.call(this, root);
 
 	this.playing = true;
+
+	this.time = 0.0;
+	this.timeScale = 1.0;
 }
 
 AnimationMixer.prototype = Object.create(THREE.AnimationMixer.prototype);
@@ -29,11 +43,7 @@ AnimationMixer.prototype.play = function()
 AnimationMixer.prototype.stop = function()
 {
 	this.setTime(0);
-
-	if(this.playing)
-	{
-		this.playing = false;
-	}
+	this.playing = false;
 };
 
 AnimationMixer.prototype.pause = function()
@@ -44,7 +54,7 @@ AnimationMixer.prototype.pause = function()
 AnimationMixer.prototype.dispose = function()
 {
 	this.stopAllAction();
-	//TODO <ADD CODE HERE>
+	this.uncacheRoot(this._root);
 };
 
 AnimationMixer.prototype.update = function(delta)
@@ -53,6 +63,5 @@ AnimationMixer.prototype.update = function(delta)
 	{
 		THREE.AnimationMixer.prototype.update.call(this, delta);	
 	}
-
 };
 
