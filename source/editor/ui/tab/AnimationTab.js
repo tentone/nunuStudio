@@ -17,14 +17,14 @@ function AnimationTab(parent, closeable, container, index)
 	this.bar.style.overflow = "visible";
 	this.bar.style.position = "absolute";
 	this.bar.style.width = "100%";
-	this.bar.style.height = "20px";
+	this.bar.style.height = "30px";
 	this.element.appendChild(this.bar);
 
 	//Timeline
 	this.timeline = document.createElement("div");
 	this.timeline.style.overflow = "auto";
 	this.timeline.style.position = "absolute";
-	this.timeline.style.top = "20px";
+	this.timeline.style.top = "30px";
 	this.timeline.style.width = "100%";
 	this.element.appendChild(this.timeline);
 
@@ -390,7 +390,7 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.width = this.size.x + "px";
 		this.element.style.height = this.size.y + "px";
 
-		this.timeline.style.height = (this.size.y - 20) + "px";
+		this.timeline.style.height = (this.size.y - 30) + "px";
 	}
 	else
 	{
