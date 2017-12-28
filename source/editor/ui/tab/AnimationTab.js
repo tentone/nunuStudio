@@ -34,7 +34,6 @@ function AnimationTab(parent, closeable, container, index)
 	this.seek.style.backgroundColor = "#FFFFFF";
 	this.seek.style.zIndex = "100";
 	this.seek.style.width = "3px";
-	this.seek.style.height = "100%";
 	this.seek.style.overflow = "hidden";
 	this.seek.style.top = "0px";
 	this.seek.style.left = "0px";
@@ -116,7 +115,7 @@ function AnimationTab(parent, closeable, container, index)
 			}
 		}
 
-		self.updateTimeline();
+		self.updateInterface();
 	});
 
 	this.play = new Button(this.bar);
@@ -175,7 +174,7 @@ function AnimationTab(parent, closeable, container, index)
 	this.zoomSlider.setOnChange(function()
 	{
 		self.zoom = self.zoomSlider.getValue();
-		self.updateTimeline();
+		self.updateInterface();
 	});
 	this.zoomSlider.setValue(this.zoom);
 }
@@ -226,8 +225,8 @@ AnimationTab.prototype.updateTimeline = function()
 
 		var tab = document.createElement("div");
 		tab.style.position = "absolute";
-			tab.style.left = "50px";
-			tab.style.width = "3px";
+		tab.style.left = "50px";
+		tab.style.width = "3px";
 		tab.style.height = "100%";
 		tab.style.backgroundColor = "#00FF00";
 		tab.style.cursor = "e-resize";
@@ -313,6 +312,8 @@ AnimationTab.prototype.updateTimeline = function()
 			height = this.size.y;
 		}
 
+		this.seek.style.height = height + "px";
+
 		timescale.width = width;
 		timescale.height = height;
 		timescale.style.width = width + "px";
@@ -337,8 +338,6 @@ AnimationTab.prototype.updateTimeline = function()
 		{
 			context.fillRect(i, 0, 1, height);
 		}
-
-		this.updateInterface();
 	}
 };
 
@@ -360,6 +359,8 @@ AnimationTab.prototype.updateInterface = function()
 		this.element.style.height = this.size.y + "px";
 
 		this.timeline.style.height = (this.size.y - 30) + "px";
+
+		this.updateTimeline();
 	}
 	else
 	{
