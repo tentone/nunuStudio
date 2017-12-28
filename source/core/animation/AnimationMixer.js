@@ -15,13 +15,22 @@ function AnimationMixer(root)
 {
 	THREE.AnimationMixer.call(this, root);
 
-	this.playing = true;
+	this.playing = false;
 
-	this.time = 0.0;
-	this.timeScale = 1.0;
+	//this.time = 0.0;
+	//this.timeScale = 1.0;
 }
 
 AnimationMixer.prototype = Object.create(THREE.AnimationMixer.prototype);
+
+AnimationMixer.prototype.playActions = function(animations)
+{
+	for(var i = 0; i < animations.length; i++)
+	{
+		var action = this.clipAction(animations[i]);
+		action.play();
+	}
+};
 
 AnimationMixer.prototype.setTime = function(time)
 {

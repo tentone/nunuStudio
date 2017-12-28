@@ -113,30 +113,25 @@ SkinnedMesh.prototype.playAnimation = function(index, loop)
 };
 
 /**
+ * Update skinned mesh animation if there is some attached.
+ * 
+ * @method onBeforeRender
+ */
+SkinnedMesh.prototype.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
+{
+	this.mixer.update(this.clock.getDelta() * this.animationSpeed);
+};
+
+/**
  * Stop all animations playback.
  * 
  * @method stopAnimation
  */
 SkinnedMesh.prototype.stopAnimation = function()
 {
-	if(this.mixer !== null)
-	{
-		this.mixer.stopAllAction();
-	}
+	this.mixer.stop();
 };
 
-/**
- * Update skinned mesh animation if there is some attached.
- *
- * @method onBeforeRender
- */
-SkinnedMesh.prototype.onBeforeRender = function(renderer, scene, camera, geometry, material, group)
-{
-	if(this.mixer !== null)
-	{
-		this.mixer.update(this.clock.getDelta() * this.animationSpeed);
-	}
-};
 
 /**
  * Dispose mesh along with its material and geometry.
@@ -156,7 +151,7 @@ SkinnedMesh.prototype.dispose = function()
 		this.geometry.dispose();
 	}
 
-	this.stopAnimation();
+	this.mixer.dispose();
 
 	//Children
 	for(var i = 0; i < this.children.length; i++)

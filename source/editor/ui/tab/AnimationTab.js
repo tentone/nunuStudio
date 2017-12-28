@@ -7,7 +7,8 @@ function AnimationTab(parent, closeable, container, index)
 	var self = this;
 
 	this.mixer = null;
-
+	this.clock = new THREE.Clock();
+	
 	this.zoom = 120.0; //Pixels/sec
 	this.timelineHeight = 30; //Pixels
 
@@ -108,100 +109,72 @@ function AnimationTab(parent, closeable, container, index)
 			scale.setInterpolation(THREE.InterpolateLinear); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
 			clip.tracks.push(scale);
 
+			var quaternion = new QuaternionKeyframeTrack(".quaternion", [0, 1.5, 3], [0,0,0,0, 0,0.706825181105366,0,0.7073882691671998, 0,0,0,0]);
+			quaternion.setInterpolation(THREE.InterpolateLinear);
+			clip.tracks.push(quaternion);
+			
 			object.animations.push(clip);
 		}
 
 		update();
 	});
 
-	//Update
-	this.updateButton = new Button(this.bar);
-	this.updateButton.position.set(100, 0);
-	this.updateButton.size.set(100, 20);
-	this.updateButton.setText("Update")
-	this.updateButton.updateInterface();
-	this.updateButton.setCallback(function()
-	{
-		update();
-	});
-
 	this.play = new Button(this.bar);
-	this.play.position.set(200, 0);
+	this.play.position.set(100, 0);
 	this.play.size.set(100, 20);
 	this.play.setText("Play")
 	this.play.updateInterface();
 	this.play.setCallback(function()
 	{
-		if(self.mixer !== null)
+		if(Editor.selectedObjects.length < 1)
 		{
-			self.mixer.play();
 			return;
 		}
 
-		if(Editor.selectedObjects.length > 0 && Editor.selectedObjects[0].animations !== undefined)
+		var object = Editor.selectedObjects[0];
+		
+		if(self.mixer !== null)
 		{
-			var object = Editor.selectedObjects[0];
-			self.mixer = new AnimationMixer(object);
-
-			for(var i = 0; i < object.animations.length; i++)
+			if(self.mixer._root !== object)
 			{
-				var action = self.mixer.clipAction(object.animations[i]);
-				action.setLoop(THREE.LoopRepeat); //LoopOnce || LoopRepeat || LoopPingPong
-				action.play();
-
-				console.log(action);
+				self.mixer.dispose();
+				self.mixer = new AnimationMixer(object);
+				self.mixer.playActions(object.animations);	
 			}
-
-			var clock = new THREE.Clock();
-			clock.start();
-
-			var loop = function()
-			{
-				if(self.mixer !== null)
-				{
-					if(!self.seeking)
-					{
-						self.mixer.update(clock.getDelta());
-					}
-					requestAnimationFrame(loop);
-				}
-			};
-			loop();
 		}
 		else
 		{
-			alert("Object not found!");
+			self.mixer = new AnimationMixer(object);
+			self.mixer.playActions(object.animations);
+		}
+
+		if(self.mixer.playing)
+		{
+			self.mixer.pause();
+			self.play.setText("Play");
+			//action.setLoop(THREE.LoopRepeat); //LoopOnce || LoopRepeat || LoopPingPong
+		}
+		else
+		{
+			self.mixer.play();
+			self.play.setText("Pause");
 		}
 	});
 
 	this.stop = new Button(this.bar);
-	this.stop.position.set(300, 0);
+	this.stop.position.set(200, 0);
 	this.stop.size.set(100, 20);
 	this.stop.setText("Stop");
 	this.stop.updateInterface();
 	this.stop.setCallback(function()
 	{
-		if(self.mixer !== null)
-		{
-			self.mixer.stop();
-			//self.mixer.stopAllAction();
-			//self.mixer = null;
-		}
-	});
-
-	this.pause = new Button(this.bar);
-	this.pause.position.set(400, 0);
-	this.pause.size.set(100, 20);
-	this.pause.setText("Pause");
-	this.pause.updateInterface();
-	this.pause.setCallback(function()
-	{
-		self.mixer.pause();
+		self.play.setText("Play");
+		self.mixer.stop();
 	});
 
 	this.zoomSlider = new Slider(this.bar);
 	this.zoomSlider.size.set(100, 15);
-	this.zoomSlider.position.set(500, 0);
+	this.zoomSlider.position.set(400, 0);
 	this.zoomSlider.setStep(10);
 	this.zoomSlider.setRange(50, 1000);
 	this.zoomSlider.updateInterface();
@@ -370,6 +343,8 @@ AnimationTab.prototype.update = function()
 		{
 			this.seek.style.left = (this.mixer.time * this.zoom - 1) + "px";
 		}
+
+		this.mixer.update(this.clock.getDelta());
 	}
 };
 
