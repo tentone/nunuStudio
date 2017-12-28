@@ -5,6 +5,8 @@
  * 
  * When multiple objects in the scene are animated independently, one AnimationMixer may be used for each object.
  *
+ * The object stores animations in its animations attribute, wich is an array an of animation clips.
+ * 
  * @class AnimationMixer
  * @constructor
  * @module Animation
@@ -16,18 +18,16 @@ function AnimationMixer(root)
 	THREE.AnimationMixer.call(this, root);
 
 	this.playing = false;
-
-	//this.time = 0.0;
-	//this.timeScale = 1.0;
 }
 
 AnimationMixer.prototype = Object.create(THREE.AnimationMixer.prototype);
 
-AnimationMixer.prototype.playActions = function(animations)
+AnimationMixer.prototype.createActions = function(animations)
 {
 	for(var i = 0; i < animations.length; i++)
 	{
 		var action = this.clipAction(animations[i]);
+		//action.setLoop(THREE.LoopRepeat); //LoopOnce || LoopRepeat || LoopPingPong
 		action.play();
 	}
 };

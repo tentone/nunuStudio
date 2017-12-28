@@ -73,8 +73,8 @@ function AnimationTab(parent, closeable, container, index)
 	//Animation
 	this.animationButton = new Button(this.bar);
 	this.animationButton.position.set(0, 0);
-	this.animationButton.size.set(100, 20);
-	this.animationButton.setText("Create Animation")
+	this.animationButton.size.set(100, 30);
+	this.animationButton.setText("Create")
 	this.animationButton.updateInterface();
 	this.animationButton.setCallback(function()
 	{
@@ -90,47 +90,42 @@ function AnimationTab(parent, closeable, container, index)
 			else
 			{
 				object.animations = [];
+	
+				var clip = new THREE.AnimationClip("Animation", 5, []);
+
+				//VectorKeyframeTrack
+				//BooleanKeyframeTrack
+				//ColorKeyframeTrack
+				//NumberKeyframeTrack
+				//QuaternionKeyframeTrack
+				//StringKeyframeTrack
+				//
+				var position = new VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
+				position.setInterpolation(THREE.InterpolateSmooth); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
+				clip.tracks.push(position);
+
+				var scale = new VectorKeyframeTrack(".scale", [0, 1, 2, 3], [1,1,1, 2,2,2, 0.5,0.5,0.5, 1,1,1]);
+				scale.setInterpolation(THREE.InterpolateLinear);
+				clip.tracks.push(scale);
+
+				var quaternion = new QuaternionKeyframeTrack(".quaternion", [0, 1.5, 3], [0,0,0,1, 0,0.706825181105366,0,0.7073882691671998, 0,0,0,1]);
+				quaternion.setInterpolation(THREE.InterpolateLinear);
+				clip.tracks.push(quaternion);
+				
+				object.animations.push(clip);
 			}
-
-			//VectorKeyframeTrack
-			//BooleanKeyframeTrack
-			//ColorKeyframeTrack
-			//NumberKeyframeTrack
-			//QuaternionKeyframeTrack
-			//StringKeyframeTrack
-
-			var clip = new THREE.AnimationClip("Animation", 5, []);
-
-			var position = new VectorKeyframeTrack(".position", [1, 2, 2.5, 3, 4.5], [0,0,0, 1,1,1, 2,1,2, 2,2,2, 0,0,0]);
-			position.setInterpolation(THREE.InterpolateSmooth); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
-			clip.tracks.push(position);
-
-			var scale = new VectorKeyframeTrack(".scale", [0, 1, 2, 3], [1,1,1, 2,2,2, 0.5,0.5,0.5, 1,1,1]);
-			scale.setInterpolation(THREE.InterpolateLinear); //InterpolateLinear || InterpolateSmooth || InterpolateDiscrete
-			clip.tracks.push(scale);
-
-			var quaternion = new QuaternionKeyframeTrack(".quaternion", [0, 1.5, 3], [0,0,0,0, 0,0.706825181105366,0,0.7073882691671998, 0,0,0,0]);
-			quaternion.setInterpolation(THREE.InterpolateLinear);
-			clip.tracks.push(quaternion);
-			
-			object.animations.push(clip);
 		}
 
-		update();
+		self.updateTimeline();
 	});
 
 	this.play = new Button(this.bar);
 	this.play.position.set(100, 0);
-	this.play.size.set(100, 20);
+	this.play.size.set(100, 30);
 	this.play.setText("Play")
 	this.play.updateInterface();
 	this.play.setCallback(function()
 	{
-		if(Editor.selectedObjects.length < 1)
-		{
-			return;
-		}
-
 		var object = Editor.selectedObjects[0];
 		
 		if(self.mixer !== null)
@@ -139,20 +134,19 @@ function AnimationTab(parent, closeable, container, index)
 			{
 				self.mixer.dispose();
 				self.mixer = new AnimationMixer(object);
-				self.mixer.playActions(object.animations);	
+				self.mixer.createActions(object.animations);	
 			}
 		}
 		else
 		{
 			self.mixer = new AnimationMixer(object);
-			self.mixer.playActions(object.animations);
+			self.mixer.createActions(object.animations);
 		}
 
 		if(self.mixer.playing)
 		{
 			self.mixer.pause();
 			self.play.setText("Play");
-			//action.setLoop(THREE.LoopRepeat); //LoopOnce || LoopRepeat || LoopPingPong
 		}
 		else
 		{
@@ -163,7 +157,7 @@ function AnimationTab(parent, closeable, container, index)
 
 	this.stop = new Button(this.bar);
 	this.stop.position.set(200, 0);
-	this.stop.size.set(100, 20);
+	this.stop.size.set(100, 30);
 	this.stop.setText("Stop");
 	this.stop.updateInterface();
 	this.stop.setCallback(function()
@@ -181,152 +175,9 @@ function AnimationTab(parent, closeable, container, index)
 	this.zoomSlider.setOnChange(function()
 	{
 		self.zoom = self.zoomSlider.getValue();
-		update();
+		self.updateTimeline();
 	});
 	this.zoomSlider.setValue(this.zoom);
-
-	function update()
-	{
-		if(Editor.selectedObjects.length > 0 && Editor.selectedObjects[0].animations !== undefined)
-		{	
-			//Clean animation division
-			if(self.animation !== undefined)
-			{
-				self.timeline.removeChild(self.animation);
-			}
-
-			self.animation = document.createElement("div");
-			self.animation.style.overflow = "visible";
-			self.animation.style.position = "absolute";
-			self.animation.style.width = "100%";
-			self.animation.style.height = "100%";
-			self.animation.style.display = "table-cell";
-			self.timeline.appendChild(self.animation);
-
-			/*var info = document.createElement("div");
-			info.style.position = "absolute";
-			info.style.width = "50px";
-			info.style.height = "100%";
-			info.style.backgroundColor = "#FF0000";
-			self.animation.appendChild(info);
-
-			var tab = document.createElement("div");
-			tab.style.position = "absolute";
- 			tab.style.left = "50px";
- 			tab.style.width = "3px";
-			tab.style.height = "100%";
-			tab.style.backgroundColor = "#00FF00";
-			tab.style.cursor = "e-resize";
-			self.animation.appendChild(tab);
-
-			var tracks = document.createElement("div");
-			tracks.style.position = "absolute";
-			tracks.style.left = "53px";
-			tracks.style.width = "300px";
-			tracks.style.height = "100%";
-			tracks.style.backgroundColor = "#0000FF";
-			self.animation.appendChild(tracks);*/
-
-			var object = Editor.selectedObjects[0];
-			var animations = object.animations;			
-			var trackCount = 0, duration = 0;
-
-			for(var i = 0; i < animations.length; i++)
-			{
-				var tracks = animations[i].tracks;
-
-				var animation = document.createElement("div");
-				animation.style.height = (self.timelineHeight * (tracks.length + 1)) + "px";
-				animation.style.width = "100%";
-				animation.style.zIndex = 10;
-				self.animation.appendChild(animation);
-
-				var name = document.createElement("div");
-				name.style.height = self.timelineHeight + "px";
-				name.style.width = "100%";
-				name.style.backgroundColor = "#222222";
-				name.innerHTML = animations[i].name;
-				animation.appendChild(name);
-
-				for(var j = 0; j < tracks.length; j++)
-				{
-					var times = tracks[j].times;
-
-					var track = document.createElement("div");
-					track.style.height = self.timelineHeight + "px";
-					track.style.width = (self.zoom * (times[times.length - 1] - times[0])) + "px";
-					animation.appendChild(track);
-
-					var color = MathUtils.randomColor();
-
-					for(var k = 0; k < times.length - 1; k++)
-					{
-						var key = document.createElement("div");
-						key.style.position = "absolute";
-						key.style.cursor = "pointer";
-						key.style.backgroundColor = color;
-						key.style.width = "3px";
-						key.style.height = self.timelineHeight + "px";
-						key.style.left = (self.zoom * times[k] - 1) + "px";
-						track.appendChild(key);
-					}
-
-					trackCount++;
-				}
-
-				if(animations[i].duration > duration)
-				{
-					duration = animations[i].duration;
-				}
-			}
-
-			var timescale = document.createElement("canvas");
-			timescale.style.position = "absolute";
-			timescale.style.top = "0px";
-			timescale.style.left = "0px";
-			self.animation.insertAdjacentElement("afterbegin", timescale);
-
-			//Update timescale
-			var width = self.zoom * duration;
-			if(width < self.size.x)
-			{
-				width = self.size.x;
-			}
-
-			var height = self.timelineHeight * trackCount;
-			if(height < self.size.y)
-			{
-				height = self.size.y;
-			}
-
-			timescale.width = width;
-			timescale.height = height;
-			timescale.style.width = width + "px";
-			timescale.style.height = height + "px";
-
-			var context = timescale.getContext("2d");
-			context.fillStyle = "#444444";
-
-			//Horizontal lines
-			for(var i = 0; i <= height; i += self.timelineHeight)
-			{
-				context.fillRect(0, i, width, 1);
-			}
-
-			//Vertical lines
-			for(var i = 0; i <= width; i += self.zoom)
-			{
-				context.fillRect(i - 1, 0, 3, height);
-			}
-
-			for(var i = 0, step = self.zoom / 5; i <= width; i += step)
-			{
-				context.fillRect(i, 0, 1, height);
-			}
-
-			self.updateInterface();
-		}
-	};
 }
 
 AnimationTab.prototype = Object.create(TabElement.prototype);
@@ -345,6 +196,149 @@ AnimationTab.prototype.update = function()
 		}
 
 		this.mixer.update(this.clock.getDelta());
+	}
+};
+
+AnimationTab.prototype.updateTimeline = function()
+{
+	if(Editor.selectedObjects.length > 0 && Editor.selectedObjects[0].animations !== undefined)
+	{	
+		//Clean animation division
+		if(this.animation !== undefined)
+		{
+			this.timeline.removeChild(this.animation);
+		}
+
+		this.animation = document.createElement("div");
+		this.animation.style.overflow = "visible";
+		this.animation.style.position = "absolute";
+		this.animation.style.width = "100%";
+		this.animation.style.height = "100%";
+		this.animation.style.display = "table-cell";
+		this.timeline.appendChild(this.animation);
+
+		/*var info = document.createElement("div");
+		info.style.position = "absolute";
+		info.style.width = "50px";
+		info.style.height = "100%";
+		info.style.backgroundColor = "#FF0000";
+		this.animation.appendChild(info);
+
+		var tab = document.createElement("div");
+		tab.style.position = "absolute";
+			tab.style.left = "50px";
+			tab.style.width = "3px";
+		tab.style.height = "100%";
+		tab.style.backgroundColor = "#00FF00";
+		tab.style.cursor = "e-resize";
+		this.animation.appendChild(tab);
+
+		var tracks = document.createElement("div");
+		tracks.style.position = "absolute";
+		tracks.style.left = "53px";
+		tracks.style.width = "300px";
+		tracks.style.height = "100%";
+		tracks.style.backgroundColor = "#0000FF";
+		this.animation.appendChild(tracks);*/
+
+		var object = Editor.selectedObjects[0];
+		var animations = object.animations;			
+		var trackCount = 0, duration = 0;
+
+		for(var i = 0; i < animations.length; i++)
+		{
+			var tracks = animations[i].tracks;
+
+			var animation = document.createElement("div");
+			animation.style.height = (this.timelineHeight * (tracks.length + 1)) + "px";
+			animation.style.width = "100%";
+			animation.style.zIndex = 10;
+			this.animation.appendChild(animation);
+
+			var name = document.createElement("div");
+			name.style.height = this.timelineHeight + "px";
+			name.style.width = "100%";
+			name.style.backgroundColor = "#222222";
+			name.innerHTML = animations[i].name;
+			animation.appendChild(name);
+
+			for(var j = 0; j < tracks.length; j++)
+			{
+				var times = tracks[j].times;
+
+				var track = document.createElement("div");
+				track.style.height = this.timelineHeight + "px";
+				track.style.width = (this.zoom * (times[times.length - 1] - times[0])) + "px";
+				animation.appendChild(track);
+
+				var color = MathUtils.randomColor();
+
+				for(var k = 0; k < times.length - 1; k++)
+				{
+					var key = document.createElement("div");
+					key.style.position = "absolute";
+					key.style.cursor = "pointer";
+					key.style.backgroundColor = color;
+					key.style.width = "3px";
+					key.style.height = this.timelineHeight + "px";
+					key.style.left = (this.zoom * times[k] - 1) + "px";
+					track.appendChild(key);
+				}
+
+				trackCount++;
+			}
+
+			if(animations[i].duration > duration)
+			{
+				duration = animations[i].duration;
+			}
+		}
+
+		var timescale = document.createElement("canvas");
+		timescale.style.position = "absolute";
+		timescale.style.top = "0px";
+		timescale.style.left = "0px";
+		this.animation.insertAdjacentElement("afterbegin", timescale);
+
+		//Update timescale
+		var width = this.zoom * duration;
+		if(width < this.size.x)
+		{
+			width = this.size.x;
+		}
+
+		var height = this.timelineHeight * trackCount;
+		if(height < this.size.y)
+		{
+			height = this.size.y;
+		}
+
+		timescale.width = width;
+		timescale.height = height;
+		timescale.style.width = width + "px";
+		timescale.style.height = height + "px";
+
+		var context = timescale.getContext("2d");
+		context.fillStyle = "#444444";
+
+		//Horizontal lines
+		for(var i = 0; i <= height; i += this.timelineHeight)
+		{
+			context.fillRect(0, i, width, 1);
+		}
+
+		//Vertical lines
+		for(var i = 0; i <= width; i += this.zoom)
+		{
+			context.fillRect(i - 1, 0, 3, height);
+		}
+
+		for(var i = 0, step = this.zoom / 5; i <= width; i += step)
+		{
+			context.fillRect(i, 0, 1, height);
+		}
+
+		this.updateInterface();
 	}
 };
 
