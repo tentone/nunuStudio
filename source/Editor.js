@@ -1570,7 +1570,7 @@ Editor.loadModel = function(file, onLoad)
 						{
 							loader.setMaterials(materials);
 						}
-						var obj = loader.parseText(reader.result);
+						var obj = loader.parse(reader.result);
 						Editor.addToScene(obj);
 					}
 					catch(e)
