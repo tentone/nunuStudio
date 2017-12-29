@@ -61,8 +61,8 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 	THREE.Texture.call(this, document.createElement("video"), mapping, wrapS, wrapT, THREE.LinearFilter, THREE.LinearFilter, THREE.RGBFormat, type, anisotropy);
 
 	//Texture control
-	this.generateMipmaps = false;
 	this.disposed = false;
+	this.generateMipmaps = false;
 
 	//Name
 	this.name = "video";
@@ -95,7 +95,6 @@ function VideoTexture(video, mapping, wrapS, wrapT, type, anisotropy)
 			requestAnimationFrame(update);
 		}
 	};
-
 	update();
 }
 

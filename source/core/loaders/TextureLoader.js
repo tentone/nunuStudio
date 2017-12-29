@@ -182,6 +182,19 @@ TextureLoader.prototype.parse = function(json, onLoad)
 			texture.mode = json.mode;
 		}
 	}
+	//Compressed texture
+	else if(category === "Compressed")
+	{
+		for(var i = 0; i < json.mipmaps.length; i++)
+		{
+			if(json.mipmaps[i].data.toArrayBuffer !== undefined)
+			{
+				json.mipmaps[i].data = new Uint8Array(json.mipmaps[i].data.toArrayBuffer());
+			}
+		}
+
+		texture = new CompressedTexture(json.mipmaps, json.width, json.height);
+	}
 	//Cube texture
 	else if(category === "Cube")
 	{
@@ -255,6 +268,11 @@ TextureLoader.prototype.parse = function(json, onLoad)
 		texture.rotation = json.rotation;
 	}
 	
+	if(json.format !== undefined)
+	{
+		texture.format = json.format;
+	}
+
 	texture.wrapS = json.wrap[0];
 	texture.wrapT = json.wrap[1];
 

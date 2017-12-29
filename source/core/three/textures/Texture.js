@@ -22,6 +22,7 @@ THREE.Texture.prototype.toJSON = function(meta)
 		name: this.name,
 		category: this.category,
 		
+		format: this.format,
 		mapping: this.mapping,
 
 		repeat: [this.repeat.x, this.repeat.y],
