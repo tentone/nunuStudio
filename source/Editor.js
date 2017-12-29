@@ -214,7 +214,6 @@ include("lib/three/loaders/AssimpLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/BabylonLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
-include("lib/three/loaders/DDSLoader.js");
 include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/GCodeLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
@@ -227,11 +226,15 @@ include("lib/three/loaders/PRWMLoader.js");
 include("lib/three/loaders/STLLoader.js");
 include("lib/three/loaders/SVGLoader.js");
 include("lib/three/loaders/TDSLoader.js");
-include("lib/three/loaders/TGALoader.js");
 include("lib/three/loaders/UTF8Loader.js");
 include("lib/three/loaders/VRMLLoader.js");
 include("lib/three/loaders/VTKLoader.js");
 include("lib/three/loaders/XLoader.js");
+
+include("lib/three/loaders/texture/DDSLoader.js");
+include("lib/three/loaders/texture/PVRLoader.js");
+include("lib/three/loaders/texture/TGALoader.js");
+include("lib/three/loaders/texture/KTXLoader.js");
 
 include("lib/three/modifiers/SimplifyModifier.js");
 include("lib/three/modifiers/SubdivisionModifier.js");
@@ -1383,19 +1386,70 @@ Editor.loadProgram = function(file, binary)
 	}
 };
 
+//Load compressed texture from data parsed by the texture loaders (PVR, DDS, etc)
+Editor.loadCompressedTexture = function(data)
+{
+	var texture = new CompressedTexture();
+	texture.image = [];
+
+	if(data.isCubemap)
+	{
+		var faces = data.mipmaps.length / data.mipmapCount;
+
+		for(var f = 0; f < faces; f++)
+		{
+			texture.image[f] = { mipmaps: [] };
+
+			for(var i = 0; i < data.mipmapCount; i ++)
+			{
+				texture.image[f].mipmaps.push(data.mipmaps[f * data.mipmapCount + i]);
+				texture.image[f].format = data.format;
+				texture.image[f].width = data.width;
+				texture.image[f].height = data.height;
+			}
+		}
+	}
+	else
+	{
+		texture.image.width = data.width;
+		texture.image.height = data.height;
+		texture.mipmaps = data.mipmaps;
+	}
+
+	if(data.mipmapCount === 1)
+	{
+		texture.minFilter = THREE.LinearFilter;
+	}
+
+	texture.format = data.format;
+	texture.needsUpdate = true;
+
+	return texture;
+}
+
 //Load texture from file object
 Editor.loadTexture = function(file, onLoad)
 {
 	var name = FileSystem.getFileName(file.name);
 	var extension = FileSystem.getFileExtension(file.name);
-	var reader = new FileReader();
 
+	var reader = new FileReader();
 	reader.onload = function()
 	{
 		if(extension === "dds")
 		{
 			var loader = new THREE.DDSLoader();
-			var data = loader.parse(reader.result);
+			var texture = Editor.loadCompressedTexture(loader._parser(reader.result));	
+		}
+		else if(extension === "pvr")
+		{
+			var loader = new THREE.PVRLoader();
+			var texture = Editor.loadCompressedTexture(loader._parser(reader.result));	
+		}
+		else if(extension === "ktx")
+		{
+			var loader = new THREE.KTXLoader();
+			var texture = Editor.loadCompressedTexture(loader._parser(reader.result));	
 		}
 		else if(extension === "tga")
 		{
@@ -1418,7 +1472,6 @@ Editor.loadTexture = function(file, onLoad)
 			onLoad(texture);
 		}
 	};
-
 	reader.readAsArrayBuffer(file);
 };
 
