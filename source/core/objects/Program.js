@@ -100,12 +100,16 @@
  */
 /**
  * Canvas being used to draw content.
+ *
+ * This canvas is where the WebGL rendering context was created.
  * @property canvas
  * @type {DOM}
  * @default null
  */
 /**
  * DOM Division element that can be used to add html content to the app.
+ *
+ * All content added to this division should be manually removed before the app exits.
  * @property division
  * @type {DOM}
  * @default null
@@ -163,17 +167,16 @@ function Program(name)
 	this.effect = null;
 	this.controls = null;
 
-	//VR display present change
-	var self = this;
-	this.onVrDisplayPresentChange = function()
+	this.manager = new EventManager();
+	
+	//VR display present change event
+	this.manager.add(window, "vrdisplaypresentchange", function()
 	{
 		if(self.display !== null && !self.display.isPresenting)
 		{
 			self.useVR = false;
 		}
-	};
-
-	window.addEventListener("vrdisplaypresentchange", this.onVrDisplayPresentChange, false);
+	});
 }
 
 Program.prototype = Object.create(ResourceManager.prototype);
@@ -187,6 +190,8 @@ Program.prototype = Object.create(ResourceManager.prototype);
  */
 Program.prototype.initialize = function()
 {
+	this.manager.create();
+
 	//If input null create input object
 	if(this.mouse === null)
 	{
@@ -548,7 +553,7 @@ Program.prototype.addDefaultScene = function(material)
  */
 Program.prototype.dispose = function()
 {
-	window.removeEventListener("vrdisplaypresentchange", this.onVrDisplayPresentChange);
+	this.manager.destroy();
 
 	//Geometry
 	for(var i in this.geometries)
