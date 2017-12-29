@@ -214,6 +214,7 @@ include("lib/three/loaders/AssimpLoader.js");
 include("lib/three/loaders/AWDLoader.js");
 include("lib/three/loaders/BabylonLoader.js");
 include("lib/three/loaders/ColladaLoader.js");
+include("lib/three/loaders/DDSLoader.js");
 include("lib/three/loaders/FBXLoader.js");
 include("lib/three/loaders/GCodeLoader.js");
 include("lib/three/loaders/GLTFLoader.js");
@@ -1391,9 +1392,24 @@ Editor.loadTexture = function(file, onLoad)
 
 	reader.onload = function()
 	{
-		var texture = new Texture(new Image(reader.result, extension));
-		texture.name = name;
+		if(extension === "dds")
+		{
+			var loader = new THREE.DDSLoader();
+			var data = loader.parse(reader.result);
+		}
+		else if(extension === "tga")
+		{
+			var loader = new THREE.TGALoader();
+			var jpeg = loader.parse(reader.result).toDataURL("image/jpeg", 1.0);
+			var texture = new Texture(new Image(jpeg, "jpeg"));
+		}
+		else
+		{
+			var texture = new Texture(new Image(reader.result, extension));
+		}
 
+		texture.name = name;
+	
 		Editor.program.addTexture(texture);
 		Editor.updateObjectViews();
 

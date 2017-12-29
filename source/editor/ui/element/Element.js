@@ -16,6 +16,9 @@ function Element(parent, type)
 
 Element.prototype.constructor = Element;
 
+//Empty function that can be used a dummy instead of creating empty functions
+Element.EMPTY = function(){};
+
 //Add drag and drog event prevention
 Element.prototype.preventDragEvents = function()
 {
