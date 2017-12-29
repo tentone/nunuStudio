@@ -26,6 +26,7 @@ function CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS,
 {
 	THREE.Texture.call(this, null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
+	this.category = "Compressed";
 	this.image = {width: width, height: height};
 	this.mipmaps = mipmaps;
 
@@ -52,8 +53,21 @@ CompressedTexture.prototype.toJSON = function(meta)
 {
 	var data = THREE.Texture.prototype.toJSON.call(this, meta);
 
-	console.log(this.image);
-	console.log(this.mipmaps);
+	console.log(this);
+
+	data.width = this.image.width;
+	data.height = this.image.height;
+
+	data.mipmaps = [];
+	for(var i = 0; i < this.mipmaps.length; i++)
+	{
+		data.mipmaps.push(
+		{
+			width: this.mipmaps[i].width,
+			height: this.mipmaps[i].height,
+			data: this.mipmaps[i].data
+		});
+	}
 
 	return data;
 };
